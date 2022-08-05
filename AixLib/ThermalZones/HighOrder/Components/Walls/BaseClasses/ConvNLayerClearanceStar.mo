@@ -89,19 +89,13 @@ model ConvNLayerClearanceStar
     final A=A,
     each final T_start=fill(T0, n),
     final wallRec=wallType,
-    final energyDynamics=energyDynamics) if use_condLayers
+    final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b1
                                                              annotation (
       Placement(transformation(extent={{-10,88},{10,108}}), iconTransformation(
           extent={{-12,88},{8,108}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
-      final m=1) if not use_condLayers
-                 annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,-28})));
   parameter Modelica.Units.SI.Area A = h * l - clearance annotation(Dialog(enable = false));
 
 equation
@@ -127,14 +121,6 @@ equation
           {44,6.66134e-16},{52,6.66134e-16}}, color={191,0,0}));
   connect(twoStar_RadEx.convPort, heatConv.port_b) annotation (Line(points={{54,
           40},{46,40},{46,6.66134e-16},{52,6.66134e-16}}, color={191,0,0}));
-  connect(port_a, thermalCollector.port_a[1]) annotation (Line(
-      points={{-100,0},{-40,0},{-40,-28},{-10,-28}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(thermalCollector.port_b, heatConv.port_b) annotation (Line(
-      points={{10,-28},{40,-28},{40,6.66134e-16},{52,6.66134e-16}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-56, 100}, {0, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 100}, {-56, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},

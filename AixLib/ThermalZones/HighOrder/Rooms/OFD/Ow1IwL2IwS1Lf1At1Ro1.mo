@@ -64,8 +64,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     door_height=0,
     door_width=0,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     final energyDynamics=energyDynamicsWalls,
@@ -90,8 +89,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
@@ -119,8 +117,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={61,19},
         extent={{-3,-15},{3,15}},
@@ -148,8 +145,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={20,-60},
         extent={{-4,-24},{4,24}},
@@ -178,8 +174,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withDoor=false,
     ISOrientation=3,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
@@ -208,8 +203,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withDoor=false,
     ISOrientation=2,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=not use_UFH)             annotation (Placement(transformation(
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin) if not use_UFH
+                                                                           annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));
@@ -236,8 +231,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={61,-20},
         extent={{-2.99998,-16},{2.99998,16}},
@@ -268,8 +262,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     windowarea=windowarea_RO,
     ISOrientation=1,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    final use_condLayers=true)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
         origin={58,59},
         extent={{-2.99997,-16},{2.99999,16}},
@@ -285,7 +278,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,40},{100,60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor if not use_UFH
+                                                                 annotation (
       Placement(transformation(extent={{-16,-104},{4,-84}}), iconTransformation(
           extent={{-16,-104},{4,-84}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_Roof annotation (

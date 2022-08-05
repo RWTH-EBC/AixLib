@@ -507,15 +507,15 @@ equation
   connect(Children2.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60.8,-38},{-5,-38}}, color={0,0,0}));
   connect(Children2.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-36},{-18,-36},{-18,-42},{5,-42},{5,-38}}, color={191,0,0}));
   connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-133,
-          -23},{-92,-23},{-92,68.24},{-84,68.24}},                                                                               color={0,0,127}));
+          -17},{-92,-17},{-92,68.24},{-84,68.24}},                                                                               color={0,0,127}));
   connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-133,
-          -17},{-92,-17},{-92,88},{92,88},{92,68.68},{83.9,68.68}},                                                                                 color={0,0,127}));
+          -14},{-92,-14},{-92,88},{92,88},{92,68.68},{83.9,68.68}},                                                                                 color={0,0,127}));
   connect(AirExchangePort[3], Corridor.AirExchangePort) annotation (Line(points={{-133,
           -11},{-92,-11},{-92,88},{92,88},{92,4.205},{84,4.205}},                                                                                color={0,0,127}));
-  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-133,-5},
-          {-92,-5},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}},                                                                                color={0,0,127}));
-  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-133,1},
-          {-92,1},{-92,-74.24},{-86,-74.24}},                                                                                    color={0,0,127}));
+  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-133,-8},
+          {-92,-8},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}},                                                                                color={0,0,127}));
+  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-133,-5},
+          {-92,-5},{-92,-74.24},{-86,-74.24}},                                                                                   color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

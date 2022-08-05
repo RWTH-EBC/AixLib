@@ -52,8 +52,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
     "Wall type for ceiling"
     annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter Modelica.Units.SI.Temperature T_U=
-      Modelica.Units.SI.Conversions.from_degC(20)
+  parameter Modelica.Units.SI.Temperature T_U=293.15
     "Nominal Room Temperature lying under panel heating"
     annotation (Dialog(group="Room Specifications"));
 
@@ -199,38 +198,52 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     D=d,
     T=Spacing)
     annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[dis]
-    annotation (Placement(transformation(extent={{-10,50},{10,70}}),
-        iconTransformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[dis]
-    annotation (Placement(transformation(extent={{-10,-90},{10,-70}}),
-        iconTransformation(extent={{-10,-90},{10,-70}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling[dis](each m=
+  Utilities.Interfaces.ConvRadComb heatFloor annotation (Placement(
+        transformation(extent={{-10,50},{10,70}}), iconTransformation(extent={{-10,
+            50},{10,70}})));
+  Utilities.Interfaces.ConvRadComb heatCeiling annotation (Placement(
+        transformation(extent={{-10,-90},{10,-70}}), iconTransformation(extent={
+            {-10,-90},{10,-70}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(each m=
         CircuitNo)
-    annotation (Placement(transformation(extent={{-10,-58},{10,-38}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor[dis](each m=
+    annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(each m=
         CircuitNo)
-    annotation (Placement(transformation(extent={{-10,40},{10,20}})));
+    annotation (Placement(transformation(extent={{-10,34},{10,14}})));
   Modelica.Blocks.Interfaces.RealInput valveInput annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-62,74})));
 
-  Modelica.Blocks.Sources.RealExpression Q_flowFloorSum(y=sum(heatFloor.Q_flow))
-    annotation (Placement(transformation(extent={{40,-48},{60,-28}})));
-  Modelica.Blocks.Sources.RealExpression Q_flowCeilingSum(y=sum(heatCeiling.Q_flow))
-    annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
+  Modelica.Blocks.Sources.RealExpression Q_flowFloorSum(y=sum({heatFloor.conv.Q_flow, heatFloor.rad.Q_flow}))
+    annotation (Placement(transformation(extent={{50,-50},{70,-30}})));
+  Modelica.Blocks.Sources.RealExpression Q_flowCeilingSum(y=sum({heatCeiling.conv.Q_flow, heatCeiling.rad.Q_flow}))
+    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flowFloor annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={100,-38})));
+        origin={110,-40})));
   Modelica.Blocks.Interfaces.RealOutput Q_flowCeiling annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={100,-60})));
+        origin={110,-60})));
+  HOMRadConvAdaptor hOMRadConvAdaptor(
+    eps=wallTypeFloor.eps,
+    surfaceOrientation=2,
+    A=A) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={38,38})));
+  HOMRadConvAdaptor hOMRadConvAdaptor1(
+    eps=wallTypeCeiling.eps,
+    surfaceOrientation=3,
+    A=A) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-22,-62})));
 protected
    parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -273,33 +286,30 @@ equation
 
   end for;
 
-  // HEAT CONNECTIONS
-
-  for i in 1:CircuitNo loop
-    for m in 1:dis loop
-    connect(underfloorHeatingCircuit[i].heatCeiling[m], thermalCollectorCeiling[m].port_a[
-      i]) annotation (Line(points={{0.44,-8.8},{0.44,-24},{0,-24},{0,-38}},
-          color={191,0,0}));
-    connect(thermalCollectorFloor[m].port_a[i], underfloorHeatingCircuit[i].heatFloor[m])
-      annotation (Line(points={{0,20},{0,7.6}}, color={191,0,0}));
-    end for;
-  end for;
-  for m in 1:dis loop
-  connect(thermalCollectorCeiling[m].port_b, heatCeiling[m])
-    annotation (Line(points={{0,-58},{0,-80}}, color={191,0,0}));
-  connect(heatFloor[m], thermalCollectorFloor[m].port_b)
-    annotation (Line(points={{0,60},{0,40}}, color={191,0,0}));
-  end for;
-
   // VALVE CONNECTION
   for i in 1:CircuitNo loop
   connect(valveInput, underfloorHeatingCircuit[i].valveInput) annotation (Line(
         points={{-62,74},{-62,32},{-16.28,32},{-16.28,11.6}}, color={0,0,127}));
   end for;
   connect(Q_flowFloorSum.y, Q_flowFloor)
-    annotation (Line(points={{61,-38},{100,-38}}, color={0,0,127}));
+    annotation (Line(points={{71,-40},{110,-40}}, color={0,0,127}));
   connect(Q_flowCeilingSum.y, Q_flowCeiling)
-    annotation (Line(points={{61,-60},{100,-60}}, color={0,0,127}));
+    annotation (Line(points={{71,-60},{110,-60}}, color={0,0,127}));
+  connect(hOMRadConvAdaptor.heatFloor, heatFloor) annotation (Line(points={{38,48},
+          {38,54},{14,54},{14,46},{0,46},{0,60}}, color={191,0,0}));
+  connect(thermalCollectorFloor.port_b, hOMRadConvAdaptor.port_a) annotation (
+      Line(points={{0,34},{0,36},{22,36},{22,20},{38,20},{38,28}}, color={191,0,
+          0}));
+  connect(thermalCollectorCeiling.port_b, hOMRadConvAdaptor1.port_a)
+    annotation (Line(points={{0,-52},{0,-54},{-6,-54},{-6,-50},{-22,-50},{-22,-52}},
+        color={191,0,0}));
+  connect(hOMRadConvAdaptor1.heatFloor, heatCeiling) annotation (Line(points={{-22,
+          -72},{-22,-94},{14,-94},{14,-66},{0,-66},{0,-80}}, color={191,0,0}));
+  connect(underfloorHeatingCircuit.heatFloor, thermalCollectorFloor.port_a)
+    annotation (Line(points={{0,7.6},{0,14}}, color={191,0,0}));
+  connect(underfloorHeatingCircuit.heatCeiling, thermalCollectorCeiling.port_a)
+    annotation (Line(points={{0.44,-8.8},{0.44,-20.4},{0,-20.4},{0,-32}}, color=
+         {191,0,0}));
   annotation (
     Dialog(group="Panel Heating", enable=withSheathing),
     choicesAllMatching=true,

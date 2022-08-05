@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms;
 model Ow2IwL2IwS1Gr1Uf1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
@@ -232,7 +232,7 @@ model Ow2IwL2IwS1Gr1Uf1
         origin={-30,59},
         extent={{2.99997,-16},{-3.00002,16}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor[dis](
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -250,13 +250,13 @@ model Ow2IwL2IwS1Gr1Uf1
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.groundPlate_upp_half,
     each outside=false,
-    each wall_length=room_length/dis,
+    each wall_length=room_length,
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
     each ISOrientation=2,
-    each final use_condLayers=not use_UFH)
-                     annotation (Placement(transformation(
+    each final use_condLayers=not use_UFH) if not use_UFH annotation (Placement(
+        transformation(
         origin={-27,-62},
         extent={{-2.00002,-11},{2.00001,11}},
         rotation=90)));
@@ -307,7 +307,8 @@ model Ow2IwL2IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1b
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground[dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground[dis] if not
+    use_UFH
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
 
 equation

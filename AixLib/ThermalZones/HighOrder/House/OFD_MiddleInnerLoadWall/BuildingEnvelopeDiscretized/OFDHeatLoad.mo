@@ -121,22 +121,23 @@ equation
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.1667},{48,69.1667},{48,26.4},{43.68,26.4}},  color={
+     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.5},{48,69.5},{48,18},{43.68,18}},      color={255,128,
+      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
           0}));
   connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.8333},{48,69.8333},{48,9.6},{43.68,9.6}},  color={255,
+     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.1667},{48,70.1667},{48,1.2},{43.68,1.2}},  color={255,
+      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.5},{48,70.5},{48,43.2},{43.68,43.2}},color=
+    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+                                                                         color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.8},{43.68,34.8}},
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
@@ -147,14 +148,14 @@ equation
   connect(wholeHouseBuildingEnvelope.uppFloDown, wholeHouseBuildingEnvelope.groFloUp) annotation (Line(points={{-14,24.72},{-22,24.72},{-22,18},{-14,18}}, color={191,0,0}));
   for i in 1:dis loop
   connect(wholeHouseBuildingEnvelope.groFloDown[i], wholeHouseBuildingEnvelope.groPlateUp[1]) annotation (Line(points={{-14,
-            2.32},{-22,2.32},{-22,-6.64},{-14,-6.64}},                                                                                                               color={191,0,0}));
+            2.32},{-22,2.32},{-22,-5.52},{-14,-5.52}},                                                                                                               color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloDown[dis+i], wholeHouseBuildingEnvelope.groPlateUp[2]) annotation (Line(points={{-14,
-            2.32},{-22,2.32},{-22,-5.52},{-14,-5.52}},                                                                                                                   color={191,0,0}));
+            2.32},{-22,2.32},{-22,-4.96},{-14,-4.96}},                                                                                                                   color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloDown[2*dis+i], wholeHouseBuildingEnvelope.groPlateUp[3]) annotation (Line(points={{-14,2.32},{-22,2.32},{-22,-4.4},{-14,-4.4}}, color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloDown[3*dis+i], wholeHouseBuildingEnvelope.groPlateUp[4]) annotation (Line(points={{-14,
-            2.32},{-22,2.32},{-22,-3.28},{-14,-3.28}},                                                                                                                     color={191,0,0}));
+            2.32},{-22,2.32},{-22,-3.84},{-14,-3.84}},                                                                                                                     color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloDown[4*dis+i], wholeHouseBuildingEnvelope.groPlateUp[5]) annotation (Line(points={{-14,
-            2.32},{-22,2.32},{-22,-2.16},{-14,-2.16}},                                                                                                                     color={191,0,0}));
+            2.32},{-22,2.32},{-22,-3.28},{-14,-3.28}},                                                                                                                     color={191,0,0}));
   end for;
   connect(prescribedTemperature[1:10].port, heatStarToComb[1:10].portConv) annotation (Line(points={{-24,-52},{-20,-52},{-20,-30},{-44,-30},{-44,-23.75}}, color={191,0,0}));
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-29},{-50,-29},{-50,-23.75},{-44,-23.75}}, color={191,0,0}));

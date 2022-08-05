@@ -27,12 +27,12 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
       radioButtons=true));
   parameter Integer use_vmax(min = 1, max = 2) = 1 "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
   parameter Modelica.Units.SI.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.Units.SI.Temperature T_Fmax[RoomNo] = fill(29 + 273.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.Units.SI.Temperature T_Room[RoomNo] = fill(20 + 273.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Fmax[RoomNo]=302.15                      "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Room[RoomNo]=293.15                      "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter Boolean Ceiling[RoomNo] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
-  parameter Modelica.Units.SI.Temperature T_U[RoomNo] = fill(Modelica.Units.SI.Conversions.from_degC(20), RoomNo) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_U[RoomNo]=293.15                                                      "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.Units.SI.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
   final parameter Modelica.Units.SI.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
 
@@ -160,12 +160,12 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-64,68})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo*dis]
-    annotation (Placement(transformation(extent={{-10,50},{10,70}}),
-        iconTransformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo*dis]
-    annotation (Placement(transformation(extent={{-10,-70},{10,-50}}),
-        iconTransformation(extent={{-10,-70},{10,-50}})));
+  Utilities.Interfaces.ConvRadComb heatFloor[RoomNo] annotation (Placement(
+        transformation(extent={{-10,50},{10,70}}), iconTransformation(extent={{
+            -10,50},{10,70}})));
+  Utilities.Interfaces.ConvRadComb heatCeiling[RoomNo] annotation (Placement(
+        transformation(extent={{-10,-70},{10,-50}}), iconTransformation(extent=
+            {{-10,-70},{10,-50}})));
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -229,8 +229,8 @@ equation
     annotation (Line(points={{-81,-36},{-100,-36}}, color={0,0,127}));
   connect(T_FlowNom.y, T_FlowNominal)
     annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
-  connect(valveInput, underfloorHeatingRoom.valveInput) annotation (Line(points
-        ={{-64,68},{-64,50},{-9.92,50},{-9.92,38}}, color={0,0,127}));
+  connect(valveInput, underfloorHeatingRoom.valveInput) annotation (Line(points=
+         {{-64,68},{-64,50},{-9.92,50},{-9.92,38}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
         graphics={
         Rectangle(

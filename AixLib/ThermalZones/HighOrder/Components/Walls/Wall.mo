@@ -13,9 +13,9 @@ model Wall
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
   // general wall parameters
-  parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
+
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
-    annotation(Dialog(group="Structure of wall layers", enable=use_condLayers),   choicesAllMatching = true,
+    annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
     Placement(transformation(extent={{2,76},{22,96}})));
 
 
@@ -148,7 +148,6 @@ model Wall
     final energyDynamics=energyDynamics,
     final h=wall_height,
     final l=wall_length,
-    final use_condLayers=use_condLayers,
     final T0=T0,
     final clearance=clearance,
     final wallType=wallPar,
@@ -277,7 +276,8 @@ equation
                                                                                                                                    color = {255, 128, 0}));
   end if;
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
-  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-62,-40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-61.6,
+          -40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
                                                       color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
                                         color={191,0,0}));

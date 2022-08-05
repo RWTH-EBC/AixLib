@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 model SumT_F "Calculation of average floor surface temperature"
   parameter Integer dis(min=1);
 
-  Modelica.Blocks.Math.MultiSum multiSum(nu=dis, k=fill(1, dis))
+  Modelica.Blocks.Math.MultiSum multiSum(final k=fill(1, multiSum.nu), nu=dis)
     annotation (Placement(transformation(extent={{-16,12},{-2,26}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor T_F[dis]
     annotation (Placement(transformation(extent={{-68,10},{-48,30}})));
@@ -24,12 +24,10 @@ equation
 
   connect(division.y, T_Fm)
     annotation (Line(points={{62.8,0},{102,0}}, color={0,0,127}));
-    for i in 1:dis loop
-      connect(T_F[i].port, port_a[i]) annotation (Line(points={{-68,20},{-84,20},
-            {-84,0},{-100,0}},        color={191,0,0}));
-      connect(T_F[i].T,multiSum. u[i])
-    annotation (Line(points={{-48,20},{-16,20},{-16,19}},color={0,0,127}));
-    end for;
+  connect(port_a, T_F.port) annotation (Line(points={{-100,0},{-74,0},{-74,20},{
+          -68,20}}, color={191,0,0}));
+  connect(T_F.T, multiSum.u) annotation (Line(points={{-47,20},{-31.5,20},{-31.5,
+          19},{-16,19}}, color={0,0,127}));
  annotation (Icon(graphics={
        Rectangle(
          extent={{-100,100},{100,-100}},

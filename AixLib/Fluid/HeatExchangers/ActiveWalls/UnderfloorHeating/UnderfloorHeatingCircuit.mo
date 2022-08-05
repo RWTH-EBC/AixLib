@@ -81,12 +81,12 @@ public
     allowFlowReversal=false)
     annotation (Placement(transformation(extent={{60,-6},{72,6}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[dis]
-    annotation (Placement(transformation(extent={{-10,34},{10,54}}),
-        iconTransformation(extent={{-8,30},{8,46}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[dis]
-    annotation (Placement(transformation(extent={{-10,-56},{10,-36}}),
-        iconTransformation(extent={{-6,-52},{10,-36}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
+      Placement(transformation(extent={{-10,34},{10,54}}), iconTransformation(
+          extent={{-8,30},{8,46}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling annotation (
+      Placement(transformation(extent={{-10,-56},{10,-36}}), iconTransformation(
+          extent={{-6,-52},{10,-36}})));
   BaseClasses.SumT_F sumT_Fm(dis=integer(dis))
     annotation (Placement(transformation(extent={{16,10},{28,22}})));
   Modelica.Blocks.Interaction.Show.RealValue T_Fm "arithmetic mean of floor surface temperature"
@@ -131,6 +131,16 @@ public
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-74,58})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(each
+      final m=dis) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={0,-28})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(each
+      final m=dis) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={0,24})));
 initial equation
 assert(dp_Pipe + dp_Valve <= 25000, "According to prEN1264 pressure drop in a heating circuit is supposed to be under 250 mbar. Error accuring in" + getInstanceName(), AssertionLevel.warning);
 
@@ -166,10 +176,6 @@ equation
 // HEAT CONNECTIONS
 
   for i in 1:dis loop
-     connect(underfloorHeatingElement[i].heatFloor, heatFloor[i])
-    annotation (Line(points={{0,4.2},{0,44}}, color={191,0,0}));
-  connect(underfloorHeatingElement[i].heatCeiling, heatCeiling[i]) annotation (Line(
-        points={{-0.2,-4.2},{-0.2,-46},{0,-46}}, color={191,0,0}));
     connect(sumT_Fm.port_a[i], underfloorHeatingElement[i].heatFloor)
       annotation (Line(points={{16,16},{0,16},{0,4.2}}, color={191,0,0}));
   end for;
@@ -179,6 +185,16 @@ equation
     annotation (Line(points={{28.12,16},{37.25,16}}, color={0,0,127}));
   connect(val.y, valveInput)
     annotation (Line(points={{-74,12},{-74,58}}, color={0,0,127}));
+  connect(heatCeiling, thermalCollectorCeiling.port_b)
+    annotation (Line(points={{0,-46},{0,-38}}, color={191,0,0}));
+  connect(underfloorHeatingElement.heatCeiling, thermalCollectorCeiling.port_a)
+    annotation (Line(points={{-0.2,-4.2},{-0.2,-11.1},{0,-11.1},{0,-18}}, color
+        ={191,0,0}));
+  connect(heatFloor, thermalCollectorFloor.port_b) annotation (Line(points={{0,
+          44},{0,39},{1.22125e-15,39},{1.22125e-15,34}}, color={191,0,0}));
+  connect(thermalCollectorFloor.port_a, underfloorHeatingElement.heatFloor)
+    annotation (Line(points={{-1.22125e-15,14},{-1.22125e-15,9.1},{0,9.1},{0,
+          4.2}}, color={191,0,0}));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-40},{100,40}},
         initialScale=0.1), graphics={

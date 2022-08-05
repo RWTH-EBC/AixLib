@@ -129,9 +129,9 @@ equation
   // FLUID CONNECTIONS
 
    connect(port_a, vol.ports[1])
-    annotation (Line(points={{-100,0},{63.6,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{64.8,0}}, color={0,127,255}));
    connect(vol.ports[2], port_b)
-    annotation (Line(points={{68.4,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{67.2,0},{100,0}}, color={0,127,255}));
 
   // HEAT CONNECTIONS
 

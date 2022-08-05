@@ -218,14 +218,15 @@ model Attic_Ro2Lf5
     wall_length=room1_length,
     wall_height=room1_width,
     withWindow=false,
-    ISOrientation=2,
     outside=false,
+    ISOrientation=2,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
+
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
     final energyDynamics=energyDynamicsWalls,

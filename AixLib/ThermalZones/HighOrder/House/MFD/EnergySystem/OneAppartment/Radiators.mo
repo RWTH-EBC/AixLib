@@ -41,8 +41,8 @@ model Radiators
       group="Pipe lengths",
       groupImage=
           "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png",
-
       descriptionLabel=true));
+
   //Pipe diameters
   parameter Modelica.Units.SI.Diameter Diam_Main=0.016 "Diameter main pipe"
     annotation (Dialog(group="Pipe diameters", descriptionLabel=true));

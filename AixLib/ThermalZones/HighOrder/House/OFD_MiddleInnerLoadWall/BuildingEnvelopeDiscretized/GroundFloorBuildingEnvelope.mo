@@ -464,10 +464,10 @@ equation
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-32},{90,-32},{90,100},{110,100},{110,110}},
                                                            color={191,0,0}));
   connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-15},{-115,-15}},
+        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-9},{-115,-9}},
         color={0,0,127}));
-  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-9},{-115,-9}},
-                                                                        color={
+  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,
+          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-6},{-115,-6}},color={
           0,0,127}));
   connect(Kitchen.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.9,
           -61.6},{-90,-61.6},{-90,-92},{90,-92},{90,26},{110,26}}, color={255,
@@ -477,8 +477,10 @@ equation
         color={191,0,0}));
 
   connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
-  connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,-76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}}, color={0,0,127}));
-  connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,-74.24},{-92,-74.24},{-92,9},{-115,9}}, color={0,0,127}));
+  connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,
+          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,0},{-115,0}},                                                                                color={0,0,127}));
+  connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,
+          -74.24},{-92,-74.24},{-92,3},{-115,3}},                                                                            color={0,0,127}));
   connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
   connect(Livingroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.48,44},{-58,44},{-58,30},{-16,30},{-16,-38},{-5,-38}}, color={0,0,0}));
   connect(Livingroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-65.08,44},{-66,44},{-66,26},{-20,26},{-20,-44},{5,-44},{5,-38}}, color={191,0,0}));
