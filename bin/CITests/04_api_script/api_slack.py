@@ -128,7 +128,6 @@ class Slack_Notification(object):
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
 
-
     def _get_pr_number(self, branch):
         url = f'https://api.github.com/repos/{self.github_repo}/pulls'
         payload = {}
@@ -158,18 +157,13 @@ class Slack_Notification(object):
         return owner[0]
 
     def _comment_issue_without_pr(self, message_text, issue_number):
-        #body = f'\"body\":\"{message_text}\"'
-
         url = f'https://api.github.com/repos/{self.github_repo}/issues/{issue_number}/comments'
-        #payload = "{" + body + "}"
         payload = json.dumps({"body": message_text})
-
         headers = {
             'Authorization': 'Bearer ' + self.github_token,
             'Content-Type': 'application/javascript'
         }
         response = requests.request("POST", url, headers=headers, data=payload)
-
 
     def _comment_issue(self, branch, time_dif, issue_number, link_pr):
         message = f' The Branch {branch} has been inactive for more than {time_dif} days. ' \
@@ -269,8 +263,7 @@ class Slack_Notification(object):
         except KeyError:
             print(f'Github Username is unknown.')
 
-
-    def _check_pr_number(self,pr_number):
+    def _check_pr_number(self, pr_number):
         url = f'https://api.github.com/repos/{self.github_repo}/pulls/{pr_number}'
         payload = {}
         headers = {
@@ -281,11 +274,32 @@ class Slack_Notification(object):
         json_text = response.json()
         try:
             pull_url = json_text["url"]
-            return pull_url
+            pr_label_list = json_text["labels"]
+            for label in pr_label_list:
+                if label["name"] == "persistent":
+                    print(f'Issue label is persistent')
+                    persistent_label = "persistent"
+            return pull_url, persistent_label
         except KeyError:
             print(f'Pull Request url is unknown.')
 
-
+    def _get_label_issue(self, issue_nr):
+        url = f'https://api.github.com/repos/{self.github_repo}/issues/{issue_nr}'
+        payload = {}
+        headers = {
+            'Authorization': 'Bearer ' + self.github_token,
+            'Content-Type': 'application/json'
+        }
+        response = requests.request("GET", url, headers=headers, data=payload)
+        json_text = response.json()
+        try:
+            issue_label_list = json_text["labels"]
+            for label in issue_label_list:
+                if label["name"] == "persistent":
+                    print(f'Issue label is persistent')
+                    return 'persistent'
+        except KeyError:
+            print(f'Pull Request url is unknown.')
 
     def _post_message(self, channel_id, message_text):
         import logging
@@ -315,6 +329,7 @@ if __name__ == '__main__':
     args = parser.parse_args()  # Parse the arguments
     from api_slack import Slack_Notification
     slack = Slack_Notification(github_token=args.github_token, slack_token=args.slack_token, github_repo=args.github_repo, base_branch=args.base_branch)
+
     slack_user_list = slack._get_user_list()  # Get a list with all slack users
     slack_mail_id = slack._get_slack_mail(slack_user_list)  # Write dictionary with slack_mail: Slack_id
     local_time = slack._local_time()  # get the local time
@@ -345,8 +360,9 @@ if __name__ == '__main__':
 
                 time.sleep(15)
                 pr_number = slack._get_pr_number(branch)  # get the number of created pull request
-                pull_url = slack._check_pr_number(pr_number)  # checks if the pull request with the number exists
-
+                result = slack._check_pr_number(pr_number)  # checks if the pull request with the number exists
+                pull_url = result[0]
+                persistent_label = result[1]
                 time.sleep(15)
                 if pull_url is None:
                     print(f'Cannot create Pull Request: {reponse}')
@@ -358,7 +374,6 @@ if __name__ == '__main__':
                                        f'\nUser name: {name}'
                         print(f'\nName: {name}\nBranch: {branch}\nGitHub E-Mail: {github_mail}\nSlack_channel_ID: {channel_id}\n{message_text}')
                         slack._post_message(channel_id, message_text)  # post message to slack user
-
                         #### Issue
                         branch_numb_list = (re.findall('[0-9]*', branch))  # write the number of branch (e.g. issue1170_*** -> 1170)
                         for numb in branch_numb_list:
@@ -367,13 +382,19 @@ if __name__ == '__main__':
                                     if str(issue_number) == str(numb):  # issue_number == branch_number
                                         if assignees_owner is not None:
                                             slack._assignees_issue(assignees_owner, issue_number)  # Add assigneers to the branch
+
+                                        label = slack._get_label_issue(issue_number)
                                         slack._comment_issue_without_pr(message_text, issue_number)  # comment the issue (delte the branch)
+                                        if label == 'persistent':
+                                            break
                                         time.sleep(5)
                                         slack._close_issue(issue_number)  # close issue
-
                         time.sleep(15)
-                        slack._delete_branch(branch)  # delete branch
-                        continue
+                        if persistent_label == "persistent":
+                            continue
+                        else:
+                            slack._delete_branch(branch)  # delete branch
+                            continue
                     if str(reponse).find(f"'message': 'You have exceeded a secondary rate limit and have been temporarily blocked from content creation. Please retry your request again later.'") > -1:
                         print(f'\nYou have exceeded a secondary rate limit and have been temporarily blocked from content creation. Please retry your request again later.\n')
                         exit(1)
@@ -392,15 +413,18 @@ if __name__ == '__main__':
 
                 artifacts_list.append(f'\n******************************\nName: {name}\nBranch: {branch}\nGitHub E-Mail: {github_mail}\nSlack_channel_ID: {channel_id}\n{message_text}')
                 #### Issue
-                branch_numb_list = (re.findall('[0-9]*', branch))  # write the number of branch (e.g. issue1170_*** -> 1170)
+                branch_numb_list = (re.findall('[0-9]*', branch))  #  write the number of branch (e.g. issue1170_*** -> 1170)
                 for numb in branch_numb_list:
                     if numb.isdigit() is True:  # get number of branch
                         for issue_number in issue_number_list:
                             if str(issue_number) == str(numb):  # issue_number == branch_number
                                 if assignees_owner is not None:
-                                    slack._assignees_issue(assignees_owner, issue_number)  # Add assigneers to the branch
-                                slack._comment_issue(branch, time_dif, issue_number, link_pr)  # comment the issue (delte the branch)
+                                    slack._assignees_issue(assignees_owner, issue_number)  #  Add assigneers to the branch
+                                slack._comment_issue(branch, time_dif, issue_number, link_pr)  #  comment the issue (delte the branch)
+                                label = slack._get_label_issue(issue_number)
 
+                                if label == 'persistent':
+                                    break
                                 time.sleep(15)
                                 slack._close_issue(issue_number)  # close issue
 
@@ -409,9 +433,12 @@ if __name__ == '__main__':
 
                 time.sleep(15)
                 if pull_url is not None:
-                    slack._close_pr(pr_number)  # close pull request
-                    time.sleep(30)
-                    slack._delete_branch(branch)  # delete branch
+                    if persistent_label == "persistent":
+                        continue
+                    else:
+                        slack._close_pr(pr_number)  # close pull request
+                        time.sleep(30)
+                        slack._delete_branch(branch)  # delete branch
                 else:
                     print(f'Cannot find pull request {pr_number}. The Branch {branch} will not be deleted.')
                 continue
@@ -450,7 +477,9 @@ if __name__ == '__main__':
     file = open(f'bin{os.sep}Configfiles{os.sep}ci_slack_branch_inactive_list.txt', "w")
     for entry in artifacts_list:
         file.write(entry)
-    file.close()'''
-    print("Check finished.")
+    file.close() 
+    '''
+    print("Check finished.") 
+
 
 
