@@ -18,15 +18,13 @@ model OriginalModel "Original model"
 
   Overwrite oveWriSet(
     description="First order system control setpoint",
-    u(
-      min=-10,
+    u(min=-10,
       max=10,
       unit="1")) "Overwrite block for setpoint"
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
 
   Overwrite oveWriAct(description="First order system input",
-    u(
-      min=-10,
+    u(min=-10,
       max=10,
       unit="1")) "Overwrite block for actuator signal"
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
@@ -49,22 +47,24 @@ equation
   connect(firOrd.y, rea.u) annotation (Line(points={{71,30},{80,30},{80,-20},{52,
           -20}}, color={0,0,127}));
   connect(rea.y, conPI.u_m)
-
     annotation (Line(points={{29,-20},{0,-20},{0,18}}, color={0,0,127}));
+
   annotation (Documentation(info="<html>
-<p>
-This is a model of a first order dynamic system with feedback control.
-Signal exchange blocks are implemented to overwrite either the setpoint or
-actuator control signals as well as read the output of the first order
-system.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 17, 2018, by David Blum:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+ <p>
+ This is a model of a first order dynamic system with feedback control.
+ Signal exchange blocks are implemented to overwrite either the setpoint or
+ actuator control signals as well as read the output of the first order
+ system.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 17, 2018, by David Blum:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+          Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OriginalModel;

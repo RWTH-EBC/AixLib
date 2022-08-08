@@ -8,18 +8,19 @@ model Carnot_TEva_etaPL
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_etaPL.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example extends from
-<a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
-AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>
-but has a part load efficiency that varies with the load.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 10, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example extends from
+ <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
+ AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>
+ but has a part load efficiency that varies with the load.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 10, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TEva_etaPL;

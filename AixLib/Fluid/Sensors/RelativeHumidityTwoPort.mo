@@ -1,7 +1,7 @@
 within AixLib.Fluid.Sensors;
 model RelativeHumidityTwoPort "Ideal two port relative humidity sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
   Modelica.Blocks.Interfaces.RealOutput phi(final unit="1",
                                             min=0,
                                             start=phi_start)
@@ -18,14 +18,14 @@ protected
     "Relative humidity to which the sensor is exposed to";
 
 protected
-  Modelica.SIunits.Temperature T_a
+  Modelica.Units.SI.Temperature T_a
     "Temperature of the medium flowing from port_a to port_b";
   Medium.MassFraction Xi_a[Medium.nXi](
     quantity=Medium.substanceNames[1:Medium.nXi])
     "Mass fraction of the medium flowing from port_a to port_b";
   Real phi_a(final unit="1")
     "Relative humidity of the medium flowing from port_a to port_b";
-  Modelica.SIunits.Temperature T_b
+  Modelica.Units.SI.Temperature T_b
     "Temperature of the medium flowing from port_b to port_a";
   Medium.MassFraction Xi_b[Medium.nXi](
     quantity=Medium.substanceNames[1:Medium.nXi])
@@ -90,63 +90,64 @@ annotation (defaultComponentName="senRelHum",
         grid={1,1}), graphics={
         Text(
           extent={{102,124},{6,95}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="phi"),
         Line(points={{0,100},{0,70}}, color={0,0,127}),
         Line(points={{-100,0},{-70,0}}, color={0,128,255}),
         Line(points={{70,0},{100,0}}, color={0,128,255}),
         Text(
           extent={{-20,120},{-140,70}},
-          lineColor={0,0,0},
-          textString=DynamicSelect("", String(phi, leftjustified=false, significantDigits=2)))}),
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(phi, leftJustified=false, significantDigits=2)))}),
   Documentation(info="<html>
-<p>
-This model outputs the relative humidity of the fluid flowing from
-<code>port_a</code> to <code>port_b</code>.
-The sensor is ideal, i.e., it does not influence the fluid.
-</p>
-<p>
-Note that this sensor can only be used with media that contain the variable <code>phi</code>,
-which is typically the case for moist air models.
-</p>
-<p>
-If the parameter <code>tau</code> is non-zero, then its output
-is computed using a first order differential equation.
-Setting <code>tau=0</code> is <i>not</i> recommend. See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 21, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating state.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
-<li>
-January 26, 2016 by Michael Wetter:<br/>
-Added <code>quantity</code> attribute for mass fraction variables.<br/>
-Made unit assignment of output signal final.
-</li>
-<li>
-January 18, 2016 by Filip Jorissen:<br/>
-Using parameter <code>tauInv</code>
-since this now exists in
-<a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
-</li>
-<li>
-June 3, 2011 by Michael Wetter:<br/>
-Revised implementation to add dynamics in such a way that
-the time constant increases as the mass flow rate tends to zero.
-This significantly improves the numerics.
-</li>
-<li>
-Feb. 5, 2011 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model outputs the relative humidity of the fluid flowing from
+ <code>port_a</code> to <code>port_b</code>.
+ The sensor is ideal, i.e., it does not influence the fluid.
+ </p>
+ <p>
+ Note that this sensor can only be used with media that contain the variable <code>phi</code>,
+ which is typically the case for moist air models.
+ </p>
+ <p>
+ If the parameter <code>tau</code> is non-zero, then its output
+ is computed using a first order differential equation.
+ Setting <code>tau=0</code> is <i>not</i> recommend. See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 21, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ January 26, 2016 by Michael Wetter:<br/>
+ Added <code>quantity</code> attribute for mass fraction variables.<br/>
+ Made unit assignment of output signal final.
+ </li>
+ <li>
+ January 18, 2016 by Filip Jorissen:<br/>
+ Using parameter <code>tauInv</code>
+ since this now exists in
+ <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
+ </li>
+ <li>
+ June 3, 2011 by Michael Wetter:<br/>
+ Revised implementation to add dynamics in such a way that
+ the time constant increases as the mass flow rate tends to zero.
+ This significantly improves the numerics.
+ </li>
+ <li>
+ Feb. 5, 2011 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RelativeHumidityTwoPort;

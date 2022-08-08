@@ -10,14 +10,13 @@ model PPMTwoPort
                    each final unit="1",
                    each min=0,
                    each max=1)));
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
 
   parameter String substanceName = "CO2" "Name of trace substance";
   parameter Real C_start(min=0) = 0
     "Initial or guess value of output (= state)"
     annotation (Dialog(group="Initialization"));
-  parameter Modelica.SIunits.MolarMass MM=
-    Modelica.Media.IdealGases.Common.SingleGasesData.CO2.MM
+  parameter Modelica.Units.SI.MolarMass MM=Modelica.Media.IdealGases.Common.SingleGasesData.CO2.MM
     "Molar mass of the trace substance";
   Modelica.Blocks.Interfaces.RealOutput ppm(min=0)
     "Trace substance in port medium in ppm"
@@ -35,8 +34,8 @@ protected
     then 1 else 0 for i in 1:Medium.nC}
     "Vector with zero everywhere except where species is";
 
-  final parameter Modelica.SIunits.MolarMass MMBul=Medium.molarMass(
-    Medium.setState_phX(
+  final parameter Modelica.Units.SI.MolarMass MMBul=Medium.molarMass(
+      Medium.setState_phX(
       p=Medium.p_default,
       h=Medium.h_default,
       X=Medium.X_default)) "Molar mass of bulk medium";
@@ -91,40 +90,41 @@ annotation (defaultComponentName="senPPM",
         graphics={
         Text(
           extent={{82,122},{0,92}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="ppm"),
         Line(points={{0,100},{0,70}}, color={0,0,127}),
         Line(points={{-100,0},{-70,0}}, color={0,128,255}),
         Line(points={{70,0},{100,0}}, color={0,128,255}),
         Text(
           extent={{-20,120},{-140,70}},
-          lineColor={0,0,0},
-          textString=DynamicSelect("", String(ppm, leftjustified=false, significantDigits=3)))}),
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(ppm, leftJustified=false, significantDigits=3)))}),
   Documentation(info="<html>
-<p>
-This model outputs the trace substance of the passing fluid
-in parts per million.
-The sensor is ideal, i.e., it does not influence the fluid.
-If the parameter <code>tau</code> is non-zero, then its output
-is computed using a first order differential equation.
-Setting <code>tau=0</code> is <i>not</i> recommend. See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 25, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating state.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
-<li>
-January 12, 2016, by Filip Jorissen:<br/>
-First implementation.
-See issue
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
-</li>
-</ul>
-</html>"));
+ <p>
+ This model outputs the trace substance of the passing fluid
+ in parts per million.
+ The sensor is ideal, i.e., it does not influence the fluid.
+ If the parameter <code>tau</code> is non-zero, then its output
+ is computed using a first order differential equation.
+ Setting <code>tau=0</code> is <i>not</i> recommend. See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 25, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ January 12, 2016, by Filip Jorissen:<br/>
+ First implementation.
+ See issue
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PPMTwoPort;

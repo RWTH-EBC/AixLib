@@ -9,11 +9,11 @@ block LimPID
   parameter Modelica.Blocks.Types.SimpleController controllerType=
          Modelica.Blocks.Types.SimpleController.PI "Type of controller";
   parameter Real k(min=0) = 1 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=0.5
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 0.5
     "Time constant of Integrator block" annotation (Dialog(enable=
           controllerType == Modelica.Blocks.Types.SimpleController.PI or
           controllerType == Modelica.Blocks.Types.SimpleController.PID));
-  parameter Modelica.SIunits.Time Td(min=0)=0.1
+  parameter Modelica.Units.SI.Time Td(min=0) = 0.1
     "Time constant of Derivative block" annotation (Dialog(enable=
           controllerType == Modelica.Blocks.Types.SimpleController.PD or
           controllerType == Modelica.Blocks.Types.SimpleController.PID));
@@ -31,10 +31,9 @@ block LimPID
     "The higher Nd, the more ideal the derivative block"
        annotation(Dialog(enable=controllerType==.Modelica.Blocks.Types.SimpleController.PD or
                                 controllerType==.Modelica.Blocks.Types.SimpleController.PID));
-  parameter Modelica.Blocks.Types.InitPID initType= Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-                                     annotation(Evaluate=true,
-      Dialog(group="Initialization"));
+    annotation (Evaluate=true, Dialog(group="Initialization"));
       // Removed as the Limiter block no longer uses this parameter.
       // parameter Boolean limitsAtInit = true
       //  "= false, if limits are ignored during initialization"
@@ -50,7 +49,7 @@ block LimPID
                          enable=controllerType==.Modelica.Blocks.Types.SimpleController.PD or
                                 controllerType==.Modelica.Blocks.Types.SimpleController.PID));
   parameter Real y_start=0 "Initial value of output"
-    annotation(Dialog(enable=initType == Modelica.Blocks.Types.InitPID.InitialOutput, group=
+    annotation(Dialog(enable=initType == Modelica.Blocks.Types.Init.InitialOutput,    group=
           "Initialization"));
   parameter Boolean strict=true "= true, if strict limits with noEvent(..)"
     annotation (Evaluate=true, choices(checkBox=true), Dialog(tab="Advanced"));
@@ -67,15 +66,15 @@ block LimPID
     annotation(Dialog(enable=reset == AixLib.Types.Reset.Parameter,
                       group="Integrator reset"));
 
-  Modelica.Blocks.Interfaces.BooleanInput trigger if
-       reset <> AixLib.Types.Reset.Disabled
+  Modelica.Blocks.Interfaces.BooleanInput trigger
+    if reset <> AixLib.Types.Reset.Disabled
     "Resets the controller output when trigger becomes true"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-80,-120})));
 
-  Modelica.Blocks.Interfaces.RealInput y_reset_in if
-       reset == AixLib.Types.Reset.Input
+  Modelica.Blocks.Interfaces.RealInput y_reset_in
+    if reset == AixLib.Types.Reset.Input
     "Input signal for state to which integrator is reset, enabled if reset = AixLib.Types.Reset.Input"
     annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
 
@@ -93,30 +92,22 @@ block LimPID
     final y_reset=y_reset,
     final k=unitTime/Ti,
     final y_start=xi_start,
-    final initType=if initType == Modelica.Blocks.Types.InitPID.SteadyState then
-        Modelica.Blocks.Types.Init.SteadyState
-             else if initType == Modelica.Blocks.Types.InitPID.InitialState
-                  or initType == Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
-             then Modelica.Blocks.Types.Init.InitialState
-             else Modelica.Blocks.Types.Init.NoInit) if
-       with_I "Integral term"
-       annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+    final initType=if initType == Modelica.Blocks.Types.Init.SteadyState then
+        Modelica.Blocks.Types.Init.SteadyState else if initType == Modelica.Blocks.Types.Init.InitialState
+         or initType == Modelica.Blocks.Types.Init.InitialState then Modelica.Blocks.Types.Init.InitialState
+         else Modelica.Blocks.Types.Init.NoInit) if with_I "Integral term"
+    annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 
   Modelica.Blocks.Continuous.Derivative D(
     final k=Td/unitTime,
     final T=max([Td/Nd,1.e-14]),
     final x_start=xd_start,
-    final initType=if initType == Modelica.Blocks.Types.InitPID.SteadyState or
-                initType == Modelica.Blocks.Types.InitPID.InitialOutput
-             then
-               Modelica.Blocks.Types.Init.SteadyState
-             else
-               if initType == Modelica.Blocks.Types.InitPID.InitialState then
-                 Modelica.Blocks.Types.Init.InitialState
-               else
-                 Modelica.Blocks.Types.Init.NoInit) if with_D "Derivative term"
-                                                     annotation (Placement(
-        transformation(extent={{-40,-10},{-20,10}})));
+    final initType=if initType == Modelica.Blocks.Types.Init.SteadyState or
+        initType == Modelica.Blocks.Types.Init.InitialOutput then Modelica.Blocks.Types.Init.SteadyState
+         else if initType == Modelica.Blocks.Types.Init.InitialState then
+        Modelica.Blocks.Types.Init.InitialState else Modelica.Blocks.Types.Init.NoInit)
+    if with_D "Derivative term"
+    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
   Modelica.Blocks.Math.Add3 addPID(
     final k1=1,
@@ -125,7 +116,7 @@ block LimPID
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 
 protected
-  constant Modelica.SIunits.Time unitTime=1 annotation (HideResult=true);
+  constant Modelica.Units.SI.Time unitTime=1 annotation (HideResult=true);
 
   final parameter Real revAct = if reverseActing then 1 else -1
     "Switch for sign for reverse or direct acting controller";
@@ -187,8 +178,8 @@ protected
 
 
   Modelica.Blocks.Sources.RealExpression intRes(
-    final y=y_reset_internal/k - addPID.u1 - addPID.u2) if
-       reset <> AixLib.Types.Reset.Disabled
+    final y=y_reset_internal/k - addPID.u1 - addPID.u2)
+    if reset <> AixLib.Types.Reset.Disabled
     "Signal source for integrator reset"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
 
@@ -260,32 +251,33 @@ equation
     Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}),
     Text(
       extent={{46,-6},{68,-18}},
-      lineColor={128,128,128},
+      textColor={128,128,128},
       textString="u"),
     Text(
       extent={{-30,70},{-5,50}},
-      lineColor={128,128,128},
+      textColor={128,128,128},
       textString="y"),
     Text(
       extent={{-58,-54},{-28,-42}},
-      lineColor={128,128,128},
+      textColor={128,128,128},
       textString="uMin"),
     Text(
       extent={{26,40},{66,56}},
-      lineColor={128,128,128},
+      textColor={128,128,128},
       textString="uMax")}));
 end Limiter;
 
 
 initial equation
-  if initType==Modelica.Blocks.Types.InitPID.InitialOutput then
+  if initType == Modelica.Blocks.Types.Init.InitialOutput then
      gainPID.y = y_start;
   end if;
 
 equation
   assert(yMax >= yMin, "LimPID: Limits must be consistent. However, yMax (=" + String(yMax) +
                        ") < yMin (=" + String(yMin) + ")");
-  if initType == Modelica.Blocks.Types.InitPID.InitialOutput and (y_start < yMin or y_start > yMax) then
+  if initType == Modelica.Blocks.Types.Init.InitialOutput and (y_start < yMin
+       or y_start > yMax) then
       Modelica.Utilities.Streams.error("LimPID: Start value y_start (=" + String(y_start) +
          ") is outside of the limits of yMin (=" + String(yMin) +") and yMax (=" + String(yMax) + ")");
   end if;
@@ -352,148 +344,148 @@ equation
    annotation (
 defaultComponentName="conPID",
 Documentation(info="<html>
-<p>
-PID controller in the standard form
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-y = k &nbsp; ( e(t) + 1 &frasl; T<sub>i</sub> &nbsp; &int; e(s) ds + T<sub>d</sub> de(t)&frasl;dt ),
-</p>
-<p>
-where
-<i>y</i> is the control signal,
-<i>e(t) = u<sub>s</sub> - u<sub>m</sub></i> is the control error,
-with <i>u<sub>s</sub></i> being the set point and <i>u<sub>m</sub></i> being
-the measured quantity,
-<i>k</i> is the gain,
-<i>T<sub>i</sub></i> is the time constant of the integral term and
-<i>T<sub>d</sub></i> is the time constant of the derivative term.
-</p>
-<p>
-Note that the units of <i>k</i> are the inverse of the units of the control error,
-while the units of <i>T<sub>i</sub></i> and <i>T<sub>d</sub></i> are seconds.
-</p>
-<p>
-For detailed treatment of integrator anti-windup, set-point weights and output limitation, see
-<a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>.
-</p>
-<h4>Options</h4>
-This controller can be configured as follows.
-<h5>P, PI, PD, or PID action</h5>
-<p>
-Through the parameter <code>controllerType</code>, the controller can be configured
-as P, PI, PD or PID controller. The default configuration is PI.
-</p>
-<h5>Direct or reverse acting</h5>
-<p>
-Through the parameter <code>reverseActing</code>, the controller can be configured to
-be reverse or direct acting.
-The above standard form is reverse acting, which is the default configuration.
-For a reverse acting controller, for a constant set point,
-an increase in measurement signal <code>u_m</code> decreases the control output signal <code>y</code>
-(Montgomery and McDowall, 2008).
-Thus,
-</p>
-<ul>
-  <li>
-  for a heating coil with a two-way valve, leave <code>reverseActing = true</code>, but
-  </li>
-  <li>
-  for a cooling coil with a two-way valve, set <code>reverseActing = false</code>.
-  </li>
-</ul>
-<h5>Reset of the controller output</h5>
-<p>
-The controller can be configured to enable an input port that allows resetting the controller
-output. The controller output can be reset as follows:
-</p>
-<ul>
-  <li>
-  If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
-  then the controller output is never reset.
-  </li>
-  <li>
-  If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
-  input signal <code>trigger</code> is enabled. Whenever the value of
-  this input changes from <code>false</code> to <code>true</code>,
-  the controller output is reset by setting <code>y</code>
-  to the value of the parameter <code>y_reset</code>.
-  </li>
-  <li>
-  If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
-  input signal <code>trigger</code> and a real input signal <code>y_reset_in</code>
-  are enabled. Whenever the value of
-  <code>trigger</code> changes from <code>false</code> to <code>true</code>,
-  the controller output is reset by setting the value of <code>y</code>
-  to <code>y_reset_in</code>.
-  </li>
-</ul>
-<p>
-Note that this controller implements an integrator anti-windup. Therefore,
-for most applications, keeping the default setting of
-<code>reset = AixLib.Types.Reset.Disabled</code> is sufficient.
-However, if the controller is used in conjuction with equipment that is being
-switched on, better control performance may be achieved by resetting the controller
-output when the equipment is switched on.
-This is in particular the case in situations
-where the equipment control input should continuously increase as the equipment is
-switched on, such as a light dimmer that may slowly increase the luminance, or
-a variable speed drive of a motor that should continuously increase the speed.
-</p>
-<h4>References</h4>
-<p>
-R. Montgomery and R. McDowall (2008).
-\"Fundamentals of HVAC Control Systems.\"
-American Society of Heating Refrigerating and Air-Conditioning Engineers Inc. Atlanta, GA.
-</p>
-
-</html>",
+ <p>
+ PID controller in the standard form
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ y = k &nbsp; ( e(t) + 1 &frasl; T<sub>i</sub> &nbsp; &int; e(s) ds + T<sub>d</sub> de(t)&frasl;dt ),
+ </p>
+ <p>
+ where
+ <i>y</i> is the control signal,
+ <i>e(t) = u<sub>s</sub> - u<sub>m</sub></i> is the control error,
+ with <i>u<sub>s</sub></i> being the set point and <i>u<sub>m</sub></i> being
+ the measured quantity,
+ <i>k</i> is the gain,
+ <i>T<sub>i</sub></i> is the time constant of the integral term and
+ <i>T<sub>d</sub></i> is the time constant of the derivative term.
+ </p>
+ <p>
+ Note that the units of <i>k</i> are the inverse of the units of the control error,
+ while the units of <i>T<sub>i</sub></i> and <i>T<sub>d</sub></i> are seconds.
+ </p>
+ <p>
+ For detailed treatment of integrator anti-windup, set-point weights and output limitation, see
+ <a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>.
+ </p>
+ <h4>Options</h4>
+ This controller can be configured as follows.
+ <h5>P, PI, PD, or PID action</h5>
+ <p>
+ Through the parameter <code>controllerType</code>, the controller can be configured
+ as P, PI, PD or PID controller. The default configuration is PI.
+ </p>
+ <h5>Direct or reverse acting</h5>
+ <p>
+ Through the parameter <code>reverseActing</code>, the controller can be configured to
+ be reverse or direct acting.
+ The above standard form is reverse acting, which is the default configuration.
+ For a reverse acting controller, for a constant set point,
+ an increase in measurement signal <code>u_m</code> decreases the control output signal <code>y</code>
+ (Montgomery and McDowall, 2008).
+ Thus,
+ </p>
+ <ul>
+   <li>
+   for a heating coil with a two-way valve, leave <code>reverseActing = true</code>, but
+   </li>
+   <li>
+   for a cooling coil with a two-way valve, set <code>reverseActing = false</code>.
+   </li>
+ </ul>
+ <h5>Reset of the controller output</h5>
+ <p>
+ The controller can be configured to enable an input port that allows resetting the controller
+ output. The controller output can be reset as follows:
+ </p>
+ <ul>
+   <li>
+   If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
+   then the controller output is never reset.
+   </li>
+   <li>
+   If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
+   input signal <code>trigger</code> is enabled. Whenever the value of
+   this input changes from <code>false</code> to <code>true</code>,
+   the controller output is reset by setting <code>y</code>
+   to the value of the parameter <code>y_reset</code>.
+   </li>
+   <li>
+   If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
+   input signal <code>trigger</code> and a real input signal <code>y_reset_in</code>
+   are enabled. Whenever the value of
+   <code>trigger</code> changes from <code>false</code> to <code>true</code>,
+   the controller output is reset by setting the value of <code>y</code>
+   to <code>y_reset_in</code>.
+   </li>
+ </ul>
+ <p>
+ Note that this controller implements an integrator anti-windup. Therefore,
+ for most applications, keeping the default setting of
+ <code>reset = AixLib.Types.Reset.Disabled</code> is sufficient.
+ However, if the controller is used in conjuction with equipment that is being
+ switched on, better control performance may be achieved by resetting the controller
+ output when the equipment is switched on.
+ This is in particular the case in situations
+ where the equipment control input should continuously increase as the equipment is
+ switched on, such as a light dimmer that may slowly increase the luminance, or
+ a variable speed drive of a motor that should continuously increase the speed.
+ </p>
+ <h4>References</h4>
+ <p>
+ R. Montgomery and R. McDowall (2008).
+ \"Fundamentals of HVAC Control Systems.\"
+ American Society of Heating Refrigerating and Air-Conditioning Engineers Inc. Atlanta, GA.
+ </p>
+ 
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 1, 2020, by Michael Wetter:<br/>
-Corrected wrong convention of reverse and direct action.<br/>
-Changed default configuration from PID to PI.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
-</li>
-<li>
-March 9, 2020, by Michael Wetter:<br/>
-Corrected wrong unit declaration for parameter <code>k</code>.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1316\">issue 1316</a>.
-</li>
-<li>
-October 19, 2019, by Filip Jorissen:<br/>
-Disabled homotopy to ensure bounded outputs
-by copying the implementation from MSL 3.2.3 and by
-hardcoding the implementation for <code>homotopyType=NoHomotopy</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1221\">issue 1221</a>.
-</li>
-<li>
-September 29, 2016, by Michael Wetter:<br/>
-Refactored model.
-</li>
-<li>
-August 25, 2016, by Michael Wetter:<br/>
-Removed parameter <code>limitsAtInit</code> because it was only propagated to
-the instance <code>limiter</code>, but this block no longer makes use of this parameter.
-This is a non-backward compatible change.<br/>
-Revised implemenentation, added comments, made some parameter in the instances final.
-</li>
-<li>July 18, 2016, by Philipp Mehrfeld:<br/>
-Added integrator reset.
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/494\">issue 494</a>.
-</li>
-<li>
-March 15, 2016, by Michael Wetter:<br/>
-Changed the default value to <code>strict=true</code> in order to avoid events
-when the controller saturates.
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
-</li>
-<li>
-February 24, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Icon(graphics={
+ <ul>
+ <li>
+ June 1, 2020, by Michael Wetter:<br/>
+ Corrected wrong convention of reverse and direct action.<br/>
+ Changed default configuration from PID to PI.<br/>
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
+ </li>
+ <li>
+ March 9, 2020, by Michael Wetter:<br/>
+ Corrected wrong unit declaration for parameter <code>k</code>.<br/>
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1316\">issue 1316</a>.
+ </li>
+ <li>
+ October 19, 2019, by Filip Jorissen:<br/>
+ Disabled homotopy to ensure bounded outputs
+ by copying the implementation from MSL 3.2.3 and by
+ hardcoding the implementation for <code>homotopyType=NoHomotopy</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1221\">issue 1221</a>.
+ </li>
+ <li>
+ September 29, 2016, by Michael Wetter:<br/>
+ Refactored model.
+ </li>
+ <li>
+ August 25, 2016, by Michael Wetter:<br/>
+ Removed parameter <code>limitsAtInit</code> because it was only propagated to
+ the instance <code>limiter</code>, but this block no longer makes use of this parameter.
+ This is a non-backward compatible change.<br/>
+ Revised implemenentation, added comments, made some parameter in the instances final.
+ </li>
+ <li>July 18, 2016, by Philipp Mehrfeld:<br/>
+ Added integrator reset.
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/494\">issue 494</a>.
+ </li>
+ <li>
+ March 15, 2016, by Michael Wetter:<br/>
+ Changed the default value to <code>strict=true</code> in order to avoid events
+ when the controller saturates.
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
+ </li>
+ <li>
+ February 24, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Icon(graphics={
         Rectangle(
           extent={{-6,-20},{66,-66}},
           lineColor={255,255,255},
@@ -544,5 +536,6 @@ First implementation.
           visible=strict,
           points={{30,60},{81,60}},
           color={255,0,0},
-          smooth=Smooth.None)}));
+          smooth=Smooth.None)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end LimPID;

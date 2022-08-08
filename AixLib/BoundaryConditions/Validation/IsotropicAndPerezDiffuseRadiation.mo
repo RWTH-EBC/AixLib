@@ -7,20 +7,12 @@ model IsotropicAndPerezDiffuseRadiation
     final unit="W/m2")
     "Radiation per unit area using Perez Model"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
-  parameter Modelica.SIunits.Angle til(
-    displayUnit="deg")
-    "Surface tilt angle";
-  parameter Modelica.SIunits.Angle lat(
-    displayUnit="deg")
-    "Latitude angle";
-  parameter Modelica.SIunits.Angle azi(
-    displayUnit="deg")
-    "Azimuth angle";
+  parameter Modelica.Units.SI.Angle til(displayUnit="deg") "Surface tilt angle";
+  parameter Modelica.Units.SI.Angle azi(displayUnit="deg") "Azimuth angle";
   parameter Real rho=0.2
     "Ground reflectance";
   SolarIrradiation.DirectTiltedSurface HDir(
     til=til,
-    lat=lat,
     azi=azi)
     "Direct Irradiation on tilted surface"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -34,7 +26,6 @@ model IsotropicAndPerezDiffuseRadiation
   SolarIrradiation.DiffusePerez HDiffPer(
     til=til,
     rho=rho,
-    lat=lat,
     azi=azi,
     outSkyCon=true,
     outGroCon=true)
@@ -77,28 +68,41 @@ equation
         preserveAspectRatio=false)),
     Documentation(
       revisions="<html>
-<ul>
-<li>
-October 25, 2020, by Ettore Zanetti:<br/>
-Updated comments for variable descriptions
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1351\">#1351</a>.
-</li>
-<li>
-April 14, 2020, by Ettore Zanetti:<br/>
-Rework after comments from pull request
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1339\">#1339</a>.
-</li>
-<li>
-March 11, 2020, by Ettore Zanetti:<br/>
-First implementation.
-</li>
-</ul>
-</html>",
+ <ul>
+ <li>
+ September 6, 2021, by Ettore Zanetti:<br/>
+ Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ May 2, 2021, by Ettore Zanetti:<br/>
+ Added altitude to parameters.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ October 25, 2020, by Ettore Zanetti:<br/>
+ Updated comments for variable descriptions
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1351\">#1351</a>.
+ </li>
+ <li>
+ April 14, 2020, by Ettore Zanetti:<br/>
+ Rework after comments from pull request
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1339\">#1339</a>.
+ </li>
+ <li>
+ March 11, 2020, by Ettore Zanetti:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",
       info="<html>
-<p>
-This model outputs the global radiation with a certain inclination and orientation
-using the isotropic sky model and the Perez sky model. The variable <code>H</code> is
-the global radiation calculated using the isotropic sky model, while <code>HPer</code> is
-the global radiation calculated using the Perez sky model.</p>
-</html>"));
+ <p>
+ This model outputs the global radiation with a certain inclination and orientation
+ using the isotropic sky model and the Perez sky model. The variable <code>H</code> is
+ the global radiation calculated using the isotropic sky model, while <code>HPer</code> is
+ the global radiation calculated using the Perez sky model.</p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IsotropicAndPerezDiffuseRadiation;

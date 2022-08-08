@@ -3,8 +3,7 @@ model PropyleneGlycolWaterProperties
   "Model that tests the implementation of the fluid properties"
   extends Modelica.Icons.Example;
   extends AixLib.Media.Examples.BaseClasses.FluidProperties(
-    redeclare package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater
-        (
+    redeclare package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater (
       X_a=0.60,
       property_T=293.15),
     TMin=273.15,
@@ -17,16 +16,17 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/PropyleneGlycolWaterProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This example checks thermophysical properties of the medium.
-</p>
-</html>",
+ <p>
+ This example checks thermophysical properties of the medium.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-March 13, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 13, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PropyleneGlycolWaterProperties;

@@ -1,5 +1,7 @@
+CalcHydraulicPower
 CtrMix
 CtrPump
 CtrPumpVFlow
 CtrThrottle
+CtrThrottleQFlow
 CtrThrottleVFlow

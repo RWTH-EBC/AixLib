@@ -7,12 +7,12 @@ model TemperatureProtection
     temPro(TConMax=313.15, TEvaMin=278.15) "Temperature protection block"
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Modelica.Blocks.Sources.Cosine TEva(
-    freqHz=1,
+    f=1,
     amplitude=10,
     offset=283.15) "Evaporator temperature"
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
   Modelica.Blocks.Sources.Cosine TCon(
-    freqHz=1.2,
+    f=1.2,
     offset=303.15,
     amplitude=20) "Condenser temperature"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
@@ -27,18 +27,19 @@ equation
     annotation (Line(points={{-59,10},{-40,10},{-22,10}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-Model that tests temperature protection functionality.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 31, 2017, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Model that tests temperature protection functionality.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 31, 2017, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Compressors/BaseClasses/Validation/TemperatureProtection.mos"
         "Simulate and plot"),
-    experiment(StopTime=5, Tolerance=1e-06));
+    experiment(StopTime=5, Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureProtection;

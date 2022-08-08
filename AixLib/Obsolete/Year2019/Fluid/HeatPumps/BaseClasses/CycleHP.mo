@@ -1,7 +1,7 @@
 ﻿within AixLib.Obsolete.Year2019.Fluid.HeatPumps.BaseClasses;
 model CycleHP
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   parameter Boolean HPctrlType =  true "Capacity control type"
     annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true), choices(choice=true
         "On/off heat pump",choice = false "Speed controlled heat pump",
@@ -130,31 +130,28 @@ public
   Modelica.Blocks.Sources.RealExpression realCoP(y=CoP) annotation (Placement(
         transformation(extent={{-32,-66},{-12,-46}}, rotation=0)));
 
-  Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
+  Modelica.Blocks.Tables.CombiTable2Ds Qdot_ConTable(
     tableName="NoName",
     fileName="NoName",
     table=tableQdot_con,
-    smoothness=smoothness) if
-                            not (capCalcType == 1)
-    annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-40,20},
-            {-20,40}})));
+    smoothness=smoothness) if not (capCalcType == 1) annotation (extent=[-60,40;
+        -40,60], Placement(transformation(extent={{-40,20},{-20,40}})));
 
-  Modelica.Blocks.Tables.CombiTable2D P_eleTable(
+  Modelica.Blocks.Tables.CombiTable2Ds P_eleTable(
     tableName="NoName",
     fileName="NoName",
     table=tableP_ele,
-    smoothness=smoothness) if
-                        not (capCalcType == 1) "Electrical power table"
-    annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-40,-10},
-            {-20,10}})));
+    smoothness=smoothness) if not (capCalcType == 1) "Electrical power table"
+    annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-40,
+            -10},{-20,10}})));
 public
   Modelica.Blocks.Sources.RealExpression realT_evaIn(y=T_evaInCorr)
     annotation (Placement(transformation(extent={{-94,26},{-74,46}}, rotation=0)));
 public
   Modelica.Blocks.Sources.RealExpression realT_conOut(y=T_conOutCorr)
     annotation (Placement(transformation(extent={{-94,6},{-74,26}}, rotation=0)));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle) if
-                                                                    PT1_cycle
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle)
+                                                                 if PT1_cycle
     annotation (Placement(transformation(extent={{42,-6},{62,14}})));
 public
   Modelica.Blocks.Math.Product productPelCoP1 annotation (Placement(

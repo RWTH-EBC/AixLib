@@ -59,7 +59,7 @@ partial model PartialCase "This is the base class from which the base cases will
         "Room with east and west facing window")));
    RoomModel Room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=289.15,
     final wallTypes=wallTypes,
@@ -127,11 +127,12 @@ partial model PartialCase "This is the base class from which the base cases will
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+  replaceable model CorrSolarGainWin =
+      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+  parameter Modelica.Units.SI.Area Win_Area=12 "Window area ";
 
   parameter Real tableHeatOrTempMax[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
   parameter Real tableCoolOrTempMin[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
@@ -147,8 +148,14 @@ partial model PartialCase "This is the base class from which the base cases will
       choice="Q Cool",
       choice="T Max",
       choice="T Min"));
-  parameter Modelica.SIunits.Time checkTimeHeatOrTempMax=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
-  parameter Modelica.SIunits.Time checkTimeCoolOrTempMin=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+  parameter Modelica.Units.SI.Time checkTimeHeatOrTempMax=31536000
+    "Simulation time when block should check if model results lies in limit range"
+    annotation (Dialog(tab="Results check", group=
+          "Heating load or max. temperature"));
+  parameter Modelica.Units.SI.Time checkTimeCoolOrTempMin=31536000
+    "Simulation time when block should check if model results lies in limit range"
+    annotation (Dialog(tab="Results check", group=
+          "Cooling load or min. temperature"));
 
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));
@@ -171,11 +178,12 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,51.2},{-29.8,51.2}},
+      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,50.12},{-29.8,50.12}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,43},{-29.8,43},{-29.8,43.1}},
+      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,43},{-29.8,43},{-29.8,
+          33.38}},
       color={0,0,127}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-78,-43},{-48,-43},{-48,-19},{-27,-19},{-27,8}},

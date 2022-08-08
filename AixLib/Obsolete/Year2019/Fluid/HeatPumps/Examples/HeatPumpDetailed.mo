@@ -64,7 +64,7 @@ model HeatPumpDetailed
     uHigh=273.15 + 40)
     annotation (Placement(transformation(extent={{64,50},{44,70}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=3000,
     offset=3000)
     annotation (Placement(transformation(extent={{76,26},{84,34}})));

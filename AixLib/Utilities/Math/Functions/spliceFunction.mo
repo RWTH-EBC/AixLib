@@ -22,32 +22,33 @@ algorithm
     end if;
 
     annotation (
-smoothOrder=1,
+smoothOrder=3,
 derivative=BaseClasses.der_spliceFunction,
 Documentation(info="<html>
-<p>
-Function to provide a once continuously differentiable transition between
-to arguments.
-</p><p>
-The function is adapted from
-<a href=\"modelica://Modelica.Media.Air.MoistAir.Utilities.spliceFunction\">
-Modelica.Media.Air.MoistAir.Utilities.spliceFunction</a> and provided here
-for easier accessability to model developers.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 10, 2013, by Michael Wetter:<br/>
-Reformulated implementation to avoid unrequired computations.
-</li>
-<li>
-May 11, 2010, by Michael Wetter:<br/>
-Removed default value for transition interval as this is problem dependent.
-</li>
-<li>
-May 20, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Function to provide a once continuously differentiable transition between
+ to arguments.
+ </p><p>
+ The function is adapted from
+ <a href=\"modelica://Modelica.Media.Air.MoistAir.Utilities.spliceFunction\">
+ Modelica.Media.Air.MoistAir.Utilities.spliceFunction</a> and provided here
+ for easier accessability to model developers.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 10, 2013, by Michael Wetter:<br/>
+ Reformulated implementation to avoid unrequired computations.
+ </li>
+ <li>
+ May 11, 2010, by Michael Wetter:<br/>
+ Removed default value for transition interval as this is problem dependent.
+ </li>
+ <li>
+ May 20, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end spliceFunction;

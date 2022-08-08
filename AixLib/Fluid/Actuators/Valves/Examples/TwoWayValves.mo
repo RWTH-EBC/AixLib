@@ -124,39 +124,40 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValves.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Test model for two way valves. Note that the
-leakage flow rate has been set to a large value
-and the rangeability to a small value
-for better visualization of the valve characteristics.
-To use common values, use the default values.
-</p>
-<p>
-The parameter <code>filterOpening</code> is set to <code>false</code>,
-as this model is used to plot the flow at different opening signals
-without taking into account the travel time of the actuator.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 8, 2018, by Filip Jorissen:<br/>
-Added butterfly valve
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/975\">#975</a>.
-</li>
-<li>
-January 29, 2015, by Filip Jorissen:<br/>
-Added pressure-independent valve.
-</li>
-<li>
-February 28, 2013, by Michael Wetter:<br/>
-Added default value for <code>dpValve_nominal</code>.
-</li>
-<li>
-June 16, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Test model for two way valves. Note that the
+ leakage flow rate has been set to a large value
+ and the rangeability to a small value
+ for better visualization of the valve characteristics.
+ To use common values, use the default values.
+ </p>
+ <p>
+ The parameter <code>filterOpening</code> is set to <code>false</code>,
+ as this model is used to plot the flow at different opening signals
+ without taking into account the travel time of the actuator.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 8, 2018, by Filip Jorissen:<br/>
+ Added butterfly valve
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/975\">#975</a>.
+ </li>
+ <li>
+ January 29, 2015, by Filip Jorissen:<br/>
+ Added pressure-independent valve.
+ </li>
+ <li>
+ February 28, 2013, by Michael Wetter:<br/>
+ Added default value for <code>dpValve_nominal</code>.
+ </li>
+ <li>
+ June 16, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(extent={{-100,-140},{100,120}})),
-    Icon(coordinateSystem(extent={{-100,-140},{100,120}})));
+    Icon(coordinateSystem(extent={{-100,-140},{100,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValves;

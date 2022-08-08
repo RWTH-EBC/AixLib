@@ -11,19 +11,19 @@ model TemperatureTwoPort "Ideal two port temperature sensor"
         origin={0,110},
         extent={{10,-10},{-10,10}},
         rotation=270)));
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initial or guess value of output (= state)"
     annotation (Dialog(group="Initialization"));
 
   parameter Boolean transferHeat = false
     "if true, temperature T converges towards TAmb when no flow"
     annotation(Evaluate=true, Dialog(group="Heat transfer"));
-  parameter Modelica.SIunits.Temperature TAmb=Medium.T_default
+  parameter Modelica.Units.SI.Temperature TAmb=Medium.T_default
     "Fixed ambient temperature for heat transfer"
-    annotation(Dialog(enable=transferHeat, group="Heat transfer"));
-  parameter Modelica.SIunits.Time tauHeaTra(min=1)=1200
+    annotation (Dialog(enable=transferHeat, group="Heat transfer"));
+  parameter Modelica.Units.SI.Time tauHeaTra(min=1) = 1200
     "Time constant for heat transfer, default 20 minutes"
-    annotation(Dialog(enable=transferHeat, group="Heat transfer"));
+    annotation (Dialog(enable=transferHeat, group="Heat transfer"));
 
 protected
   parameter Real tauHeaTraInv(final unit = "1/s")=
@@ -97,7 +97,7 @@ annotation (defaultComponentName="senTem",
           lineThickness=0.5),
         Text(
           extent={{102,140},{-18,90}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T"),
         Line(
           points={{-12,60},{-12,-25}},
@@ -120,88 +120,89 @@ annotation (defaultComponentName="senTem",
           visible=transferHeat),
         Text(
          extent={{-20,120},{-140,70}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString=DynamicSelect("", String(T-273.15, format=".1f")))}),
     Documentation(info="<html>
-<p>
-This model outputs the temperature of the medium in the flow
-between its fluid ports. The sensor does not influence the fluid.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-If the parameter <code>tau</code> is non-zero, then its output <i>T</i>
-converges to the temperature of the incoming fluid using
-a first order differential equation.
-Setting <code>tau=0</code> is <i>not</i> recommend. See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-<p>
-If <code>transferHeat = true</code>, then heat transfer with the ambient is
-approximated and <i>T</i> converges towards the fixed ambient
-temperature <i>T<sub>Amb</sub></i> using a first order approximation
-with a time constant of <code>tauHeaTra</code>
-when the flow rate is small.
-Note that no energy is exchanged with the fluid as the
-sensor does not influence the fluid temperature.
-</p>
-<p>
-Setting <code>transferHeat = true</code> is useful, for example,
-if the sensor is used to measure the fluid temperature in
-a system with on/off control on the mass flow rate.
-If <code>transferHeat</code> were <code>false</code>, then the sensor output <i>T</i>
-would remain constant if the mass flow rate is set to zero, and hence
-the controller may never switch the mass flow rate on again.
-</p>
-<p>
-In general, applications in which the sensor output is not used to switch
-the mass flow rate on should set <code>transferHeat=false</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 21, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating state.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
-<li>
-October 23, 2017 by Filip Jorissen:<br/>
-Revised implementation of equations
-when <code>transferHeat=true</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/840\">#840</a>.
-</li>
-<li>
-January 12, 2016 by Filip Jorissen:<br/>
-Removed parameter <code>tauInv</code>
-since this now exists in
-<a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
-</li>
-<li>
-June 19, 2015 by Michael Wetter:<br/>
-Revised model and documentation.
-</li>
-<li>
-June 18, 2015 by Filip Jorissen:<br/>
-Added option for simulating thermal losses.
-</li>
-<li>
-June 3, 2011 by Michael Wetter:<br/>
-Revised implementation to add dynamics in such a way that
-the time constant increases as the mass flow rate tends to zero.
-This significantly improves the numerics.
-</li>
-<li>
-February 26, 2010 by Michael Wetter:<br/>
-Set start attribute for temperature output. Prior to this change,
-the output was 0 at initial time, which caused the plot of the output to
-use 0 Kelvin as the lower value of the ordinate.
-</li>
-<li>
-September 10, 2008, by Michael Wetter:<br/>
-First implementation, based on
-<a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model outputs the temperature of the medium in the flow
+ between its fluid ports. The sensor does not influence the fluid.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ If the parameter <code>tau</code> is non-zero, then its output <i>T</i>
+ converges to the temperature of the incoming fluid using
+ a first order differential equation.
+ Setting <code>tau=0</code> is <i>not</i> recommend. See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ <p>
+ If <code>transferHeat = true</code>, then heat transfer with the ambient is
+ approximated and <i>T</i> converges towards the fixed ambient
+ temperature <i>T<sub>Amb</sub></i> using a first order approximation
+ with a time constant of <code>tauHeaTra</code>
+ when the flow rate is small.
+ Note that no energy is exchanged with the fluid as the
+ sensor does not influence the fluid temperature.
+ </p>
+ <p>
+ Setting <code>transferHeat = true</code> is useful, for example,
+ if the sensor is used to measure the fluid temperature in
+ a system with on/off control on the mass flow rate.
+ If <code>transferHeat</code> were <code>false</code>, then the sensor output <i>T</i>
+ would remain constant if the mass flow rate is set to zero, and hence
+ the controller may never switch the mass flow rate on again.
+ </p>
+ <p>
+ In general, applications in which the sensor output is not used to switch
+ the mass flow rate on should set <code>transferHeat=false</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 21, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ October 23, 2017 by Filip Jorissen:<br/>
+ Revised implementation of equations
+ when <code>transferHeat=true</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/840\">#840</a>.
+ </li>
+ <li>
+ January 12, 2016 by Filip Jorissen:<br/>
+ Removed parameter <code>tauInv</code>
+ since this now exists in
+ <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
+ </li>
+ <li>
+ June 19, 2015 by Michael Wetter:<br/>
+ Revised model and documentation.
+ </li>
+ <li>
+ June 18, 2015 by Filip Jorissen:<br/>
+ Added option for simulating thermal losses.
+ </li>
+ <li>
+ June 3, 2011 by Michael Wetter:<br/>
+ Revised implementation to add dynamics in such a way that
+ the time constant increases as the mass flow rate tends to zero.
+ This significantly improves the numerics.
+ </li>
+ <li>
+ February 26, 2010 by Michael Wetter:<br/>
+ Set start attribute for temperature output. Prior to this change,
+ the output was 0 at initial time, which caused the plot of the output to
+ use 0 Kelvin as the lower value of the ordinate.
+ </li>
+ <li>
+ September 10, 2008, by Michael Wetter:<br/>
+ First implementation, based on
+ <a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureTwoPort;

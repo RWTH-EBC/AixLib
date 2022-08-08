@@ -5,14 +5,14 @@ model Carnot_TCon
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-5
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=-5
     "Temperature difference evaporator inlet-outlet";
-  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
-  parameter Modelica.SIunits.HeatFlowRate QCon_flow_nominal = 100E3
+  parameter Modelica.Units.SI.HeatFlowRate QCon_flow_nominal=100E3
     "Evaporator heat flow rate";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal=
-    QCon_flow_nominal/dTCon_nominal/4200 "Nominal mass flow rate at condenser";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=QCon_flow_nominal/
+      dTCon_nominal/4200 "Nominal mass flow rate at condenser";
 
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(
     redeclare package Medium1 = Medium1,
@@ -60,8 +60,8 @@ model Carnot_TCon
     nPorts=1)
     annotation (Placement(transformation(extent={{60,28},{40,48}})));
 
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp2_default=
-    Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp2_default=
+      Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
       Medium2.p_default,
       Medium2.T_default,
       Medium2.X_default))
@@ -95,25 +95,26 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPum
         "Simulate and plot"),
     Documentation(
 info="<html>
-<p>
-Example that simulates a chiller whose efficiency is scaled based on the
-Carnot cycle.
-The chiller takes as an input the evaporator leaving water temperature.
-The condenser mass flow rate is computed in such a way that it has
-a temperature difference equal to <code>dTEva_nominal</code>.
-</p>
-</html>",
+ <p>
+ Example that simulates a chiller whose efficiency is scaled based on the
+ Carnot cycle.
+ The chiller takes as an input the evaporator leaving water temperature.
+ The condenser mass flow rate is computed in such a way that it has
+ a temperature difference equal to <code>dTEva_nominal</code>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 25, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TCon;

@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Heater "Heating register"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -13,6 +13,8 @@ model Heater "Heating register"
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=6.3,
+      valveCharacteristic=
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
@@ -63,7 +65,7 @@ model Heater "Heating register"
     Td=1,
     useExternalTset=false,
     TflowSet=293.15,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
+    initType=Modelica.Blocks.Types.Init.InitialOutput)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
 equation
   connect(boundaryWaterSink.ports[1], registerModule.port_b2) annotation (Line(
@@ -77,7 +79,7 @@ equation
   connect(registerModule.port_a1, boundaryAirSource.ports[1]) annotation (Line(
         points={{-40,20.1538},{-40,20},{-70,20},{-70,40}},     color={0,127,255}));
   connect(ctrBasic.registerBus, registerModule.registerBus) annotation (Line(
-      points={{-51.4,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
+      points={{-51.8,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
           -0.0230769}},
       color={255,204,51},
       thickness=0.5));
@@ -96,5 +98,7 @@ equation
       StopTime=3600,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands);
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
+        "Simulate and plot"));
 end Heater;

@@ -10,20 +10,20 @@ record Carrier_50PSW122_38kW_4_29COP_R410A =
     UACon = 9021.05488178,
     UAEva = 7132.41759701)
     "Calibrated parameters for Carrier 50PSW122"
-
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-Calibrated parameters for Carrier 50PSW122.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 6, 2017, by Massimo Cimmino:<br/>
-Calibrated parameters.
-</li>
-</ul>
-</html>"));
+ <p>
+ Calibrated parameters for Carrier 50PSW122.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 6, 2017, by Massimo Cimmino:<br/>
+ Calibrated parameters.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

@@ -9,18 +9,19 @@ model Carnot_y_etaCar
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_y_etaCar.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example extends from
-<a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_y\">
-AixLib.Fluid.HeatPumps.Examples.Carnot_y</a>
-but uses the parameter <code>etaCar</code> instead of <code>COP_nominal</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 5, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example extends from
+ <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_y\">
+ AixLib.Fluid.HeatPumps.Examples.Carnot_y</a>
+ but uses the parameter <code>etaCar</code> instead of <code>COP_nominal</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 5, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y_etaCar;

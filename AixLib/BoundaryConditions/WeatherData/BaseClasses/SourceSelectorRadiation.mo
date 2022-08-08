@@ -7,31 +7,31 @@ block SourceSelectorRadiation
 
   Modelica.Blocks.Interfaces.RealInput HDirNorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Direct normal solar irradiation from weather data file" annotation (Placement(transformation(extent={{-140,
             -10},{-100,30}}), iconTransformation(extent={{-120,10},{-100,30}})));
 
   Modelica.Blocks.Interfaces.RealInput HDirNorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor or
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor or
       datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor
     "Direct normal solar irradiation from input connector" annotation (Placement(transformation(extent={{-140,
             -40},{-100,0}}),  iconTransformation(extent={{-120,-30},{-100,-10}})));
 
   Modelica.Blocks.Interfaces.RealInput HDifHorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-     datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+  if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Diffuse horizontal solar irradiation from weather data file" annotation (Placement(transformation(
           extent={{-140,60},{-100,100}}), iconTransformation(extent={{-120,80},{
             -100,100}})));
 
   Modelica.Blocks.Interfaces.RealInput HDifHorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-     datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
+    final unit="W/m2")
+  if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor
     "Diffuse horizontal solar irradiation from input connector" annotation (Placement(transformation(
           extent={{-140,30},{-100,70}}),  iconTransformation(extent={{-120,50},{
@@ -39,16 +39,16 @@ block SourceSelectorRadiation
 
   Modelica.Blocks.Interfaces.RealInput HGloHorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Global horizontal solar irradiation from weather data file" annotation (Placement(transformation(extent={{-140,
             -70},{-100,-30}}),        iconTransformation(extent={{-120,-70},{-100,
             -50}})));
 
   Modelica.Blocks.Interfaces.RealInput HGloHorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
       datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor
     "Global horizontal solar irradiation from input connector" annotation (Placement(transformation(extent={{-140,
             -98},{-100,-58}}),        iconTransformation(extent={{-120,-100},{-100,
@@ -86,7 +86,7 @@ block SourceSelectorRadiation
 
 protected
   constant Real epsCos = 1e-6 "Small value to avoid division by 0";
-  constant Modelica.SIunits.HeatFlux solCon = 1367.7 "Solar constant";
+  constant Modelica.Units.SI.HeatFlux solCon=1367.7 "Solar constant";
 
   // Conditional connectors
   Modelica.Blocks.Interfaces.RealInput HGloHor_in_internal(
@@ -151,32 +151,32 @@ equation
   annotation (
   defaultComponentName="souSel",
 Documentation(info="<html>
-<p>
-Block that outputs the direct normal, diffuse horizontal and diffuse global
-solar irradiation.
-This block computes these output quantities based on conditionally provided
-input signals.
-</p>
-<p>
-The computations are based on Wetter (2004).
-</p>
-<h4>References</h4>
-<ul>
-<li>
-Michael Wetter.<br/>
-<a href=\"http://simulationresearch.lbl.gov/wetter/download/mwdiss.pdf\">
-Simulation-based Building Energy Optimization</a>.<br/>
-Dissertation. University of California at Berkeley. 2004.
-</li>
-</ul>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that outputs the direct normal, diffuse horizontal and diffuse global
+ solar irradiation.
+ This block computes these output quantities based on conditionally provided
+ input signals.
+ </p>
+ <p>
+ The computations are based on Wetter (2004).
+ </p>
+ <h4>References</h4>
+ <ul>
+ <li>
+ Michael Wetter.<br/>
+ <a href=\"http://simulationresearch.lbl.gov/wetter/download/mwdiss.pdf\">
+ Simulation-based Building Energy Optimization</a>.<br/>
+ Dissertation. University of California at Berkeley. 2004.
+ </li>
+ </ul>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
       Rectangle(
           extent={{-100,100},{100,-100}},
@@ -196,5 +196,6 @@ First implementation.
         Ellipse(lineColor={0,0,255},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          extent={{-2,-8},{14,8}})}));
+          extent={{-2,-8},{14,8}})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SourceSelectorRadiation;

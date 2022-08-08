@@ -59,39 +59,40 @@ equation
   annotation (
     defaultComponentName="HDifTilIso",
     Documentation(info="<html>
-<p>
-This component computes the hemispherical diffuse irradiation
-on a tilted surface using an isotropic model.
-The irradiation is a sum composed of diffuse solar irradiation and
-radiation reflected by the ground.
-For a definition of the parameters, see the
-<a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">User's Guide</a>.
-</p>
-<h4>References</h4>
-P. Ineichen, R. Perez and R. Seals (1987).
-<i>The Importance of Correct Albedo Determination for Adequately Modeling
-Energy Received by Tilted Surface</i>,
-Solar Energy, 39(4): 301-305.
-</html>", revisions="<html>
-<ul>
-<li>
-November 14, 2015, by Michael Wetter:<br/>
-Added <code>min</code>, <code>max</code> and <code>unit</code>
-attributes for <code>rho</code>.
-</li>
-<li>
-June 6, 2012, by Wangda Zuo:<br/>
-Added contributions from sky and ground that were separated in base class.
-</li>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the hemispherical diffuse irradiation
+ on a tilted surface using an isotropic model.
+ The irradiation is a sum composed of diffuse solar irradiation and
+ radiation reflected by the ground.
+ For a definition of the parameters, see the
+ <a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">User's Guide</a>.
+ </p>
+ <h4>References</h4>
+ P. Ineichen, R. Perez and R. Seals (1987).
+ <i>The Importance of Correct Albedo Determination for Adequately Modeling
+ Energy Received by Tilted Surface</i>,
+ Solar Energy, 39(4): 301-305.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 14, 2015, by Michael Wetter:<br/>
+ Added <code>min</code>, <code>max</code> and <code>unit</code>
+ attributes for <code>rho</code>.
+ </li>
+ <li>
+ June 6, 2012, by Wangda Zuo:<br/>
+ Added contributions from sky and ground that were separated in base class.
+ </li>
+ <li>
+ May 24, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255})}));
+          textColor={0,0,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DiffuseIsotropic;

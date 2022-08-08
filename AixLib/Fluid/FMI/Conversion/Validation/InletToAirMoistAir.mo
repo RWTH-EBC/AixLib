@@ -29,8 +29,8 @@ model InletToAirMoistAir
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Blocks.Sources.Constant X_w_in(k=0.01) "Inlet mass fraction"
     annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
   AixLib.Fluid.FMI.Conversion.InletToAir conAirRevFlo(redeclare package
       Medium = Medium, allowFlowReversal=true)
@@ -81,32 +81,33 @@ equation
           {64,-52},{30,-52},{30,-42}}, color={0,0,127}));
 annotation (
     Documentation(info="<html>
-<p>
-This example validates the conversion model
-<a href=\"modelica://AixLib.Fluid.FMI.Conversion.InletToAir\">
-AixLib.Fluid.FMI.Conversion.InletToAir
-</a>.
-The medium used is
-<a href=\"modelica://AixLib.Media.Air\">
-AixLib.Media.Air
-</a>
-without trace substances.
-The top model has no reverse flow, whereas the
-bottom model has reverse flow.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 29, 2016, by Michael Wetter:<br/>
-Added validation test for reverse flow.
-</li>
-<li>
-April 28, 2016 by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example validates the conversion model
+ <a href=\"modelica://AixLib.Fluid.FMI.Conversion.InletToAir\">
+ AixLib.Fluid.FMI.Conversion.InletToAir
+ </a>.
+ The medium used is
+ <a href=\"modelica://AixLib.Media.Air\">
+ AixLib.Media.Air
+ </a>
+ without trace substances.
+ The top model has no reverse flow, whereas the
+ bottom model has reverse flow.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 29, 2016, by Michael Wetter:<br/>
+ Added validation test for reverse flow.
+ </li>
+ <li>
+ April 28, 2016 by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Conversion/Validation/InletToAirMoistAir.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0));
+    experiment(Tolerance=1e-6, StopTime=1.0),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InletToAirMoistAir;

@@ -22,24 +22,25 @@ equation
           40},{26,28},{-2,28},{-2,-40},{10,-40}}, color={191,0,0}));
 annotation (Documentation(
         info="<html>
-<p>
-This model validates the use of the mixing volume with air flowing into and out of the volume
-and sensible heat added to the volume.
-</p>
-<p>
-The model <code>volDyn</code> uses a dynamic balance,
-whereas the model <code>volSte</code> uses a steady-state balance.
-The mass flow rate starts positive and reverses its direction at <i>t=5</i> seconds.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 9, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model validates the use of the mixing volume with air flowing into and out of the volume
+ and sensible heat added to the volume.
+ </p>
+ <p>
+ The model <code>volDyn</code> uses a dynamic balance,
+ whereas the model <code>volSte</code> uses a steady-state balance.
+ The mass flow rate starts positive and reverses its direction at <i>t=5</i> seconds.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 9, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeHeatReverseFlow.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-08, StopTime=10));
+    experiment(Tolerance=1e-08, StopTime=10),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeHeatReverseFlow;

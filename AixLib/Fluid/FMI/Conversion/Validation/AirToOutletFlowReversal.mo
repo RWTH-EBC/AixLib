@@ -78,26 +78,27 @@ equation
   connect(bouDryAirWithC.inlet, conDryAirWithC.outlet)
     annotation (Line(points={{39,-70},{21,-70}},          color={0,0,255}));
   annotation (Documentation(info="<html>
-<p>
-This example is identical to
-<a href=\"modelica://AixLib.Fluid.FMI.Conversion.Validation.AirToOutlet\">
-AixLib.Fluid.FMI.Conversion.Validation.AirToOutlet</a>,
-except that it has reverse flow.
-This tests whether the fluid properties from
-the upstream media are correctly converted to
-the output signals of
-<a href=\"modelica://AixLib.Fluid.FMI.Conversion.AirToOutlet\">
-AixLib.Fluid.FMI.Conversion.AirToOutlet</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 29, 2016 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example is identical to
+ <a href=\"modelica://AixLib.Fluid.FMI.Conversion.Validation.AirToOutlet\">
+ AixLib.Fluid.FMI.Conversion.Validation.AirToOutlet</a>,
+ except that it has reverse flow.
+ This tests whether the fluid properties from
+ the upstream media are correctly converted to
+ the output signals of
+ <a href=\"modelica://AixLib.Fluid.FMI.Conversion.AirToOutlet\">
+ AixLib.Fluid.FMI.Conversion.AirToOutlet</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 29, 2016 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Conversion/Validation/AirToOutletFlowReversal.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0));
+    experiment(Tolerance=1e-6, StopTime=1.0),
+  __Dymola_LockedEditing="Model from IBPSA");
 end AirToOutletFlowReversal;

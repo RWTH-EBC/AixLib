@@ -9,11 +9,15 @@ model Cellar "Cellar completly under ground"
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
   // Room geometry
-  parameter Modelica.SIunits.Length room_length = 10.24 "length" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
-  parameter Modelica.SIunits.Length room_width = 17.01 "width" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
-  parameter Modelica.SIunits.Height room_height = 2.5 "length" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
+  parameter Modelica.Units.SI.Length room_length=10.24 "length"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length room_width=17.01 "width"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
+  parameter Modelica.Units.SI.Height room_height=2.5 "length"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
   // Outer walls properties
-  parameter Modelica.SIunits.Temperature T_Ground = 283.15 "GroundTemperature" annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
+  parameter Modelica.Units.SI.Temperature T_Ground=283.15 "GroundTemperature"
+    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
   parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
       group="Outer wall properties",
       compact=true,
@@ -23,9 +27,12 @@ model Cellar "Cellar completly under ground"
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
   //Initial temperatures
-  parameter Modelica.SIunits.Temperature T0_air = 285.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_Walls = 284.95 "Walls" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_Ceiling = 285.25 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.Units.SI.Temperature T0_air=285.15 "Air"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_Walls=284.95 "Walls"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_Ceiling=285.25 "Ceiling"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -33,12 +40,12 @@ model Cellar "Cellar completly under ground"
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
     final T0=T0_air,
     final V=room_V)
@@ -155,7 +162,7 @@ protected
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL = if TIR == 1 then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else if TIR == 2 then AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR == 3 then AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML() else AixLib.DataBase.Walls.WSchV1984.Floor.FLground_WSchV1984_SML();
   // Ceiling  type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE = if TIR == 1 then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEcellar_EnEV2009_SML_loHalf() else if TIR == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.CEcellar_EnEV2002_SML_loHalf() else if TIR == 3 then AixLib.DataBase.Walls.WSchV1995.Ceiling.CEcellar_WSchV1995_SML_loHalf() else AixLib.DataBase.Walls.WSchV1984.Ceiling.CEcellar_WSchV1984_SML_loHalf();
-  parameter Modelica.SIunits.Volume room_V = room_length * room_width * room_height;
+  parameter Modelica.Units.SI.Volume room_V=room_length*room_width*room_height;
 equation
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -87}, {-42, -87}, {-42, -90}, {-90, -90}}, color = {191, 0, 0}));
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-18,-87},{-2,-87},{-2,-64},{-54,-64},{-54,-24},{-12,-24},{-12,-4},{-28,-4}},                color = {191, 0, 0}));

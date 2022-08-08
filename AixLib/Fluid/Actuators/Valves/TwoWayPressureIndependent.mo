@@ -18,17 +18,24 @@ protected
     "Parameter for avoiding unnecessary computations";
   constant Real y2dd = 0
     "Second derivative at second support point";
-  Modelica.SIunits.MassFlowRate m_flow_set
-    "Requested mass flow rate";
-  Modelica.SIunits.PressureDifference dp_min(displayUnit="Pa")
+  Modelica.Units.SI.MassFlowRate m_flow_set "Requested mass flow rate";
+  Modelica.Units.SI.PressureDifference dp_min(displayUnit="Pa")
     "Minimum pressure difference required for delivering requested mass flow rate";
-  Modelica.SIunits.PressureDifference dp_x, dp_x1, dp_x2, dp_y2, dp_y1
+  Modelica.Units.SI.PressureDifference dp_x;
+  Modelica.Units.SI.PressureDifference dp_x1;
+  Modelica.Units.SI.PressureDifference dp_x2;
+  Modelica.Units.SI.PressureDifference dp_y2;
+  Modelica.Units.SI.PressureDifference dp_y1
     "Support points for interpolation flow functions";
-  Modelica.SIunits.MassFlowRate m_flow_x, m_flow_x1, m_flow_x2, m_flow_y2, m_flow_y1
+  Modelica.Units.SI.MassFlowRate m_flow_x;
+  Modelica.Units.SI.MassFlowRate m_flow_x1;
+  Modelica.Units.SI.MassFlowRate m_flow_x2;
+  Modelica.Units.SI.MassFlowRate m_flow_y2;
+  Modelica.Units.SI.MassFlowRate m_flow_y1
     "Support points for interpolation flow functions";
-  Modelica.SIunits.MassFlowRate m_flow_smooth
+  Modelica.Units.SI.MassFlowRate m_flow_smooth
     "Smooth interpolation result between two flow regimes";
-  Modelica.SIunits.PressureDifference dp_smooth
+  Modelica.Units.SI.PressureDifference dp_smooth
     "Smooth interpolation result between two flow regimes";
 
 equation
@@ -151,124 +158,132 @@ equation
   end if;
   annotation (defaultComponentName="val",
 Documentation(info="<html>
-<p>
-Two way valve with a pressure-independent valve opening characteristic.
-The mass flow rate is controlled such that it is nearly equal to its
-set point <code>y*m_flow_nominal</code>, unless the pressure
-<code>dp</code> is too low, in which case a regular <code>Kv</code>
-characteristic is used.
-</p>
-<h4>Main equations</h4>
-<p>
-First the minimum pressure head <code>dp_min</code>
-required for delivering the requested mass flow rate
-<code>y*m_flow_nominal</code> is computed. If
-<code>dp &gt; dp_min</code> then the requested mass flow
-rate is supplied. If <code>dp &lt; dp_min</code> then
-<code>m_flow = Kv/sqrt(dp)</code>. Transition between
-these two flow regimes happens in a smooth way.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-This model is configured by setting <code>m_flow_nominal</code>
-to the mass flow rate that the valve should supply when it is
-completely open, i.e., <code>y = 1</code>. The pressure drop corresponding
-to this working point can be set using <code>dpValve_nominal</code>,
-or using a <code>Kv</code>, <code>Cv</code> or <code>Av</code>
-value. The parameter <code>dpValve_fixed</code> can be used to add
-additional pressure drops, although in this valve it is equivalent to
-add these to <code>dpValve_nominal</code>.
-</p>
-<p>
-The parameter <code>l2</code> represents the non-ideal
-leakage behaviour of this valve for high pressures.
-It is assumed that the mass flow rate will rise beyond
-the requested mass flow rate <code>y*m_flow_nominal</code>
-if <code>dp &gt; dpValve_nominal+dpFixed_nominal</code>.
-The parameter <code>l2</code> represents the slope
-of this rise:
-<code>d(m_flow)/d(dp) = l2* m_flow_nominal/dp_nominal</code>.
-In the ideal case <code>l2=0</code>, but
-this may introduce singularities, for instance when
-connecting this component with a fixed mass flow source.
-</p>
-<h4>Options</h4>
-<p>
-Parameter <code>deltax</code> sets the duration of
-the transition region between the two flow regimes
-as a fraction of <code>dp_nominal</code> or <code>m_flow_nominal</code>,
-depending on the value of <code>from_dp</code>.
-</p>
-<h4>Implementation</h4>
-<p>
-Note that the result in the transition region when
-using <code>from_dp = true</code> is not identical to
-the result when using <code>from_dp = false</code>.
-</p>
-<p>
-Variables <code>*_y1</code> and <code>*_y2</code>
-serve a dual use.
-They are used to
-1) compute the support points at <code>*_x1</code> and <code>*_x2</code>,
-which should not depend on <code>m_flow</code> or <code>dp</code> and
-2) to compute the flow functions when outside of this regime,
-which does depend on <code>m_flow</code> or <code>dp</code>.
-Min and max functions are therefore used such that one equation
-can serve both puroposes.
-</p>
-</html>",
+ <p>
+ Two way valve with a pressure-independent valve opening characteristic.
+ The mass flow rate is controlled such that it is nearly equal to its
+ set point <code>y*m_flow_nominal</code>, unless the pressure
+ <code>dp</code> is too low, in which case a regular <code>Kv</code>
+ characteristic is used.
+ </p>
+ <h4>Main equations</h4>
+ <p>
+ First the minimum pressure head <code>dp_min</code>
+ required for delivering the requested mass flow rate
+ <code>y*m_flow_nominal</code> is computed. If
+ <code>dp &gt; dp_min</code> then the requested mass flow
+ rate is supplied. If <code>dp &lt; dp_min</code> then
+ <code>m_flow = Kv/sqrt(dp)</code>. Transition between
+ these two flow regimes happens in a smooth way.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ This model is configured by setting <code>m_flow_nominal</code>
+ to the mass flow rate that the valve should supply when it is
+ completely open, i.e., <code>y = 1</code>. The pressure drop corresponding
+ to this working point can be set using <code>dpValve_nominal</code>,
+ or using a <code>Kv</code>, <code>Cv</code> or <code>Av</code>
+ value. The parameter <code>dpValve_fixed</code> can be used to add
+ additional pressure drops, although in this valve it is equivalent to
+ add these to <code>dpValve_nominal</code>.
+ </p>
+ <p>
+ The parameter <code>l2</code> represents the non-ideal
+ leakage behaviour of this valve for high pressures.
+ It is assumed that the mass flow rate will rise beyond
+ the requested mass flow rate <code>y*m_flow_nominal</code>
+ if <code>dp &gt; dpValve_nominal+dpFixed_nominal</code>.
+ The parameter <code>l2</code> represents the slope
+ of this rise:
+ <code>d(m_flow)/d(dp) = l2* m_flow_nominal/dp_nominal</code>.
+ In the ideal case <code>l2=0</code>, but
+ this may introduce singularities, for instance when
+ connecting this component with a fixed mass flow source.
+ </p>
+ <h4>Options</h4>
+ <p>
+ Parameter <code>deltax</code> sets the duration of
+ the transition region between the two flow regimes
+ as a fraction of <code>dp_nominal</code> or <code>m_flow_nominal</code>,
+ depending on the value of <code>from_dp</code>.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ Note that the result in the transition region when
+ using <code>from_dp = true</code> is not identical to
+ the result when using <code>from_dp = false</code>.
+ </p>
+ <p>
+ Variables <code>*_y1</code> and <code>*_y2</code>
+ serve a dual use.
+ They are used to
+ 1) compute the support points at <code>*_x1</code> and <code>*_x2</code>,
+ which should not depend on <code>m_flow</code> or <code>dp</code> and
+ 2) to compute the flow functions when outside of this regime,
+ which does depend on <code>m_flow</code> or <code>dp</code>.
+ Min and max functions are therefore used such that one equation
+ can serve both puroposes.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-August 7, 2020, by Ettore Zanetti:<br/>
-changed the computation of <code>phi</code> using
-<code>max(0.1*l, . )</code> to avoid
-phi=0.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1376\">
-issue 1376</a>.
-</li>
-<li>
-November 9, 2019, by Filip Jorissen:<br/>
-Guarded the computation of <code>phi</code> using
-<code>max(0, . )</code> to avoid
-negative phi.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1223\">
-issue 1223</a>.
-</li>
-<li>
-October 25, 2019, by Jianjun Hu:<br/>
-Removed icon graphics annotation. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
-</li>
-<li>
-April 14, 2017, by Filip Jorissen:<br/>
-Revised implementation using <code>cubicHermite</code>
-such that it does not have a local maximum
-and such that it is C2-continuous.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/156\">#156</a>.
-</li>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-March 15, 2016, by Michael Wetter:<br/>
-Replaced <code>spliceFunction</code> with <code>regStep</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-January 29, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ June 10, 2021, by Michael Wetter:<br/>
+ Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+ as most users need not change this value.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
+ </li>
+ <li>
+ August 7, 2020, by Ettore Zanetti:<br/>
+ changed the computation of <code>phi</code> using
+ <code>max(0.1*l, . )</code> to avoid
+ phi=0.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1376\">
+ issue 1376</a>.
+ </li>
+ <li>
+ November 9, 2019, by Filip Jorissen:<br/>
+ Guarded the computation of <code>phi</code> using
+ <code>max(0, . )</code> to avoid
+ negative phi.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1223\">
+ issue 1223</a>.
+ </li>
+ <li>
+ October 25, 2019, by Jianjun Hu:<br/>
+ Removed icon graphics annotation. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
+ </li>
+ <li>
+ April 14, 2017, by Filip Jorissen:<br/>
+ Revised implementation using <code>cubicHermite</code>
+ such that it does not have a local maximum
+ and such that it is C2-continuous.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/156\">#156</a>.
+ </li>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ March 15, 2016, by Michael Wetter:<br/>
+ Replaced <code>spliceFunction</code> with <code>regStep</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ January 29, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayPressureIndependent;

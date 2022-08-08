@@ -27,53 +27,54 @@ experiment(Tolerance=1e-06, StopTime=3600),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Validation/ThreeRoomsContamDiscretizedDoor.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model is identical to
-<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
-AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>
-except that it uses a different door model.
-</p>
-<p>
-This model has been used for a comparative model validation between CONTAM and
-the <code>Buildings</code> library.
-See Wetter (2006) for details of the validation.
-</p>
-<h4>References</h4>
-<p>
-Michael Wetter.
-<a href=\"modelica://AixLib/Resources/Images/Airflow/Multizone/Wetter-airflow-2006.pdf\">
-Multizone Airflow Model in Modelica.</a>
-Proc. of the 5th International Modelica Conference, p. 431-440. Vienna, Austria, September 2006.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 9, 2020, by Michael Wetter:<br/>
-Refactored model to use the base class
-<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
-AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
-</li>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-June 26, 2014, by Michael Wetter:<br/>
-Set the initial conditions to be fixed to avoid a translation warning.
-This required adding a heat conductor between each volume and its prescribed
-temperature in order to avoid an overdetermined system of equations.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model is identical to
+ <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+ AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>
+ except that it uses a different door model.
+ </p>
+ <p>
+ This model has been used for a comparative model validation between CONTAM and
+ the <code>Buildings</code> library.
+ See Wetter (2006) for details of the validation.
+ </p>
+ <h4>References</h4>
+ <p>
+ Michael Wetter.
+ <a href=\"modelica://AixLib/Resources/Images/Airflow/Multizone/Wetter-airflow-2006.pdf\">
+ Multizone Airflow Model in Modelica.</a>
+ Proc. of the 5th International Modelica Conference, p. 431-440. Vienna, Austria, September 2006.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 9, 2020, by Michael Wetter:<br/>
+ Refactored model to use the base class
+ <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+ AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
+ </li>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ June 26, 2014, by Michael Wetter:<br/>
+ Set the initial conditions to be fixed to avoid a translation warning.
+ This required adding a heat conductor between each volume and its prescribed
+ temperature in order to avoid an overdetermined system of equations.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ThreeRoomsContamDiscretizedDoor;

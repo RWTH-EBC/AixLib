@@ -38,10 +38,11 @@ partial model PartialThreeWayValve "Partial three way valve"
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2](each displayUnit="Pa",
-                                                         each min=0) = {0, 0}
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal[2](
+    each displayUnit="Pa",
+    each min=0) = {0,0}
     "Nominal pressure drop of pipes and other equipment in flow legs at port_1 and port_3"
-    annotation(Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"));
 
   parameter Real fraK(min=0, max=1) = 0.7
     "Fraction Kv(port_3&rarr;port_2)/Kv(port_1&rarr;port_2)";
@@ -122,110 +123,111 @@ equation
       visible=not use_inputFilter,
       points={{0,100},{0,40}})}),
     Documentation(info="<html>
-<p>
-Partial model of a three way valve. This is the base model for valves
-with different opening characteristics, such as linear, equal percentage
-or quick opening. The three way valve model consists of a mixer where
-valves are placed in two of the flow legs. The third flow leg
-has no friction.
-The flow coefficient <code>Kv</code> for flow from <code>port_1 &rarr; port_2</code> is
-a parameter.
-The flow coefficient for the bypass flow from <code>port_3 &rarr; port_2</code>
-is computed as
-</p>
-<pre>
-         Kv(port_3 &rarr; port_2)
-  fraK = ----------------------
-         Kv(port_1 &rarr; port_2)
-</pre>
-<p>
-where <code>0 &lt; fraK &le; 1</code> is a parameter with a default value
-of <code>fraK=0.7</code>.
-</p>
-<p>
-Since this model uses two way valves to construct a three way valve, see
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve\">
-AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</a>
-for details regarding the valve implementation.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
-</li>
-<li>
-November 5, 2019, by Michael Wetter:<br/>
-Moved assignment of leakage from <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve\">
-AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve</a>
-to the parent classes.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1227\">#1227</a>.
-</li>
-<li>
-October 25, 2019, by Jianjun Hu:<br/>
-Improved icon graphics annotation. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
-</li>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-December 17, 2015, by Michael Wetter:<br/>
-Removed assignment <code>redeclare final package Medium=Medium</code>
-as this is now done in the base class.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/475\">
-https://github.com/lbl-srg/modelica-buildings/issues/475</a>.
-</li>
-<li>
-November 23, 2015 by Filip Jorissen:<br/>
-Corrected valve leakage value to avoid warnings.
-</li>
-<li>
-February 28, 2013, by Michael Wetter:<br/>
-Reformulated assignment of parameters.
-Removed default value for <code>dpValve_nominal</code>, as this
-parameter has the attribute <code>fixed=false</code> for some values
-of <code>CvData</code>. In this case, assigning a value is not allowed.
-Corrected wrong documentation of parameter <code>fraK(min=0, max=1) = 0.7</code>.
-The documenation was
-<i>Fraction Kv(port_1&rarr;port_2)/Kv(port_3&rarr;port_2)</i> instead of
-<i>Fraction Kv(port_3&rarr;port_2)/Kv(port_1&rarr;port_2)</i>.
-Because the parameter set correctly its attributes <code>min=0</code> and <code>max=1</code>,
-instances of this model used the correct value.
-</li>
-<li>
-April 12, 2012 by Michael Wetter:<br/>
-Removed duplicate declaration of <code>m_flow_nominal</code>.
-</li>
-<li>
-February 20, 2012 by Michael Wetter:<br/>
-Renamed parameter <code>dp_nominal</code> to <code>dpValve_nominal</code>,
-and added new parameter <code>dpFixed_nominal=0</code>.
-See
-<a href=\"modelica://AixLib.Fluid.Actuators.UsersGuide\">
-AixLib.Fluid.Actuators.UsersGuide</a>.
-</li>
-<li>
-March 25, 2011, by Michael Wetter:<br/>
-Added homotopy method.
-</li>
-<li>
-June 3, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Partial model of a three way valve. This is the base model for valves
+ with different opening characteristics, such as linear, equal percentage
+ or quick opening. The three way valve model consists of a mixer where
+ valves are placed in two of the flow legs. The third flow leg
+ has no friction.
+ The flow coefficient <code>Kv</code> for flow from <code>port_1 &rarr; port_2</code> is
+ a parameter.
+ The flow coefficient for the bypass flow from <code>port_3 &rarr; port_2</code>
+ is computed as
+ </p>
+ <pre>
+          Kv(port_3 &rarr; port_2)
+   fraK = ----------------------
+          Kv(port_1 &rarr; port_2)
+ </pre>
+ <p>
+ where <code>0 &lt; fraK &le; 1</code> is a parameter with a default value
+ of <code>fraK=0.7</code>.
+ </p>
+ <p>
+ Since this model uses two way valves to construct a three way valve, see
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</a>
+ for details regarding the valve implementation.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ November 5, 2019, by Michael Wetter:<br/>
+ Moved assignment of leakage from <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve</a>
+ to the parent classes.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1227\">#1227</a>.
+ </li>
+ <li>
+ October 25, 2019, by Jianjun Hu:<br/>
+ Improved icon graphics annotation. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
+ </li>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ December 17, 2015, by Michael Wetter:<br/>
+ Removed assignment <code>redeclare final package Medium=Medium</code>
+ as this is now done in the base class.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/475\">
+ https://github.com/lbl-srg/modelica-buildings/issues/475</a>.
+ </li>
+ <li>
+ November 23, 2015 by Filip Jorissen:<br/>
+ Corrected valve leakage value to avoid warnings.
+ </li>
+ <li>
+ February 28, 2013, by Michael Wetter:<br/>
+ Reformulated assignment of parameters.
+ Removed default value for <code>dpValve_nominal</code>, as this
+ parameter has the attribute <code>fixed=false</code> for some values
+ of <code>CvData</code>. In this case, assigning a value is not allowed.
+ Corrected wrong documentation of parameter <code>fraK(min=0, max=1) = 0.7</code>.
+ The documenation was
+ <i>Fraction Kv(port_1&rarr;port_2)/Kv(port_3&rarr;port_2)</i> instead of
+ <i>Fraction Kv(port_3&rarr;port_2)/Kv(port_1&rarr;port_2)</i>.
+ Because the parameter set correctly its attributes <code>min=0</code> and <code>max=1</code>,
+ instances of this model used the correct value.
+ </li>
+ <li>
+ April 12, 2012 by Michael Wetter:<br/>
+ Removed duplicate declaration of <code>m_flow_nominal</code>.
+ </li>
+ <li>
+ February 20, 2012 by Michael Wetter:<br/>
+ Renamed parameter <code>dp_nominal</code> to <code>dpValve_nominal</code>,
+ and added new parameter <code>dpFixed_nominal=0</code>.
+ See
+ <a href=\"modelica://AixLib.Fluid.Actuators.UsersGuide\">
+ AixLib.Fluid.Actuators.UsersGuide</a>.
+ </li>
+ <li>
+ March 25, 2011, by Michael Wetter:<br/>
+ Added homotopy method.
+ </li>
+ <li>
+ June 3, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialThreeWayValve;

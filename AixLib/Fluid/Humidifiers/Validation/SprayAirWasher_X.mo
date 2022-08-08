@@ -5,11 +5,11 @@ model SprayAirWasher_X
 
   package Medium = AixLib.Media.Air;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";
 
-  parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal = m_flow_nominal * 0.004
-    "Maximum humidification water mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal=m_flow_nominal*
+      0.004 "Maximum humidification water mass flow rate";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
@@ -21,7 +21,7 @@ model SprayAirWasher_X
 
   replaceable AixLib.Fluid.Humidifiers.SprayAirWasher_X hum(
     mWatMax_flow=mWat_flow_nominal,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
       constrainedby AixLib.Fluid.Humidifiers.SprayAirWasher_X(
         redeclare package Medium = Medium,
         m_flow_nominal=m_flow_nominal,
@@ -71,27 +71,28 @@ equation
     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Humidifiers/Validation/SprayAirWasher_X.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Model that validates the use of a spray air washer
-configured as a steady-state model with limits on the maximum water mass flow rate
-that is added to the air stream.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 29, 2021, by Michael Wetter:<br/>
-Reformulated constraint of replaceable model to avoid access of
-component that is not in constraining type.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">AixLib, #1473</a>.
-</li>
-<li>
-May 3, 2017, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Model that validates the use of a spray air washer
+ configured as a steady-state model with limits on the maximum water mass flow rate
+ that is added to the air stream.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 29, 2021, by Michael Wetter:<br/>
+ Reformulated constraint of replaceable model to avoid access of
+ component that is not in constraining type.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">IBPSA, #1473</a>.
+ </li>
+ <li>
+ May 3, 2017, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=1080,
-      Tolerance=1e-6));
+      Tolerance=1e-6),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SprayAirWasher_X;

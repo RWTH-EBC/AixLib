@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Cooler "Cooler register example"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -34,13 +34,15 @@ model Cooler "Cooler register example"
     T_amb=293.15)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
   Fluid.Sources.Boundary_pT boundaryWaterSource(
+    p=300000,
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=279.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-60,-60})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT boundaryWaterSink(
+    p=300000,                                 nPorts=1, redeclare package Medium =
                MediumWater) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -62,11 +64,11 @@ model Cooler "Cooler register example"
     k=0.04,
     Ti=120,
     Td=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    reverseAction=true,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    reverseAction=false,
     useExternalTset=true,
     TflowSet=289.15,
-    rpm_pump=4000)
+    rpm_pump=1000)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 19)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
@@ -81,7 +83,7 @@ equation
   connect(registerModule.port_a1, boundaryAirSource.ports[1]) annotation (Line(
         points={{-40,20.1538},{-40,20},{-70,20},{-70,40}},     color={0,127,255}));
   connect(ctrBasic.registerBus, registerModule.registerBus) annotation (Line(
-      points={{-51.4,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
+      points={{-51.8,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
           -0.0230769}},
       color={255,204,51},
       thickness=0.5));
@@ -97,5 +99,8 @@ equation
     First implementation.
   </li>
 </ul>
-</html>"), experiment(StopTime=3600));
+</html>"), experiment(StopTime=3600),
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
+        "Simulate and plot"));
 end Cooler;

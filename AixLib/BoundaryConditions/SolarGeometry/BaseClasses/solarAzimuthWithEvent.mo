@@ -12,20 +12,21 @@ algorithm
   end if;
   annotation (
     Documentation(info="<html>
-<p>
-This function is used within
-<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth\">
-AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth</a> 
-to calculate solar azimuth with events.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 9, 2020 by David Blum:<br/>
-Initial implementation.
-This is for issue
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1373\">#1373</a>. 
-</li>
-</ul>
-</html>"));
+ <p>
+ This function is used within
+ <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth\">
+ AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth</a> 
+ to calculate solar azimuth with events.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 9, 2020 by David Blum:<br/>
+ Initial implementation.
+ This is for issue
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1373\">#1373</a>. 
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end solarAzimuthWithEvent;

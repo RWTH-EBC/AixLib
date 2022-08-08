@@ -26,8 +26,7 @@ model CO2TransportStep "Model with transport of CO2 through buoyancy driven flow
     nPorts=1) "CO2 source"
     annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
 equation
-
-  connect(sou.m_flow_in, pulse.y)                             annotation (Line(
+  connect(sou.m_flow_in, pulse.y) annotation (Line(
       points={{-102.1,-70},{-119,-70}},
       color={0,0,127}));
   connect(sou.ports[1], volWes.ports[4])
@@ -52,31 +51,32 @@ equation
       StopTime=86400,
       Tolerance=1e-6),
     Documentation(info="<html>
-<p>
-This model is based on
-<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
-Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
-In addition, a CO<sub>2</sub> source has been added to the left room
-in the bottom floor.
-At initial time, all volumes have zero CO<sub>2</sub> concentration.
-At <i>t=3600</i> seconds, CO<sub>2</sub> is added to <code>volWes</code>.
-As time progresses, the CO<sub>2</sub> is transported to
-the other rooms, and eventually its concentration decays.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Extended model from
-<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
-Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>
-and added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model is based on
+ <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+ Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
+ In addition, a CO<sub>2</sub> source has been added to the left room
+ in the bottom floor.
+ At initial time, all volumes have zero CO<sub>2</sub> concentration.
+ At <i>t=3600</i> seconds, CO<sub>2</sub> is added to <code>volWes</code>.
+ As time progresses, the CO<sub>2</sub> is transported to
+ the other rooms, and eventually its concentration decays.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Extended model from
+ <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+ Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>
+ and added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CO2TransportStep;

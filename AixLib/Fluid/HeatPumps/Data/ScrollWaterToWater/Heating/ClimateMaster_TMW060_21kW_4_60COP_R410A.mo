@@ -10,20 +10,20 @@ record ClimateMaster_TMW060_21kW_4_60COP_R410A =
     UACon = 6976.43602782,
     UAEva = 1012.57723222)
     "Calibrated parameters for ClimateMaster TMW060"
-
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-Calibrated parameters for ClimateMaster TMW060.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 6, 2017, by Massimo Cimmino:<br/>
-Calibrated parameters.
-</li>
-</ul>
-</html>"));
+ <p>
+ Calibrated parameters for ClimateMaster TMW060.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 6, 2017, by Massimo Cimmino:<br/>
+ Calibrated parameters.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

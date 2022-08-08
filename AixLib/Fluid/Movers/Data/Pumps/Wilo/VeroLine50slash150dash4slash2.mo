@@ -11,15 +11,16 @@ record VeroLine50slash150dash4slash2
 defaultComponentPrefixes="parameter",
 defaultComponentName="per",
 Documentation(info="<html>
-<p>Data from:<a href=\"http://productfinder.wilo.com/com/en/c0000002200012eb000020023/_0000004f0003f94e0001003a/product.html\"> http://productfinder.wilo.com/com/en/c0000002200012eb000020023/_0000004f0003f94e0001003a/product.html</a></p>
-<p>See <a href=\"modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6\">AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6</a>for more information about how the data is derived.</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-May 28, 2017, by Iago Cupeiro:
-<br/>
-Initial version
-</li>
-</ul>
-</html>"));
+ <p>Data from:<a href=\"http://productfinder.wilo.com/com/en/c0000002200012eb000020023/_0000004f0003f94e0001003a/product.html\"> http://productfinder.wilo.com/com/en/c0000002200012eb000020023/_0000004f0003f94e0001003a/product.html</a></p>
+ <p>See <a href=\"modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6\">AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6</a>for more information about how the data is derived.</p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ May 28, 2017, by Iago Cupeiro:
+ <br/>
+ Initial version
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end VeroLine50slash150dash4slash2;

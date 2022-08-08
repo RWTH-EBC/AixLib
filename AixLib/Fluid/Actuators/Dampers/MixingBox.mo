@@ -20,37 +20,43 @@ model MixingBox "Outside air mixing box with interlocked air dampers"
     "Set to true for round duct, false for square cross section"
     annotation(Dialog(enable=not use_deltaM));
   parameter Real ReC=4000
-    "Reynolds number where transition to turbulent starts"
+    "Reynolds number where transition to turbulence starts"
     annotation(Dialog(enable=not use_deltaM));
-  parameter Modelica.SIunits.MassFlowRate mOut_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate mOut_flow_nominal
     "Mass flow rate outside air damper"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpDamOut_nominal(min=0, displayUnit="Pa")
-    "Pressure drop of damper in outside air leg"
-     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpFixOut_nominal(min=0, displayUnit="Pa")=0
+  parameter Modelica.Units.SI.PressureDifference dpDamOut_nominal(min=0,
+      displayUnit="Pa") "Pressure drop of damper in outside air leg"
+    annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.PressureDifference dpFixOut_nominal(
+    min=0,
+    displayUnit="Pa") = 0
     "Pressure drop of duct and other resistances in outside air leg"
-     annotation (Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.SIunits.MassFlowRate mRec_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate mRec_flow_nominal
     "Mass flow rate recirculation air damper"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpDamRec_nominal(min=0, displayUnit="Pa")
-    "Pressure drop of damper in recirculation air leg"
-     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpFixRec_nominal(min=0, displayUnit="Pa")=0
+  parameter Modelica.Units.SI.PressureDifference dpDamRec_nominal(min=0,
+      displayUnit="Pa") "Pressure drop of damper in recirculation air leg"
+    annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.PressureDifference dpFixRec_nominal(
+    min=0,
+    displayUnit="Pa") = 0
     "Pressure drop of duct and other resistances in recirculation air leg"
-     annotation (Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.SIunits.MassFlowRate mExh_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate mExh_flow_nominal
     "Mass flow rate exhaust air damper"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpDamExh_nominal(min=0, displayUnit="Pa")
-    "Pressure drop of damper in exhaust air leg"
-     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.PressureDifference dpFixExh_nominal(min=0, displayUnit="Pa")=0
+  parameter Modelica.Units.SI.PressureDifference dpDamExh_nominal(min=0,
+      displayUnit="Pa") "Pressure drop of damper in exhaust air leg"
+    annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.PressureDifference dpFixExh_nominal(
+    min=0,
+    displayUnit="Pa") = 0
     "Pressure drop of duct and other resistances in exhaust air leg"
-     annotation (Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"));
 
   parameter Boolean from_dp=true
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -252,7 +258,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{22,132},{48,110}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="y"),
@@ -285,73 +291,87 @@ equation
           points={{0,40},{0,10},{0,12}},
           color={0,0,255}),  Text(
           extent={{-50,-84},{48,-132}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString=
                "%name")}),
 defaultComponentName="eco",
 Documentation(revisions="<html>
-<ul>
-<li>
-December 23, 2019, by Antoine Gautier:<br/>
-Updated parameter bindings consistently with refactoring of
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
-AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
-</li>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-March 22, 2017, by Michael Wetter:<br/>
-Removed the assignments of <code>AOut</code>, <code>AExh</code> and <code>ARec</code> as these are done in the damper instance using
-a final assignment of the parameter.
-This allows scaling the model with <code>m_flow_nominal</code>,
-which is generally known in the flow leg,
-and <code>v_nominal</code>, for which a default value can be specified.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Renamed protected parameters for consistency with the naming conventions.
-</li>
-<li>
-February 14, 2012 by Michael Wetter:<br/>
-Added filter to approximate the travel time of the actuator.
-</li>
-<li>
-February 3, 2012, by Michael Wetter:<br/>
-Removed assignment of <code>m_flow_small</code> as it is no
-longer used in its base class.
-</li>
-<li>
-February 23, 2010 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Model of an outside air mixing box with exponential dampers.
-Set <code>y=0</code> to close the outside air and exhaust air dampers.
-See
-<a href=\"modelica://AixLib.Fluid.Actuators.Dampers.Exponential\">
-AixLib.Fluid.Actuators.Dampers.Exponential</a>
-for the description of the exponential damper model.
-</p>
-</html>"));
+ <ul>
+ <li>
+ September 21, 2021, by Michael Wetter:<br/>
+ Corrected typo in comments.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1525\">#1525</a>.
+ </li>
+ <li>
+ June 10, 2021, by Michael Wetter:<br/>
+ Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+ as most users need not change this value.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
+ </li>
+ <li>
+ December 23, 2019, by Antoine Gautier:<br/>
+ Updated parameter bindings consistently with refactoring of
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
+ </li>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ March 22, 2017, by Michael Wetter:<br/>
+ Removed the assignments of <code>AOut</code>, <code>AExh</code> and <code>ARec</code> as these are done in the damper instance using
+ a final assignment of the parameter.
+ This allows scaling the model with <code>m_flow_nominal</code>,
+ which is generally known in the flow leg,
+ and <code>v_nominal</code>, for which a default value can be specified.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ December 14, 2012 by Michael Wetter:<br/>
+ Renamed protected parameters for consistency with the naming conventions.
+ </li>
+ <li>
+ February 14, 2012 by Michael Wetter:<br/>
+ Added filter to approximate the travel time of the actuator.
+ </li>
+ <li>
+ February 3, 2012, by Michael Wetter:<br/>
+ Removed assignment of <code>m_flow_small</code> as it is no
+ longer used in its base class.
+ </li>
+ <li>
+ February 23, 2010 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Model of an outside air mixing box with exponential dampers.
+ Set <code>y=0</code> to close the outside air and exhaust air dampers.
+ See
+ <a href=\"modelica://AixLib.Fluid.Actuators.Dampers.Exponential\">
+ AixLib.Fluid.Actuators.Dampers.Exponential</a>
+ for the description of the exponential damper model.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingBox;

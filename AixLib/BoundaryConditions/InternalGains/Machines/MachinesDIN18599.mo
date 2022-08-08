@@ -8,13 +8,14 @@ model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of 
 
   parameter Integer activityType=2 "Machine activity" annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
   parameter Real nrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal=max(
-   1e-4, surfaceMachine*nrPeople)
-   "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  parameter Modelica.Units.SI.Area areaSurfaceMachinesTotal=max(1e-4,
+      surfaceMachine*nrPeople)
+    "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
 
 protected
-  parameter Modelica.SIunits.Area surfaceMachine = 2.0 "Surface area of one machine";
-  Modelica.Blocks.Tables.CombiTable1D tableHeatOutput(
+  parameter Modelica.Units.SI.Area surfaceMachine=2.0
+    "Surface area of one machine";
+  Modelica.Blocks.Tables.CombiTable1Dv tableHeatOutput(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     tableOnFile=false,
     table=[1,50; 2,100; 3,150],
@@ -275,59 +276,64 @@ equation
   The type of activity determines the load for machines in the room for
   one person according to DIN 18599-10. The following values are used:
 </p>
-<table summary=\"DIN 18599-10 activity level and produces heat output\"
-cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
-  <tr>
-    <td style=\"background-color: #dcdcdc\">
-      Activity Type
-    </td>
-    <td style=\"background-color: #dcdcdc\">
-      Heat Load [W]
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        1
-      </p>
-    </td>
-    <td>
-      <p>
-        50
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        2
-      </p>
-    </td>
-    <td>
-      <p>
-        100
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        3
-      </p>
-    </td>
-    <td>
-      <p>
-        150
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"DIN 18599-10 activity level and produces heat output\"
+    cellspacing=\"2\" cellpadding=\"0\" border=\"0\"&gt;
+    <table>
+      <tr>
+        <td style=\"background-color: #dcdcdc\">
+          Activity Type
+        </td>
+        <td style=\"background-color: #dcdcdc\">
+          Heat Load [W]
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            1
+          </p>
+        </td>
+        <td>
+          <p>
+            50
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            2
+          </p>
+        </td>
+        <td>
+          <p>
+            100
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            3
+          </p>
+        </td>
+        <td>
+          <p>
+            150
+          </p>
+        </td>
+      </tr>
+    </table>
+    <h4>
+      <span style=\"color: #008000\">References</span>
+    </h4>
+    <p>
+      DIN 18599-10
+    </p>
+  </caption>
 </table>
-<h4>
-  <span style=\"color: #008000\">References</span>
-</h4>
-<p>
-  DIN 18599-10
-</p>
 </html>",
     revisions="<html><ul>
   <li>

@@ -9,8 +9,8 @@ block ReplaceableTwoPort
     "Component that holds the actual model"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-  Modelica.Blocks.Sources.RealExpression dpCom(y=com.port_a.p - com.port_b.p) if
-       use_p_in "Pressure drop of the component"
+  Modelica.Blocks.Sources.RealExpression dpCom(y=com.port_a.p - com.port_b.p)
+    if use_p_in "Pressure drop of the component"
     annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
 
 protected
@@ -26,8 +26,8 @@ protected
     final use_p_in=use_p_in) "Boundary component for outlet"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
 
-  Modelica.Blocks.Math.Feedback pOut if
-       use_p_in "Pressure at component outlet"
+  Modelica.Blocks.Math.Feedback pOut
+    if use_p_in "Pressure at component outlet"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
 equation
   connect(pOut.u1, bouIn.p) annotation (Line(
@@ -59,45 +59,46 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation ( Documentation(info="<html>
-<p>
-Block that serves as a container to export a thermofluid flow component.
-This block contains a replaceable model <code>com</code> that needs to
-be redeclared to export any model that has as its base class
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPort\">
-AixLib.Fluid.Interfaces.PartialTwoPort</a>.
-This allows exporting a large variety of thermofluid flow models
-with a simple redeclare.
-</p>
-<p>
-See for example
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop\">
-AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop</a>
-or
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u\">
-AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u</a>
-for how to use this block.
-</p>
-<p>
-Note that this block must not be used if the instance <code>com</code>
-sets a constant pressure. In such a situation, use
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
-AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
-together with
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
-AixLib.Fluid.FMI.Adaptors.Inlet</a>
-and
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
-AixLib.Fluid.FMI.Adaptors.Outlet</a>
-and set the pressure to be equal to the port <code>p</code> of
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
-AixLib.Fluid.FMI.Adaptors.Outlet</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 8, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Block that serves as a container to export a thermofluid flow component.
+ This block contains a replaceable model <code>com</code> that needs to
+ be redeclared to export any model that has as its base class
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPort\">
+ AixLib.Fluid.Interfaces.PartialTwoPort</a>.
+ This allows exporting a large variety of thermofluid flow models
+ with a simple redeclare.
+ </p>
+ <p>
+ See for example
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop\">
+ AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop</a>
+ or
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u\">
+ AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u</a>
+ for how to use this block.
+ </p>
+ <p>
+ Note that this block must not be used if the instance <code>com</code>
+ sets a constant pressure. In such a situation, use
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+ AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
+ together with
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
+ AixLib.Fluid.FMI.Adaptors.Inlet</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+ AixLib.Fluid.FMI.Adaptors.Outlet</a>
+ and set the pressure to be equal to the port <code>p</code> of
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+ AixLib.Fluid.FMI.Adaptors.Outlet</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 8, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReplaceableTwoPort;

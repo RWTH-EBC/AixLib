@@ -60,7 +60,7 @@ model HeatingOnly
     nPorts=1) "Sink for hot water"
     annotation (Placement(transformation(extent={{100,50},{80,70}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/86400,
+    f=1/86400,
     amplitude=1,
     phase=-1.5707963267949) "Source for thermal loads"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
@@ -121,27 +121,28 @@ equation
         "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}})),
      Documentation(info="<html>
-<p>
-This example tests the implementation of <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>, but operates it only in heating mode.
-An air volume is maintained at a temperature above <i>22&deg;</i>C by a controller
-that regulates the water flow rate in the active beam.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-June 14, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the implementation of <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>, but operates it only in heating mode.
+ An air volume is maintained at a temperature above <i>22&deg;</i>C by a controller
+ that regulates the water flow rate in the active beam.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ June 14, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeatingOnly;

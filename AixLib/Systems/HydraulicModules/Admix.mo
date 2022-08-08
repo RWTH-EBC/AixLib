@@ -1,16 +1,18 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Admix "Admix circuit with three way valve and pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
-    final massDynamics=massDynamics,
+  parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic "Valve characteristic of three way valve"
+    annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
+                                                                           // = AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()
+
+  Fluid.Actuators.Valves.ThreeWayTable valve(
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     y_start=0,
@@ -18,8 +20,10 @@ model Admix "Admix circuit with three way valve and pump"
     final m_flow_nominal=m_flow_nominal,
     final energyDynamics=energyDynamics,
     Kv=Kv,
-    dpFixed_nominal={1000,1000}) annotation (Dialog(enable=true, group="Actuators"),
-      Placement(transformation(
+    dpFixed_nominal={10,10},
+    final flowCharacteristics1=valveCharacteristic.a_ab,
+    final flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(
+        enable=true, group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,20})));

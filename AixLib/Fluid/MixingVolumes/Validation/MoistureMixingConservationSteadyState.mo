@@ -24,43 +24,43 @@ equation
           extent={{-120,-280},{180,120}}), graphics),
     experiment(Tolerance=1e-6, StopTime=1),
     Documentation(info="<html>
-<p>
-This test checks if water vapour mass is conserved.
-Two air streams with different mass flow rate are humidified
-by a mixing volume with two different vapor mass flow rates.
-These flows are then mixed.
-Afterwards the added water is removed again.
-The final water concentration, mass flow rate and enthalpy
-flow rate should then be equal to the initial values.
-</p>
-<p>
-Note, however, that there is some approximation error because
-in its default configuration, the conservation balance
-models simplify the treatment of the water that is added
-to the fluid.
-See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-and
-<a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-for a discussion.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-May 22 2015 by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MoistureMixingConservationSteadyState.mos"
-        "Simulate and plot"));
+ <p>
+ This test checks if water vapour mass is conserved.
+ Two air streams with different mass flow rate are humidified
+ by a mixing volume with two different vapor mass flow rates.
+ These flows are then mixed.
+ Afterwards the added water is removed again.
+ The final water concentration, mass flow rate and enthalpy
+ flow rate should then be equal to the initial values.
+ </p>
+ <p>
+ Note, however, that there is some approximation error because
+ in its default configuration, the conservation balance
+ models simplify the treatment of the water that is added
+ to the fluid.
+ See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ for a discussion.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ May 22 2015 by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MoistureMixingConservationSteadyState.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MoistureMixingConservationSteadyState;

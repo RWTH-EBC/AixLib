@@ -8,13 +8,14 @@ partial model PartialPrescribedOutlet
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate, used for regularization near zero flow"
-    annotation(Dialog(group = "Nominal condition"));
+  // Dynamics
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
-  parameter Modelica.SIunits.Time tau(min=0) = 10
-    "Time constant at nominal flow rate (used if energyDynamics or massDynamics not equal Modelica.Fluid.Types.Dynamics.SteadyState)"
-    annotation(Dialog(tab = "Dynamics"));
+  parameter Modelica.Units.SI.Time tau(min=0) = 10
+    "Time constant at nominal flow rate (used if energyDynamics not equal Modelica.Fluid.Types.Dynamics.SteadyState)"
+    annotation (Dialog(tab="Dynamics", enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
 
 protected
   AixLib.Fluid.FixedResistances.PressureDrop preDro(
@@ -31,6 +32,7 @@ protected
 
   AixLib.Fluid.Interfaces.PrescribedOutlet outCon(
     redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_small=m_flow_small,
     final show_T=false,
@@ -68,42 +70,52 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hea",
 Documentation(info="<html>
-<p>
-Base class for model for an ideal heater, cooler, humidifier or dehumidifier
-with a prescribed outlet conditions.
-</p>
-<p>
-Models that extend this model need to configure the instance <code>outCon</code>
-and connect its input signals, in they are enabled.
-</p>
-</html>",
+ <p>
+ Base class for model for an ideal heater, cooler, humidifier or dehumidifier
+ with a prescribed outlet conditions.
+ </p>
+ <p>
+ Models that extend this model need to configure the instance <code>outCon</code>
+ and connect its input signals, in they are enabled.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
-</li>
-<li>
-May 3, 2017, by Michael Wetter:<br/>
-Updated protected model for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
-</li>
-<li>
-December 1, 2016, by Michael Wetter:<br/>
-Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
-</li>
-<li>
-November 11, 2014, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-March 19, 2014, by Christoph Nytsch-Geusen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 10, 2022, by Michael Wetter:<br/>
+ Propagated <code>energyDynamics</code> from instance <code>outCon</code>.
+ </li>
+ <li>
+ April 29, 2021, by Michael Wetter:<br/>
+ Removed duplicate declaration of <code>m_flow_nominal</code> which is already
+ declared in the base class.<br/>
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ May 3, 2017, by Michael Wetter:<br/>
+ Updated protected model for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
+ </li>
+ <li>
+ December 1, 2016, by Michael Wetter:<br/>
+ Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+ </li>
+ <li>
+ November 11, 2014, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ March 19, 2014, by Christoph Nytsch-Geusen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialPrescribedOutlet;

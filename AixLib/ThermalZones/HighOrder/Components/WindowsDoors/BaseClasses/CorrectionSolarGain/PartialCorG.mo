@@ -4,8 +4,8 @@ partial model PartialCorG
 
   parameter Integer n = 1
     "vector size for input and output";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
-   "Thermal transmission coefficient of whole window";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Uw=3
+    "Thermal transmission coefficient of whole window";
   parameter Real g = 0.7
    "Coefficient of solar energy transmission";
 

@@ -9,10 +9,10 @@ model SolarThermal "Model of a solar thermal panel"
                        T_start,
                        Medium.reference_X)))^2);
 
-  parameter Modelica.SIunits.Area A=2 "Area of solar thermal collector"
-    annotation(Dialog(group = "Construction measures"));
-  parameter Modelica.SIunits.Volume volPip "Water volume of piping"
-    annotation(Dialog(group = "Construction measures"));
+  parameter Modelica.Units.SI.Area A=2 "Area of solar thermal collector"
+    annotation (Dialog(group="Construction measures"));
+  parameter Modelica.Units.SI.Volume volPip "Water volume of piping"
+    annotation (Dialog(group="Construction measures"));
   parameter Real pressureDropCoeff(unit="(Pa.s2)/m6") = 2500/(A*2.5e-5)^2
     "Pressure drop coefficient, delta_p[Pa] = PD * Q_flow[m^3/s]^2";
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
@@ -104,199 +104,210 @@ equation
   around 1.5 l/(min.m2). This is 3 l/min for collectors of size 0.93 m2
   up to 2.79 m2.
 </p>
-<table summary=
-\"Volume flow rate suggestions according to Furbo1996 and SunMaxx\"
-cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\">
-  <tr>
-    <td>
-      <p>
-        unit
-      </p>
-    </td>
-    <td>
-      <p>
-        SunMaxx
-      </p>
-    </td>
-    <td>
-      <p>
-        Furbo1996
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        l/(min.m2)
-      </p>
-    </td>
-    <td>
-      <p>
-        1.5
-      </p>
-    </td>
-    <td>
-      <p>
-        0.3
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        m3/(h.m2)
-      </p>
-    </td>
-    <td>
-      <p>
-        0.091
-      </p>
-    </td>
-    <td>
-      <p>
-        0.018
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        m3/(s.m2)
-      </p>
-    </td>
-    <td>
-      <p>
-        2.5e-5
-      </p>
-    </td>
-    <td>
-      <p>
-        5.0e-6
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        gpm/m2
-      </p>
-    </td>
-    <td>
-      <p>
-        0.40
-      </p>
-    </td>
-    <td>
-      <p>
-        0.079
-      </p>
-    </td>
-  </tr>
-</table>
-<p>
-  <br/>
-  Assuming a default size for a unit of 2 m2 we get pressure losses for
-  a module as in the following table (vfr=0.79 gpm):
-</p>
-<table summary=\"Pressure drop of two flat collector modules\"
-cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\">
-  <tr>
-    <td>
-      <p>
-        Collector
-      </p>
-    </td>
-    <td>
-      <p>
-        pressure drop in psi
-      </p>
-    </td>
-    <td>
-      <p>
-        pressure drop in Pa
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Titan Power Plus SU2
-      </p>
-    </td>
-    <td>
-      <p>
-        0.28
-      </p>
-    </td>
-    <td>
-      <p>
-        1900
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        SunMaxx-VHP 30 (40&#160;% Glycol)
-      </p>
-    </td>
-    <td>
-      <p>
-        0.43
-      </p>
-    </td>
-    <td>
-      <p>
-        3000
-      </p>
-    </td>
-  </tr>
-</table>
-<p>
-  <br/>
-  The pressureloss factor should therefore be around 2500 Pa /
-  (2*2.5e-5 m3/s)^2 = 1e12.
-</p>
-<ul>
-  <li>
-    <i>Febraury 7, 2018&#160;</i> by Peter Matthes:<br/>
-    Rename \"gain\" block into \"convertRelHeatFlow2absHeatFlow\" to make
-    clearer what it does.<br/>
-    Remove redundant
-    <code>connect(solarThermalEfficiency.Q_flow,&#160;convertRelHeatFlow2absHeatFlow.u)</code><br/>
+<table>
+  <caption>
+    \"Volume flow rate suggestions according to Furbo1996 and SunMaxx\"
+    cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\"&gt;
+    <table>
+      <tr>
+        <td>
+          <p>
+            unit
+          </p>
+        </td>
+        <td>
+          <p>
+            SunMaxx
+          </p>
+        </td>
+        <td>
+          <p>
+            Furbo1996
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            l/(min.m2)
+          </p>
+        </td>
+        <td>
+          <p>
+            1.5
+          </p>
+        </td>
+        <td>
+          <p>
+            0.3
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            m3/(h.m2)
+          </p>
+        </td>
+        <td>
+          <p>
+            0.091
+          </p>
+        </td>
+        <td>
+          <p>
+            0.018
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            m3/(s.m2)
+          </p>
+        </td>
+        <td>
+          <p>
+            2.5e-5
+          </p>
+        </td>
+        <td>
+          <p>
+            5.0e-6
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            gpm/m2
+          </p>
+        </td>
+        <td>
+          <p>
+            0.40
+          </p>
+        </td>
+        <td>
+          <p>
+            0.079
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br/>
+      Assuming a default size for a unit of 2 m2 we get pressure losses
+      for a module as in the following table (vfr=0.79 gpm):
+    </p>
+    <table>
+      <caption>
+        \"Pressure drop of two flat collector modules\" cellspacing=\"0\"
+        cellpadding=\"2\" border=\"1\" width=\"50%\"&gt;
+        <table>
+          <tr>
+            <td>
+              <p>
+                Collector
+              </p>
+            </td>
+            <td>
+              <p>
+                pressure drop in psi
+              </p>
+            </td>
+            <td>
+              <p>
+                pressure drop in Pa
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                Titan Power Plus SU2
+              </p>
+            </td>
+            <td>
+              <p>
+                0.28
+              </p>
+            </td>
+            <td>
+              <p>
+                1900
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                SunMaxx-VHP 30 (40&#160;% Glycol)
+              </p>
+            </td>
+            <td>
+              <p>
+                0.43
+              </p>
+            </td>
+            <td>
+              <p>
+                3000
+              </p>
+            </td>
+          </tr>
+        </table>
+        <p>
+          <br/>
+          The pressureloss factor should therefore be around 2500 Pa /
+          (2*2.5e-5 m3/s)^2 = 1e12.
+        </p>
+        <ul>
+          <li>
+            <i>Febraury 7, 2018&#160;</i> by Peter Matthes:<br/>
+            Rename \"gain\" block into \"convertRelHeatFlow2absHeatFlow\"
+            to make clearer what it does.<br/>
+            Remove redundant
+            <code>connect(solarThermalEfficiency.Q_flow,&#160;convertRelHeatFlow2absHeatFlow.u)</code><br/>
 
-    Change default pressure drop coefficient from 1e6 to 2500 Pa /
-    (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br/>
-    Change default collector area to 2 m2.<br/>
-    Extend documentation with some default parameters from
-    references.<br/>
-    Grid-align the RealInputs.
-  </li>
-  <li>
-    <i>Febraury 1, 2018&#160;</i> by Philipp Mehrfeld:<br/>
-    Delete max block as it is now implemented in the efficiency model
-  </li>
-  <li>
-    <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
-    Extend now from <a href=
-    \"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
-    AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br/>
-    Use mean temperature.<br/>
-    Limiter moved in equation section of efficiency model.
-  </li>
-  <li>
-    <i>December 15, 2016</i> by Moritz Lauster:<br/>
-    Moved
-  </li>
-  <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class
-  </li>
-  <li>
-    <i>November 19, 2013&#160;</i> by Marcus Fuchs:<br/>
-    Implemented
-  </li>
-</ul>
+            Change default pressure drop coefficient from 1e6 to 2500
+            Pa / (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br/>
+            Change default collector area to 2 m2.<br/>
+            Extend documentation with some default parameters from
+            references.<br/>
+            Grid-align the RealInputs.
+          </li>
+          <li>
+            <i>Febraury 1, 2018&#160;</i> by Philipp Mehrfeld:<br/>
+            Delete max block as it is now implemented in the efficiency
+            model
+          </li>
+          <li>
+            <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
+            Extend now from <a href=
+            \"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
+            AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br/>
+
+            Use mean temperature.<br/>
+            Limiter moved in equation section of efficiency model.
+          </li>
+          <li>
+            <i>December 15, 2016</i> by Moritz Lauster:<br/>
+            Moved
+          </li>
+          <li>
+            <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+            Changed model to use Annex 60 base class
+          </li>
+          <li>
+            <i>November 19, 2013&#160;</i> by Marcus Fuchs:<br/>
+            Implemented
+          </li>
+        </ul>
+      </caption>
+    </table>
+  </caption>
+</table>
 </html>"),  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{
               -84,80},{84,-80}},                                                                                                                            lineColor = {255, 128, 0},
             fillPattern =                                                                                                   FillPattern.Solid, fillColor = {255, 128, 0}), Rectangle(extent={{

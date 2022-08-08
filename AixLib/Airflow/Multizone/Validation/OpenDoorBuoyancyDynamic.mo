@@ -19,7 +19,6 @@ model OpenDoorBuoyancyDynamic
     T_start=292.15,
     V=2.5*5*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=0.01,
     nPorts=3) "Boundary condition at side a" annotation (Placement(
         transformation(
@@ -32,7 +31,6 @@ model OpenDoorBuoyancyDynamic
     T_start=294.15,
     V=2.5*5*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=0.01,
     nPorts=2) "Boundary condition at side b"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -52,7 +50,6 @@ model OpenDoorBuoyancyDynamic
     T_start=292.15,
     V=2.5*5*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=0.01,
     nPorts=3) "Boundary condition at side a" annotation (Placement(
         transformation(
@@ -64,7 +61,6 @@ model OpenDoorBuoyancyDynamic
     T_start=294.15,
     V=2.5*5*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=0.01,
     nPorts=2) "Boundary condition at side b" annotation (Placement(
         transformation(
@@ -100,16 +96,17 @@ equation
       StopTime=14400,
       Tolerance=1e-08),
     Documentation(info="<html>
-<p>
-This model validates the door model for the situation where there is only buoyancy-driven air flow.
-Initially the volume is at a different temperature than the pressure source, leading to an airflow that eventually decays to zero.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 9, 2020 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model validates the door model for the situation where there is only buoyancy-driven air flow.
+ Initially the volume is at a different temperature than the pressure source, leading to an airflow that eventually decays to zero.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 9, 2020 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OpenDoorBuoyancyDynamic;

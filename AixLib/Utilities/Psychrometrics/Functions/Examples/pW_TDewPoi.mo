@@ -2,10 +2,10 @@ within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model pW_TDewPoi "Model to test pW_TDewPoi and its inverse function"
   extends Modelica.Icons.Example;
 
-  Modelica.SIunits.Temperature T "Dew point temperature";
-  Modelica.SIunits.Temperature TInv "Dew point temperature";
-  Modelica.SIunits.TemperatureDifference dT "Difference between temperatures";
-  Modelica.SIunits.Pressure p_w "Water vapor partial pressure";
+  Modelica.Units.SI.Temperature T "Dew point temperature";
+  Modelica.Units.SI.Temperature TInv "Dew point temperature";
+  Modelica.Units.SI.TemperatureDifference dT "Difference between temperatures";
+  Modelica.Units.SI.Pressure p_w "Water vapor partial pressure";
   constant Real conv(unit="K/s") = 100 "Conversion factor";
 equation
   T = conv*time + 273.15;
@@ -16,5 +16,6 @@ equation
   annotation (
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/Examples/pW_TDewPoi.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end pW_TDewPoi;

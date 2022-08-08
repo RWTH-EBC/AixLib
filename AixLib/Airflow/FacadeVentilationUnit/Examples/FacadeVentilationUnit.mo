@@ -11,7 +11,8 @@ model FacadeVentilationUnit
       maxExFanPower=0.6)
     "Comprehensive rule-based controller for the facade ventilation unit"
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
-  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare package Air =
+  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare
+      package                                                                      Air =
                     Medium1, redeclare package Water = Medium2)
     "The facade ventilation unit to be tested in this example"
     annotation (Placement(transformation(extent={{70,-56},{106,-36}})));
@@ -82,30 +83,29 @@ model FacadeVentilationUnit
   Modelica.Blocks.Sources.Constant coolingWaterTemperature(k=273.15 + 17)
     "Provides a test value of the cooling water temperatiure"
     annotation (Placement(transformation(extent={{84,74},{104,94}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare package Medium =
+  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare
+      package                                                                    Medium =
                        Medium1, m_flow_nominal=0.1)
     "Measures the supply air temperature"
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
   Modelica.Blocks.Sources.Sine roomTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     phase=3.1415926535898,
-    offset=273.15 + 20)
-    "Provides a test value of the room temperature"
+    offset=273.15 + 20) "Provides a test value of the room temperature"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Sources.Sine roomSetTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     phase=1.5707963267949,
-    offset=273.15 + 20)
-    "Provides a test value of the room set temperature"
+    offset=273.15 + 20) "Provides a test value of the room set temperature"
     annotation (Placement(transformation(extent={{-100,-36},{-80,-16}})));
   Modelica.Blocks.Sources.Constant co2Concentration(k=1000)
     "Provides a test value of the CO2 concnetration"
     annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
   Modelica.Blocks.Sources.Sine outdoorTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     offset=273.15 + 10) "Provides a test value of the outdoor temperature"
     annotation (Placement(transformation(extent={{-100,6},{-80,26}})));
   AixLib.Controls.Interfaces.FVUControlBus fVUControlBus

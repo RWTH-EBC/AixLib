@@ -50,8 +50,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
-    ATot > 0 or zoneParam.VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+ if ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,10},{114,30}}),
                               iconTransformation(extent={{92,-6},{112,14}})));
@@ -66,7 +66,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
-    final nOrientations=zoneParam.nOrientations,
+    final nOrientations=size(zoneParam.AExt, 1),
     final AWin=zoneParam.AWin,
     final ATransparent=zoneParam.ATransparent,
     final hConWin=zoneParam.hConWin,
@@ -75,36 +75,35 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final ratioWinConRad=zoneParam.ratioWinConRad,
     final AExt=zoneParam.AExt,
     final hConExt=zoneParam.hConExt,
-    final nExt=zoneParam.nExt,
+    final nExt=size(zoneParam.CExt, 1),
     final RExt=zoneParam.RExt,
     final RExtRem=zoneParam.RExtRem,
     final CExt=zoneParam.CExt,
     final AInt=zoneParam.AInt,
     final hConInt=zoneParam.hConInt,
-    final nInt=zoneParam.nInt,
+    final nInt=size(zoneParam.CInt, 1),
     final RInt=zoneParam.RInt,
     final CInt=zoneParam.CInt,
     final AFloor=zoneParam.AFloor,
     final hConFloor=zoneParam.hConFloor,
-    final nFloor=zoneParam.nFloor,
+    final nFloor=size(zoneParam.CFloor, 1),
     final RFloor=zoneParam.RFloor,
     final RFloorRem=zoneParam.RFloorRem,
     final CFloor=zoneParam.CFloor,
     final ARoof=zoneParam.ARoof,
     final hConRoof=zoneParam.hConRoof,
-    final nRoof=zoneParam.nRoof,
+    final nRoof=size(zoneParam.CRoof, 1),
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
-            {86,92}})));
+    final mSenFac=mSenFac) "RC calculation core"
+    annotation (Placement(transformation(extent={{38,56},{86,92}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

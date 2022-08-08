@@ -3,13 +3,13 @@ function finiteLineSource
   "Finite line source solution of Claesson and Javed"
   extends Modelica.Icons.Function;
 
-  input Modelica.SIunits.Time t "Time";
-  input Modelica.SIunits.ThermalDiffusivity aSoi "Ground thermal diffusivity";
-  input Modelica.SIunits.Distance dis "Radial distance between borehole axes";
-  input Modelica.SIunits.Height len1 "Length of emitting borehole";
-  input Modelica.SIunits.Height burDep1 "Buried depth of emitting borehole";
-  input Modelica.SIunits.Height len2 "Length of receiving borehole";
-  input Modelica.SIunits.Height burDep2 "Buried depth of receiving borehole";
+  input Modelica.Units.SI.Time t "Time";
+  input Modelica.Units.SI.ThermalDiffusivity aSoi "Ground thermal diffusivity";
+  input Modelica.Units.SI.Distance dis "Radial distance between borehole axes";
+  input Modelica.Units.SI.Height len1 "Length of emitting borehole";
+  input Modelica.Units.SI.Height burDep1 "Buried depth of emitting borehole";
+  input Modelica.Units.SI.Height len2 "Length of receiving borehole";
+  input Modelica.Units.SI.Height burDep2 "Buried depth of receiving borehole";
   input Boolean includeRealSource = true "True if contribution of real source is included";
   input Boolean includeMirrorSource = true "True if contribution of mirror source is included";
 
@@ -19,9 +19,9 @@ protected
   Real lowBou(unit="m-1") "Lower bound of integration";
   // Upper bound is infinite
   Real uppBou(unit="m-1") = max(100.0, 10.0/dis) "Upper bound of integration";
-  Modelica.SIunits.Distance disMin
+  Modelica.Units.SI.Distance disMin
     "Minimum distance between sources and receiving line";
-  Modelica.SIunits.Time timTre "Time treshold for evaluation of the solution";
+  Modelica.Units.SI.Time timTre "Time treshold for evaluation of the solution";
 
 algorithm
 
@@ -82,52 +82,53 @@ algorithm
 
 annotation (
 Documentation(info="<html>
-<p>
-This function evaluates the finite line source solution. This solution
-gives the relation between the constant heat transfer rate (per unit length)
-injected by a line source of finite length <i>H<sub>1</sub></i> buried at a
-distance <i>D<sub>1</sub></i> from a constant temperature surface
-(<i>T=0</i>) and the average temperature raise over a line of finite length
-<i>H<sub>2</sub></i> buried at a distance <i>D<sub>2</sub></i> from the constant
-temperature surface.
-The finite line source solution is defined by:
-</p>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/FiniteLineSource_01.png\" />
-</p>
-<p>
-where <i>&Delta;T<sub>1-2</sub>(t,r,H<sub>1</sub>,D<sub>1</sub>,H<sub>2</sub>,D<sub>2</sub>)</i>
-is the temperature raise after a time <i>t</i> of constant heat injection and at
-a distance <i>r</i> from the line heat source, <i>Q'</i> is the heat injection
-rate per unit length, <i>k<sub>s</sub></i> is the soil thermal conductivity and
-<i>h<sub>FLS</sub></i> is the finite line source solution.
-</p>
-<p>
-The finite line source solution is given by:
-</p>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/FiniteLineSource_02.png\" />
-</p>
-<p>
-where <i>&alpha;<sub>s</sub></i> is the ground thermal diffusivity and
-<i>erfint</i> is the integral of the error function, defined in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Erfint\">AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_erfint</a>.
-The integral is solved numerically, with the integrand defined in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Integrand\">AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Integrand</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 17, 2019, by Massimo Cimmino:<br/>
-Modified the upper bound of integration to avoid underestimating the value of
-the integral.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1107\">AixLib, issue 1107</a>.
-</li>
-<li>
-March 22, 2018 by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function evaluates the finite line source solution. This solution
+ gives the relation between the constant heat transfer rate (per unit length)
+ injected by a line source of finite length <i>H<sub>1</sub></i> buried at a
+ distance <i>D<sub>1</sub></i> from a constant temperature surface
+ (<i>T=0</i>) and the average temperature raise over a line of finite length
+ <i>H<sub>2</sub></i> buried at a distance <i>D<sub>2</sub></i> from the constant
+ temperature surface.
+ The finite line source solution is defined by:
+ </p>
+ <p align=\"center\">
+ <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/FiniteLineSource_01.png\" />
+ </p>
+ <p>
+ where <i>&Delta;T<sub>1-2</sub>(t,r,H<sub>1</sub>,D<sub>1</sub>,H<sub>2</sub>,D<sub>2</sub>)</i>
+ is the temperature raise after a time <i>t</i> of constant heat injection and at
+ a distance <i>r</i> from the line heat source, <i>Q'</i> is the heat injection
+ rate per unit length, <i>k<sub>s</sub></i> is the soil thermal conductivity and
+ <i>h<sub>FLS</sub></i> is the finite line source solution.
+ </p>
+ <p>
+ The finite line source solution is given by:
+ </p>
+ <p align=\"center\">
+ <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/FiniteLineSource_02.png\" />
+ </p>
+ <p>
+ where <i>&alpha;<sub>s</sub></i> is the ground thermal diffusivity and
+ <i>erfint</i> is the integral of the error function, defined in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Erfint\">AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_erfint</a>.
+ The integral is solved numerically, with the integrand defined in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Integrand\">AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource_Integrand</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 17, 2019, by Massimo Cimmino:<br/>
+ Modified the upper bound of integration to avoid underestimating the value of
+ the integral.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1107\">IBPSA, issue 1107</a>.
+ </li>
+ <li>
+ March 22, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end finiteLineSource;

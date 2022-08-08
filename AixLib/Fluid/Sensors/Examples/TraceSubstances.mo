@@ -4,7 +4,7 @@ model TraceSubstances "Test model for the extra property sensor"
  package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 
- parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 15*1.2/3600
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=15*1.2/3600
     "Mass flow rate into and out of the volume";
 
   MixingVolumes.MixingVolume vol(
@@ -113,56 +113,57 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{180,
             180}})),
     Documentation(info="<html>
-<p>
-This example tests the sensors that measure trace substances.
-A CO<sub>2</sub> mass flow rate of <i>8.18E-8</i> kg/kg is added to the
-volume. The volume also has a fresh air mass flow rate and
-an exhaust air mass flow rate. The initial CO<sub>2</sub> concentration
-of the volume is <i>0</i> kg/kg.
-Note that the fresh air supply has zero carbon dioxide concentration.
-Therefore, if it were outside air, then all concentrations are relative
-to the outside air concentration.
-</p>
-</html>",
+ <p>
+ This example tests the sensors that measure trace substances.
+ A CO<sub>2</sub> mass flow rate of <i>8.18E-8</i> kg/kg is added to the
+ volume. The volume also has a fresh air mass flow rate and
+ an exhaust air mass flow rate. The initial CO<sub>2</sub> concentration
+ of the volume is <i>0</i> kg/kg.
+ Note that the fresh air supply has zero carbon dioxide concentration.
+ Therefore, if it were outside air, then all concentrations are relative
+ to the outside air concentration.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-May 22, 2015, by Michael Wetter:<br/>
-Updated example to test the correction for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/249\">issue 249</a>.
-</li>
-<li>
-May 8, 2014, by Michael Wetter:<br/>
-Added a pressure drop element, as otherwise the initialization problem
-is overspecified for incompressible media.
-</li>
-<li>
-November 27, 2013 by Michael Wetter:<br/>
-Changed sink model from a prescribed flow source to a pressure
-boundary condition. This is required for the new air model,
-which is incompressible. Otherwise, there will be no pressure reference
-in the system.
-</li>
-<li>
-September 10, 2013 by Michael Wetter:<br/>
-Changed initialization of volume to fixed initial values to avoid
-a translation warning in OpenModelica.
-</li>
-<li>
-August 30, 2013 by Michael Wetter:<br/>
-Renamed example and added an instance of
-<a href=\"modelica://AixLib.Fluid.Sensors.TraceSubstancesTwoPort\">
-AixLib.Fluid.Sensors.TraceSubstancesTwoPort</a>.
-</li>
-<li>
-September 29, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ May 22, 2015, by Michael Wetter:<br/>
+ Updated example to test the correction for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/249\">issue 249</a>.
+ </li>
+ <li>
+ May 8, 2014, by Michael Wetter:<br/>
+ Added a pressure drop element, as otherwise the initialization problem
+ is overspecified for incompressible media.
+ </li>
+ <li>
+ November 27, 2013 by Michael Wetter:<br/>
+ Changed sink model from a prescribed flow source to a pressure
+ boundary condition. This is required for the new air model,
+ which is incompressible. Otherwise, there will be no pressure reference
+ in the system.
+ </li>
+ <li>
+ September 10, 2013 by Michael Wetter:<br/>
+ Changed initialization of volume to fixed initial values to avoid
+ a translation warning in OpenModelica.
+ </li>
+ <li>
+ August 30, 2013 by Michael Wetter:<br/>
+ Renamed example and added an instance of
+ <a href=\"modelica://AixLib.Fluid.Sensors.TraceSubstancesTwoPort\">
+ AixLib.Fluid.Sensors.TraceSubstancesTwoPort</a>.
+ </li>
+ <li>
+ September 29, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TraceSubstances;

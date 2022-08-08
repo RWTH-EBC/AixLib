@@ -10,9 +10,9 @@ model TCPCommunicatorExample
           final port=portExample); //Extends basic TCP communication model
 
   /**************** necessary Input ****************************/
-  parameter Modelica.SIunits.Time samplePeriodExample = 1
+  parameter Modelica.Units.SI.Time samplePeriodExample=1
     "Sample period how often a telegram is send";
-  parameter Modelica.SIunits.Time startTimeExample = 0
+  parameter Modelica.Units.SI.Time startTimeExample=0
     "Start time when sampling starts";
   parameter String IP_AddressExample = "127.0.0.1"
     "IP address or name of Server";

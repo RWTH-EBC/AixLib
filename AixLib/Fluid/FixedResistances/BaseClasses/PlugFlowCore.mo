@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.BaseClasses;
+﻿within AixLib.Fluid.FixedResistances.BaseClasses;
 model PlugFlowCore
   "Pipe model using spatialDistribution for temperature delay with modified delay tracker"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
@@ -6,23 +6,23 @@ model PlugFlowCore
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
-  parameter Modelica.SIunits.Length dh
+  parameter Modelica.Units.SI.Length dh
     "Hydraulic diameter (assuming a round cross section area)";
 
-  parameter Modelica.SIunits.Velocity v_nominal
+  parameter Modelica.Units.SI.Velocity v_nominal
     "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
     annotation(Dialog(group="Nominal condition"));
 
-  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
+  parameter Modelica.Units.SI.Length length(min=0) "Pipe length";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_small(min=0) = 1E-4*abs(
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0) = 1E-4*abs(
     m_flow_nominal) "Small mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced"));
 
-  parameter Modelica.SIunits.Height roughness=2.5e-5
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
     annotation (Dialog(group="Geometry"));
 
@@ -39,18 +39,18 @@ model PlugFlowCore
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Evaluate=true, Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Length thickness(min=0) "Pipe wall thickness";
+  parameter Modelica.Units.SI.Length thickness(min=0) "Pipe wall thickness";
 
-  parameter Modelica.SIunits.Temperature T_start_in=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start_in=Medium.T_default
     "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_start_out=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start_out=Medium.T_default
     "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay=false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_start=0
+  parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
     annotation (Dialog(tab="Initialization", enable=initDelay));
 
   parameter Real ReC=4000
@@ -128,7 +128,7 @@ model PlugFlowCore
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
 protected
-  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default)
@@ -204,72 +204,76 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={215,202,187})}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
-</li>
-<li>
-October 20, 2017, by Michael Wetter:<br/>
-Replaced model that lumps flow resistance and transport delays
-with two separate models, as these are physically distinct processes.
-This also avoids one more layer of models.
-<br/>
-Revised variable names and documentation to follow guidelines.
-</li>
-<li>
-July 4, 2016 by Bram van der Heijde:<br/>
-Introduce <code>pipVol</code>.
-</li>
-<li>
-October 10, 2015 by Marcus Fuchs:<br/>
-Copy Icon from KUL implementation and rename model.
-Replace resistance and temperature delay by an adiabatic pipe.
-</li>
-<li>
-September, 2015 by Marcus Fuchs:<br/>First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>April 14, 2020, by Michael Wetter:<br/>
+    Changed <code>homotopyInitialization</code> to a constant.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib,
+    #1341</a>.
+  </li>
+  <li>October 20, 2017, by Michael Wetter:<br/>
+    Replaced model that lumps flow resistance and transport delays with
+    two separate models, as these are physically distinct processes.
+    This also avoids one more layer of models.<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>July 4, 2016 by Bram van der Heijde:<br/>
+    Introduce <code>pipVol</code>.
+  </li>
+  <li>October 10, 2015 by Marcus Fuchs:<br/>
+    Copy Icon from KUL implementation and rename model. Replace
+    resistance and temperature delay by an adiabatic pipe.
+  </li>
+  <li>September, 2015 by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
-</html>", info="<html>
+</html>",info="<html>
 <p>
-Pipe with heat loss using the time delay based heat losses and plug flow
-for the transport delay of the fluid.
+  Pipe with heat loss using the time delay based heat losses and plug
+  flow for the transport delay of the fluid.
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-The
-<code>spatialDistribution</code> operator is used for the temperature wave propagation
-through the length of the pipe. This operator is contained in
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>.
-</p>
-<p>
-This model does not include thermal inertia of the pipe wall.
-The wall inertia is implemented in
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">PlugFlowPipe</a>, which uses this model.
-<br/>
-The removal of the thermal inertia with a mixing volume can be desirable in the
-case where mixing volumes are added manually at the pipe junctions.
+  The <code>spatialDistribution</code> operator is used for the
+  temperature wave propagation through the length of the pipe. This
+  operator is contained in <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>.
 </p>
 <p>
-The model
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
-PlugFlowHeatLoss</a>
-implements a heat loss in design direction, but leaves the enthalpy unchanged
-in opposite flow direction. Therefore it is used in front of and behind the time delay.
-</p>
-<h4>References</h4>
-<p>
-Full details on the model implementation and experimental validation can be found
-in:
+  This model does not include thermal inertia of the pipe wall. The
+  wall inertia is implemented in <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">PlugFlowPipe</a>,
+  which uses this model.<br/>
+  The removal of the thermal inertia with a mixing volume can be
+  desirable in the case where mixing volumes are added manually at the
+  pipe junctions.
 </p>
 <p>
-van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K., Basciotti, D., M&uuml;ller,
-D., Nytsch-Geusen, C., Wetter, M. and Helsen, L. (2017).<br/>
-Dynamic equation-based thermo-hydraulic pipe model for district heating and cooling systems.<br/>
-<i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
-<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi: 10.1016/j.enconman.2017.08.072</a>.</p>
+  The model <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
+  PlugFlowHeatLoss</a> implements a heat loss in design direction, but
+  leaves the enthalpy unchanged in opposite flow direction. Therefore
+  it is used in front of and behind the time delay.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Full details on the model implementation and experimental validation
+  can be found in:
+</p>
+<p>
+  van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G.,
+  Sartor, K., Basciotti, D., Müller, D., Nytsch-Geusen, C., Wetter, M.
+  and Helsen, L. (2017).<br/>
+  Dynamic equation-based thermo-hydraulic pipe model for district
+  heating and cooling systems.<br/>
+  <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
+  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\" >doi:
+  10.1016/j.enconman.2017.08.072 </a>.
+</p>
 </html>"));
 end PlugFlowCore;

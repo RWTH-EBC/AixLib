@@ -2,24 +2,24 @@ within AixLib.BoundaryConditions.SolarIrradiation.Examples;
 model DirectTiltedSurface
   "Test model for direct solar irradiation on a tilted surface"
   extends Modelica.Icons.Example;
-  parameter Modelica.SIunits.Angle lat=37/180*Modelica.Constants.pi "Latitude";
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
         Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirRoo(
     til=AixLib.Types.Tilt.Ceiling,
-    lat=0.6457718232379,
-    azi=0.78539816339745) "Direct irradiation on roof"
+    azi=0.78539816339745)
+    "Direct irradiation on roof"
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirFlo(
     til=AixLib.Types.Tilt.Floor,
-    lat=0.6457718232379,
-    azi=0.78539816339745) "Direct irradiation on floor"
+    azi=0.78539816339745)
+    "Direct irradiation on floor"
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirWal(
     til=AixLib.Types.Tilt.Wall,
-    lat=0.6457718232379,
-    azi=0.78539816339745) "Direct irradiation on wall"
+    azi=0.78539816339745)
+    "Direct irradiation on wall"
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   AixLib.Utilities.Diagnostics.AssertEquality assEqu
     "Assert to ensure that direct radiation received by floor construction is zero"
@@ -50,18 +50,19 @@ experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DirectTiltedSurface.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the direct solar irradiation received on a ceiling, a wall and a floor.
-The assert statement will stop the simulation if the floor receives
-any direct solar irradiation.
-</p>
-</html>",
+ <p>
+ This model tests the direct solar irradiation received on a ceiling, a wall and a floor.
+ The assert statement will stop the simulation if the floor receives
+ any direct solar irradiation.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 24, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DirectTiltedSurface;

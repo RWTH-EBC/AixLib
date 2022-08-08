@@ -10,20 +10,20 @@ record ClimateMaster_TMW340_98kW_4_40COP_R410A =
     UACon = 14154.9112764,
     UAEva = 13705.1289797)
     "Calibrated parameters for ClimateMaster TMW340"
-
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-Calibrated parameters for ClimateMaster TMW340.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 6, 2017, by Massimo Cimmino:<br/>
-Calibrated parameters.
-</li>
-</ul>
-</html>"));
+ <p>
+ Calibrated parameters for ClimateMaster TMW340.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 6, 2017, by Massimo Cimmino:<br/>
+ Calibrated parameters.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

@@ -16,7 +16,7 @@ InverseXRegularized
 Max
 Min
 MovingAverage
-Polynominal
+Polynomial
 PowerLinearized
 QuadraticLinear
 RegNonZeroPower

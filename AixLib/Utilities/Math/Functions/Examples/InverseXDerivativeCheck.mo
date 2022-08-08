@@ -17,8 +17,8 @@ initial equation
 equation
   x = time^3*gain;
   y = AixLib.Utilities.Math.Functions.inverseXRegularized(
-    x=  x,
-    delta=  delta);
+    x = x,
+    delta = delta);
   der(y_comp) = AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized(x=x,delta=delta,x_der=der(x));
   err = y-y_comp;
   assert(abs(err) < 1E-3, "Error in implementation.");
@@ -30,28 +30,29 @@ experiment(
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/InverseXDerivativeCheck.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model validates the implementation of
-<a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
-AixLib.Utilities.Math.Functions.inverseXRegularized</a>
-and its first order derivative
-<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition\">
-AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition</a>.
-If the derivative implementation is wrong, the simulation will stop with an error.
-</p>
-</html>",
+ <p>
+ This model validates the implementation of
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
+ AixLib.Utilities.Math.Functions.inverseXRegularized</a>
+ and its first order derivative
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition\">
+ AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition</a>.
+ If the derivative implementation is wrong, the simulation will stop with an error.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 22, 2016, by Filip Jorissen:<br/>
-Changed example such that it explicitly uses
-<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized\">
-AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized</a>.
-</li>
-<li>
-August 11, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ June 22, 2016, by Filip Jorissen:<br/>
+ Changed example such that it explicitly uses
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized\">
+ AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized</a>.
+ </li>
+ <li>
+ August 11, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InverseXDerivativeCheck;

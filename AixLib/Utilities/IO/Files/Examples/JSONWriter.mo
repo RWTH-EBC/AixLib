@@ -25,7 +25,7 @@ model JSONWriter "Example use of the JSON writer"
     offset=1) "Ramp signal" annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   Modelica.Blocks.Sources.Constant const(k=2) "Constant signal"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Sources.Cosine cosine(amplitude=1, freqHz=12) "Cosine signal"
+  Modelica.Blocks.Sources.Cosine cosine(amplitude=1, f=12) "Cosine signal"
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
   AixLib.Utilities.IO.Files.JSONWriter jsonWriterOneVar(nin=1, fileName="TerminalOutput.json")
     "Single variable output"
@@ -55,22 +55,23 @@ equation
           0},{-40,-70},{0,-70}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-This model generates four json files,
-using a single or multiple inputs and at different points in time.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 9, 2019 by Filip Jorissen:<br/>
-First implementation.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model generates four json files,
+ using a single or multiple inputs and at different points in time.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 9, 2019 by Filip Jorissen:<br/>
+ First implementation.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=2,
       Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/JSONWriter.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end JSONWriter;

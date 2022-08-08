@@ -5,14 +5,14 @@ model ScrollWaterToWater_VariableSpeed
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=0.47
     "Nominal mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=0.47
     "Nominal mass flow rate on the evaporator side";
 
-  parameter Modelica.SIunits.MassFlowRate flowSource = 0.79
+  parameter Modelica.Units.SI.MassFlowRate flowSource=0.79
     "Mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate flowLoad = 0.47
+  parameter Modelica.Units.SI.MassFlowRate flowLoad=0.47
     "Mass flow rate on the evaporator side";
 
   AixLib.Fluid.Sources.Boundary_pT sin2(
@@ -99,26 +99,27 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of the
-<a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
-AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
-</p>
-<p>
-With constant inlet source and load water temperatures, the compressor frequency
-is increased linearly to its full load value.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 11, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that demonstrates the use of the
+ <a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
+ AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
+ </p>
+ <p>
+ With constant inlet source and load water temperatures, the compressor frequency
+ is increased linearly to its full load value.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 11, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_VariableSpeed;

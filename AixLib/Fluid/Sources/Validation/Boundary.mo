@@ -38,25 +38,25 @@ model Boundary "Validation model for boundary with different media"
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
 
     annotation (Documentation(info="<html>
-<p>
-Validation model for <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
-AixLib.Fluid.Sources.Boundary_pT</a>
-for different media.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 13, 2019 by Michael Wetter:<br/>
-First implementation.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">AixLib, #1205</a>.
-</li>
-</ul>
-</html>"),
-__Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Sources/Validation/Boundary.mos"
+ <p>
+ Validation model for <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+ AixLib.Fluid.Sources.Boundary_pT</a>
+ for different media.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 13, 2019 by Michael Wetter:<br/>
+ First implementation.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
+ </li>
+ </ul>
+ </html>"),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Validation/Boundary.mos"
         "Simulate and plot"),
 experiment(
       StopTime=1,
-      Tolerance=1e-06));
+      Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Boundary;

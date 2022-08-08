@@ -1,7 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
 model CHP "Table based CHP model"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10,
-                 vol(V=param.vol[1]));
+                  vol(V=param.vol[1]));
 
   parameter AixLib.DataBase.CHP.CHPDataSimple.CHPBaseDataDefinition param
     "CHP data set"
@@ -20,24 +20,22 @@ model CHP "Table based CHP model"
   parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.TemperatureDifference minDeltaT = 10
+  parameter Modelica.Units.SI.TemperatureDifference minDeltaT=10
     "Minimum flow and return temperature difference"
-    annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.TemperatureDifference TFlowRange = 2
+    annotation (Dialog(group="Control system"));
+  parameter Modelica.Units.SI.TemperatureDifference TFlowRange=2
     "Range of allowable flow temperature"
-    annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time delayTime = 3600
-    "Shutdown/Startup delay"
-    annotation(Dialog(group="Control system"));
+    annotation (Dialog(group="Control system"));
+  parameter Modelica.Units.SI.Time delayTime=3600 "Shutdown/Startup delay"
+    annotation (Dialog(group="Control system"));
   parameter Real Kc = 1
     "Gain of the controller"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time Tc=60
-    "Time Constant (T>0 required)"
-    annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time delayUnit = 60
+  parameter Modelica.Units.SI.Time Tc=60 "Time Constant (T>0 required)"
+    annotation (Dialog(group="Control system"));
+  parameter Modelica.Units.SI.Time delayUnit=60
     "Delay measurement of the controller output"
-    annotation(Dialog(group="Control system"));
+    annotation (Dialog(group="Control system"));
   Modelica.Blocks.Interfaces.RealInput TSet(
     final quantity="ThermodynamicTemperature",
     final unit="K",

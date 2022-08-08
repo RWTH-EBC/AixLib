@@ -36,8 +36,9 @@ model MultizoneMoistAirCO2Equipped
             thermCapInt(each der_T(fixed=true))))),
     redeclare package Medium = Medium,
     T_start=293.15,
-    dpAHU_sup=80000000,
-    dpAHU_eta=80000000) "Multizone"
+    dpAHU_sup(displayUnit="Pa") = 800,
+    dpAHU_eta(displayUnit="Pa") = 800)
+                        "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -59,9 +60,8 @@ model MultizoneMoistAirCO2Equipped
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"
@@ -126,7 +126,7 @@ equation
   connect(replicator.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-23.4,
           -54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsRad) annotation (Line(
-        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-3},{34,-3}},
+        points={{6,-54},{18,-54},{18,-3},{34,-3}},
                                 color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},

@@ -2,9 +2,9 @@ within AixLib.Fluid.HeatPumps.Compressors.BaseClasses;
 model TemperatureProtection
   "Temperature protection for heat pump compressor"
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.Temperature TConMax
+  parameter Modelica.Units.SI.Temperature TConMax
     "Upper bound for condenser temperature";
-  parameter Modelica.SIunits.Temperature TEvaMin
+  parameter Modelica.Units.SI.Temperature TEvaMin
     "Lower bound for evaporator temperature";
   parameter Real dTHys(
     final unit="K",
@@ -136,32 +136,33 @@ equation
   connect(notCon.u, hysHig.y) annotation (Line(points={{61.6,50},{14,50},{14,-30},
           {1,-30}}, color={255,0,255}));
   annotation (    Documentation(revisions="<html>
-<ul>
-<li>
-May 30, 2017, by Filip Jorissen:<br/>
-First implementation.
-See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
-</li>
-</ul>
-</html>",
+ <ul>
+ <li>
+ May 30, 2017, by Filip Jorissen:<br/>
+ First implementation.
+ See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
+ </li>
+ </ul>
+ </html>",
 info="<html>
-<p>
-Temperature protection block for heat pumps.
-This block overrides the heat pump control
-signal when the condenser temperature is too high,
-the evaporator temperature is too low,
-or the temperature difference between
-the condenser and evaporator is negative.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-Temperature bounds are set using <code>TConMax</code>
-and <code>TEvaMin</code>.
-</p>
-<h4>Options</h4>
-<p>
-Parameter <code>dTHys</code> may be used
-to change the hysteresis interval.
-</p>
-</html>"));
+ <p>
+ Temperature protection block for heat pumps.
+ This block overrides the heat pump control
+ signal when the condenser temperature is too high,
+ the evaporator temperature is too low,
+ or the temperature difference between
+ the condenser and evaporator is negative.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ Temperature bounds are set using <code>TConMax</code>
+ and <code>TEvaMin</code>.
+ </p>
+ <h4>Options</h4>
+ <p>
+ Parameter <code>dTHys</code> may be used
+ to change the hysteresis interval.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureProtection;

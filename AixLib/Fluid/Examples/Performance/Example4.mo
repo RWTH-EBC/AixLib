@@ -6,13 +6,12 @@ model Example4 "Example 4 model of simple condensing heat exchanger"
   parameter Boolean allowFlowReversal=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal";
 
-  Modelica.SIunits.MassFlowRate m_condens = min(0, -vol.ports[1].m_flow*(bou.X[1] - xSat.X[1]))
-    "Water vapor mass flow rate";
+  Modelica.Units.SI.MassFlowRate m_condens=min(0, -vol.ports[1].m_flow*(bou.X[1]
+       - xSat.X[1])) "Water vapor mass flow rate";
   Fluid.MixingVolumes.MixingVolumeMoistAir vol(
     nPorts=2,
     ports(m_flow(min={0,-Modelica.Constants.inf})),
     redeclare package Medium = Medium,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=1,
     V=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -107,60 +106,60 @@ equation
       color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-20},
             {80,60}}),         graphics),    Documentation(revisions="<html>
-<ul>
-<li>
-April 12, 2017, by Michael Wetter:<br/>
-Removed connection that is no longer needed.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-July 28, 2015, by Michael Wetter:<br/>
-Moved assignment of <code>m_condens</code> from equation section to
-declaration to avoid graphical and textual equations.
-</li>
-<li>
-July 14, 2015, by Michael Wetter:<br/>
-Revised documentation.
-</li>
-<li>
-April 17, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-This example generates a non-linear algebraic loop
-that consists of <i>12</i> equations before manipulation.
-This loop can be decoupled and removed by changing the equation
-</p>
-<pre>
-port_a.m_flow + port_b.m_flow = -mWat_flow;
-</pre>
-<p>
-in
-<a href=\"modelica://AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-to
-</p>
-<pre>
-port_a.m_flow + port_b.m_flow = 0;
-</pre>
-<p>
-See Jorissen et al. (2015) for a discussion.
-</p>
-<h4>References</h4>
-<ul>
-<li>
-Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
-Simulation speed analysis and improvements of Modelica
-models for building energy simulation.<br/>
-Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ April 12, 2017, by Michael Wetter:<br/>
+ Removed connection that is no longer needed.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ July 28, 2015, by Michael Wetter:<br/>
+ Moved assignment of <code>m_condens</code> from equation section to
+ declaration to avoid graphical and textual equations.
+ </li>
+ <li>
+ July 14, 2015, by Michael Wetter:<br/>
+ Revised documentation.
+ </li>
+ <li>
+ April 17, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ This example generates a non-linear algebraic loop
+ that consists of <i>12</i> equations before manipulation.
+ This loop can be decoupled and removed by changing the equation
+ </p>
+ <pre>
+ port_a.m_flow + port_b.m_flow = -mWat_flow;
+ </pre>
+ <p>
+ in
+ <a href=\"modelica://AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ to
+ </p>
+ <pre>
+ port_a.m_flow + port_b.m_flow = 0;
+ </pre>
+ <p>
+ See Jorissen et al. (2015) for a discussion.
+ </p>
+ <h4>References</h4>
+ <ul>
+ <li>
+ Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
+ Simulation speed analysis and improvements of Modelica
+ models for building energy simulation.<br/>
+ Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=20),
-__Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Examples/Performance/Example4.mos"
-        "Simulate and plot"));
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example4.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Example4;

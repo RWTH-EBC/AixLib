@@ -32,23 +32,23 @@ equation
   annotation (
   defaultComponentName="phi",
     Documentation(info="<html>
-<p>
-Block to compute the relative humidity of air for given
-pressure, temperature and water vapor mass fraction.
-</p>
-<p>
-Note that the water vapor mass fraction must be in <i>kg/kg</i>
-total air, and not dry air.
-</p>
-</html>",
+ <p>
+ Block to compute the relative humidity of air for given
+ pressure, temperature and water vapor mass fraction.
+ </p>
+ <p>
+ Note that the water vapor mass fraction must be in <i>kg/kg</i>
+ total air, and not dry air.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 13, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ November 13, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                     graphics={
         Polygon(
@@ -58,7 +58,7 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-70,84},{-48,66}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="X"),
@@ -73,7 +73,7 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{76,-80},{86,-96}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="T"),
@@ -83,8 +83,9 @@ First implementation.
           smooth=Smooth.Bezier),
         Text(
           extent={{34,-10},{56,-28}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="phi")}));
+          textString="phi")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Phi_pTX;

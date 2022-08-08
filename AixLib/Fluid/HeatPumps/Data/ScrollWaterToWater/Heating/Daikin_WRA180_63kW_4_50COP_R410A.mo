@@ -10,20 +10,20 @@ record Daikin_WRA180_63kW_4_50COP_R410A =
     UACon = 11553.9351864,
     UAEva = 83881.3683749)
     "Calibrated parameters for Daikin WRA180"
-
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-Calibrated parameters for Daikin WRA180.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 6, 2017, by Massimo Cimmino:<br/>
-Calibrated parameters.
-</li>
-</ul>
-</html>"));
+ <p>
+ Calibrated parameters for Daikin WRA180.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 6, 2017, by Massimo Cimmino:<br/>
+ Calibrated parameters.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

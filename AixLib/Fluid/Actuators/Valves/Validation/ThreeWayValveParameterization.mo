@@ -4,9 +4,9 @@ model ThreeWayValveParameterization
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium in the component";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.4
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.4
     "Design mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal = 4500
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=4500
     "Design pressure drop";
 
   parameter Real Kv_SI = m_flow_nominal/sqrt(dp_nominal)
@@ -16,12 +16,13 @@ model ThreeWayValveParameterization
     "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)]";
   parameter Real Cv = Kv_SI/(rhoStd*0.0631/1000/sqrt(6895))
     "Cv (US) flow coefficient [USG/min/(psi)^(1/2)]";
-  parameter Modelica.SIunits.Area Av = Kv_SI/sqrt(rhoStd)
+  parameter Modelica.Units.SI.Area Av=Kv_SI/sqrt(rhoStd)
     "Av (metric) flow coefficient";
 
-  parameter Modelica.SIunits.Density rhoStd=
-   Medium.density_pTX(101325, 273.15+4, Medium.X_default)
-   "Standard density";
+  parameter Modelica.Units.SI.Density rhoStd=Medium.density_pTX(
+      101325,
+      273.15 + 4,
+      Medium.X_default) "Standard density";
 
   AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valOPPoi(
     redeclare package Medium = Medium,
@@ -153,17 +154,18 @@ equation
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-140},{140,140}})),
     Documentation(info="<html>
-<p>
-This model test the parameterization of three-way valves.
-All valves are sized equally, but use different configuration options.
-Therefore, the valves have all the same mass flow rate.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2017, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model test the parameterization of three-way valves.
+ All valves are sized equally, but use different configuration options.
+ Therefore, the valves have all the same mass flow rate.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2017, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ThreeWayValveParameterization;

@@ -14,12 +14,12 @@ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
     choicesAllMatching=true,
     group="Unit properties");
 
-    parameter Modelica.SIunits.Efficiency eta_el= 0.25
+  parameter Modelica.Units.SI.Efficiency eta_el=0.25
     "CHP's electrical efficiency "
-    annotation (Dialog(group = "Unit properties",enable=not selectable));
-    parameter Modelica.SIunits.Efficiency eta_th = 0.65
+    annotation (Dialog(group="Unit properties", enable=not selectable));
+  parameter Modelica.Units.SI.Efficiency eta_th=0.65
     "CHP's thermal efficiency "
-    annotation (Dialog(group = "Unit properties",enable=not selectable));
+    annotation (Dialog(group="Unit properties", enable=not selectable));
 
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
@@ -27,23 +27,23 @@ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
     annotation (choicesAllMatching);
     constant Real LHV(unit="J/kg")=47300000 "Lower heating value [J/kg]";
 protected
-    parameter Modelica.SIunits.Volume V_water = 3e-3
-    "Water volume inside the CHP";
+  parameter Modelica.Units.SI.Volume V_water=3e-3 "Water volume inside the CHP";
 public
-    parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature ";
-    parameter Modelica.SIunits.Power capP_el=1000 "CHPs electrical capacity" annotation (Dialog(group = "Unit properties",enable=not selectable));
+  parameter Modelica.Units.SI.Temperature T0=
+      Modelica.Units.Conversions.from_degC(20) "Initial temperature ";
+  parameter Modelica.Units.SI.Power capP_el=1000 "CHPs electrical capacity"
+    annotation (Dialog(group="Unit properties", enable=not selectable));
  /* *******************************************************************
       Variables
       ******************************************************************* */
 
-    Modelica.SIunits.Efficiency eff_tot "Total efficiency ";
-    Modelica.SIunits.HeatFlowRate Q_th "Thermal power";
-    Modelica.SIunits.MassFlowRate dotm_fuel "Fuel mass flow rate ";
-    Modelica.SIunits.HeatFlowRate  dotE_fuel "Fuel energy consumption ";
-    Modelica.SIunits.Efficiency eff_el "CHP's electrical efficiency ";
-    Modelica.SIunits.Efficiency eff_th "CHP's thermal efficiency ";
-    Modelica.SIunits.Power P_el "Capacity ";
+  Modelica.Units.SI.Efficiency eff_tot "Total efficiency ";
+  Modelica.Units.SI.HeatFlowRate Q_th "Thermal power";
+  Modelica.Units.SI.MassFlowRate dotm_fuel "Fuel mass flow rate ";
+  Modelica.Units.SI.HeatFlowRate dotE_fuel "Fuel energy consumption ";
+  Modelica.Units.SI.Efficiency eff_el "CHP's electrical efficiency ";
+  Modelica.Units.SI.Efficiency eff_th "CHP's thermal efficiency ";
+  Modelica.Units.SI.Power P_el "Capacity ";
 
     Real sigma(  start=0.4) "Nominal power to heat ratio";
   /* *******************************************************************
@@ -83,7 +83,7 @@ public
     FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a annotation (
       Placement(transformation(extent={{-110,-10},{-90,10}})));
 
-    Modelica.Blocks.Interfaces.RealOutput Energy[3](unit="J")
+    Modelica.Blocks.Interfaces.RealOutput Energy[3](each unit="J")
     "1=W_el 2=Q_th 3=E_fuel"
     annotation (Placement(transformation(extent={{92,8},{132,48}}),
         iconTransformation(
@@ -92,7 +92,7 @@ public
         origin={102,-48})));
     Modelica.Blocks.Continuous.Integrator integrator[3]
       annotation (Placement(transformation(extent={{54,16},{74,36}})));
-    Modelica.Blocks.Interfaces.RealOutput Capacity[3](unit="W")
+    Modelica.Blocks.Interfaces.RealOutput Capacity[3](each unit="W")
     "1=P_el 2=dotQ_th 3=dotE_fuel" annotation (Placement(transformation(
           extent={{92,40},{132,80}}), iconTransformation(
         extent={{-10,-10},{10,10}},
@@ -134,8 +134,14 @@ equation
       Q_th = firstOrderQ_th.y;
 
        if onOff and selectable then
-       eff_el = param.a_0 + param.a_1*(P_el/1000)^2 + param.a_2*(P_el/1000) + param.a_3*massFlowRate.dotm^2 + param.a_4*massFlowRate.dotm + param.a_5* Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.a_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
-       eff_th = param.b_0 + param.b_1*(P_el/1000)^2 + param.b_2*(P_el/1000) + param.b_3*massFlowRate.dotm^2 + param.b_4*massFlowRate.dotm + param.b_5* Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.b_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
+       eff_el =param.a_0 + param.a_1*(P_el/1000)^2 + param.a_2*(P_el/1000) +
+      param.a_3*massFlowRate.dotm^2 + param.a_4*massFlowRate.dotm + param.a_5*
+      Modelica.Units.Conversions.to_degC(T_return.T)^2 + param.a_6*
+      Modelica.Units.Conversions.to_degC(T_return.T);
+       eff_th =param.b_0 + param.b_1*(P_el/1000)^2 + param.b_2*(P_el/1000) +
+      param.b_3*massFlowRate.dotm^2 + param.b_4*massFlowRate.dotm + param.b_5*
+      Modelica.Units.Conversions.to_degC(T_return.T)^2 + param.b_6*
+      Modelica.Units.Conversions.to_degC(T_return.T);
        firstOrderQ_th.u = param.P_elRated*P_elRel / sigma;
        firstOrderP_el.u=param.P_elRated*P_elRel;
        sigma=eff_el/eff_th;

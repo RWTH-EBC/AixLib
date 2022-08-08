@@ -71,12 +71,12 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     annotation (Placement(transformation(extent={{-20,70},{-40,90}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
-    freqHz=1/3600,
+    f=1/3600,
     offset=278.15)
     annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=0.002,
-    freqHz=1/3600,
+    f=1/3600,
     offset=0.003)
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Sensors.TemperatureTwoPort senTemHotIn(redeclare package Medium = Media.Air,
@@ -159,8 +159,8 @@ equation
     annotation (Line(points={{23,80},{38.5,80}}, color={0,0,127}));
   connect(latEff.y, realValue1.numberPort)
     annotation (Line(points={{23,60},{38.5,60}}, color={0,0,127}));
-  annotation (experiment(StopTime=7200, Interval=1, method="dassl",Tolerance=1E-6),
-    __Dymola_Comands(file=
+  annotation (experiment(StopTime=7200, Interval=1, Algorithm="dassl",Tolerance=1E-6),
+    __Dymola_Commands(file=
       "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Examples/Test_EnthalpyExchanger.mos"
         "Simulate and plot"),
     Documentation(info="<html>This example shows the functionality of the membrane-based enthalpy
