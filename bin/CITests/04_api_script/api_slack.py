@@ -180,7 +180,9 @@ class Slack_Notification(object):
     def _close_issue(self, issue_number):
         url = f'https://api.github.com/repos/{self.github_repo}/issues/{issue_number}'
         state = f'\"state\":\"closed\"'
-        payload = "{" + state + "}"
+        state_reason = f'\"state_reason\":\"not_planned\"'
+        payload = "{" + state + ",\n" + state_reason + "}"
+
         headers = {
             'Authorization': 'Bearer ' + self.github_token,
             'Content-Type': 'application/json'
