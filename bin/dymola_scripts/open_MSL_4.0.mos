@@ -1,9 +1,0 @@
-eraseClasses({"Modelica"})
-eraseClasses({"ModelicaServices"})
-// Adapt path if necessary
-openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo", changeDirectory=false)
-// MSL v4.0.0 must be unloaded before loading old MSL
-// Download the Modelica Standard Library (MSL) as a tag from here:
-// https://github.com/modelica/ModelicaStandardLibrary/releases/tag/v3.2.3%2Bbuild.4
-// openModel("C:/Program Files/Dymola 2020/Modelica/Library/ModelicaServices 3.2.3/package.mo", changeDirectory=false)
-
