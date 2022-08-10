@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model MultizoneMoistAirCO2EquippedWithPool
+model MultizoneMoistAirCO2EquippedWithPoolSimpleExample
   "Illustrates the use of MultizoneMoistAirCO2Equipped"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -11,16 +11,10 @@ model MultizoneMoistAirCO2EquippedWithPool
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
-    numZones=6,
-    zoneParam={AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall(),
-        AixLib.DataBase.ThermalZones.SwimmingBath.ChangingRooms(),
-        AixLib.DataBase.ThermalZones.SwimmingBath.EntranceHall(),
-        AixLib.DataBase.ThermalZones.SwimmingBath.SaniteryAreas(),
-        AixLib.DataBase.ThermalZones.SwimmingBath.StaffAreas(),
-        AixLib.DataBase.ThermalZones.SwimmingBath.TechnicalAreas()},
+    numZones=1,
+    zoneParam={AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall()},
     use_C_flow=true,
     use_moisture_balance=true,
-    use_swimmingPools=true,
     use_idealHeaterPools=true,
     internalGainsMode=3,
     heatAHU=true,
@@ -53,11 +47,11 @@ model MultizoneMoistAirCO2EquippedWithPool
     tableName="Internals",
     fileName=
         "D:/02_Projekte/EESchwimm/ebc0459_bmwi_baeder_ipbb/AixLib/AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingBath.txt",
-    columns=2:19)
+    columns=2:4)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[6]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[1]
     "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
@@ -66,7 +60,7 @@ model MultizoneMoistAirCO2EquippedWithPool
     offset=500)
     "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[6]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[1]
     "Convective heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
   Modelica.Blocks.Math.Gain gain(k=0.5)
@@ -75,13 +69,13 @@ model MultizoneMoistAirCO2EquippedWithPool
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{-56,-82},{-44,-70}})));
-  Modelica.Blocks.Routing.Replicator replicator(nout=6)
+  Modelica.Blocks.Routing.Replicator replicator(nout=1)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-54})));
-  Modelica.Blocks.Routing.Replicator replicator1(nout=6)
+  Modelica.Blocks.Routing.Replicator replicator1(nout=1)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
@@ -102,11 +96,11 @@ model MultizoneMoistAirCO2EquippedWithPool
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=
         "D:/02_Projekte/EESchwimm/ebc0459_bmwi_baeder_ipbb/AixLib/AixLib/Resources/LowOrder_ExampleData/TsetHeat_6Zones_SwimmingBath.txt",
-    columns=2:7)
+    columns=2:2)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
 
-  Modelica.Blocks.Sources.Constant const[6](each k=0)
+  Modelica.Blocks.Sources.Constant const[1](each k=0)
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
@@ -177,4 +171,4 @@ equation
 __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mos"
         "Simulate and plot"));
-end MultizoneMoistAirCO2EquippedWithPool;
+end MultizoneMoistAirCO2EquippedWithPoolSimpleExample;

@@ -13,7 +13,6 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAirWit
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    use_idealHeaterPool=true,
     nPorts=2,
     T_start=293.15,
     zoneParam=AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall())
