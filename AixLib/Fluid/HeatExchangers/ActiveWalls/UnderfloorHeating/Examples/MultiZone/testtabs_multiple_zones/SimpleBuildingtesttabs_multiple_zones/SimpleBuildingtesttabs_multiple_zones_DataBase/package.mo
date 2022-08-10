@@ -1,0 +1,5 @@
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Examples.MultiZone.testtabs_multiple_zones.SimpleBuildingtesttabs_multiple_zones;
+package SimpleBuildingtesttabs_multiple_zones_DataBase
+  extends Modelica.Icons.Package;
+
+end SimpleBuildingtesttabs_multiple_zones_DataBase;

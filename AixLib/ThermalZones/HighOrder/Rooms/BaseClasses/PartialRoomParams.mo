@@ -8,6 +8,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
     "Specific heat capacity of air"
     annotation (Dialog(group="Air volume of room"));
 
+  parameter Boolean use_UFH = false "If underfloor heating, conductive wall layers in floor and ceiling are disabled" annotation(Dialog(group = "Structure of wall layers"));
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     wallTypes constrainedby
     AixLib.DataBase.Walls.Collections.BaseDataMultiWalls

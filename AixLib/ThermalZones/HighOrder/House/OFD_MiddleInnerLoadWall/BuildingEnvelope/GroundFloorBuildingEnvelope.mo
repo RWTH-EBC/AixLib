@@ -145,7 +145,8 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Livingroom,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
+    final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH)          annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(
     final denAir=denAir,
     final cAir=cAir,
@@ -189,7 +190,8 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Hobby,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{84,28},{46,76}})));
+    final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH)          annotation (Placement(transformation(extent={{84,28},{46,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 WC_Storage(
     final denAir=denAir,
     final cAir=cAir,
@@ -235,7 +237,8 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_WC,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
+    final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH)          annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(
     final denAir=denAir,
     final cAir=cAir,
@@ -281,7 +284,8 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Kitchen,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
+    final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH)          annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Gr1Uf1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
@@ -323,7 +327,9 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    T0_air=T0_air)       annotation (Placement(transformation(extent={{82,-28},{42,10}})));
+    final T0_air=T0_air,
+    final use_UFH=use_UFH)
+                         annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
