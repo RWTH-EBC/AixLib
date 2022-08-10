@@ -123,8 +123,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean use_swimmingPools=false "Sets if a swimming pool is within the zone";
   parameter Integer numPools "Number of swimming pools within the zone";
   replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
-                                                                                        "Data records for swimming pools"
-   annotation (choicesAllMatching=false);
+   "Data records for swimming pools" annotation (choicesAllMatching=true);
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.

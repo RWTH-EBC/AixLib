@@ -395,9 +395,9 @@ public
  // Swimming pools
 
   replaceable package MediumWater = AixLib.Media.Water  "Medium in the component"
-      annotation (choices(
+      annotation (Evaluate=true,choices(
         choice(redeclare package Medium = AixLib.Media.Water "Water")),
-        Dialog(tab="Moisture", group="Swimming Pools"));
+        Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
   final parameter Boolean use_swimmingPools=zoneParam.use_swimmingPools "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
@@ -407,7 +407,7 @@ public
   final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]= zoneParam.poolParam
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
-  parameter Boolean use_idealHeaterPool = true "If true, swimming pools are ideally heated; if false, fluid connectors for heating cuircuit are enabled" annotation(Dialog(tab="Moisture", group="Swimming Pools"));
+  parameter Boolean use_idealHeaterPool = true "If true, swimming pools are ideally heated; if false, fluid connectors for heating cuircuit are enabled" annotation(Evaluate=true,Dialog(tab="Moisture", group="Swimming Pools",enable = use_swimmingPools));
 
   AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](
       poolParam=poolParam, redeclare package WaterMedium = MediumWater,
@@ -415,36 +415,36 @@ public
     each massDynamics=massDynamics,
     each use_idealHeater=use_idealHeaterPool) if
                                use_swimmingPools and  ATot > 0
-    annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
+    annotation (Evaluate=true,Placement(transformation(extent={{-68,-86},{-52,-72}})));
 
   Modelica.Blocks.Interfaces.RealOutput PPool(
-      final quantity="Power", final unit="W") if
-         use_swimmingPools and  ATot > 0 "Power for Pumps"
-    annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
+      final quantity="Power", final unit="W") if use_swimmingPools and (ATot > 0
+     or zoneParam.VAir > 0)              "Power for Pumps"
+    annotation (Evaluate=true,Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
 
   Modelica.Blocks.Interfaces.RealOutput QHeatPools(
       final quantity="HeatFlowRate",
-      final unit="W") if
-         use_swimmingPools and  ATot > 0 and use_idealHeaterPool
-    "Heat demands of all pools in zone to heat pool water" annotation (
+      final unit="W") if use_swimmingPools and use_idealHeaterPool and (ATot > 0
+     or zoneParam.VAir > 0)
+    "Heat demands of all pools in zone to heat pool water" annotation (Evaluate=true,
       Placement(transformation(extent={{100,-62},{120,-42}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
 
   Modelica.Blocks.Math.MultiSum sumPoolPPump(nu=numPools) if use_swimmingPools and ATot > 0
     "Sum up electriical energy consumption of the circulation pump of all swimming pools"
-    annotation (Placement(transformation(extent={{-38,-86},{-28,-76}})));
+    annotation (Evaluate=true,Placement(transformation(extent={{-38,-86},{-28,-76}})));
   Modelica.Blocks.Math.MultiSum sumPoolQHeat(nu=numPools) if use_swimmingPools
      and ATot > 0 and use_idealHeaterPool
     "Sum up heat demands of all swimming pools"
-    annotation (Placement(transformation(extent={{-38,-114},{-28,-104}})));
+    annotation (Evaluate=true,Placement(transformation(extent={{-38,-114},{-28,-104}})));
   Modelica.Blocks.Math.MultiSum sumPoolFreshWater(nu=numPools) if
     use_swimmingPools and ATot > 0 "Sum up fresh water demands of all swimming pools"
-    annotation (Placement(transformation(extent={{-34,-136},{-24,-126}})));
+    annotation (Evaluate=true,Placement(transformation(extent={{-34,-136},{-24,-126}})));
 
   Modelica.Blocks.Interfaces.RealInput openingHours if use_swimmingPools and
     ATot > 0
-         "Input profiles for opening hours" annotation (Placement(transformation(
+         "Input profiles for opening hours" annotation (Evaluate=true,Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
         origin={50,-100}),iconTransformation(
@@ -453,66 +453,67 @@ public
         origin={52,-84})));
 
   Modelica.Blocks.Interfaces.RealOutput PoolFreshWater if use_swimmingPools
-     and ATot > 0
-    annotation (Placement(transformation(extent={{100,-76},{120,-56}})));
+     and (ATot > 0 or zoneParam.VAir > 0)
+    annotation (Evaluate=true,Placement(transformation(extent={{100,-76},{120,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_b fromPool[numPools](redeclare final
       package Medium = MediumWater) if  use_swimmingPools and ATot > 0 and
     use_idealHeaterPool == false  "Outlet of heat exchanger for pool heating"
-                                                      annotation (Placement(transformation(
+                                                      annotation (Evaluate=true,Placement(transformation(
           extent={{-68,-108},{-52,-92}}), iconTransformation(extent={{-66,-100},
             {-50,-84}})));
   Modelica.Fluid.Interfaces.FluidPort_a toPool[numPools](redeclare final
       package Medium = MediumWater) if
                                      use_swimmingPools and ATot > 0 and
     use_idealHeaterPool == false "Inlet for heat exchanger for pool heating"
-                                                     annotation (Placement(transformation(
+                                                     annotation (Evaluate=true,Placement(transformation(
           extent={{-84,-108},{-68,-92}}), iconTransformation(extent={{-84,-108},
             {-68,-92}})));
 equation
     if use_swimmingPools and (ATot > 0) then
       for i in 1:numPools loop
-      connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-59.5,
+      connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Evaluate=true, Line(points={{-59.5,
               -50},{-56,-50},{-56,-64},{-54,-64},{-54,-72},{-54.8,-72},{-54.8,-71.51}},
                                                         color={0,0,127}));
-      connect(TSoil.y, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
+      connect(TSoil.y, indoorSwimmingPool[i].TSoil) annotation (Evaluate=true, Line(points={{43.4,22},
               {44,22},{44,-74.31},{-51.76,-74.31}}, color={0,0,127}));
-      connect(ROM.intGainsConv,indoorSwimmingPool[i].convPoolSurface)  annotation (Line(points={{86,78},
+      connect(ROM.intGainsConv,indoorSwimmingPool[i].convPoolSurface)  annotation (Evaluate=true, Line(points={{86,78},
               {10,78},{10,-71.72},{-61.12,-71.72}},                                                                                    color={
               191,0,0}));
-      connect(indoorSwimmingPool[i].radPoolSurface, ROM.intGainsRad)   annotation (Line(points={{-65.44,-71.72},{-65.44,-70},{-72,-70},{-72,6},
+      connect(indoorSwimmingPool[i].radPoolSurface, ROM.intGainsRad)   annotation (Evaluate=true, Line(points={{-65.44,-71.72},{-65.44,-70},{-72,-70},{-72,6},
               {86,6},{86,82}},
             color={95,95,95}));
-      connect(indoorSwimmingPool[i].TAir, TAir) annotation (Line(points={{-57.68,
+      connect(indoorSwimmingPool[i].TAir, TAir) annotation (Evaluate=true, Line(points={{-57.68,
               -71.51},{-16,-71.51},{-16,-62},{-4,-62},{-4,-6},{94,-6},{94,80},{110,
               80}},                        color={0,0,127}));
-      connect(indoorSwimmingPool[i].PPool,sumPoolPPump. u[i]) annotation (Line(points={{-51.2,
+      connect(indoorSwimmingPool[i].PPool,sumPoolPPump. u[i]) annotation (Evaluate=true, Line(points={{-51.2,
               -82.64},{-38,-82.64},{-38,-81}},                 color={0,0,127}));
-      connect(indoorSwimmingPool[i].MFlowFreshWater,sumPoolFreshWater. u[i]) annotation (Line(points={{-51.2,
+      connect(indoorSwimmingPool[i].MFlowFreshWater,sumPoolFreshWater. u[i]) annotation (Evaluate=true, Line(points={{-51.2,
               -85.02},{-46,-85.02},{-46,-130},{-34,-130},{-34,-131}},
             color={0,0,127}));
-      connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (
+      connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (Evaluate=true,
           Line(points={{-68.08,-73.19},{-78,-73.19},{-78,-88},{48,-88},{48,-100},
               {50,-100}},color={0,0,127}));
-      connect(indoorSwimmingPool[i].T_Pool, ROM.TLat_flow[i + 1]) annotation (
+      connect(indoorSwimmingPool[i].T_Pool, ROM.TLat_flow[i + 1]) annotation (Evaluate=true,
           Line(points={{-51.2,-72.56},{-51.2,-68},{-14,-68},{-14,-42},{30,-42},
               {30,64},{37.2,64},{37.2,64.4}}, color={0,0,127}));
-      connect(indoorSwimmingPool[i].QEvap, ROM.QLat_flow[i + 1]) annotation (
+      connect(indoorSwimmingPool[i].QEvap, ROM.QLat_flow[i + 1]) annotation (Evaluate=true,
           Line(points={{-51.2,-78.16},{-51.2,-70},{-22,-70},{-22,-62},{-4,-62},{
-              -4,-6},{32,-6},{32,59.6},{37,59.6}},
+              -4,-6},{32,-6},{32,59.4},{37,59.4}},
             color={0,0,127}));
-      connect(ROM.TAir, indoorSwimmingPool[i].TAir) annotation (Line(points={{87,90},
+      connect(ROM.TAir, indoorSwimmingPool[i].TAir) annotation (Evaluate=true, Line(points={{87,90},
           {98,90},{98,-2},{36,-2},{36,-38},{-57.68,-38},{-57.68,-71.51}}, color=
          {0,0,127}));
-      connect(indoorSwimmingPool[i].persons, intGains[1]) annotation (Line(points={{-68.08,
+      connect(indoorSwimmingPool[i].persons, intGains[1]) annotation (Evaluate=true, Line(points={{-68.08,
               -75.85},{-74,-75.85},{-74,-88},{80,-88},{80,-113.333}},
                                                               color={0,0,127}));
       if use_idealHeaterPool then
-              connect(indoorSwimmingPool[i].QPool,sumPoolQHeat. u[i]) annotation (Line(points={{-51.2,
+              connect(indoorSwimmingPool[i].QPool,sumPoolQHeat. u[i]) annotation (Evaluate=true, Line(points={{-51.2,
                 -80.26},{-42,-80.26},{-42,-109},{-38,-109}},
                                                         color={0,0,127}));
       else
-          connect(fromPool[i], indoorSwimmingPool[i].fromPool);
-          connect(toPool[i], indoorSwimmingPool[i].toPool);
+          connect(fromPool[i], indoorSwimmingPool[i].fromPool) annotation(Evaluate=true);
+          connect(toPool[i], indoorSwimmingPool[i].toPool)
+                                                          annotation(Evaluate=true);
       end if;
     end for;
     connect(sumPoolPPump.y, PPool) annotation (Line(points={{-27.15,-81},{35.425,
@@ -781,12 +782,12 @@ equation
 
   if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_AirExchange then
     connect(SumQLat2_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,
-            -62},{-4,-62},{-4,4},{32,4},{32,59.6},{37,59.6}},
+            -62},{-4,-62},{-4,4},{32,4},{32,59.4},{37,59.4}},
                                                             color={0,0,127}));
   end if;
   if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and not use_AirExchange then
     connect(SumQLat1_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,
-            -62},{-4,-62},{-4,4},{32,4},{32,59.6},{37,59.6}},
+            -62},{-4,-62},{-4,4},{32,4},{32,59.4},{37,59.4}},
                                                             color={0,0,127}));
   end if;
   connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,-6},
