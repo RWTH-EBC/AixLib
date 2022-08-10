@@ -2,8 +2,8 @@ within AixLib.Fluid.Pools.Example;
 model IndoorSwimmingPool
     extends Modelica.Icons.Example;
   AixLib.Fluid.Pools.IndoorSwimmingPool                indoorSwimmingPool2_1(poolParam=
-       AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(
-        use_idealHeatExchanger=false),redeclare package WaterMedium =
+       DataBase.Pools.TypesOfIndoorSwimmingPools.SwimmerPool(),
+                                      redeclare package WaterMedium =
         WaterMedium)
     annotation (Placement(transformation(extent={{-36,-36},{32,38}})));
 
@@ -40,11 +40,11 @@ model IndoorSwimmingPool
         WaterMedium,
     m_flow=150,
     T=293.15,                                    nPorts=1) if
-    indoorSwimmingPool2_1.poolParam.use_idealHeatExchanger == false
+    indoorSwimmingPool2_1.use_idealHeater == false
     annotation (Placement(transformation(extent={{-88,-88},{-68,-66}})));
   AixLib.Fluid.Sources.Boundary_pT bou(redeclare package Medium =
         WaterMedium,
-    p=200000,                          nPorts=1) if indoorSwimmingPool2_1.poolParam.use_idealHeatExchanger
+    p=200000,                          nPorts=1) if indoorSwimmingPool2_1.use_idealHeater
      == false
     annotation (Placement(transformation(extent={{-90,-48},{-70,-28}})));
 equation
