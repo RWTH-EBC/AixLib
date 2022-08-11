@@ -20,9 +20,10 @@ equation
   connect(min_X.y, X_intern);
   connect(pSat.pSat, humRat.p_w)
     annotation (Line(points={{-3,36},{7,36}},      color={0,0,127}));
-  connect(T_set, pSat.TSat) annotation (Line(points={{0,110},{0,60},{-34,60},{-34,36},{-25,36}}, color={0,0,127}));
   connect(humRat.X_w, min_X.u2) annotation (Line(points={{29,36},{36,36},{36,56.4},{48.8,56.4}}, color={0,0,127}));
   connect(X_airIn, min_X.u1) annotation (Line(points={{-120,10},{-62,10},{-62,63.6},{48.8,63.6}}, color={0,0,127}));
+  connect(min_T.y, pSat.TSat) annotation (Line(points={{-35.4,74},{-30,74},{-30,
+          36},{-25,36}}, color={0,0,127}));
   annotation (Icon(graphics={
         Line(
           points={{100,94},{-100,-94}},

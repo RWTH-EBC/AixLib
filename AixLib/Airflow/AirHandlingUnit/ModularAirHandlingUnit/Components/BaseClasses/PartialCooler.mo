@@ -18,6 +18,7 @@ partial model PartialCooler
   // Variables
   Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
   Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+  Modelica.SIunits.SpecificEnthalpy h_wat "specific enthalpy of extracted water";
 
   Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
   Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
@@ -103,7 +104,7 @@ equation
   mb_flow = m_flow_dryairIn * (X_airIn - X_airOut); // condensate
 
   // heat flows
-  Q_flow = (m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut);
+  Q_flow = m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut - mb_flow * h_wat;
   Q = Q_flow;
   if not use_T_set then
     Q_flow = u_intern * Q_flow_nominal;
@@ -116,6 +117,7 @@ equation
   // sepcific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
   h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
+  h_wat = c_wat * (T_airOut - 273.15);
 
   partialPressureDrop.dp = dp;
 
