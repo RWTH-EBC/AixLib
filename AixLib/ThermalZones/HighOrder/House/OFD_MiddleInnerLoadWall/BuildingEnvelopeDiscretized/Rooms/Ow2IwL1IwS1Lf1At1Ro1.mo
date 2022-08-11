@@ -93,9 +93,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
     windowarea=0,
     withDoor=false,
     door_height=0,
-    door_width=0,
-    final use_condLayers=true)
-                     annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
+    door_width=0)
+    annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     final energyDynamics=energyDynamicsWalls,
     final calcMethodOut=calcMethodOut,
@@ -119,12 +118,11 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=withWindow2,
     withDoor=withDoor2,
     wall_length=room_width_long,
-    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
+    wall_height=0.5*(room_height_long + room_height_short + room_width_short/
+        room_width_long*(room_height_long - room_height_short)),
     ISOrientation=1,
     U_door=U_door_OD2,
-    eps_door=eps_door_OD2,
-    final use_condLayers=true)
-                           annotation (Placement(transformation(
+    eps_door=eps_door_OD2) annotation (Placement(transformation(
         origin={-29,59},
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270)));
@@ -149,9 +147,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_height_long,
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={61,4.00001},
         extent={{-4.99999,-30},{5,30}},
         rotation=180)));
@@ -174,11 +170,10 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final wallPar=wallTypes.IW_vert_half_a,
     outside=false,
     wall_length=room_width_long,
-    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
+    wall_height=0.5*(room_height_long + room_height_short + room_width_short/
+        room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={32,-59},
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
@@ -204,9 +199,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     wall_height=room_width_short,
     withWindow=false,
     withDoor=false,
-    ISOrientation=3,
-    final use_condLayers=true)
-                     annotation (Placement(transformation(
+    ISOrientation=3) annotation (Placement(transformation(
         origin={22,60},
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
@@ -232,8 +225,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     each wall_height=room_width_long,
     each withWindow=false,
     each withDoor=false,
-    each ISOrientation=2,
-    each final use_condLayers=not use_UFH)             annotation (Placement(transformation(
+    each ISOrientation=2) annotation (Placement(transformation(
         origin={-27,-60},
         extent={{-2.00002,-11},{2.00001,11}},
         rotation=90)));
@@ -260,9 +252,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     door_width=0,
     wall_height=roof_width,
     withWindow=withWindow3,
-    windowarea=windowarea_RO,
-    final use_condLayers=true)
-                         annotation (Placement(transformation(
+    windowarea=windowarea_RO) annotation (Placement(transformation(
         origin={55,59},
         extent={{-2.99995,-17},{2.99997,17}},
         rotation=270)));

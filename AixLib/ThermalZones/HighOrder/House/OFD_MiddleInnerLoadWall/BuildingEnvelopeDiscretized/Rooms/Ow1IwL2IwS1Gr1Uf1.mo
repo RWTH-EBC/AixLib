@@ -77,8 +77,8 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     withWindow=withWindow1,
     withDoor=withDoor1,
     U_door=U_door_OD1,
-    eps_door=eps_door_OD1,
-    final use_condLayers=true)             annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
+    eps_door=eps_door_OD1)
+    annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     final energyDynamics=energyDynamicsWalls,
@@ -101,9 +101,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={23,59},
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
@@ -128,9 +126,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={61,23},
         extent={{-3,-15},{3,15}},
         rotation=180)));
@@ -155,9 +151,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={25,-59},
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
@@ -183,9 +177,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
-    each ISOrientation=3,
-    each final use_condLayers=not use_UFH)
-                     annotation (Placement(transformation(
+    each ISOrientation=3) annotation (Placement(transformation(
         origin={-31,60},
         extent={{2,-9},{-2,9}},
         rotation=90)));
@@ -211,8 +203,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
-    each ISOrientation=2,
-    each final use_condLayers=not use_UFH) annotation (Placement(transformation(
+    each ISOrientation=2) annotation (Placement(transformation(
         origin={-27,-60},
         extent={{-2.00002,-11},{2.00001,11}},
         rotation=90)));
@@ -237,9 +228,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false,
-    final use_condLayers=true)
-                    annotation (Placement(transformation(
+    withDoor=false) annotation (Placement(transformation(
         origin={61,-17},
         extent={{-3,-15},{3,15}},
         rotation=180)));
