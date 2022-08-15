@@ -4,7 +4,7 @@ package AixLib
   annotation (
   uses(
     NcDataReader2(version="2.5.0"),
-    SDF(version="0.4.1"),
+    SDF(version="0.4.2"),
     Modelica_DeviceDrivers(version="1.7.0"),
     ObsoleteModelica4(version="4.0.0"),
     Modelica(version="4.0.0")),
