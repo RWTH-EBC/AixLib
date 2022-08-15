@@ -220,20 +220,20 @@ equation
           11.1782},{-22,11.1782},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,
           -51.475}},                         color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.heatingToRooms[4], underfloorHeatingSystem.heatCeiling[9]) annotation (Line(points={{-14,
-          9.65091},{-22,9.65091},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,
+          9.65091},{-22,9.65091},{-22,8},{-18,8},{-18,-72},{-56,-72},{-56,
           -65.5917}},                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.heatingToRooms[1], underfloorHeatingSystem.heatCeiling[6]) annotation (Line(points={{-14,
-          8.88727},{-22,8.88727},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,
+          8.88727},{-22,8.88727},{-22,8},{-6,8},{-6,-72},{-56,-72},{-56,
           -65.9417}},                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.heatingToRooms[2], underfloorHeatingSystem.heatCeiling[7]) annotation (Line(points={{-14,
-          9.14182},{-22,9.14182},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,-65.825}},
-                                             color={191,0,0}));
+          9.14182},{-22,9.14182},{-22,8},{-18,8},{-18,-72},{-56,-72},{-56,
+          -65.825}},                         color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.heatingToRooms[3], underfloorHeatingSystem.heatCeiling[8]) annotation (Line(points={{-14,
-          9.39636},{-22,9.39636},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,
+          9.39636},{-22,9.39636},{-22,8},{-6,8},{-6,-72},{-56,-72},{-56,
           -65.7083}},                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.heatingToRooms[5], underfloorHeatingSystem.heatCeiling[10]) annotation (Line(points={{-14,
-          9.90545},{-22,9.90545},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,-65.475}},
-                                             color={191,0,0}));
+          9.90545},{-18,9.90545},{-18,4},{-14,4},{-14,-72},{-56,-72},{-56,
+          -65.475}},                         color={191,0,0}));
 
   for i in 1:5 loop
     connect(radConvToSingle[i].heatFloor, underfloorHeatingSystem.heatCeiling[i])
