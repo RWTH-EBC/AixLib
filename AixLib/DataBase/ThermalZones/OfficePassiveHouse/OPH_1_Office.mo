@@ -80,6 +80,8 @@ record OPH_1_Office "Office zone of office building"
     TNHeat=1,
     HeaterOn=true,
     hCool=0,
+    heaLoadFacOut=Modelica.Constants.eps,
+    heaLoadFacGrd=Modelica.Constants.eps,
     lCool=-1,
     KRCool=1000,
     TNCool=1,
@@ -87,6 +89,7 @@ record OPH_1_Office "Office zone of office building"
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
+
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.

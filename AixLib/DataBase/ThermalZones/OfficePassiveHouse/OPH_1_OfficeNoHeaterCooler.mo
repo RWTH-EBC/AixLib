@@ -81,6 +81,8 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     HeaterOn=false,
     hCool=0,
     lCool=-1,
+    heaLoadFacOut=Modelica.Constants.eps,
+    heaLoadFacGrd=Modelica.Constants.eps,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
