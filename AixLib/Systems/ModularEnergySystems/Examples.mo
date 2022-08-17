@@ -10,7 +10,7 @@ package Examples "Holds examples for the modular energy system units"
         nPorts=2),
       bou(use_T_in=true, nPorts=1),
       TSpeicher(y=70 + 273.15),
-      sine(freqHz=1/(12*3600), offset=-7000),
+      sine(f=1/(12*3600), offset=-7000),
       PLR(y=0.6));
     Modules.ModularHeatPump.ModularHeatPumpNew
                                             modularHeatPumpNew(
@@ -190,9 +190,9 @@ package Examples "Holds examples for the modular energy system units"
 
     package MediumWater = AixLib.Media.Water;
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0) = 0.5
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0) = 0.5
       "Nominal mass flow rate";
-    parameter Modelica.SIunits.Volume V_Water = 0.1;
+    parameter Modelica.Units.SI.Volume V_Water = 0.1;
     parameter Boolean Boiler=true;
 
     Fluid.Sources.Boundary_pT
@@ -240,7 +240,7 @@ package Examples "Holds examples for the modular energy system units"
           origin={-34,-74})));
     Modelica.Blocks.Sources.Sine sine(
       amplitude=-30000,
-      freqHz=1/3600,
+      f=1/3600,
       offset=-50000)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=180,
@@ -262,14 +262,14 @@ package Examples "Holds examples for the modular energy system units"
       annotation (Placement(transformation(extent={{-62,42},{-50,62}})));
     Modelica.Blocks.Sources.RealExpression PLR(y=1)
       annotation (Placement(transformation(extent={{-60,58},{-48,78}})));
-    Interfaces.BoilerControlBus          boilerControlBus if  Boiler
+    Interfaces.BoilerControlBus          boilerControlBus  if Boiler
       annotation (Placement(transformation(extent={{44,22},{64,42}})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
       annotation (Placement(transformation(extent={{62,-62},{82,-42}})));
   equation
     connect(senTFlow.port_b, vol.ports[1]) annotation (Line(points={{44,-40},{44,-60},
-            {-1.6,-60}}, color={0,127,255}));
-    connect(vol.ports[2], senTReturn.port_a) annotation (Line(points={{1.6,-60},{-60,
+            {-0.8,-60}}, color={0,127,255}));
+    connect(vol.ports[2], senTReturn.port_a) annotation (Line(points={{0.8,-60},{-60,
             -60},{-60,-44}}, color={0,127,255}));
     connect(sine.y,heater. Q_flow)
       annotation (Line(points={{47,-90},{-34,-90},{-34,-84}},
@@ -310,7 +310,7 @@ package Examples "Holds examples for the modular energy system units"
             51.8},{0.2,51.8}},          color={0,0,127}));
     connect(PLR.y,switch1. u1) annotation (Line(points={{-47.4,68},{0.2,68},{0.2,66.2}},
                            color={0,0,127}));
-    connect(temperatureSensor.T, onOffController.u) annotation (Line(points={{82,-52},
+    connect(temperatureSensor.T, onOffController.u) annotation (Line(points={{83,-52},
             {92,-52},{92,18},{-80,18},{-80,24},{-52,24}}, color={0,0,127}));
     connect(vol.heatPort, temperatureSensor.port) annotation (Line(points={{-8,-52},
             {-8,-68},{62,-68},{62,-52}}, color={191,0,0}));

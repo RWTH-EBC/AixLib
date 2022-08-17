@@ -5,9 +5,9 @@ model ModularBoiler_Regulation_wPump_wFeedback
 
   parameter Boolean hasFeedback=false "circuit has Feedback"
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2] = {0, 0} "Nominal additional pressure drop e.g. for distributor"
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal[2] = {0, 0} "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
   parameter Boolean use_advancedControl=true "Selection between two position control and flow temperature control, if true=flow temperature control is active";
   parameter Boolean severalHeatCircuits=true "Selection between using several circuit and only one heat circuits";

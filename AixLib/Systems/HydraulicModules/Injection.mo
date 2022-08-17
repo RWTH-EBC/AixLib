@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
@@ -6,12 +6,11 @@ model Injection "Injection circuit with pump and three way valve"
     annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
 
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
 
-  Fluid.Actuators.Valves.ThreeWayTable                        valve(
-    final massDynamics=massDynamics,
+  Fluid.Actuators.Valves.ThreeWayTable valve(
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -24,9 +23,8 @@ model Injection "Injection circuit with pump and three way valve"
     Kv=Kv,
     dpFixed_nominal={10,10},
     flowCharacteristics1=valveCharacteristic.a_ab,
-    flowCharacteristics3=valveCharacteristic.b_ab)
-                                 annotation (Dialog(enable=true, group="Actuators"),
-      Placement(transformation(
+    flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(enable=
+          true, group="Actuators"), Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={-40,-60})));

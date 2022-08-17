@@ -17,10 +17,10 @@ model Boiler "Simple boiler model"
     "Parameters for Boiler" annotation (Dialog(tab="General", group=
           "Boiler type"), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Temperature T_start=
-      Modelica.SIunits.Conversions.from_degC(50)
-    "Initial temperature of heat source" annotation (Evaluate=true,
-      Dialog(tab="General", group="Simulation"));
+  parameter Modelica.Units.SI.Temperature T_start=
+      Modelica.Units.Conversions.from_degC(50)
+    "Initial temperature of heat source"
+    annotation (Evaluate=true, Dialog(tab="General", group="Simulation"));
 
   /* *******************************************************************
       Components
@@ -32,7 +32,7 @@ model Boiler "Simple boiler model"
         rotation=180,
         origin={-3.25,-30})));
 
-  Modelica.Blocks.Tables.CombiTable1D tableEfficiency(
+  Modelica.Blocks.Tables.CombiTable1Dv tableEfficiency(
     tableOnFile=false,
     table=paramBoiler.eta,
     columns={2},

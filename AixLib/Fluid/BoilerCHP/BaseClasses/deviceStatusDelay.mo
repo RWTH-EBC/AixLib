@@ -13,7 +13,7 @@ model deviceStatusDelay
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{242,-4},{262,16}})));
 
-  parameter Modelica.SIunits.Time thresholdTimer
+  parameter Modelica.Units.SI.Time thresholdTimer
     "Time after which the device can be turned off again";
   Modelica.Blocks.Interfaces.BooleanInput
                                        u

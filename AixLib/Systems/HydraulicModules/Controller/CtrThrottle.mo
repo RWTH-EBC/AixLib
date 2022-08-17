@@ -1,17 +1,20 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottle "Controller for unmixed circuit with valve"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
+  parameter Modelica.Units.SI.Temperature TflowSet=289.15
+    "Flow temperature set point of consumer";
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Units.SI.Time Td(min=0) = 4
+    "Time constant of Derivative block";
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0) = 2000
+    "Rpm of the Pump";
+  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation(Dialog(group="PID"));
+    annotation (Dialog(group="PID"));
   parameter Boolean reverseAction = true
     "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0

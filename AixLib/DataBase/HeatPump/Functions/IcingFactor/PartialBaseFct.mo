@@ -1,10 +1,14 @@
-within AixLib.DataBase.HeatPump.Functions.IcingFactor;
+﻿within AixLib.DataBase.HeatPump.Functions.IcingFactor;
 partial function PartialBaseFct "Base function for all icing factor functions"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ThermodynamicTemperature T_flow_ev "Evaporator supply temperature";
-  input Modelica.SIunits.ThermodynamicTemperature T_ret_ev "Evaporator return temperature";
-  input Modelica.SIunits.ThermodynamicTemperature T_oda "Outdoor air temperature";
-  input Modelica.SIunits.MassFlowRate m_flow_ev "Mass flow rate at the evaporator";
+  input Modelica.Units.SI.ThermodynamicTemperature T_flow_ev
+    "Evaporator supply temperature";
+  input Modelica.Units.SI.ThermodynamicTemperature T_ret_ev
+    "Evaporator return temperature";
+  input Modelica.Units.SI.ThermodynamicTemperature T_oda
+    "Outdoor air temperature";
+  input Modelica.Units.SI.MassFlowRate m_flow_ev
+    "Mass flow rate at the evaporator";
   output Real iceFac(min=0, max=1) "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting.";
 
   annotation (Documentation(revisions="<html><ul>

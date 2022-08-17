@@ -12,9 +12,9 @@ model ModularBoiler_wPump_wFeedback
     annotation (Placement(transformation(extent={{-28,48},{26,80}})));
   parameter Boolean hasFeedback=false "circuit has Feedback"
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2] = {0, 0} "Nominal additional pressure drop e.g. for distributor"
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal[2] = {0, 0} "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
 
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(

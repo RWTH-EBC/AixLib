@@ -1,1 +1,23 @@
-stages:            - deploy            pages:    stage: deploy    before_script:        - apt-get update -y        - apt-get install zip unzip -y    script:        - mkdir -p public/$CI_COMMIT_REF_NAME        - cp -r $CI_COMMIT_REF_NAME/* public/$CI_COMMIT_REF_NAME            artifacts:        paths:         - public                 expire_in: 7h    when: always    allow_failure: true 
+stages:        
+    - deploy    
+        
+pages:
+    stage: deploy
+    before_script:
+        - apt-get update -y
+        - apt-get install zip unzip -y
+    script:
+        - mkdir -p public/$CI_COMMIT_REF_NAME
+        - cp -r $CI_COMMIT_REF_NAME/* public/$CI_COMMIT_REF_NAME
+        
+    artifacts:
+        paths:
+         - public
+         
+        expire_in: 7h
+    except:
+        refs:
+            - master
+            - development
+    when: always
+    allow_failure: true 

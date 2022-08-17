@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 model OnOffHP "Controller gives full speed or stop signal depending on temperature hysteresis"
   extends AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";

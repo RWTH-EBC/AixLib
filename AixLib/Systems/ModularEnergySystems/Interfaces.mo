@@ -10,7 +10,7 @@ extends Modelica.Icons.InterfacesPackage;
 
     Boolean Shutdown "true: force shutdown";
 
-    Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
+    Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end VapourCompressionMachineControleBusModular;
@@ -20,16 +20,16 @@ extends Modelica.Icons.InterfacesPackage;
     extends Modelica.Icons.SignalBus;
 
   Boolean isOn "Switches Controller on and off";
-  Modelica.SIunits.Temperature TAmbient "Ambient air temperature";
+  Modelica.Units.SI.Temperature TAmbient "Ambient air temperature";
   Boolean switchToNightMode "Switches the boiler to night mode";
-  Modelica.SIunits.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
+  Modelica.Units.SI.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
 
   // BoilerNotManufacturer
   Real PLR "Part load ratio";
-  Modelica.SIunits.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
-  Modelica.SIunits.Temperature TCold "Sensor output TCold";
-  Modelica.SIunits.Temperature THot "Sensor output THot";
-  Modelica.SIunits.Power EnergyDemand "Energy Demand";
+  Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
+  Modelica.Units.SI.Temperature TCold "Sensor output TCold";
+  Modelica.Units.SI.Temperature THot "Sensor output THot";
+  Modelica.Units.SI.Power EnergyDemand "Energy Demand";
 
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),

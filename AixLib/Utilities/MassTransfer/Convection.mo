@@ -1,8 +1,8 @@
 within AixLib.Utilities.MassTransfer;
 model Convection
   "Lumped element for mass convection (m_flow = Gc*dX)"
-  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate from solid -> fluid";
-  Modelica.SIunits.PartialPressure dp "= solid.p - fluid.p";
+  Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate from solid -> fluid";
+  Modelica.Units.SI.PartialPressure dp "= solid.p - fluid.p";
   Modelica.Blocks.Interfaces.RealInput Gc(unit="kg/(s.Pa)")
     "Signal representing the convective mass transfer coefficient in [kg/s]"
     annotation (Placement(transformation(

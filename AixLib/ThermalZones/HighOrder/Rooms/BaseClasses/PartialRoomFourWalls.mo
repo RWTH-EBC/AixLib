@@ -7,14 +7,15 @@ partial model PartialRoomFourWalls
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
     room_V=room_length*room_width*room_height);
 
-  parameter Modelica.SIunits.Length room_length=6 "length"
+  parameter Modelica.Units.SI.Length room_length=6 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.7 "height"
+  parameter Modelica.Units.SI.Height room_height=2.7 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=8 "width"
+  parameter Modelica.Units.SI.Length room_width=8 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area " annotation (Dialog(
+  parameter Modelica.Units.SI.Area Win_Area=12 "Window area " annotation (
+      Dialog(
       group="Windows",
       descriptionLabel=true,
       enable=withWindow1));

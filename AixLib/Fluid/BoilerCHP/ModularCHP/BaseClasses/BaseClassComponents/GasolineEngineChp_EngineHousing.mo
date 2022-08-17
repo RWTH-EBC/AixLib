@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 class GasolineEngineChp_EngineHousing
   "Engine housing as a simple two layer wall."
 
@@ -8,7 +8,7 @@ class GasolineEngineChp_EngineHousing
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Thickness dInn=0.005
+  parameter Modelica.Units.SI.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration properties"));
   parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData
@@ -16,55 +16,53 @@ class GasolineEngineChp_EngineHousing
     "Thermal engine material data for calculations (most common is cast iron)"
     annotation (choicesAllMatching=true, Dialog(tab="Structure", group=
           "Material Properties"));
-  constant Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
-    "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  constant Modelica.SIunits.Density rhoEngWall=EngMatData.rhoEngWall
-    "Density of the the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  constant Modelica.SIunits.SpecificHeatCapacity c=EngMatData.c
-    "Specific heat capacity of the cylinder wall material" annotation (Dialog(tab="Structure", group="Material Properties"));
+  constant Modelica.Units.SI.ThermalConductivity lambda=EngMatData.lambda
+    "Thermal conductivity of the engine block material"
+    annotation (Dialog(tab="Structure", group="Material Properties"));
+  constant Modelica.Units.SI.Density rhoEngWall=EngMatData.rhoEngWall
+    "Density of the the engine block material"
+    annotation (Dialog(tab="Structure", group="Material Properties"));
+  constant Modelica.Units.SI.SpecificHeatCapacity c=EngMatData.c
+    "Specific heat capacity of the cylinder wall material"
+    annotation (Dialog(tab="Structure", group="Material Properties"));
   constant Real z
     "Number of engine cylinders"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  constant Modelica.SIunits.Thickness dCyl
-    "Engine cylinder diameter"
+  constant Modelica.Units.SI.Thickness dCyl "Engine cylinder diameter"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  constant Modelica.SIunits.Thickness hStr
-    "Engine stroke"
+  constant Modelica.Units.SI.Thickness hStr "Engine stroke"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
   constant Real eps
     "Engine compression ratio"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.Mass mEng
-    "Total engine mass"
+  parameter Modelica.Units.SI.Mass mEng "Total engine mass"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+  parameter Modelica.Units.SI.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
-   annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.Temperature T_Amb=298.15
-    "Ambient temperature"
+    annotation (Dialog(tab="Thermal"));
+  parameter Modelica.Units.SI.Temperature T_Amb=298.15 "Ambient temperature"
     annotation (Dialog(tab="Thermal"));
   Real nEng
     "Current engine speed"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  Modelica.SIunits.ThermalConductance CalT_Exh
- "Calculation variable for the temperature of the exhaust gas";
-  Modelica.SIunits.Temperature T_Com
+  Modelica.Units.SI.ThermalConductance CalT_Exh
+    "Calculation variable for the temperature of the exhaust gas";
+  Modelica.Units.SI.Temperature T_Com
     "Calculated maximum combustion temperature inside the engine"
-   annotation (Dialog(tab="Thermal"));
-  Modelica.SIunits.Temperature T_CylWall
-    "Temperature of cylinder wall";
+    annotation (Dialog(tab="Thermal"));
+  Modelica.Units.SI.Temperature T_CylWall "Temperature of cylinder wall";
  /* Modelica.SIunits.Temperature T_LogMeanCool
  "Mean logarithmic coolant temperature" annotation (Dialog(tab="Thermal")); */
-  Modelica.SIunits.Temperature T_Exh
-    "Inlet temperature of exhaust gas" annotation (Dialog(group="Thermal"));
-  Modelica.SIunits.Temperature T_ExhPowUniOut
-    "Outlet temperature of exhaust gas"
-    annotation (Dialog(tab="Thermal"));
+  Modelica.Units.SI.Temperature T_Exh "Inlet temperature of exhaust gas"
+    annotation (Dialog(group="Thermal"));
+  Modelica.Units.SI.Temperature T_ExhPowUniOut
+    "Outlet temperature of exhaust gas" annotation (Dialog(tab="Thermal"));
   type RotationSpeed=Real(final unit="1/s", min=0);
-  Modelica.SIunits.MassFlowRate m_Exh
-    "Mass flow rate of exhaust gas" annotation (Dialog(tab="Thermal"));
-  Modelica.SIunits.SpecificHeatCapacity meanCpExh
-    "Mean specific heat capacity of the exhaust gas" annotation (Dialog(tab="Thermal"));
+  Modelica.Units.SI.MassFlowRate m_Exh "Mass flow rate of exhaust gas"
+    annotation (Dialog(tab="Thermal"));
+  Modelica.Units.SI.SpecificHeatCapacity meanCpExh
+    "Mean specific heat capacity of the exhaust gas"
+    annotation (Dialog(tab="Thermal"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb
     "Heat port to ambient"                                     annotation (
@@ -141,30 +139,31 @@ class GasolineEngineChp_EngineHousing
         origin={0,122})));
 
 protected
-  constant Modelica.SIunits.Area A_WInn=z*(Modelica.Constants.pi*dCyl*(dCyl/2 + hStr*(1 + 1/(eps - 1))))
+  constant Modelica.Units.SI.Area A_WInn=z*(Modelica.Constants.pi*dCyl*(dCyl/2
+       + hStr*(1 + 1/(eps - 1))))
     "Area of heat transporting surface from cylinder wall to outer engine block"
     annotation (Dialog(tab="Structure"));
-  parameter Modelica.SIunits.Mass mEngWall=A_WInn*rhoEngWall*dInn
+  parameter Modelica.Units.SI.Mass mEngWall=A_WInn*rhoEngWall*dInn
     "Calculated mass of cylinder wall between combustion chamber and cooling circle"
     annotation (Dialog(tab="Structure"));
-  parameter Modelica.SIunits.Mass mEngBlo=mEng - mEngWall
+  parameter Modelica.Units.SI.Mass mEngBlo=mEng - mEngWall
     "Calculated mass of the remaining engine body"
     annotation (Dialog(tab="Structure"));
-  parameter Modelica.SIunits.Thickness dOut=mEngBlo/A_WInn/rhoEngWall
+  parameter Modelica.Units.SI.Thickness dOut=mEngBlo/A_WInn/rhoEngWall
     "Thickness of outer wall of the remaining engine body"
     annotation (Dialog(tab="Structure"));
-  parameter Modelica.SIunits.HeatCapacity CEngWall=dInn*A_WInn*rhoEngWall*c
+  parameter Modelica.Units.SI.HeatCapacity CEngWall=dInn*A_WInn*rhoEngWall*c
     "Heat capacity of cylinder wall between combustion chamber and cooling circle"
     annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.HeatCapacity CEngBlo=dOut*A_WInn*rhoEngWall*c
+  parameter Modelica.Units.SI.HeatCapacity CEngBlo=dOut*A_WInn*rhoEngWall*c
     "Heat capacity of the remaining engine body"
     annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.ThermalConductance GInnWall=lambda*A_WInn/dInn
-   "Thermal conductance of the inner engine wall"
+  parameter Modelica.Units.SI.ThermalConductance GInnWall=lambda*A_WInn/dInn
+    "Thermal conductance of the inner engine wall"
     annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.ThermalConductance GEngBlo=lambda*A_WInn/dOut
-   "Thermal conductance of the remaining engine body"
-   annotation (Dialog(tab="Thermal"));
+  parameter Modelica.Units.SI.ThermalConductance GEngBlo=lambda*A_WInn/dOut
+    "Thermal conductance of the remaining engine body"
+    annotation (Dialog(tab="Thermal"));
 
 equation
 

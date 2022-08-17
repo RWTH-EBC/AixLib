@@ -5,9 +5,9 @@ model ModularBoiler_multiport
   // Feedback
   parameter Boolean hasFeedback=false   "circuit has Feedback"
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
-  parameter Modelica.SIunits.PressureDifference dp_Valve=10   "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  parameter Modelica.Units.SI.PressureDifference dp_Valve=10   "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2]={10,10}    "Nominal additional pressure drop e.g. for distributor"
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal[2]={10,10}    "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
   // Hierarchical Control
   parameter Boolean use_advancedControl      "Selection between two position control and advanced control, if true=advanced control is active"
@@ -23,10 +23,10 @@ model ModularBoiler_multiport
           use_advancedControl or severalHeatCircuits));
   final parameter Boolean severalHeatCircuits=if k > 1 then true else false "Selection between using several circuit and only one heat circuits";
   //Admixture
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[k] = fill(0.3, k)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCon[k] = fill(0.3, k)
     "Nominal mass flow rate for the individual consumers"
      annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
-  parameter Modelica.SIunits.PressureDifference dp_nominalCon[k] = fill(10, k)
+  parameter Modelica.Units.SI.PressureDifference dp_nominalCon[k] = fill(10, k)
     "Pressure drop at nominal conditions for the individual consumers"
      annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
   // Control
@@ -54,26 +54,26 @@ model ModularBoiler_multiport
     annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));
   parameter Real declination=1 "Declination of curve"
     annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
-  parameter Modelica.SIunits.Temperature Tref=333.15
+  parameter Modelica.Units.SI.Temperature Tref=333.15
     "Reference Temperature for the on off controller"
      annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));
   parameter Real day_hour=6 "Hour of day in which day mode is enabled"
     annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
   parameter Real night_hour=22 "Hour of night in which night mode is enabled"
     annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K")=0
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset(displayUnit="K")=0
     "Offset to heating curve temperature"
      annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
-  parameter Modelica.SIunits.Temperature TBoiler=348.15
+  parameter Modelica.Units.SI.Temperature TBoiler=348.15
     "Fix boiler temperature for the admixture"
      annotation(Dialog(enable=use_advancedControl and severalHeatCircuits and not TVar,tab="Control", group="Admixture control"));
-  parameter Modelica.SIunits.Temperature TMax=348.15
+  parameter Modelica.Units.SI.Temperature TMax=348.15
     "Maximum temperature, at which the system is shut down"
      annotation(Dialog(tab="Control", group="Security-related systems"));
-  parameter Modelica.SIunits.Time time_minOff=900
+  parameter Modelica.Units.SI.Time time_minOff=900
     "Time after which the device can be turned on again"
      annotation(Dialog(tab="Control", group="Manual control"));
-  parameter Modelica.SIunits.Time time_minOn=900
+  parameter Modelica.Units.SI.Time time_minOn=900
     "Time after which the device can be turned off again"
      annotation(Dialog(tab="Control", group="Manual control"));
 
@@ -233,7 +233,7 @@ equation
                                                     color={0,0,127}));
   connect(admixtureBus.Tsen_b1, hierarchicalControl.TMeaCon)
     annotation (Line(
-      points={{40.05,-47.95},{40.05,-46},{42,-46},{42,18},{51.6,18},{51.6,38}},
+      points={{40,-48},{40,-46},{42,-46},{42,18},{51.6,18},{51.6,38}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

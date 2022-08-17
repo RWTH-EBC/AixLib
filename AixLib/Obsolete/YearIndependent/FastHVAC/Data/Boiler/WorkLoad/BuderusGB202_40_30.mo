@@ -1,4 +1,4 @@
-within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.WorkLoad;
+﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.WorkLoad;
 record BuderusGB202_40_30
   "Buderus Logano Plus GB202 - Condensing Boiler - 40/30°C"
   extends WorkLoadBaseDataDefinition(

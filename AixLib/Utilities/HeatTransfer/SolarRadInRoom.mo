@@ -10,8 +10,14 @@ model SolarRadInRoom
   parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
   parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
   parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
-  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
-  parameter Modelica.SIunits.Length floor_width=0 "Total width of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor"   annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
+  parameter Modelica.Units.SI.Length floor_length=0
+    "Total length of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor"
+    annotation (Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and
+          use_dynamicMethod));
+  parameter Modelica.Units.SI.Length floor_width=0
+    "Total width of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor"
+    annotation (Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and
+          use_dynamicMethod));
 
   replaceable parameter
     ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
@@ -75,8 +81,10 @@ protected
       Y^2))*((Z*Z*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
   end sight_fac_orthogonal;
 
-  Modelica.SIunits.Length floor_length_int = if nFloors>1 then floor_length else floors[1].length "Total length of floors";
-  Modelica.SIunits.Height floor_height_int=if nFloors > 1 then floor_width else floors[1].height "Total height of floors";
+  Modelica.Units.SI.Length floor_length_int=if nFloors > 1 then floor_length
+       else floors[1].length "Total length of floors";
+  Modelica.Units.SI.Height floor_height_int=if nFloors > 1 then floor_width
+       else floors[1].height "Total height of floors";
 
   // Floors and windows have a special rule. As ASHRAE assumes one window and one floor,
   // possible different material properties have to be averaged in order for the approach to work.
@@ -87,11 +95,12 @@ protected
   Real alpha_flo_int=sum(floors.solar_absorptance)/nFloors;
   Real alpha_win_int=sum(win_in.solar_absorptance)/nWin;
   Real rho_win_int=sum(win_in.solar_reflectance)/nWin;
-  Modelica.SIunits.Area A_floor=sum(floors.length .* floors.height);
-  Modelica.SIunits.Area A_win=sum(win_in.length .* win_in.height);
-  Modelica.SIunits.Area A_walls[nWalls]=walls.length .* walls.height;
-  Modelica.SIunits.Area A_ceil[nCei]=ceilings.length .* ceilings.height;
-  Modelica.SIunits.Area area_total = A_floor + sum(A_ceil) + sum(A_walls) + A_win "Total area of all surfaces, used for bounce";
+  Modelica.Units.SI.Area A_floor=sum(floors.length .* floors.height);
+  Modelica.Units.SI.Area A_win=sum(win_in.length .* win_in.height);
+  Modelica.Units.SI.Area A_walls[nWalls]=walls.length .* walls.height;
+  Modelica.Units.SI.Area A_ceil[nCei]=ceilings.length .* ceilings.height;
+  Modelica.Units.SI.Area area_total=A_floor + sum(A_ceil) + sum(A_walls) +
+      A_win "Total area of all surfaces, used for bounce";
 
   // Define first bounce values:
   Real bounce_1_win_abs = 0;

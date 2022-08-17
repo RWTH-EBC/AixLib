@@ -1,14 +1,14 @@
 within AixLib.Systems.ModularEnergySystems.Controls;
 model NominalBehaviourNotManufacturer
-  parameter Modelica.SIunits.Power PelNom=100000;
+  parameter Modelica.Units.SI.Power PelNom=100000;
 
   parameter String Filename_PTHR="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf";
   parameter String Filename_EtaEL="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf";
   parameter String Filename_RCW="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/RatioCoolingWater.sdf";
 
-  parameter Modelica.SIunits.TemperatureDifference deltaTHeatingCircuit=20
+  parameter Modelica.Units.SI.TemperatureDifference deltaTHeatingCircuit=20
     "Nominal temperature difference heat circuit";
-  parameter Modelica.SIunits.TemperatureDifference deltaTCoolingCircuit=3.47
+  parameter Modelica.Units.SI.TemperatureDifference deltaTCoolingCircuit=3.47
     "Nominal temperature difference heat circuit";
 
 

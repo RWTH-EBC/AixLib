@@ -15,5 +15,9 @@ pages:
          - public
          
         expire_in: 7h
+    except:
+        refs:
+            - master
+            - development
     when: always
     allow_failure: true 

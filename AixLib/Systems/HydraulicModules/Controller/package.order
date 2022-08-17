@@ -1,9 +1,9 @@
+CalcHydraulicPower
 CtrMix
 CtrPump
 CtrPumpVFlow
 CtrThrottle
-CtrThrottleVFlow
-CalcHydraulicPower
 CtrThrottleQFlow
+CtrThrottleVFlow
 CtrSimpleConsumer
 CtrSimpleConsumer_base

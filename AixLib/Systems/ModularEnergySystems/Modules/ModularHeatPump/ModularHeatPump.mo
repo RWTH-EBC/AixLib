@@ -8,31 +8,31 @@ model ModularHeatPump
  parameter Boolean HighTemp=false "High temperature HP"
    annotation(choices(checkBox=true), Dialog(descriptionLabel=true, group="General machine information"));
 
- parameter Modelica.SIunits.Temperature THotMax= if HighTemp==false then  273.15+55  else 273.15+90 "Max. value of THot to force shutdown"
+ parameter Modelica.Units.SI.Temperature THotMax= if HighTemp==false then  273.15+55  else 273.15+90 "Max. value of THot to force shutdown"
  annotation (Dialog(tab="Advanced", group="General machine information"));
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=150000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow"
    annotation (Dialog(group="Nominal condition"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(group="General machine information"));
 
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(enable=dTConFix,tab="Advanced",group="General machine information"));
 
-    parameter Modelica.SIunits.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
+    parameter Modelica.Units.SI.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
                                           "Use internal TSource?"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
-   parameter Modelica.SIunits.Temperature TSourceFixed=TSourceNom "Temperature of heat source"
+   parameter Modelica.Units.SI.Temperature TSourceFixed=TSourceNom "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
 
    replaceable package MediumEvap = Media.Water
                                      constrainedby
@@ -45,7 +45,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
 
-               parameter Modelica.SIunits.Pressure dpExternal=0 "Additional system pressure difference";
+               parameter Modelica.Units.SI.Pressure dpExternal=0 "Additional system pressure difference";
  AixLib.Fluid.HeatPumps.HeatPump heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -174,7 +174,7 @@ protected
                replaceable package MediumCon = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat sink";
 
- parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+ parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
 
 equation
@@ -202,7 +202,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBus.QEvapNom, division1.u1) annotation (Line(
-      points={{-4.925,99.085},{-4.925,74},{72,74},{72,-27.2},{61.6,-27.2}},
+      points={{-5,99},{-5,74},{72,74},{72,-27.2},{61.6,-27.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

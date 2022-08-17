@@ -8,13 +8,14 @@ model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of 
 
   parameter Integer activityType=2 "Machine activity" annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
   parameter Real nrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal=max(
-   1e-4, surfaceMachine*nrPeople)
-   "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  parameter Modelica.Units.SI.Area areaSurfaceMachinesTotal=max(1e-4,
+      surfaceMachine*nrPeople)
+    "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
 
 protected
-  parameter Modelica.SIunits.Area surfaceMachine = 2.0 "Surface area of one machine";
-  Modelica.Blocks.Tables.CombiTable1D tableHeatOutput(
+  parameter Modelica.Units.SI.Area surfaceMachine=2.0
+    "Surface area of one machine";
+  Modelica.Blocks.Tables.CombiTable1Dv tableHeatOutput(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     tableOnFile=false,
     table=[1,50; 2,100; 3,150],

@@ -19,8 +19,8 @@ model StartStopController
     annotation (Placement(transformation(extent={{96,34},{128,62}}), iconTransformation(extent={{96,34},{128,62}})));
   Modelica.Blocks.Interfaces.BooleanOutput Stop
     annotation (Placement(transformation(extent={{98,-56},{126,-28}}), iconTransformation(extent={{98,-56},{126,-28}})));
-  parameter Modelica.SIunits.Time StartTime = 500;
-  parameter Modelica.SIunits.Time StopTime = 500;
+  parameter Modelica.Units.SI.Time StartTime = 500;
+  parameter Modelica.Units.SI.Time StopTime = 500;
 equation
   connect(timer.y, lessThreshold.u) annotation (Line(points={{-15,32},{-12,32},
           {-12,52},{-2,52}},                                                                      color={0,0,127}));

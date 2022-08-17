@@ -3,15 +3,15 @@ model ModularCHP
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = Media.Water,m_flow_nominal=m_flow_nominalCC);
 
-  parameter Modelica.SIunits.Power PelNom=200000 "Nominal electrical power";
+  parameter Modelica.Units.SI.Power PelNom=200000 "Nominal electrical power";
 
-  parameter Modelica.SIunits.TemperatureDifference deltaTHeatingCircuit=20 "Nominal temperature difference heat circuit";
+  parameter Modelica.Units.SI.TemperatureDifference deltaTHeatingCircuit=20 "Nominal temperature difference heat circuit";
 
-  parameter Modelica.SIunits.Temperature THotCoolingWaterMax=273.15+95 "Max. water temperature THot heat circuit";
+  parameter Modelica.Units.SI.Temperature THotCoolingWaterMax=273.15+95 "Max. water temperature THot heat circuit";
 
   parameter Real PLRMin=0.5;
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start"
    annotation (Dialog(tab="Advanced"));
 
   Fluid.BoilerCHP.CHPNotManufacturer cHPNotManufacturer(
@@ -120,11 +120,11 @@ model ModularCHP
   Controls.ControlCHPNotManufacturer controlCHPNotManufacturer
     annotation (Placement(transformation(extent={{-144,-22},{-124,-2}})));
 protected
-  parameter Modelica.SIunits.Temperature TMinCoolingWater=354.15;
-  parameter Modelica.SIunits.TemperatureDifference deltaTCoolingWater=3.47;
-  parameter Modelica.SIunits.Temperature THotHeatCircuitMax=92+273.15;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCC=0.0641977628513021*PelNom/1000 + 0.5371814977365220;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalHC=0.0173378319083308*PelNom/1000 + 0.1278781340675630;
+  parameter Modelica.Units.SI.Temperature TMinCoolingWater=354.15;
+  parameter Modelica.Units.SI.TemperatureDifference deltaTCoolingWater=3.47;
+  parameter Modelica.Units.SI.Temperature THotHeatCircuitMax=92+273.15;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCC=0.0641977628513021*PelNom/1000 + 0.5371814977365220;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominalHC=0.0173378319083308*PelNom/1000 + 0.1278781340675630;
 
    replaceable package MediumHCCC =Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
@@ -136,9 +136,9 @@ protected
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
 
- parameter Modelica.SIunits.Pressure dp_nominal=16*V_flow_HC^2*MediumHCCC.d_const/(2*Modelica.Constants.pi^2);
- parameter Modelica.SIunits.VolumeFlowRate V_flow_CC=m_flow_nominalCC/MediumHCCC.d_const;
- parameter Modelica.SIunits.VolumeFlowRate V_flow_HC=m_flow_nominalHC/MediumHCCC.d_const;
+ parameter Modelica.Units.SI.Pressure dp_nominal=16*V_flow_HC^2*MediumHCCC.d_const/(2*Modelica.Constants.pi^2);
+ parameter Modelica.Units.SI.VolumeFlowRate V_flow_CC=m_flow_nominalCC/MediumHCCC.d_const;
+ parameter Modelica.Units.SI.VolumeFlowRate V_flow_HC=m_flow_nominalHC/MediumHCCC.d_const;
 
 //  zeta=2*dp_nominal*Modelica.Constants.pi^2/(Medium.d_const*V_flow_CC^2*16),
 

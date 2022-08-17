@@ -2,13 +2,13 @@ within AixLib.DataBase.HeatPump.PerformanceData;
 model NominalHeatPumpNotManufacturer
 
   parameter Boolean HighTemp=false;
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-     parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+     parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
  parameter Boolean dTConFix=false "Constant delta T condenser"

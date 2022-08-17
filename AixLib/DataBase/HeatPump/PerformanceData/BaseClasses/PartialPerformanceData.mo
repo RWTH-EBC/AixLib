@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData.BaseClasses;
+﻿within AixLib.DataBase.HeatPump.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
 

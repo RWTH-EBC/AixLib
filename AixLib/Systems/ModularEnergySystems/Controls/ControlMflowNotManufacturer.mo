@@ -1,20 +1,20 @@
-within AixLib.Systems.ModularEnergySystems.Controls;
+﻿within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlMflowNotManufacturer
 
-   parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+   parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=150000
+  parameter Modelica.Units.SI.HeatFlowRate QNom=150000
                                                      "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Boolean HighTemp=false "true: THot > 60°C"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
  parameter Boolean dTConFix=false
@@ -41,7 +41,7 @@ model ControlMflowNotManufacturer
     Ti=10,
     yMax=1,
     yMin=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=0.1)
             annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
@@ -91,7 +91,7 @@ model ControlMflowNotManufacturer
     Ti=5,
     yMax=1,
     yMin=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=0.1)
             annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},

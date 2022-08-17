@@ -1,16 +1,16 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
- record SandBox_Soil
-   "Soil data record for the Beier et al. (2011) experiment"
-   extends
-     AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
-       kSoi=2.88,
-       cSoi=1275,
-       dSoi=2000);
-   annotation (
-   defaultComponentPrefixes="parameter",
-   defaultComponentName="soiDat",
- Documentation(
- info="<html>
+record SandBox_Soil
+  "Soil data record for the Beier et al. (2011) experiment"
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
+      kSoi=2.88,
+      cSoi=1275,
+      dSoi=2000);
+  annotation (
+  defaultComponentPrefixes="parameter",
+  defaultComponentName="soiDat",
+Documentation(
+info="<html>
  <p>
  This record contains the soil data of the Beier et al. (2011) experiment.
  </p>
@@ -21,7 +21,7 @@ within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
  analysis</i>. Geothermics 40: 79-85.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -33,6 +33,6 @@ within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end SandBox_Soil;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end SandBox_Soil;

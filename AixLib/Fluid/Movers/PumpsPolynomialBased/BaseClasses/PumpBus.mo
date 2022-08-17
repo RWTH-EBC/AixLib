@@ -1,10 +1,10 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
 expandable connector PumpBus "Standard data bus with pump information"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
-  SI.Conversions.NonSIunits.AngularVelocity_rpm rpmSet "Pump speed setpoint"
+  import      Modelica.Units.SI;
+  Modelica.Units.NonSI.AngularVelocity_rpm rpmSet "Pump speed setpoint"
     annotation (HideResult=false);
-  SI.Conversions.NonSIunits.AngularVelocity_rpm rpmMea "Pump speed actor signal"
+  Modelica.Units.NonSI.AngularVelocity_rpm rpmMea "Pump speed actor signal"
     annotation (HideResult=false);
   SI.Power PelMea "Electrical pump power"
                                          annotation (HideResult=false);

@@ -1,6 +1,6 @@
 within AixLib.Systems.TABS;
 model Tabs "Thermally Activated Building Systems"
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choices(
       choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
@@ -11,11 +11,11 @@ model Tabs "Thermally Activated Building Systems"
   parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start=293.15
+  parameter Modelica.Units.SI.Temperature T_start=293.15
     "Initial or guess value of output (= state)";
-  parameter Modelica.SIunits.Length length=100 "Pipe length"
+  parameter Modelica.Units.SI.Length length=100 "Pipe length"
     annotation (Dialog(group="Concrete core activation"));
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       DataBase.Pipes.Copper.Copper_133x3()
@@ -42,7 +42,7 @@ model Tabs "Thermally Activated Building Systems"
     "Heat flow at nominal conditions (used to calculate Gc) of the heat exchangers"
     annotation (Dialog(group="Heat exchangers in hydronic system"));
 
-  parameter Modelica.SIunits.Length length_hyd=1
+  parameter Modelica.Units.SI.Length length_hyd=1
     "Pipe length of hydronic system" annotation (Dialog(group="Hydronics"));
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe_hyd=
       DataBase.Pipes.Copper.Copper_64x2()

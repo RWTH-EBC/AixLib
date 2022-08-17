@@ -1,16 +1,14 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   parameter Boolean use_minRunTime
     "False if minimal runtime of HP is not considered" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
-    "Mimimum runtime of heat pump"
-    annotation (Dialog(enable=use_minRunTime));
+  parameter Modelica.Units.SI.Time minRunTime(displayUnit="min")
+    "Mimimum runtime of heat pump" annotation (Dialog(enable=use_minRunTime));
   parameter Boolean use_minLocTime
     "False if minimal locktime of HP is not considered" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime(displayUnit="min")
-    "Minimum lock time of heat pump"
-    annotation (Dialog(enable=use_minLocTime));
+  parameter Modelica.Units.SI.Time minLocTime(displayUnit="min")
+    "Minimum lock time of heat pump" annotation (Dialog(enable=use_minLocTime));
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
   parameter Integer maxRunPerHou "Maximal number of on/off cycles in one hour"
@@ -27,13 +25,13 @@ model OnOffControl
   BaseClasses.RunPerHouBoundary runPerHouBoundary(final maxRunPer_h=
         maxRunPerHou, final delayTime=3600) if use_runPerHou
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  BaseClasses.TimeControl locTimControl(final minRunTime=minLocTime) if
-    use_minLocTime
+  BaseClasses.TimeControl locTimControl(final minRunTime=minLocTime)
+ if use_minLocTime
     annotation (Placement(transformation(extent={{-40,-24},{-20,-4}})));
   Modelica.Blocks.Logical.Not notIsOn
     annotation (Placement(transformation(extent={{-66,-22},{-58,-14}})));
-  BaseClasses.TimeControl runTimControl(final minRunTime=minRunTime) if
-    use_minRunTime
+  BaseClasses.TimeControl runTimControl(final minRunTime=minRunTime)
+ if use_minRunTime
     annotation (Placement(transformation(extent={{-40,52},{-20,72}})));
   Modelica.Blocks.Logical.And andLoc
     annotation (Placement(transformation(extent={{28,-66},{40,-54}})));

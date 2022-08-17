@@ -2,10 +2,10 @@ within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.Q
 function qBotmix
   input Integer n;
   input Integer nbuoy;
-  input Modelica.SIunits.TemperatureDifference dTover;
-  input Modelica.SIunits.TemperatureDifference dT13;
+  input Modelica.Units.SI.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dT13;
 
-  output Modelica.SIunits.SpecificEnergy q_botmix[n];
+  output Modelica.Units.SI.SpecificEnergy q_botmix[n];
 
 protected
   Real fbotdown_sum;
@@ -13,7 +13,7 @@ protected
   Real c_bd;
   Real c_bu;
 
-  Modelica.SIunits.SpecificEnergy qb0;
+  Modelica.Units.SI.SpecificEnergy qb0;
 
 algorithm
   q_botmix:=zeros(n);

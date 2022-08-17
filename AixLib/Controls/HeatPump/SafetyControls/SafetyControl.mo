@@ -1,17 +1,17 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 
   parameter Boolean use_minRunTime=true
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(group="OnOffControl"), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime "Mimimum runtime of heat pump"
-    annotation (Dialog(group="OnOffControl",enable=use_minRunTime));
+  parameter Modelica.Units.SI.Time minRunTime "Mimimum runtime of heat pump"
+    annotation (Dialog(group="OnOffControl", enable=use_minRunTime));
   parameter Boolean use_minLocTime=true
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(group="OnOffControl"), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime "Minimum lock time of heat pump"
-    annotation (Dialog(group="OnOffControl",enable=use_minLocTime));
+  parameter Modelica.Units.SI.Time minLocTime "Minimum lock time of heat pump"
+    annotation (Dialog(group="OnOffControl", enable=use_minLocTime));
   parameter Boolean use_runPerHou=true
     "False if maximal runs per hour HP are not considered"
     annotation (Dialog(group="OnOffControl"), choices(checkBox=true));
@@ -29,7 +29,8 @@ block SafetyControl "Block including all safety levels"
       choicesAllMatching=true);
   parameter Real tableUpp[:,2] "Upper boundary of envelope"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
-  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+  parameter Modelica.Units.SI.TemperatureDifference dTHystOperEnv=5
+    "Temperature difference used for both upper and lower hysteresis in the operational envelope."
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
     annotation (Dialog(group="OnOffControl", descriptionLabel=true),choices(checkBox=true));
@@ -43,13 +44,13 @@ block SafetyControl "Block including all safety levels"
     "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(group="Defrost", enable=use_deFro),
                                         choices(checkBox=true));
-  parameter Modelica.SIunits.Power calcPel_deFro
+  parameter Modelica.Units.SI.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller and use_deFro, group="Defrost"));
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of safety control"
     annotation (Dialog(group="Anti Freeze Control"), choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TantFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(group="Anti Freeze Control", enable=use_antFre));
 
@@ -92,18 +93,18 @@ block SafetyControl "Block including all safety levels"
         origin={130,80})));
   AntiFreeze antiFreeze(final TAntFre=TantFre, final use_antFre=use_antFre)
     annotation (Placement(transformation(extent={{24,-8},{48,12}})));
-  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef if
-                                                           not use_deFro
+  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef
+                                                        if not use_deFro
     "No 2. Layer" annotation (Placement(transformation(extent={{-92,-50},{-76,
             -34}})), choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv if
-                                                     use_opeEnv annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv
+                                                  if use_opeEnv annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-110})));
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre if
-                                                     use_antFre annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre
+                                                  if use_antFre annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

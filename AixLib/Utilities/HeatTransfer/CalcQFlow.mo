@@ -2,8 +2,9 @@ within AixLib.Utilities.HeatTransfer;
 block CalcQFlow
   "Calculate Q_flow from m_flow, deltaT and specific heat capacity"
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.SpecificHeatCapacity cp
-    "Gain with specific heat capacity" annotation (Dialog(group="Fluid properties"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp
+    "Gain with specific heat capacity"
+    annotation (Dialog(group="Fluid properties"));
 
   Modelica.Blocks.Interfaces.RealInput m_flow(quantity="MassFlowRate", unit="kg/s")
     "Mass flow rate"

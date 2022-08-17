@@ -1,15 +1,15 @@
 within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlCHPNotManufacturer
 
-   parameter Modelica.SIunits.Power PelNom=200000 "Nominal electrical power";
+   parameter Modelica.Units.SI.Power PelNom=200000 "Nominal electrical power";
 
-  parameter Modelica.SIunits.TemperatureDifference deltaTHeatingCircuit=20 "Nominal temperature difference heat circuit";
+  parameter Modelica.Units.SI.TemperatureDifference deltaTHeatingCircuit=20 "Nominal temperature difference heat circuit";
 
-  parameter Modelica.SIunits.Temperature THotCoolingWaterMax=273.15+95 "Max. water temperature THot heat circuit";
+  parameter Modelica.Units.SI.Temperature THotCoolingWaterMax=273.15+95 "Max. water temperature THot heat circuit";
 
   parameter Real PLRMin=0.5;
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start"
    annotation (Dialog(tab="Advanced"));
 
 

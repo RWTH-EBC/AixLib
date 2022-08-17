@@ -1,21 +1,21 @@
 within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlBoilerNotManufacturer
 
-  parameter Modelica.SIunits.TemperatureDifference DeltaTWaterNom=20 "Temperature difference nominal";
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold";
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power";
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTWaterNom=20 "Temperature difference nominal";
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Return temperature TCold";
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power";
   parameter Boolean m_flowVar=false "Use variable water massflow";
 
 
 
   parameter Boolean Advanced=false "dTWater is constant for different PLR";
 
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
 
-  parameter Modelica.SIunits.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start";
+  parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start";
 
 
   replaceable package Medium =Media.Water constrainedby

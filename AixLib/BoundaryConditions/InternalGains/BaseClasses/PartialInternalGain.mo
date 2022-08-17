@@ -3,8 +3,9 @@ partial model PartialInternalGain
   "Partial model to build a heat source with convective and radiative component"
   parameter Real ratioConv(final min=0, final max=1) = 0.6
     "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Emissivity emissivity(min=0, max=1) = 0.95
-    "Emissivity of radiative heat source surface";
+  parameter Modelica.Units.SI.Emissivity emissivity(
+    min=0,
+    max=1) = 0.95 "Emissivity of radiative heat source surface";
   Modelica.Blocks.Interfaces.RealInput uRel(min=0, max=1) "Relative input related to max. value (might be a ratio related to number of people [-] or room area and specific heat flow [W/m2] or maximal heat flow [W]"
      annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(final T_ref=293.15, final alpha=0)

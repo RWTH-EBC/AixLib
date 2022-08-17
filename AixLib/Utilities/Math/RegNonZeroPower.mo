@@ -1,12 +1,12 @@
 within AixLib.Utilities.Math;
- block RegNonZeroPower
-   "Power function, regularized near zero, but nonzero value for x=0"
-   extends Modelica.Blocks.Interfaces.SISO;
-   parameter Real n "Exponent";
-   parameter Real delta = 0.01 "Abscissa value where transition occurs";
- equation
-   y = AixLib.Utilities.Math.Functions.regNonZeroPower(x=u, n=n, delta=delta);
-   annotation (Documentation(info="<html>
+block RegNonZeroPower
+  "Power function, regularized near zero, but nonzero value for x=0"
+  extends Modelica.Blocks.Interfaces.SISO;
+  parameter Real n "Exponent";
+  parameter Real delta = 0.01 "Abscissa value where transition occurs";
+equation
+  y = AixLib.Utilities.Math.Functions.regNonZeroPower(x=u, n=n, delta=delta);
+  annotation (Documentation(info="<html>
  
  Function that approximates <i>y=|x|<sup>n</sup></i> where <i>n &gt; 0</i>
  so that
@@ -34,16 +34,16 @@ within AixLib.Utilities.Math;
  where heat conduction dominates convection in the boundary layer.
  </p>
  See the package <code>Examples</code> for the graph.
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 29, 2013 by Marcus Fuchs:<br/>
  Implementation based on Functions.regNonZeroPower.
  </li>
  </ul>
- </html>"), Icon(graphics={   Text(
-           extent={{-88,38},{92,-34}},
-           lineColor={160,160,164},
-           textString="regNonZeroPower()")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end RegNonZeroPower;
+ </html>"),Icon(graphics={   Text(
+          extent={{-88,38},{92,-34}},
+          textColor={160,160,164},
+          textString="regNonZeroPower()")}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end RegNonZeroPower;

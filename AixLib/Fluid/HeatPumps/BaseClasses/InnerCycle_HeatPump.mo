@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPump
   "Blackbox model of refrigerant cycle of a heat pump"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
@@ -31,7 +31,7 @@ model InnerCycle_HeatPump
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
-    dTConFix=dTConFix) if                  use_non_manufacturer
+    dTConFix=dTConFix)                  if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
   PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
@@ -54,24 +54,24 @@ model InnerCycle_HeatPump
         origin={58,-20})));
 
   // Data only relevant for non manufacturer approach
-  parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Boolean HighTemp=false "true: THot > 60°C"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
+  parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
   parameter Boolean dTConFix=false

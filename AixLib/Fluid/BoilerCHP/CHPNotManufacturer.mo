@@ -5,7 +5,7 @@ model CHPNotManufacturer
               vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(
           0.8265*PelNom/1000 + 7.8516)/1000), a=0);
 
-parameter Modelica.SIunits.Power PelNom=100000;
+parameter Modelica.Units.SI.Power PelNom=100000;
 constant Real Brennwert=46753;
 //parameter Real deltaTWater;
 // parameter Real deltaTCoolingWater;

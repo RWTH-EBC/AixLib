@@ -1,13 +1,13 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model StationaryBehaviour
 
-   parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
-   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
+   parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
+   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
   parameter
     AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.EtaTExhaustBaseDataDefinition
     paramEta=AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.Ambient1();
    parameter Real EtaTable[:,2]=paramEta.EtaTable;
-   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
+   parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
    parameter Boolean m_flowVar=false;
 
 
@@ -28,7 +28,7 @@ model StationaryBehaviour
   Modelica.Blocks.Interfaces.RealOutput TExhaust(final quantity="Temperature",
       final unit="degC") "Exhaust temperature"
     annotation (Placement(transformation(extent={{100,36},{120,56}})));
-  Modelica.Blocks.Tables.CombiTable1D combiTable1D(
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1D(
     tableOnFile=false,
     table=EtaTable,
     columns={2},
@@ -71,8 +71,6 @@ protected
 equation
 
 
-  connect(BoilerBehaviour_mNom.y, combiTable1D.u[1]) annotation (Line(points={{1,46},{
-          16,46},{16,20},{26,20}},                      color={0,0,127}));
   connect(BoilerBehaviour_mNom.y, TExhaust)
     annotation (Line(points={{1,46},{110,46}}, color={0,0,127}));
   connect(PLR, qSetPoint.u1) annotation (Line(points={{-120,60},{-90,60},{-90,
@@ -99,6 +97,8 @@ equation
     annotation (Line(points={{0,-120},{0,-70},{38,-70}}, color={0,0,127}));
   connect(division.y, add1.u1) annotation (Line(points={{11,-40},{20,-40},{20,
           -58},{38,-58}}, color={0,0,127}));
+  connect(BoilerBehaviour_mNom.y, combiTable1D.u) annotation (Line(points={{1,
+          46},{20,46},{20,20},{26,20}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},
