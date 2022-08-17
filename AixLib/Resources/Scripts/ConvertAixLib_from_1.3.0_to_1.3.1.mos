@@ -1,0 +1,6 @@
+clear
+
+convertClear();
+
+// add the parameters heaLoadFacOut and heaLoadFacGrd for dynamic heat load calculation with dummy values of zero
+convertModifiers("AixLib.DataBase.ThermalZones.ZoneBaseRecord", fill("",0), {"heaLoadFacOut=0", "heaLoadFacGrd=0"});
