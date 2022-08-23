@@ -146,15 +146,16 @@ parameter Modelica.Units.SI.Pressure dpInternal=25000
   Modelica.Blocks.Sources.RealExpression m_flowCon(y=QNom/MediumCon.cp_const/
         DeltaTCon) "massflow condenser"
     annotation (Placement(transformation(extent={{68,44},{42,64}})));
-  Fluid.Movers.SpeedControlled_y fan1(
-    redeclare package Medium = Media.Water,
-    redeclare Fluid.Movers.Data.Generic per,
-    inputType=AixLib.Fluid.Types.InputType.Continuous,
-    addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom)
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+  Fluid.Movers.FlowControlled_m_flow fan(
+    redeclare package Medium = AixLib.Media.Water,
+    m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon,
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
+  Modelica.Blocks.Math.Product product1
+    annotation (Placement(transformation(extent={{-138,26},{-118,46}})));
 protected
                replaceable package MediumCon = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat sink";
@@ -207,12 +208,6 @@ equation
   connect(senTHot.T, control.THot)
     annotation (Line(points={{30,8.8},{30,36},{-16,36},{-16,64},{-44,64}},
                                                          color={0,0,127}));
-  connect(fan1.port_b, senTCold.port_a)
-    annotation (Line(points={{-62,0},{-52,0}}, color={0,127,255}));
-  connect(port_a, fan1.port_a)
-    annotation (Line(points={{-100,0},{-82,0}}, color={0,127,255}));
-  connect(control.mFlowCon, fan1.y)
-    annotation (Line(points={{-67.2,68},{-72,68},{-72,12}}, color={0,0,127}));
   connect(heatSource.port_b, heatPump.port_a2) annotation (Line(points={{10,-40},
           {18,-40},{18,-12},{12,-12}}, color={0,127,255}));
   connect(heatPump.port_b2, heatSource.port_a) annotation (Line(points={{-8,-12},
@@ -237,6 +232,16 @@ equation
           51,0},{51,8.88178e-16},{64,8.88178e-16}}, color={0,127,255}));
   connect(senMasFloHP.port_b, port_b) annotation (Line(points={{80,-1.11022e-15},
           {90,-1.11022e-15},{90,0},{100,0}}, color={0,127,255}));
+  connect(senTCold.port_a, fan.port_b)
+    annotation (Line(points={{-52,0},{-64,0}}, color={0,127,255}));
+  connect(port_a, fan.port_a) annotation (Line(points={{-100,0},{-92,0},{-92,0},
+          {-84,0}}, color={0,127,255}));
+  connect(control.mFlowCon, product1.u1) annotation (Line(points={{-67.2,68},{
+          -106,68},{-106,76},{-172,76},{-172,42},{-140,42}}, color={0,0,127}));
+  connect(m_flowCon.y, product1.u2) annotation (Line(points={{40.7,54},{42,54},
+          {42,20},{-160,20},{-160,30},{-140,30}}, color={0,0,127}));
+  connect(product1.y, fan.m_flow_in)
+    annotation (Line(points={{-117,36},{-74,36},{-74,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

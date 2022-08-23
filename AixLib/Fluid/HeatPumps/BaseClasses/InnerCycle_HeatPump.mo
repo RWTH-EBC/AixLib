@@ -32,7 +32,7 @@ model InnerCycle_HeatPump
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
     TSourceInternal=TSourceInternal,
-    THotExternal=THotExternal) if          use_non_manufacturer
+    THotExternal=THotExternal)          if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
   PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer

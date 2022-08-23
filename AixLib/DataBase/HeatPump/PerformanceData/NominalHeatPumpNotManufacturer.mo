@@ -75,7 +75,7 @@ model NominalHeatPumpNotManufacturer
         rotation=180,
         origin={-89,74})));
 protected
-parameter String FilenameCOP="modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
+parameter String FilenameCOP="D:/COP_Scroll_R410a.sdf" annotation (evaluate=True);
 equation
   connect(division1.y, PelFullLoad) annotation (Line(points={{21,-80},{110,
           -80}},              color={0,0,127}));

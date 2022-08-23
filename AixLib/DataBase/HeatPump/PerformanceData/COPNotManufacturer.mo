@@ -106,7 +106,8 @@ model COPNotManufacturer
         origin={-120,-90})));
 
 protected
-parameter String FilenameCOP="modelica:/AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
+  parameter String FilenameCOP="D:/COP_Scroll_R410a.sdf" annotation (evaluate=True);
+
 
 
 equation

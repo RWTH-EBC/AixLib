@@ -173,8 +173,8 @@ equation
         color={0,0,127}));
   connect(controlBoilerNotManufacturer.mFlowRel, fan1.y) annotation (Line(
         points={{-61,46.5333},{-50,46.5333},{-50,12}}, color={0,0,127}));
-  connect(boilerControlBus.PLR, controlBoilerNotManufacturer.plr_a) annotation
-    (Line(
+  connect(boilerControlBus.PLR, controlBoilerNotManufacturer.plr_a) annotation (
+     Line(
       points={{-1.95,100.05},{-1.95,58},{-92,58},{-92,50.9333},{-86,50.9333}},
       color={255,204,51},
       thickness=0.5), Text(
