@@ -2,9 +2,9 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.Hierarc
 model deviceStatusDelay
     extends Modelica.Blocks.Icons.DiscreteBlock;
 
-  parameter Modelica.SIunits.Time time_minOff = 900
+  parameter Modelica.Units.SI.Time time_minOff = 900
     "Time after which the device can be turned on again";
-  parameter Modelica.SIunits.Time time_minOn = 900
+  parameter Modelica.Units.SI.Time time_minOn = 900
     "Time after which the device can be turned off again";
   parameter Boolean use_safetyShutoff = false
     "Set true, to enable an additional boolean input to perform manual shutoffs for security reasons without messing up the timer" annotation (

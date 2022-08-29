@@ -10,24 +10,24 @@ model SimpleConsumer_base
   parameter Integer demandType   "Choose between heating and cooling functionality" annotation (choices(
               choice=1 "use as heating consumer",
               choice=-1 "use as cooling consumer"),Dialog(enable=true, group = "System"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0.001)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0.001)
   "Nominal mass flow rate";
-  parameter Modelica.SIunits.Volume V=0.001 "Volume of water";
-  parameter Modelica.SIunits.PressureDifference dp_nominalPumpConsumer=500
+  parameter Modelica.Units.SI.Volume V=0.001 "Volume of water";
+  parameter Modelica.Units.SI.PressureDifference dp_nominalPumpConsumer=500
     annotation (Dialog(enable = hasPump, group = "Pump"));
-  final parameter Modelica.SIunits.VolumeFlowRate Vflow_nom = m_flow_nominal/rho_default;
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  final parameter Modelica.Units.SI.VolumeFlowRate Vflow_nom = m_flow_nominal/rho_default;
+  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2] = {0,0} "Nominal additional pressure drop e.g. for distributor"
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal[2] = {0,0} "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
   parameter Real k_ControlConsumerPump(min=Modelica.Constants.small)=0.5 "Gain of controller"
     annotation (Dialog(enable = hasPump, group = "Pump"));
-  parameter Modelica.SIunits.Time Ti_ControlConsumerPump(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti_ControlConsumerPump(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
     annotation (Dialog(enable = hasPump, group = "Pump"));
   parameter Real k_ControlConsumerValve(min=Modelica.Constants.small)=0.5
                                                                         "Gain of controller"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
-  parameter Modelica.SIunits.Time Ti_ControlConsumerValve=10                              "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti_ControlConsumerValve=10                              "Time constant of Integrator block"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
 
 protected
@@ -35,7 +35,7 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 
 public
@@ -100,7 +100,7 @@ equation
 
   if hasPump then
     connect(fan.port_b, volume.ports[1])
-      annotation (Line(points={{14,0},{42.6667,0}}, color={0,127,255}));
+      annotation (Line(points={{14,0},{41.3333,0}}, color={0,127,255}));
     connect(senMasFlo.port_b, fan.port_a)
       annotation (Line(points={{-12,0},{-6,0}}, color={0,127,255}));
   else
@@ -118,7 +118,7 @@ equation
     connect(port_a, senTFlow.port_a);
   end if;
 
-  connect(volume.ports[3], senTReturn.port_a) annotation (Line(points={{37.3333,
+  connect(volume.ports[3], senTReturn.port_a) annotation (Line(points={{38.6667,
           0},{43.6667,0},{43.6667,1.77636e-15},{58,1.77636e-15}}, color={0,127,255}));
   connect(senTReturn.port_b, port_b) annotation (Line(points={{78,-8.88178e-16},
           {89,-8.88178e-16},{89,0},{100,0}}, color={0,127,255}));

@@ -1,9 +1,9 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control;
 model Control_wPump
 
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom "Temperature difference nominal"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom "Temperature difference nominal"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean m_flowVar=false "Use variable water massflow"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
@@ -11,9 +11,9 @@ model Control_wPump
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean Advanced=false "dTWater is constant for different PLR"
     annotation (choices(checkBox=true), Dialog(enable=m_flowVar,descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
     annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.SIunits.Temperature THotMax=363.15 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature THotMax=363.15 "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
   Modelica.Blocks.Logical.Switch switch3

@@ -3,9 +3,9 @@ model ManualControl
   "This model offers the choice between intern and extern control"
   parameter Real PLRMin=0.15;
   parameter Boolean manualTimeDelay=false "If true, the user can set a time during which the heat genearator is switched on independently of the internal control";
-  parameter Modelica.SIunits.Time time_minOff=900
+  parameter Modelica.Units.SI.Time time_minOff=900
     "Time after which the device can be turned on again";
-  parameter Modelica.SIunits.Time time_minOn=900
+  parameter Modelica.Units.SI.Time time_minOn=900
     "Time after which the device can be turned off again";
 
   Modelica.Blocks.Interfaces.BooleanInput isOn

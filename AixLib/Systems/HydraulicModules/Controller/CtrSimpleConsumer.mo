@@ -8,10 +8,10 @@ model CtrSimpleConsumer
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true, group = "System"));
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
-  parameter Modelica.SIunits.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
-  parameter Modelica.SIunits.HeatCapacity capacity=1 "Capacity of the material";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
-  parameter Modelica.SIunits.Temperature T_start=293.15  "Ambient temperature for convection";
+  parameter Modelica.Units.SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
+  parameter Modelica.Units.SI.HeatCapacity capacity=1 "Capacity of the material";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
+  parameter Modelica.Units.SI.Temperature T_start=293.15  "Ambient temperature for convection";
 
 
   Modelica.Blocks.Interfaces.RealInput T if functionality == "T_input"
@@ -34,8 +34,8 @@ model CtrSimpleConsumer
         origin={60,-10},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection if
-    functionality == "T_input" or functionality == "T_fixed"
+  Modelica.Thermal.HeatTransfer.Components.Convection convection
+ if functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
         origin={34,0},
         extent={{-10,-10},{10,10}},
@@ -51,19 +51,19 @@ model CtrSimpleConsumer
         extent={{-7,-8},{7,8}},
         rotation=90,
         origin={34,-23})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed) if
-    functionality == "T_fixed"                                annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed)
+ if functionality == "T_fixed"                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-44,0})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
-    functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+ if functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={32,-40})));
-  Modelica.Blocks.Sources.RealExpression Q_realExp(y=Q_flow_fixed) if
-    functionality == "Q_flow_fixed" annotation (Placement(transformation(
+  Modelica.Blocks.Sources.RealExpression Q_realExp(y=Q_flow_fixed)
+ if functionality == "Q_flow_fixed" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-44,-20})));
@@ -78,8 +78,8 @@ model CtrSimpleConsumer
     annotation (Placement(transformation(extent={{-54,-58},{-34,-38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  Modelica.Blocks.Interfaces.RealInput Q_flow_max if
-                                                 functionality == "Q_flow_input"
+  Modelica.Blocks.Interfaces.RealInput Q_flow_max
+                                              if functionality == "Q_flow_input"
     annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=0,

@@ -1,7 +1,7 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model SimpleConsumer_old "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  import SI=Modelica.SIunits;
+  import    Modelica.Units.SI;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
   parameter SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
@@ -31,12 +31,12 @@ model SimpleConsumer_old "Simple Consumer"
   parameter Real k_ControlConsumerPump "Gain of controller";
   parameter SI.Time Ti_ControlConsumerPump
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
+  parameter Modelica.Units.SI.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
   parameter Boolean show_T=false
     "= true, if actual temperature at port is computed";
 
   SI.Temperature TReturn = if fixed_return_T then T_return else T_returnSet;
-  Modelica.SIunits.HeatFlowRate Q_flow_max;
+  Modelica.Units.SI.HeatFlowRate Q_flow_max;
   Fluid.MixingVolumes.MixingVolume volume(
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
@@ -49,8 +49,8 @@ model SimpleConsumer_old "Simple Consumer"
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={0,10})));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection if
-    functionality == "T_input" or functionality == "T_fixed"
+  Modelica.Thermal.HeatTransfer.Components.Convection convection
+ if functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
         origin={10,70},
         extent={{-10,-10},{10,10}},
@@ -67,8 +67,8 @@ model SimpleConsumer_old "Simple Consumer"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,78})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed) if
-    functionality == "T_fixed"                                annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed)
+ if functionality == "T_fixed"                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -81,13 +81,13 @@ model SimpleConsumer_old "Simple Consumer"
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
-    functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+ if functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-12,40})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed) if
-    functionality == "Q_flow_fixed"                           annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed)
+ if functionality == "Q_flow_fixed"                           annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -174,8 +174,8 @@ model SimpleConsumer_old "Simple Consumer"
     annotation (Placement(transformation(extent={{-124,36},{-104,56}})));
   Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
-  Modelica.Blocks.Interfaces.RealOutput Q_flowReal if
-       functionality == "Q_flow_input" and not energy_calculation
+  Modelica.Blocks.Interfaces.RealOutput Q_flowReal
+    if functionality == "Q_flow_input" and not energy_calculation
     "Consumed real heat flow, positive for heating or cooling" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -192,8 +192,8 @@ model SimpleConsumer_old "Simple Consumer"
     annotation (Placement(transformation(extent={{166,16},{186,36}})));
   Modelica.Blocks.Continuous.Integrator energy_integrator if energy_calculation
     annotation (Placement(transformation(extent={{204,16},{224,36}})));
-  Modelica.Blocks.Interfaces.RealOutput energy_remaining if
-       functionality == "Q_flow_input" and energy_calculation
+  Modelica.Blocks.Interfaces.RealOutput energy_remaining
+    if functionality == "Q_flow_input" and energy_calculation
     "Consumed real heat flow, positive for heating or cooling" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -224,9 +224,9 @@ equation
     annotation (Line(points={{52,80},{60,80},{60,120}}, color={0,0,127},
       pattern=LinePattern.Dash));
   connect(volume.ports[1], pump.port_b)
-    annotation (Line(points={{2,0},{-20,0}},  color={0,127,255}));
+    annotation (Line(points={{1,0},{-20,0}},  color={0,127,255}));
   connect(volume.ports[2], senTemReturn.port_a)
-    annotation (Line(points={{-2,0},{38,0}}, color={0,127,255}));
+    annotation (Line(points={{-1,0},{38,0}}, color={0,127,255}));
   connect(port_b, senTemReturn.port_b)
     annotation (Line(points={{100,0},{58,0}}, color={0,127,255}));
   connect(port_a, senTemFlow.port_a)
@@ -271,10 +271,10 @@ equation
     connect(power_sum.y, energy_integrator.u) annotation (Line(points={{187,26},{194.5,
             26},{194.5,26},{202,26}}, color={0,0,127}));
     connect(Q_flow, power_sum.u[2]) annotation (Line(points={{-60,120},{-60,56},
-            {94,56},{94,27},{164,27}},
+            {94,56},{94,26.5},{164,26.5}},
                                    color={0,0,127}));
-    connect(power_sum.u[1], variableLimiter.y) annotation (Line(points={{164,25},
-            {62,25},{62,50},{-50,50},{-50,40},{-71.2,40}},
+    connect(power_sum.u[1], variableLimiter.y) annotation (Line(points={{164,25.5},
+            {62,25.5},{62,50},{-50,50},{-50,40},{-71.2,40}},
                                                         color={0,0,127}));
   end if;
 

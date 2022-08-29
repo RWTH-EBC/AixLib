@@ -13,7 +13,7 @@ model InternalControl "This model contains the internal controller"
       radioButtons=true), Dialog(enable=
           use_advancedControl or severalHeatCircuits));
 
-  parameter Modelica.SIunits.Temperature Tref=333.15
+  parameter Modelica.Units.SI.Temperature Tref=333.15
     "Reference Temperature for the on off controller"
     annotation(Dialog(
         group="Two position controller"));
@@ -29,7 +29,7 @@ model InternalControl "This model contains the internal controller"
     annotation(Dialog(group="Flow temperature control"));
   parameter Real night_hour
     annotation(Dialog(group="Flow temperature control"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TOffset
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset
     "Offset to heating curve temperature"
     annotation(Dialog(group="Flow temperature control"));
   parameter Boolean variableSetTemperature_admix
@@ -44,7 +44,7 @@ model InternalControl "This model contains the internal controller"
       radioButtons=true));
   parameter Integer k(min=1)=1 "Number of heat curcuits"
     annotation(Dialog(group="Admixture control"));
-  parameter Modelica.SIunits.Temperature TBoiler=348.15
+  parameter Modelica.Units.SI.Temperature TBoiler=348.15
     "Fix boiler temperature for the admixture"
     annotation(Dialog(enable=use_advancedControl and severalHeatcurcuits and not TVar,tab="Control", group="Admixture control"));
   parameter Boolean topLayer=true "If true, two position controller using top level of buffer storage for calculation";

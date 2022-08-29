@@ -9,9 +9,9 @@ model returnAdmixture
       choice=false "Boiler temperature control",
       radioButtons=true), Dialog(enable=
           use_advancedControl or severalHeatCircuits));
-  parameter Modelica.SIunits.Temperature TBoiler= 273.15+75 "Fix boiler temperature for the admixture";
+  parameter Modelica.Units.SI.Temperature TBoiler= 273.15+75 "Fix boiler temperature for the admixture";
   parameter Real k_ControlAdmix(min=Modelica.Constants.small)=0.005 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti_ControlAdmix(min=Modelica.Constants.small)=10 "Time constant of Integrator block";
+  parameter Modelica.Units.SI.Time Ti_ControlAdmix(min=Modelica.Constants.small)=10 "Time constant of Integrator block";
 
   Modelica.Blocks.Interfaces.RealOutput valPos[k]
     "Valve position for the k heat curcuits"

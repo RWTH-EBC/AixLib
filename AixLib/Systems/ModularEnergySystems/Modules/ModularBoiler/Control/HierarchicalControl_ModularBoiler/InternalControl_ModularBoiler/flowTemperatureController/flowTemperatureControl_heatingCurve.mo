@@ -12,7 +12,7 @@ model flowTemperatureControl_heatingCurve
  parameter Real night_hour=22;
  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve";
- parameter Modelica.SIunits.ThermodynamicTemperature TOffset=273.15
+ parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=273.15
     "Offset to heating curve temperature";
 
   AixLib.Controls.SetPoints.HeatingCurve heatingCurve(

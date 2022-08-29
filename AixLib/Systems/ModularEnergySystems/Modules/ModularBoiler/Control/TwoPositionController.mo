@@ -2,7 +2,7 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control;
 model TwoPositionController
   "Base model for the two position controller"
   //Parameters
-  parameter Modelica.SIunits.Temperature Tref=273.15 + 60 "Reference Temperature for the on off controller";
+  parameter Modelica.Units.SI.Temperature Tref=273.15 + 60 "Reference Temperature for the on off controller";
   parameter Boolean variablePLR=false "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
   parameter Boolean topLayer=true "If true, two position controller using top level of buffer storage for calculation";
   parameter Integer n=if topLayer then 1 else n  "Number of layers in the buffer storage";

@@ -1,10 +1,10 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler;
 model EmergencySwitch
 protected
-  parameter Modelica.SIunits.Temperature THotMax=TMax-onOffController.bandwidth/2;
+  parameter Modelica.Units.SI.Temperature THotMax=TMax-onOffController.bandwidth/2;
 
 public
-  parameter Modelica.SIunits.Temperature TMax=378.15 "Maximum temperature, at which the system is shut down";
+  parameter Modelica.Units.SI.Temperature TMax=378.15 "Maximum temperature, at which the system is shut down";
 
   Modelica.Blocks.Sources.RealExpression tHotMax(final y=THotMax)
     annotation (Placement(transformation(extent={{-100,-4},{-80,16}})));

@@ -3,9 +3,9 @@ model Admixture
   extends Modelica.Icons.Example;
 
   package MediumWater = AixLib.Media.Water;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon = 0.5  "Nominal mass flow rate for the individual consumers" annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_nominalCon=m_flow_nominalCon/MediumWater.d_const "Nominal Volume flow rate for the indididual consumers" annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.SIunits.PressureDifference dp_nominalCon = 2000000
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCon = 0.5  "Nominal mass flow rate for the individual consumers" annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominalCon=m_flow_nominalCon/MediumWater.d_const "Nominal Volume flow rate for the indididual consumers" annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_nominalCon = 2000000
     "Pressure drop at nominal conditions for the individual consumers"
     annotation(Dialog(group="Nominal conditions"));
 
@@ -50,12 +50,12 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(bou1.ports[1], admixture.port_b1) annotation (Line(points={{68,2.4},{
-          56,2.4},{56,24.8},{38,24.8}}, color={0,127,255}));
-  connect(bou1.ports[2], admixture.port_a2) annotation (Line(points={{68,-2.4},
-          {57,-2.4},{57,-20.8},{38,-20.8}}, color={0,127,255}));
-  connect(bou2.ports[1], admixture.port_a1) annotation (Line(points={{-68,6.4},
-          {-52,6.4},{-52,24.8},{-38,24.8}}, color={0,127,255}));
-  connect(bou2.ports[2], admixture.port_b2) annotation (Line(points={{-68,1.6},
-          {-54,1.6},{-54,-20.8},{-38,-20.8}}, color={0,127,255}));
+  connect(bou1.ports[1], admixture.port_b1) annotation (Line(points={{68,-1.2},{
+          56,-1.2},{56,24.8},{38,24.8}},color={0,127,255}));
+  connect(bou1.ports[2], admixture.port_a2) annotation (Line(points={{68,1.2},{57,
+          1.2},{57,-20.8},{38,-20.8}},      color={0,127,255}));
+  connect(bou2.ports[1], admixture.port_a1) annotation (Line(points={{-68,2.8},{
+          -52,2.8},{-52,24.8},{-38,24.8}},  color={0,127,255}));
+  connect(bou2.ports[2], admixture.port_b2) annotation (Line(points={{-68,5.2},{
+          -54,5.2},{-54,-20.8},{-38,-20.8}},  color={0,127,255}));
 end Admixture;

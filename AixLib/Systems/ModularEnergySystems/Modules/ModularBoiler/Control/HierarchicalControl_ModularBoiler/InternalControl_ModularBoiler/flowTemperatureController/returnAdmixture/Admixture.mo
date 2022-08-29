@@ -7,16 +7,16 @@ model Admixture
     final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium =  AixLib.Media.Water
     "Medium in the system" annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Temperature T_start=293.15;
+  parameter Modelica.Units.SI.Temperature T_start=293.15;
 
 
   //Nominal conditions
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon "Nominal mass flow rate for the individual consumers" annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_nominalCon=m_flow_nominalCon/Medium.d_const "Nominal Volume flow rate for the indididual consumers" annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.SIunits.PressureDifference dp_nominalCon
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCon "Nominal mass flow rate for the individual consumers" annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominalCon=m_flow_nominalCon/Medium.d_const "Nominal Volume flow rate for the indididual consumers" annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_nominalCon
     "Pressure drop at nominal conditions for the individual consumers"
     annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(enable = hasFeedback, group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(enable = hasFeedback, group="Nominal conditions"));
 
 
   // Assumptions
@@ -54,7 +54,6 @@ model Admixture
 
   AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear
                                               valve(
-    final massDynamics=massDynamics,
     use_inputFilter=false,
     final m_flow_nominal=m_flow_nominalCon,
     final energyDynamics=energyDynamics,
@@ -147,8 +146,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_b1.T, admixtureBus.Tsen_b1) annotation (Line(points={{50,26.6},{50,95.095},
-          {0.11,95.095}}, color={0,0,127}), Text(
+  connect(senT_b1.T, admixtureBus.Tsen_b1) annotation (Line(points={{50,26.6},{50,
+          95.095},{0.11,95.095}},
+                          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -167,14 +167,16 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(VFSen_out.V_flow, admixtureBus.VFlowInMea) annotation (Line(points={{-96.8,44},{
-          -114,44},{-114,95.095},{0.11,95.095}}, color={0,0,127}), Text(
+  connect(VFSen_out.V_flow, admixtureBus.VFlowInMea) annotation (Line(points={{-96.8,
+          44},{-114,44},{-114,95.095},{0.11,95.095}},
+                                                 color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(VFSen_in.V_flow, admixtureBus.VFlowOutMea) annotation (Line(points={{82.8,44},{112,
-          44},{112,95.095},{0.11,95.095}}, color={0,0,127}), Text(
+  connect(VFSen_in.V_flow, admixtureBus.VFlowOutMea) annotation (Line(points={{82.8,44},
+          {112,44},{112,95.095},{0.11,95.095}},
+                                           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

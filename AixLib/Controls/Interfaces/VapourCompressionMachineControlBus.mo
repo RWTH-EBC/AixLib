@@ -65,7 +65,7 @@ annotation (
 
   Boolean Shutdown "true: force shutdown";
 
-  Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
+  Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
 
   annotation (Documentation(info="<html><p>
   Bus connector with all relevant signals for vapour compression

@@ -8,11 +8,11 @@ partial model Boiler_base_MultiPort
     final nPorts=k);
 
   package MediumWater = AixLib.Media.Water;
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TColdNom=308.15    "Return temperature TCold"
+  parameter Modelica.Units.SI.Temperature TColdNom=308.15    "Return temperature TCold"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean m_flowVar=false "Use variable water massflow"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
@@ -20,10 +20,10 @@ partial model Boiler_base_MultiPort
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean Advanced=false "dTWater is constant for different PLR"
     annotation (choices(checkBox=true), Dialog(enable=m_flowVar,descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
     annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
-  parameter Modelica.SIunits.Temperature TStart=293.15    "T start"
+  parameter Modelica.Units.SI.Temperature TStart=293.15    "T start"
     annotation (Dialog(tab="Advanced"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure"
@@ -79,9 +79,9 @@ partial model Boiler_base_MultiPort
     annotation (Placement(transformation(extent={{-46,-10},{-26,10}})));
 
 protected
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-  parameter Modelica.SIunits.PressureDifference dp_calc=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
-  parameter Modelica.SIunits.HeatCapacity cp_medium = Medium.cp_const;
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
+  parameter Modelica.Units.SI.PressureDifference dp_calc=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.Units.SI.HeatCapacity cp_medium = Medium.cp_const;
 
 equation
 

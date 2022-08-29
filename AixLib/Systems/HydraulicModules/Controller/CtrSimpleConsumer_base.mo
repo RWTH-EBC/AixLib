@@ -11,11 +11,11 @@ model CtrSimpleConsumer_base
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
   parameter Real k_ControlConsumerPump(min=Modelica.Constants.small)=0.5 "Gain of controller"
     annotation (Dialog(enable = hasPump, group = "Pump"));
-  parameter Modelica.SIunits.Time Ti_ControlConsumerPump(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti_ControlConsumerPump(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
     annotation (Dialog(enable = hasPump, group = "Pump"));
   parameter Real k_ControlConsumerValve(min=Modelica.Constants.small)=0.5 "Gain of controller"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
-  parameter Modelica.SIunits.Time Ti_ControlConsumerValve=10 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti_ControlConsumerValve=10 "Time constant of Integrator block"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
 
   Modelica.Blocks.Interfaces.RealInput T_Flow
@@ -84,9 +84,8 @@ model CtrSimpleConsumer_base
     Ti=Ti_ControlConsumerPump,
     yMax=1,
     yMin=0.05,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    y_start=0.5) if
-                  hasPump
+    y_start=0.5)
+               if hasPump
     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
@@ -98,7 +97,6 @@ model CtrSimpleConsumer_base
     Ti=Ti_ControlConsumerValve,
     yMax=1,
     yMin=0.05,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=0.5) if hasFeedback
     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},

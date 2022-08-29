@@ -30,16 +30,13 @@ partial model PartialModularPort_b
   parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
     "Guess value of m_flow = port_a.m_flow"
     annotation(Dialog(tab = "Advanced",group="Initialisation medium"));
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=7.5e5
-    "Pressure drop at nominal conditions"
-    annotation (Dialog(tab="Advanced", group="Numeric limitations"));
   parameter Medium.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
     annotation(Dialog(tab = "Advanced",group="Numeric limitations"));
   parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
     "Small mass flow rate for regularization of zero flow"
     annotation(Dialog(tab = "Advanced",group="Numeric limitations"));
-    Modelica.SIunits.MassFlowRate m_flow(start=m_flow_start) = port_a.m_flow
+    Modelica.Units.SI.MassFlowRate m_flow(start=m_flow_start) = port_a.m_flow
     "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
 
   // Definition of connectors
@@ -57,7 +54,7 @@ partial model PartialModularPort_b
     "Fluid connectors b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
 protected
- parameter Modelica.SIunits.PressureDifference dp_nominal = 7.5e5
+ parameter Modelica.Units.SI.PressureDifference dp_nominal = 7.5e5
     "Pressure drop at nominal conditions"
     annotation(Dialog(tab = "Advanced",group="Numeric limitations"));
   annotation (Documentation(revisions="<html><ul>

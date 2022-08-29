@@ -33,11 +33,11 @@ model HierarchicalControl
         group="Two position controller"));
   parameter Integer k(min=1) "Number of heat curcuits"
     annotation(Dialog(group="Admixture control"));
-  parameter Modelica.SIunits.Temperature TBoiler=273.15 + 75
+  parameter Modelica.Units.SI.Temperature TBoiler=273.15 + 75
     "Fix boiler temperature for the admixture"
     annotation(Dialog(
         group="Admixture control"));
-  parameter Modelica.SIunits.Temperature Tref
+  parameter Modelica.Units.SI.Temperature Tref
     "Reference Temperature for the on off controller"
     annotation(Dialog(
         group="Two position controller"));
@@ -47,16 +47,16 @@ model HierarchicalControl
     annotation(Dialog(group="Flow temperature control"));
   parameter Real night_hour=22 "Hour of night in which night mode is enabled"
     annotation (Dialog(group="Flow temperature control"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TOffset = 273.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset = 273.15
     "Offset to heating curve temperature"
     annotation(Dialog(group="Flow temperature control"));
-  parameter Modelica.SIunits.Temperature TMax=273.15 + 105
+  parameter Modelica.Units.SI.Temperature TMax=273.15 + 105
     "Maximum temperature, at which the system is shut down"
     annotation(Dialog(group="Security-related systems"));
-  parameter Modelica.SIunits.Time time_minOff=900
+  parameter Modelica.Units.SI.Time time_minOff=900
     "Time after which the device can be turned on again"
     annotation(Dialog(group="Manual control"));
-  parameter Modelica.SIunits.Time time_minOn=900
+  parameter Modelica.Units.SI.Time time_minOn=900
     "Time after which the device can be turned off again"
     annotation(Dialog(group="Manual control"));
   parameter Boolean variableSetTemperature_admix

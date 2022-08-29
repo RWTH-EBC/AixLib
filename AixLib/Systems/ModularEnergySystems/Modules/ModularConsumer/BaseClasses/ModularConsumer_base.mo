@@ -11,14 +11,14 @@ partial model ModularConsumer_base
               choice="T_input",
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true, group = "System"));
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_fixed[n_consumers] = fill(10000, n_consumers) "Prescribed heat flow";
-  parameter Modelica.SIunits.PressureDifference dp_nominalCon[n_consumers] = fill(10, n_consumers)
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_fixed[n_consumers] = fill(10000, n_consumers) "Prescribed heat flow";
+  parameter Modelica.Units.SI.PressureDifference dp_nominalCon[n_consumers] = fill(10, n_consumers)
     "Pressure drop at nominal conditions for the individual consumers"
      annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
 
-  parameter Modelica.SIunits.HeatCapacity capacity[n_consumers] =  fill(500, n_consumers) "Capacity of the material";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nom[n_consumers] =  fill(10000, n_consumers) "Nominal heat flow";
-  parameter Modelica.SIunits.TemperatureDifference dT_nom[n_consumers] =  fill(20, n_consumers) "nominal temperature difference";
+  parameter Modelica.Units.SI.HeatCapacity capacity[n_consumers] =  fill(500, n_consumers) "Capacity of the material";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nom[n_consumers] =  fill(10000, n_consumers) "Nominal heat flow";
+  parameter Modelica.Units.SI.TemperatureDifference dT_nom[n_consumers] =  fill(20, n_consumers) "nominal temperature difference";
 
   HydraulicModules.SimpleConsumer simpleConsumer[n_consumers](
     redeclare each final package Medium = MediumWater,
@@ -71,7 +71,7 @@ equation
   connect(Q_flow,simpleConsumer. Q_flow) annotation (Line(points={{-60,120},{-60,
           80},{-6,80},{-6,10}},     color={0,0,127}));
   connect(T,simpleConsumer. T) annotation (Line(points={{60,120},{60,80},{6,80},
-          {6,10}}, color={0,0,127}));
+          {6,12}}, color={0,0,127}));
   connect(T_Flow,simpleConsumer. T_Flow) annotation (Line(points={{-106,-60},{-80,
           -60},{-80,-4},{-10.6,-4}},
                                    color={0,0,127}));

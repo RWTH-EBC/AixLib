@@ -1,23 +1,23 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control;
 model Control_wPump_wFeedback
 
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean m_flowVar=false "Use variable water massflow"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
   parameter Boolean Advanced=false "dTWater is constant for different PLR"
     annotation (choices(checkBox=true), Dialog(enable=m_flowVar,descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
     annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.SIunits.Temperature THotMax=363.15 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature THotMax=363.15 "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
-  parameter Modelica.SIunits.Temperature TColdNom=308.15 "Return temperature TCold"
+  parameter Modelica.Units.SI.Temperature TColdNom=308.15 "Return temperature TCold"
     annotation (Dialog(group="Nominal condition"));
   parameter Real k_ControlBoilerValve(min=Modelica.Constants.small)=1 "Gain of controller"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
-  parameter Modelica.SIunits.Time Ti_ControlBoilerValve(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti_ControlBoilerValve(min=Modelica.Constants.small)=10 "Time constant of Integrator block"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
 
   Modelica.Blocks.Logical.Switch switch3
@@ -100,7 +100,7 @@ model Control_wPump_wFeedback
     final Ti=Ti_ControlBoilerValve,
     final yMax=-0.05,
     final yMin=-1,
-    final initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     final y_start=-0.5)
     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
