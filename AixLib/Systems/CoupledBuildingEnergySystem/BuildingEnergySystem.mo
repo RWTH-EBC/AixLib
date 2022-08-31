@@ -99,7 +99,8 @@ model BuildingEnergySystem
         printAsserts=false,
         extrapolation=false),
     redeclare function HeatingCurveFunction =
-        Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=328.15),
+        Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=0, TDesign=
+            328.15),
     use_minRunTime=true,
     use_minLocTime=true,
     use_runPerHou=true,
@@ -307,8 +308,8 @@ equation
           -90},{-228,-90},{-228,-69.7143},{-220,-69.7143}},
                                        color={0,127,255}));
   connect(sou.ports[1],heatPumpSystem. port_a2)
-    annotation (Line(points={{-160,-70},{-170,-70},{-170,-69.7143},{-180,-69.7143}},
-                                                          color={0,127,255}));
+    annotation (Line(points={{-160,-70},{-170,-70},{-170,-69.7143},{-180,
+          -69.7143}},                                     color={0,127,255}));
   connect(Weather.WindSpeed,OFD. WindSpeedPort) annotation (Line(points={{228.7,
           94},{108,94},{108,42},{106,42},{106,33.75},{116.25,33.75}},
                                                           color={0,0,127}));
@@ -398,8 +399,8 @@ equation
   connect(radiator.RadiativeHeat, heatStarToCombHeaters.portRad) annotation (
       Line(points={{56,12},{74,12},{74,-10.0625},{82,-10.0625}},   color={0,0,0}));
   connect(Weather.AirTemp, heatPumpSystem.T_oda) annotation (Line(points={{228.7,
-          87.25},{228.7,86},{214,86},{214,100},{-132,100},{-132,0},{-232,0},{-232,
-          -32.6357},{-223,-32.6357}},
+          87.25},{228.7,86},{214,86},{214,100},{-132,100},{-132,0},{-232,0},{
+          -232,-32.6357},{-223,-32.6357}},
         color={0,0,127}));
   connect(bufferStorage.TTop, heatPumpSystem.TAct) annotation (Line(points={{-102,
           -3.12},{-102,-2},{-223,-2},{-223,-23.9357}},
@@ -427,7 +428,8 @@ equation
           {-124,0},{-132,0},{-132,100},{214,100},{214,87.25},{228.7,87.25}},
                                                          color={0,0,127}));
   connect(heatPumpSystem.port_b1, bufferStorage.fluidportTop1) annotation (Line(
-        points={{-180,-44.8571},{-172,-44.8571},{-172,6},{-88.35,6},{-88.35,0.26}},
+        points={{-180,-44.8571},{-172,-44.8571},{-172,6},{-88.35,6},{-88.35,
+          0.26}},
         color={0,127,255}));
   connect(pumpHeadControlledRad.pumpBus, pumpBusRad) annotation (Line(
       points={{-50,42},{-50,58}},
@@ -502,7 +504,7 @@ equation
 5-Kitchen",
           horizontalAlignment=TextAlignment.Left)}),
     experiment(
-      StopTime=31536000,
-      Interval=900,
+      StopTime=432000,
+      Interval=900.00288,
       __Dymola_Algorithm="Dassl"));
 end BuildingEnergySystem;
