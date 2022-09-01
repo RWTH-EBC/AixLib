@@ -56,6 +56,9 @@ model WholeHouseBuildingEnvelope
     "Attic set temperature for dyn. vent." annotation (Dialog(tab=
           "Dynamic ventilation", enable=withDynamicVentilation));
 
+  parameter Boolean useVentAirPort = false "Use air port for ventialtion" annotation (Dialog(tab=
+          "Dynamic ventilation"));
+
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     final denAir=denAir,
     final cAir=cAir,
@@ -184,7 +187,6 @@ model WholeHouseBuildingEnvelope
     room4_width=2.28,
     room5_width=2.28,
     alfa=1.5707963267949,
-    final nPorts=2,
     replaceable package Medium = Medium) annotation (Placement(transformation(extent={{-22,44},{22,82}})));
 
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
@@ -267,12 +269,13 @@ model WholeHouseBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloUp[5] "Heat port ceiling of ground floor" annotation (Placement(transformation(extent={{-110,-4},{-90,16}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloDown[5] "Heat port floor of ground floor (towards ground plate)" annotation (Placement(transformation(extent={{-112,-78},{-92,-58}}), iconTransformation(extent={{-110,-66},{-90,-46}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groPlateUp[5] "Heat port ground plate towards ground floor" annotation (Placement(transformation(extent={{-112,-100},{-92,-80}}), iconTransformation(extent={{-110,-90},{-90,-70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a portVent_in[11](redeclare final package
-      Medium = Medium) "Inlet for ventilation" annotation (Placement(
-        transformation(extent={{90,-78},{110,-58}}), iconTransformation(extent={
-            {94,-70},{108,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portVent_out[11](redeclare final
-      package Medium = Medium) "Outlet of Ventilation" annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPort_a portVent_in[10](redeclare final package
+      Medium = Medium) if useVentAirPort "Inlet for ventilation" annotation (
+      Placement(transformation(extent={{90,-78},{110,-58}}), iconTransformation(
+          extent={{94,-70},{108,-56}})));
+  Modelica.Fluid.Interfaces.FluidPort_b portVent_out[10](redeclare final
+      package Medium = Medium) if useVentAirPort
+                               "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{90,-98},{110,-78}}), iconTransformation(extent={
             {96,-92},{110,-78}})));
 equation
@@ -393,12 +396,6 @@ equation
     connect(portVent_out[i+5],upperFloor_Building.portVent_out[i]) annotation (Line(
         points={{100,-88},{66,-88},{66,-9.01},{20.23,-9.01}},  color={0,127,255}));
   end for;
-  connect(portVent_in[1+10],attic_2Ro_5Rooms.ports[1]) annotation (Line(
-        points={{100,-77.0909},{88,-77.0909},{88,-78},{76,-78},{76,43.715},{-3.355,
-          43.715}},                                            color={0,127,255}));
-  connect(portVent_out[1+10],attic_2Ro_5Rooms.ports[2]) annotation (Line(
-        points={{100,-97.0909},{66,-97.0909},{66,43.715},{3.355,43.715}},
-                                                               color={0,127,255}));
 
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},
