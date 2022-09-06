@@ -151,8 +151,8 @@ model BuildingEnergySystem
          + 9, 5))
     annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](each unit="K", each
-      displayUnit="degC")                                            annotation(Placement(transformation(extent={{300,-69},
-            {320,-49}}),                                                                                                                   iconTransformation(extent={{101,-7},{117,9}})));
+      displayUnit="degC")                                            annotation(Placement(transformation(extent={{300,-49},
+            {320,-29}}),                                                                                                                   iconTransformation(extent={{101,-7},{117,9}})));
   Fluid.HeatExchangers.Radiators.Radiator radiator[nRooms](
     redeclare package Medium = MediumHydraulic,
     m_flow_nominal=mRad_flow_nominal,
@@ -273,7 +273,30 @@ model BuildingEnergySystem
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={268,-60})));
+        origin={268,-40})));
+  Modelica.Blocks.Interfaces.RealOutput dTComfort[8] annotation (Placement(
+        transformation(extent={{300,-69},{320,-49}}), iconTransformation(extent
+          ={{101,-7},{117,9}})));
+  Modelica.Blocks.Continuous.Integrator integrator[nRooms]
+    annotation (Placement(transformation(extent={{260,-70},{280,-50}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1
+                                                       [nRooms](final y=PI.u_s
+         .- PI.u_m)                                             annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={238,-60})));
+  Modelica.Blocks.Continuous.Integrator integratorEl
+    annotation (Placement(transformation(extent={{260,-100},{280,-80}})));
+  Modelica.Blocks.Interfaces.RealOutput Wel(each unit="J") annotation (
+      Placement(transformation(extent={{300,-91},{320,-71}}),
+        iconTransformation(extent={{101,-7},{117,9}})));
+  Modelica.Blocks.Sources.RealExpression realExpressionPel(final y=
+        heatPumpSystem.heatPump.sigBus.PelMea) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={238,-90})));
 protected
   parameter Real heiToDiaRatio=2 "Ratio of height to diameter";
   parameter Integer nRooms = 8 "Number of rooms";
@@ -448,10 +471,18 @@ equation
           {10,22}}, color={0,0,127}));
   connect(TRoomSet.y, PI.u_s)
     annotation (Line(points={{1,90},{18,90}}, color={0,0,127}));
-  connect(realExpressionTAirs.y, TAirRooms) annotation (Line(points={{279,-60},{
-          294,-60},{294,-59},{310,-59}}, color={0,0,127}));
+  connect(realExpressionTAirs.y, TAirRooms) annotation (Line(points={{279,-40},
+          {294,-40},{294,-39},{310,-39}},color={0,0,127}));
   connect(realExpression.y, PI.u_m)
     annotation (Line(points={{30,65},{30,78}}, color={0,0,127}));
+  connect(integrator.y, dTComfort) annotation (Line(points={{281,-60},{294,-60},
+          {294,-59},{310,-59}}, color={0,0,127}));
+  connect(integrator.u, realExpression1.y)
+    annotation (Line(points={{258,-60},{249,-60}}, color={0,0,127}));
+  connect(integratorEl.y, Wel) annotation (Line(points={{281,-90},{292,-90},{
+          292,-81},{310,-81}}, color={0,0,127}));
+  connect(realExpressionPel.y, integratorEl.u)
+    annotation (Line(points={{249,-90},{258,-90}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-300,-100},
             {300,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-300,-100},{300,100}}), graphics={                                                                                           Rectangle(extent={{73,-40},
