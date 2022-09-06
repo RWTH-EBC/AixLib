@@ -1,20 +1,17 @@
 within AixLib.Systems.CoupledBuildingEnergySystem;
 model BuildingEnergySystem
-  parameter Integer TIR=3 "Thermal Insulation Regulation" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
+  extends Modelica.Icons.Example;
+  parameter Real kVal=0.2 "Gain of controller";
+  parameter Modelica.Units.SI.Time TiVal=1800
+    "Time constant of Integrator block";
+  parameter Real kHP=0.1 "Gain of controller";
+  parameter Modelica.Units.SI.Time TiHP=500 "Time constant of Integrator block";
+  parameter Modelica.Units.SI.Volume V=0.2 "Volume of tank";
+
   parameter Modelica.Units.SI.HeatFlowRate QBui_flow_nominal[nRooms]={1125.6167,
       570.6886,680.91516,810.3087,793.1851,562.0106,675.3329,639.1092}
                                                                      "Nominal heat load of building";
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay();
     replaceable package MediumHydraulic = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium
     annotation (choicesAllMatching=true);
@@ -25,16 +22,14 @@ model BuildingEnergySystem
     "Nominal mass flow rate of each radiator";
   parameter Modelica.Units.SI.Volume VHydraulic=0.01
                                                 "Volume of hydraulic pipes";
-  parameter Real k=0.2
-                     "Gain of controller";
-  parameter Modelica.Units.SI.Time Ti=1800
-    "Time constant of Integrator block";
-  parameter Integer nRooms = 8 "Number of rooms";
-  Modelica.Blocks.Continuous.LimPID PI[nRooms](each final controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    each final k=k,
-    each final Ti=Ti,                                                                                                                       each final yMax=1,
+
+  Modelica.Blocks.Continuous.LimPID PI[nRooms](
+    each final controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    each final k=kVal,
+    each final Ti=TiVal,
+    each final yMax=1,
     final yMin=val.l)
-  annotation (Placement(transformation(extent={{20,80},{40,100}})));
+    annotation (Placement(transformation(extent={{20,80},{40,100}})));
 
   Fluid.Sources.Boundary_pT        sin(
     nPorts=1,
@@ -48,7 +43,7 @@ model BuildingEnergySystem
     redeclare package Medium = MediumEva,
     T=283.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{-140,-80},{-160,-60}})));
-  HeatPumpSystems.HeatPumpSystem                heatPumpSystem(
+  HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     TEva_nominal=263.15,
     dTCon=8,
     redeclare package Medium_con = MediumHydraulic,
@@ -86,7 +81,10 @@ model BuildingEnergySystem
     cpCon=4184,
     use_secHeaGen=false,
     redeclare model TSetToNSet =
-        AixLib.Controls.HeatPump.BaseClasses.InverterControlledHP (hys=5, Ti=500),
+        AixLib.Controls.HeatPump.BaseClasses.InverterControlledHP (
+        hys=5,
+        k=kHP,
+        Ti=TiHP),
     use_sec=true,
     QCon_nominal=sum(QBui_flow_nominal),
     P_el_nominal=heatPumpSystem.QCon_nominal/3,
@@ -99,8 +97,7 @@ model BuildingEnergySystem
         printAsserts=false,
         extrapolation=false),
     redeclare function HeatingCurveFunction =
-        Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=0, TDesign=
-            328.15),
+        Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=0, TDesign=328.15),
     use_minRunTime=true,
     use_minLocTime=true,
     use_runPerHou=true,
@@ -113,12 +110,8 @@ model BuildingEnergySystem
     VEva=0.004)
     annotation (Placement(transformation(extent={{-220,-78},{-180,-20}})));
 
-  Modelica.Blocks.Sources.CombiTimeTable NaturalVentilation(
-    columns={2,3,4,5,7},
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableOnFile=false,
-    table=VentilationProfile.Profile)                                                                                                                                                                         annotation(Placement(transformation(extent={{100,60},
-            {79,81}})));
+  Modelica.Blocks.Sources.Constant NaturalVentilation[5](each k=0.1)
+    annotation (Placement(transformation(extent={{100,60},{79,81}})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather        Weather(
     Latitude=49.5,
     Longitude=8.5,
@@ -145,25 +138,21 @@ model BuildingEnergySystem
     redeclare model CorrSolarGainWin =
         ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
-    n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
+    n50=4,
     withDynamicVentilation=false,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{121,-47},
+    UValOutDoors=2.9) annotation (Placement(transformation(extent={{121,-47},
             {216,48}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{160,60},{139.5,80}})));
   Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToCombHeaters[nRooms]
-    annotation (Placement(transformation(extent={{96,-19},{82,-8}})));
+    annotation (Placement(transformation(extent={{100,-17},{78,0}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature tempGround[5](T=fill(273.15
          + 9, 5))
     annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](each unit="K", each
-      displayUnit="degC")                                            annotation(Placement(transformation(extent={{278,-55},
-            {298,-35}}),                                                                                                                   iconTransformation(extent={{101,-7},{117,9}})));
-  Modelica.Blocks.Interfaces.RealOutput Toutside(unit="K", displayUnit="degC")
-                                                                annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={262,-75}),     iconTransformation(extent={{100,83},{116,99}})));
-  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit="W/m2")   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={283,-75}),     iconTransformation(extent={{100,63},{116,79}})));
-  Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={220,-75}),     iconTransformation(extent={{101,-79},{117,-63}})));
+      displayUnit="degC")                                            annotation(Placement(transformation(extent={{300,-69},
+            {320,-49}}),                                                                                                                   iconTransformation(extent={{101,-7},{117,9}})));
   Fluid.HeatExchangers.Radiators.Radiator radiator[nRooms](
     redeclare package Medium = MediumHydraulic,
     m_flow_nominal=mRad_flow_nominal,
@@ -190,19 +179,19 @@ model BuildingEnergySystem
     useHeatingCoil2=false,
     useHeatingRod=false,
     redeclare AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data(
-      hTank=3,
+      hTank=hTank,
       hLowerPortDemand=0,
-      hUpperPortDemand=3,
+      hUpperPortDemand=hTank,
       hLowerPortSupply=0,
-      hUpperPortSupply=3,
-      hHC1Up=3,
+      hUpperPortSupply=hTank,
+      hHC1Up=hTank,
       hHC1Low=0,
-      hHC2Up=3,
+      hHC2Up=hTank,
       lambdaWall=50,
       lambdaIns=0.045,
       hHC2Low=0,
       hHR=0,
-      dTank=1.5,
+      dTank=dTank,
       sWall(displayUnit="mm") = 0.005,
       sIns(displayUnit="mm") = 0.02,
       hTS1=0,
@@ -247,8 +236,6 @@ model BuildingEnergySystem
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-10,30})));
-  Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpBusHPS
-    annotation (Placement(transformation(extent={{-280,10},{-260,30}})));
   Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpBusRad
     annotation (Placement(transformation(extent={{-60,48},{-40,68}})));
   Fluid.Actuators.Valves.TwoWayLinear val[nRooms](redeclare package Medium =
@@ -256,9 +243,9 @@ model BuildingEnergySystem
     each dpValve_nominal=100)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstantPumpOn(k=true)
-    annotation (Placement(transformation(extent={{-300,20},{-280,40}})));
+    annotation (Placement(transformation(extent={{-120,42},{-100,62}})));
   Modelica.Blocks.Sources.Constant constPumpHPSOn1(k=pumpHeadControlledRad.pumpParam.nMax)
-    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+    annotation (Placement(transformation(extent={{-120,80},{-100,100}})));
   Modelica.Blocks.Sources.Constant TRoomSet[nRooms](final k={293.15,293.15,295.15,
         293.15,291.15,293.15,297.15,293.15})
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
@@ -267,7 +254,7 @@ model BuildingEnergySystem
   Fluid.Sources.Boundary_pT        sin1(redeclare package Medium =
         MediumHydraulic, nPorts=1)
               "Fluid sink on source side"
-    annotation (Placement(transformation(extent={{-312,-40},{-292,-20}})));
+    annotation (Placement(transformation(extent={{-280,-40},{-260,-20}})));
   Modelica.Blocks.Sources.RealExpression realExpression[nRooms](final y={OFD.groundFloor_Building.Livingroom.airload.heatPort.T,
         OFD.groundFloor_Building.Hobby.airload.heatPort.T,OFD.groundFloor_Building.WC_Storage.airload.heatPort.T,
         OFD.groundFloor_Building.Kitchen.airload.heatPort.T,OFD.upperFloor_Building.Bedroom.airload.heatPort.T,
@@ -286,24 +273,14 @@ model BuildingEnergySystem
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={246,-46})));
+        origin={268,-60})));
+protected
+  parameter Real heiToDiaRatio=2 "Ratio of height to diameter";
+  parameter Integer nRooms = 8 "Number of rooms";
+  parameter Modelica.Units.SI.Height hTank=dTank*heiToDiaRatio "Height of storage";
+  parameter Modelica.Units.SI.Diameter dTank=(V*4/(heiToDiaRatio*Modelica.Constants.pi)) "Inner diameter of storage";
 equation
-  // Outputs
 
-  //SimulationData
-  VentilationSchedule[1] = NaturalVentilation.y[1];
-  VentilationSchedule[2] = NaturalVentilation.y[2];
-  VentilationSchedule[3] = NaturalVentilation.y[3];
-  VentilationSchedule[4] = NaturalVentilation.y[4];
-
-  Toutside =Weather.AirTemp;
-  //SolarRadiation
-  SolarRadiation[1] = Weather.SolarRadiation_OrientedSurfaces[1].I;
-  SolarRadiation[2] = Weather.SolarRadiation_OrientedSurfaces[2].I;
-  SolarRadiation[3] = Weather.SolarRadiation_OrientedSurfaces[3].I;
-  SolarRadiation[4] = Weather.SolarRadiation_OrientedSurfaces[4].I;
-  SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
-  SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
   connect(sin.ports[1],heatPumpSystem. port_b2) annotation (Line(points={{-260,
           -90},{-228,-90},{-228,-69.7143},{-220,-69.7143}},
                                        color={0,127,255}));
@@ -339,37 +316,37 @@ equation
     annotation (Line(points={{283.44,55.75},{272,55.75},{272,29},{218.85,29}},
                                                                           color=
          {255,128,0}));
-  connect(NaturalVentilation.y[1],OFD. AirExchangePort[1]) annotation (Line(
+  connect(NaturalVentilation[1].y,OFD. AirExchangePort[1]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,22.0909},{116.25,22.0909}},
                                                                      color={0,0,
           127}));
-  connect(NaturalVentilation.y[1],OFD. AirExchangePort[6]) annotation (Line(
+  connect(NaturalVentilation[1].y,OFD. AirExchangePort[6]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,24.25},{116.25,24.25}}, color={0,0,127}));
-  connect(NaturalVentilation.y[2],OFD. AirExchangePort[2]) annotation (Line(
+  connect(NaturalVentilation[2].y,OFD. AirExchangePort[2]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,22.5227},{116.25,22.5227}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[2],OFD. AirExchangePort[7]) annotation (Line(
+  connect(NaturalVentilation[2].y,OFD. AirExchangePort[7]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,24.6818},{116.25,24.6818}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[3],OFD. AirExchangePort[4]) annotation (Line(
+  connect(NaturalVentilation[3].y,OFD. AirExchangePort[4]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,23.3864},{116.25,23.3864}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[3],OFD. AirExchangePort[9]) annotation (Line(
+  connect(NaturalVentilation[3].y,OFD. AirExchangePort[9]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,25.5455},{116.25,25.5455}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[4],OFD. AirExchangePort[5]) annotation (Line(
+  connect(NaturalVentilation[4].y,OFD. AirExchangePort[5]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,23.8182},{116.25,23.8182}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[4],OFD. AirExchangePort[10]) annotation (Line(
+  connect(NaturalVentilation[4].y,OFD. AirExchangePort[10]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,25.9773},{116.25,25.9773}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[5],OFD. AirExchangePort[3]) annotation (Line(
+  connect(NaturalVentilation[5].y,OFD. AirExchangePort[3]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,22.9545},{116.25,22.9545}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[5],OFD. AirExchangePort[8]) annotation (Line(
+  connect(NaturalVentilation[5].y,OFD. AirExchangePort[8]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,25.1136},{116.25,25.1136}},
                                                                    color={0,0,127}));
-  connect(NaturalVentilation.y[5],OFD. AirExchangePort[11]) annotation (Line(
+  connect(NaturalVentilation[5].y, OFD. AirExchangePort[11]) annotation (Line(
         points={{77.95,70.5},{78,70.5},{78,26.4091},{116.25,26.4091}},
                                                                    color={0,0,127}));
   connect(tempGround.port,OFD. groundTemp) annotation (Line(points={{160,-70},{160,
@@ -379,25 +356,25 @@ equation
           11.9},{109,0.5},{121,0.5}},                                                                        color={191,0,0}));
   connect(OFD.groFloDown,OFD. groPlateUp) annotation (Line(points={{121,-26.1},{
           115,-26.1},{115,-26},{109,-26},{109,-37.5},{121,-37.5}},                                                                       color={191,0,0}));
-  connect(heatStarToCombHeaters[1].portConvRadComb, OFD.heatingToRooms[1]) annotation (Line(points={{96,
-          -13.5},{96,-14.9591},{121,-14.9591}},                                                                                                             color={191,0,0}));
-  connect(heatStarToCombHeaters[2].portConvRadComb, OFD.heatingToRooms[2]) annotation (Line(points={{96,
-          -13.5},{96,-14.5273},{121,-14.5273}},                                                                                                             color={191,0,0}));
-  connect(heatStarToCombHeaters[3].portConvRadComb, OFD.heatingToRooms[4]) annotation (Line(points={{96,
-          -13.5},{96,-13.6636},{121,-13.6636}},                                                                                                             color={191,0,0}));
-  connect(heatStarToCombHeaters[4].portConvRadComb, OFD.heatingToRooms[5]) annotation (Line(points={{96,
-          -13.5},{96,-13.2318},{121,-13.2318}},                                                                                                             color={191,0,0}));
-  connect(heatStarToCombHeaters[5].portConvRadComb, OFD.heatingToRooms[6]) annotation (Line(points={{96,
-          -13.5},{96,-12.8},{121,-12.8}},                                                                                                                   color={191,0,0}));
-  connect(heatStarToCombHeaters[6].portConvRadComb, OFD.heatingToRooms[7]) annotation (Line(points={{96,
-          -13.5},{96,-12.3682},{121,-12.3682}},                                                                                                       color={191,0,0}));
-  connect(heatStarToCombHeaters[7].portConvRadComb, OFD.heatingToRooms[9]) annotation (Line(points={{96,
-          -13.5},{96,-11.5045},{121,-11.5045}},                                                                                                             color={191,0,0}));
-  connect(heatStarToCombHeaters[8].portConvRadComb, OFD.heatingToRooms[10]) annotation (Line(points={{96,
-          -13.5},{96,-11.0727},{121,-11.0727}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[1].portConvRadComb, OFD.heatingToRooms[1]) annotation (Line(points={{100,
+          -8.5},{100,-14.9591},{121,-14.9591}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[2].portConvRadComb, OFD.heatingToRooms[2]) annotation (Line(points={{100,
+          -8.5},{100,-14.5273},{121,-14.5273}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[3].portConvRadComb, OFD.heatingToRooms[4]) annotation (Line(points={{100,
+          -8.5},{100,-13.6636},{121,-13.6636}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[4].portConvRadComb, OFD.heatingToRooms[5]) annotation (Line(points={{100,
+          -8.5},{100,-13.2318},{121,-13.2318}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[5].portConvRadComb, OFD.heatingToRooms[6]) annotation (Line(points={{100,
+          -8.5},{100,-12.8},{121,-12.8}},                                                                                                                   color={191,0,0}));
+  connect(heatStarToCombHeaters[6].portConvRadComb, OFD.heatingToRooms[7]) annotation (Line(points={{100,
+          -8.5},{100,-12.3682},{121,-12.3682}},                                                                                                       color={191,0,0}));
+  connect(heatStarToCombHeaters[7].portConvRadComb, OFD.heatingToRooms[9]) annotation (Line(points={{100,
+          -8.5},{100,-11.5045},{121,-11.5045}},                                                                                                             color={191,0,0}));
+  connect(heatStarToCombHeaters[8].portConvRadComb, OFD.heatingToRooms[10]) annotation (Line(points={{100,
+          -8.5},{100,-11.0727},{121,-11.0727}},                                                                                                             color={191,0,0}));
 
   connect(radiator.RadiativeHeat, heatStarToCombHeaters.portRad) annotation (
-      Line(points={{56,12},{74,12},{74,-10.0625},{82,-10.0625}},   color={0,0,0}));
+      Line(points={{56,12},{56,-3.1875},{78,-3.1875}},             color={0,0,0}));
   connect(Weather.AirTemp, heatPumpSystem.T_oda) annotation (Line(points={{228.7,
           87.25},{228.7,86},{214,86},{214,100},{-132,100},{-132,0},{-232,0},{
           -232,-32.6357},{-223,-32.6357}},
@@ -441,32 +418,28 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(radiator.ConvectiveHeat, heatStarToCombHeaters.portConv) annotation (
-      Line(points={{50,12},{94,12},{94,-16.9375},{82,-16.9375}}, color={191,0,0}));
+      Line(points={{50,12},{50,-14},{64,-14},{64,-13.8125},{78,-13.8125}},
+                                                                 color={191,0,0}));
   connect(val.port_b, radiator.port_a)
     annotation (Line(points={{20,10},{42,10}}, color={0,127,255}));
-  connect(booleanConstantPumpOn.y, pumpBusHPS.onSet) annotation (Line(points={{-279,
-          30},{-269.95,30},{-269.95,20.05}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstantPumpOn.y, pumpBusRad.onSet) annotation (Line(points={{-279,
-          30},{-266,30},{-266,62},{-49.95,62},{-49.95,58.05}}, color={255,0,255}),
+  connect(booleanConstantPumpOn.y, pumpBusRad.onSet) annotation (Line(points={{-99,52},
+          {-66,52},{-66,58.05},{-49.95,58.05}},                color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constPumpHPSOn1.y, pumpBusRad.rpmSet) annotation (Line(points={{-59,70},
-          {-49.95,70},{-49.95,58.05}}, color={0,0,127}), Text(
+  connect(constPumpHPSOn1.y, pumpBusRad.rpmSet) annotation (Line(points={{-99,90},
+          {-49.95,90},{-49.95,58.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constPumpHPSOn2.y, sou.m_flow_in) annotation (Line(points={{-159,-90},
           {-144,-90},{-144,-88},{-138,-88},{-138,-62}}, color={0,0,127}));
-  connect(sin1.ports[1], heatPumpSystem.port_a1) annotation (Line(points={{-292,
-          -30},{-236,-30},{-236,-44.8571},{-220,-44.8571}}, color={0,127,255}));
+  connect(sin1.ports[1], heatPumpSystem.port_a1) annotation (Line(points={{-260,
+          -30},{-248,-30},{-248,-38},{-230,-38},{-230,-44.8571},{-220,-44.8571}},
+                                                            color={0,127,255}));
   connect(heatPumpSystem.port_a1, bufferStorage.fluidportBottom1) annotation (
       Line(points={{-220,-44.8571},{-230,-44.8571},{-230,-38},{-248,-38},{-248,
           28},{-112,28},{-112,-62},{-88.0875,-62},{-88.0875,-52.52}}, color={0,
@@ -475,28 +448,28 @@ equation
           {10,22}}, color={0,0,127}));
   connect(TRoomSet.y, PI.u_s)
     annotation (Line(points={{1,90},{18,90}}, color={0,0,127}));
-  connect(realExpressionTAirs.y, TAirRooms) annotation (Line(points={{257,-46},
-          {272,-46},{272,-45},{288,-45}},color={0,0,127}));
+  connect(realExpressionTAirs.y, TAirRooms) annotation (Line(points={{279,-60},{
+          294,-60},{294,-59},{310,-59}}, color={0,0,127}));
   connect(realExpression.y, PI.u_m)
     annotation (Line(points={{30,65},{30,78}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-300,-100},
             {300,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-300,-100},{300,100}}), graphics={                                                                                           Rectangle(extent={{87,-40},
-              {126,-100}},                                                                                                                                                                lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{90,-54},
-              {126,-92}},                                                                                                                                                            lineColor={0,0,255},
+          extent={{-300,-100},{300,100}}), graphics={                                                                                           Rectangle(extent={{73,-40},
+              {112,-100}},                                                                                                                                                                lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{76,-54},
+              {112,-92}},                                                                                                                                                            lineColor={0,0,255},
           textString="1-Bedroom
 2-Child1
 3-Corridor
 4-Bath
-5-Child2",horizontalAlignment=TextAlignment.Left),                                                                                                                                                                                                        Text(extent={{109,-52},
-              {125,-41}},                                                                                                                                                                               lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "UF"), Rectangle(extent={{44,-40},
-              {86,-100}},                                                                                                                                                                                     lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{69,-52},
-              {85,-41}},                                                                                                                                                              lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "GF"),                                                                                                                       Text(extent={{47,-54},
-              {86,-91}},                                                                                                                                                                                lineColor={0,0,255},
+5-Child2",horizontalAlignment=TextAlignment.Left),                                                                                                                                                                                                        Text(extent={{95,-52},
+              {111,-41}},                                                                                                                                                                               lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "UF"), Rectangle(extent={{30,-40},
+              {72,-100}},                                                                                                                                                                                     lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{55,-52},
+              {71,-41}},                                                                                                                                                              lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "GF"),                                                                                                                       Text(extent={{33,-54},
+              {72,-91}},                                                                                                                                                                                lineColor={0,0,255},
           textString="1-Livingroom
 2-Hobby
 3-Corridor
