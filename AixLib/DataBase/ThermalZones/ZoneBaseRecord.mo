@@ -135,6 +135,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean HeaterOn "Use heater component";
   parameter Real hCool "Upper limit controller output";
   parameter Real lCool "Lower limit controller output";
+  parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
+  parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
   parameter Real KRCool "Gain of the controller";
   parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";

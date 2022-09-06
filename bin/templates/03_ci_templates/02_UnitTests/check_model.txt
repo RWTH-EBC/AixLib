@@ -5,13 +5,13 @@ stages:
 .check_model_job:
     stage: check
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+
     artifacts:
         when: on_failure
         paths:
@@ -28,6 +28,9 @@ stages:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
+        refs:
+            - master
+            - development
             
 %for package in package_list:
 Check_${library}_${package}:
@@ -37,17 +40,48 @@ Check_${library}_${package}:
 
 %endfor
 
+.dev_check_model_job:
+    stage: check
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate ${python_version}
+        - pip install natsort
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag}
+
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/${library}.${lib_package}-log.txt
+            - ${library}/${library}.${lib_package}-errorlog.txt
+        expire_in: 7 day
+    only:
+        refs:
+            - master
+            - development
+    retry:
+        max: 2
+        when: runner_system_failure
+
+%for package in package_list:
+Development_Check_${library}_${package}:
+    variables:
+        lib_package: ${package}
+    extends: .dev_check_model_job
+
+%endfor
+
 .check_changed_models_job:
     stage: check
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  ${ch_file}
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM 
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -58,6 +92,8 @@ Check_${library}_${package}:
         refs:
             - external_pull_requests
             ${merge_branch}
+            - master
+            - development
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
@@ -80,13 +116,12 @@ Check_${library}_${package}_changed_models:
 .CI_check_model_job:
     stage: check
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag}  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -115,7 +150,6 @@ CI_Check_${library}_${package}:
 whitelist_job:
     stage: create_whitelist
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
@@ -134,7 +168,7 @@ whitelist_job:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist 
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
@@ -164,3 +198,4 @@ whitelist_job:
     except:
         refs:
             - external_pull_requests
+

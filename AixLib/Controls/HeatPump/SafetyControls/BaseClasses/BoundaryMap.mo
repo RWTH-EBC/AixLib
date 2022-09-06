@@ -94,6 +94,5 @@ equation
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>
 </ul>
-</html>"),
-      uses(AixLib(version="0.7.3"), Modelica(version="3.2.2")));
+</html>"));
 end BoundaryMap;

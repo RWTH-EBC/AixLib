@@ -4,12 +4,11 @@ stages:
 Style_Check_AixLib:
     stage: StyleCheck
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -DS 2022
+        - xvfb-run -n 77 python bin/CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -DS 2022 
     artifacts:
         when: on_failure
         paths:
@@ -20,6 +19,7 @@ Style_Check_AixLib:
     only:
         refs:
             - external_pull_requests
+
     except:
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
@@ -35,18 +35,41 @@ Style_Check_AixLib:
             - $CI_COMMIT_MESSAGE  =~ /ci_create_html_whitelist/
             - $CI_COMMIT_MESSAGE  =~ /ci_html/
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
-            
+        refs:
+            - master
+            - development
+
+
+Development_Style_Check:
+    stage: StyleCheck
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate myenv
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - xvfb-run -n 77 python bin/CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -DS 2022
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib_StyleCheckLog.html
+            - AixLib/AixLib_StyleErrorLog.html
+        expire_in: 7 day
+    allow_failure: true
+    only:
+        refs:
+            - master
+            - development
+
     
 Style_Check_ChangedModel:
     stage: StyleCheck
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - (git diff --raw --diff-filter=AMT HEAD^1) > bin/Configfiles/ci_changed_model_list.txt
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -CM -DS 2022
+        - xvfb-run -n 77 python bin/CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -CM -DS 2022 
     only:
         changes:
             - AixLib/**/*
@@ -54,7 +77,9 @@ Style_Check_ChangedModel:
     except:
         refs:
             - external_pull_requests
-            - IBPSA_Merge 
+            - IBPSA_Merge
+            - master
+            - development
         variables:
             - $CI_COMMIT_MESSAGE =~ /ci_update_ref/
             - $CI_COMMIT_MESSAGE =~ /ci_dif_ref/

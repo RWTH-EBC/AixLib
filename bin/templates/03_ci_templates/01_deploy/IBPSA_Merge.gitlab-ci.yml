@@ -8,7 +8,6 @@ stages:
 IBPSA:
     stage: IBPSA_Merge
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install natsort
@@ -69,7 +68,7 @@ IBPSA:
 WhiteList:
     stage: Update_WhiteList
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+       
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install natsort
@@ -86,8 +85,8 @@ WhiteList:
     script:
         - cd Merge_Package/${CI_PROJECT_NAME}
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --WhiteList # Update WhiteList for HTML
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2022 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --library AixLib --wh-library IBPSA --whitelist
-        - python bin/CITests/05_Converter/lock_model.py --library AixLib --wh-library IBPSA
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2022 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --library AixLib --wh-library IBPSA --whitelist
+        - python bin/CITests/05_Converter/lock_model.py --library AixLib --wh-library IBPSA 
         - rm  -r IBPSA 
         - message="Update WhiteList_CheckModel.txt and HTML_IBPSA_WhiteList.txt"
         - git add  . 
