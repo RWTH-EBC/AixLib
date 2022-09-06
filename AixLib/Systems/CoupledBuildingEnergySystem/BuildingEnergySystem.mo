@@ -58,8 +58,8 @@ model BuildingEnergySystem
     refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
-    use_opeEnvFroRec=true,
-    tableUpp=[-100,100; 100,100],
+    use_opeEnvFroRec=false,
+    tableUpp=[-20,55; -10,60; -5,65; 30,65],
     minIceFac=0,
     use_chiller=true,
     calcPel_deFro=100,
@@ -89,13 +89,7 @@ model BuildingEnergySystem
     QCon_nominal=sum(QBui_flow_nominal),
     P_el_nominal=heatPumpSystem.QCon_nominal/3,
     redeclare model PerDataHea =
-        DataBase.HeatPump.PerformanceData.LookUpTable2D (
-        smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-        dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,
-            -5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,4958,
-            5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583]),
-        printAsserts=false,
-        extrapolation=false),
+        AixLib.DataBase.HeatPump.PerformanceData.VCLibMap,
     redeclare function HeatingCurveFunction =
         Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=0, TDesign=328.15),
     use_minRunTime=true,
@@ -424,8 +418,8 @@ equation
                                                           color={0,127,255}));
  end for;
 
-  connect(sou.T_in, Weather.AirTemp) annotation (Line(points={{-138,-66},{-124,-66},
-          {-124,0},{-132,0},{-132,100},{214,100},{214,87.25},{228.7,87.25}},
+  connect(sou.T_in, Weather.AirTemp) annotation (Line(points={{-138,-66},{-122,
+          -66},{-122,0},{-130,0},{-130,100},{216,100},{216,87.25},{228.7,87.25}},
                                                          color={0,0,127}));
   connect(heatPumpSystem.port_b1, bufferStorage.fluidportTop1) annotation (Line(
         points={{-180,-44.8571},{-172,-44.8571},{-172,6},{-88.35,6},{-88.35,
