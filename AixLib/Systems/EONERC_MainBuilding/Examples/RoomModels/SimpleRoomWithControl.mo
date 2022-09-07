@@ -12,7 +12,7 @@ model SimpleRoomWithControl
     Ti=200,
     VFlowSet=3*1800/3600)
     annotation (Placement(transformation(extent={{-100,120},{-80,140}})));
-  Controller.CtrTabs                                     ctrTabs2_1(
+  TABS.Controller.CtrTabs                                ctrTabs2_1(
       useExternalTset=false, TflowSet=295.15)
     annotation (Placement(transformation(extent={{-100,100},{-80,120}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
@@ -57,7 +57,8 @@ model SimpleRoomWithControl
   Modelica.Blocks.Interfaces.RealOutput Tair
     annotation (Placement(transformation(extent={{-152,22},{-132,42}}),
         iconTransformation(extent={{-64,-140},{-44,-120}})));
-  Modelica.Blocks.Tables.CombiTable1D ccaHeatCurve(table=[270.15,301.15; 273.15,
+  Modelica.Blocks.Tables.CombiTable1Ds ccaHeatCurve(
+                                                   table=[270.15,301.15; 273.15,
         301.15; 278.15,298.15; 283.15,295.15; 293.15,293.15; 298.15,291.15;
         303.15,291.15])
     annotation (Placement(transformation(extent={{-140,100},{-120,120}})));

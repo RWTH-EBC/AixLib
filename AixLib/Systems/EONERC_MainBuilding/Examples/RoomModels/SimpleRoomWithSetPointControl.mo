@@ -8,12 +8,11 @@ model SimpleRoomWithSetPointControl
 
   ModularAHU.Controller.CtrAHUBasic ctrAhu(
     useExternalTset=true,
-    useExternalVset=false,
     k=0.3,
     Ti=200,
     VFlowSet=3*1800/3600)
     annotation (Placement(transformation(extent={{-100,100},{-80,120}})));
-  Controller.CtrTabs                                     ctrTabs2_1(
+  TABS.Controller.CtrTabs                                ctrTabs2_1(
       useExternalTset=true, TflowSet=295.15)
     annotation (Placement(transformation(extent={{-100,122},{-80,142}})));
   Modelica.Blocks.Interfaces.RealInput TsetCca

@@ -5,7 +5,7 @@ model Ashrae140Testcase900 "Model of a ERC-Thermal Zone Including CCA and AHU"
     annotation (choicesAllMatching=true);
     package MediumAir = AixLib.Media.AirIncompressible
     annotation (choicesAllMatching=true);
-  AixLib.Systems.EONERC_MainBuilding.Tabs
+  TABS.Tabs
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
@@ -13,18 +13,6 @@ model Ashrae140Testcase900 "Model of a ERC-Thermal Zone Including CCA and AHU"
     thickness=0.1,
     alpha=20,
     length=50,
-    dynamicHX1(
-      m1_flow_nominal=0.1,
-      m2_flow_nominal=0.1,
-      nNodes=4,
-      dT_nom=6,
-      Q_nom=6000),
-    dynamicHX(
-      m1_flow_nominal=0.1,
-      m2_flow_nominal=0.1,
-      nNodes=4,
-      dT_nom=4,
-      Q_nom=6000),
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
@@ -316,15 +304,15 @@ equation
   connect(internalGains.y,thermalZone1. intGains) annotation (Line(points={{53,-18.3},
           {52,-18.3},{52,-12},{52.4,-12},{52.4,2.64}},
                                             color={0,0,127}));
-  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{88,-19},
-          {88,28.16},{58.56,28.16}},                                color={191,
+  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{88,
+          -18.9},{88,28.16},{58.56,28.16}},                         color={191,
           0,0}));
   connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{
-          0.163636,-20.1818},{28,-20.1818},{28,6.12},{23.42,6.12}},
+          0.163636,-20.1818},{28,-20.1818},{28,6.12},{26.71,6.12}},
                                                                  color={0,127,
           255}));
   connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{
-          0.163636,-10.7273},{38,-10.7273},{38,6.12},{36.58,6.12}},
+          0.163636,-10.7273},{38,-10.7273},{38,6.12},{33.29,6.12}},
                                                                color={0,127,255}));
   connect(boundaryExhaustAir.ports[1],genericAHU1. port_b2) annotation (Line(
         points={{-58,-10},{-58,-10.7273},{-36,-10.7273}},    color={0,127,255}));
@@ -343,7 +331,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(tabs1.tabsBus, Bus.tabsBus) annotation (Line(
-      points={{77.9,-31.9},{77.9,100.05},{0.05,100.05}},
+      points={{77.9,-30.89},{77.9,100.05},{0.05,100.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -385,14 +373,14 @@ equation
   connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={{
           13,-48},{12,-48},{12,-42},{-8,-42},{-8,-32},{-8.34545,-32}}, color={0,
           127,255}));
-  connect(bouWatercold1.ports[1], genericAHU1.port_a4) annotation (Line(points={
-          {24,-80},{-18,-80},{-18,-32}}, color={0,127,255}));
-  connect(bouWatercold.ports[1], tabs1.port_b2) annotation (Line(points={{48,-80},
-          {96,-80},{96,-41.8}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], tabs1.port_a2) annotation (Line(points={{20,-80},
+  connect(bouWatercold1.ports[1], genericAHU1.port_a4) annotation (Line(points={{21,-80},
+          {-18,-80},{-18,-32}},          color={0,127,255}));
+  connect(bouWatercold.ports[1], tabs1.port_b2) annotation (Line(points={{45,-80},
+          {96,-80},{96,-41.78}},color={0,127,255}));
+  connect(bouWatercold1.ports[2], tabs1.port_a2) annotation (Line(points={{23,-80},
           {22,-80},{22,-72},{92,-72},{92,-42}}, color={0,127,255}));
   connect(genericAHU1.port_b4, bouWatercold.ports[2]) annotation (Line(points={{
-          -14.7273,-32},{-14,-32},{-14,-74},{46,-74},{46,-80},{44,-80}}, color={
+          -14.7273,-32},{-14,-32},{-14,-74},{46,-74},{46,-80},{47,-80}}, color={
           0,127,255}));
   connect(bouWaterhot2.ports[1], tabs1.port_b1)
     annotation (Line(points={{73,-54},{84,-54},{84,-42}}, color={0,127,255}));

@@ -65,8 +65,8 @@ equation
   connect(sWUController.mode, integerConstant.y)
     annotation (Line(points={{-32,70},{-59,70}}, color={255,127,0}));
   connect(switchingUnit.port_b3, vol.ports[1]) annotation (Line(points={{-12,-46},
-          {-8,-46},{-8,-64},{2,-64}}, color={0,127,255}));
-  connect(vol.ports[2], switchingUnit.port_a3) annotation (Line(points={{-2,-64},
+          {-8,-46},{-8,-64},{1,-64}}, color={0,127,255}));
+  connect(vol.ports[2], switchingUnit.port_a3) annotation (Line(points={{-1,-64},
           {6,-64},{6,-46},{12,-46}}, color={0,127,255}));
   annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
            true)=

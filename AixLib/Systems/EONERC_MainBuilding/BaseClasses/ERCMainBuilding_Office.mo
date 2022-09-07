@@ -2,7 +2,6 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 record ERCMainBuilding_Office "ERCMainBuilding_Office"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start=293.15,
-    withAirCap=true,
     VAir=11625.0,
     AZone=3750.0,
     hRad=5.0,
@@ -82,6 +81,8 @@ record ERCMainBuilding_Office "ERCMainBuilding_Office"
     HeaterOn=false,
     hCool=0,
     lCool=-1,
+    heaLoadFacOut=0,
+    heaLoadFacGrd=0,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,

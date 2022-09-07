@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector MainBus2Zones
   "Data bus for E.ON ERC main building system with two zones"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus hpSystemBus
     "Heat pump system bus";
   EONERC_MainBuilding.BaseClasses.SwitchingUnitBus swuBus "Switching unit bus";

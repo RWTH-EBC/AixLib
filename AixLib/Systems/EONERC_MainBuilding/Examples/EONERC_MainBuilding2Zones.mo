@@ -16,23 +16,24 @@ model EONERC_MainBuilding2Zones
     annotation (Placement(transformation(extent={{20,72},{40,92}})));
 equation
   connect(benchmarkBuilding2Zones.mainBus, bus) annotation (Line(
-      points={{-8,39.1111},{-8,80}},
+      points={{-6.15385,39.1111},{-6.15385,60},{-8,60},{-8,80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(benchmarkBuilding2Zones.Tair, Tair1) annotation (Line(points={{-46.8,
-          -82.2222},{-100,-82.2222},{-100,-98}}, color={0,0,127}));
+  connect(benchmarkBuilding2Zones.Tair, Tair1) annotation (Line(points={{
+          -45.9487,-82.2222},{-100,-82.2222},{-100,-98}},
+                                                 color={0,0,127}));
   connect(mainBuilding2ZonesControl.bus, benchmarkBuilding2Zones.mainBus)
     annotation (Line(
-      points={{-39.2,70.1},{-8,70.1},{-8,39.1111}},
+      points={{-39.2,70.1},{-6.15385,70.1},{-6.15385,39.1111}},
       color={255,204,51},
       thickness=0.5));
   connect(benchmarkBuilding2Zones.mainBus, energyCounter2Zones.mainBus)
     annotation (Line(
-      points={{-8,39.1111},{-8,74},{29.9,74},{29.9,79.6}},
+      points={{-6.15385,39.1111},{-6.15385,74},{29.9,74},{29.9,79.6}},
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(

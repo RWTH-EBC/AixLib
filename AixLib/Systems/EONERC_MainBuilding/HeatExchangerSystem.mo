@@ -6,7 +6,7 @@ model HeatExchangerSystem
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
   HydraulicModules.ThrottlePump
                         throttlePump(
@@ -103,8 +103,7 @@ model HeatExchangerSystem
     kIns=0.03,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
         pipe1.dIns)/(pipe1.dh/2))),
-    length=20,
-    nPorts=1)                                  annotation (
+    length=20)                                 annotation (
       Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=270,
         origin={120,0})));
@@ -118,7 +117,7 @@ model HeatExchangerSystem
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{110,-110},{130,-90}}),
         iconTransformation(extent={{110,-108},{130,-88}})));
-  parameter Modelica.SIunits.Temperature T_start=303.15
+  parameter Modelica.Units.SI.Temperature T_start=303.15
     "Initialization temperature" annotation (Dialog(tab="Initialization"));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature annotation (Placement(transformation(
@@ -146,12 +145,8 @@ equation
           12},{20,20},{9.2,20}},  color={0,127,255}));
   connect(admix.port_b1, port_b2) annotation (Line(points={{80,12},{80,100}},
                      color={0,127,255}));
-  connect(pipe1.port_a, port_a3) annotation (Line(points={{120,10},{120,100}},
-                         color={0,127,255}));
   connect(admix.port_a2, port_a2) annotation (Line(points={{80,-12},{80,-100}},
                                     color={0,127,255}));
-  connect(port_b3, pipe1.ports_b[1]) annotation (Line(points={{120,-100},{120,-10}},
-                      color={0,127,255}));
   connect(throttlePump.port_a1, port_a1) annotation (Line(points={{-100,-12},{
           -120,-12},{-120,-20},{-140,-20}}, color={0,127,255}));
   connect(throttlePump.port_b2, port_b1) annotation (Line(points={{-100,12},{
@@ -159,8 +154,6 @@ equation
   connect(const.y,prescribedTemperature. T)
     annotation (Line(points={{100,-43.2},{100,-37.6}},
                                                      color={0,0,127}));
-  connect(prescribedTemperature.port, pipe1.heatPort) annotation (Line(points={
-          {100,-20},{100,0},{110,0},{110,1.77636e-15}}, color={191,0,0}));
   connect(throttlePump.hydraulicBus, hxBus.primBus) annotation (Line(
       points={{-80,-20},{-80,100},{-18.935,100},{-18.935,100.07}},
       color={255,204,51},
@@ -177,6 +170,12 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(port_b3, pipe1.port_b)
+    annotation (Line(points={{120,-100},{120,-10}}, color={0,127,255}));
+  connect(pipe1.port_a, port_a3)
+    annotation (Line(points={{120,10},{120,100}}, color={0,127,255}));
+  connect(prescribedTemperature.port, pipe1.heatPort)
+    annotation (Line(points={{100,-20},{100,0},{110,0}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {140,100}}), graphics={
         Rectangle(

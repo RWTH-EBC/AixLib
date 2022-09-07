@@ -244,8 +244,6 @@ model ERC_Zone_simpleTabs "Model of a ERC-Thermal Zone Including CCA and AHU"
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={-18,-90})));
-  TabsSimple tabsSimple(area=60*60, thickness=0.05)
-    annotation (Placement(transformation(extent={{64,-66},{84,-44}})));
   Modelica.Blocks.Interfaces.RealInput Q_flowTabs annotation (Placement(
         transformation(extent={{-114,-70},{-86,-42}}), iconTransformation(
           extent={{-114,-70},{-86,-42}})));
@@ -288,11 +286,11 @@ equation
           {52,-18.3},{52,-12},{52.4,-12},{52.4,2.64}},
                                             color={0,0,127}));
   connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{
-          0.163636,-20.1818},{28,-20.1818},{28,6.12},{23.42,6.12}},
+          0.163636,-20.1818},{28,-20.1818},{28,6.12},{26.71,6.12}},
                                                                  color={0,127,
           255}));
   connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{
-          0.163636,-10.7273},{38,-10.7273},{38,6.12},{36.58,6.12}},
+          0.163636,-10.7273},{38,-10.7273},{38,6.12},{33.29,6.12}},
                                                                color={0,127,255}));
   connect(boundaryExhaustAir.ports[1],genericAHU1. port_b2) annotation (Line(
         points={{-58,-10},{-58,-10.7273},{-36,-10.7273}},    color={0,127,255}));

@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector SimpleERCBus
   "Data bus for Simple EONERC- Controller Bus"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   Real pElHp(min=0, max=51) "HeatPumpPower in kW";
   Real mfSetHpEva(min=0, max=10.72) "Mass Flow Heat Pump Evaporator Side in kg/s";
   Real mfSetHpCon(min=0, max=16) "Mass Flow Heat Pump Condensor Side in kg/s";

@@ -6,13 +6,13 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     parameter Boolean allowFlowReversal = true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation(Dialog(tab="Assumptions"), Evaluate=true);
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal=10
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=10
     "Nominal mass flow rate";
-    parameter Modelica.SIunits.Temperature T_start_hot=303.15
+    parameter Modelica.Units.SI.Temperature T_start_hot=303.15
     "Initialization temperature hot side" annotation(Dialog(tab = "Initialization"));
-    parameter Modelica.SIunits.Temperature T_start_cold=288.15
+    parameter Modelica.Units.SI.Temperature T_start_cold=288.15
     "Initialization temperature hot side" annotation(Dialog(tab = "Initialization"));
-    parameter Modelica.SIunits.Temperature T_amb=298.15
+    parameter Modelica.Units.SI.Temperature T_amb=298.15
     "Ambient temperature of technics room";
 
   HydraulicModules.Pump pump_hot(
@@ -444,9 +444,9 @@ equation
     annotation (Line(points={{80,-108},{92,-108},{92,-110},{104,-110}},
                                                   color={191,0,0}));
   connect(throttle_recool.port_a2, volAirCoolerRecool.ports[1]) annotation (
-      Line(points={{-40,-88},{-30,-88},{-30,-102}},color={0,127,255}));
+      Line(points={{-40,-88},{-30,-88},{-30,-101}},color={0,127,255}));
   connect(throttle_recool.port_b1, volAirCoolerRecool.ports[2]) annotation (
-      Line(points={{-40,-112},{-30,-112},{-30,-98}},
+      Line(points={{-40,-112},{-30,-112},{-30,-99}},
                                                    color={0,127,255}));
   connect(throttle_recool.port_a1, pump_hot.port_b2) annotation (Line(points={{-80,
           -112},{-94,-112},{-94,12},{-80,12}},     color={0,127,255}));
@@ -456,9 +456,9 @@ equation
     annotation (Line(points={{20,-108},{40,-108}},
                                                  color={191,0,0}));
   connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
-     Line(points={{120,-88},{114,-88},{114,-102}},color={0,127,255}));
+     Line(points={{120,-88},{114,-88},{114,-101}},color={0,127,255}));
   connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation (
-     Line(points={{120,-112},{114,-112},{114,-98}},
+     Line(points={{120,-112},{114,-112},{114,-99}},
                                                   color={0,127,255}));
   connect(convection.Gc, convection1.Gc) annotation (Line(points={{10,-98},{10,-90},
           {70,-90},{70,-98}},      color={0,0,127}));
@@ -612,15 +612,15 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PT1_a2.y, heatPumpSystemBus.TColdOutMea) annotation (Line(points={{
-          206,-32.4},{208,-32.4},{208,-36},{234,-36},{234,60.07},{0.07,60.07}},
+  connect(PT1_a2.y, heatPumpSystemBus.TColdOutMea) annotation (Line(points={{206,
+          -32.4},{208,-32.4},{208,-36},{234,-36},{234,60.07},{0.07,60.07}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PT1_a4.y, heatPumpSystemBus.THotOutMea) annotation (Line(points={{
-          -190,44.4},{-190,60.07},{0.07,60.07}}, color={0,0,127}), Text(
+  connect(PT1_a4.y, heatPumpSystemBus.THotOutMea) annotation (Line(points={{-190,
+          44.4},{-190,60.07},{0.07,60.07}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -642,14 +642,14 @@ equation
   connect(temperatureSensor.port, T_outside)
     annotation (Line(points={{40,-122},{40,-108}}, color={191,0,0}));
   connect(temperatureSensor.T, heatPumpSystemBus.TOutsideMea) annotation (Line(
-        points={{40,-142},{-92,-142},{-92,-130},{-224,-130},{-224,60.07},{0.07,
+        points={{40,-143},{-92,-143},{-92,-130},{-224,-130},{-224,60.07},{0.07,
           60.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switch2.y, heatPumpSystemBus.PelAirCoolerMea) annotation (Line(points=
-         {{54.6,-52},{84,-52},{84,60},{0.07,60},{0.07,60.07}}, color={0,0,127}),
+  connect(switch2.y, heatPumpSystemBus.PelAirCoolerMea) annotation (Line(points={{54.6,
+          -52},{84,-52},{84,60},{0.07,60},{0.07,60.07}},       color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -659,8 +659,8 @@ equation
     annotation (Line(points={{54.6,-74},{59.2,-74}}, color={0,0,127}));
   connect(firstOrder.y, convection1.Gc)
     annotation (Line(points={{68.4,-74},{70,-74},{70,-98}}, color={0,0,127}));
-  connect(temperatureSensor.T, prescribedTemperature.T) annotation (Line(points=
-         {{40,-142},{49.2,-142},{49.2,-122}}, color={0,0,127}));
+  connect(temperatureSensor.T, prescribedTemperature.T) annotation (Line(points={{40,-143},
+          {49.2,-143},{49.2,-122}},           color={0,0,127}));
   connect(prescribedTemperature.port, convection1.fluid)
     annotation (Line(points={{58,-122},{60,-122},{60,-108}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,

@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector HeatPumpSystemBus
   "Data bus for ERC Heatpump system"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus busHP;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleHS;
   HydraulicModules.BaseClasses.HydraulicBus busPumpHot;

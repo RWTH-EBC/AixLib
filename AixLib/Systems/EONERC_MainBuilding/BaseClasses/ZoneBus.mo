@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector ZoneBus
   "Data bus for a thermal Zone with AHU and CCA"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
 
   TabsBus2 tabsBus "Bus for concrete core activation 1";
   ModularAHU.BaseClasses.GenericAHUBus ahuBus "Bus for AHU";

@@ -6,12 +6,12 @@ model HighTemperatureSystem
   parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start = 60
+  parameter Modelica.Units.SI.Temperature T_start = 60
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Units.SI.Temperature T_amb "Ambient temperature";
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium) "Top-flange secondary circuit" annotation (Placement(
         transformation(extent={{110,50},{130,70}}), iconTransformation(extent={{
@@ -252,8 +252,8 @@ equation
   connect(senT_a.port_a, throttlePump.port_b2) annotation (Line(points={{100,60},
           {-112,60},{-112,20}}, color={0,127,255}));
   connect(senT_b.port_b, vol.ports[1]) annotation (Line(points={{100,20},{94,20},
-          {94,36},{88,36}}, color={0,127,255}));
-  connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{92,36},{96,36},
+          {94,36},{89,36}}, color={0,127,255}));
+  connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{91,36},{96,36},
           {96,60},{100,60}}, color={0,127,255}));
   connect(cHPNoControl.fuelInput, kWToW1.u) annotation (Line(points={{-102.4,-49.2},
           {-102.4,-45},{-121.4,-45}}, color={0,0,127}));

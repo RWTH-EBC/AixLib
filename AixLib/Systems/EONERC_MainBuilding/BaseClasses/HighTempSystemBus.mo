@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector HighTempSystemBus
   "Data bus for ERC high temperature circuit"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   HydraulicModules.BaseClasses.HydraulicBus admixBus1 "Hydraulic circuit of boiler 1";
   HydraulicModules.BaseClasses.HydraulicBus admixBus2 "Hydraulic circuit of boiler 2";
   HydraulicModules.BaseClasses.HydraulicBus throttlePumpBus "Hydraulic circuit of chp";

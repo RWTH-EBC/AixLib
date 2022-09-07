@@ -1,7 +1,7 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 model EnergyCounter2Zones "Sums up all consumed energy"
-    parameter Modelica.SIunits.Temperature Tset = 273.15+22 "Set Temperature of rooms for ISE calculation";
-    parameter Modelica.SIunits.Temperature deltaTset = 2 "Set Temperature of rooms for ISE calculation";
+    parameter Modelica.Units.SI.Temperature Tset = 273.15+22 "Set Temperature of rooms for ISE calculation";
+    parameter Modelica.Units.SI.Temperature deltaTset = 2 "Set Temperature of rooms for ISE calculation";
   MainBus2Zones mainBus annotation (Placement(transformation(extent={{-118,-18},
             {-80,18}}), iconTransformation(extent={{-18,-42},{16,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator
@@ -77,7 +77,7 @@ model EnergyCounter2Zones "Sums up all consumed energy"
   Modelica.Blocks.Nonlinear.DeadZone deadZone1(uMax=deltaTset, uMin=-deltaTset)
     annotation (Placement(transformation(extent={{86,66},{96,76}})));
 equation
-  connect(integrator.u, mainBus.hpSystemBus.busHP.Pel) annotation (Line(points={
+  connect(integrator.u, mainBus.hpSystemBus.busHP.PelMea) annotation (Line(points={
           {-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -223,7 +223,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sum1.u[1], mainBus.htsBus.admixBus1.pumpBus.PelMea) annotation (Line(
-        points={{-31,-17.6667},{-98.905,-17.6667},{-98.905,0.09}}, color={0,0,127}),
+        points={{-31,-17.3333},{-98.905,-17.3333},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -236,7 +236,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sum1.u[3], mainBus.htsBus.throttlePumpBus.pumpBus.PelMea) annotation (
-     Line(points={{-31,-16.3333},{-98.905,-16.3333},{-98.905,0.09}}, color={0,0,
+     Line(points={{-31,-16.6667},{-98.905,-16.6667},{-98.905,0.09}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -245,21 +245,21 @@ equation
   connect(sum1.y, integrator6.u) annotation (Line(points={{-19.5,-17},{-14.75,
           -17},{-14.75,-17},{-11,-17}}, color={0,0,127}));
   connect(integrator.y, sumWel.u[1])
-    annotation (Line(points={{0.5,95},{49,95},{49,-17.8571}},color={0,0,127}));
+    annotation (Line(points={{0.5,95},{49,95},{49,-17.4286}},color={0,0,127}));
   connect(integrator1.y, sumWel.u[2])
-    annotation (Line(points={{0.5,79},{49,79},{49,-17.5714}},color={0,0,127}));
+    annotation (Line(points={{0.5,79},{49,79},{49,-17.2857}},color={0,0,127}));
   connect(integrator2.y, sumWel.u[3]) annotation (Line(points={{0.5,61},{32,61},
-          {32,10},{49,10},{49,-17.2857}},color={0,0,127}));
+          {32,10},{49,10},{49,-17.1429}},color={0,0,127}));
   connect(integrator3.y, sumWel.u[4]) annotation (Line(points={{0.5,45},{16,45},
           {16,46},{32,46},{32,-17},{49,-17}},
                                           color={0,0,127}));
   connect(integrator4.y, sumWel.u[5]) annotation (Line(points={{0.5,25},{32.25,
-          25},{32.25,-16.7143},{49,-16.7143}},
+          25},{32.25,-16.8571},{49,-16.8571}},
                                              color={0,0,127}));
   connect(integrator5.y, sumWel.u[6])
-    annotation (Line(points={{0.5,9},{49,9},{49,-16.4286}},color={0,0,127}));
+    annotation (Line(points={{0.5,9},{49,9},{49,-16.7143}},color={0,0,127}));
   connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{49,
-          -17},{49,-16.1429}},color={0,0,127}));
+          -17},{49,-16.5714}},color={0,0,127}));
   connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{60.5,-17},
           {64,-17},{64,-16},{66,-16},{66,0.09},{-98.905,0.09}},
                                             color={0,0,127}), Text(
@@ -268,11 +268,11 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(integrator7.y, sumQbr.u[1]) annotation (Line(points={{0.5,-35},{21.25,
-          -35},{21.25,-35.6667},{49,-35.6667}}, color={0,0,127}));
+          -35},{21.25,-35.3333},{49,-35.3333}}, color={0,0,127}));
   connect(integrator8.y, sumQbr.u[2])
     annotation (Line(points={{0.5,-55},{49,-55},{49,-35}}, color={0,0,127}));
   connect(integrator9.y, sumQbr.u[3]) annotation (Line(points={{0.5,-75},{20,
-          -75},{20,-74},{48,-74},{48,-34.3333},{49,-34.3333}}, color={0,0,127}));
+          -75},{20,-74},{48,-74},{48,-34.6667},{49,-34.6667}}, color={0,0,127}));
   connect(sumQbr.y, mainBus.evaBus.QbrTotalMea) annotation (Line(points={{60.5,-35},
           {64,-35},{64,-36},{66,-36},{66,0.09},{-98.905,0.09}}, color={0,0,127}),
       Text(

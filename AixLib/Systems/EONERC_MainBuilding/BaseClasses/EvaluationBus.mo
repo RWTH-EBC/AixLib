@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector EvaluationBus
   "Data bus for KPIs (energy consumption, control quality) of main building"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
 
   SI.Energy WelHPMea "Consumed energy of heat pump";
   SI.Energy WelPumpsHPMea "Consumed energy of heat pump pumps";

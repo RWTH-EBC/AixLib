@@ -6,7 +6,7 @@ model SimpleRoom
     package MediumAir = AixLib.Media.AirIncompressible
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.EONERC_MainBuilding.Tabs tabs(
+  TABS.Tabs                               tabs(
     redeclare package Medium = MediumWater,
     area=thermalZone1.zoneParam.AZone,
     thickness=0.05,
@@ -338,16 +338,15 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{85.3,
           26},{68,26},{68,25.68},{51,25.68}}, color={0,0,127}));
-  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -16.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}},    color={191,0,0}));
+  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,-16},
+          {40,-8},{62,-8},{62,45.92},{56.5,45.92}},              color={191,0,0}));
   connect(bouWatercold.ports[1], tabs.port_a2)
-    annotation (Line(points={{42.4,-90},{48,-90},{48,-58}},
+    annotation (Line(points={{40.3,-90},{48,-90},{48,-58}},
                                                           color={0,127,255}));
   connect(bouWatercold1.ports[1], tabs.port_b2)
-    annotation (Line(points={{56,-94.4},{56,-57.6364}},
-                                                      color={0,127,255}));
+    annotation (Line(points={{56,-92.3},{56,-57.6}},  color={0,127,255}));
   connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{19.8,-39.6364},{0.09,-39.6364},{0.09,94.11}},
+      points={{19.8,-37.8},{0.09,-37.8},{0.09,94.11}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -370,16 +369,16 @@ equation
     annotation (Line(points={{-88,32},{-80,32}}, color={0,127,255}));
   connect(bou.ports[1], genericAHU1.port_a1)
     annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
-  connect(genericAHU1.port_a2, thermalZone1.ports[1]) annotation (Line(points={
-          {-3.65455,32},{-2,32},{-2,36},{4,36},{4,26},{2,26},{2,18},{4,18},{4,
-          16},{36,16},{36,28.44},{25.125,28.44}}, color={0,127,255}));
-  connect(genericAHU1.port_b1, thermalZone1.ports[2]) annotation (Line(points={
-          {-3.65455,16},{36,16},{36,28.44},{36.875,28.44}}, color={0,127,255}));
-  connect(genericAHU1.port_a4, bouWatercold.ports[2]) annotation (Line(points={
-          {-42,-4},{-42,-22},{-86,-22},{-86,-90},{39.6,-90}}, color={0,127,255}));
-  connect(genericAHU1.port_b4, bouWatercold1.ports[2]) annotation (Line(points=
-          {{-35.0909,-4},{-34,-4},{-34,-12},{64,-12},{64,-82},{56,-82},{56,
-          -91.6}}, color={0,127,255}));
+  connect(genericAHU1.port_a2, thermalZone1.ports[1]) annotation (Line(points={{
+          -3.65455,32},{-2,32},{-2,36},{4,36},{4,26},{2,26},{2,18},{4,18},{4,16},
+          {36,16},{36,28.44},{28.0625,28.44}},    color={0,127,255}));
+  connect(genericAHU1.port_b1, thermalZone1.ports[2]) annotation (Line(points={{
+          -3.65455,16},{36,16},{36,28.44},{33.9375,28.44}}, color={0,127,255}));
+  connect(genericAHU1.port_a4, bouWatercold.ports[2]) annotation (Line(points={{-42,-4},
+          {-42,-22},{-86,-22},{-86,-90},{41.7,-90}},          color={0,127,255}));
+  connect(genericAHU1.port_b4, bouWatercold1.ports[2]) annotation (Line(points={{
+          -35.0909,-4},{-34,-4},{-34,-12},{64,-12},{64,-82},{56,-82},{56,-93.7}},
+                   color={0,127,255}));
   connect(genericAHU1.port_a5, bouWaterhot.ports[1]) annotation (Line(points={{
           -28.1818,-4},{-28.1818,-58},{-35,-58},{-35,-64}}, color={0,127,255}));
   connect(genericAHU1.port_b5, bouWaterhot1.ports[1]) annotation (Line(points={{

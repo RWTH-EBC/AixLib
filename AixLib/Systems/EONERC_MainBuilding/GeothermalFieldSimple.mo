@@ -4,7 +4,7 @@ model GeothermalFieldSimple "Geothermal probe"
     parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.Temperature T_start = 285.15
+  parameter Modelica.Units.SI.Temperature T_start = 285.15
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
 
@@ -78,7 +78,7 @@ model GeothermalFieldSimple "Geothermal probe"
         origin={0,-117})));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Units.SI.Temperature T_amb "Ambient temperature";
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
     energyDynamics=energyDynamics,
@@ -90,13 +90,13 @@ model GeothermalFieldSimple "Geothermal probe"
         extent={{-13,-13},{13,13}},
         rotation=180,
         origin={-5,-271})));
-  parameter Modelica.SIunits.Volume V=0.013*0.013*3.1415*400*40 "Volume of water in pipes in bore hole";
+  parameter Modelica.Units.SI.Volume V=0.013*0.013*3.1415*400*40 "Volume of water in pipes in bore hole";
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(final G=
         G_groundFar)
            annotation (Placement(transformation(extent={{76,-280},{96,-260}})));
-  parameter Modelica.SIunits.ThermalConductance G_groundFar = 1000
+  parameter Modelica.Units.SI.ThermalConductance G_groundFar = 1000
     "Constant thermal conductance of ground";
-  parameter Modelica.SIunits.ThermalConductance G_groundNear = 22000
+  parameter Modelica.Units.SI.ThermalConductance G_groundNear = 22000
     "Constant thermal conductance of ground";
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
@@ -105,7 +105,7 @@ model GeothermalFieldSimple "Geothermal probe"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-60,-262})));
-  parameter Modelica.SIunits.Temperature T_ground=285.15
+  parameter Modelica.Units.SI.Temperature T_ground=285.15
     "Fixed temperature of ground far away";
   BaseClasses.TwoCircuitBus twoCircuitBus annotation (Placement(transformation(
           extent={{-148,-148},{-92,-94}}), iconTransformation(extent={{-144,
@@ -113,7 +113,7 @@ model GeothermalFieldSimple "Geothermal probe"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor1(final G=
         G_pipe)
            annotation (Placement(transformation(extent={{18,-280},{38,-260}})));
-  parameter Modelica.SIunits.ThermalConductance G_pipe=0.026*3.1415*400*40 * 300
+  parameter Modelica.Units.SI.ThermalConductance G_pipe=0.026*3.1415*400*40 * 300
     "Constant thermal conductance of pipe material and near ground";
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
         C_groundNear,                                                       T(
@@ -121,9 +121,9 @@ model GeothermalFieldSimple "Geothermal probe"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={36,-296})));
-  parameter Modelica.SIunits.HeatCapacity C_groundFar=2*2*3.1415*100*1000*2000*40
+  parameter Modelica.Units.SI.HeatCapacity C_groundFar=2*2*3.1415*100*1000*2000*40
     "Heat capacity of near ground (= cp*m)";
-  parameter Modelica.SIunits.HeatCapacity C_groundNear=(0.11*0.11)*3.1415*100*1000*2000*40
+  parameter Modelica.Units.SI.HeatCapacity C_groundNear=(0.11*0.11)*3.1415*100*1000*2000*40
     "Heat capacity of near ground (= cp*m)";
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor1(C=
@@ -149,9 +149,9 @@ equation
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
   connect(pump.port_b2, vol.ports[1]) annotation (Line(points={{-24,-240},{-24,-258},
-          {-2.4,-258}},color={0,127,255}));
+          {-3.7,-258}},color={0,127,255}));
   connect(pump.port_a1, vol.ports[2]) annotation (Line(points={{24,-240},{24,-258},
-          {-7.6,-258}},           color={0,127,255}));
+          {-6.3,-258}},           color={0,127,255}));
   connect(boundary.ports[1], pump.port_b2) annotation (Line(points={{-50,-262},{
           -44,-262},{-44,-260},{-24,-260},{-24,-240}}, color={0,127,255}));
   connect(port_a, throttle.port_a1)
