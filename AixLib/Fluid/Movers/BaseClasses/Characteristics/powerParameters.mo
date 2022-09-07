@@ -1,11 +1,11 @@
 within AixLib.Fluid.Movers.BaseClasses.Characteristics;
- record powerParameters "Record for electrical power parameters"
-   extends Modelica.Icons.Record;
-   parameter Modelica.SIunits.VolumeFlowRate V_flow[:](each min=0)
-     "Volume flow rate at user-selected operating points";
-   parameter Modelica.SIunits.Power P[size(V_flow,1)](each min=0)
-     "Fan or pump electrical power at these flow rates";
-   annotation (Documentation(info="<html>
+record powerParameters "Record for electrical power parameters"
+  extends Modelica.Icons.Record;
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow[:](each min=0)
+    "Volume flow rate at user-selected operating points";
+  parameter Modelica.Units.SI.Power P[size(V_flow, 1)](each min=0)
+    "Fan or pump electrical power at these flow rates";
+  annotation (Documentation(info="<html>
  <p>
  Data record for performance data that describe volume flow rate versus
  electrical power.
@@ -15,7 +15,7 @@ within AixLib.Fluid.Movers.BaseClasses.Characteristics;
  must have the same size.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  October 10, 2012, by Michael Wetter:<br/>
@@ -27,6 +27,6 @@ within AixLib.Fluid.Movers.BaseClasses.Characteristics;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end powerParameters;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end powerParameters;

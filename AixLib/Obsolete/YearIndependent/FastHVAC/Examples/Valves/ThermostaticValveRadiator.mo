@@ -4,10 +4,9 @@ model ThermostaticValveRadiator
   Modelica.Blocks.Sources.Constant T_setRoom(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-96,-42},{-78,-24}})));
   Modelica.Blocks.Sources.Sine sine1(
-    freqHz=1/86400,
+    f=1/86400,
     offset=-2000,
-    amplitude=1214)
-                annotation (Placement(transformation(
+    amplitude=1214) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={90,30})));

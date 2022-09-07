@@ -1,9 +1,10 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
 
-  parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
-  parameter Modelica.SIunits.Time aveTime=60 "Time span for average";
+  parameter Modelica.Units.SI.Power lowBouPel
+    "If P_el falls below this value, COP will not be calculated";
+  parameter Modelica.Units.SI.Time aveTime=60 "Time span for average";
 
  Modelica.Blocks.Interfaces.RealInput Pel(final unit="W", final displayUnit=
         "kW")

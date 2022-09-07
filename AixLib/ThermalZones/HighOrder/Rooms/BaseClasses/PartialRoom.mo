@@ -3,11 +3,18 @@ partial model PartialRoom "Partial model with base component that are necessary 
 
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
-      Medium = Media.Air,
+      Medium = MediumAir,
       final T_start=T0_air);
 
+  // Medium in the room
+  replaceable package MediumAir = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
+
   // Air volume of room
-  parameter Modelica.SIunits.Volume room_V annotation (Dialog(group="Air volume of room"));
+  parameter Modelica.Units.SI.Volume room_V
+    annotation (Dialog(group="Air volume of room"));
   parameter Integer nPorts=0 "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
@@ -94,17 +101,17 @@ partial model PartialRoom "Partial model with base component that are necessary 
     "absolute humidity of ventilation air" annotation (Placement(transformation(
           extent={{-122,-48},{-100,-26}}), iconTransformation(extent={{-120,-46},
             {-100,-26}})));
-  Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W") if
-    use_moisture_balance
+  Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W")
+ if use_moisture_balance
     "Latent heat gains for the room"
     annotation (Placement(transformation(extent={{-124,-68},{-100,-44}}),
         iconTransformation(extent={{-120,-80},{-100,-60}})));
 protected
-  constant Modelica.SIunits.SpecificEnergy h_fg=
-    AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37)
+  constant Modelica.Units.SI.SpecificEnergy h_fg=
+      AixLib.Media.Air.enthalpyOfCondensingGas(273.15 + 37)
     "Latent heat of water vapor";
-  Modelica.Blocks.Math.MultiSum sumQLat_flow(nu=2) if
-                                                use_moisture_balance
+  Modelica.Blocks.Math.MultiSum sumQLat_flow(nu=2)
+                                             if use_moisture_balance
     "sum of latent heat flows"
     annotation (Placement(transformation(extent={{76,-40},{70,-34}})));
   Modelica.Blocks.Math.Gain mWat_flow(
@@ -113,8 +120,8 @@ protected
     y(final unit="kg/s")) if use_moisture_balance
     "Water flow rate due to latent heat gain"
     annotation (Placement(transformation(extent={{56,-32},{48,-24}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow
+ if use_moisture_balance
     "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{58,-52},{46,-40}})));
   Modelica.Blocks.Interfaces.RealOutput hum_internal
@@ -126,11 +133,11 @@ equation
   mWat_flow_internal = 0;
 
   connect(QLat_flow, sumQLat_flow.u[2]) annotation (Line(
-      points={{-112,-56},{80,-56},{80,-38.05},{76,-38.05}},
+      points={{-112,-56},{80,-56},{80,-36.475},{76,-36.475}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(NaturalVentilation.QLat_flow, sumQLat_flow.u[1]) annotation (Line(
-      points={{-21.76,-21.72},{-16,-21.72},{-16,-50},{80,-50},{80,-35.95},{76,-35.95}},
+      points={{-21.76,-21.72},{-16,-21.72},{-16,-50},{80,-50},{80,-37.525},{76,-37.525}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 

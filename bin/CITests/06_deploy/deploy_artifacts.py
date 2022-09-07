@@ -10,11 +10,9 @@ class Deploy_Artifacts(object):
     def __init__(self, library):
         self.library = library
         self.folder = 'Referencefiles'
-
         self.green = '\033[0;32m'
         self.CRED = '\033[91m'
         self.CEND = '\033[0m'
-
         sys.path.append('bin/CITests')
         from _config import new_ref_file, update_ref_file
         self.new_ref_file = new_ref_file
@@ -64,6 +62,7 @@ class Deploy_Artifacts(object):
             except FileNotFoundError:
                 print(f'{self.CRED}Cannot find folder:{self.CEND} {destination}')
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='deploy artifacts')
     unit_test_group = parser.add_argument_group("arguments to run deploy artifacts")
@@ -86,4 +85,3 @@ if __name__ == '__main__':
         if args.updated_ref is True:  # python bin/02_CITests/deploy/deploy_artifacts.py --library AixLib --ref --updated-ref
             updated_ref = ref_artifact._get_update_ref()
             ref_artifact.copy_txt(updated_ref)
-

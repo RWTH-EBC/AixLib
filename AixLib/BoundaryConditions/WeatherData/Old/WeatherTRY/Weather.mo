@@ -1,11 +1,12 @@
 within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY;
 model Weather "Complex weather model"
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude = 49.5
-    "latitude of location"                                                                           annotation(Dialog(group = "Location Properties"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude = 8.5
-    "longitude of location"                                                                           annotation(Dialog(group = "Location Properties"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Time_hour DiffWeatherDataTime = 1
-    "difference between weather data time and UTC, e.g. +1 for CET"                                                                                   annotation(Dialog(group = "Properties of Weather Data"));
+  parameter Modelica.Units.NonSI.Angle_deg Latitude=49.5 "latitude of location"
+    annotation (Dialog(group="Location Properties"));
+  parameter Modelica.Units.NonSI.Angle_deg Longitude=8.5
+    "longitude of location" annotation (Dialog(group="Location Properties"));
+  parameter Modelica.Units.NonSI.Time_hour DiffWeatherDataTime=1
+    "difference between weather data time and UTC, e.g. +1 for CET"
+    annotation (Dialog(group="Properties of Weather Data"));
   parameter Real GroundReflection = 0.2 "ground reflection coefficient" annotation(Dialog(group = "Location Properties"));
   parameter String tableName = "wetter"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));

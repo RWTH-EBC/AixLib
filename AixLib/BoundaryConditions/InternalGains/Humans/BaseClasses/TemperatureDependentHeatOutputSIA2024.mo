@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
+﻿within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
 model TemperatureDependentHeatOutputSIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 
@@ -12,10 +12,10 @@ model TemperatureDependentHeatOutputSIA2024
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   constant Real HeatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
-  constant Modelica.SIunits.Area BodySurface=1.8 "Body surface of one person";
+  constant Modelica.Units.SI.Area BodySurface=1.8 "Body surface of one person";
   constant Real TemperatureCoefficient(unit="1/K") = 0.025
     "Parameter for temperature dependency";
-  constant Modelica.SIunits.HeatFlowRate MinimumHeat=35 "Minimum heat output";
+  constant Modelica.Units.SI.HeatFlowRate MinimumHeat=35 "Minimum heat output";
 equation
 
   heatOutput =max(0, (0.865 - (TemperatureCoefficient*T))*(activityDegree*

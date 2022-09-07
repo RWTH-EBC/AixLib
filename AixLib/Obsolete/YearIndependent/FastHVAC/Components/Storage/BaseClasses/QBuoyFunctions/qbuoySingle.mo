@@ -3,11 +3,11 @@ function qbuoySingle
   input Integer n;
   input Integer nbuoy;
   input Integer nstop;
-  input Modelica.SIunits.TemperatureDifference dTover;
-  input Modelica.SIunits.TemperatureDifference dT13;
-  input Modelica.SIunits.TemperatureDifference dTborder;
+  input Modelica.Units.SI.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dT13;
+  input Modelica.Units.SI.TemperatureDifference dTborder;
 
-  output Modelica.SIunits.SpecificEnergy q_buoy_single[n];
+  output Modelica.Units.SI.SpecificEnergy q_buoy_single[n];
 
 algorithm
   q_buoy_single:=qFreebuoy(

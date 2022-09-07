@@ -8,13 +8,15 @@ model PipeBase
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"        annotation(Dialog(enable=not
-          calcHCon));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=30
+    "Fix value for heat transfer coeffiecient inside pipe"
+    annotation (Dialog(enable=not calcHCon));
     parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
-    final parameter Modelica.SIunits.Volume V_fluid=nParallel*Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
+  final parameter Modelica.Units.SI.Volume V_fluid=nParallel*Modelica.Constants.pi
+      *length*parameterPipe.d_i*parameterPipe.d_i/4;
 
-    parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature of fluid";
+  parameter Modelica.Units.SI.Temperature T_0=
+      Modelica.Units.Conversions.from_degC(20) "Initial temperature of fluid";
 
   /* *******************************************************************
       Pipe Parameters
@@ -22,8 +24,8 @@ model PipeBase
 
     parameter Integer nParallel(min=1)=1 "Number of identical parallel pipes"
     annotation(Dialog(group="Geometry"));
-    parameter Modelica.SIunits.Length length "Length of pipe"
-    annotation(Dialog(group = "Geometry"));
+  parameter Modelica.Units.SI.Length length "Length of pipe"
+    annotation (Dialog(group="Geometry"));
 
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Type of pipe"

@@ -4,7 +4,8 @@ model Injection2WayValve
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
+    annotation (Dialog(tab="Advanced"));
 
 
   Fluid.Actuators.Valves.TwoWayTable  valve(

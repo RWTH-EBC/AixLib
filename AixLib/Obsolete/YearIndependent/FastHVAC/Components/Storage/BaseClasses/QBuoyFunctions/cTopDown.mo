@@ -1,8 +1,8 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function cTopDown
 
-  input Modelica.SIunits.TemperatureDifference dTover;
-  input Modelica.SIunits.TemperatureDifference dTborder;
+  input Modelica.Units.SI.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dTborder;
   input Integer dn_gap;
 
   output Real c_top_down;
