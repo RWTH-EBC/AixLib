@@ -16,6 +16,7 @@ expandable connector MainBus2Zones
   ModularAHU.BaseClasses.GenericAHUBus ahu2Bus "Bus for AHU";
   SI.Temperature TZone1Mea "Temperature in room 1";
   SI.Temperature TZone2Mea "Temperature in room 2";
+  Real presence "Presence for zone 1";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consHtcBus "Consumer bus high temperature cycle";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consCold1Bus "Consumer bus cold temperature cycle 1";
   EONERC_MainBuilding.BaseClasses.EvaluationBus2Zones evaBus
