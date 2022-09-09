@@ -281,8 +281,8 @@ model BuildingEnergySystem
   Modelica.Blocks.Continuous.Integrator integrator[nRooms]
     annotation (Placement(transformation(extent={{260,-70},{280,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression1
-                                                       [nRooms](final y=PI.u_s
-         .- PI.u_m)                                             annotation (
+                                                       [nRooms](final y=abs(PI.u_s
+         .- PI.u_m))                                            annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
