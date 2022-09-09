@@ -4,9 +4,10 @@ model BuildingEnergySystem
   parameter Real kVal=0.2 "Gain of controller";
   parameter Modelica.Units.SI.Time TiVal=1800
     "Time constant of Integrator block";
-  parameter Real kHP=0.1 "Gain of controller";
-  parameter Modelica.Units.SI.Time TiHP=500 "Time constant of Integrator block";
-  parameter Modelica.Units.SI.Volume V=0.2 "Volume of tank";
+  parameter Real kHP=0.01
+                         "Gain of controller";
+  parameter Modelica.Units.SI.Time TiHP=300 "Time constant of Integrator block";
+  parameter Modelica.Units.SI.Volume V=0.1 "Volume of tank";
 
   parameter Modelica.Units.SI.HeatFlowRate QBui_flow_nominal[nRooms]={1125.6167,
       570.6886,680.91516,810.3087,793.1851,562.0106,675.3329,639.1092}
@@ -22,14 +23,16 @@ model BuildingEnergySystem
     "Nominal mass flow rate of each radiator";
   parameter Modelica.Units.SI.Volume VHydraulic=0.01
                                                 "Volume of hydraulic pipes";
-
+  parameter Modelica.Units.SI.TemperatureDifference dTOffNight=5
+    "Nigthly offset";
+  parameter Modelica.Units.SI.Temperature TRoomMax=297.15  "Room with maximal temperature";
   Modelica.Blocks.Continuous.LimPID PI[nRooms](
     each final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     each final k=kVal,
     each final Ti=TiVal,
     each final yMax=1,
     final yMin=val.l)
-    annotation (Placement(transformation(extent={{20,80},{40,100}})));
+    annotation (Placement(transformation(extent={{40,80},{60,100}})));
 
   Fluid.Sources.Boundary_pT        sin(
     nPorts=1,
@@ -51,6 +54,9 @@ model BuildingEnergySystem
     use_conPum=true,
     use_evaPum=false,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 perCon,
+    heatingCurveRecord=
+        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10(),
+    TRoom_nominal=TRoomMax,
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
@@ -69,7 +75,7 @@ model BuildingEnergySystem
     use_refIne=true,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     minTimeAntLeg(displayUnit="min") = 900,
-    scalingFactor=1,
+    scalingFactor=2,
     use_tableData=false,
     dpCon_nominal=0,
     use_conCap=true,
@@ -91,7 +97,7 @@ model BuildingEnergySystem
     redeclare model PerDataHea =
         AixLib.DataBase.HeatPump.PerformanceData.VCLibMap,
     redeclare function HeatingCurveFunction =
-        Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=0, TDesign=328.15),
+        Controls.SetPoints.Functions.HeatingCurveFunction (TOffNig=5, TDesign=297.15),
     use_minRunTime=true,
     use_minLocTime=true,
     use_runPerHou=true,
@@ -153,13 +159,14 @@ model BuildingEnergySystem
     each selectable=false,
     each final radiatorType=
         AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Bedroom(),
+    NominalPower=QBui_flow_nominal .* 1.2,
     each RT_nom={328.15,318.15,293.15},
     each calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log)
                                                            annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={52,10})));
+        origin={54,10})));
 
   Fluid.Storage.BufferStorage bufferStorage(
     redeclare package Medium = MediumHydraulic,
@@ -242,7 +249,7 @@ model BuildingEnergySystem
     annotation (Placement(transformation(extent={{-120,80},{-100,100}})));
   Modelica.Blocks.Sources.Constant TRoomSet[nRooms](final k={293.15,293.15,295.15,
         293.15,291.15,293.15,297.15,293.15})
-    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
+    annotation (Placement(transformation(extent={{-20,50},{0,70}})));
   Modelica.Blocks.Sources.Constant constPumpHPSOn2(k=heatPumpSystem.mFlow_evaNominal)
     annotation (Placement(transformation(extent={{-180,-100},{-160,-80}})));
   Fluid.Sources.Boundary_pT        sin1(redeclare package Medium =
@@ -257,7 +264,7 @@ model BuildingEnergySystem
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={30,54})));
+        origin={50,50})));
   Modelica.Blocks.Sources.RealExpression realExpressionTAirs[10](y={OFD.groundFloor_Building.Livingroom.airload.heatPort.T,
         OFD.groundFloor_Building.Hobby.airload.heatPort.T,OFD.groundFloor_Building.Corridor.airload.heatPort.T,
         OFD.groundFloor_Building.WC_Storage.airload.heatPort.T,OFD.groundFloor_Building.Kitchen.airload.heatPort.T,
@@ -269,8 +276,8 @@ model BuildingEnergySystem
         rotation=0,
         origin={268,-40})));
   Modelica.Blocks.Interfaces.RealOutput dTComfort[8] annotation (Placement(
-        transformation(extent={{300,-69},{320,-49}}), iconTransformation(extent
-          ={{101,-7},{117,9}})));
+        transformation(extent={{300,-69},{320,-49}}), iconTransformation(extent=
+           {{101,-7},{117,9}})));
   Modelica.Blocks.Continuous.Integrator integrator[nRooms]
     annotation (Placement(transformation(extent={{260,-70},{280,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression1
@@ -291,6 +298,22 @@ model BuildingEnergySystem
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={238,-90})));
+  Modelica.Blocks.Sources.Pulse OffNight[nRooms](
+    each final amplitude=dTOffNight,
+    each final width=(heatPumpSystem.night_hour - heatPumpSystem.day_hour)/24*100,
+    each final period = 86400,
+    each final nperiod=-1,
+    each final offset=-dTOffNight,
+    each final startTime = heatPumpSystem.day_hour*3600)
+    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
+  Modelica.Blocks.Math.Add add[nRooms](each final k1=+1, each final k2=+1)
+    annotation (Placement(transformation(extent={{10,80},{30,100}})));
+
+  Modelica.Blocks.Sources.RealExpression realExpressionTRoomMax(final y=OFD.upperFloor_Building.Bath.airload.heatPort.T)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-290,-10})));
 protected
   parameter Real heiToDiaRatio=2 "Ratio of height to diameter";
   parameter Integer nRooms = 8 "Number of rooms";
@@ -391,13 +414,10 @@ equation
           -8.5},{100,-11.0727},{121,-11.0727}},                                                                                                             color={191,0,0}));
 
   connect(radiator.RadiativeHeat, heatStarToCombHeaters.portRad) annotation (
-      Line(points={{56,12},{56,-3.1875},{78,-3.1875}},             color={0,0,0}));
+      Line(points={{58,12},{58,-3.1875},{78,-3.1875}},             color={0,0,0}));
   connect(Weather.AirTemp, heatPumpSystem.T_oda) annotation (Line(points={{228.7,
           87.25},{228.7,86},{214,86},{214,100},{-132,100},{-132,0},{-232,0},{
           -232,-32.6357},{-223,-32.6357}},
-        color={0,0,127}));
-  connect(bufferStorage.TTop, heatPumpSystem.TAct) annotation (Line(points={{-102,
-          -3.12},{-102,-2},{-223,-2},{-223,-23.9357}},
         color={0,0,127}));
   connect(tempBasement.port, bufferStorage.heatportOutside) annotation (Line(
         points={{-79,-89.5},{-50,-89.5},{-50,-24.44},{-60.525,-24.44}}, color={191,
@@ -411,8 +431,8 @@ equation
   connect(supVol.ports[1], pumpHeadControlledRad.port_b) annotation (Line(
         points={{-10,20},{-10,14},{-34,14},{-34,32},{-40,32}}, color={0,127,255}));
  for i in 1:nRooms loop
-  connect(radiator[i].port_b, returnVol.ports[i+1]) annotation (Line(points={{62,10},
-            {62,-54},{-30,-54},{-30,-60}},        color={0,127,255}));
+  connect(radiator[i].port_b, returnVol.ports[i+1]) annotation (Line(points={{64,10},
+            {64,-54},{-30,-54},{-30,-60}},        color={0,127,255}));
   connect(supVol.ports[i+1], val[i].port_a)
     annotation (Line(points={{-10,20},{-6,20},{-6,10},{0,10}},
                                                           color={0,127,255}));
@@ -435,10 +455,10 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(radiator.ConvectiveHeat, heatStarToCombHeaters.portConv) annotation (
-      Line(points={{50,12},{50,-14},{64,-14},{64,-13.8125},{78,-13.8125}},
+      Line(points={{52,12},{52,-14},{64,-14},{64,-13.8125},{78,-13.8125}},
                                                                  color={191,0,0}));
   connect(val.port_b, radiator.port_a)
-    annotation (Line(points={{20,10},{42,10}}, color={0,127,255}));
+    annotation (Line(points={{20,10},{44,10}}, color={0,127,255}));
   connect(booleanConstantPumpOn.y, pumpBusRad.onSet) annotation (Line(points={{-99,52},
           {-66,52},{-66,58.05},{-49.95,58.05}},                color={255,0,255}),
       Text(
@@ -461,14 +481,12 @@ equation
       Line(points={{-220,-44.8571},{-230,-44.8571},{-230,-38},{-248,-38},{-248,
           28},{-112,28},{-112,-62},{-88.0875,-62},{-88.0875,-52.52}}, color={0,
           127,255}));
-  connect(PI.y, val.y) annotation (Line(points={{41,90},{46,90},{46,30},{10,30},
+  connect(PI.y, val.y) annotation (Line(points={{61,90},{66,90},{66,30},{10,30},
           {10,22}}, color={0,0,127}));
-  connect(TRoomSet.y, PI.u_s)
-    annotation (Line(points={{1,90},{18,90}}, color={0,0,127}));
   connect(realExpressionTAirs.y, TAirRooms) annotation (Line(points={{279,-40},
           {294,-40},{294,-39},{310,-39}},color={0,0,127}));
   connect(realExpression.y, PI.u_m)
-    annotation (Line(points={{30,65},{30,78}}, color={0,0,127}));
+    annotation (Line(points={{50,61},{50,78}}, color={0,0,127}));
   connect(integrator.y, dTComfort) annotation (Line(points={{281,-60},{294,-60},
           {294,-59},{310,-59}}, color={0,0,127}));
   connect(integrator.u, realExpression1.y)
@@ -477,6 +495,16 @@ equation
           292,-81},{310,-81}}, color={0,0,127}));
   connect(realExpressionPel.y, integratorEl.u)
     annotation (Line(points={{249,-90},{258,-90}}, color={0,0,127}));
+  connect(add.y, PI.u_s)
+    annotation (Line(points={{31,90},{38,90}}, color={0,0,127}));
+  connect(add.u2, TRoomSet.y)
+    annotation (Line(points={{8,84},{8,60},{1,60}}, color={0,0,127}));
+  connect(OffNight.y, add.u1)
+    annotation (Line(points={{1,90},{2,90},{2,96},{8,96}}, color={0,0,127}));
+  connect(realExpressionTRoomMax.y, heatPumpSystem.TAct) annotation (Line(
+        points={{-279,-10},{-256,-10},{-256,-24},{-224,-24},{-224,-23.9357},{
+          -223,-23.9357}},
+                      color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-300,-100},
             {300,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-300,-100},{300,100}}), graphics={                                                                                           Rectangle(extent={{73,-40},

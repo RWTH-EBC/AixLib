@@ -87,6 +87,8 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
   parameter Real night_hour=22 "Hour of day at which night mode is enabled"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+  parameter Modelica.Units.SI.ThermodynamicTemperature TRoom_nominal=293.15
+    "Constant desired room temperature" annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve and antilegionella"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
@@ -294,8 +296,8 @@ partial model PartialHeatPumpSystem
       group="Temperature sensors",
       enable=transferHeat));
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
-                                              annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
+    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y pumSin(
@@ -377,6 +379,7 @@ partial model PartialHeatPumpSystem
   HPSystemController hPSystemController(
     final use_secHeaGen=use_secHeaGen,
     final heatingCurveRecord=heatingCurveRecord,
+    final TRoom_nominal=TRoom_nominal,
     final declination=declination,
     final day_hour=day_hour,
     final night_hour=night_hour,

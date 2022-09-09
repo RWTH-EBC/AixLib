@@ -23,6 +23,8 @@ model HPControl
       AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
     "Record with information about heating curve data"
     annotation (Dialog(group="Heating Curve - Data", enable = use_tableData),choicesAllMatching=true);
+  parameter Modelica.Units.SI.ThermodynamicTemperature TRoom_nominal=293.15
+    "Constant desired room temperature" annotation (Dialog(group="Heating Curve - Data"));
   parameter Real declination=2 "Declination of curve"
     annotation (Dialog(group="Heating Curve - Data", enable = use_tableData));
   parameter Real day_hour=6 "Hour of day at which day mode is enabled"
@@ -97,7 +99,7 @@ model HPControl
     final declination=declination,
     redeclare function HeatingCurveFunction = HeatingCurveFunction,
     use_tableData=use_tableData,
-    final TRoom_nominal=293.15)
+    final TRoom_nominal=TRoom_nominal)
     annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 
   TSetToNSet ConvTSetToNSet
@@ -116,10 +118,11 @@ model HPControl
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
 
+
 equation
 
   connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
-          1.77636e-15},{-90,-57.93},{-101.93,-57.93}},
+          1.77636e-15},{-90,-58},{-102,-58}},
                                          color={0,0,127}), Text(
       string="%second",
       index=1,
