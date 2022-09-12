@@ -160,15 +160,12 @@ equation
   connect(heatFlowSenConv.port_b, room_GF_2OW.thermRoom) annotation (Line(points={{58,-4},{58,20},{32,20},{32,26},{31.48,26}}, color={191,0,0}));
   connect(radiator_ML_delta.RadiativeHeat, heatFlowSenRad.port_a) annotation (Line(points={{68,-24},{68,-8}}, color={0,0,0}));
   connect(heatFlowSenRad.port_b, room_GF_2OW.starRoom) annotation (Line(points={{68,4},{68,26},{36.88,26}}, color={191,0,0}));
-  connect(heatFlowSenConv.Q_flow,Q_flowToRoomConv)  annotation (Line(points={{64.6,
-          -10},{86,-10},{86,-10},{110,-10}},                                                                        color={0,0,127}));
-  connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74.6,-2},
-          {90,-2},{90,10},{110,10}},                                                                          color={0,0,127}));
+  connect(heatFlowSenConv.Q_flow,Q_flowToRoomConv)  annotation (Line(points={{64,-10},{86,-10},{86,-10},{110,-10}}, color={0,0,127}));
+  connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74,-2},{90,-2},{90,10},{110,10}}, color={0,0,127}));
   connect(controlPIThermostat.y, heatValve_new.y) annotation (Line(points={{10.5,-13},{20,-13},{20,-10},{32,-10},{32,-14}}, color={0,0,127}));
   connect(Tset.y, controlPIThermostat.u_s) annotation (Line(points={{-7.5,-1},{-4,-1},{-4,-13},{-1,-13}},color={0,0,127}));
   connect(temperatureSensor.T, firstOrder.u)
-    annotation (Line(points={{23,-2.5},{20,-2.5},{20,-2},{16.8,-2}},
-                                                 color={0,0,127}));
+    annotation (Line(points={{23,-2},{16.8,-2}}, color={0,0,127}));
   connect(firstOrder.y, controlPIThermostat.u_m)
     annotation (Line(points={{7.6,-2},{5,-2},{5,-7}}, color={0,0,127}));
   annotation(experiment(StopTime = 86400, Interval = 60, Tolerance=1e-6, Algorithm = "Dassl"),

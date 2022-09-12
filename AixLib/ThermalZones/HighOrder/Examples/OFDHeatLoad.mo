@@ -112,23 +112,23 @@ equation
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.1667},{48,69.1667},{48,28.64},{43.68,28.64}},color={
+     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.5},{48,69.5},{48,21.36},{43.68,21.36}},color={255,128,
+      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
           0}));
   connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.8333},{48,69.8333},{48,14.08},{43.68,14.08}},
-                                                                    color={255,
+     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.1667},{48,70.1667},{48,7.36},{43.68,7.36}},color={255,
+      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.5},{48,70.5},{48,43.2},{43.68,43.2}},color=
+        annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+                                                                         color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.8333},{48,70.8333},{48,35.92},{43.68,35.92}},
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
