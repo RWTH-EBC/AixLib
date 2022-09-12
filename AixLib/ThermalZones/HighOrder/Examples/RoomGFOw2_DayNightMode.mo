@@ -138,8 +138,8 @@ equation
                                color={0,127,255}));
   connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points={{-67.15,10.3},{-64,10.3},{-64,-15.8}},        color = {255, 0, 255}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points={{23,8},{23,25},{31.48,25},{31.48,26}},            color = {191, 0, 0}));
-  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2.5},{40,-2.5},
-          {40,0},{56,0},{56,30},{110,30}},                                              color = {0, 0, 127}));
+  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2},{40,-2},{40,0},{56,0},{56,30},{110,30}},
+                                                                                        color = {0, 0, 127}));
   connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-84,-26},{-74,-26}},
       color={0,127,255}));
