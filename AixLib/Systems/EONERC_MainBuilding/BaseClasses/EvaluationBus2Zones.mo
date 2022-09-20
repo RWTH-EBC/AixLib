@@ -11,6 +11,9 @@ expandable connector EvaluationBus2Zones
   SI.Energy WelPumpSWUMea "Consumed energy of switching unit pump";
   SI.Energy WelPumpGTFMea "Consumed energy of geothermal field pump";
   SI.Energy WelPumpsHTSMea "Consumed energy of pumps in high temperature system";
+  SI.Energy WelPumpsAHUMea "Consumed energy of pumps in the AHUs temperature system";
+  SI.Energy WelPumpsTABSMea "Consumed energy of pumps in TABS temperature system";
+  SI.Energy WelPumpsConsMea "Consumed energy of pumps in htc and cold consumer temperature system";
   SI.Energy QbrBoi1Mea "Consumed energy of boiler 1";
   SI.Energy QbrBoi2Mea "Consumed energy of boiler 2";
   SI.Energy QbrCHPMea "Consumed energy of chp";

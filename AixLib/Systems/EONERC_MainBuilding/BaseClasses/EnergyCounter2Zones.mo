@@ -28,11 +28,11 @@ model EnergyCounter2Zones "Sums up all consumed energy"
     annotation (Placement(transformation(extent={{-10,-60},{0,-50}})));
   Modelica.Blocks.Continuous.Integrator integrator9
     annotation (Placement(transformation(extent={{-10,-80},{0,-70}})));
-  Modelica.Blocks.Continuous.Integrator integrator10
+  Modelica.Blocks.Continuous.Integrator integratorPelCHP
     annotation (Placement(transformation(extent={{-10,-100},{0,-90}})));
   Modelica.Blocks.Math.Sum sum1(nin=3)
     annotation (Placement(transformation(extent={{-30,-22},{-20,-12}})));
-  Modelica.Blocks.Math.Sum sumWel(nin=7)
+  Modelica.Blocks.Math.Sum sumWel(nin=11)
     annotation (Placement(transformation(extent={{50,-22},{60,-12}})));
   Modelica.Blocks.Math.Sum sumQbr(nin=3)
     annotation (Placement(transformation(extent={{50,-40},{60,-30}})));
@@ -76,6 +76,22 @@ model EnergyCounter2Zones "Sums up all consumed energy"
     annotation (Placement(transformation(extent={{86,48},{96,58}})));
   Modelica.Blocks.Nonlinear.DeadZone deadZone1(uMax=deltaTset, uMin=-deltaTset)
     annotation (Placement(transformation(extent={{86,66},{96,76}})));
+  Modelica.Blocks.Continuous.Integrator integratorAHUs
+    annotation (Placement(transformation(extent={{-10,-122},{0,-112}})));
+  Modelica.Blocks.Math.Sum sumAHUs(nin=6)
+    annotation (Placement(transformation(extent={{-34,-122},{-24,-112}})));
+  Modelica.Blocks.Continuous.Integrator integratorCCAs
+    annotation (Placement(transformation(extent={{-10,-142},{0,-132}})));
+  Modelica.Blocks.Math.Sum sumCCAs(nin=6)
+    annotation (Placement(transformation(extent={{-34,-142},{-24,-132}})));
+  Modelica.Blocks.Continuous.Integrator integratorCCAs1
+    annotation (Placement(transformation(extent={{-10,-160},{0,-150}})));
+  Modelica.Blocks.Math.Sum sumCCAs1(nin=2)
+    annotation (Placement(transformation(extent={{-34,-160},{-24,-150}})));
+  Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={20,-86})));
 equation
   connect(integrator.u, mainBus.hpSystemBus.busHP.PelMea) annotation (Line(points={
           {-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
@@ -209,15 +225,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integrator10.u, mainBus.htsBus.electricalPowerChpMea) annotation (
-      Line(points={{-11,-95},{-98.905,-95},{-98.905,0.09}}, color={0,0,127}),
+  connect(integratorPelCHP.u, mainBus.htsBus.electricalPowerChpMea) annotation
+    (Line(points={{-11,-95},{-98.905,-95},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator10.y, mainBus.evaBus.WelCPHMea) annotation (Line(points={{0.5,
-          -95},{32,-95},{32,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
+  connect(integratorPelCHP.y, mainBus.evaBus.WelCPHMea) annotation (Line(points
+        ={{0.5,-95},{32,-95},{32,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -245,21 +261,21 @@ equation
   connect(sum1.y, integrator6.u) annotation (Line(points={{-19.5,-17},{-14.75,
           -17},{-14.75,-17},{-11,-17}}, color={0,0,127}));
   connect(integrator.y, sumWel.u[1])
-    annotation (Line(points={{0.5,95},{49,95},{49,-17.4286}},color={0,0,127}));
+    annotation (Line(points={{0.5,95},{49,95},{49,-17.4545}},color={0,0,127}));
   connect(integrator1.y, sumWel.u[2])
-    annotation (Line(points={{0.5,79},{49,79},{49,-17.2857}},color={0,0,127}));
+    annotation (Line(points={{0.5,79},{49,79},{49,-17.3636}},color={0,0,127}));
   connect(integrator2.y, sumWel.u[3]) annotation (Line(points={{0.5,61},{32,61},
-          {32,10},{49,10},{49,-17.1429}},color={0,0,127}));
+          {32,10},{49,10},{49,-17.2727}},color={0,0,127}));
   connect(integrator3.y, sumWel.u[4]) annotation (Line(points={{0.5,45},{16,45},
-          {16,46},{32,46},{32,-17},{49,-17}},
+          {16,46},{32,46},{32,-17.1818},{49,-17.1818}},
                                           color={0,0,127}));
   connect(integrator4.y, sumWel.u[5]) annotation (Line(points={{0.5,25},{32.25,
-          25},{32.25,-16.8571},{49,-16.8571}},
+          25},{32.25,-17.0909},{49,-17.0909}},
                                              color={0,0,127}));
   connect(integrator5.y, sumWel.u[6])
-    annotation (Line(points={{0.5,9},{49,9},{49,-16.7143}},color={0,0,127}));
+    annotation (Line(points={{0.5,9},{49,9},{49,-17}},     color={0,0,127}));
   connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{49,
-          -17},{49,-16.5714}},color={0,0,127}));
+          -17},{49,-16.9091}},color={0,0,127}));
   connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{60.5,-17},
           {64,-17},{64,-16},{66,-16},{66,0.09},{-98.905,0.09}},
                                             color={0,0,127}), Text(
@@ -377,6 +393,146 @@ equation
           71},{98.25,72.8},{99.4,72.8}}, color={0,0,127}));
   connect(deadZone1.y, product4.u2) annotation (Line(points={{96.5,71},{98.25,
           71},{98.25,69.2},{99.4,69.2}}, color={0,0,127}));
+  connect(sumAHUs.y, integratorAHUs.u)
+    annotation (Line(points={{-23.5,-117},{-11,-117}}, color={0,0,127}));
+  connect(integratorAHUs.y, sumWel.u[8]) annotation (Line(points={{0.5,-117},{
+          46,-117},{46,-16.8182},{49,-16.8182}},
+                                             color={0,0,127}));
+  connect(sumCCAs.y, integratorCCAs.u)
+    annotation (Line(points={{-23.5,-137},{-11,-137}}, color={0,0,127}));
+  connect(integratorCCAs.y, sumWel.u[9]) annotation (Line(points={{0.5,-137},{
+          24,-137},{24,-138},{46,-138},{46,-16},{50,-16},{50,-16.7273},{49,
+          -16.7273}},
+        color={0,0,127}));
+  connect(sumAHUs.u[1], mainBus.ahu1Bus.preheaterBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-117.417},{-98.905,-117.417},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumAHUs.u[2], mainBus.ahu1Bus.coolerBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-117.25},{-98.905,-117.25},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumAHUs.u[3], mainBus.ahu1Bus.heaterBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-117.083},{-98.905,-117.083},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumAHUs.u[4], mainBus.ahu2Bus.preheaterBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-116.917},{-98.905,-116.917},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumAHUs.u[5], mainBus.ahu2Bus.coolerBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-116.75},{-98.905,-116.75},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumAHUs.u[6], mainBus.ahu2Bus.heaterBus.hydraulicBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-116.583},{-98.905,-116.583},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[1], mainBus.tabs1Bus.pumpBus.pumpBus.PelMea) annotation (
+      Line(points={{-35,-137.417},{-106,-137.417},{-106,0.09},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[2], mainBus.tabs1Bus.hotThrottleBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-137.25},{-98.905,-137.25},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[3], mainBus.tabs1Bus.coldThrottleBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-137.083},{-98.905,-137.083},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[4], mainBus.tabs2Bus.pumpBus.pumpBus.PelMea) annotation (
+      Line(points={{-35,-136.917},{-98.905,-136.917},{-98.905,0.09}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[5], mainBus.tabs2Bus.hotThrottleBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-136.75},{-98.905,-136.75},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs.u[6], mainBus.tabs2Bus.coldThrottleBus.pumpBus.PelMea)
+    annotation (Line(points={{-35,-136.583},{-108,-136.583},{-108,0.09},{
+          -98.905,0.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(integratorCCAs.y, mainBus.evaBus.WelPumpsTABSMea) annotation (Line(
+        points={{0.5,-137},{24,-137},{24,-172},{-146,-172},{-146,0.09},{-98.905,
+          0.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integratorAHUs.y, mainBus.evaBus.WelPumpsAHUMea) annotation (Line(
+        points={{0.5,-117},{44,-117},{44,-190},{-178,-190},{-178,0.09},{-98.905,
+          0.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sumCCAs1.y, integratorCCAs1.u)
+    annotation (Line(points={{-23.5,-155},{-11,-155}}, color={0,0,127}));
+  connect(integratorCCAs1.y, sumWel.u[10]) annotation (Line(points={{0.5,-155},
+          {32,-155},{32,-18},{40,-18},{40,-16.6364},{49,-16.6364}},
+                                                                color={0,0,127}));
+  connect(sumCCAs1.u[1], mainBus.consHtcBus.pumpBus.PelMea) annotation (Line(
+        points={{-35,-155.25},{-98.905,-155.25},{-98.905,0.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sumCCAs1.u[2], mainBus.consCold1Bus.pumpBus.PelMea) annotation (Line(
+        points={{-35,-154.75},{-98.905,-154.75},{-98.905,0.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(integratorCCAs1.y, mainBus.evaBus.WelPumpsConsMea) annotation (Line(
+        points={{0.5,-155},{24,-155},{24,-196},{-98.905,-196},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integratorPelCHP.y, gain.u) annotation (Line(points={{0.5,-95},{0.5,
+          -96},{20,-96},{20,-90.8}}, color={0,0,127}));
+  connect(gain.y, sumWel.u[11]) annotation (Line(points={{20,-81.6},{20,-76},{
+          32,-76},{32,-18},{40,-18},{40,-16.5455},{49,-16.5455}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-86,80},{94,-20}},
