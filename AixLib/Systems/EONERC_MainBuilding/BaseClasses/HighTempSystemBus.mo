@@ -16,8 +16,8 @@ expandable connector HighTempSystemBus
   Real fuelPowerChpMea "Fuel consumption of chp [0..1]";
   Real thermalPowerChpMea "Thermal power of chp [0..1]";
   Real electricalPowerChpMea "Electrical power consumption of chp [0..1]";
-  SI.Temperature T_in "Inflow temperature";
-  SI.Temperature T_out "Inflow temperature";
+  SI.Temperature TInMea "Inflow temperature";
+  SI.Temperature TOutMea "Inflow temperature";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

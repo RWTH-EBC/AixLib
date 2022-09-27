@@ -223,14 +223,16 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(fixedTemperature.port, boiler2.T_amb) annotation (Line(points={{-46,-66},
           {-28.16,-66}},                 color={191,0,0}));
-  connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,99.085},
-          {0.09,99.085}}, color={0,0,127}), Text(
+  connect(senT_a.T, hTCBus.TOutMea) annotation (Line(points={{106,66.6},{106,
+          99.085},{0.09,99.085}},
+                          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_b.T, hTCBus.T_in) annotation (Line(points={{106,26.6},{154,26.6},
-          {154,99.085},{0.09,99.085}}, color={0,0,127}), Text(
+  connect(senT_b.T, hTCBus.TInMea) annotation (Line(points={{106,26.6},{154,
+          26.6},{154,99.085},{0.09,99.085}},
+                                       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
