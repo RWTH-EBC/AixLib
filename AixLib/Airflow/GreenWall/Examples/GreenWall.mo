@@ -1,4 +1,5 @@
 within AixLib.Airflow.GreenWall.Examples;
+
 model GreenWall
   extends Modelica.Icons.Example;
   import SI = Modelica.SIunits;
