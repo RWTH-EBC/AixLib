@@ -11,7 +11,10 @@ model Pump_DN25_H05_12 "25/0.5-12 PN 10 maximum volume flow 12.0 m^3/h"
             [0,4350,750; 11,4350,750],
             nMin=750,
             nMax=4350,
-            cHQN=[0,0,0; 0,0,0; 0,0,0]);
+            cHQN=[ 0.00000e+00,  0.00000e+00,  5.42119e-07;
+                   0.00000e+00,  9.63893e-05,  0.00000e+00;
+                  -9.40049e-02,  0.00000e+00,  0.00000e+00]
+       "coefficients for H = f(Q,N) from Pump_DN25_H1_8_V9 (DN25_H1_8_V9 and DN25_H1_6_V8 similar scale of the max volume flow)");
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
