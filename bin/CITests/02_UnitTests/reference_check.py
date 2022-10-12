@@ -161,6 +161,7 @@ class Reg_Reference(object):
                 else:
                     print(f'{self.green}New reference results in package: {self.CEND} {package}\n')
                     continue
+            exit(1)
         else:
             ex_file = open(self.exit_file, "w")
             ex_file.write("#!/bin/bash" + "\n" + "\n" + "exit 0")
