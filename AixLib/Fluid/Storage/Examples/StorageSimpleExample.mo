@@ -105,7 +105,7 @@ model StorageSimpleExample "Example model with simple storage"
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-87,-17})));
-  Modelica.Blocks.Continuous.LimPID PID_pump_gen(
+  Controls.Continuous.LimPID        conPID1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.5,
     Ti=10,
@@ -123,7 +123,7 @@ model StorageSimpleExample "Example model with simple storage"
   Modelica.Blocks.Sources.Constant m_flow_set(k=m_flow_nominal_gen)
     "Set mass flow rate"
     annotation (Placement(transformation(extent={{-96,-88},{-82,-74}})));
-  Modelica.Blocks.Continuous.LimPID PID_pump_gen1(
+  Controls.Continuous.LimPID        conPID2(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
     yMin=0,
@@ -197,26 +197,25 @@ equation
           {-87,-30},{-87,-24}}, color={0,127,255}));
   connect(senMasFlo_con.port_b, simpleConsumer.port_a)
     annotation (Line(points={{54,37},{62,37},{62,14}}, color={0,127,255}));
-  connect(m_flow_set.y, PID_pump_gen.u_s) annotation (Line(points={{-81.3,-81},{
-          -76,-81},{-76,-80},{-69.2,-80}}, color={0,0,127}));
-  connect(senMasFlo_gen.m_flow, PID_pump_gen.u_m) annotation (Line(points={{-94.7,
-          -17},{-100,-17},{-100,-100},{-62,-100},{-62,-87.2}},
-                                                             color={0,0,127}));
-  connect(m_flow_set.y, PID_pump_gen1.u_s) annotation (Line(points={{-81.3,-81},
-          {-40,-81},{-40,-66},{2,-66},{2,-70},{42.8,-70}}, color={0,0,127}));
-  connect(PID_pump_gen1.y, PumpOnOffCon.u1) annotation (Line(points={{56.6,-70},
-          {60,-70},{60,-77.4},{68.6,-77.4}}, color={0,0,127}));
+  connect(m_flow_set.y, conPID1.u_s) annotation (Line(points={{-81.3,-81},{-76,
+          -81},{-76,-80},{-69.2,-80}}, color={0,0,127}));
+  connect(senMasFlo_gen.m_flow, conPID1.u_m) annotation (Line(points={{-94.7,-17},
+          {-100,-17},{-100,-100},{-62,-100},{-62,-87.2}}, color={0,0,127}));
+  connect(m_flow_set.y, conPID2.u_s) annotation (Line(points={{-81.3,-81},{-40,
+          -81},{-40,-66},{2,-66},{2,-70},{42.8,-70}}, color={0,0,127}));
+  connect(conPID2.y, PumpOnOffCon.u1) annotation (Line(points={{56.6,-70},{60,-70},
+          {60,-77.4},{68.6,-77.4}}, color={0,0,127}));
   connect(greaterZero.y, PumpOnOffCon.u2) annotation (Line(points={{30.6,-82},{68.6,
           -82},{68.6,-83}}, color={255,0,255}));
   connect(Offpump.y, PumpOnOffCon.u3) annotation (Line(points={{56.4,-90},{62,-90},
           {62,-88.6},{68.6,-88.6}}, color={0,0,127}));
   connect(PumpOnOffCon.y, pumpCon.y) annotation (Line(points={{84.7,-83},{90,-83},
           {90,-60},{34,-60},{34,-42}}, color={0,0,127}));
-  connect(senMasFlo_con.m_flow, PID_pump_gen1.u_m) annotation (Line(points={{47,44.7},
-          {47,40},{100,40},{100,-60},{50,-60},{50,-62.8}},       color={0,0,127}));
-  connect(PID_pump_gen.y, PumpOnOffGen.u1) annotation (Line(points={{-55.4,-80},
-          {-52,-80},{-52,-72},{-38,-72},{-38,-76},{-29.4,-76},{-29.4,-77.4}},
-        color={0,0,127}));
+  connect(senMasFlo_con.m_flow, conPID2.u_m) annotation (Line(points={{47,44.7},
+          {47,40},{100,40},{100,-60},{50,-60},{50,-62.8}}, color={0,0,127}));
+  connect(conPID1.y, PumpOnOffGen.u1) annotation (Line(points={{-55.4,-80},{-52,
+          -80},{-52,-72},{-38,-72},{-38,-76},{-29.4,-76},{-29.4,-77.4}}, color=
+          {0,0,127}));
   connect(storageHysteresis.y, PumpOnOffGen.u2) annotation (Line(points={{-59.4,
           60},{-58,60},{-58,50},{-100,50},{-100,-100},{-40,-100},{-40,-83},{-29.4,
           -83}}, color={255,0,255}));
