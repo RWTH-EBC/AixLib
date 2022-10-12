@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 block BoundaryMap
   "Block which returns false if the input parameters are out of the given charasteristic map.
 For the boundaries of the y-input value, a dynamic hysteresis is used to ensure a used device will stay off a certain time after shutdown."
@@ -94,6 +94,5 @@ equation
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>
 </ul>
-</html>"),
-      uses(AixLib(version="0.7.3"), Modelica(version="3.2.2")));
+</html>"));
 end BoundaryMap;

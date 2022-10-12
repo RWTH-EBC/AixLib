@@ -33,7 +33,7 @@ model HeatPumpController "Example for usage of heat pump controller"
         rotation=0,
         origin={-70,-96})));
   Modelica.Blocks.Sources.Sine T_meas(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=6,
     offset=310) "Generates the measured temperature"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));

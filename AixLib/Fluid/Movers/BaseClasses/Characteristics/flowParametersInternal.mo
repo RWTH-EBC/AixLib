@@ -1,14 +1,13 @@
 within AixLib.Fluid.Movers.BaseClasses.Characteristics;
- record flowParametersInternal "Record for flow parameters with prescribed size"
-   extends Modelica.Icons.Record;
-   parameter Integer n "Number of elements in each array"
-    annotation(Evaluate=true);
-   parameter Modelica.SIunits.VolumeFlowRate V_flow[n](each min=0)
-     "Volume flow rate at user-selected operating points";
-   parameter Modelica.SIunits.PressureDifference dp[n](
-      each min=0, each displayUnit="Pa")
-     "Fan or pump total pressure at these flow rates";
-   annotation (Documentation(info="<html>
+record flowParametersInternal "Record for flow parameters with prescribed size"
+  extends Modelica.Icons.Record;
+  parameter Integer n "Number of elements in each array"
+   annotation(Evaluate=true);
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow[n](each min=0)
+    "Volume flow rate at user-selected operating points";
+  parameter Modelica.Units.SI.PressureDifference dp[n](each min=0, each
+      displayUnit="Pa") "Fan or pump total pressure at these flow rates";
+  annotation (Documentation(info="<html>
  <p>
  Data record for performance data that describe volume flow rate versus
  pressure rise.
@@ -28,7 +27,7 @@ within AixLib.Fluid.Movers.BaseClasses.Characteristics;
  in the <code>initial algorithm</code> section, which is not supported.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  April 11, 2016 by Michael Wetter:<br/>
@@ -46,6 +45,6 @@ within AixLib.Fluid.Movers.BaseClasses.Characteristics;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end flowParametersInternal;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end flowParametersInternal;

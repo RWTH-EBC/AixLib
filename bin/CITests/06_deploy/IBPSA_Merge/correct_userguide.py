@@ -1,28 +1,18 @@
 import os
-import glob
+import argparse
 
 def folder_userguide(aixlib_dir):
-	#file = (glob.glob(ibpsa_dir))
-	for root, dirs, files in os.walk(aixlib_dir): 
-		#print(root[root.rfind(os.sep)+1:])
-		#g = root.split(os.sep)
-		#print(dirs)
+	for root, dirs, files in os.walk(aixlib_dir):
 		if root[root.rfind(os.sep)+1:] == "UsersGuide":
 			for file in files:
 				if file == "package.order":
-					#print(file)
-					#print(root+os.sep+file)
 					order_file = root+os.sep+file
-					print(order_file)
-					f = open(order_file, "r") 
+					f = open(order_file, "r")
 					lines = f.readlines()
 					f.close()
-					new_order_file = open (order_file,"w")
-					
+					new_order_file = open (order_file, "w")
 					for line in lines:
-						#print(line)
-						#if line.find("UsersGuide") > -1 :
-						if line.strip("\n") != 	"UsersGuide":
+						if line.strip("\n") != "UsersGuide":
 							new_order_file.write(line)
 							print(line)
 					new_order_file.close()
@@ -30,7 +20,8 @@ def folder_userguide(aixlib_dir):
 	
 
 if  __name__ == '__main__':
-	
-	aixlib_dir = "AixLib"
-	
-	folder_userguide(aixlib_dir)
+	parser = argparse.ArgumentParser(description="Set Github Environment Variables")
+	check_test_group = parser.add_argument_group("Arguments to set Environment Variables")
+	check_test_group.add_argument("-ad", "--aixlib-dir", default="AixLib", help="path to the aixlib scripts")
+	args = parser.parse_args()
+	folder_userguide(args.aixlib_dir)

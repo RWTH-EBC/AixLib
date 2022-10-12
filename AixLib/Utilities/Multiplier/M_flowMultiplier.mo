@@ -27,11 +27,12 @@ model M_flowMultiplier
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
 
   // Variables
-  Modelica.SIunits.VolumeFlowRate V_flow=
-      port_a.m_flow/Modelica.Fluid.Utilities.regStep(port_a.m_flow,
-                  Medium.density(state_a),
-                  Medium.density(state_b),
-                  m_flow_small*f) if show_V_flow
+  Modelica.Units.SI.VolumeFlowRate V_flow=port_a.m_flow/
+      Modelica.Fluid.Utilities.regStep(
+      port_a.m_flow,
+      Medium.density(state_a),
+      Medium.density(state_b),
+      m_flow_small*f) if show_V_flow
     "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
 
   Medium.Temperature port_a_T=

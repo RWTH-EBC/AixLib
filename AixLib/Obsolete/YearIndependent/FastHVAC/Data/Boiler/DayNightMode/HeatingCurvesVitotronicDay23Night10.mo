@@ -1,4 +1,4 @@
-within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.DayNightMode;
+﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.DayNightMode;
 record HeatingCurvesVitotronicDay23Night10
   "Heating Curves for Vitotronic Controller, TsetDay = 23°C, TsetNight = 10°C "
   extends HeatingCurvesDayNightBaseDataDefinition(

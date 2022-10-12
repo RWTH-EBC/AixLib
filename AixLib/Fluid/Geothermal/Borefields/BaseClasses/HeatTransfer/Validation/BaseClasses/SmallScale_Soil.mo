@@ -1,16 +1,16 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses;
- record SmallScale_Soil
-   "Soil data record for the Cimmino and Bernier (2015) experiment"
-   extends
-     AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
-       kSoi=0.262,
-       cSoi=745,
-       dSoi=1750);
-   annotation (
-   defaultComponentPrefixes="parameter",
-   defaultComponentName="soiDat",
- Documentation(
- info="<html>
+record SmallScale_Soil
+  "Soil data record for the Cimmino and Bernier (2015) experiment"
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
+      kSoi=0.262,
+      cSoi=745,
+      dSoi=1750);
+  annotation (
+  defaultComponentPrefixes="parameter",
+  defaultComponentName="soiDat",
+Documentation(
+info="<html>
  <p>
  This record contains the soil data of the Cimmino and Bernier (2015) experiment.
  </p>
@@ -20,7 +20,7 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Ba
  g-functions of a small-scale geothermal borehole</i>. Geothermics 56: 60-71.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -32,6 +32,6 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Ba
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end SmallScale_Soil;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end SmallScale_Soil;

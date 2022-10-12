@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.R290;
+﻿within AixLib.Media.Refrigerants.R290;
 package R290_IIR_P05_30_T263_343_Horner
   "Refrigerant model for R290 using a hybrid approach with explicit Horner
   formulas developed by Sangi et al."
@@ -55,7 +55,6 @@ package R290_IIR_P05_30_T263_343_Horner
       max=343.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
@@ -1238,7 +1237,7 @@ package R290_IIR_P05_30_T263_343_Horner
     <p>
       Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow,
       Rita; Müller, Dirk (2014): <a href=
-      \"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the
+      \"http://dx.doi.org/10.3384/ecp14096\" >A Medium Model for the
       Refrigerant Propane for Fast and Accurate Dynamic
       Simulations</a>. In: <i>The 10th International Modelica
       Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping

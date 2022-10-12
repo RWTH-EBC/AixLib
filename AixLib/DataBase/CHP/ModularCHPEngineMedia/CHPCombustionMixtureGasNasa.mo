@@ -51,9 +51,9 @@ required from medium model \"" + mediumName + "\".");
 
     MM = molarMass(state);
     h = h_TX(T, X);
-    R = data.R*X;
-    u = h - R*T;
-    d = p/(R*T);
+    R_s = data.R_s*X;
+    u =h - R_s*T;
+    d =p/(R_s*T);
     // connect state with BaseProperties
     state.T = T;
     state.p = p;
@@ -107,8 +107,22 @@ required from medium model \"" + mediumName + "\".");
       input MassFraction X[:]=reference_X "Mass fractions";
       output ThermodynamicState state;
     algorithm
-      state := if size(X,1) == 0 then ThermodynamicState(p=d*(data.R*reference_X)*T,T=T,X=reference_X) else if size(X,1) == nX then ThermodynamicState(p=d*(data.R*X)*T,T=T,X=X) else
-             ThermodynamicState(p=d*(data.R*cat(1,X,{1-sum(X)}))*T,T=T, X=cat(1,X,{1-sum(X)}));
+      state :=if size(X, 1) == 0 then ThermodynamicState(
+          p=d*(data.R_s*reference_X)*T,
+          T=T,
+          X=reference_X) else if size(X, 1) == nX then ThermodynamicState(
+          p=d*(data.R_s*X)*T,
+          T=T,
+          X=X) else ThermodynamicState(
+          p=d*(data.R_s*cat(
+            1,
+            X,
+            {1 - sum(X)}))*T,
+          T=T,
+          X=cat(
+            1,
+            X,
+            {1 - sum(X)}));
       annotation(Inline=true,smoothOrder=2);
     end setState_dTX;
 
@@ -148,7 +162,7 @@ required from medium model \"" + mediumName + "\".");
 
     redeclare function extends density "Return density of ideal gas"
     algorithm
-      d := state.p/((state.X*data.R)*state.T);
+      d :=state.p/((state.X*data.R_s)*state.T);
       annotation(Inline = true, smoothOrder = 3);
     end density;
 
@@ -196,7 +210,7 @@ required from medium model \"" + mediumName + "\".");
   function h_TX "Return specific enthalpy"
     import Modelica.Media.Interfaces.Choices;
      extends Modelica.Icons.Function;
-     input Modelica.SIunits.Temperature T "Temperature";
+    input Modelica.Units.SI.Temperature T "Temperature";
      input MassFraction X[nX]=reference_X
       "Independent Mass fractions of gas mixture";
      input Boolean exclEnthForm=excludeEnthalpyOfFormation
@@ -204,10 +218,10 @@ required from medium model \"" + mediumName + "\".");
      input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
                                      refChoice=referenceChoice
       "Choice of reference enthalpy";
-     input Modelica.SIunits.SpecificEnthalpy h_off=h_offset
-        "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
-     output Modelica.SIunits.SpecificEnthalpy h
-        "Specific enthalpy at temperature T";
+    input Modelica.Units.SI.SpecificEnthalpy h_off=h_offset
+      "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
+    output Modelica.Units.SI.SpecificEnthalpy h
+      "Specific enthalpy at temperature T";
   algorithm
     h :=(if fixedX then reference_X else X)*
          {Modelica.Media.IdealGases.Common.Functions.h_T(
@@ -218,15 +232,15 @@ required from medium model \"" + mediumName + "\".");
   function h_TX_der "Return specific enthalpy derivative"
     import Modelica.Media.Interfaces.Choices;
      extends Modelica.Icons.Function;
-     input Modelica.SIunits.Temperature T "Temperature";
+    input Modelica.Units.SI.Temperature T "Temperature";
      input MassFraction X[nX] "Independent Mass fractions of gas mixture";
      input Boolean exclEnthForm=excludeEnthalpyOfFormation
       "If true, enthalpy of formation Hf is not included in specific enthalpy h";
      input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
                                      refChoice=referenceChoice
       "Choice of reference enthalpy";
-     input Modelica.SIunits.SpecificEnthalpy h_off=h_offset
-        "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
+    input Modelica.Units.SI.SpecificEnthalpy h_off=h_offset
+      "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     input Real dT "Temperature derivative";
     input Real dX[nX] "Independent mass fraction derivative";
     output Real h_der "Specific enthalpy at temperature T";
@@ -243,7 +257,7 @@ required from medium model \"" + mediumName + "\".");
 
   redeclare function extends gasConstant "Return gasConstant"
   algorithm
-    R := data.R*state.X;
+    R_s := data.R_s*state.X;
     annotation(Inline = true, smoothOrder = 3);
   end gasConstant;
 
@@ -258,14 +272,14 @@ required from medium model \"" + mediumName + "\".");
   redeclare function extends specificHeatCapacityCv
     "Return specific heat capacity at constant volume from temperature and gas data"
   algorithm
-    cv := {Modelica.Media.IdealGases.Common.Functions.cp_T(
-                              data[i], state.T) for i in 1:nX}*state.X -data.R*state.X;
+    cv :={Modelica.Media.IdealGases.Common.Functions.cp_T(data[i], state.T)
+      for i in 1:nX}*state.X - data.R_s*state.X;
     annotation(Inline=true, smoothOrder = 1);
   end specificHeatCapacityCv;
 
   function MixEntropy "Return mixing entropy of ideal gases / R"
     extends Modelica.Icons.Function;
-    input Modelica.SIunits.MoleFraction x[:] "Mole fraction of mixture";
+    input Modelica.Units.SI.MoleFraction x[:] "Mole fraction of mixture";
     output Real smix "Mixing entropy contribution, divided by gas constant";
   algorithm
     smix := sum(if x[i] > Modelica.Constants.eps then -x[i]*Modelica.Math.log(x[i]) else
@@ -611,36 +625,30 @@ end lowPressureThermalConductivity;
     extends Modelica.Icons.Function;
     input SpecificEnthalpy h "Specific enthalpy";
     input MassFraction[nX] X "Mass fractions of composition";
-     input Boolean exclEnthForm=excludeEnthalpyOfFormation
+    input Boolean exclEnthForm=excludeEnthalpyOfFormation
       "If true, enthalpy of formation Hf is not included in specific enthalpy h";
-     input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
+    input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
                                      refChoice=referenceChoice
       "Choice of reference enthalpy";
-     input Modelica.SIunits.SpecificEnthalpy h_off=h_offset
-        "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
+    input SpecificEnthalpy h_off=h_offset
+      "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     output Temperature T "Temperature";
-  protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-  package Internal
-      "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
-    extends Modelica.Media.Common.OneNonLinearEquation;
-    redeclare record extends f_nonlinear_Data
-        "Data to be passed to non-linear function"
-      extends Modelica.Media.IdealGases.Common.DataRecord;
-    end f_nonlinear_Data;
 
-    redeclare function extends f_nonlinear
+  protected
+    function f_nonlinear "Solve h_TX(T,X) for T with given h"
+      extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
+      input SpecificEnthalpy h "Specific enthalpy";
+      input MassFraction[nX] X "Mass fractions of composition";
+      input Boolean exclEnthForm "If true, enthalpy of formation Hf is not included in specific enthalpy h";
+      input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy refChoice "Choice of reference enthalpy";
+      input SpecificEnthalpy h_off "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     algorithm
-        y := h_TX(x,X);
+      y := h_TX(T=u, X=X, exclEnthForm=exclEnthForm, refChoice=refChoice, h_off=h_off) - h;
     end f_nonlinear;
 
-    // Dummy definition has to be added for current Dymola
-    redeclare function extends solve
-    end solve;
-  end Internal;
-
   algorithm
-    T := Internal.solve(h, 200, 6000, 1.0e5, Xfull, data[1]);
+    T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
+      function f_nonlinear(h=h, X=X, exclEnthForm=exclEnthForm, refChoice=refChoice, h_off=h_off), 200, 6000);
     annotation(inverse(h = h_TX(T,X,exclEnthForm,refChoice,h_off)));
   end T_hX;
 
@@ -651,37 +659,21 @@ end lowPressureThermalConductivity;
     input SpecificEntropy s "Specific entropy";
     input MassFraction[nX] X "Mass fractions of composition";
     output Temperature T "Temperature";
-  protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-  package Internal
-      "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
-    extends Modelica.Media.Common.OneNonLinearEquation;
-    redeclare record extends f_nonlinear_Data
-        "Data to be passed to non-linear function"
-      extends Modelica.Media.IdealGases.Common.DataRecord;
-    end f_nonlinear_Data;
 
-    redeclare function extends f_nonlinear
-        "Note that this function always sees the complete mass fraction vector"
-      protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-    Real[nX] Y(unit="mol/mol")=massToMoleFractions(if size(X,1) == nX then X else cat(1,X,{1-sum(X)}), data.MM)
-          "Molar fractions";
+  protected
+    function f_nonlinear "Solve specificEntropyOfpTX(p,T,X) for T with given s"
+      extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
+      input AbsolutePressure p "Pressure";
+      input SpecificEntropy s "Specific entropy";
+      input MassFraction[nX] X "Mass fractions of composition";
     algorithm
-      y := s_TX(x,Xfull) - sum(Xfull[i]*Modelica.Constants.R/MMX[i]*
-      (if Xfull[i]<Modelica.Constants.eps then Y[i] else
-      Modelica.Math.log(Y[i]*p/reference_p)) for i in 1:nX);
-        // s_TX(x,X)- data[:].R*X*(Modelica.Math.log(p/reference_p)
-        //       + MixEntropy(massToMoleFractions(X,data[:].MM)));
+      y := specificEntropyOfpTX(p=p, T=u, X=X) - s;
     end f_nonlinear;
 
-    // Dummy definition has to be added for current Dymola
-    redeclare function extends solve
-    end solve;
-  end Internal;
-
   algorithm
-    T := Internal.solve(s, 200, 6000, p, Xfull, data[1]);
+    T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
+      function f_nonlinear(p=p, s=s, X=X), 200, 6000);
+    annotation(inverse(s = specificEntropyOfpTX(p,T,X)));
   end T_psX;
 //   redeclare function extends specificEnthalpy_psX
 //   protected

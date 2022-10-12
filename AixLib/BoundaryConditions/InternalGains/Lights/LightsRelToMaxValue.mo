@@ -3,8 +3,10 @@ model LightsRelToMaxValue "Multiplies relative input with max value (heat flow d
   extends BaseClasses.PartialInternalGain(emissivity=0.98, gainSurfaces(final k=areaSurfaceLightsTotal),
     gain(final k=maxHeatFlowAbsolute));
 
-  parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow due to lighting";
-  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.001*maxHeatFlowAbsolute "Surface of all lights in the room";
+  parameter Modelica.Units.SI.HeatFlowRate maxHeatFlowAbsolute
+    "Maximal absolute heat flow due to lighting";
+  parameter Modelica.Units.SI.Area areaSurfaceLightsTotal=0.001*
+      maxHeatFlowAbsolute "Surface of all lights in the room";
 
 equation
 

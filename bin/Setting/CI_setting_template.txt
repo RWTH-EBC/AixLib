@@ -7,6 +7,9 @@ wh_library_name = "${wh_library}"
 [dymola_version]
 dymolaversion = "${dymolaversion}"
 
+[python_version]
+python_version= "${python_version}"
+
 [Package]
 	packagelist = [ 
 	%for package in package_list:

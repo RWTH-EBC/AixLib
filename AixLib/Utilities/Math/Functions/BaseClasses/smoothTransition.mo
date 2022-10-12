@@ -1,41 +1,41 @@
 within AixLib.Utilities.Math.Functions.BaseClasses;
- function smoothTransition
-   "Twice continuously differentiable transition between the regions"
-   extends Modelica.Icons.Function;
- 
-   // The function that transitions between the regions is implemented
-   // using its own function. This allows Dymola 2016 to inline the function
-   // inverseXRegularized.
- 
- input Real x "Abscissa value";
- input Real delta(min=Modelica.Constants.eps)
-     "Abscissa value below which approximation occurs";
- input Real deltaInv = 1/delta "Inverse value of delta";
- 
- input Real a = -15*deltaInv "Polynomial coefficient";
- input Real b = 119*deltaInv^2 "Polynomial coefficient";
- input Real c = -361*deltaInv^3 "Polynomial coefficient";
- input Real d = 534*deltaInv^4 "Polynomial coefficient";
- input Real e = -380*deltaInv^5 "Polynomial coefficient";
- input Real f = 104*deltaInv^6 "Polynomial coefficient";
- output Real y "Function value";
- protected
-   Real aX "Absolute value of x";
- 
- algorithm
-  aX:= abs(x);
-  y := (if x >= 0 then 1 else -1) * (a + aX*(b + aX*(c + aX*(d + aX*(e + aX*f)))));
- annotation(smoothOrder=2,
-   derivative(order=1,
-           zeroDerivative=delta,
-           zeroDerivative=deltaInv,
-           zeroDerivative=a,
-           zeroDerivative=b,
-           zeroDerivative=c,
-           zeroDerivative=d,
-           zeroDerivative=e,
-           zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition,
-     Documentation(info="<html>
+function smoothTransition
+  "Twice continuously differentiable transition between the regions"
+  extends Modelica.Icons.Function;
+
+  // The function that transitions between the regions is implemented
+  // using its own function. This allows Dymola 2016 to inline the function
+  // inverseXRegularized.
+
+input Real x "Abscissa value";
+input Real delta(min=Modelica.Constants.eps)
+    "Abscissa value below which approximation occurs";
+input Real deltaInv = 1/delta "Inverse value of delta";
+
+input Real a = -15*deltaInv "Polynomial coefficient";
+input Real b = 119*deltaInv^2 "Polynomial coefficient";
+input Real c = -361*deltaInv^3 "Polynomial coefficient";
+input Real d = 534*deltaInv^4 "Polynomial coefficient";
+input Real e = -380*deltaInv^5 "Polynomial coefficient";
+input Real f = 104*deltaInv^6 "Polynomial coefficient";
+output Real y "Function value";
+protected
+  Real aX "Absolute value of x";
+
+algorithm
+ aX:= abs(x);
+ y := (if x >= 0 then 1 else -1) * (a + aX*(b + aX*(c + aX*(d + aX*(e + aX*f)))));
+annotation(smoothOrder=2,
+  derivative(order=1,
+          zeroDerivative=delta,
+          zeroDerivative=deltaInv,
+          zeroDerivative=a,
+          zeroDerivative=b,
+          zeroDerivative=c,
+          zeroDerivative=d,
+          zeroDerivative=e,
+          zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition,
+    Documentation(info="<html>
  <p>
  This function is used by
  <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
@@ -63,7 +63,7 @@ within AixLib.Utilities.Math.Functions.BaseClasses;
  <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
  AixLib.Utilities.Math.Functions.BaseClasses.der_2__smoothTransition</a>.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  September 12, 2018, by David Blum:<br/>
@@ -75,6 +75,6 @@ within AixLib.Utilities.Math.Functions.BaseClasses;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end smoothTransition;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end smoothTransition;

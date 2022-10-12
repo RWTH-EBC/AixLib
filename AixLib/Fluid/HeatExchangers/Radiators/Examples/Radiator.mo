@@ -16,7 +16,7 @@ model Radiator "Example for EBC radiator"
     selectable=true,
     radiatorType=AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
         NominalPower=496,
-        RT_nom=Modelica.SIunits.Conversions.from_degC({55,45,20}),
+        RT_nom=Modelica.Units.Conversions.from_degC({55,45,20}),
         PressureDrop=1017878,
         Exponent=1.2776,
         VolumeWater=3.6,

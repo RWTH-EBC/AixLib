@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid;
+within AixLib.Fluid;
 package Actuators "Package with actuator models such as valves and dampers"
   extends Modelica.Icons.VariantsPackage;
 
