@@ -57,11 +57,11 @@ model StorageSimpleExample "Example model with simple storage"
     p=200000,
     nPorts=1)
     annotation (Placement(transformation(extent={{-24,-52},{-38,-38}})));
-  AixLib.Movers.SpeedControlled_y pumpGen(redeclare package Medium = Medium,
+  AixLib.Fluid.Movers.SpeedControlled_y pumpGen(redeclare package Medium = Medium,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     annotation (Placement(transformation(extent={{-48,-20},{-68,-40}})));
-  AixLib.Movers.SpeedControlled_y pumpCon(redeclare package Medium = Medium,
+  AixLib.Fluid.Movers.SpeedControlled_y pumpCon(redeclare package Medium = Medium,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     "Consumer pump"
@@ -99,7 +99,7 @@ model StorageSimpleExample "Example model with simple storage"
     annotation (Placement(transformation(extent={{40,-6},{28,6}})));
   Modelica.Blocks.Logical.LessThreshold    greaterZero
     annotation (Placement(transformation(extent={{18,-88},{30,-76}})));
-  AixLib.Sensors.MassFlowRate senMasFlo_gen(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_gen(redeclare package Medium = Medium)
     "Mass flow rate sensor at generation side" annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -114,7 +114,7 @@ model StorageSimpleExample "Example model with simple storage"
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     xi_start=1)
     annotation (Placement(transformation(extent={{-68,-86},{-56,-74}})));
-  AixLib.Sensors.MassFlowRate senMasFlo_con(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_con(redeclare package Medium = Medium)
     "Mass fow rate sensor at consumer side" annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
