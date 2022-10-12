@@ -40,7 +40,10 @@ model StorageSimpleExample "Example model with simple storage"
 
   parameter Modelica.Units.SI.TemperatureDifference dT_gen = 8
   "Temperature difference in generation cycle";
-  Systems.HydraulicModules.SimpleConsumer simpleConsumer(
+
+  parameter Real bandwidth=5 "Bandwidth around reference signal";
+
+  AixLib.Systems.HydraulicModules.SimpleConsumer simpleConsumer(
     redeclare package Medium = Medium,
     kA=heatingRod.Q_flow_nominal/dT_gen,
     V=0.2,
@@ -49,28 +52,28 @@ model StorageSimpleExample "Example model with simple storage"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={62,4})));
-  Sources.Boundary_pT pressureBoundary(
+  AixLib.Fluid.Sources.Boundary_pT pressureBoundary(
     redeclare package Medium = Medium,
     p=200000,
     nPorts=1)
     annotation (Placement(transformation(extent={{-24,-52},{-38,-38}})));
-  Movers.SpeedControlled_y pumpGen(redeclare package Medium = Medium,
+  AixLib.Movers.SpeedControlled_y pumpGen(redeclare package Medium = Medium,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     annotation (Placement(transformation(extent={{-48,-20},{-68,-40}})));
-  Movers.SpeedControlled_y pumpCon(redeclare package Medium = Medium,
+  AixLib.Movers.SpeedControlled_y pumpCon(redeclare package Medium = Medium,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     "Consumer pump"
     annotation (Placement(transformation(extent={{44,-20},{24,-40}})));
-  Sources.Boundary_pT pressureBoundary1(
+  AixLib.Fluid.Sources.Boundary_pT pressureBoundary1(
     redeclare package Medium = Medium,
     p=200000,
     nPorts=1) annotation (Placement(transformation(extent={{70,-52},{56,-38}})));
   Modelica.Blocks.Logical.OnOffController storageHysteresis(bandwidth=bandwidth,
       pre_y_start=true)
     annotation (Placement(transformation(extent={{-72,54},{-60,66}})));
-  Modelica.Blocks.Continuous.LimPID PID_hr(controllerType=Modelica.Blocks.Types.SimpleController.PI,
+  AixLib.Controls.Continuous.LimPID        conPID(controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=10,
     yMax=1,
     yMin=0,
@@ -96,7 +99,7 @@ model StorageSimpleExample "Example model with simple storage"
     annotation (Placement(transformation(extent={{40,-6},{28,6}})));
   Modelica.Blocks.Logical.LessThreshold    greaterZero
     annotation (Placement(transformation(extent={{18,-88},{30,-76}})));
-  Sensors.MassFlowRate senMasFlo_gen(redeclare package Medium = Medium)
+  AixLib.Sensors.MassFlowRate senMasFlo_gen(redeclare package Medium = Medium)
     "Mass flow rate sensor at generation side" annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -111,7 +114,7 @@ model StorageSimpleExample "Example model with simple storage"
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     xi_start=1)
     annotation (Placement(transformation(extent={{-68,-86},{-56,-74}})));
-  Sensors.MassFlowRate senMasFlo_con(redeclare package Medium = Medium)
+  AixLib.Sensors.MassFlowRate senMasFlo_con(redeclare package Medium = Medium)
     "Mass fow rate sensor at consumer side" annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -137,7 +140,7 @@ model StorageSimpleExample "Example model with simple storage"
     annotation (Placement(transformation(extent={{-72,80},{-62,90}})));
   Modelica.Blocks.Sources.Constant addToSetTemp(k=bandwidth/2)
     annotation (Placement(transformation(extent={{-96,82},{-88,90}})));
-  parameter Real bandwidth=5 "Bandwidth around reference signal";
+
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_gen,
@@ -165,7 +168,7 @@ equation
     annotation (Line(points={{56,-45},{56,-30},{44,-30}}, color={0,127,255}));
   connect(simpleConsumer.port_b, pumpCon.port_a)
     annotation (Line(points={{62,-6},{62,-30},{44,-30}}, color={0,127,255}));
-  connect(storageSimple.TTopLayer, PID_hr.u_m) annotation (Line(points={{16.96,19.36},
+  connect(storageSimple.TTopLayer,conPID. u_m) annotation (Line(points={{16.96,19.36},
           {16.96,20},{38,20},{38,46},{-46,46},{-46,76.4}}, color={0,0,127}));
   connect(storageSimple.TTopLayer, storageHysteresis.u) annotation (Line(points={{16.96,
           19.36},{38,19.36},{38,46},{-90,46},{-90,56.4},{-73.2,56.4}},
@@ -174,7 +177,7 @@ equation
           {-59.4,67},{-23,67}}, color={255,0,255}));
   connect(HROffOrPI.y, heatingRod.u) annotation (Line(points={{-11.5,67},{-8,67},
           {-8,38},{-84,38},{-84,28},{-72,28}}, color={0,0,127}));
-  connect(PID_hr.y, HROffOrPI.u1) annotation (Line(points={{-37.2,86},{-32,86},{
+  connect(conPID.y, HROffOrPI.u1) annotation (Line(points={{-37.2,86},{-32,86},{
           -32,71},{-23,71}}, color={0,0,127}));
   connect(TUpperHysteresis.y, storageHysteresis.reference) annotation (Line(
         points={{-83.3,67},{-83.3,64},{-74,64},{-74,63.6},{-73.2,63.6}},
@@ -221,7 +224,7 @@ equation
           {-8,-60},{-58,-60},{-58,-42}}, color={0,0,127}));
   connect(Offpump.y, PumpOnOffGen.u3) annotation (Line(points={{56.4,-90},{60,-90},
           {60,-100},{-44,-100},{-44,-88.6},{-29.4,-88.6}}, color={0,0,127}));
-  connect(add.y, PID_hr.u_s) annotation (Line(points={{-61.5,85},{-61.5,86},{-55.6,
+  connect(add.y,conPID. u_s) annotation (Line(points={{-61.5,85},{-61.5,86},{-55.6,
           86}}, color={0,0,127}));
   connect(TUpperHysteresis.y, add.u2) annotation (Line(points={{-83.3,67},{-82,67},
           {-82,82},{-73,82}}, color={0,0,127}));
