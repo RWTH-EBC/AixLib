@@ -2,6 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
 partial model PartialCase "This is the base class from which the base cases will extend."
   extends Modelica.Icons.Example;
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
@@ -59,6 +61,7 @@ partial model PartialCase "This is the base class from which the base cases will
         "Room with east and west facing window")));
    RoomModel Room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=289.15,
