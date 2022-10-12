@@ -73,12 +73,13 @@ model StorageSimpleExample "Example model with simple storage"
   Modelica.Blocks.Logical.OnOffController storageHysteresis(bandwidth=bandwidth,
       pre_y_start=true)
     annotation (Placement(transformation(extent={{-72,54},{-60,66}})));
-  AixLib.Controls.Continuous.LimPID        conPID(controllerType=Modelica.Blocks.Types.SimpleController.PI,
+  AixLib.Controls.Continuous.LimPID PIDHR(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=10,
     yMax=1,
     yMin=0,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    xi_start=1)
+    xi_start=1) "PID controller for heating rod"
     annotation (Placement(transformation(extent={{-54,78},{-38,94}})));
   Modelica.Blocks.Logical.Switch HROffOrPI
     annotation (Placement(transformation(extent={{-22,62},{-12,72}})));
@@ -105,14 +106,14 @@ model StorageSimpleExample "Example model with simple storage"
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-87,-17})));
-  Controls.Continuous.LimPID        conPID1(
+  Controls.Continuous.LimPID PIDPumpGen(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.5,
     Ti=10,
     yMax=1,
     yMin=0,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    xi_start=1)
+    xi_start=1) "PID controller for generation system pump"
     annotation (Placement(transformation(extent={{-68,-86},{-56,-74}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo_con(redeclare package Medium = Medium)
     "Mass fow rate sensor at consumer side" annotation (Placement(
@@ -123,12 +124,12 @@ model StorageSimpleExample "Example model with simple storage"
   Modelica.Blocks.Sources.Constant m_flow_set(k=m_flow_nominal_gen)
     "Set mass flow rate"
     annotation (Placement(transformation(extent={{-96,-88},{-82,-74}})));
-  Controls.Continuous.LimPID        conPID2(
+  Controls.Continuous.LimPID PIDPumpCon(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
     yMin=0,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    xi_start=1)
+    xi_start=1) "PID controller for consumer pump"
     annotation (Placement(transformation(extent={{44,-64},{56,-76}})));
   Modelica.Blocks.Logical.Switch PumpOnOffCon
     annotation (Placement(transformation(extent={{70,-90},{84,-76}})));
@@ -168,8 +169,9 @@ equation
     annotation (Line(points={{56,-45},{56,-30},{44,-30}}, color={0,127,255}));
   connect(simpleConsumer.port_b, pumpCon.port_a)
     annotation (Line(points={{62,-6},{62,-30},{44,-30}}, color={0,127,255}));
-  connect(storageSimple.TTopLayer,conPID. u_m) annotation (Line(points={{16.96,19.36},
-          {16.96,20},{38,20},{38,46},{-46,46},{-46,76.4}}, color={0,0,127}));
+  connect(storageSimple.TTopLayer, PIDHR.u_m) annotation (Line(points={{16.96,
+          19.36},{16.96,20},{38,20},{38,46},{-46,46},{-46,76.4}}, color={0,0,
+          127}));
   connect(storageSimple.TTopLayer, storageHysteresis.u) annotation (Line(points={{16.96,
           19.36},{38,19.36},{38,46},{-90,46},{-90,56.4},{-73.2,56.4}},
         color={0,0,127}));
@@ -177,7 +179,7 @@ equation
           {-59.4,67},{-23,67}}, color={255,0,255}));
   connect(HROffOrPI.y, heatingRod.u) annotation (Line(points={{-11.5,67},{-8,67},
           {-8,38},{-84,38},{-84,28},{-72,28}}, color={0,0,127}));
-  connect(conPID.y, HROffOrPI.u1) annotation (Line(points={{-37.2,86},{-32,86},{
+  connect(PIDHR.y, HROffOrPI.u1) annotation (Line(points={{-37.2,86},{-32,86},{
           -32,71},{-23,71}}, color={0,0,127}));
   connect(TUpperHysteresis.y, storageHysteresis.reference) annotation (Line(
         points={{-83.3,67},{-83.3,64},{-74,64},{-74,63.6},{-73.2,63.6}},
@@ -197,25 +199,25 @@ equation
           {-87,-30},{-87,-24}}, color={0,127,255}));
   connect(senMasFlo_con.port_b, simpleConsumer.port_a)
     annotation (Line(points={{54,37},{62,37},{62,14}}, color={0,127,255}));
-  connect(m_flow_set.y, conPID1.u_s) annotation (Line(points={{-81.3,-81},{-76,
+  connect(m_flow_set.y, PIDPumpGen.u_s) annotation (Line(points={{-81.3,-81},{-76,
           -81},{-76,-80},{-69.2,-80}}, color={0,0,127}));
-  connect(senMasFlo_gen.m_flow, conPID1.u_m) annotation (Line(points={{-94.7,-17},
-          {-100,-17},{-100,-100},{-62,-100},{-62,-87.2}}, color={0,0,127}));
-  connect(m_flow_set.y, conPID2.u_s) annotation (Line(points={{-81.3,-81},{-40,
+  connect(senMasFlo_gen.m_flow, PIDPumpGen.u_m) annotation (Line(points={{-94.7,
+          -17},{-100,-17},{-100,-100},{-62,-100},{-62,-87.2}}, color={0,0,127}));
+  connect(m_flow_set.y, PIDPumpCon.u_s) annotation (Line(points={{-81.3,-81},{-40,
           -81},{-40,-66},{2,-66},{2,-70},{42.8,-70}}, color={0,0,127}));
-  connect(conPID2.y, PumpOnOffCon.u1) annotation (Line(points={{56.6,-70},{60,-70},
-          {60,-77.4},{68.6,-77.4}}, color={0,0,127}));
+  connect(PIDPumpCon.y, PumpOnOffCon.u1) annotation (Line(points={{56.6,-70},{
+          60,-70},{60,-77.4},{68.6,-77.4}}, color={0,0,127}));
   connect(greaterZero.y, PumpOnOffCon.u2) annotation (Line(points={{30.6,-82},{68.6,
           -82},{68.6,-83}}, color={255,0,255}));
   connect(Offpump.y, PumpOnOffCon.u3) annotation (Line(points={{56.4,-90},{62,-90},
           {62,-88.6},{68.6,-88.6}}, color={0,0,127}));
   connect(PumpOnOffCon.y, pumpCon.y) annotation (Line(points={{84.7,-83},{90,-83},
           {90,-60},{34,-60},{34,-42}}, color={0,0,127}));
-  connect(senMasFlo_con.m_flow, conPID2.u_m) annotation (Line(points={{47,44.7},
-          {47,40},{100,40},{100,-60},{50,-60},{50,-62.8}}, color={0,0,127}));
-  connect(conPID1.y, PumpOnOffGen.u1) annotation (Line(points={{-55.4,-80},{-52,
-          -80},{-52,-72},{-38,-72},{-38,-76},{-29.4,-76},{-29.4,-77.4}}, color=
-          {0,0,127}));
+  connect(senMasFlo_con.m_flow, PIDPumpCon.u_m) annotation (Line(points={{47,
+          44.7},{47,40},{100,40},{100,-60},{50,-60},{50,-62.8}}, color={0,0,127}));
+  connect(PIDPumpGen.y, PumpOnOffGen.u1) annotation (Line(points={{-55.4,-80},{
+          -52,-80},{-52,-72},{-38,-72},{-38,-76},{-29.4,-76},{-29.4,-77.4}},
+        color={0,0,127}));
   connect(storageHysteresis.y, PumpOnOffGen.u2) annotation (Line(points={{-59.4,
           60},{-58,60},{-58,50},{-100,50},{-100,-100},{-40,-100},{-40,-83},{-29.4,
           -83}}, color={255,0,255}));
@@ -223,7 +225,7 @@ equation
           {-8,-60},{-58,-60},{-58,-42}}, color={0,0,127}));
   connect(Offpump.y, PumpOnOffGen.u3) annotation (Line(points={{56.4,-90},{60,-90},
           {60,-100},{-44,-100},{-44,-88.6},{-29.4,-88.6}}, color={0,0,127}));
-  connect(add.y,conPID. u_s) annotation (Line(points={{-61.5,85},{-61.5,86},{-55.6,
+  connect(add.y, PIDHR.u_s) annotation (Line(points={{-61.5,85},{-61.5,86},{-55.6,
           86}}, color={0,0,127}));
   connect(TUpperHysteresis.y, add.u2) annotation (Line(points={{-83.3,67},{-82,67},
           {-82,82},{-73,82}}, color={0,0,127}));
