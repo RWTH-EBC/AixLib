@@ -21,10 +21,6 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
 
 The latest version is always available on the [release page](https://github.com/RWTH-EBC/AixLib/releases) and defined in [AixLib's package.mo](https://github.com/RWTH-EBC/AixLib/blob/master/AixLib/package.mo).
 
-## Dymola >= 2021x & MSL 4.0 Compability
-
-Starting with the Dymola 2021x version, the MSL 4.0 is included and automatically loaded. This leads to incompability with AixLib. Details and possible solutions are described in [this issue](https://github.com/RWTH-EBC/AixLib/issues/1156).
-
 ## How to cite AixLib
 
 We continuously improve **AixLib** and try to keep the community up-to-date with citable papers:

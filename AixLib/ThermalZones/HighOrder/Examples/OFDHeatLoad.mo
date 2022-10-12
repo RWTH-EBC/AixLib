@@ -15,6 +15,8 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
       choice=4 "WSchV_1984",
       radioButtons=true));
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
 
   Modelica.Blocks.Sources.Constant constRooms[nHeatedRooms](k={293.15,293.15,288.15,293.15,293.15,293.15,293.15,288.15,297.15,293.15}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,-62},{-50,-42}})));
   Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
@@ -56,6 +58,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
         Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
+    redeclare package Medium = MediumAir,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9,
     upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)),
     groundFloor_Building(Corridor(T0_air=288.15)))
@@ -121,7 +124,7 @@ equation
       Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+        annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
                                                                          color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)

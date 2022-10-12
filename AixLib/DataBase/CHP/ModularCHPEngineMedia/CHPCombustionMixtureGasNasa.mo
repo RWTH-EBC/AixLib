@@ -625,36 +625,30 @@ end lowPressureThermalConductivity;
     extends Modelica.Icons.Function;
     input SpecificEnthalpy h "Specific enthalpy";
     input MassFraction[nX] X "Mass fractions of composition";
-     input Boolean exclEnthForm=excludeEnthalpyOfFormation
+    input Boolean exclEnthForm=excludeEnthalpyOfFormation
       "If true, enthalpy of formation Hf is not included in specific enthalpy h";
-     input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
+    input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy
                                      refChoice=referenceChoice
       "Choice of reference enthalpy";
-    input Modelica.Units.SI.SpecificEnthalpy h_off=h_offset
+    input SpecificEnthalpy h_off=h_offset
       "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     output Temperature T "Temperature";
-  protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-  package Internal
-      "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
-    extends ObsoleteModelica4.Media.Common.OneNonLinearEquation;
-    redeclare record extends f_nonlinear_Data
-        "Data to be passed to non-linear function"
-      extends Modelica.Media.IdealGases.Common.DataRecord;
-    end f_nonlinear_Data;
 
-    redeclare function extends f_nonlinear
+  protected
+    function f_nonlinear "Solve h_TX(T,X) for T with given h"
+      extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
+      input SpecificEnthalpy h "Specific enthalpy";
+      input MassFraction[nX] X "Mass fractions of composition";
+      input Boolean exclEnthForm "If true, enthalpy of formation Hf is not included in specific enthalpy h";
+      input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy refChoice "Choice of reference enthalpy";
+      input SpecificEnthalpy h_off "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     algorithm
-        y := h_TX(x,X);
+      y := h_TX(T=u, X=X, exclEnthForm=exclEnthForm, refChoice=refChoice, h_off=h_off) - h;
     end f_nonlinear;
 
-    // Dummy definition has to be added for current Dymola
-    redeclare function extends solve
-    end solve;
-  end Internal;
-
   algorithm
-    T := Internal.solve(h, 200, 6000, 1.0e5, Xfull, data[1]);
+    T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
+      function f_nonlinear(h=h, X=X, exclEnthForm=exclEnthForm, refChoice=refChoice, h_off=h_off), 200, 6000);
     annotation(inverse(h = h_TX(T,X,exclEnthForm,refChoice,h_off)));
   end T_hX;
 
@@ -665,37 +659,21 @@ end lowPressureThermalConductivity;
     input SpecificEntropy s "Specific entropy";
     input MassFraction[nX] X "Mass fractions of composition";
     output Temperature T "Temperature";
-  protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-  package Internal
-      "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
-    extends ObsoleteModelica4.Media.Common.OneNonLinearEquation;
-    redeclare record extends f_nonlinear_Data
-        "Data to be passed to non-linear function"
-      extends Modelica.Media.IdealGases.Common.DataRecord;
-    end f_nonlinear_Data;
 
-    redeclare function extends f_nonlinear
-        "Note that this function always sees the complete mass fraction vector"
-      protected
-    MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
-    Real[nX] Y(unit="mol/mol")=massToMoleFractions(if size(X,1) == nX then X else cat(1,X,{1-sum(X)}), data.MM)
-          "Molar fractions";
+  protected
+    function f_nonlinear "Solve specificEntropyOfpTX(p,T,X) for T with given s"
+      extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
+      input AbsolutePressure p "Pressure";
+      input SpecificEntropy s "Specific entropy";
+      input MassFraction[nX] X "Mass fractions of composition";
     algorithm
-      y := s_TX(x,Xfull) - sum(Xfull[i]*Modelica.Constants.R/MMX[i]*
-      (if Xfull[i]<Modelica.Constants.eps then Y[i] else
-      Modelica.Math.log(Y[i]*p/reference_p)) for i in 1:nX);
-        // s_TX(x,X)- data[:].R*X*(Modelica.Math.log(p/reference_p)
-        //       + MixEntropy(massToMoleFractions(X,data[:].MM)));
+      y := specificEntropyOfpTX(p=p, T=u, X=X) - s;
     end f_nonlinear;
 
-    // Dummy definition has to be added for current Dymola
-    redeclare function extends solve
-    end solve;
-  end Internal;
-
   algorithm
-    T := Internal.solve(s, 200, 6000, p, Xfull, data[1]);
+    T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
+      function f_nonlinear(p=p, s=s, X=X), 200, 6000);
+    annotation(inverse(s = specificEntropyOfpTX(p,T,X)));
   end T_psX;
 //   redeclare function extends specificEnthalpy_psX
 //   protected
