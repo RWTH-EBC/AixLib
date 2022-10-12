@@ -1,15 +1,17 @@
-within AixLib.ThermalZones.HighOrder.Examples;
-model Appartment_VoWo "Simulation of 1 apartment "
+within AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Examples;
+model Appartment_VoWo "Simulation of 1 apartment"
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
+  AixLib.Obsolete.Year2022.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
     VoWoWSchV1984(
     redeclare package Medium = Medium,
-    redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
+    redeclare model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
     redeclare model CorrSolarGainWin =
-        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+
     fixedHeatFlow3(T_ref=288.15),
     fixedHeatFlow5(T_ref=283.15),
     fixedHeatFlow16(T_ref=288.15),
@@ -100,24 +102,32 @@ equation
   connect(VoWoWSchV1984.Returnflow, res2.port_a) annotation (Line(points={{3.38182,
           -1.5},{3.38182,-44},{26,-44}}, color={0,127,255}));
   // Here the relevant Variables for the simulation are set as output to limit the dimension of the result file
-  connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points={{-48.9333,91.6},{-10.4455,91.6},{-10.4455,42.875}},        color = {0, 0, 127}));
-  connect(AirExWindow.y, VoWoWSchV1984.AirExchangePort_Window) annotation(Line(points={{0.3,77},{6,77},{6,43.0833},{9.76364,43.0833}},          color = {0, 0, 127}));
-  connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], VoWoWSchV1984.SolarRadiation[1]) annotation(Line(points={{-74.32,72.9},{-74.32,60},{21.1091,60},{21.1091,44.5417}},
-                                                                                                                                                                color = {255, 128, 0}));
-  connect(combinedWeather.SolarRadiation_OrientedSurfaces[4], VoWoWSchV1984.SolarRadiation[2]) annotation(Line(points={{-74.32,72.9},{-74.32,60},{21.1091,60},{21.1091,42.4583}},
-                                                                                                                                                                color = {255, 128, 0}));
-  connect(combinedWeather.AirTemp, VoWoWSchV1984.air_temp) annotation(Line(points={{-48.9333,88.3},{-29.9455,88.3},{-29.9455,43.0833}},        color = {0, 0, 127}));
-  connect(Source_TsetLivingroom.y, VoWoWSchV1984.TSet[1]) annotation(Line(points={{-85.3,59},{-60,59},{-60,18.7083},{-36.6818,18.7083}},          color = {0, 0, 127}));
-  connect(Source_TsetBedroom.y, VoWoWSchV1984.TSet[2]) annotation(Line(points={{-85.3,37},{-60,37},{-60,19.9583},{-36.6818,19.9583}},          color = {0, 0, 127}));
-  connect(Source_TsetChildren.y, VoWoWSchV1984.TSet[3]) annotation(Line(points={{-85.3,15},{-72,15},{-72,14},{-60,14},{-60,21.2083},{-36.6818,21.2083}},              color = {0, 0, 127}));
+  connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points={{
+          -48.9333,91.6},{-10.4455,91.6},{-10.4455,42.875}},                                                                                         color = {0, 0, 127}));
+  connect(AirExWindow.y, VoWoWSchV1984.AirExchangePort_Window) annotation(Line(points={{0.3,77},
+          {6,77},{6,43.0833},{9.76364,43.0833}},                                                                                                color = {0, 0, 127}));
+  connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], VoWoWSchV1984.SolarRadiation[1]) annotation(Line(points={{-74.32,
+          72.9},{-74.32,60},{21.1091,60},{21.1091,42.9792}},                                                                                                    color = {255, 128, 0}));
+  connect(combinedWeather.SolarRadiation_OrientedSurfaces[4], VoWoWSchV1984.SolarRadiation[2]) annotation(Line(points={{-74.32,
+          72.9},{-74.32,60},{21.1091,60},{21.1091,44.0208}},                                                                                                    color = {255, 128, 0}));
+  connect(combinedWeather.AirTemp, VoWoWSchV1984.air_temp) annotation(Line(points={{
+          -48.9333,88.3},{-29.9455,88.3},{-29.9455,43.0833}},                                                                                  color = {0, 0, 127}));
+  connect(Source_TsetLivingroom.y, VoWoWSchV1984.TSet[1]) annotation(Line(points={{-85.3,
+          59},{-60,59},{-60,19.9583},{-36.6818,19.9583}},                                                                                         color = {0, 0, 127}));
+  connect(Source_TsetBedroom.y, VoWoWSchV1984.TSet[2]) annotation(Line(points={{-85.3,
+          37},{-60,37},{-60,20.5833},{-36.6818,20.5833}},                                                                                      color = {0, 0, 127}));
+  connect(Source_TsetChildren.y, VoWoWSchV1984.TSet[3]) annotation(Line(points={{-85.3,
+          15},{-72,15},{-72,14},{-60,14},{-60,21.2083},{-36.6818,21.2083}},                                                                                           color = {0, 0, 127}));
   connect(booleanExpression.y, Pump.IsNight) annotation (Line(points={{-73,-46},
           {-6,-46},{-6,-61.8}}, color={255,0,255}));
-  connect(Source_TsetBath.y, VoWoWSchV1984.TSet[4]) annotation(Line(points={{-85.3,-9},{-60,-9},{-60,22.4583},{-36.6818,22.4583}},          color = {0, 0, 127}));
-  connect(Source_TsetKitchen.y, VoWoWSchV1984.TSet[5]) annotation(Line(points={{-85.3,-29},{-60,-29},{-60,23.7083},{-36.6818,23.7083}},          color = {0, 0, 127}));
+  connect(Source_TsetBath.y, VoWoWSchV1984.TSet[4]) annotation(Line(points={{-85.3,
+          -9},{-60,-9},{-60,21.8333},{-36.6818,21.8333}},                                                                                   color = {0, 0, 127}));
+  connect(Source_TsetKitchen.y, VoWoWSchV1984.TSet[5]) annotation(Line(points={{-85.3,
+          -29},{-60,-29},{-60,22.4583},{-36.6818,22.4583}},                                                                                      color = {0, 0, 127}));
   connect(res2.port_b, tank.ports[1]) annotation (Line(points={{38,-44},{54,-44},
-          {54,-86},{29.6,-86},{29.6,-72}}, color={0,127,255}));
+          {54,-86},{27.2,-86},{27.2,-72}}, color={0,127,255}));
   connect(Pump.port_a, tank.ports[2]) annotation (Line(points={{4,-72},{14,-72},
-          {14,-84},{26.4,-84},{26.4,-72}}, color={0,127,255}));
+          {14,-84},{28.8,-84},{28.8,-72}}, color={0,127,255}));
   connect(Source_TseBoiler.y, hea.TSet) annotation (Line(points={{-71.3,-105},{
           -28,-105},{-28,-64},{-36,-64}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

@@ -58,6 +58,7 @@ HTML_Merge_Checks:
     only:
         refs:
             - external_pull_requests
+
     except:
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
@@ -73,6 +74,9 @@ HTML_Merge_Checks:
             - $CI_COMMIT_MESSAGE  =~ /ci_create_html_whitelist/
             - $CI_COMMIT_MESSAGE  =~ /ci_html/
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
+        refs:
+            - master
+            - development
   
 HTML_Check:
     stage: HTML_Check
@@ -117,7 +121,7 @@ HTML_Check:
         refs:
             - external_pull_requests
             - /^Correct_HTML.*$/
-            - IBPSA_Merge 
+            - IBPSA_Merge
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
             - $CI_COMMIT_MESSAGE  =~ /ci_dif_ref/
