@@ -1491,11 +1491,11 @@ equation
   </li>
   <li>[2] Khurmi, R. S.; Gupta, J. K. (2009): Textbook of Refrigeration
   and Air Conditioning. 4th ed. New Delhi: Eurasia. (682 pages). ISBN
-  9788121927819  [Titel anhand dieser ISBN in Citavi-Projekt übernehmen] .
+  9788121927819.
   </li>
   <li>[3] Lindeburg, M. R. (2013): Mechanical Engineering Reference
   Manual for the PE Exam. 13th ed. Belmont: Professional Publications,
-  Inc. (1488 pages). ISBN 9781591264149  [Titel anhand dieser ISBN in Citavi-Projekt übernehmen] .
+  Inc. (1488 pages). ISBN 9781591264149.
   </li>
   <li>[4] Verein Deutscher Ingenieure e. V.: VDI 2071:1997-12:
   Wärmerückgewinnung in Raumlufttechnischen Anlagen. Richtlinie.
