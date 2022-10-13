@@ -1,20 +1,36 @@
 ﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookTrading
     extends Modelica.Icons.Example;
+
+  BookBuyerAgent bookBuyerAgent(name=10001, ISBN=0618640150,
+    sampleRate=1)
+    annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+  BookSellerAgent bookSellerAgent(name=30001, bookList(start=[3551555559.0,30;
+          3551555577.0,20; 3551555588.0,20]),
+    sampleRate=1)
+    annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+  BookSellerAgent bookSellerAgent1(name=30002, bookList(start=[3551555589.0,
+          30; 3551555559.0,40; 3551555556.0,20]),
+    sampleRate=1)
+    annotation (Placement(transformation(extent={{-20,40},{0,60}})));
+  BookSellerAgent bookSellerAgent2(name=30003, bookList(start=[3551555555.0,
+          30; 3551555554.0,20; 3551555553.0,20; 3551555580.0,15]),
+    sampleRate=1)
+    annotation (Placement(transformation(extent={{20,40},{40,60}})));
+  BookBuyerAgent bookBuyerAgent1(
+    name=10002,
+    ISBN=3551555559.0,
+    sampleRate=1,
+    sampleTime=40)
+    annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
+  BookBuyerAgent bookBuyerAgent2(
+    ISBN=3551555559.0,
+    name=10003,
+    sampleRate=1,
+    sampleTime=55)
+    annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   inner Agents.MessageNotification messageNotification
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  BookSellerAgent bookSellerAgent(bookList(start = [3551555559.0, 30; 3551555577.0, 20; 3551555588.0, 20]), name = 30001, sampleRate = 1) annotation(
-    Placement(visible = true, transformation(extent = {{-60, 40}, {-40, 60}}, rotation = 0)));
-  BookSellerAgent bookSellerAgent2(bookList(start = [3551555555.0, 30; 3551555554.0, 20; 3551555553.0, 20; 3551555580.0, 15]), name = 30003, sampleRate = 1) annotation(
-    Placement(visible = true, transformation(extent = {{20, 40}, {40, 60}}, rotation = 0)));
-  BookSellerAgent bookSellerAgent1(bookList(start = [3551555589.0, 30; 3551555559.0, 40; 3551555556.0, 20]), name = 30002, sampleRate = 1) annotation(
-    Placement(visible = true, transformation(extent = {{-20, 40}, {0, 60}}, rotation = 0)));
-  BookBuyerAgent bookBuyerAgent(ISBN = 618640150, name = 10001, sampleRate = 1) annotation(
-    Placement(visible = true, transformation(extent = {{-60, -40}, {-40, -20}}, rotation = 0)));
-  BookBuyerAgent bookBuyerAgent2(ISBN = 3551555559.0, name = 10003, sampleRate = 1, sampleTime = 55) annotation(
-    Placement(visible = true, transformation(extent = {{20, -40}, {40, -20}}, rotation = 0)));
-  BookBuyerAgent bookBuyerAgent1(ISBN = 3551555559.0, name = 10002, sampleRate = 1, sampleTime = 40) annotation(
-    Placement(visible = true, transformation(extent = {{-20, -40}, {0, -20}}, rotation = 0)));
   annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>
