@@ -38,8 +38,7 @@ model PumpHeadControlled
     annotation (Dialog(tab="Nominal design point", group=
           "Design point of pump. Used for start value calculation."));
 
-
- // Parameters
+// Parameters
   // Initialization
   parameter Modelica.Units.SI.Height Hstart=Hnom "
       Start value of pump head. Will be used to initialize criticalDamping."
@@ -49,14 +48,14 @@ model PumpHeadControlled
   parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
     "Start value of temperature" annotation (Dialog(tab="Initialization", group="Temperature"));
 
-  // Dynamics
+// Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  // Assumptions
+// Assumptions
   parameter Modelica.Units.SI.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
@@ -66,7 +65,7 @@ model PumpHeadControlled
       T=Medium.T_default,
       X=Medium.X_default) "Default medium density";
 
-  // Power and Efficiency
+// Power and Efficiency
   parameter Boolean calculatePower=true "calc. power consumption?" annotation (
      Dialog(tab="General", group="Power and Efficiency"));
   parameter Boolean calculateEfficiency=false
@@ -83,7 +82,7 @@ model PumpHeadControlled
       group="Power and Efficiency",
       enable=calculate_Efficiency), choicesAllMatching=true);
 
-  // Variables
+// Variables
   Modelica.Units.SI.Pressure dp_pump "Pressure increase";
   Modelica.Blocks.Interfaces.RealOutput head(
     quantity="Length",
@@ -102,7 +101,7 @@ model PumpHeadControlled
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
 
   Modelica.Blocks.Tables.CombiTable1Dv maxMinTable(
-    columns={2,3},
+    columns={2,3}, extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=pumpParam.maxMinHeight,
     tableName="NoName",
     tableOnFile=false)
@@ -137,9 +136,9 @@ protected
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
   Modelica.Blocks.Continuous.CriticalDamping
                                     criticalDamping(
-    y_start=Hstart,
+    
     f=1/5,
-    initType=Modelica.Blocks.Types.Init.InitialOutput)
+    initType=Modelica.Blocks.Types.Init.InitialOutput, n = 1,y_start=Hstart)
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
 public
   Modelica.Blocks.Logical.Switch onOff
@@ -177,7 +176,7 @@ equation
 
   head = criticalDamping.y "safe head after limiting and other checks.";
   dp_pump = head * rho_default * Modelica.Constants.g_n;
-  //Calculate power and Efficiency
+//Calculate power and Efficiency
   if pumpBus.onSet and head >
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
