@@ -17,7 +17,9 @@ model CtrAHUBasic "Simple controller for AHU"
   CtrRegBasic ctrPh(
     final useExternalTset=true,
     Td=0,
-    final initType=initType) if usePreheater annotation (dialog(group="Register controller",
+    final initType=initType,
+    final reverseAction=true)
+                             if usePreheater annotation (dialog(group="Register controller",
         enable=usePreheater), Placement(transformation(extent={{0,70},{20,90}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
@@ -30,7 +32,9 @@ model CtrAHUBasic "Simple controller for AHU"
     final useExternalTset=true,
     final useExternalTMea=true,
     Td=0,
-    final initType=initType) annotation (dialog(group="Register controller",
+    final initType=initType,
+    final reverseAction=true)
+                             annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,10},{20,30}})));
 
 
