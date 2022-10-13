@@ -288,7 +288,7 @@ model TestCase1_Illumination
     n=1,
     UWin=1.4,
     xi=0,
-    til(displayUnit="deg") = {1.5707963267949})
+    til= {1.5707963267949})
     "Correction values for non-parallel and non-vertical irradiation for
     VDI2078 test case 1"
     annotation (Placement(transformation(extent={{-52,46},{-32,66}})));
