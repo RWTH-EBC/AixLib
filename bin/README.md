@@ -22,7 +22,7 @@ The whole process is automatically triggered by checking into the version contro
 - `git commit -m " [skip ci]"` 			# Skip the CI
 
 
-## What CI Tests are implement?
+## What CI Tests are implemented?
 #### Check, Simulate and Regressiontest: [UnitTests](CITests/02_UnitTests)
 
 With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.

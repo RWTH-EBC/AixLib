@@ -13,6 +13,8 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
       choice=4 "WSchV_1984",
       radioButtons=true));
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay();
@@ -52,6 +54,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     withDynamicVentilation=true,
+    redeclare package Medium = MediumAir,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
