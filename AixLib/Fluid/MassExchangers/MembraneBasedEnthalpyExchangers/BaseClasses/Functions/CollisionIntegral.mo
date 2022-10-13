@@ -5,10 +5,6 @@ function CollisionIntegral "calculates collision integral for water in air"
 
   output Real Omega_D;
 
-  constant Real kB(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
-  constant Real epsAir = 78.6 * kB "Lennard-Jones potential of air";
-  constant Real epsSteam = 363 * kB "Lennard-Jones potential of steam";
-
 protected
   Real omegas[:];
   Real epsis[:];
@@ -16,6 +12,10 @@ protected
 
   Real eps12;
   Real epsInternal;
+  
+  constant Real kB(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
+  constant Real epsAir = 78.6 * kB "Lennard-Jones potential of air";
+  constant Real epsSteam = 363 * kB "Lennard-Jones potential of steam";
 algorithm
 
   omegas :={2.662,2.476,2.318,2.184,2.066,1.966,1.877,1.789,1.729,1.667,1.612,1.562,
