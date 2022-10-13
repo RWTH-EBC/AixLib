@@ -23,7 +23,7 @@ package NaturalGasMixture_TypeAachen
     Fuel=NaturalGasTypeAachen() "Needed natural gas data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
-   import Modelica.SIunits.*;
+   import Modelica.Units.SI.*;
 
   constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;

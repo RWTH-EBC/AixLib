@@ -1,25 +1,25 @@
 within AixLib.Utilities.Math.Functions;
- function exponentialIntegralE1 "Exponential integral, E1"
-   extends Modelica.Icons.Function;
- 
-   input Real x "Independent variable";
-   output Real E1 "Exponential integral E1(x)";
- 
- protected
-   constant Real a1[6] = {-0.57721566, 0.99999193, -0.24991055, 0.05519968, -0.00976004, 0.00107857};
-   constant Real a2[5] = {0.2677737343, 8.6347608925, 18.0590169730, 8.5733287401, 1.0};
-   constant Real b2[5] = {3.9584969228, 21.0996530827, 25.6329561486, 9.5733223454, 1.0};
- 
- algorithm
- 
-     E1 := if x < 1 then
-             AixLib.Utilities.Math.Functions.polynomial(x, a1) - log(x)
-           else
-            AixLib.Utilities.Math.Functions.polynomial(x, a2)/(AixLib.Utilities.Math.Functions.polynomial(x, b2)*x*exp(x));
- 
- annotation (
- Inline=true,
- Documentation(info="<html>
+function exponentialIntegralE1 "Exponential integral, E1"
+  extends Modelica.Icons.Function;
+
+  input Real x "Independent variable";
+  output Real E1 "Exponential integral E1(x)";
+
+protected
+  constant Real a1[6] = {-0.57721566, 0.99999193, -0.24991055, 0.05519968, -0.00976004, 0.00107857};
+  constant Real a2[5] = {0.2677737343, 8.6347608925, 18.0590169730, 8.5733287401, 1.0};
+  constant Real b2[5] = {3.9584969228, 21.0996530827, 25.6329561486, 9.5733223454, 1.0};
+
+algorithm
+
+    E1 := if x < 1 then
+            AixLib.Utilities.Math.Functions.polynomial(x, a1) - log(x)
+          else
+           AixLib.Utilities.Math.Functions.polynomial(x, a2)/(AixLib.Utilities.Math.Functions.polynomial(x, b2)*x*exp(x));
+
+annotation (
+Inline=true,
+Documentation(info="<html>
  <p>
  Evaluates the exponential integral (E<sub>1</sub>), based
  on the polynomial and rational approximations of Abramowitz and Stegun (1964).
@@ -30,7 +30,7 @@ within AixLib.Utilities.Math.Functions;
  with Formulas, Graphs, and Mathematical Tables. National Bureau of Standards.
  (1964): 1046 p.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  July 16, 2018 by Michael Wetter:<br/>
@@ -41,6 +41,6 @@ within AixLib.Utilities.Math.Functions;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end exponentialIntegralE1;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end exponentialIntegralE1;

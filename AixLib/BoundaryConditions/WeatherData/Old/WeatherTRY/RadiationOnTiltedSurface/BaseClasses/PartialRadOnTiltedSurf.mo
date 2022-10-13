@@ -2,16 +2,17 @@ within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSur
 partial model PartialRadOnTiltedSurf
   parameter Integer WeatherFormat = 1 "Format weather file" annotation (Dialog(group=
         "Properties of Weather Data",                                                                              compact = true, descriptionLabel = true), choices(choice = 1 "TRY", choice= 2 "TMY", radioButtons = true));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude= 49.5
-    "latitude of location"
+  parameter Modelica.Units.NonSI.Angle_deg Latitude=49.5 "latitude of location"
     annotation (Dialog(group="Location Properties"));
   parameter Real GroundReflection=0.2 "ground reflection coefficient"
     annotation (Dialog(group="Ground reflection"));
 
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Azimut = 13.400
-    "azimut of tilted surface, e.g. 0=south, 90=west, 180=north, -90=east" annotation(Dialog(group="Surface Properties"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Tilt = 90
-    "tilt of surface, e.g. 0=horizontal surface, 90=vertical surface" annotation (Dialog(group="Surface Properties"));
+  parameter Modelica.Units.NonSI.Angle_deg Azimut=13.400
+    "azimut of tilted surface, e.g. 0=south, 90=west, 180=north, -90=east"
+    annotation (Dialog(group="Surface Properties"));
+  parameter Modelica.Units.NonSI.Angle_deg Tilt=90
+    "tilt of surface, e.g. 0=horizontal surface, 90=vertical surface"
+    annotation (Dialog(group="Surface Properties"));
 
     Modelica.Blocks.Interfaces.RealInput InHourAngleSun
     annotation (Placement(transformation(

@@ -4,13 +4,16 @@ model OutsideWall
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     use_shortWaveRadOut=true,
-    redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140 (redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec),
+    redeclare model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
+        (                                                                                                 redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec),
     redeclare AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S wallPar,
     wall_length=5,
     wall_height=2,
     withWindow=true,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 WindowType,
-    redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withSunblind=true,
     outside=true,
     calcMethodOut=2,

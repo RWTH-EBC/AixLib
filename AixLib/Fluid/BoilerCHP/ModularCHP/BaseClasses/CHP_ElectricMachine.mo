@@ -9,38 +9,39 @@ model CHP_ElectricMachine
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Modelica.SIunits.Frequency n0=CHPEngData.n0
+  parameter Modelica.Units.SI.Frequency n0=CHPEngData.n0
     "Idling speed of the electric machine"
     annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Frequency n_nominal=CHPEngData.n_nominal
-                                                         "Rated rotor speed"
+  parameter Modelica.Units.SI.Frequency n_nominal=CHPEngData.n_nominal
+    "Rated rotor speed" annotation (Dialog(group="Machine specifications"));
+  parameter Modelica.Units.SI.Frequency f_1=CHPEngData.f_1 "Frequency"
     annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Frequency f_1=CHPEngData.f_1
-                                              "Frequency"
+  parameter Modelica.Units.SI.Voltage U_1=CHPEngData.U_1 "Rated voltage"
     annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Voltage U_1=CHPEngData.U_1
-                                             "Rated voltage"
-    annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Current I_elNominal=CHPEngData.I_elNominal
-                                                      "Rated current"
-    annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Current I_1_start=if P_Mec_nominal<=15000 then 7.2*I_elNominal else 8*I_elNominal
+  parameter Modelica.Units.SI.Current I_elNominal=CHPEngData.I_elNominal
+    "Rated current" annotation (Dialog(group="Machine specifications"));
+  parameter Modelica.Units.SI.Current I_1_start=if P_Mec_nominal <= 15000 then
+      7.2*I_elNominal else 8*I_elNominal
     "Motor start current (realistic factors used from DIN VDE 2650/2651)"
-    annotation (Dialog(                           tab="Calculations"));
-  parameter Modelica.SIunits.Power P_elNominal=CHPEngData.P_elNominal
+    annotation (Dialog(tab="Calculations"));
+  parameter Modelica.Units.SI.Power P_elNominal=CHPEngData.P_elNominal
     "Nominal electrical power of electric machine"
     annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Power P_Mec_nominal=P_elNominal*(1+s_nominal/0.22) "Nominal mechanical power of electric machine"
+  parameter Modelica.Units.SI.Power P_Mec_nominal=P_elNominal*(1 + s_nominal/
+      0.22) "Nominal mechanical power of electric machine"
     annotation (Dialog(tab="Calculations"));
-  parameter Modelica.SIunits.Torque M_nominal=P_Mec_nominal/(2*Modelica.Constants.pi*n_nominal) "Nominal torque of electric machine"
+  parameter Modelica.Units.SI.Torque M_nominal=P_Mec_nominal/(2*Modelica.Constants.pi
+      *n_nominal) "Nominal torque of electric machine"
     annotation (Dialog(tab="Calculations"));
-  parameter Modelica.SIunits.Torque M_til=2*M_nominal "Tilting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
+  parameter Modelica.Units.SI.Torque M_til=2*M_nominal
+    "Tilting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
     annotation (Dialog(tab="Calculations"));
-  parameter Modelica.SIunits.Torque M_start=if P_Mec_nominal<=4000 then 1.6*M_nominal
-  elseif P_Mec_nominal>=22000 then 1*M_nominal else 1.25*M_nominal
-   "Starting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
+  parameter Modelica.Units.SI.Torque M_start=if P_Mec_nominal <= 4000 then 1.6*
+      M_nominal elseif P_Mec_nominal >= 22000 then 1*M_nominal else 1.25*
+      M_nominal
+    "Starting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
     annotation (Dialog(tab="Calculations"));
-  parameter Modelica.SIunits.Inertia J_Gen=1
+  parameter Modelica.Units.SI.Inertia J_Gen=1
     "Moment of inertia of the electric machine (default=1kg.m2)"
     annotation (Dialog(group="Calibration"));
   parameter Boolean useHeat=CHPEngData.useHeat
@@ -64,16 +65,17 @@ model CHP_ElectricMachine
                              "Transmission ratio (engine speed / generator speed)"
     annotation (Dialog(group="Machine specifications"));
 
-  Modelica.SIunits.Frequency n=inertia.w/(2*Modelica.Constants.pi) "Speed of machine rotor [1/s]";
-  Modelica.SIunits.Current I_1 "Electric current of machine stator";
-  Modelica.SIunits.Power P_E "Electrical power at the electric machine";
-  Modelica.SIunits.Power P_Mec "Mechanical power at the electric machine";
-  Modelica.SIunits.Power CalQ_Loss
+  Modelica.Units.SI.Frequency n=inertia.w/(2*Modelica.Constants.pi)
+    "Speed of machine rotor [1/s]";
+  Modelica.Units.SI.Current I_1 "Electric current of machine stator";
+  Modelica.Units.SI.Power P_E "Electrical power at the electric machine";
+  Modelica.Units.SI.Power P_Mec "Mechanical power at the electric machine";
+  Modelica.Units.SI.Power CalQ_Loss
     "Calculated heat flow from electric machine";
-  Modelica.SIunits.Power Q_Therm=if useHeat then CalQ_Loss else 0
+  Modelica.Units.SI.Power Q_Therm=if useHeat then CalQ_Loss else 0
     "Heat flow from electric machine"
     annotation (Dialog(group="Machine specifications"));
-  Modelica.SIunits.Torque M "Torque at electric machine";
+  Modelica.Units.SI.Torque M "Torque at electric machine";
   Real s=1-n*p/f_1 "Current slip of electric machine";
   Real eta "Total efficiency of the electric machine (as motor)";
   Real calI_1 = 1/(1+((k-1)/((s_nominal^2)-k))*((s^2)+rho1*abs(s)+rho0));

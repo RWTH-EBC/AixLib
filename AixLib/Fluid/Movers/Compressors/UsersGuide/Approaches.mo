@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.UsersGuide;
+﻿within AixLib.Fluid.Movers.Compressors.UsersGuide;
 class Approaches
   "Approaches implemented to calculate different efficiencies"
   extends Modelica.Icons.Information;

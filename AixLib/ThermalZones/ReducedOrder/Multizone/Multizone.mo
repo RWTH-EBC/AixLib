@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
@@ -38,8 +38,8 @@ model Multizone
   Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)] if
-    use_moisture_balance "Humidity output"
+  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)]
+ if use_moisture_balance "Humidity output"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
 

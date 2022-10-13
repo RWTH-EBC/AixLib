@@ -1,4 +1,4 @@
-within AixLib.Controls.SetPoints;
+﻿within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (
@@ -6,8 +6,9 @@ model HeatingCurve "Model of a heating curve"
       choice=true "Table Data",
       choice=false "Function",
       radioButtons=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K") = 0
-    "Offset to heating curve temperature" annotation (Dialog(descriptionLabel = true));
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset(displayUnit="K")
+     = 0 "Offset to heating curve temperature"
+    annotation (Dialog(descriptionLabel=true));
   //Function
   replaceable function HeatingCurveFunction =
       AixLib.Controls.SetPoints.Functions.PartialBaseFct                 "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
@@ -21,8 +22,9 @@ model HeatingCurve "Model of a heating curve"
   //Dynamic room temperature
   parameter Boolean use_dynTRoom=true "If different room temperatures are required, set to true"   annotation(choices(checkBox=true), Dialog(
         group="Dynamic room Temperature"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TRoom_nominal=293.15 "Constant desired room temperature "
-    annotation (Dialog(group="Dynamic room Temperature",enable=not use_dynTRoom));
+  parameter Modelica.Units.SI.ThermodynamicTemperature TRoom_nominal=293.15
+    "Constant desired room temperature " annotation (Dialog(group=
+          "Dynamic room Temperature", enable=not use_dynTRoom));
   //Day-Night Mode:
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.Custom
     "Enumeration for choosing how reference time (time = 0) should be defined"
@@ -40,15 +42,17 @@ model HeatingCurve "Model of a heating curve"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
-  Modelica.Blocks.Tables.CombiTable2D tableDay(
+  Modelica.Blocks.Tables.CombiTable2Ds tableDay(
     final tableOnFile=false,
     final table=heatingCurveRecord.varFlowTempDay,
-    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) if use_tableData "Combi Table for day data";
+    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    if use_tableData "Combi Table for day data";
 
-  Modelica.Blocks.Tables.CombiTable2D tableNight(
+  Modelica.Blocks.Tables.CombiTable2Ds tableNight(
     final tableOnFile=false,
     final table=heatingCurveRecord.varFlowTempNight,
-    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) if use_tableData "Combi Table for night data";
+    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    if use_tableData "Combi Table for night data";
 
   Modelica.Blocks.Interfaces.RealOutput TSet_internal "Internal set temperature";
   Modelica.Blocks.Sources.RealExpression TRoomExp(y=TRoom_nominal) "Real expression for room temperature";

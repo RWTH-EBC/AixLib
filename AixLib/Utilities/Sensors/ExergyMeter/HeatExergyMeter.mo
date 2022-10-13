@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sensors.ExergyMeter;
 model HeatExergyMeter
 
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
 
   parameter Boolean useConvectiveHeatFlow=true
     "Set to 'true' in order to connect the meter to a convective heat port";
@@ -10,7 +10,7 @@ model HeatExergyMeter
   parameter Boolean solarRadiation=false
     "Set to 'true' in order to connect the meter to a solar radiation port"
     annotation (Dialog(enable=if useRadiativeHeatFlow then true else false));
-  parameter Modelica.SIunits.ThermodynamicTemperature sunTemperature=6000
+  parameter Modelica.Units.SI.ThermodynamicTemperature sunTemperature=6000
     "Temperature assumption for the solar radiation";
   Modelica.Blocks.Math.Add add(k2=-1) "Subtract the temperature ratio from one"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
@@ -25,38 +25,38 @@ model HeatExergyMeter
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=400, uMin=1)
     "Limits the temperature of the heat flux"
     annotation (Placement(transformation(extent={{-66,-56},{-54,-44}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a if
-     useConvectiveHeatFlow
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
+  if useConvectiveHeatFlow
     "Entering convective heat"
     annotation (Placement(transformation(extent={{-110,82},{-90,102}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b if
-     useConvectiveHeatFlow
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
+  if useConvectiveHeatFlow
     "Outgoing convective heat"
     annotation (Placement(transformation(extent={{90,82},{110,102}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor if
-     useConvectiveHeatFlow
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
+  if useConvectiveHeatFlow
     "Heat flow sensor used for convective heat"
     annotation (Placement(transformation(extent={{-10,82},{10,102}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensorConv if
-     useConvectiveHeatFlow
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensorConv
+  if useConvectiveHeatFlow
     "Temperature sensor for convective heat"
     annotation (Placement(transformation(extent={{-94,58},{-74,78}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a radPort_a if
-     useRadiativeHeatFlow
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a radPort_a
+  if useRadiativeHeatFlow
     "Entering radiation"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b radPort_b if
-     useRadiativeHeatFlow
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b radPort_b
+  if useRadiativeHeatFlow
     "Outgoing radiation"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad if
-     useRadiativeHeatFlow "Heat flow sensor used for radiative heat"
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad
+  if useRadiativeHeatFlow "Heat flow sensor used for radiative heat"
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={0,-74})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensorRad if
-     useRadiativeHeatFlow
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensorRad
+  if useRadiativeHeatFlow
     "Temperature sensor for radiative heat"
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
 

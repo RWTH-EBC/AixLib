@@ -1,42 +1,43 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors;
- function shaGFunction
-   "Returns a SHA1 encryption of the formatted arguments for the g-function generation"
-   extends Modelica.Icons.Function;
-   input Integer nBor "Number of boreholes";
-   input Modelica.SIunits.Position cooBor[nBor, 2] "Coordinates of boreholes";
-   input Modelica.SIunits.Height hBor "Borehole length";
-   input Modelica.SIunits.Height dBor "Borehole buried depth";
-   input Modelica.SIunits.Radius rBor "Borehole radius";
-   input Modelica.SIunits.ThermalDiffusivity aSoi "Ground thermal diffusivity used in g-function evaluation";
-   input Integer nSeg "Number of line source segments per borehole";
-   input Integer nTimSho "Number of time steps in short time region";
-   input Integer nTimLon "Number of time steps in long time region";
-   input Real ttsMax "Maximum adimensional time for gfunc calculation";
- 
-   output String sha
-   "SHA1 encryption of the g-function arguments";
- 
- protected
-   constant String formatStrGen =  "1.3e" "String format for general parameters";
-   constant String formatStrCoo =  ".2f" "String format for coordinate";
- algorithm
-   sha := AixLib.Utilities.Cryptographics.sha(String(nBor, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(hBor, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(dBor, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(rBor, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(aSoi, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(nSeg, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(nTimSho, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(nTimLon, format=formatStrGen));
-   sha := AixLib.Utilities.Cryptographics.sha(sha + String(ttsMax, format=formatStrGen));
-   for i in 1:nBor loop
-     sha := AixLib.Utilities.Cryptographics.sha(sha + String(cooBor[i, 1], format=formatStrCoo));
-     sha := AixLib.Utilities.Cryptographics.sha(sha + String(cooBor[i, 2], format=formatStrCoo));
-   end for;
- 
- annotation (
- Inline=false,
- Documentation(info="<html>
+function shaGFunction
+  "Returns a SHA1 encryption of the formatted arguments for the g-function generation"
+  extends Modelica.Icons.Function;
+  input Integer nBor "Number of boreholes";
+  input Modelica.Units.SI.Position cooBor[nBor,2] "Coordinates of boreholes";
+  input Modelica.Units.SI.Height hBor "Borehole length";
+  input Modelica.Units.SI.Height dBor "Borehole buried depth";
+  input Modelica.Units.SI.Radius rBor "Borehole radius";
+  input Modelica.Units.SI.ThermalDiffusivity aSoi
+    "Ground thermal diffusivity used in g-function evaluation";
+  input Integer nSeg "Number of line source segments per borehole";
+  input Integer nTimSho "Number of time steps in short time region";
+  input Integer nTimLon "Number of time steps in long time region";
+  input Real ttsMax "Maximum adimensional time for gfunc calculation";
+
+  output String sha
+  "SHA1 encryption of the g-function arguments";
+
+protected
+  constant String formatStrGen =  "1.3e" "String format for general parameters";
+  constant String formatStrCoo =  ".2f" "String format for coordinate";
+algorithm
+  sha := AixLib.Utilities.Cryptographics.sha(String(nBor, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(hBor, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(dBor, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(rBor, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(aSoi, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(nSeg, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(nTimSho, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(nTimLon, format=formatStrGen));
+  sha := AixLib.Utilities.Cryptographics.sha(sha + String(ttsMax, format=formatStrGen));
+  for i in 1:nBor loop
+    sha := AixLib.Utilities.Cryptographics.sha(sha + String(cooBor[i, 1], format=formatStrCoo));
+    sha := AixLib.Utilities.Cryptographics.sha(sha + String(cooBor[i, 2], format=formatStrCoo));
+  end for;
+
+annotation (
+Inline=false,
+Documentation(info="<html>
  <p>
  This function returns the SHA1 encryption of its arguments.
  </p>
@@ -53,7 +54,7 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
  The SHA1 encryption is computed using
  <a href=\"modelica://AixLib.Utilities.Cryptographics.sha\">AixLib.Utilities.Cryptographics.sha</a>.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 1, 2019 by Michael Wetter:<br/>
@@ -74,6 +75,6 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end shaGFunction;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end shaGFunction;

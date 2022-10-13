@@ -1,8 +1,8 @@
 within AixLib.Electrical.Machines;
 model PVInverterRMS "Inverter model including system management"
 
- parameter Modelica.SIunits.Power uMax2
-  "Upper limits of input signals (MaxOutputPower)";
+  parameter Modelica.Units.SI.Power uMax2
+    "Upper limits of input signals (MaxOutputPower)";
  Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW(
   final quantity="Power",
   final unit="W")

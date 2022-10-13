@@ -1,29 +1,29 @@
 within AixLib.Utilities.Diagnostics;
- block AssertEquality "Assert when condition is violated"
-   extends BaseClasses.PartialInputCheck(message = "Inputs differ by more than threShold");
- equation
-   if noEvent(time > t0) then
-     assert(noEvent(abs(u1 - u2) < threShold), message + "\n"
-       + "  time       = " + String(time) + "\n"
-       + "  u1         = " + String(u1) + "\n"
-       + "  u2         = " + String(u2) + "\n"
-       + "  abs(u1-u2) = " + String(abs(u1-u2)) + "\n"
-       + "  threShold  = " + String(threShold));
-   end if;
- annotation (
- defaultComponentName="assEqu",
- Icon(graphics={Text(
-           extent={{-84,108},{90,-28}},
-           lineColor={255,0,0},
-           textString="u1 = u2")}),
- Documentation(info="<html>
+block AssertEquality "Assert when condition is violated"
+  extends BaseClasses.PartialInputCheck(message = "Inputs differ by more than threShold");
+equation
+  if noEvent(time > t0) then
+    assert(noEvent(abs(u1 - u2) < threShold), message + "\n"
+      + "  time       = " + String(time) + "\n"
+      + "  u1         = " + String(u1) + "\n"
+      + "  u2         = " + String(u2) + "\n"
+      + "  abs(u1-u2) = " + String(abs(u1-u2)) + "\n"
+      + "  threShold  = " + String(threShold));
+  end if;
+annotation (
+defaultComponentName="assEqu",
+Icon(graphics={Text(
+          extent={{-84,108},{90,-28}},
+          textColor={255,0,0},
+          textString="u1 = u2")}),
+Documentation(info="<html>
  <p>
  Model that triggers an assert if
  <i>|u1-u2| &gt; threShold</i>
  and <i>t &gt; t<sub>0</sub></i>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  October 10, 2013, by Michael Wetter:<br/>
@@ -46,6 +46,6 @@ within AixLib.Utilities.Diagnostics;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end AssertEquality;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end AssertEquality;

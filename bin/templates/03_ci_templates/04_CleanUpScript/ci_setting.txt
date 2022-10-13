@@ -5,7 +5,7 @@ stages:
 Test_CI_Setting:
     stage: check_setting
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8
     script:
         - python bin/CITests/01_CleanUp/setting_check.py --github-private-key $GITHUB_PRIVATE_KEY --github-token $GITHUB_API_TOKEN
@@ -19,7 +19,7 @@ Test_CI_Setting:
 Create_templates:
     stage: build_templates
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8
         - pip install pandas toml mako
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'

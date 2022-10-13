@@ -4,26 +4,26 @@ model HeatTransferQbuoyTimer
 //  import BufferStorage = BufferStorage2;
    extends
     AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
-  Modelica.SIunits.HeatFlowRate[n-1] Q_flow
+  Modelica.Units.SI.HeatFlowRate[n - 1] Q_flow
     "Heat flow rate from segment i+1 to i";
 
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
    // annotation 2;
 Real timer(start=tau);
 protected
-    parameter Modelica.SIunits.Length height=data.hTank/n
+  parameter Modelica.Units.SI.Length height=data.hTank/n
     "height of fluid layers";
-  parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
+  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
-  Modelica.SIunits.TemperatureDifference dT[n-1]
+  Modelica.Units.SI.TemperatureDifference dT[n - 1]
     "Temperature difference between adjoining volumes";
-  parameter Modelica.SIunits.ThermalConductivity lambda_water=0.64;
-   parameter Modelica.SIunits.Density rho=1000
+  parameter Modelica.Units.SI.ThermalConductivity lambda_water=0.64;
+  parameter Modelica.Units.SI.Density rho=1000
     "Density, used to compute fluid mass";
-    parameter Modelica.SIunits.Time tau=60;
-    parameter Modelica.SIunits.Time tau_refresh=900;
-      Modelica.SIunits.HeatFlowRate Q_buoy[n](start=zeros(n));
-      Modelica.SIunits.SpecificEnergy q_buoy[n];
+  parameter Modelica.Units.SI.Time tau=60;
+  parameter Modelica.Units.SI.Time tau_refresh=900;
+  Modelica.Units.SI.HeatFlowRate Q_buoy[n](start=zeros(n));
+  Modelica.Units.SI.SpecificEnergy q_buoy[n];
       function isBuoy =
       AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions.isBuoy;
 
