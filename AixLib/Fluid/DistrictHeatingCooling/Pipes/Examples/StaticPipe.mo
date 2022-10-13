@@ -11,7 +11,7 @@ model StaticPipe "Simple example of StaticPipe"
     annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
   Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
-    T=323.15,
+    T=273.15 + 10,
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
