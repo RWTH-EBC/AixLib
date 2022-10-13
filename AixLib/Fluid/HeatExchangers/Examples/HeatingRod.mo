@@ -3,7 +3,7 @@ model HeatingRod "Example for the usage of the heating rod model"
   extends Modelica.Icons.Example;
   extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.Heater(
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=V*heatingRod.rho_default/3600,
+    m_flow_nominal=V*1000/3600,
     Q_flow_nominal=100,
     conPI(k=10),
     vol(V=V/1000),
