@@ -112,9 +112,6 @@ model AHU
   block StartState
     outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
     outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-  initial equation
-    Q_dot_C = 1e-3;
-    Q_dot_H = 1e-3;
 
   equation
     Q_dot_C = previous(Q_dot_C);
@@ -134,22 +131,6 @@ model AHU
       singleInstance=true);
   end StartState;
 
-  block StateExtra
-
-    annotation (
-      Icon(graphics={Text(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            textString="%name")}),
-      Diagram(graphics={Text(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            textString="%stateName",
-            fontSize=10)}),
-      __Dymola_state=true,
-      showDiagram=true,
-      singleInstance=true);
-  end StateExtra;
   StartState startState
     annotation (Placement(transformation(extent={{-82,-24},{-62,-4}})));
 
@@ -839,25 +820,25 @@ equation
   stateToOnlyHeatingHRS_true = if
      choiceX
      and
-     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and heating and HRS then true else false;
 
   stateToOnlyHeatingHRS_false = if
      choiceX
      and
-     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and heating and not HRS then true else false;
 
   stateToOnlyCoolingHRS_true = if
      choiceX
      and
-     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and cooling and HRS then true else false;
 
   stateToOnlyCoolingHRS_false = if
      choiceX
      and
-     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and cooling and not HRS then true else false;
 
   X_supplyMin = (molarMassRatio*phi_supplyAir[1]*
@@ -1299,25 +1280,43 @@ equation
   //stateToHuCHRS_false==false,
 
   connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-100,56},{-100,
-          56},{-66.8889,56},{-66.8889,26}},
+          56},{-67.7778,56},{-67.7778,26}},
                                     color={0,0,127}));
   connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-100,36},{-100,
-          36},{-66.6667,36},{-66.6667,26}},
+          36},{-67.3333,36},{-67.3333,26}},
                                     color={0,0,127}));
   connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},
-          {-66.4444,42},{-66.4444,26}},
+          {-66.8889,42},{-66.8889,26}},
                             color={0,0,127}));
   connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,78},{-60,78},
-          {-60,60},{-66.2222,60},{-66.2222,26}},
+          {-60,60},{-66.4444,60},{-66.4444,26}},
                             color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-65.3333,
-          82},{-65.3333,26}},
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.6667,
+          82},{-64.6667,26}},
                        color={0,0,127}));
   connect(Vflow_in_extractAir_internal, sample.u[9]);
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{99,
           5}},                color={0,0,127}));
   connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{99,57},
           {99,49}},                                                                          color={0,0,127}));
+public
+  block StateExtra
+
+    annotation (
+      Icon(graphics={Text(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            textString="%name")}),
+      Diagram(graphics={Text(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            textString="%stateName",
+            fontSize=10)}),
+      __Dymola_state=true,
+      showDiagram=true,
+      singleInstance=true);
+  end StateExtra;
+equation
   transition(
     startState,
     stateExtra,Q_dot_C > 0 and Q_dot_H > 0,
@@ -1492,11 +1491,11 @@ equation
   </li>
   <li>[2] Khurmi, R. S.; Gupta, J. K. (2009): Textbook of Refrigeration
   and Air Conditioning. 4th ed. New Delhi: Eurasia. (682 pages). ISBN
-  9788121927819.
+  9788121927819  [Titel anhand dieser ISBN in Citavi-Projekt übernehmen] .
   </li>
   <li>[3] Lindeburg, M. R. (2013): Mechanical Engineering Reference
   Manual for the PE Exam. 13th ed. Belmont: Professional Publications,
-  Inc. (1488 pages). ISBN 9781591264149.
+  Inc. (1488 pages). ISBN 9781591264149  [Titel anhand dieser ISBN in Citavi-Projekt übernehmen] .
   </li>
   <li>[4] Verein Deutscher Ingenieure e. V.: VDI 2071:1997-12:
   Wärmerückgewinnung in Raumlufttechnischen Anlagen. Richtlinie.
