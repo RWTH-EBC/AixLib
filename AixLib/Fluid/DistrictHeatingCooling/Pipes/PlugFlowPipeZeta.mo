@@ -1,7 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeZeta
   "Pipe model using spatialDistribution for temperature delay and conditional HydraulicResistance"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
@@ -56,11 +56,11 @@ model PlugFlowPipeZeta
   parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default) =
+  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)=
     Medium.T_default "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)
-     = T_start_in "Initialization temperature at pipe outlet"
+  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)=
+       T_start_in "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay(start=false) = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
@@ -95,12 +95,15 @@ model PlugFlowPipeZeta
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore plugFlowCore(
+  FixedResistances.PlugFlowPipe                          plugFlowPipe(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
     final length=length,
-    final C=C,
+    dIns=dIns,
+    kIns=kIns,
+    cPip=cPip,
+    rhoPip=rhoPip,
     final R=R,
     final m_flow_small=m_flow_small,
     final m_flow_nominal=m_flow_nominal,
@@ -128,7 +131,7 @@ model PlugFlowPipeZeta
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
-    final nPorts=nPorts + 1,
+    final nPorts=2,
     final T_start=T_start_out,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac = if rho_default > 500 then 1 else 10)
@@ -178,25 +181,23 @@ equation
   //calculation of the flow velocity of medium in the pipes
   v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
-  for i in 1:nPorts loop
-    connect(vol.ports[i + 1], ports_b[i])
-    annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
+  connect(vol.ports[2], port_b)
+    annotation (Line(points={{71,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
-  end for;
-  connect(plugFlowCore.heatPort, heatPort)
+  connect(plugFlowPipe.heatPort, heatPort)
     annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
-  connect(plugFlowCore.port_b, vol.ports[1])
-    annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
+  connect(plugFlowPipe.port_b, vol.ports[1])
+    annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
   if use_zeta then
-  connect(hydraulicResistance.port_b, plugFlowCore.port_a)
+  connect(hydraulicResistance.port_b,plugFlowPipe. port_a)
     annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
                                                color={0,127,255}, pattern=LinePattern.Dash));
   connect(hydraulicResistance.port_a, port_a)
     annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
                                                 color={0,127,255}, pattern=LinePattern.Dash));
   else
-  connect(port_a, plugFlowCore.port_a)
+  connect(port_a,plugFlowPipe. port_a)
     annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
                                                 color={0,127,255}));
   end if;
