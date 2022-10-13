@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses;
 partial model PartialCorrectionG
   "Partial model for correction of the solar gain factor"
 
-  parameter Integer n(min = 1) "Vector size for input and output";
+  parameter Integer n(min = 1)=1 "Vector size for input and output";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window";
 
