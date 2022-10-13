@@ -100,7 +100,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   Modelica.Blocks.Interfaces.RealInput dpMea(
     final quantity="PressureDifference",
     final displayUnit="Pa",
-    final unit="Pa")=gain.u if prescribeSystemPressure
+    final unit="Pa") if prescribeSystemPressure
     "Measurement of pressure difference between two points where the set point should be obtained"
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
