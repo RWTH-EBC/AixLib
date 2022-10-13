@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows;
 model ShadedWindow
   "Calculation of solar energy transmitted through windows considering shadowing."
   parameter Modelica.Units.SI.Angle lat "Latitude";
-  parameter Integer n(min = 1) "Number of windows"
+  parameter Integer n(min = 1)=1 "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
@@ -23,7 +23,7 @@ model ShadedWindow
     annotation (dialog(group="sunscreen"));
   parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
     roof" annotation (Dialog(group="window"));
   parameter Modelica.Units.SI.Length b[n] "Width of window"
     annotation (Dialog(group="window"));
@@ -49,12 +49,12 @@ model ShadedWindow
   parameter Modelica.Units.SI.Length dBel[n]
     "Distance between projection (below) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Angle azi[n](displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.Units.SI.Angle azi[n](each displayUnit="deg") "Surface azimuth. azi=-90 degree if surface outward unit normal points
     toward east; azi=0 if it points toward south"
     annotation (Dialog(group="window"));
-  parameter Integer nCorPoi(min = 1) "Number of corner points"
+  parameter Integer nCorPoi(min = 1)=1 "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.Units.SI.Angle[nCorPoi] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
+  parameter Modelica.Units.SI.Angle[nCorPoi] alpha(each displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
      azi=-90 degree if surface outward unit normal points toward east;
      azi=0 if it points toward south" annotation (dialog(group="skyline"));
   parameter Modelica.Units.SI.Height[nCorPoi] deltaH
@@ -72,14 +72,14 @@ model ShadedWindow
      radiation" annotation (Dialog(group="window"));
 
     Modelica.Blocks.Interfaces.RealOutput HVis[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Solar energy entering the room in the visible area"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{100,30},{120,50}})));
 
     Modelica.Blocks.Interfaces.RealOutput HWin[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Solar radiation transmitted through aggregated window"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
