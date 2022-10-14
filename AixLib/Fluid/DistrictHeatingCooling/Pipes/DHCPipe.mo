@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
@@ -124,12 +124,15 @@ model DHCPipe "Generic pipe model for DHC applications"
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  replaceable AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore pipCor(
+  replaceable AixLib.Fluid.FixedResistances.PlugFlowPipe floPip(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
     final length=length,
-    final C=C,
+    final dIns=dIns,
+    final kIns=kIns,
+    final cPip=cPip,
+    final rhoPip=rhoPip,
     final R=R,
     final m_flow_small=m_flow_small,
     final m_flow_nominal=m_flow_nominal,
@@ -144,27 +147,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
     final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized) constrainedby Interfaces.PartialTwoPort(
-    redeclare package Medium = Medium,
-    dh=dh,
-    v_nominal=v_nominal,
-    length=length,
-    C=C,
-    R=R,
-    m_flow_small=m_flow_small,
-    m_flow_nominal=m_flow_nominal,
-    T_start_in=T_start_in,
-    T_start_out=T_start_out,
-    m_flow_start=m_flow_start,
-    initDelay=initDelay,
-    from_dp=from_dp,
-    fac=if not use_zeta then fac else 1.0,
-    ReC=ReC,
-    thickness=thickness,
-    roughness=roughness,
-    allowFlowReversal=allowFlowReversal,
-    homotopyInitialization=homotopyInitialization,
-    linearized=linearized) "Describing the pipe behavior" annotation (choices(
+    final linearized=linearized) constrainedby Interfaces.PartialTwoPort "Describing the pipe behavior" annotation (choices(
         choice(redeclare
           AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore
           pipCor "Static core"), choice(redeclare
@@ -181,7 +164,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
-    final nPorts=nPorts + 1,
+    final nPorts=2,
     final T_start=T_start_out,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac = if rho_default > 500 then 1 else 10)
@@ -220,7 +203,26 @@ model DHCPipe "Generic pipe model for DHC applications"
     T0=283.15) if use_soil
     annotation (Placement(transformation(extent={{-10,72},{10,92}})));
 
-
+  FixedResistances.HydraulicResistance hydRes(
+    diameter=dh,
+    m_flow_nominal=m_flow_nominal,
+    redeclare package Medium = Medium,
+    zeta=sum_zetas,
+    allowFlowReversal=allowFlowReversal,
+    from_dp=from_dp,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized,
+    m_flow_start=m_flow_start) if use_zeta
+    annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
+    if not use_soil "Thermal pass through if there is no soil activated"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-16,54})));
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
+                                                 if not use_zeta
+    annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 protected
   parameter Modelica.Units.SI.HeatCapacity CPip=length*((dh + 2*thickness)^2 -
       dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
@@ -255,44 +257,22 @@ protected
   Modelica.Units.SI.Heat Q_gai(start=0.0, fixed=true)
     "Integrated heat gain of the pipe";
 
-public
-  FixedResistances.HydraulicResistance hydRes(
-    diameter=dh,
-    m_flow_nominal=m_flow_nominal,
-    redeclare package Medium = Medium,
-    zeta=sum_zetas,
-    allowFlowReversal=allowFlowReversal,
-    from_dp=from_dp,
-    homotopyInitialization=homotopyInitialization,
-    linearized=linearized,
-    m_flow_start=m_flow_start) if use_zeta
-    annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
-    if not use_soil "Thermal pass through if there is no soil activated"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-16,54})));
-  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
-                                                 if not use_zeta
-    annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
+
 equation
   //calculation of the flow velocity of water in the pipes
   v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
   //calculation of heat losses and heat gains of pipe
-  der(Q_los) = min(0, pipCor.heatPort.Q_flow);
-  der(Q_gai) = max(0, pipCor.heatPort.Q_flow);
+  der(Q_los) = min(0,floPip.heatPort.Q_flow);
+  der(Q_gai) = max(0,floPip.heatPort.Q_flow);
 
-  for i in 1:nPorts loop
-    connect(vol.ports[i + 1], ports_b[i])
-    annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
+  connect(vol.ports[2], port_b)
+    annotation (Line(points={{71,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
-  end for;
 
-  connect(pipCor.port_b, vol.ports[1])
-    annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
-  connect(pipCor.heatPort, cylHeaTra1.port_a)
+  connect(floPip.port_b, vol.ports[1])
+    annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
+  connect(floPip.heatPort, cylHeaTra1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0},
       pattern=LinePattern.Dash));
   connect(cylHeaTra1.port_b, cylHeaTra2.port_a)
@@ -304,7 +284,7 @@ equation
   connect(cylHeaTra3.port_b, heatPort)
     annotation (Line(points={{0,90.8},{0,90.8},{0,100}}, color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(pipCor.heatPort, thePasThr.port_a[1]) annotation (Line(points={{0,10},
+  connect(floPip.heatPort, thePasThr.port_a[1]) annotation (Line(points={{0,10},
           {0,20},{-16,20},{-16,44}}, color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thePasThr.port_b, heatPort) annotation (Line(points={{-16,64},{-16,94},
@@ -314,7 +294,7 @@ equation
       points={{-100,0},{-80,0},{-80,20},{-60,20}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(hydRes.port_b, pipCor.port_a) annotation (Line(
+  connect(hydRes.port_b,floPip. port_a) annotation (Line(
       points={{-40,20},{-20,20},{-20,0},{-10,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
@@ -324,7 +304,7 @@ equation
       points={{-100,0},{-80,0},{-80,-20},{-60,-20}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(pasThrMed.port_b, pipCor.port_a) annotation (Line(
+  connect(pasThrMed.port_b,floPip. port_a) annotation (Line(
       points={{-40,-20},{-20,-20},{-20,0},{-10,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));

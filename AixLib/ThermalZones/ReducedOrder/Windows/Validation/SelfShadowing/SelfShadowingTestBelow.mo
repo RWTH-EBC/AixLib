@@ -12,8 +12,8 @@ model SelfShadowingTestBelow
     final dLef={0},
     final bAbo={0},
     final dAbo={0},
-    final azi(displayUnit="deg") = {0},
-    final til(displayUnit="deg") = {1.5707963267949},
+    final azi= {0},
+    final til= {1.5707963267949},
     final dBel={0.01},
     final bBel={1}) "Shadowing due to a projection below"
     annotation (Placement(transformation(extent={{56,46},{88,74}})));
@@ -36,8 +36,8 @@ model SelfShadowingTestBelow
     final dLef={0},
     final bAbo={0},
     final dAbo={0},
-    final azi(displayUnit="deg") = {0},
-    final til(displayUnit="deg") = {1.5707963267949},
+    final azi= {0},
+    final til= {1.5707963267949},
     final bBel={1},
     final dBel={-0.2}) "Shadowing due to a balkony"
     annotation (Placement(transformation(extent={{56,-40},{88,-12}})));
