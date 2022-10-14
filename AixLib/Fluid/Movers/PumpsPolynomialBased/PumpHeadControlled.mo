@@ -1,11 +1,7 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
-
-
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-
-
 
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
       AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
@@ -135,11 +131,14 @@ protected
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
   Modelica.Blocks.Continuous.CriticalDamping
-                                    criticalDamping(
-    
-    f=1/5,
-    initType=Modelica.Blocks.Types.Init.InitialOutput, n = 1,y_start=Hstart)
+	criticalDamping(
+		f=1/5,
+		initType=Modelica.Blocks.Types.Init.InitialOutput, 
+		n = 1,
+		y_start=Hstart
+	)
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
+
 public
   Modelica.Blocks.Logical.Switch onOff
     annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -222,23 +221,23 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,
-          76},{-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,76},{-66,93},{0.5975,93},{0.5975,100.597}},
+                                                      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{94,-10},{95,-10},
-          {95,90},{0.5975,90},{0.5975,100.597}},color={0,0,127}), Text(
+  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{94,-10},{95,-10},{95,90},{0.5975,90},{0.5975,100.597}},
+                                                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},
-          {-62,60},{-62,100.597},{0.5975,100.597}},     color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},{-62,60},{-62,100.597},{0.5975,100.597}},
+                                                        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,
-          100.597},{0.5975,100.597}}, color={255,0,255}), Text(
+  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,100.597},{0.5975,100.597}},
+                                      color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -254,14 +253,14 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{
-          -19,20},{-19,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{-19,20},{-19,100.597},{0.5975,100.597}},
+                                                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{
-          30,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{30,100.597},{0.5975,100.597}},
+                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -430,7 +429,11 @@ equation
   Describe whether the validation was done using analytical validation,
   comparative model validation or empirical validation.
 </p>
+</html>", revisions="<html>
 <ul>
+  <li>2022-10-13 by Martin Kremer:<br/>
+    Changed extrapolation in look-up table to 'hold last point'. Changed filter to first order.
+  </li>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming, restructuring and bug fixes.
   </li>

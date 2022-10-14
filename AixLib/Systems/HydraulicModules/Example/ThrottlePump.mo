@@ -53,6 +53,8 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-86, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(ThrottlePump.hydraulicBus, hydraulicBus) annotation (Line(
       points={{-20,10},{-50,10}},
@@ -80,6 +82,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-74, -30}, {-50, -30}, {-50, 10}}, color = {255, 0, 255}));
   annotation (Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
