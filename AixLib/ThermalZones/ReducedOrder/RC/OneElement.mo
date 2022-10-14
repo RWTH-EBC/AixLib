@@ -8,7 +8,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
     "Coefficient of heat transfer for linearized radiation exchange between walls"
     annotation (Dialog(group="Thermal zone"));
-  parameter Integer nOrientations(min=1)=1 "Number of orientations"
+  parameter Integer nOrientations(min=1) "Number of orientations"
     annotation(Dialog(group="Thermal zone"));
   parameter Integer nPorts=0 "Number of fluid ports"
     annotation(Evaluate=true,
