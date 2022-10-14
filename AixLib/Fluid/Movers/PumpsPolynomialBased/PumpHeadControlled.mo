@@ -1,11 +1,7 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
-
-
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-
-
 
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
       AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
@@ -135,9 +131,12 @@ protected
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
   Modelica.Blocks.Continuous.CriticalDamping
-                                    criticalDamping(
-    f=1/5,
-    initType=Modelica.Blocks.Types.Init.InitialOutput, n = 1,y_start=Hstart)
+	criticalDamping(
+		f=1/5,
+		initType=Modelica.Blocks.Types.Init.InitialOutput, 
+		n = 1,
+		y_start=Hstart
+	)
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
 
 public
