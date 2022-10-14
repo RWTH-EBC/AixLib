@@ -37,7 +37,7 @@ model GenericHumidifier_u
           extent={{100,90},{120,110}}), iconTransformation(extent={{100,90},{120,
             110}})));
   Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
-        Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow) if steamHumidifier
+        Medium.enthalpyOfCondensingGas(T=Tsteam_intern)*mWat_flow) if steamHumidifier
     annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
   Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=Medium.enthalpyOfLiquid(T=TLiqWat_in)*mWat_flow) annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
@@ -51,6 +51,7 @@ model GenericHumidifier_u
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
 
 protected
+  Modelica.Blocks.Interfaces.RealInput Tsteam_intern;
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
     annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
 
@@ -60,6 +61,11 @@ protected
   Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
 equation
+  if not steamHumidifier then
+    Tsteam_intern = 273.15;
+  end if;
+  
+  connect(Tsteam.y, Tsteam_intern);
   connect(gai.y, vol.mWat_flow) annotation (Line(
       points={{-37,60},{-30,60},{-30,-18},{-11,-18}},
       color={0,0,127}));
