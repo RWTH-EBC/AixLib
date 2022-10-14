@@ -6,6 +6,7 @@ model StorageSolarCollector
   replaceable package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Storage.StorageDetailed bufferStorage(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     m1_flow_nominal=solarThermal.m_flow_nominal,
@@ -13,6 +14,7 @@ model StorageSolarCollector
     mHC1_flow_nominal=solarThermal.m_flow_nominal,
     useHeatingCoil2=false,
     useHeatingRod=false,
+    TStart=333.15,
     redeclare AixLib.DataBase.Storage.Generic_New_2000l data(hHC1Up=2.1),
     n=10,
     hConIn=1500,
@@ -26,30 +28,33 @@ model StorageSolarCollector
                      boundary_p(          redeclare package Medium = Medium,
       nPorts=1)                 annotation(Placement(transformation(extent={{86,74},
             {66,94}})));
-  Modelica.Fluid.Pipes.DynamicPipe
-                   pipe(
+  AixLib.Fluid.FixedResistances.PressureDrop
+                   res1(
     redeclare package Medium = Medium,
-    length=10,
-    diameter=0.05)                       annotation(Placement(transformation(extent={{-6,-10},
+    m_flow_nominal=solarThermal.m_flow_nominal,
+    dp_nominal=2000)                     annotation(Placement(transformation(extent={{-6,-10},
             {14,10}})));
   AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
-  Modelica.Fluid.Pipes.DynamicPipe
-                   pipe1(
+  AixLib.Fluid.FixedResistances.PressureDrop
+                   res(
     redeclare package Medium = Medium,
-    length=10,
-    diameter=0.05)                        annotation(Placement(transformation(extent={{-40,-26},
+    allowFlowReversal=true,
+    m_flow_nominal=solarThermal.m_flow_nominal,
+    dp_nominal=2000)                      annotation(Placement(transformation(extent={{-40,-26},
             {-20,-6}})));
   AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
+    vol(T(start=298.15, fixed=true)),
     Collector=AixLib.DataBase.SolarThermal.FlatCollector(),
     A=20,
     redeclare package Medium = Medium,
     m_flow_nominal=0.04,
     volPip=1)
     annotation (Placement(transformation(extent={{24,-10},{44,10}})));
-  Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1,
-    amplitude=0.02,
+  Modelica.Blocks.Sources.Pulse pulse(period = 3600,
+    width=10,
+    amplitude=0.05,
     offset=0)                                                                                 annotation(Placement(transformation(extent={{-96,-14},
             {-76,6}})));
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valve(
@@ -81,7 +86,10 @@ model StorageSolarCollector
     offset={273.15,0.01})
     annotation (Placement(transformation(extent={{10,32},{30,52}})));
   AixLib.Fluid.Movers.FlowControlled_dp pump(redeclare package Medium = Medium,
-      m_flow_nominal=solarThermal.m_flow_nominal)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+      m_flow_nominal=solarThermal.m_flow_nominal,
+    per(pressure(V_flow={0,solarThermal.m_flow_nominal/1000,solarThermal.m_flow_nominal
+            /(1000*0.8)}, dp={dpPumpInput.k/0.8,dpPumpInput.k,0})))
     annotation (Placement(transformation(extent={{6,60},{-14,80}})));
   Modelica.Blocks.Sources.Constant dpPumpInput(k=55000)
     annotation (Placement(transformation(extent={{32,80},{12,100}})));
@@ -99,7 +107,7 @@ equation
           {31,22},{28,22},{28,10}},                                                                 color = {0, 0, 127}));
   connect(solarThermal.port_b, temperatureSensor.port_a) annotation(Line(points={{44,0},{
           48,0}},                                                                                     color = {0, 127, 255}));
-  connect(solarThermal.port_a, pipe.port_b) annotation(Line(points={{24,0},{14,
+  connect(solarThermal.port_a,res1. port_b) annotation(Line(points={{24,0},{14,
           0}},                                                                            color = {0, 127, 255}));
   connect(temperatureSensor.port_b, valve.port_a)
     annotation (Line(points={{68,0},{68,32},{69,32}}, color={0,127,255}));
@@ -113,12 +121,11 @@ equation
   connect(boundary_ph2.ports[1], bufferStorage.fluidportTop2) annotation (Line(
         points={{-66,52},{-50,52},{-50,50},{-23.125,50},{-23.125,34.1}}, color=
           {0,127,255}));
-  connect(pipe1.port_b, bufferStorage.fluidportBottom2) annotation (Line(points=
-         {{-20,-16},{-16,-16},{-16,0},{-22.875,0},{-22.875,13.9}}, color={0,127,
-          255}));
+  connect(res.port_b, bufferStorage.fluidportBottom2) annotation (Line(points={{
+          -20,-16},{-16,-16},{-16,0},{-22.875,0},{-22.875,13.9}}, color={0,127,255}));
   connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (
       Line(points={{-40,24},{-34,24},{-34,24.6},{-29.75,24.6}}, color={191,0,0}));
-  connect(pipe.port_a, bufferStorage.portHC1Out) annotation (Line(points={{-6,0},
+  connect(res1.port_a, bufferStorage.portHC1Out) annotation (Line(points={{-6,0},
           {-6,26.6},{-9.875,26.6}}, color={0,127,255}));
   connect(valve.port_b, pump.port_a) annotation (Line(points={{69,52},{68,52},{
           68,70},{6,70}}, color={0,127,255}));
@@ -131,7 +138,7 @@ equation
   connect(pump.port_b, bufferStorage.portHC1In) annotation (Line(points={{-14,
           70},{-16,70},{-16,46},{-6,46},{-6,29.7},{-9.75,29.7}}, color={0,127,
           255}));
-  connect(boundary.ports[1], pipe1.port_a)
+  connect(boundary.ports[1], res.port_a)
     annotation (Line(points={{-48,-16},{-40,-16}}, color={0,127,255}));
   connect(pulse.y, boundary.m_flow_in) annotation (Line(points={{-75,-4},{-72,
           -4},{-72,-8},{-70,-8}}, color={0,0,127}));
