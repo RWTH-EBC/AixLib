@@ -59,7 +59,6 @@ protected
       Qsek2_diff)/g_dir0
     "Transmission coefficient correction factor for irradiations from ground";
 
-
   //Calculating the correction factor for direct solar radiation
   Modelica.Units.SI.TransmissionCoefficient[n] Ta_dir
     "Energetic degree of transmission for direct radiation";

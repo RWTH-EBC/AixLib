@@ -101,7 +101,8 @@ model PumpHeadControlled
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
 
   Modelica.Blocks.Tables.CombiTable1Dv maxMinTable(
-    columns={2,3}, extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+    columns={2,3},
+    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=pumpParam.maxMinHeight,
     tableName="NoName",
     tableOnFile=false)
@@ -135,11 +136,13 @@ protected
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
   Modelica.Blocks.Continuous.CriticalDamping
-                                    criticalDamping(
-    
-    f=1/5,
-    initType=Modelica.Blocks.Types.Init.InitialOutput, n = 1,y_start=Hstart)
+    criticalDamping(
+      f=1/5,
+      initType=Modelica.Blocks.Types.Init.InitialOutput,
+      n=1,
+      y_start=Hstart)
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
+
 public
   Modelica.Blocks.Logical.Switch onOff
     annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -271,9 +274,9 @@ equation
   connect(idealSource.port_a, port_a) annotation (Line(points={{-31,-80},{-81,-80},
           {-81,0},{-100,0}}, color={0,127,255}));
   connect(idealSource.port_b,vol. ports[1])
-    annotation (Line(points={{-11,-80},{31,-80}}, color={0,127,255}));
+    annotation (Line(points={{-11,-80},{32,-80}}, color={0,127,255}));
   connect(vol.ports[2], port_b)
-    annotation (Line(points={{35,-80},{100,-80},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{34,-80},{100,-80},{100,0}}, color={0,127,255}));
   connect(onOff.y, criticalDamping.u) annotation (Line(points={{69,20},{70,20},{
           70,5},{41,5},{41,-10},{48,-10}}, color={0,0,127}));
   annotation (

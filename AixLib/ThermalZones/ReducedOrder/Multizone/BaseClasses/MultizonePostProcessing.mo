@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
   parameter Modelica.Units.SI.Volume VAir "Indoor air volume of building";
@@ -28,7 +28,7 @@ model MultizonePostProcessing
 
   Modelica.Blocks.Interfaces.RealInput TAir[numZones](each final quantity="ThermodynamicTemperature",
       each final unit="K",
-      each displayUnit= "degC") "Air temperature of each zone"
+      each displayUnit="degC") "Air temperature of each zone"
                                    annotation (Placement(transformation(extent={{-140,80},
             {-100,120}}),           iconTransformation(extent={{-140,80},{-100,120}})));
   Modelica.Blocks.Interfaces.RealInput TRad[numZones](

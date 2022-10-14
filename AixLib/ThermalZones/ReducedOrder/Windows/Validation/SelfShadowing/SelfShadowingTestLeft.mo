@@ -12,8 +12,8 @@ model SelfShadowingTestLeft
     final bBel={0},
     final dAbo={0},
     final dBel={0},
-    final azi= {0},
-    final til= {1.5707963267949},
+    final azi={0},
+    final til={1.5707963267949},
     final bLef={1},
     final dLef={0.01})
     "Shadowing due to a projection on the left-hand side of the window"

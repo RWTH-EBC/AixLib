@@ -14,8 +14,8 @@ model SelfShadowingTestAbove
     final bBel={0},
     final dAbo={0.01},
     final dBel={0},
-    final azi = {0},
-    final til = {1.5707963267949})
+    final azi={0},
+    final til={1.5707963267949})
     "Shadowing due to a projection above the window"
           annotation (Placement(transformation(extent={{56,46},{88,74}})));
   AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)

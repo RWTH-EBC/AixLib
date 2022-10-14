@@ -12,8 +12,8 @@ protected
 
   Real eps12;
   Real epsInternal;
-  
-  constant Real kB(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
+
+  constant Real kB(unit="J/K") = Modelica.Constants.k "Stefan-Boltzmann-Constant";
   constant Real epsAir = 78.6 * kB "Lennard-Jones potential of air";
   constant Real epsSteam = 363 * kB "Lennard-Jones potential of steam";
 algorithm

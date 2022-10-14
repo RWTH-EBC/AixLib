@@ -60,7 +60,7 @@ model StaticPipe
     Medium.T_default "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)=
-       T_start_in "Initialization temperature at pipe outlet"
+    T_start_in "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay(start=false) = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"

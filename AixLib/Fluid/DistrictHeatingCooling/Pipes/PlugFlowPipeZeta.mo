@@ -95,15 +95,15 @@ model PlugFlowPipeZeta
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  FixedResistances.PlugFlowPipe                          plugFlowPipe(
+  FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
     final length=length,
-    dIns=dIns,
-    kIns=kIns,
-    cPip=cPip,
-    rhoPip=rhoPip,
+    final dIns=dIns,
+    final kIns=kIns,
+    final cPip=cPip,
+    final rhoPip=rhoPip,
     final R=R,
     final m_flow_small=m_flow_small,
     final m_flow_nominal=m_flow_nominal,
@@ -190,14 +190,14 @@ equation
   connect(plugFlowPipe.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
   if use_zeta then
-  connect(hydraulicResistance.port_b,plugFlowPipe. port_a)
+  connect(hydraulicResistance.port_b, plugFlowPipe.port_a)
     annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
                                                color={0,127,255}, pattern=LinePattern.Dash));
   connect(hydraulicResistance.port_a, port_a)
     annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
                                                 color={0,127,255}, pattern=LinePattern.Dash));
   else
-  connect(port_a,plugFlowPipe. port_a)
+  connect(port_a, plugFlowPipe.port_a)
     annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
                                                 color={0,127,255}));
   end if;
