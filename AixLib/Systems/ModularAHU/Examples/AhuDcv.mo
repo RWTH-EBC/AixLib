@@ -117,11 +117,13 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     annotation (Placement(transformation(extent={{-58,-34},{62,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
+    C_start={6.076*0.0001},
     zoneParam=AixLib.DataBase.ThermalZones.Office_1995_1000(),
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
     use_NaturalAirExchange=true,
+    XCO2_amb=6.8355E-4,
     metOnePerSit=58,
     nPorts=2)            annotation (Placement(transformation(extent={{56,54},{
             100,96}})));
@@ -166,7 +168,8 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
         extent={{7,-7},{-7,7}},
         rotation=270,
         origin={47,-73})));
-  Fluid.Sources.Outside out(nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-90,-14},
+  Fluid.Sources.Outside out(
+    C={6.8355*0.0001},      nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-90,-14},
             {-70,6}})));
   Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package
       Medium =                                                                      MediumAir)
@@ -194,8 +197,10 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
         origin={95,40})));
   Controller.CtrAHUCO2 ctrAHUCO2_1(
     TFlowSet=293.15,
-    relHumSupSet=0.4,                               useTwoFanCtr=false)
-                                                      annotation (Placement(transformation(extent={{-40,40},
+    relHumSupSet=0.4,
+    minVflowPer=0.2,
+    CO2set=900,                                     useTwoFanCtr=false,
+    kCO2=3000/3600)                                   annotation (Placement(transformation(extent={{-40,40},
             {-20,60}})));
   Utilities.Psychrometrics.Phi_pTX phi
     annotation (Placement(transformation(extent={{128,56},{148,76}})));
@@ -253,7 +258,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
-      StopTime=604800,
+      StartTime=5961600,
+      StopTime=6566400,
       Interval=120.000096,
       Tolerance=1e-05,
       __Dymola_Algorithm="Dassl"));

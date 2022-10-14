@@ -84,6 +84,8 @@ record Office_1995_1000 "Office zone from 1995 with 1000 m² area and without he
     lCool = -43939.72775558922,
     KRCool = 10000,
     TNCool = 1,
+    heaLoadFacOut=0,
+    heaLoadFacGrd=0,
     CoolerOn = false,
     withIdealThresholds = false,
     TThresholdHeater = 288.15,
