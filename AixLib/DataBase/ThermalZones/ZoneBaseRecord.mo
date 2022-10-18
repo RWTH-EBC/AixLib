@@ -9,8 +9,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
     "Coefficient of heat transfer for linearized radiation exchange between walls";
   parameter Modelica.Units.SI.Angle lat "Latitude of zone location";
-  parameter Integer nOrientations(min=1) "Number of orientations";
-
+  parameter Integer nOrientations(min=1) "Number of total facades with different
+   combination of tilt and orientation";
   parameter Modelica.Units.SI.Area AWin[nOrientations]
     "Areas of windows by orientations";
   parameter Modelica.Units.SI.Area ATransparent[nOrientations]

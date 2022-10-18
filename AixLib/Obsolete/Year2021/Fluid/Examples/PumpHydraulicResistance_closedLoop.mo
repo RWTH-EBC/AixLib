@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Examples;
+within AixLib.Obsolete.Year2021.Fluid.Examples;
 model PumpHydraulicResistance_closedLoop
   "Example with pump, hydraulic resistance and pipes in a closed loop"
   import AixLib;
@@ -12,10 +12,12 @@ model PumpHydraulicResistance_closedLoop
     ControlStrategy=2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
+  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    zeta=2,
     redeclare package Medium = Medium,
     diameter=0.05,
-    m_flow_nominal=0.001)                                                annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
+    m_flow_nominal=0.001)
+    annotation (Placement(transformation(extent={{26,20},{46,40}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
