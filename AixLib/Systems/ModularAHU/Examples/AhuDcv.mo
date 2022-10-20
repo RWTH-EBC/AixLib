@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model AhuDcv "Example for air hanling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 
@@ -262,5 +262,15 @@ equation
       StopTime=6566400,
       Interval=120.000096,
       Tolerance=1e-05,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"), Documentation(info="<html>
+This example shows the combination of the <code>GenericAHU</code> with a <code>ThermalZone</code>.
+The used controller is designed for demand controlled ventilation (DCV) based on the CO2-Concentration in the zone.
+The Example provides a ready-to-use framework for testing and tuning controllers.
+</html>", revisions="<html>
+<ul>
+  <li>October, 2022, by Alexander Kümpel and Martin Kremer:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"));
 end AhuDcv;
