@@ -241,8 +241,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  if not useTwoFanCtr then
-  end if;
   connect(constCO2Set.y, PID_CO2.u_s) annotation (Line(points={{-79,-28},{-74,-28},{-74,-50},{-70,-50}}, color={0,0,127}));
   connect(PID_CO2.y, PID_VflowSup.u_s) annotation (Line(points={{-47,-50},{-2,-50}}, color={0,0,127}));
   connect(PID_CO2.y, PID_VflowRet.u_s) annotation (Line(points={{-47,-50},{-34,-50},{-34,-80},{-22,-80}}, color={0,0,127}));
