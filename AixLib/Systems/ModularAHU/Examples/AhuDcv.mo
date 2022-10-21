@@ -2,6 +2,11 @@
 model AhuDcv "Example for air hanling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 
+  parameter Real CO2Con_start = 400
+    "Start value for CO2 concentration in the thermal zone in ppm";
+  parameter Real CO2ConAmb = 450
+    "CO2 concentration in ambient air in ppm";
+
   replaceable package MediumAir = AixLib.Media.Air (extraPropertiesNames={"CO2"})
     "Medium in air canal in the component";
   replaceable package MediumWater = AixLib.Media.Water
@@ -117,13 +122,13 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     annotation (Placement(transformation(extent={{-58,-34},{62,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
-    C_start={6.076*0.0001},
+    final C_start={CO2Con_start/1E6 * (MolCO2/MolAir)},
     zoneParam=AixLib.DataBase.ThermalZones.Office_1995_1000(),
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
     use_NaturalAirExchange=true,
-    XCO2_amb=6.8355E-4,
+    XCO2_amb=CO2ConAmb/1E6 * (MolCO2/MolAir),
     metOnePerSit=58,
     nPorts=2)            annotation (Placement(transformation(extent={{56,54},{
             100,96}})));
@@ -207,6 +212,12 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
   BoundaryConditions.WeatherData.Bus weaBus1
              "Weather data bus"
     annotation (Placement(transformation(extent={{-82,78},{-62,98}})));
+protected
+  constant Modelica.Units.SI.MolarMass MolCO2=0.04401
+    "molar mass of CO2";
+  constant Modelica.Units.SI.MolarMass MolAir=0.028949
+    "molar mass of air";
+
 equation
   connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{62.5455,20},{72.83,20},{72.83,59.88}},                color={0,127,255}));
   connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{62.5455,-4},{83.17,-4},{83.17,59.88}},color={0,127,255}));
@@ -265,6 +276,8 @@ equation
 This example shows the combination of the <code>GenericAHU</code> with a <code>ThermalZone</code>.
 The used controller is designed for demand controlled ventilation (DCV) based on the CO2-Concentration in the zone.
 The Example provides a ready-to-use framework for testing and tuning controllers.
+<p>
+The nominal values for heat exchangers are derived from data sheets of a test bench air handling unit at the Institute for Energy Efficient Buildings and Indoor Climate.
 </html>", revisions="<html>
 <ul>
   <li>October, 2022, by Alexander Kümpel and Martin Kremer:<br/>
