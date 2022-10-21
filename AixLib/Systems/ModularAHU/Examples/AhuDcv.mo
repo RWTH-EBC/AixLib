@@ -195,13 +195,13 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     annotation(Placement(transformation(extent={{7,-7},{-7,7}},
         rotation=0,
         origin={95,40})));
-  Controller.CtrAHUCO2 ctrAHUCO2_1(
+  Controller.CtrAHUCO2 ctrAHUCO2(
     TFlowSet=293.15,
     relHumSupSet=0.4,
     minVflowPer=0.2,
-    CO2set=900,                                     useTwoFanCtr=false,
-    kCO2=3000/3600)                                   annotation (Placement(transformation(extent={{-40,40},
-            {-20,60}})));
+    CO2set=900,
+    useTwoFanCtr=false,
+    kCO2=3000/3600) annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Utilities.Psychrometrics.Phi_pTX phi
     annotation (Placement(transformation(extent={{128,56},{148,76}})));
   BoundaryConditions.WeatherData.Bus weaBus1
@@ -237,12 +237,11 @@ equation
       thickness=0.5));
   connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{87.3,40},
           {88,40},{88,57.36},{95.6,57.36}},                                                             color={0,0,127}));
-  connect(ctrAHUCO2_1.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
+  connect(ctrAHUCO2.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
       points={{-20,50.1},{2,50.1},{2,32.3}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone.CO2Con, ctrAHUCO2_1.CO2Mea) annotation (Line(points={{102.2,
-          56.1},{104,56.1},{104,100},{-50,100},{-50,42.8},{-42,42.8}},                                                              color={0,0,127}));
+  connect(thermalZone.CO2Con, ctrAHUCO2.CO2Mea) annotation (Line(points={{102.2,56.1},{104,56.1},{104,100},{-50,100},{-50,42.8},{-42,42.8}}, color={0,0,127}));
   connect(thermalZone.X_w, phi.X_w) annotation (Line(points={{102.2,60.3},{118,
           60.3},{118,66},{127,66}}, color={0,0,127}));
   connect(thermalZone.TAir, phi.T) annotation (Line(points={{102.2,91.8},{124,
