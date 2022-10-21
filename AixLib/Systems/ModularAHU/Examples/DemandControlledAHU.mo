@@ -1,5 +1,5 @@
 ﻿within AixLib.Systems.ModularAHU.Examples;
-model AhuDcv "Example for air hanling unit with demand controlled ventilation"
+model DemandControlledAHU "Example for air hanling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 
   parameter Real CO2Con_start = 400
@@ -176,8 +176,7 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
   Fluid.Sources.Outside out(
     C={6.8355*0.0001},      nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-90,-14},
             {-70,6}})));
-  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package
-      Medium =                                                                      MediumAir)
+  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package Medium = MediumAir)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -286,6 +285,6 @@ The nominal values for heat exchangers are derived from data sheets and experime
 </ul>
 </html>"),
 __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/AhuDcv.mos"
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/DemandControlledAHU.mos"
         "Simulate and plot"));
-end AhuDcv;
+end DemandControlledAHU;
