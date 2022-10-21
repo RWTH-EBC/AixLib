@@ -277,12 +277,15 @@ This example shows the combination of the <code>GenericAHU</code> with a <code>T
 The used controller is designed for demand controlled ventilation (DCV) based on the CO2-Concentration in the zone.
 The Example provides a ready-to-use framework for testing and tuning controllers.
 <p>
-The nominal values for heat exchangers are derived from data sheets of a test bench air handling unit at the Institute for Energy Efficient Buildings and Indoor Climate.
+The nominal values for heat exchangers are derived from data sheets and experimental data of a test bench air handling unit at the Institute for Energy Efficient Buildings and Indoor Climate.
 </html>", revisions="<html>
 <ul>
   <li>October, 2022, by Alexander Kümpel and Martin Kremer:<br/>
     First implementation.
   </li>
 </ul>
-</html>"));
+</html>"),
+__Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/AhuDcv.mos"
+        "Simulate and plot"));
 end AhuDcv;
