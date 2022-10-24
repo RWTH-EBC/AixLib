@@ -160,19 +160,19 @@ equation
     annotation (Line(points={{-70,16},{-60,16}}, color={0,127,255}));
   connect(boundaryExhaustAir.ports[1], genericAHU.port_b2)
     annotation (Line(points={{-70,40},{-60,40}}, color={0,127,255}));
-  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-46,-32},{-46,-14},{-43.6364,-14}},
-                                               color={0,127,255}));
-  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-26,-32},{-26,-14},{-32.7273,-14}},
-                                               color={0,127,255}));
+  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-46,-32},
+          {-46,-14},{-43.6364,-14}},           color={0,127,255}));
+  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-26,-32},
+          {-26,-14},{-32.7273,-14}},           color={0,127,255}));
   connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{
           -2,-32},{-2,-14},{-7.10543e-15,-14}}, color={0,127,255}));
   connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{14,
           -32},{10,-32},{10,-14},{10.9091,-14}}, color={0,127,255}));
-  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{32,-32},{30,-32},{30,-22},{20,-22},{20,-14},{21.8182,-14}},
-                                                                      color={0,
+  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{32,-32},
+          {30,-32},{30,-22},{20,-22},{20,-14},{21.8182,-14}},         color={0,
           127,255}));
-  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,-32},{48,-26},{32.1818,-26},{32.1818,-14}},
-                                                      color={0,127,255}));
+  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,-32},
+          {48,-26},{32.1818,-26},{32.1818,-14}},      color={0,127,255}));
   connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
       points={{-20,70.1},{0,70.1},{0,52.3},{-6.66134e-15,52.3}},
       color={255,204,51},
