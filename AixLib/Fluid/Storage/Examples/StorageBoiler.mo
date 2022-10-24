@@ -8,6 +8,7 @@ model StorageBoiler
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
   AixLib.Fluid.Storage.StorageDetailed bufferStorage(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     m1_flow_nominal=pipe1.m_flow_nominal,
@@ -15,6 +16,7 @@ model StorageBoiler
     mHC1_flow_nominal=pipe1.m_flow_nominal,
     useHeatingCoil2=false,
     useHeatingRod=false,
+    TStart=343.15,
     redeclare AixLib.DataBase.Storage.Generic_New_2000l data(
       hTank=2,
       hUpperPortDemand=1.95,
@@ -72,7 +74,12 @@ model StorageBoiler
     dp_nominal=0)
     annotation (Placement(transformation(extent={{42,46},{22,66}})));
   AixLib.Fluid.Movers.FlowControlled_dp pump(redeclare package Medium = Medium,
-      m_flow_nominal=pipe1.m_flow_nominal) annotation (Placement(transformation(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    T_start=298.15,
+      m_flow_nominal=pipe1.m_flow_nominal,
+    per(pressure(V_flow={0,pipe.m_flow_nominal/1000,pipe.m_flow_nominal/(1000*
+            0.8)}, dp={dpSet.k/0.8,dpSet.k,0}), motorCooledByFluid=false))
+                                           annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={2,42})));
