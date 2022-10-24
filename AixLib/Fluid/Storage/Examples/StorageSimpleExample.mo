@@ -3,6 +3,8 @@ model StorageSimpleExample "Example model with simple storage"
   extends Modelica.Icons.Example;
   StorageSimple storageSimple(
     redeclare package Medium = Medium,
+    layer(each T(start=308.15,fixed=true)),
+    layer_HE(each T(start=308.15,fixed=true)),
     n=3,
     d=0.7,
     h=0.78,
@@ -23,7 +25,7 @@ model StorageSimpleExample "Example model with simple storage"
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_gen,
     dp_nominal=dp_nominal_hr,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     Q_flow_nominal=8000,
     V=0.01,
     eta=0.98,
@@ -58,10 +60,12 @@ model StorageSimpleExample "Example model with simple storage"
     nPorts=1)
     annotation (Placement(transformation(extent={{-24,-52},{-38,-38}})));
   AixLib.Fluid.Movers.SpeedControlled_y pumpGen(redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     annotation (Placement(transformation(extent={{-48,-20},{-68,-40}})));
   AixLib.Fluid.Movers.SpeedControlled_y pumpCon(redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       redeclare
       AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4 per)
     "Consumer pump"
