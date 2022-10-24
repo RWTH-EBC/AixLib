@@ -1,5 +1,5 @@
 ﻿within AixLib.Systems.ModularAHU.Examples;
-model DemandControlledAHU "Example for air hanling unit with demand controlled ventilation"
+model DemandControlledAHU "Example for air handling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 
   parameter Real CO2Con_start = 400
