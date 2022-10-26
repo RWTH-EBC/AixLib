@@ -12,7 +12,11 @@ record Pump_DN50_H05_16 "50/0.5-16 PN 6/10 maximum volume flow 53.0 m^3/h"
             nMax=3200,
             cHQN=[ 0, 0, 1.31E-06;
                    0, 7.59E-06, 0;
-                  -0.00316, 0, 0] "coefficients for H = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)");
+                  -0.00316, 0, 0] "coefficients for H = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)",
+            cPQN=[-2.45477E+01, 2.82590E-01, -2.38897E-04, 1.27064E-07, -1.27494E-11;
+                   0, 0, 3.23573E-06, 0, 0;
+                   0, 8.70834E-05, 0, 0, 0;
+                  -8.39000E-03, 0, 0, 0, 0] "coefficients for P = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)");
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
