@@ -149,7 +149,7 @@ equation
           -18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+        experiment(Tolerance=1e-6,StopTime=3.1536e+007,Interval=3600),
         __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZone.mos"
         "Simulate and plot"),
