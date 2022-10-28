@@ -1,7 +1,6 @@
 within AixLib.Fluid.Storage;
 model StorageDetailed
   "Buffer Storage Model with support for heating rod and two heating coils"
-  import      Modelica.Units.SI;
 
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
 
@@ -12,17 +11,17 @@ model StorageDetailed
   replaceable package MediumHC2 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
-  parameter SI.MassFlowRate m1_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal(min=0)
     "Nominal mass flow rate of fluid 1 ports"
     annotation(Dialog(group = "Nominal condition"));
-  parameter SI.MassFlowRate m2_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal(min=0)
     "Nominal mass flow rate of fluid 2 ports"
     annotation(Dialog(group = "Nominal condition"));
 
-  parameter SI.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
+  parameter Modelica.Units.SI.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
     "Nominal mass flow rate of fluid 1 ports"
     annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil1));
-  parameter SI.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
+  parameter Modelica.Units.SI.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
     "Nominal mass flow rate of fluid 1 ports"
     annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil2));
 
@@ -30,7 +29,7 @@ model StorageDetailed
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
+  parameter Modelica.Units.SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
   replaceable parameter DataBase.Storage.StorageDetailedBaseDataDefinition data
     constrainedby DataBase.Storage.StorageDetailedBaseDataDefinition
@@ -42,12 +41,12 @@ model StorageDetailed
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  parameter SI.CoefficientOfHeatTransfer hConIn=100 "Model assumptions heat transfer coefficient water <-> wall";
-  parameter SI.CoefficientOfHeatTransfer hConOut=10 "Model assumptions heat transfer coefficient insulation <-> air";
-  parameter SI.CoefficientOfHeatTransfer hConHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn=100 "Model assumptions heat transfer coefficient water <-> wall";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut=10 "Model assumptions heat transfer coefficient insulation <-> air";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
                                                                            annotation(Dialog(enable=useHeatingCoil1,  tab=
           "Heating Coils and Rod"));
-  parameter SI.CoefficientOfHeatTransfer hConHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
                                                                             annotation(Dialog(enable=useHeatingCoil2,  tab=
           "Heating Coils and Rod"));
   parameter Boolean upToDownHC1 = true
@@ -57,9 +56,9 @@ model StorageDetailed
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStartWall=293.15
+  parameter Modelica.Units.SI.Temperature TStartWall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
-  parameter SI.Temperature TStartIns=293.15
+  parameter Modelica.Units.SI.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -324,11 +323,11 @@ model StorageDetailed
         rotation=270,
         origin={-56,-39})));
 
-  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
-  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
-  parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
   parameter Boolean allowFlowReversal_layers=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
