@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN50_H05_16 "50/0.5-16 PN 6/10 maximum volume flow 53.0 m^3/h"
+record Pump_DN50_H05_16 "50/0,5-16 PN 6/10 maximum volume flow 53.0 m^3/h"
   extends AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord(
             maxMinHeight=
             [0,15.8,0.4; 3,16,0.4; 6,16,0.3; 9,16,0.2;
@@ -13,10 +13,10 @@ record Pump_DN50_H05_16 "50/0.5-16 PN 6/10 maximum volume flow 53.0 m^3/h"
             cHQN=[ 0, 0, 1.31E-06;
                    0, 7.59E-06, 0;
                   -0.00316, 0, 0] "coefficients for H = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)",
-            cPQN=[-2.45477E+01, 2.82590E-01, -2.38897E-04, 1.27064E-07, -1.27494E-11;
+            cPQN=[-4E+01, 2.3E-01, -3.1E-04, 1.27064E-07, -1.27494E-11;
                    0, 0, 3.23573E-06, 0, 0;
                    0, 8.70834E-05, 0, 0, 0;
-                  -8.39000E-03, 0, 0, 0, 0] "coefficients for P = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)");
+                  -8.39000E-03, 0, 0, 0, 0] "coefficients for P = f(Q,N) inspired by Pump_DN50 and quick calibration by hand");
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
