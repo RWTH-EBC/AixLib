@@ -103,4 +103,6 @@ AixLib.Systems.HydraulicModules.Pump
 AixLib.Systems.HydraulicModules.Injection
 AixLib.Systems.HydraulicModules.Throttle
 AixLib.Systems.HydraulicModules.ThrottlePump
+AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialModularExpansionVavles
+AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve
  
