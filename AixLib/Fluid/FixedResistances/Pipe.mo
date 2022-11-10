@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -8,21 +8,23 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
 
    parameter Integer nParallel = 1 "Number of identical parallel pipes" annotation(Dialog(group = "Geometry"));
-   parameter Modelica.SIunits.Length length=1 "Length"
-                                           annotation(Dialog(group = "Geometry"));
+  parameter Modelica.Units.SI.Length length=1 "Length"
+    annotation (Dialog(group="Geometry"));
    parameter Boolean isCircular = true
     "=true if cross sectional area is circular"                                    annotation(Dialog(group = "Geometry"));
-   parameter Modelica.SIunits.Diameter diameter=parameterPipe.d_i
-   "Diameter of circular pipe"                                annotation(Dialog,   enable = isCircular);
-   parameter Modelica.SIunits.Area crossArea=Modelica.Constants.pi*
-      diameter*diameter/4 "Inner cross section area"                                                  annotation(Dialog(group = "Geometry"));
-   parameter Modelica.SIunits.Length perimeter=Modelica.Constants.pi*
-      diameter "Inner perimeter"                                                      annotation(Dialog(group = "Geometry"));
-   parameter Modelica.SIunits.Height roughness=2.5e-5
-    "Average height of surface asperities (default: smooth steel pipe)"                                 annotation(Dialog(group = "Geometry"));
+  parameter Modelica.Units.SI.Diameter diameter=parameterPipe.d_i
+    "Diameter of circular pipe" annotation (Dialog, enable=isCircular);
+  parameter Modelica.Units.SI.Area crossArea=Modelica.Constants.pi*diameter*
+      diameter/4 "Inner cross section area"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Length perimeter=Modelica.Constants.pi*diameter
+    "Inner perimeter" annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
+    "Average height of surface asperities (default: smooth steel pipe)"
+    annotation (Dialog(group="Geometry"));
 
-   parameter Modelica.SIunits.Length height_ab=0
-    "Height(port_b)-Height(port_a)"                                  annotation(Dialog(group = "Static head"));
+  parameter Modelica.Units.SI.Length height_ab=0
+    "Height(port_b)-Height(port_a)" annotation (Dialog(group="Static head"));
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
@@ -53,7 +55,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_i=1000
+    "Heat tranfer coefficient from fluid to pipe wall";
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
@@ -61,8 +64,9 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
       AixLib.DataBase.Pipes.Insulation.Iso50pc() "Insulation Type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=8 "Heat transfer coefficient to ambient"
-                                                                annotation (Dialog(tab="Heat transfer", enable=Heat_Loss_To_Ambient));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon=8
+    "Heat transfer coefficient to ambient"
+    annotation (Dialog(tab="Heat transfer", enable=Heat_Loss_To_Ambient));
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall[nNodes](
     rho=fill(parameterPipe.d, nNodes),
     c=fill(parameterPipe.c, nNodes),
@@ -83,7 +87,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     lambda=fill(parameterIso.lambda, nNodes),
     T0=fill(T_start, nNodes),
     rho=fill(parameterIso.d, nNodes),
-    each nParallel=nParallel) if              withInsulation
+    each nParallel=nParallel)              if withInsulation
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 
   Modelica.Fluid.Pipes.DynamicPipe pipe(
@@ -115,7 +119,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (                           alpha0=hCon_i))
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
+        (                                                                                                  alpha0=hCon_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -173,26 +178,26 @@ protected
 
 public
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=
-        Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
-       Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
+        Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel)
+    if Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,26})));
   AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=
-        Modelica.Constants.pi*Insulation.d_out*length/nNodes*nParallel) if
-                          (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
+        Modelica.Constants.pi*Insulation.d_out*length/nNodes*nParallel)
+                       if (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
-                                     Heat_Loss_To_Ambient and not isEmbedded "Radiation" annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel)
+                                  if Heat_Loss_To_Ambient and not isEmbedded "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-58,28})));
-parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
-                                      annotation (Dialog(tab="Heat transfer", enable = Heat_Loss_To_Ambient));
+  parameter Modelica.Units.SI.Emissivity eps=0.8 "Emissivity"
+    annotation (Dialog(tab="Heat transfer", enable=Heat_Loss_To_Ambient));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside annotation (Placement(transformation(extent={{26,72},
             {46,92}}),
         iconTransformation(extent={{6,46},{26,66}})));
@@ -203,8 +208,8 @@ parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
         origin={36,58})));
 
   AixLib.Utilities.Interfaces.RadPort Star if Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-70,74},{-50,94}}), iconTransformation(extent={{-24,46},{-4,66}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if
-                                     Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes)
+                                  if Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-60,58})));
 protected

@@ -2,24 +2,22 @@ within AixLib.DataBase.Walls;
 record WallBaseDataDefinition "Wall base data definition"
   extends Modelica.Icons.Record;
 
-  parameter Integer n(min = 1)
+  parameter Integer n(min = 1)=1
     "Number of wall layers"
     annotation(Dialog(tab = "Wall", group = "Wall parameters"));
-  parameter Modelica.SIunits.Length d[n]
-    "Thickness of wall layers"
-    annotation(Dialog(tab = "Wall", group = "Layer parameters"));
-  parameter Modelica.SIunits.Density rho[n]
-    "Density of wall layers"
-    annotation(Dialog(tab = "Wall", group = "Layer parameters"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n]
+  parameter Modelica.Units.SI.Length d[n] "Thickness of wall layers"
+    annotation (Dialog(tab="Wall", group="Layer parameters"));
+  parameter Modelica.Units.SI.Density rho[n] "Density of wall layers"
+    annotation (Dialog(tab="Wall", group="Layer parameters"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda[n]
     "Thermal conductivity of wall layers"
-    annotation(Dialog(tab = "Wall", group = "Wall parameters"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n]
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c[n]
     "Specific heat capacity of wall layers"
-    annotation(Dialog(tab = "Wall", group = "Wall parameters"));
-  parameter Modelica.SIunits.Emissivity eps = 0.95
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
+  parameter Modelica.Units.SI.Emissivity eps=0.95
     "Emissivity of inner wall surface"
-    annotation(Dialog(tab = "Wall", group = "Wall parameters"));
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
   annotation (
     defaultComponentPrefixes="parameter",
     Documentation(info = "<html><h4>

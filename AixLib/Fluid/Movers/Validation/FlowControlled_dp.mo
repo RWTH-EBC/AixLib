@@ -1,33 +1,33 @@
 within AixLib.Fluid.Movers.Validation;
- model FlowControlled_dp "Fan with zero mass flow rate and head as input"
-   extends Modelica.Icons.Example;
-  extends AixLib.Fluid.Movers.Validation.BaseClasses.FlowMachine_ZeroFlow(
-     gain(k=dp_nominal),
-     redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacSta(
-       redeclare package Medium = Medium,
-       m_flow_nominal=m_flow_nominal,
-       use_inputFilter=false,
-       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
-     redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacDyn(
-       redeclare package Medium = Medium,
-       m_flow_nominal=m_flow_nominal,
-       use_inputFilter=false,
-       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
- 
- equation
-   connect(gain.y, floMacSta.dp_in) annotation (Line(
-       points={{-25,100},{29.8,100},{29.8,92}},
-       color={0,0,127}));
-   connect(gain.y, floMacDyn.dp_in) annotation (Line(
-       points={{-25,100},{10,100},{10,30},{29.8,30},{29.8,12}},
-       color={0,0,127}));
-   annotation (
-     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
-             160}})),
- experiment(Tolerance=1e-06, StopTime=1.0),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dp.mos"
-         "Simulate and plot"),
-     Documentation(info="<html>
+model FlowControlled_dp "Fan with zero mass flow rate and head as input"
+  extends Modelica.Icons.Example;
+ extends AixLib.Fluid.Movers.Validation.BaseClasses.FlowMachine_ZeroFlow(
+    gain(k=dp_nominal),
+    redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacSta(
+      redeclare package Medium = Medium,
+      m_flow_nominal=m_flow_nominal,
+      use_inputFilter=false,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
+    redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacDyn(
+      redeclare package Medium = Medium,
+      m_flow_nominal=m_flow_nominal,
+      use_inputFilter=false,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
+
+equation
+  connect(gain.y, floMacSta.dp_in) annotation (Line(
+      points={{-25,100},{29.8,100},{29.8,92}},
+      color={0,0,127}));
+  connect(gain.y, floMacDyn.dp_in) annotation (Line(
+      points={{-25,100},{10,100},{10,30},{29.8,30},{29.8,12}},
+      color={0,0,127}));
+  annotation (
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
+            160}})),
+experiment(Tolerance=1e-06, StopTime=1.0),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dp.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
  <p>
  This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
  </p>
@@ -35,7 +35,7 @@ within AixLib.Fluid.Movers.Validation;
  The fans have been configured as steady-state models.
  This ensures that the actual speed is equal to the input signal.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 5, 2015, by Michael Wetter:<br/>
@@ -59,6 +59,6 @@ within AixLib.Fluid.Movers.Validation;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end FlowControlled_dp;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end FlowControlled_dp;

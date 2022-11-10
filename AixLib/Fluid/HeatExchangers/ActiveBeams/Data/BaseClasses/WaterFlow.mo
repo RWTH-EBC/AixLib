@@ -1,12 +1,12 @@
 within AixLib.Fluid.HeatExchangers.ActiveBeams.Data.BaseClasses;
- record WaterFlow "Record for water parameters"
-   extends Modelica.Icons.Record;
-   parameter Real r_V[:](each min=0, each final unit="1")
-     "Normalized water volume flow rate at user-selected operating points";
-   parameter Real f[size(r_V, 1)](each min=0, each unit="1")
-     "Normalized performance factor at these flow rates";
- 
-   annotation (Documentation(info="<html>
+record WaterFlow "Record for water parameters"
+  extends Modelica.Icons.Record;
+  parameter Real r_V[:](each min=0, each final unit="1")
+    "Normalized water volume flow rate at user-selected operating points";
+  parameter Real f[size(r_V, 1)](each min=0, each unit="1")
+    "Normalized performance factor at these flow rates";
+
+  annotation (Documentation(info="<html>
  <p>
  Data record for performance data that describe the water volume flow rate versus
  the change in the rate of heating or cooling.
@@ -18,7 +18,7 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.Data.BaseClasses;
  must have the same size.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  June 13, 2016, by Michael Wetter:<br/>
@@ -29,6 +29,6 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.Data.BaseClasses;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end WaterFlow;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end WaterFlow;

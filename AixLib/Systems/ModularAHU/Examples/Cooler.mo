@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Cooler "Cooler register example"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -64,7 +64,7 @@ model Cooler "Cooler register example"
     k=0.04,
     Ti=120,
     Td=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     reverseAction=false,
     useExternalTset=true,
     TflowSet=289.15,
@@ -100,7 +100,7 @@ equation
   </li>
 </ul>
 </html>"), experiment(StopTime=3600),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
         "Simulate and plot"));
 end Cooler;

@@ -4,10 +4,10 @@ partial model PartialFlowMassTransfer
   extends PartialMassTransfer;
 
   // Additional inputs provided to flow heat transfer model
-  input Modelica.SIunits.Velocity[n] vs
+  input Modelica.Units.SI.Velocity[n] vs
     "Mean velocities of fluid flow in segments";
 
-  input Modelica.SIunits.Length[n] lengths "Lengths along flow path";
+  input Modelica.Units.SI.Length[n] lengths "Lengths along flow path";
 
   annotation (Documentation(info="<html><p>
   Base class for mass transfer models of flow devices.

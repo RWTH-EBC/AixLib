@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -8,94 +8,98 @@ model GroundFloorBuildingEnvelope
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
+  replaceable package Medium = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
+
   //////////room geometry
-  parameter Modelica.SIunits.Length room_width=3.92
-    "width" annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.60 "height"
+  parameter Modelica.Units.SI.Length room_width=3.92 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length1=3.3
-    "l1 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length2=2.44 "l2 "
+  parameter Modelica.Units.SI.Height room_height=2.60 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length3=1.33 "l3 "
+  parameter Modelica.Units.SI.Length length1=3.3 "l1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length4=3.3
-    "l4 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length thickness_IWsimple=0.145
+  parameter Modelica.Units.SI.Length length2=2.44 "l2 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length3=1.33 "l3 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length4=3.3 "l4 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length thickness_IWsimple=0.145
     "thickness IWsimple "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
   //Windows and Doors
-  parameter Modelica.SIunits.Area windowarea_11=8.44 " Area Window11"
+  parameter Modelica.Units.SI.Area windowarea_11=8.44 " Area Window11"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_12=1.73 " Area Window12  "
+  parameter Modelica.Units.SI.Area windowarea_12=1.73 " Area Window12  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_22=1.73 " Area Window22"
+  parameter Modelica.Units.SI.Area windowarea_22=1.73 " Area Window22"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_41=1.4 " Area Window41  "
+  parameter Modelica.Units.SI.Area windowarea_41=1.4 " Area Window41  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_51=3.46 " Area Window51"
+  parameter Modelica.Units.SI.Area windowarea_51=3.46 " Area Window51"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_52=1.73 " Area Window52  "
+  parameter Modelica.Units.SI.Area windowarea_52=1.73 " Area Window52  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_width_31=1.01 "Width Door31"
+  parameter Modelica.Units.SI.Length door_width_31=1.01 "Width Door31"
     annotation (Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_height_31=2.25 "Height Door31  "
+  parameter Modelica.Units.SI.Length door_height_31=2.25 "Height Door31  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_width_42=1.25 "Width Door42"
+  parameter Modelica.Units.SI.Length door_width_42=1.25 "Width Door42"
     annotation (Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_height_42=2.25 "Height Door42  "
+  parameter Modelica.Units.SI.Length door_height_42=2.25 "Height Door42  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
 
   // Dynamic Ventilation
-  parameter Modelica.SIunits.Temperature Tset_Livingroom=295.15
+  parameter Modelica.Units.SI.Temperature Tset_Livingroom=295.15
     "Tset_livingroom" annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Hobby=295.15 "Tset_hobby"
+  parameter Modelica.Units.SI.Temperature Tset_Hobby=295.15 "Tset_hobby"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
+  parameter Modelica.Units.SI.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_WC=291.15 "Tset_WC" annotation (
+  parameter Modelica.Units.SI.Temperature Tset_WC=291.15 "Tset_WC" annotation (
       Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Kitchen=295.15 "Tset_kitchen"
+  parameter Modelica.Units.SI.Temperature Tset_Kitchen=295.15 "Tset_kitchen"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
@@ -146,7 +150,9 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Livingroom,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
+    final eps_door_OD2=epsOutDoors,
+    final nPorts=2,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(
     final denAir=denAir,
     final cAir=cAir,
@@ -190,7 +196,9 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Hobby,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{84,28},{46,76}})));
+    final eps_door_OD2=epsOutDoors,
+    final nPorts=2,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{84,28},{46,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 WC_Storage(
     final denAir=denAir,
     final cAir=cAir,
@@ -236,7 +244,9 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_WC,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
+    final eps_door_OD2=epsOutDoors,
+    final nPorts=2,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(
     final denAir=denAir,
     final cAir=cAir,
@@ -282,7 +292,9 @@ model GroundFloorBuildingEnvelope
     final Tset=Tset_Kitchen,
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
-    final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
+    final eps_door_OD2=epsOutDoors,
+    final nPorts=2,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Gr1Uf1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
@@ -324,7 +336,9 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    T0_air=T0_air)       annotation (Placement(transformation(extent={{82,-28},{42,10}})));
+    T0_air=T0_air,
+    final nPorts=2,
+    redeclare package Medium = Medium)       annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -340,10 +354,11 @@ model GroundFloorBuildingEnvelope
   Utilities.Interfaces.SolarRad_in West annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={110,-16})));
+        origin={110,-4})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
     annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
-  Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
+  Modelica.Blocks.Interfaces.RealInput AirExchangePort[5]
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-130,-18},{-100,12}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Livingroom
@@ -361,15 +376,29 @@ model GroundFloorBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
     "HeatPort to force a ground temperature for the ground level's floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-  Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[5] annotation (Placement(transformation(extent={{10,-8},{-10,8}},
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToCombHeaters[5]
+    annotation (Placement(transformation(
+        extent={{10,-8},{-10,8}},
         rotation=90,
         origin={0,-28})));
-  Utilities.Interfaces.ConvRadComb portConvRadRooms[5] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Utilities.Interfaces.ConvRadComb portConvRadRooms[5]
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Fluid.Interfaces.FluidPort_a portVent_in[5](redeclare final package
+      Medium = Medium) "Inlet for ventilation" annotation (Placement(
+        transformation(extent={{94,-78},{114,-58}}), iconTransformation(extent={
+            {94,-70},{108,-56}})));
+  Modelica.Fluid.Interfaces.FluidPort_b portVent_out[5](redeclare final package
+      Medium = Medium) "Outlet of Ventilation" annotation (Placement(
+        transformation(extent={{94,-94},{114,-74}}), iconTransformation(extent={
+            {94,-94},{108,-80}})));
 equation
-  connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-50.89,75.68},{-50.89,86},{90,86},{90,-16},{110,-16}},
+  connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-50.89,
+          75.68},{-50.89,82},{-12,82},{-12,78},{42,78},{42,84},{84,84},{84,86},{
+          90,86},{90,-4},{110,-4}},                       color={255,128,0}));
+  connect(Hobby.SolarRadiationPort_OW2, West) annotation (Line(points={{55.405,75.76},
+          {54,75.76},{54,84},{84,84},{84,86},{90,86},{90,-4},{110,-4}},
                                                           color={255,128,0}));
-  connect(Hobby.SolarRadiationPort_OW2, West) annotation (Line(points={{55.405,
-          75.76},{55.405,86},{90,86},{90,-16},{110,-16}}, color={255,128,0}));
   connect(Hobby.SolarRadiationPort_OW1, North) annotation (Line(points={{83.905,
           59.2},{90,59.2},{90,88},{110,88}}, color={255,128,0}));
   connect(Corridor.SolarRadiationPort_OW1, North) annotation (Line(points={{
@@ -442,10 +471,10 @@ equation
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-32},{90,-32},{90,100},{110,100},{110,110}},
                                                            color={191,0,0}));
   connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-9},{-115,-9}},
+        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-15},{-115,-15}},
         color={0,0,127}));
   connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,
-          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-6},{-115,-6}},color={
+          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-9},{-115,-9}},color={
           0,0,127}));
   connect(Kitchen.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.9,
           -61.6},{-90,-61.6},{-90,-92},{90,-92},{90,26},{110,26}}, color={255,
@@ -454,25 +483,25 @@ equation
       Line(points={{44,-10.9},{36,-10.9},{36,-92},{-34,-92},{-34,-48.8},{-46,-48.8}},
         color={191,0,0}));
 
-  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,13.92},
-          {-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-104}},
+  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,
+          13.92},{-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-108}},
                                                color={191,0,0}));
-  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{66.14,
-          26},{34,26},{34,-88},{0,-88},{0,-102}},
+  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{
+          66.14,26},{34,26},{34,-88},{0,-88},{0,-104}},
                                                color={191,0,0}));
   connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},{63.2,-34},{34,-34},{34,-88},{0,-88},{0,-100}},
                                         color={191,0,0}));
-  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,-37.44},
-          {64.14,-34},{34,-34},{34,-88},{0,-88},{0,-98}},
+  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,
+          -37.44},{64.14,-34},{34,-34},{34,-88},{0,-88},{0,-96}},
                                                 color={191,0,0}));
   connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
-          {-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-96}},
+          {-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-92}},
                                               color={191,0,0}));
   connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
   connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,
-          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,0},{-115,0}},                                                                                color={0,0,127}));
+          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}},                                                                                color={0,0,127}));
   connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,
-          -74.24},{-92,-74.24},{-92,3},{-115,3}},                                                                            color={0,0,127}));
+          -74.24},{-92,-74.24},{-92,9},{-115,9}},                                                                            color={0,0,127}));
   connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
   connect(Livingroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.48,44},{-58,44},{-58,30},{-16,30},{-16,-38},{-5,-38}}, color={0,0,0}));
   connect(Livingroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-65.08,44},{-66,44},{-66,26},{-20,26},{-20,-44},{5,-44},{5,-38}}, color={191,0,0}));
@@ -484,6 +513,38 @@ equation
   connect(WC_Storage.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{65.66,-60},{66,-60},{66,-44},{5,-44},{5,-38}}, color={191,0,0}));
   connect(Kitchen.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60,-52},{-60,-38},{-5,-38}}, color={0,0,0}));
   connect(Kitchen.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-44},{5,-44},{5,-38}}, color={191,0,0}));
+  connect(Livingroom.ports[1], portVent_in[1]) annotation (Line(points={{-65.355,
+          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,
+          -76}},
+        color={0,127,255}));
+  connect(Livingroom.ports[2], portVent_out[1]) annotation (Line(points={{-58.645,
+          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-92},{104,-92}},
+        color={0,127,255}));
+  connect(Hobby.ports[1], portVent_in[2]) annotation (Line(points={{67.8975,27.64},
+          {40,27.64},{40,28},{20,28},{20,-92},{94,-92},{94,-72},{104,-72}},
+        color={0,127,255}));
+  connect(Hobby.ports[2], portVent_out[2]) annotation (Line(points={{62.1025,27.64},
+          {20,27.64},{20,-92},{94,-92},{94,-84},{104,-84},{104,-88}},
+        color={0,127,255}));
+  connect(Corridor.ports[1], portVent_in[3]) annotation (Line(points={{65.05,-28.285},
+          {40,-28.285},{40,-28},{20,-28},{20,-92},{94,-92},{94,-68},{104,-68}},
+        color={0,127,255}));
+  connect(Corridor.ports[2], portVent_out[3]) annotation (Line(points={{58.95,-28.285},
+          {58.95,-32},{20,-32},{20,-92},{94,-92},{94,-84},{104,-84}},
+        color={0,127,255}));
+  connect(WC_Storage.ports[1], portVent_in[4]) annotation (Line(points={{65.8975,
+          -35.64},{62,-35.64},{62,-32},{20,-32},{20,-92},{94,-92},{94,-64},{104,
+          -64}},
+        color={0,127,255}));
+  connect(WC_Storage.ports[2], portVent_out[4]) annotation (Line(points={{60.1025,
+          -35.64},{60.1025,-32},{20,-32},{20,-92},{94,-92},{94,-80},{104,-80}},
+        color={0,127,255}));
+  connect(Kitchen.ports[1], portVent_in[5]) annotation (Line(points={{-67.05,-19.52},
+          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-60},{104,-60}},
+        color={0,127,255}));
+  connect(Kitchen.ports[2], portVent_out[5]) annotation (Line(points={{-60.95,-19.52},
+          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,-76}},
+        color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

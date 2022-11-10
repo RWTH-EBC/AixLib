@@ -2,15 +2,15 @@ within AixLib.Utilities.Interfaces;
 expandable connector ShortRadSurf
   "Expandable connector for short wave radiation for a surface inside a room"
   // Note: For this bus, the naming convention was not considered on purpose, as the convention is mainly for bus connectors used in controls.
-  Modelica.SIunits.Power Q_flow_ShoRadOnSur
+  Modelica.Units.SI.Power Q_flow_ShoRadOnSur
     "Short waved radiation from the room on to the inner surfaces";
-  Modelica.SIunits.Power Q_flow_ShoRadFroSur
+  Modelica.Units.SI.Power Q_flow_ShoRadFroSur
     "Short waved radiation from the inner surfaces to the room";
 
-  Modelica.SIunits.Length length "Length of surface"
-                                                annotation(HideResult=false);
-  Modelica.SIunits.Height height "Height of surface"
-                                                annotation(HideResult=false);
+  Modelica.Units.SI.Length length "Length of surface"
+    annotation (HideResult=false);
+  Modelica.Units.SI.Height height "Height of surface"
+    annotation (HideResult=false);
   Real solar_reflectance "Reflectivity of inner surface"
                                      annotation(HideResult=false);
   Real g "Transmissivity of inner surface"   annotation(HideResult=false);

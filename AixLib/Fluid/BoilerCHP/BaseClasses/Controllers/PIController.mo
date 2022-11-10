@@ -3,8 +3,7 @@ model PIController "Two coupled PI controllers for CHP control"
 
   parameter Real Kc
     "Gain of the controller";
-  parameter Modelica.SIunits.Time Tc
-    "Time constant (T>0 required)";
+  parameter Modelica.Units.SI.Time Tc "Time constant (T>0 required)";
   parameter Real minCapacity
     "Minimum controller output in load operation";
 

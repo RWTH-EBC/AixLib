@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1995.Ceiling;
+﻿within AixLib.DataBase.Walls.WSchV1995.Ceiling;
 record CEcellar_WSchV1995_SML_loHalf
   "Ceiling cellar after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht), lower half"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.02}

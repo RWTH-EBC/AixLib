@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookBuyerAgent
   extends BaseClasses.PartialAgent;
   parameter Real[:,1] knownSellers = [30001; 30002; 30003]
@@ -14,13 +14,13 @@ model BookBuyerAgent
   parameter Integer  sampleTime = 20
     "Period of time between two tries of the agent to buy the book";
 
-  Modelica.StateGraph.InitialStep waiting(nIn=4)
+  Modelica.StateGraph.InitialStep waiting(nIn=4, nOut=1)
     annotation (Placement(transformation(extent={{-166,-138},{-146,-118}})));
-  Modelica.StateGraph.Step composeRequest(nIn=3)
+  Modelica.StateGraph.Step composeRequest(nIn=3, nOut=1)
     annotation (Placement(transformation(extent={{-84,116},{-64,136}})));
-  Modelica.StateGraph.Step collectProposal(nOut=2)
+  Modelica.StateGraph.Step collectProposal(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{10,50},{30,70}})));
-  Modelica.StateGraph.Step composeBuy
+  Modelica.StateGraph.Step composeBuy(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-12,-66},{8,-46}})));
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-158,72},{-138,92}})));
@@ -31,7 +31,7 @@ model BookBuyerAgent
     annotation (Placement(transformation(extent={{-144,-18},{-124,2}})));
   Modelica.StateGraph.Transition transition(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{-44,116},{-24,136}})));
-  Modelica.StateGraph.Step check(nOut=2)
+  Modelica.StateGraph.Step check(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   Modelica.StateGraph.TransitionWithSignal newMessage
     annotation (Placement(transformation(extent={{90,116},{110,136}})));
@@ -43,16 +43,16 @@ model BookBuyerAgent
     annotation (Placement(transformation(extent={{58,50},{78,70}})));
   Modelica.StateGraph.TransitionWithSignal notDone(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{58,6},{78,26}})));
-  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-2,116},{18,136}})));
-  Modelica.StateGraph.StepWithSignal sendBuy(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendBuy(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{54,-66},{74,-46}})));
-  Modelica.StateGraph.Step check1(nOut=2)
+  Modelica.StateGraph.Step check1(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-72,-140},{-52,-120}})));
   Modelica.StateGraph.TransitionWithSignal confirmation(enableTimer=true,
       waitTime=0.1)
     annotation (Placement(transformation(extent={{0,-140},{20,-120}})));
-  Modelica.StateGraph.Step setDone(nOut=2)
+  Modelica.StateGraph.Step setDone(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{40,-140},{60,-120}})));
   Modelica.StateGraph.Transition transition1(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{22,-66},{42,-46}})));
@@ -90,7 +90,7 @@ model BookBuyerAgent
 
   inner Modelica.StateGraph.StateGraphRoot stateGraphRoot
     annotation (Placement(transformation(extent={{-140,180},{-120,200}})));
-  Modelica.StateGraph.Step stateOfOffers(nOut=2)
+  Modelica.StateGraph.Step stateOfOffers(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-68,-66},{-48,-46}})));
   Modelica.StateGraph.TransitionWithSignal transitionWithSignal1
     annotation (Placement(transformation(extent={{-40,-46},{-20,-66}})));
@@ -104,7 +104,8 @@ model BookBuyerAgent
   Modelica.StateGraph.Transition abortAction1(
                                             enableTimer=true, waitTime=15)
     annotation (Placement(transformation(extent={{90,-48},{110,-28}})));
-  Modelica.StateGraph.Step notServed(nIn=2) annotation (Placement(
+  Modelica.StateGraph.Step notServed(nIn=2, nOut=1)
+                                            annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,

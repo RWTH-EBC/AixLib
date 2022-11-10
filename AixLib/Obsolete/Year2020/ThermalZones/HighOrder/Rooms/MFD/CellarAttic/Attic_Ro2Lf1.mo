@@ -11,15 +11,30 @@ model Attic_Ro2Lf1
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
   // Room geometry
-  parameter Modelica.SIunits.Length room_length = 10.24 "length" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
-  parameter Modelica.SIunits.Length room_width = 17.01 "width" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
-  parameter Modelica.SIunits.Length roof_width1 = 5.7 "wRO1" annotation(Dialog(group = "Room geometry", absoluteWidth = 25, joinNext = true, descriptionLabel = true));
-  parameter Modelica.SIunits.Length roof_width2 = 5.7 "wRO2" annotation(Dialog(group = "Room geometry", absoluteWidth = 25, descriptionLabel = true));
-  parameter Modelica.SIunits.Angle alfa = Modelica.SIunits.Conversions.from_deg(120) "alfa" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_air = 283.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_RO1 = 282.15 "RO1" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_RO2 = 282.15 "RO2" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_FL = 284.15 "FL" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.Units.SI.Length room_length=10.24 "length"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length room_width=17.01 "width"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length roof_width1=5.7 "wRO1" annotation (Dialog(
+      group="Room geometry",
+      absoluteWidth=25,
+      joinNext=true,
+      descriptionLabel=true));
+  parameter Modelica.Units.SI.Length roof_width2=5.7 "wRO2" annotation (Dialog(
+      group="Room geometry",
+      absoluteWidth=25,
+      descriptionLabel=true));
+  parameter Modelica.Units.SI.Angle alfa=Modelica.Units.Conversions.from_deg(
+      120) "alfa"
+    annotation (Dialog(group="Room geometry", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_air=283.15 "Air"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_RO1=282.15 "RO1"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_RO2=282.15 "RO2"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_FL=284.15 "FL"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO = 0.25 "Solar absoptance roof " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
   parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
@@ -32,9 +47,19 @@ model Attic_Ro2Lf1
       radioButtons=true));
   // Windows and Doors
   parameter Boolean withWindow1 = false "Window 1 " annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
-  parameter Modelica.SIunits.Area windowarea_RO1 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow1));
+  parameter Modelica.Units.SI.Area windowarea_RO1=0 "Window area" annotation (
+      Dialog(
+      group="Windows and Doors",
+      naturalWidth=10,
+      descriptionLabel=true,
+      enable=withWindow1));
   parameter Boolean withWindow2 = false "Window 2 " annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
-  parameter Modelica.SIunits.Area windowarea_RO2 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow2));
+  parameter Modelica.Units.SI.Area windowarea_RO2=0 "Window area" annotation (
+      Dialog(
+      group="Windows and Doors",
+      naturalWidth=10,
+      descriptionLabel=true,
+      enable=withWindow2));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -42,12 +67,12 @@ model Attic_Ro2Lf1
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof1(
     withDoor=false,
     door_height=0,
@@ -136,7 +161,8 @@ protected
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_RO = if TIR == 1 then AixLib.DataBase.Walls.EnEV2009.Ceiling.ROsaddleAttic_EnEV2009_SML() else if TIR == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleAttic_EnEV2002_SML() else if TIR == 3 then AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleAttic_WSchV1995_SML() else AixLib.DataBase.Walls.WSchV1984.Ceiling.ROsaddleAttic_WSchV1984_SML() annotation(Dialog(tab = "Types"));
   //Window type
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
-  parameter Modelica.SIunits.Volume room_V = roof_width1 * roof_width2 * sin(alfa) * 0.5 * room_width;
+  parameter Modelica.Units.SI.Volume room_V=roof_width1*roof_width2*sin(alfa)*
+      0.5*room_width;
 equation
   // Connect-equation for ventilation/infiltration. If there are two windows, the ventilation rate is equally distributed between the two. the same with two door.
   // Be careful to set a given ventilation rate only for the windows, or for the doors, otherweise you will have double the ventilation rate.

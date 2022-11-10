@@ -9,9 +9,9 @@ model SimpleHeatTransfer
     Types.HeatTransferModels.Simplified
     "Choose heat transfer model"
     annotation (Dialog(tab="General",group="Heat transfer"));
-  parameter Modelica.SIunits.ThermalConductance kAMea = 25
+  parameter Modelica.Units.SI.ThermalConductance kAMea=25
     "Effective mean thermal conductance between medium and fictitious wall"
-    annotation (Dialog(tab="General",group="Heat transfer"));
+    annotation (Dialog(tab="General", group="Heat transfer"));
 
   // Extensions and parameter propagation
   //
@@ -25,10 +25,9 @@ model SimpleHeatTransfer
 
   // Definition of parameters describing advanced options
   //
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"),
-               HideResult=true);
+    annotation (Dialog(tab="Advanced"), HideResult=true);
 
   // Definition of submodels and connectors
   //
@@ -43,9 +42,9 @@ protected
   Medium.ThermodynamicState staOut
     "Thermodynamic state at outlet";
 
-  Modelica.SIunits.TemperatureDifference effTemDif
+  Modelica.Units.SI.TemperatureDifference effTemDif
     "Effective temperature difference between medium and wall";
-  Modelica.SIunits.Power Q_flow
+  Modelica.Units.SI.Power Q_flow
     "Heat flow exchanged between medium and heat port";
 
 

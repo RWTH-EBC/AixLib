@@ -4,7 +4,8 @@ model WindowSimple
   ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowSimple(
       windowarea=10,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 WindowType,
-    redeclare model CorrSolGain = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
+    redeclare model CorrSolGain =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
     annotation (Placement(transformation(extent={{-24,-4},{12,28}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 273.15) annotation(Placement(transformation(extent = {{-62, 0}, {-42, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{58, 0}, {38, 20}})));

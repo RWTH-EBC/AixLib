@@ -16,7 +16,7 @@ replaceable package Medium2 =
               X_a=0.40) "Propylene glycol water, 40% mass fraction")));
 
 
-  parameter Modelica.SIunits.Time tau=15
+  parameter Modelica.Units.SI.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
@@ -29,12 +29,12 @@ replaceable package Medium2 =
       V_flow={0},
       eta={0.7}) "Hydraulic efficiency of the fans" annotation (Dialog(group="Fans"));
 
-  parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 1
+  parameter  Modelica.Units.SI.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal = 1
     "Nominal mass flow rate in air canal";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = 0.5
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal = 0.5
     "Nominal mass flow rate in hydraulics";
-  parameter Modelica.SIunits.Temperature T_start=303.15
+  parameter Modelica.Units.SI.Temperature T_start=303.15
     "Initialization temperature" annotation(Dialog(tab="Advanced", group="Initialization"));
 
   parameter Boolean usePreheater = true "If true, a preaheater is used" annotation (choices(checkBox=true), Dialog(group="Preheater"));
@@ -81,8 +81,8 @@ replaceable package Medium2 =
     T_amb=T_amb,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
-    redeclare replaceable HydraulicModules.Admix hydraulicModule) if
-                    usePreheater "Preheating coil subsystem"
+    redeclare replaceable HydraulicModules.Admix hydraulicModule)
+                 if usePreheater "Preheating coil subsystem"
     annotation (Dialog(enable=usePreheater, group="Preheater"),Placement(transformation(extent={{-154,
             -46},{-110,14}})));
   RegisterModule cooler(
@@ -134,12 +134,12 @@ replaceable package Medium2 =
     annotation (Dialog(enable=true, group="Heat recovery heat exchanger"),Placement(transformation(extent={{-20,-14},
             {-60,54}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
-        Medium2) if     usePreheater
+        Medium2)     if usePreheater
     "Fluid connector a3 (positive design flow direction is from port_a3 to port_b3)"
     annotation (Placement(transformation(extent={{-170,-110},{-150,-90}}),
         iconTransformation(extent={{-170,-110},{-150,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare package Medium =
-        Medium2) if     usePreheater
+        Medium2)     if usePreheater
     "Fluid connector b3 (positive design flow direction is from port_a3 to port_b3)"
     annotation (Placement(transformation(extent={{-130,-110},{-110,-90}}),
         iconTransformation(extent={{-130,-110},{-110,-90}})));
@@ -198,7 +198,6 @@ replaceable package Medium2 =
   Fluid.Movers.FlowControlled_dp fanSup(
     redeclare package Medium = Medium1,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
@@ -209,7 +208,6 @@ replaceable package Medium2 =
   Fluid.Movers.FlowControlled_dp fanRet(
     redeclare package Medium = Medium1,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
@@ -226,21 +224,21 @@ replaceable package Medium2 =
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
-    T_start=T_start) if
-                       useHumidifier "Steam or adiabatic humdifier in supply canal"
+    T_start=T_start)
+                    if useHumidifier "Steam or adiabatic humdifier in supply canal"
     annotation (Dialog(enable=useHumidifier, group="Humidifiers"), Placement(transformation(extent={{130,-10},{150,10}})));
+
   Fluid.Humidifiers.GenericHumidifier_u humidifierRet(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
-    final steamHumidifier=false) if
-                              useHumidifierRet
+    final steamHumidifier=false)
+                           if useHumidifierRet
     "Adiabatic humidifier in retrun canal: cools inlet air of heat recovery system"
     annotation (Dialog(enable=useHumidifierRet, group="Humidifiers"), Placement(
         transformation(extent={{60,70},{40,90}})));
+
   Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
@@ -314,7 +312,7 @@ replaceable package Medium2 =
         origin={50,40})));
 
 
-  parameter Modelica.SIunits.PressureDifference dpDamper_nominal = 1
+  parameter Modelica.Units.SI.PressureDifference dpDamper_nominal = 1
     "Pressure drop of fully open dampers at nominal mass flow rate";
 protected
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
@@ -418,20 +416,20 @@ equation
     annotation (Line(points={{180,80},{160,80}}, color={0,127,255}));
   connect(senRelHumSup1.port_b, fanRet.port_a)
     annotation (Line(points={{118,80},{100,80}}, color={0,127,255}));
-  connect(fanRet.dp_in, genericAHUBus.dpFanRetSet) annotation (Line(points={{90,92},
+  connect(fanRet.dp_in, genericAHUBus.dpFanEtaSet) annotation (Line(points={{90,92},
           {90,120.09},{0.09,120.09}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanRet.dp_actual, genericAHUBus.dpFanRetMea) annotation (Line(points={{79,85},
+  connect(fanRet.dp_actual, genericAHUBus.dpFanEtaMea) annotation (Line(points={{79,85},
           {72,85},{72,120.09},{0.09,120.09}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanRet.P, genericAHUBus.powerFanRetMea) annotation (Line(points={{79,89},
-          {79,120.09},{0.09,120.09}}, color={0,0,127}), Text(
+  connect(fanRet.P, genericAHUBus.powerFanEtaMea) annotation (Line(points={{79,89},
+          {79,120},{0,120}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -460,7 +458,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senRelHumSup1.phi, genericAHUBus.relHumRetMea) annotation (Line(
+  connect(senRelHumSup1.phi, genericAHUBus.relHumEtaMea) annotation (Line(
         points={{123.94,86.6},{123.94,102},{124,102},{124,120},{0.09,120},{0.09,
           120.09}},                                                   color={0,0,
           127}), Text(
@@ -498,13 +496,13 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(flapRet.y, genericAHUBus.flapRetSet) annotation (Line(points={{190,92},
+  connect(flapRet.y, genericAHUBus.flapEtaSet) annotation (Line(points={{190,92},
           {190,120.09},{0.09,120.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(flapRet.y_actual, genericAHUBus.flapRetMea) annotation (Line(points={{185,87},
+  connect(flapRet.y_actual, genericAHUBus.flapEtaMea) annotation (Line(points={{185,87},
           {185,108},{184,108},{184,120},{92,120},{92,120.09},{0.09,120.09}},
                                                                    color={0,0,127}),
       Text(
@@ -541,7 +539,7 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senVolFlo.V_flow, genericAHUBus.V_flow_RetAirMea) annotation (Line(
+  connect(senVolFlo.V_flow, genericAHUBus.V_flow_EtaMea) annotation (Line(
         points={{-110,91},{-110,120.09},{0.09,120.09}},           color={0,0,127}),
       Text(
       string="%second",
@@ -604,8 +602,8 @@ equation
   connect(senTSup.T, PT1_airIn.u)
     annotation (Line(points={{206,8.8},{206,15.2}},
                                                   color={0,0,127}));
-  connect(PT1_airIn.y, genericAHUBus.TSupAirMea) annotation (Line(points={{206,
-          24.4},{206,52},{234,52},{234,120},{116,120},{116,120.09},{0.09,120.09}},
+  connect(PT1_airIn.y, genericAHUBus.TSupMea) annotation (Line(points={{206,24.4},
+          {206,52},{234,52},{234,120},{116,120},{116,120.09},{0.09,120.09}},
                                                         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -613,9 +611,8 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(senTOda.T, PT1_airIn1.u) annotation (Line(points={{-204,11},{-204,
           21.2},{-206,21.2}}, color={0,0,127}));
-  connect(PT1_airIn1.y, genericAHUBus.TOutsAirMea) annotation (Line(points={{-206,
-          30.4},{-206,52},{-242,52},{-242,120},{0.09,120},{0.09,120.09}},
-                                                                       color={0,
+  connect(PT1_airIn1.y, genericAHUBus.TOdaMea) annotation (Line(points={{-206,30.4},
+          {-206,52},{-242,52},{-242,120},{0.09,120},{0.09,120.09}},    color={0,
           0,127}), Text(
       string="%second",
       index=1,
@@ -623,16 +620,16 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(senTExh.T, PT1_airIn2.u) annotation (Line(points={{-150,91},{-150,
           101.2}},               color={0,0,127}));
-  connect(PT1_airIn2.y, genericAHUBus.TExhAirMea) annotation (Line(points={{-150,
-          110.4},{-150,120.09},{0.09,120.09}},      color={0,0,127}), Text(
+  connect(PT1_airIn2.y, genericAHUBus.TEhaMea) annotation (Line(points={{-150,110.4},
+          {-150,120.09},{0.09,120.09}},             color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(senTRet.T, PT1_airIn3.u) annotation (Line(points={{150,91},{150,97.2}},
                              color={0,0,127}));
-  connect(PT1_airIn3.y, genericAHUBus.TRetAirMea) annotation (Line(points={{150,
-          106.4},{150,120.09},{0.09,120.09}}, color={0,0,127}), Text(
+  connect(PT1_airIn3.y, genericAHUBus.TEtaMea) annotation (Line(points={{150,106.4},
+          {150,120.09},{0.09,120.09}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},

@@ -1,15 +1,15 @@
 within AixLib.Fluid.HeatExchangers.Validation;
- model PrescribedOutlet_dynamic
-   "Model that demonstrates the ideal heater/cooler model for a prescribed outlet temperature, configured as dynamic"
-   extends AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet(
-     heaHigPow(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
-     cooLimPow(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
-     heaCooUnl(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
-   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
-             -100},{200,200}}),                                                                    graphics),
-     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/PrescribedOutlet_dynamic.mos"
-         "Simulate and plot"),
-     Documentation(info="<html>
+model PrescribedOutlet_dynamic
+  "Model that demonstrates the ideal heater/cooler model for a prescribed outlet temperature, configured as dynamic"
+  extends AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet(
+    heaHigPow(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+    cooLimPow(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+    heaCooUnl(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
+            -100},{200,200}}),                                                                    graphics),
+    __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/PrescribedOutlet_dynamic.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
  <p>
  Model that demonstrates the use of an ideal heater and an ideal cooler, configured as dynamic models.
  </p>
@@ -21,7 +21,7 @@ within AixLib.Fluid.HeatExchangers.Validation;
  time constant of <i>60</i> seconds at nominal flow rate.
  At lower flow rate, the time constant increases proportional to the mass flow rate.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  October 21, 2014, by Michael Wetter:<br/>
@@ -29,8 +29,8 @@ within AixLib.Fluid.HeatExchangers.Validation;
  </li>
  </ul>
  </html>"),
-     experiment(
-       StopTime=1200,
-       Tolerance=1e-6), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end PrescribedOutlet_dynamic;
+    experiment(
+      StopTime=1200,
+      Tolerance=1e-6),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PrescribedOutlet_dynamic;

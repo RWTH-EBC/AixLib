@@ -6,34 +6,48 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.Units.SI.Diameter D1=1 "Inner tank diameter"
+    annotation (Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.Units.SI.Thickness sWall=0.1 "Thickness of wall"
+    annotation (Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.Units.SI.Thickness sIns=0.1 "Thickness of insulation"
+    annotation (Dialog(tab="Geometrical Parameters"));
 
-  parameter Modelica.SIunits.Area AWall=D1^2/4*Modelica.Constants.pi "Area" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.Units.SI.Area AWall=D1^2/4*Modelica.Constants.pi "Area"
+    annotation (Dialog(tab="Geometrical Parameters"));
 
-  parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
-    "Thermal Conductivity of wall" annotation(Dialog(group="Thermal properties"));
-    parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
-    "Thermal Conductivity of insulation" annotation(Dialog(group="Thermal properties"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Convective heat transfer coefficient water <-> wall" annotation(Dialog(group="Thermal properties"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Convective heat transfer coefficient insulation <-> air" annotation(Dialog(group="Thermal properties"));
-  parameter Modelica.SIunits.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K" annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K" annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.ThermalConductivity lambdaWall=50
+    "Thermal Conductivity of wall"
+    annotation (Dialog(group="Thermal properties"));
+  parameter Modelica.Units.SI.ThermalConductivity lambdaIns=0.045
+    "Thermal Conductivity of insulation"
+    annotation (Dialog(group="Thermal properties"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn=2
+    "Convective heat transfer coefficient water <-> wall"
+    annotation (Dialog(group="Thermal properties"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut=2
+    "Convective heat transfer coefficient insulation <-> air"
+    annotation (Dialog(group="Thermal properties"));
+  parameter Modelica.Units.SI.Temperature TStartWall=293.15
+    "Starting Temperature of wall in K"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature TStartIns=293.15
+    "Starting Temperature of insulation in K"
+    annotation (Dialog(tab="Initialization"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
     "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
-  parameter Modelica.SIunits.Density rhoIns=1600
-    "Density of insulation" annotation(Dialog(group="Material properties"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
-    "Specific heat capacity of insulation" annotation(Dialog(group="Material properties"));
-  parameter Modelica.SIunits.Density rhoWall=1600
-    "Density of Insulation" annotation(Dialog(group="Material properties"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
-    "Specific heat capacity of wall" annotation(Dialog(group="Material properties"));
+  parameter Modelica.Units.SI.Density rhoIns=1600 "Density of insulation"
+    annotation (Dialog(group="Material properties"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cIns=1000
+    "Specific heat capacity of insulation"
+    annotation (Dialog(group="Material properties"));
+  parameter Modelica.Units.SI.Density rhoWall=1600 "Density of Insulation"
+    annotation (Dialog(group="Material properties"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cWall=1000
+    "Specific heat capacity of wall"
+    annotation (Dialog(group="Material properties"));
 
   AixLib.Utilities.HeatTransfer.HeatConv convInside(final hCon=hConIn, final A=AWall)
                                                                           "Inside heat convection"

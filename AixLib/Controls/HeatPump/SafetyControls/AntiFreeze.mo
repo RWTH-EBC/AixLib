@@ -1,10 +1,10 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 model AntiFreeze "Model to prevent source from freezing"
   extends BaseClasses.PartialSafetyControl;
 
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of safety control" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TAntFre=276.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TAntFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(enable=use_antFre));
   parameter Real dTHys=2
@@ -15,8 +15,8 @@ model AntiFreeze "Model to prevent source from freezing"
   Modelica.Blocks.Logical.Hysteresis       hysteresis(
     final uLow=TAntFre,
     final pre_y_start=true,
-    final uHigh=TAntFre + dTHys) if
-       use_antFre
+    final uHigh=TAntFre + dTHys)
+    if use_antFre
     annotation (Placement(transformation(extent={{-62,-18},{-38,6}})));
                            //assume that the initial temperature is high enough.
   Modelica.Blocks.Math.Min min if use_antFre

@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP;
+﻿within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -7,13 +7,13 @@ model BoilerNoControl "Boiler model with physics only"
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
          "Boiler type"), choicesAllMatching=true);
-  parameter Modelica.SIunits.ThermalConductance G=0.003*Q_nom/50
+  parameter Modelica.Units.SI.ThermalConductance G=0.003*Q_nom/50
     "Constant thermal conductance to environment(G=Q_loss/dT)";
-  parameter Modelica.SIunits.HeatCapacity C=1.5*Q_nom
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*Q_nom
     "Heat capacity of metal (J/K)";
-  parameter Modelica.SIunits.Volume V=paramBoiler.volume "Volume";
+  parameter Modelica.Units.SI.Volume V=paramBoiler.volume "Volume";
 
-  parameter Modelica.SIunits.Power Q_nom=paramBoiler.Q_nom
+  parameter Modelica.Units.SI.Power Q_nom=paramBoiler.Q_nom
     "Nominal heating power";
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(
@@ -58,7 +58,7 @@ model BoilerNoControl "Boiler model with physics only"
       Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation(
           extent={{58,-60},{78,-40}})));
 
-  Modelica.Blocks.Tables.CombiTable1D efficiencyTableLoadDepending(
+  Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending(
     final tableOnFile=false,
     final table=etaLoadBased,
     final columns={2},
@@ -88,7 +88,7 @@ model BoilerNoControl "Boiler model with physics only"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={10,50})));
-  Modelica.Blocks.Tables.CombiTable1D efficiencyTableLoadDepending1(
+  Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending1(
     final tableOnFile=false,
     final table=etaTempBased,
     final columns={2},
