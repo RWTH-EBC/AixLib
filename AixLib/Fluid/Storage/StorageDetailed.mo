@@ -31,8 +31,8 @@ model StorageDetailed
 
   parameter Modelica.Units.SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.StorageDetailedBaseDataDefinition data
-    constrainedby DataBase.Storage.StorageDetailedBaseDataDefinition
+  replaceable parameter AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition data
+    constrainedby AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition
     "Data record for Storage" annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
