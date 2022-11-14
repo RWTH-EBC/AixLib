@@ -891,7 +891,15 @@ for i in 2:(n-1) loop
 </p>
 <p>
   <a href=
-  \"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a>
+  \"AixLib.Fluid.Storage.Examples.StorageDetailed\">AixLib.Fluid.Storage.Examples.StorageDetailed</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.StorageBoiler\">AixLib.Fluid.Storage.Examples.StorageBoiler</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.StorageSolarCollector\">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>
 </p>
 </html>"));
 end StorageDetailed;
