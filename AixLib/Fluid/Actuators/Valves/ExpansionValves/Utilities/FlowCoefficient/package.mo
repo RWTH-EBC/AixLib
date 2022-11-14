@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities;
 package FlowCoefficient "Package that contains models describing different flow coefficients"
   extends Modelica.Icons.Package;
 

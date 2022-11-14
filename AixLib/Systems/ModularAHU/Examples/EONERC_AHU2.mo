@@ -240,12 +240,16 @@ equation
       points={{-20,70.1},{0,70.1},{0,52.3}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=7200,Interval=15,Tolerance=1e-06), Documentation(revisions="<html>
-<ul>
-<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  annotation (experiment(StopTime=7200,Interval=15,Tolerance=1e-06), Documentation(revisions="<html><ul>
+  <li>October 29, 2019, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>", info="<html>
-<p>This example includes the GenericAHU model that is parameterized according to an existing air-handling unit of the EON.ERC test hall.</p>
+<p>
+  This example includes the GenericAHU model that is parameterized
+  according to an existing air-handling unit of the EON.ERC test hall.
+</p>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"

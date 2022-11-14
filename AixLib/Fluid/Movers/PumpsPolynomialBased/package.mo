@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers;
+within AixLib.Fluid.Movers;
 package PumpsPolynomialBased "Pump models with control block and new configuration approach"
 extends Modelica.Icons.Package;
 

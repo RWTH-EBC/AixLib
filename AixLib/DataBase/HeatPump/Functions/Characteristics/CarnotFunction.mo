@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.Functions.Characteristics;
+within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function CarnotFunction
   "Function to emulate the polynomal approach of the Carnot_y heat pump model"
   extends PartialBaseFct;
