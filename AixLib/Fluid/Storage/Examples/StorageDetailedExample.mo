@@ -94,6 +94,10 @@ equation
   mass flow with a higher temperature than the initial temperature.
 </p>
 <ul>
+  <li>November 14, 2022, by Laura Maier:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1223\">#1223</a>:
+    Parameter tuning and refactoring.
+  </li>
   <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>:
     Add one heating coil to example.

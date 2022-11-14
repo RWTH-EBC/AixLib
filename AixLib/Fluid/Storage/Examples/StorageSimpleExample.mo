@@ -269,5 +269,21 @@ equation
       Interval=900,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
-          __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos" "Simulate and plot"));
+          __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos" "Simulate and plot"),
+    Documentation(info="<html>
+    <p>
+    This is an example of the simple storage model with two hydronic circuits.<br/>
+    A heating rod indirectly supplies heat to the thermal energy storage.<br/>
+    A simplified consumer extracts heat from the consumer water circuit<br/>
+    based on a daily load profile.
+    </p>
+    </ul>
+    </html>",revisions="<html>
+  <ul>
+  <li>
+  <i>November 14 2022</i> by Laura Maier:<br/>
+  First implementation
+  </li>
+</ul>
+</html>"));
 end StorageSimpleExample;
