@@ -3,6 +3,7 @@ model StorageSimpleExample "Example model with simple storage"
   extends Modelica.Icons.Example;
   StorageSimple storageSimple(
     redeclare package Medium = Medium,
+    use_TOut=true,
     layer(each T(start=308.15,fixed=true)),
     layer_HE(each T(start=308.15,fixed=true)),
     n=3,
@@ -173,12 +174,6 @@ equation
     annotation (Line(points={{56,-45},{56,-30},{44,-30}}, color={0,127,255}));
   connect(simpleConsumer.port_b, pumpCon.port_a)
     annotation (Line(points={{62,-6},{62,-30},{44,-30}}, color={0,127,255}));
-  connect(storageSimple.TTopLayer, PIDHR.u_m) annotation (Line(points={{16.96,
-          19.36},{16.96,20},{38,20},{38,46},{-46,46},{-46,76.4}}, color={0,0,
-          127}));
-  connect(storageSimple.TTopLayer, storageHysteresis.u) annotation (Line(points={{16.96,
-          19.36},{38,19.36},{38,46},{-90,46},{-90,56.4},{-73.2,56.4}},
-        color={0,0,127}));
   connect(storageHysteresis.y, HROffOrPI.u2) annotation (Line(points={{-59.4,60},
           {-59.4,67},{-23,67}}, color={255,0,255}));
   connect(HROffOrPI.y, heatingRod.u) annotation (Line(points={{-11.5,67},{-8,67},
@@ -243,6 +238,11 @@ equation
           {1,22},{2,22},{2,36},{12,36}}, color={0,127,255}));
   connect(res1.port_b, senMasFlo_con.port_a) annotation (Line(points={{32,36},{
           36,36},{36,37},{40,37}}, color={0,127,255}));
+  connect(storageSimple.TLayer[3], PIDHR.u_m) annotation (Line(points={{19.165,
+          7.04},{26,7.04},{26,42},{-46,42},{-46,76.4}}, color={0,0,127}));
+  connect(storageSimple.TLayer[3], storageHysteresis.u) annotation (Line(points
+        ={{19.165,7.04},{24,7.04},{24,40},{-74,40},{-74,50},{-73.2,50},{-73.2,
+          56.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

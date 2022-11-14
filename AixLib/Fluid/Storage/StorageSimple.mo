@@ -105,54 +105,30 @@ model StorageSimple
     each final kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
 
-  Modelica.Blocks.Interfaces.RealOutput TTopLayer(
+  Modelica.Blocks.Interfaces.RealOutput TLayer[n](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
-        origin={-99,85},
-        extent={{5,5},{-5,-5}},
+        origin={-112,30},
+        extent={{12,12},{-12,-12}},
         rotation=0), iconTransformation(
-        extent={{5,5},{-5,-5}},
+        extent={{7.5,7.5},{-7.5,-7.5}},
         rotation=0,
-        origin={-76,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottomLayer(
+        origin={-86.5,29.5})));
+  Modelica.Blocks.Interfaces.RealOutput TLayer_HE[n](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     min=0,
-    displayUnit="degC") "Temperature in the bottom layer" annotation (Placement(
+    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
-        origin={-99,-83},
-        extent={{5,5},{-5,-5}},
+        origin={112,30},
+        extent={{-12,12},{12,-12}},
         rotation=0), iconTransformation(
-        extent={{5,5},{-5,-5}},
+        extent={{-7.5,7.5},{7.5,-7.5}},
         rotation=0,
-        origin={-76,-80})));
-  Modelica.Blocks.Interfaces.RealOutput TTopLayer_HE(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
-        transformation(
-        origin={97,71},
-        extent={{-5,5},{5,-5}},
-        rotation=0), iconTransformation(
-        extent={{-5,5},{5,-5}},
-        rotation=0,
-        origin={102,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottomLayer_HE(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
-        transformation(
-        origin={95,-69},
-        extent={{-5,5},{5,-5}},
-        rotation=0), iconTransformation(
-        extent={{-5,5},{5,-5}},
-        rotation=0,
-        origin={102,-80})));
+        origin={94.5,29.5})));
 protected
   parameter Modelica.Units.SI.Volume V = A * h;
   parameter Modelica.Units.SI.Area A = Modelica.Constants.pi * d ^ 2 / 4;
@@ -207,14 +183,15 @@ equation
 ///////////////////  connection of Temperature Sensor//////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-  TBottomLayer = layer[1].heatPort.T;
+  if use_TOut then
+    for k in 1:n loop
 
-  TTopLayer = layer[n].heatPort.T;
+      TLayer[k] = layer[k].heatPort.T;
 
-  TBottomLayer_HE = layer_HE[1].heatPort.T;
+      TLayer_HE[k] = layer_HE[k].heatPort.T;
 
-  TTopLayer_HE = layer_HE[n].heatPort.T;
-
+    end for;
+  end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},
             fillPattern = FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},
             fillPattern = FillPattern.Solid, origin = {78, -27}, rotation = 360), Rectangle(extent = {{-80, -71}, {80, 71}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {85, 170, 255},
@@ -269,8 +246,7 @@ equation
   <b><span style=\"color: #008000;\">Example Results</span></b>
 </p>
 <p>
-  <a href=
-  \"AixLib.Fluid.Storage.Examples.StorageSimpleExample\">AixLib.Fluid.Storage.Examples.StorageSimpleExample</a>
+  <a href=\"modelica://AixLib.Fluid.Storage.Examples.StorageSimpleExample\">AixLib.Fluid.Storage.Examples.StorageSimpleExample</a>
 </p>
 <ul>
   <li>
