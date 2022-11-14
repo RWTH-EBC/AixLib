@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.BaseClasses;
+within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
   parameter Boolean use_secHeaGen=false

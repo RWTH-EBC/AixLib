@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
+within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 block BoundaryMap
   "Block which returns false if the input parameters are out of the given charasteristic map.
 For the boundaries of the y-input value, a dynamic hysteresis is used to ensure a used device will stay off a certain time after shutdown."

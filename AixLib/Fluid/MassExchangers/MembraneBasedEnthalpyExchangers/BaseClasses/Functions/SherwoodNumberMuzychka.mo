@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function SherwoodNumberMuzychka
   "calculates sherwood number out of reynolds and prandtl number according to Muzychka et. al"
   input Real Re "Reynolds number";

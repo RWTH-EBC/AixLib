@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 package BaseClasses "Package with base classes for the HeatPump controller"
 
 annotation (Icon(graphics={
