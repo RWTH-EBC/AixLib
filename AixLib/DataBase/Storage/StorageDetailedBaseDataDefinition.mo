@@ -1,5 +1,5 @@
 within AixLib.DataBase.Storage;
-record BufferStorageBaseDataDefinition
+record StorageDetailedBaseDataDefinition
   "Base data definition for Buffer storage records"
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
@@ -17,9 +17,9 @@ record BufferStorageBaseDataDefinition
   parameter SI.Diameter dTank "Inner diameter of storage";
   parameter SI.Length sWall "Thickness of storage Wall";
   parameter SI.Length sIns "Thickness of storage insulation";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaWall
+  parameter SI.ThermalConductivity lambdaWall
     "thermal conductivity of storage wall";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaIns
+  parameter SI.ThermalConductivity lambdaIns
     "thermal conductivity of storage insulation";
   //parameter SI.CoefficientOfHeatTransfer alpha
     //"Coefficient of heat transfer air <-> insulation of tank";
@@ -38,8 +38,8 @@ record BufferStorageBaseDataDefinition
   parameter DataBase.Pipes.PipeBaseDataDefinition pipeHC2
     "Type of Pipe for HR2";
 
-  parameter Modelica.Units.SI.Length lengthHC1 "Length of Pipe for HR1";
-  parameter Modelica.Units.SI.Length lengthHC2 "Length of Pipe for HR2";
+  parameter SI.Length lengthHC1 "Length of Pipe for HR1";
+  parameter SI.Length lengthHC2 "Length of Pipe for HR2";
 
   annotation (Icon(graphics),               Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
@@ -72,4 +72,4 @@ record BufferStorageBaseDataDefinition
   </li>
 </ul>
 </html>"));
-end BufferStorageBaseDataDefinition;
+end StorageDetailedBaseDataDefinition;
