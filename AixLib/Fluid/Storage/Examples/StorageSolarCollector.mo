@@ -1,7 +1,6 @@
 within AixLib.Fluid.Storage.Examples;
 model StorageSolarCollector
   extends Modelica.Icons.Example;
-  import AixLib;
 
   replaceable package Medium = AixLib.Media.Water;
 

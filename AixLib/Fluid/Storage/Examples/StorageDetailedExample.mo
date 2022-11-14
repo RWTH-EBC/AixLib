@@ -2,7 +2,6 @@ within AixLib.Fluid.Storage.Examples;
 model StorageDetailedExample "Simple usage example for StorageDetailed"
 
   extends Modelica.Icons.Example;
-  import AixLib;
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;

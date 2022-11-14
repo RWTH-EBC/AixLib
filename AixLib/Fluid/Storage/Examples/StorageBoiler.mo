@@ -1,7 +1,6 @@
 within AixLib.Fluid.Storage.Examples;
 model StorageBoiler
   extends Modelica.Icons.Example;
-  import AixLib;
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
