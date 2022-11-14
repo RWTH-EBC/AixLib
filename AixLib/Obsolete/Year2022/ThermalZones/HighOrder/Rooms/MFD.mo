@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms;
+﻿within AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms;
 package MFD "Multiple Family Dweling"
   extends Modelica.Icons.Package;
 

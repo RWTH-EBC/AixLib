@@ -119,17 +119,18 @@ equation
   annotation (experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos" "Simulate and plot"),
     Documentation(
-    info="<html><p>
-  This is a simple example of a storage and an ideal heater.<br/>
-  The ideal heater has a constant supply temperature and supplies heat
-  to a thermal energy water storage.<br/>
-  The pressure boundary is an idealized consumer with a pressure ramp.
-</p>
-</html>",revisions="<html>
-<ul>
+    info="<html>
+    <p>
+    This is a simple example of a storage and an ideal heater.<br/> 
+    The ideal heater has a constant supply temperature and supplies heat to a thermal energy water storage.<br/> 
+    The pressure boundary is an idealized consumer with a pressure ramp.
+    </p>
+    </ul>
+    </html>",revisions="<html>
+  <ul>
   <li>
-    <i>November 14, 2022</i> by Laura Maier:<br/>
-    Added simulate and plot scripts, add docu and adapt parameters.
+  <i>November 14, 2022</i> by Laura Maier:<br/>
+  Added simulate and plot scripts, add docu and adapt parameters.
   </li>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>

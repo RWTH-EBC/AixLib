@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses;
 partial model BoilerBase
   "Base class containing the simple boiler model as peak load device"
   extends Interfaces.PartialTwoPort;

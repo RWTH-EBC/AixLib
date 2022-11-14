@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
   parameter Modelica.Units.SI.Volume VAir "Indoor air volume of building";

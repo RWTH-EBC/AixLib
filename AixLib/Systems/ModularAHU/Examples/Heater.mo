@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Heater "Heating register"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water

@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model IntermediateAgent
   extends BaseClasses.PartialAgent;
   parameter Integer broker = 10003 "Name of the corresponding broker-agent";

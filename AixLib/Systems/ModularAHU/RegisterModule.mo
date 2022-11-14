@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU;
+﻿within AixLib.Systems.ModularAHU;
 model RegisterModule "AHU register module for heaters and coolers"
     extends AixLib.Fluid.Interfaces.PartialFourPortParallel;
 

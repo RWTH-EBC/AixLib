@@ -1,4 +1,4 @@
-within AixLib.Utilities.Sensors;
+﻿within AixLib.Utilities.Sensors;
 model EnergyMeter
   "\"Integrates power [W] that is connected to input connector\""
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial

@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
   extends

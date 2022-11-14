@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump;
+﻿within AixLib.DataBase.HeatPump;
 record HeatPumpBaseDataDefinition "Basic heat pump data"
     extends Modelica.Icons.Record;
   parameter Real tableQdot_con[:,:] "Heating power table; T in degC; Q_flow in W";

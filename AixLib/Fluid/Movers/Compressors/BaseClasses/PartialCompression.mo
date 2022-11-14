@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.BaseClasses;
+﻿within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"

@@ -1,4 +1,4 @@
-within AixLib.Utilities.Tables;
+﻿within AixLib.Utilities.Tables;
 model CombiTable2DExtra
   "Altered CombiTable2D with the option to not extrapolate"
   extends Modelica.Blocks.Interfaces.SI2SO;

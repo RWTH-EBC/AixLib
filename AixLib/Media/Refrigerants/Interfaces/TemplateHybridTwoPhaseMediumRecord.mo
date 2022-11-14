@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.Interfaces;
+﻿within AixLib.Media.Refrigerants.Interfaces;
 partial package TemplateHybridTwoPhaseMediumRecord
   "Template for media models using a hybrid approach with records"
 

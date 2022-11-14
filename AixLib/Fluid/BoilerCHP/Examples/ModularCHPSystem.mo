@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+﻿within AixLib.Fluid.BoilerCHP.Examples;
 model ModularCHPSystem
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;

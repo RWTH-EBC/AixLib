@@ -1,4 +1,4 @@
-within AixLib.DataBase.Pumps.PumpPolynomialBased;
+﻿within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record Pump_DN65 "Pump with head 1 to 32m and 100m^3/h volume flow"
   extends PumpBaseRecord(
     maxMinHeight=[
