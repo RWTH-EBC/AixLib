@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.EnEV2009.OW;
+within AixLib.DataBase.Walls.EnEV2009.OW;
 record OW_EnEV2009_M
   "outer wall after EnEV 2009, for building of type M (mittel)"
   extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015}

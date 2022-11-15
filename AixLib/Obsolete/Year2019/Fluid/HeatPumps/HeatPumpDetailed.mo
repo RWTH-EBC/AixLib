@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2019.Fluid.HeatPumps;
+within AixLib.Obsolete.Year2019.Fluid.HeatPumps;
 model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

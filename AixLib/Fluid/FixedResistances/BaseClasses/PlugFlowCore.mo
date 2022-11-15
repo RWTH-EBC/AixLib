@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.BaseClasses;
+within AixLib.Fluid.FixedResistances.BaseClasses;
 model PlugFlowCore
   "Pipe model using spatialDistribution for temperature delay with modified delay tracker"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
@@ -272,8 +272,8 @@ equation
   Dynamic equation-based thermo-hydraulic pipe model for district
   heating and cooling systems.<br/>
   <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
-  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\" >doi:
-  10.1016/j.enconman.2017.08.072 </a>.
+  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
+  10.1016/j.enconman.2017.08.072</a> .
 </p>
 </html>"));
 end PlugFlowCore;

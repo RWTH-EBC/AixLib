@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Controller;
+within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottleVFlow
   "Volume Flow Set Point Controller for Throttles"
          Modelica.Blocks.Interfaces.RealInput vFlowAct

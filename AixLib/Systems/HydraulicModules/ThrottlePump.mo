@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model ThrottlePump "Throttle circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 

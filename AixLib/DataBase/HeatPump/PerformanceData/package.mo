@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump;
+within AixLib.DataBase.HeatPump;
 package PerformanceData "Different models used for a black box heat pump model"
 
 

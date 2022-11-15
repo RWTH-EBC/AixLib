@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2019.Fluid.HeatPumps.BaseClasses;
+within AixLib.Obsolete.Year2019.Fluid.HeatPumps.BaseClasses;
 model CycleHP
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   import      Modelica.Units.SI;

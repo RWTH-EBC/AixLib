@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Base model of FastHVAC Heat Pump"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 

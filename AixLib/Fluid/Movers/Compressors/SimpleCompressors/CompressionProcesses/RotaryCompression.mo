@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.SimpleCompressors.CompressionProcesses;
+within AixLib.Fluid.Movers.Compressors.SimpleCompressors.CompressionProcesses;
 model RotaryCompression
   "Model that describes the compression process of a rotary compressor"
   extends BaseClasses.PartialCompression;

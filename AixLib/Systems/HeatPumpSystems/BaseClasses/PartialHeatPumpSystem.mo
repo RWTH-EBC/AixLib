@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -64,7 +64,7 @@ partial model PartialHeatPumpSystem
       enable=use_conPum));
 
 //HeatPump Control
-  replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
+  replaceable model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
     constrainedby Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"

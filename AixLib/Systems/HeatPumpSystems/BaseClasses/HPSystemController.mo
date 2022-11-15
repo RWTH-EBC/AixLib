@@ -1,11 +1,11 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
 //HeatPump Control
-  replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
+  replaceable model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
     constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
 
   parameter Boolean use_tableData=true
@@ -152,6 +152,8 @@ model HPSystemController
       tab="Safety Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_con=4180
+    "specific heat capacity of condenser medium";
   Controls.HeatPump.SafetyControls.SafetyControl safetyControl(
     final use_minRunTime=use_minRunTime,
     final minRunTime(displayUnit="min") = minRunTime,
@@ -246,8 +248,7 @@ model HPSystemController
     use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_con=4180
-    "specific heat capacity of condenser medium";
+
   Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(
         extent={{-7,7},{7,-7}},

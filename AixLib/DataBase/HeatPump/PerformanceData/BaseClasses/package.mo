@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 package BaseClasses "Package with partial classes of Performance Data"
 annotation (Icon(graphics={
         Rectangle(
