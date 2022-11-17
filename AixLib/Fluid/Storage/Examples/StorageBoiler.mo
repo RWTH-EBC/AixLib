@@ -27,14 +27,13 @@ model StorageBoiler
     hConIn=1500,
     hConOut=15,
     redeclare package Medium = Medium,
-    hConHC1=300)                       annotation (Placement(transformation(extent={{6,-14},
-            {-18,16}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-56,-10},
-            {-36,10}})));
+    hConHC1=300) annotation (Placement(transformation(extent={{6,-14},{-18,16}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15)
+  annotation(Placement(transformation(extent={{-56,-10},{-36,10}})));
   AixLib.Fluid.Sources.Boundary_pT
-                     boundary_p(          redeclare package Medium = Medium,
-      nPorts=1)                 annotation(Placement(transformation(extent={{-48,46},
-            {-28,66}})));
+                     boundary_p(redeclare package Medium = Medium,
+								nPorts=1)
+								annotation(Placement(transformation(extent={{-48,46},{-28,66}})));
   Modelica.Blocks.Sources.Constant SetTemp(k=273.15 + 80) annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -49,19 +48,20 @@ model StorageBoiler
                                            hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
     diameter=0.05,
-    m_flow_nominal=0.001)                                                   annotation(Placement(transformation(extent={{46,-34},
+    m_flow_nominal=0.001) annotation(Placement(transformation(extent={{46,-34},
             {66,-14}})));
-  AixLib.Fluid.Sources.Boundary_ph
-                      boundary_ph1(use_p_in = true, h = 0.8e5,
+  AixLib.Fluid.Sources.Boundary_ph boundary_ph1(use_p_in = true,
+	h = 0.8e5,
     nPorts=1,
-    redeclare package Medium = Medium)                         annotation(Placement(transformation(extent={{-66,-44},
-            {-46,-24}})));
-  Modelica.Blocks.Sources.Ramp ramp(duration = 1000,               height = 0.00001e5,
-    offset=101325)                                                                     annotation(Placement(transformation(extent={{-96,-36},
-            {-76,-16}})));
+    redeclare package Medium = Medium)
+	annotation(Placement(transformation(extent={{-66,-44},{-46,-24}})));
+  Modelica.Blocks.Sources.Ramp ramp(duration = 1000,
+	height = 0.00001e5,
+    offset=101325) annotation(Placement(transformation(extent={{-96,-36},{-76,-16}})));
   AixLib.Fluid.Sources.Boundary_pT
-                      boundary_ph2(nPorts=1, redeclare package Medium = Medium)
-                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-38,34})));
+                      boundary_ph2(nPorts=1,
+					  redeclare package Medium = Medium)
+					  annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-38,34})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
