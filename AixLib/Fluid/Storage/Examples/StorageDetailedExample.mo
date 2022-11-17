@@ -36,8 +36,8 @@ model StorageDetailedExample "Simple usage example for StorageDetailed"
         rotation=180,
         origin={22,46})));
   AixLib.Fluid.Sources.Boundary_pT
-                      boundary_ph5(          redeclare package Medium = Medium,
-      nPorts=1)                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={12,-20})));
+                      boundary_ph5(redeclare package Medium = Medium,
+      nPorts=1) annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={12,-20})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary1(
     m_flow=0,
     redeclare package Medium = Medium,
@@ -69,12 +69,12 @@ model StorageDetailedExample "Simple usage example for StorageDetailed"
         origin={14,20})));
   AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph1(redeclare package Medium = Medium, nPorts=1)
-                                                     annotation(Placement(transformation(extent={{5,-5},{-5,5}},          rotation=0,     origin={13,7})));
+    annotation(Placement(transformation(extent={{5,-5},{-5,5}},rotation=0,origin={13,7})));
 equation
   connect(boundary.m_flow_in, const.y)
     annotation (Line(points={{34,38},{34,38},{51,38}}, color={0,0,127}));
   connect(boundary1.ports[1], bufferStorage.fluidportTop2) annotation (Line(points={{-34,46},
-          {-14,46},{-14,24.12},{-13.125,24.12}},                                                                                    color={0,127,255}));
+          {-14,46},{-14,24.12},{-13.125,24.12}},color={0,127,255}));
   connect(bufferStorage.fluidportTop1, boundary.ports[1]) annotation (Line(points={{-6.5,24.12},{-6.5,45.06},{12,45.06},{12,46}}, color={0,127,255}));
   connect(bufferStorage.fluidportBottom1, boundary_ph5.ports[1]) annotation (Line(points={{-6.625,-0.24},{-6.625,-20.12},{2,-20.12},{2,-20}}, color={0,127,255}));
   connect(boundary2.ports[1], bufferStorage.fluidportBottom2) annotation (Line(points={{-36,-20},{-14,-20},{-14,-0.12},{-12.875,-0.12}}, color={0,127,255}));
