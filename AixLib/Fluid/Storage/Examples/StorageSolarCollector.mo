@@ -143,13 +143,17 @@ equation
           -4},{-72,-8},{-70,-8}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime = 172800, Interval = 60),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos" "Simulate and plot"),
-  Documentation(info = "<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
+  Documentation(info = "<html>
+  <p>
   This is a simple example of a storage and a solar collector.
-</p>
-<ul>
+  </p>
+  </ul>
+  </html>",revisions="<html>
+  <ul>
+  <li>
+   <i>November 17, 2022</i> by Laura Maier:<br/>
+    Replace pump, polish example to make it more realistic, and add simulate and plot script.
+   </li>
   <li>
     <i>October 11, 2016</i> by Marcus Fuchs:<br/>
     Replace pipe
