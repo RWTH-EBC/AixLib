@@ -30,10 +30,8 @@ model StorageBoiler
     hConHC1=300) annotation (Placement(transformation(extent={{6,-14},{-18,16}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15)
   annotation(Placement(transformation(extent={{-56,-10},{-36,10}})));
-  AixLib.Fluid.Sources.Boundary_pT
-                     boundary_p(redeclare package Medium = Medium,
-								nPorts=1)
-								annotation(Placement(transformation(extent={{-48,46},{-28,66}})));
+  AixLib.Fluid.Sources.Boundary_pT boundary_p(redeclare package Medium = Medium,nPorts=1)
+	annotation(Placement(transformation(extent={{-48,46},{-28,66}})));
   Modelica.Blocks.Sources.Constant SetTemp(k=273.15 + 80) annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -44,8 +42,7 @@ model StorageBoiler
     m_flow_nominal=0.5,
     dp_nominal=200)
     annotation (Placement(transformation(extent={{18,-34},{38,-14}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance
-                                           hydraulicResistance(zeta = 1000,
+  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
     diameter=0.05,
     m_flow_nominal=0.001) annotation(Placement(transformation(extent={{46,-34},
@@ -58,8 +55,7 @@ model StorageBoiler
   Modelica.Blocks.Sources.Ramp ramp(duration = 1000,
 	height = 0.00001e5,
     offset=101325) annotation(Placement(transformation(extent={{-96,-36},{-76,-16}})));
-  AixLib.Fluid.Sources.Boundary_pT
-                      boundary_ph2(nPorts=1,
+  AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1,
 					  redeclare package Medium = Medium)
 					  annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-38,34})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe1(
@@ -78,10 +74,7 @@ model StorageBoiler
       m_flow_nominal=pipe1.m_flow_nominal,
     per(pressure(V_flow={0,pipe.m_flow_nominal/1000,pipe.m_flow_nominal/(1000*
             0.8)}, dp={dpSet.k/0.8,dpSet.k,0}), motorCooledByFluid=false))
-                                           annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=90,
-        origin={2,42})));
+		annotation (Placement(transformation(extent={{10,10},{-10,-10}},rotation=90,origin={2,42})));
   Modelica.Blocks.Sources.Constant dpSet(k=40000)
     "Constant set pressure difference for pump" annotation (Placement(
         transformation(
@@ -90,8 +83,8 @@ model StorageBoiler
         origin={37,27})));
 equation
   connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points={{38,-24},
-          {46,-24}},                                                                           color = {0, 127, 255}));
-  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-75,-26},{-68,-26}},      color = {0, 0, 127}));
+          {46,-24}},color = {0, 127, 255}));
+  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-75,-26},{-68,-26}},color = {0, 0, 127}));
   connect(boundary_ph1.ports[1], pipe1.port_a) annotation (Line(
       points={{-46,-34},{-36,-34}},
       color={0,127,255}));
