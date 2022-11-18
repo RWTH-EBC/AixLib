@@ -31,8 +31,8 @@ model StorageDetailed
 
   parameter Modelica.Units.SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.StorageDetailedBaseDataDefinition data
-    constrainedby DataBase.Storage.StorageDetailedBaseDataDefinition
+  replaceable parameter AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition data
+    constrainedby AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition
     "Data record for Storage" annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -776,6 +776,9 @@ for i in 2:(n-1) loop
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html><ul>
+  <li>November 14, 2022, by Laura Maier:<br/>
+  Add adapt name and do some spring cleaning
+  </li>
   <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     - <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br/>
@@ -891,7 +894,15 @@ for i in 2:(n-1) loop
 </p>
 <p>
   <a href=
-  \"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a>
+  \"AixLib.Fluid.Storage.Examples.StorageDetailed\">AixLib.Fluid.Storage.Examples.StorageDetailed</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.StorageBoiler\">AixLib.Fluid.Storage.Examples.StorageBoiler</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.StorageSolarCollector\">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>
 </p>
 </html>"));
 end StorageDetailed;

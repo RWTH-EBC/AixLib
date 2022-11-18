@@ -10,16 +10,44 @@ model StorageSimple
   parameter Modelica.Units.SI.Length d "storage diameter";
   parameter Modelica.Units.SI.Length h "storage height";
   parameter Modelica.Units.SI.ThermalConductivity lambda_ins
-    "thermal conductivity of insulation"                                                         annotation(Dialog(group = "Heat losses"));
+    "thermal conductivity of insulation"
+ annotation(Dialog(group = "Heat losses"));
   parameter Modelica.Units.SI.Length s_ins "thickness of insulation" annotation(Dialog(group = "Heat losses"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn "Iinternal heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut "External heat transfer coefficient"   annotation(Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn "Iinternal heat transfer coefficient"
+  annotation(Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut "External heat transfer coefficient"
+  annotation(Dialog(group="Heat losses"));
   parameter Modelica.Units.SI.Volume V_HE "heat exchanger volume" annotation(Dialog(group = "Heat exchanger"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_HE
-    "heat exchanger heat transfer coefficient"                                                         annotation(Dialog(group = "Heat exchanger"));
-  parameter Modelica.Units.SI.Area A_HE "heat exchanger area" annotation(Dialog(group = "Heat exchanger"));
-  parameter Modelica.Units.SI.RelativePressureCoefficient beta = 350e-6 annotation(Dialog(group = "Bouyancy"));
+    "heat exchanger heat transfer coefficient" annotation(Dialog(group = "Heat exchanger"));
+  parameter Modelica.Units.SI.Area A_HE "heat exchanger area"
+  annotation(Dialog(group = "Heat exchanger"));
+  parameter Modelica.Units.SI.RelativePressureCoefficient beta = 350e-6
+  annotation(Dialog(group = "Bouyancy"));
   parameter Real kappa = 0.4 annotation(Dialog(group = "Bouyancy"));
+
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer
+    "Nominal mass flow rate in layers";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE
+    "Nominal mass flow rate of heat exchanger layers";
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
+
+  //Initialization parameters
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
+    "Start value of temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure" annotation(Dialog(tab="Initialization"));
+
+  //Mass flow rates to regulate zero flow
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+   parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+
+   //Optional temperature outputs
+   parameter Boolean use_TOut = true "Use temperature real outputs";
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_consumer(redeclare final package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -108}, {10, -88}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
@@ -53,7 +81,7 @@ model StorageSimple
     each final V = V_HE / n,
     redeclare final package Medium = Medium,
     each final nPorts=2,
-    each final m_flow_nominal=m_flow_nominal_HE)               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
+    each final m_flow_nominal=m_flow_nominal_HE) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each final G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](final G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
@@ -76,81 +104,41 @@ model StorageSimple
     each final dx=dx,
     each final kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer
-    "Nominal mass flow rate in layers";
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE
-    "Nominal mass flow rate of heat exchanger layers";
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
-
-  //Initialization parameters
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation(Dialog(tab="Initialization"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure" annotation(Dialog(tab="Initialization"));
-
-  //Mass flow rates to regulate zero flow
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-   parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-
-  Modelica.Blocks.Interfaces.RealOutput TTopLayer(
+  Modelica.Blocks.Interfaces.RealOutput TLayer[n](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
-        origin={-99,85},
-        extent={{5,5},{-5,-5}},
+        origin={-112,30},
+        extent={{12,12},{-12,-12}},
         rotation=0), iconTransformation(
-        extent={{5,5},{-5,-5}},
+        extent={{7.5,7.5},{-7.5,-7.5}},
         rotation=0,
-        origin={-76,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottomLayer(
+        origin={-86.5,29.5})));
+  Modelica.Blocks.Interfaces.RealOutput TLayer_HE[n](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     min=0,
-    displayUnit="degC") "Temperature in the bottom layer" annotation (Placement(
+    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
-        origin={-99,-83},
-        extent={{5,5},{-5,-5}},
+        origin={112,30},
+        extent={{-12,12},{12,-12}},
         rotation=0), iconTransformation(
-        extent={{5,5},{-5,-5}},
+        extent={{-7.5,7.5},{7.5,-7.5}},
         rotation=0,
-        origin={-76,-80})));
-  Modelica.Blocks.Interfaces.RealOutput TTopLayer_HE(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
-        transformation(
-        origin={97,71},
-        extent={{-5,5},{5,-5}},
-        rotation=0), iconTransformation(
-        extent={{-5,5},{5,-5}},
-        rotation=0,
-        origin={102,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottomLayer_HE(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
-        transformation(
-        origin={95,-69},
-        extent={{-5,5},{5,-5}},
-        rotation=0), iconTransformation(
-        extent={{-5,5},{5,-5}},
-        rotation=0,
-        origin={102,-80})));
+        origin={94.5,29.5})));
 protected
   parameter Modelica.Units.SI.Volume V = A * h;
   parameter Modelica.Units.SI.Area A = Modelica.Constants.pi * d ^ 2 / 4;
   parameter Modelica.Units.SI.Length dx = V / A / n;
-  parameter Modelica.Units.SI.ThermalConductance G_middle=2*Modelica.Constants.pi*h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2))
-       + 1/(hConOut*(d/2 + s_ins)));
-  parameter Modelica.Units.SI.ThermalConductance G_top_bottom = G_middle + lambda_ins / s_ins * A;
+  parameter Modelica.Units.SI.ThermalConductance G_middle=
+  2*Modelica.Constants.pi*h/n/(1/(hConIn*d/2) + 1/lambda_ins*
+  log((d/2 + s_ins)/(d/2)) + 1/(hConOut*(d/2 + s_ins)));
+  parameter Modelica.Units.SI.ThermalConductance G_top_bottom=
+   G_middle + lambda_ins / s_ins * A;
+
 equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(
@@ -195,22 +183,23 @@ equation
 ///////////////////  connection of Temperature Sensor//////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-  TBottomLayer = layer[1].heatPort.T;
+  if use_TOut then
+    for k in 1:n loop
 
-  TTopLayer = layer[n].heatPort.T;
+      TLayer[k] = layer[k].heatPort.T;
 
-  TBottomLayer_HE = layer_HE[1].heatPort.T;
+      TLayer_HE[k] = layer_HE[k].heatPort.T;
 
-  TTopLayer_HE = layer_HE[n].heatPort.T;
-
+    end for;
+  end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -27}, rotation = 360), Rectangle(extent = {{-80, -71}, {80, 71}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {85, 170, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {4, 1}, rotation = 360), Polygon(points = {{-24, -67}, {-16, -67}, {-8, -67}, {4, -67}, {12, -67}, {36, -67}, {76, -67}, {110, -67}, {136, -67}, {136, 39}, {-24, 35}, {-24, -67}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {170, 213, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {-52, 33}, rotation = 360), Polygon(points = {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 170, 170},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {-37, 38}, rotation = 360), Polygon(points = {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 62, 62},
-            fillPattern =                                                                                                   FillPattern.Solid, origin = {4, 0}, rotation = 360), Rectangle(extent = {{-76, 100}, {84, -100}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info="<html><p>
+            fillPattern = FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},
+            fillPattern = FillPattern.Solid, origin = {78, -27}, rotation = 360), Rectangle(extent = {{-80, -71}, {80, 71}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {85, 170, 255},
+            fillPattern = FillPattern.Solid, origin = {4, 1}, rotation = 360), Polygon(points = {{-24, -67}, {-16, -67}, {-8, -67}, {4, -67}, {12, -67}, {36, -67}, {76, -67}, {110, -67}, {136, -67}, {136, 39}, {-24, 35}, {-24, -67}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {170, 213, 255},
+            fillPattern = FillPattern.Solid, origin = {-52, 33}, rotation = 360), Polygon(points = {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 170, 170},
+            fillPattern = FillPattern.Solid, origin = {-37, 38}, rotation = 360), Polygon(points = {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 62, 62},
+            fillPattern = FillPattern.Solid, origin = {4, 0}, rotation = 360), Rectangle(extent = {{-76, 100}, {84, -100}}, lineColor = {0, 0, 0},
+            lineThickness = 1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
 <p>
@@ -257,21 +246,13 @@ equation
   <b><span style=\"color: #008000;\">Example Results</span></b>
 </p>
 <p>
-  <a href=
-  \"AixLib.HVAC.Storage.Examples.StorageBoiler\">AixLib.HVAC.Storage.Examples.StorageBoiler</a>
-</p>
-<p>
-  <a href=
-  \"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a>
+  <a href=\"modelica://AixLib.Fluid.Storage.Examples.StorageSimpleExample\">AixLib.Fluid.Storage.Examples.StorageSimpleExample</a>
 </p>
 <ul>
-  <li>November 2022 by Laura Maier:
-  </li>
-  <li style=\"list-style: none; display: inline\">
-    <p>
+  <li>
+    <i>November 2022</i> by Laura Maier:<br/>
       Rename model and specify difference compared to detailed thermal
       energy storage model
-    </p>
   </li>
   <li>
     <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
