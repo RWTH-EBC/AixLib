@@ -63,17 +63,20 @@ model StorageSimple
     each final V = V / n,
     redeclare final package Medium = Medium,
     each final nPorts=2,
-    each final m_flow_nominal=m_flow_nominal_layer)      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
+    each final m_flow_nominal=m_flow_nominal_layer)
+		annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
-    "connect to ambient temperature around the storage"                                                            annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), iconTransformation(extent = {{-90, -10}, {-70, 10}})));
+    "connect to ambient temperature around the storage"
+		annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), 
+				   iconTransformation(extent = {{-90, -10}, {-70, 10}})));
   Modelica.Fluid.Interfaces.FluidPort_b
-                    port_b_heatGenerator(redeclare final package Medium = Medium)
-                                         annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
+    port_b_heatGenerator(redeclare final package Medium = Medium)
+		annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
   Modelica.Fluid.Interfaces.FluidPort_a
-                    port_a_heatGenerator(redeclare final package Medium = Medium)
-                                         annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
+    port_a_heatGenerator(redeclare final package Medium = Medium)
+        annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
   Fluid.MixingVolumes.MixingVolume
-                     layer_HE[n](
+    layer_HE[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
     each final T_start=T_start,
