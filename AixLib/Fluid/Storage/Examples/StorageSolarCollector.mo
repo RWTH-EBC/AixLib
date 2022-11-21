@@ -148,7 +148,7 @@ equation
   <p>
   This is a simple example of a storage and a solar collector.
   </p>
-  </ul>
+  <ul>
   </html>",revisions="<html>
   <ul>
   <li>
