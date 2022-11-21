@@ -118,7 +118,7 @@ equation
     The ideal heater has a constant supply temperature and supplies heat to a thermal energy water storage.<br/> 
     The pressure boundary is an idealized consumer with a pressure ramp.
     </p>
-    </ul>
+    <ul>
     </html>",revisions="<html>
   <ul>
   <li>
