@@ -142,5 +142,5 @@ package AixLib
           lineColor={128,128,128},
           extent={{-100.0,-100.0},{100.0,100.0}},
           radius=25.0),
-        Bitmap(extent={{-100,-100},{100,100}}, fileName="modelica://AixLib/Resources/Images/Icon_Modelica_Aixlib.png")}));
+        Bitmap(extent={{-74,-80},{78,80}}, fileName="modelica://AixLib/Resources/Images/Icon_Modelica_Aixlib.png")}));
 end AixLib;
