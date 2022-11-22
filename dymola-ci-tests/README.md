@@ -6,20 +6,23 @@ Typical actions are translating and linking the application parts, but in princi
 Usually, not only the entire system is rebuilt, but also automated tests are performed and software metrics are created to measure software quality. 
 The whole process is automatically triggered by checking into the version control system.
 
-## CI commands and ci [lists]
-- `git commit -m "ci_update_ref"` 			# Update referencefiles for all models that are added in file bin/08_interact_CI/update_ref.txt  
-- `git commit -m "ci_correct_html"`     	# CI bot message: correct html syntax
-- `git commit -m "ci_create_whitelist"` 	# create a new whitelist for the model check
-- `git commit -m "ci_create_html_whitelist"`# create a new html whitelist for the html check
-- `git commit -m "ci_simulate"` 	  		# Simulate all examples
-- `git commit -m "ci_check"` 		  		# Check all models
-- `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
-- `git commit -m "ci_html"` 				# Test only the html of models
-- `git commit -m " [skip ci]"` 			    # Skip the CI pipeline
+## CI commands  
+| CI Command     | Description      | 
+| :------------- | :-------------: | 
+| `git commit -m "ci_create_model_wh"`          | create a whitelist with models that failed the check job         | 
+| `git commit -m "ci_create_html_wh"`           | create a whitelist with models that should not go through the html check         | 
+| `git commit -m "ci_create_example_wh"`           | create a whitelist with models that failed the simulate job         |
+| `git commit -m "ci_simulate"`           | Simulate all examples         |
+| `git commit -m "ci_check"`           | Check all models         |
+| `git commit -m "ci_regression_test"`           | Start the regression test          |
+| `git commit -m "ci_html"`           | Test only the html of models         |
+| `git commit -m "ci_setting"`           | Test the CI settings         |
+| `git commit -m "ci_trigger_ibpsa"`           | trigger IBPSA merge         |
+| `git commit -m "ci_build_structure"`           | Build the CI structure         |
+| `git commit -m " <<comit>> [skip ci]`           | Skip the CI pipeline       |
 
 ## What CI Tests are implemented?
 ![AixLib-CI](Documentation/aixlib_ci_new.svg)
-
 
 - The first stage is an HTML-check, which validates and corrects the HTML-code inside the annotation section of each model.
 Any corrections are made via an automatically created new branch.
