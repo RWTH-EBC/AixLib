@@ -21,15 +21,14 @@ The whole process is automatically triggered by checking into the version contro
 ![AixLib-CI](Documentation/aixlib_ci_new.svg)
 
 
-The first stage is an HTML-check, which validates and corrects the HTML-code inside the annotation section of each model.
+- The first stage is an HTML-check, which validates and corrects the HTML-code inside the annotation section of each model.
 Any corrections are made via an automatically created new branch.
 The user can subsequently review and merge the branch independently.
-The Style-Check performs quality checks for each model using the Model Management Library of Dymola. Currently, this stage is allowed to fail for existing models, while new models will need to fulfill the requirements.
+- The Style-Check performs quality checks for each model using the Model Management Library of Dymola. Currently, this stage is allowed to fail for existing models, while new models will need to fulfill the requirements.
 The following three stages are performed for all packages separately for easier error tracking. 
-Check stage triggers triggers the Modelica Check function for all models. Any syntactic or logical errors (e.g. singularity of the system of equations) will cause this stage to fail. 
-Simulate performs a simulation for all examples of AixLib. These are found based on the Modelica.Icons.Example icon.
+- Check stage triggers triggers the Modelica Check function for all models. Any syntactic or logical errors (e.g. singularity of the system of equations) will cause this stage to fail. 
+- Simulate performs a simulation for all examples of AixLib. These are found based on the Modelica.Icons.Example icon.
 Any non-successful simulation will cause this stage to fall.
-
-
-Regressiontest is the final stage that verifies that the simulation results of models with existing reference results are in line with the prior results. The regressions are performed using the BuildingsPy library\footnote{\url{https://github.com/lbl-srg/BuildingsPy}}.
-Failed regression tests will trigger the preparation of dynamic plots and the deployment of an additional GitLab page, which will display the new and existing, i.e., reference, results based on Google Charts \footnote{\url{https://developers.google.com/chart}}.
+- Regressiontest is the final stage that verifies that the simulation results of models with existing reference results are in line with the prior results. 
+The regressions are performed using the [BuildingsPy library](https://github.com/lbl-srg/BuildingsPy).
+Failed regression tests will trigger the preparation of dynamic plots and the deployment of an additional GitLab page, which will display the new and existing, i.e., reference, results based on [Google Charts](https://developers.google.com/chart).
