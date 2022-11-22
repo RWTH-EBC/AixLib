@@ -145,6 +145,7 @@ equation
     <i>13.12.2013</i> by Sebastian Stinner:<br/>
     implemented
   </li>
+    </ul>
 </ul>
 </html>"));
 end StorageBoiler;
