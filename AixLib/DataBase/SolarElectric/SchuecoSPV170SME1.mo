@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.SolarElectric;
+within AixLib.DataBase.SolarElectric;
 record SchuecoSPV170SME1 "Schüco SPV 170 SME-1"
 
   extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(

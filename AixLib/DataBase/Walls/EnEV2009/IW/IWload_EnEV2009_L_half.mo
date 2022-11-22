@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.EnEV2009.IW;
+within AixLib.DataBase.Walls.EnEV2009.IW;
 record IWload_EnEV2009_L_half
   "Inner wall load-bearing after EnEV 2009, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases

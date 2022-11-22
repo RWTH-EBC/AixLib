@@ -249,13 +249,14 @@ equation
   <b><span style=\"color: #008000;\">Example Results</span></b>
 </p>
 <p>
-  <a href=\"modelica://AixLib.Fluid.Storage.Examples.StorageSimpleExample\">AixLib.Fluid.Storage.Examples.StorageSimpleExample</a>
+  <a href=
+  \"modelica://AixLib.Fluid.Storage.Examples.StorageSimpleExample\">AixLib.Fluid.Storage.Examples.StorageSimpleExample</a>
 </p>
 <ul>
   <li>
     <i>November 2022</i> by Laura Maier:<br/>
-      Rename model and specify difference compared to detailed thermal
-      energy storage model
+    Rename model and specify difference compared to detailed thermal
+    energy storage model
   </li>
   <li>
     <i>November 2014&#160;</i> by Marcus Fuchs:<br/>

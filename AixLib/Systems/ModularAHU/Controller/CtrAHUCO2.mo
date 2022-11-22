@@ -302,17 +302,42 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Control")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This control uses the heating and cooling register to regulate the supply air temperature. The set point of the supply air can be given either by the parameter <i>TFlowSet </i>or by the external input variable <i>Tset.</i> The preheater is used for frost protection and has a fixed set point of 5&deg;C. The heat recovery system is always used and the bypass closed. The supply and return air flaps are always open. </p>
-<p>The volume flow is controlled by PID controllers with two options: </p>
+    Documentation(info="<html><p>
+  This control uses the heating and cooling register to regulate the
+  supply air temperature. The set point of the supply air can be given
+  either by the parameter <i>TFlowSet</i> or by the external input
+  variable <i>Tset.</i> The preheater is used for frost protection and
+  has a fixed set point of 5°C. The heat recovery system is always used
+  and the bypass closed. The supply and return air flaps are always
+  open.
+</p>
+<p>
+  The volume flow is controlled by PID controllers with two options:
+</p>
 <ul>
-<li>useTwoFanCtr = False: the supply and return air fans are controlled by only one PID controller. Both fans get the same pressure setpoint. This option is recommended for closed systems where the supply air volume flow is equal to the return air volume flow. Without this option, only one fan could be active to provide volume flow.</li>
-<li>useTwoFanCtr = True: The supply air fan and the return air fan are controlled separately. Each controller aims to reach the volume flow set point for the supply or return air chanal. This option is recommended for open systems.</li>
+  <li>useTwoFanCtr = False: the supply and return air fans are
+  controlled by only one PID controller. Both fans get the same
+  pressure setpoint. This option is recommended for closed systems
+  where the supply air volume flow is equal to the return air volume
+  flow. Without this option, only one fan could be active to provide
+  volume flow.
+  </li>
+  <li>useTwoFanCtr = True: The supply air fan and the return air fan
+  are controlled separately. Each controller aims to reach the volume
+  flow set point for the supply or return air chanal. This option is
+  recommended for open systems.
+  </li>
 </ul>
-<p><br>The maximal volume flow can be limited by the maximal pressure difference of the fans <i>dpMax</i>.</p>
+<p>
+  <br/>
+  The maximal volume flow can be limited by the maximal pressure
+  difference of the fans <i>dpMax</i>.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  <li>October 29, 2019, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end CtrAHUCO2;
