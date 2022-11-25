@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -1045,11 +1045,10 @@ package UsersGuide "User's Guide"
   </caption>
 </table>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>January 1, 2021, by Konstantina Xanthopoulou:<br/>
-      Implemented
-    </li>
-  </ul>
+<ul>
+  <li>January 1, 2021, by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 

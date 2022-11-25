@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model VCLibMap
   "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapour Compression Library"
   extends BaseClasses.PartialPerformanceData;
@@ -215,13 +215,12 @@ equation
   The publications regarding this model are currenlty in review.
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>May 05, 2021&#160;</i> by Fabian Wüllhorst:<br/>
-      First implementation (see issue <a href=
-      \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>May 05, 2021&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
+  </li>
 </ul>
 </html>"));
 end VCLibMap;

@@ -1,4 +1,4 @@
-within AixLib.Controls.Interfaces;
+﻿within AixLib.Controls.Interfaces;
 expandable connector VapourCompressionMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
@@ -63,12 +63,11 @@ annotation (
   machines.
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>May 21, 2021, by Fabian Wüllhorst:<br/>
-      Refactor (see <a href=
-      \"https://github.com/RWTH-EBC/AixLib/issues/912\">issue 912</a>).
-    </li>
-  </ul>
+<ul>
+  <li>May 21, 2021, by Fabian Wüllhorst:<br/>
+    Refactor (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/912\">issue 912</a>).
+  </li>
 </ul>
 </html>"));
 end VapourCompressionMachineControlBus;

@@ -82,6 +82,8 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     HeaterOn=false,
     hCool=-1*Modelica.Constants.eps,
     lCool=-2*Modelica.Constants.eps,
+    heaLoadFacOut=Modelica.Constants.eps,
+    heaLoadFacGrd=Modelica.Constants.eps,
     KRCool=Modelica.Constants.eps,
     TNCool=Modelica.Constants.eps,
     CoolerOn=false,

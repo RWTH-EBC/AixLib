@@ -416,8 +416,7 @@ equation
 </p>
 <p>
   <img height=\"300\" src=
-  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\"
-  alt=\"1\">
+  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\">
 </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
   <tr>
@@ -540,7 +539,8 @@ equation
   \"https://www.esmagazine.com/ext/resources/images/WhitePapers/CBS-US-Whitepaper.pdf\">
   Link to PDF</a>.
 </p>
-</html>", revisions="<html><ul>
+</html>", revisions="<html>
+<ul>
   <li>October 28, 2021, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1151\">#1151</a>
     Added model to library.

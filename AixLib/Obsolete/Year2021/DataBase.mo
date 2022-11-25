@@ -24,16 +24,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end SymphonyEnergySE6M181;
@@ -60,16 +59,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end SchuecoSME1;
@@ -102,16 +100,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end PVBaseRecord;
@@ -139,16 +136,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end CanadianSolarCS6P250P;
@@ -176,16 +172,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end AleoS24;
@@ -212,16 +207,15 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>October 11, 2016</i> by Tobias Blacha:<br/>
-      Moved into AixLib
-    </li>
-    <li>
-      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-      Added documentation and formatted appropriately
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
     end ACSPanelSystem;

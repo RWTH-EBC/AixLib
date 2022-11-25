@@ -1,4 +1,3 @@
-
 within AixLib.Airflow.Multizone.Validation;
 model ThreeRoomsContamDiscretizedDoor
   "Model with three rooms for the validation of the multizone air exchange models"
@@ -79,5 +78,3 @@ experiment(Tolerance=1e-06, StopTime=3600),
  </html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end ThreeRoomsContamDiscretizedDoor;
-
-
