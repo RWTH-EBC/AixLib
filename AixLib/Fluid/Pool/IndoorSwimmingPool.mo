@@ -543,33 +543,81 @@ operation"),
           textString="Water treatment 
 circuit
 ")}),
-Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Model for indoor swimming pools to calculate energy and water demands. Optional use of a wave machine, pool cover, partial load for the circulation pump and heat recovery from wastewater or recycling. In addition, an ideal heater can be used to heat the pool. </p>
-<p><br><br><img src=\"modelica://AixLib/Resources/Images/Fluid/Pools/PoolAndWaterCuircut.png\"/> </p>
-
-<p><b><span style=\"color: #008000;\">Important parameters and Inputs</span></b> </p>
+Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Model for indoor swimming pools to calculate energy and water
+  demands. Optional use of a wave machine, pool cover, partial load for
+  the circulation pump and heat recovery from wastewater or recycling.
+  In addition, an ideal heater can be used to heat the pool.
+</p>
+<p>
+  <br/>
+  <br/>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/Pools/PoolAndWaterCuircut.png\"
+  alt=\"1\">
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Important parameters and
+  Inputs</span></b>
+</p>
 <ul>
-<li>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a> record.</li>
-<li>openingHours: Input profile for the opening hours to consider a pool cover or a reduced circulation flow during non-operating hours. Also, during non-opening hours pool occupancy is set to 0. </li>
-<li>persons: Input profile for occupancy of the pool to consider occupancy level for evaportaion. </li>
+  <li>All pool specific parameters are collected in one <a href=
+  \"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a>
+  record.
+  </li>
+  <li>openingHours: Input profile for the opening hours to consider a
+  pool cover or a reduced circulation flow during non-operating hours.
+  Also, during non-opening hours pool occupancy is set to 0.
+  </li>
+  <li>persons: Input profile for occupancy of the pool to consider
+  occupancy level for evaportaion.
+  </li>
 </ul>
-
-<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<p>
+  <b><span style=\"color: #008000;\">Assumptions</span></b>
+</p>
 <ul>
-<li>Evaporation is determined according to VDI 2089.</li>
-<li>Filter and disinfection units are not explicitly modeled and have to be considered within the pump delivery head (pumpHead). According to Saunus 1.7 bar is a good estimation for swimming pools in sport oriented swimming facilities.</li>
-<li>The type of the filter should be taken into account within the determination of the volume flow and storage capacities. DIN 19643 provides standards for the volume flow and storage capacities, taking into account the pool size and type as well as the filter type.</li>
-<li>There are no water losses or heat gains due to people entering or leaving the swimming pool.</li>
+  <li>Evaporation is determined according to VDI 2089.
+  </li>
+  <li>Filter and disinfection units are not explicitly modeled and have
+  to be considered within the pump delivery head (pumpHead). According
+  to Saunus 1.7 bar is a good estimation for swimming pools in sport
+  oriented swimming facilities.
+  </li>
+  <li>The type of the filter should be taken into account within the
+  determination of the volume flow and storage capacities. DIN 19643
+  provides standards for the volume flow and storage capacities, taking
+  into account the pool size and type as well as the filter type.
+  </li>
+  <li>There are no water losses or heat gains due to people entering or
+  leaving the swimming pool.
+  </li>
 </ul>
-
-<p><b><span style=\"color: #008000;\">References</span></b>
-<p>For automatic generation of a swimming pool within a thermal zone and multizone model as well as for datasets, see https://github.com/RWTH-EBC/TEASER 
-<p>References for implemented constants (use also for parametrization): 
+<p>
+  <b><span style=\"color: #008000;\">References</span></b>
+</p>
+<p>
+  For automatic generation of a swimming pool within a thermal zone and
+  multizone model as well as for datasets, see
+  https://github.com/RWTH-EBC/TEASER
+</p>
+<p>
+  References for implemented constants (use also for parametrization):
+</p>
 <ul>
-<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
-<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
-<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+  <li>German Association of Engineers: Guideline VDI 2089-1, January
+  2010: Building Services in swimming baths - Indoor Pools
+  </li>
+  <li>German Institute for Standardization DIN 19643-1, November 2012:
+  Treatment of water of swimming pools and baths - Part 1 General
+  Requirements
+  </li>
+  <li>Chroistoph Saunus, 2005: Schwimmbäder Planung - Ausführung -
+  Betrieb
+  </li>
 </ul>
 </html>"));
 end IndoorSwimmingPool;
