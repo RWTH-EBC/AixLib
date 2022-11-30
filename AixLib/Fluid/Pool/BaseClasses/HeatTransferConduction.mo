@@ -1,13 +1,14 @@
 within AixLib.Fluid.Pool.BaseClasses;
 model HeatTransferConduction
   "Heat transfer due to conduction through pool walls"
-  parameter Modelica.Units.SI.Area AInnerPoolWall;
-  parameter Modelica.Units.SI.Area APoolWallWithEarthContact;
-  parameter Modelica.Units.SI.Area APoolFloorWithEarthContact;
-  parameter Modelica.Units.SI.Area AInnerPoolFloor;
 
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal;
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical;
+  parameter Modelica.Units.SI.Area AWalInt "Area of pool walls which is connected to inner rooms (inner pool walls)";
+  parameter Modelica.Units.SI.Area AWalExt "Area of pool walls which is connected to the ground (pool wall with earth contact)";
+  parameter Modelica.Units.SI.Area AFloInt "Area of pool floors which is connected to inner rooms (inner pool floor)";
+  parameter Modelica.Units.SI.Area AFloExt "Area of pool floors which is connected to teh ground (pool floor with earth contact)";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
+
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature HeatFlowOuter
     "Generate Heat Flow for earth contact" annotation (Placement(transformation(
@@ -26,13 +27,13 @@ model HeatTransferConduction
 
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     InnerPoolFloor(
-    A=AInnerPoolFloor,
-   wallRec=PoolWall,
+    A=AFloInt,
+    wallRec=PoolWall,
     T_start=fill((0), (PoolWall.n)))
              annotation (Placement(transformation(extent={{-10,-34},{18,-10}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalInner(
     hCon_const=hConWaterHorizontal,
-    A=AInnerPoolFloor,
+    A=AFloInt,
     calcMethod=3,
     surfaceOrientation=1)
                   annotation (Placement(transformation(
@@ -41,7 +42,7 @@ model HeatTransferConduction
         rotation=180)));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterVerticalOuter(
     hCon_const=hConWaterVertical,
-    A=APoolWallWithEarthContact,
+    A=AWalExt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
         origin={-54,40},
@@ -49,13 +50,13 @@ model HeatTransferConduction
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     PoolWallWithEarthContact(
-    A=APoolWallWithEarthContact,
+    A=AWalExt,
     wallRec=PoolWall,
     T_start=fill((0), (PoolWall.n)))
              annotation (Placement(transformation(extent={{-6,26},{22,54}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalOuter(
     hCon_const=hConWaterHorizontal,
-    A=APoolFloorWithEarthContact,
+    A=AFloExt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
         origin={-52,-60},
@@ -63,7 +64,7 @@ model HeatTransferConduction
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     PoolFloorWithEarthContact(
-    A=APoolFloorWithEarthContact,
+    A=AFloExt,
     wallRec=PoolWall,
     T_start=fill((0), (PoolWall.n)))
              annotation (Placement(transformation(extent={{-10,-72},{14,-50}})));
@@ -75,7 +76,7 @@ model HeatTransferConduction
         origin={44,12})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     InnerPoolWall(
-    A=AInnerPoolWall,
+    A=AWalInt,
     wallRec=PoolWall,
     T_start=fill((0), (PoolWall.n)))
              annotation (Placement(transformation(extent={{-6,64},{22,92}})));
@@ -84,7 +85,7 @@ model HeatTransferConduction
     annotation (Placement(transformation(extent={{96,2},{76,22}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterVerticalInner(
     hCon_const=hConWaterVertical,
-    A=AInnerPoolWall,
+    A=AWalInt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
         origin={-54,78},
@@ -153,6 +154,6 @@ equation
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model is a base model to calculate the heat transfer through pool walls. The pool walls are sorted by: vertical walls with earth contact, pool floor with earth contact and the sum of walls and pool floor without earth contact.</p>
+    <p>This model is a base model to calculate the heat transfer through pool walls. The pool walls are  divided in: vertical walls without earth contact, vertical walls with earth contact, pool floor without earth contact, pool floor with earth contact.</p>
 </html>"));
 end HeatTransferConduction;

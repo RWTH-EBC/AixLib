@@ -1,13 +1,20 @@
 within AixLib.Fluid.Pool.BaseClasses;
 model waveMachine "Calculate energy demands of a wave machine"
 
-  parameter Modelica.Units.SI.Length h_wave "Height of generated wave";
-  parameter Modelica.Units.SI.Length w_wave
-    "Width of wave machine outlet/of generated wave";
-  parameter Modelica.Units.SI.Time wavePool_startTime
+
+
+
+  parameter Modelica.Units.SI.Length heightWave "Height of generated wave";
+  parameter Modelica.Units.SI.Length widthWave
+    "Width of generated wave/ width of wave machineoutlet";
+  parameter Modelica.Units.SI.Time timeWavePul_start
     "Start time of first wave cycle";
-  parameter Modelica.Units.SI.Time wavePool_period "Time of cycling period";
-  parameter Real wavePool_width "Length of wave generation within cycling period";
+  parameter Modelica.Units.SI.Time periodeWavePul "Time of cycling period";
+  parameter Real widthWavePul "Fraction of time of wave generation within cycling period";
+
+
+
+
 
   Modelica.Blocks.Math.RealToBoolean useWavePool(threshold=1)
     "If input = 1, then true, else no waves generated"
@@ -19,7 +26,7 @@ model waveMachine "Calculate energy demands of a wave machine"
     extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
     "Estimate consumed power per width to generate wave of a certain heigth; "
     annotation (Placement(transformation(extent={{-46,50},{-26,70}})));
-  Modelica.Blocks.Sources.RealExpression get_h_wave(y=h_wave)
+  Modelica.Blocks.Sources.RealExpression get_heightWave(y=heightWave)
     "Get height of generated wave"
     annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
   Modelica.Blocks.Interfaces.RealInput open "Input profil of wave machine"
@@ -27,7 +34,7 @@ model waveMachine "Calculate energy demands of a wave machine"
   Modelica.Blocks.Interfaces.RealOutput PWaveMachine( final unit="W", final quantity="Power")
     "Power consumption of wave machine"
     annotation (Placement(transformation(extent={{96,-10},{116,10}})));
-  Modelica.Blocks.Math.Gain multiply(k=w_wave) "Multply by width of wave"
+  Modelica.Blocks.Math.Gain multiply(k=widthWave) "Multply by width of wave"
     annotation (Placement(transformation(extent={{0,52},{16,68}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
     "no output if wave machine is off"
@@ -37,12 +44,12 @@ model waveMachine "Calculate energy demands of a wave machine"
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Modelica.Blocks.Sources.BooleanPulse wavePoolCycle(
-    width=wavePool_width,
-    period=wavePool_period,
-    startTime=wavePool_startTime)
+    width=widthWavePul,
+    period=periodeWavePul,
+    startTime=timeWavePul_start)
     annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
 equation
-  connect(get_h_wave.y, tablePWave.u[1]) annotation (Line(points={{-69,60},{-48,
+  connect(get_heightWave.y, tablePWave.u[1]) annotation (Line(points={{-69,60},{-48,
           60}},                  color={0,0,127}));
   connect(multiply.u, tablePWave.y[1]) annotation (Line(points={{-1.6,60},{-25,60}},
                               color={0,0,127}));

@@ -2,14 +2,14 @@ within AixLib.DataBase.Pools;
 record IndoorSwimmingPoolBaseRecord
   extends Modelica.Icons.Record;
 
-  parameter Modelica.Units.SI.Temperature T_pool
+  parameter Modelica.Units.SI.Temperature TPool
     "Set water temperature of swimming pool";
-  parameter Modelica.Units.SI.Volume V_pool "Volume of pool water";
-  parameter Modelica.Units.SI.Area A_pool(min=0)
+  parameter Modelica.Units.SI.Volume VPool "Volume of pool water";
+  parameter Modelica.Units.SI.Area APool(min=0)
     "Area of water surface of swimming pool";
-  parameter Modelica.Units.SI.Length d_pool(min=0)
+  parameter Modelica.Units.SI.Length depthPool(min=0)
     "Average depth of swimming pool";
-  parameter Modelica.Units.SI.Volume V_storage
+  parameter Modelica.Units.SI.Volume VStorage
     "Usable Volume of water storage, DIN 19643-1";
 
   // parameter for pool water circulation
@@ -18,12 +18,16 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.Units.SI.VolumeFlowRate V_flow_partial(min=0)
     "In the case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for non opening hours?";
-  parameter Boolean use_idealHeater=true "Include an ideal heat exchanger into the circulation system";
-  parameter Modelica.Units.SI.PressureDifference dpHeatExchangerPool
+  parameter Modelica.Units.SI.PressureDifference dpHeaExcPool
     "Pressure drop of heat exchanger, should be zero for an indeal heated pool";
+  parameter Boolean use_idealHeater=true "Include an ideal heat exchanger into the circulation system";
+  parameter Real KHeat "Gain of controller for ideal heater";
+  parameter Modelica.Units.SI.Time THeat "Time constant of Integrator block for ideal heater";
+  parameter Real QMaxHeat "Upper limit of output for ideal heater";
+  parameter Real QMinHeat "Lower limit of output for ideal heater";
 
   // parameter for evaporation
-  parameter Real beta_inUse(unit="m/s") "Water transfer coefficient during opening hours if pool is used, VDI 2089";
+  parameter Real betaInUse(unit="m/s") "Water transfer coefficient during opening hours if pool is used, VDI 2089";
   parameter Boolean use_poolCover=false "Pool covered during non opening hours";
 
   // parameter for fresh water
@@ -32,26 +36,26 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.Units.SI.MassFlowRate m_flow_out(min=0.0001)
     "Waterexchange due to people in the pool, DIN 19643-1";
   parameter Boolean use_HRS=false "Is a heat recovery system physically integrated?";
-  parameter Modelica.Units.SI.Efficiency efficiencyHRS
+  parameter Modelica.Units.SI.Efficiency etaHRS
     "Effieciency of heat recovery system";
 
  // Wave mode
   parameter Boolean use_wavePool=false "Is there a wave machine installed?";
-  parameter Modelica.Units.SI.Length h_wave "Height of generatedwave";
-  parameter Modelica.Units.SI.Length w_wave
-    "Width of generated wave/ width of wave machine outlet";
-  parameter Modelica.Units.SI.Time wavePool_startTime
+  parameter Modelica.Units.SI.Length heightWave "Height of generated wave";
+  parameter Modelica.Units.SI.Length widthWave
+    "Width of generated wave/ width of wave machineoutlet";
+  parameter Modelica.Units.SI.Time timeWavePul_start
     "Start time of first wave cycle";
-  parameter Modelica.Units.SI.Time wavePool_period "Time of cycling period";
-  parameter Real wavePool_width "Length of wave generation within cycling period";
+  parameter Modelica.Units.SI.Time periodeWavePul "Time of cycling period";
+  parameter Real widthWavePul "Fraction of time of wave generation within cycling period";
 
  // Pool Walls
-  parameter Modelica.Units.SI.Area AInnerPoolWall;
-  parameter Modelica.Units.SI.Area APoolWallWithEarthContact;
-  parameter Modelica.Units.SI.Area APoolFloorWithEarthContact;
-  parameter Modelica.Units.SI.Area AInnerPoolFloor;
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal;
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical;
+  parameter Modelica.Units.SI.Area AWalInt "Area of pool walls which is connected to inner rooms (inner pool walls)";
+  parameter Modelica.Units.SI.Area AWalExt "Area of pool walls which is connected to the ground (pool wall with earth contact)";
+  parameter Modelica.Units.SI.Area AFloInt "Area of pool floors which is connected to inner rooms (inner pool floor)";
+  parameter Modelica.Units.SI.Area AFloExt "Area of pool floors which is connected to teh ground (pool floor with earth contact)";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
   //replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     PoolWallParam constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition

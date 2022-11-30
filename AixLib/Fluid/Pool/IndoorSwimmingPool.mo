@@ -6,14 +6,14 @@ model IndoorSwimmingPool
   replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   // Water transfer coefficients according to VDI 2089 Blatt 1
-  parameter Real beta_nonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
-  parameter Real beta_cover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
-                                                                                                      annotation (Dialog(group="Water transfer coefficients"));
-  parameter Real beta_wavePool(unit="m/s")=50/3600 "Water transfer coefficient during wavePool operation"
-                                                                                                         annotation (Dialog(group="Water transfer coefficients"));
+  parameter Real betaNonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
+  parameter Real betaCover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
+                                                                                                     annotation (Dialog(group="Water transfer coefficients"));
+  parameter Real betaWavePool(unit="m/s")=50/3600 "Water transfer coefficient during wavePool operation"
+                                                                                                        annotation (Dialog(group="Water transfer coefficients"));
 
   // Parameter and variables for evaporation
-  constant Modelica.Units.SI.SpecificHeatCapacity R_D=461.52
+  constant Modelica.Units.SI.SpecificHeatCapacity RD=461.52
     "Specific gas constant for steam";                                // Source: Klaus Lucas, Thermodynamik (2008)
   final parameter Modelica.Units.SI.SpecificEnergy h_vapor=
       AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.TPool)
@@ -23,7 +23,7 @@ model IndoorSwimmingPool
   Modelica.Units.SI.Pressure psat_TPool=
   Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
       poolWater.T) "Saturation pressure at pool temperature";
-  Modelica.Units.SI.Pressure psat_T_Air=
+  Modelica.Units.SI.Pressure psat_TAir=
       Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
       TAir) "Saturation pressure at air temperature";
   Real phi "Relative humidity";
@@ -43,16 +43,16 @@ model IndoorSwimmingPool
      "Actual circulation mass flow rate to the pool";
 
   // Fresh water and water recycling
-  final parameter Modelica.Units.SI.Efficiency eps=if poolParam.use_HRS then
-      poolParam.efficiencyHRS else 0;
+  final parameter Modelica.Units.SI.Efficiency eta=if poolParam.use_HRS then
+      poolParam.etaHRS else 0;
   Modelica.Units.SI.MassFlowRate m_flow_freshWater(start=0.0)
   "Mass flow of fresh water supplied to pool circulation system";
 
   // Convection and Radiation at pool water surface
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpha_Air=3.5
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConvAir=3.5
     "Coefficient of heat transfer between the water surface and the room air";
     // approximated for free and forced convection at velocities between 0,05 to 0,2 m/s  above a plane area
-  parameter Real epsilon = 0.9*0.95
+  parameter Real eps = 0.9*0.95
     "Product of expected emission coefficients of water (0.95) and the surrounding wall surfaces (0.95)";
 
   AixLib.Fluid.MixingVolumes.MixingVolume Storage(
@@ -181,7 +181,7 @@ model IndoorSwimmingPool
       origin={30,100})));
 
   Modelica.Thermal.HeatTransfer.Components.BodyRadiation radWaterSurface(
-  final Gr=epsilon*poolParam.APool)
+  final Gr=eps*poolParam.APool)
   "Model to depict the heat flow rate due to radiation between the pool surface an the surrounding walls" annotation (Placement(transformation(
       extent={{-7,-7},{7,7}},
       rotation=90,
@@ -193,7 +193,7 @@ model IndoorSwimmingPool
       rotation=90,
       origin={67,75})));
 
-  Modelica.Blocks.Sources.RealExpression getHeatCoefConv(y=alpha_Air*poolParam.APool)
+  Modelica.Blocks.Sources.RealExpression getHeatCoefConv(y=hConvAir*poolParam.APool)
     "Coefficient of heat transfer between water surface and room air" annotation (Placement(transformation(extent={{100,66},
             {82,84}})));
 
@@ -213,10 +213,10 @@ model IndoorSwimmingPool
         iconTransformation(extent={{98,-102},{118,-82}})));
 
   AixLib.Fluid.Pool.BaseClasses.HeatTransferConduction heatTransferConduction(
-    AInnerPoolWall=poolParam.AInnerPoolWall,
-    APoolWallWithEarthContact=poolParam.APoolWallWithEarthContact,
-    APoolFloorWithEarthContact=poolParam.APoolFloorWithEarthContact,
-    AInnerPoolFloor=poolParam.AInnerPoolFloor,
+    AWalInt=poolParam.AWalInt,
+    AWalExt=poolParam.AWalExt,
+    AFloInt=poolParam.AFloInt,
+    AFloExt=poolParam.AFloExt,
     hConWaterHorizontal=poolParam.hConWaterHorizontal,
     hConWaterVertical=poolParam.hConWaterVertical,
     PoolWall=poolParam.PoolWallParam)
@@ -282,11 +282,11 @@ model IndoorSwimmingPool
     if poolParam.use_idealHeater
     annotation (Placement(transformation(extent={{48,-20},{32,-4}})));
   Controls.Continuous.LimPID        PI(
-    k=poolParam.k_idealHeater,
-    yMax=poolParam.QMax_idealHeater,
-    yMin=poolParam.QMin_idealHeater,
+    k=poolParam.KHeat,
+    yMax=poolParam.QMaxHeat,
+    yMin=poolParam.QMinHeat,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=poolParam.Ti_idealHeater) if poolParam.use_idealHeater                                                                                                                                                                  annotation(Placement(transformation(extent={{-4,-4},
+    Ti=poolParam.THeat) if poolParam.use_idealHeater                                                                                                                                                                  annotation(Placement(transformation(extent={{-4,-4},
             {4,4}},
         rotation=180,
         origin={66,-16})));
@@ -325,7 +325,7 @@ model IndoorSwimmingPool
     m_flow_nominal=m_flow_nominal,
     show_T=false,
     from_dp=false,
-    dp_nominal=pumpHead - poolParam.dpHeatExchangerPool,
+    dp_nominal=pumpHead - poolParam.dpHeaExcPool,
     homotopyInitialization=true,
     linearized=false,
     deltaM=0.3)
@@ -352,21 +352,21 @@ equation
 
   // Evaporation according to VDI 2089 sheet 1, formula (1)
    phi=absToRelHum.relHum;
-   if psat_TPool-phi*psat_T_Air<0 then
+   if psat_TPool-phi*psat_TAir<0 then
      m_flow_evap=0.0;
    else
     if openingHours > 0 then
       if persons > 0 then
-         m_flow_evap =persons*(poolParam.beta_inUse/(R_D*0.5*(poolWater.T +
-          TAir))*(psat_TPool - phi*psat_T_Air)*poolParam.APool);
+         m_flow_evap =persons*(poolParam.betaInUse/(RD*0.5*(poolWater.T +
+          TAir))*(psat_TPool - phi*psat_TAir)*poolParam.APool);
        else
-         m_flow_evap = beta_nonUse /(R_D*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_T_Air)*poolParam.APool;
+         m_flow_evap = betaNonUse /(RD*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_TAir)*poolParam.APool;
        end if;
      else
        if poolParam.use_poolCover then
-         m_flow_evap = beta_cover /(R_D*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_T_Air)*poolParam.APool;
+         m_flow_evap = betaCover /(RD*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_TAir)*poolParam.APool;
        else
-         m_flow_evap = beta_nonUse /(R_D*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_T_Air)*poolParam.APool;
+         m_flow_evap = betaNonUse /(RD*0.5*(poolWater.T + TAir))*(psat_TPool-phi*psat_TAir)*poolParam.APool;
        end if;
      end if;
    end if;
