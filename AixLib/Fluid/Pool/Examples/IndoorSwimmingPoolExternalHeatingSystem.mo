@@ -1,21 +1,17 @@
 within AixLib.Fluid.Pool.Examples;
 model IndoorSwimmingPoolExternalHeatingSystem
     extends Modelica.Icons.Example;
-  Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater
-    "Flow rate of added fresh water to the pool and water treatment system"
-    annotation (Placement(transformation(extent={{98,-100},{126,-72}}),
-        iconTransformation(extent={{98,-100},{126,-72}})));
   .AixLib.Fluid.Pool.IndoorSwimmingPool indoorSwimming(poolParam=
         AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(
         use_idealHeater=false), redeclare package WaterMedium = WaterMedium)
-    annotation (Placement(transformation(extent={{-60,-36},{8,38}})));
+    annotation (Placement(transformation(extent={{-32,-38},{16,28}})));
 
     replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.RealExpression TSoil(y=273.15 + 8)
     annotation (Placement(transformation(extent={{74,80},{58,96}})));
   Modelica.Blocks.Sources.RealExpression X_W(y=14.3/1000)
-    annotation (Placement(transformation(extent={{-86,54},{-70,70}})));
+    annotation (Placement(transformation(extent={{-88,48},{-72,64}})));
   Modelica.Blocks.Sources.RealExpression T_Air(y=273.15 + 30)
     annotation (Placement(transformation(extent={{-86,72},{-70,88}})));
   Modelica.Blocks.Sources.Pulse Opening(
@@ -34,19 +30,9 @@ model IndoorSwimmingPoolExternalHeatingSystem
     offset=0.3,
     startTime=7*3600)
     annotation (Placement(transformation(extent={{-94,-8},{-80,6}})));
-  Modelica.Blocks.Interfaces.RealOutput QEvap annotation (Placement(
-        transformation(extent={{-86,16},{-118,48}}), iconTransformation(extent={
-            {-86,16},{-118,48}})));
-  Modelica.Blocks.Interfaces.RealOutput PPool
-    "Output eletric energy needed for pool operation" annotation (Placement(
-        transformation(extent={{98,-78},{124,-52}}),iconTransformation(extent={{98,-78},
-            {124,-52}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-16,74},{-4,86}})));
-  Modelica.Blocks.Interfaces.RealOutput TPool "Value of Real output"
-    annotation (Placement(transformation(extent={{98,58},{122,82}}),
-        iconTransformation(extent={{98,58},{122,82}})));
   Controls.Continuous.LimPID        PI(
     k=1000,
     yMax=10000000,
@@ -55,13 +41,9 @@ model IndoorSwimmingPoolExternalHeatingSystem
     Ti=1)                                                                                                                                                                                                         annotation(Placement(transformation(extent={{-8,-8},
             {8,8}},
         rotation=180,
-        origin={62,6})));
+        origin={82,4})));
   Modelica.Blocks.Sources.RealExpression SetTemperature(y=273.15 + 28)
-    annotation (Placement(transformation(extent={{98,20},{80,36}})));
-  Modelica.Blocks.Interfaces.RealOutput y1
-               "Connector of actuator output signal"
-    annotation (Placement(transformation(extent={{98,-32},{122,-8}}),
-        iconTransformation(extent={{98,-32},{122,-8}})));
+    annotation (Placement(transformation(extent={{96,34},{78,50}})));
   MixingVolumes.MixingVolume vol(
     redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=indoorSwimming.m_flow_nominal,
@@ -69,51 +51,38 @@ model IndoorSwimmingPoolExternalHeatingSystem
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=90,
-        origin={32,-14})));
+        origin={44,-12})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{62,-50},{42,-30}})));
 equation
-  connect(TSoil.y, indoorSwimming.TSoil) annotation (Line(points={{57.2,88},{18,
-          88},{18,18.39},{9.02,18.39}},  color={0,0,127}));
-  connect(indoorSwimming.X_w, X_W.y) annotation (Line(points={{-35.86,39.11},{
-          -34,39.11},{-34,50},{-64,50},{-64,62},{-69.2,62}},
+  connect(TSoil.y, indoorSwimming.TSoil) annotation (Line(points={{57.2,88},{36,
+          88},{36,10.51},{16.72,10.51}}, color={0,0,127}));
+  connect(indoorSwimming.X_w, X_W.y) annotation (Line(points={{-14.96,28.99},{
+          -14.96,38},{-64,38},{-64,56},{-71.2,56}},
                                        color={0,0,127}));
-  connect(indoorSwimming.TAir, T_Air.y) annotation (Line(points={{-48.78,39.11},
-          {-48.78,80},{-69.2,80}}, color={0,0,127}));
-  connect(Opening.y, indoorSwimming.openingHours) annotation (Line(points={{-79.3,
-          -37},{-70,-37},{-70,-20.46},{-62.04,-20.46}}, color={0,0,127}));
-  connect(Person.y, indoorSwimming.persons) annotation (Line(points={{-79.3,-1},
-          {-70,-1},{-70,-8.25},{-61.7,-8.25}}, color={0,0,127}));
-  connect(indoorSwimming.QEvap, QEvap) annotation (Line(points={{-61.36,21.72},
-          {-61.36,20},{-80,20},{-80,32},{-102,32}},color={0,0,127}));
-  connect(indoorSwimming.PPool, PPool) annotation (Line(points={{10.72,-27.12},
-          {10.72,-26},{18,-26},{18,-65},{111,-65}},            color={0,0,127}));
-  connect(indoorSwimming.MFlowFreshWater, MFlowFreshWater) annotation (Line(
-        points={{10.72,-33.04},{10.72,-86},{112,-86}}, color={0,0,127}));
+  connect(indoorSwimming.TAir, T_Air.y) annotation (Line(points={{-24.08,28.99},
+          {-24.08,80},{-69.2,80}}, color={0,0,127}));
+  connect(Opening.y, indoorSwimming.timeOpe) annotation (Line(points={{-79.3,
+          -37},{-50,-37},{-50,-24.14},{-33.44,-24.14}}, color={0,0,127}));
+  connect(Person.y, indoorSwimming.uRelPer) annotation (Line(points={{-79.3,-1},
+          {-50,-1},{-50,-13.91},{-33.68,-13.91}}, color={0,0,127}));
   connect(prescribedTemperature.T, T_Air.y)
     annotation (Line(points={{-17.2,80},{-69.2,80}}, color={0,0,127}));
-  connect(prescribedTemperature.port, indoorSwimming.convPoolSurface)
-    annotation (Line(points={{-4,80},{-0.84,80},{-0.84,39.48}}, color={191,0,0}));
-  connect(indoorSwimming.TPool, TPool) annotation (Line(points={{10.72,6.92},{
-          32,6.92},{32,70},{110,70}}, color={0,0,127}));
-  connect(MFlowFreshWater, MFlowFreshWater)
-    annotation (Line(points={{112,-86},{112,-86}}, color={0,0,127}));
-  connect(PI.u_s, SetTemperature.y) annotation (Line(points={{71.6,6},{76,6},{
-          76,28},{79.1,28}}, color={0,0,127}));
-  connect(indoorSwimming.TPool, PI.u_m) annotation (Line(points={{10.72,6.92},{
-          32,6.92},{32,20},{62,20},{62,15.6}}, color={0,0,127}));
-  connect(PI.y, y1) annotation (Line(points={{53.2,6},{48,6},{48,-20},{110,-20}},
-        color={0,0,127}));
-  connect(vol.ports[1], indoorSwimming.toPool) annotation (Line(points={{22,-15},
-          {22,-10.1},{8,-10.1}}, color={0,127,255}));
-  connect(vol.ports[2], indoorSwimming.fromPool) annotation (Line(points={{22,
-          -13},{22,-18.98},{8,-18.98}}, color={0,127,255}));
+  connect(prescribedTemperature.port, indoorSwimming.convPool) annotation (Line(
+        points={{-4,80},{9.76,80},{9.76,29.32}}, color={191,0,0}));
+  connect(PI.u_s, SetTemperature.y) annotation (Line(points={{91.6,4},{98,4},{
+          98,30},{70,30},{70,42},{77.1,42}},
+                             color={0,0,127}));
+  connect(indoorSwimming.TPool, PI.u_m) annotation (Line(points={{17.92,0.28},{
+          62,0.28},{62,18},{82,18},{82,13.6}}, color={0,0,127}));
+  connect(vol.ports[1], indoorSwimming.port_a1) annotation (Line(points={{34,
+          -13},{16,-13},{16,-14.9}}, color={0,127,255}));
+  connect(vol.ports[2], indoorSwimming.port_b1) annotation (Line(points={{34,
+          -11},{20,-11},{20,-22.82},{16,-22.82}}, color={0,127,255}));
   connect(prescribedHeatFlow.port, vol.heatPort)
-    annotation (Line(points={{42,-40},{32,-40},{32,-24}}, color={191,0,0}));
-  connect(PI.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{53.2,6},{
-          48,6},{48,-20},{78,-20},{78,-40},{62,-40}}, color={0,0,127}));
-  connect(TPool, TPool)
-    annotation (Line(points={{110,70},{110,70}}, color={0,0,127}));
+    annotation (Line(points={{42,-40},{42,-22},{44,-22}}, color={191,0,0}));
+  connect(PI.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{73.2,4},{
+          66,4},{66,-20},{70,-20},{70,-40},{62,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=172800, __Dymola_Algorithm="Dassl"));
