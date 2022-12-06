@@ -133,5 +133,16 @@ package AixLib
   specific problems.
 </p>
 </html>"),
-  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={Bitmap(extent={{-106,-100},{106,100}}, fileName = "modelica://AixLib/Resources/Images/Icon_Modelica_AixLib.png")}));
+   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
+        Rectangle(
+          lineColor={200,200,200},
+          fillColor={214,62,54},
+          fillPattern=FillPattern.Solid,
+          extent={{-100.0,-100.0},{100.0,100.0}},
+          radius=25.0),
+        Rectangle(
+          lineColor={128,128,128},
+          extent={{-100.0,-100.0},{100.0,100.0}},
+          radius=25.0),
+        Bitmap(extent={{-74,-80},{78,80}}, fileName="modelica://AixLib/Resources/Images/Icon_Modelica_Aixlib.png")}));
 end AixLib;
