@@ -18,7 +18,8 @@ model SelfShadowingTestLeft
     final dLef={0.01})
     "Shadowing due to a projection on the left-hand side of the window"
     annotation (Placement(transformation(extent={{62,-4},{94,24}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=
+        1.5707963267949)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
   Modelica.Blocks.Sources.Constant alt(k=0.3490658504)

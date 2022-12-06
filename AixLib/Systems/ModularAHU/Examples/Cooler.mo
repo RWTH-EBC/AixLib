@@ -7,7 +7,6 @@ model Cooler "Cooler register example"
     annotation (choicesAllMatching=true);
 
   RegisterModule registerModule(
-    
     redeclare HydraulicModules.ThrottlePump hydraulicModule(
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
@@ -22,7 +21,6 @@ model Cooler "Cooler register example"
     redeclare package Medium1 = MediumAir,
     T_amb=293.15,T_start=297.15,
     dynamicHX(
-      
       Q_nom=30000,
       dT_nom=20,dp1_nominal=100,
       dp2_nominal=6000),
@@ -31,6 +29,7 @@ model Cooler "Cooler register example"
     m1_flow_nominal=1,
     m2_flow_nominal=0.1, massDynamics = Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
+
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     p=300000,
     nPorts=1,
