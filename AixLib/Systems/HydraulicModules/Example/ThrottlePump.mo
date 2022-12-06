@@ -53,7 +53,7 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
     Placement(visible = true, transformation(origin = {-86, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(ThrottlePump.hydraulicBus, hydraulicBus) annotation (Line(
@@ -82,8 +82,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
-    Line(points = {{-74, -30}, {-50, -30}, {-50, 10}}, color = {255, 0, 255}));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation (
+    Line(points={{-75,-30},{-49.95,-30},{-49.95,10.05}},
+                                                       color = {255, 0, 255}));
   annotation (Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
@@ -91,6 +92,9 @@ equation
             100}})),
     experiment(StopTime=600),
     Documentation(revisions="<html><ul>
+  <li>December 06, 2022, by FG Modelica:<br/>
+    Fixes to increase compatability to OpenModelica #1378.
+  </li>
   <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.
   </li>

@@ -239,13 +239,13 @@ equation
   connect(pipe8.heatPort, pipe9.heatPort)
     annotation (Line(points={{-32,-20},{8,-20}},  color={191,0,0}));
   connect(pipe2.port_a, junc15j.ports[1])
-    annotation (Line(points={{-30,20},{-41.0667,20}},
+    annotation (Line(points={{-30,20},{-40.5333,20}},
                                                    color={0,127,255}));
   connect(VFSen_injection.port_b, juncjp6.ports[1])
-    annotation (Line(points={{8,20},{14.9333,20}},
+    annotation (Line(points={{8,20},{15.4667,20}},
                                               color={0,127,255}));
   connect(pipe6.port_a, junc3v6.ports[1])
-    annotation (Line(points={{0,-60},{14.9333,-60}},
+    annotation (Line(points={{0,-60},{15.4667,-60}},
                                                 color={0,127,255}));
   connect(juncjp6.ports[2], pipe3.port_a)
     annotation (Line(points={{16,20},{24,20}},   color={0,127,255}));
@@ -302,13 +302,13 @@ equation
   connect(pipe8.port_b, valve.port_3)
     annotation (Line(points={{-40,-28},{-40,-52}}, color={0,127,255}));
   connect(pipe9.port_b, juncjp6.ports[3]) annotation (Line(points={{16,-12},{16,
-          20},{17.0667,20}},     color={0,127,255}));
+          20},{16.5333,20}},     color={0,127,255}));
   connect(pipe9.port_a, junc3v6.ports[3]) annotation (Line(points={{16,-28},{16,
-          -60},{17.0667,-60}},       color={0,127,255}));
+          -60},{16.5333,-60}},       color={0,127,255}));
   connect(pipe4.port_b, senT_b1.port_a)
     annotation (Line(points={{86,20},{88,20}}, color={0,127,255}));
   connect(pipe8.port_a, junc15j.ports[3]) annotation (Line(points={{-40,-12},{
-          -40,20},{-38.9333,20}}, color={0,127,255}));
+          -40,20},{-39.4667,20}}, color={0,127,255}));
   connect(pipe9.heatPort, prescribedTemperature.port) annotation (Line(points={
           {8,-20},{8,-34},{30,-34},{30,-20},{32,-20}}, color={191,0,0}));
   annotation (
@@ -448,6 +448,9 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
+  <li>December 06, 2022, by FG Modelica:<br/>
+    Fixes to increase compatability to OpenModelica #1378.
+  </li>
   <li>August 09, 2018, by Alexander Kümpel:<br/>
     Extension from base PartioalHydraulicModuls
   </li>

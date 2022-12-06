@@ -49,9 +49,9 @@ model GenericHumidifier_u
     annotation (Placement(transformation(extent={{-100,-104},{-80,-84}})));
   Modelica.Blocks.Routing.RealPassThrough Tsteam if steamHumidifier
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y = mWat_flow_nominal)  annotation(
+  Modelica.Blocks.Sources.RealExpression realExpression(y = mWat_flow_nominal)  annotation (
     Placement(visible = true, transformation(origin = {-62, 32}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Product product annotation(
+  Modelica.Blocks.Math.Product product annotation (
     Placement(visible = true, transformation(origin = {-20, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 protected
   Modelica.Blocks.Interfaces.RealInput Tsteam_intern;
@@ -64,10 +64,10 @@ equation
   if not steamHumidifier then
     Tsteam_intern = 273.15;
   end if;
-  
+
   connect(Tsteam.y, Tsteam_intern);
   connect(product.y, vol.mWat_flow) annotation (Line(
-      points={{-37,60},{-30,60},{-30,-18},{-11,-18}},
+      points={{-9,60},{-30,60},{-30,-18},{-11,-18}},
       color={0,0,127}));
   connect(u, limiter.u)
     annotation (Line(points={{-120,60},{-92,60}}, color={0,0,127}));
@@ -100,11 +100,11 @@ equation
       points={{-79,-94},{-72,-94},{-72,-88},{-62,-88}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(limiter.y, product.u1) annotation(
-    Line(points = {{-68, 60}, {-48, 60}, {-48, 66}, {-32, 66}}, color = {0, 0, 127}));
-  connect(realExpression.y, product.u2) annotation(
-    Line(points = {{-50, 32}, {-40, 32}, {-40, 54}, {-32, 54}}, color = {0, 0, 127}));
-  connect(product.y, mWat_flow) annotation(
+  connect(limiter.y, product.u1) annotation (
+    Line(points={{-69,60},{-48,60},{-48,66},{-32,66}},          color = {0, 0, 127}));
+  connect(realExpression.y, product.u2) annotation (
+    Line(points={{-51,32},{-40,32},{-40,54},{-32,54}},          color = {0, 0, 127}));
+  connect(product.y, mWat_flow) annotation (
     Line(points = {{-9, 60}, {110, 60}}, color = {0, 0, 127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Text(lineColor = {0, 0, 127}, extent = {{-52, -60}, {58, -120}}, textString = "m=%m_flow_nominal"),
@@ -165,6 +165,9 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
+  <li>December 06, 2022, by FG Modelica:<br/>
+    Fixes to increase compatability to OpenModelica #1378.
+  </li>
   <li>October 22, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>

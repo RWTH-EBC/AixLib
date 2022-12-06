@@ -168,12 +168,12 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(pipe5.port_a, junc3v6.ports[1])
-    annotation (Line(points={{-4,-60},{4.4,-60}},
+    annotation (Line(points={{-4,-60},{5.2,-60}},
                                                 color={0,127,255}));
   connect(valve.port_b, pipe6.port_a)
     annotation (Line(points={{-50,-60},{-58,-60}}, color={0,127,255}));
   connect(juncjp6.ports[1], pipe2.port_a)
-    annotation (Line(points={{4.4,20},{16,20}}, color={0,127,255}));
+    annotation (Line(points={{5.2,20},{16,20}}, color={0,127,255}));
   connect(senT_a1.port_b, pipe1.port_a)
     annotation (Line(points={{-88,20},{-40,20}}, color={0,127,255}));
   connect(pipe1.heatPort, prescribedTemperature.port) annotation (Line(points={{-32,
@@ -214,9 +214,9 @@ equation
   connect(pipe4.port_b, junc3v6.ports[2])
     annotation (Line(points={{44,-60},{6,-60}}, color={0,127,255}));
   connect(pipe7.port_b, juncjp6.ports[3])
-    annotation (Line(points={{6,-12},{6,20},{7.6,20}}, color={0,127,255}));
+    annotation (Line(points={{6,-12},{6,20},{6.8,20}}, color={0,127,255}));
   connect(pipe7.port_a, junc3v6.ports[3])
-    annotation (Line(points={{6,-28},{7.6,-28},{7.6,-60}}, color={0,127,255}));
+    annotation (Line(points={{6,-28},{6.8,-28},{6.8,-60}}, color={0,127,255}));
   connect(pipe5.port_b, valve.port_a)
     annotation (Line(points={{-20,-60},{-34,-60}}, color={0,127,255}));
   connect(pipe6.port_b, senT_b2.port_a)
@@ -326,6 +326,14 @@ equation
   </li>
   <li>June 30, 2018, by Alexander Kümpel:<br/>
     First implementation
+  </li>
+</ul>
+</html>", revisions="<html><ul>
+  <li>December 06, 2022, by FG Modelica:<br/>
+    Fixes to increase compatability to OpenModelica #1378.
+  </li>
+  <li>2017-06 by Alexander Kümpel:<br/>
+    Implemented
   </li>
 </ul>
 </html>"));

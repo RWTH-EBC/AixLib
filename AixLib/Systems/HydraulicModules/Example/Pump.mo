@@ -54,33 +54,44 @@ model Pump "Test for unmixed pump circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
     Placement(visible = true, transformation(origin = {-86, -28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(Unmixed.hydraulicBus, hydraulicBus) annotation(
-    Line(points = {{-20, 10}, {-42, 10}}, color = {255, 204, 51}, thickness = 0.5),
-    Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
-  connect(hydRes.port_b, Unmixed.port_a2) annotation(
-    Line(points = {{20, 60}, {28, 60}, {28, 40}}, color = {0, 127, 255}));
-  connect(hydRes.port_a, Unmixed.port_b1) annotation(
-    Line(points = {{0, 60}, {-8, 60}, {-8, 40}}, color = {0, 127, 255}));
-  connect(boundary.ports[1], Unmixed.port_a1) annotation(
-    Line(points = {{-8, -40}, {-8, -20}}, color = {0, 127, 255}));
-  connect(boundary1.ports[1], Unmixed.port_b2) annotation(
-    Line(points = {{28, -40}, {28, -20}, {28, -20}}, color = {0, 127, 255}));
-  connect(RPM_ramp.y, hydraulicBus.pumpBus.rpmSet) annotation(
-    Line(points = {{-79, 10}, {-60, 10}, {-60, 10.05}, {-41.95, 10.05}}, color = {0, 0, 127}),
-    Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}, horizontalAlignment = TextAlignment.Left));
-  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
-    Line(points = {{-74, -28}, {-42, -28}, {-42, 10}}, color = {255, 0, 255}));
+  connect(Unmixed.hydraulicBus, hydraulicBus) annotation (Line(
+      points={{-20,10},{-42,10}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(hydRes.port_b, Unmixed.port_a2)
+    annotation (Line(points={{20,60},{28,60},{28,40}},     color={0,127,255}));
+  connect(hydRes.port_a, Unmixed.port_b1)
+    annotation (Line(points={{0,60},{-8,60},{-8,40}},    color={0,127,255}));
+  connect(boundary.ports[1], Unmixed.port_a1)
+    annotation (Line(points={{-8,-40},{-8,-20}}, color={0,127,255}));
+  connect(boundary1.ports[1], Unmixed.port_b2)
+    annotation (Line(points={{28,-40},{28,-20},{28,-20}}, color={0,127,255}));
+  connect(RPM_ramp.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{
+          -79,10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation (
+    Line(points={{-75,-28},{-41.95,-28},{-41.95,10.05}},
+                                                       color = {255, 0, 255}));
   annotation (Placement(transformation(extent={{80,80},{100,100}})),
               Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(StopTime=800,Interval = 5,Solver=dassl),
+    experiment(StopTime=800,Interval = 5),
     Documentation(revisions="<html><ul>
+  <li>December 06, 2022, by FG Modelica:<br/>
+    Fixes to increase compatability to OpenModelica #1378.
+  </li>
   <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.
   </li>
