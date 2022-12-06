@@ -177,7 +177,7 @@ model DHCPipe "Generic pipe model for DHC applications"
   // See also AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.TransportWaterAir
   // for why mSenFac is 10 and not 1000, as this gives more reasonable
   // temperature step response
-  Fluid.MixingVolumes.MixingVolume vol(
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
@@ -289,7 +289,7 @@ equation
         color={0,127,255}));
 
   connect(pipCor.port_b, vol.ports[1])
-    annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
+    annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
   connect(pipCor.heatPort, cylHeaTra1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0},
       pattern=LinePattern.Dash));
