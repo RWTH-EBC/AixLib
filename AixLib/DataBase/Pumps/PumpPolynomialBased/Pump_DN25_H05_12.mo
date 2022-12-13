@@ -34,5 +34,10 @@ model Pump_DN25_H05_12 "25/0.5-12 PN 10 maximum volume flow 12.0 m^3/h"
     Documentation(info="<html>
 <p><span style=\"font-family: Courier New;\">maxMinHeight=[Q [m3/h], Hmax [m], Hmin [m]] (maximum and minimum boundaries of pump)</span></p>
 <p><span style=\"font-family: Courier New;\">maxMinSpeedCurves=[Q [m3/h], nMax [rev/min], nMin [rev/min]](maximum and minimum boundaries of pump speed)</span></p>
+
+Data sheet:
+<a href=\"https://wilo.com/de/de/Katalog/de/produkte-expertise/wilo-stratos-maxo/stratos-maxo-25-0-5-12-pn-10\"
+>https://wilo.com/de/de/Katalog/de/produkte-expertise/wilo-stratos-maxo/stratos-maxo-25-0-5-12-pn-10</a>
+
 </html>"));
 end Pump_DN25_H05_12;
