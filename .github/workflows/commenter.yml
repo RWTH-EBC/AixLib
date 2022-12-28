@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - name: Get comment text
         id: getText
-        run: echo ::set-output name=text::$(cat ./docs/Review_Template.md | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
+        run: echo ::set-output name=text::$(cat ./.github/docs/Review_Template.md | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
       - uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
