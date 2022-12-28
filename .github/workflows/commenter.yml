@@ -1,0 +1,29 @@
+name: 'Commenter'
+
+on:
+  # Allows you to run this workflow manually from the Actions tab or through HTTP API
+  workflow_dispatch:
+
+  pull_request: 
+    types: ['review_requested']
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get comment text
+        id: getText
+        run: echo ::set-output name=text::$(cat ./docs/Review_Template.md | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '${{ steps.getText.outputs.text }}'
+            })
