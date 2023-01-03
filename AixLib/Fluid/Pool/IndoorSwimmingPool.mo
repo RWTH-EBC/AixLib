@@ -227,6 +227,7 @@ model IndoorSwimmingPool
     AFloExt=poolParam.AFloExt,
     hConWaterHorizontal=poolParam.hConWaterHorizontal,
     hConWaterVertical=poolParam.hConWaterVertical,
+    TPool=poolParam.TPool,
     PoolWall=poolParam.PoolWallParam)
     "Model to depict the heat flow rate through the pool walls to the bordering room/soil"
     annotation (Placement(transformation(extent={{64,32},{80,48}})));
