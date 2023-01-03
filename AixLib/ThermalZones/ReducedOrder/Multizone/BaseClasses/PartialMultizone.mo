@@ -148,6 +148,10 @@ partial model PartialMultizone "Partial model for multizone models"
       group="Cooler",
       enable=not recOrSep));
 
+  parameter Boolean use_pools=false
+  "If true, input connector timeOpe is enabled and heat and mass exchanges 
+  between pool and corresponding zone are balancecd" annotation (Dialog(tab="Moisture"));
+
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -189,6 +193,15 @@ partial model PartialMultizone "Partial model for multizone models"
     "Heat flow based on internal gains for each zone from persons, machines, and light"
                         annotation (Placement(transformation(extent={{100,-90},{
             120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
+  Modelica.Blocks.Interfaces.RealInput timeOpe
+    if use_moisture_balance and use_pools
+    "Input profiles for opening hours for pools" annotation (Placement(
+        transformation(extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={42,-102}),
+        iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={38,-110})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
@@ -247,6 +260,12 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+    if zone[i].use_pools then
+      connect(timeOpe,zone[i].timeOpe) annotation (Line(
+        points={{42,-102},{42,52.28},{44.3,52.28}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    end if;
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80.42,70.32},
           {86,70.32},{86,-78},{66,-78},{-100,-78},{-100,-70}},
