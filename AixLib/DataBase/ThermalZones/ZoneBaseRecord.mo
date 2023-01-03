@@ -147,6 +147,9 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Boolean use_pools=false;
+  parameter Integer nPools;
+  parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:];
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.

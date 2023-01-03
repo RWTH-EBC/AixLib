@@ -1,5 +1,5 @@
-within AixLib.DataBase.ThermalZones.OfficePassiveHouse;
-record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal heater cooler"
+within AixLib.DataBase.ThermalZones.SwimmingFacility;
+record SwimmingHall "Record for swimming hall new"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start=293.15,
     VAir=6700.0,
@@ -89,9 +89,9 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false,
-    use_pools=false,
-    nPools=0,
-    poolParam={AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()});
+    use_pools=true,
+    nPools=1,
+    poolParam={AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool()});
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.
@@ -114,4 +114,4 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
   zoning for an office building.</span>
 </p>
 </html>"));
-end OPH_1_OfficeNoHeaterCooler;
+end SwimmingHall;

@@ -89,7 +89,10 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     CoolerOn=false,
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
-    withIdealThresholds=false);
+    withIdealThresholds=false,
+    use_pools=false,
+    nPools=0,
+    poolParam={AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()});
   annotation (Documentation(revisions="<html><ul>
   <li>
     <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>

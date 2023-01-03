@@ -89,5 +89,8 @@ record Office_1995_1000 "Office zone from 1995 with 1000 m² area and without he
     CoolerOn = false,
     withIdealThresholds = false,
     TThresholdHeater = 288.15,
-    TThresholdCooler = 295.15);
+    TThresholdCooler = 295.15,
+    use_pools=false,
+    nPools=0,
+    poolParam={AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()});
 end Office_1995_1000;
