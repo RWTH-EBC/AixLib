@@ -2,6 +2,10 @@ within AixLib.Fluid.Pool.BaseClasses;
 model HeatTransferConduction
   "Heat transfer due to conduction through pool walls"
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   parameter Modelica.Units.SI.Area AWalInt "Area of pool walls which is connected to inner rooms (inner pool walls)";
   parameter Modelica.Units.SI.Area AWalExt "Area of pool walls which is connected to the ground (pool wall with earth contact)";
   parameter Modelica.Units.SI.Area AFloInt "Area of pool floors which is connected to inner rooms (inner pool floor)";
@@ -9,6 +13,7 @@ model HeatTransferConduction
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
 
+  parameter Modelica.Units.SI.Temperature TPool "Set temperature for pool";
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature HeatFlowOuter
     "Generate Heat Flow for earth contact" annotation (Placement(transformation(
@@ -29,15 +34,16 @@ model HeatTransferConduction
     InnerPoolFloor(
     A=AFloInt,
     wallRec=PoolWall,
-    T_start=fill((0), (PoolWall.n)))
-             annotation (Placement(transformation(extent={{-10,-34},{18,-10}})));
+    T_start=fill(TPool, PoolWall.n),
+    energyDynamics=energyDynamics)
+             annotation (Placement(transformation(extent={{-2,-32},{22,-8}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalInner(
     hCon_const=hConWaterHorizontal,
     A=AFloInt,
     calcMethod=3,
     surfaceOrientation=1)
                   annotation (Placement(transformation(
-        origin={-48,-22},
+        origin={-50,-20},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterVerticalOuter(
@@ -45,29 +51,31 @@ model HeatTransferConduction
     A=AWalExt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
-        origin={-54,40},
+        origin={-50,40},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     PoolWallWithEarthContact(
     A=AWalExt,
     wallRec=PoolWall,
-    T_start=fill((0), (PoolWall.n)))
-             annotation (Placement(transformation(extent={{-6,26},{22,54}})));
+    T_start=fill(TPool, PoolWall.n),
+    energyDynamics=energyDynamics)
+             annotation (Placement(transformation(extent={{-2,28},{22,52}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalOuter(
     hCon_const=hConWaterHorizontal,
     A=AFloExt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
-        origin={-52,-60},
+        origin={-50,-60},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     PoolFloorWithEarthContact(
     A=AFloExt,
     wallRec=PoolWall,
-    T_start=fill((0), (PoolWall.n)))
-             annotation (Placement(transformation(extent={{-10,-72},{14,-50}})));
+    T_start=fill(TPool, PoolWall.n),
+    energyDynamics=energyDynamics)
+             annotation (Placement(transformation(extent={{-2,-72},{22,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     prescribedHeatFlow1 "Generate Heat Flow for earth contact"
                            annotation (Placement(transformation(
@@ -78,8 +86,9 @@ model HeatTransferConduction
     InnerPoolWall(
     A=AWalInt,
     wallRec=PoolWall,
-    T_start=fill((0), (PoolWall.n)))
-             annotation (Placement(transformation(extent={{-6,64},{22,92}})));
+    T_start=fill(TPool, PoolWall.n),
+    energyDynamics=energyDynamics)
+             annotation (Placement(transformation(extent={{-2,68},{22,92}})));
   Modelica.Blocks.Sources.RealExpression HeatFlowInner(y=0)
     "Inner pool walls are not connected to other zones, only outer pool walls have earth contact"
     annotation (Placement(transformation(extent={{96,2},{76,22}})));
@@ -88,7 +97,7 @@ model HeatTransferConduction
     A=AWalInt,
     calcMethod=3,
     surfaceOrientation=1)  annotation (Placement(transformation(
-        origin={-54,78},
+        origin={-50,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWall
@@ -99,31 +108,31 @@ equation
   connect(heatport_a, heatport_a)
     annotation (Line(points={{-103,-1},{-103,-1}}, color={191,0,0}));
   connect(HeatConvWaterHorizontalInner.port_a, InnerPoolFloor.port_a)
-    annotation (Line(points={{-38,-22},{-10,-22}}, color={191,0,0}));
+    annotation (Line(points={{-40,-20},{-2,-20}},  color={191,0,0}));
   connect(PoolFloorWithEarthContact.port_b, HeatFlowOuter.port) annotation (
-      Line(points={{14,-61},{58,-61},{58,-28},{68,-28}}, color={191,0,0}));
+      Line(points={{22,-61},{58,-61},{58,-28},{68,-28}}, color={191,0,0}));
   connect(PoolFloorWithEarthContact.port_a, HeatConvWaterHorizontalOuter.port_a)
-    annotation (Line(points={{-10,-61},{-10,-60},{-42,-60}}, color={191,0,0}));
+    annotation (Line(points={{-2,-61},{-2,-60},{-40,-60}},   color={191,0,0}));
   connect(InnerPoolWall.port_b, prescribedHeatFlow1.port) annotation (Line(
-        points={{22,78},{30,78},{30,12},{38,12}}, color={191,0,0}));
+        points={{22,80},{30,80},{30,12},{38,12}}, color={191,0,0}));
   connect(HeatConvWaterVerticalOuter.port_b, heatport_a) annotation (Line(
-        points={{-64,40},{-72,40},{-72,-1},{-103,-1}}, color={191,0,0}));
+        points={{-60,40},{-72,40},{-72,-1},{-103,-1}}, color={191,0,0}));
   connect(HeatConvWaterHorizontalInner.port_b, heatport_a) annotation (Line(
-        points={{-58,-22},{-72,-22},{-72,-1},{-103,-1}}, color={191,0,0}));
+        points={{-60,-20},{-72,-20},{-72,-1},{-103,-1}}, color={191,0,0}));
   connect(HeatConvWaterHorizontalOuter.port_b, heatport_a) annotation (Line(
-        points={{-62,-60},{-72,-60},{-72,-1},{-103,-1}}, color={191,0,0}));
+        points={{-60,-60},{-72,-60},{-72,-1},{-103,-1}}, color={191,0,0}));
   connect(prescribedHeatFlow1.Q_flow, HeatFlowInner.y)
     annotation (Line(points={{50,12},{75,12}}, color={0,0,127}));
   connect(HeatFlowOuter.port, PoolWallWithEarthContact.port_b) annotation (Line(
         points={{68,-28},{58,-28},{58,40},{22,40}}, color={191,0,0}));
   connect(InnerPoolFloor.port_b, prescribedHeatFlow1.port) annotation (Line(
-        points={{18,-22},{30,-22},{30,12},{38,12}}, color={191,0,0}));
+        points={{22,-20},{30,-20},{30,12},{38,12}}, color={191,0,0}));
   connect(HeatConvWaterVerticalOuter.port_a, PoolWallWithEarthContact.port_a)
-    annotation (Line(points={{-44,40},{-6,40}}, color={191,0,0}));
+    annotation (Line(points={{-40,40},{-2,40}}, color={191,0,0}));
   connect(InnerPoolWall.port_a, HeatConvWaterVerticalInner.port_a) annotation (
-      Line(points={{-6,78},{-44,78}},                   color={191,0,0}));
+      Line(points={{-2,80},{-40,80}},                   color={191,0,0}));
   connect(HeatConvWaterVerticalInner.port_b, heatport_a) annotation (Line(
-        points={{-64,78},{-72,78},{-72,-1},{-103,-1}},color={191,0,0}));
+        points={{-60,80},{-72,80},{-72,-1},{-103,-1}},color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,58},{28,-26}},
