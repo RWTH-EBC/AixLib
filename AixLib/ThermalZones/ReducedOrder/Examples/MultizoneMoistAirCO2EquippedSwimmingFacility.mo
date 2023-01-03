@@ -13,7 +13,7 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     ABuilding=8375,
     ASurTot=12744.27,
     numZones=5,
-    zoneParam={AixLib.DataBase.ThermalZones.OfficePassiveHouse.SwimmingHall(),
+    zoneParam={AixLib.DataBase.ThermalZones.SwimmingFacility.SwimmingHall(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
