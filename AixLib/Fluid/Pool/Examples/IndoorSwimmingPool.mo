@@ -6,7 +6,7 @@ model IndoorSwimmingPool
       redeclare package WaterMedium = WaterMedium)
     annotation (Placement(transformation(extent={{-20,-40},{30,16}})));
 
-    replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
+   package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.RealExpression TSoil(y=273.15 + 8)
     annotation (Placement(transformation(extent={{96,44},{80,60}})));

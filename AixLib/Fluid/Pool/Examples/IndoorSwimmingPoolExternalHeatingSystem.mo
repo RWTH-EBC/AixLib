@@ -1,12 +1,12 @@
 within AixLib.Fluid.Pool.Examples;
 model IndoorSwimmingPoolExternalHeatingSystem
     extends Modelica.Icons.Example;
-  .AixLib.Fluid.Pool.IndoorSwimmingPool indoorSwimming(poolParam=
+  AixLib.Fluid.Pool.IndoorSwimmingPool indoorSwimming(poolParam=
         AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(
         use_idealHeater=false), redeclare package WaterMedium = WaterMedium)
     annotation (Placement(transformation(extent={{-32,-38},{16,28}})));
 
-    replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
+    package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.RealExpression TSoil(y=273.15 + 8)
     annotation (Placement(transformation(extent={{74,80},{58,96}})));
@@ -75,10 +75,10 @@ equation
                              color={0,0,127}));
   connect(indoorSwimming.TPool, PI.u_m) annotation (Line(points={{17.92,0.28},{
           62,0.28},{62,18},{82,18},{82,13.6}}, color={0,0,127}));
-  connect(vol.ports[1], indoorSwimming.port_a1) annotation (Line(points={{34,
-          -13},{16,-13},{16,-14.9}}, color={0,127,255}));
-  connect(vol.ports[2], indoorSwimming.port_b1) annotation (Line(points={{34,
-          -11},{20,-11},{20,-22.82},{16,-22.82}}, color={0,127,255}));
+  connect(vol.ports[1], indoorSwimming.port_a1) annotation (Line(points={{34,-13},
+          {16,-13},{16,-14.24}},     color={0,127,255}));
+  connect(vol.ports[2], indoorSwimming.port_b1) annotation (Line(points={{34,-11},
+          {20,-11},{20,-22.16},{16,-22.16}},      color={0,127,255}));
   connect(prescribedHeatFlow.port, vol.heatPort)
     annotation (Line(points={{42,-40},{42,-22},{44,-22}}, color={191,0,0}));
   connect(PI.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{73.2,4},{
