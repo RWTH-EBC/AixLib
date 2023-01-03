@@ -4,10 +4,11 @@ partial model PartialThermalZone "Partial model for thermal zone models"
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
-  parameter Integer nPorts=0
+  parameter Integer nPorts = if zoneParam.use_pools then 2 else 0
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
@@ -112,8 +113,6 @@ protected
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,
           80}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,56.05},{78,56.05},{78,
-          52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,78},{92,
           78},{92,20},{104,20}},
                                color={191,0,0}));
@@ -124,6 +123,12 @@ equation
   connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,82},{94,82},
           {94,40},{104,40}},
                            color={191,0,0}));
+
+  for i in 1:nPorts loop
+      connect(ROM.ports[i], ports[i]) annotation (Line(points={{77,56.05},{78,56.05},{78,
+          52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
+  end for;
+
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),graphics={Text(extent={{
               -80,114},{92,64}},lineColor=
