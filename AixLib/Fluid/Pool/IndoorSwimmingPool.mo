@@ -5,6 +5,10 @@ model IndoorSwimmingPool
 
   replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real betaNonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
   parameter Real betaCover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
@@ -57,6 +61,7 @@ model IndoorSwimmingPool
 
   AixLib.Fluid.MixingVolumes.MixingVolume poolSto(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VStorage,
@@ -68,6 +73,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{30,-92},{22,-84}})));
   AixLib.Fluid.MixingVolumes.MixingVolume poolWat(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VPool,
@@ -309,7 +315,7 @@ model IndoorSwimmingPool
     yMin=0) annotation (Placement(transformation(extent={{18,-54},{8,-44}})));
   Movers.FlowControlled_m_flow cirPump(
     redeclare package Medium = WaterMedium,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
