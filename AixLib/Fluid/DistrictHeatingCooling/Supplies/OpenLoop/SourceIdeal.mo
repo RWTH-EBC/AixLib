@@ -22,6 +22,7 @@ model SourceIdeal
 
   Sources.Boundary_pT   sink(redeclare package Medium = Medium,
     p=pReturn,
+    T=TReturn,
     nPorts=1)
     "Ideal sink for return from the network" annotation (Placement(
         transformation(
