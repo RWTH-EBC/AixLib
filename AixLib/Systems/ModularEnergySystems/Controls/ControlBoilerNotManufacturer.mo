@@ -2,7 +2,8 @@ within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlBoilerNotManufacturer
 
     parameter Modelica.Units.SI.TemperatureDifference DeltaTWaterNom=20 "Temperature difference nominal";
-  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Return temperature TCold";
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15 + 35
+                                                             "Return temperature TCold";
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power";
   parameter Boolean m_flowVar=false "Use variable water massflow";
 
@@ -14,13 +15,16 @@ model ControlBoilerNotManufacturer
 
   parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
 
-  parameter Modelica.Units.SI.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature THotMax=273.15 + 90
+                                                            "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start";
+  parameter Modelica.Units.SI.Temperature TStart=273.15 + 20
+                                                           "T start";
 
 
-  replaceable package Medium =Media.Water constrainedby
+  replaceable package Medium = AixLib.Media.Water
+                                          constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Water "Water"),
@@ -32,8 +36,8 @@ model ControlBoilerNotManufacturer
 
 
   Modelica.Blocks.Continuous.LimPID PID(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.01,
+    controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    k=0.008,
     Ti=10,
     yMax=1,
     yMin=0) annotation (Placement(transformation(extent={{4,50},{24,70}})));
@@ -171,8 +175,6 @@ equation
     annotation (Line(points={{85,132},{110,132}}, color={0,0,127}));
   connect(switch7.y, mFlowRel)
     annotation (Line(points={{105,88},{130,88}}, color={0,0,127}));
-  connect(switch5.y, switch7.u1)
-    annotation (Line(points={{63,80},{82,80}}, color={0,0,127}));
   connect(pLRMin.y, switch7.u2) annotation (Line(points={{-65,154},{-44,154},{
           -44,100},{-28,100},{-28,102},{74,102},{74,88},{82,88}}, color={255,0,
           255}));
@@ -181,9 +183,10 @@ equation
   connect(const.y, switch3.u1) annotation (Line(points={{-79,190},{-60,190},{
           -60,162},{-44,162},{-44,168},{56,168},{56,140},{62,140}}, color={0,0,
           127}));
-  connect(const.y, switch7.u3) annotation (Line(points={{-79,190},{-60,190},{
-          -60,162},{-44,162},{-44,168},{56,168},{56,104},{82,104},{82,96}},
-        color={0,0,127}));
+  connect(realOne.y, switch7.u3) annotation (Line(points={{-13.5,90},{20,90},{
+          20,98},{82,98},{82,96}}, color={0,0,127}));
+  connect(const.y, switch7.u1) annotation (Line(points={{-79,190},{-34,190},{
+          -34,194},{70,194},{70,80},{82,80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,200}}),                                  graphics={
                                       Rectangle(

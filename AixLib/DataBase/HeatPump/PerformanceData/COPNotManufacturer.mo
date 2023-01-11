@@ -42,11 +42,6 @@ model COPNotManufacturer
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-10,30})));
-  Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom) annotation (
-      Placement(transformation(
-        extent={{-10,-9},{10,9}},
-        rotation=0,
-        origin={-66,-83})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -70,12 +65,6 @@ model COPNotManufacturer
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-10,70})));
-  Modelica.Blocks.Logical.Switch tConOut
-    annotation (Placement(transformation(extent={{9,9},{-9,-9}},
-        rotation=180,
-        origin={-37,-55})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression2(y=THotExternal)
-    annotation (Placement(transformation(extent={{-88,-72},{-62,-58}})));
   Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin4
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
@@ -99,7 +88,7 @@ model COPNotManufacturer
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-120,90})));
-  Modelica.Blocks.Interfaces.RealInput tConOutSet annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput tConOut annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
@@ -126,14 +115,6 @@ equation
                                                             color={0,0,127}));
   connect(tSource1.y, switch1.u1)
     annotation (Line(points={{-34.8,62},{-22,62}}, color={0,0,127}));
-  connect(tConOut.y,fromKelvin5. Kelvin) annotation (Line(points={{-27.1,-55},{-19.8,
-          -55}},                                                        color={0,
-          0,127}));
-  connect(tHotNom.y,tConOut. u3)
-    annotation (Line(points={{-55,-83},{-47.8,-83},{-47.8,-62.2}},
-                                                       color={0,0,127}));
-  connect(booleanExpression2.y,tConOut. u2) annotation (Line(points={{-60.7,-65},
-          {-54,-65},{-54,-55},{-47.8,-55}},                  color={255,0,255}));
   connect(fromKelvin5.Celsius, deltaTCon.u2) annotation (Line(points={{0.9,-55},
           {8,-55},{8,-18},{-28,-18},{-28,-8.4},{-21.8,-8.4}}, color={0,0,127}));
   connect(fromKelvin4.Celsius, deltaTCon.u1) annotation (Line(points={{-55,2},{-40,
@@ -142,20 +123,17 @@ equation
     annotation (Line(points={{95.2,0},{112,0}}, color={0,0,127}));
   connect(pLR, limiter.u)
     annotation (Line(points={{-120,30},{-22,30}}, color={0,0,127}));
-  connect(tConOutSet, tConOut.u1) annotation (Line(points={{-120,-90},{-94,-90},
-          {-94,-47.8},{-47.8,-47.8}}, color={0,0,127}));
   connect(tConIn, fromKelvin4.Kelvin) annotation (Line(points={{-120,-30},{-84,-30},
           {-84,2},{-78,2}}, color={0,0,127}));
   connect(booleanExpression1.y, switch1.u2)
     annotation (Line(points={{-64.4,70},{-22,70}}, color={255,0,255}));
   connect(tSource, switch1.u3) annotation (Line(points={{-120,90},{-28,90},{-28,
           78},{-22,78}}, color={0,0,127}));
+  connect(tConOut, fromKelvin5.Kelvin) annotation (Line(points={{-120,-90},{-52,
+          -90},{-52,-55},{-19.8,-55}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
                                                               Text(
-          extent={{22,-38},{90,-78}},
-          lineColor={28,108,200},
-          textString="THotNom oder variables THot"),          Text(
           extent={{-4,108},{64,68}},
           lineColor={28,108,200},
           textString="TSource konst oder variabel")}));

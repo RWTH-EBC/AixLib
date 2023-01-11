@@ -7,6 +7,7 @@ extends Modelica.Icons.InterfacesPackage;
     Real QRel "Part load ratio";
 
     Real PLR "Part load ratio compressor";
+    Real PLR_HP "Part load Thermal";
 
     Boolean Shutdown "true: force shutdown";
 
@@ -32,8 +33,12 @@ extends Modelica.Icons.InterfacesPackage;
   Real PLR "Part load ratio";
   Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
   Modelica.Units.SI.Temperature TCold "Sensor output TCold";
+  Modelica.Units.SI.Temperature TColdCC "Sensor output TCold CombustionChamber";
   Modelica.Units.SI.Temperature THot "Sensor output THot";
   Modelica.Units.SI.Power EnergyDemand "Energy Demand";
+  Modelica.Units.SI.Power PowerDemand "Energy Demand";
+  Boolean OnOff;
+
 
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),

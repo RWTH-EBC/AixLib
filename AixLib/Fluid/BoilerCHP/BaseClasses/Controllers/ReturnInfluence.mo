@@ -30,7 +30,8 @@ model ReturnInfluence
     dataset="/Eta_TCold",
     dataUnit="-",
     scaleUnits={"K","degC","-","K"},
-    interpMethod=SDF.Types.InterpolationMethod.Linear)
+    interpMethod=SDF.Types.InterpolationMethod.Linear,
+    extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
     annotation (Placement(transformation(extent={{36,-4},{56,16}})));
   Modelica.Blocks.Sources.RealExpression tColdNom(y=TColdNom)
     "Return Water temperature Setpoint"
@@ -56,7 +57,7 @@ model ReturnInfluence
     annotation (Placement(transformation(extent={{4,-4},{24,16}})));
   Modelica.Blocks.Sources.RealExpression qSetpoint(y=QNom)
     "Return Water temperature Setpoint"
-    annotation (Placement(transformation(extent={{-46,-30},{-26,-10}})));
+    annotation (Placement(transformation(extent={{-54,-30},{-26,-10}})));
   Modelica.Blocks.Math.Product etaCalculation1
     "calculates the efficiency of the boiler" annotation (Placement(
         transformation(
@@ -87,28 +88,28 @@ equation
   connect(PLR, multiplex4_1.u3[1]) annotation (Line(points={{-120,0},{-88,0},{
           -88,3},{2,3}},     color={0,0,127}));
   connect(fromKelvin.Celsius, multiplex4_1.u2[1]) annotation (Line(points={{-49,30},
-          {-40,30},{-40,9},{2,9}},           color={0,0,127}));
+          {-44,30},{-44,9},{2,9}},           color={0,0,127}));
   connect(multiplex4_1.y, ReturnFlowBehaviour_mNom.u)
     annotation (Line(points={{25,6},{34,6}},     color={0,0,127}));
   connect(qSetpoint.y, etaCalculation1.u1)
-    annotation (Line(points={{-25,-20},{-2,-20}},            color={0,0,127}));
+    annotation (Line(points={{-24.6,-20},{-2,-20}},          color={0,0,127}));
   connect(PLR, etaCalculation1.u2) annotation (Line(points={{-120,0},{-88,0},{
           -88,-32},{-2,-32}},color={0,0,127}));
-  connect(fromKelvin.Celsius, add.u2) annotation (Line(points={{-49,30},{-40,30},
-          {-40,42},{-30,42}}, color={0,0,127}));
+  connect(fromKelvin.Celsius, add.u2) annotation (Line(points={{-49,30},{-44,30},
+          {-44,42},{-30,42}}, color={0,0,127}));
   connect(etaCalculation1.y, etaCalculation.u2) annotation (Line(points={{21,-26},
           {58,-26},{58,-6},{64,-6}}, color={0,0,127}));
   connect(ReturnFlowBehaviour_mNom.y, etaCalculation.u1)
     annotation (Line(points={{57,6},{64,6}}, color={0,0,127}));
   connect(TColdMeasure, fromKelvin1.Kelvin)
     annotation (Line(points={{-120,70},{-70,70}}, color={0,0,127}));
-  connect(fromKelvin1.Celsius, add.u1) annotation (Line(points={{-47,70},{-40,
-          70},{-40,54},{-30,54}}, color={0,0,127}));
+  connect(fromKelvin1.Celsius, add.u1) annotation (Line(points={{-47,70},{-42,
+          70},{-42,54},{-30,54}}, color={0,0,127}));
   connect(etaCalculation.y, add1.u1) annotation (Line(points={{87,0},{92,0},{92,
           -38},{60,-38},{60,-48},{66,-48}}, color={0,0,127}));
   connect(QLosses, add1.u2)
     annotation (Line(points={{0,-120},{0,-60},{66,-60}}, color={0,0,127}));
-  connect(add1.y, Q_flow) annotation (Line(points={{89,-54},{98,-54},{98,0},{
+  connect(add1.y, Q_flow) annotation (Line(points={{89,-54},{96,-54},{96,0},{
           110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(

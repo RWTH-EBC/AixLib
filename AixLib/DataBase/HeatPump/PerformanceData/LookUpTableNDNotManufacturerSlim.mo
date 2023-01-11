@@ -129,24 +129,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(sigBus.TSource, ActualCOP.tSource) annotation (Line(
-      points={{-1,100},{-1,102},{-62,102},{-62,76}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(sigBus.PLR, ActualCOP.pLR) annotation (Line(
       points={{-0.925,100.07},{-0.925,102},{-74,102},{-74,76}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.THot, ActualCOP.tConOutSet) annotation (Line(
-      points={{-0.925,100.07},{-0.925,102},{-98,102},{-98,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -193,6 +177,22 @@ equation
           50,62},{50,56}}, color={255,0,255}));
   connect(switch4.y, productPel.u1)
     annotation (Line(points={{50,33},{50,26},{14,26}}, color={0,0,127}));
+  connect(sigBus.TConOutMea, ActualCOP.tConOut) annotation (Line(
+      points={{-0.925,100.07},{-68,100.07},{-68,102},{-98,102},{-98,76}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.TEvaInMea, ActualCOP.tSource) annotation (Line(
+      points={{-0.925,100.07},{-0.925,94},{-62,94},{-62,76}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},
               {-30,40},{-60,40},{-60,20},{60,20},{60,0},{-60,0},{-60,-20},{60,-20},

@@ -30,7 +30,7 @@ model ControlMflowNotManufacturer
         rotation=180,
         origin={120,70})));
   Modelica.Blocks.Sources.RealExpression tHotNom1(y=THotNom)
-    annotation (Placement(transformation(extent={{118,16},{100,44}})));
+    annotation (Placement(transformation(extent={{136,16},{100,44}})));
   Modelica.Blocks.Logical.Or or1
     annotation (Placement(transformation(extent={{40,52},{24,68}})));
   Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
@@ -73,7 +73,7 @@ model ControlMflowNotManufacturer
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
     k=0.004,
     Ti=20,
-    yMin=0,
+    yMin=0.1,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     xi_start=0,
     y_start=1)
@@ -82,7 +82,7 @@ model ControlMflowNotManufacturer
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
     k=0.008,
     Ti=10,
-    yMin=0.05,
+    yMin=0.1,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     xi_start=0,
     y_start=1)
@@ -95,6 +95,10 @@ model ControlMflowNotManufacturer
   Modelica.Blocks.Interfaces.BooleanOutput schutdown annotation (Placement(
         transformation(extent={{-100,-90},{-120,-70}}), iconTransformation(
           extent={{-100,-90},{-120,-70}})));
+  Modelica.Blocks.Logical.Greater greater1
+    annotation (Placement(transformation(extent={{-18,-122},{-34,-106}})));
+  Modelica.Blocks.Logical.Or or2
+    annotation (Placement(transformation(extent={{-56,-104},{-72,-88}})));
 protected
    replaceable package MediumCon = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat sink";
@@ -104,7 +108,7 @@ equation
     annotation (Line(points={{120,70},{79.6,70}}, color={0,0,127}));
   connect(pLRMin.y, or1.u1) annotation (Line(points={{61.2,70},{54,70},{54,60},
           {41.6,60}},color={255,0,255}));
-  connect(tHotNom1.y, gain1.u) annotation (Line(points={{99.1,30},{90,30},{90,
+  connect(tHotNom1.y, gain1.u) annotation (Line(points={{98.2,30},{88,30},{88,
           16},{81.6,16}},      color={0,0,127}));
   connect(THot, gain.u) annotation (Line(points={{120,-40},{90,-40},{90,-21},{
           65.8,-21}},                 color={0,0,127}));
@@ -134,16 +138,24 @@ equation
           -10,-30},{-24,-30},{-24,-32}}, color={0,0,127}));
   connect(gain.y, conPID2.u_m) annotation (Line(points={{45.1,-21},{28,-21},{28,
           -54},{-36,-54},{-36,-44}}, color={0,0,127}));
-  connect(conPID2.y, switch1.u3) annotation (Line(points={{-47,-32},{-50,-32},{
-          -50,-24},{-56,-24},{-56,-6.4},{-66.4,-6.4}}, color={0,0,127}));
+  connect(conPID2.y, switch1.u3) annotation (Line(points={{-47,-32},{-56,-32},{
+          -56,-6.4},{-66.4,-6.4}},                     color={0,0,127}));
   connect(tHotMax.y, greater.u2) annotation (Line(points={{4.6,-95},{4.6,-96},{
           -16.4,-96},{-16.4,-86.4}}, color={0,0,127}));
   connect(THot, greater.u1) annotation (Line(points={{120,-40},{80,-40},{80,-80},
           {-16.4,-80}}, color={0,0,127}));
-  connect(greater.y, schutdown)
-    annotation (Line(points={{-34.8,-80},{-110,-80}}, color={255,0,255}));
-  connect(greater.y, or1.u2) annotation (Line(points={{-34.8,-80},{-56,-80},{
-          -56,-62},{48,-62},{48,53.6},{41.6,53.6}}, color={255,0,255}));
+  connect(TCold, greater1.u1) annotation (Line(points={{120,-90},{102,-90},{102,
+          -94},{82,-94},{82,-114},{-16.4,-114}}, color={0,0,127}));
+  connect(tHotNom1.y, greater1.u2) annotation (Line(points={{98.2,30},{94,30},{
+          94,-120.4},{-16.4,-120.4}}, color={0,0,127}));
+  connect(greater1.y, or2.u2) annotation (Line(points={{-34.8,-114},{-38,-114},
+          {-38,-112},{-40,-112},{-40,-102.4},{-54.4,-102.4}}, color={255,0,255}));
+  connect(greater.y, or2.u1) annotation (Line(points={{-34.8,-80},{-44,-80},{
+          -44,-96},{-54.4,-96}}, color={255,0,255}));
+  connect(or1.u2, or2.y) annotation (Line(points={{41.6,53.6},{44,53.6},{44,-64},
+          {-78,-64},{-78,-96},{-72.8,-96}}, color={255,0,255}));
+  connect(or2.y, schutdown) annotation (Line(points={{-72.8,-96},{-84,-96},{-84,
+          -80},{-110,-80}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},

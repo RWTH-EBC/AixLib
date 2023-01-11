@@ -18,7 +18,8 @@ model StationaryBehaviour
     dataset="/ExhaustTemp",
     dataUnit="degC",
     scaleUnits={"degC","-","K"},
-    interpMethod=SDF.Types.InterpolationMethod.Linear)
+    interpMethod=SDF.Types.InterpolationMethod.Linear,
+    extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
     annotation (Placement(transformation(extent={{-20,36},{0,56}})));
 
  Modelica.Blocks.Interfaces.RealInput PLR "Part Load Ratio"

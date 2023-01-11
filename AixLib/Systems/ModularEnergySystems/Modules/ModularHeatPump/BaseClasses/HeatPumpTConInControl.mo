@@ -16,7 +16,7 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation ();
 
-  Fluid.Sensors.TemperatureTwoPort senTInlet_b(
+  Fluid.Sensors.TemperatureTwoPort senTConInlet(
     redeclare final package Medium = AixLib.Media.Water,
     final m_flow_nominal=QNom/Medium1.cp_const/DeltaTCon,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -27,7 +27,7 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         extent={{7,8},{-7,-8}},
         rotation=0,
         origin={-81,-60})));
-  Fluid.Sensors.TemperatureTwoPort senTOutlet_b(
+  Fluid.Sensors.TemperatureTwoPort senTModuleOutlet(
     redeclare final package Medium = AixLib.Media.Water,
     final m_flow_nominal=QNom/Medium1.cp_const/DeltaTCon,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -38,7 +38,7 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={72,60})));
-  Fluid.Sensors.TemperatureTwoPort senTInlet_a(
+  Fluid.Sensors.TemperatureTwoPort senTModuleInlet(
     redeclare final package Medium = AixLib.Media.Water,
     final m_flow_nominal=QNom/Medium1.cp_const/DeltaTCon,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -49,7 +49,7 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         extent={{7,-8},{-7,8}},
         rotation=0,
         origin={81,-60})));
-  Fluid.Sensors.TemperatureTwoPort senTOutlet_a(
+  Fluid.Sensors.TemperatureTwoPort senTConOutlet(
     redeclare final package Medium = AixLib.Media.Water,
     final m_flow_nominal=QNom/Medium1.cp_const/DeltaTCon,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -100,7 +100,7 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         rotation=0)));
   AixLib.Controls.Continuous.LimPID conPID(
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    k=0.01,
+    k=0.005,
     Ti=30,
     Td=1,
     yMax=0.9)
@@ -109,38 +109,46 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
     annotation (Placement(transformation(extent={{50,-116},{70,-98}})));
   Modelica.Blocks.Sources.RealExpression tColdNom1(y=THotNom - DeltaTCon)
     "Nominal TCold"
-    annotation (Placement(transformation(extent={{-200,-108},{-128,-78}})));
+    annotation (Placement(transformation(extent={{-254,-108},{-182,-78}})));
+  Modelica.Blocks.Math.Gain gain(k=-1)
+    annotation (Placement(transformation(extent={{-156,-100},{-142,-86}})));
+  Modelica.Blocks.Math.Gain gain1(k=-1)
+    annotation (Placement(transformation(extent={{-80,-138},{-94,-124}})));
 equation
   connect(one.y, positionBypass.u3) annotation (Line(points={{-21,-119},{-2,-119},
           {-2,-112}}, color={0,0,127}));
   connect(feedback1.y, positionBypass.u2)
     annotation (Line(points={{-23.6,-104},{-2,-104}}, color={255,0,255}));
-  connect(port_a2, senTInlet_a.port_a)
+  connect(port_a2, senTModuleInlet.port_a)
     annotation (Line(points={{100,-60},{88,-60}}, color={0,127,255}));
-  connect(port_b2, senTInlet_b.port_b)
+  connect(port_b2, senTConInlet.port_b)
     annotation (Line(points={{-100,-60},{-88,-60}}, color={0,127,255}));
-  connect(port_a1, senTOutlet_a.port_a)
+  connect(port_a1, senTConOutlet.port_a)
     annotation (Line(points={{-100,60},{-80,60}}, color={0,127,255}));
-  connect(senTOutlet_b.port_b, port_b1)
+  connect(senTModuleOutlet.port_b, port_b1)
     annotation (Line(points={{80,60},{100,60}}, color={0,127,255}));
-  connect(senTInlet_b.port_a, mFlowMainInlet_b.port_b)
+  connect(senTConInlet.port_a, mFlowMainInlet_b.port_b)
     annotation (Line(points={{-74,-60},{-64,-60}}, color={0,127,255}));
   connect(positionBypass.y, positionMain.u1) annotation (Line(points={{21,-104},
           {26,-104},{26,-74.8},{15.4,-74.8}}, color={0,0,127}));
-  connect(mFlowMainOutlet_b.port_b, senTOutlet_b.port_a)
+  connect(mFlowMainOutlet_b.port_b, senTModuleOutlet.port_a)
     annotation (Line(points={{48,60},{64,60}}, color={0,127,255}));
-  connect(senTOutlet_a.port_b, mFlowMainOutlet_a.port_a)
+  connect(senTConOutlet.port_b, mFlowMainOutlet_a.port_a)
     annotation (Line(points={{-60,60},{-48,60}}, color={0,127,255}));
-  connect(senTInlet_a.port_b, mFlowMainInlet_a.port_a)
+  connect(senTModuleInlet.port_b, mFlowMainInlet_a.port_a)
     annotation (Line(points={{74,-60},{68,-60}}, color={0,127,255}));
   connect(one2.y, positionMain.u2) annotation (Line(points={{71,-107},{92,-107},
           {92,-83.2},{15.4,-83.2}}, color={0,0,127}));
-  connect(senTInlet_b.T, conPID.u_m) annotation (Line(points={{-81,-68.8},{-81,
-          -122},{-104,-122},{-104,-106}}, color={0,0,127}));
   connect(conPID.y, positionBypass.u1)
     annotation (Line(points={{-93,-94},{-2,-94},{-2,-96}}, color={0,0,127}));
-  connect(conPID.u_s, tColdNom1.y) annotation (Line(points={{-116,-94},{-116,
-          -93},{-124.4,-93}}, color={0,0,127}));
+  connect(tColdNom1.y, gain.u)
+    annotation (Line(points={{-178.4,-93},{-157.4,-93}}, color={0,0,127}));
+  connect(gain.y, conPID.u_s) annotation (Line(points={{-141.3,-93},{-122,-93},
+          {-122,-94},{-116,-94}}, color={0,0,127}));
+  connect(senTConInlet.T, gain1.u) annotation (Line(points={{-81,-68.8},{-81,
+          -120},{-64,-120},{-64,-131},{-78.6,-131}}, color={0,0,127}));
+  connect(gain1.y, conPID.u_m) annotation (Line(points={{-94.7,-131},{-104,-131},
+          {-104,-106}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-30,30},{30,-30}},

@@ -1,6 +1,7 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
-model ModularBoiler
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
+model ModularBoilerStandalone
+                              extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare
+      package
       Medium = AixLib.Media.Water,
                            final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
 
@@ -86,19 +87,26 @@ model ModularBoiler
   Modelica.Blocks.Continuous.Integrator integrator1
     annotation (Placement(transformation(extent={{76,-38},{88,-26}})));
 
+  Controls.ControlBoilerNotManufacturer
+    controlBoilerNotManufacturer(
+    DeltaTWaterNom=dTWaterNom,
+    TColdNom=TColdNom,           QNom=QNom, m_flowVar=m_flowVar,
+    Advanced=Advanced,
+    dTWaterSet=dTWaterSet,
+    THotMax=THotMax,
+    TStart=TStart)
+    annotation (Placement(transformation(extent={{-80,34},{-60,54}})));
+  AixLib.Fluid.Movers.SpeedControlled_y fan1(
+    redeclare package Medium = Media.Water,
+    allowFlowReversal=false,
+    m_flow_small=0.001,
+    per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={dp_nominal/0.8,
+            dp_nominal,0})),
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
     boilerControlBus
     annotation (Placement(transformation(extent={{-12,90},{8,110}})));
-  Modelica.Blocks.Sources.RealExpression one1(y=QNom/4180/dTWaterNom)
-    annotation (Placement(transformation(extent={{-66,48},{-54,64}})));
-  Fluid.Movers.FlowControlled_m_flow fan(
-    redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=QNom/4180/dTWaterNom,
-    addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-56,-10},{-36,10}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=20)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{-152,32},{-126,50}})));
 protected
    parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.Units.SI.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -121,6 +129,8 @@ equation
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
 
   if Pump==false then
+  connect(port_a, heatGeneratorNoControl.port_a) annotation (Line(points={{-100,0},
+            {-100,-20},{-8,-20},{-8,0}},     color={0,127,255}));
   else
   end if;
 
@@ -134,8 +144,27 @@ equation
         points={{13,-7},{30,-7},{30,-32},{74.8,-32}},
                                                    color={0,0,127}));
 
+  connect(fan1.port_b, heatGeneratorNoControl.port_a)
+    annotation (Line(points={{-40,0},{-8,0}}, color={0,127,255}));
+  connect(senTCold.port_b, fan1.port_a)
+    annotation (Line(points={{-70,0},{-60,0}}, color={0,127,255}));
+  connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
+    annotation (Line(points={{-59,37.2},{-10,37.2},{-10,9}},
+                   color={0,0,127}));
   connect(port_b, port_b) annotation (Line(points={{100,0},{106,0},{106,0},{100,
           0}}, color={0,127,255}));
+  connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
+        points={{-80,11},{-80,30},{-92,30},{-92,42.6667},{-82,42.6667}},
+                                                                  color={0,0,127}));
+  connect(boilerControlBus.DeltaTWater, controlBoilerNotManufacturer.DeltaTWater_a)
+    annotation (Line(
+      points={{-1.95,100.05},{-1.95,74},{-96,74},{-96,38.6667},{-82,38.6667}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points={{88.6,
           -32},{110,-32},{110,106},{-1.95,106},{-1.95,100.05}},       color={0,
           0,127}), Text(
@@ -143,36 +172,22 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senTHot.T, boilerControlBus.THot) annotation (Line(points={{60,11},{
-          58,11},{58,50},{8,50},{8,100.05},{-1.95,100.05}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.PLR, heatGeneratorNoControl.PLR) annotation (Line(
-      points={{-1.95,100.05},{-4,100.05},{-4,5.4},{-10,5.4}},
+  connect(controlBoilerNotManufacturer.plr_b, heatGeneratorNoControl.PLR)
+    annotation (Line(points={{-59,49.4667},{-16,49.4667},{-16,5.4},{-10,5.4}},
+        color={0,0,127}));
+  connect(controlBoilerNotManufacturer.mFlowRel, fan1.y) annotation (Line(
+        points={{-57,46.5333},{-50,46.5333},{-50,12}}, color={0,0,127}));
+  connect(boilerControlBus.PLR, controlBoilerNotManufacturer.plr_a) annotation (
+     Line(
+      points={{-1.95,100.05},{-1.95,58},{-92,58},{-92,50.9333},{-82,50.9333}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(fan.port_b, heatGeneratorNoControl.port_a)
-    annotation (Line(points={{-36,0},{-8,0}}, color={0,127,255}));
-  connect(senTCold.port_b, fan.port_a)
-    annotation (Line(points={{-70,0},{-56,0}}, color={0,127,255}));
-  connect(one1.y, fan.m_flow_in) annotation (Line(points={{-53.4,56},{-48,56},{
-          -48,12},{-46,12}}, color={0,0,127}));
-  connect(dTWaterNom1.y, heatGeneratorNoControl.dTWater) annotation (Line(
-        points={{-124.7,41},{-20,41},{-20,9},{-10,9}}, color={0,0,127}));
-  connect(heatGeneratorNoControl.PowerDemand, boilerControlBus.PowerDemand)
-    annotation (Line(points={{13,-7},{26,-7},{26,100.05},{-1.95,100.05}}, color=
-         {0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTHot.T, controlBoilerNotManufacturer.THot) annotation (Line(points={{60,11},
+          {60,28},{-90,28},{-90,40.6667},{-82,40.6667}},         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
@@ -205,4 +220,4 @@ equation
 </ol>
 </html>"),
     experiment(StopTime=10));
-end ModularBoiler;
+end ModularBoilerStandalone;

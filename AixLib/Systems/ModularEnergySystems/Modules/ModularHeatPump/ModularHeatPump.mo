@@ -3,8 +3,6 @@ model ModularHeatPump
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = Media.Water,final m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
-       parameter Boolean dTConFix=false "Constant delta T condenser"
-   annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="General machine information"));
  parameter Boolean HighTemp=false "High temperature HP"
    annotation(choices(checkBox=true), Dialog(descriptionLabel=true, group="General machine information"));
 
@@ -20,7 +18,7 @@ model ModularHeatPump
    annotation (Dialog(group="General machine information"));
 
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
-   annotation (Dialog(enable=dTConFix,tab="Advanced",group="General machine information"));
+   annotation (Dialog(tab="Advanced",group="General machine information"));
 
     parameter Modelica.Units.SI.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
@@ -82,7 +80,6 @@ parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSourceFixed,
-    dTConFix=dTConFix,
     redeclare model PerDataMainHP =
         DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturer)
     annotation (Placement(transformation(extent={{-10,-18},{10,6}})));
@@ -148,8 +145,7 @@ parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const
     QNom=QNom,
     PLRMin=PLRMin,
     HighTemp=HighTemp,
-    DeltaTCon=DeltaTCon,
-    dTConFix=dTConFix) annotation (Placement(transformation(extent={{-66,36},{-46,56}})));
+    DeltaTCon=DeltaTCon) annotation (Placement(transformation(extent={{-66,36},{-46,56}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=180,
@@ -263,8 +259,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(greater.y, control.Shutdown) annotation (Line(points={{13.2,50},{10,
-          50},{10,46},{-44,46}}, color={255,0,255}));
   connect(senTCold.T, greater.u1) annotation (Line(points={{-37,11},{-37,18},{
           66,18},{66,50},{31.6,50}},   color={0,0,127}));
   connect(port_a, fan1.port_a)

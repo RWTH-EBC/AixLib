@@ -69,7 +69,8 @@ annotation (
 
    Real mFlowWaterRel;
 
-   Modelica.Units.SI.ThermodynamicTemperature THot;
+   Modelica.Units.SI.ThermodynamicTemperature THotSet;
+     Modelica.Units.SI.ThermodynamicTemperature TSourceSet;
 
 
   annotation (Documentation(info="<html><p>

@@ -2,7 +2,13 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump.BaseClasses;
 model HeatPumpHotWaterFeedback
 
   extends
-    AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump.BaseClasses.HeatPumpTConInControl
+    AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump.BaseClasses.HeatPumpTConInControl(
+      one2(y=0), conPID(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.1,
+      Ti=20,
+      yMax=1,
+      yMin=0))
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 
@@ -20,47 +26,33 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         Media.Water, final allowFlowReversal=true)
     "Mass flow sensor bypass"        annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
-        rotation=270,
-        origin={0,30})));
-  Fluid.Actuators.Valves.TwoWayLinear valBaypass(
-    allowFlowReversal=false,
-    m_flow_nominal=QNom/4180/DeltaTCon,
-    from_dp=false,
-    redeclare package Medium = Media.Water,
-    dpValve_nominal=6000,
-    riseTime=60,
-    y_start=0)            annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        rotation=270)));
+  Modelica.Blocks.Interfaces.RealOutput mFlowCon "m_flow Condenser" annotation (
+     Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={0,-10})));
-  Fluid.Actuators.Valves.TwoWayLinear valMain(
-    allowFlowReversal=false,
-    m_flow_nominal=QNom/4180/DeltaTCon,
-    from_dp=false,
+        origin={0,110})));
+  Fluid.Actuators.Valves.ThreeWayLinear val(
     redeclare package Medium = AixLib.Media.Water,
+    riseTime=30,
+    m_flow_nominal=QNom/4180/DeltaTCon,
     dpValve_nominal=6000,
-    riseTime=60,
-    y_start=0) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=180,
-        origin={20,60})));
+    fraK=1) annotation (Placement(transformation(extent={{12,-48},{-12,-72}})));
 equation
-  connect(mFlowBypass.port_b, valBaypass.port_a) annotation (Line(points={{-1.4988e-15,
-          22},{6.10623e-16,0}}, color={0,127,255}));
-  connect(mFlowMainOutlet_a.port_b, valMain.port_a)
-    annotation (Line(points={{-36,60},{10,60}}, color={0,127,255}));
+  connect(mFlowMainOutlet_a.m_flow, mFlowCon) annotation (Line(points={{-42,
+          66.6},{-42,80},{0,80},{0,110}}, color={0,0,127}));
+  connect(mFlowMainInlet_a.port_b, val.port_1)
+    annotation (Line(points={{56,-60},{12,-60}}, color={0,127,255}));
   connect(mFlowMainOutlet_a.port_b, mFlowBypass.port_a)
-    annotation (Line(points={{-36,60},{0,60},{0,38}}, color={0,127,255}));
-  connect(valBaypass.port_b, mFlowMainInlet_b.port_a)
-    annotation (Line(points={{0,-20},{0,-60},{-52,-60}}, color={0,127,255}));
-  connect(mFlowMainInlet_a.port_b, mFlowMainInlet_b.port_a)
-    annotation (Line(points={{56,-60},{-52,-60}}, color={0,127,255}));
-  connect(positionMain.y, valMain.y) annotation (Line(points={{-0.7,-79},{-0.7,
-          -48},{20,-48},{20,48}}, color={0,0,127}));
-  connect(positionBypass.y, valBaypass.y) annotation (Line(points={{21,-104},{
-          38,-104},{38,-40},{-28,-40},{-28,-10},{-12,-10}}, color={0,0,127}));
-  connect(valMain.port_b, mFlowMainOutlet_b.port_a)
-    annotation (Line(points={{30,60},{36,60}}, color={0,127,255}));
+    annotation (Line(points={{-36,60},{0,60},{0,8}}, color={0,127,255}));
+  connect(mFlowMainOutlet_a.port_b, mFlowMainOutlet_b.port_a)
+    annotation (Line(points={{-36,60},{36,60}}, color={0,127,255}));
+  connect(mFlowBypass.port_b, val.port_3)
+    annotation (Line(points={{0,-8},{0,-48},{0,-48}}, color={0,127,255}));
+  connect(val.port_2, mFlowMainInlet_b.port_a)
+    annotation (Line(points={{-12,-60},{-52,-60}}, color={0,127,255}));
+  connect(conPID.y, val.y)
+    annotation (Line(points={{-93,-94},{0,-94},{0,-74.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-30,30},{30,-30}},

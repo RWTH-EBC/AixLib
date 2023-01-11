@@ -25,8 +25,6 @@ model LookUpTableNDNotManufacturer
   parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
- parameter Boolean dTConFix=false
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
 
   SDF.NDTable SDFCOP(
@@ -57,8 +55,7 @@ model LookUpTableNDNotManufacturer
     THotNom=THotNom,
     TSourceNom=TSourceNom,
     QNom=QNom,
-    DeltaTCon=DeltaTCon,
-    dTConFix=dTConFix)
+    DeltaTCon=DeltaTCon)
     annotation (Placement(transformation(extent={{-80,-16},{-60,4}})));
   Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
     annotation (Placement(transformation(extent={{-124,50},{-104,70}})));
@@ -200,7 +197,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(nominalHeatPump.QEvapNom, sigBus.QEvapNom) annotation (Line(points={{-59,-4},
-          {8,-4},{8,58},{-1,58},{-1,100}},                    color={0,0,127}),
+          {8,-4},{8,58},{-0.925,58},{-0.925,100.07}},         color={0,0,127}),
       Text(
       string="%second",
       index=1,
