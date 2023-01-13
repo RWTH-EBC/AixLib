@@ -5,6 +5,10 @@ model IndoorSwimmingPool
 
   replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real betaNonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
   parameter Real betaCover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
@@ -57,6 +61,7 @@ model IndoorSwimmingPool
 
   AixLib.Fluid.MixingVolumes.MixingVolume poolSto(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VStorage,
@@ -68,6 +73,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{30,-92},{22,-84}})));
   AixLib.Fluid.MixingVolumes.MixingVolume poolWat(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VPool,
@@ -221,6 +227,7 @@ model IndoorSwimmingPool
     AFloExt=poolParam.AFloExt,
     hConWaterHorizontal=poolParam.hConWaterHorizontal,
     hConWaterVertical=poolParam.hConWaterVertical,
+    TPool=poolParam.TPool,
     PoolWall=poolParam.PoolWallParam)
     "Model to depict the heat flow rate through the pool walls to the bordering room/soil"
     annotation (Placement(transformation(extent={{64,32},{80,48}})));
@@ -309,11 +316,27 @@ model IndoorSwimmingPool
     yMin=0) annotation (Placement(transformation(extent={{18,-54},{8,-44}})));
   Movers.FlowControlled_m_flow cirPump(
     redeclare package Medium = WaterMedium,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
-    redeclare Movers.Data.Generic per,
+    redeclare Movers.Data.Generic per(
+      pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
+            pumpHead/0.7,pumpHead,0}),
+      use_powerCharacteristic=false,
+      hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
+          eta={0.7,0.8,0.7}),
+      motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
+          eta={0.9,0.9,0.9}),
+      power(V_flow={0,(m_flow_nominal/1000*0.2),(m_flow_nominal/1000*0.5),
+            m_flow_nominal/1000*0.7,m_flow_nominal/1000,m_flow_nominal/1000/0.7,
+            m_flow_nominal/1000/0.6,m_flow_nominal/1000/0.5,m_flow_nominal/1000
+            /0.4}, P={(m_flow_nominal/0.4)/1000*pumpHead/0.7/0.9,(
+            m_flow_nominal/0.5)/1000*pumpHead/0.7/0.9,(m_flow_nominal/0.6)/1000
+            *pumpHead/0.7/0.9,(m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,
+            m_flow_nominal/1000*pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*
+            pumpHead/0.7/0.9,(m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(
+            m_flow_nominal/1000*0.2)*pumpHead/0.7/0.9,0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,

@@ -57,9 +57,8 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterHorizontal "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWaterVertical "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
   //replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
-  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
-    PoolWallParam constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
-    annotation (choicesAllMatching=true, Placement(transformation(extent={{48,-98},{68,-78}})));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam
+    annotation (choicesAllMatching=true);
 
   annotation (Documentation(info="<html>
 
