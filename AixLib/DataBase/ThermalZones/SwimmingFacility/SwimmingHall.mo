@@ -90,8 +90,9 @@ record SwimmingHall "Record for swimming hall new"
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false,
     use_pools=true,
-    nPools=1,
-    poolParam={AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool()});
+    nPools=2,
+    poolParam={AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),
+    AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool()});
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.
