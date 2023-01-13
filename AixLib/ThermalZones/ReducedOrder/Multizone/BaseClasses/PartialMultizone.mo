@@ -14,10 +14,13 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
     "Setup for zones" annotation (choicesAllMatching=false);
-  parameter Integer nPorts=0
+
+  parameter Integer nPorts[numZones] = {if zoneParam[i].use_pools then 2 else 0 for i in 1:numZones}
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+
   parameter Boolean use_MechanicalAirExchange=true
     "Consider mechanical ventilation by setting true";
   parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
@@ -54,18 +57,16 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{-10,-10},{10,10}},
     rotation=90,
     origin={60,-110})));
-  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
+  Modelica.Blocks.Interfaces.RealOutput TAir[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") if ASurTot > 0 or VAir > 0
-    "Indoor air temperature"
+    displayUnit="degC") if ASurTot > 0 or VAir > 0 "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
         iconTransformation(extent={{80,19},{100,40}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
+  Modelica.Blocks.Interfaces.RealOutput TRad[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") if ASurTot > 0
-    "Mean indoor radiation temperature"
+    displayUnit="degC") if ASurTot > 0 "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,0},{100,20}})));
   BoundaryConditions.WeatherData.Bus weaBus
@@ -104,7 +105,7 @@ partial model PartialMultizone "Partial model for multizone models"
     final zoneParam=zoneParam,
     redeclare each final model corG = corG,
     each final internalGainsMode=internalGainsMode,
-    each final nPorts=nPorts,
+    final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
