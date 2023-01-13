@@ -13,7 +13,7 @@ model ThermalZoneMoistAirSwimmingPool
     recOrSep=true,
     nPorts=2,
     T_start=293.15,
-    zoneParam=AixLib.DataBase.ThermalZones.SwimmingFacility.SwimmingHall())
+    zoneParam=DataBase.ThermalZones.SwimmingFacility.SwimmingHall())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
