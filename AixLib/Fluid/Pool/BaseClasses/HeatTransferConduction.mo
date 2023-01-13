@@ -101,7 +101,7 @@ model HeatTransferConduction
         extent={{-10,-10},{10,10}},
         rotation=180)));
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWall
-    annotation (Placement(transformation(extent={{76,-98},{96,-78}})));
+    annotation (choicesAllMatching=true,Placement(transformation(extent={{76,-98},{96,-78}})));
 equation
   connect(HeatFlowOuter.T, TSoil)
     annotation (Line(points={{81.2,-28},{110,-28}}, color={0,0,127}));

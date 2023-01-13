@@ -1,7 +1,21 @@
 within AixLib.Fluid.Pool.BaseClasses;
 model AirFlowMoistureToROM
 
-  replaceable package AirMedium = AixLib.Media.Air annotation (choicesAllMatching=true);
+    replaceable package AirMedium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+              property_T=293.15,
+              X_a=0.40)
+              "Propylene glycol water, 40% mass fraction")));
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   parameter Integer nPools = 1;
 
     //Parameters to enable addition of evaporation mass flow to ROM
@@ -22,14 +36,16 @@ model AirFlowMoistureToROM
     redeclare package Medium = AirMedium,
     T_start=303.15,
     V=VAirLay,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=energyDynamics,
     m_flow_nominal=m_flow_air_nominal,
     nPorts=2) "Air layer above swimming pool, relevant for evaporation"
     annotation (Placement(transformation(extent={{-4,42},{-24,62}})));
   Movers.FlowControlled_m_flow          sou(
     redeclare package Medium = AirMedium,
+    energyDynamics=energyDynamics,
     m_flow_nominal=m_flow_air_nominal,
-    addPowerToMedium=false)
+    addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true)
                  annotation (Placement(transformation(extent={{-42,-40},{-64,-14}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         AirMedium)

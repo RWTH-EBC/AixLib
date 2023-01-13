@@ -15,7 +15,7 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
     "Setup for zones" annotation (choicesAllMatching=false);
 
-  parameter Integer nPorts[numZones] = {if zoneParam[i].use_pools then 2 else 0 for i in 1:numZones}
+  parameter Integer nPorts = 0
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
@@ -105,7 +105,7 @@ partial model PartialMultizone "Partial model for multizone models"
     final zoneParam=zoneParam,
     redeclare each final model corG = corG,
     each final internalGainsMode=internalGainsMode,
-    final nPorts=nPorts,
+    each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,

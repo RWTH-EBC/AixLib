@@ -364,6 +364,7 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   Fluid.Pool.BaseClasses.AirFlowMoistureToROM airFlowMoistureToROM(
     redeclare package AirMedium = Medium,
+    energyDynamics=energyDynamics,
     nPools=zoneParam.nPools,
     m_flow_air_nominal=1,
     VAirLay=zoneParam.VAir)

@@ -4,7 +4,12 @@ partial model PartialThermalZone "Partial model for thermal zone models"
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
-  parameter Integer nPorts = if zoneParam.use_pools then 2 else 0
+  parameter Integer nPorts =  0
+    "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+   final parameter Integer nPortsROM = if zoneParam.use_pools then nPorts + 2 else nPorts
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
@@ -64,7 +69,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
-    final nPorts=nPorts,
+    final nPorts=nPortsROM,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
     final nOrientations=size(zoneParam.AExt, 1),
