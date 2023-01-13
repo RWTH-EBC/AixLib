@@ -362,8 +362,7 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   // protected: ThermalZone
 
-  Fluid.Pool.BaseClasses.AirFlowMoistureToROM_New
-                                              airFlowMoistureToROM_New(
+  Fluid.Pool.BaseClasses.AirFlowMoistureToROM airFlowMoistureToROM(
     redeclare package AirMedium = Medium,
     nPools=zoneParam.nPools,
     m_flow_air_nominal=1,
@@ -900,22 +899,21 @@ end if;
                                                      color={0,0,127}));
       connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-19.6,
           -48},{-18,-48},{-18,-64},{-49.03,-64},{-49.03,-69.82}}, color={0,0,127}));
-      connect(airFlowMoistureToROM_New.port_b, ROM.ports[1]) annotation (Line(
+      connect(airFlowMoistureToROM.port_b, ROM.ports[1]) annotation (Line(
             points={{-65.94,-73.72},{-65.94,-74},{-72,-74},{-72,8},{58,8},{58,
-              50},{77,50},{77,56.05}},
-                           color={0,127,255}));
-      connect(airFlowMoistureToROM_New.port_a, ROM.ports[2]) annotation (Line(
+              50},{77,50},{77,56.05}}, color={0,127,255}));
+      connect(airFlowMoistureToROM.port_a, ROM.ports[2]) annotation (Line(
             points={{-66,-72.28},{-72,-72.28},{-72,8},{58,8},{58,50},{77,50},{
-              77,56.05}},      color={0,127,255}));
+              77,56.05}}, color={0,127,255}));
     end for;
   end if;
 
-  connect(indoorSwimmingPool.QEva, airFlowMoistureToROM_New.QEva) annotation (
-      Line(points={{-54.28,-72.64},{-57.23,-72.64},{-57.23,-71.92},{-60.18,
-          -71.92}}, color={0,0,127}));
-  connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM_New.m_flow_eva)
-    annotation (Line(points={{-54.35,-74.38},{-57.25,-74.38},{-57.25,-74.11},{
-          -60.15,-74.11}}, color={0,0,127}));
+  connect(indoorSwimmingPool.QEva, airFlowMoistureToROM.QEva) annotation (Line(
+        points={{-54.28,-72.64},{-57.23,-72.64},{-57.23,-71.92},{-60.18,-71.92}},
+        color={0,0,127}));
+  connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM.m_flow_eva)
+    annotation (Line(points={{-54.35,-74.38},{-57.25,-74.38},{-57.25,-74.11},{-60.15,
+          -74.11}}, color={0,0,127}));
    annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
