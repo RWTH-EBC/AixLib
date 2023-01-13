@@ -34,7 +34,8 @@ record SportPool "Pool which is mainly used by sport swimmers"
     AFloExt=559.82,
     hConWaterHorizontal=50.0,
     hConWaterVertical=5200.0,
-    PoolWallParam=AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteIsulationConstruction());
+    PoolWallParam=
+        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction());
   annotation (Documentation(info="<html>
 <p>The swimming pool &quot;SportPool&quot; describes a typical indoor swimming pool, which is mainly used for sport swimming. </p>
 </html>"));

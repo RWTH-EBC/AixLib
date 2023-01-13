@@ -35,7 +35,7 @@ record ChildrensPool "Pool which is mainly used by children"
     hConWaterHorizontal=50.0,
     hConWaterVertical=5200.0,
     PoolWallParam=
-        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteIsulationConstruction());
+        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction());
 annotation (Documentation(info="<html>
 <p>The swimming pool &quot;ChildrensPool&quot; describes a typical indoor swimming pool, which is mainly used by children and to teach children swimming. </p>
 </html>"));
