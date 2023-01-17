@@ -13,17 +13,19 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
       choice=4 "WSchV_1984",
       radioButtons=true));
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay();
   Modelica.Blocks.Sources.CombiTimeTable NaturalVentilation(
     columns={2,3,4,5,7},                                                               extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = VentilationProfile.Profile) annotation(Placement(transformation(extent={{-53,59},{-73,79}})));
   Modelica.Blocks.Sources.CombiTimeTable TSet(columns = {2, 3, 4, 5, 6, 7}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = TSetProfile.Profile) annotation(Placement(transformation(extent={{-94,-2},{-114,18}})));
-  Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}),    iconTransformation(extent={{101,-7},{117,9}})));
-  Modelica.Blocks.Interfaces.RealOutput Toutside(unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}),     iconTransformation(extent={{100,83},{116,99}})));
-  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](each unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}),    iconTransformation(extent={{101,-7},{117,9}})));
+  Modelica.Blocks.Interfaces.RealOutput Toutside(each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}),     iconTransformation(extent={{100,83},{116,99}})));
+  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](each unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
   Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={64,-77}),      iconTransformation(extent={{101,-79},{117,-63}})));
-  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}),      iconTransformation(extent={{101,-99},{117,-83}})));
+  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}),      iconTransformation(extent={{101,-99},{117,-83}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
@@ -52,6 +54,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     withDynamicVentilation=true,
+    redeclare package Medium = MediumAir,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));

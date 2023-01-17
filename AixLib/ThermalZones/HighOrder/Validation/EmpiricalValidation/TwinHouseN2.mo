@@ -1,8 +1,11 @@
 ﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model TwinHouseN2
    extends Modelica.Icons.Example;
+   replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 roomTwinHouseN2(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,
