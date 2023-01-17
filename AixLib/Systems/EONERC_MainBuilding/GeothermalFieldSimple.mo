@@ -19,12 +19,13 @@ model GeothermalFieldSimple "Geothermal probe"
   HydraulicModules.Throttle throttle(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
+    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso100pc(),
     energyDynamics=energyDynamics,
     allowFlowReversal=allowFlowReversal,
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    tauHeaTra=1800,
+    tauHeaTra=3600,
     length=5,
     final Kv=160,
     massDynamics=massDynamics,
@@ -34,26 +35,35 @@ model GeothermalFieldSimple "Geothermal probe"
         rotation=270,
         origin={2,-50})));
   HydraulicModules.Pump pump(
-    redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.Copper.Copper_159x3(),
+    redeclare package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40),
+    parameterPipe=AixLib.DataBase.Pipes.PE_X.DIN_16893_SDR11_d160(),
+    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
+    tauHeaTra=800,
     energyDynamics=energyDynamics,
     allowFlowReversal=allowFlowReversal,
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    tauHeaTra=1800,
     length=40,
     massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per(
             motorCooledByFluid=false), addPowerToMedium=false)),
-    pipe3(length=80)) annotation (Placement(transformation(
+    pipe1(withInsulation=true, withConvection=false),
+    pipe2(withInsulation=true, withConvection=false),
+    pipe3(
+      length=80,
+      withInsulation=true,
+      withConvection=false))
+                      annotation (Placement(transformation(
         extent={{-40,40},{40,-40}},
         rotation=90,
         origin={0,-200})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
-    redeclare package Medium1 = Medium,
+    redeclare package Medium1 = AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40),
     redeclare package Medium2 = Medium,
     allowFlowReversal1=allowFlowReversal,
     allowFlowReversal2=allowFlowReversal,
@@ -71,8 +81,8 @@ model GeothermalFieldSimple "Geothermal probe"
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
     redeclare Fluid.MixingVolumes.MixingVolume vol2,
     tau_C=10,
-    dT_nom=1,
-    Q_nom=800000)                          annotation (Placement(transformation(
+    dT_nom=3,
+    Q_nom=200000)                          annotation (Placement(transformation(
         extent={{21,22},{-21,-22}},
         rotation=0,
         origin={0,-117})));
@@ -80,7 +90,8 @@ model GeothermalFieldSimple "Geothermal probe"
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Units.SI.Temperature T_amb "Ambient temperature";
   Fluid.MixingVolumes.MixingVolume vol(
-    redeclare package Medium = Medium,
+    redeclare package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40),
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     T_start=T_start,
@@ -99,7 +110,8 @@ model GeothermalFieldSimple "Geothermal probe"
   parameter Modelica.Units.SI.ThermalConductance G_groundNear = 22000
     "Constant thermal conductance of ground";
   Fluid.Sources.Boundary_pT          boundary(
-    redeclare package Medium = Medium,
+    redeclare package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40),
     p=200000,
     nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},

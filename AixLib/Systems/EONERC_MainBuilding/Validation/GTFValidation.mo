@@ -36,7 +36,10 @@ model GTFValidation "Validation of geothermal field"
     redeclare package Medium = Medium,
     m_flow_nominal=10,
     T_start=286.65,
-    T_amb=293.15)
+    T_amb=289.65,
+    pump(T_start=288.15),
+    throttle(T_start=288.15),
+    vol(T_start=288.15))
     annotation (Placement(transformation(extent={{-6,-66},{40,0}})));
   BaseClasses.TwoCircuitBus twoCircuitBus1 annotation (Placement(transformation(
           extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-80,-38},{
@@ -100,7 +103,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (experiment(StopTime=259200),
+  annotation (experiment(StopTime=1814400, __Dymola_Algorithm="Dassl"),
                                          __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_GTFValidation.mos"
         "Simulate and plot"));
