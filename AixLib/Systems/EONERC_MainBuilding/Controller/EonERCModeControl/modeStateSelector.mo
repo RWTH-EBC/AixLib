@@ -62,14 +62,15 @@ model modeStateSelector "Selects sub modes for heating and cooling"
             {-100,18}})));
   Modelica.Blocks.Continuous.Integrator int_HS(use_reset = true);
   Modelica.Blocks.Continuous.Integrator int_CS(use_reset = true);
-  Modelica.StateGraph.InitialStepWithSignal demandEstimation(nOut=1)
+  Modelica.StateGraph.InitialStepWithSignal demandEstimation(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
   Modelica.StateGraph.Transition tran(enableTimer=true, waitTime=
         waitTimeEstimation)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-62,0})));
-  Modelica.StateGraph.StepWithSignal mode1 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode1(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,80},{48,92}})));
   Modelica.StateGraph.Alternative alternative(nBranches=8)
     annotation (Placement(transformation(extent={{-28,-100},{76,100}})));
@@ -77,31 +78,38 @@ model modeStateSelector "Selects sub modes for heating and cooling"
     annotation (Placement(transformation(extent={{10,80},{22,92}})));
   Modelica.StateGraph.TransitionWithSignal tran2
     annotation (Placement(transformation(extent={{10,60},{22,72}})));
-  Modelica.StateGraph.StepWithSignal mode2 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode2(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,60},{48,72}})));
   Modelica.StateGraph.TransitionWithSignal tran3
     annotation (Placement(transformation(extent={{10,40},{22,52}})));
-  Modelica.StateGraph.StepWithSignal mode3 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode3(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,40},{48,52}})));
   Modelica.StateGraph.TransitionWithSignal tran4
     annotation (Placement(transformation(extent={{10,20},{22,32}})));
-  Modelica.StateGraph.StepWithSignal mode4 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode4(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,20},{48,32}})));
   Modelica.StateGraph.TransitionWithSignal tran5
     annotation (Placement(transformation(extent={{10,0},{22,12}})));
-  Modelica.StateGraph.StepWithSignal mode5 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode5(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,0},{48,12}})));
   Modelica.StateGraph.TransitionWithSignal tran6
     annotation (Placement(transformation(extent={{10,-20},{22,-8}})));
-  Modelica.StateGraph.StepWithSignal mode6 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode6(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,-20},{48,-8}})));
   Modelica.StateGraph.TransitionWithSignal tran7
     annotation (Placement(transformation(extent={{10,-40},{22,-28}})));
-  Modelica.StateGraph.StepWithSignal mode7 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode7(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,-40},{48,-28}})));
   Modelica.StateGraph.TransitionWithSignal tran8
     annotation (Placement(transformation(extent={{10,-60},{22,-48}})));
-  Modelica.StateGraph.StepWithSignal mode8 "To reset integrator"
+  Modelica.StateGraph.StepWithSignal mode8(nIn=1, nOut=1)
+                                           "To reset integrator"
     annotation (Placement(transformation(extent={{36,-60},{48,-48}})));
   Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingModeInt and T_CS[1] >
         273.15 + 12)
@@ -154,11 +162,11 @@ model modeStateSelector "Selects sub modes for heating and cooling"
   Modelica.StateGraph.Transition tran16(enableTimer=true, waitTime=
         timeModeActive)
     annotation (Placement(transformation(extent={{50,-60},{62,-48}})));
-  Modelica.StateGraph.Step step
+  Modelica.StateGraph.Step step(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-52,-8},{-36,8}})));
-  parameter Modelica.SIunits.Time waitTimeEstimation=300
+  parameter Modelica.Units.SI.Time waitTimeEstimation=300
     "Wait time for demand estaimation";
-  parameter Modelica.SIunits.Time timeModeActive=1800
+  parameter Modelica.Units.SI.Time timeModeActive=1800
     "Time before mode estimation in which one mode is active";
 equation
 //determine heating or cooling mode
@@ -282,22 +290,6 @@ equation
     case = -1;
   end if;
 
-  connect(tran1.outPort, mode1.inPort[1])
-    annotation (Line(points={{16.9,86},{35.4,86}},color={0,0,0}));
-  connect(tran2.outPort, mode2.inPort[1])
-    annotation (Line(points={{16.9,66},{35.4,66}},color={0,0,0}));
-  connect(tran3.outPort, mode3.inPort[1])
-    annotation (Line(points={{16.9,46},{35.4,46}},color={0,0,0}));
-  connect(tran4.outPort, mode4.inPort[1])
-    annotation (Line(points={{16.9,26},{35.4,26}},color={0,0,0}));
-  connect(tran5.outPort, mode5.inPort[1])
-    annotation (Line(points={{16.9,6},{35.4,6}},color={0,0,0}));
-  connect(tran6.outPort, mode6.inPort[1])
-    annotation (Line(points={{16.9,-14},{35.4,-14}},color={0,0,0}));
-  connect(tran7.outPort, mode7.inPort[1])
-    annotation (Line(points={{16.9,-34},{35.4,-34}},color={0,0,0}));
-  connect(tran8.outPort, mode8.inPort[1])
-    annotation (Line(points={{16.9,-54},{35.4,-54}},color={0,0,0}));
   connect(hpOnly.y, tran1.condition) annotation (Line(points={{7,77},{8,77},{8,78.8},
           {16,78.8}},      color={255,0,255}));
   connect(tran2.condition, HPandGTF.y) annotation (Line(points={{16,58.8},{12,58.8},
@@ -317,53 +309,77 @@ equation
   connect(tran8.condition, HP_reCooler.y) annotation (Line(points={{16,-61.2},{12,
           -61.2},{12,-63},{7,-63}}, color={255,0,255}));
   connect(tran1.inPort, alternative.split[1]) annotation (Line(points={{13.6,86},
-          {-18,86},{-18,87.5},{-17.08,87.5}}, color={0,0,0}));
+          {-18,86},{-18,-43.75},{-17.08,-43.75}},
+                                              color={0,0,0}));
   connect(tran2.inPort, alternative.split[2]) annotation (Line(points={{13.6,66},
-          {-18,66},{-18,62.5},{-17.08,62.5}}, color={0,0,0}));
+          {-18,66},{-18,-31.25},{-17.08,-31.25}},
+                                              color={0,0,0}));
   connect(tran3.inPort, alternative.split[3]) annotation (Line(points={{13.6,46},
-          {-18,46},{-18,37.5},{-17.08,37.5}}, color={0,0,0}));
+          {-18,46},{-18,-18.75},{-17.08,-18.75}},
+                                              color={0,0,0}));
   connect(tran4.inPort, alternative.split[4]) annotation (Line(points={{13.6,26},
-          {-18,26},{-18,12.5},{-17.08,12.5}}, color={0,0,0}));
+          {-18,26},{-18,-6.25},{-17.08,-6.25}},
+                                              color={0,0,0}));
   connect(tran5.inPort, alternative.split[5]) annotation (Line(points={{13.6,6},
-          {-18,6},{-18,-12.5},{-17.08,-12.5}}, color={0,0,0}));
+          {-18,6},{-18,6.25},{-17.08,6.25}},   color={0,0,0}));
   connect(tran6.inPort, alternative.split[6]) annotation (Line(points={{13.6,-14},
-          {-18,-14},{-18,-37.5},{-17.08,-37.5}}, color={0,0,0}));
+          {-18,-14},{-18,18.75},{-17.08,18.75}}, color={0,0,0}));
   connect(tran7.inPort, alternative.split[7]) annotation (Line(points={{13.6,-34},
-          {-18,-34},{-18,-62.5},{-17.08,-62.5}}, color={0,0,0}));
+          {-18,-34},{-18,31.25},{-17.08,31.25}}, color={0,0,0}));
   connect(tran8.inPort, alternative.split[8]) annotation (Line(points={{13.6,-54},
-          {-18,-54},{-18,-87.5},{-17.08,-87.5}}, color={0,0,0}));
-  connect(mode1.outPort[1], tran9.inPort)
-    annotation (Line(points={{48.3,86},{53.6,86}}, color={0,0,0}));
+          {-18,-54},{-18,43.75},{-17.08,43.75}}, color={0,0,0}));
   connect(tran9.outPort, alternative.join[1]) annotation (Line(points={{56.9,86},
-          {62,86},{62,87.5},{65.08,87.5}}, color={0,0,0}));
-  connect(mode8.outPort[1], tran16.inPort)
-    annotation (Line(points={{48.3,-54},{53.6,-54}}, color={0,0,0}));
-  connect(mode7.outPort[1], tran15.inPort)
-    annotation (Line(points={{48.3,-34},{53.6,-34}}, color={0,0,0}));
-  connect(mode6.outPort[1], tran14.inPort)
-    annotation (Line(points={{48.3,-14},{53.6,-14}}, color={0,0,0}));
-  connect(mode5.outPort[1], tran13.inPort)
-    annotation (Line(points={{48.3,6},{53.6,6}}, color={0,0,0}));
-  connect(mode4.outPort[1], tran12.inPort)
-    annotation (Line(points={{48.3,26},{53.6,26}}, color={0,0,0}));
-  connect(mode3.outPort[1], tran11.inPort)
-    annotation (Line(points={{48.3,46},{53.6,46}}, color={0,0,0}));
+          {62,86},{62,-43.75},{65.08,-43.75}},
+                                           color={0,0,0}));
+  connect(tran10.outPort, alternative.join[2]) annotation (Line(points={{56.9,66},
+          {60,66},{60,-31.25},{65.08,-31.25}},
+                                           color={0,0,0}));
+  connect(tran11.outPort, alternative.join[3]) annotation (Line(points={{56.9,46},
+          {60,46},{60,-18.75},{65.08,-18.75}},
+                                           color={0,0,0}));
+  connect(tran12.outPort, alternative.join[4]) annotation (Line(points={{56.9,26},
+          {62,26},{62,-6.25},{65.08,-6.25}},
+                                           color={0,0,0}));
+  connect(tran13.outPort, alternative.join[5]) annotation (Line(points={{56.9,6},
+          {60,6},{60,6.25},{65.08,6.25}},   color={0,0,0}));
+  connect(tran14.outPort, alternative.join[6]) annotation (Line(points={{56.9,-14},
+          {60,-14},{60,18.75},{65.08,18.75}}, color={0,0,0}));
+  connect(tran15.outPort, alternative.join[7]) annotation (Line(points={{56.9,-34},
+          {60,-34},{60,31.25},{65.08,31.25}}, color={0,0,0}));
+  connect(tran16.outPort, alternative.join[8]) annotation (Line(points={{56.9,-54},
+          {60,-54},{60,43.75},{65.08,43.75}}, color={0,0,0}));
+  connect(tran1.outPort, mode1.inPort[1])
+    annotation (Line(points={{16.9,86},{35.4,86}}, color={0,0,0}));
+  connect(tran2.outPort, mode2.inPort[1])
+    annotation (Line(points={{16.9,66},{35.4,66}}, color={0,0,0}));
+  connect(tran3.outPort, mode3.inPort[1])
+    annotation (Line(points={{16.9,46},{35.4,46}}, color={0,0,0}));
+  connect(tran4.outPort, mode4.inPort[1])
+    annotation (Line(points={{16.9,26},{35.4,26}}, color={0,0,0}));
+  connect(tran5.outPort, mode5.inPort[1])
+    annotation (Line(points={{16.9,6},{35.4,6}}, color={0,0,0}));
+  connect(tran6.outPort, mode6.inPort[1])
+    annotation (Line(points={{16.9,-14},{35.4,-14}}, color={0,0,0}));
+  connect(tran7.outPort, mode7.inPort[1])
+    annotation (Line(points={{16.9,-34},{35.4,-34}}, color={0,0,0}));
+  connect(tran8.outPort, mode8.inPort[1])
+    annotation (Line(points={{16.9,-54},{35.4,-54}}, color={0,0,0}));
   connect(mode2.outPort[1], tran10.inPort)
     annotation (Line(points={{48.3,66},{53.6,66}}, color={0,0,0}));
-  connect(tran10.outPort, alternative.join[2]) annotation (Line(points={{56.9,66},
-          {60,66},{60,62.5},{65.08,62.5}}, color={0,0,0}));
-  connect(tran11.outPort, alternative.join[3]) annotation (Line(points={{56.9,46},
-          {60,46},{60,37.5},{65.08,37.5}}, color={0,0,0}));
-  connect(tran12.outPort, alternative.join[4]) annotation (Line(points={{56.9,26},
-          {62,26},{62,12.5},{65.08,12.5}}, color={0,0,0}));
-  connect(tran13.outPort, alternative.join[5]) annotation (Line(points={{56.9,6},
-          {60,6},{60,-12.5},{65.08,-12.5}}, color={0,0,0}));
-  connect(tran14.outPort, alternative.join[6]) annotation (Line(points={{56.9,-14},
-          {60,-14},{60,-37.5},{65.08,-37.5}}, color={0,0,0}));
-  connect(tran15.outPort, alternative.join[7]) annotation (Line(points={{56.9,-34},
-          {60,-34},{60,-62.5},{65.08,-62.5}}, color={0,0,0}));
-  connect(tran16.outPort, alternative.join[8]) annotation (Line(points={{56.9,-54},
-          {60,-54},{60,-87.5},{65.08,-87.5}}, color={0,0,0}));
+  connect(mode3.outPort[1], tran11.inPort)
+    annotation (Line(points={{48.3,46},{53.6,46}}, color={0,0,0}));
+  connect(mode4.outPort[1], tran12.inPort)
+    annotation (Line(points={{48.3,26},{53.6,26}}, color={0,0,0}));
+  connect(mode5.outPort[1], tran13.inPort)
+    annotation (Line(points={{48.3,6},{53.6,6}}, color={0,0,0}));
+  connect(mode6.outPort[1], tran14.inPort)
+    annotation (Line(points={{48.3,-14},{53.6,-14}}, color={0,0,0}));
+  connect(mode7.outPort[1], tran15.inPort)
+    annotation (Line(points={{48.3,-34},{53.6,-34}}, color={0,0,0}));
+  connect(mode8.outPort[1], tran16.inPort)
+    annotation (Line(points={{48.3,-54},{53.6,-54}}, color={0,0,0}));
+  connect(mode1.outPort[1], tran9.inPort)
+    annotation (Line(points={{48.3,86},{53.6,86}}, color={0,0,0}));
   connect(demandEstimation.outPort[1], tran.inPort)
     annotation (Line(points={{-73.6,0},{-65.2,0}}, color={0,0,0}));
   connect(tran.outPort, step.inPort[1])
@@ -371,8 +387,8 @@ equation
   connect(step.outPort[1], alternative.inPort)
     annotation (Line(points={{-35.6,0},{-29.56,0}}, color={0,0,0}));
   connect(alternative.outPort, demandEstimation.inPort[1]) annotation (Line(
-        points={{77.04,0},{80,0},{80,118},{-92,118},{-92,0},{-90.8,0}}, color={0,
-          0,0}));
+        points={{77.04,0},{84,0},{84,110},{-96,110},{-96,0},{-90.8,0}}, color={
+          0,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

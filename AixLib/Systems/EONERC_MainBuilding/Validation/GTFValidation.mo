@@ -103,7 +103,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (experiment(StopTime=1814400, __Dymola_Algorithm="Dassl"),
+  annotation (experiment(StopTime=2246400, __Dymola_Algorithm="Dassl"),
                                          __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_GTFValidation.mos"
         "Simulate and plot"));

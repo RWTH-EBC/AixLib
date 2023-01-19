@@ -13,7 +13,7 @@ model CtrHP "Heatpump Controller"
     final k=0.2,
     final Ti=600,
     final Td=0,
-    initType=Modelica.Blocks.Types.InitPID.NoInit,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=N_rel_min,
     reverseActing=false)
@@ -47,7 +47,7 @@ model CtrHP "Heatpump Controller"
     final k=0.2,
     final Ti=600,
     final Td=0,
-    initType=Modelica.Blocks.Types.InitPID.NoInit,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=N_rel_min,
     reverseActing=true)

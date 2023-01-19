@@ -48,7 +48,7 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
   CtrHighTemperatureSystem ctrHighTemperatureSystem
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
-  Modelica.Blocks.Tables.CombiTable1D ccaHeatCurve(table=[270.15,303.15; 273.15,
+  Modelica.Blocks.Tables.CombiTable1Ds ccaHeatCurve(table=[270.15,303.15; 273.15,
         303.15; 278.15,298.15; 283.15,293.15; 293.15,291.15; 298.15,288.15;
         303.15,288.15])
     annotation (Placement(transformation(extent={{-70,-90},{-50,-70}})));
@@ -192,29 +192,29 @@ equation
       Line(points={{-34,22.1},{-100,22.1},{-100,60},{-83.6,60}},
         color={255,0,255}));
   connect(modeStateSelector.T_HS[1], bus.hpSystemBus.TTopHSMea) annotation (Line(points={{-59.96,
-          9.71},{-96,9.71},{-96,106},{100,106},{100,-0.935},{100.07,-0.935}},
+          10.655},{-96,10.655},{-96,106},{100,106},{100,-0.935},{100.07,-0.935}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(modeStateSelector.T_HS[2], bus.hpSystemBus.TBottomHSMea) annotation (Line(points={{-59.96,
-          13.49},{-96,13.49},{-96,106},{100,106},{100,-0.935},{100.07,-0.935}},
+          12.545},{-96,12.545},{-96,106},{100,106},{100,-0.935},{100.07,-0.935}},
                                          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(modeStateSelector.T_CS[1], bus.hpSystemBus.TTopCSMea) annotation (Line(points={{-59.96,
-          -15.49},{-98,-15.49},{-98,104},{100.07,104},{100.07,-0.935}},
+          -14.545},{-98,-14.545},{-98,104},{100.07,104},{100.07,-0.935}},
                     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(modeStateSelector.T_CS[2], bus.hpSystemBus.TBottomCSMea) annotation (Line(points={{-59.96,
-          -11.71},{-82,-11.71},{-82,-12},{-98,-12},{-98,104},{100.07,104},{
-          100.07,-0.935}},  color={0,0,127}), Text(
+          -12.655},{-82,-12.655},{-82,-12},{-98,-12},{-98,104},{100.07,104},{100.07,
+          -0.935}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -263,9 +263,6 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(ccaHeatCurve.u[1], modeStateSelector.T_air) annotation (Line(points={{-72,-80},
-          {-78,-80},{-78,-40},{-25.2,-40},{-25.2,-25.78}},             color={0,
-          0,127}));
   connect(ctrTabs2_2.tabsBus, bus.tabs2Bus) annotation (Line(
       points={{-20,-90},{0,-90},{0,-168},{100.07,-168},{100.07,-0.935}},
       color={255,204,51},
@@ -341,6 +338,9 @@ equation
     annotation (Line(points={{38.4,68},{12.4,68}}, color={255,0,255}));
   connect(modeStateSelector.freeCoolingGC, not2.u) annotation (Line(points={{
           -9.8,-1},{-2,-1},{-2,68},{3.2,68}}, color={255,0,255}));
+  connect(modeStateSelector.T_air, ccaHeatCurve.u) annotation (Line(points={{
+          -25.2,-25.78},{-25.2,-48},{-82,-48},{-82,-80},{-72,-80}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -180},{100,100}}), graphics={Line(
           points={{20,80},{80,0},{40,-80}},

@@ -3,24 +3,22 @@ model CtrAHUTsetRoom
   "Controller for AHU that controlls the zone temperature"
   CtrAHUBasic             ctrAHUBasic(
     final useExternalTset=true,
-    final useExternalVset=useExternalVset,
       final VFlowSet=VFlowSet) annotation (Dialog(enable=true), Placement(
         transformation(extent={{40,-10},{60,10}})));
   BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
           extent={{92,-10},{112,10}}), iconTransformation(extent={{86,-18},{118,
             16}})));
-  parameter Modelica.SIunits.Temperature TRoomSet=295.15
+  parameter Modelica.Units.SI.Temperature TRoomSet=295.15
     "Flow temperature set point of room"
     annotation (Dialog(enable=useExternalTset == false));
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
-  parameter Boolean useExternalVset=false
-    "If True, set volume flow can be given externally";
+
   parameter Real k=0.2 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti=300 "Time constant of Integrator block";
+  parameter Modelica.Units.SI.Time Ti=300 "Time constant of Integrator block";
   parameter Real yMax=298.15 "Upper limit of output";
   parameter Real yMin=289.15 "Lower limit of output";
-  parameter Modelica.SIunits.VolumeFlowRate VFlowSet=1000/3600
+  parameter Modelica.Units.SI.VolumeFlowRate VFlowSet=1000/3600
     "Set value of volume flow [m^3/s]" annotation (dialog(group="Fan Controller", enable=useExternalVset == false));
   Controls.Continuous.LimPID        conPID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -39,11 +37,6 @@ model CtrAHUTsetRoom
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent={{-140,40},
             {-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput VFlow if useExternalVset
-    "Connector of second Real input signal" annotation (Placement(
-        transformation(extent={{-140,-80},{-100,-40}}),
-                                                      iconTransformation(extent={{-140,
-            -80},{-100,-40}})));
 equation
   connect(constTflowSet.y, conPID.u_s) annotation (Line(
       points={{-59,30},{-32,30},{-32,0},{-22,0}},
@@ -55,8 +48,6 @@ equation
       points={{-120,60},{-24,60},{-24,0},{-22,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(VFlow, ctrAHUBasic.VFlow)
-    annotation (Line(points={{-120,-60},{38,-60},{38,-6}}, color={0,0,127}));
   connect(ctrAHUBasic.genericAHUBus, genericAHUBus) annotation (Line(
       points={{60,0.1},{80,0.1},{80,0},{102,0}},
       color={255,204,51},

@@ -9,15 +9,12 @@ block CtrHXsimple "Controller for heat exchanger system"
                                                                   annotation (Placement(transformation(extent={{0,80},{
             20,100}})));
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 298.15 "Flow temperature set point of consumer";
+  parameter Modelica.Units.SI.Temperature TflowSet = 298.15 "Flow temperature set point of consumer";
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller" annotation(Dialog(group="PID"));
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=60
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=60
     "Time constant of Integrator block" annotation(Dialog(group="PID"));
   parameter Real rpmPumpPrim( min=0, unit="1") = 1500 "Rpm of the pump on the high temperature side";
   parameter Real rpmPumpSec( min=0, unit="1") = 1000 "Rpm of the Pump on the low temperature side";
-  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
-    "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation(Dialog(group="PID"));
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -35,7 +32,7 @@ block CtrHXsimple "Controller for heat exchanger system"
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     final k=k,
     final Ti=Ti,
-    final initType=initType,
+    final initType=Modelica.Blocks.Types.Init.InitialState,
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,

@@ -507,7 +507,7 @@ model MainBuilding2Zones "Benchmark building model"
     V=0.1,
     m_flow_nominal=1,
     redeclare package Medium = MediumWater,
-    functionality="Q_flow_input",
+    functionality="T_input",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-176,166},{-164,178}})));
   Fluid.MixingVolumes.MixingVolume vol2(
@@ -526,13 +526,13 @@ model MainBuilding2Zones "Benchmark building model"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
         origin={-160,10})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_AHU1(y=-(0.9*(Tair - 273.15) +
+  Modelica.Blocks.Sources.RealExpression Q_flow_AHU1(y=-(0.5*(Tair - 273.15) +
         6)*1000)
-    annotation (Placement(transformation(extent={{-198,192},{-182,208}})));
+    annotation (Placement(transformation(extent={{-212,190},{-196,206}})));
   Modelica.Blocks.Nonlinear.Limiter limiterAHU1(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
-        rotation=270,
-        origin={-174,186})));
+        rotation=0,
+        origin={-184,198})));
   HydraulicModules.Admix admixCold(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
@@ -557,11 +557,11 @@ model MainBuilding2Zones "Benchmark building model"
         rotation=90,
         origin={108,-10})));
   HydraulicModules.SimpleConsumer consumerCold(
-    kA=1000,
+    kA=2000,
     V=0.1,
     m_flow_nominal=1,
     redeclare package Medium = MediumWater,
-    functionality="Q_flow_input",
+    functionality="T_input",
     T_start=293.15) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
@@ -593,12 +593,12 @@ model MainBuilding2Zones "Benchmark building model"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
-        origin={148,16})));
+        origin={174,0})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCACold1(uMax=80000,  uMin=0)
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={126,16})));
+        origin={156,0})));
   Modelica.Blocks.Interfaces.RealOutput Tair
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
@@ -628,6 +628,46 @@ model MainBuilding2Zones "Benchmark building model"
   Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=273.15)
     "Ice Protection"
     annotation (Placement(transformation(extent={{-20,-106},{-8,-94}})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold2(y=mainBus.consCold1Bus.VFlowInMea
+        *4.18*(mainBus.consCold1Bus.TFwrdOutMea - mainBus.consCold1Bus.TRtrnInMea))
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={226,6})));
+  Modelica.Blocks.Math.Add add(k2=1/2000) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=180,
+        origin={141,-3})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold3(y=mainBus.consCold1Bus.TRtrnInMea)
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={174,-12})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold4(y=mainBus.consHtcBus.TRtrnInMea)
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=0,
+        origin={-204,208})));
+  Modelica.Blocks.Math.Add add1(k2=1/2000) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=0,
+        origin={-172,204})));
+  Modelica.Blocks.Nonlinear.Limiter limiterAHU2(uMax=273.15 + 90, uMin=273.15
+         + 20)
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        rotation=270,
+        origin={-168,188})));
+  Modelica.Blocks.Nonlinear.Limiter limiterAHU3(uMax=273.15 + 35, uMin=273.15
+         + 10)
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        rotation=180,
+        origin={126,10})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold5(y=mainBus.consHtcBus.VFlowInMea
+        *4.18*(mainBus.consHtcBus.TFwrdOutMea - mainBus.consHtcBus.TRtrnInMea))
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={224,-24})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
       Line(points={{14,-100},{14,-77.4444},{15,-77.4444}},          color={191,
@@ -859,10 +899,7 @@ equation
   connect(vol2.ports[3], admixHTC.port_a1)
     annotation (Line(points={{-176,-19.8},{-176,140}}, color={238,46,47}));
   connect(Q_flow_AHU1.y,limiterAHU1. u)
-    annotation (Line(points={{-181.2,200},{-174,200},{-174,190.8}},
-                                                         color={0,0,127}));
-  connect(limiterAHU1.y,consumerHTC. Q_flow) annotation (Line(points={{-174,
-          181.6},{-174,178},{-173.6,178}},        color={0,0,127}));
+    annotation (Line(points={{-195.2,198},{-188.8,198}}, color={0,0,127}));
   connect(consumerCold.port_a, admixCold.port_b1)
     annotation (Line(points={{104,12},{104,0},{102,0}}, color={0,127,255}));
   connect(consumerCold.port_b, admixCold.port_a2)
@@ -879,10 +916,9 @@ equation
           -50},{122.533,-24},{114,-24},{114,-20}}, color={0,127,255}));
   connect(vol5.ports[2], heatpumpSystem.port_a1) annotation (Line(points={{122,-50},
           {122,-49.3333},{70,-49.3333}},            color={0,127,255}));
-  connect(limiterCCACold1.y, consumerCold.Q_flow) annotation (Line(points={{
-          121.6,16},{106.4,16},{106.4,18}}, color={0,0,127}));
   connect(limiterCCACold1.u,Q_flow_CCA_cold1. y)
-    annotation (Line(points={{130.8,16},{139.2,16}},   color={0,0,127}));
+    annotation (Line(points={{160.8,-5.55112e-16},{161,-5.55112e-16},{161,
+          1.11022e-15},{165.2,1.11022e-15}},           color={0,0,127}));
   connect(vol5.ports[3], switchingUnit.port_b1) annotation (Line(points={{121.467,
           -50},{198,-50},{198,-36},{236,-36}},         color={0,127,255}));
   connect(vol4.ports[3], switchingUnit.port_a2)
@@ -943,6 +979,36 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(Q_flow_CCA_cold2.y, mainBus.QCold) annotation (Line(points={{217.2,6},
+          {217.2,4},{208,4},{208,280},{192,280},{192,384},{161,384},{161,419}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.u2, limiterCCACold1.y) annotation (Line(points={{147,-1.22125e-15},
+          {149.3,-1.22125e-15},{149.3,6.10623e-16},{151.6,6.10623e-16}}, color=
+          {0,0,127}));
+  connect(add.u1, Q_flow_CCA_cold3.y) annotation (Line(points={{147,-6},{152,-6},
+          {152,-12},{165.2,-12}}, color={0,0,127}));
+  connect(add1.u1, Q_flow_CCA_cold4.y) annotation (Line(points={{-176.8,206.4},
+          {-195.2,206.4},{-195.2,208}}, color={0,0,127}));
+  connect(limiterAHU1.y, add1.u2) annotation (Line(points={{-179.6,198},{-178,
+          198},{-178,201.6},{-176.8,201.6}}, color={0,0,127}));
+  connect(add1.y, limiterAHU2.u) annotation (Line(points={{-167.6,204},{-167.6,
+          192.8},{-168,192.8}}, color={0,0,127}));
+  connect(limiterAHU2.y, consumerHTC.T) annotation (Line(points={{-168,183.6},{
+          -165.2,183.6},{-165.2,178}}, color={0,0,127}));
+  connect(limiterAHU3.u, add.y) annotation (Line(points={{130.8,10},{132,10},{
+          132,-3},{135.5,-3}}, color={0,0,127}));
+  connect(limiterAHU3.y, consumerCold.T) annotation (Line(points={{121.6,10},{
+          122,10},{122,18},{114.8,18}}, color={0,0,127}));
+  connect(Q_flow_CCA_cold5.y, mainBus.QHtc) annotation (Line(points={{215.2,-24},
+          {200,-24},{200,-18},{161,-18},{161,419}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{560,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{560,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

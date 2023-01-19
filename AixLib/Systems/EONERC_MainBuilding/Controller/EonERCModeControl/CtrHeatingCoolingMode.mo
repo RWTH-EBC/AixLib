@@ -6,9 +6,9 @@ model CtrHeatingCoolingMode "Determination of heating or cooling mode"
   Modelica.StateGraph.TransitionWithSignal transitionHeatingMode(enableTimer=
         true, waitTime=1800)
     annotation (Placement(transformation(extent={{78,40},{98,60}})));
-  Modelica.StateGraph.StepWithSignal stepCoolingActive
+  Modelica.StateGraph.StepWithSignal stepCoolingActive(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{48,40},{68,60}})));
-  Modelica.StateGraph.InitialStepWithSignal stepHeatingActive(nOut=1)
+  Modelica.StateGraph.InitialStepWithSignal stepHeatingActive(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
   Modelica.Blocks.Continuous.Derivative derivativeHS
     annotation (Placement(transformation(extent={{-60,-20},{-48,-8}})));
@@ -16,11 +16,13 @@ model CtrHeatingCoolingMode "Determination of heating or cooling mode"
     annotation (Placement(transformation(extent={{0,-6},{12,-18}})));
   Modelica.StateGraph.Transition tran
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  Modelica.StateGraph.StepWithSignal stepCooling "To reset integrator"
+  Modelica.StateGraph.StepWithSignal stepCooling(nIn=1, nOut=1)
+                                                 "To reset integrator"
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
   Modelica.StateGraph.Transition tran1
     annotation (Placement(transformation(extent={{26,40},{46,60}})));
-  Modelica.StateGraph.StepWithSignal stepHeating "To reset integrator"
+  Modelica.StateGraph.StepWithSignal stepHeating(nOut=1, nIn=1)
+                                                 "To reset integrator"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Math.Sum sumHS(nin=2, k={0.5,0.5})
     annotation (Placement(transformation(extent={{-94,-20},{-82,-8}})));
@@ -101,24 +103,6 @@ model CtrHeatingCoolingMode "Determination of heating or cooling mode"
         rotation=90,
         origin={84,2})));
 equation
-  connect(stepHeatingActive.outPort[1],transitionCoolingMode. inPort)
-    annotation (Line(points={{-39.5,50},{-30,50},{-30,50},{-22,50}},
-                                                     color={0,0,0}));
-  connect(stepCoolingActive.outPort[1],transitionHeatingMode. inPort)
-    annotation (Line(points={{68.5,50},{84,50}},   color={0,0,0}));
-  connect(tran.outPort, stepHeatingActive.inPort[1])
-    annotation (Line(points={{-68.5,50},{-61,50}}, color={0,0,0}));
-  connect(transitionCoolingMode.outPort,stepCooling. inPort[1])
-    annotation (Line(points={{-16.5,50},{-1,50}},   color={0,0,0}));
-  connect(stepCooling.outPort[1], tran1.inPort)
-    annotation (Line(points={{20.5,50},{32,50}}, color={0,0,0}));
-  connect(tran1.outPort, stepCoolingActive.inPort[1])
-    annotation (Line(points={{37.5,50},{47,50}}, color={0,0,0}));
-  connect(tran.inPort, stepHeating.outPort[1])
-    annotation (Line(points={{-74,50},{-79.5,50}}, color={0,0,0}));
-  connect(transitionHeatingMode.outPort,stepHeating. inPort[1]) annotation (
-      Line(points={{89.5,50},{90,50},{90,66},{-101,66},{-101,50}},        color=
-         {0,0,0}));
   connect(integratorHS.y,greater. u1)
     annotation (Line(points={{12.6,-12},{22.8,-12}},   color={0,0,127}));
   connect(integratorCS.y,greater. u2) annotation (Line(points={{12.6,-34},{22.8,
@@ -190,6 +174,23 @@ equation
           {88,-2.8},{87.2,-2.8}}, color={255,0,255}));
   connect(or4.y, transitionHeatingMode.condition) annotation (Line(points={{84,
           6.4},{86,6.4},{86,38},{88,38}}, color={255,0,255}));
+  connect(stepHeatingActive.outPort[1], transitionCoolingMode.inPort)
+    annotation (Line(points={{-39.5,50},{-22,50}}, color={0,0,0}));
+  connect(tran.outPort, stepHeatingActive.inPort[1])
+    annotation (Line(points={{-68.5,50},{-61,50}}, color={0,0,0}));
+  connect(stepHeating.outPort[1], tran.inPort)
+    annotation (Line(points={{-79.5,50},{-74,50}}, color={0,0,0}));
+  connect(transitionCoolingMode.outPort, stepCooling.inPort[1])
+    annotation (Line(points={{-16.5,50},{-1,50}}, color={0,0,0}));
+  connect(stepCooling.outPort[1], tran1.inPort)
+    annotation (Line(points={{20.5,50},{32,50}}, color={0,0,0}));
+  connect(tran1.outPort, stepCoolingActive.inPort[1])
+    annotation (Line(points={{37.5,50},{47,50}}, color={0,0,0}));
+  connect(stepCoolingActive.outPort[1], transitionHeatingMode.inPort)
+    annotation (Line(points={{68.5,50},{84,50}}, color={0,0,0}));
+  connect(transitionHeatingMode.outPort, stepHeating.inPort[1]) annotation (
+      Line(points={{89.5,50},{94,50},{94,66},{-110,66},{-110,50},{-101,50}},
+        color={0,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CtrHeatingCoolingMode;
