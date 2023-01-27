@@ -39,7 +39,7 @@ partial model Boiler_base_MultiPort
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final dTWaterNom=dTWaterNom,
-    final TColdNom=TColdNom,
+    final TRetNom=TColdNom,
     final m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   inner Modelica.Fluid.System system(final p_start=system.p_ambient)

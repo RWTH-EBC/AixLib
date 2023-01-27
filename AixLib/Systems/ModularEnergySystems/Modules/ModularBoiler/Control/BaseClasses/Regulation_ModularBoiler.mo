@@ -26,8 +26,8 @@ model Regulation_ModularBoiler
   Modelica.Blocks.Interfaces.RealOutput mFlow_relB
     annotation (Placement(transformation(extent={{92,-10},{112,10}}),
         iconTransformation(extent={{92,-10},{112,10}})));
-  Modelica.Blocks.Interfaces.RealOutput PLRset if
-   not use_advancedControl or (use_advancedControl and severalHeatCircuits)
+  Modelica.Blocks.Interfaces.RealOutput PLRset
+if not use_advancedControl or (use_advancedControl and severalHeatCircuits)
     annotation (Placement(transformation(extent={{92,30},{112,50}}),
         iconTransformation(extent={{92,30},{112,50}})));
   Modelica.Blocks.Interfaces.RealInput PLRMea

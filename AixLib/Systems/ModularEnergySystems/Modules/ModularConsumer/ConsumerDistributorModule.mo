@@ -1,10 +1,14 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer;
-model ModularConsumer
-    extends AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.BaseClasses.ModularConsumer_base;
+model ConsumerDistributorModule
+    extends
+    AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.BaseClasses.ModularConsumer_base(
+    T_Flow(unit="K"),
+    T_Return(unit="K"),
+    simpleConsumer(final T_start=T_start));
     extends AixLib.Fluid.Interfaces.PartialTwoPort(redeclare package Medium =
         MediumWater);
 
-  AixLib.Systems.ModularEnergySystems.Modules.Distributor.Distributor
+  Fluid.HeatExchangers.ActiveWalls.Distributor
     distributor(
     redeclare package Medium = Medium,
     final m_flow_nominal = sum(simpleConsumer.m_flow_nominal),
@@ -13,6 +17,9 @@ model ModularConsumer
         extent={{-24,-24},{24,24}},
         rotation=90,
         origin={0,-50})));
+
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start[n_consumers]=fill(Medium.T_default, n_consumers)
+    "Start value of temperature";
 equation
 
   connect(port_a, distributor.mainFlow) annotation (Line(points={{-100,0},{-60,0},
@@ -61,23 +68,6 @@ equation
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="CONSUMER"),
-                   Ellipse(
-          extent={{-72,64},{88,-96}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid),Ellipse(
-          extent={{-52,44},{68,-76}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),Text(
-          extent={{-48,2},{64,-34}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="CONSUMER")}),                              Diagram(
+          textString="CONSUMER [%n]")}),                         Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end ModularConsumer;
+end ConsumerDistributorModule;

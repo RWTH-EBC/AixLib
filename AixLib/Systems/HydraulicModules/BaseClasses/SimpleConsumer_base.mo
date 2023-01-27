@@ -46,12 +46,13 @@ public
     addPowerToMedium=false) if hasPump       annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={4,-1.77636e-15})));
+        origin={8,-1.77636e-15})));
   Fluid.MixingVolumes.MixingVolume volume(
     redeclare package Medium = Medium,
     final V=V,
     final m_flow_nominal=m_flow_nominal,
-    nPorts=3)                                                     annotation (Placement(transformation(
+    nPorts= if hasFeedback then 3 else 2)
+     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={40,-10})));
@@ -84,47 +85,49 @@ public
     allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-32,-10},{-12,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput T_Flow
-    annotation (Placement(
-        transformation(
-        extent={{-14,-14},{14,14}},
-        rotation=0,
-        origin={-106,-40})));
-  Modelica.Blocks.Interfaces.RealInput T_Return
-    annotation (Placement(
-        transformation(
-        extent={{-14,-14},{14,14}},
-        rotation=0,
-        origin={-106,-60})));
 equation
 
   if hasPump then
-    connect(fan.port_b, volume.ports[1])
-      annotation (Line(points={{14,0},{41.3333,0}}, color={0,127,255}));
     connect(senMasFlo.port_b, fan.port_a)
-      annotation (Line(points={{-12,0},{-6,0}}, color={0,127,255}));
+      annotation (Line(points={{-12,0},{-2,0}}, color={0,127,255},
+        pattern=LinePattern.Dash));
+  connect(fan.port_b, volume.ports[1]) annotation (Line(points={{18,-2.498e-15},
+            {29,-2.498e-15},{29,0},{40,0}},
+                                          color={0,127,255},
+        pattern=LinePattern.Dash));
   else
-    connect(senMasFlo.port_b, volume.ports[1]);
+  connect(senMasFlo.port_b, volume.ports[1]) annotation (Line(
+      points={{-12,0},{-12,14},{40,14},{40,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+
   end if;
 
   if hasFeedback then
     connect(port_a, val.port_1)
-      annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
-    connect(volume.ports[2], val.port_3) annotation (Line(points={{40,0},{40,20},
-            {-80,20},{-80,10}}, color={0,127,255}));
+      annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255},
+        pattern=LinePattern.Dash));
     connect(val.port_2, senTFlow.port_a)
-      annotation (Line(points={{-70,0},{-62,0}}, color={0,127,255}));
+      annotation (Line(points={{-70,0},{-62,0}}, color={0,127,255},
+        pattern=LinePattern.Dash));
+    connect(val.port_3, volume.ports[3]) annotation (Line(
+      points={{-80,10},{-80,26},{40,26},{40,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
   else
     connect(port_a, senTFlow.port_a);
   end if;
 
-  connect(volume.ports[3], senTReturn.port_a) annotation (Line(points={{38.6667,
-          0},{43.6667,0},{43.6667,1.77636e-15},{58,1.77636e-15}}, color={0,127,255}));
   connect(senTReturn.port_b, port_b) annotation (Line(points={{78,-8.88178e-16},
           {89,-8.88178e-16},{89,0},{100,0}}, color={0,127,255}));
   connect(senTFlow.port_b, senMasFlo.port_a)
     annotation (Line(points={{-42,0},{-32,0}}, color={0,127,255}));
 
+
+
+
+  connect(volume.ports[2], senTReturn.port_a) annotation (Line(points={{40,0},{49,
+          0},{49,1.72085e-15},{58,1.72085e-15}},        color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{20,-124},{60,-139},{20,-154},{20,-124}},

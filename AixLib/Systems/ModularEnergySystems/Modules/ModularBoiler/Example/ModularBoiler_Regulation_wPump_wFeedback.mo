@@ -45,7 +45,7 @@ model ModularBoiler_Regulation_wPump_wFeedback
 
 equation
   connect(bou.ports[1], modularBoiler_Regulation_wPump_wFeedback.port_a)
-   annotation (Line(points={{-44,2.4},{-34,2.4},{-34,0},{-30,0}},   color={0,127,
+   annotation (Line(points={{-44,-1.2},{-34,-1.2},{-34,0},{-30,0}}, color={0,127,
           255}));
   connect(boilerControlBus, modularBoiler_Regulation_wPump_wFeedback.boilerControlBus)
    annotation (Line(
@@ -71,7 +71,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modularBoiler_Regulation_wPump_wFeedback.port_b, bou.ports[2])
-   annotation (Line(points={{34,0},{60,0},{60,-60},{-40,-60},{-40,-2.4},{-44,-2.4}},
+   annotation (Line(points={{34,0},{60,0},{60,-60},{-40,-60},{-40,1.2},{-44,1.2}},
                   color={0,127,255}));
   connect(BouT_sine.y, bou.T_in)
    annotation (Line(points={{-79,4},{-74,4},{-74,4.8},

@@ -50,7 +50,7 @@ equation
           -79.8,-21.8}}, color={0,0,127}));
   connect(vol.heatPort, temperatureSensor.port)
     annotation (Line(points={{36,14},{36,-14},{42,-14}}, color={191,0,0}));
-  connect(temperatureSensor.T, onOffController.u) annotation (Line(points={{62,-14},
+  connect(temperatureSensor.T, onOffController.u) annotation (Line(points={{63,-14},
           {76,-14},{76,-88},{-150,-88},{-150,-70},{-130,-70}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

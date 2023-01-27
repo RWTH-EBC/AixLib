@@ -27,9 +27,11 @@ extends Modelica.Icons.InterfacesPackage;
   // BoilerNotManufacturer
   Real PLR "Part load ratio";
   Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
-  Modelica.Units.SI.Temperature TCold "Sensor output TCold";
-  Modelica.Units.SI.Temperature THot "Sensor output THot";
+    Modelica.Units.SI.Temperature TFlowMea "Measured flow temperature of boiler";
+    Modelica.Units.SI.Temperature TRetMea
+      "Measured return temperature of boiler";
   Modelica.Units.SI.Power EnergyDemand "Energy Demand";
+  Modelica.Units.SI.Temperature TFlowSet "Set value for flow temperature";
 
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),

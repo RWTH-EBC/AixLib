@@ -5,8 +5,7 @@ model BoilerNotManufacturer "Simple heat generator without control"
         a=coeffPresLoss, vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom/1000 - 13.388)/1000));
 
   parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Setpoint temperature difference heat circuit";
-  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
+  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 35 "Nominal TCold";
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
   parameter Boolean m_flowVar=false "Boolean for use of variable water massflow";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
@@ -20,13 +19,13 @@ model BoilerNotManufacturer "Simple heat generator without control"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.Controllers.StationaryBehaviour DemandCalc(
-    TColdNom=TColdNom,
+    TColdNom=TRetNom,
     QNom=QNom,
     dTWaterNom=dTWaterNom,
     m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-30,70},{-10,90}})));
   BaseClasses.Controllers.ReturnInfluence HeatCalc(
-    TColdNom=TColdNom,
+    TColdNom=TRetNom,
     QNom=QNom,
     dTWaterNom=dTWaterNom,
     m_flowVar=m_flowVar)
@@ -34,12 +33,6 @@ model BoilerNotManufacturer "Simple heat generator without control"
   Modelica.Blocks.Interfaces.RealInput PLR "Part Load Ratio" annotation (
       Placement(transformation(extent={{-140,34},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
-      Modelica.Blocks.Interfaces.RealInput dTWater
-    "temperature difference THot-TCold"            annotation (Placement(
-        transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-120,90})));
 
   Modelica.Blocks.Logical.Switch switch3
     annotation (Placement(transformation(extent={{-9,-9},{9,9}},
@@ -75,11 +68,16 @@ model BoilerNotManufacturer "Simple heat generator without control"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={82,40})));
-  Modelica.Blocks.Interfaces.RealOutput TVolume "TVolume" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput TVolume(unit="K")
+                                                "TVolume" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-110})));
+  Modelica.Blocks.Interfaces.RealInput dTWater(unit="K")
+    "Temperature difference between flow and return" annotation (Placement(
+        transformation(extent={{-140,70},{-100,110}}), iconTransformation(
+          extent={{-140,80},{-100,120}})));
 protected
     parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -91,10 +89,6 @@ TVolume=vol.T;
 
   connect(vol.heatPort, internalCapacity.port) annotation (Line(points={{-50,-70},
           {-50,-50},{-28,-50}},           color={191,0,0}));
-  connect(dTWater, DemandCalc.dTWater) annotation (Line(points={{-120,90},{-76,90},
-          {-76,82},{-32,82}}, color={0,0,127}));
-  connect(dTWater, HeatCalc.dTWater) annotation (Line(points={{-120,90},{-84,90},
-          {-84,39},{2,39}}, color={0,0,127}));
   connect(RealZero.y, switch3.u1) annotation (Line(points={{21,72},{46,72},{46,
           3.8},{46.2,3.8}},
                        color={0,0,127}));
@@ -134,6 +128,10 @@ TVolume=vol.T;
     annotation (Line(points={{25,46},{31.8,46},{31.8,3.8}}, color={0,0,127}));
   connect(ConductanceToEnv.port_a, vol.heatPort)
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
+  connect(dTWater, DemandCalc.dTWater) annotation (Line(points={{-120,90},{-84,90},
+          {-84,82},{-32,82}}, color={0,0,127}));
+  connect(dTWater, HeatCalc.dTWater) annotation (Line(points={{-120,90},{-84,90},
+          {-84,40},{-52,40},{-52,39},{2,39}}, color={0,0,127}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html><h4>

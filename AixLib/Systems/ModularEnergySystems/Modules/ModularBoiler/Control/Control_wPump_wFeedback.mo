@@ -43,7 +43,7 @@ model Control_wPump_wFeedback
     final m_flowVar=m_flowVar,
     final Advanced=Advanced,
     final dTWaterSet=dTWaterSet,
-    final THotMax=THotMax,
+    final TFlowMax=THotMax,
     final PLRMin=PLRMin)
     annotation (Placement(transformation(extent={{-72,0},{-52,20}})));
   Modelica.Blocks.Logical.Greater greater

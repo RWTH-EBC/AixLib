@@ -153,12 +153,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(TCon1_const.y,
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[1])
-    annotation (Line(points={{-81,80},{-64,80},{-64,22},{-36,22},{-36,10.2},{
-          -32,10.2}},
+    annotation (Line(points={{-81,80},{-64,80},{-64,22},{-36,22},{-36,11.1},{
+          -32,11.1}},
         color={0,0,127}));
   connect(TCon2_const.y,
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[2])
-    annotation (Line(points={{-81,50},{-72,50},{-72,13.8},{-32,13.8}},
+    annotation (Line(points={{-81,50},{-72,50},{-72,12.9},{-32,12.9}},
         color={0,0,127}));
 
   connect(TCon1_const1.y,

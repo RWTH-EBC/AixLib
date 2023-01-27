@@ -8,9 +8,11 @@ partial model Boiler_base
   package MediumWater = AixLib.Media.Water "Boiler Medium";
   parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature TColdNom=308.15 "Return temperature TCold"
+  parameter Modelica.Units.SI.Temperature TRetNom=308.15
+    "Return temperature TCold"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature THotMax=363.15 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature TFlowMax=363.15
+    "Maximal temperature to force shutdown";
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean m_flowVar=false "Use variable water massflow"
@@ -36,12 +38,12 @@ partial model Boiler_base
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final dTWaterNom=dTWaterNom,
-    final TColdNom=TColdNom,
+    final TRetNom=TRetNom,
     final m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   inner Modelica.Fluid.System system(final p_start=system.p_ambient)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTHot(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTFlow(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -49,11 +51,12 @@ partial model Boiler_base
     final transferHeat=false,
     final allowFlowReversal=false,
     final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    "Temperature sensor of hot side of heat generator (supply)" annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=0,
         origin={60,0})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTCold(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -61,17 +64,18 @@ partial model Boiler_base
     final transferHeat=false,
     final allowFlowReversal=false,
     final m_flow_small=0.001)
-    "Temperature sensor of cold side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    "Temperature sensor of cold side of heat generator (supply)" annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,0})));
 
-  AixLib.Fluid.Movers.SpeedControlled_y fan(
+  AixLib.Fluid.Movers.SpeedControlled_y pump(
     redeclare final package Medium = Medium,
     final allowFlowReversal=false,
     final m_flow_small=0.001,
-    final per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={dp_nominal/0.8,
-            dp_nominal,0})),
+    final per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={
+            dp_nominal/0.8,dp_nominal,0})),
     final addPowerToMedium=false) if Pump "Boiler Pump"
     annotation (Placement(transformation(extent={{-46,-10},{-26,10}})));
 
@@ -83,17 +87,17 @@ protected
 equation
 
   if not Pump then
-    connect(senTCold.port_b, heatGeneratorNoControl.port_a);
+    connect(senTRet.port_b, heatGeneratorNoControl.port_a);
   else
-    connect(fan.port_b, heatGeneratorNoControl.port_a)
-      annotation (Line(points={{-26,0},{-10,0}},color={0,127,255}));
-    connect(senTCold.port_b, fan.port_a)
+    connect(pump.port_b, heatGeneratorNoControl.port_a)
+      annotation (Line(points={{-26,0},{-10,0}}, color={0,127,255}));
+    connect(senTRet.port_b, pump.port_a)
       annotation (Line(points={{-50,0},{-46,0}}, color={0,127,255}));
   end if;
 
-  connect(senTHot.port_b, port_b)
+  connect(senTFlow.port_b, port_b)
     annotation (Line(points={{70,0},{100,0}}, color={0,127,255}));
-  connect(senTHot.port_a, heatGeneratorNoControl.port_b)
+  connect(senTFlow.port_a, heatGeneratorNoControl.port_b)
     annotation (Line(points={{50,0},{10,0}}, color={0,127,255}));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

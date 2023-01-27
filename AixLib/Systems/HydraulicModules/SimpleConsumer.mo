@@ -14,13 +14,14 @@ model SimpleConsumer
   parameter Modelica.Units.SI.TemperatureDifference dT_nom = 20 "nominal temperature difference";
 
 
+
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
               choice="T_input",
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true, group = "System"));
 
-  Modelica.Units.SI.HeatFlowRate Q_flow_max;
+
 
   Modelica.Blocks.Interfaces.RealInput T if functionality == "T_input"
                                          annotation (Placement(transformation(
@@ -40,6 +41,18 @@ model SimpleConsumer
         rotation=270,
         origin={-60,100})));
 
+  // Pump
+  parameter AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType TOutSetSou "Source for set value for outlet temperature" annotation (Evaluate=true, HideResult=true, Dialog(group="Pump", enable = hasPump));
+  parameter Modelica.Units.SI.Temperature TOutSet "Constant set value for outlet temperature" annotation(Dialog(enable=TOutSetSou == AixLib.Systems.ModularEnergySystems.Modules.
+      ModularConsumer.Types.InputType.Constant and hasPump, group="Pump"));
+
+  // Feedback
+  parameter AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType TInSetSou "Source for set value for inlet temperature" annotation (Evaluate=true, HideResult=true, Dialog(group="Feedback", enable = hasFeedback));
+  parameter Modelica.Units.SI.Temperature TInSet "Constant set value for inlet temperature" annotation(Dialog(enable=TInSetSou == AixLib.Systems.ModularEnergySystems.Modules.
+      ModularConsumer.Types.InputType.Constant  and hasFeedback, group="Feedback"));
+
+
+
   Controller.CtrSimpleConsumer ctrSimpleConsumer(
     final demandType=demandType,
     final hasPump=hasPump,
@@ -53,45 +66,123 @@ model SimpleConsumer
     final T_fixed=T_fixed,
     final capacity=capacity,
     final Q_flow_fixed=Q_flow_fixed,
-    final T_start=T_start)
-    annotation (Placement(transformation(extent={{-60,-80},{-20,-40}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_max_exp(y=Q_flow_max)
- if functionality == "Q_flow_input" annotation (Placement(transformation(
-        extent={{-10.5,-6.5},{10.5,6.5}},
+    final T_start=T_start,
+    dT_maxNominalReturn=dT_maxNominalReturn,
+    cp_medium=Medium.cp_const)
+    annotation (Placement(transformation(extent={{-48,-100},{-8,-60}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(T(start=
+          T_start, fixed=true), C=capacity)
+    annotation (Placement(transformation(
+        origin={74,-58},
+        extent={{-10,10},{10,-10}},
+        rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.Convection convection
+ if functionality == "T_input" or functionality == "T_fixed"
+    annotation (Placement(transformation(
+        origin={48,-48},
+        extent={{-10,-10},{10,10}},
+        rotation=180)));
+  Modelica.Blocks.Sources.RealExpression kA_realExp(y=kA) if functionality == "T_input"
+     or functionality == "T_fixed" annotation (Placement(transformation(
+        extent={{-7,-8},{7,8}},
         rotation=90,
-        origin={-82.5,-81.5})));
+        origin={48,-71})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+ if functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+        rotation=0,
+        origin={46,-88})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature if functionality == "T_input" or functionality == "T_fixed"
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={14,-48})));
+  Modelica.Blocks.Interfaces.RealInput T_Flow if TInSetSou == AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType.Continuous
+    annotation (Placement(
+        transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=0,
+        origin={-106,-44})));
+  Modelica.Blocks.Interfaces.RealInput T_Return if TOutSetSou == AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType.Continuous
+    annotation (Placement(
+        transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=0,
+        origin={-106,-62})));
+  Modelica.Blocks.Sources.RealExpression TInSetConstant(y=TInSet) if TInSetSou ==
+    AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType.Constant
+    "Constant set value if no continous source provided" annotation (Placement(
+        transformation(
+        extent={{-10.5,-6.5},{10.5,6.5}},
+        rotation=0,
+        origin={-82.5,-29.5})));
+  Modelica.Blocks.Sources.RealExpression TOutSetConstant(y=TOutSet)
+ if TOutSetSou == AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType.Constant
+    "Constant set value if no continous source provided" annotation (Placement(
+        transformation(
+        extent={{-10.5,-6.5},{10.5,6.5}},
+        rotation=0,
+        origin={-82.5,-39.5})));
 equation
-  if demandType==1 then
-    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTFlow.T - (T_Return - dT_maxNominalReturn)));
-  else
-    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (T_Return + dT_maxNominalReturn - senTFlow.T));
-  end if;
 
-  connect(T_Flow, ctrSimpleConsumer.T_Flow) annotation (Line(points={{-106,-40},
-          {-80,-40},{-80,-50},{-61.5,-50}},     color={0,0,127}));
-  connect(T_Return, ctrSimpleConsumer.T_Return) annotation (Line(points={{-106,-60},
-          {-80,-60},{-80,-55},{-61.5,-55}},     color={0,0,127}));
+  connect(T_Flow, ctrSimpleConsumer.T_Flow) annotation (Line(points={{-106,-44},
+          {-60,-44},{-60,-70},{-49.5,-70}},     color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(T_Return, ctrSimpleConsumer.T_Return) annotation (Line(points={{-106,-62},
+          {-60,-62},{-60,-75},{-49.5,-75}},     color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(senTFlow.T, ctrSimpleConsumer.T_Flow_Mea)
-    annotation (Line(points={{-52,-11},{-52,-22},{-50,-22},{-50,-38.5}},
+    annotation (Line(points={{-52,-11},{-52,-48},{-38,-48},{-38,-58.5}},
                                                       color={0,0,127}));
-  connect(ctrSimpleConsumer.y_val, val.y) annotation (Line(points={{-45,-38.5},{
-          -45,-20},{-80,-20},{-80,-12}},  color={0,0,127}));
-  connect(ctrSimpleConsumer.y_pump, fan.y) annotation (Line(points={{-35,-38.5},
-          {-35,-20},{4,-20},{4,-12}}, color={0,0,127}));
-  connect(ctrSimpleConsumer.T_Return_Mea, senTReturn.T) annotation (Line(points={{-40,
-          -38.5},{-40,-28},{68,-28},{68,-11}},       color={0,0,127}));
+  connect(ctrSimpleConsumer.y_val, val.y) annotation (Line(points={{-33,-58.5},{
+          -33,-50},{-56,-50},{-56,-18},{-80,-18},{-80,-12}},
+                                          color={0,0,127}));
+  connect(ctrSimpleConsumer.y_pump, fan.y) annotation (Line(points={{-23,-58.5},
+          {-23,-18},{8,-18},{8,-12}}, color={0,0,127}));
+  connect(ctrSimpleConsumer.T_Return_Mea, senTReturn.T) annotation (Line(points={{-28,
+          -58.5},{-28,-50},{-16,-50},{-16,-32},{68,-32},{68,-11}},
+                                                     color={0,0,127}));
 
   if functionality == "T_input" then
     connect(T, ctrSimpleConsumer.Q_flow) annotation (Line(points={{-106,-100},{-64,
-            -100},{-64,-76},{-62,-76},{-62,-75},{-61,-75}},
+            -100},{-64,-76},{-62,-76},{-62,-95},{-49,-95}},
                                         color={0,0,127}));
   elseif functionality == "Q_flow_input" then
-    connect(Q_flow, ctrSimpleConsumer.T) annotation (Line(points={{-106,-80},{-92,
-            -80},{-92,-65},{-61,-65}}, color={0,0,127}));
-    connect(Q_flow_max_exp.y, ctrSimpleConsumer.Q_flow_max) annotation (Line(
-        points={{-82.5,-69.95},{-72,-69.95},{-72,-70},{-61,-70}}, color={0,0,127}));
+    connect(Q_flow, ctrSimpleConsumer.T) annotation (Line(points={{-106,-80},{-56,
+            -80},{-56,-85},{-49,-85}}, color={0,0,127}));
   end if;
 
-  connect(ctrSimpleConsumer.port_a, volume.heatPort)
-    annotation (Line(points={{-20,-60},{50,-60},{50,-10}}, color={191,0,0}));
+  connect(convection.fluid,prescribedTemperature.port)
+    annotation (Line(points={{38,-48},{20,-48}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+    connect(heatCapacitor.port,convection.solid) annotation (Line(points={{74,-48},
+          {58,-48}},                     color={191,0,0}));
+  connect(kA_realExp.y,convection. Gc)
+    annotation (Line(points={{48,-63.3},{48,-58}},
+                                              color={0,0,127}));
+    connect(prescribedHeatFlow.port,heatCapacitor. port)
+    annotation (Line(points={{54,-88},{62,-88},{62,-48},{74,-48}},
+                                                         color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(ctrSimpleConsumer.Q_flow_vol, prescribedHeatFlow.Q_flow) annotation (
+      Line(points={{-6.5,-86.5},{-2,-86.5},{-2,-88},{38,-88}},color={0,0,127}));
+  connect(ctrSimpleConsumer.TFixed_vol, prescribedTemperature.T) annotation (
+      Line(points={{-7,-77.5},{-7,-76},{18,-76},{18,-58},{6.8,-58},{6.8,-48}},
+                                                           color={0,0,127}));
+  connect(heatCapacitor.port, volume.heatPort) annotation (Line(points={{74,-48},
+          {74,-28},{54,-28},{54,-10},{50,-10}},
+                                       color={191,0,0}));
+  connect(TInSetConstant.y, ctrSimpleConsumer.T_Flow) annotation (Line(
+      points={{-70.95,-29.5},{-66,-29.5},{-66,-30},{-60,-30},{-60,-70},{-49.5,-70}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+
+  connect(TOutSetConstant.y, ctrSimpleConsumer.T_Return) annotation (Line(
+      points={{-70.95,-39.5},{-60,-39.5},{-60,-74},{-49.5,-74},{-49.5,-75}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(senMasFlo.m_flow, ctrSimpleConsumer.m_flow_Mea) annotation (Line(
+        points={{-22,11},{-22,16},{-32,16},{-32,-44},{-15.5,-44},{-15.5,-58.5}},
+        color={0,0,127}));
 end SimpleConsumer;

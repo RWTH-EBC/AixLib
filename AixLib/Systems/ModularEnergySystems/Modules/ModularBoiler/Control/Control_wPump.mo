@@ -88,6 +88,17 @@ model Control_wPump
         extent={{-10,-10},{10,10}},
         origin={-100,60})));
 
+  HierarchicalControl_ModularBoiler.InternalControl_ModularBoiler.flowTemperatureController.flowTemperatureControl_heatingCurve
+    tempCtrl(
+    final declination=declination,
+    final day_hour=day_hour,
+    final TOffset=TOffset,
+    final night_hour=night_hour) if use_flowTControl
+    annotation (Placement(transformation(extent={{-18,64},{2,84}})));
+  Modelica.Blocks.Interfaces.RealInput Tamb
+    "Ambient temperature for heating curve" annotation (Placement(
+        transformation(extent={{-112,6},{-88,34}}), iconTransformation(extent={
+            {-112,6},{-88,34}})));
 equation
 
   connect(realExpression.y, switch3.u1)
@@ -147,8 +158,22 @@ equation
     annotation (
       Line(points={{-100,40},{-80,40},{-80,7},{-74,7}},      color={0,0,127}));
 
+  connect(tempCtrl.TAmb, Tamb) annotation (Line(points={{-18,74},{-68,74},{-68,
+          36},{-82,36},{-82,20},{-100,20}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-60},
-            {100,80}})),                                         Diagram(
+            {100,80}}), graphics={
+        Rectangle(
+          extent={{-100,80},{100,-60}},
+          lineColor={28,108,200},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid),
+                            Text(
+          extent={{-102,24},{98,-20}},
+          lineColor={0,0,127},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-60},{100,80}})),
     Documentation(info="<html><p>
   A boiler model consisting of physical components. The user has the

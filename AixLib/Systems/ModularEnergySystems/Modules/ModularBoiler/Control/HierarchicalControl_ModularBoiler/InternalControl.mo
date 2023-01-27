@@ -136,11 +136,10 @@ equation
   connect(returnAdmixture.valPos, valPos)
     annotation (Line(points={{62,-69.8},{88,
           -69.8},{88,-60},{104,-60}}, color={0,0,127}));
-  connect(Tflow, flowTemperatureControl_heatingCurve.TMea)
-    annotation (Line(
+  connect(Tflow, flowTemperatureControl_heatingCurve.TFlowMea) annotation (Line(
         points={{-100,-20},{-58,-20},{-58,-78},{-31.2,-78},{-31.2,-70}}, color=
           {0,0,127}));
-  connect(Tamb, flowTemperatureControl_heatingCurve.Tamb)
+  connect(Tamb,flowTemperatureControl_heatingCurve.TAmb)
     annotation (Line(
         points={{-100,-60},{-40,-60}},                     color={0,0,127}));
   connect(Tflow, returnAdmixture.TMeaBoiler)

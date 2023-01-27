@@ -12,7 +12,8 @@ model ControlBoilerNotManufacturer
 
   parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
 
-  parameter Modelica.Units.SI.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.Units.SI.Temperature TFlowMax=273.15 + 90
+    "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
   parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start";
@@ -55,10 +56,6 @@ model ControlBoilerNotManufacturer
     annotation (Placement(transformation(extent={{0,-32},{20,-12}})));
   Modelica.Blocks.Logical.Or or1
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=Advanced)
-    annotation (Placement(transformation(extent={{-100,-80},{-74,-60}})));
-  Modelica.Blocks.Logical.Change change1
-    annotation (Placement(transformation(extent={{-56,-80},{-36,-60}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{58,-62},{78,-42}})));
   Modelica.Blocks.Sources.RealExpression dTWaterNom(y=DeltaTWaterNom)
@@ -89,19 +86,12 @@ equation
                                      color={255,0,255}));
   connect(or1.y,switch1. u2) annotation (Line(points={{11,-80},{20,-80},{20,-52},
           {56,-52}},   color={255,0,255}));
-  connect(booleanExpression1.y,switch2. u2) annotation (Line(points={{-72.7,-70},
-          {-64,-70},{-64,-22},{-2,-22}},                            color={255,0,
-          255}));
   connect(switch1.y, switch6.u1) annotation (Line(points={{79,-52},{84,-52},{84,
           -116},{-146,-116},{-146,52},{-82,52}},color={0,0,127}));
   connect(or1.y, switch6.u2) annotation (Line(points={{11,-80},{20,-80},{20,-52},
           {-138,-52},{-138,60},{-82,60}},       color={255,0,255}));
   connect(dTSetpointReal2.y,switch2. u1) annotation (Line(points={{-9,-14},{-2,
           -14}},                          color={0,0,127}));
-  connect(booleanExpression1.y,change1. u) annotation (Line(points={{-72.7,-70},
-          {-58,-70}},                    color={255,0,255}));
-  connect(or1.u1,change1. y) annotation (Line(points={{-12,-80},{-32,-80},{-32,
-          -70},{-35,-70}},   color={255,0,255}));
   connect(switch2.y, switch6.u3) annotation (Line(points={{21,-22},{26,-22},{26,
           -46},{-156,-46},{-156,68},{-82,68}},        color={0,0,127}));
   connect(or1.y, switch5.u2) annotation (Line(points={{11,-80},{20,-80},{20,-52},
@@ -131,11 +121,18 @@ equation
   connect(gain1.y, PID.u_m)
     annotation (Line(points={{11,20},{50,20},{50,48}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                                      Rectangle(
+        Rectangle(
           extent={{-100,100},{100,-100}},
-          lineColor={0,0,0},
+          lineColor={28,108,200},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid),
+                            Text(
+          extent={{-102,26},{98,-18}},
+          lineColor={0,0,127},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
-          fillColor={255,255,255})}),                            Diagram(
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html><p>
   Boiler control unit, which estimates the relative water mass flow and

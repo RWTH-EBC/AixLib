@@ -233,7 +233,7 @@ equation
                                                     color={0,0,127}));
   connect(admixtureBus.Tsen_b1, hierarchicalControl.TMeaCon)
     annotation (Line(
-      points={{40,-48},{40,-46},{42,-46},{42,18},{51.6,18},{51.6,38}},
+      points={{40.05,-47.95},{40.05,-46},{42,-46},{42,18},{51.6,18},{51.6,38}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

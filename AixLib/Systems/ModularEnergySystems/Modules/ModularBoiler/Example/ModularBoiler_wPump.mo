@@ -30,7 +30,7 @@ model ModularBoiler_wPump
         origin={-70,48})));
 equation
   connect(bou.ports[1], modularBoiler_wPump.port_a)
-   annotation (Line(points={{-72,0.4},{-50,0.4},{-50,0},{-30,0}},
+   annotation (Line(points={{-72,-3.2},{-50,-3.2},{-50,0},{-30,0}},
                                              color={0,127,255}));
   connect(boilerControlBus, modularBoiler_wPump.boilerControlBus)
    annotation (
@@ -55,7 +55,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modularBoiler_wPump.port_b, bou.ports[2])
-   annotation (Line(points={{30,0},{60,0},{60,-46},{-72,-46},{-72,-4.4}},
+   annotation (Line(points={{30,0},{60,0},{60,-46},{-72,-46},{-72,-0.8}},
         color={0,127,255}));
 annotation (
     experiment(StopTime=3600));

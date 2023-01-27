@@ -6,9 +6,9 @@ model ModularBoiler_wPump_wFeedback
   Control.Control_wPump_wFeedback control_wPump_wFeedback(
     final dTWaterNom=dTWaterNom,
     final QNom=QNom,
-    final THotMax=THotMax,
+    final THotMax=TFlowMax,
     final PLRMin=PLRMin,
-    final TColdNom=TColdNom)
+    final TColdNom=TRetNom)
     annotation (Placement(transformation(extent={{-28,48},{26,80}})));
   parameter Boolean hasFeedback=false "circuit has Feedback"
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
@@ -28,18 +28,15 @@ model ModularBoiler_wPump_wFeedback
     annotation (Placement(transformation(extent={{-10,88},{10,108}})));
 
 equation
-  connect(control_wPump_wFeedback.TCold, senTCold.T)
-    annotation (Line(points={{-28,57.1429},{-60,57.1429},{-60,11}},
-                                            color={0,0,127}));
+  connect(control_wPump_wFeedback.TCold, senTRet.T) annotation (Line(points={{-28,
+          57.1429},{-60,57.1429},{-60,11}}, color={0,0,127}));
   connect(heatGeneratorNoControl.TVolume, control_wPump_wFeedback.THot_Boiler)
     annotation (Line(points={{0,-11},{0,-20},{-50,-20},{-50,52.5714},{-28,
           52.5714}},
         color={0,0,127}));
-  connect(senTHot.T, control_wPump_wFeedback.THot)
-    annotation (Line(points={{60,
-          11},{60,20},{-42,20},{-42,48},{-28,48}}, color={0,0,127}));
-  connect(control_wPump_wFeedback.y, fan.y)
-    annotation (Line(points={{-11.8,48},
+  connect(senTFlow.T, control_wPump_wFeedback.THot) annotation (Line(points={{
+          60,11},{60,20},{-42,20},{-42,48},{-28,48}}, color={0,0,127}));
+  connect(control_wPump_wFeedback.y, pump.y) annotation (Line(points={{-11.8,48},
           {-12,48},{-12,38},{-36,38},{-36,12}}, color={0,0,127}));
   connect(control_wPump_wFeedback.PLR, heatGeneratorNoControl.PLR)
     annotation (
@@ -70,14 +67,14 @@ equation
   if hasFeedback then
     connect(port_a, val.port_1)
       annotation (Line(points={{-100,0},{-94,0}}, color={0,127,255}));
-    connect(val.port_2, senTCold.port_a)
+    connect(val.port_2, senTRet.port_a)
       annotation (Line(points={{-74,0},{-70,0}}, color={0,127,255}));
     connect(port_b, val.port_3)
       annotation (Line(points={{100,0},{100,-40},{-84,
             -40},{-84,-10}},
                       color={0,127,255}));
   else
-     connect(port_a, senTCold.port_a);
+    connect(port_a, senTRet.port_a);
   end if;
 
   connect(control_wPump_wFeedback.y_valve, val.y)

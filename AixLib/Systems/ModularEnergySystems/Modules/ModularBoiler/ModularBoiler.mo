@@ -35,7 +35,7 @@ model ModularBoiler
     redeclare final package Medium = Media.Water,
     final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
     final dTWaterNom=dTWaterNom,
-    final TColdNom=TColdNom,
+    final TRetNom=TColdNom,
     final m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   inner Modelica.Fluid.System system(p_start=system.p_ambient)
@@ -124,7 +124,7 @@ equation
   connect(port_a, senTCold.port_a)
    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
   connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
-   annotation (Line(points={{-19,18.8},{-16,18.8},{-16,9},{-10,9}},
+   annotation (Line(points={{-19,18.8},{-16,18.8},{-16,10},{-10,10}},
                    color={0,0,127}));
   connect(greater.y, switch3.u2)
    annotation (Line(points={{43.2,64},{30,64},{30,50}}, color={255,0,255}));

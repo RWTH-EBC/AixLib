@@ -94,7 +94,7 @@ model ModularBoiler_with_Consumers
 equation
   connect(bou.ports[1],
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.port_a)
-    annotation (Line(points={{-66,-13.6},{-40,-13.6},{-40,0},{-28,0}},
+    annotation (Line(points={{-66,-17.2},{-40,-17.2},{-40,0},{-28,0}},
                                                                  color={0,127,255}));
   connect(boilerControlBus,
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.boilerControlBus)
@@ -129,22 +129,24 @@ equation
     modularConsumer_multiport.ports_a)
     annotation (Line(points={{36,0},{62,0}}, color={0,127,255}));
   connect(modularConsumer_multiport.port_b, bou.ports[2]) annotation (Line(
-        points={{82,0},{88,0},{88,-40},{-60,-40},{-60,-18.4},{-66,-18.4}},
+        points={{82,0},{88,0},{88,-40},{-60,-40},{-60,-14.8},{-66,-14.8}},
         color={0,127,255}));
   connect(TCon1.y, modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[
-    1]) annotation (Line(points={{-71,54},{-44,54},{-44,10},{-38,10},{-38,10.2},
-          {-28,10.2}}, color={0,0,127}));
+    1]) annotation (Line(points={{-71,54},{-44,54},{-44,10},{-38,10},{-38,11.1},
+          {-28,11.1}}, color={0,0,127}));
   connect(TCon2.y, modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[
-    2]) annotation (Line(points={{-71,20},{-52,20},{-52,12},{-28,12},{-28,13.8}},
+    2]) annotation (Line(points={{-71,20},{-52,20},{-52,12},{-28,12},{-28,12.9}},
         color={0,0,127}));
   connect(TCon1.y, modularConsumer_multiport.T_Flow[1]) annotation (Line(points={{-71,54},
-          {-44,54},{-44,-32},{50,-32},{50,-7},{62,-7}},          color={0,0,127}));
+          {-44,54},{-44,-32},{50,-32},{50,-6.5},{62,-6.5}},      color={0,0,127}));
   connect(TCon2.y, modularConsumer_multiport.T_Flow[2]) annotation (Line(points={{-71,20},
-          {-52,20},{-52,-32},{50,-32},{50,-5},{62,-5}},          color={0,0,127}));
+          {-52,20},{-52,-32},{50,-32},{50,-5.5},{62,-5.5}},      color={0,0,127}));
   connect(TCon3.y, modularConsumer_multiport.T_Return[1]) annotation (Line(
-        points={{9,-78},{58,-78},{58,-10},{62,-10}}, color={0,0,127}));
+        points={{9,-78},{58,-78},{58,-9.5},{62,-9.5}},
+                                                     color={0,0,127}));
   connect(TCon3.y, modularConsumer_multiport.T_Return[2]) annotation (Line(
-        points={{9,-78},{58,-78},{58,-8},{62,-8}}, color={0,0,127}));
+        points={{9,-78},{58,-78},{58,-8.5},{62,-8.5}},
+                                                   color={0,0,127}));
   connect(sine.y, boilerControlBus.Tamb) annotation (Line(points={{-133,78},{
           -64,78},{-64,80},{0,80},{0,60}}, color={0,0,127}), Text(
       string="%second",
