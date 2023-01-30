@@ -11,8 +11,6 @@ model NominalBehaviourNotManufacturer
   parameter Modelica.Units.SI.TemperatureDifference deltaTCoolingCircuit=3.47
     "Nominal temperature difference heat circuit";
 
-
-
   SDF.NDTable SDFStromkennzahl(
     nin=2,
     readFromFile=true,

@@ -6,8 +6,6 @@ model ControlBoilerNotManufacturer
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power";
   parameter Boolean m_flowVar=false "Use variable water massflow";
 
-
-
   parameter Boolean Advanced=false "dTWater is constant for different PLR";
 
   parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
@@ -18,7 +16,6 @@ model ControlBoilerNotManufacturer
 
   parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start";
 
-
   replaceable package Medium =Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
@@ -28,7 +25,6 @@ model ControlBoilerNotManufacturer
               property_T=293.15,
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
-
 
   Modelica.Blocks.Continuous.LimPID PID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,

@@ -18,8 +18,6 @@ partial model ModularConsumer_base
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nom[n_consumers] "Nominal heat flow" annotation(Dialog(enable=functionality<>"Q_flow_fixed", group="Nominal conditions (Array - each consumer)"));
   parameter Modelica.Units.SI.TemperatureDifference dT_nom[n_consumers]  "nominal temperature difference" annotation(Dialog(group="Nominal conditions (Array - each consumer)"));
 
-
-
   // Feedback
   parameter Boolean hasFeedback[n_consumers]  "if circuit has feedback for temperature control" annotation(Dialog(group="Feedback (Array - each consumer)"));
   parameter AixLib.Systems.ModularEnergySystems.Modules.ModularConsumer.Types.InputType TInSetSou                                                                                                                                         "Source for set value for inlet temperature" annotation (Evaluate=true, HideResult=true, Dialog(group="Feedback (Array - each consumer)"));
@@ -30,7 +28,6 @@ partial model ModularConsumer_base
     "Time constant of Integrator block" annotation(Dialog(group="Feedback (Array - each consumer)"));
   parameter Modelica.Units.SI.PressureDifference dp_Valve[n_consumers]
     "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation(Dialog(group="Feedback (Array - each consumer)"));
-
 
   // Pump
   parameter Boolean hasPump[n_consumers] "circuit has Pump" annotation(Dialog(group="Pump (Array - each consumer)"));

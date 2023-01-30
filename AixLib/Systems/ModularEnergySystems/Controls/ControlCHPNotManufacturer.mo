@@ -12,9 +12,6 @@ model ControlCHPNotManufacturer
   parameter Modelica.Units.SI.Temperature TStart=273.15+20 "T start"
    annotation (Dialog(tab="Advanced"));
 
-
-
-
   Modelica.Blocks.Sources.RealExpression TMin(y=273.15 + 81) "MinimalStartTemp"
     annotation (Placement(transformation(extent={{-104,58},{-80,76}})));
   Modelica.Blocks.Math.Add add3

@@ -1,8 +1,2 @@
-ModularBoiler_wPump
-ModularBoiler_wPump_wFeedback
-ModularBoiler_Regulation_wPump_wFeedback
-ModularBoiler_HierachicalRegulation_wPump_wFeedback_wAdmix
-ModularBoiler_with_Consumers
 ModularBoilerConsumer
-ModularBoilerConsumerTest
-ModularBoilerSimpleTest
+ModularBoilerSimple

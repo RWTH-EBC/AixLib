@@ -1,11 +1,4 @@
-ControlsModularBoiler
-ModularBoiler
-ModularBoilerSingle
-ModularBoiler_multiport
-ModularBoiler_wPump
-ModularBoiler_wPump_wFeedback
-ModularBoiler_Regulation_wPump_wFeedback
-Control
 BaseClasses
+ControlsModularBoiler
 Example
-ModularBoiler_wPumpInternalCtrl
+ModularBoiler
