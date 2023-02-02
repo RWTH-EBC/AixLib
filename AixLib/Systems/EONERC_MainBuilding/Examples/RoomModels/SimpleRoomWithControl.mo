@@ -1,6 +1,6 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
 model SimpleRoomWithControl
-  extends RoomModels.SimpleRoom
+  extends RoomModels.SimpleRoom(thermalZone1(energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial))
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
@@ -107,7 +107,7 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Tair, ccaHeatCurve.u[1])
-    annotation (Line(points={{-142,32},{-142,110}}, color={0,0,127}));
+  connect(ccaHeatCurve.u, Tair) annotation (Line(points={{-142,110},{-144,110},
+          {-144,32},{-142,32}}, color={0,0,127}));
   annotation (experiment(StopTime=432000, Interval=3600.00288));
 end SimpleRoomWithControl;

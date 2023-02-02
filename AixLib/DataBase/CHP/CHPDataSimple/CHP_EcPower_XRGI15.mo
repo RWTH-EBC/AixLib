@@ -3,7 +3,7 @@ record CHP_EcPower_XRGI15 "EC Power: chp CRGI 15  (17-30 kW thermal)"
   extends CHPDataSimple.CHPBaseDataDefinition(
     vol={8e-3},
     data_CHP=[0, 0,    0,      0,    0;
-             40, 6.00, 17.00, 25, 2.94;
+             40, 6.00, 17.00, 26.1, 2.89;
             100, 15.0, 30.00, 48.91, 5.43],
     maxTFlow=358.15,
     maxTReturn=348.15,

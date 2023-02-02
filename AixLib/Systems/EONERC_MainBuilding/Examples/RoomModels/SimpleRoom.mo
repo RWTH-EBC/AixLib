@@ -18,7 +18,7 @@ model SimpleRoom
     zoneParam=BaseClasses.ERCMainBuilding_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     T_start=293.15,
     recOrSep=false,
     Heater_on=false,

@@ -225,15 +225,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integratorPelCHP.u, mainBus.htsBus.electricalPowerChpMea) annotation
-    (Line(points={{-11,-95},{-98.905,-95},{-98.905,0.09}}, color={0,0,127}),
+  connect(integratorPelCHP.u, mainBus.htsBus.electricalPowerChpMea) annotation (
+     Line(points={{-11,-95},{-98.905,-95},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integratorPelCHP.y, mainBus.evaBus.WelCPHMea) annotation (Line(points
-        ={{0.5,-95},{32,-95},{32,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
+  connect(integratorPelCHP.y, mainBus.evaBus.WelCPHMea) annotation (Line(points=
+         {{0.5,-95},{32,-95},{32,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

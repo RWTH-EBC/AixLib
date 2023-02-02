@@ -34,7 +34,7 @@ model BoilerNoControl "Boiler model with physics only"
     "Limits the rel power between 0 and 1"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
-        max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
+        max(etaLoadBased[:, 2]))
     "Nominal gas power"
     annotation (Placement(transformation(extent={{-62,88},{-34,104}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower

@@ -16,7 +16,7 @@ model HeatExchangerSystem
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    length=5,
+    length=2,
     Kv=63,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
@@ -24,8 +24,12 @@ model HeatExchangerSystem
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
           addPowerToMedium=false)),
-    valve(order=1),
-    pipe4(length=15))
+    valve(flowCharacteristics=
+          AixLib.Fluid.Actuators.Valves.Data.EqualPercentage(y={0,0.01,0.1,0.43,
+          0.49,0.7,0.85,1}, phi={0.0001,0.0015,0.002,0.055,0.17,0.55,0.97,1}),
+        order=1),
+    pipe3(length=5),
+    pipe4(length=10))
     annotation (Placement(transformation(extent={{-100,20},{-60,-20}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium,
@@ -36,16 +40,17 @@ model HeatExchangerSystem
     m2_flow_nominal=40.2,
     dp1_nominal=14000,
     dp2_nominal=48000,
-    tau1=2,
-    tau2=2,
+    nNodes=4,
+    tau1=0.5,
+    tau2=0.5,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start,
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
     redeclare Fluid.MixingVolumes.MixingVolume vol2,
-    tau_C=10,
-    dT_nom=50,
+    tau_C=0.5,
+    dT_nom=25,
     Q_nom=256000)                          annotation (Placement(transformation(
         extent={{-21,22},{21,-22}},
         rotation=270,

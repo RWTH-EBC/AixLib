@@ -17,14 +17,14 @@ model CtrAHUBasic "Simple controller for AHU"
   CtrRegBasic ctrPh(
     final useExternalTset=true,
     Td=0,
-    final initType=initType,
+    final initType=Modelica.Blocks.Types.Init.NoInit,
     final reverseAction=true)
                              if usePreheater annotation (dialog(group="Register controller",
         enable=usePreheater), Placement(transformation(extent={{0,70},{20,90}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
-    final initType=initType,
+    final initType=Modelica.Blocks.Types.Init.NoInit,
     final reverseAction=false)
                               annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,40},{20,60}})));
@@ -32,7 +32,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final useExternalTset=true,
     final useExternalTMea=true,
     Td=0,
-    final initType=initType,
+    final initType=Modelica.Blocks.Types.Init.NoInit,
     final reverseAction=true)
                              annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,10},{20,30}})));
@@ -101,9 +101,6 @@ model CtrAHUBasic "Simple controller for AHU"
     "Constant volume flow setpoint"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
-  Modelica.Blocks.Sources.Constant ConstHRS(final k=0)
-    "Heat recovery is deactivated"
-    annotation (Placement(transformation(extent={{40,-32},{52,-20}})));
   Modelica.Blocks.Sources.Constant ConstFlap(final k=1) "Flaps are always open"
     annotation (Placement(transformation(extent={{20,-20},{32,-8}})));
   Modelica.Blocks.Sources.Constant ConstHum(final k=0) "Humidifiers are off"
@@ -116,6 +113,29 @@ model CtrAHUBasic "Simple controller for AHU"
 
   Modelica.Blocks.Routing.RealPassThrough realPassThrough if not useTwoFanCtr
     annotation (Placement(transformation(extent={{60,-66},{72,-54}})));
+  Controls.Continuous.LimPID PID_HRS(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    final k=0.01,
+    final Ti=600,
+    final Td=0,
+    final initType=Modelica.Blocks.Types.Init.InitialState,
+    y_start=y_start,
+    final reverseActing=false,
+    final reset=AixLib.Types.Reset.Disabled)
+    "PID controller for hrs"
+    annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
+  Modelica.Blocks.Math.Add add(k2=-1)
+    annotation (Placement(transformation(extent={{-42,-30},{-28,-16}})));
+  Modelica.Blocks.Sources.Constant ConstFlap1(final k=1)
+                                                        "Flaps are always open"
+    annotation (Placement(transformation(extent={{-68,-34},{-56,-22}})));
+  Modelica.Blocks.Math.BooleanToReal booleanToReal
+    annotation (Placement(transformation(extent={{-140,-50},{-120,-30}})));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=273.15 +
+        18)
+    annotation (Placement(transformation(extent={{-174,-50},{-154,-30}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{20.2,80},{100.05,80},{100.05,0.05}},
@@ -168,12 +188,6 @@ equation
       points={{-120,0},{-28,0},{-28,20},{-2,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ConstHRS.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{52.6,
-          -26},{100.05,-26},{100.05,0.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(ConstFlap.y, genericAHUBus.flapEtaSet) annotation (Line(points={{32.6,
           -14},{100.05,-14},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
@@ -232,8 +246,39 @@ equation
   end if;
   connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},
           {22,-50},{22,-60},{58.8,-60}}, color={0,0,127}));
-  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points
-        ={{72.6,-60},{100.05,-60},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points=
+         {{72.6,-60},{100.05,-60},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PID_HRS.u_m, genericAHUBus.coolerBus.TAirInMea) annotation (Line(
+        points={{-10,-36},{-10,-40},{104,-40},{104,0.05},{100.05,0.05}}, color=
+          {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.y, PID_HRS.u_s) annotation (Line(points={{-27.3,-23},{-27.3,-24},
+          {-22,-24}}, color={0,0,127}));
+  connect(add.u1, ctrRh.Tset) annotation (Line(
+      points={{-43.4,-18.8},{-48,-18.8},{-48,20},{-2,20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(ConstFlap1.y, add.u2) annotation (Line(points={{-55.4,-28},{-48,-28},
+          {-48,-27.2},{-43.4,-27.2}}, color={0,0,127}));
+  connect(greaterThreshold.y, booleanToReal.u)
+    annotation (Line(points={{-153,-40},{-142,-40}}, color={255,0,255}));
+  connect(greaterThreshold.u, genericAHUBus.TOdaMea) annotation (Line(points={{
+          -176,-40},{-182,-40},{-182,-26},{-186,-26},{-186,0.05},{100.05,0.05}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(PID_HRS.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{1,
+          -24},{64,-24},{64,-26},{130,-26},{130,-18},{146,-18},{146,0.05},{
+          100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
