@@ -84,16 +84,26 @@ model HighTemperatureSystem
     allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
-        Q_min=40000))
+    TAmb=303.15,
+    paramBoiler=AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_60kW(
+        Q_nom=120000,
+        Q_min=40000,
+        eta=[0.3,0.98; 1.0,0.99]),
+    etaTempBased=[293.15,1.07; 303.15,1.05; 313.15,1.02; 318.15,1.005; 323.15,1;
+        373.15,0.995])
     annotation (Placement(transformation(extent={{-8,-72},{-32,-48}})));
   Fluid.BoilerCHP.BoilerNoControl boiler1(
     redeclare package Medium = Medium,
     allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
-        Q_min=40000))
+    TAmb=303.15,
+    paramBoiler=AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_60kW(
+        Q_nom=120000,
+        Q_min=40000,
+        eta=[0.3,0.98; 1.0,0.99]),
+    etaTempBased=[293.15,1.07; 303.15,1.05; 313.15,1.02; 318.15,1.005; 323.15,1;
+        373.15,0.995])
     annotation (Placement(transformation(extent={{72,-72},{48,-48}})));
   Fluid.BoilerCHP.CHPNoControl
                       cHPNoControl(
@@ -101,7 +111,7 @@ model HighTemperatureSystem
     allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
+    param=AixLib.DataBase.CHP.CHPDataSimple.CHP_EcPower_XRGI15(),
     minCapacity=0)
     annotation (Placement(transformation(extent={{-88,-72},{-112,-48}})));
   BaseClasses.HighTempSystemBus hTCBus annotation (Placement(transformation(

@@ -32,25 +32,30 @@ model MainBuilding2Zones "Benchmark building model"
   AixLib.Systems.TABS.Tabs
        tabs1(
     redeclare package Medium = MediumWater,
+    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_133x3(lambda=100),
     area=60*60,
     thickness=0.05,
-    alpha=15)
+    alpha=10)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
   AixLib.Systems.TABS.Tabs
        tabs2(
     redeclare package Medium = MediumWater,
+    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_133x3(lambda=100),
     area=60*60,
     thickness=0.05,
-    alpha=15)
+    alpha=10)
     annotation (Placement(transformation(extent={{364,122},{404,162}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1North(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=BaseClasses.ERCMainBuilding_Office(),
+    zoneParam=
+        AixLib.Systems.EONERC_MainBuilding.BaseClasses.ERCMainBuilding_OfficeNorth(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
+    use_NaturalAirExchange=true,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
@@ -67,10 +72,10 @@ model MainBuilding2Zones "Benchmark building model"
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/SIA2024_SingleOffice_week.txt"),
     columns={2,3,4},
-    tableOnFile=false,
+    tableOnFile=true,
     table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
         0.1,0,0; 10740,0,0.1,0,0; 10800,0,0.1,0,0; 14340,0,0.1,0,0; 14400,0,0.1,
         0,0; 17940,0,0.1,0,0; 18000,0,0.1,0,0; 21540,0,0.1,0,0; 21600,0,0.1,0,0;
@@ -163,19 +168,21 @@ model MainBuilding2Zones "Benchmark building model"
     "Weather data bus"
     annotation (Placement(transformation(extent={{44,334},{78,366}}),
     iconTransformation(extent={{-150,388},{-130,408}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone2South(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=BaseClasses.ERCMainBuilding_Office(),
+    zoneParam=
+        AixLib.Systems.EONERC_MainBuilding.BaseClasses.ERCMainBuilding_OfficeSouth(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
+    use_NaturalAirExchange=true,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{294,206},{350,260}})));
   ModularAHU.GenericAHU genericAHU1(
     redeclare package Medium1 = MediumAir,
@@ -236,10 +243,9 @@ model MainBuilding2Zones "Benchmark building model"
         dT_nom=20,
         Q_nom=100000)),
     dynamicHX(
-      dp1_nominal=150,
-      dp2_nominal=150,
-      dT_nom=2,
-      Q_nom=50000),
+      nNodes=5,
+      dT_nom=1,
+      Q_nom=170000),
     humidifier(
       dp_nominal=20,
       mWat_flow_nominal=1,
@@ -346,10 +352,9 @@ model MainBuilding2Zones "Benchmark building model"
         dT_nom=20,
         Q_nom=100000)),
     dynamicHX(
-      dp1_nominal=150,
-      dp2_nominal=150,
-      dT_nom=2,
-      Q_nom=50000),
+      nNodes=5,
+      dT_nom=1,
+      Q_nom=170000),
     humidifier(
       dp_nominal=20,
       mWat_flow_nominal=1,
@@ -362,10 +367,10 @@ model MainBuilding2Zones "Benchmark building model"
   Modelica.Blocks.Sources.CombiTimeTable internalGains1(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/SIA2024_SingleOffice_week.txt"),
     columns={2,3,4},
-    tableOnFile=false,
+    tableOnFile=true,
     table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
         0.1,0,0; 10740,0,0.1,0,0; 10800,0,0.1,0,0; 14340,0,0.1,0,0; 14400,0,0.1,
         0,0; 17940,0,0.1,0,0; 18000,0,0.1,0,0; 21540,0,0.1,0,0; 21600,0,0.1,0,0;
@@ -625,7 +630,7 @@ model MainBuilding2Zones "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={8,216})));
-  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=273.15)
+  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=272.15)
     "Ice Protection"
     annotation (Placement(transformation(extent={{-20,-106},{-8,-94}})));
   Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold2(y=mainBus.consCold1Bus.VFlowInMea
@@ -672,7 +677,7 @@ equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
       Line(points={{14,-100},{14,-77.4444},{15,-77.4444}},          color={191,
           0,0}));
-  connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
+  connect(weaDat.weaBus, thermalZone1North.weaBus) annotation (Line(
       points={{60,378},{112,378},{112,342.4}},
       color={255,204,51},
       thickness=0.5));
@@ -683,18 +688,17 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{165,
-          287.7},{162.4,287.7},{162.4,300.64}},
-                                            color={0,0,127}));
-  connect(tabs1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{178,162},
-          {182,162},{182,326.16},{168.56,326.16}},                  color={191,
-          0,0}));
-  connect(weaDat.weaBus,thermalZone2. weaBus) annotation (Line(
+  connect(internalGains.y, thermalZone1North.intGains) annotation (Line(points=
+          {{165,287.7},{162.4,287.7},{162.4,300.64}}, color={0,0,127}));
+  connect(tabs1.heatPort, thermalZone1North.intGainsConv) annotation (Line(
+        points={{178,162},{182,162},{182,326.16},{168.56,326.16}}, color={191,0,
+          0}));
+  connect(weaDat.weaBus, thermalZone2South.weaBus) annotation (Line(
       points={{60,378},{216,378},{216,249.2},{294,249.2}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone2.intGainsConv, tabs2.heatPort) annotation (Line(points={{350.56,
-          234.08},{384,234.08},{384,164}},            color={191,0,0}));
+  connect(thermalZone2South.intGainsConv, tabs2.heatPort) annotation (Line(
+        points={{350.56,234.08},{384,234.08},{384,164}}, color={191,0,0}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
         points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
   connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (Line(
@@ -710,15 +714,16 @@ equation
   connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
         points={{270,-88},{270,-80},{264,-80}}, color={0,127,255}));
 
-  connect(thermalZone1.TAir, mainBus.TZone1Mea) annotation (Line(points={{170.8,
-          348.2},{170,348.2},{170,419.145},{161.115,419.145}}, color={0,0,127}),
-      Text(
+  connect(thermalZone1North.TAir, mainBus.TZone1Mea) annotation (Line(points={{
+          170.8,348.2},{170,348.2},{170,419.145},{161.115,419.145}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(thermalZone2.TAir, mainBus.TZone2Mea) annotation (Line(points={{352.8,
-          254.6},{352.8,419.145},{161.115,419.145}}, color={0,0,127}), Text(
+  connect(thermalZone2South.TAir, mainBus.TZone2Mea) annotation (Line(points={{
+          352.8,254.6},{352.8,419.145},{161.115,419.145}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -810,20 +815,21 @@ equation
   connect(genericAHU2.port_a5, genericAHU1.port_a5) annotation (Line(points={{105.818,
           160},{106,160},{106,128},{-12.1818,128},{-12.1818,248}},
         color={238,46,47}));
-  connect(thermalZone2.intGains, internalGains1.y) annotation (Line(points={{
-          344.4,210.32},{343.2,210.32},{343.2,197.7},{345,197.7}}, color={0,0,
+  connect(thermalZone2South.intGains, internalGains1.y) annotation (Line(points
+        ={{344.4,210.32},{343.2,210.32},{343.2,197.7},{345,197.7}}, color={0,0,
           127}));
-  connect(genericAHU2.port_a2, thermalZone2.ports[1]) annotation (Line(points={{144.545,
-          214},{231.272,214},{231.272,213.56},{318.71,213.56}},          color=
-          {0,127,255}));
-  connect(genericAHU2.port_b1, thermalZone2.ports[2]) annotation (Line(points={{144.545,
-          190},{332,190},{332,213.56},{325.29,213.56}},          color={0,127,
-          255}));
-  connect(genericAHU1.port_b1, thermalZone1.ports[1]) annotation (Line(points={{26.5455,
-          278},{142,278},{142,304.12},{136.71,304.12}},          color={0,127,
-          255}));
-  connect(genericAHU1.port_a2, thermalZone1.ports[2]) annotation (Line(points={{26.5455,
-          302},{80,302},{80,304.12},{143.29,304.12}},          color={0,127,255}));
+  connect(genericAHU2.port_a2, thermalZone2South.ports[1]) annotation (Line(
+        points={{144.545,214},{231.272,214},{231.272,213.56},{318.71,213.56}},
+        color={0,127,255}));
+  connect(genericAHU2.port_b1, thermalZone2South.ports[2]) annotation (Line(
+        points={{144.545,190},{332,190},{332,213.56},{325.29,213.56}}, color={0,
+          127,255}));
+  connect(genericAHU1.port_b1, thermalZone1North.ports[1]) annotation (Line(
+        points={{26.5455,278},{142,278},{142,304.12},{136.71,304.12}}, color={0,
+          127,255}));
+  connect(genericAHU1.port_a2, thermalZone1North.ports[2]) annotation (Line(
+        points={{26.5455,302},{80,302},{80,304.12},{143.29,304.12}}, color={0,
+          127,255}));
   connect(genericAHU2.genericAHUBus, mainBus.ahu2Bus) annotation (Line(
       points={{84,226.3},{84,419.145},{161.115,419.145}},
       color={255,204,51},
