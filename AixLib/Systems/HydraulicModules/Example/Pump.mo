@@ -89,8 +89,8 @@ equation
             100}})),
     experiment(StopTime=800,Interval = 5),
     Documentation(revisions="<html><ul>
-  <li>December 06, 2022, by FG Modelica:<br/>
-    Fixes to increase compatability to OpenModelica #1378.
+  <li>December 06, 2022, by EBC-Modelica group:<br/>
+    Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
   </li>
   <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.

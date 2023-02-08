@@ -304,8 +304,8 @@ equation
   </li>
 </ul>
 </html>", revisions="<html><ul>
-  <li>December 06, 2022, by FG Modelica:<br/>
-    Fixes to increase compatability to OpenModelica #1378.
+  <li>December 06, 2022, by EBC-Modelica group:<br/>
+    Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
   </li>
   <li>2017-06 by Alexander Kümpel:<br/>
     Implemented
