@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model Window "Calculation of solar energy transmitted through windows"
-  parameter Integer n(min = 1) "Number of windows"
+  parameter Integer n(min = 1)=1 "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
@@ -25,13 +25,13 @@ model Window "Calculation of solar energy transmitted through windows"
     annotation (dialog(group="sunscreen"));
   parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
      roof" annotation (Dialog(group="window"));
 
   Modelica.Blocks.Interfaces.RealInput incAng[n](
-    final quantity="Angle",
-    final unit="rad",
-    displayUnit="degree")
+    each final quantity="Angle",
+    each final unit="rad",
+    each displayUnit="degree")
     "Incidence angles of the sun beam on a tilted surface"
     annotation (Placement(transformation(extent={{-124,68},{-100,92}}),
     iconTransformation(extent={{-120,72},{-100,92}})));
@@ -47,8 +47,8 @@ model Window "Calculation of solar energy transmitted through windows"
     annotation (Placement(transformation(extent={{-124,42},{-100,66}}),
         iconTransformation(extent={{-120,46},{-100,66}})));
    Modelica.Blocks.Interfaces.RealInput HDirTil[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Direct irradition on tilted surface"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "Direct irradition on tilted surface"
     annotation (Placement(transformation(extent={{-124,-92},{-100,-68}}),
         iconTransformation(extent={{-120,-88},{-100,-68}})));
 
@@ -65,27 +65,27 @@ model Window "Calculation of solar energy transmitted through windows"
         iconTransformation(extent={{-120,-32},{-100,-12}})));
 
     Modelica.Blocks.Interfaces.RealInput HDifTil[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface from the sky"
     annotation (Placement(transformation(extent={{-124,-12},{-100,12}}),
         iconTransformation(extent={{-120,-8},{-100,12}})));
 
     Modelica.Blocks.Interfaces.RealOutput HVis[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Solar energy entering the room in the visible area"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{100,30},{120,50}})));
 
     Modelica.Blocks.Interfaces.RealOutput HWin[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Solar radiation transmitted through aggregated window"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
 
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind[n](
-    final lim=lim)
+    each final lim=lim)
     annotation (Placement(transformation(extent={{-68,-42},{-56,-30}})));
   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
     final n=n,
