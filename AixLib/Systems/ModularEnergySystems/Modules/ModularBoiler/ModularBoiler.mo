@@ -77,6 +77,7 @@ model ModularBoiler
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
 
   Fluid.BoilerCHP.BoilerNotManufacturer heatGeneratorNoControl(
+    allowFlowReversal=allowFlowReversal,
     final T_start=TStart,
     final QNom=QNom,
     final PLRMin=PLRMin,
@@ -94,7 +95,7 @@ model ModularBoiler
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final T_start=TStart,
     final transferHeat=false,
-    final allowFlowReversal=false,
+    final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001)
     "Temperature sensor of hot side of heat generator (supply)" annotation (
       Placement(transformation(
@@ -107,7 +108,7 @@ model ModularBoiler
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final T_start=TStart,
     final transferHeat=false,
-    final allowFlowReversal=false,
+    final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001)
     "Temperature sensor of cold side of heat generator (supply)" annotation (
       Placement(transformation(
@@ -117,7 +118,7 @@ model ModularBoiler
 
   AixLib.Fluid.Movers.SpeedControlled_y pump(
     redeclare final package Medium = Medium,
-    final allowFlowReversal=false,
+    final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001,
     final per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={
             dp_nominal/0.8,dp_nominal,0})),
@@ -229,8 +230,23 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControl.dTWaterNom, heatGeneratorNoControl.dTWater) annotation (
      Line(points={{-56.3,62.46},{-20,62.46},{-20,10},{-12,10}}, color={0,0,127}));
+  connect(boilerControlBus.PLRMea, boilerControl.PLRset) annotation (Line(
+      points={{0.05,98.05},{0.05,79.8},{-57.66,79.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
     annotation (Dialog(group = "Feedback"), choices(checkBox = true),
               Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={175,175,175},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dash),
         Line(
           points={{-94,0},{96,0}},
           color={0,127,255},

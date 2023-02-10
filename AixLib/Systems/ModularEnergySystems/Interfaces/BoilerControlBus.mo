@@ -16,6 +16,7 @@ Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature differ
     "Measured return temperature of boiler";
 Modelica.Units.SI.Power EnergyDemand "Energy Demand";
 Modelica.Units.SI.Temperature TFlowSet "Set value for flow temperature";
+Real PLRMea "Measured part load ratio";
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),

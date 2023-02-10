@@ -5,8 +5,8 @@ model SimpleConsumer_base
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   package MediumWater = AixLib.Media.Water;
-  parameter Boolean hasPump=false   "circuit has Pump" annotation (Dialog(group = "Pump"), choices(checkBox = true));
-  parameter Boolean hasFeedback = false "circuit has Feedback" annotation (Dialog(group = "Feedback"), choices(checkBox = true));
+  parameter Boolean hasPump = true   "circuit has Pump" annotation (Dialog(group = "Pump"), choices(checkBox = true));
+  parameter Boolean hasFeedback = true "circuit has Feedback" annotation (Dialog(group = "Feedback"), choices(checkBox = true));
   parameter Integer demandType   "Choose between heating and cooling functionality" annotation (choices(
               choice=1 "use as heating consumer",
               choice=-1 "use as cooling consumer"),Dialog(enable=true, group = "System"));
@@ -129,6 +129,13 @@ equation
   connect(volume.ports[2], senTReturn.port_a) annotation (Line(points={{40,0},{49,
           0},{49,1.72085e-15},{58,1.72085e-15}},        color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={175,175,175},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dash),
         Polygon(
           points={{20,-124},{60,-139},{20,-154},{20,-124}},
           lineColor={0,128,255},
@@ -139,22 +146,68 @@ equation
           points={{55,-139},{-60,-139}},
           color={0,128,255},
           visible=not allowFlowReversal),
+        Line(
+          points={{-96,0},{94,0}},
+          color={0,127,255},
+          thickness=0.5),
+        Polygon(
+          points={{-82,-10},{-82,10},{-62,0},{-82,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid, visible=hasFeedback),
+        Polygon(
+          points={{10,-10},{-10,-10},{0,10},{10,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-62,-10},
+          rotation=0, visible=hasFeedback),
+        Polygon(
+          points={{-42,-10},{-42,10},{-62,0},{-42,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid, visible=hasFeedback),
+        Ellipse(
+          extent={{-28,20},{12,-20}},
+          lineColor={135,135,135},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid, visible=hasPump),
+        Line(
+          points={{-8,20},{12,0},{-8,-20}},
+          color={135,135,135},
+          thickness=0.5, visible=hasPump),
+        Ellipse(
+          extent={{80,2},{84,-2}},
+          lineColor={0,128,255},
+          lineThickness=0.5,
+          fillColor={0,128,255},
+          fillPattern=FillPattern.Solid, visible=hasFeedback),
+        Line(
+          points={{-62,-20},{-62,-60}},
+          color={0,128,255},
+          thickness=0.5, visible=hasFeedback),
+        Line(
+          points={{-62,-60},{82,-60}},
+          color={0,128,255},
+          thickness=0.5, visible=hasFeedback),
+        Line(
+          points={{82,-2},{82,-60}},
+          color={0,128,255},
+          thickness=0.5, visible=hasFeedback),
                    Ellipse(
-          extent={{-80,80},{80,-80}},
+          extent={{16,18},{52,-18}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Ellipse(
-          extent={{-60,60},{60,-60}},
+          extent={{20,14},{48,-14}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),Text(
-          extent={{-56,18},{56,-18}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="CONSUMER")}),                              Diagram(
+          fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimpleConsumer_base;

@@ -1,7 +1,7 @@
 within AixLib.Systems.HydraulicModules.Controller;
 model CtrSimpleConsumer
   extends AixLib.Systems.HydraulicModules.Controller.CtrSimpleConsumer_base(
-      PIPump(yMin=0.01));
+      PIPump(yMax=0.99));
 
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
