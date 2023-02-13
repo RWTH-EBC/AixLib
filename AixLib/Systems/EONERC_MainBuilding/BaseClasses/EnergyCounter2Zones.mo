@@ -27,7 +27,7 @@ model EnergyCounter2Zones "Sums up all consumed energy"
   Modelica.Blocks.Continuous.Integrator integrator8
     annotation (Placement(transformation(extent={{-10,-60},{0,-50}})));
   Modelica.Blocks.Continuous.Integrator integrator9
-    annotation (Placement(transformation(extent={{-10,-80},{0,-70}})));
+    annotation (Placement(transformation(extent={{-8,-80},{2,-70}})));
   Modelica.Blocks.Continuous.Integrator integratorPelCHP
     annotation (Placement(transformation(extent={{-10,-100},{0,-90}})));
   Modelica.Blocks.Math.Sum sum1(nin=3)
@@ -92,6 +92,18 @@ model EnergyCounter2Zones "Sums up all consumed energy"
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={20,-86})));
+  Modelica.Blocks.Math.MultiSum multiSumPCons(nu=10)
+    annotation (Placement(transformation(extent={{2,156},{14,168}})));
+  Modelica.Blocks.Math.Add add5(k2=-1)
+    annotation (Placement(transformation(extent={{36,146},{56,166}})));
+  Modelica.Blocks.Nonlinear.Limiter elecBuy(uMax=10000000, uMin=0)
+    annotation (Placement(transformation(extent={{84,172},{104,192}})));
+  Modelica.Blocks.Nonlinear.Limiter elecSell(uMax=0, uMin=-1000000)
+    annotation (Placement(transformation(extent={{84,140},{104,160}})));
+  Modelica.Blocks.Continuous.Integrator integrator10
+    annotation (Placement(transformation(extent={{116,178},{126,188}})));
+  Modelica.Blocks.Continuous.Integrator integrator15
+    annotation (Placement(transformation(extent={{118,144},{128,154}})));
 equation
   connect(integrator.u, mainBus.hpSystemBus.busHP.PelMea) annotation (Line(points={
           {-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
@@ -214,13 +226,13 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(integrator9.u, mainBus.htsBus.fuelPowerChpMea) annotation (Line(
-        points={{-11,-75},{-98.905,-75},{-98.905,0.09}}, color={0,0,127}), Text(
+        points={{-9,-75},{-98.905,-75},{-98.905,0.09}},  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator9.y, mainBus.evaBus.QbrCHPMea) annotation (Line(points={{0.5,
-          -75},{32,-75},{32,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
+  connect(integrator9.y, mainBus.evaBus.QbrCHPMea) annotation (Line(points={{2.5,-75},
+          {32,-75},{32,0.09},{-98.905,0.09}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -287,7 +299,7 @@ equation
           -35},{21.25,-35.3333},{49,-35.3333}}, color={0,0,127}));
   connect(integrator8.y, sumQbr.u[2])
     annotation (Line(points={{0.5,-55},{49,-55},{49,-35}}, color={0,0,127}));
-  connect(integrator9.y, sumQbr.u[3]) annotation (Line(points={{0.5,-75},{20,
+  connect(integrator9.y, sumQbr.u[3]) annotation (Line(points={{2.5,-75},{20,
           -75},{20,-74},{48,-74},{48,-34.6667},{49,-34.6667}}, color={0,0,127}));
   connect(sumQbr.y, mainBus.evaBus.QbrTotalMea) annotation (Line(points={{60.5,-35},
           {64,-35},{64,-36},{66,-36},{66,0.09},{-98.905,0.09}}, color={0,0,127}),
@@ -533,6 +545,62 @@ equation
   connect(gain.y, sumWel.u[11]) annotation (Line(points={{20,-81.6},{20,-76},{
           32,-76},{32,-18},{40,-18},{40,-16.5455},{49,-16.5455}}, color={0,0,
           127}));
+  connect(integrator.u, multiSumPCons.u[1]) annotation (Line(points={{-11,95},{
+          -14,95},{-14,114},{2,114},{2,160.11}}, color={0,0,127}));
+  connect(integrator1.u, multiSumPCons.u[2]) annotation (Line(points={{-11,79},
+          {-14,79},{-14,114},{2,114},{2,160.53}}, color={0,0,127}));
+  connect(integrator2.u, multiSumPCons.u[3]) annotation (Line(points={{-11,61},
+          {-32,61},{-32,88},{-14,88},{-14,114},{2,114},{2,160.95}}, color={0,0,
+          127}));
+  connect(integrator3.u, multiSumPCons.u[4]) annotation (Line(points={{-11,45},
+          {-14,45},{-14,56},{-16,56},{-16,60},{-32,60},{-32,88},{-14,88},{-14,
+          114},{2,114},{2,161.37}}, color={0,0,127}));
+  connect(integrator4.u, multiSumPCons.u[5]) annotation (Line(points={{-11,25},
+          {-32,25},{-32,88},{-14,88},{-14,114},{2,114},{2,161.79}}, color={0,0,
+          127}));
+  connect(integrator5.u, multiSumPCons.u[6]) annotation (Line(points={{-11,9},{
+          -16,9},{-16,24},{-32,24},{-32,88},{-14,88},{-14,114},{2,114},{2,
+          162.21}}, color={0,0,127}));
+  connect(integrator6.u, multiSumPCons.u[7]) annotation (Line(points={{-11,-17},
+          {-12,-17},{-12,-12},{-14,-12},{-14,4},{-16,4},{-16,24},{-32,24},{-32,
+          88},{-14,88},{-14,114},{2,114},{2,162.63}}, color={0,0,127}));
+  connect(integratorAHUs.u, multiSumPCons.u[8]) annotation (Line(points={{-11,
+          -117},{-16,-117},{-16,-12},{-14,-12},{-14,4},{-16,4},{-16,24},{-32,24},
+          {-32,88},{-14,88},{-14,114},{2,114},{2,163.05}}, color={0,0,127}));
+  connect(integratorCCAs.u, multiSumPCons.u[9]) annotation (Line(points={{-11,
+          -137},{-11,-120},{-16,-120},{-16,-12},{-14,-12},{-14,4},{-16,4},{-16,
+          24},{-32,24},{-32,88},{-14,88},{-14,114},{2,114},{2,163.47}}, color={
+          0,0,127}));
+  connect(integratorCCAs1.u, multiSumPCons.u[10]) annotation (Line(points={{-11,
+          -155},{-11,-120},{-16,-120},{-16,-12},{-14,-12},{-14,4},{-16,4},{-16,
+          24},{-32,24},{-32,88},{-14,88},{-14,114},{2,114},{2,163.89}}, color={
+          0,0,127}));
+  connect(multiSumPCons.y, add5.u1)
+    annotation (Line(points={{15.02,162},{34,162}}, color={0,0,127}));
+  connect(add5.y, elecBuy.u) annotation (Line(points={{57,156},{62,156},{62,182},
+          {82,182}}, color={0,0,127}));
+  connect(add5.y, elecSell.u)
+    annotation (Line(points={{57,156},{57,150},{82,150}}, color={0,0,127}));
+  connect(elecBuy.y, integrator10.u)
+    annotation (Line(points={{105,182},{105,183},{115,183}}, color={0,0,127}));
+  connect(elecSell.y, integrator15.u) annotation (Line(points={{105,150},{111,
+          150},{111,149},{117,149}}, color={0,0,127}));
+  connect(integrator10.y, mainBus.evaBus.WelTotalBuyMea) annotation (Line(
+        points={{126.5,183},{126.5,162},{-98.905,162},{-98.905,0.09}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(integrator15.y, mainBus.evaBus.WelTotalSellMea) annotation (Line(
+        points={{128.5,149},{142,149},{142,170},{-98.905,170},{-98.905,0.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integratorPelCHP.u, add5.u2)
+    annotation (Line(points={{-11,-95},{-11,150},{34,150}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-86,80},{94,-20}},

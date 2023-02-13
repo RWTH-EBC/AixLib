@@ -46,7 +46,7 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{-60,-140},{-40,-120}})));
   CtrTabs ctrTabs2_1(useExternalTset=false, TflowSet=292.15)
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  CtrHighTemperatureSystem ctrHighTemperatureSystem
+  CtrHighTemperatureSystem ctrHighTemperatureSystem(T_chp_set=273.15 + 90)
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
   Modelica.Blocks.Tables.CombiTable1Ds ccaHeatCurve(table=[270.15,303.15; 273.15,
         303.15; 278.15,298.15; 283.15,293.15; 293.15,291.15; 298.15,288.15;

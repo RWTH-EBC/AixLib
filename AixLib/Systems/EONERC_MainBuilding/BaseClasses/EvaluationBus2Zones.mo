@@ -19,6 +19,8 @@ expandable connector EvaluationBus2Zones
   SI.Energy QbrCHPMea "Consumed energy of chp";
   SI.Energy WelCPHMea "Produced electricity of chp";
   SI.Energy WelTotalMea "Total consumed electricity";
+  SI.Energy WelTotalBuyMea "Total consumed electricity from grid";
+  SI.Energy WelTotalSellMea "Total electricity passed to grid";
   SI.Energy QbrTotalMea "Total consumed fuel";
   Real IseHTC "ISE of high temperature consumer";
   Real IseCold1 "ISE of cold consumer 1";
