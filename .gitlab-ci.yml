@@ -1,4 +1,3 @@
-
 include:
     project: 'EBC/EBC_all/gitlab_ci/templates'
     ref: AixLib_Test
