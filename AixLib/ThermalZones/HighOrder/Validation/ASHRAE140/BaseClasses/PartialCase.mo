@@ -224,9 +224,9 @@ equation
   connect(ReferenceCoolingLoadOrTempMin.y[2], checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit) annotation (Line(points={{72.7,-77},{87,-77},{87,-80.5},{97.95,-80.5}}, color={0,0,127}));
   connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
   connect(temperatureSensor.T, to_degCRoomConvTemp.u) annotation (Line(points={{84.6,36},
-          {91,36}},                                                                              color={0,0,127}));
+          {91,36}}, color={0,0,127}));
   connect(temperatureSensor1.T, to_degCRoomConvTemp1.u) annotation (Line(points={{84.6,18},
-          {91,18}},                                                                                color={0,0,127}));
+          {91,18}}, color={0,0,127}));
   connect(to_degCRoomConvTemp1.y, FreeFloatRoomRadTemperature) annotation (Line(points={{102.5,18},{140,18}}, color={0,0,127}));
   connect(Room.thermRoom, temperatureSensor.port) annotation (Line(points={{-2.92,35},{-2.92,44},{67,44},{67,36},{72,36}}, color={191,0,0}));
   connect(Room.starRoom, temperatureSensor1.port) annotation (Line(points={{5.48,35},{5.48,42},{65,42},{65,18},{72,18}}, color={0,0,0}));
