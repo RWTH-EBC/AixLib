@@ -1,7 +1,6 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
 model NominalHeatPumpNotManufacturer
 
-  parameter Boolean HighTemp=false;
   parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
@@ -44,7 +43,7 @@ model NominalHeatPumpNotManufacturer
         rotation=0,
         origin={-56,34})));
   Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
-    annotation (Placement(transformation(extent={{-48,-84},{-32,-64}})));
+    annotation (Placement(transformation(extent={{-92,-86},{-36,-62}})));
   Modelica.Blocks.Sources.RealExpression qNom1(y=QNom)
     annotation (Placement(transformation(extent={{30,16},{46,36}})));
   Modelica.Blocks.Sources.RealExpression deltaTCon(y=DeltaTCon)
@@ -88,7 +87,7 @@ equation
   connect(tSourceNom.y, fromKelvin3.Kelvin)
     annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));
   connect(qNom.y, division1.u1)
-    annotation (Line(points={{-31.2,-74},{-2,-74}}, color={0,0,127}));
+    annotation (Line(points={{-33.2,-74},{-2,-74}}, color={0,0,127}));
   connect(add.u1, qNom1.y)
     annotation (Line(points={{62,26},{46.8,26}}, color={0,0,127}));
   connect(SDFCOP1.y, division1.u2) annotation (Line(points={{-10,-33.2},{-10,

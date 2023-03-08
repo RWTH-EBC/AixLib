@@ -172,7 +172,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(controlBoilerNotManufacturer.plr_b, heatGeneratorNoControl.PLR)
+  connect(controlBoilerNotManufacturer.plr_b, heatGeneratorNoControl.Qrel)
     annotation (Line(points={{-59,49.4667},{-16,49.4667},{-16,5.4},{-10,5.4}},
         color={0,0,127}));
   connect(controlBoilerNotManufacturer.mFlowRel, fan1.y) annotation (Line(

@@ -109,11 +109,14 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
     annotation (Placement(transformation(extent={{50,-116},{70,-98}})));
   Modelica.Blocks.Sources.RealExpression tColdNom1(y=THotNom - DeltaTCon)
     "Nominal TCold"
-    annotation (Placement(transformation(extent={{-254,-108},{-182,-78}})));
+    annotation (Placement(transformation(extent={{-272,-16},{-200,14}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
-    annotation (Placement(transformation(extent={{-156,-100},{-142,-86}})));
+    annotation (Placement(transformation(extent={{-156,-102},{-140,-86}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
-    annotation (Placement(transformation(extent={{-80,-138},{-94,-124}})));
+    annotation (Placement(transformation(extent={{-86,-138},{-100,-124}})));
+  Modelica.Blocks.Sources.RealExpression tColdNom2(y=THotNom - 15)
+    "Nominal TCold"
+    annotation (Placement(transformation(extent={{-258,-108},{-186,-80}})));
 equation
   connect(one.y, positionBypass.u3) annotation (Line(points={{-21,-119},{-2,-119},
           {-2,-112}}, color={0,0,127}));
@@ -141,14 +144,15 @@ equation
           {92,-83.2},{15.4,-83.2}}, color={0,0,127}));
   connect(conPID.y, positionBypass.u1)
     annotation (Line(points={{-93,-94},{-2,-94},{-2,-96}}, color={0,0,127}));
-  connect(tColdNom1.y, gain.u)
-    annotation (Line(points={{-178.4,-93},{-157.4,-93}}, color={0,0,127}));
-  connect(gain.y, conPID.u_s) annotation (Line(points={{-141.3,-93},{-122,-93},
-          {-122,-94},{-116,-94}}, color={0,0,127}));
+  connect(gain.y, conPID.u_s) annotation (Line(points={{-139.2,-94},{-116,-94}},
+                                  color={0,0,127}));
   connect(senTConInlet.T, gain1.u) annotation (Line(points={{-81,-68.8},{-81,
-          -120},{-64,-120},{-64,-131},{-78.6,-131}}, color={0,0,127}));
-  connect(gain1.y, conPID.u_m) annotation (Line(points={{-94.7,-131},{-104,-131},
-          {-104,-106}}, color={0,0,127}));
+          -120},{-64,-120},{-64,-131},{-84.6,-131}}, color={0,0,127}));
+  connect(gain1.y, conPID.u_m) annotation (Line(points={{-100.7,-131},{-104,
+          -131},{-104,-106}},
+                        color={0,0,127}));
+  connect(tColdNom2.y, gain.u)
+    annotation (Line(points={{-182.4,-94},{-157.6,-94}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-30,30},{30,-30}},

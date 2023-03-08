@@ -9,11 +9,7 @@ model Boiler "Boiler with internal and external control"
     "Parameters for Boiler"
     annotation (Dialog(tab = "General", group = "Boiler type"),
     choicesAllMatching = true);
-  parameter
-    AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
-    paramHC
-    "Parameters for heating curve"
-    annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
+
   parameter Real KR=1
     "Gain of Boiler heater"
     annotation (Dialog(tab = "General", group = "Boiler type"));
@@ -49,19 +45,9 @@ model Boiler "Boiler with internal and external control"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={50,-90})));
-  Modelica.Blocks.Interfaces.RealInput TAmbient(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC")
-    "Ambient air temperature"
-    annotation (Placement(
-        transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent=
-           {{-80,60},{-60,80}})));
-   Modelica.Blocks.Interfaces.BooleanInput switchToNightMode
-     "Connector of Boolean input signal"
-     annotation (Placement(transformation(
-     extent={{-100,10},{-60,50}}), iconTransformation(extent={{-80,30},{-60,
-     50}})));
+  Modelica.Blocks.Interfaces.RealInput PLR "PartLoadRatio"
+    annotation (Placement(transformation(extent={{-146,40},{-106,80}}),
+        iconTransformation(extent={{-126,60},{-106,80}})));
   replaceable model ExtControl =
     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC
      constrainedby
@@ -76,18 +62,18 @@ model Boiler "Boiler with internal and external control"
     final energyDynamics=energyDynamics)
     "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
-  ExtControl myExternalControl(
-    final paramHC=paramHC,
-    final declination=declination,
-    final Tdelta_Max=Tdelta_Max,
-    final Tdelta_Min=Tdelta_Min,
-    final Fb=Fb,
-    final FA=FA)
-    "External control"
-     annotation (Placement(transformation(extent={{-10,38},
-            {10,58}})));
 
 
+  Modelica.Blocks.Math.Product qSetPoint "Product QSetPoint"
+    annotation (Placement(transformation(extent={{-62,54},{-42,74}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{-6,46},{14,66}})));
+  Modelica.Blocks.Sources.RealExpression tColdNom(y=15)
+    "Return Water temperature Setpoint"
+    annotation (Placement(transformation(extent={{-106,70},{-86,90}})));
+  Modelica.Blocks.Sources.RealExpression tColdNom1(y=60)
+    "Return Water temperature Setpoint"
+    annotation (Placement(transformation(extent={{-160,18},{-140,38}})));
 equation
   connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
           {-49.95,3.9},{-40,3.9},{-40,-20},{-60,-20},{-60,-40}}, color={0,0,127}));
@@ -99,21 +85,19 @@ equation
   connect(senMasFlo.m_flow, internalControl.mFlow) annotation (Line(points={{70,-69},
           {70,-69},{70,-22},{-78,-22},{-78,-4.925},{-70.075,-4.925}},
         color={0,0,127}));
-  connect(isOn, myExternalControl.isOn) annotation (Line(points={{30,100},{30,76},
-          {-20,76},{-20,50},{-9.9,50},{-9.9,50.25}}, color={255,0,255}));
-  connect(senTHot.T, myExternalControl.TFlowIs) annotation (Line(points={{40,-69},
-          {40,-69},{40,-18},{6.5,-18},{6.5,38.8}}, color={0,0,127}));
-  connect(myExternalControl.isOn_final, internalControl.isOn) annotation (Line(
-        points={{10.2,49.8},{20,49.8},{20,20},{-57.525,20},{-57.525,10.275}},
-        color={255,0,255}));
-  connect(myExternalControl.TFlowSet, internalControl.Tflow_set) annotation (
-      Line(points={{10.2,52.8},{18,52.8},{18,22},{-62.0375,22},{-62.0375,
-          10.1125}}, color={0,0,127}));
-  connect(TAmbient,myExternalControl.TOutside)  annotation (Line(points={{-80,60},
-          {-22,60},{-22,44.4},{-9.725,44.4}}, color={0,0,127}));
-  connect(myExternalControl.switchToNightMode,switchToNightMode)  annotation (
-      Line(points={{-9.95,53.625},{-16.975,53.625},{-16.975,30},{-80,30}},
-        color={255,0,255}));
+  connect(PLR, qSetPoint.u2) annotation (Line(points={{-126,60},{-84,60},{-84,
+          58},{-64,58}}, color={0,0,127}));
+  connect(tColdNom.y, qSetPoint.u1) annotation (Line(points={{-85,80},{-80,80},
+          {-80,70},{-64,70}}, color={0,0,127}));
+  connect(qSetPoint.y, add1.u1) annotation (Line(points={{-41,64},{-28,64},{-28,
+          62},{-8,62}}, color={0,0,127}));
+  connect(tColdNom1.y, add1.u2) annotation (Line(points={{-139,28},{-88,28},{
+          -88,50},{-8,50}}, color={0,0,127}));
+  connect(add1.y, internalControl.Tflow_set) annotation (Line(points={{15,56},{
+          28,56},{28,40},{42,40},{42,26},{-62.0375,26},{-62.0375,10.1125}},
+        color={0,0,127}));
+  connect(isOn, internalControl.isOn) annotation (Line(points={{30,100},{30,18},
+          {-57.525,18},{-57.525,10.275}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{-18.5,-23.5},{-26.5,-7.5},{-4.5,36.5},{3.5,10.5},{25.5,14.5},

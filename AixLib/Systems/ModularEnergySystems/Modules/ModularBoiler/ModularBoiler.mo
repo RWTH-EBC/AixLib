@@ -150,7 +150,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.PLR, heatGeneratorNoControl.PLR) annotation (Line(
+  connect(boilerControlBus.PLR, heatGeneratorNoControl.Qrel) annotation (Line(
       points={{-1.95,100.05},{-4,100.05},{-4,5.4},{-10,5.4}},
       color={255,204,51},
       thickness=0.5), Text(

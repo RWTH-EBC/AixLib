@@ -21,6 +21,9 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation ();
 
+ parameter Modelica.Units.SI.Temperature T_start=THotNom-DeltaTCon
+    "Start value of temperature"
+    annotation(Dialog(tab = "Initialization"));
 
   Fluid.Sensors.MassFlowRate mFlowBypass(redeclare final package Medium =
         Media.Water, final allowFlowReversal=true)

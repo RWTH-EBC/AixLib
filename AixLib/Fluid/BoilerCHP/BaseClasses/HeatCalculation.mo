@@ -1,6 +1,6 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
 model HeatCalculation
-  Controllers.StationaryBehaviour             DemandCalc(
+  Controllers.OperatingEfficiency             DemandCalc(
     TColdNom=TColdNom,
     QNom=QNom,
     dTWaterNom=dTWaterNom,
@@ -75,9 +75,8 @@ equation
                               color={0,0,127}));
   connect(limiter.y,HeatCalc. PLR) annotation (Line(points={{-57.4,40},{-34,40},
           {-34,32},{8,32}}, color={0,0,127}));
-  connect(limiter.y,DemandCalc. PLR) annotation (Line(points={{-57.4,40},{-54,
-          40},{-54,72},{-26,72}},
-                              color={0,0,127}));
+  connect(limiter.y, DemandCalc.Qrel_mFlow) annotation (Line(points={{-57.4,40},
+          {-54,40},{-54,72},{-26,72}}, color={0,0,127}));
   connect(lessEqualThreshold.y,switch1. u2) annotation (Line(points={{-37.4,12},
           {68,12},{68,46},{88,46},{88,38}},                   color={255,0,255}));
   connect(RealZero.y,switch1. u1) annotation (Line(points={{27,58},{96,58},{96,

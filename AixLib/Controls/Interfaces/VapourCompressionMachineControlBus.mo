@@ -63,11 +63,11 @@ annotation (
 
   Real PLR "Part load ratio compressor";
 
-  Boolean Shutdown "true: force shutdown";
-
   Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
 
    Real mFlowWaterRel;
+
+   Real mFlowSet;
 
    Modelica.Units.SI.ThermodynamicTemperature THotSet;
      Modelica.Units.SI.ThermodynamicTemperature TSourceSet;

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model COPNotManufacturer
 
 
@@ -6,18 +6,10 @@ model COPNotManufacturer
                                           "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
-    parameter Boolean THotExternal=false "Use external THot?"
-                                                             annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-
-      parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-    parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
+   parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
- parameter Boolean HighTemp=false "true: THot > 60°C"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
 
@@ -58,9 +50,9 @@ model COPNotManufacturer
         origin={-11,-3})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=
         TSourceInternal)
-    annotation (Placement(transformation(extent={{-98,62},{-66,78}})));
+    annotation (Placement(transformation(extent={{-128,56},{-72,80}})));
   Modelica.Blocks.Sources.RealExpression tSource1(y=TSource) "TSource"
-    annotation (Placement(transformation(extent={{-60,54},{-36,70}})));
+    annotation (Placement(transformation(extent={{-72,48},{-36,70}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
@@ -114,7 +106,8 @@ equation
   connect(switch1.y,fromKelvin1. Kelvin) annotation (Line(points={{1,70},{8.4,70}},
                                                             color={0,0,127}));
   connect(tSource1.y, switch1.u1)
-    annotation (Line(points={{-34.8,62},{-22,62}}, color={0,0,127}));
+    annotation (Line(points={{-34.2,59},{-34.2,62},{-22,62}},
+                                                   color={0,0,127}));
   connect(fromKelvin5.Celsius, deltaTCon.u2) annotation (Line(points={{0.9,-55},
           {8,-55},{8,-18},{-28,-18},{-28,-8.4},{-21.8,-8.4}}, color={0,0,127}));
   connect(fromKelvin4.Celsius, deltaTCon.u1) annotation (Line(points={{-55,2},{-40,
@@ -126,7 +119,8 @@ equation
   connect(tConIn, fromKelvin4.Kelvin) annotation (Line(points={{-120,-30},{-84,-30},
           {-84,2},{-78,2}}, color={0,0,127}));
   connect(booleanExpression1.y, switch1.u2)
-    annotation (Line(points={{-64.4,70},{-22,70}}, color={255,0,255}));
+    annotation (Line(points={{-69.2,68},{-62,68},{-62,74},{-30,74},{-30,70},{-22,
+          70}},                                    color={255,0,255}));
   connect(tSource, switch1.u3) annotation (Line(points={{-120,90},{-28,90},{-28,
           78},{-22,78}}, color={0,0,127}));
   connect(tConOut, fromKelvin5.Kelvin) annotation (Line(points={{-120,-90},{-52,
@@ -134,7 +128,7 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
                                                               Text(
-          extent={{-4,108},{64,68}},
+          extent={{-4,108},{96,64}},
           lineColor={28,108,200},
           textString="TSource konst oder variabel")}));
 end COPNotManufacturer;

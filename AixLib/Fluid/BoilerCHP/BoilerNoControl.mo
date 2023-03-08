@@ -36,7 +36,7 @@ model BoilerNoControl "Boiler model with physics only"
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
         max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
     "Nominal gas power"
-    annotation (Placement(transformation(extent={{-62,88},{-34,104}})));
+    annotation (Placement(transformation(extent={{-68,86},{-34,104}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower
     "Connector of Real output signal" annotation (Placement(transformation(
           extent={{100,90},{120,110}}), iconTransformation(extent={{-10,-10},{10,
@@ -108,7 +108,8 @@ equation
   connect(ConductanceToEnv.port_b, T_amb)
     annotation (Line(points={{-20,-20},{40,-20}}, color={191,0,0}));
   connect(QgasCalculation.u1, NominalGasConsumption.y)
-    annotation (Line(points={{-22,96},{-32.6,96}}, color={0,0,127}));
+    annotation (Line(points={{-22,96},{-26,96},{-26,95},{-32.3,95}},
+                                                   color={0,0,127}));
   connect(limiter.y, QgasCalculation.u2) annotation (Line(points={{-59,70},{-50,
           70},{-50,84},{-22,84}}, color={0,0,127}));
   connect(limiter.y, efficiencyTableLoadDepending.u[1]) annotation (Line(points=

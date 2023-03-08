@@ -29,6 +29,8 @@ model TWWAdd_on
                                                            "T start"
    annotation (Dialog(tab="Advanced"));
 
+   package Medium = AixLib.Media.Water;
+
 
 
 
@@ -46,7 +48,7 @@ model TWWAdd_on
         rotation=0,
         origin={-72,-40})));
   Fluid.Sensors.MassFlowRate senMasFloTWW(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+        AixLib.Media.Water)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-50}})));
   Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=TColdNom)
@@ -89,7 +91,7 @@ model TWWAdd_on
     "Real input temperature difference dimension point"
     annotation (Placement(transformation(extent={{90,-90},{110,-68}})));
   Fluid.Sensors.MassFlowRate senMasFloBypass(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+        AixLib.Media.Water)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{68,50},{48,70}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
@@ -103,6 +105,7 @@ model TWWAdd_on
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
   Fluid.Actuators.Valves.TwoWayEqualPercentage val(
     redeclare package Medium = AixLib.Media.Water,
+    allowFlowReversal=false,
     m_flow_nominal=QNom/(Medium.cp_const*50),
     dpValve_nominal=6000,
     R=100) "Durchflussbegrenzer"
@@ -118,9 +121,7 @@ model TWWAdd_on
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     p(start=Medium.p_default),
     redeclare final package Medium =
-        AixLib.Media.Water,
-    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+        AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   AixLib.Controls.Continuous.LimPID conPID(controllerType=Modelica.Blocks.Types.SimpleController.PID)
@@ -128,25 +129,19 @@ model TWWAdd_on
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(
     p(start=Medium.p_default),
     redeclare final package Medium =
-       AixLib.Media.Water,
-    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+       AixLib.Media.Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{110,-50},{90,-30}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2(
     p(start=Medium.p_default),
     redeclare final package Medium =
-        AixLib.Media.Water,
-    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+        AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b2(
     p(start=Medium.p_default),
     redeclare final package Medium =
-       AixLib.Media.Water,
-    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+       AixLib.Media.Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-70,90},{-90,110}})));
   Modelica.Blocks.Math.Gain gain(k=-1)

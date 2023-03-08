@@ -30,13 +30,22 @@ extends Modelica.Icons.InterfacesPackage;
   Modelica.Units.SI.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
 
   // BoilerNotManufacturer
-  Real PLR "Part load ratio";
+  Real Qrel "Part load ratio";
+  Real Qrel_mFlow "Part load ratio";
+  Real Qrel_DeltaT "Part load ratio";
+  Real Efficiency "Efficiency";
+  Modelica.Units.SI.Temperature TReturnMea;
+  Modelica.Units.SI.Temperature TSupplySet;
+  Modelica.Units.SI.Temperature TSupplyMea;
+  Modelica.Units.SI.MassFlowRate m_flow;
+  Modelica.Units.SI.Power Losses "Power losses";
+  Modelica.Units.SI.Power ThermalPower "Power losses";
   Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
   Modelica.Units.SI.Temperature TCold "Sensor output TCold";
   Modelica.Units.SI.Temperature TColdCC "Sensor output TCold CombustionChamber";
   Modelica.Units.SI.Temperature THot "Sensor output THot";
   Modelica.Units.SI.Power EnergyDemand "Energy Demand";
-  Modelica.Units.SI.Power PowerDemand "Energy Demand";
+  Modelica.Units.SI.Power PowerDemand "Power Demand";
   Boolean OnOff;
 
 

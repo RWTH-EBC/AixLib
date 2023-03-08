@@ -82,180 +82,114 @@ model ModularBoiler2
     final allowFlowReversal=true,
     final m_flow_small=0.001)
     "Temperature sensor of hot side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{-6,-8},{6,8}},
         rotation=0,
-        origin={-84,0})));
-  Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{46,36},{58,48}})));
+        origin={-86,0})));
 
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
     boilerControlBus
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  Modelica.Blocks.Sources.RealExpression one1(y=QNom/Medium.cp_const/dTWaterNom)
-    annotation (Placement(transformation(extent={{-216,126},{-106,150}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=dTWaterNom)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{-78,42},{-52,60}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a1(
-    p(start=Medium.p_default),
-    redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-110,-100},{-90,-80}})));
-  Fluid.Sensors.TemperatureTwoPort senTColdTWW(
-    redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    final initType=Modelica.Blocks.Types.Init.InitialState,
-    final transferHeat=false,
-    final allowFlowReversal=false,
-    final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)" annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-82,-90})));
-  Fluid.Sensors.MassFlowRate senMasFloTWW(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
-    "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{-64,-100},{-46,-80}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=TColdNom)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{32,-128},{58,-112}})));
-  Fluid.HeatExchangers.ConstantEffectiveness hex(
-    redeclare package Medium1 = AixLib.Media.Water,
-    redeclare package Medium2 = AixLib.Media.Water,
-    m1_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    m2_flow_nominal=QNom/(Medium.cp_const*50),
-    dp1_nominal=6000,
-    dp2_nominal=6000,
-    eps=1) annotation (Placement(transformation(extent={{-6,-60},{-28,-40}})));
-  AixLib.Controls.Continuous.LimPID conPID(controllerType=Modelica.Blocks.Types.SimpleController.PID)
-    annotation (Placement(transformation(extent={{122,-32},{142,-12}})));
-  Fluid.Sensors.TemperatureTwoPort senTHotTWW(
-    redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    final initType=Modelica.Blocks.Types.Init.InitialState,
-    final transferHeat=false,
-    final allowFlowReversal=false,
-    final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)" annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={48,-92})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(
-    p(start=Medium.p_default),
-    redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
-    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{110,-102},{90,-82}})));
-  Fluid.Sensors.TemperatureTwoPort senTColdFeedback(
-    redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    final initType=Modelica.Blocks.Types.Init.InitialState,
-    T_start=TStart,
-    final transferHeat=false,
-    final allowFlowReversal=false,
-    final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)" annotation (
-      Placement(transformation(
-        extent={{9,-10},{-9,10}},
-        rotation=0,
-        origin={-69,-44})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom4(y=1)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{90,-132},{110,-110}})));
-  Fluid.Sensors.MassFlowRate senMasFloBypass(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
-    "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{50,-54},{30,-34}})));
-  Modelica.Blocks.Math.Gain gain(k=-1)
-    annotation (Placement(transformation(extent={{102,-26},{110,-18}})));
-  Modelica.Blocks.Math.Gain gain1(k=-1)
-    annotation (Placement(transformation(extent={{90,-60},{98,-52}})));
-  Modelica.Blocks.Logical.Switch positionBypass annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={178,-102})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=0.001)
-    annotation (Placement(transformation(extent={{-10,-118},{10,-98}})));
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val1(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     from_dp=false,
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    verifyFlowReversal=true,
-    use_inputFilter=false,
+    use_inputFilter=true,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
     dpValve_nominal=6000,
     fraK=1,
-    R=100) annotation (Placement(transformation(extent={{66,-6},{50,6}})));
+    R=100) annotation (Placement(transformation(extent={{62,-8},{46,8}})));
   Fluid.Movers.SpeedControlled_y fan(redeclare package Medium =
-        AixLib.Media.Water, redeclare
-      AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per)
-    annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+        AixLib.Media.Water,
+    redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per(
+        pressure(V_flow={0,V_flow_nominal,V_flow_nominal/0.7}, dp={dp_nominal/0.9,
+            dp_nominal,0})),
+    addPowerToMedium=false,
+    use_inputFilter=false)
+    annotation (Placement(transformation(extent={{-56,-10},{-36,10}})));
   AixLib.Controls.Continuous.LimPID conPID1(controllerType=Modelica.Blocks.Types.SimpleController.PID,
     k=1,
     Ti=5,
     Td=1,
     yMin=0.01)
     annotation (Placement(transformation(extent={{-66,128},{-46,148}})));
-  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium
+      = AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{-36,-10},{-20,10}})));
-  Fluid.Actuators.Valves.TwoWayEqualPercentage val(
-    redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=QNom/(Medium.cp_const*50),
-    dpValve_nominal=6000,
-    R=100) "Durchflussbegrenzer"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-36,-70})));
-  AixLib.Controls.Continuous.LimPID conPID2(controllerType=Modelica.Blocks.Types.SimpleController.PID)
-    "ControlUnit_Durchflussbegrenzer"
-    annotation (Placement(transformation(extent={{-182,-54},{-162,-34}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom3(y=QNom/(Medium.cp_const*50))
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{-352,-68},{-214,-34}})));
+    annotation (Placement(transformation(extent={{-30,-10},{-14,10}})));
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val2(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     from_dp=false,
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    verifyFlowReversal=true,
-    use_inputFilter=false,
+    use_inputFilter=true,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
     dpValve_nominal=6000,
     fraK=1,
-    R=100) annotation (Placement(transformation(extent={{88,-6},{74,6}})));
+    R=100) annotation (Placement(transformation(extent={{90,-8},{72,8}})));
   AixLib.Controls.Continuous.LimPID conPID3(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.05,
-    Ti=1138.2,
-    yMin=0.1)
-    annotation (Placement(transformation(extent={{44,86},{64,106}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom6(y=333.15)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{14,124},{34,138}})));
+    Ti=30,
+    yMin=0)
+    annotation (Placement(transformation(extent={{92,130},{112,150}})));
   Fluid.Sensors.MassFlowRate senMasFloBypass1(redeclare final package Medium =
         Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{-6,-38},{-26,-18}})));
+  TWWAdd_on tWWAdd_on
+    annotation (Placement(transformation(extent={{-2,-86},{18,-66}})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_a1(
+    p(start=Medium.p_default),
+    redeclare final package Medium = Medium)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b1(
+    p(start=Medium.p_default),
+    redeclare final package Medium = Medium)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{110,-90},{90,-70}})));
+  Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=TColdNom)
+    "Real input temperature difference dimension point"
+    annotation (Placement(transformation(extent={{-154,126},{-114,152}})));
+  AixLib.Controls.Continuous.LimPID conPID2(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=1,
+    Ti=5,
+    Td=1,
+    yMax=1,
+    yMin=0)
+    annotation (Placement(transformation(extent={{-18,150},{2,170}})));
+  Modelica.Blocks.Math.Gain gain(k=-1)
+    annotation (Placement(transformation(extent={{14,34},{34,54}})));
+  Modelica.Blocks.Math.Gain gain1(k=-1)
+    annotation (Placement(transformation(extent={{56,104},{76,124}})));
+  Modelica.Blocks.Math.Add add(k2=-1)
+    annotation (Placement(transformation(extent={{-62,210},{-42,230}})));
+  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=TColdNom)
+    "Real input temperature difference dimension point"
+    annotation (Placement(transformation(extent={{-162,202},{-122,228}})));
+  Modelica.Blocks.Math.Add add1(k2=-1)
+    annotation (Placement(transformation(extent={{-136,68},{-116,88}})));
+  Modelica.Blocks.Math.Gain gain3
+    annotation (Placement(transformation(extent={{-64,68},{-44,88}})));
+  Modelica.Blocks.Math.Add add2
+    annotation (Placement(transformation(extent={{-94,166},{-74,186}})));
+  Fluid.Sensors.TemperatureTwoPort        senTCold1(
+    redeclare final package Medium = Media.Water,
+    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+    final initType=Modelica.Blocks.Types.Init.InitialState,
+    T_start=TStart,
+    final transferHeat=false,
+    final allowFlowReversal=true,
+    final m_flow_small=0.001)
+    "Temperature sensor of hot side of heat generator (supply)"
+    annotation (Placement(transformation(extent={{-6,-8},{6,8}},
+        rotation=0,
+        origin={-66,0})));
 protected
    parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=18000+7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
    replaceable package MediumBoiler =Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
@@ -281,149 +215,111 @@ equation
   connect(senTHot.port_a, heatGeneratorNoControl.port_b)
     annotation (Line(points={{20,0},{10,0}}, color={0,127,255}));
   connect(port_a, senTCold.port_a)
-    annotation (Line(points={{-100,0},{-94,0}}, color={0,127,255}));
-  connect(heatGeneratorNoControl.PowerDemand, integrator1.u) annotation (Line(
-        points={{11,-7},{11,42},{44.8,42}},        color={0,0,127}));
+    annotation (Line(points={{-100,0},{-92,0}}, color={0,127,255}));
 
-  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points={{58.6,42},
-          {62,42},{62,54},{0.05,54},{0.05,100.05}},                   color={0,
-          0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(senTHot.T, boilerControlBus.THot) annotation (Line(points={{30,11},{
-          30,62},{0.05,62},{0.05,100.05}},                  color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(dTWaterNom1.y, heatGeneratorNoControl.dTWater) annotation (Line(
-        points={{-50.7,51},{-20,51},{-20,14},{-12,14},{-12,9}},
-                                                       color={0,0,127}));
-  connect(heatGeneratorNoControl.PowerDemand, boilerControlBus.PowerDemand)
-    annotation (Line(points={{11,-7},{16,-7},{16,-18},{0.05,-18},{0.05,100.05}},
-                                                                          color=
-         {0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(port_a1, senTColdTWW.port_a)
-    annotation (Line(points={{-100,-90},{-92,-90}}, color={0,127,255}));
-  connect(senTColdTWW.port_b, senMasFloTWW.port_a)
-    annotation (Line(points={{-72,-90},{-64,-90}}, color={0,127,255}));
-  connect(senTHotTWW.port_b, port_b1)
-    annotation (Line(points={{58,-92},{100,-92}}, color={0,127,255}));
-  connect(hex.port_b2, senTHotTWW.port_a) annotation (Line(points={{-6,-56},{28,
-          -56},{28,-92},{38,-92}}, color={0,127,255}));
-  connect(hex.port_b1, senTColdFeedback.port_a)
-    annotation (Line(points={{-28,-44},{-60,-44}}, color={0,127,255}));
-  connect(senMasFloBypass.port_b, hex.port_a1) annotation (Line(points={{30,-44},
-          {-6,-44}},                                     color={0,127,255}));
-  connect(dTWaterNom2.y, gain.u) annotation (Line(points={{59.3,-120},{64,-120},
-          {64,-66},{76,-66},{76,-30},{100,-30},{100,-26},{101.2,-26},{101.2,-22}},
-                             color={0,0,127}));
-  connect(gain.y, conPID.u_s)
-    annotation (Line(points={{110.4,-22},{120,-22}}, color={0,0,127}));
-  connect(senTHotTWW.T, gain1.u)
-    annotation (Line(points={{48,-81},{48,-74},{84,-74},{84,-56},{89.2,-56}},
-                                                            color={0,0,127}));
-  connect(gain1.y, conPID.u_m) annotation (Line(points={{98.4,-56},{118,-56},{
-          118,-34},{132,-34}},
-                     color={0,0,127}));
-  connect(conPID.y, positionBypass.u1) annotation (Line(points={{143,-22},{154,
-          -22},{154,-48},{148,-48},{148,-78},{156,-78},{156,-94},{166,-94}},
-                                        color={0,0,127}));
-  connect(dTWaterNom4.y, positionBypass.u3) annotation (Line(points={{111,-121},
-          {112,-121},{118,-121},{118,-110},{166,-110}},
-                                                     color={0,0,127}));
-  connect(senMasFloTWW.m_flow, greaterThreshold.u) annotation (Line(points={{-55,-79},
-          {-68,-79},{-68,-108},{-12,-108}},             color={0,0,127}));
-  connect(greaterThreshold.y, positionBypass.u2) annotation (Line(points={{11,-108},
-          {68,-108},{68,-102},{86,-102},{86,-106},{116,-106},{116,-102},{166,
-          -102}},                                  color={255,0,255}));
   connect(senTHot.port_b, val1.port_2)
-    annotation (Line(points={{40,0},{50,0}}, color={0,127,255}));
-  connect(val1.port_3, senMasFloBypass.port_a)
-    annotation (Line(points={{58,-6},{62,-6},{62,-44},{50,-44}},
-                                                          color={0,127,255}));
-  connect(senTCold.port_b, fan.port_a)
-    annotation (Line(points={{-74,0},{-68,0}}, color={0,127,255}));
-  connect(positionBypass.y, val1.y) annotation (Line(points={{189,-102},{118,
-          -102},{118,-108},{70,-108},{70,-102},{190,-102},{190,-38},{172,-38},{
-          172,14},{58,14},{58,7.2}}, color={0,0,127}));
-  connect(boilerControlBus.PLR, heatGeneratorNoControl.PLR) annotation (Line(
-      points={{0.05,100.05},{0.05,28},{-12,28},{-12,5.4}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(senMasFloTWW.port_b, val.port_a) annotation (Line(points={{-46,-90},{
-          -36,-90},{-36,-80}},
-                 color={0,127,255}));
-  connect(val.port_b, hex.port_a2) annotation (Line(points={{-36,-60},{-36,-56},
-          {-28,-56}},                                     color={0,127,255}));
-  connect(conPID2.y, val.y) annotation (Line(points={{-161,-44},{-96,-44},{-96,
-          -70},{-48,-70}},
-                      color={0,0,127}));
-  connect(senMasFloTWW.m_flow, conPID2.u_m) annotation (Line(points={{-55,-79},
-          {-114,-79},{-114,-68},{-172,-68},{-172,-56}},
-                                                      color={0,0,127}));
-  connect(conPID2.u_s, dTWaterNom3.y)
-    annotation (Line(points={{-184,-44},{-120,-44},{-120,-51},{-207.1,-51}},
-                                                       color={0,0,127}));
+    annotation (Line(points={{40,0},{46,0}}, color={0,127,255}));
   connect(senMasFloHeizkreis.port_b, heatGeneratorNoControl.port_a)
-    annotation (Line(points={{-20,0},{-10,0}},color={0,127,255}));
-  connect(senMasFloHeizkreis.m_flow, conPID1.u_m) annotation (Line(points={{-28,11},
-          {-28,114},{-56,114},{-56,126}},          color={0,0,127}));
-  connect(one1.y, conPID1.u_s)
-    annotation (Line(points={{-100.5,138},{-68,138}}, color={0,0,127}));
+    annotation (Line(points={{-14,0},{-10,0}},color={0,127,255}));
   connect(fan.port_b, senMasFloHeizkreis.port_a)
-    annotation (Line(points={{-48,0},{-36,0}},          color={0,127,255}));
-  connect(conPID1.y, fan.y) annotation (Line(points={{-45,138},{-32,138},{-32,
-          24},{-58,24},{-58,12}}, color={0,0,127}));
-  connect(boilerControlBus.OnOff, heatGeneratorNoControl.OnOff) annotation (
-      Line(
-      points={{0.05,100.05},{0.05,38},{-24,38},{-24,8},{-21.6,8},{-21.6,7.2}},
+    annotation (Line(points={{-36,0},{-30,0}},          color={0,127,255}));
+  connect(port_b, val2.port_1)
+    annotation (Line(points={{100,0},{90,0}}, color={0,127,255}));
+  connect(val1.port_1, val2.port_2)
+    annotation (Line(points={{62,0},{72,0}}, color={0,127,255}));
+  connect(val2.port_3, senMasFloBypass1.port_a)
+    annotation (Line(points={{81,-8},{81,-28},{-6,-28}}, color={0,127,255}));
+  connect(conPID3.y, val2.y) annotation (Line(points={{113,140},{113,14},{81,14},
+          {81,9.6}},         color={0,0,127}));
+  connect(val1.port_3, tWWAdd_on.port_a2) annotation (Line(points={{54,-8},{54,
+          -50},{16,-50},{16,-66}},
+                              color={0,127,255}));
+  connect(tWWAdd_on.port_b2, senTCold.port_a) annotation (Line(points={{0,-66},
+          {0,-60},{-92,-60},{-92,0}},color={0,127,255}));
+  connect(port_a1, tWWAdd_on.port_a1)
+    annotation (Line(points={{-100,-80},{-2,-80}}, color={0,127,255}));
+  connect(tWWAdd_on.port_b1, port_b1)
+    annotation (Line(points={{18,-80},{100,-80}}, color={0,127,255}));
+  connect(tWWAdd_on.TWW_Valve, val1.y) annotation (Line(points={{19,-83},{70,
+          -83},{70,22},{54,22},{54,9.6}},
+                                     color={0,0,127}));
+  connect(heatGeneratorNoControl.boilerControlBus, boilerControlBus)
+    annotation (Line(
+      points={{-2.8,9.6},{0,9.6},{0,100}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(port_b, val2.port_1)
-    annotation (Line(points={{100,0},{88,0}}, color={0,127,255}));
-  connect(val1.port_1, val2.port_2)
-    annotation (Line(points={{66,0},{74,0}}, color={0,127,255}));
-  connect(senTCold.T, conPID3.u_m) annotation (Line(points={{-84,11},{-84,74},{
-          54,74},{54,84}}, color={0,0,127}));
-  connect(dTWaterNom6.y, conPID3.u_s) annotation (Line(points={{35,131},{44,131},
-          {44,114},{30,114},{30,96},{42,96}}, color={0,0,127}));
-  connect(val2.port_3, senMasFloBypass1.port_a)
-    annotation (Line(points={{81,-6},{81,-28},{-6,-28}}, color={0,127,255}));
-  connect(senMasFloBypass1.port_b, fan.port_a)
-    annotation (Line(points={{-26,-28},{-68,-28},{-68,0}}, color={0,127,255}));
-  connect(senTCold.T, boilerControlBus.TCold) annotation (Line(points={{-84,11},
-          {-84,86},{0.05,86},{0.05,100.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatGeneratorNoControl.TColdBoiler, boilerControlBus.TColdCC)
-    annotation (Line(points={{11,-7},{14,-7},{14,100.05},{0.05,100.05}}, color=
-          {0,0,127}), Text(
+  connect(senTCold.T, conPID1.u_m) annotation (Line(points={{-86,8.8},{-86,98},
+          {-56,98},{-56,126}},
+                          color={0,0,127}));
+  connect(conPID1.y, fan.y) annotation (Line(points={{-45,138},{-36,138},{-36,
+          30},{-46,30},{-46,12}},
+                              color={0,0,127}));
+  connect(dTWaterNom1.y, conPID1.u_s) annotation (Line(points={{-112,139},{-94,139},
+          {-94,140},{-68,140},{-68,138}}, color={0,0,127}));
+  connect(conPID2.y, boilerControlBus.Qrel) annotation (Line(points={{3,160},{16,
+          160},{16,100.05},{0.05,100.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(conPID3.y, val2.y) annotation (Line(points={{65,96},{124,96},{124,32},
-          {81,32},{81,7.2}}, color={0,0,127}));
-  connect(senTColdFeedback.port_b, senTCold.port_a)
-    annotation (Line(points={{-78,-44},{-94,-44},{-94,0}}, color={0,127,255}));
+  connect(gain.y, conPID3.u_m)
+    annotation (Line(points={{35,44},{102,44},{102,128}}, color={0,0,127}));
+  connect(dTWaterNom1.y, gain1.u) annotation (Line(points={{-112,139},{-112,118},
+          {48,118},{48,114},{54,114}}, color={0,0,127}));
+  connect(gain1.y, conPID3.u_s)
+    annotation (Line(points={{77,114},{90,114},{90,140}}, color={0,0,127}));
+  connect(dTWaterNom2.y, add.u2) annotation (Line(points={{-120,215},{-120,202},
+          {-112,202},{-112,210},{-76,210},{-76,212},{-64,212},{-64,214}}, color=
+         {0,0,127}));
+  connect(boilerControlBus.TSupplySet, add.u1) annotation (Line(
+      points={{0.05,100.05},{-100,100.05},{-100,98},{-226,98},{-226,226},{-64,226}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(senTCold.T, add1.u2) annotation (Line(points={{-86,8.8},{-112,8.8},{
+          -112,20},{-150,20},{-150,72},{-138,72}},
+                                              color={0,0,127}));
+  connect(senTHot.T, add1.u1) annotation (Line(points={{30,11},{30,70},{-166,70},
+          {-166,84},{-138,84}}, color={0,0,127}));
+  connect(add1.y, gain3.u)
+    annotation (Line(points={{-115,78},{-66,78}}, color={0,0,127}));
+  connect(boilerControlBus.TSupplySet, conPID2.u_s) annotation (Line(
+      points={{0.05,100.05},{-14,100.05},{-14,146},{-20,146},{-20,160}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.y, add2.u1) annotation (Line(points={{-41,220},{-34,220},{-34,216},
+          {-30,216},{-30,194},{-102,194},{-102,182},{-96,182}}, color={0,0,127}));
+  connect(senTCold.T, add2.u2) annotation (Line(points={{-86,8.8},{-86,156},{
+          -108,156},{-108,170},{-96,170}},
+                                      color={0,0,127}));
+  connect(add2.y, conPID2.u_m) annotation (Line(points={{-73,176},{-40,176},{-40,
+          130},{-8,130},{-8,148}}, color={0,0,127}));
+  connect(senTCold.port_b, senTCold1.port_a)
+    annotation (Line(points={{-80,0},{-72,0}}, color={0,127,255}));
+  connect(senTCold1.port_b, fan.port_a)
+    annotation (Line(points={{-60,0},{-56,0}}, color={0,127,255}));
+  connect(senTCold1.port_a, senMasFloBypass1.port_b)
+    annotation (Line(points={{-72,0},{-72,-28},{-26,-28}}, color={0,127,255}));
+  connect(senTCold1.T, gain.u)
+    annotation (Line(points={{-66,8.8},{-66,44},{12,44}}, color={0,0,127}));
+  connect(senMasFloHeizkreis.m_flow, boilerControlBus.m_flow) annotation (Line(
+        points={{-22,11},{-22,100.05},{0.05,100.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

@@ -16,12 +16,11 @@ model HeatPump
       final TSourceNom=TSourceNom,
       final QNom=QNom,
       final PLRMin=PLRMin,
-      final HighTemp=HighTemp,
       final DeltaTCon=DeltaTCon,
       final DeltaTEvap=DeltaTEvap,
       final TSource=TSource,
       TSourceInternal=TSourceInternal,
-      THotExternal=THotExternal));
+      Modulating=Modulating));
 
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -47,8 +46,6 @@ model HeatPump
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Boolean HighTemp=false "true: THot > 60°C"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7
     "Temperature difference heat sink condenser"
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
@@ -59,8 +56,7 @@ model HeatPump
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
  parameter Boolean TSourceInternal=false  "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
- parameter Boolean THotExternal=false "Use external THot?"
-                                                          annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+  parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
 
 equation
   connect(innerCycle.QEva, sigBus.QEvap) annotation (Line(points={{0,-30.7},{-6,

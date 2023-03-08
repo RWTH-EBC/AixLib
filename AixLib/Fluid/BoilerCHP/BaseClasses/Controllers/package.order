@@ -6,5 +6,6 @@ InternalControl
 PIController
 PartialExternalControl
 ReturnInfluence
-StationaryBehaviour
+OperatingEfficiency
 CHPNomBehaviour
+NominalEfficiency

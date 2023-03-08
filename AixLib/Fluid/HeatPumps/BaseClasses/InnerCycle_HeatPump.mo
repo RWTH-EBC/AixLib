@@ -27,12 +27,11 @@ model InnerCycle_HeatPump
     TSourceNom=TSourceNom,
     QNom=QNom,
     PLRMin=PLRMin,
-    HighTemp=HighTemp,
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
     TSourceInternal=TSourceInternal,
-    THotExternal=THotExternal)          if use_non_manufacturer
+    Modulating=Modulating)              if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
   PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
@@ -65,8 +64,6 @@ model InnerCycle_HeatPump
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Boolean HighTemp=false "true: THot > 60°C"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
@@ -77,8 +74,7 @@ model InnerCycle_HeatPump
 
   parameter Boolean TSourceInternal=false "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-     parameter Boolean THotExternal=false "Use external THot?"
-                                                              annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+       parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
 
 
 equation
