@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -8,8 +8,10 @@ model GroundFloorBuildingEnvelope
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model";
+  replaceable package Medium = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
 
   //////////room geometry
   parameter Modelica.Units.SI.Length room_width=3.92 "width"
