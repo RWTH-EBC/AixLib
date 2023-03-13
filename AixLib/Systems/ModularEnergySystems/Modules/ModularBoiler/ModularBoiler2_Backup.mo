@@ -204,8 +204,8 @@ model ModularBoiler2_Backup
     Td=1,
     yMin=0.01)
     annotation (Placement(transformation(extent={{-66,128},{-46,148}})));
-  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium
-      = AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium =
+        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{-36,-10},{-20,10}})));
   Fluid.Actuators.Valves.TwoWayEqualPercentage val(

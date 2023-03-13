@@ -64,21 +64,9 @@ model EvaporatorCondenserWithCapacity
         rotation=0,
         origin={-61,78})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(final alpha=0,
-      final T_ref=293.15) "Heat flow rate of the condenser" annotation (
-      Placement(transformation(
-        extent={{12,-12},{-12,12}},
-        rotation=270,
-        origin={0,-68})));
-  Modelica.Blocks.Interfaces.RealInput QFlow_in "Heat flow rate to the medium"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={0,-118}), iconTransformation(
-        extent={{-8,-8},{8,8}},
-        rotation=90,
-        origin={-8.88178e-16,-106})));
-
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_con
+    "heatflow in condenser" annotation (Placement(transformation(extent={{-5,-95},
+            {5,-105}}), iconTransformation(extent={{-5,-93},{5,-103}})));
 equation
   connect(conIns.fluid, heatCap.port)
     annotation (Line(points={{-12,36},{-12,52},{1.77636e-15,52}},
@@ -102,10 +90,8 @@ equation
       points={{-9,-10},{-12,-10},{-12,20}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(vol.heatPort, preHea.port) annotation (Line(points={{-9,-10},{-12,-10},
-          {-12,-34},{0,-34},{0,-56},{2.22045e-15,-56}},   color={191,0,0}));
-  connect(preHea.Q_flow, QFlow_in) annotation (Line(points={{-2.22045e-15,-80},{
-          -2.22045e-15,-99},{0,-99},{0,-118}}, color={0,0,127}));
+  connect(vol.heatPort, port_con) annotation (Line(points={{-9,-10},{-14,-10},{-14,
+          -88},{0,-88},{0,-100}}, color={191,0,0}));
   annotation (Icon(graphics={ Ellipse(
           extent={{-48,46},{46,-42}},
           lineColor={0,0,0},

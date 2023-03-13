@@ -72,6 +72,8 @@ annotation (
    Modelica.Units.SI.ThermodynamicTemperature THotSet;
      Modelica.Units.SI.ThermodynamicTemperature TSourceSet;
 
+     Boolean OnOff;
+
 
   annotation (Documentation(info="<html><p>
   Bus connector with all relevant signals for vapour compression

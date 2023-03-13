@@ -124,7 +124,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(sigBus, lookUpTableNDNotManufacturerHeating.sigBus) annotation (Line(
-      points={{0,102},{73.74,102},{73.74,80}},
+      points={{0,102},{69.45,102},{69.45,80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -132,12 +132,14 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(lookUpTableNDNotManufacturerHeating.QCon, switchQCon.u1) annotation (
-      Line(points={{53.2,14.9},{53.2,6},{64,6},{64,-4},{68,-4}}, color={0,0,127}));
+      Line(points={{52.3333,14.9},{52.3333,6},{64,6},{64,-4},{68,-4}},
+                                                                 color={0,0,127}));
   connect(lookUpTableNDNotManufacturerHeating.Pel, switchPel.u1) annotation (
-      Line(points={{74,14.9},{74,6},{34,6},{34,-30},{8,-30},{8,-68}}, color={0,0,
+      Line(points={{69.6667,14.9},{69.6667,6},{34,6},{34,-30},{8,-30},{8,-68}},
+                                                                      color={0,0,
           127}));
   connect(lookUpTableNDNotManufacturerHeating.QEva, gainEva.u) annotation (Line(
-        points={{94.8,14.9},{94.8,6},{56,6},{56,-6},{-51.2,-6}}, color={0,0,127}));
+        points={{87,14.9},{87,6},{56,6},{56,-6},{-51.2,-6}},     color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

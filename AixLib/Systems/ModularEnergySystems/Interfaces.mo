@@ -30,24 +30,25 @@ extends Modelica.Icons.InterfacesPackage;
   Modelica.Units.SI.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
 
   // BoilerNotManufacturer
-  Real Qrel "Part load ratio";
-  Real Qrel_mFlow "Part load ratio";
-  Real Qrel_DeltaT "Part load ratio";
-  Real Efficiency "Efficiency";
-  Modelica.Units.SI.Temperature TReturnMea;
-  Modelica.Units.SI.Temperature TSupplySet;
-  Modelica.Units.SI.Temperature TSupplyMea;
-  Modelica.Units.SI.MassFlowRate m_flow;
-  Modelica.Units.SI.Power Losses "Power losses";
-  Modelica.Units.SI.Power ThermalPower "Power losses";
-  Modelica.Units.SI.TemperatureDifference DeltaTWater "Setpoint temperature difference heat circuit";
-  Modelica.Units.SI.Temperature TCold "Sensor output TCold";
-  Modelica.Units.SI.Temperature TColdCC "Sensor output TCold CombustionChamber";
-  Modelica.Units.SI.Temperature THot "Sensor output THot";
-  Modelica.Units.SI.Power EnergyDemand "Energy Demand";
-  Modelica.Units.SI.Power PowerDemand "Power Demand";
-  Boolean OnOff;
+    // Outer variables
+      Real QrelSet "Relative fuel consumption";
+      Modelica.Units.SI.Temperature TSupplySet "Setpoint supply temperature";
 
+    // Inner variables
+      Real Qrel_mFlow "Relative water mass flow";
+      Real Qrel_DeltaT "Relative temperature difference";
+
+      Modelica.Units.SI.Temperature TReturnMea "Measurement return temperature";
+      Modelica.Units.SI.Temperature TSupplyMea "Measurement supply temperature";
+      Modelica.Units.SI.Temperature TColdMea "Sensor output TCold combustion chamber";
+      Modelica.Units.SI.Temperature THotWater "Sensor output hot water temperature";
+
+      Modelica.Units.SI.MassFlowRate m_flowMea "Measurement water mass flow";
+
+      Real Efficiency "Efficiency of operation point";
+      Modelica.Units.SI.Power Losses "Power losses";
+      Modelica.Units.SI.Power ThermalPower "Thermal power";
+      Modelica.Units.SI.Power PowerDemand "Power demand";
 
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),

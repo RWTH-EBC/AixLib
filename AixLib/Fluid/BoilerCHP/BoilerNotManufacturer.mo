@@ -5,11 +5,8 @@ model BoilerNotManufacturer "Simple heat generator without control"
         a=coeffPresLoss, vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom/1000)/1000));
 
   parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Setpoint temperature difference heat circuit";
   parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
-  parameter Boolean m_flowVar=false "Boolean for use of variable water massflow";
-  parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
 
 
@@ -41,13 +38,14 @@ model BoilerNotManufacturer "Simple heat generator without control"
     annotation (Placement(transformation(extent={{-38,86},{-18,106}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
-  BaseClasses.Controllers.NominalEfficiency nominalEfficiency(QNom=QNom,
+  BaseClasses.Controllers.NominalEfficiency nominalEfficiency(
+    TColdNom=TColdNom,                                        QNom=QNom,
       dTWaterNom=dTWaterNom)
     annotation (Placement(transformation(extent={{-64,44},{-44,64}})));
-  Modelica.Blocks.Math.Product product1
+  Modelica.Blocks.Math.Product powerDemand
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Blocks.Math.Product product2
-    annotation (Placement(transformation(extent={{58,-2},{78,18}})));
+  Modelica.Blocks.Math.Product thermalPower
+    annotation (Placement(transformation(extent={{58,24},{78,44}})));
 protected
     parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -65,44 +63,29 @@ equation
     annotation (Line(points={{-32,-34},{-26,-34}}, color={191,0,0}));
   connect(ConductanceToEnv.port_a, vol.heatPort)
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
-  connect(senTCold.T, boilerControlBus.TReturnMea) annotation (Line(points={{-70,
-          -69},{-70,96.05},{-27.95,96.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(vol.heatPort, temperatureSensor.port)
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
   connect(temperatureSensor.T, boilerControlBus.TSupplyMea) annotation (Line(
-        points={{-29,-16},{-26,-16},{-26,-12},{-27.95,-12},{-27.95,96.05}},
+        points={{-29,-16},{-28,-16},{-28,40},{-27.95,40},{-27.95,96.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nominalEfficiency.nominalPowerDemand, product1.u2) annotation (Line(
-        points={{-43,47},{-10,47},{-10,34},{18,34}}, color={0,0,127}));
-  connect(product1.y, product2.u1) annotation (Line(points={{41,40},{50,40},{50,
-          14},{56,14}}, color={0,0,127}));
-  connect(boilerControlBus.Efficiency, product2.u2) annotation (Line(
-      points={{-27.95,96.05},{-27.95,2},{56,2}},
+  connect(nominalEfficiency.nominalPowerDemand, powerDemand.u2) annotation (
+      Line(points={{-43,47},{-10,47},{-10,34},{18,34}}, color={0,0,127}));
+  connect(powerDemand.y, thermalPower.u1)
+    annotation (Line(points={{41,40},{56,40}}, color={0,0,127}));
+  connect(boilerControlBus.Efficiency, thermalPower.u2) annotation (Line(
+      points={{-27.95,96.05},{-27.95,28},{56,28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(product2.y, heater.Q_flow) annotation (Line(points={{79,8},{82,8},{82,
-          -14},{-60,-14},{-60,-40}}, color={0,0,127}));
-  connect(nominalEfficiency.boilerControlBus, boilerControlBus) annotation (
-      Line(
-      points={{-54,64},{-54,86},{-32,86},{-32,96},{-28,96}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
+  connect(thermalPower.y, heater.Q_flow) annotation (Line(points={{79,34},{90,
+          34},{90,12},{-60,12},{-60,-40}}, color={0,0,127}));
   connect(operatingEfficiency.boilerControlBus, boilerControlBus) annotation (
       Line(
       points={{30.2,80},{30.2,86},{-32,86},{-32,96},{-28,96}},
@@ -112,14 +95,14 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(product1.y, boilerControlBus.PowerDemand) annotation (Line(points={{41,
-          40},{50,40},{50,56},{-27.95,56},{-27.95,96.05}}, color={0,0,127}),
+  connect(powerDemand.y, boilerControlBus.PowerDemand) annotation (Line(points=
+          {{41,40},{50,40},{50,56},{-27.95,56},{-27.95,96.05}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.Qrel, product1.u1) annotation (Line(
+  connect(boilerControlBus.QrelSet, powerDemand.u1) annotation (Line(
       points={{-27.95,96.05},{-27.95,46},{18,46}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -127,13 +110,19 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(product2.y, boilerControlBus.ThermalPower) annotation (Line(points={{
-          79,8},{106,8},{106,18},{122,18},{122,96.05},{-27.95,96.05}}, color={0,
-          0,127}), Text(
+  connect(thermalPower.y, boilerControlBus.ThermalPower) annotation (Line(
+        points={{79,34},{90,34},{90,96},{-27.95,96},{-27.95,96.05}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(senTCold.T, boilerControlBus.TColdMea) annotation (Line(points={{-70,
+          -69},{-70,96.05},{-27.95,96.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>

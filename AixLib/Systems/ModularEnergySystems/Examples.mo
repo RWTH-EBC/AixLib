@@ -10,13 +10,12 @@ package Examples "Holds examples for the modular energy system units"
         V=4,
         nPorts=2),
       bou(use_T_in=true, nPorts=1),
-      TSpeicher(y=50 + 273.15),
+      TSpeicher(y=40 + 273.15),
       sine(f=1/3600, offset=-100000),
       PLR(y=1));
     Modules.ModularHeatPump.ModularHeatPump modularHeatPumpNew(
-      HighTemp=true,
-      THotNom=333.15,
-      TSourceNom=303.15,
+      THotNom=313.15,
+      TSourceNom=278.15,
       QNom=200000,
       PLRMin=0.5,
       T_Start_Condenser=333.15,
@@ -72,6 +71,13 @@ package Examples "Holds examples for the modular energy system units"
         index=1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
+    connect(onOffController.y, sigBus.OnOff) annotation (Line(points={{-107,-64},
+            {-96,-64},{-96,-56},{-80.925,-56},{-80.925,17.085}}, color={255,0,
+            255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=5000));
@@ -91,8 +97,8 @@ package Examples "Holds examples for the modular energy system units"
       bou(nPorts=1));
     Interfaces.BoilerControlBus boilerControlBus
       annotation (Placement(transformation(extent={{-122,8},{-102,28}})));
-    Modules.ModularBoiler.ModularBoiler2 modularBoiler2_1(TColdNom=333.15, QNom
-        =150000)
+    Modules.ModularBoiler.ModularBoiler2 modularBoiler2_1(TColdNom=333.15, QNom=
+         150000)
       annotation (Placement(transformation(extent={{-44,-2},{-24,18}})));
     Fluid.Sources.Boundary_pT
                         bou1(

@@ -9,3 +9,5 @@ LookUpTableNDNotManufacturer
 NominalHeatPumpNotManufacturer
 LookUpTableNDNotManufacturerSlim
 COPNotManufacturer
+CarnotCOP
+GeneralThermodynamic

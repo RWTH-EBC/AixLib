@@ -432,6 +432,23 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-66,-28})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{62,30},{82,50}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(final alpha=0,
+      final T_ref=293.15) "Heat flow rate of the condenser" annotation (
+      Placement(transformation(
+        extent={{12,-12},{-12,12}},
+        rotation=270,
+        origin={36,60})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
+    annotation (Placement(transformation(extent={{-36,-70},{-54,-52}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea1(final alpha=
+        0, final T_ref=293.15)
+                          "Heat flow rate of the condenser" annotation (
+      Placement(transformation(
+        extent={{7,-7},{-7,7}},
+        rotation=90,
+        origin={31,-57})));
 protected
   parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_min=0.3
     "Realistic mass flow minimum for simulation plausibility";
@@ -478,20 +495,8 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBus.TConOutMea) annotation (Line(points={{38,81},{38,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(senT_a2.T, sigBus.TEvaInMea) annotation (Line(points={{38,-75},{38,-36},
           {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBus.TEvaOutMea) annotation (Line(points={{-52,-75},{-52,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -579,18 +584,6 @@ equation
       pattern=LinePattern.Dash));
   connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
           -60}}, color={0,127,255}));
-  connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(
-      points={{16,64.6},{16,77.04},{0,77.04}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(
-      points={{-16,64.6},{-16,77.04},{0,77.04}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(realPassThroughnSetEva.y, eva.QFlow_in) annotation (Line(points={{16,-58.6},
-          {16,-69.04},{0,-69.04}}, color={0,0,127}));
-  connect(heatFlowIneEva.y, eva.QFlow_in) annotation (Line(points={{-14,-58.6},{
-          -14,-69.04},{0,-69.04}}, color={0,0,127}));
   connect(senT_a2.port_b, eva.port_a)
     annotation (Line(points={{28,-86},{16,-86}}, color={0,127,255}));
   connect(senT_b2.port_a, eva.port_b)
@@ -637,6 +630,37 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(greaterThreshold.u, sigBus.nSet) annotation (Line(points={{-73.2,-28},
           {-76,-28},{-76,-42.915},{-104.925,-42.915}},color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThroughnSetCon.y, preHea.Q_flow) annotation (Line(points={{16,
+          64.6},{16,70},{26,70},{26,44},{36,44},{36,48}}, color={0,0,127}));
+  connect(heatFlowIneCon.y, preHea.Q_flow) annotation (Line(points={{-16,64.6},
+          {-16,72},{24,72},{24,42},{36,42},{36,48}}, color={0,0,127}));
+  connect(preHea.port, con.port_con)
+    annotation (Line(points={{36,72},{36,78.32},{0,78.32}}, color={191,0,0}));
+  connect(con.port_con, temperatureSensor.port) annotation (Line(points={{0,
+          78.32},{26,78.32},{26,78},{62,78},{62,40}}, color={191,0,0}));
+  connect(temperatureSensor.T, sigBus.TConOutMea) annotation (Line(points={{83,
+          40},{90,40},{90,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(preHea1.port, eva.port_con) annotation (Line(points={{31,-64},{20,-64},
+          {20,-66},{0,-66},{0,-70.32}}, color={191,0,0}));
+  connect(realPassThroughnSetEva.y, preHea1.Q_flow) annotation (Line(points={{
+          16,-58.6},{16,-68},{42,-68},{42,-48},{36,-48},{36,-44},{31,-44},{31,
+          -50}}, color={0,0,127}));
+  connect(heatFlowIneEva.y, preHea1.Q_flow) annotation (Line(points={{-14,-58.6},
+          {-14,-60},{14,-60},{14,-64},{16,-64},{16,-68},{42,-68},{42,-48},{36,
+          -48},{36,-44},{31,-44},{31,-50}}, color={0,0,127}));
+  connect(eva.port_con, temperatureSensor1.port) annotation (Line(points={{0,
+          -70.32},{-16,-70.32},{-16,-66},{-36,-66},{-36,-61}}, color={191,0,0}));
+  connect(temperatureSensor1.T, sigBus.TEvaOutMea) annotation (Line(points={{
+          -54.9,-61},{-60,-61},{-60,-42.915},{-104.925,-42.915}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

@@ -2,99 +2,84 @@ within AixLib.Systems.ModularEnergySystems.Modules;
 package ModularStorage
   model ScalableStorage
 
-    parameter Integer n=10 "number of layers";
+    parameter Integer n=102
+                           "number of layers";
     parameter Modelica.Units.SI.Volume V=10 "Volume";
-    parameter Modelica.Units.SI.MassFlowRate m_Flow=3;
+    parameter Modelica.Units.SI.MassFlowRate m_Flow=500/4.18/5;
     parameter Modelica.Units.SI.Temperature T_start=318.15;
      parameter Modelica.Units.SI.Temperature TColdNom=311.15;
-     parameter Modelica.Units.SI.Temperature THotNom=273.15+45;
+     parameter Modelica.Units.SI.Temperature THotNom=273.15 + 45;
      parameter Modelica.Units.SI.TemperatureDifference DeltaT=5;
 
-    Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-          AixLib.Media.Water)
-      annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
-    Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-          AixLib.Media.Water)
-      annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
 
-    Fluid.MixingVolumes.MixingVolume layer[n](
+    Modelica.Blocks.Interfaces.RealOutput tHot
+      annotation (Placement(transformation(extent={{-100,40},{-120,60}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Supply(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Return(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Return(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
+    Modelica.Blocks.Interfaces.RealOutput tCold
+      annotation (Placement(transformation(extent={{-100,-62},{-120,-42}})));
+    Fluid.MixingVolumes.MixingVolume        layer(
       redeclare package Medium = AixLib.Media.Water,
       T_start=T_start,
       m_flow_nominal=m_Flow,
-      V=V/n,
-      nPorts=2) annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-    Modelica.Blocks.Math.MultiSum multiSum( nu=n)
-      annotation (Placement(transformation(extent={{80,28},{68,40}})));
-    Modelica.Blocks.Math.Division division
-      annotation (Placement(transformation(extent={{0,18},{-20,38}})));
-    Modelica.Blocks.Sources.RealExpression realExpression(y=n)
-      annotation (Placement(transformation(extent={{44,2},{24,22}})));
-    Modelica.Blocks.Math.Add add(k2=-1)
-      annotation (Placement(transformation(extent={{-40,62},{-60,82}})));
-    Modelica.Blocks.Math.Division division1
-      annotation (Placement(transformation(extent={{-154,-16},{-174,4}})));
-    Modelica.Blocks.Math.Add add1(k2=-1)
-      annotation (Placement(transformation(extent={{-40,-40},{-60,-20}})));
-    Modelica.Blocks.Sources.RealExpression realExpression1(y=TColdNom)
-      annotation (Placement(transformation(extent={{-100,-70},{-40,-50}})));
-    Modelica.Blocks.Interfaces.RealOutput y
-      annotation (Placement(transformation(extent={{-100,20},{-120,40}})));
-    HeatTransferOnly heatTransferOnly(
-      n=n,
-      V=V,
-      m_flow_nom=m_Flow)
-      annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-    Modelica.Blocks.Nonlinear.Limiter limiter(uMax=2, uMin=0)
-      annotation (Placement(transformation(extent={{-170,60},{-150,80}})));
-    Modelica.Blocks.Sources.RealExpression realExpression2(y=THotNom)
-      annotation (Placement(transformation(extent={{114,-38},{60,-16}})));
-    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor[n]
-      annotation (Placement(transformation(extent={{82,70},{62,90}})));
-    Modelica.Blocks.Interfaces.RealInput u
-      annotation (Placement(transformation(extent={{140,-72},{100,-32}})));
-    Modelica.Blocks.Sources.RealExpression realExpression3(y=DeltaT)
-      annotation (Placement(transformation(extent={{36,-100},{-4,-76}})));
+      V=1.8125,
+      nPorts=3) annotation (Placement(transformation(extent={{6,76},{26,96}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+      annotation (Placement(transformation(extent={{-34,44},{-54,64}})));
+    Fluid.MixingVolumes.MixingVolume        layer5(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=1.8125,
+      nPorts=3) annotation (Placement(transformation(extent={{10,-90},{30,-70}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
+      annotation (Placement(transformation(extent={{-12,-66},{-32,-46}})));
+    Fluid.MixingVolumes.MixingVolume        layer1(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=1.8125,
+      nPorts=2) annotation (Placement(transformation(extent={{4,-10},{24,10}})));
   equation
-
-    connect(heatTransferOnly.therm, layer.heatPort);
-
-    connect(port_a, layer[1].ports[1]);
-    connect(layer[n].ports[2], port_b);
-    connect(temperatureSensor[n].T, multiSum.u[n]);
-    connect(layer[n].heatPort, temperatureSensor[n].port);
-
-
-
-    //Connect layers
-    for k in 1:n - 1 loop
-      connect(layer[k].ports[2], layer[k + 1].ports[1]);
-       connect(temperatureSensor[k].T, multiSum.u[k]);
-       connect(layer[k].heatPort, temperatureSensor[k].port);
-    end for;
-
-
-    connect(multiSum.y, division.u1)
-      annotation (Line(points={{66.98,34},{2,34}},    color={0,0,127}));
-    connect(realExpression.y, division.u2) annotation (Line(points={{23,12},{8,12},
-            {8,22},{2,22}},     color={0,0,127}));
-    connect(division.y, add.u1) annotation (Line(points={{-21,28},{-26,28},{-26,78},
-            {-38,78}},                   color={0,0,127}));
-    connect(add.y, division1.u1) annotation (Line(points={{-61,72},{-68,72},{-68,8},
-            {-120,8},{-120,0},{-152,0}},
-                       color={0,0,127}));
-    connect(division1.y, limiter.u) annotation (Line(points={{-175,-6},{-196,-6},{
-            -196,70},{-172,70}}, color={0,0,127}));
-    connect(limiter.y, y) annotation (Line(points={{-149,70},{-90,70},{-90,30},{-110,
-            30}}, color={0,0,127}));
-
-    connect(u, add1.u1) annotation (Line(points={{120,-52},{28,-52},{28,-24},{-38,
-            -24}}, color={0,0,127}));
-    connect(realExpression3.y, division1.u2) annotation (Line(points={{-6,-88},{-38,
-            -88},{-38,-90},{-144,-90},{-144,-12},{-152,-12}}, color={0,0,127}));
-    connect(realExpression3.y, add1.u2) annotation (Line(points={{-6,-88},{-12,
-            -88},{-12,-36},{-38,-36}}, color={0,0,127}));
-    connect(add1.y, add.u2) annotation (Line(points={{-61,-30},{-70,-30},{-70,6},
-            {-38,6},{-38,66}}, color={0,0,127}));
+    connect(port_b_Supply, layer.ports[1]) annotation (Line(points={{-100,80},{
+            0,80},{0,68},{14.6667,68},{14.6667,76}},
+                                  color={0,127,255}));
+    connect(temperatureSensor.T, tHot) annotation (Line(points={{-55,54},{-62,54},
+            {-62,48},{-110,48},{-110,50}}, color={0,0,127}));
+    connect(port_a_Supply, port_a_Supply)
+      annotation (Line(points={{-100,20},{-100,20}}, color={0,127,255}));
+    connect(layer.heatPort, temperatureSensor.port) annotation (Line(points={{6,86},{
+            -4,86},{-4,54},{-34,54}},    color={191,0,0}));
+    connect(layer5.ports[1], port_b_Return) annotation (Line(points={{18.6667,
+            -90},{18.6667,-92},{-62,-92},{-62,-80},{-100,-80}}, color={0,127,
+            255}));
+    connect(port_a_Return, layer5.ports[2]) annotation (Line(points={{-100,-20},
+            {36,-20},{36,-90},{20,-90}}, color={0,127,255}));
+    connect(layer5.heatPort, temperatureSensor1.port) annotation (Line(points={
+            {10,-80},{-6,-80},{-6,-56},{-12,-56}}, color={191,0,0}));
+    connect(temperatureSensor1.T, tCold) annotation (Line(points={{-33,-56},{
+            -44,-56},{-44,-58},{-46,-58},{-46,-52},{-110,-52}}, color={0,0,127}));
+    connect(port_a_Supply, layer.ports[2]) annotation (Line(points={{-100,20},{
+            -58,20},{-58,18},{16,18},{16,76}}, color={0,127,255}));
+    connect(layer.ports[3], layer1.ports[1]) annotation (Line(points={{17.3333,
+            76},{17.3333,74},{14,74},{14,68},{16,68},{16,18},{-2,18},{-2,-10},{
+            13,-10}}, color={0,127,255}));
+    connect(layer1.ports[2], layer5.ports[3]) annotation (Line(points={{15,-10},
+            {15,-90},{21.3333,-90}}, color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end ScalableStorage;
@@ -655,8 +640,8 @@ package ModularStorage
       annotation (Line(points={{56,-16},{18,-16}},color={0,127,255}));
     connect(senTemReturn.port_b, port_b_Return)
       annotation (Line(points={{-86,-80},{-100,-80}}, color={0,127,255}));
-    connect(scalableStorage.y, y) annotation (Line(points={{79,-5},{64,-5},{64,0},
-            {-110,0}},                 color={0,0,127}));
+    connect(scalableStorage.tHot, y) annotation (Line(points={{79,-3},{64,-3},{
+            64,0},{-110,0}}, color={0,0,127}));
     connect(senTemReturn1.port_b, valCold.port_a) annotation (Line(points={{-72,-20},
             {-32,-20},{-32,-48},{-20,-48}}, color={0,127,255}));
     connect(senTemReturn1.port_a, port_a_Return)
@@ -762,11 +747,146 @@ package ModularStorage
             {-20,-8},{-20,-20},{-100,-20}}, color={0,127,255}));
     connect(scalableStorage.port_b, port_b_Return) annotation (Line(points={{-10,-8},
             {-20,-8},{-20,-80},{-100,-80}}, color={0,127,255}));
-    connect(relLoadStorage, scalableStorage.y) annotation (Line(points={{-110,0},{
-            -30,0},{-30,3},{-11,3}}, color={0,0,127}));
+    connect(relLoadStorage, scalableStorage.tHot) annotation (Line(points={{
+            -110,0},{-30,0},{-30,5},{-11,5}}, color={0,0,127}));
     connect(u, scalableStorage.u)
       annotation (Line(points={{120,-2},{12,-2},{12,-5.2}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end GridStorageHydraulicSeparator;
+
+  model StorageInflows
+
+    parameter Real n=5;
+     parameter Modelica.Units.SI.Volume V=10 "Volume";
+    parameter Modelica.Units.SI.MassFlowRate m_Flow=3;
+     parameter Modelica.Units.SI.TemperatureDifference DeltaT=5;
+       parameter Modelica.Units.SI.Temperature T_start=318.15;
+
+    Fluid.MixingVolumes.MixingVolume        layer(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/n,
+      nPorts=2) annotation (Placement(transformation(extent={{-8,66},{12,86}})));
+    Fluid.MixingVolumes.MixingVolume        layer1(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/n,
+      nPorts=3) annotation (Placement(transformation(extent={{-8,0},{12,20}})));
+    Fluid.MixingVolumes.MixingVolume        layer2(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/n,
+      nPorts=2)
+      annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
+    Fluid.MixingVolumes.MixingVolume        layer3(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/n,
+      nPorts=3) annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-108,-48},{-88,-28}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Supply(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply1(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply2(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-106,-2},{-86,18}})));
+    Fluid.MixingVolumes.MixingVolume        layer4(
+      redeclare package Medium = Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/n,
+      nPorts=3) annotation (Placement(transformation(extent={{-8,36},{12,56}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply3(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-108,36},{-88,56}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+      annotation (Placement(transformation(extent={{-32,0},{-52,20}})));
+    Modelica.Blocks.Interfaces.RealOutput tCenter
+      annotation (Placement(transformation(extent={{-100,-80},{-120,-60}})));
+  equation
+    connect(port_a_Supply1,layer. ports[1]) annotation (Line(points={{0,100},{1,100},
+            {1,66}},                color={0,127,255}));
+    connect(layer2.ports[1],port_b_Supply)  annotation (Line(points={{-1,-80},{-1,
+            -90},{0,-90},{0,-100}}, color={0,127,255}));
+    connect(layer1.ports[1], layer3.ports[1]) annotation (Line(points={{0.666667,0},
+            {-1.33333,0},{-1.33333,-42}}, color={0,127,255}));
+    connect(layer3.ports[2], layer2.ports[2])
+      annotation (Line(points={{0,-42},{1,-42},{1,-80}}, color={0,127,255}));
+    connect(port_a_Supply, layer3.ports[3]) annotation (Line(points={{-98,-38},{-68,
+            -38},{-68,-40},{1.33333,-40},{1.33333,-42}}, color={0,127,255}));
+    connect(port_a_Supply2, layer1.ports[2]) annotation (Line(points={{-96,8},{-62,
+            8},{-62,2},{2,2},{2,0}}, color={0,127,255}));
+    connect(layer.ports[2], layer4.ports[1])
+      annotation (Line(points={{3,66},{3,36},{0.666667,36}}, color={0,127,255}));
+    connect(layer4.ports[2], layer1.ports[3])
+      annotation (Line(points={{2,36},{2,0},{3.33333,0}}, color={0,127,255}));
+    connect(port_a_Supply3, layer4.ports[3]) annotation (Line(points={{-98,46},{-56,
+            46},{-56,36},{3.33333,36}}, color={0,127,255}));
+    connect(temperatureSensor.port, layer1.heatPort) annotation (Line(points={{
+            -32,10},{-26,10},{-26,12},{-8,12},{-8,10}}, color={191,0,0}));
+    connect(temperatureSensor.T, tCenter) annotation (Line(points={{-53,10},{
+            -54,10},{-54,-70},{-110,-70}}, color={0,0,127}));
+  end StorageInflows;
+
+  model StorageSimpleLayer
+
+      parameter Real n=2;
+     parameter Modelica.Units.SI.Volume V=10 "Volume";
+    parameter Modelica.Units.SI.MassFlowRate m_Flow=3;
+     parameter Modelica.Units.SI.TemperatureDifference DeltaT=5;
+       parameter Modelica.Units.SI.Temperature T_start=318.15;
+
+    Fluid.MixingVolumes.MixingVolume        layer(
+      redeclare package Medium = AixLib.Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=1.8125,
+      nPorts=2) annotation (Placement(transformation(extent={{-6,64},{14,84}})));
+    Fluid.MixingVolumes.MixingVolume        layer4(
+      redeclare package Medium = AixLib.Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=1.8125,
+      nPorts=2) annotation (Placement(transformation(extent={{-6,34},{14,54}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply1(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-8,88},{12,108}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Supply(redeclare package
+        Medium =
+          Media.Water)
+      annotation (Placement(transformation(extent={{-8,-112},{12,-92}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+      annotation (Placement(transformation(extent={{-30,-2},{-50,18}})));
+    Modelica.Blocks.Interfaces.RealOutput tCenter
+      annotation (Placement(transformation(extent={{-98,-82},{-118,-62}})));
+  equation
+    connect(temperatureSensor.T, tCenter) annotation (Line(points={{-51,8},{-52,8},
+            {-52,-72},{-108,-72}}, color={0,0,127}));
+    connect(port_a_Supply1, layer.ports[1])
+      annotation (Line(points={{2,98},{2,64},{3,64}}, color={0,127,255}));
+    connect(layer.ports[2], layer4.ports[1])
+      annotation (Line(points={{5,64},{5,34},{3,34}}, color={0,127,255}));
+    connect(layer4.ports[2], port_b_Supply) annotation (Line(points={{5,34},{5,0},
+            {6,0},{6,-34},{2,-34},{2,-102}}, color={0,127,255}));
+    connect(layer4.heatPort, temperatureSensor.port) annotation (Line(points={{-6,
+            44},{-18,44},{-18,8},{-30,8}}, color={191,0,0}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end StorageSimpleLayer;
 end ModularStorage;

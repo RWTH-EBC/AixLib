@@ -189,7 +189,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBus.Shutdown, switch3.u2) annotation (Line(
-      points={{-0.925,100.07},{-0.925,48},{-35,48},{-35,23.8}},
+      points={{-1,100},{-1,48},{-35,48},{-35,23.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

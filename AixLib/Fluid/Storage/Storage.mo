@@ -120,10 +120,10 @@ protected
 equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(
-      points={{0,-98},{0,-34},{20,-34},{20,-2},{10,-2}},
+      points={{0,-98},{0,-34},{20,-34},{20,-1},{10,-1}},
       color={0,127,255}));
   connect(layer[n].ports[2], port_b_consumer) annotation (Line(
-      points={{10,2},{16,2},{20,2},{20,40},{0,40},{0,92}},
+      points={{10,1},{16,1},{20,1},{20,40},{0,40},{0,92}},
       color={0,127,255}));
 
   //Connect layers
@@ -137,10 +137,10 @@ equation
   end for;
   //Connect layers of Heat Exchanger
   connect(port_a_heatGenerator, layer_HE[n].ports[2]) annotation (Line(
-      points={{84,88},{84,36},{96,22},{94,2}},
+      points={{84,88},{94,36},{94,22},{94,1}},
       color={0,127,255}));
   connect(port_b_heatGenerator, layer_HE[1].ports[1]) annotation (Line(
-      points={{84,-88},{84,-26},{96,-16},{94,-2}},
+      points={{84,-88},{84,-26},{94,-26},{94,-1}},
       color={0,127,255}));
   for k in 1:n - 1 loop
     connect(layer_HE[k].ports[2], layer_HE[k + 1].ports[1]);
