@@ -6,6 +6,7 @@
 1. [District Heating and Cooling](#dhc)
 1. [Fast HVAC](#fasthvac)
 1. [Building Automation Systems](#bas)
+1. [Photovoltaic System Model](#pv)
 
 
 ## Building Physics <a name="buildingphysics"></a>
@@ -76,3 +77,9 @@ Stinner, S., Schumacher, M., Finkbeiner, K., Streblow, R., & Müller, D. (2015).
 
 #### Hardware-in-the-Loop-Simulation of a Building Energy and Control System to Investigate Circulating Pump Control Using Modelica
 Schneider, G. F., Oppermann, J., Constantin, A., Streblow, R., & Müller, D. (2015). In: Proceedings of the International Modelica Conference, Versailles, France, September 21-23, pp. 225-233, DOI: [DOI: 10.3384/ecp15118225](http://dx.doi.org/10.3384/ecp15118225)
+
+## Photovoltaic System Model <a name="pv"></a>
+
+#### Open-source photovoltaic model for early building planning processes: Modeling, application and validation
+Maier, L.; Kratz, M.; Vering, C.; Mehrfeld, P.; Müller, D. (2022). In: Proceedings of the 17th International Building Performance Simulation Association (BS 2021),
+Bruges, Belgium, September 1-3 2021. DOI: [DOI: 10.18154/RWTH-2021-09356](http://dx.doi.org/10.18154/RWTH-2021-09356)
