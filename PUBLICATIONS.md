@@ -3,6 +3,7 @@
 ## Table of contents
 1. [Building Physics](#buildingphysics)
 1. [Building Systems](#buildingsystems)
+1. [Heat Transfer](#heattransfer)
 1. [District Heating and Cooling](#dhc)
 1. [Fast HVAC](#fasthvac)
 1. [Building Automation Systems](#bas)
@@ -78,6 +79,12 @@ Kümpel, Alexander; Teichmann, Jens; Mathis, Paul; Müller, Dirk (2022).
 In: Journal of building engineering, 2022,
 [DOI:10.1016/j.jobe.2022.104439 ](https://doi.org/10.1016/j.jobe.2022.104439 )
 
+## Heat Transfer <a name="heattransfer"></a>
+### Underfloor Heating
+#### Underfloor heating system model for building performance simulations
+Göbel, Stephan; Schmitt, Elaine; Mehrfeld, Philipp; Müller, Dirk (2021)
+In: Proceedings of 14th Modelica Conference 2021,
+[DOI:10.3384/ecp21181343](https://doi.org/10.3384/ecp21181343)
 
 ## District Heating and Cooling <a name="dhc"></a>
 
