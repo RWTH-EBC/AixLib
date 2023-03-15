@@ -45,6 +45,10 @@ DOI: URL: http://dx.doi.org/10.5075/epfl-infoscience-190601
 
 *Compariston between to approches according to ISO 13790 and VDI 6007*
 
+### Moisture in thermal zones: a dynamic modeling approach
+Kremer, Martin Theodor; Mathis, Paul; Müller, Dirk (2021). In: 1st International Conference on Moisture in Buildings 2021, ICMB21, 2021-06-28 - 2021-06-29.
+DOI: URL: https://doi.org/10.14293/ICMB210033
+
 ### HOM and ROM
 
 #### Not published yet
