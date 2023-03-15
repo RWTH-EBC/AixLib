@@ -49,6 +49,10 @@ DOI: URL: http://dx.doi.org/10.5075/epfl-infoscience-190601
 Kremer, Martin Theodor; Mathis, Paul; Müller, Dirk (2021). In: 1st International Conference on Moisture in Buildings 2021, ICMB21, 2021-06-28 - 2021-06-29.
 DOI: URL: https://doi.org/10.14293/ICMB210033
 
+### Effect of Reduced Air Change Rates on Indoor Air Quality and Air Conditioning Energy Consumption in Retail Buildings
+Finkbeiner, Konstantin; Kremer, Martin Theodor; Ying, Xuchao; Rätz, Martin; Mathis, Paul; Müller, Dirk (2021). In: Building Simulation Conference 2021: 17th Conference of IBPSA, BS21, 2021-08-31 - 2021-09-03, Brügge, Belgium.
+DOI: URL: https://doi.org/10.18154/RWTH-2021-09080
+
 ### HOM and ROM
 
 #### Not published yet
