@@ -53,6 +53,11 @@ DOI: URL: https://doi.org/10.14293/ICMB210033
 Finkbeiner, Konstantin; Kremer, Martin Theodor; Ying, Xuchao; Rätz, Martin; Mathis, Paul; Müller, Dirk (2021). In: Building Simulation Conference 2021: 17th Conference of IBPSA, BS21, 2021-08-31 - 2021-09-03, Brügge, Belgium.
 DOI: URL: https://doi.org/10.18154/RWTH-2021-09080
 
+
+#### Analyzing the Energy-Saving Potential of Demand-Controlled Ventilation in Hospitals via Dynamic Building Simulations
+Rätz, Martin; Kalliomäki, Petri; Mathis, Paul; Koskela, Hannu; Müller, Dirk (2020). In: 16th International Conference on Indoor Air Quality and Climate (Indoor air 2020) : online, 1 November 2020 / International Society of Indoor Air Quality and Climate (ISIAQ), Pages: 1026-1031.
+ISBN: 978-1-71382-360-5 
+
 ### HOM and ROM
 
 #### Not published yet
