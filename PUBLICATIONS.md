@@ -65,8 +65,13 @@ Currently only an internal report with the title "*Verification and Comparison o
 Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; Müller, Dirk (2015). 14th International Conference of the International Building Performance Simulation Association , 14th IBPSA, 07.12.2015-09.12.2015, Hyderabad, India. [PDF](http://www.ibpsa.org/proceedings/BS2015/p2202.pdf), [Info](http://www.ebc.eonerc.rwth-aachen.de/cms/E-ON-ERC-EBC/Forschung/Publikationen/~dncb/Details/?file=540827&lidx=1)
 
 
-##### Moisture Recovery - A Dynamic Modelling Approach
+#### Moisture Recovery - A Dynamic Modelling Approach
 Kremer, Martin; Mathis, Paul; Müller, Dirk; Clima 2019, May 2019,[pdf](https://www.e3s-conferences.org/articles/e3sconf/pdf/2019/37/e3sconf_clima2019_01099.pdf), [DOI:10.1051/e3sconf/2019111101099](https://doi.org/10.1051/e3sconf/201911101099)
+
+#### Modular hydronic subsystem models for testing and improving control algorithms of air-handling units
+Kümpel, Alexander; Teichmann, Jens; Mathis, Paul; Müller, Dirk (2022).
+In: Journal of building engineering, 2022,
+[DOI:10.1016/j.jobe.2022.104439 ](https://doi.org/10.1016/j.jobe.2022.104439 )
 
 
 ## District Heating and Cooling <a name="dhc"></a>
