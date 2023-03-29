@@ -12,23 +12,24 @@ model CheckBlackBodySkyTemperature
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 equation
   connect(TBlaBod.y, cheSkyBlaBodTem.TIn)
-    annotation (Line(points={{-19,0},{0,0},{18,0}}, color={0,0,127}));
+    annotation (Line(points={{-19,0},{18,0}}, color={0,0,127}));
   annotation (
 Documentation(info="<html>
-<p>
-This example tests the model that checks the black-body sky temperature.
-</p>
-</html>",
+ <p>
+ This example tests the model that checks the black-body sky temperature.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 5, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ January 5, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/CheckBlackBodySkyTemperature.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CheckBlackBodySkyTemperature;

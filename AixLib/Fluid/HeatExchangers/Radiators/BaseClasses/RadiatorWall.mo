@@ -1,26 +1,31 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 class RadiatorWall "Simple one layer wall"
 
-  parameter Modelica.SIunits.Thickness d
-    "Thickness"
+  parameter Modelica.Fluid.Types.Dynamics initDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial"
+    annotation(Evaluate=true, Dialog(tab="Initialization"));
+
+  parameter Modelica.Units.SI.Thickness d "Thickness"
     annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.ThermalConductivity lambda
-    "Thermal conductivity" annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.HeatCapacity C
-    "Heat capacity of radiator wall";
-  parameter Modelica.SIunits.SpecificHeatCapacity c
-    "Specific heat capacity" annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.Temperature T0
-    "Initial temperature" annotation (Dialog(group="Thermal"));
-  parameter Modelica.SIunits.Area A
-    "Area of radiator surface";
-  parameter Modelica.SIunits.ThermalConductance G=lambda*A/d;
+  parameter Modelica.Units.SI.ThermalConductivity lambda "Thermal conductivity"
+    annotation (Dialog(group="Structure"));
+  parameter Modelica.Units.SI.HeatCapacity C "Heat capacity of radiator wall";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c "Specific heat capacity"
+    annotation (Dialog(group="Structure"));
+  parameter Modelica.Units.SI.Temperature T0 "Initial temperature"
+    annotation (Dialog(group="Thermal"));
+  parameter Modelica.Units.SI.Area A "Area of radiator surface";
+  parameter Modelica.Units.SI.ThermalConductance G=lambda*A/d;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-104,-8},{-84,12}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
     annotation (Placement(transformation(extent={{84,-10},{104,10}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=C)
-    annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
+    C=C,
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=T0),
+    final der_T(fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), start=0)) annotation (Placement(transformation(
         origin={-6,-62},
         extent={{-10,-10},{10,10}},
         rotation=180)));

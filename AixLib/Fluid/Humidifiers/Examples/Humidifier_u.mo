@@ -5,8 +5,8 @@ model Humidifier_u "Model that demonstrates the ideal humidifier model"
   package Medium = AixLib.Media.Air;
 
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=
-     3000/1000/20 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3000/1000/20
+    "Nominal mass flow rate";
 
   AixLib.Fluid.Sources.MassFlowSource_T sou(
     redeclare package Medium = Medium,
@@ -34,8 +34,7 @@ model Humidifier_u "Model that demonstrates the ideal humidifier model"
     Td=1,
     k=1,
     Ti=10,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    reverseAction=true) "Controller"
+    reverseActing=false) "Controller"
     annotation (Placement(transformation(extent={{40,140},{60,160}})));
   AixLib.Fluid.Humidifiers.Humidifier_u humDyn(
     redeclare package Medium = Medium,
@@ -43,7 +42,6 @@ model Humidifier_u "Model that demonstrates the ideal humidifier model"
     dp_nominal=6000,
     mWat_flow_nominal=m_flow_nominal*0.005,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     T_start=303.15) "Dynamic model of the humidifier"
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem2(redeclare package Medium =
@@ -53,8 +51,7 @@ model Humidifier_u "Model that demonstrates the ideal humidifier model"
     Td=1,
     Ti=10,
     k=0.1,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    reverseAction=true) "Controller"
+    reverseActing=false) "Controller"
     annotation (Placement(transformation(extent={{40,30},{60,50}})));
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
@@ -108,29 +105,30 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Humidifiers/Examples/Humidifier_u.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of an ideal humidifier.
-Both humidifer models are identical, except that one model is configured
-as a steady-state model, whereas the other is configured as a dynamic model.
-Both humidifiers add water to the medium to track a set-point for the outlet
-temperature using adiabatic cooling.
-The temperature of the water that is added to the medium is determined by
-the parameter <code>T</code> of the humidifier models.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 23, 2013, by Michael Wetter:<br/>
-Added flow resistance at the outlet of the humidifier to avoid a numerical derivative,
-and changed model to use a prescribed mass flow rate.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Model that demonstrates the use of an ideal humidifier.
+ Both humidifer models are identical, except that one model is configured
+ as a steady-state model, whereas the other is configured as a dynamic model.
+ Both humidifiers add water to the medium to track a set-point for the outlet
+ temperature using adiabatic cooling.
+ The temperature of the water that is added to the medium is determined by
+ the parameter <code>T</code> of the humidifier models.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 23, 2013, by Michael Wetter:<br/>
+ Added flow resistance at the outlet of the humidifier to avoid a numerical derivative,
+ and changed model to use a prescribed mass flow rate.
+ </li>
+ <li>
+ July 11, 2011, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=1200,
-      Tolerance=1e-06));
+      Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

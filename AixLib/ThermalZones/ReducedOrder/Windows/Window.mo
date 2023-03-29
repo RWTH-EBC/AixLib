@@ -1,52 +1,45 @@
 within AixLib.ThermalZones.ReducedOrder.Windows;
 model Window "Calculation of solar energy transmitted through windows"
-  parameter Modelica.SIunits.Angle lat "Latitude";
-  parameter Integer n(min = 1) "Number of windows"
+  parameter Modelica.Units.SI.Angle lat "Latitude";
+  parameter Integer n(min = 1)=1 "Number of windows"
     annotation(dialog(group="window"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
-    annotation(dialog(group="window"));
-   parameter Modelica.SIunits.TransmissionCoefficient g[n]
-    "Total energy transmittance of windows"
-    annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
-    "Total energy transmittance of windows with closed sunscreen for direct
-     radiation"
-    annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
-    "Total energy transmittance of windows with closed sunscreen for diffuse
-     radiation"
-    annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
+    annotation (dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g[n]
+    "Total energy transmittance of windows" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDir[n] "Total energy transmittance of windows with closed sunscreen for direct
+     radiation" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDif[n] "Total energy transmittance of windows with closed sunscreen for diffuse
+     radiation" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
+  parameter Modelica.Units.SI.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active"
-    annotation(dialog(group="sunscreen"));
-  parameter Modelica.SIunits.Angle xi(displayUnit="degree")= 0
+    annotation (dialog(group="sunscreen"));
+  parameter Modelica.Units.SI.Angle xi(displayUnit="deg") = 0
     "Elevation angle";
-  parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
-    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof"
-    annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Angle azi[n] "Surface azimuth"
+  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.Angle azi[n] "Surface azimuth"
     annotation (Dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
   Modelica.Blocks.Interfaces.RealOutput HVis[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Solar energy entering the room in the visible area"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{100,30},{120,50}})));
 
   Modelica.Blocks.Interfaces.RealOutput HWin[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Solar radiation transmitted through aggregated window"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
@@ -65,32 +58,24 @@ model Window "Calculation of solar energy transmitted through windows"
     "Base class of window"
     annotation (
     Placement(transformation(extent={{20,-32},{86,30}})));
-  AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
-    each lat=lat,
-    final azi=azi,
-    final til=til)
-    "Calculates the incidence angle" annotation (
-    Placement(transformation(extent={{-40,74},{-30,84}})));
+  AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](final azi=
+        azi, final til=til) "Calculates the incidence angle"
+    annotation (Placement(transformation(extent={{-40,74},{-30,84}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-108,-10},{-88,10}}),
         iconTransformation(extent={{-108,-10},{-88,10}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
     "Calculates the altitude angle"
     annotation (Placement(transformation(extent={{-18,56},{-10,64}})));
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
     "Calculates the zenith angle"
     annotation (Placement(transformation(extent={{-28,56},{-20,64}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
-    final til=til,
-    each lat=lat,
-    final azi=azi)
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](final til=
+        til, final azi=azi)
     "Calculates the diffuse irradiation on a tilted surface after Perez"
-    annotation (
-    Placement(transformation(extent={{-32,-6},{-20,6}})));
+    annotation (Placement(transformation(extent={{-32,-6},{-20,6}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
-    final til=til,
-    each lat=lat,
-    final azi=azi)
+      final til=til, final azi=azi)
     "Calculates the direct irradiation on a tilted surfcae"
     annotation (Placement(transformation(extent={{-60,-54},{-40,-34}})));
 equation

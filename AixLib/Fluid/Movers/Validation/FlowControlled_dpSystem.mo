@@ -3,9 +3,9 @@ model FlowControlled_dpSystem
   "Demonstration of the use of prescribedPressure"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Air;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal = 100
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=100
     "Nominal pressure difference";
   Modelica.Blocks.Sources.Ramp y(
     duration=0.5,
@@ -14,10 +14,11 @@ model FlowControlled_dpSystem
     offset=dp_nominal)
                "Input signal"
     annotation (Placement(transformation(extent={{-120,80},{-100,100}})));
-  Sources.Boundary_pT             sou(
-    redeclare package Medium = Medium, nPorts=2)
-              "Source"
-              annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
+  Sources.Boundary_pT sou(
+    redeclare package Medium = Medium,
+    nPorts=2)
+    "Source"
+    annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
   AixLib.Fluid.Movers.FlowControlled_dp floConDp(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -43,7 +44,9 @@ model FlowControlled_dpSystem
     "Pressure difference across air system"
     annotation (Placement(transformation(extent={{0,-30},{20,-50}})));
 
-  Sources.Boundary_pT sin(redeclare package Medium = Medium, nPorts=4) "Sink"
+  Sources.Boundary_pT sin(
+    redeclare package Medium = Medium,
+    nPorts=4) "Sink"
     annotation (Placement(transformation(extent={{120,-10},{100,10}})));
   MixingVolumes.MixingVolume zone2(
     redeclare package Medium = Medium,
@@ -51,6 +54,7 @@ model FlowControlled_dpSystem
     m_flow_nominal=m_flow_nominal,
     nPorts=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    "Mixing volume"
     annotation (Placement(transformation(extent={{80,40},{100,60}})));
   AixLib.Fluid.FixedResistances.PressureDrop heaCoi1(
     redeclare package Medium = Medium,
@@ -61,8 +65,9 @@ model FlowControlled_dpSystem
     redeclare package Medium = Medium,
     from_dp=true,
     use_inputFilter=false,
+    dpDamper_nominal=10,
     m_flow_nominal=m_flow_nominal/2)
-                           "Damper"
+    "Damper"
     annotation (Placement(transformation(extent={{40,70},{60,90}})));
   MixingVolumes.MixingVolume zone1(
     redeclare package Medium = Medium,
@@ -70,27 +75,31 @@ model FlowControlled_dpSystem
     m_flow_nominal=m_flow_nominal,
     nPorts=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
-          annotation (Placement(transformation(extent={{80,80},{100,100}})));
+    "Mixing volume"
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Actuators.Dampers.Exponential dam1(
     redeclare package Medium = Medium,
     from_dp=true,
     use_inputFilter=false,
+    dpDamper_nominal=10,
     m_flow_nominal=m_flow_nominal/2)
-                           "Damper"
+             "Damper"
     annotation (Placement(transformation(extent={{40,30},{60,50}})));
   Actuators.Dampers.Exponential dam3(
     redeclare package Medium = Medium,
     from_dp=true,
     use_inputFilter=false,
+    dpDamper_nominal=10,
     m_flow_nominal=m_flow_nominal/2)
-                           "Damper"
+             "Damper"
     annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
   Actuators.Dampers.Exponential dam4(
     redeclare package Medium = Medium,
     from_dp=true,
     use_inputFilter=false,
+    dpDamper_nominal=10,
     m_flow_nominal=m_flow_nominal/2)
-                           "Damper"
+             "Damper"
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
   MixingVolumes.MixingVolume zone3(
     redeclare package Medium = Medium,
@@ -98,20 +107,22 @@ model FlowControlled_dpSystem
     m_flow_nominal=m_flow_nominal,
     nPorts=3,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
-              annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
+    "Mixing volume"
+    annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
   MixingVolumes.MixingVolume zone4(
     redeclare package Medium = Medium,
     V=50,
     m_flow_nominal=m_flow_nominal,
     nPorts=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    "Mixing volume"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
   Modelica.Blocks.Sources.Ramp y1(
     duration=0.5,
     height=1,
     offset=0,
     startTime=0)
-               "Input signal"
+    "Input signal"
     annotation (Placement(transformation(extent={{-60,90},{-40,110}})));
   AixLib.Fluid.FixedResistances.PressureDrop duct3(
     redeclare package Medium = Medium,
@@ -134,10 +145,10 @@ model FlowControlled_dpSystem
     m_flow_nominal=m_flow_nominal/2) "Duct pressure drop"
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
 equation
-  connect(y.y, floConDp.dp_in) annotation (Line(points={{-99,90},{-70.2,90},{-70.2,
+  connect(y.y, floConDp.dp_in) annotation (Line(points={{-99,90},{-70,90},{-70,
           72}}, color={0,0,127}));
   connect(y.y, floConDpSystem.dp_in) annotation (Line(points={{-99,90},{-90,90},
-          {-90,20},{-70,20},{-70,-68},{-70.2,-68}},
+          {-90,20},{-70,20},{-70,-68},{-70,-68}},
                                            color={0,0,127}));
   connect(zone2.ports[1], sin.ports[1])
     annotation (Line(points={{88,40},{100,40},{100,3}},    color={0,127,255}));
@@ -204,25 +215,26 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dpSystem.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates and tests the use of
-<a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
-AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
-movers that use parameter
-<code>prescribeSystemPressure</code>.
-</p>
-<p>
-The mass flow rates and actual pressure heads of the two configurations are compared.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 4 2017, by Filip Jorissen:<br/>
-First implementation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
-</li>
-</ul>
-</html>"),
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
+ <p>
+ This example demonstrates and tests the use of
+ <a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
+ AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
+ movers that use parameter
+ <code>prescribeSystemPressure</code>.
+ </p>
+ <p>
+ The mass flow rates and actual pressure heads of the two configurations are compared.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 4 2017, by Filip Jorissen:<br/>
+ First implementation.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
+ </li>
+ </ul>
+ </html>"),
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowControlled_dpSystem;

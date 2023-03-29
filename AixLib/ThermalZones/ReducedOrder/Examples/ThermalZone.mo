@@ -6,12 +6,11 @@ model ThermalZone "Illustrates the use of ThermalZone"
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-    each der_T(fixed=true)))),
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
-    internalGainsMode=1)
-    "Thermal zone"
+    internalGainsMode=1) "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -114,9 +113,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
     annotation (Placement(transformation(extent={{46,-10},{26,10}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{94,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
     "Convective heat flow of additional internal gains"
@@ -130,15 +128,17 @@ model ThermalZone "Illustrates the use of ThermalZone"
 
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+      points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
-    annotation (Line(points={{26,0},{10,0},{10,-1}}, color={191,0,0}));
+    annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}},
+                                                     color={191,0,0}));
   connect(prescribedHeatFlow1.port, thermalZone.intGainsConv) annotation (Line(
-        points={{26,-18},{18,-18},{18,-5},{10,-5}}, color={191,0,0}));
+        points={{26,-18},{18,-18},{18,0.4},{10.2,0.4}},
+                                                    color={191,0,0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{53.4,-18},{46,-18}},          color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)
@@ -148,8 +148,11 @@ equation
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),
+        experiment(Tolerance=1e-6,StopTime=3.1536e+007,Interval=3600),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZone.mos"
+        "Simulate and plot"),
     Documentation(revisions="<html><ul>
   <li>September 29, 2016, by Moritz Lauster:<br/>
     Implemented.

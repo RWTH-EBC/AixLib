@@ -4,12 +4,13 @@ model FiniteLineSource_Integrand_Length
   extends Modelica.Icons.Example;
 
   parameter Real dis_over_len = 0.0005 "Radial distance between borehole axes";
-  parameter Modelica.SIunits.Height len150 = 150.0 "Length of emitting borehole";
-  parameter Modelica.SIunits.Height len75 = 75.0 "Length of emitting borehole";
-  parameter Modelica.SIunits.Height len25 = 25.0 "Length of emitting borehole";
-  parameter Modelica.SIunits.Height len5 = 5.0 "Length of emitting borehole";
-  parameter Modelica.SIunits.Height len1 = 1.0 "Length of emitting borehole";
-  parameter Modelica.SIunits.Height burDep = 4. "Buried depth of emitting borehole";
+  parameter Modelica.Units.SI.Height len150=150.0 "Length of emitting borehole";
+  parameter Modelica.Units.SI.Height len75=75.0 "Length of emitting borehole";
+  parameter Modelica.Units.SI.Height len25=25.0 "Length of emitting borehole";
+  parameter Modelica.Units.SI.Height len5=5.0 "Length of emitting borehole";
+  parameter Modelica.Units.SI.Height len1=1.0 "Length of emitting borehole";
+  parameter Modelica.Units.SI.Height burDep=4.
+    "Buried depth of emitting borehole";
   Real u "Integration variable";
   Real logy150 "Logarithm of finite line source integrand";
   Real logy75 "Logarithm of finite line source integrand";
@@ -66,16 +67,17 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StartTime=0.01, StopTime=500.0),
     Documentation(info="<html>
-<p>
-This example demonstrates the evaluation of the
-finite line source integrand function.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 15, 2019, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example demonstrates the evaluation of the
+ finite line source integrand function.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 15, 2019, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FiniteLineSource_Integrand_Length;

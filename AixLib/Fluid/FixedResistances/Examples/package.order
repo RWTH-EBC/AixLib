@@ -1,9 +1,10 @@
 CheckValve
 CompareFixedResistances
 FlowJunction
+GenericPipe
 HydraulicDiameter
 Pipe
 PlugFlowPipe
+PlugFlowPipeDiscretized
 PressureDrop
 SimplePipe
-GenericPipe

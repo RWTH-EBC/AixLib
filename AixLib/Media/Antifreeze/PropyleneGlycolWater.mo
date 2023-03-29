@@ -2,20 +2,19 @@ within AixLib.Media.Antifreeze;
 package PropyleneGlycolWater
   "Package with model for propylene glycol - water with constant properties"
   extends Modelica.Media.Interfaces.PartialSimpleMedium(
-    mediumName="PropyleneGlycolWater(X_a = "
-      + String(X_a) + ", property_T = "
-      + String(property_T) + ")",
-    final cp_const=specificHeatCapacityCp_TX_a(T = property_T, X_a = X_a),
+    mediumName="PropyleneGlycolWater(X_a = " + String(X_a) + ", property_T = "
+         + String(property_T) + ")",
+    final cp_const=specificHeatCapacityCp_TX_a(T=property_T, X_a=X_a),
     final cv_const=cp_const,
-    final d_const=density_TX_a(T = property_T, X_a = X_a),
-    final eta_const=dynamicViscosity_TX_a(T = property_T, X_a = X_a),
-    final lambda_const=thermalConductivity_TX_a(T = property_T, X_a = X_a),
+    final d_const=density_TX_a(T=property_T, X_a=X_a),
+    final eta_const=dynamicViscosity_TX_a(T=property_T, X_a=X_a),
+    final lambda_const=thermalConductivity_TX_a(T=property_T, X_a=X_a),
     a_const=1484,
-    final T_min=fusionTemperature_TX_a(T = property_T, X_a = X_a),
-    T_max=Modelica.SIunits.Conversions.from_degC(100),
+    final T_min=fusionTemperature_TX_a(T=property_T, X_a=X_a),
+    T_max=Modelica.Units.Conversions.from_degC(100),
     T0=273.15,
-    MM_const=(X_a/simplePropyleneGlycolWaterConstants[1].molarMass + (1
-         - X_a)/0.018015268)^(-1),
+    MM_const=(X_a/simplePropyleneGlycolWaterConstants[1].molarMass + (1 - X_a)/
+        0.018015268)^(-1),
     fluidConstants=simplePropyleneGlycolWaterConstants,
     p_default=300000,
     reference_p=300000,
@@ -25,9 +24,9 @@ package PropyleneGlycolWater
     Temperature(start=T_default),
     Density(start=d_const));
 
-  constant Modelica.SIunits.Temperature property_T
+  constant Modelica.Units.SI.Temperature property_T
     "Temperature for evaluation of constant fluid properties";
-  constant Modelica.SIunits.MassFraction X_a
+  constant Modelica.Units.SI.MassFraction X_a
     "Mass fraction of propylene glycol in water";
 
   redeclare model BaseProperties "Base properties"
@@ -39,14 +38,14 @@ package PropyleneGlycolWater
     InputMassFraction[nXi] Xi=fill(0, 0)
       "Structurally independent mass fractions";
     InputSpecificEnthalpy h "Specific enthalpy of medium";
-    Modelica.SIunits.SpecificInternalEnergy u
+    Modelica.Units.SI.SpecificInternalEnergy u
       "Specific internal energy of medium";
-    Modelica.SIunits.Density d=d_const "Density of medium";
-    Modelica.SIunits.MassFraction[nX] X={1}
+    Modelica.Units.SI.Density d=d_const "Density of medium";
+    Modelica.Units.SI.MassFraction[nX] X={1}
       "Mass fractions (= (component mass)/total mass  m_i/m)";
-    final Modelica.SIunits.SpecificHeatCapacity R=0
+    final Modelica.Units.SI.SpecificHeatCapacity R_s=0
       "Gas constant (of mixture if applicable)";
-    final Modelica.SIunits.MolarMass MM=MM_const
+    final Modelica.Units.SI.MolarMass MM=MM_const
       "Molar mass (of mixture or single fluid)";
     ThermodynamicState state
       "Thermodynamic state record for optional functions";
@@ -55,37 +54,35 @@ package PropyleneGlycolWater
       annotation(Evaluate=true, Dialog(tab="Advanced"));
     final parameter Boolean standardOrderComponents=true
       "If true, and reducedX = true, the last element of X will be computed from the other ones";
-    Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC=
-        Modelica.SIunits.Conversions.to_degC(T)
-      "Temperature of medium in [degC]";
-    Modelica.SIunits.Conversions.NonSIunits.Pressure_bar p_bar=
-        Modelica.SIunits.Conversions.to_bar(p)
+    Modelica.Units.NonSI.Temperature_degC T_degC=
+        Modelica.Units.Conversions.to_degC(T) "Temperature of medium in [degC]";
+    Modelica.Units.NonSI.Pressure_bar p_bar=Modelica.Units.Conversions.to_bar(p)
       "Absolute pressure of medium in [bar]";
 
     // Local connector definition, used for equation balancing check
-    connector InputAbsolutePressure = input Modelica.SIunits.AbsolutePressure
+    connector InputAbsolutePressure = input Modelica.Units.SI.AbsolutePressure
       "Pressure as input signal connector";
-    connector InputSpecificEnthalpy = input Modelica.SIunits.SpecificEnthalpy
+    connector InputSpecificEnthalpy = input Modelica.Units.SI.SpecificEnthalpy
       "Specific enthalpy as input signal connector";
-    connector InputMassFraction = input Modelica.SIunits.MassFraction
+    connector InputMassFraction = input Modelica.Units.SI.MassFraction
       "Mass fraction as input signal connector";
 
   equation
   assert(T >= T_min, "
-In "   + getInstanceName() + ": Temperature T exceeded its minimum allowed value of " + String(T_min-273.15)
+ In "  + getInstanceName() + ": Temperature T exceeded its minimum allowed value of " + String(T_min-273.15)
     + " degC (" + String(T_min) + " Kelvin)
-as required from medium model \"" + mediumName + "\".");
+ as required from medium model \""+ mediumName + "\".");
   assert(T <= T_max, "
-In "   + getInstanceName() + ": Temperature T exceeded its maximum allowed value of " + String(T_max-273.15)
+ In "  + getInstanceName() + ": Temperature T exceeded its maximum allowed value of " + String(T_max-273.15)
     + " degC (" + String(T_max) + " Kelvin)
-as required from medium model \"" + mediumName + "\".");
+ as required from medium model \""+ mediumName + "\".");
 
   assert(X_a >= X_a_min, "
-In "   + getInstanceName() + ": Mass fraction x_a exceeded its minimum allowed value of " + String(X_a_min) + "
-as required from medium model \"" + mediumName + "\".");
+ In "  + getInstanceName() + ": Mass fraction x_a exceeded its minimum allowed value of " + String(X_a_min) + "
+ as required from medium model \""+ mediumName + "\".");
   assert(X_a <= X_a_max, "
-In "   + getInstanceName() + ": Mass fraction x_a exceeded its maximum allowed value of " + String(X_a_max) + "
-as required from medium model \"" + mediumName + "\".");
+ In "  + getInstanceName() + ": Mass fraction x_a exceeded its maximum allowed value of " + String(X_a_max) + "
+ as required from medium model \""+ mediumName + "\".");
 
     h = cp_const*(T-reference_T);
     u = h;
@@ -93,23 +90,23 @@ as required from medium model \"" + mediumName + "\".");
     state.p = p;
 
     annotation(Documentation(info="<html>
-    <p>
-    This base properties model is identical to
-    <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
-    Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
-    except that the equation
-    <code>u = cv_const*(T - reference_T)</code>
-    has been replaced by <code>u=h</code> because
-    <code>cp_const=cv_const</code>.
-    Also, the model checks if the mass fraction of the mixture is within the
-    allowed limits.
-    </p>
-</html>"));
+     <p>
+     This base properties model is identical to
+     <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
+     Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
+     except that the equation
+     <code>u = cv_const*(T - reference_T)</code>
+     has been replaced by <code>u=h</code> because
+     <code>cp_const=cv_const</code>.
+     Also, the model checks if the mass fraction of the mixture is within the
+     allowed limits.
+     </p>
+ </html>"));
   end BaseProperties;
 protected
-  constant Modelica.SIunits.MassFraction X_a_min=0.
+  constant Modelica.Units.SI.MassFraction X_a_min=0.
     "Minimum allowed mass fraction of propylene glycol in water";
-  constant Modelica.SIunits.MassFraction X_a_max=0.6
+  constant Modelica.Units.SI.MassFraction X_a_max=0.6
     "Maximum allowed mass fraction of propylene glycol in water";
 
   // Fluid constants based on pure Propylene Glycol
@@ -122,10 +119,9 @@ protected
     each molarMass=0.07609);
 
   // Coefficients for evaluation of physical properties
-  constant AixLib.Media.Antifreeze.BaseClasses.PropertyCoefficients
-    proCoe(
+  constant AixLib.Media.Antifreeze.BaseClasses.PropertyCoefficients proCoe(
     X_a_ref=0.307031,
-    T_ref=Modelica.SIunits.Conversions.from_degC(32.7083),
+    T_ref=Modelica.Units.Conversions.from_degC(32.7083),
     nX_a=6,
     nT={4,4,4,3,2,1},
     nTot=18,
@@ -149,9 +145,10 @@ protected
   replaceable function density_TX_a
     "Evaluate density of antifreeze-water mixture"
     extends Modelica.Icons.Function;
-    input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-    input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-    output Modelica.SIunits.Density d "Density of antifreeze-water mixture";
+    input Modelica.Units.SI.Temperature T
+      "Temperature of antifreeze-water mixture";
+    input Modelica.Units.SI.MassFraction X_a "Mass fraction of antifreeze";
+    output Modelica.Units.SI.Density d "Density of antifreeze-water mixture";
   algorithm
     d :=polynomialProperty(
         X_a,
@@ -159,37 +156,39 @@ protected
         proCoe.a_d)
     annotation (
     Documentation(info="<html>
-  <p>
-  Density of propylene antifreeze-water mixture at specified mass fraction
-  and temperature, based on Melinder (2010).
-  </p>
-  <h4>References</h4>
-  <p>
-  Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-  Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-  IIR/IIF.
-  </p>
-  </html>",
+   <p>
+   Density of propylene antifreeze-water mixture at specified mass fraction
+   and temperature, based on Melinder (2010).
+   </p>
+   <h4>References</h4>
+   <p>
+   Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+   Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+   IIR/IIF.
+   </p>
+   </html>",
   revisions="<html>
-  <ul>
-  <li>
-  May 2, 2018 by Massimo Cimmino:<br/>
-  First implementation.
-  This function is used by
-  <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-  AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-  </li>
-  </ul>
-  </html>"));
+   <ul>
+   <li>
+   May 2, 2018 by Massimo Cimmino:<br/>
+   First implementation.
+   This function is used by
+   <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
+   AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
+   </li>
+   </ul>
+   </html>"));
 
   end density_TX_a;
 
   replaceable function dynamicViscosity_TX_a
     "Evaluate dynamic viscosity of antifreeze-water mixture"
       extends Modelica.Icons.Function;
-    input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-    input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-    output Modelica.SIunits.DynamicViscosity eta "Dynamic Viscosity of antifreeze-water mixture";
+    input Modelica.Units.SI.Temperature T
+      "Temperature of antifreeze-water mixture";
+    input Modelica.Units.SI.MassFraction X_a "Mass fraction of antifreeze";
+    output Modelica.Units.SI.DynamicViscosity eta
+      "Dynamic Viscosity of antifreeze-water mixture";
   algorithm
     eta :=1e-3*exp(polynomialProperty(
         X_a,
@@ -198,64 +197,66 @@ protected
 
   annotation (
   Documentation(info="<html>
-<p>
-Dynamic viscosity of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-May 2, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Dynamic viscosity of antifreeze-water mixture at specified mass fraction and
+ temperature, based on Melinder (2010).
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ May 2, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ This function is used by
+ <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
+ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
+ </li>
+ </ul>
+ </html>"));
   end dynamicViscosity_TX_a;
 
   replaceable function fusionTemperature_TX_a
     "Evaluate temperature of fusion of antifreeze-water mixture"
       extends Modelica.Icons.Function;
-    input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-    input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-    output Modelica.SIunits.Temperature Tf "Temperature of fusion of antifreeze-water mixture";
+    input Modelica.Units.SI.Temperature T
+      "Temperature of antifreeze-water mixture";
+    input Modelica.Units.SI.MassFraction X_a "Mass fraction of antifreeze";
+    output Modelica.Units.SI.Temperature Tf
+      "Temperature of fusion of antifreeze-water mixture";
   algorithm
-    Tf :=Modelica.SIunits.Conversions.from_degC(polynomialProperty(
+    Tf :=Modelica.Units.Conversions.from_degC(polynomialProperty(
         X_a,
         T,
         proCoe.a_Tf));
 
   annotation (
   Documentation(info="<html>
-<p>
-Fusion temperature of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-May 2, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Fusion temperature of antifreeze-water mixture at specified mass fraction and
+ temperature, based on Melinder (2010).
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ May 2, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ This function is used by
+ <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
+ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
+ </li>
+ </ul>
+ </html>"));
   end fusionTemperature_TX_a;
 
   replaceable function polynomialProperty
@@ -286,49 +287,51 @@ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
     end for;
   annotation (
   Documentation(info="<html>
-<p>
-Evaluates a thermophysical property of a mixture, based on correlations proposed
-by Melinder (2010).
-</p>
-<p>
-The polynomial has the form
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup>
-+ a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup>
-+ ... +
-a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup>
-+ ... +
-a<sub>ny[1])+1</sub> (x-xm)<sup>1</sup>(y-ym)<sup>0</sup>
-+ ... +
-a<sub>ny[1]+ny[2]</sub> (x-xm)<sup>1</sup>(y-ym)<sup>ny[2]-1</sup>
-+ ...
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used models in
-<a href=\"modelica://AixLib.Media.Antifreeze\">
-AixLib.Media.Antifreeze</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Evaluates a thermophysical property of a mixture, based on correlations proposed
+ by Melinder (2010).
+ </p>
+ <p>
+ The polynomial has the form
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup>
+ + a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup>
+ + ... +
+ a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup>
+ + ... +
+ a<sub>ny[1])+1</sub> (x-xm)<sup>1</sup>(y-ym)<sup>0</sup>
+ + ... +
+ a<sub>ny[1]+ny[2]</sub> (x-xm)<sup>1</sup>(y-ym)<sup>ny[2]-1</sup>
+ + ...
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ March 16, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ This function is used models in
+ <a href=\"modelica://AixLib.Media.Antifreeze\">
+ AixLib.Media.Antifreeze</a>.
+ </li>
+ </ul>
+ </html>"));
   end polynomialProperty;
 
   replaceable function specificHeatCapacityCp_TX_a
     "Evaluate specific heat capacity of antifreeze-water mixture"
       extends Modelica.Icons.Function;
-    input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-    input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-    output Modelica.SIunits.SpecificHeatCapacity cp "Specific heat capacity of antifreeze-water mixture";
+    input Modelica.Units.SI.Temperature T
+      "Temperature of antifreeze-water mixture";
+    input Modelica.Units.SI.MassFraction X_a "Mass fraction of antifreeze";
+    output Modelica.Units.SI.SpecificHeatCapacity cp
+      "Specific heat capacity of antifreeze-water mixture";
   algorithm
     cp :=polynomialProperty(
         X_a,
@@ -337,35 +340,37 @@ AixLib.Media.Antifreeze</a>.
 
   annotation (
   Documentation(info="<html>
-<p>
-Specific heat capacity of antifreeze-water mixture at specified mass fraction
-and temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Specific heat capacity of antifreeze-water mixture at specified mass fraction
+ and temperature, based on Melinder (2010).
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ March 16, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ This function is used by
+ <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
+ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
+ </li>
+ </ul>
+ </html>"));
   end specificHeatCapacityCp_TX_a;
 
   replaceable function thermalConductivity_TX_a
     "Evaluate thermal conductivity of antifreeze-water mixture"
       extends Modelica.Icons.Function;
-    input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-    input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-    output Modelica.SIunits.ThermalConductivity lambda "Thermal conductivity of antifreeze-water mixture";
+    input Modelica.Units.SI.Temperature T
+      "Temperature of antifreeze-water mixture";
+    input Modelica.Units.SI.MassFraction X_a "Mass fraction of antifreeze";
+    output Modelica.Units.SI.ThermalConductivity lambda
+      "Thermal conductivity of antifreeze-water mixture";
   algorithm
     lambda :=polynomialProperty(
         X_a,
@@ -374,101 +379,103 @@ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
 
   annotation (
   Documentation(info="<html>
-<p>
-Thermal conductivity of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Thermal conductivity of antifreeze-water mixture at specified mass fraction and
+ temperature, based on Melinder (2010).
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ March 16, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ This function is used by
+ <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
+ AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
+ </li>
+ </ul>
+ </html>"));
   end thermalConductivity_TX_a;
 annotation(preferredView="info", Documentation(info="<html>
-<p>
-This medium package models propylene glycol - water mixtures.
-</p>
-<p>
-The mass density, specific heat capacity, thermal conductivity and viscosity
-are assumed constant and evaluated at a set temperature and mass fraction of
-propylene glycol within the mixture. The dependence of the four properties
-are shown on the figure below.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterProperties.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The accuracy of the thermophysical properties is dependent on the temperature
-variations encountered during simulations.
-The figure below shows the relative error of the the four properties over a
-<i>10</i> &deg;C range around the temperature used to evaluate the constant
-properties. The maximum errors are <i>0.8</i> % for mass density, <i>1.5</i> %
-for specific heat capacity, <i>3.2</i> % for thermal conductivity and <i>250</i>
-% for dynamic viscosity.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError10degC.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The figure below shows the relative error of the the four properties over a
-<i>20</i> &deg;C range around the temperature used to evaluate the constant
-proepties. The maximum errors are <i>1.6</i> % for mass density, <i>3.0</i> %
-for specific heat capacity, <i>6.2</i> % for thermal conductivity and <i>950</i>
-% for dynamic viscosity.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError20degC.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The enthalpy is computed using the convention that <i>h=0</i>
-if <i>T=0</i> &deg;C.
-</p>
-<h4>Limitations</h4>
-<p>
-Density, specific heat capacity, thermal conductivity and viscosity are constant.
-The propylene glycol/water mixture is modeled as an incompressible liquid.
-There are no phase changes. The medium is limited to temperatures below
-<i>100</i> &deg;C and mass fractions below <i>0.60</i>.
-As is the case for AixLib.Media.Water, this medium package should not be used if
-the simulation relies on the dynamic viscosity.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-The temperature and mass fraction must be specified for the evaluation of the
-constant thermophysical properties. A typical use of the package is (e.g. for
-a temperature of <i>20</i> &deg;C and a mass fraction of <i>0.40</i>):
-</p>
-<p>
-<code>Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater(property_T=293.15, X_a=0.40)</code>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
-Now printing different messages if temperature or mass fraction is above or below its limit,
-and adding instance name as JModelica does not print the full instance name in the assertion.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
-</li>
-<li>
-March 16, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This medium package models propylene glycol - water mixtures.
+ </p>
+ <p>
+ The mass density, specific heat capacity, thermal conductivity and viscosity
+ are assumed constant and evaluated at a set temperature and mass fraction of
+ propylene glycol within the mixture. The dependence of the four properties
+ are shown on the figure below.
+ </p>
+ <p align=\"center\">
+ <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterProperties.png\" border=\"1\"
+ alt=\"Relative variation of specific heat capacity with temperature\"/>
+ </p>
+ <p>
+ The accuracy of the thermophysical properties is dependent on the temperature
+ variations encountered during simulations.
+ The figure below shows the relative error of the the four properties over a
+ <i>10</i> &deg;C range around the temperature used to evaluate the constant
+ properties. The maximum errors are <i>0.8</i> % for mass density, <i>1.5</i> %
+ for specific heat capacity, <i>3.2</i> % for thermal conductivity and <i>250</i>
+ % for dynamic viscosity.
+ </p>
+ <p align=\"center\">
+ <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError10degC.png\" border=\"1\"
+ alt=\"Relative variation of specific heat capacity with temperature\"/>
+ </p>
+ <p>
+ The figure below shows the relative error of the the four properties over a
+ <i>20</i> &deg;C range around the temperature used to evaluate the constant
+ proepties. The maximum errors are <i>1.6</i> % for mass density, <i>3.0</i> %
+ for specific heat capacity, <i>6.2</i> % for thermal conductivity and <i>950</i>
+ % for dynamic viscosity.
+ </p>
+ <p align=\"center\">
+ <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError20degC.png\" border=\"1\"
+ alt=\"Relative variation of specific heat capacity with temperature\"/>
+ </p>
+ <p>
+ The enthalpy is computed using the convention that <i>h=0</i>
+ if <i>T=0</i> &deg;C.
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ Density, specific heat capacity, thermal conductivity and viscosity are constant.
+ The propylene glycol/water mixture is modeled as an incompressible liquid.
+ There are no phase changes. The medium is limited to temperatures below
+ <i>100</i> &deg;C and mass fractions below <i>0.60</i>.
+ As is the case for <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>,
+ this medium package should not be used if
+ the simulation relies on the dynamic viscosity.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ The temperature and mass fraction must be specified for the evaluation of the
+ constant thermophysical properties. A typical use of the package is (e.g. for
+ a temperature of <i>20</i> &deg;C and a mass fraction of <i>0.40</i>):
+ </p>
+ <p>
+ <code>Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater(property_T=293.15, X_a=0.40)</code>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
+ Now printing different messages if temperature or mass fraction is above or below its limit,
+ and adding instance name as JModelica does not print the full instance name in the assertion.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
+ </li>
+ <li>
+ March 16, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PropyleneGlycolWater;

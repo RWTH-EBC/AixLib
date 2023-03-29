@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model Injection "Test for injection circuit"
   extends Modelica.Icons.Example;
 
@@ -14,6 +14,7 @@ model Injection "Test for injection circuit"
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     pipe8(length=0.5),
     length=1,
     Kv=10,
@@ -55,6 +56,8 @@ model Injection "Test for injection circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-84, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
 
   connect(hydraulicBus,Injection. hydraulicBus) annotation (Line(
@@ -83,6 +86,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-72, -30}, {-40, -30}, {-40, 10}}, color = {255, 0, 255}));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,

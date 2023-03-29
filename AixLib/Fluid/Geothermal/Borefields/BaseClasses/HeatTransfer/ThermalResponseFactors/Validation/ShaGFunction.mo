@@ -32,16 +32,17 @@ annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/ThermalResponseFactors/Validation/ShaGFunction.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example uses a typical single borehole to test the SHA1-encryption of the
-arguments required to determine the borehole's thermal response factor.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example uses a typical single borehole to test the SHA1-encryption of the
+ arguments required to determine the borehole's thermal response factor.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 18, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ShaGFunction;

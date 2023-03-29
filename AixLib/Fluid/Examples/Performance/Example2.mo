@@ -3,9 +3,9 @@ model Example2 "Example 2 model with series pressure components"
   extends Modelica.Icons.Example;
 
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=1
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=1
     "Pressure drop at nominal mass flow rate";
   Fluid.Movers.FlowControlled_dp pump_dp(
     redeclare package Medium = Medium,
@@ -59,72 +59,72 @@ equation
             -40},{40,60}}),    graphics),
     experiment(Tolerance=1e-6, StopTime=20),
     Documentation(info="<html>
-<p>
-This example demonstrates that the use of the parameter <code>from_dp</code>
-can be important for reducing the size of algebraic loops in hydraulic
-circuits with many pressure drop components connected in series and
-a pump setting the pressure head.
-</p>
-<p>
-If <code>from_dp=true</code>, we obtain: <br/>
-
-Sizes of nonlinear systems of equations: {7}<br/>
-Sizes after manipulation of the nonlinear systems: {<b>5</b>}<br/>
-If <code>from_dp=false</code>, we obtain: <br/>
-Sizes of nonlinear systems of equations: {7}<br />
-Sizes after manipulation of the nonlinear systems: {<b>1</b>}<br/>
-</p>
-<p>
-This can have a large impact on computational speed.
-</p>
-<p>
-Following script can be used in Dymola to compare the CPU times.
-</p>
-<p>
-<code>
-cpuOld=OutputCPUtime;<br/>
-evaluateOld=Evaluate;<br/>
-OutputCPUtime:=true;<br/>
-simulateModel(\"AixLib.Fluid.Examples.Performance.Example2(from_dp.k=false)\", stopTime=10000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example2\");<br/>
-simulateModel(\"AixLib.Fluid.Examples.Performance.Example2(from_dp.k=true)\", stopTime=10000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example2\");<br/>
-createPlot(id=1, position={15, 10, 592, 421}, range={0.0, 10000.0, -0.01, 25}, autoscale=false, grid=true);<br/>
-plotExpression(apply(Example2[end-1].CPUtime), false, \"from_dp=false\", 1);<br/>
-plotExpression(apply(Example2[end].CPUtime), false, \"from_dp=true\", 1);<br/>
-OutputCPUtime=cpuOld;<br/>
-Evaluate=evaluateOld;<br/>
-</code>
-</p>
-<p>
-See Jorissen et al. (2015) for a discussion.
-</p>
-<h4>References</h4>
-<ul>
-<li>
-Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
-Simulation speed analysis and improvements of Modelica
-models for building energy simulation.<br/>
-Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
-</li>
-</ul>
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-July 14, 2015, by Michael Wetter:<br/>
-Revised documentation.
-</li>
-<li>
-May 20, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Examples/Performance/Example2.mos"
-        "Simulate and plot"));
+ <p>
+ This example demonstrates that the use of the parameter <code>from_dp</code>
+ can be important for reducing the size of algebraic loops in hydraulic
+ circuits with many pressure drop components connected in series and
+ a pump setting the pressure head.
+ </p>
+ <p>
+ If <code>from_dp=true</code>, we obtain: <br/>
+ 
+ Sizes of nonlinear systems of equations: {7}<br/>
+ Sizes after manipulation of the nonlinear systems: {<b>5</b>}<br/>
+ If <code>from_dp=false</code>, we obtain: <br/>
+ Sizes of nonlinear systems of equations: {7}<br/>
+ Sizes after manipulation of the nonlinear systems: {<b>1</b>}<br/>
+ </p>
+ <p>
+ This can have a large impact on computational speed.
+ </p>
+ <p>
+ Following script can be used in Dymola to compare the CPU times.
+ </p>
+ <p>
+ <code>
+ cpuOld=OutputCPUtime;<br/>
+ evaluateOld=Evaluate;<br/>
+ OutputCPUtime:=true;<br/>
+ simulateModel(\"AixLib.Fluid.Examples.Performance.Example2(from_dp.k=false)\", stopTime=10000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example2\");<br/>
+ simulateModel(\"AixLib.Fluid.Examples.Performance.Example2(from_dp.k=true)\", stopTime=10000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example2\");<br/>
+ createPlot(id=1, position={15, 10, 592, 421}, range={0.0, 10000.0, -0.01, 25}, autoscale=false, grid=true);<br/>
+ plotExpression(apply(Example2[end-1].CPUtime), false, \"from_dp=false\", 1);<br/>
+ plotExpression(apply(Example2[end].CPUtime), false, \"from_dp=true\", 1);<br/>
+ OutputCPUtime=cpuOld;<br/>
+ Evaluate=evaluateOld;<br/>
+ </code>
+ </p>
+ <p>
+ See Jorissen et al. (2015) for a discussion.
+ </p>
+ <h4>References</h4>
+ <ul>
+ <li>
+ Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
+ Simulation speed analysis and improvements of Modelica
+ models for building energy simulation.<br/>
+ Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
+ </li>
+ </ul>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ July 14, 2015, by Michael Wetter:<br/>
+ Revised documentation.
+ </li>
+ <li>
+ May 20, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example2.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Example2;

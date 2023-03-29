@@ -3,7 +3,7 @@ model EightPortHeatMassExchanger
   "EightPortHeatMassExchanger example model"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
 
   Sources.Boundary_pT sin(          redeclare package Medium = Medium, nPorts=4)
@@ -101,20 +101,20 @@ equation
   connect(eigPor.port_a4, sin.ports[4]) annotation (Line(points={{10,2},{16,2},
           {16,-50},{3,-50}}, color={0,127,255}));
   annotation (    Documentation(info="<html>
-<p>
-This example model demonstrates the use of the
-<a href=\"modelica://AixLib.Fluid.Interfaces.EightPortHeatMassExchanger\">EightPortHeatMassExchanger</a> model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example model demonstrates the use of the
+ <a href=\"modelica://AixLib.Fluid.Interfaces.EightPortHeatMassExchanger\">EightPortHeatMassExchanger</a> model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 18, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=5),
-__Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Interfaces/Examples/EightPortHeatMassExchanger.mos"
-        "Simulate and plot"));
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/EightPortHeatMassExchanger.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EightPortHeatMassExchanger;

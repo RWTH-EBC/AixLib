@@ -1,6 +1,7 @@
 within AixLib.Utilities.Sources;
 model HourOfDay "Computes the hour of day taking the second of year as input"
-  Modelica.Blocks.Sources.Clock clock(offset = -startTime) annotation(Placement(transformation(extent = {{-20, 20}, {0, 40}})));
+  Modelica.Blocks.Sources.ContinuousClock clock(offset=-startTime)
+    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Interfaces.RealOutput SOY "second of the year" annotation(Placement(transformation(extent = {{90, 70}, {110, 90}})));
   Modelica.Blocks.Interfaces.RealOutput H "passed hours" annotation(Placement(transformation(extent = {{90, 10}, {110, 30}})));
   Modelica.Blocks.Interfaces.RealOutput D "passed days" annotation(Placement(transformation(extent = {{90, -50}, {110, -30}})));

@@ -1,11 +1,12 @@
-GenericPipe
 CheckValve
+GenericPipe
 HydraulicDiameter
 HydraulicResistance
 Junction
 LosslessPipe
 Pipe
 PlugFlowPipe
+PlugFlowPipeDiscretized
 PressureDrop
 SimplePipe
 Examples

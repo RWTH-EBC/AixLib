@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
+﻿within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
 model TemperatureDependentMoistureOutputSIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 
@@ -10,12 +10,12 @@ model TemperatureDependentMoistureOutputSIA2024
 
   Modelica.Blocks.Interfaces.RealOutput moistOutput "Moisture output in g/h"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  TemperatureDependentHeatOutputSIA2024 temperatureDependentHeatOutput_SIA2024
+  TemperatureDependentHeatOutputSIA2024 temperatureDependentHeatOutput_SIA2024(activityDegree=activityDegree)
     "Temperature dependent heat output"
     annotation (Placement(transformation(extent={{-74,32},{-54,52}})));
 protected
   constant Real HeatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
-  constant Modelica.SIunits.Area BodySurface=1.8 "Body surface of one person";
+  constant Modelica.Units.SI.Area BodySurface=1.8 "Body surface of one person";
   constant Real MoistGain(unit="g/h") = 10/7 "Gain for moisture output";
 equation
 

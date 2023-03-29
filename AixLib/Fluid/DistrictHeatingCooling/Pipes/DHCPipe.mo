@@ -1,6 +1,10 @@
 ﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
+<<<<<<< HEAD
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+=======
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
+>>>>>>> development
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
@@ -14,13 +18,25 @@ model DHCPipe "Generic pipe model for DHC applications"
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Dialog(tab="Advanced"));
 
+<<<<<<< HEAD
   parameter Modelica.SIunits.Velocity v_nominal = 1.5
     "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
     annotation(Dialog(group="Nominal condition"));
+=======
+  parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/
+      v_nominal/Modelica.Constants.pi)
+    "Hydraulic diameter (assuming a round cross section area)"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.Velocity v_nominal=1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation (Dialog(group="Nominal condition"));
+>>>>>>> development
 
   parameter Real ReC=4000
     "Reynolds number where transition to turbulent starts";
 
+<<<<<<< HEAD
   parameter Modelica.SIunits.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
     annotation (Dialog(group="Material"));
@@ -52,15 +68,64 @@ model DHCPipe "Generic pipe model for DHC applications"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Temperature T_start_out(start=Medium.T_default)=
     T_start_in "Initialization temperature at pipe outlet"
+=======
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
+    "Average height of surface asperities (default: smooth steel pipe)"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.Length length "Pipe length"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal)
+    "Small mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced"));
+
+  parameter Modelica.Units.SI.Length dIns
+    "Thickness of pipe insulation, used to compute R"
+    annotation (Dialog(group="Thermal resistance"));
+
+  parameter Modelica.Units.SI.ThermalConductivity kIns
+    "Heat conductivity of pipe insulation, used to compute R"
+    annotation (Dialog(group="Thermal resistance"));
+
+  parameter Modelica.Units.SI.SpecificHeatCapacity cPip=2300
+    "Specific heat of pipe wall material. 2300 for PE, 500 for steel"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.Density rhoPip(displayUnit="kg/m3") = 930
+    "Density of pipe wall material. 930 for PE, 8000 for steel"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)=
+    Medium.T_default "Initialization temperature at pipe inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)=
+       T_start_in "Initialization temperature at pipe outlet"
+>>>>>>> development
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay(start=false) = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
     annotation (Dialog(tab="Initialization"));
+<<<<<<< HEAD
   parameter Modelica.SIunits.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe"
     annotation (Dialog(tab="Initialization", enable=initDelay));
 
   parameter Real R(unit="(m.K)/W")=1/(kIns*2*Modelica.Constants.pi/
     Modelica.Math.log((parameterPipe.d_i/2 + dIns)/(parameterPipe.d_i/2)))
+=======
+  parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
+    "Initial value of mass flow rate through pipe"
+    annotation (Dialog(tab="Initialization", enable=initDelay));
+
+  parameter Real R(unit="(m.K)/W")=1/(kIns*2*Modelica.Constants.pi/
+    Modelica.Math.log((dh/2 + dIns)/(dh/2)))
+>>>>>>> development
     "Thermal resistance per unit length from fluid to boundary temperature"
     annotation (Dialog(group="Thermal resistance"));
 
@@ -72,7 +137,11 @@ model DHCPipe "Generic pipe model for DHC applications"
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc. if use_zeta"
     annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
+<<<<<<< HEAD
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+=======
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+>>>>>>> development
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   parameter Boolean linearized = false
@@ -83,6 +152,7 @@ model DHCPipe "Generic pipe model for DHC applications"
   //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
   //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück --> move to docu
 
+<<<<<<< HEAD
   parameter Modelica.SIunits.Density rhoSoi = 1630 "Density of material/soil"
   annotation(Dialog(tab="Soil", enable=use_soil));
 
@@ -101,22 +171,50 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
   annotation(Dialog(tab="Soil", enable=use_soil));
+=======
+  parameter Modelica.Units.SI.Density rho_soi=1630 "Density of material/soil"
+    annotation (Dialog(tab="Soil", enable=use_soil));
+
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1046
+    "Specific heat capacity of material/soil"
+    annotation (Dialog(tab="Soil", enable=use_soil));
+  parameter Modelica.Units.SI.Length thickness_soi=0.6
+    "thickness of soil layer for heat loss calulcation"
+    annotation (Dialog(tab="Soil", enable=use_soil));
+
+  parameter Modelica.Units.SI.ThermalConductivity lambda=1.5
+    "Heat conductivity of material/soil"
+    annotation (Dialog(tab="Soil", enable=use_soil));
+
+  final parameter Modelica.Units.SI.Length d_in=dh + 2*thickness
+    "Inner diameter of pipe" annotation (Dialog(tab="Soil", enable=use_soil));
+
+  final parameter Modelica.Units.SI.Temperature T0=289.15 "Initial temperature"
+    annotation (Dialog(tab="Soil"));
+>>>>>>> development
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equations"));
 
+<<<<<<< HEAD
   parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
            AixLib.DataBase.Pipes.PE_X.DIN_16893_SDR11_d32() "Pipe type"
     annotation (choicesAllMatching=true);
 
+=======
+>>>>>>> development
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
   replaceable AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore pipCor(
     redeclare final package Medium = Medium,
+<<<<<<< HEAD
     final dh=parameterPipe.d_i,
+=======
+    final dh=dh,
+>>>>>>> development
     final v_nominal=v_nominal,
     final length=length,
     final C=C,
@@ -136,7 +234,11 @@ model DHCPipe "Generic pipe model for DHC applications"
     final homotopyInitialization=homotopyInitialization,
     final linearized=linearized) constrainedby Interfaces.PartialTwoPort(
     redeclare package Medium = Medium,
+<<<<<<< HEAD
     dh=parameterPipe.d_i,
+=======
+    dh=dh,
+>>>>>>> development
     v_nominal=v_nominal,
     length=length,
     C=C,
@@ -167,11 +269,19 @@ model DHCPipe "Generic pipe model for DHC applications"
   // See also AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.TransportWaterAir
   // for why mSenFac is 10 and not 1000, as this gives more reasonable
   // temperature step response
+<<<<<<< HEAD
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
     final nPorts=nPorts + 1,
+=======
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
+    redeclare final package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    final V=if rho_default > 500 then VEqu else VEqu/1000,
+    final nPorts=2,
+>>>>>>> development
     final T_start=T_start_out,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac = if rho_default > 500 then 1 else 10)
@@ -180,6 +290,7 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra1(
     final energyDynamics=energyDynamics,
+<<<<<<< HEAD
     final rho=rhoSoi,
     final c=c,
     final d_in=parameterPipe.d_i + 2*thickness,
@@ -187,10 +298,20 @@ model DHCPipe "Generic pipe model for DHC applications"
     final length=length,
     final lambda=lambda,
     T0=T0) if     use_soil
+=======
+    final rho=rho_soi,
+    final c=c,
+    final d_in=dh + 2*thickness,
+    final d_out=d_in + thickness_soi/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+>>>>>>> development
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2(
     final energyDynamics=energyDynamics,
+<<<<<<< HEAD
     final rho=rhoSoi,
     final c=c,
     final d_in=parameterPipe.d_i + 2*thickness + thickness_ground/3,
@@ -215,6 +336,33 @@ protected
     length*((parameterPipe.d_i + 2*thickness)^2 - parameterPipe.d_i^2)*Modelica.Constants.pi/4*parameterPipe.c*parameterPipe.d "Heat capacity of pipe wall";
 
   final parameter Modelica.SIunits.Volume VEqu=CPip/(rho_default*cp_default)
+=======
+    final rho=rho_soi,
+    final c=c,
+    final d_in=dh + 2*thickness + thickness_soi/3,
+    final d_out=d_in + 2*thickness_soi/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+    annotation (Placement(transformation(extent={{-10,46},{10,66}})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3(
+    final energyDynamics=energyDynamics,
+    final rho=rho_soi,
+    final c=c,
+    final d_in=dh + 2*thickness + 2*thickness_soi/3,
+    final d_out=d_in + thickness_soi,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+    annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
+
+protected
+  parameter Modelica.Units.SI.HeatCapacity CPip=length*((dh + 2*thickness)^2 -
+      dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
+
+  final parameter Modelica.Units.SI.Volume VEqu=CPip/(rho_default*cp_default)
+>>>>>>> development
     "Equivalent water volume to represent pipe wall thermal inertia";
 
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
@@ -222,21 +370,33 @@ protected
       p=Medium.p_default,
       X=Medium.X_default) "Default medium state";
 
+<<<<<<< HEAD
   parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+=======
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+>>>>>>> development
       Medium.specificHeatCapacityCp(state=sta_default)
     "Heat capacity of medium";
 
   parameter Real C(unit="J/(K.m)")=
+<<<<<<< HEAD
     rho_default*Modelica.Constants.pi*(parameterPipe.d_i/2)^2*cp_default
     "Thermal capacity per unit length of water in pipe";
 
   parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+=======
+    rho_default*Modelica.Constants.pi*(dh/2)^2*cp_default
+    "Thermal capacity per unit length of water in pipe";
+
+  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
+>>>>>>> development
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default)
     "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
     annotation (Dialog(group="Advanced"));
 
+<<<<<<< HEAD
   Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
   Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
@@ -245,6 +405,18 @@ protected
 public
   FixedResistances.HydraulicResistance hydRes(
     diameter=parameterPipe.d_i,
+=======
+  Modelica.Units.SI.Velocity v_med "Velocity of the medium in the pipe";
+
+  Modelica.Units.SI.Heat Q_los(start=0.0, fixed=true)
+    "Integrated heat loss of the pipe";
+  Modelica.Units.SI.Heat Q_gai(start=0.0, fixed=true)
+    "Integrated heat gain of the pipe";
+
+public
+  FixedResistances.HydraulicResistance hydRes(
+    diameter=dh,
+>>>>>>> development
     m_flow_nominal=m_flow_nominal,
     redeclare package Medium = Medium,
     zeta=sum_zetas,
@@ -254,12 +426,18 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+<<<<<<< HEAD
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1) if
        not use_soil "Thermal pass through if there is no soil activated"
+=======
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
+    if not use_soil "Thermal pass through if there is no soil activated"
+>>>>>>> development
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-16,54})));
+<<<<<<< HEAD
   Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium) if
                                                     not use_zeta
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
@@ -276,6 +454,22 @@ equation
     annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
   end for;
+=======
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
+                                                 if not use_zeta
+    annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
+equation
+  //calculation of the flow velocity of water in the pipes
+  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+  //calculation of heat losses and heat gains of pipe
+  der(Q_los) = min(0, pipCor.heatPort.Q_flow);
+  der(Q_gai) = max(0, pipCor.heatPort.Q_flow);
+
+  connect(vol.ports[2], port_b)
+    annotation (Line(points={{71,20},{72,20},{72,6},{72,0},{100,0}},
+        color={0,127,255}));
+>>>>>>> development
 
   connect(pipCor.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
@@ -379,12 +573,17 @@ equation
           textString="Zeta=%sum_zetas",
           visible=use_zeta)}),
     Documentation(revisions="<html><ul>
+<<<<<<< HEAD
     <li>November 12, 2020, by Michael Mans:<br/>
+=======
+  <li>November 12, 2020, by Michael Mans:<br/>
+>>>>>>> development
     First implementation
   </li>
 </ul>
 </html>", info="<html>
 <p>
+<<<<<<< HEAD
   This pipe aims to enable the representation of all one pipe district heating 
   and cooling pipe applications for dynamic simulation of district heating and 
   cooling grids.
@@ -392,6 +591,15 @@ equation
 <p>
   Pipe with heat loss using the wether the time delay based heat losses and
   transport of the fluid using a plug flow model, applicable for
+=======
+  This pipe aims to enable the representation of all one pipe district
+  heating and cooling pipe applications for dynamic simulation of
+  district heating and cooling grids.
+</p>
+<p>
+  Pipe with heat loss using the wether the time delay based heat losses
+  and transport of the fluid using a plug flow model, applicable for
+>>>>>>> development
   simulation of long pipes such as in district heating and cooling
   systems, or the more staty-state based approach with the static core.
 </p>
@@ -402,10 +610,17 @@ equation
   a static factor or using the sum of zeta values.
 </p>
 <p>
+<<<<<<< HEAD
   In addition this model is able to represent a very simplified ground around 
   the pipe. With 3 capacities and the possibility to define the soil properties, 
   this enables the user of this pipe model to account for heat losses in a more 
   accurate way.
+=======
+  In addition this model is able to represent a very simplified soil
+  around the pipe. With 3 capacities and the possibility to define the
+  soil properties, this enables the user of this pipe model to account
+  for heat losses in a more accurate way.
+>>>>>>> development
 </p>
 <h4>
   Implementation
@@ -414,7 +629,12 @@ equation
   This model is based on <a href=
   \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>
   or on <a href=
+<<<<<<< HEAD
   \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore\">AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore</a>
+=======
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore\">
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore</a>
+>>>>>>> development
   .
 </p>
 <p>
@@ -464,8 +684,13 @@ equation
   through a static factor which has to given prior.
 </p>
 <p>
+<<<<<<< HEAD
   The Soil model is represented by three capacities which can be parameterized
   in the Soil Tab of the model.
+=======
+  The Soil model is represented by three capacities which can be
+  parameterized in the Soil Tab of the model.
+>>>>>>> development
 </p>
 <h4>
   Assumptions

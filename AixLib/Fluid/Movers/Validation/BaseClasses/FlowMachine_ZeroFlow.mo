@@ -5,9 +5,9 @@ partial model FlowMachine_ZeroFlow
   replaceable package Medium = AixLib.Media.Air
       constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal = 500
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=500
     "Nominal pressure difference";
 
   Modelica.Blocks.Sources.Ramp y(
@@ -93,33 +93,34 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
             160}})),
     Documentation(info="<html>
-<p>
-This is the base class for examples that demonstrates the use of a flow machine whose flow rate transitions to zero.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-September 20, 2014, by Michael Wetter:<br/>
-Added <code>constrainedby</code> declaration for medium.
-Otherwise, the pedantic model check of
-<a href=\"modelica://AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm_Data\">
-AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm_Data</a>
-fails because water does not implemented the function
-<code>Xsaturation</code>.
-</li>
-<li>February 20, 2016, by Ruben Baetens:<br/>
-Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
-</li>
-<li>
-March 24 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This is the base class for examples that demonstrates the use of a flow machine whose flow rate transitions to zero.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ September 20, 2014, by Michael Wetter:<br/>
+ Added <code>constrainedby</code> declaration for medium.
+ Otherwise, the pedantic model check of
+ <a href=\"modelica://AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm_Data\">
+ AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm_Data</a>
+ fails because water does not implemented the function
+ <code>Xsaturation</code>.
+ </li>
+ <li>February 20, 2016, by Ruben Baetens:<br/>
+ Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+ </li>
+ <li>
+ March 24 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowMachine_ZeroFlow;

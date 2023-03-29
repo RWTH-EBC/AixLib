@@ -3,10 +3,11 @@ partial model PartialSunblind "A Base Class for Sunblindes"
 
   parameter Integer n=4
     "Size of solar vector (orientations)";
-  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n](each min=0.0,
+  parameter Modelica.Units.SI.TransmissionCoefficient gsunblind[n](
+    each min=0.0,
     each max=1.0) = {1,1,1,1}
     "Total energy transmittances if sunblind is closed";
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax
+  parameter Modelica.Units.SI.RadiantEnergyFluenceRate Imax
     "Intensity at which the sunblind closes (see also TOutAirLimit)";
 
   Utilities.Interfaces.SolarRad_in
@@ -16,7 +17,7 @@ partial model PartialSunblind "A Base Class for Sunblindes"
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={8,-100}), iconTransformation(
+        origin={0,-90}),  iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-90})));
@@ -27,4 +28,5 @@ partial model PartialSunblind "A Base Class for Sunblindes"
 initial equation
   assert(n==size(gsunblind,1),"gsunblind has to have n elements");
 
+  annotation (Diagram(coordinateSystem(extent={{-80,-80},{80,80}})), Icon(coordinateSystem(extent={{-80,-80},{80,80}})));
 end PartialSunblind;

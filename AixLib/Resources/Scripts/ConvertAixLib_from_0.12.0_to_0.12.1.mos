@@ -1,0 +1,32 @@
+﻿clear
+
+convertClear();
+
+convertClass("AixLib.FastHVAC", "AixLib.Obsolete.YearIndependent.FastHVAC");
+convertClass("AixLib.Utilities.HeatTransfer.HeatConvPipeInside", "AixLib.Obsolete.YearIndependent.Utilities.HeatTransfer.HeatConvPipeInside");
+
+// Change naming in AixLib.Controls.Interfaces.ThermalMachineControlBus
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"n"}, {"nSet"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"mode"}, {"modeSet"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_flow_ev"}, {"TEvaInMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_flow_co"}, {"TConInMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_ret_co"}, {"TConOutMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_ret_ev"}, {"TEvaOutMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"Pel"}, {"PelMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"m_flow_ev"}, {""});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"m_flow_co"}, {""});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"CoP"}, {"CoPMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_oda"}, {"TOdaMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_eva"}, {"TEvaAmbMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_con"}, {"TConAmbMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"iceFac"}, {"iceFacMea"});
+
+// Change naming of ThermalMachine to VapourCompressionMachine
+convertClass("AixLib.Controls.Interfaces.ThermalMachineControlBus", "AixLib.Controls.Interfaces.VapourCompressionMachineControlBus");
+convertClass("AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine", "AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine");
+
+// Change naming of Security to safety
+convertClass("AixLib.Controls.HeatPump.SecurityControls", "AixLib.Controls.HeatPump.SafetyControls");
+convertClass("AixLib.Controls.HeatPump.SecurityControls.SecurityControl", "AixLib.Controls.HeatPump.SafetyControls.SafetyControl");
+convertClass("AixLib.Controls.HeatPump.SecurityControls.BaseClasses.PartialSecurityControl", "AixLib.Controls.HeatPump.SafetyControls.BaseClasses.PartialSafetyControl");
+

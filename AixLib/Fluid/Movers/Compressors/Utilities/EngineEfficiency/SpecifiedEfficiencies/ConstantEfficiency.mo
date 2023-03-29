@@ -6,7 +6,7 @@ model ConstantEfficiency
 
   // Definition of parameters
   //
-  parameter Modelica.SIunits.Efficiency etaEngCon = 0.9
+  parameter Modelica.Units.SI.Efficiency etaEngCon=0.9
     "Constant overall engine efficiency";
 
 equation

@@ -1,7 +1,7 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 expandable connector HydraulicBus "Data bus for hydraulic circuits"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus
     pumpBus;
   Real valveSet(min=0, max=1) "Valve opening setpoint 0..1";

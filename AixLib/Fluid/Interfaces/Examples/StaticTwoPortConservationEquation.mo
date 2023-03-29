@@ -105,25 +105,26 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/StaticTwoPortConservationEquation.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-Model that tests the conservation equations that are used
-for the heat and mass balance.
-The instances have either water or air, and either allow or prohibit
-flow reversal.
-This example tests the implementation of the steady-state balance.
-</p>
-</html>",
+ <p>
+ Model that tests the conservation equations that are used
+ for the heat and mass balance.
+ The instances have either water or air, and either allow or prohibit
+ flow reversal.
+ This example tests the implementation of the steady-state balance.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 22, 2016 by Michael Wetter:<br/>
-Updated model to use the new parameter <code>use_mWat_flow</code>
-rather than <code>sensibleOnly</code>.
-</li>
-<li>
-July 17, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ January 22, 2016 by Michael Wetter:<br/>
+ Updated model to use the new parameter <code>use_mWat_flow</code>
+ rather than <code>sensibleOnly</code>.
+ </li>
+ <li>
+ July 17, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StaticTwoPortConservationEquation;

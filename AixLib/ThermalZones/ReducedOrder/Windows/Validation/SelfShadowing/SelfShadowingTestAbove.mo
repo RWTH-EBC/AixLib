@@ -14,11 +14,12 @@ model SelfShadowingTestAbove
     final bBel={0},
     final dAbo={0.01},
     final dBel={0},
-    final azi(displayUnit="deg") = {0},
-    final til(displayUnit="deg") = {1.5707963267949})
+    final azi={0},
+    final til={1.5707963267949})
     "Shadowing due to a projection above the window"
           annotation (Placement(transformation(extent={{56,46},{88,74}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=
+        1.5707963267949)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-26,40},{-6,60}})));
   Modelica.Blocks.Sources.Constant solAzi(k=0)
@@ -27,8 +28,8 @@ model SelfShadowingTestAbove
   Modelica.Blocks.Sources.Constant alt(k=Modelica.Constants.pi/6)
     "Constant altitude angle"
     annotation (Placement(transformation(extent={{-88,-20},{-68,0}})));
-  Modelica.Blocks.Sources.Sine altSine(freqHz=1, amplitude=Modelica.Constants.pi
-        /3) "Altitude angle generated as a sine"
+  Modelica.Blocks.Sources.Sine altSine(f=1, amplitude=Modelica.Constants.pi/3)
+    "Altitude angle generated as a sine"
     annotation (Placement(transformation(extent={{-88,56},{-68,76}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing selfShadowingAboveSin(
     final n=1,
@@ -42,16 +43,15 @@ model SelfShadowingTestAbove
     final bBel={0},
     final dAbo={0.01},
     final dBel={0},
-    final azi(displayUnit="deg") = {0},
-    final til(displayUnit="deg") = {1.5707963267949})
+    final azi={0},
+    final til={1.5707963267949})
     "Shadowing due to a projection above the window"
           annotation (Placement(transformation(extent={{56,-32},{88,-4}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng2(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng2(azi=0, til=
+        1.5707963267949)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-26,-38},{-6,-18}})));
-  Modelica.Blocks.Sources.Sine solAziSine(
-    freqHz=0.25,
-    amplitude=2*Modelica.Constants.pi)
+  Modelica.Blocks.Sources.Sine solAziSine(f=0.25, amplitude=2*Modelica.Constants.pi)
     "Solar azimuth generated as a sine"
     annotation (Placement(transformation(extent={{-88,-52},{-68,-32}})));
 equation

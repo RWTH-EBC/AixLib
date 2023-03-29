@@ -97,37 +97,38 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-20},{100,
             100}}), graphics),
     Documentation(info="<html>
-<p>
-This partial model is extended by
-<a href=\"modelica://AixLib.Fluid.Examples.Performance.Example1v1\">
-AixLib.Fluid.Examples.Performance.Example1v1</a>
-and
-<a href=\"modelica://AixLib.Fluid.Examples.Performance.Example1v2\">
-AixLib.Fluid.Examples.Performance.Example1v2</a>
-and is created to avoid errors in the implementation of the two depending examples.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 8, 2017, by Michael Wetter:<br/>
-Updated heater model.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
-AixLib, #763</a>.
-</li>
-<li>
-February 22, 2016, by Michael Wetter:<br/>
-Removed parameter <code>dynamicBalance</code> for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">issue 411</a>.
-</li>
-<li>
-July 14, 2015, by Michael Wetter:<br/>
-Revised documentation.
-</li>
-<li>
-April 17, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This partial model is extended by
+ <a href=\"modelica://AixLib.Fluid.Examples.Performance.Example1v1\">
+ AixLib.Fluid.Examples.Performance.Example1v1</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.Examples.Performance.Example1v2\">
+ AixLib.Fluid.Examples.Performance.Example1v2</a>
+ and is created to avoid errors in the implementation of the two depending examples.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 8, 2017, by Michael Wetter:<br/>
+ Updated heater model.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+ AixLib, #763</a>.
+ </li>
+ <li>
+ February 22, 2016, by Michael Wetter:<br/>
+ Removed parameter <code>dynamicBalance</code> for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">issue 411</a>.
+ </li>
+ <li>
+ July 14, 2015, by Michael Wetter:<br/>
+ Revised documentation.
+ </li>
+ <li>
+ April 17, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Example1;

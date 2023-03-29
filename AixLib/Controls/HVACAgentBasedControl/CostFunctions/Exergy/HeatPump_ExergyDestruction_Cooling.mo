@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
+﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
 model HeatPump_ExergyDestruction_Cooling
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";
@@ -60,10 +60,11 @@ model HeatPump_ExergyDestruction_Cooling
     annotation (Placement(transformation(extent={{-28,60},{-8,80}})));
   Modelica.Blocks.Math.Add add3(k2=-1)
     annotation (Placement(transformation(extent={{-68,22},{-48,42}})));
-  Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower) annotation(Placement(transformation(extent={{54,-62},
-            {74,-42}})));
-  Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser) annotation(Placement(transformation(extent={{54,-94},
-            {74,-74}})));
+  Modelica.Blocks.Tables.CombiTable2Ds PowerTable(table=tablePower)
+    annotation (Placement(transformation(extent={{54,-62},{74,-42}})));
+  Modelica.Blocks.Tables.CombiTable2Ds HeatFlowCondenserTable(table=
+        tableHeatFlowCondenser)
+    annotation (Placement(transformation(extent={{54,-94},{74,-74}})));
 equation
 
  COP = HeatFlowCondenserTable.y/PowerTable.y;

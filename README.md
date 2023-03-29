@@ -1,8 +1,6 @@
 Branch for the development in TransUrban.NRW
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
 
-[![Travis CI](https://travis-ci.org/RWTH-EBC/AixLib.svg?branch=master)](https://travis-ci.org/RWTH-EBC/AixLib)
-
 # AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  

@@ -67,10 +67,10 @@ model Stratified "Test model for stratified tank"
     "Pressure boundary condition"
                  annotation (Placement(transformation(extent={{20,60},{40,80}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/86400,
+    f=1/86400,
     amplitude=10,
-    offset=273.15 + 20) annotation (Placement(transformation(extent={{-90,62},{
-            -70,82}})));
+    offset=273.15 + 20)
+    annotation (Placement(transformation(extent={{-90,62},{-70,82}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TBCSid2
     "Boundary condition for tank" annotation (Placement(transformation(extent={
             {-40,50},{-28,62}})));
@@ -147,18 +147,19 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/Stratified.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This test model compares two tank models. The only difference between
-the two tank models is that one uses the third order upwind discretization
-scheme that reduces numerical diffusion that is induced when connecting
-volumes in series.
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-</ul>
-</html>"));
+ This test model compares two tank models. The only difference between
+ the two tank models is that one uses the third order upwind discretization
+ scheme that reduces numerical diffusion that is induced when connecting
+ volumes in series.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Stratified;

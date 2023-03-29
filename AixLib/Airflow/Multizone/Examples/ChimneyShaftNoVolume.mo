@@ -1,13 +1,12 @@
 within AixLib.Airflow.Multizone.Examples;
 model ChimneyShaftNoVolume
-  "Model that demonstrates the chimney effect with a steady-state model of a shaft"
+  "Model with chimney effect and a steady-state model of a shaft"
   extends Modelica.Icons.Example;
   package Medium = Modelica.Media.Air.SimpleAir;
 
   AixLib.Fluid.MixingVolumes.MixingVolume roo(
     V=2.5*5*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=273.15 + 20,
     redeclare package Medium = Medium,
     m_flow_nominal=0.05,
@@ -17,7 +16,8 @@ model ChimneyShaftNoVolume
   AixLib.Airflow.Multizone.Orifice oriChiTop(
     m=0.5,
     redeclare package Medium = Medium,
-    A=0.01) annotation (Placement(transformation(
+    A=0.01) "Orifice at top"
+            annotation (Placement(transformation(
         origin={70,11},
         extent={{-10,-10},{10,10}},
         rotation=90)));
@@ -25,19 +25,21 @@ model ChimneyShaftNoVolume
     redeclare package Medium = Medium,
     use_m_flow_in=true,
     T=293.15,
-    nPorts=1)
+    nPorts=1) "Mass flow rate boundary condition"
     annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
   AixLib.Fluid.Sources.Boundary_pT bou0(
     redeclare package Medium = Medium,
     T=273.15,
-    nPorts=2) annotation (Placement(transformation(
+    nPorts=2) "Pressure boundary condition"
+              annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={90,50})));
   AixLib.Airflow.Multizone.Orifice oriBot(
     m=0.5,
     redeclare package Medium = Medium,
-    A=0.01) annotation (Placement(transformation(
+    A=0.01) "Orifice"
+            annotation (Placement(transformation(
         origin={110,-20},
         extent={{10,-10},{-10,10}},
         rotation=90)));
@@ -53,12 +55,14 @@ model ChimneyShaftNoVolume
   AixLib.Airflow.Multizone.Orifice oriChiBot(
     m=0.5,
     redeclare package Medium = Medium,
-    A=0.01) annotation (Placement(transformation(
+    A=0.01) "Orifice at bottom"
+            annotation (Placement(transformation(
         origin={70,-49},
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea
-    "Prescribed heat flow" annotation (Placement(transformation(
+    "Prescribed heat flow rate"
+                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,10})));
@@ -76,7 +80,7 @@ model ChimneyShaftNoVolume
     "Temperature sensor" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={-80,0})));
-  Modelica.Blocks.Math.Gain gain(k=3000)
+  Modelica.Blocks.Math.Gain gain(k=3000) "Gain for heat flow rate"
     annotation (Placement(transformation(extent={{-28,20},{-8,40}})));
   AixLib.Airflow.Multizone.MediumColumn sha(redeclare package Medium = Medium,
       densitySelection=AixLib.Airflow.Multizone.Types.densitySelection.actual) "Shaft of chimney"
@@ -114,8 +118,7 @@ equation
           -50}},
       color={191,0,0}));
   connect(roo.heatPort, temSen.port) annotation (Line(
-      points={{20,-50},{-40,-50},{-40,-20},{-96,-20},{-96,6.10623e-16},{-90,
-          6.10623e-16}},
+      points={{20,-50},{-94,-50},{-94,6.10623e-16},{-90,6.10623e-16}},
       color={191,0,0}));
   connect(bou0.ports[1], oriChiTop.port_b)  annotation (Line(
       points={{92,40},{88,40},{88,34},{70,34},{70,21}},
@@ -146,71 +149,77 @@ equation
       StopTime=3600,
       Tolerance=1e-06),
     Documentation(info="<html>
-<p>
-This model demonstrate buoyancy-induced air flow
-through a vertical shaft.
-On the right, there are two flow paths that are connected
-to a volume, which is kept at 20&deg;C through a feedback
-controller, and to the ambient, which is at
-0&deg;C.
-The flow path on the very right consists of an orifice
-and two models that compute the pressure difference
-<i>&Delta;p</i>
-between
-the bottom and top of the medium column using <i>&Delta;p=h &rho; g</i>,
-where
-<i>h</i> is the height of the medium column,
-<i>&rho;</i> is the density of the medium column and
-<i>g</i> is the gravity constant.
-</p>
-<p>
-The top model is parameterized to use the
-density from the ambient,
-whereas the bottom model is parameterized to use
-the density from the room volume, regardless of
-the flow direction.
-In the other flow path, the model <code>sha</code>
-is parameterized to use the density of the inflowing
-medium.
-Thus, these models can be thought of as a chimney to the left,
-and a roof with a leakage on the right. The chimney height starts
-<i>1.5</i> m below the roof, and ends <i>1.5</i> m above the roof.
-</p>
-<p>
-The flow boundary condition of the model
-<code>boundary</code> is such that at the start
-of the simulation, air flows from <code>boundary</code>
-to <code>roo</code> until <i>t=600</i> seconds. Then, the flow rate
-is set to zero until <i>t=1800</i> seconds.
-Since the shaft <code>sha</code> is filled with
-20&deg;C air, there is a circulation in the clock-wise
-direction; up the shaft, and down the other flow path.
-Next, until <i>t=2400</i> seconds, air is extracted from
-the volume <code>roo</code>, and then the flow rate
-of <code>boundary</code> is set to zero. Since the
-shaft <code>sha</code> is now filed with air at 0&deg;C,
-there is a counter clock-wise flow; down the shaft, and
-up the other flow path.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 24, 2015 by Michael Wetter:<br/>
-Changed media to
-<a href=\"modelica://Modelica.Media.Air.SimpleAir\">
-Modelica.Media.Air.SimpleAir</a>
-in order to test the medium column for a media that has no moisture.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model demonstrate buoyancy-induced air flow
+ through a vertical shaft.
+ On the right, there are two flow paths that are connected
+ to a volume, which is kept at 20&deg;C through a feedback
+ controller, and to the ambient, which is at
+ 0&deg;C.
+ The flow path on the very right consists of an orifice
+ and two models that compute the pressure difference
+ <i>&Delta;p</i>
+ between
+ the bottom and top of the medium column using <i>&Delta;p=h &rho; g</i>,
+ where
+ <i>h</i> is the height of the medium column,
+ <i>&rho;</i> is the density of the medium column and
+ <i>g</i> is the gravity constant.
+ </p>
+ <p>
+ The top model is parameterized to use the
+ density from the ambient,
+ whereas the bottom model is parameterized to use
+ the density from the room volume, regardless of
+ the flow direction.
+ In the other flow path, the model <code>sha</code>
+ is parameterized to use the density of the inflowing
+ medium.
+ Thus, these models can be thought of as a chimney to the left,
+ and a roof with a leakage on the right. The chimney height starts
+ <i>1.5</i> m below the roof, and ends <i>1.5</i> m above the roof.
+ </p>
+ <p>
+ The flow boundary condition of the model
+ <code>boundary</code> is such that at the start
+ of the simulation, air flows from <code>boundary</code>
+ to <code>roo</code> until <i>t=600</i> seconds. Then, the flow rate
+ is set to zero until <i>t=1800</i> seconds.
+ Since the shaft <code>sha</code> is filled with
+ 20&deg;C air, there is a circulation in the clock-wise
+ direction; up the shaft, and down the other flow path.
+ Next, until <i>t=2400</i> seconds, air is extracted from
+ the volume <code>roo</code>, and then the flow rate
+ of <code>boundary</code> is set to zero. Since the
+ shaft <code>sha</code> is now filed with air at 0&deg;C,
+ there is a counter clock-wise flow; down the shaft, and
+ up the other flow path.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ February 24, 2015 by Michael Wetter:<br/>
+ Changed media to
+ <a href=\"modelica://Modelica.Media.Air.SimpleAir\">
+ Modelica.Media.Air.SimpleAir</a>
+ in order to test the medium column for a media that has no moisture.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ChimneyShaftNoVolume;

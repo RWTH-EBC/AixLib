@@ -4,6 +4,7 @@ EightPort
 EightPortHeatMassExchanger
 FourPortHeatExchanger
 FourPortHeatMassExchanger
+LumpedVolumeDeclarations
 PartialEightPortInterface
 PartialFourPort
 PartialFourPortInterface
@@ -26,6 +27,5 @@ StaticTwoPortHeatMassExchanger
 TwoPortHeatMassExchanger
 EightPortFlowResistanceParameters
 FourPortFlowResistanceParameters
-LumpedVolumeDeclarations
 TwoPortFlowResistanceParameters
 Examples

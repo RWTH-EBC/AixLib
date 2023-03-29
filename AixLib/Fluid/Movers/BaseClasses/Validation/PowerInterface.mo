@@ -38,18 +38,19 @@ equation
           -20,-30},{-12,-30}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-Simple validation model for the power interface model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 19, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Simple validation model for the power interface model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 19, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/BaseClasses/Validation/PowerInterface.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerInterface;

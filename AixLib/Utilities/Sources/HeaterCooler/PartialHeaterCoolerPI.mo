@@ -6,15 +6,21 @@ partial model PartialHeaterCoolerPI
   parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater = 1
-    "Time constant of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_heater=1
+    "Time constant of the heating controller" annotation (Dialog(
+      tab="Heater",
+      group="Controller",
+      enable=not recOrSep));
   parameter Real h_cooler = 0 "Upper limit controller output of the cooler"
                                                                            annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Real l_cooler = 0 "Lower limit controller output of the cooler"          annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Real KR_cooler = 1000 "Gain of the cooling controller"
                                                                   annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler = 1
-    "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_cooler=1
+    "Time constant of the cooling controller" annotation (Dialog(
+      tab="Cooler",
+      group="Controller",
+      enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam = AixLib.DataBase.ThermalZones.ZoneRecordDummy()

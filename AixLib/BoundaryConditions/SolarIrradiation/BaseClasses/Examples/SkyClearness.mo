@@ -2,8 +2,7 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model SkyClearness "Test model for sky clearness"
   extends Modelica.Icons.Example;
 
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=
-        0.34906585039887)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.SkyClearness skyCle
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
@@ -25,7 +24,7 @@ equation
       textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(weaBus.HGloHor, skyCle.HGloHor) annotation (Line(
+  connect(weaBus.HDirNor, skyCle.HDirNor) annotation (Line(
       points={{8,30},{24,30},{24,16},{38,16}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -49,19 +48,20 @@ equation
       extent={{-6,3},{-6,3}}));
   annotation (
 Documentation(info="<html>
-<p>
-This example computes the sky clearness.
-</p>
-</html>",
+ <p>
+ This example computes the sky clearness.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-July 07, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ July 07, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(StartTime=100000, Tolerance=1e-6, StopTime=3000000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/SkyClearness.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SkyClearness;

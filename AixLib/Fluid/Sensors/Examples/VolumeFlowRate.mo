@@ -26,7 +26,8 @@ model VolumeFlowRate "Test model for the volume flow rate sensor"
     annotation (Placement(transformation(extent={{-90,-2},{-70,18}})));
   AixLib.Fluid.Sensors.VolumeFlowRate senDyn(
     redeclare package Medium = Medium,
-    m_flow_nominal=10)
+    m_flow_nominal=10,
+    tau=1)
     "Sensor configured to use a dynamic model for the density"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.Fluid.Sensors.VolumeFlowRate senSteSta(
@@ -51,22 +52,23 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/VolumeFlowRate.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example tests the volume flow rate sensor.
-One sensor is configured to be steady-state, and the other is
-configured to be dynamic.
-Note that steady-state sensors can lead to numerical problems
-if used incorrectly.
-See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 31, 2013 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the volume flow rate sensor.
+ One sensor is configured to be steady-state, and the other is
+ configured to be dynamic.
+ Note that steady-state sensors can lead to numerical problems
+ if used incorrectly.
+ See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 31, 2013 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end VolumeFlowRate;

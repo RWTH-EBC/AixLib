@@ -1,16 +1,18 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Admix "Admix circuit with three way valve and pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
-    final massDynamics=massDynamics,
+  parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic "Valve characteristic of three way valve"
+    annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
+                                                                           // = AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()
+
+  Fluid.Actuators.Valves.ThreeWayTable valve(
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     y_start=0,
@@ -18,8 +20,10 @@ model Admix "Admix circuit with three way valve and pump"
     final m_flow_nominal=m_flow_nominal,
     final energyDynamics=energyDynamics,
     Kv=Kv,
-    dpFixed_nominal={1000,1000}) annotation (Dialog(enable=true, group="Actuators"),
-      Placement(transformation(
+    dpFixed_nominal={10,10},
+    final flowCharacteristics1=valveCharacteristic.a_ab,
+    final flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(
+        enable=true, group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,20})));
@@ -148,7 +152,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(pipe5.port_a,junc456. ports[1])
-    annotation (Line(points={{-50,-60},{-32.1333,-60}}, color={0,127,255}));
+    annotation (Line(points={{-50,-60},{-31.0667,-60}}, color={0,127,255}));
   connect(pipe6.port_a,junc456. ports[2]) annotation (Line(points={{-30,-28},{
           -30,-44},{-30,-60},{-30,-60}},
                            color={0,127,255}));
@@ -181,7 +185,7 @@ equation
   connect(pipe1.port_b, valve.port_1)
     annotation (Line(points={{-62,20},{-40,20}}, color={0,127,255}));
   connect(pipe4.port_b, junc456.ports[3])
-    annotation (Line(points={{24,-60},{-27.8667,-60}}, color={0,127,255}));
+    annotation (Line(points={{24,-60},{-28.9333,-60}}, color={0,127,255}));
   connect(pipe5.port_b, senT_b2.port_a)
     annotation (Line(points={{-66,-60},{-78,-60}}, color={0,127,255}));
   connect(pipe2.port_b, PumpInterface.port_a) annotation (Line(points={{8,20},{
@@ -297,6 +301,14 @@ equation
   </li>
   <li>February 6, 2016, by Peter Matthes:<br/>
     First implementation
+  </li>
+</ul>
+</html>", revisions="<html><ul>
+  <li>December 06, 2022, by EBC-Modelica group:<br/>
+    Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
+  </li>
+  <li>2017-06 by Alexander Kümpel:<br/>
+    Implemented
   </li>
 </ul>
 </html>"));

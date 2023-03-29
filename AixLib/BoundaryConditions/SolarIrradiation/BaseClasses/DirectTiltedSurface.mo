@@ -19,40 +19,41 @@ equation
   annotation (
     defaultComponentName="HDirTil",
     Documentation(info="<html>
-<p>
-This component computes the direct solar irradiation on a tilted surface.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 27, 2018, by Michael Wetter:<br/>
-Corrected <code>displayUnit</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">AixLib, issue 912</a>.
-</li>
-<li>
-May 5, 2015, by Filip Jorissen:<br/>
-Converted <code>algorithm</code> section into
-<code>equation</code> section for easier differentiability.
-</li>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the direct solar irradiation on a tilted surface.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 27, 2018, by Michael Wetter:<br/>
+ Corrected <code>displayUnit</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+ </li>
+ <li>
+ May 5, 2015, by Filip Jorissen:<br/>
+ Converted <code>algorithm</code> section into
+ <code>equation</code> section for easier differentiability.
+ </li>
+ <li>
+ May 24, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Text(
           extent={{-50,56},{-102,68}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="HDirNor"),
         Text(
           extent={{-54,-66},{-106,-54}},
-          lineColor={0,0,127},
-          textString="incAng")}));
+          textColor={0,0,127},
+          textString="incAng")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DirectTiltedSurface;

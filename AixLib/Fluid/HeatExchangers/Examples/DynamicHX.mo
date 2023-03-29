@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.Examples;
+﻿within AixLib.Fluid.HeatExchangers.Examples;
 model DynamicHX
   "Model that demonstrates use of a simple dynamic heat exchanger"
  package Medium1 = AixLib.Media.Water "Medium model";

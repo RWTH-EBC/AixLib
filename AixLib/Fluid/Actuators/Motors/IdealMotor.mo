@@ -3,8 +3,8 @@ model IdealMotor "Ideal motor model with hysteresis"
   extends Modelica.Blocks.Interfaces.SISO;
 
   parameter Real delta(min=0, max=0.5) = 0.05 "Hysteresis";
-  parameter Modelica.SIunits.Time tOpe(min=0) = 120 "Opening time";
-  parameter Modelica.SIunits.Time tClo(min=0) = tOpe "Closing time";
+  parameter Modelica.Units.SI.Time tOpe(min=0) = 120 "Opening time";
+  parameter Modelica.Units.SI.Time tClo(min=0) = tOpe "Closing time";
   parameter Real y_start(min=0, max=1) = 0.5 "Start position";
 
   Modelica.Blocks.Logical.Hysteresis uppHys(final uLow=0, uHigh=delta,
@@ -73,45 +73,45 @@ equation
    annotation (
 defaultComponentName="mot",
 Documentation(info="<html>
-<p>
-Ideal actuator motor model with hysteresis and finite actuation speed.
-If the current actuator position <code>y</code> is below (or above) the
-input signal <code>u</code> by an amount bigger than the hysteresis
-<code>delta</code>, then the position <code>y</code> is increased (decreased)
-until it reaches <code>u</code>.
-The output <code>y</code> is bounded between <code>0</code> and <code>1</code>.
-</p>
-<p>
-<b>Note:</b> This model can introduce state events which increase the computation time.
-For a more efficient implementation that approximates a motor, set in
-the valve or damper model the parameter <code>use_inputFilter=true</code>
-instead of using this motor model.
-See also
-<a href=\"modelica://AixLib.Fluid.Actuators.UsersGuide\">
-AixLib.Fluid.Actuators.UsersGuide</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-September 8, 2008 by Michael Wetter:<br/>
-Added to instance <code>int</code> the attribute
-<code>y(stateSelect=StateSelect.always)</code>. Without this attribute,
-the model <a href=\"modelica://AixLib.Fluid.Examples.TwoWayValves\">
-AixLib.Fluid.Examples.TwoWayValves</a> sets <code>y=3</code>
-which is consistent with this model.
-</li>
-<li>
-September 8, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Icon(graphics={
+ <p>
+ Ideal actuator motor model with hysteresis and finite actuation speed.
+ If the current actuator position <code>y</code> is below (or above) the
+ input signal <code>u</code> by an amount bigger than the hysteresis
+ <code>delta</code>, then the position <code>y</code> is increased (decreased)
+ until it reaches <code>u</code>.
+ The output <code>y</code> is bounded between <code>0</code> and <code>1</code>.
+ </p>
+ <p>
+ <b>Note:</b> This model can introduce state events which increase the computation time.
+ For a more efficient implementation that approximates a motor, set in
+ the valve or damper model the parameter <code>use_inputFilter=true</code>
+ instead of using this motor model.
+ See also
+ <a href=\"modelica://AixLib.Fluid.Actuators.UsersGuide\">
+ AixLib.Fluid.Actuators.UsersGuide</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ September 8, 2008 by Michael Wetter:<br/>
+ Added to instance <code>int</code> the attribute
+ <code>y(stateSelect=StateSelect.always)</code>. Without this attribute,
+ the model <a href=\"modelica://AixLib.Fluid.Examples.TwoWayValves\">
+ AixLib.Fluid.Examples.TwoWayValves</a> sets <code>y=3</code>
+ which is consistent with this model.
+ </li>
+ <li>
+ September 8, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Icon(graphics={
         Line(points={{-8,-86},{-8,68}}, color={192,192,192}),
         Polygon(
           points={{-7,85},{-15,63},{1,63},{-7,85}},
@@ -126,11 +126,11 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{66,-26},{94,-48}},
-          lineColor={160,160,164},
+          textColor={160,160,164},
           textString="u-y"),
         Text(
           extent={{-3,83},{50,65}},
-          lineColor={160,160,164},
+          textColor={160,160,164},
           textString="v"),
         Line(
           points={{-80,-74},{-8,-74}},
@@ -158,11 +158,11 @@ First implementation.
           thickness=0.5),
         Text(
           extent={{19,-35},{44,-18}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="+delta"),
         Text(
           extent={{-63,-18},{-40,-2}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="-delta"),
         Line(
           points={{-8,22},{-8,-74}},
@@ -172,16 +172,17 @@ First implementation.
           thickness=0.5),
         Text(
           extent={{-37,12},{-10,32}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="vOpen"),
         Text(
           extent={{-4,-86},{30,-64}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="vClose"),
         Line(
           points={{-20,-13},{-30,-18},{-20,-23}},
           thickness=0.5),
         Line(
           points={{6,-13},{16,-18},{6,-23}},
-          thickness=0.5)}));
+          thickness=0.5)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IdealMotor;

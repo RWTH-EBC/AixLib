@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model Injection2WayValve "Test for injection circuit with a 2 way valve"
   extends Modelica.Icons.Example;
 
@@ -54,6 +54,8 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-84, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
 
   connect(hydraulicBus,Injection. hydraulicBus) annotation (Line(
@@ -82,6 +84,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-72, -30}, {-40, -30}, {-40, 10}}, color = {255, 0, 255}));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,

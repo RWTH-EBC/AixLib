@@ -3,8 +3,9 @@ partial model PartialInternalGain
   "Partial model to build a heat source with convective and radiative component"
   parameter Real ratioConv(final min=0, final max=1) = 0.6
     "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Emissivity emissivity(min=0, max=1) = 0.95
-    "Emissivity of radiative heat source surface";
+  parameter Modelica.Units.SI.Emissivity emissivity(
+    min=0,
+    max=1) = 0.95 "Emissivity of radiative heat source surface";
   Modelica.Blocks.Interfaces.RealInput uRel(min=0, max=1) "Relative input related to max. value (might be a ratio related to number of people [-] or room area and specific heat flow [W/m2] or maximal heat flow [W]"
      annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(final T_ref=293.15, final alpha=0)
@@ -34,15 +35,15 @@ equation
   connect(gainRad.y, radiativeHeat.Q_flow) annotation (Line(points={{16.4,-20},{24,-20}}, color={0,0,127}));
   connect(productHeatOutput.y, gainConv.u) annotation (Line(points={{-6.98,0},{0,0},{0,20},{7.2,20}}, color={0,0,127}));
   connect(productHeatOutput.y, gainRad.u) annotation (Line(points={{-6.98,0},{0,0},{0,-20},{7.2,-20}}, color={0,0,127}));
-  connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
-  connect(radConvertor.rad, radHeat) annotation (Line(
-      points={{71.1,-60},{90,-60}},
+  connect(radiativeHeat.port, radConvertor.convPort) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52,-60}}, color={191,0,0}));
+  connect(radConvertor.radPort, radHeat) annotation (Line(
+      points={{72.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(uRel, gain.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
   connect(gain.y, productHeatOutput.u[1]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
   connect(gainSurfaces.y,limiter. u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
-  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-49}}, color={0,0,127}));
   connect(uRel, gainSurfaces.u) annotation (Line(points={{-100,0},{-80,0},{-80,-60},{-61.2,-60}}, color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
   <li>

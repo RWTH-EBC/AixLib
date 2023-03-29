@@ -55,9 +55,8 @@ model MultizonePartlyCooled "Illustrates the use of Multizone"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"
@@ -135,8 +134,12 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(info="<html>
-<p>This example is based on <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>. This example shows the variant of a multi-zone building with some zones where cooling is activated and others where it is not.</p>
+    Documentation(info="<html><p>
+  This example is based on <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.
+  This example shows the variant of a multi-zone building with some
+  zones where cooling is activated and others where it is not.
+</p>
 </html>", revisions="<html>
 <ul>
   <li>August 21, 2020, by Marcus Fuchs:<br/>

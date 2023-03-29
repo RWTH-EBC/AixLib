@@ -38,21 +38,22 @@ equation
             __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/BaseClasses/Examples/ModificationFactor.mos"
         "Simulate and plot"),
         Documentation(info="<html>
-<p>
-This example tests the implementation of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.ModificationFactor\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.ModificationFactor</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the implementation of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.ModificationFactor\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.ModificationFactor</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ModificationFactor;

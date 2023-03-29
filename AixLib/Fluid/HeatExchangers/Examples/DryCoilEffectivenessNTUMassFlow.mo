@@ -2,7 +2,8 @@ within AixLib.Fluid.HeatExchangers.Examples;
 model DryCoilEffectivenessNTUMassFlow
   "Model of epsilon-NTU dry coil that tests variable mass flow rates"
   extends Modelica.Icons.Example;
-  extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.EffectivenessNTUMassFlow(
+  extends
+    AixLib.Fluid.HeatExchangers.Examples.BaseClasses.EffectivenessNTUMassFlow(
     sou_1(nPorts=1),
     sin_1(nPorts=1),
     sou_2(nPorts=1),
@@ -57,18 +58,19 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/DryCoilEffectivenessNTUMassFlow.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model tests
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
-for different mass flow rates.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 12, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model tests
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+ for different mass flow rates.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 12, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DryCoilEffectivenessNTUMassFlow;

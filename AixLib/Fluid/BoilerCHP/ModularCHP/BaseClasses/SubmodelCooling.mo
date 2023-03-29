@@ -10,17 +10,17 @@ model SubmodelCooling
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
+  parameter Modelica.Units.SI.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.ThermalConductance GEngToCoo=45
+  parameter Modelica.Units.SI.ThermalConductance GEngToCoo=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+  parameter Modelica.Units.SI.MassFlowRate
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));

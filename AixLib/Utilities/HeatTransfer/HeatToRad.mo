@@ -1,18 +1,35 @@
-within AixLib.Utilities.HeatTransfer;
+﻿within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
-  parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
+  parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity";
+  parameter Modelica.Units.SI.Temperature T_ref=
+      Modelica.Units.Conversions.from_degC(16)
+    "Reference temperature for optional linearization"
+    annotation (Dialog(enable=radCalcMethod == 4));
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
-                                   annotation (Dialog(enable=not use_A_in));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv "Heat port for convective or conductive heat flow" annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
+  parameter Modelica.Units.SI.Area A=-1 "Fixed value of prescribed area"
+    annotation (Dialog(enable=not use_A_in));
+  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
+    Evaluate=true,
+    Dialog(group = "Radiation exchange equation", compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort
+    "Heat port for convective or conductive heat flow"
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
-        origin={0,90},
+        origin={0,110},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  AixLib.Utilities.Interfaces.RadPort rad "Heat port for longwave radiative heat flow" annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+  AixLib.Utilities.Interfaces.RadPort radPort
+    "Heat port for longwave radiative heat flow"
+    annotation (Placement(transformation(extent={{91,-10},{111,10}}), iconTransformation(extent={{91,-10},{111,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
@@ -21,18 +38,26 @@ initial equation
     assert(A > 0, "The area for heattransfer must be positive");
   end if;
 equation
-  conv.Q_flow + rad.Q_flow = 0;
+ convPort.Q_flow + radPort.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
   // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
-  conv.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1) - max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1));
+  if radCalcMethod == 1 then
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1) - max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1));
+  elseif radCalcMethod == 2 then
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*convPort.T*convPort.T*convPort.T*(convPort.T - radPort.T);
+  elseif radCalcMethod == 3 then
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(convPort.T - radPort.T);
+  else
+    convPort.Q_flow =Modelica.Constants.sigma*eps*A_in_internal*4*T_ref*T_ref*T_ref*(convPort.T - radPort.T);
+  end if;
   if not use_A_in then
     A_in_internal =A;
   end if;
+
+
   connect(A_in, A_in_internal);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                            Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},  lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-78,80},{82,-80}},      lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>

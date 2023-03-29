@@ -1,36 +1,72 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
+
+
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0)
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0)
     "Ventilation and infiltration temperature"
     annotation (Placement(transformation(extent={{-120,-12},{-80,28}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-90,0})));
-  Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
-    quantity="VolumeFlowRate", final unit="1/h")
+  Modelica.Blocks.Interfaces.RealInput ventRate[numZones](
+    each final quantity="VolumeFlowRate", each final unit="1/h")
     "Ventilation and infiltration rate"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-100,-36},{-80,-16}})));
 
+
+
+  Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if (ASurTot > 0 or
+    VAir > 0) and use_moisture_balance
+             "Ventilation and infiltration humidity"
+     annotation (Placement(
+        transformation(
+        extent={{20,20},{-20,-20}},
+        rotation=180,
+        origin={-100,40}),  iconTransformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-90,24})));
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
+    "CO2 concentration in the thermal zone in ppm"
+    annotation (Placement(transformation(extent={{100,10},{120,30}})));
+  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)]
+ if use_moisture_balance "Humidity output"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
 
-  connect(zone.ventRate, ventRate) annotation (Line(points={{44.3,52.28},{44.3,
-          52.28},{44.3,-20},{-100,-20}},
+  connect(zone.ventRate, ventRate) annotation (Line(points={{38.84,60.89},{38.84,
+          60.89},{38.84,-20},{-100,-20}},
                                 color={0,0,127}));
-  connect(ventTemp, zone.ventTemp) annotation (Line(points={{-100,8},{-34,8},{
-          -34,61.505},{35.27,61.505}},        color={0,0,127}));
+  connect(ventTemp, zone.ventTemp) annotation (Line(points={{-100,8},{-34,8},{-34,
+          66.22},{38.84,66.22}},              color={0,0,127}));
+  connect(zone.ventHum, ventHum) annotation (Line(points={{39.05,54.945},{-28.475,
+          54.945},{-28.475,40},{-100,40}}, color={0,0,127}));
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,51.05},{82.1,40},
+          {82,40},{82,20},{110,20}},color={0,0,127}));
+  connect(zone.X_w, X_w)
+    annotation (Line(points={{82.1,55.15},{82.1,0},{110,0}},color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html><ul>
+  <li>November 20, 2020, by Katharina Breuer:<br/>
+    Combine thermal zone models
+  </li>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    Add moisture balance
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and AixLib models.
   </li>
@@ -50,6 +86,10 @@ equation
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
   and subsequently in <a href=
   \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
+</p>
+<p>
+  Moisture and CO2 balances are conditional submodels which can be
+  activated by setting use_moisture_balance or use_C_flow true.
 </p>
 <h4>
   Typical use and important parameters

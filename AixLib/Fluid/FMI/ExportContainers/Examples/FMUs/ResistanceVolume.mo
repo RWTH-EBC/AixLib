@@ -4,14 +4,14 @@ block ResistanceVolume
   extends AixLib.Fluid.FMI.ExportContainers.PartialTwoPort(
     redeclare package Medium = AixLib.Media.Air);
 
-  parameter Modelica.SIunits.Volume V=1 "Volume";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
+  parameter Modelica.Units.SI.Volume V=1 "Volume";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=100
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=100
     "Nominal pressure drop";
 
-  Modelica.Blocks.Sources.RealExpression dpCom(y=res.port_a.p - res.port_b.p) if
-       use_p_in "Pressure drop of the component"
+  Modelica.Blocks.Sources.RealExpression dpCom(y=res.port_a.p - res.port_b.p)
+    if use_p_in "Pressure drop of the component"
     annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
 
 protected
@@ -79,36 +79,36 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation (Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a
-flow resistance and a control volume.
-The FMU has an instance of
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
-AixLib.Fluid.FixedResistances.PressureDrop</a> and
-<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
-AixLib.Fluid.MixingVolumes.MixingVolume</a>.
-</p>
-<p>
-The mass dynamics has been set to
-<code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
-See the
-<a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
-for the rationale.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-November 8, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a
+ flow resistance and a control volume.
+ The FMU has an instance of
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
+ AixLib.Fluid.FixedResistances.PressureDrop</a> and
+ <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
+ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
+ </p>
+ <p>
+ The mass dynamics has been set to
+ <code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
+ See the
+ <a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
+ for the rationale.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ November 8, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/ResistanceVolume.mos"
         "Export FMU"),
     Icon(graphics={
@@ -126,5 +126,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           extent={{18,32},{84,-34}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={170,213,255})}));
+          fillColor={170,213,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ResistanceVolume;

@@ -1,36 +1,36 @@
 within AixLib.Utilities.Psychrometrics;
 package Constants "Library of constants for psychometric functions"
   extends Modelica.Icons.Package;
-  constant Modelica.SIunits.Temperature T_ref = 273.15
+  constant Modelica.Units.SI.Temperature T_ref=273.15
     "Reference temperature for psychrometric calculations";
-  constant Modelica.SIunits.SpecificHeatCapacity cpAir=1006
+  constant Modelica.Units.SI.SpecificHeatCapacity cpAir=1006
     "Specific heat capacity of air";
-  constant Modelica.SIunits.SpecificHeatCapacity cpSte=1860
+  constant Modelica.Units.SI.SpecificHeatCapacity cpSte=1860
     "Specific heat capacity of water vapor";
-  constant Modelica.SIunits.SpecificHeatCapacity cpWatLiq = 4184
+  constant Modelica.Units.SI.SpecificHeatCapacity cpWatLiq=4184
     "Specific heat capacity of liquid water";
-  constant Modelica.SIunits.SpecificEnthalpy h_fg = 2501014.5
+  constant Modelica.Units.SI.SpecificEnthalpy h_fg=2501014.5
     "Enthalpy of evaporation of water at the reference temperature";
   constant Real k_mair = 0.6219647130774989 "Ratio of molar weights";
 
   annotation (
     Documentation(info="<html>
-<p>
-This package provides constants for functions used
-in the calculation of thermodynamic properties of moist air.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 24, 2016, by Filip Jorissen:<br/>
-Added reference temperature.
-</li>
-<li>
-July 24, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This package provides constants for functions used
+ in the calculation of thermodynamic properties of moist air.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 24, 2016, by Filip Jorissen:<br/>
+ Added reference temperature.
+ </li>
+ <li>
+ July 24, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(extent={{-100.0,-100.0},{100.0,100.0}}), graphics={
       Polygon(
         origin={-9.2597,25.6673},
@@ -52,5 +52,6 @@ First implementation.
         pattern=LinePattern.None,
         fillPattern=FillPattern.Solid,
         points={{-10.873,41.478},{-10.873,41.478},{-14.048,-4.162},{-9.352,-24.8},{7.912,-24.469},{16.247,0.27},{16.247,0.27},{13.336,0.071},{13.336,0.071},{7.515,-9.983},{-3.134,-7.271},{-2.671,41.214},{-2.671,41.214}},
-        smooth=Smooth.Bezier)}));
+        smooth=Smooth.Bezier)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Constants;

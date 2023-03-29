@@ -39,23 +39,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/RegNonZeroPowerDerivative_2_Check.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example checks whether the function derivative
-is implemented correctly. If the derivative implementation
-is not correct, the model will stop with an assert statement.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 17, 2015 by Michael Wetter:<br/>
-Updated regression test to have slope that is different from one.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
-</li>
-<li>
-April 14, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example checks whether the function derivative
+ is implemented correctly. If the derivative implementation
+ is not correct, the model will stop with an assert statement.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 17, 2015 by Michael Wetter:<br/>
+ Updated regression test to have slope that is different from one.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+ </li>
+ <li>
+ April 14, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RegNonZeroPowerDerivative_2_Check;

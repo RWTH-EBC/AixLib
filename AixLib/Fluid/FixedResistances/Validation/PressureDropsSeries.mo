@@ -6,7 +6,7 @@ model PressureDropsSeries "Test of multiple resistances in series"
 
    parameter Integer nRes(min=2) = 10 "Number of resistances";
 
-   parameter Modelica.SIunits.PressureDifference dp_nominal = 5
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=5
     "Nominal pressure drop for each resistance";
 
    Modelica.Blocks.Sources.Ramp P(
@@ -54,15 +54,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PressureDropsSeries.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model tests multiple resistances in series.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 20, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model tests multiple resistances in series.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 20, 2007 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PressureDropsSeries;
