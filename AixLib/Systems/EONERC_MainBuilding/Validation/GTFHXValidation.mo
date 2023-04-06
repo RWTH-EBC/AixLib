@@ -120,8 +120,8 @@ equation
   connect(senTInSec.port_b, dynamicHX.port_a2) annotation (Line(points={{-24,18},
           {-19.5,18},{-19.5,18.2},{-15,18.2}}, color={0,127,255}));
   annotation (experiment(StopTime=604800, __Dymola_NumberOfIntervals=5000),
-                                         __Dymola_Commands(file(ensureSimulated
-          =true) =
+                                         __Dymola_Commands(file(ensureSimulated=
+           true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plotGTFHXValidation.mos"
         "Simulate and plot"));
 end GTFHXValidation;
