@@ -53,9 +53,11 @@ model IndoorSwimmingPool
       poolParam.etaHRS else 0;
   Modelica.Units.SI.MassFlowRate m_flow_add(start=0.0)
   "Mass flow of fresh water supplied to pool circulation system";
+  parameter Modelica.Media.Interfaces.Types.Temperature TFreWater=283.15
+    "Temperature of fresh water";
 
   // Convection and Radiation at pool water surface
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConvAir=3.5
+  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConvAir=3.5
     "Coefficient of heat transfer between the water surface and the room air";
     // approximated for free and forced convection at velocities between 0,05 to 0,2 m/s  above a plane area
   parameter Real eps = 0.9*0.95
@@ -288,7 +290,7 @@ model IndoorSwimmingPool
   Sources.MassFlowSource_T bou(
     redeclare package Medium = WaterMedium,
     use_m_flow_in=true,
-    T=283.15,
+    T=TFreWater,
     nPorts=1)
     annotation (Placement(transformation(extent={{-52,-94},{-40,-82}})));
   Modelica.Blocks.Sources.RealExpression getMeaTPool(y=poolWat.T) annotation (
@@ -367,6 +369,7 @@ model IndoorSwimmingPool
     linearized=false,
     deltaM=0.3) "representative resistance for whole system "
     annotation (Placement(transformation(extent={{32,-76},{44,-60}})));
+
 
 protected
   final parameter Modelica.Units.SI.Density rhoWater_default=
