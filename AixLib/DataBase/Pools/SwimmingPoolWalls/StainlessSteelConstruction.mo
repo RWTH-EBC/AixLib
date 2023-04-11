@@ -1,5 +1,6 @@
 within AixLib.DataBase.Pools.SwimmingPoolWalls;
 record StainlessSteelConstruction
+  "Stainless steel pool construction without insulation"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 1 "Number of wall layers",
     d={0.05} "Thickness of wall layers",

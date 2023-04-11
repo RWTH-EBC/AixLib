@@ -101,6 +101,7 @@ model HeatTransferConduction
         extent={{-10,-10},{10,10}},
         rotation=180)));
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWall
+    "Wall type for pool walls, record contains all wall layers"
     annotation (Placement(transformation(extent={{76,-98},{96,-78}})));
 equation
   connect(HeatFlowOuter.T, TSoil)
