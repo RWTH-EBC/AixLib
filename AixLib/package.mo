@@ -4,9 +4,9 @@ package AixLib
   annotation (
   uses(
 	SDF(version="0.4.2"),
-	Modelica_DeviceDrivers(version="2.0.0"),
+	Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0")),
-  version="1.3.1",
+  version="1.3.2",
   conversion(from(
     version="0.3.2",
                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",
@@ -89,7 +89,9 @@ package AixLib
 	version="1.2.1",				  
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.1_to_1.2.2.mos",
 	version="1.3.0",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.0_to_1.3.1.mos")					  
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.0_to_1.3.1.mos",
+	version="1.3.1",				  
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.1_to_1.3.2.mos")					  
 					  ),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed

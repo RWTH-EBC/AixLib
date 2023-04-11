@@ -17,7 +17,6 @@ model StaticPipe "Simple example of StaticPipe"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe pip(
     redeclare package Medium = Medium,
-    nPorts=1,
     dh=0.1,
     length=100,
     dIns=0.05,
@@ -57,7 +56,7 @@ equation
     annotation (Line(points={{-20,70},{10,70},{10,10}}, color={191,0,0}));
   connect(Tin.y, sou.T_in)
     annotation (Line(points={{-71,4},{-62,4}}, color={0,0,127}));
-  connect(pip.ports_b[1], senTemOut.port_a)
+  connect(pip.port_b, senTemOut.port_a)
     annotation (Line(points={{20,0},{30,0}}, color={0,127,255}));
   connect(senTemOut.port_b, sin.ports[1])
     annotation (Line(points={{50,0},{62,0}}, color={0,127,255}));

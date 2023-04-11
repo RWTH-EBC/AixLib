@@ -41,6 +41,8 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   Real[n] qSek2_Gro
     "Overall coefficient of heat transfer for double pane window";
 protected
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin_dimless=1
+    "Auxiliary parameter for dimensionless UWin";
   parameter Modelica.Units.SI.TransmissionCoefficient g_Dir0=taue_Dir0 + q210
        + q220 "Reference vertical parallel transmission coefficient for direct radiation
     for double pane window";
@@ -66,36 +68,28 @@ protected
       2)/xn2_DifCov "Energetic degree of transmission for second pane";
   parameter Modelica.Units.SI.Emissivity a_1DifCov=1 - tau_1DifCov -
       rho_1DifCov "Degree of absorption for single pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer q21_DifCov=a_1DifCov*(1
-       + (tau_1DifCov*rho_1DifCov/xn2_DifCov))*UWin/25
-    "Coefficient of heat transfer for exterior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer q22_DifCov=a_1DifCov*(
-      tau_1DifCov/xn2_DifCov)*(1 - (UWin/7.7))
-    "Coefficient of heat transfer for interior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer qSek2_DifCov=q21_DifCov
+  parameter Real q21_DifCov=a_1DifCov*(1
+       + (tau_1DifCov*rho_1DifCov/xn2_DifCov))*UWin/UWin_dimless/25
+    "Auxiliary variable for exterior pane of double pane window";
+  parameter Real q22_DifCov=a_1DifCov*(
+      tau_1DifCov/xn2_DifCov)*(1 - (UWin/UWin_dimless/7.7))
+    "Auxiliary variable for interior pane of double pane window";
+  parameter Real qSek2_DifCov=q21_DifCov
        + q22_DifCov
-    "Overall coefficient of heat transfer for double pane window";
+    "Auxiliary variable for whole double pane window";
 
 equation
   for i in 1:n loop
     //Calculating variables for the overall degree of energy passage for
     //direct irradiation
-    if (1-rho_1Dir[i]^2)==0 then
-      xn2_Dir[i]=10^(-20);
-    else
-      xn2_Dir[i]= 1-rho_1Dir[i]^2;
-    end if;
+    xn2_Dir[i]=max(10^(-20),1-rho_1Dir[i]^2);
     q21_Dir[i]=a_1Dir[i]*(1+(tau_1Dir[i]*rho_1Dir[i]/xn2_Dir[i]))*UWin/25;
     q22_Dir[i]= a_1Dir[i]*(tau_1Dir[i]/xn2_Dir[i])*(1-(UWin/7.7));
     qSek2_Dir[i]=q21_Dir[i]+q22_Dir[i];
     tau_2Dir[i]= tau_1Dir[i]^2/xn2_Dir[i];
 
     //Calculating variables for diffuse irradiation at clear sky
-    if (1-rho_1DifCle[i]^2)==0 then
-      xn2_DifCle[i]=10^(-20);
-    else
-      xn2_DifCle[i]= 1-rho_1DifCle[i]^2;
-    end if;
+    xn2_DifCle[i]=max(10^(-20),1-rho_1DifCle[i]^2);
     q21_DifCle[i]=a_1DifCle[i]*(1+(tau_1DifCle[i]*rho_1DifCle[i]/
       xn2_DifCle[i]))*UWin/25;
     q22_DifCle[i]= a_1DifCle[i]*(tau_1DifCle[i]/xn2_DifCle[i])*(1-(UWin/7.7));
@@ -104,11 +98,7 @@ equation
 
     //Calculating variables for the overall degree of energy passage for ground
     //reflection radiation
-    if (1-rho_1Gro[i]^2)==0 then
-      xn2_Gro[i]=10^(-20);
-    else
-      xn2_Gro[i]= 1-rho_1Gro[i]^2;
-    end if;
+    xn2_Gro[i]=max(10^(-20),1-rho_1Gro[i]^2);
     q21_Gro[i]=a_1Gro[i]*(1+(tau_1Gro[i]*rho_1Gro[i]/xn2_Gro[i]))*UWin/25;
     q22_Gro[i]= a_1Gro[i]*(tau_1Gro[i]/xn2_Gro[i])*(1-(UWin/7.7));
     qSek2_Gro[i]=q21_Gro[i]+q22_Gro[i];
