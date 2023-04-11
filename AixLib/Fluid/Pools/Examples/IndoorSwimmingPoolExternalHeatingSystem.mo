@@ -2,8 +2,8 @@ within AixLib.Fluid.Pools.Examples;
 model IndoorSwimmingPoolExternalHeatingSystem
     extends Modelica.Icons.Example;
   .AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimming(poolParam=
-        AixLib.DataBase.Pools.SportPool(use_idealHeater=false), redeclare
-      package WaterMedium = WaterMedium)
+        AixLib.DataBase.Pools.SportPool(use_ideHeaExc=false), redeclare package
+      WaterMedium = WaterMedium)
     annotation (Placement(transformation(extent={{-32,-38},{16,28}})));
 
     replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
@@ -46,6 +46,8 @@ model IndoorSwimmingPoolExternalHeatingSystem
     annotation (Placement(transformation(extent={{96,34},{78,50}})));
   MixingVolumes.MixingVolume vol(
     redeclare package Medium = AixLib.Media.Water,
+    energyDynamics=indoorSwimming.energyDynamics,
+    p_start=100000,
     m_flow_nominal=indoorSwimming.m_flow_nominal,
     V=2,
     nPorts=2) annotation (Placement(transformation(
