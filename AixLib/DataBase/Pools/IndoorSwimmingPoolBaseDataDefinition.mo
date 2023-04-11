@@ -7,7 +7,7 @@ record IndoorSwimmingPoolBaseDataDefinition
   parameter Modelica.Units.SI.Volume VPool "Volume of pool water";
   parameter Modelica.Units.SI.Area APool(min=0)
     "Area of water surface of swimming pool";
-  parameter Modelica.Units.SI.Length depPool(min=0)
+  parameter Modelica.Units.SI.Length depthPool(min=0)
     "Average depth of swimming pool";
   parameter Modelica.Units.SI.Volume VSto
     "Usable Volume of water storage, DIN 19643-1";
@@ -41,13 +41,13 @@ record IndoorSwimmingPoolBaseDataDefinition
 
  // Wave mode
   parameter Boolean use_wavPool=false "Is there a wave machine installed?";
-  parameter Modelica.Units.SI.Length heiWav "Height of generated wave";
-  parameter Modelica.Units.SI.Length widWav
+  parameter Modelica.Units.SI.Length heightWav "Height of generated wave";
+  parameter Modelica.Units.SI.Length widthWav
     "Width of generated wave/ width of wave machineoutlet";
   parameter Modelica.Units.SI.Time timeWavPul_start
     "Start time of first wave cycle";
   parameter Modelica.Units.SI.Time perWavPul "Time of cycling period";
-  parameter Real widWavPul "Fraction of time of wave generation within cycling period";
+  parameter Real widthWavPul "Fraction of time of wave generation within cycling period";
 
  // Pool Walls
   parameter Modelica.Units.SI.Area AWalInt "Area of pool walls which is connected to inner rooms (inner pool walls)";
