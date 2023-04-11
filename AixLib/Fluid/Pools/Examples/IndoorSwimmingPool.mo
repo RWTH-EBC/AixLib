@@ -53,7 +53,10 @@ equation
         points={{-4,80},{23.5,80},{23.5,17.12}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"),
+    experiment(Tolerance=1e-6,StopTime=604800,Interval=900),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos"
+        "Simulate and plot"),
     Documentation(info="<html>
 <p>Example model for an sport oriented indoor swimming pool with an integrated ideal heat exchanger. </p>
 </html>"));
