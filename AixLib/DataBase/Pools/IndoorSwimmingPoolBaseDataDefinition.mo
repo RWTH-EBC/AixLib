@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pools;
-record IndoorSwimmingPoolBaseRecord
+record IndoorSwimmingPoolBaseDataDefinition
   extends Modelica.Icons.Record;
 
   parameter Modelica.Units.SI.Temperature TPool
@@ -74,4 +74,4 @@ record IndoorSwimmingPoolBaseRecord
 <li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
 </ul>
 </html>"));
-end IndoorSwimmingPoolBaseRecord;
+end IndoorSwimmingPoolBaseDataDefinition;
