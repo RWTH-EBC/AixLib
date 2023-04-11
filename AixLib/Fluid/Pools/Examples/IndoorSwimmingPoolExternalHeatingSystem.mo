@@ -87,5 +87,8 @@ equation
           66,4},{66,-20},{70,-20},{70,-40},{62,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<p>Example model for an sport oriented indoor swimming pool with an external heat source. </p>
+</html>"));
 end IndoorSwimmingPoolExternalHeatingSystem;

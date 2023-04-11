@@ -1,5 +1,5 @@
 within AixLib.Fluid.Pools.Examples;
-model IndoorSwimmingPool
+model IndoorSwimmingPool "Example of an indoor swimming pool"
     extends Modelica.Icons.Example;
   .AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimming(poolParam=
         AixLib.DataBase.Pools.SportPool(), redeclare package WaterMedium =
@@ -53,5 +53,8 @@ equation
         points={{-4,80},{23.5,80},{23.5,17.12}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<p>Example model for an sport oriented indoor swimming pool with an integrated ideal heat exchanger. </p>
+</html>"));
 end IndoorSwimmingPool;
