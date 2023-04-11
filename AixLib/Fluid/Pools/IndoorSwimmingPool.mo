@@ -9,17 +9,19 @@ model IndoorSwimmingPool
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+  "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Advanced", group="Dynamics"));
+
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real betaNonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
-  parameter Real betaCover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
-                                                                                                     annotation (Dialog(group="Water transfer coefficients"));
-  parameter Real betaWavePool(unit="m/s")=50/3600 "Water transfer coefficient during wavePool operation"
-                                                                                                        annotation (Dialog(group="Water transfer coefficients"));
+  parameter Real betaCover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours with pool cover" annotation (Dialog(group="Water transfer coefficients"));
+  parameter Real betaWavePool(unit="m/s")=50/3600 "Water transfer coefficient during wave pool operation" annotation (Dialog(group="Water transfer coefficients"));
 
   // Parameter and variables for evaporation
-  constant Modelica.Units.SI.SpecificHeatCapacity RD=461.52
+  final constant Modelica.Units.SI.SpecificHeatCapacity RD=461.52
     "Specific gas constant for steam";                                // Source: Klaus Lucas, Thermodynamik (2008)
-  final parameter Modelica.Units.SI.SpecificEnergy h_vapor=
+  final parameter Modelica.Units.SI.SpecificEnergy hVap=
       AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.TPool)
     "Latent heat of evaporating water";
   Modelica.Units.SI.MassFlowRate m_flow_evap(start=0.0)
@@ -34,7 +36,7 @@ model IndoorSwimmingPool
 
   // Pump
   parameter Modelica.Units.SI.Pressure pumpHead=170000
-    "Expected average flow resistance of water cycle";
+    "Expected average flow resistance of water cycle";    //Source: Saunus 2005
 
   // Pool circulation flow rate
   final parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=
@@ -62,6 +64,7 @@ model IndoorSwimmingPool
   AixLib.Fluid.MixingVolumes.MixingVolume poolSto(
     redeclare package Medium = WaterMedium,
     energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VSto,
@@ -74,6 +77,7 @@ model IndoorSwimmingPool
   AixLib.Fluid.MixingVolumes.MixingVolume poolWat(
     redeclare package Medium = WaterMedium,
     energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=poolParam.TPool,
     m_flow_nominal=m_flow_nominal,
     V=poolParam.VPool,
@@ -101,8 +105,8 @@ model IndoorSwimmingPool
     redeclare package Medium2 = WaterMedium,
     m1_flow_nominal=poolParam.m_flow_out*1.5,
     m2_flow_nominal=poolParam.m_flow_out,
-    dp1_nominal(displayUnit="bar") = 100000,
-    dp2_nominal(displayUnit="bar") = 100000,
+    dp1_nominal(displayUnit="bar") = 20000,
+    dp2_nominal(displayUnit="bar") = 20000,
     eps=eps)
      annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
@@ -206,7 +210,7 @@ model IndoorSwimmingPool
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss annotation (Placement(transformation(extent={{-4,52},
             {12,68}})));
 
-  Modelica.Blocks.Math.Gain hEva(final k=h_vapor)
+  Modelica.Blocks.Math.Gain hEva(final k=hVap)
     "Calculation of heat flow rate due to evaporation" annotation (Placement(
         transformation(
         extent={{-4,-4},{4,4}},
