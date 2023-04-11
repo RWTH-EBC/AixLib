@@ -102,7 +102,7 @@ model IndoorSwimmingPool
         extent={{9,-9},{-9,9}},
         rotation=180,
         origin={-81,41})));
-  AixLib.Fluid.HeatExchangers.ConstantEffectiveness HeatExchanger(
+  AixLib.Fluid.HeatExchangers.ConstantEffectiveness heatExchanger(
     redeclare package Medium1 = WaterMedium,
     redeclare package Medium2 = WaterMedium,
     m1_flow_nominal=poolParam.m_flow_out*1.5,
@@ -438,9 +438,9 @@ equation
   connect(poolWat.ports[3], setEva.port_a) annotation (Line(points={{2.66667,-10},
           {2,-10},{2,-18},{-12,-18},{-12,26},{-24,26}}, color={0,127,255}));
 
-  connect(poolSto.ports[2], HeatExchanger.port_b1) annotation (Line(points={{-28.5,
+  connect(poolSto.ports[2],heatExchanger. port_b1) annotation (Line(points={{-28.5,
           -56},{-28.5,-64},{-36,-64},{-36,-68}}, color={0,127,255}));
-  connect(poolSto.ports[3], HeatExchanger.port_a2) annotation (Line(points={{-27.5,
+  connect(poolSto.ports[3],heatExchanger. port_a2) annotation (Line(points={{-27.5,
           -56},{-28,-56},{-28,-64},{-30,-64},{-30,-68}}, color={0,127,255}));
   connect(poolSto.ports[4], cirPump.port_a) annotation (Line(points={{-26.5,-56},
           {-14,-56},{-14,-68},{-8,-68}}, color={0,127,255}));
@@ -451,7 +451,7 @@ equation
           {-62,88},{-67,88},{-67,103}},color={0,0,127}));
   connect(absToRelHum.absHum, X_w) annotation (Line(points={{-56.4,83},{-56,83},
           {-56,88},{-29,88},{-29,103}},  color={0,0,127}));
-  connect(HeatExchanger.port_b2, Sinc.ports[1]) annotation (Line(points={{-30,-78},
+  connect(heatExchanger.port_b2, Sinc.ports[1]) annotation (Line(points={{-30,-78},
           {-30,-88},{22,-88}},                    color={0,127,255}));
   connect(setEva.port_b, sincEva.ports[1])
     annotation (Line(points={{-36,26},{-58,26}}, color={0,127,255}));
@@ -484,7 +484,7 @@ equation
   connect(minusGain.y, preHeatFlowEvapLoss.Q_flow)
     annotation (Line(points={{-15.6,60},{-4,60}}, color={0,0,127}));
 
-  connect(bou.ports[1], HeatExchanger.port_a1) annotation (Line(points={{-40,-88},
+  connect(bou.ports[1],heatExchanger. port_a1) annotation (Line(points={{-40,-88},
           {-40,-78},{-36,-78}}, color={0,127,255}));
   connect(waveMachine.open, timeOpe) annotation (Line(points={{-93.28,-87},{-98,
           -87},{-98,-74},{-90,-74},{-90,-58},{-106,-58}}, color={0,0,127}));
