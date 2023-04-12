@@ -1,8 +1,8 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
-record ASHRAE140_900
-   "Record for ASHRAE140 Testcase 900."
+record ASHRAE140_900 "Record for ASHRAE140 Testcase 900."
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
-    T_start=293,
+    T_start=293.0,
+    withAirCap = true,
     VAir=129.60000000000002,
     AZone=48.0,
     hRad=5.13,
@@ -73,8 +73,8 @@ record ASHRAE140_900
     withAHU=false,
     minAHU=0,
     maxAHU=12,
-    maxIrr = {100,100,100,100},
     shadingFactor = {1,1,1,1},
+    maxIrr = {100,100,100,100},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,
@@ -82,11 +82,12 @@ record ASHRAE140_900
     HeaterOn=false,
     hCool=0,
     lCool=-1,
+    heaLoadFacOut=1,
+    heaLoadFacGrd=1,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
-
 end ASHRAE140_900;

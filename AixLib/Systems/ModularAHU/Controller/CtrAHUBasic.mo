@@ -253,7 +253,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(PID_HRS.u_m, genericAHUBus.coolerBus.TAirInMea) annotation (Line(
-        points={{-10,-36},{-10,-40},{104,-40},{104,0.05},{100.05,0.05}}, color=
+        points={{-10,-36},{-10,-42},{104,-42},{104,0.05},{100.05,0.05}}, color=
           {0,0,127}), Text(
       string="%second",
       index=1,
@@ -262,7 +262,7 @@ equation
   connect(add.y, PID_HRS.u_s) annotation (Line(points={{-27.3,-23},{-27.3,-24},
           {-22,-24}}, color={0,0,127}));
   connect(add.u1, ctrRh.Tset) annotation (Line(
-      points={{-43.4,-18.8},{-48,-18.8},{-48,20},{-2,20}},
+      points={{-43.4,-18.8},{-62,-18.8},{-62,30},{-32,30},{-32,20},{-2,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstFlap1.y, add.u2) annotation (Line(points={{-55.4,-28},{-48,-28},
