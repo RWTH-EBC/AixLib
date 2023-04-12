@@ -1,4 +1,4 @@
-simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="IndoorSwimmingPool");
+simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="IndoorSwimmingPoolExternalHeatingSystem");
 createPlot(id = 1,
  position = {55, 50, 697, 502},
  x = "time",
