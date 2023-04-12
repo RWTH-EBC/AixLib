@@ -5,6 +5,7 @@ HighTemperatureSystem
 SwitchingUnit
 HeatExchangerSystem
 GeothermalFieldSimple
+ERC_AHU
 Controller
 BaseClasses
 Validation
