@@ -213,8 +213,7 @@ replaceable package Medium2 =
     final m_flow_nominal=m1_flow_nominal,
     redeclare Fluid.Movers.Data.Generic per(hydraulicEfficiency=
           hydraulicEfficiency, motorEfficiency(eta={0.95})),
-    final inputType=AixLib.Fluid.Types.InputType.Continuous,
-    dp_start=0)                                              "Return air fan"
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
