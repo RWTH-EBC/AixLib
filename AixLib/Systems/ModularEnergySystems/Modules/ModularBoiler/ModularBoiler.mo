@@ -87,8 +87,6 @@ model ModularBoiler
     final TRetNom=TRetNom,
     final m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  inner Modelica.Fluid.System system(final p_start=system.p_ambient)
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTFlow(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -167,7 +165,7 @@ protected
     parameter Modelica.Units.SI.PressureDifference dp_nominal = dp_nominal_boiler + dp_Valve;
   parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.Units.SI.PressureDifference dp_nominal_boiler=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
-  parameter Modelica.Units.SI.HeatCapacity cp_medium = Medium.cp_const;
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_medium = Medium.cp_const;
 
 equation
   if not Pump then
