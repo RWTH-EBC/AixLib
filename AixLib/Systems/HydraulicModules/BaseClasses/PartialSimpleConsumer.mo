@@ -1,5 +1,5 @@
 within AixLib.Systems.HydraulicModules.BaseClasses;
-model SimpleConsumer_base
+partial model PartialSimpleConsumer
   extends AixLib.Fluid.Interfaces.PartialTwoPort(redeclare package Medium =
         MediumWater);
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
@@ -115,16 +115,16 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   else
-    connect(port_a, senTFlow.port_a);
+    connect(port_a, senTFlow.port_a) annotation (Line(
+      points={{-100,0},{-100,-20},{-62,-20},{-62,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
   end if;
 
   connect(senTReturn.port_b, port_b) annotation (Line(points={{78,-8.88178e-16},
           {89,-8.88178e-16},{89,0},{100,0}}, color={0,127,255}));
   connect(senTFlow.port_b, senMasFlo.port_a)
     annotation (Line(points={{-42,0},{-32,0}}, color={0,127,255}));
-
-
-
 
   connect(volume.ports[2], senTReturn.port_a) annotation (Line(points={{40,0},{49,
           0},{49,1.72085e-15},{58,1.72085e-15}},        color={0,127,255}));
@@ -210,4 +210,4 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end SimpleConsumer_base;
+end PartialSimpleConsumer;

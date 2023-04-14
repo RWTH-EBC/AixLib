@@ -76,9 +76,9 @@ equation
   connect(pump.port_b, port_b)
     annotation (Line(points={{8,0},{100,0}},  color={0,127,255}));
   connect(port_a, vol.ports[1])
-    annotation (Line(points={{-100,0},{-63.6,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-62.8,0}}, color={0,127,255}));
   connect(vol.ports[2], pump.port_a)
-    annotation (Line(points={{-60.4,0},{-12,0}}, color={0,127,255}));
+    annotation (Line(points={{-61.2,0},{-12,0}}, color={0,127,255}));
   connect(prescribedTemperature.port, vol.heatPort) annotation (Line(points={{-44,
           20},{-80,20},{-80,8},{-70,8}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-40},
