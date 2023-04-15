@@ -8,7 +8,7 @@ model ModularBoilerConsumer
   ModularBoiler modularBoiler(
     allowFlowReversal=false,
     TStart=343.15,
-    QNom=40000,
+    QNom(displayUnit="kW") = 75000,
     m_flowVar=true,
     hasFeedback=true,
     TRetNom=323.15,
@@ -61,8 +61,6 @@ model ModularBoilerConsumer
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-90,90})));
-  Interfaces.ConsumerControlBus consumerControlBus(nConsumers=nConsumers)
-    annotation (Placement(transformation(extent={{36,50},{56,70}})));
 equation
   connect(boilerControlBus, modularBoiler.boilerControlBus) annotation (Line(
       points={{0,60},{0,38},{-24,38},{-24,29.4}},
@@ -89,11 +87,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modularConsumer.consumerControlBus, consumerControlBus) annotation (
-      Line(
-      points={{54,30},{54,48},{46,48},{46,60}},
-      color={255,204,51},
-      thickness=0.5));
   connect(bou.ports[1], modularBoiler.port_a)
     annotation (Line(points={{-72,-2},{-72,0},{-54,0}}, color={0,127,255}));
 annotation (

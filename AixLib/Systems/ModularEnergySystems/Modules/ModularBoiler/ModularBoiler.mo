@@ -236,6 +236,13 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(heatGeneratorNoControl.PowerDemand, boilerControlBus.EnergyDemand)
+    annotation (Line(points={{11,-7},{28,-7},{28,98.05},{0.05,98.05}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
     annotation (Dialog(group = "Feedback"), choices(checkBox = true),
               Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
