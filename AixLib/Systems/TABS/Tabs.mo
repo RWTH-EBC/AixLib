@@ -250,32 +250,6 @@ equation
           -76,-80},{-76,-100},{-80,-100}}, color={0,127,255}));
   connect(port_a2, throttlePumpCold.port_a1) annotation (Line(points={{40,-100},
           {40,-84},{34,-84},{34,-86},{28,-86},{28,-80}}, color={0,127,255}));
-  connect(pumpSys.hydraulicBus, tabsBus.pumpBus) annotation (Line(
-      points={{-20,20},{-74,20},{-74,0.1},{-99.9,0.1}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(throttlePumpHot.hydraulicBus, tabsBus.hotThrottleBus) annotation (
-      Line(
-      points={{-60,-60},{-99.9,-60},{-99.9,0.1}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
-      Line(
-      points={{20,-60},{-12,-60},{-12,-68},{-100,-68},{-100,0.1},{-99.9,0.1}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(pipe.port_b, pumpSys.port_a2) annotation (Line(points={{10,58},{26,58},
           {26,40},{12,40}}, color={0,127,255}));
   connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{52,-80},{
@@ -285,6 +259,32 @@ equation
   connect(pipe.heatPort, convection.solid) annotation (Line(points={{7.21645e-16,
           68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}}, color={191,
           0,0}));
+  connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
+      Line(
+      points={{20,-60},{10,-60},{10,-10},{-74,-10},{-74,0.1},{-99.9,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(throttlePumpHot.hydraulicBus, tabsBus.hotThrottleBus) annotation (
+      Line(
+      points={{-60,-60},{-70,-60},{-70,-26},{-68,-26},{-68,0.1},{-99.9,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pumpSys.hydraulicBus, tabsBus.pumpBus) annotation (Line(
+      points={{-20,20},{-74,20},{-74,0.1},{-99.9,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Dialog(tab="Initialization"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
