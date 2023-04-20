@@ -18,7 +18,7 @@ package RC "Package with reduced order thermal zones based on VDI 6007 Part 1"
   where simulation speed requirements, aggregation of multiple buildings
   and lack of data availability
   justify simpler models. However, this package allows users to
-  choose between models with one to four wall elements, and to define the
+  choose between models with one to five wall elements, and to define the
   number of RC-elements per wall for each wall. The latter can be done by setting
   <i>n<sub>k</sub></i>, which is the length of the vectors for resistances
   <i>R<sub>k</sub></i> and capacities <i>C<sub>k</sub></i>).
@@ -210,6 +210,10 @@ package RC "Package with reduced order thermal zones based on VDI 6007 Part 1"
   of the wall element if set to <code>true</code>. It can be used to add heat
   loads directly to a specific surface or to connect components that distribute
   radiation and have a specific surface temperature, e.g. a floor heating.
+  </p>
+  <p>
+  For borders to neighboured zones, one element per neighboured zone is created, 
+  which is why the R and C parameters have an additional array dimension.
   </p>
   <h4>Parameter calculation</h4>
   <p>To calculate parameters of all four models, the Python package TEASER <a
