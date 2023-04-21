@@ -345,7 +345,12 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
+  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
+    final dataSource=zoneParam.TSoilDataSource,
+    final TMean=zoneParam.TSoil,
+    final offsetTime=zoneParam.TSoilOffsetTime,
+    final amplitudeTGround=zoneParam.TSoilAmplitude,
+    final fileDataSource=zoneParam.TSoilFile) if
     zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
@@ -528,8 +533,9 @@ equation
           {-44,87},{-44,75.6},{-41.2,75.6}}, color={0,0,127}));
   connect(constSunblindRoof.y, eqAirTempRoof.sunblind) annotation (Line(points={
           {-36,91.7},{-36,79.2},{-34,79.2}}, color={0,0,127}));
-  connect(TSoil.y, preTemFloor.T)
-    annotation (Line(points={{43.4,22},{48,22},{48,28.8}}, color={0,0,127}));
+  connect(TSoil.TGroundOut, preTemFloor.T)
+    annotation (Line(points={{43.4,19.6},{48,19.6},{48,28.8}},
+                                                           color={0,0,127}));
   connect(preTemFloor.port, ROM.floor)
     annotation (Line(points={{48,42},{48,56},{62,56}}, color={191,0,0}));
   connect(preTemRoof.port, theConRoof.fluid)
@@ -819,7 +825,10 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
   <li>April 20, 2023, by Philip Groesdonk:<br/>
-    Added five element RC model (for heat exchange with neighboured zones).
+  Added five element RC model (for heat exchange with neighboured zones) and
+  an option choice for set temperatures of soil, i.e. floor element outdoor 
+  surface temperatures. This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1080\">issue 1080</a>.
   </li>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
