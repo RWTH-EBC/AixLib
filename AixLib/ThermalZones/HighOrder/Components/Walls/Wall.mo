@@ -1,6 +1,19 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
+  //New parameter and module
+  parameter Boolean withShield = false;
+  parameter Modelica.Units.SI.Length L_Win_Shield = 0.05;
+  parameter Modelica.Units.SI.Length H_Win_Shadow_min = 0.05 "Distance from shield to upper border of window";
+  parameter Modelica.Units.SI.Length H_Win_Shadow_max = 1.10 "Distance from shield to lower border of window";
+  Shadow.ShadowEff shadowEff(
+    L_Shield=L_Win_Shield,
+    H_Window_min=H_Win_Shadow_min,
+    H_Window_max=H_Win_Shadow_max) if withWindow and outside and withShield
+    annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
+  BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
+    annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
+        iconTransformation(extent={{-29,-90},{-9,-70}})));
 
   //Type parameter
   parameter Boolean outside = true
@@ -91,7 +104,8 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
   replaceable model WindowModel =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
+   constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
      redeclare final model CorrSolGain=CorrSolarGainWin,
      final T0=T0,
      final windowarea=windowarea,
@@ -207,6 +221,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
  if use_shortWaveRadIn
     "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
     annotation (Placement(transformation(extent={{80,88},{90,98}})));
+
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -270,21 +285,40 @@ equation
   // **** connections for outside wall with window and sunblind****
   //******************************************************************
   if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}}, color={255,128,0}));
+    if withShield then
+      connect(weaBus, shadowEff.weaBus) annotation (Line(
+      points={{-19,-80},{-40,-80},{-40,-2},{-20,-2}},
+      color={255,204,51},
+      thickness=0.5,
+          pattern=LinePattern.Dash),
+                      Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+      connect(windowModel.solarRad_in, shadowEff.solarRad_out) annotation (Line(
+        points={{-13.7,-27.2},{-16,-27.2},{-16,-20},{4,-20},{4,-10},{1,-10}},
+        color={255,128,0},
+          pattern=LinePattern.Dash));
+      connect(Sunblind.Rad_Out[1], shadowEff.solarRad_in) annotation (Line(points={{
+          -21.5625,-32.375},{-21,-32.375},{-21,-10}}, color={255,128,0},
+          pattern=LinePattern.Dash));
+    else
+      connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}}, color={255,128,
+              0},
+          pattern=LinePattern.Dash));
+    end if;
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
                                                                                                                                    color = {255, 128, 0}));
   end if;
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
-  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-62,-40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-61.6,
+          -40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
                                                       color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
                                         color={191,0,0}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
-
-
   connect(WindSpeedPort, windowModel.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
-
-
   connect(shortRadWin, windowModel.shortRadWin) annotation (Line(points={{104,-59},
           {60,-59},{60,-23.56},{9.7,-23.56}},      color={0,0,0}), Text(
       string="%first",
