@@ -9,7 +9,7 @@ initial equation
 
 equation
   delTEqLWWin=delTEqLW;
-  TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGro*wfGro;
+  TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGroundUsed*wfGro;
   annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>
    <ul>
    <li>
@@ -30,6 +30,5 @@ equation
    </html>",info="<html>
    <p><code>VDI6007</code> is a strict implementation of the calculations defined
    in VDI 6007 Part 1. The sum of all weightfactors should be one.</p>
-   </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+   </html>"));
 end VDI6007;

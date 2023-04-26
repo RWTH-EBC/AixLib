@@ -57,7 +57,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
@@ -65,14 +65,14 @@ model ThermalZone "Thermal zone containing moisture balance"
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{56,-34},
             {76,-14}})));
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{56,-34},
             {76,-14}})));
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
@@ -96,7 +96,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     final UWin=zoneParam.UWin) if
     sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-16,43},{-4,55}})));
-  EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
+  replaceable EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
     final n=zoneParam.nOrientations,
     final wfWall=zoneParam.wfWall,
@@ -104,13 +104,13 @@ model ThermalZone "Thermal zone containing moisture balance"
     final wfGro=zoneParam.wfGro,
     final hConWallOut=zoneParam.hConWallOut,
     final hRad=zoneParam.hRadWall,
+    TGroundFromInput=true,
     final hConWinOut=zoneParam.hConWinOut,
-    final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    final aExt=zoneParam.aExt) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-38,10},{-26,22}})));
 
-  EquivalentAirTemperature.VDI6007 eqAirTempRoof(
+  replaceable EquivalentAirTemperature.VDI6007 eqAirTempRoof(
     final wfGro=0,
     final n=zoneParam.nOrientationsRoof,
     final aExt=zoneParam.aRoof,
@@ -118,7 +118,8 @@ model ThermalZone "Thermal zone containing moisture balance"
     final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    final TGro=273.15) if zoneParam.ARoof > 0
+    TGroundFromInput=true) if
+                          zoneParam.ARoof > 0
     "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-40,66},{-28,78}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
@@ -136,11 +137,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     final til=zoneParam.tiltExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,10},{-68,26}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
+  replaceable BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
      final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls)
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,31},{-68,48}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
+  replaceable BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
      final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof)
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
@@ -206,7 +207,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     "surface heat port for nz borders - inner surface if zone index is higher than index of other zone, outer if lower"
     annotation (Placement(transformation(extent={{94,86},{114,106}}),
                             iconTransformation(extent={{90,70},{110,90}})));
-  SolarGain.SimpleExternalShading simpleExternalShading(
+  replaceable SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
     final gValues=zoneParam.shadingFactor) if
@@ -345,16 +346,6 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
-    final dataSource=zoneParam.TSoilDataSource,
-    final TMean=zoneParam.TSoil,
-    final offsetTime=zoneParam.TSoilOffsetTime,
-    final amplitudeTGround=zoneParam.TSoilAmplitude,
-    final fileDataSource=zoneParam.TSoilFile) if
-    zoneParam.AFloor > 0
-    "Outdoor surface temperature for floor plate"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
-    rotation=180,origin={39,22})));
   Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt))
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
@@ -432,6 +423,16 @@ protected
   Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
      and use_NaturalAirExchange and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-14},{-64,-8}})));
+  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
+    final dataSource=zoneParam.TSoilDataSource,
+    final TMean=zoneParam.TSoil,
+    final offsetTime=zoneParam.TSoilOffsetTime,
+    final amplitudeTGround=zoneParam.TSoilAmplitude,
+    final fileDataSource=zoneParam.TSoilFile) if
+    zoneParam.AFloor > 0
+    "Outdoor surface temperature for floor plate"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
+    rotation=180,origin={39,22})));
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -823,6 +824,11 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
           -40},{110,-40}},                   color={0,0,127}));
+  connect(TSoil.TGroundOut, eqAirTempWall.TGround) annotation (Line(points={{43.4,
+          19.6},{48,19.6},{48,8.8},{-32,8.8}}, color={0,0,127}));
+  connect(TSoil.TGroundOut, eqAirTempRoof.TGround) annotation (Line(points={{43.4,
+          19.6},{48,19.6},{48,28},{36,28},{36,62},{-34,62},{-34,64.8}}, color={0,
+          0,127}));
   annotation (Documentation(revisions="<html><ul>
   <li>April 20, 2023, by Philip Groesdonk:<br/>
   Added five element RC model (for heat exchange with neighboured zones) and
@@ -970,12 +976,6 @@ end if;
           smooth=Smooth.None,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{65,-7},{90,-18}},
-          lineColor={0,0,255},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="Internal Gains"),
         Polygon(
           points={{30,100},{-88,100},{-88,60},{30,60},{30,100},{30,100},{30,100}},
           lineColor={0,0,255},
@@ -1041,6 +1041,12 @@ Cooling"),
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="Moisture"),
+        Text(
+          extent={{65,-3},{90,-14}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Internal Gains"),
         Rectangle(
           extent={{-72,6},{-2,-38}},
           lineColor={0,0,255},

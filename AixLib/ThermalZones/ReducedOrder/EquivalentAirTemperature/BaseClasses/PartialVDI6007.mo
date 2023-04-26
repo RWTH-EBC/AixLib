@@ -10,7 +10,8 @@ partial model PartialVDI6007
   parameter Real wfGro(unit="1")
     "Weight factor of the ground (0 if not considered)";
   parameter Modelica.Units.SI.Temperature TGro
-    "Temperature of the ground in contact with floor plate";
+    "Constant temperature of the ground in contact with floor plate"
+    annotation(Dialog(enable=not TGroundFromInput));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut
     "Exterior walls convective coefficient of heat transfer (outdoor)";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
@@ -18,9 +19,14 @@ partial model PartialVDI6007
   parameter Boolean withLongwave=true
     "Set to true to include longwave radiation exchange"
     annotation(choices(checkBox = true));
+  parameter Boolean TGroundFromInput=false
+    "Set to true to use TGround input connector instead of TGro constant"
+    annotation(choices(checkBox = true));
 
   Modelica.Units.SI.Temperature TEqWall[n] "Equivalent wall temperature";
   Modelica.Units.SI.Temperature TEqWin[n] "Equivalent window temperature";
+  Modelica.Units.SI.Temperature TGroundUsed
+  "Used value for temperature of the ground in contact with floor plate";
   Modelica.Units.SI.TemperatureDifference delTEqLW
     "Equivalent long wave temperature";
   Modelica.Units.SI.TemperatureDifference delTEqLWWin
@@ -61,6 +67,16 @@ partial model PartialVDI6007
     extent={{-20,-20},{20,20}},
     rotation=-90,
     origin={0,120})));
+  Modelica.Blocks.Interfaces.RealInput TGround(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if TGroundFromInput
+    "Temperature of the ground in contact with floor plate"
+    annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={0,-120})));
 
 initial equation
   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro) > 0.1),
@@ -70,6 +86,11 @@ initial equation
     irrelevant.",level=AssertionLevel.warning);
 
 equation
+  if TGroundFromInput then
+    TGroundUsed=TGround;
+  else
+    TGroundUsed=TGro;
+  end if;
   delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConWallOut);
   delTEqSW=HSol*aExt/(hRad + hConWallOut);
   if withLongwave then
@@ -147,6 +168,5 @@ equation
    Implemented.
    </li>
    </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+ </html>"));
 end PartialVDI6007;
