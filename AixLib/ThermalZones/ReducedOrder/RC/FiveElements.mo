@@ -94,7 +94,7 @@ protected
         origin={170,148},
         rotation=-90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallNZ[
-    nNZs](final G={min(AExt, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
+    nNZs](final G={min(ATotExt, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
       ATotExt > 0 and ATotNZ > 0
     "Resistor between exterior walls and neighboured zone borders" annotation (Placement(
         transformation(
@@ -102,7 +102,7 @@ protected
         origin={80,66},
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nWins,nNZs](
-     final G={min(AWin, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
+     final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
        ATotNZ > 0 and ATotWin > 0 "Resistor between neighboured zone borders and windows"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -173,7 +173,7 @@ equation
     end for;
   end if;
 
-  if AExt > 0 then
+  if ATotExt > 0 then
     for j in 1:nNZs loop
       if ANZ[j] > 0 then
         connect(heatFlowSensor[j].port_a, resExtWallNZ[j].port_b) annotation (Line(
