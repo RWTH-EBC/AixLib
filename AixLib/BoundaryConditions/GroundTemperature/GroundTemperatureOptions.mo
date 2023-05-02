@@ -7,18 +7,19 @@ model GroundTemperatureOptions
     annotation (Dialog(group="General"));
   parameter Modelica.Units.SI.Temperature TMean "constant or mean ground temperature (for sine) or average air temperature over the year (for Kusuda)"
     annotation (Dialog(group="General", enable=not dataSource==GroundTemperatureDataSource.File));
-  parameter Real offsetTime
+  parameter Real offsetTime=0
     "time from simulation time 0 until minimum ground temperature in s (for sine and Kusuda)"
     annotation (Dialog(group="General", enable=dataSource==GroundTemperatureDataSource.Kusuda or dataSource==GroundTemperatureDataSource.Sine));
-  parameter Modelica.Units.SI.Temperature amplitudeTGround
+  parameter Modelica.Units.SI.TemperatureDifference amplitudeTGround=0
     "amplitude of ground temperature (for sine option) or of surface temperature [(maximum air temperature - minimum air temperature)/2] (for Kusuda)"
     annotation (Dialog(group="General", enable=dataSource==GroundTemperatureDataSource.Kusuda or dataSource==GroundTemperatureDataSource.Sine));
-  parameter String fileDataSource
+  parameter String fileDataSource="NoName"
+    "path to a (.mos) file that has the temperature stored in a table called TGround"
     annotation (Dialog(group="General", enable=dataSource==GroundTemperatureDataSource.File));
   parameter Modelica.Units.SI.ThermalDiffusivity alpha=0.04
     "Thermal diffusivity of the ground for Kusuda. Declare in m2/day!"
     annotation (Dialog(group="Special Kusuda parameters", enable=dataSource==GroundTemperatureDataSource.Kusuda));
-  parameter Modelica.Units.SI.Distance depth "Depth of ground temperature"
+  parameter Modelica.Units.SI.Distance depth=0 "Depth of ground temperature"
     annotation (Dialog(group="Special Kusuda parameters", enable=dataSource==GroundTemperatureDataSource.Kusuda));
 
   // add conditions
@@ -45,7 +46,7 @@ model GroundTemperatureOptions
   Modelica.Blocks.Sources.Sine sine(
     amplitude=amplitudeTGround,
     f=1.0/31536000.0,
-    phase=-offsetTime/31536000.0*2*pi,
+    phase=-offsetTime/31536000.0*2*pi - pi/2,
     offset=TMean,
     startTime=-31536000.0) if
        dataSource==GroundTemperatureDataSource.Sine
