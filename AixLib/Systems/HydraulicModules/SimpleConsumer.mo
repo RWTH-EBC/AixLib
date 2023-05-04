@@ -1,6 +1,8 @@
 within AixLib.Systems.HydraulicModules;
 model SimpleConsumer
-  extends AixLib.Systems.HydraulicModules.BaseClasses.SimpleConsumer_base(
+  extends AixLib.Systems.HydraulicModules.BaseClasses.PartialSimpleConsumer(
+    hasFeedback=true,
+    hasPump=true,
   final V=Q_flow_nom*5.24444e-06,
   final m_flow_nominal=Q_flow_nom/(Medium.cp_const*dT_nom),
   senMasFlo(allowFlowReversal=allowFlowReversal),
