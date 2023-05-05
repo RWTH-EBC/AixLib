@@ -101,7 +101,7 @@ protected
         extent={{-10,-10},{10,10}},
         origin={80,66},
         rotation=90)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nWins,nNZs](
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nNZs](
      final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
        ATotNZ > 0 and ATotWin > 0 "Resistor between neighboured zone borders and windows"
     annotation (Placement(transformation(
@@ -294,14 +294,21 @@ equation
    elements bordering zones with a lower index in 
    <code>otherNZIndex[nNZs]</code> than this zone's index <code>thisZoneIndex</code> 
    are ignored here and calculated in the other zone's ROM.
-   Ths implementation increases calculation times and calculation complexity.
+   Ths implementation increases calculation times and calculation complexity -
+   also because the neighboured zones are directly connected via heat flow 
+   ports to ensure no energy is produced out of or lost to nowhere.
    The neighboured zone borders are parameterized via the length of the RC-chain
    <code>nNZ</code>,
    the vector of capacities <code>CNZ[nNZs, nNZ]</code>, the vector of resistances
-   <code>RNZ[nNZs, nNZ]</code> and the remaining resistances <code>RNZRe[nNZs]</code>.
+   <code>RNZ[nNZs, nNZ]</code> and the remaining resistances <code>RNZRem[nNZs]</code>.
    </p>
    <p>
-   The image below shows the RC-network of this model.
+   The image below shows the RC-network of this model. In the image, dashed 
+   lines represent the possibly multiple borders to neighboured zones (= array 
+   of borders). Dotted lines represent the radiation resistances between each 
+   pair of surfaces facing the indoor, which are not explicitly shown here due 
+   to the high amount of resistances. See the documentation of 
+   <code>FourElement</code> for a better visualisation.
    </p>
    <p align=\"center\">
    <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FiveElements.png\" alt=\"image\"/>
