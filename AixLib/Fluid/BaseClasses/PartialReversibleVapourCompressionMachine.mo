@@ -658,9 +658,8 @@ equation
           -48},{36,-44},{31,-44},{31,-50}}, color={0,0,127}));
   connect(eva.port_con, temperatureSensor1.port) annotation (Line(points={{0,
           -70.32},{-16,-70.32},{-16,-66},{-36,-66},{-36,-61}}, color={191,0,0}));
-  connect(temperatureSensor1.T, sigBus.TEvaOutMea) annotation (Line(points={{
-          -54.9,-61},{-60,-61},{-60,-42.915},{-104.925,-42.915}}, color={0,0,
-          127}), Text(
+  connect(senT_b2.T, sigBus.TEvaOutMea) annotation (Line(points={{-52,-75},{-58,
+          -75},{-58,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

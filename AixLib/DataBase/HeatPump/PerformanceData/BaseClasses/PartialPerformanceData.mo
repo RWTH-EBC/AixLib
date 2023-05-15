@@ -2,6 +2,34 @@
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
 
+
+    parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+  parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+   parameter Boolean TSourceInternal=false
+                                          "Use internal TSource?"
+    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+
+    parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
+
+
+
+
   Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
                                                       "Electrical Power consumed by HP" annotation (Placement(
         transformation(

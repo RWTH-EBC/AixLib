@@ -59,7 +59,9 @@ parameter Modelica.Units.SI.Pressure dpInternal=25000
     refIneFre_constant=0.02,
     nthOrder=3,
     useBusConnectorOnly=true,
-    use_non_manufacturer=true,
+    TCon_start=T_Start_Condenser,
+    redeclare model PerDataMainHP = PerDataMainHP,
+    use_non_manufacturer=use_non_manufacturer,
     use_rev=false,
     use_autoCalc=true,
     Q_useNominal=QNom,
@@ -158,6 +160,12 @@ parameter Modelica.Units.SI.Pressure dpInternal=25000
     THotNom=THotNom,
     Modulating=Modulating)
     annotation (Placement(transformation(extent={{-92,72},{-50,98}})));
+   parameter Boolean use_non_manufacturer=false "Use non manufacturer approach?";
+  replaceable model PerDataMainHP =
+      AixLib.DataBase.HeatPump.PerformanceData.GeneralThermodynamic
+    constrainedby
+    DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+    annotation (choicesAllMatching=true);
 protected
 package MediumCon = AixLib.Media.Water "Medium heat sink";
 
@@ -225,14 +233,6 @@ equation
   connect(senTHot.T, modularControl.tHot) annotation (Line(points={{32,8.8},{32,
           60},{-100,60},{-100,78.4},{-92,78.4}},
                                        color={0,0,127}));
-  connect(sigBus.mFlowSet, fan.y) annotation (Line(
-      points={{1.075,101.085},{-28,101.085},{-28,40},{-74,40},{-74,-30}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(fan.port_b, heatPump.port_a1) annotation (Line(points={{-64,-42},{-34,
           -42},{-34,2},{-8,2}}, color={0,127,255}));
   connect(sigBus.m_flowConMea, division.u1) annotation (Line(
@@ -243,6 +243,14 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.mFlowSetExternal, fan.y) annotation (Line(
+      points={{1.075,101.085},{-74,101.085},{-74,-30}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

@@ -19,9 +19,9 @@ model ModularControl
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.05,
     Ti=3600,
-    yMax=0.75,
+    yMax=1,
     Td=1,
-    yMin=0.3)
+    yMin=0.2)
     annotation (Placement(transformation(extent={{-196,-12},{-176,8}})));
   Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold
     annotation (Placement(transformation(extent={{-58,6},{-38,26}})));
@@ -75,9 +75,8 @@ model ModularControl
     annotation (Placement(transformation(extent={{-266,-102},{-204,-74}})));
   Modelica.Blocks.Logical.Switch switch5
     annotation (Placement(transformation(extent={{-2,-108},{18,-88}})));
-  Modelica.Blocks.Sources.RealExpression tColdNom5(y=1)
-    "Nominal TCold"
-    annotation (Placement(transformation(extent={{78,-116},{140,-88}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0.2)
+    annotation (Placement(transformation(extent={{-160,-12},{-140,8}})));
 equation
   connect(mode.y, sigBus1.modeSet) annotation (Line(points={{-261.8,79},{-261.8,
           78},{-286.925,78},{-286.925,41.085}},                     color={255,
@@ -127,15 +126,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(conPID.y, switch1.u1) annotation (Line(points={{-175,-2},{-116,-2},{
-          -116,112},{-70,112}}, color={0,0,127}));
-  connect(switch3.y, sigBus1.mFlowSet) annotation (Line(points={{133,-28},{138,-28},
-          {138,-10},{-170,-10},{-170,-22},{-278,-22},{-278,14},{-286.925,14},{-286.925,
-          41.085}},                             color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(switch2.y, firstOrder.u) annotation (Line(points={{87,-36},{96,-36},{
           96,30},{138,30}},                  color={0,0,127}));
   connect(gain.y, switch4.u3) annotation (Line(points={{-147,-164},{-110,-164},{
@@ -176,13 +166,29 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(tColdNom2.y, switch2.u3) annotation (Line(points={{62.4,76},{70,76},{
           70,2},{52,2},{52,-44},{64,-44}}, color={0,0,127}));
-  connect(firstOrder.y, switch3.u3) annotation (Line(points={{161,30},{176,30},
-          {176,22},{184,22},{184,-50},{102,-50},{102,-36},{110,-36}}, color={0,
+  connect(firstOrder.y, switch3.u3) annotation (Line(points={{161,30},{184,30},
+          {184,-50},{102,-50},{102,-36},{110,-36}},                   color={0,
           0,127}));
-  connect(conPID1.y, switch3.u1) annotation (Line(points={{69,-74},{92,-74},{92,
-          -20},{110,-20}}, color={0,0,127}));
-  connect(conPID1.y, switch2.u1) annotation (Line(points={{69,-74},{82,-74},{82,
-          -54},{36,-54},{36,-24},{64,-24},{64,-28}}, color={0,0,127}));
+  connect(sigBus1.mFlowSetExternal, switch2.u1) annotation (Line(
+      points={{-286.925,41.085},{22,41.085},{22,-28},{64,-28}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus1.mFlowSetExternal, switch3.u1) annotation (Line(
+      points={{-286.925,41.085},{110,41.085},{110,-20}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(conPID.y, limiter.u)
+    annotation (Line(points={{-175,-2},{-162,-2}}, color={0,0,127}));
+  connect(limiter.y, switch1.u1) annotation (Line(points={{-139,-2},{-116,-2},{
+          -116,112},{-70,112}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-320,
             -100},{100,160}})), Diagram(coordinateSystem(preserveAspectRatio=
             false, extent={{-320,-100},{100,160}})));

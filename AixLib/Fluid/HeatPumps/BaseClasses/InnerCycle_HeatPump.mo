@@ -34,7 +34,16 @@ model InnerCycle_HeatPump
     Modulating=Modulating)              if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
-  PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
+  PerDataMainHP PerformanceDataHPHeating(
+    THotMax=THotMax,
+    THotNom=THotNom,
+    TSourceNom=TSourceNom,
+    QNom=QNom,
+    PLRMin=PLRMin,
+    DeltaTCon=DeltaTCon,
+    DeltaTEvap=DeltaTEvap,
+    TSource=TSource,
+    Modulating=Modulating)               if not use_non_manufacturer
   annotation (Placement(transformation(
   extent={{-17,20},{37,76}},rotation=0)));
   PerDataRevHP PerformanceDataHPCooling if use_rev and not use_non_manufacturer

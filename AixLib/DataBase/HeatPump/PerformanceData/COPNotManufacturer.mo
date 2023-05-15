@@ -16,7 +16,7 @@ model COPNotManufacturer
   SDF.NDTable sDF_COP(
     final nin=4,
     final readFromFile=true,
-    final filename=FilenameCOP,
+    final filename="modelica://Typquartiere/COP_Scroll_R410A_InterExtraPolation.sdf",
     final dataset="/COP",
     final dataUnit="-",
     final scaleUnits={"degC","-","K","degC"},
@@ -87,7 +87,7 @@ model COPNotManufacturer
         origin={-120,-90})));
 
 protected
-  parameter String FilenameCOP="D:/COP_Scroll_R410a.sdf" annotation (evaluate=True);
+  parameter String FilenameCOP="D:/COP_Scroll_R410A_InterExtraPolation.sdf" annotation (evaluate=True);
 
 
 
