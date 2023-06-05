@@ -12,7 +12,7 @@ model NominalHeatPumpNotManufacturer
 
   Modelica.Blocks.Interfaces.RealOutput PelFullLoad(final unit="W", final
       displayUnit="kW")
-    "maximal notwendige elektrische Leistung im Betriebspunkt" annotation (
+    "maximal electric power at operating point" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -22,7 +22,7 @@ model NominalHeatPumpNotManufacturer
 
   Modelica.Blocks.Interfaces.RealOutput QEvapNom(final unit="W", final
       displayUnit="kW")
-    "maximal notwendige elektrische Leistung im Betriebspunkt" annotation (
+    "Evaporation at operating point and maximum electric power" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

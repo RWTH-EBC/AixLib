@@ -8,5 +8,5 @@ PartialExternalControl
 ReturnInfluence
 OperatingEfficiency
 CHPNomBehaviour
-NominalEfficiency
+NominalPowerDemand
 ExhaustTempModel

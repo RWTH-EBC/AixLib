@@ -94,7 +94,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBus1.QRel, lessEqualThreshold.u) annotation (Line(
-      points={{-286.925,41.085},{-286.925,16},{-60,16}},
+      points={{-287,41},{-287,16},{-60,16}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

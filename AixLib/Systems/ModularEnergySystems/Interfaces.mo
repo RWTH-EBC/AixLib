@@ -31,12 +31,12 @@ extends Modelica.Icons.InterfacesPackage;
 
   // BoilerNotManufacturer
     // Outer variables
-      Real QrelSet "Relative fuel consumption";
+      Real PRatioSet "Relative power ratio of set power to nominal power demand [%]";
       Modelica.Units.SI.Temperature TSupplySet "Setpoint supply temperature";
 
     // Inner variables
-      Real Qrel_mFlow "Relative water mass flow";
-      Real Qrel_DeltaT "Relative temperature difference";
+      Real Q_rel_mFlow "Relative water mass flow";
+      Real Q_rel_DeltaT "Relative temperature difference";
 
       Modelica.Units.SI.Temperature TReturnMea "Measurement return temperature";
       Modelica.Units.SI.Temperature TSupplyMea "Measurement supply temperature";
@@ -45,7 +45,7 @@ extends Modelica.Icons.InterfacesPackage;
 
       Modelica.Units.SI.MassFlowRate m_flowMea "Measurement water mass flow";
 
-      Real Efficiency "Efficiency of operation point";
+      Real Efficiency "Efficiency at operating point";
       Modelica.Units.SI.Power Losses "Power losses";
       Modelica.Units.SI.Power ThermalPower "Thermal power";
       Modelica.Units.SI.Power PowerDemand "Power demand";

@@ -73,7 +73,7 @@ model LookUpTableNDNotManufacturerSlim
   Modelica.Blocks.Sources.RealExpression zero3
     annotation (Placement(transformation(extent={{-64,-16},{-36,2}})));
 
-  Modelica.Blocks.Logical.Switch P_elOnOff annotation (Placement(transformation(
+  Modelica.Blocks.Logical.Switch PelOnOff annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={0,-22})));
@@ -111,22 +111,22 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(ActualCOP.COP, productQCon.u2) annotation (Line(points={{-80,52.8},{
           -80,-38},{-86,-38},{-86,-42}}, color={0,0,127}));
-  connect(zero3.y, P_elOnOff.u1)
+  connect(zero3.y, PelOnOff.u1)
     annotation (Line(points={{-34.6,-7},{-16,-7},{-16,-10},{-8,-10}},
                                                            color={0,0,127}));
-  connect(mFlowWaterMin.y, P_elOnOff.u2) annotation (Line(points={{-30,39},{-30,
+  connect(mFlowWaterMin.y, PelOnOff.u2) annotation (Line(points={{-30,39},{-30,
           0},{0,0},{0,-10},{7.77156e-16,-10}}, color={255,0,255}));
-  connect(productPel.y, P_elOnOff.u3)
+  connect(productPel.y, PelOnOff.u3)
     annotation (Line(points={{8,3},{8,-10}}, color={0,0,127}));
-  connect(P_elOnOff.y, productQCon.u1) annotation (Line(points={{-6.66134e-16,
+  connect(PelOnOff.y, productQCon.u1) annotation (Line(points={{-6.66134e-16,
           -33},{-6.66134e-16,-36},{-74,-36},{-74,-42}}, color={0,0,127}));
-  connect(P_elOnOff.y, addQEvap.u1) annotation (Line(points={{-6.66134e-16,-33},
+  connect(PelOnOff.y, addQEvap.u1) annotation (Line(points={{-6.66134e-16,-33},
           {-6.66134e-16,-50},{86,-50},{86,-74}}, color={0,0,127}));
   connect(productQCon.y, QCon)
     annotation (Line(points={{-80,-65},{-80,-110}}, color={0,0,127}));
   connect(addQEvap.y, QEva)
     annotation (Line(points={{80,-97},{80,-110}}, color={0,0,127}));
-  connect(P_elOnOff.y, Pel)
+  connect(PelOnOff.y, Pel)
     annotation (Line(points={{-6.66134e-16,-33},{0,-110}}, color={0,0,127}));
   connect(sigBus.TConOutMea, ActualCOP.tConOut) annotation (Line(
       points={{-0.925,100.07},{-68,100.07},{-68,102},{-98,102},{-98,76}},
@@ -174,7 +174,7 @@ equation
           26},{78,12}}, color={0,0,127}));
   connect(switch1.y, productPel.u1) annotation (Line(points={{70,-11},{70,-16},
           {38,-16},{38,30},{14,30},{14,26}}, color={0,0,127}));
-  connect(sigBus.QRel, switch1.u3) annotation (Line(
+  connect(sigBus.PLRSet, switch1.u3) annotation (Line(
       points={{-0.925,100.07},{62,100.07},{62,12}},
       color={255,204,51},
       thickness=0.5), Text(

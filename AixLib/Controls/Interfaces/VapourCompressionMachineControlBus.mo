@@ -59,9 +59,8 @@ annotation (
 </html>"));
 
   // Non Manufacturer Models only
-  Real QRel "Part load ratio";
 
-  Real PLR "Part load ratio compressor";
+  Real PLRSet "Part load ratio compressor";
 
   Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
 

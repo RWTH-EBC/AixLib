@@ -1,30 +1,29 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model ModularBoiler2
-
+/*Parameters*/
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
-                           final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
+                           final m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
+  parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=20 "Nominal temperature difference of flow and return"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature TColdNom=273.15 + 35
-                                                             "Return temperature TCold"
+  parameter Modelica.Units.SI.Temperature T_cold_nom=273.15 + 35
+                                                             "Return temperature"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
+  parameter Modelica.Units.SI.HeatFlowRate Q_nom=50000 "Nominal heat flow rate"
    annotation (Dialog(group="Nominal condition"));
-
 
   parameter Boolean Pump=true "Model includes a pump"
    annotation (choices(checkBox=true), Dialog(descriptionLabel=true));
 
 
 
-  parameter Modelica.Units.SI.Temperature THotMax=273.15 + 90
+  parameter Modelica.Units.SI.Temperature T_hot_max=273.15 + 90
                                                             "Maximal temperature to force shutdown";
-  parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
+  parameter Real PLR_min=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.Units.SI.Temperature TStart=273.15 + 20
-                                                           "T start"
+  parameter Modelica.Units.SI.Temperature T_start=273.15 + 20
+                                                           "Starting temperature"
    annotation (Dialog(tab="Advanced"));
 
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -40,18 +39,18 @@ model ModularBoiler2
   Fluid.BoilerCHP.BoilerNotManufacturer
                         heatGeneratorNoControl(
     allowFlowReversal=true,
-    T_start=TStart,
-    QNom=QNom,
+    T_start=T_start,
+    Q_nom=Q_nom,
     redeclare package Medium = Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    dTWaterNom=dTWaterNom,
-    TColdNom=TColdNom)
+    final m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
+    dT_w_nom=dT_w_nom,
+    T_cold_nom=T_cold_nom)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTReturn(
     redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+    final m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
     final initType=Modelica.Blocks.Types.Init.InitialState,
-    T_start=TStart,
+    T_start=T_start,
     final transferHeat=false,
     final allowFlowReversal=true,
     final m_flow_small=0.001) "Temperature sensor return flow" annotation (
@@ -69,11 +68,11 @@ model ModularBoiler2
     from_dp=false,
     use_inputFilter=true,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+    m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
     dpValve_nominal=6000,
     fraK=1,
     R=100) annotation (Placement(transformation(extent={{90,-8},{74,8}})));
-  Fluid.Movers.SpeedControlled_y fan(redeclare package Medium =
+  Fluid.Movers.SpeedControlled_y pump(redeclare package Medium =
         AixLib.Media.Water,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per(
         pressure(V_flow={0,V_flow_nominal,V_flow_nominal/0.7}, dp={dp_nominal/0.9,
@@ -89,7 +88,7 @@ model ModularBoiler2
     annotation (Placement(transformation(extent={{-66,128},{-46,148}})));
   Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium =
         AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
-    "Sensor for mass flwo rate"
+    "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-30,-10},{-14,10}})));
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val2(
     redeclare package Medium = AixLib.Media.Water,
@@ -97,7 +96,7 @@ model ModularBoiler2
     from_dp=false,
     use_inputFilter=true,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+    m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
     dpValve_nominal=6000,
     fraK=1,
     R=100) annotation (Placement(transformation(extent={{64,-8},{46,8}})));
@@ -109,7 +108,7 @@ model ModularBoiler2
     annotation (Placement(transformation(extent={{92,130},{112,150}})));
   Fluid.Sensors.MassFlowRate senMasFloBypass1(redeclare final package Medium =
         Media.Water, final allowFlowReversal=allowFlowReversal)
-    "Sensor for mass flwo rate"
+    "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-6,-38},{-26,-18}})));
   ModularBoiler.TWWAdd_on tWWAdd_on
     annotation (Placement(transformation(extent={{-2,-86},{18,-66}})));
@@ -123,7 +122,7 @@ model ModularBoiler2
     redeclare final package Medium = Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{110,-90},{90,-70}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=TColdNom)
+  Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=T_cold_nom)
     "Real input temperature difference dimension point"
     annotation (Placement(transformation(extent={{-154,126},{-114,152}})));
   AixLib.Controls.Continuous.LimPID conPID2(
@@ -138,7 +137,7 @@ model ModularBoiler2
     annotation (Placement(transformation(extent={{56,104},{76,124}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{-62,210},{-42,230}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=TColdNom)
+  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=T_cold_nom)
     "Real input temperature difference dimension point"
     annotation (Placement(transformation(extent={{-174,200},{-134,226}})));
   Modelica.Blocks.Math.Add add2
@@ -147,7 +146,7 @@ model ModularBoiler2
     annotation (Placement(transformation(extent={{56,50},{76,70}})));
 protected
    parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=18000+7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.Units.SI.PressureDifference dp_nom=18000+7.143*10^8*exp(-0.007078*Q_nom/1000)*(V_flow_nominal)^2;
    replaceable package MediumBoiler =Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
@@ -172,7 +171,7 @@ equation
 
   connect(senMasFloHeizkreis.port_b, heatGeneratorNoControl.port_a)
     annotation (Line(points={{-14,0},{-10,0}},color={0,127,255}));
-  connect(fan.port_b, senMasFloHeizkreis.port_a)
+  connect(pump.port_b, senMasFloHeizkreis.port_a)
     annotation (Line(points={{-36,0},{-30,0}},          color={0,127,255}));
   connect(val2.port_3, senMasFloBypass1.port_a)
     annotation (Line(points={{55,-8},{54,-8},{54,-28},{-6,-28}},
@@ -200,12 +199,12 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(conPID1.y, fan.y) annotation (Line(points={{-45,138},{-36,138},{-36,
+  connect(conPID1.y, pump.y) annotation (Line(points={{-45,138},{-36,138},{-36,
           30},{-46,30},{-46,12}},
                               color={0,0,127}));
   connect(dTWaterNom1.y, conPID1.u_s) annotation (Line(points={{-112,139},{-94,139},
           {-94,140},{-68,140},{-68,138}}, color={0,0,127}));
-  connect(conPID2.y, boilerControlBus.QrelSet) annotation (Line(points={{3,160},
+  connect(conPID2.y, boilerControlBus.PRatioSet) annotation (Line(points={{3,160},
           {16,160},{16,100.05},{0.05,100.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -251,9 +250,9 @@ equation
     annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
   connect(heatGeneratorNoControl.port_b, val2.port_2)
     annotation (Line(points={{10,0},{46,0}}, color={0,127,255}));
-  connect(senMasFloBypass1.port_b, fan.port_a) annotation (Line(points={{-26,
+  connect(senMasFloBypass1.port_b, pump.port_a) annotation (Line(points={{-26,
           -28},{-68,-28},{-68,0},{-56,0}}, color={0,127,255}));
-  connect(senTReturn.port_b, fan.port_a)
+  connect(senTReturn.port_b, pump.port_a)
     annotation (Line(points={{-80,0},{-56,0}}, color={0,127,255}));
   connect(senTReturn.T, boilerControlBus.TReturnMea) annotation (Line(points={{
           -86,8.8},{-84,8.8},{-84,70},{0.05,70},{0.05,100.05}}, color={0,0,127}),

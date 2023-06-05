@@ -1,13 +1,14 @@
 within AixLib.Fluid.BoilerCHP;
 model BoilerNotManufacturer "Simple heat generator without control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
-    redeclare package Medium = Media.Water,
-        a=coeffPresLoss, vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom/1000)/1000));
+    redeclare package Medium = AixLib.Media.Water,
+        a=coeffPresLoss, vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(
+          1.1615*Q_nom/1000)/1000));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
-  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
-
+/*Parameters*/
+  parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=15 "Nominal temperature difference of flow and return";
+  parameter Modelica.Units.SI.Temperature T_cold_nom=273.15 + 35 "Nominal Return Temperature";
+  parameter Modelica.Units.SI.HeatFlowRate Q_nom=50000 "Nominal heat flow rate";
 
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
@@ -17,20 +18,20 @@ model BoilerNotManufacturer "Simple heat generator without control"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.Controllers.OperatingEfficiency operatingEfficiency(
-    TColdNom=TColdNom,
-    QNom=QNom,
-    dTWaterNom=dTWaterNom)
+    T_cold_nom=T_cold_nom,
+    Q_nom=Q_nom,
+    dT_w_nom=dT_w_nom) "Model for calculating operating efficiency"
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=
-        QNom*0.003/50)
+        Q_nom*0.003/50)
                  "Thermal resistance of the boiler casing" annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-38,-34})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
-        displayUnit="K") = 283.15)
+        displayUnit="K") = 283.15) "Temperature of environment around the boiler to account for heat losses"
     annotation (Placement(transformation(extent={{14,-40},{2,-28}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-26,-28},{-14,-40}})));
@@ -38,18 +39,18 @@ model BoilerNotManufacturer "Simple heat generator without control"
     annotation (Placement(transformation(extent={{-38,86},{-18,106}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
-  BaseClasses.Controllers.NominalEfficiency nominalEfficiency(
-    TColdNom=TColdNom,                                        QNom=QNom,
-      dTWaterNom=dTWaterNom)
-    annotation (Placement(transformation(extent={{-64,44},{-44,64}})));
+  BaseClasses.Controllers.NominalPowerDemand nominalPowerDemand(
+    T_cold_nom=T_cold_nom,                                        Q_nom=Q_nom,
+      dT_w_nom=dT_w_nom) "Model for calculating nominal power demand"
+    annotation (Placement(transformation(extent={{-66,34},{-46,54}})));
   Modelica.Blocks.Math.Product powerDemand
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Math.Product thermalPower
     annotation (Placement(transformation(extent={{58,24},{78,44}})));
 protected
-    parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
+    parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*Q_nom/1000)
     "Pressure loss coefficient of the heat generator";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*Q_nom
     "Heat capacity of metal (J/K)";
 
 equation
@@ -72,8 +73,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nominalEfficiency.nominalPowerDemand, powerDemand.u2) annotation (
-      Line(points={{-43,47},{-10,47},{-10,34},{18,34}}, color={0,0,127}));
+  connect(nominalPowerDemand.nominalPowerDemand, powerDemand.u2) annotation (
+      Line(points={{-45,37},{-45,34},{18,34}},          color={0,0,127}));
   connect(powerDemand.y, thermalPower.u1)
     annotation (Line(points={{41,40},{56,40}}, color={0,0,127}));
   connect(boilerControlBus.Efficiency, thermalPower.u2) annotation (Line(
@@ -102,7 +103,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.QrelSet, powerDemand.u1) annotation (Line(
+  connect(boilerControlBus.PRatioSet, powerDemand.u1) annotation (Line(
       points={{-27.95,96.05},{-27.95,46},{18,46}},
       color={255,204,51},
       thickness=0.5), Text(

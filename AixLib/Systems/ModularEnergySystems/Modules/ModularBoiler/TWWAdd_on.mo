@@ -1,26 +1,26 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model TWWAdd_on
 
- parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
+ parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=20 "nom,inal temperature difference of flow and return"
    annotation (Dialog(group="Nominal condition"));
- parameter Modelica.Units.SI.Temperature TColdNom=273.15 + 35
-                                                             "Return temperature TCold"
-   annotation (Dialog(group="Nominal condition"));
-
-
- parameter Modelica.Units.SI.Temperature TWaterHot=273.15 + 60 "Set point temperature drinking water outlet";
- parameter Modelica.Units.SI.Temperature TWaterCold=283.15 "Default temperature drinking water inlet";
- parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
+ parameter Modelica.Units.SI.Temperature T_cold_nom=273.15 + 35
+                                                             "nominal return temperature"
    annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
+
+ parameter Modelica.Units.SI.Temperature T_w_hot=273.15 + 60 "Set point temperature drinking water outlet";
+ parameter Modelica.Units.SI.Temperature T_w_cold=283.15 "Default temperature drinking water inlet";
+ parameter Modelica.Units.SI.HeatFlowRate Q_nom=50000 "Thermal dimension power"
+   annotation (Dialog(group="Nominal condition"));
+
+  parameter Modelica.Units.SI.TemperatureDifference dT_w_set=15 "Temperature difference setpoint"
    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
 
 
-  parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
+  parameter Real PLR_min=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.Units.SI.Temperature TStart=273.15 + 20
-                                                           "T start"
+  parameter Modelica.Units.SI.Temperature T_start=273.15 + 20
+                                                           "starting temperature"
    annotation (Dialog(tab="Advanced"));
 
    package Medium = AixLib.Media.Water;
@@ -31,7 +31,7 @@ model TWWAdd_on
 
   Fluid.Sensors.TemperatureTwoPort senTColdTWW(
     redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*(TWaterHot - TWaterCold)),
+    final m_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final transferHeat=false,
     final allowFlowReversal=false,
@@ -43,22 +43,22 @@ model TWWAdd_on
         origin={-72,-40})));
   Fluid.Sensors.MassFlowRate senMasFloTWW(redeclare final package Medium =
         AixLib.Media.Water)
-    "Sensor for mass flwo rate"
+    "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-50}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=TWaterHot)
+  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=T_w_hot)
     "Real input temperature difference dimension point"
     annotation (Placement(transformation(extent={{38,8},{86,32}})));
   Fluid.HeatExchangers.ConstantEffectiveness hex(
     redeclare package Medium1 = AixLib.Media.Water,
     redeclare package Medium2 = AixLib.Media.Water,
-    m1_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-    m2_flow_nominal=QNom/(Medium.cp_const*(TWaterHot - TWaterCold)),
+    m1_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
+    m2_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
     dp1_nominal=6000,
     dp2_nominal=6000,
-    eps=1) annotation (Placement(transformation(extent={{12,44},{-10,64}})));
+    eps=1) "Heat exchanger" annotation (Placement(transformation(extent={{12,44},{-10,64}})));
   Fluid.Sensors.TemperatureTwoPort senTHotTWW(
     redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*(TWaterHot - TWaterCold)),
+    final m_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final transferHeat=false,
     final allowFlowReversal=false,
@@ -70,9 +70,9 @@ model TWWAdd_on
         origin={48,-40})));
   Fluid.Sensors.TemperatureTwoPort senTColdFeedback(
     redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+    final m_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
     final initType=Modelica.Blocks.Types.Init.InitialState,
-    T_start=TStart,
+    T_start=T_start,
     final transferHeat=false,
     final allowFlowReversal=false,
     final m_flow_small=0.001)
@@ -86,7 +86,7 @@ model TWWAdd_on
     annotation (Placement(transformation(extent={{90,-90},{110,-68}})));
   Fluid.Sensors.MassFlowRate senMasFloBypass(redeclare final package Medium =
         AixLib.Media.Water)
-    "Sensor for mass flwo rate"
+    "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{68,50},{48,70}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
     annotation (Placement(transformation(extent={{90,-18},{98,-10}})));
@@ -100,17 +100,17 @@ model TWWAdd_on
   Fluid.Actuators.Valves.TwoWayEqualPercentage val(
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
-    m_flow_nominal=QNom/(Medium.cp_const*(TWaterHot - TWaterCold)),
+    m_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
     dpValve_nominal=6000,
-    R=100) "Durchflussbegrenzer"
+    R=100) "flow limiter"
     annotation (Placement(transformation(extent={{-10,10},{12,-12}},
         rotation=90,
         origin={-16,0})));
   AixLib.Controls.Continuous.LimPID conPID2(controllerType=Modelica.Blocks.Types.SimpleController.PID)
     "ControlUnit_Durchflussbegrenzer"
     annotation (Placement(transformation(extent={{-64,-80},{-46,-98}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom3(y=QNom/(Medium.cp_const*(
-        TWaterHot - TWaterCold)))
+  Modelica.Blocks.Sources.RealExpression dTWaterNom3(y=Q_nom/(Medium.cp_const*(
+        T_w_hot - T_w_cold)))
     "Real input temperature difference dimension point"
     annotation (Placement(transformation(extent={{-254,-106},{-100,-72}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(

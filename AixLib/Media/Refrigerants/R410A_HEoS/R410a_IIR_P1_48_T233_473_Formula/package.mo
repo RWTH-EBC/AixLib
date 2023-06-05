@@ -443,7 +443,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
   */
   redeclare function extends saturationPressure
     "Saturation pressure of refrigerant (Ancillary equation)"
-  protected
+protected
     Real OM = (1 - T/fluidConstants[1].criticalTemperature);
 
   algorithm
@@ -466,7 +466,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends saturationTemperature
     "Saturation temperature of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -489,7 +489,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends bubbleDensity
     "Boiling curve specific density of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -521,7 +521,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends dewDensity
     "Dew curve specific density of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -551,7 +551,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends bubbleEnthalpy
     "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -576,7 +576,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends dewEnthalpy
     "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -602,7 +602,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends bubbleEntropy
     "Boiling curve specific entropy of refrigerant (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -627,7 +627,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
 
   redeclare function extends dewEntropy
     "Dew curve specific entropy of propane (Ancillary equation)"
-  protected
+protected
     Real x;
 
   algorithm
@@ -662,7 +662,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
       "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
-  protected
+protected
     SmoothTransition st;
     SpecificEnthalpy dh = st.T_ph;
     SpecificEnthalpy h_dew;
@@ -811,7 +811,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
       "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
-  protected
+protected
     SmoothTransition st;
     SpecificEntropy ds = st.T_ps;
     SpecificEntropy s_dew;
@@ -959,7 +959,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
       "2 for two-phase, 1 for one-phase, 0 if not known";
     output Density d "Density";
 
-  protected
+protected
     SmoothTransition st;
     AbsolutePressure dp = st.d_pT;
     SaturationProperties sat = setSat_T(T=T);
@@ -1152,7 +1152,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
     ExternalMedia libaray (i.e. CoolProp)
   */
 
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -1222,7 +1222,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
     Vol. 22, No. 4. Afterwards, the coefficients are adapted to the results
     obtained by the ExternalMedia libaray (i.e. CoolProp)
   */
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -1289,7 +1289,7 @@ package R410a_IIR_P1_48_T233_473_Formula "Refrigerant model for R410a using a hy
     Mixtures R410A and R407C from Dynamic Light Scattering (DLS).
     International Journal ofThermophysics, Vol. 24, No. 5.
   */
-  protected
+protected
     Real tau = sat.Tsat/343.16 "Dimensionless temperature";
 
   algorithm

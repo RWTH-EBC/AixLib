@@ -5,21 +5,21 @@ model ModularHeatPump
       Medium = AixLib.Media.Water,
                            final m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
 
-  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot to force shutdown"
+  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Maximum value of THot to force shutdown"
  annotation (Dialog(tab="Advanced", group="General machine information"));
   parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of heat source"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow rate of heat pump"
    annotation (Dialog(group="Nominal condition"));
-  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+  parameter Real PLRMin=0.4 "Limit of PLR (Part-load-ratio); minimum =0"
    annotation (Dialog(group="General machine information"));
 
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="Advanced",group="General machine information"));
 
-    parameter Modelica.Units.SI.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
+    parameter Modelica.Units.SI.Temperature TCon_start=293.15 "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
@@ -32,7 +32,7 @@ parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const
 
    replaceable package MediumEvap = AixLib.Media.Water
                                      constrainedby
-    Modelica.Media.Interfaces.PartialMedium "Medium heat source"
+    Modelica.Media.Interfaces.PartialMedium "Medium of heat source"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Water "Water"),
         choice(redeclare package Medium =
@@ -46,7 +46,7 @@ parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional syst
 parameter Modelica.Units.SI.Pressure dpInternal=25000
                                                      "Pressure difference condenser";
 
- parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
+ parameter Boolean Modulating=true "Is the heat pump inverte driven?";
 
 
 
@@ -59,7 +59,7 @@ parameter Modelica.Units.SI.Pressure dpInternal=25000
     refIneFre_constant=0.02,
     nthOrder=3,
     useBusConnectorOnly=true,
-    TCon_start=T_Start_Condenser,
+    TCon_start=TCon_start,
     redeclare model PerDataMainHP = PerDataMainHP,
     use_non_manufacturer=use_non_manufacturer,
     use_rev=false,
@@ -282,11 +282,11 @@ equation
 <p><br>with different operation types:</p>
 <ul>
 <li>with a fixed THot, which is THotNom -&gt; temperature difference between THot and TCold is not constant</li>
-<li>with a fixed deltaTCon -&gt; THot is not equal THotNom. THotNom is only important for nominal electrical demand</li>
+<li>with a fixed DeltaTCon -&gt; THot is not equal THotNom. THotNom is only important for nominal electrical demand</li>
 <li>as a high temperature heat pump, using R134a and a piston compressor</li>
 <li>as a low temperature heat pump, using R410a and a scroll compressor</li>
 </ul>
 <p><br>Concept </p>
-<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, deltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
+<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, DeltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
 </html>"));
 end ModularHeatPump;
