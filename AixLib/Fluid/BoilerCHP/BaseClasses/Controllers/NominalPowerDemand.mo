@@ -42,7 +42,8 @@ model NominalPowerDemand
   SDF.NDTable boilerEffciency2(
     nin=4,
     readFromFile=true,
-    filename=Filename,
+    filename=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/DataBase/Boiler/General/Boiler_Eta_4D.sdf"),
     dataset="/ETA_Kennfeld",
     dataUnit="-",
     scaleUnits={"degC","K","-","K"},

@@ -92,25 +92,25 @@ package Examples "Holds examples for the modular energy system units"
       TSpeicher(y=80 + 273.15),
       sine(
         amplitude=50000,
-        f=1/3600,
-        offset=-50000),
+        f=1/9000,
+        offset=-75000),
       bou(nPorts=1));
     Interfaces.BoilerControlBus boilerControlBus
       annotation (Placement(transformation(extent={{-122,8},{-102,28}})));
-    Modules.ModularBoiler.ModularBoiler2 modularBoiler2_1(TColdNom=333.15, QNom=
-         150000)
+    Modules.ModularBoiler.ModularBoiler2 modularBoiler2_1(T_cold_nom=333.15,
+        Q_nom=150000)
       annotation (Placement(transformation(extent={{-44,-2},{-24,18}})));
     Fluid.Sources.Boundary_pT
                         bou1(
       nPorts=1,
       use_T_in=false,
-      redeclare package Medium = Media.Water)
+      redeclare package Medium = AixLib.Media.Water)
       annotation (Placement(transformation(extent={{-70,-74},{-50,-54}})));
     Fluid.Sources.Boundary_pT
                         bou2(
       nPorts=1,
       use_T_in=false,
-      redeclare package Medium = Media.Water)
+      redeclare package Medium = AixLib.Media.Water)
       annotation (Placement(transformation(extent={{-24,-74},{-4,-54}})));
   equation
     connect(boilerControlBus, modularBoiler2_1.boilerControlBus) annotation (

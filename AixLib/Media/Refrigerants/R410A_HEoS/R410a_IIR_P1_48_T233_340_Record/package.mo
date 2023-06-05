@@ -121,7 +121,7 @@ package R410a_IIR_P1_48_T233_340_Record "Refrigerant model for R410a using a hyb
     ExternalMedia libaray (i.e. CoolProp)
   */
 
-protected
+  protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -191,7 +191,7 @@ protected
     Vol. 22, No. 4. Afterwards, the coefficients are adapted to the results
     obtained by the ExternalMedia libaray (i.e. CoolProp)
   */
-protected
+  protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -258,7 +258,7 @@ protected
     Mixtures R410A and R407C from Dynamic Light Scattering (DLS).
     International Journal ofThermophysics, Vol. 24, No. 5.
   */
-protected
+  protected
     Real tau = sat.Tsat/343.16 "Dimensionless temperature";
 
   algorithm

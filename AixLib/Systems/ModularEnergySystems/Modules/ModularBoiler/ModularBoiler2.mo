@@ -86,8 +86,8 @@ model ModularBoiler2
     Td=1,
     yMin=0.01)
     annotation (Placement(transformation(extent={{-66,128},{-46,148}})));
-  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium =
-        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium
+      = AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-30,-10},{-14,10}})));
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val2(
@@ -135,18 +135,11 @@ model ModularBoiler2
     annotation (Placement(transformation(extent={{-18,150},{2,170}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
     annotation (Placement(transformation(extent={{56,104},{76,124}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
-    annotation (Placement(transformation(extent={{-62,210},{-42,230}})));
-  Modelica.Blocks.Sources.RealExpression dTWaterNom2(y=T_cold_nom)
-    "Real input temperature difference dimension point"
-    annotation (Placement(transformation(extent={{-174,200},{-134,226}})));
-  Modelica.Blocks.Math.Add add2
-    annotation (Placement(transformation(extent={{-94,166},{-74,186}})));
   Modelica.Blocks.Math.Gain gain2(k=-1)
     annotation (Placement(transformation(extent={{56,50},{76,70}})));
 protected
    parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-  parameter Modelica.Units.SI.PressureDifference dp_nom=18000+7.143*10^8*exp(-0.007078*Q_nom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=18000+7.143*10^8*exp(-0.007078*Q_nom/1000)*(V_flow_nominal)^2;
    replaceable package MediumBoiler =Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
@@ -214,17 +207,6 @@ equation
           {48,118},{48,114},{54,114}}, color={0,0,127}));
   connect(gain1.y, conPID3.u_s)
     annotation (Line(points={{77,114},{90,114},{90,140}}, color={0,0,127}));
-  connect(dTWaterNom2.y, add.u2) annotation (Line(points={{-132,213},{-132,212},
-          {-64,212},{-64,214}},                                           color=
-         {0,0,127}));
-  connect(boilerControlBus.TSupplySet, add.u1) annotation (Line(
-      points={{0.05,100.05},{-100,100.05},{-100,98},{-226,98},{-226,226},{-64,226}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
 
   connect(boilerControlBus.TSupplySet, conPID2.u_s) annotation (Line(
       points={{0.05,100.05},{-14,100.05},{-14,146},{-20,146},{-20,160}},
@@ -234,10 +216,6 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add.y, add2.u1) annotation (Line(points={{-41,220},{-34,220},{-34,216},
-          {-30,216},{-30,194},{-102,194},{-102,182},{-96,182}}, color={0,0,127}));
-  connect(add2.y, conPID2.u_m) annotation (Line(points={{-73,176},{-40,176},{-40,
-          130},{-8,130},{-8,148}}, color={0,0,127}));
   connect(senMasFloHeizkreis.m_flow, boilerControlBus.m_flowMea) annotation (
       Line(points={{-22,11},{-22,100.05},{0.05,100.05}}, color={0,0,127}), Text(
       string="%second",
@@ -269,15 +247,6 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.TReturnMea, add2.u2) annotation (Line(
-      points={{0.05,100.05},{-108,100.05},{-108,104},{-192,104},{-192,170},{-96,
-          170}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.TColdMea, gain2.u) annotation (Line(
       points={{0.05,100.05},{32,100.05},{32,60},{54,60}},
       color={255,204,51},
@@ -288,6 +257,14 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(gain2.y, conPID3.u_m)
     annotation (Line(points={{77,60},{102,60},{102,128}}, color={0,0,127}));
+  connect(boilerControlBus.TSupplyMea, conPID2.u_m) annotation (Line(
+      points={{0.05,100.05},{2,100.05},{2,132},{-8,132},{-8,148}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

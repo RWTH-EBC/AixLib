@@ -42,7 +42,7 @@ model BoilerNotManufacturer "Simple heat generator without control"
   BaseClasses.Controllers.NominalPowerDemand nominalPowerDemand(
     T_cold_nom=T_cold_nom,                                        Q_nom=Q_nom,
       dT_w_nom=dT_w_nom) "Model for calculating nominal power demand"
-    annotation (Placement(transformation(extent={{-66,34},{-46,54}})));
+    annotation (Placement(transformation(extent={{-60,32},{-40,52}})));
   Modelica.Blocks.Math.Product powerDemand
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Math.Product thermalPower
@@ -74,7 +74,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(nominalPowerDemand.nominalPowerDemand, powerDemand.u2) annotation (
-      Line(points={{-45,37},{-45,34},{18,34}},          color={0,0,127}));
+      Line(points={{-39,35},{-39,34},{18,34}},          color={0,0,127}));
   connect(powerDemand.y, thermalPower.u1)
     annotation (Line(points={{41,40},{56,40}}, color={0,0,127}));
   connect(boilerControlBus.Efficiency, thermalPower.u2) annotation (Line(
