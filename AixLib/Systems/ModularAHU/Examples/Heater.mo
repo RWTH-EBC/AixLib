@@ -20,20 +20,18 @@ model Heater "Heating register"
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
     redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=1,
-    m2_flow_nominal=0.1,
     redeclare package Medium1 = MediumAir,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    T_amb=293.15,
     dynamicHX(
-      dp1_nominal=100,
-      dp2_nominal=6000,
-      dT_nom=20,
       Q_nom=30000,
-      redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
-      redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
+      dT_nom=20,dp1_nominal=100,
+      dp2_nominal=6000),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     hydraulicModuleIcon="Admix",
-    T_amb=293.15)
+    m1_flow_nominal=1,
+    m2_flow_nominal=0.1, massDynamics = Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
+
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     nPorts=1,
     redeclare package Medium = MediumWater,
@@ -98,7 +96,7 @@ equation
       StopTime=3600,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
         "Simulate and plot"));
 end Heater;

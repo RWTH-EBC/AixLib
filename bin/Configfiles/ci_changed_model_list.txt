@@ -1,8 +1,0 @@
-:100644 100644 7c121b53e 0a950fe3f M	AixLib/Airflow/AirHandlingUnit/Examples/AHU.mo
-:100644 100644 7047fb520 e329ab729 M	AixLib/Airflow/FacadeVentilationUnit/FacadeVentilationUnit.mo
-:100644 100644 0b3ccc127 cc28b043a M	AixLib/BoundaryConditions/SolarGeometry/BaseClasses/Examples/AltitudeAngle.mo
-:100644 100644 f5f26fc91 bfe97f68b M	AixLib/Resources/ReferenceResults/Dymola/AixLib_Airflow_AirHandlingUnit_Examples_AHU.txt
-:100644 100644 562489e43 603c57505 M	bin/02_CITests/02_UnitTests/reference_check.py
-:100644 100644 b91f45783 6d2cf5f4d M	bin/06_Configfiles/ci_reference_list.txt
-:100644 100644 c7172ef66 000000000 M	bin/06_Configfiles/exit.sh
-:100644 100644 941b35144 db8b04ef1 M	bin/07_templates/03_ci_templates/02_UnitTests/regression_test.gitlab-ci.yml
