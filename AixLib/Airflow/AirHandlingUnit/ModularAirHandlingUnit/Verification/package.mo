@@ -1,4 +1,4 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit;
-package Validation "Validation simulations"
+package Verification "Verification cases"
 extends Modelica.Icons.ExamplesPackage;
-end Validation;
+end Verification;
