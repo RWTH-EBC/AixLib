@@ -2,8 +2,11 @@
 model Warehouse
   import ModelicaServices;
     extends Modelica.Icons.Example;
+      replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   Rooms.RoomEmpiricalValidation.RoomWarehouse room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=283.15,
     TWalls_start=283.15,

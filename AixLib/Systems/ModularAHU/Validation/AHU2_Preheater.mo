@@ -98,6 +98,8 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
 
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -143,6 +145,8 @@ equation
   connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
       Line(points={{-20,-70},{-22,-70},{-22,0.461538},{-22,0.461538}}, color={0,
           127,255}));
+  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-68, -24}, {-38, -24}, {-38, 10}}, color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
