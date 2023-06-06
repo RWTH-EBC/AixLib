@@ -13,7 +13,7 @@ partial model GeothermalHeatPumpBase
 
   replaceable model PeakLoadDeviceModel =
       AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPortTransport
+    AixLib.Fluid.Interfaces.PartialTwoPortTransport(redeclare package Medium = Medium)
     annotation(choicesAllMatching=true);
     PeakLoadDeviceModel PeakLoadDevice
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
