@@ -11,9 +11,11 @@ partial model GeothermalHeatPumpBase
   parameter Modelica.Units.SI.Temperature T_start_hot=300
     "Initial temperature of warm components";
 
-    replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
-      redeclare package Medium = Medium)                                       constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPort
+  replaceable model PeakLoadDeviceModel =
+      AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby
+    AixLib.Fluid.Interfaces.PartialTwoPortTransport
+    annotation(choicesAllMatching=true);
+    PeakLoadDeviceModel PeakLoadDevice
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.BufferStorage
