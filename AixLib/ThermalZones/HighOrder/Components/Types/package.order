@@ -3,6 +3,7 @@ CoeffTableEastWestWindow
 CoeffTableSouthWindow
 PartialCoeffTable
 CalcMethodConvectiveHeatTransfer
+CalcMethodRadiativeHeatTransfer
 CalcMethodConvectiveHeatTransferInsideSurface
 CalcMethodLongwaveRadiationHeatTransfer
 SurfaceOrientation
