@@ -2,3 +2,4 @@ selectorCoefficients
 CoeffTableEastWestWindow
 CoeffTableSouthWindow
 PartialCoeffTable
+CalcMethodRadiativeHeatTransfer
