@@ -1,12 +1,12 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
 model CtrTabsQflow "Power based Controller for concrete core activation"
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.Units.SI.Temperature TflowSet = 293.15 "Flow temperature set point of consumer";
-  parameter Real k(min=0, unit="1") = 0.03 "Gain of controller";
+  parameter Modelica.Units.SI.Temperature TflowSet=293.15   "Flow temperature set point of consumer";
+  parameter Real k(unit="1")=0.03          "Gain of controller";
   parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=60
     "Time constant of Integrator block";
   parameter Modelica.Units.SI.Time Td(min=0)= 0 "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 3000 "Rpm of the Pump";
+  parameter Real rpm_pump(unit="1")=3000          "Rpm of the Pump";
 //   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
 //     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
 //     annotation(Dialog(group="PID"));
@@ -46,6 +46,9 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
     annotation (Placement(transformation(extent={{20,14},{30,24}})));
   Modelica.Blocks.Math.Min min1
     annotation (Placement(transformation(extent={{16,-40},{26,-30}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flow1
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{98,80},{118,100}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{1.4,68.2},{42,68.2},{42,70},{102,70},{102,36},{101.085,36},{101.085,
@@ -99,6 +102,8 @@ equation
           {-16,-32},{-16,-30},{-54,-30},{-54,38},{-20.8,38}}, color={0,0,127}));
   connect(max3.u1, calcHydraulicPower.Q_flow) annotation (Line(points={{19,22},
           {-38,22},{-38,38},{-20.8,38}}, color={0,0,127}));
+  connect(calcHydraulicPower.Q_flow, Q_flow1) annotation (Line(points={{-20.8,
+          38},{-24,38},{-24,90},{108,90}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},

@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
-record ASHRAE140_900 "Record for ASHRAE140 Testcase 900."
+record ASHRAE140_900 "Record for ASHRAE140 Testcase 900"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start=293.0,
     withAirCap = true,
@@ -39,9 +39,9 @@ record ASHRAE140_900 "Record for ASHRAE140 Testcase 900."
     RRoofRem=0.061807839516,
     CRoof={381586.716241},
     nOrientationsRoof=1,
-    tiltRoof={0},
-    aziRoof={0},
-    wfRoof={1},
+    tiltRoof={0.0},
+    aziRoof={0-0.0},
+    wfRoof={1.0},
     aRoof=0.6,
     aExt=0.6,
     TSoil=285.15,
@@ -54,7 +54,7 @@ record ASHRAE140_900 "Record for ASHRAE140 Testcase 900."
     aziExtWalls={0,1.5707963267949,3.1415926535898,-1.5707963267949},
     wfWall={0.15094339622641512,0.25471698113207547,0.33962264150943394,0.25471698113207547},
     wfWin={1.0,0.0,0.0,0.0},
-    wfGro=0,
+    wfGro=0.0,
     specificPeople=0.07143,
     activityDegree=1.2,
     fixedHeatFlowRatePersons=1.25,
