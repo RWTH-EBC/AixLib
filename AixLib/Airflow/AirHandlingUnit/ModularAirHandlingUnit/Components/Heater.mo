@@ -3,29 +3,10 @@ model Heater
   "Idealized model for heater containing heat capacity of heat exchanger"
   extends Components.BaseClasses.PartialHeater;
 
-  parameter Modelica.Units.SI.Length s=0.003 "distance of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
-
-  parameter Boolean use_constant_heatTransferCoefficient=false "if true then a constant heat transfer coefficient is used";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constant_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
-
-  BaseClasses.HeatTransfer.ConvectiveHeatTransferCoefficient heatTransfer(
-    m_flow=m_flow_airIn,
-    length=length,
-    width=width,
-    nFins=nFins,
-    s=s);
-
 equation
 
   // mass balance moisture
   X_airIn = X_airOut;
-
-  // convective heat transfer
-  if use_constant_heatTransferCoefficient then
-    k_air = k;
-  else
-    k_air = heatTransfer.alpha;
-  end if;
 
   annotation (Icon(graphics={Line(
           points={{-76,-58},{-76,-74}},

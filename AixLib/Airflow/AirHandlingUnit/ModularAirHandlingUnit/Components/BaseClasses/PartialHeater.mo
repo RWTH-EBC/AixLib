@@ -6,19 +6,7 @@ partial model PartialHeater
   parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.Units.SI.SpecificHeatCapacity c_steel = 920 "specific heat capacity of heat exchanger material" annotation (HideResult = (use_T_set));
   parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
-
-  parameter Modelica.Units.SI.Mass m_steel = 3 "mass of heat exchanger" annotation (HideResult = (use_T_set));
-
-  parameter Modelica.Units.SI.Length length=0.3 "length of heat exchanger in flow direction" annotation (HideResult = (use_T_set));
-  parameter Modelica.Units.SI.Length width=0.6 "width of heat exchanger vertical to flow direction" annotation (HideResult = (use_T_set));
-  parameter Real nFins=60 "number of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
-  parameter Modelica.Units.SI.Area area=length*width*nFins "heat exchange surface area"
-                                                                                       annotation(enable=false,HideResult = (use_T_set));
-  parameter Modelica.Units.SI.Length delta = 0.002 "thickness of exchange plate" annotation (HideResult = (use_T_set));
-  parameter Modelica.Units.SI.ThermalConductivity lambda = 670 "thermal conduction of exchange plate" annotation (HideResult = (use_T_set));
-  //parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_air = 60 "convective heat transfer coefficient";
 
   parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
 
@@ -74,32 +62,6 @@ partial model PartialHeater
     annotation (Placement(transformation(extent={{100,10},{120,30}}),
         iconTransformation(extent={{100,10},{120,30}})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G=
-        lambda*area/delta) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-12,-54})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if not use_T_set
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
-        iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=m_steel
-        *c_steel) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={34,-28})));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-12,-6})));
-  Modelica.Blocks.Sources.RealExpression convectiveHeatTransferCoefficient(y=
-        k_air*area)
-    annotation (Placement(transformation(extent={{-66,-16},{-46,4}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature
-    annotation (Placement(transformation(extent={{-48,22},{-28,42}})));
-  Modelica.Blocks.Sources.RealExpression T_air(y=(T_airIn + T_airOut)/2)
-    annotation (Placement(transformation(extent={{8,46},{-12,66}})));
   Modelica.Blocks.Interfaces.RealInput T_set if use_T_set annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -108,11 +70,6 @@ partial model PartialHeater
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,100})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-12,20})));
 
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
@@ -124,6 +81,14 @@ partial model PartialHeater
 
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
+  Modelica.Blocks.Interfaces.RealInput u(min=0, max=1)
+    if not use_T_set "input connector scaling heat flow rate [0..1]" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={48,110}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,100})));
 protected
   parameter Real Q_in=0 "dummy heat flow rate, if use_T_set = false";
   Modelica.Blocks.Interfaces.RealInput Q_in_internal "internal heat flow rate";
@@ -143,7 +108,7 @@ equation
 
   if not use_T_set then
     Q_in_internal = Q_in;
-    Q_flow = heatFlowSensor.Q_flow;
+    Q_flow = u * Q_flow_nominal;
   else
     Q_flow = Q_in_internal;
   end if;
@@ -160,21 +125,6 @@ equation
   connect(max.y,T_intern);
 
   // Connectors
-  connect(heatPort, thermalConductor.port_b)
-    annotation (Line(points={{0,-100},{0,-82},{-12,-82},{-12,-64}},
-                                                    color={191,0,0}));
-  connect(thermalConductor.port_a, heatCapacitor.port)
-    annotation (Line(points={{-12,-44},{-12,-28},{24,-28}}, color={191,0,0}));
-  connect(heatCapacitor.port, convection.solid)
-    annotation (Line(points={{24,-28},{-12,-28},{-12,-16}}, color={191,0,0}));
-  connect(convectiveHeatTransferCoefficient.y, convection.Gc)
-    annotation (Line(points={{-45,-6},{-22,-6}}, color={0,0,127}));
-  connect(T_air.y, prescribedTemperature.T) annotation (Line(points={{-13,56},{-60,
-          56},{-60,32},{-50,32}}, color={0,0,127}));
-  connect(prescribedTemperature.port, heatFlowSensor.port_b)
-    annotation (Line(points={{-28,32},{-12,32},{-12,30}}, color={191,0,0}));
-  connect(heatFlowSensor.port_a, convection.fluid)
-    annotation (Line(points={{-12,10},{-12,4}}, color={191,0,0}));
   connect(T_set, max.u1) annotation (Line(points={{0,110},{0,88},{-22,88},{-22,82},
           {-19,82}}, color={0,0,127}));
   connect(T_airIn, max.u2) annotation (Line(points={{-120,40},{-80,40},{-80,76},
