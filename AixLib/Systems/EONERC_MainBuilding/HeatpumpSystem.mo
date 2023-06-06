@@ -286,14 +286,14 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
 
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{42,-58},{54,-46}})));
-  Modelica.Blocks.Sources.Constant const2(k=1800)
+  Modelica.Blocks.Sources.Constant const2(k=4600)
     annotation (Placement(transformation(extent={{24,-50},{32,-42}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={40,-132})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=300, initType=Modelica.Blocks.Types.Init.InitialState)
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=60,  initType=Modelica.Blocks.Types.Init.InitialState)
     annotation (Placement(transformation(extent={{60,-78},{68,-70}})));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
