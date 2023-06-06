@@ -4,7 +4,7 @@ Cooler
 SprayHumidifier
 SteamHumidifier
 PlateHeatExchanger
-PlateHeatExchangerFixedEfficiency
+HeatRecoverySystem
 FanSimple
 RecircFlap
 PassThrough

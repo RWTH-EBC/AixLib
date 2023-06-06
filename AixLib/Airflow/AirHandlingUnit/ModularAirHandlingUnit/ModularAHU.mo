@@ -52,14 +52,12 @@ model ModularAHU "model of a modular air handling unit"
     "relative humidity of outdoor air" annotation (Placement(transformation(
           extent={{-174,-14},{-146,14}}), iconTransformation(extent={{-168,16},
             {-160,24}})));
-  Components.PlateHeatExchangerFixedEfficiency
-    plateHeatExchangerFixedEfficiency(
+  Components.HeatRecoverySystem heatRecoverySystem(
     rho_air=rho,
     epsEnabled=efficiencyHRS_enabled,
     epsDisabled=efficiencyHRS_disabled,
-                                      redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple) if
-                                         heatRecovery
+    redeclare model PartialPressureDrop =
+        Components.PressureDrop.PressureDropSimple) if heatRecovery
     annotation (Placement(transformation(extent={{-94,2},{-74,22}})));
   Components.FanSimple fanSimple(rho_air=rho, eta=eta_sup)
     annotation (Placement(transformation(extent={{8,-48},{28,-28}})));
@@ -82,8 +80,8 @@ model ModularAHU "model of a modular air handling unit"
     rho_air(displayUnit="kg/m3") = rho,
     use_T_set=true,
     redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple) if
-                                                  cooling or dehumidifying
+        Components.PressureDrop.PressureDropSimple)
+                                               if cooling or dehumidifying
     annotation (Placement(transformation(extent={{-32,-50},{-12,-30}})));
 
   replaceable model humidifier = Components.SteamHumidifier
@@ -189,9 +187,8 @@ model ModularAHU "model of a modular air handling unit"
         extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={-31,-105})));
-  Controler.ControlerHeatRecovery controlerHeatRecovery(
-    eps=plateHeatExchangerFixedEfficiency.epsEnabled,
-    dT_min=2) if heatRecovery
+  Controler.ControlerHeatRecovery controlerHeatRecovery(eps=heatRecoverySystem.epsEnabled,
+      dT_min=2) if heatRecovery
     annotation (Placement(transformation(extent={{-110,34},{-90,54}})));
   Modelica.Blocks.Sources.Constant watIn(k=Twat) if humidifying
     annotation (Placement(transformation(extent={{42,-76},{50,-68}})));
@@ -280,11 +277,10 @@ equation
 
   connect(VflowOda, gain.u)
     annotation (Line(points={{-160,80},{-141.2,80}}, color={0,0,127}));
-  connect(gain.y, plateHeatExchangerFixedEfficiency.m_flow_airInOda)
-    annotation (Line(points={{-127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,
-          0,127}));
-  connect(T_oda, plateHeatExchangerFixedEfficiency.T_airInOda) annotation (Line(
-        points={{-160,40},{-120,40},{-120,17},{-95,17}}, color={0,0,127}));
+  connect(gain.y, heatRecoverySystem.m_flow_airInOda) annotation (Line(points={
+          {-127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,0,127}));
+  connect(T_oda, heatRecoverySystem.T_airInOda) annotation (Line(points={{-160,
+          40},{-120,40},{-120,17},{-95,17}}, color={0,0,127}));
   connect(gain.y, passThroughHrs.m_flow_airIn) annotation (Line(points={{-127.4,
           80},{-120,80},{-120,-11},{-95,-11}}, color={0,0,127}));
   connect(T_oda, passThroughHrs.T_airIn) annotation (Line(points={{-160,40},{-120,
@@ -345,15 +341,13 @@ equation
   connect(fanSimple1.PelFan, add.u2) annotation (Line(points={{-41,50},{-63.6,
           50},{-63.6,-66.8}},
                           color={0,0,127}));
-  connect(fanSimple1.m_flow_airOut, plateHeatExchangerFixedEfficiency.m_flow_airInEta)
+  connect(fanSimple1.m_flow_airOut, heatRecoverySystem.m_flow_airInEta)
     annotation (Line(points={{-41,66},{-66,66},{-66,20},{-73,20}}, color={0,0,
           127}));
-  connect(fanSimple1.T_airOut, plateHeatExchangerFixedEfficiency.T_airInEta)
-    annotation (Line(points={{-41,63},{-66,63},{-66,17},{-73,17}}, color={0,0,
-          127}));
-  connect(fanSimple1.X_airOut, plateHeatExchangerFixedEfficiency.X_airInEta)
-    annotation (Line(points={{-41,60},{-66,60},{-66,14},{-73,14}}, color={0,0,
-          127}));
+  connect(fanSimple1.T_airOut, heatRecoverySystem.T_airInEta) annotation (Line(
+        points={{-41,63},{-66,63},{-66,17},{-73,17}}, color={0,0,127}));
+  connect(fanSimple1.X_airOut, heatRecoverySystem.X_airInEta) annotation (Line(
+        points={{-41,60},{-66,60},{-66,14},{-73,14}}, color={0,0,127}));
   connect(fanSimple1.T_airOut, controlerHeatRecovery.T_airInEta) annotation (
       Line(points={{-41,63},{-114,63},{-114,50},{-111,50}}, color={0,0,127}));
   connect(T_oda, controlerHeatRecovery.T_airInOda) annotation (Line(points={{-160,
@@ -363,24 +357,19 @@ equation
           44},{-111,44}}, color={0,0,127}));
   connect(watIn.y, hum.T_watIn) annotation (Line(points={{50.4,-72},{61,-72},{
           61,-63.4}}, color={0,0,127}));
-  connect(plateHeatExchangerFixedEfficiency.m_flow_airOutOda, passThroughCoo.m_flow_airIn)
+  connect(heatRecoverySystem.m_flow_airOutOda, passThroughCoo.m_flow_airIn)
     annotation (Line(points={{-73,10},{-56,10},{-56,-11},{-33,-11}}, color={0,0,
           127}));
-  connect(plateHeatExchangerFixedEfficiency.T_airOutOda, passThroughCoo.T_airIn)
-    annotation (Line(points={{-73,7},{-56,7},{-56,-16},{-33,-16}}, color={0,0,
-          127}));
-  connect(plateHeatExchangerFixedEfficiency.X_airOutOda, passThroughCoo.X_airIn)
-    annotation (Line(points={{-73,4},{-56,4},{-56,-21},{-33,-21}}, color={0,0,
-          127}));
-  connect(plateHeatExchangerFixedEfficiency.m_flow_airOutOda, coo.m_flow_airIn)
-    annotation (Line(points={{-73,10},{-56,10},{-56,-32},{-33,-32}}, color={0,0,
-          127}));
-  connect(plateHeatExchangerFixedEfficiency.T_airOutOda, coo.T_airIn)
-    annotation (Line(points={{-73,7},{-56,7},{-56,-35},{-33,-35}}, color={0,0,
-          127}));
-  connect(plateHeatExchangerFixedEfficiency.X_airOutOda, coo.X_airIn)
-    annotation (Line(points={{-73,4},{-56,4},{-56,-38},{-33,-38}}, color={0,0,
-          127}));
+  connect(heatRecoverySystem.T_airOutOda, passThroughCoo.T_airIn) annotation (
+      Line(points={{-73,7},{-56,7},{-56,-16},{-33,-16}}, color={0,0,127}));
+  connect(heatRecoverySystem.X_airOutOda, passThroughCoo.X_airIn) annotation (
+      Line(points={{-73,4},{-56,4},{-56,-21},{-33,-21}}, color={0,0,127}));
+  connect(heatRecoverySystem.m_flow_airOutOda, coo.m_flow_airIn) annotation (
+      Line(points={{-73,10},{-56,10},{-56,-32},{-33,-32}}, color={0,0,127}));
+  connect(heatRecoverySystem.T_airOutOda, coo.T_airIn) annotation (Line(points=
+          {{-73,7},{-56,7},{-56,-35},{-33,-35}}, color={0,0,127}));
+  connect(heatRecoverySystem.X_airOutOda, coo.X_airIn) annotation (Line(points=
+          {{-73,4},{-56,4},{-56,-38},{-33,-38}}, color={0,0,127}));
   connect(passThroughHrs.m_flow_airOut, passThroughCoo.m_flow_airIn)
     annotation (Line(points={{-73,-11},{-52.5,-11},{-52.5,-11},{-33,-11}},
         color={0,0,127}));
@@ -424,15 +413,14 @@ equation
           {32,-78.4},{19.2,-78.4}}, color={0,0,127}));
   connect(T_supplyAir, add1.u1) annotation (Line(points={{100,-100},{100,-80},{
           34,-80},{34,-85.6},{19.2,-85.6}}, color={0,0,127}));
-  connect(controlerHeatRecovery.hrsOn, plateHeatExchangerFixedEfficiency.hrsOn)
+  connect(controlerHeatRecovery.hrsOn, heatRecoverySystem.hrsOn)
     annotation (Line(points={{-89,44},{-84,44},{-84,24}}, color={255,0,255}));
   connect(relToAbsHum.absHum, passThroughHrs.X_airIn) annotation (Line(points={
           {-125,-3},{-120,-3},{-120,-21},{-95,-21}}, color={0,0,127}));
   connect(phi_oda, relToAbsHum.relHum)
     annotation (Line(points={{-160,0},{-137,0},{-137,-0.4}}, color={0,0,127}));
-  connect(relToAbsHum.absHum, plateHeatExchangerFixedEfficiency.X_airInOda)
-    annotation (Line(points={{-125,-3},{-120,-3},{-120,14},{-95,14}}, color={0,
-          0,127}));
+  connect(relToAbsHum.absHum, heatRecoverySystem.X_airInOda) annotation (Line(
+        points={{-125,-3},{-120,-3},{-120,14},{-95,14}}, color={0,0,127}));
   connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
           40},{-120,-12},{-142,-12},{-142,-5.8},{-137,-5.8}}, color={0,0,127}));
   connect(phi_eta, relToAbsHum1.relHum) annotation (Line(points={{160,0},{122,0},{122,36.4},{109,36.4}}, color={0,0,127}));
@@ -450,15 +438,14 @@ equation
          {{117,-26},{136,-26},{136,-85.8},{141,-85.8}}, color={0,0,127}));
   connect(controlerCooler.TcoolerSet, coo.T_set) annotation (Line(points={{-15,
           -80},{-8,-80},{-8,-30},{-22,-30}}, color={0,0,127}));
-  connect(relToAbsHum2.absHum, controlerCooler.xSup) annotation (Line(points={{
-          45,-91},{-48,-91},{-48,-74},{-37,-74}}, color={0,0,127}));
+  connect(relToAbsHum2.absHum, controlerCooler.xSupSet) annotation (Line(points
+        ={{45,-91},{-48,-91},{-48,-74},{-37,-74}}, color={0,0,127}));
   connect(add1.y, controlerCooler.TsupSet) annotation (Line(points={{5.4,-82},{
           -6,-82},{-6,-96},{-44,-96},{-44,-82},{-37,-82}}, color={0,0,127}));
   connect(passThroughHrs.X_airOut, controlerCooler.Xout) annotation (Line(
         points={{-73,-21},{-40,-21},{-40,-86},{-37,-86}}, color={0,0,127}));
-  connect(plateHeatExchangerFixedEfficiency.X_airOutOda, controlerCooler.Xout)
-    annotation (Line(points={{-73,4},{-40,4},{-40,-86},{-37,-86}}, color={0,0,
-          127}));
+  connect(heatRecoverySystem.X_airOutOda, controlerCooler.Xout) annotation (
+      Line(points={{-73,4},{-40,4},{-40,-86},{-37,-86}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));

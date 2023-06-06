@@ -1,5 +1,5 @@
 ﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
-model PlateHeatExchangerFixedEfficiency
+model HeatRecoverySystem
 
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
@@ -242,4 +242,4 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
                     Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end PlateHeatExchangerFixedEfficiency;
+end HeatRecoverySystem;
