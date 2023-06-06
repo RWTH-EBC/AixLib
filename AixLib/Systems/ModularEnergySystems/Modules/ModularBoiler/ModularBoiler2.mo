@@ -16,6 +16,9 @@ model ModularBoiler2
   parameter Boolean Pump=true "Model includes a pump"
    annotation (choices(checkBox=true), Dialog(descriptionLabel=true));
 
+   parameter Boolean DrinkingWaterSupply=true "Model includes additional drinking water supply"
+   annotation (choices(checkBox=true), Dialog(descriptionLabel=true));
+
 
 
   parameter Modelica.Units.SI.Temperature T_hot_max=273.15 + 90
@@ -62,7 +65,7 @@ model ModularBoiler2
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
     boilerControlBus
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val1(
+  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val_DrinkingWater(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     from_dp=false,
@@ -86,11 +89,11 @@ model ModularBoiler2
     Td=1,
     yMin=0.01)
     annotation (Placement(transformation(extent={{-66,128},{-46,148}})));
-  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium
-      = AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
+  Fluid.Sensors.MassFlowRate senMasFloHeizkreis(redeclare final package Medium =
+        AixLib.Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-30,-10},{-14,10}})));
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val2(
+  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val_Feedback(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     from_dp=false,
@@ -110,16 +113,16 @@ model ModularBoiler2
         Media.Water, final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flow rate"
     annotation (Placement(transformation(extent={{-6,-38},{-26,-18}})));
-  ModularBoiler.TWWAdd_on tWWAdd_on
+  ModularBoiler.TWWAdd_on tWWAdd_on if DrinkingWaterSupply == true
     annotation (Placement(transformation(extent={{-2,-86},{18,-66}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     p(start=Medium.p_default),
-    redeclare final package Medium = Medium)
+    redeclare final package Medium = Medium) if DrinkingWaterSupply == true
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(
     p(start=Medium.p_default),
-    redeclare final package Medium = Medium)
+    redeclare final package Medium = Medium) if DrinkingWaterSupply == true
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{110,-90},{90,-70}})));
   Modelica.Blocks.Sources.RealExpression dTWaterNom1(y=T_cold_nom)
@@ -152,12 +155,35 @@ protected
 
 equation
 
-  connect(port_a, port_a)
-    annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
-
-  if Pump==false then
+ if Pump==false then
   else
   end if;
+
+
+  if DrinkingWaterSupply== true then
+
+    connect(val_DrinkingWater.port_3, tWWAdd_on.port_a2) annotation (Line(
+          points={{82,-8},{82,-38},{16,-38},{16,-66}}, color={0,127,255}));
+    connect(tWWAdd_on.TWW_Valve, val_DrinkingWater.y) annotation (Line(points={{
+            19,-83},{19,-84},{24,-84},{24,-14},{66,-14},{66,14},{82,14},{82,9.6}},
+          color={0,0,127}));
+    connect(tWWAdd_on.port_b1, port_b1)
+    annotation (Line(points={{18,-80},{100,-80}}, color={0,127,255}));
+    connect(tWWAdd_on.port_b2, senTReturn.port_a) annotation (Line(points={{0,-66},
+          {0,-60},{-92,-60},{-92,0}}, color={0,127,255}));
+    connect(port_a1, tWWAdd_on.port_a1)
+    annotation (Line(points={{-100,-80},{-2,-80}}, color={0,127,255}));
+    connect(val_DrinkingWater.port_1, port_b)
+    annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
+
+  else
+
+    connect(val_Feedback.port_1, port_b)
+    annotation (Line(points={{64,0},{100,0}}, color={0,127,255}));
+
+  end if;
+
+
 
   connect(port_a, senTReturn.port_a)
     annotation (Line(points={{-100,0},{-92,0}}, color={0,127,255}));
@@ -166,23 +192,10 @@ equation
     annotation (Line(points={{-14,0},{-10,0}},color={0,127,255}));
   connect(pump.port_b, senMasFloHeizkreis.port_a)
     annotation (Line(points={{-36,0},{-30,0}},          color={0,127,255}));
-  connect(val2.port_3, senMasFloBypass1.port_a)
-    annotation (Line(points={{55,-8},{54,-8},{54,-28},{-6,-28}},
-                                                         color={0,127,255}));
-  connect(conPID3.y, val2.y) annotation (Line(points={{113,140},{113,16},{55,16},
-          {55,9.6}},         color={0,0,127}));
-  connect(val1.port_3, tWWAdd_on.port_a2) annotation (Line(points={{82,-8},{82,
-          -38},{16,-38},{16,-66}},
-                              color={0,127,255}));
-  connect(tWWAdd_on.port_b2, senTReturn.port_a) annotation (Line(points={{0,-66},
-          {0,-60},{-92,-60},{-92,0}}, color={0,127,255}));
-  connect(port_a1, tWWAdd_on.port_a1)
-    annotation (Line(points={{-100,-80},{-2,-80}}, color={0,127,255}));
-  connect(tWWAdd_on.port_b1, port_b1)
-    annotation (Line(points={{18,-80},{100,-80}}, color={0,127,255}));
-  connect(tWWAdd_on.TWW_Valve, val1.y) annotation (Line(points={{19,-83},{19,
-          -78},{24,-78},{24,-14},{66,-14},{66,14},{82,14},{82,9.6}},
-                                     color={0,0,127}));
+  connect(val_Feedback.port_3, senMasFloBypass1.port_a) annotation (Line(points
+        ={{55,-8},{54,-8},{54,-28},{-6,-28}}, color={0,127,255}));
+  connect(conPID3.y, val_Feedback.y) annotation (Line(points={{113,140},{113,16},
+          {55,16},{55,9.6}}, color={0,0,127}));
   connect(heatGeneratorNoControl.boilerControlBus, boilerControlBus)
     annotation (Line(
       points={{-2.8,9.6},{0,9.6},{0,100}},
@@ -222,11 +235,9 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(val2.port_1, val1.port_2)
+  connect(val_Feedback.port_1, val_DrinkingWater.port_2)
     annotation (Line(points={{64,0},{74,0}}, color={0,127,255}));
-  connect(val1.port_1, port_b)
-    annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
-  connect(heatGeneratorNoControl.port_b, val2.port_2)
+  connect(heatGeneratorNoControl.port_b, val_Feedback.port_2)
     annotation (Line(points={{10,0},{46,0}}, color={0,127,255}));
   connect(senMasFloBypass1.port_b, pump.port_a) annotation (Line(points={{-26,
           -28},{-68,-28},{-68,0},{-56,0}}, color={0,127,255}));
@@ -265,7 +276,7 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
           lineColor={0,0,0},

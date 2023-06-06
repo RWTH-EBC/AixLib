@@ -21,34 +21,8 @@ extends Modelica.Icons.InterfacesPackage;
   end VapourCompressionMachineControleBusModular;
 
   expandable connector BoilerControlBus
-    "Standard data bus with boiler information"
+    "Standard data bus for boiler information"
     extends Modelica.Icons.SignalBus;
-
-  Boolean isOn "Switches Controller on and off";
-  Modelica.Units.SI.Temperature TAmbient "Ambient air temperature";
-  Boolean switchToNightMode "Switches the boiler to night mode";
-  Modelica.Units.SI.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
-
-  // BoilerNotManufacturer
-    // Outer variables
-      Real PRatioSet "Relative power ratio of set power to nominal power demand [%]";
-      Modelica.Units.SI.Temperature TSupplySet "Setpoint supply temperature";
-
-    // Inner variables
-      Real Q_rel_mFlow "Relative water mass flow";
-      Real Q_rel_DeltaT "Relative temperature difference";
-
-      Modelica.Units.SI.Temperature TReturnMea "Measurement return temperature";
-      Modelica.Units.SI.Temperature TSupplyMea "Measurement supply temperature";
-      Modelica.Units.SI.Temperature TColdMea "Sensor output TCold combustion chamber";
-      Modelica.Units.SI.Temperature THotWater "Sensor output hot water temperature";
-
-      Modelica.Units.SI.MassFlowRate m_flowMea "Measurement water mass flow";
-
-      Real Efficiency "Efficiency at operating point";
-      Modelica.Units.SI.Power Losses "Power losses";
-      Modelica.Units.SI.Power ThermalPower "Thermal power";
-      Modelica.Units.SI.Power PowerDemand "Power demand";
 
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),

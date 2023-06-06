@@ -6,7 +6,7 @@ InternalControl
 PIController
 PartialExternalControl
 ReturnInfluence
-OperatingEfficiency
+OperationEfficiency
 CHPNomBehaviour
-NominalPowerDemand
+NominalFuelConsumption
 ExhaustTempModel
