@@ -51,14 +51,14 @@ model testPumpHeadCalculation
   Modelica.Blocks.Sources.RealExpression headNew(y=headFlowSpeedFuncNew(
         param.cHQN,
         volumeFlowTable.y,
-        speedTable.y)) if sum(abs(param.cHQN)) <> 0
+        speedTable.y)) if sum(abs(param.cHQN)) > 0
     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
 
   Modelica.Blocks.Sources.RealExpression headNewABC(y=headFlowSpeedFuncNewABC(
         {param.cHQN[3,1], param.cHQN[2,2], param.cHQN[1,3]},
         volumeFlowTable.y,
         speedTable.y)) if sum(abs({param.cHQN[3,1], param.cHQN[2,2],
-          param.cHQN[1,3]})) <> 0
+          param.cHQN[1,3]})) > 0
     annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
 
   annotation (
