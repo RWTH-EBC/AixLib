@@ -8,6 +8,10 @@ model PartialHumidifier "partial model of a humidifier"
   parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
   parameter Boolean use_X_set = false "if true, a set humidity is used to calculate the necessary mass flow rate";
 
+  parameter Modelica.Units.SI.MassFlowRate m_wat_flow_nominal = 0.05
+    "nominal water/steam flow rate of humidifier"
+    annotation(Dialog(enable=not use_X_set),group="Nominal conditions");
+
   // constants
   constant Modelica.Units.SI.SpecificEnthalpy r100 = 2257E3 "specific heat of vaporization at 100°C";
   constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
@@ -64,11 +68,8 @@ model PartialHumidifier "partial model of a humidifier"
     "absolute humidity of outgoing air"
     annotation (Placement(transformation(extent={{100,10},{120,30}}),
         iconTransformation(extent={{100,10},{120,30}})));
-  Modelica.Blocks.Interfaces.RealInput m_wat_flow(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s") if not use_X_set
-                                         "mass flow rate of steam"
-    annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput u(min=0, max=1) if not use_X_set
+    "input connector scaling water flow rate [0..1]" annotation (Placement(
         transformation(
         extent={{20,-20},{-20,20}},
         rotation=-90,
@@ -99,6 +100,12 @@ model PartialHumidifier "partial model of a humidifier"
         rotation=90,
         origin={-30,-94})));
 protected
+  Modelica.Blocks.Sources.Constant mWat_nominal(k=m_wat_flow_nominal)
+    if not use_X_set
+    annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+  Modelica.Blocks.Math.Product product1 if not use_X_set
+    annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+protected
   Modelica.Blocks.Math.Max max if use_X_set
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
@@ -121,12 +128,16 @@ equation
 
     // conditional connectors
    // connect(max.y,X_intern);
-   connect(m_wat_flow,m_wat_flow_intern);
+  connect(u, m_wat_flow_intern);
 
   connect(X_set, max.u1) annotation (Line(points={{0,110},{0,86},{-48,86},{-48,76},
           {-42,76}}, color={0,0,127}));
   connect(X_airIn, max.u2) annotation (Line(points={{-120,20},{-80,20},{-80,64},
           {-42,64}}, color={0,0,127}));
+  connect(mWat_nominal.y, product1.u1) annotation (Line(points={{-79,-50},{-70,
+          -50},{-70,-44},{-62,-44}}, color={0,0,127}));
+  connect(u, product1.u2) annotation (Line(points={{-70,-104},{-70,-56},{-62,
+          -56}}, color={0,0,127}));
         annotation (
     preferredView="info",
     Documentation(info="<html><p>
