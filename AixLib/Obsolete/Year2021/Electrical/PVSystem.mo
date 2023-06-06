@@ -119,32 +119,25 @@ package PVSystem
       AixLib.Obsolete.Year2021.Electrical.PVSystem.BaseClasses.PartialPVSystem;
     extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
-      parameter  Modelica.SIunits.Angle Latitude = 0.65798912800186
-    "Location's Latitude"
-         annotation (Dialog(group="Location"));
+    parameter Modelica.Units.SI.Angle Latitude=0.65798912800186
+      "Location's Latitude" annotation (Dialog(group="Location"));
 
-    parameter Modelica.SIunits.Angle til = 0.34906585039887
-    "Surface's tilt angle (0:flat)"
-         annotation (Dialog(group="Geometry"));
+    parameter Modelica.Units.SI.Angle til=0.34906585039887
+      "Surface's tilt angle (0:flat)" annotation (Dialog(group="Geometry"));
 
-    parameter Modelica.SIunits.Angle azi = -0.78539816339745
-    "Surface's azimut angle (0:South)"
-           annotation (Dialog(group="Geometry"));
+    parameter Modelica.Units.SI.Angle azi=-0.78539816339745
+      "Surface's azimut angle (0:South)" annotation (Dialog(group="Geometry"));
 
     AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
           transformation(extent={{-120,-20},{-80,20}}),iconTransformation(extent={{-110,
               -10},{-90,10}})));
     Modelica.Blocks.Math.Add G "Total irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
-    AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez    HDifTil(
-      til=til,
-      lat=Latitude,
-      azi=azi)               "Diffuse irradiation on tilted surface"
+    AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(til=til,
+        azi=azi) "Diffuse irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-62,18},{-42,38}})));
-    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface    HDirTil(
-      til=til,
-      lat=Latitude,
-      azi=azi)               "Direct irradiation on tilted surface"
+    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(til=
+          til, azi=azi) "Direct irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
   equation
 
@@ -308,15 +301,16 @@ package PVSystem
   \"AixLib.Fluid.Solar.Electric.PVSystem\">PVsystem</a> model.
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
-    Formated documentation.
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+      Formated documentation.
+    </li>
+  </ul>
 </ul>
 </html>"));
     end ExamplePV;
@@ -363,11 +357,12 @@ package PVSystem
   \"AixLib.Fluid.Solar.Electric.PVSystemTMY3\">PVsystemTMY3</a> model.
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
-    First implementation
-  </li>
+  <ul>
+    <li>
+      <i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
+      First implementation
+    </li>
+  </ul>
 </ul>
 </html>"));
     end ExamplePVTMY3;
@@ -383,7 +378,7 @@ package PVSystem
         "Number of panels";
       parameter AixLib.Obsolete.Year2021.DataBase.SolarElectric.PVBaseRecord
         data "PV data set" annotation (choicesAllMatching=true);
-      parameter Modelica.SIunits.Power MaxOutputPower
+      parameter Modelica.Units.SI.Power MaxOutputPower
         "Maximum output power for inverter";
       Modelica.Blocks.Interfaces.RealOutput PVPowerW(
         final quantity="Power",
@@ -433,8 +428,8 @@ package PVSystem
     model PVInverterRMS "Inverter model including system management"
       extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
-     parameter Modelica.SIunits.Power uMax2
-      "Upper limits of input signals (MaxOutputPower)";
+      parameter Modelica.Units.SI.Power uMax2
+        "Upper limits of input signals (MaxOutputPower)";
      Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW(
       final quantity="Power",
       final unit="W")
@@ -512,7 +507,8 @@ package PVSystem
   </li>
 </ul>
 </html>",info="<html><h4>
-<span style=\"color: #008000\">Overview</span>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <p>
   The <b>PVinverterRMS</b> model represents a simple PV inverter.
 </p>
@@ -529,24 +525,18 @@ package PVSystem
     model PVModuleDC "partial model for PV module"
       extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
-     parameter Modelica.SIunits.Area Area
-      "Area of one Panel";
-     parameter Modelica.SIunits.Efficiency Eta0
-      "Maximum efficiency";
-     parameter Modelica.SIunits.Temp_K NoctTemp
-      "Defined temperature";
-     parameter Modelica.SIunits.Temp_K NoctTempCell
-      "Meassured cell temperature";
-     parameter Modelica.SIunits.RadiantEnergyFluenceRate NoctRadiation
-      "Defined radiation";
-     parameter Modelica.SIunits.LinearTemperatureCoefficient TempCoeff
-      "Temperature coeffient";
-     Modelica.SIunits.Power PowerPV
-      "Power of PV panels";
-     Modelica.SIunits.Efficiency EtaVar
-      "Efficiency of PV cell";
-     Modelica.SIunits.Temp_K TCell
-      "Cell temperature";
+      parameter Modelica.Units.SI.Area Area "Area of one Panel";
+      parameter Modelica.Units.SI.Efficiency Eta0 "Maximum efficiency";
+      parameter Modelica.Units.SI.Temperature NoctTemp "Defined temperature";
+      parameter Modelica.Units.SI.Temperature NoctTempCell
+        "Meassured cell temperature";
+      parameter Modelica.Units.SI.RadiantEnergyFluenceRate NoctRadiation
+        "Defined radiation";
+      parameter Modelica.Units.SI.LinearTemperatureCoefficient TempCoeff
+        "Temperature coeffient";
+      Modelica.Units.SI.Power PowerPV "Power of PV panels";
+      Modelica.Units.SI.Efficiency EtaVar "Efficiency of PV cell";
+      Modelica.Units.SI.Temperature TCell "Cell temperature";
 
      Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
       final quantity="Power",
@@ -598,20 +588,21 @@ package PVSystem
   temperature&#160;dependency&#160;for&#160;efficiency.
 </p>
 </html>",revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 20, 2017</i> by Larissa Kühn:<br/>
-    Modification of Input to make the model compatible with diffent
-    weather models
-  </li>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/>
-    Implemented
-  </li>
+  <ul>
+    <li>
+      <i>October 20, 2017</i> by Larissa Kühn:<br/>
+      Modification of Input to make the model compatible with diffent
+      weather models
+    </li>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/>
+      Implemented
+    </li>
+  </ul>
 </ul>
 </html>"),     Diagram(
             coordinateSystem(preserveAspectRatio=false)));

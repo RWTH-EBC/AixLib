@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model Admix "Test for admix circuit"
   extends Modelica.Icons.Example;
 
@@ -57,6 +57,8 @@ model Admix "Test for admix circuit"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-84, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
 
   connect(Admix.port_b1, hydRes.port_a)
@@ -85,6 +87,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-72, -30}, {-42, -30}, {-42, 10}}, color = {255, 0, 255}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
@@ -6,18 +6,18 @@ model Multizone
 
 
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0)
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0)
     "Ventilation and infiltration temperature"
     annotation (Placement(transformation(extent={{-120,-12},{-80,28}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-90,0})));
-  Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
-    quantity="VolumeFlowRate", final unit="1/h")
+  Modelica.Blocks.Interfaces.RealInput ventRate[numZones](
+    each final quantity="VolumeFlowRate", each final unit="1/h")
     "Ventilation and infiltration rate"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-100,-36},{-80,-16}})));
@@ -38,8 +38,8 @@ model Multizone
   Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)] if
-    use_moisture_balance "Humidity output"
+  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)]
+ if use_moisture_balance "Humidity output"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
 

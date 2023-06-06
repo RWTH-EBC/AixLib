@@ -3,9 +3,9 @@ model VCLibMap
   "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapour Compression Library"
   extends BaseClasses.PartialPerformanceData;
   // Parameters Heat pump operation
-  parameter Modelica.SIunits.Power QCon_flow_nominal=5000
-    "Nominal heating power of heat pump"                                                 annotation(Dialog(group=
-          "Heat pump specification"));
+  parameter Modelica.Units.SI.Power QCon_flow_nominal=5000
+    "Nominal heating power of heat pump"
+    annotation (Dialog(group="Heat pump specification"));
   parameter String refrigerant="R410A" "Identifier for the refrigerant" annotation(Dialog(group=
           "Heat pump specification"));
   parameter String flowsheet="StandardFlowsheet" "Identifier for the flowsheet" annotation(Dialog(group=
@@ -23,8 +23,12 @@ model VCLibMap
   parameter String tableName_QConNominal="Q_flow_con_nominal" "String identifier in sdf table for QConNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
   parameter String tableName_mFlowEvaNominal="m_flow_eva" "String identifier in sdf table for mFlow_evaNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
   parameter String tableName_mFlowConNominal="m_flow_con" "String identifier in sdf table for mFlow_conNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
-  parameter Modelica.SIunits.Power Q_flowTableNom = SDF.Functions.readDatasetDouble(fileref, dataset_QflowNom, "W")
-  "Nominal heat flow in map. Doesn't need to be changed."  annotation(Dialog(tab="SDF File", group="Variable names"));
+  parameter Modelica.Units.SI.Power Q_flowTableNom=
+      SDF.Functions.readDatasetDouble(
+      fileref,
+      dataset_QflowNom,
+      "W") "Nominal heat flow in map. Doesn't need to be changed."
+    annotation (Dialog(tab="SDF File", group="Variable names"));
   parameter Real minCOP=0.1
     "Minimal possible COP value. Used to avoid division by zero error. Should never occur anyways if performance map is correctly created"
     annotation (Dialog(tab="Advanced"));
@@ -103,13 +107,13 @@ model VCLibMap
 
 protected
   parameter String fileref = Modelica.Utilities.Files.loadResource(filename);
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal=
+  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal=
       SDF.Functions.readDatasetDouble(
       fileref,
       dataset_mFlowEvaNominal,
       "kg/s") "Nominal mass flow rate";
 
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal=
+  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal=
       SDF.Functions.readDatasetDouble(
       fileref,
       dataset_mFlowConNominal,
@@ -211,12 +215,13 @@ equation
   The publications regarding this model are currenlty in review.
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>May 05, 2021&#160;</i> by Fabian Wüllhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
-  </li>
+  <ul>
+    <li>
+      <i>May 05, 2021&#160;</i> by Fabian Wüllhorst:<br/>
+      First implementation (see issue <a href=
+      \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
+    </li>
+  </ul>
 </ul>
 </html>"));
 end VCLibMap;

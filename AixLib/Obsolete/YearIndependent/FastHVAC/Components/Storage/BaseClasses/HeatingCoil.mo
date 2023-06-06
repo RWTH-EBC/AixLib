@@ -6,11 +6,12 @@ model HeatingCoil
   parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
 
- parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
+  parameter Modelica.Units.SI.Length lengthHC=3 "Length of Pipe for HC";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC=20 "Model assumptions heat transfer coefficient HC <-> Heating Water";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC=20
+    "Model assumptions heat transfer coefficient HC <-> Heating Water";
 
-  parameter Modelica.SIunits.Temperature T_start "Start Temperature of fluid";
+  parameter Modelica.Units.SI.Temperature T_start "Start Temperature of fluid";
 
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeRecordHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
@@ -50,8 +51,9 @@ model HeatingCoil
   AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
   parameter Boolean calcHCon=true "Use calculated value for inside heat transfer coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coefficient inside pipe"
-                                                         annotation(Dialog(enable=not calcHCon));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=30
+    "Fix value for heat transfer coefficient inside pipe"
+    annotation (Dialog(enable=not calcHCon));
 equation
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-2,82},{-2,104}},

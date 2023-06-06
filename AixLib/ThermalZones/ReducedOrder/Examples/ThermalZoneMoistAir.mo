@@ -118,9 +118,8 @@ model ThermalZoneMoistAir
     annotation (Placement(transformation(extent={{46,-10},{26,10}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{94,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
     "Convective heat flow of additional internal gains"
@@ -169,8 +168,11 @@ equation
   connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
           -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),
+        experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAir.mos"
+        "Simulate and plot"),
     Documentation(revisions="<html><ul>
   <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.

@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.UsersGuide;
+﻿within AixLib.Media.Refrigerants.UsersGuide;
 class References "References"
   extends Modelica.Icons.References;
 

@@ -1,0 +1,10 @@
+﻿clear
+
+convertClear();
+
+// replacing use_AirExchange by two booleans in order to set natural and mechenical ventilation seperatly
+// use_MechanicalAirExchange replaces use_AirExchange 
+//  use_NaturalAirExchange gets the same boolean value by default as use_MechanicalAirExchange within the thermal zone model to enable the use of conversion scripts 
+
+convertElement("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone","use_AirExchange","use_MechanicalAirExchange"); 
+

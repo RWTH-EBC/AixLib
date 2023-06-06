@@ -1,15 +1,19 @@
-within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model TwinHouseN2
    extends Modelica.Icons.Example;
+   replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 roomTwinHouseN2(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,
     calcMethodIn=1,
     redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     solar_absorptance_OW=0.23,
     use_infiltEN12831=true,
     n50=1.62,
@@ -135,7 +139,7 @@ model TwinHouseN2
     annotation (Placement(transformation(extent={{144,84},{154,94}})));
 equation
   connect(weather.WindSpeed, roomTwinHouseN2.WindSpeedPort) annotation (Line(
-        points={{-59,90},{28,90},{28,2.2},{33,2.2}},      color={0,0,127}));
+        points={{-59,90},{28,90},{28,-11.1},{33,-11.1}},  color={0,0,127}));
   connect(weather.AirTemp, outsideTemp.T) annotation (Line(points={{-59,87},{
           -56,87},{-56,78.5},{-53.1,78.5}}, color={0,0,127}));
   connect(Temp.port, roomTwinHouseN2.Therm_ground) annotation (Line(points={{51,

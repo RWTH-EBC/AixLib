@@ -1,13 +1,9 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function CollisionIntegral "calculates collision integral for water in air"
 
-  input Modelica.SIunits.Temperature T;
+  input Modelica.Units.SI.Temperature T;
 
   output Real Omega_D;
-
-  constant Real kB(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
-  constant Real epsAir = 78.6 * kB "Lennard-Jones potential of air";
-  constant Real epsSteam = 363 * kB "Lennard-Jones potential of steam";
 
 protected
   Real omegas[:];
@@ -16,6 +12,11 @@ protected
 
   Real eps12;
   Real epsInternal;
+
+  constant Real epsAir = 78.6 * Modelica.Constants.k
+    "Lennard-Jones potential of air";
+  constant Real epsSteam = 363 * Modelica.Constants.k
+    "Lennard-Jones potential of steam";
 algorithm
 
   omegas :={2.662,2.476,2.318,2.184,2.066,1.966,1.877,1.789,1.729,1.667,1.612,1.562,
@@ -33,7 +34,7 @@ algorithm
 
   eps12 :=(epsAir*epsSteam)^(1/2);
 
-  epsInternal :=kB*T/eps12;
+  epsInternal :=Modelica.Constants.k*T/eps12;
 
   Omega_D := AixLib.Utilities.Math.Functions.linearInterpolation(
     x=epsInternal, y_1=interp);

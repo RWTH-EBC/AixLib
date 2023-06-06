@@ -3,8 +3,8 @@ function NusseltNumberStephan
   "calculates nusselt number out of reynolds and prandtl number according to Stephan, K."
 
   // Inputs
-  input Modelica.SIunits.Length dimension "characteristic dimension";
-  input Modelica.SIunits.Length length "length of flat gap";
+  input Modelica.Units.SI.Length dimension "characteristic dimension";
+  input Modelica.Units.SI.Length length "length of flat gap";
   input Real Pr "Prandtl number";
   input Real Re "Reynolds number";
 

@@ -2,10 +2,10 @@ within AixLib.Utilities.Sensors.ExergyMeter;
 model FlowExergyMeter
 
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
 
   Modelica.Blocks.Interfaces.RealInput X_ref[Medium.nX](
-  final quantity="MassFraction", final unit="1", min=0, max=1)
+  each final quantity="MassFraction", each final unit="1", each min=0, each max=1)
     "Reference composition"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
@@ -45,7 +45,8 @@ model FlowExergyMeter
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-100})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef(redeclare package Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef(redeclare package
+                                                                                Medium =
                Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{-12,-62},{-32,-42}})));
   Modelica.Fluid.Sensors.SpecificEntropy specificEntropy_ref(redeclare package Medium =

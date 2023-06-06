@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model ColdProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 0
@@ -28,15 +28,15 @@ model ColdProducerAgent
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-92,-108})));
-  Modelica.StateGraph.Step message(nOut=2)
+  Modelica.StateGraph.Step message(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-72,-118},{-52,-98}})));
-  Modelica.StateGraph.Step adjustHeat
+  Modelica.StateGraph.Step adjustHeat(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,20},{-16,40}})));
   Modelica.StateGraph.Transition transition2(
       enableTimer=true, waitTime=2)
     annotation (Placement(transformation(extent={{-8,20},{12,40}})));
 
-  Modelica.StateGraph.Step computeProposal
+  Modelica.StateGraph.Step computeProposal(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-26,86},{-6,106}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=noEvent(
         getperformative.y[1] == 4))
@@ -54,7 +54,7 @@ model ColdProducerAgent
       enableTimer=true)
     annotation (Placement(transformation(extent={{44,86},{64,106}})));
 
-  Modelica.StateGraph.StepWithSignal sendProposal(nOut=3)
+  Modelica.StateGraph.StepWithSignal sendProposal(nOut=3, nIn=1)
     annotation (Placement(transformation(extent={{76,86},{96,106}})));
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-170,-50},{-150,-30}})));
@@ -73,12 +73,12 @@ model ColdProducerAgent
     annotation (Placement(transformation(extent={{-124,-68},{-98,-50}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-90,-62},{-84,-56}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,-56},{-16,-36}})));
   Modelica.StateGraph.Transition transition3(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{2,-56},{22,-36}})));
 
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{42,-56},{62,-36}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{82,-56},{102,-36}})));
@@ -116,7 +116,7 @@ protected
     annotation (Placement(transformation(extent={{140,-204},{180,-164}})));
 
 public
-  Modelica.StateGraph.Step confirm
+  Modelica.StateGraph.Step confirm(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-38,-26},{-18,-6}})));
   Modelica.StateGraph.Transition transition6(
       enableTimer=true, waitTime=2)
@@ -146,7 +146,7 @@ public
         rotation=0,
         origin={-82,-154})));
   Modelica.StateGraph.Step shutDown(
-                                   nOut=2)
+                                   nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-56,-164},{-36,-144}})));
   Modelica.StateGraph.Transition transition7(                  waitTime=0.1,
       enableTimer=true)
@@ -196,7 +196,7 @@ equation
   end if;
 
   connect(newMessage.inPort, waiting.outPort[1]) annotation (Line(
-      points={{-96,-108},{-108,-108},{-108,-107.75},{-119.5,-107.75}},
+      points={{-96,-108},{-108,-108},{-108,-108.125},{-119.5,-108.125}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(newMessage.outPort, message.inPort[1]) annotation (Line(
@@ -249,7 +249,7 @@ equation
       smooth=Smooth.None));
   connect(sendProposal.outPort[1], transitionWithSignal1.inPort) annotation (
       Line(
-      points={{96.5,96.3333},{104,96.3333},{104,68},{-114,68},{-114,30},{-80,30}},
+      points={{96.5,95.8333},{104,95.8333},{104,68},{-114,68},{-114,30},{-80,30}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(transitionWithSignal2.condition, booleanExpression2.y) annotation (
@@ -264,7 +264,7 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(message.outPort[1], transitionWithSignal.inPort) annotation (Line(
-      points={{-51.5,-107.75},{-48,-107.75},{-48,-86},{-132,-86},{-132,96},{-94,
+      points={{-51.5,-108.125},{-48,-108.125},{-48,-86},{-132,-86},{-132,96},{-94,
           96}},
       color={0,0,0},
       smooth=Smooth.None));
@@ -278,7 +278,7 @@ equation
       color={255,0,255},
       smooth=Smooth.None));
   connect(transitionWithSignal3.inPort, message.outPort[2]) annotation (Line(
-      points={{-80,-46},{-132,-46},{-132,-86},{-48,-86},{-48,-108.25},{-51.5,-108.25}},
+      points={{-80,-46},{-132,-46},{-132,-86},{-48,-86},{-48,-107.875},{-51.5,-107.875}},
       color={0,0,0},
       smooth=Smooth.None));
 
@@ -446,7 +446,7 @@ algorithm
 
 equation
   connect(transition2.outPort, sendConfirmation.inPort[1]) annotation (Line(
-      points={{3.5,30},{14,30},{14,30.5},{25,30.5}},
+      points={{3.5,30},{14,30},{14,29.75},{25,29.75}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(sendConfirmation.outPort[1], transition5.inPort) annotation (Line(
@@ -454,8 +454,7 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(transition5.outPort, waiting.inPort[2]) annotation (Line(
-      points={{83.5,30},{104,30},{104,-172},{-148,-172},{-148,-107.75},{
-          -141,-107.75}},
+      points={{83.5,30},{104,30},{104,-172},{-148,-172},{-148,-108.125},{-141,-108.125}},
       color={0,0,0},
       smooth=Smooth.None));
 
@@ -490,32 +489,26 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(transition6.outPort, sendConfirmation.inPort[2]) annotation (Line(
-      points={{3.5,-16},{18,-16},{18,29.5},{25,29.5}},
+      points={{3.5,-16},{18,-16},{18,30.25},{25,30.25}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(transition4.outPort, waiting.inPort[1]) annotation (Line(
-      points={{93.5,-46},{104,-46},{104,-172},{-148,-172},{-148,-107.25},{
-          -141,-107.25}},
+      points={{93.5,-46},{104,-46},{104,-172},{-148,-172},{-148,-108.375},{-141,
+          -108.375}},
       color={0,0,0},
-      smooth=Smooth.None));
-
-  connect(calcCapacity, calcCapacity) annotation (Line(
-      points={{-90,198},{-90,198},{-90,198}},
-      color={0,0,127},
       smooth=Smooth.None));
   connect(not2.u, OnOff_external) annotation (Line(points={{-185,-189},{
           -188,-189},{-188,-190},{-192,-190},{-192,-110},{-200,-110}},
                                     color={255,0,255}));
-  connect(Off.inPort, waiting.outPort[2]) annotation (Line(points={{-86,
-          -154},{-112,-154},{-112,-154},{-112,-108.25},{-119.5,-108.25}},
+  connect(Off.inPort, waiting.outPort[2]) annotation (Line(points={{-86,-154},{-112,
+          -154},{-112,-154},{-112,-107.875},{-119.5,-107.875}},
                                                               color={0,0,0}));
   connect(Off.outPort, shutDown.inPort[1]) annotation (Line(points={{-80.5,-154},
           {-57,-154}},            color={0,0,0}));
   connect(shutDown.outPort[1], transition7.inPort) annotation (Line(points={{-35.5,
-          -153.75},{-28.75,-153.75},{-28.75,-154},{-20,-154}}, color={0,0,0}));
+          -154},{-28.75,-154},{-28.75,-154},{-20,-154}},       color={0,0,0}));
   connect(transition7.outPort, waiting.inPort[3]) annotation (Line(points={{-14.5,
-          -154},{18,-154},{18,-172},{-148,-172},{-148,-108.25},{-141,
-          -108.25}},
+          -154},{18,-154},{18,-172},{-148,-172},{-148,-107.875},{-141,-107.875}},
         color={0,0,0}));
   connect(not2.y, and1.u1) annotation (Line(points={{-173.5,-189},{-124,
           -189},{-124,-186},{-120,-186},{-120,-188},{-116,-188}},
@@ -527,12 +520,12 @@ equation
           -196},{-124,-196},{-116,-196}},
                               color={255,0,255}));
   connect(reset.inPort, sendProposal.outPort[3]) annotation (Line(
-      points={{14,-106},{120,-106},{120,95.6667},{96.5,95.6667}},
+      points={{14,-106},{120,-106},{120,96.1667},{96.5,96.1667}},
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(reset.outPort, waiting.inPort[4]) annotation (Line(
-      points={{8.5,-106},{-14,-106},{-14,-126},{-142,-126},{-142,-114},{
-          -142,-108.75},{-141,-108.75}},
+      points={{8.5,-106},{-14,-106},{-14,-126},{-142,-126},{-142,-114},{-142,-107.625},
+          {-141,-107.625}},
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(minCapacityInput, zeroOrderHold.u)

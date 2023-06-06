@@ -24,15 +24,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end SymphonyEnergySE6M181;
@@ -59,15 +60,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end SchuecoSME1;
@@ -75,18 +77,16 @@ package DataBase
     record PVBaseRecord
       extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
         extends Modelica.Icons.Record;
-      parameter Modelica.SIunits.Efficiency Eta0(min=0, max=1)
+      parameter Modelica.Units.SI.Efficiency Eta0(min=0, max=1)
         "Maximum efficiency";
-      parameter Modelica.SIunits.LinearTemperatureCoefficient TempCoeff(min=0, max=1)
-        "Temperature coeffient";
-      parameter Modelica.SIunits.Temp_K NoctTempCell
+      parameter Modelica.Units.SI.LinearTemperatureCoefficient TempCoeff(min=0,
+          max=1) "Temperature coeffient";
+      parameter Modelica.Units.SI.Temperature NoctTempCell
         "Meassured cell temperature";
-      parameter Modelica.SIunits.Temp_K NoctTemp
-        "Defined temperature";
-      parameter Modelica.SIunits.RadiantEnergyFluenceRate NoctRadiation
+      parameter Modelica.Units.SI.Temperature NoctTemp "Defined temperature";
+      parameter Modelica.Units.SI.RadiantEnergyFluenceRate NoctRadiation
         "Defined radiation";
-      parameter Modelica.SIunits.Area Area
-        "Area of one Panel";
+      parameter Modelica.Units.SI.Area Area "Area of one Panel";
 
       annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
@@ -102,15 +102,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end PVBaseRecord;
@@ -138,15 +139,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end CanadianSolarCS6P250P;
@@ -174,15 +176,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end AleoS24;
@@ -209,15 +212,16 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
-    Added documentation and formatted appropriately
-  </li>
+  <ul>
+    <li>
+      <i>October 11, 2016</i> by Tobias Blacha:<br/>
+      Moved into AixLib
+    </li>
+    <li>
+      <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+      Added documentation and formatted appropriately
+    </li>
+  </ul>
 </ul>
 </html>"));
     end ACSPanelSystem;

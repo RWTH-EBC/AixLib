@@ -1,15 +1,14 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
-  parameter Modelica.SIunits.Volume VAir
-     "Indoor air volume of building";
-  parameter Integer numZones(min=1)
+  parameter Modelica.Units.SI.Volume VAir "Indoor air volume of building";
+  parameter Integer numZones(min=1)=1
     "Number of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
-  parameter Modelica.SIunits.Pressure PAirConstant = 101325
-    "constant pressure of indoor air for rel. humidity calculation"  annotation (Dialog(
-    enable=calc_rel_humidity));
+  parameter Modelica.Units.SI.Pressure PAirConstant=101325
+    "constant pressure of indoor air for rel. humidity calculation"
+    annotation (Dialog(enable=calc_rel_humidity));
   parameter Boolean calc_rel_humidity "true to calculate rel. humidity";
   Modelica.Blocks.Math.Sum PHeaterSumCalc(nin=numZones)
     "Power consumed for heating with ideal heaters"
@@ -27,31 +26,31 @@ model MultizonePostProcessing
     "Average temperature of all zones"
     annotation (Placement(transformation(extent={{58,88},{74,104}})));
 
-  Modelica.Blocks.Interfaces.RealInput TAir[numZones](final quantity="ThermodynamicTemperature",
-      final unit="K",
-      displayUnit= "°C") "Air temperature of each zone"
+  Modelica.Blocks.Interfaces.RealInput TAir[numZones](each final quantity="ThermodynamicTemperature",
+      each final unit="K",
+      each displayUnit="degC") "Air temperature of each zone"
                                    annotation (Placement(transformation(extent={{-140,80},
             {-100,120}}),           iconTransformation(extent={{-140,80},{-100,120}})));
   Modelica.Blocks.Interfaces.RealInput TRad[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="°C") "Radiative temperature of each zone"
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC") "Radiative temperature of each zone"
                                    annotation (Placement(transformation(extent={{-140,56},
             {-100,96}}),            iconTransformation(extent={{-140,56},{-100,
             96}})));
   Modelica.Blocks.Interfaces.RealInput X_w[numZones](
-    final quantity="MassFraction",
-    final unit="1") if calc_rel_humidity
+    each final quantity="MassFraction",
+    each final unit="1") if calc_rel_humidity
                     "Absolute humidity in thermal zone" annotation (
       Placement(transformation(extent={{-140,28},{-100,68}}),
         iconTransformation(extent={{-140,22},{-100,62}})));
-  Modelica.Blocks.Interfaces.RealInput PCooler[numZones](final quantity="HeatFlowRate",
-      final unit="W")
+  Modelica.Blocks.Interfaces.RealInput PCooler[numZones](each final quantity="HeatFlowRate",
+      each final unit="W")
     "Power consumed for cooling with ideal coolers by each zone" annotation (
       Placement(transformation(extent={{-140,-34},{-100,6}}),
         iconTransformation(extent={{-140,-34},{-100,6}})));
-  Modelica.Blocks.Interfaces.RealInput PHeater[numZones](final quantity="HeatFlowRate",
-      final unit="W")
+  Modelica.Blocks.Interfaces.RealInput PHeater[numZones](each final quantity="HeatFlowRate",
+      each final unit="W")
     "Power consumed for heating ling with ideal heaters by each zone"
     annotation (Placement(transformation(extent={{-140,-6},{-100,34}}),
         iconTransformation(extent={{-140,-6},{-100,34}})));
@@ -146,8 +145,8 @@ model MultizonePostProcessing
   Utilities.Psychrometrics.Phi_pTX calcPhi[numZones] if calc_rel_humidity
     "Calculates relative humdity"
     annotation (Placement(transformation(extent={{-22,32},{-2,52}})));
-  Modelica.Blocks.Sources.Constant constPressure[numZones](k=PAirConstant) if
-    calc_rel_humidity
+  Modelica.Blocks.Sources.Constant constPressure[numZones](each k=PAirConstant)
+ if calc_rel_humidity
     annotation (Placement(transformation(extent={{-78,20},{-62,36}})));
   Modelica.Blocks.Interfaces.RealOutput TOperativeMean(
     final quantity="ThermodynamicTemperature",
@@ -155,8 +154,8 @@ model MultizonePostProcessing
     displayUnit="degC") "Average operative air temperature in building"
     annotation (Placement(transformation(extent={{100,68},{120,88}}),
         iconTransformation(extent={{100,68},{120,88}})));
-  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1") if
-    calc_rel_humidity
+  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1")
+ if calc_rel_humidity
     "Average relative humidity in building" annotation (Placement(
         transformation(extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},
             {120,70}})));
@@ -169,6 +168,22 @@ model MultizonePostProcessing
         VAir) if calc_rel_humidity
               "Average relative humidity of all zones"
     annotation (Placement(transformation(extent={{58,48},{74,64}})));
+  Modelica.Blocks.Interfaces.RealOutput QIntGains[numZones,3](
+    each final quantity="Energy",
+    each final unit="J",
+    each displayUnit="kWh")
+    "Heat gains based on internal gains for each zone from persons, machines, and light"
+    annotation (Placement(transformation(extent={{100,-122},{120,-102}}),
+        iconTransformation(extent={{100,-130},{120,-110}})));
+  Modelica.Blocks.Interfaces.RealInput QIntGains_flow[numZones,3](each final
+      quantity="HeatFlowRate", each final unit="W")
+    "Heat flow based on internal gains for each zone from persons, machines, and light"
+                                                                 annotation (
+      Placement(transformation(extent={{-140,-140},{-100,-100}}),
+        iconTransformation(extent={{-140,-140},{-100,-100}})));
+  Modelica.Blocks.Continuous.Integrator QIntGainCalc[numZones,3]
+    "Heat gain based on internal gains for each zone from persons, machines, and light"
+    annotation (Placement(transformation(extent={{58,-124},{74,-108}})));
 equation
   connect(TAirAverageCalc.u, TAir) annotation (Line(points={{56.4,96},{56.4,100},
           {-120,100}}, color={0,0,127}));
@@ -237,9 +252,14 @@ equation
           {15.5,42},{15.5,56},{56.4,56}}, color={0,0,127}));
   connect(RelHumditiyMeanCalc.y, RelHumidityMean) annotation (Line(points={{74.8,56},
           {88,56},{88,60},{110,60}},          color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  connect(QIntGains_flow, QIntGainCalc.u) annotation (Line(points={{-120,-120},
+          {-32,-120},{-32,-116},{56.4,-116}}, color={0,0,127}));
+  connect(QIntGainCalc.y, QIntGains) annotation (Line(points={{74.8,-116},{92,
+          -116},{92,-112},{110,-112}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -120},{100,100}}),                                  graphics={
         Rectangle(
-          extent={{-100,100},{100,-100}},
+          extent={{-100,100},{100,-120}},
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
@@ -279,7 +299,8 @@ equation
         Ellipse(extent={{2,-64},{10,-70}}, lineColor={28,108,200}),
         Ellipse(extent={{12,-54},{20,-60}}, lineColor={28,108,200})}),
                                                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,
+            100}})),
     Documentation(info="<html><p>
   This model is used to simplify the post processing. It's purpose is
   to calculate and output common simulation information and KPI for

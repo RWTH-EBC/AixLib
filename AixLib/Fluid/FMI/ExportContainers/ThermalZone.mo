@@ -1,62 +1,62 @@
 within AixLib.Fluid.FMI.ExportContainers;
- partial block ThermalZone
-   "Partial block to export a model of a thermal zone as an FMU"
-   replaceable package Medium =
-     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-       annotation (choices(
-         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
- 
-   parameter Integer nPorts(min=2) "Number of fluid ports";
- 
-   Interfaces.Inlet fluPor[nPorts](
-     redeclare each final package Medium = Medium,
-     each final use_p_in=false,
-     each final allowFlowReversal=true) "Fluid connector" annotation (Placement(
-         transformation(extent={{-180,150},{-160,170}}), iconTransformation(
-           extent={{-180,150},{-160,170}})));
- 
-   Adaptors.ThermalZone theZonAda(
-     redeclare final package Medium = Medium,
-     final nPorts=nPorts)
-     "Adapter between the HVAC supply and return air, and its connectors for the FMU"
-     annotation (Placement(transformation(extent={{-140,150},{-120,170}})));
- 
- equation
-   connect(theZonAda.fluPor, fluPor) annotation (Line(points={{-142.2,160},{
-           -142.2,160},{-144,160},{-170,160}},color={0,0,255}));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},
-             {160,180}}), graphics={Rectangle(
-           extent={{-160,180},{160,-140}},
-           fillPattern=FillPattern.Solid,
-           fillColor={255,255,255},
-           lineColor={0,0,0}),
-         Rectangle(
-           extent={{-74,-76},{92,114}},
-           lineColor={95,95,95},
-           fillColor={95,95,95},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{-64,270},{78,164}},
-           lineColor={0,0,255},
-           textString="%name"),
-         Rectangle(
-           extent={{-62,100},{80,-62}},
-           pattern=LinePattern.None,
-           lineColor={117,148,176},
-           fillColor={170,213,255},
-           fillPattern=FillPattern.Sphere),
-         Rectangle(
-           extent={{80,72},{92,-32}},
-           lineColor={95,95,95},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{84,72},{88,-32}},
-           lineColor={95,95,95},
-           fillColor={170,213,255},
-           fillPattern=FillPattern.Solid)}),                      Diagram(
-         coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},{160,180}})),
-     Documentation(info="<html>
+partial block ThermalZone
+  "Partial block to export a model of a thermal zone as an FMU"
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
+
+  parameter Integer nPorts(min=2) "Number of fluid ports";
+
+  Interfaces.Inlet fluPor[nPorts](
+    redeclare each final package Medium = Medium,
+    each final use_p_in=false,
+    each final allowFlowReversal=true) "Fluid connector" annotation (Placement(
+        transformation(extent={{-180,150},{-160,170}}), iconTransformation(
+          extent={{-180,150},{-160,170}})));
+
+  Adaptors.ThermalZone theZonAda(
+    redeclare final package Medium = Medium,
+    final nPorts=nPorts)
+    "Adapter between the HVAC supply and return air, and its connectors for the FMU"
+    annotation (Placement(transformation(extent={{-140,150},{-120,170}})));
+
+equation
+  connect(theZonAda.fluPor, fluPor) annotation (Line(points={{-142.2,160},{
+          -142.2,160},{-144,160},{-170,160}},color={0,0,255}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},
+            {160,180}}), graphics={Rectangle(
+          extent={{-160,180},{160,-140}},
+          fillPattern=FillPattern.Solid,
+          fillColor={255,255,255},
+          lineColor={0,0,0}),
+        Rectangle(
+          extent={{-74,-76},{92,114}},
+          lineColor={95,95,95},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-64,270},{78,164}},
+          textColor={0,0,255},
+          textString="%name"),
+        Rectangle(
+          extent={{-62,100},{80,-62}},
+          pattern=LinePattern.None,
+          lineColor={117,148,176},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Sphere),
+        Rectangle(
+          extent={{80,72},{92,-32}},
+          lineColor={95,95,95},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{84,72},{88,-32}},
+          lineColor={95,95,95},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid)}),                      Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},{160,180}})),
+    Documentation(info="<html>
  <p>
  Model that is used as a container for a single thermal zone
  that is to be exported as an FMU.
@@ -180,7 +180,7 @@ within AixLib.Fluid.FMI.ExportContainers;
  that has signal flow.
  -->
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>
@@ -201,6 +201,6 @@ within AixLib.Fluid.FMI.ExportContainers;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end ThermalZone;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end ThermalZone;

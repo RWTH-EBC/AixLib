@@ -6,10 +6,12 @@ model LightsAreaSpecific "Heat flow due to lighting relative to room area and sp
     radConvertor(final A=max(Modelica.Constants.eps, areaSurfaceLightsTotal)),
     gain(final k=roomArea*lightingPowerRoomAreaSpecific),
     gainSurfaces(final k=areaSurfaceLightsTotal));
-  parameter Modelica.SIunits.Area roomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
+  parameter Modelica.Units.SI.Area roomArea "Area of room"
+    annotation (Dialog(descriptionLabel=true));
   parameter Real lightingPowerRoomAreaSpecific=10 "Lighting power per square meter room"
                                                                            annotation(Dialog( descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.01*roomArea "Surface of all lights in the room";
+  parameter Modelica.Units.SI.Area areaSurfaceLightsTotal=0.01*roomArea
+    "Surface of all lights in the room";
 
   annotation (Icon(graphics={
         Ellipse(

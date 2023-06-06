@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Validation;
+﻿within AixLib.Systems.ModularAHU.Validation;
 model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -108,6 +108,8 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-90,34},{-78,46}})));
   Modelica.Blocks.Sources.Constant const(k=-0.5)
     annotation (Placement(transformation(extent={{-104,32},{-96,40}})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
+    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -158,6 +160,8 @@ equation
           -72,40},{-72,36}},          color={0,0,127}));
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
+  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation (
+    Line(points={{-69,-24},{-37.95,-24},{-37.95,10.05}}, color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
@@ -165,6 +169,9 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
+  <li>December 06, 2022, by EBC-Modelica group:<br/>
+    Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
+  </li>
   <li>November 4, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
