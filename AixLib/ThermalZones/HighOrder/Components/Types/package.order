@@ -2,3 +2,7 @@ selectorCoefficients
 CoeffTableEastWestWindow
 CoeffTableSouthWindow
 PartialCoeffTable
+CalcMethodConvectiveHeatTransfer
+CalcMethodConvectiveHeatTransferInsideSurface
+CalcMethodLongwaveRadiationHeatTransfer
+SurfaceOrientation

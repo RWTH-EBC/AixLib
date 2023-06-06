@@ -27,20 +27,12 @@ model ConvNLayerClearanceStar
     "Specific heat capacity"
     annotation (Dialog(group="Structure of wall layers"));
   // which orientation of surface?
-  parameter Integer surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
-        "vertical",                                                                                                    choice = 2
-        "horizontal facing up",                                                                                                    choice = 3
-        "horizontal facing down",                                                                                                    radioButtons = true));
-  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
-        group="Convection", descriptionLabel=true), choices(
-      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
-      choice=2 "By Bernd Glueck",
-      choice=3 "Custom hCon (constant)",
-      choice=4 "ASHRAE140-2017",
-      radioButtons=true));
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true));
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
+        group="Convection", descriptionLabel=true));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2
     "Constant convective heat transfer coefficient"
-    annotation (Dialog(group="Convection", enable=calcMethod == 1));
+    annotation (Dialog(group="Convection", enable=calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A));
 
   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
