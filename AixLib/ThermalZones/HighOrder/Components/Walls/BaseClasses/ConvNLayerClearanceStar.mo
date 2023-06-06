@@ -27,7 +27,7 @@ model ConvNLayerClearanceStar
     "Specific heat capacity"
     annotation (Dialog(group="Structure of wall layers"));
   // which orientation of surface?
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true));
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true));
   parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
         group="Convection", descriptionLabel=true));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2

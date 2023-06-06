@@ -41,7 +41,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       group="Heat convection",
       enable=(calcMethodIn == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon)));
 
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodLongwaveRadiationHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodLongwaveRadiationHeatTransfer.No_Approx "Calculation method for longwave radiation heat transfer"
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer"
     annotation (
     Evaluate=true,
     Dialog(tab="Inner walls", group="Longwave radiation",   compact=true));
@@ -51,7 +51,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
     annotation (Dialog(
       tab="Inner walls",
       group="Longwave radiation",
-      enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodLongwaveRadiationHeatTransfer.Linear_Constant_Tref));
+      enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
 
   //// Outer / Exterior wall parameters
   //Window type
