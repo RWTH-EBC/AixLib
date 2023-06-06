@@ -1,165 +1,132 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
+  extends AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeating;
 
-      extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
-        false, final m_flow_nominal = m_flow_Circuit);
-      extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
-      import Modelica.Constants.pi;
-   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab="Dynamics"));
+  parameter Modelica.Units.SI.Length length "Length of pipe"
+    annotation (Dialog(group="Panel Heating"));
+  parameter Integer nPipeLay=if withSheathing then 2 else 1
+    "Number of pipe layers";
+  final parameter Modelica.Units.SI.Volume VWat=Modelica.Constants.pi/4*dInn^
+      (2)*length "Water Volume in Tube";
+  final parameter Modelica.Units.SI.Time tau=VWat*(rho_default*dis)/
+      m_flow_nominal;
 
-  parameter Integer n_pipe(min = 1) "Number of Pipe Layers" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.Units.SI.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.Units.SI.Thickness d_a[n_pipe] "Outer Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.Units.SI.Thickness d_i[n_pipe] "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.Units.SI.ThermalConductivity lambda_pipe[n_pipe] "Thermal conductivity of pipe layers" annotation(Dialog(group = "Panel Heating"));
+  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
+    "velocity of medium in pipe";
 
-  parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
+  final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(
+      Modelica.Constants.pi*0.5))
+    "Inner pipe diameter as a comparison for user parameter";
 
-  parameter Integer calculateVol "Calculation method to determine Water Volume" annotation (Dialog(group="Calculation Method to determine Water Volume in Pipe",
-        descriptionLabel=true), choices(
-      choice=1 "Calculation with inner diameter",
-      choice=2 "Calculation with time constant",
-      radioButtons=true));
-  final parameter Modelica.Units.SI.Volume V_Water = if calculateVol == 1 then (pi / 4 * d_i[1]^(2) * PipeLength) else (vol.m_flow_nominal * tau / (rho_default * dis))  "Water Volume in Tube";
-  final parameter Modelica.Units.SI.Time tau = 250 "Time constant to heat up the medium";
-  final parameter Modelica.Units.SI.Time tau_nom = V_Water * (rho_default * dis) / m_flow_Circuit;
-
-  parameter Modelica.Units.SI.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
-    "Wall type for floor"
-    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  final parameter Integer n_floor(min = 1) = wallTypeFloor.n "Number of floor layers";
-
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
-    "Wall type for ceiling"
-    annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
-  final parameter Integer n_ceiling(min = 1) = wallTypeCeiling.n "Number of ceiling layers";
-
-  parameter Modelica.Units.SI.Temperature T0(start = 273.15 + 20) "Start Temperature";
-
-  parameter Modelica.Units.SI.MassFlowRate m_flow_Circuit "Nominal Mass Flow Rate";
-  final parameter Modelica.Units.SI.VolumeFlowRate V_flow = m_flow_Circuit / rho_default "Nominal Volume Flow Rate in pipe";
-  parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
-  final parameter Modelica.Units.SI.Velocity v = V_flow / (pi / 4 * d_i[1] ^ (2)) "velocity of medium in pipe";
-  final parameter Modelica.Units.SI.Diameter d_i_nom = sqrt(4 * V_flow / (pi * 0.5)) "Inner pipe diameter as a comparison for user parameter";
-
-  final parameter Modelica.Units.SI.Area A_sur = pi * d_i[1] * PipeLength "Surface area inside the pipe";
-  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer h_turb = 2200 "Coefficient of heat transfer at the inner surface of pipe due to turbulent flow";
-
-  parameter Modelica.Units.SI.ThermalResistance R_x = 0 "Thermal Resistance between Screed and Pipe";
+  final parameter Modelica.Units.SI.Area APipeInnSuf=Modelica.Constants.pi*dInn*length "Surface area inside the pipe";
+  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer hPipeInnTurb=2200
+    "Coefficient of heat transfer at the inner surface of pipe due to turbulent flow";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    redeclare package Medium = Medium,
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
-    p_start=p_start,
-    T_start=T_start,
-    X_start=X_start,
-    C_start=C_start,
-    C_nominal=C_nominal,
-    mSenFac=mSenFac,
-    allowFlowReversal=false,
-    V=V_Water,
-    nPorts=2,
-    m_flow_nominal=m_flow_Circuit)
-    annotation (Placement(transformation(extent={{54,0},{78,24}})));
+    redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final p_start=p_start,
+    final T_start=T_start,
+    final X_start=X_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+    final mSenFac=mSenFac,
+    final allowFlowReversal=false,
+    final V=VWat,
+    final nPorts=2,
+    final m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayerFloor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer nLayFloor(
     final A=A,
-    T_start=fill((T0), (n_floor)),
-    wallRec=wallTypeFloor,
-    energyDynamics=energyDynamicsWalls)
-                           annotation (Placement(transformation(
-        extent={{-7,-8},{7,8}},
+    final T_start=fill((T_start), (wallTypeFloor.n)),
+    final wallRec=wallTypeFloor,
+    final energyDynamics=energyDynamicsWalls) "N-Layer floor model" annotation (
+      Placement(transformation(
+        extent={{-12,-12},{12,12}},
         rotation=90,
-        origin={0,27})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor "upward heat flow to heated room" annotation (
-      Placement(transformation(extent={{-8,34},{8,50}}), iconTransformation(
-          extent={{-10,32},{10,52}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling "downward heat flow" annotation (
-      Placement(transformation(extent={{-8,-48},{8,-32}}), iconTransformation(
-          extent={{-12,-52},{8,-32}})));
+        origin={50,70})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heaPorFloor
+    "Upward heat flow to heated room" annotation (Placement(transformation(
+          extent={{-8,92},{8,108}}), iconTransformation(extent={{-10,32},{10,52}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heaPorCei
+    "Downward heat flow to ceiling" annotation (Placement(transformation(extent=
+           {{-8,-108},{8,-92}}), iconTransformation(extent={{-12,-112},{8,-92}})));
 
-  AixLib.Utilities.HeatTransfer.CylindricHeatConduction heatCondaPipe[n_pipe](
-    d_out=d_a,
-    lambda=lambda_pipe,
-    d_in=d_i,
-    each nParallel=1,
-    each length=PipeLength) annotation (Placement(transformation(
-        extent={{7,-7},{-7,7}},
-        rotation=0,
-        origin={23,9})));
-  AixLib.Utilities.HeatTransfer.HeatConv           heatConvPipeInside(hCon=
-        h_turb, A=A_sur)
-    annotation (Placement(transformation(extent={{36,8},{44,16}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=R_x)
-               annotation (Placement(transformation(extent={{6,10},{14,18}})));
-protected
-    parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
-      T=Medium.T_default,
-      p=Medium.p_default,
-      X=Medium.X_default);
-  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
-    "Density, used to compute fluid volume";
+  AixLib.Utilities.HeatTransfer.CylindricHeatConduction pipeHeaCon[nPipeLay](
+    final d_out=if withSheathing then {dOut, dOut + thicknessSheathing} else {dOut},
+    final lambda=if withSheathing then {pipeMaterial.lambda,sheathingMaterial.lambda} else {pipeMaterial.lambda},
+    final d_in=if withSheathing then {dInn, dOut} else {dInn},
+    each final nParallel=1,
+    each final length=length) "Cylindric heat conduction through pipe" annotation (
+      Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={-30,60})));
+  AixLib.Utilities.HeatTransfer.HeatConv heatConvPipeInside(hCon=hPipeInnTurb,
+      A=APipeInnSuf) annotation (Placement(transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=270,
+        origin={-30,30})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalResistor theRes(R=R_x)
+    "Thermal resistance between screed and pipe"
+    annotation (Placement(transformation(extent={{20,40},{0,60}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer nLayCei(
+    final A=A,
+    T_start=fill((T_start), (wallTypeCeiling.n)),
+    wallRec=wallTypeCeiling) "N-Layer ceiling model" annotation (Placement(
+        transformation(
+        extent={{12,-12},{-12,12}},
+        rotation=90,
+        origin={50,-30})));
+
 initial equation
-  if use_vmax == 1 then
-  assert(v <= 0.5, "In" + getInstanceName() + "Medium velocity in pipe is "+String(v)+"and exceeds 0.5 m/s", AssertionLevel.warning);
+  if raiseErrorForMaxVelocity then
+    assert(v <= 0.5, "In" + getInstanceName() +
+    "Medium velocity in pipe is "+String(v)+"and exceeds 0.5 m/s. 
+    Use dInn =" + String(dInnMin) + " to stay in velocity range.", AssertionLevel.warning);
   else
-  assert(v <= 0.5, "In" + getInstanceName() + "Medium velocity in pipe is "+String(v)+"and exceeds 0.5 m/s",  AssertionLevel.error);
+    assert(v <= 0.5, "In" + getInstanceName() +
+    "Medium velocity in pipe is "+String(v)+"and exceeds 0.5 m/s. 
+    Use dInn =" + String(dInnMin) + " to stay in velocity range.",  AssertionLevel.error);
   end if;
-  if calculateVol == 2 then
-    if v > 0.5 then
-  Modelica.Utilities.Streams.print("d_i_nom ="+String(d_i_nom)+".Use this parameter for useful parametrization of d_i for pipe to stay in velocity range.");
-    end if;
-  end if;
-equation
-
-public
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayerCeiling(
-    final A=A,
-    T_start=fill((T0), (n_ceiling)),
-    wallRec=wallTypeCeiling) annotation (Placement(transformation(
-        extent={{7,-8},{-7,8}},
-        rotation=90,
-        origin={0,-13})));
 equation
 
   // FLUID CONNECTIONS
 
    connect(port_a, vol.ports[1])
-    annotation (Line(points={{-100,0},{64.8,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-1,0}},   color={0,127,255}));
    connect(vol.ports[2], port_b)
-    annotation (Line(points={{67.2,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{1,0},{100,0}},    color={0,127,255}));
 
   // HEAT CONNECTIONS
 
-      for i in 1:(n_pipe-1) loop
-    connect(heatCondaPipe[i].port_b, heatCondaPipe[i + 1].port_a) annotation (
-        Line(
-        points={{23,15.16},{23,14},{24,14},{24,12},{23,12},{23,9.28}},
+  for i in 1:(nPipeLay - 1) loop
+    connect(pipeHeaCon[i].port_b, pipeHeaCon[i + 1].port_a) annotation (Line(
+        points={{-21.2,60},{-29.6,60}},
         color={191,0,0},
         pattern=LinePattern.Dash));
       end for;
 
-  connect(simpleNLayerFloor.port_b, heatFloor) annotation (Line(points={{1.33227e-15,
-          34},{0,34},{0,42}}, color={191,0,0}));
-  connect(simpleNLayerCeiling.port_b, heatCeiling) annotation (Line(points={{-1.33227e-15,
-          -20},{0,-20},{0,-40}}, color={191,0,0}));
+  connect(nLayFloor.port_b, heaPorFloor) annotation (Line(points={{50,82},{50,84},
+          {0,84},{0,100}}, color={191,0,0}));
+  connect(nLayCei.port_b, heaPorCei) annotation (Line(points={{50,-42},{50,-86},
+          {0,-86},{0,-100}}, color={191,0,0}));
 
   connect(heatConvPipeInside.port_b, vol.heatPort)
-    annotation (Line(points={{44,12},{54,12}}, color={191,0,0}));
-  connect(heatConvPipeInside.port_a, heatCondaPipe[1].port_a) annotation (Line(
-        points={{36,12},{34,12},{34,9.28},{23,9.28}},color={191,0,0}));
-  connect(thermalResistor.port_b, heatCondaPipe[n_pipe].port_b) annotation (Line(
-        points={{14,14},{18,14},{18,15.16},{23,15.16}}, color={191,0,0}));
-  connect(thermalResistor.port_a, simpleNLayerFloor.port_a)
-    annotation (Line(points={{6,14},{0,14},{0,20}}, color={191,0,0}));
-  connect(thermalResistor.port_a, simpleNLayerCeiling.port_a)
-    annotation (Line(points={{6,14},{0,14},{0,-6}}, color={191,0,0}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -40},{100,40}},
+    annotation (Line(points={{-30,18},{-30,10},{-10,10}},
+                                               color={191,0,0}));
+  connect(heatConvPipeInside.port_a, pipeHeaCon[1].port_a) annotation (Line(
+        points={{-30,42},{-30,51},{-29.6,51},{-29.6,60}}, color={191,0,0}));
+  connect(theRes.port_b, pipeHeaCon[nPipeLay].port_b) annotation (Line(points={{0,
+          50},{-6,50},{-6,60},{-21.2,60}}, color={191,0,0}));
+  connect(theRes.port_a, nLayFloor.port_a)
+    annotation (Line(points={{20,50},{50,50},{50,58}}, color={191,0,0}));
+  connect(theRes.port_a, nLayCei.port_a)
+    annotation (Line(points={{20,50},{50,50},{50,-18}}, color={191,0,0}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}},
         initialScale=0.1),        graphics={
         Rectangle(
           extent={{-100,40},{100,18}},
@@ -231,8 +198,6 @@ equation
   Volume is calculated by time constant, a nominal inner diameter is
   calculated with the maximum velocity for easier parametrization.
 </p>
-</html>"),                 Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-40},{100,
-            40}},
-        initialScale=0.1)));
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
 end UnderfloorHeatingElement;

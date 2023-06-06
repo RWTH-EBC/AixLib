@@ -223,7 +223,8 @@ protected
   parameter Integer usesWindowInt[4] = {if usesWindow[i] then 1 else 0 for i in 1:size(usesWindow, 1)};
   parameter Integer nWin=sum(usesWindowInt)
     "Number of windows in room transmitting shortwave radiation";
-
+initial equation
+  assert(use_UFH <> use_shortWaveRadIn, "Underfloor heating does not allow shortwave radiation, as floor model is disabled", AssertionLevel.error);
 equation
   connect(wallSouth.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.66667,
           -73.25},{-8,-73.25},{-8,-82},{-94,-82},{-94,36},{-108,36}}, color={0,

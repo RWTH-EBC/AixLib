@@ -51,9 +51,10 @@ partial model PartialModularPort_ab
     "Fluid connectors b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-100,140},{100,100}},
-          lineColor={28,108,200},
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Text(
+          extent={{-149,-104},{151,-144}},
+          textColor={0,0,255},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>

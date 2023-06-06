@@ -3,8 +3,7 @@ model qG_TypeA
   "Calculating the limiting heat flux for underfloor heating Types A and C according to EN 1264"
   import Modelica.Constants.e;
 
-  extends
-    UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
+  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
 
   parameter Modelica.Units.SI.Temperature T_Fmax "maximum surface temperature";
   parameter Modelica.Units.SI.Temperature T_Room "Room temperature";

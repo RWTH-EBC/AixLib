@@ -5,7 +5,8 @@ model WholeHouseBuildingEnvelope
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  replaceable package Medium = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+  replaceable package Medium = AixLib.Media.Air constrainedby
+    Modelica.Media.Interfaces.PartialMedium                                                           "Medium in the component"
       annotation (choices(
         choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
         choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
@@ -355,7 +356,18 @@ equation
           45.9},{8.8,43},{3.67,43},{3.67,36.07}},                                                                                                 color={191,0,0}));
   connect(attic_2Ro_5Rooms.thermRoom5, upperFloor_Building.thermCeiling_Children2) annotation (Line(points={{17.6,
           45.9},{12.87,45.9},{12.87,36.07}},                                                                                                     color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Children1, groundFloor_Building.thermCeiling_Hobby) annotation (Line(points={{-10.36,
+          -14.3},{-10.36,-18},{-40,-18},{-40,-23.84},{-9.8,-23.84}},                                                                                 color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Corridor, groundFloor_Building.thermCeiling_Corridor) annotation (Line(points={{-3,
+          -14.3},{-3,-18},{-40,-18},{-40,-23.84},{-2.2,-23.84}},                                                                                                           color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Bath, groundFloor_Building.thermCeiling_WCStorage) annotation (Line(points={{3.9,
+          -14.3},{3.9,-18},{-40,-18},{-40,-23.84},{5.8,-23.84}},                                                                            color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Children2, groundFloor_Building.thermCeiling_Kitchen) annotation (Line(points={{13.1,
+          -14.3},{13.1,-18},{-40,-18},{-40,-23.84},{14.2,-23.84}},                                                                                 color={191,0,0}));
 
+  connect(groundFloor_Building.groundTemp, groPlateLowPart.port_a) annotation (
+      Line(points={{0,-74},{0,-78},{7.77156e-16,-78},{7.77156e-16,-82}}, color={
+          191,0,0}));
   connect(heatingToRooms[1:5], groundFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
           -20.9091},{-90,-20.9091},{-90,-22},{-78,-22},{-78,-46},{0,-46},{0,-49.04}},                                                                  color={191,0,0}));
   connect(heatingToRooms[6:10], upperFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
@@ -367,27 +379,6 @@ equation
   connect(AirExchangePort[11], attic_2Ro_5Rooms.AirExchangePort) annotation (Line(points={{-114,
           62.3636},{-76,62.3636},{-76,76.205},{-24.2,76.205}},                                                                                       color={0,0,127}));
   connect(groPlateLowPart.port_b, groundTemp) annotation (Line(points={{0,-90},{0,-100}}, color={191,0,0}));
-  connect(groPlateLowPart.port_a, groPlateUp) annotation (Line(points={{8.88178e-16,-82},{0,-82},{0,-80},{-38,-80},{-38,-90},{-102,-90}}, color={191,0,0}));
-  connect(groFloDown, groundFloor_Building.groundTemp) annotation (Line(points={{-102,-68},{-38,-68},{-38,-74},{0,-74}}, color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Bedroom, uppFloDown[1]) annotation (Line(points={{-15.88,
-          -14.3},{-15.88,-18},{-40,-18},{-40,24},{-100,24}},                                                                                         color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Children1, uppFloDown[2]) annotation (Line(points={{-10.36,
-          -14.3},{-10.36,-18},{-40,-18},{-40,26},{-100,26}},                                                                                         color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Corridor, uppFloDown[3]) annotation (Line(points={{-3,
-          -14.3},{-3,-18},{-40,-18},{-40,28},{-100,28}},                                                                                      color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Bath, uppFloDown[4]) annotation (Line(points={{3.9,
-          -14.3},{3.9,-18},{-40,-18},{-40,30},{-100,30}},                                                                                   color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Children2, uppFloDown[5]) annotation (Line(points={{13.1,
-          -14.3},{13.1,-18},{-40,-18},{-40,32},{-100,32}},                                                                                         color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Livingroom, groFloUp[1]) annotation (Line(points={{-18.4,
-          -23.84},{-18.4,-20},{-44,-20},{-44,2},{-100,2}},                                                                                              color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Hobby, groFloUp[2]) annotation (Line(points={{-9.8,
-          -23.84},{-9.8,-20},{-44,-20},{-44,4},{-100,4}},                                                                                      color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Corridor, groFloUp[3]) annotation (Line(points={{-2.2,-23.84},{-2.2,-20},{-44,-20},{-44,6},{-100,6}}, color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_WCStorage, groFloUp[4]) annotation (Line(points={{5.8,
-          -23.84},{5.8,-20},{-44,-20},{-44,8},{-100,8}},                                                                                           color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Kitchen, groFloUp[5]) annotation (Line(points={{14.2,
-          -23.84},{14.2,-20},{-44,-20},{-44,10},{-100,10}},                                                                                        color={191,0,0}));
 
   for i in 1:5 loop
    connect(portVent_in[i],groundFloor_Building.portVent_in[i]) annotation (Line(
@@ -408,6 +399,9 @@ equation
   connect(portVent_out[11], attic_2Ro_5Rooms.ports[2]) annotation (Line(points={{100,
           -83.4545},{66,-83.4545},{66,43.715},{1.6775,43.715}},
         color={0,127,255}));
+  connect(groPlateLowPart.port_a, groundFloor_Building.groundTemp) annotation (
+      Line(points={{7.77156e-16,-82},{7.77156e-16,-78},{0,-78},{0,-74}}, color={
+          191,0,0}));
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},
           lineColor={0,0,0},

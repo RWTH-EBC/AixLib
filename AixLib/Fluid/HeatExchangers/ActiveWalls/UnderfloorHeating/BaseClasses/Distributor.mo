@@ -19,16 +19,17 @@ model Distributor
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package
-      Medium = Medium)
-    annotation (Placement(transformation(extent={{-70,-10},{-50,10}}),
-        iconTransformation(extent={{-70,-10},{-50,10}})));
+  Modelica.Fluid.Interfaces.FluidPort_a portMaiSup(redeclare final package
+      Medium = Medium) "Main supply port" annotation (Placement(transformation(
+          extent={{-70,-10},{-50,10}}), iconTransformation(extent={{-70,-10},{-50,
+            10}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
-      Medium = Medium) annotation (Placement(transformation(extent={{50,-10},
+  Modelica.Fluid.Interfaces.FluidPort_b portMaiRet(redeclare final package
+      Medium = Medium) "Main return port"
+                       annotation (Placement(transformation(extent={{50,-10},
             {70,10}}),
                     iconTransformation(extent={{50,-10},{70,10}})));
-  AixLib.Fluid.MixingVolumes.MixingVolume vol_flow(
+  AixLib.Fluid.MixingVolumes.MixingVolume volSup(
     final m_flow_nominal=m_flow_nominal,
     final V=m_flow_nominal*tau/rho_default,
     redeclare final package Medium = Medium,
@@ -41,12 +42,11 @@ model Distributor
     final mSenFac=mSenFac,
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=n+1)                                          annotation (Placement(
-        transformation(
+    final nPorts=n + 1) "Volume for supply" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={0,12})));
-  AixLib.Fluid.MixingVolumes.MixingVolume vol_return(
+        rotation=270,
+        origin={30,30})));
+  AixLib.Fluid.MixingVolumes.MixingVolume volRet(
     final m_flow_nominal=m_flow_nominal,
     final V=m_flow_nominal*tau/rho_default,
     redeclare final package Medium = Medium,
@@ -59,10 +59,12 @@ model Distributor
     final mSenFac=mSenFac,
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=n+1)                                              annotation (Placement(
-        transformation(extent={{-10,-20},{10,0}}, rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
-      package Medium = Medium) annotation (Placement(
+    final nPorts=n + 1) "Volume for return flow" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-30,-30})));
+  Modelica.Fluid.Interfaces.FluidPorts_b portsCirSup[n](redeclare each final
+      package Medium = Medium) "Supply ports to circuits" annotation (Placement(
       visible=true,
       transformation(
         origin={0,60},
@@ -72,9 +74,9 @@ model Distributor
         origin={-8,60},
         extent={{-6,-24},{6,24}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
-      package       Medium =
-                       Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_a portsCirRet[n](redeclare each final
+      package Medium = Medium) "Return ports from circuits" annotation (
+      Placement(
       visible=true,
       transformation(
         origin={0,-60},
@@ -95,16 +97,16 @@ protected
 equation
 
   for k in 1:n loop
-    connect(vol_flow.ports[k + 1], flowPorts[k])
-      annotation (Line(points={{0,22},{0,60}}, color={255,0,0}));
-    connect(vol_return.ports[k + 1], returnPorts[k])
-      annotation (Line(points={{0,-20},{0,-60}}, color={0,0,255}));
+    connect(volSup.ports[k + 1], portsCirSup[k])
+      annotation (Line(points={{20,30},{0,30},{0,60}}, color={255,0,0}));
+    connect(volRet.ports[k + 1], portsCirRet[k])
+      annotation (Line(points={{-20,-30},{0,-30},{0,-60}}, color={0,0,255}));
   end for;
 
-  connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,0},{-24,0},
-          {-24,22},{1.77636e-15,22}}, color={0,127,255}));
-  connect(vol_return.ports[1], mainReturn) annotation (Line(points={{0,-20},{30,
-          -20},{30,0},{60,0},{60,0}}, color={0,127,255}));
+  connect(portMaiSup, volSup.ports[1]) annotation (Line(points={{-60,0},{-10,0},
+          {-10,30},{20,30}}, color={0,127,255}));
+  connect(volRet.ports[1], portMaiRet) annotation (Line(points={{-20,-30},{10,-30},
+          {10,0},{60,0}}, color={0,127,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}})),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}}),

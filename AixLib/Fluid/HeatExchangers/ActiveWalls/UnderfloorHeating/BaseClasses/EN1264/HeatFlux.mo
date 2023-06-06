@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264;
 model HeatFlux "Upward and downward heat flux of an underfloor heating circuit according to EN 1264-2"
-  extends
-    UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.qG_TypeA;
+  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.qG_TypeA;
 
   parameter Boolean Ceiling "false if ground plate is under panel heating" annotation (choices(checkBox=true));
   parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns "Thermal resistance of thermal insulation";

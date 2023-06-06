@@ -1,23 +1,11 @@
 ﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingSystem "Model for an underfloor heating system"
-extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
-        false, final m_flow_nominal = m_flow_total);
-  import Modelica.Constants.e;
-  replaceable package Medium =
-    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
-            AixLib.Media.Antifreeze.PropyleneGlycolWater (
-              property_T=293.15,
-              X_a=0.40)
-              "Propylene glycol water, 40% mass fraction")));
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends
+    AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeating;
 
   parameter Integer RoomNo(min=1) "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
-  final parameter Integer CircuitNo[RoomNo]=underfloorHeatingRoom.CircuitNo
+  final parameter Integer CircuitNo[RoomNo]=ufhRoom.CircuitNo
     "Number of circuits in a certain room";
-  parameter Integer dis  "Number of discretization layers for panel heating pipe";
   parameter Modelica.Units.SI.Power Q_Nf[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.Units.SI.Area A[RoomNo] "Floor Area" annotation(Dialog(group = "Room Specifications"));
   parameter Integer calculateVol = 1 annotation (Dialog(group="Panel Heating",
@@ -35,27 +23,13 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   parameter Modelica.Units.SI.Temperature T_U[RoomNo]=293.15                                                      "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.Units.SI.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
   final parameter Modelica.Units.SI.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
-
-  parameter
-    UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial=
-      UnderfloorHeating.BaseClasses.PipeMaterials.PERTpipe() "Pipe Material"
-    annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
   parameter Modelica.Units.SI.Thickness PipeThickness[RoomNo] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter d_a[RoomNo] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
 
-  parameter Boolean withSheathing = true "false if pipe has no Sheathing" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
-  parameter
-    UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition
-    SheathingMaterial=
-      UnderfloorHeating.BaseClasses.Sheathing_Materials.PVCwithTrappedAir()
-    "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=
-          withSheathing), choicesAllMatching=true);
+
   parameter Modelica.Units.SI.Diameter d[RoomNo](min = d_a) = d_a "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
 
-  final parameter Modelica.Units.SI.MassFlowRate m_flow_total=sum(
-      underfloorHeatingRoom.m_flow_PanelHeating)
-    "Total mass flow in the panel heating system";
-  final parameter Modelica.Units.SI.HeatFlux q_max=max(underfloorHeatingRoom.q)
+  final parameter Modelica.Units.SI.HeatFlux q_max=max(ufhRoom.q)
     "highest specific heat flux in system";
   parameter Modelica.Units.SI.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
   final parameter Modelica.Units.SI.TemperatureDifference dT_Hdes = q_max / K_H[1] "Temperature difference between medium and room for room with highest heat flux";
@@ -65,9 +39,9 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   final parameter Modelica.Units.SI.TemperatureDifference sigma_i[RoomNo] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:RoomNo}) "Nominal temperature spread in rooms";
   final parameter Modelica.Units.SI.Temperature T_Return[RoomNo] = fill(T_Vdes, RoomNo) .- sigma_i "Nominal return temperature in each room";
 
-  final parameter Real K_H[RoomNo]=underfloorHeatingRoom.K_H
+  final parameter Real K_H[RoomNo]=ufhRoom.K_H
     "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
-  final parameter Real q[RoomNo]=underfloorHeatingRoom.q
+  final parameter Real q[RoomNo]=ufhRoom.q
     "needed heat flux from underfloor heating";
   final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[RoomNo] = q ./ K_H "Nominal temperature difference between heating medium and room for each room";
 
@@ -93,11 +67,12 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     C_nominal=C_nominal,
     mSenFac=mSenFac,
     m_flow_nominal=m_flow_total,
-    n=integer(sum(CircuitNo))) annotation (Placement(transformation(
-        extent={{-12,-12},{12,12}},
+    n=integer(sum(CircuitNo))) "Distributes the water into the rooms"
+                               annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-28,0})));
-  UnderfloorHeatingRoom underfloorHeatingRoom[RoomNo](
+        origin={-20,-20})));
+  UnderfloorHeatingRoom ufhRoom[RoomNo](
     redeclare each final package Medium = Medium,
     each allowFlowReversal=false,
     each final energyDynamics=energyDynamics,
@@ -132,40 +107,39 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     each maxLength=maxLength,
     final wallTypeFloor=wallTypeFloor,
     final wallTypeCeiling=wallTypeCeiling,
-    final dT_Hi=dT_Hi)
-    annotation (Placement(transformation(extent={{-16,16},{16,36}})));
+    final dT_Hi=dT_Hi) "Underfloor heating instance for all rooms"
+    annotation (Placement(transformation(extent={{0,0},{40,40}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
     redeclare package Medium = Medium,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_total,
     T_start=T_start)
-    annotation (Placement(transformation(extent={{-74,-8},{-58,8}})));
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TReturn(
     redeclare package Medium = Medium,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_total,
     T_start=T_start)
-    annotation (Placement(transformation(extent={{34,-8},{50,8}})));
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
 
-  Modelica.Blocks.Sources.RealExpression m_flowNom(y=m_flow_total)
-    annotation (Placement(transformation(extent={{-60,-46},{-80,-26}})));
-  Modelica.Blocks.Interfaces.RealOutput m_flowNominal
-    annotation (Placement(transformation(extent={{-90,-46},{-110,-26}})));
-  Modelica.Blocks.Sources.RealExpression T_FlowNom(y=T_Vdes)
-    annotation (Placement(transformation(extent={{-60,-64},{-80,-44}})));
-  Modelica.Blocks.Interfaces.RealOutput T_FlowNominal
-    annotation (Placement(transformation(extent={{-90,-64},{-110,-44}})));
-  Modelica.Blocks.Interfaces.RealInput valveInput[RoomNo] annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput uVal[RoomNo]
+    "Control value for valve (0: closed, 1: open)" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
-        rotation=-90,
-        origin={-64,68})));
-  Utilities.Interfaces.ConvRadComb heatFloor[RoomNo] annotation (Placement(
-        transformation(extent={{-10,50},{10,70}}), iconTransformation(extent={{
-            -10,50},{10,70}})));
-  Utilities.Interfaces.ConvRadComb heatCeiling[RoomNo] annotation (Placement(
-        transformation(extent={{-10,-70},{10,-50}}), iconTransformation(extent=
-            {{-10,-70},{10,-50}})));
+        rotation=0,
+        origin={-120,60})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portConFloor[RoomNo]
+    "Convective heat port of floor"
+    annotation (Placement(transformation(extent={{30,90},{50,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portRadFloor[RoomNo]
+    "Radiative heat port of floor"
+    annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portRadCei[RoomNo]
+    "Radiative heat port of ceiling"
+    annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portConCei[RoomNo]
+    "Convective heat port of ceiling"
+    annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -183,49 +157,41 @@ equation
 
  // OUTER FLUID CONNECTIONS
   connect(port_a, TFlow.port_a)
-    annotation (Line(points={{-100,0},{-74,0}}, color={0,127,255}));
-  connect(TFlow.port_b, distributor.mainFlow)
-    annotation (Line(points={{-58,0},{-40,0}}, color={0,127,255}));
-  connect(TReturn.port_a, distributor.mainReturn)
-    annotation (Line(points={{34,0},{-16,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
+  connect(TFlow.port_b, distributor.portMaiSup) annotation (Line(points={{-60,0},
+          {-46,0},{-46,-20},{-40,-20}}, color={0,127,255}));
+  connect(TReturn.port_a,distributor.portMaiRet)
+    annotation (Line(points={{60,0},{44,0},{44,-20},{-1.77636e-15,-20}},
+                                              color={0,127,255}));
   connect(TReturn.port_b, port_b)
-    annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
 
   // HEATING CIRCUITS FLUID CONNECTIONS
 
      for m in 1:CircuitNo[1] loop
-    connect(distributor.flowPorts[m], underfloorHeatingRoom[1].ports_a[m]);
-    connect(underfloorHeatingRoom[1].ports_b[m], distributor.returnPorts[m]);
+    connect(distributor.portsCirSup[m], ufhRoom[1].ports_a[m]);
+    connect(ufhRoom[1].ports_b[m], distributor.portsCirRet[m]);
   end for;
 
   if RoomNo > 1 then
     for x in 2:RoomNo loop
       for u in 1:CircuitNo[x] loop
-        connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x - 1)) + u)],
-          underfloorHeatingRoom[x].ports_a[u]) annotation (Line(points={{-29.6,
-                12},{-29.6,27.4286},{-16,27.4286}},
-                                                color={0,127,255}));
-        connect(underfloorHeatingRoom[x].ports_b[u], distributor.returnPorts[(
-          sum(CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{16,
-                27.4286},{24,27.4286},{24,-22},{-26.4,-22},{-26.4,-12.4}},
-              color={0,127,255}));
+        connect(distributor.portsCirSup[(sum(CircuitNo[v] for v in 1:(x - 1)) +
+          u)], ufhRoom[x].ports_a[u]) annotation (Line(points={{-22.6667,0},{
+                -22.6667,20},{0,20}},  color={0,127,255}));
+        connect(ufhRoom[x].ports_b[u], distributor.portsCirRet[(sum(CircuitNo[v]
+          for v in 1:(x - 1)) + u)]) annotation (Line(points={{40,20},{40,20},{
+                46,20},{46,-46},{-17.3333,-46},{-17.3333,-40.6667}},  color={0,127,
+                255}));
       end for;
           end for;
   end if;
 
   // OTHER CONNECTIONS
 
-  connect(m_flowNom.y, m_flowNominal)
-    annotation (Line(points={{-81,-36},{-100,-36}}, color={0,0,127}));
-  connect(T_FlowNom.y, T_FlowNominal)
-    annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
-  connect(valveInput, underfloorHeatingRoom.valveInput) annotation (Line(points=
-         {{-64,68},{-64,50},{-9.92,50},{-9.92,38}}, color={0,0,127}));
-  connect(underfloorHeatingRoom.heatCeiling, heatCeiling)
-    annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
-  connect(underfloorHeatingRoom.heatFloor, heatFloor)
-    annotation (Line(points={{0,36},{0,60}}, color={191,0,0}));
-    annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
+  connect(uVal, ufhRoom.uVal) annotation (Line(points={{-120,60},{-14,60},{-14,
+          32},{-4,32}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(extent={{-100,-80},{100,100}},initialScale=0.1),
         graphics={
         Rectangle(
           extent={{-100,60},{100,-60}},
@@ -440,5 +406,6 @@ equation
   calculated with the maximum velocity for easier parametrization.
 </p>
 </html>"),                                  Diagram(coordinateSystem(extent={{-100,
-            -60},{100,60}}, initialScale=0.1)));
+            -100},{100,100}},
+                            initialScale=0.1)));
 end UnderfloorHeatingSystem;
