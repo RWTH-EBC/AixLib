@@ -22,9 +22,6 @@ partial model PartialHeater
   Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
   Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
-  Modelica.Units.SI.CoefficientOfHeatTransfer k_air "convective heat transfer coefficient"
-                                                                                          annotation(enable=false,HideResult = (use_T_set));
-
   Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
 
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(
@@ -95,6 +92,10 @@ protected
   Modelica.Blocks.Interfaces.RealInput T_intern "internal temperature";
   Modelica.Blocks.Math.Max max
     annotation (Placement(transformation(extent={{-18,74},{-8,84}})));
+  Modelica.Blocks.Sources.Constant Q_nominal(k=Q_flow_nominal) if not use_T_set
+    annotation (Placement(transformation(extent={{12,40},{32,60}})));
+  Modelica.Blocks.Math.Product product1 if not use_T_set
+    annotation (Placement(transformation(extent={{52,22},{72,42}})));
 equation
 
   // mass balances
@@ -106,12 +107,7 @@ equation
   Q_flow = -(m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut);
   Q = Q_flow;
 
-  if not use_T_set then
-    Q_in_internal = Q_in;
-    Q_flow = u * Q_flow_nominal;
-  else
-    Q_flow = Q_in_internal;
-  end if;
+  Q_flow = Q_in_internal;
 
   // sepcific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
@@ -123,12 +119,17 @@ equation
 
   // Conditional connectors
   connect(max.y,T_intern);
+  connect(product1.y, Q_in_internal);
 
   // Connectors
   connect(T_set, max.u1) annotation (Line(points={{0,110},{0,88},{-22,88},{-22,82},
           {-19,82}}, color={0,0,127}));
   connect(T_airIn, max.u2) annotation (Line(points={{-120,40},{-80,40},{-80,76},
           {-19,76}}, color={0,0,127}));
+  connect(Q_nominal.y, product1.u1) annotation (Line(points={{33,50},{42,50},{42,
+          38},{50,38}}, color={0,0,127}));
+  connect(u, product1.u2) annotation (Line(points={{48,110},{48,82},{42,82},{42,
+          26},{50,26}}, color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-100,94},{100,-94}},
