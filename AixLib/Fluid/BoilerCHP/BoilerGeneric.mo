@@ -2,7 +2,7 @@ within AixLib.Fluid.BoilerCHP;
 model BoilerGeneric "Generic performance map based boiler"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
     redeclare package Medium = AixLib.Media.Water,
-    a=coeffPresLoss,
+    dp_nominal=dp_nominal,
     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*
           QNom/1000)/1000));
 
@@ -50,11 +50,10 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{-2,30},{18,50}})));
   Modelica.Blocks.Math.Product thermalPower "Thermal power during operation"
     annotation (Placement(transformation(extent={{34,24},{54,44}})));
+
 protected
-  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
-    "Pressure loss coefficient of the heat generator";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
-    "Heat capacity of metal (J/K)";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=7000 "Default-value; Will be replaced";
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom "Heat capacity of metal (J/K)";
 
 equation
 
@@ -91,7 +90,7 @@ equation
           {60,0},{-60,0},{-60,-40}},       color={0,0,127}));
   connect(operatingEfficiency.boilerControlBus, boilerControlBus) annotation (
       Line(
-      points={{30.2,80},{30.2,86},{-28,86},{-28,100}},
+      points={{30,80},{30,86},{-28,86},{-28,100}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -146,12 +145,23 @@ equation
 <p>The model differs between <u>nominal</u> conditions and <u>operating</u>.</p>
 <p>For nominal conditions (parametrization) the model estimates <u>nominal</u> fuel consumption [W] from AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.NominalEfficiency. The <u>operating</u> fuel consumption [W] is estimated via relative fuel consumption [-]. The relative fuel consumption [-] is the control variable. </p>
 <p>During operation, the transferred heat flow [W] is estimated with respect to actual efficiency which comes from AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.OperatingEfficiency.</p>
-<p>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>for pressure losses bases on a fit-function of manufacturer data.</p>
+<p>The pressure losses base on a fit-function from manufacturer data: <i><span style=\"color: #ee2e2f;\">Plot is comming soon</span></i></p>
+<p><br>The volume bases on a fit-function from manufacturer data: <i><span style=\"color: #ee2e2f;\">Plot is comming soon</span></i></p>
 <p><br>Further assumptions are taken into account for losses (see AixLib.Fluid.BoilerCHP.BoilerNoControl):</p>
 <ul>
 <li>G: a heat loss of 0.3 &percnt; of nominal power at a temperature difference of 50 K to ambient is assumed.</li>
-<li>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</li>
+<li>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.<br></li>
 </ul>
+<p>The model bases on data from the following boilers: <i><span style=\"color: #ee2e2f;\">List with boiler names &amp; manufactueres is comming soon</span></i></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"40%\"><tr>
+<td><h4>Manufacturer</h4></td>
+<td><h4>Boiler</h4></td>
+</tr>
+<tr>
+<td><p>...</p></td>
+<td><p>...</p></td>
+</tr>
+</table>
 </html>",
         revisions="<html>
 <ul>

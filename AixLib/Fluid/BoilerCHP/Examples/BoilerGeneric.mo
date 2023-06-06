@@ -2,19 +2,26 @@ within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerGeneric
     extends Modelica.Icons.Example;
 
+     parameter Modelica.Units.SI.TemperatureDifference dTNom=20
+    "Nominal temperature difference of supply and return";
+  parameter Modelica.Units.SI.Temperature TRetNom=606.3
+    "Nominal return temperature";
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000
+    "Nominal thermal capacity";
+
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   AixLib.Fluid.BoilerCHP.BoilerGeneric boilerNotManufacturer(
-    m_flow_nominal=50/4.18/20,
-    dTNom=20,
-    TRetNom=606.3,
-    QNom=50000)
+    m_flow_nominal=QNom/Medium.cp_const/dTNom,
+    dTNom=dTNom,
+    TRetNom=TRetNom,
+    QNom=QNom)
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_m_flow_in=false,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=50/4.18/20,
+    m_flow=QNom/Medium.cp_const/dTNom,
     T=313.15,
     nPorts=1)
     "Source"
@@ -33,7 +40,7 @@ model BoilerGeneric
     annotation (Placement(transformation(extent={{-10,14},{10,34}})));
   Sensors.TemperatureTwoPort              senTReturn(
     redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=50000/(Medium.cp_const*20),
+    final m_flow_nominal=QNom/Medium.cp_const/dTNom,
     final initType=Modelica.Blocks.Types.Init.InitialState,
     T_start=293.15,
     final transferHeat=false,
@@ -53,6 +60,7 @@ model BoilerGeneric
   Modelica.Blocks.Sources.RealExpression temSupSet(y=75 + 273.15)
     "Setpoint supply temperature"
     annotation (Placement(transformation(extent={{-98,56},{-62,80}})));
+
 equation
   connect(boilerNotManufacturer.port_b, sink.ports[1])
     annotation (Line(points={{12,0},{48,0}}, color={0,127,255}));

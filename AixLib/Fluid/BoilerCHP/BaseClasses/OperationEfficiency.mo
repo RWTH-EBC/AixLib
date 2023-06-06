@@ -40,13 +40,15 @@ package Medium=AixLib.Media.Water;
   Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=1, uMin=PLR_min)
     "Limiter to make SDF simulation robust"
     annotation (Placement(transformation(extent={{-2,22},{8,32}})));
+  Controls.Interfaces.BoilerControlBus                     boilerControlBus
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 protected
   parameter Modelica.Units.SI.MassFlowRate m_flow_nom=QNom/(Medium.cp_const*dTNom);
   parameter Real PLR_min=0.2;
 equation
 
   connect(boilerControlBus.m_flowMea, rel_m_flow.u1) annotation (Line(
-      points={{2,100},{-100,100},{-100,-48},{-52,-48}},
+      points={{0,100},{0,50},{-8,50},{-8,-34},{-78,-34},{-78,-48},{-52,-48}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -56,7 +58,7 @@ equation
   connect(nominal_m_fow.y, rel_m_flow.u2) annotation (Line(points={{-58,-66},{-56,
           -66},{-56,-60},{-52,-60}}, color={0,0,127}));
   connect(boilerControlBus.TColdMea, add2.u2) annotation (Line(
-      points={{2,100},{-100,100},{-100,19.6},{-61.8,19.6}},
+      points={{0,100},{0,72},{-100,72},{-100,20},{-61.8,20},{-61.8,19.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -66,7 +68,7 @@ equation
   connect(deltaTNom.y, multiplex4_1.u4[1]) annotation (Line(points={{-39.1,-16},
           {0,-16},{0,12},{22,12},{22,13}}, color={0,0,127}));
   connect(boilerControlBus.TSupplyMea, add2.u1) annotation (Line(
-      points={{2,100},{-100,100},{-100,30.4},{-61.8,30.4}},
+      points={{0,100},{0,50},{-90,50},{-90,30},{-61.8,30},{-61.8,30.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -76,7 +78,7 @@ equation
   connect(multiplex4_1.y, boilerEffciency2.u)
     annotation (Line(points={{45,22},{58,22}}, color={0,0,127}));
   connect(boilerEffciency2.y, boilerControlBus.Efficiency) annotation (Line(
-        points={{81,22},{96,22},{96,68},{2,68},{2,100}},          color={0,0,
+        points={{81,22},{84,22},{84,42},{0,42},{0,100}},          color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -95,7 +97,7 @@ equation
   connect(add2.y, relative_dT.u1) annotation (Line(points={{-41.1,25},{-36.45,
           25},{-36.45,24.4},{-31.8,24.4}}, color={0,0,127}));
   connect(boilerControlBus.TColdMea, multiplex4_1.u1[1]) annotation (Line(
-      points={{2,100},{2,46},{14,46},{14,31},{22,31}},
+      points={{0,100},{0,42},{22,42},{22,31}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
