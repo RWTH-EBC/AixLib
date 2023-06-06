@@ -77,7 +77,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.TSupplyMea, conPID.u_m) annotation (Line(
+  connect(boilerControlBus.TSupMea, conPID.u_m) annotation (Line(
       points={{0,24},{-34,24},{-34,56}},
       color={255,204,51},
       thickness=0.5), Text(
