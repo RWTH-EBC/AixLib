@@ -42,7 +42,7 @@ model ComparisonToAHUHRS "Comparitive simulation with existing AHU model"
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,50},{34,62}})));
   ModularAHU modularAHU(
-    humidifying=false,
+    humidifying=true,
     cooling=false,
     dehumidifying=false,
     heating=false,
@@ -51,7 +51,8 @@ model ComparisonToAHUHRS "Comparitive simulation with existing AHU model"
     Twat=273.15,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"),
-    redeclare model humidifier = Components.SprayHumidifier)
+    redeclare model humidifier =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SprayHumidifier)
     annotation (Placement(transformation(extent={{-54,-68},{16,-30}})));
   Modelica.Blocks.Math.Abs abs1
     annotation (Placement(transformation(extent={{-46,-100},{-66,-80}})));

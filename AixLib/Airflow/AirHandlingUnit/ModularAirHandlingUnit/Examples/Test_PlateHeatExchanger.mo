@@ -2,16 +2,8 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples;
 model Test_PlateHeatExchanger
   "Simple test case for the two variants of plate heat exchanger"
   extends Modelica.Icons.Example;
-  Components.PlateHeatExchanger plateHeatExchanger(
-    k_air=60,
-    area=140,
-    T_start=281.15,
-    redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
-    annotation (Placement(transformation(extent={{-20,20},{20,60}})));
-  Components.PlateHeatExchangerFixedEfficiency
-    plateHeatExchangerFixedEfficiency(redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
+  Components.HeatRecoverySystem plateHeatExchangerFixedEfficiency(redeclare
+      model PartialPressureDrop = Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{-20,-60},{22,-20}})));
   Modelica.Blocks.Sources.Constant X_OdaIn(k=0.005)
     annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
@@ -34,36 +26,22 @@ model Test_PlateHeatExchanger
   Modelica.Blocks.Sources.Constant const(k=291.15)
     annotation (Placement(transformation(extent={{52,-10},{32,10}})));
 equation
-  connect(X_OdaIn.y, plateHeatExchanger.X_airInOda) annotation (Line(points={{
-          -79,-40},{-60,-40},{-60,44},{-22,44}}, color={0,0,127}));
   connect(X_OdaIn.y, plateHeatExchangerFixedEfficiency.X_airInOda) annotation (
       Line(points={{-79,-40},{-60,-40},{-60,-36},{-22.1,-36}}, color={0,0,127}));
   connect(T_OdaIn.y, plateHeatExchangerFixedEfficiency.T_airInOda) annotation (
       Line(points={{-79,0},{-60,0},{-60,-30},{-22.1,-30}}, color={0,0,127}));
-  connect(T_OdaIn.y, plateHeatExchanger.T_airInOda) annotation (Line(points={{
-          -79,0},{-60,0},{-60,50},{-22,50}}, color={0,0,127}));
   connect(m_flow.y, plateHeatExchangerFixedEfficiency.m_flow_airInOda)
     annotation (Line(points={{-79,40},{-60,40},{-60,-24},{-22.1,-24}}, color={0,
           0,127}));
-  connect(m_flow.y, plateHeatExchanger.m_flow_airInOda) annotation (Line(points=
-         {{-79,40},{-60,40},{-60,56},{-22,56}}, color={0,0,127}));
-  connect(m_flow.y, plateHeatExchanger.m_flow_airInEta) annotation (Line(points=
-         {{-79,40},{-60,40},{-60,100},{60,100},{60,56},{22,56}}, color={0,0,127}));
   connect(m_flow.y, plateHeatExchangerFixedEfficiency.m_flow_airInEta)
     annotation (Line(points={{-79,40},{-60,40},{-60,100},{60,100},{60,-24},{
           24.1,-24}}, color={0,0,127}));
   connect(X_EtaIn.y, plateHeatExchangerFixedEfficiency.X_airInEta) annotation (
       Line(points={{79,-30},{60,-30},{60,-36},{24.1,-36}}, color={0,0,127}));
-  connect(X_EtaIn.y, plateHeatExchanger.X_airInEta) annotation (Line(points={{
-          79,-30},{60,-30},{60,44},{22,44}}, color={0,0,127}));
-  connect(T_EtaIn.y, plateHeatExchanger.T_airInEta) annotation (Line(points={{
-          79,30},{60,30},{60,50},{22,50}}, color={0,0,127}));
   connect(T_EtaIn.y, plateHeatExchangerFixedEfficiency.T_airInEta) annotation (
       Line(points={{79,30},{60,30},{60,-30},{24.1,-30}}, color={0,0,127}));
   connect(const.y, plateHeatExchangerFixedEfficiency.T_set)
     annotation (Line(points={{31,0},{1,0},{1,-18}}, color={0,0,127}));
-  connect(const.y, plateHeatExchanger.T_set) annotation (Line(points={{31,0},{
-          28,0},{28,20},{60,20},{60,82},{0,82},{0,62}}, color={0,0,127}));
 annotation (experiment(StopTime=3600, __Dymola_NumberOfIntervals=3600),
  Documentation(info="<html><p>
   Testing <a href=

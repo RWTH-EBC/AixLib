@@ -1,9 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger;
 model Test_PlateHeatExchanger
-  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PlateHeatExchanger
-  plateHeatExchanger(redeclare model PartialPressureDrop =
-        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
-    annotation (Placement(transformation(extent={{-8,-52},{12,-32}})));
   Modelica.Blocks.Sources.Ramp m_flow(
     height=0,
     duration=600,

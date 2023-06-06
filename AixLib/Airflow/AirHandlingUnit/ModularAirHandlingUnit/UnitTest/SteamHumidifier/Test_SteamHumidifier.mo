@@ -81,8 +81,8 @@ equation
     annotation (Line(points={{8,44},{26,44}}, color={0,127,255}));
   connect(humPowerSet.y, hum1.u) annotation (Line(points={{-3,80},{20,80},{20,
           50},{25,50}}, color={0,0,127}));
-  connect(m_wat_flow.y, steamHumidifier.m_wat_flow) annotation (Line(points={{
-          53,-26},{42,-26},{42,-80},{-20,-80},{-20,-29.4}}, color={0,0,127}));
+  connect(m_wat_flow.y, steamHumidifier.u) annotation (Line(points={{53,-26},{
+          42,-26},{42,-80},{-20,-80},{-20,-29.4}}, color={0,0,127}));
   connect(T_steam.y, steamHumidifier.T_watIn) annotation (Line(points={{15,-60},
           {-18,-60},{-18,-29.4},{-17,-29.4}}, color={0,0,127}));
   connect(p_atm.y, phi.p) annotation (Line(points={{0.4,-40},{8,-40},{8,-32.8},

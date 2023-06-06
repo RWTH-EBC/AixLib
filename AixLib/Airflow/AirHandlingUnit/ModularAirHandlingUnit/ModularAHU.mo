@@ -8,14 +8,14 @@ model ModularAHU "model of a modular air handling unit"
   parameter Boolean heatRecovery = false;
   parameter Boolean use_PhiSet = false;
 
-  parameter Modelica.SIunits.Temperature Twat=373.15
+  parameter Modelica.Units.SI.Temperature Twat=373.15
     "water or steam temperature"
     annotation(Dialog(group="Humidifying",enable=humidifying));
-  parameter Modelica.SIunits.Temperature TcooSur=373.15
+  parameter Modelica.Units.SI.Temperature TcooSur=373.15
     "temperature of cooling surface (set to high value if no condensate should 
     be considered)"
     annotation(Dialog(group="Cooling",enable=cooling or dehumidifying));
-  constant Modelica.SIunits.Density rho = 1.2 "constant density of air";
+  constant Modelica.Units.SI.Density rho = 1.2 "constant density of air";
 
   // Efficiency of HRS
   parameter Real efficiencyHRS_enabled(
@@ -29,16 +29,16 @@ model ModularAHU "model of a modular air handling unit"
     (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=heatReecovery));
   // assumed increase in ventilator pressure
-  parameter Modelica.SIunits.Pressure dp_sup=800
+  parameter Modelica.Units.SI.Pressure dp_sup=800
     "pressure difference over supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Pressure dp_eta=800
+  parameter Modelica.Units.SI.Pressure dp_eta=800
     "pressure difference over extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
   // assumed efficiencies of the ventilators
-  parameter Modelica.SIunits.Efficiency eta_sup=0.7 "efficiency of supply fan"
+  parameter Modelica.Units.SI.Efficiency eta_sup=0.7 "efficiency of supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Efficiency eta_eta=0.7 "efficiency of extract fan"
+  parameter Modelica.Units.SI.Efficiency eta_eta=0.7 "efficiency of extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
 
   Modelica.Blocks.Interfaces.RealInput VflowOda(unit="m3/s") "m3/s"
@@ -99,8 +99,8 @@ model ModularAHU "model of a modular air handling unit"
     rho_air=rho,
     use_T_set=true,
     redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple,
-    use_constant_heatTransferCoefficient=true) if heating or dehumidifying
+        Components.PressureDrop.PressureDropSimple)
+                                               if heating or dehumidifying
     annotation (Placement(transformation(extent={{96,-64},{116,-44}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15)
     "K (use as PortIn)"
@@ -277,10 +277,10 @@ equation
 
   connect(VflowOda, gain.u)
     annotation (Line(points={{-160,80},{-141.2,80}}, color={0,0,127}));
-  connect(gain.y, heatRecoverySystem.m_flow_airInOda) annotation (Line(points={
-          {-127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,0,127}));
-  connect(T_oda, heatRecoverySystem.T_airInOda) annotation (Line(points={{-160,
-          40},{-120,40},{-120,17},{-95,17}}, color={0,0,127}));
+  connect(gain.y, heatRecoverySystem.m_flow_airInOda) annotation (Line(points={{
+          -127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,0,127}));
+  connect(T_oda, heatRecoverySystem.T_airInOda) annotation (Line(points={{-160,40},
+          {-120,40},{-120,17},{-95,17}}, color={0,0,127}));
   connect(gain.y, passThroughHrs.m_flow_airIn) annotation (Line(points={{-127.4,
           80},{-120,80},{-120,-11},{-95,-11}}, color={0,0,127}));
   connect(T_oda, passThroughHrs.T_airIn) annotation (Line(points={{-160,40},{-120,
@@ -342,8 +342,7 @@ equation
           50},{-63.6,-66.8}},
                           color={0,0,127}));
   connect(fanSimple1.m_flow_airOut, heatRecoverySystem.m_flow_airInEta)
-    annotation (Line(points={{-41,66},{-66,66},{-66,20},{-73,20}}, color={0,0,
-          127}));
+    annotation (Line(points={{-41,66},{-66,66},{-66,20},{-73,20}}, color={0,0,127}));
   connect(fanSimple1.T_airOut, heatRecoverySystem.T_airInEta) annotation (Line(
         points={{-41,63},{-66,63},{-66,17},{-73,17}}, color={0,0,127}));
   connect(fanSimple1.X_airOut, heatRecoverySystem.X_airInEta) annotation (Line(
@@ -366,10 +365,10 @@ equation
       Line(points={{-73,4},{-56,4},{-56,-21},{-33,-21}}, color={0,0,127}));
   connect(heatRecoverySystem.m_flow_airOutOda, coo.m_flow_airIn) annotation (
       Line(points={{-73,10},{-56,10},{-56,-32},{-33,-32}}, color={0,0,127}));
-  connect(heatRecoverySystem.T_airOutOda, coo.T_airIn) annotation (Line(points=
-          {{-73,7},{-56,7},{-56,-35},{-33,-35}}, color={0,0,127}));
-  connect(heatRecoverySystem.X_airOutOda, coo.X_airIn) annotation (Line(points=
-          {{-73,4},{-56,4},{-56,-38},{-33,-38}}, color={0,0,127}));
+  connect(heatRecoverySystem.T_airOutOda, coo.T_airIn) annotation (Line(points={
+          {-73,7},{-56,7},{-56,-35},{-33,-35}}, color={0,0,127}));
+  connect(heatRecoverySystem.X_airOutOda, coo.X_airIn) annotation (Line(points={
+          {-73,4},{-56,4},{-56,-38},{-33,-38}}, color={0,0,127}));
   connect(passThroughHrs.m_flow_airOut, passThroughCoo.m_flow_airIn)
     annotation (Line(points={{-73,-11},{-52.5,-11},{-52.5,-11},{-33,-11}},
         color={0,0,127}));
@@ -438,8 +437,8 @@ equation
          {{117,-26},{136,-26},{136,-85.8},{141,-85.8}}, color={0,0,127}));
   connect(controlerCooler.TcoolerSet, coo.T_set) annotation (Line(points={{-15,
           -80},{-8,-80},{-8,-30},{-22,-30}}, color={0,0,127}));
-  connect(relToAbsHum2.absHum, controlerCooler.xSupSet) annotation (Line(points
-        ={{45,-91},{-48,-91},{-48,-74},{-37,-74}}, color={0,0,127}));
+  connect(relToAbsHum2.absHum, controlerCooler.xSupSet) annotation (Line(points=
+         {{45,-91},{-48,-91},{-48,-74},{-37,-74}}, color={0,0,127}));
   connect(add1.y, controlerCooler.TsupSet) annotation (Line(points={{5.4,-82},{
           -6,-82},{-6,-96},{-44,-96},{-44,-82},{-37,-82}}, color={0,0,127}));
   connect(passThroughHrs.X_airOut, controlerCooler.Xout) annotation (Line(

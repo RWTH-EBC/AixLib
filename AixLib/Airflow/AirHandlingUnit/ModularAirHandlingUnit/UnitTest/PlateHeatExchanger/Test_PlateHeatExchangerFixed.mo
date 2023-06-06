@@ -1,6 +1,6 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger;
 model Test_PlateHeatExchangerFixed
-  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PlateHeatExchangerFixedEfficiency
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.HeatRecoverySystem
     plateHeatExchanger(redeclare model PartialPressureDrop =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{-8,-52},{12,-32}})));

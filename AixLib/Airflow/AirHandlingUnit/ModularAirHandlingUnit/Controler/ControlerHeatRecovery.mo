@@ -3,10 +3,10 @@ model ControlerHeatRecovery
   "controler for heat recovery system with fixed efficiency"
 
   parameter Real eps "efficiency of hrs";
-  parameter Modelica.SIunits.TemperatureDifference dT_min
+  parameter Modelica.Units.SI.TemperatureDifference dT_min
     "minimum temperature difference for which the hrs is switched off";
 
-  Modelica.SIunits.Temperature T_airOutOda_max
+  Modelica.Units.SI.Temperature T_airOutOda_max
     "outlet temperature with maximum heat recovery";
 
   Modelica.Blocks.Interfaces.RealInput T_airInEta(

@@ -71,8 +71,8 @@ equation
           -58},{-42,42},{-16,42}}, color={0,0,127}));
   connect(T_airIn.y, boundary.T_in) annotation (Line(points={{-79,-18},{-50,-18},
           {-50,50},{-16,50}}, color={0,0,127}));
-  connect(m_wat_flow.y, sprayHumidifier.m_wat_flow) annotation (Line(points={{
-          49,-4},{38,-4},{38,-78},{-16,-78},{-16,-19.4}}, color={0,0,127}));
+  connect(m_wat_flow.y, sprayHumidifier.u) annotation (Line(points={{49,-4},{38,
+          -4},{38,-78},{-16,-78},{-16,-19.4}}, color={0,0,127}));
   connect(boundary.ports[1], hum.port_a)
     annotation (Line(points={{6,46},{22,46}}, color={0,127,255}));
   connect(hum.port_b, T_airOut_fluid.port_a) annotation (Line(points={{42,46},{

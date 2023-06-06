@@ -2,16 +2,8 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples;
 model Test_PlateHeatExchanger2
   "Simple test case for the two variants of plate heat exchanger"
   extends Modelica.Icons.Example;
-  Components.PlateHeatExchanger plateHeatExchanger(
-    k_air=60,
-    area=140,
-    T_start=281.15,
-    redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
-    annotation (Placement(transformation(extent={{-20,20},{20,60}})));
-  Components.PlateHeatExchangerFixedEfficiency
-    plateHeatExchangerFixedEfficiency(redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
+  Components.HeatRecoverySystem plateHeatExchangerFixedEfficiency(redeclare
+      model PartialPressureDrop = Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{-20,-60},{22,-20}})));
   Modelica.Blocks.Sources.Ramp m_flow(
     height=1000/3600*1.18,

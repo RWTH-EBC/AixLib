@@ -1,8 +1,6 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples;
 model Test_ExampleAHU
   extends Modelica.Icons.Example;
-  ExampleAHU exampleAHU
-    annotation (Placement(transformation(extent={{-56,8},{54,70}})));
   Modelica.Blocks.Sources.Constant T_setCooler(k=273.15 + 26)
     annotation (Placement(transformation(extent={{20,-100},{0,-80}})));
   Modelica.Blocks.Sources.Constant X_set_Cooler(k=0.0115)
