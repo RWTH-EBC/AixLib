@@ -5,6 +5,5 @@ PartialCoeffTable
 CalcMethodConvectiveHeatTransfer
 CalcMethodRadiativeHeatTransfer
 CalcMethodConvectiveHeatTransferInsideSurface
-CalcMethodLongwaveRadiationHeatTransfer
 ThermalInsulationRegulation
 InsideSurfaceOrientation

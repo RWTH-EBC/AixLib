@@ -20,10 +20,10 @@ model Window_ASHRAE140
       Placement(transformation(extent={{-10,-20},{10,0}})));
   Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
     final A=windowarea,
-    calcMethod=2,
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
   Utilities.HeatTransfer.HeatConvInside heatConv_inside(
-    calcMethod=2,
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
     hCon_const=2,
     final A=windowarea)
                   annotation (Placement(transformation(extent={{68,-20},{48,2}})));

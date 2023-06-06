@@ -9,7 +9,7 @@ model TwinHouseN2
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,
-    calcMethodIn=1,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
     redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses Type_Win,
     redeclare model CorrSolarGainWin =

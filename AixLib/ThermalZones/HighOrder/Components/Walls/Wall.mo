@@ -4,9 +4,9 @@ model Wall
 
   //Type parameter
   parameter Boolean outside = true
-    "Choose if the wall is an outside or an inside wall"                                annotation(Dialog(group = "General Wall Type Parameter", compact = true), choices(choice = true
-        "Outside Wall",                                                                                                    choice = false
-        "Inside Wall",                                                                                                    radioButtons = true));
+    "Choose if the wall is an outside wall" annotation (
+      Dialog(group = "General Wall Type Parameter", compact = true),
+      choices(checkBox=true));
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
