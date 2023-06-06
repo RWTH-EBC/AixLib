@@ -16,6 +16,19 @@ model HeatFlux "Upward and downward heat flux of an underfloor heating circuit a
 
   final parameter Modelica.Units.SI.HeatFlux q_max = K_H * dT_H;
   final parameter Modelica.Units.SI.HeatFlux q_U = 1 / R_U * (R_O * q_max + T_Room - T_U);
+  final parameter Modelica.Units.SI.TemperatureDifference dT_HU=
+      UnderfloorHeating.BaseClasses.logDT({TSup_nominal,TRet_nominal,
+      TZoneBel_nominal});
+    final parameter Modelica.Units.SI.ThermalResistance R_add=1/(K_H*(1 + R_O/R_U*
+      dT_H/dT_HU)*A + A*(TZone_nominal - T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*
+      dT_H/dT_HU) - R_pipe - 1/(2200*Modelica.Constants.pi*dInn*length)
+    "additional thermal resistance";
+  final parameter Modelica.Units.SI.ThermalResistance R_pipe=if withSheathing
+       then (log(dOut + thicknessSheathing/dOut))/(2*sheathingMaterial.lambda*
+      Modelica.Constants.pi*length) + (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
+       else (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
+    "thermal resistance through pipe layers";
+
 
 initial equation
 

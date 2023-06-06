@@ -184,12 +184,14 @@ equation
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-21},
           {-50,-21},{-50,-15.75},{-44,-15.75}},                                                                                            color={191,0,0}));
   connect(m_flow_specification1.ports[1], underfloorHeatingSystem.port_a)
-    annotation (Line(points={{-82,-58},{-76,-58},{-76,-59},{-68,-59}}, color={0,
+    annotation (Line(points={{-82,-58},{-76,-58},{-76,-59.7778},{-68,-59.7778}},
+                                                                       color={0,
           127,255}));
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
-        points={{-44,-59},{-44,-58},{-24,-58}}, color={0,127,255}));
-  connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-79.4,
-          -36},{-63.68,-36},{-63.68,-51.0667}},        color={0,0,127}));
+        points={{-44,-59.7778},{-44,-58},{-24,-58}},
+                                                color={0,127,255}));
+  connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{
+          -79.4,-36},{-70.4,-36},{-70.4,-55.1111}}, color={0,0,127}));
 
   connect(wholeHouseBuildingEnvelope.heatingToRooms[4], underfloorHeatingSystem.heatFloor[1]) annotation (Line(points={{-14,
           9.65091},{-22,9.65091},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,-52.525}},

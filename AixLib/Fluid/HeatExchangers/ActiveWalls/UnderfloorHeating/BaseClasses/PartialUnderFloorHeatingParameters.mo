@@ -1,6 +1,16 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 partial model PartialUnderFloorHeatingParameters
   "Common parameters for underfloor heating"
+  parameter Modelica.Units.SI.Temperature TSurMax=29 + 273.15
+    "Maximum surface temperature"                                                            annotation (Dialog(group=
+          "Room Specifications"));
+
+  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
+    "velocity of medium in pipe";
+
+  final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(
+      Modelica.Constants.pi*0.5))
+    "Inner pipe diameter as a comparison for user parameter";
 
   parameter Modelica.Units.SI.Diameter dOut "Outer diameter of pipe"
                                                                     annotation (Dialog( group=

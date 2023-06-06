@@ -1,9 +1,37 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
 model qG_TypeA
   "Calculating the limiting heat flux for underfloor heating Types A and C according to EN 1264"
   import Modelica.Constants.e;
 
   extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
+  final parameter Modelica.Units.SI.Thickness InsulationThickness=
+      wallTypeCeiling.d[1] "Thickness of thermal insulation";
+  final parameter Modelica.Units.SI.ThermalConductivity lambda_ins=
+      wallTypeCeiling.lambda[1] "Thermal conductivity of thermal insulation";
+  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns= InsulationThickness/lambda_ins "Thermal resistance of thermal insulation";
+  final parameter Modelica.Units.SI.MassFlowRate m_flow_PanelHeating=Q_flow_nominal/(dT_nominal*cp)*(1 + (R_O/R_U) + (TZone_nominal -
+      TZoneBel_nominal)/(q_flow_nominal*R_U)) "Nominal mass flow rate";
+
+  final parameter Modelica.Units.SI.Thickness CoverThickness=wallTypeFloor.d[1]
+    "thickness of cover above pipe";
+  final parameter Modelica.Units.SI.ThermalConductivity lambda_E=wallTypeFloor.lambda[1]
+    "Thermal conductivity of cover";
+
+  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaB=wallTypeFloor.d[2]
+      /wallTypeFloor.lambda[2] "Thermal resistance of flooring";
+
+  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaCeiling=if Ceiling
+       then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
+    "Thermal resistance of ceiling";
+  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaPlaster=if Ceiling
+       then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0
+    "Thermal resistance of plaster";
+  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at Ceiling Surface";
+
+  final parameter Modelica.Units.SI.ThermalInsulance R_U=EN_1264.R_U
+    "Thermal resistance of wall layers under panel heating";
+  final parameter Modelica.Units.SI.ThermalInsulance R_O=EN_1264.R_O
+    "Thermal resistance of wall layers above panel heating";
 
   parameter Modelica.Units.SI.Temperature T_Fmax "maximum surface temperature";
   parameter Modelica.Units.SI.Temperature T_Room "Room temperature";
@@ -24,11 +52,12 @@ model qG_TypeA
     else
   phi * B_G * (dT_HG / phi) ^(n_G) * 0.375 / T * f_G "limiting heat flux";
 
-  parameter Modelica.Units.SI.HeatFlux q_Gmax "maximum possible heat flux";
-
+  final parameter Modelica.Units.SI.HeatFlux q_Gmax=8.92*(T_Fmax -
+      TZone_nominal)^(1.1)
+    "Maxium possible heat flux with given surface temperature and room temperature";
   final parameter Modelica.Units.SI.TemperatureDifference dT_HG375 = phi *  (B_G / (B * product_ai))^(1/(1-n_G)) "maximum temperature difference at Spacing = 0.375 m";
   final parameter Modelica.Units.SI.TemperatureDifference dT_HG = if T <= 0.375 then phi *  (B_G / (B * product_ai))^(1/(1-n_G)) else phi * ( B_G / (B * product_ai))^(1/(1-n_G)) * f_G "maximum temperature difference between heating medium and room";
-  parameter Modelica.Units.SI.TemperatureDifference dT_H "logarithmic temperature difference between heating medium and room";
+  parameter Modelica.Units.SI.TemperatureDifference dT_H=q_flow_nominal/K_H "logarithmic temperature difference between heating medium and room";
 
   Tables.CombiTable2DParameter tableA4(
     table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,
@@ -70,7 +99,22 @@ model qG_TypeA
 
 initial equation
   assert(dT_H <= dT_HG, "Temperature difference between medium and room seems to be higher than the maximum temperature difference (see EN 1264)");
+  assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
+     + getInstanceName());
 
+  if Ceiling then
+    assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 3, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 3 ceiling layers). Error accuring in"
+       + getInstanceName());
+  else
+    assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 4, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 4 ground plate layers). Error accuring in"
+       + getInstanceName());
+  end if;
+
+  if T_U >= 18 + 273.15 then
+    assert(R_lambdaIns >= 0.75, "Thermal resistivity of insulation layer needs to be greater than 0.75 m²K / W (see EN 1264-4 table 1)");
+  else
+    assert(R_lambdaIns >= 1.25, "Thermal resistivity of insulation layer needs to be greater than 1.25 m²K / W (see EN 1264-4 table 1)");
+  end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end qG_TypeA;

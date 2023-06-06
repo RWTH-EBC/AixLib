@@ -2,24 +2,13 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
   extends
     AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeating;
-  parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*length
-    "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0
+  parameter Modelica.Units.SI.PressureDifference dpValve_nominal=0
     "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.Units.SI.PressureDifference dpFixed_nominal = 0
     "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.Units.SI.Temperature TSurMeaMax=29 + 273.15
-    "Maximum mean surface temperature"                                                       annotation (Dialog(group=
-          "Room Specifications"));
-  parameter Modelica.Units.SI.Temperature TRoom_nominal=20 + 273.15
-    "Nominal Room Temperature"                                                            annotation (Dialog(group=
-          "Room Specifications"));
-
-  parameter Modelica.Units.SI.Distance spacing "Spacing between tubes" annotation (Dialog( group=
-          "Panel Heating"));
-  final parameter Modelica.Units.SI.Length length=A/spacing
+  parameter Modelica.Units.SI.Length length
     "Length of panel heating pipe" annotation (Dialog(group="Panel Heating"));
 
   AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.UnderfloorHeatingElement
@@ -54,9 +43,9 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     allowFlowReversal=false,
     each m_flow_nominal=m_flow_nominal,
     from_dp=false,
-    dpValve_nominal=dp_Pipe + dp_Valve,
+    dpValve_nominal=dpValve_nominal,
     dpFixed_nominal=dpFixed_nominal)
-    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Blocks.Interfaces.RealInput uVal
     "Control input for valve (0: closed, 1: open)" annotation (Placement(
         transformation(
@@ -131,6 +120,15 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
 
 
+  FixedResistances.HydraulicDiameter resPip(
+    redeclare package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
+    final show_T=show_T,
+    final dh=dInn,
+    final length=length,
+    final v_nominal=v) "Pressure loss model for pipe"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -142,19 +140,17 @@ protected
 
 initial equation
   assert(
-    dp_Pipe + dp_Valve <= 25000,
+    resPip.dp_nominal + dpFixed_nominal + dpValve_nominal <= 25000,
     "According to prEN1264 pressure drop in a heating circuit is 
-    supposed to be under 250 mbar. Error accuring in" +
-    getInstanceName(), AssertionLevel.warning);
+    supposed to be under 250 mbar. Error accuring in" + getInstanceName(),
+    AssertionLevel.warning);
 
 equation
   assert(
-    TFloorMea <= TSurMeaMax,
+    TFloorMea <= TSurMax,
     "Mean surface temperature in" + getInstanceName() + "too high",
     AssertionLevel.warning);
 
- connect(port_a, val.port_a)
-    annotation (Line(points={{-100,0},{-60,0}}, color={0,127,255}));
   if dis > 1 then
     for i in 1:(dis-1) loop
       connect(ufhEle[i].port_b, ufhEle[i + 1].port_a) annotation (Line(
@@ -165,7 +161,7 @@ equation
     end for;
   end if;
   connect(val.y, uVal)
-    annotation (Line(points={{-50,12},{-50,60},{-118,60}}, color={0,0,127}));
+    annotation (Line(points={{-40,12},{-40,60},{-118,60}}, color={0,0,127}));
   connect(radConSplFlo.portCon,theColConFlo. port_a)
     annotation (Line(points={{4,40},{4,44},{20,44},{20,52}}, color={191,0,0}));
   connect(radConSplFlo.portRad,theColRadFlo. port_a) annotation (Line(points={{-4,
@@ -196,10 +192,14 @@ equation
      Line(points={{61,30},{90,30},{90,50},{110,50}}, color={0,0,127}));
   connect(discretizedFloorTemperatureAnalysis.TFloorMax, TFloorMax) annotation (
      Line(points={{61,34},{84,34},{84,70},{110,70}}, color={0,0,127}));
-  connect(val.port_b, ufhEle[1].port_a) annotation (Line(points={{-40,0},{-10,0}},
+  connect(val.port_b, ufhEle[1].port_a) annotation (Line(points={{-30,0},{-10,0}},
                                           color={0,127,255}));
   connect(ufhEle[dis].port_b, port_b) annotation (Line(points={{10,0},{100,0}},
                                      color={0,127,255}));
+  connect(val.port_a, resPip.port_b)
+    annotation (Line(points={{-50,0},{-60,0}}, color={0,127,255}));
+  connect(port_a, resPip.port_a)
+    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         initialScale=0.1), graphics={

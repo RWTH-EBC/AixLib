@@ -10,14 +10,6 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
       (2)*length "Water Volume in Tube";
   final parameter Modelica.Units.SI.Time tau=VWat*(rho_default*dis)/
       m_flow_nominal;
-
-  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
-    "velocity of medium in pipe";
-
-  final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(
-      Modelica.Constants.pi*0.5))
-    "Inner pipe diameter as a comparison for user parameter";
-
   final parameter Modelica.Units.SI.Area APipeInnSuf=Modelica.Constants.pi*dInn*length "Surface area inside the pipe";
   final parameter Modelica.Units.SI.CoefficientOfHeatTransfer hPipeInnTurb=2200
     "Coefficient of heat transfer at the inner surface of pipe due to turbulent flow";
