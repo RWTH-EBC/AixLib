@@ -192,10 +192,10 @@ equation
       R = a / b;
 
   // conversion of direct and diffuse horizontal radiation
-  if WeatherFormat == 1 then // TRY
+  if WeatherFormat == false then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
-  else  // WeatherFormat == 2 , TMY then
+  else  // WeatherFormat == true , TMY then
     InBeamRadHor = solarInput1 * cos_theta_z;
     InDiffRadHor = max(solarInput2-InBeamRadHor, 0);
   end if;
