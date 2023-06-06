@@ -13,9 +13,9 @@ partial model GeothermalHeatPumpBase
 
   replaceable model PeakLoadDeviceModel =
       AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPortTransport(redeclare package Medium = Medium)
+    AixLib.Fluid.Interfaces.PartialTwoPortTransport
     annotation(choicesAllMatching=true);
-    PeakLoadDeviceModel PeakLoadDevice
+    PeakLoadDeviceModel peaLoaDev(redeclare package Medium=Medium)
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.BufferStorage
@@ -259,7 +259,7 @@ equation
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
-  connect(resistanceHeatConsumerFlow.port_b, PeakLoadDevice.port_a) annotation (
+  connect(resistanceHeatConsumerFlow.port_b, peaLoaDev.port_a) annotation (
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
   connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-16.5,
           20},{-16,20},{-16,28},{-146,28},{-146,27.2}},        color={0,127,255}));
