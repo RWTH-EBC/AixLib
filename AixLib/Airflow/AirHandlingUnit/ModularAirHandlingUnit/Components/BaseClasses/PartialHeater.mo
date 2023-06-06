@@ -3,41 +3,41 @@ partial model PartialHeater
   "BaseClass for heat exchangers in air handling units"
 
   // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_steel = 920 "specific heat capacity of heat exchanger material" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_steel = 920 "specific heat capacity of heat exchanger material" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
 
-  parameter Modelica.SIunits.Mass m_steel = 3 "mass of heat exchanger" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Mass m_steel = 3 "mass of heat exchanger" annotation (HideResult = (use_T_set));
 
-  parameter Modelica.SIunits.Length length=0.3 "length of heat exchanger in flow direction" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.Length width=0.6 "width of heat exchanger vertical to flow direction" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Length length=0.3 "length of heat exchanger in flow direction" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Length width=0.6 "width of heat exchanger vertical to flow direction" annotation (HideResult = (use_T_set));
   parameter Real nFins=60 "number of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.Area area=length*width*nFins "heat exchange surface area"
-                                                                                      annotation(enable=false,HideResult = (use_T_set));
-  parameter Modelica.SIunits.Length delta = 0.002 "thickness of exchange plate" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.ThermalConductivity lambda = 670 "thermal conduction of exchange plate" annotation (HideResult = (use_T_set));
-  //parameter Modelica.SIunits.CoefficientOfHeatTransfer k_air = 60 "convective heat transfer coefficient";
+  parameter Modelica.Units.SI.Area area=length*width*nFins "heat exchange surface area"
+                                                                                       annotation(enable=false,HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Length delta = 0.002 "thickness of exchange plate" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.ThermalConductivity lambda = 670 "thermal conduction of exchange plate" annotation (HideResult = (use_T_set));
+  //parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_air = 60 "convective heat transfer coefficient";
 
   parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal = 45E3 "maximum heat output of heater at design point. Only used, if use_T_set = true" annotation (HideResult = (not use_T_set));
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal = 45E3 "maximum heat output of heater at design point. Only used, if use_T_set = true" annotation (HideResult = (not use_T_set));
 
   // constants
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
   // Variables
-  Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
-  Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+  Modelica.Units.SI.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
-  Modelica.SIunits.CoefficientOfHeatTransfer k_air "convective heat transfer coefficient"
-                                                                                         annotation(enable=false,HideResult = (use_T_set));
+  Modelica.Units.SI.CoefficientOfHeatTransfer k_air "convective heat transfer coefficient"
+                                                                                          annotation(enable=false,HideResult = (use_T_set));
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
 
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(
     final quantity = "MassFlowRate",

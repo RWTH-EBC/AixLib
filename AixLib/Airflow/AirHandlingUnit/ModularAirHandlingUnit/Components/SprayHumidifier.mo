@@ -5,7 +5,7 @@ model SprayHumidifier "Idealized model of a spray humidifier"
   parameter Real k = 500 "exponent for humidification degree";
 
   // Variables
-  Modelica.SIunits.SpecificEnthalpy h_watIn "specific enthalpy of incoming water";
+  Modelica.Units.SI.SpecificEnthalpy h_watIn "specific enthalpy of incoming water";
 
   Real eta_B "humidification degree";
 
@@ -21,7 +21,7 @@ model SprayHumidifier "Idealized model of a spray humidifier"
     annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 protected
   Real WLN "water to air ratio";
-  Modelica.SIunits.Temperature T_intern "internal outlet temperature";
+  Modelica.Units.SI.Temperature T_intern "internal outlet temperature";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=T_intern)
     annotation (Placement(transformation(extent={{-78,-6},{-58,14}})));

@@ -1,30 +1,30 @@
 ﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PlateHeatExchangerFixedEfficiency
 
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
   parameter Real epsEnabled = 0.85 "efficiency of the heat recovery system (0...1) if it is used";
   parameter Real epsDisabled = 0.1 "efficiency of the heat recovery system (0...1) if it is bypassed";
 
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairInOda "mass flow rate of incoming dry outdoor air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairInEta "mass flow rate of incoming dry exhaust air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairInOda "mass flow rate of incoming dry outdoor air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairInEta "mass flow rate of incoming dry exhaust air";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairOutOda "mass flow rate of outgoing dry outdoor air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairOutEta "mass flow rate of outgoing dry exhaust air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOutOda "mass flow rate of outgoing dry outdoor air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOutEta "mass flow rate of outgoing dry exhaust air";
 
-  Modelica.SIunits.SpecificEnthalpy h_airInOda "specific enthalpy of incoming outdoor air";
-  Modelica.SIunits.SpecificEnthalpy h_airOutOda "specific enthalpy of outgoing outdoor air";
+  Modelica.Units.SI.SpecificEnthalpy h_airInOda "specific enthalpy of incoming outdoor air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOutOda "specific enthalpy of outgoing outdoor air";
 
-  Modelica.SIunits.SpecificEnthalpy h_airInEta "specific enthalpy of incoming exhaust air";
-  Modelica.SIunits.SpecificEnthalpy h_airOutEta "specific enthalpy of outgoing exhaust air";
+  Modelica.Units.SI.SpecificEnthalpy h_airInEta "specific enthalpy of incoming exhaust air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOutEta "specific enthalpy of outgoing exhaust air";
 
-  Modelica.SIunits.Temperature T_airOutOda_max "maximum temperature of outdoor air outlet if HRS is used";
-  Modelica.SIunits.Temperature T_airOutOda_min "minimum temperature of outdoor air outlet if HRS is bypassed";
+  Modelica.Units.SI.Temperature T_airOutOda_max "maximum temperature of outdoor air outlet if HRS is used";
+  Modelica.Units.SI.Temperature T_airOutOda_min "minimum temperature of outdoor air outlet if HRS is bypassed";
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
 
   replaceable model PartialPressureDrop =
     Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);

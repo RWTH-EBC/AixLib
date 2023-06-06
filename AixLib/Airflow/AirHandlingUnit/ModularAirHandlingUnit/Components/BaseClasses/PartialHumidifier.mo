@@ -2,24 +2,24 @@
 model PartialHumidifier "partial model of a humidifier"
 
   // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_water = 4180 "specific heat capacity of water";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_water = 4180 "specific heat capacity of water";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
   parameter Boolean use_X_set = false "if true, a set humidity is used to calculate the necessary mass flow rate";
 
   // constants
-  constant Modelica.SIunits.SpecificEnthalpy r100 = 2257E3 "specific heat of vaporization at 100°C";
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r100 = 2257E3 "specific heat of vaporization at 100°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
   // Variables
-  Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
-  Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+  Modelica.Units.SI.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
 
   replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);

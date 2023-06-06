@@ -1,12 +1,12 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SensibleCooler
   "Idealized model for cooler (not considering condensation)"
-  extends BaseClasses.PartialCooler(final use_X_set=false);
+  extends BaseClasses.PartialCooler;
 
-  parameter Modelica.SIunits.Length s=0.003 "distance of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.Length s=0.003 "distance of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
 
   parameter Boolean use_constant_heatTransferCoefficient=false "if true then a constant heat transfer coefficient is used";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constan_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constan_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
 
   BaseClasses.HeatTransfer.ConvectiveHeatTransferCoefficient heatTransfer(
     m_flow=m_flow_airIn,

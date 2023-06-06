@@ -1,35 +1,35 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PlateHeatExchanger
 
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_steel = 920 "specific heat capacity of heat exchanger material";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_steel = 920 "specific heat capacity of heat exchanger material";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
 
-  parameter Modelica.SIunits.Mass m_steel = 3 "mass of heat exchanger";
+  parameter Modelica.Units.SI.Mass m_steel = 3 "mass of heat exchanger";
 
-  parameter Modelica.SIunits.Area area = 2 "heat exchange surface area";
-  parameter Modelica.SIunits.Length delta = 0.002 "thickness of exchange plate";
-  parameter Modelica.SIunits.ThermalConductivity lambda = 670 "thermal conduction of exchange plate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer k_air = 600 "convective heat transfer coefficient";
+  parameter Modelica.Units.SI.Area area = 2 "heat exchange surface area";
+  parameter Modelica.Units.SI.Length delta = 0.002 "thickness of exchange plate";
+  parameter Modelica.Units.SI.ThermalConductivity lambda = 670 "thermal conduction of exchange plate";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_air = 600 "convective heat transfer coefficient";
 
-  parameter Modelica.SIunits.Temperature T_start = 293.15 "start temperature of plates" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start = 293.15 "start temperature of plates" annotation(Dialog(tab="Initialization"));
 
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
-  Modelica.SIunits.Temperature T_airOutOda_max "maximum outdoor air temperature";
+  Modelica.Units.SI.Temperature T_airOutOda_max "maximum outdoor air temperature";
 
-  Modelica.SIunits.SpecificEnthalpy h_airInOda "specific enthalpy of incoming outdoor air";
-  Modelica.SIunits.SpecificEnthalpy h_airOutOda "specific enthalpy of outgoing outdoor air";
-  Modelica.SIunits.SpecificEnthalpy h_airOutOda_max "maximum specific enthalpy of outgoing outdoor air";
-  //Modelica.SIunits.SpecificEnthalpy h_airOutOda_set "specific enthalpy of set temperature";
-  Modelica.SIunits.SpecificEnthalpy h_airInEta "specific enthalpy of incoming exhaust air";
-  Modelica.SIunits.SpecificEnthalpy h_airOutEta "specific enthalpy of outgoing exhaust air";
+  Modelica.Units.SI.SpecificEnthalpy h_airInOda "specific enthalpy of incoming outdoor air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOutOda "specific enthalpy of outgoing outdoor air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOutOda_max "maximum specific enthalpy of outgoing outdoor air";
+  //Modelica.Units.SI.SpecificEnthalpy h_airOutOda_set "specific enthalpy of set temperature";
+  Modelica.Units.SI.SpecificEnthalpy h_airInEta "specific enthalpy of incoming exhaust air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOutEta "specific enthalpy of outgoing exhaust air";
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
-  Modelica.SIunits.HeatFlowRate Q_flow_max "max heat flow";
-  //Modelica.SIunits.HeatFlowRate Q_flow_set "heat flow at set temperature";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
+  Modelica.Units.SI.HeatFlowRate Q_flow_max "max heat flow";
+  //Modelica.Units.SI.HeatFlowRate Q_flow_set "heat flow at set temperature";
 
    replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);

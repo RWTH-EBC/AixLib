@@ -2,22 +2,22 @@
 model FanSimple "model of a simple fan"
 
   // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "density of air";
   parameter Real eta = 0.7 "efficiency of fan";
 
   // constants
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
   // variables
-  Modelica.SIunits.Power P_el "electrical power of fan";
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow rate added to air flow";
-  Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
-  Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+  Modelica.Units.SI.Power P_el "electrical power of fan";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow rate added to air flow";
+  Modelica.Units.SI.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
   // objects
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(final quantity="MassFlowRate",

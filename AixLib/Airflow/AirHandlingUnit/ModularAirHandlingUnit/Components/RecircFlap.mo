@@ -1,15 +1,15 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model RecircFlap "model for recirculating flap"
 
   // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
   parameter Boolean exponential = false "= true for exponential opening of flap";
 
   // variables
-  Modelica.SIunits.SpecificHeatCapacity cp_airInOda "specific heat capacity of incoming outdoor air";
-  Modelica.SIunits.SpecificHeatCapacity cp_airInEta "specific heat capacity of incoming exhaust air";
+  Modelica.Units.SI.SpecificHeatCapacity cp_airInOda "specific heat capacity of incoming outdoor air";
+  Modelica.Units.SI.SpecificHeatCapacity cp_airInEta "specific heat capacity of incoming exhaust air";
 
   Real splitFactor "factor that describes portion of exhaust air, that is mixed into the outdoor air";
 

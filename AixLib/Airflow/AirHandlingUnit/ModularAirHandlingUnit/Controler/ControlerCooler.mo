@@ -2,11 +2,10 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerCooler
   parameter Boolean activeDehumidifying=false
     "true if active dehumidifying is done in cooler";
-  Modelica.Blocks.Interfaces.RealInput xSup(start=0.007)
-    "max. set value for absolute humidity of supply air"
-                                                    annotation (Placement(
-        transformation(extent={{-140,40},{-100,80}}),   iconTransformation(
-          extent={{-120,50},{-100,70}})));
+  Modelica.Blocks.Interfaces.RealInput xSupSet(start=0.007)
+    "max. set value for absolute humidity of supply air" annotation (Placement(
+        transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent
+          ={{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput TsupSet(start=293.15)
     "set value for temperature at supply air outlet" annotation (Placement(
         transformation(extent={{-140,-40},{-100,0}}),   iconTransformation(
@@ -25,43 +24,45 @@ model ControlerCooler
           extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,
             10}})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough if not activeDehumidifying
-    annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
+    annotation (Placement(transformation(extent={{52,-98},{72,-78}})));
   Modelica.Blocks.Math.Min min_X if activeDehumidifying
-    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+    annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   //ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum relToAbsHum annotation (Placement(transformation(extent={{-72,44},{-52,64}})));
   Utilities.Psychrometrics.pW_X pWat(use_p_in=false)
-    annotation (Placement(transformation(extent={{-30,62},{-10,82}})));
+    annotation (Placement(transformation(extent={{-58,-6},{-38,14}})));
   Utilities.Psychrometrics.TDewPoi_pW dewPoi
-    annotation (Placement(transformation(extent={{8,62},{28,82}})));
+    annotation (Placement(transformation(extent={{-30,-6},{-10,14}})));
   Modelica.Blocks.Logical.Greater greater
-    annotation (Placement(transformation(extent={{-24,102},{-4,122}})));
+    annotation (Placement(transformation(extent={{-8,70},{12,90}})));
   Modelica.Blocks.Logical.Switch switch1 if activeDehumidifying
-    annotation (Placement(transformation(extent={{86,84},{106,104}})));
+    annotation (Placement(transformation(extent={{58,12},{78,32}})));
 equation
-  connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{30,-20},{30,-16},
-          {38,-16}}, color={0,0,127}));
-  connect(realPassThrough.y, TcoolerSet) annotation (Line(points={{61,-50},{92,
-          -50},{92,-10},{94,-10},{94,0},{110,0}}, color={0,0,127}));
-  connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{32,
-          -20},{32,-50},{38,-50}}, color={0,0,127}));
-  connect(xSup, pWat.X_w) annotation (Line(points={{-120,60},{-80,60},{-80,72},
-          {-31,72}}, color={0,0,127}));
+  connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{4,-20},{4,-8},
+          {10,-8}},  color={0,0,127}));
+  connect(realPassThrough.y, TcoolerSet) annotation (Line(points={{73,-88},{82,
+          -88},{82,0},{110,0}},                   color={0,0,127}));
+  connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{30,
+          -20},{30,-88},{50,-88}}, color={0,0,127}));
+  connect(xSupSet, pWat.X_w) annotation (Line(points={{-120,60},{-64,60},{-64,4},
+          {-59,4}}, color={0,0,127}));
   connect(pWat.p_w, dewPoi.p_w)
-    annotation (Line(points={{-9,72},{7,72}}, color={0,0,127}));
-  connect(dewPoi.T, min_X.u1) annotation (Line(points={{29,72},{32,72},{32,-4},
-          {38,-4}}, color={0,0,127}));
-  connect(Xout, greater.u1) annotation (Line(points={{-120,-60},{-120,112},{-26,
-          112}}, color={0,0,127}));
-  connect(xSup, greater.u2) annotation (Line(points={{-120,60},{-79,60},{-79,
-          104},{-26,104}}, color={0,0,127}));
-  connect(greater.y, switch1.u2) annotation (Line(points={{-3,112},{42,112},{42,
-          94},{84,94}}, color={255,0,255}));
+    annotation (Line(points={{-37,4},{-31,4}},color={0,0,127}));
+  connect(dewPoi.T, min_X.u1) annotation (Line(points={{-9,4},{10,4}},
+                    color={0,0,127}));
+  connect(Xout, greater.u1) annotation (Line(points={{-120,-60},{-88,-60},{-88,
+          80},{-10,80}},
+                 color={0,0,127}));
+  connect(xSupSet, greater.u2) annotation (Line(points={{-120,60},{-16,60},{-16,
+          72},{-10,72}}, color={0,0,127}));
+  connect(greater.y, switch1.u2) annotation (Line(points={{13,80},{50,80},{50,
+          22},{56,22}}, color={255,0,255}));
   connect(min_X.y, switch1.u1)
-    annotation (Line(points={{61,-10},{61,102},{84,102}}, color={0,0,127}));
-  connect(TsupSet, switch1.u3) annotation (Line(points={{-120,-20},{70,-20},{70,
-          86},{84,86}}, color={0,0,127}));
-  connect(switch1.y, TcoolerSet) annotation (Line(points={{107,94},{106,94},{
-          106,0},{110,0}}, color={0,0,127}));
+    annotation (Line(points={{33,-2},{48,-2},{48,30},{56,30}},
+                                                          color={0,0,127}));
+  connect(TsupSet, switch1.u3) annotation (Line(points={{-120,-20},{50,-20},{50,
+          14},{56,14}}, color={0,0,127}));
+  connect(switch1.y, TcoolerSet) annotation (Line(points={{79,22},{82,22},{82,0},
+          {110,0}},        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerCooler;

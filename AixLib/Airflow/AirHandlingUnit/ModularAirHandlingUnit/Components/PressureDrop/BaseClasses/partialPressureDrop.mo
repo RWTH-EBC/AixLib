@@ -1,11 +1,11 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.BaseClasses;
 partial model partialPressureDrop
 
-        input Modelica.SIunits.MassFlowRate m_flow;
-        input Modelica.SIunits.Density rho;
+        input Modelica.Units.SI.MassFlowRate m_flow;
+        input Modelica.Units.SI.Density rho;
         parameter Real a = 0.5;
 
-        output Modelica.SIunits.Pressure dp;
+        output Modelica.Units.SI.Pressure dp;
 
  annotation (                                  Documentation(info="<html><p>
   This is a partial model for calculation of the pressure Drop in

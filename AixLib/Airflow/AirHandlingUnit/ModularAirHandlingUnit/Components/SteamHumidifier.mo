@@ -2,7 +2,7 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SteamHumidifier
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
-  Modelica.SIunits.SpecificEnthalpy h_steam "specific enthalpy of steam";
+  Modelica.Units.SI.SpecificEnthalpy h_steam "specific enthalpy of steam";
 
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));

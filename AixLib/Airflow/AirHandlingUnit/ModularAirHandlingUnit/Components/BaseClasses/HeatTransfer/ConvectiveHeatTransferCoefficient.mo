@@ -3,30 +3,30 @@ model ConvectiveHeatTransferCoefficient
   "model that calculates the convective heat transfer coefficient for plane gaps in an air heat exchanger"
 
   //Inputs
-  input Modelica.SIunits.MassFlowRate m_flow "mass flow rate of air";
+  input Modelica.Units.SI.MassFlowRate m_flow "mass flow rate of air";
 
   //parameters
-  parameter Modelica.SIunits.Length s "distance between fins";
-  parameter Modelica.SIunits.Length length "length of heat exchanger";
-  parameter Modelica.SIunits.Length width "width of heat exchanger";
+  parameter Modelica.Units.SI.Length s "distance between fins";
+  parameter Modelica.Units.SI.Length length "length of heat exchanger";
+  parameter Modelica.Units.SI.Length width "width of heat exchanger";
   parameter Real nFins "number of parallel plates in heat exchanger";
 
   //Variables
   Real Pr "Prandtl number";
   Real Re "Reynolds number";
   Real Nu "Nusselt number";
-  Modelica.SIunits.Velocity v "velocity of air";
+  Modelica.Units.SI.Velocity v "velocity of air";
 
   //outputs
-  output Modelica.SIunits.CoefficientOfHeatTransfer alpha "convective heat transfer coefficient";
+  output Modelica.Units.SI.CoefficientOfHeatTransfer alpha "convective heat transfer coefficient";
 
 protected
-  constant Modelica.SIunits.Density rho = 1.18 "density of air";
-  constant Modelica.SIunits.DynamicViscosity mu = 17.1E-6  "dynamic viscosity of air";
-  constant Modelica.SIunits.ThermalConductivity lambda = 0.0262 "thermal conductivity of air";
-  constant Modelica.SIunits.SpecificHeatCapacity cp =  1006 "heat capacity of air";
+  constant Modelica.Units.SI.Density rho = 1.18 "density of air";
+  constant Modelica.Units.SI.DynamicViscosity mu = 17.1E-6  "dynamic viscosity of air";
+  constant Modelica.Units.SI.ThermalConductivity lambda = 0.0262 "thermal conductivity of air";
+  constant Modelica.Units.SI.SpecificHeatCapacity cp =  1006 "heat capacity of air";
 
-  Modelica.SIunits.Length diameter "hydraulic diameter";
+  Modelica.Units.SI.Length diameter "hydraulic diameter";
 
 equation
   Pr = mu*cp/lambda;

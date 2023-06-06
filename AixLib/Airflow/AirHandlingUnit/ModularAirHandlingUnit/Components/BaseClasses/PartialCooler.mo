@@ -3,27 +3,27 @@ partial model PartialCooler
   "BaseClass for cooling heat exchangers in air handling units"
 
   // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
 
   parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(min=0) = 45E3 "maximum cooling power of cooler (design point)";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(min=0) = 45E3 "maximum cooling power of cooler (design point)";
 
   // constants
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+  constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
 
   // Variables
-  Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
-  Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
-  Modelica.SIunits.SpecificEnthalpy h_wat "specific enthalpy of extracted water";
+  Modelica.Units.SI.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
+  Modelica.Units.SI.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+  Modelica.Units.SI.SpecificEnthalpy h_wat "specific enthalpy of extracted water";
 
-  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
-  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
+  Modelica.Units.SI.HeatFlowRate Q_flow "heat flow";
 
   replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);
@@ -87,7 +87,7 @@ partial model PartialCooler
         rotation=-90,
         origin={0,100})));
 protected
-  Modelica.SIunits.MassFlowRate mb_flow "mass flow over boundary";
+  Modelica.Units.SI.MassFlowRate mb_flow "mass flow over boundary";
   Modelica.Blocks.Interfaces.RealInput T_intern "internal temperature";
   Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
   Modelica.Blocks.Interfaces.RealInput u_intern "internal input connector for heat flow scaling";
