@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HVisible
   "Calculates the solar energy entering the room in the visible area"
   extends Modelica.Blocks.Icons.Block;
-  parameter Integer n(min=1) "Number of windows"
+  parameter Integer n(min=1)=1 "Number of windows"
     annotation (Dialog(group="window"));
 
   parameter Modelica.Units.SI.TransmissionCoefficient tau_vis[n]
@@ -14,7 +14,7 @@ model HVisible
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
 
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
     roof" annotation (Dialog(group="window"));
   final parameter Modelica.Units.SI.ReflectionCoefficient rho=0.2
     "Degree of ground reflection";
@@ -24,30 +24,30 @@ model HVisible
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-114,-6},{-100,8}})));
   Modelica.Blocks.Interfaces.RealInput corTaue_Dir[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{-128,78},{-108,98}}),
         iconTransformation(extent={{-114,-106},{-100,-92}})));
 
   Modelica.Blocks.Interfaces.RealInput corTaue_DifCle[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{-120,-92},{-100,-72}}),
         iconTransformation(extent={{-114,-86},{-100,-72}})));
 
   Modelica.Blocks.Interfaces.RealInput corTaue_DifCov[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
     sky"
     annotation (Placement(transformation(extent={{-120,-72},{-100,-52}}),
         iconTransformation(extent={{-114,-66},{-100,-52}})));
 
   Modelica.Blocks.Interfaces.RealInput corTaue_Gro[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{-120,-52},{-100,-32}}),
         iconTransformation(extent={{-114,-46},{-100,-32}})));
@@ -59,8 +59,8 @@ model HVisible
         iconTransformation(extent={{-114,-26},{-100,-12}})));
 
    Modelica.Blocks.Interfaces.RealInput HDirTil[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Direct irradition on tilted surface"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "Direct irradition on tilted surface"
     annotation (Placement(transformation(extent={{-114,76},{-100,90}}),
         iconTransformation(extent={{-114,76},{-100,90}})));
 
@@ -83,22 +83,22 @@ model HVisible
         iconTransformation(extent={{-114,12},{-100,26}})));
 
   Modelica.Blocks.Interfaces.RealInput HDifTilCov[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface at covered
     sky"
     annotation (Placement(transformation(extent={{-116,42},{-100,58}}),
         iconTransformation(extent={{-114,44},{-100,58}})));
   Modelica.Blocks.Interfaces.RealInput HDifTilCle[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2")
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface at clear sky"
     annotation (Placement(transformation(extent={{-116,58},{-100,74}}),
         iconTransformation(extent={{-114,60},{-100,74}})));
 
   Modelica.Blocks.Interfaces.RealOutput HVis[n](
-    final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "solar energy entering the room in the visible area"
+    each final quantity="RadiantEnergyFluenceRate",
+    each final unit="W/m2") "solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 
