@@ -18,7 +18,7 @@ partial model PartialCase "This is the base class from which the base cases will
     each GroundReflection= 0.2,
     each Latitude=sun.Latitude,
     each h= 1609,
-    each WeatherFormat=2) "N, E, S, W, Horz"
+    each WeatherFormat=true) "N, E, S, W, Horz"
     annotation (Placement(transformation(extent={{-102,41},{-74,69}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
