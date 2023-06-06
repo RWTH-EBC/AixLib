@@ -34,19 +34,13 @@ model ConvNLayerClearanceStar
     "Constant convective heat transfer coefficient"
     annotation (Dialog(group="Convection", enable=calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A));
 
-  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
-    Dialog(group = "Radiation", compact=true),
-    choices(
-      choice=1 "No approx",
-      choice=2 "Linear approx at wall temp",
-      choice=3 "Linear approx at rad temp",
-      choice=4 "Linear approx at constant T_ref",
-      radioButtons=true));
+    Dialog(group = "Radiation", compact=true));
   parameter Modelica.Units.SI.Temperature T_ref=
       Modelica.Units.Conversions.from_degC(16)
     "Reference temperature for optional linearization"
-    annotation (Dialog(group="Radiation", enable=radCalcMethod == 4));
+    annotation (Dialog(group="Radiation", enable=radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
 
   parameter Modelica.Units.SI.Temperature T0=
       Modelica.Units.Conversions.from_degC(16) "Initial temperature"
