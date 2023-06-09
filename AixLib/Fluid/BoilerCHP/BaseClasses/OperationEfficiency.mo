@@ -25,19 +25,20 @@ package Medium=AixLib.Media.Water;
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/Boiler/General/Boiler_Eta_4D.sdf"),
-    dataset="/ETA_Kennfeld",
+        "modelica://AixLib/DataBase/Boiler/General/Boiler_Generic_Performance_Map.sdf"),
+
+    dataset="/Performance_Map",
     dataUnit="-",
-    scaleUnits={"degC","-","-","K"},
+    scaleUnits={"K","-","-","K"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
     extrapMethod=SDF.Types.ExtrapolationMethod.None)
     annotation (Placement(transformation(extent={{60,12},{80,32}})));
   Modelica.Blocks.Math.Division relative_dT "relative temperature difference"
     annotation (Placement(transformation(extent={{-30,10},{-12,28}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=PLR_min)
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0.1)
     "Limiter to make SDF simulation robust"
     annotation (Placement(transformation(extent={{-12,-64},{8,-44}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=1, uMin=PLR_min)
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=1, uMin=0.1)
     "Limiter to make SDF simulation robust"
     annotation (Placement(transformation(extent={{-2,22},{8,32}})));
   Controls.Interfaces.BoilerControlBus                     boilerControlBus

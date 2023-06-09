@@ -1,8 +1,9 @@
 within AixLib.Fluid.BoilerCHP;
 model BoilerGeneric "Generic performance map based boiler"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
+    a=(Medium.d_const^2)/m_flow_nominal^2,
     redeclare package Medium = AixLib.Media.Water,
-    dp_nominal=dp_nominal,
+    dp_nominal=7000,
     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*
           QNom/1000)/1000));
 
@@ -12,6 +13,9 @@ model BoilerGeneric "Generic performance map based boiler"
     "Nominal return temperature";
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000
     "Nominal thermal capacity";
+
+  //parameter Modelica.Units.SI.PressureDifference dp_nominal=7000 "Default-value; Will be replaced";
+
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
       T(start=T_start))            "Boiler thermal capacity (dry weight)"
@@ -52,7 +56,6 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{34,24},{54,44}})));
 
 protected
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=7000 "Default-value; Will be replaced";
   parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom "Heat capacity of metal (J/K)";
 
 equation
