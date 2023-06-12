@@ -57,7 +57,7 @@ model HeatPump "Example for the reversible heat pump model."
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     VEva=0.04,
     use_evaCap=false,
-    scalingFactor=1,
+    scalingFactor=0.9,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     mFlow_conNominal=0.5,
     mFlow_evaNominal=0.5,
@@ -186,7 +186,7 @@ equation
         points={{-12.5,3},{-70,3}},                   color={0,127,255}));
   connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
           {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
-  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
+  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-19},{76,4},
           {60,4},{60,12}}, color={0,127,255}));
   connect(pumSou.port_b, heatPump.port_a1) annotation (Line(points={{40,12},{28,
           12},{28,3},{16.5,3}}, color={0,127,255}));
@@ -197,7 +197,7 @@ equation
   connect(senTAct.port_b, sinkSideFixedBoundary.ports[1]) annotation (Line(
         points={{64,-64},{72,-64},{72,-64},{78,-64}}, color={0,127,255}));
   connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
-          -64},{66,-22},{76,-22}}, color={0,127,255}));
+          -64},{66,-21},{76,-21}}, color={0,127,255}));
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
         points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127},
         smooth=Smooth.None));
