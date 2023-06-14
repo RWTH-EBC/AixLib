@@ -57,7 +57,6 @@ model HeatPump "Example for the reversible heat pump model."
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     VEva=0.04,
     use_evaCap=false,
-    scalingFactor=0.9,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     mFlow_conNominal=0.5,
     mFlow_evaNominal=0.5,
