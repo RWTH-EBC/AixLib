@@ -508,10 +508,6 @@ equation
     annotation (Line(points={{65,101},{66,101},{66,102},{8.05,102},{8.05,40.05}},
                                                                           color=
          {0,0,127}));
-  connect(hotEnergyCalc.Tout1,Bus. ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
-    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}},    color={0,0,127}));
-  connect(hotEnergyCalc.Tin1,Bus. ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
-    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}},    color={0,0,127}));
   connect(hotEnergyCalc.y1, QFlowHeat)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
@@ -548,6 +544,10 @@ equation
           {152,-108},{152,-85.475}}, color={0,0,127}));
   connect(realExpression7.y, multiSum.u[4]) annotation (Line(points={{135,-124},
           {135,-105},{152,-105},{152,-84.425}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
+    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tout1, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
+    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}}, color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=60,
