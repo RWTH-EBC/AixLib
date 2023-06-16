@@ -368,7 +368,7 @@ model Ashrae140Testcase900SP
     annotation (Placement(transformation(extent={{-28,126},{-16,138}})));
   Modelica.Blocks.Math.Product product2
     annotation (Placement(transformation(extent={{14,128},{26,140}})));
-  Modelica.Blocks.Math.Gain gain(k=4.18*1000)
+  Modelica.Blocks.Math.Gain gain(k=1.225*1.005)
     annotation (Placement(transformation(extent={{46,128},{58,140}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
@@ -560,17 +560,14 @@ equation
           130.4},{12.8,130.4}}, color={0,0,127}));
   connect(gain.u, product2.y)
     annotation (Line(points={{44.8,134},{26.6,134}}, color={0,0,127}));
-  connect(product2.u1, Bus.ahuBus.heaterBus.hydraulicBus.VFlowInMea)
-    annotation (Line(points={{12.8,137.6},{8.05,137.6},{8.05,40.05}}, color={0,
-          0,127}));
-  connect(add2.u1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea) annotation (
-      Line(points={{-29.2,135.6},{-52,135.6},{-52,40.05},{8.05,40.05}}, color={
-          0,0,127}));
-  connect(add2.u2, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea) annotation (
-      Line(points={{-29.2,128.4},{-40,128.4},{-40,40.05},{8.05,40.05}}, color={
-          0,0,127}));
   connect(gain.y, Q_Ahu) annotation (Line(points={{58.6,134},{58.6,124},{78,124},
           {78,120},{92,120},{92,134}}, color={0,0,127}));
+  connect(add2.u1, Bus.ahuBus.heaterBus.TAirOutMea) annotation (Line(points={{
+          -29.2,135.6},{-50,135.6},{-50,40.05},{8.05,40.05}}, color={0,0,127}));
+  connect(add2.u2, Bus.ahuBus.coolerBus.TAirInMea) annotation (Line(points={{
+          -29.2,128.4},{-50,128.4},{-50,40.05},{8.05,40.05}}, color={0,0,127}));
+  connect(product2.u1, Bus.ahuBus.coolerBus.VFlowAirMea) annotation (Line(
+        points={{12.8,137.6},{8.05,137.6},{8.05,40.05}}, color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=60,
