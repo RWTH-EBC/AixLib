@@ -43,6 +43,12 @@ model EnergyCalc
   Modelica.Blocks.Interfaces.RealOutput y1
                           "Output signal connector"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+  Modelica.Blocks.Interfaces.RealOutput y2
+               "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{100,80},{120,100}})));
+  Modelica.Blocks.Interfaces.RealOutput y3
+               "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}})));
 equation
   connect(add.y, gain.u)
     annotation (Line(points={{41,0},{56,0}}, color={0,0,127}));
@@ -68,6 +74,10 @@ equation
           -28,-44},{-22,-44}}, color={0,0,127}));
   connect(vFlow2, product1.u2) annotation (Line(points={{-50,-110},{-50,-56},{
           -22,-56}}, color={0,0,127}));
+  connect(product2.y, y2) annotation (Line(points={{1,50},{96,50},{96,90},{110,
+          90}}, color={0,0,127}));
+  connect(product1.y, y3) annotation (Line(points={{1,-50},{52,-50},{52,-90},{
+          110,-90}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}})), Icon(
         coordinateSystem(extent={{-100,-100},{100,100}})));
 end EnergyCalc;

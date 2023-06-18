@@ -10,7 +10,6 @@ model Ashrae140Testcase900SPTest
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
-    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x0_9(),
     area=48,
     thickness=0.1,
     alpha=20,
@@ -296,7 +295,7 @@ model Ashrae140Testcase900SPTest
     ctrThrottleHotQFlow(
       k=0.00003,
       Ti=280,
-      rpm_pump=3000),
+      rpm_pump=2000),
     ctrThrottleColdQFlow(
       k=0.00003,
       Ti=280,
@@ -329,8 +328,6 @@ model Ashrae140Testcase900SPTest
   Modelica.Blocks.Sources.RealExpression realExpression4(y=thermalZone1.ROM.roofRC.thermCapExt[
         1].T)
     annotation (Placement(transformation(extent={{166,-56},{186,-36}})));
-  Modelica.Blocks.Sources.RealExpression realExpression5(y=-tabs1.pipe.heatPort.Q_flow)
-    annotation (Placement(transformation(extent={{164,-132},{184,-112}})));
   Modelica.Blocks.Interfaces.RealOutput T_IntWall "Value of Real output"
     annotation (Placement(transformation(extent={{202,34},{222,54}})));
   Modelica.Blocks.Interfaces.RealOutput T_ExtWall "Value of Real output"
@@ -345,8 +342,6 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{204,-80},{224,-60}})));
   Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
     annotation (Placement(transformation(extent={{202,-104},{222,-84}})));
-  Modelica.Blocks.Interfaces.RealOutput Q_Tabs "Value of Real output"
-    annotation (Placement(transformation(extent={{202,-132},{222,-112}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=4)
     annotation (Placement(transformation(extent={{168,-94},{180,-82}})));
   Modelica.Blocks.Sources.RealExpression realExpression6(y=thermalZone1.ROM.radHeatSol[
@@ -363,6 +358,19 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{114,-102},{134,-82}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
     annotation (Placement(transformation(extent={{126,-24},{146,-4}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{100,123},{112,135}})));
+  Modelica.Blocks.Math.Add add2
+    annotation (Placement(transformation(extent={{100,159},{112,171}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs "Value of Real output"
+    annotation (Placement(transformation(extent={{130,119},{150,139}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Ahu "Value of Real output"
+    annotation (Placement(transformation(extent={{130,155},{150,175}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs_ctr
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{-6,184},{14,204}})));
+  Modelica.Blocks.Math.Gain gain(k=0.001)
+    annotation (Placement(transformation(extent={{-32,184},{-12,204}})));
 equation
   connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
       points={{-72,30},{8,30},{8,-17.6},{10,-17.6}},
@@ -536,8 +544,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression5.y, Q_Tabs)
-    annotation (Line(points={{185,-122},{212,-122}}, color={0,0,127}));
   connect(realExpression6.y, multiSum.u[1]) annotation (Line(points={{135,-78},
           {152,-78},{152,-89.575},{168,-89.575}}, color={0,0,127}));
   connect(realExpression9.y, multiSum.u[2]) annotation (Line(points={{135,-92},
@@ -551,6 +557,22 @@ equation
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-11.8},{
           68.8,-10},{86,-10},{86,0},{118,0},{118,-14},{136,-14}}, color={0,0,
           127}));
+  connect(coolEnergyCalc.y3, add1.u2) annotation (Line(points={{81,51},{88,51},
+          {88,77},{94,77},{94,125.4},{98.8,125.4}}, color={0,0,127}));
+  connect(coolEnergyCalc.y2, add2.u2) annotation (Line(points={{81,69},{88,69},
+          {88,161},{98.8,161},{98.8,161.4}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3, add1.u1) annotation (Line(points={{81,81},{92,81},{
+          92,132.6},{98.8,132.6}}, color={0,0,127}));
+  connect(hotEnergyCalc.y2, add2.u1) annotation (Line(points={{81,99},{80,99},{
+          80,167},{98.8,167},{98.8,168.6}}, color={0,0,127}));
+  connect(Q_Ahu, add2.y)
+    annotation (Line(points={{140,165},{112.6,165}}, color={0,0,127}));
+  connect(Q_Tabs, add1.y)
+    annotation (Line(points={{140,129},{112.6,129}}, color={0,0,127}));
+  connect(ctrTabsQflow.Q_flow1, gain.u) annotation (Line(points={{-37.2,-9},{
+          -22,-9},{-22,124},{-34,124},{-34,194}}, color={0,0,127}));
+  connect(gain.y, Q_Tabs_ctr)
+    annotation (Line(points={{-11,194},{4,194}}, color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=60,
