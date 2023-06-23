@@ -1,15 +1,16 @@
 within AixLib.ThermalZones.ReducedOrder.RC.BaseClasses;
 function GSurfSurf
   "calculates parameters for conductance between different surfaces of the same type"
+  extends Modelica.Icons.Function;
 
-  input Modelica.SIunits.Area[:] AArray "Vector of areas";
-  input Modelica.SIunits.CoefficientOfHeatTransfer hRad
+  input Modelica.Units.SI.Area[:] AArray "Vector of areas";
+  input Modelica.Units.SI.CoefficientOfHeatTransfer hRad
     "Coefficient of heat transfer for linearized radiation exchange between surfaces";
-  output Modelica.SIunits.ThermalConductance[:] G
+  output Modelica.Units.SI.ThermalConductance[:] G
     "Constant thermal conductance between pairs of surfaces, calculated as minimal area * hRad";
 protected
   Integer g=1 "index counter for thermal conductances";
-  Modelica.SIunits.ThermalConductance G0;
+  Modelica.Units.SI.ThermalConductance G0;
 algorithm
   g:=0;
   if size(AArray, 1) < 2 then

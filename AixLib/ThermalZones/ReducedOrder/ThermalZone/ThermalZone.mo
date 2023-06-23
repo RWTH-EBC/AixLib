@@ -428,8 +428,7 @@ protected
     final TMean=zoneParam.TSoil,
     final offsetTime=zoneParam.TSoilOffsetTime,
     final amplitudeTGround=zoneParam.TSoilAmplitude,
-    final fileDataSource=zoneParam.TSoilFile) if
-    zoneParam.AFloor > 0
+    final fileDataSource=zoneParam.TSoilFile)
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={39,22})));
@@ -824,9 +823,9 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
           -40},{110,-40}},                   color={0,0,127}));
-  connect(TSoil.TGroundOut, eqAirTempWall.TGround) annotation (Line(points={{43.4,
+  connect(TSoil.TGroundOut, eqAirTempWall.TGro_in) annotation (Line(points={{43.4,
           19.6},{48,19.6},{48,8.8},{-32,8.8}}, color={0,0,127}));
-  connect(TSoil.TGroundOut, eqAirTempRoof.TGround) annotation (Line(points={{43.4,
+  connect(TSoil.TGroundOut, eqAirTempRoof.TGro_in) annotation (Line(points={{43.4,
           19.6},{48,19.6},{48,28},{36,28},{36,62},{-34,62},{-34,64.8}}, color={0,
           0,127}));
   annotation (Documentation(revisions="<html><ul>

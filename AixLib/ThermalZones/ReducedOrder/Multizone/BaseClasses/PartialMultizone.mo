@@ -73,13 +73,13 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
-    if ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
+       ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
-    if ASurTot > 0 "Radiative internal gains"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
+       ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
@@ -247,6 +247,25 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+
+    // connect neighboured zone with higher index to this NZ, making sure that
+    // multiple NZ borders between two zones are connected in the same order
+    if sum(zoneParam[i].ANZ) > 0 then
+      for i_i in 1:zoneParam[i].nNZs loop
+        for j in i:numZones loop
+          if sum(zoneParam[j].ANZ) > 0 and zoneParam[i].otherNZIndex[i_i] == j then
+            for j_i in 1:zoneParam[j].nNZs loop
+              if zoneParam[j].otherNZIndex[j_i] == i then
+                if sum({if o == i then 1 else 0 for o in zoneParam[j].otherNZIndex[1:j_i]}) == sum({if o == j then 1 else 0 for o in zoneParam[i].otherNZIndex[1:i_i]}) then
+                  connect(zone[i].nzHeatFlow[i_i], zone[j].nzHeatFlow[j_i]) annotation (Line(points={{80,85.9},
+                          {90,85.9},{90,88},{86,88},{86,85.9},{80,85.9}},                                                                     color={191,0,0}));
+                end if;
+              end if;
+            end for;
+          end if;
+        end for;
+      end for;
+    end if;
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80.42,70.32},
           {86,70.32},{86,-78},{66,-78},{-100,-78},{-100,-70}},

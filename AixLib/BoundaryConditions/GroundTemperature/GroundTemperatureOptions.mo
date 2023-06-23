@@ -60,7 +60,7 @@ model GroundTemperatureOptions
     tableOnFile=true,
     tableName="TGround",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName="") if
+    fileName=fileDataSource) if
        dataSource==GroundTemperatureDataSource.File
     "Ground temperatures from table"
     annotation (Placement(transformation(extent={{-10,-66},{10,-46}})));

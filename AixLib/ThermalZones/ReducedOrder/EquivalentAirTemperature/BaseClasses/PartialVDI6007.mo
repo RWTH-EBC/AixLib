@@ -20,13 +20,11 @@ partial model PartialVDI6007
     "Set to true to include longwave radiation exchange"
     annotation(choices(checkBox = true));
   parameter Boolean TGroundFromInput=false
-    "Set to true to use TGround input connector instead of TGro constant"
+    "Set to true to use TGro_in input connector instead of TGro constant"
     annotation(choices(checkBox = true));
 
   Modelica.Units.SI.Temperature TEqWall[n] "Equivalent wall temperature";
   Modelica.Units.SI.Temperature TEqWin[n] "Equivalent window temperature";
-  Modelica.Units.SI.Temperature TGroundUsed
-  "Used value for temperature of the ground in contact with floor plate";
   Modelica.Units.SI.TemperatureDifference delTEqLW
     "Equivalent long wave temperature";
   Modelica.Units.SI.TemperatureDifference delTEqLWWin
@@ -67,7 +65,7 @@ partial model PartialVDI6007
     extent={{-20,-20},{20,20}},
     rotation=-90,
     origin={0,120})));
-  Modelica.Blocks.Interfaces.RealInput TGround(
+  Modelica.Blocks.Interfaces.RealInput TGro_in(
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if TGroundFromInput
@@ -78,6 +76,10 @@ partial model PartialVDI6007
         rotation=90,
         origin={0,-120})));
 
+protected
+  Modelica.Units.SI.Temperature TGroundUsed
+  "Used value for temperature of the ground in contact with floor plate";
+
 initial equation
   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro) > 0.1),
  "The sum of the weighting factors (walls,windows and ground) in the
@@ -87,7 +89,7 @@ initial equation
 
 equation
   if TGroundFromInput then
-    TGroundUsed=TGround;
+    TGroundUsed=TGro_in;
   else
     TGroundUsed=TGro;
   end if;
@@ -140,6 +142,12 @@ equation
    </html>",
   revisions="<html>
    <ul>
+   <li>
+   May 5, 2023, by Philip Groesdonk:<br/>
+   Added an option for non-constant ground temperature from an input connector.
+   This is for
+   <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1744\">#1744</a>.
+   </li>
    <li>
    July 11, 2019, by Katharina Brinkmann:<br/>
    Renamed <code>alphaRad</code> to <code>hRad</code>,
