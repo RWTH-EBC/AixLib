@@ -1,44 +1,101 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN50_H05_16 "50/0,5-16 PN 6/10 maximum volume flow 53.0 m^3/h"
-  extends AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord(
-            maxMinHeight=
-            [0, 15.801652892561986, 0.3801652892562011;
-2.0580912863070537, 16, 0.3305785123966949;
-4.091286307053942, 16, 0.3305785123966949;
-6.008298755186722, 16, 0.2809917355371887;
-8.04149377593361, 15.950413223140497, 0.23140495867768607;
-10.016597510373446, 16, 0.08264462809917461;
-12.049792531120332, 15.851239669421489, 0.033057851239671976;
-13.966804979253114, 15.454545454545457, 0.18181818181817988;
-17.975103734439834, 14.363636363636365, 0.23140495867768607;
-21.925311203319502, 13.024793388429753, 0.4297520661157037;
-27.90871369294606, 11.041322314049587, 0.8264462809917354;
-33.89211618257262, 9.355371900826448, 1.1735537190082646;
-41.908713692946066, 6.87603305785124, 1.8677685950413228;
-52.713692946058096, 3.0578512396694233, 3.0578512396694233],
-            maxMinSpeedCurves=
-            [0,3200,500; 53,3200,500],
-            nMin=500,
-            nMax=3200,
-            cHQN=[ 0, 0, 1.31E-06;
-                   0, 7.59E-06, 0;
-                  -0.00316, 0, 0] "coefficients for H = f(Q,N) from Pump_DN50 (similar scale of max volume flow and maxmin Speed)",
-            cPQN=[-4E+01, 2.3E-01, -3.1E-04, 1.27064E-07, -1.27494E-11;
-                   0, 0, 3.23573E-06, 0, 0;
-                   0, 8.70834E-05, 0, 0, 0;
-                  -8.39000E-03, 0, 0, 0, 0] "coefficients for P = f(Q,N) inspired by Pump_DN50 and quick calibration by hand");
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p><span style=\"font-family: Courier New;\">maxMinHeight=[Q [m3/h], Hmax [m], Hmin [m]] (maximum and minimum boundaries of pump)</span></p>
-<p><span style=\"font-family: Courier New;\">maxMinSpeedCurves=[Q [m3/h], nMax [rev/min], nMin [rev/min]](maximum and minimum boundaries of pump speed)</span></p>
-
-Data sheet:
-<a href=\"https://wilo.com/de/de/Katalog/de/produkte-expertise/wilo-stratos-maxo/stratos-maxo-50-0-5-16-pn-6-10\"
->https://wilo.com/de/de/Katalog/de/produkte-expertise/wilo-stratos-maxo/stratos-maxo-50-0-5-16-pn-6-10</a>
-</html>
-
-"));
+record Pump_DN50_H05_16 "Wilo Stratos Maxo 50/0.5-16 PN6/10"
+   extends PumpBaseRecord(
+    maxMinHeight=[
+           0.00, 15.73,  0.427;
+           1.82, 15.83,  0.451;
+           3.64, 15.93,  0.475;
+           5.45, 15.95,  0.422;
+           7.27, 15.95,  0.349;
+           9.09, 15.89,  0.246;
+          10.91, 15.79,  0.123;
+          12.73, 15.59,  0.000;
+          14.54, 15.22,  0.000;
+          16.36, 14.81,  0.000;
+          18.18, 14.18,  0.000;
+          20.00, 13.55,  0.000;
+          21.82, 12.99,  0.000;
+          23.63, 12.43,  0.000;
+          25.45, 11.89,  0.000;
+          27.27, 11.36,  0.000;
+          29.09, 10.84,  0.000;
+          30.91, 10.33,  0.000;
+          32.72,  9.82,  0.000;
+          34.54,  9.31,  0.000;
+          36.36,  8.80,  0.000;
+          38.18,  8.24,  0.000;
+          40.00,  7.68,  0.000;
+          41.81,  7.03,  0.000;
+          43.63,  6.37,  0.000;
+          45.45,  5.72,  0.000;
+          47.27,  5.06,  0.000;
+          49.09,  4.44,  0.000;
+          50.90,  3.83,  0.000;
+          52.72,  3.09,  0.000]
+      "maximum and minimum boundaries of pump (Q,Hmax,Hmin)",
+    maxMinSpeedCurves = [
+           0.00, 3226,  534;
+           1.82, 3186,  542;
+           3.64, 3146,  551;
+           5.45, 3121,  551;
+           7.27, 3100,  549;
+           9.09, 3085,  536;
+          10.91, 3073,  515;
+          12.73, 3047,  549;
+          14.54, 2996,  549;
+          16.36, 2946,  549;
+          18.18, 2896,  549;
+          20.00, 2846,  549;
+          21.82, 2806,  549;
+          23.63, 2765,  549;
+          25.45, 2725,  549;
+          27.27, 2685,  549;
+          29.09, 2656,  549;
+          30.91, 2635,  549;
+          32.72, 2610,  549;
+          34.54, 2579,  549;
+          36.36, 2550,  549;
+          38.18, 2530,  549;
+          40.00, 2509,  549;
+          41.81, 2488,  549;
+          43.63, 2467,  549;
+          45.45, 2461,  549;
+          47.27, 2460,  549;
+          49.09, 2446,  549;
+          50.90, 2425,  549;
+          52.72, 2391,  549]
+      "maximum and minimum boundaries of pump speed (Q,nMax,nMin)",
+    nMin=500,
+    nMax=3200,
+    cHQN=[ 0.00000e+00,  0.00000e+00,  1.52602e-06;
+           0.00000e+00,  4.97504e-05,  0.00000e+00;
+          -4.35468e-03,  0.00000e+00,  0.00000e+00]
+       "coefficients for H = f(Q,N)",
+    cPQN=[ 7.81838e+01, -2.90517e-01,  3.03791e-04, -9.85552e-08,  1.38780e-11;
+           0.00000e+00,  0.00000e+00,  4.44312e-06,  0.00000e+00,  0.00000e+00;
+           0.00000e+00,  3.24679e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
+          -3.79467e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
+       "coefficients for P = f(Q,N)");
+      annotation(preferredView="text", Documentation(revisions="<html>
+<ul>
+<li>2023-06-25 by Sarah Leidolf:<br>Generated</li>
+</ul>
+</html>", info="<html>
+<h4>Measurement and Regression Data</h4>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H05_16.png\"
+  alt=\"Pump Characterisistcs\">
+</p>
+<p>cHQN:</p>
+<pre>           0.00000e+00,  0.00000e+00,  1.52602e-06;
+           0.00000e+00,  4.97504e-05,  0.00000e+00;
+          -4.35468e-03,  0.00000e+00,  0.00000e+00</pre>
+<p>cPQN:</p>
+<pre>           7.81838e+01, -2.90517e-01,  3.03791e-04, -9.85552e-08,  1.38780e-11;
+           0.00000e+00,  0.00000e+00,  4.44312e-06,  0.00000e+00,  0.00000e+00;
+           0.00000e+00,  3.24679e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
+          -3.79467e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</pre>
+</html>"));
 
 end Pump_DN50_H05_16;
