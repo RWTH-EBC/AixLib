@@ -1,9 +1,11 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowEff "Shadow effect of shield"
+  parameter Integer Mode = 1 "Test: shadow mode";
   parameter Modelica.Units.SI.Length L_Shield = 0.3 "Horizontal length of the sun shield";
   parameter Modelica.Units.SI.Length H_Window_min = 0.1 "Distance from shield to upper border of window";
   parameter Modelica.Units.SI.Length H_Window_max = 1.1 "Distance from shield to lower border of window";
   parameter Modelica.Units.NonSI.Angle_deg azi_deg = -54 "Surface azimuth, S=0°, W=90°, N=180°, E=-90°";
+  parameter Real C_I_diff(min=0,max=1) = 1 "Correction coefficient of shadow effect for I_diff";
 
   BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
@@ -17,6 +19,7 @@ model ShadowEff "Shadow effect of shield"
 
 protected
   Modelica.Units.SI.TransmissionCoefficient g_Shadow(min=0.0,max=1.0) "shadow coefficient: 0=full shadowed, 1=no shadow";
+  Real g_I_diff = atan(L_Shield / ((H_Window_max+H_Window_min)/2))/(Modelica.Constants.pi/2);
 
 equation
   if shadowLength.With_Shadow then
@@ -26,7 +29,11 @@ equation
   end if;
   solarRad_out.I = solarRad_out.I_dir + solarRad_out.I_diff;
   solarRad_out.I_dir = solarRad_in.I_dir*g_Shadow;
-  solarRad_out.I_diff = solarRad_in.I_diff;
+  if Mode == 1 then
+    solarRad_out.I_diff = solarRad_in.I_diff*g_I_diff*C_I_diff;
+  else
+    solarRad_out.I_diff = solarRad_in.I_diff*((g_Shadow - 1)*C_I_diff + 1);
+  end if;
   solarRad_out.I_gr = solarRad_in.I_gr;
   solarRad_out.AOI = solarRad_in.AOI;
 

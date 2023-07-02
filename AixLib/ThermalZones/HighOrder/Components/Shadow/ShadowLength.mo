@@ -34,7 +34,7 @@ model ShadowLength
     annotation (Placement(transformation(extent={{100,-60},{120,-40}})));
 
 equation
-  if tan(zen.zen)<0.0001 or cos(wallSolAzi.verAzi)<0.0001 then
+  if tan(zen.zen)<1e-5 or cos(wallSolAzi.verAzi)<1e-5 then
     With_Shadow = false;
   else
     With_Shadow = true;

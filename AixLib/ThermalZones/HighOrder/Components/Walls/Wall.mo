@@ -6,7 +6,9 @@ model Wall
   parameter Modelica.Units.SI.Length L_Win_Shield = 0.05;
   parameter Modelica.Units.SI.Length H_Win_Shadow_min = 0.05 "Distance from shield to upper border of window";
   parameter Modelica.Units.SI.Length H_Win_Shadow_max = 1.10 "Distance from shield to lower border of window";
+  parameter Integer shadowMode = 1 "Test: shadow mode";
   Shadow.ShadowEff shadowEff(
+    Mode=shadowMode,
     L_Shield=L_Win_Shield,
     H_Window_min=H_Win_Shadow_min,
     H_Window_max=H_Win_Shadow_max) if withWindow and outside and withShield
