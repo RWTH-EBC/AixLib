@@ -9,7 +9,7 @@ initial equation
 
 equation
   delTEqLWWin=delTEqLW;
-  TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGroundUsed*wfGro;
+  TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGroSouSel.y*wfGro;
   annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>
    <ul>
    <li>

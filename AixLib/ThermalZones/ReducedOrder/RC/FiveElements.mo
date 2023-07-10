@@ -94,7 +94,7 @@ protected
         origin={170,148},
         rotation=-90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallNZ[
-    nNZs](final G={min(ATotExt, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
+    nNZs](final G={min(ATotExt, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
       ATotExt > 0 and ATotNZ > 0
     "Resistor between exterior walls and neighboured zone borders" annotation (Placement(
         transformation(
@@ -102,14 +102,14 @@ protected
         origin={80,66},
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nNZs](
-     final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
+     final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
        ATotNZ > 0 and ATotWin > 0 "Resistor between neighboured zone borders and windows"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={106,66},
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntNZ[nNZs](
-      final G={min(AInt, ANZ[i])*hRad for i in 1:nNZs}, dT(start=0)) if
+      final G={min(AInt, ANZ[i])*hRad for i in 1:nNZs}, each dT(start=0)) if
        AInt > 0 and ATotNZ > 0
     "Resistor between interior walls and neighboured zone borders" annotation (Placement(
         transformation(
@@ -117,7 +117,7 @@ protected
         rotation=90,
         origin={132,66})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorNZ[nNZs](
-      final G={min(ANZ[i], AFloor)*hRad for i in 1:nNZs}, dT(start=0)) if
+      final G={min(ANZ[i], AFloor)*hRad for i in 1:nNZs}, each dT(start=0)) if
        ATotNZ > 0 and AFloor > 0
     "Resistor between floor plate and neighboured zone borders" annotation (Placement(
         transformation(
@@ -125,7 +125,7 @@ protected
         rotation=90,
         origin={158,66})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofNZ[nNZs](
-      final G={min(ARoof, ANZ[j])*hRad for j in 1:nNZs}, dT(start=0)) if
+      final G={min(ARoof, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
       ARoof > 0 and ATotNZ > 0 "Resistor between roofs and neighboured zone borders"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

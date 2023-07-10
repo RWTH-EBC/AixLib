@@ -76,9 +76,14 @@ partial model PartialVDI6007
         rotation=90,
         origin={0,-120})));
 
+
 protected
-  Modelica.Units.SI.Temperature TGroundUsed
-  "Used value for temperature of the ground in contact with floor plate";
+  SourceSelector TGroSouSel(final useInput=TGroundFromInput, p=TGro)
+    "Input selector for ground temperature" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={8,-40})));
 
 initial equation
   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro) > 0.1),
@@ -88,11 +93,6 @@ initial equation
     irrelevant.",level=AssertionLevel.warning);
 
 equation
-  if TGroundFromInput then
-    TGroundUsed=TGro_in;
-  else
-    TGroundUsed=TGro;
-  end if;
   delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConWallOut);
   delTEqSW=HSol*aExt/(hRad + hConWallOut);
   if withLongwave then
@@ -103,6 +103,8 @@ equation
     TEqWall=TDryBul.+delTEqSW;
   end if;
 
+  connect(TGro_in, TGroSouSel.uCon)
+    annotation (Line(points={{0,-120},{0,-51}}, color={0,0,127}));
   annotation (  Icon(coordinateSystem(preserveAspectRatio=false,
   extent={{-100,-100},{100,100}}),
   graphics={

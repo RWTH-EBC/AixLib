@@ -21,7 +21,7 @@ initial equation
 
 equation
   delTEqLWWin=(TBlaSky - TDryBul)*hRad/(hRad + hConWinOut);
-  TEqAir = TEqWall*wfWall + TGroundUsed*wfGro;
+  TEqAir = TEqWall*wfWall + TGroSouSel.y*wfGro;
   TEqAirWin = TEqWin*wfWin;
   annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>
    <ul>
