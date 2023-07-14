@@ -4,8 +4,9 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   extends Modelica.Icons.Example;
 
   extends AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone peaLoaDev(redeclare
-        package                                                                                                   Medium =
+  redeclare model PeakLoadDeviceModel=
+        AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone (                             redeclare
+          package                                                                                                 Medium =
                          Medium, energyDynamics=energyDynamics),
                                   heatPump(
       redeclare package Medium_con = Medium,
