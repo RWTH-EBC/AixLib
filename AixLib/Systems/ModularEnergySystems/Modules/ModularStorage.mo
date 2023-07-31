@@ -2,14 +2,17 @@ within AixLib.Systems.ModularEnergySystems.Modules;
 package ModularStorage
   model ScalableStorage
 
-    parameter Integer n=102
-                           "number of layers";
+
     parameter Modelica.Units.SI.Volume V=10 "Volume";
-    parameter Modelica.Units.SI.MassFlowRate m_Flow=500/4.18/5;
-    parameter Modelica.Units.SI.Temperature T_start=318.15;
-     parameter Modelica.Units.SI.Temperature TColdNom=311.15;
-     parameter Modelica.Units.SI.Temperature THotNom=273.15 + 45;
-     parameter Modelica.Units.SI.TemperatureDifference DeltaT=5;
+   parameter Modelica.Units.SI.HeatFlowRate QNom=300000
+      "Nominal heat flow rate of heat pump";
+    parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5
+      "Temperature difference heat sink condenser";
+
+    parameter Modelica.Units.SI.MassFlowRate m_Flow=QNom/4184/DeltaTCon;
+
+    parameter Modelica.Units.SI.Temperature T_start;
+
 
 
     Modelica.Blocks.Interfaces.RealOutput tHot
@@ -31,35 +34,37 @@ package ModularStorage
           Media.Water)
       annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
     Modelica.Blocks.Interfaces.RealOutput tCold
-      annotation (Placement(transformation(extent={{-100,-62},{-120,-42}})));
+      annotation (Placement(transformation(extent={{-100,-66},{-120,-46}})));
     Fluid.MixingVolumes.MixingVolume        layer(
       redeclare package Medium = AixLib.Media.Water,
       T_start=T_start,
       m_flow_nominal=m_Flow,
-      V=1.8125,
+      V=V/3,
       nPorts=3) annotation (Placement(transformation(extent={{6,76},{26,96}})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
       annotation (Placement(transformation(extent={{-34,44},{-54,64}})));
     Fluid.MixingVolumes.MixingVolume        layer5(
-      redeclare package Medium = Media.Water,
+      redeclare package Medium = AixLib.Media.Water,
       T_start=T_start,
       m_flow_nominal=m_Flow,
-      V=1.8125,
+      V=V/3,
       nPorts=3) annotation (Placement(transformation(extent={{10,-90},{30,-70}})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
       annotation (Placement(transformation(extent={{-12,-66},{-32,-46}})));
     Fluid.MixingVolumes.MixingVolume        layer1(
-      redeclare package Medium = Media.Water,
+      redeclare package Medium = AixLib.Media.Water,
       T_start=T_start,
       m_flow_nominal=m_Flow,
-      V=1.8125,
+      V=V/3,
       nPorts=2) annotation (Placement(transformation(extent={{4,-10},{24,10}})));
+    Modelica.Blocks.Interfaces.RealOutput tHot1
+      annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor2
+      annotation (Placement(transformation(extent={{-34,-6},{-54,14}})));
   equation
     connect(port_b_Supply, layer.ports[1]) annotation (Line(points={{-100,80},{
             0,80},{0,68},{14.6667,68},{14.6667,76}},
                                   color={0,127,255}));
-    connect(temperatureSensor.T, tHot) annotation (Line(points={{-55,54},{-62,54},
-            {-62,48},{-110,48},{-110,50}}, color={0,0,127}));
     connect(port_a_Supply, port_a_Supply)
       annotation (Line(points={{-100,20},{-100,20}}, color={0,127,255}));
     connect(layer.heatPort, temperatureSensor.port) annotation (Line(points={{6,86},{
@@ -71,8 +76,6 @@ package ModularStorage
             {36,-20},{36,-90},{20,-90}}, color={0,127,255}));
     connect(layer5.heatPort, temperatureSensor1.port) annotation (Line(points={
             {10,-80},{-6,-80},{-6,-56},{-12,-56}}, color={191,0,0}));
-    connect(temperatureSensor1.T, tCold) annotation (Line(points={{-33,-56},{
-            -44,-56},{-44,-58},{-46,-58},{-46,-52},{-110,-52}}, color={0,0,127}));
     connect(port_a_Supply, layer.ports[2]) annotation (Line(points={{-100,20},{
             -58,20},{-58,18},{16,18},{16,76}}, color={0,127,255}));
     connect(layer.ports[3], layer1.ports[1]) annotation (Line(points={{17.3333,
@@ -80,6 +83,14 @@ package ModularStorage
             13,-10}}, color={0,127,255}));
     connect(layer1.ports[2], layer5.ports[3]) annotation (Line(points={{15,-10},
             {15,-90},{21.3333,-90}}, color={0,127,255}));
+    connect(tCold, temperatureSensor1.T) annotation (Line(points={{-110,-56},{
+            -33,-56},{-33,-56}}, color={0,0,127}));
+    connect(tHot, temperatureSensor.T) annotation (Line(points={{-110,50},{-78,
+            50},{-78,54},{-55,54}}, color={0,0,127}));
+    connect(layer1.heatPort, temperatureSensor2.port) annotation (Line(points={
+            {4,0},{-8,0},{-8,2},{-34,2},{-34,4}}, color={191,0,0}));
+    connect(temperatureSensor2.T, tHot1)
+      annotation (Line(points={{-55,4},{-110,4},{-110,0}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end ScalableStorage;
@@ -889,4 +900,263 @@ package ModularStorage
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end StorageSimpleLayer;
+
+  model Storage
+
+     parameter Modelica.Units.SI.MassFlowRate m_Flow=39;
+    parameter Modelica.Units.SI.Temperature T_start=35+273.15;
+    parameter Modelica.Units.SI.Temperature TColdNom=313.15;
+    parameter Modelica.Units.SI.Temperature THotNom=35+273.15;
+    parameter Modelica.Units.SI.TemperatureDifference DeltaT=5;
+
+    parameter Modelica.Units.SI.Volume V=14.5 "Volume";
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Return(redeclare package
+        Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Return(redeclare package
+        Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Supply(redeclare package
+        Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Supply(redeclare package
+        Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
+    Modelica.Blocks.Interfaces.RealOutput tempStrorageBottom "tCold" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-110,-60})));
+    AixLib.Fluid.MixingVolumes.MixingVolume layer(
+      redeclare package Medium = AixLib.Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/3,
+      nPorts=3) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+      annotation (Placement(transformation(extent={{-22,-10},{-42,10}})));
+    AixLib.Fluid.MixingVolumes.MixingVolume layer1(
+      redeclare package Medium = AixLib.Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/3,
+      nPorts=2) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    AixLib.Fluid.MixingVolumes.MixingVolume layer2(
+      redeclare package Medium = AixLib.Media.Water,
+      T_start=T_start,
+      m_flow_nominal=m_Flow,
+      V=V/3,
+      nPorts=3)
+      annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
+      annotation (Placement(transformation(extent={{-68,50},{-88,70}})));
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor2
+      annotation (Placement(transformation(extent={{-22,-70},{-42,-50}})));
+    Modelica.Blocks.Interfaces.RealOutput tempStrorageMedium "tCold" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-110,0})));
+    Modelica.Blocks.Interfaces.RealOutput tempStrorageTop "tCold" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-110,60})));
+  equation
+
+    connect(port_b_Supply, layer.ports[1]) annotation (Line(points={{-100,80},{
+            -40,80},{-40,58},{-1.33333,58},{-1.33333,70}},               color={0,
+            127,255}));
+    connect(port_a_Supply, layer.ports[2]) annotation (Line(points={{-100,20},{-74,
+            20},{-74,22},{2.22045e-16,22},{2.22045e-16,70}}, color={0,127,255}));
+    connect(layer.ports[3], layer1.ports[1]) annotation (Line(points={{1.33333,
+            70},{-10,70},{-10,34},{-18,34},{-18,-18},{-1,-18},{-1,-10}},
+                                                                    color={0,127,255}));
+    connect(port_a_Return, layer2.ports[1]) annotation (Line(points={{-100,-20},{-58,
+            -20},{-58,-84},{-1.33333,-84},{-1.33333,-70}}, color={0,127,255}));
+    connect(port_b_Return, layer2.ports[2]) annotation (Line(points={{-100,-80},{-92,
+            -80},{-92,-84},{-78,-84},{-78,-70},{2.22045e-16,-70}}, color={0,127,255}));
+    connect(layer1.ports[2], layer2.ports[3]) annotation (Line(points={{1,-10},
+            {1.33333,-10},{1.33333,-70}},
+                                color={0,127,255}));
+    connect(layer1.heatPort, temperatureSensor.port) annotation (Line(points={{-10,0},
+            {-22,0}},                      color={191,0,0}));
+    connect(temperatureSensor1.port, layer.heatPort) annotation (Line(points={{-68,60},
+            {-24,60},{-24,80},{-10,80}},                       color={191,0,0}));
+    connect(layer2.heatPort, temperatureSensor2.port) annotation (Line(points={{-10,-60},
+            {-22,-60}},                          color={191,0,0}));
+    connect(temperatureSensor2.T, tempStrorageBottom)
+      annotation (Line(points={{-43,-60},{-110,-60}}, color={0,0,127}));
+    connect(temperatureSensor.T, tempStrorageMedium) annotation (Line(points={{-43,0},
+            {-76,0},{-76,-4.44089e-16},{-110,-4.44089e-16}},
+                                                color={0,0,127}));
+    connect(temperatureSensor1.T, tempStrorageTop)
+      annotation (Line(points={{-89,60},{-110,60}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end Storage;
+
+  model Consumer
+
+    parameter  Modelica.Units.SI.TemperatureDifference DeltaT;
+    parameter  Modelica.Units.SI.HeatFlowRate QNom;
+    parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/Medium.cp_const/DeltaT;
+
+    package Medium = AixLib.Media.Water;
+
+    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater1
+      "Prescribed heat flow" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-62,-8})));
+    AixLib.Fluid.MixingVolumes.MixingVolume heatingGrid(
+      T_start=308.15,
+      V=14,
+      redeclare final package Medium = AixLib.Media.Water,
+      final m_flow_nominal=m_flow_nominal,
+      nPorts=2)       "Fluid volume" annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=90,
+          origin={-50,-30})));
+    AixLib.Fluid.FixedResistances.PressureDrop res(
+      redeclare package Medium = AixLib.Media.Water,
+      m_flow_nominal=m_flow_nominal,
+      dp_nominal=10000)
+      annotation (Placement(transformation(extent={{-12,2},{-32,24}})));
+    AixLib.Controls.Continuous.LimPID conPID1(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.005,
+      Ti=120,
+      yMax=1,
+      yMin=0)
+      annotation (Placement(transformation(extent={{-18,46},{2,66}})));
+    AixLib.Fluid.Sensors.TemperatureTwoPort tCold1(
+      redeclare package Medium = AixLib.Media.Water,
+      m_flow_nominal=250000/4180/7,
+      initType=Modelica.Blocks.Types.Init.InitialState)
+      annotation (Placement(transformation(extent={{-9,12},{9,-12}},
+          rotation=0,
+          origin={41,-40})));
+    AixLib.Fluid.Sensors.TemperatureTwoPort tHotHeatingGrid2(
+      redeclare package Medium = AixLib.Media.Water,
+      m_flow_nominal=250000/4180/7,
+      initType=Modelica.Blocks.Types.Init.InitialState) annotation (Placement(
+          transformation(
+          extent={{8,-10},{-8,10}},
+          rotation=0,
+          origin={34,14})));
+
+    Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+      annotation (Placement(transformation(extent={{-42,18},{-22,38}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a_Grid(redeclare package Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{88,10},{108,30}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b_Grid(redeclare package Medium =
+          AixLib.Media.Water)
+      annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
+    AixLib.Fluid.Movers.SpeedControlled_y
+                                   fan1(
+      redeclare package Medium = AixLib.Media.Water,
+      allowFlowReversal=false,
+      redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
+          pressure(V_flow={0,m_flow_nominal/1000,2*m_flow_nominal/1000}, dp={2*
+              16000,16000,0})),
+      inputType=AixLib.Fluid.Types.InputType.Continuous,
+      addPowerToMedium=false,
+      use_inputFilter=true,
+      riseTime=10,
+      init=Modelica.Blocks.Types.Init.SteadyState,
+      y_start=1)
+      annotation (Placement(transformation(extent={{20,4},{0,24}})));
+    Modelica.Blocks.Math.Add add1(k2=-1)
+      annotation (Placement(transformation(extent={{-68,46},{-48,66}})));
+    Modelica.Blocks.Sources.RealExpression tColdNom3(y=DeltaT)
+      "Nominal TCold"
+      annotation (Placement(transformation(extent={{-164,18},{-102,46}})));
+    AixLib.Fluid.Sensors.TemperatureTwoPort tHotHeatingGrid1(
+      redeclare package Medium = AixLib.Media.Water,
+      m_flow_nominal=250000/4180/7,
+      initType=Modelica.Blocks.Types.Init.InitialState)
+                       annotation (Placement(transformation(
+          extent={{8,-10},{-8,10}},
+          rotation=0,
+          origin={78,14})));
+    AixLib.Fluid.Actuators.Valves.ThreeWayLinear val(
+      redeclare package Medium = AixLib.Media.Water,
+      tau=120,
+      m_flow_nominal=m_flow_nominal,
+      dpValve_nominal=6000,
+      fraK=1)                                        annotation (Placement(
+          transformation(
+          extent={{-8,8},{8,-8}},
+          rotation=180,
+          origin={54,14})));
+    AixLib.Controls.Continuous.LimPID conPID2(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.005,
+      Ti=120,
+      yMax=1,
+      yMin=0)
+      annotation (Placement(transformation(extent={{-6,90},{14,110}})));
+    Modelica.Blocks.Interfaces.RealInput tHotSet
+      annotation (Placement(transformation(extent={{-140,70},{-100,110}})));
+    Modelica.Blocks.Interfaces.RealInput thermalDemand
+      annotation (Placement(transformation(extent={{-140,-28},{-100,12}})));
+    Modelica.Blocks.Math.Gain gain(k=-1)
+      annotation (Placement(transformation(extent={{-94,6},{-82,18}})));
+  equation
+    connect(heatingGrid.heatPort,temperatureSensor. port) annotation (Line(
+          points={{-50,-20},{-50,28},{-42,28}},                 color={191,0,
+            0}));
+    connect(res.port_b,heatingGrid. ports[2]) annotation (Line(points={{-32,13},{
+            -38,13},{-38,-16},{-36,-16},{-36,-31},{-40,-31}},  color={0,127,
+            255}));
+    connect(heatingGrid.ports[1],tCold1. port_a) annotation (Line(points={{-40,-29},
+            {26,-29},{26,-40},{32,-40}},  color={0,127,255}));
+    connect(temperatureSensor.T, conPID1.u_m)
+      annotation (Line(points={{-21,28},{-8,28},{-8,44}}, color={0,0,127}));
+    connect(heater1.port, heatingGrid.heatPort) annotation (Line(points={{-52,-8},
+            {-50,-8},{-50,-20}},                     color={191,0,0}));
+    connect(fan1.port_a, tHotHeatingGrid2.port_b)
+      annotation (Line(points={{20,14},{26,14}}, color={0,127,255}));
+    connect(res.port_a, fan1.port_b)
+      annotation (Line(points={{-12,13},{-6,13},{-6,14},{0,14}},
+                                                       color={0,127,255}));
+    connect(conPID1.y, fan1.y)
+      annotation (Line(points={{3,56},{10,56},{10,26}}, color={0,0,127}));
+    connect(add1.y, conPID1.u_s)
+      annotation (Line(points={{-47,56},{-20,56}}, color={0,0,127}));
+    connect(tColdNom3.y, add1.u2) annotation (Line(points={{-98.9,32},{-86,32},{-86,
+            50},{-70,50}}, color={0,0,127}));
+    connect(tHotHeatingGrid2.T, add1.u1) annotation (Line(points={{34,25},{34,78},
+            {-86,78},{-86,62},{-70,62}},
+                                color={0,0,127}));
+    connect(tHotHeatingGrid1.port_a, port_a_Grid) annotation (Line(points={{86,14},
+            {90,14},{90,20},{98,20}}, color={0,127,255}));
+    connect(tCold1.port_b, port_b_Grid)
+      annotation (Line(points={{50,-40},{100,-40}}, color={0,127,255}));
+    connect(tHotHeatingGrid1.port_b, val.port_1)
+      annotation (Line(points={{70,14},{62,14}}, color={0,127,255}));
+    connect(tHotHeatingGrid2.port_a, val.port_2) annotation (Line(points={{42,14},
+            {46,14}},                 color={0,127,255}));
+    connect(tCold1.port_b, val.port_3)
+      annotation (Line(points={{50,-40},{54,-40},{54,6}}, color={0,127,255}));
+    connect(conPID2.y, val.y)
+      annotation (Line(points={{15,100},{54,100},{54,23.6}}, color={0,0,127}));
+    connect(tHotHeatingGrid2.T, conPID2.u_m)
+      annotation (Line(points={{34,25},{34,78},{4,78},{4,88}}, color={0,0,127}));
+    connect(tHotSet, conPID2.u_s) annotation (Line(points={{-120,90},{-66,90},{
+            -66,100},{-8,100}}, color={0,0,127}));
+    connect(gain.y, heater1.Q_flow) annotation (Line(points={{-81.4,12},{-72,12},
+            {-72,-8}}, color={0,0,127}));
+    connect(thermalDemand, gain.u) annotation (Line(points={{-120,-8},{-95.2,-8},
+            {-95.2,12}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end Consumer;
 end ModularStorage;

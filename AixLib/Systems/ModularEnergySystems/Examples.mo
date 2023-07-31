@@ -2,85 +2,123 @@ within AixLib.Systems.ModularEnergySystems;
 package Examples "Holds examples for the modular energy system units"
   extends Modelica.Icons.ExamplesPackage;
   model HeatPump
-      extends
-      AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
-      vol(
-        T_start=303.15,
-        m_flow_nominal=1,
-        V=4,
-        nPorts=2),
-      bou(use_T_in=true, nPorts=1),
-      TSpeicher(y=40 + 273.15),
-      sine(f=1/3600, offset=-100000),
-      PLR(y=1));
+
     Modules.ModularHeatPump.ModularHeatPump modularHeatPumpNew(
-      THotNom=313.15,
+      THotNom=318.15,
       TSourceNom=278.15,
-      QNom=200000,
-      PLRMin=0.5,
-      T_Start_Condenser=333.15,
+      QNom=1.5*QNom,
+      PLRMin=0.4,
+      DeltaTCon=DeltaTCon,
+      TCon_start=313.15,
       TSourceInternal=true,
-      redeclare package MediumEvap = AixLib.Media.Water)
-      annotation (Placement(transformation(extent={{-24,-10},{-4,10}})));
+      redeclare package MediumEvap = AixLib.Media.Water,
+      use_non_manufacturer=true,
+      redeclare model PerDataMainHP =
+          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim)
+      annotation (Placement(transformation(extent={{40,-16},{60,4}})));
     .AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
-      annotation (Placement(transformation(extent={{-96,0},{-66,34}}),
-          iconTransformation(extent={{-84,8},{-66,34}})));
+      annotation (Placement(transformation(extent={{-20,-30},{10,4}}),
+          iconTransformation(extent={{-8,-22},{10,4}})));
 
     inner Modelica.Fluid.System system(p_start=system.p_ambient)
       annotation (Placement(transformation(extent={{80,80},{100,100}})));
-    Modelica.Fluid.Pipes.StaticPipe pipe(
-      redeclare package Medium =
-          Modelica.Media.Water.ConstantPropertyLiquidWater,
-      allowFlowReversal=true,
-      length=5,
-      isCircular=true,
-      diameter=0.03,
-      redeclare model FlowModel =
-          Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-            dp_nominal=0, m_flow_nominal=0.4785))
-      annotation (Placement(transformation(extent={{44,-44},{22,-24}})));
+    Modelica.Blocks.Sources.Sine sine1(
+      amplitude=QNom*0.15,
+      f=1/(3600*24),
+      offset=QNom*0.5)
+      annotation (Placement(transformation(extent={{-34,40},{-14,60}})));
+    parameter Modelica.Units.SI.HeatFlowRate QNom=300000
+      "Nominal heat flow rate of heat pump";
+    parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5
+      "Temperature difference heat sink condenser";
+    Modules.ModularHeatPump.BaseClasses.ModularControl modularControl
+      annotation (Placement(transformation(extent={{-100,16},{-58,42}})));
+    Modelica.Blocks.Sources.Sine sine(
+      amplitude=5,
+      f=1/(3600*24),
+      offset=313.15)
+      annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+    AixLib.Controls.Continuous.LimPID SetMFlow(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.001,
+      Ti=1,
+      yMax=1,
+      Td=1,
+      yMin=0.5,
+      initType=Modelica.Blocks.Types.Init.NoInit,
+      y_start=1) "Setpoint mass flow"
+      annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
+    Modules.ModularStorage.Consumer consumer(DeltaT=DeltaTCon, QNom=QNom)
+      annotation (Placement(transformation(extent={{32,40},{52,60}})));
+    Modules.ModularStorage.ScalableStorage scalableStorage(
+      V=100,
+      QNom=QNom,
+      DeltaTCon=DeltaTCon,
+      m_Flow=QNom/4180/DeltaTCon,
+      T_start=313.15)
+      annotation (Placement(transformation(extent={{72,38},{92,58}})));
+    Fluid.Sources.Boundary_pT        bou(redeclare package Medium =
+          AixLib.Media.Water, nPorts=1)
+      annotation (Placement(transformation(extent={{20,4},{40,24}})));
   equation
-    bou.T_in=vol.T;
+
     connect(sigBus, modularHeatPumpNew.sigBus) annotation (Line(
-        points={{-81,17},{-23.9,17},{-23.9,-3.9}},
+        points={{-5,-13},{34,-13},{34,-9.9},{40.1,-9.9}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
-    connect(modularHeatPumpNew.port_b, vol.ports[1])
-      annotation (Line(points={{-4,0},{46,0},{46,4}}, color={0,127,255}));
-    connect(bou.ports[1], modularHeatPumpNew.port_a) annotation (Line(points={{
-            0,-40},{2,-40},{2,-38},{4,-38},{4,-22},{-24,-22},{-24,0}}, color={0,
-            127,255}));
-    connect(vol.ports[2], pipe.port_a) annotation (Line(points={{46,4},{48,4},{
-            48,-34},{44,-34}}, color={0,127,255}));
-    connect(pipe.port_b, modularHeatPumpNew.port_a) annotation (Line(points={{
-            22,-34},{18,-34},{18,-32},{14,-32},{14,-18},{-40,-18},{-40,0},{-24,
-            0}}, color={0,127,255}));
-    connect(switch1.y, sigBus.QRel) annotation (Line(points={{-59.1,-29},{-56,
-            -29},{-56,8},{-80.925,8},{-80.925,17.085}}, color={0,0,127}), Text(
+    connect(modularControl.sigBus, sigBus) annotation (Line(
+        points={{-77.9,22.1},{-77.9,-13},{-5,-13}},
+        color={255,204,51},
+        thickness=0.5), Text(
         string="%second",
         index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-    connect(TSpeicher.y, sigBus.THotSet) annotation (Line(points={{-138.4,-58},
-            {-138.4,24},{-80.925,24},{-80.925,17.085}}, color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{-3,6},{-3,6}},
+        extent={{-3,-6},{-3,-6}},
         horizontalAlignment=TextAlignment.Right));
-    connect(onOffController.y, sigBus.OnOff) annotation (Line(points={{-107,-64},
-            {-96,-64},{-96,-56},{-80.925,-56},{-80.925,17.085}}, color={255,0,
-            255}), Text(
+    connect(sine.y, SetMFlow.u_s)
+      annotation (Line(points={{-79,90},{-76,90},{-76,100},{-42,100},{-42,90}},
+                                                   color={0,0,127}));
+    connect(scalableStorage.port_b_Supply, consumer.port_a_Grid) annotation (
+        Line(points={{72,56},{56,56},{56,52},{51.8,52}}, color={0,127,255}));
+    connect(consumer.port_b_Grid, scalableStorage.port_a_Return) annotation (
+        Line(points={{52,46},{72,46}},                 color={0,127,255}));
+    connect(scalableStorage.port_b_Return, modularHeatPumpNew.port_a)
+      annotation (Line(points={{72,40},{14,40},{14,-6},{40,-6}}, color={0,127,
+            255}));
+    connect(scalableStorage.tCold, modularControl.u2) annotation (Line(points={{71,42.4},
+            {-24,42.4},{-24,42},{-120,42},{-120,22},{-102,22}},           color
+          ={0,0,127}));
+    connect(sine.y, consumer.tHotSet) annotation (Line(points={{-79,90},{-76,90},
+            {-76,100},{-42,100},{-42,62},{-44,62},{-44,59},{30,59}},
+                                                 color={0,0,127}));
+    connect(sine1.y, consumer.thermalDemand)
+      annotation (Line(points={{-13,50},{30,50},{30,49.2}}, color={0,0,127}));
+    connect(modularHeatPumpNew.port_a, bou.ports[1])
+      annotation (Line(points={{40,-6},{40,14}}, color={0,127,255}));
+    connect(SetMFlow.y, sigBus.mFlowSetExternal) annotation (Line(points={{-19,
+            90},{-4.925,90},{-4.925,-12.915}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(sine.y, sigBus.THotSet) annotation (Line(points={{-79,90},{-76,90},
+            {-76,100},{-42,100},{-42,76},{-48,76},{-48,40},{-4.925,40},{-4.925,
+            -12.915}},                       color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(scalableStorage.tHot, SetMFlow.u_m) annotation (Line(points={{71,53},
+            {70,53},{70,58},{58,58},{58,68},{-30,68},{-30,78}}, color={0,0,127}));
+    connect(modularHeatPumpNew.port_b, scalableStorage.port_a_Supply)
+      annotation (Line(points={{60,-6},{64,-6},{64,50},{72,50}}, color={0,127,
+            255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-      experiment(StopTime=5000));
+      experiment(StopTime=604800, __Dymola_Algorithm="Dassl"));
   end HeatPump;
 
   model Boiler
@@ -315,4 +353,87 @@ package Examples "Holds examples for the modular energy system units"
       Diagram(coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=36000, __Dymola_Algorithm="Dassl"));
   end Test;
+
+  model HeatPump_Basic
+    Modules.ModularHeatPump.ModularHeatPump modularHeatPump(
+      THotNom=318.15,
+      PLRMin=0.3,
+      DeltaTCon=5,
+      dpInternal=10000,
+      redeclare model PerDataMainHP =
+          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim)
+      annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    Fluid.Sources.Boundary_pT        bou(
+      redeclare package Medium = AixLib.Media.Water,
+      T=313.15,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+    AixLib.Controls.Interfaces.VapourCompressionMachineControlBus  sigBus
+      annotation (Placement(transformation(extent={{-60,-62},{-30,-28}}),
+          iconTransformation(extent={{-8,-22},{10,4}})));
+    Fluid.Sources.Boundary_pT        bou1(redeclare package Medium =
+          Media.Water, nPorts=1)
+      annotation (Placement(transformation(extent={{98,-10},{78,10}})));
+    Modelica.Blocks.Sources.RealExpression frequency(y=50)  annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-123,-48})));
+    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-103,-80})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+      annotation (Placement(transformation(extent={{-116,-38},{-96,-18}})));
+    Modelica.Blocks.Sources.RealExpression m_flow_set1(y=45 + 273.15)
+      annotation (Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-7,-84})));
+  equation
+    connect(sigBus, modularHeatPump.sigBus) annotation (Line(
+        points={{-45,-45},{-22,-45},{-22,-3.9},{-7.9,-3.9}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bou.ports[1], modularHeatPump.port_a)
+      annotation (Line(points={{-48,0},{-8,0}}, color={0,127,255}));
+    connect(modularHeatPump.port_b, bou1.ports[1])
+      annotation (Line(points={{12,0},{78,0}}, color={0,127,255}));
+    connect(frequency.y, sigBus.frequency) annotation (Line(points={{-113.1,-48},
+            {-44.925,-48},{-44.925,-44.915}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(m_flow_set.y, sigBus.mFlowSetExternal) annotation (Line(points={{
+            -93.1,-80},{-44.925,-80},{-44.925,-44.915}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(sigBus.OnOff, booleanExpression.y) annotation (Line(
+        points={{-44.925,-44.915},{-90,-44.915},{-90,-28},{-95,-28}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(m_flow_set1.y, sigBus.THotSet) annotation (Line(points={{2.9,-84},{
+            14,-84},{14,-82},{24,-82},{24,-60},{-44.925,-60},{-44.925,-44.915}},
+          color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    annotation (
+      Icon(coordinateSystem(preserveAspectRatio=false)),
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+      experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
+  end HeatPump_Basic;
 end Examples;

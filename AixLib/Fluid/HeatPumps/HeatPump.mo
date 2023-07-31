@@ -58,8 +58,6 @@ model HeatPump
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
   parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
 
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
-    annotation (Placement(transformation(extent={{46,38},{66,58}})));
 equation
   connect(innerCycle.QEva, sigBus.QEvap) annotation (Line(points={{0,-30.7},{-6,
           -30.7},{-6,-40},{-105,-40},{-105,-43}}, color={0,0,127}), Text(

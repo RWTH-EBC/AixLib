@@ -211,7 +211,7 @@ equation
   connect(dTWaterNom1.y, conPID1.u_s) annotation (Line(points={{-112,139},{-94,139},
           {-94,140},{-68,140},{-68,138}}, color={0,0,127}));
   connect(conPID2.y, boilerControlBus.PRatioSet) annotation (Line(points={{3,160},
-          {16,160},{16,100.05},{0.05,100.05}}, color={0,0,127}), Text(
+          {16,160},{16,100},{0,100}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -222,7 +222,7 @@ equation
     annotation (Line(points={{77,114},{90,114},{90,140}}, color={0,0,127}));
 
   connect(boilerControlBus.TSupplySet, conPID2.u_s) annotation (Line(
-      points={{0.05,100.05},{-14,100.05},{-14,146},{-20,146},{-20,160}},
+      points={{0,100},{-14,100},{-14,146},{-20,146},{-20,160}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -230,7 +230,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(senMasFloHeizkreis.m_flow, boilerControlBus.m_flowMea) annotation (
-      Line(points={{-22,11},{-22,100.05},{0.05,100.05}}, color={0,0,127}), Text(
+      Line(points={{-22,11},{-22,100},{0,100}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -243,15 +243,15 @@ equation
           -28},{-68,-28},{-68,0},{-56,0}}, color={0,127,255}));
   connect(senTReturn.port_b, pump.port_a)
     annotation (Line(points={{-80,0},{-56,0}}, color={0,127,255}));
-  connect(senTReturn.T, boilerControlBus.TReturnMea) annotation (Line(points={{
-          -86,8.8},{-84,8.8},{-84,70},{0.05,70},{0.05,100.05}}, color={0,0,127}),
+  connect(senTReturn.T, boilerControlBus.TReturnMea) annotation (Line(points={{-86,8.8},
+          {-84,8.8},{-84,70},{0,70},{0,100}},                   color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(boilerControlBus.TReturnMea, conPID1.u_m) annotation (Line(
-      points={{0.05,100.05},{-30,100.05},{-30,106},{-56,106},{-56,126}},
+      points={{0,100},{-30,100},{-30,106},{-56,106},{-56,126}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -259,7 +259,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.TColdMea, gain2.u) annotation (Line(
-      points={{0.05,100.05},{32,100.05},{32,60},{54,60}},
+      points={{0,100},{32,100},{32,60},{54,60}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -269,7 +269,7 @@ equation
   connect(gain2.y, conPID3.u_m)
     annotation (Line(points={{77,60},{102,60},{102,128}}, color={0,0,127}));
   connect(boilerControlBus.TSupplyMea, conPID2.u_m) annotation (Line(
-      points={{0.05,100.05},{2,100.05},{2,132},{-8,132},{-8,148}},
+      points={{0,100},{2,100},{2,132},{-8,132},{-8,148}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

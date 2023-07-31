@@ -16,10 +16,10 @@ model COPNotManufacturer
   SDF.NDTable sDF_COP(
     final nin=4,
     final readFromFile=true,
-    final filename="modelica://Typquartiere/COP_Scroll_R410A_InterExtraPolation.sdf",
+    final filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
     final dataset="/COP",
     final dataUnit="-",
-    final scaleUnits={"degC","-","K","degC"},
+    final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
     final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
     "SDF-Table data for COP" annotation (Placement(transformation(
@@ -30,10 +30,6 @@ model COPNotManufacturer
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={18,70})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=PLRMin)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-10,30})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -61,7 +57,8 @@ model COPNotManufacturer
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-66,2})));
-  Modelica.Blocks.Interfaces.RealInput pLR annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput frequency annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-120,30})));
@@ -86,15 +83,12 @@ model COPNotManufacturer
         rotation=0,
         origin={-120,-90})));
 
-protected
-  parameter String FilenameCOP="D:/COP_Scroll_R410A_InterExtraPolation.sdf" annotation (evaluate=True);
 
 
-
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=100, uMin=20)
+    annotation (Placement(transformation(extent={{-56,20},{-36,40}})));
 equation
 
-  connect(limiter.y,multiplex4_2. u2[1]) annotation (Line(points={{1,30},{28,30},
-          {28,3},{36,3}},          color={0,0,127}));
   connect(fromKelvin1.Celsius,multiplex4_2. u1[1]) annotation (Line(points={{26.8,70},
           {30,70},{30,8},{36,8},{36,9}},           color={0,0,127}));
   connect(fromKelvin5.Celsius,multiplex4_2. u4[1]) annotation (Line(points={{0.9,-55},
@@ -114,8 +108,6 @@ equation
           2},{-40,2.4},{-21.8,2.4}}, color={0,0,127}));
   connect(sDF_COP.y, COP)
     annotation (Line(points={{95.2,0},{112,0}}, color={0,0,127}));
-  connect(pLR, limiter.u)
-    annotation (Line(points={{-120,30},{-22,30}}, color={0,0,127}));
   connect(tConIn, fromKelvin4.Kelvin) annotation (Line(points={{-120,-30},{-84,-30},
           {-84,2},{-78,2}}, color={0,0,127}));
   connect(booleanExpression1.y, switch1.u2)
@@ -125,6 +117,10 @@ equation
           78},{-22,78}}, color={0,0,127}));
   connect(tConOut, fromKelvin5.Kelvin) annotation (Line(points={{-120,-90},{-52,
           -90},{-52,-55},{-19.8,-55}}, color={0,0,127}));
+  connect(limiter.y, multiplex4_2.u2[1])
+    annotation (Line(points={{-35,30},{6,30},{6,3},{36,3}}, color={0,0,127}));
+  connect(frequency, limiter.u) annotation (Line(points={{-120,30},{-96,30},{
+          -96,28},{-58,28},{-58,30}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
                                                               Text(

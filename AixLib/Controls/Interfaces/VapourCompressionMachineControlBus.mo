@@ -64,17 +64,21 @@ annotation (
 
   Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
 
-   Real mFlowWaterRel;
+  Modelica.Units.SI.Power QEvapFullLoad "Nominal evaporation heat flow";
 
-   Real mFlowSet;
-   Real mFlowSetExternal;
+ Real mFlowWaterRel;
 
-   Modelica.Units.SI.ThermodynamicTemperature THotSet;
-     Modelica.Units.SI.ThermodynamicTemperature TSourceSet;
+ Real mFlowSet;
+ Real mFlowSetExternal;
 
-     Boolean OnOff;
+ Modelica.Units.SI.ThermodynamicTemperature THotSet;
+ Modelica.Units.SI.ThermodynamicTemperature TSourceSet;
 
+ Boolean OnOff;
 
+ Real frequency;
+
+ Real COP;
   annotation (Documentation(info="<html><p>
   Bus connector with all relevant signals for vapour compression
   machines.
