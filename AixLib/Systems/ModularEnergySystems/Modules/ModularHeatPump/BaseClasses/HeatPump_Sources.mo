@@ -9,7 +9,7 @@ package HeatPump_Sources
 
       parameter Boolean TSourceInternal=true
                                             "Use internal TSource?"
-      annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+      annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
      parameter Modelica.Units.SI.Temperature TSource=TSourceNom "Temperature of heat source"
      annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));

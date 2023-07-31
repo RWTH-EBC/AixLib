@@ -105,7 +105,8 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
   Modelica.Blocks.Sources.RealExpression m_flowCon(y=m_flow_nominal)
                    "massflow condenser"
     annotation (Placement(transformation(extent={{154,52},{90,80}})));
-  BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom)
+  BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom,
+      TSourceInternal=TSourceInternal)
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (

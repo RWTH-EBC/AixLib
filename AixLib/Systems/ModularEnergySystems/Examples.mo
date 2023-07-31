@@ -359,6 +359,7 @@ package Examples "Holds examples for the modular energy system units"
       THotNom=318.15,
       PLRMin=0.3,
       DeltaTCon=5,
+      TSourceInternal=false,
       dpInternal=10000,
       redeclare model PerDataMainHP =
           AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim)
@@ -379,18 +380,28 @@ package Examples "Holds examples for the modular energy system units"
           extent={{-9,-12},{9,12}},
           rotation=0,
           origin={-123,-48})));
-    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) annotation (
+    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) "[0.1 ... 1]"
+                                                           annotation (
         Placement(transformation(
           extent={{-9,-12},{9,12}},
           rotation=0,
-          origin={-103,-80})));
+          origin={-125,-72})));
     Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
       annotation (Placement(transformation(extent={{-116,-38},{-96,-18}})));
-    Modelica.Blocks.Sources.RealExpression m_flow_set1(y=45 + 273.15)
-      annotation (Placement(transformation(
+    Modelica.Blocks.Sources.RealExpression t_Hot_Set(y=45) annotation (
+        Placement(transformation(
           extent={{-9,-12},{9,12}},
           rotation=0,
-          origin={-7,-84})));
+          origin={-125,-96})));
+    Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
+      annotation (Placement(transformation(extent={{-14,-110},{6,-90}})));
+    Modelica.Blocks.Sources.RealExpression t_Source_Set(y=10) annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-127,-120})));
+    Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
+      annotation (Placement(transformation(extent={{-86,-130},{-66,-110}})));
   equation
     connect(sigBus, modularHeatPump.sigBus) annotation (Line(
         points={{-45,-45},{-22,-45},{-22,-3.9},{-7.9,-3.9}},
@@ -410,8 +421,8 @@ package Examples "Holds examples for the modular energy system units"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(m_flow_set.y, sigBus.mFlowSetExternal) annotation (Line(points={{
-            -93.1,-80},{-44.925,-80},{-44.925,-44.915}}, color={0,0,127}), Text(
+    connect(m_flow_set.y, sigBus.mFlowSetExternal) annotation (Line(points={{-115.1,
+            -72},{-44.925,-72},{-44.925,-44.915}},       color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
@@ -424,9 +435,20 @@ package Examples "Holds examples for the modular energy system units"
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(m_flow_set1.y, sigBus.THotSet) annotation (Line(points={{2.9,-84},{
-            14,-84},{14,-82},{24,-82},{24,-60},{-44.925,-60},{-44.925,-44.915}},
-          color={0,0,127}), Text(
+    connect(t_Hot_Set.y, toKelvin.Celsius) annotation (Line(points={{-115.1,-96},
+            {-90,-96},{-90,-94},{-16,-94},{-16,-100}}, color={0,0,127}));
+    connect(toKelvin.Kelvin, sigBus.THotSet) annotation (Line(points={{7,-100},
+            {22,-100},{22,-98},{32,-98},{32,-44.915},{-44.925,-44.915}}, color=
+            {0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(t_Source_Set.y, toKelvin1.Celsius)
+      annotation (Line(points={{-117.1,-120},{-88,-120}}, color={0,0,127}));
+    connect(toKelvin1.Kelvin, sigBus.TSourceSet) annotation (Line(points={{-65,
+            -120},{54,-120},{54,-44.915},{-44.925,-44.915}}, color={0,0,127}),
+        Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
