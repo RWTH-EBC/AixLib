@@ -136,7 +136,8 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     annotation (Placement(transformation(extent={{94,110},{58,136}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{16,32},{36,52}})));
-  Modelica.Blocks.Sources.RealExpression zero(y=0) annotation (Placement(
+  Modelica.Blocks.Sources.RealExpression zero(y=0.1)
+                                                   annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
