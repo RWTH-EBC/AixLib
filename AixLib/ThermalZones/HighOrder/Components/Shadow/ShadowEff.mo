@@ -1,6 +1,9 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowEff "Shadow effect of shield"
-  parameter Integer Mode = 1 "Test: shadow mode";
+  parameter Integer Mode = 1
+    "Diffuse radiation calculation,
+    1=Constant reduce factor for diffuse radiation,
+    2=Calculation based on g_Shadow";
   parameter Modelica.Units.SI.Length L_Shield = 0.3 "Horizontal length of the sun shield";
   parameter Modelica.Units.SI.Length H_Window_min = 0.1 "Distance from shield to upper border of window";
   parameter Modelica.Units.SI.Length H_Window_max = 1.1 "Distance from shield to lower border of window";
@@ -25,12 +28,12 @@ equation
   if shadowLength.With_Shadow then
     g_Shadow = min(max((H_Window_max-shadowLength.H_Shadow)/(H_Window_max-H_Window_min), 0), 1);
   else
-    g_Shadow = 1;
+    g_Shadow = 0;
   end if;
   solarRad_out.I = solarRad_out.I_dir + solarRad_out.I_diff;
   solarRad_out.I_dir = solarRad_in.I_dir*g_Shadow;
   if Mode == 1 then
-    solarRad_out.I_diff = solarRad_in.I_diff*g_I_diff*C_I_diff;
+    solarRad_out.I_diff = solarRad_in.I_diff*(1-g_I_diff)*C_I_diff;
   else
     solarRad_out.I_diff = solarRad_in.I_diff*((g_Shadow - 1)*C_I_diff + 1);
   end if;
