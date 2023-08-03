@@ -40,11 +40,12 @@ model NominalHeatPumpNotManufacturer
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={0,70})));
-  SDF.NDTable SDFCOPNominal(
+  SDF.NDTable SDFCOPDesign(
     final nin=4,
     final readFromFile=true,
     final filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
+
     final dataset="\COP",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -93,13 +94,15 @@ model NominalHeatPumpNotManufacturer
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{168,-38},{188,-18}})));
   Modelica.Blocks.Math.Log log
-    annotation (Placement(transformation(extent={{62,-38},{82,-18}})));
+    annotation (Placement(transformation(extent={{42,-38},{62,-18}})));
   Modelica.Blocks.Math.Log log1
     annotation (Placement(transformation(extent={{66,14},{86,34}})));
-  SDF.NDTable SDF_PI_Nom(
+  SDF.NDTable SDF_PI_Design(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf"),
+    final filename=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf"),
+
     final dataset="\PI",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -148,7 +151,7 @@ model NominalHeatPumpNotManufacturer
     "SDF-Table data for COP" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
-        origin={8,-78})));
+        origin={12,-68})));
 
   Modelica.Blocks.Math.Product product2
     annotation (Placement(transformation(extent={{80,-84},{100,-64}})));
@@ -160,16 +163,50 @@ model NominalHeatPumpNotManufacturer
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={332,20})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=100, uMin=25)
-    annotation (Placement(transformation(extent={{-148,-72},{-128,-52}})));
+  SDF.NDTable SDF_T_FullLoad(
+    final nin=4,
+    final readFromFile=true,
+    final filename=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
+
+    final dataset="\T_mean_comp",
+    final dataUnit="K",
+    final scaleUnits={"degC","Hz","K","degC"},
+    final interpMethod=SDF.Types.InterpolationMethod.Linear,
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    "SDF-Table data for mean compressor temperature" annotation (Placement(
+        transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=0,
+        origin={12,-104})));
+  SDF.NDTable SDF_T_Design(
+    final nin=4,
+    final readFromFile=true,
+    final filename=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
+
+    final dataset="\T_mean_comp",
+    final dataUnit="K",
+    final scaleUnits={"degC","Hz","K","degC"},
+    final interpMethod=SDF.Types.InterpolationMethod.Linear,
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    "SDF-Table data for mean compressor temperature" annotation (Placement(
+        transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=0,
+        origin={36,110})));
+  Modelica.Blocks.Math.Product product3
+    annotation (Placement(transformation(extent={{104,20},{124,40}})));
+  Modelica.Blocks.Math.Product product4
+    annotation (Placement(transformation(extent={{80,-44},{100,-24}})));
 equation
   connect(tSourceNom.y, fromKelvin3.Kelvin)
     annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));
   connect(qNom.y, NomPel.u1) annotation (Line(points={{101.7,83},{101.7,82},{
           114,82}}, color={0,0,127}));
-  connect(SDFCOPNominal.y, NomPel.u2)
+  connect(SDFCOPDesign.y, NomPel.u2)
     annotation (Line(points={{49.2,70},{114,70}}, color={0,0,127}));
-  connect(multiplex4_1.y, SDFCOPNominal.u)
+  connect(multiplex4_1.y, SDFCOPDesign.u)
     annotation (Line(points={{11,70},{21.6,70}}, color={0,0,127}));
   connect(fromKelvin3.Celsius, multiplex4_1.u1[1]) annotation (Line(points={{-25,92},
           {-12,92},{-12,79}},                     color={0,0,127}));
@@ -189,17 +226,12 @@ equation
   connect(NomPel.y, product1.u1) annotation (Line(points={{137,76},{148,76},{
           148,72},{164,72},{164,-12},{158,-12},{158,-22},{166,-22}}, color={0,0,
           127}));
-  connect(log.y, division3.u1) annotation (Line(points={{83,-28},{122,-28}},
-                      color={0,0,127}));
-  connect(log1.y, division3.u2) annotation (Line(points={{87,24},{92,24},{92,
-          -40},{122,-40}},
-                      color={0,0,127}));
-  connect(SDF_PI_FullLoad.y, log.u) annotation (Line(points={{23.2,-28},{60,-28}},
+  connect(SDF_PI_FullLoad.y, log.u) annotation (Line(points={{23.2,-28},{40,-28}},
                               color={0,0,127}));
-  connect(SDF_PI_Nom.y, log1.u)
+  connect(SDF_PI_Design.y, log1.u)
     annotation (Line(points={{51.2,24},{64,24}}, color={0,0,127}));
-  connect(multiplex4_1.y, SDF_PI_Nom.u) annotation (Line(points={{11,70},{14,70},
-          {14,24},{23.6,24}},                   color={0,0,127}));
+  connect(multiplex4_1.y, SDF_PI_Design.u) annotation (Line(points={{11,70},{14,
+          70},{14,24},{23.6,24}}, color={0,0,127}));
   connect(multiplex4_2.y,SDF_PI_FullLoad. u) annotation (Line(points={{-21,-28},
           {-4.4,-28}},
         color={0,0,127}));
@@ -227,9 +259,10 @@ equation
   connect(NomPel.y, add.u2) annotation (Line(points={{137,76},{148,76},{148,72},
           {176,72}}, color={0,0,127}));
   connect(multiplex4_2.y, SDFCOPNominal1.u) annotation (Line(points={{-21,-28},
-          {-16,-28},{-16,-78},{-6.4,-78}}, color={0,0,127}));
+          {-12,-28},{-12,-68},{-2.4,-68}}, color={0,0,127}));
   connect(SDFCOPNominal1.y, product2.u2)
-    annotation (Line(points={{21.2,-78},{78,-78},{78,-80}}, color={0,0,127}));
+    annotation (Line(points={{25.2,-68},{54,-68},{54,-80},{78,-80}},
+                                                            color={0,0,127}));
   connect(product1.y, product2.u1) annotation (Line(points={{189,-28},{194,-28},
           {194,-48},{56,-48},{56,-68},{78,-68}}, color={0,0,127}));
   connect(product2.y, add1.u2)
@@ -252,8 +285,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(limiter.y, multiplex4_2.u4[1]) annotation (Line(points={{-127,-62},{
-          -94,-62},{-94,-54},{-56,-54},{-56,-37},{-44,-37}}, color={0,0,127}));
   connect(sigBus.THotSet, fromKelvin1.Kelvin) annotation (Line(
       points={{201.075,0.07},{-114,0.07},{-114,-38},{-90,-38}},
       color={255,204,51},
@@ -262,8 +293,24 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fromKelvin1.Celsius, limiter.u) annotation (Line(points={{-67,-38},{
-          -68,-38},{-68,-46},{-176,-46},{-176,-62},{-150,-62}}, color={0,0,127}));
+  connect(fromKelvin1.Celsius, multiplex4_2.u4[1]) annotation (Line(points={{
+          -67,-38},{-52,-38},{-52,-46},{-44,-46},{-44,-37}}, color={0,0,127}));
+  connect(multiplex4_1.y, SDF_T_Design.u) annotation (Line(points={{11,70},{12,
+          70},{12,88},{21.6,88},{21.6,110}}, color={0,0,127}));
+  connect(product3.y, division3.u2) annotation (Line(points={{125,30},{130,30},
+          {130,10},{112,10},{112,-40},{122,-40}}, color={0,0,127}));
+  connect(log.y, product4.u1)
+    annotation (Line(points={{63,-28},{78,-28}}, color={0,0,127}));
+  connect(product4.y, division3.u1) annotation (Line(points={{101,-34},{104,-34},
+          {104,-32},{106,-32},{106,-28},{122,-28}}, color={0,0,127}));
+  connect(SDF_T_FullLoad.y, product4.u2) annotation (Line(points={{25.2,-104},{
+          50,-104},{50,-40},{78,-40}}, color={0,0,127}));
+  connect(multiplex4_2.y, SDF_T_FullLoad.u) annotation (Line(points={{-21,-28},
+          {-18,-28},{-18,-104},{-2.4,-104}}, color={0,0,127}));
+  connect(log1.y, product3.u2)
+    annotation (Line(points={{87,24},{102,24}}, color={0,0,127}));
+  connect(SDF_T_Design.y, product3.u1) annotation (Line(points={{49.2,110},{66,
+          110},{66,36},{102,36}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-160},{200,
             160}})),

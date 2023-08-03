@@ -356,7 +356,9 @@ package Examples "Holds examples for the modular energy system units"
 
   model HeatPump_Basic
     Modules.ModularHeatPump.ModularHeatPump modularHeatPump(
-      THotNom=318.15,
+      THotNom=308.15,
+      TSourceNom=283.15,
+      QNom=54730,
       PLRMin=0.3,
       DeltaTCon=5,
       TSourceInternal=false,
@@ -366,7 +368,7 @@ package Examples "Holds examples for the modular energy system units"
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Fluid.Sources.Boundary_pT        bou(
       redeclare package Medium = AixLib.Media.Water,
-      T=313.15,
+      T=303.15,
       nPorts=1)
       annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus  sigBus
@@ -375,7 +377,7 @@ package Examples "Holds examples for the modular energy system units"
     Fluid.Sources.Boundary_pT        bou1(redeclare package Medium =
           Media.Water, nPorts=1)
       annotation (Placement(transformation(extent={{98,-10},{78,10}})));
-    Modelica.Blocks.Sources.RealExpression frequency(y=50)  annotation (
+    Modelica.Blocks.Sources.RealExpression frequency(y=100) annotation (
         Placement(transformation(
           extent={{-9,-12},{9,12}},
           rotation=0,
@@ -388,14 +390,14 @@ package Examples "Holds examples for the modular energy system units"
           origin={-125,-72})));
     Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
       annotation (Placement(transformation(extent={{-116,-38},{-96,-18}})));
-    Modelica.Blocks.Sources.RealExpression t_Hot_Set(y=45) annotation (
+    Modelica.Blocks.Sources.RealExpression t_Hot_Set(y=35) annotation (
         Placement(transformation(
           extent={{-9,-12},{9,12}},
           rotation=0,
           origin={-125,-96})));
     Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
       annotation (Placement(transformation(extent={{-14,-110},{6,-90}})));
-    Modelica.Blocks.Sources.RealExpression t_Source_Set(y=10) annotation (
+    Modelica.Blocks.Sources.RealExpression t_Source_Set(y=5)  annotation (
         Placement(transformation(
           extent={{-9,-12},{9,12}},
           rotation=0,

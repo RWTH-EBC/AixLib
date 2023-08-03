@@ -102,9 +102,6 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
         extent={{8,8},{-8,-8}},
         rotation=180,
         origin={32,0})));
-  Modelica.Blocks.Sources.RealExpression m_flowCon(y=m_flow_nominal)
-                   "massflow condenser"
-    annotation (Placement(transformation(extent={{154,52},{90,80}})));
   BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom,
       TSourceInternal=TSourceInternal)
     "Liquid heat source"
@@ -112,8 +109,6 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-14,84},{16,118}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  Modelica.Blocks.Math.Division division
-    annotation (Placement(transformation(extent={{62,62},{40,84}})));
   Fluid.Movers.SpeedControlled_y fan(
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
@@ -173,24 +168,8 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(m_flowCon.y, division.u2) annotation (Line(points={{86.8,66},{68,66},
-          {68,66.4},{64.2,66.4}},                  color={0,0,127}));
-  connect(division.y, sigBus.mFlowWaterRel) annotation (Line(points={{38.9,73},
-          {23.45,73},{23.45,101.085},{1.075,101.085}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(fan.port_b, heatPump.port_a1) annotation (Line(points={{-32,0},{-6,0}},
                                 color={0,127,255}));
-  connect(sigBus.m_flowConMea, division.u1) annotation (Line(
-      points={{1.075,101.085},{74,101.085},{74,79.6},{64.2,79.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(mode.y, sigBus.modeSet) annotation (Line(points={{56.2,123},{1.075,
           123},{1.075,101.085}}, color={255,0,255}), Text(
       string="%second",
