@@ -1,14 +1,16 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowEff "Shadow effect of shield"
   parameter Integer Mode = 1
-    "Diffuse radiation calculation,
-    1=Constant reduce factor for diffuse radiation,
-    2=Calculation based on g_Shadow";
+    "Diffuse radiation calculation mode,
+    1=Constant reduce factor for diffuse radiation (infinite length of shield),
+    2=Constant reduce factor for diffuse radiation (on perpendicular direction),
+    3=Constant reduce factor for diffuse radiation (on perpendicular direction without integration),
+    else=Use same reduce factor g_Shadow as direct radiation (no diffuse radiation when no shadow effect)";
   parameter Modelica.Units.SI.Length L_Shield = 0.3 "Horizontal length of the sun shield";
   parameter Modelica.Units.SI.Length H_Window_min = 0.1 "Distance from shield to upper border of window";
   parameter Modelica.Units.SI.Length H_Window_max = 1.1 "Distance from shield to lower border of window";
   parameter Modelica.Units.NonSI.Angle_deg azi_deg = -54 "Surface azimuth, S=0°, W=90°, N=180°, E=-90°";
-  parameter Real C_I_diff(min=0,max=1) = 1 "Correction coefficient of shadow effect for I_diff";
+  parameter Real C_I_diff(min=0,max=1) = 1 "Reduce factor of shadow effect for I_diff: 0=fully reduced, 1=no addtional reduce";
 
   BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
@@ -21,8 +23,22 @@ model ShadowEff "Shadow effect of shield"
     annotation (Placement(transformation(extent={{-40,-20},{0,20}})));
 
 protected
-  Modelica.Units.SI.TransmissionCoefficient g_Shadow(min=0.0,max=1.0) "shadow coefficient: 0=full shadowed, 1=no shadow";
-  Real g_I_diff = atan(L_Shield / ((H_Window_max+H_Window_min)/2))/(Modelica.Constants.pi/2);
+  Modelica.Units.SI.TransmissionCoefficient g_Shadow(min=0.0,max=1.0) "Shadow coefficient: 0=full shadowed, 1=no shadow";
+  Real g_I_diff "Shadow coefficient for diffuse radiation: 0=full shadowed, 1=no shadow";
+  Real sum, beta, s, H, L, g_I_diff_mean "Parameters for integration";
+  Modelica.Units.SI.Angle beta_upper = Modelica.Constants.pi / 2 "Assumption: max. 90° with diffuse radiation";
+
+algorithm
+  // Calculate the mean shadow factor regarding 90° range from perpenticular direction
+  sum := 0;
+  for i in 1:100 loop
+    H := (H_Window_max + H_Window_min)/2;
+    L := L_Shield;
+    s := Modelica.Constants.pi / 2 / 100; // Differential of 90° for integration
+    beta := beta_upper / 100 * i; // Angle to the perpendicular direction
+    sum := sum + (2/Modelica.Constants.pi) * Modelica.Math.atan(H/L * (if Mode == 1 then Modelica.Math.cos(beta) else 1)) * s;
+  end for;
+  g_I_diff_mean := sum / (Modelica.Constants.pi / 2);
 
 equation
   if shadowLength.With_Shadow then
@@ -32,10 +48,15 @@ equation
   end if;
   solarRad_out.I = solarRad_out.I_dir + solarRad_out.I_diff;
   solarRad_out.I_dir = solarRad_in.I_dir*g_Shadow;
-  if Mode == 1 then
-    solarRad_out.I_diff = solarRad_in.I_diff*(1-g_I_diff)*C_I_diff;
+  if Mode == 1 or Mode == 2 then
+    g_I_diff = g_I_diff_mean;
+    solarRad_out.I_diff = solarRad_in.I_diff*g_I_diff*C_I_diff;
+  elseif Mode == 3 then
+    g_I_diff = atan((H_Window_max+H_Window_min)/2 / L_Shield)/(Modelica.Constants.pi/2);
+    solarRad_out.I_diff = solarRad_in.I_diff*g_I_diff*C_I_diff;
   else
-    solarRad_out.I_diff = solarRad_in.I_diff*((g_Shadow - 1)*C_I_diff + 1);
+    g_I_diff = 0;
+    solarRad_out.I_diff = solarRad_in.I_diff*g_Shadow*C_I_diff;
   end if;
   solarRad_out.I_gr = solarRad_in.I_gr;
   solarRad_out.AOI = solarRad_in.AOI;
