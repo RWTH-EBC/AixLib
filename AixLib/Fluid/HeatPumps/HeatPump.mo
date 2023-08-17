@@ -15,7 +15,6 @@ model HeatPump
       final THotNom=THotNom,
       final TSourceNom=TSourceNom,
       final QNom=QNom,
-      final PLRMin=PLRMin,
       final DeltaTCon=DeltaTCon,
       final DeltaTEvap=DeltaTEvap,
       final TSource=TSource,
@@ -44,8 +43,7 @@ model HeatPump
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7
     "Temperature difference heat sink condenser"
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));

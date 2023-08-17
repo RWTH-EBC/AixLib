@@ -3,19 +3,16 @@ model ModularHeatPump
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
-                           final m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
+                           final m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon);
 
   parameter Modelica.Units.SI.Temperature THotMax=333.15 "Maximum value of THot to force shutdown"
  annotation (Evaluate=false,Dialog(tab="Advanced", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
-   annotation (Evaluate=false,Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of heat source"
-   annotation (Evaluate=false,Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow rate of heat pump"
-   annotation (Evaluate=false,Dialog(group="Nominal condition"));
-  parameter Real PLRMin=0.4 "Limit of PLR (Part-load-ratio); minimum =0"
-   annotation (Dialog(group="General machine information"));
-
+  parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
+   annotation (Evaluate=false,Dialog(group="Design condition"));
+  parameter Modelica.Units.SI.Temperature TSourceDes=278.15 "Design temperature of heat source"
+   annotation (Evaluate=false,Dialog(group="Design condition"));
+  parameter Modelica.Units.SI.HeatFlowRate QDes=150000 "Design heat flow rate of heat pump"
+   annotation (Evaluate=true,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
 
@@ -25,10 +22,10 @@ model ModularHeatPump
     parameter Boolean TSourceInternal=true
                                           "Use internal TSource?"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-      parameter Modelica.Units.SI.Temperature TSource=TSourceNom "Temperature of heat source"
+      parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
 
    replaceable package MediumEvap = AixLib.Media.Water
                                      constrainedby
@@ -60,15 +57,15 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     nthOrder=3,
     useBusConnectorOnly=true,
     mFlow_conNominal=m_flow_nominal,
-    VCon=max(0.0000001*QNom - 0.0094, 0.003),
-    mFlow_evaNominal=max(0.00004*QNom - 0.3177, 0.3),
-    VEva=max(0.0000001*QNom - 0.0075, 0.003),
+    VCon=max(0.0000001*QDes - 0.0094, 0.003),
+    mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
+    VEva=max(0.0000001*QDes - 0.0075, 0.003),
     TCon_start=TCon_start,
     redeclare model PerDataMainHP = PerDataMainHP,
     use_non_manufacturer=use_non_manufacturer,
     use_rev=false,
     use_autoCalc=false,
-    Q_useNominal=QNom,
+    Q_useNominal=QDes,
     use_refIne=true,
     dpCon_nominal=dpInternal,
     use_conCap=false,
@@ -83,13 +80,12 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     show_TPort=false,
     THotMax=THotMax,
-    THotNom=THotNom,
-    TSourceNom=TSourceNom,
-    QNom=QNom,
-    PLRMin=PLRMin,
+    THotNom=THotDes,
+    TSourceNom=TSourceDes,
+    QNom=QDes,
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
-    TSource=TSourceNom,
+    TSource=TSourceDes,
     TSourceInternal=TSourceInternal,
     Modulating=Modulating)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
@@ -102,8 +98,10 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
         extent={{8,8},{-8,-8}},
         rotation=180,
         origin={32,0})));
-  BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom,
-      TSourceInternal=TSourceInternal)
+  BaseClasses.HeatPump_Sources.Liquid heatSource(
+    TSourceNom=TSourceDes,
+      TSourceInternal=TSourceInternal,
+    TSource=TSourceDes)
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
@@ -129,10 +127,10 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
   Modelica.Blocks.Sources.BooleanExpression mode(y=true)
-    annotation (Placement(transformation(extent={{94,110},{58,136}})));
+    annotation (Placement(transformation(extent={{70,64},{34,90}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{16,32},{36,52}})));
-  Modelica.Blocks.Sources.RealExpression zero(y=0.1)
+  Modelica.Blocks.Sources.RealExpression zero(y=0.2)
                                                    annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},
@@ -170,8 +168,8 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(fan.port_b, heatPump.port_a1) annotation (Line(points={{-32,0},{-6,0}},
                                 color={0,127,255}));
-  connect(mode.y, sigBus.modeSet) annotation (Line(points={{56.2,123},{1.075,
-          123},{1.075,101.085}}, color={255,0,255}), Text(
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{32.2,77},{1.075,77},
+          {1.075,101.085}},      color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
