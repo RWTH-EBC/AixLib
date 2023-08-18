@@ -186,7 +186,10 @@ equation
           8},{-50,1.2},{-9.6,1.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
+    experiment(Tolerance=1e-6,StopTime=3.1536e+007,Interval=3600),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAirSwimmingPool.mos"
+        "Simulate and plot"),
     Documentation(info="<html>
     <p><span style=\"font-family: Arial;\">This example illustrates the use of
     <a href=
