@@ -63,6 +63,7 @@ partial model PartialMultizone "Partial model for multizone models"
     each displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
+        iconTransformation(extent={{80,19},{100,40}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[numZones](
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -250,7 +251,7 @@ equation
 
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
-        points={{76,-100},{76,50.64},{75.8,50.64}},
+        points={{76,-100},{76,51.46},{75.8,51.46}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(intGains[(i*3) - 1], zone[i].intGains[2]);
