@@ -13,7 +13,8 @@ model ThermalZoneMoistAirSwimmingPool
     recOrSep=true,
     nPorts=2,
     T_start=293.15,
-    zoneParam=DataBase.ThermalZones.SwimmingFacility.SwimmingHall())
+    redeclare AixLib.DataBase.ThermalZones.SwimmingFacility.SwimmingHall
+      zoneParam(HeaterOn=true))
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -148,6 +149,10 @@ model ThermalZoneMoistAirSwimmingPool
     fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Profile_timeOpe_pools.txt"))
                                                                                                                                             "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-92,-34},{-76,-18}})));
+  Modelica.Blocks.Sources.Constant
+                               const(k=273.15 + 30)
+                "Sinusoidal excitation for additional internal gains"
+    annotation (Placement(transformation(extent={{-70,2},{-58,14}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,6},{-10,6}},
@@ -177,7 +182,19 @@ equation
   connect(tableOpeningHours.y[1],thermalZone.timeOpe)
       annotation (Line(points={{-75.2,-26},{-7,-26},{-7,-8.4}},
                                                             color={0,0,127}));
+  connect(const.y, thermalZone.TSetHeat) annotation (Line(points={{-57.4,8},{-50,
+          8},{-50,1.2},{-9.6,1.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+    <p><span style=\"font-family: Arial;\">This example illustrates the use of
+    <a href=
+    \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>. 
+    Parameter set for thermal zone is for a swimming hall of a swimming 
+    facility including two swimming pools. All boundary conditions are generic 
+    to show how to apply different kinds of boundary conditions. The results 
+    should show a typical profile for indoor air temperatures, but are not 
+    related to a specific building or measurement data.</span></p>
+</html>"));
 end ThermalZoneMoistAirSwimmingPool;

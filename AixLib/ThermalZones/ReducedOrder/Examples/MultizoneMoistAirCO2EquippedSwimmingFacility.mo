@@ -12,12 +12,13 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
-    numZones=5,
-    zoneParam={DataBase.ThermalZones.SwimmingFacility.SwimmingHall(),
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    numZones=6,
+    zoneParam={DataBase.ThermalZones.SwimmingFacility.SwimmingHall(HeaterOn=
+        true),DataBase.ThermalZones.SwimmingFacility.Entrance(HeaterOn=true),
+        DataBase.ThermalZones.SwimmingFacility.Changing(HeaterOn=true),
+        DataBase.ThermalZones.SwimmingFacility.Showers(HeaterOn=true),
+        DataBase.ThermalZones.SwimmingFacility.Supervisory(HeaterOn=true),
+        DataBase.ThermalZones.SwimmingFacility.Technichal(HeaterOn=true)},
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
@@ -53,10 +54,10 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
-    columns=2:16)
+    columns=2:19)
     "Profiles for internal gains"
-    annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[5]
+    annotation (Placement(transformation(extent={{74,-42},{58,-26}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[6]
     "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
@@ -64,7 +65,7 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     f=1/86400,
     offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[6]
     "Convective heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
   Modelica.Blocks.Math.Gain gain(k=0.5)
@@ -73,13 +74,13 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{-56,-82},{-44,-70}})));
-  Modelica.Blocks.Routing.Replicator replicator(nout=5)
+  Modelica.Blocks.Routing.Replicator replicator(nout=6)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-54})));
-  Modelica.Blocks.Routing.Replicator replicator1(nout=5)
+  Modelica.Blocks.Routing.Replicator replicator1(nout=6)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
@@ -100,10 +101,10 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
-    columns=2:6)
+    columns=2:7)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0)
+  Modelica.Blocks.Sources.Constant const[6](each k=0)
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
@@ -121,7 +122,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(tableInternalGains.y, multizone.intGains)
-    annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
+    annotation (Line(points={{57.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
   connect(gain.y, replicator.u)
     annotation (Line(points={{-43.4,-54},{-37.2,-54}}, color={0,0,127}));
   connect(sine.y, gain.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-54},
