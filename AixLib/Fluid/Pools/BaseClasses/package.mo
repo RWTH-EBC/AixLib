@@ -1,4 +1,4 @@
-within AixLib.Fluid.Pool;
+within AixLib.Fluid.Pools;
 package BaseClasses
     extends Modelica.Icons.BasesPackage;
 

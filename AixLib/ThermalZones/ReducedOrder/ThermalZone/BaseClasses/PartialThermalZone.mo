@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
+  replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
   parameter Integer nPorts =  0
     "Number of fluid ports"

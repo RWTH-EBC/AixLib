@@ -1,8 +1,5 @@
-within AixLib.Fluid.Pool.BaseClasses;
+within AixLib.Fluid.Pools.BaseClasses;
 model waveMachine "Calculate energy demands of a wave machine"
-
-
-
 
   parameter Modelica.Units.SI.Length heightWave "Height of generated wave";
   parameter Modelica.Units.SI.Length widthWave
@@ -11,10 +8,6 @@ model waveMachine "Calculate energy demands of a wave machine"
     "Start time of first wave cycle";
   parameter Modelica.Units.SI.Time periodeWavePul "Time of cycling period";
   parameter Real widthWavePul "Fraction of time of wave generation within cycling period";
-
-
-
-
 
   Modelica.Blocks.Math.RealToBoolean useWavePool(threshold=1)
     "If input = 1, then true, else no waves generated"

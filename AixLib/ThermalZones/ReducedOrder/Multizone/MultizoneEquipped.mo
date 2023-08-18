@@ -114,7 +114,7 @@ model MultizoneEquipped
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
 protected
-  parameter Real zoneFactor[numZones,1](fixed=false)
+  parameter Real zoneFactor[numZones,1](each fixed=false)
     "Calculated zone factors";
   parameter Real VAirRes(fixed=false)
     "Resulting air volume in zones supplied by the AHU";

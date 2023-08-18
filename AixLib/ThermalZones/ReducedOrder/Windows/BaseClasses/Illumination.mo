@@ -7,9 +7,9 @@ model Illumination
     "Radiation equivalent for uniformly overcast skies";
 
   //Window parameter
-  parameter Integer n(min=1) "Number of windows"
+  parameter Integer n(min=1)=1 "Number of windows"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
      roof" annotation (Dialog(group="window"));
   parameter Real r[n] "Frame share"
     annotation (Dialog(group="window"));
@@ -25,22 +25,22 @@ model Illumination
     annotation (Placement(transformation(extent={{98,-10},{118,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput HVis[n](final quantity=
-    "RadiantEnergyFluenceRate", final unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HVis[n](each final quantity=
+    "RadiantEnergyFluenceRate", each final unit="W/m2")
     "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{-120,70},{-100,90}}),
         iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput corTaue_DifCov[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
      sky"
     annotation (Placement(transformation(extent={{-120,-70},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
 
   Modelica.Blocks.Interfaces.RealInput corTaue_Gro[n](
-    final quantity="TransmissionCoefficient",
-    final unit="1")
+    each final quantity="TransmissionCoefficient",
+    each final unit="1")
     "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{-120,30},{-100,50}}),
         iconTransformation(extent={{-120,30},{-100,50}})));

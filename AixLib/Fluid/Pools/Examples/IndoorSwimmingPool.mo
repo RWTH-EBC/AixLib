@@ -1,9 +1,9 @@
-within AixLib.Fluid.Pool.Examples;
-model IndoorSwimmingPool
+within AixLib.Fluid.Pools.Examples;
+model IndoorSwimmingPool "Example of an indoor swimming pool"
     extends Modelica.Icons.Example;
-  .AixLib.Fluid.Pool.IndoorSwimmingPool indoorSwimming(poolParam=
-        AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),
-      redeclare package WaterMedium = WaterMedium)
+  .AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimming(poolParam=
+        AixLib.DataBase.Pools.SportPool(), redeclare package WaterMedium =
+        WaterMedium)
     annotation (Placement(transformation(extent={{-20,-40},{30,16}})));
 
    package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
@@ -53,5 +53,11 @@ equation
         points={{-4,80},{23.5,80},{23.5,17.12}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=172800, __Dymola_Algorithm="Dassl"));
+    experiment(Tolerance=1e-6,StopTime=604800,Interval=900),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
+<p>Example model for an sport oriented indoor swimming pool with an integrated ideal heat exchanger. </p>
+</html>"));
 end IndoorSwimmingPool;

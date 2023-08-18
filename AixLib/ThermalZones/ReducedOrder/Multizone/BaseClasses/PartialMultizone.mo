@@ -57,16 +57,18 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{-10,-10},{10,10}},
     rotation=90,
     origin={60,-110})));
-  Modelica.Blocks.Interfaces.RealOutput TAir[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC") if ASurTot > 0 or VAir > 0 "Indoor air temperature"
+  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC") if ASurTot > 0 or VAir > 0
+    "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
         iconTransformation(extent={{80,19},{100,40}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC") if ASurTot > 0 "Mean indoor radiation temperature"
+  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC") if ASurTot > 0
+    "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,0},{100,20}})));
   BoundaryConditions.WeatherData.Bus weaBus
@@ -154,10 +156,10 @@ partial model PartialMultizone "Partial model for multizone models"
   between pool and corresponding zone are balancecd" annotation (Dialog(tab="Moisture"));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) "Set point for heater - used only if zoneParam[i].HeaterOn is true"
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0) "Set point for heater - used only if zoneParam[i].HeaterOn is true"
     annotation (Placement(transformation(
     extent={{20,-20},{-20,20}},
     rotation=270,
@@ -166,10 +168,10 @@ partial model PartialMultizone "Partial model for multizone models"
     rotation=270,
     origin={-52,-110})));
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) "Set point for cooler - used only if zoneParam[i].CoolerOn is true"
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0) "Set point for cooler - used only if zoneParam[i].CoolerOn is true"
     annotation (Placement(transformation(
     extent={{20,-20},{-20,20}},
     rotation=270,
@@ -177,20 +179,20 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{10,-10},{-10,10}},
     rotation=270,
     origin={-74,-110})));
-  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final quantity="HeatFlowRate",
-      final unit="W")
+  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](each final quantity="HeatFlowRate",
+      each final unit="W")
     "Power for heating"
     annotation (
     Placement(transformation(extent={{100,-56},{120,-36}}),
     iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final quantity="HeatFlowRate",
-      final unit="W")
+  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](each final quantity="HeatFlowRate",
+      each final unit="W")
     "Power for cooling"
     annotation (
     Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
     extent={{80,-100},{100,-80}})));
-  Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](final
-      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
+  Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](each final
+      quantity="HeatFlowRate", each final unit="W") if ASurTot > 0 or VAir > 0
     "Heat flow based on internal gains for each zone from persons, machines, and light"
                         annotation (Placement(transformation(extent={{100,-90},{
             120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
