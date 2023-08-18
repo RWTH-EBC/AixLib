@@ -6,7 +6,7 @@ model IndoorSwimmingPool "Example of an indoor swimming pool"
         WaterMedium)
     annotation (Placement(transformation(extent={{-20,-40},{30,16}})));
 
-   package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
+    replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.RealExpression TSoil(y=273.15 + 8)
     annotation (Placement(transformation(extent={{96,44},{80,60}})));
