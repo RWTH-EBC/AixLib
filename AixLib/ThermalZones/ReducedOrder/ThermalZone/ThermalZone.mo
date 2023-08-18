@@ -64,7 +64,7 @@ model ThermalZone "Thermal zone containing moisture balance"
   final parameter Boolean use_pools = zoneParam.use_pools
     "If true, input connector timeOpe is enabled and heat and mass exchanges between pool and zone air are balancecd";
   final parameter Integer nPools = zoneParam.nPools "Number of pools in thermal zone";
-  final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[nPools]=zoneParam.poolParam "Setup for swimming pools";
+  final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition poolParam[nPools]=zoneParam.poolParam "Setup for swimming pools";
 
 
   AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
@@ -335,7 +335,7 @@ model ThermalZone "Thermal zone containing moisture balance"
         iconTransformation(extent={{100,-50},{120,-30}})));
 
     // Pools
-  Fluid.Pool.IndoorSwimmingPool indoorSwimmingPool[nPools](poolParam=poolParam,
+  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[nPools](poolParam=poolParam,
     redeclare package WaterMedium = MediumWater,
     each energyDynamics=energyDynamics)
     if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
@@ -362,11 +362,11 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   // protected: ThermalZone
 
-  Fluid.Pool.BaseClasses.AirFlowMoistureToROM airFlowMoistureToROM(
+  Fluid.Pools.BaseClasses.AirFlowMoistureToROM airFlowMoistureToROM(
     redeclare package AirMedium = Medium,
     energyDynamics=energyDynamics,
     nPools=zoneParam.nPools,
-    m_flow_air_nominal=1,
+    m_flow_air_nominal=5,
     VAirLay=zoneParam.VAir)
     if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
     annotation (Placement(transformation(extent={{-66,-76},{-60,-70}})));
