@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Controller;
-block CtrThrottleQFlow
-  "Volume Flow Set Point Controller for Throttles"
+block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
          Modelica.Blocks.Interfaces.RealInput Q_flowMea
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
@@ -59,6 +58,13 @@ block CtrThrottleQFlow
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.Constant constPumpSet(final k=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Blocks.Logical.GreaterThreshold
+                                        pumpSwitchOff1(final threshold=0)
+    annotation (Placement(transformation(extent={{-32,-88},{-12,-68}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{34,-58},{54,-78}})));
+  Modelica.Blocks.Sources.Constant lowerBound(final k=0)
+    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
 equation
 
   connect(PID.u_s, Q_flowSet) annotation (Line(
@@ -86,12 +92,20 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{
-          100.12,-50},{100.12,0.12}}, color={0,0,127}), Text(
+  connect(Q_flowSet, pumpSwitchOff1.u) annotation (Line(points={{-120,-50},{-40,
+          -50},{-40,-78},{-34,-78}}, color={0,0,127}));
+  connect(pumpSwitchOff1.y, switch1.u2) annotation (Line(points={{-11,-78},{24,
+          -78},{24,-68},{32,-68}}, color={255,0,255}));
+  connect(switch1.y, hydraulicBus.valveSet) annotation (Line(points={{55,-68},{
+          100.12,-68},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(lowerBound.y, switch1.u1)
+    annotation (Line(points={{21,-90},{32,-90},{32,-76}}, color={0,0,127}));
+  connect(PID.y, switch1.u3) annotation (Line(points={{1,-50},{24,-50},{24,-60},
+          {32,-60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -163,4 +177,4 @@ equation
   Power
 </p>
 </html>"));
-end CtrThrottleQFlow;
+end CtrThrottleQFlow_cold;

@@ -10,7 +10,6 @@ model Ashrae140Testcase900SPTest
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
-    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x0_9(),
     area=48,
     thickness=0.1,
     alpha=20,
@@ -23,20 +22,20 @@ model Ashrae140Testcase900SPTest
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
-    annotation (Placement(transformation(extent={{86,-102},{106,-80}})));
+    annotation (Placement(transformation(extent={{84,-102},{104,-80}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900(),
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
+    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900
+      zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2) "Thermal zone"
-    annotation (Placement(transformation(extent={{10,-62},{66,-4}})));
+    nPorts=2)
+     "Thermal zone"
+    annotation (Placement(transformation(extent={{10,-64},{66,-6}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -294,11 +293,12 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{-58,-50},{-38,-30}})));
   Controller.CtrTabsQflow ctrTabsQflow(
     ctrThrottleHotQFlow(
-      k=0.05,
-      Ti=120,
-      rpm_pump=3000), ctrThrottleColdQFlow(
-      k=0.05,
-      Ti=120,
+      k=0.00003,
+      Ti=280,
+      rpm_pump=2000),
+    ctrThrottleColdQFlow(
+      k=0.00003,
+      Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
     annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
@@ -306,29 +306,74 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
     annotation (Placement(transformation(extent={{100,80},{120,100}})));
-  Modelica.Blocks.Sources.Trapezoid trapezoid(
-    amplitude=10,
-    rising=900,
-    width=3600,
-    falling=900,
-    period=9000,
-    offset=-5)
+  Modelica.Blocks.Sources.Step      step(
+    height=10000,
+    offset=-5000,
+    startTime=86400)
     annotation (Placement(transformation(extent={{-182,-24},{-162,-4}})));
-  Modelica.Blocks.Sources.Trapezoid trapezoid1(
-    amplitude=15,
-    rising=900,
-    width=3600,
-    falling=900,
-    period=9000,
-    offset=285)
+  Modelica.Blocks.Sources.Constant  const(k=300)
     annotation (Placement(transformation(extent={{-184,-60},{-164,-40}})));
   BaseClasses.EnergyCalc coolEnergyCalc annotation (Placement(transformation(
           rotation=0, extent={{60,50},{80,70}})));
   BaseClasses.EnergyCalc hotEnergyCalc annotation (Placement(transformation(
           rotation=0, extent={{60,80},{80,100}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=thermalZone1.ROM.intWallRC.thermCapInt[
+        1].T) annotation (Placement(transformation(extent={{164,34},{184,54}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=thermalZone1.ROM.extWallRC.thermCapExt[
+        1].T) annotation (Placement(transformation(extent={{162,10},{182,30}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=thermalZone1.ROM.resWin.port_b.T)
+    annotation (Placement(transformation(extent={{164,-12},{184,8}})));
+  Modelica.Blocks.Sources.RealExpression realExpression3(y=tabs1.heatCapacitor.T)
+    annotation (Placement(transformation(extent={{164,-36},{184,-16}})));
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=thermalZone1.ROM.roofRC.thermCapExt[
+        1].T)
+    annotation (Placement(transformation(extent={{166,-56},{186,-36}})));
+  Modelica.Blocks.Interfaces.RealOutput T_IntWall "Value of Real output"
+    annotation (Placement(transformation(extent={{202,34},{222,54}})));
+  Modelica.Blocks.Interfaces.RealOutput T_ExtWall "Value of Real output"
+    annotation (Placement(transformation(extent={{200,10},{220,30}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Win "Value of Real output"
+    annotation (Placement(transformation(extent={{202,-12},{222,8}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Tabs "Value of Real output"
+    annotation (Placement(transformation(extent={{202,-36},{222,-16}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Roof "Value of Real output"
+    annotation (Placement(transformation(extent={{204,-56},{224,-36}})));
+  Modelica.Blocks.Interfaces.RealOutput T_amb "Value of Real output"
+    annotation (Placement(transformation(extent={{204,-80},{224,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
+    annotation (Placement(transformation(extent={{202,-104},{222,-84}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4)
+    annotation (Placement(transformation(extent={{168,-94},{180,-82}})));
+  Modelica.Blocks.Sources.RealExpression realExpression6(y=thermalZone1.ROM.radHeatSol[
+        1].Q_flow)
+    annotation (Placement(transformation(extent={{114,-88},{134,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression7(y=thermalZone1.ROM.radHeatSol[
+        4].Q_flow)
+    annotation (Placement(transformation(extent={{116,-134},{136,-114}})));
+  Modelica.Blocks.Sources.RealExpression realExpression8(y=thermalZone1.ROM.radHeatSol[
+        3].Q_flow)
+    annotation (Placement(transformation(extent={{114,-118},{134,-98}})));
+  Modelica.Blocks.Sources.RealExpression realExpression9(y=thermalZone1.ROM.radHeatSol[
+        2].Q_flow)
+    annotation (Placement(transformation(extent={{114,-102},{134,-82}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
+    annotation (Placement(transformation(extent={{126,-24},{146,-4}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{100,123},{112,135}})));
+  Modelica.Blocks.Math.Add add2
+    annotation (Placement(transformation(extent={{100,159},{112,171}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs "Value of Real output"
+    annotation (Placement(transformation(extent={{130,119},{150,139}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Ahu "Value of Real output"
+    annotation (Placement(transformation(extent={{130,155},{150,175}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs_ctr
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{-6,184},{14,204}})));
+  Modelica.Blocks.Math.Gain gain(k=0.001)
+    annotation (Placement(transformation(extent={{-32,184},{-12,204}})));
 equation
-  connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
-      points={{-72,30},{8,30},{8,-15.6},{10,-15.6}},
+  connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
+      points={{-72,30},{8,30},{8,-17.6},{10,-17.6}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -338,21 +383,21 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(internalGains.y,thermalZone1. intGains) annotation (Line(points={{61,-78.3},
-          {60,-78.3},{60,-72},{60.4,-72},{60.4,-57.36}},
+  connect(internalGains.y,thermalZone1.intGains) annotation (Line(points={{61,-78.3},
+          {60,-78.3},{60,-72},{60.4,-72},{60.4,-59.36}},
                                             color={0,0,127}));
-  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{96,
-          -78.9},{96,-31.84},{66.56,-31.84}},                       color={191,
+  connect(tabs1.heatPort,thermalZone1.intGainsConv) annotation (Line(points={{94,
+          -78.9},{94,-33.84},{66.56,-33.84}},                       color={191,
           0,0}));
-  connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{8.16364,
-          -80.1818},{36,-80.1818},{36,-53.88},{34.71,-53.88}},   color={0,127,
+  connect(genericAHU1.port_b1,thermalZone1.ports[1]) annotation (Line(points={{8.16364,
+          -80.1818},{36,-80.1818},{36,-55.88},{34.71,-55.88}},   color={0,127,
           255}));
-  connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{8.16364,
-          -70.7273},{46,-70.7273},{46,-53.88},{41.29,-53.88}}, color={0,127,255}));
-  connect(boundaryExhaustAir.ports[1],genericAHU1. port_b2) annotation (Line(
+  connect(genericAHU1.port_a2,thermalZone1.ports[2]) annotation (Line(points={{8.16364,
+          -70.7273},{46,-70.7273},{46,-55.88},{41.29,-55.88}}, color={0,127,255}));
+  connect(boundaryExhaustAir.ports[1],genericAHU1.port_b2) annotation (Line(
         points={{-50,-70},{-50,-70.7273},{-28,-70.7273}},    color={0,127,255}));
-  connect(thermalZone1.TAir, Bus.TZoneMea) annotation (Line(points={{68.8,-9.8},
-          {86.4,-9.8},{86.4,40.05},{8.05,40.05}},   color={0,0,127}), Text(
+  connect(thermalZone1.TAir, Bus.TZoneMea) annotation (Line(points={{68.8,-11.8},
+          {86.4,-11.8},{86.4,40.05},{8.05,40.05}},  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -400,20 +445,20 @@ equation
   connect(bouWatercold1.ports[1], genericAHU1.port_a4) annotation (Line(points={{29,-140},
           {-10,-140},{-10,-92}},         color={0,127,255}));
   connect(bouWatercold.ports[1], tabs1.port_b2) annotation (Line(points={{53,-140},
-          {104,-140},{104,-101.78}},
+          {102,-140},{102,-101.78}},
                                 color={0,127,255}));
   connect(bouWatercold1.ports[2], tabs1.port_a2) annotation (Line(points={{31,-140},
-          {30,-140},{30,-132},{100,-132},{100,-102}},
+          {30,-140},{30,-132},{98,-132},{98,-102}},
                                                 color={0,127,255}));
   connect(genericAHU1.port_b4, bouWatercold.ports[2]) annotation (Line(points={{
           -6.72727,-92},{-6,-92},{-6,-134},{54,-134},{54,-140},{55,-140}},
                                                                          color={
           0,127,255}));
   connect(bouWaterhot2.ports[1], tabs1.port_b1)
-    annotation (Line(points={{81,-114},{92,-114},{92,-102}},
+    annotation (Line(points={{81,-114},{90,-114},{90,-102}},
                                                           color={0,127,255}));
   connect(bouWaterhot3.ports[1], tabs1.port_a1)
-    annotation (Line(points={{63,-108},{88,-108},{88,-102}},
+    annotation (Line(points={{63,-108},{86,-108},{86,-102}},
                                                           color={0,127,255}));
   connect(ctrTabsQflow.tabsBus, Bus.tabsBus) annotation (Line(
       points={{-38,-18},{-10,-18},{-10,40.05},{8.05,40.05}},
@@ -423,14 +468,12 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(trapezoid.y, ctrTabsQflow.QFlowSet) annotation (Line(points={{-161,-14},
-          {-110,-14},{-110,-17.9},{-58.3,-17.9}},
-                                               color={0,0,127}));
-  connect(trapezoid1.y, ctrAhu.Tset) annotation (Line(points={{-163,-50},{-100.5,
-          -50},{-100.5,-40},{-60,-40}},
-                                     color={0,0,127}));
+  connect(step.y, ctrTabsQflow.QFlowSet) annotation (Line(points={{-161,-14},{-110,
+          -14},{-110,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(const.y, ctrAhu.Tset) annotation (Line(points={{-163,-50},{-100.5,-50},
+          {-100.5,-40},{-60,-40}}, color={0,0,127}));
   connect(tabs1.tabsBus, Bus.tabsBus) annotation (Line(
-      points={{85.9,-90.89},{78,-90.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
+      points={{83.9,-90.89},{78,-90.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -485,8 +528,53 @@ equation
     annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}},    color={0,0,127}));
   connect(hotEnergyCalc.y1, QFlowHeat)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
+  connect(realExpression.y, T_IntWall)
+    annotation (Line(points={{185,44},{212,44}}, color={0,0,127}));
+  connect(realExpression1.y, T_ExtWall)
+    annotation (Line(points={{183,20},{210,20}}, color={0,0,127}));
+  connect(realExpression2.y, T_Win)
+    annotation (Line(points={{185,-2},{212,-2}}, color={0,0,127}));
+  connect(realExpression3.y, T_Tabs)
+    annotation (Line(points={{185,-26},{212,-26}}, color={0,0,127}));
+  connect(realExpression4.y, T_Roof)
+    annotation (Line(points={{187,-46},{214,-46}}, color={0,0,127}));
+  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{214,-70},{92,-70},{92,
+          -2},{-4,-2},{-4,16},{-43,16},{-43,-2}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realExpression6.y, multiSum.u[1]) annotation (Line(points={{135,-78},
+          {152,-78},{152,-89.575},{168,-89.575}}, color={0,0,127}));
+  connect(realExpression9.y, multiSum.u[2]) annotation (Line(points={{135,-92},
+          {152,-92},{152,-88.525},{168,-88.525}}, color={0,0,127}));
+  connect(realExpression8.y, multiSum.u[3]) annotation (Line(points={{135,-108},
+          {168,-108},{168,-87.475}}, color={0,0,127}));
+  connect(realExpression7.y, multiSum.u[4]) annotation (Line(points={{137,-124},
+          {137,-107},{168,-107},{168,-86.425}}, color={0,0,127}));
+  connect(multiSum.y, solar_radiation) annotation (Line(points={{181.02,-88},{
+          194,-88},{194,-94},{212,-94}}, color={0,0,127}));
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-11.8},{
+          68.8,-10},{86,-10},{86,0},{118,0},{118,-14},{136,-14}}, color={0,0,
+          127}));
+  connect(coolEnergyCalc.y3, add1.u2) annotation (Line(points={{81,51},{88,51},
+          {88,77},{94,77},{94,125.4},{98.8,125.4}}, color={0,0,127}));
+  connect(coolEnergyCalc.y2, add2.u2) annotation (Line(points={{81,69},{88,69},
+          {88,161},{98.8,161},{98.8,161.4}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3, add1.u1) annotation (Line(points={{81,81},{92,81},{
+          92,132.6},{98.8,132.6}}, color={0,0,127}));
+  connect(hotEnergyCalc.y2, add2.u1) annotation (Line(points={{81,99},{80,99},{
+          80,167},{98.8,167},{98.8,168.6}}, color={0,0,127}));
+  connect(Q_Ahu, add2.y)
+    annotation (Line(points={{140,165},{112.6,165}}, color={0,0,127}));
+  connect(Q_Tabs, add1.y)
+    annotation (Line(points={{140,129},{112.6,129}}, color={0,0,127}));
+  connect(ctrTabsQflow.Q_flow1, gain.u) annotation (Line(points={{-37.2,-9},{
+          -22,-9},{-22,124},{-34,124},{-34,194}}, color={0,0,127}));
+  connect(gain.y, Q_Tabs_ctr)
+    annotation (Line(points={{-11,194},{4,194}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=3600,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),

@@ -19,7 +19,6 @@ model Ashrae140Testcase900SP
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
-    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x0_9(),
     area=48,
     thickness=0.1,
     alpha=20,
@@ -27,7 +26,7 @@ model Ashrae140Testcase900SP
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
-            Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
     throttlePumpCold(Kv=10, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
@@ -36,9 +35,7 @@ model Ashrae140Testcase900SP
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900(),
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
+    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900 zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
     recOrSep=false,
@@ -52,7 +49,7 @@ model Ashrae140Testcase900SP
     filNam=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/ASHRAE140.mos"))
     "Weather data reader"
-    annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+    annotation (Placement(transformation(extent={{-92,18},{-72,38}})));
 
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -298,12 +295,12 @@ model Ashrae140Testcase900SP
     annotation (Placement(transformation(extent={{-58,-50},{-38,-30}})));
   Controller.CtrTabsQflow ctrTabsQflow(
     ctrThrottleHotQFlow(
-      k=0.05,
-      Ti=120,
+      k=0.00003,
+      Ti=280,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.05,
-      Ti=120,
+      k=0.00003,
+      Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
     annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
@@ -321,13 +318,65 @@ model Ashrae140Testcase900SP
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
     annotation (Placement(transformation(extent={{100,80},{120,100}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=thermalZone1.ROM.intWallRC.thermCapInt[
+        1].T) annotation (Placement(transformation(extent={{146,36},{166,56}})));
+  Modelica.Blocks.Interfaces.RealOutput T_IntWall "Value of Real output"
+    annotation (Placement(transformation(extent={{184,36},{204,56}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=thermalZone1.ROM.extWallRC.thermCapExt[
+        1].T) annotation (Placement(transformation(extent={{144,12},{164,32}})));
+  Modelica.Blocks.Interfaces.RealOutput T_ExtWall "Value of Real output"
+    annotation (Placement(transformation(extent={{182,12},{202,32}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=thermalZone1.ROM.resWin.port_b.T)
+    annotation (Placement(transformation(extent={{146,-10},{166,10}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Win "Value of Real output"
+    annotation (Placement(transformation(extent={{184,-10},{204,10}})));
+  Modelica.Blocks.Sources.RealExpression realExpression3(y=tabs1.heatCapacitor.T)
+    annotation (Placement(transformation(extent={{146,-34},{166,-14}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Tabs "Value of Real output"
+    annotation (Placement(transformation(extent={{184,-34},{204,-14}})));
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=thermalZone1.ROM.roofRC.thermCapExt[
+        1].T)
+    annotation (Placement(transformation(extent={{148,-54},{168,-34}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Roof "Value of Real output"
+    annotation (Placement(transformation(extent={{186,-54},{206,-34}})));
+  Modelica.Blocks.Interfaces.RealOutput T_amb "Value of Real output"
+    annotation (Placement(transformation(extent={{186,-78},{206,-58}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs "Value of Real output"
+    annotation (Placement(transformation(extent={{132,116},{152,136}})));
+  Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
+    annotation (Placement(transformation(extent={{186,-102},{206,-82}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4)
+    annotation (Placement(transformation(extent={{152,-92},{164,-80}})));
+  Modelica.Blocks.Sources.RealExpression realExpression6(y=thermalZone1.ROM.radHeatSol[
+        1].Q_flow)
+    annotation (Placement(transformation(extent={{112,-88},{132,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression9(y=thermalZone1.ROM.radHeatSol[
+        2].Q_flow)
+    annotation (Placement(transformation(extent={{112,-102},{132,-82}})));
+  Modelica.Blocks.Sources.RealExpression realExpression8(y=thermalZone1.ROM.radHeatSol[
+        3].Q_flow)
+    annotation (Placement(transformation(extent={{112,-118},{132,-98}})));
+  Modelica.Blocks.Sources.RealExpression realExpression7(y=thermalZone1.ROM.radHeatSol[
+        4].Q_flow)
+    annotation (Placement(transformation(extent={{114,-134},{134,-114}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Ahu "Value of Real output"
+    annotation (Placement(transformation(extent={{132,152},{152,172}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{102,120},{114,132}})));
+  Modelica.Blocks.Math.Add add2
+    annotation (Placement(transformation(extent={{102,156},{114,168}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs_ctr
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{2,134},{22,154}})));
+  Modelica.Blocks.Math.Gain gain(k=0.001)
+    annotation (Placement(transformation(extent={{-24,134},{-4,154}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
-      points={{-72,30},{8,30},{8,-15.6},{10,-15.6}},
+      points={{-72,28},{8,28},{8,-15.6},{10,-15.6}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
-      points={{-72,30},{-43,30},{-43,-2}},
+      points={{-72,28},{-43,28},{-43,-2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -467,10 +516,6 @@ equation
     annotation (Line(points={{65,101},{66,101},{66,102},{8.05,102},{8.05,40.05}},
                                                                           color=
          {0,0,127}));
-  connect(hotEnergyCalc.Tout1,Bus. ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
-    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}},    color={0,0,127}));
-  connect(hotEnergyCalc.Tin1,Bus. ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
-    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}},    color={0,0,127}));
   connect(hotEnergyCalc.y1, QFlowHeat)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
@@ -479,8 +524,55 @@ equation
           -17.9},{-58.3,-16},{-94,-16},{-94,0},{-120,0}}, color={0,0,127}));
   connect(ctrAhu.Tset, TAhuSet)
     annotation (Line(points={{-60,-40},{-120,-40}}, color={0,0,127}));
+  connect(realExpression.y, T_IntWall)
+    annotation (Line(points={{167,46},{194,46}}, color={0,0,127}));
+  connect(realExpression1.y, T_ExtWall)
+    annotation (Line(points={{165,22},{192,22}}, color={0,0,127}));
+  connect(realExpression2.y, T_Win)
+    annotation (Line(points={{167,0},{194,0}}, color={0,0,127}));
+  connect(realExpression3.y, T_Tabs)
+    annotation (Line(points={{167,-24},{194,-24}}, color={0,0,127}));
+  connect(realExpression4.y, T_Roof)
+    annotation (Line(points={{169,-44},{196,-44}}, color={0,0,127}));
+  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{196,-68},{74,-68},{74,
+          0},{-22,0},{-22,18},{-43,18},{-43,-2}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(multiSum.y, solar_radiation) annotation (Line(points={{165.02,-86},{
+          178,-86},{178,-92},{196,-92}}, color={0,0,127}));
+  connect(realExpression6.y, multiSum.u[1]) annotation (Line(points={{133,-78},
+          {136,-78},{136,-87.575},{152,-87.575}}, color={0,0,127}));
+  connect(realExpression9.y, multiSum.u[2]) annotation (Line(points={{133,-92},
+          {136,-92},{136,-86.525},{152,-86.525}}, color={0,0,127}));
+  connect(realExpression8.y, multiSum.u[3]) annotation (Line(points={{133,-108},
+          {152,-108},{152,-85.475}}, color={0,0,127}));
+  connect(realExpression7.y, multiSum.u[4]) annotation (Line(points={{135,-124},
+          {135,-105},{152,-105},{152,-84.425}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
+    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tout1, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
+    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}}, color={0,0,127}));
+  connect(Q_Tabs, add1.y)
+    annotation (Line(points={{142,126},{114.6,126}}, color={0,0,127}));
+  connect(Q_Ahu, add2.y)
+    annotation (Line(points={{142,162},{114.6,162}}, color={0,0,127}));
+  connect(hotEnergyCalc.y2, add2.u1) annotation (Line(points={{81,99},{82,99},{
+          82,164},{100.8,164},{100.8,165.6}}, color={0,0,127}));
+  connect(coolEnergyCalc.y2, add2.u2) annotation (Line(points={{81,69},{90,69},
+          {90,158},{100.8,158},{100.8,158.4}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3, add1.u1) annotation (Line(points={{81,81},{94,81},{
+          94,129.6},{100.8,129.6}}, color={0,0,127}));
+  connect(coolEnergyCalc.y3, add1.u2) annotation (Line(points={{81,51},{80,51},
+          {80,46},{90,46},{90,74},{96,74},{96,122.4},{100.8,122.4}}, color={0,0,
+          127}));
+  connect(ctrTabsQflow.Q_flow1, gain.u) annotation (Line(points={{-37.2,-9},{
+          -14,-9},{-14,74},{-26,74},{-26,144}}, color={0,0,127}));
+  connect(gain.y, Q_Tabs_ctr)
+    annotation (Line(points={{-3,144},{12,144}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=3600,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
