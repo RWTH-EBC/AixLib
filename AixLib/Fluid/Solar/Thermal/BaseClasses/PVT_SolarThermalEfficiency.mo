@@ -3,7 +3,7 @@ model PVT_SolarThermalEfficiency
   "Calculates the efficiency of a thermal component of pvt"
   parameter AixLib.DataBase.PhotovoltaicThermal.SolarThermalBaseDataDefinition
     Collector=AixLib.DataBase.PhotovoltaicThermal.PVT_thermal()
-    "Properties of Solar Thermal Collector" annotation (choicesAllMatching=true);
+    "Thermal properties of Photovoltaic thermal Collector" annotation (choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput T_air(
     quantity="ThermodynamicTemperature",
     unit="K",

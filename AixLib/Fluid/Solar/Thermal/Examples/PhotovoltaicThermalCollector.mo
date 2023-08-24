@@ -53,7 +53,9 @@ model PhotovoltaicThermalCollector
     volPip=0.05,
     Collector=AixLib.DataBase.SolarThermal.AirCollector(),
     pVT_SolarThermalEfficiency(Collector=
-          AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedPVTWithLowEmissionCoating()))
+          AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedPVTWithLowEmissionCoating()),
+    solarElectricalEfficiency(Collector=
+          AixLib.DataBase.PhotovoltaicThermal.ElectricalGlazedPVTWithLowEmissionCoating()))
     annotation (Placement(transformation(extent={{-4,-10},{20,12}})));
 equation
   connect(massFlowSensor.port_b, T1.port_a)
