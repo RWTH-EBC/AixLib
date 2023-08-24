@@ -106,7 +106,7 @@ model TWWAdd_on
     annotation (Placement(transformation(extent={{-10,10},{12,-12}},
         rotation=90,
         origin={-16,0})));
-  AixLib.Controls.Continuous.LimPID conPID2(controllerType=Modelica.Blocks.Types.SimpleController.PID)
+  AixLib.Controls.Continuous.LimPID conPID2(controllerType=Modelica.Blocks.Types.SimpleController.PI)
     "ControlUnit_Durchflussbegrenzer"
     annotation (Placement(transformation(extent={{-64,-80},{-46,-98}})));
   Modelica.Blocks.Sources.RealExpression dTWaterNom3(y=Q_nom/(Medium.cp_const*(
@@ -119,7 +119,7 @@ model TWWAdd_on
         AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
-  AixLib.Controls.Continuous.LimPID conPID(controllerType=Modelica.Blocks.Types.SimpleController.PID)
+  AixLib.Controls.Continuous.LimPID conPID(controllerType=Modelica.Blocks.Types.SimpleController.PI)
     annotation (Placement(transformation(extent={{122,10},{142,30}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(
     p(start=Medium.p_default),

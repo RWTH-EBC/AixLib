@@ -643,8 +643,8 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(points={{-210,0},{-166,0},{-90,0}},  color={28,108,200}),
-        Rectangle(visible=usePreheater, extent={{-164,38},{-116,-40}}, lineColor
-            = {0,0,0},
+        Rectangle(visible=usePreheater, extent={{-164,38},{-116,-40}}, lineColor=
+              {0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Rectangle(extent={{-4,38},{44,-40}}, lineColor={0,0,0}),

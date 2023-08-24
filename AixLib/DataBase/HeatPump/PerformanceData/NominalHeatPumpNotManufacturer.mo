@@ -45,7 +45,6 @@ model NominalHeatPumpNotManufacturer
     final readFromFile=true,
     final filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
-
     final dataset="\COP",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -102,7 +101,6 @@ model NominalHeatPumpNotManufacturer
     final readFromFile=true,
     final filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf"),
-
     final dataset="\PI",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -168,7 +166,6 @@ model NominalHeatPumpNotManufacturer
     final readFromFile=true,
     final filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
-
     final dataset="\T_mean_comp",
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -179,12 +176,12 @@ model NominalHeatPumpNotManufacturer
         extent={{-12,-12},{12,12}},
         rotation=0,
         origin={12,-104})));
+
   SDF.NDTable SDF_T_Design(
     final nin=4,
     final readFromFile=true,
     final filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
-
     final dataset="\T_mean_comp",
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -195,6 +192,7 @@ model NominalHeatPumpNotManufacturer
         extent={{-12,-12},{12,12}},
         rotation=0,
         origin={36,110})));
+
   Modelica.Blocks.Math.Product product3
     annotation (Placement(transformation(extent={{104,20},{124,40}})));
   Modelica.Blocks.Math.Product product4

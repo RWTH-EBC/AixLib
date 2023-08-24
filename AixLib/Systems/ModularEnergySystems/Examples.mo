@@ -122,62 +122,92 @@ package Examples "Holds examples for the modular energy system units"
   end HeatPump;
 
   model Boiler
-     extends
-      AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
-      vol(
-        T_start=293.15,
-        m_flow_nominal=1, nPorts=2),
-      TSpeicher(y=80 + 273.15),
-      sine(
-        amplitude=50000,
-        f=1/9000,
-        offset=-75000),
-      bou(nPorts=1));
-    Interfaces.BoilerControlBus boilerControlBus
-      annotation (Placement(transformation(extent={{-122,8},{-102,28}})));
-    Modules.ModularBoiler.ModularBoiler2 modularBoiler2_1(T_cold_nom=333.15,
-        Q_nom=150000)
-      annotation (Placement(transformation(extent={{-44,-2},{-24,18}})));
+
     Fluid.Sources.Boundary_pT
-                        bou1(
-      nPorts=1,
+                        bou(
       use_T_in=false,
-      redeclare package Medium = AixLib.Media.Water)
-      annotation (Placement(transformation(extent={{-70,-74},{-50,-54}})));
+      redeclare package Medium = Media.Water,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{32,-4},{52,16}})));
     Fluid.Sources.Boundary_pT
                         bou2(
-      nPorts=1,
       use_T_in=false,
-      redeclare package Medium = AixLib.Media.Water)
-      annotation (Placement(transformation(extent={{-24,-74},{-4,-54}})));
+      redeclare package Medium = Media.Water,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{20,-42},{40,-22}})));
+    Fluid.Sources.Boundary_pT
+                        bou3(
+      use_T_in=false,
+      redeclare package Medium = Media.Water,
+      T=333.15,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{-58,-12},{-38,8}})));
+    Modules.ModularBoiler.BoilerModular boilerModular(
+      dT_w_nom=dT_w_nom,
+      T_cold_nom=T_cold_nom,
+      Q_nom=Q_nom)
+      annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    Interfaces.BoilerControlBus
+      boilerControlBus
+      annotation (Placement(transformation(extent={{-12,10},{8,30}})));
+    Modules.ModularBoiler.Control control(T_cold_nom=T_cold_nom)
+      annotation (Placement(transformation(extent={{-30,60},{-10,80}})));
+    parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=20
+      "Nominal temperature difference of flow and return";
+    parameter Modelica.Units.SI.Temperature T_cold_nom=333.15
+      "Return temperature";
+    parameter Modelica.Units.SI.HeatFlowRate Q_nom=10000
+      "Nominal heat flow rate";
+    Fluid.Sources.MassFlowSource_T        bouEvap_a(
+      redeclare package Medium = AixLib.Media.Water,
+      use_m_flow_in=true,
+      m_flow=1,
+      use_T_in=false,
+      T=283.15,
+      nPorts=1) annotation (Placement(transformation(extent={{-70,-10},{-42,-38}})));
+    Modelica.Blocks.Sources.Sine sine(
+      f=1/3600,
+      offset=0.0250,
+      amplitude=0.025,
+      startTime=2000) "water mass flow"
+      annotation (Placement(transformation(extent={{-154,-34},{-134,-14}})));
+    Modelica.Blocks.Sources.RealExpression TSupSet(y=75 + 273.15)
+      "set point supply temperature"
+      annotation (Placement(transformation(extent={{-110,22},{-78,42}})));
   equation
-    connect(boilerControlBus, modularBoiler2_1.boilerControlBus) annotation (
-        Line(
-        points={{-112,18},{-34,18}},
+    connect(boilerControlBus, boilerModular.boilerControlBus) annotation (Line(
+        points={{-2,20},{-2,16},{2,16},{2,10}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(modularBoiler2_1.port_b, vol.ports[1]) annotation (Line(points={{
-            -24,8},{-12,8},{-12,6},{46,6},{46,4}}, color={0,127,255}));
-    connect(bou.ports[1], modularBoiler2_1.port_a) annotation (Line(points={{0,
-            -40},{8,-40},{8,-38},{12,-38},{12,-12},{-78,-12},{-78,8},{-44,8}},
-          color={0,127,255}));
-    connect(vol.ports[2], modularBoiler2_1.port_a) annotation (Line(points={{46,
-            4},{46,-10},{-66,-10},{-66,8},{-44,8}}, color={0,127,255}));
-    connect(bou1.ports[1], modularBoiler2_1.port_a1) annotation (Line(points={{
-            -50,-64},{-44,-64},{-44,0}}, color={0,127,255}));
-    connect(modularBoiler2_1.port_b1, bou2.ports[1]) annotation (Line(points={{
-            -24,0},{-12,0},{-12,-2},{-4,-2},{-4,-64}}, color={0,127,255}));
-    connect(TSpeicher.y, boilerControlBus.TSupplySet) annotation (Line(points={
-            {-138.4,-58},{-138.4,18.05},{-111.95,18.05}}, color={0,0,127}),
-        Text(
-        string="%second",
-        index=1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
+    connect(boilerModular.port_b, bou.ports[1]) annotation (Line(points={{12,0},
+            {28,0},{28,-8},{56,-8},{56,6},{52,6}}, color={0,127,255}));
+    connect(bou3.ports[1], boilerModular.port_a) annotation (Line(points={{-38,
+            -2},{-36,-2},{-36,0},{-8,0}}, color={0,127,255}));
+    connect(boilerModular.port_b1, bou2.ports[1]) annotation (Line(points={{12,
+            -8},{46,-8},{46,-32},{40,-32}}, color={0,127,255}));
+    connect(control.boilerControlBus, boilerControlBus) annotation (Line(
+        points={{-10,70},{-2,70},{-2,20}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(bouEvap_a.ports[1], boilerModular.port_a1) annotation (Line(points=
+            {{-42,-24},{-28,-24},{-28,-26},{-16,-26},{-16,-8},{-8,-8}}, color={
+            0,127,255}));
+    connect(sine.y, bouEvap_a.m_flow_in) annotation (Line(points={{-133,-24},{
+            -72.8,-24},{-72.8,-35.2}}, color={0,0,127}));
+    connect(TSupSet.y, boilerControlBus.TSupplySet) annotation (Line(points={{-76.4,
+            32},{-18,32},{-18,20},{-2,20}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=10000));

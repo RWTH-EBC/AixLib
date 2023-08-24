@@ -20,9 +20,9 @@ model BoilerGeneric "Generic performance map based boiler"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.Controllers.OperationEfficiency operatingEfficiency(
+    dTNom=dTNom,
     TRetNom=TRetNom,
-    Q_nom=QNom,
-    dT_w_nom=dTNom) "Performance map for efficiency during operation"
+    QNom=QNom)      "Performance map for efficiency during operation"
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(
@@ -32,7 +32,7 @@ model BoilerGeneric "Generic performance map based boiler"
         rotation=180,
         origin={-38,-34})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
-        displayUnit="K") = 283.15) "Temperature of environment around the boiler to account for heat losses"
+        displayUnit="K") = 293.15) "Temperature of environment around the boiler to account for heat losses"
     annotation (Placement(transformation(extent={{14,-40},{2,-28}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-26,-28},{-14,-40}})));
@@ -41,9 +41,9 @@ model BoilerGeneric "Generic performance map based boiler"
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   BaseClasses.Controllers.NominalFuelConsumption nominalFuelConsumption(
-    T_cold_nom=TRetNom,
-    Q_nom=QNom,
-    dT_w_nom=dTNom) "Nominal fuel consumption"
+    dTNom=dTNom,
+    TRetNom=TRetNom,
+    QNom=QNom)      "Nominal fuel consumption"
     annotation (Placement(transformation(extent={{-56,24},{-36,44}})));
   Modelica.Blocks.Math.Product fuelConsumption
     "Fuel consumption during operation"

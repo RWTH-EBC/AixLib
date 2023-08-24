@@ -41,13 +41,14 @@ model NominalFuelConsumption "Estimates nominal fuel consumption"
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/Boiler/General/Boiler_Eta_4D.sdf"),
-    dataset="/ETA_Kennfeld",
+        "modelica://AixLib/DataBase/Boiler/General/Boiler_Generic_Performance_Map.sdf"),
+    dataset="/Performance_Map",
     dataUnit="-",
-    scaleUnits={"degC","-","-","K"},
+    scaleUnits={"K","-","-","K"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
-    extrapMethod=SDF.Types.ExtrapolationMethod.None)
+    extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
     annotation (Placement(transformation(extent={{54,-16},{74,4}})));
+
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-32,64},{-12,84}})));
 
