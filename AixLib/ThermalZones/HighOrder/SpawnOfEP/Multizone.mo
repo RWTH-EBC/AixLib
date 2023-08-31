@@ -3,7 +3,7 @@ model Multizone
 
   parameter Integer nZones= 1
                              "Number of zones";
-  parameter Integer nPorts=1
+  parameter Integer nPorts=0
     "Number of fluid ports (equals to 2 for one inlet and one outlet)"
     annotation (Evaluate=true,Dialog(connectorSizing=true,tab="General",group="Ports"));
   replaceable package Medium=Buildings.Media.Air
@@ -17,7 +17,7 @@ model Multizone
     zoneName=zoneNames,
     redeclare package Medium = Medium,
     use_C_flow=use_C_flow,
-    nPorts=nPorts)
+    each nPorts=nPorts)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temAir[nZones]
     "Air temperature sensor"
@@ -31,7 +31,7 @@ model Multizone
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b portsExt[nZones,nPorts](
      redeclare each package Medium = Medium) "Fluid inlets and outlets"
-    annotation (Placement(transformation(
+    annotation (Dialog(connectorSizing=true),Placement(transformation(
         extent={{40,-10},{-40,10}},
         rotation=180,
         origin={2,-94}), iconTransformation(
