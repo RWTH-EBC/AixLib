@@ -25,6 +25,9 @@ The latest version is always available on the [release page](https://github.com/
 
 We continuously improve **AixLib** and try to keep the community up-to-date with citable papers:
 
+- AixLib: an open-source Modelica library for compound building energy systems from component to district level with automated quality management.
+  Maier L., Jansen D., Wüllhorst F., Kremer M., Kümpel A., Blacha T., Müller D..
+  Journal of Building Performance Simulation, https://doi.org/10.1080/19401493.2023.2250521
 - AixLib - An Open-Source Modelica Library within the IEA-EBC Annex 60 Framework.
   Müller D., Lauster M., Constantin A., Fuchs M., Remmen P..
   BauSIM 2016, p.3–9, September 2016.
