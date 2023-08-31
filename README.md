@@ -30,18 +30,18 @@ Starting with the Dymola 2021x version, the MSL 4.0 is included and automaticall
 We continuously improve **AixLib** and try to keep the community up-to-date with citable papers.
 Please use the following article for citations when using or enhancing AixLib.
 
-@article{doi:10.1080/19401493.2023.2250521,
-author = {Laura Maier and David Jansen and Fabian Wüllhorst and Martin Kremer and Alexander Kümpel and Tobias Blacha and Dirk Müller},
-title = {AixLib: an open-source Modelica library for compound building energy systems from component to district level with automated quality management},
-journal = {Journal of Building Performance Simulation},
-volume = {0},
-number = {0},
-pages = {1-24},
-year  = {2023},
-publisher = {Taylor & Francis},
-doi = {10.1080/19401493.2023.2250521},
-URL = {https://doi.org/10.1080/19401493.2023.2250521},
-eprint = {https://doi.org/10.1080/19401493.2023.2250521}
+@article{doi:10.1080/19401493.2023.2250521,<br>
+author = {Laura Maier and David Jansen and Fabian Wüllhorst and Martin Kremer and Alexander Kümpel and Tobias Blacha and Dirk Müller},<br>
+title = {AixLib: an open-source Modelica library for compound building energy systems from component to district level with automated quality management},<br>
+journal = {Journal of Building Performance Simulation},<br>
+volume = {0},<br>
+number = {0},<br>
+pages = {1-24},<br>
+year  = {2023},<br>
+publisher = {Taylor & Francis},<br>
+doi = {10.1080/19401493.2023.2250521},<br>
+URL = {https://doi.org/10.1080/19401493.2023.2250521},<br>
+eprint = {https://doi.org/10.1080/19401493.2023.2250521}<br>
 }
 
 ## Publications using AixLib
