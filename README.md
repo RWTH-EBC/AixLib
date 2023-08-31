@@ -1,5 +1,7 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
 
+[![DOI](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/add-open-modelica-badge-ci/badge_file/om_readyness_badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/add-open-modelica-badge-ci/badge_file/om_readyness_badge.svg)
+
 # AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  
