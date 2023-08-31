@@ -27,12 +27,22 @@ Starting with the Dymola 2021x version, the MSL 4.0 is included and automaticall
 
 ## How to cite AixLib
 
-We continuously improve **AixLib** and try to keep the community up-to-date with citable papers:
+We continuously improve **AixLib** and try to keep the community up-to-date with citable papers.
+Please use the following article for citations when using or enhancing AixLib.
 
-- AixLib - An Open-Source Modelica Library within the IEA-EBC Annex 60 Framework.
-  Müller D., Lauster M., Constantin A., Fuchs M., Remmen P..
-  BauSIM 2016, p.3–9, September 2016.
-  [link](http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf)
+@article{doi:10.1080/19401493.2023.2250521,
+author = {Laura Maier and David Jansen and Fabian Wüllhorst and Martin Kremer and Alexander Kümpel and Tobias Blacha and Dirk Müller},
+title = {AixLib: an open-source Modelica library for compound building energy systems from component to district level with automated quality management},
+journal = {Journal of Building Performance Simulation},
+volume = {0},
+number = {0},
+pages = {1-24},
+year  = {2023},
+publisher = {Taylor & Francis},
+doi = {10.1080/19401493.2023.2250521},
+URL = {https://doi.org/10.1080/19401493.2023.2250521},
+eprint = {https://doi.org/10.1080/19401493.2023.2250521}
+}
 
 ## Publications using AixLib
 
