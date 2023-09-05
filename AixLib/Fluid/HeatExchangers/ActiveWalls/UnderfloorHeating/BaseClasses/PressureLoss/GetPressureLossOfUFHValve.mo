@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHValve
   "Function to evaluate the pressure loss for regulating valve of heating circuit."
   input Modelica.Units.SI.VolumeFlowRate vol_flow "Volume flow rate";
@@ -32,7 +32,8 @@ algorithm
 </p>
 <p>
   <img src=
-  \"modelica://UnderfloorHeating/Resources/PressureLossOfUFHValve.png\">
+  \"modelica://UnderfloorHeating/Resources/PressureLossOfUFHValve.png\"
+  alt=\"1\">
 </p>
 <p>
   [1] SCHÜTZ ENERGY SYSTEMS: Heizkreisverteiler: Montageanleitung/-
