@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHDistributor
   "Function to evaluate the pressure loss for a given number of heating circuit distributor outlets."
   input Modelica.Units.SI.VolumeFlowRate vol_flow "Volume flow rate";
@@ -40,7 +40,8 @@ algorithm
 </p>
 <p>
   <img src=
-  \"modelica://UnderfloorHeating/Resources/PressureLossOfUFHDistributor.png\">
+  \"modelica://UnderfloorHeating/Resources/PressureLossOfUFHDistributor.png\"
+  alt=\"1\">
 </p>
 <p>
   [1] SCHÜTZ ENERGY SYSTEMS: Heizkreisverteiler: Montageanleitung/-
