@@ -1,5 +1,5 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
-model NominalHeatPumpNotManufacturer
+within AixLib.DataBase.HeatPump.PerformanceData.BaseClasses;
+model DesignGenericHP
 
   parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
@@ -11,7 +11,6 @@ model NominalHeatPumpNotManufacturer
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
      parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
-
 
   Modelica.Blocks.Math.Division NomPel "Nominal electric Power"
     annotation (Placement(transformation(extent={{116,66},{136,86}})));
@@ -105,7 +104,7 @@ model NominalHeatPumpNotManufacturer
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for PressureRatio" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
@@ -119,7 +118,7 @@ model NominalHeatPumpNotManufacturer
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for PressureRatio" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
@@ -333,4 +332,4 @@ equation
     Documentation(info="<html>
 <p>Auslegung des Betriebspunktes indem die maximale elektrische Leistung vorliegt</p>
 </html>"));
-end NominalHeatPumpNotManufacturer;
+end DesignGenericHP;

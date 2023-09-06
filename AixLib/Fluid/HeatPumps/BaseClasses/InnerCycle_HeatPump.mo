@@ -20,9 +20,8 @@ model InnerCycle_HeatPump
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
-  DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim
+  DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric
     lookUpTableNDNotManufacturerHeating(
-    THotMax=THotMax,
     THotNom=THotNom,
     TSourceNom=TSourceNom,
     QNom=QNom,
@@ -30,18 +29,10 @@ model InnerCycle_HeatPump
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
     TSourceInternal=TSourceInternal,
-    Modulating=Modulating)              if use_non_manufacturer
+    Modulating=Modulating) if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
-  PerDataMainHP PerformanceDataHPHeating(
-    THotMax=THotMax,
-    THotNom=THotNom,
-    TSourceNom=TSourceNom,
-    QNom=QNom,
-    DeltaTCon=DeltaTCon,
-    DeltaTEvap=DeltaTEvap,
-    TSource=TSource,
-    Modulating=Modulating)               if not use_non_manufacturer
+  PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
   annotation (Placement(transformation(
   extent={{-17,20},{37,76}},rotation=0)));
   PerDataRevHP PerformanceDataHPCooling if use_rev and not use_non_manufacturer

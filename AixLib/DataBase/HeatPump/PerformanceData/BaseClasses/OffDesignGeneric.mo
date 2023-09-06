@@ -1,15 +1,11 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
-model COPNotManufacturer
-
+within AixLib.DataBase.HeatPump.PerformanceData.BaseClasses;
+model OffDesignGeneric
 
     parameter Boolean TSourceInternal=false
                                           "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
    parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
-  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
 
@@ -83,8 +79,6 @@ model COPNotManufacturer
         rotation=0,
         origin={-120,-90})));
 
-
-
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=100, uMin=20)
     annotation (Placement(transformation(extent={{-56,20},{-36,40}})));
 equation
@@ -127,4 +121,4 @@ equation
           extent={{-4,108},{96,64}},
           lineColor={28,108,200},
           textString="TSource konst oder variabel")}));
-end COPNotManufacturer;
+end OffDesignGeneric;

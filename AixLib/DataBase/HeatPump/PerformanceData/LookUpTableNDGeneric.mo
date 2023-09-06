@@ -1,41 +1,37 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model LookUpTableNDNotManufacturerSlim
-  "4-dimensional table without manufacturer data for heat pump"
+model LookUpTableNDGeneric "Generic performance map characteristic"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   // Not Manufacturer
-  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
-  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
+
+  parameter Modelica.Units.SI.Temperature THotNom=THotNom "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=TSourceNom "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=QNom "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=DeltaTCon "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=DeltaTEvap "Temperature difference heat source evaporator"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-   parameter Boolean TSourceInternal=false
+  parameter Modelica.Units.SI.Temperature TSource=TSource "temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+   parameter Boolean TSourceInternal=TSourceInternal
                                           "Use internal TSource?"
-    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+    annotation (Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
 
-    parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
+    parameter Boolean Modulating=Modulating "Is the heat pump inverter-driven?";
 
-  NominalHeatPumpNotManufacturer NominalCOP(
+  BaseClasses.DesignGenericHP design(
     THotNom=THotNom,
     TSourceNom=TSourceNom,
     QNom=QNom,
     DeltaTCon=DeltaTCon,
-    Modulating=Modulating)
-                         "Nominal Operating"
+    Modulating=Modulating) "design operation"
     annotation (Placement(transformation(extent={{40,40},{20,60}})));
   Modelica.Blocks.Math.Add addQEvap(k1=-1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -50,11 +46,10 @@ model LookUpTableNDNotManufacturerSlim
         rotation=-90,
         origin={-80,-54})));
 
-  COPNotManufacturer ActualCOP(
+  BaseClasses.OffDesignGeneric offDesign(
     TSourceInternal=TSourceInternal,
-    TSource=TSource,
-    PLRMin=PLRMin) "Actual operating is represented" annotation (Placement(
-        transformation(
+    TSource=TSource)
+                   "off design operation" annotation (Placement(transformation(
         extent={{-10,-20},{10,20}},
         rotation=270,
         origin={-80,64})));
@@ -85,7 +80,7 @@ equation
   connect(QEva, QEva)
     annotation (Line(points={{80,-110},{80,-110}}, color={0,0,127}));
 
-  connect(sigBus.TConInMea, ActualCOP.tConIn) annotation (Line(
+  connect(sigBus.TConInMea,offDesign. tConIn) annotation (Line(
       points={{-0.925,100.07},{-0.925,102},{-86,102},{-86,76}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -93,7 +88,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ActualCOP.COP, productQCon.u2) annotation (Line(points={{-80,52.8},{
+  connect(offDesign.COP, productQCon.u2) annotation (Line(points={{-80,52.8},{
           -80,-38},{-86,-38},{-86,-42}}, color={0,0,127}));
   connect(PelOnOff.y, productQCon.u1) annotation (Line(points={{-6.66134e-16,
           -33},{-6.66134e-16,-36},{-74,-36},{-74,-42}}, color={0,0,127}));
@@ -105,7 +100,7 @@ equation
     annotation (Line(points={{80,-97},{80,-110}}, color={0,0,127}));
   connect(PelOnOff.y, Pel)
     annotation (Line(points={{-6.66134e-16,-33},{0,-110}}, color={0,0,127}));
-  connect(sigBus.TConOutMea, ActualCOP.tConOut) annotation (Line(
+  connect(sigBus.TConOutMea,offDesign. tConOut) annotation (Line(
       points={{-0.925,100.07},{-38,100.07},{-38,102},{-98,102},{-98,76}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -113,7 +108,7 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.TEvaInMea, ActualCOP.tSource) annotation (Line(
+  connect(sigBus.TEvaInMea,offDesign. tSource) annotation (Line(
       points={{-0.925,100.07},{-0.925,94},{-62,94},{-62,76}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -128,7 +123,7 @@ equation
 
   connect(one.y, switch1.u3)
     annotation (Line(points={{99.1,50},{80,50},{80,36}},  color={0,0,127}));
-  connect(sigBus, NominalCOP.sigBus) annotation (Line(
+  connect(sigBus, design.sigBus) annotation (Line(
       points={{-1,100},{-2,100},{-2,50},{19.95,50}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -136,10 +131,9 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(NominalCOP.PelFullLoadSetPoint, productPel.u2)
-    annotation (Line(points={{18.8,48.25},{14,48.25},{14,28}},
-                                                        color={0,0,127}));
-  connect(sigBus.frequency, ActualCOP.frequency) annotation (Line(
+  connect(design.PelFullLoadSetPoint, productPel.u2) annotation (Line(points={{18.8,
+          48.25},{14,48.25},{14,28}}, color={0,0,127}));
+  connect(sigBus.frequency,offDesign. frequency) annotation (Line(
       points={{-0.925,100.07},{-74,100.07},{-74,76}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -172,7 +166,7 @@ equation
   connect(zero3.y, PelOnOff.u3)
     annotation (Line(points={{-30.6,-13},{-30.6,-14},{-18,-14},{-18,-10},{-8,
           -10}},                                         color={0,0,127}));
-  connect(ActualCOP.COP, sigBus.COP) annotation (Line(points={{-80,52.8},{-80,
+  connect(offDesign.COP, sigBus.COP) annotation (Line(points={{-80,52.8},{-80,
           40},{-32,40},{-32,100.07},{-0.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -258,4 +252,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end LookUpTableNDNotManufacturerSlim;
+end LookUpTableNDGeneric;

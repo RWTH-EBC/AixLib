@@ -29,8 +29,6 @@ model InnerCycle_HeatPumpNonManufacturer
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
-  DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturer PerformanceDataHPHeatingNonManufacturer
-    annotation (Placement(transformation(extent={{7,20},{61,76}}, rotation=0)));
   Modelica.Blocks.Math.Gain gainEva(final k=-1)
     "Negate QEva to match definition of heat flow direction" annotation (
       Placement(transformation(

@@ -5,9 +5,6 @@ PolynomalApproach
 VCLibMap
 calcCOP
 BaseClasses
-LookUpTableNDNotManufacturer
-NominalHeatPumpNotManufacturer
-LookUpTableNDNotManufacturerSlim
-COPNotManufacturer
+LookUpTableNDGeneric
 CarnotCOP
 GeneralThermodynamic

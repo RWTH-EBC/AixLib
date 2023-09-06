@@ -4,24 +4,21 @@ package Examples "Holds examples for the modular energy system units"
   model HeatPump
 
     Modules.ModularHeatPump.ModularHeatPump modularHeatPumpNew(
-      THotNom=318.15,
-      TSourceNom=278.15,
-      QNom=1.5*QNom,
-      PLRMin=0.4,
+      THotDes=591.65,
+      TSourceDes=551.3,
+      QDes=1.5*QNom,
       DeltaTCon=DeltaTCon,
       TCon_start=313.15,
       TSourceInternal=true,
       redeclare package MediumEvap = AixLib.Media.Water,
       use_non_manufacturer=true,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim)
+          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric)
       annotation (Placement(transformation(extent={{40,-16},{60,4}})));
     .AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
       annotation (Placement(transformation(extent={{-20,-30},{10,4}}),
           iconTransformation(extent={{-8,-22},{10,4}})));
 
-    inner Modelica.Fluid.System system(p_start=system.p_ambient)
-      annotation (Placement(transformation(extent={{80,80},{100,100}})));
     Modelica.Blocks.Sources.Sine sine1(
       amplitude=QNom*0.15,
       f=1/(3600*24),
@@ -386,15 +383,14 @@ package Examples "Holds examples for the modular energy system units"
 
   model HeatPump_Basic
     Modules.ModularHeatPump.ModularHeatPump modularHeatPump(
-      THotNom=308.15,
-      TSourceNom=283.15,
-      QNom=54730,
-      PLRMin=0.3,
+      THotDes(displayUnit="K") = 308.15,
+      TSourceDes(displayUnit="K") = 283.15,
+      QDes=54730,
       DeltaTCon=5,
       TSourceInternal=false,
       dpInternal=10000,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim)
+          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Fluid.Sources.Boundary_pT        bou(
       redeclare package Medium = AixLib.Media.Water,

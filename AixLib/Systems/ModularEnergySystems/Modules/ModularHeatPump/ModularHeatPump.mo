@@ -90,9 +90,6 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     Modulating=Modulating)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
 
-  inner Modelica.Fluid.System system(p_start=system.p_ambient)
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
-
   Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
         Media.Water)        annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
