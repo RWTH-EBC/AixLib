@@ -179,7 +179,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     L_Shield=L_Win_Shield,
     H_Window_min=H_Win_Shadow_min,
     H_Window_max=H_Win_Shadow_max,
-    azi_deg=azi_deg)               if withWindow and outside and withShield
+    azi_deg=azi_deg_Win)           if withWindow and outside and withShield
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
     annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
