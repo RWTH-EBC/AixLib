@@ -1,10 +1,10 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
-model ShadowEff "Shadow effect of shield"
+model ShadowEff "Shadow effect of horizotal shield, reducing the solar radiation through the window"
   parameter Integer Mode = 1
     "Diffuse radiation calculation mode,
-    1=Constant reduce factor for diffuse radiation (infinite length of shield),
-    2=Constant reduce factor for diffuse radiation (on perpendicular direction),
-    3=Constant reduce factor for diffuse radiation (on perpendicular direction without integration),
+    1=Constant reduce factor for diffuse radiation (infinite width of shield),
+    2=Constant reduce factor for diffuse radiation (only considering perpendicular direction),
+    3=Constant reduce factor for diffuse radiation (only considering perpendicular direction without integration),
     else=Use same reduce factor g_Shadow as direct radiation (no diffuse radiation when no shadow effect)";
   parameter Modelica.Units.SI.Length L_Shield = 0.3 "Horizontal length of the sun shield";
   parameter Modelica.Units.SI.Length H_Window_min = 0.1 "Distance from shield to upper border of window";

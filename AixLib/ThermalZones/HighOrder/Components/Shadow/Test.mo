@@ -4,7 +4,8 @@ model Test
   ShadowLength shadowLength
     annotation (Placement(transformation(extent={{40,60},{80,100}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "D:/jji/Gitce/ebc0268_aif_smart_ventilation_nk/Sim_2023/WeatherData/TRY2015_507931060546_Jahr_City_Aachen.mos")
+        ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   ShadowEff shadowEff1
     annotation (Placement(transformation(extent={{40,20},{80,60}})));

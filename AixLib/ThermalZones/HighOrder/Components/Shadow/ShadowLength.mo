@@ -1,6 +1,6 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowLength
-  "Calculate the shadow length on vertical surface by horizontal shield"
+  "Calculate the shadow length on the vertical surface by a horizontal shield"
   parameter Modelica.Units.NonSI.Angle_deg azi_deg = -54.00 "Surface azimuth, S=0°, W=90°, N=180°, E=-90°";
   parameter Modelica.Units.SI.Length L_Shield = 0.300 "Horizontal length of the sun shield";
 
@@ -39,7 +39,7 @@ equation
   else
     With_Shadow = true;
   end if;
-  H_Shadow = L_Shield/(tan(zen.zen)*cos(wallSolAzi.verAzi));
+  H_Shadow = L_Shield/(tan(zen.zen)*cos(wallSolAzi.verAzi)); //H_Shadow = L_Shield * tan(VSA)
 
   connect(weaBus.solZen, altAng.zen) annotation (Line(
       points={{-100,0},{-80,0},{-80,70},{-62,70}},

@@ -1,21 +1,6 @@
-within AixLib.ThermalZones.HighOrder.Components.Walls;
+﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
-  //New parameter and module
-  parameter Boolean withShield = false;
-  parameter Modelica.Units.SI.Length L_Win_Shield = 0.05;
-  parameter Modelica.Units.SI.Length H_Win_Shadow_min = 0.05 "Distance from shield to upper border of window";
-  parameter Modelica.Units.SI.Length H_Win_Shadow_max = 1.10 "Distance from shield to lower border of window";
-  parameter Integer shadowMode = 1 "Shadow mode";
-  Shadow.ShadowEff shadowEff(
-    Mode=shadowMode,
-    L_Shield=L_Win_Shield,
-    H_Window_min=H_Win_Shadow_min,
-    H_Window_max=H_Win_Shadow_max) if withWindow and outside and withShield
-    annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
-  BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
-    annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
-        iconTransformation(extent={{-29,-90},{-9,-70}})));
 
   //Type parameter
   parameter Boolean outside = true
@@ -103,7 +88,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
       enable=calcMethodIn == 3));
   // window parameters
   parameter Boolean withWindow=false
-    "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
+    "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", group="Window", enable = outside));
   replaceable model WindowModel =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
    constrainedby
@@ -113,28 +98,34 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
      final windowarea=windowarea,
      final WindowType=WindowType)
        "Model for window"
-                     annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true);
+                     annotation (Dialog(tab="Window", group="Window", enable=withWindow and outside),   choicesAllMatching=true);
 
   WindowModel windowModel if withWindow and outside annotation(Placement(transformation(extent={{-15,-48},{11,-22}})));
 
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
-    "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
+    "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", group="Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.Units.SI.Area windowarea=2 "Area of window"
-    annotation (Dialog(tab="Window", enable=withWindow and outside));
+    annotation (Dialog(tab="Window", group="Window", enable=withWindow and outside));
   replaceable model CorrSolarGainWin =
       WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
+    constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", group="Window", enable = withWindow and outside));
 
-  parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
-  parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+  parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", group="Sunblind", enable = outside and withWindow));
+  parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", group="Sunblind", enable = withWindow and outside and withSunblind));
   parameter Real LimitSolIrr if withWindow and outside and withSunblind
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
-    annotation(Dialog(tab="Window",   enable=withWindow and outside and
-          withSunblind));
+    annotation(Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
   parameter Modelica.Units.SI.Temperature TOutAirLimit
     if withWindow and outside and withSunblind
     "Temperature at which sunblind closes (see also LimitSolIrr)" annotation (
-      Dialog(tab="Window", enable=withWindow and outside and withSunblind));
+      Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
+  //New parameter and module fow shadow model
+  parameter Boolean withShield = false "enable shadow effect?" annotation(Dialog(tab = "Window", group="Shadow", enable = outside and withWindow and withSunblind));
+  parameter Modelica.Units.SI.Length L_Win_Shield = 0.05 "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length H_Win_Shadow_min = 0.05 "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length H_Win_Shadow_max = 1.10 "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.NonSI.Angle_deg azi_deg_Win = -54 "Window glazing azimuth, S=0°, W=90°, N=180°, E=-90°" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+
   // door parameters
   parameter Boolean withDoor=false   "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_door=1.8
@@ -182,7 +173,17 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     final Imax=LimitSolIrr,
     final TOutAirLimit=TOutAirLimit)
                       if outside and withWindow and withSunblind
-    annotation (Placement(transformation(extent={{-46,-47},{-23,-21}})));
+    annotation (Placement(transformation(extent={{-52,-44},{-36,-28}})));
+  Shadow.ShadowEff shadowEff(
+    Mode=1,
+    L_Shield=L_Win_Shield,
+    H_Window_min=H_Win_Shadow_min,
+    H_Window_max=H_Win_Shadow_max,
+    azi_deg=azi_deg)               if withWindow and outside and withShield
+    annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
+  BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
+    annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
+        iconTransformation(extent={{-29,-90},{-9,-70}})));
   WindowsDoors.Door Door(
     final door_area=door_height*door_width,
     final eps=eps_door,
@@ -289,7 +290,7 @@ equation
   if outside and withWindow and withSunblind then
     if withShield then
       connect(weaBus, shadowEff.weaBus) annotation (Line(
-      points={{-19,-80},{-40,-80},{-40,-2},{-20,-2}},
+      points={{-19,-80},{-76,-80},{-76,-2},{-40,-2}},
       color={255,204,51},
       thickness=0.5,
           pattern=LinePattern.Dash),
@@ -299,24 +300,25 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
       connect(windowModel.solarRad_in, shadowEff.solarRad_out) annotation (Line(
-        points={{-13.7,-27.2},{-16,-27.2},{-16,-20},{4,-20},{4,-10},{1,-10}},
+        points={{-13.7,-27.2},{-16,-27.2},{-16,-10},{-19,-10}},
         color={255,128,0},
           pattern=LinePattern.Dash));
-      connect(Sunblind.Rad_Out[1], shadowEff.solarRad_in) annotation (Line(points={{
-          -21.5625,-32.375},{-21,-32.375},{-21,-10}}, color={255,128,0},
+      connect(Sunblind.Rad_Out[1], shadowEff.solarRad_in) annotation (Line(points={{-35,-35},
+              {-32,-35},{-32,-20},{-44,-20},{-44,-10},{-41,-10}},
+                                                      color={255,128,0},
           pattern=LinePattern.Dash));
     else
-      connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}}, color={255,128,
+      connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-35,-35},
+              {-32,-35},{-32,-34},{-28,-34},{-28,-27.2},{-13.7,-27.2}},                                                                           color={255,128,
               0},
           pattern=LinePattern.Dash));
     end if;
-    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
-                                                                                                                                   color = {255, 128, 0}));
+    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-53,-35},
+            {-54,-35},{-54,89},{-106,89}},                                                                                         color = {255, 128, 0}));
   end if;
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-61.6,
-          -40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
-                                                      color={0,0,127}));
+          -40},{-61.6,-39},{-53,-39}},                color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
                                         color={191,0,0}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
