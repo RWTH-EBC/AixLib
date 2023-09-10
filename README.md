@@ -36,8 +36,8 @@ pages = {1-24},<br>
 year  = {2023},<br>
 publisher = {Taylor & Francis},<br>
 doi = {10.1080/19401493.2023.2250521},<br>
-URL = {https://doi.org/10.1080/19401493.2023.2250521},<br>
-eprint = {https://doi.org/10.1080/19401493.2023.2250521}<br>
+URL = {https://doi.org/10.1080/19401493.2023.2250521 },<br>
+eprint = {https://doi.org/10.1080/19401493.2023.2250521 }<br>
 }
 
 ## Publications using AixLib
