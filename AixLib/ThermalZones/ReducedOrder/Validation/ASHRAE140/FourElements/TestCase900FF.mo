@@ -22,8 +22,8 @@ model TestCase900FF "Test case 900 free floating"
     azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[4](til
-      ={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949}, azi={
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[4](til=
+       {1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949}, azi={
         0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
@@ -171,8 +171,8 @@ model TestCase900FF "Test case 900 free floating"
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1]
-    (til={0}, azi={0})
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+     til={0}, azi={0})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](til={0},

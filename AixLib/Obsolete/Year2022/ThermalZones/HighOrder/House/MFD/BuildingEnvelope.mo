@@ -27,14 +27,12 @@ package BuildingEnvelope
     replaceable model WindowModel =
         AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
       constrainedby
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-                                                                                                    annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow               annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
 
     replaceable model CorrSolarGainWin =
         AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
       constrainedby
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-                                                                                                                      "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG               "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
     AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo
       Livingroom(
@@ -139,8 +137,8 @@ package BuildingEnvelope
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Kitchen annotation(Placement(transformation(extent = {{100, -96}, {120, -76}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermLivingroom annotation(Placement(transformation(extent = {{-60, 12}, {-44, 28}}), iconTransformation(extent = {{-56, 14}, {-44, 28}})));
     AixLib.Utilities.Interfaces.RadPort StarLivingroom annotation (Placement(
-          transformation(extent={{-40,12},{-24,28}}), iconTransformation(extent
-            ={{-40,0},{-24,14}})));
+          transformation(extent={{-40,12},{-24,28}}), iconTransformation(extent=
+             {{-40,0},{-24,14}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren annotation(Placement(transformation(extent={{34,28},
               {50,44}}),                                                                                                                  iconTransformation(extent={{34,28},
               {50,44}})));
