@@ -71,55 +71,253 @@ equation
           {-62,100},{-62,68.96}},          color={0,0,127}));
   connect(Irradiation, pVT_SolarThermalEfficiency.G) annotation (Line(points={{0,100},
           {0,70},{-52.4,70},{-52.4,68.96}},        color={0,0,127}));
-  annotation (Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Simplified model of a photovoltaic thermal collector, which builds upon the solar thermal model. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit and an electrical power output.</p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>The model maps solar collector efficiency based on the equation </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/HeatExchanger/SolarThermal/equation-vRK5Io7E.png\"/> </p>
-<p>and similar for the electrical efficiency a linear approximation is used. Values for the linear and quadratic coefficients for the thermal efficiency as well as the coefficients for the linear approximation are derived from the thesis &quot;<a href=\"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">Thermal management of PVT collectors: Development and modelling of highly efficient glazed, flat plate PVT collectors with low emissivity coatings and overheating protection</a>&quot; by Markus L&auml;mmle, p.43 Figure 3.12. The underlying data was validated with the following assumptions: </p>
+  annotation (Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Simplified model of a photovoltaic thermal collector, which builds
+  upon the solar thermal model. Inputs are outdoor air temperature and
+  solar irradiation. Based on these values and the collector properties
+  from database, this model creates a heat flow to the fluid circuit
+  and an electrical power output.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  The model maps solar collector efficiency based on the equation
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/HeatExchanger/SolarThermal/equation-vRK5Io7E.png\"
+  alt=\"1\">
+</p>
+<p>
+  and similar for the electrical efficiency a linear approximation is
+  used. Values for the linear and quadratic coefficients for the
+  thermal efficiency as well as the coefficients for the linear
+  approximation are derived from the thesis \"<a href=
+  \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">Thermal
+  management of PVT collectors: Development and modelling of highly
+  efficient glazed, flat plate PVT collectors with low emissivity
+  coatings and overheating protection</a>\" by Markus Lämmle, p.43
+  Figure 3.12. The underlying data was validated with the following
+  assumptions:
+</p>
 <ul>
-<li>solar irradiation G=1000 W/m^2</li>
-<li>windspeed Uwind=3m/s</li>
-<li>ambient temperature Ta= 25&deg;C</li>
+  <li>solar irradiation G=1000 W/m^2
+  </li>
+  <li>windspeed Uwind=3m/s
+  </li>
+  <li>ambient temperature Ta= 25°C
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">Known Limitations</span></b> </p>
+<p>
+  <b><span style=\"color: #008000;\">Known Limitations</span></b>
+</p>
 <ul>
-<li>Connected directly with Sources.TempAndRad, this model only represents a horizontal collector. There is no calculation for radiation on tilted surfaces. </li>
-<li>With the standard BaseParameters, this model uses water as working fluid </li>
+  <li>Connected directly with Sources.TempAndRad, this model only
+  represents a horizontal collector. There is no calculation for
+  radiation on tilted surfaces.
+  </li>
+  <li>With the standard BaseParameters, this model uses water as
+  working fluid
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
-<p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a> </p>
-<h5>Parameters </h5>
-<p>Furbo1996 (<a href=\"http://orbit.dtu.dk/en/publications/optimum-solar-collector-fluid-flow-rates(34823dd4-5b1d-4e16-be04-17f9f6ae05e5).html\">Optimum solar collector fluid flow rates</a>) suggests a default volume flow rate of approx. 0.2 l/(min.m2) to 0.4 l/(min.m2). Taken from a panel manufacturer&apos;s manual (<a href=\"https://www.altestore.com/static/datafiles/Others/SunMaxx%20Technical%20Manual.pdf\">SunMaxx Technical Manual.pdf</a>) the standard volume flow rate seems to be around 1.5 l/(min.m2). This is 3 l/min for collectors of size 0.93 m2 up to 2.79 m2. </p>
-<p>&quot;Volume flow rate suggestions according to Furbo1996 and SunMaxx&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot; border=&quot;1&quot; width=&quot;50&percnt;&quot;&gt; </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td><p>unit </p></td>
-<td><p>SunMaxx </p></td>
-<td><p>Furbo1996 </p></td>
-</tr>
-<tr>
-<td><p>l/(min.m2) </p></td>
-<td><p>1.5 </p></td>
-<td><p>0.3 </p></td>
-</tr>
-<tr>
-<td><p>m3/(h.m2) </p></td>
-<td><p>0.091 </p></td>
-<td><p>0.018 </p></td>
-</tr>
-<tr>
-<td><p>m3/(s.m2) </p></td>
-<td><p>2.5e-5 </p></td>
-<td><p>5.0e-6 </p></td>
-</tr>
-<tr>
-<td><p>gpm/m2 </p></td>
-<td><p>0.40 </p></td>
-<td><p>0.079 </p><p><br>Assuming a default size for a unit of 2 m2 we get pressure losses for a module as in the following table (vfr=0.79 gpm): </p><p>&quot;Pressure drop of two flat collector modules&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot; border=&quot;1&quot; width=&quot;50&percnt;&quot;&gt; </p><p>Collector </p><p>pressure drop in psi </p><p>pressure drop in Pa </p><p>Titan Power Plus SU2 </p><p>0.28 </p><p>1900 </p><p>SunMaxx-VHP 30 (40&nbsp;&percnt; Glycol) </p><p>0.43 </p><p>3000 </p><p><br>The pressureloss factor should therefore be around 2500 Pa / (2*2.5e-5 m3/s)^2 = 1e12. </p><ul>
-<li><i>Febraury 7, 2018&nbsp;</i> by Peter Matthes:<br>Rename &quot;gain&quot; block into &quot;convertRelHeatFlow2absHeatFlow&quot; to make clearer what it does.<br>Remove redundant <span style=\"font-family: Courier New;\">connect(solarThermalEfficiency.Q_flow,&nbsp;convertRelHeatFlow2absHeatFlow.u)</span><br>Change default pressure drop coefficient from 1e6 to 2500 Pa / (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br>Change default collector area to 2 m2.<br>Extend documentation with some default parameters from references.<br>Grid-align the RealInputs. </li><li><i>Febraury 1, 2018&nbsp;</i> by Philipp Mehrfeld:<br>Delete max block as it is now implemented in the efficiency model </li><li><i>October 25, 2017</i> by Philipp Mehrfeld:<br>Extend now from <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br>Use mean temperature.<br>Limiter moved in equation section of efficiency model. </li><li><i>December 15, 2016</i> by Moritz Lauster:<br>Moved </li><li><i>November 2014&nbsp;</i> by Marcus Fuchs:<br>Changed model to use Annex 60 base class </li><li><i>November 19, 2013&nbsp;</i> by Marcus Fuchs:<br>Implemented </li>
-</ul></td>
-</tr>
+<p>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
+</p>
+<p>
+  <a href=
+  \"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a>
+</p>
+<h5>
+  Parameters
+</h5>
+<p>
+  Furbo1996 (<a href=
+  \"http://orbit.dtu.dk/en/publications/optimum-solar-collector-fluid-flow-rates(34823dd4-5b1d-4e16-be04-17f9f6ae05e5).html\">Optimum
+  solar collector fluid flow rates</a>) suggests a default volume flow
+  rate of approx. 0.2 l/(min.m2) to 0.4 l/(min.m2). Taken from a panel
+  manufacturer's manual (<a href=
+  \"https://www.altestore.com/static/datafiles/Others/SunMaxx%20Technical%20Manual.pdf\">SunMaxx
+  Technical Manual.pdf</a>) the standard volume flow rate seems to be
+  around 1.5 l/(min.m2). This is 3 l/min for collectors of size 0.93 m2
+  up to 2.79 m2.
+</p>
+<p>
+  \"Volume flow rate suggestions according to Furbo1996 and SunMaxx\"
+  cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\"&gt;
+</p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td>
+      <p>
+        unit
+      </p>
+    </td>
+    <td>
+      <p>
+        SunMaxx
+      </p>
+    </td>
+    <td>
+      <p>
+        Furbo1996
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        l/(min.m2)
+      </p>
+    </td>
+    <td>
+      <p>
+        1.5
+      </p>
+    </td>
+    <td>
+      <p>
+        0.3
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        m3/(h.m2)
+      </p>
+    </td>
+    <td>
+      <p>
+        0.091
+      </p>
+    </td>
+    <td>
+      <p>
+        0.018
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        m3/(s.m2)
+      </p>
+    </td>
+    <td>
+      <p>
+        2.5e-5
+      </p>
+    </td>
+    <td>
+      <p>
+        5.0e-6
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        gpm/m2
+      </p>
+    </td>
+    <td>
+      <p>
+        0.40
+      </p>
+    </td>
+    <td>
+      <p>
+        0.079
+      </p>
+      <p>
+        <br/>
+        Assuming a default size for a unit of 2 m2 we get pressure
+        losses for a module as in the following table (vfr=0.79 gpm):
+      </p>
+      <p>
+        \"Pressure drop of two flat collector modules\" cellspacing=\"0\"
+        cellpadding=\"2\" border=\"1\" width=\"50%\"&gt;
+      </p>
+      <p>
+        Collector
+      </p>
+      <p>
+        pressure drop in psi
+      </p>
+      <p>
+        pressure drop in Pa
+      </p>
+      <p>
+        Titan Power Plus SU2
+      </p>
+      <p>
+        0.28
+      </p>
+      <p>
+        1900
+      </p>
+      <p>
+        SunMaxx-VHP 30 (40&#160;% Glycol)
+      </p>
+      <p>
+        0.43
+      </p>
+      <p>
+        3000
+      </p>
+      <p>
+        <br/>
+        The pressureloss factor should therefore be around 2500 Pa /
+        (2*2.5e-5 m3/s)^2 = 1e12.
+      </p>
+      <ul>
+        <li>
+          <i>Febraury 7, 2018&#160;</i> by Peter Matthes:<br/>
+          Rename \"gain\" block into \"convertRelHeatFlow2absHeatFlow\" to
+          make clearer what it does.<br/>
+          Remove redundant <span style=
+          \"font-family: Courier New;\">connect(solarThermalEfficiency.Q_flow,&#160;convertRelHeatFlow2absHeatFlow.u)</span><br/>
+
+          Change default pressure drop coefficient from 1e6 to 2500 Pa
+          / (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br/>
+          Change default collector area to 2 m2.<br/>
+          Extend documentation with some default parameters from
+          references.<br/>
+          Grid-align the RealInputs.
+        </li>
+        <li>
+          <i>Febraury 1, 2018&#160;</i> by Philipp Mehrfeld:<br/>
+          Delete max block as it is now implemented in the efficiency
+          model
+        </li>
+        <li>
+          <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
+          Extend now from <a href=
+          \"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
+          AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br/>
+
+          Use mean temperature.<br/>
+          Limiter moved in equation section of efficiency model.
+        </li>
+        <li>
+          <i>December 15, 2016</i> by Moritz Lauster:<br/>
+          Moved
+        </li>
+        <li>
+          <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+          Changed model to use Annex 60 base class
+        </li>
+        <li>
+          <i>November 19, 2013&#160;</i> by Marcus Fuchs:<br/>
+          Implemented
+        </li>
+      </ul>
+    </td>
+  </tr>
 </table>
 </html>"),  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{
               -84,80},{84,-80}},                                                                                                                            lineColor = {255, 128, 0},
