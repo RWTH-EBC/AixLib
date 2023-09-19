@@ -48,7 +48,7 @@ equation
   R = R_help;
 
   // conversion of direct and diffuse horizontal radiation
-  if WeatherFormat == false then // TRY
+  if not WeatherFormat then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
   else  // WeatherFormat == true , TMY then

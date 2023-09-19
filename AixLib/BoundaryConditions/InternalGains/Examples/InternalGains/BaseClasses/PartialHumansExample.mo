@@ -13,16 +13,19 @@ partial model PartialHumansExample "Base class with bounday conditions for human
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad annotation (Placement(transformation(extent={{18,-16},{34,0}})));
   Modelica.Blocks.Math.MultiSum sumQ_flows(nu=2) annotation (Placement(transformation(extent={{34,-70},{46,-58}})));
   replaceable AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman humanIntGains(roomArea=20) constrainedby AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman(roomArea=20) annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-16,-12},{10,14}})));
-  Modelica.Blocks.Interfaces.RealOutput HeatOut(quantity = "Power", unit = "W") annotation (
+  Modelica.Blocks.Interfaces.RealOutput HeatOut(quantity = "Power", unit = "W") annotation(
     Placement(visible = true, iconTransformation(extent = {{80, -80}, {100, -60}}, rotation = 0)));
 equation
   connect(sine.y,varTempRoom. T) annotation(Line(points={{-82.6,24},{-92,24},{-92,52},{-86,52}},          color = {0, 0, 127}));
   connect(heatFlowSensorConv.port_b,fixedTemp. port) annotation (Line(points={{52,19},{56,19},{56,14},{60,14}}, color={191,0,0}));
   connect(fixedTemp.port,heatFlowSensorRad. port_b) annotation (Line(points={{60,14},{56,14},{56,-8},{34,-8}},
                                                                                                              color={191,0,0}));
-  connect(heatFlowSensorConv.Q_flow,sumQ_flows. u[1]) annotation (Line(points={{45,12},{46,12},{46,-50},{30,-50},{30,-61.9},{34,-61.9}}, color={0,0,127}));
-  connect(heatFlowSensorRad.Q_flow,sumQ_flows. u[2]) annotation (Line(points={{26,-16},{26,-66.1},{34,-66.1}},                          color={0,0,127}));
-  connect(sumQ_flows.y,HeatOut)  annotation (Line(points={{47.02,-64},{100,-64}},color={0,0,127}));
+  connect(heatFlowSensorConv.Q_flow,sumQ_flows. u[1]) annotation (Line(points={{45,11.3},
+          {46,11.3},{46,-50},{30,-50},{30,-65.05},{34,-65.05}},                                                                          color={0,0,127}));
+  connect(heatFlowSensorRad.Q_flow,sumQ_flows. u[2]) annotation (Line(points={{26,
+          -16.8},{26,-62.95},{34,-62.95}},                                                                                              color={0,0,127}));
+  connect(sumQ_flows.y,HeatOut)  annotation (Line(points={{47.02,-64},{24,-64},{
+          24,0},{0,0}},                                                          color={0,0,127}));
   connect(varTempRoom.port, humanIntGains.TRoom) annotation (Line(points={{-64,52},{-40,52},{-40,12.7},{-14.7,12.7}}, color={191,0,0}));
   connect(combiTimeTable.y[1], humanIntGains.uRel) annotation (Line(points={{-61,-16},{-40,-16},{-40,1},{-16,1}}, color={0,0,127}));
   connect(heatFlowSensorConv.port_a, humanIntGains.convHeat) annotation (Line(points={{38,19},{24,19},{24,8.8},{8.7,8.8}}, color={191,0,0}));
