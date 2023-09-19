@@ -1,33 +1,31 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model NominalFuelConsumption "Estimates nominal fuel consumption"
+model DesignOperation "Operating for design conditions"
 
-   parameter Modelica.Units.SI.TemperatureDifference dTNom=20
-    "Nominal temperature difference of supply and return";
-  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 60
-    "Nominal return temperature";
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000
-    "Nominal thermal capacity";
-  Modelica.Blocks.Sources.RealExpression tReturnNom(y=TRetNom)
+  parameter Modelica.Units.SI.TemperatureDifference DelTDes=20
+    "Design temperature difference between supply and return";
+  parameter Modelica.Units.SI.Temperature TRetDes=273.15 + 60
+    "Design return temperature";
+  parameter Modelica.Units.SI.HeatFlowRate QDes=50000 "Design thermal capacity";
+  Modelica.Blocks.Sources.RealExpression tReturnNom(y=TRetDes)
     "Nominal return temperature"
     annotation (Placement(transformation(extent={{-100,6},{-54,30}})));
 
-  Modelica.Blocks.Sources.RealExpression dTNominal(y=dTNom)
+  Modelica.Blocks.Sources.RealExpression dTNominal(y=DelTDes)
     "Nominal temperature differences"
     annotation (Placement(transformation(extent={{-100,-36},{-50,-14}})));
-  Modelica.Blocks.Sources.RealExpression rel_m_flow(y=1)
-    "Nominal realtive water mass flow"
+  Modelica.Blocks.Sources.RealExpression q_rel(y=1) "realtive power"
     annotation (Placement(transformation(extent={{-100,-16},{-54,8}})));
 
-  Modelica.Blocks.Sources.RealExpression nominalLosses(y=QNom*0.003)
+  Modelica.Blocks.Sources.RealExpression nominalLosses(y=QDes*0.003)
                                      "Nominal Heat Losses"
     annotation (Placement(transformation(extent={{-100,68},{-54,92}})));
-  Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
+  Modelica.Blocks.Sources.RealExpression qNom(y=QDes)
     "Nominal thermal capacity"
     annotation (Placement(transformation(extent={{-100,40},{-54,64}})));
   Modelica.Blocks.Math.Division division
     annotation (Placement(transformation(extent={{26,48},{46,68}})));
-  Modelica.Blocks.Interfaces.RealOutput nominalFuelConsumption(quantity="Power",
-      final unit="W") "nominal Fuel Consumption" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput designPowerDemand(quantity="Power",
+      final unit="W") "design power demand" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -57,12 +55,11 @@ equation
   connect(multiplex4_2.y, boilerEffciency2.u)
     annotation (Line(points={{39,-6},{52,-6}}, color={0,0,127}));
   connect(boilerEffciency2.y, division.u2) annotation (Line(points={{75,-6},{80,
-          -6},{80,44},{8,44},{8,52},{24,52}},   color={0,0,127}));
-  connect(rel_m_flow.y, multiplex4_2.u3[1]) annotation (Line(points={{-51.7,-4},
-          {-34,-4},{-34,-10},{-10,-10},{-10,-9},{16,-9}},
-                                      color={0,0,127}));
+          -6},{80,30},{8,30},{8,52},{24,52}},   color={0,0,127}));
+  connect(q_rel.y, multiplex4_2.u3[1]) annotation (Line(points={{-51.7,-4},{-34,
+          -4},{-34,-9},{16,-9}}, color={0,0,127}));
   connect(dTNominal.y, multiplex4_2.u4[1]) annotation (Line(points={{-47.5,-25},
-          {-20,-25},{-20,-20},{16,-20},{16,-15}},
+          {-20,-25},{-20,-16},{16,-16},{16,-15}},
                                          color={0,0,127}));
   connect(nominalLosses.y, add.u1)
     annotation (Line(points={{-51.7,80},{-34,80}}, color={0,0,127}));
@@ -70,10 +67,10 @@ equation
           {-34,68}}, color={0,0,127}));
   connect(add.y, division.u1) annotation (Line(points={{-11,74},{16,74},{16,64},
           {24,64}}, color={0,0,127}));
-  connect(division.y, nominalFuelConsumption)
+  connect(division.y, designPowerDemand)
     annotation (Line(points={{47,58},{110,58}}, color={0,0,127}));
-  connect(rel_m_flow.y, multiplex4_2.u2[1]) annotation (Line(points={{-51.7,-4},
-          {-34,-4},{-34,-3},{16,-3}}, color={0,0,127}));
+  connect(q_rel.y, multiplex4_2.u2[1]) annotation (Line(points={{-51.7,-4},{-34,
+          -4},{-34,-3},{16,-3}}, color={0,0,127}));
   connect(tReturnNom.y, multiplex4_2.u1[1]) annotation (Line(points={{-51.7,18},
           {-10,18},{-10,3},{16,3}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -124,7 +121,7 @@ equation
           extent={{-42,74},{44,28}},
           textColor={0,0,0},
           fontName="Arial Black",
-          textString="Nominal
+          textString="Design
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
@@ -146,4 +143,4 @@ equation
 <li>June, 2023  by Moritz Zuschlag &amp; David Jansen</li>
 </ul>
 </html>"));
-end NominalFuelConsumption;
+end DesignOperation;

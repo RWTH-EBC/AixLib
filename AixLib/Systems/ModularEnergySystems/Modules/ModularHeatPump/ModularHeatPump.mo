@@ -55,7 +55,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     refIneFre_constant=0.02,
     nthOrder=3,
-    useBusConnectorOnly=true,
+    final useBusConnectorOnly=true,
     mFlow_conNominal=m_flow_nominal,
     VCon=max(0.0000001*QDes - 0.0094, 0.003),
     mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),

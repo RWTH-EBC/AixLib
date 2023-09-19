@@ -1,19 +1,16 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model OperationEfficiency
+model OffDesignOperation
 
-parameter Modelica.Units.SI.TemperatureDifference dTNom=20
-    "Nominal temperature difference of supply and return";
-  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 60
-    "Nominal return temperature";
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000
-    "Nominal thermal capacity";
-  parameter
-    AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.EtaTExhaustBaseDataDefinition
-    paramEta=AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.Ambient1();
+  parameter Modelica.Units.SI.TemperatureDifference DelTDes=20
+    "Design temperature difference between supply and return";
+  parameter Modelica.Units.SI.Temperature TRetDes=273.15 + 60
+    "Design return temperature";
+  parameter Modelica.Units.SI.HeatFlowRate QDes=50000 "Design thermal capacity";
+
 
 package Medium=AixLib.Media.Water;
 
-  Modelica.Blocks.Sources.RealExpression deltaTNom(y=dTNom)
+  Modelica.Blocks.Sources.RealExpression deltaTNom(y=DelTDes)
     "Nominal temperature difference between supply and return"
     annotation (Placement(transformation(extent={{-100,-34},{-42,2}})));
   Systems.ModularEnergySystems.Interfaces.BoilerControlBus boilerControlBus
@@ -47,7 +44,8 @@ package Medium=AixLib.Media.Water;
     "Limiter to make SDF simulation robust"
     annotation (Placement(transformation(extent={{-2,22},{8,32}})));
 protected
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nom=QNom/(Medium.cp_const*dTNom);
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nom=QDes/(Medium.cp_const*
+      DelTDes);
   parameter Real PLR_min=0.2;
 equation
 
@@ -156,7 +154,7 @@ equation
           extent={{-32,76},{52,22}},
           textColor={0,0,0},
           fontName="Arial Black",
-          textString="Operating
+          textString="OffDesign
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
@@ -172,4 +170,4 @@ equation
 <li>June, 2023  by Moritz Zuschlag &amp; David Jansen</li>
 </ul>
 </html>"));
-end OperationEfficiency;
+end OffDesignOperation;

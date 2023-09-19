@@ -20,6 +20,10 @@ partial model PartialReversibleVapourCompressionMachine
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
 
+     parameter Boolean use_non_manufacturer=false
+    "Use generic approach?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+
+
   replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
     AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a vapour compression machine"
     annotation (Placement(transformation(
@@ -29,11 +33,11 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Boolean use_rev=false "Is the vapour compression machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true, enable= not use_non_manufacturer));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
-    annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+    annotation(choices(checkBox=true), Dialog(descriptionLabel=true,enable=not use_non_manufacturer));
   parameter Modelica.Units.SI.Power Q_useNominal(start=0)
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
-  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
+  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine" annotation(Dialog(enable=not use_non_manufacturer));
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
@@ -582,8 +586,8 @@ equation
       points={{0,-102},{0,-110},{-24,-110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
-          -60}}, color={0,127,255}));
+  connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60}},
+                 color={0,127,255}));
   connect(senT_a2.port_b, eva.port_a)
     annotation (Line(points={{28,-86},{16,-86}}, color={0,127,255}));
   connect(senT_b2.port_a, eva.port_b)

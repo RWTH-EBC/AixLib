@@ -125,86 +125,97 @@ package Examples "Holds examples for the modular energy system units"
       use_T_in=false,
       redeclare package Medium = Media.Water,
       nPorts=1)
-      annotation (Placement(transformation(extent={{32,-4},{52,16}})));
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={52,0})));
     Fluid.Sources.Boundary_pT
                         bou2(
       use_T_in=false,
       redeclare package Medium = Media.Water,
       nPorts=1)
-      annotation (Placement(transformation(extent={{20,-42},{40,-22}})));
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={50,-30})));
     Fluid.Sources.Boundary_pT
                         bou3(
-      use_T_in=false,
-      redeclare package Medium = Media.Water,
-      T=333.15,
+      use_T_in=true,
+      redeclare package Medium = AixLib.Media.Water,
       nPorts=1)
-      annotation (Placement(transformation(extent={{-58,-12},{-38,8}})));
+      annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     Modules.ModularBoiler.BoilerModular boilerModular(
-      dT_w_nom=dT_w_nom,
-      T_cold_nom=T_cold_nom,
-      Q_nom=Q_nom)
+      DesDelT=20,
+      DesRetT=333.15,
+      DesQ=20000,
+      DWheating=true)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Interfaces.BoilerControlBus
       boilerControlBus
-      annotation (Placement(transformation(extent={{-12,10},{8,30}})));
-    Modules.ModularBoiler.Control control(T_cold_nom=T_cold_nom)
+      annotation (Placement(transformation(extent={{-8,12},{12,32}})));
+    Modules.ModularBoiler.Control control(TRetDes=333.15)
       annotation (Placement(transformation(extent={{-30,60},{-10,80}})));
-    parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=20
-      "Nominal temperature difference of flow and return";
-    parameter Modelica.Units.SI.Temperature T_cold_nom=333.15
-      "Return temperature";
-    parameter Modelica.Units.SI.HeatFlowRate Q_nom=10000
-      "Nominal heat flow rate";
+
     Fluid.Sources.MassFlowSource_T        bouEvap_a(
       redeclare package Medium = AixLib.Media.Water,
       use_m_flow_in=true,
-      m_flow=1,
+      m_flow=0,
       use_T_in=false,
       T=283.15,
-      nPorts=1) annotation (Placement(transformation(extent={{-70,-10},{-42,-38}})));
+      nPorts=1) annotation (Placement(transformation(extent={{-60,-20},{-40,-40}})));
     Modelica.Blocks.Sources.Sine sine(
       f=1/3600,
       offset=0.0250,
       amplitude=0.025,
       startTime=2000) "water mass flow"
-      annotation (Placement(transformation(extent={{-154,-34},{-134,-14}})));
+      annotation (Placement(transformation(extent={{-100,-48},{-80,-28}})));
     Modelica.Blocks.Sources.RealExpression TSupSet(y=75 + 273.15)
       "set point supply temperature"
-      annotation (Placement(transformation(extent={{-110,22},{-78,42}})));
+      annotation (Placement(transformation(extent={{-80,22},{-48,42}})));
+    Modelica.Blocks.Sources.Ramp ramp(
+      height=20,
+      duration=2500,
+      offset=40 + 273.15)
+      annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   equation
     connect(boilerControlBus, boilerModular.boilerControlBus) annotation (Line(
-        points={{-2,20},{-2,16},{2,16},{2,10}},
+        points={{2,22},{2,10}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
-    connect(boilerModular.port_b, bou.ports[1]) annotation (Line(points={{12,0},
-            {28,0},{28,-8},{56,-8},{56,6},{52,6}}, color={0,127,255}));
-    connect(bou3.ports[1], boilerModular.port_a) annotation (Line(points={{-38,
-            -2},{-36,-2},{-36,0},{-8,0}}, color={0,127,255}));
-    connect(boilerModular.port_b1, bou2.ports[1]) annotation (Line(points={{12,
-            -8},{46,-8},{46,-32},{40,-32}}, color={0,127,255}));
+    connect(boilerModular.port_b, bou.ports[1]) annotation (Line(points={{12,0},{31,
+            0},{31,6.66134e-16},{42,6.66134e-16}}, color={0,127,255}));
+    connect(bou3.ports[1], boilerModular.port_a) annotation (Line(points={{-40,0},
+            {-8,0}},                      color={0,127,255}));
     connect(control.boilerControlBus, boilerControlBus) annotation (Line(
-        points={{-10,70},{-2,70},{-2,20}},
+        points={{-10,70},{2,70},{2,22}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(bouEvap_a.ports[1], boilerModular.port_a1) annotation (Line(points=
-            {{-42,-24},{-28,-24},{-28,-26},{-16,-26},{-16,-8},{-8,-8}}, color={
-            0,127,255}));
-    connect(sine.y, bouEvap_a.m_flow_in) annotation (Line(points={{-133,-24},{
-            -72.8,-24},{-72.8,-35.2}}, color={0,0,127}));
-    connect(TSupSet.y, boilerControlBus.TSupplySet) annotation (Line(points={{-76.4,
-            32},{-18,32},{-18,20},{-2,20}}, color={0,0,127}), Text(
+    connect(TSupSet.y, boilerControlBus.TSupplySet) annotation (Line(points={{-46.4,
+            32},{-14,32},{-14,22},{2,22}},  color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(ramp.y, bou3.T_in) annotation (Line(points={{-79,10},{-68,10},{-68,4},
+            {-62,4}},         color={0,0,127}));
+    connect(ramp.y, boilerControlBus.TReturnMea) annotation (Line(points={{-79,10},
+            {-68,10},{-68,22},{2,22}},      color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(sine.y, bouEvap_a.m_flow_in)
+      annotation (Line(points={{-79,-38},{-62,-38}}, color={0,0,127}));
+    connect(boilerModular.port_b_DW, bou2.ports[1]) annotation (Line(points={{12,-8},
+            {32,-8},{32,-30},{40,-30}}, color={0,127,255}));
+    connect(bouEvap_a.ports[1], boilerModular.port_a_DW) annotation (Line(points={
+            {-40,-30},{-16,-30},{-16,-8},{-8,-8}}, color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=10000));

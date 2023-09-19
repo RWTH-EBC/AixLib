@@ -31,30 +31,28 @@ model HeatPump
     annotation (Dialog(enable=not use_non_manufacturer),choicesAllMatching=true);
     // NotManufacturer - only relevant if PerDataMainHP is set to
 
-  parameter Boolean use_non_manufacturer=false
-                                              "Use non manufacturer approach?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
 
   // Data only relevant for non manufacturer approach
   parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="General machine information"));
   parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="Essential"));
   parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="General machine information"));
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Essential"
+    annotation (Dialog(tab="Generic", group="General machine information"));
 
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7
     "Temperature difference heat sink condenser"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="Optional"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3
     "Temperature difference heat source evaporator"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="General machine information"));
   parameter Modelica.Units.SI.Temperature TSource=280 "Temperature of heat source"
-    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    annotation (Dialog(tab="Generic", group="Essential"));
  parameter Boolean TSourceInternal=false  "Use internal TSource?"
-    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-  parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
+    annotation (Dialog(descriptionLabel=true, tab="Generic",group="Essential"));
+  parameter Boolean Modulating=true "Is the heat pump inverter-driven?"  annotation (Dialog(tab="Generic", group="Essential"));
 
 equation
   connect(innerCycle.QEva, sigBus.QEvap) annotation (Line(points={{0,-30.7},{-6,

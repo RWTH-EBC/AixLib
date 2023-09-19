@@ -1,17 +1,21 @@
 within AixLib.Fluid.BoilerCHP;
 model BoilerGeneric "Generic performance map based boiler"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
-    redeclare package Medium = AixLib.Media.Water,
+    T_start=TRetDes +dTDes,
+    redeclare final package Medium = AixLib.Media.Water,
     a=coeffPresLoss,
-    vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*
-          QNom/1000)/1000));
+    vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QDes
+              /1000)/1000),
+    final m_flow_nominal=QDes/(Medium.cp_const*dTDes),
+    final dp_nominal= m_flow_nominal^2*a/(Medium.d_const^2));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTNom=20
-    "Nominal temperature difference of supply and return";
-  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 60
-    "Nominal return temperature";
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000
-    "Nominal thermal capacity";
+  parameter Modelica.Units.SI.TemperatureDifference dTDes=20
+    "Design temperature difference of supply and return"
+    annotation (Dialog(group="Design"));
+  parameter Modelica.Units.SI.Temperature TRetDes=273.15 + 60
+    "Nominal return temperature" annotation (Dialog(group="Design"));
+  parameter Modelica.Units.SI.HeatFlowRate QDes=50000 "Design thermal capacity"
+    annotation (Dialog(group="Design"));
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
       T(start=T_start))            "Boiler thermal capacity (dry weight)"
@@ -19,14 +23,14 @@ model BoilerGeneric "Generic performance map based boiler"
         extent={{-10,10},{10,-10}},
         rotation=90,
         origin={-18,-50})));
-  BaseClasses.Controllers.OperationEfficiency operatingEfficiency(
-    dTNom=dTNom,
-    TRetNom=TRetNom,
-    QNom=QNom)      "Performance map for efficiency during operation"
+  BaseClasses.Controllers.OffDesignOperation offDesignOperation(
+    DelTDes=dTDes,
+    TRetDes=TRetDes,
+    QDes=QDes) "off design operation"
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(
-      final G=QNom*0.003/50) "Thermal resistance of the boiler casing"
+      final G=QDes*0.003/50) "Thermal resistance of the boiler casing"
     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
@@ -40,20 +44,19 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{-38,90},{-18,110}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
-  BaseClasses.Controllers.NominalFuelConsumption nominalFuelConsumption(
-    dTNom=dTNom,
-    TRetNom=TRetNom,
-    QNom=QNom)      "Nominal fuel consumption"
+  BaseClasses.Controllers.DesignOperation designOperation(
+    DelTDes=dTDes,
+    TRetDes=TRetDes,
+    QDes=QDes) "designOperation for design fuel power"
     annotation (Placement(transformation(extent={{-56,24},{-36,44}})));
-  Modelica.Blocks.Math.Product fuelConsumption
-    "Fuel consumption during operation"
+  Modelica.Blocks.Math.Product powerDemand "Set power demand"
     annotation (Placement(transformation(extent={{-2,30},{18,50}})));
   Modelica.Blocks.Math.Product thermalPower "Thermal power during operation"
     annotation (Placement(transformation(extent={{34,24},{54,44}})));
 protected
-  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
+  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QDes/1000)
     "Pressure loss coefficient of the heat generator";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*QDes
     "Heat capacity of metal (J/K)";
 
 equation
@@ -75,9 +78,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nominalFuelConsumption.nominalFuelConsumption, fuelConsumption.u2)
+  connect(designOperation.designPowerDemand, powerDemand.u2)
     annotation (Line(points={{-35,34},{-4,34}}, color={0,0,127}));
-  connect(fuelConsumption.y, thermalPower.u1)
+  connect(powerDemand.y, thermalPower.u1)
     annotation (Line(points={{19,40},{32,40}}, color={0,0,127}));
   connect(boilerControlBus.Efficiency, thermalPower.u2) annotation (Line(
       points={{-28,100},{-28,28},{32,28}},
@@ -89,7 +92,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(thermalPower.y, heater.Q_flow) annotation (Line(points={{55,34},{60,34},
           {60,0},{-60,0},{-60,-40}},       color={0,0,127}));
-  connect(operatingEfficiency.boilerControlBus, boilerControlBus) annotation (
+  connect(offDesignOperation.boilerControlBus, boilerControlBus) annotation (
       Line(
       points={{30.2,80},{30.2,86},{-28,86},{-28,100}},
       color={255,204,51},
@@ -98,14 +101,13 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fuelConsumption.y, boilerControlBus.PowerDemand) annotation (Line(
-        points={{19,40},{24,40},{24,56},{-28,56},{-28,100}}, color={0,0,127}),
-      Text(
+  connect(powerDemand.y, boilerControlBus.PowerDemand) annotation (Line(points={
+          {19,40},{24,40},{24,56},{-28,56},{-28,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.FirRatSet, fuelConsumption.u1) annotation (Line(
+  connect(boilerControlBus.FirRatSet, powerDemand.u1) annotation (Line(
       points={{-28,100},{-28,46},{-4,46}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -143,10 +145,11 @@ equation
 <li><span style=\"font-family: Arial;\">Relative water mass flow</span></li>
 <li><span style=\"font-family: Arial;\">Realtive temperature difference</span></li>
 </ul>
-<p>The model differs between <u>nominal</u> conditions and <u>operating</u>.</p>
-<p>For nominal conditions (parametrization) the model estimates <u>nominal</u> fuel consumption [W] from AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.NominalEfficiency. The <u>operating</u> fuel consumption [W] is estimated via relative fuel consumption [-]. The relative fuel consumption [-] is the control variable. </p>
-<p>During operation, the transferred heat flow [W] is estimated with respect to actual efficiency which comes from AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.OperatingEfficiency.</p>
-<p>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>for pressure losses bases on a fit-function of manufacturer data.</p>
+<p>The model differs between <u>design</u> operating <u>off-design</u> operating.</p>
+<p>For design conditions (parametrization) the model estimates max. fuel consumption [W]. The <u>off-design</u> fuel consumption [W] is estimated via FirRatSet [-]. </p>
+<p>During operation, the transferred heat flow [W] is estimated with respect to actual efficiency within a performance map.</p>
+<p>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>bases on a fit-function of manufacturer data.</p>
+<p>The volume <span style=\"font-family: Courier New;\">vol.V</span> bases on a fit-function of manufacturer data.</p>
 <p><br>Further assumptions are taken into account for losses (see AixLib.Fluid.BoilerCHP.BoilerNoControl):</p>
 <ul>
 <li>G: a heat loss of 0.3 &percnt; of nominal power at a temperature difference of 50 K to ambient is assumed.</li>
