@@ -1,9 +1,10 @@
 within AixLib.Fluid.Storage;
 model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
-  import      Modelica.Units.SI;
+  import Modelica.Units.SI;
 
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start=TStart[1]);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
+    final T_start=sum(TStart)/n);
 
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
@@ -41,8 +42,9 @@ model BufferStorage
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
-
-  parameter SI.Temperature TStart[n] "Start Temperature of fluid in each layer. e.g. for a 3 layer model: {20, 20, 20}" annotation (Dialog(tab="Initialization", group="Storage specific"));
+  parameter SI.Temperature TStart[n]=fill(TStartWall,n)
+    "Start Temperature of fluid in each layer. e.g. for a 3 layer model: {20, 20, 20}"
+    annotation (Dialog(tab="Initialization", group="Storage specific"));
 
   replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
@@ -152,14 +154,12 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package                                                                    Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(redeclare final
-      package                                                                    Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(redeclare final package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -176,7 +176,7 @@ model BufferStorage
       "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+  AixLib.Fluid.MixingVolumes.MixingVolume layer[n](
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
@@ -188,7 +188,7 @@ model BufferStorage
     each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
-    T_start=TStart,
+    final T_start=TStart,
     redeclare each final package Medium = Medium,
     each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
@@ -310,7 +310,7 @@ model BufferStorage
     pipeHC=data.pipeHC1,
     allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
-    TStart=TStart[1]) if useHeatingCoil1
+    TStart=sum(TStart)/n) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -324,7 +324,7 @@ model BufferStorage
     redeclare package Medium = MediumHC2,
     allowFlowReversal=allowFlowReversal_HC2,
     final m_flow_nominal=mHC2_flow_nominal,
-    TStart=TStart[1]) if useHeatingCoil2
+    TStart=sum(TStart)/n) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

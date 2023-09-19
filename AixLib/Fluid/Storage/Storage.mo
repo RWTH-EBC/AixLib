@@ -94,7 +94,7 @@ model Storage
     "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
 
   //Initialization parameters
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start[n]
+  parameter Modelica.Units.SI.Temperature T_start[n]
     "Start value of temperature of each layer, e.g. for 3 layers: {20, 20, 20}" annotation(Dialog(tab="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
@@ -137,10 +137,10 @@ equation
   end for;
   //Connect layers of Heat Exchanger
   connect(port_a_heatGenerator, layer_HE[n].ports[2]) annotation (Line(
-      points={{84,88},{94,36},{94,22},{94,1}},
+      points={{84,88},{84,40},{94,40},{94,1}},
       color={0,127,255}));
   connect(port_b_heatGenerator, layer_HE[1].ports[1]) annotation (Line(
-      points={{84,-88},{84,-26},{94,-26},{94,-1}},
+      points={{84,-88},{84,-34},{94,-34},{94,-1}},
       color={0,127,255}));
   for k in 1:n - 1 loop
     connect(layer_HE[k].ports[2], layer_HE[k + 1].ports[1]);
