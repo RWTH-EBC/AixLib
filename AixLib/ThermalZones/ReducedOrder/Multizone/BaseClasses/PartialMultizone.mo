@@ -12,12 +12,11 @@ partial model PartialMultizone "Partial model for multizone models"
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
-  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
+  replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
 
   parameter Integer nPorts = 0
-    "Number of fluid ports"
-    annotation(Evaluate=true,
+    "Number of fluid ports"  annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
 
 
@@ -107,6 +106,7 @@ partial model PartialMultizone "Partial model for multizone models"
     final zoneParam=zoneParam,
     redeclare each final model corG = corG,
     each final internalGainsMode=internalGainsMode,
+    redeclare package MediumPoolWater = MediumPoolWater,
     each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -151,9 +151,13 @@ partial model PartialMultizone "Partial model for multizone models"
       group="Cooler",
       enable=not recOrSep));
 
-  parameter Boolean use_pools=false
-  "If true, input connector timeOpe is enabled and heat and mass exchanges 
-  between pool and corresponding zone are balancecd" annotation (Dialog(tab="Moisture"));
+
+  //Swimming pool params
+  parameter Boolean use_pools_tot = false "use swimming pools within at least one zone of the multizone" annotation(Dialog(tab="Moisture", group="Pools"));
+  replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare
+          package                                                                                Medium =
+            AixLib.Media.Water
+              "Water")), Dialog(enable=use_pools_tot,tab="Moisture", group="Pools"));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     each final quantity="ThermodynamicTemperature",
@@ -167,6 +171,8 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{10,-10},{-10,10}},
     rotation=270,
     origin={-52,-110})));
+
+
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -197,7 +203,7 @@ partial model PartialMultizone "Partial model for multizone models"
                         annotation (Placement(transformation(extent={{100,-90},{
             120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
   Modelica.Blocks.Interfaces.RealInput timeOpe
-    if use_moisture_balance and use_pools
+    if use_moisture_balance and use_pools_tot
     "Input profiles for opening hours for pools" annotation (Placement(
         transformation(extent={{-20,-20},{20,20}},
         rotation=90,
@@ -205,6 +211,7 @@ partial model PartialMultizone "Partial model for multizone models"
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={38,-110})));
+
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then

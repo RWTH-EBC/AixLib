@@ -8,8 +8,12 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+   // Pool parameters
+   parameter Boolean use_pools = false
+    "If true, pool model and corresponding connections are enabled"
+  annotation(Dialog(tab="Moisture", group="Pools"));
 
-   final parameter Integer nPortsROM = if zoneParam.use_pools then nPorts + 2 else nPorts
+   final parameter Integer nPortsROM = if use_pools then nPorts + 2 else nPorts
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));

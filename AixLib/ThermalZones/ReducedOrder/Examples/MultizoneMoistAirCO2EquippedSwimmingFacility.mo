@@ -22,7 +22,7 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
-    use_pools=true,
+    use_pools_tot=true,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
@@ -34,14 +34,32 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=0.8,
     effHRSAHU_disabled=0.2,
-    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-            thermCapInt(each der_T(fixed=true))))),
+    zone(
+      use_pools={true,false,false,false,false,false},
+      nPools={2,1,1,1,1,1},
+      poolWallParam={{
+          AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction(),
+          AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()},
+          {AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{
+          AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{
+          AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{
+          AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{
+          AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()}},
+      poolParam={{AixLib.DataBase.Pools.SportPool(),
+          AixLib.DataBase.Pools.ChildrensPool()},{
+          AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
+          AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
+          AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
+          AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
+          AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()}},
+      ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
+              each der_T(fixed=true))))),
     redeclare package Medium = Medium,
     T_start=293.15,
     dpAHU_sup(displayUnit="Pa") = 800,
-    dpAHU_eta(displayUnit="Pa") = 800)
-                        "Multizone"
+    dpAHU_eta(displayUnit="Pa") = 800) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,

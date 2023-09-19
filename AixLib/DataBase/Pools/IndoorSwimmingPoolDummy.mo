@@ -1,7 +1,7 @@
 within AixLib.DataBase.Pools;
 record IndoorSwimmingPoolDummy
   "This is a dummy record with non-physical parameter values."
-  extends IndoorSwimmingPoolBaseDataDefinition(
+  extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition(
     TPool=Modelica.Constants.eps,
     VPool=Modelica.Constants.inf,
     APool=Modelica.Constants.inf,
@@ -34,8 +34,7 @@ record IndoorSwimmingPoolDummy
     AFloExt=Modelica.Constants.inf,
     AFloInt=Modelica.Constants.inf,
     hConWatHor=Modelica.Constants.inf,
-    hConWatVer=Modelica.Constants.inf,
-    PoolWallParam=AixLib.DataBase.Pools.SwimmingPoolWalls.WallDummy());
+    hConWatVer=Modelica.Constants.inf);
   annotation (Documentation(info="<html>
 <p>This record is a place holder for zones without swimming pools to avoid error messages.</p>
 </html>"));

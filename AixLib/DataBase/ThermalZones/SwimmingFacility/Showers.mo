@@ -89,10 +89,7 @@ record Showers "Swimming facility - Showers and other sanitary areas"
     CoolerOn = false,
     withIdealThresholds = false,
     TThresholdHeater = 288.15,
-    TThresholdCooler = 295.15,
-    use_pools = false,
-    nPools = 0,
-    poolParam = {AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()});
+    TThresholdCooler = 295.15);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Showers;

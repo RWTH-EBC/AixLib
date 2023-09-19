@@ -4,19 +4,27 @@ model ThermalZoneMoistAirSwimmingPool
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
+    use_pools=true,
     use_moisture_balance=true,
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
+    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+        intWallRC(thermCapInt(each der_T(fixed=true))),
+        floorRC(thermCapExt(each der_T(fixed=true))),
+        roofRC(thermCapExt(each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
     recOrSep=true,
+    nPools=2,
+    poolParam={DataBase.Pools.SportPool(),DataBase.Pools.ChildrensPool()},
+    poolWallParam={
+        DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction(),
+        DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()},
     nPorts=2,
     T_start=293.15,
     redeclare AixLib.DataBase.ThermalZones.SwimmingFacility.SwimmingHall
-      zoneParam(HeaterOn=true))
-    "Thermal zone"
+      zoneParam(HeaterOn=true)) "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,

@@ -3,6 +3,9 @@ model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition
     poolParam "Choose setup for this pool" annotation (choicesAllMatching=true);
 
+   parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    poolWallParam "Choose setup for this pool" annotation (choicesAllMatching=true);
+
   replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -234,7 +237,7 @@ model IndoorSwimmingPool
     hConWaterHorizontal=poolParam.hConWatHor,
     hConWaterVertical=poolParam.hConWatVer,
     TPool=poolParam.TPool,
-    PoolWall=poolParam.PoolWallParam)
+    PoolWall=poolWallParam)
     "Model to depict the heat flow rate through the pool walls to the bordering room/soil"
     annotation (Placement(transformation(extent={{64,32},{80,48}})));
 
