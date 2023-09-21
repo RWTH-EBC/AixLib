@@ -33,10 +33,11 @@ model ThermalZoneMoistAirSwimmingPool
     annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName = "UserProfiles",
-    fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
+    tableName="Internals",
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingFacility_6Zones.txt"),
     columns = {2, 3, 4},
-    tableOnFile=false,
+    tableOnFile=true,
     table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
         0.1,0,0; 10740,0,0.1,0,0; 10800,0,0.1,0,0; 14340,0,0.1,0,0; 14400,0,0.1,
         0,0; 17940,0,0.1,0,0; 18000,0,0.1,0,0; 21540,0,0.1,0,0; 21600,0,0.1,0,0;
@@ -152,9 +153,10 @@ model ThermalZoneMoistAirSwimmingPool
   Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="OpeningHours",
+    tableName="openingHours",
     columns=2:2,
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Profile_timeOpe_pools.txt"))
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))
                                                                                                                                             "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-92,-34},{-76,-18}})));
   Modelica.Blocks.Sources.Constant

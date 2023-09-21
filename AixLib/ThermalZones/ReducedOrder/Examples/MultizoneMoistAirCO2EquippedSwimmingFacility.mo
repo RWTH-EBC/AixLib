@@ -52,13 +52,16 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
           AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
           AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{
           AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()}},
-      ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-              each der_T(fixed=true))))),
+      ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+          intWallRC(thermCapInt(each der_T(fixed=true))),
+           floorRC(thermCapExt(each der_T(fixed=true))),
+           roofRC(thermCapExt(each der_T(fixed=true))))),
     redeclare package Medium = Medium,
     T_start=293.15,
     dpAHU_sup(displayUnit="Pa") = 800,
     dpAHU_eta(displayUnit="Pa") = 800) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
+
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -70,8 +73,7 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingFacility_6Zones.txt"),
     columns=2:19)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{74,-42},{58,-26}})));
@@ -109,16 +111,14 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="AHU",
     columns=2:5,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_6Zone_SIA_4Columns.txt"))
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_SwimmingFacility_6Zones.txt"))
     "Boundary conditions for air handling unit"
     annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Tset_SwimmingFacility.txt"),
     columns=2:7)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
@@ -129,9 +129,9 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
   Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="OpeningHours",
+    tableName="openingHours",
     columns=2:2,
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Profile_timeOpe_pools.txt"))
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))
     "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-64,-32},{-48,-16}})));
 equation
