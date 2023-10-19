@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN50_H05_16 "Pump with head 0.5 to 16m (Wilo Stratos Maxo 50/0.5-16 PN6/10)"
+record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wilo Stratos Maxo 50/0.5-16 PN6/10)"
    extends PumpBaseRecord(
     maxMinHeight=[
            0.00, 15.73,  0.427;
@@ -67,35 +67,32 @@ record Pump_DN50_H05_16 "Pump with head 0.5 to 16m (Wilo Stratos Maxo 50/0.5-16 
       "maximum and minimum boundaries of pump speed (Q,nMax,nMin)",
     nMin=500,
     nMax=3200,
-    cHQN=[ 0.00000e+00,  0.00000e+00,  1.52602e-06;
-           0.00000e+00,  4.97504e-05,  0.00000e+00;
-          -4.35468e-03,  0.00000e+00,  0.00000e+00]
+    cHQN=[ 0.00000e+00,  0.00000e+00,  1.52394e-06;
+           0.00000e+00,  5.07893e-05,  0.00000e+00;
+          -4.42148e-03,  0.00000e+00,  0.00000e+00]
        "coefficients for H = f(Q,N)",
-    cPQN=[ 7.81838e+01, -2.90517e-01,  3.03791e-04, -9.85552e-08,  1.38780e-11;
-           0.00000e+00,  0.00000e+00,  4.44312e-06,  0.00000e+00,  0.00000e+00;
-           0.00000e+00,  3.24679e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
-          -3.79467e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
+    cPQN=[ 8.61711e+01, -3.19500e-01,  3.36762e-04, -1.12746e-07,  1.59435e-11;
+           0.00000e+00,  0.00000e+00,  4.33938e-06,  0.00000e+00,  0.00000e+00;
+           0.00000e+00,  5.09522e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
+          -4.54214e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
       annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2023-06-25 by Sarah Leidolf:<br>Generated</li>
+<li>2023-10-19 by Sarah Leidolf:<br>Generated</li>
 </ul>
 </html>", info="<html>
 <h4>Measurement and Regression Data</h4>
-<p>
-  <img src=
-  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H05_16.png\"
-  alt=\"Pump Characterisistcs\">
-</p>
+<p>Impure curves at high pump speed because of inaccurate data of the actual speed.</p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H05_16.png\"/> </p>
 <p>cHQN:</p>
-<pre>           0.00000e+00,  0.00000e+00,  1.52602e-06;
-           0.00000e+00,  4.97504e-05,  0.00000e+00;
-          -4.35468e-03,  0.00000e+00,  0.00000e+00</pre>
+<p><span style=\"font-family: Courier New;\">          0.00000e+00,  0.00000e+00,  1.52394e-06;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  5.07893e-05,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">          -4.42148e-03,  0.00000e+00,  0.00000e+000</span></p>
 <p>cPQN:</p>
-<pre>           7.81838e+01, -2.90517e-01,  3.03791e-04, -9.85552e-08,  1.38780e-11;
-           0.00000e+00,  0.00000e+00,  4.44312e-06,  0.00000e+00,  0.00000e+00;
-           0.00000e+00,  3.24679e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
-          -3.79467e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</pre>
+<p><span style=\"font-family: Courier New;\">          8.61711e+01, -3.19500e-01,  3.36762e-04, -1.12746e-07,  1.59435e-11;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  0.00000e+00,  4.33938e-06,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  5.09522e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">          -4.54214e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</span></p>
 </html>"));
 
 end Pump_DN50_H05_16;

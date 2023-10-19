@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN25_H05_12 "Pump with head 0.5 to 12m and 12m^3/h volume flow (25/0.5-12 PN)"
+record Pump_DN25_H05_12 "Pump with head 0.5 to 12,4m and 12,4m^3/h volume flow (25/0.5-12 PN)"
    extends PumpBaseRecord(
      maxMinHeight=[
            0.00, 12.30,  0.367;
@@ -67,34 +67,31 @@ record Pump_DN25_H05_12 "Pump with head 0.5 to 12m and 12m^3/h volume flow (25/0
       "maximum and minimum boundaries of pump speed (Q,nMax,nMin)",
     nMin=750,
     nMax=4350,
-    cHQN=[ 0.00000e+00,  0.00000e+00,  6.48364e-07;
-           0.00000e+00,  4.95678e-05,  0.00000e+00;
-          -4.02425e-02,  0.00000e+00,  0.00000e+00]
+    cHQN=[ 0.00000e+00,  0.00000e+00,  6.52362e-07;
+           0.00000e+00,  6.12540e-05,  0.00000e+00;
+          -4.34488e-02,  0.00000e+00,  0.00000e+00]
        "coefficients for H = f(Q,N)",
-    cPQN=[ 2.83315e+01, -5.76969e-02,  4.07271e-05, -8.81637e-09,  8.94944e-13;
-           0.00000e+00,  0.00000e+00,  1.68778e-06,  0.00000e+00,  0.00000e+00;
-           0.00000e+00,  2.37492e-04,  0.00000e+00,  0.00000e+00,  0.00000e+00;
-          -8.16541e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
+    cPQN=[1.17764e+00,  2.85662e-03, -2.38557e-06,  3.01986e-09, -2.01864e-13;
+           0.00000e+00,  0.00000e+00,  1.75607e-06,  0.00000e+00,  0.00000e+00;
+           0.00000e+00,  2.57857e-04,  0.00000e+00,  0.00000e+00,  0.00000e+00;
+          -8.92872e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
 annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2023-06-25 by Sarah Leidolf:<br>Generated</li>
+<li>2023-10-19 by Sarah Leidolf:<br>Generated</li>
 </ul>
 </html>", info="<html>
 <h4>Measurement and Regression Data</h4>
-<p>
-  <img src=
-  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H05_12.png\"
-  alt=\"Pump Characterisistcs\">
-</p>
+<p>Impure curves at high pump speed because of inaccurate data of the actual speed.</p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H05_12.png\"/> </p>
 <p>cHQN:</p>
-<pre>           0.00000e+00,  0.00000e+00,  6.48364e-07;
-           0.00000e+00,  4.95678e-05,  0.00000e+00;
-          -4.02425e-02,  0.00000e+00,  0.00000e+00</pre>
+<p><span style=\"font-family: Courier New;\">      0.00000e+00,  0.00000e+00,  6.52362e-07;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  6.12540e-05,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">          -4.34488e-02,  0.00000e+00,  0.00000e+00</span></p>
 <p>cPQN:</p>
-<pre>          2.83315e+01, -5.76969e-02,  4.07271e-05, -8.81637e-09,  8.94944e-13;
-           0.00000e+00,  0.00000e+00,  1.68778e-06,  0.00000e+00,  0.00000e+00;
-           0.00000e+00,  2.37492e-04,  0.00000e+00,  0.00000e+00,  0.00000e+00;
-          -8.16541e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</pre>
+<p><span style=\"font-family: Courier New;\">      1.17764e+00,  2.85662e-03, -2.38557e-06,  3.01986e-09, -2.01864e-13;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  0.00000e+00,  1.75607e-06,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">           0.00000e+00,  2.57857e-04,  0.00000e+00,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">          -8.92872e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</span></p>
 </html>"));
 end Pump_DN25_H05_12;
