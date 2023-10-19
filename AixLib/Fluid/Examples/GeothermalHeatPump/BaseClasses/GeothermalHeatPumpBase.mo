@@ -11,9 +11,12 @@ partial model GeothermalHeatPumpBase
   parameter Modelica.Units.SI.Temperature T_start_hot=300
     "Initial temperature of warm components";
 
-    replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
-      redeclare package Medium = Medium)                                       constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPort
+  replaceable model PeakLoadDeviceModel =
+      AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby
+    AixLib.Fluid.Interfaces.PartialTwoPortTransport(redeclare package Medium=Medium)
+    annotation(choicesAllMatching=true);
+
+    PeakLoadDeviceModel peaLoaDev
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.BufferStorage
@@ -38,7 +41,8 @@ partial model GeothermalHeatPumpBase
     n=5,
     hConIn=100,
     hConOut=10,
-    hConHC1=500)
+    hConHC1=500,
+    upToDownHC1=false)
          "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{24,-14},
             {52,20}})));
   FixedResistances.PressureDrop                     resistanceColdStorage(
@@ -256,7 +260,7 @@ equation
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
-  connect(resistanceHeatConsumerFlow.port_b, PeakLoadDevice.port_a) annotation (
+  connect(resistanceHeatConsumerFlow.port_b, peaLoaDev.port_a) annotation (
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
   connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-16.5,
           20},{-16,20},{-16,28},{-146,28},{-146,27.2}},        color={0,127,255}));
@@ -283,11 +287,6 @@ equation
       Line(points={{33.275,-14.34},{33.275,-20},{58,-20}}, color={0,127,255}));
   connect(coldStorage.fluidportTop1, resistanceColdConsumerReturn.port_b)
     annotation (Line(points={{33.1,20.17},{33.1,32},{80,32}}, color={0,127,255}));
-  connect(heatPump.port_b2, coldStorage.portHC1Out) annotation (Line(points={{
-          -33.5,-8.00002},{-33.5,-22},{16,-22},{16,7.42},{23.825,7.42}}, color=
-          {0,127,255}));
-  connect(pumpEvaporator.port_a, coldStorage.portHC1In) annotation (Line(points=
-         {{14,36},{18,36},{18,12.69},{23.65,12.69}}, color={0,127,255}));
   connect(pumpCondenser.port_a, heatStorage.portHC1Out) annotation (Line(points=
          {{6,-98},{16,-98},{16,-74.58},{23.825,-74.58}}, color={0,127,255}));
   connect(heatPump.port_b1, heatStorage.portHC1In) annotation (Line(points={{
@@ -297,6 +296,11 @@ equation
   connect(resistanceHeatConsumerReturn.port_b, heatStorage.fluidportBottom2)
     annotation (Line(points={{80,-106},{42.025,-106},{42.025,-96.17}}, color={0,
           127,255}));
+  connect(pumpEvaporator.port_a, coldStorage.portHC1Out) annotation (Line(
+        points={{14,36},{16,36},{16,7.42},{23.825,7.42}}, color={0,127,255}));
+  connect(heatPump.port_b2, coldStorage.portHC1In) annotation (Line(points={{
+          -33.5,-8.00002},{-33.5,-16},{14,-16},{14,12.69},{23.65,12.69}}, color
+        ={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
