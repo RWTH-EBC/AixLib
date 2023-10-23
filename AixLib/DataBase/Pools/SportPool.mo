@@ -1,6 +1,6 @@
 within AixLib.DataBase.Pools;
 record SportPool "Pool which is mainly used by sport swimmers"
-  extends IndoorSwimmingPoolBaseDataDefinition(
+  extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition(
     TPool=301.15,
     VPool=942.956,
     APool=416.5,
@@ -33,9 +33,7 @@ record SportPool "Pool which is mainly used by sport swimmers"
     AFloInt=0.001,
     AFloExt=559.82,
     hConWatHor=50.0,
-    hConWatVer=5200.0,
-    PoolWallParam=
-        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction());
+    hConWatVer=5200.0);
   annotation (Documentation(info="<html>
 <p>The swimming pool &quot;SportPool&quot; describes a typical indoor swimming pool, which is mainly used for sport swimming. </p>
 </html>"));
