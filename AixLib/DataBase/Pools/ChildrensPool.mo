@@ -1,6 +1,6 @@
 within AixLib.DataBase.Pools;
 record ChildrensPool "Pool which is mainly used by children"
-  extends IndoorSwimmingPoolBaseDataDefinition(
+  extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition(
     TPool=303.15,
     VPool=126.8,
     APool=125.0,
@@ -33,9 +33,7 @@ record ChildrensPool "Pool which is mainly used by children"
     AFloInt=0.001,
     AFloExt=156.5,
     hConWatHor=50.0,
-    hConWatVer=5200.0,
-    PoolWallParam=
-        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction());
+    hConWatVer=5200.0);
 annotation (Documentation(info="<html>
 <p>The swimming pool &quot;ChildrensPool&quot; describes a typical indoor swimming pool, which is mainly used by children and to teach children swimming. </p>
 </html>"));
