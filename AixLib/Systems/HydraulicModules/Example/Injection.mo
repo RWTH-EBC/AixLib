@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Example;
+within AixLib.Systems.HydraulicModules.Example;
 model Injection "Test for injection circuit"
   extends Modelica.Icons.Example;
 

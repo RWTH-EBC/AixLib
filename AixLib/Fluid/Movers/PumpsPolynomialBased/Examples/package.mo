@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
+within AixLib.Fluid.Movers.PumpsPolynomialBased;
 package Examples
 extends Modelica.Icons.ExamplesPackage;
 

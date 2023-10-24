@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.ThermalZones;
+within AixLib.DataBase.ThermalZones;
 record Office_1995_1000 "Office zone from 1995 with 1000 m² area and without heater"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = 293.15,

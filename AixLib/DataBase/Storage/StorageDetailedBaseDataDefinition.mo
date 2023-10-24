@@ -49,14 +49,14 @@ record StorageDetailedBaseDataDefinition
   <span style=\"color:#008000\">References</span>
 </h4>
 <p>
-  Base data definition for record used with
-  <a href=\"modelica://AixLib.Fluid.Storage.StorageDetailed\">AixLib.Fluid.Storage.StorageDetailed</a>
+  Base data definition for record used with <a href=
+  \"modelica://AixLib.Fluid.Storage.StorageDetailed\">AixLib.Fluid.Storage.StorageDetailed</a>
 </p>
 </html>",
         revisions="<html><ul>
   <li>
-  <i>November 17, 2022</i> by Laura Maier:<br/>
-  Refactor and fix documentation
+    <i>November 17, 2022</i> by Laura Maier:<br/>
+    Refactor and fix documentation
   </li>
   <li>
     <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>

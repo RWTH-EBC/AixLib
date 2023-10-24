@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
 model PowerFlowCoefficient
   "Model describing flow coefficient based on power approach"
   extends BaseClasses.PartialFlowCoefficient;

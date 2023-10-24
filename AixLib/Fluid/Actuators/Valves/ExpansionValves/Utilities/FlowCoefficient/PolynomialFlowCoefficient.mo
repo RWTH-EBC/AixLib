@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
 model PolynomialFlowCoefficient
   "Model describing flow coefficient based on polynomial approach"
   extends BaseClasses.PartialFlowCoefficient;

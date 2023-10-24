@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Generic_VarRef_VarDisVol_RotaryScroll
   "Generic overall volumetric efficiency based on literature review for various compressors"
   extends PolynomialVolumetricEfficiency(

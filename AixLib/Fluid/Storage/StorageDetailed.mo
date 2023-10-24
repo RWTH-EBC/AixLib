@@ -777,7 +777,7 @@ for i in 2:(n-1) loop
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html><ul>
   <li>November 14, 2022, by Laura Maier:<br/>
-  Add adapt name and do some spring cleaning
+    Add adapt name and do some spring cleaning
   </li>
   <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     - <a href=

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
+within AixLib.Controls.HVACAgentBasedControl.Agents;
 model ColdProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 0

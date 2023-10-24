@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
 

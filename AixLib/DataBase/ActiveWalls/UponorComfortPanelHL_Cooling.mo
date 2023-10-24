@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.ActiveWalls;
+within AixLib.DataBase.ActiveWalls;
 record UponorComfortPanelHL_Cooling
   "Ceiling cooling from Uponor Comfort panel HL"
 

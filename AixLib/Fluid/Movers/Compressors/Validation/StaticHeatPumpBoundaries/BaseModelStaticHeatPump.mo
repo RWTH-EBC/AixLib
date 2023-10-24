@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
+within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
 model BaseModelStaticHeatPump
   "Base model to test compressors using static heat pump boundaries"
 
