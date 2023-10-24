@@ -77,24 +77,62 @@ record Pump_DN30_H1_12 "Pump with head 1 to 11m and 10,7m^3/h volume flow (Wilo 
           -3.71130e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
 
-  annotation(preferredView="text", Documentation(revisions="<html>
-<ul>
-<li>2023-10-19 by Sarah Leidolf:<br>Generated</li>
+  annotation(preferredView="text", Documentation(revisions="<html><ul>
+  <li>2023-10-19 by Sarah Leidolf:<br/>
+    Generated
+  </li>
 </ul>
-</html>", info="<html>
-<h4>Measurement and Regression Data</h4>
-<p>Dimension estimate, but inaccuracies occur due to lack of information in the data sheets.</p>
-<p>Espacially because of missing information of upper and lower limit of pump speed.</p>
-<p><br><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN30_H1_12.png\"/> </p>
-<p>cHQN:</p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 5.07080e-07;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 6.15992e-05, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-6.58190e-02, 0.00000e+00, 0.00000e+00</span></p>
-<p>cPQN:</p>
-<p><span style=\"font-family: Courier New;\">4.06360e-05, 2.77185e-02, -2.02099e-05, 8.49238e-09, -8.67775e-13;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.21688e-06, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 6.87022e-06, 0.00000e+00, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-3.71130e-02, 0.00000e+00, 0.00000e+00, 0.00000e+00, 0.00000e+00</span></p>
+</html>", info="<html><h4>
+  Measurement and Regression Data
+</h4>
+<p>
+  Dimension estimate, but inaccuracies occur due to lack of information
+  in the data sheets.
+</p>
+<p>
+  Espacially because of missing information of upper and lower limit of
+  pump speed.
+</p>
+<p>
+  <br/>
+  <img src=
+  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN30_H1_12.png\"
+  alt=\"1\">
+</p>
+<p>
+  cHQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
+  5.07080e-07;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 6.15992e-05,
+  0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-6.58190e-02, 0.00000e+00,
+  0.00000e+00</span>
+</p>
+<p>
+  cPQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">4.06360e-05, 2.77185e-02,
+  -2.02099e-05, 8.49238e-09, -8.67775e-13;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
+  1.21688e-06, 0.00000e+00, 0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 6.87022e-06,
+  0.00000e+00, 0.00000e+00, 0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-3.71130e-02, 0.00000e+00,
+  0.00000e+00, 0.00000e+00, 0.00000e+00</span>
+</p>
 </html>"));
 
 end Pump_DN30_H1_12;
