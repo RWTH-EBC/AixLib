@@ -76,11 +76,14 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
           -7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;
           -4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
+
       annotation(preferredView="text", Documentation(revisions="<html><ul>
+
   <li>2023-10-19 by Sarah Leidolf:<br/>
     Generated
   </li>
 </ul>
+
 </html>", info="<html><h4>
   Measurement and Regression Data
 </h4>
@@ -101,6 +104,7 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
   cHQN:
 </p>
 <p>
+
   <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
   5.29109e-07;</span>
 </p>
@@ -111,6 +115,7 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
 <p>
   <span style=\"font-family: Courier New;\">-6.78540e-02, 0.00000e+00,
   0.00000e+00</span>
+
 </p>
 <p>
   cPQN:
@@ -130,6 +135,7 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
 <p>
   <span style=\"font-family: Courier New;\">-4.10723e-01, 0.00000e+00,
   2.94088e-08, 0.00000e+00, 0.00000e+00</span>
+
 </p>
 </html>"));
 end Pump_DN50_H1_10;

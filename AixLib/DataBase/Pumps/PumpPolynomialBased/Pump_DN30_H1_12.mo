@@ -82,6 +82,7 @@ record Pump_DN30_H1_12 "Pump with head 1 to 11m and 10,7m^3/h volume flow (Wilo 
     Generated
   </li>
 </ul>
+
 </html>", info="<html><h4>
   Measurement and Regression Data
 </h4>
@@ -98,11 +99,13 @@ record Pump_DN30_H1_12 "Pump with head 1 to 11m and 10,7m^3/h volume flow (Wilo 
   <img src=
   \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN30_H1_12.png\"
   alt=\"1\">
+
 </p>
 <p>
   cHQN:
 </p>
 <p>
+
   <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
   5.07080e-07;</span>
 </p>
@@ -113,11 +116,13 @@ record Pump_DN30_H1_12 "Pump with head 1 to 11m and 10,7m^3/h volume flow (Wilo 
 <p>
   <span style=\"font-family: Courier New;\">-6.58190e-02, 0.00000e+00,
   0.00000e+00</span>
+
 </p>
 <p>
   cPQN:
 </p>
 <p>
+
   <span style=\"font-family: Courier New;\">4.06360e-05, 2.77185e-02,
   -2.02099e-05, 8.49238e-09, -8.67775e-13;</span>
 </p>
@@ -132,6 +137,7 @@ record Pump_DN30_H1_12 "Pump with head 1 to 11m and 10,7m^3/h volume flow (Wilo 
 <p>
   <span style=\"font-family: Courier New;\">-3.71130e-02, 0.00000e+00,
   0.00000e+00, 0.00000e+00, 0.00000e+00</span>
+
 </p>
 </html>"));
 

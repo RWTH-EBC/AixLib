@@ -76,11 +76,14 @@ record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wi
            0.00000e+00,  5.09522e-05,  0.00000e+00,  0.00000e+00,  0.00000e+00;
           -4.54214e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
+
       annotation(preferredView="text", Documentation(revisions="<html><ul>
+
   <li>2023-10-19 by Sarah Leidolf:<br/>
     Generated
   </li>
 </ul>
+
 </html>", info="<html><h4>
   Measurement and Regression Data
 </h4>
@@ -92,11 +95,13 @@ record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wi
   <img src=
   \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H05_16.png\"
   alt=\"1\">
+
 </p>
 <p>
   cHQN:
 </p>
 <p>
+
   <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
   1.52394e-06;</span>
 </p>
@@ -107,11 +112,13 @@ record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wi
 <p>
   <span style=\"font-family: Courier New;\">-4.42148e-03, 0.00000e+00,
   0.00000e+000</span>
+
 </p>
 <p>
   cPQN:
 </p>
 <p>
+
   <span style=\"font-family: Courier New;\">8.61711e+01, -3.19500e-01,
   3.36762e-04, -1.12746e-07, 1.59435e-11;</span>
 </p>
@@ -126,6 +133,7 @@ record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wi
 <p>
   <span style=\"font-family: Courier New;\">-4.54214e-03, 0.00000e+00,
   0.00000e+00, 0.00000e+00, 0.00000e+00</span>
+
 </p>
 </html>"));
 
