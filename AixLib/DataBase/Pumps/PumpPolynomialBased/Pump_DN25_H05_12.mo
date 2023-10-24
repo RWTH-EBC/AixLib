@@ -82,16 +82,16 @@ annotation(preferredView="text", Documentation(revisions="<html>
 </ul>
 </html>", info="<html>
 <h4>Measurement and Regression Data</h4>
-<p>Impure curves at high pump speed because of inaccurate data of the actual speed.</p>
+<p>Impure curves at high pump speed because of inaccurate data of upper and lower limit of pump speed.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H05_12.png\"/> </p>
 <p>cHQN:</p>
-<p><span style=\"font-family: Courier New;\">      0.00000e+00,  0.00000e+00,  6.52362e-07;</span></p>
-<p><span style=\"font-family: Courier New;\">           0.00000e+00,  6.12540e-05,  0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">          -4.34488e-02,  0.00000e+00,  0.00000e+00</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 6.52362e-07;</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00, 6.12540e-05, 0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">-4.34488e-02, 0.00000e+00, 0.00000e+00</span></p>
 <p>cPQN:</p>
-<p><span style=\"font-family: Courier New;\">      1.17764e+00,  2.85662e-03, -2.38557e-06,  3.01986e-09, -2.01864e-13;</span></p>
-<p><span style=\"font-family: Courier New;\">           0.00000e+00,  0.00000e+00,  1.75607e-06,  0.00000e+00,  0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">           0.00000e+00,  2.57857e-04,  0.00000e+00,  0.00000e+00,  0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">          -8.92872e-02,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00</span></p>
+<p><span style=\"font-family: Courier New;\">1.17764e+00, 2.85662e-03, -2.38557e-06, 3.01986e-09, -2.01864e-13;</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.75607e-06, 0.00000e+00, 0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00, 2.57857e-04, 0.00000e+00, 0.00000e+00, 0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">-8.92872e-02, 0.00000e+00, 0.00000e+00, 0.00000e+00, 0.00000e+00</span></p>
 </html>"));
 end Pump_DN25_H05_12;

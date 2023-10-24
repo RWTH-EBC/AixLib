@@ -34,47 +34,47 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
           11.00,  1.00,  0.000]
       "maximum and minimum boundaries of pump (Q,Hmax,Hmin)",
     maxMinSpeedCurves = [
-           0.00, 4450, 1400;
-           0.38, 4450, 1400;
-           0.76, 4450, 1400;
-           1.14, 4450, 1400;
-           1.52, 4450, 1400;
-           1.90, 4450, 1400;
-           2.28, 4450, 1400;
-           2.66, 4450, 1400;
-           3.03, 4450, 1400;
-           3.41, 4450, 1400;
-           3.79, 4450, 1400;
-           4.17, 4450, 1400;
-           4.55, 4200, 1400;
-           4.93, 4014, 1400;
-           5.31, 4006, 1400;
-           5.69, 3993, 1400;
-           6.07, 3986, 1400;
-           6.45, 3972, 1400;
-           6.83, 3965, 1400;
-           7.21, 3951, 1400;
-           7.59, 3944, 1400;
-           7.97, 3930, 1400;
-           8.34, 3920, 1400;
-           8.72, 3909, 1400;
-           9.10, 3900, 1400;
-           9.48, 3888, 1400;
-           9.86, 3880, 1400;
-          10.24, 3867, 1400;
-          10.62, 3859, 1400;
-          11.00, 3846, 1400]
+          0.00, 4450, 1400;
+           0.40, 4450, 1400;
+           0.79, 4450, 1400;
+           1.19, 4450, 1400;
+           1.59, 4450, 1400;
+           1.98, 4450, 1400;
+           2.38, 4450, 1400;
+           2.78, 4450, 1400;
+           3.17, 4450, 1400;
+           3.57, 4431, 1400;
+           3.97, 4411, 1400;
+           4.36, 4381, 1400;
+           4.76, 4349, 1400;
+           5.16, 4318, 1400;
+           5.55, 4286, 1400;
+           5.95, 4254, 1400;
+           6.34, 4224, 1400;
+           6.74, 4195, 1400;
+           7.14, 4164, 1400;
+           7.53, 4131, 1400;
+           7.93, 4098, 1400;
+           8.33, 4065, 1400;
+           8.72, 4033, 1400;
+           9.12, 4001, 1400;
+           9.52, 3969, 1400;
+           9.91, 3937, 1400;
+          10.31, 3905, 1400;
+          10.71, 3873, 1400;
+          11.10, 3846, 1400;
+          11.50, 3830, 1400]
       "maximum and minimum boundaries of pump speed (Q,nMax,nMin)",
     nMin=1400,
     nMax=4450,
-    cHQN=[0.00000e+00,  0.00000e+00,  5.24657e-07;
-          -3.89844e-01,  1.45207e-04,  0.00000e+00;
-           3.82070e-03,  0.00000e+00, -5.39588e-09]
+    cHQN=[0.00000e+00,  0.00000e+00,  5.29109e-07;
+           0.00000e+00,  1.41007e-04, -2.69160e-08;
+          -6.78540e-02,  0.00000e+00,  0.00000e+00]
        "coefficients for H = f(Q,N)",
-    cPQN=[ 9.80257e-02,  4.36208e-02, -4.75382e-05,  1.80796e-08, -1.91681e-12;
-           1.97155e+01, -2.01796e-02,  5.63182e-06,  0.00000e+00,  0.00000e+00;
-          -5.52573e+00,  7.08360e-03, -1.58502e-06,  0.00000e+00,  0.00000e+00;
-          -5.06448e-01,  0.00000e+00,  3.65647e-08,  0.00000e+00,  0.00000e+00]
+    cPQN=[1.27173e+00,  2.83414e-02, -3.32976e-05,  1.37583e-08, -1.49621e-12;
+           3.36126e+01, -2.82618e-02,  6.76678e-06,  0.00000e+00,  0.00000e+00;
+          -7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;
+          -4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
       annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
@@ -83,16 +83,16 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
 </html>", info="<html>
 <h4>Measurement and Regression Data</h4>
 <p>Dimension estimate, but inaccuracies occur due to lack of information in the data sheets.</p>
-<p>Espacially because of missing information of actual speed.</p>
+<p>Espacially because of missing information of upper and lower limit of pump speed.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H1_10.png\"/> </p>
 <p>cHQN:</p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 5.24657e-07;</span></p>
-<p><span style=\"font-family: Courier New;\">-3.89844e-01, 1.45207e-04, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">3.82070e-03, 0.00000e+00, -5.39588e-09</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00,  0.00000e+00,  5.29109e-07;</span></p>
+<p><span style=\"font-family: Courier New;\">0.00000e+00,  1.41007e-04, -2.69160e-08;</span></p>
+<p><span style=\"font-family: Courier New;\">-6.78540e-02,  0.00000e+00,  0.00000e+00</span></p>
 <p>cPQN:</p>
-<p><span style=\"font-family: Courier New;\">9.80257e-02, 4.36208e-02, -4.75382e-05, 1.80796e-08, -1.91681e-12;</span></p>
-<p><span style=\"font-family: Courier New;\">1.97155e+01, -2.01796e-02, 5.63182e-06, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-5.52573e+00, 7.08360e-03, -1.58502e-06, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-5.06448e-01, 0.00000e+00, 3.65647e-08, 0.00000e+00, 0.00000e+00</span></p>
+<p><span style=\"font-family: Courier New;\">1.27173e+00,  2.83414e-02, -3.32976e-05,  1.37583e-08, -1.49621e-12;</span></p>
+<p><span style=\"font-family: Courier New;\"> 3.36126e+01, -2.82618e-02,  6.76678e-06,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\"> -7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;</span></p>
+<p><span style=\"font-family: Courier New;\">-4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00</span></p>
 </html>"));
 end Pump_DN50_H1_10;
