@@ -76,23 +76,49 @@ record Pump_DN50_H1_10 "Pump with head 1 to 10.8m and 11.5m^3/h volume flow (Wil
           -7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;
           -4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
-      annotation(preferredView="text", Documentation(revisions="<html>
-<ul>
-<li>2023-10-19 by Sarah Leidolf:<br>Generated</li>
+  annotation(preferredView="text", Documentation(revisions="<html><ul>
+  <li>2023-10-19 by Sarah Leidolf:<br/>
+    Generated
+  </li>
 </ul>
 </html>", info="<html>
-<h4>Measurement and Regression Data</h4>
-<p>Dimension estimate, but inaccuracies occur due to lack of information in the data sheets.</p>
-<p>Espacially because of missing information of upper and lower limit of pump speed.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H1_10.png\"/> </p>
-<p>cHQN:</p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00,  0.00000e+00,  5.29109e-07;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00,  1.41007e-04, -2.69160e-08;</span></p>
-<p><span style=\"font-family: Courier New;\">-6.78540e-02,  0.00000e+00,  0.00000e+00</span></p>
-<p>cPQN:</p>
-<p><span style=\"font-family: Courier New;\">1.27173e+00,  2.83414e-02, -3.32976e-05,  1.37583e-08, -1.49621e-12;</span></p>
-<p><span style=\"font-family: Courier New;\"> 3.36126e+01, -2.82618e-02,  6.76678e-06,  0.00000e+00,  0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\"> -7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00</span></p>
+<p>
+  Dimension estimate, but inaccuracies occur due to lack of information in the data sheets.Espacially because of missing information of upper and lower limit of pump speed.
+</p>
+<h4>
+  Measurement Data
+</h4>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H1_10.png\"
+  alt=\"Pump Characterisistcs\">
+</p>
+<p>
+  cHQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00,  0.00000e+00,  5.29109e-07;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00,  1.41007e-04, -2.69160e-08;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-6.78540e-02,  0.00000e+00,  0.00000e+00</span>
+</p>
+<p>
+  cPQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">1.27173e+00,  2.83414e-02, -3.32976e-05,  1.37583e-08, -1.49621e-12;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">3.36126e+01, -2.82618e-02,  6.76678e-06,  0.00000e+00,  0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-7.91039e+00,  8.00678e-03, -1.65276e-06,  0.00000e+00,  0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-4.10723e-01,  0.00000e+00,  2.94088e-08,  0.00000e+00,  0.00000e+00</span>
+</p>
 </html>"));
 end Pump_DN50_H1_10;
