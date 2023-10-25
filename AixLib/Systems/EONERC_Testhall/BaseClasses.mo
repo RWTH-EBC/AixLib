@@ -1,5 +1,6 @@
 ﻿within AixLib.Systems.EONERC_Testhall;
 package BaseClasses
+  extends Modelica.Icons.BasesPackage;
   package AHU
     model AHU
       AixLib.Systems.ModularAHU.GenericAHU ahu(
@@ -14,10 +15,12 @@ package BaseClasses
         preheater(
           hydraulicModuleIcon="Injection",
           m2_flow_nominal=2.3,
-          redeclare AixLib.Systems.HydraulicModules.Injection hydraulicModule(
+          redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection
+            hydraulicModule(
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
             Kv=6.3,
             valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
+
             pipe1(length=1.2),
             pipe2(length=0.1),
             pipe3(length=0.1),
@@ -28,32 +31,34 @@ package BaseClasses
             pipe8(length=0.3),
             pipe9(length=0.3),
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
               PumpInterface(pump(redeclare
                   AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
         cooler(
           hydraulicModuleIcon="Injection2WayValve",
           m2_flow_nominal=2.3,
-          redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
+          redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
             hydraulicModule(
             pipeModel="SimplePipe",
             length=1,
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(),
             Kv=25,
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
-              PumpInterface(pumpParam=Testhall.Subsystems.AHU.Pump_Test.pump_cooler()))),
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+              PumpInterface(pumpParam=
+                  Testhall.Subsystems.AHU.Pump_Test.pump_cooler()))),
         heater(
           hydraulicModuleIcon="Injection2WayValve",
           m2_flow_nominal=2.3,
-          redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
+          redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
             hydraulicModule(
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
             Kv=10,
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
               PumpInterface(pump(redeclare
                   AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
+
             pipe1(length=10),
             pipe2(length=0.6),
             pipe3(length=2),
@@ -421,9 +426,11 @@ package BaseClasses
           final m1_flow_nominal=3.7,
           m2_flow_nominal=2.7,
           T_amb=295.15,
-          redeclare replaceable AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+          redeclare replaceable AixLib.DataBase.Pumps.HydraulicModules.Admix
+            hydraulicModule(
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
-            parameterIso=AixLib.DataBase.Pipes.Insulation.Iso50pc(lambda=lambda, c=c),
+            parameterIso=AixLib.DataBase.Pipes.Insulation.Iso50pc(lambda=lambda,
+                c=c),
             Kv=Kv,
             valveCharacteristic=
                 AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
@@ -434,9 +441,10 @@ package BaseClasses
             pipe5(length=1.3, fac=fac5),
             pipe6(length=0.3, fac=fac6),
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
               PumpInterface(pump(redeclare
                   AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per))),
+
           dynamicHX(
             dp1_nominal=11,
             dp2_nominal=dp2_HX "nach Datenblatt dp2=20e3",
@@ -445,8 +453,8 @@ package BaseClasses
             tau_C=tau_C,
             dT_nom=25,
             Gc1=Gc1,
-            Gc2=Gc2))              annotation (Dialog(enable=true),
-            Placement(transformation(extent={{-24,-6},{20,54}})));
+            Gc2=Gc2)) annotation (Dialog(enable=true), Placement(transformation(
+                extent={{-24,-6},{20,54}})));
 
         Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
           annotation (Placement(transformation(extent={{-62,76},{-42,96}})));
@@ -574,10 +582,11 @@ package BaseClasses
           m2_flow_nominal=2.3,
           T_amb=295.15,
           hydraulicModuleIcon="Admix",
-          redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+          redeclare AixLib.DataBase.Pumps.HydraulicModules.Admix
+            hydraulicModule(
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
-            parameterIso=AixLib.DataBase.Pipes.Insulation.Iso50pc(lambda=lambda, c=
-                c),
+            parameterIso=AixLib.DataBase.Pipes.Insulation.Iso50pc(lambda=lambda,
+                c=c),
             Kv=Kv,
             valveCharacteristic=
                 AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
@@ -588,8 +597,9 @@ package BaseClasses
             pipe5(length=1.5, fac=fac5),
             pipe6(length=0.3, fac=fac6),
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
-              PumpInterface(pumpParam=Testhall.Subsystems.AHU.Pump_Test.pump_cooler())),
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+              PumpInterface(pumpParam=
+                  Testhall.Subsystems.AHU.Pump_Test.pump_cooler())),
           dynamicHX(
             dp1_nominal=125,
             dp2_nominal=dp2_HX,
@@ -739,11 +749,13 @@ package BaseClasses
           m1_flow_nominal=3.7,
           m2_flow_nominal=2.3,
           T_amb=288.15,
-          redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+          redeclare AixLib.DataBase.Pumps.HydraulicModules.Admix
+            hydraulicModule(
             parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_18x1(),
             parameterIso=AixLib.DataBase.Pipes.Insulation.Iso50pc(),
             Kv=Kv "Data Sheet: Kv=10",
             valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
+
             pipe1(length=15, fac=fac1),
             pipe2(length=0.6, fac=fac2),
             pipe3(length=2, fac=fac3),
@@ -751,8 +763,9 @@ package BaseClasses
             pipe5(length=15.4, fac=fac5),
             pipe6(length=0.6, fac=fac6),
             redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
-              PumpInterface(pumpParam=Testhall.Subsystems.AHU.Pump_Test.pump_heater())),
+              AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+              PumpInterface(pumpParam=
+                  Testhall.Subsystems.AHU.Pump_Test.pump_heater())),
           dynamicHX(
             dp1_nominal=23,
             dp2_nominal=dp2_HX,
@@ -845,57 +858,61 @@ package BaseClasses
           usePreheater=true,
           useHumidifierRet=false,
           useHumidifier=false,
-          preheater(hydraulicModuleIcon="Injection", redeclare replaceable AixLib.Systems.HydraulicModules.Injection
-            hydraulicModule(
-            parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(d_i=35e-3, d_o=
-                40e-3),
-            Kv=6.3,
-            valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
-            valve(y_start=0.5),
-            pipe1(length=1.2),
-            pipe2(length=0.1),
-            pipe3(length=0.1),
-            pipe4(length=2.3, fac=220),
-            pipe5(length=2),
-            pipe6(length=0.1),
-            pipe7(length=1.3),
-            pipe8(length=0.3),
-            pipe9(length=0.3),
-            redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-              PumpInterface(pump(redeclare
-                  AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)))),
+          preheater(hydraulicModuleIcon="Injection", redeclare replaceable
+              AixLib.DataBase.Pumps.HydraulicModules.Injection hydraulicModule(
+              parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(d_i=35e-3,
+                  d_o=40e-3),
+              Kv=6.3,
+              valveCharacteristic=
+                  AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
+              valve(y_start=0.5),
+              pipe1(length=1.2),
+              pipe2(length=0.1),
+              pipe3(length=0.1),
+              pipe4(length=2.3, fac=220),
+              pipe5(length=2),
+              pipe6(length=0.1),
+              pipe7(length=1.3),
+              pipe8(length=0.3),
+              pipe9(length=0.3),
+              redeclare
+                AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+                PumpInterface(pump(redeclare
+                    AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)))),
           cooler(hydraulicModuleIcon="Injection2WayValve", redeclare
-              AixLib.Systems.HydraulicModules.Injection2WayValve hydraulicModule(
+              AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
+              hydraulicModule(
               pipeModel="SimplePipe",
               length=1,
               parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(),
               Kv=25,
               redeclare
-                AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+                AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
                 PumpInterface(pump(redeclare
                     AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
           heater(
             hydraulicModuleIcon="Injection",
             m2_flow_nominal=2.3,
             T_amb=288.15,
-          redeclare AixLib.Systems.HydraulicModules.Injection hydraulicModule(
-            parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
-            Kv=10,
-            valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
-            pipe1(length=10),
-            pipe2(length=0.3),
-            pipe3(length=0.3),
-            pipe4(length=2, fac=315),
-            pipe5(length=5.5),
-            pipe6(length=0.4),
-            pipe7(length=10),
-            pipe8(length=0.6),
-            pipe9(length=0.6),
-            redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-              PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12
-                  per)))))
+            redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection
+              hydraulicModule(
+              parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
+              Kv=10,
+              valveCharacteristic=
+                  AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
+              pipe1(length=10),
+              pipe2(length=0.3),
+              pipe3(length=0.3),
+              pipe4(length=2, fac=315),
+              pipe5(length=5.5),
+              pipe6(length=0.4),
+              pipe7(length=10),
+              pipe8(length=0.6),
+              pipe9(length=0.6),
+              redeclare
+                AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+                PumpInterface(pump(redeclare
+                    AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)))))
           annotation (Placement(transformation(extent={{-54,-24},{46,28}})));
 
         AixLib.Fluid.Sources.Boundary_ph SupPrimHeater(
@@ -984,7 +1001,7 @@ package BaseClasses
   package CCA "Concrete core activation"
     model CCA
 
-      AixLib.Systems.HydraulicModules.Injection2WayValve cca(
+      AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve cca(
         redeclare package Medium = AixLib.Media.Water,
         pipeModel="SimplePipe",
         length=1,
@@ -992,9 +1009,9 @@ package BaseClasses
         Kv=2.34,
         m_flow_nominal=1.79,
         redeclare
-        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
-              PumpInterface(pumpParam=
-                  AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H1_10()),
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          PumpInterface(pumpParam=
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H1_10()),
         pipe1(length=0.3),
         pipe2(length=0.2),
         pipe3(length=10),
@@ -1030,14 +1047,19 @@ package BaseClasses
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_CCA
         annotation (Placement(transformation(extent={{-26,94},{-6,114}}),
             iconTransformation(extent={{-10,94},{10,114}})));
+      DistributeBus           dB_CCA annotation (Placement(transformation(extent={{-104,
+                -42},{-78,-10}}),  iconTransformation(extent={{-122,-24},{-82,16}})));
       AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
             AixLib.Media.Water) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-44,30})));
-      DistributeBus distributeBus
-        annotation (Placement(transformation(extent={{-122,-46},{-82,-6}})));
     equation
+      connect(dB_CCA.bus_cca, cca.hydraulicBus) annotation (Line(
+          points={{-90.935,-25.92},{-69.4999,-25.92},{-69.4999,-26},{-47.9999,
+              -26}},
+          color={255,204,51},
+          thickness=0.5));
       connect(cca_supprim, cca.port_a1) annotation (Line(points={{-34,-100},{
               -34,-81},{-33.5999,-81},{-33.5999,-62}},
                                     color={0,127,255}));
@@ -1053,13 +1075,8 @@ package BaseClasses
               9.9999},{-38,9.9999},{-38,20},{-44,20}}, color={0,127,255}));
       connect(senMasFlo.port_b, concreteCoreActivation.port_sup) annotation (Line(
             points={{-44,40},{-48,40},{-48,59},{-42,59}}, color={0,127,255}));
-      connect(cca.hydraulicBus, distributeBus.bus_cca) annotation (Line(
-          points={{-47.9999,-26},{-74.9999,-26},{-74.9999,-25.9},{-101.9,-25.9}},
-
-          color={255,204,51},
-          thickness=0.5));
-      connect(senMasFlo.m_flow, distributeBus.bus_cca.mflow) annotation (Line(
-            points={{-55,30},{-100,30},{-100,-26},{-102,-26}}, color={0,0,127}));
+      connect(senMasFlo.m_flow, dB_CCA.bus_cca.mflow) annotation (Line(points={{
+              -55,30},{-90.935,30},{-90.935,-25.92}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
               extent={{-100,100},{100,-100}},
@@ -1134,11 +1151,11 @@ package BaseClasses
           "heat port for connection to room volume" annotation (Placement(
               transformation(extent={{-10,66},{10,86}}),  iconTransformation(extent={{
                   -10,100},{10,120}})));
-        Modelica.Fluid.Interfaces.FluidPort_a port_sup(redeclare package Medium =
-              Medium)
+        Modelica.Fluid.Interfaces.FluidPort_a port_sup(redeclare package Medium
+            = Medium)
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_ret(redeclare package Medium =
-              Medium)
+        Modelica.Fluid.Interfaces.FluidPort_b port_ret(redeclare package Medium
+            = Medium)
           annotation (Placement(transformation(extent={{90,-10},{110,10}})));
       equation
         connect(pipe.heatPort,heatCapacitor. port) annotation (Line(points={{7.21645e-16,
@@ -1247,16 +1264,19 @@ package BaseClasses
             MediumAir) annotation (Placement(transformation(extent={{-188,76},{-168,
                 96}}), iconTransformation(extent={{22,-70},{42,-50}})));
 
-      AixLib.Systems.HydraulicModules.Injection2WayValve cid_Valve(
+      DistributeBus           distributeBus_CID annotation (Placement(
+            transformation(extent={{-82,100},{-46,138}}), iconTransformation(extent=
+               {{-112,-16},{-86,14}})));
+      AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve cid_Valve(
         redeclare package Medium = MediumWater,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
         Kv=0.63,
         m_flow_nominal=0.15,
-       redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-              PumpInterface(pump(redeclare
-                  AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)),
+        redeclare
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          PumpInterface(pump(redeclare
+              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)),
         pipe1(length=0.3, fac=10),
         pipe2(length=0.15, fac=10),
         pipe3(length=2.5, fac=10),
@@ -1279,15 +1299,13 @@ package BaseClasses
 
       connect(cid_supprim, cid_Valve.port_a1) annotation (Line(points={{-180,-8},{-165.001,
               -8},{-165.001,-8.00108},{-150.002,-8.00108}}, color={0,127,255}));
-      connect(cid_retprim, cid_Valve.port_b2) annotation (Line(points={{-180,-32},{
-              -156,-32},{-156,-32.001},{-150.002,-32.001}}, color={0,127,255}));
+      connect(cid_retprim, cid_Valve.port_b2) annotation (Line(points={{-180,
+              -32},{-156,-32},{-156,-32.001},{-150.002,-32.001}},
+                                                            color={0,127,255}));
 
       connect(cid_Valve.port_a2, hex_office_heater.port_b1) annotation (Line(points={{
               -110.002,-32.001},{-96,-32.001},{-96,34.4},{26,34.4}},  color={0,127,255}));
 
-      connect(Valve.y, distributeBus_CID.control_cid.Office1_Air_Valve) annotation (
-         Line(points={{-146,98},{-146,106},{-84,106},{-84,98},{-63.91,98},{-63.91,119.095}},
-            color={0,0,127}));
       connect(cid_Valve.port_b1, senMasFlo_hydraulics.port_a) annotation (Line(
             points={{-110.002,-8.00108},{-108,-8.00108},{-108,-8},{-78,-8}}, color=
               {0,127,255}));
@@ -1298,15 +1316,18 @@ package BaseClasses
           color={255,204,51},
           thickness=0.5));
 
-      connect(senMasFlo_hydraulics.m_flow, distributeBus_CID.bus_cid.m_flow)
-        annotation (Line(points={{-68,3},{-68,94},{-63.91,94},{-63.91,119.095}},
-            color={0,0,127}));
       connect(Valve.port_a, air_in)
         annotation (Line(points={{-156,86},{-178,86}}, color={0,127,255}));
       connect(Valve.port_b, hex_office_heater.port_a2) annotation (Line(points={{-136,
               86},{18,86},{18,47.6},{26,47.6}}, color={0,127,255}));
       connect(hex_office_heater.port_b2, pipe_offices.port_a) annotation (Line(
             points={{46,47.6},{46,46},{96,46},{96,64},{102,64}}, color={0,127,255}));
+      connect(senMasFlo_hydraulics.m_flow, distributeBus_CID.bus_cid.mflow)
+        annotation (Line(points={{-68,3},{-68,120},{-63.91,120},{-63.91,119.095}},
+            color={0,0,127}));
+      connect(Valve.y, distributeBus_CID.bus_cid.Office_Air_Valve) annotation (
+          Line(points={{-146,98},{-146,106},{-63.91,106},{-63.91,119.095}},
+            color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,-80},
                 {160,120}}),graphics={Rectangle(
               extent={{-100,60},{100,-60}},
@@ -1770,6 +1791,8 @@ package BaseClasses
                                                                   n=3, f=0.01,
         x_start={0,0,0})
         annotation (Placement(transformation(extent={{900,166},{920,186}})));
+      BaseClass.DistributeBus distributeBus_Buildings
+        annotation (Placement(transformation(extent={{-102,-60},{-62,-20}})));
     equation
       connect(pipe_out_hall2.port_b, AirOut_Hall2.ports[1])
         annotation (Line(points={{70,138},{70,154}}, color={0,127,255}));
@@ -2177,6 +2200,9 @@ package BaseClasses
       Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_building
         annotation (Placement(transformation(extent={{664,22},{684,42}}),     iconTransformation(extent={{-48,56},
                 {-28,76}})));
+      BaseClass.DistributeBus distributeBus_Buildings
+        annotation (Placement(transformation(extent={{652,-18},{692,22}}),  iconTransformation(extent={{-54,-6},
+                {-14,34}})));
       AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office4(
         redeclare package Medium = MediumAir,
         energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -2873,22 +2899,174 @@ package BaseClasses
                                Diagram(coordinateSystem(preserveAspectRatio=false,
               extent={{-160,0},{1460,280}})));
     end Buildings;
+
+    model SimpleConsumer_Hall1
+
+       replaceable package MediumWater =
+          AixLib.Media.Water
+        "Medium in the heatingsystem/hydraulic" annotation(choicesAllMatching=true);
+      replaceable package MediumAir =
+          AixLib.Media.Air
+        "Medium in the system" annotation(choicesAllMatching=true);
+
+      AixLib.DataBase.Pumps.HydraulicModules.SimpleConsumer Hall1(
+        redeclare package Medium = AixLib.Media.Air,
+        capacity=1,
+        Q_flow_fixed=20,
+        m_flow_nominal=3.7,
+        T_start=295.35,
+        functionality="Q_flow_input") "Thermal zone"
+        annotation (Placement(transformation(extent={{-64,116},{36,216}})));
+
+      AixLib.Fluid.Sources.MassFlowSource_T Sup(
+        redeclare package Medium = AixLib.Media.Air,
+        m_flow=3.7,
+        use_T_in=true,
+        nPorts=1)
+        annotation (Placement(transformation(extent={{-112,82},{-92,102}})));
+      AixLib.Fluid.Sources.Boundary_pT Ret(
+        redeclare package Medium = AixLib.Media.Air,
+        use_T_in=false,
+        nPorts=1) annotation (Placement(transformation(extent={{90,76},{70,96}})));
+      Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 20)
+        annotation (Placement(transformation(extent={{-170,90},{-150,110}})));
+      Modelica.Blocks.Sources.Constant const(k=-100e3)
+        annotation (Placement(transformation(extent={{-114,240},{-94,260}})));
+    equation
+
+      connect(Sup.ports[1], Hall1.port_a) annotation (Line(points={{-92,92},{-80,92},
+              {-80,166},{-64,166}}, color={0,127,255}));
+      connect(Ret.ports[1], Hall1.port_b) annotation (Line(points={{70,86},{40,86},
+              {40,166},{36,166}}, color={0,127,255}));
+      connect(realExpression.y, Sup.T_in) annotation (Line(points={{-149,100},{-122,
+              100},{-122,96},{-114,96}}, color={0,0,127}));
+      connect(const.y, Hall1.Q_flow)
+        annotation (Line(points={{-93,250},{-44,250},{-44,216}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
+                -40},{120,280}}),
+                              graphics={
+            Rectangle(
+              extent={{-58,262},{1448,0}},
+              lineColor={0,0,0},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-8,252},{152,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{166,252},{326,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{340,252},{500,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{510,252},{670,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{682,252},{842,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{856,252},{1016,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{1032,252},{1192,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{1210,252},{1370,214}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-44,72},{130,8}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="Hall2"),
+            Text(
+              extent={{154,72},{328,8}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="Hall1"),
+            Text(
+              extent={{310,66},{584,8}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="O1"),
+            Text(
+              extent={{528,66},{802,8}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="O2"),
+            Text(
+              extent={{754,70},{1028,12}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="O3"),
+            Text(
+              extent={{968,72},{1242,14}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="O4"),
+            Text(
+              extent={{1192,72},{1466,14}},
+              lineColor={0,0,0},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid,
+              fontSize=11,
+              textString="O5")}),
+                               Diagram(coordinateSystem(preserveAspectRatio=false,
+              extent={{-160,-40},{120,280}})),
+        experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
+    end SimpleConsumer_Hall1;
+
+    package Hall2
+    end Hall2;
+
+    package Hall1
+    end Hall1;
+
+    package OfficeArea
+    end OfficeArea;
   end Consumers;
 
   package CPH "Ceiling panel heater"
     model CPH
 
-      AixLib.Systems.HydraulicModules.Injection2WayValve cph_Valve(redeclare
-          package Medium =
-            AixLib.Media.Water,
+      AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve cph_Valve(
+        redeclare package Medium = AixLib.Media.Water,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=1.2,
         m_flow_nominal=0.54,
-         redeclare
-              AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-              PumpInterface(pump(redeclare
-                  AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
+        redeclare
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          PumpInterface(pump(redeclare
+              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
         pipe1(length=0.4),
         pipe2(length=0.1),
         pipe3(length=1),
@@ -2902,9 +3080,8 @@ package BaseClasses
             rotation=90,
             origin={-4,-116})));
 
-      /**Pumpe Original: Wilo Stratos 25/1to6**/
 
-      AixLib.Systems.HydraulicModules.Throttle cph_Throttle(
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle cph_Throttle(
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
         Kv=8,
@@ -2927,31 +3104,38 @@ package BaseClasses
         nNodes=3,
         each Gr=27) annotation (Placement(transformation(extent={{-34,58},{22,120}})));
 
-      Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package
-          Medium =
+      Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package Medium =
             AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-208},{-24,
                 -188}}), iconTransformation(extent={{-86,-210},{-66,-190}})));
-      Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package
-          Medium =
+      Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package Medium =
             AixLib.Media.Water) annotation (Placement(transformation(extent={{16,-208},{36,
                 -188}}), iconTransformation(extent={{2,-212},{22,-192}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_CPH
         annotation (Placement(transformation(extent={{-16,108},{4,128}}),
             iconTransformation(extent={{-38,70},{-18,90}})));
+      DistributeBus           distributeBus_CPH annotation (Placement(
+            transformation(extent={{-152,-46},{-112,-4}}),  iconTransformation(
+              extent={{-180,-76},{-140,-34}})));
       AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
             AixLib.Media.Water) annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=270,
             origin={-32,-40})));
-      DistributeBus distributeBus annotation (Placement(transformation(extent={
-                {-176,-46},{-146,-10}}), iconTransformation(extent={{-176,-46},
-                {-146,-10}})));
     equation
       connect(cph_Throttle.port_b2, cph_Valve.port_a2) annotation (Line(points={{11.6,
               -16},{10,-16},{10,-56},{26,-56},{26,-66.0001}},  color={0,127,255}));
       connect(radiantCeilingPanelHeater.port_b1,heat_port_CPH)
         annotation (Line(points={{-6,100.78},{-6,109.39},{-6,109.39},{-6,118}},
                                                       color={191,0,0}));
+      connect(distributeBus_CPH.bus_cph_throttle, cph_Throttle.hydraulicBus)
+        annotation (Line(
+          points={{-131.9,-24.895},{-131.9,15},{-38,15}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(distributeBus_CPH.bus_cph, cph_Valve.hydraulicBus) annotation (Line(
+          points={{-131.9,-24.895},{-131.9,-116},{-53.9999,-116}},
+          color={255,204,51},
+          thickness=0.5));
       connect(cph_supprim, cph_Valve.port_a1) annotation (Line(points={{-34,
               -198},{-34,-183},{-33.9999,-183},{-33.9999,-166}},
                                                           color={0,127,255}));
@@ -2967,19 +3151,9 @@ package BaseClasses
               -30},{-32,-16},{-25.6,-16}}, color={0,127,255}));
       connect(senMasFlo.port_a, cph_Valve.port_b1) annotation (Line(points={{-32,-50},
               {-33.9999,-50},{-33.9999,-66.0001}},      color={0,127,255}));
-      connect(cph_Valve.hydraulicBus, distributeBus.bus_cph) annotation (Line(
-          points={{-53.9999,-116},{-142,-116},{-142,-27.91},{-160.925,-27.91}},
-
-          color={255,204,51},
-          thickness=0.5));
-      connect(cph_Throttle.hydraulicBus, distributeBus.bus_cph_throttle)
-        annotation (Line(
-          points={{-38,15},{-38,14},{-138,14},{-138,-27.91},{-160.925,-27.91}},
-
-          color={255,204,51},
-          thickness=0.5));
-      connect(senMasFlo.m_flow, distributeBus.bus_cph.mflow) annotation (Line(
-            points={{-43,-40},{-140,-40},{-140,-28},{-161,-28}}, color={0,0,127}));
+      connect(senMasFlo.m_flow, distributeBus_CPH.bus_cph.mflow) annotation (Line(
+            points={{-43,-40},{-106,-40},{-106,-24.895},{-131.9,-24.895}}, color={0,
+              0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
                 -200},{100,120}}),graphics={
             Rectangle(
@@ -3035,6 +3209,91 @@ package BaseClasses
         experiment(StopTime=7200, __Dymola_Algorithm="Dassl"));
     end CPH;
 
+    package Components
+      model RadiantCeilingPanelHeater
+
+        replaceable package Medium = AixLib.Media.Water
+          "Medium in the system" annotation (choicesAllMatching=true);
+
+        parameter Integer nNodes "Number of elements";
+        parameter Real Gr(unit="m2") = 1.5*18*0.9/nNodes
+          "Net radiation conductance between two surfaces (see docu)";
+
+        AixLib.Fluid.FixedResistances.GenericPipe
+                                         genericPipe(
+          nNodes=nNodes,
+          redeclare package Medium = Medium,
+          T_start=343.15)
+          annotation (Dialog(enable=true), Placement(transformation(extent={{-12,-12},{12,12}})));
+        Modelica.Fluid.Interfaces.FluidPort_b radiantcph_ret(redeclare package
+            Medium =
+              Medium)
+          "Fluid connector b (positive design flow direction is from port_a to port_b)"
+          annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+        Modelica.Fluid.Interfaces.FluidPort_a radiantcph_sup(redeclare package
+            Medium =
+              Medium)
+          "Fluid connector a (positive design flow direction is from port_a to port_b)"
+          annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+        Modelica.Thermal.HeatTransfer.Components.BodyRadiation bodyRadiation[nNodes](Gr=Gr)
+                                  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={0,36})));
+        Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=
+              nNodes) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={0,68})));
+        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b1
+          annotation (Placement(transformation(extent={{-10,28},{10,48}}),
+              iconTransformation(extent={{-10,28},{10,48}})));
+      equation
+        connect(genericPipe.port_b, radiantcph_ret)
+          annotation (Line(points={{12,0},{100,0}}, color={0,127,255}));
+        connect(genericPipe.port_a, radiantcph_sup)
+          annotation (Line(points={{-12,0},{-100,0}}, color={0,127,255}));
+        connect(thermalCollector.port_a, bodyRadiation.port_b)
+          annotation (Line(points={{0,58},{0,46}}, color={191,0,0}));
+        connect(thermalCollector.port_b, port_b1)
+          annotation (Line(points={{0,78},{0,38},{0,38}},
+                                                   color={191,0,0}));
+        connect(genericPipe.heatPort, bodyRadiation[nNodes].port_a)
+          annotation (Line(points={{0,12},{0,26}}, color={191,0,0}));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+              Rectangle(
+                extent={{-60,10},{60,-10}},
+                lineColor={0,0,0},
+                fillColor={95,95,95},
+                fillPattern=FillPattern.Solid),
+              Line(
+                points={{-50,-12},{-50,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash),
+              Line(
+                points={{-30,-12},{-30,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash),
+              Line(
+                points={{-10,-12},{-10,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash),
+              Line(
+                points={{10,-12},{10,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash),
+              Line(
+                points={{30,-12},{30,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash),
+              Line(
+                points={{50,-12},{50,-32}},
+                color={255,128,0},
+                pattern=LinePattern.Dash)}),                           Diagram(
+              coordinateSystem(preserveAspectRatio=false)));
+      end RadiantCeilingPanelHeater;
+    end Components;
+
     model CPH_calib
 
         replaceable package MediumWater =
@@ -3060,18 +3319,17 @@ package BaseClasses
         use_T_in=true,
         nPorts=1) "fCPHTempSupPrimADS "
         annotation (Placement(transformation(extent={{-80,-186},{-60,-166}})));
-      AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
-        annotation (Placement(transformation(extent={{-94,-110},{-74,-90}}),
-            iconTransformation(extent={{0,0},{0,0}})));
-      AixLib.Systems.HydraulicModules.Injection2WayValve cph_Valve(redeclare
-          package Medium =
-            MediumWater,
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+        hydraulicBus annotation (Placement(transformation(extent={{-94,-110},{-74,
+                -90}}), iconTransformation(extent={{0,0},{0,0}})));
+      AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve cph_Valve(
+        redeclare package Medium = MediumWater,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
         Kv=12,
         m_flow_nominal=2.3,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
         pipe1(length=0.4),
@@ -3087,7 +3345,7 @@ package BaseClasses
             rotation=90,
             origin={-4,-94})));
 
-      AixLib.Systems.HydraulicModules.Throttle cph_Throttle(
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle cph_Throttle(
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
         Kv=8,
@@ -3116,9 +3374,9 @@ package BaseClasses
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         columns=2:9)  "1-TempOut, 2-TempRet, 3-TempRetPrim, 4-TempSup, 5-TempSupPrim, 6-PumpSpeed,7-VolFlow, 8-ValveSet"
         annotation (Placement(transformation(extent={{-158,-110},{-138,-90}})));
-      AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus1
-        annotation (Placement(transformation(extent={{-86,-8},{-66,12}}),
-            iconTransformation(extent={{0,0},{0,0}})));
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+        hydraulicBus1 annotation (Placement(transformation(extent={{-86,-8},{-66,
+                12}}), iconTransformation(extent={{0,0},{0,0}})));
     equation
       connect(hydraulicBus, cph_Valve.hydraulicBus) annotation (Line(
           points={{-84,-100},{-68,-100},{-68,-94.0001},{-53.9999,-94.0001}},
@@ -3208,94 +3466,165 @@ package BaseClasses
               extent={{-160,-200},{100,80}})),
         experiment(StopTime=7200, __Dymola_Algorithm="Dassl"));
     end CPH_calib;
-
-    package Components
-      model RadiantCeilingPanelHeater
-
-        replaceable package Medium = AixLib.Media.Water
-          "Medium in the system" annotation (choicesAllMatching=true);
-
-        parameter Integer nNodes "Number of elements";
-        parameter Real Gr(unit="m2") = 1.5*18*0.9/nNodes
-          "Net radiation conductance between two surfaces (see docu)";
-
-        AixLib.Fluid.FixedResistances.GenericPipe
-                                         genericPipe(
-          nNodes=nNodes,
-          redeclare package Medium = Medium,
-          T_start=343.15)
-          annotation (Dialog(enable=true), Placement(transformation(extent={{-12,-12},{12,12}})));
-        Modelica.Fluid.Interfaces.FluidPort_b radiantcph_ret(redeclare package
-            Medium =
-              Medium)
-          "Fluid connector b (positive design flow direction is from port_a to port_b)"
-          annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_a radiantcph_sup(redeclare package
-            Medium =
-              Medium)
-          "Fluid connector a (positive design flow direction is from port_a to port_b)"
-          annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Thermal.HeatTransfer.Components.BodyRadiation bodyRadiation[nNodes](Gr=Gr)
-                                  annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=90,
-              origin={0,36})));
-        Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=
-              nNodes) annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=180,
-              origin={0,68})));
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b1
-          annotation (Placement(transformation(extent={{-10,28},{10,48}}),
-              iconTransformation(extent={{-10,28},{10,48}})));
-      equation
-        connect(genericPipe.port_b, radiantcph_ret)
-          annotation (Line(points={{12,0},{100,0}}, color={0,127,255}));
-        connect(genericPipe.port_a, radiantcph_sup)
-          annotation (Line(points={{-12,0},{-100,0}}, color={0,127,255}));
-        connect(thermalCollector.port_a, bodyRadiation.port_b)
-          annotation (Line(points={{0,58},{0,46}}, color={191,0,0}));
-        connect(thermalCollector.port_b, port_b1)
-          annotation (Line(points={{0,78},{0,38},{0,38}},
-                                                   color={191,0,0}));
-        connect(genericPipe.heatPort, bodyRadiation[nNodes].port_a)
-          annotation (Line(points={{0,12},{0,26}}, color={191,0,0}));
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-              Rectangle(
-                extent={{-60,10},{60,-10}},
-                lineColor={0,0,0},
-                fillColor={95,95,95},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-50,-12},{-50,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash),
-              Line(
-                points={{-30,-12},{-30,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash),
-              Line(
-                points={{-10,-12},{-10,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash),
-              Line(
-                points={{10,-12},{10,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash),
-              Line(
-                points={{30,-12},{30,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash),
-              Line(
-                points={{50,-12},{50,-32}},
-                color={255,128,0},
-                pattern=LinePattern.Dash)}),                           Diagram(
-              coordinateSystem(preserveAspectRatio=false)));
-      end RadiantCeilingPanelHeater;
-    end Components;
   end CPH;
 
-  package Distributor
+  package DHS "Disctrict heating system"
+    model DHS
+
+          replaceable package MediumWater =
+          AixLib.Media.Water "Medium in the heatingsystem/hydraulic" annotation (
+          choicesAllMatching=true);
+      replaceable package MediumAir =
+          AixLib.Media.Air
+        "Medium in the system" annotation(choicesAllMatching=true);
+
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle dhs(
+        redeclare package Medium = MediumWater,
+        length=1,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_42x1(),
+        Kv=5,
+        m_flow_nominal=1,
+        pipe1(length=14),
+        pipe2(length=1),
+        pipe3(length=6),
+        T_amb=273.15 + 10,
+        T_start=323.15) "distribute heating system"
+        annotation (Placement(transformation(extent={{-144,-56},{-44,44}})));
+      AixLib.Fluid.Sources.Boundary_ph                FernwaermeAus(
+        redeclare package Medium = MediumWater,
+        p=100000,
+        nPorts=1)
+        annotation (Placement(transformation(extent={{-264,-40},{-244,-20}})));
+      AixLib.Fluid.Sources.Boundary_pT                FernwaermeEin(
+        redeclare package Medium = MediumWater,
+        p=115000,
+        T=403.15,
+        nPorts=1) "nominal mass flow 1 kg/s"
+        annotation (Placement(transformation(extent={{-262,20},{-242,40}})));
+      AixLib.Fluid.FixedResistances.GenericPipe pipe1(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
+        length=2,
+        redeclare package Medium = MediumWater,
+        m_flow_nominal=2.3) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=180,
+            origin={188,26})));
+
+      AixLib.Fluid.HeatExchangers.ConstantEffectiveness     hex(
+        redeclare package Medium1 = MediumWater,
+        redeclare package Medium2 = MediumWater,
+        m1_flow_nominal=2.3,
+        m2_flow_nominal=2.3,
+        dp1_nominal=0,
+        dp2_nominal=0,
+        eps=0.95) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={12,2})));
+      AixLib.DataBase.Pumps.HydraulicModules.Pump pump(
+        redeclare package Medium = MediumWater,
+        length=1,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
+        m_flow_nominal=2.3,
+        redeclare
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          PumpInterface(pump(redeclare
+              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per,
+              riseTime=5)),
+        pipe1(length=3.5),
+        pipe2(length=7),
+        pipe3(length=10),
+        T_amb=273.15 + 10,
+        T_start=353.15) "nominal mass flow 2.2 kg/s"
+        annotation (Placement(transformation(extent={{68,-38},{148,42}})));
+      AixLib.Fluid.FixedResistances.GenericPipe pipe14(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
+        length=2,
+        redeclare package Medium = MediumWater,
+        m_flow_nominal=2.3) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=180,
+            origin={192,-22})));
+
+      AixLib.Fluid.FixedResistances.GenericPipe pipe15(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
+        length=12,
+        redeclare package Medium = MediumWater,
+        m_flow_nominal=2.3) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=180,
+            origin={-194,-30})));
+
+      Modelica.Blocks.Sources.RealExpression valve(y=0.27)
+        annotation (Placement(transformation(extent={{-170,104},{-150,124}})));
+      Modelica.Blocks.Sources.RealExpression nSet(y=2307)
+        annotation (Placement(transformation(extent={{-22,98},{-2,118}})));
+      Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+        annotation (Placement(transformation(extent={{-22,116},{-2,136}})));
+      AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
+        annotation (Placement(transformation(extent={{36,88},{74,126}}),
+            iconTransformation(extent={{-112,-14},{-86,12}})));
+      AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus1
+        annotation (Placement(transformation(extent={{-114,60},{-76,98}}),
+            iconTransformation(extent={{-112,-14},{-86,12}})));
+      AixLib.Fluid.Sources.Boundary_ph bou1(
+        redeclare package Medium = MediumWater,
+        p=100000,
+        nPorts=1)
+        annotation (Placement(transformation(extent={{238,-32},{218,-12}})));
+      AixLib.Fluid.Sources.Boundary_ph bou(
+        redeclare package Medium = MediumWater,
+        p=100000,
+        nPorts=1) annotation (Placement(transformation(extent={{242,16},{222,36}})));
+    equation
+      connect(FernwaermeEin.ports[1],dhs. port_a1)
+        annotation (Line(points={{-242,30},{-194,30},{-194,24},{-144,24}},
+                                                     color={0,127,255}));
+      connect(dhs.port_b1,hex. port_a1) annotation (Line(points={{-44,24},{6,24},{6,
+              12}},                       color={0,127,255}));
+      connect(hex.port_b1,dhs. port_a2)
+        annotation (Line(points={{6,-8},{6,-36},{-44,-36}},color={0,127,255}));
+      connect(hex.port_b2,pump. port_a1)
+        annotation (Line(points={{18,12},{18,26},{68,26}},    color={0,127,255}));
+      connect(hex.port_a2,pump. port_b2)
+        annotation (Line(points={{18,-8},{18,-22},{68,-22}},color={0,127,255}));
+      connect(pump.port_b1,pipe1. port_a) annotation (Line(points={{148,26},{178,26}},
+                                      color={0,127,255}));
+      connect(pump.port_a2,pipe14. port_a) annotation (Line(points={{148,-22},{182,-22}},
+                                  color={0,127,255}));
+      connect(FernwaermeAus.ports[1],pipe15. port_a) annotation (Line(points={{-244,
+              -30},{-204,-30}},                             color={0,127,255}));
+      connect(pipe15.port_b,dhs. port_b2) annotation (Line(points={{-184,-30},{-164,
+              -30},{-164,-36},{-144,-36}},         color={0,127,255}));
+      connect(nSet.y,registerBus. hydraulicBus.pumpBus.rpmSet) annotation (Line(
+            points={{-1,108},{26,108},{26,107.095},{55.095,107.095}},color={0,0,127}));
+      connect(booleanExpression.y,registerBus. hydraulicBus.pumpBus.onSet)
+        annotation (Line(points={{-1,126},{30,126},{30,107.095},{55.095,107.095}},
+            color={255,0,255}));
+      connect(registerBus, pump.hydraulicBus) annotation (Line(
+          points={{55,107},{55,105.5},{108,105.5},{108,42}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(dhs.hydraulicBus, registerBus1) annotation (Line(
+          points={{-94,44},{-94,62},{-94,79},{-95,79}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(valve.y, registerBus1.hydraulicBus.valveSet) annotation (Line(points=
+              {{-149,114},{-102,114},{-102,79.095},{-94.905,79.095}}, color={0,0,
+              127}));
+      connect(bou.ports[1], pipe1.port_b)
+        annotation (Line(points={{222,26},{198,26}}, color={0,127,255}));
+      connect(pipe14.port_b, bou1.ports[1]) annotation (Line(points={{202,-22},{210,
+              -22},{210,-22},{218,-22}}, color={0,127,255}));
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,-100},{300,120}})),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-280,-100},{300,
+                120}})),
+        experiment(StopTime=100, __Dymola_Algorithm="Dassl"));
+    end DHS;
+  end DHS;
+
+  package Hydraulics
     model Distributor
 
        replaceable package MediumWater =
@@ -3304,7 +3633,7 @@ package BaseClasses
       replaceable package MediumAir =
           AixLib.Media.Air
         "Medium in the system" annotation(choicesAllMatching=true);
-      AixLib.Systems.HydraulicModules.Throttle dhs(
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle dhs(
         redeclare package Medium = AixLib.Media.Water,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_42x1(),
@@ -3358,23 +3687,21 @@ package BaseClasses
             rotation=90,
             origin={154,32})));
 
-      AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus2
-        annotation (Placement(transformation(extent={{248,98},{268,118}}), iconTransformation(
-              extent={{0,0},{0,0}})));
-      AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus1
-        annotation (Placement(transformation(extent={{32,114},
-                {52,134}}),                                                iconTransformation(extent=
-               {{0,0},{0,0}})));
-      AixLib.Systems.HydraulicModules.Pump
-                               pump(
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus2
+        annotation (Placement(transformation(extent={{248,98},{268,118}}),
+            iconTransformation(extent={{0,0},{0,0}})));
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus1
+        annotation (Placement(transformation(extent={{32,114},{52,134}}),
+            iconTransformation(extent={{0,0},{0,0}})));
+      AixLib.DataBase.Pumps.HydraulicModules.Pump pump(
         redeclare package Medium = MediumWater,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
         m_flow_nominal=2.3,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)),
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          PumpInterface(pumpParam=
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN30_H1_12()),
         pipe1(length=3.5),
         pipe2(length=7),
         pipe3(length=10),
@@ -3630,8 +3957,9 @@ package BaseClasses
       connect(reserve.Q_flow, heatflow_reserve) annotation (Line(points={{1339,340},
               {1339,381}},                       color={0,0,127}));
 
-      connect(vol1.ports[1], pipe14.port_b) annotation (Line(points={{1251.71,-26},
-              {376,-26},{376,-12},{328,-12}},color={0,127,255}));
+      connect(vol1.ports[1], pipe14.port_b) annotation (Line(points={{1251.71,
+              -26},{376,-26},{376,-12},{328,-12}},
+                                             color={0,127,255}));
 
       connect(valve_set.y, hydraulicBus1.valveSet) annotation (Line(points={{-23,
               146},{42.05,146},{42.05,124.05}}, color={0,0,127}));
@@ -3644,24 +3972,24 @@ package BaseClasses
               {1014,358}}, color={0,127,255}));
       connect(pipe3.port_b, cca_rl) annotation (Line(points={{1066,190},{1074,190},
               {1074,358}}, color={0,127,255}));
-      connect(pipe3.port_a, vol1.ports[1]) annotation (Line(points={{1066,170},{
-              1064,170},{1064,-26},{1251.71,-26}}, color={0,127,255}));
+      connect(pipe3.port_a, vol1.ports[1]) annotation (Line(points={{1066,170},
+              {1064,170},{1064,-26},{1251.71,-26}},color={0,127,255}));
       connect(pipe4.port_b, cid_vl) annotation (Line(points={{1144,188},{1144,272},
               {1142,272},{1142,356}}, color={0,127,255}));
       connect(pipe5.port_b, cid_rl)
         annotation (Line(points={{1186,188},{1186,356}}, color={0,127,255}));
       connect(pipe4.port_a, pipe1.port_b) annotation (Line(points={{1144,168},{1144,
               50},{364,50}}, color={0,127,255}));
-      connect(pipe5.port_a, vol1.ports[2]) annotation (Line(points={{1186,168},{
-              1184,168},{1184,-26},{1251.14,-26}}, color={0,127,255}));
+      connect(pipe5.port_a, vol1.ports[2]) annotation (Line(points={{1186,168},
+              {1184,168},{1184,-26},{1251.14,-26}},color={0,127,255}));
       connect(pipe6.port_a, pipe1.port_b)
         annotation (Line(points={{844,186},{844,50},{364,50}}, color={0,127,255}));
       connect(pipe6.port_b, cph_vl)
         annotation (Line(points={{844,206},{844,358}}, color={0,127,255}));
       connect(pipe7.port_b, cph_rl)
         annotation (Line(points={{890,204},{890,358}}, color={0,127,255}));
-      connect(pipe7.port_a, vol1.ports[3]) annotation (Line(points={{890,184},{888,
-              184},{888,-26},{1250.57,-26}},
+      connect(pipe7.port_a, vol1.ports[3]) annotation (Line(points={{890,184},{
+              888,184},{888,-26},{1250.57,-26}},
                                           color={0,127,255}));
       connect(pipe10.port_a, pipe1.port_b) annotation (Line(points={{606,198},{604,
               198},{604,50},{364,50}}, color={0,127,255}));
@@ -3677,22 +4005,25 @@ package BaseClasses
               {746,358}}, color={0,127,255}));
       connect(pipe11.port_a, vol1.ports[4]) annotation (Line(points={{642,198},{640,
               198},{640,-26},{1250,-26}},    color={0,127,255}));
-      connect(pipe9.port_a, vol1.ports[5]) annotation (Line(points={{750,194},{748,
-              194},{748,-26},{1249.43,-26}}, color={0,127,255}));
+      connect(pipe9.port_a, vol1.ports[5]) annotation (Line(points={{750,194},{
+              748,194},{748,-26},{1249.43,-26}},
+                                             color={0,127,255}));
       connect(pipe12.port_b, jn_vl)
         annotation (Line(points={{416,288},{416,366}}, color={0,127,255}));
       connect(pipe13.port_a, jn_rl) annotation (Line(points={{486,292},{484,292},{
               484,364}}, color={0,127,255}));
       connect(pipe12.port_a, pipe1.port_b)
         annotation (Line(points={{416,268},{416,50},{364,50}}, color={0,127,255}));
-      connect(pipe13.port_b, vol1.ports[6]) annotation (Line(points={{486,272},{484,
-              272},{484,-26},{1248.86,-26}}, color={0,127,255}));
+      connect(pipe13.port_b, vol1.ports[6]) annotation (Line(points={{486,272},
+              {484,272},{484,-26},{1248.86,-26}},
+                                             color={0,127,255}));
       connect(reserve_rl.port_a, reserve_volume.ports[1]) annotation (Line(points={
               {1338,154},{1363,154},{1363,188}}, color={0,127,255}));
       connect(reserve_vl.port_b, reserve_volume.ports[2]) annotation (Line(points={
               {1398,158},{1365,158},{1365,188}}, color={0,127,255}));
-      connect(reserve_rl.port_b, vol1.ports[7]) annotation (Line(points={{1338,134},
-              {1336,134},{1336,-26},{1248.29,-26}}, color={0,127,255}));
+      connect(reserve_rl.port_b, vol1.ports[7]) annotation (Line(points={{1338,
+              134},{1336,134},{1336,-26},{1248.29,-26}},
+                                                    color={0,127,255}));
       connect(pipe1.port_b, reserve_vl.port_a) annotation (Line(points={{364,50},{
               1400,50},{1400,138},{1398,138}}, color={0,127,255}));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
@@ -3822,7 +4153,7 @@ package BaseClasses
       replaceable package MediumAir =
           AixLib.Media.Air
         "Medium in the system" annotation(choicesAllMatching=true);
-      AixLib.Systems.HydraulicModules.Throttle dhs(
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle dhs(
         redeclare package Medium = AixLib.Media.Water,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
@@ -3868,14 +4199,13 @@ package BaseClasses
             rotation=90,
             origin={154,32})));
 
-      AixLib.Systems.HydraulicModules.Pump
-                               pump(
+      AixLib.DataBase.Pumps.HydraulicModules.Pump pump(
         redeclare package Medium = MediumWater,
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_64x2(),
         m_flow_nominal=4.2,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
               AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN30_H1_12()),
         pipe1(length=3.5),
@@ -3987,17 +4317,17 @@ package BaseClasses
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={890,192})));
-      Modelica.Fluid.Interfaces.FluidPort_b rlt_h_vl(redeclare package Medium =
-            MediumWater) annotation (Placement(transformation(extent={{594,350},{
+      Modelica.Fluid.Interfaces.FluidPort_b rlt_h_vl(redeclare package Medium
+          = MediumWater) annotation (Placement(transformation(extent={{594,350},{
                 614,370}}), iconTransformation(extent={{1350,250},{1370,270}})));
-      Modelica.Fluid.Interfaces.FluidPort_a rlt_h_rl(redeclare package Medium =
-            MediumWater) annotation (Placement(transformation(extent={{630,348},{
+      Modelica.Fluid.Interfaces.FluidPort_a rlt_h_rl(redeclare package Medium
+          = MediumWater) annotation (Placement(transformation(extent={{630,348},{
                 650,368}}), iconTransformation(extent={{1352,224},{1372,244}})));
-      Modelica.Fluid.Interfaces.FluidPort_b rlt_ph_vl(redeclare package Medium =
-            MediumWater) annotation (Placement(transformation(extent={{700,348},{
+      Modelica.Fluid.Interfaces.FluidPort_b rlt_ph_vl(redeclare package Medium
+          = MediumWater) annotation (Placement(transformation(extent={{700,348},{
                 720,368}}), iconTransformation(extent={{1352,156},{1372,176}})));
-      Modelica.Fluid.Interfaces.FluidPort_a rlt_ph_rl(redeclare package Medium =
-            MediumWater) annotation (Placement(transformation(extent={{730,350},{
+      Modelica.Fluid.Interfaces.FluidPort_a rlt_ph_rl(redeclare package Medium
+          = MediumWater) annotation (Placement(transformation(extent={{730,350},{
                 750,370}}), iconTransformation(extent={{1352,126},{1372,146}})));
       AixLib.Fluid.FixedResistances.GenericPipe pipe8(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
@@ -4063,11 +4393,14 @@ package BaseClasses
         p=100000,
         use_T_in=false,
         nPorts=1) annotation (Placement(transformation(extent={{392,-44},{376,-28}})));
+      DistributeBus           distributeBus_DHS annotation (Placement(
+            transformation(extent={{138,124},{174,162}}), iconTransformation(extent=
+               {{-112,-16},{-86,14}})));
       AixLib.Fluid.Sensors.MassFlowRate senMasFlo_hydraulics(redeclare package
           Medium = AixLib.Media.Water)
         annotation (Placement(transformation(extent={{316,40},{336,60}})));
-      AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-            AixLib.Media.Water, m_flow_nominal=4.2)
+      AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium
+          = AixLib.Media.Water, m_flow_nominal=4.2)
         annotation (Placement(transformation(extent={{332,-24},{312,-4}})));
     equation
       connect(FernwaermeEin.ports[1], dhs.port_a1)
@@ -4105,12 +4438,14 @@ package BaseClasses
               {604,360}}, color={0,127,255}));
       connect(jn_rl, pipe13.port_a) annotation (Line(points={{480,358},{480,292},{
               486,292}}, color={0,127,255}));
-      connect(vol1.ports[1], pipe13.port_b) annotation (Line(points={{1111.67,-26},
-              {1064,-26},{1064,-12},{486,-12},{486,272}}, color={0,127,255}));
+      connect(vol1.ports[1], pipe13.port_b) annotation (Line(points={{1111.67,
+              -26},{1064,-26},{1064,-12},{486,-12},{486,272}},
+                                                          color={0,127,255}));
       connect(pipe11.port_a, rlt_h_rl) annotation (Line(points={{642,218},{640,218},
               {640,358}}, color={0,127,255}));
-      connect(pipe11.port_b, vol1.ports[1]) annotation (Line(points={{642,198},{640,
-              198},{640,188},{638,188},{638,-12},{1064,-12},{1064,-26},{1111.67,-26}},
+      connect(pipe11.port_b, vol1.ports[1]) annotation (Line(points={{642,198},
+              {640,198},{640,188},{638,188},{638,-12},{1064,-12},{1064,-26},{
+              1111.67,-26}},
             color={0,127,255}));
       connect(pipe8.port_b, rlt_ph_vl) annotation (Line(points={{714,214},{710,214},
               {710,358}}, color={0,127,255}));
@@ -4122,12 +4457,13 @@ package BaseClasses
               888,358}}, color={0,127,255}));
       connect(pipe6.port_b, cph_vl) annotation (Line(points={{844,206},{844,282},{
               842,282},{842,358}}, color={0,127,255}));
-      connect(pipe7.port_b, vol1.ports[3]) annotation (Line(points={{890,182},{888,
-              182},{888,-12},{1064,-12},{1064,-26},{1110.33,-26}}, color={0,127,255}));
+      connect(pipe7.port_b, vol1.ports[3]) annotation (Line(points={{890,182},{
+              888,182},{888,-12},{1064,-12},{1064,-26},{1110.33,-26}},
+                                                                   color={0,127,255}));
       connect(pipe5.port_a, cid_rl) annotation (Line(points={{1186,188},{1184,188},
               {1184,340},{1180,340},{1180,358}}, color={0,127,255}));
-      connect(pipe5.port_b, vol1.ports[4]) annotation (Line(points={{1186,168},{
-              1184,168},{1184,-16},{1109.67,-16},{1109.67,-26}}, color={0,127,255}));
+      connect(pipe5.port_b, vol1.ports[4]) annotation (Line(points={{1186,168},
+              {1184,168},{1184,-16},{1109.67,-16},{1109.67,-26}},color={0,127,255}));
       connect(pipe4.port_b, cid_vl) annotation (Line(points={{1144,188},{1146,188},
               {1146,360}}, color={0,127,255}));
       connect(pipe2.port_b, cca_vl) annotation (Line(points={{1012,190},{1012,340},
@@ -4161,8 +4497,9 @@ package BaseClasses
               -14},{336,-14},{332,-14}}, color={0,127,255}));
       connect(senTem.port_b, pump.port_a2) annotation (Line(points={{312,-14},{296,-14},
               {296,8},{286,8}}, color={0,127,255}));
-      connect(vol1.ports[6], pipe14.port_a) annotation (Line(points={{1108.33,-26},
-              {1064,-26},{1064,-14},{360,-14}},color={0,127,255}));
+      connect(vol1.ports[6], pipe14.port_a) annotation (Line(points={{1108.33,
+              -26},{1064,-26},{1064,-14},{360,-14}},
+                                               color={0,127,255}));
       connect(senTem.T, distributeBus_DHS.bus_dhs.T_RL) annotation (Line(points={{322,
               -3},{322,14},{302,14},{302,122},{156.09,122},{156.09,143.095}}, color=
              {0,0,127}), Text(
@@ -4288,164 +4625,7 @@ package BaseClasses
               preserveAspectRatio=false, extent={{-160,-100},{1460,360}})),
         experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
     end Distributor_withoutReserve;
-
-    package DHS "Disctrict heating system"
-      model DHS
-
-            replaceable package MediumWater =
-            AixLib.Media.Water "Medium in the heatingsystem/hydraulic" annotation (
-            choicesAllMatching=true);
-        replaceable package MediumAir =
-            AixLib.Media.Air
-          "Medium in the system" annotation(choicesAllMatching=true);
-
-        AixLib.Systems.HydraulicModules.Throttle dhs(
-          redeclare package Medium = MediumWater,
-          length=1,
-          parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_42x1(),
-          Kv=5,
-          m_flow_nominal=1,
-          pipe1(length=14),
-          pipe2(length=1),
-          pipe3(length=6),
-          T_amb=273.15 + 10,
-          T_start=323.15) "distribute heating system"
-          annotation (Placement(transformation(extent={{-144,-56},{-44,44}})));
-        AixLib.Fluid.Sources.Boundary_ph                FernwaermeAus(
-          redeclare package Medium = MediumWater,
-          p=100000,
-          nPorts=1)
-          annotation (Placement(transformation(extent={{-264,-40},{-244,-20}})));
-        AixLib.Fluid.Sources.Boundary_pT                FernwaermeEin(
-          redeclare package Medium = MediumWater,
-          p=115000,
-          T=403.15,
-          nPorts=1) "nominal mass flow 1 kg/s"
-          annotation (Placement(transformation(extent={{-262,20},{-242,40}})));
-        AixLib.Fluid.FixedResistances.GenericPipe pipe1(
-          parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
-          length=2,
-          redeclare package Medium = MediumWater,
-          m_flow_nominal=2.3) annotation (Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=180,
-              origin={188,26})));
-
-        AixLib.Fluid.HeatExchangers.ConstantEffectiveness     hex(
-          redeclare package Medium1 = MediumWater,
-          redeclare package Medium2 = MediumWater,
-          m1_flow_nominal=2.3,
-          m2_flow_nominal=2.3,
-          dp1_nominal=0,
-          dp2_nominal=0,
-          eps=0.95) annotation (Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=90,
-              origin={12,2})));
-        AixLib.Systems.HydraulicModules.Pump
-                                 pump(
-          redeclare package Medium = MediumWater,
-          length=1,
-          parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
-          m_flow_nominal=2.3,
-          redeclare
-            AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-            PumpInterface(pump(redeclare
-                AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per, riseTime=
-                 5)),
-          pipe1(length=3.5),
-          pipe2(length=7),
-          pipe3(length=10),
-          T_amb=273.15 + 10,
-          T_start=353.15) "nominal mass flow 2.2 kg/s"
-          annotation (Placement(transformation(extent={{68,-38},{148,42}})));
-        AixLib.Fluid.FixedResistances.GenericPipe pipe14(
-          parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
-          length=2,
-          redeclare package Medium = MediumWater,
-          m_flow_nominal=2.3) annotation (Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=180,
-              origin={192,-22})));
-
-        AixLib.Fluid.FixedResistances.GenericPipe pipe15(
-          parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
-          length=12,
-          redeclare package Medium = MediumWater,
-          m_flow_nominal=2.3) annotation (Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=180,
-              origin={-194,-30})));
-
-        Modelica.Blocks.Sources.RealExpression valve(y=0.27)
-          annotation (Placement(transformation(extent={{-170,104},{-150,124}})));
-        Modelica.Blocks.Sources.RealExpression nSet(y=2307)
-          annotation (Placement(transformation(extent={{-22,98},{-2,118}})));
-        Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
-          annotation (Placement(transformation(extent={{-22,116},{-2,136}})));
-        AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
-          annotation (Placement(transformation(extent={{36,88},{74,126}}),
-              iconTransformation(extent={{-112,-14},{-86,12}})));
-        AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus1
-          annotation (Placement(transformation(extent={{-114,60},{-76,98}}),
-              iconTransformation(extent={{-112,-14},{-86,12}})));
-        AixLib.Fluid.Sources.Boundary_ph bou1(
-          redeclare package Medium = MediumWater,
-          p=100000,
-          nPorts=1)
-          annotation (Placement(transformation(extent={{238,-32},{218,-12}})));
-        AixLib.Fluid.Sources.Boundary_ph bou(
-          redeclare package Medium = MediumWater,
-          p=100000,
-          nPorts=1) annotation (Placement(transformation(extent={{242,16},{222,36}})));
-      equation
-        connect(FernwaermeEin.ports[1],dhs. port_a1)
-          annotation (Line(points={{-242,30},{-194,30},{-194,24},{-144,24}},
-                                                       color={0,127,255}));
-        connect(dhs.port_b1,hex. port_a1) annotation (Line(points={{-44,24},{6,24},{6,
-                12}},                       color={0,127,255}));
-        connect(hex.port_b1,dhs. port_a2)
-          annotation (Line(points={{6,-8},{6,-36},{-44,-36}},color={0,127,255}));
-        connect(hex.port_b2,pump. port_a1)
-          annotation (Line(points={{18,12},{18,26},{68,26}},    color={0,127,255}));
-        connect(hex.port_a2,pump. port_b2)
-          annotation (Line(points={{18,-8},{18,-22},{68,-22}},color={0,127,255}));
-        connect(pump.port_b1,pipe1. port_a) annotation (Line(points={{148,26},{178,26}},
-                                        color={0,127,255}));
-        connect(pump.port_a2,pipe14. port_a) annotation (Line(points={{148,-22},{182,-22}},
-                                    color={0,127,255}));
-        connect(FernwaermeAus.ports[1],pipe15. port_a) annotation (Line(points={{-244,
-                -30},{-204,-30}},                             color={0,127,255}));
-        connect(pipe15.port_b,dhs. port_b2) annotation (Line(points={{-184,-30},{-164,
-                -30},{-164,-36},{-144,-36}},         color={0,127,255}));
-        connect(nSet.y,registerBus. hydraulicBus.pumpBus.rpmSet) annotation (Line(
-              points={{-1,108},{26,108},{26,107.095},{55.095,107.095}},color={0,0,127}));
-        connect(booleanExpression.y,registerBus. hydraulicBus.pumpBus.onSet)
-          annotation (Line(points={{-1,126},{30,126},{30,107.095},{55.095,107.095}},
-              color={255,0,255}));
-        connect(registerBus, pump.hydraulicBus) annotation (Line(
-            points={{55,107},{55,105.5},{108,105.5},{108,42}},
-            color={255,204,51},
-            thickness=0.5));
-        connect(dhs.hydraulicBus, registerBus1) annotation (Line(
-            points={{-94,44},{-94,62},{-94,79},{-95,79}},
-            color={255,204,51},
-            thickness=0.5));
-        connect(valve.y, registerBus1.hydraulicBus.valveSet) annotation (Line(points=
-                {{-149,114},{-102,114},{-102,79.095},{-94.905,79.095}}, color={0,0,
-                127}));
-        connect(bou.ports[1], pipe1.port_b)
-          annotation (Line(points={{222,26},{198,26}}, color={0,127,255}));
-        connect(pipe14.port_b, bou1.ports[1]) annotation (Line(points={{202,-22},{210,
-                -22},{210,-22},{218,-22}}, color={0,127,255}));
-        annotation (
-          Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,-100},{300,120}})),
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-280,-100},{300,
-                  120}})),
-          experiment(StopTime=100, __Dymola_Algorithm="Dassl"));
-      end DHS;
-    end DHS;
-  end Distributor;
+  end Hydraulics;
 
   package JN "Jet Nozzle"
     model JN "Reheater/Recooler jet nozzles"
@@ -4547,7 +4727,7 @@ package BaseClasses
         nPorts=1,
         p=100000)
         annotation (Placement(transformation(extent={{94,-76},{114,-56}})));
-      AixLib.Systems.HydraulicModules.Throttle throttle[10](
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle throttle[10](
         length=1,
         each parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
         Kv=4,
@@ -4557,11 +4737,15 @@ package BaseClasses
         m_flow_nominal=2.3,
         redeclare package Medium = MediumWater,
         T_amb=273.15 + 10,
-        T_start=323.15) "reheater jet nozzles" annotation (Placement(transformation(
+        T_start=323.15) "reheater jet nozzles" annotation (Placement(
+            transformation(
             extent={{-26,-26},{26,26}},
             rotation=90,
             origin={-12,-46})));
 
+      BaseClass.DistributeBus distributeBus_JN annotation (Placement(transformation(
+              extent={{-88,94},{-52,132}}), iconTransformation(extent={{-112,-16},{
+                -86,14}})));
       AixLib.Fluid.MixingVolumes.MixingVolume vol1(
         nPorts=11,
         redeclare package Medium = MediumAir,
@@ -4695,7 +4879,8 @@ package BaseClasses
         m1_flow_nominal=3.7,
         m2_flow_nominal=2.3,
         T_amb=288.15,
-        redeclare AixLib.Systems.HydraulicModules.Throttle hydraulicModule(
+        redeclare AixLib.DataBase.Pumps.HydraulicModules.Throttle
+          hydraulicModule(
           parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
           Kv=4,
           pipe1(length=3.5),
@@ -4740,7 +4925,8 @@ package BaseClasses
         m1_flow_nominal=3.7,
         m2_flow_nominal=2.3,
         T_amb=288.15,
-        redeclare AixLib.Systems.HydraulicModules.Throttle hydraulicModule(
+        redeclare AixLib.DataBase.Pumps.HydraulicModules.Throttle
+          hydraulicModule(
           parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
           Kv=2.5,
           pipe1(length=3.5),
@@ -4760,12 +4946,13 @@ package BaseClasses
         annotation (Placement(transformation(extent={{60,4},{80,26}}),
             iconTransformation(extent={{-112,-14},{-86,12}})));
 
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         pumpInterface_SpeedControlledNrpm(
         redeclare package Medium = AixLib.Media.Water,
         m_flow_nominal=2.3,
-        pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))
-        annotation (Placement(transformation(extent={{-166,-126},{-146,-106}})));
+        pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8
+            per)) annotation (Placement(transformation(extent={{-166,-126},{-146,
+                -106}})));
       Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
         annotation (Placement(transformation(extent={{-204,-76},{-184,-56}})));
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus
@@ -4894,7 +5081,7 @@ package BaseClasses
           Medium =
             MediumAir) annotation (Placement(transformation(extent={{126,44},{146,64}}),
             iconTransformation(extent={{60,-50},{80,-30}})));
-      AixLib.Systems.HydraulicModules.Throttle throttle(
+      AixLib.DataBase.Pumps.HydraulicModules.Throttle throttle(
         length=1,
         each parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
         Kv=4,
@@ -4904,16 +5091,17 @@ package BaseClasses
         m_flow_nominal=0.4,
         redeclare package Medium = MediumWater,
         T_amb=273.15 + 10,
-        T_start=323.15) "reheater jet nozzles" annotation (Placement(transformation(
+        T_start=323.15) "reheater jet nozzles" annotation (Placement(
+            transformation(
             extent={{-26,-26},{26,26}},
             rotation=90,
             origin={-12,-46})));
 
       Modelica.Blocks.Sources.Constant const1(k=0.2)
         annotation (Placement(transformation(extent={{-82,-20},{-70,-8}})));
-      AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus_jn
-        annotation (Placement(transformation(extent={{-72,-56},{-52,-36}}),
-            iconTransformation(extent={{0,0},{0,0}})));
+      AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+        hydraulicBus_jn annotation (Placement(transformation(extent={{-72,-56},
+                {-52,-36}}), iconTransformation(extent={{0,0},{0,0}})));
       AixLib.Fluid.Actuators.Valves.TwoWayLinear Valve(
         redeclare package Medium = MediumAir,
         each m_flow_nominal=0.8,
@@ -4924,8 +5112,9 @@ package BaseClasses
             extent={{10,10},{-10,-10}},
             rotation=180,
             origin={-114,54})));
-      DistributeBus distributeBus annotation (Placement(transformation(extent={{-134,
-                96},{-94,136}}), iconTransformation(extent={{-120,-4},{-80,36}})));
+      DistributeBus           distributeBus_JN annotation (Placement(transformation(
+              extent={{-74,94},{-38,132}}), iconTransformation(extent={{-112,-16},{
+                -86,14}})));
     equation
 
       connect(throttle.hydraulicBus, hydraulicBus_jn) annotation (Line(
@@ -4950,9 +5139,8 @@ package BaseClasses
         annotation (Line(points={{-124,54},{-160,54}}, color={0,127,255}));
       connect(Valve.port_b, hx.port_b1) annotation (Line(points={{-104,54},{-66,54},
               {-66,7.6},{-22,7.6}}, color={0,127,255}));
-      connect(Valve.y, distributeBus.bus_jn.valveSet)
-        annotation (Line(points={{-114,66},{-114,92},{-114,116.1},{-113.9,116.1}},
-                                                        color={0,0,127}));
+      connect(Valve.y, distributeBus_JN.bus_jn.valveSet) annotation (Line(points={{
+              -114,66},{-114,113.095},{-55.91,113.095}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-80},
                 {160,120}}),graphics={Rectangle(
               extent={{-100,80},{100,-40}},
@@ -5013,23 +5201,26 @@ are determined from the connections to this bus).
     import      Modelica.Units.SI;
 
     Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_office_heating;
-    Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_cid;
     Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_ahu;
     Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_jn;
     Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_input;
     Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_building;
 
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_cca;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_cph;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_cph_throttle;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_cid;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_ahu;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_ahu_pre;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_ahu_cold;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_jn;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_valve_jn;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_dhs;
-    AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_dhs_pump;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_cca;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_cph;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+      bus_cph_throttle;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_cid;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_ahu;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_ahu_pre;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+      bus_ahu_cold;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_jn;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+      bus_valve_jn;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus bus_dhs;
+    AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.HydraulicBus
+      bus_dhs_pump;
 
   end DistributeBus;
 end BaseClasses;

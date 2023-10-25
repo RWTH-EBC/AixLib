@@ -1,8 +1,8 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlCID
-  EONERC_Testhall.BaseClasses.DistributeBus distributeBus_CID annotation (Placement(
-        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
-            {{78,-22},{118,20}})));
+  BaseClasses.DistributeBus distributeBus_CID annotation (Placement(
+        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(
+          extent={{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cid_m_flow(
     yMin=0,
     Td=0.5,
@@ -70,26 +70,22 @@ equation
   connect(booleanExpression1.y, distributeBus_CID.bus_cid.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={
           255,0,255}));
-  connect(PID_cid_m_flow.u_m, distributeBus_CID.bus_cid.m_flow) annotation (
-      Line(points={{-38,52},{-38,-14.895},{-93.9,-14.895}}, color={0,0,127}));
   connect(PID_Valve.u_m, distributeBus_CID.bus_cid.TFwrdOutMea) annotation (
       Line(points={{62,56},{62,44},{-22,44},{-22,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
   connect(criticalDamping.y, distributeBus_CID.bus_cid.valveSet) annotation (
       Line(points={{5,24},{-22,24},{-22,-14.895},{-93.9,-14.895}}, color={0,0,
           127}));
-  connect(PID_AirValve.y, distributeBus_CID.control_cid.Office1_Air_Valve)
-    annotation (Line(points={{-19,-50},{-70,-50},{-70,-14.895},{-93.9,-14.895}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(PID_AirValve.u_m, distributeBus_CID.control_cid.RoomTemp) annotation (
-     Line(points={{-8,-62},{-8,-68},{-92,-68},{-92,-58},{-93.9,-58},{-93.9,
-          -14.895}}, color={0,0,127}));
   connect(RoomTemp_set.y, PID_AirValve.u_s)
     annotation (Line(points={{19,-50},{4,-50}}, color={0,0,127}));
+  connect(PID_cid_m_flow.u_m, distributeBus_CID.bus_cid.mflow) annotation (Line(
+        points={{-38,52},{-38,-14.895},{-93.9,-14.895}}, color={0,0,127}));
+  connect(PID_AirValve.u_m, distributeBus_CID.bus_cid.RoomTemp) annotation (
+      Line(points={{-8,-62},{-8,-68},{-68,-68},{-68,-14.895},{-93.9,-14.895}},
+        color={0,0,127}));
+  connect(PID_AirValve.y, distributeBus_CID.bus_cid.Office_Air_Valve)
+    annotation (Line(points={{-19,-50},{-68,-50},{-68,-14.895},{-93.9,-14.895}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

@@ -29,16 +29,16 @@ model Testhall_simpleConsumer
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
   BaseClasses.CID.CID cID
     annotation (Placement(transformation(extent={{32,14},{100,56}})));
-  BaseClasses.JN.JN_simpel jN_TestBlock
+  BaseClasses.JN.JN_simpel jN
     annotation (Placement(transformation(extent={{-104,26},{-72,46}})));
-      AixLib.Systems.HydraulicModules.SimpleConsumer               Hall1(
+  AixLib.DataBase.Pumps.HydraulicModules.SimpleConsumer Hall1(
     redeclare package Medium = AixLib.Media.Air,
     V=1e3,
     m_flow_nominal=3,
     T_start=291.15,
     functionality="Q_flow_input") "Thermal zone"
     annotation (Placement(transformation(extent={{-90,70},{-62,96}})));
-      AixLib.Systems.HydraulicModules.SimpleConsumer Office(
+  AixLib.DataBase.Pumps.HydraulicModules.SimpleConsumer Office(
     redeclare package Medium = AixLib.Media.Air,
     V=1e3,
     m_flow_nominal=0.8,
@@ -95,7 +95,7 @@ model Testhall_simpleConsumer
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://Testhall/AnnahmenPlausibility/DataBase/txt/CoolerInput.txt"),
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/CoolerInput.txt"),
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2})
     annotation (Placement(transformation(extent={{168,-84},{156,-72}})));
@@ -111,7 +111,8 @@ model Testhall_simpleConsumer
     preheater(
       hydraulicModuleIcon="Injection",
       m2_flow_nominal=0.45,
-      redeclare AixLib.Systems.HydraulicModules.Injection hydraulicModule(
+      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection
+        hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=6.3,
         valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
@@ -125,33 +126,33 @@ model Testhall_simpleConsumer
         pipe8(length=0.3),
         pipe9(length=0.3),
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
     cooler(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=5,
-      redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
+      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
         hydraulicModule(
         pipeModel="SimplePipe",
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(),
         Kv=25,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
-              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50() "Replace with AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H05_16()"))),
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H05_16()))),
     heater(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=1.2,
-      redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
+      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
         hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=10,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
-              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9() "Replace with AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H05_12"),
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H05_12()),
         pipe1(length=10),
         pipe2(length=0.6),
         pipe3(length=2),
@@ -160,6 +161,7 @@ model Testhall_simpleConsumer
         pipe6(length=10),
         pipe7(length=0.6))))
     annotation (Placement(transformation(extent={{180,-60},{94,-16}})));
+
   Modelica.Blocks.Sources.CombiTimeTable HeatFlowHall2(
     tableOnFile=true,
     tableName="measurement",
@@ -188,27 +190,29 @@ model Testhall_simpleConsumer
     dpMax=2000,
     useTwoFanCtr=true,
     k=0.8) annotation (Placement(transformation(extent={{170,-10},{150,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium
-      = AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package
+      Medium =
+        AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-54,60})));
   Controller.ControlJN controlJN
     annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
-  BaseClasses.Distributor.Distributor_withoutReserve distributor_withoutReserve
-    annotation (Placement(transformation(extent={{-146,-202},{118,-100}})));
+  BaseClasses.Hydraulics.Distributor_withoutReserve
+    distributor_withoutReserve
+    annotation (Placement(transformation(extent={{-146,-196},{118,-100}})));
   BaseClasses.DistributeBus distributeBus_jn annotation (Placement(
-        transformation(extent={{-110,46},{-102,58}}), iconTransformation(extent
-          ={{-110,46},{-102,58}})));
+        transformation(extent={{-110,46},{-102,58}}), iconTransformation(
+          extent={{-110,46},{-102,58}})));
   BaseClasses.DistributeBus distributeBus_cid annotation (Placement(
-        transformation(extent={{110,80},{120,94}}), iconTransformation(extent={
-            {110,80},{120,94}})));
+        transformation(extent={{110,80},{120,94}}), iconTransformation(extent=
+           {{110,80},{120,94}})));
 equation
   connect(cID.air_out, Office.port_a)
     annotation (Line(points={{56,43.4},{56,85},{62,85}}, color={0,127,255}));
-  connect(jN_TestBlock.heating_air_hall1, Hall1.port_a) annotation (Line(points=
-         {{-95.6,42},{-96,42},{-96,83},{-90,83}}, color={0,127,255}));
+  connect(jN.heating_air_hall1, Hall1.port_a) annotation (Line(points={{-95.6,
+          42},{-96,42},{-96,83},{-90,83}}, color={0,127,255}));
   connect(cca_PrescribedHeatFlow.port, cCA.heat_port_CCA)
     annotation (Line(points={{-25,52},{-25,40.76}}, color={191,0,0}));
   connect(hall1_heatflow.y, gainjn.u)
@@ -240,8 +244,8 @@ equation
           -70},{137,-60}}, color={0,127,255}));
   connect(ahu.port_b1, cID.air_in) annotation (Line(points={{93.6091,-40},{74.4,
           -40},{74.4,18.2}}, color={0,127,255}));
-  connect(ahu.port_b1, jN_TestBlock.air_RLT_SUP) annotation (Line(points={{
-          93.6091,-40},{74,-40},{74,-12},{-81,-12},{-81,30}}, color={0,127,255}));
+  connect(ahu.port_b1, jN.air_RLT_SUP) annotation (Line(points={{93.6091,-40},
+          {74,-40},{74,-12},{-81,-12},{-81,30}}, color={0,127,255}));
   connect(HeatFlowHall2.y[1], gaincph.u)
     annotation (Line(points={{-201,78},{-193.2,78}}, color={0,0,127}));
   connect(gaincph.y, cph_PrescribedHeatFlow.Q_flow) annotation (Line(points={{-179.4,
@@ -259,30 +263,74 @@ equation
   connect(senHallTemp.port_b, ahu.port_a2) annotation (Line(points={{-54,50},{
           -54,44},{8,44},{8,-16},{84,-16},{84,-24},{93.6091,-24}}, color={0,127,
           255}));
-  connect(controlJN.distributeBus_JN, jN_TestBlock.distributeBus) annotation (
-      Line(
-      points={{-112.2,45.9},{-112.2,36},{-98,36},{-98,35.6}},
-      color={255,204,51},
-      thickness=0.5));
   connect(controlJN.distributeBus_JN, distributeBus_jn) annotation (Line(
       points={{-112.2,45.9},{-106,45.9},{-106,52}},
       color={255,204,51},
       thickness=0.5));
   connect(senHallTemp.T, distributeBus_jn.bus_jn.TempHall) annotation (Line(
         points={{-65,60},{-98,60},{-98,52.03},{-105.98,52.03}}, color={0,0,127}));
-  connect(controlCPH.distributeBus_CPH, cPH.distributeBus) annotation (Line(
-      points={{-194.2,-40.1},{-184,-40.1},{-184,-34.5},{-178.162,-34.5}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(controlCCA.distributeBus_CCA, cCA.distributeBus) annotation (Line(
-      points={{-54.2,21.9},{-50,21.9},{-50,16.06},{-44.38,16.06}},
-      color={255,204,51},
-      thickness=0.5));
   connect(distributeBus_cid, controlCID.distributeBus_CID) annotation (Line(
       points={{115,87},{116,87},{116,58},{33.8,58},{33.8,39.9}},
       color={255,204,51},
       thickness=0.5));
-  connect(senRoomTemp.T, distributeBus_cid.bus_cid.TempRoom) annotation (Line(
+  connect(distributor_withoutReserve.jn_vl, jN.heating_water_in) annotation (
+      Line(points={{-41.0519,-117.113},{-40,-117.113},{-40,-14},{-91.4,-14},{
+          -91.4,30}},
+                color={0,127,255}));
+  connect(distributor_withoutReserve.jn_rl, jN.heating_water_out) annotation (
+     Line(points={{-36.4889,-117.113},{-36.4889,-8},{-94.4,-8},{-94.4,30}},
+        color={0,127,255}));
+  connect(distributor_withoutReserve.cph_vl, cPH.cph_supprim) annotation (Line(
+        points={{-16.2815,-116.696},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
+        color={0,127,255}));
+  connect(distributor_withoutReserve.cph_rl, cPH.cph_retprim) annotation (Line(
+        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,
+          -56.25}}, color={0,127,255}));
+  connect(distributor_withoutReserve.cca_vl, cCA.cca_supprim) annotation (Line(
+        points={{37.4963,-115.861},{36,-115.861},{36,-10},{-31.46,-10},{-31.46,
+          2}}, color={0,127,255}));
+  connect(distributor_withoutReserve.cca_rl, cCA.cca_retprim) annotation (Line(
+        points={{42.0593,-116.278},{42.0593,-4},{-17.4,-4},{-17.4,2}}, color={0,
+          127,255}));
+  connect(distributor_withoutReserve.cid_vl, cID.cid_supprim) annotation (Line(
+        points={{68.1333,-116.696},{68.1333,8},{60.4,8},{60.4,18.2}}, color={0,
+          127,255}));
+  connect(distributor_withoutReserve.cid_rl, cID.cid_retprim) annotation (Line(
+        points={{74,-116.696},{74,-94},{66,-94},{66,6},{54.8,6},{54.8,18.2}},
+        color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_ph_vl, ahu.port_a3) annotation (Line(
+        points={{102.03,-140.487},{102.03,-142},{172,-142},{172,-66},{168.273,
+          -66},{168.273,-60}}, color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_ph_rl, ahu.port_b3) annotation (Line(
+        points={{102.03,-146.748},{102.03,-148},{172,-148},{172,-66},{160.455,
+          -66},{160.455,-60}}, color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_h_vl, ahu.port_a5) annotation (Line(
+        points={{101.704,-120.87},{120,-120.87},{120,-122},{121.364,-122},{
+          121.364,-60}}, color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_h_rl, ahu.port_b5) annotation (Line(
+        points={{102.03,-126.296},{102.03,-126},{113.936,-126},{113.936,-60}},
+        color={0,127,255}));
+  connect(jN.distributeBus_JN, controlJN.distributeBus_JN) annotation (Line(
+      points={{-97.9,33.9},{-100,33.9},{-100,36},{-110,36},{-110,45.9},{-112.2,
+          45.9}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (
+      Line(
+      points={{-194.2,-40.1},{-194.2,-37.875},{-178,-37.875}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCCA.distributeBus_CCA, cCA.dB_CCA) annotation (Line(
+      points={{-54.2,21.9},{-54.2,20.24},{-44.38,20.24}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCID.distributeBus_CID, cID.distributeBus_CID) annotation (
+      Line(
+      points={{33.8,39.9},{32,39.9},{32,40},{38,40},{38,30},{48.2,30},{48.2,30.59}},
+      color={255,204,51},
+      thickness=0.5));
+
+  connect(senRoomTemp.T, distributeBus_cid.bus_cid.RoomTemp) annotation (Line(
         points={{100,85},{100,87.035},{115.025,87.035}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
