@@ -1,6 +1,6 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.BaseClasses.Control;
 model ControlCPH
-  EONERC_Testhall.BaseClasses.DistributeBus distributeBus_CPH annotation (Placement(
+  .Testhall.BaseClass.DistributeBus distributeBus_CPH annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cph_m_flow(
@@ -55,6 +55,9 @@ equation
          {0,0,127}));
   connect(m_flow_set.y, PID_cph_m_flow.u_s)
     annotation (Line(points={{-77,64},{-50,64}}, color={0,0,127}));
+  connect(PID_cph_m_flow.u_m, distributeBus_CPH.bus_cph.m_flow) annotation (
+      Line(points={{-38,52},{-38,-14.895},{-93.9,-14.895}},
+                                                         color={0,0,127}));
   connect(PID_Valve.u_s, T_Set_Hall_Circ.y)
     annotation (Line(points={{50,68},{33,68}}, color={0,0,127}));
   connect(PID_Valve.u_m, distributeBus_CPH.bus_cph.TFwrdOutMea) annotation (
@@ -71,9 +74,6 @@ equation
   connect(Set_ValveThrottle.y, distributeBus_CPH.bus_cph_throttle.valveSet)
     annotation (Line(points={{-13,-60},{-93.9,-60},{-93.9,-14.895}}, color={0,0,
           127}));
-  connect(PID_cph_m_flow.u_m, distributeBus_CPH.bus_cph_throttle.mflow)
-    annotation (Line(points={{-38,52},{-38,-16},{-93.9,-16},{-93.9,-14.895}},
-        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

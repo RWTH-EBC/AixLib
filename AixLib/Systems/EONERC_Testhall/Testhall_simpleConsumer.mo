@@ -23,17 +23,13 @@ model Testhall_simpleConsumer
     p=115000,
     use_T_in=true,
     nPorts=1) annotation (Placement(transformation(extent={{144,-72},{140,-68}})));
-  BaseClass.CCA.CCA cCA
+  BaseClasses.CCA.CCA cCA
     annotation (Placement(transformation(extent={{-44,2},{-6,40}})));
-  BaseClass.CPH.CPH cPH
+  BaseClasses.CPH.CPH cPH
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  BaseClass.CID.CID cID
+  BaseClasses.CID.CID cID
     annotation (Placement(transformation(extent={{32,14},{100,56}})));
-  BaseClass.Distributor.Distributor_withoutReserve distributor(redeclare
-      package MediumWater = AixLib.Media.Water, redeclare package MediumAir =
-        AixLib.Media.Air)
-    annotation (Placement(transformation(extent={{-214,-216},{136,-120}})));
-  BaseClass.JN.JN_simpel jN_TestBlock
+  BaseClasses.JN.JN_simpel jN_TestBlock
     annotation (Placement(transformation(extent={{-104,26},{-72,46}})));
       AixLib.Systems.HydraulicModules.SimpleConsumer               Hall1(
     redeclare package Medium = AixLib.Media.Air,
@@ -174,18 +170,16 @@ model Testhall_simpleConsumer
 
   Modelica.Blocks.Math.Gain gaincph(k=-1000)
     annotation (Placement(transformation(extent={{-192,72},{-180,84}})));
-  Controller.ControlCPH controlCPH
-    annotation (Placement(transformation(extent={{-222,-52},{-202,-32}})));
   Controller.ControlCID controlCID
     annotation (Placement(transformation(extent={{14,30},{34,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                    senRoomTemp(redeclare package Medium =
         AixLib.Media.Air, m_flow_nominal=0.8)
     annotation (Placement(transformation(extent={{90,64},{110,84}})));
-  BaseClass.DistributeBus dB_CID annotation (Placement(transformation(extent={{
-            110,90},{120,102}}), iconTransformation(extent={{96,26},{136,66}})));
   Controller.ControlCCA           controlCCA
     annotation (Placement(transformation(extent={{-74,12},{-48,32}})));
+  Controller.ControlCPH controlCPH
+    annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
   AixLib.Systems.ModularAHU.Controller.CtrAHUBasic controlAHU(
     TFlowSet=310.15,
     ctrPh(rpm_pump=2300),
@@ -194,16 +188,22 @@ model Testhall_simpleConsumer
     dpMax=2000,
     useTwoFanCtr=true,
     k=0.8) annotation (Placement(transformation(extent={{170,-10},{150,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium =
-        AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium
+      = AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-54,60})));
   Controller.ControlJN controlJN
-    annotation (Placement(transformation(extent={{-126,24},{-106,44}})));
-  BaseClass.DistributeBus dB_JN annotation (Placement(transformation(extent={{
-            -112,42},{-102,54}}), iconTransformation(extent={{96,26},{136,66}})));
+    annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
+  BaseClasses.Distributor.Distributor_withoutReserve distributor_withoutReserve
+    annotation (Placement(transformation(extent={{-146,-202},{118,-100}})));
+  BaseClasses.DistributeBus distributeBus_jn annotation (Placement(
+        transformation(extent={{-110,46},{-102,58}}), iconTransformation(extent
+          ={{-110,46},{-102,58}})));
+  BaseClasses.DistributeBus distributeBus_cid annotation (Placement(
+        transformation(extent={{110,80},{120,94}}), iconTransformation(extent={
+            {110,80},{120,94}})));
 equation
   connect(cID.air_out, Office.port_a)
     annotation (Line(points={{56,43.4},{56,85},{62,85}}, color={0,127,255}));
@@ -242,65 +242,10 @@ equation
           -40},{74.4,18.2}}, color={0,127,255}));
   connect(ahu.port_b1, jN_TestBlock.air_RLT_SUP) annotation (Line(points={{
           93.6091,-40},{74,-40},{74,-12},{-81,-12},{-81,30}}, color={0,127,255}));
-  connect(ahu.port_b5, distributor.rlt_h_rl) annotation (Line(points={{113.936,
-          -60},{112,-60},{112,-114},{122,-114},{122,-146.296},{114.827,-146.296}},
-        color={0,127,255}));
-  connect(distributor.rlt_h_vl, ahu.port_a5) annotation (Line(points={{114.395,
-          -140.87},{114.395,-140},{121.364,-140},{121.364,-60}}, color={0,127,
-          255}));
-  connect(distributor.rlt_ph_rl, ahu.port_b3) annotation (Line(points={{114.827,
-          -166.748},{170,-166.748},{170,-66},{160.455,-66},{160.455,-60}},
-        color={0,127,255}));
-  connect(distributor.rlt_ph_vl, ahu.port_a3) annotation (Line(points={{114.827,
-          -160.487},{170,-160.487},{170,-66},{168.273,-66},{168.273,-60}},
-        color={0,127,255}));
   connect(HeatFlowHall2.y[1], gaincph.u)
     annotation (Line(points={{-201,78},{-193.2,78}}, color={0,0,127}));
   connect(gaincph.y, cph_PrescribedHeatFlow.Q_flow) annotation (Line(points={{-179.4,
           78},{-171,78},{-171,42}}, color={0,0,127}));
-  connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (Line(
-      points={{-202.2,-42.1},{-186,-42.1},{-186,-37.875},{-178,-37.875}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(distributor.cph_vl, cPH.cph_supprim) annotation (Line(points={{
-          -42.0247,-136.696},{-42.0247,-106},{-164.431,-106},{-164.431,-56}},
-        color={0,127,255}));
-  connect(distributor.cph_rl, cPH.cph_retprim) annotation (Line(points={{
-          -36.4074,-136.696},{-36.4074,-114},{-150.215,-114},{-150.215,-56.25}},
-        color={0,127,255}));
-  connect(distributor.jn_vl, jN_TestBlock.heating_water_in) annotation (Line(
-        points={{-74.8642,-137.113},{-74.8642,8},{-91.4,8},{-91.4,30}}, color={
-          0,127,255}));
-  connect(controlCID.distributeBus_CID, cID.distributeBus_CID) annotation (Line(
-      points={{33.8,39.9},{44,39.9},{44,30.59},{48.2,30.59}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(distributor.jn_rl, jN_TestBlock.heating_water_out) annotation (Line(
-        points={{-68.8148,-137.113},{-68.8148,8},{-82,8},{-82,6},{-94.4,6},{
-          -94.4,30}}, color={0,127,255}));
-  connect(distributor.cca_rl, cCA.cca_retprim) annotation (Line(points={{35.321,
-          -136.278},{34,-136.278},{34,-4},{-17.4,-4},{-17.4,2}}, color={0,127,
-          255}));
-  connect(distributor.cca_vl, cCA.cca_supprim) annotation (Line(points={{29.2716,
-          -135.861},{28,-135.861},{28,-4},{-31.46,-4},{-31.46,2}},
-        color={0,127,255}));
-  connect(distributor.cid_rl, cID.cid_retprim) annotation (Line(points={{77.6667,
-          -136.696},{76,-136.696},{76,12},{54.8,12},{54.8,18.2}},         color=
-         {0,127,255}));
-  connect(cID.cid_supprim, distributor.cid_vl) annotation (Line(points={{60.4,
-          18.2},{60.4,-114},{69.8889,-114},{69.8889,-136.696}}, color={0,127,
-          255}));
-  connect(dB_CID, controlCID.distributeBus_CID) annotation (Line(
-      points={{115,96},{114,96},{114,39.9},{33.8,39.9}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(senRoomTemp.T, dB_CID.control_cid.RoomTemp) annotation (Line(points={{100,85},
-          {100,108},{115.025,108},{115.025,96.03}},
-                                                 color={0,0,127}));
-  connect(controlCCA.distributeBus_CCA, cCA.dB_CCA) annotation (Line(
-      points={{-54.2,21.9},{-54.2,20.24},{-44.38,20.24}},
-      color={255,204,51},
-      thickness=0.5));
   connect(controlAHU.genericAHUBus, ahu.genericAHUBus) annotation (Line(
       points={{150,0.1},{137,0.1},{137,-15.8}},
       color={255,204,51},
@@ -314,17 +259,31 @@ equation
   connect(senHallTemp.port_b, ahu.port_a2) annotation (Line(points={{-54,50},{
           -54,44},{8,44},{8,-16},{84,-16},{84,-24},{93.6091,-24}}, color={0,127,
           255}));
-  connect(controlJN.distributeBus_JN, jN_TestBlock.distributeBus_JN)
-    annotation (Line(
-      points={{-106.2,33.9},{-97.9,33.9}},
+  connect(controlJN.distributeBus_JN, jN_TestBlock.distributeBus) annotation (
+      Line(
+      points={{-112.2,45.9},{-112.2,36},{-98,36},{-98,35.6}},
       color={255,204,51},
       thickness=0.5));
-  connect(dB_JN, controlJN.distributeBus_JN) annotation (Line(
-      points={{-107,48},{-107,40.95},{-106.2,40.95},{-106.2,33.9}},
+  connect(controlJN.distributeBus_JN, distributeBus_jn) annotation (Line(
+      points={{-112.2,45.9},{-106,45.9},{-106,52}},
       color={255,204,51},
       thickness=0.5));
-  connect(senHallTemp.T, dB_JN.bus_jn.TempHall) annotation (Line(points={{-65,
-          60},{-106.975,60},{-106.975,48.03}}, color={0,0,127}));
+  connect(senHallTemp.T, distributeBus_jn.bus_jn.TempHall) annotation (Line(
+        points={{-65,60},{-98,60},{-98,52.03},{-105.98,52.03}}, color={0,0,127}));
+  connect(controlCPH.distributeBus_CPH, cPH.distributeBus) annotation (Line(
+      points={{-194.2,-40.1},{-184,-40.1},{-184,-34.5},{-178.162,-34.5}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCCA.distributeBus_CCA, cCA.distributeBus) annotation (Line(
+      points={{-54.2,21.9},{-50,21.9},{-50,16.06},{-44.38,16.06}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(distributeBus_cid, controlCID.distributeBus_CID) annotation (Line(
+      points={{115,87},{116,87},{116,58},{33.8,58},{33.8,39.9}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(senRoomTemp.T, distributeBus_cid.bus_cid.TempRoom) annotation (Line(
+        points={{100,85},{100,87.035},{115.025,87.035}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),

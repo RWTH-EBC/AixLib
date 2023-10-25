@@ -1,6 +1,6 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.BaseClasses.Control;
 model ControlJN
-  EONERC_Testhall.BaseClasses.DistributeBus distributeBus_JN annotation (Placement(
+  .Testhall.BaseClass.DistributeBus distributeBus_JN annotation (Placement(
         transformation(extent={{-100,18},{-60,60}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_AirValve(

@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.BaseClasses.Control;
 model ControlSystem_withoutJN_andCold
   .Testhall.BaseClass.DistributeBus dB_Buildings annotation (Placement(
         transformation(extent={{-214,268},{-142,352}}), iconTransformation(
@@ -18,6 +18,8 @@ model ControlSystem_withoutJN_andCold
     Temp_Set_Circ(displayUnit="K") = 283.15,
     Temp_Set_Air(displayUnit="K") = 284.15)
     annotation (Placement(transformation(extent={{318,0},{298,20}})));
+  AHU.AHUControl aHUControl
+    annotation (Placement(transformation(extent={{-10,-112},{72,-40}})));
   .Testhall.BaseClass.DistributeBus dB_AHU annotation (Placement(transformation(
           extent={{-102,-124},{-30,-40}}), iconTransformation(extent={{0,0},{0,
             0}})));

@@ -1,6 +1,6 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.BaseClasses.Control;
 model ControlCID
-  EONERC_Testhall.BaseClasses.DistributeBus distributeBus_CID annotation (Placement(
+  .Testhall.BaseClass.DistributeBus distributeBus_CID annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cid_m_flow(

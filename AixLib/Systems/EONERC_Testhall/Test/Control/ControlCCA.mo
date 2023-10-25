@@ -1,6 +1,6 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.BaseClasses.Control;
 model ControlCCA
-  EONERC_Testhall.BaseClasses.DistributeBus distributeBus_CCA annotation (Placement(
+  .Testhall.BaseClass.DistributeBus distributeBus_CCA annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cca_m_flow(
@@ -49,6 +49,8 @@ equation
   connect(booleanExpression1.y, distributeBus_CCA.bus_cca.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-70,-33},{-70,-14.895},{-93.9,-14.895}},
         color={255,0,255}));
+  connect(PID_cca_m_flow.u_m, distributeBus_CCA.bus_cca.m_flow) annotation (
+      Line(points={{-44,52},{-44,-14.895},{-93.9,-14.895}}, color={0,0,127}));
   connect(PID_cca_m_flow.y, distributeBus_CCA.bus_cca.pumpBus.rpmSet)
     annotation (Line(points={{-33,64},{-22,64},{-22,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
@@ -62,8 +64,6 @@ equation
           {8,-54},{0,-54}}, color={0,0,127}));
   connect(PID_Valve.u_s, T_Sol.y) annotation (Line(points={{68,-64},{90,-64},{
           90,-40},{95.4,-40}}, color={0,0,127}));
-  connect(PID_cca_m_flow.u_m, distributeBus_CCA.bus_cca.mflow)
-    annotation (Line(points={{-44,52},{-44,-15},{-94,-15}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{160,100}}),                                  graphics={
         Text(
