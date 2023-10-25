@@ -3,6 +3,9 @@ model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition
     poolParam "Choose setup for this pool" annotation (choicesAllMatching=true);
 
+   parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    poolWallParam "Choose setup for this pool" annotation (choicesAllMatching=true);
+
   replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -234,7 +237,7 @@ model IndoorSwimmingPool
     hConWaterHorizontal=poolParam.hConWatHor,
     hConWaterVertical=poolParam.hConWatVer,
     TPool=poolParam.TPool,
-    PoolWall=poolParam.PoolWallParam)
+    PoolWall=poolWallParam)
     "Model to depict the heat flow rate through the pool walls to the bordering room/soil"
     annotation (Placement(transformation(extent={{64,32},{80,48}})));
 
@@ -247,8 +250,8 @@ model IndoorSwimmingPool
   Modelica.Blocks.Interfaces.RealOutput QEva(
     final quantity="HeatFlowRate",
     final unit="W") "Heat due to evaporation" annotation (Placement(
-        transformation(extent={{-92,46},{-122,76}}), iconTransformation(extent={
-            {-94,46},{-114,66}})));
+        transformation(extent={{-94,52},{-124,82}}), iconTransformation(extent={{-94,60},
+            {-114,80}})));
 
    Modelica.Blocks.Interfaces.RealOutput QPool(
      final quantity="HeatFlowRate",
@@ -371,6 +374,10 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{32,-76},{44,-60}})));
 
 
+  Modelica.Blocks.Interfaces.RealOutput m_flow_eva(final quantity=
+        "MassFlowRate", final unit="kg/s") "Evaporation mass flow" annotation (
+      Placement(transformation(extent={{-94,34},{-122,62}}), iconTransformation(
+          extent={{-96,36},{-116,56}})));
 protected
   final parameter Modelica.Units.SI.Density rhoWater_default=
       WaterMedium.density_pTX(
@@ -473,8 +480,9 @@ equation
           39.92},{38,39.92},{38,0},{14,0}}, color={191,0,0}));
   connect(hEva.y, minusGain.u) annotation (Line(points={{-39.6,52},{-34,52},{-34,
           60},{-24.8,60}}, color={0,0,127}));
-  connect(hEva.y, QEva) annotation (Line(points={{-39.6,52},{-34,52},{-34,61},{-107,
-          61}}, color={0,0,127}));
+  connect(hEva.y, QEva) annotation (Line(points={{-39.6,52},{-34,52},{-34,67},{
+          -109,67}},
+                color={0,0,127}));
   connect(heatTraCond.TSoil, TSoil) annotation (Line(points={{80.48,42.88},{82,42.88},
           {82,49},{105,49}}, color={0,0,127}));
   connect(convPool, convPool)
@@ -528,6 +536,8 @@ equation
 
   connect(PI.u_m,getMeaTPool. y) annotation (Line(points={{66,-11.2},{66,4},{92,
           4},{92,16},{83,16}}, color={0,0,127}));
+  connect(getEva.y, m_flow_eva) annotation (Line(points={{-71.1,41},{-68,41},{
+          -68,48},{-108,48}}, color={0,0,127}));
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},
