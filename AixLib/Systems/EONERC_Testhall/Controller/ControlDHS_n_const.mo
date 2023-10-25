@@ -1,8 +1,8 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlDHS_n_const
-  BaseClasses.DistributeBus distributeBus_DHS annotation (Placement(
-        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(
-          extent={{78,-22},{118,20}})));
+  BaseClass.DistributeBus distributeBus_DHS annotation (Placement(
+        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
+            {{78,-22},{118,20}})));
   Modelica.Blocks.Sources.Constant T_Set_SupPrim(k=50 + 273.15) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},

@@ -23,22 +23,22 @@ model Testhall_simpleConsumer
     p=115000,
     use_T_in=true,
     nPorts=1) annotation (Placement(transformation(extent={{144,-72},{140,-68}})));
-  BaseClasses.CCA.CCA cCA
+  BaseClass.CCA.CCA cCA
     annotation (Placement(transformation(extent={{-44,2},{-6,40}})));
-  BaseClasses.CPH.CPH cPH
+  BaseClass.CPH.CPH cPH
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  BaseClasses.CID.CID cID
+  BaseClass.CID cID
     annotation (Placement(transformation(extent={{32,14},{100,56}})));
-  BaseClasses.JN.JN_simpel jN
+  BaseClass.JetNozzle.JN_simpel jN
     annotation (Placement(transformation(extent={{-104,26},{-72,46}})));
-  AixLib.DataBase.Pumps.HydraulicModules.SimpleConsumer Hall1(
+  HydraulicModules.SimpleConsumer                       Hall1(
     redeclare package Medium = AixLib.Media.Air,
     V=1e3,
     m_flow_nominal=3,
     T_start=291.15,
     functionality="Q_flow_input") "Thermal zone"
     annotation (Placement(transformation(extent={{-90,70},{-62,96}})));
-  AixLib.DataBase.Pumps.HydraulicModules.SimpleConsumer Office(
+  HydraulicModules.SimpleConsumer                       Office(
     redeclare package Medium = AixLib.Media.Air,
     V=1e3,
     m_flow_nominal=0.8,
@@ -82,13 +82,13 @@ model Testhall_simpleConsumer
         extent={{-5,-5},{5,5}},
         rotation=270,
         origin={-25,79})));
-  Modelica.Blocks.Sources.CombiTimeTable roomTemp(
+  Modelica.Blocks.Sources.CombiTimeTable ambientAir(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Systems/EONERC_Testhall/DataBase/RoomTemperatureNovtoMay.txt"),
-    columns=2:9,
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/AmbientAir.txt"),
+    columns={2},
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    "1-Office1,...5-Office5,6-Hall1,7-Hall2,8-AmbTemp"
     annotation (Placement(transformation(extent={{242,-56},{222,-36}})));
 
     Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(
@@ -111,7 +111,7 @@ model Testhall_simpleConsumer
     preheater(
       hydraulicModuleIcon="Injection",
       m2_flow_nominal=0.45,
-      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection
+      redeclare AixLib.Systems.HydraulicModules.Injection
         hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=6.3,
@@ -126,31 +126,31 @@ model Testhall_simpleConsumer
         pipe8(length=0.3),
         pipe9(length=0.3),
         redeclare
-          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
     cooler(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=5,
-      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
+      redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
         hydraulicModule(
         pipeModel="SimplePipe",
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(),
         Kv=25,
         redeclare
-          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
               AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H05_16()))),
     heater(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=1.2,
-      redeclare AixLib.DataBase.Pumps.HydraulicModules.Injection2WayValve
+      redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
         hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=10,
         redeclare
-          AixLib.DataBase.Pumps.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
               AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H05_12()),
         pipe1(length=10),
@@ -199,15 +199,14 @@ model Testhall_simpleConsumer
         origin={-54,60})));
   Controller.ControlJN controlJN
     annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
-  BaseClasses.Hydraulics.Distributor_withoutReserve
-    distributor_withoutReserve
+  BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
     annotation (Placement(transformation(extent={{-146,-196},{118,-100}})));
-  BaseClasses.DistributeBus distributeBus_jn annotation (Placement(
-        transformation(extent={{-110,46},{-102,58}}), iconTransformation(
-          extent={{-110,46},{-102,58}})));
-  BaseClasses.DistributeBus distributeBus_cid annotation (Placement(
-        transformation(extent={{110,80},{120,94}}), iconTransformation(extent=
-           {{110,80},{120,94}})));
+  BaseClass.DistributeBus distributeBus_jn annotation (Placement(transformation(
+          extent={{-110,46},{-102,58}}), iconTransformation(extent={{-110,46},{
+            -102,58}})));
+  BaseClass.DistributeBus distributeBus_cid annotation (Placement(
+        transformation(extent={{110,80},{120,94}}), iconTransformation(extent={
+            {110,80},{120,94}})));
 equation
   connect(cID.air_out, Office.port_a)
     annotation (Line(points={{56,43.4},{56,85},{62,85}}, color={0,127,255}));
@@ -230,8 +229,6 @@ equation
     annotation (Line(points={{-25,73.5},{-25,70}}, color={0,0,127}));
   connect(gaincca.u, cca_heatflow.y)
     annotation (Line(points={{-25,85},{-25,108},{-33,108}}, color={0,0,127}));
-  connect(roomTemp.y[8], ODA.T_in) annotation (Line(points={{221,-46},{204,-46},
-          {204,-39.2},{198.4,-39.2}},                      color={0,0,127}));
   connect(combiTimeTable.y[1], sup_c.T_in) annotation (Line(points={{155.4,-78},
           {150,-78},{150,-69.2},{144.4,-69.2}}, color={0,0,127}));
   connect(EHA.ports[1], ahu.port_b2)
@@ -332,6 +329,8 @@ equation
 
   connect(senRoomTemp.T, distributeBus_cid.bus_cid.RoomTemp) annotation (Line(
         points={{100,85},{100,87.035},{115.025,87.035}}, color={0,0,127}));
+  connect(ambientAir.y[1], ODA.T_in) annotation (Line(points={{221,-46},{204,
+          -46},{204,-39.2},{198.4,-39.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),

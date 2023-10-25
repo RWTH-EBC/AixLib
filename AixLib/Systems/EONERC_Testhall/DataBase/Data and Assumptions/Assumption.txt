@@ -1,0 +1,9 @@
+Use Data from 24.10.22 12pm to 24.10.23 12pm
+
+Individual missing values ​​are supplemented by the previous value
+
+
+Ambient Air Temperature:
+	- unlogical sensor data at 14.11.22 (above 50°C) and between 10.12 to 15.12.22 (above 50°C)
+	- approx T_amb=10°C at 14.11.22
+	- approx T_amb=1°C from 10.12 to 15.12.22

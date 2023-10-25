@@ -1,8 +1,8 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlCCA
-  BaseClasses.DistributeBus distributeBus_CCA annotation (Placement(
-        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(
-          extent={{78,-22},{118,20}})));
+  BaseClass.DistributeBus distributeBus_CCA annotation (Placement(
+        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
+            {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cca_m_flow(
     yMin=0,
     Td=0.5,
