@@ -7,3 +7,7 @@ Ambient Air Temperature:
 	- unlogical sensor data at 14.11.22 (above 50°C) and between 10.12 to 15.12.22 (above 50°C)
 	- approx T_amb=10°C at 14.11.22
 	- approx T_amb=1°C from 10.12 to 15.12.22
+
+
+Heat Flow for JN, CCA and CID are approx by monitoring data. Use monthly variating value to estimate dimension. 
+Approx JN heat flow as Q_JN = (4*Q_CID - Q_CCA) (four times because of area relation of office and hall1)

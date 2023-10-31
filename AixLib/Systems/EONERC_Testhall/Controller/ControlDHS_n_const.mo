@@ -3,7 +3,7 @@ model ControlDHS_n_const
   BaseClass.DistributeBus distributeBus_DHS annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
-  Modelica.Blocks.Sources.Constant T_Set_SupPrim(k=50 + 273.15) annotation (
+  Modelica.Blocks.Sources.Constant T_Set_SupPrim(k=70 + 273.15) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -13,8 +13,8 @@ model ControlDHS_n_const
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=2000,
-    k=0.003) annotation (Placement(transformation(
+    Ti=3000,
+    k=0.01)  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={62,68})));
@@ -74,5 +74,9 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
-           false)));
+           false)),
+    experiment(
+      StopTime=400000,
+      __Dymola_NumberOfIntervals=200,
+      __Dymola_Algorithm="Dassl"));
 end ControlDHS_n_const;

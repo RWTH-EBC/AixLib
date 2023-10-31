@@ -1,6 +1,6 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlCCA_Heizkurve
-  .Testhall.BaseClass.DistributeBus distributeBus_CCA annotation (Placement(
+  BaseClass.DistributeBus           distributeBus_CCA annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cca_m_flow(
@@ -32,7 +32,7 @@ model ControlCCA_Heizkurve
     Td=0.5,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
-    Ti=1500,
+    Ti=2000,
     k=0.001) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=0,
@@ -61,8 +61,6 @@ equation
   connect(booleanExpression1.y, distributeBus_CCA.bus_cca.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-70,-33},{-70,-14.895},{-93.9,-14.895}},
         color={255,0,255}));
-  connect(PID_cca_m_flow.u_m, distributeBus_CCA.bus_cca.m_flow) annotation (
-      Line(points={{-44,52},{-44,-14.895},{-93.9,-14.895}}, color={0,0,127}));
   connect(PID_cca_m_flow.y, distributeBus_CCA.bus_cca.pumpBus.rpmSet)
     annotation (Line(points={{-33,64},{-22,64},{-22,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
@@ -82,6 +80,12 @@ equation
     annotation (Line(points={{77,-64},{68,-64}}, color={0,0,127}));
   connect(y.u1, T_amb) annotation (Line(points={{121.2,-60.4},{120,-60.4},{120,-36},
           {158,-36}}, color={0,0,127}));
+  connect(PID_cca_m_flow.u_m, distributeBus_CCA.bus_cca.mflow) annotation (Line(
+        points={{-44,52},{-44,-14.895},{-93.9,-14.895}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{160,100}}),                                  graphics={
         Text(

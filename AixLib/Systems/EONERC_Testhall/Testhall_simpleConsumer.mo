@@ -33,14 +33,14 @@ model Testhall_simpleConsumer
     annotation (Placement(transformation(extent={{-104,26},{-72,46}})));
   HydraulicModules.SimpleConsumer                       Hall1(
     redeclare package Medium = AixLib.Media.Air,
-    V=1e3,
+    V=5e5,
     m_flow_nominal=3,
     T_start=291.15,
     functionality="Q_flow_input") "Thermal zone"
     annotation (Placement(transformation(extent={{-90,70},{-62,96}})));
   HydraulicModules.SimpleConsumer                       Office(
     redeclare package Medium = AixLib.Media.Air,
-    V=1e3,
+    V=5e4,
     m_flow_nominal=0.8,
     T_start=291.15,
     functionality="Q_flow_input") "Thermal zone"
@@ -50,21 +50,22 @@ model Testhall_simpleConsumer
         extent={{-9,-9},{9,9}},
         rotation=270,
         origin={-25,61})));
-  Modelica.Blocks.Sources.TimeTable cca_heatflow(table=[0,2; 1382400,3.4;
-        3888000,13.6; 6480000,17; 9072000,27; 11664000,13.6; 14256000,11;
-        16848000,-6.8])
+  Modelica.Blocks.Sources.TimeTable cca_heatflow(table=[0,2; 267840,7; 2678400,
+        7; 5270400,15; 7948800,22; 10627200,36; 13132800,28; 15811200,7;
+        18403200,0; 21081600,0; 23673600,0; 26352000,0; 29030400,7; 31536000,7])
     "4 typische Heizbedarfe (2 Winter, 2 Sommer) je einen Tag lang"
     annotation (Placement(transformation(extent={{-54,98},{-34,118}})));
-  Modelica.Blocks.Sources.TimeTable hall1_heatflow(table=[0,15.4; 1382400,35.86;
-        3888000,22.44; 6480000,16.06; 9072000,16.28; 11664000,21.56; 14256000,9.9;
-        16848000,0]) "Values for November till May"
+  Modelica.Blocks.Sources.TimeTable hall1_heatflow(table=[0,7; 2678400,29;
+        5270400,19; 7948800,9.6; 10627200,5.8; 13132800,5.2; 15811200,13;
+        18403200,1; 21081600,4; 23673600,0; 26352000,2.4; 29030400,21; 31536000,
+        7])          "Values for November till May"
     annotation (Placement(transformation(extent={{-140,120},{-120,140}})));
   Modelica.Blocks.Math.Gain gainjn(k=-1000)
     annotation (Placement(transformation(extent={{-106,124},{-94,136}})));
-  Modelica.Blocks.Sources.TimeTable cid_heatflow(table=[0,4.5; 1382400,9;
-        3888000,8.5; 6480000,7.9; 9072000,10.45; 11664000,8.3; 14256000,5;
-        16848000,0.25])
-    "Values for November till May"
+  Modelica.Blocks.Sources.TimeTable cid_heatflow(table=[0,3.5; 2678400,9;
+        5270400,8.5; 7948800,7.9; 10627200,10.45; 13132800,8.3; 15811200,5;
+        18403200,0.25; 21081600,1; 23673600,0; 26352000,0.6; 29030400,7;
+        31536000,3.5]) "Oct till Oct"
     annotation (Placement(transformation(extent={{36,112},{56,132}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_PrescribedHeatFlow(alpha=0)
     annotation (Placement(transformation(
@@ -91,14 +92,15 @@ model Testhall_simpleConsumer
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{242,-56},{222,-36}})));
 
-    Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(
+    Modelica.Blocks.Sources.CombiTimeTable CoolerInput(
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/CoolerInput.txt"),
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Cooler.txt"),
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2})
     annotation (Placement(transformation(extent={{168,-84},{156,-72}})));
+
   AixLib.Systems.ModularAHU.GenericAHU ahu(
     redeclare package Medium1 = AixLib.Media.Air,
     redeclare package Medium2 = AixLib.Media.Water,
@@ -147,8 +149,10 @@ model Testhall_simpleConsumer
       m2_flow_nominal=1.2,
       redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
         hydraulicModule(
+        pipeModel="SimplePipe",
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=10,
+        valve(flowCharacteristics=Fluid.Actuators.Valves.Data.Linear()),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
@@ -162,37 +166,35 @@ model Testhall_simpleConsumer
         pipe7(length=0.6))))
     annotation (Placement(transformation(extent={{180,-60},{94,-16}})));
 
-  Modelica.Blocks.Sources.CombiTimeTable HeatFlowHall2(
+  Modelica.Blocks.Sources.CombiTimeTable QFlowHall2(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Systems/EONERC_Testhall/DataBase/HeatFlowNovtoMay.txt"),
-    columns={11},
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/QflowHall2.txt"),
+    columns={2},
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    annotation (Placement(transformation(extent={{-222,68},{-202,88}})));
+    annotation (Placement(transformation(extent={{-210,40},{-190,60}})));
 
-  Modelica.Blocks.Math.Gain gaincph(k=-1000)
-    annotation (Placement(transformation(extent={{-192,72},{-180,84}})));
   Controller.ControlCID controlCID
     annotation (Placement(transformation(extent={{14,30},{34,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                    senRoomTemp(redeclare package Medium =
         AixLib.Media.Air, m_flow_nominal=0.8)
     annotation (Placement(transformation(extent={{90,64},{110,84}})));
-  Controller.ControlCCA           controlCCA
+  Controller.ControlCCA_Heizkurve controlCCA
     annotation (Placement(transformation(extent={{-74,12},{-48,32}})));
   Controller.ControlCPH controlCPH
     annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
   AixLib.Systems.ModularAHU.Controller.CtrAHUBasic controlAHU(
     TFlowSet=310.15,
     ctrPh(rpm_pump=2300),
-    ctrRh(k=0.015),
+    ctrRh(k=0.01, Ti=1000),
     VFlowSet=3.08,
-    dpMax=2000,
+    dpMax=5000,
     useTwoFanCtr=true,
-    k=0.8) annotation (Placement(transformation(extent={{170,-10},{150,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package
-      Medium =
-        AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
+    k=0.8) annotation (Placement(transformation(extent={{174,-10},{154,10}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium
+      = AixLib.Media.Air, m_flow_nominal=3) annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
@@ -210,8 +212,8 @@ model Testhall_simpleConsumer
 equation
   connect(cID.air_out, Office.port_a)
     annotation (Line(points={{56,43.4},{56,85},{62,85}}, color={0,127,255}));
-  connect(jN.heating_air_hall1, Hall1.port_a) annotation (Line(points={{-95.6,
-          42},{-96,42},{-96,83},{-90,83}}, color={0,127,255}));
+  connect(jN.air_out, Hall1.port_a) annotation (Line(points={{-95.6,42},{-96,42},
+          {-96,83},{-90,83}}, color={0,127,255}));
   connect(cca_PrescribedHeatFlow.port, cCA.heat_port_CCA)
     annotation (Line(points={{-25,52},{-25,40.76}}, color={191,0,0}));
   connect(hall1_heatflow.y, gainjn.u)
@@ -229,8 +231,8 @@ equation
     annotation (Line(points={{-25,73.5},{-25,70}}, color={0,0,127}));
   connect(gaincca.u, cca_heatflow.y)
     annotation (Line(points={{-25,85},{-25,108},{-33,108}}, color={0,0,127}));
-  connect(combiTimeTable.y[1], sup_c.T_in) annotation (Line(points={{155.4,-78},
-          {150,-78},{150,-69.2},{144.4,-69.2}}, color={0,0,127}));
+  connect(CoolerInput.y[1], sup_c.T_in) annotation (Line(points={{155.4,-78},{
+          150,-78},{150,-69.2},{144.4,-69.2}}, color={0,0,127}));
   connect(EHA.ports[1], ahu.port_b2)
     annotation (Line(points={{194,-24},{180,-24}}, color={0,127,255}));
   connect(ODA.ports[1], ahu.port_a1)
@@ -241,14 +243,10 @@ equation
           -70},{137,-60}}, color={0,127,255}));
   connect(ahu.port_b1, cID.air_in) annotation (Line(points={{93.6091,-40},{74.4,
           -40},{74.4,18.2}}, color={0,127,255}));
-  connect(ahu.port_b1, jN.air_RLT_SUP) annotation (Line(points={{93.6091,-40},
-          {74,-40},{74,-12},{-81,-12},{-81,30}}, color={0,127,255}));
-  connect(HeatFlowHall2.y[1], gaincph.u)
-    annotation (Line(points={{-201,78},{-193.2,78}}, color={0,0,127}));
-  connect(gaincph.y, cph_PrescribedHeatFlow.Q_flow) annotation (Line(points={{-179.4,
-          78},{-171,78},{-171,42}}, color={0,0,127}));
+  connect(ahu.port_b1, jN.air_in) annotation (Line(points={{93.6091,-40},{74,-40},
+          {74,-12},{-81,-12},{-81,30}}, color={0,127,255}));
   connect(controlAHU.genericAHUBus, ahu.genericAHUBus) annotation (Line(
-      points={{150,0.1},{137,0.1},{137,-15.8}},
+      points={{154,0.1},{137,0.1},{137,-15.8}},
       color={255,204,51},
       thickness=0.5));
   connect(Office.port_b, senRoomTemp.port_a)
@@ -331,11 +329,13 @@ equation
         points={{100,85},{100,87.035},{115.025,87.035}}, color={0,0,127}));
   connect(ambientAir.y[1], ODA.T_in) annotation (Line(points={{221,-46},{204,
           -46},{204,-39.2},{198.4,-39.2}}, color={0,0,127}));
+  connect(QFlowHall2.y[1], cph_PrescribedHeatFlow.Q_flow)
+    annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
+  connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{221,-46},
+          {204,-46},{204,16},{102,16},{102,12},{-4,12},{-4,-6},{-74.6,-6},{
+          -74.6,22}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(
-      StopTime=10000,
-      __Dymola_NumberOfIntervals=200,
-      __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=1209600, __Dymola_Algorithm="Dassl"));
 end Testhall_simpleConsumer;

@@ -4,6 +4,7 @@ package CPH
 
     HydraulicModules.Injection2WayValve                       cph_Valve(
       redeclare package Medium = AixLib.Media.Water,
+      pipeModel="SimplePipe",
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
       Kv=1.2,

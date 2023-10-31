@@ -20,12 +20,10 @@ model CID "Ceiling induction diffusers / DID Deckeninduktionsdurchlässe"
     redeclare package Medium2 = AixLib.Media.Air)
                                            "DID"
     annotation (Placement(transformation(extent={{46,52},{26,30}})));
-  AixLib.Fluid.Actuators.Valves.TwoWayLinear Valve(
+  Fluid.Actuators.Dampers.Exponential        Valve(
     redeclare package Medium = MediumAir,
     each m_flow_nominal=0.8,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=12000,
-    dpValve_nominal=10,
+    dpDamper_nominal=1000,
     each l=0.01) "if Valve Kv=100 " annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,

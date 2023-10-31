@@ -55,6 +55,7 @@ model Distributor_withoutReserve
 
   HydraulicModules.Pump                       pump(
     redeclare package Medium = MediumWater,
+    pipeModel="SimplePipe",
     length=1,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_64x2(),
     m_flow_nominal=4.2,

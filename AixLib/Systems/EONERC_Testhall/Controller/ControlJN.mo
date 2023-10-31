@@ -8,8 +8,8 @@ model ControlJN
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=1500,
-    k=0.02)  annotation (Placement(transformation(
+    Ti=2200,
+    k=0.01)  annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={6,4})));

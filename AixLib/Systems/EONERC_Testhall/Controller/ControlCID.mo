@@ -28,8 +28,8 @@ model ControlCID
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=1500,
-    k=0.003) annotation (Placement(transformation(
+    Ti=100,
+    k=0.05)  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={62,68})));
@@ -47,8 +47,8 @@ model ControlCID
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=1500,
-    k=0.02)  annotation (Placement(transformation(
+    Ti=1000,
+    k=0.1)   annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-8,-50})));

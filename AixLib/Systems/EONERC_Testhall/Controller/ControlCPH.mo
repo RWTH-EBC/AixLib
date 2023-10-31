@@ -28,8 +28,8 @@ model ControlCPH
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=2000,
-    k=0.1)   annotation (Placement(transformation(
+    Ti=250,
+    k=0.001) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={62,68})));
@@ -39,11 +39,6 @@ model ControlCPH
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-2,-60})));
-  Modelica.Blocks.Continuous.CriticalDamping criticalDamping(
-    n=2,
-    f=0.05,
-    x_start={0,0})
-    annotation (Placement(transformation(extent={{26,14},{6,34}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
@@ -60,19 +55,16 @@ equation
   connect(PID_Valve.u_m, distributeBus_CPH.bus_cph.TFwrdOutMea) annotation (
       Line(points={{62,56},{62,44},{-74,44},{-74,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
-  connect(criticalDamping.y, distributeBus_CPH.bus_cph.valveSet) annotation (
-      Line(points={{5,24},{-6,24},{-6,-14.895},{-93.9,-14.895}},
-                                                              color={0,0,127}));
   connect(booleanExpression1.y, distributeBus_CPH.bus_cph.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={
           255,0,255}));
-  connect(PID_Valve.y, criticalDamping.u) annotation (Line(points={{73,68},{84,
-          68},{84,24},{28,24}}, color={0,0,127}));
   connect(Set_ValveThrottle.y, distributeBus_CPH.bus_cph_throttle.valveSet)
     annotation (Line(points={{-13,-60},{-93.9,-60},{-93.9,-14.895}}, color={0,0,
           127}));
   connect(PID_cph_m_flow.u_m, distributeBus_CPH.bus_cph.mflow) annotation (Line(
         points={{-38,52},{-38,-16},{-93.9,-16},{-93.9,-14.895}}, color={0,0,127}));
+  connect(PID_Valve.y, distributeBus_CPH.bus_cph.valveSet) annotation (Line(
+        points={{73,68},{78,68},{78,-14.895},{-93.9,-14.895}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
