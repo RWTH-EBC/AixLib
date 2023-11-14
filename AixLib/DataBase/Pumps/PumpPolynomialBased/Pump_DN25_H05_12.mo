@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN25_H05_12 "Pump with head 0.5 to 12,4m and 12,4m^3/h volume flow (25/0.5-12 PN)"
+record Pump_DN25_H05_12 "Pump with head 0.5 to 12.4m and 12.4m^3/h volume flow (25/0.5-12 PN)"
    extends PumpBaseRecord(
      maxMinHeight=[
            0.00, 12.30,  0.367;

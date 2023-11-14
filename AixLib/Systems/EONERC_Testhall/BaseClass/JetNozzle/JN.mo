@@ -93,7 +93,7 @@ model JN "Reheater/Recooler jet nozzles"
     nPorts=1,
     p=100000)
     annotation (Placement(transformation(extent={{94,-76},{114,-56}})));
-  AixLib.DataBase.Pumps.HydraulicModules.Throttle throttle[10](
+  HydraulicModules.Throttle                       throttle[10](
     length=1,
     each parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     Kv=4,

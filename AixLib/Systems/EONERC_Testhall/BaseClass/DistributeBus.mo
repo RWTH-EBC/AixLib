@@ -5,7 +5,6 @@ expandable connector DistributeBus "Distribute Data Bus"
 
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_office_heating;
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_ahu;
-  Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_jn;
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_input;
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus control_building;
 
@@ -19,8 +18,6 @@ expandable connector DistributeBus "Distribute Data Bus"
   AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus
     bus_ahu_cold;
   AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_jn;
-  AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus
-    bus_valve_jn;
   AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus bus_dhs;
   AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus
     bus_dhs_pump;

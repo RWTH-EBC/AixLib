@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
-record Pump_DN50_H05_16 "Pump with head 0.5 to 15,8m and 54m^3/h volume flow (Wilo Stratos Maxo 50/0.5-16 PN6/10)"
+record Pump_DN50_H05_16 "Pump with head 0.5 to 15.8m and 54m^3/h volume flow (Wilo Stratos Maxo 50/0.5-16 PN6/10)"
    extends PumpBaseRecord(
     maxMinHeight=[
            0.00, 15.73,  0.427;
