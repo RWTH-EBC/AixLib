@@ -148,5 +148,9 @@ equation
     Implemented.
   </li>
 </ul>
-</html>"));
+</html>"),
+  experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+  __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos"
+        "Simulate and plot"));
 end Multizone;
