@@ -124,7 +124,7 @@ protected
     "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{58,-52},{46,-40}})));
   Modelica.Blocks.Interfaces.RealOutput hum_internal = 0  if not use_moisture_balance
-    "internal humidity (used for case with no moisture balance";
+    "internal humidity (used for case with no moisture balance)";
   Modelica.Blocks.Interfaces.RealOutput mWat_flow_internal = 0 if not use_moisture_balance
     "internal mass flow rate of water vapor (used for case with no moisture balance)";
 equation
