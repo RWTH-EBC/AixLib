@@ -37,11 +37,13 @@ model PhotovoltaicThermal "Simple Model of a photovoltaic thermal panel"
       final unit="W") "DC output power of the PV array"
     annotation (Placement(transformation(extent={{100,26},{120,46}})));
 
-  BaseClasses.SolarElectricalEfficiency eleEff
+  BaseClasses.SolarElectricalEfficiency eleEff(parCol=
+        AixLib.DataBase.PhotovoltaicThermal.ElectricalGlazedPVTWithLowEmissionCoating())
     annotation (Placement(transformation(extent={{26,34},{58,66}})));
   Modelica.Blocks.Math.Gain conRelElePowerToAbsElePower(final k=A)
     annotation (Placement(transformation(extent={{70,44},{82,56}})));
-  BaseClasses.PVT_SolarThermalEfficiency pvtEff
+  BaseClasses.PVT_SolarThermalEfficiency pvtEff(parCol=
+        AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedPVTWithLowEmissionCoating())
     annotation (Placement(transformation(extent={{-70,36},{-38,68}})));
 equation
   connect(conRelHeaFlowToAbsHeaFlow.y, heater.Q_flow) annotation (Line(points={
