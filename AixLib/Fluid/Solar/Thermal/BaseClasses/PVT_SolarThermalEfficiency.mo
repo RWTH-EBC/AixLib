@@ -2,9 +2,9 @@ within AixLib.Fluid.Solar.Thermal.BaseClasses;
 model PVT_SolarThermalEfficiency
   "Calculates the efficiency of a thermal component of pvt"
   parameter AixLib.DataBase.PhotovoltaicThermal.SolarThermalBaseDataDefinition
-    Collector=AixLib.DataBase.PhotovoltaicThermal.PVT_thermal()
+    parCol=AixLib.DataBase.PhotovoltaicThermal.PVT_thermal()
     "Thermal properties of Photovoltaic thermal Collector" annotation (choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.RealInput T_air(
+  Modelica.Blocks.Interfaces.RealInput TAir(
     quantity="ThermodynamicTemperature",
     unit="K",
     displayUnit="degC") "Air temperature" annotation (Placement(transformation(
@@ -16,7 +16,7 @@ model PVT_SolarThermalEfficiency
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={10,106})));
-  Modelica.Blocks.Interfaces.RealInput T_col(
+  Modelica.Blocks.Interfaces.RealInput TCol(
     quantity="ThermodynamicTemperature",
     unit="K",
     displayUnit="degC") "Collector temperature" annotation (Placement(
@@ -24,22 +24,22 @@ model PVT_SolarThermalEfficiency
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-50,-106})));
-  Modelica.Blocks.Interfaces.RealOutput Q_flow(quantity="HeatFlux", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput QFlow(quantity="HeatFlux", unit="W/m2")
     "Useful heat flow from solar collector in W/m2"
     annotation (Placement(transformation(extent={{98,-10},{118,10}})));
 protected
-  Modelica.Units.SI.Efficiency eta(max=Collector.eta_zero)
+  Modelica.Units.SI.Efficiency eta(max= parCol.eta_zero)
     "Efficiency of solar thermal collector";
   Modelica.Units.SI.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation
-  dT = T_col - T_air;
+  dT = TCol - TAir;
   eta = max(0,
-          min(Collector.eta_zero,
-              Collector.eta_zero - Collector.c1*dT/max(G,
+          min(parCol.eta_zero,
+              parCol.eta_zero - parCol.c1*dT/max(G,
                 Modelica.Constants.eps) -
-              Collector.c2*dT*dT/max(G, Modelica.Constants.eps)));
-  Q_flow = G*eta;
+              parCol.c2*dT*dT/max(G, Modelica.Constants.eps)));
+  QFlow = G*eta;
   annotation (Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

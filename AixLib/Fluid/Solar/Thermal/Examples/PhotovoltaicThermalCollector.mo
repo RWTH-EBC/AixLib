@@ -6,11 +6,11 @@ model PhotovoltaicThermalCollector
   replaceable package Medium = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model";
 
-  Sources.Boundary_pT                source(
+  Sources.Boundary_pT source(
     nPorts=1,
     redeclare package Medium = Medium,
-    p=system.p_ambient + pVT_Modul.pressureDropCoeff*(pVT_Modul.m_flow_nominal/
-        995)^2 + pipe.dp_nominal)
+    p=system.p_ambient + pvt.pressureDropCoeff*(pvt.m_flow_nominal/995)^2 +
+        pipe.dp_nominal)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Sources.Boundary_pT                sink(nPorts=1, redeclare package Medium =
         Medium,
@@ -43,20 +43,21 @@ model PhotovoltaicThermalCollector
     T_ambient=298.15,
     m_flow_start=system.m_flow_nominal,
     use_eps_Re=true,
-    m_flow_nominal=1.5*pVT_Modul.A/60*995/1000,
+    m_flow_nominal=1.5*pvt.A/60*995/1000,
     p_ambient=300000)
-              annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
-  AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal pVT_Modul(
+    annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+  AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal pvt(
+    pvtEff(parCol=
+          AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedPVTWithLowEmissionCoating()),
+    eleEff(parCol=
+          AixLib.DataBase.PhotovoltaicThermal.ElectricalGlazedPVTWithLowEmissionCoating()),
     redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=system.m_flow_nominal,
     A=2,
     volPip=0.05,
-    Collector=AixLib.DataBase.SolarThermal.AirCollector(),
-    pVT_SolarThermalEfficiency(Collector=
-          AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedPVTWithLowEmissionCoating()),
-    solarElectricalEfficiency(Collector=
-          AixLib.DataBase.PhotovoltaicThermal.ElectricalGlazedPVTWithLowEmissionCoating()))
+    parCol=AixLib.DataBase.SolarThermal.AirCollector())
     annotation (Placement(transformation(extent={{-4,-10},{20,12}})));
+
 equation
   connect(massFlowSensor.port_b, T1.port_a)
     annotation (Line(points={{-34,0},{-28,0}}, color={0,127,255}));
@@ -66,17 +67,14 @@ equation
     annotation (Line(points={{-60,0},{-54,0}}, color={0,127,255}));
   connect(pipe.port_b, sink.ports[1])
     annotation (Line(points={{74,0},{80,0}}, color={0,127,255}));
-  connect(T1.port_b, pVT_Modul.port_a)
-    annotation (Line(points={{-8,0},{-6,0},{-6,1},{-4,1}},
-                                            color={0,127,255}));
-  connect(T2.port_a, pVT_Modul.port_b)
-    annotation (Line(points={{28,0},{24,0},{24,1},{20,1}},
-                                             color={0,127,255}));
-  connect(hotSummerDay.y[1], pVT_Modul.T_air)
-    annotation (Line(points={{-5,72},{0.8,72},{0.8,12}},
-                                                     color={0,0,127}));
-  connect(hotSummerDay.y[2], pVT_Modul.Irradiation)
-    annotation (Line(points={{-5,72},{8,72},{8,12}},   color={0,0,127}));
+  connect(T1.port_b, pvt.port_a)
+    annotation (Line(points={{-8,0},{-6,0},{-6,1},{-4,1}}, color={0,127,255}));
+  connect(T2.port_a, pvt.port_b)
+    annotation (Line(points={{28,0},{24,0},{24,1},{20,1}}, color={0,127,255}));
+  connect(hotSummerDay.y[1], pvt.TAir)
+    annotation (Line(points={{-5,72},{0.8,72},{0.8,12}}, color={0,0,127}));
+  connect(hotSummerDay.y[2], pvt.irr)
+    annotation (Line(points={{-5,72},{8,72},{8,12}}, color={0,0,127}));
   annotation (
     experiment(StopTime=82600, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),

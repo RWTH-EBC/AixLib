@@ -3,8 +3,8 @@ package AixLib
 
   annotation (
   uses(
-	SDF(version="0.4.2"),
-	Modelica_DeviceDrivers(version="2.1.1"),
+ SDF(version="0.4.2"),
+ Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0")),
   version="1.3.2",
   conversion(from(
@@ -78,21 +78,20 @@ package AixLib
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.12.0_to_0.12.1.mos",
     version="1.0.1",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.1_to_1.0.2.mos",
-	version="1.0.2",
+ version="1.0.2",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.2_to_1.0.3.mos",
     version="1.0.3",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.3_to_1.1.0.mos",
-	version="1.1.0",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.1.0_to_1.2.0.mos",
-	version="1.2.0",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.0_to_1.2.1.mos",
-	version="1.2.1",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.1_to_1.2.2.mos",
-	version="1.3.0",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.0_to_1.3.1.mos",
-	version="1.3.1",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.1_to_1.3.2.mos")					  
-					  ),
+ version="1.1.0",
+       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.1.0_to_1.2.0.mos",
+ version="1.2.0",
+       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.0_to_1.2.1.mos",
+ version="1.2.1",
+       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.1_to_1.2.2.mos",
+ version="1.3.0",
+       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.0_to_1.3.1.mos",
+ version="1.3.1",
+       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.3.1_to_1.3.2.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of

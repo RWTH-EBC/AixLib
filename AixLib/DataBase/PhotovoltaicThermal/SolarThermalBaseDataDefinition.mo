@@ -22,18 +22,17 @@ record SolarThermalBaseDataDefinition
 </ul>
 </html>", info="<html>
 <h4>
-  <span style=\"color:#008000\">Overview</span>
+  Overview
 </h4>
 <p>
   This base record defines the values conversion factor and loss
   coefficients for solar thermal collectors.
 </p>
 <h4>
-  <span style=\"color:#008000\">References</span>
+  References
 </h4>
 <p>
-  Base data definition for record to be used in model <a href=
-  \"AixLib.Fluid.Solar.Thermal.SolarThermal\">AixLib.Fluid.Solar.Thermal.SolarThermal</a>.
+  Base data definition for record to be used in model <a href=\"modelica://AixLib.Fluid.Solar.Thermal.SolarThermal\">AixLib.Fluid.Solar.Thermal.SolarThermal</a>.
 </p>
 </html>"));
 end SolarThermalBaseDataDefinition;

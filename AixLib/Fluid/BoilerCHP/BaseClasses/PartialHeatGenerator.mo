@@ -110,10 +110,10 @@ equation
           -80},{-80,-80}}, color={0,127,255},
       thickness=1));
   connect(senTCold.port_b, vol.ports[1])
-    annotation (Line(points={{-60,-80},{-42,-80}}, color={0,127,255},
+    annotation (Line(points={{-60,-80},{-41,-80}}, color={0,127,255},
       thickness=1));
   connect(vol.ports[2], pressureDrop.port_a) annotation (Line(
-      points={{-38,-80},{-38,-80},{-20,-80}},
+      points={{-39,-80},{-39,-80},{-20,-80}},
       color={0,127,255},
       thickness=1));
   connect(senMasFlo.port_b, port_b) annotation (Line(points={{80,-80},{90,-80},{
