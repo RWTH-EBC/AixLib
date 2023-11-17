@@ -121,10 +121,10 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
       Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
   //New parameter and module fow shadow model
   parameter Boolean withShield = false "enable shadow effect?" annotation(Dialog(tab = "Window", group="Shadow", enable = outside and withWindow and withSunblind));
-  parameter Modelica.Units.SI.Length L_Win_Shield = 0.05 "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.SI.Length H_Win_Shadow_min = 0.05 "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.SI.Length H_Win_Shadow_max = 1.10 "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.NonSI.Angle_deg azi_deg_Win = -54 "Window glazing azimuth, S=0°, W=90°, N=180°, E=-90°" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length lenWinShie = 0.05 "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length heiWinShadMin = 0.05 "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length heiWinShadMax = 1.10 "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.NonSI.Angle_deg aziDegWin = -54 "Window glazing azimuth, S=0°, W=90°, N=180°, E=-90°" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
 
   // door parameters
   parameter Boolean withDoor=false   "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
@@ -174,12 +174,12 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     final TOutAirLimit=TOutAirLimit)
                       if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-52,-44},{-36,-28}})));
-  Shadow.ShadowEffect shadowEff(
-    Mode=1,
-    L_Shield=L_Win_Shield,
-    H_Window_min=H_Win_Shadow_min,
-    H_Window_max=H_Win_Shadow_max,
-    azi_deg=azi_deg) if withWindow and outside and withShield
+  Shadow.ShadowEffect shadowEff(calMod=AixLib.ThermalZones.HighOrder.Components.Shadow.Types.selectorShadowEffectMode.constRedDiffAllDir,
+    lenShie=lenWinShie,
+    heiWinMin=heiWinShadMin,
+    heiWinMax=heiWinShadMax,
+    aziDeg=aziDegWin)
+                     if withWindow and outside and withShield
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
     annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
@@ -305,9 +305,9 @@ equation
           pattern=LinePattern.Dash));
       connect(Sunblind.Rad_Out[1], shadowEff.solRadIn) annotation (Line(
           points={{-35,-35},{-32,-35},{-32,-20},{-44,-20},{-44,-10},{-41,-10}},
-
           color={255,128,0},
           pattern=LinePattern.Dash));
+
     else
       connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-35,-35},
               {-32,-35},{-32,-34},{-28,-34},{-28,-27.2},{-13.7,-27.2}},                                                                           color={255,128,
