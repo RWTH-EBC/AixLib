@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Components.Shadow;
-model WeaDatPrcs "Weather data processing"
-  extends RadTrans;
-  parameter Integer nDryBulPort=1 "Number of output";
+model WeatherDataProcessing "Weather data processing"
+  extends RadiationTransfer;
+  parameter Integer nDryBulPort=1 "Number of output port(s)";
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemp[
     nDryBulPort]
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
@@ -14,4 +14,4 @@ equation
   for i in 1:nDryBulPort loop
     connect(weaBus.TDryBul, preTemp[i].T);
   end for;
-end WeaDatPrcs;
+end WeatherDataProcessing;

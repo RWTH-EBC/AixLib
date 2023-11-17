@@ -174,12 +174,12 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     final TOutAirLimit=TOutAirLimit)
                       if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-52,-44},{-36,-28}})));
-  Shadow.ShadowEff shadowEff(
+  Shadow.ShadowEffect shadowEff(
     Mode=1,
     L_Shield=L_Win_Shield,
     H_Window_min=H_Win_Shadow_min,
     H_Window_max=H_Win_Shadow_max,
-    azi_deg=azi_deg)               if withWindow and outside and withShield
+    azi_deg=azi_deg) if withWindow and outside and withShield
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
     annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
@@ -299,13 +299,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-      connect(windowModel.solarRad_in, shadowEff.solarRad_out) annotation (Line(
-        points={{-13.7,-27.2},{-16,-27.2},{-16,-10},{-19,-10}},
-        color={255,128,0},
+      connect(windowModel.solarRad_in, shadowEff.solRadOut) annotation (Line(
+          points={{-13.7,-27.2},{-16,-27.2},{-16,-10},{-19,-10}},
+          color={255,128,0},
           pattern=LinePattern.Dash));
-      connect(Sunblind.Rad_Out[1], shadowEff.solarRad_in) annotation (Line(points={{-35,-35},
-              {-32,-35},{-32,-20},{-44,-20},{-44,-10},{-41,-10}},
-                                                      color={255,128,0},
+      connect(Sunblind.Rad_Out[1], shadowEff.solRadIn) annotation (Line(
+          points={{-35,-35},{-32,-35},{-32,-20},{-44,-20},{-44,-10},{-41,-10}},
+
+          color={255,128,0},
           pattern=LinePattern.Dash));
     else
       connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-35,-35},
