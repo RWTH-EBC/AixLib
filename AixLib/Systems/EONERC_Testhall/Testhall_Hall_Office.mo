@@ -27,9 +27,9 @@ model Testhall_Hall_Office
     annotation (Placement(transformation(extent={{-44,2},{-6,40}})));
   BaseClass.CPH.CPH cPH
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  BaseClass.CID cID
+  BaseClass.CID.CID cID
     annotation (Placement(transformation(extent={{32,14},{100,56}})));
-  BaseClass.JetNozzle.JN_simpel jN
+  BaseClass.JetNozzle.JN        jN
     annotation (Placement(transformation(extent={{-104,26},{-72,46}})));
   HydraulicModules.SimpleConsumer                       Hall1(
     redeclare package Medium = AixLib.Media.Air,
@@ -58,7 +58,7 @@ model Testhall_Hall_Office
         15811200,13; 18403200,1; 21081600,4; 23673600,0; 26352000,2.4; 29030400,
         21; 31536000,7])
     annotation (Placement(transformation(extent={{-140,120},{-120,140}})));
-  Modelica.Blocks.Math.Gain gainjn(k=-1000*2.9)
+  Modelica.Blocks.Math.Gain gainjn(k=-1000*3)
     annotation (Placement(transformation(extent={{-106,124},{-94,136}})));
   Modelica.Blocks.Sources.TimeTable cid_heatflow(table=[0,0.5; 86400,3.5;
         2678400,9; 5270400,8.5; 7948800,7.9; 10627200,10.45; 13132800,8.3;
@@ -198,7 +198,7 @@ model Testhall_Hall_Office
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-54,60})));
-  Controller.ControlJN controlJN
+  Controller.ControlJN_constHydrValve controlJN
     annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
     annotation (Placement(transformation(extent={{-146,-196},{118,-100}})));

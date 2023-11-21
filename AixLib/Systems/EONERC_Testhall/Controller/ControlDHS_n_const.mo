@@ -14,7 +14,7 @@ model ControlDHS_n_const
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=3000,
-    k=0.01)  annotation (Placement(transformation(
+    k=0.1)   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={62,68})));

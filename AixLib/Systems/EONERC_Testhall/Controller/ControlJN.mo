@@ -18,7 +18,7 @@ model ControlJN
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={44,-36})));
-  Modelica.Blocks.Sources.Constant T_Set_Hall_Circ(k=60 + 273.15) annotation (
+  Modelica.Blocks.Sources.Constant T_Set_Hall_Circ(k=70 + 273.15) annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -33,13 +33,13 @@ model ControlJN
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={44,82})));
-  Modelica.Blocks.Continuous.LimPID PID_cph_m_flow(
+  Modelica.Blocks.Continuous.LimPID PID_m_flow(
     yMin=0,
     Td=0.5,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=4350,
     Ti=1,
-    k=50)    annotation (Placement(transformation(
+    k=30) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-20,16})));
@@ -63,12 +63,12 @@ equation
                                                    color={0,0,127}));
   connect(PID_AirValve.u_m, distributeBus_JN.bus_jn.TempHall) annotation (Line(
         points={{6,-48},{6,-54},{-79.9,-54},{-79.9,39.105}}, color={0,0,127}));
-  connect(m_flow_set.y,PID_cph_m_flow. u_s)
-    annotation (Line(points={{25,16},{-8,16}},   color={0,0,127}));
-  connect(PID_cph_m_flow.y, distributeBus_JN.bus_jn.pumpBus.rpmSet) annotation (
-     Line(points={{-31,16},{-54,16},{-54,39.105},{-79.9,39.105}}, color={0,0,
+  connect(m_flow_set.y, PID_m_flow.u_s)
+    annotation (Line(points={{25,16},{-8,16}}, color={0,0,127}));
+  connect(PID_m_flow.y, distributeBus_JN.bus_jn.pumpBus.rpmSet) annotation (
+      Line(points={{-31,16},{-54,16},{-54,39.105},{-79.9,39.105}}, color={0,0,
           127}));
-  connect(PID_cph_m_flow.u_m, distributeBus_JN.bus_jn.mflow) annotation (Line(
+  connect(PID_m_flow.u_m, distributeBus_JN.bus_jn.mflow) annotation (Line(
         points={{-20,4},{-20,-2},{-79.9,-2},{-79.9,39.105}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

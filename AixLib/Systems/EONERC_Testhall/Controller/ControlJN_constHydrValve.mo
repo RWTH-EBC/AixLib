@@ -18,11 +18,26 @@ model ControlJN_constHydrValve
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={44,-36})));
-  Modelica.Blocks.Sources.Constant ValveSet(k=0.2) annotation (Placement(
+  Modelica.Blocks.Sources.Constant ValveSet(k=0.5) annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={40,60})));
+  Modelica.Blocks.Continuous.LimPID PID_m_flow(
+    yMin=0,
+    Td=0.5,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    yMax=4350,
+    Ti=1,
+    k=30) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={0,12})));
+  Modelica.Blocks.Sources.Constant m_flow_set(k=0.4)  annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={56,12})));
 equation
   connect(RoomTemp_set.y, PID_AirValve.u_s)
     annotation (Line(points={{33,-36},{18,-36}},color={0,0,127}));
@@ -33,6 +48,13 @@ equation
         points={{6,-48},{6,-54},{-79.9,-54},{-79.9,39.105}}, color={0,0,127}));
   connect(ValveSet.y, distributeBus_JN.bus_jn.valveSet) annotation (Line(points=
          {{29,60},{-54,60},{-54,39.105},{-79.9,39.105}}, color={0,0,127}));
+  connect(m_flow_set.y, PID_m_flow.u_s)
+    annotation (Line(points={{45,12},{12,12}}, color={0,0,127}));
+  connect(PID_m_flow.y, distributeBus_JN.bus_jn.pumpBus.rpmSet) annotation (
+      Line(points={{-11,12},{-34,12},{-34,39.105},{-79.9,39.105}}, color={0,0,
+          127}));
+  connect(PID_m_flow.u_m, distributeBus_JN.bus_jn.mflow) annotation (Line(
+        points={{0,0},{0,-6},{-79.9,-6},{-79.9,39.105}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

@@ -24,7 +24,7 @@ model ControlJN_controlQFlow
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=250,
-    k=0.001) annotation (Placement(transformation(
+    k=0.1)   annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={44,74})));
@@ -37,6 +37,21 @@ model ControlJN_controlQFlow
     annotation (Placement(transformation(extent={{0,44},{8,52}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{16,42},{24,50}})));
+  Modelica.Blocks.Continuous.LimPID PID_m_flow(
+    yMin=0,
+    Td=0.5,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    yMax=4350,
+    Ti=1,
+    k=30) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={20,10})));
+  Modelica.Blocks.Sources.Constant m_flow_set(k=0.4)  annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={76,10})));
 equation
   connect(RoomTemp_set.y, PID_AirValve.u_s)
     annotation (Line(points={{33,-36},{18,-36}},color={0,0,127}));
@@ -63,6 +78,12 @@ equation
           39.105}}, color={0,0,127}));
   connect(product.y, PID_Valve.u_m)
     annotation (Line(points={{24.4,46},{44,46},{44,62}}, color={0,0,127}));
+  connect(m_flow_set.y, PID_m_flow.u_s)
+    annotation (Line(points={{65,10},{32,10}}, color={0,0,127}));
+  connect(PID_m_flow.u_m, distributeBus_JN.bus_jn.mflow) annotation (Line(
+        points={{20,-2},{20,-8},{-79.9,-8},{-79.9,39.105}}, color={0,0,127}));
+  connect(PID_m_flow.y, distributeBus_JN.bus_jn.pumpBus.rpmSet) annotation (
+      Line(points={{9,10},{-79.9,10},{-79.9,39.105}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
