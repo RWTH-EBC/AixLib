@@ -237,17 +237,17 @@ package CID
           extent={{6,-6},{-6,6}},
           rotation=180,
           origin={42,8})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{90,-2},{110,
+    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{90,-2},{110,
               18}}), iconTransformation(extent={{88,-54},{108,-34}})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_water(redeclare package Medium
-        = Media.Water) annotation (Placement(transformation(extent={{-48,-108},
+    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_water(redeclare package Medium =
+          Media.Water) annotation (Placement(transformation(extent={{-48,-108},
               {-28,-88}}), iconTransformation(extent={{-22,-108},{-2,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_water(redeclare package Medium
-        = Media.Water) annotation (Placement(transformation(extent={{10,-110},{
+    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_water(redeclare package Medium =
+          Media.Water) annotation (Placement(transformation(extent={{10,-110},{
               30,-90}}), iconTransformation(extent={{14,-108},{34,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_air(redeclare package Medium
-        = Media.Air)                                                                              annotation (Placement(transformation(extent={{88,36},
+    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_air(redeclare package Medium =
+          Media.Air)                                                                              annotation (Placement(transformation(extent={{88,36},
               {108,56}}),
           iconTransformation(extent={{86,22},{106,42}})));
     Fluid.Sources.Boundary_pT                   boundary2(

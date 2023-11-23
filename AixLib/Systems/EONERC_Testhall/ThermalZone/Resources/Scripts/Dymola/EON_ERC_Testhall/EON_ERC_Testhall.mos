@@ -1,0 +1,5 @@
+simulateModel("Testhall.EON_ERC_Testhall.EON_ERC_Testhall", method="Dassl", tolerance=0.0001, stopTime=31536000, resultFile="EON_ERC_Testhall");
+createPlot(id=1, y={"multizone.PHeater[1]"});
+createPlot(id=2, y={"multizone.PCooler[1]"});
+createPlot(id=3, y={"multizone.TAir[1]"});
+

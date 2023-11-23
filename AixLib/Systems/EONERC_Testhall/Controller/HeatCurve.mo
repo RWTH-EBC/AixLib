@@ -3,8 +3,8 @@ model HeatCurve
 
   parameter Real u_lower = 15 "lower heating limit" annotation(Dialog(tab = "General", group = "Limits"));
   parameter Real t_sup_upper = 80 "upper supply temperature limit" annotation(Dialog(tab = "General", group = "Limits"));
-  parameter Real x = -1 "gradient of heat curve" annotation(Dialog(tab = "General", group = "Heat Curve"));
-  parameter Real b = 10 "intercept" annotation(Dialog(tab = "General", group = "Heat Curve"));
+  parameter Real x = -1 "slope" annotation(Dialog(tab = "General", group = "Heat Curve"));
+  parameter Real b = 10 "offset" annotation(Dialog(tab = "General", group = "Heat Curve"));
 
   Real t_ambient;
   Real y;

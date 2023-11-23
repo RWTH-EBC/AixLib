@@ -3,21 +3,11 @@ model ControlCCA_Heizkurve "Information out of Unterlagen\\Heizlastberechnung\\H
   BaseClass.DistributeBus           distributeBus_CCA annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
-  Modelica.Blocks.Continuous.LimPID PID_cca_m_flow(
-    yMin=0,
-    Td=0.5,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    yMax=3690,
-    Ti=1,
-    k=10)    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-44,64})));
-  Modelica.Blocks.Sources.Constant m_flow_set(k=1.31) annotation (Placement(
+  Modelica.Blocks.Sources.Constant m_flow_set(k=3600) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={-88,64})));
+        origin={-34,16})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
@@ -41,17 +31,16 @@ model ControlCCA_Heizkurve "Information out of Unterlagen\\Heizlastberechnung\\H
   Modelica.Blocks.Interfaces.RealInput T_amb annotation (Placement(
         transformation(extent={{186,-84},{146,-44}}), iconTransformation(extent={{-126,
             -20},{-86,20}})));
-  HeatCurve heatCurve(t_sup_upper=50, b=38)
+  HeatCurve heatCurve(
+    u_lower=17,
+    t_sup_upper=48,
+    x=-0.5,
+    b=24)
     annotation (Placement(transformation(extent={{126,-74},{106,-54}})));
 equation
-  connect(m_flow_set.y,PID_cca_m_flow. u_s)
-    annotation (Line(points={{-77,64},{-56,64}}, color={0,0,127}));
   connect(booleanExpression1.y, distributeBus_CCA.bus_cca.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-70,-33},{-70,-14.895},{-93.9,-14.895}},
         color={255,0,255}));
-  connect(PID_cca_m_flow.y, distributeBus_CCA.bus_cca.pumpBus.rpmSet)
-    annotation (Line(points={{-33,64},{-22,64},{-22,-14.895},{-93.9,-14.895}},
-        color={0,0,127}));
   connect(criticalDamping.y, distributeBus_CCA.bus_cca.valveSet) annotation (
       Line(points={{-23,-54},{-66,-54},{-66,-14.895},{-93.9,-14.895}}, color={0,
           0,127}));
@@ -60,16 +49,13 @@ equation
         color={0,0,127}));
   connect(PID_Valve.y, criticalDamping.u) annotation (Line(points={{45,-64},{8,-64},
           {8,-54},{0,-54}}, color={0,0,127}));
-  connect(PID_cca_m_flow.u_m, distributeBus_CCA.bus_cca.mflow) annotation (Line(
-        points={{-44,52},{-44,-14.895},{-93.9,-14.895}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(T_amb, heatCurve.T_amb)
     annotation (Line(points={{166,-64},{128,-64}}, color={0,0,127}));
   connect(heatCurve.T_sup, PID_Valve.u_s)
     annotation (Line(points={{105.2,-64},{68,-64}}, color={0,0,127}));
+  connect(m_flow_set.y, distributeBus_CCA.bus_cca.pumpBus.rpmSet) annotation (
+      Line(points={{-45,16},{-68,16},{-68,-14.895},{-93.9,-14.895}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{160,100}}),                                  graphics={
         Text(

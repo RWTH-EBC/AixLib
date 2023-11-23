@@ -237,8 +237,11 @@ equation
           -40},{78,-36},{48,-36},{48,-20.4},{41.8,-20.4}}, color={0,127,255}));
   connect(ahu.port_a2, jn.jn_rl_air) annotation (Line(points={{93.6091,-24},{52,
           -24},{52,-12.8},{41.6,-12.8}}, color={0,127,255}));
+  connect(ambientAir.y[1], controlCPH.T_amb) annotation (Line(points={{243,-72},
+          {236,-72},{236,-80},{-128,-80},{-128,-62},{-222,-62},{-222,-40},{
+          -214.4,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(StopTime=100000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=1000000, __Dymola_Algorithm="Dassl"));
 end Testhall_Hall;

@@ -14,7 +14,7 @@ model ControlDHS_n_const
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=3000,
-    k=0.1)   annotation (Placement(transformation(
+    k=0.2)   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={62,68})));
@@ -22,12 +22,12 @@ model ControlDHS_n_const
     n=2,
     f=0.05,
     x_start={0,0})
-    annotation (Placement(transformation(extent={{26,-18},{6,2}})));
+    annotation (Placement(transformation(extent={{28,-22},{8,-2}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-90,-44})));
-  Modelica.Blocks.Sources.Constant nset(k=4000) annotation (Placement(
+  Modelica.Blocks.Sources.Constant nset(k=4500) annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -36,9 +36,11 @@ equation
   connect(PID_Valve.u_s, T_Set_SupPrim.y)
     annotation (Line(points={{50,68},{33,68}}, color={0,0,127}));
   connect(PID_Valve.y, criticalDamping.u) annotation (Line(points={{73,68},{78,
-          68},{78,-8},{28,-8}}, color={0,0,127}));
+          68},{78,-12},{30,-12}},
+                                color={0,0,127}));
   connect(criticalDamping.y, distributeBus_DHS.bus_dhs.valveSet) annotation (
-      Line(points={{5,-8},{-22,-8},{-22,-14.895},{-93.9,-14.895}}, color={0,0,
+      Line(points={{7,-12},{-22,-12},{-22,-14.895},{-93.9,-14.895}},
+                                                                   color={0,0,
           127}));
   connect(booleanExpression1.y, distributeBus_DHS.bus_dhs_pump.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={

@@ -2,24 +2,25 @@ within AixLib.Systems.EONERC_Testhall.BaseClass;
 package CPH
   model CPH
 
-    HydraulicModules.Injection2WayValve                       cph_Valve(
+    HydraulicModules.Admix                                    cph_Valve(
       redeclare package Medium = AixLib.Media.Water,
       pipeModel="SimplePipe",
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
       Kv=1.2,
-          redeclare
-        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
+      valveCharacteristic=
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+        PumpInterface(pumpParam=
+            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4()),
       m_flow_nominal=0.54,
       pipe1(length=0.4),
       pipe2(length=0.1),
       pipe3(length=1),
-      pipe5(length=0.15),
+      pipe5(length=0.3),
       pipe4(length=1),
-      pipe6(length=0.15),
-      pipe7(length=0.3),
+      pipe6(length=0.3),
       T_amb=273.15 + 10,
       T_start=343.15) annotation (Placement(transformation(
           extent={{-50,-50},{49.9999,49.9999}},
@@ -62,11 +63,6 @@ package CPH
     DistributeBus distributeBus_CPH annotation (Placement(transformation(extent=
              {{-152,-46},{-112,-4}}), iconTransformation(extent={{-180,-76},{-140,
               -34}})));
-    AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
-          AixLib.Media.Water) annotation (Placement(transformation(
-          extent={{10,10},{-10,-10}},
-          rotation=270,
-          origin={-32,-40})));
   equation
     connect(cph_Throttle.port_b2, cph_Valve.port_a2) annotation (Line(points={{11.6,
             -16},{10,-16},{10,-56},{26,-56},{26,-66.0001}},  color={0,127,255}));
@@ -92,13 +88,9 @@ package CPH
     connect(cph_Throttle.port_b1, radiantCeilingPanelHeater.radiantcph_sup)
       annotation (Line(points={{-25.6,46},{-24,46},{-24,54},{-42,54},{-42,89},{
             -34,89}}, color={0,127,255}));
-    connect(senMasFlo.port_b, cph_Throttle.port_a1) annotation (Line(points={{-32,
-            -30},{-32,-16},{-25.6,-16}}, color={0,127,255}));
-    connect(senMasFlo.port_a, cph_Valve.port_b1) annotation (Line(points={{-32,-50},
-            {-33.9999,-50},{-33.9999,-66.0001}},      color={0,127,255}));
-    connect(senMasFlo.m_flow, distributeBus_CPH.bus_cph.mflow) annotation (Line(
-          points={{-43,-40},{-106,-40},{-106,-24.895},{-131.9,-24.895}}, color={0,
-            0,127}));
+    connect(cph_Valve.port_b1, cph_Throttle.port_a1) annotation (Line(points={{
+            -33.9999,-66.0001},{-32,-66.0001},{-32,-22},{-25.6,-22},{-25.6,-16}},
+          color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
               -200},{100,120}}),graphics={
           Rectangle(

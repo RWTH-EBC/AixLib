@@ -31,7 +31,7 @@ model Distributor_withoutReserve
     p=120000,
     T=403.15,
     nPorts=1) "nominal mass flow 1 kg/s"
-    annotation (Placement(transformation(extent={{-108,50},{-88,70}})));
+    annotation (Placement(transformation(extent={{-112,50},{-92,70}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe1(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
     length=4.5,
@@ -236,7 +236,7 @@ model Distributor_withoutReserve
     annotation (Placement(transformation(extent={{48,180},{104,232}})));
 equation
   connect(FernwaermeEin.ports[1], dhs.port_a1)
-    annotation (Line(points={{-88,60},{-10,60}}, color={0,127,255}));
+    annotation (Line(points={{-92,60},{-10,60}}, color={0,127,255}));
   connect(dhs.port_b1, hex.port_a1) annotation (Line(points={{90,60},{116,60},{
           116,60},{148,60},{148,42}}, color={0,127,255}));
   connect(hex.port_b1, dhs.port_a2)
