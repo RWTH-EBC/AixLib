@@ -25,7 +25,8 @@ model Wall
   // Surface parameters
   parameter Real solar_absorptance = 0.25
     "Solar absorptance coefficient of outside wall surface"                                       annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside));
-  parameter Integer calcMethodOut=1 "Calculation method for convective heat transfer coefficient at outside surface" annotation (Dialog(
+  parameter Integer calcMethodOut=1
+  "Calculation method for convective heat transfer coefficient at outside surface" annotation (Dialog(
       tab="Surface Parameters",
       group="Outside surface",
       enable=outside,
@@ -119,12 +120,16 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     if withWindow and outside and withSunblind
     "Temperature at which sunblind closes (see also LimitSolIrr)" annotation (
       Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
-  //New parameter and module fow shadow model
+  //Parameter and module fow shadow model
   parameter Boolean withShield = false "enable shadow effect?" annotation(Dialog(tab = "Window", group="Shadow", enable = outside and withWindow and withSunblind));
-  parameter Modelica.Units.SI.Length lenWinShie = 0.05 "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.SI.Length heiWinShadMin = 0.05 "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.SI.Length heiWinShadMax = 1.10 "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
-  parameter Modelica.Units.NonSI.Angle_deg aziDegWin = -54 "Window glazing azimuth, S=0°, W=90°, N=180°, E=-90°" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length lenWinShie = 0.05
+    "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length heiWinShadMin = 0.05
+    "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.SI.Length heiWinShadMax = 1.10
+    "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+  parameter Modelica.Units.NonSI.Angle_deg aziDegWin = -54
+    "Window glazing azimuth, S=0°, W=90°, N=180°, E=-90°" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
 
   // door parameters
   parameter Boolean withDoor=false   "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));

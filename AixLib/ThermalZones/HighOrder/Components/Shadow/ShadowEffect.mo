@@ -13,6 +13,8 @@ model ShadowEffect
     "Surface azimuth, S=0°, W=90°, N=180°, E=-90°";
   parameter Real redFacDifRad(min=0,max=1) = 1
     "Reduce factor of shadow effect for diffuse radiation: 0=fully reduced, 1=no addtional reduce";
+  parameter Integer N = 100
+    "Number of discretisation angles to calculate the shadow factor";
 
   BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
@@ -33,11 +35,11 @@ protected
 algorithm
   // Calculate the mean shadow factor regarding 90° range from perpenticular direction
   sum := 0;
-  for i in 1:100 loop
+  for i in 1:N loop
     H := (heiWinMax + heiWinMin)/2;
     L := lenShie;
-    s := (Modelica.Constants.pi/2) / 100; // Differential of 90° for integration
-    beta := (Modelica.Constants.pi/2) / 100 * i; // Angle to the perpendicular direction
+    s := (Modelica.Constants.pi/2) / N; // Differential of 90° for integration
+    beta := (Modelica.Constants.pi/2) / N * i; // Angle to the perpendicular direction
     sum := sum + (2/Modelica.Constants.pi) * Modelica.Math.atan(H/L * Modelica.Math.cos(beta)) * s;
   end for;
   gShaDif_mean := sum / (Modelica.Constants.pi/2);

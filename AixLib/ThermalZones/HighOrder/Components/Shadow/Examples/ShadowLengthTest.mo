@@ -28,5 +28,11 @@ equation
       StopTime=31536000,
       Interval=3600,
       Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"), Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>Simulation to test the <a href=\"AixLib.Building.Components.Shadow.ShadowLength\">ShadowLength</a> model with different facade azimuth angles and sun shied lengths. </p>
+<ul>
+<li><i>November, 2023&nbsp;</i> by Jun Jiang:<br>Implemented. </li>
+</ul>
+</html>"));
 end ShadowLengthTest;

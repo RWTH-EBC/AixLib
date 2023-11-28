@@ -35,14 +35,21 @@ model ShadowLength
     "= true, if the shadow is present on the surface"
     annotation (Placement(transformation(extent={{100,-60},{120,-40}})));
 
+  Modelica.Blocks.Math.Tan tan1
+    annotation (Placement(transformation(extent={{10,-60},{30,-40}})));
+  Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=0.001, uHigh=0.002)
+    annotation (Placement(transformation(extent={{40,40},{60,60}})));
+  Modelica.Blocks.Logical.Hysteresis hysteresis1(uLow=0.001, uHigh=0.002)
+    annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=if sha then lenShie/(
+        tan(zen.zen)*cos(wallSolAzi.verAzi)) else 0)
+    annotation (Placement(transformation(extent={{60,80},{80,100}})));
+  Modelica.Blocks.Math.Cos cos1
+    annotation (Placement(transformation(extent={{10,40},{30,60}})));
+
+  Modelica.Blocks.Logical.And and1
+    annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 equation
-  if tan(zen.zen)<0.001 or cos(wallSolAzi.verAzi)<0.001 then
-    sha = false;
-    heiSha = 0;
-  else
-    sha = true;
-    heiSha = lenShie/(tan(zen.zen)*cos(wallSolAzi.verAzi));   //H_Shadow = lenShie * tan(VSA)
-  end if;
 
   connect(weaBus.solZen, altAng.zen) annotation (Line(
       points={{-100,0},{-80,0},{-80,70},{-62,70}},
@@ -92,6 +99,22 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(realExpression.y, heiSha) annotation (Line(points={{81,90},{96,90},{96,
+          50},{110,50}},    color={0,0,127}));
+  connect(zen.zen, tan1.u)
+    annotation (Line(points={{1,-50},{8,-50}}, color={0,0,127}));
+  connect(wallSolAzi.verAzi, cos1.u)
+    annotation (Line(points={{1,50},{8,50}}, color={0,0,127}));
+  connect(cos1.y, hysteresis.u)
+    annotation (Line(points={{31,50},{38,50}}, color={0,0,127}));
+  connect(tan1.y, hysteresis1.u)
+    annotation (Line(points={{31,-50},{38,-50}}, color={0,0,127}));
+  connect(hysteresis.y, and1.u1) annotation (Line(points={{61,50},{62,50},{62,20},
+          {38,20},{38,0}}, color={255,0,255}));
+  connect(hysteresis1.y, and1.u2) annotation (Line(points={{61,-50},{62,-50},{62,
+          -20},{38,-20},{38,-8}}, color={255,0,255}));
+  connect(and1.y, sha) annotation (Line(points={{61,0},{80,0},{80,-50},{110,-50}},
+        color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(
           extent={{-98,-98},{98,98}}, fileName="modelica://AixLib/Resources/Images/ThermalZones/HighOrder/Components/Shadow/Icon/ShadowLength.png"),

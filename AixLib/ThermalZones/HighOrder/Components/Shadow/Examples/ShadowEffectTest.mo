@@ -53,6 +53,8 @@ model ShadowEffectTest "Test the modul ShadowEffect"
   BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth        solAzi
     "Solar azimuth"
     annotation (Placement(transformation(extent={{40,-160},{60,-140}})));
+  Modelica.Blocks.Sources.RealExpression gShaDirEffDiffAll(y=shaEffDiffAll.gShaDir)
+    annotation (Placement(transformation(extent={{80,-40},{100,-20}})));
 equation
   connect(weaDat.weaBus, shaEffDiffAll.weaBus) annotation (Line(
       points={{-80,30},{-20,30},{-20,58},{0,58}},
@@ -155,5 +157,11 @@ equation
   annotation (experiment(
       StopTime=31536000,
       Interval=3600,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"), Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>Simulation to test the <a href=\"AixLib.Building.Components.Shadow.ShadowEffect\">ShadowEffect</a> model with different diffuse radiation calculation modes. Comparison with shadow coefficient with the model <a href=\"AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing\">SelfShadowing</a>.</p>
+<ul>
+<li><i>November, 2023&nbsp;</i> by Jun Jiang:<br>Implemented. </li>
+</ul>
+</html>"));
 end ShadowEffectTest;
