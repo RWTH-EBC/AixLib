@@ -40,13 +40,13 @@ model JN_approxAirflow
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{-40,28},{-20,48}})));
 
-  Fluid.FixedResistances.HydraulicDiameter res(
+  Fluid.FixedResistances.HydraulicDiameter res_vl_air(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2.64,
     length=3) annotation (Placement(transformation(extent={{68,-14},{48,6}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
     annotation (Placement(transformation(extent={{-4,-10},{8,2}})));
-  Fluid.FixedResistances.HydraulicDiameter res1(
+  Fluid.FixedResistances.HydraulicDiameter res_rl_air(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2.64,
     length=3) annotation (Placement(transformation(
@@ -76,12 +76,11 @@ equation
           {-41,-1.425},{-26,-1.425}},   color={0,0,127}));
   connect(gain1.y,boundary1. m_flow_in) annotation (Line(points={{8.6,-4},{8.6,
           -8.8},{22.8,-8.8}},    color={0,0,127}));
-  connect(res.port_b,boundary1. ports[1])
-    annotation (Line(points={{48,-4},{36,-4}},
-                                             color={0,127,255}));
-  connect(boundary2.ports[1],res1. port_a)
+  connect(res_vl_air.port_b, boundary1.ports[1])
+    annotation (Line(points={{48,-4},{36,-4}}, color={0,127,255}));
+  connect(boundary2.ports[1], res_rl_air.port_a)
     annotation (Line(points={{52,36},{52,34},{62,34}}, color={0,127,255}));
-  connect(res1.port_b, jn_rl_air)
+  connect(res_rl_air.port_b, jn_rl_air)
     annotation (Line(points={{82,34},{100,34}}, color={0,127,255}));
   connect(gain1.u, mflow_jn_total.y)
     annotation (Line(points={{-5.2,-4},{-5.2,-3},{-15.15,-3}},
@@ -91,7 +90,7 @@ equation
                                                     color={0,0,127}));
   connect(Hall1_Temp.y[1], boundary2.T_in) annotation (Line(points={{-19,38},{
           30,38},{30,33.6},{38.8,33.6}}, color={0,0,127}));
-  connect(jn_vl_air, res.port_a)
+  connect(jn_vl_air, res_vl_air.port_a)
     annotation (Line(points={{102,-4},{68,-4}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(

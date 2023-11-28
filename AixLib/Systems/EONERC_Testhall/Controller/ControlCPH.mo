@@ -47,13 +47,16 @@ equation
   connect(PID_Valve.u_m, distributeBus_CPH.bus_cph_throttle.TFwrdOutMea)
     annotation (Line(points={{30,56},{30,-14.895},{-93.9,-14.895}}, color={0,0,
           127}));
-  connect(ThrottSet.y, distributeBus_CPH.bus_cph_throttle.valveSet) annotation
-    (Line(points={{9,-60},{-93.9,-60},{-93.9,-14.895}}, color={0,0,127}));
+  connect(ThrottSet.y, distributeBus_CPH.bus_cph_throttle.valveSet) annotation (
+     Line(points={{9,-60},{-93.9,-60},{-93.9,-14.895}}, color={0,0,127}));
   connect(heatCurve.T_sup, PID_Valve.u_s)
     annotation (Line(points={{61.2,64},{52,64},{52,68},{42,68}},
                                                  color={0,0,127}));
   connect(T_amb,heatCurve. T_amb)
     annotation (Line(points={{110,64},{84,64}}, color={0,0,127}));
+  connect(heatCurve.T_sup, distributeBus_CPH.bus_cph_throttle.T_sup_set)
+    annotation (Line(points={{61.2,64},{50,64},{50,-14.895},{-93.9,-14.895}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

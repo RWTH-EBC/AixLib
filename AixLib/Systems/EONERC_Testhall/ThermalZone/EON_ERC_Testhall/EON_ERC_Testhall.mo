@@ -6,7 +6,7 @@ model EON_ERC_Testhall
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=0,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start = 293.15,
+    T_start=293.15,
     VAir = 5824.359,
     ABuilding=779.7,
     ASurTot=2575.3,
@@ -28,8 +28,8 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   effFanAHU_eta=0.7,
   effHRSAHU_enabled = 0.8,
   effHRSAHU_disabled = 0.2,
-  dpAHU_sup=800,
-  dpAHU_eta=800,
+    dpAHU_sup=800,
+    dpAHU_eta=800,
   zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC(
             thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each

@@ -56,6 +56,9 @@ equation
   connect(m_flow_set.y, distributeBus_CCA.bus_cca.pumpBus.rpmSet) annotation (
       Line(points={{-45,16},{-68,16},{-68,-14.895},{-93.9,-14.895}}, color={0,0,
           127}));
+  connect(heatCurve.T_sup, distributeBus_CCA.bus_cca.T_sup_set) annotation (
+      Line(points={{105.2,-64},{82,-64},{82,-14.895},{-93.9,-14.895}}, color={0,
+          0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{160,100}}),                                  graphics={
         Text(

@@ -3,7 +3,7 @@ model ControlDHS_n_const
   BaseClass.DistributeBus distributeBus_DHS annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
-  Modelica.Blocks.Sources.Constant T_Set_SupPrim(k=70 + 273.15) annotation (
+  Modelica.Blocks.Sources.Constant T_Set_SupPrim(k=57 + 273.15) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -45,12 +45,12 @@ equation
   connect(booleanExpression1.y, distributeBus_DHS.bus_dhs_pump.pumpBus.onSet)
     annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={
           255,0,255}));
-  connect(PID_Valve.u_m, distributeBus_DHS.bus_dhs.T_RL) annotation (Line(
-        points={{62,56},{62,38},{-42,38},{-42,-14.895},{-93.9,-14.895}}, color=
-          {0,0,127}));
   connect(nset.y, distributeBus_DHS.bus_dhs_pump.pumpBus.rpmSet) annotation (
       Line(points={{-23,72},{-68,72},{-68,-14.895},{-93.9,-14.895}}, color={0,0,
           127}));
+  connect(PID_Valve.u_m, distributeBus_DHS.bus_dhs_pump.TFwrdOutMea)
+    annotation (Line(points={{62,56},{62,18},{-64,18},{-64,-14.895},{-93.9,
+          -14.895}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

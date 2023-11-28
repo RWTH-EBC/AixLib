@@ -147,7 +147,7 @@ model Testhall_Hall
     dpMax=5000,
     useTwoFanCtr=true,
     k=10)  annotation (Placement(transformation(extent={{176,-10},{156,10}})));
-  BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
+  BaseClass.Distributor.Distributor_withoutReserve distributor
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
   BaseClass.CID.CID_ConsumerWater cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
@@ -179,32 +179,30 @@ equation
       points={{156,0.1},{137,0.1},{137,-15.8}},
       color={255,204,51},
       thickness=0.5));
-  connect(distributor_withoutReserve.cph_vl, cPH.cph_supprim) annotation (Line(
-        points={{-16.2815,-125.652},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
+  connect(distributor.cph_vl, cPH.cph_supprim) annotation (Line(points={{
+          -16.2815,-125.652},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
-  connect(distributor_withoutReserve.cph_rl, cPH.cph_retprim) annotation (Line(
-        points={{-12.0444,-125.652},{-12.0444,-90},{-150.215,-90},{-150.215,
-          -56.25}}, color={0,127,255}));
-  connect(distributor_withoutReserve.cca_vl, cCA.cca_supprim) annotation (Line(
-        points={{37.4963,-124.87},{-14,-124.87},{-14,-42},{-81.46,-42},{-81.46,
-          -30}},
-               color={0,127,255}));
-  connect(distributor_withoutReserve.cca_rl, cCA.cca_retprim) annotation (Line(
-        points={{42.0593,-125.261},{42.0593,-36},{-67.4,-36},{-67.4,-30}},
-                                                                       color={0,
+  connect(distributor.cph_rl, cPH.cph_retprim) annotation (Line(points={{
+          -12.0444,-125.652},{-12.0444,-90},{-150.215,-90},{-150.215,-56.25}},
+        color={0,127,255}));
+  connect(distributor.cca_vl, cCA.cca_supprim) annotation (Line(points={{
+          37.4963,-124.87},{-14,-124.87},{-14,-42},{-81.46,-42},{-81.46,-30}},
+        color={0,127,255}));
+  connect(distributor.cca_rl, cCA.cca_retprim) annotation (Line(points={{
+          42.0593,-125.261},{42.0593,-36},{-67.4,-36},{-67.4,-30}}, color={0,
           127,255}));
-  connect(distributor_withoutReserve.rlt_ph_vl, ahu.port_a3) annotation (Line(
-        points={{102.03,-147.957},{102.03,-142},{172,-142},{172,-66},{168.273,
-          -66},{168.273,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_ph_rl, ahu.port_b3) annotation (Line(
-        points={{102.03,-153.826},{102.03,-148},{172,-148},{172,-66},{160.455,
-          -66},{160.455,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_h_vl, ahu.port_a5) annotation (Line(
-        points={{101.704,-129.565},{122,-129.565},{122,-86},{121.364,-86},{
-          121.364,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_h_rl, ahu.port_b5) annotation (Line(
-        points={{102.03,-134.652},{102.03,-126},{113.936,-126},{113.936,-60}},
+  connect(distributor.rlt_ph_vl, ahu.port_a3) annotation (Line(points={{102.03,
+          -147.957},{102.03,-142},{172,-142},{172,-66},{168.273,-66},{168.273,
+          -60}}, color={0,127,255}));
+  connect(distributor.rlt_ph_rl, ahu.port_b3) annotation (Line(points={{102.03,
+          -153.826},{102.03,-148},{172,-148},{172,-66},{160.455,-66},{160.455,
+          -60}}, color={0,127,255}));
+  connect(distributor.rlt_h_vl, ahu.port_a5) annotation (Line(points={{101.704,
+          -129.565},{122,-129.565},{122,-86},{121.364,-86},{121.364,-60}},
         color={0,127,255}));
+  connect(distributor.rlt_h_rl, ahu.port_b5) annotation (Line(points={{102.03,
+          -134.652},{102.03,-126},{113.936,-126},{113.936,-60}}, color={0,127,
+          255}));
   connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (
       Line(
       points={{-194.2,-40.1},{-194.2,-37.875},{-178,-37.875}},
@@ -226,11 +224,10 @@ equation
           84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
   connect(ahu.port_a2, cid.cid_rl_air) annotation (Line(points={{93.6091,-24},{
           80,-24},{80,-50.8},{71.6,-50.8}}, color={0,127,255}));
-  connect(distributor_withoutReserve.cid_vl, cid.cid_vl_water) annotation (Line(
-        points={{68.1333,-125.652},{68.1333,-63.8},{60.8,-63.8}}, color={0,127,
-          255}));
-  connect(distributor_withoutReserve.cid_rl, cid.cid_rl_water) annotation (Line(
-        points={{74,-125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
+  connect(distributor.cid_vl, cid.cid_vl_water) annotation (Line(points={{
+          68.1333,-125.652},{68.1333,-63.8},{60.8,-63.8}}, color={0,127,255}));
+  connect(distributor.cid_rl, cid.cid_rl_water) annotation (Line(points={{74,
+          -125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
   connect(cca_heatflow.y, gaincca.u)
     annotation (Line(points={{-99,60},{-75,60},{-75,53}}, color={0,0,127}));
   connect(ahu.port_b1, jn.jn_vl_air) annotation (Line(points={{93.6091,-40},{78,
@@ -240,6 +237,18 @@ equation
   connect(ambientAir.y[1], controlCPH.T_amb) annotation (Line(points={{243,-72},
           {236,-72},{236,-80},{-128,-80},{-128,-62},{-222,-62},{-222,-40},{
           -214.4,-40}}, color={0,0,127}));
+  connect(controlCPH.distributeBus_CPH, distributor.distributeBus_DHS)
+    annotation (Line(
+      points={{-194.2,-40.1},{-188,-40.1},{-188,-104},{-96.1333,-104},{-96.1333,
+          -145.804}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCCA.distributeBus_CCA, distributor.distributeBus_DHS)
+    annotation (Line(
+      points={{-104.2,-10.1},{-104.2,-78.05},{-96.1333,-78.05},{-96.1333,
+          -145.804}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
