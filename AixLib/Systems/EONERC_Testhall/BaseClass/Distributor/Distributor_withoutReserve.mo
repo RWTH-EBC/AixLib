@@ -92,20 +92,18 @@ model Distributor_withoutReserve
         rotation=180,
         origin={1110,-36})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b cid_vl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{1136,350},{
-            1156,370}}),
-                    iconTransformation(extent={{1144,270},{1164,290}})));
-  Modelica.Fluid.Interfaces.FluidPort_a cid_rl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{1170,348},{
-            1190,368}}), iconTransformation(extent={{1180,270},{1200,290}})));
-  Modelica.Fluid.Interfaces.FluidPort_b cca_vl(redeclare package Medium =
-        AixLib.Media.Water)
-    annotation (Placement(transformation(extent={{1008,350},{1028,370}}),
-        iconTransformation(extent={{956,274},{976,294}})));
-  Modelica.Fluid.Interfaces.FluidPort_a cca_rl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{1048,348},{
-            1068,368}}), iconTransformation(extent={{984,272},{1004,292}})));
+  Modelica.Fluid.Interfaces.FluidPort_b cid_sup(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1136,
+            350},{1156,370}}), iconTransformation(extent={{1144,270},{1164,290}})));
+  Modelica.Fluid.Interfaces.FluidPort_a cid_ret(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1170,
+            348},{1190,368}}), iconTransformation(extent={{1180,270},{1200,290}})));
+  Modelica.Fluid.Interfaces.FluidPort_b cca_sup(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1008,
+            350},{1028,370}}), iconTransformation(extent={{956,274},{976,294}})));
+  Modelica.Fluid.Interfaces.FluidPort_a cca_ret(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1048,
+            348},{1068,368}}), iconTransformation(extent={{984,272},{1004,292}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe2(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
@@ -142,12 +140,12 @@ model Distributor_withoutReserve
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1186,178})));
-  Modelica.Fluid.Interfaces.FluidPort_a cph_rl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{878,348},{
-            898,368}}), iconTransformation(extent={{652,270},{672,290}})));
-  Modelica.Fluid.Interfaces.FluidPort_b cph_vl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{832,348},{
-            852,368}}), iconTransformation(extent={{626,270},{646,290}})));
+  Modelica.Fluid.Interfaces.FluidPort_a cph_ret(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{878,
+            348},{898,368}}), iconTransformation(extent={{652,270},{672,290}})));
+  Modelica.Fluid.Interfaces.FluidPort_b cph_sup(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{832,
+            348},{852,368}}), iconTransformation(extent={{626,270},{646,290}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe6(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
@@ -166,18 +164,18 @@ model Distributor_withoutReserve
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={890,192})));
-  Modelica.Fluid.Interfaces.FluidPort_b rlt_h_vl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{560,350},{
-            580,370}}), iconTransformation(extent={{1350,250},{1370,270}})));
-  Modelica.Fluid.Interfaces.FluidPort_a rlt_h_rl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{630,348},{
-            650,368}}), iconTransformation(extent={{1352,224},{1372,244}})));
-  Modelica.Fluid.Interfaces.FluidPort_b rlt_ph_vl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{700,348},{
-            720,368}}), iconTransformation(extent={{1352,156},{1372,176}})));
-  Modelica.Fluid.Interfaces.FluidPort_a rlt_ph_rl(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(extent={{730,350},{
-            750,370}}), iconTransformation(extent={{1352,126},{1372,146}})));
+  Modelica.Fluid.Interfaces.FluidPort_b rlt_h_sup(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{560,
+            350},{580,370}}), iconTransformation(extent={{1350,250},{1370,270}})));
+  Modelica.Fluid.Interfaces.FluidPort_a rlt_h_ret(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{630,
+            348},{650,368}}), iconTransformation(extent={{1352,224},{1372,244}})));
+  Modelica.Fluid.Interfaces.FluidPort_b rlt_ph_sup(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{700,
+            348},{720,368}}), iconTransformation(extent={{1352,156},{1372,176}})));
+  Modelica.Fluid.Interfaces.FluidPort_a rlt_ph_ret(redeclare package Medium =
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{730,
+            350},{750,370}}), iconTransformation(extent={{1352,126},{1372,146}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe8(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
     length=0.1,
@@ -256,36 +254,35 @@ equation
           {572,52},{366,52}},      color={0,127,255}));
   connect(pipe8.port_a, pipe1.port_b) annotation (Line(points={{714,194},{712,194},
           {712,52},{366,52}},      color={0,127,255}));
-  connect(pipe10.port_b, rlt_h_vl) annotation (Line(points={{574,152},{570,152},
+  connect(pipe10.port_b, rlt_h_sup) annotation (Line(points={{574,152},{570,152},
           {570,360}}, color={0,127,255}));
-  connect(pipe11.port_a, rlt_h_rl) annotation (Line(points={{642,148},{642,150},
-          {640,150},{640,358}},
-                      color={0,127,255}));
+  connect(pipe11.port_a, rlt_h_ret) annotation (Line(points={{642,148},{642,150},
+          {640,150},{640,358}}, color={0,127,255}));
   connect(pipe11.port_b, vol1.ports[1]) annotation (Line(points={{642,128},{642,
           -12},{748,-12},{748,-26},{1111.6,-26}},
         color={0,127,255}));
-  connect(pipe8.port_b, rlt_ph_vl) annotation (Line(points={{714,214},{710,214},
+  connect(pipe8.port_b, rlt_ph_sup) annotation (Line(points={{714,214},{710,214},
           {710,358}}, color={0,127,255}));
-  connect(pipe9.port_a, rlt_ph_rl) annotation (Line(points={{750,214},{740,214},
+  connect(pipe9.port_a, rlt_ph_ret) annotation (Line(points={{750,214},{740,214},
           {740,360}}, color={0,127,255}));
   connect(pipe9.port_b, vol1.ports[1]) annotation (Line(points={{750,194},{750,
           -26},{1111.6,-26}},
                             color={0,127,255}));
-  connect(pipe7.port_a, cph_rl) annotation (Line(points={{890,202},{888,202},{
+  connect(pipe7.port_a, cph_ret) annotation (Line(points={{890,202},{888,202},{
           888,358}}, color={0,127,255}));
-  connect(pipe6.port_b, cph_vl) annotation (Line(points={{844,206},{844,282},{
+  connect(pipe6.port_b, cph_sup) annotation (Line(points={{844,206},{844,282},{
           842,282},{842,358}}, color={0,127,255}));
   connect(pipe7.port_b, vol1.ports[2]) annotation (Line(points={{890,182},{888,
           182},{888,-12},{1064,-12},{1064,-26},{1110.8,-26}},  color={0,127,255}));
-  connect(pipe5.port_a, cid_rl) annotation (Line(points={{1186,188},{1184,188},
+  connect(pipe5.port_a, cid_ret) annotation (Line(points={{1186,188},{1184,188},
           {1184,340},{1180,340},{1180,358}}, color={0,127,255}));
   connect(pipe5.port_b, vol1.ports[3]) annotation (Line(points={{1186,168},{
           1184,168},{1184,-16},{1110,-16},{1110,-26}},       color={0,127,255}));
-  connect(pipe4.port_b, cid_vl) annotation (Line(points={{1144,188},{1146,188},
+  connect(pipe4.port_b, cid_sup) annotation (Line(points={{1144,188},{1146,188},
           {1146,360}}, color={0,127,255}));
-  connect(pipe2.port_b, cca_vl) annotation (Line(points={{1012,190},{1012,340},
+  connect(pipe2.port_b, cca_sup) annotation (Line(points={{1012,190},{1012,340},
           {1018,340},{1018,360}}, color={0,127,255}));
-  connect(pipe3.port_a, cca_rl) annotation (Line(points={{1066,190},{1058,190},
+  connect(pipe3.port_a, cca_ret) annotation (Line(points={{1066,190},{1058,190},
           {1058,358}}, color={0,127,255}));
   connect(pipe3.port_b, vol1.ports[4]) annotation (Line(points={{1066,170},{
           1064,170},{1064,-26},{1109.2,-26}},  color={0,127,255}));

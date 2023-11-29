@@ -283,34 +283,34 @@ equation
   connect(distributor_withoutReserve.jn_rl, jN.heating_water_out) annotation (
      Line(points={{-36.4889,-117.113},{-36.4889,-8},{-94.4,-8},{-94.4,30}},
         color={0,127,255}));
-  connect(distributor_withoutReserve.cph_vl, cPH.cph_supprim) annotation (Line(
+  connect(distributor_withoutReserve.cph_sup, cPH.cph_supprim) annotation (Line(
         points={{-16.2815,-116.696},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
-  connect(distributor_withoutReserve.cph_rl, cPH.cph_retprim) annotation (Line(
-        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,
-          -56.25}}, color={0,127,255}));
-  connect(distributor_withoutReserve.cca_vl, cCA.cca_supprim) annotation (Line(
+  connect(distributor_withoutReserve.cph_ret, cPH.cph_retprim) annotation (Line(
+        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,-56.25}},
+        color={0,127,255}));
+  connect(distributor_withoutReserve.cca_sup, cCA.cca_supprim) annotation (Line(
         points={{37.4963,-115.861},{36,-115.861},{36,-10},{-31.46,-10},{-31.46,
           2}}, color={0,127,255}));
-  connect(distributor_withoutReserve.cca_rl, cCA.cca_retprim) annotation (Line(
+  connect(distributor_withoutReserve.cca_ret, cCA.cca_retprim) annotation (Line(
         points={{42.0593,-116.278},{42.0593,-4},{-17.4,-4},{-17.4,2}}, color={0,
           127,255}));
-  connect(distributor_withoutReserve.cid_vl, cID.cid_supprim) annotation (Line(
+  connect(distributor_withoutReserve.cid_sup, cID.cid_supprim) annotation (Line(
         points={{68.1333,-116.696},{68.1333,8},{60.4,8},{60.4,18.2}}, color={0,
           127,255}));
-  connect(distributor_withoutReserve.cid_rl, cID.cid_retprim) annotation (Line(
+  connect(distributor_withoutReserve.cid_ret, cID.cid_retprim) annotation (Line(
         points={{74,-116.696},{74,-94},{66,-94},{66,6},{54.8,6},{54.8,18.2}},
         color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_ph_vl, ahu.port_a3) annotation (Line(
-        points={{102.03,-140.487},{102.03,-142},{172,-142},{172,-66},{168.273,
-          -66},{168.273,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_ph_rl, ahu.port_b3) annotation (Line(
-        points={{102.03,-146.748},{102.03,-148},{172,-148},{172,-66},{160.455,
-          -66},{160.455,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_h_vl, ahu.port_a5) annotation (Line(
+  connect(distributor_withoutReserve.rlt_ph_sup, ahu.port_a3) annotation (Line(
+        points={{102.03,-140.487},{102.03,-142},{172,-142},{172,-66},{168.273,-66},
+          {168.273,-60}}, color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_ph_ret, ahu.port_b3) annotation (Line(
+        points={{102.03,-146.748},{102.03,-148},{172,-148},{172,-66},{160.455,-66},
+          {160.455,-60}}, color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_h_sup, ahu.port_a5) annotation (Line(
         points={{101.704,-120.87},{120,-120.87},{120,-120},{121.364,-120},{
           121.364,-60}}, color={0,127,255}));
-  connect(distributor_withoutReserve.rlt_h_rl, ahu.port_b5) annotation (Line(
+  connect(distributor_withoutReserve.rlt_h_ret, ahu.port_b5) annotation (Line(
         points={{102.03,-126.296},{102.03,-126},{113.936,-126},{113.936,-60}},
         color={0,127,255}));
   connect(jN.distributeBus_JN, controlJN.distributeBus_JN) annotation (Line(

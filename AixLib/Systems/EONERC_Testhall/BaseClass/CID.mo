@@ -231,32 +231,31 @@ package CID
 
   model CID_ConsumerWater
 
-    Fluid.Sources.Boundary_pT                   boundary1(
-      redeclare package Medium = Media.Air,
+    Fluid.Sources.Boundary_pT                   bound_sup(redeclare package
+        Medium = AixLib.Media.Air,
       nPorts=1)       annotation (Placement(transformation(
           extent={{6,-6},{-6,6}},
           rotation=180,
           origin={42,8})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_air(redeclare package Medium
+    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_air(redeclare package Medium
         = Media.Air) annotation (Placement(transformation(extent={{90,-2},{110,
               18}}), iconTransformation(extent={{88,-54},{108,-34}})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_vl_water(redeclare package Medium
-        = Media.Water) annotation (Placement(transformation(extent={{-60,-108},
-              {-40,-88}}), iconTransformation(extent={{-22,-108},{-2,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_water(redeclare package Medium
-        = Media.Water) annotation (Placement(transformation(extent={{16,-110},{
-              36,-90}}), iconTransformation(extent={{14,-108},{34,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_rl_air(redeclare package Medium
-        = Media.Air)                                                                              annotation (Placement(transformation(extent={{88,36},
-              {108,56}}),
-          iconTransformation(extent={{86,22},{106,42}})));
-    Fluid.Sources.Boundary_pT                   boundary2(
+    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_water(redeclare package
+        Medium = Media.Water) annotation (Placement(transformation(extent={{-60,
+              -108},{-40,-88}}), iconTransformation(extent={{-22,-108},{-2,-88}})));
+    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_water(redeclare package
+        Medium = Media.Water) annotation (Placement(transformation(extent={{16,
+              -110},{36,-90}}), iconTransformation(extent={{14,-108},{34,-88}})));
+    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_air(redeclare package Medium
+        = Media.Air) annotation (Placement(transformation(extent={{88,36},{108,
+              56}}), iconTransformation(extent={{86,22},{106,42}})));
+    Fluid.Sources.Boundary_pT                   bound_ret(
       redeclare package Medium = AixLib.Media.Air,
       use_T_in=true,
       nPorts=1)       annotation (Placement(transformation(
           extent={{6,-6},{-6,6}},
           rotation=180,
-          origin={44,48})));
+          origin={42,48})));
     Modelica.Blocks.Sources.CombiTimeTable Office_RoomTemp(
       tableOnFile=true,
       tableName="measurement",
@@ -270,8 +269,8 @@ package CID
       annotation (Placement(transformation(extent={{-38,48},{-26,60}})));
     Modelica.Blocks.Math.MultiSum sum_T_office(nu=5)
       annotation (Placement(transformation(extent={{-66,50},{-56,60}})));
-    HydraulicModules.SimpleConsumer SimpleConsumer(
-      redeclare package Medium = Media.Water,
+    HydraulicModules.SimpleConsumer Hall1(
+      redeclare package Medium = AixLib.Media.Water,
       m_flow_nominal=0.15,
       T_start=291.15,
       functionality="Q_flow_input") "Thermal zone"
@@ -286,40 +285,40 @@ package CID
           extent={{-5,-5},{5,5}},
           rotation=270,
           origin={-17,-21})));
-    Fluid.FixedResistances.HydraulicDiameter res_vl_air(
+    Fluid.FixedResistances.HydraulicDiameter res_sup_air(
       redeclare package Medium = AixLib.Media.Air,
       m_flow_nominal=0.66,
       length=3) annotation (Placement(transformation(extent={{84,-2},{64,18}})));
-    Fluid.FixedResistances.HydraulicDiameter res_rl_air(
+    Fluid.FixedResistances.HydraulicDiameter res_ret_air(
       redeclare package Medium = AixLib.Media.Air,
       m_flow_nominal=0.66,
       length=3) annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=180,
           origin={70,46})));
-    Fluid.FixedResistances.PressureDrop res_vl_water(
+    Fluid.FixedResistances.PressureDrop res_sup_water(
       redeclare package Medium = AixLib.Media.Water,
       m_flow_nominal=0.15,
       dp_nominal=3000) annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=270,
           origin={-50,-74})));
-    Fluid.FixedResistances.PressureDrop res_rl_water(
+    Fluid.FixedResistances.PressureDrop res_ret_water(
       redeclare package Medium = AixLib.Media.Water,
       m_flow_nominal=0.15,
       dp_nominal=3000) annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=90,
           origin={26,-74})));
-    Fluid.Sensors.TemperatureTwoPort senTem_vl(redeclare package Medium =
-          AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_sup(redeclare package Medium
+        = AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{-42,-58},{-30,-48}})));
-    Fluid.Sensors.TemperatureTwoPort senTem_rl(redeclare package Medium =
-          AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_ret(redeclare package Medium
+        = AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{14,-58},{26,-48}})));
   equation
-    connect(T_office.y, boundary2.T_in) annotation (Line(points={{-25.4,54},{30,
-            54},{30,45.6},{36.8,45.6}}, color={0,0,127}));
+    connect(T_office.y, bound_ret.T_in) annotation (Line(points={{-25.4,54},{30,
+            54},{30,45.6},{34.8,45.6}}, color={0,0,127}));
     connect(sum_T_office.y, T_office.u) annotation (Line(points={{-55.15,55},{-55.15,
             54},{-39.2,54}}, color={0,0,127}));
     connect(Office_RoomTemp.y[1], sum_T_office.u[1]) annotation (Line(points={{
@@ -332,31 +331,31 @@ package CID
             -79,54},{-79,55.7},{-66,55.7}}, color={0,0,127}));
     connect(Office_RoomTemp.y[5], sum_T_office.u[5]) annotation (Line(points={{
             -79,54},{-79,56.4},{-66,56.4}}, color={0,0,127}));
-    connect(cid_rl_water, cid_rl_water)
+    connect(cid_ret_water, cid_ret_water)
       annotation (Line(points={{26,-100},{26,-100}}, color={0,127,255}));
     connect(cid_heatflow_kW.y, heatflow_Watt.u) annotation (Line(points={{53,
             -26},{-6,-26},{-6,-15},{-17,-15}}, color={0,0,127}));
-    connect(heatflow_Watt.y, SimpleConsumer.Q_flow) annotation (Line(points={{
-            -17,-26.5},{-17,-33.25},{-16.4,-33.25},{-16.4,-40}}, color={0,0,127}));
-    connect(cid_vl_air, res_vl_air.port_a)
+    connect(heatflow_Watt.y, Hall1.Q_flow) annotation (Line(points={{-17,-26.5},
+            {-17,-33.25},{-16.4,-33.25},{-16.4,-40}}, color={0,0,127}));
+    connect(cid_sup_air, res_sup_air.port_a)
       annotation (Line(points={{100,8},{84,8}}, color={0,127,255}));
-    connect(res_vl_air.port_b, boundary1.ports[1])
+    connect(res_sup_air.port_b, bound_sup.ports[1])
       annotation (Line(points={{64,8},{48,8}}, color={0,127,255}));
-    connect(boundary2.ports[1], res_rl_air.port_a)
-      annotation (Line(points={{50,48},{50,46},{60,46}}, color={0,127,255}));
-    connect(res_rl_air.port_b, cid_rl_air)
+    connect(bound_ret.ports[1], res_ret_air.port_a)
+      annotation (Line(points={{48,48},{48,46},{60,46}}, color={0,127,255}));
+    connect(res_ret_air.port_b, cid_ret_air)
       annotation (Line(points={{80,46},{98,46}}, color={0,127,255}));
-    connect(res_vl_water.port_a, cid_vl_water)
+    connect(res_sup_water.port_a, cid_sup_water)
       annotation (Line(points={{-50,-84},{-50,-98}}, color={0,127,255}));
-    connect(res_rl_water.port_b, cid_rl_water)
+    connect(res_ret_water.port_b, cid_ret_water)
       annotation (Line(points={{26,-84},{26,-100}}, color={0,127,255}));
-    connect(res_vl_water.port_b, senTem_vl.port_a) annotation (Line(points={{
-            -50,-64},{-50,-52},{-42,-52},{-42,-53}}, color={0,127,255}));
-    connect(senTem_vl.port_b, SimpleConsumer.port_a)
+    connect(res_sup_water.port_b, senTem_water_sup.port_a) annotation (Line(
+          points={{-50,-64},{-50,-52},{-42,-52},{-42,-53}}, color={0,127,255}));
+    connect(senTem_water_sup.port_b, Hall1.port_a)
       annotation (Line(points={{-30,-53},{-22,-53}}, color={0,127,255}));
-    connect(SimpleConsumer.port_b, senTem_rl.port_a)
+    connect(Hall1.port_b, senTem_water_ret.port_a)
       annotation (Line(points={{6,-53},{14,-53}}, color={0,127,255}));
-    connect(senTem_rl.port_b, res_rl_water.port_a)
+    connect(senTem_water_ret.port_b, res_ret_water.port_a)
       annotation (Line(points={{26,-53},{26,-64}}, color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(

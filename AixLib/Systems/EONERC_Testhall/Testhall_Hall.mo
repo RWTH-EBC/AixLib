@@ -27,12 +27,12 @@ model Testhall_Hall
     annotation (Placement(transformation(extent={{-94,-30},{-56,8}})));
   BaseClass.CPH.CPH cPH
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cca_PrescribedHeatFlow(alpha=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cca_heatFlow(alpha=0)
     annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=270,
         origin={-75,29})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_PrescribedHeatFlow(alpha=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_heatFlow(alpha=0)
     annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=270,
@@ -141,7 +141,8 @@ model Testhall_Hall
     annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
   AixLib.Systems.ModularAHU.Controller.CtrAHUBasic controlAHU(
     TFlowSet=310.15,
-    ctrPh(rpm_pump=2300),
+    TFrostProtect=273.15 + 8,
+    ctrPh(useExternalTMea=false, rpm_pump=2300),
     ctrRh(k=0.01, Ti=1000),
     VFlowSet=3.08,
     dpMax=5000,
@@ -151,19 +152,18 @@ model Testhall_Hall
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
   BaseClass.CID.CID_ConsumerWater cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
-  Modelica.Blocks.Sources.TimeTable cca_heatflow(table=[0,2; 267840,7; 2678400,
-        7; 5270400,15; 7948800,22; 10627200,36; 13132800,28; 15811200,7;
-        18403200,0; 21081600,0; 23673600,0; 26352000,0; 29030400,7; 31536000,7])
+  Modelica.Blocks.Sources.TimeTable QFlowCCA(table=[0,2; 267840,7; 2678400,7;
+        5270400,15; 7948800,22; 10627200,36; 13132800,28; 15811200,7; 18403200,
+        0; 21081600,0; 23673600,0; 26352000,0; 29030400,7; 31536000,7])
     annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
   BaseClass.JetNozzle.JN_approxAirflow jn
     annotation (Placement(transformation(extent={{22,-26},{42,-6}})));
 equation
-  connect(cca_PrescribedHeatFlow.port, cCA.heat_port_CCA)
-    annotation (Line(points={{-75,20},{-75,8.76}},  color={191,0,0}));
-  connect(cph_PrescribedHeatFlow.port,cPH.heat_port_CPH)  annotation (Line(
-        points={{-171,24},{-171,-10},{-156.677,-10},{-156.677,-21}}, color={191,
-          0,0}));
-  connect(gaincca.y, cca_PrescribedHeatFlow.Q_flow)
+  connect(cca_heatFlow.port, cCA.heat_port_CCA)
+    annotation (Line(points={{-75,20},{-75,8.76}}, color={191,0,0}));
+  connect(cph_heatFlow.port, cPH.heat_port_CPH) annotation (Line(points={{-171,
+          24},{-171,-10},{-156.677,-10},{-156.677,-21}}, color={191,0,0}));
+  connect(gaincca.y, cca_heatFlow.Q_flow)
     annotation (Line(points={{-75,41.5},{-75,38}}, color={0,0,127}));
   connect(CoolerInput.y[1], sup_c.T_in) annotation (Line(points={{155.4,-102},{
           148,-102},{148,-69.2},{144.4,-69.2}},color={0,0,127}));
@@ -179,28 +179,28 @@ equation
       points={{156,0.1},{137,0.1},{137,-15.8}},
       color={255,204,51},
       thickness=0.5));
-  connect(distributor.cph_vl, cPH.cph_supprim) annotation (Line(points={{
+  connect(distributor.cph_sup, cPH.cph_supprim) annotation (Line(points={{
           -16.2815,-125.652},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
-  connect(distributor.cph_rl, cPH.cph_retprim) annotation (Line(points={{
+  connect(distributor.cph_ret, cPH.cph_retprim) annotation (Line(points={{
           -12.0444,-125.652},{-12.0444,-90},{-150.215,-90},{-150.215,-56.25}},
         color={0,127,255}));
-  connect(distributor.cca_vl, cCA.cca_supprim) annotation (Line(points={{
+  connect(distributor.cca_sup, cCA.cca_supprim) annotation (Line(points={{
           37.4963,-124.87},{-14,-124.87},{-14,-42},{-81.46,-42},{-81.46,-30}},
         color={0,127,255}));
-  connect(distributor.cca_rl, cCA.cca_retprim) annotation (Line(points={{
+  connect(distributor.cca_ret, cCA.cca_retprim) annotation (Line(points={{
           42.0593,-125.261},{42.0593,-36},{-67.4,-36},{-67.4,-30}}, color={0,
           127,255}));
-  connect(distributor.rlt_ph_vl, ahu.port_a3) annotation (Line(points={{102.03,
+  connect(distributor.rlt_ph_sup, ahu.port_a3) annotation (Line(points={{102.03,
           -147.957},{102.03,-142},{172,-142},{172,-66},{168.273,-66},{168.273,
           -60}}, color={0,127,255}));
-  connect(distributor.rlt_ph_rl, ahu.port_b3) annotation (Line(points={{102.03,
+  connect(distributor.rlt_ph_ret, ahu.port_b3) annotation (Line(points={{102.03,
           -153.826},{102.03,-148},{172,-148},{172,-66},{160.455,-66},{160.455,
           -60}}, color={0,127,255}));
-  connect(distributor.rlt_h_vl, ahu.port_a5) annotation (Line(points={{101.704,
+  connect(distributor.rlt_h_sup, ahu.port_a5) annotation (Line(points={{101.704,
           -129.565},{122,-129.565},{122,-86},{121.364,-86},{121.364,-60}},
         color={0,127,255}));
-  connect(distributor.rlt_h_rl, ahu.port_b5) annotation (Line(points={{102.03,
+  connect(distributor.rlt_h_ret, ahu.port_b5) annotation (Line(points={{102.03,
           -134.652},{102.03,-126},{113.936,-126},{113.936,-60}}, color={0,127,
           255}));
   connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (
@@ -215,25 +215,25 @@ equation
 
   connect(ambientAir.y[1], ODA.T_in) annotation (Line(points={{243,-72},{236,
           -72},{236,-39.2},{198.4,-39.2}}, color={0,0,127}));
-  connect(QFlowHall2.y[1], cph_PrescribedHeatFlow.Q_flow)
+  connect(QFlowHall2.y[1], cph_heatFlow.Q_flow)
     annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{243,-72},
           {236,-72},{236,-80},{-128,-80},{-128,-10},{-124.6,-10}},
                       color={0,0,127}));
-  connect(ahu.port_b1, cid.cid_vl_air) annotation (Line(points={{93.6091,-40},{
-          84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
-  connect(ahu.port_a2, cid.cid_rl_air) annotation (Line(points={{93.6091,-24},{
-          80,-24},{80,-50.8},{71.6,-50.8}}, color={0,127,255}));
-  connect(distributor.cid_vl, cid.cid_vl_water) annotation (Line(points={{
+  connect(ahu.port_b1, cid.cid_sup_air) annotation (Line(points={{93.6091,-40},
+          {84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
+  connect(ahu.port_a2, cid.cid_ret_air) annotation (Line(points={{93.6091,-24},
+          {80,-24},{80,-50.8},{71.6,-50.8}}, color={0,127,255}));
+  connect(distributor.cid_sup, cid.cid_sup_water) annotation (Line(points={{
           68.1333,-125.652},{68.1333,-63.8},{60.8,-63.8}}, color={0,127,255}));
-  connect(distributor.cid_rl, cid.cid_rl_water) annotation (Line(points={{74,
+  connect(distributor.cid_ret, cid.cid_ret_water) annotation (Line(points={{74,
           -125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
-  connect(cca_heatflow.y, gaincca.u)
+  connect(QFlowCCA.y, gaincca.u)
     annotation (Line(points={{-99,60},{-75,60},{-75,53}}, color={0,0,127}));
-  connect(ahu.port_b1, jn.jn_vl_air) annotation (Line(points={{93.6091,-40},{78,
-          -40},{78,-36},{48,-36},{48,-20.4},{41.8,-20.4}}, color={0,127,255}));
-  connect(ahu.port_a2, jn.jn_rl_air) annotation (Line(points={{93.6091,-24},{52,
-          -24},{52,-12.8},{41.6,-12.8}}, color={0,127,255}));
+  connect(ahu.port_b1, jn.jn_sup_air) annotation (Line(points={{93.6091,-40},{
+          78,-40},{78,-36},{48,-36},{48,-20.4},{41.8,-20.4}}, color={0,127,255}));
+  connect(ahu.port_a2, jn.jn_ret_air) annotation (Line(points={{93.6091,-24},{
+          52,-24},{52,-12.8},{41.6,-12.8}}, color={0,127,255}));
   connect(ambientAir.y[1], controlCPH.T_amb) annotation (Line(points={{243,-72},
           {236,-72},{236,-80},{-128,-80},{-128,-62},{-222,-62},{-222,-40},{
           -214.4,-40}}, color={0,0,127}));
@@ -252,5 +252,5 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(StopTime=1000000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=100, __Dymola_Algorithm="Dassl"));
 end Testhall_Hall;
