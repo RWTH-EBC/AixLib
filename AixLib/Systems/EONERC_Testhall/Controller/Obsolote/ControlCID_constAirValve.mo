@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.Controller.Obsolote;
 model ControlCID_constAirValve
   "Information out of Unterlagen\\Heizlastberechnung\\Heizkurve_BKT"
   BaseClass.DistributeBus distributeBus_CID annotation (Placement(

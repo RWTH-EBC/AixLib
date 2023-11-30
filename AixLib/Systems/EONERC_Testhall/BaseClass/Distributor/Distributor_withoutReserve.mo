@@ -4,7 +4,7 @@ model Distributor_withoutReserve
   HydraulicModules.Throttle                       dhs(
     redeclare package Medium = AixLib.Media.Water,
     length=1,
-    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
+    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_42x1(),
     Kv=2.5,
     m_flow_nominal=2.3,
     pipe1(length=14),
@@ -16,21 +16,21 @@ model Distributor_withoutReserve
 
   AixLib.Fluid.Sources.Boundary_ph                FernwaermeAus(
     redeclare package Medium = AixLib.Media.Water,
-    p=100000,
+    p=750000,
     nPorts=1)
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
 
   AixLib.Fluid.Sources.Boundary_pT                FernwaermeEin(
     redeclare package Medium = AixLib.Media.Water,
-    p=120000,
-    T=388.15,
+    p=1150000,
+    T=393.15,
     nPorts=1) "nominal mass flow 1 kg/s"
     annotation (Placement(transformation(extent={{-112,50},{-92,70}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe1(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
     length=4.5,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=4.2) annotation (Placement(transformation(
+    m_flow_nominal=2)   annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={356,52})));
@@ -39,7 +39,7 @@ model Distributor_withoutReserve
     redeclare package Medium1 = AixLib.Media.Water,
     redeclare package Medium2 = AixLib.Media.Water,
     m1_flow_nominal=2.3,
-    m2_flow_nominal=4.53,
+    m2_flow_nominal=2,
     dp1_nominal=10,
     dp2_nominal=10,
     eps=0.95) annotation (Placement(transformation(
@@ -52,7 +52,7 @@ model Distributor_withoutReserve
     pipeModel="SimplePipe",
     length=1,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_64x2(),
-    m_flow_nominal=4.2,
+    m_flow_nominal=3,
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
       PumpInterface(pumpParam=
@@ -67,7 +67,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_76_1x1_5(),
     length=1.5,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=4.2) annotation (Placement(transformation(
+    m_flow_nominal=2)   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={350,-14})));
@@ -84,7 +84,7 @@ model Distributor_withoutReserve
   AixLib.Fluid.MixingVolumes.MixingVolume     vol1(
     nPorts=5,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=4.2,
+    m_flow_nominal=3,
     V=0.1,
     p_start=120000,
     T_start=353.15) annotation (Placement(transformation(
@@ -108,8 +108,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=1.79)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.8) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={1012,180})));
@@ -117,8 +116,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=1.79)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.8) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1066,180})));
@@ -126,8 +124,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.15)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={1144,178})));
@@ -135,8 +132,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.15)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1186,178})));
@@ -150,8 +146,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.54)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={844,196})));
@@ -159,8 +154,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.54)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={890,192})));
@@ -180,8 +174,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.45)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={714,204})));
@@ -189,8 +182,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=0.45)
-                        annotation (Placement(transformation(
+    m_flow_nominal=0.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={750,204})));
@@ -198,7 +190,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=1.2) annotation (Placement(transformation(
+    m_flow_nominal=0.4) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={574,142})));
@@ -206,7 +198,7 @@ model Distributor_withoutReserve
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=1.2) annotation (Placement(transformation(
+    m_flow_nominal=0.4) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={642,138})));

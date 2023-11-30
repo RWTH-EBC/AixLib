@@ -7,20 +7,21 @@ model CCA
     length=1,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     Kv=2.34,
-    m_flow_nominal=1.79,
+    m_flow_nominal=0.8,
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
       PumpInterface(pumpParam=
           AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H1_10()),
     pipe1(length=0.3),
     pipe2(length=0.2),
-    pipe3(length=10),
+    pipe3(length=10, fac=10),
     pipe4(length=10),
-    pipe6(length=0.4),
-    pipe7(length=0.18),
-    pipe5(length=0.1),
+    pipe6(length=0.2),
+    pipe5(length=0.5),
     T_amb=273.15 + 10,
-    T_start=323.15) annotation (Placement(transformation(
+    T_start=323.15,
+    pipe7(length=0.2))
+                    annotation (Placement(transformation(
         extent={{-36,-36},{35.9999,35.9999}},
         rotation=90,
         origin={-12,-26})));
@@ -32,7 +33,7 @@ model CCA
     Gc=41e6,
     pipe(
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
-      length=17.2,
+      length=30,
       m_flow_nominal=1.79,
       T_start=323.15))
     annotation (Placement(transformation(extent={{-42,32},{14,86}})));
@@ -43,15 +44,10 @@ model CCA
         AixLib.Media.Water) annotation (Placement(transformation(extent={{0,-110},
             {20,-90}}), iconTransformation(extent={{30,-110},{50,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_CCA
-    annotation (Placement(transformation(extent={{-26,94},{-6,114}}),
+    annotation (Placement(transformation(extent={{-24,94},{-4,114}}),
         iconTransformation(extent={{-10,94},{10,114}})));
   DistributeBus dB_CCA annotation (Placement(transformation(extent={{-104,-42},
             {-78,-10}}), iconTransformation(extent={{-122,-24},{-82,16}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
-        AixLib.Media.Water) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-44,30})));
 equation
   connect(dB_CCA.bus_cca, cca.hydraulicBus) annotation (Line(
       points={{-90.935,-25.92},{-69.4999,-25.92},{-69.4999,-26},{-47.9999,-26}},
@@ -67,13 +63,10 @@ equation
           9.9999},{8,9.9999},{8,28},{22,28},{22,59},{14,59}},            color={
           0,127,255}));
   connect(concreteCoreActivation.heatPort, heat_port_CCA) annotation (Line(
-        points={{-14,88.7},{-14,96.35},{-16,96.35},{-16,104}}, color={191,0,0}));
-  connect(cca.port_b1, senMasFlo.port_a) annotation (Line(points={{-33.5999,
-          9.9999},{-38,9.9999},{-38,20},{-44,20}}, color={0,127,255}));
-  connect(senMasFlo.port_b, concreteCoreActivation.port_sup) annotation (Line(
-        points={{-44,40},{-48,40},{-48,59},{-42,59}}, color={0,127,255}));
-  connect(senMasFlo.m_flow, dB_CCA.bus_cca.mflow) annotation (Line(points={{-55,30},
-          {-90.935,30},{-90.935,-25.92}},         color={0,0,127}));
+        points={{-14,88.7},{-14,104}},                         color={191,0,0}));
+  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points
+        ={{-33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
+        color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

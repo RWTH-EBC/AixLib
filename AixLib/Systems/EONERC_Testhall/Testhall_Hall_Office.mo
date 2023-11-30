@@ -173,13 +173,13 @@ model Testhall_Hall_Office
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{-210,40},{-190,60}})));
 
-  Controller.ControlCID_Heizkurve controlCID
+  Controller.Obsolote.ControlCID_Heizkurve controlCID
     annotation (Placement(transformation(extent={{16,28},{36,48}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                    senRoomTemp(redeclare package Medium =
         AixLib.Media.Air, m_flow_nominal=0.66)
     annotation (Placement(transformation(extent={{92,62},{112,82}})));
-  Controller.ControlCCA_Heizkurve controlCCA
+  Controller.ControlCCA controlCCA
     annotation (Placement(transformation(extent={{-74,12},{-48,32}})));
   Controller.ControlCPH controlCPH
     annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
@@ -198,7 +198,7 @@ model Testhall_Hall_Office
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-54,60})));
-  Controller.ControlJN_constHydrValve controlJN
+  Controller.Obsolote.ControlJN_constHydrValve controlJN
     annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
     annotation (Placement(transformation(extent={{-146,-196},{118,-100}})));

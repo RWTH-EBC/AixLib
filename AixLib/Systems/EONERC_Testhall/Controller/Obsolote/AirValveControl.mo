@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.Controller.Obsolote;
 model AirValveControl
   parameter Modelica.Units.SI.Temperature Temp_Set_Air
     "Set Temperature of Air Flow";

@@ -20,7 +20,7 @@ model HeatCurve
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
-        origin={-98,40})));
+        origin={-104,40})));
   Modelica.Blocks.Math.Add t_sup
     annotation (Placement(transformation(extent={{80,-4},{88,4}})));
   Modelica.Blocks.Sources.RealExpression t_supply(y=y)
@@ -34,14 +34,15 @@ equation
 
 
 
-  connect(KelvinConstant.y, t_amb.u1) annotation (Line(points={{-93.6,40},{-88,40},
-          {-88,10},{-90,10},{-90,4.4},{-86.8,4.4}}, color={0,0,127}));
+
+  connect(KelvinConstant.y, t_amb.u1) annotation (Line(points={{-99.6,40},{-90,40},
+          {-90,4.4},{-86.8,4.4}},                   color={0,0,127}));
   connect(T_amb, t_amb.u2) annotation (Line(points={{-120,0},{-103.4,0},{-103.4,
           -0.4},{-86.8,-0.4}}, color={0,0,127}));
   connect(t_supply.y, t_sup.u2) annotation (Line(points={{53,-2},{66.1,-2},{66.1,
           -2.4},{79.2,-2.4}}, color={0,0,127}));
   connect(t_sup.u1, KelvinConstant.y) annotation (Line(points={{79.2,2.4},{58,2.4},
-          {58,32},{-88,32},{-88,40},{-93.6,40}}, color={0,0,127}));
+          {58,32},{-88,32},{-88,40},{-99.6,40}}, color={0,0,127}));
   connect(t_sup.y, T_sup)
     annotation (Line(points={{88.4,0},{108,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.Controller.Obsolote;
 model ControlDHS_n_const
   BaseClass.DistributeBus distributeBus_DHS annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=

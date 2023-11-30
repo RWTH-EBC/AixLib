@@ -85,7 +85,7 @@ equation
   connect(gain_mflow.u, mflow_jn_total.y) annotation (Line(points={{-5.2,-4},{-5.2,
           -3},{-15.15,-3}}, color={0,0,127}));
   connect(mflow_jn_total.y,bound_ret. m_flow_in) annotation (Line(points={{-15.15,
-          -3},{-12,-3},{-12,26},{38.8,26},{38.8,31.2}},
+          -3},{-12,-3},{-12,32},{38.8,32},{38.8,31.2}},
                                                     color={0,0,127}));
   connect(Hall1_Temp.y[1],bound_ret. T_in) annotation (Line(points={{-19,38},{
           30,38},{30,33.6},{38.8,33.6}}, color={0,0,127}));

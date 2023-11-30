@@ -1,7 +1,6 @@
 within AixLib.Systems.EONERC_Testhall.ThermalZone.EON_ERC_Testhall;
-model EON_ERC_Testhall
+model EON_ERC_Testhall_example
   "This is the simulation model of EON_ERC_Testhall with traceable ID 0"
-
 
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=0,
@@ -87,9 +86,6 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_Thermalzone
-    annotation (Placement(transformation(extent={{-12,-26},{8,-6}}),
-        iconTransformation(extent={{-88,-38},{-68,-18}})));
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -109,8 +105,6 @@ equation
           -82},{34.6,-82},{34.6,-9}},
                                  color={0,0,127}));
 
-  connect(heat_port_Thermalzone, multizone.intGainsConv) annotation (Line(
-        points={{-2,-16},{28,-16},{28,-6.2},{34,-6.2}}, color={191,0,0}));
   annotation (experiment(
       StartTime=0,
       StopTime=31536000,
@@ -140,4 +134,4 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="TB")}));
-end EON_ERC_Testhall;
+end EON_ERC_Testhall_example;

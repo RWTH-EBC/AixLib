@@ -1,19 +1,5 @@
-within AixLib.Systems.EONERC_Testhall.BaseClass;
+within AixLib.Systems.EONERC_Testhall.ThermalZone.Obsolete;
 model Buildings
-
-   replaceable package MediumWater =
-      AixLib.Media.Water
-    "Medium in the heatingsystem/hydraulic" annotation(choicesAllMatching=true);
-  replaceable package MediumAir =
-      AixLib.Media.Air
-    "Medium in the system" annotation(choicesAllMatching=true);
-
-        //AWin={5,0,0,0,5},
-        //AExt={0,175,140,175,0},
-
-        //withAirCap=true,
-        //AWin={0,2,0,2,0},
-        //AExt={0,320,90,310,0},
 
    AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office5(
     redeclare package Medium = AixLib.Media.Air,
@@ -73,7 +59,7 @@ model Buildings
     annotation (Placement(transformation(extent={{652,-18},{692,22}}),  iconTransformation(extent={{-54,-6},
             {-14,34}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office4(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=120,
@@ -112,7 +98,7 @@ model Buildings
     annotation (Placement(transformation(extent={{1110,96},{1184,116}}),
         iconTransformation(extent={{1068,-8},{1142,12}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office3(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=60,
@@ -178,7 +164,7 @@ model Buildings
   Modelica.Blocks.Sources.Constant ventRate3(each k=0)
     annotation (Placement(transformation(extent={{842,238},{862,258}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office2(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=60,
@@ -245,7 +231,7 @@ model Buildings
   Modelica.Blocks.Sources.Constant ventRate2(each k=0)
     annotation (Placement(transformation(extent={{638,234},{658,254}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Office1(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=60,
@@ -312,7 +298,7 @@ model Buildings
   Modelica.Blocks.Sources.Constant ventRate1(each k=0)
     annotation (Placement(transformation(extent={{430,222},{450,242}})));
       AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone     Hall1(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=5000,
@@ -384,7 +370,7 @@ model Buildings
     annotation (Placement(transformation(extent={{388,-8},{408,12}}),
         iconTransformation(extent={{290,-8},{310,12}})));
     AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone Hall2(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zoneParam=Testhall.DataBase.ZoneParameter_Office_Parameterized(
         VAir=3000,
@@ -458,14 +444,14 @@ model Buildings
   Modelica.Blocks.Sources.Constant ventRate_hall2(each k=0)
     annotation (Placement(transformation(extent={{-82,238},{-62,258}})));
   AixLib.Fluid.Sources.Boundary_ph     AirOut_Hall2(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     nPorts=1,
     p=100000) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-48,84})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe_out_hall2(
-    redeclare package Medium = MediumAir,
+    redeclare package Medium = AixLib.Media.Air,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
     length=1,
     m_flow_nominal=1) annotation (Placement(transformation(
@@ -494,7 +480,7 @@ equation
     annotation (Line(points={{1421,210},{1452.5,210},{1452.5,32},{674,32}},    color={0,0,127}));
   connect(distributeBus_Buildings.control_building, control_building)
     annotation (Line(
-      points={{672.1,2.1},{674,2.1},{674,32}},
+      points={{672,2},{674,2},{674,32}},
       color={255,204,51},
       thickness=0.5));
   connect(ventRate4.y, Office4.ventRate) annotation (Line(points={{1059,238},{1059,

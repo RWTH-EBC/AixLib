@@ -2,19 +2,17 @@ within AixLib.Systems.EONERC_Testhall.BaseClass;
 package CPH
   model CPH
 
-    HydraulicModules.Admix                                    cph_Valve(
+    HydraulicModules.Injection2WayValve                       cph_Valve(
       redeclare package Medium = AixLib.Media.Water,
       pipeModel="SimplePipe",
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
       Kv=1.2,
-      valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
             AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4()),
-      m_flow_nominal=0.54,
+      m_flow_nominal=0.2,
       pipe1(length=0.4),
       pipe2(length=0.1),
       pipe3(length=1),
@@ -22,7 +20,9 @@ package CPH
       pipe4(length=1),
       pipe6(length=0.3),
       T_amb=273.15 + 10,
-      T_start=343.15) annotation (Placement(transformation(
+      T_start=343.15,
+      pipe7(length=0.3))
+                      annotation (Placement(transformation(
           extent={{-50,-50},{49.9999,49.9999}},
           rotation=90,
           origin={-4,-116})));
@@ -31,7 +31,7 @@ package CPH
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
       Kv=8,
-      m_flow_nominal=0.54,
+      m_flow_nominal=0.2,
       redeclare package Medium = AixLib.Media.Water,
       pipe1(length=1),
       pipe2(length=30, fac=2),
@@ -51,11 +51,11 @@ package CPH
       each Gr=27)
       annotation (Placement(transformation(extent={{-34,58},{22,120}})));
 
-    Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package Medium =
-          AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-208},{-24,
+    Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package Medium
+        = AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-208},{-24,
               -188}}), iconTransformation(extent={{-86,-210},{-66,-190}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package Medium =
-          AixLib.Media.Water) annotation (Placement(transformation(extent={{16,-208},{36,
+    Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package Medium
+        = AixLib.Media.Water) annotation (Placement(transformation(extent={{16,-208},{36,
               -188}}), iconTransformation(extent={{2,-212},{22,-192}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_CPH
       annotation (Placement(transformation(extent={{-16,108},{4,128}}),
@@ -148,8 +148,6 @@ package CPH
 
   model RadiantCeilingPanelHeater
 
-    replaceable package Medium = AixLib.Media.Water
-      "Medium in the system" annotation (choicesAllMatching=true);
 
     parameter Integer nNodes "Number of elements";
     parameter Real Gr(unit="m2") = 1.5*18*0.9/nNodes
@@ -158,17 +156,17 @@ package CPH
     AixLib.Fluid.FixedResistances.GenericPipe
                                      genericPipe(
       nNodes=nNodes,
-      redeclare package Medium = Medium,
+      redeclare package Medium = AixLib.Media.Water,
       T_start=343.15)
       annotation (Dialog(enable=true), Placement(transformation(extent={{-12,-12},{12,12}})));
     Modelica.Fluid.Interfaces.FluidPort_b radiantcph_ret(redeclare package
         Medium =
-          Medium)
+          AixLib.Media.Water)
       "Fluid connector b (positive design flow direction is from port_a to port_b)"
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
     Modelica.Fluid.Interfaces.FluidPort_a radiantcph_sup(redeclare package
         Medium =
-          Medium)
+          AixLib.Media.Water)
       "Fluid connector a (positive design flow direction is from port_a to port_b)"
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Modelica.Thermal.HeatTransfer.Components.BodyRadiation bodyRadiation[nNodes](Gr=Gr)

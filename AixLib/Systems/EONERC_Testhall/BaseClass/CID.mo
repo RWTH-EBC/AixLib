@@ -2,12 +2,7 @@
 package CID
   model CID "Ceiling induction diffusers / DID Deckeninduktionsdurchlässe"
 
-      replaceable package MediumWater =
-        AixLib.Media.Water "Medium in the heatingsystem/hydraulic" annotation (
-        choicesAllMatching=true);
-    replaceable package MediumAir =
-        AixLib.Media.Air
-      "Medium in the system" annotation(choicesAllMatching=true);
+
 
     Fluid.HeatExchangers.DynamicHX                    dynamicHX(
       each m1_flow_nominal=0.15,
@@ -22,7 +17,7 @@ package CID
       Q_nom=1000*0.15)                       "DID"
       annotation (Placement(transformation(extent={{46,52},{26,30}})));
     Fluid.Actuators.Dampers.Exponential        Valve(
-      redeclare package Medium = MediumAir,
+      redeclare package Medium = AixLib.Media.Air,
       each m_flow_nominal=0.66,
       dpDamper_nominal=100,
       each l=0.01) "if Valve Kv=100 " annotation (Placement(transformation(
@@ -31,24 +26,24 @@ package CID
           origin={-146,86})));
 
     Modelica.Fluid.Interfaces.FluidPort_b air_out(redeclare package Medium =
-          MediumAir) "SUP" annotation (Placement(transformation(extent={{130,54},{
+          AixLib.Media.Air) "SUP" annotation (Placement(transformation(extent={{130,54},{
               150,74}}), iconTransformation(extent={{-70,50},{-50,70}})));
     Modelica.Fluid.Interfaces.FluidPort_a cid_supprim(redeclare package Medium =
-          MediumWater) annotation (Placement(transformation(extent={{-190,-18},{-170,
+          AixLib.Media.Water) annotation (Placement(transformation(extent={{-190,-18},{-170,
               2}}), iconTransformation(extent={{-48,-70},{-28,-50}})));
     Modelica.Fluid.Interfaces.FluidPort_b cid_retprim(redeclare package Medium =
-          MediumWater) annotation (Placement(transformation(extent={{-190,-42},{
+          AixLib.Media.Water) annotation (Placement(transformation(extent={{-190,-42},{
               -170,-22}}),
                       iconTransformation(extent={{-76,-70},{-56,-50}})));
     Modelica.Fluid.Interfaces.FluidPort_a air_in(redeclare package Medium =
-          MediumAir) annotation (Placement(transformation(extent={{-188,76},{-168,
+          AixLib.Media.Air) annotation (Placement(transformation(extent={{-188,76},{-168,
               96}}), iconTransformation(extent={{22,-70},{42,-50}})));
 
     DistributeBus distributeBus_CID annotation (Placement(transformation(extent={
               {-82,100},{-46,138}}), iconTransformation(extent={{-112,-16},{-86,
               14}})));
     HydraulicModules.Injection2WayValve                       cid_Valve(
-      redeclare package Medium = MediumWater,
+      redeclare package Medium = AixLib.Media.Water,
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
       Kv=0.63,
@@ -236,18 +231,18 @@ package CID
       nPorts=1)       annotation (Placement(transformation(
           extent={{6,-6},{-6,6}},
           rotation=180,
-          origin={42,8})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{90,-2},{110,
-              18}}), iconTransformation(extent={{88,-54},{108,-34}})));
+          origin={42,18})));
+    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{90,8},{110,
+              28}}), iconTransformation(extent={{88,-54},{108,-34}})));
     Modelica.Fluid.Interfaces.FluidPort_a cid_sup_water(redeclare package
         Medium = Media.Water) annotation (Placement(transformation(extent={{-60,
               -108},{-40,-88}}), iconTransformation(extent={{-22,-108},{-2,-88}})));
     Modelica.Fluid.Interfaces.FluidPort_b cid_ret_water(redeclare package
         Medium = Media.Water) annotation (Placement(transformation(extent={{16,
               -110},{36,-90}}), iconTransformation(extent={{14,-108},{34,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{88,36},{108,
+    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{88,36},{108,
               56}}), iconTransformation(extent={{86,22},{106,42}})));
     Fluid.Sources.Boundary_pT                   bound_ret(
       redeclare package Medium = AixLib.Media.Air,
@@ -275,7 +270,7 @@ package CID
       T_start=291.15,
       functionality="Q_flow_input") "Thermal zone"
       annotation (Placement(transformation(extent={{-22,-66},{6,-40}})));
-    Modelica.Blocks.Sources.TimeTable cid_heatflow_kW(table=[0,0.5; 86400,3.5;
+    Modelica.Blocks.Sources.TimeTable cid_heatflow_kW(table=[0,3.5; 86400,3.5;
           2678400,9; 5270400,8.5; 7948800,7.9; 10627200,10.45; 13132800,8.3;
           15811200,5; 18403200,0.25; 21081600,1; 23673600,0; 26352000,0.6;
           29030400,7; 31536000,3.5])
@@ -288,7 +283,7 @@ package CID
     Fluid.FixedResistances.HydraulicDiameter res_sup_air(
       redeclare package Medium = AixLib.Media.Air,
       m_flow_nominal=0.66,
-      length=3) annotation (Placement(transformation(extent={{84,-2},{64,18}})));
+      length=3) annotation (Placement(transformation(extent={{84,8},{64,28}})));
     Fluid.FixedResistances.HydraulicDiameter res_ret_air(
       redeclare package Medium = AixLib.Media.Air,
       m_flow_nominal=0.66,
@@ -298,23 +293,23 @@ package CID
           origin={70,46})));
     Fluid.FixedResistances.PressureDrop res_sup_water(
       redeclare package Medium = AixLib.Media.Water,
-      m_flow_nominal=0.15,
-      dp_nominal=3000) annotation (Placement(transformation(
+      m_flow_nominal=0.3,
+      dp_nominal=3e4)  annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=270,
           origin={-50,-74})));
     Fluid.FixedResistances.PressureDrop res_ret_water(
       redeclare package Medium = AixLib.Media.Water,
-      m_flow_nominal=0.15,
-      dp_nominal=3000) annotation (Placement(transformation(
+      m_flow_nominal=0.3,
+      dp_nominal=10)   annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=90,
           origin={26,-74})));
-    Fluid.Sensors.TemperatureTwoPort senTem_water_sup(redeclare package Medium
-        = AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_sup(redeclare package Medium =
+          AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{-42,-58},{-30,-48}})));
-    Fluid.Sensors.TemperatureTwoPort senTem_water_ret(redeclare package Medium
-        = AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_ret(redeclare package Medium =
+          AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{14,-58},{26,-48}})));
   equation
     connect(T_office.y, bound_ret.T_in) annotation (Line(points={{-25.4,54},{30,
@@ -333,14 +328,17 @@ package CID
             -79,54},{-79,56.4},{-66,56.4}}, color={0,0,127}));
     connect(cid_ret_water, cid_ret_water)
       annotation (Line(points={{26,-100},{26,-100}}, color={0,127,255}));
-    connect(cid_heatflow_kW.y, heatflow_Watt.u) annotation (Line(points={{53,
-            -26},{-6,-26},{-6,-15},{-17,-15}}, color={0,0,127}));
+    connect(cid_heatflow_kW.y, heatflow_Watt.u) annotation (Line(points={{53,-26},
+            {28,-26},{28,-12},{-18,-12},{-18,-15},{-17,-15}},
+                                               color={0,0,127}));
     connect(heatflow_Watt.y, Hall1.Q_flow) annotation (Line(points={{-17,-26.5},
             {-17,-33.25},{-16.4,-33.25},{-16.4,-40}}, color={0,0,127}));
     connect(cid_sup_air, res_sup_air.port_a)
-      annotation (Line(points={{100,8},{84,8}}, color={0,127,255}));
+      annotation (Line(points={{100,18},{84,18}},
+                                                color={0,127,255}));
     connect(res_sup_air.port_b, bound_sup.ports[1])
-      annotation (Line(points={{64,8},{48,8}}, color={0,127,255}));
+      annotation (Line(points={{64,18},{48,18}},
+                                               color={0,127,255}));
     connect(bound_ret.ports[1], res_ret_air.port_a)
       annotation (Line(points={{48,48},{48,46},{60,46}}, color={0,127,255}));
     connect(res_ret_air.port_b, cid_ret_air)

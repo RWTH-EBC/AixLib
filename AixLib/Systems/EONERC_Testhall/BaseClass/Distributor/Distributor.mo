@@ -1,12 +1,7 @@
 within AixLib.Systems.EONERC_Testhall.BaseClass.Distributor;
 model Distributor
 
-   replaceable package MediumWater =
-      AixLib.Media.Water
-    "Medium in the heatingsystem/hydraulic" annotation(choicesAllMatching=true);
-  replaceable package MediumAir =
-      AixLib.Media.Air
-    "Medium in the system" annotation(choicesAllMatching=true);
+
   HydraulicModules.Throttle                       dhs(
     redeclare package Medium = AixLib.Media.Water,
     length=1,
@@ -22,7 +17,7 @@ model Distributor
     annotation (Placement(transformation(extent={{-10,-20},{90,80}})));
 
   AixLib.Fluid.Sources.Boundary_ph                FernwaermeAus(
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     p=100000,
     nPorts=1)
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
@@ -33,7 +28,7 @@ model Distributor
         rotation=0,
         origin={-34,146})));
   AixLib.Fluid.Sources.Boundary_pT                FernwaermeEin(
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     p=120000,
     T=403.15,
     nPorts=1) "nominal mass flow 1 kg/s"
@@ -43,15 +38,15 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe1(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
     length=5,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={354,50})));
 
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness     hex(
-    redeclare package Medium1 = MediumWater,
-    redeclare package Medium2 = MediumWater,
+    redeclare package Medium1 = AixLib.Media.Water,
+    redeclare package Medium2 = AixLib.Media.Water,
     m1_flow_nominal=2.3,
     m2_flow_nominal=2.3,
     dp1_nominal=10,
@@ -68,7 +63,7 @@ model Distributor
     annotation (Placement(transformation(extent={{32,114},{52,134}}),
         iconTransformation(extent={{0,0},{0,0}})));
   HydraulicModules.Pump                       pump(
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     length=1,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     m_flow_nominal=2.3,
@@ -91,7 +86,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe14(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
     length=2,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -100,7 +95,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe15(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_42x1(),
     length=12,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -109,14 +104,14 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe reserve_rl(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(),
     length=1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1338,144})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume reserve_volume(
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3,
     V=0.012,
     nPorts=2,
@@ -127,7 +122,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe reserve_vl(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(),
     length=1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -143,7 +138,7 @@ model Distributor
         origin={520,300})));
   AixLib.Fluid.MixingVolumes.MixingVolume     vol1(
     nPorts=7,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3,
     V=0.012,
     p_start=120000,
@@ -155,25 +150,25 @@ model Distributor
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
     annotation (Placement(transformation(extent={{178,112},{198,132}})));
   Modelica.Fluid.Interfaces.FluidPort_b cid_rl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{1176,346},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1176,346},{
             1196,366}}),
                     iconTransformation(extent={{1144,270},{1164,290}})));
   Modelica.Fluid.Interfaces.FluidPort_a cid_vl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{1132,346},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{1132,346},{
             1152,366}}),
                     iconTransformation(extent={{1180,270},{1200,290}})));
   Modelica.Fluid.Interfaces.FluidPort_b cca_rl(redeclare package Medium =
-        MediumWater)
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{1064,348},{1084,368}}),
         iconTransformation(extent={{1012,272},{1032,292}})));
   Modelica.Fluid.Interfaces.FluidPort_a cca_vl(redeclare package Medium =
-        MediumWater)
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{1004,348},{1024,368}}),
         iconTransformation(extent={{984,272},{1004,292}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe2(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -181,7 +176,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe3(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -189,7 +184,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe4(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -197,21 +192,21 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe5(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={1186,178})));
   Modelica.Fluid.Interfaces.FluidPort_a cph_vl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{834,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{834,348},{
             854,368}}), iconTransformation(extent={{652,270},{672,290}})));
   Modelica.Fluid.Interfaces.FluidPort_b cph_rl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{880,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{880,348},{
             900,368}}), iconTransformation(extent={{686,270},{706,290}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe6(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -219,27 +214,27 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe7(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={890,194})));
   Modelica.Fluid.Interfaces.FluidPort_b rlt_h_rl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{626,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{626,348},{
             646,368}}), iconTransformation(extent={{1354,198},{1374,218}})));
   Modelica.Fluid.Interfaces.FluidPort_a rlt_h_vl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{594,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{594,348},{
             614,368}}), iconTransformation(extent={{1352,224},{1372,244}})));
   Modelica.Fluid.Interfaces.FluidPort_b rlt_ph_rl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{736,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{736,348},{
             756,368}}), iconTransformation(extent={{1354,98},{1374,118}})));
   Modelica.Fluid.Interfaces.FluidPort_a rlt_ph_vl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{700,348},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{700,348},{
             720,368}}), iconTransformation(extent={{1352,126},{1372,146}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe8(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -247,7 +242,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe9(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -255,7 +250,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe10(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -263,7 +258,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe11(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=0.1,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -271,7 +266,7 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe12(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=5.2,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) "jn"
                         annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
@@ -280,17 +275,17 @@ model Distributor
   AixLib.Fluid.FixedResistances.GenericPipe pipe13(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
     length=5.2,
-    redeclare package Medium = MediumWater,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=2.3) "jn"
                         annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={486,282})));
   Modelica.Fluid.Interfaces.FluidPort_b jn_rl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{474,354},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{474,354},{
             494,374}}), iconTransformation(extent={{816,270},{836,290}})));
   Modelica.Fluid.Interfaces.FluidPort_a jn_vl(redeclare package Medium =
-        MediumWater) annotation (Placement(transformation(extent={{406,356},{
+        AixLib.Media.Water) annotation (Placement(transformation(extent={{406,356},{
             426,376}}), iconTransformation(extent={{850,270},{870,290}})));
 equation
   connect(FernwaermeEin.ports[1], dhs.port_a1)

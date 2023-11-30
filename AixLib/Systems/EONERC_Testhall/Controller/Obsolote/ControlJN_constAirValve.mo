@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
+within AixLib.Systems.EONERC_Testhall.Controller.Obsolote;
 model ControlJN_constAirValve
   BaseClass.DistributeBus distributeBus_JN annotation (Placement(transformation(
           extent={{-64,-18},{-24,24}}), iconTransformation(extent={{78,-22},{

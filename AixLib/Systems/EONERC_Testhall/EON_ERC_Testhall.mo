@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_Testhall;
-model Testhall_Hall
+model EON_ERC_Testhall
 
   AixLib.Fluid.Sources.Boundary_ph EHA(redeclare package Medium =
         AixLib.Media.Air, nPorts=1)
@@ -27,22 +27,12 @@ model Testhall_Hall
     annotation (Placement(transformation(extent={{-94,-30},{-56,8}})));
   BaseClass.CPH.CPH cPH
     annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cca_heatFlow(alpha=0)
-    annotation (Placement(transformation(
-        extent={{-9,-9},{9,9}},
-        rotation=270,
-        origin={-75,29})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_heatFlow(alpha=0)
     annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=270,
         origin={-171,33})));
 
-  Modelica.Blocks.Math.Gain gaincca(k=-1000) annotation (Placement(
-        transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=270,
-        origin={-75,47})));
   Modelica.Blocks.Sources.CombiTimeTable ambientAir(
     tableOnFile=true,
     tableName="measurement",
@@ -149,19 +139,13 @@ model Testhall_Hall
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
   BaseClass.CID.CID_ConsumerWater cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
-  Modelica.Blocks.Sources.TimeTable QFlowCCA(table=[0,2; 267840,7; 2678400,7;
-        5270400,15; 7948800,22; 10627200,36; 13132800,28; 15811200,7; 18403200,
-        0; 21081600,0; 23673600,0; 26352000,0; 29030400,7; 31536000,7])
-    annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
   BaseClass.JetNozzle.JN_approxAirflow jn
     annotation (Placement(transformation(extent={{22,-26},{42,-6}})));
+  ThermalZone.EON_ERC_Testhall.EON_ERC_Testhall eON_ERC_Testhall
+    annotation (Placement(transformation(extent={{-46,12},{-4,54}})));
 equation
-  connect(cca_heatFlow.port, cCA.heat_port_CCA)
-    annotation (Line(points={{-75,20},{-75,8.76}}, color={191,0,0}));
   connect(cph_heatFlow.port, cPH.heat_port_CPH) annotation (Line(points={{-171,24},
           {-171,-10},{-156.677,-10},{-156.677,-21}},     color={191,0,0}));
-  connect(gaincca.y, cca_heatFlow.Q_flow)
-    annotation (Line(points={{-75,41.5},{-75,38}}, color={0,0,127}));
   connect(CoolerInput.y[1], sup_c.T_in) annotation (Line(points={{155.4,-102},{
           148,-102},{148,-69.2},{144.4,-69.2}},color={0,0,127}));
   connect(EHA.ports[1], ahu.port_b2)
@@ -225,8 +209,6 @@ equation
           -125.652},{68.1333,-63.8},{60.8,-63.8}},         color={0,127,255}));
   connect(distributor.cid_ret, cid.cid_ret_water) annotation (Line(points={{74,
           -125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
-  connect(QFlowCCA.y, gaincca.u)
-    annotation (Line(points={{-99,60},{-75,60},{-75,53}}, color={0,0,127}));
   connect(ahu.port_b1, jn.jn_sup_air) annotation (Line(points={{93.6091,-40},{
           78,-40},{78,-36},{48,-36},{48,-20.4},{41.8,-20.4}}, color={0,127,255}));
   connect(ahu.port_a2, jn.jn_ret_air) annotation (Line(points={{93.6091,-24},{
@@ -246,8 +228,11 @@ equation
           -145.804}},
       color={255,204,51},
       thickness=0.5));
+  connect(cCA.heat_port_CCA, eON_ERC_Testhall.heat_port_Thermalzone)
+    annotation (Line(points={{-75,8.76},{-75,27.12},{-41.38,27.12}}, color={191,
+          0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
     experiment(StopTime=100000, __Dymola_Algorithm="Dassl"));
-end Testhall_Hall;
+end EON_ERC_Testhall;

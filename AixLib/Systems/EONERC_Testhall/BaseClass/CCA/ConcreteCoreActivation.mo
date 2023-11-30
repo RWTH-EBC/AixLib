@@ -1,9 +1,6 @@
 within AixLib.Systems.EONERC_Testhall.BaseClass.CCA;
 model ConcreteCoreActivation
 
-  replaceable package Medium =
-      AixLib.Media.Water
-    "Medium in the system" annotation (choicesAllMatching=true);
 
   parameter Integer nNodes "Number of elements";
   parameter Modelica.Units.SI.HeatCapacity C
@@ -12,7 +9,7 @@ model ConcreteCoreActivation
     "Signal representing the convective thermal conductance in [W/K]";
 
   AixLib.Fluid.FixedResistances.GenericPipe pipe(
-    redeclare package Medium = Medium,
+    redeclare package Medium = AixLib.Media.Water,
     parameterPipe=parameterPipe,
     m_flow_nominal=m_flow_nominal,
     length=length,
@@ -38,10 +35,10 @@ model ConcreteCoreActivation
         transformation(extent={{-10,66},{10,86}}),  iconTransformation(extent={{
             -10,100},{10,120}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_sup(redeclare package Medium =
-        Medium)
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_ret(redeclare package Medium =
-        Medium)
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 equation
   connect(pipe.heatPort,heatCapacitor. port) annotation (Line(points={{7.21645e-16,

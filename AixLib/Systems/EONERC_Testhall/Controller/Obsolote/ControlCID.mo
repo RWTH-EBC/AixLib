@@ -1,7 +1,7 @@
-within AixLib.Systems.EONERC_Testhall.Controller;
-model ControlCID_Heizkurve "Information out of Unterlagen\\Heizlastberechnung\\Heizkurve_BKT"
+within AixLib.Systems.EONERC_Testhall.Controller.Obsolote;
+model ControlCID
   BaseClass.DistributeBus distributeBus_CID annotation (Placement(
-        transformation(extent={{-138,-36},{-98,6}}), iconTransformation(extent=
+        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_cid_m_flow(
     yMin=0,
@@ -12,12 +12,32 @@ model ControlCID_Heizkurve "Information out of Unterlagen\\Heizlastberechnung\\H
     k=20)    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-62,64})));
+        origin={-38,64})));
   Modelica.Blocks.Sources.Constant m_flow_set(k=0.09) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-112,64})));
+        origin={-88,64})));
+  Modelica.Blocks.Sources.Constant T_Set_Hall_Circ(k=50 + 273.15) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={22,68})));
+  Modelica.Blocks.Continuous.LimPID PID_Valve(
+    yMin=0,
+    Td=0.5,
+    yMax=1,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    Ti=2000,
+    k=0.005) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={62,68})));
+  Modelica.Blocks.Continuous.CriticalDamping criticalDamping(
+    n=2,
+    f=0.05,
+    x_start={0,0})
+    annotation (Placement(transformation(extent={{26,14},{6,34}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
@@ -27,64 +47,46 @@ model ControlCID_Heizkurve "Information out of Unterlagen\\Heizlastberechnung\\H
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=2000,
-    k=0.01)  annotation (Placement(transformation(
+    Ti=3000,
+    k=0.1)   annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={-6,-50})));
+        origin={-8,-50})));
   Modelica.Blocks.Sources.Constant RoomTemp_set(k=20 + 273.15) annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={30,-50})));
-  Modelica.Blocks.Continuous.LimPID PID_Valve(
-    yMin=0,
-    Td=0.5,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    yMax=1,
-    Ti=2000,
-    k=0.001) annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=0,
-        origin={-10,42})));
-  HeatCurve heatCurve(x=-1.7935, b=58.16)
-    annotation (Placement(transformation(extent={{40,32},{20,52}})));
-  Modelica.Blocks.Interfaces.RealInput T_amb
-    annotation (Placement(transformation(extent={{186,18},{146,58}}),
-        iconTransformation(extent={{-112,-20},{-72,20}})));
 equation
   connect(m_flow_set.y,PID_cid_m_flow. u_s)
-    annotation (Line(points={{-101,64},{-74,64}},color={0,0,127}));
+    annotation (Line(points={{-77,64},{-50,64}}, color={0,0,127}));
+  connect(PID_Valve.u_s, T_Set_Hall_Circ.y)
+    annotation (Line(points={{50,68},{33,68}}, color={0,0,127}));
+  connect(PID_Valve.y, criticalDamping.u) annotation (Line(points={{73,68},{84,
+          68},{84,24},{28,24}}, color={0,0,127}));
   connect(PID_cid_m_flow.y, distributeBus_CID.bus_cid.pumpBus.rpmSet)
-    annotation (Line(points={{-51,64},{-46,64},{-46,-14.895},{-117.9,-14.895}},
+    annotation (Line(points={{-27,64},{-22,64},{-22,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
   connect(booleanExpression1.y, distributeBus_CID.bus_cid.pumpBus.onSet)
-    annotation (Line(points={{-90,-33},{-90,-14.895},{-117.9,-14.895}},color={
+    annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={
           255,0,255}));
+  connect(PID_Valve.u_m, distributeBus_CID.bus_cid.TFwrdOutMea) annotation (
+      Line(points={{62,56},{62,44},{-22,44},{-22,-14.895},{-93.9,-14.895}},
+        color={0,0,127}));
+  connect(criticalDamping.y, distributeBus_CID.bus_cid.valveSet) annotation (
+      Line(points={{5,24},{-22,24},{-22,-14.895},{-93.9,-14.895}}, color={0,0,
+          127}));
   connect(RoomTemp_set.y, PID_AirValve.u_s)
-    annotation (Line(points={{19,-50},{6,-50}}, color={0,0,127}));
+    annotation (Line(points={{19,-50},{4,-50}}, color={0,0,127}));
   connect(PID_cid_m_flow.u_m, distributeBus_CID.bus_cid.mflow) annotation (Line(
-        points={{-62,52},{-62,-14.895},{-117.9,-14.895}},color={0,0,127}));
+        points={{-38,52},{-38,-14.895},{-93.9,-14.895}}, color={0,0,127}));
   connect(PID_AirValve.u_m, distributeBus_CID.bus_cid.RoomTemp) annotation (
-      Line(points={{-6,-62},{-6,-68},{-92,-68},{-92,-14.895},{-117.9,-14.895}},
+      Line(points={{-8,-62},{-8,-68},{-68,-68},{-68,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
   connect(PID_AirValve.y, distributeBus_CID.bus_cid.Office_Air_Valve)
-    annotation (Line(points={{-17,-50},{-92,-50},{-92,-14.895},{-117.9,-14.895}},
+    annotation (Line(points={{-19,-50},{-68,-50},{-68,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
-  connect(PID_Valve.y, distributeBus_CID.bus_cid.valveSet) annotation (Line(
-        points={{-21,42},{-30,42},{-30,-14.895},{-117.9,-14.895}},
-                                                              color={0,0,127}));
-  connect(PID_Valve.u_m, distributeBus_CID.bus_cid.TFwrdOutMea) annotation (
-      Line(points={{-10,54},{-10,62},{-30,62},{-30,-14.895},{-117.9,-14.895}},
-                                                                          color=
-         {0,0,127}));
-  connect(heatCurve.T_sup, PID_Valve.u_s)
-    annotation (Line(points={{19.2,42},{2,42}}, color={0,0,127}));
-  connect(heatCurve.T_amb, T_amb) annotation (Line(points={{42,42},{53,42},{53,
-          38},{166,38}},
-                    color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-140},
-            {160,120}}),                                        graphics={
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
           lineColor={95,95,95},
@@ -109,5 +111,5 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
-           false, extent={{-140,-140},{160,120}})));
-end ControlCID_Heizkurve;
+           false)));
+end ControlCID;
