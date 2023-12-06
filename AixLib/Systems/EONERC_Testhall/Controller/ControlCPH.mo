@@ -1,7 +1,7 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlCPH
 
-  /** Control strategie out of TwinCat **/
+
   BaseClass.DistributeBus distributeBus_CPH annotation (Placement(
         transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
             {{78,-22},{118,20}})));

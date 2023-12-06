@@ -32,7 +32,8 @@ model ControlDHS
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-64,72})));
-  Modelica.Blocks.Sources.Constant dp_set(k=0.25e5) annotation (Placement(
+  Modelica.Blocks.Sources.Constant dp_set(k=0.25e5)
+    "probaby between 0.1e5 and 0.25e5"              annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

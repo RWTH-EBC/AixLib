@@ -130,19 +130,30 @@ model EON_ERC_Testhall
     TFlowSet=310.15,
     TFrostProtect=273.15 + 8,
     ctrPh(useExternalTMea=false, rpm_pump=2300),
-    ctrRh(k=0.01, Ti=1000),
+    ctrRh(k=0.1, Ti=1000),
     VFlowSet=3.08,
     dpMax=5000,
     useTwoFanCtr=true,
-    k=10)  annotation (Placement(transformation(extent={{176,-10},{156,10}})));
+    k=1)   annotation (Placement(transformation(extent={{176,-10},{156,10}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
   BaseClass.CID.CID_ConsumerWater cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
-  BaseClass.JetNozzle.JN_approxAirflow jn
-    annotation (Placement(transformation(extent={{22,-26},{42,-6}})));
-  ThermalZone.EON_ERC_Testhall.EON_ERC_Testhall eON_ERC_Testhall
-    annotation (Placement(transformation(extent={{-46,12},{-4,54}})));
+  ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
+    annotation (Placement(transformation(extent={{-38,34},{-6,66}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow thermalzone_intGains_rad(alpha=0)
+    annotation (Placement(transformation(
+        extent={{-9,-9},{9,9}},
+        rotation=0,
+        origin={-61,55})));
+  Modelica.Blocks.Sources.Constant intGains_rad(k=0)
+    annotation (Placement(transformation(extent={{-124,46},{-104,66}})));
+  Fluid.Sensors.TemperatureTwoPort senTem_Hall1(redeclare package Medium =
+        AixLib.Media.Air, m_flow_nominal=2.5) annotation (Placement(
+        transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=270,
+        origin={65,9})));
 equation
   connect(cph_heatFlow.port, cPH.heat_port_CPH) annotation (Line(points={{-171,24},
           {-171,-10},{-156.677,-10},{-156.677,-21}},     color={191,0,0}));
@@ -204,15 +215,11 @@ equation
   connect(ahu.port_b1, cid.cid_sup_air) annotation (Line(points={{93.6091,-40},
           {84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
   connect(ahu.port_a2, cid.cid_ret_air) annotation (Line(points={{93.6091,-24},
-          {80,-24},{80,-50.8},{71.6,-50.8}}, color={0,127,255}));
+          {78,-24},{78,-50.8},{71.6,-50.8}}, color={0,127,255}));
   connect(distributor.cid_sup, cid.cid_sup_water) annotation (Line(points={{68.1333,
           -125.652},{68.1333,-63.8},{60.8,-63.8}},         color={0,127,255}));
   connect(distributor.cid_ret, cid.cid_ret_water) annotation (Line(points={{74,
           -125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
-  connect(ahu.port_b1, jn.jn_sup_air) annotation (Line(points={{93.6091,-40},{
-          78,-40},{78,-36},{48,-36},{48,-20.4},{41.8,-20.4}}, color={0,127,255}));
-  connect(ahu.port_a2, jn.jn_ret_air) annotation (Line(points={{93.6091,-24},{
-          52,-24},{52,-12.8},{41.6,-12.8}}, color={0,127,255}));
   connect(ambientAir.y[1], controlCPH.T_amb) annotation (Line(points={{243,-72},
           {236,-72},{236,-80},{-128,-80},{-128,-62},{-222,-62},{-222,-40},{
           -214.4,-40}}, color={0,0,127}));
@@ -228,11 +235,23 @@ equation
           -145.804}},
       color={255,204,51},
       thickness=0.5));
-  connect(cCA.heat_port_CCA, eON_ERC_Testhall.heat_port_Thermalzone)
-    annotation (Line(points={{-75,8.76},{-75,27.12},{-41.38,27.12}}, color={191,
-          0,0}));
+  connect(cCA.heat_port_CCA, eON_ERC_Testhall.intGainsConv_port) annotation (
+      Line(points={{-75,8.76},{-75,48.4},{-37.68,48.4}}, color={191,0,0}));
+  connect(intGains_rad.y, thermalzone_intGains_rad.Q_flow) annotation (Line(
+        points={{-103,56},{-86.5,56},{-86.5,55},{-70,55}}, color={0,0,127}));
+  connect(thermalzone_intGains_rad.port, eON_ERC_Testhall.intGainsRad_port)
+    annotation (Line(points={{-52,55},{-52,53.84},{-37.68,53.84}}, color={191,0,
+          0}));
+  connect(senTem_Hall1.port_b, ahu.port_a2) annotation (Line(points={{65,2},{64,
+          2},{64,-24},{93.6091,-24}}, color={0,127,255}));
+  connect(ahu.port_b1, eON_ERC_Testhall.ports[1]) annotation (Line(points={{
+          93.6091,-40},{76,-40},{76,-26},{-23.56,-26},{-23.56,35.28}}, color={0,
+          127,255}));
+  connect(senTem_Hall1.port_a, eON_ERC_Testhall.ports[2]) annotation (Line(
+        points={{65,16},{64,16},{64,22},{-19.8,22},{-19.8,35.28}}, color={0,127,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(StopTime=100000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
 end EON_ERC_Testhall;

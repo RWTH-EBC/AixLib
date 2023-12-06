@@ -27,7 +27,6 @@ model CCA
         origin={-12,-26})));
 
   ConcreteCoreActivation concreteCoreActivation(
-    redeclare package Medium = AixLib.Media.Water,
     nNodes=6,
     C=200,
     Gc=41e6,
@@ -64,8 +63,8 @@ equation
           0,127,255}));
   connect(concreteCoreActivation.heatPort, heat_port_CCA) annotation (Line(
         points={{-14,88.7},{-14,104}},                         color={191,0,0}));
-  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points
-        ={{-33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
+  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points={{
+          -33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

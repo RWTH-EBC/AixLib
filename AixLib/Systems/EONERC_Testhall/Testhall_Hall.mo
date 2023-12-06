@@ -249,5 +249,5 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(StopTime=100000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
 end Testhall_Hall;

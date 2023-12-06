@@ -1,5 +1,5 @@
-within AixLib.Systems.EONERC_Testhall.ThermalZone.EON_ERC_Testhall;
-model EON_ERC_Testhall_example
+within AixLib.Systems.EONERC_Testhall.ThermalZone.TeaserOutput.EON_ERC_Testhall;
+model EON_ERC_Testhall_multizone
   "This is the simulation model of EON_ERC_Testhall with traceable ID 0"
 
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
@@ -41,8 +41,8 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://Testhall/DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Systems/EONERC_Testhall/ThermalZone/TeaserOutput/DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
 
@@ -134,4 +134,4 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="TB")}));
-end EON_ERC_Testhall_example;
+end EON_ERC_Testhall_multizone;

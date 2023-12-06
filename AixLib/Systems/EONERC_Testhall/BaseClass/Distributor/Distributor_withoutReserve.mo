@@ -23,7 +23,7 @@ model Distributor_withoutReserve
   AixLib.Fluid.Sources.Boundary_pT                FernwaermeEin(
     redeclare package Medium = AixLib.Media.Water,
     p=1150000,
-    T=393.15,
+    T=373.15,
     nPorts=1) "nominal mass flow 1 kg/s"
     annotation (Placement(transformation(extent={{-112,50},{-92,70}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe1(
