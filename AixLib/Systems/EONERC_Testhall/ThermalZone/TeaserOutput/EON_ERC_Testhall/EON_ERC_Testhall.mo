@@ -29,8 +29,8 @@ ThermalZones.ReducedOrder.ThermalZone.ThermalZone            multizone(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://Testhall/EON_ERC_Testhall/InternalGains_EON_ERC_Testhall.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Systems/EONERC_Testhall/ThermalZone/TeaserOutput/EON_ERC_Testhall/InternalGains_EON_ERC_Testhall.txt"),
     columns=2:4)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -39,11 +39,11 @@ ThermalZones.ReducedOrder.ThermalZone.ThermalZone            multizone(
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://Testhall/EON_ERC_Testhall/TsetHeat_EON_ERC_Testhall.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Systems/EONERC_Testhall/ThermalZone/TeaserOutput/EON_ERC_Testhall/TsetHeat_EON_ERC_Testhall.txt"),
     columns=2:2)
     "Set points for heater"
-    annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+    annotation (Placement(transformation(extent={{-72,-8},{-56,8}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow thermalzone_intGains_rad(alpha=0)
     annotation (Placement(transformation(
@@ -76,8 +76,8 @@ equation
       Line(points={{32,26},{14,26},{14,-2.6},{8.2,-2.6}}, color={191,0,0}));
   connect(multizone.intGainsConv, thermalzone_intGains_conv.port)
     annotation (Line(points={{8.2,-5.6},{8.2,-4},{32,-4}}, color={191,0,0}));
-  connect(tableTSet.y[1], multizone.TSetHeat) annotation (Line(points={{55.2,
-          -58},{-16,-58},{-16,-4.8},{-11.6,-4.8}}, color={0,0,127}));
+  connect(tableTSet.y[1], multizone.TSetHeat) annotation (Line(points={{-55.2,0},
+          {-22,0},{-22,-4.8},{-11.6,-4.8}}, color={0,0,127}));
   annotation (experiment(
       StopTime=10000,
       Interval=3600,

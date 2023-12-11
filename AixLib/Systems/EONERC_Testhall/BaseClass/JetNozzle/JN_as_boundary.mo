@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_Testhall.BaseClass.JetNozzle;
-model JN_approxAirflow
+model JN_as_boundary
   Fluid.Sources.MassFlowSource_T              bound_sup(
     redeclare package Medium = AixLib.Media.Air,
     use_m_flow_in=true,
@@ -103,4 +103,4 @@ equation
 ")}),                                                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000000, __Dymola_Algorithm="Dassl"));
-end JN_approxAirflow;
+end JN_as_boundary;

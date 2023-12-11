@@ -11,11 +11,13 @@ model HeatCurve
 
 
   Modelica.Blocks.Interfaces.RealInput T_amb
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation (Placement(transformation(extent={{-132,-20},{-92,20}}),
+        iconTransformation(extent={{-140,-100},{-100,-60}})));
   Modelica.Blocks.Interfaces.RealOutput T_sup
-    annotation (Placement(transformation(extent={{98,-10},{118,10}})));
-  Modelica.Blocks.Math.Add t_amb(k1=-1)
-    annotation (Placement(transformation(extent={{-86,-2},{-78,6}})));
+    annotation (Placement(transformation(extent={{98,-10},{118,10}}),
+        iconTransformation(extent={{-14,-14},{14,14}},
+        rotation=90,
+        origin={-80,114})));
   Modelica.Blocks.Sources.Constant KelvinConstant(k=273.15) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -25,6 +27,8 @@ model HeatCurve
     annotation (Placement(transformation(extent={{80,-4},{88,4}})));
   Modelica.Blocks.Sources.RealExpression t_supply(y=y)
     annotation (Placement(transformation(extent={{32,-12},{52,8}})));
+  Modelica.Blocks.Math.Add t_amb(k1=-1)
+    annotation (Placement(transformation(extent={{-64,-2},{-56,6}})));
 equation
 
   t_ambient = min(t_amb.y, u_lower);
@@ -35,16 +39,64 @@ equation
 
 
 
-  connect(KelvinConstant.y, t_amb.u1) annotation (Line(points={{-99.6,40},{-90,40},
-          {-90,4.4},{-86.8,4.4}},                   color={0,0,127}));
-  connect(T_amb, t_amb.u2) annotation (Line(points={{-120,0},{-103.4,0},{-103.4,
-          -0.4},{-86.8,-0.4}}, color={0,0,127}));
   connect(t_supply.y, t_sup.u2) annotation (Line(points={{53,-2},{66.1,-2},{66.1,
           -2.4},{79.2,-2.4}}, color={0,0,127}));
   connect(t_sup.u1, KelvinConstant.y) annotation (Line(points={{79.2,2.4},{58,2.4},
           {58,32},{-88,32},{-88,40},{-99.6,40}}, color={0,0,127}));
   connect(t_sup.y, T_sup)
-    annotation (Line(points={{88.4,0},{108,0}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+    annotation (Line(points={{88.4,0},{82,0},{82,0},{108,0}},
+                                                color={0,0,127}));
+  connect(t_amb.u2, T_amb) annotation (Line(points={{-64.8,-0.4},{-88.4,-0.4},{-88.4,
+          0},{-112,0}}, color={0,0,127}));
+  connect(t_amb.u1, KelvinConstant.y) annotation (Line(points={{-64.8,4.4},{-86,
+          4.4},{-86,38},{-88,38},{-88,40},{-99.6,40}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{102,-100}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,0}),
+        Line(
+          points={{-48,-48}},
+          color={0,0,0},
+          pattern=LinePattern.None),
+        Line(
+          points={{-130,-60}},
+          color={0,0,0},
+          pattern=LinePattern.None),
+        Line(
+          points={{-94,-80},{86,-80}},
+          color={215,215,215},
+          thickness=1,
+          arrow={Arrow.None,Arrow.Filled}),
+        Line(
+          points={{-80,-94},{-80,86}},
+          color={215,215,215},
+          thickness=1,
+          arrow={Arrow.None,Arrow.Filled}),
+        Line(
+          points={{-80,58},{38,-66}},
+          color={238,46,47},
+          thickness=1),
+        Line(
+          points={{38,-66},{70,-66}},
+          color={238,46,47},
+          thickness=1),
+        Line(
+          points={{-98,58},{-80,58}},
+          color={238,46,47},
+          thickness=1),
+        Polygon(
+          points={{-80,96},{-88,74},{-72,74},{-80,96}},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Polygon(
+          points={{0,11},{-8,-11},{8,-11},{0,11}},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={84,-79},
+          rotation=270,
+          pattern=LinePattern.None)}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end HeatCurve;

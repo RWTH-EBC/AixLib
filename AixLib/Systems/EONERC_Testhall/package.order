@@ -2,6 +2,7 @@ BaseClass
 Controller
 DataBase
 ThermalZone
+TestModels
 Testhall_Hall_Office
 Testhall_Hall
 EON_ERC_Testhall

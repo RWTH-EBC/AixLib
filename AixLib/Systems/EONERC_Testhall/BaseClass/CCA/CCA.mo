@@ -26,15 +26,15 @@ model CCA
         rotation=90,
         origin={-12,-26})));
 
-  ConcreteCoreActivation concreteCoreActivation(
-    nNodes=6,
-    C=200,
-    Gc=41e6,
+  ConcreteCoreActivation_area_alpha concreteCoreActivation(
+    area=600,
+    thickness=0.1,
+    alpha=100,
     pipe(
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
-      length=30,
-      m_flow_nominal=1.79,
-      T_start=323.15))
+      length=1500,
+      m_flow_nominal=0.8,
+      T_start=288.15))
     annotation (Placement(transformation(extent={{-42,32},{14,86}})));
   Modelica.Fluid.Interfaces.FluidPort_a cca_supprim(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-110},
@@ -58,13 +58,13 @@ equation
   connect(cca_retprim, cca.port_b2) annotation (Line(points={{10,-100},{10,-81},
           {9.60002,-81},{9.60002,-62}},
                           color={0,127,255}));
-  connect(cca.port_a2, concreteCoreActivation.port_ret) annotation (Line(points={{9.60002,
-          9.9999},{8,9.9999},{8,28},{22,28},{22,59},{14,59}},            color={
-          0,127,255}));
-  connect(concreteCoreActivation.heatPort, heat_port_CCA) annotation (Line(
-        points={{-14,88.7},{-14,104}},                         color={191,0,0}));
-  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points={{
-          -33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
+  connect(cca.port_a2, concreteCoreActivation.port_ret) annotation (Line(points
+        ={{9.60002,9.9999},{8,9.9999},{8,28},{22,28},{22,59},{14,59}}, color={0,
+          127,255}));
+  connect(concreteCoreActivation.heatPort, heat_port_CCA)
+    annotation (Line(points={{-14,88.7},{-14,104}}, color={191,0,0}));
+  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points
+        ={{-33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

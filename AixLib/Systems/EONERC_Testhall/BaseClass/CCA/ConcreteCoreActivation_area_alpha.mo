@@ -1,12 +1,19 @@
 within AixLib.Systems.EONERC_Testhall.BaseClass.CCA;
-model ConcreteCoreActivation
-
-
-  parameter Integer nNodes "Number of elements";
-  parameter Modelica.Units.SI.HeatCapacity C
-    "Heat capacity of element (= cp*m)";
-  parameter  Modelica.Units.SI.ThermalConductance Gc
-    "Signal representing the convective thermal conductance in [W/K]";
+model ConcreteCoreActivation_area_alpha
+import      Modelica.Units.SI;
+  parameter SI.Area area "Area of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.Length thickness "Thickness of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.SpecificHeatCapacity cp=1000
+    "Specific heat capacity of concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.Density rho=2300 "Density of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter Real alpha=10 "Heat transfer coefficient concrete to air"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter Modelica.Units.SI.Length length=100 "Pipe length"
+    annotation (Dialog(group="Concrete core activation"));
 
   AixLib.Fluid.FixedResistances.GenericPipe pipe(
     redeclare package Medium = AixLib.Media.Water,
@@ -17,8 +24,9 @@ model ConcreteCoreActivation
       Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=C/
-        nNodes, T(start=323.15)) annotation (Placement(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=rho*
+        area*thickness*cp, T(start=288.15))
+                                 annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=270,
@@ -28,8 +36,9 @@ model ConcreteCoreActivation
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={0,44})));
-  Modelica.Blocks.Sources.Constant const(k=Gc/nNodes)
+  Modelica.Blocks.Sources.Constant const(k=area*alpha)
     annotation (Placement(transformation(extent={{-60,34},{-40,54}})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
     "heat port for connection to room volume" annotation (Placement(
         transformation(extent={{-10,66},{10,86}}),  iconTransformation(extent={{
@@ -86,4 +95,4 @@ equation
           textString="%CCA"),
         Line(points={{146,-70}}, color={255,0,0})}),             Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end ConcreteCoreActivation;
+end ConcreteCoreActivation_area_alpha;

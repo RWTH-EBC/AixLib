@@ -137,7 +137,7 @@ model EON_ERC_Testhall
     k=1)   annotation (Placement(transformation(extent={{176,-10},{156,10}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
-  BaseClass.CID.CID_ConsumerWater cid
+  BaseClass.CID.CID_approx cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
   ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
     annotation (Placement(transformation(extent={{-38,34},{-6,66}})));
@@ -210,7 +210,7 @@ equation
   connect(QFlowHall2.y[1], cph_heatFlow.Q_flow)
     annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{243,-72},
-          {236,-72},{236,-80},{-128,-80},{-128,-10},{-124.6,-10}},
+          {236,-72},{236,-80},{-128,-80},{-128,-10},{-124,-10}},
                       color={0,0,127}));
   connect(ahu.port_b1, cid.cid_sup_air) annotation (Line(points={{93.6091,-40},
           {84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));

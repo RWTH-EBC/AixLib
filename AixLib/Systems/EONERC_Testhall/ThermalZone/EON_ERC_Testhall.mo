@@ -2,29 +2,32 @@ within AixLib.Systems.EONERC_Testhall.ThermalZone;
 model EON_ERC_Testhall
 ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalzone(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15,
+    T_start=288.15,
     internalGainsMode=1,
     use_C_flow=false,
     use_moisture_balance=false,
     redeclare package Medium = AixLib.Media.Air,
     redeclare
       AixLib.Systems.EONERC_Testhall.ThermalZone.TeaserOutput.EON_ERC_Testhall.EON_ERC_Testhall_DataBase.EON_ERC_Testhall_Hall1
-      zoneParam(T_start=288.15),
+      zoneParam(
+      T_start=288.15,
+      specificPeople=0.01,
+      activityDegree=1,
+      fixedHeatFlowRatePersons=40,
+      ratioConvectiveHeatPeople=0.2,
+      internalGainsMachinesSpecific=1,
+      lightingPowerSpecific=0.2,
+      HeaterOn=false),
     redeclare model corG =
         ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
     use_MechanicalAirExchange=false,
     use_NaturalAirExchange=false,
     nPorts=2)                    "ThermalZone"
     annotation (Placement(transformation(extent={{-6,26},{14,46}})));
-  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-    computeWetBulbTemperature=false,
-    filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Systems/EONERC_Testhall/ThermalZone/TeaserOutput/DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
-    "Weather data reader"
-    annotation (Placement(transformation(extent={{-94,64},{-74,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
+    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
     fileName=ModelicaServices.ExternalReferences.loadResource(
@@ -46,23 +49,26 @@ ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalzone(
    "convective internal gains" annotation (Placement(
         transformation(extent={{72,40},{92,20}}), iconTransformation(extent={{-108,
             -20},{-88,0}})));
-  Modelica.Blocks.Sources.Constant T_Set(k=273.15 + 20)
-    annotation (Placement(transformation(extent={{-66,12},{-46,32}})));
+  BoundaryConditions.WeatherData.Bus
+      weaBus "Weather data bus" annotation (Placement(transformation(extent={{-68,32},
+            {-48,52}}),          iconTransformation(extent={{-108,54},{-88,74}})));
 equation
-  connect(weaDat.weaBus, thermalzone.weaBus) annotation (Line(
-      points={{-74,74},{-12,74},{-12,42},{-6,42}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(tableInternalGains.y, thermalzone.intGains)
-    annotation (Line(points={{43.2,0},{12,0},{12,27.6}}, color={0,0,127}));
   connect(thermalzone.intGainsRad, intGainsRad_port) annotation (Line(points={{14.2,
           39.4},{14.2,38},{66,38},{66,50},{82,50}}, color={191,0,0}));
   connect(thermalzone.intGainsConv, intGainsConv_port) annotation (Line(points={
           {14.2,36.4},{66,36.4},{66,30},{82,30}}, color={191,0,0}));
   connect(ports, thermalzone.ports) annotation (Line(points={{0,-92},{0,22},{4,
           22},{4,28.8}}, color={0,127,255}));
-  connect(T_Set.y, thermalzone.TSetHeat) annotation (Line(points={{-45,22},{-12,
-          22},{-12,37.2},{-5.6,37.2}}, color={0,0,127}));
+  connect(tableInternalGains.y[1], thermalzone.intGains[3])
+    annotation (Line(points={{43.2,0},{12,0},{12,28}}, color={0,0,127}));
+  connect(tableInternalGains.y[3], thermalzone.intGains[1])
+    annotation (Line(points={{43.2,0},{12,0},{12,27.2}}, color={0,0,127}));
+  connect(tableInternalGains.y[2], thermalzone.intGains[2])
+    annotation (Line(points={{43.2,0},{12,0},{12,27.6}}, color={0,0,127}));
+  connect(thermalzone.weaBus, weaBus) annotation (Line(
+      points={{-6,42},{-58,42}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,68},{100,-100}},

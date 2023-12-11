@@ -173,7 +173,7 @@ model Testhall_Hall_Office
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{-210,40},{-190,60}})));
 
-  Controller.Obsolote.ControlCID_Heizkurve controlCID
+  Controller.Obsolete.ControlCID_Heizkurve controlCID
     annotation (Placement(transformation(extent={{16,28},{36,48}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                    senRoomTemp(redeclare package Medium =
@@ -198,7 +198,7 @@ model Testhall_Hall_Office
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-54,60})));
-  Controller.Obsolote.ControlJN_constHydrValve controlJN
+  Controller.Obsolete.ControlJN_constHydrValve controlJN
     annotation (Placement(transformation(extent={{-132,36},{-112,56}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
     annotation (Placement(transformation(extent={{-146,-196},{118,-100}})));
@@ -287,7 +287,8 @@ equation
         points={{-16.2815,-116.696},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
   connect(distributor_withoutReserve.cph_ret, cPH.cph_retprim) annotation (Line(
-        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,-56.25}},
+        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,
+          -56.25}},
         color={0,127,255}));
   connect(distributor_withoutReserve.cca_sup, cCA.cca_supprim) annotation (Line(
         points={{37.4963,-115.861},{36,-115.861},{36,-10},{-31.46,-10},{-31.46,
@@ -302,11 +303,13 @@ equation
         points={{74,-116.696},{74,-94},{66,-94},{66,6},{54.8,6},{54.8,18.2}},
         color={0,127,255}));
   connect(distributor_withoutReserve.rlt_ph_sup, ahu.port_a3) annotation (Line(
-        points={{102.03,-140.487},{102.03,-142},{172,-142},{172,-66},{168.273,-66},
-          {168.273,-60}}, color={0,127,255}));
+        points={{102.03,-140.487},{102.03,-142},{172,-142},{172,-66},{168.273,
+          -66},{168.273,-60}},
+                          color={0,127,255}));
   connect(distributor_withoutReserve.rlt_ph_ret, ahu.port_b3) annotation (Line(
-        points={{102.03,-146.748},{102.03,-148},{172,-148},{172,-66},{160.455,-66},
-          {160.455,-60}}, color={0,127,255}));
+        points={{102.03,-146.748},{102.03,-148},{172,-148},{172,-66},{160.455,
+          -66},{160.455,-60}},
+                          color={0,127,255}));
   connect(distributor_withoutReserve.rlt_h_sup, ahu.port_a5) annotation (Line(
         points={{101.704,-120.87},{120,-120.87},{120,-120},{121.364,-120},{
           121.364,-60}}, color={0,127,255}));
@@ -340,8 +343,8 @@ equation
   connect(QFlowHall2.y[1], cph_PrescribedHeatFlow.Q_flow)
     annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{221,-46},
-          {204,-46},{204,16},{102,16},{102,12},{-4,12},{-4,-6},{-74.6,-6},{
-          -74.6,22}}, color={0,0,127}));
+          {204,-46},{204,16},{102,16},{102,12},{-4,12},{-4,-6},{-74,-6},{-74,22}},
+                      color={0,0,127}));
   connect(senTAirOutCID.port_a, cID.air_out)
     annotation (Line(points={{44,62},{56,62},{56,43.4}}, color={0,127,255}));
   connect(senTAirOutCID.port_b, Office.port_a)

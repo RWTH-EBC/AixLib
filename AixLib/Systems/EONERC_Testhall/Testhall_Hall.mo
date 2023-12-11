@@ -147,13 +147,13 @@ model Testhall_Hall
     k=10)  annotation (Placement(transformation(extent={{176,-10},{156,10}})));
   BaseClass.Distributor.Distributor_withoutReserve distributor
     annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
-  BaseClass.CID.CID_ConsumerWater cid
+  BaseClass.CID.CID_approx cid
     annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
   Modelica.Blocks.Sources.TimeTable QFlowCCA(table=[0,2; 267840,7; 2678400,7;
         5270400,15; 7948800,22; 10627200,36; 13132800,28; 15811200,7; 18403200,
         0; 21081600,0; 23673600,0; 26352000,0; 29030400,7; 31536000,7])
     annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
-  BaseClass.JetNozzle.JN_approxAirflow jn
+  BaseClass.JetNozzle.JN_as_boundary jn
     annotation (Placement(transformation(extent={{22,-26},{42,-6}})));
 equation
   connect(cca_heatFlow.port, cCA.heat_port_CCA)
@@ -215,7 +215,7 @@ equation
   connect(QFlowHall2.y[1], cph_heatFlow.Q_flow)
     annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{243,-72},
-          {236,-72},{236,-80},{-128,-80},{-128,-10},{-124.6,-10}},
+          {236,-72},{236,-80},{-128,-80},{-128,-10},{-124,-10}},
                       color={0,0,127}));
   connect(ahu.port_b1, cid.cid_sup_air) annotation (Line(points={{93.6091,-40},
           {84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
