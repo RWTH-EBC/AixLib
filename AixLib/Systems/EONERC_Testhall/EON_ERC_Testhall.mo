@@ -172,16 +172,17 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(distributor.cph_sup, cPH.cph_supprim) annotation (Line(points={{
-          -16.2815,-125.652},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
+          -45.6148,-125.652},{-45.6148,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
   connect(distributor.cph_ret, cPH.cph_retprim) annotation (Line(points={{
-          -12.0444,-125.652},{-12.0444,-90},{-150.215,-90},{-150.215,-56.25}},
+          -39.4222,-125.652},{-39.4222,-90},{-150.215,-90},{-150.215,-56.25}},
         color={0,127,255}));
-  connect(distributor.cca_sup, cCA.cca_supprim) annotation (Line(points={{37.4963,
-          -124.87},{-14,-124.87},{-14,-42},{-81.46,-42},{-81.46,-30}},
+  connect(distributor.cca_sup, cCA.cca_supprim) annotation (Line(points={{
+          -21.4963,-125.652},{-14,-125.652},{-14,-42},{-81.46,-42},{-81.46,-30}},
         color={0,127,255}));
-  connect(distributor.cca_ret, cCA.cca_retprim) annotation (Line(points={{42.0593,
-          -125.261},{42.0593,-36},{-67.4,-36},{-67.4,-30}},         color={0,
+  connect(distributor.cca_ret, cCA.cca_retprim) annotation (Line(points={{
+          -16.2815,-125.652},{-16.2815,-36},{-67.4,-36},{-67.4,-30}},
+                                                                    color={0,
           127,255}));
   connect(distributor.rlt_ph_sup, ahu.port_a3) annotation (Line(points={{102.03,
           -147.957},{102.03,-142},{172,-142},{172,-66},{168.273,-66},{168.273,

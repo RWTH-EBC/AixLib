@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_Testhall.TestModels;
-model CCA
+model CCA "Model of EON ERC Testhall including Monitoring Data and Weather Data from 25.Oct 2022 12am till 26.Oct 2023 12am"
   ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
     annotation (Placement(transformation(extent={{-18,-14},{14,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow thermalzone_intGains_rad(alpha=0)

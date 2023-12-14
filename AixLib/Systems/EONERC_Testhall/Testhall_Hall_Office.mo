@@ -168,9 +168,10 @@ model Testhall_Hall_Office
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/QflowHall2.txt"),
-    columns={2},
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Hall2.txt"),
+    columns=2:13,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    "12 - Qflow in W"
     annotation (Placement(transformation(extent={{-210,40},{-190,60}})));
 
   Controller.Obsolete.ControlCID_Heizkurve controlCID
@@ -340,8 +341,6 @@ equation
         points={{102,83},{102,87.035},{115.025,87.035}}, color={0,0,127}));
   connect(ambientAir.y[1], ODA.T_in) annotation (Line(points={{221,-46},{204,
           -46},{204,-39.2},{198.4,-39.2}}, color={0,0,127}));
-  connect(QFlowHall2.y[1], cph_PrescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{221,-46},
           {204,-46},{204,16},{102,16},{102,12},{-4,12},{-4,-6},{-74,-6},{-74,22}},
                       color={0,0,127}));
@@ -356,6 +355,8 @@ equation
   connect(ambientAir.y[1], controlCID.T_amb) annotation (Line(points={{221,-46},
           {204,-46},{204,16},{102,16},{102,12},{10,12},{10,38.7692},{19.2,
           38.7692}}, color={0,0,127}));
+  connect(QFlowHall2.y[12], cph_PrescribedHeatFlow.Q_flow)
+    annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),

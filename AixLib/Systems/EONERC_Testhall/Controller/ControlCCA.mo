@@ -24,7 +24,7 @@ model ControlCCA
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
     Ti=2000,
-    k=0.01)  annotation (Placement(transformation(
+    k=0.2)   annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=0,
         origin={30,-64})));

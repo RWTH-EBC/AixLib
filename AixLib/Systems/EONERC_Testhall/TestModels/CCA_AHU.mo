@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_Testhall.TestModels;
-model CCA_AHU
+model CCA_AHU "Model of EON ERC Testhall including Monitoring Data and Weather Data from 25.Oct 2022 12am till 26.Oct 2023 12am"
 
   Fluid.Sources.Boundary_ph        EHA(redeclare package Medium = Media.Air,
       nPorts=1) "AirOut" annotation (Placement(transformation(
@@ -31,8 +31,8 @@ model CCA_AHU
     columns={2})
     annotation (Placement(transformation(extent={{176,-38},{164,-26}})));
   ModularAHU.GenericAHU                ahu(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+    redeclare package Medium1 = AixLib.Media.Air,
+    redeclare package Medium2 = AixLib.Media.Water,
     T_amb=288.15,
     m1_flow_nominal=3.7,
     m2_flow_nominal=2.3,
@@ -47,10 +47,13 @@ model CCA_AHU
         Kv=6.3,
         valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
         pipe1(length=1.2),
-        pipe2(length=0.1),
+        pipe2(length=0.1, nNodes=1),
         pipe3(length=0.1),
         pipe4(length=2.3),
-        pipe5(length=2, fac=10),
+        pipe5(
+          length=2,
+          fac=10,
+          nNodes=1),
         pipe6(length=0.1),
         pipe7(length=1.3),
         pipe8(length=0.3),
@@ -58,7 +61,8 @@ model CCA_AHU
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
-              Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
+              Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
+      dynamicHX(nNodes=1)),
     cooler(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=5,
@@ -87,13 +91,17 @@ model CCA_AHU
         pipe2(length=0.6),
         pipe3(length=2),
         pipe4(length=5.5, fac=10),
-        pipe5(length=10.4),
-        pipe6(length=0.6))))
+        pipe5(length=12, nNodes=1),
+        pipe6(length=0.6)),
+      dynamicHX(nNodes=1)))
     annotation (Placement(transformation(extent={{188,10},{102,54}})));
   ModularAHU.Controller.CtrAHUBasic                controlAHU(
     TFlowSet=310.15,
     TFrostProtect=273.15 + 8,
-    ctrPh(useExternalTMea=false, rpm_pump=2300),
+    ctrPh(
+      useExternalTMea=false,
+      k=0.001,
+      rpm_pump=2300),
     ctrRh(k=0.01, Ti=1000),
     VFlowSet=3.08,
     dpMax=5000,
@@ -140,7 +148,7 @@ model CCA_AHU
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={194,-56})));
-  BaseClass.JetNozzle.JN_control_T_Hall jN_approxAirflow_2_1
+  BaseClass.JetNozzle.JN_control_T_Hall jN
     annotation (Placement(transformation(extent={{38,34},{58,54}})));
   ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
     annotation (Placement(transformation(extent={{-40,30},{-8,60}})));
@@ -180,6 +188,7 @@ model CCA_AHU
             {-122,88}}),         iconTransformation(extent={{190,-10},{210,10}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
     annotation (Placement(transformation(extent={{200,82},{220,102}})));
+
 equation
   connect(CoolerInput.y[1],sup_c. T_in) annotation (Line(points={{163.4,-32},{
           156,-32},{156,0.8},{152.4,0.8}},     color={0,0,127}));
@@ -199,10 +208,10 @@ equation
           90,30},{90,7.6},{71.8,7.6}},       color={0,127,255}));
   connect(ahu.port_a2,cid. cid_ret_air) annotation (Line(points={{101.609,46},{
           76,46},{76,15.2},{71.6,15.2}},     color={0,127,255}));
-  connect(jN_approxAirflow_2_1.jn_ret_air, ahu.port_a2) annotation (Line(points={{57.6,
-          47.2},{57.6,46},{101.609,46}},       color={0,127,255}));
-  connect(ahu.port_b1, jN_approxAirflow_2_1.jn_sup_air) annotation (Line(points={{101.609,
-          30},{64,30},{64,39.6},{57.8,39.6}},          color={0,127,255}));
+  connect(jN.jn_ret_air, ahu.port_a2) annotation (Line(points={{57.6,47.2},{
+          57.6,46},{101.609,46}}, color={0,127,255}));
+  connect(ahu.port_b1, jN.jn_sup_air) annotation (Line(points={{101.609,30},{64,
+          30},{64,39.6},{57.8,39.6}}, color={0,127,255}));
   connect(intGains_rad.y,thermalzone_intGains_rad. Q_flow) annotation (Line(
         points={{-71.5,53},{-68,53},{-68,50},{-60,50}},
                                                     color={0,0,127}));
@@ -236,12 +245,12 @@ equation
   connect(intGains_rad1.y, bound_sup3.T_in) annotation (Line(points={{-129.5,-9},
           {-120,-9},{-120,-20},{38,-20},{38,-44},{74,-44},{74,-58.4},{158.8,-58.4}},
         color={0,0,127}));
-  connect(jN_approxAirflow_2_1.jn_sup_thermalzone, eON_ERC_Testhall.ports[1])
-    annotation (Line(points={{38,39},{38,38},{-2,38},{-2,24},{-25.56,24},{-25.56,
+  connect(jN.jn_sup_thermalzone, eON_ERC_Testhall.ports[1]) annotation (Line(
+        points={{38,39},{38,38},{-2,38},{-2,24},{-25.56,24},{-25.56,31.2}},
+        color={0,127,255}));
+  connect(jN.jn_ret_thermalzone, eON_ERC_Testhall.ports[2]) annotation (Line(
+        points={{38,47.2},{38,46},{2,46},{2,38},{-2,38},{-2,24},{-21.8,24},{-21.8,
           31.2}}, color={0,127,255}));
-  connect(jN_approxAirflow_2_1.jn_ret_thermalzone, eON_ERC_Testhall.ports[2])
-    annotation (Line(points={{38,47.2},{38,46},{2,46},{2,38},{-2,38},{-2,24},{-21.8,
-          24},{-21.8,31.2}}, color={0,127,255}));
   connect(x_pTphi.phi, weaBus.relHum) annotation (Line(points={{198,86},{-116,86},
           {-116,82},{-128,82}}, color={0,0,127}));
   connect(x_pTphi.p_in, weaBus.pAtm)
@@ -274,8 +283,8 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,-140},{
             140,140}})),
     experiment(
-      StartTime=25660800,
-      StopTime=28080000,
+      StartTime=1000000,
+      StopTime=10000000,
       Interval=3600,
       __Dymola_Algorithm="Dassl"));
 end CCA_AHU;

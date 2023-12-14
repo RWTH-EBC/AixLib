@@ -7,7 +7,7 @@ package CPH
       pipeModel="SimplePipe",
       length=1,
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
-      Kv=1.2,
+      Kv=12,
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
@@ -43,18 +43,18 @@ package CPH
           origin={-7,15})));
     RadiantCeilingPanelHeater radiantCeilingPanelHeater(
       genericPipe(
-        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_18x1(),
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
         length=17.2,
         m_flow_nominal=0.54),
       nNodes=3,
       each Gr=27)
       annotation (Placement(transformation(extent={{-34,58},{22,120}})));
 
-    Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package Medium =
-          AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-208},{-24,
+    Modelica.Fluid.Interfaces.FluidPort_a cph_supprim(redeclare package Medium
+        = AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-208},{-24,
               -188}}), iconTransformation(extent={{-86,-210},{-66,-190}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package Medium =
-          AixLib.Media.Water) annotation (Placement(transformation(extent={{16,-208},{36,
+    Modelica.Fluid.Interfaces.FluidPort_b cph_retprim(redeclare package Medium
+        = AixLib.Media.Water) annotation (Placement(transformation(extent={{16,-208},{36,
               -188}}), iconTransformation(extent={{2,-212},{22,-192}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heat_port_CPH
       annotation (Placement(transformation(extent={{-16,108},{4,128}}),

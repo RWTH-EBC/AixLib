@@ -35,9 +35,10 @@ model JN_as_boundary
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Hall1Temp.txt"),
-    columns={2},
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Office_Hall_Temp.txt"),
+    columns=2:8,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    "1 to 5 Office, 6 - Hall1, 7 - Hall2"
     annotation (Placement(transformation(extent={{-40,28},{-20,48}})));
 
   Fluid.FixedResistances.HydraulicDiameter res_sup_air(
@@ -87,10 +88,10 @@ equation
   connect(mflow_jn_total.y,bound_ret. m_flow_in) annotation (Line(points={{-15.15,
           -3},{-12,-3},{-12,32},{38.8,32},{38.8,31.2}},
                                                     color={0,0,127}));
-  connect(Hall1_Temp.y[1],bound_ret. T_in) annotation (Line(points={{-19,38},{
-          30,38},{30,33.6},{38.8,33.6}}, color={0,0,127}));
   connect(jn_sup_air, res_sup_air.port_a)
     annotation (Line(points={{102,-4},{68,-4}}, color={0,127,255}));
+  connect(Hall1_Temp.y[6], bound_ret.T_in) annotation (Line(points={{-19,38},{
+          -10,38},{-10,34},{38.8,34},{38.8,33.6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

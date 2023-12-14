@@ -8,6 +8,7 @@ model CCA
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     Kv=2.34,
     m_flow_nominal=0.8,
+    vol=0.005,
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
       PumpInterface(pumpParam=
@@ -17,7 +18,7 @@ model CCA
     pipe3(length=10, fac=10),
     pipe4(length=10),
     pipe6(length=0.2),
-    pipe5(length=0.5),
+    pipe5(length=0.5, nNodes=1),
     T_amb=273.15 + 10,
     T_start=323.15,
     pipe7(length=0.2))
@@ -27,14 +28,16 @@ model CCA
         origin={-12,-26})));
 
   ConcreteCoreActivation_area_alpha concreteCoreActivation(
-    area=600,
-    thickness=0.1,
-    alpha=100,
+    area=700,
+    thickness=0.2,
+    alpha=150,
     pipe(
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
       length=1500,
+      hCon=10,
       m_flow_nominal=0.8,
-      T_start=288.15))
+      nNodes=1,
+      T_start=295.15))
     annotation (Placement(transformation(extent={{-42,32},{14,86}})));
   Modelica.Fluid.Interfaces.FluidPort_a cca_supprim(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{-44,-110},
@@ -58,13 +61,13 @@ equation
   connect(cca_retprim, cca.port_b2) annotation (Line(points={{10,-100},{10,-81},
           {9.60002,-81},{9.60002,-62}},
                           color={0,127,255}));
-  connect(cca.port_a2, concreteCoreActivation.port_ret) annotation (Line(points
-        ={{9.60002,9.9999},{8,9.9999},{8,28},{22,28},{22,59},{14,59}}, color={0,
+  connect(cca.port_a2, concreteCoreActivation.port_ret) annotation (Line(points=
+         {{9.60002,9.9999},{8,9.9999},{8,28},{22,28},{22,59},{14,59}}, color={0,
           127,255}));
   connect(concreteCoreActivation.heatPort, heat_port_CCA)
     annotation (Line(points={{-14,88.7},{-14,104}}, color={191,0,0}));
-  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points
-        ={{-33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
+  connect(cca.port_b1, concreteCoreActivation.port_sup) annotation (Line(points={{
+          -33.5999,9.9999},{-32,9.9999},{-32,28},{-50,28},{-50,59},{-42,59}},
         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

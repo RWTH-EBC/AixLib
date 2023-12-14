@@ -11,3 +11,8 @@ Ambient Air Temperature:
 
 Heat Flow for JN, CCA and CID are approx by monitoring data. Use monthly variating value to estimate dimension. 
 Approx JN heat flow as Q_JN = (4*Q_CID - Q_CCA) (four times because of area relation of office and hall1)
+
+CPH Hall2:
+
+	QFlow:
+		- Unlogical Values from second 3974400 to 6598800 at TempOffSet, MassFlow and Temperatur, therefore the Temperature OffSet as QFlow is approximated with konstant values in this period

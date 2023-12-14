@@ -100,10 +100,10 @@ model Distributor_withoutReserve
             348},{1190,368}}), iconTransformation(extent={{1180,270},{1200,290}})));
   Modelica.Fluid.Interfaces.FluidPort_b cca_sup(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{1008,
-            350},{1028,370}}), iconTransformation(extent={{956,274},{976,294}})));
+            350},{1028,370}}), iconTransformation(extent={{594,270},{614,290}})));
   Modelica.Fluid.Interfaces.FluidPort_a cca_ret(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{1048,
-            348},{1068,368}}), iconTransformation(extent={{984,272},{1004,292}})));
+            348},{1068,368}}), iconTransformation(extent={{626,270},{646,290}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe2(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
     length=0.1,
@@ -138,10 +138,10 @@ model Distributor_withoutReserve
         origin={1186,178})));
   Modelica.Fluid.Interfaces.FluidPort_a cph_ret(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{878,
-            348},{898,368}}), iconTransformation(extent={{652,270},{672,290}})));
+            348},{898,368}}), iconTransformation(extent={{484,270},{504,290}})));
   Modelica.Fluid.Interfaces.FluidPort_b cph_sup(redeclare package Medium =
         AixLib.Media.Water) annotation (Placement(transformation(extent={{832,
-            348},{852,368}}), iconTransformation(extent={{626,270},{646,290}})));
+            348},{852,368}}), iconTransformation(extent={{446,270},{466,290}})));
   AixLib.Fluid.FixedResistances.GenericPipe pipe6(
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_40x1(),
     length=0.1,
@@ -210,7 +210,8 @@ model Distributor_withoutReserve
   DistributeBus distributeBus_DHS annotation (Placement(transformation(extent={
             {138,124},{174,162}}), iconTransformation(extent={{120,150},{172,
             204}})));
-  Controller.ControlDHS controlDHS
+  Controller.Obsolete.ControlDHS_n_const
+                        controlDHS_n_const
     annotation (Placement(transformation(extent={{48,180},{104,232}})));
   Fluid.Sensors.Pressure senPressure_sup(redeclare package Medium =
         AixLib.Media.Water)
@@ -290,7 +291,8 @@ equation
           -36},{370,-14},{360,-14}}, color={0,127,255}));
   connect(vol1.ports[5], pipe14.port_a) annotation (Line(points={{1108.4,-26},{
           1064,-26},{1064,-14},{360,-14}}, color={0,127,255}));
-  connect(distributeBus_DHS, controlDHS.distributeBus_DHS) annotation (Line(
+  connect(distributeBus_DHS, controlDHS_n_const.distributeBus_DHS) annotation (
+      Line(
       points={{156,143},{156,205.74},{103.44,205.74}},
       color={255,204,51},
       thickness=0.5));

@@ -125,8 +125,8 @@ package CID
           extent={{6,-6},{-6,6}},
           rotation=180,
           origin={42,18})));
-    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{90,8},{110,
+    Modelica.Fluid.Interfaces.FluidPort_a cid_sup_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{90,8},{110,
               28}}), iconTransformation(extent={{88,-54},{108,-34}})));
     Modelica.Fluid.Interfaces.FluidPort_a cid_sup_water(redeclare package
         Medium = Media.Water) annotation (Placement(transformation(extent={{-60,
@@ -134,8 +134,8 @@ package CID
     Modelica.Fluid.Interfaces.FluidPort_b cid_ret_water(redeclare package
         Medium = Media.Water) annotation (Placement(transformation(extent={{16,
               -110},{36,-90}}), iconTransformation(extent={{14,-108},{34,-88}})));
-    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{88,36},{108,
+    Modelica.Fluid.Interfaces.FluidPort_b cid_ret_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{88,36},{108,
               56}}), iconTransformation(extent={{86,22},{106,42}})));
     Fluid.Sources.Boundary_pT                   bound_ret(
       redeclare package Medium = AixLib.Media.Air,
@@ -148,8 +148,8 @@ package CID
       tableOnFile=true,
       tableName="measurement",
       fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://AixLib/Systems/EONERC_Testhall/DataBase/OfficeRoomTemp.txt"),
-      columns=2:6,
+          "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Office_Hall_Temp.txt"),
+      columns=2:8,
       smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
       annotation (Placement(transformation(extent={{-100,44},{-80,64}})));
 
@@ -199,11 +199,11 @@ package CID
           extent={{10,-10},{-10,10}},
           rotation=90,
           origin={26,-74})));
-    Fluid.Sensors.TemperatureTwoPort senTem_water_sup(redeclare package Medium
-        = AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_sup(redeclare package Medium =
+          AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{-42,-58},{-30,-48}})));
-    Fluid.Sensors.TemperatureTwoPort senTem_water_ret(redeclare package Medium
-        = AixLib.Media.Water, m_flow_nominal=0.15)
+    Fluid.Sensors.TemperatureTwoPort senTem_water_ret(redeclare package Medium =
+          AixLib.Media.Water, m_flow_nominal=0.15)
       annotation (Placement(transformation(extent={{14,-58},{26,-48}})));
   equation
     connect(T_office.y, bound_ret.T_in) annotation (Line(points={{-25.4,54},{30,

@@ -11,6 +11,7 @@ ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalzone(
       AixLib.Systems.EONERC_Testhall.ThermalZone.TeaserOutput.EON_ERC_Testhall.EON_ERC_Testhall_DataBase.EON_ERC_Testhall_Hall1
       zoneParam(
       T_start=288.15,
+      AExt={95.91,389.64,711.0,629.0,389.64},
       specificPeople=0.01,
       activityDegree=1,
       fixedHeatFlowRatePersons=40,

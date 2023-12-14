@@ -33,8 +33,8 @@ model ControlCPH_ProgrammHall
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Hall2Temp.txt"),
-    columns={2},
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Office_Hall_Temp.txt"),
+    columns=2:8,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{100,-90},{80,-70}})));
 
@@ -75,8 +75,9 @@ model ControlCPH_ProgrammHall
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Hall2.txt"),
-    columns=2:3,
+    columns=2:13,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    "7 - Offset, 8 - Radiation"
     annotation (Placement(transformation(extent={{98,-62},{78,-42}})));
   Modelica.Blocks.Math.Add addtoKelvin
     annotation (Placement(transformation(extent={{6,-54},{-2,-46}})));
@@ -95,9 +96,11 @@ equation
     annotation (Line(points={{-29,-50},{-48,-50},{-48,-14.895},{-93.9,-14.895}},
         color={0,0,127}));
   connect(heatCurve.T_sup, PID_Valve.u_s)
-    annotation (Line(points={{55.2,68},{42,68}}, color={0,0,127}));
+    annotation (Line(points={{74,79.4},{58,79.4},{58,68},{42,68}},
+                                                 color={0,0,127}));
   connect(T_amb, heatCurve.T_amb)
-    annotation (Line(points={{104,68},{78,68}}, color={0,0,127}));
+    annotation (Line(points={{104,68},{92,68},{92,60},{78,60}},
+                                                color={0,0,127}));
   connect(n_const.y, distributeBus_CPH.bus_cph.pumpBus.rpmSet) annotation (Line(
         points={{-55,32},{-68,32},{-68,-14.895},{-93.9,-14.895}},
                                                       color={0,0,127}));
@@ -113,12 +116,6 @@ equation
     annotation (Line(points={{56.6,-50},{50.8,-50}}, color={0,0,127}));
   connect(a.y, calcTSet.u[2]) annotation (Line(points={{41.6,-50},{32,-50},{32,
           -48.95},{24,-48.95}}, color={0,0,127}));
-  connect(Hall2.y[1], sumHallTemp.u[1]) annotation (Line(points={{79,-80},{52,
-          -80},{52,-81.05},{26,-81.05}}, color={0,0,127}));
-  connect(Hall2_Offset_and_Radiation.y[1], feedback.u1)
-    annotation (Line(points={{77,-52},{77,-50},{66.8,-50}}, color={0,0,127}));
-  connect(Hall2_Offset_and_Radiation.y[2], sumHallTemp.u[2]) annotation (Line(
-        points={{77,-52},{72,-52},{72,-78.95},{26,-78.95}}, color={0,0,127}));
   connect(calcTSet.y, addtoKelvin.u2) annotation (Line(points={{10.98,-50},{
           10.98,-52.4},{6.8,-52.4}}, color={0,0,127}));
   connect(CtoK.y, addtoKelvin.u1) annotation (Line(points={{11.6,-30},{6.8,-30},
@@ -128,6 +125,12 @@ equation
   connect(PID_Valve.u_m, distributeBus_CPH.bus_cph_throttle.TFwrdOutMea)
     annotation (Line(points={{30,56},{30,-14.895},{-93.9,-14.895}}, color={0,0,
           127}));
+  connect(Hall2.y[7], sumHallTemp.u[1]) annotation (Line(points={{79,-80},{52,
+          -80},{52,-81.05},{26,-81.05}}, color={0,0,127}));
+  connect(Hall2_Offset_and_Radiation.y[8], sumHallTemp.u[2]) annotation (Line(
+        points={{77,-52},{72,-52},{72,-78.95},{26,-78.95}}, color={0,0,127}));
+  connect(Hall2_Offset_and_Radiation.y[7], feedback.u1)
+    annotation (Line(points={{77,-52},{77,-50},{66.8,-50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
