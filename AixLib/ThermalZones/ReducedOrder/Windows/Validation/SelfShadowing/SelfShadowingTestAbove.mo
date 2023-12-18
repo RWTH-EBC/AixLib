@@ -19,7 +19,8 @@ model SelfShadowingTestAbove
     "Shadowing due to a projection above the window"
           annotation (Placement(transformation(extent={{56,46},{88,74}})));
   AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=
-        1.5707963267949) "Incidence angle for the window"
+        1.5707963267949) 
+    "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-26,40},{-6,60}})));
   Modelica.Blocks.Sources.Constant solAzi(k=0)
     "Constant soar azimuth angle (North)"
