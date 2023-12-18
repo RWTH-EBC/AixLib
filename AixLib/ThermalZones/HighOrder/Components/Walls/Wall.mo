@@ -187,8 +187,8 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
                      if withWindow and outside and withShield
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
-    annotation (Placement(transformation(extent={{-29,-90},{-9,-70}}),
-        iconTransformation(extent={{-29,-90},{-9,-70}})));
+    annotation (Placement(transformation(extent={{-90,-70},{-110,-50}}),
+        iconTransformation(extent={{-30,-70},{-10,-50}})));
   WindowsDoors.Door Door(
     final door_area=door_height*door_width,
     final eps=eps_door,
@@ -295,7 +295,7 @@ equation
   if outside and withWindow and withSunblind then
     if withShield then
       connect(weaBus, shadowEff.weaBus) annotation (Line(
-      points={{-19,-80},{-76,-80},{-76,-2},{-40,-2}},
+      points={{-100,-60},{-76,-60},{-76,-2},{-40,-2}},
       color={255,204,51},
       thickness=0.5,
           pattern=LinePattern.Dash),
