@@ -1,7 +1,7 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model HeatCurve
 
-  parameter Real u_lower = 15 "lower heating limit" annotation(Dialog(tab = "General", group = "Limits"));
+  parameter Real u = 15 "heating limit" annotation(Dialog(tab = "General", group = "Limits"));
   parameter Real t_sup_upper = 80 "upper supply temperature limit" annotation(Dialog(tab = "General", group = "Limits"));
   parameter Real x = -1 "slope" annotation(Dialog(tab = "General", group = "Heat Curve"));
   parameter Real b = 10 "offset" annotation(Dialog(tab = "General", group = "Heat Curve"));
@@ -98,5 +98,14 @@ equation
           origin={84,-79},
           rotation=270,
           pattern=LinePattern.None)}),                           Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Input: T_amb in Kelvin</p>
+<p>Output: T_Supply in Kelvin</p>
+<p>Setting of Heat Curve Characteristic:</p>
+<ul>
+<li>u: Ambient temperature above which only the minimum supply temperature is required in &deg;C</li>
+<li>t_supply_upper: Maximum supply temperature in &deg;C</li>
+</ul>
+</html>"));
 end HeatCurve;

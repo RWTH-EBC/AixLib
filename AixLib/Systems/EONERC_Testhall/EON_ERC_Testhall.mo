@@ -1,47 +1,28 @@
 within AixLib.Systems.EONERC_Testhall;
 model EON_ERC_Testhall
+  "Model of EON ERC Testhall including Monitoring Data and Weather Data from 25.Oct 2022 12am till 26.Oct 2023 12am"
 
-  AixLib.Fluid.Sources.Boundary_ph EHA(redeclare package Medium =
-        AixLib.Media.Air, nPorts=1)
-                "AirOut" annotation (Placement(transformation(
+  Fluid.Sources.Boundary_ph        EHA(redeclare package Medium = Media.Air,
+      nPorts=1) "AirOut" annotation (Placement(transformation(
         extent={{-2,-2},{2,2}},
         rotation=180,
-        origin={196,-24})));
-  AixLib.Fluid.Sources.Boundary_pT     ODA(
+        origin={160,46})));
+  Fluid.Sources.Boundary_pT            ODA(
+    use_X_in=true,
+    use_Xi_in=false,
     use_T_in=true,
     redeclare package Medium = AixLib.Media.Air,
-    p=101325,
     nPorts=1) "ODA"
-    annotation (Placement(transformation(extent={{198,-42},{194,-38}})));
-
-  AixLib.Fluid.Sources.Boundary_pT ret_c(
-    redeclare package Medium = AixLib.Media.Water,
+    annotation (Placement(transformation(extent={{162,28},{158,32}})));
+  Fluid.Sources.Boundary_pT        ret_c(
+    redeclare package Medium = Media.Water,
     use_T_in=false,
-    nPorts=1) annotation (Placement(transformation(extent={{124,-74},{128,-70}})));
-  AixLib.Fluid.Sources.Boundary_pT sup_c(
-    redeclare package Medium = AixLib.Media.Water,
+    nPorts=1) annotation (Placement(transformation(extent={{132,-4},{136,0}})));
+  Fluid.Sources.Boundary_pT        sup_c(
+    redeclare package Medium = Media.Water,
     p=115000,
     use_T_in=true,
-    nPorts=1) annotation (Placement(transformation(extent={{144,-72},{140,-68}})));
-  BaseClass.CCA.CCA cCA
-    annotation (Placement(transformation(extent={{-94,-30},{-56,8}})));
-  BaseClass.CPH.CPH cPH
-    annotation (Placement(transformation(extent={{-178,-56},{-136,-16}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_heatFlow(alpha=0)
-    annotation (Placement(transformation(
-        extent={{-9,-9},{9,9}},
-        rotation=270,
-        origin={-171,33})));
-
-  Modelica.Blocks.Sources.CombiTimeTable ambientAir(
-    tableOnFile=true,
-    tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/AmbientAir.txt"),
-    columns={2},
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    annotation (Placement(transformation(extent={{264,-82},{244,-62}})));
-
+    nPorts=1) annotation (Placement(transformation(extent={{110,-4},{106,0}})));
     Modelica.Blocks.Sources.CombiTimeTable CoolerInput(
     tableOnFile=true,
     tableName="measurement",
@@ -49,9 +30,8 @@ model EON_ERC_Testhall
         "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Cooler.txt"),
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2})
-    annotation (Placement(transformation(extent={{168,-108},{156,-96}})));
-
-  AixLib.Systems.ModularAHU.GenericAHU ahu(
+    annotation (Placement(transformation(extent={{92,-22},{104,-10}})));
+  ModularAHU.GenericAHU                ahu(
     redeclare package Medium1 = AixLib.Media.Air,
     redeclare package Medium2 = AixLib.Media.Water,
     T_amb=288.15,
@@ -63,196 +43,250 @@ model EON_ERC_Testhall
     preheater(
       hydraulicModuleIcon="Injection",
       m2_flow_nominal=0.3,
-      redeclare AixLib.Systems.HydraulicModules.Injection hydraulicModule(
+      redeclare HydraulicModules.Injection hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=6.3,
         valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
         pipe1(length=1.2),
-        pipe2(length=0.1),
+        pipe2(length=0.1, nNodes=1),
         pipe3(length=0.1),
         pipe4(length=2.3),
-        pipe5(length=2, fac=10),
+        pipe5(
+          length=2,
+          fac=10,
+          nNodes=1),
         pipe6(length=0.1),
         pipe7(length=1.3),
         pipe8(length=0.3),
         pipe9(length=0.3),
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))),
+              Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
+      dynamicHX(nNodes=1)),
     cooler(
       hydraulicModuleIcon="Injection2WayValve",
       m2_flow_nominal=5,
-      redeclare AixLib.Systems.HydraulicModules.Injection2WayValve
-        hydraulicModule(
+      redeclare HydraulicModules.Injection2WayValve hydraulicModule(
         pipeModel="SimplePipe",
         length=1,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_6x1(),
         Kv=25,
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
               AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN50_H05_16()))),
     heater(
       hydraulicModuleIcon="Admix",
       m2_flow_nominal=0.4,
-      redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+      redeclare HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1(),
         Kv=10,
         valveCharacteristic=
             AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
           PumpInterface(pumpParam=
               AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H05_12()),
         pipe1(length=10),
         pipe2(length=0.6),
         pipe3(length=2),
         pipe4(length=5.5, fac=10),
-        pipe5(length=10.4),
-        pipe6(length=0.6))))
-    annotation (Placement(transformation(extent={{180,-60},{94,-16}})));
+        pipe5(length=12, nNodes=1),
+        pipe6(length=0.6)),
+      dynamicHX(nNodes=1)))
+    annotation (Placement(transformation(extent={{152,10},{66,54}})));
+  ModularAHU.Controller.CtrAHUBasic                controlAHU(
+    TFlowSet=310.15,
+    TFrostProtect=273.15 + 8,
+    ctrPh(
+      useExternalTMea=false,
+      k=0.001,
+      rpm_pump=2300),
+    ctrRh(k=0.01, Ti=1000),
+    VFlowSet=3.08,
+    dpMax=5000,
+    useTwoFanCtr=true,
+    k=10)  annotation (Placement(transformation(extent={{140,60},{120,80}})));
+  BaseClass.CID.CID_approx cid
+    annotation (Placement(transformation(extent={{32,-30},{52,-10}})));
+  BaseClass.JetNozzle.JN_control_T_Hall jN
+    annotation (Placement(transformation(extent={{16,30},{36,50}})));
+  ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
+    annotation (Placement(transformation(extent={{-40,30},{-8,60}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow thermalzone_intGains_rad(alpha=0)
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-54,50})));
+  Modelica.Blocks.Sources.Constant intGains_rad(k=0)
+    annotation (Placement(transformation(extent={{-82,48},{-72,58}})));
+  BaseClass.CCA.CCA cCA
+    annotation (Placement(transformation(extent={{-104,18},{-82,38}})));
+  Controller.ControlCCA controlCCA
+    annotation (Placement(transformation(extent={{-138,20},{-120,34}})));
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+      computeWetBulbTemperature=false, filNam=
+        ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Systems/EONERC_Testhall/DataBase/Aachen_251022_251023.mos"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-162,72},{-142,92}})));
+  BoundaryConditions.WeatherData.Bus
+      weaBus "Weather data bus" annotation (Placement(transformation(extent={{-134,76},
+            {-122,88}}),         iconTransformation(extent={{190,-10},{210,10}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi
+    annotation (Placement(transformation(extent={{114,92},{134,112}})));
 
+  BaseClass.Distributor.Distributor_withoutReserve distributor_withoutReserve
+    annotation (Placement(transformation(extent={{-106,-104},{76,-48}})));
+  BaseClass.CPH.CPH cPH
+    annotation (Placement(transformation(extent={{-52,-46},{-26,-14}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cph_heatFlow(alpha=0)
+    annotation (Placement(transformation(
+        extent={{-9,-9},{9,9}},
+        rotation=0,
+        origin={-65,-11})));
   Modelica.Blocks.Sources.CombiTimeTable QFlowHall2(
     tableOnFile=true,
     tableName="measurement",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/QflowHall2.txt"),
-    columns={2},
+        "modelica://AixLib/Systems/EONERC_Testhall/DataBase/Hall2.txt"),
+    columns=2:13,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    annotation (Placement(transformation(extent={{-210,40},{-190,60}})));
-
-  Controller.ControlCCA controlCCA
-    annotation (Placement(transformation(extent={{-124,-20},{-98,0}})));
+    "12 - Qflow in W"
+    annotation (Placement(transformation(extent={{-108,-20},{-88,0}})));
   Controller.ControlCPH controlCPH
-    annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
-  AixLib.Systems.ModularAHU.Controller.CtrAHUBasic controlAHU(
-    TFlowSet=310.15,
-    TFrostProtect=273.15 + 8,
-    ctrPh(useExternalTMea=false, rpm_pump=2300),
-    ctrRh(k=0.1, Ti=1000),
-    VFlowSet=3.08,
-    dpMax=5000,
-    useTwoFanCtr=true,
-    k=1)   annotation (Placement(transformation(extent={{176,-10},{156,10}})));
-  BaseClass.Distributor.Distributor_withoutReserve distributor
-    annotation (Placement(transformation(extent={{-146,-200},{118,-110}})));
-  BaseClass.CID.CID_approx cid
-    annotation (Placement(transformation(extent={{52,-64},{72,-44}})));
-  ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
-    annotation (Placement(transformation(extent={{-38,34},{-6,66}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow thermalzone_intGains_rad(alpha=0)
-    annotation (Placement(transformation(
-        extent={{-9,-9},{9,9}},
-        rotation=0,
-        origin={-61,55})));
-  Modelica.Blocks.Sources.Constant intGains_rad(k=0)
-    annotation (Placement(transformation(extent={{-124,46},{-104,66}})));
-  Fluid.Sensors.TemperatureTwoPort senTem_Hall1(redeclare package Medium =
-        AixLib.Media.Air, m_flow_nominal=2.5) annotation (Placement(
-        transformation(
-        extent={{-7,-7},{7,7}},
-        rotation=270,
-        origin={65,9})));
+    annotation (Placement(transformation(extent={{-96,-44},{-76,-24}})));
 equation
-  connect(cph_heatFlow.port, cPH.heat_port_CPH) annotation (Line(points={{-171,24},
-          {-171,-10},{-156.677,-10},{-156.677,-21}},     color={191,0,0}));
-  connect(CoolerInput.y[1], sup_c.T_in) annotation (Line(points={{155.4,-102},{
-          148,-102},{148,-69.2},{144.4,-69.2}},color={0,0,127}));
-  connect(EHA.ports[1], ahu.port_b2)
-    annotation (Line(points={{194,-24},{180,-24}}, color={0,127,255}));
-  connect(ODA.ports[1], ahu.port_a1)
-    annotation (Line(points={{194,-40},{180,-40}}, color={0,127,255}));
-  connect(ret_c.ports[1], ahu.port_b4) annotation (Line(points={{128,-72},{
-          129.182,-72},{129.182,-60}}, color={0,127,255}));
-  connect(sup_c.ports[1], ahu.port_a4) annotation (Line(points={{140,-70},{137,
-          -70},{137,-60}}, color={0,127,255}));
-  connect(controlAHU.genericAHUBus, ahu.genericAHUBus) annotation (Line(
-      points={{156,0.1},{137,0.1},{137,-15.8}},
+  connect(CoolerInput.y[1],sup_c. T_in) annotation (Line(points={{104.6,-16},{
+          112,-16},{112,-1.2},{110.4,-1.2}},   color={0,0,127}));
+  connect(ODA.ports[1],ahu. port_a1)
+    annotation (Line(points={{158,30},{152,30}},   color={0,127,255}));
+  connect(ret_c.ports[1],ahu. port_b4) annotation (Line(points={{136,-2},{138,
+          -2},{138,4},{101.182,4},{101.182,10}},
+                                       color={0,127,255}));
+  connect(sup_c.ports[1],ahu. port_a4) annotation (Line(points={{106,-2},{106,4},
+          {109,4},{109,10}},
+                           color={0,127,255}));
+  connect(controlAHU.genericAHUBus,ahu. genericAHUBus) annotation (Line(
+      points={{120,70.1},{109,70.1},{109,54.2}},
       color={255,204,51},
       thickness=0.5));
-  connect(distributor.cph_sup, cPH.cph_supprim) annotation (Line(points={{
-          -45.6148,-125.652},{-45.6148,-94},{-164.431,-94},{-164.431,-56}},
+  connect(ahu.port_b1,cid. cid_sup_air) annotation (Line(points={{65.6091,30},{
+          58,30},{58,-24.4},{51.8,-24.4}},   color={0,127,255}));
+  connect(ahu.port_a2,cid. cid_ret_air) annotation (Line(points={{65.6091,46},{
+          54,46},{54,42},{52,42},{52,-6},{56,-6},{56,-16.8},{51.6,-16.8}},
+                                             color={0,127,255}));
+  connect(jN.jn_ret_air, ahu.port_a2) annotation (Line(points={{35.6,43.2},{
+          35.6,42},{54,42},{54,46},{65.6091,46}},
+                                  color={0,127,255}));
+  connect(ahu.port_b1, jN.jn_sup_air) annotation (Line(points={{65.6091,30},{42,
+          30},{42,35.6},{35.8,35.6}}, color={0,127,255}));
+  connect(intGains_rad.y,thermalzone_intGains_rad. Q_flow) annotation (Line(
+        points={{-71.5,53},{-68,53},{-68,50},{-60,50}},
+                                                    color={0,0,127}));
+  connect(thermalzone_intGains_rad.port,eON_ERC_Testhall. intGainsRad_port)
+    annotation (Line(points={{-48,50},{-48,48.6},{-39.68,48.6}},
+                                                              color={191,0,0}));
+  connect(controlCCA.distributeBus_CCA,cCA. dB_CCA) annotation (Line(
+      points={{-124.292,26.93},{-124.292,27.6},{-104.22,27.6}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(cCA.heat_port_CCA,eON_ERC_Testhall. intGainsConv_port) annotation (
+      Line(points={{-93,38.4},{-93,43.5},{-39.68,43.5}}, color={191,0,0}));
+  connect(weaDat.weaBus, eON_ERC_Testhall.weaBus) annotation (Line(
+      points={{-142,82},{-44,82},{-44,54.6},{-39.68,54.6}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-142,82},{-128,82}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.TDryBul, controlCCA.T_amb) annotation (Line(
+      points={{-128,82},{-128,38},{-142,38},{-142,27},{-138,27}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(jN.jn_sup_thermalzone, eON_ERC_Testhall.ports[1]) annotation (Line(
+        points={{16,35},{16,34},{-2,34},{-2,26},{-25.56,26},{-25.56,31.2}},
         color={0,127,255}));
-  connect(distributor.cph_ret, cPH.cph_retprim) annotation (Line(points={{
-          -39.4222,-125.652},{-39.4222,-90},{-150.215,-90},{-150.215,-56.25}},
+  connect(jN.jn_ret_thermalzone, eON_ERC_Testhall.ports[2]) annotation (Line(
+        points={{16,43.2},{16,42},{2,42},{2,34},{-2,34},{-2,26},{-21.8,26},{
+          -21.8,31.2}},
+                  color={0,127,255}));
+  connect(x_pTphi.phi, weaBus.relHum) annotation (Line(points={{112,96},{-128,
+          96},{-128,82}},       color={0,0,127}));
+  connect(x_pTphi.p_in, weaBus.pAtm)
+    annotation (Line(points={{112,108},{-128,108},{-128,82}},
+                                                            color={0,0,127}));
+  connect(x_pTphi.T, weaBus.TDryBul) annotation (Line(points={{112,102},{-128,
+          102},{-128,82}},      color={0,0,127}));
+  connect(ODA.T_in, weaBus.TDryBul) annotation (Line(points={{162.4,30.8},{
+          168.2,30.8},{168.2,82},{-128,82}},
+                                       color={0,0,127}));
+  connect(ODA.X_in, x_pTphi.X) annotation (Line(points={{162.4,29.2},{168,29.2},
+          {168,102},{135,102}},       color={0,0,127}));
+  connect(distributor_withoutReserve.cca_sup, cCA.cca_supprim) annotation (Line(
+        points={{-20.1679,-57.7391},{-20.1679,12},{-96.74,12},{-96.74,18}},
         color={0,127,255}));
-  connect(distributor.cca_sup, cCA.cca_supprim) annotation (Line(points={{
-          -21.4963,-125.652},{-14,-125.652},{-14,-42},{-81.46,-42},{-81.46,-30}},
-        color={0,127,255}));
-  connect(distributor.cca_ret, cCA.cca_retprim) annotation (Line(points={{
-          -16.2815,-125.652},{-16.2815,-36},{-67.4,-36},{-67.4,-30}},
-                                                                    color={0,
+  connect(distributor_withoutReserve.cca_ret, cCA.cca_retprim) annotation (Line(
+        points={{-16.5728,-57.7391},{-16.5728,12},{-88.6,12},{-88.6,18}}, color=
+         {0,127,255}));
+  connect(distributor_withoutReserve.cid_sup, cid.cid_sup_water) annotation (
+      Line(points={{41.6222,-57.7391},{40.8,-57.7391},{40.8,-29.8}}, color={0,
           127,255}));
-  connect(distributor.rlt_ph_sup, ahu.port_a3) annotation (Line(points={{102.03,
-          -147.957},{102.03,-142},{172,-142},{172,-66},{168.273,-66},{168.273,
-          -60}}, color={0,127,255}));
-  connect(distributor.rlt_ph_ret, ahu.port_b3) annotation (Line(points={{102.03,
-          -153.826},{102.03,-148},{172,-148},{172,-66},{160.455,-66},{160.455,
-          -60}}, color={0,127,255}));
-  connect(distributor.rlt_h_sup, ahu.port_a5) annotation (Line(points={{101.704,
-          -129.565},{122,-129.565},{122,-86},{121.364,-86},{121.364,-60}},
-        color={0,127,255}));
-  connect(distributor.rlt_h_ret, ahu.port_b5) annotation (Line(points={{102.03,
-          -134.652},{102.03,-126},{113.936,-126},{113.936,-60}}, color={0,127,
-          255}));
-  connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (
-      Line(
-      points={{-194.2,-40.1},{-194.2,-37.875},{-178,-37.875}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(controlCCA.distributeBus_CCA, cCA.dB_CCA) annotation (Line(
-      points={{-104.2,-10.1},{-104.2,-11.76},{-94.38,-11.76}},
-      color={255,204,51},
-      thickness=0.5));
-
-  connect(ambientAir.y[1], ODA.T_in) annotation (Line(points={{243,-72},{236,
-          -72},{236,-39.2},{198.4,-39.2}}, color={0,0,127}));
-  connect(QFlowHall2.y[1], cph_heatFlow.Q_flow)
-    annotation (Line(points={{-189,50},{-171,50},{-171,42}}, color={0,0,127}));
-  connect(ambientAir.y[1], controlCCA.T_amb) annotation (Line(points={{243,-72},
-          {236,-72},{236,-80},{-128,-80},{-128,-10},{-124,-10}},
-                      color={0,0,127}));
-  connect(ahu.port_b1, cid.cid_sup_air) annotation (Line(points={{93.6091,-40},
-          {84,-40},{84,-58.4},{71.8,-58.4}}, color={0,127,255}));
-  connect(ahu.port_a2, cid.cid_ret_air) annotation (Line(points={{93.6091,-24},
-          {78,-24},{78,-50.8},{71.6,-50.8}}, color={0,127,255}));
-  connect(distributor.cid_sup, cid.cid_sup_water) annotation (Line(points={{68.1333,
-          -125.652},{68.1333,-63.8},{60.8,-63.8}},         color={0,127,255}));
-  connect(distributor.cid_ret, cid.cid_ret_water) annotation (Line(points={{74,
-          -125.652},{74,-63.8},{64.4,-63.8}}, color={0,127,255}));
-  connect(ambientAir.y[1], controlCPH.T_amb) annotation (Line(points={{243,-72},
-          {236,-72},{236,-80},{-128,-80},{-128,-62},{-222,-62},{-222,-40},{
-          -214.4,-40}}, color={0,0,127}));
-  connect(controlCPH.distributeBus_CPH, distributor.distributeBus_DHS)
-    annotation (Line(
-      points={{-194.2,-40.1},{-188,-40.1},{-188,-104},{-96.1333,-104},{-96.1333,
-          -145.804}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(controlCCA.distributeBus_CCA, distributor.distributeBus_DHS)
-    annotation (Line(
-      points={{-104.2,-10.1},{-104.2,-78.05},{-96.1333,-78.05},{-96.1333,
-          -145.804}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(cCA.heat_port_CCA, eON_ERC_Testhall.intGainsConv_port) annotation (
-      Line(points={{-75,8.76},{-75,48.4},{-37.68,48.4}}, color={191,0,0}));
-  connect(intGains_rad.y, thermalzone_intGains_rad.Q_flow) annotation (Line(
-        points={{-103,56},{-86.5,56},{-86.5,55},{-70,55}}, color={0,0,127}));
-  connect(thermalzone_intGains_rad.port, eON_ERC_Testhall.intGainsRad_port)
-    annotation (Line(points={{-52,55},{-52,53.84},{-37.68,53.84}}, color={191,0,
-          0}));
-  connect(senTem_Hall1.port_b, ahu.port_a2) annotation (Line(points={{65,2},{64,
-          2},{64,-24},{93.6091,-24}}, color={0,127,255}));
-  connect(ahu.port_b1, eON_ERC_Testhall.ports[1]) annotation (Line(points={{
-          93.6091,-40},{76,-40},{76,-26},{-23.56,-26},{-23.56,35.28}}, color={0,
+  connect(distributor_withoutReserve.cid_ret, cid.cid_ret_water) annotation (
+      Line(points={{45.6667,-57.7391},{44.4,-57.7391},{44.4,-29.8}}, color={0,
           127,255}));
-  connect(senTem_Hall1.port_a, eON_ERC_Testhall.ports[2]) annotation (Line(
-        points={{65,16},{64,16},{64,22},{-19.8,22},{-19.8,35.28}}, color={0,127,
-          255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-                                                                 Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-240,-220},{300,100}})),
-    experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
+  connect(distributor_withoutReserve.rlt_h_sup, ahu.port_a5) annotation (Line(
+        points={{64.7654,-60.1739},{64.7654,4},{93.3636,4},{93.3636,10}}, color=
+         {0,127,255}));
+  connect(distributor_withoutReserve.rlt_h_ret, ahu.port_b5) annotation (Line(
+        points={{64.9901,-63.3391},{64.9901,-62},{85.9364,-62},{85.9364,10}},
+        color={0,127,255}));
+  connect(distributor_withoutReserve.rlt_ph_sup, ahu.port_a3) annotation (Line(
+        points={{64.9901,-71.6174},{64.9901,-70},{120,-70},{120,-6},{128,-6},{
+          128,-8},{140.273,-8},{140.273,10}}, color={0,127,255}));
+  connect(ahu.port_b3, distributor_withoutReserve.rlt_ph_ret) annotation (Line(
+        points={{132.455,10},{132.455,-75.2696},{64.9901,-75.2696}}, color={0,
+          127,255}));
+  connect(distributor_withoutReserve.cph_sup, cPH.cph_supprim) annotation (Line(
+        points={{-36.7951,-57.7391},{-36,-57.7391},{-36,-58},{-38,-58},{-38,-52},
+          {-43.6,-52},{-43.6,-46}}, color={0,127,255}));
+  connect(distributor_withoutReserve.cph_ret, cPH.cph_retprim) annotation (Line(
+        points={{-32.5259,-57.7391},{-32.5259,-54},{-34.8,-54},{-34.8,-46.2}},
+        color={0,127,255}));
+  connect(cph_heatFlow.port, cPH.heat_port_CPH) annotation (Line(points={{-56,-11},
+          {-38.8,-11},{-38.8,-18}},                      color={191,0,0}));
+  connect(QFlowHall2.y[12], cph_heatFlow.Q_flow) annotation (Line(points={{-87,
+          -10},{-80.5,-10},{-80.5,-11},{-74,-11}}, color={0,0,127}));
+  connect(controlCPH.distributeBus_CPH, cPH.distributeBus_CPH) annotation (Line(
+      points={{-76.2,-34.1},{-76.2,-31.5},{-52,-31.5}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.TDryBul, controlCPH.T_amb) annotation (Line(
+      points={{-128,82},{-128,38},{-142,38},{-142,-34},{-96.4,-34}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(ahu.port_b2, EHA.ports[1])
+    annotation (Line(points={{152,46},{158,46}}, color={0,127,255}));
+  connect(controlCPH.distributeBus_CPH, distributor_withoutReserve.distributeBus_DHS)
+    annotation (Line(
+      points={{-76.2,-34.1},{-71.6222,-34.1},{-71.6222,-70.2783}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(controlCCA.distributeBus_CCA, distributor_withoutReserve.distributeBus_DHS)
+    annotation (Line(
+      points={{-124.292,26.93},{-114,26.93},{-114,-50},{-71.6222,-50},{-71.6222,
+          -70.2783}},
+      color={255,204,51},
+      thickness=0.5));
+  annotation (
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,-140},{180,
+            140}})),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-180,-140},{
+            180,140}})),
+    experiment(
+      StartTime=1000000,
+      StopTime=10000000,
+      Interval=3600,
+      __Dymola_Algorithm="Dassl"));
 end EON_ERC_Testhall;

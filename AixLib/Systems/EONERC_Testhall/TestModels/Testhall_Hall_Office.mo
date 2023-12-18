@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_Testhall;
+within AixLib.Systems.EONERC_Testhall.TestModels;
 model Testhall_Hall_Office
 
   AixLib.Fluid.Sources.Boundary_ph EHA(redeclare package Medium =
@@ -192,8 +192,8 @@ model Testhall_Hall_Office
     dpMax=5000,
     useTwoFanCtr=true,
     k=10)  annotation (Placement(transformation(extent={{176,-10},{156,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium =
-        AixLib.Media.Air, m_flow_nominal=2.64)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senHallTemp(redeclare package Medium
+      = AixLib.Media.Air, m_flow_nominal=2.64)
                                             annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
@@ -285,17 +285,18 @@ equation
      Line(points={{-36.4889,-117.113},{-36.4889,-8},{-94.4,-8},{-94.4,30}},
         color={0,127,255}));
   connect(distributor_withoutReserve.cph_sup, cPH.cph_supprim) annotation (Line(
-        points={{-16.2815,-116.696},{-16.2815,-94},{-164.431,-94},{-164.431,-56}},
+        points={{-45.6148,-116.696},{-45.6148,-94},{-164.431,-94},{-164.431,-56}},
         color={0,127,255}));
   connect(distributor_withoutReserve.cph_ret, cPH.cph_retprim) annotation (Line(
-        points={{-12.0444,-116.696},{-12.0444,-90},{-150.215,-90},{-150.215,
+        points={{-39.4222,-116.696},{-39.4222,-90},{-150.215,-90},{-150.215,
           -56.25}},
         color={0,127,255}));
   connect(distributor_withoutReserve.cca_sup, cCA.cca_supprim) annotation (Line(
-        points={{37.4963,-115.861},{36,-115.861},{36,-10},{-31.46,-10},{-31.46,
+        points={{-21.4963,-116.696},{36,-116.696},{36,-10},{-31.46,-10},{-31.46,
           2}}, color={0,127,255}));
   connect(distributor_withoutReserve.cca_ret, cCA.cca_retprim) annotation (Line(
-        points={{42.0593,-116.278},{42.0593,-4},{-17.4,-4},{-17.4,2}}, color={0,
+        points={{-16.2815,-116.696},{-16.2815,-4},{-17.4,-4},{-17.4,2}},
+                                                                       color={0,
           127,255}));
   connect(distributor_withoutReserve.cid_sup, cID.cid_supprim) annotation (Line(
         points={{68.1333,-116.696},{68.1333,8},{60.4,8},{60.4,18.2}}, color={0,

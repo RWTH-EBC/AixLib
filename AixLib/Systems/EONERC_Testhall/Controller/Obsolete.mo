@@ -72,7 +72,7 @@ package Obsolete
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-90,-44})));
-    Modelica.Blocks.Sources.Constant nset(k=4500) annotation (Placement(
+    Modelica.Blocks.Sources.Constant nset(k=4800) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
