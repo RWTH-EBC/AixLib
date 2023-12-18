@@ -183,10 +183,10 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     lenShie=lenWinShie,
     heiWinMin=heiWinShadMin,
     heiWinMax=heiWinShadMax,
-    aziDeg=aziDegWin)
-                     if withWindow and outside and withShield
+    aziDeg=aziDegWin) if withWindow and outside and withShield and withSunblind
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
-  BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield "Weather bus"
+  BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield and withSunblind
+    "Weather bus"
     annotation (Placement(transformation(extent={{-90,-70},{-110,-50}}),
         iconTransformation(extent={{-30,-70},{-10,-50}})));
   WindowsDoors.Door Door(
@@ -482,12 +482,8 @@ equation
   <a href=
   \"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a>
 </p>
+</html>", revisions="<html>
 <ul>
-  <li>
-    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
-    Add short wave connector to pass wall and window parameters.
-  </li>
   <li>
     <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
