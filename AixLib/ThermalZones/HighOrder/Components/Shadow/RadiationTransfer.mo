@@ -63,5 +63,17 @@ equation
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
           lineThickness=1)}),                                    Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li><i>December 2023,&nbsp;</i>by Jun Jiang:<br>Implemented.<br>This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1433\">#1433</a>.</li>
+</ul>
+</html>", info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>This model converts weather data to the solar radiation port.</p>
+<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
+<p>See the submodules in the model.</p>
+<p><b><span style=\"color: #008000;\">Assumptions</span> </b></p>
+<p>Vertical wall surface (til = 90&deg;).</p>
+</html>"));
 end RadiationTransfer;

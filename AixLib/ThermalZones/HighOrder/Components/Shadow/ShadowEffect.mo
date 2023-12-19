@@ -116,5 +116,26 @@ equation
           extent={{-100,140},{100,100}},
           textString="%name",
           textColor={0,0,255})}),                                Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>This model represents the reducing effect of solar radiation caused by the shadow on the window surface. </p>
+<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
+<p>The model calculates the ratio of the shadow on the window glazing area to determine the radiation reduction.</p>
+<ul>
+<li>For the area without shadow, the solar radiation remains unchanged.</li>
+<li>For the area with shadow, the direct radiation is reduced to zero, the diffuse radiation is reduced according to the defined type.</li>
+</ul>
+<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<ul>
+<li>The diffuse radiation has a vertical incident angle between 0&deg; (horizontal to the ground) and 90&deg; (vertical to the ground, upward).</li>
+<li>The reduction of reflected radiation is not considered.</li>
+</ul>
+<p><b><span style=\"color: #008000;\">Example Results</span> </b></p>
+<p><a href=\"AixLib.ThermalZones.HighOrder.Components.Shadow.Examples.ShadowEffectTest\">AixLib.ThermalZones.HighOrder.Components.Shadow.Examples.ShadowEffectTest</a> </p>
+</html>", revisions="<html>
+<ul>
+<li><i>December 2023,&nbsp;</i>by Jun Jiang:<br>Implemented.<br>This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1433\">#1433</a>.</li>
+</ul>
+</html>"));
 end ShadowEffect;

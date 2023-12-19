@@ -30,9 +30,10 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"), Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span> </b></p>
-<p>Simulation to test the <a href=\"AixLib.Building.Components.Shadow.ShadowLength\">ShadowLength</a> model with different facade azimuth angles and sun shied lengths. </p>
+<p>Simulation to test the <a href=\"AixLib.Building.Components.Shadow.ShadowLength\">ShadowLength</a> model with different facade azimuth angles and sun shied lengths.</p>
+</html>", revisions="<html>
 <ul>
-<li><i>November, 2023&nbsp;</i> by Jun Jiang:<br>Implemented. </li>
+<li><i>November 2023,&nbsp;</i>by Jun Jiang:<br>Implemented.<br>This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1433\">#1433</a>.</li>
 </ul>
 </html>"));
 end ShadowLengthTest;

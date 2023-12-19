@@ -122,5 +122,24 @@ equation
           extent={{-100,140},{100,100}},
           textString="%name",
           textColor={0,0,255})}),
-      Diagram(coordinateSystem(preserveAspectRatio=false)));
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>This model represents the shadow length on a vertical wall caused by a horizontal shield on it. </p>
+<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
+<ul>
+<li>The model calculates the wall solar azimuth and the zenith angles to determine if a shadow is present on the wall surface, then outputs it as a boolean value.</li>
+<li>When the shadow is present, the model calculates the shadow length.</li>
+</ul>
+<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<ul>
+<li>The wall is vertical (til = 90&deg;), while the shield is horizontal.</li>
+</ul>
+<p><b><span style=\"color: #008000;\">Example Results</span> </b></p>
+<p><a href=\"AixLib.ThermalZones.HighOrder.Components.Shadow.Examples.ShadowLengthTest\">AixLib.ThermalZones.HighOrder.Components.Shadow.Examples.ShadowLengthTest</a> </p>
+</html>", revisions="<html>
+<ul>
+<li><i>December 2023,&nbsp;</i>by Jun Jiang:<br>Implemented.<br>This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1433\">#1433</a>.</li>
+</ul>
+</html>"));
 end ShadowLength;
