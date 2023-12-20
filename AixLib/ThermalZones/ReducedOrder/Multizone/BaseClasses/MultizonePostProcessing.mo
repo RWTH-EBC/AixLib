@@ -172,7 +172,7 @@ model MultizonePostProcessing
     each final quantity="Energy",
     each final unit="J",
     each displayUnit="kWh")
-    "Heat gains based on internal gains for each zone from from lights[1], machines[2], and persons[3]"
+    "Heat gains based on internal gains for each zone from lights[1], machines[2], and persons[3]"
     annotation (Placement(transformation(extent={{100,-122},{120,-102}}),
         iconTransformation(extent={{100,-130},{120,-110}})));
   Modelica.Blocks.Interfaces.RealInput QIntGains_flow[numZones,3](each final
