@@ -155,7 +155,7 @@ partial model PartialMultizone "Partial model for multizone models"
   //Swimming pool params
   parameter Boolean use_pools_tot = false "use swimming pools within at least one zone of the multizone" annotation(Dialog(tab="Moisture", group="Pools"));
   replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare
-          package                                                                                Medium =
+          package Medium =
             AixLib.Media.Water
               "Water")), Dialog(enable=use_pools_tot,tab="Moisture", group="Pools"));
 
@@ -199,7 +199,7 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{80,-100},{100,-80}})));
   Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](each final
       quantity="HeatFlowRate", each final unit="W") if ASurTot > 0 or VAir > 0
-    "Heat flow based on internal gains for each zone from persons, machines, and light"
+    "Heat flow based on internal gains from lights[1], machines[2], and persons[3]"
                         annotation (Placement(transformation(extent={{100,-90},{
             120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
   Modelica.Blocks.Interfaces.RealInput timeOpe
