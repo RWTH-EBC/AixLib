@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.PhotovoltaicThermal;
+within AixLib.DataBase.PhotovoltaicThermal;
 record PhotovoltaicThermalBaseDataDefinitionElectrical
   "Base Data Definition for the electrical part of a photovoltaic thermal collector"
   extends Modelica.Icons.Record;
@@ -7,12 +7,15 @@ record PhotovoltaicThermalBaseDataDefinitionElectrical
   parameter Real m(unit = "W/(m.m.K)") "gradient of linear approximation";
 
   annotation(Documentation(revisions="<html><ul>
- <p>September 2023, Philipp Schmitz, Fabian Wüllhorst </p>
-<ul>
-<li>implemented </li>
+  <p>
+    September 2023, Philipp Schmitz, Fabian Wüllhorst
+  </p>
+  <ul>
+    <li>implemented
+    </li>
+  </ul>
 </ul>
-</html>", info="<html>
-<h4>
+</html>", info="<html><h4>
   Overview
 </h4>
 <p>
@@ -23,7 +26,8 @@ record PhotovoltaicThermalBaseDataDefinitionElectrical
   References
 </h4>
 <p>
-  Base data definition for record to be used in model <a href=\"modelica://AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal\">AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal</a>.
+  Base data definition for record to be used in model <a href=
+  \"modelica://AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal\">AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal</a>.
 </p>
 </html>"));
 end PhotovoltaicThermalBaseDataDefinitionElectrical;

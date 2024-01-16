@@ -70,30 +70,81 @@ equation
           70},{-52.4,68.96}}, color={0,0,127}));
   connect(TAir, eleEff.TAir) annotation (Line(points={{-60,100},{-60,76},{34,76},
           {34,66.96}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<h4>Overview</h4>
-<p>Simplified model of a photovoltaic thermal collector, which builds upon the solar thermal model. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit and an electrical power output.</p>
-<h4>Concept</h4>
-<p>The model maps solar collector efficiency based on the equation </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/HeatExchanger/SolarThermal/equation-vRK5Io7E.png\"/> </p>
-<p>and similar for the electrical efficiency a linear approximation is used. Values for the linear and quadratic coefficients for the thermal efficiency as well as the coefficients for the linear approximation are derived from the thesis &quot;<a href=\"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">Thermal management of PVT collectors: Development and modelling of highly efficient glazed, flat plate PVT collectors with low emissivity coatings and overheating protection</a>&quot; by Markus L&auml;mmle, p.43 Figure 3.12. The underlying data was validated with the following assumptions: </p>
+  annotation (Documentation(info="<html><h4>
+  Overview
+</h4>
+<p>
+  Simplified model of a photovoltaic thermal collector, which builds
+  upon the solar thermal model. Inputs are outdoor air temperature and
+  solar irradiation. Based on these values and the collector properties
+  from database, this model creates a heat flow to the fluid circuit
+  and an electrical power output.
+</p>
+<h4>
+  Concept
+</h4>
+<p>
+  The model maps solar collector efficiency based on the equation
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/HeatExchanger/SolarThermal/equation-vRK5Io7E.png\"
+  alt=\"1\">
+</p>
+<p>
+  and similar for the electrical efficiency a linear approximation is
+  used. Values for the linear and quadratic coefficients for the
+  thermal efficiency as well as the coefficients for the linear
+  approximation are derived from the thesis \"<a href=
+  \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">Thermal
+  management of PVT collectors: Development and modelling of highly
+  efficient glazed, flat plate PVT collectors with low emissivity
+  coatings and overheating protection</a>\" by Markus Lämmle, p.43
+  Figure 3.12. The underlying data was validated with the following
+  assumptions:
+</p>
 <ul>
-<li>solar irradiation G=1000 W/m^2</li>
-<li>windspeed Uwind=3m/s</li>
-<li>ambient temperature Ta= 25&deg;C</li>
+  <li>solar irradiation G=1000 W/m^2
+  </li>
+  <li>windspeed Uwind=3m/s
+  </li>
+  <li>ambient temperature Ta= 25°C
+  </li>
 </ul>
-<h4>Known Limitations</h4>
+<h4>
+  Known Limitations
+</h4>
 <ul>
-<li>Connected directly with Sources.TempAndRad, this model only represents a horizontal collector. There is no calculation for radiation on tilted surfaces. </li>
-<li>With the standard BaseParameters, this model uses water as working fluid </li>
+  <li>Connected directly with Sources.TempAndRad, this model only
+  represents a horizontal collector. There is no calculation for
+  radiation on tilted surfaces.
+  </li>
+  <li>With the standard BaseParameters, this model uses water as
+  working fluid
+  </li>
 </ul>
-<h4>Example Results</h4>
-<p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a> </p>
-<h5>Parameters </h5>
-<p>This model is an extension of <a href=\"modelica://AixLib.Fluid.Solar.Thermal.SolarThermal\">AixLib.Fluid.Solar.Thermal.SolarThermal</a>. Therefore the parameters can be found in the base model. </p>
-<p><br>September 2023, Philipp Schmitz, Fabian W&uuml;llhorst </p>
+<h4>
+  Example Results
+</h4>
+<p>
+  <a href=
+  \"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a>
+</p>
+<h5>
+  Parameters
+</h5>
+<p>
+  This model is an extension of <a href=
+  \"modelica://AixLib.Fluid.Solar.Thermal.SolarThermal\">AixLib.Fluid.Solar.Thermal.SolarThermal</a>.
+  Therefore the parameters can be found in the base model.
+</p>
+<p>
+  <br/>
+  September 2023, Philipp Schmitz, Fabian Wüllhorst
+</p>
 <ul>
-<li>implemented </li>
+  <li>implemented
+  </li>
 </ul>
 </html>"),  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{
               -84,80},{84,-80}},                                                                                                                            lineColor = {255, 128, 0},
