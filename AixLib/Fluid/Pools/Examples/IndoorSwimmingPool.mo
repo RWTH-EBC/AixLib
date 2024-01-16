@@ -2,7 +2,10 @@ within AixLib.Fluid.Pools.Examples;
 model IndoorSwimmingPool "Example of an indoor swimming pool"
     extends Modelica.Icons.Example;
   .AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimming(poolParam=
-        AixLib.DataBase.Pools.SportPool(), redeclare package WaterMedium =
+        AixLib.DataBase.Pools.SportPool(),
+    poolWallParam=
+        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction(),
+                                           redeclare package WaterMedium =
         WaterMedium)
     annotation (Placement(transformation(extent={{-20,-40},{30,16}})));
 
