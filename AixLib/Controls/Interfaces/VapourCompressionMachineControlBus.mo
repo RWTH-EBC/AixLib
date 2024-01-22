@@ -60,18 +60,17 @@ annotation (
 
   // Non Manufacturer Models only
 
-  Real PLRSet "Part load ratio compressor";
 
   Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
+   Modelica.Units.SI.Power QEva "evaporation heat flow";
+    Modelica.Units.SI.Power QCon "condenser heat flow";
+
 
   Modelica.Units.SI.Power QEvapFullLoad "Nominal evaporation heat flow";
 
- Real mFlowWaterRel;
 
  Real mFlowSet;
- Real mFlowSetExternal;
 
- Modelica.Units.SI.ThermodynamicTemperature THotSet;
  Modelica.Units.SI.ThermodynamicTemperature TSourceSet;
 
  Boolean OnOff;

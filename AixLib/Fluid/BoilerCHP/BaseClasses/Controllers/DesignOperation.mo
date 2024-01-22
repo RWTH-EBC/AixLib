@@ -1,31 +1,33 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model DesignOperation "Operating for design conditions"
 
-  parameter Modelica.Units.SI.TemperatureDifference DelTDes=20
-    "Design temperature difference between supply and return";
-  parameter Modelica.Units.SI.Temperature TRetDes=273.15 + 60
-    "Design return temperature";
-  parameter Modelica.Units.SI.HeatFlowRate QDes=50000 "Design thermal capacity";
-  Modelica.Blocks.Sources.RealExpression tReturnNom(y=TRetDes)
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Design thermal capacity";
+
+    parameter Modelica.Units.SI.Temperature THotNom=273.15 + 80
+    "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
+
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15 + 60
+    "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
+
+
+
+  Modelica.Blocks.Sources.RealExpression ReturnTemp(y=TColdNom)
     "Nominal return temperature"
     annotation (Placement(transformation(extent={{-100,6},{-54,30}})));
 
-  Modelica.Blocks.Sources.RealExpression dTNominal(y=DelTDes)
-    "Nominal temperature differences"
-    annotation (Placement(transformation(extent={{-100,-36},{-50,-14}})));
-  Modelica.Blocks.Sources.RealExpression q_rel(y=1) "realtive power"
+  Modelica.Blocks.Sources.RealExpression y_fullLoad(y=1) "realtive power"
     annotation (Placement(transformation(extent={{-100,-16},{-54,8}})));
 
-  Modelica.Blocks.Sources.RealExpression nominalLosses(y=QDes*0.003)
-                                     "Nominal Heat Losses"
-    annotation (Placement(transformation(extent={{-100,68},{-54,92}})));
-  Modelica.Blocks.Sources.RealExpression qNom(y=QDes)
+  Modelica.Blocks.Sources.RealExpression conductance(y=0.0465*QNom + 4.9891)
+    "Thermal conductance"
+    annotation (Placement(transformation(extent={{-98,54},{-52,78}})));
+  Modelica.Blocks.Sources.RealExpression NomCap(y=QNom)
     "Nominal thermal capacity"
-    annotation (Placement(transformation(extent={{-100,40},{-54,64}})));
+    annotation (Placement(transformation(extent={{-98,28},{-52,52}})));
   Modelica.Blocks.Math.Division division
-    annotation (Placement(transformation(extent={{26,48},{46,68}})));
+    annotation (Placement(transformation(extent={{58,48},{78,68}})));
   Modelica.Blocks.Interfaces.RealOutput designPowerDemand(quantity="Power",
-      final unit="W") "design power demand" annotation (Placement(
+      final unit="W") "Nominal fuel demand" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -35,44 +37,65 @@ model DesignOperation "Operating for design conditions"
         origin={110,0})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4_2
     annotation (Placement(transformation(extent={{18,-16},{38,4}})));
-  SDF.NDTable boilerEffciency2(
+  SDF.NDTable boilerEffciency(
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/Boiler/General/Boiler_Generic_Performance_Map.sdf"),
-    dataset="/Performance_Map",
+        "modelica://AixLib/DataBase/Boiler/General/Boiler_Generic_Characteristic_Chart.sdf"),
+
+    dataset="/Characteristic chart",
     dataUnit="-",
-    scaleUnits={"K","-","-","K"},
+    scaleUnits={"K","K","-","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
-    extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)   "Characteristic chart"
     annotation (Placement(transformation(extent={{54,-16},{74,4}})));
 
   Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-32,64},{-12,84}})));
+    annotation (Placement(transformation(extent={{20,54},{40,74}})));
 
+  Modelica.Blocks.Math.Add add1(k1=-1)
+    annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+  Modelica.Blocks.Sources.RealExpression ReturnTemp1(y=TColdNom)
+    "Nominal return temperature"
+    annotation (Placement(transformation(extent={{-100,-56},{-54,-32}})));
+  Modelica.Blocks.Sources.RealExpression SupplyTemp(y=THotNom)
+    "Nominal supply temperature"
+    annotation (Placement(transformation(extent={{-100,-78},{-54,-54}})));
+  Modelica.Blocks.Sources.RealExpression SupplyTemp1(y=THotNom - 293.15)
+    "Nominal supply temperature"
+    annotation (Placement(transformation(extent={{-100,80},{-54,104}})));
+  Modelica.Blocks.Math.Product losses "Nominal boiler losses"
+    annotation (Placement(transformation(extent={{-32,76},{-12,96}})));
 equation
 
-  connect(multiplex4_2.y, boilerEffciency2.u)
+  connect(multiplex4_2.y, boilerEffciency.u)
     annotation (Line(points={{39,-6},{52,-6}}, color={0,0,127}));
-  connect(boilerEffciency2.y, division.u2) annotation (Line(points={{75,-6},{80,
-          -6},{80,30},{8,30},{8,52},{24,52}},   color={0,0,127}));
-  connect(q_rel.y, multiplex4_2.u3[1]) annotation (Line(points={{-51.7,-4},{-34,
-          -4},{-34,-9},{16,-9}}, color={0,0,127}));
-  connect(dTNominal.y, multiplex4_2.u4[1]) annotation (Line(points={{-47.5,-25},
-          {-20,-25},{-20,-16},{16,-16},{16,-15}},
-                                         color={0,0,127}));
-  connect(nominalLosses.y, add.u1)
-    annotation (Line(points={{-51.7,80},{-34,80}}, color={0,0,127}));
-  connect(qNom.y, add.u2) annotation (Line(points={{-51.7,52},{-40,52},{-40,68},
-          {-34,68}}, color={0,0,127}));
-  connect(add.y, division.u1) annotation (Line(points={{-11,74},{16,74},{16,64},
-          {24,64}}, color={0,0,127}));
+  connect(boilerEffciency.y, division.u2) annotation (Line(points={{75,-6},{80,-6},
+          {80,22},{50,22},{50,52},{56,52}}, color={0,0,127}));
+  connect(y_fullLoad.y, multiplex4_2.u3[1]) annotation (Line(points={{-51.7,-4},
+          {-34,-4},{-34,-9},{16,-9}}, color={0,0,127}));
+  connect(NomCap.y, add.u2) annotation (Line(points={{-49.7,40},{-40,40},{-40,58},
+          {18,58}}, color={0,0,127}));
+  connect(add.y, division.u1) annotation (Line(points={{41,64},{56,64}},
+                    color={0,0,127}));
   connect(division.y, designPowerDemand)
-    annotation (Line(points={{47,58},{110,58}}, color={0,0,127}));
-  connect(q_rel.y, multiplex4_2.u2[1]) annotation (Line(points={{-51.7,-4},{-34,
-          -4},{-34,-3},{16,-3}}, color={0,0,127}));
-  connect(tReturnNom.y, multiplex4_2.u1[1]) annotation (Line(points={{-51.7,18},
+    annotation (Line(points={{79,58},{110,58}}, color={0,0,127}));
+  connect(y_fullLoad.y, multiplex4_2.u2[1]) annotation (Line(points={{-51.7,-4},
+          {-34,-4},{-34,-3},{16,-3}}, color={0,0,127}));
+  connect(ReturnTemp.y, multiplex4_2.u1[1]) annotation (Line(points={{-51.7,18},
           {-10,18},{-10,3},{16,3}}, color={0,0,127}));
+  connect(ReturnTemp1.y, add1.u1)
+    annotation (Line(points={{-51.7,-44},{-42,-44}}, color={0,0,127}));
+  connect(SupplyTemp.y, add1.u2) annotation (Line(points={{-51.7,-66},{-42,-66},
+          {-42,-56}}, color={0,0,127}));
+  connect(add1.y, multiplex4_2.u4[1]) annotation (Line(points={{-19,-50},{8,-50},
+          {8,-15},{16,-15}}, color={0,0,127}));
+  connect(conductance.y, losses.u2) annotation (Line(points={{-49.7,66},{-40,66},
+          {-40,80},{-34,80}}, color={0,0,127}));
+  connect(SupplyTemp1.y, losses.u1)
+    annotation (Line(points={{-51.7,92},{-34,92}}, color={0,0,127}));
+  connect(losses.y, add.u1) annotation (Line(points={{-11,86},{0,86},{0,70},{18,
+          70}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},

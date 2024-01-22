@@ -62,18 +62,18 @@ package HeatPump_Sources
       Ti=20,
       yMax=1,
       Td=1,
-      yMin=0.01,
+      yMin=0.1,
       initType=Modelica.Blocks.Types.Init.InitialOutput,
       y_start=1)
       annotation (Placement(transformation(extent={{-66,-68},{-46,-48}})));
     Modelica.Blocks.Math.Add add(k2=-1)
-      annotation (Placement(transformation(extent={{-122,-94},{-102,-74}})));
+      annotation (Placement(transformation(extent={{-130,-68},{-110,-48}})));
     Modelica.Blocks.Sources.RealExpression mFlowEva1(y=3)
                       "massflow heat source"
-      annotation (Placement(transformation(extent={{-132,-70},{-108,-46}})));
-    Modelica.Blocks.Math.Gain gain(k=-1)
+      annotation (Placement(transformation(extent={{-172,-76},{-148,-52}})));
+    Modelica.Blocks.Math.Gain gain
       annotation (Placement(transformation(extent={{-90,-90},{-78,-78}})));
-    Modelica.Blocks.Math.Gain gain1(k=-1)
+    Modelica.Blocks.Math.Gain gain1
       annotation (Placement(transformation(extent={{-94,-64},{-82,-52}})));
     Modelica.Blocks.Math.Product product1
       annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
@@ -106,28 +106,13 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(gain.y, conPID.u_m) annotation (Line(points={{-77.4,-84},{-56,-84},
-            {-56,-70}}, color={0,0,127}));
-    connect(mFlowEva1.y, gain1.u)
-      annotation (Line(points={{-106.8,-58},{-95.2,-58}}, color={0,0,127}));
-    connect(gain1.y, conPID.u_s)
-      annotation (Line(points={{-81.4,-58},{-68,-58}}, color={0,0,127}));
     connect(division1.y, product1.u1) annotation (Line(points={{19,-50},{12,-50},
             {12,-32},{-4,-32}}, color={0,0,127}));
     connect(product1.y, bouEvap_a.m_flow_in) annotation (Line(points={{-27,-38},
             {-32,-38},{-32,-11.2},{13.2,-11.2}}, color={0,0,127}));
-    connect(switch1.y, add.u1) annotation (Line(points={{1,50},{16,50},{16,16},
-            {-156,16},{-156,-78},{-124,-78}}, color={0,0,127}));
-    connect(add.y, gain.u)
-      annotation (Line(points={{-101,-84},{-91.2,-84}}, color={0,0,127}));
-    connect(sigBus.TEvaOutMea, add.u2) annotation (Line(
-        points={{0.09,100.08},{0.09,80},{-170,80},{-170,-90},{-124,-90}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
+    connect(switch1.y, add.u1) annotation (Line(points={{1,50},{4,50},{4,16},{
+            -50,16},{-50,14},{-132,14},{-132,-52}},
+                                              color={0,0,127}));
     connect(sigBus.TSourceSet, switch1.u3) annotation (Line(
         points={{0.09,100.08},{0,100.08},{0,80},{-36,80},{-36,58},{-22,58}},
         color={255,204,51},
@@ -150,6 +135,23 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(sigBus.TEvaOutMea, gain.u) annotation (Line(
+        points={{0.09,100.08},{2,100.08},{2,-12},{-94,-12},{-94,-84},{-91.2,-84}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(gain.y, conPID.u_m) annotation (Line(points={{-77.4,-84},{-68,-84},
+            {-68,-86},{-56,-86},{-56,-70}}, color={0,0,127}));
+    connect(mFlowEva1.y, add.u2)
+      annotation (Line(points={{-146.8,-64},{-132,-64}}, color={0,0,127}));
+    connect(add.y, gain1.u)
+      annotation (Line(points={{-109,-58},{-95.2,-58}}, color={0,0,127}));
+    connect(gain1.y, conPID.u_s)
+      annotation (Line(points={{-81.4,-58},{-68,-58}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Ellipse(
             extent={{-74,78},{74,-78}},

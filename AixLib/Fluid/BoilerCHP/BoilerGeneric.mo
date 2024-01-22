@@ -1,21 +1,22 @@
 within AixLib.Fluid.BoilerCHP;
 model BoilerGeneric "Generic performance map based boiler"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
-    T_start=TRetDes +dTDes,
+    T_start=THotNom,
     redeclare final package Medium = AixLib.Media.Water,
     a=coeffPresLoss,
-    vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QDes
+    vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom
               /1000)/1000),
-    final m_flow_nominal=QDes/(Medium.cp_const*dTDes),
+    final m_flow_nominal=QNom/(Medium.cp_const*(THotNom-TColdNom)),
     final dp_nominal= m_flow_nominal^2*a/(Medium.d_const^2));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTDes=20
-    "Design temperature difference of supply and return"
-    annotation (Dialog(group="Design"));
-  parameter Modelica.Units.SI.Temperature TRetDes=273.15 + 60
-    "Nominal return temperature" annotation (Dialog(group="Design"));
-  parameter Modelica.Units.SI.HeatFlowRate QDes=50000 "Design thermal capacity"
-    annotation (Dialog(group="Design"));
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Design thermal capacity";
+
+    parameter Modelica.Units.SI.Temperature THotNom=273.15 + 80
+    "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
+
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15 + 60
+    "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
+
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
       T(start=T_start))            "Boiler thermal capacity (dry weight)"
@@ -24,13 +25,15 @@ model BoilerGeneric "Generic performance map based boiler"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.Controllers.OffDesignOperation offDesignOperation(
-    DelTDes=dTDes,
-    TRetDes=TRetDes,
-    QDes=QDes) "off design operation"
+    QNom=QNom,
+    THotNom=THotNom,
+    TColdNom=TColdNom)
+               "off design operation"
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(
-      final G=QDes*0.003/50) "Thermal resistance of the boiler casing"
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(final G=
+        0.0465*QNom/1000 + 4.9891)
+                             "Thermal resistance of the boiler casing"
     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
@@ -45,18 +48,19 @@ model BoilerGeneric "Generic performance map based boiler"
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   BaseClasses.Controllers.DesignOperation designOperation(
-    DelTDes=dTDes,
-    TRetDes=TRetDes,
-    QDes=QDes) "designOperation for design fuel power"
+    QNom=QNom,
+    THotNom=THotNom,
+    TColdNom=TColdNom)
+               "designOperation for design fuel power"
     annotation (Placement(transformation(extent={{-56,24},{-36,44}})));
   Modelica.Blocks.Math.Product powerDemand "Set power demand"
     annotation (Placement(transformation(extent={{-2,30},{18,50}})));
   Modelica.Blocks.Math.Product thermalPower "Thermal power during operation"
     annotation (Placement(transformation(extent={{34,24},{54,44}})));
 protected
-  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QDes/1000)
+  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*QDes
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
     "Heat capacity of metal (J/K)";
 
 equation
@@ -71,13 +75,6 @@ equation
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
   connect(vol.heatPort, temperatureSensor.port)
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
-  connect(temperatureSensor.T, boilerControlBus.TSupplyMea) annotation (Line(
-        points={{-29,-16},{-28,-16},{-28,100}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(designOperation.designPowerDemand, powerDemand.u2)
     annotation (Line(points={{-35,34},{-4,34}}, color={0,0,127}));
   connect(powerDemand.y, thermalPower.u1)
@@ -130,6 +127,12 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(senMasFlo.m_flow, boilerControlBus.m_flowMea) annotation (Line(points
         ={{70,-69},{70,100},{-28,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(temperatureSensor.T, boilerControlBus.TSupplyMea) annotation (Line(
+        points={{-29,-16},{-28,-16},{-28,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

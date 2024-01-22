@@ -2,7 +2,8 @@
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
 
-
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
 
 

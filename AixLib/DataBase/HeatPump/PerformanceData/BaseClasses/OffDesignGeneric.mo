@@ -8,6 +8,8 @@ model OffDesignGeneric
    parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
+   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+
 
   SDF.NDTable sDF_COP(
     final nin=4,
@@ -32,17 +34,17 @@ model OffDesignGeneric
         rotation=0,
         origin={48,0})));
   Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin5
-    annotation (Placement(transformation(extent={{9,-9},{-9,9}},
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={-9,-55})));
+        origin={-76,-90})));
   Modelica.Blocks.Math.Add deltaTCon(k1=-1) annotation (Placement(
         transformation(
-        extent={{-9,-9},{9,9}},
+        extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-11,-3})));
+        origin={-30,-36})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=
         TSourceInternal)
-    annotation (Placement(transformation(extent={{-128,56},{-72,80}})));
+    annotation (Placement(transformation(extent={{-98,62},{-68,84}})));
   Modelica.Blocks.Sources.RealExpression tSource1(y=TSource) "TSource"
     annotation (Placement(transformation(extent={{-72,48},{-36,70}})));
   Modelica.Blocks.Logical.Switch switch1
@@ -52,12 +54,12 @@ model OffDesignGeneric
   Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin4
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-66,2})));
+        origin={-72,-30})));
   Modelica.Blocks.Interfaces.RealInput frequency annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-120,30})));
+        origin={-120,8})));
   Modelica.Blocks.Interfaces.RealOutput COP  annotation (
       Placement(transformation(
         extent={{12,-12},{-12,12}},
@@ -80,45 +82,73 @@ model OffDesignGeneric
         origin={-120,-90})));
 
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=100, uMin=20)
-    annotation (Placement(transformation(extent={{-56,20},{-36,40}})));
+    annotation (Placement(transformation(extent={{-44,-8},{-24,12}})));
+  Modelica.Blocks.Logical.Switch switch2
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={4,28})));
+  Modelica.Blocks.Sources.BooleanExpression FrequencyDependency(y=FreDep)
+    annotation (Placement(transformation(extent={{-52,18},{-30,38}})));
+  Modelica.Blocks.Sources.RealExpression DesFre(y=50) "design frequency 50 Hz"
+    annotation (Placement(transformation(extent={{-50,32},{-32,52}})));
+  Modelica.Blocks.Math.Product productPel annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-64,2})));
+  Modelica.Blocks.Sources.RealExpression hundret(y=100)
+    annotation (Placement(transformation(extent={{-102,-18},{-84,0}})));
 equation
 
   connect(fromKelvin1.Celsius,multiplex4_2. u1[1]) annotation (Line(points={{26.8,70},
           {30,70},{30,8},{36,8},{36,9}},           color={0,0,127}));
-  connect(fromKelvin5.Celsius,multiplex4_2. u4[1]) annotation (Line(points={{0.9,-55},
-          {8,-55},{8,-10},{36,-10},{36,-9}}, color={0,0,127}));
+  connect(fromKelvin5.Celsius,multiplex4_2. u4[1]) annotation (Line(points={{-65,-90},
+          {6,-90},{6,-8},{36,-8},{36,-9}},   color={0,0,127}));
   connect(multiplex4_2.y,sDF_COP. u)
     annotation (Line(points={{59,0},{67.6,0}},      color={0,0,127}));
   connect(deltaTCon.y, multiplex4_2.u3[1])
-    annotation (Line(points={{-1.1,-3},{36,-3}}, color={0,0,127}));
+    annotation (Line(points={{-19,-36},{-10,-36},{-10,-3},{36,-3}},
+                                                 color={0,0,127}));
   connect(switch1.y,fromKelvin1. Kelvin) annotation (Line(points={{1,70},{8.4,70}},
                                                             color={0,0,127}));
   connect(tSource1.y, switch1.u1)
     annotation (Line(points={{-34.2,59},{-34.2,62},{-22,62}},
                                                    color={0,0,127}));
-  connect(fromKelvin5.Celsius, deltaTCon.u2) annotation (Line(points={{0.9,-55},
-          {8,-55},{8,-18},{-28,-18},{-28,-8.4},{-21.8,-8.4}}, color={0,0,127}));
-  connect(fromKelvin4.Celsius, deltaTCon.u1) annotation (Line(points={{-55,2},{-40,
-          2},{-40,2.4},{-21.8,2.4}}, color={0,0,127}));
+  connect(fromKelvin5.Celsius, deltaTCon.u2) annotation (Line(points={{-65,-90},
+          {-50,-90},{-50,-42},{-42,-42}},                     color={0,0,127}));
+  connect(fromKelvin4.Celsius, deltaTCon.u1) annotation (Line(points={{-61,-30},
+          {-42,-30}},                color={0,0,127}));
   connect(sDF_COP.y, COP)
     annotation (Line(points={{95.2,0},{112,0}}, color={0,0,127}));
-  connect(tConIn, fromKelvin4.Kelvin) annotation (Line(points={{-120,-30},{-84,-30},
-          {-84,2},{-78,2}}, color={0,0,127}));
+  connect(tConIn, fromKelvin4.Kelvin) annotation (Line(points={{-120,-30},{-84,
+          -30}},            color={0,0,127}));
   connect(booleanExpression1.y, switch1.u2)
-    annotation (Line(points={{-69.2,68},{-62,68},{-62,74},{-30,74},{-30,70},{-22,
-          70}},                                    color={255,0,255}));
+    annotation (Line(points={{-66.5,73},{-66.5,72},{-32,72},{-32,70},{-22,70}},
+                                                   color={255,0,255}));
   connect(tSource, switch1.u3) annotation (Line(points={{-120,90},{-28,90},{-28,
           78},{-22,78}}, color={0,0,127}));
-  connect(tConOut, fromKelvin5.Kelvin) annotation (Line(points={{-120,-90},{-52,
-          -90},{-52,-55},{-19.8,-55}}, color={0,0,127}));
-  connect(limiter.y, multiplex4_2.u2[1])
-    annotation (Line(points={{-35,30},{6,30},{6,3},{36,3}}, color={0,0,127}));
-  connect(frequency, limiter.u) annotation (Line(points={{-120,30},{-96,30},{
-          -96,28},{-58,28},{-58,30}}, color={0,0,127}));
+  connect(tConOut, fromKelvin5.Kelvin) annotation (Line(points={{-120,-90},{-88,
+          -90}},                       color={0,0,127}));
+  connect(DesFre.y, switch2.u3) annotation (Line(points={{-31.1,42},{-14,42},{-14,
+          36},{-8,36}}, color={0,0,127}));
+  connect(switch2.y, multiplex4_2.u2[1])
+    annotation (Line(points={{15,28},{26,28},{26,3},{36,3}}, color={0,0,127}));
+  connect(limiter.y, switch2.u1) annotation (Line(points={{-23,2},{-20,2},{-20,
+          20},{-8,20}}, color={0,0,127}));
+  connect(switch2.u2, FrequencyDependency.y)
+    annotation (Line(points={{-8,28},{-28.9,28}}, color={255,0,255}));
+  connect(limiter.u, productPel.y)
+    annotation (Line(points={{-46,2},{-53,2}}, color={0,0,127}));
+  connect(productPel.u2, hundret.y) annotation (Line(points={{-76,-4},{-80,-4},
+          {-80,-9},{-83.1,-9}}, color={0,0,127}));
+  connect(frequency, productPel.u1)
+    annotation (Line(points={{-120,8},{-76,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
                                                               Text(
           extent={{-4,108},{96,64}},
           lineColor={28,108,200},
-          textString="TSource konst oder variabel")}));
+          textString="TSource konst oder variabel"),          Text(
+          extent={{36,56},{136,12}},
+          lineColor={28,108,200},
+          textString="COP=f(compressor frequency)?")}));
 end OffDesignGeneric;

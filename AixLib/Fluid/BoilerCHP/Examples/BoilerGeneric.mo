@@ -5,16 +5,16 @@ model BoilerGeneric
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   AixLib.Fluid.BoilerCHP.BoilerGeneric boilerNotManufacturer(
-    m_flow_nominal=50/4.18/20,
-    dT_w_nom=20,
-    T_cold_nom=333.15,
-    Q_nom=50000)
+    T_start=293.15,
+    QNom=20000,
+    THotNom=353.15,
+    TColdNom=333.15)
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_m_flow_in=false,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=50/4.18/20,
+    m_flow=20/4.18/20,
     T=313.15,
     nPorts=1)
     "Source"
@@ -50,9 +50,13 @@ model BoilerGeneric
     Td=1,
     yMax=1,
     yMin=0) annotation (Placement(transformation(extent={{-44,58},{-24,78}})));
-  Modelica.Blocks.Sources.RealExpression temSupSet(y=75 + 273.15)
-    "Setpoint supply temperature"
-    annotation (Placement(transformation(extent={{-98,56},{-62,80}})));
+  Modelica.Blocks.Sources.Sine sine(
+    amplitude=5,
+    f=1/(3600*24),
+    phase=0,
+    offset=273.15 + 75,
+    startTime=700) "Ambient air temperature"
+    annotation (Placement(transformation(extent={{-100,58},{-80,78}})));
 equation
   connect(boilerNotManufacturer.port_b, sink.ports[1])
     annotation (Line(points={{12,0},{48,0}}, color={0,127,255}));
@@ -60,7 +64,7 @@ equation
     annotation (Line(points={{-89,4},{-70,4}}, color={0,0,127}));
   connect(boilerControlBus, boilerNotManufacturer.boilerControlBus) annotation (
      Line(
-      points={{0,24},{0,9.6},{-0.8,9.6}},
+      points={{0,24},{0,10},{-0.8,10}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -85,9 +89,9 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(conPID.u_s, temSupSet.y)
-    annotation (Line(points={{-46,68},{-60.2,68}}, color={0,0,127}));
+  connect(sine.y, conPID.u_s)
+    annotation (Line(points={{-79,68},{-46,68}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=1000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=2000, __Dymola_Algorithm="Dassl"));
 end BoilerGeneric;

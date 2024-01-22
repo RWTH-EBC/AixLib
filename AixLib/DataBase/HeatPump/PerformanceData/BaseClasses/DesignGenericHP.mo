@@ -10,7 +10,7 @@ model DesignGenericHP
      parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-     parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
+     parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 
   Modelica.Blocks.Math.Division NomPel "Nominal electric Power"
     annotation (Placement(transformation(extent={{116,66},{136,86}})));
@@ -124,7 +124,7 @@ model DesignGenericHP
         rotation=0,
         origin={10,-28})));
 
-  Modelica.Blocks.Sources.BooleanExpression modulating(y=Modulating)
+  Modelica.Blocks.Sources.BooleanExpression FrequencyDependency(y=FreDep)
     annotation (Placement(transformation(extent={{-200,62},{-166,86}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -240,7 +240,7 @@ equation
   connect(NomFrequency.y, switch1.u1) annotation (Line(points={{-176.9,92},{
           -158,92},{-158,82},{-150,82}},
                                     color={0,0,127}));
-  connect(modulating.y, switch1.u2)
+  connect(FrequencyDependency.y, switch1.u2)
     annotation (Line(points={{-164.3,74},{-150,74}}, color={255,0,255}));
   connect(NomFrequency1.y, switch1.u3) annotation (Line(points={{-176.9,50},{
           -158,50},{-158,66},{-150,66}},
@@ -282,14 +282,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(sigBus.THotSet, fromKelvin1.Kelvin) annotation (Line(
-      points={{201.075,0.07},{-114,0.07},{-114,-38},{-90,-38}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(fromKelvin1.Celsius, multiplex4_2.u4[1]) annotation (Line(points={{
           -67,-38},{-52,-38},{-52,-46},{-44,-46},{-44,-37}}, color={0,0,127}));
   connect(multiplex4_1.y, SDF_T_Design.u) annotation (Line(points={{11,70},{12,
@@ -308,6 +300,14 @@ equation
     annotation (Line(points={{87,24},{102,24}}, color={0,0,127}));
   connect(SDF_T_Design.y, product3.u1) annotation (Line(points={{49.2,110},{66,
           110},{66,36},{102,36}}, color={0,0,127}));
+  connect(sigBus.TConOutMea, fromKelvin1.Kelvin) annotation (Line(
+      points={{201.075,0.07},{-118,0.07},{-118,-38},{-90,-38}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-160},{200,
             160}})),

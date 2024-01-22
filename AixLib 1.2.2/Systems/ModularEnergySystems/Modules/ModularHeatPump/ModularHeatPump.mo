@@ -1,0 +1,239 @@
+within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump;
+model ModularHeatPump
+
+   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
+      Medium = AixLib.Media.Water,
+                           final m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon);
+
+  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Maximum value of THot to force shutdown"
+ annotation (Evaluate=false,Dialog(tab="Advanced", group="General machine information"));
+  parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
+   annotation (Evaluate=false,Dialog(group="Design condition"));
+  parameter Modelica.Units.SI.Temperature TSourceDes=278.15 "Design temperature of heat source"
+   annotation (Evaluate=false,Dialog(group="Design condition"));
+  parameter Modelica.Units.SI.HeatFlowRate QDes=150000 "Design heat flow rate of heat pump"
+   annotation (Evaluate=true,Dialog(group="Design condition"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+   annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
+
+    parameter Modelica.Units.SI.Temperature TCon_start=293.15 "Initial temperature condenser"
+    annotation (Dialog(tab="Advanced"));
+
+    parameter Boolean TSourceInternal=true
+                                          "Use internal TSource?"
+    annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+      parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
+   annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
+
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
+
+   replaceable package MediumEvap = AixLib.Media.Water
+                                     constrainedby
+    Modelica.Media.Interfaces.PartialMedium "Medium of heat source"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+              property_T=293.15,
+              X_a=0.40)
+              "Propylene glycol water, 40% mass fraction")));
+
+parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional system pressure difference";
+
+parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
+                                                     "Pressure difference condenser";
+
+
+
+
+ AixLib.Fluid.HeatPumps.HeatPump heatPump(
+    redeclare package Medium_con =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium_eva =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    refIneFre_constant=0.02,
+    nthOrder=3,
+    final useBusConnectorOnly=true,
+    mFlow_conNominal=m_flow_nominal,
+    VCon=max(0.0000001*QDes - 0.0094, 0.003),
+    mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
+    VEva=max(0.0000001*QDes - 0.0075, 0.003),
+    TCon_start=TCon_start,
+    redeclare model PerDataMainHP = PerDataMainHP,
+    use_non_manufacturer=use_non_manufacturer,
+    use_rev=false,
+    use_autoCalc=false,
+    Q_useNominal=QDes,
+    use_refIne=true,
+    dpCon_nominal=dpInternal,
+    use_conCap=false,
+    dpEva_nominal=25000,
+    use_evaCap=false,
+    tauSenT=1,
+    transferHeat=false,
+    allowFlowReversalEva=false,
+    allowFlowReversalCon=false,
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    show_TPort=false,
+    THotMax=THotMax,
+    THotNom=THotDes,
+    TSourceNom=TSourceDes,
+    QNom=QDes,
+    DeltaTCon=DeltaTCon,
+    DeltaTEvap=DeltaTEvap,
+    TSource=TSourceDes,
+    TSourceInternal=TSourceInternal,
+    FreDep=FreDep)
+    annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
+
+  Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
+        Media.Water)        annotation (Placement(transformation(
+        extent={{8,8},{-8,-8}},
+        rotation=180,
+        origin={32,0})));
+  BaseClasses.HeatPump_Sources.Liquid heatSource(
+    TSourceNom=TSourceDes,
+      TSourceInternal=TSourceInternal,
+    TSource=TSourceDes)
+    "Liquid heat source"
+    annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
+      Placement(transformation(extent={{-14,84},{16,118}}),
+        iconTransformation(extent={{-108,-52},{-90,-26}})));
+  Fluid.Movers.SpeedControlled_y fan(
+    redeclare package Medium = AixLib.Media.Water,
+    allowFlowReversal=false,
+    redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
+        pressure(V_flow={0,heatPump.con.m_flow_nominal/1000,heatPump.con.m_flow_nominal
+            /1000/0.7}, dp={(dpInternal + dpExternal)/0.7,(dpInternal +
+            dpExternal),0})),
+    inputType=AixLib.Fluid.Types.InputType.Continuous,
+    addPowerToMedium=false,
+    use_inputFilter=false,
+    riseTime=10,
+    init=Modelica.Blocks.Types.Init.SteadyState,
+    y_start=1)
+    annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
+   parameter Boolean use_non_manufacturer=true  "Use non manufacturer approach?";
+  replaceable model PerDataMainHP =
+      AixLib.DataBase.HeatPump.PerformanceData.GeneralThermodynamic
+    constrainedby
+    DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+    annotation (choicesAllMatching=true);
+  Modelica.Blocks.Sources.BooleanExpression mode(y=true)
+    annotation (Placement(transformation(extent={{70,64},{34,90}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{16,32},{36,52}})));
+  Modelica.Blocks.Sources.RealExpression zero(y=0.2)
+                                                   annotation (Placement(
+        transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=0,
+        origin={-6,28})));
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+protected
+package MediumCon = AixLib.Media.Water "Medium heat sink";
+
+ parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="Advanced",group="General machine information"));
+
+equation
+
+  connect(port_a, port_a)
+    annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
+  connect(heatSource.port_b, heatPump.port_a2) annotation (Line(points={{10,-40},
+          {18,-40},{18,-12},{14,-12}}, color={0,127,255}));
+  connect(heatPump.port_b2, heatSource.port_a) annotation (Line(points={{-6,-12},
+          {-14,-12},{-14,-40},{-10,-40}}, color={0,127,255}));
+  connect(sigBus, heatPump.sigBus) annotation (Line(
+      points={{1,101},{1,52},{-22,52},{-22,-9.9},{-5.9,-9.9}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus, heatSource.sigBus) annotation (Line(
+      points={{1,101},{1,58},{74,58},{74,-29.7},{0.1,-29.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(fan.port_b, heatPump.port_a1) annotation (Line(points={{-32,0},{-6,0}},
+                                color={0,127,255}));
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{32.2,77},{1.075,77},
+          {1.075,101.085}},      color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPump.port_b1, senMasFloHP.port_a)
+    annotation (Line(points={{14,0},{19,0},{19,8.88178e-16},{24,8.88178e-16}},
+                                             color={0,127,255}));
+  connect(zero.y, switch1.u3)
+    annotation (Line(points={{7.2,28},{14,28},{14,34}}, color={0,0,127}));
+  connect(sigBus.OnOff, switch1.u2) annotation (Line(
+      points={{1.075,101.085},{1.075,42},{14,42}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(port_a, fan.port_a)
+    annotation (Line(points={{-100,0},{-52,0}}, color={0,127,255}));
+  connect(senMasFloHP.port_b, port_b)
+    annotation (Line(points={{40,0},{100,0}}, color={0,127,255}));
+  connect(sigBus.mFlowSetExternal, switch1.u1) annotation (Line(
+      points={{1.075,101.085},{1.075,50},{14,50}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switch1.y, fan.y) annotation (Line(points={{37,42},{42,42},{42,18},{
+          -42,18},{-42,12}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-17,83},{17,-83}},
+          fillColor={255,0,128},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,0},
+          origin={1,61},
+          rotation=90),
+        Rectangle(
+          extent={{-82,42},{84,-46}},
+          lineColor={238,46,47},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-16,83},{16,-83}},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,0},
+          origin={1,-64},
+          rotation=90)}),                                        Diagram(
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=40000),
+    Documentation(info="<html>
+<p>Modular heat pump with different options</p>
+<ul>
+<li>with or without pump</li>
+<li>with or without an external temperature for TSource</li>
+</ul>
+<p><br>with different operation types:</p>
+<ul>
+<li>with a fixed THot, which is THotNom -&gt; temperature difference between THot and TCold is not constant</li>
+<li>with a fixed DeltaTCon -&gt; THot is not equal THotNom. THotNom is only important for nominal electrical demand</li>
+<li>as a high temperature heat pump, using R134a and a piston compressor</li>
+<li>as a low temperature heat pump, using R410a and a scroll compressor</li>
+</ul>
+<p><br>Concept </p>
+<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, DeltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
+</html>"));
+end ModularHeatPump;

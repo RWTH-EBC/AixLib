@@ -2,16 +2,16 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model TWWAdd_on
 
  parameter Modelica.Units.SI.TemperatureDifference dT_w_nom=20 "nom,inal temperature difference of flow and return"
-   annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.Temperature DesRetT=273.15 + 35
+   annotation (Dialog(group="Nominal condition"),Evaluate=false);
+  parameter Modelica.Units.SI.Temperature DesRetT=308.15
     "nominal return temperature"
-   annotation (Dialog(group="Nominal condition"));
+   annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
 
- parameter Modelica.Units.SI.Temperature T_w_hot=273.15 + 60 "Set point temperature drinking water outlet";
+ parameter Modelica.Units.SI.Temperature T_w_hot=333.15      "Set point temperature drinking water outlet";
  parameter Modelica.Units.SI.Temperature T_w_cold=283.15 "Default temperature drinking water inlet";
  parameter Modelica.Units.SI.HeatFlowRate Q_nom=50000 "Thermal dimension power"
-   annotation (Dialog(group="Nominal condition"));
+   annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
   parameter Modelica.Units.SI.TemperatureDifference dT_w_set=15 "Temperature difference setpoint"
    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
@@ -40,9 +40,8 @@ model TWWAdd_on
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-72,-40})));
-  Fluid.Sensors.MassFlowRate senMasFloTWW(redeclare final package Medium =
-        AixLib.Media.Water)
-    "Sensor for mass flow rate"
+  Fluid.Sensors.MassFlowRate senMasFloDhw(redeclare final package Medium =
+        AixLib.Media.Water) "Sensor for mass flow rate domestic hot water"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-50}})));
   Modelica.Blocks.Sources.RealExpression hotDWTem(y=T_w_hot)
     "hot drinking water temperature"
@@ -52,8 +51,8 @@ model TWWAdd_on
     redeclare package Medium2 = AixLib.Media.Water,
     m1_flow_nominal=Q_nom/(Medium.cp_const*dT_w_nom),
     m2_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
-    dp1_nominal=6000,
-    dp2_nominal=6000,
+    dp1_nominal=0,
+    dp2_nominal=0,
     eps=1) "Heat exchanger" annotation (Placement(transformation(extent={{12,44},{-10,64}})));
   Fluid.Sensors.TemperatureTwoPort senT_DW_out(
     redeclare final package Medium = AixLib.Media.Water,
@@ -97,9 +96,10 @@ model TWWAdd_on
     annotation (Placement(transformation(extent={{28,-82},{48,-62}})));
   Fluid.Actuators.Valves.TwoWayEqualPercentage val(
     redeclare package Medium = AixLib.Media.Water,
-    allowFlowReversal=false,
+    allowFlowReversal=true,
     m_flow_nominal=Q_nom/(Medium.cp_const*(T_w_hot - T_w_cold)),
     dpValve_nominal=6000,
+    use_inputFilter=false,
     R=100) "flow limiter limiting water massflow "
     annotation (Placement(transformation(extent={{-10,10},{12,-12}},
         rotation=90,
@@ -142,10 +142,15 @@ model TWWAdd_on
     annotation (Placement(transformation(extent={{-54,-84},{-44,-74}})));
   Modelica.Blocks.Math.Gain gain3(k=-1)
     annotation (Placement(transformation(extent={{-56,-104},{-44,-92}})));
+  Modelica.Blocks.Interfaces.BooleanOutput dhwOnOff
+    "On-Off Signal domestic hot water" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-40,110})));
 equation
   connect(port_a_DW, senT_DW_in.port_a)
     annotation (Line(points={{-100,-40},{-82,-40}}, color={0,127,255}));
-  connect(senT_DW_in.port_b, senMasFloTWW.port_a)
+  connect(senT_DW_in.port_b,senMasFloDhw. port_a)
     annotation (Line(points={{-62,-40},{-44,-40}}, color={0,127,255}));
   connect(senT_DW_out.port_b, port_b_DW)
     annotation (Line(points={{42,-40},{100,-40}}, color={0,127,255}));
@@ -165,11 +170,11 @@ equation
                                         color={0,0,127}));
   connect(valDWposClosed.y, positionBypass.u3) annotation (Line(points={{71,-95},
           {78,-95},{78,-36},{68,-36},{68,-20},{74,-20}}, color={0,0,127}));
-  connect(senMasFloTWW.m_flow,greaterThreshold. u) annotation (Line(points={{-34,-51},
+  connect(senMasFloDhw.m_flow,greaterThreshold. u) annotation (Line(points={{-34,-51},
           {-34,-62},{20,-62},{20,-72},{26,-72}},        color={0,0,127}));
   connect(greaterThreshold.y,positionBypass. u2) annotation (Line(points={{49,-72},
           {66,-72},{66,-12},{74,-12}},             color={255,0,255}));
-  connect(senMasFloTWW.port_b,val. port_a) annotation (Line(points={{-24,-40},{-15,
+  connect(senMasFloDhw.port_b,val. port_a) annotation (Line(points={{-24,-40},{-15,
           -40},{-15,-10}},
                  color={0,127,255}));
   connect(val.port_b,hex. port_a2) annotation (Line(points={{-15,12},{-15,48},{-10,
@@ -193,6 +198,8 @@ equation
           -43.4,-98}}, color={0,0,127}));
   connect(gain3.u, senTColdFeedback.T) annotation (Line(points={{-57.2,-98},{
           -132,-98},{-132,94},{-51,94},{-51,71}}, color={0,0,127}));
+  connect(greaterThreshold.y, dhwOnOff) annotation (Line(points={{49,-72},{138,
+          -72},{138,82},{-40,82},{-40,110}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end TWWAdd_on;

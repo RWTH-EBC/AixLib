@@ -5,33 +5,31 @@ model LookUpTableNDGeneric "Generic performance map characteristic"
 
   // Not Manufacturer
 
-  parameter Modelica.Units.SI.Temperature THotNom=THotNom "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=TSourceNom "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=283.15 "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=QNom "Nominal heat flow"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=DeltaTCon "Temperature difference heat sink condenser"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=DeltaTEvap "Temperature difference heat source evaporator"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.Units.SI.Temperature TSource=TSource "temperature of heat source"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-   parameter Boolean TSourceInternal=TSourceInternal
-                                          "Use internal TSource?"
+  parameter Modelica.Units.SI.Temperature TSource=283.15 "temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+   parameter Boolean TSourceInternal=true "Use internal TSource?"
     annotation (Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
 
-    parameter Boolean Modulating=Modulating "Is the heat pump inverter-driven?";
 
   BaseClasses.DesignGenericHP design(
     THotNom=THotNom,
     TSourceNom=TSourceNom,
     QNom=QNom,
     DeltaTCon=DeltaTCon,
-    Modulating=Modulating) "design operation"
+    FreDep=FreDep)         "design operation"
     annotation (Placement(transformation(extent={{40,40},{20,60}})));
   Modelica.Blocks.Math.Add addQEvap(k1=-1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -48,8 +46,8 @@ model LookUpTableNDGeneric "Generic performance map characteristic"
 
   BaseClasses.OffDesignGeneric offDesign(
     TSourceInternal=TSourceInternal,
-    TSource=TSource)
-                   "off design operation" annotation (Placement(transformation(
+    TSource=TSource,
+    FreDep=FreDep) "off design operation" annotation (Placement(transformation(
         extent={{-10,-20},{10,20}},
         rotation=270,
         origin={-80,64})));
@@ -60,18 +58,7 @@ model LookUpTableNDGeneric "Generic performance map characteristic"
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={0,-22})));
-  Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={68,28})));
-  Modelica.Blocks.Sources.BooleanExpression modulating(y=Modulating)
-    annotation (Placement(transformation(extent={{126,16},{92,40}})));
-  Modelica.Blocks.Sources.RealExpression one(y=1)
-    annotation (Placement(transformation(extent={{118,40},{100,60}})));
-  Modelica.Blocks.Math.Division division3
-    annotation (Placement(transformation(extent={{100,60},{120,80}})));
-  Modelica.Blocks.Sources.RealExpression zero1(y=100)
-    annotation (Placement(transformation(extent={{54,54},{74,74}})));
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 equation
 
   connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
@@ -116,13 +103,7 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switch1.y, productPel.u1) annotation (Line(points={{57,28},{26,28}},
-                                             color={0,0,127}));
-  connect(modulating.y, switch1.u2) annotation (Line(points={{90.3,28},{80,28}},
-                                     color={255,0,255}));
 
-  connect(one.y, switch1.u3)
-    annotation (Line(points={{99.1,50},{80,50},{80,36}},  color={0,0,127}));
   connect(sigBus, design.sigBus) annotation (Line(
       points={{-1,100},{-2,100},{-2,50},{19.95,50}},
       color={255,204,51},
@@ -133,26 +114,6 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(design.PelFullLoadSetPoint, productPel.u2) annotation (Line(points={{18.8,
           48.25},{14,48.25},{14,28}}, color={0,0,127}));
-  connect(sigBus.frequency,offDesign. frequency) annotation (Line(
-      points={{-0.925,100.07},{-74,100.07},{-74,76}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(division3.y, switch1.u1) annotation (Line(points={{121,70},{130,70},{
-          130,20},{80,20}},         color={0,0,127}));
-  connect(zero1.y, division3.u2) annotation (Line(points={{75,64},{98,64}},
-                                               color={0,0,127}));
-  connect(sigBus.frequency, division3.u1) annotation (Line(
-      points={{-0.925,100.07},{-2,100.07},{-2,76},{98,76}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(sigBus.OnOff, PelOnOff.u2) annotation (Line(
       points={{-0.925,100.07},{-0.925,-10},{0,-10}},
       color={255,204,51},
@@ -166,11 +127,21 @@ equation
   connect(zero3.y, PelOnOff.u3)
     annotation (Line(points={{-30.6,-13},{-30.6,-14},{-18,-14},{-18,-10},{-8,
           -10}},                                         color={0,0,127}));
-  connect(offDesign.COP, sigBus.COP) annotation (Line(points={{-80,52.8},{-80,
-          40},{-32,40},{-32,100.07},{-0.925,100.07}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
+  connect(sigBus.nSet, productPel.u1) annotation (Line(
+      points={{-0.925,100.07},{-0.925,88},{50,88},{50,32},{26,32},{26,28}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.nSet, offDesign.frequency) annotation (Line(
+      points={{-0.925,100.07},{-38,100.07},{-38,98},{-78.4,98},{-78.4,76}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={

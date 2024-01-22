@@ -32,25 +32,26 @@ model GeneralThermodynamic
 
 
   CarnotCOP carnotCOPDesign
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
+    annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
   CarnotCOP carnotCOPOffDesign
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   Modelica.Blocks.Sources.RealExpression tSourceNom(y=TSourceNom)
-    annotation (Placement(transformation(extent={{-128,34},{-102,58}})));
+    annotation (Placement(transformation(extent={{-128,72},{-102,96}})));
   Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom)
-    annotation (Placement(transformation(extent={{-124,52},{-102,76}})));
+    annotation (Placement(transformation(extent={{-124,90},{-102,114}})));
   Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.5) "Guetegrad"
+  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.45)
+                                                          "Guetegrad"
     annotation (Placement(transformation(extent={{-118,18},{-82,38}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{0,-2},{20,18}})));
   Modelica.Blocks.Math.Product copDesign annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-38,44})));
+        origin={-38,70})));
   Modelica.Blocks.Math.Product copOffDesign annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -69,9 +70,10 @@ model GeneralThermodynamic
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
 equation
   connect(tSourceNom.y, carnotCOPDesign.tCold)
-    annotation (Line(points={{-100.7,46},{-82,46}}, color={0,0,127}));
-  connect(tHotNom.y, carnotCOPDesign.tHot) annotation (Line(points={{-100.9,64},
-          {-90,64},{-90,54},{-82,54}}, color={0,0,127}));
+    annotation (Line(points={{-100.7,84},{-92,84},{-92,86},{-82,86}},
+                                                    color={0,0,127}));
+  connect(tHotNom.y, carnotCOPDesign.tHot) annotation (Line(points={{-100.9,102},
+          {-90,102},{-90,94},{-82,94}},color={0,0,127}));
   connect(sigBus.TConOutMea, carnotCOPOffDesign.tHot) annotation (Line(
       points={{-0.925,100.07},{0,100.07},{0,54},{38,54}},
       color={255,204,51},
@@ -88,11 +90,13 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(carnotCOPDesign.COP, copDesign.u1) annotation (Line(points={{-58.85,49.95},
-          {-54.425,49.95},{-54.425,50},{-50,50}}, color={0,0,127}));
-  connect(etaCarnot.y, copDesign.u2) annotation (Line(points={{-80.2,28},{-56,28},
-          {-56,38},{-50,38}}, color={0,0,127}));
-  connect(copDesign.y, division1.u2) annotation (Line(points={{-27,44},{-16,44},
+  connect(carnotCOPDesign.COP, copDesign.u1) annotation (Line(points={{-58.85,
+          89.95},{-54.425,89.95},{-54.425,76},{-50,76}},
+                                                  color={0,0,127}));
+  connect(etaCarnot.y, copDesign.u2) annotation (Line(points={{-80.2,28},{-56,
+          28},{-56,64},{-50,64}},
+                              color={0,0,127}));
+  connect(copDesign.y, division1.u2) annotation (Line(points={{-27,70},{-16,70},
           {-16,24},{-64,24},{-64,4},{-50,4}}, color={0,0,127}));
   connect(qNom.y, division1.u1) annotation (Line(points={{-91.2,6},{-78,6},{-78,
           16},{-50,16}}, color={0,0,127}));
@@ -112,14 +116,6 @@ equation
           28},{42,-8},{56,-8},{56,-6},{60,-6}}, color={0,0,127}));
   connect(division1.y, productPel.u2)
     annotation (Line(points={{-27,10},{-6,10},{-6,-18}}, color={0,0,127}));
-  connect(sigBus.QRel, productPel.u1) annotation (Line(
-      points={{-0.925,100.07},{-0.925,-10},{6,-10},{6,-18}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(productPel.y, Pel) annotation (Line(points={{-1.9984e-15,-41},{-1.9984e-15,
           -110},{0,-110}}, color={0,0,127}));
   connect(productPel.y, qConOffDesign.u1) annotation (Line(points={{-1.9984e-15,
@@ -134,6 +130,14 @@ equation
     annotation (Line(points={{0,-41},{0,-46},{38,-46}}, color={0,0,127}));
   connect(add1.y, QEva)
     annotation (Line(points={{61,-40},{80,-40},{80,-110}}, color={0,0,127}));
+  connect(sigBus.nSet, productPel.u1) annotation (Line(
+      points={{-0.925,100.07},{-0.925,-12},{6,-12},{6,-18}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GeneralThermodynamic;

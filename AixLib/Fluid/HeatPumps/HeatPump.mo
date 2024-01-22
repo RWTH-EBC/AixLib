@@ -19,7 +19,7 @@ model HeatPump
       final DeltaTEvap=DeltaTEvap,
       final TSource=TSource,
       TSourceInternal=TSourceInternal,
-      Modulating=Modulating));
+      FreDep=FreDep));
 
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -52,15 +52,59 @@ model HeatPump
     annotation (Dialog(tab="Generic", group="Essential"));
  parameter Boolean TSourceInternal=false  "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Generic",group="Essential"));
-  parameter Boolean Modulating=true "Is the heat pump inverter-driven?"  annotation (Dialog(tab="Generic", group="Essential"));
-
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?" annotation (Dialog(descriptionLabel=true, tab="Generic",group="Essential"));
+  Modelica.Blocks.Logical.Switch PelOnOff annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={120,-26})));
+  Modelica.Blocks.Sources.RealExpression zero1(y=1)
+    annotation (Placement(transformation(extent={{136,-78},{156,-58}})));
+  Modelica.Blocks.Logical.Switch PelOnOff1
+                                          annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={92,10})));
+  Modelica.Blocks.Sources.RealExpression zero2(y=0)
+    annotation (Placement(transformation(extent={{146,30},{166,50}})));
 equation
-  connect(innerCycle.QEva, sigBus.QEvap) annotation (Line(points={{0,-30.7},{-6,
-          -30.7},{-6,-40},{-105,-40},{-105,-43}}, color={0,0,127}), Text(
+  connect(innerCycle.QEva, sigBus.QEva) annotation (Line(points={{-1.77636e-15,
+          -30.7},{-36,-30.7},{-36,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(innerCycle.QCon, sigBus.QCon) annotation (Line(points={{1.77636e-15,
+          28.7},{-104.925,28.7},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(innerCycle.Pel, PelOnOff.u1) annotation (Line(points={{28.73,-0.865},
+          {74,-0.865},{74,-18},{108,-18}}, color={0,0,127}));
+  connect(sigBus.OnOff, PelOnOff.u2) annotation (Line(
+      points={{-104.925,-42.915},{-14,-42.915},{-14,-42},{78,-42},{78,-26},{108,
+          -26}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(zero1.y, PelOnOff.u3) annotation (Line(points={{157,-68},{184,-68},{
+          184,-52},{108,-52},{108,-34}}, color={0,0,127}));
+  connect(innerCycle.QCon, PelOnOff1.u1) annotation (Line(points={{0,28.7},{12,
+          28.7},{12,36},{66,36},{66,18},{80,18}}, color={0,0,127}));
+  connect(sigBus.OnOff, PelOnOff1.u2) annotation (Line(
+      points={{-104.925,-42.915},{60,-42.915},{60,10},{80,10}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(zero2.y, PelOnOff1.u3) annotation (Line(points={{167,40},{176,40},{
+          176,38},{180,38},{180,2},{80,2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

@@ -12,7 +12,7 @@ model ModularHeatPump
   parameter Modelica.Units.SI.Temperature TSourceDes=278.15 "Design temperature of heat source"
    annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.HeatFlowRate QDes=150000 "Design heat flow rate of heat pump"
-   annotation (Evaluate=true,Dialog(group="Design condition"));
+   annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
 
@@ -43,8 +43,6 @@ parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional syst
 parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
                                                      "Pressure difference condenser";
 
- parameter Boolean Modulating=true "Is the heat pump inverte driven?";
-
 
 
 
@@ -66,7 +64,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     use_rev=false,
     use_autoCalc=false,
     Q_useNominal=QDes,
-    use_refIne=true,
+    use_refIne=false,
     dpCon_nominal=dpInternal,
     use_conCap=false,
     dpEva_nominal=25000,
@@ -87,7 +85,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     DeltaTEvap=DeltaTEvap,
     TSource=TSourceDes,
     TSourceInternal=TSourceInternal,
-    Modulating=Modulating)
+    FreDep=FreDep)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
 
   Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
@@ -106,10 +104,13 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
         iconTransformation(extent={{-108,-52},{-90,-26}})));
   Fluid.Movers.SpeedControlled_y fan(
     redeclare package Medium = AixLib.Media.Water,
-    allowFlowReversal=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_start=THotDes,
+    allowFlowReversal=true,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
         pressure(V_flow={0,heatPump.con.m_flow_nominal/1000,heatPump.con.m_flow_nominal
-            /1000/0.7}, dp={dpInternal/0.7,dpInternal,0})),
+            /1000/0.7}, dp={(dpInternal + dpExternal)/0.7,(dpInternal +
+            dpExternal),0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
     use_inputFilter=false,
@@ -125,14 +126,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     annotation (choicesAllMatching=true);
   Modelica.Blocks.Sources.BooleanExpression mode(y=true)
     annotation (Placement(transformation(extent={{70,64},{34,90}})));
-  Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{16,32},{36,52}})));
-  Modelica.Blocks.Sources.RealExpression zero(y=0.2)
-                                                   annotation (Placement(
-        transformation(
-        extent={{-12,-12},{12,12}},
-        rotation=0,
-        origin={-6,28})));
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 protected
 package MediumCon = AixLib.Media.Water "Medium heat sink";
 
@@ -174,30 +168,18 @@ equation
   connect(heatPump.port_b1, senMasFloHP.port_a)
     annotation (Line(points={{14,0},{19,0},{19,8.88178e-16},{24,8.88178e-16}},
                                              color={0,127,255}));
-  connect(zero.y, switch1.u3)
-    annotation (Line(points={{7.2,28},{14,28},{14,34}}, color={0,0,127}));
-  connect(sigBus.OnOff, switch1.u2) annotation (Line(
-      points={{1.075,101.085},{1.075,42},{14,42}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(port_a, fan.port_a)
     annotation (Line(points={{-100,0},{-52,0}}, color={0,127,255}));
   connect(senMasFloHP.port_b, port_b)
     annotation (Line(points={{40,0},{100,0}}, color={0,127,255}));
-  connect(sigBus.mFlowSetExternal, switch1.u1) annotation (Line(
-      points={{1.075,101.085},{1.075,50},{14,50}},
+  connect(sigBus.mFlowSet, fan.y) annotation (Line(
+      points={{1.075,101.085},{1.075,28},{-42,28},{-42,12}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switch1.y, fan.y) annotation (Line(points={{37,42},{42,42},{42,18},{
-          -42,18},{-42,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

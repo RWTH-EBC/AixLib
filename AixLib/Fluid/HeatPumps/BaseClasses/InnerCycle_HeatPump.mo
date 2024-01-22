@@ -29,10 +29,11 @@ model InnerCycle_HeatPump
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
     TSourceInternal=TSourceInternal,
-    Modulating=Modulating) if use_non_manufacturer
+    FreDep=FreDep)         if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
-  PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
+  PerDataMainHP PerformanceDataHPHeating(QNom=QNom)
+                                         if not use_non_manufacturer
   annotation (Placement(transformation(
   extent={{-17,20},{37,76}},rotation=0)));
   PerDataRevHP PerformanceDataHPCooling if use_rev and not use_non_manufacturer
@@ -71,9 +72,8 @@ model InnerCycle_HeatPump
 
   parameter Boolean TSourceInternal=false "Use internal TSource?"
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-       parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
 
-
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 equation
 
   connect(PerformanceDataHPHeating.QCon, switchQCon.u1)

@@ -1,23 +1,19 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model CHPNomBehaviour
 
-parameter Modelica.SIunits.Power NomPower=100000;
-parameter Boolean ElDriven=true;
 parameter Real PLRMin=0.5;
 
- parameter String Filename_PowerEl_heat="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/PowerEL_heat.sdf";
- parameter String Filename_PTHR= "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf";
- parameter String Filename_EtaEL= "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf";
 
 
 
   SDF.NDTable SDF1(
     nin=2,
     readFromFile=true,
-    filename=Filename_PTHR,
+    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf"),
     dataset="/PTHR",
     dataUnit="[-]",
-    scaleUnits={"W","-"})
+    scaleUnits={"W","-"},
+    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
       "Power to Heat Ratio"
     annotation (Placement(transformation(extent={{-20,50},{0,70}})));
   Modelica.Blocks.Routing.Multiplex2 multiplex2_2
@@ -37,10 +33,11 @@ parameter Real PLRMin=0.5;
   SDF.NDTable SDF3(
     nin=2,
     readFromFile=true,
-    filename=Filename_PTHR,
+    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf"),
     dataset="/PTHR",
     dataUnit="[-]",
-    scaleUnits={"W","-"})
+    scaleUnits={"W","-"},
+    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
       "Power to Heat Ratio"
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   Modelica.Blocks.Math.Division division2
@@ -55,22 +52,8 @@ parameter Real PLRMin=0.5;
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={110,-70})));
-  Modelica.Blocks.Sources.RealExpression nomPower(y=NomPower) "Nominal Power"
-    annotation (Placement(transformation(extent={{-246,28},{-206,50}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=ElDriven)
-    annotation (Placement(transformation(extent={{-250,0},{-230,20}})));
-  SDF.NDTable electricNomPower(
-    nin=1,
-    readFromFile=true,
-    filename=Filename_PowerEl_heat,
-    dataset="/Power_el",
-    dataUnit="W",
-    scaleUnits={"W"})     "Electric nominal power"
-    annotation (Placement(transformation(extent={{-184,-10},{-164,10}})));
-  Modelica.Blocks.Logical.Switch switch2
-    annotation (Placement(transformation(extent={{-11,-11},{11,11}},
-        rotation=0,
-        origin={-123,25})));
+  Modelica.Blocks.Interfaces.RealInput Power
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 equation
   connect(multiplex2_2.u2[1], pLRMin.y) annotation (Line(points={{-57.6,64.8},{-57.6,
           65},{-86,65}},              color={0,0,127}));
@@ -90,24 +73,18 @@ equation
   connect(division2.y,MaxThermalPower)  annotation (Line(points={{84.7,-69},{96,
           -69},{96,-70},{110,-70}},
         color={0,0,127}));
-  connect(SDF3.y,division2. u2) annotation (Line(points={{41,-50},{48,-50},{48,-73.2},
-          {68.6,-73.2}},                             color={0,0,127}));
   connect(multiplex2_2.y, SDF1.u)
     annotation (Line(points={{-39.2,60},{-22,60}}, color={0,0,127}));
-  connect(nomPower.y, switch2.u1) annotation (Line(points={{-204,39},{-152,39},{
-          -152,32},{-136.2,32},{-136.2,33.8}}, color={0,0,127}));
-  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-229,10},{-198,
-          10},{-198,25},{-136.2,25}}, color={255,0,255}));
-  connect(nomPower.y, electricNomPower.u[1]) annotation (Line(points={{-204,39},
-          {-142,39},{-142,-50},{-158,-50},{-158,0},{-186,0}}, color={0,0,127}));
-  connect(electricNomPower.y, switch2.u3) annotation (Line(points={{-163,0},{-154,
-          0},{-154,-6},{-194,-6},{-194,16.2},{-136.2,16.2}}, color={0,0,127}));
-  connect(switch2.y, multiplex2_2.u1[1]) annotation (Line(points={{-110.9,25},{-88,
-          25},{-88,55.2},{-57.6,55.2}}, color={0,0,127}));
-  connect(switch2.y, multiplex2_1.u1[1]) annotation (Line(points={{-110.9,25},{-54,
-          25},{-54,-54.8},{-19.6,-54.8}}, color={0,0,127}));
-  connect(switch2.y, division2.u1) annotation (Line(points={{-110.9,25},{-66,25},
-          {-66,-28},{68.6,-28},{68.6,-64.8}}, color={0,0,127}));
+  connect(Power, multiplex2_2.u1[1]) annotation (Line(points={{-120,0},{-86,0},
+          {-86,56},{-57.6,56},{-57.6,55.2}},                  color={0,0,127}));
+  connect(Power, multiplex2_1.u1[1]) annotation (Line(points={{-120,0},{-62,0},
+          {-62,-54.8},{-19.6,-54.8}},                  color={0,0,127}));
+  connect(Power, pElMin.u2) annotation (Line(points={{-120,0},{-64,0},{-64,16.4},
+          {-35.2,16.4}}, color={0,0,127}));
+  connect(SDF3.y, division2.u2) annotation (Line(points={{41,-50},{48,-50},{48,
+          -73.2},{68.6,-73.2}}, color={0,0,127}));
+  connect(Power, division2.u1) annotation (Line(points={{-120,0},{60,0},{60,
+          -64.8},{68.6,-64.8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CHPNomBehaviour;
