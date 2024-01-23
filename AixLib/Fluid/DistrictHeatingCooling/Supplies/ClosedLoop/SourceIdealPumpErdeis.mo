@@ -134,17 +134,17 @@ equation
             Polygon(points={{-30,46},{52,0},{-30,-44},{-30,46}},
             lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
             fillPattern=FillPattern.Solid)}),                    Diagram(
-        coordinateSystem(preserveAspectRatio=false)), Documentation(revisions="<html>
-<ul>
-<li>
-March 3, 2018, by Marcus Fuchs:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+        coordinateSystem(preserveAspectRatio=false)), Documentation(revisions="<html><ul>
+  <li>March 3, 2018, by Marcus Fuchs:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This model represents the supply node with an ideal pressure source and sink.
-It provides a prescribed supply pressure and supply temperature to the network.
+  This model represents the supply node with an ideal pressure source
+  and sink. It provides a prescribed supply pressure and supply
+  temperature to the network.
 </p>
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));

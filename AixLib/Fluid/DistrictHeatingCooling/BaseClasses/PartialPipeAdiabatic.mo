@@ -100,18 +100,17 @@ protected
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-This base class provides an interface for adiabatic pipe models. It can be used
-to wrap around different pipe model implementations without representation of
-the thermal losses through the pipe wall.
+    Documentation(info="<html><p>
+  This base class provides an interface for adiabatic pipe models. It
+  can be used to wrap around different pipe model implementations
+  without representation of the thermal losses through the pipe wall.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-May 27, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>May 27, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialPipeAdiabatic;

@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Logical;
+within AixLib.Utilities.Logical;
 model HPReversibleControlLogicHeatColdDHWDirectCooling
   "Controls a reversible Heatpump based on cold, heat and dhw input, aswell as network temperature"
 
@@ -211,11 +211,16 @@ Cases"),Ellipse(
           lineColor={0,0,255},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-440,-80},{-260,80}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>Oktober, 2020 </i> by Jonas Grossmann: <br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oktober, 2020</i> by Jonas Grossmann:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Control Logic for a reversible Heat-Pump and direct cooling. Based on Heat, Cold and DHW inputs aswell as the network temperature.</p>
+<p>
+  Control Logic for a reversible Heat-Pump and direct cooling. Based on
+  Heat, Cold and DHW inputs aswell as the network temperature.
+</p>
 </html>"));
 end HPReversibleControlLogicHeatColdDHWDirectCooling;

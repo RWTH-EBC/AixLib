@@ -105,9 +105,15 @@ extends Modelica.Icons.VariantsPackage;
             -3.2}}, color={0,0,127}));
     connect(input_pressure, add.u1)
       annotation (Line(points={{60,102},{60,5.2},{66.6,5.2}}, color={0,0,127}));
-   annotation (Documentation(info="<html>
-        <p>This mass flow control system try to hold the mass flow ratio from one of the heat source constant within the desired ratio.</p>
-        <p>This controller need two input value and that are mass flow rate from the two sources that need to be controlled and returns the difference of the pressure difference for the source </p>
-        </html>"));
+   annotation (Documentation(info="<html><p>
+  This mass flow control system try to hold the mass flow ratio from
+  one of the heat source constant within the desired ratio.
+</p>
+<p>
+  This controller need two input value and that are mass flow rate from
+  the two sources that need to be controlled and returns the difference
+  of the pressure difference for the source
+</p>
+</html>"));
   end HeatFlowController;
 end OpenLoopSupplyPressure;

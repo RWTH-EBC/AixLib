@@ -175,11 +175,18 @@ Bool"),                                        Text(
           lineColor={0,0,255},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-540,-80},{-260,80}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>Oktober, 2020</i> ,by Jonas Grossmann:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oktober, 2020</i> ,by Jonas Grossmann:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Control Logiv for a Valve with 2 PI controllers. Useful for Substations that supply heating and cooling, and thus have to yield a return temperature that can he hotter or colder than the supply temperature. Implemented for Jonas Grossmann's Master Thesis.</p>
+<p>
+  Control Logiv for a Valve with 2 PI controllers. Useful for
+  Substations that supply heating and cooling, and thus have to yield a
+  return temperature that can he hotter or colder than the supply
+  temperature. Implemented for Jonas Grossmann's Master Thesis.
+</p>
 </html>"));
 end ValveControlLogic2PI;

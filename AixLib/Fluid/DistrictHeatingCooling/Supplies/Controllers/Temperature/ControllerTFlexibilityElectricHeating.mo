@@ -36,12 +36,11 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -80},{100,40}})),                                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,40}})),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end ControllerTFlexibilityElectricHeating;

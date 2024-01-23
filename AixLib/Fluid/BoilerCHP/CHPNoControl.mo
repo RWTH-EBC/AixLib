@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model CHPNoControl
   "Table based CHP model without an internal controller"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(

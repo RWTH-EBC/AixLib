@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookTrading
     extends Modelica.Icons.Example;
 

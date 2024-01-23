@@ -72,15 +72,18 @@ equation
           "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/PlugFlowPipe.mos"
         "Simulate and Plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
-    Documentation(info="<html>
-<p>Basic test of model
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbeddedDis\">
-AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbeddedDis</a>.
-This test includes an inlet temperature step under a constant mass flow rate.
+    Documentation(info="<html><p>
+  Basic test of model <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbeddedDis\">
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbeddedDis</a>.
+  This test includes an inlet temperature step under a constant mass
+  flow rate.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
+  <li>September 8, 2017 by Bram van der Heijde<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end PlugFlowPipeEmbeddedDis;

@@ -70,18 +70,18 @@ equation
           extent={{-78,40},{2,-40}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This model is a quick draft of a supply model with prescribed heat flow rate
-input. The same resulting mass flow rate is drawn from the supply network 
-and fed back into the return network. The substation has a fixed dT.
+  This model is a quick draft of a supply model with prescribed heat
+  flow rate input. The same resulting mass flow rate is drawn from the
+  supply network and fed back into the return network. The substation
+  has a fixed dT.
 </p>
 </html>"));
 end SourcePowerDoubleM;

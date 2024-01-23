@@ -30,16 +30,14 @@ equation
           {-62,4}}, color={0,0,127}));
   connect(dpIn, pump.dp_in) annotation (Line(points={{-106,-70},{-20,-70},{-20,
           30},{0,30},{0,12}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-January 8, 2018, by Marcus Fuchs:<br/>
-Implemented.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>January 8, 2018, by Marcus Fuchs:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>", info="<html>
 This model represents the supply node with an ideal pressure source,
-from which a pump discharges at a given pressure rise. It provides
-a prescribed supply pressure and supply temperature to the network.
+from which a pump discharges at a given pressure rise. It provides a
+prescribed supply pressure and supply temperature to the network.
 </html>"));
 end SourcePump;

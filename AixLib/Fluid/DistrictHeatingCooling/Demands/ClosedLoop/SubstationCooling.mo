@@ -208,16 +208,24 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,120}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>April 15, 2020</i> ,by Tobias Blacha:<br/>
-Add documentaion </li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>April 15, 2020</i> ,by Tobias Blacha:<br/>
+    Add documentaion
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks with chiller and fixed temperature difference (parameter) on network side. 
-This model uses the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
-The supply temperature of buildings cooling system must be set be using the input T_supplyCoolingSet.  </p>
+<p>
+  Substation model for bidirectional low-temperature networks with
+  chiller and fixed temperature difference (parameter) on network side.
+  This model uses the chiller <a href=
+  \"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
+  The supply temperature of buildings cooling system must be set be
+  using the input T_supplyCoolingSet.
+</p>
 </html>"));
 end SubstationCooling;
