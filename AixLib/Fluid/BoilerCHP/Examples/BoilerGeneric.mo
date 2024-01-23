@@ -2,9 +2,10 @@ within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerGeneric
     extends Modelica.Icons.Example;
 
-      package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
+    package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   AixLib.Fluid.BoilerCHP.BoilerGeneric boiGen(
+    redeclare package Medium = Medium,
     T_start=293.15,
     QNom=20000,
     TSupNom=353.15,
@@ -38,7 +39,7 @@ model BoilerGeneric
     yMin=0) annotation (Placement(transformation(extent={{-44,58},{-24,78}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
-    f=1/(3600*24),
+    f=100/(3600*24),
     phase=0,
     offset=273.15 + 75,
     startTime=700) "Ambient air temperature"
@@ -76,5 +77,19 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=2000, __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/BoilerGeneric.mos"
-        "Simulate and Plot"));
+        "Simulate and Plot"),
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+Example that demonstrates the behavior of <a href=
+  \"AixLib.Fluid.BoilerCHP.BoilerGeneric\">AixLib.Fluid.BoilerCHP.BoilerGeneric.</a>
+</p>
+<p>
+The firing rate of the boiler is controlled by a PI controller to hold a sine prescribed supply set point temperature, while the temperature of prescribed input massflow changes overt time.
+</p>
+</html>
+
+
+"));
 end BoilerGeneric;

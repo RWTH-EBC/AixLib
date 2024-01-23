@@ -146,7 +146,7 @@ equation
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model calculates the nominal fuel demand (W) for nominal conditions. </p>
+<p>This model calculates the nominal fuel power (W) for nominal conditions. </p>
 <p><span style=\"font-family: Arial;\">The nominal adiabatic efficiency (reference is the higher heating value (includes vaporization enthalpy)) comes from the SDF and depends on:</span></p>
 <ul>
 <li><span style=\"font-family: Arial;\">Nominal return temperature (TColdNom)</span></li>

@@ -1,9 +1,10 @@
 within AixLib.Fluid.BoilerCHP;
 model BoilerGeneric "Generic performance map based boiler"
+
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
     T_start=TSupNom,
-    redeclare final package Medium = AixLib.Media.Water,
     a=coeffPresLoss,
+    redeclare package Medium=AixLib.Media.Water,
     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*
           QNom/1000)/1000),
     final m_flow_nominal=QNom/(Medium.cp_const*(TSupNom - TRetNom)),
@@ -16,7 +17,6 @@ model BoilerGeneric "Generic performance map based boiler"
 
   parameter Modelica.Units.SI.Temperature TRetNom=333.15
     "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
-
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
       T(start=T_start))            "Boiler thermal capacity (dry weight)"
@@ -51,12 +51,12 @@ model BoilerGeneric "Generic performance map based boiler"
     TSupNom=TSupNom,
     TRetNom=TRetNom) "designOperation for design fuel power"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
-  Modelica.Blocks.Math.Product fuelDemand "fuel demand" annotation (Placement(
+  Modelica.Blocks.Math.Product fuelPower(final y(unit="W")) "fuel power" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-44,48})));
-  Modelica.Blocks.Math.Product thermalPower "thermal power"
+  Modelica.Blocks.Math.Product thermalPower(final y(unit="W")) "thermal power"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-38,14})));
@@ -78,11 +78,11 @@ equation
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
   connect(vol.heatPort, temperatureSensor.port)
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
-  connect(designOperation.NomFueDem, fuelDemand.u2)
+  connect(designOperation.NomFueDem, fuelPower.u2)
     annotation (Line(points={{-50,69},{-50,60}}, color={0,0,127}));
   connect(thermalPower.y, heater.Q_flow) annotation (Line(points={{-38,3},{-38,
           0},{-60,0},{-60,-40}},           color={0,0,127}));
-  connect(boilerControlBus.FirRatSet, fuelDemand.u1) annotation (Line(
+  connect(boilerControlBus.FirRatSet, fuelPower.u1) annotation (Line(
       points={{0,100},{0,66},{-38,66},{-38,60}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -103,7 +103,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(fuelDemand.y, thermalPower.u2)
+  connect(fuelPower.y, thermalPower.u2)
     annotation (Line(points={{-44,37},{-44,26}}, color={0,0,127}));
   connect(boilerControlBus.Efficiency, thermalPower.u1) annotation (Line(
       points={{0,100},{0,32},{-32,32},{-32,26}},
@@ -135,8 +135,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(fuelDemand.y, boilerControlBus.fuelPower) annotation (Line(points={{
-          -44,37},{-44,32},{0,32},{0,100}}, color={0,0,127}), Text(
+  connect(fuelPower.y, boilerControlBus.fuelPower) annotation (Line(points={{-44,
+          37},{-44,32},{0,32},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -145,8 +145,8 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The model differs between <u>design</u> operation <u>off-design</u> operation.</p>
-<p>For design conditions (parametrization) the model estimates max. fuel consumption. The <u>off-design</u> fuel consumption is estimated via FirRatSet [-]. </p>
+<p>The model differs between <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> and <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a>.</p>
+<p>In <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> for nominal conditions the (max) fuel power is estimated. The <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a> fuel consumption is estimated via firing rate. </p>
 <p>During operation, the transferred heat flow is estimated with respect to actual efficiency within a performance map.</p>
 <p><br>Further assumptions are used:</p>
 <ul>

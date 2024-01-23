@@ -69,8 +69,6 @@ package Modules
       // PLR Flow temperature control
       parameter Real kPLR=0.05 "Gain of controller" annotation (Dialog(tab="Control", group = "Flow temperature"));
       parameter Modelica.Units.SI.Time TiPLR=10 "Time constant of Integrator block" annotation (Dialog(tab="Control", group = "Flow temperature"));
-      parameter Real yMaxPLR=1.0 "Upper limit of output" annotation (Dialog(tab="Control", group = "Flow temperature"));
-      parameter Real yMinPLR=0 "Lower limit of output" annotation (Dialog(tab="Control", group = "Flow temperature"));
 
       // Feedback
       parameter Real kFeedBack=1 "Gain of controller" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
@@ -85,8 +83,7 @@ package Modules
         allowFlowReversal=allowFlowReversal,
         final T_start=TStart,
         final QNom=QNom,
-        redeclare final package Medium = Medium,
-        final m_flow_nominal=m_flow_nominal,
+        TSupNom=TSupNom,
         final TRetNom=TRetNom)
         annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
       AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(
@@ -142,8 +139,6 @@ package Modules
         final PLRMin=PLRMin,
         kPLR=kPLR,
         TiPLR=TiPLR,
-        yMaxPLR=yMaxPLR,
-        yMinPLR=yMinPLR,
         final TFlowByHeaCur=use_HeaCur,
         final use_tableData=use_tableData,
         redeclare final function HeatingCurveFunction = HeatingCurveFunction,
@@ -161,8 +156,10 @@ package Modules
         final time_minOff=time_minOff,
         final TFlowMax=TFlowMax,
         final time_minOn=time_minOn) "Central control unit of boiler"
-        annotation (Placement(transformation(extent={{-100,66},{-66,100}})));
+        annotation (Placement(transformation(extent={{-96,58},{-62,92}})));
 
+      parameter Modelica.Units.SI.Temperature TSupNom=353.15
+        "Design supply temperature";
     protected
         parameter Modelica.Units.SI.PressureDifference dp_nominal = dp_nominal_boiler + dp_Valve;
       parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
@@ -225,6 +222,15 @@ package Modules
           index=-1,
           extent={{-3,6},{-3,6}},
           horizontalAlignment=TextAlignment.Right));
+      connect(boilerControl.boilerControlBus, boilerControlBus) annotation (
+          Line(
+          points={{-79,92},{0,92},{0,98}},
+          color={255,204,51},
+          thickness=0.5), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}},
+          horizontalAlignment=TextAlignment.Left));
         annotation (Dialog(group = "Feedback"), choices(checkBox = true),
                   Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
@@ -1203,9 +1209,6 @@ package Modules
         parameter Real PLRMin=0.15 "Minimal Part Load Ratio" annotation (Dialog(group="Flow Temperature Control"));
         parameter Real kPLR=1 "Gain of controller"  annotation (Dialog(group="Flow Temperature Control"));
         parameter Modelica.Units.SI.Time TiPLR=10 "Time constant of Integrator block"  annotation (Dialog(group="Flow Temperature Control"));
-        parameter Real yMaxPLR=1.0
-         "Upper limit of output"  annotation (Dialog(group="Flow Temperature Control"));
-        parameter Real yMinPLR=0 "Lower limit of output"  annotation (Dialog(group="Flow Temperature Control"));
 
         // Heating Curve
         parameter Boolean TFlowByHeaCur=false "Use heating curve to set flow temperature" annotation (Dialog(group="Heating Curve"));
@@ -1276,8 +1279,8 @@ package Modules
         InternalPLRControl internalPLRControl(
           final k=kPLR,
           final Ti=TiPLR,
-          final yMax=yMaxPLR,
-          final yMin=yMinPLR)
+          final yMax=1,
+          final yMin=PLRMin)
           annotation (Placement(transformation(extent={{-20,6},{0,26}})));
 
       equation
@@ -1390,7 +1393,7 @@ package Modules
         Modelica.Blocks.Interfaces.RealOutput PLR annotation (Placement(
               transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={
                   {92,30},{112,50}})));
-        Modelica.Blocks.Sources.RealExpression realExpression1
+        Modelica.Blocks.Sources.RealExpression realExpression1(y=PLRMin)
           annotation (Placement(transformation(extent={{2,12},{22,32}})));
         Modelica.Blocks.Logical.Switch switch4
           annotation (Placement(transformation(extent={{40,26},{60,46}})));
@@ -1905,7 +1908,8 @@ package Modules
           T=293.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-96,-14},{-72,10}})));
-        Interfaces.BoilerControlBus boilerControlBus
+        AixLib.Controls.Interfaces.BoilerControlBus
+                                    boilerControlBus
           annotation (Placement(transformation(extent={{-10,50},{10,70}})));
         ModularConsumer.ConsumerDistributorModule modularConsumer(
           n_consumers=nConsumers,
@@ -1957,13 +1961,13 @@ package Modules
         connect(modularConsumer.port_b, modularBoiler.port_a) annotation (Line(points={{84,0},{
                 98,0},{98,-62},{-62,-62},{-62,0},{-54,0}},         color={0,127,255}));
         connect(TFlowSet.y, boilerControlBus.TFlowSet) annotation (Line(points={{-75,44},
-                {0.05,44},{0.05,60.05}},                       color={0,0,127}), Text(
+                {0,44},{0,60}},                                color={0,0,127}), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}},
             horizontalAlignment=TextAlignment.Left));
-        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-79,90},{
-                0.05,90},{0.05,60.05}},                       color={255,0,255}),
+        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-79,90},
+                {0,90},{0,60}},                               color={255,0,255}),
             Text(
             string="%second",
             index=1,
@@ -1997,7 +2001,8 @@ package Modules
           T=293.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-96,-14},{-72,10}})));
-        Interfaces.BoilerControlBus boilerControlBus
+        AixLib.Controls.Interfaces.BoilerControlBus
+                                    boilerControlBus
           annotation (Placement(transformation(extent={{-10,52},{10,72}})));
         Modelica.Blocks.Sources.Constant TFlowSet(k=273 + 80) annotation (Placement(
               transformation(
@@ -2033,14 +2038,14 @@ package Modules
             horizontalAlignment=TextAlignment.Left));
         connect(bou.ports[1], modularBoiler.port_a) annotation (Line(points={{-72,-2},
                 {-70,-2},{-70,0},{-34,0}}, color={0,127,255}));
-        connect(TFlowSet.y, boilerControlBus.TFlowSet) annotation (Line(points={{-75,
-                40},{0.05,40},{0.05,62.05}}, color={0,0,127}), Text(
+        connect(TFlowSet.y, boilerControlBus.TFlowSet) annotation (Line(points={{-75,40},
+                {0,40},{0,62}},              color={0,0,127}), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}},
             horizontalAlignment=TextAlignment.Left));
-        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-77,76},{
-                0.05,76},{0.05,62.05}}, color={255,0,255}), Text(
+        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-77,76},
+                {0,76},{0,62}},         color={255,0,255}), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}},
@@ -2081,7 +2086,8 @@ package Modules
           T=293.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-96,-14},{-72,10}})));
-        Interfaces.BoilerControlBus boilerControlBus
+        AixLib.Controls.Interfaces.BoilerControlBus
+                                    boilerControlBus
           annotation (Placement(transformation(extent={{-10,50},{10,70}})));
         ModularConsumer.ConsumerDistributorModule modularConsumer(
           n_consumers=nConsumers,
@@ -2146,13 +2152,13 @@ package Modules
         connect(modularConsumer.port_b, modularBoiler.port_a) annotation (Line(points={{84,0},{
                 98,0},{98,-62},{-62,-62},{-62,0},{-54,0}},         color={0,127,255}));
         connect(TFlowSet.y, boilerControlBus.TFlowSet) annotation (Line(points={{-75,44},
-                {0.05,44},{0.05,60.05}},                       color={0,0,127}), Text(
+                {0,44},{0,60}},                                color={0,0,127}), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}},
             horizontalAlignment=TextAlignment.Left));
-        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-79,90},{
-                0.05,90},{0.05,60.05}},                       color={255,0,255}),
+        connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-79,90},
+                {0,90},{0,60}},                               color={255,0,255}),
             Text(
             string="%second",
             index=1,
