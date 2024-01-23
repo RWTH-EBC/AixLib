@@ -29,7 +29,7 @@ model BoilerGeneric "Generic performance map based boiler"
     THotNom=THotNom,
     TColdNom=TColdNom)
                "off design operation"
-    annotation (Placement(transformation(extent={{20,60},{40,80}})));
+    annotation (Placement(transformation(extent={{30,72},{50,92}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(final G=
         0.0465*QNom/1000 + 4.9891)
@@ -44,7 +44,7 @@ model BoilerGeneric "Generic performance map based boiler"
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-26,-28},{-14,-40}})));
   Systems.ModularEnergySystems.Interfaces.BoilerControlBus boilerControlBus
-    annotation (Placement(transformation(extent={{-38,90},{-18,110}})));
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   BaseClasses.Controllers.DesignOperation designOperation(
@@ -52,11 +52,16 @@ model BoilerGeneric "Generic performance map based boiler"
     THotNom=THotNom,
     TColdNom=TColdNom)
                "designOperation for design fuel power"
-    annotation (Placement(transformation(extent={{-56,24},{-36,44}})));
-  Modelica.Blocks.Math.Product powerDemand "Set power demand"
-    annotation (Placement(transformation(extent={{-2,30},{18,50}})));
-  Modelica.Blocks.Math.Product thermalPower "Thermal power during operation"
-    annotation (Placement(transformation(extent={{34,24},{54,44}})));
+    annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
+  Modelica.Blocks.Math.Product fuelDemand "fuel demand" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-44,48})));
+  Modelica.Blocks.Math.Product thermalPower "thermal power"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-38,14})));
 protected
   parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -75,37 +80,27 @@ equation
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
   connect(vol.heatPort, temperatureSensor.port)
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
-  connect(designOperation.designPowerDemand, powerDemand.u2)
-    annotation (Line(points={{-35,34},{-4,34}}, color={0,0,127}));
-  connect(powerDemand.y, thermalPower.u1)
-    annotation (Line(points={{19,40},{32,40}}, color={0,0,127}));
-  connect(boilerControlBus.Efficiency, thermalPower.u2) annotation (Line(
-      points={{-28,100},{-28,28},{32,28}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(thermalPower.y, heater.Q_flow) annotation (Line(points={{55,34},{60,34},
-          {60,0},{-60,0},{-60,-40}},       color={0,0,127}));
+  connect(designOperation.NomFueDem, fuelDemand.u2)
+    annotation (Line(points={{-50,69},{-50,60}}, color={0,0,127}));
+  connect(thermalPower.y, heater.Q_flow) annotation (Line(points={{-38,3},{-38,
+          0},{-60,0},{-60,-40}},           color={0,0,127}));
   connect(offDesignOperation.boilerControlBus, boilerControlBus) annotation (
       Line(
-      points={{30.2,80},{30.2,86},{-28,86},{-28,100}},
+      points={{40.2,92},{40.2,96},{0,96},{0,100}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(powerDemand.y, boilerControlBus.PowerDemand) annotation (Line(points={
-          {19,40},{24,40},{24,56},{-28,56},{-28,100}}, color={0,0,127}), Text(
+  connect(fuelDemand.y, boilerControlBus.PowerDemand) annotation (Line(points={
+          {-44,37},{-44,34},{0,34},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.FirRatSet, powerDemand.u1) annotation (Line(
-      points={{-28,100},{-28,46},{-4,46}},
+  connect(boilerControlBus.FirRatSet, fuelDemand.u1) annotation (Line(
+      points={{0,100},{0,66},{-38,66},{-38,60}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -113,50 +108,53 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalPower.y, boilerControlBus.ThermalPower) annotation (Line(
-        points={{55,34},{60,34},{60,100},{-28,100}},                 color={0,0,
+        points={{-38,3},{-38,0},{0,0},{0,100}},                      color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(senTCold.T, boilerControlBus.TColdMea) annotation (Line(points={{-70,-69},
-          {-70,100},{-28,100}},             color={0,0,127}), Text(
+          {-70,100},{0,100}},               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senMasFlo.m_flow, boilerControlBus.m_flowMea) annotation (Line(points
-        ={{70,-69},{70,100},{-28,100}}, color={0,0,127}), Text(
+  connect(senMasFlo.m_flow, boilerControlBus.m_flowMea) annotation (Line(points={{70,-69},
+          {70,100},{0,100}},            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(temperatureSensor.T, boilerControlBus.TSupplyMea) annotation (Line(
-        points={{-29,-16},{-28,-16},{-28,100}}, color={0,0,127}), Text(
+        points={{-29,-16},{0,-16},{0,100}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(fuelDemand.y, thermalPower.u2)
+    annotation (Line(points={{-44,37},{-44,26}}, color={0,0,127}));
+  connect(boilerControlBus.FirRatSet, thermalPower.u1) annotation (Line(
+      points={{0,100},{0,30},{-32,30},{-32,26}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>A boiler model consisting of physical components. The efficiency is presented via a performance map in dependency on:</p>
+<p>The model differs between <u>design</u> operation <u>off-design</u> operation.</p>
+<p>For design conditions (parametrization) the model estimates max. fuel consumption. The <u>off-design</u> fuel consumption is estimated via FirRatSet [-]. </p>
+<p>During operation, the transferred heat flow is estimated with respect to actual efficiency within a performance map.</p>
+<p><br>Further assumptions are used:</p>
 <ul>
-<li><span style=\"font-family: Arial;\">Return temperature</span></li>
-<li><span style=\"font-family: Arial;\">Nominale temperature difference</span></li>
-<li><span style=\"font-family: Arial;\">Relative water mass flow</span></li>
-<li><span style=\"font-family: Arial;\">Realtive temperature difference</span></li>
-</ul>
-<p>The model differs between <u>design</u> operating <u>off-design</u> operating.</p>
-<p>For design conditions (parametrization) the model estimates max. fuel consumption [W]. The <u>off-design</u> fuel consumption [W] is estimated via FirRatSet [-]. </p>
-<p>During operation, the transferred heat flow [W] is estimated with respect to actual efficiency within a performance map.</p>
-<p>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>bases on a fit-function of manufacturer data.</p>
-<p>The volume <span style=\"font-family: Courier New;\">vol.V</span> bases on a fit-function of manufacturer data.</p>
-<p><br>Further assumptions are taken into account for losses (see AixLib.Fluid.BoilerCHP.BoilerNoControl):</p>
-<ul>
-<li>G: a heat loss of 0.3 &percnt; of nominal power at a temperature difference of 50 K to ambient is assumed.</li>
-<li>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</li>
+<li>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>is described by a fit-function from manufacturer data.</li>
+<li>The volume <span style=\"font-family: Courier New;\">vol.V</span> bases on a fit from manufacturer data.</li>
+<li>G: Thermal conductance is described by a fit 0.0465 * QNom/1000 + 4.9891 from manufacturere data at a temperature difference of 50 K to ambient</li>
+<li>C: Factor C/QNom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default. (see AixLib.Fluid.BoilerCHP.BoilerNoControl)</li>
 </ul>
 </html>",
         revisions="<html>

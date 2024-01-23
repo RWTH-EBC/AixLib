@@ -15,36 +15,36 @@ package Medium=AixLib.Media.Water;
   Systems.ModularEnergySystems.Interfaces.BoilerControlBus boilerControlBus
     annotation (Placement(transformation(extent={{-8,90},{12,110}})));
   Modelica.Blocks.Math.Add add2(k2=-1)
-    annotation (Placement(transformation(extent={{-60,16},{-42,34}})));
+    annotation (Placement(transformation(extent={{-68,-26},{-50,-8}})));
   Modelica.Blocks.Math.Division devision1
     annotation (Placement(transformation(extent={{-50,-64},{-30,-44}})));
   Modelica.Blocks.Sources.RealExpression nominal_m_fow(y=m_flow_nom) "Nominal mass flow rate"
     annotation (Placement(transformation(extent={{-100,-80},{-60,-52}})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4
-    annotation (Placement(transformation(extent={{24,12},{44,32}})));
+    annotation (Placement(transformation(extent={{24,10},{46,32}})));
   SDF.NDTable boilerEffciency(
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/DataBase/Boiler/General/Boiler_Generic_Characteristic_Chart.sdf"),
-
     dataset="/Characteristic chart",
     dataUnit="-",
     scaleUnits={"K","K","-","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
-    extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "Characteristic chart"
+    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
+    "Characteristic chart of adiabatic efficiency"
     annotation (Placement(transformation(extent={{60,12},{80,32}})));
 
   Modelica.Blocks.Math.Division devision
-    annotation (Placement(transformation(extent={{-30,10},{-12,28}})));
-  Modelica.Blocks.Sources.RealExpression ReturnTemp(y=TColdNom)
+    annotation (Placement(transformation(extent={{-30,-30},{-12,-12}})));
+  Modelica.Blocks.Sources.RealExpression NomRetTemp(y=TColdNom)
     "Nominal return temperature"
-    annotation (Placement(transformation(extent={{-94,-18},{-48,6}})));
-  Modelica.Blocks.Sources.RealExpression SupplyTemp(y=THotNom)
+    annotation (Placement(transformation(extent={{-92,18},{-46,42}})));
+  Modelica.Blocks.Sources.RealExpression NomSupTemp(y=THotNom)
     "Nominal supply temperature"
-    annotation (Placement(transformation(extent={{-94,-40},{-48,-16}})));
+    annotation (Placement(transformation(extent={{-92,-4},{-46,20}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
-    annotation (Placement(transformation(extent={{-34,-22},{-14,-2}})));
+    annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
 protected
   parameter Modelica.Units.SI.MassFlowRate m_flow_nom=QNom/(Medium.cp_const*
       (THotNom-TColdNom));
@@ -61,7 +61,7 @@ equation
   connect(nominal_m_fow.y, devision1.u2) annotation (Line(points={{-58,-66},{-56,
           -66},{-56,-60},{-52,-60}}, color={0,0,127}));
   connect(boilerControlBus.TColdMea, add2.u2) annotation (Line(
-      points={{2,100},{-100,100},{-100,19.6},{-61.8,19.6}},
+      points={{2,100},{-100,100},{-100,-22.4},{-69.8,-22.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -69,7 +69,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.TSupplyMea, add2.u1) annotation (Line(
-      points={{2,100},{-100,100},{-100,30.4},{-61.8,30.4}},
+      points={{2,100},{-100,100},{-100,-11.6},{-69.8,-11.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -77,35 +77,37 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(multiplex4.y, boilerEffciency.u)
-    annotation (Line(points={{45,22},{58,22}}, color={0,0,127}));
+    annotation (Line(points={{47.1,21},{52,21},{52,22},{58,22}},
+                                               color={0,0,127}));
   connect(boilerEffciency.y, boilerControlBus.Efficiency) annotation (Line(
         points={{81,22},{96,22},{96,68},{2,68},{2,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(add2.y, devision.u1) annotation (Line(points={{-41.1,25},{-36.45,25},{
-          -36.45,24.4},{-31.8,24.4}}, color={0,0,127}));
+  connect(add2.y, devision.u1) annotation (Line(points={{-49.1,-17},{-36.45,-17},
+          {-36.45,-15.6},{-31.8,-15.6}},
+                                      color={0,0,127}));
   connect(boilerControlBus.TColdMea, multiplex4.u1[1]) annotation (Line(
-      points={{2,100},{2,31},{22,31}},
+      points={{2,100},{2,30.9},{21.8,30.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ReturnTemp.y, add1.u1)
-    annotation (Line(points={{-45.7,-6},{-36,-6}}, color={0,0,127}));
-  connect(SupplyTemp.y, add1.u2) annotation (Line(points={{-45.7,-28},{-42,-28},
-          {-42,-18},{-36,-18}}, color={0,0,127}));
-  connect(add1.y, devision.u2) annotation (Line(points={{-13,-12},{6,-12},{6,6},
-          {-38,6},{-38,13.6},{-31.8,13.6}}, color={0,0,127}));
-  connect(add1.y, multiplex4.u4[1]) annotation (Line(points={{-13,-12},{6,-12},{
-          6,13},{22,13}}, color={0,0,127}));
-  connect(devision.y, multiplex4.u2[1]) annotation (Line(points={{-11.1,19},{-2,
-          19},{-2,25},{22,25}}, color={0,0,127}));
-  connect(devision1.y, multiplex4.u3[1]) annotation (Line(points={{-29,-54},{10,
-          -54},{10,19},{22,19}}, color={0,0,127}));
+  connect(NomRetTemp.y, add1.u1)
+    annotation (Line(points={{-43.7,30},{-34,30}}, color={0,0,127}));
+  connect(NomSupTemp.y, add1.u2) annotation (Line(points={{-43.7,8},{-42,8},{
+          -42,18},{-34,18}},    color={0,0,127}));
+  connect(add1.y, devision.u2) annotation (Line(points={{-11,24},{2,24},{2,4},{
+          -38,4},{-38,-26.4},{-31.8,-26.4}},color={0,0,127}));
+  connect(add1.y, multiplex4.u2[1]) annotation (Line(points={{-11,24},{2,24},{2,
+          24.3},{21.8,24.3}}, color={0,0,127}));
+  connect(devision1.y, multiplex4.u4[1]) annotation (Line(points={{-29,-54},{14,
+          -54},{14,11.1},{21.8,11.1}}, color={0,0,127}));
+  connect(devision.y, multiplex4.u3[1]) annotation (Line(points={{-11.1,-21},{8,
+          -21},{8,17.7},{21.8,17.7}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},
@@ -158,12 +160,12 @@ equation
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p><span style=\"font-family: Arial;\">This model calculates the efficiency for operation from SDF in dependency on:</span></p>
+<p><span style=\"font-family: Arial;\">This model calculates the adiabatic efficiency for an operating point from a characteristic chart in dependency on:</span></p>
 <ul>
-<li><span style=\"font-family: Arial;\">Return temperature</span></li>
-<li><span style=\"font-family: Arial;\">Nominale temperature difference</span></li>
-<li><span style=\"font-family: Arial;\">Relative water mass flow</span></li>
-<li><span style=\"font-family: Arial;\">Realtive temperature difference</span></li>
+<li><span style=\"font-family: Arial;\">Nominal return temperature (TColdNom)</span></li>
+<li><span style=\"font-family: Arial;\">Nominale temperature difference (TColdNom-THotNom)</span></li>
+<li><span style=\"font-family: Arial;\">Nominal relative temperature difference </span></li>
+<li><span style=\"font-family: Arial;\">Nominal relative water mass flow </span></li>
 </ul>
 </html>", revisions="<html>
 <ul>
