@@ -28,16 +28,18 @@ equation
     annotation (Line(points={{-60,-2.22045e-016},{0,0}}, color={0,127,255}));
   connect(source.ports[3], idealSinkConstHeat.port_a) annotation (Line(points={
           {-60,-2.66667},{-20,-2},{-20,-70},{0,-70}}, color={0,127,255}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model demonstrates the ideal sink implementation of demand nodes, with a minimal 
-example, and node models based on a common base class with variants prescirbing either 
-the discharged mass flow rate or the extracted heat flow rate.</p>
+<p>
+  This model demonstrates the ideal sink implementation of demand
+  nodes, with a minimal example, and node models based on a common base
+  class with variants prescirbing either the discharged mass flow rate
+  or the extracted heat flow rate.
+</p>
 </html>"));
 end IdealSinks;

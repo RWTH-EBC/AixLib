@@ -114,15 +114,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, __Dymola_Algorithm="Cvode"),
-    Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-This is similar to the OpenLoopCooling example, but demonstrates a very simple
-pressure control.
+This is similar to the OpenLoopCooling example, but demonstrates a very
+simple pressure control.
 </html>"));
 end OpenLoopHeatPumpCarnot;

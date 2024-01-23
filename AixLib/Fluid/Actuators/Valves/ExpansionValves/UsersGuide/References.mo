@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
 class References "References"
   extends Modelica.Icons.References;
 

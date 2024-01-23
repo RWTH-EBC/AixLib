@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.Data;
+within AixLib.Fluid.Actuators.Valves.Data;
 record LinearLinear = GenericThreeWay(a_ab = Linear(), b_ab=Linear())
   "Linear-linear valve characteristic for three way valve"
   annotation (

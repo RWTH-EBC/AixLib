@@ -12,10 +12,10 @@ equation
             100}}), graphics={Text(
           extent={{-90,40},{90,-40}},
           textString="and")}),
-    Documentation(info="<html>
-<p>
-The output is <strong>true</strong> if all inputs are <strong>true</strong>, otherwise
-the output is <strong>false</strong>.
+    Documentation(info="<html><p>
+  The output is <strong>true</strong> if all inputs are
+  <strong>true</strong>, otherwise the output is
+  <strong>false</strong>.
 </p>
 </html>"));
 end TripleAnd;

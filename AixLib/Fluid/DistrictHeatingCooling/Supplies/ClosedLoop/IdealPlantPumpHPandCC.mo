@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantPumpHPandCC
   "Supply node model with ideal HeatPump and CompressionChiller and Pump for heat and cold supply of uni-directional networks"
 
@@ -244,13 +244,17 @@ equation
             fillPattern=FillPattern.Solid)}),                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{140,
             140}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>November 23, 2019</i> ,by Michael Mans:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 23, 2019</i> ,by Michael Mans:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-This model represents the supply node of a bidirectional network with indeal heater and ideal cooler. The operation mode of the depends on the flow direction.
-In the case that port_b is the outlet, heating operation takes place. In the case that port_a is the outlet, cooling operation takes place.
+This model represents the supply node of a bidirectional network with
+indeal heater and ideal cooler. The operation mode of the depends on
+the flow direction. In the case that port_b is the outlet, heating
+operation takes place. In the case that port_a is the outlet, cooling
+operation takes place.
 </html>"));
 end IdealPlantPumpHPandCC;

@@ -163,15 +163,16 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Inputs")}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+    Documentation(revisions="<html><ul>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>Base class for a substation model that uses replaceable components
-for modeling the heat transfer and the flow control parts.</p>
+<p>
+  Base class for a substation model that uses replaceable components
+  for modeling the heat transfer and the flow control parts.
+</p>
 </html>"));
 end PartialGeneralSubstation;

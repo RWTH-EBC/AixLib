@@ -41,17 +41,17 @@ equation
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-This was added for the Supplies.OpenLoop.SourceMFlow model, but will be removed as
-soon as we have a better model for the prescribed flow supply.
+    Documentation(info="<html><p>
+  This was added for the Supplies.OpenLoop.SourceMFlow model, but will
+  be removed as soon as we have a better model for the prescribed flow
+  supply.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialSupplyLessInputs;

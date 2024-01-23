@@ -42,7 +42,7 @@ record DIN_16893_SDR11_d180 "PE-X Pipe, d_o=180mm, SDR11"
 </html>",
       revisions="<html><ul>
   <li>
-    <i>July 16, 2020;</i> by Phillip Stoffel <br/>
+    <i>July 16, 2020;</i> by Phillip Stoffel<br/>
     Implemented.
   </li>
 </ul>

@@ -125,90 +125,91 @@ equation
         Line(points={{-100,90},{-80,90},{-80,84},{80,84},{80,64}},
                                                     color={0,0,255})}),
 defaultComponentName="heaPum",
-Documentation(info="<html>
-<p>
-This is a model of a heat pump whose coefficient of performance COP changes
-with temperatures in the same way as the Carnot efficiency changes.
-The control input is the setpoint of the condenser leaving temperature, which
-is met exactly at steady state if the heat pump has sufficient capacity.
+Documentation(info="<html><p>
+  This is a model of a heat pump whose coefficient of performance COP
+  changes with temperatures in the same way as the Carnot efficiency
+  changes. The control input is the setpoint of the condenser leaving
+  temperature, which is met exactly at steady state if the heat pump
+  has sufficient capacity.
 </p>
 <p>
-The model allows to either specify the Carnot effectivness
-<i>&eta;<sub>Carnot,0</sub></i>, or
-a <i>COP<sub>0</sub></i>
-at the nominal conditions, together with
-the evaporator temperature <i>T<sub>eva,0</sub></i> and
-the condenser temperature <i>T<sub>con,0</sub></i>, in which
-case the model computes the Carnot effectivness as
+  The model allows to either specify the Carnot effectivness
+  <i>η<sub>Carnot,0</sub></i>, or a <i>COP<sub>0</sub></i> at the
+  nominal conditions, together with the evaporator temperature
+  <i>T<sub>eva,0</sub></i> and the condenser temperature
+  <i>T<sub>con,0</sub></i>, in which case the model computes the Carnot
+  effectivness as
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> =
-  COP<sub>0</sub>
-&frasl;  (T<sub>con,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
+<p style=\"text-align:center;font-style:italic;\">
+  η<sub>Carnot,0</sub> = COP<sub>0</sub> ⁄ (T<sub>con,0</sub> ⁄
+  (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
 </p>
 <p>
-The heat pump COP is computed as the product
+  The heat pump COP is computed as the product
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
-  COP = &eta;<sub>Carnot,0</sub> COP<sub>Carnot</sub> &eta;<sub>PL</sub>,
-</p>
-<p>
-where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
-<i>&eta;<sub>PL</sub></i> is a polynomial in heating part load ratio <i>y<sub>PL</sub></i>
-that can be used to take into account a change in <i>COP</i> at part load
-conditions.
-This polynomial has the form
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  &eta;<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y<sub>PL</sub> + a<sub>3</sub> y<sub>PL</sub><sup>2</sup> + ...
+<p style=\"text-align:center;font-style:italic;\">
+  COP = η<sub>Carnot,0</sub> COP<sub>Carnot</sub> η<sub>PL</sub>,
 </p>
 <p>
-where the coefficients <i>a<sub>i</sub></i>
-are declared by the parameter <code>a</code>.
+  where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
+  <i>η<sub>PL</sub></i> is a polynomial in heating part load ratio
+  <i>y<sub>PL</sub></i> that can be used to take into account a change
+  in <i>COP</i> at part load conditions. This polynomial has the form
+</p>
+<p style=\"text-align:center;font-style:italic;\">
+  η<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y<sub>PL</sub> +
+  a<sub>3</sub> y<sub>PL</sub><sup>2</sup> + ...
 </p>
 <p>
-On the <code>Dynamics</code> tag, the model can be parametrized to compute a transient
-or steady-state response.
-The transient response of the model is computed using a first
-order differential equation for the evaporator and condenser fluid volumes.
-The heat pump outlet temperatures are equal to the temperatures of these lumped volumes.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-When using this component, make sure that the condenser has sufficient mass flow rate.
-Based on the evaporator mass flow rate, temperature difference and the efficiencies,
-the model computes how much heat will be removed by to the evaporator.
-If the mass flow rate is too small, very low outlet temperatures can result, possibly below freezing.
+  where the coefficients <i>a<sub>i</sub></i> are declared by the
+  parameter <code>a</code>.
 </p>
 <p>
-The condenser heat flow rate <code>QCon_flow_nominal</code> is used to assign
-the default value for the mass flow rates, which are used for the pressure drop
-calculations.
-It is also used to compute the part load efficiency.
-Hence, make sure that <code>QCon_flow_nominal</code> is set to a reasonable value.
+  On the <code>Dynamics</code> tag, the model can be parametrized to
+  compute a transient or steady-state response. The transient response
+  of the model is computed using a first order differential equation
+  for the evaporator and condenser fluid volumes. The heat pump outlet
+  temperatures are equal to the temperatures of these lumped volumes.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  When using this component, make sure that the condenser has
+  sufficient mass flow rate. Based on the evaporator mass flow rate,
+  temperature difference and the efficiencies, the model computes how
+  much heat will be removed by to the evaporator. If the mass flow rate
+  is too small, very low outlet temperatures can result, possibly below
+  freezing.
 </p>
 <p>
-The maximum heating capacity is set by the parameter <code>QCon_flow_max</code>,
-which is by default set to infinity.
+  The condenser heat flow rate <code>QCon_flow_nominal</code> is used
+  to assign the default value for the mass flow rates, which are used
+  for the pressure drop calculations. It is also used to compute the
+  part load efficiency. Hence, make sure that
+  <code>QCon_flow_nominal</code> is set to a reasonable value.
 </p>
 <p>
-The coefficient of performance depends on the
-evaporator and condenser leaving temperature
-since otherwise the second law of thermodynamics may be violated.
+  The maximum heating capacity is set by the parameter
+  <code>QCon_flow_max</code>, which is by default set to infinity.
 </p>
-<h4>Notes</h4>
 <p>
-For a similar model that can be used as a chiller, see
-<a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
-AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>.
+  The coefficient of performance depends on the evaporator and
+  condenser leaving temperature since otherwise the second law of
+  thermodynamics may be violated.
+</p>
+<h4>
+  Notes
+</h4>
+<p>
+  For a similar model that can be used as a chiller, see <a href=
+  \"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-Oktober, 2020, by Jonas Grossmann:<br/>
-First Implementation
-</li>
+revisions="<html><ul>
+  <li>Oktober, 2020, by Jonas Grossmann:<br/>
+    First Implementation
+  </li>
 </ul>
 </html>"));
 end Carnot_TCon_Reversible;

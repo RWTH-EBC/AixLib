@@ -123,12 +123,11 @@ equation
       StopTime=31536000,
       Interval=900,
       __Dymola_Algorithm="Cvode"),
-    Documentation(revisions="<html>
-<ul>
-<li>
-November 22, 2019, by Michael Mans:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>November 22, 2019, by Michael Mans:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>"));
 end IdealPlantHybrErdeis;

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn;
 model IdealSinkHeatInputTemperature
   "Demand node as an ideal sink without return flow, using input connector"
   extends
@@ -71,19 +71,21 @@ equation
           extent={{-46,-32},{-6,-92}},
           lineColor={28,108,200},
           fillColor={175,175,175},
-          fillPattern=FillPattern.Solid)}), Documentation(info="<html>
-<p> This model implements a very simple demand node representation with only an
-ideal flow sink discharging an imported heat flow rate from the DHC system's
-supply network. <code>Q_flow_input</code> specifies the heat flow rate to be
-extracted from the network into the ideal sink depending on the 
- difference between flow temperature and prescribded return temperature over the 
-heat exchanger of the substation. </p>
+          fillPattern=FillPattern.Solid)}), Documentation(info="<html><p>
+  This model implements a very simple demand node representation with
+  only an ideal flow sink discharging an imported heat flow rate from
+  the DHC system's supply network. <code>Q_flow_input</code> specifies
+  the heat flow rate to be extracted from the network into the ideal
+  sink depending on the difference between flow temperature and
+  prescribded return temperature over the heat exchanger of the
+  substation.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end IdealSinkHeatInputTemperature;

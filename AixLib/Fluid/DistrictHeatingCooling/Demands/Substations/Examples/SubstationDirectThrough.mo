@@ -59,20 +59,27 @@ equation
     annotation (Line(points={{46,0},{54,0}}, color={0,127,255}));
   connect(senTem_dyn.port_b, sink.ports[1])
     annotation (Line(points={{74,0},{80,0}}, color={0,127,255}));
-  annotation (experiment(StopTime=100), Documentation(revisions="<html>
-<ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  annotation (experiment(StopTime=100), Documentation(revisions="<html><ul>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>This example demonstrates that the <a
-href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough\">AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough</a>
-model does not affect the fluid flow, but only serves as a placeholder with direct throughflow.</p>
-<p>The simulation results show that the mass flow sensor and the static temperature sensor monitor
-the same values as the input set-values of the sources. Only for a mass flow rate of 0 does the 
-static temperature sensor show a deviation from the set temperature entering the substation model.
-For comparison, a dynamic temperature sensor is also included in this model.</p>
+<p>
+  This example demonstrates that the <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough</a>
+  model does not affect the fluid flow, but only serves as a
+  placeholder with direct throughflow.
+</p>
+<p>
+  The simulation results show that the mass flow sensor and the static
+  temperature sensor monitor the same values as the input set-values of
+  the sources. Only for a mass flow rate of 0 does the static
+  temperature sensor show a deviation from the set temperature entering
+  the substation model. For comparison, a dynamic temperature sensor is
+  also included in this model.
+</p>
 </html>"));
 end SubstationDirectThrough;

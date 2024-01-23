@@ -48,16 +48,18 @@ equation
           127}));
   connect(idealSinkHeatInput1.Q_flow_input, pulse.y) annotation (Line(points={{
           -0.8,58},{-12,58},{-12,80},{86,80},{86,50},{81,50}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model demonstrates the ideal sink implementation of demand nodes, with a minimal 
-example, and node models based on a common base class with variants prescirbing either 
-the discharged mass flow rate or the extracted heat flow rate.</p>
+<p>
+  This model demonstrates the ideal sink implementation of demand
+  nodes, with a minimal example, and node models based on a common base
+  class with variants prescirbing either the discharged mass flow rate
+  or the extracted heat flow rate.
+</p>
 </html>"));
 end IdealSinksDynamicDemand;

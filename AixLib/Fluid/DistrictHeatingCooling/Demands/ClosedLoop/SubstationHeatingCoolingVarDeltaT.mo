@@ -351,16 +351,25 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, 
-the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. 
-This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a> 
-and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
-The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
+<p>
+  Substation model for bidirctional low-temperature networks for
+  buildings with heat pump and chiller. In the case of simultaneous
+  cooling and heating demands, the return flows are used as supply
+  flows for the other application. The mass flows are controlled
+  equation-based. This model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>
+  and the chiller <a href=
+  \"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
+  The mass flows are calculated using the heating and cooling demands
+  and the specified temperature differences between flow and return
+  (network side).
+</p>
 </html>"));
 end SubstationHeatingCoolingVarDeltaT;

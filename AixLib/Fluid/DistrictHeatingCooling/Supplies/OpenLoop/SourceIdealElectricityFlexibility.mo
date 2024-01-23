@@ -84,17 +84,17 @@ equation
           extent={{-78,40},{2,-40}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This model represents the supply node with an ideal pressure source and sink.
-It provides a prescribed supply pressure and supply temperature to the network.
+  This model represents the supply node with an ideal pressure source
+  and sink. It provides a prescribed supply pressure and supply
+  temperature to the network.
 </p>
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));

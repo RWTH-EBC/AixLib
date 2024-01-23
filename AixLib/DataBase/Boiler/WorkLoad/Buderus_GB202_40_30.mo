@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Boiler.WorkLoad;
+within AixLib.DataBase.Boiler.WorkLoad;
 record Buderus_GB202_40_30
   "Buderus Logano Plus GB202 - Condensing Boiler - 40/30degC"
   extends WorkLoadBaseDataDefinition(
