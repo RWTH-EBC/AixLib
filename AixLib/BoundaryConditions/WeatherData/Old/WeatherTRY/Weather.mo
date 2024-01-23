@@ -25,14 +25,15 @@ model Weather "Complex weather model"
 
   replaceable model RadOnTiltedSurface =
       AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
-    constrainedby AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
+    constrainedby
+    AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
     "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
 
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
   Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[SOD.nSurfaces] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
-  parameter Boolean outOpt = false "Output individual vectors instead of one vector [-]" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
+  parameter Boolean outOpt = true "Output individual vectors instead of one vector [-]" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Cloud_cover = false "Cloud cover [-] (TRY col 7)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Wind_dir = false "Wind direction [deg] (TRY col 8)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Wind_speed = false "Wind speed [m/s]  (TRY col 9)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
