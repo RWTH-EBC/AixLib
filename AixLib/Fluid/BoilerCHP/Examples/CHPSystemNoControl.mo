@@ -7,6 +7,7 @@ model CHPSystemNoControl "Example that illustrates use of CHPNoControl model"
       combinedHeatPower(
     redeclare package Medium = Medium,
     m_flow_nominal=0.02,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(

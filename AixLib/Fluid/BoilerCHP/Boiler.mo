@@ -1,8 +1,7 @@
 ﻿within AixLib.Fluid.BoilerCHP;
 model Boiler "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
-                                      vol(energyDynamics=energyDynamics,
-                                          V=paramBoiler.volume));
+                                      vol(V=paramBoiler.volume));
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler
@@ -38,9 +37,6 @@ model Boiler "Boiler with internal and external control"
   parameter Real FA=0.2 "Increment for increased set temperature"
     annotation(Dialog(tab="External Control"));
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics"));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     "Switches Controler on and off"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
