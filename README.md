@@ -1,6 +1,7 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
+[![OM](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)
 
-# AixLib
+# <img src="./AixLib/Resources/Images/Icon_Modelica_AixLib_background.png" width="40"> AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  
 The library contains models of HVAC systems as well as high and reduced order building models.  

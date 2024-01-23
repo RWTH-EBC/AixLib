@@ -56,9 +56,6 @@ record IndoorSwimmingPoolBaseDataDefinition
   parameter Modelica.Units.SI.Area AFloExt "Area of pool floors which is connected to teh ground (pool floor with earth contact)";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWatHor "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWatVer "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
-  //replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam
-   "Wall base data definition with all layers of pool walls"  annotation (choicesAllMatching=true);
 
   annotation (Documentation(info="<html>
 
