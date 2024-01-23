@@ -7,19 +7,18 @@ model ScrollWaterToWater_OneRoomRadiator
   replaceable package MediumW =
       AixLib.Media.Water "Medium model for water";
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal = 20000
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=20000
     "Nominal heat flow rate of radiator";
-  parameter Modelica.SIunits.Temperature TRadSup_nominal = 273.15+50
+  parameter Modelica.Units.SI.Temperature TRadSup_nominal=273.15 + 50
     "Radiator nominal supply water temperature";
-  parameter Modelica.SIunits.Temperature TRadRet_nominal = 273.15+45
+  parameter Modelica.Units.SI.Temperature TRadRet_nominal=273.15 + 45
     "Radiator nominal return water temperature";
-  parameter Modelica.SIunits.MassFlowRate mHeaPum_flow_nominal=
-    Q_flow_nominal/4200/5
-    "Heat pump nominal mass flow rate";
-  parameter Modelica.SIunits.Volume V=6*10*3 "Room volume";
-  parameter Modelica.SIunits.MassFlowRate mA_flow_nominal = V*6/3600
+  parameter Modelica.Units.SI.MassFlowRate mHeaPum_flow_nominal=Q_flow_nominal/
+      4200/5 "Heat pump nominal mass flow rate";
+  parameter Modelica.Units.SI.Volume V=6*10*3 "Room volume";
+  parameter Modelica.Units.SI.MassFlowRate mA_flow_nominal=V*1.2*6/3600
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.HeatFlowRate QRooInt_flow = 4000
+  parameter Modelica.Units.SI.HeatFlowRate QRooInt_flow=4000
     "Internal heat gains of the room";
 //------------------------------------------------------------------------------//
 
@@ -72,7 +71,6 @@ model ScrollWaterToWater_OneRoomRadiator
   AixLib.Fluid.Movers.FlowControlled_m_flow pumHeaPum(
     redeclare package Medium = MediumW,
     m_flow_nominal=mHeaPum_flow_nominal,
-    y_start=1,
     m_flow_start=0.85,
     T_start=TRadSup_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
@@ -127,7 +125,6 @@ model ScrollWaterToWater_OneRoomRadiator
 
   AixLib.Fluid.Movers.FlowControlled_m_flow pumHeaPumSou(
     redeclare package Medium = MediumW,
-    y_start=1,
     m_flow_start=0.85,
     m_flow_nominal=mHeaPum_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
@@ -290,34 +287,46 @@ equation
   connect(preSou.ports[1], temRet.port_b) annotation (Line(points={{70,-120},{60,
           -120},{60,-30}}, color={0,127,255}));
   annotation (Documentation(info="<html>
-<p>
-Example that simulates one room equipped with a radiator. Hot water is produced
-by a <i>24</i> kW nominal capacity heat pump. The source side water temperature to the
-heat pump is constant at <i>10</i>&deg;C.
-</p>
-<p>
-The heat pump is turned on when the room temperature falls below
-<i>19</i>&deg;C and turned
-off when the room temperature rises above <i>21</i>&deg;C.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-March 3, 2017, by Michael Wetter:<br/>
-Changed mass flow test to use a hysteresis as a threshold test
-can cause chattering.
-</li>
-<li>
-January 27, 2017, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Example that simulates one room equipped with a radiator. Hot water is produced
+ by a <i>24</i> kW nominal capacity heat pump. The source side water temperature to the
+ heat pump is constant at <i>10</i>&deg;C.
+ </p>
+ <p>
+ The heat pump is turned on when the room temperature falls below
+ <i>19</i>&deg;C and turned
+ off when the room temperature rises above <i>21</i>&deg;C.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 22, 2021, by Michael Wetter:<br/>
+ Removed assignments <code>pumHeaPum(y_start=1)</code> and <code>pumHeaPumSou(y_start=1)</code>.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1498\">#1498</a>.
+ </li>
+ <li>
+ April 21, 2021, by Michael Wetter:<br/>
+ Corrected error in calculation of design mass flow rate.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2458\">#2458</a>.
+ </li>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ March 3, 2017, by Michael Wetter:<br/>
+ Changed mass flow test to use a hysteresis as a threshold test
+ can cause chattering.
+ </li>
+ <li>
+ January 27, 2017, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-240,-220},{100,
             100}})),
     __Dymola_Commands(file=
@@ -325,5 +334,6 @@ First implementation.
         "Simulate and plot"),
     experiment(
       StopTime=172800,
-      Tolerance=1e-08));
+      Tolerance=1e-08),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_OneRoomRadiator;

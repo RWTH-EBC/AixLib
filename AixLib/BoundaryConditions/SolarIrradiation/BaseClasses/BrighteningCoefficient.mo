@@ -113,53 +113,54 @@ equation
   annotation (
     defaultComponentName="briCoe",
     Documentation(info="<html>
-<p>
-This component computes the circumsolar and horizon brightening coefficients.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 27, 2018, by Michael Wetter:<br/>
-Corrected <code>displayUnit</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">AixLib, issue 912</a>.
-</li>
-<li>
-March 15, 2016, by Michael Wetter:<br/>
-Replaced <code>spliceFunction</code> with <code>regStep</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
-</li>
-<li>
-May 25, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the circumsolar and horizon brightening coefficients.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 27, 2018, by Michael Wetter:<br/>
+ Corrected <code>displayUnit</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+ </li>
+ <li>
+ March 15, 2016, by Michael Wetter:<br/>
+ Replaced <code>spliceFunction</code> with <code>regStep</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+ </li>
+ <li>
+ May 25, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Text(
           extent={{-96,72},{-52,50}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="skyCle"),
         Text(
           extent={{-96,14},{-52,-8}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="skyBri"),
         Text(
           extent={{-96,-46},{-52,-68}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="zen"),
         Text(
           extent={{62,50},{106,28}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="F1"),
         Text(
           extent={{60,-30},{104,-52}},
-          lineColor={0,0,127},
-          textString="F2")}));
+          textColor={0,0,127},
+          textString="F2")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BrighteningCoefficient;

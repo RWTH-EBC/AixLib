@@ -1,11 +1,13 @@
-within AixLib.Controls.SetPoints.Functions;
+﻿within AixLib.Controls.SetPoints.Functions;
 partial function PartialBaseFct "Base function of a heating curve"
   extends Modelica.Icons.Function;
 
-  input Modelica.SIunits.ThermodynamicTemperature T_oda "Outdoor air temperature";
-  input Modelica.SIunits.ThermodynamicTemperature TRoom "Room temperature";
+  input Modelica.Units.SI.ThermodynamicTemperature T_oda
+    "Outdoor air temperature";
+  input Modelica.Units.SI.ThermodynamicTemperature TRoom "Room temperature";
   input Boolean isDay "Boolean to evaulate if it is day or night";
-  output Modelica.SIunits.ThermodynamicTemperature TSet "Set temperature for the heat generator";
+  output Modelica.Units.SI.ThermodynamicTemperature TSet
+    "Set temperature for the heat generator";
 
   annotation (Documentation(revisions="<html><ul>
   <li>

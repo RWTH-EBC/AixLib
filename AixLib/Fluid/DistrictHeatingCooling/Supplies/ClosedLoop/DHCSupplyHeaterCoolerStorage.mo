@@ -2,17 +2,16 @@ within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model DHCSupplyHeaterCoolerStorage
   "Supply node model with ideal heater and cooler and storage tank without heat losses for heat and cold supply of bidirectional networks"
 
-      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
+      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
-      "Nominal pressure drop";
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
+    "Nominal pressure drop";
 
-      parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=m_flow_nominal
     "Nominal mass flow rate";
 
-      parameter Modelica.SIunits.Volume V_Tank "Volume of thermal storage tank";
+  parameter Modelica.Units.SI.Volume V_Tank "Volume of thermal storage tank";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
@@ -37,8 +36,8 @@ model DHCSupplyHeaterCoolerStorage
     m_flow_nominal=m_flow_nominal)
     "Ideal heater (only in operation if mass flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{42,-10},{62,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_cooOut(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_cooOut(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     "Outlet temperature of ideal cooler if mass flow direcetion is from port_b to port_a"
     annotation (Placement(transformation(extent={{-92,-10},{-112,10}})));
   Modelica.Blocks.Interfaces.RealInput T_cooSet(unit="K")
@@ -57,15 +56,15 @@ model DHCSupplyHeaterCoolerStorage
     nSeg=3,
     VTan=V_Tank)
               annotation (Placement(transformation(extent={{0,-10},{-20,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_heaOut(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_heaOut(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     "Outlet temperature of ideal heater if mass flow direcetion is from port_a to port_b"
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoHea(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoHea(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{26,-10},{6,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoCoo(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoCoo(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-30,-10},{-50,10}})));
   Modelica.Blocks.Math.Min min "Set temperature of ideal heater"
     annotation (Placement(transformation(extent={{-44,28},{-56,40}})));
@@ -123,14 +122,24 @@ equation
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{100,
             100}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020</i> ,by Tobias Blacha:<br/>
-Moved to development </li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020</i> ,by Tobias Blacha:<br/>
+    Moved to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model represents the supply node of a bidirectional network with ideal heater and ideal cooler and storage tank. The tank is integrated into the network directly. The operation mode of the supply systems depends on the flow direction. In the case that port_b is the outlet, heating operation takes place. In the case that port_a is the outlet, cooling operation takes place. </p>
+<p>
+  This model represents the supply node of a bidirectional network with
+  ideal heater and ideal cooler and storage tank. The tank is
+  integrated into the network directly. The operation mode of the
+  supply systems depends on the flow direction. In the case that port_b
+  is the outlet, heating operation takes place. In the case that port_a
+  is the outlet, cooling operation takes place.
+</p>
 </html>"));
 end DHCSupplyHeaterCoolerStorage;

@@ -4,7 +4,7 @@ model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
     final prescribedHeatFlowRate=true));
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
     annotation (Placement(transformation(
@@ -59,7 +59,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-56,-12},{54,-72}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="Q=%Q_flow_nominal"),
         Rectangle(
           extent={{-100,60},{-70,58}},
@@ -69,107 +69,114 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-122,106},{-78,78}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="u"),
         Text(
           extent={{72,96},{116,68}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Q_flow")}),
 defaultComponentName="hea",
 Documentation(info="<html>
-<p>
-Model for an ideal heater or cooler with prescribed heat flow rate to the medium.
-</p>
-<p>
-This model adds heat in the amount of <code>Q_flow = u Q_flow_nominal</code> to the medium.
-The input signal <code>u</code> and the nominal heat flow rate <code>Q_flow_nominal</code>
-can be positive or negative. A positive value of <code>Q_flow</code> means
-heating, and negative means cooling.
-</p>
-<p>
-The outlet conditions at <code>port_a</code> are not affected by this model,
-other than for a possible pressure difference due to flow friction.
-</p>
-<p>
-Optionally, this model can have a flow resistance.
-Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
-</p>
-<p>
-For a model that uses as an input the fluid temperature leaving at
-<code>port_b</code>, use
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
-</p>
-<h4>Limitations</h4>
-<p>
-This model does not affect the humidity of the air. Therefore,
-if used to cool air below the dew point temperature, the water mass fraction
-will not change.
-</p>
-<h4>Validation</h4>
-<p>
-The model has been validated against the analytical solution in
-the example
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">
-AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
-</p>
-</html>",
+ <p>
+ Model for an ideal heater or cooler with prescribed heat flow rate to the medium.
+ </p>
+ <p>
+ This model adds heat in the amount of <code>Q_flow = u Q_flow_nominal</code> to the medium.
+ The input signal <code>u</code> and the nominal heat flow rate <code>Q_flow_nominal</code>
+ can be positive or negative. A positive value of <code>Q_flow</code> means
+ heating, and negative means cooling.
+ </p>
+ <p>
+ The outlet conditions at <code>port_a</code> are not affected by this model,
+ other than for a possible pressure difference due to flow friction.
+ </p>
+ <p>
+ Optionally, this model can have a flow resistance.
+ Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
+ </p>
+ <p>
+ For a model that uses as an input the fluid temperature leaving at
+ <code>port_b</code>, use
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
+ AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ This model does not affect the humidity of the air. Therefore,
+ if used to cool air below the dew point temperature, the water mass fraction
+ will not change.
+ </p>
+ <h4>Validation</h4>
+ <p>
+ The model has been validated against the analytical solution in
+ the example
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">
+ AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 3, 2016, by Michael Wetter:<br/>
-Set <code>preHea(final alpha=0)</code> as this allows to simplify the
-system of equations.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/570\">#570</a>.
-</li>
-<li>
-November 19, 2015, by Michael Wetter:<br/>
-Removed assignment of parameter
-<code>showDesignFlowDirection</code> in <code>extends</code> statement.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
-</li>
-<li>
-May 6, 2015, by Michael Wetter:<br/>
-Set <code>prescribedHeatFlowRate=true</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
-#412</a>.
-</li>
-<li>
-May 1, 2015, by Marcus Fuchs:<br/>
-Corrected typo in documentation.
-</li>
-<li>
-November 12, 2014, by Michael Wetter:<br/>
-Added output signal <code>Q_flow</code> so that it has
-the same output ports as
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>.
-</li>
-<li>
-September 11, 2014, by Christoph Nytsch-Geusen:<br/>
-Renaming class to <code>HeaterCooler_u</code>.
-</li>
-<li>
-October 15, 2013, by Michael Wetter:<br/>
-Redeclared the control volume to be final so that it does not show
-anymore in the parameter window.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-Redeclared fluid volume as final. This prevents the fluid volume model
-to appear in the dialog window.
-</li>
-<li>
-May 24, 2011, by Michael Wetter:<br/>
-Changed base class to allow using the model as a dynamic or a steady-state model.
-</li>
-<li>
-April 17, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ November 3, 2016, by Michael Wetter:<br/>
+ Set <code>preHea(final alpha=0)</code> as this allows to simplify the
+ system of equations.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/570\">#570</a>.
+ </li>
+ <li>
+ November 19, 2015, by Michael Wetter:<br/>
+ Removed assignment of parameter
+ <code>showDesignFlowDirection</code> in <code>extends</code> statement.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
+ </li>
+ <li>
+ May 6, 2015, by Michael Wetter:<br/>
+ Set <code>prescribedHeatFlowRate=true</code>.
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
+ #412</a>.
+ </li>
+ <li>
+ May 1, 2015, by Marcus Fuchs:<br/>
+ Corrected typo in documentation.
+ </li>
+ <li>
+ November 12, 2014, by Michael Wetter:<br/>
+ Added output signal <code>Q_flow</code> so that it has
+ the same output ports as
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
+ AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>.
+ </li>
+ <li>
+ September 11, 2014, by Christoph Nytsch-Geusen:<br/>
+ Renaming class to <code>HeaterCooler_u</code>.
+ </li>
+ <li>
+ October 15, 2013, by Michael Wetter:<br/>
+ Redeclared the control volume to be final so that it does not show
+ anymore in the parameter window.
+ </li>
+ <li>
+ July 11, 2011, by Michael Wetter:<br/>
+ Redeclared fluid volume as final. This prevents the fluid volume model
+ to appear in the dialog window.
+ </li>
+ <li>
+ May 24, 2011, by Michael Wetter:<br/>
+ Changed base class to allow using the model as a dynamic or a steady-state model.
+ </li>
+ <li>
+ April 17, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

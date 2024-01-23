@@ -106,34 +106,35 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvesMotor.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Test model for two way valves. Note that the
-leakage flow rate has been set to a large value
-and the rangeability to a small value
-for better visualization of the valve characteristics.
-To use common values, use the default values.
-</p>
-<p>
-All valves are connected to a model of a motor with
-hysteresis. A more efficient implementation that approximates
-a motor but lacks hysteresis would be to
-set the valve parameter <code>use_inputFilter=true</code> instead
-of using the motor model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 29, 2015, by Filip Jorissen:<br/>
-Added pressure-independent valve.
-</li>
-<li>
-February 28, 2013, by Michael Wetter:<br/>
-Added default value for <code>dpValve_nominal</code>.
-</li>
-<li>
-June 16, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Test model for two way valves. Note that the
+ leakage flow rate has been set to a large value
+ and the rangeability to a small value
+ for better visualization of the valve characteristics.
+ To use common values, use the default values.
+ </p>
+ <p>
+ All valves are connected to a model of a motor with
+ hysteresis. A more efficient implementation that approximates
+ a motor but lacks hysteresis would be to
+ set the valve parameter <code>use_inputFilter=true</code> instead
+ of using the motor model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 29, 2015, by Filip Jorissen:<br/>
+ Added pressure-independent valve.
+ </li>
+ <li>
+ February 28, 2013, by Michael Wetter:<br/>
+ Added default value for <code>dpValve_nominal</code>.
+ </li>
+ <li>
+ June 16, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValvesMotor;

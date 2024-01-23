@@ -148,43 +148,44 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PumpCurveDerivatives.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example checks if the pump similarity law implementation results in
-monotoneously increasing or decreasing relations between <code>dp</code>,
-<code>m_flow</code> and <code>Nrpm</code>.
-</p>
-</html>",
+ <p>
+ This example checks if the pump similarity law implementation results in
+ monotoneously increasing or decreasing relations between <code>dp</code>,
+ <code>m_flow</code> and <code>Nrpm</code>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-July 5, 2017, by Michael Wetter:<br/>
-Replaced exact derivative with derivative approximation, and removed the assertions.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/807\">#807</a>.
-</li>
-<li>
-April 6, 2017, by Thierry S. Nouidui:<br/>
-Added <code>experiment</code> annotation
-for JModelica verification.
-</li>
-<li>
-June 6, 2015, by Michael Wetter:<br/>
-Removed duplicate <code>experiment</code> annotation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-November 26, 2014, by Filip Jorissen:<br/>
-Cleaned up implementation
-</li>
-<li>
-February 27, 2014, by Filip Jorissen:<br/>
-First implementation. See
-<a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
-for a discussion and validation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ July 5, 2017, by Michael Wetter:<br/>
+ Replaced exact derivative with derivative approximation, and removed the assertions.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/807\">#807</a>.
+ </li>
+ <li>
+ April 6, 2017, by Thierry S. Nouidui:<br/>
+ Added <code>experiment</code> annotation
+ for JModelica verification.
+ </li>
+ <li>
+ June 6, 2015, by Michael Wetter:<br/>
+ Removed duplicate <code>experiment</code> annotation.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+ </li>
+ <li>
+ November 26, 2014, by Filip Jorissen:<br/>
+ Cleaned up implementation
+ </li>
+ <li>
+ February 27, 2014, by Filip Jorissen:<br/>
+ First implementation. See
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
+ for a discussion and validation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(extent={{-140,-140},{140,120}},
-          preserveAspectRatio=false)));
+          preserveAspectRatio=false)),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PumpCurveDerivatives;

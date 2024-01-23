@@ -4,7 +4,7 @@ model EvaporatorCondenser "Test model for the evaporator or condenser model"
 
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.01
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
 
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ref(T=283.15)
@@ -33,7 +33,6 @@ model EvaporatorCondenser "Test model for the evaporator or condenser model"
     m_flow(start=0.1),
     dp(start=10),
     UA=100,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     dp_nominal=0,
     tau=5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -69,23 +68,24 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=100),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of the
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenser\">
-AixLib.Fluid.HeatExchangers.EvaporatorCondenser</a> model.
-</p>
-<p>
-The fluid flow rate is increased from <i>m&#775; = 0.01 kg/s</i> to
-<i>m&#775; = 0.10 kg/s</i> over 100 seconds. As a result, the heat exchanger
-effectiveness and the fluid temperature difference in the heat exchanger
-decrease.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 11, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that demonstrates the use of the
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenser\">
+ AixLib.Fluid.HeatExchangers.EvaporatorCondenser</a> model.
+ </p>
+ <p>
+ The fluid flow rate is increased from <i>m&#775; = 0.01 kg/s</i> to
+ <i>m&#775; = 0.10 kg/s</i> over 100 seconds. As a result, the heat exchanger
+ effectiveness and the fluid temperature difference in the heat exchanger
+ decrease.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 11, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EvaporatorCondenser;

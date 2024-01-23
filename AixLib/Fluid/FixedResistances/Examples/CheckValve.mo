@@ -77,21 +77,21 @@ equation
           {-64,-32},{-52,-32}}, color={0,0,127}));
   connect(checkValve_m_flow.port_b, sin.ports[3]) annotation (Line(points={{10,-40},
           {30,-40},{30,-2.66667}}, color={0,127,255}));
-  annotation (experiment(Tolerance=1e-06, StopTime=1, __Dymola_Algorithm="Cvode"),
-      __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CheckValve.mos"
+  annotation (experiment(Tolerance=1e-06, StopTime=1),
+      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CheckValve.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-September 16, 2019, by Kristoff Six and Filip Jorissen:<br/>
-Implementation of a hydraulic check valve. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1198\">issue 1198</a>.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example model for the use of a hydraulic check valve.
-</p>
-</html>"));
+ <ul>
+ <li>
+ September 16, 2019, by Kristoff Six and Filip Jorissen:<br/>
+ Implementation of a hydraulic check valve. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1198\">issue 1198</a>.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example model for the use of a hydraulic check valve.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CheckValve;

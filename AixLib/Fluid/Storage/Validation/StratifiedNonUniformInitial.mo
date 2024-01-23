@@ -6,7 +6,7 @@ model StratifiedNonUniformInitial
   package Medium = AixLib.Media.Water "Medium model";
   constant Integer nSeg = 7 "Number of segments in tank";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 1*1000/3600/4;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1*1000/3600/4;
 
   AixLib.Fluid.Sources.Boundary_pT sou_1(
     p=300000 + 5000,
@@ -131,18 +131,19 @@ annotation (experiment(Tolerance=1e-6, StopTime=3600),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Validation/StratifiedNonUniformInitial.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-This test model validates
-<a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
-AixLib.Fluid.Storage.Stratified</a> by specifying a non-uniform initial 
-temperature. 
-</html>", revisions="<html>
-<ul>
-<li>
-November 13, 2019 by Jianjun Hu:<br/>
-Changed the uniform initial tank temperature to be non-uniform.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1246\">#1246</a>.
-</li>
-</ul>
-</html>"));
+ This test model validates
+ <a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
+ AixLib.Fluid.Storage.Stratified</a> by specifying a non-uniform initial 
+ temperature. 
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 13, 2019 by Jianjun Hu:<br/>
+ Changed the uniform initial tank temperature to be non-uniform.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1246\">#1246</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedNonUniformInitial;

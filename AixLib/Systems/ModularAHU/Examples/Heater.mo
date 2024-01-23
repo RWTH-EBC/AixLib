@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Heater "Heating register"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -13,6 +13,8 @@ model Heater "Heating register"
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=6.3,
+      valveCharacteristic=
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
@@ -63,7 +65,7 @@ model Heater "Heating register"
     Td=1,
     useExternalTset=false,
     TflowSet=293.15,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
+    initType=Modelica.Blocks.Types.Init.InitialOutput)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
 equation
   connect(boundaryWaterSink.ports[1], registerModule.port_b2) annotation (Line(

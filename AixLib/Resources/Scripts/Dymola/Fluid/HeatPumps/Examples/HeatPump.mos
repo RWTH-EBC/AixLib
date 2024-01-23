@@ -1,3 +1,3 @@
 simulateModel("AixLib.Fluid.HeatPumps.Examples.HeatPump", tolerance=1e-6, stopTime=3600, method="dassl", resultFile="HeatPump");
-createPlot(id=2, position={75, 70, 1210, 980}, y={"heatPump.sigBus.T_flow_co","heatPump.sigBus.T_flow_ev","heatPump.sigBus.T_ret_co","heatPump.sigBus.T_ret_ev"}, range={0.0, 3600.0, 5.0, 40.0}, grid=true, filename="HeatPump.mat", colors={{28,108,200}, {238,46,47}, {0,140,72}, {180,56,148}});
+createPlot(id=2, position={75, 70, 1210, 980}, y={"heatPump.sigBus.TConInMea","heatPump.sigBus.TEvaInMea","heatPump.sigBus.TConOutMea","heatPump.sigBus.TEvaOutMea"}, range={0.0, 3600.0, 5.0, 40.0}, grid=true, filename="HeatPump.mat", colors={{28,108,200}, {238,46,47}, {0,140,72}, {180,56,148}});
 createPlot(id=2, position={75, 70, 1210, 240}, y={"heatPump.innerCycle.QEva", "heatPump.innerCycle.QCon", "heatPump.innerCycle.Pel"}, range={0.0, 3600.0, -200000.0, 300000.0}, grid=true, subPlot=2, colors={{28,108,200}, {238,46,47}, {0,140,72}});

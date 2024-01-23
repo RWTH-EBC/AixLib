@@ -25,33 +25,33 @@ equation
   port_b.C_outflow = inStream(port_a.C_outflow);
 
   annotation (Documentation(info="<html>
-<p>
-This model multiplies the mass flow rate so that
-<code>0 = port_b.m_flow + k * port_a.m_flow</code>.
-</p>
-<p>
-The specific enthalpy, the species concentration and the trace substance concentration
-remain unchanged.
-Therefore, this model does not conserve mass or energy.
-It is used in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield</a>
-and also in the Buildings library
-to avoid having to instantiate circuits in parallel, with each
-having the same mass flow rate and temperatures.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 27, 2013, by Michael Wetter:<br/>
-Changed implementation to extend from <code>Modelica.Fluid</code>.
-</li>
-<li>
-June 27, 2012, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Icon(graphics={
+ <p>
+ This model multiplies the mass flow rate so that
+ <code>0 = port_b.m_flow + k * port_a.m_flow</code>.
+ </p>
+ <p>
+ The specific enthalpy, the species concentration and the trace substance concentration
+ remain unchanged.
+ Therefore, this model does not conserve mass or energy.
+ It is used in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield</a>
+ and also in the Buildings library
+ to avoid having to instantiate circuits in parallel, with each
+ having the same mass flow rate and temperatures.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 27, 2013, by Michael Wetter:<br/>
+ Changed implementation to extend from <code>Modelica.Fluid</code>.
+ </li>
+ <li>
+ June 27, 2012, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Icon(graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           fillColor={255,237,228},
@@ -63,5 +63,6 @@ First implementation.
           lineColor={0,0,255},
           smooth=Smooth.None,
           fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowRateMultiplier;

@@ -10,16 +10,16 @@ model LimPID "Test model for PID controller with optional reverse action"
     Td=1,
     yMax=1,
     yMin=-1,
-    initType=Modelica.Blocks.Types.InitPID.InitialState)
-          annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+    initType=Modelica.Blocks.Types.Init.InitialState)
+    annotation (Placement(transformation(extent={{-20,30},{0,50}})));
   AixLib.Controls.Continuous.LimPID limPIDRev(
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    reverseAction=true,
+    reverseActing=false,
     Ti=1,
     Td=1,
     yMax=1,
     yMin=-1,
-    initType=Modelica.Blocks.Types.InitPID.InitialState)
+    initType=Modelica.Blocks.Types.Init.InitialState)
     "Controller with reverse action"
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
   Modelica.Blocks.Sources.Constant const(k=0.5)
@@ -35,8 +35,8 @@ model LimPID "Test model for PID controller with optional reverse action"
     Td=1,
     yMax=1,
     yMin=-1,
-    initType=Modelica.Blocks.Types.InitPID.InitialState)
-          annotation (Placement(transformation(extent={{-20,70},{0,90}})));
+    initType=Modelica.Blocks.Types.Init.InitialState)
+    annotation (Placement(transformation(extent={{-20,70},{0,90}})));
   AixLib.Utilities.Diagnostics.AssertEquality assertEquality1(
     threShold=1e-3)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
@@ -80,34 +80,35 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/LimPID.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-April 26, 2016, by Michael Wetter:<br/>
-Relaxed tolerance of assertions from <i>1E-10</i>
-to <i>1E-3</i> as the default relative tolerance in JModelica
-is <i>1E-4</i>.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">
-Buildings, issue 510</a>.
-</li>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-This model tests the implementation of the
-PID controller with optional reverse action.
-The model <code>limPIDOri</code> is the original
-implementation of the controller from the Modelica
-Standard Library. The models <code>limPID</code>
-and <code>limPIDRev</code> are the implementations
-from the AixLib library. The model
-<code>limPIDRev</code> is parameterized to have
-reverse action.
-The assertion blocks test whether the results
-of all three controllers are identical.
-</p>
-</html>"));
+ <ul>
+ <li>
+ April 26, 2016, by Michael Wetter:<br/>
+ Relaxed tolerance of assertions from <i>1E-10</i>
+ to <i>1E-3</i> as the default relative tolerance in JModelica
+ is <i>1E-4</i>.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">
+ Buildings, issue 510</a>.
+ </li>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ This model tests the implementation of the
+ PID controller with optional reverse action.
+ The model <code>limPIDOri</code> is the original
+ implementation of the controller from the Modelica
+ Standard Library. The models <code>limPID</code>
+ and <code>limPIDRev</code> are the implementations
+ from the AixLib library. The model
+ <code>limPIDRev</code> is parameterized to have
+ reverse action.
+ The assertion blocks test whether the results
+ of all three controllers are identical.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end LimPID;

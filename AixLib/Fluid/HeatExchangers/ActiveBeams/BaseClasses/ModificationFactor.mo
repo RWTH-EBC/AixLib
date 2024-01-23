@@ -105,30 +105,31 @@ equation
           {60,-40},{60,-2.8},{64,-2.8}}, color={0,0,127}));
   annotation ( defaultComponentName="mod",
             Documentation(info="<html>
-<p>
-This model determines the three modification factors described in
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide</a>
-by comparing the actual values of air mass flow rate,
-water mass flow rate and room-water temperature difference with the nominal values.
-The three modification factors are then multiplied.
-Input to this model are the total mass flow rates of all parallel beams combined.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model determines the three modification factors described in
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide</a>
+ by comparing the actual values of air mass flow rate,
+ water mass flow rate and room-water temperature difference with the nominal values.
+ The three modification factors are then multiplied.
+ Input to this model are the total mass flow rates of all parallel beams combined.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{100,100},{-100,-100}},
-          lineColor={0,0,0},
-          textString="f")}));
+          textColor={0,0,0},
+          textString="f")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ModificationFactor;

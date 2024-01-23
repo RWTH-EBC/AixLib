@@ -10,22 +10,15 @@ model SteamHumidifier_X
       final QMax_flow = Modelica.Constants.inf,
       final QMin_flow = -Modelica.Constants.inf,
       final mWatMax_flow = mWatMax_flow,
-      final mWatMin_flow = 0,
-      final energyDynamics = Modelica.Fluid.Types.Dynamics.SteadyState,
-      final massDynamics = massDynamics));
+      final mWatMin_flow = 0));
 
-  parameter Modelica.SIunits.MassFlowRate mWatMax_flow(min=0) = Modelica.Constants.inf
+  parameter Modelica.Units.SI.MassFlowRate mWatMax_flow(min=0) = Modelica.Constants.inf
     "Maximum water mass flow rate addition (positive)"
     annotation (Evaluate=true);
 
-  parameter Modelica.SIunits.MassFraction X_start[Medium.nX] = Medium.X_default
+  parameter Modelica.Units.SI.MassFraction X_start[Medium.nX]=Medium.X_default
     "Start value of mass fractions m_i/m"
     annotation (Dialog(tab="Initialization"));
-
-  // Dynamics
-  parameter Modelica.Fluid.Types.Dynamics massDynamics = Modelica.Fluid.Types.Dynamics.SteadyState
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Set maximum to a high value to avoid users mistakenly entering relative humidity.
   Modelica.Blocks.Interfaces.RealInput X_w(
@@ -43,12 +36,12 @@ model SteamHumidifier_X
     "Heat flow rate added to the fluid (if flow is from port_a to port_b)"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
 protected
-  constant Modelica.SIunits.SpecificEnthalpy hSte = Medium.enthalpyOfCondensingGas(T=373.15)
+  constant Modelica.Units.SI.SpecificEnthalpy hSte=
+      Medium.enthalpyOfCondensingGas(T=373.15)
     "Enthalpy of steam at 100 degree Celsius";
 
-  Modelica.SIunits.SpecificEnthalpy hLea=
-    inStream(port_a.h_outflow) +
-    {hSte} * (port_b.Xi_outflow - inStream(port_a.Xi_outflow))
+  Modelica.Units.SI.SpecificEnthalpy hLea=inStream(port_a.h_outflow) + {hSte}*(
+      port_b.Xi_outflow - inStream(port_a.Xi_outflow))
     "Approximation of leaving enthalpy, based on dh/dx=h_fg";
 
   Modelica.Blocks.Sources.RealExpression TLea(y=
@@ -77,11 +70,11 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-100,98},{-64,80}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="X_w"),
         Text(
           extent={{72,68},{138,14}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="mWat_flow"),
         Rectangle(
           extent={{-100,62},{-70,58}},
@@ -138,7 +131,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{72,108},{120,92}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Q_flow"),
         Polygon(
           points={{56,-26},{44,-34},{44,-34},{56,-40},{56,-38},{48,-34},{48,-34},
@@ -199,73 +192,78 @@ equation
           pattern=LinePattern.None)}),
 defaultComponentName="hum",
 Documentation(info="<html>
-<p>
-Model for a steam humidifier with a prescribed outlet water vapor mass fraction
-in kg/kg total air.
-</p>
-<p>
-This model forces the outlet water mass fraction at <code>port_b</code> to be
-no lower than the
-input signal <code>X_wSet</code>, subject to optional limits on the
-maximum water vapor mass flow rate that is added, as
-described by the parameter <code>mWatMax_flow</code>.
-By default, the model has unlimited capacity.
-</p>
-<p>
-The output signal <code>mWat_flow &ge; 0</code> is the moisture added
-to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
-If the flow is reversed, then <code>mWat_flow = 0</code>.
-The outlet specific enthalpy at <code>port_b</code> is increased by
-the enthalpy of steam at <i>100</i>&deg;C times the mass of steam that was added.
-Therefore, the temperature of the leaving fluid is slightly above the inlet temperature.
-</p>
-<p>
-The outlet conditions at <code>port_a</code> are not affected by this model,
-other than for a possible pressure difference due to flow friction.
-</p>
-<p>
-If the parameter <code>energyDynamics</code> is different from
-<code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
-the component models the dynamic response using a first order differential equation.
-The time constant of the component is equal to the parameter <code>tau</code>.
-This time constant is adjusted based on the mass flow rate using
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-&tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
-</p>
-<p>
-where
-<i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
-<i>m&#775;</i> and
-<i>&tau;</i> is the time constant at the nominal mass flow rate
-<i>m&#775;<sub>nom</sub></i>.
-This type of dynamics is equal to the dynamics that a completely mixed
-control volume would have.
-</p>
-<p>
-Optionally, this model can have a flow resistance.
-Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
-</p>
-<p>
-For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
-this with the nominal water mass flow rate, use
-<a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
-AixLib.Fluid.Humidifiers.Humidifier_u</a>
-
-</p>
-<h4>Limitations</h4>
-<p>
-This model only adds water vapor for the flow from
-<code>port_a</code> to <code>port_b</code>.
-The water vapor of the reverse flow is not affected by this model.
-</p>
-</html>",
+ <p>
+ Model for a steam humidifier with a prescribed outlet water vapor mass fraction
+ in kg/kg total air.
+ </p>
+ <p>
+ This model forces the outlet water mass fraction at <code>port_b</code> to be
+ no lower than the
+ input signal <code>X_wSet</code>, subject to optional limits on the
+ maximum water vapor mass flow rate that is added, as
+ described by the parameter <code>mWatMax_flow</code>.
+ By default, the model has unlimited capacity.
+ </p>
+ <p>
+ The output signal <code>mWat_flow &ge; 0</code> is the moisture added
+ to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
+ If the flow is reversed, then <code>mWat_flow = 0</code>.
+ The outlet specific enthalpy at <code>port_b</code> is increased by
+ the enthalpy of steam at <i>100</i>&deg;C times the mass of steam that was added.
+ Therefore, the temperature of the leaving fluid is slightly above the inlet temperature.
+ </p>
+ <p>
+ The outlet conditions at <code>port_a</code> are not affected by this model,
+ other than for a possible pressure difference due to flow friction.
+ </p>
+ <p>
+ If the parameter <code>energyDynamics</code> is different from
+ <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+ the component models the dynamic response using a first order differential equation.
+ The time constant of the component is equal to the parameter <code>tau</code>.
+ This time constant is adjusted based on the mass flow rate using
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ &tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
+ </p>
+ <p>
+ where
+ <i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
+ <i>m&#775;</i> and
+ <i>&tau;</i> is the time constant at the nominal mass flow rate
+ <i>m&#775;<sub>nom</sub></i>.
+ This type of dynamics is equal to the dynamics that a completely mixed
+ control volume would have.
+ </p>
+ <p>
+ Optionally, this model can have a flow resistance.
+ Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
+ </p>
+ <p>
+ For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
+ this with the nominal water mass flow rate, use
+ <a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
+ AixLib.Fluid.Humidifiers.Humidifier_u</a>
+ 
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ This model only adds water vapor for the flow from
+ <code>port_a</code> to <code>port_b</code>.
+ The water vapor of the reverse flow is not affected by this model.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 10, 2017, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 8, 2022, by Michael Wetter:<br/>
+ Renamed parameter <code>massDynamics</code> to <code>energyDynamics</code> for consistency with other models.
+ </li>
+ <li>
+ May 10, 2017, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SteamHumidifier_X;

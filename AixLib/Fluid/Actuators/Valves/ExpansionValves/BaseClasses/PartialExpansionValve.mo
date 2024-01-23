@@ -1,44 +1,38 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialExpansionValve
   "Base model for all expansion valve models"
 
   // Definition of parameters
   //
-  parameter Modelica.SIunits.Area AVal = 2.5e-6
+  parameter Modelica.Units.SI.Area AVal=2.5e-6
     "Cross-sectional area of the valve when it is fully opened"
-    annotation(Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Diameter dInlPip = 7.5e-3
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Diameter dInlPip=7.5e-3
     "Diameter of the pipe at valve's inlet"
-    annotation(Dialog(group="Geometry"));
+    annotation (Dialog(group="Geometry"));
 
   parameter Boolean useInpFil = true
     "= true, if transient behaviour of valve opening or closing is computed"
     annotation(Dialog(group="Transient behaviour"));
-  parameter Modelica.SIunits.Time risTim = 0.5
+  parameter Modelica.Units.SI.Time risTim=0.5
     "Time until valve opening reaches 99.6 % of its set value"
-    annotation(Dialog(
-      enable = useInpFil,
-      group="Transient behaviour"));
+    annotation (Dialog(enable=useInpFil, group="Transient behaviour"));
 
   parameter Utilities.Types.CalcProc calcProc=Utilities.Types.CalcProc.nominal
     "Chose predefined calculation method for flow coefficient"
     annotation (Dialog(tab="Flow Coefficient"));
-  parameter Modelica.SIunits.MassFlowRate mFlowNom = m_flow_nominal
-    "Mass flow at nominal conditions"
-    annotation(Dialog(
-               tab="Flow Coefficient",
-               group="Nominal calculation",
-               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
-          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
-           else false));
-  parameter Modelica.SIunits.PressureDifference dpNom = 15e5
-    "Pressure drop at nominal conditions"
-    annotation(Dialog(
-               tab="Flow Coefficient",
-               group="Nominal calculation",
-               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
-          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
-           else false));
+  parameter Modelica.Units.SI.MassFlowRate mFlowNom=m_flow_nominal
+    "Mass flow at nominal conditions" annotation (Dialog(
+      tab="Flow Coefficient",
+      group="Nominal calculation",
+      enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (calcProc
+           == Utilities.Types.CalcProc.flowCoefficient)) then true else false));
+  parameter Modelica.Units.SI.PressureDifference dpNom=15e5
+    "Pressure drop at nominal conditions" annotation (Dialog(
+      tab="Flow Coefficient",
+      group="Nominal calculation",
+      enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (calcProc
+           == Utilities.Types.CalcProc.flowCoefficient)) then true else false));
 
   // Definition of model describing flow coefficient
   //
@@ -124,8 +118,8 @@ partial model PartialExpansionValve
     final filterType=Modelica.Blocks.Types.FilterType.LowPass,
     order=2,
     f_cut=5/(2*Modelica.Constants.pi*risTim),
-    x(each stateSelect=StateSelect.always)) if
-        useInpFil
+    x(each stateSelect=StateSelect.always))
+     if useInpFil
     "Second order filter to approximate valve opening or closing time"
     annotation (Placement(transformation(
         extent={{-30,59},{-10,80}})));
@@ -136,16 +130,15 @@ partial model PartialExpansionValve
 
 
 protected
-  Modelica.SIunits.Area AThr
-    "Current cross-sectional area of the valve";
+  Modelica.Units.SI.Area AThr "Current cross-sectional area of the valve";
   Real opening(unit="1")
     "Current valve's opening";
 
-  Modelica.SIunits.Density dInl = Medium.density(staInl)
+  Modelica.Units.SI.Density dInl=Medium.density(staInl)
     "Density at valves's inlet conditions";
-  Modelica.SIunits.AbsolutePressure pInl = port_a.p
+  Modelica.Units.SI.AbsolutePressure pInl=port_a.p
     "Pressure of the fluid at inlet conditions";
-  Modelica.SIunits.AbsolutePressure pOut = port_b.p
+  Modelica.Units.SI.AbsolutePressure pOut=port_b.p
     "Pressure of the fluid at outlet conditions";
 
 
@@ -297,112 +290,119 @@ equation
   In the following, these modeling approaches are characterised
   shortly:<br/>
 </p>
-<table summary=\"Modelling approaches\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Approach
-    </th>
-    <th>
-      Formula
-    </th>
-    <th>
-      Comment
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <b>Linear</b>
-    </td>
-    <td>
-      <code>ṁ = C A<sub>valve</sub> dp</code>
-    </td>
-    <td>
-      Used for testing or initialisation
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Nominal</b>
-    </td>
-    <td>
-      <code>ṁ = ṁ<sub>nominal</sub> / dp<sub>nominal</sub>
-      A<sub>valve</sub> dp</code>
-    </td>
-    <td>
-      Used mainly for initialisation
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Flow coefficient</b>
-    </td>
-    <td>
-      <code>ṁ = C A<sub>valve</sub> sqrt(2 ρ<sub>inlet</sub>
-      dp)</code>
-    </td>
-    <td>
-      Chosen by default and follows from Bernoulli's law
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Modelling approaches\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Approach
+        </th>
+        <th>
+          Formula
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <b>Linear</b>
+        </td>
+        <td>
+          <code>ṁ = C A<sub>valve</sub> dp</code>
+        </td>
+        <td>
+          Used for testing or initialisation
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Nominal</b>
+        </td>
+        <td>
+          <code>ṁ = ṁ<sub>nominal</sub> / dp<sub>nominal</sub>
+          A<sub>valve</sub> dp</code>
+        </td>
+        <td>
+          Used mainly for initialisation
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Flow coefficient</b>
+        </td>
+        <td>
+          <code>ṁ = C A<sub>valve</sub> sqrt(2 ρ<sub>inlet</sub>
+          dp)</code>
+        </td>
+        <td>
+          Chosen by default and follows from Bernoulli's law
+        </td>
+      </tr>
+    </table>
+    <p>
+      For the third approach (i.e. flow coefficient), different
+      calculation models are stored in <a href=
+      \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
+      AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.FlowCoefficient</a>.
+      Therefore, the calculation procedure of the flow coefficient C is
+      introduced as replaceable model and must by defined by the User.
+    </p>
+    <h4>
+      Transient behaviour
+    </h4>
+    <p>
+      The base model has a parameter <code>useInpFil</code> that is
+      used to model the valve's transient behaviour while opening or
+      closing. Generally, this approach uses the same modeling attempt
+      as the stat-up and shut-down transients introtuced for flow
+      machines (see <a href=
+      \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
+      Therefore, just the parameter's affections are presented here:
+    </p>
+    <ol>
+      <li>If <code>useInpFil=false</code>, then the input signal <code>
+        opeSet.y</code> is equal to the valve's opening degree. Thus, a
+        step change in the input signal causes a step change in the
+        opening degree.
+      </li>
+      <li>If <code>useInpFil=true</code>, which is the default, then
+      the opening degree is equal to the output of a filter. This
+      filter is implemented as a 2nd order differential equation. Thus,
+      a step change in the fan input signal will cause a gradual change
+      in the opening degree. The filter has a parameter
+      <code>risTim</code>, which by default is set to <i>1</i> second.
+      The rise time is the time required to reach <i>99.6%</i> of the
+      full opening degree, or,if the ventil is closed, to reach a
+      opening degree of <i>0.4%</i>.
+      </li>
+    </ol>
+    <h4>
+      References
+    </h4>
+    <p>
+      In the following, some general references are given for
+      information about modelling expansion valves. The modelling
+      approach presented here is alligned to the modelling approaches
+      presented in the literature:
+    </p>
+    <p>
+      Li, W. (2013): <a href=
+      \"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">Simplified
+      modeling analysis ofmass flow characteristics in electronic
+      expansion valve</a>. In: <i>Applied Thermal Engineering
+      53(1)</i>, S. 8–12
+    </p>
+    <p>
+      X. Cao, Z.-Y. Li, L.-L. Shao and C.-L. Zhang (2016): <a href=
+      \"http://dx.doi.org/10.1016/j.applthermaleng.2015.09.062\">Refrigerant
+      flow through electronic expansion valve: Experiment and neural
+      network modeling</a>. In: <i>Applied Thermal Engineering 92</i>,
+      S. 210–218
+    </p>
+  </caption>
 </table>
-<p>
-  For the third approach (i.e. flow coefficient), different calculation
-  models are stored in <a href=
-  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
-  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.FlowCoefficient</a>.
-  Therefore, the calculation procedure of the flow coefficient C is
-  introduced as replaceable model and must by defined by the User.
-</p>
-<h4>
-  Transient behaviour
-</h4>
-<p>
-  The base model has a parameter <code>useInpFil</code> that is used to
-  model the valve's transient behaviour while opening or closing.
-  Generally, this approach uses the same modeling attempt as the
-  stat-up and shut-down transients introtuced for flow machines (see
-  <a href=
-  \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
-  Therefore, just the parameter's affections are presented here:
-</p>
-<ol>
-  <li>If <code>useInpFil=false</code>, then the input signal
-  <code>opeSet.y</code> is equal to the valve's opening degree. Thus, a
-  step change in the input signal causes a step change in the opening
-  degree.
-  </li>
-  <li>If <code>useInpFil=true</code>, which is the default, then the
-  opening degree is equal to the output of a filter. This filter is
-  implemented as a 2nd order differential equation. Thus, a step change
-  in the fan input signal will cause a gradual change in the opening
-  degree. The filter has a parameter <code>risTim</code>, which by
-  default is set to <i>1</i> second. The rise time is the time required
-  to reach <i>99.6%</i> of the full opening degree, or,if the ventil is
-  closed, to reach a opening degree of <i>0.4%</i>.
-  </li>
-</ol>
-<h4>
-  References
-</h4>
-<p>
-  In the following, some general references are given for information
-  about modelling expansion valves. The modelling approach presented
-  here is alligned to the modelling approaches presented in the
-  literature:
-</p>
-<p>
-  Li, W. (2013): <a href=
-  \"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">Simplified
-  modeling analysis ofmass flow characteristics in electronic expansion
-  valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8–12
-</p>
-<p>
-  X. Cao, Z.-Y. Li, L.-L. Shao and C.-L. Zhang (2016): <a href=
-  \"http://dx.doi.org/10.1016/j.applthermaleng.2015.09.062\">Refrigerant
-  flow through electronic expansion valve: Experiment and neural
-  network modeling</a>. In: <i>Applied Thermal Engineering 92</i>, S.
-  210–218
-</p>
 </html>"));
 end PartialExpansionValve;

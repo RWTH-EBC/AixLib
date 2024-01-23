@@ -3,19 +3,52 @@ model Radiators
   //Pipe lengths
  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  parameter Modelica.SIunits.Length Length_thSt = 2.5 "L1" annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thBath = 2.5 "L2  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thChildren1 = 2.3 "L3  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thChildren2 = 1.5 "L4  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true));
-  parameter Modelica.SIunits.Length Length_toKi = 2.5 "l5" annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toBath = 2 "l4  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toChildren = 0.5 "l3  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toBedroom = 4.0 "l2  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toLi = 7 "l1  " annotation(Dialog(group = "Pipe lengths", groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png", descriptionLabel = true));
+  parameter Modelica.Units.SI.Length Length_thSt=2.5 "L1" annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thBath=2.5 "L2  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thChildren1=2.3 "L3  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thChildren2=1.5 "L4  "
+    annotation (Dialog(group="Pipe lengths", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length Length_toKi=2.5 "l5" annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toBath=2 "l4  " annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toChildren=0.5 "l3  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toBedroom=4.0 "l2  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toLi=7 "l1  " annotation (Dialog(
+      group="Pipe lengths",
+      groupImage=
+          "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png",
+
+      descriptionLabel=true));
   //Pipe diameters
-  parameter Modelica.SIunits.Diameter Diam_Main = 0.016 "Diameter main pipe" annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
-  parameter Modelica.SIunits.Diameter Diam_Sec = 0.013
-    "Diameter secondary pipe  "                                                    annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
+  parameter Modelica.Units.SI.Diameter Diam_Main=0.016 "Diameter main pipe"
+    annotation (Dialog(group="Pipe diameters", descriptionLabel=true));
+  parameter Modelica.Units.SI.Diameter Diam_Sec=0.013
+    "Diameter secondary pipe  "
+    annotation (Dialog(group="Pipe diameters", descriptionLabel=true));
   //Hydraulic resistance
   parameter Real zeta_lateral = 2.5 "zeta lateral" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true, joinNext = true));
   parameter Real zeta_through = 0.6 "zeta through" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
@@ -42,13 +75,12 @@ model Radiators
     redeclare package Medium = Medium,
     selectable=true)
     annotation (Placement(transformation(extent={{83,-48},{100,-31}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveKi(
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveKi(
     Kvs=0.41,
     Kv_setT=0.262,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
+    dp(start=1000)) annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorLi(
     radiatorType=Type_Radiator_Livingroom,
     m_flow_nominal=0.01,
@@ -67,34 +99,30 @@ model Radiators
     redeclare package Medium = Medium,
     selectable=true)
     annotation (Placement(transformation(extent={{86,33},{101,48}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveBa(
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveBa(
     Kvs=0.24,
     Kv_setT=0.162,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{38,-47},{50,-31}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveLi(
+    dp(start=1000)) annotation (Placement(transformation(extent={{38,-47},{50,-31}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveLi(
     Kvs=1.43,
     Kv_setT=0.4,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{-67,-4},{-79,12}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveCh(
+    dp(start=1000)) annotation (Placement(transformation(extent={{-67,-4},{-79,12}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveCh(
     Kvs=0.16,
     Kv_setT=0.088,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{64,32},{76,48}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveBe(
+    dp(start=1000)) annotation (Placement(transformation(extent={{64,32},{76,48}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveBe(
     Kvs=0.24,
     Kv_setT=0.182,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{49,74},{60,87}})));
+    dp(start=1000)) annotation (Placement(transformation(extent={{49,74},{60,87}})));
   Modelica.Fluid.Pipes.StaticPipe thStF(
     diameter = Diam_Main,
     length = Length_thSt,

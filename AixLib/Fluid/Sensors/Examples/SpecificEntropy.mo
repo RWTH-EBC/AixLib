@@ -26,7 +26,8 @@ model SpecificEntropy "Test model for the entropy flow rate sensors"
     annotation (Placement(transformation(extent={{-80,-12},{-60,8}})));
 
   AixLib.Fluid.Sensors.SpecificEntropy senFloSou(
-    redeclare package Medium = Medium) "Sensor at the flow source"
+    redeclare package Medium = Medium, warnAboutOnePortConnection=false)
+                                       "Sensor at the flow source"
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
   AixLib.Fluid.Sensors.SpecificEntropyTwoPort senStr(
     redeclare package Medium = Medium,
@@ -49,15 +50,16 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/SpecificEntropy.mos"
         "Simulate and plot"),    Documentation(info="<html>
-<p>
-This example tests the specific entropy sensors.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 31, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the specific entropy sensors.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 31, 2013, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SpecificEntropy;

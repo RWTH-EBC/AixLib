@@ -9,7 +9,8 @@ model DHCSupplyHeaterCoolerStorage
     annotation (Placement(transformation(extent={{-92,4},{-72,24}})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation1(
                                                                    redeclare
-      package Medium = Medium,
+      package                                                                        Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,
@@ -21,7 +22,8 @@ model DHCSupplyHeaterCoolerStorage
         origin={-16,-14})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation2(
                                                                    redeclare
-      package Medium = Medium,
+      package                                                                        Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,
@@ -37,24 +39,21 @@ model DHCSupplyHeaterCoolerStorage
     m_flow_nominal=5,
     dIns=0.001,
     kIns=0.04,
-    redeclare package Medium = Medium,
-    nPorts=2)  annotation (Placement(transformation(extent={{-60,4},{-40,24}})));
+    redeclare package Medium = Medium)  annotation (Placement(transformation(extent={{-60,4},{-40,24}})));
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
     dh=0.2,
     length=5,
     m_flow_nominal=5,
     dIns=0.001,
     kIns=0.04,
-    redeclare package Medium = Medium,
-    nPorts=1)  annotation (Placement(transformation(extent={{-2,6},{18,26}})));
+    redeclare package Medium = Medium)  annotation (Placement(transformation(extent={{-2,6},{18,26}})));
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe2(
     dh=0.2,
     length=5,
     m_flow_nominal=5,
     dIns=0.001,
     kIns=0.04,
-    redeclare package Medium = Medium,
-    nPorts=1)
+    redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{20,-54},{0,-34}})));
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe3(
     dh=0.2,
@@ -62,8 +61,7 @@ model DHCSupplyHeaterCoolerStorage
     m_flow_nominal=5,
     dIns=0.001,
     kIns=0.04,
-    redeclare package Medium = Medium,
-    nPorts=1)
+    redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-40,-54},{-60,-34}})));
   Modelica.Blocks.Sources.Constant T_HotLineSet(k=16 + 273.15)
     annotation (Placement(transformation(extent={{-126,58},{-106,78}})));
@@ -89,20 +87,20 @@ equation
       Line(points={{-105,38},{-104,38},{-104,22},{-92.7273,22}}, color={0,0,127}));
   connect(T_HotLineSet.y, DHCSupplyHeaterCoolerStorage.T_cooSet) annotation (
       Line(points={{-105,68},{-100,68},{-100,19},{-92.7273,19}}, color={0,0,127}));
-  connect(plugFlowPipe1.ports_b[1], substation2.port_a) annotation (Line(points={{18,16},
+  connect(plugFlowPipe1.port_b, substation2.port_a) annotation (Line(points={{18,16},
           {40,16},{40,-6}},                   color={0,127,255}));
   connect(plugFlowPipe2.port_a, substation2.port_b) annotation (Line(points={{20,-44},
           {40,-44},{40,-26}},                   color={0,127,255}));
-  connect(plugFlowPipe.ports_b[1], plugFlowPipe1.port_a) annotation (Line(
-        points={{-40,12},{-22,12},{-22,16},{-2,16}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[2], substation1.port_a) annotation (Line(points={{-40,16},
-          {-16,16},{-16,-4}},                                       color={0,
+  connect(plugFlowPipe.port_b, plugFlowPipe1.port_a) annotation (Line(
+        points={{-40,14},{-22,14},{-22,16},{-2,16}}, color={0,127,255}));
+  connect(plugFlowPipe.port_b, substation1.port_a) annotation (Line(points={{-40,14},
+          {-16,14},{-16,-4}},                                       color={0,
           127,255}));
-  connect(plugFlowPipe3.port_a, plugFlowPipe2.ports_b[1])
+  connect(plugFlowPipe3.port_a, plugFlowPipe2.port_b)
     annotation (Line(points={{-40,-44},{0,-44}}, color={0,127,255}));
   connect(substation1.port_b, plugFlowPipe3.port_a) annotation (Line(points={{-16,-24},
           {-16,-44},{-40,-44}},                         color={0,127,255}));
-  connect(DHCSupplyHeaterCoolerStorage.port_a, plugFlowPipe3.ports_b[1])
+  connect(DHCSupplyHeaterCoolerStorage.port_a, plugFlowPipe3.port_b)
     annotation (Line(points={{-92,14},{-128,14},{-128,-44},{-60,-44}}, color={0,
           127,255}));
   annotation (
@@ -112,12 +110,11 @@ equation
       StopTime=172800,
       Interval=60,
       Tolerance=1e-05),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>"),
     __Dymola_experimentSetupOutput(equidistant=false));

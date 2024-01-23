@@ -6,9 +6,9 @@ model TwoWayValveParameterization
  package Medium = AixLib.Media.Water;
 
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.4
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.4
     "Design mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal = 4500
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=4500
     "Design pressure drop";
 
   parameter Real Kv_SI = m_flow_nominal/sqrt(dp_nominal)
@@ -18,12 +18,13 @@ model TwoWayValveParameterization
     "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)]";
   parameter Real Cv = Kv_SI/(rhoStd*0.0631/1000/sqrt(6895))
     "Cv (US) flow coefficient [USG/min/(psi)^(1/2)]";
-  parameter Modelica.SIunits.Area Av = Kv_SI/sqrt(rhoStd)
+  parameter Modelica.Units.SI.Area Av=Kv_SI/sqrt(rhoStd)
     "Av (metric) flow coefficient";
 
-  parameter Modelica.SIunits.Density rhoStd=
-   Medium.density_pTX(101325, 273.15+4, Medium.X_default)
-   "Standard density";
+  parameter Modelica.Units.SI.Density rhoStd=Medium.density_pTX(
+      101325,
+      273.15 + 4,
+      Medium.X_default) "Standard density";
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear valOPPoi(
     redeclare package Medium = Medium,
@@ -135,33 +136,34 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Validation/TwoWayValveParameterization.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Test model for two way valves. This model tests the
-different parameterization of the valve model.
-All valves have the same mass flow rates.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2017, by Michael Wetter:<br/>
-Removed assertion blocks, exposed common parameters,
-and added a valve that uses <code>Av</code> as the parameter.
-</li>
-<li>
-April 1, 2013, by Michael Wetter:<br/>
-Removed the valve from <code>Modelica.Fluid</code> to allow a successful check
-of the model in the pedantic mode in Dymola 2014.
-</li>
-<li>
-March 1, 2013, by Michael Wetter:<br/>
-Removed assignment of <code>dpValve_nominal</code> if
-<code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
-as in this case, it is computed by the model.
-</li>
-<li>
-February 18, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Test model for two way valves. This model tests the
+ different parameterization of the valve model.
+ All valves have the same mass flow rates.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2017, by Michael Wetter:<br/>
+ Removed assertion blocks, exposed common parameters,
+ and added a valve that uses <code>Av</code> as the parameter.
+ </li>
+ <li>
+ April 1, 2013, by Michael Wetter:<br/>
+ Removed the valve from <code>Modelica.Fluid</code> to allow a successful check
+ of the model in the pedantic mode in Dymola 2014.
+ </li>
+ <li>
+ March 1, 2013, by Michael Wetter:<br/>
+ Removed assignment of <code>dpValve_nominal</code> if
+ <code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
+ as in this case, it is computed by the model.
+ </li>
+ <li>
+ February 18, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValveParameterization;

@@ -6,7 +6,7 @@ model NumberOfRequests
     nin=2,
     threShold=0,
     kind=0) annotation (Placement(transformation(extent={{0,20},{20,40}})));
-  Modelica.Blocks.Sources.Sine sine(freqHz=2)
+  Modelica.Blocks.Sources.Sine sine(f=2)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   Modelica.Blocks.Sources.Pulse pulse(period=0.35)
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
@@ -19,29 +19,30 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/NumberOfRequests.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-January 12, 2017, by Thierry S. Nouidui:<br/>
-Modified example to prevent simultaneous events
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/646\">#646</a>.
-</li>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example that demonstrates the use of the block
-<a href=\"modelica://AixLib.Controls.Continuous.NumberOfRequests\">
-AixLib.Controls.Continuous.NumberOfRequests</a>.
-The parameters of the block are such that the output is incremented
-for each input signal that is strictly larger than <i>0</i>.
-The figure below shows the inputs and the output of the block.
-</p>
-<p align=\"center\">
-<img alt=\"Simulation results\" src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/NumberOfRequests.png\" border=\"1\" />
-</p>
-</html>"));
+ <ul>
+ <li>
+ January 12, 2017, by Thierry S. Nouidui:<br/>
+ Modified example to prevent simultaneous events
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/646\">#646</a>.
+ </li>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example that demonstrates the use of the block
+ <a href=\"modelica://AixLib.Controls.Continuous.NumberOfRequests\">
+ AixLib.Controls.Continuous.NumberOfRequests</a>.
+ The parameters of the block are such that the output is incremented
+ for each input signal that is strictly larger than <i>0</i>.
+ The figure below shows the inputs and the output of the block.
+ </p>
+ <p align=\"center\">
+ <img alt=\"Simulation results\" src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/NumberOfRequests.png\" border=\"1\" />
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end NumberOfRequests;

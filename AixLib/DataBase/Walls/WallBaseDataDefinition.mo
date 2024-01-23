@@ -1,17 +1,26 @@
 within AixLib.DataBase.Walls;
 record WallBaseDataDefinition "Wall base data definition"
   extends Modelica.Icons.Record;
-  // pma 2010-04-28: REMOVED THE BASE DEFINITIONS to get errors thrown when using unparameterised wall models
-  parameter Integer n(min = 1) = 3 "Number of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.Length d[n] "Thickness of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
-  parameter Modelica.SIunits.Density rho[n] "Density of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n]
-    "Thermal conductivity of wall layers"                                                        annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n]
-    "Specific heat capacity of wall layers"                                                    annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.Emissivity eps = 0.95
-    "Emissivity of inner wall surface"                                                annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  annotation(Documentation(info = "<html><h4>
+
+  parameter Integer n(min = 1)
+    "Number of wall layers"
+    annotation(Dialog(tab = "Wall", group = "Wall parameters"));
+  parameter Modelica.Units.SI.Length d[n] "Thickness of wall layers"
+    annotation (Dialog(tab="Wall", group="Layer parameters"));
+  parameter Modelica.Units.SI.Density rho[n] "Density of wall layers"
+    annotation (Dialog(tab="Wall", group="Layer parameters"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda[n]
+    "Thermal conductivity of wall layers"
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c[n]
+    "Specific heat capacity of wall layers"
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
+  parameter Modelica.Units.SI.Emissivity eps=0.95
+    "Emissivity of inner wall surface"
+    annotation (Dialog(tab="Wall", group="Wall parameters"));
+  annotation (
+    defaultComponentPrefixes="parameter",
+    Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
@@ -37,8 +46,13 @@ record WallBaseDataDefinition "Wall base data definition"
 </p>
 <ul>
   <li>
-    <i>September 3, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>September 3, 2013</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
+  </li>
+  <li>
+    <i>April 15, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>
+    Define n as length of vectors
   </li>
 </ul>
 </html>"));

@@ -19,19 +19,19 @@ model OverAYear_usingOneYearData
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/Validation/OverAYear_usingOneYearData.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This is a validation case for a simulation extending with two months over one year,
-but using data for only one year.
-</p>
-<p>
-The test script plots the dry bulb temperature for the days 0-10 and 365-375 for comparison.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>September 3, 2018 by Ana Constantin:<br/>
-First implementation for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
-</li>
-</ul>
-</html>"));
-
+ <p>
+ This is a validation case for a simulation extending with two months over one year,
+ but using data for only one year.
+ </p>
+ <p>
+ The test script plots the dry bulb temperature for the days 0-10 and 365-375 for comparison.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>September 3, 2018 by Ana Constantin:<br/>
+ First implementation for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OverAYear_usingOneYearData;

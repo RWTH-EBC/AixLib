@@ -28,8 +28,8 @@ model Outlet "Adaptor for connecting a fluid outlet to the FMI interface"
         transformation(extent={{-110,-10},{-90,10}}),
           iconTransformation(extent={{-110,
             -10},{-90,10}})));
-  AixLib.Fluid.FMI.Interfaces.PressureInput p if
-       use_p_in "Pressure to be sent to outlet"
+  AixLib.Fluid.FMI.Interfaces.PressureInput p
+    if use_p_in "Pressure to be sent to outlet"
               annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -109,7 +109,7 @@ equation
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Line(
           points={{60,0},{100,0}},
           color={0,0,255}),
@@ -120,7 +120,7 @@ equation
           fillColor={0,127,255}),
         Text(
           extent={{66,40},{100,0}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="outlet"),
         Line(
           points={{0,-60},{0,-100}},
@@ -129,52 +129,53 @@ equation
           visible=use_p_in),
         Text(
           extent={{10,-64},{44,-104}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="p",
           visible=use_p_in)}),
     Documentation(info="<html>
-<p>
-Model that is used to connect a fluid port with an output signal.
-The model needs to be used in conjunction with an instance of
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
-AixLib.Fluid.FMI.Adaptors.Inlet</a> in order for
-fluid mass flow rate and pressure to be properly assigned to
-the acausal fluid models.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
-AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
-or
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
-AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
-for how to use this model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air and water.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-November 8, 2016, by Michael Wetter:<br/>
-Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-April 15, 2015 by Michael Wetter:<br/>
-Changed connector variable to be temperature instead of
-specific enthalpy.
-</li>
-<li>
-January 21, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that is used to connect a fluid port with an output signal.
+ The model needs to be used in conjunction with an instance of
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
+ AixLib.Fluid.FMI.Adaptors.Inlet</a> in order for
+ fluid mass flow rate and pressure to be properly assigned to
+ the acausal fluid models.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+ AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
+ or
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
+ AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
+ for how to use this model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air and water.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ November 8, 2016, by Michael Wetter:<br/>
+ Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ April 15, 2015 by Michael Wetter:<br/>
+ Changed connector variable to be temperature instead of
+ specific enthalpy.
+ </li>
+ <li>
+ January 21, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Outlet;

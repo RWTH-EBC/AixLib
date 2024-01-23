@@ -9,48 +9,46 @@ model IndirectTankHeatExchanger
 
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
-      redeclare final package Medium = MediumHex);
+    final massDynamics=energyDynamics,
+    redeclare final package Medium = MediumHex);
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     redeclare final package Medium = MediumHex,
     final show_T=false);
 
-  parameter Integer nSeg(min=2) "Number of segments in the heat exchanger";
-  parameter Modelica.SIunits.HeatCapacity CHex
-    "Capacitance of the heat exchanger";
-  parameter Modelica.SIunits.Volume volHexFlu
-    "Volume of heat transfer fluid in the heat exchanger";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
-    "Heat transfer at nominal conditions"
-  annotation(Dialog(tab="General", group="Nominal condition"));
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
 
-  final parameter Modelica.SIunits.ThermalConductance UA_nominal=
-    abs(Q_flow_nominal/(THex_nominal-TTan_nominal))
+  parameter Integer nSeg(min=2) "Number of segments in the heat exchanger";
+  parameter Modelica.Units.SI.HeatCapacity CHex
+    "Capacitance of the heat exchanger";
+  parameter Modelica.Units.SI.Volume volHexFlu
+    "Volume of heat transfer fluid in the heat exchanger";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
+    "Heat transfer at nominal conditions"
+    annotation (Dialog(tab="General", group="Nominal condition"));
+
+  final parameter Modelica.Units.SI.ThermalConductance UA_nominal=abs(
+      Q_flow_nominal/(THex_nominal - TTan_nominal))
     "Nominal UA value for the heat exchanger";
-  parameter Modelica.SIunits.Temperature TTan_nominal
+  parameter Modelica.Units.SI.Temperature TTan_nominal
     "Temperature of fluid inside the tank at UA_nominal"
-    annotation(Dialog(tab="General", group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature THex_nominal
+    annotation (Dialog(tab="General", group="Nominal condition"));
+  parameter Modelica.Units.SI.Temperature THex_nominal
     "Temperature of fluid inside the heat exchanger at UA_nominal"
-    annotation(Dialog(tab="General", group="Nominal condition"));
+    annotation (Dialog(tab="General", group="Nominal condition"));
   parameter Real r_nominal(min=0, max=1)=0.5
     "Ratio between coil inside and outside convective heat transfer"
           annotation(Dialog(tab="General", group="Nominal condition"));
 
-  parameter Modelica.SIunits.Diameter dExtHex
+  parameter Modelica.Units.SI.Diameter dExtHex
     "Exterior diameter of the heat exchanger pipe";
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Formulation of energy balance for heat exchanger internal fluid mass"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsSolid=energyDynamics
     "Formulation of energy balance for heat exchanger solid mass"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
-    "Formulation of mass balance for heat exchanger"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
   parameter Boolean hA_flowDependent = true
     "Set to false to make the convective heat coefficient calculation of the fluid inside the coil independent of mass flow rate"
@@ -82,7 +80,7 @@ model IndirectTankHeatExchanger
     each m_flow_nominal=m_flow_nominal,
     each V=volHexFlu/nSeg,
     each energyDynamics=energyDynamics,
-    each massDynamics=massDynamics,
+    each massDynamics=energyDynamics,
     each p_start=p_start,
     each T_start=T_start,
     each X_start=X_start,
@@ -93,11 +91,11 @@ model IndirectTankHeatExchanger
     annotation (Placement(transformation(extent={{-32,-40},{-12,-20}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor cap[nSeg](
      each C=CHex/nSeg,
-     T(each start=T_start,
-       each fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.FixedInitial)),
-     der_T(
-       each fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyStateInitial))) if
-             not energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyState
+     each T(start=T_start,
+            fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.FixedInitial)),
+     each der_T(
+            fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)))
+          if not energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyState
     "Thermal mass of the heat exchanger"
     annotation (Placement(transformation(extent={{-6,6},{14,26}})));
 protected
@@ -151,6 +149,11 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={20,42})));
+
+initial equation
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
 
 equation
   for i in 1:(nSeg - 1) loop
@@ -272,83 +275,101 @@ equation
           fillPattern=FillPattern.Solid)}),
           defaultComponentName="indTanHex",
         Documentation(info = "<html>
-          <p>
-          This model is a heat exchanger with a moving fluid on one side and a stagnant fluid on the other.
-          It is intended for use when a heat exchanger is submerged in a stagnant fluid.
-          For example, the heat exchanger in a storage tank which is part of a solar thermal system.
-          </p>
-          <p>
-          This component models the fluid in the heat exchanger, convection between the fluid and
-          the heat exchanger, and convection from the heat exchanger to the surrounding fluid.
-          </p>
-          <p>
-          The model is based on <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
-          AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside</a> and
-          <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
-          AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
-          </p>
-          <p>
-          The fluid ports are intended to be connected to a circulated heat transfer fluid
-          while the heat port is intended to be connected to a stagnant fluid.
-          </p>
-          </html>",
+           <p>
+           This model is a heat exchanger with a moving fluid on one side and a stagnant fluid on the other.
+           It is intended for use when a heat exchanger is submerged in a stagnant fluid.
+           For example, the heat exchanger in a storage tank which is part of a solar thermal system.
+           </p>
+           <p>
+           This component models the fluid in the heat exchanger, convection between the fluid and
+           the heat exchanger, and convection from the heat exchanger to the surrounding fluid.
+           </p>
+           <p>
+           The model is based on <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
+           AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside</a> and
+           <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
+           AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
+           </p>
+           <p>
+           The fluid ports are intended to be connected to a circulated heat transfer fluid
+           while the heat port is intended to be connected to a stagnant fluid.
+           </p>
+           </html>",
           revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-January 7, 2016, by Filip Jorissen:<br/>
-Propagated <code>flowDependent</code> and <code>temperatureDependent</code>
-in <code>hAPipIns</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/454\">#454</a>.
-</li>
-<li>
-September 24, 2015 by Michael Wetter:<br/>
-Set <code>fixed</code> attribute in <code>cap.T</code> to avoid
-unspecified initial conditions.
-</li>
-<li>
-July 2, 2015, by Michael Wetter:<br/>
-Set <code>prescribedHeatFlowRate=false</code> in control volume.
-</li>
-<li>
-July 1, 2015, by Filip Jorissen:<br/>
-Added parameter <code>energyDynamicsSolid</code>.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
-#434</a>.
-</li>
-<li>
-March 28, 2015, by Filip Jorissen:<br/>
-Propagated <code>allowFlowReversal</code>.
-</li>
-          <li>
-          August 29, 2014, by Michael Wetter:<br/>
-          Introduced <code>MediumTan</code> for the tank medium, and assigned <code>Medium</code>
-          to be equal to <code>MediumHex</code>.
-          This is to correct issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">
-          #271</a>.
-          </li>
-          <li>
-          June 18, 2014, by Michael Wetter:<br/>
-          Set initial equations for <code>cap</code>, and renamed this instance from
-          <code>Cap</code> to <code>cap</code>.
-          This was done to avoid a warning during translation, and to comply with
-          the coding convention.
-          </li>
-          <li>
-          October 8, 2013, by Michael Wetter:<br/>
-          Removed parameter <code>show_V_flow</code>.
-          </li>
-          <li>
-          January 29, 2013, by Peter Grant:<br/>
-          First implementation.
-          </li>
-          </ul>
-          </html>"));
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ April 9, 2021, by Michael Wetter:<br/>
+ Corrected placement of <code>each</code> keyword.<br/>
+ See <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/2440\">Buildings, PR #2440</a>.
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ January 7, 2016, by Filip Jorissen:<br/>
+ Propagated <code>flowDependent</code> and <code>temperatureDependent</code>
+ in <code>hAPipIns</code>.
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/454\">#454</a>.
+ </li>
+ <li>
+ September 24, 2015 by Michael Wetter:<br/>
+ Set <code>fixed</code> attribute in <code>cap.T</code> to avoid
+ unspecified initial conditions.
+ </li>
+ <li>
+ July 2, 2015, by Michael Wetter:<br/>
+ Set <code>prescribedHeatFlowRate=false</code> in control volume.
+ </li>
+ <li>
+ July 1, 2015, by Filip Jorissen:<br/>
+ Added parameter <code>energyDynamicsSolid</code>.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
+ #434</a>.
+ </li>
+ <li>
+ March 28, 2015, by Filip Jorissen:<br/>
+ Propagated <code>allowFlowReversal</code>.
+ </li>
+           <li>
+           August 29, 2014, by Michael Wetter:<br/>
+           Introduced <code>MediumTan</code> for the tank medium, and assigned <code>Medium</code>
+           to be equal to <code>MediumHex</code>.
+           This is to correct issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">
+           #271</a>.
+           </li>
+           <li>
+           June 18, 2014, by Michael Wetter:<br/>
+           Set initial equations for <code>cap</code>, and renamed this instance from
+           <code>Cap</code> to <code>cap</code>.
+           This was done to avoid a warning during translation, and to comply with
+           the coding convention.
+           </li>
+           <li>
+           October 8, 2013, by Michael Wetter:<br/>
+           Removed parameter <code>show_V_flow</code>.
+           </li>
+           <li>
+           January 29, 2013, by Peter Grant:<br/>
+           First implementation.
+           </li>
+           </ul>
+           </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IndirectTankHeatExchanger;

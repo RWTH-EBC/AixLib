@@ -2,37 +2,36 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-temperature networks for buildings with 
   heat pump and direct cooling."
 
-      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
+      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
     "Nominal pressure drop";
 
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=m_flow_nominal
     "Nominal mass flow rate"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.HeatFlowRate heaDem_max
+  parameter Modelica.Units.SI.HeatFlowRate heaDem_max
     "Maximum heat demand for scaling of heat pump"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.TemperatureDifference deltaT_heaSecSet = 10
+    parameter Modelica.Units.SI.TemperatureDifference deltaT_heaSecSet=10
     "Set temperature difference for heating on secondary site (building system)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.Temperature T_heaSecSet = 273.15 + 55
+  parameter Modelica.Units.SI.Temperature T_heaSecSet=273.15 + 55
     "Set supply temperature for space heating on secondary side (building)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
 
-    parameter Modelica.SIunits.Temperature T_heaPriSet = 273.15 + 22
+  parameter Modelica.Units.SI.Temperature T_heaPriSet=273.15 + 22
     "Set temperature of primary side (warm line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
-    parameter Modelica.SIunits.Temperature T_cooPriSet = 273.15 + 12
+    annotation (Dialog(tab="General", group="Grid"));
+  parameter Modelica.Units.SI.Temperature T_cooPriSet=273.15 + 12
     "Set temperature of primary side (cold line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
+    annotation (Dialog(tab="General", group="Grid"));
 
 
 
@@ -184,8 +183,8 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-      final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
-    Medium.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
 equation
@@ -326,12 +325,27 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-160},{240,
             160}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020,by</i> Tobias Blacha:<br>Move to development</li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020,by</i> Tobias Blacha:<br/>
+    Move to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks for buildings with heat pump and direct cooling. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application for energy balancing. This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>. The mass flows are controlled equation-based and calculated using the heating and cooling demands and the specified temperatures of the warm and cold line of the network.</p>
+<p>
+  Substation model for bidirectional low-temperature networks for
+  buildings with heat pump and direct cooling. In the case of
+  simultaneous cooling and heating demands, the return flows are used
+  as supply flows for the other application for energy balancing. This
+  model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
+  The mass flows are controlled equation-based and calculated using the
+  heating and cooling demands and the specified temperatures of the
+  warm and cold line of the network.
+</p>
 </html>"));
 end DHCSubstationHeatPumpDirectCooling;

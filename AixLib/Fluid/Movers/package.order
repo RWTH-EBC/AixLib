@@ -1,10 +1,10 @@
 UsersGuide
 FlowControlled_dp
 FlowControlled_m_flow
-Pump
 SpeedControlled_Nrpm
 SpeedControlled_y
 Compressors
+DpControlledMovers
 PumpsPolynomialBased
 Data
 Examples

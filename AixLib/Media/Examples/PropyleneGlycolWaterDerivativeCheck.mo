@@ -7,13 +7,13 @@ model PropyleneGlycolWaterDerivativeCheck
       X_a=0.60,
       property_T=293.15);
 
-    Modelica.SIunits.Temperature T "Temperature";
-    Modelica.SIunits.SpecificEnthalpy hLiqSym "Liquid phase enthalpy";
-    Modelica.SIunits.SpecificEnthalpy hLiqCod "Liquid phase enthalpy";
-    Modelica.SIunits.SpecificHeatCapacity cpSym "Specific heat capacity";
-    Modelica.SIunits.SpecificHeatCapacity cpCod "Specific heat capacity";
-    Modelica.SIunits.SpecificHeatCapacity cvSym "Specific heat capacity";
-    Modelica.SIunits.SpecificHeatCapacity cvCod "Specific heat capacity";
+  Modelica.Units.SI.Temperature T "Temperature";
+  Modelica.Units.SI.SpecificEnthalpy hLiqSym "Liquid phase enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy hLiqCod "Liquid phase enthalpy";
+  Modelica.Units.SI.SpecificHeatCapacity cpSym "Specific heat capacity";
+  Modelica.Units.SI.SpecificHeatCapacity cpCod "Specific heat capacity";
+  Modelica.Units.SI.SpecificHeatCapacity cvSym "Specific heat capacity";
+  Modelica.Units.SI.SpecificHeatCapacity cvCod "Specific heat capacity";
     constant Real convT(unit="K/s3") = 100
       "Conversion factor to satisfy unit check";
 initial equation
@@ -48,17 +48,18 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/PropyleneGlycolWaterDerivativeCheck.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This example checks whether the function derivative
-is implemented correctly. If the derivative implementation
-is not correct, the model will stop with an assert statement.
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-March 13, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example checks whether the function derivative
+ is implemented correctly. If the derivative implementation
+ is not correct, the model will stop with an assert statement.
+ </p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ March 13, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PropyleneGlycolWaterDerivativeCheck;

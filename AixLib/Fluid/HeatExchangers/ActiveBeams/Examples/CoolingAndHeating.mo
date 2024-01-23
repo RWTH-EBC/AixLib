@@ -36,10 +36,8 @@ model CoolingAndHeating
   AixLib.Controls.Continuous.LimPID conHea(
     yMax=0.094,
     Td=0,
-    reverseAction=false,
     Ti=100,
-    k=0.1,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI)
+    k=0.1)
     "Controller for heating"
          annotation (Placement(transformation(extent={{-70,-20},{-50,0}})));
   Sources.MassFlowSource_T pumCoo(
@@ -64,7 +62,7 @@ model CoolingAndHeating
     nPorts=1) "Sink hot water"
     annotation (Placement(transformation(extent={{100,50},{80,70}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/86400,
+    f=1/86400,
     amplitude=1,
     phase=-1.5707963267949) "Source for thermal loads"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
@@ -80,11 +78,10 @@ model CoolingAndHeating
     annotation (Placement(transformation(extent={{-110,20},{-90,40}})));
   AixLib.Controls.Continuous.LimPID conCoo(
     yMax=0.094,
-    reverseAction=true,
+    reverseActing=false,
     Td=0,
     k=0.5,
-    Ti=70,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI)
+    Ti=70)
     "Controller for cooling"
     annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
 
@@ -144,36 +141,37 @@ equation
         "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}})),
      Documentation(info="<html>
-<p>
-This example tests the implementation of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>
-for both heating and cooling mode. An air volume is maintained at a temperature between <i>22&circ;</i>C and
-<i>25&circ;</i>C by two controllers that regulate the water flow rate in the active beam.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-June 25, 2016, by Michael Wetter:<br/>
-Changed medium start temperature to avoid conflicting
-start values of the same precedence in Dymola 2016.
-See
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/485\">
-issue 485</a>.
-</li>
-<li>
-June 14, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the implementation of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>
+ for both heating and cooling mode. An air volume is maintained at a temperature between <i>22&deg;</i>C and
+ <i>25&deg;</i>C by two controllers that regulate the water flow rate in the active beam.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ June 25, 2016, by Michael Wetter:<br/>
+ Changed medium start temperature to avoid conflicting
+ start values of the same precedence in Dymola 2016.
+ See
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/485\">
+ issue 485</a>.
+ </li>
+ <li>
+ June 14, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CoolingAndHeating;

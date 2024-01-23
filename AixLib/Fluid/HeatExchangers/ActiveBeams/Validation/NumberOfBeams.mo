@@ -184,33 +184,34 @@ equation
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/Validation/NumberOfBeams.mos"
         "Simulate and plot"),
      Documentation(info="<html>
-<p>
-This model validates the scaling of the heat tranfer and pressure drop for
-<code>nBeams &gt; 1</code>.
-</p>
-<p>
-It uses two instances of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>,
-one with
-<code>nBeams = 1</code> and one with
-<code>nBeams = 10</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-June 14, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model validates the scaling of the heat tranfer and pressure drop for
+ <code>nBeams &gt; 1</code>.
+ </p>
+ <p>
+ It uses two instances of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>,
+ one with
+ <code>nBeams = 1</code> and one with
+ <code>nBeams = 10</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ June 14, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end NumberOfBeams;

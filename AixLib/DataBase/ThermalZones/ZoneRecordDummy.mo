@@ -2,6 +2,7 @@ within AixLib.DataBase.ThermalZones;
 record ZoneRecordDummy "This is a dummy record with non-physical parameter values."
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start=Modelica.Constants.eps,
+    withAirCap=true,
     VAir=Modelica.Constants.inf,
     AZone=Modelica.Constants.inf,
     hRad=Modelica.Constants.eps,
@@ -72,6 +73,8 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     withAHU=false,
     minAHU=Modelica.Constants.eps,
     maxAHU=2*Modelica.Constants.eps,
+    shadingFactor=fill(1, nOrientations),
+    maxIrr=fill(0, nOrientations),
     hHeat=2*Modelica.Constants.eps,
     lHeat=Modelica.Constants.eps,
     KRHeat=Modelica.Constants.eps,

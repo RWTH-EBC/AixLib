@@ -40,37 +40,38 @@ partial block PartialTwoPort
           fillColor={255,255,255}),
             Text(
           extent={{-151,147},{149,107}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
           textString="%name")}),    Documentation(info="<html>
-<p>
-Partial model that can be used to export thermofluid flow models as an FMU.
-This model only declares the inlet and outlet ports, the medium and
-whether flow reversal is allowed.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
-AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
-for a block that extends this partial block.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-November 8, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Partial model that can be used to export thermofluid flow models as an FMU.
+ This model only declares the inlet and outlet ports, the medium and
+ whether flow reversal is allowed.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
+ AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
+ for a block that extends this partial block.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ November 8, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPort;

@@ -1,20 +1,22 @@
-within AixLib.Systems.ModularAHU.Controller;
+﻿within AixLib.Systems.ModularAHU.Controller;
 block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
-          useExternalTset == false));
+  parameter Modelica.Units.SI.Temperature TflowSet=293.15
+    "Flow temperature set point of consumer"
+    annotation (Dialog(enable=useExternalTset == false));
   parameter Real k(min=0, unit="1") = 0.02 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
+  parameter Modelica.Units.SI.Time Td(min=0) = 4
+    "Time constant of Derivative block";
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+    annotation (Dialog(group="PID"));
+  parameter Boolean reverseAction = true
+    "Set to true if a heating coil, and false if a cooling coil is controlled";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -37,7 +39,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction,
+    final reverseActing=reverseAction,
     final reset=AixLib.Types.Reset.Disabled)
             annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));

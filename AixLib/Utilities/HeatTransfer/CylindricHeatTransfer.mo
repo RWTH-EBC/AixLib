@@ -5,15 +5,15 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  parameter Modelica.SIunits.Density rho=1600 "Density of material";
-  parameter Modelica.SIunits.SpecificHeatCapacity c=1000
+  parameter Modelica.Units.SI.Density rho=1600 "Density of material";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
     "Specific heat capacity of material";
-  parameter Modelica.SIunits.Length d_out(min=0) "Outer diameter of pipe";
-  parameter Modelica.SIunits.Length d_in(min=0) "Inner diameter of pipe";
-  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
-  parameter Modelica.SIunits.ThermalConductivity lambda=373
+  parameter Modelica.Units.SI.Length d_out(min=0) "Outer diameter of pipe";
+  parameter Modelica.Units.SI.Length d_in(min=0) "Inner diameter of pipe";
+  parameter Modelica.Units.SI.Length length(min=0) " Length of pipe";
+  parameter Modelica.Units.SI.ThermalConductivity lambda=373
     "Heat conductivity of pipe";
-  parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature";
+  parameter Modelica.Units.SI.Temperature T0=289.15 "Initial temperature";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
@@ -27,8 +27,8 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     lambda=lambda,
     d_in=(d_out + d_in)/2,
     d_out=d_out,
-    nParallel=nParallel)
-    "Outer heat conduction" annotation (Placement(transformation(extent={{-10,56},
+    nParallel=nParallel) "Outer heat conduction"
+                            annotation (Placement(transformation(extent={{-10,56},
             {10,76}}, rotation=0)));
   AixLib.Utilities.HeatTransfer.CylindricLoad CylindricLoad1(
     final energyDynamics=energyDynamics,
@@ -38,16 +38,16 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     d_out=d_out,
     length=length,
     T0=T0,
-    nParallel=nParallel)
-    "Heat capacity" annotation (Placement(transformation(extent={{-10,38},{10,58}},
+    nParallel=nParallel) "Heat capacity"
+                    annotation (Placement(transformation(extent={{-10,38},{10,58}},
                       rotation=0)));
   AixLib.Utilities.HeatTransfer.CylindricHeatConduction CylindricHeatConductionIn(
     length=length,
     lambda=lambda,
     d_out=(d_out + d_in)/2,
     d_in=d_in,
-    nParallel=nParallel)
-    "Inner heat conduction" annotation (Placement(transformation(extent={{-10,14},
+    nParallel=nParallel) "Inner heat conduction"
+                            annotation (Placement(transformation(extent={{-10,14},
             {10,34}}, rotation=0)));
 equation
   connect(CylindricHeatConductionOut.port_b, port_b) annotation (Line(

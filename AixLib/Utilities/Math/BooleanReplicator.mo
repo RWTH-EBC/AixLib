@@ -25,19 +25,20 @@ equation
           fillColor={255,0,255},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
-<p>
-This block replicates the boolean input signal to an array of <code>nout</code> identical output signals.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 28, 2013, by Marcus Fuchs:<br/>
-Changed block to use Functions.booleanReplicator.
-</li>
-<li>
-July 27, 2012, by Kaustubh Phalak:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This block replicates the boolean input signal to an array of <code>nout</code> identical output signals.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 28, 2013, by Marcus Fuchs:<br/>
+ Changed block to use Functions.booleanReplicator.
+ </li>
+ <li>
+ July 27, 2012, by Kaustubh Phalak:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BooleanReplicator;

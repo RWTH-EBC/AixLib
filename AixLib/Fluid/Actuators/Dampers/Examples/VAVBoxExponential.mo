@@ -5,17 +5,19 @@ model VAVBoxExponential
 
  package Medium = AixLib.Media.Air;
 
-  AixLib.Fluid.Actuators.Dampers.Exponential dam(redeclare package Medium =
-        Medium, m_flow_nominal=2)
-    annotation (Placement(transformation(extent={{20,10},{40,30}})));
+  AixLib.Fluid.Actuators.Dampers.Exponential dam(
+    redeclare package Medium = Medium,
+    dpDamper_nominal=5,
+    m_flow_nominal=2)
+             annotation (Placement(transformation(extent={{20,10},{40,30}})));
     Modelica.Blocks.Sources.Step yDam(
     height=-1,
     offset=1,
     startTime=60)
                  annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
     Modelica.Blocks.Sources.Ramp P(
-    height=-10,
-    offset=101330,
+    height=-20,
+    offset=101335,
     startTime=0,
     duration=60) annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
@@ -30,16 +32,17 @@ model VAVBoxExponential
           extent={{72,-20},{52,0}})));
     Modelica.Blocks.Sources.Constant PAtm(k=101325)
       annotation (Placement(transformation(extent={{60,60},{80,80}})));
-  AixLib.Fluid.Actuators.Dampers.VAVBoxExponential vav(
+  AixLib.Fluid.Actuators.Dampers.Exponential vav(
     redeclare package Medium = Medium,
-    dp_nominal=5,
+    dpDamper_nominal=5,
+    dpFixed_nominal=5,
     m_flow_nominal=2)
-    annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
+             annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
   AixLib.Fluid.FixedResistances.PressureDrop res(
     from_dp=true,
     m_flow_nominal=2,
     redeclare package Medium = Medium,
-    dp_nominal=5 - 0.45*2^2/1.2/1.8^2/2)
+    dp_nominal=5)
     annotation (Placement(transformation(extent={{-36,10},{-16,30}})));
 
 equation
@@ -71,24 +74,25 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=240),
 Documentation(info="<html>
-<p>
-Test model for the variable air volume flow box.
-The model has two flow legs, both are connected to models for constant inlet and outlet
-pressures.
-The top flow leg has a flow resistance and an air damper, and
-the bottom flow leg combines both of these resistances into one model.
-Both flow legs have identical mass flow rates, except at very small
-flow rates. The reason for this difference is that the equations
-are regularized for numerical reasons, and combining the two components
-within one component leads to a slightly different equation for the
-regularization.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 20, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Test model for the variable air volume flow box.
+ The model has two flow legs, both are connected to models for constant inlet and outlet
+ pressures.
+ The top flow leg has a flow resistance and an air damper, and
+ the bottom flow leg combines both of these resistances into one model.
+ Both flow legs have identical mass flow rates, except at very small
+ flow rates. The reason for this difference is that the equations
+ are regularized for numerical reasons, and combining the two components
+ within one component leads to a slightly different equation for the
+ regularization.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 20, 2007 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end VAVBoxExponential;

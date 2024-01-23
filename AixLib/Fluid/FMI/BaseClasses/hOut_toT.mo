@@ -9,8 +9,8 @@ block hOut_toT "Conversion from h to T"
   Modelica.Blocks.Interfaces.RealInput h(final unit="J/kg") "Specific enthalpy"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
 
-  Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg") if
-       Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
+  Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg")
+    if Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
 
   Modelica.Blocks.Interfaces.RealOutput T(final unit="K",
@@ -34,20 +34,21 @@ equation
       X=Xi_internal);
 
 annotation (Documentation(revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-April 28, 2016, by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Block that converts enthalpy to temperature.
-</p>
-</html>"));
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ April 28, 2016, by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Block that converts enthalpy to temperature.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end hOut_toT;

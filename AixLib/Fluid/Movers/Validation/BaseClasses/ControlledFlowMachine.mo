@@ -198,7 +198,8 @@ equation
             160}})),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160,160}})),
     Documentation(info="<html>
-This example demonstrates the use of the flow model with four different configuration.
-At steady-state, all flow models have the same mass flow rate and pressure difference.
-</html>"));
+ This example demonstrates the use of the flow model with four different configuration.
+ At steady-state, all flow models have the same mass flow rate and pressure difference.
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ControlledFlowMachine;

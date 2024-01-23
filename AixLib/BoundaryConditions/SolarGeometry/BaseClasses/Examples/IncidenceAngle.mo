@@ -9,8 +9,8 @@ model IncidenceAngle "Test model for incidence angle"
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(
     azi=AixLib.Types.Azimuth.S,
-    til=AixLib.Types.Tilt.Wall,
-    lat=0.73268921998722) "Incidence angle"
+    til=AixLib.Types.Tilt.Wall)
+    "Incidence angle"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
@@ -47,30 +47,39 @@ equation
       textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(weaBus.lat, incAng.lat) annotation (Line(
+      points={{-36,0},{38,0}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
   Documentation(info="<html>
-<p>
-This example computes the solar incidence angle on a tilted surface.
-This model is also part of more extensive tests that run the
-model for different orientations. These tests are at
-<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle\">
-AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 24, 2015, by Michael Wetter:<br/>
-Assigned azimuth and tilt using the types from
-<a href=\"modelica://AixLib.Types.Tilt\">
-AixLib.Types.Tilt</a>.
-</li>
-<li>
-May 19, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example computes the solar incidence angle on a tilted surface.
+ This model is also part of more extensive tests that run the
+ model for different orientations. These tests are at
+ <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle\">
+ AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 24, 2015, by Michael Wetter:<br/>
+ Assigned azimuth and tilt using the types from
+ <a href=\"modelica://AixLib.Types.Tilt\">
+ AixLib.Types.Tilt</a>.
+ </li>
+ <li>
+ May 19, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/IncidenceAngle.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IncidenceAngle;

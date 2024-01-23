@@ -48,17 +48,18 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/PressureDrop.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Example model for a fixed resistance that takes as a parameter the
-pressure drop at nominal condition.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 1, 2016, by Michael Wetter:<br/>
-First implementation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Example model for a fixed resistance that takes as a parameter the
+ pressure drop at nominal condition.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 1, 2016, by Michael Wetter:<br/>
+ First implementation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PressureDrop;

@@ -1,0 +1,61 @@
+stages:
+    - StyleCheck
+    
+Style_Check_AixLib:
+    stage: StyleCheck
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate ${python_version}
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -DS ${dymolaversion}
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/${library}_StyleCheckLog.html
+            - ${library}/${library}_StyleErrorLog.html
+        expire_in: 7 day 
+    allow_failure: true 
+    only:
+        refs:
+            - external_pull_requests
+    except:
+        variables:
+            %for commit in except_commit_list:
+            - $CI_COMMIT_MESSAGE  =~ /${commit}/
+            %endfor
+            
+    
+Style_Check_ChangedModel:
+    stage: StyleCheck
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate ${python_version}
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - (git diff --raw --diff-filter=AMT HEAD^1) > ${ch_file}
+        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion}
+    only:
+        changes:
+            - ${library}/**/*
+        
+    except:
+        refs:
+            - external_pull_requests
+            ${merge_branch} 
+        variables:
+            %for commit in except_commit_list:
+            - $CI_COMMIT_MESSAGE =~ /${commit}/
+            %endfor
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/ChangedModels_StyleCheckLog.html
+            - ${library}/ChangedModels_StyleErrorLog.html
+            - ${library}/${library}_StyleCheckLog.html
+            - ${library}/${library}_StyleErrorLog.html
+            - ${ch_file}
+        expire_in: 7 day 
+    allow_failure: true 

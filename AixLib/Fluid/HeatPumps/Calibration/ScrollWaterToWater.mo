@@ -28,62 +28,63 @@ model ScrollWaterToWater
   parameter Real volRat(min = 1.0, unit = "1") = 2.0
     "Built-in volume ratio";
 
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal(min = 0) = 0.009
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal(min=0) = 0.009
     "Refrigerant volume flow rate at suction";
 
-  parameter Modelica.SIunits.MassFlowRate leaCoe(min = 0) = 0.03
+  parameter Modelica.Units.SI.MassFlowRate leaCoe(min=0) = 0.03
     "Leakage coefficient";
 
-  parameter Modelica.SIunits.Efficiency etaEle = 0.696
+  parameter Modelica.Units.SI.Efficiency etaEle=0.696
     "Electro-mechanical efficiency of the compressor";
 
-  parameter Modelica.SIunits.Power PLos(min = 0) = 500.0
+  parameter Modelica.Units.SI.Power PLos(min=0) = 500.0
     "Constant part of the compressor power losses";
 
-  parameter Modelica.SIunits.TemperatureDifference dTSup(min = 0) = 10.0
+  parameter Modelica.Units.SI.TemperatureDifference dTSup(min=0) = 10.0
     "Superheating at compressor suction";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {100,100}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,100}}),
       graphics={Text(extent={{-88,92},{-64,90}},
-        lineColor={28,108,200})}),
+        textColor={28,108,200})}),
     preferredView="info",
     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Calibration/ScrollWaterToWater.mos"
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=142),
 Documentation(info="<HTML>
-<p>
-Calibration model for the calibration of models for water to water heat pump
-with scroll compressor.
-</p>
-<p>
-Source and load temperatures and flow rates are read from an external time
-table.
-</p>
-<p>
-This model is called from the Python code that computes heat pump model
-parameters from the performance data.
-Heat pump model parameters are obtained through an optimization procedure that
-minimizes the difference between the modeled and tabulated (from the
-manufacturers) capacity and power input of the heat pump.
-</p>
-<p>
-The optimization is done using a Python implementation of the heat pump model,
-found in AixLib/Resources/src/fluid/heatpumps/calibration/.
-Heat pump model parameters are verified using this modelica model after their
-evaluation by the Python code.
-</p>
-<p>
-Documentation for the Python code is in the directory
-<code>AixLib/Resources/src/fluid/heatpumps/calibration/doc/build/html</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 31, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Calibration model for the calibration of models for water to water heat pump
+ with scroll compressor.
+ </p>
+ <p>
+ Source and load temperatures and flow rates are read from an external time
+ table.
+ </p>
+ <p>
+ This model is called from the Python code that computes heat pump model
+ parameters from the performance data.
+ Heat pump model parameters are obtained through an optimization procedure that
+ minimizes the difference between the modeled and tabulated (from the
+ manufacturers) capacity and power input of the heat pump.
+ </p>
+ <p>
+ The optimization is done using a Python implementation of the heat pump model,
+ found in AixLib/Resources/src/fluid/heatpumps/calibration/.
+ Heat pump model parameters are verified using this modelica model after their
+ evaluation by the Python code.
+ </p>
+ <p>
+ Documentation for the Python code is in the directory
+ <code>AixLib/Resources/src/fluid/heatpumps/calibration/doc/build/html</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 31, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater;

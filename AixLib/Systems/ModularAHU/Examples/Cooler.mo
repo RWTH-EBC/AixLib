@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Cooler "Cooler register example"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -34,13 +34,15 @@ model Cooler "Cooler register example"
     T_amb=293.15)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
   Fluid.Sources.Boundary_pT boundaryWaterSource(
+    p=300000,
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=279.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-60,-60})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT boundaryWaterSink(
+    p=300000,                                 nPorts=1, redeclare package Medium =
                MediumWater) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -62,11 +64,11 @@ model Cooler "Cooler register example"
     k=0.04,
     Ti=120,
     Td=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    reverseAction=true,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    reverseAction=false,
     useExternalTset=true,
     TflowSet=289.15,
-    rpm_pump=4000)
+    rpm_pump=1000)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 19)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));

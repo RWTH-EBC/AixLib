@@ -2,5 +2,6 @@ IcingBlock
 LookUpTable2D
 LookUpTableND
 PolynomalApproach
+VCLibMap
 calcCOP
 BaseClasses

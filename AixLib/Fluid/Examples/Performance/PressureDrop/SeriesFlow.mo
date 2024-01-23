@@ -4,9 +4,9 @@ model SeriesFlow
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Air;
   parameter Integer nRes(min=2) = 10 "Number of resistances";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=1
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=1
     "Pressure drop at nominal mass flow rate";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
 
   Sources.MassFlowSource_T sou(
@@ -44,22 +44,22 @@ equation
   connect(sou.m_flow_in, pulse_p.y) annotation (Line(points={{-62,8},{-62,8},{
           -79,8}},           color={0,0,127}));
    annotation (    Documentation(revisions="<html>
-<ul>
-<li>
-May 26, 2017, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example model that demonstrates how translation statistics
-depend on the type of boundary conditions,
-the parallel or series configuration of the components
-and the value of parameter <code>from_dp</code>.
-</p>
-</html>"),
+ <ul>
+ <li>
+ May 26, 2017, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example model that demonstrates how translation statistics
+ depend on the type of boundary conditions,
+ the parallel or series configuration of the components
+ and the value of parameter <code>from_dp</code>.
+ </p>
+ </html>"),
     experiment(Tolerance=1e-06, StopTime=1),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos"
-        "Simulate and plot"));
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SeriesFlow;

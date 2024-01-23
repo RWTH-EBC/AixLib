@@ -5,21 +5,24 @@ function multipoleThermalResistances
 
   input Integer nPip "Number of pipes";
   input Integer J "Number of multipoles";
-  input Modelica.SIunits.Position xPip[nPip] "x-Coordinates of pipes";
-  input Modelica.SIunits.Position yPip[nPip] "y-Coordinates of pipes";
-  input Modelica.SIunits.Radius rBor "Borehole radius";
-  input Modelica.SIunits.Radius rPip[nPip] "Outter radius of pipes";
-  input Modelica.SIunits.ThermalConductivity kFil "Thermal conductivity of grouting material";
-  input Modelica.SIunits.ThermalConductivity kSoi "Thermal conductivity of soil material";
+  input Modelica.Units.SI.Position xPip[nPip] "x-Coordinates of pipes";
+  input Modelica.Units.SI.Position yPip[nPip] "y-Coordinates of pipes";
+  input Modelica.Units.SI.Radius rBor "Borehole radius";
+  input Modelica.Units.SI.Radius rPip[nPip] "Outter radius of pipes";
+  input Modelica.Units.SI.ThermalConductivity kFil
+    "Thermal conductivity of grouting material";
+  input Modelica.Units.SI.ThermalConductivity kSoi
+    "Thermal conductivity of soil material";
   input Real RFluPip[nPip](each unit="(m.K)/W") "Fluid to pipe wall thermal resistances";
-  input Modelica.SIunits.Temperature TBor=0 "Average borehole wall temperature";
+  input Modelica.Units.SI.Temperature TBor=0
+    "Average borehole wall temperature";
 
   output Real RDelta[nPip,nPip](each unit="(m.K)/W") "Delta-circuit thermal resistances";
   output Real R[nPip,nPip](each unit="(m.K)/W") "Internal thermal resistances";
 
 protected
   Real QPip_flow[nPip](each unit="W/m") "Pipe heat transfer rates";
-  Modelica.SIunits.Temperature TFlu[nPip] "Fluid temperatures";
+  Modelica.Units.SI.Temperature TFlu[nPip] "Fluid temperatures";
   Real K[nPip,nPip](each unit="W/(m.K)") "Internal thermal conductances";
 
 algorithm
@@ -64,20 +67,21 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
-<p>This model evaluates the delta-circuit borehole thermal resistances using the multipole method of Claesson and Hellstrom (2011).
-</p>
-<h4>References</h4>
-<p>J. Claesson and G. Hellstrom. 
-<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
-</i>
-HVAC&amp;R Research,
-17(6): 895-911, 2011.</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 12, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>This model evaluates the delta-circuit borehole thermal resistances using the multipole method of Claesson and Hellstrom (2011).
+ </p>
+ <h4>References</h4>
+ <p>J. Claesson and G. Hellstrom. 
+ <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
+ </i>
+ HVAC&amp;R Research,
+ 17(6): 895-911, 2011.</p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 12, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end multipoleThermalResistances;

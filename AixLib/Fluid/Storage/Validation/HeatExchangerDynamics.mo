@@ -7,9 +7,10 @@ model HeatExchangerDynamics
 
   constant Integer nSeg = 7 "Number of segments in tank";
 
-  parameter Modelica.SIunits.HeatFlowRate QHex_flow_nominal = 2000
+  parameter Modelica.Units.SI.HeatFlowRate QHex_flow_nominal=2000
     "Design heat flow rate of heat exchanger";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= QHex_flow_nominal/4200/4;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=QHex_flow_nominal/
+      4200/4;
 
   AixLib.Fluid.Sources.Boundary_pT watInTan(
     redeclare package Medium = Medium,
@@ -124,32 +125,33 @@ equation
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Validation/HeatExchangerDynamics.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This validation model compares two tank models. The only difference between
-the two tank models is that one uses a dynamic energy balance, whereas
-the other uses a steady-state energy balance for the heat exchanger.
-The mass flow rate through the heat exchanger is varied from zero to
-the design flow rate and back to zero to test the model under conditions in
-which no water flows through the heat exchanger.
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-July 5, 2017, by Michael Wetter:<br/>
-Added zero mass flow rate boundary conditions to avoid a translation error in Dymola 2018.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/834\">issue 834</a>.
-</li>
-<li>
-January 8, 2016 by Michael Wetter:<br/>
-First implementation to test
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">issue 434</a>.
-</li>
-</ul>
-</html>"),
-    experiment(Tolerance=1e-6, StopTime=14400));
+ This validation model compares two tank models. The only difference between
+ the two tank models is that one uses a dynamic energy balance, whereas
+ the other uses a steady-state energy balance for the heat exchanger.
+ The mass flow rate through the heat exchanger is varied from zero to
+ the design flow rate and back to zero to test the model under conditions in
+ which no water flows through the heat exchanger.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ July 5, 2017, by Michael Wetter:<br/>
+ Added zero mass flow rate boundary conditions to avoid a translation error in Dymola 2018.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/834\">issue 834</a>.
+ </li>
+ <li>
+ January 8, 2016 by Michael Wetter:<br/>
+ First implementation to test
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">issue 434</a>.
+ </li>
+ </ul>
+ </html>"),
+    experiment(Tolerance=1e-6, StopTime=14400),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeatExchangerDynamics;

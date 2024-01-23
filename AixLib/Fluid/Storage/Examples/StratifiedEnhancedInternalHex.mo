@@ -6,10 +6,10 @@ model StratifiedEnhancedInternalHex
   package MediumTan = AixLib.Media.Water "Medium in the tank";
   package MediumHex = AixLib.Media.Water "Medium in the heat exchanger";
 
- parameter Modelica.SIunits.PressureDifference dpHex_nominal=2500
+  parameter Modelica.Units.SI.PressureDifference dpHex_nominal=2500
     "Pressure drop across the heat exchanger at nominal conditions";
 
-  parameter Modelica.SIunits.MassFlowRate mHex_flow_nominal = 0.278
+  parameter Modelica.Units.SI.MassFlowRate mHex_flow_nominal=0.278
     "Mass flow rate of heat exchanger";
 
   AixLib.Fluid.Sources.Boundary_pT bouWat(redeclare package Medium =
@@ -155,73 +155,74 @@ equation
         "Simulate and plot"),
 experiment(Tolerance=1e-6, StopTime=1200),
 Documentation(info="<html>
-<p>
-This model provides an example for the
-<a href=\"modelica://AixLib.Fluid.Storage.StratifiedEnhancedInternalHex\">
-AixLib.Fluid.Storage.StratifiedEnhancedInternalHex</a> model.
-There are three tanks.
-In the tank on top, the fluid in the heat exchanger and the metal of the
-heat exchanger use a steady-state energy balance.
-In the middle tank, both use a dynamic balance.
-In the bottom tank, the fluid uses a steady-state heat balance
-but the metal of the heat exchanger uses a dynamic balance.
-</p>
-<p>
-Each tank starts at the same water temperature, and there is no
-water flow through the tank.
-The glycol that flows through the heat exchanger starts with zero
-mass flow rate, and is set to its design flow rate at <i>t=300</i> seconds.
-</p>
-</html>",
+ <p>
+ This model provides an example for the
+ <a href=\"modelica://AixLib.Fluid.Storage.StratifiedEnhancedInternalHex\">
+ AixLib.Fluid.Storage.StratifiedEnhancedInternalHex</a> model.
+ There are three tanks.
+ In the tank on top, the fluid in the heat exchanger and the metal of the
+ heat exchanger use a steady-state energy balance.
+ In the middle tank, both use a dynamic balance.
+ In the bottom tank, the fluid uses a steady-state heat balance
+ but the metal of the heat exchanger uses a dynamic balance.
+ </p>
+ <p>
+ Each tank starts at the same water temperature, and there is no
+ water flow through the tank.
+ The glycol that flows through the heat exchanger starts with zero
+ mass flow rate, and is set to its design flow rate at <i>t=300</i> seconds.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-September 28, 2015 by Michael Wetter:<br/>
-Changed medium in heat exchanger from
-<a href=\"modelica://Modelica.Media.Incompressible.Examples.Glycol47\">
-Modelica.Media.Incompressible.Examples.Glycol47</a> to
-<a href=\"modelica://AixLib.Media.Water\">
-AixLib.Media.Water</a>
-to avoid numerical derivative in regression tests.
-</li>
-<li>
-July 2, 2015 by Michael Wetter:<br/>
-Modified example to test dynamic versus steady-state heat exchanger
-configuration.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-August 29, 2014 by Michael Wetter:<br/>
-Revised example to use a different media in the tank and in the
-heat exchanger. This is to provide a unit test for
-issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">#271</a>.
-</li>
-<li>
-April 18, 2014 by Michael Wetter:<br/>
-Revised example for new connectors and parameters, and provided
-more interesting parameter values that cause a tank stratification.
-</li>
-<li>
-Mar 27, 2013 by Peter Grant:<br/>
-First implementation
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ September 28, 2015 by Michael Wetter:<br/>
+ Changed medium in heat exchanger from
+ <a href=\"modelica://Modelica.Media.Incompressible.Examples.Glycol47\">
+ Modelica.Media.Incompressible.Examples.Glycol47</a> to
+ <a href=\"modelica://AixLib.Media.Water\">
+ AixLib.Media.Water</a>
+ to avoid numerical derivative in regression tests.
+ </li>
+ <li>
+ July 2, 2015 by Michael Wetter:<br/>
+ Modified example to test dynamic versus steady-state heat exchanger
+ configuration.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ August 29, 2014 by Michael Wetter:<br/>
+ Revised example to use a different media in the tank and in the
+ heat exchanger. This is to provide a unit test for
+ issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">#271</a>.
+ </li>
+ <li>
+ April 18, 2014 by Michael Wetter:<br/>
+ Revised example for new connectors and parameters, and provided
+ more interesting parameter values that cause a tank stratification.
+ </li>
+ <li>
+ Mar 27, 2013 by Peter Grant:<br/>
+ First implementation
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedEnhancedInternalHex;

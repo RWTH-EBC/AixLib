@@ -7,9 +7,11 @@ package Types "Package with type definitions"
       FlowRate "Flow rate is prescribed",
       PressureDifference "Pressure difference is prescribed")
     "Enumeration to choose what variable is prescribed";
+
  annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains type definitions for movers.
-</p>
-</html>"));
+ <p>
+ This package contains type definitions for movers.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Types;

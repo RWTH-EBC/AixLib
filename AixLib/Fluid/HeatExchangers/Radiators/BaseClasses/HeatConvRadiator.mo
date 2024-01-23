@@ -7,8 +7,7 @@ model HeatConvRadiator
   parameter Real dT_nom "Nominal temperature difference";
   parameter Real kA=(1-s_eff)*NominalPower/dT_nom^n;
   Real alpha_t;
-  Modelica.SIunits.Conversions.NonSIunits.Temperature_degC posDiff=
-    noEvent(abs(port_b.T - port_a.T))
+  Modelica.Units.NonSI.Temperature_degC posDiff=noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));

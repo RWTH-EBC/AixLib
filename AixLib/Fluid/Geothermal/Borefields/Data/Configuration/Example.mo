@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.Data.Configuration;
 record Example
   "Example definition of a configuration data record"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
       borCon = Types.BoreholeConfiguration.SingleUTube,
       cooBor={{0,0},{0,6},{6,0},{6,6}},
       mBor_flow_nominal=0.3,
@@ -18,24 +19,25 @@ record Example
   defaultComponentName="conDat",
     Documentation(
 info="<html>
-<p>
-This record presents an example for how to define configuration data records
-using the template in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template\">
-AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template</a>.
-</p>
-</html>",
+ <p>
+ This record presents an example for how to define configuration data records
+ using the template in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template\">
+ AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-July 15, 2018, by Michael Wetter:<br/>
-Revised implementation, added <code>defaultComponentPrefixes</code> and
-<code>defaultComponentName</code>.
-</li>
-<li>
-June 28, 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ July 15, 2018, by Michael Wetter:<br/>
+ Revised implementation, added <code>defaultComponentPrefixes</code> and
+ <code>defaultComponentName</code>.
+ </li>
+ <li>
+ June 28, 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Example;

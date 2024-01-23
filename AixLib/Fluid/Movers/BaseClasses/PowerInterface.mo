@@ -3,13 +3,13 @@ model PowerInterface
   "Partial model to compute power draw and heat dissipation of fans and pumps"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
 
   parameter Boolean motorCooledByFluid
     "Flag, true if the motor is cooled by the fluid stream";
 
-  parameter Modelica.SIunits.VolumeFlowRate delta_V_flow
+  parameter Modelica.Units.SI.VolumeFlowRate delta_V_flow
     "Factor used for setting heat input into medium to zero at very small flows";
 
   Modelica.Blocks.Interfaces.RealInput etaHyd(
@@ -40,12 +40,17 @@ model PowerInterface
     final unit="W") "Heat input from fan or pump to medium"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-  Modelica.SIunits.Power WHyd
+  Modelica.Units.SI.Power WHyd
     "Hydraulic power input (converted to flow work and heat)";
 
 protected
-  Modelica.SIunits.HeatFlowRate QThe_flow
+  Modelica.Units.SI.HeatFlowRate QThe_flow
     "Heat input from fan or pump to medium";
+
+initial equation
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
 
 equation
   // Hydraulic power (transmitted by shaft), etaHyd = WFlo/WHyd
@@ -108,33 +113,40 @@ equation
           lineColor={0,0,0},
           fillColor={255,0,0})}),
     Documentation(info="<html>
-<p>Block that implements the functions to compute the
-heat dissipation of fans and pumps. It is used by the model
-<a href=\"modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine\">
-AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>.
-</p>
-</html>",
+ <p>Block that implements the functions to compute the
+ heat dissipation of fans and pumps. It is used by the model
+ <a href=\"modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine\">
+ AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>.
+ </p>
+ </html>",
       revisions="<html>
-<ul>
-<li>
-December 2, 2016, by Michael Wetter:<br/>
-Removed <code>min</code> attribute as otherwise numerical noise can cause
-the assertion on the limit to fail.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
-</li>
-<li>
-March 15, 2016, by Michael Wetter:<br/>
-Replaced <code>spliceFunction</code> with <code>regStep</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
-</li>
-<li>
-February 19, 2016, by Michael Wetter:<br/>
-First implementation during refactoring of mover models to make implementation clearer.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ December 2, 2016, by Michael Wetter:<br/>
+ Removed <code>min</code> attribute as otherwise numerical noise can cause
+ the assertion on the limit to fail.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+ </li>
+ <li>
+ March 15, 2016, by Michael Wetter:<br/>
+ Replaced <code>spliceFunction</code> with <code>regStep</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+ </li>
+ <li>
+ February 19, 2016, by Michael Wetter:<br/>
+ First implementation during refactoring of mover models to make implementation clearer.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerInterface;

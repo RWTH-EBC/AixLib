@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.R290;
+﻿within AixLib.Media.Refrigerants.R290;
 package R290_IIR_P05_30_T263_343_Formula
   "Refrigerant model for R290 using a hybrid approach with explicit formulas
   developed by Sangi et al."
@@ -55,7 +55,6 @@ package R290_IIR_P05_30_T263_343_Formula
       max=343.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
@@ -1199,98 +1198,104 @@ package R290_IIR_P05_30_T263_343_Formula
   The implemented coefficients are fitted to external data by Sangi et
   al. and are valid within the following range:<br/>
 </p>
-<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
-border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
-  <tr>
-    <td>
-      <p>
-        Parameter
-      </p>
-    </td>
-    <td>
-      <p>
-        Minimum Value
-      </p>
-    </td>
-    <td>
-      <p>
-        Maximum Value
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Pressure (p) in bar
-      </p>
-    </td>
-    <td>
-      <p>
-        0.5
-      </p>
-    </td>
-    <td>
-      <p>
-        30
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Temperature (T) in K
-      </p>
-    </td>
-    <td>
-      <p>
-        263.15
-      </p>
-    </td>
-    <td>
-      <p>
-        343.15
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"
+    width=\"30%\" style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td>
+          <p>
+            Parameter
+          </p>
+        </td>
+        <td>
+          <p>
+            Minimum Value
+          </p>
+        </td>
+        <td>
+          <p>
+            Maximum Value
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Pressure (p) in bar
+          </p>
+        </td>
+        <td>
+          <p>
+            0.5
+          </p>
+        </td>
+        <td>
+          <p>
+            30
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Temperature (T) in K
+          </p>
+        </td>
+        <td>
+          <p>
+            263.15
+          </p>
+        </td>
+        <td>
+          <p>
+            343.15
+          </p>
+        </td>
+      </tr>
+    </table>
+    <h4>
+      Validation
+    </h4>
+    <p>
+      Sangi et al. validated their model by comparing it to results
+      obtained from the Helmholtz equation of state. They found out
+      that relative error of the refrigerant model compared to
+      HelmholtzMedia (Thorade and Saadat, 2012) is close to zero.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      Thorade, Matthis; Saadat, Ali (2012): <a href=
+      \"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia
+      - A fluid properties library</a>. In: <i>Proceedings of the 9th
+      International Modelica Conference</i>; September 3-5; 2012;
+      Munich; Germany. Linköping University Electronic Press, S. 63–70.
+    </p>
+    <p>
+      Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow,
+      Rita; Müller, Dirk (2014): <a href=
+      \"http://dx.doi.org/10.3384/ecp14096\" >A Medium Model for the
+      Refrigerant Propane for Fast and Accurate Dynamic
+      Simulations</a>. In: <i>The 10th International Modelica
+      Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping
+      University Electronic Press (Linköping Electronic Conference
+      Proceedings), S. 1271–1275
+    </p>
+    <p>
+      Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat
+      Pumps - Modeling, Simulation and Exergy Analysis. <i>Master
+      thesis</i>
+    </p>
+    <p>
+      Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference
+      Multiparameter Viscosity Equation for Propane with an Optimized
+      Functional Form. In: <i>J. Phys. Chem. Ref. Data, Vol. 35, No.
+      3</i>, S. 1415-1442
+    </p>
+  </caption>
 </table>
-<h4>
-  Validation
-</h4>
-<p>
-  Sangi et al. validated their model by comparing it to results
-  obtained from the Helmholtz equation of state. They found out that
-  relative error of the refrigerant model compared to HelmholtzMedia
-  (Thorade and Saadat, 2012) is close to zero.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  Thorade, Matthis; Saadat, Ali (2012): <a href=
-  \"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A
-  fluid properties library</a>. In: <i>Proceedings of the 9th
-  International Modelica Conference</i>; September 3-5; 2012; Munich;
-  Germany. Linköping University Electronic Press, S. 63–70.
-</p>
-<p>
-  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
-  Medium Model for the Refrigerant Propane for Fast and Accurate
-  Dynamic Simulations</a>. In: <i>The 10th International Modelica
-  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
-  Electronic Press (Linköping Electronic Conference Proceedings), S.
-  1271–1275
-</p>
-<p>
-  Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat
-  Pumps - Modeling, Simulation and Exergy Analysis. <i>Master
-  thesis</i>
-</p>
-<p>
-  Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference
-  Multiparameter Viscosity Equation for Propane with an Optimized
-  Functional Form. In: <i>J. Phys. Chem. Ref. Data, Vol. 35, No. 3</i>,
-  S. 1415-1442
-</p>
 </html>"));
 end R290_IIR_P05_30_T263_343_Formula;

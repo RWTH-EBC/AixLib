@@ -3,13 +3,13 @@ model HACoilInside "Test model for HACoilInside"
   extends Modelica.Icons.Example;
 
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=0.1,
+    f=0.1,
     amplitude=0.063,
     offset=0.063) "Mass flow rate"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=10,
-    freqHz=0.1,
+    f=0.1,
     offset=273.15 + 50) "Temperature"
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside hASin(
@@ -31,16 +31,17 @@ equation
         "Simulate and plot"),
         experiment(Tolerance=1e-6, StopTime=15),
         Documentation(info="<html>
-        <p>
-        Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
-        AixLib.Fluid.HeatExchanger.BaseClassess.HACoilInside</a>.
-        </p>
-        </html>", revisions="<html>
-<ul>
-<li>
-May 11, 2013, by Michael Wetter:<br/>
-First version.
-</li>
-</ul>
-</html>"));
+         <p>
+         Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
+         AixLib.Fluid.HeatExchanger.BaseClassess.HACoilInside</a>.
+         </p>
+         </html>",revisions="<html>
+ <ul>
+ <li>
+ May 11, 2013, by Michael Wetter:<br/>
+ First version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HACoilInside;

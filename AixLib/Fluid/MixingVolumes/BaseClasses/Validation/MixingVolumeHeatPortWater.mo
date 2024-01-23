@@ -3,8 +3,8 @@ model MixingVolumeHeatPortWater
   "Validation model for setting the initialization of the pressure for water"
   extends Modelica.Icons.Example;
 
-  replaceable package Medium = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium
-                                            "Medium model";
+  replaceable package Medium = AixLib.Media.Water constrainedby
+    Modelica.Media.Interfaces.PartialMedium "Medium model";
 
   parameter Integer nEle(min=2)= 3 "Number of volumes"
     annotation(Evaluate=true);
@@ -65,26 +65,27 @@ equation
                                                    color={0,127,255}));
 
   annotation (Documentation(info="<html>
-<p>
-Model that validates that the initial conditions are uniquely set
-and not overdetermined.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 3, 2017 by Michael Wetter:<br/>
-Corrected medium for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/850\">issue 850</a>.
-</li>
-<li>
-October 23, 2017 by Michael Wetter:<br/>
-First implementation for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ Model that validates that the initial conditions are uniquely set
+ and not overdetermined.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 3, 2017 by Michael Wetter:<br/>
+ Corrected medium for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/850\">issue 850</a>.
+ </li>
+ <li>
+ October 23, 2017 by Michael Wetter:<br/>
+ First implementation for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1E-6, StopTime=1.0),
 __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/BaseClasses/Validation/MixingVolumeHeatPortWater.mos"
-  "Simulate and plot"));
+  "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeHeatPortWater;
