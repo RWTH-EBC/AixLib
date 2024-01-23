@@ -72,9 +72,6 @@ model PlugFlowPipe
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
-
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -102,7 +99,6 @@ model PlugFlowPipe
     final thickness=thickness,
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
-    final homotopyInitialization=homotopyInitialization,
     final linearized=linearized)
     "Describing the pipe behavior"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -165,7 +161,7 @@ equation
 
   connect(cor.port_a, port_a)
     annotation (Line(points={{-10,0},{-56,0},{-100,0}}, color={0,127,255}));
-  annotation (
+    annotation(Evaluate=true, Dialog(tab="Advanced"),
     Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
