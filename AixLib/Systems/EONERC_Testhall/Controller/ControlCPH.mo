@@ -2,9 +2,9 @@ within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlCPH
 
 
-  BaseClass.DistributeBus distributeBus_CPH annotation (Placement(
-        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
-            {{78,-22},{118,20}})));
+  Subsystems.BaseClasses.HallHydraulicBus distributeBus_CPH annotation (
+      Placement(transformation(extent={{-114,-36},{-74,6}}), iconTransformation(
+          extent={{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_Valve(
     yMin=0,
     Td=0.5,

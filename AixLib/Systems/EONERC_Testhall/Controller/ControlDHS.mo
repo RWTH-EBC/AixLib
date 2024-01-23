@@ -1,83 +1,84 @@
 within AixLib.Systems.EONERC_Testhall.Controller;
 model ControlDHS
-  BaseClass.DistributeBus distributeBus_DHS annotation (Placement(
-        transformation(extent={{-114,-36},{-74,6}}), iconTransformation(extent=
-            {{78,-22},{118,20}})));
+  Subsystems.BaseClasses.HallHydraulicBus distributeBus_DHS annotation (
+      Placement(transformation(extent={{80,-20},{120,20}}), iconTransformation(
+          extent={{78,-22},{118,20}})));
   Modelica.Blocks.Continuous.LimPID PID_Valve(
     yMin=0,
     Td=0.5,
     yMax=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=3000,
-    k=0.002) annotation (Placement(transformation(
+    Ti=Ti_valve,
+    k=k_valve)
+             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={62,68})));
-  Modelica.Blocks.Continuous.CriticalDamping criticalDamping(
-    n=2,
-    f=0.05,
-    x_start={0,0})
-    annotation (Placement(transformation(extent={{62,-24},{42,-4}})));
+        origin={0,70})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-90,-44})));
+        rotation=0,
+        origin={-90,0})));
   Modelica.Blocks.Continuous.LimPID PID_rpmSet(
     yMin=0,
     Td=0.5,
     yMax=4800,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=3000,
-    k=0.2)   annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+    Ti=Ti_pump,
+    k=k_pump)
+             annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={-64,72})));
+        origin={0,-70})));
   Modelica.Blocks.Sources.Constant dp_set(k=0.25e5)
     "probaby between 0.1e5 and 0.25e5"              annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-98,72})));
+        origin={-50,-70})));
   Modelica.Blocks.Math.Feedback dp_act annotation (Placement(transformation(
-        extent={{-6,6},{6,-6}},
-        rotation=90,
-        origin={-64,44})));
+        extent={{-10,10},{10,-10}},
+        rotation=270,
+        origin={0,-30})));
   Modelica.Blocks.Math.Max maxTSupSet
-    annotation (Placement(transformation(extent={{18,62},{30,74}})));
+    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
+  parameter Real k_valve=0.002 "Gain of controller";
+  parameter Modelica.Units.SI.Time Ti_valve=3000
+    "Time constant of Integrator block";
+  parameter Real k_pump=0.2 "Gain of controller";
+  parameter Modelica.Units.SI.Time Ti_pump=3000
+    "Time constant of Integrator block";
 equation
-  connect(PID_Valve.y, criticalDamping.u) annotation (Line(points={{73,68},{78,
-          68},{78,-14},{64,-14}},
-                                color={0,0,127}));
-  connect(criticalDamping.y, distributeBus_DHS.bus_dhs.valveSet) annotation (
-      Line(points={{41,-14},{-26.5,-14},{-26.5,-14.895},{-93.9,-14.895}},
-                                                                   color={0,0,
-          127}));
   connect(booleanExpression1.y, distributeBus_DHS.bus_dhs_pump.pumpBus.onSet)
-    annotation (Line(points={{-90,-33},{-90,-14.895},{-93.9,-14.895}}, color={
+    annotation (Line(points={{-79,0},{-79,0.1},{100.1,0.1}},           color={
           255,0,255}));
   connect(PID_Valve.u_m, distributeBus_DHS.bus_dhs_pump.TFwrdOutMea)
-    annotation (Line(points={{62,56},{62,6},{-26,6},{-26,-14.895},{-93.9,
-          -14.895}}, color={0,0,127}));
+    annotation (Line(points={{0,58},{0,0},{50,0},{50,0.1},{100.1,0.1}},
+                     color={0,0,127}));
   connect(dp_set.y, PID_rpmSet.u_s)
-    annotation (Line(points={{-87,72},{-76,72}}, color={0,0,127}));
+    annotation (Line(points={{-39,-70},{-12,-70}},
+                                                 color={0,0,127}));
   connect(dp_act.y, PID_rpmSet.u_m)
-    annotation (Line(points={{-64,49.4},{-64,60}}, color={0,0,127}));
+    annotation (Line(points={{-1.55431e-15,-39},{-1.55431e-15,-58},{0,-58}},
+                                                   color={0,0,127}));
   connect(dp_act.u1, distributeBus_DHS.bus_dhs_pump.p_sup) annotation (Line(
-        points={{-64,39.2},{-64,-14.895},{-93.9,-14.895}}, color={0,0,127}));
+        points={{1.33227e-15,-22},{1.33227e-15,0.1},{100.1,0.1}},
+                                                           color={0,0,127}));
   connect(dp_act.u2, distributeBus_DHS.bus_dhs_pump.p_ret) annotation (Line(
-        points={{-68.8,44},{-93.9,44},{-93.9,-14.895}}, color={0,0,127}));
+        points={{8,-30},{100.1,-30},{100.1,0.1}},       color={0,0,127}));
   connect(PID_rpmSet.y, distributeBus_DHS.bus_dhs_pump.pumpBus.rpmSet)
-    annotation (Line(points={{-53,72},{-48,72},{-48,-14.895},{-93.9,-14.895}},
+    annotation (Line(points={{11,-70},{100,-70},{100,0.1},{100.1,0.1}},
         color={0,0,127}));
   connect(maxTSupSet.y, PID_Valve.u_s)
-    annotation (Line(points={{30.6,68},{50,68}}, color={0,0,127}));
+    annotation (Line(points={{-39,70},{-12,70}}, color={0,0,127}));
   connect(maxTSupSet.u1, distributeBus_DHS.bus_cph_throttle.T_sup_set)
-    annotation (Line(points={{16.8,71.6},{16.8,72},{-28,72},{-28,-14.895},{
-          -93.9,-14.895}}, color={0,0,127}));
+    annotation (Line(points={{-62,76},{-72,76},{-72,0},{14,0},{14,0.1},{100.1,
+          0.1}},           color={0,0,127}));
   connect(maxTSupSet.u2, distributeBus_DHS.bus_cca.T_sup_set) annotation (Line(
-        points={{16.8,64.4},{16.8,66},{-28,66},{-28,-14.895},{-93.9,-14.895}},
+        points={{-62,64},{-72,64},{-72,0},{14,0},{14,0.1},{100.1,0.1}},
         color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  connect(PID_Valve.y, distributeBus_DHS.bus_dhs.valveSet) annotation (Line(
+        points={{11,70},{100.1,70},{100.1,0.1}}, color={0,0,127}));
+  annotation (Icon(graphics={
         Text(
           extent={{-90,20},{56,-20}},
           lineColor={95,95,95},
@@ -101,9 +102,7 @@ equation
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
-           false)),
-    experiment(
+          textString="Control")}), experiment(
       StopTime=400000,
       __Dymola_NumberOfIntervals=200,
       __Dymola_Algorithm="Dassl"));

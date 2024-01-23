@@ -107,7 +107,7 @@ model CCA_AHU "Model of EON ERC Testhall including Monitoring Data and Weather D
     dpMax=5000,
     useTwoFanCtr=true,
     k=10)  annotation (Placement(transformation(extent={{184,60},{164,80}})));
-  BaseClass.CID.CID_approx cid
+  Subsystems.CeilingInjectionDiffusor.CIDSystem_approx cid
     annotation (Placement(transformation(extent={{52,2},{72,22}})));
   Fluid.Sources.Boundary_pT                   bound_sup1(
     redeclare package Medium = AixLib.Media.Water,
@@ -148,7 +148,7 @@ model CCA_AHU "Model of EON ERC Testhall including Monitoring Data and Weather D
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={194,-56})));
-  BaseClass.JetNozzle.JN_control_T_Hall jN
+  Subsystems.JetNozzle.JN jN
     annotation (Placement(transformation(extent={{38,34},{58,54}})));
   ThermalZone.EON_ERC_Testhall eON_ERC_Testhall
     annotation (Placement(transformation(extent={{-40,30},{-8,60}})));
@@ -159,9 +159,9 @@ model CCA_AHU "Model of EON ERC Testhall including Monitoring Data and Weather D
         origin={-54,50})));
   Modelica.Blocks.Sources.Constant intGains_rad(k=0)
     annotation (Placement(transformation(extent={{-82,48},{-72,58}})));
-  BaseClass.CCA.CCA cCA
+  Subsystems.ConcreteCoreActivation.CCASystem cCA
     annotation (Placement(transformation(extent={{-104,18},{-82,38}})));
-  Controller.ControlCCA controlCCA
+  Subsystems.ConcreteCoreActivation.Controls.ControlCCA controlCCA
     annotation (Placement(transformation(extent={{-138,20},{-120,34}})));
   Fluid.Sources.Boundary_pT                   bound_sup(
     redeclare package Medium = AixLib.Media.Water,
@@ -196,30 +196,30 @@ equation
     annotation (Line(points={{202,46},{188,46}},   color={0,127,255}));
   connect(ODA.ports[1],ahu. port_a1)
     annotation (Line(points={{202,30},{188,30}},   color={0,127,255}));
-  connect(ret_c.ports[1],ahu. port_b4) annotation (Line(points={{136,-2},{
-          137.182,-2},{137.182,10}},   color={0,127,255}));
+  connect(ret_c.ports[1],ahu. port_b4) annotation (Line(points={{136,-2},{137.182,
+          -2},{137.182,10}},           color={0,127,255}));
   connect(sup_c.ports[1],ahu. port_a4) annotation (Line(points={{148,0},{145,0},
           {145,10}},       color={0,127,255}));
   connect(controlAHU.genericAHUBus,ahu. genericAHUBus) annotation (Line(
       points={{164,70.1},{145,70.1},{145,54.2}},
       color={255,204,51},
       thickness=0.5));
-  connect(ahu.port_b1,cid. cid_sup_air) annotation (Line(points={{101.609,30},{
-          90,30},{90,7.6},{71.8,7.6}},       color={0,127,255}));
-  connect(ahu.port_a2,cid. cid_ret_air) annotation (Line(points={{101.609,46},{
-          76,46},{76,15.2},{71.6,15.2}},     color={0,127,255}));
-  connect(jN.jn_ret_air, ahu.port_a2) annotation (Line(points={{57.6,47.2},{
-          57.6,46},{101.609,46}}, color={0,127,255}));
-  connect(ahu.port_b1, jN.jn_sup_air) annotation (Line(points={{101.609,30},{64,
-          30},{64,39.6},{57.8,39.6}}, color={0,127,255}));
+  connect(ahu.port_b1, cid.port_a1) annotation (Line(points={{101.609,30},{90,
+          30},{90,7.6},{71.8,7.6}}, color={0,127,255}));
+  connect(ahu.port_a2, cid.port_b1) annotation (Line(points={{101.609,46},{76,
+          46},{76,15.2},{71.6,15.2}}, color={0,127,255}));
+  connect(jN.port_b2, ahu.port_a2) annotation (Line(points={{57.6,47.2},{57.6,
+          46},{101.609,46}}, color={0,127,255}));
+  connect(ahu.port_b1, jN.port_a1) annotation (Line(points={{101.609,30},{64,30},
+          {64,39.6},{57.8,39.6}}, color={0,127,255}));
   connect(intGains_rad.y,thermalzone_intGains_rad. Q_flow) annotation (Line(
         points={{-71.5,53},{-68,53},{-68,50},{-60,50}},
                                                     color={0,0,127}));
   connect(thermalzone_intGains_rad.port,eON_ERC_Testhall. intGainsRad_port)
     annotation (Line(points={{-48,50},{-48,48.6},{-39.68,48.6}},
                                                               color={191,0,0}));
-  connect(controlCCA.distributeBus_CCA,cCA. dB_CCA) annotation (Line(
-      points={{-124.292,26.93},{-124.292,27.6},{-104.22,27.6}},
+  connect(controlCCA.distributeBus_CCA,cCA.ccaBus)  annotation (Line(
+      points={{-121.8,26.93},{-121.8,27.6},{-104.22,27.6}},
       color={255,204,51},
       thickness=0.5));
   connect(cCA.heat_port_CCA,eON_ERC_Testhall. intGainsConv_port) annotation (
@@ -245,12 +245,12 @@ equation
   connect(intGains_rad1.y, bound_sup3.T_in) annotation (Line(points={{-129.5,-9},
           {-120,-9},{-120,-20},{38,-20},{38,-44},{74,-44},{74,-58.4},{158.8,-58.4}},
         color={0,0,127}));
-  connect(jN.jn_sup_thermalzone, eON_ERC_Testhall.ports[1]) annotation (Line(
-        points={{38,39},{38,38},{-2,38},{-2,24},{-25.56,24},{-25.56,31.2}},
+  connect(jN.port_b1, eON_ERC_Testhall.ports[1]) annotation (Line(points={{38,
+          39},{38,38},{-2,38},{-2,24},{-25.56,24},{-25.56,31.2}}, color={0,127,
+          255}));
+  connect(jN.port_a2, eON_ERC_Testhall.ports[2]) annotation (Line(points={{38,
+          47.2},{38,46},{2,46},{2,38},{-2,38},{-2,24},{-21.8,24},{-21.8,31.2}},
         color={0,127,255}));
-  connect(jN.jn_ret_thermalzone, eON_ERC_Testhall.ports[2]) annotation (Line(
-        points={{38,47.2},{38,46},{2,46},{2,38},{-2,38},{-2,24},{-21.8,24},{-21.8,
-          31.2}}, color={0,127,255}));
   connect(x_pTphi.phi, weaBus.relHum) annotation (Line(points={{198,86},{-116,86},
           {-116,82},{-128,82}}, color={0,0,127}));
   connect(x_pTphi.p_in, weaBus.pAtm)
@@ -261,16 +261,16 @@ equation
           30.8},{222.2,82},{-128,82}}, color={0,0,127}));
   connect(ODA.X_in, x_pTphi.X) annotation (Line(points={{206.4,29.2},{206.4,
           60.6},{221,60.6},{221,92}}, color={0,0,127}));
-  connect(bound_sup.ports[1], cCA.cca_supprim) annotation (Line(points={{-102,
-          -6},{-96.74,-6},{-96.74,18}}, color={0,127,255}));
-  connect(bound_ret.ports[1], cCA.cca_retprim) annotation (Line(points={{-86,-6},
-          {-86,-4},{-88.6,-4},{-88.6,18}}, color={0,127,255}));
-  connect(bound_sup1.ports[1], cid.cid_sup_water) annotation (Line(points={{58,
-          -18},{60.8,-18},{60.8,2.2}}, color={0,127,255}));
-  connect(bound_ret1.ports[1], cid.cid_ret_water) annotation (Line(points={{74,
-          -18},{64.4,-18},{64.4,2.2}}, color={0,127,255}));
-  connect(bound_sup2.ports[1], ahu.port_a5) annotation (Line(points={{94,-42},{
-          102,-42},{102,4},{129.364,4},{129.364,10}}, color={0,127,255}));
+  connect(bound_sup.ports[1], cCA.port_a) annotation (Line(points={{-102,-6},{-96.74,
+          -6},{-96.74,18}}, color={0,127,255}));
+  connect(bound_ret.ports[1], cCA.port_b) annotation (Line(points={{-86,-6},{-86,
+          -4},{-88.6,-4},{-88.6,18}}, color={0,127,255}));
+  connect(bound_sup1.ports[1], cid.port_a2) annotation (Line(points={{58,-18},{
+          60.8,-18},{60.8,2.2}}, color={0,127,255}));
+  connect(bound_ret1.ports[1], cid.port_b2) annotation (Line(points={{74,-18},{
+          64.4,-18},{64.4,2.2}}, color={0,127,255}));
+  connect(bound_sup2.ports[1], ahu.port_a5) annotation (Line(points={{94,-42},
+          {102,-42},{102,4},{129.364,4},{129.364,10}},color={0,127,255}));
   connect(bound_ret2.ports[1], ahu.port_b5) annotation (Line(points={{110,-42},
           {104,-42},{104,4},{121.936,4},{121.936,10}}, color={0,127,255}));
   connect(bound_ret3.ports[1], ahu.port_b3) annotation (Line(points={{188,-56},
