@@ -25,12 +25,14 @@ package BuildingAndEnergySystem
     replaceable model WindowModel =
         AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
       constrainedby
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow               annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+                                                                                                    annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
 
     replaceable model CorrSolarGainWin =
         AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
       constrainedby
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG               "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+                                                                                                                      "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
     EnergySystem.OneAppartment.Radiators Hydraulic(
       hydResRadLi(m_flow_nominal=0.0001),

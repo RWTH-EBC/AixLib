@@ -232,8 +232,8 @@ equation
   end if;
   connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},
           {22,-50},{22,-60},{58.8,-60}}, color={0,0,127}));
-  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points=
-         {{72.6,-60},{100.05,-60},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points
+        ={{72.6,-60},{100.05,-60},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

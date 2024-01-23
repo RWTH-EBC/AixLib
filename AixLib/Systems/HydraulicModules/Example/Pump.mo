@@ -54,7 +54,7 @@ model Pump "Test for unmixed pump circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
     Placement(visible = true, transformation(origin = {-86, -28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(Unmixed.hydraulicBus, hydraulicBus) annotation (Line(
