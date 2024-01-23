@@ -97,8 +97,8 @@ package Modules
         final transferHeat=false,
         final allowFlowReversal=allowFlowReversal,
         final m_flow_small=0.001)
-        "Temperature sensor of hot side of heat generator (supply)" annotation
-        (Placement(transformation(
+        "Temperature sensor of hot side of heat generator (supply)" annotation (
+         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,0})));
@@ -200,29 +200,9 @@ package Modules
         connect(port_a, senTRet.port_a);
       end if;
 
-      connect(boilerControlBus, boilerControl.boilerControlBus) annotation (Line(
-          points={{0,98},{0,100},{-74,100},{-74,100},{-83,100}},
-          color={255,204,51},
-          thickness=0.5), Text(
-          string="%first",
-          index=-1,
-          extent={{-3,6},{-3,6}},
-          horizontalAlignment=TextAlignment.Right));
-      connect(senTSup.T, boilerControlBus.TSupMea) annotation (Line(points={{60,
-              11},{64,11},{64,98},{0,98}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}},
-          horizontalAlignment=TextAlignment.Left));
-      connect(senTRet.T, boilerControlBus.TRetMea) annotation (Line(points={{-60,11},
-              {-60,16},{64,16},{64,98},{0,98}},          color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{-3,6},{-3,6}},
-          horizontalAlignment=TextAlignment.Right));
       connect(boilerGeneric.boilerControlBus, boilerControlBus) annotation (
           Line(
-          points={{-0.8,10},{-0.8,82},{0,82},{0,98}},
+          points={{2,10},{2,82},{0,82},{0,98}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%second",
@@ -1341,15 +1321,6 @@ package Modules
               extent={{-6,3},{-6,3}},
               horizontalAlignment=TextAlignment.Right));
         end if;
-        connect(boilerControlBus.TSupMea, safteyControl.TFlowMea) annotation (
-            Line(
-            points={{0,100},{-38,100},{-38,46},{-22,46}},
-            color={255,204,51},
-            thickness=0.5), Text(
-            string="%first",
-            index=-1,
-            extent={{-6,3},{-6,3}},
-            horizontalAlignment=TextAlignment.Right));
         connect(boilerControlBus.TRetMea, safteyControl.TRetMea) annotation (Line(
             points={{0,100},{-38,100},{-38,42},{-22,42},{-22,41.8}},
             color={255,204,51},
@@ -1357,15 +1328,6 @@ package Modules
             string="%first",
             index=-1,
             extent={{-3,-6},{-3,-6}},
-            horizontalAlignment=TextAlignment.Right));
-        connect(boilerControlBus.TSupMea, internalPLRControl.TFlowMea)
-          annotation (Line(
-            points={{0,100},{-40,100},{-40,10.8},{-22,10.8}},
-            color={255,204,51},
-            thickness=0.5), Text(
-            string="%first",
-            index=-1,
-            extent={{-6,3},{-6,3}},
             horizontalAlignment=TextAlignment.Right));
         connect(boilerControlBus.TRetMea, feedbackControl.TReturnMea) annotation (
             Line(
