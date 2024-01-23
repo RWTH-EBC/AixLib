@@ -3,7 +3,7 @@ model CoolingTwoSuppliesDoubleMvar
   "A small open loop example with a cooling substation and pressure control"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_amb = 283.15
+  parameter Modelica.Units.SI.Temperature T_amb = 283.15
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
@@ -70,7 +70,7 @@ model CoolingTwoSuppliesDoubleMvar
         origin={-160,-250})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=12000,
-    freqHz=1/10000,
+    f=1/10000,
     offset=-24000) "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -83,7 +83,7 @@ model CoolingTwoSuppliesDoubleMvar
         origin={-30,30})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=12000,
-    freqHz=1/10000,
+    f=1/10000,
     offset=-24000) "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -173,7 +173,7 @@ model CoolingTwoSuppliesDoubleMvar
         origin={200,-182})));
   Modelica.Blocks.Sources.Sine sine2(
     amplitude=12000,
-    freqHz=1/10000,
+    f=1/10000,
     offset=-24000) "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -181,7 +181,7 @@ model CoolingTwoSuppliesDoubleMvar
         origin={230,-210})));
   Modelica.Blocks.Sources.Sine sine3(
     amplitude=12000,
-    freqHz=1/10000,
+    f=1/10000,
     offset=-24000) "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -227,7 +227,7 @@ model CoolingTwoSuppliesDoubleMvar
         origin={310,-250})));
   Modelica.Blocks.Sources.Sine sine4(
     amplitude=12000,
-    freqHz=1/10000,
+    f=1/10000,
     offset=48000)  "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -237,7 +237,7 @@ equation
   connect(sourceIdeal.port_b, pipeSupply.port_a)
     annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
   connect(pipeSupply.ports_b[1], varTSupply.port_a)
-    annotation (Line(points={{58,-10},{58,-60},{10,-60}}, color={0,127,255}));
+    annotation (Line(points={{59,-10},{59,-60},{10,-60}}, color={0,127,255}));
   connect(varTSupply.port_b, pipeReturn.port_a) annotation (Line(points={{-10,-60},
           {-60,-60},{-60,-10}}, color={0,127,255}));
   connect(pipeReturn.ports_b[1], sourceIdeal.port_a)
@@ -260,12 +260,12 @@ equation
     annotation (Line(points={{-30,41},{-30,53},{-10.6,53}}, color={0,0,127}));
   connect(varTSupply1.port_b, pipeReturn1.port_a) annotation (Line(points={{-10,
           -182},{-60,-182},{-60,-130}}, color={0,127,255}));
-  connect(pipeSupply1.ports_b[1], varTSupply1.port_a) annotation (Line(points={{
-          58,-130},{58,-182},{10,-182}}, color={0,127,255}));
+  connect(pipeSupply1.ports_b[1], varTSupply1.port_a) annotation (Line(points={{59,-130},
+          {59,-182},{10,-182}},          color={0,127,255}));
   connect(varTSupply1.Q_flow_input, sine1.y) annotation (Line(points={{10.8,-190},
           {30,-190},{30,-199}}, color={0,0,127}));
   connect(pipeSupply1.port_a, pipeSupply.ports_b[2])
-    annotation (Line(points={{60,-110},{60,-10},{62,-10}}, color={0,127,255}));
+    annotation (Line(points={{60,-110},{60,-10},{61,-10}}, color={0,127,255}));
   connect(pipeReturn1.ports_b[1], pipeReturn.port_a)
     annotation (Line(points={{-60,-110},{-60,-10}}, color={0,127,255}));
   connect(TGround.port, pipeReturn1.heatPort) annotation (Line(points={{-160,-200},
@@ -277,12 +277,12 @@ equation
           127,255}));
   connect(varTSupply2.port_b, pipeReturn2.port_a) annotation (Line(points={{190,
           -60},{140,-60},{140,-10}}, color={0,127,255}));
-  connect(pipeSupply2.ports_b[1], varTSupply2.port_a) annotation (Line(points={{
-          258,-10},{258,-60},{210,-60}}, color={0,127,255}));
-  connect(pipeSupply3.port_a, pipeSupply2.ports_b[2]) annotation (Line(points={{
-          260,-110},{260,-10},{262,-10}}, color={0,127,255}));
-  connect(pipeSupply3.ports_b[1], varTSupply3.port_a) annotation (Line(points={{
-          258,-130},{258,-182},{210,-182}}, color={0,127,255}));
+  connect(pipeSupply2.ports_b[1], varTSupply2.port_a) annotation (Line(points={{259,-10},
+          {259,-60},{210,-60}},          color={0,127,255}));
+  connect(pipeSupply3.port_a, pipeSupply2.ports_b[2]) annotation (Line(points={{260,
+          -110},{260,-10},{261,-10}},     color={0,127,255}));
+  connect(pipeSupply3.ports_b[1], varTSupply3.port_a) annotation (Line(points={{259,
+          -130},{259,-182},{210,-182}},     color={0,127,255}));
   connect(varTSupply2.Q_flow_input, sine3.y) annotation (Line(points={{210.8,-68},
           {230,-68},{230,-79}}, color={0,0,127}));
   connect(varTSupply3.Q_flow_input, sine2.y) annotation (Line(points={{210.8,-190},
@@ -303,10 +303,10 @@ equation
           {-160,-20},{120,-20},{120,0},{130,0}}, color={191,0,0}));
   connect(varTSupply3.dpOut, pControl.u_m) annotation (Line(points={{189.2,-190},
           {100,-190},{100,30},{-18,30}}, color={0,0,127}));
-  connect(pipeSupply3.ports_b[2], pipeSupply4.port_a) annotation (Line(points={{
-          262,-130},{262,-240},{180,-240}}, color={0,127,255}));
+  connect(pipeSupply3.ports_b[2], pipeSupply4.port_a) annotation (Line(points={{261,
+          -130},{261,-240},{180,-240}},     color={0,127,255}));
   connect(pipeSupply4.ports_b[1], pipeSupply1.ports_b[2]) annotation (Line(
-        points={{160,-240},{62,-240},{62,-130}}, color={0,127,255}));
+        points={{160,-240},{61,-240},{61,-130}}, color={0,127,255}));
   connect(pipeReturn3.port_a, pipeReturn4.port_a) annotation (Line(points={{140,
           -130},{140,-260},{120,-260}}, color={0,127,255}));
   connect(pipeReturn4.ports_b[1], pipeReturn1.port_a) annotation (Line(points={{
