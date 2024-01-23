@@ -269,26 +269,26 @@ model DHCDoublePipe "Generic pipe model for DHC applications"
   Medium.ThermodynamicState sta_a=
       Medium.setState_phX(port_a.p,
                           noEvent(actualStream(port_a.h_outflow)),
-                          noEvent(actualStream(port_a.Xi_outflow))) if
-         show_T "Medium properties in port_a";
+                          noEvent(actualStream(port_a.Xi_outflow)))
+      if show_T "Medium properties in port_a";
 
   Medium.ThermodynamicState sta_b[nPorts]=
       Medium.setState_phX(ports_b.p,
                           noEvent(actualStream(ports_b.h_outflow)),
-                          noEvent(actualStream(ports_b.Xi_outflow))) if
-         show_T "Medium properties in ports_b";
+                          noEvent(actualStream(ports_b.Xi_outflow)))
+      if show_T "Medium properties in ports_b";
 
    Medium.ThermodynamicState sta_a1=
       Medium.setState_phX(port_a1.p,
                           noEvent(actualStream(port_a1.h_outflow)),
-                          noEvent(actualStream(port_a1.Xi_outflow))) if
-         show_T "Medium properties in port_a1";
+                          noEvent(actualStream(port_a1.Xi_outflow)))
+      if show_T "Medium properties in port_a1";
 
   Medium.ThermodynamicState sta_b1[nPorts]=
       Medium.setState_phX(ports_b1.p,
                           noEvent(actualStream(ports_b1.h_outflow)),
-                          noEvent(actualStream(ports_b1.Xi_outflow))) if
-         show_T "Medium properties in ports_b1";
+                          noEvent(actualStream(ports_b1.Xi_outflow)))
+      if show_T "Medium properties in ports_b1";
 
 
 
@@ -338,14 +338,14 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1) if
-       not use_soil "Thermal pass through if there is no soil activated"
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
+    if not use_soil "Thermal pass through if there is no soil activated"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-16,54})));
-  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium) if
-                                                    not use_zeta
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
+                                                 if not use_zeta
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   replaceable FixedResistances.BaseClasses.PlugFlowCore              pipCor1(
     redeclare final package Medium = Medium,
@@ -446,14 +446,14 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{80,-70},{60,-50}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr1(final m=1) if
-       not use_soil "Thermal pass through if there is no soil activated"
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr1(final m=1)
+    if not use_soil "Thermal pass through if there is no soil activated"
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-20,-114})));
   Interfaces.PassThroughMedium pasThrMed1(redeclare package Medium = Medium)
-    if                                              not use_zeta
+                                                 if not use_zeta
     annotation (Placement(transformation(extent={{80,-100},{60,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort1
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"

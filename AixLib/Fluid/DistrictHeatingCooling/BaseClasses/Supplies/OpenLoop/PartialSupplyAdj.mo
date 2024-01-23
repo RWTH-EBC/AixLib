@@ -6,12 +6,12 @@ partial model PartialSupplyAdj
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
 
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=1,
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=1,
     tau=0)                        "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_supply(redeclare package Medium
-      = Medium) "Mass flow rate sensor"
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_supply(redeclare package Medium =
+        Medium) "Mass flow rate sensor"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
     "Prescribed supply temperature"  annotation (Placement(transformation(
@@ -20,8 +20,8 @@ partial model PartialSupplyAdj
   Modelica.Blocks.Interfaces.RealInput dpIn(unit="Pa")
     "Prescribed pressure rise" annotation (Placement(transformation(extent={{-126,
             -90},{-86,-50}}), iconTransformation(extent={{-126,-90},{-86,-50}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=1,
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=1,
     tau=0)                        "Return temperature sensor"
     annotation (Placement(transformation(extent={{-34,-10},{-54,10}})));
   Sensors.MassFlowRate senMasFlo_return(redeclare package Medium = Medium)

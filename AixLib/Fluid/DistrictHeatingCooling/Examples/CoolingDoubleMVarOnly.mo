@@ -203,8 +203,8 @@ model CoolingDoubleMVarOnly
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={78,-264})));
-  Supplies.OpenLoop.SourcePowerDoubleMvar sourcePower(redeclare package Medium
-      = Medium, pReturn=200000) annotation (Placement(transformation(
+  Supplies.OpenLoop.SourcePowerDoubleMvar sourcePower(redeclare package Medium =
+        Medium, pReturn=200000) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={310,-250})));

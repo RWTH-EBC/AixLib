@@ -186,7 +186,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final d_out=d_in + thickness_ground/3,
     final length=length,
     final lambda=lambda,
-    T0=T0) if     use_soil
+    T0=T0)     if use_soil
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2(
@@ -197,7 +197,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final d_out=d_in + 2*thickness_ground/3,
     final length=length,
     final lambda=lambda,
-    T0=T0) if     use_soil
+    T0=T0)     if use_soil
     annotation (Placement(transformation(extent={{-10,46},{10,66}})));
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3(
     final energyDynamics=energyDynamics,
@@ -207,7 +207,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final d_out=d_in + thickness_ground,
     final length=length,
     final lambda=lambda,
-    T0=T0) if     use_soil
+    T0=T0)     if use_soil
     annotation (Placement(transformation(extent={{-10,72},{10,92}})));
 
 protected
@@ -254,14 +254,14 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1) if
-       not use_soil "Thermal pass through if there is no soil activated"
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
+    if not use_soil "Thermal pass through if there is no soil activated"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-16,54})));
-  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium) if
-                                                    not use_zeta
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
+                                                 if not use_zeta
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 equation
   //calculation of the flow velocity of water in the pipes
