@@ -1,7 +1,12 @@
-within AixLib.DataBase.PhotovoltaicThermal;
-record ThermalGlazedPVTWithoutLowEmissionCoating
-  "thermal properties of pvt module"
-  extends SolarThermalBaseDataDefinition(eta_zero = 0.65458, c1 = 6.6356, c2 = 0.0235);
+﻿within AixLib.DataBase.PhotovoltaicThermal;
+record ThermalGlazedWithoutLowEmissionCoating
+  "Glazed PVT Collector without low emission coating"
+  extends PhotovoltaicThermalBaseDataDefinition(
+    etaEle_zero=0.8,
+    mEle=0.5378,
+    etaThe_zero=0.65458,
+    c1The=6.6356,
+    c2The=0.0235);
   annotation(Documentation(info="<html><h4>
   Overview
 </h4>
@@ -25,5 +30,13 @@ record ThermalGlazedPVTWithoutLowEmissionCoating
   <li>implemented
   </li>
 </ul>
+</html>", revisions="<html><ul>
+  <li>
+    <i>January 23, 2024</i> by Philipp Schmitz and Fabian Wuellhorst:<br/>
+    First implementation. This is for
+ <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1451\">
+ issue 1451</a>.
+  </li>
+</ul>
 </html>"));
-end ThermalGlazedPVTWithoutLowEmissionCoating;
+end ThermalGlazedWithoutLowEmissionCoating;

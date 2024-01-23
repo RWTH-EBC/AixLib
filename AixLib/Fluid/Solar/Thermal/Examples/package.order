@@ -1,2 +1,3 @@
-SolarThermalCollector
-PhotovoltaicThermalCollector
+SolarThermal
+PhotovoltaicThermal
+BaseClasses
