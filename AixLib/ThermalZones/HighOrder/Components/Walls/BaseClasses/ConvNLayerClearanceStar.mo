@@ -27,7 +27,7 @@ model ConvNLayerClearanceStar
     "Specific heat capacity"
     annotation (Dialog(group="Structure of wall layers"));
   // which orientation of surface?
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation surfaceOrientation
     "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true));
   parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethod=
       AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck

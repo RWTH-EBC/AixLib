@@ -19,7 +19,7 @@ model HeatConvInside
           calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017 then true else false));
 
   // which orientation of surface?
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation "Surface orientation" annotation (
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation surfaceOrientation "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon then false else true),
       Evaluate=true);
   parameter Modelica.Units.SI.Area A(min=Modelica.Constants.eps)
@@ -42,7 +42,7 @@ equation
   if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A then
 
     // floor (horizontal facing up)
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_up then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=5,
@@ -50,7 +50,7 @@ equation
         x_small=dT_small);
 
     // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_down then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=0.7,
@@ -71,7 +71,7 @@ equation
 
     // floor (horizontal facing up)
 
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_up then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
@@ -80,7 +80,7 @@ equation
 
 
     // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_down then
        hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
@@ -107,7 +107,7 @@ equation
 
 
     // floor (horizontal facing up)
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_up then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=4.13,
@@ -115,7 +115,7 @@ equation
         x_small=dT_small);
 
       // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.SurfaceOrientation.horizontal_facing_down then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=1,

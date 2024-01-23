@@ -7,3 +7,4 @@ CalcMethodRadiativeHeatTransfer
 CalcMethodConvectiveHeatTransferInsideSurface
 ThermalInsulationRegulation
 InsideSurfaceOrientation
+SurfaceOrientation
