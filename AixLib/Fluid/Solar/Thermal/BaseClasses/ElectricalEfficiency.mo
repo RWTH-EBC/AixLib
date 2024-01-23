@@ -4,7 +4,8 @@ model ElectricalEfficiency
   parameter Modelica.Units.SI.Efficiency eta_zero(max=1)
     "Conversion factor/Efficiency at Q = 0";
   parameter Real m(unit = "W/(m.m.K)") "Gradient of linear approximation";
-
+  Modelica.Units.SI.Efficiency eta(max=eta_zero)
+    "Efficiency of electricity generation of pvt collector";
   Modelica.Blocks.Interfaces.RealInput TAir(
     quantity="ThermodynamicTemperature",
     unit="K",
@@ -29,8 +30,6 @@ model ElectricalEfficiency
     "Useful electric power output from solar collector in W/m2"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  Modelica.Units.SI.Efficiency eta(max=eta_zero)
-    "Efficiency of electricity generation of pvt collector";
   Modelica.Units.SI.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation

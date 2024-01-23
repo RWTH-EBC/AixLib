@@ -2,11 +2,11 @@
 record ThermalGlazedWithoutLowEmissionCoating
   "Glazed PVT Collector without low emission coating"
   extends PhotovoltaicThermalBaseDataDefinition(
-    etaEle_zero=0.8,
-    mEle=0.5378,
-    etaThe_zero=0.65458,
-    c1The=6.6356,
-    c2The=0.0235);
+    etaEle_zero=0.1154,
+    mEle=0.5474,
+    etaThe_zero=0.628175311,
+    c1The=6.0867,
+    c2The=2.59E-02);
   annotation(Documentation(info="<html><h4>
   Overview
 </h4>

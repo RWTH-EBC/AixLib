@@ -13,14 +13,14 @@ model PartialExample
   Sources.Boundary_pT sin(redeclare package Medium = Medium, p=2e5)
     "Sink model"
     annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-  Modelica.Blocks.Sources.CombiTimeTable hotSumDay(
+  Modelica.Blocks.Sources.CombiTimeTable weaDat(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    table=[0,21,0; 3600,20.6,0; 7200,20.5,0; 10800,20.4,0; 14400,20,6; 18000,20.5,
-        106; 21600,22.4,251; 25200,24.1,402; 28800,26.3,540; 32400,28.4,657; 36000,
-        30,739; 39600,31.5,777; 43200,31.5,778; 46800,32.5,737; 50400,32.5,657; 54000,
-        32.5,544; 57600,32.5,407; 61200,32.5,257; 64800,31.6,60; 68400,30.8,5; 72000,
-        22.9,0; 75600,21.2,0; 79200,20.6,0; 82800,20.3,0],
-    offset={273.15,0.01}) "Profile for a hot summer day"
+    table=[0,6,0; 3600,5.6,0; 7200,5.5,0; 10800,5.4,0; 14400,5,6; 18000,5.5,106;
+        21600,7.4,251; 25200,9.1,402; 28800,11.3,540; 32400,13.4,657; 36000,15,
+        739; 39600,16.5,777; 43200,16.5,778; 46800,17.5,737; 50400,17.5,657;
+        54000,17.5,544; 57600,17.5,407; 61200,17.5,257; 64800,16.6,60; 68400,15.8,
+        5; 72000,7.9,0; 75600,6.2,0; 79200,5.6,0; 82800,5.3,0],
+    offset={273.15,0.01}) "Profile for a day"
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
 
   annotation (

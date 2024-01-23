@@ -5,7 +5,8 @@ model ThermalEfficiency
     "Conversion factor/Efficiency at Q = 0";
   parameter Real c1(unit = "W/(m.m.K)") "Loss coefficient c1";
   parameter Real c2(unit = "W/(m.m.K.K)") "Loss coefficient c2";
-
+  Modelica.Units.SI.Efficiency eta(max=eta_zero)
+    "Efficiency of solar thermal collector";
   Modelica.Blocks.Interfaces.RealInput TAir(
     quantity="ThermodynamicTemperature",
     unit="K",
@@ -30,8 +31,6 @@ model ThermalEfficiency
     "Useful heat flow from solar collector in W/m2"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  Modelica.Units.SI.Efficiency eta(max=eta_zero)
-    "Efficiency of solar thermal collector";
   Modelica.Units.SI.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation

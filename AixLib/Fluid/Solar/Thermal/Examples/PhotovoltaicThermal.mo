@@ -4,14 +4,14 @@ model PhotovoltaicThermal
   extends Modelica.Icons.Example;
   extends AixLib.Fluid.Solar.Thermal.Examples.BaseClasses.PartialExample(sin(
         nPorts=1), sou(nPorts=1),
-        m_flow_nominal=1.5*pvt.A/60*995/1000,
-        dp_nominal=pvt.pressureDropCoeff*(m_flow_nominal/995)^2);
+    m_flow_nominal=0.04,
+        dp_nominal=pvt.dp_nominal);
 
   AixLib.Fluid.Solar.Thermal.PhotovoltaicThermal pvt(
     redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    A=2,
+    A=20,
     volPip=0.05,
     redeclare
       AixLib.DataBase.PhotovoltaicThermal.ThermalGlazedWithLowEmissionCoating
@@ -23,9 +23,9 @@ equation
     annotation (Line(points={{-40,0},{-10,0}}, color={0,127,255}));
   connect(pvt.port_b, sin.ports[1])
     annotation (Line(points={{10,0},{40,0}}, color={0,127,255}));
-  connect(pvt.TAir, hotSumDay.y[1]) annotation (Line(points={{-6,10},{-8,10},{-8,50},
+  connect(pvt.TAir, weaDat.y[1]) annotation (Line(points={{-6,10},{-8,10},{-8,50},
           {-19,50}}, color={0,0,127}));
-  connect(pvt.Irr, hotSumDay.y[2])
+  connect(pvt.Irr, weaDat.y[2])
     annotation (Line(points={{0,10},{0,50},{-19,50}}, color={0,0,127}));
   annotation (
     experiment(

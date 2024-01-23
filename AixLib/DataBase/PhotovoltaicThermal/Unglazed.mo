@@ -1,17 +1,16 @@
 ﻿within AixLib.DataBase.PhotovoltaicThermal;
-record ThermalGlazedWithLowEmissionCoating
-  "Glazed PVT Collector with low emission coating"
+record Unglazed "Unglazed PVT collector"
   extends PhotovoltaicThermalBaseDataDefinition(
-    etaEle_zero=0.1117,
-    mEle=0.5131,
-    etaThe_zero=0.667506427,
-    c1The=3.8674,
-    c2The=2.56E-02);
+    etaEle_zero=0.1052,
+    mEle=0.3848,
+    etaThe_zero=0.672045005,
+    c1The=20.6360,
+    c2The=6.17E-04);
   annotation(Documentation(info="<html><h4>
   Overview
 </h4>
 <p>
-  Derived from the simulated results of a glazed PVT Collector with
+  Derived from the simulated results of a glazed PVT Collector without
   low-emission coating from this <a href=
   \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">
   thesis</a> p.43 Figure 3.12.
@@ -39,4 +38,4 @@ record ThermalGlazedWithLowEmissionCoating
   </li>
 </ul>
 </html>"));
-end ThermalGlazedWithLowEmissionCoating;
+end Unglazed;

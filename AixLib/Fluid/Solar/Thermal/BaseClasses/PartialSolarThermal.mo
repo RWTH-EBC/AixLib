@@ -40,6 +40,11 @@ partial model PartialSolarThermal "Partial model of a solar thermal device"
   Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W") "Heat added to medium"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
 
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTVol
+    "Volume temperature sensor" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-10,-50})));
 equation
   connect(TAir, solTheEff.TAir) annotation (Line(points={{-60,100},{-60,68},{-56,68},
           {-56,62},{-55,62}},     color={0,0,127}));
@@ -49,14 +54,16 @@ equation
           50},{12,50},{12,-30},{-60,-30},{-60,-40}}, color={0,0,127}));
   connect(senTCold.T, calcMeaT.u1) annotation (Line(points={{-70,-69},{-70,-66},{-78,
           -66},{-78,-10},{-56,-10},{-56,-2}}, color={0,0,127}));
-  connect(senTHot.T, calcMeaT.u2) annotation (Line(points={{40,-69},{32,-69},{32,-10},
-          {-44,-10},{-44,-2}}, color={0,0,127}));
   connect(calcMeaT.y, solTheEff.TCol) annotation (Line(points={{-50,21},{-50,28},{
           -55,28},{-55,38}},   color={0,0,127}));
   connect(solTheEff.q_flow, conRelHeaFlowToAbsHeaFlow.u)
     annotation (Line(points={{-39,50},{-22,50}},   color={0,0,127}));
   connect(conRelHeaFlowToAbsHeaFlow.y, Q_flow)
     annotation (Line(points={{1,50},{12,50},{12,70},{110,70}}, color={0,0,127}));
+  connect(senTVol.T, calcMeaT.u2) annotation (Line(points={{1,-50},{20,-50},{20,
+          -20},{-44,-20},{-44,-2}}, color={0,0,127}));
+  connect(senTVol.port, vol.heatPort)
+    annotation (Line(points={{-20,-50},{-50,-50},{-50,-70}}, color={191,0,0}));
   annotation (Documentation(info="<html>
 <p>Partial model of a solar thermal collector.</p>
 </html>", revisions="<html><ul>

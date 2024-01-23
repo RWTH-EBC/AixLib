@@ -17,9 +17,9 @@ model SolarThermal
     redeclare AixLib.DataBase.SolarThermal.FlatCollector parCol)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
-  connect(hotSumDay.y[1], solThe.TAir)
+  connect(weaDat.y[1], solThe.TAir)
     annotation (Line(points={{-19,50},{-6,50},{-6,10}}, color={0,0,127}));
-  connect(solThe.Irr, hotSumDay.y[2])
+  connect(solThe.Irr, weaDat.y[2])
     annotation (Line(points={{0,10},{0,50},{-19,50}}, color={0,0,127}));
   connect(solThe.port_b, sin.ports[1])
     annotation (Line(points={{10,0},{40,0}}, color={0,127,255}));
