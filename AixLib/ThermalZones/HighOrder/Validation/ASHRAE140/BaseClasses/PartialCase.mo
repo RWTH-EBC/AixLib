@@ -18,7 +18,7 @@ partial model PartialCase "This is the base class from which the base cases will
     each GroundReflection= 0.2,
     each Latitude=sun.Latitude,
     each h= 1609,
-    each WeatherFormat=2) "N, E, S, W, Horz"
+    each WeatherFormat=true) "N, E, S, W, Horz"
     annotation (Placement(transformation(extent={{-102,41},{-74,69}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -41,21 +41,21 @@ partial model PartialCase "This is the base class from which the base cases will
       choices(
         choice(redeclare model Room = Rooms.ASHRAE140.SouthFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with south facing window"),
         choice(redeclare model Room = Rooms.ASHRAE140.EastWestFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with east and west facing window")));
@@ -66,11 +66,11 @@ partial model PartialCase "This is the base class from which the base cases will
     T0_air=294.15,
     TWalls_start=289.15,
     final wallTypes=wallTypes,
-    calcMethodIn=4,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
     final Type_Win=windowParam,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
-    calcMethodOut=2,
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     final Win_Area=Win_Area,
     final absInnerWallSurf=absInnerWallSurf,
     final use_dynamicShortWaveRadMethod=false)

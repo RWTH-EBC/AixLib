@@ -4,9 +4,9 @@ model Wall
 
   //Type parameter
   parameter Boolean outside = true
-    "Choose if the wall is an outside or an inside wall"                                annotation(Dialog(group = "General Wall Type Parameter", compact = true), choices(choice = true
-        "Outside Wall",                                                                                                    choice = false
-        "Inside Wall",                                                                                                    radioButtons = true));
+    "Choose if the wall is an outside wall (or an inside wall)" annotation (
+      Dialog(group = "General Wall Type Parameter", compact = true),
+      choices(checkBox=true));
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
@@ -25,68 +25,51 @@ model Wall
   // Surface parameters
   parameter Real solar_absorptance = 0.25
     "Solar absorptance coefficient of outside wall surface"                                       annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside));
-  parameter Integer calcMethodOut=1
-  "Calculation method for convective heat transfer coefficient at outside surface" annotation (Dialog(
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 "Calculation method for convective heat transfer coefficient at outside surface" annotation (Dialog(
       tab="Surface Parameters",
       group="Outside surface",
       enable=outside,
-      compact=true), choices(
-      choice=1 "DIN 6946",
-      choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hCon (constant)",
-      radioButtons=true));
+      compact=true));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut_const=25
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
     annotation (Dialog(
       tab="Surface Parameters",
       group="Outside surface",
-      enable=calcMethodOut == 3 and outside));
+      enable=calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.Custom_hCon and outside));
 parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"                                                                                                     annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable=
-          calcMethodOut == 2 and outside),                                                                                                                                                                                                        choicesAllMatching = true);
-  parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
-        "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
+          calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals and outside),                                                                                                                                                                                                        choicesAllMatching = true);
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation ISOrientation = AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true));
 
 
   parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
   parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
-  parameter Integer radLongCalcMethod=1 "Calculation method for longwave radiation heat transfer"
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer"
     annotation (
     Evaluate=true,
-    Dialog(tab="Surface Parameters", group="Inside surface",   compact=true),
-    choices(
-      choice=1 "No approx",
-      choice=2 "Linear approx at wall temp",
-      choice=3 "Linear approx at rad temp",
-      choice=4 "Linear approx at constant T_ref",
-      radioButtons=true));
+    Dialog(tab="Surface Parameters", group="Inside surface",   compact=true));
   parameter Modelica.Units.SI.Temperature T_ref=
       Modelica.Units.Conversions.from_degC(16)
     "Reference temperature for optional linearization of longwave radiation"
     annotation (Dialog(
       tab="Surface Parameters",
       group="Inside surface",
-      enable=radLongCalcMethod == 4));
+      enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
 
-  parameter Integer calcMethodIn=1
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A
     "Calculation method of convective heat transfer coefficient at inside surface"
     annotation (Dialog(
       tab="Surface Parameters",
       group="Inside surface",
       compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
-      choice=2 "By Bernd Glueck",
-      choice=3 "Custom hCon (constant)",
-      choice=4 "ASHRAE140-2017",
-      radioButtons=true));
+      descriptionLabel=true));
 
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
     annotation (Dialog(
       tab="Surface Parameters",
       group="Inside surface",
-      enable=calcMethodIn == 3));
+      enable=calcMethodIn == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon));
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", group="Window", enable = outside));
@@ -170,7 +153,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A=ANet)                                    if outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
                                                                                                annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
   Sunblinds.Sunblind Sunblind(
     final n=1,
@@ -253,7 +236,7 @@ equation
   //******************************************************************
   if outside then
     connect(SolarRadiationPort, SolarAbsorption.solarRad_in) annotation(Line(points={{-106,89},{-48,89},{-48,88.4},{-48.105,88.4}},    color = {255, 128, 0}));
-    if calcMethodOut == 1 or calcMethodOut == 2 then
+    if calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals then
       connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points={{-103,64},{-68,64},{-68,51},{-46,51}},                color = {0, 0, 127}));
     end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation(Line(points = {{-47, 58}, {-56, 58}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
