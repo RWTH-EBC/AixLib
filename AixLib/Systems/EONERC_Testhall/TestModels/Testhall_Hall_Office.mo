@@ -182,7 +182,7 @@ model Testhall_Hall_Office
     annotation (Placement(transformation(extent={{92,62},{112,82}})));
   Subsystems.ConcreteCoreActivation.Controls.ControlCCA controlCCA
     annotation (Placement(transformation(extent={{-74,12},{-48,32}})));
-  Obsolete.CPH.ControlCPH controlCPH
+  Subsystems.CeilingPanelHeaters.Controls.ControlCPH controlCPH
     annotation (Placement(transformation(extent={{-214,-50},{-194,-30}})));
   AixLib.Systems.ModularAHU.Controller.CtrAHUBasic controlAHU(
     TFlowSet=310.15,

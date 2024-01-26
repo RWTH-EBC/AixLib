@@ -123,7 +123,7 @@ model Tabs "Thermally Activated Building Systems"
       Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
-        origin={-10,82})));
+        origin={0,82})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
     "heat port for connection to room volume" annotation (Placement(
         transformation(extent={{-10,88},{10,108}}), iconTransformation(extent={{
@@ -134,7 +134,7 @@ model Tabs "Thermally Activated Building Systems"
            {{-116,-14},{-86,16}})));
 
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
-    annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
+    annotation (Placement(transformation(extent={{-46,72},{-26,92}})));
 
   Fluid.HeatExchangers.DynamicHX dynamicHXCold(
     final allowFlowReversal1=true,
@@ -225,13 +225,12 @@ equation
   connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{7.21645e-16,
           68},{7.21645e-16,72},{24,72}}, color={191,0,0}));
   connect(heatCapacitor.port, convection.solid)
-    annotation (Line(points={{24,72},{12,72},{12,76},{-10,76}},
+    annotation (Line(points={{24,72},{12,72},{12,76},{-4.44089e-16,76}},
                                                          color={191,0,0}));
   connect(convection.fluid, heatPort)
-    annotation (Line(points={{-10,88},{0,98}},         color={191,0,0}));
+    annotation (Line(points={{4.44089e-16,88},{0,98}}, color={191,0,0}));
   connect(convection.Gc, const.y)
-    annotation (Line(points={{-16,82},{-22,82},{-22,78},{-39,78}},
-                                                color={0,0,127}));
+    annotation (Line(points={{-6,82},{-25,82}}, color={0,0,127}));
   connect(dynamicHXHot.port_a1, dynamicHXCold.port_b1)
     annotation (Line(points={{-28,-20},{28,-20}}, color={0,127,255}));
   connect(dynamicHXCold.port_a1, pumpSys.port_b2) annotation (Line(points={{48,-20},
@@ -285,7 +284,8 @@ equation
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
   connect(pipe.heatPort, convection.solid) annotation (Line(points={{
-          7.21645e-16,68},{7.21645e-16,70},{-10,70},{-10,76}},       color={191,
+          7.21645e-16,68},{7.21645e-16,70},{-4.44089e-16,70},{-4.44089e-16,76}},
+                                                                     color={191,
           0,0}));
   annotation (
     Dialog(tab="Initialization"),

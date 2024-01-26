@@ -140,11 +140,11 @@ package JN
       annotation (Placement(transformation(extent={{-62,-12},{-42,8}})));
     Modelica.Blocks.Math.MultiSum mflow_jn_total(nu=10)
       annotation (Placement(transformation(extent={{-26,-8},{-16,2}})));
-    Modelica.Fluid.Interfaces.FluidPort_a jn_sup_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{92,-14},{112,6}}),
+    Modelica.Fluid.Interfaces.FluidPort_a jn_sup_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{92,-14},{112,6}}),
           iconTransformation(extent={{88,-54},{108,-34}})));
-    Modelica.Fluid.Interfaces.FluidPort_b jn_ret_air(redeclare package Medium
-        = Media.Air) annotation (Placement(transformation(extent={{90,24},{110,44}}),
+    Modelica.Fluid.Interfaces.FluidPort_b jn_ret_air(redeclare package Medium =
+          Media.Air) annotation (Placement(transformation(extent={{90,24},{110,44}}),
           iconTransformation(extent={{86,22},{106,42}})));
     Fluid.Sources.MassFlowSource_T              bound_ret(
       use_m_flow_in=true,

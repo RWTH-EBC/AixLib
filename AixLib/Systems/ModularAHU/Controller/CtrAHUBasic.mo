@@ -263,7 +263,11 @@ equation
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Control")}),
+          textString="Control"),
+        Text(
+          extent={{-100,140},{100,100}},
+          textColor={0,0,0},
+          textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This control uses the heating and cooling register to regulate the supply air temperature. The set point of the supply air can be given either by the parameter <i>TFlowSet </i>or by the external input variable <i>Tset.</i> The preheater use used for frost protection and has a fixed set point of 5&deg;C. The heat recovery system is always used and the bypass closed. The supply and return air flaps are always open. </p>
