@@ -19,6 +19,7 @@ model HeatGeneratorNoControllSystem "Example that illustrates use of heat genera
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=
         0.03,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=0.002,
     coeffPresLoss=1e10)
     "Heat generator without control"
