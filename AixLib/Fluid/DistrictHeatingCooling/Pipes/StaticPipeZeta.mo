@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model StaticPipeZeta
   "Pipe model using spatialDistribution for temperature delay"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);

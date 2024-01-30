@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantPumpHPandCC
   "Supply node model with ideal HeatPump and CompressionChiller and Pump for heat and cold supply of uni-directional networks"
 

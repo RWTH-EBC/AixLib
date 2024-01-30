@@ -6,24 +6,24 @@ model ValveControlledHX "Substation with variable dT and Heat Exchanger"
     final allowFlowReversal=false,
     final m_flow_nominal = Q_flow_nominal/cp_default/dTDesign);
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
 
-  parameter Modelica.SIunits.Temperature TReturn
+  parameter Modelica.Units.SI.Temperature TReturn
     "Fixed return temperature";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+  parameter Modelica.Units.SI.TemperatureDifference dTDesign(
     displayUnit="K")=60
     "Design temperature difference for the substation's heat exchanger";
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
     annotation(Dialog(group="Design parameter"));
 
   parameter Real deltaM=0.1
     "Fraction of nominal flow rate where flow transitions to laminar"
     annotation (Dialog(tab="Flow resistance"));
-  parameter Modelica.SIunits.Time tau=30
+  parameter Modelica.Units.SI.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
     annotation (Dialog(tab="Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -38,7 +38,7 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
     Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 public

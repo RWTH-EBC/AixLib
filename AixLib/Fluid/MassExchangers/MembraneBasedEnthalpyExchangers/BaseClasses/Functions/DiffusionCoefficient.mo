@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function DiffusionCoefficient
   "calculates diffusion coefficient of substance 2 in substance 1"
 

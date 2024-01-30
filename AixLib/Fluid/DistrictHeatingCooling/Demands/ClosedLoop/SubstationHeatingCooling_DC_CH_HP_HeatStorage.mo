@@ -579,9 +579,9 @@ equation
   connect(senMasFlo_he_in.port_a, senTem_HE_heat_in.port_b)
     annotation (Line(points={{68,-594},{178,-594}}, color={0,127,255}));
   connect(senTem_HE_heat_in.port_a, heatExchanger_heating.ports[1])
-    annotation (Line(points={{198,-594},{226,-594}}, color={0,127,255}));
+    annotation (Line(points={{198,-594},{227,-594}}, color={0,127,255}));
   connect(heatExchanger_heating.ports[2], senTem_HE_heat_out.port_b)
-    annotation (Line(points={{230,-594},{244,-594},{244,-594},{256,-594}},
+    annotation (Line(points={{229,-594},{244,-594},{244,-594},{256,-594}},
         color={0,127,255}));
   connect(senTem_HE_heat_out.port_a, pumpHeating.port_b) annotation (Line(
         points={{276,-594},{352,-594},{352,-594},{430,-594}}, color={0,127,255}));
@@ -647,14 +647,15 @@ equation
           {-154,-50},{-154,-8},{-118,-8}}, color={0,127,255}));
   connect(senTem_DC_in1.port_a, jun_DC1.port_2) annotation (Line(points={{-98,-8},
           {-74,-8},{-74,-8},{-48,-8}}, color={0,127,255}));
-  connect(port_a, vol.ports[1]) annotation (Line(points={{-258,-60},{-230,-60},{
-          -230,-52}}, color={0,127,255}));
+  connect(port_a, vol.ports[1]) annotation (Line(points={{-258,-60},{-229,-60},
+          {-229,-52}},color={0,127,255}));
   connect(senMasFlo_GridHeat.port_a, vol.ports[2]) annotation (Line(points={{-204,
-          -60},{-226,-60},{-226,-52}}, color={0,127,255}));
-  connect(vol1.ports[1], port_b) annotation (Line(points={{640,-50},{640,-58},{664,
-          -58}}, color={0,127,255}));
-  connect(senMasFlo_GridCool.port_b, vol1.ports[2]) annotation (Line(points={{616,
-          -58},{644,-58},{644,-50}}, color={0,127,255}));
+          -60},{-227,-60},{-227,-52}}, color={0,127,255}));
+  connect(vol1.ports[1], port_b) annotation (Line(points={{641,-50},{641,-58},{
+          664,-58}},
+                 color={0,127,255}));
+  connect(senMasFlo_GridCool.port_b, vol1.ports[2]) annotation (Line(points={{616,-58},
+          {643,-58},{643,-50}},      color={0,127,255}));
   connect(jun1.port_1, senMasFlo_GridCool.port_a)
     annotation (Line(points={{580,-58},{596,-58}}, color={0,127,255}));
   connect(const1.y,add2. u2) annotation (Line(points={{277,222},{303.5,222},{
@@ -680,9 +681,9 @@ equation
     annotation (Line(points={{102,256},{102,218},{106,218}}, color={191,0,0}));
   connect(jun_DC2.port_1, senTem_HE_Cooling_out.port_b)
     annotation (Line(points={{8,210},{50,210}}, color={0,127,255}));
-  connect(senTem_HE_Cooling_out.port_a, vol2.ports[1]) annotation (Line(points={
-          {70,210},{92,210},{92,208},{114,208}}, color={0,127,255}));
-  connect(vol2.ports[2], senTem_DC_in2.port_b) annotation (Line(points={{118,208},
+  connect(senTem_HE_Cooling_out.port_a, vol2.ports[1]) annotation (Line(points={{70,210},
+          {92,210},{92,208},{115,208}},          color={0,127,255}));
+  connect(vol2.ports[2], senTem_DC_in2.port_b) annotation (Line(points={{117,208},
           {136,208},{136,210},{158,210}}, color={0,127,255}));
   connect(senTem_DC_in2.port_a, jun_DC3.port_2)
     annotation (Line(points={{178,210},{216,210}}, color={0,127,255}));

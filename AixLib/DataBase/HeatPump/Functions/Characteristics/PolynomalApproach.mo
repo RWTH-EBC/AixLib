@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.Functions.Characteristics;
+﻿within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function PolynomalApproach
   "Function to emulate the polynomal approach of the TRNSYS Type 401 heat pump model"
   extends PartialBaseFct;

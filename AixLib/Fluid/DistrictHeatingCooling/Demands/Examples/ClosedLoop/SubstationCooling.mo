@@ -21,7 +21,7 @@ model SubstationCooling
         rotation=90,
         origin={82,24})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/3600,
+    f=1/3600,
     startTime=0,
     amplitude=1000,
     offset=2000)

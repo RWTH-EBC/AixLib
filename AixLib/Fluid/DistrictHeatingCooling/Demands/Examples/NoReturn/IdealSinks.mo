@@ -20,14 +20,15 @@ model IdealSinks "Ideal sink models demonstrated in a simple setup"
     redeclare package Medium = Medium,
     dTDesign=30,
     prescribedQ(displayUnit="kW") = 200000)
-    annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
+    annotation (Placement(transformation(extent={{2,-82},{22,-62}})));
 equation
   connect(source.ports[1], idealSinkMin.port_a) annotation (Line(points={{-60,
-          2.66667},{-20,2},{-20,70},{0,70}}, color={0,127,255}));
+          -1.33333},{-20,-1.33333},{-20,70},{0,70}},
+                                             color={0,127,255}));
   connect(source.ports[2], idealSinkConstFlow.port_a)
     annotation (Line(points={{-60,-2.22045e-016},{0,0}}, color={0,127,255}));
-  connect(source.ports[3], idealSinkConstHeat.port_a) annotation (Line(points={
-          {-60,-2.66667},{-20,-2},{-20,-70},{0,-70}}, color={0,127,255}));
+  connect(source.ports[3], idealSinkConstHeat.port_a) annotation (Line(points={{-60,
+          1.33333},{-20,1.33333},{-20,-72},{2,-72}},  color={0,127,255}));
   annotation (Documentation(revisions="<html><ul>
   <li>June 18, 2017, by Marcus Fuchs:<br/>
     First implementation for <a href=

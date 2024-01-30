@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.BaseClasses;
+﻿within AixLib.Fluid.FixedResistances.BaseClasses;
 model PlugFlowCore
   "Pipe model using spatialDistribution for temperature delay with modified delay tracker"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;

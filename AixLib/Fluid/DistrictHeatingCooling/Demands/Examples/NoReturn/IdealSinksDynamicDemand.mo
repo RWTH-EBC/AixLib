@@ -36,13 +36,13 @@ model IdealSinksDynamicDemand
     period=3600,
     nperiod=-1) annotation (Placement(transformation(extent={{60,40},{80,60}})));
 equation
-  connect(idealSinkHeatInput1.port_a, source.ports[1]) annotation (Line(points=
-          {{0,50},{-30,50},{-30,2.66667},{-60,2.66667}}, color={0,127,255}));
+  connect(idealSinkHeatInput1.port_a, source.ports[1]) annotation (Line(points={{0,50},{
+          -30,50},{-30,-1.33333},{-60,-1.33333}},        color={0,127,255}));
   connect(idealSinkHeatInput.port_a, source.ports[2]) annotation (Line(points={
           {0,0},{-30,0},{-30,-2.22045e-016},{-60,-2.22045e-016}}, color={0,127,
           255}));
-  connect(idealSinkHeat.port_a, source.ports[3]) annotation (Line(points={{0,
-          -50},{-30,-50},{-30,-2.66667},{-60,-2.66667}}, color={0,127,255}));
+  connect(idealSinkHeat.port_a, source.ports[3]) annotation (Line(points={{0,-50},
+          {-30,-50},{-30,1.33333},{-60,1.33333}},        color={0,127,255}));
   connect(Q_flow_from_txt.y[1], idealSinkHeatInput.Q_flow_input) annotation (
       Line(points={{81,0},{86,0},{86,26},{-12,26},{-12,8},{-0.8,8}}, color={0,0,
           127}));

@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers;
+﻿within AixLib.Fluid.HeatExchangers;
 model DynamicHX "Simple dynamic heat exchanger model"
   extends Interfaces.FourPortHeatExchanger;
 

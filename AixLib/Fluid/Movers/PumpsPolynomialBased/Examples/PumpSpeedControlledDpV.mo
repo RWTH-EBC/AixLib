@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledDpV
   "Testing the pump dp-var algorithm with the speed controlled pump model."
   extends Modelica.Icons.Example;

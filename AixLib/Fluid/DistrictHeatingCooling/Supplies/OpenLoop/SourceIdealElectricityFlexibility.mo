@@ -5,14 +5,14 @@ model SourceIdealElectricityFlexibility
         m_flow_nominal=m_flow_nominal), senT_supply(m_flow_nominal=
           m_flow_nominal));
 
-  parameter Modelica.SIunits.Power Q_maxHeater;
-  parameter Modelica.SIunits.Power Q_maxElectricHeater;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal;
+  parameter Modelica.Units.SI.Power Q_maxHeater;
+  parameter Modelica.Units.SI.Power Q_maxElectricHeater;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal;
 
-  parameter Modelica.SIunits.AbsolutePressure pReturn
+  parameter Modelica.Units.SI.AbsolutePressure pReturn
     "Fixed return pressure";
 
-  parameter Modelica.SIunits.Temperature TReturn
+  parameter Modelica.Units.SI.Temperature TReturn
     "Fixed return temperature";
 
   AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =

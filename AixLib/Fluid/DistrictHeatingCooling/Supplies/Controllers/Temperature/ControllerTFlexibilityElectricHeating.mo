@@ -3,7 +3,7 @@ model ControllerTFlexibilityElectricHeating
   "This is a model for controlling the flow temperature taking into account the renewable electricity supply. If there is a surplus of renewable electricity, this is used to increase the flow temperatures. Otherwise, the flow temperature is set according to the heating curve."
   extends PartialControllerT;
 
-  parameter Modelica.SIunits.Temperature T_maxNetwork
+  parameter Modelica.Units.SI.Temperature T_maxNetwork
   "Parameters for defining the maximum supply temperature";
 
   Modelica.Blocks.Interfaces.RealInput T_setNormalOperation(unit="K")

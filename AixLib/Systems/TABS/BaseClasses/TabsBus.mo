@@ -1,4 +1,4 @@
-within AixLib.Systems.TABS.BaseClasses;
+﻿within AixLib.Systems.TABS.BaseClasses;
 expandable connector TabsBus "Data bus for tabs"
   extends Modelica.Icons.SignalBus;
   import      Modelica.Units.SI;

@@ -1,4 +1,4 @@
-within AixLib.Systems.TABS.Controller;
+﻿within AixLib.Systems.TABS.Controller;
 model CtrTabs "Controller for concrete core activation"
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
   parameter Modelica.Units.SI.Temperature TflowSet=293.15

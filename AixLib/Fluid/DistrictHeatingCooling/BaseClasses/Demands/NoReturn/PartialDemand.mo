@@ -33,7 +33,7 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
     Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 

@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps;
+﻿within AixLib.Fluid.HeatPumps;
 model Carnot_TCon_Reversible
   "reversible HeatPump, inspired by the Model from Xiyuan Chen \"Carnot_TCon_RE\""
  extends AixLib.Fluid.HeatPumps.BaseClasses.Carnot1(
@@ -43,14 +43,14 @@ model Carnot_TCon_Reversible
     final homotopyInitialization=homotopyInitialization,
       final Q_flow_nominal=1));
 
-  parameter Modelica.SIunits.HeatFlowRate QEva_flow_min(
+  parameter Modelica.Units.SI.HeatFlowRate QEva_flow_min(
     max=0) = -60000
     "Maximum heat flow rate for cooling (negative)";
-  parameter Modelica.SIunits.HeatFlowRate QCon_flow_max(
+  parameter Modelica.Units.SI.HeatFlowRate QCon_flow_max(
     min=0) = 30000
     "Maximum heat flow rate for heating (positive)";
-   parameter Modelica.SIunits.HeatFlowRate Q_heating_nominal(min = 0);
-   parameter Modelica.SIunits.HeatFlowRate Q_cooling_nominal(max = 0);
+   parameter Modelica.Units.SI.HeatFlowRate Q_heating_nominal(min = 0);
+   parameter Modelica.Units.SI.HeatFlowRate Q_cooling_nominal(max = 0);
 
   Modelica.Blocks.Interfaces.RealInput TSet(unit="K")
     "Condenser leaving water temperature"

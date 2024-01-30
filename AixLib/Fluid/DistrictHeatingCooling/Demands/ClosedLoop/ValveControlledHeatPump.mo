@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model ValveControlledHeatPump
   "Substation with variable dT and Heat Pump"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(

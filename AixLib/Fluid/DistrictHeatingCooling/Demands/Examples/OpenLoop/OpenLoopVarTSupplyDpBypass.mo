@@ -1,5 +1,5 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
-model OpenLoopVarTSupplyDp
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoop;
+model OpenLoopVarTSupplyDpBypass
   "A small open loop example with a Substation with variable dT for fixed return temperature"
   extends Modelica.Icons.Example;
 
@@ -7,42 +7,46 @@ model OpenLoopVarTSupplyDp
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
-    T_nominal=273.15+60,
-    p_nominal=600000.0,
-    T_default=273.15+60);
+      T_nominal=273.15 + 60,
+      p_nominal=600000.0,
+      T_default=273.15 + 60);
 
-  Supplies.OpenLoop.SourceIdeal sourceIdeal(
+  AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop.SourceIdeal sourceIdeal(
     redeclare package Medium = Medium,
     TReturn=273.15 + 60,
-    pReturn=200000)      "Simple suppy model"
+    pReturn=200000) "Simple suppy model"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
-  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp    demand(
+  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass
+    demand(
     redeclare package Medium = Medium,
     dp_nominal=50000,
     Q_flow_nominal=78239.1,
     dTDesign=15,
-    TReturn=333.15)         "Simple demand model" annotation (Placement(
+    TReturn=283.15,
+    m_flo_bypass=0.00) "Simple demand model" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-2,-60})));
-  FixedResistances.PlugFlowPipe pipeSupply(
+        origin={0,-60})));
+  AixLib.Fluid.FixedResistances.PlugFlowPipe pipeSupply(
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
     m_flow_nominal=1,
     dIns=0.03,
-    kIns=0.027) "Supply pipe" annotation (Placement(transformation(
+    kIns=0.027,
+    nPorts=1)   "Supply pipe" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,0})));
-  FixedResistances.PlugFlowPipe pipeReturn(
+  AixLib.Fluid.FixedResistances.PlugFlowPipe pipeReturn(
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
     m_flow_nominal=1,
     dIns=0.03,
-    kIns=0.027) "Return pipe" annotation (Placement(transformation(
+    kIns=0.027,
+    nPorts=1)   "Return pipe" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-60,0})));
@@ -82,14 +86,8 @@ model OpenLoopVarTSupplyDp
         rotation=90,
         origin={-30,30})));
 equation
-  connect(sourceIdeal.port_b, pipeSupply.port_a)
-    annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
-  connect(pipeSupply.port_b, demand.port_a)
-    annotation (Line(points={{60,-10},{60,-60},{8,-60}},  color={0,127,255}));
-  connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-12,-60},{
+  connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-10,-60},{
           -60,-60},{-60,-10}}, color={0,127,255}));
-  connect(pipeReturn.port_b, sourceIdeal.port_a)
-    annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   connect(TSet.y, sourceIdeal.TIn)
     annotation (Line(points={{-20,77},{-20,67},{-10.6,67}}, color={0,0,127}));
   connect(TGroundSet.y, TGround.T)
@@ -99,18 +97,24 @@ equation
   connect(TGround.port, pipeSupply.heatPort) annotation (Line(points={{-80,-30},
           {-80,-20},{80,-20},{80,0},{70,0}}, color={191,0,0}));
   connect(demand.Q_flow_input, sine.y)
-    annotation (Line(points={{8.8,-68},{60,-68},{60,-75}},  color={0,0,127}));
+    annotation (Line(points={{10.8,-68},{60,-68},{60,-75}}, color={0,0,127}));
   connect(dpSet.y, pControl.u_s)
     annotation (Line(points={{-30,9},{-30,18}}, color={0,0,127}));
-  connect(demand.dpOut, pControl.u_m) annotation (Line(points={{-12.8,-68},{-20,
+  connect(demand.dpOut, pControl.u_m) annotation (Line(points={{-10.8,-68},{-20,
           -68},{-20,-40},{0,-40},{0,30},{-18,30}}, color={0,0,127}));
   connect(pControl.y, sourceIdeal.dpIn)
     annotation (Line(points={{-30,41},{-30,53},{-10.6,53}}, color={0,0,127}));
+  connect(sourceIdeal.port_b, pipeSupply.port_a) annotation (Line(points={{10,
+          60},{24,60},{24,56},{60,56},{60,10}}, color={0,127,255}));
+  connect(pipeReturn.ports_b[1], sourceIdeal.port_a) annotation (Line(points={{
+          -60,10},{-62,10},{-62,60},{-10,60}}, color={0,127,255}));
+  connect(demand.port_a, pipeSupply.ports_b[1]) annotation (Line(points={{10,
+          -60},{28,-60},{28,-58},{60,-58},{60,-10}}, color={0,127,255}));
   annotation (
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDp.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpBypass.mos"
                       "Simulate and plot"),
     Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+    coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html><ul>
   <li>March 17, 2018, by Marcus Fuchs:<br/>
@@ -120,12 +124,12 @@ equation
 </html>", info="<html>
 <p>
   This is an OpenLoop example of <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp\">
-  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp</a>
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass</a>
   which is a simple substation model using a fixed return temperature
   and the actual supply temperature to calculate the mass flow rate
   drawn from the network. This model uses an open loop design to
   prescribe the required flow rate.
 </p>
 </html>"));
-end OpenLoopVarTSupplyDp;
+end OpenLoopVarTSupplyDpBypass;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoop;
 model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
   "A small open loop example with a Substation with variable supply temperature and fixed dT"
   extends Modelica.Icons.Example;
@@ -7,44 +7,46 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
-    T_nominal=273.15+60,
-    p_nominal=600000.0,
-    T_default=273.15+60);
+      T_nominal=273.15 + 60,
+      p_nominal=600000.0,
+      T_default=273.15 + 60);
 
-  Supplies.OpenLoop.SourceIdeal sourceIdeal(
+  AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop.SourceIdeal sourceIdeal(
     redeclare package Medium = Medium,
     TReturn=273.15 + 60,
-    pReturn=200000)      "Simple suppy model"
+    pReturn=200000) "Simple suppy model"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpFixedTempDifferenceBypass
-                                                                       demand(
+    demand(
     redeclare package Medium = Medium,
     dp_nominal=50000,
     Q_flow_nominal=78239.1,
     dTDesign=15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    m_flo_bypass=0.003)     "Simple demand model" annotation (Placement(
+    m_flo_bypass=0.003) "Simple demand model" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,-66})));
-  FixedResistances.PlugFlowPipe pipeSupply(
+  AixLib.Fluid.FixedResistances.PlugFlowPipe pipeSupply(
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
     m_flow_nominal=1,
     dIns=0.03,
-    kIns=0.027) "Supply pipe" annotation (Placement(transformation(
+    kIns=0.027,
+    nPorts=1)   "Supply pipe" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,0})));
-  FixedResistances.PlugFlowPipe pipeReturn(
+  AixLib.Fluid.FixedResistances.PlugFlowPipe pipeReturn(
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
     m_flow_nominal=1,
     dIns=0.03,
-    kIns=0.027) "Return pipe" annotation (Placement(transformation(
+    kIns=0.027,
+    nPorts=1)   "Return pipe" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-60,0})));
@@ -86,14 +88,9 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
 equation
   connect(sourceIdeal.port_b, pipeSupply.port_a)
     annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
-  connect(pipeSupply.port_b, demand.port_a)
-    annotation (Line(points={{60,-10},{60,-58.2222},{10,-58.2222}},
-                                                          color={0,127,255}));
   connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-10,
           -58.2222},{-60,-58.2222},{-60,-10}},
                                color={0,127,255}));
-  connect(pipeReturn.port_b, sourceIdeal.port_a)
-    annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   connect(TSet.y, sourceIdeal.TIn)
     annotation (Line(points={{-20,77},{-20,67},{-10.6,67}}, color={0,0,127}));
   connect(TGroundSet.y, TGround.T)
@@ -112,6 +109,10 @@ equation
                                                    color={0,0,127}));
   connect(pControl.y, sourceIdeal.dpIn)
     annotation (Line(points={{-30,41},{-30,53},{-10.6,53}}, color={0,0,127}));
+  connect(demand.port_a, pipeSupply.ports_b[1]) annotation (Line(points={{10,
+          -58.2222},{32,-58.2222},{32,-56},{60,-56},{60,-10}}, color={0,127,255}));
+  connect(pipeReturn.ports_b[1], sourceIdeal.port_a)
+    annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   annotation (
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mos"
                       "Simulate and plot"),

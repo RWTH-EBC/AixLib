@@ -3,6 +3,3 @@ DHCSubstationHeatPumpDirectCooling
 ClosedLoop
 NoReturn
 OpenLoop
-OpenLoopVarTSupplyDp
-OpenLoopVarTSupplyDpBypass
-OpenLoopVarTSupplyDpFixedTempDifferenceBypass

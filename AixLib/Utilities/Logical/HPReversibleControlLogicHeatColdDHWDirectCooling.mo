@@ -1,4 +1,4 @@
-within AixLib.Utilities.Logical;
+﻿within AixLib.Utilities.Logical;
 model HPReversibleControlLogicHeatColdDHWDirectCooling
   "Controls a reversible Heatpump based on cold, heat and dhw input, aswell as network temperature"
 

@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 partial model Carnot1
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
 

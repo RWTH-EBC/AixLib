@@ -5,7 +5,7 @@ model IdealSinkConstFlow
     AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
     redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
 
-  parameter Modelica.SIunits.MassFlowRate prescribed_m_flow
+  parameter Modelica.Units.SI.MassFlowRate prescribed_m_flow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
   Modelica.Blocks.Sources.Constant m_flow_set(k=prescribed_m_flow)
@@ -22,7 +22,7 @@ equation
   connect(m_flow_set.y, changeSign.u)
     annotation (Line(points={{-59,80},{-2,80}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in) annotation (Line(points={{21,80},{84,80},
-          {84,10},{70,8}}, color={0,0,127}));
+          {84,8},{72,8}},  color={0,0,127}));
   annotation (Icon(graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

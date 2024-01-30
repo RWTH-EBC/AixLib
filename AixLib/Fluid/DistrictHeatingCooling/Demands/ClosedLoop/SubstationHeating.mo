@@ -6,17 +6,17 @@ model SubstationHeating
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
+    parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = heatDemand_max / (cp_default * deltaT_heatingGridSet)
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = heatDemand_max / (cp_default * deltaT_heatingGridSet)
     "Nominal mass flow rate based on max. heating demand and set temperature difference";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
@@ -112,16 +112,16 @@ public
         iconTransformation(extent={{158,48},{178,68}})));
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-100,0},{-82,0},{-82,6}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-81,0},{-81,6}}, color={0,127,255}));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{160,0},{140,0},{140,6}},
+    annotation (Line(points={{160,0},{141,0},{141,6}},
                                                      color={0,127,255}));
-  connect(vol.ports[2],pumpHeating. port_a) annotation (Line(points={{-78,6},{-78,
+  connect(vol.ports[2],pumpHeating. port_a) annotation (Line(points={{-79,6},{-79,
           0},{-64,0}},         color={0,127,255}));
   connect(pumpHeating.port_b, heaPum.port_a2) annotation (Line(points={{-44,0},{
           28,0}},                      color={0,127,255}));
-  connect(heaPum.port_b2, vol1.ports[2]) annotation (Line(points={{48,0},{144,0},
-          {144,6}},              color={0,127,255}));
+  connect(heaPum.port_b2, vol1.ports[2]) annotation (Line(points={{48,0},{143,0},
+          {143,6}},              color={0,127,255}));
   connect(heatingReturnBuilding.ports[1], heaPum.port_a1) annotation (Line(
         points={{68,-38},{60,-38},{60,-12},{48,-12}}, color={0,127,255}));
   connect(heatingReturnBuilding.m_flow_in, division.y)

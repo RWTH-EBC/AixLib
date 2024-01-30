@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol
   "Substation model for low-temperature networks for buildings with reversible heat pump that also supplies dhw"
 
@@ -11,34 +11,34 @@ model ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180
+    parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180
     "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate heatDemand_max
+    parameter Modelica.Units.SI.HeatFlowRate heatDemand_max
     "maximum heat demand for scaling of heatpump in Watt";
 
-    parameter Modelica.SIunits.HeatFlowRate coldDemand_max
+    parameter Modelica.Units.SI.HeatFlowRate coldDemand_max
     "maximum cold demand for scaling of heatpump in cooling mode in Watt";
 
-    parameter Modelica.SIunits.Pressure dp_nominal=50000
+    parameter Modelica.Units.SI.Pressure dp_nominal=50000
     "nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal=(heatDemand_max)/cp_default/dT_Network
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=(heatDemand_max)/cp_default/dT_Network
     "Nominal mass flow rate of the Network Pipe";
 
-    parameter Modelica.SIunits.TemperatureDifference dT_Network(displayUnit="K")
+    parameter Modelica.Units.SI.TemperatureDifference dT_Network(displayUnit="K")
     "Design temperature difference between hot and cold pipe";
 
-    parameter Modelica.SIunits.Temperature T_threshhold_dc(displayUnit="°C")
+    parameter Modelica.Units.SI.Temperature T_threshhold_dc(displayUnit="°C")
     "Maximum Temperature for Direct Cooling.";
 
-    parameter Modelica.SIunits.Temperature T_dhw_supply(displayUnit="°C")
+    parameter Modelica.Units.SI.Temperature T_dhw_supply(displayUnit="°C")
     "Temperature of the DHW that comes out of showers, sinks etc. Is used to compute the return Temperature";
 
-    parameter Modelica.SIunits.Temperature T_heat_supply(displayUnit="°C")
+    parameter Modelica.Units.SI.Temperature T_heat_supply(displayUnit="°C")
     "Temperature of the DHW that comes out of showers, sinks etc. Is used to compute the return Temperature";
 
-    parameter Modelica.SIunits.Temperature T_cold_supply(displayUnit="°C")
+    parameter Modelica.Units.SI.Temperature T_cold_supply(displayUnit="°C")
     "Temperature of the DHW that comes out of showers, sinks etc. Is used to compute the return Temperature";
 
 public
@@ -286,12 +286,11 @@ equation
   connect(dT_hot.y,T_heat_return. u1) annotation (Line(points={{-199,-242},{-60,
           -242}},                             color={0,0,127}));
   connect(HX.ports[1],senTem_afterFreeCool. port_a)
-    annotation (Line(points={{-142,0},{-100,0}}, color={0,127,255}));
-  connect(senTem_return.port_b,del1. ports[1]) annotation (Line(points={{38,
-          1.77636e-15},{74,1.77636e-15},{74,0},{72,0}},
-                                            color={0,127,255}));
+    annotation (Line(points={{-143,0},{-100,0}}, color={0,127,255}));
+  connect(senTem_return.port_b,del1. ports[1]) annotation (Line(points={{38,1.77636e-15},
+          {74,1.77636e-15},{74,0},{73,0}},  color={0,127,255}));
   connect(del1.ports[2],port_b)
-    annotation (Line(points={{76,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{75,0},{100,0}}, color={0,127,255}));
   connect(senTem_supply.port_a,port_a)  annotation (Line(points={{-406,
           -1.77636e-15},{-396,-1.77636e-15},{-396,0},{-440,0}},
                                  color={0,127,255}));
@@ -320,7 +319,7 @@ equation
   connect(val.port_b,senMasFlo. port_a)
     annotation (Line(points={{-238,0},{-192,0}}, color={0,127,255}));
   connect(senMasFlo.port_b,HX. ports[2])
-    annotation (Line(points={{-172,0},{-146,0}}, color={0,127,255}));
+    annotation (Line(points={{-172,0},{-145,0}}, color={0,127,255}));
   connect(cp_dT1.y,dT_cold. u2) annotation (Line(points={{-277,-184},{-234,-184},
           {-234,-212},{-222,-212}}, color={0,0,127}));
   connect(cold_input,dT_cold. u1) annotation (Line(points={{-460,100},{-410,100},

@@ -6,17 +6,17 @@ model SubstationCooling
     Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
+    parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
 
-    parameter Modelica.SIunits.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
+    parameter Modelica.Units.SI.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = -coolingDemand_max / (cp_default * deltaT_coolingGridSet)
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = -coolingDemand_max / (cp_default * deltaT_coolingGridSet)
     "Nominal mass flow rate based on max. cooling demand and set temperature difference";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
@@ -118,12 +118,12 @@ model SubstationCooling
     annotation (Placement(transformation(extent={{-118,70},{-98,90}})));
 equation
   connect(port_a, vol.ports[1])
-    annotation (Line(points={{-142,0},{-122,0},{-122,6}},
+    annotation (Line(points={{-142,0},{-121,0},{-121,6}},
                                                         color={0,127,255}));
   connect(port_b, vol1.ports[1])
-    annotation (Line(points={{100,0},{78,0},{78,6}}, color={0,127,255}));
+    annotation (Line(points={{100,0},{79,0},{79,6}}, color={0,127,255}));
   connect(pumpCooling.port_a, vol1.ports[2])
-    annotation (Line(points={{68,0},{82,0},{82,6}}, color={0,127,255}));
+    annotation (Line(points={{68,0},{81,0},{81,6}}, color={0,127,255}));
   connect(const1.y, division1.u2) annotation (Line(points={{-11.4,56},{-10,56},{
           -10,66},{-3.4,66},{-3.4,66.8}},
                                    color={0,0,127}));
@@ -172,7 +172,7 @@ equation
                                                          color={0,127,255}));
   connect(senTemChiOut.port_b, chiller.port_b1) annotation (Line(points={{-66,1},
           {-34,1},{-34,0.4},{-6,0.4}}, color={0,127,255}));
-  connect(vol.ports[2], senTemChiOut.port_a) annotation (Line(points={{-118,6},{
+  connect(vol.ports[2], senTemChiOut.port_a) annotation (Line(points={{-119,6},{
           -118,6},{-118,1},{-82,1}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {100,120}}), graphics={

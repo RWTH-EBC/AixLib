@@ -22,7 +22,7 @@ model SubstationHeating
         origin={84,0})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=1000,
-    freqHz=1/3600,
+    f=1/3600,
     offset=2000,
     startTime=0)
     annotation (Placement(transformation(extent={{-80,72},{-60,92}})));

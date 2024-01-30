@@ -6,24 +6,24 @@ model ValveControlledHX "Substation with variable dT and Heat Exchanger"
     final allowFlowReversal=false,
     final m_flow_nominal = Q_flow_nominal/cp_default/dTDesign);
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
 
-  parameter Modelica.SIunits.Temperature TReturn
+  parameter Modelica.Units.SI.Temperature TReturn
     "Fixed return temperature";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+  parameter Modelica.Units.SI.TemperatureDifference dTDesign(
     displayUnit="K")=60
     "Design temperature difference for the substation's heat exchanger";
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
     annotation(Dialog(group="Design parameter"));
 
   parameter Real deltaM=0.1
     "Fraction of nominal flow rate where flow transitions to laminar"
     annotation (Dialog(tab="Flow resistance"));
-  parameter Modelica.SIunits.Time tau=30
+  parameter Modelica.Units.SI.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
     annotation (Dialog(tab="Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -38,7 +38,7 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
     Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 public
@@ -106,7 +106,7 @@ equation
           64},{-42,64}},   color={0,0,127}));
   connect(Q_flow_input, min.u1) annotation (Line(points={{-108,126},{-56,126},{
           -56,76},{-42,76}},            color={0,0,127}));
-  connect(senT_return.port_a, vol1.ports[1]) annotation (Line(points={{60,0},{38,
+  connect(senT_return.port_a, vol1.ports[1]) annotation (Line(points={{60,0},{39,
           0}},                    color={0,127,255}));
   connect(valve.y_actual, feedback.u1) annotation (Line(points={{-5,7},{-5,20},
           {10,20},{10,50},{-2,50}},    color={0,0,127}));
@@ -119,7 +119,7 @@ equation
           116},{-56,76},{-42,76}},
                                 color={0,0,127}));
   connect(valve.port_b, vol1.ports[2])
-    annotation (Line(points={{0,0},{42,0}}, color={0,127,255}));
+    annotation (Line(points={{0,0},{41,0}}, color={0,127,255}));
   connect(prescribedHeatFlow.port, vol1.heatPort)
     annotation (Line(points={{20,40},{20,10},{30,10}},  color={191,0,0}));
   connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-73,82},{

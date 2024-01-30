@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeEmbeddedDis
   "Embedded pipe model using spatialDistribution for temperature delay and discretization of sourrounding soil for heat loss calculation."
 

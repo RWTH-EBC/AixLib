@@ -6,17 +6,17 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
-    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
-    parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
+    parameter Modelica.Units.SI.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "nominal pressure drop";
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000 "nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max((heatDemand_max/(cp_default*deltaT_heatingSet)),-coolingDemand_max/(cp_default*deltaT_coolingSet))
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = max((heatDemand_max/(cp_default*deltaT_heatingSet)),-coolingDemand_max/(cp_default*deltaT_coolingSet))
     "Nominal mass flow rate based on max. demand and set temperature difference";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
@@ -206,10 +206,10 @@ public
     annotation (Placement(transformation(extent={{188,52},{168,72}})));
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-260,0},{-234,0},{-234,4}},
+    annotation (Line(points={{-260,0},{-233,0},{-233,4}},
                                                         color={0,127,255}));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{220,0},{196,0},{196,8}},
+    annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255}));
   connect(chi.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
           {-146,10}},color={0,127,255}));
@@ -278,12 +278,12 @@ equation
   connect(T_supplyCoolingSet, chi.TSet) annotation (Line(points={{228,102},{
           106,102},{106,42},{8,42},{8,21},{-2,21}},                     color=
          {0,0,127}));
-  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{
-          -230,4},{-230,0},{-206,0},{-206,0}}, color={0,127,255}));
+  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{-231,4},
+          {-231,0},{-206,0},{-206,0}},         color={0,127,255}));
   connect(senMasFlo_GridHeat.port_b, jun.port_1)
     annotation (Line(points={{-186,0},{-156,0}}, color={0,127,255}));
   connect(senMasFlo_GridCool.port_b, vol1.ports[2])
-    annotation (Line(points={{172,0},{200,0},{200,8}}, color={0,127,255}));
+    annotation (Line(points={{172,0},{199,0},{199,8}}, color={0,127,255}));
   connect(senMasFlo_GridCool.port_a, jun1.port_1)
     annotation (Line(points={{152,0},{136,0}}, color={0,127,255}));
   connect(jun.port_2, senMasFlo_HeatPump.port_a) annotation (Line(points={{

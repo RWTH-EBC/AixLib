@@ -5,10 +5,10 @@ model IdealSinkConstHeat
     AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
     redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
 
-  parameter Modelica.SIunits.HeatFlowRate prescribedQ
+  parameter Modelica.Units.SI.HeatFlowRate prescribedQ
     "Prescribed heat flow rate, positive values are extracted from the network";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+  parameter Modelica.Units.SI.TemperatureDifference dTDesign(
     displayUnit="K")
     "Design temperature difference for the substation's heat exchanger";
 
@@ -30,7 +30,7 @@ model IdealSinkConstHeat
 equation
 
   connect(changeSign.y, sink.m_flow_in) annotation (Line(points={{21,80},{84,80},
-          {84,10},{70,8}}, color={0,0,127}));
+          {84,8},{72,8}},  color={0,0,127}));
   connect(heatToMassFlow.y, changeSign.u)
     annotation (Line(points={{-19,80},{-2,80}}, color={0,0,127}));
   connect(Q_flow_set.y, heatToMassFlow.u)

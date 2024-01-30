@@ -3,3 +3,6 @@ OpenLoopCoolingDp
 OpenLoopHeatPumpCarnot
 OpenLoopHeatingConstdT
 SubstationValveControlledHX
+OpenLoopVarTSupplyDp
+OpenLoopVarTSupplyDpBypass
+OpenLoopVarTSupplyDpFixedTempDifferenceBypass

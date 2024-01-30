@@ -62,7 +62,7 @@ model OpenLoopHeatingConstdT
     annotation (Placement(transformation(extent={{-28,20},{-20,28}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=2000,
-    freqHz=86400,
+    f=86400,
     offset=5000,
     startTime=0) annotation (Placement(transformation(extent={{42,-38},{34,-30}})));
 equation
@@ -94,6 +94,9 @@ equation
         points={{-25,65},{-18,65},{-18,39.8},{-6.54545,39.8}}, color={0,0,127}));
   connect(sine.y, demand.Q_flow_input) annotation (Line(points={{33.6,-34},{24,
           -34},{24,-42},{14.8,-42}}, color={0,0,127}));
+  connect(TGround.port, plugFlowPipe1.heatPort) annotation (Line(points={{-84,
+          -32},{-30,-32},{-30,-78},{80,-78},{80,12},{72,12},{72,12}}, color={
+          191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=172800, Interval=60),

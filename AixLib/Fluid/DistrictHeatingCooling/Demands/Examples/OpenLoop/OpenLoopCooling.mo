@@ -2,7 +2,7 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoop;
 model OpenLoopCooling "A small open loop example with a cooling substation"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_amb = 283.15
+  parameter Modelica.Units.SI.Temperature T_amb = 283.15
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (

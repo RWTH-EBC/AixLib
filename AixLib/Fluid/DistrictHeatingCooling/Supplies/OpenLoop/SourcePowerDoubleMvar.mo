@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop;
 model SourcePowerDoubleMvar
   "Open loop supply source with prescribed power feed-in"
   extends BaseClasses.Supplies.OpenLoop.PartialSupplyLessInputs;

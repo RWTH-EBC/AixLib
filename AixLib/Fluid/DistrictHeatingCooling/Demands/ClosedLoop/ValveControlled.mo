@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model ValveControlled "Substation with variable dT"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),

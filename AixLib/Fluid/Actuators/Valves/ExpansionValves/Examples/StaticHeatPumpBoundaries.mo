@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples;
 model StaticHeatPumpBoundaries
   "Base model to test expansion valve using static heat pump boundaries"
   extends Modelica.Icons.Example;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCDoublePipe "Generic pipe model for DHC applications"
 
   replaceable package Medium =

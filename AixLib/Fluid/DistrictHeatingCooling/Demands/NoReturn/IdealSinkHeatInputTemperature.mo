@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn;
 model IdealSinkHeatInputTemperature
   "Demand node as an ideal sink without return flow, using input connector"
   extends

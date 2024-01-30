@@ -1,4 +1,4 @@
-within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers;
+﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers;
 model MultiRadiator "Simple multi radiator model"
 extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 

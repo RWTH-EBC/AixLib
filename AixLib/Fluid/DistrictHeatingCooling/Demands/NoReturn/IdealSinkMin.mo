@@ -12,7 +12,7 @@ model IdealSinkMin
         Medium, m_flow_nominal=1) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
-  parameter Modelica.SIunits.MassFlowRate prescribed_m_flow
+  parameter Modelica.Units.SI.MassFlowRate prescribed_m_flow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
   AixLib.Fluid.Sources.MassFlowSource_T sink(
