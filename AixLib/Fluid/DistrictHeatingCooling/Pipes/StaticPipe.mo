@@ -57,11 +57,11 @@ model StaticPipe
   parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default) =
+  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)=
     Medium.T_default "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)
-     = T_start_in "Initialization temperature at pipe outlet"
+  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)=
+       T_start_in "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay(start=false) = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
@@ -130,7 +130,7 @@ model StaticPipe
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
-    final nPorts=nPorts + 1,
+    final nPorts=2,
     final T_start=T_start_out,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac = if rho_default > 500 then 1 else 10)
@@ -180,16 +180,14 @@ equation
   //calculation of the flow velocity of medium in the pipes
  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
-  for i in 1:nPorts loop
-    connect(vol.ports[i + 1], ports_b[i])
-    annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
+  connect(vol.ports[2], port_b)
+    annotation (Line(points={{71,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
-  end for;
   connect(staticCore.heatPort, heatPort)
     annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
   connect(staticCore.port_b, vol.ports[1])
-    annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
+    annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
   //Connect hydraulicResistance
   if use_zeta then
   connect(hydraulicResistance.port_b, staticCore.port_a)

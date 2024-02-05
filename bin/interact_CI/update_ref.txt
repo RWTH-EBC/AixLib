@@ -1,2 +1,0 @@
-AixLib_Electrical_PVSystem_Examples_ExamplePVSystem.txt
-AixLib_Electrical_PVSystem_Validation_ValidationPVSystem.txt

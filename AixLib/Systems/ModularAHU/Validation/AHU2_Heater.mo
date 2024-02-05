@@ -103,6 +103,8 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-90,34},{-78,46}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-104,32},{-96,40}})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Celsius, combiTimeTable.y[2]) annotation (Line(points={{-80,-92},
           {-106,-92},{-106,70},{-58,70},{-58,90},{-79,90}}, color={0,0,127}));
@@ -153,6 +155,8 @@ equation
           -72,40},{-72,36}},          color={0,0,127}));
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
+  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-68, -24}, {-38, -24}, {-38, 10}}, color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual

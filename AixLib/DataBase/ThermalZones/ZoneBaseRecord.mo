@@ -9,8 +9,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
     "Coefficient of heat transfer for linearized radiation exchange between walls";
   parameter Modelica.Units.SI.Angle lat "Latitude of zone location";
-  parameter Integer nOrientations(min=1) "Number of orientations";
-
+  parameter Integer nOrientations(min=1) "Number of total facades with different
+   combination of tilt and orientation";
   parameter Modelica.Units.SI.Area AWin[nOrientations]
     "Areas of windows by orientations";
   parameter Modelica.Units.SI.Area ATransparent[nOrientations]
@@ -127,7 +127,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
   parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
-  parameter Real maxIrr[nOrientations](unit = "W/m2") "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
+  parameter Real maxIrr[nOrientations](each unit = "W/m2") "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
@@ -135,6 +135,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean HeaterOn "Use heater component";
   parameter Real hCool "Upper limit controller output";
   parameter Real lCool "Lower limit controller output";
+  parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
+  parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
   parameter Real KRCool "Gain of the controller";
   parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";

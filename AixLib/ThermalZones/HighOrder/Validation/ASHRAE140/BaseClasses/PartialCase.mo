@@ -2,6 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
 partial model PartialCase "This is the base class from which the base cases will extend."
   extends Modelica.Icons.Example;
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
@@ -16,7 +18,7 @@ partial model PartialCase "This is the base class from which the base cases will
     each GroundReflection= 0.2,
     each Latitude=sun.Latitude,
     each h= 1609,
-    each WeatherFormat=2) "N, E, S, W, Horz"
+    each WeatherFormat=true) "N, E, S, W, Horz"
     annotation (Placement(transformation(extent={{-102,41},{-74,69}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -39,35 +41,36 @@ partial model PartialCase "This is the base class from which the base cases will
       choices(
         choice(redeclare model Room = Rooms.ASHRAE140.SouthFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with south facing window"),
-        choice(redeclare model Room = Rooms.ASHRAE140.EathWestFacingWindows (
+        choice(redeclare model Room = Rooms.ASHRAE140.EastWestFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with east and west facing window")));
    RoomModel Room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=289.15,
     final wallTypes=wallTypes,
-    calcMethodIn=4,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
     final Type_Win=windowParam,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
-    calcMethodOut=2,
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     final Win_Area=Win_Area,
     final absInnerWallSurf=absInnerWallSurf,
     final use_dynamicShortWaveRadMethod=false)
@@ -220,8 +223,10 @@ equation
   connect(ReferenceCoolingLoadOrTempMin.y[1], checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit) annotation (Line(points={{72.7,-77},{86,-77},{86,-83.5},{97.95,-83.5}}, color={0,0,127}));
   connect(ReferenceCoolingLoadOrTempMin.y[2], checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit) annotation (Line(points={{72.7,-77},{87,-77},{87,-80.5},{97.95,-80.5}}, color={0,0,127}));
   connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
-  connect(temperatureSensor.T, to_degCRoomConvTemp.u) annotation (Line(points={{84,36},{91,36}}, color={0,0,127}));
-  connect(temperatureSensor1.T, to_degCRoomConvTemp1.u) annotation (Line(points={{84,18},{91,18}}, color={0,0,127}));
+  connect(temperatureSensor.T, to_degCRoomConvTemp.u) annotation (Line(points={{84.6,36},
+          {91,36}}, color={0,0,127}));
+  connect(temperatureSensor1.T, to_degCRoomConvTemp1.u) annotation (Line(points={{84.6,18},
+          {91,18}}, color={0,0,127}));
   connect(to_degCRoomConvTemp1.y, FreeFloatRoomRadTemperature) annotation (Line(points={{102.5,18},{140,18}}, color={0,0,127}));
   connect(Room.thermRoom, temperatureSensor.port) annotation (Line(points={{-2.92,35},{-2.92,44},{67,44},{67,36},{72,36}}, color={191,0,0}));
   connect(Room.starRoom, temperatureSensor1.port) annotation (Line(points={{5.48,35},{5.48,42},{65,42},{65,18},{72,18}}, color={0,0,0}));
@@ -326,7 +331,6 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(Tolerance=1e-6, StopTime=31539600),
     __Dymola_experimentSetupOutput(events=true),
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>

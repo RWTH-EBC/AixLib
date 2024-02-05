@@ -7,10 +7,10 @@ model Case620
     tableHeatOrTempMax=[620,4613,5944],
     redeclare model RoomModel = Rooms.ASHRAE140.EastWestFacingWindows (
         wallTypes=wallTypes,
-        calcMethodIn=4,
+        calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
         Type_Win=windowParam,
         solar_absorptance_OW=solar_absorptance_OW,
-        calcMethodOut=2,
+        calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
         Win_Area=Win_Area,
         absInnerWallSurf=absInnerWallSurf),
     Room(redeclare Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions));

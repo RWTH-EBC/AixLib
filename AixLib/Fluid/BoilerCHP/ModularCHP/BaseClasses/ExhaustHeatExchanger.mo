@@ -79,7 +79,7 @@ model ExhaustHeatExchanger
   parameter Modelica.Units.SI.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+  parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow"
     annotation (Dialog(tab="Advanced", group="Initialization"));
   constant Modelica.Units.SI.MolarMass M_H2O=0.01802 "Molar mass of water";
@@ -254,8 +254,6 @@ model ExhaustHeatExchanger
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
     dh=d_iExh,
-    rho_default=1.18,
-    mu_default=1.82*10^(-5),
     length=l_ExhHex) "Pressure drop of the exhaust gas"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
   AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
