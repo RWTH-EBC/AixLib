@@ -6,46 +6,44 @@ model DHCSubstationHeatPumpChiller
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000
     "Nominal pressure drop";
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=max(max((heaDem_max/(
-      cp_default*deltaT_heaSecSet)), -cooDem_max/(cp_default*deltaT_cooSecSet)),
-      0.0001)
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = max((heaDem_max/(cp_default*deltaT_heaSecSet)),-cooDem_max/(cp_default*deltaT_cooSecSet))
     "Nominal mass flow rate based on max. demand and set temperature difference";
 
-  parameter Modelica.Units.SI.HeatFlowRate heaDem_max
+    parameter Modelica.Units.SI.HeatFlowRate heaDem_max
     "Maximum heat demand for scaling of heatpump in Watt"
-    annotation (Dialog(tab="General", group="Building System"));
+    annotation (Dialog(tab = "General", group = "Building System"));
 
-  parameter Modelica.Units.SI.HeatFlowRate cooDem_max
+    parameter Modelica.Units.SI.HeatFlowRate cooDem_max
     "Maximum cooling demand for scaling of chiller in Watt (negative values)"
-    annotation (Dialog(tab="General", group="Building System"));
+    annotation (Dialog(tab = "General", group = "Building System"));
 
-  parameter Modelica.Units.SI.Temperature T_heaSecSet=273.15 + 55
+    parameter Modelica.Units.SI.Temperature T_heaSecSet = 273.15 + 55
     "Set supply temperature for space heating on secondary side (building system)"
-    annotation (Dialog(tab="General", group="Building System"));
+    annotation (Dialog(tab = "General", group = "Building System"));
 
-  parameter Modelica.Units.SI.TemperatureDifference deltaT_heaSecSet
+    parameter Modelica.Units.SI.Temperature deltaT_heaSecSet
     "Set temperature difference for heating on secondary site (building system)"
-    annotation (Dialog(tab="General", group="Building System"));
+     annotation (Dialog(tab = "General", group = "Building System"));
 
-  parameter Modelica.Units.SI.Temperature T_cooSecSet=273.15 + 12
+    parameter Modelica.Units.SI.Temperature T_cooSecSet = 273.15 + 12
     "Set supply temperature for cooling on secondary side (building system)"
-    annotation (Dialog(tab="General", group="Building System"));
+    annotation (Dialog(tab = "General", group = "Building System"));
 
-  parameter Modelica.Units.SI.Temperature deltaT_cooSecSet
+    parameter Modelica.Units.SI.Temperature deltaT_cooSecSet
     "Set temperature difference for cooling on secondary site (building system)"
-    annotation (Dialog(tab="General", group="Building System"));
+    annotation (Dialog(tab = "General", group = "Building System"));
 
 
-  parameter Modelica.Units.SI.Temperature deltaT_heaPriSet
+    parameter Modelica.Units.SI.Temperature deltaT_heaPriSet
     "Set temperature difference for heating on primary site (grid)"
-    annotation (Dialog(tab="General", group="Grid"));
+     annotation (Dialog(tab = "General", group = "Grid"));
 
-  parameter Modelica.Units.SI.Temperature deltaT_cooPriSet
+      parameter Modelica.Units.SI.Temperature deltaT_cooPriSet
     "Set temperature difference for cooling on primary site (grid)"
-    annotation (Dialog(tab="General", group="Grid"));
+     annotation (Dialog(tab = "General", group = "Grid"));
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
@@ -211,18 +209,18 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
-      Medium.specificHeatCapacityCp(sta_default)
+      final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+    Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
 
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-260,0},{-234,0},{-234,4}},
+    annotation (Line(points={{-260,0},{-233,0},{-233,4}},
                                                         color={0,127,255},
       thickness=1));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{220,0},{196,0},{196,8}},
+    annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255},
       thickness=1));
   connect(chi.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
@@ -286,7 +284,7 @@ equation
   connect(pumHea.P, sum1.u[4]);
 
   connect(vol.ports[2], jun.port_1) annotation (Line(
-      points={{-230,4},{-230,4},{-230,0},{-156,0}},
+      points={{-231,4},{-230,4},{-230,0},{-156,0}},
       color={0,127,255},
       thickness=1));
   connect(jun.port_2, pumHea.port_a) annotation (Line(
@@ -298,7 +296,7 @@ equation
       color={0,127,255},
       thickness=1));
   connect(vol1.ports[2], jun1.port_1) annotation (Line(
-      points={{200,8},{196,8},{196,0},{136,0}},
+      points={{199,8},{196,8},{196,0},{136,0}},
       color={0,127,255},
       thickness=1));
   connect(souHeaSec.T_in, T_heaPumInSec.y) annotation (Line(points={{64,-50},{80,
@@ -371,26 +369,12 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})),
-    Documentation(revisions="<html><ul>
-  <li>
-    <i>October 19, 2020</i> ,by Tobias Blacha:<br/>
-    Implemented
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li><i>October 19, 2020</i> ,by Tobias Blacha:<br/>
+Implemented </li>
 </ul>
 </html>", info="<html>
-<p>
-  Substation model for bidirctional low-temperature networks for
-  buildings with heat pump and chiller. In the case of simultaneous
-  cooling and heating demands, the return flows are used as supply
-  flows for the other application. This model uses the heat pump
-  <a href=
-  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>
-  and the chiller <a href=
-  \"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
-  The mass flows are controlled equation-based and calculated using the
-  heating and cooling demands and the specified temperature differences
-  for heating an cooling on both primary (grind) and secondary
-  (building system) side.
-</p>
+<p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a> and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>. The mass flows are controlled equation-based and calculated using the heating and cooling demands and the specified temperature differences for heating an cooling on both primary (grind) and secondary (building system) side.</p>
 </html>"));
 end DHCSubstationHeatPumpChiller;

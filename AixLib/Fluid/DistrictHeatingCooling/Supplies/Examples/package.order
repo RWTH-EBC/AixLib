@@ -1,1 +1,8 @@
 DHCSupplyHeaterCoolerStorage
+ControllerTFlexibilityElectricHeating
+SourceIdealElectricityFlexibility
+IdealPlant
+IdealPlantRevHP
+IdealPlantPump
+IdealPlantPumpErdeis
+IdealPlantHybrErdeis

@@ -17,7 +17,7 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
     "Maximum heat demand for scaling of heat pump"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.Temperature deltaT_heaSecSet=10
+    parameter Modelica.Units.SI.TemperatureDifference deltaT_heaSecSet=10
     "Set temperature difference for heating on secondary site (building system)"
     annotation (Dialog(tab="General", group="Building System"));
 

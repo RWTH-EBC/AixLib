@@ -1,4 +1,6 @@
 HeatPumpCarnot
 VarTSupplyDp
 VarTSupplyDpBypass
+VarTSupplyDpFixedTempDifference
 VarTSupplyDpFixedTempDifferenceBypass
+ValveControlledHX
