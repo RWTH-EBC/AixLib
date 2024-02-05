@@ -322,88 +322,80 @@ equation
                                                  color={0,0,255}),
         Line(points={{0,-70},{0,-90},{100,-90}}, color={0,0,255}),
         Line(points={{62,0},{100,0}},                 color={0,0,255})}),
-      Documentation(info="<html>
-<p>
-This is the base class for the Carnot chiller and the Carnot heat pump
-whose coefficient of performance COP changes
-with temperatures in the same way as the Carnot efficiency changes.
+      Documentation(info="<html><p>
+  This is the base class for the Carnot chiller and the Carnot heat
+  pump whose coefficient of performance COP changes with temperatures
+  in the same way as the Carnot efficiency changes.
 </p>
 <p>
-The model allows to either specify the Carnot effectivness
-<i>&eta;<sub>Carnot,0</sub></i>, or
-a <i>COP<sub>0</sub></i>
-at the nominal conditions, together with
-the evaporator temperature <i>T<sub>eva,0</sub></i> and
-the condenser temperature <i>T<sub>con,0</sub></i>, in which
-case the model computes the Carnot effectivness as
+  The model allows to either specify the Carnot effectivness
+  <i>η<sub>Carnot,0</sub></i>, or a <i>COP<sub>0</sub></i> at the
+  nominal conditions, together with the evaporator temperature
+  <i>T<sub>eva,0</sub></i> and the condenser temperature
+  <i>T<sub>con,0</sub></i>, in which case the model computes the Carnot
+  effectivness as
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> =
-  COP<sub>0</sub>
-&frasl;  (T<sub>use,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)),
+  η<sub>Carnot,0</sub> = COP<sub>0</sub> ⁄ (T<sub>use,0</sub> ⁄
+  (T<sub>con,0</sub>-T<sub>eva,0</sub>)),
 </p>
 <p>
-where
-<i>T<sub>use</sub></i> is the temperature of the the useful heat,
-e.g., the evaporator temperature for a chiller or the condenser temperature
-for a heat pump.
+  where <i>T<sub>use</sub></i> is the temperature of the the useful
+  heat, e.g., the evaporator temperature for a chiller or the condenser
+  temperature for a heat pump.
 </p>
 <p>
-The COP is computed as the product
+  The COP is computed as the product
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-  COP = &eta;<sub>Carnot,0</sub> COP<sub>Carnot</sub> &eta;<sub>PL</sub>,
+  COP = η<sub>Carnot,0</sub> COP<sub>Carnot</sub> η<sub>PL</sub>,
 </p>
 <p>
-where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
-<i>&eta;<sub>PL</sub></i> is the part load efficiency, expressed using
-a polynomial.
-This polynomial has the form
+  where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
+  <i>η<sub>PL</sub></i> is the part load efficiency, expressed using a
+  polynomial. This polynomial has the form
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-  &eta;<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y + a<sub>3</sub> y<sup>2</sup> + ...
+  η<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y + a<sub>3</sub>
+  y<sup>2</sup> + ...
 </p>
 <p>
-where <i>y &isin; [0, 1]</i> is
-either the part load for cooling in case of a chiller, or the part load of heating in
-case of a heat pump, and the coefficients <i>a<sub>i</sub></i>
-are declared by the parameter <code>a</code>.
+  where <i>y ∈ [0, 1]</i> is either the part load for cooling in case
+  of a chiller, or the part load of heating in case of a heat pump, and
+  the coefficients <i>a<sub>i</sub></i> are declared by the parameter
+  <code>a</code>.
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-To make this base class applicable to chiller or heat pumps, it uses
-the boolean constant <code>COP_is_for_cooling</code>.
-Depending on its value, the equations for the coefficient of performance
-and the part load ratio are set up.
+  To make this base class applicable to chiller or heat pumps, it uses
+  the boolean constant <code>COP_is_for_cooling</code>. Depending on
+  its value, the equations for the coefficient of performance and the
+  part load ratio are set up.
 </p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 16, 2017, by Michael Wetter:<br/>
-Added temperature difference between fluids in condenser and evaporator
-for computation of nominal COP and effectiveness.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/698\">
-#698</a>.
-</li>
-<li>
-March 28, 2017, by Felix Buenning:<br/>
-Added temperature difference between fluids in condenser and evaporator.
-The difference is based on discussions with Emerson Climate Technologies.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/698\">
-#698</a>.
-</li>
-<li>
-January 2, 2017, by Filip Jorissen:<br/>
-Removed option for choosing what temperature
-should be used to compute the Carnot efficiency.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
-issue 497</a>.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-First implementation of this base class.
-</li>
+</html>", revisions="<html><ul>
+  <li>June 16, 2017, by Michael Wetter:<br/>
+    Added temperature difference between fluids in condenser and
+    evaporator for computation of nominal COP and effectiveness.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/698\">#698</a>.
+  </li>
+  <li>March 28, 2017, by Felix Buenning:<br/>
+    Added temperature difference between fluids in condenser and
+    evaporator. The difference is based on discussions with Emerson
+    Climate Technologies.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/698\">#698</a>.
+  </li>
+  <li>January 2, 2017, by Filip Jorissen:<br/>
+    Removed option for choosing what temperature should be used to
+    compute the Carnot efficiency. This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/497\">issue 497</a>.
+  </li>
+  <li>January 26, 2016, by Michael Wetter:<br/>
+    First implementation of this base class.
+  </li>
 </ul>
 </html>"));
 end Carnot1;
