@@ -5,7 +5,7 @@ model StratifiedLoadingUnloading "Test model for stratified tank"
  package Medium = AixLib.Media.Water "Medium model";
  constant Integer nSeg = 7 "Number of segments in tank";
 
- parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 1*1000/3600/4;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1*1000/3600/4;
 
   AixLib.Fluid.Sources.Boundary_pT sou_1(
     p=300000 + 5000,
@@ -63,8 +63,8 @@ model StratifiedLoadingUnloading "Test model for stratified tank"
         Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
                                      annotation (Placement(transformation(
           extent={{-60,0},{-44,16}})));
-  AixLib.Fluid.Sensors.EnthalpyFlowRate HOutEnh_flow(redeclare package Medium =
-               Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
+  AixLib.Fluid.Sensors.EnthalpyFlowRate HOutEnh_flow(redeclare package
+      Medium = Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
                                      annotation (Placement(transformation(
           extent={{2,0},{18,16}})));
   Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(
@@ -147,19 +147,20 @@ equation
   annotation (                     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Validation/StratifiedLoadingUnloading.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This test model compares two tank models. The only difference between
-the two tank models is that one uses the third order upwind discretization
-scheme that reduces numerical diffusion that is induced when connecting
-volumes in series.
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-</ul>
-</html>"),
-    experiment(Tolerance=1e-6, StopTime=14400));
+ This test model compares two tank models. The only difference between
+ the two tank models is that one uses the third order upwind discretization
+ scheme that reduces numerical diffusion that is induced when connecting
+ volumes in series.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ </ul>
+ </html>"),
+    experiment(Tolerance=1e-6, StopTime=14400),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedLoadingUnloading;

@@ -16,24 +16,24 @@ model PropyleneGlycolWater
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Antifreeze/Validation/PropyleneGlycolWater.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This example checks the implementation of functions that evaluate the
-temperature- and concentration-dependent thermophysical properties of the
-medium.
-</p>
-<p>
-Thermophysical properties (density, specific heat capacity, thermal conductivity
-and dynamic viscosity) are shown as 0 if the temperature is below the fusion
-temperature.
-</p>
-</html>",
+ <p>
+ This example checks the implementation of functions that evaluate the
+ temperature- and concentration-dependent thermophysical properties of the
+ medium.
+ </p>
+ <p>
+ Thermophysical properties (density, specific heat capacity, thermal conductivity
+ and dynamic viscosity) are shown as 0 if the temperature is below the fusion
+ temperature.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-March 14, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
-
+ <ul>
+ <li>
+ March 14, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PropyleneGlycolWater;

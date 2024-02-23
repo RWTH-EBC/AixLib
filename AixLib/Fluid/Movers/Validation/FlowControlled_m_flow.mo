@@ -29,23 +29,24 @@ experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_m_flow.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
-</p>
-<p>
-The fans have been configured as steady-state models.
-This ensures that the actual speed is equal to the input signal.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 14, 2012, by Michael Wetter:<br/>
-Added filter for start-up and shut-down transient.
-</li>
-<li>
-March 24 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
+ </p>
+ <p>
+ The fans have been configured as steady-state models.
+ This ensures that the actual speed is equal to the input signal.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 14, 2012, by Michael Wetter:<br/>
+ Added filter for start-up and shut-down transient.
+ </li>
+ <li>
+ March 24 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowControlled_m_flow;

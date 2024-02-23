@@ -1,0 +1,11 @@
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2", "AixLib.ThermalZones.ReducedOrder.Multizone.Multizone");
+convertClass("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped", "AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped");
+
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange", fill("",0),{"use_AirExchange=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", fill("",0),{"use_moisture_balance=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange", fill("",0),{"use_AirExchange=true", "use_moisture_balance=true", "use_C_flow=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2", fill("",0),{"use_moisture_balance=true", "use_C_flow=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped", fill("",0),{"use_moisture_balance=true", "use_C_flow=true"});

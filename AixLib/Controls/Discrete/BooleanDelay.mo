@@ -21,39 +21,40 @@ algorithm
 defaultComponentName="del",
 Documentation(
 info="<html>
-<p>
-Block that delays the boolean input signal by
-one sampling interval.
-For example,
-if <i>u</i> denotes the input,
-<i>y</i> denotes the output, and
-<i>t<sub>i</sub></i> and <i>t<sub>i+1</sub></i>
-denote subsequent sampling
-instants, then the model outputs
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-y(t<sub>i+1</sub>) = u(t<sub>i</sub>).
-</p>
-</html>",
+ <p>
+ Block that delays the boolean input signal by
+ one sampling interval.
+ For example,
+ if <i>u</i> denotes the input,
+ <i>y</i> denotes the output, and
+ <i>t<sub>i</sub></i> and <i>t<sub>i+1</sub></i>
+ denote subsequent sampling
+ instants, then the model outputs
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ y(t<sub>i+1</sub>) = u(t<sub>i</sub>).
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 6, 2015, by Michael Wetter:<br/>
-Set start value and <code>fixed</code> attribute
-for <code>firstTrigger</code>
-to avoid a translation warning in pedantic mode
-in Dymola 2016.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Improved documentation.
-</li>
-<li>
-November 26, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ June 6, 2015, by Michael Wetter:<br/>
+ Set start value and <code>fixed</code> attribute
+ for <code>firstTrigger</code>
+ to avoid a translation warning in pedantic mode
+ in Dymola 2016.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+ </li>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Improved documentation.
+ </li>
+ <li>
+ November 26, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BooleanDelay;

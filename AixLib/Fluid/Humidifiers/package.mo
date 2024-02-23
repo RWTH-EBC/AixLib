@@ -2,8 +2,9 @@ within AixLib.Fluid;
 package Humidifiers "Package with humidifier models"
   extends Modelica.Icons.Package;
 
-annotation (preferredView="info", Documentation(info="<html><p>
-  Package with humidifiers.
+annotation (preferredView="info", Documentation(info="<html>
+<p>
+Package with humidifiers.
 </p>
 </html>"),
     Icon(graphics={

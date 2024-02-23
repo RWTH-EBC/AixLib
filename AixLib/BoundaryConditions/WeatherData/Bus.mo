@@ -10,15 +10,16 @@ expandable connector Bus "Data bus that stores weather data"
           lineColor={255,204,51},
           lineThickness=0.5)}),
     Documentation(info="<html>
-<p>
-This component is an expandable connector that is used to implement a bus that contains the weather data.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 25, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This component is an expandable connector that is used to implement a bus that contains the weather data.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 25, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Bus;

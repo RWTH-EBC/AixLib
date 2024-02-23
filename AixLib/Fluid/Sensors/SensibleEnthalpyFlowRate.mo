@@ -3,23 +3,24 @@ model SensibleEnthalpyFlowRate
   "Ideal enthalphy flow rate sensor that outputs the sensible enthalpy flow rate only"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
     redeclare replaceable package Medium =
-        Modelica.Media.Interfaces.PartialCondensingGases);
+        Modelica.Media.Interfaces.PartialCondensingGases,
+    tau=0);
   extends AixLib.Fluid.BaseClasses.IndexMassFraction(final substanceName="water");
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
   Modelica.Blocks.Interfaces.RealOutput H_flow(final unit="W")
     "Sensible enthalpy flow rate, positive if from port_a to port_b"
     annotation (Placement(transformation(
         origin={0,110},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  parameter Modelica.SIunits.SpecificEnthalpy h_out_start=
-    Medium.enthalpyOfNonCondensingGas(T=Medium.T_default)
+  parameter Modelica.Units.SI.SpecificEnthalpy h_out_start=
+      Medium.enthalpyOfNonCondensingGas(T=Medium.T_default)
     "Initial or guess value of measured specific sensible enthalpy"
     annotation (Dialog(group="Initialization"));
 protected
-  Modelica.SIunits.SpecificEnthalpy hMed_out(start=h_out_start)
+  Modelica.Units.SI.SpecificEnthalpy hMed_out(start=h_out_start)
     "Medium sensible enthalpy to which the sensor is exposed";
-  Modelica.SIunits.SpecificEnthalpy h_out(start=h_out_start)
+  Modelica.Units.SI.SpecificEnthalpy h_out(start=h_out_start)
     "Medium sensible enthalpy that is used to compute the enthalpy flow rate";
   Medium.MassFraction XiActual[Medium.nXi]
     "Medium mass fraction to which sensor is exposed to";
@@ -73,7 +74,7 @@ annotation (defaultComponentName="senEntFlo",
         Line(points={{0,100},{0,70}}, color={0,0,127}),
         Text(
           extent={{180,151},{20,99}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="HS_flow"),
         Polygon(
           points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
@@ -90,105 +91,122 @@ annotation (defaultComponentName="senEntFlo",
         Line(points={{22.9,32.8},{40.2,57.3}}),
         Line(points={{0,70},{0,40}}),
         Line(points={{-22.9,32.8},{-40.2,57.3}}),
-        Line(points={{-37.6,13.7},{-65.8,23.9}})}),
+        Line(points={{-37.6,13.7},{-65.8,23.9}}),
+        Text(
+         extent={{-20,120},{-140,70}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(H_flow, leftJustified=false, significantDigits=3)))}),
   Documentation(info="<html>
-<p>
-This model outputs the <i>sensible</i> enthalphy flow rate of the medium in the flow
-between its fluid ports. In particular, if the total enthalpy flow rate is
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  H&#775;<sub>tot</sub> = H&#775;<sub>sen</sub> + H&#775;<sub>lat</sub>,
-</p>
-<p>
-where
-<i>H&#775;<sub>sen</sub> = m&#775; (1-X<sub>w</sub>) c<sub>p,air</sub></i>,
-then this sensor outputs <i>H&#775; = H&#775;<sub>sen</sub></i>.
-</p>
-
-<p>
-If the parameter <code>tau</code> is non-zero, then the measured
-specific sensible enthalpy <i>h<sub>out</sub></i> that is used to
-compute the sensible enthalpy flow rate
-<i>H&#775;<sub>sen</sub> = m&#775; h<sub>out</sub></i>
-is computed using a first order differential equation.
-See <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-
-<p>
-For a sensor that measures
-<i>H&#775;<sub>tot</sub></i>, use
-<a href=\"modelica://AixLib.Fluid.Sensors.EnthalpyFlowRate\">
-AixLib.Fluid.Sensors.EnthalpyFlowRate</a>.<br/>
-For a sensor that measures
-<i>H&#775;<sub>lat</sub></i>, use
-<a href=\"modelica://AixLib.Fluid.Sensors.LatentEnthalpyFlowRate\">
-AixLib.Fluid.Sensors.LatentEnthalpyFlowRate</a>.
-</p>
-
-<p>
-The sensor is ideal, i.e., it does not influence the fluid.
-The sensor can only be used with medium models that implement the function
-<code>enthalpyOfNonCondensingGas(T)</code>.</p>
-
-</html>",
+ <p>
+ This model outputs the <i>sensible</i> enthalphy flow rate of the medium in the flow
+ between its fluid ports. In particular, if the total enthalpy flow rate is
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+   H&#775;<sub>tot</sub> = H&#775;<sub>sen</sub> + H&#775;<sub>lat</sub>,
+ </p>
+ <p>
+ where
+ <i>H&#775;<sub>sen</sub> = m&#775; (1-X<sub>w</sub>) c<sub>p,air</sub></i>,
+ then this sensor outputs <i>H&#775; = H&#775;<sub>sen</sub></i>.
+ </p>
+ 
+ <p>
+ If the parameter <code>tau</code> is non-zero, then the measured
+ specific sensible enthalpy <i>h<sub>out</sub></i> that is used to
+ compute the sensible enthalpy flow rate
+ <i>H&#775;<sub>sen</sub> = m&#775; h<sub>out</sub></i>
+ is computed using a first order differential equation.
+ See <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ 
+ <p>
+ For a sensor that measures
+ <i>H&#775;<sub>tot</sub></i>, use
+ <a href=\"modelica://AixLib.Fluid.Sensors.EnthalpyFlowRate\">
+ AixLib.Fluid.Sensors.EnthalpyFlowRate</a>.<br/>
+ For a sensor that measures
+ <i>H&#775;<sub>lat</sub></i>, use
+ <a href=\"modelica://AixLib.Fluid.Sensors.LatentEnthalpyFlowRate\">
+ AixLib.Fluid.Sensors.LatentEnthalpyFlowRate</a>.
+ </p>
+ 
+ <p>
+ The sensor is ideal, i.e., it does not influence the fluid.
+ The sensor can only be used with medium models that implement the function
+ <code>enthalpyOfNonCondensingGas(T)</code>.</p>
+ 
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 18, 2016 by Filip Jorissen:<br/>
-Using parameter <code>tauInv</code>
-since this now exists in
-<a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
-</li>
-<li>
-September 10, 2013, by Michael Wetter:<br/>
-Changed medium declaration in the <code>extends</code> statement
-to <code>replaceable</code> to avoid a translation error in
-OpenModelica.
-</li>
-<li>
-August 31, 2013, by Michael Wetter:<br/>
-Removed default value <code>tau=0</code> as the base class
-already sets <code>tau=1</code>.
-This change was made so that all sensors use the same default value.
-</li>
-<li>
-December 18, 2012, by Michael Wetter:<br/>
-Moved computation of <code>i_w</code> to new base class
-<a href=\"modelica://AixLib.Fluid.BaseClasses.IndexWater\">
-AixLib.Fluid.BaseClasses.IndexWater</a>.
-The value of this parameter is now assigned dynamically and does not require to be specified
-by the user.
-</li>
-<li>
-November 3, 2011, by Michael Wetter:<br/>
-Moved <code>der(h_out) := 0;</code> from the initial algorithm section to
-the initial equation section
-as this assignment does not conform to the Modelica specification.
-</li>
-<li>
-August 10, 2011 by Michael Wetter:<br/>
-Added parameter <code>i_w</code> and an assert statement to
-make sure it is set correctly. Without this change, Dymola
-cannot differentiate the model when reducing the index of the DAE.
-</li>
-<li>
-June 3, 2011 by Michael Wetter:<br/>
-Revised implementation to add dynamics in such a way that
-the time constant increases as the mass flow rate tends to zero.
-This can improve the numerics.
-</li>
-<li>
-February 22, by Michael Wetter:<br/>
-Improved code that searches for index of 'water' in the medium model.
-</li>
-<li>
-September 9, 2009 by Michael Wetter:<br/>
-First implementation.
-Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ October 19, 2020, by Antoine Gautier:<br/>
+ Changed default value for <code>tau</code> from <code>1</code> to <code>0</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1406\">#1406</a>.
+ </li>
+ <li>
+ February 25, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ January 18, 2016 by Filip Jorissen:<br/>
+ Using parameter <code>tauInv</code>
+ since this now exists in
+ <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
+ </li>
+ <li>
+ September 10, 2013, by Michael Wetter:<br/>
+ Changed medium declaration in the <code>extends</code> statement
+ to <code>replaceable</code> to avoid a translation error in
+ OpenModelica.
+ </li>
+ <li>
+ August 31, 2013, by Michael Wetter:<br/>
+ Removed default value <code>tau=0</code> as the base class
+ already sets <code>tau=1</code>.
+ This change was made so that all sensors use the same default value.
+ </li>
+ <li>
+ December 18, 2012, by Michael Wetter:<br/>
+ Moved computation of <code>i_w</code> to new base class
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.IndexWater\">
+ AixLib.Fluid.BaseClasses.IndexWater</a>.
+ The value of this parameter is now assigned dynamically and does not require to be specified
+ by the user.
+ </li>
+ <li>
+ November 3, 2011, by Michael Wetter:<br/>
+ Moved <code>der(h_out) := 0;</code> from the initial algorithm section to
+ the initial equation section
+ as this assignment does not conform to the Modelica specification.
+ </li>
+ <li>
+ August 10, 2011 by Michael Wetter:<br/>
+ Added parameter <code>i_w</code> and an assert statement to
+ make sure it is set correctly. Without this change, Dymola
+ cannot differentiate the model when reducing the index of the DAE.
+ </li>
+ <li>
+ June 3, 2011 by Michael Wetter:<br/>
+ Revised implementation to add dynamics in such a way that
+ the time constant increases as the mass flow rate tends to zero.
+ This can improve the numerics.
+ </li>
+ <li>
+ February 22, by Michael Wetter:<br/>
+ Improved code that searches for index of 'water' in the medium model.
+ </li>
+ <li>
+ September 9, 2009 by Michael Wetter:<br/>
+ First implementation.
+ Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SensibleEnthalpyFlowRate;

@@ -8,15 +8,15 @@ model ReaderTMY3HDirNor
     "Weather data reader with radiation data obtained from the inputs' connectors"
     annotation (Placement(transformation(extent={{68,-10},{88,10}})));
 protected
-    Modelica.Blocks.Sources.Sine HGloHor1(
-    freqHz=1/86400,
+  Modelica.Blocks.Sources.Sine HGloHor1(
+    f=1/86400,
     startTime=25200,
     offset=0,
     amplitude=100) "Horizontal global radiation"
     annotation (Placement(transformation(extent={{-88,-30},{-68,-10}})));
 
-    Modelica.Blocks.Sources.Sine HGloHor(
-    freqHz=1/86400,
+  Modelica.Blocks.Sources.Sine HGloHor(
+    f=1/86400,
     startTime=68428,
     offset=0,
     amplitude=100) "Horizontal global radiation"
@@ -41,18 +41,19 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/Validation/ReaderTMY3HDirNor.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the calculation of the direct normal radiation.
-The instance <code>weaDatInpCon</code> obtains the global horizontal and
-the diffuse horizontal solar radiation from its inputs connectors.
-</p>
-</html>",
+ <p>
+ This model tests the calculation of the direct normal radiation.
+ The instance <code>weaDatInpCon</code> obtains the global horizontal and
+ the diffuse horizontal solar radiation from its inputs connectors.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 06, 2016, by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ December 06, 2016, by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReaderTMY3HDirNor;

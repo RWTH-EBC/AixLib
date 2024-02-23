@@ -2,7 +2,6 @@ ClosedLoop_y
 MoverContinuous
 MoverParameter
 MoverStages
-PumpHydraulicResistance_closedLoop
 PumpsParallel
 PumpsSeries
 SpeedControlled_y_pumpCurves

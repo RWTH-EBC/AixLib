@@ -1,11 +1,9 @@
 within AixLib.Utilities.Interfaces;
 connector RadPort "Connector for twostar (approximated) radiation exchange"
   extends Modelica.Thermal.HeatTransfer.Interfaces.HeatPort;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {95, 95, 95},  pattern = LinePattern.None, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-82, 84}, {78, -76}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(info = "<html><h4>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={                                 Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),
+                                                                                                                                                   Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>

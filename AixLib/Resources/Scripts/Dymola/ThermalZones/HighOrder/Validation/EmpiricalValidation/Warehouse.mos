@@ -1,0 +1,17 @@
+removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse", startTime=0, stopTime=31536000, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="Warehouse");
+createPlot(id=1, subPlot=1,
+ y = {"meanMeasuredTemp", "roomTemp"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=1, subPlot=2, 
+ y = {"coolingPower"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=1, subPlot=3, 
+ y = {"heatingPower"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

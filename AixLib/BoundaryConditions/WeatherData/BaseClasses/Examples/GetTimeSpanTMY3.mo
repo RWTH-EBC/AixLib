@@ -7,12 +7,12 @@ model GetTimeSpanTMY3 "Test model to get the time span of a weather file"
     "Name of weather data file";
   parameter String tabNam = "tab1" "Name of table on weather file";
 
-  parameter Modelica.SIunits.Time[2] timeSpan(each fixed=false)
+  parameter Modelica.Units.SI.Time[2] timeSpan(each fixed=false)
     "Start time, end time of weather data";
 
 protected
-  constant Modelica.SIunits.Time endTim = 365*24*3600.;
-  constant Modelica.SIunits.Time staTim = 0.;
+  constant Modelica.Units.SI.Time endTim=365*24*3600.;
+  constant Modelica.Units.SI.Time staTim=0.;
 
 initial equation
   timeSpan = AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeSpanTMY3(
@@ -25,24 +25,25 @@ initial equation
 
   annotation (
     Documentation(info="<html>
-<p>
-This example tests getting the time span of a TMY3 weather data file.
-</p>
-</html>",
+ <p>
+ This example tests getting the time span of a TMY3 weather data file.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 16, 2019, by Michael Wetter:<br/>
-Removed call to get the absolute path of the file, corrected the <code>.mos</code>
-file name and updated the documentation
-</li>
-<li>
-April 15, 2019, by Ana Constantin:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ April 16, 2019, by Michael Wetter:<br/>
+ Removed call to get the absolute path of the file, corrected the <code>.mos</code>
+ file name and updated the documentation
+ </li>
+ <li>
+ April 15, 2019, by Ana Constantin:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetTimeSpanTMY3.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end GetTimeSpanTMY3;

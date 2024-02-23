@@ -1,0 +1,17 @@
+removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode", startTime=0, stopTime=86400, outputInterval=60, tolerance=1e-6, method="dassl", resultFile="RoomGFOw2_DayNightMode");
+createPlot(
+ y = {"TRoom"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"Q_flowToRoomConv", "Q_flowToRoomRad"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=3, 
+ y = {"m_flowHC"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

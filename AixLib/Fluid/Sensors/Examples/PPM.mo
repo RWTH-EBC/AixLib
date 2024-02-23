@@ -4,7 +4,8 @@ model PPM "Test model for the extra property sensor outputting PPM"
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = volDyn.V*senPPMTwoPort.tau*3*rho_default
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=volDyn.V*
+      senPPMTwoPort.tau*3*rho_default
     "Mass flow rate into and out of the volume";
 
   AixLib.Fluid.MixingVolumes.MixingVolume volDyn(
@@ -13,7 +14,6 @@ model PPM "Test model for the extra property sensor outputting PPM"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=1,
     use_C_flow=true,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=m_flow_nominal) "Mixing volume with dynamics"
     annotation (Placement(transformation(extent={{70,50},{90,70}})));
   AixLib.Fluid.Sources.MassFlowSource_T mSou(
@@ -22,7 +22,9 @@ model PPM "Test model for the extra property sensor outputting PPM"
     m_flow=m_flow_nominal) "Fresh air supply"
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
 
-  AixLib.Fluid.Sensors.PPM senPPMVol(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.PPM senPPMVol(
+    redeclare package Medium = Medium,
+    warnAboutOnePortConnection=false)
     "PPM sensor for mixing volume"
     annotation (Placement(transformation(extent={{120,40},{140,60}})));
   Modelica.Blocks.Sources.Constant CO2In(k=m_flow_nominal/1000)
@@ -36,7 +38,8 @@ model PPM "Test model for the extra property sensor outputting PPM"
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={80,10})));
-  AixLib.Fluid.Sensors.PPM senPPMIn(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.PPM senPPMIn(redeclare package Medium = Medium,
+      warnAboutOnePortConnection=false)
     "PPM sensor for inlet"
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   AixLib.Fluid.Sensors.PPMTwoPort senPPMNoRev(
@@ -67,12 +70,12 @@ model PPM "Test model for the extra property sensor outputting PPM"
     nPorts=3,
     V=1,
     use_C_flow=true,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
     "Mixing volume without dynamics"
     annotation (Placement(transformation(extent={{70,80},{90,100}})));
-  AixLib.Fluid.Sensors.PPM senPPMVol2( redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.PPM senPPMVol2( redeclare package Medium = Medium,
+      warnAboutOnePortConnection=false)
     "PPM sensor for mixing volume"
     annotation (Placement(transformation(extent={{120,80},{140,100}})));
   AixLib.Fluid.Sources.MassFlowSource_T mSouSta(
@@ -91,8 +94,8 @@ protected
       p=Medium.p_default,
       X=Medium.X_default[1:Medium.nXi]) "Medium state at default values";
   // Density at medium default values, used to compute the size of control volumes
-  final parameter Modelica.SIunits.Density rho_default=Medium.density(
-    state=state_default) "Density, used to compute fluid mass";
+  final parameter Modelica.Units.SI.Density rho_default=Medium.density(state=
+      state_default) "Density, used to compute fluid mass";
 
 equation
   connect(mSou.ports[1], volDyn.ports[1]) annotation (Line(points={{-20,42},{
@@ -129,26 +132,27 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{180,
             180}})),
     Documentation(info="<html>
-<p>
-This example tests the sensors that measure trace substances
-using an output in parts per million.
-Various configurations with and without flow reversal
-and with or without dynamics are tested.
-</p>
-</html>",
+ <p>
+ This example tests the sensors that measure trace substances
+ using an output in parts per million.
+ Various configurations with and without flow reversal
+ and with or without dynamics are tested.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-January 12, 2016, by Filip Jorissen:<br/>
-First implementation.
-See issue
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ January 12, 2016, by Filip Jorissen:<br/>
+ First implementation.
+ See issue
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PPM;

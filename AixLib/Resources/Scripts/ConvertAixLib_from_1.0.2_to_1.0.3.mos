@@ -1,0 +1,6 @@
+﻿clear
+
+convertClear();
+
+// remove modifiers for PartialHuman-Model
+convertModifiers("AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman", {"ratioConvectiveHeat"}, fill("",0));

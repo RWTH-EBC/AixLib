@@ -3,7 +3,7 @@ partial model PartialCorrectionG
   "Partial model for correction of the solar gain factor"
 
   parameter Integer n(min = 1) "Vector size for input and output";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window";
 
   Modelica.Blocks.Interfaces.RealInput HSkyDifTil[n](
@@ -43,21 +43,22 @@ partial model PartialCorrectionG
   fillColor={215,215,215},
   fillPattern=FillPattern.Solid), Text(
   extent={{-52,24},{62,-16}},
-  lineColor={0,0,0},
+  textColor={0,0,0},
   textString="%name")}),
   Documentation(info="<html>
-  <p>Partial model for correction factors for transmitted solar radiation
-  through a transparent element.</p>
-  </html>", revisions="<html>
-  <ul>
-  <li>
-  February 27, 2016, by Michael Wetter:<br/>
-  Moved input above outputs.
-  </li>
-  <li>
-  February 24, 2014, by Reza Tavakoli:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"));
+   <p>Partial model for correction factors for transmitted solar radiation
+   through a transparent element.</p>
+   </html>",revisions="<html>
+   <ul>
+   <li>
+   February 27, 2016, by Michael Wetter:<br/>
+   Moved input above outputs.
+   </li>
+   <li>
+   February 24, 2014, by Reza Tavakoli:<br/>
+   Implemented.
+   </li>
+   </ul>
+   </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialCorrectionG;

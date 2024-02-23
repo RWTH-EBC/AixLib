@@ -1,0 +1,3 @@
+﻿translateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe");
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe", stopTime=3600, method="dassl", tolerance=1e-6, resultFile="DHCPipe");
+createPlot(id=1, y={"senTemIn.T", "senTemOut.T", "senTemIn1.T", "senTemOut1.T", "senTemIn2.T", "senTemOut2.T", "senTemIn3.T", "senTemOut3.T"});

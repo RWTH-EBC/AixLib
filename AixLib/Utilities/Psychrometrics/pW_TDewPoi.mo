@@ -16,49 +16,49 @@ equation
     annotation (
     defaultComponentName="pWat",
     Documentation(info="<html>
-<p>
-Block to compute the water vapor pressure for a given dew point temperature.
-</p>
-<p>
-The correlation used in this model is valid for dew point temperatures between
-<i>0</i>&deg;C and <i>30</i>&deg;C. It is an approximation to the correlation from 2005
-ASHRAE Handbook, p. 6.2, which is valid in a wider range of temperatures and implemented
-in
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi\">
-AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi</a>.
-The approximation error of this simplified function is below 5% for a
-temperature of <i>0</i>&deg;C to <i>30</i>&deg;C.
-The benefit of this simpler function is that it can be inverted analytically,
-whereas the other function requires a numerical solution.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 7, 2011 by Michael Wetter:<br/>
-Changed function call from
-<code>p_w = AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi(T=T);</code>
-to
-<code>p_w = AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi_amb(T=T);</code>
-as the first version sometimes triggered warnings when the solver attempts negative
-temperatures. The accuracy of the two implementation does not change much in the
-region of interest for building HVAC applications.
-</li>
-<li>February 17, 2010 by Michael Wetter:<br/>
-Renamed block from <code>DewPointTemperature_pWat</code>
-to <code>pW_TDewPoi</code>.
-</li>
-<li>
-September 4, 2008 by Michael Wetter:<br/>
-Changed from causal to acausal ports, needed, for example, for
-<a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
-AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
-</li>
-<li>
-August 7, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block to compute the water vapor pressure for a given dew point temperature.
+ </p>
+ <p>
+ The correlation used in this model is valid for dew point temperatures between
+ <i>0</i>&deg;C and <i>30</i>&deg;C. It is an approximation to the correlation from 2005
+ ASHRAE Handbook, p. 6.2, which is valid in a wider range of temperatures and implemented
+ in
+ <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi\">
+ AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi</a>.
+ The approximation error of this simplified function is below 5% for a
+ temperature of <i>0</i>&deg;C to <i>30</i>&deg;C.
+ The benefit of this simpler function is that it can be inverted analytically,
+ whereas the other function requires a numerical solution.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 7, 2011 by Michael Wetter:<br/>
+ Changed function call from
+ <code>p_w = AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi(T=T);</code>
+ to
+ <code>p_w = AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi_amb(T=T);</code>
+ as the first version sometimes triggered warnings when the solver attempts negative
+ temperatures. The accuracy of the two implementation does not change much in the
+ region of interest for building HVAC applications.
+ </li>
+ <li>February 17, 2010 by Michael Wetter:<br/>
+ Renamed block from <code>DewPointTemperature_pWat</code>
+ to <code>pW_TDewPoi</code>.
+ </li>
+ <li>
+ September 4, 2008 by Michael Wetter:<br/>
+ Changed from causal to acausal ports, needed, for example, for
+ <a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
+ AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
+ </li>
+ <li>
+ August 7, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
@@ -68,11 +68,11 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{104,44},{142,-2}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="p_w"),
         Text(
           extent={{-136,50},{-98,4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TDP"),
         Line(points={{-68,86},{-68,-72}}),
         Line(points={{82,-72},{-66,-72}}),
@@ -99,18 +99,19 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-64,84},{-42,66}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="X"),
         Text(
           extent={{82,-80},{92,-96}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="T"),
         Line(points={{68,-44},{-62,-44}}, color={175,175,175}),
         Line(points={{68,-18},{-10,-18}}, color={175,175,175}),
         Line(points={{70,6},{12,6}}, color={175,175,175}),
-        Line(points={{68,32},{22,32}}, color={175,175,175})}));
+        Line(points={{68,32},{22,32}}, color={175,175,175})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end pW_TDewPoi;

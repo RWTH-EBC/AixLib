@@ -5,17 +5,18 @@ model DryCoilEffectivenessNTUPControl
 
  package Medium1 = AixLib.Media.Water "Medium model for water";
  package Medium2 = AixLib.Media.Air "Medium model for air";
-  parameter Modelica.SIunits.Temperature T_a1_nominal = 60+273.15
+  parameter Modelica.Units.SI.Temperature T_a1_nominal=60 + 273.15
     "Temperature at nominal conditions as port a1";
-  parameter Modelica.SIunits.Temperature T_b1_nominal = 50+273.15
+  parameter Modelica.Units.SI.Temperature T_b1_nominal=50 + 273.15
     "Temperature at nominal conditions as port b1";
-  parameter Modelica.SIunits.Temperature T_a2_nominal = 20+273.15
+  parameter Modelica.Units.SI.Temperature T_a2_nominal=20 + 273.15
     "Temperature at nominal conditions as port a2";
-  parameter Modelica.SIunits.Temperature T_b2_nominal = 40+273.15
+  parameter Modelica.Units.SI.Temperature T_b2_nominal=40 + 273.15
     "Temperature at nominal conditions as port b2";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 5
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=5
     "Nominal mass flow rate medium 1";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = m1_flow_nominal*4200/1000*(T_a1_nominal-T_b1_nominal)/(T_b2_nominal-T_a2_nominal)
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=m1_flow_nominal*4200
+      /1000*(T_a1_nominal - T_b1_nominal)/(T_b2_nominal - T_a2_nominal)
     "Nominal mass flow rate medium 2";
 
   AixLib.Fluid.Sources.Boundary_pT sin_2(
@@ -62,7 +63,6 @@ model DryCoilEffectivenessNTUPControl
     dpValve_nominal=6000) "Valve"
     annotation (Placement(transformation(extent={{30,50},{50,70}})));
   AixLib.Controls.Continuous.LimPID P(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=30,
     k=0.1,
     Td=1)
@@ -130,32 +130,33 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/DryCoilEffectivenessNTUPControl.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model demonstrates the use of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>.
-The valve on the water-side is regulated to track a setpoint temperature
-for the air outlet.
-</p>
-</html>",
+ <p>
+ This model demonstrates the use of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>.
+ The valve on the water-side is regulated to track a setpoint temperature
+ for the air outlet.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-July 3, 2014, by Michael Wetter:<br/>
-Changed pressure sink to mass flow rate sink to avoid an overdetermined
-by consistent set of initial conditions.
-</li>
-<li>
-March 1, 2013, by Michael Wetter:<br/>
-Added nominal pressure drop for valve as
-this parameter no longer has a default value.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ July 3, 2014, by Michael Wetter:<br/>
+ Changed pressure sink to mass flow rate sink to avoid an overdetermined
+ by consistent set of initial conditions.
+ </li>
+ <li>
+ March 1, 2013, by Michael Wetter:<br/>
+ Added nominal pressure drop for valve as
+ this parameter no longer has a default value.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DryCoilEffectivenessNTUPControl;

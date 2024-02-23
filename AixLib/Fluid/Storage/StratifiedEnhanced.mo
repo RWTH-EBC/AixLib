@@ -79,60 +79,66 @@ equation
   annotation (
 defaultComponentName="tan",
 Documentation(info="<html>
-<p>
-This is a model of a stratified storage tank for thermal energy storage.
-</p>
-<p>
-See the
-<a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
-AixLib.Fluid.Storage.UsersGuide</a>
-for more information.
-</p>
-<h4>Limitations</h4>
-<p>
-The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-June 1, 2018, by Michael Wetter:<br/>
-Refactored model to allow a fluid port in the tank that do not have
-the enhanced stratification model.<br/>
-This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
-issue 1182</a>.
-</li>
-<li>
-March 29, 2012 by Wangda Zuo:<br/>
-Revised the implementation to reduce the temperature overshoot.
-</li>
-<li>
-June 23, 2010 by Michael Wetter and Wangda Zuo:<br/>
-Changed model that is used to correct the numerical diffusion.
-The previous version used the model from Stefan Wischhusen,
-<a href=\"http://www.modelica.org/events/modelica2006/Proceedings/sessions/Session3a2.pdf\">
-An Enhanced Discretization Method for Storage
-Tank Models within Energy Systems</a>,
-<i>Modelica Conference</i>,
-Vienna, Austria, September 2006. However, for situations where there is a strong stratification,
-this model can lead to a large overshoot in tank temperatures, leading to a violation of the
-second law.
-In this revision, the model that computes the volume outlet temperatures has been changed to a third order upwind scheme,
-which is implemented in
-<a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier\">
-AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier</a>.
-</li>
-<li>
-October 23, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This is a model of a stratified storage tank for thermal energy storage.
+ </p>
+ <p>
+ See the
+ <a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
+ AixLib.Fluid.Storage.UsersGuide</a>
+ for more information.
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ June 1, 2018, by Michael Wetter:<br/>
+ Refactored model to allow a fluid port in the tank that do not have
+ the enhanced stratification model.<br/>
+ This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
+ issue 1182</a>.
+ </li>
+ <li>
+ March 29, 2012 by Wangda Zuo:<br/>
+ Revised the implementation to reduce the temperature overshoot.
+ </li>
+ <li>
+ June 23, 2010 by Michael Wetter and Wangda Zuo:<br/>
+ Changed model that is used to correct the numerical diffusion.
+ The previous version used the model from Stefan Wischhusen,
+ <a href=\"http://www.modelica.org/events/modelica2006/Proceedings/sessions/Session3a2.pdf\">
+ An Enhanced Discretization Method for Storage
+ Tank Models within Energy Systems</a>,
+ <i>Modelica Conference</i>,
+ Vienna, Austria, September 2006. However, for situations where there is a strong stratification,
+ this model can lead to a large overshoot in tank temperatures, leading to a violation of the
+ second law.
+ In this revision, the model that computes the volume outlet temperatures has been changed to a third order upwind scheme,
+ which is implemented in
+ <a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier\">
+ AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier</a>.
+ </li>
+ <li>
+ October 23, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
  Icon(graphics={
         Rectangle(
           extent={{-40,20},{40,-20}},
@@ -156,5 +162,6 @@ First implementation.
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={255,255,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedEnhanced;

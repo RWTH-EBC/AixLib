@@ -7,9 +7,12 @@ package Data
     record EngineMaterialData
       extends Modelica.Icons.Record;
 
-      constant Modelica.SIunits.ThermalConductivity lambda = 44.5    "Thermal conductivity of the engine block material (default value is 44.5)";
-      constant Modelica.SIunits.Density rhoEngWall = 7200            "Density of the the engine block material (default value is 72000)";
-      constant Modelica.SIunits.SpecificHeatCapacity c = 535         "Specific heat capacity of the cylinder wall material (default value is 535)";
+      constant Modelica.Units.SI.ThermalConductivity lambda=44.5
+        "Thermal conductivity of the engine block material (default value is 44.5)";
+      constant Modelica.Units.SI.Density rhoEngWall=7200
+        "Density of the the engine block material (default value is 72000)";
+      constant Modelica.Units.SI.SpecificHeatCapacity c=535
+        "Specific heat capacity of the cylinder wall material (default value is 535)";
 
       annotation (Documentation(revisions="<html><ul>
   <li>

@@ -1,0 +1,24 @@
+﻿simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation", stopTime=7200, numberOfIntervals=0, outputInterval=2, method="dassl",tolerance=1E-6, resultFile="DynamicValidation");
+createPlot(id=1, 
+ position={15, 15, 584, 571}, 
+ y={"m3hOda.y", "V_flow_exp.showNumber"}, 
+ range={0.0, 7500.0, 100.0, 500.0}, 
+ grid=true, 
+ colors={{28,108,200}, {238,46,47}});
+createPlot(id=1, 
+ position={15, 15, 584, 571}, 
+ y={"senTemSup.T", "T_Sup_exp.showNumber"}, 
+ range={0.0, 7500.0, 15.0, 20.0}, 
+ autoscale=false, 
+ grid=true, 
+ subPlot=102, 
+ colors={{28,108,200}, {238,46,47}}, 
+ displayUnits={"degC", ""});
+createPlot(id=1, 
+ position={15, 15, 584, 571}, 
+ y={"toDryAirSup.XiDry", "X_Sup_exp.showNumber"}, 
+ range={0.0, 7500.0, 0.004, 0.008}, 
+ autoscale=false, 
+ grid=true, 
+ subPlot=103, 
+ colors={{28,108,200}, {238,46,47}});

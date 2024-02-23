@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems;
+﻿within AixLib.Systems.HeatPumpSystems;
 package BaseClasses "BaseClasses for heat pump systems"
 
 annotation (Documentation(revisions="<html><ul>

@@ -92,54 +92,55 @@ equation
         Text(
           visible=use_X_in,
           extent={{-164,4},{-62,-36}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="X"),
         Text(
           visible=use_Xi_in,
           extent={{-164,4},{-62,-36}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Xi"),
         Text(
           visible=use_C_in,
           extent={{-164,-90},{-62,-130}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="C")}),
           Documentation(info="<html>
-<p>
-Partial model that defines outflowing properties
-<code>ports.Xi_outflow</code> and <code>ports.C_outflow</code>
-using an optional input for both.
-Otherwise the parameter value is used.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 19, 2019, by Michael Wetter:<br/>
-Refactored handling of mass fractions which was needed to handle media such as
-<a href=\"modelica://Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents\">
-Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents</a> and
-<a href=\"modelica://Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas\">
-Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas</a>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">AixLib, #1205</a>.
-</li>
-<li>
-February 13, 2018, by Michael Wetter:<br/>
-Corrected error in quantity assignment for <code>Xi_in</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
-</li>
-<li>
-February 2nd, 2018 by Filip Jorissen<br/>
-Initial version for refactoring inputs of sources.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Partial model that defines outflowing properties
+ <code>ports.Xi_outflow</code> and <code>ports.C_outflow</code>
+ using an optional input for both.
+ Otherwise the parameter value is used.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 19, 2019, by Michael Wetter:<br/>
+ Refactored handling of mass fractions which was needed to handle media such as
+ <a href=\"modelica://Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents\">
+ Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents</a> and
+ <a href=\"modelica://Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas\">
+ Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas</a>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
+ </li>
+ <li>
+ February 13, 2018, by Michael Wetter:<br/>
+ Corrected error in quantity assignment for <code>Xi_in</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
+ </li>
+ <li>
+ February 2nd, 2018 by Filip Jorissen<br/>
+ Initial version for refactoring inputs of sources.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialSource_Xi_C;

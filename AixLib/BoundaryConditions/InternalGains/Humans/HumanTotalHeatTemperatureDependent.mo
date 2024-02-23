@@ -23,13 +23,13 @@ model HumanTotalHeatTemperatureDependent
     "Latent heat per kg moisture"
     annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
 protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
-    AixLib.Utilities.Psychrometrics.Constants.cpSte
+  constant Modelica.Units.SI.SpecificHeatCapacity cp_steam=AixLib.Utilities.Psychrometrics.Constants.cpSte
     "Specific heat capacity of steam";
-  constant Modelica.SIunits.SpecificEnthalpy EnthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
+  constant Modelica.Units.SI.SpecificEnthalpy EnthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
     "Enthalpy of evaporation";
-  constant Modelica.SIunits.SpecificEnergy h_fg=
-    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
+  constant Modelica.Units.SI.SpecificEnergy h_fg=
+      Media.Air.enthalpyOfCondensingGas(273.15 + 37)
+    "Latent heat of water vapor";
 equation
   connect(to_degC.y, temperatureDependentMoistuerOutputSIA2024_1.T) annotation (
      Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-62,76}}, color={0,0,

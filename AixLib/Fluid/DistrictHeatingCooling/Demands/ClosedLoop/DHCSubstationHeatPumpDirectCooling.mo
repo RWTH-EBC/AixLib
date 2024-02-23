@@ -2,37 +2,36 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-temperature networks for buildings with 
   heat pump and direct cooling."
 
-      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
+      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
     "Nominal pressure drop";
 
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=m_flow_nominal
     "Nominal mass flow rate"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.HeatFlowRate heaDem_max
+  parameter Modelica.Units.SI.HeatFlowRate heaDem_max
     "Maximum heat demand for scaling of heat pump"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.TemperatureDifference deltaT_heaSecSet = 10
+  parameter Modelica.Units.SI.Temperature deltaT_heaSecSet=10
     "Set temperature difference for heating on secondary site (building system)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.Temperature T_heaSecSet = 273.15 + 55
+  parameter Modelica.Units.SI.Temperature T_heaSecSet=273.15 + 55
     "Set supply temperature for space heating on secondary side (building)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
 
-    parameter Modelica.SIunits.Temperature T_heaPriSet = 273.15 + 22
+  parameter Modelica.Units.SI.Temperature T_heaPriSet=273.15 + 22
     "Set temperature of primary side (warm line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
-    parameter Modelica.SIunits.Temperature T_cooPriSet = 273.15 + 12
+    annotation (Dialog(tab="General", group="Grid"));
+  parameter Modelica.Units.SI.Temperature T_cooPriSet=273.15 + 12
     "Set temperature of primary side (cold line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
+    annotation (Dialog(tab="General", group="Grid"));
 
 
 
@@ -184,17 +183,17 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-      final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
-    Medium.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-240,0},{-214,0},{-214,4}},
+    annotation (Line(points={{-240,0},{-213,0},{-213,4}},
                                                         color={0,127,255},
       thickness=1));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{240,0},{216,0},{216,8}},
+    annotation (Line(points={{240,0},{217,0},{217,8}},
                                                      color={0,127,255},
       thickness=1));
   connect(heaDem, add1.u1)
@@ -215,7 +214,7 @@ equation
   connect(T_heaPumSet.y, heaPum.TSet)
     annotation (Line(points={{77.5,-39},{60,-39}}, color={0,0,127}));
   connect(dirCoo.ports[1], pumCoo.port_b)
-    annotation (Line(points={{4,24},{48,24}}, color={0,127,255},
+    annotation (Line(points={{5,24},{48,24}}, color={0,127,255},
       thickness=1));
   connect(cooDem, division2.u1) annotation (Line(points={{248,62},{176,62},{176,
           63.2},{103.4,63.2}}, color={0,0,127}));
@@ -249,7 +248,7 @@ equation
   connect(division1.y, pumHeaPri.m_flow_in) annotation (Line(points={{-73.2,-62},
           {-50,-62},{-50,-36}}, color={0,0,127}));
   connect(senT_dirCooOutPri.port_b, dirCoo.ports[2])
-    annotation (Line(points={{-58,24},{8,24}}, color={0,127,255},
+    annotation (Line(points={{-58,24},{7,24}}, color={0,127,255},
       thickness=1));
   connect(jun.port_3, senT_dirCooOutPri.port_a) annotation (Line(points={{-126,
           10},{-128,10},{-128,24},{-78,24}}, color={0,127,255},
@@ -270,7 +269,7 @@ equation
   connect(m_flow_heaSec.u1, realExpression4.y) annotation (Line(points={{169.4,
           -60.8},{177.7,-60.8},{177.7,-60},{181.4,-60}}, color={0,0,127}));
   connect(vol.ports[2], jun.port_1)
-    annotation (Line(points={{-210,4},{-210,0},{-136,0}}, color={0,127,255},
+    annotation (Line(points={{-211,4},{-211,0},{-136,0}}, color={0,127,255},
       thickness=1));
   connect(jun.port_2, pumHeaPri.port_a) annotation (Line(points={{-116,0},{-96,
           0},{-96,-24},{-60,-24}}, color={0,127,255},
@@ -279,7 +278,7 @@ equation
     annotation (Line(points={{68,24},{108,24}}, color={0,127,255},
       thickness=1));
   connect(jun1.port_1, vol1.ports[2])
-    annotation (Line(points={{156,0},{220,0},{220,8}}, color={0,127,255},
+    annotation (Line(points={{156,0},{219,0},{219,8}}, color={0,127,255},
       thickness=1));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,
             -160},{240,160}}),
@@ -326,12 +325,27 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-160},{240,
             160}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020,by</i> Tobias Blacha:<br>Move to development</li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020,by</i> Tobias Blacha:<br/>
+    Move to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks for buildings with heat pump and direct cooling. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application for energy balancing. This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>. The mass flows are controlled equation-based and calculated using the heating and cooling demands and the specified temperatures of the warm and cold line of the network.</p>
+<p>
+  Substation model for bidirectional low-temperature networks for
+  buildings with heat pump and direct cooling. In the case of
+  simultaneous cooling and heating demands, the return flows are used
+  as supply flows for the other application for energy balancing. This
+  model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
+  The mass flows are controlled equation-based and calculated using the
+  heating and cooling demands and the specified temperatures of the
+  warm and cold line of the network.
+</p>
 </html>"));
 end DHCSubstationHeatPumpDirectCooling;

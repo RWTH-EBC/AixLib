@@ -3,8 +3,8 @@ record SurfaceOrientationBaseDataDefinition
   extends Modelica.Icons.Record;
   parameter Integer nSurfaces;
   parameter String[nSurfaces] name;
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg[nSurfaces] Azimut;
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg[nSurfaces] Tilt;
+  parameter Modelica.Units.NonSI.Angle_deg[nSurfaces] Azimut;
+  parameter Modelica.Units.NonSI.Angle_deg[nSurfaces] Tilt;
   annotation(Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

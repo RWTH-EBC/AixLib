@@ -7,20 +7,21 @@ block FlowSplitter_u "Declaration of an FMU that exports a flow splitter"
         allowFlowReversal(start=false));
 
   annotation (  Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a fluid flow component.
-The FMU is an instance of
-<a href=\"modelica://AixLib.Fluid.FMI.FlowSplitter_u\">
-AixLib.Fluid.FMI.FlowSplitter_u</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 20, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a fluid flow component.
+ The FMU is an instance of
+ <a href=\"modelica://AixLib.Fluid.FMI.FlowSplitter_u\">
+ AixLib.Fluid.FMI.FlowSplitter_u</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 20, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/FlowSplitter_u.mos"
-        "Export FMU"));
+        "Export FMU"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowSplitter_u;

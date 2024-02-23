@@ -7,16 +7,15 @@ block Humidifier_u
       final m_flow_nominal=m_flow_nominal,
       final dp_nominal=if use_p_in then dp_nominal else 0,
       final mWat_flow_nominal=mWat_flow_nominal,
-      massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
       final energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
 
-  parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=0
-    "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       0 "Pressure";
 
-  parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal=0.01*0.005
+  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal=0.01*0.005
     "Water mass flow rate at u=1, positive for humidification";
 
   Modelica.Blocks.Interfaces.RealInput u(min=0, max=1, unit="1")
@@ -29,41 +28,41 @@ equation
       smooth=Smooth.None));
 
   annotation (  Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a humidifier
-that takes as an input signal the normalized mass flow rate of water that
-will be added to the medium.
-The FMU has an instance of
-<a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
-AixLib.Fluid.Humidifiers.Humidifier_u</a>.
-</p>
-<p>
-The mass dynamics has been set to
-<code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
-See the
-<a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
-for the rationale.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 12, 2017, by Michael Wetter:<br/>
-Removed temperature that is no longer needed.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-April 29, 2015 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a humidifier
+ that takes as an input signal the normalized mass flow rate of water that
+ will be added to the medium.
+ The FMU has an instance of
+ <a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
+ AixLib.Fluid.Humidifiers.Humidifier_u</a>.
+ </p>
+ <p>
+ The mass dynamics has been set to
+ <code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
+ See the
+ <a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
+ for the rationale.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 12, 2017, by Michael Wetter:<br/>
+ Removed temperature that is no longer needed.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ April 29, 2015 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/Humidifier_u.mos"
         "Export FMU"),
     Icon(graphics={
@@ -100,7 +99,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-54,-12},{56,-72}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="Q=%Q_flow_nominal"),
         Rectangle(
           extent={{-100,61},{-68,58}},
@@ -110,6 +109,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-104,94},{-60,66}},
-          lineColor={0,0,255},
-          textString="u")}));
+          textColor={0,0,255},
+          textString="u")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

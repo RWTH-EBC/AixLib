@@ -1,4 +1,4 @@
-within AixLib.Utilities.Time;
+﻿within AixLib.Utilities.Time;
 model DaytimeSwitch
   "Set the output to true if the given daytime stamp is equal to current daytime"
   parameter Boolean weekly=true

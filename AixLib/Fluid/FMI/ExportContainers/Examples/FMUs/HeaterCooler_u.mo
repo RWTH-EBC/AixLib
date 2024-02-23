@@ -7,14 +7,13 @@ block HeaterCooler_u
       final m_flow_nominal=m_flow_nominal,
       final dp_nominal=if use_p_in then dp_nominal else 0,
       final Q_flow_nominal=Q_flow_nominal,
-      massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=0
-    "Pressure";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal=100
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       0 "Pressure";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=100
     "Heat flow rate at u=1, positive for heating";
   Modelica.Blocks.Interfaces.RealInput u(min=0, max=1, unit="1")
     "Control input"
@@ -26,34 +25,40 @@ equation
       smooth=Smooth.None));
 
   annotation (  Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a heater
-that takes as an input signal the normalized heat flow rate.
-The FMU has an instance of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
-AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>.
-</p>
-<p>
-The mass dynamics has been set to
-<code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
-See the
-<a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
-for the rationale.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-November 3, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a heater
+ that takes as an input signal the normalized heat flow rate.
+ The FMU has an instance of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+ AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>.
+ </p>
+ <p>
+ The mass dynamics has been set to
+ <code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
+ See the
+ <a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
+ for the rationale.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ November 3, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/HeaterCooler_u.mos"
         "Export FMU"),
     Icon(graphics={
@@ -90,7 +95,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-54,-12},{56,-72}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="Q=%Q_flow_nominal"),
         Rectangle(
           extent={{-100,61},{-68,58}},
@@ -100,6 +105,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-104,94},{-60,66}},
-          lineColor={0,0,255},
-          textString="u")}));
+          textColor={0,0,255},
+          textString="u")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

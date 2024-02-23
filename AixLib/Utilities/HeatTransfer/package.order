@@ -1,11 +1,11 @@
 CalcQFlow
-CylindricHeatTransfer
 CylindricHeatConduction
+CylindricHeatTransfer
 CylindricLoad
 HeatConv
 HeatConvInside
 HeatConvOutside
-HeatConvPipeInside
 HeatConvPipeInsideDynamic
 HeatToRad
+SolarRadInRoom
 SolarRadToHeat

@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.EN14511;
+﻿within AixLib.DataBase.HeatPump.EN14511;
 record Vitocal200AWO201
   "Vitocal200AWO201"
   extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(

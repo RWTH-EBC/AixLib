@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.UsersGuide;
+﻿within AixLib.Controls.HVACAgentBasedControl.UsersGuide;
 class Requirements "Requirements"
   extends Modelica.Icons.Information;
   annotation (Documentation(info="<html><p>

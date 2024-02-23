@@ -25,9 +25,9 @@ protected
   parameter Real coefficient = 100 * 18.016 * 287.058/(8314.3 * 101325) * 6.1078
   "Coefficient for Magnus formula";
 equation
-  absHum * TDryBul = coefficient * TDryBul * 10^(7.5*
-    Modelica.SIunits.Conversions.to_degC(TDryBul)/(237.3 +
-    Modelica.SIunits.Conversions.to_degC(TDryBul)))*relHum;
+  absHum * TDryBul =coefficient*TDryBul*10^(7.5*
+    Modelica.Units.Conversions.to_degC(TDryBul)/(237.3 +
+    Modelica.Units.Conversions.to_degC(TDryBul)))*relHum;
   annotation (Documentation(revisions="<html><ul>
   <li>September 27, 2016 by Moritz Lauster:<br/>
     First Implementation.

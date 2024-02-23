@@ -3,6 +3,8 @@ DHCDoublePipe
 StaticPipe
 PlugFlowPipeEmbedded
 PlugFlowPipeZeta
+StaticPipe
+BaseClassesStatic
 Examples
 BaseClassesStatic
 PlugFlowPipeEmbeddedDis

@@ -1,9 +1,9 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HeatIllumination "heating energy due to Illumination"
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.EnergyFlowRate HIll1
+  parameter Modelica.Units.SI.EnergyFlowRate HIll1
     "Energy output of Illumination in the morning and evening";
-  parameter Modelica.SIunits.EnergyFlowRate HIll2
+  parameter Modelica.Units.SI.EnergyFlowRate HIll2
     "Energy output of Illumination during daytime";
   Modelica.Blocks.Interfaces.BooleanInput Illumination
     "True if Illumination is on, False if it is turned off"
@@ -14,7 +14,7 @@ model HeatIllumination "heating energy due to Illumination"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-12},{124,12}})));
 protected
-  constant Modelica.SIunits.Time day=86400;
+  constant Modelica.Units.SI.Time day=86400;
 equation
   if Illumination==false then
     HIll=0;

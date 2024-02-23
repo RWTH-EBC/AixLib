@@ -3,21 +3,20 @@ model ExergyMeters
 
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.Units.SI.Temperature T_start=323.15
     "Start reference temperature of medium";
 
   parameter Integer n = 10 "Number of layers";
 
-  parameter Modelica.SIunits.Mass mass = 1000 "Mass of one layer";
+  parameter Modelica.Units.SI.Mass mass=1000 "Mass of one layer";
 
   package Medium = AixLib.Media.Water "Medium in the sensor"
                            annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.Sine pulse(
-    each freqHz=1/3600,
+    each f=1/3600,
     each offset=3000,
-    each amplitude=3000)
-                      "Sine wave to vary heat generation and demand"
+    each amplitude=3000) "Sine wave to vary heat generation and demand"
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
   ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
     redeclare package Medium = Medium,
@@ -34,12 +33,14 @@ model ExergyMeters
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.Constant X_ref[1](k={1}) "Reference composition"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
-  inner Modelica.Fluid.System system "Basic parameters"
+  inner Modelica.Fluid.System system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                                     "Basic parameters"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
   ExergyMeter.HeatExergyMeter exHeatSec
     "Exergy content of the heat flux on secondary side"
     annotation (Placement(transformation(extent={{74,5},{94,25}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpPrim(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,
     redeclare package Medium = Medium,
@@ -47,20 +48,35 @@ model ExergyMeters
     m_flow_nominal=0.5,
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
-  AixLib.Fluid.Storage.Storage bufferStorageHeatingcoils(
-    layer_HE(each T_start=T_start),
-    layer(each T_start=T_start),
+  Fluid.Storage.BufferStorage  bufferStorageHeatingcoils(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package MediumHC1 = Medium,
+    redeclare package MediumHC2 = Medium,
+    m1_flow_nominal=0.5,
+    m2_flow_nominal=0.5,
+    mHC1_flow_nominal=0.5,
+    useHeatingCoil1=true,
+    useHeatingCoil2=false,
+    useHeatingRod=false,
+    TStart=T_start,
+    redeclare DataBase.Storage.Generic_New_2000l data(
+      hTank=1,
+      hUpperPortDemand=0.95,
+      hUpperPortSupply=0.95,
+      hHC1Up=0.95,
+      dTank=2,
+      sIns=0.2,
+      lambdaIns=0.075,
+      hTS2=0.95),
+    hConHC1=300,
+    TStartWall=T_start,
+    TStartIns=T_start,
     redeclare package Medium = Medium,
-    lambda_ins=0.075,
-    s_ins=0.2,
     hConIn=100,
     hConOut=10,
-    k_HE=300,
-    h=1.5,
-    V_HE=0.02,
-    A_HE=7,
-    n=10,
-    d=2) "Storage tank" annotation (Placement(transformation(extent={{26,54},{-2,88}})));
+    n=10)
+         "Storage tank" annotation (Placement(transformation(extent={{-2,54},{26,
+            88}})));
   Fluid.FixedResistances.PressureDrop      pipePrim(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -90,6 +106,7 @@ model ExergyMeters
         rotation=90,
         origin={-84,70})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpSec(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,
     redeclare package Medium = Medium,
@@ -224,31 +241,22 @@ equation
 
   connect(pumpPrim.port_b, exPrimIn.port_a)
     annotation (Line(points={{-44,86},{-40,86},{-36,86}}, color={0,127,255}));
-  connect(exPrimIn.port_b, bufferStorageHeatingcoils.port_a_heatGenerator)
-    annotation (Line(points={{-16,86},{0.24,86},{0.24,85.96}},  color={0,127,255}));
-  connect(bufferStorageHeatingcoils.port_b_heatGenerator, exPrimOut.port_a)
-    annotation (Line(points={{0.24,57.4},{-5.88,57.4},{-5.88,57},{-14,57}},
-        color={0,127,255}));
   connect(exPrimOut.port_b, pipePrim.port_a) annotation (Line(points={{-34,57},{
           -46,57},{-46,56.5}}, color={0,127,255}));
   connect(pipePrim.port_b, heater.ports[1]) annotation (Line(points={{-60,56.5},
-          {-72,56.5},{-72,68},{-74,68}}, color={0,127,255}));
-  connect(heater.ports[2], pumpPrim.port_a) annotation (Line(points={{-74,72},{-70,
-          72},{-70,86},{-64,86}}, color={0,127,255}));
-  connect(bufferStorageHeatingcoils.port_b_consumer, exSecOut.port_a)
-    annotation (Line(points={{12,88},{12,92},{28,92},{28,82},{34,82}}, color={0,
-          127,255}));
+          {-72,56.5},{-72,69},{-74,69}}, color={0,127,255}));
+  connect(heater.ports[2], pumpPrim.port_a) annotation (Line(points={{-74,71},{
+          -70,71},{-70,86},{-64,86}},
+                                  color={0,127,255}));
   connect(exSecOut.port_b, pumpSec.port_a)
     annotation (Line(points={{54,82},{54,82},{60,82}}, color={0,127,255}));
   connect(exSecIn.port_a, pipeSec.port_b)
     annotation (Line(points={{52,54},{58,54},{58,54.5}}, color={0,127,255}));
-  connect(exSecIn.port_b, bufferStorageHeatingcoils.port_a_consumer)
-    annotation (Line(points={{32,54},{28,54},{28,46},{12,46},{12,54}}, color={0,
-          127,255}));
   connect(pipeSec.port_a, consumer.ports[1]) annotation (Line(points={{74,54.5},
-          {80,54.5},{80,68},{86,68}}, color={0,127,255}));
-  connect(pumpSec.port_b, consumer.ports[2]) annotation (Line(points={{80,82},{82,
-          82},{82,72},{86,72}}, color={0,127,255}));
+          {80,54.5},{80,69},{86,69}}, color={0,127,255}));
+  connect(pumpSec.port_b, consumer.ports[2]) annotation (Line(points={{80,82},{
+          82,82},{82,71},{86,71}},
+                                color={0,127,255}));
   connect(consumerHeatFlow.Q_flow, gain.y)
     annotation (Line(points={{48,24},{40.6,24}}, color={0,0,127}));
   connect(pulse.y, gain.u) annotation (Line(points={{9,-4},{20,-4},{20,24},{26.8,
@@ -308,32 +316,33 @@ equation
   connect(expansionVesselPrim.ports[1], pumpPrim.port_a)
     annotation (Line(points={{-70,90},{-70,86},{-64,86}}, color={0,127,255}));
   connect(exPrimIn.exergyFlow, calcExergyDestructionLoss_1.u[1]) annotation (
-      Line(points={{-26,97},{-26,100},{100,100},{100,-8},{50,-8},{50,-31.7143},
-          {58,-31.7143}},color={0,0,127}));
+      Line(points={{-26,97},{-26,100},{100,100},{100,-8},{50,-8},{50,-30.8571},
+          {58,-30.8571}},color={0,0,127}));
   connect(exSecIn.exergyFlow, calcExergyDestructionLoss_1.u[2]) annotation (
       Line(points={{42,65},{80,65},{80,40},{100,40},{100,-8},{50,-8},{50,
-          -31.1429},{58,-31.1429}},
+          -30.5714},{58,-30.5714}},
                           color={0,0,127}));
   connect(exPrimOut.exergyFlow, calcExergyDestructionLoss_1.u[3]) annotation (
-      Line(points={{-24,68},{-8,68},{-8,10},{50,10},{50,-30.5714},{58,-30.5714}},
+      Line(points={{-24,68},{-8,68},{-8,10},{50,10},{50,-30.2857},{58,-30.2857}},
         color={0,0,127}));
   connect(exSecOut.exergyFlow, calcExergyDestructionLoss_1.u[4]) annotation (
       Line(points={{44,93},{44,93},{44,102},{44,100},{100,100},{100,-46},{50,-46},
           {50,-30},{58,-30}}, color={0,0,127}));
   connect(exergyStorageMeterMedium.exergyChangeRate,
     calcExergyDestructionLoss_1.u[5]) annotation (Line(points={{-23.4,-22.2},{
-          24,-22.2},{24,-29.4286},{58,-29.4286}},
+          24,-22.2},{24,-29.7143},{58,-29.7143}},
                                                color={0,0,127}));
   connect(exHeatPrim.exergyFlow, calcExergyDestructionLoss_2.u[1]) annotation (
-      Line(points={{-68,4},{-68,-6},{-18,-6},{-18,-48},{42,-48},{42,-71.6},{58,-71.6}},
+      Line(points={{-68,4},{-68,-6},{-18,-6},{-18,-48},{42,-48},{42,-70.8},{58,
+          -70.8}},
         color={0,0,127}));
   connect(exergyStorageMeterMedium.exergyChangeRate,
     calcExergyDestructionLoss_2.u[3]) annotation (Line(points={{-23.4,-22.2},{24,
           -22.2},{24,-70},{58,-70}}, color={0,0,127}));
   connect(exHeatSec.exergyFlow, gain1.u)
     annotation (Line(points={{84,4},{84,-4},{73.2,-4}}, color={0,0,127}));
-  connect(gain1.y, calcExergyDestructionLoss_2.u[2]) annotation (Line(points={{59.4,
-          -4},{42,-4},{42,-70.8},{58,-70.8}}, color={0,0,127}));
+  connect(gain1.y, calcExergyDestructionLoss_2.u[2]) annotation (Line(points={{59.4,-4},
+          {42,-4},{42,-70.4},{58,-70.4}},     color={0,0,127}));
   connect(p_ref.y, exergyStorageMeterConsumer.p_ref) annotation (Line(points={{
           -79,-50},{-76,-50},{-76,-46},{-50,-46}}, color={85,85,255}));
   connect(p_ref.y, exergyStorageMeterConsumer.p) annotation (Line(points={{-79,
@@ -347,7 +356,7 @@ equation
           -79,-10},{-72,-10},{-72,-39},{-50,-39}}, color={255,0,0}));
   connect(exergyStorageMeterConsumer.exergyChangeRate,
     calcExergyDestructionLoss_2.u[4]) annotation (Line(points={{-29.4,-52.2},{
-          38,-52.2},{38,-69.2},{58,-69.2}}, color={0,0,127}));
+          38,-52.2},{38,-69.6},{58,-69.6}}, color={0,0,127}));
   connect(X_ref.y, exergyStorageMeterHeater.X_ref) annotation (Line(points={{-79,
           -90},{-70,-90},{-70,-91},{-42,-91}}, color={0,127,0}));
   connect(X_ref.y, exergyStorageMeterHeater.X) annotation (Line(points={{-79,-90},
@@ -362,26 +371,40 @@ equation
           -10},{-72,-10},{-72,-77},{-42,-77}}, color={255,0,0}));
   connect(exergyStorageMeterHeater.exergyChangeRate,
     calcExergyDestructionLoss_2.u[5]) annotation (Line(points={{-21.4,-90.2},{
-          38,-90.2},{38,-68.4},{58,-68.4}}, color={0,0,127}));
+          38,-90.2},{38,-69.2},{58,-69.2}}, color={0,0,127}));
   connect(exergyStorageMeterConsumer.exergyChangeRate,
     calcExergyDestructionLoss_1.u[6]) annotation (Line(points={{-29.4,-52.2},{
-          38,-52.2},{38,-32},{38,-28.8571},{58,-28.8571}}, color={0,0,127}));
+          38,-52.2},{38,-32},{38,-29.4286},{58,-29.4286}}, color={0,0,127}));
   connect(exergyStorageMeterHeater.exergyChangeRate,
     calcExergyDestructionLoss_1.u[7]) annotation (Line(points={{-21.4,-90.2},{
-          38,-90.2},{38,-28.2857},{58,-28.2857}}, color={0,0,127}));
+          38,-90.2},{38,-29.1429},{58,-29.1429}}, color={0,0,127}));
   connect(heaterTemperature.port, heater.heatPort)
     annotation (Line(points={{-80,48},{-84,48},{-84,60}}, color={191,0,0}));
   connect(heaterTemperature.T, exergyStorageMeterHeater.T[1]) annotation (Line(
-        points={{-68,48},{-62,48},{-62,34},{-100,34},{-100,-70},{-16,-70},{-16,
-          -98},{-32,-98},{-32,-94}}, color={0,0,127}));
+        points={{-67.4,48},{-62,48},{-62,34},{-100,34},{-100,-70},{-16,-70},{
+          -16,-98},{-32,-98},{-32,-94}},
+                                     color={0,0,127}));
   connect(consumerTemperature.port, consumer.heatPort) annotation (Line(points=
           {{76,42},{88,42},{96,42},{96,60}}, color={191,0,0}));
   connect(consumerTemperature.T, exergyStorageMeterConsumer.T[1]) annotation (
-      Line(points={{64,42},{60,42},{60,36},{22,36},{22,-62},{-40,-62},{-40,-56}},
+      Line(points={{63.4,42},{60,42},{60,36},{22,36},{22,-62},{-40,-62},{-40,
+          -56}},
         color={0,0,127}));
+  connect(exPrimIn.port_b, bufferStorageHeatingcoils.portHC1In) annotation (
+      Line(points={{-16,86},{-10,86},{-10,80.69},{-2.35,80.69}}, color={0,127,255}));
+  connect(bufferStorageHeatingcoils.portHC1Out, exPrimOut.port_a) annotation (
+      Line(points={{-2.175,75.42},{-2.175,65.71},{-14,65.71},{-14,57}}, color={0,
+          127,255}));
+  connect(exSecIn.port_b, bufferStorageHeatingcoils.fluidportBottom2)
+    annotation (Line(points={{32,54},{24,54},{24,53.83},{16.025,53.83}}, color={
+          0,127,255}));
+  connect(bufferStorageHeatingcoils.fluidportTop2, exSecOut.port_a) annotation (
+     Line(points={{16.375,88.17},{16.375,100},{32,100},{32,82},{34,82}}, color={
+          0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=7200, Interval=10),
+    experiment(Tolerance=1e-6, StopTime=7200, Interval=10),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>

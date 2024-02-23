@@ -1,0 +1,27 @@
+removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220", startTime=0, stopTime=31539600, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="Case220");
+createPlot(id=1, subPlot=1,
+ y = {"checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit", "AnnualHeatingLoad", "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+ createPlot(id=1, subPlot=2, 
+ y = {"checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit", "AnnualCoolingLoad", "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+ createPlot(id=1, subPlot=3, 
+ y = {"checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied", "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=2, subPlot=1,
+ y = {"Room.thermRoom.T", "Room.starRoom.T"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=2, subPlot=2, 
+ y = {"TransmittedSolarRadiation_room"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

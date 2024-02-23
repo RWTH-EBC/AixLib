@@ -1,14 +1,15 @@
 within AixLib.Airflow.Multizone;
 model MediumColumnDynamic
   "Vertical shaft with no friction and storage of heat and mass"
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
+    final massDynamics=energyDynamics);
 
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
 
-  parameter Modelica.SIunits.Length h(min=0) = 3 "Height of shaft";
+  parameter Modelica.Units.SI.Length h(min=0) = 3 "Height of shaft";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(
     redeclare final package Medium = Medium,
@@ -22,7 +23,7 @@ model MediumColumnDynamic
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{10,-110},{-10,-90}}), iconTransformation(extent={{10,-110},{-10,-90}})));
 
-  parameter Modelica.SIunits.Volume V "Volume in medium shaft";
+  parameter Modelica.Units.SI.Volume V "Volume in medium shaft";
 
   // Heat transfer through boundary
   parameter Boolean use_HeatTransfer = false
@@ -64,7 +65,8 @@ model MediumColumnDynamic
 
   replaceable model HeatTransfer =
       Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
-    constrainedby Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.PartialVesselHeatTransfer
+    constrainedby
+    Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.PartialVesselHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Assumptions", group="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if use_HeatTransfer
@@ -95,15 +97,15 @@ equation
           points={{0,100},{0,-100},{0,-98}}),
         Text(
           extent={{24,-78},{106,-100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Bottom"),
         Text(
           extent={{32,104},{98,70}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Top"),
         Text(
           extent={{42,26},{94,-10}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid,
           textString="h=%h"),
@@ -152,69 +154,76 @@ equation
           color={255,0,0})}),
 defaultComponentName="col",
 Documentation(info="<html>
-<p>
-This model contains a completely mixed fluid volume and
-models that take into account the pressure difference of
-a medium column that is at the same temperature as the
-fluid volume. It can be used to model the pressure difference
-caused by a stack effect.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-Set the parameter <code>use_HeatTransfer=true</code> to expose
-a <code>heatPort</code>. This <code>heatPort</code> can be used
-to add or subtract heat from the volume. This allows, for example,
-to use this model in conjunction with a model for heat transfer through
-walls to model a solar chimney that stores heat.
-</p>
-<h4>Dynamics</h4>
-<p>
-For a steady-state model, use
-<a href=\"modelica://AixLib.Airflow.Multizone.MediumColumn\">
-AixLib.Airflow.Multizone.MediumColumn</a> instead of this model.
-</p>
-<p>In this model, the parameter <code>h</code> must always be positive, and the port <code>port_a</code> must be
-at the top of the column.
-</p>
-</html>",
+ <p>
+ This model contains a completely mixed fluid volume and
+ models that take into account the pressure difference of
+ a medium column that is at the same temperature as the
+ fluid volume. It can be used to model the pressure difference
+ caused by a stack effect.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ Set the parameter <code>use_HeatTransfer=true</code> to expose
+ a <code>heatPort</code>. This <code>heatPort</code> can be used
+ to add or subtract heat from the volume. This allows, for example,
+ to use this model in conjunction with a model for heat transfer through
+ walls to model a solar chimney that stores heat.
+ </p>
+ <h4>Dynamics</h4>
+ <p>
+ For a steady-state model, use
+ <a href=\"modelica://AixLib.Airflow.Multizone.MediumColumn\">
+ AixLib.Airflow.Multizone.MediumColumn</a> instead of this model.
+ </p>
+ <p>In this model, the parameter <code>h</code> must always be positive, and the port <code>port_a</code> must be
+ at the top of the column.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-January 8, 2019, by Michael Wetter:<br/>
-Changed public parameter <code>m_flow_nominal</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/970\">#970</a>.
-</li>
-<li>
-May 1, 2018, by Filip Jorissen:<br/>
-Removed declaration of <code>allowFlowReversal</code>
-and changed default density computation such
-that it assumes a constant pressure.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/877\">#877</a>.
-</li>
-<li>
-October 6, 2014 by Michael Wetter:<br/>
-Removed assignment of <code>port_?.p.nominal</code> to avoid a warning
-in OpenModelica because
-alias sets have different nominal values.
-</li>
-<li>
-July 31, 2011 by Michael Wetter:<br/>
-Changed model to use new base class
-<a href=\"modelica://AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">
-AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
-</li>
-<li>May 25, 2011 by Michael Wetter:<br/>
-Added <code>m_flow_nominal</code>, which is used if component is configured as steady-state.
-</li>
-<li>July 28, 2010 by Michael Wetter:<br/>
-Released first version.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ January 8, 2019, by Michael Wetter:<br/>
+ Changed public parameter <code>m_flow_nominal</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/970\">#970</a>.
+ </li>
+ <li>
+ May 1, 2018, by Filip Jorissen:<br/>
+ Removed declaration of <code>allowFlowReversal</code>
+ and changed default density computation such
+ that it assumes a constant pressure.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/877\">#877</a>.
+ </li>
+ <li>
+ October 6, 2014 by Michael Wetter:<br/>
+ Removed assignment of <code>port_?.p.nominal</code> to avoid a warning
+ in OpenModelica because
+ alias sets have different nominal values.
+ </li>
+ <li>
+ July 31, 2011 by Michael Wetter:<br/>
+ Changed model to use new base class
+ <a href=\"modelica://AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">
+ AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+ </li>
+ <li>May 25, 2011 by Michael Wetter:<br/>
+ Added <code>m_flow_nominal</code>, which is used if component is configured as steady-state.
+ </li>
+ <li>July 28, 2010 by Michael Wetter:<br/>
+ Released first version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MediumColumnDynamic;

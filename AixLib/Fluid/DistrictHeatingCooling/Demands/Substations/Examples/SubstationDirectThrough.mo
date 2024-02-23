@@ -22,13 +22,13 @@ model SubstationDirectThrough
         origin={90,0})));
   Modelica.Blocks.Sources.Sine m_flow_set(
     amplitude=2,
-    freqHz=0.01,
+    f=0.01,
     offset=2) "Varying the example's mass flow rate"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
   Modelica.Blocks.Sources.Sine T_set(
     amplitude=10,
     offset=273.15 + 60,
-    freqHz=0.01) "Varying the example's tempertare"
+    f=0.01) "Varying the example's tempertare"
     annotation (Placement(transformation(extent={{-98,-40},{-78,-20}})));
   Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
     "Mass flow rate sensor"
@@ -47,8 +47,8 @@ model SubstationDirectThrough
 equation
   connect(source.ports[1], substationDirectThrough.port_a)
     annotation (Line(points={{-40,0},{-30,0}}, color={0,127,255}));
-  connect(m_flow_set.y, source.m_flow_in) annotation (Line(points={{-79,30},{
-          -70,30},{-70,10},{-60,8}}, color={0,0,127}));
+  connect(m_flow_set.y, source.m_flow_in) annotation (Line(points={{-79,30},{-70,
+          30},{-70,8},{-62,8}},      color={0,0,127}));
   connect(T_set.y, source.T_in) annotation (Line(points={{-77,-30},{-70,-30},{
           -70,2},{-62,4}}, color={0,0,127}));
   connect(substationDirectThrough.port_b, senMasFlo.port_a)

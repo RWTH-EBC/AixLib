@@ -2,25 +2,28 @@ within AixLib.Fluid.Storage.BaseClasses;
 model HeatTransferLambdaEffSmooth "Heat transfer with buoyancy and smoothing"
   extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
 
-  Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
+  Modelica.Units.SI.HeatFlowRate[n - 1] qFlow
+    "Heat flow rate from segment i+1 to i";
 
 protected
   parameter Real kappa=0.41 "Karman constant";
-  parameter Modelica.SIunits.Length height=data.hTank/n
+  parameter Modelica.Units.SI.Length height=data.hTank/n
     "Height of fluid layers";
   parameter Real beta=350e-6 "Thermal expansion coefficient in 1/K";
-  parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
+  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
-   parameter Modelica.SIunits.Density rho=1000
+  parameter Modelica.Units.SI.Density rho=1000
     "Density, used to compute fluid mass";
-   parameter Modelica.SIunits.SpecificHeatCapacity c_p=4180
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_p=4180
     "Specific heat capacity";
                               //
- Modelica.SIunits.TemperatureDifference dT[n-1]
+  Modelica.Units.SI.TemperatureDifference dT[n - 1]
     "Temperature difference between adjoining volumes";
-  Modelica.SIunits.ThermalConductance[n-1] k "Effective heat transfer coefficient";
-  Modelica.SIunits.ThermalConductivity[ n-1] lambda "Effective heat conductivity";
-  parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
+  Modelica.Units.SI.ThermalConductance[n - 1] k
+    "Effective heat transfer coefficient";
+  Modelica.Units.SI.ThermalConductivity[n - 1] lambda
+    "Effective heat conductivity";
+  parameter Modelica.Units.SI.ThermalConductivity lambdaWater=0.64
     "Thermal conductivity of water";
 equation
 

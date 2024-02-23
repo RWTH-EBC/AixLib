@@ -9,15 +9,15 @@ model TwoPhaseSeparator
    Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
-  parameter Modelica.SIunits.AbsolutePressure pInl=
-    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+5)))
+  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
+      Medium.setBubbleState(Medium.setSat_T(TInl + 5)))
     "Actual pressure at inlet conditions";
-  parameter Modelica.SIunits.Temperature TInl = 303.15
+  parameter Modelica.Units.SI.Temperature TInl=303.15
     "Actual temperature at inlet conditions";
-  parameter Modelica.SIunits.AbsolutePressure pOut=
-    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
+  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
+      Medium.setDewState(Medium.setSat_T(TOut)))
     "Actual set point of the compressor's outlet pressure";
-  parameter Modelica.SIunits.Temperature TOut = 293.15
+  parameter Modelica.Units.SI.Temperature TOut=293.15
     "Actual temperature at outlet conditions";
 
   // Definition of models

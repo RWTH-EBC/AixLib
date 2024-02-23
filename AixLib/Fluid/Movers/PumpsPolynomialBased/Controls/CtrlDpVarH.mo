@@ -1,25 +1,24 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
 model CtrlDpVarH "'dp variable' for PumpHeadControlled"
   extends BaseClasses.PumpController;
 
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nstart=
-     pumpParam.nMin + (pumpParam.nMax - pumpParam.nMin)*0.8
-    "pump speed at start of simulation";
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm Nstart=pumpParam.nMin + (
+      pumpParam.nMax - pumpParam.nMin)*0.8 "pump speed at start of simulation";
   parameter Real Qnom(
     quantity="VolumeFlowRate",
     unit="m3/h",
     displayUnit="m3/h") = 0.5*max(pumpParam.maxMinSpeedCurves[:,1]) "Nominal volume flow rate in m³/h";
-  parameter Modelica.SIunits.Height Hnom=
+  parameter Modelica.Units.SI.Height Hnom=
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
       Qnom,
       Nstart) "Nominal pump head in m (water)";
-  parameter Modelica.SIunits.Height H0 = 0.5 * Hnom "pump head when Q == 0 m3/h";
+  parameter Modelica.Units.SI.Height H0=0.5*Hnom "pump head when Q == 0 m3/h";
 
   parameter Real k(unit="1") = 50 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small) = 0.01
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 0.01
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0) = 0.001
+  parameter Modelica.Units.SI.Time Td(min=0) = 0.001
     "Time constant of Derivative block";
 
   Modelica.Blocks.Sources.RealExpression headControl(y=(Hnom - H0)/Qnom*Q.y +

@@ -27,18 +27,19 @@ equation
     annotation (Line(points={{-39,30},{-4,30},{-4,12}},   color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-Simple validation model for the flow machine interface model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 19, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Simple validation model for the flow machine interface model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 19, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/BaseClasses/Validation/FlowMachineInterface.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowMachineInterface;

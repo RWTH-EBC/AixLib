@@ -1,17 +1,17 @@
 within AixLib.Airflow.Multizone.BaseClasses.Examples;
 model PowerLawFixedM "Test model for power law function"
   extends Modelica.Icons.Example;
-  parameter Real k = 2/10^m "Flow coefficient, k = V_flow/ dp^m";
+  parameter Real C = 2/10^m "Flow coefficient, C = V_flow/ dp^m";
 
   constant Real m(min=0.5, max=1) = 0.5
     "Flow exponent, m=0.5 for turbulent, m=1 for laminar";
-  parameter Modelica.SIunits.PressureDifference dp_turbulent(min=0)=5
+  parameter Modelica.Units.SI.PressureDifference dp_turbulent(min=0) = 5
     "Pressure difference where regularization starts";
 
-  Modelica.SIunits.PressureDifference dp "Pressure difference";
-  Modelica.SIunits.VolumeFlowRate V_flow
+  Modelica.Units.SI.PressureDifference dp "Pressure difference";
+  Modelica.Units.SI.VolumeFlowRate V_flow
     "Volume flow rate computed with model powerLaw";
-  Modelica.SIunits.VolumeFlowRate VFixed_flow
+  Modelica.Units.SI.VolumeFlowRate VFixed_flow
     "Volume flow rate computed with model powerLawFixed";
 
   constant Real gamma(min=1) = 1.5
@@ -29,11 +29,11 @@ equation
   dp = 10*(-1+2*time);
   V_flow = AixLib.Airflow.Multizone.BaseClasses.powerLaw(
     dp=dp,
-    k=k,
+    C=C,
     m=m,
     dp_turbulent=dp_turbulent);
   VFixed_flow = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
-    k=k,
+    C=C,
     dp=dp,
     m=m,
     a=a,
@@ -46,23 +46,24 @@ equation
 experiment(Tolerance=1e-6, StopTime=1.0),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/BaseClasses/Examples/PowerLawFixedM.mos"
         "Simulate and plot"), Documentation(info="<html>
-<p>
-This examples demonstrates the
-<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLaw\">
-Buildings.Airflow.Multizone.BaseClasses.powerLaw</a>
-and
-<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
-functions.
-They need to return the same function value.
-This is verified by an <code>assert</code> statement.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 12, 2011, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This examples demonstrates the
+ <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLaw\">
+ Buildings.Airflow.Multizone.BaseClasses.powerLaw</a>
+ and
+ <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
+ Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
+ functions.
+ They need to return the same function value.
+ This is verified by an <code>assert</code> statement.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 12, 2011, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerLawFixedM;

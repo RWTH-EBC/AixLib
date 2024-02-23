@@ -21,7 +21,7 @@ model SubstationValveControlledHX
         origin={44,70})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=1000,
-    freqHz=1/3600,
+    f=1/3600,
     offset=2000,
     startTime=0)
     annotation (Placement(transformation(extent={{-4,-40},{16,-20}})));
@@ -43,7 +43,7 @@ model SubstationValveControlledHX
     startTime=0,
     amplitude=20000,
     offset=450000,
-    freqHz=1/1800)
+    f=1/1800)
     annotation (Placement(transformation(extent={{-98,-20},{-78,0}})));
 equation
   connect(ramp.y, Flow.T_in)

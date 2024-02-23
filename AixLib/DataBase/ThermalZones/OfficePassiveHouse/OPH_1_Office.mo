@@ -81,12 +81,15 @@ record OPH_1_Office "Office zone of office building"
     HeaterOn=true,
     hCool=0,
     lCool=-1,
+    heaLoadFacOut=0,
+    heaLoadFacGrd=0,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
+
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.

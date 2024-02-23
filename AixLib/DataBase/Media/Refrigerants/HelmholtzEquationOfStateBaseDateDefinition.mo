@@ -1,4 +1,4 @@
-within AixLib.DataBase.Media.Refrigerants;
+﻿within AixLib.DataBase.Media.Refrigerants;
 record HelmholtzEquationOfStateBaseDateDefinition
   "Base data definition for fitting coefficients of the Helmholtz EoS"
   extends Modelica.Icons.Record;

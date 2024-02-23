@@ -1,4 +1,4 @@
-within AixLib.DataBase.Chiller;
+﻿within AixLib.DataBase.Chiller;
 record ChillerBaseDataDefinition "Basic chiller data"
     extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(tableQdot_con = tableQdot_eva);
 

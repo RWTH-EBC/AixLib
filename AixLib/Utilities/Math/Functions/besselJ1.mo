@@ -60,22 +60,23 @@ algorithm
 
 annotation (
 Documentation(info="<html>
-<p>
-Evaluates the Bessel function of the first kind of order 1 (<i>J<sub>1</sub></i>), based
-on the implementations of Press et al. (1986).
-</p>
-<h4>References</h4>
-<p>
-Press, William H., Brian P. Flannery, Saul A. Teukolsky, and William T.
-Vetterling. Numerical Recipes - The Art of Scientific Computing. Cambridge
-University Press (1986): 988 p.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 21, 2018 by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Evaluates the Bessel function of the first kind of order 1 (<i>J<sub>1</sub></i>), based
+ on the implementations of Press et al. (1986).
+ </p>
+ <h4>References</h4>
+ <p>
+ Press, William H., Brian P. Flannery, Saul A. Teukolsky, and William T.
+ Vetterling. Numerical Recipes - The Art of Scientific Computing. Cambridge
+ University Press (1986): 988 p.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 21, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end besselJ1;

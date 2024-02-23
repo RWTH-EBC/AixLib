@@ -3,11 +3,10 @@ model R410A_dSpecificVolumeVap_pT
   "Validation of the derivatives of the specific volume with regards to p and T"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.AbsolutePressure p = 400e3
+  parameter Modelica.Units.SI.AbsolutePressure p=400e3
     "Pressure of refrigerant vapor";
 
-  parameter Modelica.SIunits.Temperature T = 273.15
-    "Temperature of refrigerant";
+  parameter Modelica.Units.SI.Temperature T=273.15 "Temperature of refrigerant";
 
   parameter Real dp(final unit="Pa") = 1.0
     "Delta of pressure of refrigerant vapor";
@@ -43,14 +42,14 @@ protected
   Real dv_p_num(
     final unit="m3/(kg)")
     "Numerical delta of specific volume of refrigerant with regards to
-    pressure";
+     pressure";
 
   Real dv_T_num(
     final unit="m3/(kg)")
     "Numerical delta of specific volume of refrigerant with regards to
-    temperature";
+     temperature";
 
-  constant Modelica.SIunits.Time oneSec = 1.0
+  constant Modelica.Units.SI.Time oneSec=1.0
     "Unit time variable for unit conversion of time derivatives";
 
 equation
@@ -81,20 +80,21 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=100),
     Documentation(info="<html>
-<p>
-Validation case for evaluation of derivatives of the Martin-Hou equation of
-state with regards to pressure and temperature.
-</p>
-<p>
-The analytical implementation of derivatives is compared to a numerical
-evaluation of the derivatives.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 25, 2017, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Validation case for evaluation of derivatives of the Martin-Hou equation of
+ state with regards to pressure and temperature.
+ </p>
+ <p>
+ The analytical implementation of derivatives is compared to a numerical
+ evaluation of the derivatives.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 25, 2017, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end R410A_dSpecificVolumeVap_pT;

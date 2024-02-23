@@ -1,4 +1,4 @@
-within AixLib.DataBase;
+﻿within AixLib.DataBase;
 package WindowsDoors "Windows and doors definition package"
   extends Modelica.Icons.Package;
 

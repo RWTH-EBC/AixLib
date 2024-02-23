@@ -1,24 +1,22 @@
-within AixLib.Fluid.Movers.Compressors.BaseClasses;
+﻿within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"
 
   // Definition of parameters describing the geometry
   //
-  parameter Modelica.SIunits.Volume
-    VDis(min=0) = 13e-6
+  parameter Modelica.Units.SI.Volume VDis(min=0) = 13e-6
     "Displacement volume of the compressor"
-    annotation(Dialog(tab="General",group="Geometry"));
-  parameter Modelica.SIunits.Efficiency
-    epsRef(min=0, max=1, nominal=0.05) = 0.04
-    "Ratio of the real and the ideal displacement volume"
-    annotation(Dialog(tab="General",group="Geometry"));
+    annotation (Dialog(tab="General", group="Geometry"));
+  parameter Modelica.Units.SI.Efficiency epsRef(
+    min=0,
+    max=1,
+    nominal=0.05) = 0.04 "Ratio of the real and the ideal displacement volume"
+    annotation (Dialog(tab="General", group="Geometry"));
 
-  parameter Modelica.SIunits.Frequency
-    rotSpeMax(min=0) = 120
-    "Maximal rotational speed executable by the compressor"
-    annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
-               HideResult=true);
+  parameter Modelica.Units.SI.Frequency rotSpeMax(min=0) = 120
+    "Maximal rotational speed executable by the compressor" annotation (Dialog(
+        tab="General", group="Compressor's characterisitcs"), HideResult=true);
   parameter Real
     piPreMax(min=1, unit="1") = 15
     "Maximal pressure ratio executable by the compressor"
@@ -28,10 +26,9 @@ partial model PartialCompression
   parameter Boolean useInpFil = true
     "= true, if transient behaviour of rotational speed is computed"
     annotation(Dialog(group="Transient behaviour"));
-  parameter Modelica.SIunits.Time risTim = 0.5
+  parameter Modelica.Units.SI.Time risTim=0.5
     "Time until rotational speed reaches 99.6 % of its set value"
-    annotation(Dialog(enable = useInpFil,
-               group="Transient behaviour"));
+    annotation (Dialog(enable=useInpFil, group="Transient behaviour"));
 
   // Definition of models describing efficiencies
   //
@@ -89,10 +86,9 @@ partial model PartialCompression
 
   // Definition of parameters describing nominal conditions
   //
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"),
-               HideResult=true);
+    annotation (Dialog(tab="Advanced"), HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
@@ -107,30 +103,28 @@ partial model PartialCompression
 
   // Definition of parameters used for initialisation
   //
-  parameter Modelica.SIunits.Frequency rotSpe0 = 60
-    "Compressor's rotational spped at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.AbsolutePressure pInl0 = 3e5
-    "Pressure at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.Temperature TInl0 = 283.15
-    "Temperature at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.Density dInl0=
-    Medium.density(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Density at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
-  parameter Modelica.SIunits.SpecificEnthalpy hInl0=
-    Medium.specificEnthalpy(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Specific enthalpy at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
+  parameter Modelica.Units.SI.Frequency rotSpe0=60
+    "Compressor's rotational spped at initialisation" annotation (Dialog(tab=
+          "Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.AbsolutePressure pInl0=3e5
+    "Pressure at compressor's inlet at initialisation" annotation (Dialog(tab=
+          "Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.Temperature TInl0=283.15
+    "Temperature at compressor's inlet at initialisation" annotation (Dialog(
+        tab="Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.Density dInl0=Medium.density(Medium.setState_pTX(
+      p=pInl0, T=TInl0)) "Density at compressor's inlet at initialisation"
+    annotation (Dialog(
+      tab="Advanced",
+      group="Initialisation",
+      enable=false), HideResult=true);
+  parameter Modelica.Units.SI.SpecificEnthalpy hInl0=Medium.specificEnthalpy(
+      Medium.setState_pTX(p=pInl0, T=TInl0))
+    "Specific enthalpy at compressor's inlet at initialisation" annotation (
+      Dialog(
+      tab="Advanced",
+      group="Initialisation",
+      enable=false), HideResult=true);
 
   // Definition of connectors and submodels
   //
@@ -208,17 +202,14 @@ partial model PartialCompression
     Medium.ThermodynamicState staOut
       "Thermodynamic state at outlet conditions";
 
-    Modelica.SIunits.SpecificEntropy sInl
+    Modelica.Units.SI.SpecificEntropy sInl
       "Specific entropy at inlet conditions";
-    Modelica.SIunits.SpecificEntropy sOut
+    Modelica.Units.SI.SpecificEntropy sOut
       "Specific entropy at outlet conditions";
 
-    Modelica.SIunits.Efficiency etaEng
-      "Overall engine efficiency";
-    Modelica.SIunits.Efficiency etaVol
-      "Overall volumetric efficiency";
-    Modelica.SIunits.Efficiency etaIse
-      "Overall isentropic efficiency";
+    Modelica.Units.SI.Efficiency etaEng "Overall engine efficiency";
+    Modelica.Units.SI.Efficiency etaVol "Overall volumetric efficiency";
+    Modelica.Units.SI.Efficiency etaIse "Overall isentropic efficiency";
   end CompressorStates;
 
   record CompressorQualities
@@ -237,14 +228,10 @@ partial model PartialCompression
     Real quaOut(min=0, max=1, unit="1")
       "Vapour quality at outlet conditions";
 
-    Modelica.SIunits.SpecificEnthalpy hLiqInl
-      "Liquid enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hVapInl
-      "Vapour enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hLiqOut
-      "Liquid enthalpy at outlet";
-    Modelica.SIunits.SpecificEnthalpy hVapOut
-      "Vapour enthalpy at outlet";
+    Modelica.Units.SI.SpecificEnthalpy hLiqInl "Liquid enthalpy at inlet";
+    Modelica.Units.SI.SpecificEnthalpy hVapInl "Vapour enthalpy at inlet";
+    Modelica.Units.SI.SpecificEnthalpy hLiqOut "Liquid enthalpy at outlet";
+    Modelica.Units.SI.SpecificEnthalpy hVapOut "Vapour enthalpy at outlet";
   end CompressorQualities;
 
   CompressorStates comSta(
@@ -281,18 +268,18 @@ partial model PartialCompression
              hOut<Medium.dewEnthalpy(Medium.setSat_p(pOut))) then
              (hOut - Medium.bubbleEnthalpy(Medium.setSat_p(pOut)))/
              max(Medium.dewEnthalpy(Medium.setSat_p(pOut)) -
-             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0)) if
-    show_qua
+             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0))
+ if show_qua
     "Record containing compressor's vapour qualities";
 
   // Definition of variables
   //
-  Modelica.SIunits.Power PEle
+  Modelica.Units.SI.Power PEle
     "Compressor's current electrical power consumption";
-  Modelica.SIunits.Power Q_flow_ref
+  Modelica.Units.SI.Power Q_flow_ref
     "Current power transferred to reffrigerant";
 
-  Modelica.SIunits.Frequency rotSpe(min=0, max=rotSpeMax)
+  Modelica.Units.SI.Frequency rotSpe(min=0, max=rotSpeMax)
     "Compressor's current rotational speed";
   Real piPre(min=0, max=piPreMax, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
@@ -303,23 +290,22 @@ protected
   Medium.ThermodynamicState staOut
     "Thermodynamic state at outlet conditions";
 
-  Modelica.SIunits.AbsolutePressure pInl(start=pInl0)
+  Modelica.Units.SI.AbsolutePressure pInl(start=pInl0)
     "Pressure at inlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hInl(start=hInl0)
+  Modelica.Units.SI.SpecificEnthalpy hInl(start=hInl0)
     "Specific enthalpy at inlet conditions";
-  Modelica.SIunits.Density dInl
-    "Density at inlet conditions";
+  Modelica.Units.SI.Density dInl "Density at inlet conditions";
 
-  Modelica.SIunits.AbsolutePressure pOut(start=pInl0-dp_start)
+  Modelica.Units.SI.AbsolutePressure pOut(start=pInl0 - dp_start)
     "Pressure at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hOut
+  Modelica.Units.SI.SpecificEnthalpy hOut
     "Specific enthalpy at outlet conditions";
 
-  Modelica.SIunits.SpecificEnthalpy hOutIse
+  Modelica.Units.SI.SpecificEnthalpy hOutIse
     "Specific isentropic enthalpy at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy dh
+  Modelica.Units.SI.SpecificEnthalpy dh
     "Specific enthalpy difference: hOut - hInl";
-  Modelica.SIunits.SpecificEnthalpy dhIse
+  Modelica.Units.SI.SpecificEnthalpy dhIse
     "Specific isentropic enthalpy difference: hOutIse - hInl";
 
 equation
@@ -458,129 +444,137 @@ equation
   modelling approaches of these efficiencies are shortly characterised
   below:<br/>
 </p>
-<table summary=\"Efficiencies\" border=\"1\" cellspacing=\"0\" cellpadding=
-\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Efficiency
-    </th>
-    <th>
-      Formula
-    </th>
-    <th>
-      Comment
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <b>Engine</b>
-    </td>
-    <td>
-      <code>η<sub>eng</sub> = Q̇<sub>ref</sub> / P<sub>el</sub></code>
-    </td>
-    <td>
-      Used for calculation of compressor's power consumption
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Isentropic</b>
-    </td>
-    <td>
-      <code>η<sub>ise</sub> = (h<sub>outIse</sub> - h<sub>inl</sub>) /
-      (h<sub>out</sub> - h<sub>inl</sub>)</code>
-    </td>
-    <td>
-      Used for calculation of thermodynamic change of state
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Volumetric</b>
-    </td>
-    <td>
-      <code>η<sub>vol</sub> = V̇<sub>ide</sub> /
-      V̇<sub>rea</sub></code>
-    </td>
-    <td>
-      Used for calculation of mass flow rate
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Efficiencies\" border=\"1\" cellspacing=\"0\" cellpadding= \"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Efficiency
+        </th>
+        <th>
+          Formula
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <b>Engine</b>
+        </td>
+        <td>
+          <code>η<sub>eng</sub> = Q̇<sub>ref</sub> /
+          P<sub>el</sub></code>
+        </td>
+        <td>
+          Used for calculation of compressor's power consumption
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Isentropic</b>
+        </td>
+        <td>
+          <code>η<sub>ise</sub> = (h<sub>outIse</sub> -
+          h<sub>inl</sub>) / (h<sub>out</sub> - h<sub>inl</sub>)</code>
+        </td>
+        <td>
+          Used for calculation of thermodynamic change of state
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Volumetric</b>
+        </td>
+        <td>
+          <code>η<sub>vol</sub> = V̇<sub>ide</sub> /
+          V̇<sub>rea</sub></code>
+        </td>
+        <td>
+          Used for calculation of mass flow rate
+        </td>
+      </tr>
+    </table>
+    <p>
+      These efficiency models are stored in <a href=
+      \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
+      AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>,
+      <a href=
+      \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
+      AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a>
+      and <a href=
+      \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
+      AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
+      Therefore, the calculation procedure of the efficiencies are
+      introduced as replaceable models and must be defined by the User.
+    </p>
+    <h4>
+      Transient behaviour
+    </h4>
+    <p>
+      The base model has a parameter <code>useInpFil</code> that is
+      used to model the compressors's transient behaviour while
+      changing rotational speed. Generally, this approach uses the same
+      modeling attempt as the stat-up and shut-down transients
+      introtuced for flow machines (see <a href=
+      \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
+      Therefore, just the parameter's affections are presented here:
+    </p>
+    <ol>
+      <li>If <code>useInpFil=false</code>, then the input signal <code>
+        opeSet.y</code> is equal to the compressor's rotational speed.
+        Thus, a step change in the input signal causes a step change in
+        the rotational speed.
+      </li>
+      <li>If <code>useInpFil=true</code>, which is the default, then
+      the rotational speed is equal to the output of a filter. This
+      filter is implemented as a 2nd order differential equation. Thus,
+      a step change in the compressor's input signal will cause a
+      gradual change in the rotational speed. The filter has a
+      parameter <code>risTim</code>, which by default is set to
+      <i>1</i> second. The rise time is the time required to reach <i>
+        99.6%</i> of the full rotational speed, or, if the compressor
+        is shut-down, to reach a rotational speed of <i>0.4%</i>.
+      </li>
+    </ol>
+    <h4>
+      References
+    </h4>
+    <p>
+      In the following, some general references are given for
+      information about modelling compressors. The modelling approach
+      presented here is alligned to the modelling approaches presented
+      in the literature:
+    </p>
+    <p>
+      W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): <a href=
+      \"http://dx.doi.org/10.1007/978-3-8348-9302-4\">Küttner
+      Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter,
+      Brennkraftmaschinen (in German)</a>. Publisher: <i>Vieweg +
+      Teubner</i>
+    </p>
+    <p>
+      H. Qiao, R. Radermacher and V. Aute (2010): <a href=
+      \"http://docs.lib.purdue.edu/iracc/1090\">A review for numerical
+      simulation of vapor compression systems</a>. In: <i>International
+      Refrigeration and Air Conditioning Conference</i>
+    </p>
+    <p>
+      P.C. Hanlon (2011): <a href=
+      \"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">
+      Compressor Handbook</a>. Publisher: <i>McGraw-Hill</i>
+    </p>
+    <p>
+      V. A. Cara Martin and R. Radermacher (2015): <a href=
+      \"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
+      AHRI Project 8013: A Study of Methods to Represent Compressor
+      Performance Data over an Operating Envelope Based on a Finite Set
+      of Test Data</a>. Publisher: <i>Air-Conditioning, Heating, and
+      Refrigeration Institute (AHRI)</i>
+    </p>
+  </caption>
 </table>
-<p>
-  These efficiency models are stored in <a href=
-  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>,
-  <a href=
-  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a>
-  and <a href=
-  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
-  Therefore, the calculation procedure of the efficiencies are
-  introduced as replaceable models and must be defined by the User.
-</p>
-<h4>
-  Transient behaviour
-</h4>
-<p>
-  The base model has a parameter <code>useInpFil</code> that is used to
-  model the compressors's transient behaviour while changing rotational
-  speed. Generally, this approach uses the same modeling attempt as the
-  stat-up and shut-down transients introtuced for flow machines (see
-  <a href=
-  \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
-  Therefore, just the parameter's affections are presented here:
-</p>
-<ol>
-  <li>If <code>useInpFil=false</code>, then the input signal
-  <code>opeSet.y</code> is equal to the compressor's rotational speed.
-  Thus, a step change in the input signal causes a step change in the
-  rotational speed.
-  </li>
-  <li>If <code>useInpFil=true</code>, which is the default, then the
-  rotational speed is equal to the output of a filter. This filter is
-  implemented as a 2nd order differential equation. Thus, a step change
-  in the compressor's input signal will cause a gradual change in the
-  rotational speed. The filter has a parameter <code>risTim</code>,
-  which by default is set to <i>1</i> second. The rise time is the time
-  required to reach <i>99.6%</i> of the full rotational speed, or, if
-  the compressor is shut-down, to reach a rotational speed of
-  <i>0.4%</i>.
-  </li>
-</ol>
-<h4>
-  References
-</h4>
-<p>
-  In the following, some general references are given for information
-  about modelling compressors. The modelling approach presented here is
-  alligned to the modelling approaches presented in the literature:
-</p>
-<p>
-  W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): <a href=
-  \"http://dx.doi.org/10.1007/978-3-8348-9302-4\">Küttner
-  Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
-  (in German)</a>. Publisher: <i>Vieweg + Teubner</i>
-</p>
-<p>
-  H. Qiao, R. Radermacher and V. Aute (2010): <a href=
-  \"http://docs.lib.purdue.edu/iracc/1090\">A review for numerical
-  simulation of vapor compression systems</a>. In: <i>International
-  Refrigeration and Air Conditioning Conference</i>
-</p>
-<p>
-  P.C. Hanlon (2011): <a href=
-  \"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">Compressor
-  Handbook</a>. Publisher: <i>McGraw-Hill</i>
-</p>
-<p>
-  V. A. Cara Martin and R. Radermacher (2015): <a href=
-  \"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
-  AHRI Project 8013: A Study of Methods to Represent Compressor
-  Performance Data over an Operating Envelope Based on a Finite Set of
-  Test Data</a>. Publisher: <i>Air-Conditioning, Heating, and
-  Refrigeration Institute (AHRI)</i>
-</p>
 </html>"));
 end PartialCompression;

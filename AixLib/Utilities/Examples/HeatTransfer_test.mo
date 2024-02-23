@@ -17,12 +17,14 @@ model HeatTransfer_test "Test routine for heat transfer models"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTrans(G = 16 * 1.5) annotation(Placement(transformation(extent = {{-10, -56}, {10, -36}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempOutside annotation(Placement(transformation(extent = {{-80, 0}, {-60, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempInside annotation(Placement(transformation(extent = {{80, 0}, {60, 20}})));
-  Modelica.Blocks.Sources.Sine sineWindSpeed(amplitude = 10, freqHz = 0.5) annotation(Placement(transformation(extent = {{-34, -24}, {-24, -14}})));
+  Modelica.Blocks.Sources.Sine sineWindSpeed(amplitude=10, f=0.5)
+    annotation (Placement(transformation(extent={{-34,-24},{-24,-14}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow[6] annotation(Placement(transformation(extent = {{76, 50}, {94, 68}})));
-  Modelica.Blocks.Sources.Sine     sine(
+  Modelica.Blocks.Sources.Sine sine(
     amplitude=15,
-    freqHz=1/3600/12,
-    offset=273.15 + 15)                                      annotation(Placement(transformation(extent = {{-100, -20}, {-86, -6}})));
+    f=1/3600/12,
+    offset=273.15 + 15)
+    annotation (Placement(transformation(extent={{-100,-20},{-86,-6}})));
   Modelica.Blocks.Sources.Constant constTempInside(k=273.15 + 20)
                                                             annotation(Placement(transformation(extent = {{7, -7}, {-7, 7}}, origin = {93, -15})));
 equation

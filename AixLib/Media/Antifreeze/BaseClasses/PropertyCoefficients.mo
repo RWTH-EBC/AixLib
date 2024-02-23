@@ -3,8 +3,8 @@ record PropertyCoefficients
   "Polynomial coefficients to evaluate fluid properties"
   extends Modelica.Icons.Record;
 
-  Modelica.SIunits.MassFraction X_a_ref "Reference mass fraction";
-  Modelica.SIunits.Temperature T_ref "Reference temperature";
+  Modelica.Units.SI.MassFraction X_a_ref "Reference mass fraction";
+  Modelica.Units.SI.Temperature T_ref "Reference temperature";
   parameter Integer nX_a "Order of polynomial in x";
   Integer nT[nX_a] "Order of polynomial in y";
   parameter Integer nTot "Total number of coefficients";
@@ -17,24 +17,25 @@ record PropertyCoefficients
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>
-Record that is used by media packages in 
-<a href=\"modelica://AixLib.Media.Antifreeze\">
-AixLib.Media.Antifreeze</a> to implement the thermophysical properties
-based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 11, 2018, by Michael Wetter:
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Record that is used by media packages in 
+ <a href=\"modelica://AixLib.Media.Antifreeze\">
+ AixLib.Media.Antifreeze</a> to implement the thermophysical properties
+ based on Melinder (2010).
+ </p>
+ <h4>References</h4>
+ <p>
+ Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+ Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+ IIR/IIF.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 11, 2018, by Michael Wetter:
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PropertyCoefficients;

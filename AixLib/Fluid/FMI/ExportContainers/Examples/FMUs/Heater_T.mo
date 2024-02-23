@@ -9,14 +9,14 @@ block Heater_T
       final QMax_flow=QMax_flow,
       final energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  parameter Modelica.SIunits.HeatFlowRate QMax_flow=Modelica.Constants.inf
+  parameter Modelica.Units.SI.HeatFlowRate QMax_flow=Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)";
-  parameter Modelica.SIunits.HeatFlowRate QMin_flow=-Modelica.Constants.inf
+  parameter Modelica.Units.SI.HeatFlowRate QMin_flow=-Modelica.Constants.inf
     "Maximum heat flow rate for cooling (negative)";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=0
-    "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       0 "Pressure";
 
   Modelica.Blocks.Interfaces.RealInput TSet(unit="K", displayUnit="degC")
     "Set point temperature of the fluid that leaves port_b"
@@ -36,34 +36,34 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (  Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a heater
-that takes as an input signal the leaving fluid temperature.
-The FMU has an instance of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 8, 2017, by Michael Wetter:<br/>
-Updated heater model.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
-AixLib, #763</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-November 20, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a heater
+ that takes as an input signal the leaving fluid temperature.
+ The FMU has an instance of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
+ AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 8, 2017, by Michael Wetter:<br/>
+ Updated heater model.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+ AixLib, #763</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ November 20, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/Heater_T.mos"
         "Export FMU"),
     Icon(graphics={
@@ -106,7 +106,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-56,74},{54,14}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="TSet"),
         Rectangle(
           extent={{-100,61},{-68,58}},
@@ -116,14 +116,15 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-104,94},{-60,66}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="T"),
         Text(
           extent={{64,92},{108,64}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Q"),
                    Text(
           extent={{26,-28},{70,-74}},
-          lineColor={255,255,255},
-          textString="+")}));
+          textColor={255,255,255},
+          textString="+")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Heater_T;

@@ -1,8 +1,5 @@
-DHCSubstationHeatPumpDirectCooling
 ClosedLoop
-NoReturn
 OpenLoop
 OpenLoopVarTSupplyDp
 OpenLoopVarTSupplyDpBypass
-OpenLoopHeatPumpCarnot
 OpenLoopVarTSupplyDpFixedTempDifferenceBypass

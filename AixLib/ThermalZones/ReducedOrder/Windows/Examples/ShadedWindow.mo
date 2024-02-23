@@ -27,7 +27,7 @@ model ShadedWindow "Testmodel for ShadedWindow"
     bBel={0,0},
     dAbo={0.5,0.5},
     dBel={0,0},
-    azi(displayUnit="deg") = {0,1.5707963267949},
+    azi={0,1.5707963267949},
     deltaH={5,5,10,10},
     s={100,100,20,20},
     gap={false,true,false},

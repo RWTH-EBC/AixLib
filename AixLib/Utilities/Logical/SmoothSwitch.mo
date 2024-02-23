@@ -1,6 +1,6 @@
 within AixLib.Utilities.Logical;
 block SmoothSwitch "Smooth switch between two Real signals"
-  extends Modelica.Blocks.Interfaces.partialBooleanBlockIcon;
+  extends Modelica.Blocks.Icons.PartialBooleanBlock;
   Modelica.Blocks.Interfaces.RealInput u1
     "Connector of first Real input signal"                                       annotation(Placement(transformation(extent = {{-140, 60}, {-100, 100}})));
   Modelica.Blocks.Interfaces.BooleanInput u2
@@ -42,6 +42,7 @@ equation
     Implemented.
   </li>
 </ul>
-</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{12, 0}, {100, 0}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-100, 0}, {-40, 0}}, color = {255, 0, 127}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}), Line(points = {{-100, -80}, {-40, -80}, {-40, -80}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-40, 12}, {-40, -12}}, color = {255, 0, 127}), Line(points = {{-100, 80}, {-38, 80}}, color = {0, 0, 255}), Line(points = {{-38, 80}, {6, 2}}, thickness = 1, color = {0, 0, 255}), Ellipse(extent = {{2, 8}, {18, -6}}, fillColor = {0, 0, 0},
+</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{12, 0}, {100, 0}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-100, 0}, {-40, 0}}, color = {255, 0, 127}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}), Line(points = {{-100, -80}, {-40, -80}, {-40, -80}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-40, 12}, {-40, -12}}, color = {255, 0, 127}), Line(points = {{-100, 80}, {-38, 80}}, color = {0, 0, 255}), Line(points = {{-38, 80}, {6, 2}}, thickness = 1, color = {0, 0, 255}), Ellipse(extent={{
+              -2,10},{18,-10}},                                                                                                                                                                                                        fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 255})}));
 end SmoothSwitch;

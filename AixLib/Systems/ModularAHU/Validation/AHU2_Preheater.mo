@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Validation;
+﻿within AixLib.Systems.ModularAHU.Validation;
 model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -6,7 +6,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   package MediumAir = AixLib.Media.Air
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Preheater_RampValve data "Measured data";
+  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Preheater_StepResponse data "Measured data";
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     redeclare package Medium = MediumWater,
     use_T_in=true,
@@ -15,8 +15,8 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-20,-80})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(          redeclare package Medium =
-               MediumWater, nPorts=1)
+  Fluid.Sources.Boundary_pT boundaryWaterSink(          redeclare package
+      Medium = MediumWater, nPorts=1)
                             annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -51,23 +51,31 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-78,-102},{-58,-82}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
     annotation (Placement(transformation(extent={{-96,32},{-82,46}})));
-  Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
+  Modelica.Blocks.Math.Gain gain1(k=1.1439/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
+    T_start=288.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
-      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
+      pipeModel="PlugFlowPipe",
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1_5(),
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
-      tau=5,
       length=1,
       Kv=10,
+      valveCharacteristic=
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
+          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.13,0.205,0.566,
+          0.813,0.88,0.91,0.95,1}, phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,
+          1}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,
+          0.25,0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.022,0.53,0.96,0.98,
+          0.99,1})),
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
       pipe3(length=1.06),
       pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
             0.48),
-      pipe5(length=1.42),
+      pipe5(length=1.44, fac=16),
       pipe6(length=0.52),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
@@ -76,34 +84,22 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
           calculatePower=true)),
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=3000/3600,
-    m2_flow_nominal=2.866/3600*1000,
-    tau=150,
+    m1_flow_nominal=3000/3600*1.2,
+    m2_flow_nominal=2866/3600,
+    tau=90 + 70,
     T_amb=293.15,
     dynamicHX(
       dp1_nominal=66,
       dp2_nominal=6000 + 8000,
-      nNodes=2,
-      tau1=4,
-      tau2=15,
-      tau_C=15,
-      dT_nom=29.53,
+      nNodes=5,
+      dT_nom=43.9,
       Q_nom=57700))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
+
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.2,
-        0.0; 0.28,0.005; 0.37,0.19; 0.48,0.44; 0.61,0.67; 0.84,0.97; 0.9,1.0; 1.0,
-        1.0])
-    annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
-  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
-    redeclare package Medium = MediumWater,
-    m_flow_nominal=0.5,
-    zeta=70,
-    diameter=0.032) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-22,-52})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -140,24 +136,23 @@ equation
         points={{-50,40},{-36,40},{-36,40.1538},{-22,40.1538}}, color={0,127,255}));
   connect(registerModule.port_b1, boundaryAirSink.ports[1]) annotation (Line(
         points={{40,40.1538},{55,40.1538},{55,40},{70,40}}, color={0,127,255}));
-  connect(gain.y, valveCharacteristics.u)
-    annotation (Line(points={{-79.6,0},{-69.2,0}}, color={0,0,127}));
-  connect(boundaryWaterSource.ports[1], hydraulicResistance.port_a) annotation (
-     Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
-  connect(hydraulicResistance.port_b, registerModule.port_a2)
-    annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
-  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valveSet)
-    annotation (Line(points={{-55.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
-          127}), Text(
+  connect(gain.y, registerBus1.hydraulicBus.valveSet) annotation (Line(points={{
+          -79.6,0},{-37.95,0},{-37.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
+      Line(points={{-20,-70},{-22,-70},{-22,0.461538},{-22,0.461538}}, color={0,
+          127,255}));
+  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation(
+    Line(points = {{-68, -24}, {-38, -24}, {-38, 10}}, color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
   opening (includes opening delay already) is used.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>November 4, 2019, by Alexander Kümpel:<br/>
     First implementation.

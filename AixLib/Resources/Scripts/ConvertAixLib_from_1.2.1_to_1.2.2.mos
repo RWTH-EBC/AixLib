@@ -1,0 +1,14 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Examples.Appartment_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.House.MFD.EnergySystem.OneAppartment.Radiators", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.House.MFD.EnergySystem.OneAppartment.Radiators");
+convertClass("AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators");
+convertClass("AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bedroom_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bedroom_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Children_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Children_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Corridor_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Corridor_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Kitchen_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Kitchen_VoWo");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo", "AixLib.Obsolete.Year2022.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo");

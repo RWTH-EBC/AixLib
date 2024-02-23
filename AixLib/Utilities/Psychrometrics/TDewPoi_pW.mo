@@ -20,30 +20,30 @@ equation
     annotation (
     defaultComponentName="dewPoi",
     Documentation(info="<html>
-<p>
-Dew point temperature calculation for moist air above freezing temperature.
-</p>
-<p>
-The correlation used in this model is valid for dew point temperatures between
-<i>0</i>&deg;C and <i>200</i>&deg;C. It is the correlation from 2005
-ASHRAE Handbook, p. 6.2. In an earlier version of this model, the equation from
-Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
-temperatures.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 4, 2008 by Michael Wetter:<br/>
-Changed from causal to acausal ports, needed, for example, for
-<a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
-AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
-</li>
-<li>
-August 7, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Dew point temperature calculation for moist air above freezing temperature.
+ </p>
+ <p>
+ The correlation used in this model is valid for dew point temperatures between
+ <i>0</i>&deg;C and <i>200</i>&deg;C. It is the correlation from 2005
+ ASHRAE Handbook, p. 6.2. In an earlier version of this model, the equation from
+ Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
+ temperatures.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 4, 2008 by Michael Wetter:<br/>
+ Changed from causal to acausal ports, needed, for example, for
+ <a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
+ AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
+ </li>
+ <li>
+ August 7, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
@@ -53,11 +53,11 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-124,50},{-86,4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="p_w"),
         Text(
           extent={{102,46},{140,0}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TDP"),
         Line(points={{-68,86},{-68,-72}}),
         Line(points={{82,-72},{-66,-72}}),
@@ -84,18 +84,19 @@ First implementation.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-64,84},{-42,66}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="X"),
         Text(
           extent={{82,-80},{92,-96}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="T"),
         Line(points={{68,-44},{-62,-44}}, color={175,175,175}),
         Line(points={{68,-18},{-10,-18}}, color={175,175,175}),
         Line(points={{70,6},{12,6}}, color={175,175,175}),
-        Line(points={{68,32},{22,32}}, color={175,175,175})}));
+        Line(points={{68,32},{22,32}}, color={175,175,175})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TDewPoi_pW;

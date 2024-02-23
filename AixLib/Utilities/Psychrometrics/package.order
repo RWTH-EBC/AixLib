@@ -1,5 +1,6 @@
 Constants
 Density_pTX
+MixedHumidity
 MixedTemperature
 Phi_pTX
 SaturationPressure
@@ -12,6 +13,7 @@ ToDryAir
 ToTotalAir
 X_pTphi
 X_pW
+hSat_pTSat
 pW_TDewPoi
 pW_X
 Functions

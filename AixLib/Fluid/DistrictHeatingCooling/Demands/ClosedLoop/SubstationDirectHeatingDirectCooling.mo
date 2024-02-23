@@ -7,20 +7,20 @@ model SubstationDirectHeatingDirectCooling "Substation model for bidirctional lo
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
+    parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
-    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
-    parameter Modelica.SIunits.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
+    parameter Modelica.Units.SI.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
 
@@ -133,10 +133,10 @@ equation
 
 
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-260,0},{-234,0},{-234,4}},
+    annotation (Line(points={{-260,0},{-233,0},{-233,4}},
                                                         color={0,127,255}));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{220,0},{196,0},{196,8}},
+    annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255}));
   connect(const3.y, division1.u2) annotation (Line(points={{-125.4,-98},{-108,-98},
           {-108,-74.8},{-97.6,-74.8}}, color={0,0,127}));
@@ -146,12 +146,12 @@ equation
           102.8},{57.7,90},{65.4,90}}, color={0,0,127}));
   connect(division2.y, pumpCooling.m_flow_in) annotation (Line(points={{33.3,
           107},{32,107},{32,66},{38,66},{38,36}}, color={0,0,127}));
-  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{
-          -230,4},{-230,0},{-206,0},{-206,0}}, color={0,127,255}));
+  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{-231,4},
+          {-231,0},{-206,0},{-206,0}},         color={0,127,255}));
   connect(senMasFlo_GridHeat.port_b, jun.port_1)
     annotation (Line(points={{-186,0},{-156,0}}, color={0,127,255}));
   connect(senMasFlo_GridCool.port_b, vol1.ports[2])
-    annotation (Line(points={{172,0},{200,0},{200,8}}, color={0,127,255}));
+    annotation (Line(points={{172,0},{199,0},{199,8}}, color={0,127,255}));
   connect(senMasFlo_GridCool.port_a, jun1.port_1)
     annotation (Line(points={{152,0},{136,0}}, color={0,127,255}));
   connect(jun.port_2, senMasFlo_HeatPump.port_a) annotation (Line(points={{
@@ -165,9 +165,9 @@ equation
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
   connect(del.ports[1], pumpCooling.port_b)
-    annotation (Line(points={{-16,24},{28,24}}, color={0,127,255}));
+    annotation (Line(points={{-15,24},{28,24}}, color={0,127,255}));
   connect(jun.port_3, del.ports[2]) annotation (Line(points={{-146,10},{-148,10},
-          {-148,24},{-12,24}}, color={0,127,255}));
+          {-148,24},{-13,24}}, color={0,127,255}));
   connect(coolingDemand, division2.u1) annotation (Line(points={{228,62},{122,62},
           {122,111.2},{49.4,111.2}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, del.heatPort)
@@ -179,9 +179,9 @@ equation
   connect(senTem.port_b, jun1.port_3) annotation (Line(points={{42,-24},{126,
           -24},{126,-10}}, color={0,127,255}));
   connect(senTem1.port_b,del1. ports[1])
-    annotation (Line(points={{-26,-24},{-2,-24}}, color={0,127,255}));
+    annotation (Line(points={{-26,-24},{-1,-24}}, color={0,127,255}));
   connect(senTem.port_a,del1. ports[2])
-    annotation (Line(points={{22,-24},{2,-24}}, color={0,127,255}));
+    annotation (Line(points={{22,-24},{1,-24}}, color={0,127,255}));
   connect(prescribedHeatFlow1.port,del1. heatPort) annotation (Line(points={{-40,
           -74},{-40,-52},{-18,-52},{-18,-34},{-10,-34}}, color={191,0,0}));
   connect(heatDemand, division1.u1) annotation (Line(points={{-274,-60},{-124,-60},
@@ -226,8 +226,11 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-160},{220,
             160}})),
     Documentation(revisions="<html>
-<ul>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    <ul>
+    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+    Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
+    </li>
+<li><i>August 09, 2018</i> by Tobias Blacha:<br/>
 Implemented </li>
 </ul>
 </html>"));

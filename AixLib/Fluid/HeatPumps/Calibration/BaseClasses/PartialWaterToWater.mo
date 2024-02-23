@@ -11,20 +11,20 @@ model PartialWaterToWater
   replaceable package ref = AixLib.Media.Refrigerants.R410A
     "Refrigerant model";
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal
     "Nominal mass flow rate on condenser side";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal
     "Nominal mass flow rate on evaporator side";
 
-  parameter Modelica.SIunits.Pressure dp1_nominal = 1000
+  parameter Modelica.Units.SI.Pressure dp1_nominal=1000
     "Pressure drop at nominal mass flow rate on condenser side";
-  parameter Modelica.SIunits.Pressure dp2_nominal = 1000
+  parameter Modelica.Units.SI.Pressure dp2_nominal=1000
     "Pressure drop at nominal mass flow rate on evaporator side";
 
-  parameter Modelica.SIunits.ThermalConductance UACon
+  parameter Modelica.Units.SI.ThermalConductance UACon
     "Thermal conductance of condenser";
 
-  parameter Modelica.SIunits.ThermalConductance UAEva
+  parameter Modelica.Units.SI.ThermalConductance UAEva
     "Thermal conductance of evaporator";
 
   Modelica.Blocks.Sources.CombiTimeTable calDat(
@@ -104,23 +104,24 @@ equation
             -100},{100,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,
             100}})),                                 preferredView="info",Documentation(info="<HTML>
-<p>
-Base class for the calibration of water to water heat pump models.
-</p>
-<p>
-Source and load temperatures and flow rates are read from an external time table.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-October 31, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Base class for the calibration of water to water heat pump models.
+ </p>
+ <p>
+ Source and load temperatures and flow rates are read from an external time table.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ October 31, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialWaterToWater;

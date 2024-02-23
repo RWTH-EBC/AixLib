@@ -15,20 +15,20 @@ model ConstantEffectiveness
   mWat1_flow = +mWat_flow,
   mWat2_flow = -mWat_flow);
 
-  parameter Modelica.SIunits.Efficiency epsS(max=1) = 0.8
+  parameter Modelica.Units.SI.Efficiency epsS(max=1) = 0.8
     "Sensible heat exchanger effectiveness";
-  parameter Modelica.SIunits.Efficiency epsL(max=1) = 0.8
+  parameter Modelica.Units.SI.Efficiency epsL(max=1) = 0.8
     "Latent heat exchanger effectiveness";
 
-  Modelica.SIunits.HeatFlowRate QLat_flow
+  Modelica.Units.SI.HeatFlowRate QLat_flow
     "Latent heat exchange from medium 2 to medium 1";
 
   Medium1.MassFraction X_w_in1 "Inlet water mass fraction of medium 1";
   Medium2.MassFraction X_w_in2 "Inlet water mass fraction of medium 2";
 
-  Modelica.SIunits.MassFlowRate mWat_flow
+  Modelica.Units.SI.MassFlowRate mWat_flow
     "Water flow rate from medium 2 to medium 1";
-  Modelica.SIunits.MassFlowRate mMax_flow
+  Modelica.Units.SI.MassFlowRate mMax_flow
     "Maximum water flow rate from medium 2 to medium 1";
 
 protected
@@ -97,84 +97,85 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-62,50},{48,-10}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="epsS=%epsS"),
         Text(
           extent={{-60,4},{50,-56}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString="epsL=%epsL")}),
           preferredView="info",
 defaultComponentName="masExc",
 Documentation(info="<html>
-<p>
-Model for a heat and moisture exchanger with constant effectiveness.
-</p>
-<p>
-This model transfers heat and moisture in the amount of </p>
-<pre>
-  QSen = epsS * Q_max,
-  m    = epsL * mWat_max,
-</pre>
-<p>
-where <code>epsS</code> and <code>epsL</code> are constant effectiveness
-for the sensible and latent heat transfer,
-<code>Q_max</code> is the maximum sensible heat that can be transferred and
-<code>mWat_max</code> is the maximum moisture that can be transferred.
-</p>
-<p>
-For a sensible heat exchanger, use
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
-AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
-instead of this model.
-</p>
-<p>
-This model can only be used with medium models that define the integer constant
-<code>Water</code> which needs to be equal to the index of the water mass fraction
-in the species vector.
-</p>
-</html>",
+ <p>
+ Model for a heat and moisture exchanger with constant effectiveness.
+ </p>
+ <p>
+ This model transfers heat and moisture in the amount of </p>
+ <pre>
+   QSen = epsS * Q_max,
+   m    = epsL * mWat_max,
+ </pre>
+ <p>
+ where <code>epsS</code> and <code>epsL</code> are constant effectiveness
+ for the sensible and latent heat transfer,
+ <code>Q_max</code> is the maximum sensible heat that can be transferred and
+ <code>mWat_max</code> is the maximum moisture that can be transferred.
+ </p>
+ <p>
+ For a sensible heat exchanger, use
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
+ AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
+ instead of this model.
+ </p>
+ <p>
+ This model can only be used with medium models that define the integer constant
+ <code>Water</code> which needs to be equal to the index of the water mass fraction
+ in the species vector.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 30, 2018, by Filip Jorissen:<br/>
-Set <code>final prescribedHeatFlowRate1=true</code> and 
-<code>final prescribedHeatFlowRate2=true</code>.<br/>
-See
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/907\">#907</a>.
-</li>
-<li>
-April 11, 2017, by Michael Wetter:<br/>
-Corrected bug as <code>Q1_flow</code> did not include latent heat flow rate.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-October 14, 2013 by Michael Wetter:<br/>
-Replaced access to constant <code>Medium1.Water</code> by introducing
-the parameter <code>i1_w</code>, and used a similar construct for
-<code>Medium2</code>.
-This avoids an error during model check as these constants are not known
-in the partial medium model.
-</li>
-<li>
-August 13, 2013 by Michael Wetter:<br/>
-Corrected error in the documentation.
-</li>
-<li>
-July 30, 2013 by Michael Wetter:<br/>
-Updated model to use new variable <code>mWat_flow</code>
-in the base class.
-</li>
-<li>
-January 28, 2010, by Michael Wetter:<br/>
-Added regularization near zero flow.
-</li>
-<li>
-October 21, 2008, by Michael Wetter:<br/>
-First implementation, based on
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
-AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ April 30, 2018, by Filip Jorissen:<br/>
+ Set <code>final prescribedHeatFlowRate1=true</code> and 
+ <code>final prescribedHeatFlowRate2=true</code>.<br/>
+ See
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/907\">#907</a>.
+ </li>
+ <li>
+ April 11, 2017, by Michael Wetter:<br/>
+ Corrected bug as <code>Q1_flow</code> did not include latent heat flow rate.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ October 14, 2013 by Michael Wetter:<br/>
+ Replaced access to constant <code>Medium1.Water</code> by introducing
+ the parameter <code>i1_w</code>, and used a similar construct for
+ <code>Medium2</code>.
+ This avoids an error during model check as these constants are not known
+ in the partial medium model.
+ </li>
+ <li>
+ August 13, 2013 by Michael Wetter:<br/>
+ Corrected error in the documentation.
+ </li>
+ <li>
+ July 30, 2013 by Michael Wetter:<br/>
+ Updated model to use new variable <code>mWat_flow</code>
+ in the base class.
+ </li>
+ <li>
+ January 28, 2010, by Michael Wetter:<br/>
+ Added regularization near zero flow.
+ </li>
+ <li>
+ October 21, 2008, by Michael Wetter:<br/>
+ First implementation, based on
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
+ AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectiveness;

@@ -5,14 +5,14 @@ model ReciprocatingWaterToWater_Dynamic
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=0.47
     "Nominal mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=0.47
     "Nominal mass flow rate on the evaporator side";
 
-  parameter Modelica.SIunits.MassFlowRate flowSource = 0.79
+  parameter Modelica.Units.SI.MassFlowRate flowSource=0.79
     "Mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate flowLoad = 0.47
+  parameter Modelica.Units.SI.MassFlowRate flowLoad=0.47
     "Mass flow rate on the evaporator side";
 
   AixLib.Fluid.Sources.Boundary_pT sin2(
@@ -165,28 +165,29 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of the
-<a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
-AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model. This
-validation case also tests the stage input to the heat pump models.
-</p>
-<p>
-With constant inlet source and load water temperatures, the heat pumps cycle on
-and off. The apparent capacity of the dynamic model is compared to the
-steady-state model and to the condenser heat transfer rate.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 14, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that demonstrates the use of the
+ <a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
+ AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model. This
+ validation case also tests the stage input to the heat pump models.
+ </p>
+ <p>
+ With constant inlet source and load water temperatures, the heat pumps cycle on
+ and off. The apparent capacity of the dynamic model is compared to the
+ steady-state model and to the condenser heat transfer rate.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 14, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReciprocatingWaterToWater_Dynamic;

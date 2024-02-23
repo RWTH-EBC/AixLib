@@ -36,44 +36,45 @@ annotation(smoothOrder=2,
           zeroDerivative=e,
           zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition,
     Documentation(info="<html>
-<p>
-This function is used by
-<a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
-AixLib.Utilities.Math.Functions.inverseXRegularized</a>
-to provide a twice continuously differentiable transition between
-the different regions.
-The code has been implemented in a function as this allows
-to implement the function
-<a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
-AixLib.Utilities.Math.Functions.inverseXRegularized</a>
-in such a way that Dymola inlines it.
-However, this function will not be inlined as its body is too large.
-</p>
-<h4>Implementation</h4>
-<p>
-For efficiency, the polynomial coefficients
-<code>a, b, c, d, e, f</code> and
-the inverse of the smoothing parameter <code>deltaInv</code>
-are exposed as arguments to this function.
-Also,
-derivatives are provided in
-<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition\">
-AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition</a>
-and in
-<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
-AixLib.Utilities.Math.Functions.BaseClasses.der_2__smoothTransition</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 12, 2018, by David Blum:<br/>
-Change if-statement to if-expression.  
-For issue <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1019\">#1019</a>.
-</li>
-<li>
-August 11, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function is used by
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
+ AixLib.Utilities.Math.Functions.inverseXRegularized</a>
+ to provide a twice continuously differentiable transition between
+ the different regions.
+ The code has been implemented in a function as this allows
+ to implement the function
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
+ AixLib.Utilities.Math.Functions.inverseXRegularized</a>
+ in such a way that Dymola inlines it.
+ However, this function will not be inlined as its body is too large.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ For efficiency, the polynomial coefficients
+ <code>a, b, c, d, e, f</code> and
+ the inverse of the smoothing parameter <code>deltaInv</code>
+ are exposed as arguments to this function.
+ Also,
+ derivatives are provided in
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition\">
+ AixLib.Utilities.Math.Functions.BaseClasses.der_smoothTransition</a>
+ and in
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
+ AixLib.Utilities.Math.Functions.BaseClasses.der_2__smoothTransition</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 12, 2018, by David Blum:<br/>
+ Change if-statement to if-expression.  
+ For issue <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1019\">#1019</a>.
+ </li>
+ <li>
+ August 11, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end smoothTransition;

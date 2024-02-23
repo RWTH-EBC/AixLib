@@ -1,7 +1,7 @@
 within AixLib.Fluid.Chillers;
 model Chiller
   "Grey-box model for reversible chillers using a black-box to simulate the refrigeration cycle"
-  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
+  extends AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine(
   use_rev=true,
   final machineType = false,
   redeclare AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
@@ -128,7 +128,7 @@ model Chiller
 <p>
   Using a signal bus as a connector, this chiller model can be easily
   combined within a chiller system model including several control or
-  security blocks analogous to <a href=
+  safety blocks analogous to <a href=
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
   The relevant data is aggregated. The mode signal chooses the type of
   the chiller operation. As a result, this model can also be used as a

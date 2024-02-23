@@ -8,7 +8,7 @@ function ConstantQualityGrade
     mFlow_eva,
     mFlow_con);
     parameter Real qualityGrade=0.3 "Constant quality grade";
-    parameter Modelica.SIunits.Power P_com=2000
+  parameter Modelica.Units.SI.Power P_com=2000
     "Constant electric power input for compressor";
 protected
     Real CoP_C "Carnot CoP";

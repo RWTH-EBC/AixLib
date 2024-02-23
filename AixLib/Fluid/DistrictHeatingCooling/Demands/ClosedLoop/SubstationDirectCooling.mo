@@ -6,20 +6,20 @@ model SubstationDirectCooling
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
+    parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
-    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
+    parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+    parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
-    parameter Modelica.SIunits.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
+    parameter Modelica.Units.SI.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+    parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
@@ -93,23 +93,23 @@ public
 equation
 
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-260,0},{-234,0},{-234,4}},
+    annotation (Line(points={{-260,0},{-233,0},{-233,4}},
                                                         color={0,127,255}));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{220,0},{196,0},{196,8}},
+    annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255}));
   connect(division2.u2, realExpression1.y) annotation (Line(points={{69.4,102.8},
           {81.7,102.8},{81.7,90},{91.4,90}}, color={0,0,127}));
-  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{
-          -230,4},{-230,0},{-206,0},{-206,0}}, color={0,127,255}));
+  connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{-231,4},
+          {-231,0},{-206,0},{-206,0}},         color={0,127,255}));
   connect(senMasFlo_GridCool.port_b, vol1.ports[2])
-    annotation (Line(points={{172,0},{200,0},{200,8}}, color={0,127,255}));
+    annotation (Line(points={{172,0},{199,0},{199,8}}, color={0,127,255}));
   connect(senMasFlo.port_b, pumpCooling.port_a)
     annotation (Line(points={{70,0},{50,0}},   color={0,127,255}));
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
   connect(del.ports[1], pumpCooling.port_b)
-    annotation (Line(points={{-104,0},{30,0}},  color={0,127,255}));
+    annotation (Line(points={{-103,0},{30,0}},  color={0,127,255}));
   connect(coolingDemand, division2.u1) annotation (Line(points={{228,62},{122,
           62},{122,111.2},{69.4,111.2}},
                                      color={0,0,127}));
@@ -128,7 +128,7 @@ equation
   connect(mass_flow_heatExchangerHeating1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{7,94},{40,94},{40,12}}, color={0,0,127}));
   connect(senMasFlo_GridHeat.port_b, del.ports[2])
-    annotation (Line(points={{-186,0},{-100,0}}, color={0,127,255}));
+    annotation (Line(points={{-186,0},{-101,0}}, color={0,127,255}));
   connect(senTem4.port_b, senMasFlo_GridCool.port_a)
     annotation (Line(points={{120,0},{152,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
@@ -167,8 +167,11 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-160},{220,
             160}})),
     Documentation(revisions="<html>
-<ul>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    <ul>
+    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+    Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
+    </li>
+<li><i>August 09, 2018</i> by Tobias Blacha:<br/>
 Implemented </li>
 </ul>
 </html>"));

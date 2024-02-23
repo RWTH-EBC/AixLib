@@ -20,10 +20,11 @@ partial model PartialSource
 
   Modelica.Fluid.Interfaces.FluidPorts_b ports[nPorts](
     redeclare each package Medium = Medium,
-    m_flow(each max=if flowDirection == Modelica.Fluid.Types.PortFlowDirection.Leaving
-             then 0 else +Modelica.Constants.inf,
-           each min=if flowDirection == Modelica.Fluid.Types.PortFlowDirection.Entering
-           then 0 else -Modelica.Constants.inf))
+    each m_flow(max=if flowDirection == Modelica.Fluid.Types.PortFlowDirection.Leaving
+                    then 0 else +Modelica.Constants.inf,
+                min=if flowDirection == Modelica.Fluid.Types.PortFlowDirection.Entering
+                    then 0 else -Modelica.Constants.inf))
+    "Fluid ports"
     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
 
 protected
@@ -47,11 +48,11 @@ initial equation
   // Only one connection allowed to a port to avoid unwanted ideal mixing
   for i in 1:nPorts loop
     assert(cardinality(ports[i]) <= 1,"
-Each ports[i] of boundary shall at most be connected to one component.
-If two or more connections are present, ideal mixing takes
-place in these connections, which is usually not the intention
-of the modeller. Increase nPorts to add an additional port.
-");
+ Each ports[i] of boundary shall at most be connected to one component.
+ If two or more connections are present, ideal mixing takes
+ place in these connections, which is usually not the intention
+ of the modeller. Increase nPorts to add an additional port.
+ ");
   end for;
 
 equation
@@ -59,39 +60,45 @@ equation
 
   annotation (defaultComponentName="bou",
   Documentation(info="<html>
-<p>
-Partial model for a fluid source that either prescribes
-pressure or mass flow rate.
-Models that extend this partial model need to prescribe the outflowing
-specific enthalpy, composition and trace substances.
-This partial model only declares the <code>ports</code>
-and ensures that the pressures at all ports are equal.
-</p>
-<h4>Implementation</h4>
-<p>
-If the parameter <code>verifyInputs</code> is set to <code>true</code>,
-then a protected instance of medium base properties is enabled.
-This instance verifies that the
-medium temperature is within the bounds <code>T_min</code> and <code>T_max</code>,
-where <code>T_min</code> and <code>T_max</code> are constants of the <code>Medium</code>.
-If the temperature is outside these bounds, the simulation will stop with an error.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-May 30, 2018, by Michael Wetter:<br/>
-Improved documentation.
-</li>
-<li>
-February 2nd, 2018 by Filip Jorissen<br/>
-Initial version for refactoring inputs of sources.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Partial model for a fluid source that either prescribes
+ pressure or mass flow rate.
+ Models that extend this partial model need to prescribe the outflowing
+ specific enthalpy, composition and trace substances.
+ This partial model only declares the <code>ports</code>
+ and ensures that the pressures at all ports are equal.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ If the parameter <code>verifyInputs</code> is set to <code>true</code>,
+ then a protected instance of medium base properties is enabled.
+ This instance verifies that the
+ medium temperature is within the bounds <code>T_min</code> and <code>T_max</code>,
+ where <code>T_min</code> and <code>T_max</code> are constants of the <code>Medium</code>.
+ If the temperature is outside these bounds, the simulation will stop with an error.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 1, 2021, by Michael Wetter:<br/>
+ Corrected misplaced <code>each</code> and added missing instance comment.<br/>
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1462\">IBPSA, #1462</a>.
+ </li>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">IBPSA, #1050</a>.
+ </li>
+ <li>
+ May 30, 2018, by Michael Wetter:<br/>
+ Improved documentation.
+ </li>
+ <li>
+ February 2nd, 2018 by Filip Jorissen<br/>
+ Initial version for refactoring inputs of sources.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">IBPSA, #882</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialSource;

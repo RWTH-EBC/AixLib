@@ -16,15 +16,16 @@ algorithm
   end if;
 
 annotation (Documentation(info="<html>
-<p>
-Function that evaluates the binomial coefficient \"n choose k\".
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 9, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Function that evaluates the binomial coefficient \"n choose k\".
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 9, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end binomial;

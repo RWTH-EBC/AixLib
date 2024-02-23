@@ -7,7 +7,7 @@ partial model PartialSubstation
     "Get the prescribed heat flow rate from the input connector"
     annotation(Evaluate=true, HideResult=true);
 
-  parameter Modelica.SIunits.HeatFlowRate prescribedQ
+  parameter Modelica.Units.SI.HeatFlowRate prescribedQ
     "Fixed value of prescribed heat flow rate"
     annotation (Dialog(enable = not use_Q_in));
 
@@ -19,7 +19,7 @@ partial model PartialSubstation
     "Get the prescribed heat flow rate from the input connector"
     annotation(Evaluate=true, HideResult=true);
 
-  parameter Modelica.SIunits.MassFlowRate prescribed_m_flow
+  parameter Modelica.Units.SI.MassFlowRate prescribed_m_flow
     "Fixed value of prescribed mass flow rate"
     annotation (Dialog(enable = not use_m_flow_in));
 

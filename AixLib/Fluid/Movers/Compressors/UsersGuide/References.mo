@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.UsersGuide;
+﻿within AixLib.Fluid.Movers.Compressors.UsersGuide;
 class References "References"
   extends Modelica.Icons.References;
 

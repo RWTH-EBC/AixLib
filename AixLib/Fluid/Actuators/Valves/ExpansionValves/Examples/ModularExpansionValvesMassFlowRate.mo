@@ -12,15 +12,15 @@ model ModularExpansionValvesMassFlowRate
 
   parameter Integer nVal = 3
     "Number of valves - each valve will be connected to an individual port_b";
-  parameter Modelica.SIunits.AbsolutePressure pInl=
-    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+5)))
+  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
+      Medium.setBubbleState(Medium.setSat_T(TInl + 5)))
     "Current pressure at inlet conditions";
-  parameter Modelica.SIunits.Temperature TInl = 348.15
+  parameter Modelica.Units.SI.Temperature TInl=348.15
     "Current temperature at inlet conditions";
-  parameter Modelica.SIunits.AbsolutePressure pOut=
-    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
+  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
+      Medium.setDewState(Medium.setSat_T(TOut)))
     "Current set point of the compressor's outlet pressure";
-  parameter Modelica.SIunits.Temperature TOut = 278.15
+  parameter Modelica.Units.SI.Temperature TOut=278.15
     "Current temperature at outlet conditions";
 
   // Definition of models
@@ -82,10 +82,9 @@ model ModularExpansionValvesMassFlowRate
     "Replicating the valves' opening signal"
     annotation (Placement(transformation(extent={{40,40},{20,60}})));
   Modelica.Blocks.Sources.Sine valOpe(
-    freqHz=1,
+    f=1,
     amplitude=0.45,
-    offset=0.5)
-    "Input signal to prediscribe expansion valve's opening"
+    offset=0.5) "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{80,16},{60,36}})));
   Modelica.Blocks.Routing.Replicator repInt(nout=nVal)
     "Replicating the internal set signal"

@@ -4,7 +4,7 @@ model Velocity "Test model for the flow velocity sensor"
 
   package Medium = AixLib.Media.Air "Medium model";
 
-  parameter Modelica.SIunits.Area A = 0.1*0.1/4*Modelica.Constants.pi
+  parameter Modelica.Units.SI.Area A=0.1*0.1/4*Modelica.Constants.pi
     "Cross sectional area of flow channel";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
@@ -54,22 +54,23 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Velocity.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example tests the flow velocity sensor.
-One sensor is configured to be steady-state, and the other is
-configured to be dynamic.
-Note that steady-state sensors can lead to numerical problems
-if used incorrectly.
-See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 20, 2016 by Marcus Fuchs:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the flow velocity sensor.
+ One sensor is configured to be steady-state, and the other is
+ configured to be dynamic.
+ Note that steady-state sensors can lead to numerical problems
+ if used incorrectly.
+ See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 20, 2016 by Marcus Fuchs:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Velocity;

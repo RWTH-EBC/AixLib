@@ -1,4 +1,4 @@
-within AixLib.Utilities;
+﻿within AixLib.Utilities;
 package Tables "Package containing table blocks altered from them in the standard library"
 annotation (Icon(coordinateSystem(extent={{-80,-80},{80,80}}), graphics={
         Rectangle(

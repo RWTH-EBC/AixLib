@@ -1,10 +1,10 @@
-within AixLib.Controls.SetPoints.Functions;
+﻿within AixLib.Controls.SetPoints.Functions;
 function HeatingCurveFunction "Linear function with a set temperature of 55degC at -20 degC outdoor air temperature"
   extends PartialBaseFct;
 
-  parameter Modelica.SIunits.TemperatureDifference TOffNig=10
+  parameter Modelica.Units.SI.TemperatureDifference TOffNig=10
     "Delta K for night mode of heating system";
-  parameter Modelica.SIunits.ThermodynamicTemperature TDesign=328.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TDesign=328.15
     "Design temperature of heating system at -20 °C outside air temperature";
 algorithm
   if isDay then

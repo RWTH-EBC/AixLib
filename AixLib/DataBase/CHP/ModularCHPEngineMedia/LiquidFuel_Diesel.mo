@@ -23,7 +23,7 @@ package LiquidFuel_Diesel
     Fuel=DieselFuel() "Needed fuel data for combustion calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
-   import Modelica.SIunits.*;
+   import Modelica.Units.SI.*;
 
   constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
   constant MolarMass MM = Fuel.MM_liq "Molar mass of the fuel";

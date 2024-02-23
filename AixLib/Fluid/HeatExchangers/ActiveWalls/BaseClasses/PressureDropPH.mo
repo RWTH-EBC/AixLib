@@ -7,7 +7,7 @@ model PressureDropPH
     "Pressure drop coefficient, delta_p[Pa] = tubeLength*m*m_flow[kg/s]^n";
   parameter Real n = 1.7
     "Pressure drop exponent, delta_p[Pa] = tubeLength*m*m_flow[kg/s]^n";
-  parameter Modelica.SIunits.Length tubeLength = 10 "total length of tube";
+  parameter Modelica.Units.SI.Length tubeLength=10 "total length of tube";
 
 equation
    // Isenthalpic state transformation (no storage and no loss of energy)

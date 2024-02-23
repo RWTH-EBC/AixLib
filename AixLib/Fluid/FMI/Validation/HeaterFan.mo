@@ -4,11 +4,11 @@ model HeaterFan
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Air "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=Q_flow_nominal/1000/10
-    "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=2000
-    "Pressure";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal = 1000
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=Q_flow_nominal/1000/
+      10 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       2000 "Pressure";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=1000
     "Heat flow rate at u=1, positive for heating";
 
   parameter Boolean use_p_in = true
@@ -64,12 +64,12 @@ model HeaterFan
     "Moisture mass fraction for back flow"
     annotation (Placement(transformation(extent={{120,-6},{100,14}})));
 
-  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for back flow"
+  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for back flow"
     annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
 
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
 equation
   connect(uHea.y, hea.u) annotation (Line(
@@ -126,39 +126,40 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{140,100}}), graphics), Documentation(info="<html>
-<p>
-This example demonstrates how to configure a model with a heater
-and a fan that causes a pressure rise in the air stream.
-Note that the mass flow rate and the absolute pressure are
-set by the component <code>sou</code>.
-Therefore, the fan simply increases the pressure of the medium,
-and it also computes how much power is needed for this pressure rise,
-which is an input to the fan model.
-</p>
-<p>
-For a model with that computes the mass flow rate based on the pressure drop, see
-<a href=\"modelica://AixLib.Fluid.FMI.Validation.HeaterFanPressureDriven\">
-AixLib.Fluid.FMI.Validation.HeaterFanPressureDriven</a>.
-</p>
-<p>
-For this example, the models are not exported as FMUs. However, the
-thermofluid flow models are wrapped using input/output blocks.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-November 8, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to configure a model with a heater
+ and a fan that causes a pressure rise in the air stream.
+ Note that the mass flow rate and the absolute pressure are
+ set by the component <code>sou</code>.
+ Therefore, the fan simply increases the pressure of the medium,
+ and it also computes how much power is needed for this pressure rise,
+ which is an input to the fan model.
+ </p>
+ <p>
+ For a model with that computes the mass flow rate based on the pressure drop, see
+ <a href=\"modelica://AixLib.Fluid.FMI.Validation.HeaterFanPressureDriven\">
+ AixLib.Fluid.FMI.Validation.HeaterFanPressureDriven</a>.
+ </p>
+ <p>
+ For this example, the models are not exported as FMUs. However, the
+ thermofluid flow models are wrapped using input/output blocks.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ November 8, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Validation/HeaterFan.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0));
+    experiment(Tolerance=1e-6, StopTime=1.0),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeaterFan;

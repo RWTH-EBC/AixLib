@@ -62,22 +62,23 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/HydraulicDiameter.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Example model for a fixed resistance that takes as a parameter the hydraulic diameter.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 21, 2018, by Michael Wetter:<br/>
-Updated example to add a large diameter pipe, and to use water.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1026\">#1026</a>.
-</li>
-<li>
-December 1, 2016, by Michael Wetter:<br/>
-First implementation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Example model for a fixed resistance that takes as a parameter the hydraulic diameter.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 21, 2018, by Michael Wetter:<br/>
+ Updated example to add a large diameter pipe, and to use water.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1026\">#1026</a>.
+ </li>
+ <li>
+ December 1, 2016, by Michael Wetter:<br/>
+ First implementation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HydraulicDiameter;

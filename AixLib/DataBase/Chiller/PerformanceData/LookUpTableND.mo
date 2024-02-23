@@ -1,6 +1,7 @@
 within AixLib.DataBase.Chiller.PerformanceData;
 model LookUpTableND "N-dimensional table with data for chiller"
-  extends AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
     "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
   parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -142,21 +143,21 @@ equation
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,
           41.2},{-1.77636e-15,34.4},{50,34.4}},
                                              color={0,0,127}));
-  connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
+  connect(sigBus.TConInMea,t_Co_in. u) annotation (Line(
       points={{1.075,104.07},{46,104.07},{46,69.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
+  connect(sigBus.TEvaOutMea, t_Ev_ou.u) annotation (Line(
       points={{1.075,104.07},{-40,104.07},{-40,71.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.n, greaterThreshold.u) annotation (Line(
+  connect(sigBus.nSet, greaterThreshold.u) annotation (Line(
       points={{1.075,104.07},{-72,104.07},{-72,71.2}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -169,7 +170,7 @@ equation
   connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,57.4},
           {-72,-18},{38,-18},{38,-34},{50,-34},{50,-48}},
                                         color={255,0,255}));
-  connect(sigBus.n, nConGain.u) annotation (Line(
+  connect(sigBus.nSet, nConGain.u) annotation (Line(
       points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,95.6}},
       color={255,204,51},
       thickness=0.5), Text(

@@ -13,7 +13,7 @@ model TemperatureWetBulbTwoPort "Ideal wet bulb temperature sensor"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,110})));
-  parameter Modelica.SIunits.Temperature TWetBul_start = Medium.T_default
+  parameter Modelica.Units.SI.Temperature TWetBul_start=Medium.T_default
     "Initial or guess value of wet bulb temperature (used to compute initial output signal))"
     annotation (Dialog(group="Initialization"));
 
@@ -23,7 +23,7 @@ protected
   AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBulMod(
     redeclare package Medium = Medium,
     TWetBul(start=TWetBul_start)) "Block for wet bulb temperature";
-  Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy h "Specific enthalpy";
   Medium.MassFraction Xi[Medium.nXi]
     "Species vector, needed because indexed argument for the operator inStream is not supported";
 initial equation
@@ -87,7 +87,7 @@ annotation (defaultComponentName="senWetBul",
           lineThickness=0.5),
         Text(
           extent={{102,140},{-18,90}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T"),
         Line(
           points={{-12,60},{-12,-25}},
@@ -95,53 +95,64 @@ annotation (defaultComponentName="senWetBul",
         Line(
           points={{12,60},{12,-24}},
           thickness=0.5),
-        Line(points={{0,100},{0,50}}, color={0,0,127})}),
+        Line(points={{0,100},{0,50}}, color={0,0,127}),
+        Text(
+         extent={{-20,120},{-140,70}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(T-273.15, format=".1f")))}),
     Documentation(info="<html>
-<p>
-This sensor outputs the wet bulb temperature of the medium in the flow
-between its fluid ports. The sensor is ideal, i.e., it does not influence the fluid.
-If the parameter <code>tau</code> is non-zero, then its output
-is computed using a first order differential equation.
-Setting <code>tau=0</code> is <i>not</i> recommend. See
-<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
-AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
-</p>
-</html>",
+ <p>
+ This sensor outputs the wet bulb temperature of the medium in the flow
+ between its fluid ports. The sensor is ideal, i.e., it does not influence the fluid.
+ If the parameter <code>tau</code> is non-zero, then its output
+ is computed using a first order differential equation.
+ Setting <code>tau=0</code> is <i>not</i> recommend. See
+ <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 18, 2016 by Filip Jorissen:<br/>
-Using parameter <code>tauInv</code>
-since this now exists in
-<a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
-</li>
-<li>
-September 10, 2013 by Michael Wetter:<br/>
-Set <code>start</code> attribute for <code>wetBulMod</code>
-to use consistent start values within this model.
-</li>
-<li>
-June 3, 2011 by Michael Wetter:<br/>
-Revised implementation to add dynamics in such a way that
-the time constant increases as the mass flow rate tends to zero.
-This significantly improves the numerics.
-</li>
-<li>
-February 18, 2010, by Michael Wetter:<br/>
-Revised model to use new block for computing the wet bulb temperature.
-</li>
-<li>
-September 10, 2008, by Michael Wetter:<br/>
-Renamed output port to have the same interfaces as the dry bulb temperature sensor.
-</li>
-<li>
-May 5, 2008, by Michael Wetter:<br/>
-First implementation.
-Implementation is based on
-<a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ February 21, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ January 18, 2016 by Filip Jorissen:<br/>
+ Using parameter <code>tauInv</code>
+ since this now exists in
+ <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
+ </li>
+ <li>
+ September 10, 2013 by Michael Wetter:<br/>
+ Set <code>start</code> attribute for <code>wetBulMod</code>
+ to use consistent start values within this model.
+ </li>
+ <li>
+ June 3, 2011 by Michael Wetter:<br/>
+ Revised implementation to add dynamics in such a way that
+ the time constant increases as the mass flow rate tends to zero.
+ This significantly improves the numerics.
+ </li>
+ <li>
+ February 18, 2010, by Michael Wetter:<br/>
+ Revised model to use new block for computing the wet bulb temperature.
+ </li>
+ <li>
+ September 10, 2008, by Michael Wetter:<br/>
+ Renamed output port to have the same interfaces as the dry bulb temperature sensor.
+ </li>
+ <li>
+ May 5, 2008, by Michael Wetter:<br/>
+ First implementation.
+ Implementation is based on
+ <a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureWetBulbTwoPort;

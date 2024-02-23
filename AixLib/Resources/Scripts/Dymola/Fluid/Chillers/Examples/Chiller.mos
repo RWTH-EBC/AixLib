@@ -1,3 +1,3 @@
 simulateModel("AixLib.Fluid.Chillers.Examples.Chiller", tolerance=1e-6, stopTime=3600, method="dassl", resultFile="Chiller");
-createPlot(id=2, position={75, 70, 1210, 980}, y={"chiller.sigBus.T_flow_co","chiller.sigBus.T_flow_ev","chiller.sigBus.T_ret_co","chiller.sigBus.T_ret_ev"}, range={0.0, 3600.0, 5.0, 40.0}, grid=true, filename="chiller.mat", colors={{28,108,200}, {238,46,47}, {0,140,72}, {180,56,148}});
+createPlot(id=2, position={75, 70, 1210, 980}, y={"chiller.sigBus.TConInMea","chiller.sigBus.TEvaInMea","chiller.sigBus.TConOutMea","chiller.sigBus.TEvaOutMea"}, range={0.0, 3600.0, 5.0, 40.0}, grid=true, filename="chiller.mat", colors={{28,108,200}, {238,46,47}, {0,140,72}, {180,56,148}});
 createPlot(id=2, position={75, 70, 1210, 240}, y={"chiller.innerCycle.QEva", "chiller.innerCycle.QCon", "chiller.innerCycle.Pel"}, range={0.0, 3600.0, -200000.0, 300000.0}, grid=true, subPlot=2, colors={{28,108,200}, {238,46,47}, {0,140,72}});

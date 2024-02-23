@@ -5,7 +5,7 @@ model InternalHEXTwoUTube
 
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
-  parameter Modelica.SIunits.Length hSeg = borFieDat.conDat.hBor/nSeg
+  parameter Modelica.Units.SI.Length hSeg=borFieDat.conDat.hBor/nSeg
     "Length of the internal heat exchanger";
 
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
@@ -116,18 +116,19 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Examples/InternalHEXTwoUTube.mos"
         "Simulate and plot"),
             Documentation(info="<html>
-This example simulates the interior thermal behavior of a double U-tube borehole segment.
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source FixedBoundary with Boundary_pT. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-June 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ This example simulates the interior thermal behavior of a double U-tube borehole segment.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source FixedBoundary with Boundary_pT. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ June 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXTwoUTube;

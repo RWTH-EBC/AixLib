@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1984.OW;
+﻿within AixLib.DataBase.Walls.WSchV1984.OW;
 record OW_WSchV1984_L
   "outer wall after WSchV1984, for building of type L (leicht)"
   // New Walls for Dymola 2012, the same number of layers as other mass clases

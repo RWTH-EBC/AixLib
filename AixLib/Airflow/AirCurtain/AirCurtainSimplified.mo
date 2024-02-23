@@ -1,19 +1,18 @@
 within AixLib.Airflow.AirCurtain;
 model AirCurtainSimplified
   "Ideal model for the usage of an air curtain in the context of low order retail zones"
-  parameter Modelica.SIunits.VolumeFlowRate V_flowAirCur = 5
+  parameter Modelica.Units.SI.VolumeFlowRate V_flowAirCur=5
     "Design volume flow rate of the air curtain";
-  parameter Modelica.SIunits.TemperatureDifference TAddAirCur = 5
+  parameter Modelica.Units.SI.TemperatureDifference TAddAirCur=5
     "Temperature increase over the air curtain";
   parameter Real etaAirCur = 0.73
     "Efficiency of the air curtain";
-  parameter Modelica.SIunits.Density rho = 1.25
-    "Air density";
-  parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
+  parameter Modelica.Units.SI.Density rho=1.25 "Air density";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
     "Specific heat capacity of air";
-  parameter Modelica.SIunits.Temperature TBou = 287.15
+  parameter Modelica.Units.SI.Temperature TBou=287.15
     "Threshold of the ambient temperature when aircurtain becomes active";
-  parameter Modelica.SIunits.Power PAirCur = 27500
+  parameter Modelica.Units.SI.Power PAirCur=27500
     "The thermal Power of the air curtain, simplified use";
   Utilities.Psychrometrics.MixedTemperature mixedTemperature
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));

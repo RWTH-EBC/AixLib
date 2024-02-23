@@ -12,14 +12,14 @@ model HumanTotalHeat_VDI2078 "Model for sensible and latent heat output after VD
   Modelica.Blocks.Math.MultiProduct productLatentHeatOutput(nu=2)
     annotation (Placement(transformation(extent={{-26,42},{-6,62}})));
 protected
-  Modelica.Blocks.Tables.CombiTable1D MoistureOutput(
+  Modelica.Blocks.Tables.CombiTable1Dv MoistureOutput(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     tableOnFile=false,
     columns={ActivityType},
-    table=[10,35,95,165; 18,35,95,165; 20,35,110,185; 22,40,125,215; 23,50,135,225;
-        24,60,140,230; 25,60,145,240; 26,65,150,250; 35,65,150,250])
+    table=[10,35,95,165; 18,35,95,165; 20,35,110,185; 22,40,125,215; 23,50,135,
+        225; 24,60,140,230; 25,60,145,240; 26,65,150,250; 35,65,150,250])
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
-  Modelica.Blocks.Tables.CombiTable1D HeatOutputLatent(
+  Modelica.Blocks.Tables.CombiTable1Dv HeatOutputLatent(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     tableOnFile=false,
     columns={ActivityType},

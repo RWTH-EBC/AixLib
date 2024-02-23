@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU;
+﻿within AixLib.Systems.ModularAHU;
 model RegisterModule "AHU register module for heaters and coolers"
     extends AixLib.Fluid.Interfaces.PartialFourPortParallel;
 
@@ -11,24 +11,27 @@ model RegisterModule "AHU register module for heaters and coolers"
               choice="Throttle",
               choice="ThrottlePump"),Dialog(enable=true, group="Hydraulics"));
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
-    parameter Modelica.SIunits.Temperature T_start=293.15
-    "Initialization temperature" annotation(Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Time tau=15
-    "Time constant for PT1 behavior of temperature sensors in air canal" annotation(Dialog(group="Heat exchanger"));
-  parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.Temperature T_start=293.15
+    "Initialization temperature" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Time tau=15
+    "Time constant for PT1 behavior of temperature sensors in air canal"
+    annotation (Dialog(group="Heat exchanger"));
+  parameter Modelica.Units.SI.Temperature T_amb "Ambient temperature";
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
+  parameter Modelica.Units.SI.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
-  replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+  replaceable HydraulicModules.Admix hydraulicModule
+  constrainedby
+    AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule(
+    length=1,
+    Kv=6.3,
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,
     redeclare final package Medium = Medium2,
@@ -48,16 +51,21 @@ model RegisterModule "AHU register module for heaters and coolers"
     final allowFlowReversal2=allowFlowReversal2,
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
-    tau1=5,
-    tau2=10,
+    dp1_nominal=10,
+    dp2_nominal=10,
+    tau1=2,
+    tau2=8,
     energyDynamics=energyDynamics,
     final massDynamics=massDynamics,
     T1_start=T_start,
-    T2_start=T_start)
+    T2_start=T_start,
+    tau_C=10,
+    dT_nom=1,
+    Q_nom=1000*m1_flow_nominal)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
-    annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
+    annotation (Placement(transformation(extent={{-108,-20},{-70,18}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
 
 
@@ -120,7 +128,7 @@ equation
           {60,60}},                   color={0,127,255}));
   connect(hydraulicModule.hydraulicBus, registerBus.hydraulicBus) annotation (
       Line(
-      points={{-36,-40},{-89.94,-40},{-89.94,-0.945}},
+      points={{-36,-40},{-88.905,-40},{-88.905,-0.905}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -131,13 +139,14 @@ equation
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-20,60}},                       color={0,127,255}));
   connect(PT1_airIn.y, registerBus.TAirInMea) annotation (Line(points={{-70,101},
-          {-70,110},{-89.94,110},{-89.94,-0.945}},          color={0,0,127}),
+          {-70,110},{-88.905,110},{-88.905,-0.905}},        color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PT1_airOut.y, registerBus.TAirOutMea) annotation (Line(points={{70,101},
-          {70,110},{-89.94,110},{-89.94,-0.945}}, color={0,0,127}), Text(
+          {70,110},{-88.905,110},{-88.905,-0.905}},
+                                                  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -150,7 +159,7 @@ equation
   connect(hydraulicModule.port_b2, port_b2) annotation (Line(points={{24.8,-78},
           {100,-78},{100,-60}}, color={0,127,255}));
   connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
-          {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
+          {-38,34},{-88.905,34},{-88.905,-0.905}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -389,9 +398,10 @@ equation
   with a first order element to simulate the dynamic behavior of the
   sensors.
 </p>
+</html>", revisions="<html>
 <ul>
-  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
-    First implementation
+  <li>January 23, 2018, by Alexander Kümpel:<br/>
+    First implementation.
   </li>
 </ul>
 </html>"));

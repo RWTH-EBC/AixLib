@@ -23,17 +23,18 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/SetPoints/Examples/Table.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Example that demonstrates the use of the block
-<a href=\"modelica://AixLib.Controls.SetPoints.Table\">
-AixLib.Controls.SetPoints.Table</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Example that demonstrates the use of the block
+ <a href=\"modelica://AixLib.Controls.SetPoints.Table\">
+ AixLib.Controls.SetPoints.Table</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Table;

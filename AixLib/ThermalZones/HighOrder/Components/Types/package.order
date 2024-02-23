@@ -1,0 +1,9 @@
+selectorCoefficients
+CoeffTableEastWestWindow
+CoeffTableSouthWindow
+PartialCoeffTable
+CalcMethodConvectiveHeatTransfer
+CalcMethodRadiativeHeatTransfer
+CalcMethodConvectiveHeatTransferInsideSurface
+ThermalInsulationRegulation
+InsideSurfaceOrientation

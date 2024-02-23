@@ -7,34 +7,6 @@ model IdealPlantPumpErdeis
     dpRes_nominal=11000,
     length=1700)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
-  Demands.ClosedLoop.PumpControlledHeatPumpFixDeltaT
-    pumpControlledHeatPumpFixDeltaT(
-    m_flow_nominal=0.5,
-    redeclare package MediumBuilding = Medium,
-    dTBuilding=20,
-    TSupplyBuilding=333.15,
-    dTDesign=5,
-    Q_flow_nominal=7000,
-    redeclare package Medium = Medium,
-    TReturn=343.15,
-    tau=30)         annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={24,-20})));
-  Demands.ClosedLoop.PumpControlledHeatPumpFixDeltaT
-    pumpControlledHeatPumpFixDeltaT1(
-    m_flow_nominal=0.5,
-    redeclare package MediumBuilding = Medium,
-    Q_flow_nominal=6500,
-    dTBuilding=20,
-    TSupplyBuilding=333.15,
-    dTDesign=5,
-    redeclare package Medium = Medium,
-    TReturn=343.15,
-    tau=30)         annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={80,-20})));
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
     dh=0.2,
     length=5,

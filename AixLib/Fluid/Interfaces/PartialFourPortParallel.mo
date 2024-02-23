@@ -59,47 +59,48 @@ partial model PartialFourPortParallel
   annotation (
     preferredView="info",
     Documentation(info="<html>
-<p>
-This model defines an interface for components with four ports
-in which flows occur in parallel.
-The parameters <code>allowFlowReversal1</code> and <code>allowFlowReversal2</code>
-may be used by models that extend this model to treat flow reversal.
-</p>
-<p>
-This model is identical to
-<a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>,
-except for the following: </p>
-<ol>
-<li>it has four ports, and </li>
-<li>the parameter <code>showDesignFlowDirection</code> is not implemented.
-</li>
-</ol>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-July 8, 2018, by Filip Jorissen:<br/>
-Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
-</li>
-<li>February 18, 2016 by Bram van der Heijde:<br/>
-First implementation, adapted from
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
-AixLib.Fluid.Interfaces.PartialFourPort</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model defines an interface for components with four ports
+ in which flows occur in parallel.
+ The parameters <code>allowFlowReversal1</code> and <code>allowFlowReversal2</code>
+ may be used by models that extend this model to treat flow reversal.
+ </p>
+ <p>
+ This model is identical to
+ <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>,
+ except for the following: </p>
+ <ol>
+ <li>it has four ports, and </li>
+ <li>the parameter <code>showDesignFlowDirection</code> is not implemented.
+ </li>
+ </ol>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ July 8, 2018, by Filip Jorissen:<br/>
+ Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
+ </li>
+ <li>February 18, 2016 by Bram van der Heijde:<br/>
+ First implementation, adapted from
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
+ AixLib.Fluid.Interfaces.PartialFourPort</a>.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={1,1}), graphics={Text(
           extent={{-151,147},{149,107}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
-          textString="%name")}));
+          textString="%name")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialFourPortParallel;

@@ -7,7 +7,7 @@ partial model PartialHeatTransfer
     "Get the prescribed heat flow rate from the input connector"
     annotation(Evaluate=true, HideResult=true);
 
-  parameter Modelica.SIunits.HeatFlowRate prescribedQ
+  parameter Modelica.Units.SI.HeatFlowRate prescribedQ
     "Fixed value of prescribed heat flow rate"
     annotation (Dialog(enable = not use_Q_in));
 

@@ -6,12 +6,12 @@ model BasicFlowFunction_dp_DerivativeCheck
   constant Real gain = 2 "Gain for computing the mass flow rate";
 
   parameter Real k = 0.35 "Flow coefficient";
-  parameter Modelica.SIunits.MassFlowRate m_flow_turbulent = 0.36
+  parameter Modelica.Units.SI.MassFlowRate m_flow_turbulent=0.36
     "Mass flow rate where transition to turbulent flow occurs";
-  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate";
-  Modelica.SIunits.MassFlowRate m_flow_comp "Comparison value for m_flow";
-  Modelica.SIunits.PressureDifference dp "Pressure drop";
-  Modelica.SIunits.MassFlowRate err "Integration error";
+  Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate";
+  Modelica.Units.SI.MassFlowRate m_flow_comp "Comparison value for m_flow";
+  Modelica.Units.SI.PressureDifference dp "Pressure drop";
+  Modelica.Units.SI.MassFlowRate err "Integration error";
 initial equation
  m_flow = m_flow_comp;
 equation
@@ -31,28 +31,29 @@ experiment(
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/BasicFlowFunction_dp_DerivativeCheck.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model validates the implementation of
-<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
-AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>
-and its first order derivative
-<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp_der\">
-AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp_der</a>.
-If the derivative implementation is wrong, the simulation will stop with an error.
-</p>
-</html>",
+ <p>
+ This model validates the implementation of
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
+ AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>
+ and its first order derivative
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp_der\">
+ AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp_der</a>.
+ If the derivative implementation is wrong, the simulation will stop with an error.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-July 29, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ July 29, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BasicFlowFunction_dp_DerivativeCheck;

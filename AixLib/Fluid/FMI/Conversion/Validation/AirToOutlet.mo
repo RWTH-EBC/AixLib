@@ -63,26 +63,27 @@ equation
           -14,-78},{-2,-78}}, color={0,0,127}));
 annotation (
     Documentation(info="<html>
-<p>
-This example validates the conversion model
-<a href=\"modelica://AixLib.Fluid.FMI.Conversion.AirToOutlet\">
-AixLib.Fluid.FMI.Conversion.AirToOutlet</a>
-for the situation without reverse flow.
-</p>
-<p>
-The conversion elements all have either a dry or
-moist air medium, with our without trace substances,
-in order to test all combinations of air.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 20, 2016 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example validates the conversion model
+ <a href=\"modelica://AixLib.Fluid.FMI.Conversion.AirToOutlet\">
+ AixLib.Fluid.FMI.Conversion.AirToOutlet</a>
+ for the situation without reverse flow.
+ </p>
+ <p>
+ The conversion elements all have either a dry or
+ moist air medium, with our without trace substances,
+ in order to test all combinations of air.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 20, 2016 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Conversion/Validation/AirToOutlet.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0));
+    experiment(Tolerance=1e-6, StopTime=1.0),
+  __Dymola_LockedEditing="Model from IBPSA");
 end AirToOutlet;

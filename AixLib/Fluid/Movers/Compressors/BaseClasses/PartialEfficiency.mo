@@ -11,20 +11,20 @@ partial model PartialEfficiency
 
   // Definition of inputs
   //
-  input Modelica.SIunits.Efficiency epsRef(min=0, max=1, nominal=0.05)
-    "Ratio of the real and the ideal displacement volume";
-  input Modelica.SIunits.Volume VDis(min=0)
-    "Displacement volume";
+  input Modelica.Units.SI.Efficiency epsRef(
+    min=0,
+    max=1,
+    nominal=0.05) "Ratio of the real and the ideal displacement volume";
+  input Modelica.Units.SI.Volume VDis(min=0) "Displacement volume";
   input Real piPre(min=0, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
-  input Modelica.SIunits.Frequency rotSpe(min=0)
+  input Modelica.Units.SI.Frequency rotSpe(min=0)
     "Compressor's current rotational speed";
   input Medium.ThermodynamicState staInl
     "Thermodynamic state at compressor's inlet";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at compressor's outlet";
-  input Modelica.SIunits.Temperature TAmb
-    "Ambient temperature";
+  input Modelica.Units.SI.Temperature TAmb "Ambient temperature";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={
@@ -74,96 +74,101 @@ partial model PartialEfficiency
   AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
   These inputs are summarised below:<br/>
 </p>
-<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Type
-    </th>
-    <th>
-      Name
-    </th>
-    <th>
-      Comment
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>epsRef</code>
-    </td>
-    <td>
-      Ratio of the real and the ideal displacement volume
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>VDis</code>
-    </td>
-    <td>
-      Displacement volume
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>piPre</code>
-    </td>
-    <td>
-      Pressure ratio
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>rotSpe</code>
-    </td>
-    <td>
-      Rotational speed
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>staInl</code>
-    </td>
-    <td>
-      Thermodynamic state at compressor's inlet conditions
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>staOut</code>
-    </td>
-    <td>
-      Thermodynamic state at compressor's out conditions
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>input</b>
-    </td>
-    <td>
-      <code>TAmb</code>
-    </td>
-    <td>
-      Ambient temperature
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Inputs and outputs\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Type
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>epsRef</code>
+        </td>
+        <td>
+          Ratio of the real and the ideal displacement volume
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>VDis</code>
+        </td>
+        <td>
+          Displacement volume
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>piPre</code>
+        </td>
+        <td>
+          Pressure ratio
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>rotSpe</code>
+        </td>
+        <td>
+          Rotational speed
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>staInl</code>
+        </td>
+        <td>
+          Thermodynamic state at compressor's inlet conditions
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>staOut</code>
+        </td>
+        <td>
+          Thermodynamic state at compressor's out conditions
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>input</b>
+        </td>
+        <td>
+          <code>TAmb</code>
+        </td>
+        <td>
+          Ambient temperature
+        </td>
+      </tr>
+    </table>
+  </caption>
 </table>
 </html>"));
 end PartialEfficiency;

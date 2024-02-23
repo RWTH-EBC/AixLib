@@ -1,0 +1,4 @@
+simulateModel("AixLib.Utilities.Math.Examples.MovingAverage", method="CVode", tolerance=1e-6, stopTime=50.0, resultFile="MovingAverage");
+createPlot(id = 1,
+ y = {"movingAverage.u", "movingAverage.y"},
+ grid = true);

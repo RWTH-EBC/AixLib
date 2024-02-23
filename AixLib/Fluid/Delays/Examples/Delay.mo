@@ -34,8 +34,8 @@ model Delay
     dp_nominal=5,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{26,-4},{46,16}})));
-  AixLib.Fluid.Delays.DelayFirstOrder del(         m_flow_nominal=5, redeclare package Medium =
-                       Medium,
+  AixLib.Fluid.Delays.DelayFirstOrder del(         m_flow_nominal=5, redeclare
+      package Medium = Medium,
     nPorts=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=283.15)
@@ -61,5 +61,6 @@ equation
       color={0,127,255}));
     annotation (experiment(Tolerance=1e-6, StopTime=300),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Delays/Examples/Delay.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Delay;

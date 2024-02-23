@@ -1,4 +1,4 @@
-simulateModel("AixLib.Utilities.Math.Examples.IntegerReplicator",tolerance=1e-6, stopTime=2, method="dassl", resultFile="IntegerReplicator");
+simulateModel("AixLib.Utilities.Math.Examples.IntegerReplicator",tolerance=1e-6, stopTime=2, method="CVode", resultFile="IntegerReplicator");
 removePlots();
 createPlot(id = 1,
  position = {11, 3, 438, 673},

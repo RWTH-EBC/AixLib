@@ -33,45 +33,46 @@ algorithm
   end if;
   annotation (
     Documentation(info="<html>
-
-Function that approximates <i>y=|x|<sup>n</sup></i> where <i>n &gt; 0</i>
-so that
-<ul>
-<li><i>y(0)</i> is not equal to zero.</li>
-<li><i>dy/dx</i> is bounded and continuous everywhere.</li>
-</ul>
-
-<p>
-This function replaces <i>y=|x|<sup>n</sup></i> in the interval
-<i>-&delta;...+&delta;</i> by a 4-th order polynomial that has the same
-function value and the first and second derivative at <i>x=&plusmn; &delta;</i>.
-</p>
-<p>
-A typical use of this function is to replace the
-function for the convective heat transfer
-coefficient for forced or free convection that is of the form
-<i>h=c |dT|<sup>n</sup></i> for some constant <i>c</i> and exponent
-<i>0 &le; n &le; 1</i>.
-By using this function, the original function
-that has an infinite derivative near zero and that takes on zero
-at the origin is replaced by a function with a bounded derivative and
-a non-zero value at the origin. Physically,
-the region <i>-&delta;...+&delta;</i> may be interpreted as the region
-where heat conduction dominates convection in the boundary layer.
-</p>
-See the package <code>Examples</code> for the graph.
-</html>", revisions="<html>
-<ul>
-<li>
-March 30, 2011, by Michael Wetter:<br/>
-Added <code>zeroDerivative</code> keyword.
-</li>
-<li>
-April 14, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Inline=true,
+ 
+ Function that approximates <i>y=|x|<sup>n</sup></i> where <i>n &gt; 0</i>
+ so that
+ <ul>
+ <li><i>y(0)</i> is not equal to zero.</li>
+ <li><i>dy/dx</i> is bounded and continuous everywhere.</li>
+ </ul>
+ 
+ <p>
+ This function replaces <i>y=|x|<sup>n</sup></i> in the interval
+ <i>-&delta;...+&delta;</i> by a 4-th order polynomial that has the same
+ function value and the first and second derivative at <i>x=&plusmn; &delta;</i>.
+ </p>
+ <p>
+ A typical use of this function is to replace the
+ function for the convective heat transfer
+ coefficient for forced or free convection that is of the form
+ <i>h=c |dT|<sup>n</sup></i> for some constant <i>c</i> and exponent
+ <i>0 &le; n &le; 1</i>.
+ By using this function, the original function
+ that has an infinite derivative near zero and that takes on zero
+ at the origin is replaced by a function with a bounded derivative and
+ a non-zero value at the origin. Physically,
+ the region <i>-&delta;...+&delta;</i> may be interpreted as the region
+ where heat conduction dominates convection in the boundary layer.
+ </p>
+ See the package <code>Examples</code> for the graph.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 30, 2011, by Michael Wetter:<br/>
+ Added <code>zeroDerivative</code> keyword.
+ </li>
+ <li>
+ April 14, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Inline=true,
            smoothOrder=2,
-           derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower);
+           derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower,
+  __Dymola_LockedEditing="Model from IBPSA");
 end regNonZeroPower;

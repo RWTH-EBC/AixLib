@@ -20,34 +20,35 @@ record TopS40slash10 "Pump data for a staged Wilo-Top-S 40/10 pump"
 defaultComponentPrefixes="parameter",
 defaultComponentName="per",
 Documentation(info="<html>
-  <p>Data from:
-  <a href=\"http://productfinder.wilo.com/en/COM/product/000000120001ad890001003a/fc_product_datasheet\">
-  http://productfinder.wilo.com/en/COM/product/000000120001ad890001003a/fc_product_datasheet
-  </a>
-  </p>
-  <p>See
-  <a href=\"modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6\">
-  AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6
-  </a>
-  for more information about how the data is derived.
-  </p>
-  </html>",
+   <p>Data from:
+   <a href=\"http://productfinder.wilo.com/en/COM/product/000000120001ad890001003a/fc_product_datasheet\">
+   http://productfinder.wilo.com/en/COM/product/000000120001ad890001003a/fc_product_datasheet
+   </a>
+   </p>
+   <p>See
+   <a href=\"modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6\">
+   AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6
+   </a>
+   for more information about how the data is derived.
+   </p>
+   </html>",
   revisions="<html>
-<ul>
-<li>
-February 17, 2016, by Michael Wetter:<br/>
-Updated parameter names for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
-</li>
-<li>
-February 17, 2016, by Michael Wetter:<br/>
-Updated parameter names for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
-</li>
-<li>
-January 19, 2016, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ February 17, 2016, by Michael Wetter:<br/>
+ Updated parameter names for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
+ </li>
+ <li>
+ February 17, 2016, by Michael Wetter:<br/>
+ Updated parameter names for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
+ </li>
+ <li>
+ January 19, 2016, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TopS40slash10;

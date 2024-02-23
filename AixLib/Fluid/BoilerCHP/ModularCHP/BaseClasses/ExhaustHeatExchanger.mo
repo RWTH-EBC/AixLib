@@ -27,16 +27,16 @@ model ExhaustHeatExchanger
     CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Modelica.SIunits.Time tau=1
+  parameter Modelica.Units.SI.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.SIunits.Temperature T1_start=T_Amb
+  parameter Modelica.Units.SI.Temperature T1_start=T_Amb
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Advanced", group="Initialization"));
-  parameter Modelica.SIunits.Temperature T2_start=T_Amb
+  parameter Modelica.Units.SI.Temperature T2_start=T_Amb
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Advanced", group="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p1_start=p_Amb
@@ -51,21 +51,22 @@ model ExhaustHeatExchanger
   parameter Boolean ConTec=false
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Condensing technology"));
-  parameter Modelica.SIunits.Temperature T_Amb=298.15
+  parameter Modelica.Units.SI.Temperature T_Amb=298.15
     "Fixed ambient temperature for heat transfer"
     annotation (Dialog(group="Ambient Properties"));
-  parameter Modelica.SIunits.Area A_surExhHea=50
-    "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
-  parameter Modelica.SIunits.Length d_iExh=CHPEngData.dExh
+  parameter Modelica.Units.SI.Area A_surExhHea=50
+    "Surface for exhaust heat transfer"
+    annotation (Dialog(tab="Calibration parameters"));
+  parameter Modelica.Units.SI.Length d_iExh=CHPEngData.dExh
     "Inner diameter of exhaust pipe"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.ThermalConductance GAmb=5
+  parameter Modelica.Units.SI.ThermalConductance GAmb=5
     "Constant thermal conductance of material"
     annotation (Dialog(tab="Calibration parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCoo=850
+  parameter Modelica.Units.SI.ThermalConductance GCoo=850
     "Constant thermal conductance of material"
     annotation (Dialog(tab="Calibration parameters"));
-  parameter Modelica.SIunits.HeatCapacity CExhHex=4000
+  parameter Modelica.Units.SI.HeatCapacity CExhHex=4000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)"
     annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_Amb=101325
@@ -75,29 +76,27 @@ model ExhaustHeatExchanger
       CHPEngData.dp_Coo
     "Guess value of dp = port_a.p - port_b.p"
     annotation (Dialog(tab="Advanced", group="Initialization"));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
+  parameter Modelica.Units.SI.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+  parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow"
     annotation (Dialog(tab="Advanced", group="Initialization"));
-  constant Modelica.SIunits.MolarMass M_H2O=0.01802
-    "Molar mass of water";
+  constant Modelica.Units.SI.MolarMass M_H2O=0.01802 "Molar mass of water";
 
     //Antoine-Parameters needed for the calculation of the saturation vapor pressure xSat_H2OExhDry
   constant Real A=11.7621;
   constant Real B=3874.61;
   constant Real C=229.73;
 
-  parameter Modelica.SIunits.Length l_ExhHex=1
+  parameter Modelica.Units.SI.Length l_ExhHex=1
     "Length of the exhaust pipe inside the exhaust heat exchanger" annotation (
       Dialog(tab="Calibration parameters", group="Engine parameters"));
-  parameter Modelica.SIunits.PressureDifference dp_CooExhHex=CHPEngData.dp_Coo
+  parameter Modelica.Units.SI.PressureDifference dp_CooExhHex=CHPEngData.dp_Coo
     "Pressure drop at nominal mass flow rate inside the coolant circle "
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.MolarMass M_Exh=1200
-    "Molar mass of the exhaust gas"
-    annotation (Dialog(group="Thermal"));
+  parameter Modelica.Units.SI.MolarMass M_Exh=1200
+    "Molar mass of the exhaust gas" annotation (Dialog(group="Thermal"));
 
   Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
   "Quotient of exhaust gas in and outgoing temperature";
@@ -107,35 +106,43 @@ model ExhaustHeatExchanger
     "Water load of the exhaust gas";
   Real xSat_H2OExhDry
     "Saturation water load of the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_H2OExh
+  Modelica.Units.SI.MassFlowRate m_H2OExh
     "Mass flow of water in the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ExhDry
-    "Mass flow of dry exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ConH2OExh
-    "Mass flow of condensing water";
-  Modelica.SIunits.AbsolutePressure pExh
+  Modelica.Units.SI.MassFlowRate m_ExhDry "Mass flow of dry exhaust gas";
+  Modelica.Units.SI.MassFlowRate m_ConH2OExh "Mass flow of condensing water";
+  Modelica.Units.SI.AbsolutePressure pExh
     "Pressure in the exhaust gas stream (assuming ambient conditions)";
-  Modelica.SIunits.AbsolutePressure pSatH2OExh
+  Modelica.Units.SI.AbsolutePressure pSatH2OExh
     "Saturation vapor pressure of the exhaust gas water";
-  Modelica.SIunits.SpecificEnthalpy deltaH_Vap
+  Modelica.Units.SI.SpecificEnthalpy deltaH_Vap
     "Specific enthalpy of vaporization (empirical formula based on table data)";
-  Modelica.SIunits.SpecificHeatCapacity meanCpExh=cHPExhHexBus.calMeaCpExh
+  Modelica.Units.SI.SpecificHeatCapacity meanCpExh=cHPExhHexBus.calMeaCpExh
     "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
-   annotation (Dialog(group = "Thermal"));
-  Modelica.SIunits.HeatFlowRate Q_Gen=cHPExhHexBus.calThePowGen
+    annotation (Dialog(group="Thermal"));
+  Modelica.Units.SI.HeatFlowRate Q_Gen=cHPExhHexBus.calThePowGen
     "Calculated loss heat from the induction machine"
-   annotation (Dialog(group = "Thermal"));
-  Modelica.SIunits.Temperature T_LogMeanExh
+    annotation (Dialog(group="Thermal"));
+  Modelica.Units.SI.Temperature T_LogMeanExh
     "Mean logarithmic temperature of exhaust gas";
 
     //Calculation of the thermodynamic state of the exhaust gas inlet used by the convective heat transfer model
   Medium1.ThermodynamicState state1 = Medium1.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
-  Modelica.SIunits.SpecificEnthalpy h1_in = Medium1.specificEnthalpy(state1);
-  Modelica.SIunits.DynamicViscosity eta1_in = Medium1.dynamicViscosity(state1);
-  Modelica.SIunits.Density rho1_in = Medium1.density_phX(state1.p,h1_in,state1.X);
-  Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
-  Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
-  Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
+  Modelica.Units.SI.SpecificEnthalpy h1_in=Medium1.specificEnthalpy(state1);
+  Modelica.Units.SI.DynamicViscosity eta1_in=Medium1.dynamicViscosity(state1);
+  Modelica.Units.SI.Density rho1_in=Medium1.density_phX(
+      state1.p,
+      h1_in,
+      state1.X);
+  Modelica.Units.SI.Velocity v1_in=senMasFloExh.m_flow/(Modelica.Constants.pi*
+      rho1_in*d_iExh^2/4);
+  Modelica.Units.SI.ThermalConductivity lambda1_in=Medium1.thermalConductivity(
+      state1);
+  Modelica.Units.SI.ReynoldsNumber Re1_in=
+      Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
+      v1_in,
+      rho1_in,
+      eta1_in,
+      d_iExh);
 
   Modelica.Blocks.Sources.RealExpression machineIsOff(y=0)
     "Calculated heat from generator losses"
@@ -247,8 +254,6 @@ model ExhaustHeatExchanger
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
     dh=d_iExh,
-    rho_default=1.18,
-    mu_default=1.82*10^(-5),
     length=l_ExhHex) "Pressure drop of the exhaust gas"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
   AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
@@ -285,9 +290,9 @@ model ExhaustHeatExchanger
         iconTransformation(extent={{-110,-10},{-90,10}})));
 
 protected
-  parameter Modelica.SIunits.Volume VExhHex=l_ExhHex/4*Modelica.Constants.pi*
-      d_iExh^2
-    "Exhaust gas volume inside the exhaust heat exchanger" annotation(Dialog(tab="Calibration parameters",group="Engine parameters"));
+  parameter Modelica.Units.SI.Volume VExhHex=l_ExhHex/4*Modelica.Constants.pi*
+      d_iExh^2 "Exhaust gas volume inside the exhaust heat exchanger"
+    annotation (Dialog(tab="Calibration parameters", group="Engine parameters"));
 
 equation
 //Calculation of water condensation and its usable latent heat

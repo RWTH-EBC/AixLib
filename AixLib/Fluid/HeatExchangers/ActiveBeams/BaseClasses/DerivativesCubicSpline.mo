@@ -41,28 +41,28 @@ algorithm
 annotation (
   defaultComponentName="cubSpl",
   Documentation(info="<html>
-<p>
-This model calculates the output based on the cubic hermite interpolation
-and linear extrapolation of predefined values. The predefined values must create a monotone curve.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 15, 2016, by Michael Wetter:<br/>
-Removed wrong annotations.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/629\">#629</a>.
-</li>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model calculates the output based on the cubic hermite interpolation
+ and linear extrapolation of predefined values. The predefined values must create a monotone curve.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 15, 2016, by Michael Wetter:<br/>
+ Removed wrong annotations.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/629\">#629</a>.
+ </li>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
     Line(points={{46,-76},{46,58}},
                                   color={192,192,192}),
@@ -79,5 +79,6 @@ First implementation.
           points={{-82,-72},{-40,-72},{-18,-56},{-6,-32},{0,-8},{14,26},{32,46},
               {46,50},{80,50}},
           color={0,0,0},
-          smooth=Smooth.Bezier)}));
+          smooth=Smooth.Bezier)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DerivativesCubicSpline;

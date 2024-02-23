@@ -1,27 +1,28 @@
 within AixLib.Utilities.Sensors.ExergyMeter;
 model StoredExergyMeter
 
-    extends Modelica.Icons.RotationalSensor;
+    extends Modelica.Icons.RoundSensor;
 
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the sensor" annotation (choicesAllMatching=true);
 
   parameter Integer n=1 "Number of identical volumes";
 
-  parameter Modelica.SIunits.Mass mass=100 "mass of each layer";
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.Units.SI.Mass mass=100 "mass of each layer";
+  parameter Modelica.Units.SI.Temperature T_start=323.15
     "Start reference temperature of medium"
     annotation (Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.Temperature T_ref_start=273.15
+  parameter Modelica.Units.SI.Temperature T_ref_start=273.15
     "Start reference temperature" annotation (Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.Energy exergyContent_start = 1e+05
+  parameter Modelica.Units.SI.Energy exergyContent_start=1e+05
     "Start exergy content" annotation (Dialog(tab="Initialisation"));
 
   Modelica.Fluid.Sensors.SpecificEntropy specificEntropy[n](redeclare package Medium =
                Medium)
     "Specific entropy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{70,0},{50,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package
+                                                                                Medium =
                Medium)
     "Specific enthalpy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -35,10 +36,12 @@ model StoredExergyMeter
     "Reference pressure"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef[n](redeclare package Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef[n](redeclare
+      package                                                                      Medium =
                        Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{-10,60},{-30,40}})));
-  Modelica.Fluid.Sensors.SpecificEntropy specificEntropyRef[n](redeclare package Medium =
+  Modelica.Fluid.Sensors.SpecificEntropy specificEntropyRef[n](redeclare
+      package                                                                    Medium =
                        Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{10,60},{30,40}})));
   Modelica.Blocks.Interfaces.RealOutput exergyChangeRate(final quantity="Power",
@@ -72,10 +75,10 @@ model StoredExergyMeter
         origin={0,0})));
 
   Modelica.Blocks.Interfaces.RealInput T[n](
-    final unit="K",
-    displayUnit="degC",
-    final quantity="ThermodynamicTemperature",
-    min=0) "Actual temperature"
+    each final unit="K",
+    each displayUnit="degC",
+    each final quantity="ThermodynamicTemperature",
+    each min=0) "Actual temperature"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-108}), iconTransformation(
@@ -136,16 +139,16 @@ model StoredExergyMeter
         rotation=180,
         origin={27,-32})));
   Modelica.Blocks.Interfaces.RealInput X_ref[Medium.nX](
-  final quantity="MassFraction", final unit="1", min=0, max=1)
+  each final quantity="MassFraction", each final unit="1", each min=0, each max=1)
     "Reference composition"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,-70})));
   Modelica.Blocks.Interfaces.RealInput X[Medium.nX](
-    final quantity="MassFraction",
-    final unit="1",
-    min=0,
-    max=1) "Actual composition"    annotation (Placement(transformation(
+    each final quantity="MassFraction",
+    each final unit="1",
+    each min=0,
+    each max=1) "Actual composition"    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={50,-108})));

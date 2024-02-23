@@ -7,7 +7,7 @@ model FileWriter "Partial model for writing results to a .csv file"
     annotation(Evaluate=true, Dialog(connectorSizing=true));
   parameter String fileName = getInstanceName() + ".csv"
     "File name, including extension";
-  parameter Modelica.SIunits.Time samplePeriod
+  parameter Modelica.Units.SI.Time samplePeriod
     "Sample period: equidistant interval for which the inputs are saved";
   parameter String delimiter = "\t"
     "Delimiter for csv file"
@@ -29,8 +29,7 @@ protected
   parameter Boolean isCombiTimeTable = false
     "=true, if CombiTimeTable header should be prepended upon destruction"
     annotation(Evaluate=true);
-  parameter Modelica.SIunits.Time t0(fixed=false)
-    "First sample time instant";
+  parameter Modelica.Units.SI.Time t0(fixed=false) "First sample time instant";
   parameter String insNam = getInstanceName() "Instance name";
   AixLib.Utilities.IO.Files.BaseClasses.FileWriterObject filWri=
       AixLib.Utilities.IO.Files.BaseClasses.FileWriterObject(
@@ -80,46 +79,47 @@ algorithm
   defaultComponentName="csvWri",
   Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-86,-54},{90,-96}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Right,
           textString="%fileName"),                                        Text(
           extent={{-86,-54},{90,-96}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Right,
           textString="%fileName"),                                        Text(
           extent={{-86,-16},{90,-58}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Right,
           textString="%samplePeriod")}),                         Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<ul>
-<li>
-October 17, 2019 by Filip Jorissen:<br/>
-Avoiding overflow of string buffer in dymola.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1219\">#1219</a>.
-</li>
-<li>
-October 8, 2018 by Filip Jorissen:<br/>
-Added implementation for the parameter <code>significantDigits</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
-</li>
-<li>
-September 6, 2018 by Filip Jorissen:<br/>
-Improved comment of <code>samplePeriod</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1010\">#1010</a>.
-</li>
-<li>
-May 10, 2018 by Filip Jorissen:<br/>
-First implementation.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
-</li>
-</ul>
-</html>",
+ <ul>
+ <li>
+ October 17, 2019 by Filip Jorissen:<br/>
+ Avoiding overflow of string buffer in dymola.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1219\">#1219</a>.
+ </li>
+ <li>
+ October 8, 2018 by Filip Jorissen:<br/>
+ Added implementation for the parameter <code>significantDigits</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
+ </li>
+ <li>
+ September 6, 2018 by Filip Jorissen:<br/>
+ Improved comment of <code>samplePeriod</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1010\">#1010</a>.
+ </li>
+ <li>
+ May 10, 2018 by Filip Jorissen:<br/>
+ First implementation.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
+ </li>
+ </ul>
+ </html>",
         info="<html>
-<p>
-Base class for a file writer.        
-See extending classes.
-</p>
-</html>"));
+ <p>
+ Base class for a file writer.        
+ See extending classes.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FileWriter;

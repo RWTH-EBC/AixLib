@@ -1,34 +1,39 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions;
 function convectionResistanceCircularPipe
   "Thermal resistance from the fluid in pipes and the grout zones (Bauer et al. 2011)"
+  extends Modelica.Icons.Function;
 
   // Geometry of the borehole
-  input Modelica.SIunits.Height hSeg "Height of the element";
-  input Modelica.SIunits.Radius rTub "Tube radius";
-  input Modelica.SIunits.Length eTub "Tube thickness";
+  input Modelica.Units.SI.Height hSeg "Height of the element";
+  input Modelica.Units.SI.Radius rTub "Tube radius";
+  input Modelica.Units.SI.Length eTub "Tube thickness";
   // thermal properties
-  input Modelica.SIunits.ThermalConductivity kMed
+  input Modelica.Units.SI.ThermalConductivity kMed
     "Thermal conductivity of the fluid";
-  input Modelica.SIunits.DynamicViscosity muMed
+  input Modelica.Units.SI.DynamicViscosity muMed
     "Dynamic viscosity of the fluid";
-  input Modelica.SIunits.SpecificHeatCapacity cpMed
+  input Modelica.Units.SI.SpecificHeatCapacity cpMed
     "Specific heat capacity of the fluid";
-  input Modelica.SIunits.MassFlowRate m_flow "Mass flow rate";
-  input Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+  input Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate";
+  input Modelica.Units.SI.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
   // Outputs
-  output Modelica.SIunits.ThermalResistance RFluPip
+  output Modelica.Units.SI.ThermalResistance RFluPip
     "Convection resistance (or conduction in fluid if no mass flow)";
 
 protected
-  parameter Modelica.SIunits.Radius rTub_in = rTub - eTub
-    "Pipe inner radius";
-  Modelica.SIunits.CoefficientOfHeatTransfer h
+  parameter Modelica.Units.SI.Radius rTub_in=rTub - eTub "Pipe inner radius";
+  Modelica.Units.SI.CoefficientOfHeatTransfer h
     "Convective heat transfer coefficient of the fluid";
 
   Real k(unit="s/kg")
     "Coefficient used in the computation of the convective heat transfer coefficient";
-  Modelica.SIunits.MassFlowRate m_flow_abs = AixLib.Utilities.Math.Functions.spliceFunction(m_flow,-m_flow,m_flow,m_flow_nominal/30);
+  Modelica.Units.SI.MassFlowRate m_flow_abs=
+      AixLib.Utilities.Math.Functions.spliceFunction(
+      m_flow,
+      -m_flow,
+      m_flow,
+      m_flow_nominal/30);
   Real Re "Reynolds number";
   Real NuTurb "Nusselt at Re=2400";
   Real Nu "Nusselt";
@@ -60,54 +65,55 @@ algorithm
   RFluPip := 1/(2*Modelica.Constants.pi*rTub_in*hSeg*h);
 
   annotation (Diagram(graphics), Documentation(info="<html>
-<p>
-This model computes the convection resistance in the pipes of a borehole segment 
-with heigth <i>h<sub>Seg</sub></i> using correlations suggested by Bergman et al. (2011).
-</p>
-<p>
-If the flow is laminar (<i>Re &le; 2300</i>, with <i>Re</i> being the Reynolds number of the flow),
-the Nusselt number of the flow is assumed to be constant at 3.66. If the flow is turbulent (<i>Re &gt; 2300</i>),
-the correlation of Dittus-Boelter is used to find the convection heat transfer coefficient as
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  Nu = 0.023 &nbsp; Re<sup>0.8</sup> &nbsp; Pr<sup>n</sup>,
-</p>
-<p>
-where <i>Nu</i> is the Nusselt number and 
-<i>Pr</i> is the Prandlt number.
-A value of <i>n=0.35</i> is used, as the reference uses <i>n=0.4</i> for heating and 
-<i>n=0.3</i> for cooling. To ensure that the function is continuously differentiable,
-a smooth transition between the laminar and turbulent values is created for the
-range <i>2300 &lt; Re &lt; 2400</i>.
-</p>
-<h4>References</h4>
-<p>
-Bergman, T. L., Incropera, F. P., DeWitt, D. P., &amp; Lavine, A. S. (2011). <i>Fundamentals of heat and mass
-transfer</i> (7th ed.). New York: John Wiley &amp; Sons.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 10, 2018, by Alex Laferri&egrave;re:<br/>
-Added laminar flow and smooth laminar-turbulent transition.
-Revised documentation.
-</li>
-<li>
-February 14, 2014, by Michael Wetter:<br/>
-Removed unused input <code>rBor</code>.
-Revised documentation.
-</li>
-<li>
-January 24, 2014, by Michael Wetter:<br/>
-Revised implementation. 
-Changed <code>cpFluid</code> to <code>cpMed</code> to use consistent notation.
-Added regularization for computation of convective heat transfer coefficient to
-avoid an event and a non-differentiability.
-</li>
-<li>
-January 23, 2014, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model computes the convection resistance in the pipes of a borehole segment 
+ with heigth <i>h<sub>Seg</sub></i> using correlations suggested by Bergman et al. (2011).
+ </p>
+ <p>
+ If the flow is laminar (<i>Re &le; 2300</i>, with <i>Re</i> being the Reynolds number of the flow),
+ the Nusselt number of the flow is assumed to be constant at 3.66. If the flow is turbulent (<i>Re &gt; 2300</i>),
+ the correlation of Dittus-Boelter is used to find the convection heat transfer coefficient as
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+   Nu = 0.023 &nbsp; Re<sup>0.8</sup> &nbsp; Pr<sup>n</sup>,
+ </p>
+ <p>
+ where <i>Nu</i> is the Nusselt number and 
+ <i>Pr</i> is the Prandlt number.
+ A value of <i>n=0.35</i> is used, as the reference uses <i>n=0.4</i> for heating and 
+ <i>n=0.3</i> for cooling. To ensure that the function is continuously differentiable,
+ a smooth transition between the laminar and turbulent values is created for the
+ range <i>2300 &lt; Re &lt; 2400</i>.
+ </p>
+ <h4>References</h4>
+ <p>
+ Bergman, T. L., Incropera, F. P., DeWitt, D. P., &amp; Lavine, A. S. (2011). <i>Fundamentals of heat and mass
+ transfer</i> (7th ed.). New York: John Wiley &amp; Sons.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 10, 2018, by Alex Laferri&egrave;re:<br/>
+ Added laminar flow and smooth laminar-turbulent transition.
+ Revised documentation.
+ </li>
+ <li>
+ February 14, 2014, by Michael Wetter:<br/>
+ Removed unused input <code>rBor</code>.
+ Revised documentation.
+ </li>
+ <li>
+ January 24, 2014, by Michael Wetter:<br/>
+ Revised implementation. 
+ Changed <code>cpFluid</code> to <code>cpMed</code> to use consistent notation.
+ Added regularization for computation of convective heat transfer coefficient to
+ avoid an event and a non-differentiability.
+ </li>
+ <li>
+ January 23, 2014, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end convectionResistanceCircularPipe;

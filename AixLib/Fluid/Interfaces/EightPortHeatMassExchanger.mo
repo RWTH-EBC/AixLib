@@ -14,26 +14,22 @@ model EightPortHeatMassExchanger
   extends AixLib.Fluid.Interfaces.EightPortFlowResistanceParameters(
      final computeFlowResistance1=true, final computeFlowResistance2=true,final computeFlowResistance3=true, final computeFlowResistance4=true);
 
-  parameter Modelica.SIunits.Time tau1 = 30 "Time constant at nominal flow"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
-  parameter Modelica.SIunits.Time tau2 = 30 "Time constant at nominal flow"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
-  parameter Modelica.SIunits.Time tau3 = 30 "Time constant at nominal flow"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
-  parameter Modelica.SIunits.Time tau4 = 30 "Time constant at nominal flow"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
 
-  // Advanced
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Time tau1=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+  parameter Modelica.Units.SI.Time tau2=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+  parameter Modelica.Units.SI.Time tau3=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+  parameter Modelica.Units.SI.Time tau4=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 
   // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Formulation of energy balance"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
-    "Formulation of mass balance"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
   // Initialization
   parameter Medium1.AbsolutePressure p1_start = Medium1.p_default
@@ -108,13 +104,13 @@ model EightPortHeatMassExchanger
     "Nominal value of trace substances. (Set to typical order of magnitude.)"
    annotation (Dialog(tab="Initialization", group = "Medium 4", enable=Medium4.nC > 0));
 
- Modelica.SIunits.HeatFlowRate Q1_flow = vol1.heatPort.Q_flow
+  Modelica.Units.SI.HeatFlowRate Q1_flow=vol1.heatPort.Q_flow
     "Heat flow rate into medium 1";
-  Modelica.SIunits.HeatFlowRate Q2_flow = vol2.heatPort.Q_flow
+  Modelica.Units.SI.HeatFlowRate Q2_flow=vol2.heatPort.Q_flow
     "Heat flow rate into medium 2";
-  Modelica.SIunits.HeatFlowRate Q3_flow = vol3.heatPort.Q_flow
+  Modelica.Units.SI.HeatFlowRate Q3_flow=vol3.heatPort.Q_flow
     "Heat flow rate into medium 1";
-  Modelica.SIunits.HeatFlowRate Q4_flow = vol4.heatPort.Q_flow
+  Modelica.Units.SI.HeatFlowRate Q4_flow=vol4.heatPort.Q_flow
     "Heat flow rate into medium 2";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol1(
@@ -126,7 +122,7 @@ model EightPortHeatMassExchanger
                          then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     massDynamics=if tau1 > Modelica.Constants.eps
-                         then massDynamics else
+                         then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     final p_start=p1_start,
     final T_start=T1_start,
@@ -143,7 +139,7 @@ model EightPortHeatMassExchanger
                          then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     massDynamics=if tau2 > Modelica.Constants.eps
-                         then massDynamics else
+                         then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     final p_start=p2_start,
     final T_start=T2_start,
@@ -161,7 +157,7 @@ model EightPortHeatMassExchanger
                          then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     massDynamics=if tau3 > Modelica.Constants.eps
-                         then massDynamics else
+                         then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     final p_start=p3_start,
     final T_start=T3_start,
@@ -182,7 +178,7 @@ model EightPortHeatMassExchanger
                          then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     massDynamics=if tau4 > Modelica.Constants.eps
-                         then massDynamics else
+                         then energyDynamics else
                          Modelica.Fluid.Types.Dynamics.SteadyState,
     final p_start=p4_start,
     final T_start=T4_start,
@@ -243,36 +239,40 @@ model EightPortHeatMassExchanger
 protected
   parameter Medium1.ThermodynamicState sta1_nominal=Medium1.setState_pTX(
       T=Medium1.T_default, p=Medium1.p_default, X=Medium1.X_default);
-  parameter Modelica.SIunits.Density rho1_nominal=Medium1.density(sta1_nominal)
+  parameter Modelica.Units.SI.Density rho1_nominal=Medium1.density(sta1_nominal)
     "Density, used to compute fluid volume";
   parameter Medium2.ThermodynamicState sta2_nominal=Medium2.setState_pTX(
       T=Medium2.T_default, p=Medium2.p_default, X=Medium2.X_default);
-  parameter Modelica.SIunits.Density rho2_nominal=Medium2.density(sta2_nominal)
+  parameter Modelica.Units.SI.Density rho2_nominal=Medium2.density(sta2_nominal)
     "Density, used to compute fluid volume";
   parameter Medium1.ThermodynamicState sta3_nominal=Medium3.setState_pTX(
       T=Medium3.T_default, p=Medium3.p_default, X=Medium3.X_default);
-  parameter Modelica.SIunits.Density rho3_nominal=Medium3.density(sta3_nominal)
+  parameter Modelica.Units.SI.Density rho3_nominal=Medium3.density(sta3_nominal)
     "Density, used to compute fluid volume";
   parameter Medium4.ThermodynamicState sta4_nominal=Medium4.setState_pTX(
       T=Medium4.T_default, p=Medium4.p_default, X=Medium4.X_default);
-  parameter Modelica.SIunits.Density rho4_nominal=Medium4.density(sta4_nominal)
+  parameter Modelica.Units.SI.Density rho4_nominal=Medium4.density(sta4_nominal)
     "Density, used to compute fluid volume";
 
   parameter Medium1.ThermodynamicState sta1_start=Medium1.setState_pTX(
       T=T1_start, p=p1_start, X=X1_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h1_outflow_start = Medium1.specificEnthalpy(sta1_start)
+  parameter Modelica.Units.SI.SpecificEnthalpy h1_outflow_start=
+      Medium1.specificEnthalpy(sta1_start)
     "Start value for outflowing enthalpy";
   parameter Medium2.ThermodynamicState sta2_start=Medium2.setState_pTX(
       T=T2_start, p=p2_start, X=X2_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h2_outflow_start = Medium2.specificEnthalpy(sta2_start)
+  parameter Modelica.Units.SI.SpecificEnthalpy h2_outflow_start=
+      Medium2.specificEnthalpy(sta2_start)
     "Start value for outflowing enthalpy";
   parameter Medium3.ThermodynamicState sta3_start=Medium3.setState_pTX(
       T=T3_start, p=p3_start, X=X3_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h3_outflow_start = Medium3.specificEnthalpy(sta3_start)
+  parameter Modelica.Units.SI.SpecificEnthalpy h3_outflow_start=
+      Medium3.specificEnthalpy(sta3_start)
     "Start value for outflowing enthalpy";
   parameter Medium4.ThermodynamicState sta4_start=Medium4.setState_pTX(
       T=T4_start, p=p4_start, X=X4_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h4_outflow_start = Medium4.specificEnthalpy(sta4_start)
+  parameter Modelica.Units.SI.SpecificEnthalpy h4_outflow_start=
+      Medium4.specificEnthalpy(sta4_start)
     "Start value for outflowing enthalpy";
 
 initial algorithm
@@ -280,54 +280,37 @@ initial algorithm
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau1 > Modelica.Constants.eps,
 "The parameter tau1, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau1 = " + String(tau1) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau1 > Modelica.Constants.eps,
-"The parameter tau1, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau1 = " + String(tau1) + "\n");
+  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+  Received tau1 = "+ String(tau1) + "\n");
 
  // Check for tau2
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau2 > Modelica.Constants.eps,
 "The parameter tau2, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau2 = " + String(tau2) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau2 > Modelica.Constants.eps,
-"The parameter tau2, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau2 = " + String(tau2) + "\n");
+  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+  Received tau2 = "+ String(tau2) + "\n");
 
   // Check for tau1
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau3 > Modelica.Constants.eps,
 "The parameter tau3, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau3 = " + String(tau3) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau3 > Modelica.Constants.eps,
-"The parameter tau3, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau3 = " + String(tau3) + "\n");
+  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+  Received tau3 = "+ String(tau3) + "\n");
 
  // Check for tau2
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau4 > Modelica.Constants.eps,
 "The parameter tau4, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau4 = " + String(tau4) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau4 > Modelica.Constants.eps,
-"The parameter tau4, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau4 = " + String(tau4) + "\n");
+  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+  Received tau4 = "+ String(tau4) + "\n");
 
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
 
 equation
   connect(vol1.ports[2], port_b1) annotation (Line(
-      points={{2,80},{100,80}},
+      points={{1,80},{100,80}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_a1, preDro1.port_a) annotation (Line(
@@ -335,7 +318,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(preDro1.port_b, vol1.ports[1]) annotation (Line(
-      points={{-60,80},{-2,80}},
+      points={{-60,80},{-1,80}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_a2, preDro2.port_a) annotation (Line(
@@ -347,11 +330,11 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(preDro4.port_b, vol4.ports[1]) annotation (Line(
-      points={{66,-80},{-58,-80},{-58,-10}},
+      points={{66,-80},{-59,-80},{-59,-10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_b4, vol4.ports[2]) annotation (Line(
-      points={{-100,-80},{-62,-80},{-62,-10}},
+      points={{-100,-80},{-61,-80},{-61,-10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_a3, preDro3.port_a) annotation (Line(
@@ -359,37 +342,44 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(preDro3.port_b, vol3.ports[1]) annotation (Line(
-      points={{-70,-32},{-54,-32},{-54,-76},{-2,-76},{-2,-70}},
+      points={{-70,-32},{-54,-32},{-54,-76},{-1,-76},{-1,-70}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_b3, vol3.ports[2]) annotation (Line(
-      points={{100,-30},{90,-30},{90,-66},{62,-66},{62,-76},{2,-76},{2,-70}},
+      points={{100,-30},{90,-30},{90,-66},{62,-66},{62,-76},{1,-76},{1,-70}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(port_b2, vol2.ports[1]) annotation (Line(
-      points={{-100,30},{58,30},{58,10}},
+      points={{-100,30},{59,30},{59,10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(preDro2.port_b, vol2.ports[2]) annotation (Line(
-      points={{70,30},{62,30},{62,10}},
+      points={{70,30},{61,30},{61,10}},
       color={0,127,255},
       smooth=Smooth.None));
   annotation (
     Documentation(info="<html>
-<p>This component transports four fluid streams between eight ports. It provides the basic model for implementing a dynamic heat exchanger. </p>
-<p>The model can be used as-is, although there will be no heat or mass transfer between the four fluid streams. To add heat transfer, heat flow can be added to the heat port of the four volumes.</p>
-<h4>Implementation</h4>
-<p>The variable names follow the conventions used in <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>. </p>
-</html>", revisions="<html>
-<ul>
-<li>July 18, 2018, by Massimo Cimmino:
-<br/>Remove start values of m_flow and dp variables.
-</li>
-</ul>
-<ul>
-<li>July 2014, by Damien Picard:<br/>First implementation. </li>
-</ul>
-</html>"),
+ <p>This component transports four fluid streams between eight ports. It provides the basic model for implementing a dynamic heat exchanger. </p>
+ <p>The model can be used as-is, although there will be no heat or mass transfer between the four fluid streams. To add heat transfer, heat flow can be added to the heat port of the four volumes.</p>
+ <h4>Implementation</h4>
+ <p>The variable names follow the conventions used in <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>. </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ July 18, 2018, by Massimo Cimmino:<br/>
+ Remove start values of m_flow and dp variables.
+ </li>
+ </ul>
+ <ul>
+ <li>July 2014, by Damien Picard:<br/>First implementation. </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -425,5 +415,6 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics));
+            100,100}}), graphics),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EightPortHeatMassExchanger;

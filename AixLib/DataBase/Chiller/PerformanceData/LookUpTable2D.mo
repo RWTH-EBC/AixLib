@@ -1,6 +1,7 @@
 within AixLib.DataBase.Chiller.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
-  extends AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation";
@@ -87,21 +88,21 @@ protected
 equation
   if printAsserts then
     assert(
-        minSou + 273.15 < sigBus.T_flow_co,
+        minSou + 273.15 <sigBus.TConInMea,
         "Current T_flow_co is too low. Extrapolation of data will result in unrealistic results",
         level=AssertionLevel.warning);
     assert(
-        maxSou + 273.15 > sigBus.T_flow_co,
+        maxSou + 273.15 >sigBus.TConInMea,
         "Current T_flow_co is too high. Extrapolation of data will result in unrealistic results",
         level=AssertionLevel.warning);
     assert(
-        minSup + 273.15 < sigBus.T_ret_ev,
-        "Current T_ret_ev is too low. Extrapolation of data will result in unrealistic results",
-        level=AssertionLevel.warning);
+      minSup + 273.15 < sigBus.TEvaOutMea,
+      "Current T_ret_ev is too low. Extrapolation of data will result in unrealistic results",
+      level=AssertionLevel.warning);
     assert(
-        maxSup + 273.15 > sigBus.T_ret_ev,
-        "Current T_ret_ev is too high. Extrapolation of data will result in unrealistic results",
-        level=AssertionLevel.warning);
+      maxSup + 273.15 > sigBus.TEvaOutMea,
+      "Current T_ret_ev is too high. Extrapolation of data will result in unrealistic results",
+      level=AssertionLevel.warning);
   else
   end if;
   connect(t_Co_in.y,Qdot_EvaTable. u2) annotation (Line(points={{52,65.4},{52,
@@ -113,14 +114,14 @@ equation
   connect(t_Ev_ou.y,Qdot_EvaTable. u1) annotation (Line(points={{-54,69.4},{-54,
           60},{52,60},{52,50.8},{54.4,50.8}},
                                   color={0,0,127}));
-  connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
+  connect(sigBus.TEvaOutMea, t_Ev_ou.u) annotation (Line(
       points={{1.075,104.07},{-54,104.07},{-54,83.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
+  connect(sigBus.TConInMea,t_Co_in. u) annotation (Line(
       points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -135,20 +136,20 @@ equation
   connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{68,-68.6},{
           68,-70},{-76.4,-70},{-76.4,-72.8}},                             color=
          {0,0,127}));
-  connect(sigBus.iceFac, proRedQEva.u1) annotation (Line(
-      points={{1.075,104.07},{20,104.07},{20,-42},{72,-42},{72,-54.8},{71.6,
-          -54.8}},
+  connect(sigBus.iceFacMea, proRedQEva.u1) annotation (Line(
+      points={{1.075,104.07},{20,104.07},{20,-42},{72,-42},{72,-54.8},{71.6,-54.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
   connect(nTimesPel.y, Pel) annotation (Line(points={{-41,-18.7},{-41,-30},{0,
           -30},{0,-110}},          color={0,0,127}));
   connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-13,39.7},{-13,
           31.4},{-13.2,31.4}}, color={0,0,127}));
-  connect(sigBus.n, nTimesSF.u1) annotation (Line(
+  connect(sigBus.nSet, nTimesSF.u1) annotation (Line(
       points={{1.075,104.07},{-4,104.07},{-4,31.4},{-4.8,31.4}},
       color={255,204,51},
       thickness=0.5), Text(

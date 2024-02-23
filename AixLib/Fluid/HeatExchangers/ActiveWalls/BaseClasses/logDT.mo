@@ -3,8 +3,8 @@ function logDT
 
   import Modelica.Math.log;
 
-input Modelica.SIunits.Temperature Temp_in[3];
-output Modelica.SIunits.Temperature Temp_out;
+  input Modelica.Units.SI.Temperature Temp_in[3];
+  output Modelica.Units.SI.Temperature Temp_out;
 
 algorithm
 Temp_out :=(Temp_in[1] - Temp_in[2])/log((Temp_in[1] - Temp_in[3])/(Temp_in[2] -

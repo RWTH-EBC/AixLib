@@ -1,9 +1,8 @@
 within AixLib.Media.Refrigerants.R410A;
 function pressureSatVap_T
   "Function that calculates the pressure of saturated R410A vapor based on temperature"
-  input Modelica.SIunits.Temperature T
-    "Temperature of refrigerant";
-  output Modelica.SIunits.AbsolutePressure p
+  input Modelica.Units.SI.Temperature T "Temperature of refrigerant";
+  output Modelica.Units.SI.AbsolutePressure p
     "Pressure of saturated refrigerant vapor";
 
 protected
@@ -12,12 +11,6 @@ protected
 
   final Real x0 = 0.2086902
     "x0 for saturation pressure of refrigerant vapor";
-
-  final Modelica.SIunits.Temperature TCri = 345.25
-    "Critical temperature of refrigerant";
-
-  final Modelica.SIunits.AbsolutePressure pCri = 4925.1e3
-    "Critical pressure of refrigerant";
 
   Real x
     "Independent variable";
@@ -30,22 +23,23 @@ algorithm
 
 annotation (smoothOrder=1,
 preferredView="info",Documentation(info="<HTML>
-<p>
-Function that calculates the pressure of saturated R410A vapor based on temperature.
-</p>
-<h4>References</h4>
-<p>
-Thermodynamic properties of DuPont Suva 410A:
-<a href=\"https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf\">
-https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
-</a>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 17, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Function that calculates the pressure of saturated R410A vapor based on temperature.
+ </p>
+ <h4>References</h4>
+ <p>
+ Thermodynamic properties of DuPont Suva 410A:
+ <a href=\"https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf\">
+ https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
+ </a>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 17, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end pressureSatVap_T;

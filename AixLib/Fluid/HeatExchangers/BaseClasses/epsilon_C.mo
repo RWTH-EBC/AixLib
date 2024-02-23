@@ -1,30 +1,30 @@
 within AixLib.Fluid.HeatExchangers.BaseClasses;
 function epsilon_C
   "Computes heat exchanger effectiveness for given capacity flow rates and heat exchanger flow regime"
-  input Modelica.SIunits.ThermalConductance UA "UA value";
-  input Modelica.SIunits.ThermalConductance C1_flow
+  input Modelica.Units.SI.ThermalConductance UA "UA value";
+  input Modelica.Units.SI.ThermalConductance C1_flow
     "Enthalpy flow rate medium 1";
-  input Modelica.SIunits.ThermalConductance C2_flow
+  input Modelica.Units.SI.ThermalConductance C2_flow
     "Enthalpy flow rate medium 2";
   input Integer flowRegime
     "Heat exchanger flow regime, see  AixLib.Fluid.Types.HeatExchangerFlowRegime";
-  input Modelica.SIunits.ThermalConductance CMin_flow_nominal
+  input Modelica.Units.SI.ThermalConductance CMin_flow_nominal
     "Minimum enthalpy flow rate at nominal condition";
-  input Modelica.SIunits.ThermalConductance CMax_flow_nominal
+  input Modelica.Units.SI.ThermalConductance CMax_flow_nominal
     "Maximum enthalpy flow rate at nominal condition";
   input Real delta = 1E-3 "Small value used for smoothing";
   output Real eps(min=0, max=1) "Heat exchanger effectiveness";
 
 protected
-  Modelica.SIunits.ThermalConductance deltaCMin
+  Modelica.Units.SI.ThermalConductance deltaCMin
     "Small number for capacity flow rate";
-  Modelica.SIunits.ThermalConductance deltaCMax
+  Modelica.Units.SI.ThermalConductance deltaCMax
     "Small number for capacity flow rate";
-  Modelica.SIunits.ThermalConductance CMin_flow "Minimum capacity flow rate";
-  Modelica.SIunits.ThermalConductance CMax_flow "Maximum capacity flow rate";
-  Modelica.SIunits.ThermalConductance CMinNZ_flow
+  Modelica.Units.SI.ThermalConductance CMin_flow "Minimum capacity flow rate";
+  Modelica.Units.SI.ThermalConductance CMax_flow "Maximum capacity flow rate";
+  Modelica.Units.SI.ThermalConductance CMinNZ_flow
     "Minimum capacity flow rate, bounded away from zero";
-  Modelica.SIunits.ThermalConductance CMaxNZ_flow
+  Modelica.Units.SI.ThermalConductance CMaxNZ_flow
     "Maximum capacity flow rate, bounded away from zero";
   Real gaiEps(min=0, max=1)
     "Gain used to force UA to zero for very small flow rates";
@@ -78,47 +78,48 @@ algorithm
   Inline=false,
   smoothOrder=1,
   Documentation(info="<html>
-<p>
-This function computes the heat exchanger effectiveness,
-the Number of Transfer Units, and the capacity flow ratio
-for given capacity flow rates.
-</p>
-<p>
-The implementation allows for zero flow rate.
-As <code>CMin_flow</code> crosses <code>delta*CMin_flow_nominal</code> from above,
-the Number of Transfer Units and the heat exchanger effectiveness go to zero.
-</p>
-<p>
-The different options for the flow regime are declared in
-<a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
-AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
-</p>
-</html>",
+ <p>
+ This function computes the heat exchanger effectiveness,
+ the Number of Transfer Units, and the capacity flow ratio
+ for given capacity flow rates.
+ </p>
+ <p>
+ The implementation allows for zero flow rate.
+ As <code>CMin_flow</code> crosses <code>delta*CMin_flow_nominal</code> from above,
+ the Number of Transfer Units and the heat exchanger effectiveness go to zero.
+ </p>
+ <p>
+ The different options for the flow regime are declared in
+ <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
+ AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 10, 2018, by Michael Wetter:<br/>
-Removed outputs <code>Z</code> and <code>NTU</code> as they are not used by other models.
-Removed <code>if</code> statement that can cause a discontinuous derivative.
-</li>
-<li>
-July 7, 2014, by Michael Wetter:<br/>
-Changed the type of the input <code>flowRegime</code> from
-<code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
-to <code>Integer</code>.
-This was done to have the same argument list as
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ\">
-AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ</a>,
-in which the type had to be changed.
-</li>
-<li>
-July 6, 2014, by Michael Wetter:<br/>
-Removed unused <code>import</code> statement.
-</li>
-<li>
-February 20, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ January 10, 2018, by Michael Wetter:<br/>
+ Removed outputs <code>Z</code> and <code>NTU</code> as they are not used by other models.
+ Removed <code>if</code> statement that can cause a discontinuous derivative.
+ </li>
+ <li>
+ July 7, 2014, by Michael Wetter:<br/>
+ Changed the type of the input <code>flowRegime</code> from
+ <code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
+ to <code>Integer</code>.
+ This was done to have the same argument list as
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ\">
+ AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ</a>,
+ in which the type had to be changed.
+ </li>
+ <li>
+ July 6, 2014, by Michael Wetter:<br/>
+ Removed unused <code>import</code> statement.
+ </li>
+ <li>
+ February 20, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end epsilon_C;

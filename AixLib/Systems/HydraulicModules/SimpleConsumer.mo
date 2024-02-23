@@ -1,7 +1,7 @@
 ﻿within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  import SI=Modelica.SIunits;
+  import    Modelica.Units.SI;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
   parameter SI.Temperature T_fixed = 293.15
@@ -38,8 +38,8 @@ model SimpleConsumer "Simple Consumer"
         origin={44,40},
         extent={{-10,10},{10,-10}},
         rotation=90)));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection if
-    functionality == "T_input" or functionality == "T_fixed"
+  Modelica.Thermal.HeatTransfer.Components.Convection convection
+ if functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
         origin={10,70},
         extent={{-10,-10},{10,10}},
@@ -56,8 +56,8 @@ model SimpleConsumer "Simple Consumer"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,78})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed) if
-    functionality == "T_fixed"                                annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed)
+ if functionality == "T_fixed"                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -70,13 +70,13 @@ model SimpleConsumer "Simple Consumer"
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
-    functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+ if functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-62,58})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed) if
-    functionality == "Q_flow_fixed"                           annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed)
+ if functionality == "Q_flow_fixed"                           annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -149,7 +149,6 @@ equation
   possible to choose between these options with the parameter
   \"functionality\".
 </p>
-</html>", revisions="<html>
 <ul>
   <li>August 31, 2020, by Alexander Kümpel:<br/>
     Remove pipes

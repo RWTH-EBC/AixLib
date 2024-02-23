@@ -3,16 +3,18 @@ model LightsRelToMaxValue "Multiplies relative input with max value (heat flow d
   extends BaseClasses.PartialInternalGain(emissivity=0.98, gainSurfaces(final k=areaSurfaceLightsTotal),
     gain(final k=maxHeatFlowAbsolute));
 
-  parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow due to lighting";
-  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.001*maxHeatFlowAbsolute "Surface of all lights in the room";
+  parameter Modelica.Units.SI.HeatFlowRate maxHeatFlowAbsolute
+    "Maximal absolute heat flow due to lighting";
+  parameter Modelica.Units.SI.Area areaSurfaceLightsTotal=0.001*
+      maxHeatFlowAbsolute "Surface of all lights in the room";
 
 equation
 
-  connect(radConvertor.rad, radHeat) annotation (Line(
+  connect(radConvertor.radPort, radHeat) annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
+  connect(radiativeHeat.port, radConvertor.convPort) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
   annotation ( Icon(graphics={
         Ellipse(
           extent={{-50,72},{50,-40}},

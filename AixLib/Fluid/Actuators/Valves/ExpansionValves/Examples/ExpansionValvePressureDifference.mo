@@ -10,18 +10,18 @@ model ExpansionValvePressureDifference
    Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
-  parameter Modelica.SIunits.AbsolutePressure pInl=
-    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+5)))
+  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
+      Medium.setBubbleState(Medium.setSat_T(TInl + 5)))
     "Actual pressure at inlet conditions";
-  parameter Modelica.SIunits.Temperature TInl = 348.15
+  parameter Modelica.Units.SI.Temperature TInl=348.15
     "Actual temperature at inlet conditions";
-  parameter Modelica.SIunits.AbsolutePressure pOut=
-    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
+  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
+      Medium.setDewState(Medium.setSat_T(TOut)))
     "Actual set point of the compressor's outlet pressure";
-  parameter Modelica.SIunits.Temperature TOut = 278.15
+  parameter Modelica.Units.SI.Temperature TOut=278.15
     "Actual temperature at outlet conditions";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";
 
   // Define components
@@ -35,9 +35,8 @@ model ExpansionValvePressureDifference
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine valOpe(
     amplitude=0.45,
-    freqHz=1,
-    offset=0.5)
-    "Input signal to prediscribe expansion valve's opening"
+    f=1,
+    offset=0.5) "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   SimpleExpansionValves.IsenthalpicExpansionValve linearValve(
     redeclare package Medium = Medium,

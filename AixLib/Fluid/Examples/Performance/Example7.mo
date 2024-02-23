@@ -20,34 +20,34 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -40},{40,60}}),    graphics={Text(
           extent={{-62,24},{-18,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="See code")}),
     experiment(
       Tolerance=1e-6, StopTime=100),
     Documentation(revisions="<html>
-<ul>
-<li>
-April 11, 2016 by Michael Wetter:<br/>
-Corrected wrong hyperlink in documentation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
-</li>
-<li>
-July 14, 2015, by Michael Wetter:<br/>
-Revised documentation.
-</li>
-<li>
-April 17, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.Examples.Performance.Example6\">
-AixLib.Fluid.Examples.Performance.Example6</a> for the documentation.
-</p>
-</html>"),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Examples/Performance/Example7.mos"
-        "Simulate and plot"));
+ <ul>
+ <li>
+ April 11, 2016 by Michael Wetter:<br/>
+ Corrected wrong hyperlink in documentation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
+ </li>
+ <li>
+ July 14, 2015, by Michael Wetter:<br/>
+ Revised documentation.
+ </li>
+ <li>
+ April 17, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.Examples.Performance.Example6\">
+ AixLib.Fluid.Examples.Performance.Example6</a> for the documentation.
+ </p>
+ </html>"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example7.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Example7;

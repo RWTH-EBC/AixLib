@@ -31,19 +31,20 @@ experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/Pump_stratos.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>This example demonstrates and tests the use of a flow machine that uses
-a performance data from a Stratos pump.</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 17, 2016, by Michael Wetter:<br/>
-Updated parameter names for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
-</li>
-<li>April 18, 2014
-    by Filip Jorissen:<br/>
-       Initial version
-</li>
-</ul>
-</html>"));
+ <p>This example demonstrates and tests the use of a flow machine that uses
+ a performance data from a Stratos pump.</p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 17, 2016, by Michael Wetter:<br/>
+ Updated parameter names for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
+ </li>
+ <li>April 18, 2014
+     by Filip Jorissen:<br/>
+        Initial version
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Pump_stratos;

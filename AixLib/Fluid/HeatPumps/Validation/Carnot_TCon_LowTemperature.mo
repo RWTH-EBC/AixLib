@@ -15,23 +15,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_TCon_LowTemperature.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example extends from
-<a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_TCon\">
-AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>
-but decreases the set point for the leaving condenser temperature
-to be below its inlet temperature, in which case the model provides no heating.
-Towards the end of the simulation, the inlet temperature of the condenser is decreased
-to be below the evaporator temperature. In this domain, the model requires cooling
-again. While this is not a meaningful operating point for the model, the example
-verifies that it robustly simulates this regime.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 10, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example extends from
+ <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_TCon\">
+ AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>
+ but decreases the set point for the leaving condenser temperature
+ to be below its inlet temperature, in which case the model provides no heating.
+ Towards the end of the simulation, the inlet temperature of the condenser is decreased
+ to be below the evaporator temperature. In this domain, the model requires cooling
+ again. While this is not a meaningful operating point for the model, the example
+ verifies that it robustly simulates this regime.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 10, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TCon_LowTemperature;

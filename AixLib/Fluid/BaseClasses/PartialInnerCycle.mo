@@ -1,11 +1,11 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialInnerCycle
-  "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
+  "Blackbox model of refrigerant cycle of a vapour compression machine (heat pump or chiller)"
 
-  parameter Boolean use_rev=true "True if the thermal machine is reversible";
-  parameter Real scalingFactor=1 "Scaling factor of thermal machine";
+  parameter Boolean use_rev=true "True if the vapour compression machine is reversible";
+  parameter Real scalingFactor=1 "Scaling factor of vapour compression machine";
 
-  AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-18,86},{18,118}}), iconTransformation(
           extent={{-16,88},{18,118}})));
   Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev
@@ -48,8 +48,8 @@ partial model PartialInnerCycle
 
 equation
   assert(
-    use_rev or (use_rev == false and sigBus.mode == true),
-    "Can't turn to reversible operation mode on irreversible thermal machine",
+    use_rev or (use_rev == false and sigBus.modeSet == true),
+    "Can't turn to reversible operation mode on irreversible vapour compression machine",
     level=AssertionLevel.error);
 
   connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-94,-14},{-94,
@@ -57,7 +57,7 @@ equation
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-15,-91},{
           -2.22045e-15,-110.5},{0.5,-110.5}},
                                  color={0,0,127}));
-  connect(sigBus.mode, switchPel.u2) annotation (Line(
+  connect(sigBus.modeSet,  switchPel.u2) annotation (Line(
       points={{0.09,102.08},{0.09,-68},{2.22045e-15,-68}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -67,11 +67,11 @@ equation
 
   connect(switchQCon.y, QCon) annotation (Line(points={{91,-12},{94,-12},{94,0},
           {110,0}}, color={0,0,127}));
-  connect(sigBus.mode, switchQEva.u2) annotation (Line(
+  connect(sigBus.modeSet, switchQEva.u2) annotation (Line(
       points={{0.09,102.08},{-64,102.08},{-64,-14},{-68,-14}},
       color={255,204,51},
       thickness=0.5));
-  connect(sigBus.mode, switchQCon.u2) annotation (Line(
+  connect(sigBus.modeSet, switchQCon.u2) annotation (Line(
       points={{0.09,102.08},{64,102.08},{64,-12},{68,-12}},
       color={255,204,51},
       thickness=0.5));
@@ -143,8 +143,8 @@ equation
     Documentation(revisions="<html><ul>
   <li>
     <i>May 22, 2019</i> by Julian Matthes:<br/>
-    Rebuild due to the introducion of the thermal machine partial model
-    (see issue <a href=
+    Rebuild due to the introducion of the vapour compression machine
+    partial model (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
   <li>
@@ -155,12 +155,12 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This black box model represents the refrigerant cycle of a thermal
-  machine. Used in AixLib.Fluid.HeatPumps.HeatPump and
+  This black box model represents the refrigerant cycle of a vapour
+  compression machine. Used in AixLib.Fluid.HeatPumps.HeatPump and
   AixLib.Fluid.Chiller.Chiller, this model serves the simulation of a
-  reversible thermal machine. Thus, data both of chillers and heat
-  pumps can be used to calculate the three relevant values <span style=
-  \"font-family: Courier New;\">P_el</span>, <span style=
+  reversible vapour compression machine. Thus, data both of chillers
+  and heat pumps can be used to calculate the three relevant values
+  <span style=\"font-family: Courier New;\">P_el</span>, <span style=
   \"font-family: Courier New;\">QCon</span> and <span style=
   \"font-family: Courier New;\">QEva</span>. The <span style=
   \"font-family: Courier New;\">mode</span> of the machine is used to

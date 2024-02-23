@@ -10,22 +10,23 @@ model SelfShadowingTestRight
     final dLef={0},
     final bBel={0},
     final dBel={0},
-    final azi(displayUnit="deg") = {0},
-    final til(displayUnit="deg") = {1.5707963267949},
+    final azi={0},
+    final til={1.5707963267949},
     final bRig={1},
     final dRig={0.01},
     final bAbo={0},
     final dAbo={0})
     "Shadowing due to a projection on the right-hand side"
     annotation (Placement(transformation(extent={{60,-4},{92,24}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=
+        1.5707963267949)
     "Incidence Angle for the window"
     annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
   Modelica.Blocks.Sources.Constant alt(k=0.3490658504)
     "Constant altitude angle"
     annotation (Placement(transformation(extent={{-74,8},{-54,28}})));
-  Modelica.Blocks.Sources.Sine solAziSine(amplitude=Modelica.Constants.pi,
-      freqHz=1) "Solar azimuth angle generated as a sine"
+  Modelica.Blocks.Sources.Sine solAziSine(amplitude=Modelica.Constants.pi, f=1)
+    "Solar azimuth angle generated as a sine"
     annotation (Placement(transformation(extent={{-76,-26},{-56,-6}})));
 equation
   connect(incAng1.incAng, selfShadowingRight.incAng[1]) annotation (Line(

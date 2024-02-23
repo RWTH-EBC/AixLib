@@ -1,14 +1,17 @@
 within AixLib.Airflow.Multizone.BaseClasses;
 partial model ZonalFlow "Flow across zonal boundaries of a room"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-     redeclare final package Medium1 = Medium,
-     redeclare final package Medium2 = Medium,
-     final allowFlowReversal1 = false,
-     final allowFlowReversal2 = false,
-     final m1_flow_nominal = 10/3600*1.2,
-     final m2_flow_nominal = m1_flow_nominal);
+    redeclare final package Medium1 = Medium,
+    redeclare final package Medium2 = Medium,
+    final allowFlowReversal1 = false,
+    final allowFlowReversal2 = false,
+    final m1_flow_nominal = 10/3600*1.2,
+    final m2_flow_nominal = m1_flow_nominal,
+    final m1_flow_small=1E-4*abs(m1_flow_nominal),
+    final m2_flow_small=1E-4*abs(m2_flow_nominal));
 
    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+    "Medium in the component"
     annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
 
@@ -61,31 +64,39 @@ equation
           origin={-79,-63},
           rotation=360)}),
     Documentation(info="<html>
-<p>
-This is a partial model for computing the air exchange between volumes.
-Models that extend this model need to provide an equation for
-<code>port_a1.m_flow</code> and <code>port_a2.m_flow</code>.
-</p>
-</html>",
+ <p>
+ This is a partial model for computing the air exchange between volumes.
+ Models that extend this model need to provide an equation for
+ <code>port_a1.m_flow</code> and <code>port_a2.m_flow</code>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-August 18, 2014, by Michael Wetter:<br/>
-Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
-</li>
-<li>
-July 20, 2010 by Michael Wetter:<br/>
-Migrated model to Modelica 3.1 and integrated it into the Buildings library.
-</li>
-<li>
-January 4, 2006, by Michael Wetter:<br/>
-Implemented first version.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 12, 2020, by Michael Wetter:<br/>
+ Changed assignment of <code>m1_flow_small</code> and
+ <code>m2_flow_small</code> to <code>final</code>.
+ These quantities are not used in this model and models that extend from it.
+ Hence there is no need for the user to change the value.
+ </li>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ August 18, 2014, by Michael Wetter:<br/>
+ Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
+ </li>
+ <li>
+ July 20, 2010 by Michael Wetter:<br/>
+ Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+ </li>
+ <li>
+ January 4, 2006, by Michael Wetter:<br/>
+ Implemented first version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ZonalFlow;

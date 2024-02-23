@@ -1,15 +1,15 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckTemperature "Test model for CheckTemperature"
   extends Modelica.Icons.Example;
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckDryBulbTemperature
     cheTemDryBul "Check dry bulb temperature "
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckDewPointTemperature
     cheTemDewPoi "Check dew point temperature"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
   AixLib.Utilities.Time.ModelTime modTim
     "Block that outputs the model time"
-    annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
+    annotation (Placement(transformation(extent={{-90,0},{-70,20}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim(
     weaDatStaTim=0,
     weaDatEndTim=31536000)
@@ -33,7 +33,7 @@ protected
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
 equation
   connect(modTim.y, conTim.modTim) annotation (Line(
-      points={{-79,10},{-62,10}},
+      points={{-69,10},{-62,10}},
       color={0,0,127}));
   connect(conTim.calTim, datRea.u) annotation (Line(
       points={{-39,10},{-22,10}},
@@ -52,25 +52,26 @@ equation
       color={0,0,127}));
   annotation (
 Documentation(info="<html>
-<p>
-This example tests the model that checks the temperature.
-</p>
-</html>",
+ <p>
+ This example tests the model that checks the temperature.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 21, 2016, by Michael Wetter:<br/>
-Replaced <code>ModelicaServices.ExternalReferences.loadResource</code> with
-<code>Modelica.Utilities.Files.loadResource</code>.
-</li>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ April 21, 2016, by Michael Wetter:<br/>
+ Replaced <code>ModelicaServices.ExternalReferences.loadResource</code> with
+ <code>Modelica.Utilities.Files.loadResource</code>.
+ </li>
+ <li>
+ July 14, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StartTime=0, StopTime=8640000),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/CheckTemperature.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CheckTemperature;

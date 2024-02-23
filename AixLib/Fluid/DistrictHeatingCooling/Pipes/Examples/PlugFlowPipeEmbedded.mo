@@ -1,15 +1,13 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
 model PlugFlowPipeEmbedded "Simple example of PlugFlowPipeEmbedded"
-  import AixLib;
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
   Modelica.Blocks.Sources.Ramp Tin(
     height=20,
-    offset=273.15 + 10,
-    duration=1000,
-    startTime=10000)
-                   "Ramp pressure signal"
+    duration=0,
+    offset=273.15 + 50,
+    startTime=100) "Ramp pressure signal"
     annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
   Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
@@ -20,9 +18,10 @@ model PlugFlowPipeEmbedded "Simple example of PlugFlowPipeEmbedded"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded
                                              pip(
     redeclare package Medium = Medium,
-    nPorts=1,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     dh=0.1,
     length=100,
+    dIns=0.05,
     kIns=0.028,
     m_flow_nominal=1,
     cPip=500,
@@ -30,13 +29,11 @@ model PlugFlowPipeEmbedded "Simple example of PlugFlowPipeEmbedded"
     initDelay=true,
     m_flow_start=1,
     rhoPip=8000,
-    dIns=0.00001,
+    use_zeta=true,
     T_start_in=323.15,
-    T_start_out=323.15,
-    thickness_ground=0.05)
-                        "Pipe"
+    T_start_out=323.15) "Pipe"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature bou(T=288.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature bou(T=283.15)
     "Boundary temperature"
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   AixLib.Fluid.Sources.MassFlowSource_T sou(
@@ -62,7 +59,7 @@ equation
                                                         color={191,0,0}));
   connect(Tin.y, sou.T_in)
     annotation (Line(points={{-71,4},{-62,4}}, color={0,0,127}));
-  connect(pip.ports_b[1], senTemOut.port_a)
+  connect(pip.port_b, senTemOut.port_a)
     annotation (Line(points={{20,0},{30,0}}, color={0,127,255}));
   connect(senTemOut.port_b, sin.ports[1])
     annotation (Line(points={{50,0},{62,0}}, color={0,127,255}));
@@ -73,10 +70,7 @@ equation
   annotation (
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeEmbedded.mos"
                       "Simulate and plot"),
-    experiment(
-      StopTime=100000,
-      Interval=60,
-      Tolerance=1e-06),
+    experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html><p>
   Basic test of model <a href=
   \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded\">

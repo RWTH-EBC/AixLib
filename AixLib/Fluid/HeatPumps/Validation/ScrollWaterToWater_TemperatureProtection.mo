@@ -5,14 +5,14 @@ model ScrollWaterToWater_TemperatureProtection
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=0.47
     "Nominal mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = 0.47
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=0.47
     "Nominal mass flow rate on the evaporator side";
 
-  parameter Modelica.SIunits.MassFlowRate flowSource = 0.79
+  parameter Modelica.Units.SI.MassFlowRate flowSource=0.79
     "Mass flow rate on the condenser side";
-  parameter Modelica.SIunits.MassFlowRate flowLoad = 0.47
+  parameter Modelica.Units.SI.MassFlowRate flowLoad=0.47
     "Mass flow rate on the evaporator side";
 
   AixLib.Fluid.Sources.Boundary_pT sin2(
@@ -69,17 +69,15 @@ model ScrollWaterToWater_TemperatureProtection
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Sine yLoa(
     startTime=250,
-    freqHz=1/600,
+    f=1/600,
     amplitude=30,
     offset=313.15) "Load side fluid temperature"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  Modelica.Blocks.Sources.Cosine
-                               ySou(
+  Modelica.Blocks.Sources.Cosine ySou(
     startTime=0,
     amplitude=20,
     offset=293.15,
-    freqHz=1/400)
-                 "Source side fluid temperature"
+    f=1/400) "Source side fluid temperature"
     annotation (Placement(transformation(extent={{100,-38},{80,-18}})));
 equation
   connect(mSou.y, sou.m_flow_in)
@@ -106,27 +104,28 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
-<p>
-Model that demonstrates the temperature protection implementation of the
-<a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
-AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
-</p>
-<p>
-The heat pump is disabled when the evaporator and condenser temperature
-requirements are not satisfied.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-May 30, 2017, by Filip Jorissen:<br/>
-First implementation.
-See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that demonstrates the temperature protection implementation of the
+ <a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
+ AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
+ </p>
+ <p>
+ The heat pump is disabled when the evaporator and condenser temperature
+ requirements are not satisfied.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ May 30, 2017, by Filip Jorissen:<br/>
+ First implementation.
+ See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_TemperatureProtection;

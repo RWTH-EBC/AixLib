@@ -1,0 +1,118 @@
+// Conversion script for AixLib library
+//  from: Version 0.11.1
+//  to:   Version 0.12.0
+clear
+
+convertClear();
+
+// Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1365
+convertModifiers("AixLib.Controls.Continuous.LimPID", {"reverseAction"}, {"reverseActing=not %reverseAction%"});
+convertModifiers("AixLib.Controls.Continuous.PIDHysteresis", {"reverseAction"}, {"reverseActing=not %reverseAction%"});
+convertModifiers("AixLib.Controls.Continuous.PIDHysteresisTimer", {"reverseAction"}, {"reverseActing=not %reverseAction%"});
+
+
+// Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1362
+convertModifiers("AixLib.Airflow.Multizone.BaseClasses.PowerLawResistance", {"m_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.BaseClasses.TwoWayFlowElement", {"m1_flow_small", "m2_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.EffectiveAirLeakageArea", {"m_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.Orifice", {"m_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.DoorDiscretizedOpen", {"m1_flow_small", "m2_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.DoorDiscretizedOperable", {"m1_flow_small", "m2_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.ZonalFlow_ACS", {"m1_flow_small", "m2_flow_small"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.ZonalFlow_m_flow", {"m1_flow_small", "m2_flow_small"}, fill("",0), true);
+
+convertClass("AixLib.Fluid.Sources.FixedBoundary",
+             "AixLib.Obsolete.Fluid.Sources.FixedBoundary");
+convertClass("AixLib.Controls.SetPoints.HotWaterTemperatureReset",
+             "AixLib.Controls.SetPoints.SupplyReturnTemperatureReset");
+
+//refactoring of alpha to hCon or hRad
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaWin",
+    "hConWin");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaExt",
+    "hConExt");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaExtWallConst",
+    "hConExtWall_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaWinConst",
+    "hConWin_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.ThreeElements",
+    "alphaFloor",
+    "hConFloor");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.ThreeElements",
+    "alphaFloorConst",
+    "hConFloor_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.TwoElements",
+    "alphaInt",
+    "hConInt");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.TwoElements",
+    "alphaIntWall",
+    "hConIntWall");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.FourElements",
+    "alphaRoof",
+    "hConRoof");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.FourElements",
+    "alphaRoofConst",
+    "hConRoof_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaRad",
+    "hRad");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.BaseClasses.PartialVDI6007",
+    "alphaWallOut",
+    "hConWallOut");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.BaseClasses.PartialVDI6007",
+    "alphaRad",
+    "hRad");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow",
+    "alphaWinOut",
+    "hConWinOut");
+
+// Refactoring damper models.
+convertElement(
+    "AixLib.Fluid.Actuators.Dampers.PressureIndependent",
+    "dp_nominal",
+    "dpDamper_nominal");
+convertModifiers(
+    "AixLib.Fluid.Actuators.Dampers.Exponential",
+    {"k1=0.45", "v_nominal=1"},
+    {"k1=%k1%",
+    "dpDamper_nominal=%k1% * 1.2 * %v_nominal%^2 / 2"},
+    true);
+convertModifiers(
+    "AixLib.Fluid.Actuators.Dampers.VAVBoxExponential",
+    {"dp_nominal", "k1=0.45", "v_nominal=1", "dp_nominalIncludesDamper=true"},
+    {"k1=%k1%",
+    "dpDamper_nominal=%k1% * 1.2 * %v_nominal%^2 / 2",
+    "dpFixed_nominal=if %dp_nominalIncludesDamper% then %dp_nominal% - %k1% * 1.2 * %v_nominal%^2 / 2 else %dp_nominal%"},
+    true);
+convertModifiers(
+    "AixLib.Fluid.Actuators.Dampers.MixingBox",
+    {"dpOut_nominal", "dpRec_nominal", "dpExh_nominal", "k1=0.45", "v_nominal=1", "dp_nominalIncludesDamper=false"},
+    {"k1=%k1%",
+    "dpDamOut_nominal=%k1% * 1.2 * %v_nominal%^2 / 2",
+    "dpFixOut_nominal=if %dp_nominalIncludesDamper% then %dpOut_nominal% - %k1% * 1.2 * %v_nominal%^2 / 2 else %dpOut_nominal%",
+    "dpDamRec_nominal=%k1% * 1.2 * %v_nominal%^2 / 2",
+    "dpFixRec_nominal=if %dp_nominalIncludesDamper% then %dpRec_nominal% - %k1% * 1.2 * %v_nominal%^2 / 2 else %dpRec_nominal%",
+    "dpDamExh_nominal=%k1% * 1.2 * %v_nominal%^2 / 2",
+    "dpFixExh_nominal=if %dp_nominalIncludesDamper% then %dpExh_nominal% - %k1% * 1.2 * %v_nominal%^2 / 2 else %dpExh_nominal%"},
+    true);
+convertClass(
+    "AixLib.Fluid.Actuators.Dampers.VAVBoxExponential",
+    "AixLib.Fluid.Actuators.Dampers.Exponential");

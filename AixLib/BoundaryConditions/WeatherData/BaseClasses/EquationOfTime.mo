@@ -21,28 +21,29 @@ equation
   annotation (
     defaultComponentName="eqnTim",
     Documentation(info="<html>
-<p>
-This component computes the difference between solar noon and noon of local civic time.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 13, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the difference between solar noon and noon of local civic time.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 13, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Text(
           extent={{-58,38},{38,-24}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="t"),
         Text(
           extent={{-6,4},{52,-24}},
-          lineColor={0,0,255},
-          textString="equ")}));
+          textColor={0,0,255},
+          textString="equ")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EquationOfTime;

@@ -4,10 +4,10 @@ model PumpsParallel "Two flow machines in parallel"
 
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
 
-  parameter Modelica.SIunits.Density rho_nominal=1000
+  parameter Modelica.Units.SI.Density rho_nominal=1000
     "Density, used to compute fluid mass";
 
   AixLib.Fluid.FixedResistances.PressureDrop dpIn1(
@@ -116,38 +116,39 @@ equation
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/PumpsParallel.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This example tests the configuration of two flow machines that are installed in parallel.
-Both flow machines start with full speed.
-At <i>t=150</i> second, the speed of the flow machine on the top is reduced to zero.
-As its speed is reduced, the mass flow rate changes its direction in such a way that the flow machine
-at the top has reverse flow.
-</html>", revisions="<html>
-<ul>
-<li>February 20, 2016, by Ruben Baetens:<br/>
-Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
-</li>
-<li>
-April 2, 2015, by Filip Jorissen:<br/>
-Set constant speed for pump using a <code>parameter</code>
-instead of a <code>realInput</code>.
-</li>
-<li>
-May 29, 2014, by Michael Wetter:<br/>
-Removed undesirable annotation <code>Evaluate=true</code>,
-and set <code>rho_nominal</code> to a constant to avoid a non-literal
-nominal value for <code>V_flow_max</code> and <code>VMachine_flow</code>.
-</li>
-<li>
-February 14, 2012, by Michael Wetter:<br/>
-Added filter for start-up and shut-down transient.
-</li>
-<li>
-March 24 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ This example tests the configuration of two flow machines that are installed in parallel.
+ Both flow machines start with full speed.
+ At <i>t=150</i> second, the speed of the flow machine on the top is reduced to zero.
+ As its speed is reduced, the mass flow rate changes its direction in such a way that the flow machine
+ at the top has reverse flow.
+ </html>",revisions="<html>
+ <ul>
+ <li>February 20, 2016, by Ruben Baetens:<br/>
+ Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+ </li>
+ <li>
+ April 2, 2015, by Filip Jorissen:<br/>
+ Set constant speed for pump using a <code>parameter</code>
+ instead of a <code>realInput</code>.
+ </li>
+ <li>
+ May 29, 2014, by Michael Wetter:<br/>
+ Removed undesirable annotation <code>Evaluate=true</code>,
+ and set <code>rho_nominal</code> to a constant to avoid a non-literal
+ nominal value for <code>V_flow_max</code> and <code>VMachine_flow</code>.
+ </li>
+ <li>
+ February 14, 2012, by Michael Wetter:<br/>
+ Added filter for start-up and shut-down transient.
+ </li>
+ <li>
+ March 24 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=300,
-      Tolerance=1e-06));
+      Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PumpsParallel;

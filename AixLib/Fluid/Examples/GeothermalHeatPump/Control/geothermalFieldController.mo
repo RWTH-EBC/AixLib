@@ -1,14 +1,14 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump.Control;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump.Control;
 model geothermalFieldController
   "Controls the heat exchange with a heat or cold source by setting two valves"
 
-  parameter Modelica.SIunits.Temperature temperature_low=273.15 + 40
+  parameter Modelica.Units.SI.Temperature temperature_low=273.15 + 40
     "Lower temperature threshold for hysteresis";
-  parameter Modelica.SIunits.Temperature temperature_high=273.15 + 45
+  parameter Modelica.Units.SI.Temperature temperature_high=273.15 + 45
     "Upper temperature threshold for hysteresis";
   parameter Boolean warmSide=true
     "true = hysteresis with negation = for warm side";
-  parameter Modelica.SIunits.Time delayTime=10
+  parameter Modelica.Units.SI.Time delayTime=10
     "Time delay between opening of valve 1 and 2";
 
   Modelica.Blocks.Logical.Switch switch

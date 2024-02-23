@@ -35,8 +35,8 @@ model HVAC
         rotation=90,
         origin={-60,-120})));
   Modelica.Blocks.Interfaces.RealOutput X_wZon[nPorts](
-    each final unit="kg/kg") if
-       Medium.nXi > 0
+    each final unit="kg/kg")
+    if Medium.nXi > 0
     "Water mass fraction per total air mass of the backward flowing medium in the connector outlet"
     annotation (Placement(transformation(extent={{20,20},{-20,-20}},
         rotation=90,
@@ -79,8 +79,8 @@ protected
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   AixLib.Fluid.FMI.BaseClasses.X_w_toX x_w_toX(
-    redeclare final package Medium = Medium) if
-       Medium.nXi > 0 "Conversion from X_w to X"
+    redeclare final package Medium = Medium)
+    if Medium.nXi > 0 "Conversion from X_w to X"
     annotation (Placement(transformation(extent={{40,-40},{20,-20}})));
 
   Modelica.Blocks.Sources.RealExpression hSup[nPorts](
@@ -90,14 +90,14 @@ protected
 
   RealVectorExpression XiSup[nPorts](
     each final n = Medium.nXi,
-    final y={inStream(ports[i].Xi_outflow) for i in 1:nPorts}) if
-       Medium.nXi > 0 "Water vapor concentration of supply air"
+    final y={inStream(ports[i].Xi_outflow) for i in 1:nPorts})
+    if Medium.nXi > 0 "Water vapor concentration of supply air"
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
 
   RealVectorExpression CSup[nPorts](
     each final n=Medium.nC,
-    final y={inStream(ports[i].C_outflow) for i in 1:nPorts}) if
-       Medium.nC > 0 "Trace substance concentration of supply air"
+    final y={inStream(ports[i].C_outflow) for i in 1:nPorts})
+    if Medium.nC > 0 "Trace substance concentration of supply air"
     annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
 
   ///////////////////////////////////////////////////////////////////////////
@@ -128,18 +128,18 @@ protected
           borderPattern=BorderPattern.Raised),
         Text(
           extent={{-96,15},{96,-15}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%y"),
         Text(
           extent={{-150,90},{140,50}},
           textString="%name",
-          lineColor={0,0,255})}), Documentation(info="<html>
-<p>
-The (time varying) vector <code>Real</code> output signal of this block can be defined in its
-parameter menu via variable <code>y</code>. The purpose is to support the
-easy definition of vector-valued Real expressions in a block diagram.
-</p>
-</html>"));
+          textColor={0,0,255})}), Documentation(info="<html>
+ <p>
+ The (time varying) vector <code>Real</code> output signal of this block can be defined in its
+ parameter menu via variable <code>y</code>. The purpose is to support the
+ easy definition of vector-valued Real expressions in a block diagram.
+ </p>
+ </html>"));
 
   end RealVectorExpression;
 
@@ -197,7 +197,7 @@ equation
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Rectangle(
           extent={{-90,20},{40,14}},
           lineColor={0,0,0},
@@ -231,7 +231,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-92,-42},{-6,-98}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="[%nPorts]",
           horizontalAlignment=TextAlignment.Left),
         Ellipse(
@@ -249,108 +249,109 @@ equation
             Bitmap(extent={{-96,52},{-24,108}},fileName=
             "modelica://AixLib/Resources/Images/Fluid/FMI/modelica_icon.png")}),
     Documentation(info="<html>
-<p>
-Adaptor that can be used to connect an HVAC system (with acausal ports)
-to input/output signals, which then can be exposed in an FMI interface.
-</p>
-<p>
-The adaptor has a vector of fluid ports called <code>ports</code>.
-The supply and return air ducts need to be connected to these ports.
-Also, if a thermal zone has interzonal air exchange or air infiltration,
-these flow paths also need be connected to <code>ports</code>.
-</p>
-<p>
-This model outputs at the port <code>fluPor</code> the mass flow rate for
-each flow that is connected to <code>ports</code>, together with its
-temperature, water vapor mass fraction per total mass of the air (not per kg dry
-air), and trace substances. These quantities are always as if the flow
-enters the room, even if the flow is zero or negative.
-If a medium has no moisture, e.g., if <code>Medium.nXi=0</code>, or
-if it has no trace substances, e.g., if <code>Medium.nC=0</code>, then
-the output signal for these properties are removed.
-These quantities are always as if the flow
-enters the room, even if the flow is zero or negative.
-Thus, a thermal zone model that uses these signals to compute the
-heat added by the HVAC system need to implement an equation such as
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-Q<sub>sen</sub> = max(0, &#7745;<sub>sup</sub>) &nbsp; c<sub>p</sub> &nbsp; (T<sub>sup</sub> - T<sub>air,zon</sub>),
-</p>
-<p>
-where
-<i>Q<sub>sen</sub></i> is the sensible heat flow rate added to the thermal zone,
-<i>&#7745;<sub>sup</sub></i> is the supply air mass flow rate from
-the port <code>fluPor</code> (which is negative if it is an exhaust),
-<i>c<sub>p</sub></i> is the specific heat capacity at constant pressure,
-<i>T<sub>sup</sub></i> is the supply air temperature and
-<i>T<sub>air,zon</sub></i> is the zone air temperature.
-Note that without the <i>max(&middot;, &middot;)</i> function, the energy
-balance would be wrong.
-</p>
-<p>
-The output signals of this model are the zone air temperature,
-the water vapor mass fraction per total mass of the air (unless <code>Medium.nXi=0</code>)
-and trace substances (unless <code>Medium.nC=0</code>).
-These output connectors can be used to connect to a controller.
-These values are obtained from the fluid stream(s) that flow into this component
-at the port <code>fluPor</code>, e.g., from the connector
-<code>fluPor.backward</code>.
-Note that there are <code>nPorts</code> of these signals.
-For a completely mixed room, they will all have the same value, but
-for a room with non-uniform temperatures, they can have different values.
-</p>
-<h4>Assumption and limitations</h4>
-<p>
-The mass flow rates at <code>ports</code> sum to zero, hence this
-model conserves mass.
-</p>
-<p>
-This model does not impose any pressure, other than setting the pressure
-of all fluid connections to <code>ports</code> to be equal.
-The reason is that setting a pressure can lead to non-physical system models,
-for example if a mass flow rate is imposed and the HVAC system is connected
-to a model that sets a pressure boundary condition such as
-<a href=\"modelica://AixLib.Fluid.Sources.Outside\">
-AixLib.Fluid.Sources.Outside</a>.
-Also, setting a pressure would make it impossible to use multiple instances
-of this model (one for each thermal zone) and build in Modelica an airflow network
-model with pressure driven mass flow rates.
-</p>
-<p>
-The model has no pressure drop. Hence, the pressure drop
-of an air diffuser or of an exhaust grill need to be modelled
-in models that are connected to <code>ports</code>.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
-AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
-for a model that uses this model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-September 13, 2017, by Michael Wetter:<br/>
-Removed erroneous <code>each</code>.
-</li>
-<li>
-October 4, 2016, by Michael Wetter:<br/>
-Corrected assignment of <code>quantity</code> in <code>CZon</code>.
-</li>
-<li>
-June 29, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-April 14, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Adaptor that can be used to connect an HVAC system (with acausal ports)
+ to input/output signals, which then can be exposed in an FMI interface.
+ </p>
+ <p>
+ The adaptor has a vector of fluid ports called <code>ports</code>.
+ The supply and return air ducts need to be connected to these ports.
+ Also, if a thermal zone has interzonal air exchange or air infiltration,
+ these flow paths also need be connected to <code>ports</code>.
+ </p>
+ <p>
+ This model outputs at the port <code>fluPor</code> the mass flow rate for
+ each flow that is connected to <code>ports</code>, together with its
+ temperature, water vapor mass fraction per total mass of the air (not per kg dry
+ air), and trace substances. These quantities are always as if the flow
+ enters the room, even if the flow is zero or negative.
+ If a medium has no moisture, e.g., if <code>Medium.nXi=0</code>, or
+ if it has no trace substances, e.g., if <code>Medium.nC=0</code>, then
+ the output signal for these properties are removed.
+ These quantities are always as if the flow
+ enters the room, even if the flow is zero or negative.
+ Thus, a thermal zone model that uses these signals to compute the
+ heat added by the HVAC system need to implement an equation such as
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ Q<sub>sen</sub> = max(0, &#7745;<sub>sup</sub>) &nbsp; c<sub>p</sub> &nbsp; (T<sub>sup</sub> - T<sub>air,zon</sub>),
+ </p>
+ <p>
+ where
+ <i>Q<sub>sen</sub></i> is the sensible heat flow rate added to the thermal zone,
+ <i>&#7745;<sub>sup</sub></i> is the supply air mass flow rate from
+ the port <code>fluPor</code> (which is negative if it is an exhaust),
+ <i>c<sub>p</sub></i> is the specific heat capacity at constant pressure,
+ <i>T<sub>sup</sub></i> is the supply air temperature and
+ <i>T<sub>air,zon</sub></i> is the zone air temperature.
+ Note that without the <i>max(&middot;, &middot;)</i> function, the energy
+ balance would be wrong.
+ </p>
+ <p>
+ The output signals of this model are the zone air temperature,
+ the water vapor mass fraction per total mass of the air (unless <code>Medium.nXi=0</code>)
+ and trace substances (unless <code>Medium.nC=0</code>).
+ These output connectors can be used to connect to a controller.
+ These values are obtained from the fluid stream(s) that flow into this component
+ at the port <code>fluPor</code>, e.g., from the connector
+ <code>fluPor.backward</code>.
+ Note that there are <code>nPorts</code> of these signals.
+ For a completely mixed room, they will all have the same value, but
+ for a room with non-uniform temperatures, they can have different values.
+ </p>
+ <h4>Assumption and limitations</h4>
+ <p>
+ The mass flow rates at <code>ports</code> sum to zero, hence this
+ model conserves mass.
+ </p>
+ <p>
+ This model does not impose any pressure, other than setting the pressure
+ of all fluid connections to <code>ports</code> to be equal.
+ The reason is that setting a pressure can lead to non-physical system models,
+ for example if a mass flow rate is imposed and the HVAC system is connected
+ to a model that sets a pressure boundary condition such as
+ <a href=\"modelica://AixLib.Fluid.Sources.Outside\">
+ AixLib.Fluid.Sources.Outside</a>.
+ Also, setting a pressure would make it impossible to use multiple instances
+ of this model (one for each thermal zone) and build in Modelica an airflow network
+ model with pressure driven mass flow rates.
+ </p>
+ <p>
+ The model has no pressure drop. Hence, the pressure drop
+ of an air diffuser or of an exhaust grill need to be modelled
+ in models that are connected to <code>ports</code>.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
+ AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
+ for a model that uses this model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ September 13, 2017, by Michael Wetter:<br/>
+ Removed erroneous <code>each</code>.
+ </li>
+ <li>
+ October 4, 2016, by Michael Wetter:<br/>
+ Corrected assignment of <code>quantity</code> in <code>CZon</code>.
+ </li>
+ <li>
+ June 29, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ April 14, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HVAC;

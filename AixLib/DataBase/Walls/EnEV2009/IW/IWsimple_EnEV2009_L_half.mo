@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.EnEV2009.IW;
+﻿within AixLib.DataBase.Walls.EnEV2009.IW;
 record IWsimple_EnEV2009_L_half
   "Inner wall simple after EnEV, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases

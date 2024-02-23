@@ -5,7 +5,7 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
 
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
-  parameter Modelica.SIunits.Temperature T_start = 273.15 + 22
+  parameter Modelica.Units.SI.Temperature T_start=273.15 + 22
     "Initial soil temperature";
 
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube
@@ -291,24 +291,24 @@ equation
   annotation (experiment(Tolerance=1e-6, StopTime=15000),
   Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-160},{120,120}})),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeDynamics.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeDynamics.mos"
         "Simulate and Plot"),
         Documentation(info="<html>
-<p>
-This example illustrates different borehole models using different mass
-and energy dynamics.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 10, 2018, by Alex Laferri&egrave;re:<br/>
-Removed ground heat transfer models so the example focuses on the boreholes.
-</li>
-<li>
-February, 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example illustrates different borehole models using different mass
+ and energy dynamics.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 10, 2018, by Alex Laferri&egrave;re:<br/>
+ Removed ground heat transfer models so the example focuses on the boreholes.
+ </li>
+ <li>
+ February, 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BoreholeDynamics;

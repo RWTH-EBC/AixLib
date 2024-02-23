@@ -2,9 +2,11 @@
  *
  * Michael Wetter, LBNL                     2018-05-12
  */
-#include "fileWriterStructure.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "ModelicaUtilities.h"
+
+#include "fileWriterStructure.h"
 
 void prependString(const char* fileName, const char* string){
   char *origString;
@@ -51,11 +53,10 @@ void fileWriterFree(void* ptrFileWriter){
   /* If this FileWriter writes in a CombiTimeTable format, prepend the required header
   now that we know how many lines have been written. */
   if (ID->isCombiTimeTable){
-    char* buf;
-    asprintf(&buf,"#1\ndouble csv(%i,%i)\n",ID->numRows,ID->numColumns);
+    char buf[255];
+    sprintf(buf,"#1\ndouble csv(%i,%i)\n",ID->numRows,ID->numColumns);
     prependString(ID->fileWriterName, buf);
-    free(buf);
-    }
+  }
 
   freeBase(ptrFileWriter);
 

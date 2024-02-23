@@ -2,12 +2,12 @@ within AixLib.DataBase.ActiveWalls;
 record JocoKlimaBodenTOP2000_Parkett
   "Floor Heating Klima Boden TOP 2000 by Joco with parquet"
 
-extends ActiveWallBaseDataDefinition(
-    Temp_nom=Modelica.SIunits.Conversions.from_degC({40,35,20}),
+  extends ActiveWallBaseDataDefinition(
+    Temp_nom=Modelica.Units.Conversions.from_degC({40,35,20}),
     q_dot_nom=80,
     k_isolation=1.25,
-    k_top=q_dot_nom/AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT(
-      {Temp_nom[1],Temp_nom[2],(q_dot_nom/8.92)^(1/1.1) + Temp_nom[3]}),
+    k_top=q_dot_nom/AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT({
+        Temp_nom[1],Temp_nom[2],(q_dot_nom/8.92)^(1/1.1) + Temp_nom[3]}),
     k_down=(k_isolation^(-1) - k_top^(-1))^(-1),
     VolumeWaterPerMeter=0.13,
     Spacing=0.25,

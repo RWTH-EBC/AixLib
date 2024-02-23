@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model Throttle "Test for ummixed throttle circuit"
   extends Modelica.Icons.Example;
 

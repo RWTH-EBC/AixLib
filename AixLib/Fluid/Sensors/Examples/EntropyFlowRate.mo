@@ -30,7 +30,8 @@ model EntropyFlowRate "Test model for the entropy flow rate sensors"
 
   AixLib.Fluid.Sensors.SpecificEntropyTwoPort  senS(
     redeclare package Medium = Medium,
-    m_flow_nominal=2) "Specific entropy sensor"
+    m_flow_nominal=2,
+    tau=0)            "Specific entropy sensor"
                 annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.Fluid.Sensors.MassFlowRate senM_flow(
     redeclare package Medium = Medium) "Mass flow rate sensor"
@@ -70,18 +71,19 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/EntropyFlowRate.mos"
         "Simulate and plot"),    Documentation(info="<html>
-<p>
-This example tests the entropy flow rate sensor and the
-specific entropy sensor.
-The model compares the output of the entropy flow rate sensor with
-the product of the output of the entropy and the mass flow rate sensor.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 29, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the entropy flow rate sensor and the
+ specific entropy sensor.
+ The model compares the output of the entropy flow rate sensor with
+ the product of the output of the entropy and the mass flow rate sensor.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 29, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EntropyFlowRate;

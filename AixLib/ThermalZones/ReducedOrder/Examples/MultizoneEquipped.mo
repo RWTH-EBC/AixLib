@@ -31,8 +31,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
     T_start=293.15,
-    dpAHU_sup=80000000,
-    dpAHU_eta=80000000)
+    dpAHU_sup(displayUnit="Pa") = 800,
+    dpAHU_eta(displayUnit="Pa") = 800)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -55,9 +55,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"

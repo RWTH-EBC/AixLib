@@ -20,7 +20,8 @@ model Density "Test model for the density sensor"
           extent={{-50,-10},{-30,10}})));
 
   AixLib.Fluid.Sensors.Density senDenVol(
-    redeclare package Medium = Medium) "Density sensor for the volume"
+    redeclare package Medium = Medium, warnAboutOnePortConnection=false)
+                                       "Density sensor for the volume"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
@@ -66,20 +67,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Density.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example tests the density sensors.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 10, 2013 by Michael Wetter:<br/>
-Changed initialization of volume to fixed initial values to avoid
-a translation warning in OpenModelica.
-</li>
-<li>
-August 31, 2013 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example tests the density sensors.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 10, 2013 by Michael Wetter:<br/>
+ Changed initialization of volume to fixed initial values to avoid
+ a translation warning in OpenModelica.
+ </li>
+ <li>
+ August 31, 2013 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Density;

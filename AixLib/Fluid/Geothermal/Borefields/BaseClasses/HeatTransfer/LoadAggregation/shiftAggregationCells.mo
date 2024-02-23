@@ -4,13 +4,15 @@ function shiftAggregationCells
   extends Modelica.Icons.Function;
 
   input Integer i "Number of aggregation cells";
-  input Modelica.SIunits.HeatFlowRate QAgg_flow[i] "Vector of aggregated loads";
+  input Modelica.Units.SI.HeatFlowRate QAgg_flow[i]
+    "Vector of aggregated loads";
   input Real rCel[i](each min=Modelica.Constants.small) "Aggregation cell widths";
-  input Modelica.SIunits.Time nu[i] "Cell aggregation times";
-  input Modelica.SIunits.Time curTim "Current simulation time";
+  input Modelica.Units.SI.Time nu[i] "Cell aggregation times";
+  input Modelica.Units.SI.Time curTim "Current simulation time";
 
   output Integer curCel "Current occupied aggregation cell";
-  output Modelica.SIunits.HeatFlowRate QAggShi_flow[i] "Shifted vector of aggregated loads";
+  output Modelica.Units.SI.HeatFlowRate QAggShi_flow[i]
+    "Shifted vector of aggregated loads";
 
 algorithm
   curCel := 1;
@@ -31,23 +33,24 @@ algorithm
   QAggShi_flow[1] := 0;
 
   annotation (Documentation(info="<html>
-<p>
-Performs the shifting operation which propagates the thermal load history
-towards the more distant aggregation cells, and then sets the current cell's
-value at <i>0</i>. Additionally, this function also outputs the last filled load
-aggregation cell.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 15, 2018, by Michael Wetter:<br/>
-Added <code>min=Modelica.Constants.small</code> to <code>rCel</code>
-so that a tool can infer that this quantity is non-zero.
-</li>
-<li>
-March 5, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Performs the shifting operation which propagates the thermal load history
+ towards the more distant aggregation cells, and then sets the current cell's
+ value at <i>0</i>. Additionally, this function also outputs the last filled load
+ aggregation cell.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 15, 2018, by Michael Wetter:<br/>
+ Added <code>min=Modelica.Constants.small</code> to <code>rCel</code>
+ so that a tool can infer that this quantity is non-zero.
+ </li>
+ <li>
+ March 5, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end shiftAggregationCells;

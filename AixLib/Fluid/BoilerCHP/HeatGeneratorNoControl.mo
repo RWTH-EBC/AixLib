@@ -1,7 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
 model HeatGeneratorNoControl "Simple heat generator without control"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=coeffPresLoss), vol(V=V));
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
+        a=coeffPresLoss, vol(V=V));
 
   Modelica.Blocks.Interfaces.RealInput Q_flow(final unit="W")
     "Prescribed heat flow"
@@ -35,7 +35,7 @@ model HeatGeneratorNoControl "Simple heat generator without control"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));
-  parameter Modelica.SIunits.Volume V
+  parameter Modelica.Units.SI.Volume V
     "Volume of the heat exchanger inside the heat generator";
   parameter Real coeffPresLoss
     "Pressure loss coefficient of the heat generator";

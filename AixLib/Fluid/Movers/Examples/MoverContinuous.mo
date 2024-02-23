@@ -32,20 +32,21 @@ equation
           -20},{-50,70},{-59,70}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-This example demonstrates the use of a <code>RealInput</code>
-connector for a mover model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 24, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates the use of a <code>RealInput</code>
+ connector for a mover model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 24, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-06, StopTime=1),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/MoverContinuous.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MoverContinuous;

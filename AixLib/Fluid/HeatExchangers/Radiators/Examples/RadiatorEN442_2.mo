@@ -2,17 +2,16 @@ within AixLib.Fluid.HeatExchangers.Radiators.Examples;
 model RadiatorEN442_2 "Test model for radiator"
   extends Modelica.Icons.Example;
  package Medium = AixLib.Media.Water "Medium model";
- parameter Modelica.SIunits.Temperature TRoo = 20+273.15 "Room temperature"
+  parameter Modelica.Units.SI.Temperature TRoo=20 + 273.15 "Room temperature"
     annotation (Evaluate=false);
- parameter Modelica.SIunits.Power Q_flow_nominal = 500 "Nominal power";
-  parameter Modelica.SIunits.Temperature T_a_nominal=313.15
+  parameter Modelica.Units.SI.Power Q_flow_nominal=500 "Nominal power";
+  parameter Modelica.Units.SI.Temperature T_a_nominal=313.15
     "Radiator inlet temperature at nominal condition";
- parameter Modelica.SIunits.Temperature T_b_nominal = 303.15
+  parameter Modelica.Units.SI.Temperature T_b_nominal=303.15
     "Radiator outlet temperature at nominal condition";
- parameter Modelica.SIunits.MassFlowRate m_flow_nominal=
-    Q_flow_nominal/(T_a_nominal-T_b_nominal)/Medium.cp_const
-    "Nominal mass flow rate";
- parameter Modelica.SIunits.PressureDifference dp_nominal = 3000
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=Q_flow_nominal/(
+      T_a_nominal - T_b_nominal)/Medium.cp_const "Nominal mass flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=3000
     "Pressure drop at m_flow_nominal";
 
   AixLib.Fluid.Sources.Boundary_pT sou(
@@ -106,28 +105,29 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=10800),
     Documentation(info="<html>
-This test model compares the radiator model when
-used as a steady-state and a dynamic model.
-</html>", revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-June 5, 2015 by Michael Wetter:<br/>
-Removed <code>annotation(Evaluate=true)</code> from instances
-<code>T_a_nominal</code> and <code>T_b_nominal</code>
-to avoid the warning about non-literal nominal values.
-This fixes
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/128\">#128</a>.
-</li>
-<li>
-January 30, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ This test model compares the radiator model when
+ used as a steady-state and a dynamic model.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ June 5, 2015 by Michael Wetter:<br/>
+ Removed <code>annotation(Evaluate=true)</code> from instances
+ <code>T_a_nominal</code> and <code>T_b_nominal</code>
+ to avoid the warning about non-literal nominal values.
+ This fixes
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/128\">#128</a>.
+ </li>
+ <li>
+ January 30, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RadiatorEN442_2;

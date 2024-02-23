@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Poly_R410a_130_Rotary "Rotary Compressor - R410a - 130 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
     final polyMod=Types.VolumetricPolynomialModels.Koerner2017,
@@ -16,50 +16,55 @@ model Poly_R410a_130_Rotary "Rotary Compressor - R410a - 130 cm³ - Polynomial"
   This model contains a calculation procedure for the isentropic
   efficiency presented by Körner (2017).<br/>
 </p>
-<table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Reference
-    </th>
-    <th>
-      Formula
-    </th>
-    <th>
-      Refrigerants
-    </th>
-    <th>
-      Validity <code>n<sub>compressor</sub></code>
-    </th>
-    <th>
-      Validity <code>Π<sub>pressure</sub></code>
-    </th>
-  </tr>
-  <tr>
-    <td>
-      Koerner2017
-    </td>
-    <td>
-      <code>η<sub>vol</sub> = a1*π^b1</code>
-    </td>
-    <td>
-      R410a
-    </td>
-    <td>
-      <code>50 - 120</code>
-    </td>
-    <td>
-      <code>1 - 10</code>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Power approaches\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Reference
+        </th>
+        <th>
+          Formula
+        </th>
+        <th>
+          Refrigerants
+        </th>
+        <th>
+          Validity <code>n<sub>compressor</sub></code>
+        </th>
+        <th>
+          Validity <code>Π<sub>pressure</sub></code>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Koerner2017
+        </td>
+        <td>
+          <code>η<sub>vol</sub> = a1*π^b1</code>
+        </td>
+        <td>
+          R410a
+        </td>
+        <td>
+          <code>50 - 120</code>
+        </td>
+        <td>
+          <code>1 - 10</code>
+        </td>
+      </tr>
+    </table>
+    <h4>
+      References
+    </h4>
+    <p>
+      D. Körner (2017): Development of dynamic compression heat pump
+      models to evaluate promising refrigerants considering legal
+      regulations. <i>Master Thesis</i>
+    </p>
+  </caption>
 </table>
-<h4>
-  References
-</h4>
-<p>
-  D. Körner (2017): Development of dynamic compression heat pump models
-  to evaluate promising refrigerants considering legal regulations.
-  <i>Master Thesis</i>
-</p>
 </html>"));
 end Poly_R410a_130_Rotary;

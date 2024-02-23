@@ -5,17 +5,17 @@ model Carnot_y "Test model for heat pump based on Carnot efficiency"
  package Medium2 = AixLib.Media.Water "Medium model";
   parameter Real COP_nominal = 6 "Nominal COP";
 
-  parameter Modelica.SIunits.Power P_nominal=10E3
+  parameter Modelica.Units.SI.Power P_nominal=10E3
     "Nominal compressor power (at y=1)";
-  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-10
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=-10
     "Temperature difference evaporator outlet-inlet";
-  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal=
-     -P_nominal*(COP_nominal-1)/cp2_default/dTEva_nominal
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=-P_nominal*(
+      COP_nominal - 1)/cp2_default/dTEva_nominal
     "Nominal mass flow rate at chilled water side";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal=
-      P_nominal*COP_nominal/cp1_default/dTCon_nominal
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=P_nominal*
+      COP_nominal/cp1_default/dTCon_nominal
     "Nominal mass flow rate at condenser water wide";
   AixLib.Fluid.HeatPumps.Carnot_y heaPum(
     redeclare package Medium1 = Medium1,
@@ -70,15 +70,15 @@ model Carnot_y "Test model for heat pump based on Carnot efficiency"
     startTime=900,
     offset=273.15 + 15) "Evaporator inlet temperature"
     annotation (Placement(transformation(extent={{50,-40},{70,-20}})));
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp1_default=
-    Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp1_default=
+      Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
       Medium1.p_default,
       Medium1.T_default,
       Medium1.X_default))
     "Specific heat capacity of medium 2 at default medium state";
 
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp2_default=
-    Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp2_default=
+      Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
       Medium2.p_default,
       Medium2.T_default,
       Medium2.X_default))
@@ -116,36 +116,37 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/Carnot_y.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015 by Michael Wetter:<br/>
-Changed sign of <code>dTEva_nominal</code> to be consistent.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-March 26, 2013 by Michael Wetter:<br/>
-Removed assignment of parameter that had attribute <code>fixed=false</code>.
-</li>
-<li>
-March 3, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example that simulates a heat pump whose efficiency is scaled based on the
-Carnot cycle.
-The control signal of the heat pump is the compressor speed.
-</p>
-</html>"));
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 25, 2015 by Michael Wetter:<br/>
+ Changed sign of <code>dTEva_nominal</code> to be consistent.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ March 26, 2013 by Michael Wetter:<br/>
+ Removed assignment of parameter that had attribute <code>fixed=false</code>.
+ </li>
+ <li>
+ March 3, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example that simulates a heat pump whose efficiency is scaled based on the
+ Carnot cycle.
+ The control signal of the heat pump is the compressor speed.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y;

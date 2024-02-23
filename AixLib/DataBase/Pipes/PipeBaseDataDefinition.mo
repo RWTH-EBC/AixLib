@@ -2,7 +2,7 @@ within AixLib.DataBase.Pipes;
 record PipeBaseDataDefinition
   "Base data definition of parameter values for pipes"
   extends Modelica.Icons.Record;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
 
   // Constant chemical values assumed
   parameter SI.Diameter d_i "Inner pipe diameter";

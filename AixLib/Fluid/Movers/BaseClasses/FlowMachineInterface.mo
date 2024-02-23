@@ -5,6 +5,9 @@ model FlowMachineInterface
 
   import cha = AixLib.Fluid.Movers.BaseClasses.Characteristics;
 
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
+
   parameter AixLib.Fluid.Movers.Data.Generic per
     "Record with performance data"
     annotation (choicesAllMatching=true,
@@ -15,23 +18,20 @@ model FlowMachineInterface
   parameter Boolean computePowerUsingSimilarityLaws
     "= true, compute power exactly, using similarity laws. Otherwise approximate.";
 
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=
-    per.pressure.V_flow[nOri] "Nominal volume flow rate, used for homotopy";
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=per.pressure.V_flow[
+      nOri] "Nominal volume flow rate, used for homotopy";
 
-  parameter Modelica.SIunits.Density rho_default
+  parameter Modelica.Units.SI.Density rho_default
     "Fluid density at medium default state";
 
   parameter Boolean haveVMax
     "Flag, true if user specified data that contain V_flow_max";
 
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_max
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow_max
     "Maximum volume flow rate, used for smoothing";
 
   parameter Integer nOri(min=1) "Number of data points for pressure curve"
     annotation(Evaluate=true);
-
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
 
  // Normalized speed
   Modelica.Blocks.Interfaces.RealInput y_in(final unit="1") if preSpe
@@ -124,13 +124,10 @@ protected
   final parameter Real hydDer[size(per.hydraulicEfficiency.V_flow,1)](each fixed=false)
     "Coefficients for polynomial of hydraulic efficiency vs. volume flow rate";
 
-  parameter Modelica.SIunits.PressureDifference dpMax(displayUnit="Pa")=
-    if haveDPMax then
-      per.pressure.dp[1]
-    else
-      per.pressure.dp[1] - ((per.pressure.dp[2] - per.pressure.dp[1])/(
-        per.pressure.V_flow[2] - per.pressure.V_flow[1]))*per.pressure.V_flow[1]
-    "Maximum head";
+  parameter Modelica.Units.SI.PressureDifference dpMax(displayUnit="Pa") = if
+    haveDPMax then per.pressure.dp[1] else per.pressure.dp[1] - ((per.pressure.dp[
+    2] - per.pressure.dp[1])/(per.pressure.V_flow[2] - per.pressure.V_flow[1]))
+    *per.pressure.V_flow[1] "Maximum head";
 
   parameter Real delta = 0.05
     "Small value used to for regularization and to approximate an internal flow resistance of the fan";
@@ -268,17 +265,17 @@ initial equation
   assert(AixLib.Utilities.Math.Functions.isMonotonic(x=per.pressure.V_flow, strict=true) and
   per.pressure.V_flow[1] > -Modelica.Constants.eps,
   "The fan pressure rise must be a strictly decreasing sequence with respect to the volume flow rate,
-  with the first element for the fan pressure raise being non-zero.
-The following performance data have been entered:
-" + getArrayAsString(per.pressure.V_flow, "pressure.V_flow"));
+   with the first element for the fan pressure raise being non-zero.
+ The following performance data have been entered:
+ "+ getArrayAsString(per.pressure.V_flow, "pressure.V_flow"));
 
   if not haveVMax then
     assert((per.pressure.V_flow[nOri]-per.pressure.V_flow[nOri-1])
          /((per.pressure.dp[nOri]-per.pressure.dp[nOri-1]))<0,
     "The last two pressure points for the fan or pump performance curve must be decreasing.
-    You need to set more reasonable parameters.
-Received
-" + getArrayAsString(per.pressure.dp, "dp"));
+     You need to set more reasonable parameters.
+ Received
+ "+ getArrayAsString(per.pressure.dp, "dp"));
 
   end if;
 
@@ -286,21 +283,21 @@ Received
   // the minimum decrease condition
   if (not haveMinimumDecrease) then
     Modelica.Utilities.Streams.print("
-Warning:
-========
-It is recommended that the volume flow rate versus pressure relation
-of the fan or pump satisfies the minimum decrease condition
-
-        (per.pressure.dp[i+1]-per.pressure.dp[i])
-d[i] = ------------------------------------------------- < " + String(-kRes) + "
-       (per.pressure.V_flow[i+1]-per.pressure.V_flow[i])
-
- is
-" + getArrayAsString({(per.pressure.dp[i+1]-per.pressure.dp[i])
+ Warning:
+ ========
+ It is recommended that the volume flow rate versus pressure relation
+ of the fan or pump satisfies the minimum decrease condition
+ 
+         (per.pressure.dp[i+1]-per.pressure.dp[i])
+ d[i] = ------------------------------------------------- < "+ String(-kRes) + "
+        (per.pressure.V_flow[i+1]-per.pressure.V_flow[i])
+ 
+  is
+ "+ getArrayAsString({(per.pressure.dp[i+1]-per.pressure.dp[i])
         /(per.pressure.V_flow[i+1]-per.pressure.V_flow[i]) for i in 1:nOri-1}, "d") + "
-Otherwise, a solution to the equations may not exist if the fan or pump speed is reduced.
-In this situation, the solver will fail due to non-convergence and
-the simulation stops.");
+ Otherwise, a solution to the equations may not exist if the fan or pump speed is reduced.
+ In this situation, the solver will fail due to non-convergence and
+ the simulation stops.");
   end if;
 
   // Correction for flow resistance of pump or fan
@@ -336,6 +333,10 @@ the simulation stops.");
     1)) elseif (size(per.hydraulicEfficiency.V_flow, 1) == 1) then {0}
      else AixLib.Utilities.Math.Functions.splineDerivatives(x=per.hydraulicEfficiency.V_flow,
     y=per.hydraulicEfficiency.eta);
+
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
 
 equation
   //assign values of dp and r_N, depending on which variable exists and is prescribed
@@ -530,19 +531,19 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                     graphics={
         Text(extent={{56,66},{106,52}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="dp"),
         Text(extent={{56,8},{106,-6}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="PEle"),
         Text(extent={{52,-22},{102,-36}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="eta"),
         Text(extent={{50,-52},{100,-66}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="etaHyd"),
         Text(extent={{50,-72},{100,-86}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="etaMot"),
         Ellipse(
           extent={{-78,34},{44,-88}},
@@ -592,10 +593,10 @@ equation
           origin={-43,-31},
           rotation=90),
         Text(extent={{56,36},{106,22}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="WFlo"),
         Text(extent={{56,94},{106,80}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="V_flow"),
         Line(
           points={{-74,92},{-74,40}},
@@ -610,157 +611,164 @@ equation
           color={0,0,0},
           smooth=Smooth.Bezier)}),
     Documentation(info="<html>
-<p>
-This is an interface that implements the functions to compute the head, power draw
-and efficiency of fans and pumps.
-</p>
-<p>
-The nominal hydraulic characteristic (volume flow rate versus total pressure)
-is given by a set of data points
-using the data record <code>per</code>, which is an instance of
-<a href=\"modelica://AixLib.Fluid.Movers.Data.Generic\">
-AixLib.Fluid.Movers.Data.Generic</a>.
-A cubic hermite spline with linear extrapolation is used to compute
-the performance at other operating points.
-</p>
-<p>
-The fan or pump energy balance can be specified in two alternative ways:
-</p>
-<ul>
-<li>
-If <code>per.use_powerCharacteristic = false</code>, then the data points for
-normalized volume flow rate versus efficiency is used to determine the efficiency,
-and then the power consumption. The default is a constant efficiency of <i>0.7</i>.
-</li>
-<li>
-If <code>per.use_powerCharacteristic = true</code>, then the data points for
-normalized volume flow rate versus power consumption
-is used to determine the power consumption, and then the efficiency
-is computed based on the actual power consumption and the flow work.
-</li>
-</ul>
-<p>
-For exceptions to this general rule, check the
-<a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
-User's Guide</a> for more information.
-</p>
-
-<h4>Implementation</h4>
-<p>
-For numerical reasons, the user-provided data points for volume flow rate
-versus pressure rise are modified to add a fan internal flow resistance.
-Because this flow resistance is subtracted during the simulation when
-computing the fan pressure rise, the model reproduces the exact points
-that were provided by the user.
-</p>
-<p>
-Also for numerical reasons, the pressure rise at zero flow rate and
-the flow rate at zero pressure rise is added to the user-provided data,
-unless the user already provides these data points.
-Since Modelica 3.2 does not allow dynamic memory allocation, this
-implementation required the use of three different arrays for the
-situation where no additional point is added, where one additional
-point is added and where two additional points are added.
-The parameter <code>curve</code> causes the correct data record
-to be used during the simulation.
-</p>
-</html>",
+ <p>
+ This is an interface that implements the functions to compute the head, power draw
+ and efficiency of fans and pumps.
+ </p>
+ <p>
+ The nominal hydraulic characteristic (volume flow rate versus total pressure)
+ is given by a set of data points
+ using the data record <code>per</code>, which is an instance of
+ <a href=\"modelica://AixLib.Fluid.Movers.Data.Generic\">
+ AixLib.Fluid.Movers.Data.Generic</a>.
+ A cubic hermite spline with linear extrapolation is used to compute
+ the performance at other operating points.
+ </p>
+ <p>
+ The fan or pump energy balance can be specified in two alternative ways:
+ </p>
+ <ul>
+ <li>
+ If <code>per.use_powerCharacteristic = false</code>, then the data points for
+ normalized volume flow rate versus efficiency is used to determine the efficiency,
+ and then the power consumption. The default is a constant efficiency of <i>0.7</i>.
+ </li>
+ <li>
+ If <code>per.use_powerCharacteristic = true</code>, then the data points for
+ normalized volume flow rate versus power consumption
+ is used to determine the power consumption, and then the efficiency
+ is computed based on the actual power consumption and the flow work.
+ </li>
+ </ul>
+ <p>
+ For exceptions to this general rule, check the
+ <a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
+ User's Guide</a> for more information.
+ </p>
+ 
+ <h4>Implementation</h4>
+ <p>
+ For numerical reasons, the user-provided data points for volume flow rate
+ versus pressure rise are modified to add a fan internal flow resistance.
+ Because this flow resistance is subtracted during the simulation when
+ computing the fan pressure rise, the model reproduces the exact points
+ that were provided by the user.
+ </p>
+ <p>
+ Also for numerical reasons, the pressure rise at zero flow rate and
+ the flow rate at zero pressure rise is added to the user-provided data,
+ unless the user already provides these data points.
+ Since Modelica 3.2 does not allow dynamic memory allocation, this
+ implementation required the use of three different arrays for the
+ situation where no additional point is added, where one additional
+ point is added and where two additional points are added.
+ The parameter <code>curve</code> causes the correct data record
+ to be used during the simulation.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 2, 2016, by Michael Wetter:<br/>
-Removed <code>min</code> attribute as otherwise numerical noise can cause
-the assertion on the limit to fail.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
-</li>
-<li>
-February 19, 2016, by Michael Wetter and Filip Jorissen:<br/>
-Refactored model to make implementation clearer.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference and reformatted code.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-September 2, 2015, by Michael Wetter:<br/>
-Corrected computation of
-<code>etaMot = cha.efficiency(per=per.motorEfficiency, V_flow=V_flow, d=motDer, r_N=r_N, delta=1E-4)</code>
-which previously used <code>V_flow_max</code> instead of <code>V_flow</code>.
-</li>
-<li>
-January 6, 2015, by Michael Wetter:<br/>
-Revised model for OpenModelica.
-</li>
-<li>
-November 22, 2014, by Michael Wetter:<br/>
-Removed in <code>N_actual</code> and <code>N_filtered</code>
-the <code>max</code> attribute to
-avoid a translation warning.
-</li>
-<li>
-April 21, 2014, by Filip Jorissen and Michael Wetter:<br/>
-Changed model to use
-<a href=\"modelica://AixLib.Fluid.Movers.Data.Generic\">
-AixLib.Fluid.Movers.Data.Generic</a>.
-April 19, 2014, by Filip Jorissen:<br/>
-Passed extra parameters to power() and efficiency()
-to be able to properly evaluate the
-scaling law. See
-<a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
-for a discussion and validation.
-</li>
-<li>
-September 27, 2013, by Michael Wetter:<br/>
-Reformulated <code>per=if (curve == 1) then pCur1 elseif (curve == 2) then pCur2 else pCur3</code>
-by moving the computation into the idividual logical branches because OpenModelica generates an
-error when assign the statement to <code>data</code>
-as <code>pCur1</code>, <code>pCur2</code> and <code>pCur3</code> have different dimensions.
-</li>
-<li>
-September 17, 2013, by Michael Wetter:<br/>
-Added missing <code>each</code> keyword in declaration of parameters
-that are an array.
-</li>
-<li>
-March 20, 2013, by Michael Wetter:<br/>
-Removed assignment in declaration of <code>pCur?.V_flow</code> as
-these parameters have the attribute <code>fixed=false</code> set.
-</li>
-<li>
-October 11, 2012, by Michael Wetter:<br/>
-Added implementation of <code>WFlo = eta * P</code> with
-guard against division by zero.
-Changed implementation of <code>etaMot=sqrt(eta)</code> to
-<code>etaHyd = 1</code> to avoid infinite derivative as <code>eta</code>
-converges to zero.
-</li>
-<li>
-February 20, 2012, by Michael Wetter:<br/>
-Assigned value to nominal attribute of <code>V_flow</code>.
-</li>
-<li>
-February 14, 2012, by Michael Wetter:<br/>
-Added filter for start-up and shut-down transient.
-</li>
-<li>
-October 4 2011, by Michael Wetter:<br/>
-Revised the implementation of the pressure drop computation as a function
-of speed and volume flow rate.
-The new implementation avoids a singularity near zero volume flow rate and zero speed.
-</li>
-<li>
-March 28 2011, by Michael Wetter:<br/>
-Added <code>homotopy</code> operator.
-</li>
-<li>
-March 23 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ December 2, 2016, by Michael Wetter:<br/>
+ Removed <code>min</code> attribute as otherwise numerical noise can cause
+ the assertion on the limit to fail.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+ </li>
+ <li>
+ February 19, 2016, by Michael Wetter and Filip Jorissen:<br/>
+ Refactored model to make implementation clearer.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference and reformatted code.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ September 2, 2015, by Michael Wetter:<br/>
+ Corrected computation of
+ <code>etaMot = cha.efficiency(per=per.motorEfficiency, V_flow=V_flow, d=motDer, r_N=r_N, delta=1E-4)</code>
+ which previously used <code>V_flow_max</code> instead of <code>V_flow</code>.
+ </li>
+ <li>
+ January 6, 2015, by Michael Wetter:<br/>
+ Revised model for OpenModelica.
+ </li>
+ <li>
+ November 22, 2014, by Michael Wetter:<br/>
+ Removed in <code>N_actual</code> and <code>N_filtered</code>
+ the <code>max</code> attribute to
+ avoid a translation warning.
+ </li>
+ <li>
+ April 21, 2014, by Filip Jorissen and Michael Wetter:<br/>
+ Changed model to use
+ <a href=\"modelica://AixLib.Fluid.Movers.Data.Generic\">
+ AixLib.Fluid.Movers.Data.Generic</a>.
+ April 19, 2014, by Filip Jorissen:<br/>
+ Passed extra parameters to power() and efficiency()
+ to be able to properly evaluate the
+ scaling law. See
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
+ for a discussion and validation.
+ </li>
+ <li>
+ September 27, 2013, by Michael Wetter:<br/>
+ Reformulated <code>per=if (curve == 1) then pCur1 elseif (curve == 2) then pCur2 else pCur3</code>
+ by moving the computation into the idividual logical branches because OpenModelica generates an
+ error when assign the statement to <code>data</code>
+ as <code>pCur1</code>, <code>pCur2</code> and <code>pCur3</code> have different dimensions.
+ </li>
+ <li>
+ September 17, 2013, by Michael Wetter:<br/>
+ Added missing <code>each</code> keyword in declaration of parameters
+ that are an array.
+ </li>
+ <li>
+ March 20, 2013, by Michael Wetter:<br/>
+ Removed assignment in declaration of <code>pCur?.V_flow</code> as
+ these parameters have the attribute <code>fixed=false</code> set.
+ </li>
+ <li>
+ October 11, 2012, by Michael Wetter:<br/>
+ Added implementation of <code>WFlo = eta * P</code> with
+ guard against division by zero.
+ Changed implementation of <code>etaMot=sqrt(eta)</code> to
+ <code>etaHyd = 1</code> to avoid infinite derivative as <code>eta</code>
+ converges to zero.
+ </li>
+ <li>
+ February 20, 2012, by Michael Wetter:<br/>
+ Assigned value to nominal attribute of <code>V_flow</code>.
+ </li>
+ <li>
+ February 14, 2012, by Michael Wetter:<br/>
+ Added filter for start-up and shut-down transient.
+ </li>
+ <li>
+ October 4 2011, by Michael Wetter:<br/>
+ Revised the implementation of the pressure drop computation as a function
+ of speed and volume flow rate.
+ The new implementation avoids a singularity near zero volume flow rate and zero speed.
+ </li>
+ <li>
+ March 28 2011, by Michael Wetter:<br/>
+ Added <code>homotopy</code> operator.
+ </li>
+ <li>
+ March 23 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowMachineInterface;

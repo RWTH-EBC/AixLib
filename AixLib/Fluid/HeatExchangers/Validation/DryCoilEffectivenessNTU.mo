@@ -6,18 +6,20 @@ model DryCoilEffectivenessNTU
  package Medium1 = AixLib.Media.Water;
  package Medium2 = AixLib.Media.Air;
 
- parameter Modelica.SIunits.SpecificHeatCapacity cp1=
- Medium1.specificHeatCapacityCp(
-      Medium1.setState_pTX(Medium1.p_default, Medium1.T_default, Medium1.X_default))
-    "Specific heat capacity of medium 2";
- parameter Modelica.SIunits.SpecificHeatCapacity cp2=
- Medium2.specificHeatCapacityCp(
-      Medium2.setState_pTX(Medium2.p_default, Medium2.T_default, Medium2.X_default))
-    "Specific heat capacity of medium 2";
- parameter Modelica.SIunits.MassFlowRate m1_flow = 5
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp1=
+      Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
+      Medium1.p_default,
+      Medium1.T_default,
+      Medium1.X_default)) "Specific heat capacity of medium 2";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp2=
+      Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
+      Medium2.p_default,
+      Medium2.T_default,
+      Medium2.X_default)) "Specific heat capacity of medium 2";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow=5
     "Nominal mass flow rate medium 1";
- parameter Modelica.SIunits.MassFlowRate m2_flow = m1_flow*cp1/
-      cp2 "Nominal mass flow rate medium 2";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow=m1_flow*cp1/cp2
+    "Nominal mass flow rate medium 2";
 
   AixLib.Fluid.Sources.Boundary_pT sin_2(
     redeclare package Medium = Medium2,
@@ -247,27 +249,28 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation(experiment(Tolerance=1e-6, StopTime=360),
-__Dymola_Commands(file="modelica://Buildings/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/DryCoilEffectivenessNTU.mos"
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/DryCoilEffectivenessNTU.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model tests
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
-for different inlet conditions.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-February 12, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model tests
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+ for different inlet conditions.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ February 12, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DryCoilEffectivenessNTU;

@@ -12,7 +12,8 @@ model PITemp "PI controller that can switch the output range of the controller"
   parameter Real h = 1 "upper limit controller output" annotation(Dialog(group = "Control"));
   parameter Real l = 0 "lower limit of controller output" annotation(Dialog(group = "Control"));
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
-  parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
+  parameter Modelica.Units.SI.Time TN=1 "Time Constant (T>0 required)"
+    annotation (Dialog(group="Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), iconTransformation(extent = {{80, -10}, {100, 10}})));
   parameter Boolean rangeSwitch = false "Switch controller output range";
   Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off" annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));

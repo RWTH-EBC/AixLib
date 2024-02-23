@@ -4,7 +4,6 @@ import os
 from builtins import input
 
 ''' This script merges the Modelica IBPSA Library into AixLib
-
 This approach is taken from
 https://github.com/open-ideas/IDEAS/tree/master/IDEAS/Scripts/mergeAnnex60Script.py
 '''
@@ -25,5 +24,6 @@ else:
         json.dump(data, dataFile)
 
 mer = m.IBPSA(ibpsa_dir, aixlib_dir)
-mer.set_excluded_packages(["Experimental", "Obsolete"])
+mer.set_excluded_directories(["Experimental", "Obsolete"])
 mer.merge()
+print("Merged.")

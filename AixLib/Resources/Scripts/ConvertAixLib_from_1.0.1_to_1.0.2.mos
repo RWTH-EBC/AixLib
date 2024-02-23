@@ -1,0 +1,7 @@
+﻿clear
+
+convertClear();
+
+// Move obsolete Examples to Obsolete
+convertClass("AixLib.Fluid.Examples.PumpRadiatorThermostaticValve", "AixLib.Obsolete.Year2021.Fluid.Examples.PumpRadiatorThermostaticValve");
+convertClass("AixLib.Fluid.Examples.PumpRadiatorValve", "AixLib.Obsolete.Year2021.Fluid.Examples.PumpRadiatorValve");

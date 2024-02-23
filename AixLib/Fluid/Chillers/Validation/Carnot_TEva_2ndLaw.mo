@@ -5,19 +5,19 @@ model Carnot_TEva_2ndLaw
 
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-4
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=-4
     "Temperature difference evaporator outlet-inlet";
-  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=4
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=4
     "Temperature difference condenser outlet-inlet";
   parameter Real COPc_nominal = 3 "Chiller COP";
-  parameter Modelica.SIunits.HeatFlowRate QEva_flow_nominal = -100E3
+  parameter Modelica.Units.SI.HeatFlowRate QEva_flow_nominal=-100E3
     "Evaporator heat flow rate";
-  final parameter Modelica.SIunits.MassFlowRate m2_flow_nominal=
-    QEva_flow_nominal/dTEva_nominal/4200
+  final parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=
+      QEva_flow_nominal/dTEva_nominal/4200
     "Nominal mass flow rate at chilled water side";
 
-  final parameter Modelica.SIunits.MassFlowRate m1_flow_nominal=
-    -m2_flow_nominal/dTCon_nominal*dTEva_nominal
+  final parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=-
+      m2_flow_nominal/dTCon_nominal*dTEva_nominal
     "Nominal mass flow rate at condeser water side";
 
   Modelica.Blocks.Sources.Constant TEvaIn(k=273.15 + 20)
@@ -56,15 +56,15 @@ protected
    replaceable package Medium2 = Modelica.Media.Interfaces.PartialMedium
       "Medium model";
 
-    parameter Modelica.SIunits.TemperatureDifference dTEva_nominal
+    parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal
       "Temperature difference evaporator outlet-inlet";
-    parameter Modelica.SIunits.TemperatureDifference dTCon_nominal
+    parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal
       "Temperature difference condenser outlet-inlet";
-    parameter Modelica.SIunits.HeatFlowRate QEva_flow_nominal
+    parameter Modelica.Units.SI.HeatFlowRate QEva_flow_nominal
       "Evaporator heat flow rate";
-    parameter Modelica.SIunits.MassFlowRate m1_flow_nominal
+    parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal
       "Nominal mass flow rate at condeser water side";
-    parameter Modelica.SIunits.MassFlowRate m2_flow_nominal
+    parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal
       "Nominal mass flow rate at chilled water side";
 
     AixLib.Fluid.Sources.MassFlowSource_T sou1(
@@ -150,8 +150,8 @@ protected
           origin={152,-46})));
   equation
     assert(SGen_flow > 0, "Entropy generated is zero or negative, which violates the 2nd law.
-  This is because the model is configured to use the inlet temperatures
-  to compute the Carnot efficiency, which can lead to non-physical results.",
+   This is because the model is configured to use the inlet temperatures
+   to compute the Carnot efficiency, which can lead to non-physical results.",
     level = AssertionLevel.warning);
     connect(SIn_flow.y, dS_flow.u1)
       annotation (Line(points={{81,50},{88,50},{88,46},{98,46}},
@@ -219,30 +219,31 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_2ndLaw.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example verifies that the 2nd law of thermodynamics is not violated
-despite of a very small temperature lift.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-January 9, 2017, by Michael Wetter:<br/>
-Renamed internal protected class <code>Chiller</code> to be upper-case.
-</li>
-<li>
-January 3, 2017, by Michael Wetter:<br/>
-Updated model because the option to use the inlet temperatures to compute the COP
-has been removed.
-</li>
-<li>
-November 18, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example verifies that the 2nd law of thermodynamics is not violated
+ despite of a very small temperature lift.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ January 9, 2017, by Michael Wetter:<br/>
+ Renamed internal protected class <code>Chiller</code> to be upper-case.
+ </li>
+ <li>
+ January 3, 2017, by Michael Wetter:<br/>
+ Updated model because the option to use the inlet temperatures to compute the COP
+ has been removed.
+ </li>
+ <li>
+ November 18, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TEva_2ndLaw;

@@ -9,7 +9,7 @@ model AirCurtain
     PAirCur=50000,
     TBou=287.15)
     annotation (Placement(transformation(extent={{-14,-12},{20,20}})));
-  ThermalZones.HighOrder.Components.DryAir.Airload airload
+  ThermalZones.HighOrder.Components.DryAir.Airload airload(T0=293.15, V=48)
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -32,10 +32,10 @@ model AirCurtain
     iconTransformation(extent={{-70,-12},{-50,8}})));
 equation
   connect(airCurtainSimplyfied.port_b, airload.port)
-    annotation (Line(points={{20,2.54545},{40,2.54545},{40,0},{63,0}},
+    annotation (Line(points={{20,2.54545},{40,2.54545},{40,-8},{72,-8}},
                                              color={191,0,0}));
-  connect(pulse.y, airCurtainSimplyfied.schedule) annotation (Line(points={{-39,50},
-          {-24,50},{-24,14.1818},{-15.2364,14.1818}},     color={0,0,127}));
+  connect(pulse.y, airCurtainSimplyfied.schedule) annotation (Line(points={{-39,50},{-24,50},{-24,14.1818},{-15.2364,14.1818}},
+                                                          color={0,0,127}));
   connect(weaDat.weaBus, weaBus) annotation (Line(
       points={{-80,72},{-67,72}},
       color={255,204,51},

@@ -3,8 +3,8 @@ model RadOnTiltedSurf_Perez
   "Calculates solar radiation on tilted surfaces according to Perez"
   extends RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf;
 
-  import Modelica.SIunits.Conversions.to_deg;
-  import Modelica.SIunits.Conversions.from_deg;
+  import Modelica.Units.Conversions.to_deg;
+  import Modelica.Units.Conversions.from_deg;
   import Modelica.Math.sin;
   import Modelica.Math.acos;
   import Modelica.Math.cos;
@@ -14,7 +14,7 @@ model RadOnTiltedSurf_Perez
   parameter Boolean GroundReflexApprox =  false
     "Shall the GroundReflection be approximated?" annotation (Dialog(group=
         "Ground reflection"));
-  parameter Modelica.SIunits.Height h=0
+  parameter Modelica.Units.SI.Height h=0
     "height of the tilted surfaces centre in metre. if unknown it is 0";
 
 //constants
@@ -192,10 +192,10 @@ equation
       R = a / b;
 
   // conversion of direct and diffuse horizontal radiation
-  if WeatherFormat == 1 then // TRY
+  if not WeatherFormat then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
-  else  // WeatherFormat == 2 , TMY then
+  else  // WeatherFormat == true , TMY then
     InBeamRadHor = solarInput1 * cos_theta_z;
     InDiffRadHor = max(solarInput2-InBeamRadHor, 0);
   end if;

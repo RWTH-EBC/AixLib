@@ -54,19 +54,20 @@ experiment(Tolerance=1e-6, StopTime=3.1536e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/Outside.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model demonstrates how to connect fluid flow component to a
-boundary condition that has environmental conditions as
-obtained from a weather file.
-The model draws a constant mass flow rate of outside air through
-its components.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-Feb. 9, 2011 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model demonstrates how to connect fluid flow component to a
+ boundary condition that has environmental conditions as
+ obtained from a weather file.
+ The model draws a constant mass flow rate of outside air through
+ its components.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ Feb. 9, 2011 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Outside;

@@ -1,0 +1,8 @@
+﻿clear
+
+convertClear();
+
+convertClass("AixLib.Fluid.Movers.Pump", "AixLib.Obsolete.Year2021.Fluid.Movers.Pump")
+convertClass("AixLib.Fluid.Actuators.Valves.MixingValve", "AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.MixingValve")
+convertClass("AixLib.Fluid.Actuators.Valves.SimpleValve", "AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve")
+convertClass("AixLib.Fluid.Actuators.Valves.ThermostaticValve", "AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve")

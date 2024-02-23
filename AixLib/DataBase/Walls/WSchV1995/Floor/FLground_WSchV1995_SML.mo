@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1995.Floor;
+﻿within AixLib.DataBase.Walls.WSchV1995.Floor;
 record FLground_WSchV1995_SML
   "Floor towards ground after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.04, 0.25, 0.04, 0.06}

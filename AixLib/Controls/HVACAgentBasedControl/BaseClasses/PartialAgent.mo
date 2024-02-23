@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 partial model PartialAgent
   parameter Integer name "Name of the agent (five-digit number, eg. 10001)";
   parameter Boolean usePoke=false
@@ -6,8 +6,8 @@ partial model PartialAgent
   parameter Real sampleRate=5
     "Sample time for inbox update (used if usePoke=false)";
 
-  outer HVACAgentBasedControl.Agents.MessageNotification messageNotification if
-    usePoke;
+  outer HVACAgentBasedControl.Agents.MessageNotification messageNotification
+ if usePoke;
 
   Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.Packager packager
     annotation (Placement(transformation(extent={{176,184},{196,204}})));
@@ -56,8 +56,8 @@ partial model PartialAgent
           annotation (Placement(transformation(extent={{176,-44},{196,-24}})));
   inner Modelica.StateGraph.StateGraphRoot stateGraphRoot
     annotation (Placement(transformation(extent={{-160,180},{-140,200}})));
-  SendSample                                       sendSample if
-                                                        usePoke
+  SendSample                                       sendSample
+                                                     if usePoke
     annotation (Placement(transformation(extent={{160,-200},{180,-180}})));
   Modelica.Blocks.Interfaces.BooleanOutput sendOut if usePoke
     "Turns true when the sending unit of the agent is active"

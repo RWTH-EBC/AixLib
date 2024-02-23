@@ -5,7 +5,7 @@ model PowerSimplified
 
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=3
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3
     "Nominal mass flow rate";
 
   parameter Data.Pumps.Wilo.Stratos30slash1to8 per "Pump performance data"
@@ -114,62 +114,69 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PowerSimplified.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example compares the power consumed by pumps that
-take three different control signals.
-Each pump has identical mass flow rate and pressure rise.
-</p>
-<p>
-Note that for the instances
-<a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">
-AixLib.Fluid.Movers.FlowControlled_dp</a>
-and
-<a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_m_flow\">
-AixLib.Fluid.Movers.FlowControlled_m_flow</a>,
-we had to assign the efficiencies (otherwise the default constant
-efficiency of <i>0.7</i> would have been used).
-In these models, the power consumption is computed
-using similarity laws, but using the mass flow rate as opposed
-to the speed, because speed is not known in these two models.
-This is an approximation at operating points in which
-the speed is different from the nominal speed <code>N_nominal</code>
-because similarity laws are valid for speed and not for
-mass flow rate.
-</p>
-<p>
-The figure below shows the approximation error for the
-power calculation where the speed <i>N<sub>rpm</sub></i> differs from
-the nominal speed <i>N<sub>nominal</sub></i>.
-</p>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Validation/PowerSimplified.png\"/>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 11, 2016, by Michael Wetter:<br/>
-Revised implementation by assigning the data record directly in the
-instances <code>pump_dp</code> and <code>pump_m_flow</code>, because
-using a <code>parameter</code> and assigning this <code>parameter</code> leads
-in OpenModelica to the error message
-<code>expected subtype of record AixLib.Fluid.Movers.Data.Generic</code>.
-</li>
-<li>
-March 2, 2016, by Filip Jorissen:<br/>
-Revised implementation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
-</li>
-<li>
-November 5, 2015, by Michael Wetter:<br/>
-Changed parameters since the power is no longer a parameter for the movers
-that take mass flow rate or head as an input.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
-</li>
-<li>
-November 22, 2014, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example compares the power consumed by pumps that
+ take three different control signals.
+ Each pump has identical mass flow rate and pressure rise.
+ </p>
+ <p>
+ Note that for the instances
+ <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">
+ AixLib.Fluid.Movers.FlowControlled_dp</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_m_flow\">
+ AixLib.Fluid.Movers.FlowControlled_m_flow</a>,
+ we had to assign the efficiencies (otherwise the default constant
+ efficiency of <i>0.7</i> would have been used).
+ In these models, the power consumption is computed
+ using similarity laws, but using the mass flow rate as opposed
+ to the speed, because speed is not known in these two models.
+ This is an approximation at operating points in which
+ the speed is different from the nominal speed <code>N_nominal</code>
+ because similarity laws are valid for speed and not for
+ mass flow rate.
+ </p>
+ <p>
+ The figure below shows the approximation error for the
+ power calculation where the speed <i>N<sub>rpm</sub></i> differs from
+ the nominal speed <i>N<sub>nominal</sub></i>.
+ </p>
+ <p align=\"center\">
+ <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Validation/PowerSimplified.png\"/>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 15, 2021, by Hongxiang Fu:<br/>
+ Fixed the image in the documentation which was cut off
+ at the <i>y</i>-axis. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1533\">IBPSA, #1533</a>.
+ </li>
+ <li>
+ March 11, 2016, by Michael Wetter:<br/>
+ Revised implementation by assigning the data record directly in the
+ instances <code>pump_dp</code> and <code>pump_m_flow</code>, because
+ using a <code>parameter</code> and assigning this <code>parameter</code> leads
+ in OpenModelica to the error message
+ <code>expected subtype of record AixLib.Fluid.Movers.Data.Generic</code>.
+ </li>
+ <li>
+ March 2, 2016, by Filip Jorissen:<br/>
+ Revised implementation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
+ </li>
+ <li>
+ November 5, 2015, by Michael Wetter:<br/>
+ Changed parameters since the power is no longer a parameter for the movers
+ that take mass flow rate or head as an input.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
+ </li>
+ <li>
+ November 22, 2014, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerSimplified;

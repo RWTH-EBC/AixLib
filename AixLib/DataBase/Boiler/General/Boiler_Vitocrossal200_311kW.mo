@@ -1,4 +1,4 @@
-within AixLib.DataBase.Boiler.General;
+﻿within AixLib.DataBase.Boiler.General;
 record Boiler_Vitocrossal200_311kW
   "Gas-fired condensing boiler Viessmann Vitocrossal200 311kW"
   extends BoilerTwoPointBaseDataDefinition(

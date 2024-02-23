@@ -1,4 +1,4 @@
-within AixLib.DataBase.CHP.CHPDataSimple;
+﻿within AixLib.DataBase.CHP.CHPDataSimple;
 record CHP_mini_ECO_POWER_5_LiquidGas
   "Vaillant: mini BHKW eco Power 4.7 (Liquid gas)"
   extends CHPDataSimple.CHPBaseDataDefinition(

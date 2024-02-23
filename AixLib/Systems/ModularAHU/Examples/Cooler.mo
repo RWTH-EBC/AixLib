@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Cooler "Cooler register example"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -7,7 +7,6 @@ model Cooler "Cooler register example"
     annotation (choicesAllMatching=true);
 
   RegisterModule registerModule(
-    T_start=297.15,
     redeclare HydraulicModules.ThrottlePump hydraulicModule(
       parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
@@ -19,28 +18,28 @@ model Cooler "Cooler register example"
             AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
             per))),
     redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=1,
-    m2_flow_nominal=0.1,
     redeclare package Medium1 = MediumAir,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    T_amb=293.15,T_start=297.15,
     dynamicHX(
-      dp1_nominal=100,
-      dp2_nominal=6000,
-      dT_nom=20,
       Q_nom=30000,
-      redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
-      redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
+      dT_nom=20,dp1_nominal=100,
+      dp2_nominal=6000),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     hydraulicModuleIcon="ThrottlePump",
-    T_amb=293.15)
+    m1_flow_nominal=1,
+    m2_flow_nominal=0.1, massDynamics = Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
+
   Fluid.Sources.Boundary_pT boundaryWaterSource(
+    p=300000,
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=279.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-60,-60})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT boundaryWaterSink(
+    p=300000,                                 nPorts=1, redeclare package Medium =
                MediumWater) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -62,11 +61,11 @@ model Cooler "Cooler register example"
     k=0.04,
     Ti=120,
     Td=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    reverseAction=true,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    reverseAction=false,
     useExternalTset=true,
     TflowSet=289.15,
-    rpm_pump=4000)
+    rpm_pump=1000)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 19)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
@@ -81,7 +80,7 @@ equation
   connect(registerModule.port_a1, boundaryAirSource.ports[1]) annotation (Line(
         points={{-40,20.1538},{-40,20},{-70,20},{-70,40}},     color={0,127,255}));
   connect(ctrBasic.registerBus, registerModule.registerBus) annotation (Line(
-      points={{-51.4,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
+      points={{-51.8,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
           -0.0230769}},
       color={255,204,51},
       thickness=0.5));
@@ -97,5 +96,8 @@ equation
     First implementation.
   </li>
 </ul>
-</html>"), experiment(StopTime=3600));
+</html>"), experiment(StopTime=3600),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
+        "Simulate and plot"));
 end Cooler;

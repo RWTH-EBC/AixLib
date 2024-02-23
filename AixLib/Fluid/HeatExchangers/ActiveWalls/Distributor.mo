@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
@@ -6,10 +6,10 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
   parameter Integer n(min=1) "Number of underfloor heating circuits / registers"
     annotation (Dialog(connectorSizing=true, group="General"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="General"));
 
-  parameter Modelica.SIunits.Time tau=10
+  parameter Modelica.Units.SI.Time tau=10
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
     annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 
@@ -58,7 +58,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal) annotation (Placement(
         transformation(extent={{-10,-20},{10,0}}, rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final package Medium =
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
+      package                                                                      Medium =
                        Medium) annotation (Placement(
       visible=true,
       transformation(
@@ -69,7 +70,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         origin={0,60},
         extent={{-6,-24},{6,24}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final package Medium =
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
+      package                                                                        Medium =
                        Medium) annotation (Placement(
       visible=true,
       transformation(
@@ -86,7 +88,7 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 equation
   connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,32},{-46,32},

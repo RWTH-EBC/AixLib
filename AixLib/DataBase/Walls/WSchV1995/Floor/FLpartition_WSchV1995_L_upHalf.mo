@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1995.Floor;
+﻿within AixLib.DataBase.Walls.WSchV1995.Floor;
 record FLpartition_WSchV1995_L_upHalf
   "Floor partition after WSchV1995, for building of typeL (leicht), upper half"
   extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.02, 0.06}

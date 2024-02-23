@@ -30,66 +30,66 @@ partial model PartialTwoPort "Partial component with two ports"
 
   annotation (
     Documentation(info="<html>
-<p>
-This partial model defines an interface for components with two ports.
-The treatment of the design flow direction and of flow reversal are predefined based on the parameter <code>allowFlowReversal</code>.
-The component may transport fluid and may have internal storage for a given fluid <code>Medium</code>.
-</p>
-<h4>Implementation</h4>
-<p>
-This model is similar to
-<a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">
-Modelica.Fluid.Interfaces.PartialTwoPort</a>
-but it does not use the <code>outer system</code> declaration.
-This declaration is omitted as in building energy simulation,
-many models use multiple media, an in practice,
-users have not used this global definition to assign parameters.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-July 8, 2018, by Filip Jorissen:<br/>
-Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
-</li>
-<li>
-November 19, 2015, by Michael Wetter:<br/>
-Removed parameters
-<code>port_a_exposesState</code> and
-<code>port_b_exposesState</code>
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/351\">#351</a>
-and
-<code>showDesignFlowDirection</code>
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
-</li>
-<li>
-November 13, 2015, by Michael Wetter:<br/>
-Assinged <code>start</code> attribute for leaving
-enthalpy at <code>port_a</code> and <code>port_b</code>.
-This was done to make the model similar to
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
-AixLib.Fluid.Interfaces.PartialFourPort</a>.
-</li>
-<li>
-November 12, 2015, by Michael Wetter:<br/>
-Removed import statement.
-</li>
-<li>
-October 21, 2014, by Michael Wetter:<br/>
-Revised implementation.
-Declared medium in ports to be <code>final</code>.
-</li>
-<li>
-October 20, 2014, by Filip Jorisson:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This partial model defines an interface for components with two ports.
+ The treatment of the design flow direction and of flow reversal are predefined based on the parameter <code>allowFlowReversal</code>.
+ The component may transport fluid and may have internal storage for a given fluid <code>Medium</code>.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ This model is similar to
+ <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">
+ Modelica.Fluid.Interfaces.PartialTwoPort</a>
+ but it does not use the <code>outer system</code> declaration.
+ This declaration is omitted as in building energy simulation,
+ many models use multiple media, an in practice,
+ users have not used this global definition to assign parameters.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ July 8, 2018, by Filip Jorissen:<br/>
+ Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
+ </li>
+ <li>
+ November 19, 2015, by Michael Wetter:<br/>
+ Removed parameters
+ <code>port_a_exposesState</code> and
+ <code>port_b_exposesState</code>
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/351\">#351</a>
+ and
+ <code>showDesignFlowDirection</code>
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
+ </li>
+ <li>
+ November 13, 2015, by Michael Wetter:<br/>
+ Assinged <code>start</code> attribute for leaving
+ enthalpy at <code>port_a</code> and <code>port_b</code>.
+ This was done to make the model similar to
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
+ AixLib.Fluid.Interfaces.PartialFourPort</a>.
+ </li>
+ <li>
+ November 12, 2015, by Michael Wetter:<br/>
+ Removed import statement.
+ </li>
+ <li>
+ October 21, 2014, by Michael Wetter:<br/>
+ Revised implementation.
+ Declared medium in ports to be <code>final</code>.
+ </li>
+ <li>
+ October 20, 2014, by Filip Jorisson:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}}), graphics={
@@ -105,6 +105,7 @@ First implementation.
           visible=not allowFlowReversal),
         Text(
           extent={{-149,-114},{151,-154}},
-          lineColor={0,0,255},
-          textString="%name")}));
+          textColor={0,0,255},
+          textString="%name")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPort;

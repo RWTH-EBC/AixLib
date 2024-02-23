@@ -26,8 +26,8 @@ model Inlet "Adaptor for connecting a fluid inlet to the FMI interface"
                 annotation (Placement(
         transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},
             {110,10}})));
-  AixLib.Fluid.FMI.Interfaces.PressureOutput p if
-     use_p_in "Pressure"
+  AixLib.Fluid.FMI.Interfaces.PressureOutput p
+  if use_p_in "Pressure"
   annotation (
       Placement(
       transformation(
@@ -107,7 +107,7 @@ equation
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Line(
           points={{-100,0},{-60,0}},
           color={0,0,255}),
@@ -128,7 +128,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-20,6},{14,-12}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid,
           textString="m"),
@@ -139,64 +139,65 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-120,34},{-98,16}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="inlet"),
         Line(
           points={{0,-100},{0,-60}},
           color={0,127,127}),
         Text(
           extent={{2,-76},{24,-94}},
-          lineColor={0,127,127},
+          textColor={0,127,127},
           visible=use_p_in,
           textString="p")}),
     Documentation(info="<html>
-<p>
-Model that is used to connect an input signal to a fluid port.
-The model needs to be used in conjunction with an instance of
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
-AixLib.Fluid.FMI.Adaptors.Outlet</a> in order for
-fluid mass flow rate and pressure to be properly assigned to
-the acausal fluid models.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
-AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
-or
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
-AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
-for how to use this model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air and water.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-November 8, 2016, by Michael Wetter:<br/>
-Corrected wrong argument type in function call of <code>Medium.temperature_phX</code> and
-<code>Medium.specificEnthalpy_pTX</code>.
-</li>
-<li>
-October 23, 2016, by Michael Wetter:<br/>
-Changed type of pressure output connector.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-April 15, 2015 by Michael Wetter:<br/>
-Changed connector variable to be temperature instead of
-specific enthalpy.
-</li>
-<li>
-January 21, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model that is used to connect an input signal to a fluid port.
+ The model needs to be used in conjunction with an instance of
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+ AixLib.Fluid.FMI.Adaptors.Outlet</a> in order for
+ fluid mass flow rate and pressure to be properly assigned to
+ the acausal fluid models.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+ AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
+ or
+ <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
+ AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
+ for how to use this model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air and water.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ November 8, 2016, by Michael Wetter:<br/>
+ Corrected wrong argument type in function call of <code>Medium.temperature_phX</code> and
+ <code>Medium.specificEnthalpy_pTX</code>.
+ </li>
+ <li>
+ October 23, 2016, by Michael Wetter:<br/>
+ Changed type of pressure output connector.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ April 15, 2015 by Michael Wetter:<br/>
+ Changed connector variable to be temperature instead of
+ specific enthalpy.
+ </li>
+ <li>
+ January 21, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Inlet;

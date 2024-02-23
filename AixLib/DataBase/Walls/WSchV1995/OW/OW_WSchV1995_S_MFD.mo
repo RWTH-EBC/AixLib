@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1995.OW;
+﻿within AixLib.DataBase.Walls.WSchV1995.OW;
 record OW_WSchV1995_S_MFD
   "outer wall after WSchV1995, for building of type S (schwer), for MFD"
   extends WallBaseDataDefinition(n(min=1) = 4 "Number of wall layers",

@@ -3,7 +3,7 @@ model RadOnTiltedSurf_Liu
   "Calculates solar radiation on tilted surfaces according to Liu"
   extends BaseClasses.PartialRadOnTiltedSurf;
 
-import Modelica.SIunits.Conversions.from_deg;
+import Modelica.Units.Conversions.from_deg;
 
   Real InBeamRadHor "beam irradiance on the horizontal surface";
   Real InDiffRadHor "diffuse irradiance on the horizontal surface";
@@ -48,10 +48,10 @@ equation
   R = R_help;
 
   // conversion of direct and diffuse horizontal radiation
-  if WeatherFormat == 1 then // TRY
+  if not WeatherFormat then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
-  else  // WeatherFormat == 2 , TMY then
+  else  // WeatherFormat == true , TMY then
     InBeamRadHor = solarInput1 * cos_theta_z;
     InDiffRadHor = max(solarInput2-InBeamRadHor, 0);
   end if;

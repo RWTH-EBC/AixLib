@@ -5,12 +5,11 @@ model VectorFunctions "Test model for functions that take a vector as argument"
   AixLib.Utilities.Math.Min minVec(
                    nin=3)
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
-  Modelica.Blocks.Sources.Sine sine(freqHz=6)
+  Modelica.Blocks.Sources.Sine sine(f=6)
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-  Modelica.Blocks.Sources.Sine sine1(
-                                    freqHz=8)
+  Modelica.Blocks.Sources.Sine sine1(f=8)
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-  Modelica.Blocks.Sources.Sine sine2(freqHz=10)
+  Modelica.Blocks.Sources.Sine sine2(f=10)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   AixLib.Utilities.Math.Max maxVec(
                    nin=3)
@@ -50,15 +49,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/VectorFunctions.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the implementation of functions that take a vector as an argument.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 15, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model tests the implementation of functions that take a vector as an argument.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 15, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end VectorFunctions;

@@ -41,7 +41,10 @@ Documentation(info="<html><h4>
 <p>
   The simulation consists of the following models:
 </p>
-<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+<table>
+  <caption>
+    \"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td bgcolor=\"#DCDCDC\">
       <p>

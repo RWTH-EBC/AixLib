@@ -4,14 +4,17 @@ model InternalResistancesTwoUTube "Validation of InternalResistancesTwoUTube"
 
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
-  parameter Modelica.SIunits.Length hSeg = borFieDat.conDat.hBor/nSeg
+  parameter Modelica.Units.SI.Length hSeg=borFieDat.conDat.hBor/nSeg
     "Length of the internal heat exchanger";
-  parameter Modelica.SIunits.ThermalResistance Rgb_val=0.572601 "Grout node to borehole wall thermal resistance";
-  parameter Modelica.SIunits.ThermalResistance Rgg1_val=0.0406121 "Grout node to grout node thermal resistance";
-  parameter Modelica.SIunits.ThermalResistance Rgg2_val=0.216904
+  parameter Modelica.Units.SI.ThermalResistance Rgb_val=0.572601
+    "Grout node to borehole wall thermal resistance";
+  parameter Modelica.Units.SI.ThermalResistance Rgg1_val=0.0406121
+    "Grout node to grout node thermal resistance";
+  parameter Modelica.Units.SI.ThermalResistance Rgg2_val=0.216904
     "Thermal resistance between two grout nodes opposite to each other";
-  parameter Modelica.SIunits.ThermalResistance RCondGro_val=0.195099 "Pipe to grout node thermal resistance";
-  parameter Modelica.SIunits.Temperature T_start=298.15 "Initial temperature";
+  parameter Modelica.Units.SI.ThermalResistance RCondGro_val=0.195099
+    "Pipe to grout node thermal resistance";
+  parameter Modelica.Units.SI.Temperature T_start=298.15 "Initial temperature";
 
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TWal(T=T_start)
     "Borehole wall temperature"
@@ -73,16 +76,17 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Examples/InternalResistancesTwoUTube.mos"
         "Simulate and plot"),
   Documentation(info="<html>
-This example tests the implementation of
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesTwoUTube\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesTwoUTube</a>
-for the dynamic behavior of the filling material in a double U-tube borehole.
-</html>", revisions="<html>
-<ul>
-<li>
-July 19, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ This example tests the implementation of
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesTwoUTube\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesTwoUTube</a>
+ for the dynamic behavior of the filling material in a double U-tube borehole.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 19, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InternalResistancesTwoUTube;

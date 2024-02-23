@@ -38,39 +38,40 @@ equation
  end if; // linearized
   annotation (
 Documentation(info="<html>
-<p>
-Partial model for valves with different opening characteristics,
-such as linear, equal percentage or quick opening. This partial extends from
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve\">
-AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</a>
-and also contains the governing equations for these three two way valve models.
-</p>
-<h4>Implementation</h4>
-<p>
-Models that extend this model need to provide a binding equation
-for the flow function <code>phi</code>.
-An example of such a code can be found in
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayLinear\">
-AixLib.Fluid.Actuators.Valves.TwoWayLinear</a>.
-</p>
-</html>",
+ <p>
+ Partial model for valves with different opening characteristics,
+ such as linear, equal percentage or quick opening. This partial extends from
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</a>
+ and also contains the governing equations for these three two way valve models.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ Models that extend this model need to provide a binding equation
+ for the flow function <code>phi</code>.
+ An example of such a code can be found in
+ <a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayLinear\">
+ AixLib.Fluid.Actuators.Valves.TwoWayLinear</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-October 25, 2019, by Jianjun Hu:<br/>
-Removed icon graphics annotation. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
-</li>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-January 29, 2015 by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ October 25, 2019, by Jianjun Hu:<br/>
+ Removed icon graphics annotation. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
+ </li>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ January 29, 2015 by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoWayValveKv;

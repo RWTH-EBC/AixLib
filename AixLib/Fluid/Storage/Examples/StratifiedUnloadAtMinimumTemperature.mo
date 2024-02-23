@@ -4,9 +4,9 @@ model StratifiedUnloadAtMinimumTemperature
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.Volume VTan=3 "Tank volume";
+  parameter Modelica.Units.SI.Volume VTan=3 "Tank volume";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 3*1000/3600
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3*1000/3600
     "Nominal mass flow rate";
 
   constant Integer nSeg=5 "Number of volume segments";
@@ -177,32 +177,33 @@ equation
       StopTime=21600,
       Tolerance=1e-06),
     Documentation(info="<html>
-<p>
-Example for tank model that has three outlets, each with a valve.
-The valve at the bottom opens when the temperature in that tank segment
-is sufficiently warm to serve the load.
-The tank in the middle also opens when its tank temperature is sufficiently high,
-but only if the valve below is closed.
-Finally, the valve at the top only opens if no other valve is open.
-Hence, there is always exactly one valve open.
-On the right-hand side of the model is a heater that adds heat to the bottom of the
-tank if the top tank segment is below the set point temperature.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly
-by removing CDL blocks.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-June 1, 2018, by Michael Wetter:<br/>
-First implementation.<br/>
-This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
-issue 1182</a>.
-</li>
-</ul>
-</html>"));
+ <p>
+ Example for tank model that has three outlets, each with a valve.
+ The valve at the bottom opens when the temperature in that tank segment
+ is sufficiently warm to serve the load.
+ The tank in the middle also opens when its tank temperature is sufficiently high,
+ but only if the valve below is closed.
+ Finally, the valve at the top only opens if no other valve is open.
+ Hence, there is always exactly one valve open.
+ On the right-hand side of the model is a heater that adds heat to the bottom of the
+ tank if the top tank segment is below the set point temperature.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly
+ by removing CDL blocks.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ June 1, 2018, by Michael Wetter:<br/>
+ First implementation.<br/>
+ This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
+ issue 1182</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedUnloadAtMinimumTemperature;

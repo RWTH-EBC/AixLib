@@ -69,223 +69,235 @@ class Naming "Naming and abbreviations"
   related to the Helmholtz energy equation of state. Some examples are
   given below:
 </p>
-<table summary=\"Abbreviations for EoS\" cellpadding=\"2\" border=\"1\"
-width=\"80%\" style=\"border-collapse:collapse;\">
-  <tr>
-    <td>
-      <p>
-        <b>Expression</b>
-      </p>
-    </td>
-    <td>
-      <p>
-        <b>Abbreviation</b>
-      </p>
-    </td>
-    <td>
-      <p>
-        <b>Comment</b>
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        alpha_0
-      </p>
-    </td>
-    <td>
-      <p>
-        f_Idg
-      </p>
-    </td>
-    <td>
-      <p>
-        Helmholtz energy of ideal gas
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        alpha_r
-      </p>
-    </td>
-    <td>
-      <p>
-        f_Res
-      </p>
-    </td>
-    <td>
-      <p>
-        Helmholtz energy of residual gas
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        tau * d(alpha_0)/(dtau)_delta=const.
-      </p>
-    </td>
-    <td>
-      <p>
-        t_fIdg_t
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of f_Idg with respect to tau
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        tau*tau * dd(alpha_0)/(dtau*dtau)_delta=const.
-      </p>
-    </td>
-    <td>
-      <p>
-        tt_fIdg_tt
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of f_Idg with respect to tau*tau
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        tau*delta * dd(alpha_r)/(dtau*ddelta)
-      </p>
-    </td>
-    <td>
-      <p>
-        td_fRes_td
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of f_Res with respect to tau*delta
-      </p>
-    </td>
-  </tr>
-</table>
-<p>
-  Some special abbreviations are introduced for partial derivatives.
-  Some examples are given below:
-</p>
-<table summary=\"Abbreviations for partial derivatives\" cellspacing=\"0\"
-cellpadding=\"2\" border=\"1\" width=\"80%\" style=
-\"border-collapse:collapse;\">
-  <tr>
-    <td>
-      <p>
-        <b>Expression</b>
-      </p>
-    </td>
-    <td>
-      <p>
-        <b>Abbreviation</b>
-      </p>
-    </td>
-    <td>
-      <p>
-        <b>Comment</b>
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        d(d)/(dp)_h=const.
-      </p>
-    </td>
-    <td>
-      <p>
-        ddph
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of density with respect to pressure at
-        constant specific enthalpy
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        d(T)/(ds)_p=const.
-      </p>
-    </td>
-    <td>
-      <p>
-        dTsp
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of temperature with respect to specific
-        entropy and constant pressure
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        d(Tsat)/(dp)
-      </p>
-    </td>
-    <td>
-      <p>
-        dTp
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of saturation temperature with respect to
-        pressure
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        d(dl)/(dp)
-      </p>
-    </td>
-    <td>
-      <p>
-        ddldp
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of bubble density with respect to pressure
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        d(dv)/(dp)
-      </p>
-    </td>
-    <td>
-      <p>
-        ddvdp
-      </p>
-    </td>
-    <td>
-      <p>
-        Partial derivative of dew density with respect to pressure
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Abbreviations for EoS\" cellpadding=\"2\" border=\"1\" width=\"80%\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td>
+          <p>
+            <b>Expression</b>
+          </p>
+        </td>
+        <td>
+          <p>
+            <b>Abbreviation</b>
+          </p>
+        </td>
+        <td>
+          <p>
+            <b>Comment</b>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            alpha_0
+          </p>
+        </td>
+        <td>
+          <p>
+            f_Idg
+          </p>
+        </td>
+        <td>
+          <p>
+            Helmholtz energy of ideal gas
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            alpha_r
+          </p>
+        </td>
+        <td>
+          <p>
+            f_Res
+          </p>
+        </td>
+        <td>
+          <p>
+            Helmholtz energy of residual gas
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            tau * d(alpha_0)/(dtau)_delta=const.
+          </p>
+        </td>
+        <td>
+          <p>
+            t_fIdg_t
+          </p>
+        </td>
+        <td>
+          <p>
+            Partial derivative of f_Idg with respect to tau
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            tau*tau * dd(alpha_0)/(dtau*dtau)_delta=const.
+          </p>
+        </td>
+        <td>
+          <p>
+            tt_fIdg_tt
+          </p>
+        </td>
+        <td>
+          <p>
+            Partial derivative of f_Idg with respect to tau*tau
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            tau*delta * dd(alpha_r)/(dtau*ddelta)
+          </p>
+        </td>
+        <td>
+          <p>
+            td_fRes_td
+          </p>
+        </td>
+        <td>
+          <p>
+            Partial derivative of f_Res with respect to tau*delta
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      Some special abbreviations are introduced for partial
+      derivatives. Some examples are given below:
+    </p>
+    <table>
+      <caption>
+        \"Abbreviations for partial derivatives\" cellspacing=\"0\"
+        cellpadding=\"2\" border=\"1\" width=\"80%\" style=
+        \"border-collapse:collapse;\"&gt;
+        <table>
+          <tr>
+            <td>
+              <p>
+                <b>Expression</b>
+              </p>
+            </td>
+            <td>
+              <p>
+                <b>Abbreviation</b>
+              </p>
+            </td>
+            <td>
+              <p>
+                <b>Comment</b>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                d(d)/(dp)_h=const.
+              </p>
+            </td>
+            <td>
+              <p>
+                ddph
+              </p>
+            </td>
+            <td>
+              <p>
+                Partial derivative of density with respect to pressure
+                at constant specific enthalpy
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                d(T)/(ds)_p=const.
+              </p>
+            </td>
+            <td>
+              <p>
+                dTsp
+              </p>
+            </td>
+            <td>
+              <p>
+                Partial derivative of temperature with respect to
+                specific entropy and constant pressure
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                d(Tsat)/(dp)
+              </p>
+            </td>
+            <td>
+              <p>
+                dTp
+              </p>
+            </td>
+            <td>
+              <p>
+                Partial derivative of saturation temperature with
+                respect to pressure
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                d(dl)/(dp)
+              </p>
+            </td>
+            <td>
+              <p>
+                ddldp
+              </p>
+            </td>
+            <td>
+              <p>
+                Partial derivative of bubble density with respect to
+                pressure
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                d(dv)/(dp)
+              </p>
+            </td>
+            <td>
+              <p>
+                ddvdp
+              </p>
+            </td>
+            <td>
+              <p>
+                Partial derivative of dew density with respect to
+                pressure
+              </p>
+            </td>
+          </tr>
+        </table>
+      </caption>
+    </table>
+  </caption>
 </table>
 </html>"));
 end Naming;

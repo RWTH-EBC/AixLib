@@ -16,35 +16,36 @@ type ZeroTime = enumeration(
     NY2020 "New year 2020, 00:00:00 local time")
   "Use this to set the date corresponding to time = 0"
   annotation (Documentation(info="<html>
-<p>
-Type for choosing how to set the reference time in
-<a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
-AixLib.Utilities.Time.CalendarTime</a>.
-</p>
-<p>
-For example, <code>AixLib.Utilities.Time.Types.TimeReference.NY2016</code>
-means that if the Modelica built-in variable <code>time=0</code>, it is
-January 1, 2016, 0:00:00 local time.
-</p>
-<p>
-When using <code>AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code>,
-<code>time</code> is defined with respect to GMT. This is different from the use
-of <code>time</code> in the weather data reader
-<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
-AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>, as the weather data reader assumes
-that <code>time</code> is expressed in local time.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 10, 2016, by Michael Wetter:<br/>
-Revised implementation and moved to new package
-<a href=\"modelica://AixLib.Utilities.Time.CalendarTime.Types\">
-AixLib.Utilities.Time.CalendarTime.Types</a>.
-</li>
-<li>
-August 3, 2016, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Type for choosing how to set the reference time in
+ <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
+ AixLib.Utilities.Time.CalendarTime</a>.
+ </p>
+ <p>
+ For example, <code>AixLib.Utilities.Time.Types.TimeReference.NY2016</code>
+ means that if the Modelica built-in variable <code>time=0</code>, it is
+ January 1, 2016, 0:00:00 local time.
+ </p>
+ <p>
+ When using <code>AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code>,
+ <code>time</code> is defined with respect to GMT. This is different from the use
+ of <code>time</code> in the weather data reader
+ <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
+ AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>, as the weather data reader assumes
+ that <code>time</code> is expressed in local time.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 10, 2016, by Michael Wetter:<br/>
+ Revised implementation and moved to new package
+ <a href=\"modelica://AixLib.Utilities.Time.CalendarTime.Types\">
+ AixLib.Utilities.Time.CalendarTime.Types</a>.
+ </li>
+ <li>
+ August 3, 2016, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

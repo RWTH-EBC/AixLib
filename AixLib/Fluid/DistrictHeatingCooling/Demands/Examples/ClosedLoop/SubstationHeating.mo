@@ -22,7 +22,7 @@ model SubstationHeating
         origin={84,0})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=1000,
-    freqHz=1/3600,
+    f=1/3600,
     offset=2000,
     startTime=0)
     annotation (Placement(transformation(extent={{-80,72},{-60,92}})));
@@ -75,8 +75,11 @@ It illustrates the settings needed in the demand model to work in a bidirectiona
 low-temperature network.<p>
 </html>", revisions="<html>
 <ul>
-<li><i>April 15, 2020</i> ,by Tobias Blacha:<br/>
-Add documentaion </li>
+    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+    Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
+  </li>
+<li><i>April 15, 2020</i> by Tobias Blacha:<br/>
+Added documentaion </li>
 </ul>
 </html>"));
 end SubstationHeating;

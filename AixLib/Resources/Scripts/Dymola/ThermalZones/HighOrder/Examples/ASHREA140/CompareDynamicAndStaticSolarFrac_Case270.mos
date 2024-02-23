@@ -1,0 +1,27 @@
+﻿removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270", startTime=0, stopTime=86400, outputInterval=3600, tolerance=1e-6, method="dassl", resultFile="CompareDynamicAndStaticSolarFrac_Case270");
+createPlot(id=1, subPlot=1,
+ y = {"Room.solarRadInRoom.solar_frac_flo[1]","Room_dyn.solarRadInRoom.solar_frac_flo[1]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+ createPlot(id=1, subPlot=2, 
+ y = {"Room.solarRadInRoom.solar_frac_cei[1]","Room_dyn.solarRadInRoom.solar_frac_cei[1]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=2, subPlot=1,
+ y = {"Room.solarRadInRoom.solar_frac_win_abs[1]","Room_dyn.solarRadInRoom.solar_frac_win_abs[1]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=2, subPlot=2, 
+ y = {"Room.solarRadInRoom.solar_frac_win_lost[1]","Room_dyn.solarRadInRoom.solar_frac_win_lost[1]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(id=3, subPlot=1,
+ y = {"Room.solarRadInRoom.solar_frac_wall[1]","Room_dyn.solarRadInRoom.solar_frac_wall[1]","Room.solarRadInRoom.solar_frac_wall[2]","Room_dyn.solarRadInRoom.solar_frac_wall[2]","Room.solarRadInRoom.solar_frac_wall[3]","Room_dyn.solarRadInRoom.solar_frac_wall[3]","Room.solarRadInRoom.solar_frac_wall[4]","Room_dyn.solarRadInRoom.solar_frac_wall[4]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

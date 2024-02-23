@@ -5,18 +5,17 @@ model Carnot_TEva_reverseFlow
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-10
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=-10
     "Temperature difference evaporator inlet-outlet";
-  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
   parameter Real COPc_nominal = 3 "Chiller COP";
-  parameter Modelica.SIunits.HeatFlowRate QEva_flow_nominal = -100E3
+  parameter Modelica.Units.SI.HeatFlowRate QEva_flow_nominal=-100E3
     "Evaporator heat flow rate";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal=
-    QEva_flow_nominal/dTEva_nominal/4200
-    "Nominal mass flow rate at chilled water side";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal=
-    m2_flow_nominal*(COPc_nominal+1)/COPc_nominal
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=QEva_flow_nominal/
+      dTEva_nominal/4200 "Nominal mass flow rate at chilled water side";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=m2_flow_nominal*(
+      COPc_nominal + 1)/COPc_nominal
     "Nominal mass flow rate at condenser water wide";
 
   AixLib.Fluid.Chillers.Carnot_TEva chi(
@@ -71,8 +70,8 @@ model Carnot_TEva_reverseFlow
   Modelica.Blocks.Math.Add QCon_flow(k2=-1) "Condenser heat flow rate"
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
 
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp1_default=
-    Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp1_default=
+      Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
       Medium1.p_default,
       Medium1.T_default,
       Medium1.X_default))
@@ -118,28 +117,29 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chiller
         "Simulate and plot"),
     Documentation(
 info="<html>
-<p>
-Example that simulates a chiller whose efficiency is scaled based on the
-Carnot cycle.
-The chiller takes as an input the evaporator leaving water temperature.
-The condenser mass flow rate is computed in such a way that it has
-a temperature difference equal to <code>dTEva_nominal</code>.
-</p>
-<p>
-This example checks the correct behavior if a mass flow rate attains zero.
-</p>
-</html>",
+ <p>
+ Example that simulates a chiller whose efficiency is scaled based on the
+ Carnot cycle.
+ The chiller takes as an input the evaporator leaving water temperature.
+ The condenser mass flow rate is computed in such a way that it has
+ a temperature difference equal to <code>dTEva_nominal</code>.
+ </p>
+ <p>
+ This example checks the correct behavior if a mass flow rate attains zero.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 25, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TEva_reverseFlow;

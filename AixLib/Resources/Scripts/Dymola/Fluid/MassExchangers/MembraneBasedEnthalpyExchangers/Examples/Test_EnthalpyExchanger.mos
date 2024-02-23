@@ -1,0 +1,23 @@
+﻿simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger", stopTime=7200, outputInterval=10, method="dassl", tolerance=1e-6, resultFile="Test_EnthalpyExchanger");
+createPlot(id=1, 
+ position={19, 15, 817, 560}, 
+ y={"senEff.y", "latEff.y"}, 
+ range={0.0, 7500.0, 0.0, 1.0}, 
+ grid=true, 
+ colors={{28,108,200}, {238,46,47}});
+createPlot(id=1, 
+ position={19, 15, 817, 560}, 
+ y={"senTemColOut.T", "senTemHotIn.T", "senTemColIn.T", "senTemHotOut.T"}, 
+ range={0.0, 7500.0, -5.0, 25.0},
+ grid=true, 
+ subPlot=102, 
+ colors={{0,140,72}, {238,46,47}, {28,108,200}, {217,67,180}}, 
+ displayUnits={"degC", "degC", "degC", "degC"});
+createPlot(id=1, 
+ position={19, 15, 817, 560}, 
+ y={"senMasFraColIn.X", "senMasFraHotIn.X", "senMasFraColOut.X", "senMasFraHotOut.X"}, 
+ range={0.0, 7500.0, 0.0, 0.01}, 
+ grid=true, 
+ subPlot=103, 
+ colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, 
+ displayUnits={"kg/kg", "kg/kg", "kg/kg", "kg/kg"})

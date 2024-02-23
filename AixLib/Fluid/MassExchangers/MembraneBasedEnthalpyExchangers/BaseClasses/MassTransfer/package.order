@@ -1,0 +1,6 @@
+CrossFlowReduction
+LocalDuctConvectiveMassFlow
+MembraneMassTransfer
+PartialDuctMassTransfer
+PartialFlowMassTransfer
+PartialMassTransfer

@@ -3,8 +3,9 @@ package SolarGain "Package with models for solar gain corrections according to V
   extends Modelica.Icons.VariantsPackage;
 
 
-annotation (Documentation(info="<html><p>
-  This package contains models to compute solar heat gains.
+annotation (Documentation(info="<html>
+<p>
+This package contains models to compute solar heat gains.
 </p>
 </html>"));
 end SolarGain;

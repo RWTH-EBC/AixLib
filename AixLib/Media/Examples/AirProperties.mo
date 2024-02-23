@@ -7,7 +7,7 @@ model AirProperties
     TMin=273.15-30,
     TMax=273.15+60);
 
-  Modelica.SIunits.SpecificEnthalpy hLiq "Specific enthalpy of liquid";
+  Modelica.Units.SI.SpecificEnthalpy hLiq "Specific enthalpy of liquid";
 
 equation
   // Check the implementation of the base properties
@@ -23,16 +23,17 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/AirProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This example checks thermophysical properties of the medium.
-</p>
-</html>",
+ <p>
+ This example checks thermophysical properties of the medium.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 19, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ December 19, 2013, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end AirProperties;

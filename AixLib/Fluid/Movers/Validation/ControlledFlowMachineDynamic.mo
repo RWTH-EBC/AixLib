@@ -12,9 +12,9 @@ experiment(Tolerance=1e-6, StopTime=600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/ControlledFlowMachineDynamic.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This example demonstrates the use of the flow model with four different configurations.
-At steady-state, all flow models have the same mass flow rate and pressure difference.
-</html>"),
-Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})));
-
+ This example demonstrates the use of the flow model with four different configurations.
+ At steady-state, all flow models have the same mass flow rate and pressure difference.
+ </html>"),
+Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ControlledFlowMachineDynamic;

@@ -5,15 +5,22 @@ model MachinesAreaSpecific "Heat flow due to machines relative to room area and 
     gain(final k=intGainsMachinesRoomAreaSpecific*roomArea),
     gainSurfaces(final k=areaSurfaceMachinesTotal));
 
-  parameter Modelica.SIunits.HeatFlux intGainsMachinesRoomAreaSpecific=1.0 "Heat flow from machines per square meter room" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal=max(
-        1e-4, surfaceMachine*intGainsMachinesRoomAreaSpecific*(1/
-        HeatPerMachine)*roomArea) "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
-  parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.Units.SI.HeatFlux intGainsMachinesRoomAreaSpecific=1.0
+    "Heat flow from machines per square meter room"
+    annotation (Dialog(descriptionLabel=true));
+  parameter Modelica.Units.SI.Area areaSurfaceMachinesTotal=max(1e-4,
+      surfaceMachine*intGainsMachinesRoomAreaSpecific*(1/HeatPerMachine)*
+      roomArea)
+    "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  parameter Modelica.Units.SI.Area roomArea "Area of room"
+    annotation (Dialog(descriptionLabel=true));
 
 protected
-  parameter Modelica.SIunits.HeatFlowRate HeatPerMachine = 100 "Average Heat Flow per machine taken from DIN V 18599-10" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area surfaceMachine = 2.0 "Surface area of one machine";
+  parameter Modelica.Units.SI.HeatFlowRate HeatPerMachine=100
+    "Average Heat Flow per machine taken from DIN V 18599-10"
+    annotation (Dialog(descriptionLabel=true));
+  parameter Modelica.Units.SI.Area surfaceMachine=2.0
+    "Surface area of one machine";
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},

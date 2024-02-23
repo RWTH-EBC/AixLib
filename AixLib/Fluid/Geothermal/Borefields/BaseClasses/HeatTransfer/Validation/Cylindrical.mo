@@ -3,7 +3,7 @@ model Cylindrical
   "Comparison of the Cylindrical with the GroundTemperatureResponse"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_start = 295.15
+  parameter Modelica.Units.SI.Temperature T_start=295.15
     "Initial soil temperature";
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template borFieDat=
     AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Borefield()
@@ -49,22 +49,23 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=360000.0),
     Documentation(info="<html>
-<p>
-This example demonstrates the use of
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical</a>.
-</p>
-<p>
-After a short delay, a constant heat flow rate is applied to the inner surface
-of a cylindrical ground layer while the outer surface is kept at a constant
-temperature.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 13, 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example demonstrates the use of
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical</a>.
+ </p>
+ <p>
+ After a short delay, a constant heat flow rate is applied to the inner surface
+ of a cylindrical ground layer while the outer surface is kept at a constant
+ temperature.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 13, 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Cylindrical;

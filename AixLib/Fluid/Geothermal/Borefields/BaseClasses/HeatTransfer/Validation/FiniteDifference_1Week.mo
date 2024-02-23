@@ -3,7 +3,7 @@ model FiniteDifference_1Week
   "Short term validation of ground temperature response model"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_start = 283.15
+  parameter Modelica.Units.SI.Temperature T_start=283.15
     "Initial soil temperature";
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical soi(
     final steadyStateInitial=false,
@@ -47,7 +47,7 @@ model FiniteDifference_1Week
     annotation (Placement(transformation(extent={{-90,-88},{-70,-68}})));
 
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/(24*3600),
+    f=1/(24*3600),
     startTime=21600,
     amplitude=1e8) "Heat flow signal"
     annotation (Placement(transformation(extent={{-92,-10},{-72,10}})));
@@ -108,27 +108,28 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=604800.0),
     Documentation(info="<html>
-<p>
-This example validates the implementation of
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>
-for the evaluation of the borehole wall temperature at a short time scale.
-</p>
-<p>
-After a short delay, a sinusoidal heat flow rate is applied to borehole heat
-exchanger. The temperature at the borehole wall evaluated with
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>
-is compared to the temperature obtained with
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical</a>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 13, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example validates the implementation of
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>
+ for the evaluation of the borehole wall temperature at a short time scale.
+ </p>
+ <p>
+ After a short delay, a sinusoidal heat flow rate is applied to borehole heat
+ exchanger. The temperature at the borehole wall evaluated with
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>
+ is compared to the temperature obtained with
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical</a>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 13, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FiniteDifference_1Week;

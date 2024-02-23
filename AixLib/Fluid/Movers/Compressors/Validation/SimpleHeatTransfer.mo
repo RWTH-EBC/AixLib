@@ -9,15 +9,15 @@ model SimpleHeatTransfer
    Modelica.Media.R134a.R134a_ph
    "Medium of the compressor";
 
-  parameter Modelica.SIunits.AbsolutePressure pInl=
-    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+2)))
+  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
+      Medium.setBubbleState(Medium.setSat_T(TInl + 2)))
     "Current pressure at inlet conditions";
-  parameter Modelica.SIunits.Temperature TInl = 283.15
+  parameter Modelica.Units.SI.Temperature TInl=283.15
     "Current temperature at inlet conditions";
-  parameter Modelica.SIunits.AbsolutePressure pOut=
-    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut-5)))
+  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
+      Medium.setDewState(Medium.setSat_T(TOut - 5)))
     "Current set point of the compressor's outlet pressure";
-  parameter Modelica.SIunits.Temperature TOut = 333.15
+  parameter Modelica.Units.SI.Temperature TOut=333.15
     "Current temperature at outlet conditions";
 
   // Definition of submodels and connectors

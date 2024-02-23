@@ -4,11 +4,9 @@ model SourceIdeal
   extends BaseClasses.Supplies.OpenLoop.PartialSupply(senT_return(
         allowFlowReversal=true));
 
-  parameter Modelica.SIunits.AbsolutePressure pReturn
-    "Fixed return pressure";
+  parameter Modelica.Units.SI.AbsolutePressure pReturn "Fixed return pressure";
 
-  parameter Modelica.SIunits.Temperature TReturn
-    "Fixed return temperature";
+  parameter Modelica.Units.SI.Temperature TReturn "Fixed return temperature";
 
   AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =
         Medium,

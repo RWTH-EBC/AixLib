@@ -7,7 +7,7 @@ model MediumColumn
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
 
-  parameter Modelica.SIunits.Length h(min=0) = 3 "Height of shaft";
+  parameter Modelica.Units.SI.Length h(min=0) = 3 "Height of shaft";
   parameter AixLib.Airflow.Multizone.Types.densitySelection densitySelection
     "Select how to pick density" annotation (Evaluate=true);
 
@@ -24,13 +24,13 @@ model MediumColumn
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{10,-110},{-10,-90}}), iconTransformation(extent={{10,-110},{-10,-90}})));
 
-  Modelica.SIunits.VolumeFlowRate V_flow
+  Modelica.Units.SI.VolumeFlowRate V_flow
     "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
-  Modelica.SIunits.MassFlowRate m_flow
+  Modelica.Units.SI.MassFlowRate m_flow
     "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
-  Modelica.SIunits.PressureDifference dp(displayUnit="Pa")
+  Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
     "Pressure difference between port_a and port_b";
-  Modelica.SIunits.Density rho "Density in medium column";
+  Modelica.Units.SI.Density rho "Density in medium column";
 protected
   Medium.ThermodynamicState sta_a=Medium.setState_phX(
       port_a.p,
@@ -102,15 +102,15 @@ equation
           points={{0,100},{0,-100},{0,-98}}),
         Text(
           extent={{24,-78},{106,-100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Bottom"),
         Text(
           extent={{32,104},{98,70}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Top"),
         Text(
           extent={{36,26},{88,-10}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid,
           textString="h=%h"),
@@ -155,115 +155,116 @@ equation
           lineColor={0,0,0})}),
 defaultComponentName="col",
 Documentation(info="<html>
-<p>
-This model describes the pressure difference of a vertical medium
-column. It can be used to model the pressure difference caused by
-stack effect.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-The model can be used with the following three configurations, which are
-controlled by the setting of the parameter <code>densitySelection</code>:
-</p>
-<ul>
-<li>
-<code>top</code>:
-Use this setting to use the density from the volume that is connected
-to <code>port_a</code>.
-</li>
-<li>
-<code>bottom</code>:
-Use this setting to use the density from the volume that is connected
-to <code>port_b</code>.
-</li>
-<li>
-<code>actual</code>:
-Use this setting to use the density based on the actual flow direction.
-</li>
-</ul>
-<p>
-The settings <code>top</code> and <code>bottom</code>
-should be used when rooms or different floors of a building are
-connected since multizone airflow models assume that each floor is completely mixed.
-For these two seetings, this model will compute the pressure between the center of the room
-and an opening that is at height <code>h</code> relative to the center of the room.
-The setting <code>actual</code> may be used to model a chimney in which
-a column of air will change its density based on the flow direction.
-</p>
-<p>
-In this model, the parameter <code>h</code> must always be positive, and the port <code>port_a</code> must be
-at the top of the column.
-</p>
-<h4>Dynamics</h4>
-<p>
-For a dynamic model, use
-<a href=\"modelica://AixLib.Airflow.Multizone.MediumColumnDynamic\">
-AixLib.Airflow.Multizone.MediumColumnDynamic</a> instead of this model.
-</p>
-</html>",
+ <p>
+ This model describes the pressure difference of a vertical medium
+ column. It can be used to model the pressure difference caused by
+ stack effect.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ The model can be used with the following three configurations, which are
+ controlled by the setting of the parameter <code>densitySelection</code>:
+ </p>
+ <ul>
+ <li>
+ <code>top</code>:
+ Use this setting to use the density from the volume that is connected
+ to <code>port_a</code>.
+ </li>
+ <li>
+ <code>bottom</code>:
+ Use this setting to use the density from the volume that is connected
+ to <code>port_b</code>.
+ </li>
+ <li>
+ <code>actual</code>:
+ Use this setting to use the density based on the actual flow direction.
+ </li>
+ </ul>
+ <p>
+ The settings <code>top</code> and <code>bottom</code>
+ should be used when rooms or different floors of a building are
+ connected since multizone airflow models assume that each floor is completely mixed.
+ For these two seetings, this model will compute the pressure between the center of the room
+ and an opening that is at height <code>h</code> relative to the center of the room.
+ The setting <code>actual</code> may be used to model a chimney in which
+ a column of air will change its density based on the flow direction.
+ </p>
+ <p>
+ In this model, the parameter <code>h</code> must always be positive, and the port <code>port_a</code> must be
+ at the top of the column.
+ </p>
+ <h4>Dynamics</h4>
+ <p>
+ For a dynamic model, use
+ <a href=\"modelica://AixLib.Airflow.Multizone.MediumColumnDynamic\">
+ AixLib.Airflow.Multizone.MediumColumnDynamic</a> instead of this model.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-May 1, 2018, by Filip Jorissen:<br/>
-Removed declaration of <code>allowFlowReversal</code>
-and changed default density computation such
-that it assumes a constant pressure.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/877\">#877</a>.
-</li>
-<li>
-November 3, 2016, by Michael Wetter:<br/>
-Removed start values for mass flow rate and pressure difference
-to simplify the parameter window.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/552\">#552</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-February 24, 2015 by Michael Wetter:<br/>
-Changed model to use
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
-AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>
-for the density computation
-as
-<a href=\"modelica://AixLib.Media.Air.density\">
-AixLib.Media.Air.density</a>
-does not depend on temperature.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>October 4, 2014 by Michael Wetter:<br/>
-Removed assignment of <code>port_?.p.nominal</code> to avoid a warning in OpenModelica because
-alias sets have different nominal values.
-</li>
-<li>April 17, 2013 by Michael Wetter:<br/>
-Reformulated the assert statement that checks for the correct value of <code>densitySelection</code>.
-</li>
-<li>July 28, 2010 by Michael Wetter:<br/>
-Changed sign for pressure difference.
-</li>
-<li>
-July 20, 2010 by Michael Wetter:<br/>
-Migrated model to Modelica 3.1 and integrated it into the Buildings library.
-Reimplemented assignment of density based on flow direction or based on outflowing state.
-</li>
-<li>
-February 24, 2005 by Michael Wetter:<br/>
-Released first version.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ May 1, 2018, by Filip Jorissen:<br/>
+ Removed declaration of <code>allowFlowReversal</code>
+ and changed default density computation such
+ that it assumes a constant pressure.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/877\">#877</a>.
+ </li>
+ <li>
+ November 3, 2016, by Michael Wetter:<br/>
+ Removed start values for mass flow rate and pressure difference
+ to simplify the parameter window.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/552\">#552</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ February 24, 2015 by Michael Wetter:<br/>
+ Changed model to use
+ <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
+ AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>
+ for the density computation
+ as
+ <a href=\"modelica://AixLib.Media.Air.density\">
+ AixLib.Media.Air.density</a>
+ does not depend on temperature.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>October 4, 2014 by Michael Wetter:<br/>
+ Removed assignment of <code>port_?.p.nominal</code> to avoid a warning in OpenModelica because
+ alias sets have different nominal values.
+ </li>
+ <li>April 17, 2013 by Michael Wetter:<br/>
+ Reformulated the assert statement that checks for the correct value of <code>densitySelection</code>.
+ </li>
+ <li>July 28, 2010 by Michael Wetter:<br/>
+ Changed sign for pressure difference.
+ </li>
+ <li>
+ July 20, 2010 by Michael Wetter:<br/>
+ Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+ Reimplemented assignment of density based on flow direction or based on outflowing state.
+ </li>
+ <li>
+ February 24, 2005 by Michael Wetter:<br/>
+ Released first version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MediumColumn;

@@ -1,0 +1,6 @@
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled", tolerance=1e-6, stopTime=600.0, method="dassl", resultFile="PumpSpeedControlledTest");
+removePlots(false);
+createPlot(id=1, position={0, 0, 1578, 755}, y={"rampValvePosition.y"}, heading="Valve opening", range={0.0, 600.0, 0.0, 0.6000000000000001}, grid=true, filename="PumpSpeedControlledTest.mat", colors={{28,108,200}});
+createPlot(id=1, position={0, 0, 1578, 249}, y={"pumpBus.rpmMea", "pumpBus.rpmSet"}, heading="Speed", range={0.0, 600.0, -1000.0, 5000.0}, grid=true, filename="PumpSpeedControlledTest.mat", subPlot=2, colors={{28,108,200}, {238,46,47}});
+createPlot(id=1, position={0, 0, 1578, 248}, y={"pumpBus.onSet"}, heading="On/Off", range={0.0, 600.0, -0.2, 1.2000000000000002}, grid=true, filename="PumpSpeedControlledTest.mat", subPlot=3, colors={{28,108,200}});
+

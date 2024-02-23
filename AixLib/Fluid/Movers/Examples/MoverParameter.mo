@@ -4,7 +4,7 @@ model MoverParameter
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=2
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=2
     "Nominal mass flow rate";
 
   FlowControlled_m_flow pump_m_flow(
@@ -60,7 +60,7 @@ model MoverParameter
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
     "Pump with speed input"
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  parameter Modelica.SIunits.PressureDifference dp_nominal=10000
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=10000
     "Nominal pressure raise";
 equation
   connect(sou.ports[1], pump_m_flow.port_a) annotation (Line(
@@ -90,28 +90,29 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/MoverParameter.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates the use of a <code>Parameter</code>
-set point for a mover model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 17, 2016, by Michael Wetter:<br/>
-Updated parameter names for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-August 24, 2015, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    experiment(Tolerance=1e-06, StopTime=1));
+ <p>
+ This example demonstrates the use of a <code>Parameter</code>
+ set point for a mover model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 17, 2016, by Michael Wetter:<br/>
+ Updated parameter names for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ August 24, 2015, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    experiment(Tolerance=1e-06, StopTime=1),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MoverParameter;

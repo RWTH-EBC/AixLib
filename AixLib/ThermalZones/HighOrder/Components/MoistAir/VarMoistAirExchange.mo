@@ -17,16 +17,15 @@ model VarMoistAirExchange
     min=0) "absolute humidity of room air"
     annotation (Placement(transformation(extent={{100,42},{80,62}})));
 protected
-  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=
-    AixLib.Utilities.Psychrometrics.Constants.h_fg
+  constant Modelica.Units.SI.SpecificEnthalpy enthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
     "enthalpy of evaporation";
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
-    AixLib.Utilities.Psychrometrics.Constants.cpSte
+  constant Modelica.Units.SI.SpecificHeatCapacity cp_steam=AixLib.Utilities.Psychrometrics.Constants.cpSte
     "specific heat capacity of steam";
-   constant Modelica.SIunits.SpecificEnergy h_fg=
-    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
+  constant Modelica.Units.SI.SpecificEnergy h_fg=
+      Media.Air.enthalpyOfCondensingGas(273.15 + 37)
+    "Latent heat of water vapor";
 equation
-   QLat_flow = InPort1 * V * rho * (HumIn-HumOut) / 3600 * h_fg;
+   QLat_flow =ventRate*V*rho*(HumIn - HumOut)/hToS*h_fg;
   annotation (Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

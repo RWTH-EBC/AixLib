@@ -133,7 +133,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     origin={-61,59})));
   Modelica.Blocks.Math.Product product1
     "Solar radiation times g value for sunblind (open or closed) for
-    one direction"
+     one direction"
     annotation (Placement(transformation(extent={{-6,65},{4,75}})));
   Modelica.Blocks.Logical.Switch switch1
     "Determines g value for sunblind (open or closed) for one direction"
@@ -150,7 +150,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     origin={-25,59})));
   Modelica.Blocks.Math.Product product
     "Solar radiation times g value
-    for sunblind (open or closed) for one direction"
+     for sunblind (open or closed) for one direction"
     annotation (Placement(transformation(extent={{-6,84},{4,94}})));
   EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=2,
@@ -164,6 +164,15 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     TGro=285.15)
     "Equivalent air temperature"
     annotation (Placement(transformation(extent={{-26,-16},{-6,2}})));
+  Modelica.Blocks.Math.Add add(k1=-1)
+    "Computes 1 - g_sunblind for one direction"
+    annotation (Placement(transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=-90,
+    origin={-58,16})));
+  Modelica.Blocks.Sources.Constant const1(k=1)
+    "Constant for 1 - g_sunblind"
+    annotation (Placement(transformation(extent={{-70,22},{-64,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableSolRadWall(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableOnFile=false,
@@ -197,6 +206,15 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     extent={{-4,-4},{4,4}},
     rotation=-90,
     origin={-20,32})));
+  Modelica.Blocks.Math.Add add1(k1=-1)
+    "Computes 1 - g_sunblind for one direction"
+    annotation (Placement(transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=-90,
+    origin={-24,18})));
+  Modelica.Blocks.Sources.Constant const2(k=1)
+    "Constant for 1 - g_sunblind"
+    annotation (Placement(transformation(extent={{-36,24},{-30,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{4,-10},{16,2}})));
@@ -270,9 +288,15 @@ equation
   connect(tableSolRadWindow.y[2], product.u1)
     annotation (Line(points={{-77.3,
     73},{-16,73},{-16,92},{-7,92}}, color={0,0,127}));
+  connect(const1.y, add.u2)
+    annotation (Line(points={{-63.7,25},{-60.4,25},{
+    -60.4,20.8}}, color={0,0,127}));
   connect(tableSolRadWall.y, eqAirTemp.HSol)
     annotation (Line(points={{-77.3,13},{-68,13},{-68,2},{-46,2},{-46,-1.6},{-28,
     -1.6}}, color={0,0,127}));
+  connect(switch1.y, add.u1)
+    annotation (Line(points={{-54,25.6},{-54,24},{-54,
+    20.8},{-55.6,20.8}}, color={0,0,127}));
   connect(greaterThreshold1.y, switch1.u2)
     annotation (Line(points={{-61,53.5},
     {-61,50},{-54,50},{-54,34.8}}, color={255,0,255}));
@@ -282,6 +306,12 @@ equation
   connect(g_sunblind1.y, switch2.u1)
     annotation (Line(points={{-11,43.7},{-11,
     40},{-16.8,40},{-16.8,36.8}}, color={0,0,127}));
+  connect(const2.y, add1.u2)
+    annotation (Line(points={{-29.7,27},{-26.4,27},{
+    -26.4,22.8}}, color={0,0,127}));
+  connect(switch2.y, add1.u1)
+    annotation (Line(points={{-20,27.6},{-20,26},{-20,
+    22.8},{-21.6,22.8}}, color={0,0,127}));
   connect(greaterThreshold2.y, switch2.u2)
     annotation (Line(points={{-25,53.5},
     {-25,52},{-20,52},{-20,36.8}}, color={255,0,255}));
@@ -298,6 +328,12 @@ equation
     color={0,0,127}));
   connect(preTem.port, theConWall.fluid)
     annotation (Line(points={{16,-4},{22,-4},{22,1},{26,1}}, color={191,0,0}));
+  connect(add.y, eqAirTemp.sunblind[1])
+    annotation (Line(points={{-58,11.6},{-58,6},{-16,6},{-16,4.7}},
+    color={0,0,127}));
+  connect(add1.y, eqAirTemp.sunblind[2])
+    annotation (Line(points={{-24,13.6},{-24,13.6},{-24,8},{-16,8},{-16,2.9}},
+    color={0,0,127}));
   connect(outdoorTemp.y[1], eqAirTemp.TDryBul)
     annotation (Line(points={{-77.3,-25},{-46,-25},{-46,-12.4},{-28,-12.4}},
     color={0,0,127}));
@@ -330,44 +366,42 @@ equation
           {83,48}}, color={0,0,127}));
   connect(reference.y[1],assEqu. u1) annotation (Line(points={{97,82},{100,82},
           {100,62},{78,62},{78,54},{83,54}}, color={0,0,127}));
-  connect(switch1.y, eqAirTemp.sunblind[1]) annotation (Line(points={{-54,25.6},
-          {-54,4.7},{-16,4.7}}, color={0,0,127}));
-  connect(switch2.y, eqAirTemp.sunblind[2]) annotation (Line(points={{-20,27.6},
-          {-20,2.9},{-16,2.9}}, color={0,0,127}));
   annotation ( Documentation(info="<html>
-  <p>Test Case 9 of the VDI 6007 Part 1: Calculation of indoor air
-  temperature excited by a radiative and convective heat source for
-  room version S with two exterior walls. It is based on Test Case 8.</p>
-  <h4>Boundary conditions</h4>
-  <ul>
-  <li>daily profile for outdoor air temperature in hourly steps</li>
-  <li>daily profile for solar radiation on the exterior wall</li>
-  <li>daily profile for solar radiation through the windows in hourly
-  steps</li>
-  <li>sunblind closes at &gt;100 W/m<sup>2</sup></li>
-  <li>long-wave radiation exchange between exterior wall, windows and
-  ambient environment</li>
-  </ul>
-  <p>This test validates reaction of indoor air
-  temperature at mixed internal gains and outdoor impacts including
-  solar radiation and long-wave radiation on exterior walls.</p>
-  </html>", revisions="<html>
-  <ul>
-  <li>
-  July 11, 2019, by Katharina Brinkmann:<br/>
-  Renamed <code>alphaWall</code> to <code>hConWall</code>
-  </li>
-  <li>
-  July 7, 2016, by Moritz Lauster:<br/>
-  Added automatic check against validation thresholds.
-  </li>
-  <li>
-  January 11, 2016, by Moritz Lauster:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"),experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
+   <p>Test Case 9 of the VDI 6007 Part 1: Calculation of indoor air
+   temperature excited by a radiative and convective heat source for
+   room version S with two exterior walls. It is based on Test Case 8.</p>
+   <h4>Boundary conditions</h4>
+   <ul>
+   <li>daily profile for outdoor air temperature in hourly steps</li>
+   <li>daily profile for solar radiation on the exterior wall</li>
+   <li>daily profile for solar radiation through the windows in hourly
+   steps</li>
+   <li>sunblind closes at &gt;100 W/m<sup>2</sup></li>
+   <li>long-wave radiation exchange between exterior wall, windows and
+   ambient environment</li>
+   </ul>
+   <p>This test validates reaction of indoor air
+   temperature at mixed internal gains and outdoor impacts including
+   solar radiation and long-wave radiation on exterior walls.</p>
+   </html>",revisions="<html>
+   <ul>
+   <li>
+   July 11, 2019, by Katharina Brinkmann:<br/>
+   Renamed <code>alphaWall</code> to <code>hConWall</code>
+   </li>
+   <li>
+   July 7, 2016, by Moritz Lauster:<br/>
+   Added automatic check against validation thresholds.
+   </li>
+   <li>
+   January 11, 2016, by Moritz Lauster:<br/>
+   Implemented.
+   </li>
+   </ul>
+   </html>"),
+            experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase9.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TestCase9;

@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model IntermediateAgent
   extends BaseClasses.PartialAgent;
   parameter Integer broker = 10003 "Name of the corresponding broker-agent";
@@ -22,10 +22,10 @@ model IntermediateAgent
         extent={{10,10},{-10,-10}},
         rotation=0,
         origin={-160,-136})));
-  Modelica.StateGraph.Step message(nOut=2)
+  Modelica.StateGraph.Step message(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-178,-98},{-158,-78}})));
 
-  Modelica.StateGraph.Step passOnCall
+  Modelica.StateGraph.Step passOnCall(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,86},{-16,106}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=noEvent(
         getperformative.y[1] == 4))
@@ -37,7 +37,7 @@ model IntermediateAgent
       enableTimer=true)
     annotation (Placement(transformation(extent={{14,86},{34,106}})));
 
-  Modelica.StateGraph.StepWithSignal sendCall(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendCall(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{74,86},{94,106}})));
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-176,-34},{-156,-14}})));
@@ -50,12 +50,12 @@ model IntermediateAgent
     annotation (Placement(transformation(extent={{-120,-250},{-94,-232}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-88,-244},{-82,-238}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-34,-238},{-14,-218}})));
   Modelica.StateGraph.Transition transition3(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{4,-238},{24,-218}})));
 
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{44,-238},{64,-218}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{84,-238},{104,-218}})));
@@ -69,17 +69,17 @@ model IntermediateAgent
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-108,40})));
-  Modelica.StateGraph.Step check
+  Modelica.StateGraph.Step check(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression4(y=noEvent((
         getperformative.y[1] == 8) and (getsender.y[1] == broker)))
     annotation (Placement(transformation(extent={{-70,6},{-44,24}})));
-  Modelica.StateGraph.Step passOnInformation
+  Modelica.StateGraph.Step passOnInformation(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{2,30},{22,50}})));
   Modelica.StateGraph.Transition transition7(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{44,30},{64,50}})));
-  Modelica.StateGraph.StepWithSignal sendInformation(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendInformation(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{84,30},{104,50}})));
   Modelica.StateGraph.TransitionWithSignal newMessage2
                                                       annotation (Placement(
@@ -87,18 +87,18 @@ model IntermediateAgent
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-40})));
-  Modelica.StateGraph.Step check1
+  Modelica.StateGraph.Step check1(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-86,-50},{-66,-30}})));
   Modelica.StateGraph.TransitionWithSignal fromBottomBroker(waitTime=0.5,
       enableTimer=false)
     annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
-  Modelica.StateGraph.Step passOnConfirmation
+  Modelica.StateGraph.Step passOnConfirmation(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
   Modelica.StateGraph.Transition transition8(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{38,-50},{58,-30}})));
   Modelica.StateGraph.StepWithSignal sendConfirmation(
-                                                     nOut=1)
+                                                     nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{82,-50},{102,-30}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=noEvent((
         getsender.y[1] == currentClient)))
@@ -106,13 +106,13 @@ model IntermediateAgent
   Modelica.StateGraph.Transition transition2(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{-112,-118},{-92,-98}})));
-  Modelica.StateGraph.Step confirmToBottom
+  Modelica.StateGraph.Step confirmToBottom(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-70,-118},{-50,-98}})));
   Modelica.StateGraph.Transition transition5(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{-22,-118},{-2,-98}})));
   Modelica.StateGraph.StepWithSignal sendConfirmation1(
-                                                     nOut=1)
+                                                     nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{34,-118},{54,-98}})));
   Modelica.StateGraph.Transition transition6(                  waitTime=0.1,
       enableTimer=true)
@@ -176,7 +176,7 @@ model IntermediateAgent
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{-150,-300},{-130,-280}})));
   Modelica.StateGraph.Step shutDown(
-                                   nOut=2)
+                                   nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-80,-274},{-60,-254}})));
   Modelica.StateGraph.Transition transition9(                  waitTime=0.1,
       enableTimer=true)
@@ -191,7 +191,7 @@ model IntermediateAgent
 equation
 
   connect(newMessage.inPort, waiting.outPort[1]) annotation (Line(
-      points={{-156,-136},{-140,-136},{-140,-243.75},{-167.5,-243.75}},
+      points={{-156,-136},{-140,-136},{-140,-244.125},{-167.5,-244.125}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(newMessage.outPort, message.inPort[1]) annotation (Line(
@@ -225,8 +225,8 @@ equation
       smooth=Smooth.None));
 
   connect(message.outPort[1], transitionWithSignal.inPort) annotation (Line(
-      points={{-157.5,-87.75},{-152,-87.75},{-152,-86},{-144,-86},{-144,-86},
-          {-132,-86},{-132,96},{-82,96}},
+      points={{-157.5,-88.125},{-152,-88.125},{-152,-86},{-144,-86},{-144,-86},{
+          -132,-86},{-132,96},{-82,96}},
       color={0,0,0},
       smooth=Smooth.None));
 
@@ -239,8 +239,8 @@ equation
       color={255,0,255},
       smooth=Smooth.None));
   connect(transitionWithSignal3.inPort, message.outPort[2]) annotation (Line(
-      points={{-78,-228},{-132,-228},{-132,-86},{-152,-86},{-152,-88.25},{-157.5,
-          -88.25}},
+      points={{-78,-228},{-132,-228},{-132,-86},{-152,-86},{-152,-87.875},{-157.5,
+          -87.875}},
       color={0,0,0},
       smooth=Smooth.None));
 
@@ -358,14 +358,13 @@ algorithm
 equation
 
   connect(transition4.outPort, waiting.inPort[1]) annotation (Line(
-      points={{95.5,-228},{130,-228},{130,-280},{-192,-280},{-192,-243.2},{
-          -189,-243.2}},
+      points={{95.5,-228},{130,-228},{130,-280},{-192,-280},{-192,-244.4},{-189,
+          -244.4}},
       color={0,0,0},
       smooth=Smooth.None));
 
   connect(sendCall.outPort[1], newMessage1.inPort) annotation (Line(
-      points={{94.5,96.25},{110,96.25},{110,60},{-122,60},{-122,40},{-112,
-          40}},
+      points={{94.5,95.875},{110,95.875},{110,60},{-122,60},{-122,40},{-112,40}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(newMessage1.outPort, check.inPort[1]) annotation (Line(
@@ -389,8 +388,8 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(sendInformation.outPort[1], newMessage2.inPort) annotation (Line(
-      points={{104.5,40.25},{110,40.25},{110,-16},{-124,-16},{-124,-40},{
-          -114,-40}},
+      points={{104.5,39.875},{110,39.875},{110,-16},{-124,-16},{-124,-40},{-114,
+          -40}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(newMessage2.outPort, check1.inPort[1]) annotation (Line(
@@ -445,8 +444,8 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(transition6.outPort, waiting.inPort[2]) annotation (Line(
-      points={{93.5,-108},{130,-108},{130,-280},{-192,-280},{-192,-243.6},{
-          -189,-243.6}},
+      points={{93.5,-108},{130,-108},{130,-280},{-192,-280},{-192,-244.2},{-189,
+          -244.2}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(newMessage1.condition, integerChange.y) annotation (Line(
@@ -498,12 +497,11 @@ equation
       color={255,0,255},
       smooth=Smooth.None));
   connect(reset.inPort, sendCall.outPort[2]) annotation (Line(
-      points={{-32,-160},{36,-160},{124,-160},{124,94},{124,95.75},{94.5,
-          95.75}},
+      points={{-32,-160},{36,-160},{124,-160},{124,94},{124,96.125},{94.5,96.125}},
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(sendInformation.outPort[2], reset1.inPort) annotation (Line(
-      points={{104.5,39.75},{124,39.75},{124,-180},{8,-180}},
+      points={{104.5,40.125},{124,40.125},{124,-180},{8,-180}},
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(reset.outPort, waiting.inPort[3]) annotation (Line(
@@ -511,26 +509,25 @@ equation
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(reset1.outPort, waiting.inPort[4]) annotation (Line(
-      points={{2.5,-180},{-80,-180},{-192,-180},{-192,-244.4},{-189,-244.4}},
+      points={{2.5,-180},{-80,-180},{-192,-180},{-192,-243.8},{-189,-243.8}},
       color={255,0,0},
       pattern=LinePattern.Dot));
   connect(and1.u2, booleanExpression2.y) annotation (Line(points={{-152,
           -298},{-158,-298},{-158,-296},{-179,-296}},
                                           color={255,0,255}));
-  connect(Off.inPort, waiting.outPort[2]) annotation (Line(points={{-120,
-          -264},{-164,-264},{-164,-244.25},{-167.5,-244.25}},
+  connect(Off.inPort, waiting.outPort[2]) annotation (Line(points={{-120,-264},{
+          -164,-264},{-164,-243.875},{-167.5,-243.875}},
                                                        color={0,0,0}));
   connect(Off.outPort, shutDown.inPort[1]) annotation (Line(points={{-114.5,
           -264},{-128,-264},{-81,-264}},        color={0,0,0}));
   connect(shutDown.outPort[1], transition9.inPort) annotation (Line(points={{-59.5,
-          -263.75},{-52,-263.75},{-52,-264},{-46,-264}}, color={0,0,0}));
+          -264},{-52,-264},{-52,-264},{-46,-264}},       color={0,0,0}));
   connect(and1.y, Off.condition) annotation (Line(points={{-129,-290},{-118,
           -290},{-118,-276},{-116,-276}},
                                     color={255,0,255}));
   connect(transition9.outPort, waiting.inPort[5]) annotation (Line(points={{-40.5,
-          -264},{-26,-264},{-26,-280},{-192,-280},{-192,-244},{-190,-244},{
-          -190,-244.8},{-189,-244.8}},
-                                  color={0,0,0}));
+          -264},{-26,-264},{-26,-280},{-192,-280},{-192,-244},{-190,-244},{-190,
+          -243.6},{-189,-243.6}}, color={0,0,0}));
   connect(OnOff_external, not2.u) annotation (Line(points={{-132,-144},{
           -132,-190},{-196,-190},{-196,-287},{-173,-287}}, color={255,0,255}));
   connect(not2.y, and1.u1) annotation (Line(points={{-161.5,-287},{-160,

@@ -22,8 +22,8 @@ partial model Outside
 protected
   final parameter Boolean singleSubstance = (Medium.nX == 1)
     "True if single substance medium";
-  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi if
-       not singleSubstance "Block to compute water vapor concentration";
+  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi
+    if not singleSubstance "Block to compute water vapor concentration";
 
   Modelica.Blocks.Interfaces.RealInput T_in_internal(final unit="K",
                                                      displayUnit="degC")
@@ -81,15 +81,10 @@ equation
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
-        Ellipse(
-          extent={{-98,100},{102,-100}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Sphere,
-          fillColor={0,127,255}),
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Line(
           visible=use_C_in,
           points={{-100,-80},{-60,-80}},
@@ -97,75 +92,93 @@ equation
         Text(
           visible=use_C_in,
           extent={{-164,-90},{-62,-130}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="C")}),
+          textString="C"),
+        Ellipse(
+          extent={{-100,100},{100,-100}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor=DynamicSelect({0,127,255},
+            min(1, max(0, (1-(weaBus.TDryBul-273.15)/50)))*{28,108,200}+
+            min(1, max(0, (weaBus.TDryBul-273.15)/50))*{255,0,0})),
+        Text(
+          extent={{62,28},{-58,-22}},
+          textColor={255,255,255},
+          textString=DynamicSelect("", String(weaBus.TDryBul-273.15, format=".1f")))}),
     Documentation(info="<html>
-<p>
-This is the base class for models that describes boundary conditions for
-pressure, enthalpy, and species concentration that can be obtained
-from weather data, and that may be modified based on the wind pressure.
-</p>
-<p>If the parameter <code>use_C_in</code> is <code>false</code> (default option),
-the <code>C</code> parameter
-is used as the trace substance for flow that leaves the component, and the
-<code>C_in</code> input connector is disabled; if <code>use_C_in</code> is <code>true</code>,
-then the <code>C</code> parameter is ignored, and the value provided by the input connector is used instead.</p>
-<p>
-Note that boundary temperature,
-mass fractions and trace substances have only an effect if the mass flow
-is from the boundary into the port. If mass is flowing from
-the port into the boundary, the boundary definitions,
-with exception of boundary pressure, do not have an effect.
-</p>
-</html>",
+ <p>
+ This is the base class for models that describes boundary conditions for
+ pressure, enthalpy, and species concentration that can be obtained
+ from weather data, and that may be modified based on the wind pressure.
+ </p>
+ <p>If the parameter <code>use_C_in</code> is <code>false</code> (default option),
+ the <code>C</code> parameter
+ is used as the trace substance for flow that leaves the component, and the
+ <code>C_in</code> input connector is disabled; if <code>use_C_in</code> is <code>true</code>,
+ then the <code>C</code> parameter is ignored, and the value provided by the input connector is used instead.</p>
+ <p>
+ Note that boundary temperature,
+ mass fractions and trace substances have only an effect if the mass flow
+ is from the boundary into the port. If mass is flowing from
+ the port into the boundary, the boundary definitions,
+ with exception of boundary pressure, do not have an effect.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 14, 2019, by Michael Wetter:<br/>
-Removed duplicate connector.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
-</li>
-<li>
-January 14, 2019 by Jianjun Hu:<br/>
-Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
-AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
-</li>
-<li>
-May 30, 2017 by Jianjun Hu:<br/>
-Corrected <code>X_in_internal = zeros()</code> to be <code>X_in_internal = ones()</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/787\"> #787</a>.
-</li>
-<li>
-April, 25, 2016 by Marcus Fuchs:<br/>
-Introduced missing <code>each</code> keyword. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/454\"> #454</a>,
-to prevent a warning in OpenModelica.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-Added <code>unit</code> and <code>quantity</code> attributes.
-</li>
-<li>
-May 30, 2014, by Michael Wetter:<br/>
-Removed undesirable annotation <code>Evaluate=true</code>.
-</li>
-<li>
-October 26, 2011 by Michael Wetter:<br/>
-Introduced new base class to allow implementation of wind pressure for natural ventilation.
-</li>
-<li>
-April 27, 2011 by Michael Wetter:<br/>
-Revised implementation to allow medium model that do not have water vapor.
-</li>
-<li>
-Feb. 9, 2011 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ February 25, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating state.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ November 14, 2019, by Michael Wetter:<br/>
+ Removed duplicate connector.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
+ </li>
+ <li>
+ January 14, 2019 by Jianjun Hu:<br/>
+ Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
+ AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
+ </li>
+ <li>
+ May 30, 2017 by Jianjun Hu:<br/>
+ Corrected <code>X_in_internal = zeros()</code> to be <code>X_in_internal = ones()</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/787\"> #787</a>.
+ </li>
+ <li>
+ April, 25, 2016 by Marcus Fuchs:<br/>
+ Introduced missing <code>each</code> keyword. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/454\"> #454</a>,
+ to prevent a warning in OpenModelica.
+ </li>
+ <li>
+ January 26, 2016, by Michael Wetter:<br/>
+ Added <code>unit</code> and <code>quantity</code> attributes.
+ </li>
+ <li>
+ May 30, 2014, by Michael Wetter:<br/>
+ Removed undesirable annotation <code>Evaluate=true</code>.
+ </li>
+ <li>
+ October 26, 2011 by Michael Wetter:<br/>
+ Introduced new base class to allow implementation of wind pressure for natural ventilation.
+ </li>
+ <li>
+ April 27, 2011 by Michael Wetter:<br/>
+ Revised implementation to allow medium model that do not have water vapor.
+ </li>
+ <li>
+ Feb. 9, 2011 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Outside;

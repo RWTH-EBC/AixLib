@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.Correct
 model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
   extends PartialCorG;
 
-  import Modelica.SIunits.Conversions.to_deg;
+  import Modelica.Units.Conversions.to_deg;
 
 //  parameter Real coeff=0.6 "Weight coefficient";
  // parameter Modelica.SIunits.Area A=6 "Area of surface";
@@ -101,11 +101,21 @@ annotation (
   </li>
 </ul>
 </html>",
-    revisions="<html><p>
-  <i>February 24, 2014</i> by Reza Tavakoli:
-</p>
-<p>
-  implemented
-</p>
+    revisions="<html><ul>
+  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
+    Removed parameter <code>g</code>.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/899\">issue 899</a>.
+  </li>
+  <li>
+    <p>
+      <i>February 24, 2014</i> by Reza Tavakoli:
+    </p>
+    <p>
+      implemented
+    </p>
+  </li>
+</ul>
 </html>"));
 end CorG_VDI6007;

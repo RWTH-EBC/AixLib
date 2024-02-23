@@ -35,24 +35,25 @@ equation
       color={0,0,127}));
   annotation (
 Documentation(info="<html>
-<p>
-This example tests the model that asserts that the pressure is within acceptable bounds.
-</p>
-</html>",
+ <p>
+ This example tests the model that asserts that the pressure is within acceptable bounds.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 21, 2016, by Michael Wetter:<br/>
-Replaced <code>ModelicaServices.ExternalReferences.loadResource</code> with
-<code>Modelica.Utilities.Files.loadResource</code>.
-</li>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ April 21, 2016, by Michael Wetter:<br/>
+ Replaced <code>ModelicaServices.ExternalReferences.loadResource</code> with
+ <code>Modelica.Utilities.Files.loadResource</code>.
+ </li>
+ <li>
+ July 14, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StartTime=0, StopTime=8640000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/CheckPressure.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CheckPressure;

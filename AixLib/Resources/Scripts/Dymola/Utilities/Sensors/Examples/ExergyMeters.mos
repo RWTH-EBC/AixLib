@@ -1,0 +1,2 @@
+simulateModel("AixLib.Utilities.Sensors.Examples.ExergyMeters", tolerance=1e-6, stopTime=7200, method="dassl", resultFile="ExergyMeters");
+createPlot(id=1, position={405, 134, 811, 420}, y={"calcExergyDestructionLoss_1.y", "calcExergyDestructionLoss_2.y"}, range={0.0, 90000.0, -200.0, 1800.0}, grid=true, filename="ExergyMeters.mat", colors={{28,108,200}, {238,46,47}});

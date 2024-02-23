@@ -6,27 +6,23 @@ model Convector "Heat exchanger for the water stream"
     final computeFlowResistance=true,
     final dp_nominal = per.dpWat_nominal "Don't multiply with nBeams, as the beams are in parallel");
 
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
+
   parameter Data.Generic per "Performance data"
     annotation (choicesAllMatching = true,
     Placement(transformation(extent={{60,-80},{80,-60}})));
 
   parameter Integer nBeams(min=1) "Number of beams in parallel";
 
-  parameter Modelica.SIunits.Time tau = 30
+  parameter Modelica.Units.SI.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
-
-  // Advanced
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
   // Initialization
   parameter Medium.AbsolutePressure p_start = Medium.p_default
@@ -69,7 +65,6 @@ protected
     final tau=tau,
     final homotopyInitialization=homotopyInitialization,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -94,6 +89,12 @@ protected
   Sensors.MassFlowRate senFloWatCoo(
     redeclare final package Medium = Medium) "Mass flow rate sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
+initial equation
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
+
 equation
   connect(hex.Q_flow, Q_flow) annotation (Line(points={{61,6},{70,6},{70,70},{
           110,70}},
@@ -137,29 +138,42 @@ equation
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={95,95,95})}), defaultComponentName="con",
            Documentation(info="<html>
-<p>
-In cooling mode, this model adds heat to the water stream. The heat added is equal to:
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-Q<sub>Beam</sub> = Q<sub>rated</sub> f<sub><code>&#916;</code>T</sub> f<sub>SA</sub> f<sub>W</sub>
-</p>
-<p>
-In heating mode, the heat is removed from the water stream.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Made assignment of <code>senTem.y</code> final.
-</li>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ In cooling mode, this model adds heat to the water stream. The heat added is equal to:
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ Q<sub>Beam</sub> = Q<sub>rated</sub> f<sub><code>&#916;</code>T</sub> f<sub>SA</sub> f<sub>W</sub>
+ </p>
+ <p>
+ In heating mode, the heat is removed from the water stream.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 3, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Made assignment of <code>senTem.y</code> final.
+ </li>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Convector;
