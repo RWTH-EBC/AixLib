@@ -1,2 +1,9 @@
 DHCSubstationHeatPumpChiller
 DHCSubstationHeatPumpDirectCooling
+SubstationCooling
+SubstationHeating
+SubstationHeatingCoolingFixDeltaT
+SubstationHeatingCoolingVarDeltaT
+SubstationDirectCooling
+SubstationDirectHeatingDirectCooling
+SubstationDirectHeatingDirectCoolingDHW
