@@ -113,105 +113,285 @@ equation
     annotation (Line(points={{-40,30},{-70,30},{-70,40}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This example implements Example 4.24 from Larock et al. [2000] as a reference
-network to validate the modeling of static hydraulic network examples. The
-network contains two supply nodes, three demand nodes and one pipe loop.</p>
-<p align=\"center\"><img
-src=\"modelica://AixLib/Resources/Images/Fluid/DistrictHeatingCooling/ReferenceNetworks/HydraulicValidationNetwork.png\"
-alt=\"Network scheme\"/> </p>
-<h4>Assumptions and limitations</h4>
-<p>This model is the simplest implementation of the reference network. This
-currently leads to inefficiencies like non-linear systems of equations for the
-initialization problem. Thus, it can serve as a reference case for improving
-efficiencies of similar network models. </p>
-<h4>Validation</h4>
-<p>Larock et al. [2000] give detailed reference results for this example
-network. For this validation example, the values have been converted to SI
-units.</p>
-<p>The supply pressures of S1 and S2 are originally given in feet of pressure
-head and have been converted to pressure in bar: </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Supply pressures\"><tr>
-<td></td>
-<td><p>S1</p></td>
-<td><p>S2</p></td>
-</tr>
-<tr>
-<td><p>Pressure head [Larock et al., 2000]</p></td>
-<td><p>100 ft</p></td>
-<td><p>90 ft</p></td>
-</tr>
-<tr>
-<td><p>Prescribed supply pressure</p></td>
-<td><p>2.9890 bar</p></td>
-<td><p>2.6902 bar</p></td>
-</tr>
+    Documentation(info="<html><p>
+  This example implements Example 4.24 from Larock et al. [2000] as a
+  reference network to validate the modeling of static hydraulic
+  network examples. The network contains two supply nodes, three demand
+  nodes and one pipe loop.
+</p>
+<p align=\"center\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/DistrictHeatingCooling/ReferenceNetworks/HydraulicValidationNetwork.png\"
+  alt=\"Network scheme\">
+</p>
+<h4>
+  Assumptions and limitations
+</h4>
+<p>
+  This model is the simplest implementation of the reference network.
+  This currently leads to inefficiencies like non-linear systems of
+  equations for the initialization problem. Thus, it can serve as a
+  reference case for improving efficiencies of similar network models.
+</p>
+<h4>
+  Validation
+</h4>
+<p>
+  Larock et al. [2000] give detailed reference results for this example
+  network. For this validation example, the values have been converted
+  to SI units.
+</p>
+<p>
+  The supply pressures of S1 and S2 are originally given in feet of
+  pressure head and have been converted to pressure in bar:
+</p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=
+\"Supply pressures\">
+  <tr>
+    <td></td>
+    <td>
+      <p>
+        S1
+      </p>
+    </td>
+    <td>
+      <p>
+        S2
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Pressure head [Larock et al., 2000]
+      </p>
+    </td>
+    <td>
+      <p>
+        100 ft
+      </p>
+    </td>
+    <td>
+      <p>
+        90 ft
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Prescribed supply pressure
+      </p>
+    </td>
+    <td>
+      <p>
+        2.9890 bar
+      </p>
+    </td>
+    <td>
+      <p>
+        2.6902 bar
+      </p>
+    </td>
+  </tr>
 </table>
-<p>The discharges at the demand nodes B1, B2, and B3 were originally given in
-ft**3/s and have been converted to mass flow rates in kg/s using the density of
-995.586 kg/m**3: </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Discharges\"><tr>
-<td></td>
-<td><p>B1</p></td>
-<td><p>B2</p></td>
-<td><p>B3</p></td>
-</tr>
-<tr>
-<td><p>Discharge [Larock et al., 2000]</p></td>
-<td><p>1.0 ft**3/s</p></td>
-<td><p>1.5 ft**3/s</p></td>
-<td><p>0.8 ft**3/s</p></td>
-</tr>
-<tr>
-<td><p>Prescribed mass flow rate</p></td>
-<td><p>28.175 kg/s</p></td>
-<td><p>42.213 kg/s</p></td>
-<td><p>22.600 kg/s</p></td>
-</tr>
+<p>
+  The discharges at the demand nodes B1, B2, and B3 were originally
+  given in ft**3/s and have been converted to mass flow rates in kg/s
+  using the density of 995.586 kg/m**3:
+</p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=
+\"Discharges\">
+  <tr>
+    <td></td>
+    <td>
+      <p>
+        B1
+      </p>
+    </td>
+    <td>
+      <p>
+        B2
+      </p>
+    </td>
+    <td>
+      <p>
+        B3
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Discharge [Larock et al., 2000]
+      </p>
+    </td>
+    <td>
+      <p>
+        1.0 ft**3/s
+      </p>
+    </td>
+    <td>
+      <p>
+        1.5 ft**3/s
+      </p>
+    </td>
+    <td>
+      <p>
+        0.8 ft**3/s
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Prescribed mass flow rate
+      </p>
+    </td>
+    <td>
+      <p>
+        28.175 kg/s
+      </p>
+    </td>
+    <td>
+      <p>
+        42.213 kg/s
+      </p>
+    </td>
+    <td>
+      <p>
+        22.600 kg/s
+      </p>
+    </td>
+  </tr>
 </table>
-<p>For the pipes, Larock et al. [2000] give an exponential equation to calculate
-the pressure losses as a function of the mass flow rate. This model
-implementation uses the reference results&apos; mass flow rates and pressure
-losses as nominal values in the Pressure Drop model: </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Nominal values\"><tr>
-<td></td>
-<td><p>1</p></td>
-<td><p>2</p></td>
-<td><p>3</p></td>
-<td><p>4</p></td>
-<td><p>5</p></td>
-</tr>
-<tr>
-<td><p>Nominal mass flow rate im kg/s</p></td>
-<td><p>59.7352</p></td>
-<td><p>29.8378</p></td>
-<td><p>12.4528</p></td>
-<td><p>1.7144</p></td>
-<td><p>33.2923</p></td>
-</tr>
-<tr>
-<td><p>Nominal pressure drop in bar</p></td>
-<td><p>0.9710 bar</p></td>
-<td><p>0.3206</p></td>
-<td><p>0.3121</p></td>
-<td><p>0.0084</p></td>
-<td><p>0.6804</p></td>
-</tr>
+<p>
+  For the pipes, Larock et al. [2000] give an exponential equation to
+  calculate the pressure losses as a function of the mass flow rate.
+  This model implementation uses the reference results' mass flow rates
+  and pressure losses as nominal values in the Pressure Drop model:
+</p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=
+\"Nominal values\">
+  <tr>
+    <td></td>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+    <td>
+      <p>
+        2
+      </p>
+    </td>
+    <td>
+      <p>
+        3
+      </p>
+    </td>
+    <td>
+      <p>
+        4
+      </p>
+    </td>
+    <td>
+      <p>
+        5
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Nominal mass flow rate im kg/s
+      </p>
+    </td>
+    <td>
+      <p>
+        59.7352
+      </p>
+    </td>
+    <td>
+      <p>
+        29.8378
+      </p>
+    </td>
+    <td>
+      <p>
+        12.4528
+      </p>
+    </td>
+    <td>
+      <p>
+        1.7144
+      </p>
+    </td>
+    <td>
+      <p>
+        33.2923
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Nominal pressure drop in bar
+      </p>
+    </td>
+    <td>
+      <p>
+        0.9710 bar
+      </p>
+    </td>
+    <td>
+      <p>
+        0.3206
+      </p>
+    </td>
+    <td>
+      <p>
+        0.3121
+      </p>
+    </td>
+    <td>
+      <p>
+        0.0084
+      </p>
+    </td>
+    <td>
+      <p>
+        0.6804
+      </p>
+    </td>
+  </tr>
 </table>
-<p>The outputs compare the relative deviations between the calculated pressures
-at the demand nodes B1, B2, and B3 with the reference results given in Larock et
-al. [2000]. The results show deviations below 0.3 percent.</p>
-<h4>References</h4>
-<ul>
-<li><a href=\"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters. <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press, 2000.</a></li>
-<li>AixLib issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a></li>
-</ul>
-</html>", revisions="<html>
+<p>
+  The outputs compare the relative deviations between the calculated
+  pressures at the demand nodes B1, B2, and B3 with the reference
+  results given in Larock et al. [2000]. The results show deviations
+  below 0.3 percent.
+</p>
+<h4>
+  References
+</h4>
 <ul>
   <li>
-  May 25, 2017, by Marcus Fuchs:<br/>
-  Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
- </li>
+    <a href=
+    \"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">
+    Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters.
+    <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press,
+    2000.</a>
+  </li>
+  <li>AixLib issue <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a>
+  </li>
+</ul>
+</html>", revisions="<html><ul>
+  <li>May 25, 2017, by Marcus Fuchs:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
+  </li>
 </ul>
 </html>"));
 end HydraulicValidation;
