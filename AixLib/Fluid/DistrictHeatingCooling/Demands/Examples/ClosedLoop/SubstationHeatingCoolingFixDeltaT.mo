@@ -87,18 +87,24 @@ equation
       StopTime=86400,
       Interval=60,
       Tolerance=1e-007),
-    Documentation(revisions="<html>
-    <ul>
-    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>February 20, 2024</i> by Rahul Karuvingal:<br/>
     Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
-    </li>
-<li><i>April 15, 2020</i> by Tobias Blacha:<br/>
-Added documentaion </li>
+  </li>
+  <li>
+    <i>April 15, 2020</i> by Tobias Blacha:<br/>
+    Added documentaion
+  </li>
 </ul>
-</html>", info="<html>
-<p>This example shows a simple example of a closed loop substation with heat pump and chiller (const. temperature difference on network and building sides)
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT\">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT</a>. 
-It illustrates the settings needed in the demand model to work in a bidirectional
-low-temperature network.<p>
+</html>", info="<html><p>
+  This example shows a simple example of a closed loop substation with
+  heat pump and chiller (const. temperature difference on network and
+  building sides) <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT</a>.
+  It illustrates the settings needed in the demand model to work in a
+  bidirectional low-temperature network.
+</p>
 </html>"));
 end SubstationHeatingCoolingFixDeltaT;

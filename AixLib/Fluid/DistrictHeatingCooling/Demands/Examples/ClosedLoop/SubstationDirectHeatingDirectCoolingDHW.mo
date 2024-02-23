@@ -79,20 +79,27 @@ equation
       StopTime=86400,
       Interval=60,
       Tolerance=1e-007),
-  Documentation(info="<html>
-  <p>This example shows a simple example of a closed loop substation model for bidirctional low-temperature networks for buildings with 
-  heat pump,direct cooling and DHW demand <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW\">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW</a>. 
-  It illustrates the settings needed to run the demand model.<p>
-</html>", revisions="<html>
-<ul>
-    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+  Documentation(info="<html><p>
+  This example shows a simple example of a closed loop substation model
+  for bidirctional low-temperature networks for buildings with heat
+  pump,direct cooling and DHW demand <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW</a>.
+  It illustrates the settings needed to run the demand model.
+</p>
+</html>", revisions="<html><ul>
+  <li>
+    <i>February 20, 2024</i> by Rahul Karuvingal:<br/>
     Added documentation.
   </li>
-    <li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+  <li>
+    <i>February 20, 2024</i> by Rahul Karuvingal:<br/>
     Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
   </li>
-<li><i>April 15, 2020</i> by Tobias Blacha:<br/>
-First Implementation </li>
+  <li>
+    <i>April 15, 2020</i> by Tobias Blacha:<br/>
+    First Implementation
+  </li>
 </ul>
 </html>"));
 end SubstationDirectHeatingDirectCoolingDHW;
