@@ -22,12 +22,12 @@ model SubstationDirectCooling
     parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -43,12 +43,12 @@ public
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder del(
+  AixLib.Fluid.Delays.DelayFirstOrder del(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-112,0},{-92,20}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpCooling(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -66,13 +66,13 @@ public
                                    realExpression1(y=(cp_default*(273.15 + 22
          - senTem4.T)))
     annotation (Placement(transformation(extent={{104,84},{92,96}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
@@ -80,8 +80,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-108,88})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTem4(redeclare package Medium
-      = Medium, m_flow_nominal=2)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTem4(redeclare package Medium =
+        Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=7200)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},

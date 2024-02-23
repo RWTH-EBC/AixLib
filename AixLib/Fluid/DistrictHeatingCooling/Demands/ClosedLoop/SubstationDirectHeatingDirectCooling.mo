@@ -23,17 +23,17 @@ model SubstationDirectHeatingDirectCooling "Substation model for bidirctional lo
     parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{188,8},{208,28}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpHeating(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -59,7 +59,7 @@ public
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
         iconTransformation(extent={{152,84},{112,124}})));
 
-  AixLibDHC.Fluid.FixedResistances.Junction jun(
+  AixLib.Fluid.FixedResistances.Junction jun(
     redeclare package Medium = Medium,
     dp_nominal={0,dp_nominal,dp_nominal},
     portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
@@ -68,18 +68,18 @@ public
     m_flow_nominal=m_flow_nominal*{1,1,1})
     annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
 
-  AixLibDHC.Fluid.FixedResistances.Junction jun1(
+  AixLib.Fluid.FixedResistances.Junction jun1(
     redeclare package Medium = Medium,
     dp_nominal={0,dp_nominal,dp_nominal},
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
     m_flow_nominal=m_flow_nominal*{1,1,1})
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder del(
+  AixLib.Fluid.Delays.DelayFirstOrder del(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-24,24},{-4,44}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpCooling(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -95,29 +95,29 @@ public
     annotation (Placement(transformation(extent={{48,100},{34,114}})));
   Modelica.Blocks.Sources.Constant const1(k=(cp_default*deltaT_coolingGridSet))
     annotation (Placement(transformation(extent={{78,84},{66,96}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium) annotation (Placement(transformation(extent={{78,14},{58,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-40,88})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{22,-34},{42,-14}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium
-      = Medium, m_flow_nominal=2)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium =
+        Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-46,-34},{-26,-14}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder del1(
+  AixLib.Fluid.Delays.DelayFirstOrder del1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)

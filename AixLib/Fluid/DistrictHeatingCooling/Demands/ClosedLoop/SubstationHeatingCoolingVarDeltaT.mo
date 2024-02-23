@@ -19,31 +19,31 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
     parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = max((heatDemand_max/(cp_default*deltaT_heatingSet)),-coolingDemand_max/(cp_default*deltaT_coolingSet))
     "Nominal mass flow rate based on max. demand and set temperature difference";
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{188,8},{208,28}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpHeating(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     use_inputFilter=false,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
-  AixLibDHC.Fluid.Sources.MassFlowSource_T sourceHeating(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
   Modelica.Blocks.Sources.Constant T_return(k=deltaT_heatingSet)
     annotation (Placement(transformation(extent={{118,-102},{104,-88}})));
-  AixLibDHC.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium =
+  AixLib.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-48,-64},{-28,-44}})));
   Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet))
@@ -60,7 +60,7 @@ public
     "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
-  AixLibDHC.Fluid.HeatPumps.Carnot_TCon heaPum(
+  AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     allowFlowReversal1=false,
@@ -93,7 +93,7 @@ public
     annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
-  AixLibDHC.Fluid.FixedResistances.Junction jun(
+  AixLib.Fluid.FixedResistances.Junction jun(
     redeclare package Medium = Medium,
     tau=60,
     dp_nominal={0,dp_nominal,dp_nominal},
@@ -103,14 +103,14 @@ public
     m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1})
     annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
 
-  AixLibDHC.Fluid.FixedResistances.Junction jun1(
+  AixLib.Fluid.FixedResistances.Junction jun1(
     redeclare package Medium = Medium,
     tau=60,
     dp_nominal={0,dp_nominal,dp_nominal},
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
     m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1})
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
-  AixLibDHC.Fluid.Chillers.Carnot_TEva chi(
+  AixLib.Fluid.Chillers.Carnot_TEva chi(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     allowFlowReversal1=false,
@@ -123,7 +123,7 @@ public
     QEva_flow_nominal=coolingDemand_max,
     QEva_flow_min=coolingDemand_max)
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpCooling(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -140,12 +140,12 @@ public
     annotation (
       Placement(transformation(extent={{248,82},{208,122}}),
         iconTransformation(extent={{-280,-72},{-240,-32}})));
-  AixLibDHC.Fluid.Sources.MassFlowSource_T sourceCooling(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(extent={{-70,44},{-50,64}})));
-  AixLibDHC.Fluid.Sources.Boundary_pT sinkCooling(redeclare package Medium =
+  AixLib.Fluid.Sources.Boundary_pT sinkCooling(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{30,46},{10,66}})));
   Modelica.Blocks.Math.Add add2(k2=-1)
@@ -163,16 +163,16 @@ public
     annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
   Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet))
     annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
   Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet(unit = "K")

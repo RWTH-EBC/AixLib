@@ -19,24 +19,24 @@ model SubstationHeating
     parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = heatDemand_max / (cp_default * deltaT_heatingGridSet)
     "Nominal mass flow rate based on max. heating demand and set temperature difference";
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{132,6},{152,26}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpHeating(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     use_inputFilter=false,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
-  AixLibDHC.Fluid.Sources.MassFlowSource_T heatingReturnBuilding(
+  AixLib.Fluid.Sources.MassFlowSource_T heatingReturnBuilding(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
@@ -45,7 +45,7 @@ model SubstationHeating
   Modelica.Blocks.Sources.Constant deltaT_heatingBuildingSite(k=
         deltaT_heatingSet)
     annotation (Placement(transformation(extent={{136,-74},{124,-62}})));
-  AixLibDHC.Fluid.Sources.Boundary_pT heatingSupplyBuilding(redeclare package
+  AixLib.Fluid.Sources.Boundary_pT heatingSupplyBuilding(redeclare package
       Medium = Medium, nPorts=1)
     "Represents supply flow of buildings heating system"
     annotation (Placement(transformation(extent={{-44,-48},{-24,-28}})));
@@ -55,15 +55,15 @@ model SubstationHeating
     annotation (Placement(transformation(extent={{114,-38},{98,-22}})));
 public
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        AixLibDHC.Media.Water)
+        AixLib.Media.Water)
     "Fluid connector for connecting the substation to the warm line of the network"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        AixLibDHC.Media.Water)
+        AixLib.Media.Water)
     "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{150,-10},{170,10}}),
         iconTransformation(extent={{150,-10},{170,10}})));
-  AixLibDHC.Fluid.HeatPumps.Carnot_TCon heaPum(
+  AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     dp1_nominal=dp_nominal,
@@ -78,7 +78,7 @@ public
     annotation (Placement(transformation(extent={{-36,58},{-50,72}})));
   Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
     annotation (Placement(transformation(extent={{-14,52},{-26,64}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTemHeatingSup(redeclare package
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemHeatingSup(redeclare package
       Medium = Medium, m_flow_nominal=m_flow_nominal)
     "Supply temperatur of buildings heating system"
     annotation (Placement(transformation(extent={{6,-48},{-14,-28}})));

@@ -27,25 +27,25 @@ model SubstationCooling
         Medium)
     "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{-130,6},{-110,26}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     T_start=288.15,
     tau=60) annotation (Placement(transformation(extent={{70,6},{90,26}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpCooling(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{68,-10},{48,10}})));
-  AixLibDHC.Fluid.Chillers.Carnot_TEva chiller(
+  AixLib.Fluid.Chillers.Carnot_TEva chiller(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     allowFlowReversal1=true,
@@ -59,7 +59,7 @@ model SubstationCooling
         extent={{-9,9},{9,-9}},
         rotation=180,
         origin={3,-5})));
-  AixLibDHC.Fluid.Sources.MassFlowSource_T coolingReturnBuilding(
+  AixLib.Fluid.Sources.MassFlowSource_T coolingReturnBuilding(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
@@ -69,7 +69,7 @@ model SubstationCooling
   Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k=
         deltaT_coolingSet)
     annotation (Placement(transformation(extent={{-126,-94},{-106,-74}})));
-  AixLibDHC.Fluid.Sources.Boundary_pT coolingSupplyBuilding(redeclare package
+  AixLib.Fluid.Sources.Boundary_pT coolingSupplyBuilding(redeclare package
       Medium = Medium, nPorts=1)
     "Mass flow sink represents supply flow of buildings cooling system"
     annotation (Placement(transformation(extent={{64,-64},{44,-44}})));
@@ -86,7 +86,7 @@ model SubstationCooling
     "Input for cooling demand profile of substation (negative values for cooling)"
     annotation (Placement(transformation(extent={{-166,74},{-126,114}}),
         iconTransformation(extent={{-166,74},{-126,114}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package
       Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-82,-6},{-66,8}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")

@@ -24,29 +24,29 @@ model SubstationDirectHeatingDirectCoolingDHW "Substation model for bidirctional
     parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     T_start=305.15,
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-  AixLibDHC.Fluid.Delays.DelayFirstOrder vol1(
+  AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60) annotation (Placement(transformation(extent={{188,8},{208,28}})));
-  AixLibDHC.Fluid.Movers.FlowControlled_m_flow pumpHeating(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     use_inputFilter=false,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
-  AixLibDHC.Fluid.Sources.MassFlowSource_T sourceHeating(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
-    nPorts=2) annotation (Placement(transformation(
+    nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={146,-56})));
@@ -54,7 +54,7 @@ model SubstationDirectHeatingDirectCoolingDHW "Substation model for bidirctional
     annotation (Placement(transformation(extent={{7,-7},{-7,7}},
         rotation=0,
         origin={213,-97})));
-  AixLibDHC.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium =
+  AixLib.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{14,-62},{34,-42}})));
   Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet))
@@ -75,7 +75,7 @@ public
     "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
-  AixLibDHC.Fluid.HeatPumps.Carnot_TCon heaPum(
+  AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     use_eta_Carnot_nominal=true,
@@ -97,7 +97,7 @@ public
         rotation=0,
         origin={182,-80})));
 
-  AixLibDHC.Fluid.Delays.DelayFirstOrder del(
+  AixLib.Fluid.Delays.DelayFirstOrder del(
     redeclare package Medium = Medium,
     T_start=305.15,
     m_flow_nominal=m_flow_nominal,
@@ -108,7 +108,7 @@ public
         transformation(extent={{-290,92},{-250,132}}),
                                                     iconTransformation(extent={{-180,22},
             {-140,62}})));
-  AixLibDHC.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   Modelica.Blocks.Sources.Constant const4(k=T_supplyDHWSet)
@@ -118,11 +118,11 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-22,32})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTem2(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTem2(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{66,-62},{46,-42}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTem3(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTem3(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{130,-66},{110,-44}})));
   Modelica.Blocks.Interfaces.RealOutput P_el_HP( unit = "W")
     "Electrical power consumed by heat pump"
@@ -141,7 +141,7 @@ public
     annotation (Placement(transformation(extent={{-226,70},{-214,82}})));
   Modelica.Blocks.Math.Division division3
     annotation (Placement(transformation(extent={{-152,50},{-136,66}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTemHPin(redeclare package
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemHPin(redeclare package
       Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{28,-10},{48,12}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*(senTemIn.T
@@ -156,7 +156,7 @@ public
   Modelica.Blocks.Sources.Constant const2(k=2*cp_default)
     "min temperatur difference for dhw"
     annotation (Placement(transformation(extent={{-204,28},{-192,40}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTemIn(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemIn(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     T_start=305.15)
@@ -167,7 +167,7 @@ public
     annotation (Placement(transformation(extent={{-142,-78},{-154,-66}})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-186,-62},{-206,-42}})));
-  AixLibDHC.Fluid.Sensors.TemperatureTwoPort senTemOut(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemOut(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     T_start=305.15)
@@ -212,9 +212,6 @@ equation
                              color={0,0,127}));
   connect(prescribedHeatFlow.port, del.heatPort) annotation (Line(points={{-22,22},
           {-22,10},{-10,10}},              color={191,0,0}));
-  connect(sourceHeating.ports[1], senTem3.port_a)
-    annotation (Line(points={{136,-57},{130,-57},{130,-55}},
-                                                          color={0,127,255}));
   connect(senTem3.port_b, heaPum.port_a1)
     annotation (Line(points={{110,-55},{110,-54},{106,-54},{106,-12},{104,-12}},
                                                           color={0,127,255}));
@@ -297,6 +294,8 @@ equation
           100},{4,100},{4,84},{18,84}}, color={0,0,127}));
   connect(max3.y, pumpHeating.m_flow_in) annotation (Line(points={{41,78},{64,
           78},{64,36},{-54,36},{-54,12}}, color={0,0,127}));
+  connect(senTem3.port_a, sourceHeating.ports[1]) annotation (Line(points={{130,
+          -55},{130,-56},{136,-56}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
                          graphics={
