@@ -66,18 +66,23 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400, Interval=60),
-    Documentation(info="<html>
-<p>This example shows a simple example of a closed loop substation with chiller 
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling\">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling</a>. 
-It illustrates the settings needed in the demand model to work in a bidirectional
-low-temperature network.<p>
-</html>", revisions="<html>
-<ul>
-<li><i>February 20, 2024</i> by Rahul Karuvingal:<br/>
-Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
-</li>
-<li><i>April 15, 2020</i> by Tobias Blacha:<br/>
-Add documentaion </li>
+    Documentation(info="<html><p>
+  This example shows a simple example of a closed loop substation with
+  chiller <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling</a>.
+  It illustrates the settings needed in the demand model to work in a
+  bidirectional low-temperature network.
+</p>
+</html>", revisions="<html><ul>
+  <li>
+    <i>February 20, 2024</i> by Rahul Karuvingal:<br/>
+    Revised to make it compatible with MSL 4.0.0 and Aixlib 1.3.2.
+  </li>
+  <li>
+    <i>April 15, 2020</i> by Tobias Blacha:<br/>
+    Add documentaion
+  </li>
 </ul>
 </html>"));
 end SubstationCooling;
