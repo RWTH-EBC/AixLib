@@ -99,7 +99,7 @@ public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
-  Modelica.Blocks.Sources.Constant mindeltaT(k=20)
+  Modelica.Blocks.Sources.Constant mindeltaT(k=dTDesign)
     "Temperature of return line in °C" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
@@ -186,7 +186,7 @@ equation
   connect(switch1.y, source.T_in) annotation (Line(points={{117,32},{124,32},{
           124,-64},{30,-64}},
                           color={0,0,127}));
-  connect(changeSign.y, source.m_flow_in)
+  connect(smoothMax.y, source.m_flow_in)
     annotation (Line(points={{0,-47},{0,-68},{30,-68}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
