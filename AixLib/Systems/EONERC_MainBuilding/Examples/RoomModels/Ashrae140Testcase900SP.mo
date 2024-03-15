@@ -370,6 +370,9 @@ model Ashrae140Testcase900SP
     annotation (Placement(transformation(extent={{2,134},{22,154}})));
   Modelica.Blocks.Math.Gain gain(k=0.001)
     annotation (Placement(transformation(extent={{-24,134},{-4,154}})));
+  Modelica.Blocks.Interfaces.RealOutput TSupMea "Value of Real output"
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{106,40},{126,60}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-72,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -571,6 +574,8 @@ equation
           -14,-9},{-14,74},{-26,74},{-26,144}}, color={0,0,127}));
   connect(gain.y, Q_Tabs_ctr)
     annotation (Line(points={{-3,144},{12,144}}, color={0,0,127}));
+  connect(TSupMea, Bus.ahuBus.TSupMea) annotation (Line(points={{110,40},{62,40},
+          {62,40.05},{8.05,40.05}}, color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=60,
