@@ -367,13 +367,13 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(out.weaBus, weaBus) annotation (Line(
       points={{-100,16.12},{-102,16.12},{-102,16},{-112,16},{-112,60},{-71,60}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)));
