@@ -263,9 +263,23 @@ equation
           lineColor={0,0,0})}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{140,
             100}})),
-    Documentation(info="<html>
-<p>This model uses 4-dimensional table data, wich are calculated for a simplyfied refrigerant circuit with the use of isentropic compressor efficienciecs as a function of pressure gradient and frequency, superheating and calibration of minimal temperature differencees in condeser and evaporater. The table data ist a function of THot, TSource, deltaTCon and relative power, which represents compressor frequency.</p>
-<p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
-<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
+    Documentation(info="<html><p>
+  This model uses 4-dimensional table data, wich are calculated for a
+  simplyfied refrigerant circuit with the use of isentropic compressor
+  efficienciecs as a function of pressure gradient and frequency,
+  superheating and calibration of minimal temperature differencees in
+  condeser and evaporater. The table data ist a function of THot,
+  TSource, deltaTCon and relative power, which represents compressor
+  frequency.
+</p>
+<p>
+  <br/>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_Prel.png\">
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_DeltaT_HK.png\">
+</p>
 </html>"));
 end Wamak_R410A;

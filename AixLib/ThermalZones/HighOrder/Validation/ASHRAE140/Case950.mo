@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case950
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650(
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),

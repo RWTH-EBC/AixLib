@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.DryAir;
+within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model InfiltrationRate_DIN12831
   "Heat flow caused by infiltration after european standard DIN EN 12831"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;

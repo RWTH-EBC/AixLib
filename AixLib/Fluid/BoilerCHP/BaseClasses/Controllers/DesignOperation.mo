@@ -145,19 +145,44 @@ equation
           textString="Design
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model calculates the nominal fuel demand (W) for nominal conditions. </p>
-<p><span style=\"font-family: Arial;\">The nominal efficiency comes from the SDF and depends on:</span></p>
+    Documentation(info="<html><p>
+  This model calculates the nominal fuel demand (W) for nominal
+  conditions.
+</p>
+<p>
+  <span style=\"font-family: Arial;\">The nominal efficiency comes from
+  the SDF and depends on:</span>
+</p>
 <ul>
-<li><span style=\"font-family: Arial;\">Nominal return temperature (TColdNom)</span></li>
-<li><span style=\"font-family: Arial;\">Nominale temperature difference (TColdNom-THotNom)</span></li>
-<li><span style=\"font-family: Arial;\">Nominal relative temperature difference (1)</span></li>
-<li><span style=\"font-family: Arial;\">Nominal relative water mass flow (1)</span></li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal return temperature
+    (TColdNom)</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominale temperature difference
+    (TColdNom-THotNom)</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal relative temperature
+    difference (1)</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal relative water mass flow
+    (1)</span>
+  </li>
 </ul>
-<p><br>Further assumptions are taken into account for nominal losses: Thermal conductance is described by a fit<span style=\"font-family: Calibri; color: #595959;\"> 0.0465 * QNom/1000 + 4.9891</span> based on manufacturere data at a temperature difference of 50 K to ambient</p>
+<p>
+  <br/>
+  Further assumptions are taken into account for nominal losses:
+  Thermal conductance is described by a fit <span style=
+  \"font-family: Calibri; color: #595959;\">0.0465 * QNom/1000 +
+  4.9891</span> based on manufacturere data at a temperature difference
+  of 50 K to ambient
+</p>
 </html>", revisions="<html>
 <ul>
-<li>June, 2023  by Moritz Zuschlag &amp; David Jansen</li>
+  <li>June, 2023 by Moritz Zuschlag & David Jansen
+  </li>
 </ul>
 </html>"));
 end DesignOperation;

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.UsersGuide;
+within AixLib.Controls.HVACAgentBasedControl.UsersGuide;
 class Gettingstarted "Getting started"
   extends Modelica.Icons.Information;
   annotation (Documentation(info="<html><h4>

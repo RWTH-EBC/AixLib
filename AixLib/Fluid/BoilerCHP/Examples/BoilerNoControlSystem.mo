@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
+within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerNoControlSystem
   "Example that illustrates the use of the boiler model without control"
   extends Modelica.Icons.Example;

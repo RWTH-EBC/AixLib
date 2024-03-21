@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Pumps.PumpPolynomialBased;
+within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record Pump_DN25_H1_6_V8
   "Pump with head 1 to 6m and 8.87m^3/h volume flow"
   extends PumpBaseRecord(

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Interfaces;
+within AixLib.Fluid.Interfaces;
 model FourPortHeatExchanger
   "Model transporting two fluid streams between four ports with storing mass or energy in n volumes"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.PrimaryExergy;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.PrimaryExergy;
 model HeatPump_PrimaryExergyDestruction_Cooling
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";

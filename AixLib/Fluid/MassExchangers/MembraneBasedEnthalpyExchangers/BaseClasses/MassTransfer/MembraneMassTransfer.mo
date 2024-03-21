@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 model MembraneMassTransfer "model for mass transfer through membrane in 
   quasi-counter flow arrangement"
 

@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers.BaseClasses;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers.BaseClasses;
 model PseudoRadiator
   /* *******************************************************************
       Parameters

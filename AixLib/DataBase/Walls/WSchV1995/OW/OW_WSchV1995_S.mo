@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1995.OW;
+within AixLib.DataBase.Walls.WSchV1995.OW;
 record OW_WSchV1995_S
   "outer wall after WSchV1995, for building of type S (schwer)"
   extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015}

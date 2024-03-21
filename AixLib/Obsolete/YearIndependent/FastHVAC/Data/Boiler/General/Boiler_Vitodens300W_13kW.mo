@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.General;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.General;
 record Boiler_Vitodens300W_13kW
   "Condesing boiler Viessmann Vitodens 300W 13kW, for Tv/Tr = 50/30 °C"
   extends BoilerTwoPointBaseDataDefinition(

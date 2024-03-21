@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.BaseClasses;
+within AixLib.Controls.HeatPump.BaseClasses;
 model InverterControlledHP "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
