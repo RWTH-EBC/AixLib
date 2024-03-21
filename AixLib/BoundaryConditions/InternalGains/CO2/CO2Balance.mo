@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.InternalGains.CO2;
+within AixLib.BoundaryConditions.InternalGains.CO2;
 model CO2Balance "Calculation of CO2 concentration within a thermal zone"
   parameter Modelica.Units.SI.Area areaZon "Zone area";
   parameter Real actDeg = 1.8 "Activity degree (Met units)";

@@ -196,7 +196,9 @@ equation
           fillColor={255,255,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             200}})),
-    Documentation(info="<html>
-<p>Boiler control unit, which estimates the relative water mass flow and chooses the right water temperature difference.</p>
+    Documentation(info="<html><p>
+  Boiler control unit, which estimates the relative water mass flow and
+  chooses the right water temperature difference.
+</p>
 </html>"));
 end ControlBoilerNotManufacturer;

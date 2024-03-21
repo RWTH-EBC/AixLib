@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPumpNonManufacturer
   "Blackbox model of refrigerant cycle of a heat pump in case no manufacturer data is used"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle(use_rev=false);

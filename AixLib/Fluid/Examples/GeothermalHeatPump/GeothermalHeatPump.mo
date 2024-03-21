@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
+within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;

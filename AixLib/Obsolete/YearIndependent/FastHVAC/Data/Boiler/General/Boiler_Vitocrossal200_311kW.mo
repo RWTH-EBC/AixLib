@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.General;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.General;
 record Boiler_Vitocrossal200_311kW
   "Gas-fired condensing boiler Viessmann Vitocrossal200 311kW"
   extends BoilerTwoPointBaseDataDefinition(

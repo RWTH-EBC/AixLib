@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Controller;
+within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottle "Controller for unmixed circuit with valve"
   //Boolean choice;
 

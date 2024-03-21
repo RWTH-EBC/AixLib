@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.BaseClasses;
+within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpHeadControlled
   "Head controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;

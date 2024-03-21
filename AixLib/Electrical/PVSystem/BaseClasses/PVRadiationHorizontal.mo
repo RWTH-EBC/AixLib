@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVRadiationHorizontal "PV radiation and absorptance model - input: total irradiance on horizontal plane"
 
  parameter Real lat(final quantity = "Angle",

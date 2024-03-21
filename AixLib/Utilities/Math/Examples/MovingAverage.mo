@@ -19,14 +19,14 @@ equation
 annotation(experiment(Tolerance=1e-6, StopTime=50.0, Algorithm="CVode"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/MovingAverage.mos"
         "Simulate and plot"),
-    Documentation(info="<html>
-<p>This model tests the implementation of the moving average model.</p>
+    Documentation(info="<html><p>
+  This model tests the implementation of the moving average model.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-November 09, 2021, by Fabian Wuellhorst:<br/>
-First implementation.
-</li>
+  <li>November 09, 2021, by Fabian Wuellhorst:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end MovingAverage;

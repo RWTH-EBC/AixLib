@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.EN14511;
+within AixLib.DataBase.HeatPump.EN14511;
 record WAMAK "WAMAK_WW_64_SHR HD Modul"
   extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
     tableP_ele=[0, 5,

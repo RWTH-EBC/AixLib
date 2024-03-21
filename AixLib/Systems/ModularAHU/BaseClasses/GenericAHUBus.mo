@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.BaseClasses;
+within AixLib.Systems.ModularAHU.BaseClasses;
 expandable connector GenericAHUBus
   "Data bus for generic air-handling unit"
   extends Modelica.Icons.SignalBus;
@@ -33,11 +33,17 @@ expandable connector GenericAHUBus
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(graphics,
             coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Definition of a standard bus connector for ahu register modules. The bus connector includes the <a href=\"modelica://AixLib/Systems/HydraulicModules/BaseClasses/HydraulicBus.mo\">HydraulicBus</a>.</p>
+    Documentation(info="<html><p>
+  Definition of a standard bus connector for ahu register modules. The
+  bus connector includes the <a href=
+  \"modelica://AixLib/Systems/HydraulicModules/BaseClasses/HydraulicBus.mo\">
+  HydraulicBus</a>.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>October 29, 2019, by Alexander Kümpel:<br/>First implementation. </li>
+  <li>October 29, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end GenericAHUBus;

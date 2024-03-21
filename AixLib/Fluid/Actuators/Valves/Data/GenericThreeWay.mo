@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.Data;
+within AixLib.Fluid.Actuators.Valves.Data;
 record GenericThreeWay "Generic record for 3 way valve parameters"
   extends Modelica.Icons.Record;
   parameter AixLib.Fluid.Actuators.Valves.Data.Generic a_ab

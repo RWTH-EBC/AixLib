@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump.BaseClasses;
+within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump.BaseClasses;
 model ModularControl
 
 

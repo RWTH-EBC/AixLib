@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 model UDPSend_adapted "A block for sending UDP datagrams"
   import Modelica_DeviceDrivers;
   extends Modelica_DeviceDrivers.Utilities.Icons.BaseIcon;

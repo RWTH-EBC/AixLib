@@ -159,17 +159,33 @@ equation
           textString="OffDesign
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p><span style=\"font-family: Arial;\">This model calculates the adiabatic efficiency for an operating point from a characteristic chart in dependency on:</span></p>
+    Documentation(info="<html><p>
+  <span style=\"font-family: Arial;\">This model calculates the adiabatic
+  efficiency for an operating point from a characteristic chart in
+  dependency on:</span>
+</p>
 <ul>
-<li><span style=\"font-family: Arial;\">Nominal return temperature (TColdNom)</span></li>
-<li><span style=\"font-family: Arial;\">Nominale temperature difference (TColdNom-THotNom)</span></li>
-<li><span style=\"font-family: Arial;\">Nominal relative temperature difference </span></li>
-<li><span style=\"font-family: Arial;\">Nominal relative water mass flow </span></li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal return temperature
+    (TColdNom)</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominale temperature difference
+    (TColdNom-THotNom)</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal relative temperature
+    difference</span>
+  </li>
+  <li>
+    <span style=\"font-family: Arial;\">Nominal relative water mass
+    flow</span>
+  </li>
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>June, 2023  by Moritz Zuschlag &amp; David Jansen</li>
+  <li>June, 2023 by Moritz Zuschlag & David Jansen
+  </li>
 </ul>
 </html>"));
 end OffDesignOperation;

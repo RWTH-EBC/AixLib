@@ -118,9 +118,16 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This Model calculates the change of efficiency and heat flow in case of TCold is different from nominal TCold. For example, if TCold decreases the exhaust temperature will decrease as well and the heatflow increases.</p>
-<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/Boiler/Kennfeld_EtaRL_TRL30_PLRvar_20K_mNom.png\"/></p>
+    Documentation(info="<html><p>
+  This Model calculates the change of efficiency and heat flow in case
+  of TCold is different from nominal TCold. For example, if TCold
+  decreases the exhaust temperature will decrease as well and the
+  heatflow increases.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/Boiler/Kennfeld_EtaRL_TRL30_PLRvar_20K_mNom.png\">
+</p>
 </html>"),
     experiment(StopTime=86400, __Dymola_NumberOfIntervals=3600));
 end ReturnInfluence;

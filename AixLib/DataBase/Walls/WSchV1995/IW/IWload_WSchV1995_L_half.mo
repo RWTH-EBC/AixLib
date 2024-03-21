@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1995.IW;
+within AixLib.DataBase.Walls.WSchV1995.IW;
 record IWload_WSchV1995_L_half
   "Inner wall load-bearing after WSchV1995, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases

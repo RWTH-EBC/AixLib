@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.SetPoints.Functions;
+within AixLib.Controls.SetPoints.Functions;
 function HeatingCurveFunction "Linear function with a set temperature of 55degC at -20 degC outdoor air temperature"
   extends PartialBaseFct;
 
