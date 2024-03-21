@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump;
-model ModularHeatPump
+model ModularHeatPump_Water_old
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
@@ -22,7 +22,7 @@ model ModularHeatPump
     parameter Boolean TSourceInternal=true
                                           "Use internal TSource?"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-      parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
+      parameter Modelica.Units.SI.Temperature TSource=278.15   "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
 parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
@@ -43,9 +43,6 @@ parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional syst
 parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
                                                      "Pressure difference condenser";
 
-
-
-
  AixLib.Fluid.HeatPumps.HeatPump heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -59,8 +56,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
     VEva=max(0.0000001*QDes - 0.0075, 0.003),
     TCon_start=TCon_start,
-    redeclare model PerDataMainHP = PerDataMainHP,
-    use_non_manufacturer=use_non_manufacturer,
+    use_non_manufacturer=false,
     use_rev=false,
     use_autoCalc=false,
     Q_useNominal=QDes,
@@ -77,13 +73,15 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     show_TPort=false,
+    redeclare model PerDataMainHP =
+        PerDataMainHP,
     THotMax=THotMax,
     THotNom=THotDes,
     TSourceNom=TSourceDes,
     QNom=QDes,
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
-    TSource=TSourceDes,
+    TSource=TSource,
     TSourceInternal=TSourceInternal,
     FreDep=FreDep)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
@@ -96,7 +94,7 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
   BaseClasses.HeatPump_Sources.Liquid heatSource(
     TSourceNom=TSourceDes,
       TSourceInternal=TSourceInternal,
-    TSource=TSourceDes)
+    TSource=TSource)
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
@@ -120,13 +118,17 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
    parameter Boolean use_non_manufacturer=true  "Use non manufacturer approach?";
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.GeneralThermodynamic
-    constrainedby
-    DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.Generic_Water constrainedby
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+    "Performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
   Modelica.Blocks.Sources.BooleanExpression mode(y=true)
     annotation (Placement(transformation(extent={{70,64},{34,90}})));
   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+  Modelica.Blocks.Sources.RealExpression zero3(y=1)
+    annotation (Placement(transformation(extent={{-80,90},{-52,108}})));
+  BaseClasses.COP_calc cOP_calc
+    annotation (Placement(transformation(extent={{-72,48},{-52,70}})));
 protected
 package MediumCon = AixLib.Media.Water "Medium heat sink";
 
@@ -180,6 +182,34 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(zero3.y, sigBus.iceFacMeas) annotation (Line(points={{-50.6,99},{-29.3,
+          99},{-29.3,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.PelMea, cOP_calc.P_el_mea) annotation (Line(
+      points={{1.075,101.085},{1.075,80},{-86,80},{-86,63.4},{-74,63.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.QCon, cOP_calc.Q_con) annotation (Line(
+      points={{1.075,101.085},{1.075,82},{-98,82},{-98,54.6},{-74,54.6}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cOP_calc.COP, sigBus.COP) annotation (Line(points={{-51,59},{1.075,59},
+          {1.075,101.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
@@ -218,4 +248,4 @@ equation
 <p><br>Concept </p>
 <p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, DeltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
 </html>"));
-end ModularHeatPump;
+end ModularHeatPump_Water_old;

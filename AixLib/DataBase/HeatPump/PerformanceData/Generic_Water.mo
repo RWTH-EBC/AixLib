@@ -1,28 +1,27 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model LookUpTableNDGeneric "Generic performance map characteristic"
+model Generic_Water "Generic WaterWater"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   // Not Manufacturer
 
-  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=283.15 "Nominal temperature of TSource"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+ // parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
+ //  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+//  parameter Modelica.Units.SI.Temperature TSourceNom=283.15 "Nominal temperature of TSource"
+ //  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+//  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
+  // annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+//  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
+  // annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+//  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+ //  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+//
+//  parameter Modelica.Units.SI.Temperature TSource=283.15 "temperature of heat source"
+//   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.Units.SI.Temperature TSource=283.15 "temperature of heat source"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
-   parameter Boolean TSourceInternal=true "Use internal TSource?"
-    annotation (Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
-
+ //  parameter Boolean TSourceInternal=true "Use internal TSource?"
+ //   annotation (Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
 
   BaseClasses.DesignGenericHP design(
     THotNom=THotNom,
@@ -58,7 +57,7 @@ model LookUpTableNDGeneric "Generic performance map characteristic"
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={0,-22})));
-  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+//  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 equation
 
   connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
@@ -223,4 +222,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end LookUpTableNDGeneric;
+end Generic_Water;

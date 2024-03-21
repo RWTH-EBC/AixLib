@@ -4,3 +4,4 @@ HeatPumpHotWaterFeedback
 Example
 HeatPump_Sources
 ModularControl
+COP_calc

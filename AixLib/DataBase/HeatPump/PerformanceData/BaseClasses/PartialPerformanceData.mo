@@ -5,6 +5,29 @@ partial model PartialPerformanceData
   parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
+    // Not Manufacturer
+
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.Temperature TSourceNom=283.15 "Nominal temperature of TSource"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+  parameter Modelica.Units.SI.Temperature TSource=283.15 "temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+   parameter Boolean TSourceInternal=true "Use internal TSource?"
+    annotation (Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
+
+
+      parameter Boolean FreDep=true "COP=f(compressor frequency)?" annotation(Dialog(tab="NotManufacturer",tab="Advanced",group="General machine information"));
+
+      parameter Real eta_carnot = 0.405 annotation(Dialog(tab="General Thermodynamic",tab="Advanced",group="General machine information"));
+
+
 
 
   Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")

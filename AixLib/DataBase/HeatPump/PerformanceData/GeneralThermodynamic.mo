@@ -6,29 +6,6 @@ model GeneralThermodynamic
 
 
 
-    parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
-  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
-  parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
-   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-
-   parameter Boolean TSourceInternal=false
-                                          "Use internal TSource?"
-    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
-
-    parameter Boolean Modulating=true "Is the heat pump inverter-driven?";
 
 
   CarnotCOP carnotCOPDesign
@@ -43,7 +20,7 @@ model GeneralThermodynamic
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.45)
+  Modelica.Blocks.Sources.RealExpression etaCarnot(y=eta_carnot)
                                                           "Guetegrad"
     annotation (Placement(transformation(extent={{-118,18},{-82,38}})));
   Modelica.Blocks.Math.Add add(k2=-1)

@@ -3,7 +3,7 @@ package Examples "Holds examples for the modular energy system units"
   extends Modelica.Icons.ExamplesPackage;
   model HeatPump
 
-    Modules.ModularHeatPump.ModularHeatPump modularHeatPumpNew(
+    Modules.ModularHeatPump.ModularHeatPump_Water_old modularHeatPumpNew(
       THotDes=591.65,
       TSourceDes=551.3,
       QDes=3*QNom,
@@ -13,7 +13,7 @@ package Examples "Holds examples for the modular energy system units"
       redeclare package MediumEvap = AixLib.Media.Water,
       use_non_manufacturer=true,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric,
+          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water,
       FreDep=false)
       annotation (Placement(transformation(extent={{40,-16},{60,4}})));
     .AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
@@ -97,15 +97,14 @@ package Examples "Holds examples for the modular energy system units"
     connect(modularHeatPumpNew.port_a, bou.ports[1])
       annotation (Line(points={{40,-6},{40,14}}, color={0,127,255}));
     connect(SetMFlow.y, sigBus.mFlowSetExternal) annotation (Line(points={{-3,110},
-            {0,110},{0,38},{-4.925,38},{-4.925,-12.915}},
-                                               color={0,0,127}), Text(
+            {0,110},{0,38},{-5,38},{-5,-13}},  color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
     connect(sine.y, sigBus.THotSet) annotation (Line(points={{-79,90},{-76,90},
-            {-76,100},{-42,100},{-42,76},{-48,76},{-48,40},{-4.925,40},{-4.925,
-            -12.915}},                       color={0,0,127}), Text(
+            {-76,100},{-42,100},{-42,76},{-48,76},{-48,40},{-5,40},{-5,-13}},
+                                             color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
@@ -388,7 +387,7 @@ package Examples "Holds examples for the modular energy system units"
   end Test;
 
   model HeatPump_Basic
-    Modules.ModularHeatPump.ModularHeatPump modularHeatPump(
+    Modules.ModularHeatPump.ModularHeatPump_Water_old modularHeatPump(
       THotDes(displayUnit="K") = 308.15,
       TSourceDes(displayUnit="K") = 283.15,
       QDes=54730,
@@ -396,8 +395,162 @@ package Examples "Holds examples for the modular energy system units"
       TSourceInternal=false,
       dpInternal=10000,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric)
+          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    Fluid.Sources.Boundary_pT        bou(
+      redeclare package Medium = AixLib.Media.Water,
+      T=303.15,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+    AixLib.Controls.Interfaces.VapourCompressionMachineControlBus  sigBus
+      annotation (Placement(transformation(extent={{-60,-62},{-30,-28}}),
+          iconTransformation(extent={{-8,-22},{10,4}})));
+    Fluid.Sources.Boundary_pT        bou1(redeclare package Medium =
+          Media.Water, nPorts=1)
+      annotation (Placement(transformation(extent={{98,-10},{78,10}})));
+    Modelica.Blocks.Sources.RealExpression frequency(y=1)   annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-123,-48})));
+    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) "[0.1 ... 1]"
+                                                           annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-125,-72})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+      annotation (Placement(transformation(extent={{-116,-38},{-96,-18}})));
+    Modelica.Blocks.Sources.RealExpression t_Source_Set(y=5)  annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-127,-120})));
+    Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
+      annotation (Placement(transformation(extent={{-86,-130},{-66,-110}})));
+  equation
+    connect(sigBus, modularHeatPump.sigBus) annotation (Line(
+        points={{-45,-45},{-22,-45},{-22,-3.9},{-7.9,-3.9}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bou.ports[1], modularHeatPump.port_a)
+      annotation (Line(points={{-48,0},{-8,0}}, color={0,127,255}));
+    connect(modularHeatPump.port_b, bou1.ports[1])
+      annotation (Line(points={{12,0},{78,0}}, color={0,127,255}));
+    connect(m_flow_set.y, sigBus.mFlowSetExternal) annotation (Line(points={{-115.1,
+            -72},{-45,-72},{-45,-45}},                   color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(sigBus.OnOff, booleanExpression.y) annotation (Line(
+        points={{-44.925,-44.915},{-90,-44.915},{-90,-28},{-95,-28}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(t_Source_Set.y, toKelvin1.Celsius)
+      annotation (Line(points={{-117.1,-120},{-88,-120}}, color={0,0,127}));
+    connect(toKelvin1.Kelvin, sigBus.TSourceSet) annotation (Line(points={{-65,
+            -120},{-32,-120},{-32,-44.915},{-44.925,-44.915}},
+                                                             color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(frequency.y, sigBus.nSet) annotation (Line(points={{-113.1,-48},{
+            -106,-48},{-106,-50},{-44.925,-50},{-44.925,-44.915}}, color={0,0,
+            127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    annotation (
+      Icon(coordinateSystem(preserveAspectRatio=false)),
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+      experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
+  end HeatPump_Basic;
+
+  model HeatPump_Basic_R134a
+    Fluid.Sources.Boundary_pT        bou(
+      redeclare package Medium = AixLib.Media.Water,
+      T=333.15,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+    AixLib.Controls.Interfaces.VapourCompressionMachineControlBus  sigBus
+      annotation (Placement(transformation(extent={{-60,-62},{-30,-28}}),
+          iconTransformation(extent={{-8,-22},{10,4}})));
+    Fluid.Sources.Boundary_pT        bou1(redeclare package Medium =
+          Media.Water, nPorts=1)
+      annotation (Placement(transformation(extent={{98,-10},{78,10}})));
+    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) "[0.1 ... 1]"
+                                                           annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-125,-72})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+      annotation (Placement(transformation(extent={{-116,-38},{-96,-18}})));
+    Modelica.Blocks.Sources.RealExpression t_Source_Set(y=1)  annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-127,-120})));
+    Modules.ModularHeatPump.ModularHeatPump_Water modularHeatPump_R134a(
+      THotDes=343.15,
+      TSourceDes=308.15,
+      QDes=82250,
+      DeltaTCon=7,
+      TSourceInternal=true,
+      TSource=288.15)
+      annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
+  equation
+    connect(sigBus.OnOff, booleanExpression.y) annotation (Line(
+        points={{-44.925,-44.915},{-90,-44.915},{-90,-28},{-95,-28}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(bou.ports[1], modularHeatPump_R134a.port_a)
+      annotation (Line(points={{-48,0},{-6,0}}, color={0,127,255}));
+    connect(modularHeatPump_R134a.port_b, bou1.ports[1])
+      annotation (Line(points={{14,0},{78,0}}, color={0,127,255}));
+    connect(sigBus, modularHeatPump_R134a.sigBus) annotation (Line(
+        points={{-45,-45},{-25.5,-45},{-25.5,-3.9},{-5.9,-3.9}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(t_Source_Set.y, sigBus.nSet) annotation (Line(points={{-117.1,-120},
+            {-44.925,-120},{-44.925,-44.915}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(m_flow_set.y, sigBus.mFlowSet) annotation (Line(points={{-115.1,-72},
+            {-44.925,-72},{-44.925,-44.915}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    annotation (
+      Icon(coordinateSystem(preserveAspectRatio=false)),
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+      experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
+  end HeatPump_Basic_R134a;
+
+  model HeatPump_Basic_Air
     Fluid.Sources.Boundary_pT        bou(
       redeclare package Medium = AixLib.Media.Water,
       T=303.15,
@@ -436,19 +589,9 @@ package Examples "Holds examples for the modular energy system units"
           origin={-127,-120})));
     Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
       annotation (Placement(transformation(extent={{-86,-130},{-66,-110}})));
+    Modules.ModularHeatPump.ModularHeatPump_Air modularHeatPump_Air
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   equation
-    connect(sigBus, modularHeatPump.sigBus) annotation (Line(
-        points={{-45,-45},{-22,-45},{-22,-3.9},{-7.9,-3.9}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bou.ports[1], modularHeatPump.port_a)
-      annotation (Line(points={{-48,0},{-8,0}}, color={0,127,255}));
-    connect(modularHeatPump.port_b, bou1.ports[1])
-      annotation (Line(points={{12,0},{78,0}}, color={0,127,255}));
     connect(frequency.y, sigBus.frequency) annotation (Line(points={{-113.1,-48},
             {-44.925,-48},{-44.925,-44.915}}, color={0,0,127}), Text(
         string="%second",
@@ -456,7 +599,7 @@ package Examples "Holds examples for the modular energy system units"
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
     connect(m_flow_set.y, sigBus.mFlowSetExternal) annotation (Line(points={{-115.1,
-            -72},{-44.925,-72},{-44.925,-44.915}},       color={0,0,127}), Text(
+            -72},{-45,-72},{-45,-45}},                   color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
@@ -472,7 +615,7 @@ package Examples "Holds examples for the modular energy system units"
     connect(t_Hot_Set.y, toKelvin.Celsius) annotation (Line(points={{-115.1,-96},
             {-90,-96},{-90,-94},{-16,-94},{-16,-100}}, color={0,0,127}));
     connect(toKelvin.Kelvin, sigBus.THotSet) annotation (Line(points={{7,-100},
-            {22,-100},{22,-98},{32,-98},{32,-44.915},{-44.925,-44.915}}, color=
+            {22,-100},{22,-98},{32,-98},{32,-45},{-45,-45}},             color=
             {0,0,127}), Text(
         string="%second",
         index=1,
@@ -487,9 +630,21 @@ package Examples "Holds examples for the modular energy system units"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(modularHeatPump_Air.port_b, bou1.ports[1]) annotation (Line(points=
+            {{10,0},{36,0},{36,-2},{82,-2},{82,0},{78,0}}, color={0,127,255}));
+    connect(bou.ports[1], modularHeatPump_Air.port_a)
+      annotation (Line(points={{-48,0},{-10,0}}, color={0,127,255}));
+    connect(sigBus, modularHeatPump_Air.sigBus) annotation (Line(
+        points={{-45,-45},{-45,-12},{-28,-12},{-28,-3.9},{-9.9,-3.9}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),
       Diagram(coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
-  end HeatPump_Basic;
+  end HeatPump_Basic_Air;
 end Examples;

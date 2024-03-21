@@ -7,7 +7,7 @@ model BoilerGeneric "Generic performance map based boiler"
     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom
               /1000)/1000),
     final m_flow_nominal=QNom/(Medium.cp_const*(THotNom-TColdNom)),
-    final dp_nominal= m_flow_nominal^2*a/(Medium.d_const^2));
+    dp_nominal=m_flow_nominal^2*a/(Medium.d_const^2));
 
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Design thermal capacity";
 
@@ -62,6 +62,10 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-38,14})));
+  Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin
+    annotation (Placement(transformation(extent={{-22,-26},{-2,-6}})));
+  Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
+    annotation (Placement(transformation(extent={{8,-26},{28,-6}})));
 protected
   parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -126,15 +130,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(temperatureSensor.T, boilerControlBus.TSupplyMea) annotation (Line(
-        points={{-29,-16},{0,-16},{0,100}},     color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(fuelDemand.y, thermalPower.u2)
     annotation (Line(points={{-44,37},{-44,26}}, color={0,0,127}));
-  connect(boilerControlBus.FirRatSet, thermalPower.u1) annotation (Line(
+  connect(boilerControlBus.Efficiency, thermalPower.u1) annotation (Line(
       points={{0,100},{0,30},{-32,30},{-32,26}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -142,6 +140,17 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(temperatureSensor.T, fromKelvin.Kelvin)
+    annotation (Line(points={{-29,-16},{-24,-16}}, color={0,0,127}));
+  connect(fromKelvin.Celsius, toKelvin.Celsius)
+    annotation (Line(points={{-1,-16},{6,-16}},         color={0,0,127}));
+  connect(toKelvin.Kelvin, boilerControlBus.TSupplyMea) annotation (Line(points={{29,-16},
+          {36,-16},{36,-6},{22,-6},{22,60},{0,60},{0,100}},          color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>

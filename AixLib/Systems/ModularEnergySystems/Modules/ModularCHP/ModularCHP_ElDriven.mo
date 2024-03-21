@@ -137,7 +137,8 @@ parameter Modelica.Units.SI.Temperature DesHotT "Design supply temperature";
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={86,-26})));
-  EnergyNeighborhoods.Controls.OnOff onOff3(bandwidth_plus=2, bandwidth_minus=2)
+  EnergyNeighborhoods.Components.Controls.OnOff onOff3(bandwidth_plus=2,
+      bandwidth_minus=2)
     annotation (Placement(transformation(extent={{-64,20},{-44,40}})));
 protected
   parameter Modelica.Units.SI.Temperature TMinCoolingWater=354.15;
@@ -173,12 +174,6 @@ equation
 //      Shutdown=false;
 //   end if;
 
-  connect(integrator1.y, cHPControlBus.ElectricEnergy) annotation (Line(points={{71,38},
-          {76,38},{76,102},{0,102}},                color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(port_a, fanHC.port_a)
     annotation (Line(points={{-100,0},{-100,-12}}, color={0,127,255}));
   connect(THotHeatCircuit.T, cHPControlBus.THot) annotation (Line(points={{68,-61},
@@ -307,6 +302,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(fanHC.port_b, TColdHeatCircuit.port_a) annotation (Line(points={{-100,
           -32},{-102,-32},{-102,-72},{-56,-72}}, color={0,127,255}));
+  connect(integrator1.y, cHPControlBus.Energy_Elec_CHP) annotation (Line(points
+        ={{71,38},{82,38},{82,102},{0,102}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

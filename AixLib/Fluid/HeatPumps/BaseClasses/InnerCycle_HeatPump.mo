@@ -20,25 +20,19 @@ model InnerCycle_HeatPump
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
-  DataBase.HeatPump.PerformanceData.LookUpTableNDGeneric
-    lookUpTableNDNotManufacturerHeating(
+  PerDataMainHP PerformanceDataHPHeating(QNom=QNom,
     THotNom=THotNom,
     TSourceNom=TSourceNom,
-    QNom=QNom,
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
-    TSourceInternal=TSourceInternal,
-    FreDep=FreDep)         if use_non_manufacturer
-    annotation (Placement(transformation(extent={{48,18},{100,80}})));
-
-  PerDataMainHP PerformanceDataHPHeating(QNom=QNom)
-                                         if not use_non_manufacturer
+    FreDep=FreDep,
+    eta_carnot=eta_carnot)               if not use_non_manufacturer
   annotation (Placement(transformation(
-  extent={{-17,20},{37,76}},rotation=0)));
+  extent={{5,24},{59,80}},  rotation=0)));
   PerDataRevHP PerformanceDataHPCooling if use_rev and not use_non_manufacturer
   annotation (Placement(transformation(extent={{-27,-28},{27,28}},
-  rotation=0,origin={-66,48})));
+  rotation=0,origin={-32,52})));
   Modelica.Blocks.Math.Gain gainEva(final k=-1)
     "Negate QEva to match definition of heat flow direction" annotation (
       Placement(transformation(
@@ -74,21 +68,21 @@ model InnerCycle_HeatPump
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+  parameter Real eta_carnot=0.405;
 equation
 
   connect(PerformanceDataHPHeating.QCon, switchQCon.u1)
-    annotation (Line(points={{-11.6,17.2},{-11.6,-4},{68,-4}},
-                                                             color={0,0,127}));
+    annotation (Line(points={{10.4,21.2},{10.4,-4},{68,-4}}, color={0,0,127}));
   connect(PerformanceDataHPHeating.Pel, switchPel.u1) annotation (Line(
-        points={{10,17.2},{10,-30},{8,-30},{8,-68}}, color={0,0,127}));
+        points={{32,21.2},{32,-30},{8,-30},{8,-68}}, color={0,0,127}));
   connect(PerformanceDataHPCooling.Pel, switchPel.u3) annotation (
       Line(
-      points={{-66,17.2},{-66,-30},{-8,-30},{-8,-68}},
+      points={{-32,21.2},{-32,-30},{-8,-30},{-8,-68}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHPCooling.QEva, switchQEva.u3) annotation (
       Line(
-      points={{-44.4,17.2},{-44.4,-22},{-68,-22}},
+      points={{-10.4,21.2},{-10.4,-22},{-68,-22}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(constZero.y, switchPel.u3)
@@ -107,36 +101,19 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHPCooling.QCon, gainCon.u) annotation (Line(
-      points={{-87.6,17.2},{-87.6,2},{-24,2},{-24,-20},{53.2,-20}},
+      points={{-53.6,21.2},{-53.6,2},{-24,2},{-24,-20},{53.2,-20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataHPHeating.QEva, gainEva.u) annotation (Line(points={{31.6,
-          17.2},{31.6,-6},{-51.2,-6}},       color={0,0,127}));
+  connect(PerformanceDataHPHeating.QEva, gainEva.u) annotation (Line(points={{53.6,
+          21.2},{53.6,-6},{-51.2,-6}},       color={0,0,127}));
   connect(sigBus, PerformanceDataHPCooling.sigBus) annotation (Line(
-      points={{0,102},{0,86},{-65.73,86},{-65.73,77.12}},
+      points={{0,102},{0,86},{-31.73,86},{-31.73,81.12}},
       color={255,204,51},
       thickness=0.5));
   connect(sigBus, PerformanceDataHPHeating.sigBus) annotation (Line(
-      points={{0,102},{0,86},{9.73,86},{9.73,76}},
+      points={{0,102},{0,86},{31.73,86},{31.73,80}},
       color={255,204,51},
       thickness=0.5));
-  connect(sigBus, lookUpTableNDNotManufacturerHeating.sigBus) annotation (Line(
-      points={{0,102},{69.45,102},{69.45,80}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(lookUpTableNDNotManufacturerHeating.QCon, switchQCon.u1) annotation (
-      Line(points={{52.3333,14.9},{52.3333,6},{64,6},{64,-4},{68,-4}},
-                                                                 color={0,0,127}));
-  connect(lookUpTableNDNotManufacturerHeating.Pel, switchPel.u1) annotation (
-      Line(points={{69.6667,14.9},{69.6667,6},{34,6},{34,-30},{8,-30},{8,-68}},
-                                                                      color={0,0,
-          127}));
-  connect(lookUpTableNDNotManufacturerHeating.QEva, gainEva.u) annotation (Line(
-        points={{87,14.9},{87,6},{56,6},{56,-6},{-51.2,-6}},     color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
