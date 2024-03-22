@@ -71,7 +71,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMin.y, ahu.phi_supplyAir[1]) annotation (Line(
-      points={{47,-46},{32,-46},{32,-9.9},{18.48,-9.9}},
+      points={{47,-46},{32,-46},{32,-11.25},{18.48,-11.25}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(waterLoadOutside.y, ahu.X_outdoorAir) annotation (Line(
@@ -83,7 +83,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMax.y, ahu.phi_supplyAir[2]) annotation (Line(points={{77,-46},
-          {72,-46},{72,-66},{28,-66},{28,-11.7},{18.48,-11.7}},       color={0,0,
+          {72,-46},{72,-66},{28,-66},{28,-10.35},{18.48,-10.35}},     color={0,0,
           127}));
   connect(ahu.T_extractAir, addToExtractTemp.y) annotation (Line(points={{18.48,
           9.9},{27.92,9.9},{27.92,18},{33.4,18}},         color={0,0,127}));

@@ -1,8 +1,8 @@
-within AixLib.Airflow.Window.BaseClasses.Functions.OpeningArea;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningArea;
 function geometricAreaTopBottomHung
   "Calculation of the geometric opening area of top- or bottom-hung windows"
   extends
-    AixLib.Airflow.Window.BaseClasses.Functions.OpeningArea.partialOpeningArea;
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningArea.partialOpeningArea;
   output Modelica.Units.SI.Angle alpha = 2*asin(s/(2*h)) "Hinged opening angle";
 protected
   Modelica.Units.SI.Area A1 "Opening area at top/bottom";
