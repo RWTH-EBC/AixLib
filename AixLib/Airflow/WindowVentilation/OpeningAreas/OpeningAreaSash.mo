@@ -112,27 +112,6 @@ equation
     effOpnArea else 0;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={0,0,0},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-80,100},{80,-60}},
-          lineColor={0,0,0},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-78,98},{78,-58}},
-          lineColor={0,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-72,92},{72,-52}},
-          lineColor={0,0,0},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
           extent={{-70,90},{70,-50}},
           lineColor={0,0,0},
           fillColor={102,204,255},

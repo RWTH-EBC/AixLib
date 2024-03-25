@@ -1,7 +1,7 @@
 alpha_to_s
-s_to_alpha
 effectiveOpeningArea
 equivalentOpeningArea
 geometricOpeningArea
-projectiveOpeningArea
 partialOpeningArea
+projectiveOpeningArea
+s_to_alpha

@@ -149,7 +149,6 @@ model OpeningArea "Calculation of different opening areas"
     winClrW=winClrW,
     winClrH=winClrH,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingHorizontal,
-
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric)
     "Sliding, horizontal, geometric opening"
     annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
