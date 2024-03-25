@@ -1,6 +1,7 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialOpeningArea
   "Calculation of window opening area"
+  extends Modelica.Blocks.Icons.Block;
   parameter Modelica.Units.SI.Length winClrW(min=0)
     "Width of the window clear opening";
   parameter Modelica.Units.SI.Height winClrH(min=0)
@@ -11,12 +12,6 @@ partial model PartialOpeningArea
     "Window opening area"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={0,0,0},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-80,100},{80,-60}},
           lineColor={0,0,0},
