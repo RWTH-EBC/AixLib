@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea;
+﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 function s_to_alpha
   "Conversion from the hinged opening width to hinged opening angle"
   extends Modelica.Icons.Function;

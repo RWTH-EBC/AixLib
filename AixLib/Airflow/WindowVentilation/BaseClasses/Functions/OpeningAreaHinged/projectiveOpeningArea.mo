@@ -1,11 +1,11 @@
-within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 function projectiveOpeningArea
   "Calculation of the projective opening area"
   extends
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea.partialOpeningArea;
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.partialOpeningArea;
 protected
   Modelica.Units.SI.Angle alpha=
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea.s_to_alpha(
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
     a, b, s) "Hinged opening angle";
   Modelica.Units.SI.Area A1 "Projective opening of oppsite side";
   Modelica.Units.SI.Area A2 "Projectvie opening of profile side";

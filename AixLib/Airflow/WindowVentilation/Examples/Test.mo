@@ -36,9 +36,9 @@ model Test
     winClrW=winClrW,
     winClrH=winClrH,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward,
-
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective)
     annotation (Placement(transformation(extent={{40,80},{80,120}})));
+
   Modelica.Blocks.Sources.SawTooth sawTooth(amplitude=0.5, period=10)
     annotation (Placement(transformation(extent={{-80,100},{-60,120}})));
 equation

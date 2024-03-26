@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea;
+﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 function effectiveOpeningArea
   "Calculation of the effective opening area"
   extends Modelica.Icons.Function;

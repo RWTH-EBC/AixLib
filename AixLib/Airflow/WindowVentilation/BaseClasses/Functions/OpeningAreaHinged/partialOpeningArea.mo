@@ -1,4 +1,4 @@
-within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 partial function partialOpeningArea
   "Calculation of hinged-opening area by rectangular windows"
   extends Modelica.Icons.Function;

@@ -10,6 +10,6 @@ model alpha_to_s
   parameter Modelica.Units.SI.Length b(min=0)
     "Distance from the hinged axis to the frame across the opening area";
 equation
-  y = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.HingedOpeningArea.alpha_to_s(
+  y = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.alpha_to_s(
     a, b, u);
 end alpha_to_s;
