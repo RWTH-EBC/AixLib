@@ -1,23 +1,21 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
-model Maas "Empirical expression developed by Maas (1995)"
-  extends
-    AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
+model Jiang "Empirical expression developed by Jiang et al. (2022)"
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlow(
       final useOpnAreaInput=true,
       final useSpecOpnAreaTyp=true,
       final opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective);
-  Modelica.Blocks.Interfaces.RealInput u_13(unit="m/s", min=0)
-    "Local wind speed at a height of 13 m"
-    annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+  Modelica.Blocks.Interfaces.RealInput dp(unit="Pa")
+    "Pressure difference between the outside and inside of the facade "
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 protected
-  Real C_1 = 0.0056 "Coefficient 1";
-  Real C_2 = 0.0037 "Coefficient 2";
-  Real C_3 = 0.012 "Coefficient 3";
+  Real C_1 = 0.15 "Coefficient 1";
+  Real C_2 = 0.33 "Coefficient 2";
   Real interimRes1 "Interim result";
 equation
-  interimRes1 = C_1*(u_13^2) + C_2*winClrH*deltaT + C_3;
+  interimRes1 = C_1*dp + C_2;
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
   V_flow = if noEvent(interimRes1 > Modelica.Constants.eps)
     then 1/2*A_eff*sqrt(interimRes1) else 0;
-end Maas;
+end Jiang;
