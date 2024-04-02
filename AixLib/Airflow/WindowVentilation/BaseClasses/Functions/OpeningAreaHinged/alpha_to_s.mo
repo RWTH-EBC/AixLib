@@ -11,4 +11,12 @@ function alpha_to_s
   output Modelica.Units.SI.Length s(min=0) "Opening width of window sash";
 algorithm
   s := 2*b*sin(alpha/2);
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end alpha_to_s;

@@ -14,4 +14,12 @@ algorithm
     "The opening angle should be less or equal than 90°",
     AssertionLevel.error);
   alpha := 2*asin(s/(2*b));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end s_to_alpha;

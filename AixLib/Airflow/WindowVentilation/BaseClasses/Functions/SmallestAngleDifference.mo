@@ -31,4 +31,12 @@ algorithm
     /*Exceptions*/
     beta := 0;
   end if;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end SmallestAngleDifference;

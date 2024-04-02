@@ -13,4 +13,12 @@ algorithm
   A1 := s*a;
   A2 := 0.5*s*b*cos(alpha/2);
   A := A1 + 2*A2;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end geometricOpeningArea;

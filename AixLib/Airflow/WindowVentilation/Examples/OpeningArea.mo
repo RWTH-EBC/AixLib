@@ -189,57 +189,57 @@ model OpeningArea "Calculation of different opening areas"
     "Pivot, horizontal, geometric opening"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
 equation
-  connect(opnWidth.y, openingAreaSash_side_hung_in_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_side_hung_in_geo.u) annotation (Line(
         points={{-119,10},{-90,10},{-90,70},{-82,70}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_side_hung_in_proj.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_side_hung_in_proj.u) annotation (Line(
         points={{-119,10},{-90,10},{-90,30},{-82,30}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_side_hung_in_eq.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_side_hung_in_eq.u) annotation (Line(
         points={{-119,10},{-90,10},{-90,-10},{-82,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_side_hung_in_eff.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_side_hung_in_eff.u) annotation (Line(
         points={{-119,10},{-90,10},{-90,-50},{-82,-50}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_side_hung_out_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_side_hung_out_geo.u) annotation (Line(
         points={{-119,10},{-50,10},{-50,70},{-42,70}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_bottom_hung_in_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_bottom_hung_in_geo.u) annotation (Line(
         points={{-119,10},{-10,10},{-10,70},{-2,70}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_bottom_hung_in_proj.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_bottom_hung_in_proj.u) annotation (Line(
         points={{-119,10},{-10,10},{-10,30},{-2,30}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_bottom_hung_in_eq.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_bottom_hung_in_eq.u) annotation (Line(
         points={{-119,10},{-10,10},{-10,-10},{-2,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_bottom_hung_in_eff.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_bottom_hung_in_eff.u) annotation (Line(
         points={{-119,10},{-10,10},{-10,-50},{-2,-50}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_top_hung_out_proj.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_top_hung_out_proj.u) annotation (Line(
         points={{-119,10},{-50,10},{-50,30},{-42,30}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_vertical_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_vertical_geo.u) annotation (Line(
         points={{-119,10},{30,10},{30,70},{38,70}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_vertical_proj.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_vertical_proj.u) annotation (Line(
         points={{-119,10},{30,10},{30,30},{38,30}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_vertical_eq.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_vertical_eq.u) annotation (Line(
         points={{-119,10},{30,10},{30,-10},{38,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_vertical_eff.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_vertical_eff.u) annotation (Line(
         points={{-119,10},{30,10},{30,-50},{38,-50}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_horizontal_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_horizontal_geo.u) annotation (Line(
         points={{-119,10},{70,10},{70,70},{78,70}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_horizontal_proj.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_horizontal_proj.u) annotation (Line(
         points={{-119,10},{70,10},{70,30},{78,30}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_horizontal_eq.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_horizontal_eq.u) annotation (Line(
         points={{-119,10},{70,10},{70,-10},{78,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_pivot_horizontal_eff.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_pivot_horizontal_eff.u) annotation (Line(
         points={{-119,10},{70,10},{70,-50},{78,-50}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_sliding_vertical_geo.s) annotation (Line(
+  connect(opnWidth.y, openingAreaSash_sliding_vertical_geo.u) annotation (Line(
         points={{-119,10},{-50,10},{-50,-10},{-42,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_sliding_horizontal_geo.s) annotation (
+  connect(opnWidth.y, openingAreaSash_sliding_horizontal_geo.u) annotation (
       Line(points={{-119,10},{-50,10},{-50,-50},{-42,-50}}, color={0,0,127}));
   connect(opnAngle.y, from_deg.u) annotation (Line(points={{-119,-70},{-88,-70},
           {-88,-90},{-82,-90}}, color={0,0,127}));
-  connect(from_deg.y, openingAreaSashAngle_side_hung_in_geo.alpha)
+  connect(from_deg.y, openingAreaSashAngle_side_hung_in_geo.u)
     annotation (Line(points={{-59,-90},{-42,-90}}, color={0,0,127}));
-  connect(from_deg.y, openingAreaSashAngle_bottom_hung_in_geo.alpha)
+  connect(from_deg.y, openingAreaSashAngle_bottom_hung_in_geo.u)
     annotation (Line(points={{-59,-90},{-50,-90},{-50,-70},{-8,-70},{-8,-90},{-2,
           -90}}, color={0,0,127}));
-  connect(from_deg.y, openingAreaSashAngle_pivot_vertical_geo.alpha)
+  connect(from_deg.y, openingAreaSashAngle_pivot_vertical_geo.u)
     annotation (Line(points={{-59,-90},{-50,-90},{-50,-70},{30,-70},{30,-90},{38,
           -90}}, color={0,0,127}));
-  connect(from_deg.y, openingAreaSashAngle_pivot_horizontal_geo.alpha)
+  connect(from_deg.y, openingAreaSashAngle_pivot_horizontal_geo.u)
     annotation (Line(points={{-59,-90},{-50,-90},{-50,-70},{70,-70},{70,-90},{78,
           -90}}, color={0,0,127}));
   annotation (experiment(
@@ -355,5 +355,13 @@ horizontal"),
           extent={{-120,-80},{-100,-100}},
           textColor={0,0,0},
           fontSize=16,
-          textString="geo.")}));
+          textString="geo.")}),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end OpeningArea;

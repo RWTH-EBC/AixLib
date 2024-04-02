@@ -2,9 +2,10 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Maas "Empirical expression developed by Maas (1995)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      final useOpnAreaInput=true,
-      final useSpecOpnAreaTyp=true,
-      final opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective);
+      redeclare final model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashWidth (
+          opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
+          opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective));
   Modelica.Blocks.Interfaces.RealInput u_13(unit="m/s", min=0)
     "Local wind speed at a height of 13 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -19,5 +20,13 @@ equation
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
   V_flow = if noEvent(interimRes1 > Modelica.Constants.eps)
-    then 1/2*A_eff*sqrt(interimRes1) else 0;
+    then 1/2*openingArea.A*sqrt(interimRes1) else 0;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end Maas;

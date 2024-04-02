@@ -13,4 +13,12 @@ algorithm
   A1 := a*b*(1 - cos(alpha));
   A2 := 0.5*b*sin(alpha)*b*cos(alpha);
   A := A1 + 2*A2;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end projectiveOpeningArea;

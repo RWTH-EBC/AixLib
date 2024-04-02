@@ -14,4 +14,12 @@ protected
   Modelica.Units.NonSI.Angle_deg beta_deg "Incidence angle in degree";
 equation
   beta_deg = Modelica.Units.Conversions.to_deg(beta);
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end PartialEmpiricalFlowStackWindIncidence;

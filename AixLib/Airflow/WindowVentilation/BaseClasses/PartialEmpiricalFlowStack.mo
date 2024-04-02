@@ -9,4 +9,12 @@ partial model PartialEmpiricalFlowStack
 protected
   Modelica.Units.SI.TemperatureDifference deltaT = T_i - T_a;
   Modelica.Units.SI.Temperature avgT = (T_i + T_a)/2;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end PartialEmpiricalFlowStack;

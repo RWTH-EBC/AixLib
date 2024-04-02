@@ -9,4 +9,12 @@ function effectiveOpeningArea
   output Modelica.Units.SI.Area A(min=0) "Effective opening area";
 algorithm
   A := A_eq/A_eq90*A_clr;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end effectiveOpeningArea;

@@ -1,13 +1,13 @@
 ﻿within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialOpeningAreaSash
-  "Partial model for window opening area calculation with different types of sash"
+  "Window opening area, specified for different types of sash opening"
   extends PartialOpeningArea;
   parameter AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes
     opnTyp = AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward
     "Window opening type";
   parameter AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes
     opnAreaTyp = AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric
-    "Window opening area types for calculation";
+    "Window opening area types by calculation";
 
   /*Characterize lengths*/
   Modelica.Units.SI.Length lenA(min=0)
@@ -16,6 +16,7 @@ partial model PartialOpeningAreaSash
   Modelica.Units.SI.Length lenB(min=0)
     "Length B to characterize the hung and pivot window opening:
     distance from the hinged axis to the frame across the opening area";
+
   /*Variables to describe the opening*/
   Modelica.Units.SI.Length opnWidth(min=0) "Window sash opening width";
   Modelica.Units.SI.Angle opnAngle(
@@ -25,11 +26,13 @@ partial model PartialOpeningAreaSash
   Modelica.Units.SI.Area projOpnArea(min=0) "Projective opening area";
   Modelica.Units.SI.Area eqOpnArea(min=0) "Equivalent opening area";
   Modelica.Units.SI.Area effOpnArea(min=0) "Effective opening area";
-
 protected
-  Modelica.Units.SI.Length s90(min=0) "Sash opening width by 90° opening / full sliding opening";
-  Modelica.Units.SI.Area geoOpnArea90(min=0) "Geometric opening area by 90° opening";
-  Modelica.Units.SI.Area eqOpnArea90(min=0) "Equivalent opening area by 90° opening";
+  Modelica.Units.SI.Length s90(min=0)
+    "Sash opening width by 90° opening / full sliding opening";
+  Modelica.Units.SI.Area geoOpnArea90(min=0)
+    "Geometric opening area by 90° opening";
+  Modelica.Units.SI.Area eqOpnArea90(min=0)
+    "Equivalent opening area by 90° opening";
 equation
   /*Hinged opening*/
   if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
@@ -69,11 +72,11 @@ equation
       lenA, lenB, s90)*2;
     /*Define characteristic lengths*/
     if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical then
-      /*Vertical*/
+      /*Vertical pivot axis*/
       lenA = winClrH;
       lenB = winClrW/2;
     else
-      /*Horizontal*/
+      /*Horizontal pivot axis*/
       lenA = winClrW;
       lenB = winClrH/2;
     end if;
@@ -210,5 +213,13 @@ equation
           extent={{-100,-100},{100,-60}},
           textColor={0,0,0},
           textString="%opnAreaTyp")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false)));
+          Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end PartialOpeningAreaSash;

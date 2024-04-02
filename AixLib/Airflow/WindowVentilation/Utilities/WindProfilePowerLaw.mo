@@ -75,5 +75,12 @@ equation
 </tr>
 </table>
 <p><br>Ref: <a href=\"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a></p>
+</html>", revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end WindProfilePowerLaw;

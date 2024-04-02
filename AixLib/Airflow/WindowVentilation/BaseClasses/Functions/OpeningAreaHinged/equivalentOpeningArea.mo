@@ -11,4 +11,12 @@ algorithm
   else
     A := (A_clr^(-2) + A_geo^(-2))^(-0.5);
   end if;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end equivalentOpeningArea;
