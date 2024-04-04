@@ -32,6 +32,12 @@ model VentilationFlowRateSimpleOpening
     redeclare model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
     annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
+  EmpiricalExpressions.DIN4108 dIN4108(
+    winClrW=winClrW,
+    winClrH=winClrH,
+    redeclare model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
+    annotation (Placement(transformation(extent={{80,-80},{100,-60}})));
 equation
   connect(from_degC_i.y, warrenParkins.T_i) annotation (Line(points={{-39,90},{
           -30,90},{-30,98},{78,98}}, color={0,0,127}));
@@ -59,10 +65,8 @@ equation
           {-20,34},{78,34}}, color={0,0,127}));
   connect(windSpeed_ctt.y[1], windProfilePowerLaw.u_r) annotation (Line(points=
           {{-79,30},{-10,30},{-10,25},{49,25}}, color={0,0,127}));
-  connect(windProfilePowerLaw.u, caciolo.u) annotation (Line(points={{60.5,25},
-          {70,25},{70,28},{78,28}}, color={0,0,127}));
   connect(windDirection_sine.y, caciolo.phi) annotation (Line(points={{-79,0},{
-          0,0},{0,20},{70,20},{70,24},{78,24}}, color={0,0,127}));
+          0,0},{0,20},{74,20},{74,24},{78,24}}, color={0,0,127}));
   connect(from_degC_i.y, tang.T_i) annotation (Line(points={{-39,90},{-30,90},{
           -30,18},{78,18}}, color={0,0,127}));
   connect(from_degC_a.y, tang.T_a) annotation (Line(points={{-39,60},{-20,60},{
@@ -79,4 +83,12 @@ equation
           60},{-20,-46},{78,-46}}, color={0,0,127}));
   connect(windSpeed_ctt.y[1], dIN16798.u_10) annotation (Line(points={{-79,30},
           {-10,30},{-10,-52},{78,-52}}, color={0,0,127}));
+  connect(windProfilePowerLaw.u, caciolo.u) annotation (Line(points={{60.5,25},
+          {70,25},{70,28},{78,28}}, color={0,0,127}));
+  connect(from_degC_i.y, dIN4108.T_i) annotation (Line(points={{-39,90},{-30,90},
+          {-30,-62},{78,-62}}, color={0,0,127}));
+  connect(from_degC_a.y, dIN4108.T_a) annotation (Line(points={{-39,60},{-20,60},
+          {-20,-66},{78,-66}}, color={0,0,127}));
+  connect(windProfilePowerLaw.u, dIN4108.u) annotation (Line(points={{60.5,25},
+          {70,25},{70,-72},{78,-72}}, color={0,0,127}));
 end VentilationFlowRateSimpleOpening;

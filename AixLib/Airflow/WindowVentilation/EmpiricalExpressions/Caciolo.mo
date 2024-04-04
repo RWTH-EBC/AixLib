@@ -27,7 +27,8 @@ equation
     assert(u >= u_lim,
       "The wind speed in the windward condition is less than the limitation, the V_flow_w will be set to 0",
       AssertionLevel.warning);
-    V_flow_w = if noEvent(u >= u_lim) then 0.0357*openingArea.A*(u - u_lim) else 0;
+    V_flow_w = if noEvent(u >= u_lim) then 0.0357*openingArea.A*(u - u_lim)
+      else 0;
   else
     /*Leeward*/
     C_T = 1.355 - 0.179*u;

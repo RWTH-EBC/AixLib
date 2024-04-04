@@ -9,7 +9,7 @@ partial model PartialOpeningArea
     "Height of the window clear opening";
   Modelica.Units.SI.Area clrOpnArea = winClrW*winClrH
     "Window clear opening area";
-  replaceable Modelica.Blocks.Interfaces.RealInput u if useInputPort
+  replaceable Modelica.Blocks.Interfaces.RealInput u_win if useInputPort
     constrainedby Modelica.Blocks.Interfaces.RealInput
     "Conditional input port for window sash opening width or opening angle"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));

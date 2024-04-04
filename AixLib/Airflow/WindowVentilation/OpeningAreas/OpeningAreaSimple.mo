@@ -2,7 +2,7 @@ within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSimple "Common simple opening (no sash)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
     final useInputPort=false,
-    final u);
+    final u_win);
 equation
   A = clrOpnArea;
   annotation (Icon(graphics={

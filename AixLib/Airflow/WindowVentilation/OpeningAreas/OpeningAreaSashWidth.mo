@@ -1,12 +1,13 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashWidth
   "Common sash opening, input port opening width"
-  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSashCommon(
-    final useInputPort=true,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u(
-    quantity="Length", unit="m", min=0) "Window sash opening width");
+  extends
+    AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSashCommon(
+      final useInputPort=true,
+      redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
+        quantity="Length", unit="m", min=0));
 equation
-  opnWidth = u;
+  opnWidth = u_win;
   /*Calculate the opening angle*/
   /*Hinged or pivot opening*/
   if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or

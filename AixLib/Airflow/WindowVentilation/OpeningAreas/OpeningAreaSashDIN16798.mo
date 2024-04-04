@@ -2,18 +2,18 @@ within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashDIN16798
   "Specified DIN CEN/TR 16798-8: Bottom- or Top-hung  opening, input port opening width"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
-    final useInputPort = true,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u(
-    quantity="Length", unit="m", min=0) "Window sash opening width");
+    final useInputPort=true,
+    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
+      quantity="Length", unit="m", min=0));
 protected
   Real C_w "Coefficient depending on the kind of window";
 equation
   assert(
-    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward or
-    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward,
-    "The model is only valid for top or bottom-hung opening.",
+    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
+    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
+    "The model is only valid for top- or bottom-hung opening.",
     AssertionLevel.error);
-  opnWidth = u;
+  opnWidth = u_win;
   opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
       winClrW, winClrH, opnWidth);
   assert((winClrH/winClrW >= 1) and (winClrH/winClrW <= 2),

@@ -2,10 +2,10 @@
 model OpeningAreaSashVDI2078
   "Specified VDI 2078: Bottom-hung inwards opening, input port opening width"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
-    final useInputPort = true,
+    final useInputPort=true,
     final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u(
-    quantity="Length", unit="m", min=0) "Window sash opening width");
+    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
+      quantity="Length", unit="m", min=0));
   parameter Modelica.Units.SI.Height winRevFraH = 0.1
     "Distance between the windows reveal and frame";
   parameter Modelica.Units.SI.Length winSashD(min=0) = 0 "Window sash depth";
@@ -15,7 +15,7 @@ protected
     "Height of the overlap between window frame and casement";
   Real C_Rev "Correction factor of the window reveal";
 equation
-  opnWidth = u;
+  opnWidth = u_win;
   opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
       winClrW, winClrH, opnWidth);
   assert(opnAngle <= Modelica.Units.Conversions.from_deg(15),

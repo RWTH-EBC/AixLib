@@ -3,7 +3,7 @@ model OpeningAreaSimpleVDI2078
   "Specified VDI 2078: Simple opening (no sash)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
     final useInputPort=false,
-    final u);
+    final u_win);
   Modelica.Units.SI.Height H_eff(min=0)
     "Effective height for the thermal updraft";
 equation

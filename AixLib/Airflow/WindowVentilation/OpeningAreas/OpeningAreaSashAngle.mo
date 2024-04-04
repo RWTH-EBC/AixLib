@@ -1,11 +1,11 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashAngle
   "Common sash opening, input port opening angle"
-  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSashCommon(
-    final useInputPort=true,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u(
-    quantity="Angle", unit="rad", min=0, max=Modelica.Constants.pi/2)
-    "Window sash opening angle");
+  extends
+    AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSashCommon(
+      final useInputPort=true,
+      redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
+        quantity="Angle", unit="rad", min=0, max=Modelica.Constants.pi/2));
 equation
   assert(
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
@@ -25,7 +25,7 @@ equation
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal then
-    opnAngle = u;
+    opnAngle = u_win;
     opnWidth = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.alpha_to_s(
       lenA, lenB, opnAngle);
 

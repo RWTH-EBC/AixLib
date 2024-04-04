@@ -4,14 +4,14 @@ model OpeningAreaSashHall
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
     final useInputPort=true,
     final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u(
-    quantity="Length", unit="m", min=0) "Window sash opening width");
+    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
+      quantity="Length", unit="m", min=0));
   parameter Modelica.Units.SI.Length winSashD(min=0) = 0 "Window sash depth";
   parameter Modelica.Units.SI.Length winGapW(min=0) = 0.01
     "Gap width in the overlap area between the frame and the sash";
   Real C_NPL "Correction factor of the neutral pressure level";
 equation
-  opnWidth = u;
+  opnWidth = u_win;
   opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
     winClrW, winClrH, opnWidth);
   assert(winClrH >= winClrW,
