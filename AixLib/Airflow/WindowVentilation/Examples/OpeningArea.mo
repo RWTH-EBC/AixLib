@@ -3,7 +3,6 @@ model OpeningArea "Calculation of different opening areas"
   extends Modelica.Icons.Example;
   parameter Modelica.Units.SI.Length winClrW = 1.0;
   parameter Modelica.Units.SI.Height winClrH = 1.5;
-
   Modelica.Blocks.Sources.Ramp opnWidth(
     height=0.5,
     duration=50,
@@ -19,7 +18,6 @@ model OpeningArea "Calculation of different opening areas"
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric)
     "Side-hung, inward, geometric opening"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-
   OpeningAreas.OpeningAreaSashWidth openingAreaSash_side_hung_in_proj(
     winClrW=winClrW,
     winClrH=winClrH,

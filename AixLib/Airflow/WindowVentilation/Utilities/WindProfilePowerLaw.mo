@@ -1,8 +1,9 @@
 within AixLib.Airflow.WindowVentilation.Utilities;
 model WindProfilePowerLaw
   "Wind profile power law relationship of Hellmann"
-  parameter Modelica.Units.SI.Height hei "Height of the wind speed to calculate";
-  parameter Modelica.Units.SI.Height heiRef
+  parameter Modelica.Units.SI.Height hei(min=0)
+    "Height of the wind speed to calculate";
+  parameter Modelica.Units.SI.Height heiRef(min=0)=10
     "Reference height of the known wind speed";
   parameter Modelica.Units.SI.Length lenRough(min=0)=0.6 "Roughness length";
   Real alpha "Hellmann exponent";

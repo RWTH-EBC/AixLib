@@ -6,8 +6,9 @@ model LarsenHeiselberg
       redeclare replaceable model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
   parameter Modelica.Units.SI.Velocity windSpeLim(min=0.25)=1
-    "Due to the wind speed in the denominator, this expression is not applicable to low wind speeds,
-    output with 0 if the wind speed is less than this limit";
+    "Limitation of wind speed";
+  //Due to the wind speed in the denominator, this expression is not applicable
+  //to low wind speeds, output with 0 if the wind speed is less than this limit.
   Modelica.Blocks.Interfaces.RealInput u_10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -40,7 +41,7 @@ equation
     C_3 = 0.0111;
   end if;
   assert(u_10 >= windSpeLim,
-    "The wind speed is less than the limited wind speed, the term of wind correlation will be set to 0",
+    "The wind speed is less than the limited value, the term of wind correlation will be set to 0",
     AssertionLevel.warning);
   interimRes1 = if noEvent(u_10 >= windSpeLim)
     then C_1*(C_beta_p^2)*(u_10^2) + C_2*deltaT*winClrH + C_3*deltaC_p*deltaT/(u_10^2)

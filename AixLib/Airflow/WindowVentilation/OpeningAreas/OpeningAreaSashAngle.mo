@@ -1,7 +1,7 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashAngle
-  "Window opening with different types of sash, input port with opening angle"
-  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
+  "Common sash opening, input port opening angle"
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSashCommon(
     final useInputPort=true,
     redeclare final Modelica.Blocks.Interfaces.RealInput u(
     quantity="Angle", unit="rad", min=0, max=Modelica.Constants.pi/2)

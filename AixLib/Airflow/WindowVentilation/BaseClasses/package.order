@@ -4,5 +4,7 @@ PartialEmpiricalFlowStackWindIncidence
 PartialExampleVentilationFlowRate
 PartialOpeningArea
 PartialOpeningAreaSash
+PartialOpeningAreaSashCommon
 Functions
+Records
 Types

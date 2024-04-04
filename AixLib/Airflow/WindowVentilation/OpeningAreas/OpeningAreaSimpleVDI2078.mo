@@ -1,10 +1,14 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
-model OpeningAreaSimple "Common simple opening (no sash)"
+model OpeningAreaSimpleVDI2078
+  "Specified VDI 2078: Simple opening (no sash)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
     final useInputPort=false,
     final u);
+  Modelica.Units.SI.Height H_eff(min=0)
+    "Effective height for the thermal updraft";
 equation
-  A = clrOpnArea;
+  H_eff = 2/3*winClrH;
+  A = 1/3*clrOpnArea;
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,90},{70,-50}},
@@ -14,12 +18,12 @@ equation
         Text(
           extent={{-100,-100},{100,-60}},
           textColor={0,0,0},
-          textString="Simple")}), Documentation(revisions="<html>
+          textString="VDI 2078")}), Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
     Implemented.
   </li>
 </ul>
 </html>"));
-end OpeningAreaSimple;
+end OpeningAreaSimpleVDI2078;

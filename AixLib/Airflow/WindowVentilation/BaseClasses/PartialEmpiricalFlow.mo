@@ -13,8 +13,7 @@ partial model PartialEmpiricalFlow
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea
     constrainedby
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
-      final winClrW=winClrW,
-      final winClrH=winClrH)
+      final winClrW=winClrW, final winClrH=winClrH)
     annotation (choicesAllMatching=true);
   OpeningArea openingArea
     annotation (Placement(transformation(extent={{20,60},{40,80}})));

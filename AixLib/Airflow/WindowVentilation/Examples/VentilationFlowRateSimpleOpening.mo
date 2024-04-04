@@ -4,7 +4,6 @@ model VentilationFlowRateSimpleOpening
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate;
   extends Modelica.Icons.UnderConstruction;
-
   EmpiricalExpressions.WarrenParkins warrenParkins(winClrW=winClrW, winClrH=
         winClrH)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
@@ -15,8 +14,24 @@ model VentilationFlowRateSimpleOpening
     annotation (Placement(transformation(extent={{80,40},{100,60}})));
   EmpiricalExpressions.Caciolo caciolo(winClrW=winClrW, winClrH=winClrH)
     annotation (Placement(transformation(extent={{80,20},{100,40}})));
-  Utilities.WindProfilePowerLaw windProfilePowerLaw(hei=10, heiRef=5)
+  Utilities.WindProfilePowerLaw windProfilePowerLaw(hei=5)
     annotation (Placement(transformation(extent={{50,20},{60,30}})));
+  EmpiricalExpressions.Tang tang(winClrW=winClrW, winClrH=winClrH)
+    annotation (Placement(transformation(extent={{80,0},{100,20}})));
+  EmpiricalExpressions.VDI2078 vDI2078(
+    winClrW=winClrW,
+    winClrH=winClrH,
+    redeclare model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078)
+    annotation (Placement(transformation(extent={{80,-20},{100,0}})));
+  Modelica.Blocks.Sources.Constant const(k=1)
+    annotation (Placement(transformation(extent={{70,-30},{80,-20}})));
+  EmpiricalExpressions.DIN16798 dIN16798(
+    winClrW=winClrW,
+    winClrH=winClrH,
+    redeclare model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
+    annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
 equation
   connect(from_degC_i.y, warrenParkins.T_i) annotation (Line(points={{-39,90},{
           -30,90},{-30,98},{78,98}}, color={0,0,127}));
@@ -48,4 +63,20 @@ equation
           {70,25},{70,28},{78,28}}, color={0,0,127}));
   connect(windDirection_sine.y, caciolo.phi) annotation (Line(points={{-79,0},{
           0,0},{0,20},{70,20},{70,24},{78,24}}, color={0,0,127}));
+  connect(from_degC_i.y, tang.T_i) annotation (Line(points={{-39,90},{-30,90},{
+          -30,18},{78,18}}, color={0,0,127}));
+  connect(from_degC_a.y, tang.T_a) annotation (Line(points={{-39,60},{-20,60},{
+          -20,14},{78,14}}, color={0,0,127}));
+  connect(from_degC_i.y, vDI2078.T_i) annotation (Line(points={{-39,90},{-30,90},
+          {-30,-2},{78,-2}}, color={0,0,127}));
+  connect(from_degC_a.y, vDI2078.T_a) annotation (Line(points={{-39,60},{-20,60},
+          {-20,-6},{78,-6}}, color={0,0,127}));
+  connect(const.y, vDI2078.C_ss)
+    annotation (Line(points={{80.5,-25},{90,-25},{90,-22}}, color={0,0,127}));
+  connect(from_degC_i.y, dIN16798.T_i) annotation (Line(points={{-39,90},{-30,
+          90},{-30,-42},{78,-42}}, color={0,0,127}));
+  connect(from_degC_a.y, dIN16798.T_a) annotation (Line(points={{-39,60},{-20,
+          60},{-20,-46},{78,-46}}, color={0,0,127}));
+  connect(windSpeed_ctt.y[1], dIN16798.u_10) annotation (Line(points={{-79,30},
+          {-10,30},{-10,-52},{78,-52}}, color={0,0,127}));
 end VentilationFlowRateSimpleOpening;

@@ -14,7 +14,7 @@ protected
   Real C_3 = 0.01 "Coefficient 3";
   Real interimRes1 "Interim result";
 equation
-  interimRes1 = C_1*(u_10^2) + C_2*winClrH*deltaT + C_3;
+  interimRes1 = C_1*(u_10^2) + C_2*winClrH*abs(deltaT) + C_3;
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
@@ -23,7 +23,7 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
+    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
     Implemented.
   </li>
 </ul>
