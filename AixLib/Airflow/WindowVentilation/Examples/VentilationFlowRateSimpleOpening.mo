@@ -38,6 +38,8 @@ model VentilationFlowRateSimpleOpening
     redeclare model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
     annotation (Placement(transformation(extent={{80,-80},{100,-60}})));
+  EmpiricalExpressions.ASHRAE aSHRAE(winClrW=winClrW, winClrH=winClrH)
+    annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
 equation
   connect(from_degC_i.y, warrenParkins.T_i) annotation (Line(points={{-39,90},{
           -30,90},{-30,98},{78,98}}, color={0,0,127}));
@@ -91,4 +93,12 @@ equation
           {-20,-66},{78,-66}}, color={0,0,127}));
   connect(windProfilePowerLaw.u, dIN4108.u) annotation (Line(points={{60.5,25},
           {70,25},{70,-72},{78,-72}}, color={0,0,127}));
+  connect(from_degC_i.y, aSHRAE.T_i) annotation (Line(points={{-39,90},{-30,90},
+          {-30,-82},{78,-82}}, color={0,0,127}));
+  connect(from_degC_a.y, aSHRAE.T_a) annotation (Line(points={{-39,60},{-20,60},
+          {-20,-86},{78,-86}}, color={0,0,127}));
+  connect(windProfilePowerLaw.u, aSHRAE.u) annotation (Line(points={{60.5,25},{
+          70,25},{70,-92},{78,-92}}, color={0,0,127}));
+  connect(windDirection_sine.y, aSHRAE.phi) annotation (Line(points={{-79,0},{0,
+          0},{0,-96},{78,-96}}, color={0,0,127}));
 end VentilationFlowRateSimpleOpening;

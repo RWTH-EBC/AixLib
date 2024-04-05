@@ -21,5 +21,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area by a simple opening without window sash.</p>
 </html>"));
 end OpeningAreaSimple;

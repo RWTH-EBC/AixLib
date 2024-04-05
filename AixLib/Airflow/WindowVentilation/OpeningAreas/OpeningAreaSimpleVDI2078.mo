@@ -25,5 +25,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area by a simple opening without window sash according to VDI 2078:2015-06.</p>
 </html>"));
 end OpeningAreaSimpleVDI2078;

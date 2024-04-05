@@ -31,5 +31,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area according to the empirical expression developed by Hall.</p>
+<p>Only bottom-hung openings can be applied.</p>
+<p>Input port of this model is the opening width.</p>
 </html>"));
 end OpeningAreaSashHall;

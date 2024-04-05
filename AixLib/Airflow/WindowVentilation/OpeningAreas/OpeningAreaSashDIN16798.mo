@@ -34,5 +34,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8):2018-03.</p>
+<p>Only top- or bottom-hung openings can be applied.</p>
+<p>Input port of this model is the opening width.</p>
 </html>"));
 end OpeningAreaSashDIN16798;

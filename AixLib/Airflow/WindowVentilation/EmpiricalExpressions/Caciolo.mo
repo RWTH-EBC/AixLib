@@ -48,5 +48,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Caciolo et al..</p>
+<h4>References</h4>
+<p>Caciolo, M., Cui, S., Stabat, P., &amp; Marchio, D. (2013). Development of a new correlation for single-sided natural ventilation adapted to leeward conditions. Energy and Buildings, 60, 372&ndash;382.</p>
 </html>"));
 end Caciolo;

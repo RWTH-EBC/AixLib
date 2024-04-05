@@ -61,5 +61,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area according to DIN/TS 4108-8:2022-09.</p>
+<p>All common <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Types/WindowOpeningTypes.mo\">window opening types</a> can be applied.</p>
+<p>Input port of this model is the opening width.</p>
 </html>"));
 end OpeningAreaSashDIN4108;

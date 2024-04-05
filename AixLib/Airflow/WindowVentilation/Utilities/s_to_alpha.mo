@@ -22,5 +22,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>Convert from window opening width to opening angle.</p>
 </html>"));
 end s_to_alpha;

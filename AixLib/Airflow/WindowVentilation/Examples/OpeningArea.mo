@@ -225,8 +225,8 @@ equation
       Line(points={{-119,10},{70,10},{70,-50},{78,-50}}, color={0,0,127}));
   connect(opnWidth.y, openingAreaSash_sliding_vertical_geo.u_win) annotation (
       Line(points={{-119,10},{-50,10},{-50,-10},{-42,-10}}, color={0,0,127}));
-  connect(opnWidth.y, openingAreaSash_sliding_horizontal_geo.u_win) annotation
-    (Line(points={{-119,10},{-50,10},{-50,-50},{-42,-50}}, color={0,0,127}));
+  connect(opnWidth.y, openingAreaSash_sliding_horizontal_geo.u_win) annotation (
+     Line(points={{-119,10},{-50,10},{-50,-50},{-42,-50}}, color={0,0,127}));
   connect(opnAngle.y, from_deg.u) annotation (Line(points={{-119,-70},{-88,-70},
           {-88,-90},{-82,-90}}, color={0,0,127}));
   connect(from_deg.y, openingAreaSashAngle_side_hung_in_geo.u_win)

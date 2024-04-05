@@ -32,5 +32,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression according to VDI 2078:2015-06.</p>
+<h4>References</h4>
+<p>Verein Deutscher Ingenieure e.V. (2015.06). Berechnung der thermischen Lasten und Raumtemperaturen (Auslegung K&uuml;hllast und Jahressimulation) (VDI 2078). VDI Fachmedien GmbH &amp; Co. KG.</p>
 </html>"));
 end VDI2078;

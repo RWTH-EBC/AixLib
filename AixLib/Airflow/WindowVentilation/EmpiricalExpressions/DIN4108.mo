@@ -34,5 +34,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression according to DIN/TS 4108-8:2022-09.</p>
+<h4>References</h4>
+<p>DIN Deutsches Institut f&uuml;r Normung e. V. (2022.09). W&auml;rmeschutz und Energie-Einsparung in Geb&auml;uden &ndash; Teil 8: Vermeidung von Schimmelwachstum in Wohngeb&auml;uden: Vornorm (DIN/TS 4108-8). Beuth Verlag GmbH.</p>
 </html>"));
 end DIN4108;

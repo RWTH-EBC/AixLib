@@ -32,5 +32,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Tang et al..</p>
+<h4>References</h4>
+<p>Tang, Y., Li, X., Zhu, W., &amp; Cheng, P. L. (2016). Predicting single-sided airflow rates based on primary school experimental study. Building and Environment, 98, 71&ndash;79. </p>
 </html>"));
 end Tang;

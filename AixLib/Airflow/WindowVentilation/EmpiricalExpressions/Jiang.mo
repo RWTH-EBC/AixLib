@@ -26,5 +26,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Jiang et al..</p>
+<h4>References</h4>
+<p>Jiang, J., Yang, J., Rewitz, K., &amp; M&uuml;ller, D. (2022). Experimental Quantification of Air Volume Flow by Natural Ventilation through Window Opening. In American Society of Heating and Air-Conditioning Engineers (Chair), IAQ 2020: Indoor Environmental Quality Performance Approaches, Athens.</p>
 </html>"));
 end Jiang;

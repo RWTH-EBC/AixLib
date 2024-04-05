@@ -35,5 +35,8 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model determines the window opening area of several common <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Types/WindowOpeningTypes.mo\">window opening types</a>. For each opening type, four different <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Types/OpeningAreaTypes.mo\">opening area types</a> are defined.</p>
+<p>Input port of this model is the opening width.</p>
 </html>"));
 end OpeningAreaSashWidth;

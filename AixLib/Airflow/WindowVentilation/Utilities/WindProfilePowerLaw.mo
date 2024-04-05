@@ -23,6 +23,8 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
+<p>This model contains the wind profile power law relationship of Hellmann.</p>
+<p>The power law allows for the calculation of wind speeds at different heights based on the reference speed and height.</p>
 <h4>Roughness Classes and Lengths</h4>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"100%\"><tr>
 <td><h4>Roughness class</h4></td>
@@ -75,7 +77,8 @@ equation
 <td><p>Large cities with high buildings and skyscrapers</p></td>
 </tr>
 </table>
-<p><br>Ref: <a href=\"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a></p>
+<p><br><br><br><b>References</b></p>
+<p><br><br>See <a href=\"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a></p>
 </html>", revisions="<html>
 <ul>
   <li>

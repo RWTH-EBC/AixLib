@@ -28,5 +28,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Maas.</p>
+<h4>References</h4>
+<p>Maas, A. (1995). Experimentelle Quantifizierung des Luftwechsels bei Fensterl&uuml;ftung [Dissertation]. Universit&auml;t Gesamthochschule Kassel, Kassel. </p>
 </html>"));
 end Maas;

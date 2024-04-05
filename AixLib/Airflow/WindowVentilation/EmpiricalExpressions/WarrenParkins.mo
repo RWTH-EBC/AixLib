@@ -1,6 +1,6 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model WarrenParkins
-  "Empirical expression developed by Warren und Parkins (1984)"
+  "Empirical expression developed by Warren and Parkins (1984)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
       redeclare replaceable model OpeningArea =
@@ -29,5 +29,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Warren and Parkins.</p>
+<h4>References</h4>
+<p>Warren, P. R., &amp; Parkins, L. M. (1984). Single-sided ventilation through open windows. In Air infiltration and Ventilation Centre (Chair), Windows in building design and maintenance, Goteborg. </p>
 </html>"));
 end WarrenParkins;

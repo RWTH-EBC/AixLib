@@ -26,5 +26,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Hall.</p>
+<h4>References</h4>
+<p>Hall, M. (2004). Untersuchungen zum thermisch induzierten Luftwechselpotential von Kippfenstern [Dissertation]. Universit&auml;t Kassel, Kassel. </p>
 </html>"));
 end Hall;

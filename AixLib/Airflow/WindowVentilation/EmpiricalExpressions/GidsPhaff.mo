@@ -27,5 +27,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by de Gids and Phaff.</p>
+<h4>References</h4>
+<p>Gids, W. de, &amp; Phaff, H. (1982). Ventilation rates and energy consumption due to open windows: a brief overview of research in the Netherlands. Air Infiltration Review, 4(1), 4&ndash;5.</p>
 </html>"));
 end GidsPhaff;

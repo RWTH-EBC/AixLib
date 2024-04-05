@@ -60,5 +60,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression developed by Larsen and Heiselberg.</p>
+<h4>References</h4>
+<p>Larsen, T. S., &amp; Heiselberg, P. (2008). Single-sided natural ventilation driven by wind pressure and temperature difference. Energy and Buildings, 40(6), 1031&ndash;1040.</p>
 </html>"));
 end LarsenHeiselberg;

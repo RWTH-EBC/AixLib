@@ -37,5 +37,9 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This model contains the empirical expression according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8):2018-03.</p>
+<h4>References</h4>
+<p>DIN Deutsches Institut f&uuml;r Normung e. V. (2018.03). Energieeffizienz von Geb&auml;uden &ndash; L&uuml;ftung von Geb&auml;uden &ndash; Teil 8: Interpretation der Anforderungen der EN 16798-7 &ndash; Berechnungsmethoden zur Bestimmung der Luftvolumenstr&ouml;me in Geb&auml;uden einschlie&szlig;lich Infiltration (Modul M5-5): Englische Fassung CEN/TR 16798-8:2017 (DIN CEN/TR 16798-8). Beuth Verlag GmbH.</p>
 </html>"));
 end DIN16798;
