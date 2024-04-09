@@ -40,5 +40,7 @@ partial model PartialOpeningArea
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model provides a base class of window opening area.</p>
 </html>"));
 end PartialOpeningArea;

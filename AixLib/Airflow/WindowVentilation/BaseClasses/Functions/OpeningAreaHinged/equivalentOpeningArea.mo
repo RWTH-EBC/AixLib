@@ -18,5 +18,7 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function calculates the equivalent opening area.</p>
 </html>"));
 end equivalentOpeningArea;

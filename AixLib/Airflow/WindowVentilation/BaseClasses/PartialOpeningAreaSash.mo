@@ -99,5 +99,7 @@ partial model PartialOpeningAreaSash
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model provides a base class of window sash opening area.</p>
 </html>"));
 end PartialOpeningAreaSash;

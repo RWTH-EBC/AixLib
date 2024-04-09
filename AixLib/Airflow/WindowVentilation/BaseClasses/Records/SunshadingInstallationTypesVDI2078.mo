@@ -13,4 +13,6 @@ type SunshadingInstallationTypesVDI2078 = enumeration(
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This enum provides a selector for the record of sunshading coefficient.</p>
 </html>"));

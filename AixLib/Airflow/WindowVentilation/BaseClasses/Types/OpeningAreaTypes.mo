@@ -4,4 +4,7 @@ type OpeningAreaTypes = enumeration(
     Projective "Projective opening area",
     Equivalent "Equivalent opening area",
     Effective "Effective opening area")
-    "Enumeration to define window opening area types";
+    "Enumeration to define window opening area types" annotation (Documentation(
+      info="<html>
+<p>This enum defines window sash opening area types.</p>
+</html>"));

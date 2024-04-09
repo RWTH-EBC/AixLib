@@ -3,7 +3,6 @@ model VentilationFlowRateSimpleOpening
   "Use different empirical expressions to determine the window ventilation flow rate by simple opening"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate;
-  extends Modelica.Icons.UnderConstruction;
   EmpiricalExpressions.WarrenParkins warrenParkins(winClrW=winClrW, winClrH=
         winClrH)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
@@ -101,4 +100,15 @@ equation
           70,25},{70,-92},{78,-92}}, color={0,0,127}));
   connect(windDirection_sine.y, aSHRAE.phi) annotation (Line(points={{-79,0},{0,
           0},{0,-96},{78,-96}}, color={0,0,127}));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 9, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
+<p>The result shows that the estimated volume flow can be quite different when using different models.</p>
+</html>"));
 end VentilationFlowRateSimpleOpening;

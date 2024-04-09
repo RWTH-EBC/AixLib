@@ -20,5 +20,7 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function calculates the geometric opening area.</p>
 </html>"));
 end geometricOpeningArea;

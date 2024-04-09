@@ -1,9 +1,6 @@
 ﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions;
 function SmallestAngleDifference
-  "Find the smallest difference between two angles around a point,
-  the difference is calculated as input angle 'phi1' to the reference angle 'phi2',
-  positive value shows a clockwise direction from input to reference, i.e.
-  shows a counter-clockwise by measurement"
+  "Smallest difference between two angles around a point"
   input AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes
     typ=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes.Range180;
   input Modelica.Units.SI.Angle phi1 "Input angle";
@@ -38,5 +35,8 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function finds the smallest difference between two angles around a point.</p>
+<p>The difference is calculated as input angle &apos;phi1&apos; to the reference angle &apos;phi2&apos;, positive value shows a clockwise direction from input to reference, i.e. shows a counter-clockwise by measurement.</p>
 </html>"));
 end SmallestAngleDifference;

@@ -16,5 +16,7 @@ protected
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model provides a base class of models that estimate ventilation volume flow. The model has indoor and ambient temperature input ports to account for the thermal stack effect.</p>
 </html>"));
 end PartialEmpiricalFlowStack;

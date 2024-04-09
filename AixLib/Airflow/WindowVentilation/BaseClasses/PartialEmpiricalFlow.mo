@@ -42,5 +42,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model provides a base class of models that estimate ventilation volume flow.</p>
 </html>"));
 end PartialEmpiricalFlow;

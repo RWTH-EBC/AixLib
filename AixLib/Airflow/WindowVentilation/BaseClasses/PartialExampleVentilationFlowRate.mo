@@ -42,5 +42,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial example provides the boundary condition settings for examples of ventilation flow rate.</p>
 </html>"));
 end PartialExampleVentilationFlowRate;

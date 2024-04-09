@@ -16,5 +16,7 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function calculates the effective opening area.</p>
 </html>"));
 end effectiveOpeningArea;

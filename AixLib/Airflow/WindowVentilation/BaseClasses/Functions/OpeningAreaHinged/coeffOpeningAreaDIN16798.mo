@@ -20,5 +20,7 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function calculates the coefficient for hinged opening area according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8).</p>
 </html>"));
 end coeffOpeningAreaDIN16798;

@@ -15,5 +15,7 @@ partial function partialOpeningArea
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial function defines the inputs and output of the function for opening area calculation.</p>
 </html>"));
 end partialOpeningArea;

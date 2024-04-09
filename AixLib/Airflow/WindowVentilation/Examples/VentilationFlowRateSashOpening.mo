@@ -3,7 +3,6 @@ model VentilationFlowRateSashOpening
   "Use different empirical expressions to determine the window ventilation flow rate by sash opening"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate;
-  extends Modelica.Icons.UnderConstruction;
   EmpiricalExpressions.WarrenParkins warrenParkins(
     winClrW=winClrW,
     winClrH=winClrH,
@@ -123,4 +122,15 @@ equation
           0},{0,-56},{78,-56}}, color={0,0,127}));
   connect(sawTooth_winOpnW.y, aSHRAE.u_win) annotation (Line(points={{-79,-90},
           {20,-90},{20,-38},{90,-38}}, color={0,0,127}));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>April 9, 2024&#160;</i> by Jun Jiang:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example checks the models that simulate the window ventilation flow rate with the sash opening.</p>
+<p>The result shows that the estimated volume flow can be quite different when using different models.</p>
+</html>"));
 end VentilationFlowRateSashOpening;

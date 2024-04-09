@@ -77,8 +77,8 @@ equation
 <td><p>Large cities with high buildings and skyscrapers</p></td>
 </tr>
 </table>
-<p><br><br><br><b>References</b></p>
-<p><br><br>See <a href=\"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a></p>
+<p><br><h4>References</h4></p>
+<p><br>Hau, E. (2016). Windkraftanlagen: Grundlagen, Technik, Einsatz, Wirtschaftlichkeit (6. Auflage). Springer Vieweg. </p><p><br><a href=\"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a></p>
 </html>", revisions="<html>
 <ul>
   <li>

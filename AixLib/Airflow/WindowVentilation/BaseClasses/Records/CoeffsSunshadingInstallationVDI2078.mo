@@ -21,5 +21,8 @@ record CoeffsSunshadingInstallationVDI2078
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This record shows the sunshading coefficient as defined in VDI 2078:2015-06.</p>
+<p>This record is not integrated into any model, but can be used as a reference.</p>
 </html>"));
 end CoeffsSunshadingInstallationVDI2078;

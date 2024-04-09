@@ -8,4 +8,7 @@ type WindowOpeningTypes = enumeration(
     PivotHorizontal "Pivot horizontal opening (centre hinge horizontal)",
     SlidingVertical "Sliding opening vertical (single-hung or double-hung)",
     SlidingHorizontal "Sliding opening horizontal (slider)")
-    "Enumeration to define window opening types";
+    "Enumeration to define window opening types" annotation (Documentation(info
+      ="<html>
+<p>This enum defines window sash opening types.</p>
+</html>"));

@@ -15,25 +15,25 @@ annotation (Documentation(info="<html>
 </tr>
 <tr>
 <td><p>Gids and Phaff (1982)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>Warren and Parkins (1984)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>Maas (1995)</p></td>
 <td><p>N</p></td>
-<td><p>Y</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 <td><p>N</p></td>
 <td><p>N</p></td>
 </tr>
@@ -47,31 +47,31 @@ annotation (Documentation(info="<html>
 </tr>
 <tr>
 <td><p>Larsen and Heiselberg (2008)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>ASHRAE (2009)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>Caciolo et al. (2013)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>VDI 2078 (2015)</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 <td><p>N</p></td>
 <td><p>Only bottom-hung, inward</p></td>
 <td><p>N</p></td>
@@ -79,19 +79,19 @@ annotation (Documentation(info="<html>
 </tr>
 <tr>
 <td><p>Tang et al. (2016)</p></td>
-<td><p>Y</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
+<td><p><span style=\"color: #1c6cc8;\">?</span></p></td>
 </tr>
 <tr>
 <td><p>DIN EN 16798-7 (2017)</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 <td><p>N</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 <td><p>N</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 </tr>
 <tr>
 <td><p>Jiang et al. (2022)</p></td>
@@ -103,16 +103,16 @@ annotation (Documentation(info="<html>
 </tr>
 <tr>
 <td><p>DIN/TS 4108-8 (2022)</p></td>
-<td><p>Y</p></td>
-<td><p>Y</p></td>
-<td><p>Y</p></td>
-<td><p>Y</p></td>
-<td><p>Y</p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
+<td><p><span style=\"color: #ee2e2f;\">Y</span></p></td>
 </tr>
 </table>
 <ul>
-<li>Y = Applicable</li>
-<li>? = Applicable without validation</li>
+<li><span style=\"color: #ee2e2f;\">Y</span> = Applicable</li>
+<li><span style=\"color: #1c6cc8;\">?</span> = Applicable without validation</li>
 <li>N = Not applicable</li>
 </ul>
 </html>"));

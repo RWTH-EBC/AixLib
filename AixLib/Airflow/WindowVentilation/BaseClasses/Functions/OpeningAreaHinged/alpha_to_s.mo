@@ -18,5 +18,7 @@ algorithm
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This function converts the hinged opening angle to hinged opening width.</p>
 </html>"));
 end alpha_to_s;

@@ -159,7 +159,7 @@ model OpeningArea "Calculation of different opening areas"
     "Side-hung, inward, geometric opening"
     annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
   Modelica.Blocks.Sources.Ramp opnAngle(
-    height=90,
+    height=30,
     duration=50,
     startTime=5)
     annotation (Placement(transformation(extent={{-140,-80},{-120,-60}})));
@@ -361,5 +361,13 @@ horizontal"),
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This example simulates and checks the following models that calculate the common window opening area:</p>
+<ul>
+<li><a href=\"modelica://AixLib/Airflow/WindowVentilation/OpeningAreas/OpeningAreaSimple.mo\">OpeningAreaSimple</a></li>
+<li><a href=\"modelica://AixLib/Airflow/WindowVentilation/OpeningAreas/OpeningAreaSashWidth.mo\">OpeningAreaSashWidth</a></li>
+<li><a href=\"modelica://AixLib/Airflow/WindowVentilation/OpeningAreas/OpeningAreaSashAngle.mo\">OpeningAreaSashAngle</a></li>
+</ul>
+<p><br>The icon of the model can change automatically to indicate the type of window opening that is now being set.</p>
 </html>"));
 end OpeningArea;

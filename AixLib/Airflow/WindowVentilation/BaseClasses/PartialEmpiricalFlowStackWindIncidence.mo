@@ -21,5 +21,7 @@ equation
     Implemented.
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model provides a base class of models that estimate ventilation volume flow. The model has a wind direction input port to account for the wind incidence.</p>
 </html>"));
 end PartialEmpiricalFlowStackWindIncidence;
