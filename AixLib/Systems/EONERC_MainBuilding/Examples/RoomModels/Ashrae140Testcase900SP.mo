@@ -140,7 +140,7 @@ model Ashrae140Testcase900SP
         0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0;
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0],
-    shiftTime=-259200)
+    shiftTime=259200)
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=90,
@@ -374,6 +374,19 @@ model Ashrae140Testcase900SP
   Modelica.Blocks.Interfaces.RealOutput TSupMea "Value of Real output"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{106,40},{126,60}})));
+  Modelica.Blocks.Interfaces.RealOutput schedule_human "Value of Real output"
+    annotation (Placement(transformation(extent={{126,-58},{146,-38}}),
+        iconTransformation(extent={{132,-64},{152,-44}})));
+  Modelica.Blocks.Sources.RealExpression realExpression5(y=-tabs1.pipe.heatPort.Q_flow)
+    annotation (Placement(transformation(extent={{154,-130},{174,-110}})));
+  Modelica.Blocks.Sources.RealExpression realExpression10(y=tabs1.pipe.heatPort.T)
+    annotation (Placement(transformation(extent={{152,-150},{172,-130}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_tabs_del "Value of Real output"
+    annotation (Placement(transformation(extent={{184,-130},{204,-110}}),
+        iconTransformation(extent={{190,-136},{210,-116}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Tabs_Pipe "Value of Real output"
+    annotation (Placement(transformation(extent={{190,-150},{210,-130}}),
+        iconTransformation(extent={{222,-170},{242,-150}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-72,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -577,8 +590,14 @@ equation
     annotation (Line(points={{-3,144},{12,144}}, color={0,0,127}));
   connect(TSupMea, Bus.ahuBus.TSupMea) annotation (Line(points={{110,40},{62,40},
           {62,40.05},{8.05,40.05}}, color={0,0,127}));
+  connect(schedule_human, internalGains.y[1]) annotation (Line(points={{136,-48},
+          {90,-48},{90,-68},{61,-68},{61,-78.3}}, color={0,0,127}));
+  connect(realExpression5.y, Q_tabs_del)
+    annotation (Line(points={{175,-120},{194,-120}}, color={0,0,127}));
+  connect(realExpression10.y, T_Tabs_Pipe)
+    annotation (Line(points={{173,-140},{200,-140}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=86400,
+      StopTime=518400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),

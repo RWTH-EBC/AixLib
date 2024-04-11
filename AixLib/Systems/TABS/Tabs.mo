@@ -73,7 +73,7 @@ model Tabs "Thermally Activated Building Systems"
       Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={0,58})));
+        origin={0,54})));
 
   HydraulicModules.Pump pumpSys(
     redeclare package Medium = Medium,
@@ -220,10 +220,12 @@ model Tabs "Thermally Activated Building Systems"
 
 equation
 
-  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,40},
-          {-24,58},{-10,58}}, color={0,127,255}));
-  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{7.21645e-16,
-          68},{7.21645e-16,72},{24,72}}, color={191,0,0}));
+  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,
+          40},{-24,54},{-10,54}},
+                              color={0,127,255}));
+  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{
+          7.21645e-16,64},{7.21645e-16,72},{24,72}},
+                                         color={191,0,0}));
   connect(heatCapacitor.port, convection.solid)
     annotation (Line(points={{24,72},{-3.33067e-16,72}}, color={191,0,0}));
   connect(convection.fluid, heatPort)
@@ -250,14 +252,15 @@ equation
           -76,-80},{-76,-100},{-80,-100}}, color={0,127,255}));
   connect(port_a2, throttlePumpCold.port_a1) annotation (Line(points={{40,-100},
           {40,-84},{34,-84},{34,-86},{28,-86},{28,-80}}, color={0,127,255}));
-  connect(pipe.port_b, pumpSys.port_a2) annotation (Line(points={{10,58},{26,58},
+  connect(pipe.port_b, pumpSys.port_a2) annotation (Line(points={{10,54},{26,54},
           {26,40},{12,40}}, color={0,127,255}));
   connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{52,-80},{
           52,-86},{80,-86},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
-  connect(pipe.heatPort, convection.solid) annotation (Line(points={{7.21645e-16,
-          68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}}, color={191,
+  connect(pipe.heatPort, convection.solid) annotation (Line(points={{
+          7.21645e-16,64},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}},
+                                                                     color={191,
           0,0}));
   connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
       Line(

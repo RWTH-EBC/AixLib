@@ -10,6 +10,7 @@ model Ashrae140Testcase900SPTest
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
+    parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
     area=48,
     thickness=0.1,
     alpha=20,
@@ -131,7 +132,7 @@ model Ashrae140Testcase900SPTest
         0,0,0; 590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0],
     offset={0},
-    shiftTime=-259200)
+    shiftTime=259200)
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=90,
@@ -309,12 +310,10 @@ model Ashrae140Testcase900SPTest
   Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
     annotation (Placement(transformation(extent={{100,80},{120,100}})));
   Modelica.Blocks.Sources.Step      step(
-    height=10000,
-    offset=-5000,
-    startTime=86400)
+    height=5000,
+    offset=0,
+    startTime=280000)
     annotation (Placement(transformation(extent={{-182,-24},{-162,-4}})));
-  Modelica.Blocks.Sources.Constant  const(k=300)
-    annotation (Placement(transformation(extent={{-184,-60},{-164,-40}})));
   BaseClasses.EnergyCalc coolEnergyCalc annotation (Placement(transformation(
           rotation=0, extent={{60,50},{80,70}})));
   BaseClasses.EnergyCalc hotEnergyCalc annotation (Placement(transformation(
@@ -373,6 +372,53 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{-6,184},{14,204}})));
   Modelica.Blocks.Math.Gain gain(k=0.001)
     annotation (Placement(transformation(extent={{-32,184},{-12,204}})));
+  Modelica.Blocks.Sources.Step      step1(
+    height=7,
+    offset=291.15,
+    startTime=280000)
+    annotation (Placement(transformation(extent={{-180,-56},{-160,-36}})));
+  Modelica.Blocks.Sources.CombiTimeTable internalGains1(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="UserProfiles",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
+
+    columns={2},
+    tableOnFile=false,
+    table=[0,291.15; 279999,291.15; 280000,298.15; 289999,298.15; 290000,291.15;
+        310000,291.15; 320000,298.18; 320001,291.15],
+    offset={0},
+    shiftTime=0)
+    "Table with profiles for internal gains"
+    annotation(Placement(transformation(extent={{-7,-7},{7,7}},
+        rotation=0,
+        origin={-137,-54})));
+  Modelica.Blocks.Sources.CombiTimeTable internalGains2(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="UserProfiles",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
+
+    columns={2},
+    tableOnFile=false,
+    table=[0,1000; 259199,1000; 259200,0; 279999,0; 280000,5000; 289999,5000;
+        290000,0; 314999,0; 315000,600; 325000,600; 325001,0],
+    offset={0},
+    shiftTime=0)
+    "Table with profiles for internal gains"
+    annotation(Placement(transformation(extent={{-7,-7},{7,7}},
+        rotation=0,
+        origin={-143,-12})));
+  Modelica.Blocks.Sources.RealExpression realExpression5(y=-tabs1.pipe.heatPort.Q_flow)
+    annotation (Placement(transformation(extent={{168,-138},{188,-118}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_tabs_del "Value of Real output"
+    annotation (Placement(transformation(extent={{198,-138},{218,-118}}),
+        iconTransformation(extent={{190,-136},{210,-116}})));
+  Modelica.Blocks.Sources.RealExpression realExpression10(y=tabs1.pipe.heatPort.T)
+    annotation (Placement(transformation(extent={{166,-158},{186,-138}})));
+  Modelica.Blocks.Interfaces.RealOutput T_Tabs_Pipe "Value of Real output"
+    annotation (Placement(transformation(extent={{204,-158},{224,-138}}),
+        iconTransformation(extent={{222,-170},{242,-150}})));
 equation
   connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
       points={{-72,30},{8,30},{8,-17.6},{10,-17.6}},
@@ -470,10 +516,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(step.y, ctrTabsQflow.QFlowSet) annotation (Line(points={{-161,-14},{-110,
-          -14},{-110,-17.9},{-58.3,-17.9}}, color={0,0,127}));
-  connect(const.y, ctrAhu.Tset) annotation (Line(points={{-163,-50},{-100.5,-50},
-          {-100.5,-40},{-60,-40}}, color={0,0,127}));
   connect(tabs1.tabsBus, Bus.tabsBus) annotation (Line(
       points={{83.9,-90.89},{78,-90.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
       color={255,204,51},
@@ -522,12 +564,7 @@ equation
     annotation (Line(points={{59,87},{8.05,87},{8.05,40.05}},    color={0,0,127}));
   connect(hotEnergyCalc.vFlow1, Bus.ahuBus.heaterBus.hydraulicBus.VFlowInMea)
     annotation (Line(points={{65,101},{66,101},{66,102},{8.05,102},{8.05,40.05}},
-                                                                          color=
-         {0,0,127}));
-  connect(hotEnergyCalc.Tout1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
-    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}},    color={0,0,127}));
-  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
-    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}},    color={0,0,127}));
+        color={0,0,127}));
   connect(hotEnergyCalc.y1, QFlowHeat)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(realExpression.y, T_IntWall)
@@ -575,8 +612,21 @@ equation
           -22,-9},{-22,124},{-34,124},{-34,194}}, color={0,0,127}));
   connect(gain.y, Q_Tabs_ctr)
     annotation (Line(points={{-11,194},{4,194}}, color={0,0,127}));
+  connect(internalGains1.y[1], ctrAhu.Tset) annotation (Line(points={{-129.3,
+          -54},{-94,-54},{-94,-40},{-60,-40}}, color={0,0,127}));
+  connect(internalGains2.y[1], ctrTabsQflow.QFlowSet) annotation (Line(points={
+          {-135.3,-12},{-96,-12},{-96,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
+    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}}, color={0,0,127}));
+  connect(hotEnergyCalc.Tout1, Bus.ahuBus.coolerBus.hydraulicBus.TRtrnOutMea)
+    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}}, color={0,0,127}));
+  connect(realExpression5.y, Q_tabs_del)
+    annotation (Line(points={{189,-128},{208,-128}}, color={0,0,127}));
+  connect(realExpression10.y, T_Tabs_Pipe)
+    annotation (Line(points={{187,-148},{214,-148}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=86400,
+      StartTime=259200,
+      StopTime=432000,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),

@@ -130,7 +130,7 @@ model Ashrae140Testcase900 "Model of a ERC-Thermal Zone Including CCA and AHU"
         583140,0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,
         0,0,0; 590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0],
-    shiftTime=-259200)
+    shiftTime=259200)
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=90,
