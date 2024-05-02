@@ -20,7 +20,7 @@ model Tabs "Thermally Activated Building Systems"
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       DataBase.Pipes.Copper.Copper_133x3()
     "Pipe type with representative length and diameter"
-    annotation (Dialog(group="Concrete core activation"));
+    annotation (choicesAllMatching=true, Dialog(group="Concrete core activation"));
 
   parameter SI.Area area "Area of activated concrete"
     annotation (Dialog(group="Concrete core activation"));
@@ -223,11 +223,6 @@ equation
   connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,
           40},{-24,54},{-10,54}},
                               color={0,127,255}));
-  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{
-          7.21645e-16,64},{7.21645e-16,72},{24,72}},
-                                         color={191,0,0}));
-  connect(heatCapacitor.port, convection.solid)
-    annotation (Line(points={{24,72},{-3.33067e-16,72}}, color={191,0,0}));
   connect(convection.fluid, heatPort)
     annotation (Line(points={{4.44089e-16,84},{0,98}}, color={191,0,0}));
   connect(convection.Gc, const.y)
@@ -258,10 +253,6 @@ equation
           52,-86},{80,-86},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
-  connect(pipe.heatPort, convection.solid) annotation (Line(points={{
-          7.21645e-16,64},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}},
-                                                                     color={191,
-          0,0}));
   connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
       Line(
       points={{20,-60},{10,-60},{10,-10},{-74,-10},{-74,0.1},{-99.9,0.1}},
@@ -288,6 +279,10 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{0,64},{14,
+          64},{14,72},{24,72}}, color={191,0,0}));
+  connect(heatCapacitor.port, convection.solid)
+    annotation (Line(points={{24,72},{0,72}}, color={191,0,0}));
   annotation (
     Dialog(tab="Initialization"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

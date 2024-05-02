@@ -53,18 +53,22 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
     final reverseActing=reverseAction)
             annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
 
-  Modelica.Blocks.Logical.GreaterThreshold
-                                        pumpSwitchOff(final threshold=0)
-    annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.Constant constPumpSet(final k=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Modelica.Blocks.Logical.GreaterThreshold
+  Modelica.Blocks.Logical.GreaterEqualThreshold
                                         pumpSwitchOff1(final threshold=0)
     annotation (Placement(transformation(extent={{-32,-88},{-12,-68}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{34,-58},{54,-78}})));
   Modelica.Blocks.Sources.Constant lowerBound(final k=0)
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
+  Modelica.Blocks.Logical.OnOffController
+                                        pumpSwitchOff2(bandwidth=0.005)
+    annotation (Placement(transformation(extent={{32,48},{52,68}})));
+  Modelica.Blocks.Logical.Not           pumpSwitchOff3
+    annotation (Placement(transformation(extent={{72,48},{92,68}})));
+  Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
+    annotation (Placement(transformation(extent={{0,78},{20,98}})));
 equation
 
   connect(PID.u_s, Q_flowSet) annotation (Line(
@@ -78,14 +82,6 @@ equation
 
   connect(PID.u_m, Q_flowMea)
     annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
-  connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{1,-50},{8,-50},{8,40},{18,40}},   color={0,0,127}));
-  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onSet) annotation (Line(points={{41,40},
-          {100.12,40},{100.12,0.12}},            color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(constPumpSet.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
@@ -106,6 +102,18 @@ equation
     annotation (Line(points={{21,-90},{32,-90},{32,-76}}, color={0,0,127}));
   connect(PID.y, switch1.u3) annotation (Line(points={{1,-50},{24,-50},{24,-60},
           {32,-60}}, color={0,0,127}));
+  connect(pumpSwitchOff2.y, pumpSwitchOff3.u)
+    annotation (Line(points={{53,58},{70,58}}, color={255,0,255}));
+  connect(pumpSwitchOff3.y, hydraulicBus.pumpBus.onSet) annotation (Line(points={{93,58},
+          {100.12,58},{100.12,0.12}},         color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(valveReference.y, pumpSwitchOff2.reference) annotation (Line(points={
+          {21,88},{26,88},{26,64},{30,64}}, color={0,0,127}));
+  connect(switch1.y, pumpSwitchOff2.u) annotation (Line(points={{55,-68},{60,
+          -68},{60,36},{10,36},{10,52},{30,52}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

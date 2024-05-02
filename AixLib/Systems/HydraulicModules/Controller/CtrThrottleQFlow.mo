@@ -38,7 +38,7 @@ block CtrThrottleQFlow
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
   Modelica.Blocks.Sources.Constant constQ_flowSet(final k=Q_flowSetCon)
-                                                                      if not useExternalQset
+    if not useExternalQset
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.Controls.Continuous.LimPID PID(
     final yMax=1,
@@ -54,11 +54,15 @@ block CtrThrottleQFlow
     final reverseActing=reverseAction)
             annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
 
-  Modelica.Blocks.Logical.GreaterThreshold
-                                        pumpSwitchOff(final threshold=0)
+  Modelica.Blocks.Logical.OnOffController
+                                        pumpSwitchOff(bandwidth=0.005)
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.Constant constPumpSet(final k=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Blocks.Logical.Not           pumpSwitchOff1
+    annotation (Placement(transformation(extent={{60,30},{80,50}})));
 equation
 
   connect(PID.u_s, Q_flowSet) annotation (Line(
@@ -73,13 +77,7 @@ equation
   connect(PID.u_m, Q_flowMea)
     annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
   connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{1,-50},{8,-50},{8,40},{18,40}},   color={0,0,127}));
-  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onSet) annotation (Line(points={{41,40},
-          {100.12,40},{100.12,0.12}},            color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+    annotation (Line(points={{1,-50},{8,-50},{8,34},{18,34}},   color={0,0,127}));
   connect(constPumpSet.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
@@ -88,6 +86,16 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{
           100.12,-50},{100.12,0.12}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(valveReference.y, pumpSwitchOff.reference) annotation (Line(points={{11,
+          80},{14,80},{14,46},{18,46}}, color={0,0,127}));
+  connect(pumpSwitchOff.y, pumpSwitchOff1.u)
+    annotation (Line(points={{41,40},{58,40}}, color={255,0,255}));
+  connect(pumpSwitchOff1.y, hydraulicBus.pumpBus.onSet) annotation (Line(points=
+         {{81,40},{100.12,40},{100.12,0.12}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

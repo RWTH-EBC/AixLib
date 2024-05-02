@@ -19,18 +19,6 @@ public
     "Connector of Real output signal"
     annotation (Placement(transformation(extent={{98,-10},{118,10}})));
 equation
-  connect(add.u2, hydraulicBus.TFwrdInMea) annotation (Line(points={{-22,26},{-99.88,
-          26},{-99.88,0.12}},  color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(add.u1, hydraulicBus.TRtrnOutMea) annotation (Line(points={{-22,38},{-100,
-          38},{-100,0.12},{-99.88,0.12}},   color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(product1.u1, add.y) annotation (Line(points={{56,6},{12,6},{12,32},{1,
           32}},   color={0,0,127}));
   connect(gain.u, hydraulicBus.VFlowInMea) annotation (Line(points={{-57.8,1},{
@@ -48,6 +36,18 @@ equation
     annotation (Line(points={{79,0},{108,0}}, color={0,0,127}));
   connect(Q_flow, Q_flow)
     annotation (Line(points={{108,0},{108,0}}, color={0,0,127}));
+  connect(add.u2, hydraulicBus.TFwrdOutMea) annotation (Line(points={{-22,26},{
+          -99.88,26},{-99.88,0.12}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.u1, hydraulicBus.TRtrnInMea) annotation (Line(points={{-22,38},{
+          -99.88,38},{-99.88,0.12}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
