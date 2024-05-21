@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularEnergySystems.Controls;
+within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlCHPNotManufacturer
 
    parameter Modelica.Units.SI.Power PelNom=200000 "Nominal electrical power";
@@ -113,9 +113,19 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Controlunit of BHKW water massflows. Both massflows depends on the temperature of the volume of PartialHeatGenerator which represents the water temperature after exhaust heat exchanger.</p>
-<p>To describe a realistic beahviour during a cold start the system increases water massflows after TVolume has reached nominal temperature:file:</p>
-<p><span style=\"font-size: 16pt;\"><img src=\"modelica://AixLib/../../../Diagramme AixLib/BHKW/Temp_Verläufe.png\"/></span></p>
+    Documentation(info="<html><p>
+  Controlunit of BHKW water massflows. Both massflows depends on the
+  temperature of the volume of PartialHeatGenerator which represents
+  the water temperature after exhaust heat exchanger.
+</p>
+<p>
+  To describe a realistic beahviour during a cold start the system
+  increases water massflows after TVolume has reached nominal
+  temperature:file:
+</p>
+<p>
+  <span style=\"font-size: 16pt;\"><img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/BHKW/Temp_Verl%C3%A4ufe.png\"></span>
+</p>
 </html>"));
 end ControlCHPNotManufacturer;

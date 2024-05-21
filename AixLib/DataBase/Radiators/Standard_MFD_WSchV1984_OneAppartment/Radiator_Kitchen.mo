@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment;
+within AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment;
 record Radiator_Kitchen
   "ThermX2, Profil V (Kermi) Power=576W, L=800, H=300, Typ=12, {75,65,20}"
   extends AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.EnEV2009.OW;
+within AixLib.DataBase.Walls.EnEV2009.OW;
 record OW_EnEV2009_M_MFD
   "outer wall after EnEV 2009, for building of type M (mittel), for MFD"
   extends WallBaseDataDefinition(n(min=1) = 4 "Number of wall layers",
