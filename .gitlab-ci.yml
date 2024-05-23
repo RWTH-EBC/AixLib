@@ -1,4 +1,2 @@
 include:
-    project: 'EBC/EBC_all/gitlab_ci/templates'
-    ref: AixLib
-    file: 'dymola-ci-tests/ci_templates/.gitlab-ci.yml'
+    - 'bin/ci-tests/.gitlab-ci.yml'
