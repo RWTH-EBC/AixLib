@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.HeatPumps;
 model HeatPump
-  "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
+  "Test Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine(
   use_rev=true,
   final machineType = true,
