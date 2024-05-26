@@ -2,7 +2,7 @@
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 # result_dir : result
 # expire_in_time : 7h
-# PR_main_branch_rule : None
+# PR_main_branch_rule : $CI_COMMIT_BRANCH  == "master"  
 
 
 stages:
