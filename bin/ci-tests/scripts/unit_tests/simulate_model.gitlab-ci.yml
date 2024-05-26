@@ -1,0 +1,258 @@
+# dym_image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+# ci_stage_simulate: simulate
+# ci_stage_create_exampel_whitelist: create_example_whitelist
+# arg_push : --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+# arg_PR: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+# commit_string: None
+# PR_main_branch_rule: None
+# library: AixLib
+# ci_check_commit ci_simulate
+# python_version: myenv
+# modelicapyci_test_validate_module: ModelicaPyCI.unittest.checkpackages.validatetest
+# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_simulate_whitelist.txt. Please pull the new files before push again.
+# whitelist_model_file: ci_simulate_whitelist.txt
+# ci_create_model_whitelist_commit: ci_create_example_whitelist
+# result_dir : result
+# expire_in_time: 7h
+# xvfb_flag : xvfb-run -n 77
+# config_ci_exit_file : exit.sh
+
+include: 'bin/ci-tests/scripts/utilities.yml'
+
+stages:
+    - simulate
+    - create_example_whitelist
+
+.sim_rules:PR:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "external_pull_request_event"  &&  None
+          when: on_success
+        - if: $CI_PIPELINE_SOURCE == "push"  && (None)
+          when: on_success
+        - if: $CI_COMMIT_MESSAGE  =~ /ci_simulate/ && $CI_PIPELINE_SOURCE == "push"
+          when: always
+
+.sim_rules:Push:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push"  &&  None
+          when: on_success
+        - if:  (None)
+          when: never
+
+.simulate_model_job:PR:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: simulate
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - !reference [.custom_install_additional_modelica_libraries, script]
+    script:
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest  --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - result/
+        expire_in: 7h
+    rules:
+        - !reference [.sim_rules:PR , rules]
+
+.simulate_model_job:Push:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: simulate
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - !reference [.custom_install_additional_modelica_libraries, script]
+    script:
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - result/
+        expire_in: 7h
+    rules:
+        - !reference [.sim_rules:Push , rules]
+
+Simulate_AixLib_Airflow:PR:
+    variables:
+        lib_package: Airflow
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_BoundaryConditions:PR:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Controls:PR:
+    variables:
+        lib_package: Controls
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_DataBase:PR:
+    variables:
+        lib_package: DataBase
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Electrical:PR:
+    variables:
+        lib_package: Electrical
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Examples:PR:
+    variables:
+        lib_package: Examples
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Fluid:PR:
+    variables:
+        lib_package: Fluid
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Media:PR:
+    variables:
+        lib_package: Media
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Obsolete:PR:
+    variables:
+        lib_package: Obsolete
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Resources:PR:
+    variables:
+        lib_package: Resources
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Systems:PR:
+    variables:
+        lib_package: Systems
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_ThermalZones:PR:
+    variables:
+        lib_package: ThermalZones
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Types:PR:
+    variables:
+        lib_package: Types
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_UsersGuide:PR:
+    variables:
+        lib_package: UsersGuide
+    extends: .simulate_model_job:PR
+
+Simulate_AixLib_Utilities:PR:
+    variables:
+        lib_package: Utilities
+    extends: .simulate_model_job:PR
+
+
+
+Simulate_AixLib_Airflow:Push:
+    variables:
+        lib_package: Airflow
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_BoundaryConditions:Push:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Controls:Push:
+    variables:
+        lib_package: Controls
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_DataBase:Push:
+    variables:
+        lib_package: DataBase
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Electrical:Push:
+    variables:
+        lib_package: Electrical
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Examples:Push:
+    variables:
+        lib_package: Examples
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Fluid:Push:
+    variables:
+        lib_package: Fluid
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Media:Push:
+    variables:
+        lib_package: Media
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Obsolete:Push:
+    variables:
+        lib_package: Obsolete
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Resources:Push:
+    variables:
+        lib_package: Resources
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Systems:Push:
+    variables:
+        lib_package: Systems
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_ThermalZones:Push:
+    variables:
+        lib_package: ThermalZones
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Types:Push:
+    variables:
+        lib_package: Types
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_UsersGuide:Push:
+    variables:
+        lib_package: UsersGuide
+    extends: .simulate_model_job:Push
+
+Simulate_AixLib_Utilities:Push:
+    variables:
+        lib_package: Utilities
+    extends: .simulate_model_job:Push
+
+
+simulate_whitelist_job:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage:  create_example_whitelist
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - !reference [.custom_install_additional_modelica_libraries, script]
+        - !reference [.github_ssh_auth, script]
+    script:
+        - mkdir whitelist && cd whitelist
+        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
+        - cd $CI_PROJECT_NAME
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest  --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+    after_script:
+        - cd whitelist && cd $CI_PROJECT_NAME
+        - if cat exit.sh | grep "FAIL"; then
+            message="CI message from ebc-aixlib-bot. Update file ci_simulate_whitelist.txt. Please pull the new files before push again." ;
+            git add ci_simulate_whitelist.txt ;
+            git commit -m "$message" ;
+            git push git@github.com:$Github_Repository.git ;
+            exit 0;
+          else
+            exit 0 ;
+          fi
+    artifacts:
+        paths:
+            - result/
+        expire_in: 7h
+    rules:
+        - if: $CI_COMMIT_MESSAGE =~ /ci_create_example_whitelist/ && $CI_PIPELINE_SOURCE == "push"
+          when: always

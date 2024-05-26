@@ -1,0 +1,219 @@
+# ci_stage_OM_simulate: OM_simulate
+# commit_string: None
+# library: AixLib
+# PR_main_branch_rule : None
+# ci_OM_sim_commit: ci_om_simulate
+# OM_python_check_model_module: ModelicaPyCI.unittest.om_check
+# arg_PR : --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# arg_push: --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# result_dir: result
+# OM_Image:  registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
+# expire_in_time: 7h
+# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+
+include: 'bin/ci-tests/scripts/utilities.yml'
+
+stages:
+    - OM_simulate
+
+.OM_sim_rules:PR:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "external_pull_request_event"  &&  None
+          when: on_success
+        - if: $CI_PIPELINE_SOURCE == "push"  && (None)
+          when: on_success
+        - if: $CI_COMMIT_MESSAGE  =~ /ci_om_simulate/ && $CI_PIPELINE_SOURCE == "push"
+          when: always
+
+.OM_sim_rules:push:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push"  &&  None
+          when: on_success
+        - if:  (None)
+          when: never
+
+.OM_simulate_model_job:PR:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
+    stage: OM_simulate
+    before_script:
+        - !reference [.clone_ci_templates, script]
+    script:
+        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - result/
+        expire_in: 7h
+    allow_failure: true
+    rules:
+        - !reference [.OM_sim_rules:PR , rules]
+
+.OM_simulate_model_job:push:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
+    stage: OM_simulate
+    before_script:
+        - !reference [.clone_ci_templates, script]
+    script:
+        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - result/
+        expire_in: 7h
+    allow_failure: true
+    rules:
+        - !reference [.OM_sim_rules:push, rules]
+
+OM_Simulate_AixLib_Airflow:PR:
+    variables:
+        lib_package: Airflow
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_BoundaryConditions:PR:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Controls:PR:
+    variables:
+        lib_package: Controls
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_DataBase:PR:
+    variables:
+        lib_package: DataBase
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Electrical:PR:
+    variables:
+        lib_package: Electrical
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Examples:PR:
+    variables:
+        lib_package: Examples
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Fluid:PR:
+    variables:
+        lib_package: Fluid
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Media:PR:
+    variables:
+        lib_package: Media
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Obsolete:PR:
+    variables:
+        lib_package: Obsolete
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Resources:PR:
+    variables:
+        lib_package: Resources
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Systems:PR:
+    variables:
+        lib_package: Systems
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_ThermalZones:PR:
+    variables:
+        lib_package: ThermalZones
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Types:PR:
+    variables:
+        lib_package: Types
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_UsersGuide:PR:
+    variables:
+        lib_package: UsersGuide
+    extends: .OM_simulate_model_job:PR
+
+OM_Simulate_AixLib_Utilities:PR:
+    variables:
+        lib_package: Utilities
+    extends: .OM_simulate_model_job:PR
+
+
+OM_Simulate_AixLib_Airflow:push:
+    variables:
+        lib_package: Airflow
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_BoundaryConditions:push:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Controls:push:
+    variables:
+        lib_package: Controls
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_DataBase:push:
+    variables:
+        lib_package: DataBase
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Electrical:push:
+    variables:
+        lib_package: Electrical
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Examples:push:
+    variables:
+        lib_package: Examples
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Fluid:push:
+    variables:
+        lib_package: Fluid
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Media:push:
+    variables:
+        lib_package: Media
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Obsolete:push:
+    variables:
+        lib_package: Obsolete
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Resources:push:
+    variables:
+        lib_package: Resources
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Systems:push:
+    variables:
+        lib_package: Systems
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_ThermalZones:push:
+    variables:
+        lib_package: ThermalZones
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Types:push:
+    variables:
+        lib_package: Types
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_UsersGuide:push:
+    variables:
+        lib_package: UsersGuide
+    extends: .OM_simulate_model_job:push
+
+OM_Simulate_AixLib_Utilities:push:
+    variables:
+        lib_package: Utilities
+    extends: .OM_simulate_model_job:push
+
+
+
