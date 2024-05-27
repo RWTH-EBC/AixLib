@@ -1,4 +1,4 @@
-# ci_stage_deploy : deploy
+# ci_stage_deploy : 99_deploy
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 # result_dir : bin/ci-tests/result
 # expire_in_time : 7h
@@ -6,10 +6,10 @@
 
 
 stages:
-    - deploy
+    - 99_deploy
 pages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: deploy
+    stage: 99_deploy
     before_script:
         - apt-get update -y
         - apt-get install zip unzip -y

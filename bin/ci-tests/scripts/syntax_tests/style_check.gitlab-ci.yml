@@ -1,5 +1,5 @@
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-# ci_stage_style_check : Style_check
+# ci_stage_style_check : 4_Style_check
 # python_version :   myenv
 # modelicapyci_syntax_test_module : ModelicaPyCI.syntax.style_checking
 # xvfb_flag : xvfb-run -n 77
@@ -13,7 +13,7 @@
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 stages:
-    - Style_check
+    - 4_Style_check
 
 
 .StyleCheckRule:PR:
@@ -34,7 +34,7 @@ stages:
 
 StyleCheck:AixLib:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: Style_check
+    stage: 4_Style_check
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
@@ -50,7 +50,7 @@ StyleCheck:AixLib:PR:
 
 StyleCheck:AixLib:Push:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: Style_check
+    stage: 4_Style_check
     before_script:
         - !reference [.clone_ci_templates, script]
     script:

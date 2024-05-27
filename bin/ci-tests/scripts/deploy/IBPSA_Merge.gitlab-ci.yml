@@ -1,6 +1,6 @@
-# ci_stage_lib_merge : merge
-# ci_stage_update_whitelist : update_whiteList
-# ci_stage_open_PR : open_PR
+# ci_stage_lib_merge : 1_merge
+# ci_stage_update_whitelist : 14_update_whiteList
+# ci_stage_open_PR : 13_open_PR
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 # python_version : myenv
 # git_url : https://github.com/ibpsa/modelica-ibpsa.git
@@ -26,13 +26,13 @@
 include: 'bin/ci-tests/scripts/utilities.yml'
 
 stages:
-    - merge
-    - update_whiteList
-    - open_PR
+    - 1_merge
+    - 14_update_whiteList
+    - 13_open_PR
 
 IBPSA:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: merge
+    stage: 1_merge
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.github_ssh_auth, script]
@@ -57,7 +57,7 @@ IBPSA:
 
 WhiteList:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: update_whiteList
+    stage: 14_update_whiteList
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.github_ssh_auth, script]
@@ -88,7 +88,7 @@ WhiteList:
 
 IBPSA_Pull_Request:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: open_PR
+    stage: 13_open_PR
     before_script:
         - !reference [.clone_ci_templates, script]
         - git config --global user.name "$GITLAB_USER_NAME"

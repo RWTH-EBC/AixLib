@@ -1,7 +1,7 @@
 #  image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-#  ci_stage_html_check : HTML_Check
-# ci_stage_html_whitelist : create_html_whitelist
-#  ci_stage_open_PR : open_PR
+#  ci_stage_html_check : 3_HTML_Check
+# ci_stage_html_whitelist : 2_create_html_whitelist
+#  ci_stage_open_PR : 13_open_PR
 #  html_praefix : correct_HTML_
 # python_version : myenv
 # ModelicaPyCI.syntax.html_tidy : modelicapyci_html_tidy_module
@@ -21,9 +21,9 @@ include: 'bin/ci-tests/scripts/utilities.yml'
 
 image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 stages:
-    - HTML_Check
-    - create_html_whitelist
-    - open_PR
+    - 3_HTML_Check
+    - 2_create_html_whitelist
+    - 13_open_PR
 
 variables:
     Praefix_Branch: correct_HTML_
@@ -49,7 +49,7 @@ variables:
 
 
 Check_HTML:PR:
-    stage: HTML_Check
+    stage: 3_HTML_Check
     before_script:
         - !reference [.clone_ci_templates, script]
 
@@ -63,7 +63,7 @@ Check_HTML:PR:
         - !reference [.html_rules:PR , rules]
 
 Check_HTML:push:
-    stage: HTML_Check
+    stage: 3_HTML_Check
     before_script:
         - !reference [.github_ssh_auth, script]
         - !reference [.clone_ci_templates, script]
@@ -79,7 +79,7 @@ Check_HTML:push:
 
 
 Open_Pull_HTML_Request:
-    stage: open_PR
+    stage: 13_open_PR
     before_script:
         - !reference [.github_ssh_auth, script]
         - !reference [.clone_ci_templates, script]
@@ -91,7 +91,7 @@ Open_Pull_HTML_Request:
 
 
 html_whitelist_job:
-    stage: create_html_whitelist
+    stage: 2_create_html_whitelist
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.github_ssh_auth, script]

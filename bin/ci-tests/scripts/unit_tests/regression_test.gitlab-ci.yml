@@ -1,8 +1,8 @@
 # dym_image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-# ci_stage_regression_test: RegressionTest
-# ci_stage_ref_check :Ref_Check
-# ci_stage_plot_ref : plot_ref
-# ci_stage_prepare : prepare
+# ci_stage_regression_test: 7_RegressionTest
+# ci_stage_ref_check :1_Ref_Check
+# ci_stage_plot_ref : 11_plot_ref
+# ci_stage_prepare : 12_prepare
 # python_version : myenv
 # buildingspy_upgrade : git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
 # modelicapyci_test_reference_module: ModelicaPyCI.unittest.reference_check
@@ -34,10 +34,10 @@
 include: 'bin/ci-tests/scripts/utilities.yml'
 
 stages:
-    - RegressionTest
-    - Ref_Check
-    - plot_ref
-    - prepare
+    - 7_RegressionTest
+    - 1_Ref_Check
+    - 11_plot_ref
+    - 12_prepare
 
 .regression_rules:PR:
     rules:
@@ -56,7 +56,7 @@ stages:
 
 .Regressiontest:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: RegressionTest
+    stage: 7_RegressionTest
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -83,7 +83,7 @@ stages:
 
 .Regressiontest:Push:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: RegressionTest
+    stage: 7_RegressionTest
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -260,7 +260,7 @@ Regressiontest_AixLib_Utilities:Push:
 
 
 Regression_overall_coverage:PR:
-    stage: RegressionTest
+    stage: 7_RegressionTest
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -278,7 +278,7 @@ Regression_overall_coverage:PR:
           when: always
 
 Regression_overall_coverage:Push:
-    stage: RegressionTest
+    stage: 7_RegressionTest
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -294,7 +294,7 @@ Regression_overall_coverage:Push:
         - !reference [.regression_rules:Push , rules]
 
 prepare_create_plots:Push:
-    stage: prepare
+    stage: 12_prepare
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -342,7 +342,7 @@ prepare_create_plots:Push:
       artifacts: true
 
 prepare_create_plots:PR:
-    stage: prepare
+    stage: 12_prepare
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
@@ -388,7 +388,7 @@ prepare_create_plots:PR:
       artifacts: true
 
 RegressionTest_Check_References:
-    stage: Ref_Check
+    stage: 1_Ref_Check
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]

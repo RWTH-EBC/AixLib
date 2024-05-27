@@ -1,6 +1,6 @@
 # dym_image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-# ci_stage_simulate: simulate
-# ci_stage_create_exampel_whitelist: create_example_whitelist
+# ci_stage_simulate: 6_simulate
+# ci_stage_create_exampel_whitelist: 2_create_example_whitelist
 # arg_push : --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
 # arg_PR: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
 # commit_string: $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/
@@ -22,8 +22,8 @@
 include: 'bin/ci-tests/scripts/utilities.yml'
 
 stages:
-    - simulate
-    - create_example_whitelist
+    - 6_simulate
+    - 2_create_example_whitelist
 
 .sim_rules:PR:
     rules:
@@ -43,7 +43,7 @@ stages:
 
 .simulate_model_job:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: simulate
+    stage: 6_simulate
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -59,7 +59,7 @@ stages:
 
 .simulate_model_job:Push:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: simulate
+    stage: 6_simulate
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
@@ -228,7 +228,7 @@ Simulate_AixLib_Utilities:Push:
 
 simulate_whitelist_job:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage:  create_example_whitelist
+    stage:  2_create_example_whitelist
     before_script:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]

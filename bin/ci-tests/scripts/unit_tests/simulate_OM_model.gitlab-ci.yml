@@ -1,4 +1,4 @@
-# ci_stage_OM_simulate: OM_simulate
+# ci_stage_OM_simulate: 9_OM_simulate
 # commit_string: $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/
 # library: AixLib
 # PR_main_branch_rule : $CI_COMMIT_BRANCH  == "master"  
@@ -14,7 +14,7 @@
 include: 'bin/ci-tests/scripts/utilities.yml'
 
 stages:
-    - OM_simulate
+    - 9_OM_simulate
 
 .OM_sim_rules:PR:
     rules:
@@ -34,7 +34,7 @@ stages:
 
 .OM_simulate_model_job:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
-    stage: OM_simulate
+    stage: 9_OM_simulate
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
@@ -50,7 +50,7 @@ stages:
 
 .OM_simulate_model_job:push:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
-    stage: OM_simulate
+    stage: 9_OM_simulate
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
