@@ -63,6 +63,7 @@ stages:
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
+        - export CI_PYTHON_CONFIG_FILE="../D:\04_git\AixLib\bin\ci-tests\config\modelica_py_ci_config.toml"
         - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
     after_script:
         - if cat exit.sh | grep "FAIL"; then
@@ -91,6 +92,7 @@ stages:
 
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
+        - export CI_PYTHON_CONFIG_FILE="../D:\04_git\AixLib\bin\ci-tests\config\modelica_py_ci_config.toml"
         - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check --changed-flag  --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
     after_script:
         - if cat exit.sh | grep "FAIL"; then
@@ -257,6 +259,7 @@ Regression_overall_coverage:PR:
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
+        - export CI_PYTHON_CONFIG_FILE="../D:\04_git\AixLib\bin\ci-tests\config\modelica_py_ci_config.toml"
         - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     artifacts:
         when: on_failure
@@ -275,6 +278,7 @@ Regression_overall_coverage:Push:
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
+        - export CI_PYTHON_CONFIG_FILE="../D:\04_git\AixLib\bin\ci-tests\config\modelica_py_ci_config.toml"
         - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     artifacts:
         when: on_failure
@@ -387,6 +391,7 @@ RegressionTest_Check_References:
         - mkdir CorrectedVersion && cd CorrectedVersion
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
+        - export CI_PYTHON_CONFIG_FILE="../D:\04_git\AixLib\bin\ci-tests\config\modelica_py_ci_config.toml"
         - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     after_script:
         - source activate myenv
