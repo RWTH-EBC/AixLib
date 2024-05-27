@@ -10,12 +10,12 @@
 # result_dir: bin/ci-tests/result
 # expire_in_time: 7h
 # ci_create_model_whitelist_commit: ci_create_model_whitelist
-# arg_push: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --filter-whitelist-flag  --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
-# arg_PR: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+# arg_push: --dym-options DYM_CHECK --filter-whitelist-flag  --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+# arg_PR: --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
 # config_ci_exit_file: exit.sh
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_check_whitelist.txt. Please pull the new files before push again.
 # whitelist_model_file: ci_check_whitelist.txt
-# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+# arg_wh: --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
 # python_version myenv
 # package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 # modelicapyci_config_structure_module: ModelicaPyCI.structure.config_structure
@@ -49,7 +49,7 @@ stages:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -65,7 +65,7 @@ stages:
         - !reference [.clone_ci_templates, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --filter-whitelist-flag  --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --filter-whitelist-flag  --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -198,7 +198,7 @@ check_whitelist_job:
         - mkdir whitelist && cd whitelist
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     after_script:
         - cd whitelist && cd $CI_PROJECT_NAME
         - if cat exit.sh | grep "FAIL"; then

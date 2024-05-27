@@ -1,7 +1,7 @@
 ## CI Whitelists
 
-| List     | Description      | 
-| :------------- | :-------------: | 
-| ci_check_whitelist.txt        | Whitelist with models that are not checked         |
-| ci_html_whitelist.txt         | Whitelist with models where the html syntax is not checked        |
-| ci_simulate_whitelist.txt          | Whitelist with models that are not simulated        |
+| List                   |                              Description                              | 
+|:-----------------------|:---------------------------------------------------------------------:| 
+| check_whitelist.txt    |              Whitelist with models that are not checked               |
+| simulate_whitelist.txt |             Whitelist with models that are not simulated              |
+| ibpsa_whitelist.txt    | Whitelist models from IBPSA library that are not checked or simulated |

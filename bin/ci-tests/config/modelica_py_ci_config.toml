@@ -15,7 +15,6 @@ exit_file = "exit.sh"
 new_create_ref_file = "ci_new_created_reference.txt"
 changed_file = "ci_changed_model_list.txt"
 ref_file = "ci_reference_list.txt"
-eof_file = "EOF.sh"
 
 [whitelist]
 dir = "ci_whitelist"

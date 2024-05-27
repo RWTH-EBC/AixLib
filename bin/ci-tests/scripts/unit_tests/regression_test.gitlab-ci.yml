@@ -26,8 +26,6 @@
 # xvfb_flag: xvfb-run -n 77
 # modelicapyci_structure_module: ModelicaPyCI.structure.config_structure
 # arg_ref: --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
-# TODO-Jansen: Whats the purpose of eof-files?
-# config_ci_eof_file: EOF.sh
 # config_ci_new_create_ref_file: ci_new_created_reference.txt
 # bot_create_ref_commit: CI message from ebc-aixlib-bot. Automatic push of CI with new regression reference files. Please pull the new files before push again. Plottet Results $GITLAB_Page/$CI_COMMIT_REF_NAME/charts/
 # ci_show_ref_commit: ci_show_ref

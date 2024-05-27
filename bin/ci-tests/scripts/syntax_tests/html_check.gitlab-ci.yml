@@ -101,7 +101,7 @@ html_whitelist_job:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
         - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --log-flag  --whitelist-library IBPSA         - message="CI message from ebc-aixlib-bot. Update or created new whitelist. Please pull the new whitelist before push again."
-        - git add rci_html_whitelist.txt
+        - git add ibpsa_whitelist.txt
         - git commit -m "$message"
         - git push git@github.com:$Github_Repository.git
     artifacts:
