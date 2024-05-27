@@ -12,7 +12,7 @@
 # expire_in_time : 7h
 # modelicapyci_create_whitelist_module : ModelicaPyCI.structure.create_whitelist
 # arg_whitelist_html : --root-whitelist-library modelica-ibpsa --git-url https://github.com/ibpsa/modelica-ibpsa.git --whitelist-library IBPSA --library AixLib 
-# arg_whitelist_check_sim : --root-whitelist-library modelica-ibpsa --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# arg_whitelist_check_sim : --root-whitelist-library modelica-ibpsa --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
 # modelicapyci_test_validate_module : ModelicaPyCI.unittest.checkpackages.validatetest
 # xvfb_flag : xvfb-run -n 77
 # arg_lock :  
@@ -65,7 +65,7 @@ WhiteList:
         - cd Merge_Package/AixLib
         - python -m ModelicaPyCI.structure.create_whitelist --root-whitelist-library modelica-ibpsa --git-url https://github.com/ibpsa/modelica-ibpsa.git --whitelist-library IBPSA --library AixLib 
         # TODO-DJA: Is it really necessary to check&simulate&regression all IBPSA models each time? IBPSA has it's own CI and if its broke it is their issue
-        # - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library modelica-ibpsa --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        # - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library modelica-ibpsa --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
         - python -m ModelicaPyCI.converter.lock_model 
         - rm -r IBPSA
         - message="CI message from ebc-aixlib-bot. Merge of 'IBPSA' library. Update files ci_check_whitelist.txt and rci_html_whitelist.txt"

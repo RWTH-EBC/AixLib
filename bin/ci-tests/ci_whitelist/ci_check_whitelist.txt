@@ -106,3 +106,6 @@ AixLib.Systems.HydraulicModules.ThrottlePump
 AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialModularExpansionVavles
 AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve
  
+AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool
+AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool
