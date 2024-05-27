@@ -5,6 +5,7 @@ github_repository = "RWTH-EBC/AixLib"
 stage_list = [ "html", "style", "check", "simulate", "regression", "Merge",]
 # stage_list = ["Merge",]
 library = "AixLib"
+library_path = "D:/04_git/AixLib"
 dymola_version = "2022"
 conda_environment = "myenv"
 main_branch = "master"
@@ -19,10 +20,6 @@ buildingspy_upgrade = "git+https://github.com/MichaMans/BuildingsPy@testexamples
 
 [packages]
 AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Fluid", "Media", "Resources", "Systems", "ThermalZones", "Types", "UsersGuide", "Utilities",]
-
-[ci_config]
-library_root = "D:/04_git/AixLib"
-dir = "bin/ci-tests"
 
 [whitelist_library_config]
 local_path = "modelica-ibpsa"
@@ -96,42 +93,3 @@ update_example_whitelist_commit = "CI message from ebc-aixlib-bot. Update file c
 create_structure_commit = "CI message from ebc-aixlib-bot. Add files for ci structure"
 create_html_file_commit = "CI message from ebc-aixlib-bot. Push new files with corrected html Syntax ."
 build_whitelist_commit = "CI message from ebc-aixlib-bot. Push new created whitelists."
-
-[ci_config.result]
-dir = "result"
-whitelist_dir = "ci_whitelist"
-plot_dir = "charts"
-syntax_dir = "syntax"
-regression_dir = "regression"
-check_result_dir = "Dymola_check"
-
-[ci_config.ci_files]
-dir = "Configfiles"
-exit_file = "exit.sh"
-new_create_ref_file = "ci_new_created_reference.txt"
-changed_file = "ci_changed_model_list.txt"
-ref_file = "ci_reference_list.txt"
-eof_file = "EOF.sh"
-
-[ci_config.whitelist]
-dir = "ci_whitelist"
-check_file = "ci_check_whitelist.txt"
-simulate_file = "ci_simulate_whitelist.txt"
-html_file = "rci_html_whitelist.txt"
-
-[ci_config.artifacts]
-dir = "artifacts"
-library_ref_results_dir = "Resources/ReferenceResults/Dymola"
-library_resource_dir = "Resources/Scripts/Dymola"
-
-[ci_config.interact]
-dir = "interact_CI"
-show_ref_file = "show_ref.txt"
-update_ref_file = "update_ref.txt"
-
-[ci_config.plots]
-chart_dir = "charts"
-templates_chart_dir = "MoCITempGen/templates/google_templates"
-templates_chart_file = "MoCITempGen/templates/google_templates/google_chart.txt"
-templates_index_file = "MoCITempGen/templates/google_templates/index.txt"
-templates_layout_file = "MoCITempGen/templates/google_templates/layout_index.txt"
