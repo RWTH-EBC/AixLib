@@ -14,7 +14,7 @@
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_simulate_whitelist.txt. Please pull the new files before push again.
 # whitelist_model_file: ci_simulate_whitelist.txt
 # ci_create_model_whitelist_commit: ci_create_example_whitelist
-# result_dir : result
+# result_dir : bin/ci-tests/result
 # expire_in_time: 7h
 # xvfb_flag : xvfb-run -n 77
 # config_ci_exit_file : exit.sh
@@ -52,7 +52,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.sim_rules:PR , rules]
@@ -68,7 +68,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.sim_rules:Push , rules]
@@ -251,7 +251,7 @@ simulate_whitelist_job:
           fi
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /ci_create_example_whitelist/ && $CI_PIPELINE_SOURCE == "push"

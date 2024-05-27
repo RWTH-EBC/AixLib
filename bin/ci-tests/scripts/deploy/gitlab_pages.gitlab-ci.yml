@@ -1,6 +1,6 @@
 # ci_stage_deploy : deploy
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-# result_dir : result
+# result_dir : bin/ci-tests/result
 # expire_in_time : 7h
 # PR_main_branch_rule : $CI_COMMIT_BRANCH  == "master"  
 
@@ -15,7 +15,7 @@ pages:
         - apt-get install zip unzip -y
     script:
         - mkdir -p public/$CI_COMMIT_REF_NAME
-        - cp -r result/* public/$CI_COMMIT_REF_NAME
+        - cp -r bin/ci-tests/result/* public/$CI_COMMIT_REF_NAME
     artifacts:
         paths:
          - public

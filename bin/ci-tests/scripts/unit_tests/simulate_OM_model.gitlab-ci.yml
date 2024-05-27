@@ -6,7 +6,7 @@
 # OM_python_check_model_module: ModelicaPyCI.unittest.om_check
 # arg_PR : --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
 # arg_push: --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
-# result_dir: result
+# result_dir: bin/ci-tests/result
 # OM_Image:  registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
 # expire_in_time: 7h
 # packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
@@ -42,7 +42,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     allow_failure: true
     rules:
@@ -58,7 +58,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     allow_failure: true
     rules:

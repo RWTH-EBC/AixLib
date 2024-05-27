@@ -6,7 +6,7 @@
 # python_version : myenv
 # ModelicaPyCI.syntax.html_tidy : modelicapyci_html_tidy_module
 # arg_correct_html: --filter-whitelist-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
-# result_dir : result
+# result_dir : bin/ci-tests/result
 # expire_in_time : 7h
 # commit_string : $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/
 # library : AixLib
@@ -57,7 +57,7 @@ Check_HTML:PR:
         - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.html_rules:PR , rules]
@@ -71,7 +71,7 @@ Check_HTML:push:
         - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.html_rules:push , rules]
@@ -106,7 +106,7 @@ html_whitelist_job:
         - git push git@github.com:$Github_Repository.git
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7 day
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /ci_create_html_whitelist/ && $CI_PIPELINE_SOURCE == "push"

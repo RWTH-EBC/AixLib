@@ -18,7 +18,7 @@
 # arg_lock :  
 # whitelist_library : IBPSA
 # bot_merge_commit : CI message from ebc-aixlib-bot. Merge of 'IBPSA' library. Update files ci_check_whitelist.txt and rci_html_whitelist.txt
-# result_dir : result
+# result_dir : bin/ci-tests/result
 # modelicapyci_api_github_module : ModelicaPyCI.api_script.api_github
 # arg_api_pr : --ibpsa-merge-flag  --create-pr-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib 
 # merge_library_dir: IBPSA_folder

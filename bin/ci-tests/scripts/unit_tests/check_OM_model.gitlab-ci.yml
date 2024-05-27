@@ -6,7 +6,7 @@
 # ci_OM_check_commit: ci_om_check
 # OM_Image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
 # OM_python_check_model_module: ModelicaPyCI.unittest.om_check
-# result_dir: result
+# result_dir: bin/ci-tests/result
 # expire_in_time: 7h
 # arg_PR: --om-options OM_CHECK --whitelist-library IBPSA --packages $lib_package --library AixLib 
 # arg_push: --om-options OM_CHECK --changed-flag  --whitelist-library IBPSA --packages $lib_package --library AixLib 
@@ -43,7 +43,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     allow_failure: true
     rules:
@@ -59,7 +59,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     allow_failure: true
     rules:

@@ -8,7 +8,7 @@
 # modelicapyci_test_reference_module: ModelicaPyCI.unittest.reference_check
 # modelicapyci_google_chart_module : ModelicaPyCI.converter.google_charts
 # config_ci_exit_file : exit.sh
-# result_dir : result
+# result_dir : bin/ci-tests/result
 # arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
 # ci_regression_test_commit : $ {ci_regression_test_commit}
 # expire_in_time : 7h
@@ -74,7 +74,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.regression_rules:PR , rules]
@@ -102,7 +102,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.regression_rules:Push , rules]
@@ -270,7 +270,7 @@ Regression_overall_coverage:PR:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.regression_rules:PR , rules]
@@ -288,7 +288,7 @@ Regression_overall_coverage:Push:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.regression_rules:Push , rules]
@@ -306,7 +306,7 @@ prepare_create_plots:Push:
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
     rules:
         - !reference [.regression_rules:Push , rules]
     needs:
@@ -350,7 +350,7 @@ prepare_create_plots:PR:
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
     rules:
         - !reference [.regression_rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_regression_test/ && $CI_PIPELINE_SOURCE == "push"
@@ -414,8 +414,8 @@ RegressionTest_Check_References:
             git add $push_model ;
             git commit -m "$message";
             git push git@github.com:$Github_Repository.git ;
-            mkdir -p ../../result/ ;
-            cp -r result/* ../../result ;
+            mkdir -p ../../bin/ci-tests/result/ ;
+            cp -r bin/ci-tests/result/* ../../bin/ci-tests/result ;
             exit 1 ;
           else
             exit 0 ;
@@ -423,7 +423,7 @@ RegressionTest_Check_References:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.regression_rules:PR , rules]
@@ -443,7 +443,7 @@ plot_reference_results:
     artifacts:
         when: always
         paths:
-            - result/
+            - bin/ci-tests/result/
     rules:
         - if: $CI_COMMIT_MESSAGE  =~ /ci_show_ref/
           when: always

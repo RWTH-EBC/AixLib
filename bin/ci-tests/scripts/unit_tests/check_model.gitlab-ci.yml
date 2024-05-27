@@ -7,7 +7,7 @@
 # ci_check_commit: ci_check
 # xvfb_flag: xvfb-run -n 77
 # modelicapyci_test_validate_module: ModelicaPyCI.unittest.checkpackages.validatetest
-# result_dir: result
+# result_dir: bin/ci-tests/result
 # expire_in_time: 7h
 # ci_create_model_whitelist_commit: ci_create_model_whitelist
 # arg_push: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
@@ -53,7 +53,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.check_rules:PR , rules]
@@ -69,7 +69,7 @@ stages:
     artifacts:
         when: on_failure
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - !reference [.check_rules:push , rules]
@@ -252,7 +252,7 @@ check_whitelist_job:
           fi
     artifacts:
         paths:
-            - result/
+            - bin/ci-tests/result/
         expire_in: 7h
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /ci_create_model_whitelist/ && $CI_PIPELINE_SOURCE == "push"

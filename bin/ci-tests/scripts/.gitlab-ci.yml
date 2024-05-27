@@ -1,21 +1,21 @@
 # You can adjust the sequence of the stages to your needs
 stages:
-    - Style_check
-    - OM_simulate
-    - HTML_Check
-    - create_html_whitelist
+    - merge
+    - update_whiteList
     - open_PR
-    - model_check
-    - create_model_whitelist
-    - OM_model_check
+    - OM_simulate
     - RegressionTest
     - Ref_Check
     - plot_ref
     - prepare
-    - merge
-    - update_whiteList
     - simulate
     - create_example_whitelist
+    - model_check
+    - create_model_whitelist
+    - OM_model_check
+    - Style_check
+    - HTML_Check
+    - create_html_whitelist
     - deploy
 
 variables:
@@ -23,12 +23,12 @@ variables:
     GITLAB_Page:  https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib
 
 include:
-    - 'bin/ci-tests/scripts/syntax_tests/style_check.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/deploy/IBPSA_Merge.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/unit_tests/simulate_OM_model.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/syntax_tests/html_check.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/deploy/gitlab_pages.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/regression_test.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/simulate_model.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/unit_tests/check_model.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/unit_tests/check_OM_model.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/regression_test.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/deploy/IBPSA_Merge.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/simulate_model.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/deploy/gitlab_pages.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/syntax_tests/style_check.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/syntax_tests/html_check.gitlab-ci.yml'  
