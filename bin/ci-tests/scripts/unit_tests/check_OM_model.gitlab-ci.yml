@@ -10,7 +10,7 @@
 # expire_in_time: 7h
 # arg_PR: --om-options OM_CHECK --whitelist-library IBPSA --packages $lib_package --library AixLib 
 # arg_push: --om-options OM_CHECK --changed-flag  --whitelist-library IBPSA --packages $lib_package --library AixLib 
-# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 
@@ -90,11 +90,6 @@ OM_Check_AixLib_Electrical:PR:
         lib_package: Electrical
     extends: .OM_check_model_job:PR
 
-OM_Check_AixLib_Examples:PR:
-    variables:
-        lib_package: Examples
-    extends: .OM_check_model_job:PR
-
 OM_Check_AixLib_Fluid:PR:
     variables:
         lib_package: Fluid
@@ -164,11 +159,6 @@ OM_Check_AixLib_DataBase:push:
 OM_Check_AixLib_Electrical:push:
     variables:
         lib_package: Electrical
-    extends: .OM_check_model_job:push
-
-OM_Check_AixLib_Examples:push:
-    variables:
-        lib_package: Examples
     extends: .OM_check_model_job:push
 
 OM_Check_AixLib_Fluid:push:

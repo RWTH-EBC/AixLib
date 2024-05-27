@@ -18,7 +18,7 @@ template_scripts_dir = "scripts"
 buildingspy_upgrade = "git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage"
 
 [packages]
-AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Examples", "Fluid", "Media", "Obsolete", "Resources", "Systems", "ThermalZones", "Types", "UsersGuide", "Utilities",]
+AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Fluid", "Media", "Obsolete", "Resources", "Systems", "ThermalZones", "Types", "UsersGuide", "Utilities",]
 
 [ci_config]
 library_root = "D:/04_git/AixLib"

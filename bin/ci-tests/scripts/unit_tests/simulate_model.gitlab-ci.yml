@@ -9,8 +9,8 @@
 # ci_check_commit ci_simulate
 # python_version: myenv
 # modelicapyci_test_validate_module: ModelicaPyCI.unittest.checkpackages.validatetest
-# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
-# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Obsolete', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_simulate_whitelist.txt. Please pull the new files before push again.
 # whitelist_model_file: ci_simulate_whitelist.txt
 # ci_create_model_whitelist_commit: ci_create_example_whitelist
@@ -98,11 +98,6 @@ Simulate_AixLib_Electrical:PR:
         lib_package: Electrical
     extends: .simulate_model_job:PR
 
-Simulate_AixLib_Examples:PR:
-    variables:
-        lib_package: Examples
-    extends: .simulate_model_job:PR
-
 Simulate_AixLib_Fluid:PR:
     variables:
         lib_package: Fluid
@@ -175,11 +170,6 @@ Simulate_AixLib_Electrical:Push:
         lib_package: Electrical
     extends: .simulate_model_job:Push
 
-Simulate_AixLib_Examples:Push:
-    variables:
-        lib_package: Examples
-    extends: .simulate_model_job:Push
-
 Simulate_AixLib_Fluid:Push:
     variables:
         lib_package: Fluid
@@ -237,7 +227,7 @@ simulate_whitelist_job:
         - mkdir whitelist && cd whitelist
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest  --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest  --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     after_script:
         - cd whitelist && cd $CI_PROJECT_NAME
         - if cat exit.sh | grep "FAIL"; then
