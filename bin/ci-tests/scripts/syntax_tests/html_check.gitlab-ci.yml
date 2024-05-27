@@ -1,7 +1,7 @@
 #  image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 #  ci_stage_html_check : 3_HTML_Check
 # ci_stage_html_whitelist : 2_create_html_whitelist
-#  ci_stage_open_PR : 13_open_PR
+#  ci_stage_open_PR : 15_open_PR
 #  html_praefix : correct_HTML_
 # python_version : myenv
 # ModelicaPyCI.syntax.html_tidy : modelicapyci_html_tidy_module
@@ -23,7 +23,7 @@ image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-mini
 stages:
     - 3_HTML_Check
     - 2_create_html_whitelist
-    - 13_open_PR
+    - 15_open_PR
 
 variables:
     Praefix_Branch: correct_HTML_
@@ -79,7 +79,7 @@ Check_HTML:push:
 
 
 Open_Pull_HTML_Request:
-    stage: 13_open_PR
+    stage: 15_open_PR
     before_script:
         - !reference [.github_ssh_auth, script]
         - !reference [.clone_ci_templates, script]
