@@ -43,6 +43,7 @@ create_whitelist_module = "ModelicaPyCI.structure.create_whitelist"
 
 [template_files]
 base = "D:/04_git/MoCITempGen/templates/ci_templates"
+url = "https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica"
 regression_file = "unit_tests/regression_test.txt"
 check_file = "unit_tests/check_model.txt"
 simulate_file = "unit_tests/simulate_model.txt"

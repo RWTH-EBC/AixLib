@@ -9,15 +9,15 @@
 # modelicapyci_google_chart_module : ModelicaPyCI.converter.google_charts
 # config_ci_exit_file : exit.sh
 # result_dir : bin/ci-tests/result
-# arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+# arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # ci_regression_test_commit : $ {ci_regression_test_commit}
 # expire_in_time : 7h
 # arg_PR: --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
 # arg_push: --changed-flag  --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
-# arg_chart: --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+# arg_chart: --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 # modelicapyci_api_github_module: ModelicaPyCI.api_script.api_github
-# {arg_create_plots} : --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+# {arg_create_plots} : --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # api_github_arg: --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
 # commit_string = $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/
 # PR_main_branch_rule : &{PR_main_branch_rule}
@@ -68,7 +68,7 @@ stages:
     after_script:
         - if cat exit.sh | grep "FAIL"; then
             source activate myenv ;
-            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
+            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
             exit 1 ;
           else
             exit 0 ;
@@ -97,7 +97,7 @@ stages:
     after_script:
         - if cat exit.sh | grep "FAIL"; then
             source activate myenv ;
-            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
+            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
             exit 1 ;
           else
             exit 0 ;
@@ -267,8 +267,8 @@ prepare_create_plots:Push:
         - apt-get update -y && apt-get install zip unzip -y
         - pip install pandas mako matplot toml requests
     script:
-        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
-        - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
+        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+        - python -m ModelicaPyCI.api_script.api_github --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
             - bin/ci-tests/result/
@@ -303,7 +303,7 @@ prepare_create_plots:PR:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
@@ -359,7 +359,7 @@ RegressionTest_Check_References:
             (git ls-files --others --exclude-standard --directory AixLib) > ci_new_created_reference.txt ;
             message="CI message from ebc-aixlib-bot. Automatic push of CI with new regression reference files. Please pull the new files before push again. Plottet Results $GITLAB_Page/$CI_COMMIT_REF_NAME/charts/" ;
             pip install pandas mako matplot;
-            python -m ModelicaPyCI.converter.google_charts --new-ref-flag  --line-html-flag  --library AixLib  ;
+            python -m ModelicaPyCI.converter.google_charts --new-ref-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib  ;
             git add $push_model ;
             git commit -m "$message";
             git push git@github.com:$Github_Repository.git ;
