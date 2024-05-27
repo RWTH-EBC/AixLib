@@ -1,5 +1,6 @@
 # conda_environment: myenv
 # modelica_py_ci_url: https://github.com/RWTH-EBC/ModelicaPyCI.git@2_pydantic_config
+# ci_toml_path: bin/ci-tests/config/modelica_py_ci_config.toml
 
 # This file contains small scripts, rules or other templates
 # which can be referenced by other templates in this repo (or other repos as well).
@@ -25,6 +26,7 @@
     - export PYTHONIOENCODING=utf-8
     - pip install git+https://github.com/lbl-srg/BuildingsPy.git@master
     - pip install git+https://github.com/RWTH-EBC/ModelicaPyCI.git@2_pydantic_config
+    - export CI_PYTHON_CONFIG_FILE="bin/ci-tests/config/modelica_py_ci_config.toml"
 
 .custom_install_additional_modelica_libraries:
   script:
