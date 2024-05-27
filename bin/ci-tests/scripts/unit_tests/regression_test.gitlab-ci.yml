@@ -9,15 +9,15 @@
 # modelicapyci_google_chart_module : ModelicaPyCI.converter.google_charts
 # config_ci_exit_file : exit.sh
 # result_dir : bin/ci-tests/result
-# arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
+# arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # ci_regression_test_commit : $ {ci_regression_test_commit}
 # expire_in_time : 7h
 # arg_PR: --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
 # arg_push: --changed-flag  --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
-# arg_chart: --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
-# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# arg_chart: --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 # modelicapyci_api_github_module: ModelicaPyCI.api_script.api_github
-# {arg_create_plots} : --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
+# {arg_create_plots} : --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # api_github_arg: --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
 # commit_string = $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/
 # PR_main_branch_rule : &{PR_main_branch_rule}
@@ -25,7 +25,7 @@
 # ci_regression_test_commit :  ci_regression_test
 # xvfb_flag: xvfb-run -n 77
 # modelicapyci_structure_module: ModelicaPyCI.structure.config_structure
-# arg_ref: --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# arg_ref: --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
 # TODO-Jansen: Whats the purpose of eof-files?
 # config_ci_eof_file: EOF.sh
 # config_ci_new_create_ref_file: ci_new_created_reference.txt
@@ -68,7 +68,7 @@ stages:
     after_script:
         - if cat exit.sh | grep "FAIL"; then
             source activate myenv ;
-            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities  ;
+            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
             exit 1 ;
           else
             exit 0 ;
@@ -97,7 +97,7 @@ stages:
     after_script:
         - if cat exit.sh | grep "FAIL"; then
             source activate myenv ;
-            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities  ;
+            python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities  ;
             exit 1 ;
           else
             exit 0 ;
@@ -145,11 +145,6 @@ Regressiontest_AixLib_Media:PR:
         lib_package: AixLib.Media
     extends: .Regressiontest:PR
 
-Regressiontest_AixLib_Resources:PR:
-    variables:
-        lib_package: AixLib.Resources
-    extends: .Regressiontest:PR
-
 Regressiontest_AixLib_Systems:PR:
     variables:
         lib_package: AixLib.Systems
@@ -163,11 +158,6 @@ Regressiontest_AixLib_ThermalZones:PR:
 Regressiontest_AixLib_Types:PR:
     variables:
         lib_package: AixLib.Types
-    extends: .Regressiontest:PR
-
-Regressiontest_AixLib_UsersGuide:PR:
-    variables:
-        lib_package: AixLib.UsersGuide
     extends: .Regressiontest:PR
 
 Regressiontest_AixLib_Utilities:PR:
@@ -211,11 +201,6 @@ Regressiontest_AixLib_Media:Push:
         lib_package: AixLib.Media
     extends: .Regressiontest:Push
 
-Regressiontest_AixLib_Resources:Push:
-    variables:
-        lib_package: AixLib.Resources
-    extends: .Regressiontest:Push
-
 Regressiontest_AixLib_Systems:Push:
     variables:
         lib_package: AixLib.Systems
@@ -229,11 +214,6 @@ Regressiontest_AixLib_ThermalZones:Push:
 Regressiontest_AixLib_Types:Push:
     variables:
         lib_package: AixLib.Types
-    extends: .Regressiontest:Push
-
-Regressiontest_AixLib_UsersGuide:Push:
-    variables:
-        lib_package: AixLib.UsersGuide
     extends: .Regressiontest:Push
 
 Regressiontest_AixLib_Utilities:Push:
@@ -250,7 +230,7 @@ Regression_overall_coverage:PR:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
         - export CI_PYTHON_CONFIG_FILE="../bin/ci-tests/config/modelica_py_ci_config.toml"
-        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -269,7 +249,7 @@ Regression_overall_coverage:Push:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
         - export CI_PYTHON_CONFIG_FILE="../bin/ci-tests/config/modelica_py_ci_config.toml"
-        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --coverage-only  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -287,7 +267,7 @@ prepare_create_plots:Push:
         - apt-get update -y && apt-get install zip unzip -y
         - pip install pandas mako matplot toml requests
     script:
-        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
+        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
@@ -309,15 +289,11 @@ prepare_create_plots:Push:
       artifacts: true
     - job: Regressiontest_AixLib_Media:Push
       artifacts: true
-    - job: Regressiontest_AixLib_Resources:Push
-      artifacts: true
     - job: Regressiontest_AixLib_Systems:Push
       artifacts: true
     - job: Regressiontest_AixLib_ThermalZones:Push
       artifacts: true
     - job: Regressiontest_AixLib_Types:Push
-      artifacts: true
-    - job: Regressiontest_AixLib_UsersGuide:Push
       artifacts: true
     - job: Regressiontest_AixLib_Utilities:Push
       artifacts: true
@@ -327,7 +303,7 @@ prepare_create_plots:PR:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
+        - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch master --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
@@ -351,15 +327,11 @@ prepare_create_plots:PR:
       artifacts: true
     - job: Regressiontest_AixLib_Media:PR
       artifacts: true
-    - job: Regressiontest_AixLib_Resources:PR
-      artifacts: true
     - job: Regressiontest_AixLib_Systems:PR
       artifacts: true
     - job: Regressiontest_AixLib_ThermalZones:PR
       artifacts: true
     - job: Regressiontest_AixLib_Types:PR
-      artifacts: true
-    - job: Regressiontest_AixLib_UsersGuide:PR
       artifacts: true
     - job: Regressiontest_AixLib_Utilities:PR
       artifacts: true
@@ -378,7 +350,7 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
         - export CI_PYTHON_CONFIG_FILE="../bin/ci-tests/config/modelica_py_ci_config.toml"
-        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - cd AixLib && xvfb-run -n 77 python -m ModelicaPyCI.unittest.reference_check  --create-ref  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     after_script:
         - source activate myenv
         - cd CorrectedVersion/$CI_PROJECT_NAME

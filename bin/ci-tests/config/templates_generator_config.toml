@@ -19,7 +19,7 @@ template_scripts_dir = "scripts"
 buildingspy_upgrade = "git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage"
 
 [packages]
-AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Fluid", "Media", "Resources", "Systems", "ThermalZones", "Types", "UsersGuide", "Utilities",]
+AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
 
 [whitelist_library_config]
 local_path = "modelica-ibpsa"

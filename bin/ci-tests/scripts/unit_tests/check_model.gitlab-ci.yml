@@ -15,9 +15,9 @@
 # config_ci_exit_file: exit.sh
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_check_whitelist.txt. Please pull the new files before push again.
 # whitelist_model_file: ci_check_whitelist.txt
-# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+# arg_wh: --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
 # python_version myenv
-# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 # modelicapyci_config_structure_module: ModelicaPyCI.structure.config_structure
 
 include: 'bin/ci-tests/scripts/utilities.yml'
@@ -109,11 +109,6 @@ Check_AixLib_Media:PR:
         lib_package: Media
     extends: .check_model_job:PR
 
-Check_AixLib_Resources:PR:
-    variables:
-        lib_package: Resources
-    extends: .check_model_job:PR
-
 Check_AixLib_Systems:PR:
     variables:
         lib_package: Systems
@@ -127,11 +122,6 @@ Check_AixLib_ThermalZones:PR:
 Check_AixLib_Types:PR:
     variables:
         lib_package: Types
-    extends: .check_model_job:PR
-
-Check_AixLib_UsersGuide:PR:
-    variables:
-        lib_package: UsersGuide
     extends: .check_model_job:PR
 
 Check_AixLib_Utilities:PR:
@@ -175,11 +165,6 @@ Check_AixLib_Media:Push:
         lib_package: Media
     extends: .check_model_job:Push
 
-Check_AixLib_Resources:Push:
-    variables:
-        lib_package: Resources
-    extends: .check_model_job:Push
-
 Check_AixLib_Systems:Push:
     variables:
         lib_package: Systems
@@ -193,11 +178,6 @@ Check_AixLib_ThermalZones:Push:
 Check_AixLib_Types:Push:
     variables:
         lib_package: Types
-    extends: .check_model_job:Push
-
-Check_AixLib_UsersGuide:Push:
-    variables:
-        lib_package: UsersGuide
     extends: .check_model_job:Push
 
 Check_AixLib_Utilities:Push:
@@ -218,7 +198,7 @@ check_whitelist_job:
         - mkdir whitelist && cd whitelist
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     after_script:
         - cd whitelist && cd $CI_PROJECT_NAME
         - if cat exit.sh | grep "FAIL"; then

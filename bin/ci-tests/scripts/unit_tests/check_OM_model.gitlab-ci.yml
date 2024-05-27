@@ -10,7 +10,7 @@
 # expire_in_time: 7h
 # arg_PR: --om-options OM_CHECK --whitelist-library IBPSA --packages $lib_package --library AixLib 
 # arg_push: --om-options OM_CHECK --changed-flag  --whitelist-library IBPSA --packages $lib_package --library AixLib 
-# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Resources', 'Systems', 'ThermalZones', 'Types', 'UsersGuide', 'Utilities']
+# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 
@@ -100,11 +100,6 @@ OM_Check_AixLib_Media:PR:
         lib_package: Media
     extends: .OM_check_model_job:PR
 
-OM_Check_AixLib_Resources:PR:
-    variables:
-        lib_package: Resources
-    extends: .OM_check_model_job:PR
-
 OM_Check_AixLib_Systems:PR:
     variables:
         lib_package: Systems
@@ -118,11 +113,6 @@ OM_Check_AixLib_ThermalZones:PR:
 OM_Check_AixLib_Types:PR:
     variables:
         lib_package: Types
-    extends: .OM_check_model_job:PR
-
-OM_Check_AixLib_UsersGuide:PR:
-    variables:
-        lib_package: UsersGuide
     extends: .OM_check_model_job:PR
 
 OM_Check_AixLib_Utilities:PR:
@@ -166,11 +156,6 @@ OM_Check_AixLib_Media:push:
         lib_package: Media
     extends: .OM_check_model_job:push
 
-OM_Check_AixLib_Resources:push:
-    variables:
-        lib_package: Resources
-    extends: .OM_check_model_job:push
-
 OM_Check_AixLib_Systems:push:
     variables:
         lib_package: Systems
@@ -184,11 +169,6 @@ OM_Check_AixLib_ThermalZones:push:
 OM_Check_AixLib_Types:push:
     variables:
         lib_package: Types
-    extends: .OM_check_model_job:push
-
-OM_Check_AixLib_UsersGuide:push:
-    variables:
-        lib_package: UsersGuide
     extends: .OM_check_model_job:push
 
 OM_Check_AixLib_Utilities:push:

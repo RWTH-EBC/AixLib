@@ -3,8 +3,8 @@
 :: .custom_install_additional_modelica_libraries
 :: .github_ssh_auth
 
-python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
-python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Resources Systems ThermalZones Types UsersGuide Utilities 
+python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
+python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 
 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
@@ -37,10 +37,6 @@ python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-libr
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Media
 :: Check & Simulate AixLib Media on push
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Media
-:: Check & Simulate AixLib Resources on PR
-python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Resources
-:: Check & Simulate AixLib Resources on push
-python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Resources
 :: Check & Simulate AixLib Systems on PR
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Systems
 :: Check & Simulate AixLib Systems on push
@@ -53,10 +49,6 @@ python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-libr
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Types
 :: Check & Simulate AixLib Types on push
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Types
-:: Check & Simulate AixLib UsersGuide on PR
-python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages UsersGuide
-:: Check & Simulate AixLib UsersGuide on push
-python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages UsersGuide
 :: Check & Simulate AixLib Utilities on PR
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Utilities
 :: Check & Simulate AixLib Utilities on push
