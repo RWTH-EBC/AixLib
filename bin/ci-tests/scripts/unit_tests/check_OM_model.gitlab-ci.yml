@@ -39,7 +39,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_CHECK --whitelist-library IBPSA --packages $lib_package --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_CHECK --whitelist-library IBPSA --packages $lib_package --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -55,7 +55,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_CHECK --changed-flag  --whitelist-library IBPSA --packages $lib_package --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_CHECK --changed-flag  --whitelist-library IBPSA --packages $lib_package --library AixLib 
     artifacts:
         when: on_failure
         paths:

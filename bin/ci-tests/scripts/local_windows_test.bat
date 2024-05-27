@@ -6,8 +6,8 @@
 python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
 python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities 
 
-python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
-python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
+python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
+python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
 
 :: Check & Simulate AixLib Airflow on PR
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --root-whitelist-library .. --whitelist-library IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Airflow

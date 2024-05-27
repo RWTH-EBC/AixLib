@@ -38,7 +38,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -54,7 +54,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 ModelicaPyCI.unittest.om_check  --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Obsolete Resources Systems ThermalZones Types UsersGuide Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:

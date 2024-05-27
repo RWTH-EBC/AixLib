@@ -8,8 +8,8 @@
 # PR_main_branch_rule : $CI_COMMIT_BRANCH  == "master"  
 # ci_style_commit : ci_style_check
 # result_dir : result
-# arg_PR : --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
-# arg_Push : --changed-flag  --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
+# arg_PR : --dymola-version 2022 --library AixLib 
+# arg_Push : --changed-flag  --dymola-version 2022 --library AixLib 
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 stages:
@@ -38,7 +38,7 @@ StyleCheck:AixLib:PR:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -54,7 +54,7 @@ StyleCheck:AixLib:Push:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib --root-library AixLib\package.mo 
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
     artifacts:
         when: on_failure
         paths:
