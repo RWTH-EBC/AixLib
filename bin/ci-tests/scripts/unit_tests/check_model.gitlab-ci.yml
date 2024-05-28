@@ -14,7 +14,7 @@
 # arg_PR: --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
 # config_ci_exit_file: exit.sh
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file ci_check_whitelist.txt. Please pull the new files before push again.
-# whitelist_model_file: ci_check_whitelist.txt
+# whitelist_model_file: check_whitelist.txt
 # arg_wh: --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities --library AixLib 
 # python_version myenv
 # package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
@@ -203,7 +203,7 @@ check_whitelist_job:
         - cd whitelist && cd $CI_PROJECT_NAME
         - if cat exit.sh | grep "FAIL"; then
             message="CI message from ebc-aixlib-bot. Update file ci_check_whitelist.txt. Please pull the new files before push again." ;
-            git add ci_check_whitelist.txt ;
+            git add check_whitelist.txt ;
             git commit -m "$message" ;
             git push git@github.com:$Github_Repository.git;
             exit 0;

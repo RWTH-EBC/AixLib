@@ -18,9 +18,11 @@ ref_file = "ci_reference_list.txt"
 
 [whitelist]
 dir = "ci_whitelist"
-check_file = "ci_check_whitelist.txt"
-simulate_file = "ci_simulate_whitelist.txt"
-html_file = "rci_html_whitelist.txt"
+check_file = 'check_whitelist.txt'
+simulate_file = 'simulate_whitelist.txt'
+ibpsa_file = 'ibpsa_whitelist.txt'
+ref_file = "reference_whitelist.txt"
+
 
 [artifacts]
 dir = "artifacts"
