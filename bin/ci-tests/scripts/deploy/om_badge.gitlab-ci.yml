@@ -10,7 +10,7 @@ create_om_badge:
         - !reference [.clone_ci_templates, script]
         - pip install --upgrade pip anybadge && apt-get update -y && apt-get install zip unzip -y
     script:
-        - python -m ModelicaPyCI.deploy.create_om_badge {arg}
+        - python -m ModelicaPyCI.deploy.create_om_badge --main-branch master --badge-folder $CI_COMMIT_REF_NAME/badge_files --om-badge-name om_readiness_badge.svg --library AixLib 
     artifacts:
         paths:
          - $CI_COMMIT_REF_NAME/badge_files
