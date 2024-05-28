@@ -78,7 +78,7 @@ WhiteList:
         paths:
             - Merge_Package
         expire_in: 7h
-        
+
 
 IBPSA_Pull_Request:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
