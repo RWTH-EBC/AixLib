@@ -1,0 +1,18 @@
+include: 'bin/ci-tests/scripts/utilities.yml'
+
+stages:
+    - 1_OM_Badge
+
+create_om_badge:
+    image: python:3.9
+    stage: 1_OM_Badge
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - pip install --upgrade pip anybadge && apt-get update -y && apt-get install zip unzip -y
+    script:
+        - python -m ModelicaPyCI.deploy.create_om_badge {arg}
+    artifacts:
+        paths:
+         - $CI_COMMIT_REF_NAME/badge_files
+    when: always
+    allow_failure: true
