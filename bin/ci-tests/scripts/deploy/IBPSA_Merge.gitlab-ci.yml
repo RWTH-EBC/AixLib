@@ -65,7 +65,6 @@ WhiteList:
         - cd Merge_Package/AixLib
         - python -m ModelicaPyCI.structure.create_whitelist --root-whitelist-library modelica-ibpsa --git-url https://github.com/ibpsa/modelica-ibpsa.git --whitelist-library IBPSA --library AixLib 
         - python -m ModelicaPyCI.converter.lock_model 
-        - rm -r IBPSA
         - message="CI message from ebc-aixlib-bot. Merge of 'IBPSA' library. Update files ci_check_whitelist.txt and rci_html_whitelist.txt"
         - push_model=$(git ls-files --others --exclude-standard --directory AixLib)
         - git add $push_model
