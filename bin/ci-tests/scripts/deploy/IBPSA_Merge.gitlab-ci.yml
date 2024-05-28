@@ -40,6 +40,7 @@ IBPSA:
         - cp -R AixLib temp_AixLib
         - rm -r IBPSA_folder || echo "all clear to clone"
         - git clone https://github.com/ibpsa/modelica-ibpsa.git IBPSA_folder
+        - export CI_PYTHON_CONFIG_FILE="AixLib/bin/ci-tests/config/modelica_py_ci_config.toml"
         - python -m ModelicaPyCI.deploy.ibpsa_merge --merge-library-mos-scripts Resources/Scripts/Conversion --temporary-mos-path Convertmos --merge-library-dir IBPSA_folder --merge-library IBPSA --library-mos-scripts Resources/Scripts --library-dir temp_AixLib --library AixLib 
         - rm -r IBPSA_folder
         - mkdir $CI_PROJECT_NAME/Merge_Package
@@ -77,10 +78,9 @@ WhiteList:
         paths:
             - Merge_Package
         expire_in: 7h
-
-    allow_failure: true
     needs:
-    - job: IBPSA
+    - pipeline: $PARENT_PIPELINE_ID
+      job: IBPSA
       artifacts: true
 
 IBPSA_Pull_Request:
@@ -95,3 +95,7 @@ IBPSA_Pull_Request:
     rules:
        - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "CustomIBPSA_Merge" && $CI_COMMIT_MESSAGE =~ /ci_trigger_ibpsa/
          when: always
+    needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: Whitelist
+      artifacts: true
