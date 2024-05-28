@@ -2,7 +2,7 @@
 # ci_stage_update_whitelist : 13_update_whiteList
 # ci_stage_open_PR : 15_open_PR
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-# python_version : myenv
+
 # git_url : https://github.com/ibpsa/modelica-ibpsa.git
 # library : AixLib
 # merge_branch : CustomIBPSA_Merge

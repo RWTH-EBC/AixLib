@@ -4,7 +4,7 @@ stages:
     - 1_OM_Badge
 
 create_om_badge:
-    image: python:3.9
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: 1_OM_Badge
     before_script:
         - !reference [.clone_ci_templates, script]

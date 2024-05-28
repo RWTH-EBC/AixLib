@@ -1,65 +1,37 @@
 # image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
 # ci_stage_style_check : 4_Style_check
-# modelicapyci_syntax_test_module : ModelicaPyCI.syntax.style_checking
-# xvfb_flag : xvfb-run -n 77
+# modelicapyci_syntax_naming_guideline : ModelicaPyCI.syntax.naming_guideline
 # library : AixLib
 # commit_string : $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
 # PR_main_branch_rule : $CI_COMMIT_BRANCH  == "master"  
-# ci_style_commit : ci_style_check
+# ci_naming_guideline : ci_check_naming
 # result_dir : bin/ci-tests/result
-# arg_PR : --dymola-version 2022 --library AixLib 
-# arg_Push : --changed-flag  --dymola-version 2022 --library AixLib 
+# arg : --changed-flag  --main-branch master --config bin/ci-tests/naming_guideline.config --library AixLib 
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 stages:
     - 4_Style_check
 
 
-.StyleCheckRule:PR:
+.NamingGuideline:PR:
     rules:
         - if: $CI_PIPELINE_SOURCE == "external_pull_request_event"  &&  $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
           when: on_success
         - if: $CI_PIPELINE_SOURCE == "push"  && ($CI_COMMIT_BRANCH  == "master"  )
           when: on_success
-        - if: $CI_COMMIT_MESSAGE  =~ /ci_style_check/ && $CI_PIPELINE_SOURCE == "push"
+        - if: $CI_COMMIT_MESSAGE  =~ /ci_check_naming/ && $CI_PIPELINE_SOURCE == "push"
           when: always
 
-.StyleCheckRule:Push:
-    rules:
-        - if: $CI_PIPELINE_SOURCE == "push"  &&  $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
-          when: on_success
-        - if:  ($CI_COMMIT_BRANCH  == "master"  )
-          when: never
-
-StyleCheck:AixLib:PR:
+NamingGuideline:AixLib:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: 4_Style_check
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --main-branch master --config bin/ci-tests/naming_guideline.config --library AixLib 
     artifacts:
-        when: on_failure
         paths:
             - bin/ci-tests/result/
         expire_in: 7 day
-    allow_failure: true
     rules:
-        - !reference [.StyleCheckRule:PR , rules]
-
-StyleCheck:AixLib:Push:
-    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
-    stage: 4_Style_check
-    before_script:
-        - !reference [.clone_ci_templates, script]
-    script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
-    artifacts:
-        when: on_failure
-        paths:
-            - bin/ci-tests/result/
-        expire_in: 7 day
-    allow_failure: true
-    rules:
-        - !reference [.StyleCheckRule:Push , rules]
-
+        - !reference [.NamingGuideline:PR , rules]
