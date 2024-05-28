@@ -2,7 +2,7 @@ dymola_image = "registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_
 open_modelica_image = "registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main"
 gitlab_page = "https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib"
 github_repository = "RWTH-EBC/AixLib"
-stage_list = [ "html", "style", "check", "simulate", "regression", "Merge",]
+stage_list = [ "html", "style", "check", "simulate", "regression", "Merge", "om_badge"]
 # stage_list = ["Merge",]
 library = "AixLib"
 library_local_path = "D:/04_git/AixLib"
@@ -20,6 +20,7 @@ bot_name = "ebc-aixlib-bot"
 utilities_directory = "utilities.yml"
 template_scripts_dir = "scripts"
 buildingspy_upgrade = "git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage"
+om_badge_name = "om_readiness_badge.svg"
 
 [packages]
 AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
