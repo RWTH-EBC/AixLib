@@ -4,7 +4,7 @@
 # library : AixLib
 # ci_naming_guideline : ci_check_naming
 # result_dir : bin/ci-tests/result
-# arg : --changed-flag  --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
+# arg : --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 stages:
@@ -17,7 +17,7 @@ NamingGuideline:AixLib:PR:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
     artifacts:
         paths:
             - bin/ci-tests/result/
