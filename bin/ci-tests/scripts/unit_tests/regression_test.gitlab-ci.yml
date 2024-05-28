@@ -19,7 +19,6 @@
 # modelicapyci_api_github_module: ModelicaPyCI.api_script.api_github
 # {arg_create_plots} : --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Fluid Media Systems ThermalZones Types Utilities 
 # api_github_arg: --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
-# commit_string = $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
 # PR_main_branch_rule : &{PR_main_branch_rule}
 # library: AixLib
 # ci_regression_test_commit :  ci_regression_test
@@ -38,20 +37,6 @@ stages:
     - 11_plot_ref
     - 12_prepare
 
-.regression_rules:PR:
-    rules:
-        - if: $CI_PIPELINE_SOURCE == "external_pull_request_event"  &&  $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
-          when: on_success
-        - if: $CI_PIPELINE_SOURCE == "push"  && ($CI_COMMIT_BRANCH  == "main"  )
-          when: on_success
-
-
-.regression_rules:Push:
-    rules:
-        - if: $CI_PIPELINE_SOURCE == "push"  &&  $CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/
-          when: on_success
-        - if:  ($CI_COMMIT_BRANCH  == "main"  )
-          when: never
 
 .Regressiontest:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
@@ -77,7 +62,7 @@ stages:
             - bin/ci-tests/result/
         expire_in: 7h
     rules:
-        - !reference [.regression_rules:PR , rules]
+        - !reference [.rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_regression_test/ && $CI_PIPELINE_SOURCE == "push"
           when: always
 
@@ -106,7 +91,7 @@ stages:
             - bin/ci-tests/result/
         expire_in: 7h
     rules:
-        - !reference [.regression_rules:Push , rules]
+        - !reference [.rules:push , rules]
 
 Regressiontest_AixLib_Airflow:PR:
     variables:
@@ -235,7 +220,7 @@ Regression_overall_coverage:PR:
             - bin/ci-tests/result/
         expire_in: 7h
     rules:
-        - !reference [.regression_rules:PR , rules]
+        - !reference [.rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_regression_test/ && $CI_PIPELINE_SOURCE == "push"
           when: always
 
@@ -254,7 +239,7 @@ Regression_overall_coverage:Push:
             - bin/ci-tests/result/
         expire_in: 7h
     rules:
-        - !reference [.regression_rules:Push , rules]
+        - !reference [.rules:push , rules]
 
 prepare_create_plots:Push:
     stage: 12_prepare
@@ -271,7 +256,7 @@ prepare_create_plots:Push:
         paths:
             - bin/ci-tests/result/
     rules:
-        - !reference [.regression_rules:Push , rules]
+        - !reference [.rules:push , rules]
     needs:
     - job: Regressiontest_AixLib_Airflow:Push
       artifacts: true
@@ -307,7 +292,7 @@ prepare_create_plots:PR:
         paths:
             - bin/ci-tests/result/
     rules:
-        - !reference [.regression_rules:PR , rules]
+        - !reference [.rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_regression_test/ && $CI_PIPELINE_SOURCE == "push"
           when: always
     needs:
@@ -373,7 +358,7 @@ RegressionTest_Check_References:
             - bin/ci-tests/result/
         expire_in: 7h
     rules:
-        - !reference [.regression_rules:PR , rules]
+        - !reference [.rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_reference_check/ && $CI_PIPELINE_SOURCE == "push"
           when: always
 
