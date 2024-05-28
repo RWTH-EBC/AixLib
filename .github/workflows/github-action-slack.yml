@@ -18,4 +18,4 @@ jobs:
         with:
           python-version: '3.11.0-alpha.1'
       - run:  pip install requests datetime argparse slack_sdk
-      - run:  python bin/CITests/04_api_script/api_slack.py --github-token ${{ secrets.GIT_TOKEN }} --slack-token ${{ secrets.SLACK_BOT_TOKEN }} --github-repo "RWTH-EBC/AixLib" --base-branch "development"
+      - run:  python bin/CITests/04_api_script/api_slack.py --github-token ${{ secrets.GIT_TOKEN }} --slack-token ${{ secrets.SLACK_BOT_TOKEN }} --github-repo "RWTH-EBC/AixLib" --main-branch "main"
