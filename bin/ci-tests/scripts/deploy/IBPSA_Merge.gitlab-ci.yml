@@ -78,10 +78,7 @@ WhiteList:
         paths:
             - Merge_Package
         expire_in: 7h
-    needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: IBPSA
-      artifacts: true
+        
 
 IBPSA_Pull_Request:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
@@ -95,7 +92,3 @@ IBPSA_Pull_Request:
     rules:
        - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "CustomIBPSA_Merge" && $CI_COMMIT_MESSAGE =~ /ci_trigger_ibpsa/
          when: always
-    needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: Whitelist
-      artifacts: true
