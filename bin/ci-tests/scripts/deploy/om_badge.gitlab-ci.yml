@@ -14,5 +14,7 @@ create_om_badge:
     artifacts:
         paths:
          - bin/ci-tests/result
-    when: always
+    rules:
+        - if:  ($CI_COMMIT_BRANCH  == "main")
+          when: always
     allow_failure: true

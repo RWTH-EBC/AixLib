@@ -188,10 +188,6 @@ order = 13.0
 name = "update_whiteList"
 order = 14.0
 
-[stage_names.build_ci_structure]
-name = "build_ci_structure"
-order = 15.0
-
 [stage_names.OM_badge]
 name = "OM_Badge"
 order = 1.0
