@@ -31,10 +31,10 @@ equation
   Air exchange coefficients at 50 Pa pressure difference between
   ambience and room air:
 </p>
-<table>
+  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
   <caption>
-    \"coefficients\" cellspacing=\"2\" cellpadding=\"0\" border= \"1\"&gt;
-    <table>
+  coefficients
+  </caption>
       <tr>
         <td>
           <p style=\"text-align:center;\"></p>
@@ -111,10 +111,10 @@ equation
       <br/>
       Reference values for air shielding value e:
     </p>
-    <table>
-      <caption>
-        \"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\
-      </caption>
+  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
+  <caption>
+  Reference
+  </caption>
       <tr>
         <td></td>
         <td>
@@ -226,9 +226,9 @@ equation
       <br/>
       Reference values for height correction value ε:
     </p>
-    <table>
+    <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
       <caption>
-        \"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\
+      Reference
       </caption>
       <tr>
         <td>
