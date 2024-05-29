@@ -13,8 +13,8 @@
 # config_ci_exit_file: exit.sh
 # bot_update_model_whitelist_commit: CI message from ebc-aixlib-bot. Update file whitelist-check_file. Please pull the new files before push again.
 # whitelist_model_file: check_whitelist.txt
-# arg_wh: --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
-# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
+# arg_wh: --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+# package_list: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 # modelicapyci_config_structure_module: ModelicaPyCI.structure.config_structure
 
 include: 'bin/ci-tests/scripts/utilities.yml'
@@ -78,16 +78,6 @@ Check_AixLib_DataBase:PR:
         lib_package: DataBase
     extends: .check_model_job:PR
 
-Check_AixLib_Electrical:PR:
-    variables:
-        lib_package: Electrical
-    extends: .check_model_job:PR
-
-Check_AixLib_Examples:PR:
-    variables:
-        lib_package: Examples
-    extends: .check_model_job:PR
-
 Check_AixLib_Fluid:PR:
     variables:
         lib_package: Fluid
@@ -139,16 +129,6 @@ Check_AixLib_DataBase:Push:
         lib_package: DataBase
     extends: .check_model_job:Push
 
-Check_AixLib_Electrical:Push:
-    variables:
-        lib_package: Electrical
-    extends: .check_model_job:Push
-
-Check_AixLib_Examples:Push:
-    variables:
-        lib_package: Examples
-    extends: .check_model_job:Push
-
 Check_AixLib_Fluid:Push:
     variables:
         lib_package: Fluid
@@ -192,7 +172,7 @@ check_whitelist_job:
         - mkdir whitelist && cd whitelist
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
-        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+        - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --create-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     after_script:
         - cd whitelist && cd $CI_PROJECT_NAME
         - if cat exit.sh | grep "FAIL"; then

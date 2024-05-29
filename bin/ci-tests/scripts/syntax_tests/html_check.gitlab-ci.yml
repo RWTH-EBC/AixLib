@@ -5,14 +5,14 @@
 #  html_praefix : correct_HTML_
 
 # ModelicaPyCI.syntax.html_tidy : modelicapyci_html_tidy_module
-# arg_correct_html: --filter-whitelist-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities 
+# arg_correct_html: --filter-whitelist-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
 # result_dir : bin/ci-tests/result
 # expire_in_time : 7h
 # library : AixLib
 
 # ci_html_commit : ci_html
 # ModelicaPyCI.api_script.api_github : modelicapyci_api_github_module
-# arg_PR : --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities 
+# arg_PR : --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
 # arg_wh : --filter-whitelist-flag  --log-flag  --whitelist-library IBPSA 
 # bot_create_html_file_commit : CI message from ebc-aixlib-bot. Push new files with corrected html Syntax .
 
@@ -36,7 +36,7 @@ Check_HTML:PR:
         - !reference [.clone_ci_templates, script]
 
     script:
-        - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities 
+        - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
     artifacts:
         paths:
             - bin/ci-tests/result/
@@ -52,7 +52,7 @@ Check_HTML:push:
         - !reference [.github_ssh_auth, script]
         - !reference [.clone_ci_templates, script]
     script:
-        - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities 
+        - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
     artifacts:
         paths:
             - bin/ci-tests/result/

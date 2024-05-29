@@ -2,12 +2,12 @@
 # library: AixLib
 # ci_OM_sim_commit: ci_om_simulate
 # OM_python_check_model_module: ModelicaPyCI.unittest.om_check
-# arg_PR : --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
-# arg_push: --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+# arg_PR : --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+# arg_push: --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
 # result_dir: bin/ci-tests/result
 # OM_Image:  registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
 # expire_in_time: 7h
-# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Electrical', 'Examples', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
+# packages: ['Airflow', 'BoundaryConditions', 'Controls', 'DataBase', 'Fluid', 'Media', 'Systems', 'ThermalZones', 'Types', 'Utilities']
 
 include: 'bin/ci-tests/scripts/utilities.yml'
 
@@ -21,7 +21,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -39,7 +39,7 @@ stages:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Electrical Examples Fluid Media Systems ThermalZones Types Utilities --library AixLib 
+        - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
         when: on_failure
         paths:
@@ -67,16 +67,6 @@ OM_Simulate_AixLib_Controls:PR:
 OM_Simulate_AixLib_DataBase:PR:
     variables:
         lib_package: DataBase
-    extends: .OM_simulate_model_job:PR
-
-OM_Simulate_AixLib_Electrical:PR:
-    variables:
-        lib_package: Electrical
-    extends: .OM_simulate_model_job:PR
-
-OM_Simulate_AixLib_Examples:PR:
-    variables:
-        lib_package: Examples
     extends: .OM_simulate_model_job:PR
 
 OM_Simulate_AixLib_Fluid:PR:
@@ -128,16 +118,6 @@ OM_Simulate_AixLib_Controls:push:
 OM_Simulate_AixLib_DataBase:push:
     variables:
         lib_package: DataBase
-    extends: .OM_simulate_model_job:push
-
-OM_Simulate_AixLib_Electrical:push:
-    variables:
-        lib_package: Electrical
-    extends: .OM_simulate_model_job:push
-
-OM_Simulate_AixLib_Examples:push:
-    variables:
-        lib_package: Examples
     extends: .OM_simulate_model_job:push
 
 OM_Simulate_AixLib_Fluid:push:

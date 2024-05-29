@@ -23,7 +23,8 @@ commit_string = "$CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE 
 pr_main_branch_rule = "$CI_COMMIT_BRANCH  == \"main\"  "
 
 [packages]
-AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Examples", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
+#AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Examples", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
+AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
 
 [whitelist_library_config]
 local_path = "modelica-ibpsa"
