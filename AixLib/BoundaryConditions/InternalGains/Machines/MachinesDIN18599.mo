@@ -278,12 +278,9 @@ equation
   The type of activity determines the load for machines in the room for
   one person according to DIN 18599-10. The following values are used:
 </p>
-<table>
-  <caption>
-    \"DIN 18599-10 activity level and produces heat output\"
-    cellspacing=\"2\" cellpadding=\"0\" border=\"0\"&gt;
-    <table>
-      <tr>
+  <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+    <caption>DIN 18599-10 activity level and produces heat output</caption>
+    <tr>
         <td style=\"background-color: #dcdcdc\">
           Activity Type
         </td>
