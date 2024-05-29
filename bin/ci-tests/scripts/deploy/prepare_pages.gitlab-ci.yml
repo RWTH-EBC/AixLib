@@ -1,0 +1,20 @@
+# ci_stage_prepare_page : prepare_pages
+# result_dir : bin/ci-tests/result
+# expire_in_time : 7h
+
+
+
+stages:
+    - prepare_pages
+pages:
+    stage: prepare_pages
+    script:
+        - if [ ! -d "bin/ci-tests/result" ]; then echo "No results in this pipeline, no pages to publish" && exit 0; fi
+        - mkdir -p public/$CI_COMMIT_REF_NAME
+        - cp -r bin/ci-tests/result/* public/$CI_COMMIT_REF_NAME
+    artifacts:
+        paths:
+         - public
+        expire_in: 7h
+    when: always
+    allow_failure: true

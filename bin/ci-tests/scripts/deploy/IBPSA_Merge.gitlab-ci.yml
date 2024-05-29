@@ -1,0 +1,94 @@
+# ci_stage_lib_merge : merge
+# ci_stage_update_whitelist : update_whiteList
+# ci_stage_open_PR : open_PR
+# image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+
+# git_url : https://github.com/ibpsa/modelica-ibpsa.git
+# library : AixLib
+# merge_branch : CustomIBPSA_Merge
+# modelicapyci_library_merge_module : ModelicaPyCI.deploy.ibpsa_merge
+# arg_lib : --merge-library-mos-scripts Resources/Scripts/Conversion --temporary-mos-path Convertmos --merge-library-dir IBPSA_folder --merge-library IBPSA --library-mos-scripts Resources/Scripts --library-dir temp_AixLib --library AixLib 
+# ci_trigger_ibpsa_commit : ci_trigger_ibpsa
+# expire_in_time : 7h
+# modelicapyci_create_whitelist_module : ModelicaPyCI.structure.create_whitelist
+# arg_whitelist_html : --root-whitelist-library modelica-ibpsa --git-url https://github.com/ibpsa/modelica-ibpsa.git --whitelist-library IBPSA --library AixLib 
+# modelicapyci_test_validate_module : ModelicaPyCI.unittest.checkpackages.validatetest
+# xvfb_flag : xvfb-run -n 77
+# arg_lock :  
+# whitelist_library : IBPSA
+# bot_merge_commit : CI message from ebc-aixlib-bot. Merge of 'IBPSA' library.
+# result_dir : bin/ci-tests/result
+# modelicapyci_api_github_module : ModelicaPyCI.api_script.api_github
+# arg_api_pr : --ibpsa-merge-flag  --create-pr-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib 
+# merge_library_dir: IBPSA_folder
+
+include: 'bin/ci-tests/scripts/utilities.yml'
+
+stages:
+    - merge
+    - update_whiteList
+    - open_PR
+
+IBPSA:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: merge
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - !reference [.github_ssh_auth, script]
+    script:
+        - cd ..
+        - cp -R AixLib temp_AixLib
+        - rm -r IBPSA_folder || echo "all clear to clone"
+        - git clone https://github.com/ibpsa/modelica-ibpsa.git IBPSA_folder
+        - export CI_PYTHON_CONFIG_FILE="AixLib/bin/ci-tests/config/modelica_py_ci_config.toml"
+        - python -m ModelicaPyCI.deploy.ibpsa_merge --merge-library-mos-scripts Resources/Scripts/Conversion --temporary-mos-path Convertmos --merge-library-dir IBPSA_folder --merge-library IBPSA --library-mos-scripts Resources/Scripts --library-dir temp_AixLib --library AixLib 
+        - rm -r IBPSA_folder
+        - mkdir $CI_PROJECT_NAME/Merge_Package
+        - cp -R temp_AixLib $CI_PROJECT_NAME/Merge_Package
+        - rm -r temp_AixLib
+        - mv $CI_PROJECT_NAME/Merge_Package/temp_AixLib $CI_PROJECT_NAME/Merge_Package/AixLib
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "CustomIBPSA_Merge" && $CI_COMMIT_MESSAGE =~ /ci_trigger_ibpsa/
+          when: always
+    artifacts:
+        paths:
+            - Merge_Package
+        expire_in: 7h
+
+WhiteList:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: update_whiteList
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - !reference [.github_ssh_auth, script]
+    script:
+        - cd Merge_Package/AixLib
+        - python -m ModelicaPyCI.structure.create_whitelist --root-whitelist-library modelica-ibpsa --git-url https://github.com/ibpsa/modelica-ibpsa.git --whitelist-library IBPSA --library AixLib 
+        - python -m ModelicaPyCI.converter.lock_model 
+        - message="CI message from ebc-aixlib-bot. Merge of 'IBPSA' library."
+        - push_model=$(git ls-files --others --exclude-standard --directory AixLib)
+        - git switch $CI_COMMIT_BRANCH
+        - git add $push_model
+        - git commit -m "$message"
+        - git push git@github.com:$Github_Repository.git
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "CustomIBPSA_Merge" && $CI_COMMIT_MESSAGE =~ /ci_trigger_ibpsa/
+          when: always
+    artifacts:
+        paths:
+            - Merge_Package
+        expire_in: 7h
+
+
+IBPSA_Pull_Request:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: open_PR
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - git config --global user.name "$GITLAB_USER_NAME"
+        - git config --global user.email "$GITLAB_USER_EMAIL"
+    script:
+       - python -m ModelicaPyCI.api_script.api_github --ibpsa-merge-flag  --create-pr-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib 
+    rules:
+       - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "CustomIBPSA_Merge" && $CI_COMMIT_MESSAGE =~ /ci_trigger_ibpsa/
+         when: always

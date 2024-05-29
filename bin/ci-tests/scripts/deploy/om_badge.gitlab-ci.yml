@@ -1,0 +1,18 @@
+include: 'bin/ci-tests/scripts/utilities.yml'
+
+stages:
+    - OM_Badge
+
+create_om_badge:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: OM_Badge
+    before_script:
+        - !reference [.clone_ci_templates, script]
+        - pip install --upgrade pip anybadge && apt-get update -y && apt-get install zip unzip -y
+    script:
+        - python -m ModelicaPyCI.deploy.create_om_badge --main-branch master --om-badge-name om_readiness_badge.svg --library AixLib 
+    artifacts:
+        paths:
+         - bin/ci-tests/result
+    when: always
+    allow_failure: true

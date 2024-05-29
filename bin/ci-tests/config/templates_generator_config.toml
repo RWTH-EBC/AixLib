@@ -1,0 +1,204 @@
+dymola_image = "registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda"
+open_modelica_image = "registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main"
+gitlab_page = "https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib"
+github_repository = "RWTH-EBC/AixLib"
+stage_list = [ "html", "style", "check", "simulate", "regression", "Merge", "om_badge"]
+library = "AixLib"
+library_local_path = "D:/04_git/AixLib"
+templates_store_local_path = "D:/04_git/AixLib"
+templates_store_project = ""
+templates_store_branch_name = ""
+dymola_version = "2022"
+conda_environment = "myenv"
+main_branch = "main"
+html_praefix = "correct_HTML_"
+expire_in_time = "7h"
+xvfb_flag = "xvfb-run -n 77"
+bot_name = "ebc-aixlib-bot"
+utilities_directory = "utilities.yml"
+template_scripts_dir = "scripts"
+om_badge_name = "om_readiness_badge.svg"
+buildingspy_upgrade = "git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage"
+commit_string = "$CI_COMMIT_MESSAGE  !~ /ci_update_ref/   && $CI_COMMIT_MESSAGE  !~ /ci_show_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_dif_ref/ && $CI_COMMIT_MESSAGE  !~ /ci_create_model_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_html_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_create_example_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_om_simulate/ && $CI_COMMIT_MESSAGE  !~ /ci_check/ && $CI_COMMIT_MESSAGE  !~ /ci_om_check/ && $CI_COMMIT_MESSAGE  !~ /ci_regression_test/ && $CI_COMMIT_MESSAGE  !~ /ci_html/ && $CI_COMMIT_MESSAGE  !~ /ci_setting/ && $CI_COMMIT_MESSAGE  !~ /ci_style_check/ && $CI_COMMIT_MESSAGE  !~ /ci_trigger_ibpsa/ && $CI_COMMIT_MESSAGE  !~ /ci_merge_except/ && $CI_COMMIT_MESSAGE  !~ /ci_correct_html/ && $CI_COMMIT_MESSAGE  !~ /ci_build_structure/ && $CI_COMMIT_MESSAGE  !~ /ci_build_whitelist/ && $CI_COMMIT_MESSAGE  !~ /ci_reference_check/ && $CI_COMMIT_MESSAGE  !~ /ci_check_naming/"
+pr_main_branch_rule = "$CI_COMMIT_BRANCH  == \"main\"  "
+
+[packages]
+AixLib = [ "Airflow", "BoundaryConditions", "Controls", "DataBase", "Electrical", "Examples", "Fluid", "Media", "Systems", "ThermalZones", "Types", "Utilities",]
+
+[whitelist_library_config]
+local_path = "modelica-ibpsa"
+library = "IBPSA"
+git_url = "https://github.com/ibpsa/modelica-ibpsa.git"
+
+[modelica_py_ci]
+url = "https://github.com/RWTH-EBC/ModelicaPyCI.git@2_pydantic_config"
+OM_python_check_model_module = "ModelicaPyCI.unittest.om_check"
+test_validate_module = "ModelicaPyCI.unittest.checkpackages.validatetest"
+test_reference_module = "ModelicaPyCI.unittest.reference_check"
+google_chart_module = "ModelicaPyCI.converter.google_charts"
+api_github_module = "ModelicaPyCI.api_script.api_github"
+html_tidy_module = "ModelicaPyCI.syntax.html_tidy"
+syntax_test_module = "ModelicaPyCI.syntax.style_checking"
+naming_guideline_module = "ModelicaPyCI.syntax.naming_guideline"
+configuration_module = "ModelicaPyCI.config"
+library_merge_module = "ModelicaPyCI.deploy.ibpsa_merge"
+lock_model_module = "ModelicaPyCI.converter.lock_model"
+config_structure_module = "ModelicaPyCI.structure.config_structure"
+create_whitelist_module = "ModelicaPyCI.structure.create_whitelist"
+om_badge_module = "ModelicaPyCI.deploy.create_om_badge"
+
+[template_files]
+base = "D:\\04_git\\MoCITempGen\\templates\\ci_templates"
+url = "https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica"
+regression_file = "unit_tests/regression_test.txt"
+check_file = "unit_tests/check_model.txt"
+simulate_file = "unit_tests/simulate_model.txt"
+page_file = "deploy/prepare_pages.txt"
+ibpsa_merge_file = "deploy/IBPSA_Merge.txt"
+om_badge_file = "deploy/om_badge.txt"
+html_file = "syntax_tests/html_check.txt"
+style_check_file = "syntax_tests/style_check.txt"
+naming_guideline_file = "syntax_tests/naming_guideline.txt"
+structure_file = "deploy/create_CI_path.txt"
+main_yml_file = ".gitlab-ci.txt"
+local_templates_yml_file = "local_templates.gitlab-ci.txt"
+remote_templates_yml_file = "remote_templates.gitlab-ci.txt"
+setting_file = "cleanupscript/ci_setting.txt"
+deploy_test_file = "deploy/deploy_ci_tests.txt"
+build_whitelist_file = "cleanupscript/ci_build_whitelist.txt"
+OM_check_file = "unit_tests/check_OM_model.txt"
+OM_simulate_file = "unit_tests/simulate_OM_model.txt"
+utilities_file = "utilities.txt"
+local_windows = "local_windows_test.txt"
+
+[commit_interaction]
+update_ref = "ci_update_ref"
+show_ref = "ci_show_ref"
+dif_ref = "ci_dif_ref"
+create_model_whitelist = "ci_create_model_whitelist"
+create_html_whitelist = "ci_create_html_whitelist"
+create_simulate_whitelist = "ci_create_example_whitelist"
+simulate = "ci_simulate"
+OM_simulate = "ci_om_simulate"
+check = "ci_check"
+OM_check = "ci_om_check"
+regression_test = "ci_regression_test"
+html = "ci_html"
+setting = "ci_setting"
+style = "ci_style_check"
+trigger_ibpsa = "ci_trigger_ibpsa"
+merge_except = "ci_merge_except"
+correct_html = "ci_correct_html"
+build_structure = "ci_build_structure"
+build_whitelist_structure = "ci_build_whitelist"
+reference_check = "ci_reference_check"
+naming = "ci_check_naming"
+
+[bot_messages]
+merge_commit = "CI message from ebc-aixlib-bot. Merge of 'IBPSA' library."
+push_commit = "CI message from ebc-aixlib-bot. Automatic push of CI with new regression reference files. Please pull the new files before push again."
+create_ref_message = "CI message from ebc-aixlib-bot. New reference files were pushed to this branch. The job was successfully and the newly added files are tested in another commit."
+update_whitelist_commit = "CI message from ebc-aixlib-bot. Update or created new whitelist. Please pull the new whitelist before push again."
+create_ref_commit = "CI message from ebc-aixlib-bot. Automatic push of CI with new regression reference files. Please pull the new files before push again. Plottet Results $GITLAB_Page/$CI_COMMIT_REF_NAME/charts/"
+create_CI_template_commit = "CI message from ebc-aixlib-bot. Automatic push of CI with new created CI templates. Please pull the new files before push again."
+update_model_whitelist_commit = "CI message from ebc-aixlib-bot. Update file whitelist-check_file. Please pull the new files before push again."
+update_example_whitelist_commit = "CI message from ebc-aixlib-bot. Update file whitelist-simulate_file. Please pull the new files before push again."
+create_structure_commit = "CI message from ebc-aixlib-bot. Add files for ci structure"
+create_html_file_commit = "CI message from ebc-aixlib-bot. Push new files with corrected html Syntax ."
+build_whitelist_commit = "CI message from ebc-aixlib-bot. Push new created whitelists."
+
+[stage_names.check_setting]
+name = "check_setting"
+order = 0.0
+
+[stage_names.build_templates]
+name = "build_templates"
+order = 0.0
+
+[stage_names.whitelist_setting]
+name = "build_ci_whitelist"
+order = 0.0
+
+[stage_names.ref_check]
+name = "Ref_Check"
+order = 1.0
+
+[stage_names.lib_merge]
+name = "merge"
+order = 1.0
+
+[stage_names.html_whitelist]
+name = "create_html_whitelist"
+order = 2.0
+
+[stage_names.create_whitelist]
+name = "create_model_whitelist"
+order = 2.0
+
+[stage_names.create_example_whitelist]
+name = "create_example_whitelist"
+order = 2.0
+
+[stage_names.html_check]
+name = "HTML_Check"
+order = 3.0
+
+[stage_names.style_check]
+name = "Style_check"
+order = 4.0
+
+[stage_names.dymola_model_check]
+name = "model_check"
+order = 5.0
+
+[stage_names.simulate]
+name = "simulate"
+order = 6.0
+
+[stage_names.regression_test]
+name = "RegressionTest"
+order = 7.0
+
+[stage_names.OM_model_check]
+name = "OM_model_check"
+order = 8.0
+
+[stage_names.OM_simulate]
+name = "OM_simulate"
+order = 9.0
+
+[stage_names.update_ref]
+name = "Update_Ref"
+order = 10.0
+
+[stage_names.plot_ref]
+name = "plot_ref"
+order = 11.0
+
+[stage_names.prepare]
+name = "prepare"
+order = 12.0
+
+[stage_names.open_PR]
+name = "open_PR"
+order = 13.0
+
+[stage_names.update_whitelist]
+name = "update_whiteList"
+order = 14.0
+
+[stage_names.build_ci_structure]
+name = "build_ci_structure"
+order = 15.0
+
+[stage_names.OM_badge]
+name = "OM_Badge"
+order = 1.0
+
+[stage_names.prepare_pages]
+name = "prepare_pages"
+order = 99.0
+
+[stage_names.deploy]
+name = "deploy"
+order = 1000.0

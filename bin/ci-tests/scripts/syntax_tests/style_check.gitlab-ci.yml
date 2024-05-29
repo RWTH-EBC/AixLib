@@ -1,0 +1,50 @@
+# image_name : registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+# ci_stage_style_check : Style_check
+# modelicapyci_syntax_test_module : ModelicaPyCI.syntax.style_checking
+# xvfb_flag : xvfb-run -n 77
+# library : AixLib
+
+# ci_style_commit : ci_style_check
+# result_dir : bin/ci-tests/result
+# arg_PR : --dymola-version 2022 --library AixLib 
+# arg_Push : --changed-flag  --dymola-version 2022 --library AixLib 
+
+include: 'bin/ci-tests/scripts/utilities.yml'
+stages:
+    - Style_check
+
+
+StyleCheck:AixLib:PR:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: Style_check
+    before_script:
+        - !reference [.clone_ci_templates, script]
+    script:
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - bin/ci-tests/result/
+        expire_in: 7 day
+    allow_failure: true
+    rules:
+        - if: $CI_COMMIT_MESSAGE  =~ /ci_style_check/ && $CI_PIPELINE_SOURCE == "push"
+          when: always
+        - !reference [.rules:PR , rules]
+
+StyleCheck:AixLib:Push:
+    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+    stage: Style_check
+    before_script:
+        - !reference [.clone_ci_templates, script]
+    script:
+        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
+    artifacts:
+        when: on_failure
+        paths:
+            - bin/ci-tests/result/
+        expire_in: 7 day
+    allow_failure: true
+    rules:
+        - !reference [.rules:push , rules]
+
