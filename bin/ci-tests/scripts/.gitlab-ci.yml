@@ -3,9 +3,9 @@ stages:
     - merge
     - Ref_Check
     - OM_Badge
-    - create_model_whitelist
-    - create_example_whitelist
     - create_html_whitelist
+    - create_example_whitelist
+    - create_model_whitelist
     - HTML_Check
     - Style_check
     - model_check
@@ -25,17 +25,17 @@ variables:
     GITLAB_Page:  https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib
 
 include:
-    - 'bin/ci-tests/scripts/deploy/IBPSA_Merge.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/check_model.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/regression_test.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/simulate_model.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/syntax_tests/style_check.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/unit_tests/check_OM_model.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/deploy/om_badge.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/syntax_tests/html_check.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/syntax_tests/naming_guideline.gitlab-ci.yml'  
-    - 'bin/ci-tests/scripts/deploy/prepare_pages.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/check_OM_model.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/syntax_tests/style_check.gitlab-ci.yml'  
     - 'bin/ci-tests/scripts/unit_tests/simulate_OM_model.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/deploy/IBPSA_Merge.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/simulate_model.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/regression_test.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/deploy/prepare_pages.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/unit_tests/check_model.gitlab-ci.yml'  
+    - 'bin/ci-tests/scripts/deploy/om_badge.gitlab-ci.yml'  
     - project: 'EBC/EBC_all/gitlab_ci/templates'
       file: 'pages/gl-pages.gitlab-ci.yml'
   #   - project: 'EBC/EBC_all/gitlab_ci/templates'
