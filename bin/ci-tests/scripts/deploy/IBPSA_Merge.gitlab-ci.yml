@@ -67,7 +67,7 @@ WhiteList:
         - python -m ModelicaPyCI.converter.lock_model 
         - message="CI message from ebc-aixlib-bot. Merge of 'IBPSA' library. Update files ci_check_whitelist.txt and rci_html_whitelist.txt"
         - push_model=$(git ls-files --others --exclude-standard --directory AixLib)
-        - git checkout $CI_COMMIT_BRANCH
+        - git switch $CI_COMMIT_BRANCH
         - git add $push_model
         - git commit -m "$message"
         - git push git@github.com:$Github_Repository.git
