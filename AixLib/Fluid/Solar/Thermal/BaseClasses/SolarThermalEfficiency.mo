@@ -38,7 +38,7 @@ equation
           min(Collector.eta_zero,
               Collector.eta_zero - Collector.c1*dT/max(G,
                 Modelica.Constants.eps) -
-              Collector.c2*dT*dT/max(G, Modelica.Constants.eps)));
+              Collector.c2*dT*dT/max(G, Modelica.Constants.eps))); "in this way eta will never be nagative, and the collector will never be cooled down by the environment temperature!!!! please check!!!!"
   Q_flow = G*eta;
   annotation (Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
