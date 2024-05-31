@@ -91,7 +91,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final T_start=T_start)
     "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
-  FixedResistances.PressureDrop                             pressureDrop(
+  FixedResistances.PressureDrop pressureDrop(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final show_T=false,
