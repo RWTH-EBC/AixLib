@@ -9,6 +9,8 @@ python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-
 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
 
+python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
+
 :: Check & Simulate AixLib Airflow on PR
 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_SIM DYM_CHECK --dymola-version 2022 --additional-libraries-to-load  --library AixLib  --packages Airflow
 :: Check & Simulate AixLib Airflow on push

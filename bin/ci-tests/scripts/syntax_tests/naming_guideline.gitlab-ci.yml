@@ -17,7 +17,7 @@ NamingGuideline:AixLib:PR:
     before_script:
         - !reference [.clone_ci_templates, script]
     script:
-        - xvfb-run -n 77 python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
+        - python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
     artifacts:
         paths:
             - bin/ci-tests/result/

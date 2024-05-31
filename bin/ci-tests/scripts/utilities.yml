@@ -25,6 +25,7 @@
     - source activate myenv || echo "myenv is not installed, can't activate it"
     - pip install --upgrade pip && pip install natsort toml pandas mako requests
     - export PYTHONIOENCODING=utf-8
+    - pip install git+https://github.com/RWTH-EBC/ebcpy.git@130-add-option-to-dymolaapi-to-start-with-no-model_name
     - pip install git+https://github.com/lbl-srg/BuildingsPy.git@master
     - pip install git+https://github.com/RWTH-EBC/ModelicaPyCI.git@2_pydantic_config
     - export CI_PYTHON_CONFIG_FILE="bin/ci-tests/config/modelica_py_ci_config.toml"
