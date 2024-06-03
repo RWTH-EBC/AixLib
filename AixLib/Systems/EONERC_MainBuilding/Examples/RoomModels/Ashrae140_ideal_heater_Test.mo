@@ -1,6 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140Testcase900SP_ideal_heater
-  "Model of a ERC-Thermal Zone Including CCA and AHU"
+model Ashrae140_ideal_heater_Test
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -24,7 +23,7 @@ model Ashrae140Testcase900SP_ideal_heater
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
+        "modelica://AixLib/Resources/weatherdata/ASHRAE140.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-128,30},{-108,50}})));
 
@@ -194,9 +193,6 @@ model Ashrae140Testcase900SP_ideal_heater
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     "Convective heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{74,-158},{54,-138}})));
-  Modelica.Blocks.Interfaces.RealInput QFlowSet
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{160,-168},{120,-128}})));
   Modelica.Blocks.Interfaces.RealOutput T_amb "Value of Real output"
     annotation (Placement(transformation(extent={{-34,44},{-14,64}}),
         iconTransformation(extent={{284,-178},{304,-158}})));
@@ -221,6 +217,9 @@ model Ashrae140Testcase900SP_ideal_heater
     annotation (Placement(transformation(extent={{210,-142},{230,-122}})));
   Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
     annotation (Placement(transformation(extent={{282,-110},{302,-90}})));
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0.0,0.0; 21600,
+        500; 21700,2500; 32400,2000; 40000,1500])
+    annotation (Placement(transformation(extent={{106,-158},{86,-138}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-108,40},{-46,40},{-46,-3.6},{-24,-3.6}},
@@ -277,10 +276,10 @@ equation
           {244,-116},{244,-93.475},{248,-93.475}}, color={0,0,127}));
   connect(realExpression15.y, multiSum.u[4]) annotation (Line(points={{231,-132},
           {244,-132},{244,-92.425},{248,-92.425}}, color={0,0,127}));
-  connect(prescribedHeatFlow.Q_flow, QFlowSet)
-    annotation (Line(points={{74,-148},{140,-148}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone1.intGainsConv) annotation (Line(
         points={{54,-148},{42,-148},{42,-19.84},{32.56,-19.84}}, color={191,0,0}));
+  connect(combiTimeTable.y[1], prescribedHeatFlow.Q_flow)
+    annotation (Line(points={{85,-148},{74,-148}}, color={0,0,127}));
   annotation (experiment(
       StartTime=259200,
       StopTime=345600,
@@ -288,4 +287,4 @@ equation
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140Testcase900SP_ideal_heater;
+end Ashrae140_ideal_heater_Test;
