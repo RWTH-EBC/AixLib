@@ -18,7 +18,7 @@ StyleCheck:AixLib:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: Style_check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --dymola-version 2022 --library AixLib 
     artifacts:
@@ -36,7 +36,7 @@ StyleCheck:AixLib:Push:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: Style_check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - xvfb-run -n 77 python -m ModelicaPyCI.syntax.style_checking --changed-flag  --dymola-version 2022 --library AixLib 
     artifacts:

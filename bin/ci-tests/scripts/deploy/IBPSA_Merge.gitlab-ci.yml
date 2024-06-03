@@ -33,7 +33,7 @@ IBPSA:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: merge
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.github_ssh_auth, script]
     script:
         - cd ..
@@ -59,7 +59,7 @@ WhiteList:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: update_whiteList
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.github_ssh_auth, script]
     script:
         - cd Merge_Package/AixLib
@@ -84,7 +84,7 @@ IBPSA_Pull_Request:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: open_PR
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - git config --global user.name "$GITLAB_USER_NAME"
         - git config --global user.email "$GITLAB_USER_EMAIL"
     script:

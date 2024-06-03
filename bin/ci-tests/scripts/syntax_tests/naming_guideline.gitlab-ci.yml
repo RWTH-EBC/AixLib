@@ -15,7 +15,7 @@ NamingGuideline:AixLib:PR:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: Style_check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - python -m ModelicaPyCI.syntax.naming_guideline --changed-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --working-branch $CI_COMMIT_BRANCH --github-repository RWTH-EBC/AixLib --main-branch main --config bin/ci-tests/naming_guideline.config --library AixLib 
     artifacts:

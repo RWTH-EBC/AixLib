@@ -28,7 +28,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: model_check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
     script:
         - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --filter-whitelist-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
@@ -46,7 +46,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: model_check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
     script:
         - xvfb-run -n 77 python -m ModelicaPyCI.unittest.checkpackages.validatetest --dym-options DYM_CHECK --filter-whitelist-flag  --changed-flag  --dymola-version 2022 --additional-libraries-to-load  --packages $lib_package --library AixLib 
@@ -164,7 +164,7 @@ check_whitelist_job:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: create_model_whitelist
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - !reference [.github_ssh_auth, script]
 

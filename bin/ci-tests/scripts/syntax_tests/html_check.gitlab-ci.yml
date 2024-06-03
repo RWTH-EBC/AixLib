@@ -33,7 +33,7 @@ variables:
 Check_HTML:PR:
     stage: HTML_Check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
 
     script:
         - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
@@ -50,7 +50,7 @@ Check_HTML:push:
     stage: HTML_Check
     before_script:
         - !reference [.github_ssh_auth, script]
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - python -m ModelicaPyCI.syntax.html_tidy --filter-whitelist-flag  --correct-view-flag  --log-flag  --whitelist-library IBPSA --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
     artifacts:
@@ -66,7 +66,7 @@ Open_Pull_HTML_Request:
     stage: open_PR
     before_script:
         - !reference [.github_ssh_auth, script]
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - python -m ModelicaPyCI.api_script.api_github --correct-html-flag  --create-pr-flag  --github-token $GITHUB_API_TOKEN --main-branch main --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     rules:
@@ -77,7 +77,7 @@ Open_Pull_HTML_Request:
 html_whitelist_job:
     stage: create_html_whitelist
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.github_ssh_auth, script]
 
     script:

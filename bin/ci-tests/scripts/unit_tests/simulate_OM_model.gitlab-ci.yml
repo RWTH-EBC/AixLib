@@ -19,7 +19,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
     stage: OM_simulate
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
@@ -37,7 +37,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/openmodelica-docker:main
     stage: OM_simulate
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:

@@ -42,7 +42,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: RegressionTest
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
@@ -70,7 +70,7 @@ stages:
     image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
     stage: RegressionTest
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
 
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
@@ -198,7 +198,7 @@ Regressiontest_AixLib_Utilities:Push:
 Regression_overall_coverage:PR:
     stage: RegressionTest
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
@@ -217,7 +217,7 @@ Regression_overall_coverage:PR:
 Regression_overall_coverage:Push:
     stage: RegressionTest
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     script:
@@ -234,7 +234,7 @@ Regression_overall_coverage:Push:
 prepare_create_plots:Push:
     stage: prepare
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - apt-get update -y && apt-get install zip unzip -y
@@ -272,7 +272,7 @@ prepare_create_plots:Push:
 prepare_create_plots:PR:
     stage: prepare
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
     script:
         - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
         - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
@@ -308,7 +308,7 @@ prepare_create_plots:PR:
 RegressionTest_Check_References:
     stage: Ref_Check
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - !reference [.custom_install_additional_modelica_libraries, script]
         - !reference [.github_ssh_auth, script]
         - apt-get update -y && apt-get install xdg-utils --fix-missing -y
@@ -351,7 +351,7 @@ RegressionTest_Check_References:
 plot_reference_results:
     stage: plot_ref
     before_script:
-        - !reference [.clone_ci_templates, script]
+        - !reference [.activate_python_and_install_requirements, script]
         - apt-get update -y && apt-get install zip unzip -y
         - pip install pandas mako matplot toml requests
 

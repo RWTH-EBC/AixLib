@@ -1,5 +1,5 @@
 :: Make sure you have everything installed as in the util scripts:
-:: .clone_ci_templates
+:: .activate_python_and_install_requirements
 :: .custom_install_additional_modelica_libraries
 :: .github_ssh_auth
 

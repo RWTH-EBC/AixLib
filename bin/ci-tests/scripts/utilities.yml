@@ -19,7 +19,7 @@
     - git config --global user.name "$GITLAB_USER_NAME"
     - git config --global user.email "$GITLAB_USER_EMAIL"
 
-.clone_ci_templates:
+.activate_python_and_install_requirements:
   script:
     - export PIP_CACHE_DIR="/opt/cache/pip"
     - source activate myenv || echo "myenv is not installed, can't activate it"
