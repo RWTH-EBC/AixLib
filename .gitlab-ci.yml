@@ -1,2 +1,4 @@
 include:
-    - 'bin/ci-tests/scripts/.gitlab-ci.yml'
+    project: 'EBC/EBC_all/gitlab_ci/templates'
+    ref: AixLibCI
+    file: 'aixlib/ci/scripts/.gitlab-ci.yml'
