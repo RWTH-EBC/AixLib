@@ -47,6 +47,6 @@
         - if:  ($CI_COMMIT_BRANCH  == "main"  )
           when: never
 
-.open_modelica_git_user_setting
-    script:
-        - runuser -u openmodelicausers -- sh -c 'git config --global --add safe.directory "$(pwd)"'
+.open_modelica_git_user_setting:
+  script:
+    - runuser -u openmodelicausers -- sh -c 'git config --global --add safe.directory "$(pwd)"'
