@@ -20,6 +20,7 @@ stages:
     stage: OM_simulate
     before_script:
         - !reference [.activate_python_and_install_requirements, script]
+        - !reference [.open_modelica_git_user_setting, script]
     script:
         - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
@@ -38,6 +39,7 @@ stages:
     stage: OM_simulate
     before_script:
         - !reference [.activate_python_and_install_requirements, script]
+        - !reference [.open_modelica_git_user_setting, script]
     script:
         - runuser -u openmodelicausers -- python3 -m ModelicaPyCI.unittest.om_check --om-options OM_SIM --changed-flag  --whitelist-library IBPSA --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities --library AixLib 
     artifacts:
