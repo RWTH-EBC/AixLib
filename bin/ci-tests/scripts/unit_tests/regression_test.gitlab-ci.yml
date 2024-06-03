@@ -9,7 +9,6 @@
 # modelicapyci_google_chart_module : ModelicaPyCI.converter.google_charts
 # config_ci_exit_file : exit.sh
 # result_dir : bin/ci-tests/result
-# arg_chart : --create-layout-flag  --funnel-comp-flag  --error-flag  --line-html-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
 # ci_regression_test_commit : $ {ci_regression_test_commit}
 # expire_in_time : 7h
 # arg_PR: --batch  --dymola-version 2022 --tool dymola --number-of-processors 4 --path . --library-root .. --packages $lib_package --library AixLib 
@@ -247,6 +246,7 @@ prepare_create_plots:Push:
             - bin/ci-tests/result/
     rules:
         - !reference [.rules:push , rules]
+    when: on_failure
     needs:
     - job: Regressiontest_AixLib_Airflow:Push
       artifacts: true
@@ -275,7 +275,7 @@ prepare_create_plots:PR:
         - !reference [.activate_python_and_install_requirements, script]
     script:
         - python -m ModelicaPyCI.converter.google_charts --create-layout-flag  --templates-url https://github.com/RWTH-EBC/MoCITempGen.git@03_openModelica --library AixLib --packages Airflow BoundaryConditions Controls DataBase Fluid Media Systems ThermalZones Types Utilities 
-        - python -m ModelicaPyCI.api_script.api_github   --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
+        - python -m ModelicaPyCI.api_script.api_github --post-pr-comment-flag  --prepare-plot-flag  --gitlab-page https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib --github-token ${GITHUB_API_TOKEN} --main-branch main --working-branch $CI_COMMIT_REF_NAME --github-repository RWTH-EBC/AixLib 
     artifacts:
         paths:
             - bin/ci-tests/result/
@@ -283,6 +283,7 @@ prepare_create_plots:PR:
         - !reference [.rules:PR , rules]
         - if: $CI_COMMIT_MESSAGE  =~ /ci_regression_test/ && $CI_PIPELINE_SOURCE == "push"
           when: always
+    when: on_failure
     needs:
     - job: Regressiontest_AixLib_Airflow:PR
       artifacts: true

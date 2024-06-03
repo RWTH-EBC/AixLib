@@ -115,11 +115,11 @@ order = 0.0
 
 [stage_names.build_templates]
 name = "build_templates"
-order = 0.0
+order = 0.1
 
 [stage_names.whitelist_setting]
 name = "build_ci_whitelist"
-order = 0.0
+order = 0.2
 
 [stage_names.ref_check]
 name = "Ref_Check"
