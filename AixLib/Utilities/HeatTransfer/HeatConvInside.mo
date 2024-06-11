@@ -19,7 +19,7 @@ model HeatConvInside
           calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017 then true else false));
 
   // which orientation of surface?
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation "Surface orientation" annotation (
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon then false else true),
       Evaluate=true);
   parameter Modelica.Units.SI.Area A(min=Modelica.Constants.eps)
