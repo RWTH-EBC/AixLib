@@ -19,6 +19,7 @@ model Ashrae140Testcase900SP
        tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
+    T_start=T_start_tabs,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_5(),
     area=48,
     thickness=0.1,
@@ -38,7 +39,7 @@ model Ashrae140Testcase900SP
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900 zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15,
+    T_start=T_start_zone,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
@@ -60,7 +61,7 @@ model Ashrae140Testcase900SP
     T_amb=293.15,
     m1_flow_nominal=129/3600*3,
     m2_flow_nominal=0.1,
-    T_start=293.15,
+    T_start=T_start_ahu,
     usePreheater=false,
     useHumidifierRet=false,
     useHumidifier=false,
@@ -384,6 +385,12 @@ model Ashrae140Testcase900SP
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=90,
         origin={60,-88})));
+  parameter Modelica.Units.SI.Temperature T_start_tabs=293.15
+    "Initial or guess value of output (= state)";
+  parameter Modelica.Units.SI.Temperature T_start_ahu=293.15
+    "Initialization temperature";
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start_zone=293.15
+    "Start value of temperature";
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
