@@ -29,16 +29,26 @@ annotation (Documentation(info="<html>
 </ul>
 <p><br><br><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaQu.png\"/><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaGeo.png\"/><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaProj.png\"/> </p>
 <h4>Namespaces</h4>
+<p>Amb: Ambient</p>
 <p>Ang: Angle</p>
+<p>Avg: Average</p>
 <p>Axs: Axis</p>
 <p>Clr: Clear</p>
 <p>Cof: Coefficient</p>
+<p>Cor: Correlation; Correction</p>
+<p>Dcg: Discharge</p>
 <p>Dif: Difference</p>
 <p>Eff: Effective</p>
 <p>Eqv: Equivalent</p>
 <p>Frm: Frame</p>
 <p>Geo: Geometric</p>
+<p>Inc: Incidence</p>
 <p>Opn: Open; Opening</p>
+<p>Ovl: Overlap</p>
 <p>Prj: Projective</p>
+<p>Ref: Reference</p>
+<p>Rev: Reveal</p>
+<p>Ruf: Rough; Roughness</p>
+<p>Sas: Sash</p>
 </html>"));
 end WindowVentilation;

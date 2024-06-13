@@ -1,63 +1,57 @@
 ﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashDIN4108
-  "Specified DIN/TS 4108-8: Different openings, input port opening width"
-  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
-    final useInputPort=true,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
-      quantity="Length", unit="m", min=0));
-  parameter Modelica.Units.SI.Length winSashD(min=0) = 0 "Window sash depth"
+  "Specified DIN/TS 4108-8: Valid for different opening types"
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash;
+  parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
+    "Window sash thickness (depth)"
     annotation(Dialog(enable=(
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal)));
 equation
-  opnWidth = u_win;
   if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungOutward then
-    opnAngle =
+    opnAng =
       AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-      winClrH,
-      winClrW,
-      opnWidth);
-    A = if opnWidth < Modelica.Constants.eps then 0 else sqrt(1/
-      ((winClrW*winClrH)^(-2) + (2*winClrW*winClrH*sin(opnAngle/2) + winClrW^2*sin(opnAngle))^(-2)));
+      winClrHeight, winClrWidth, opnWidth);
+    A = if opnWidth < Modelica.Constants.eps then 0 else
+      sqrt(1/((winClrWidth*winClrHeight)^(-2) + (2*winClrWidth*winClrHeight*sin(opnAng/2) + winClrWidth^2*sin(opnAng))^(-2)));
+
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward then
-    assert((winClrH/winClrW >= 1) and (winClrH/winClrW <= 2),
+    assert((winClrHeight/winClrWidth >= 1) and (winClrHeight/winClrWidth <= 2),
       "For hinged windows, the model applies for height and width geometries of approx. 1:1 to 2:1",
       AssertionLevel.warning);
-    opnAngle =
+    opnAng =
       AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-      winClrW,
-      winClrH,
-      opnWidth);
-    assert(opnAngle <= Modelica.Units.Conversions.from_deg(30),
+      winClrWidth, winClrHeight, opnWidth);
+    assert(opnAng <= Modelica.Units.Conversions.from_deg(30),
       "The model only applies to a maximum tilt angle of 30°",
       AssertionLevel.warning);
     A = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.CoeffOpeningAreaDIN16798(
-      opnAngle)*winClrW*winClrH;
+      opnAng)*winClrWidth*winClrHeight;
+
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal then
-    opnAngle =if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical
-       then
-      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-      winClrH,
-      winClrW/2,
-      opnWidth) else
-      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-      winClrW,
-      winClrH/2,
-      opnWidth);
+    opnAng =
+      if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical then
+        AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrHeight, winClrWidth/2, opnWidth) else
+        AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrWidth, winClrHeight/2, opnWidth);
     A = if opnWidth < Modelica.Constants.eps then 0 else
-      min(2*(opnWidth*(winClrW - 2*winSashD) + opnWidth*sqrt((winClrH/2*opnWidth/(opnWidth + winSashD))^2 - 0.25*opnWidth^2)),
-      (winClrH - winSashD)*winClrW);
+      min(2*(opnWidth*(winClrWidth - 2*sWinSas) + opnWidth*sqrt((winClrHeight/2*opnWidth/(opnWidth + sWinSas))^2 - 0.25*opnWidth^2)),
+      (winClrHeight - sWinSas)*winClrWidth);
+
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingVertical then
-    opnAngle = 0;
-    A = opnWidth*winClrW;
+    opnAng = 0;
+    A = opnWidth*winClrWidth;
+
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingHorizontal then
-    opnAngle = 0;
-    A = opnWidth*winClrH;
+    opnAng = 0;
+    A = opnWidth*winClrHeight;
+
   else
-    opnAngle = 0;
+    opnAng = 0;
     A = 0;
   end if;
   annotation (Icon(graphics={
@@ -68,8 +62,8 @@ equation
                                 Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 4, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

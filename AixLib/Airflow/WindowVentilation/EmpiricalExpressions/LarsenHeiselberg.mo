@@ -49,8 +49,8 @@ equation
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow = if noEvent(interimRes1 > Modelica.Constants.eps)
-    then openingArea.A*sqrt(interimRes1) else 0;
+  V_flow =if noEvent(interimRes1 > Modelica.Constants.eps) then openingArea_1.A
+    *sqrt(interimRes1) else 0;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>

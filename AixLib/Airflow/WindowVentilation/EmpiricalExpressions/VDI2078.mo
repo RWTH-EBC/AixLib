@@ -17,8 +17,8 @@ model VDI2078 "Empirical expression according to VDI 2078 (2015)"
 protected
   Real interimRes1 "Interim result";
 equation
-  A_eff = openingArea.A;
-  H_eff = openingArea.H_eff;
+  A_eff =openingArea_1.A;
+  H_eff =openingArea_1.H_eff;
   interimRes1 = Modelica.Constants.g_n*H_eff*deltaT/(2*T_a);
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",

@@ -4,21 +4,21 @@ partial model PartialEmpiricalFlowStackWindIncidence
   extends PartialEmpiricalFlowStack;
   parameter Modelica.Units.SI.Angle aziRef(displayUnit="deg")=0
     "Azimuth angle of the referece surface impacted by wind";
-  Modelica.Units.SI.Angle beta(displayUnit="deg")
+  Modelica.Units.SI.Angle incAng(displayUnit="deg")
     "Incidence angle of wind on reference surface";
-  Modelica.Blocks.Interfaces.RealInput phi(
-    unit="rad", displayUnit="deg", min=0, max=2*Modelica.Constants.pi)
+  Modelica.Blocks.Interfaces.RealInput winDir(
+    final unit="rad", displayUnit="deg", min=0, max=2*Modelica.Constants.pi)
     "Local wind direction"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
 protected
-  Modelica.Units.NonSI.Angle_deg beta_deg "Incidence angle in degree";
+  Modelica.Units.NonSI.Angle_deg incAngDeg "Incidence angle in degree";
 equation
-  beta_deg = Modelica.Units.Conversions.to_deg(beta);
+  incAngDeg = Modelica.Units.Conversions.to_deg(incAng);
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

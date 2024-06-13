@@ -1,30 +1,23 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashDIN16798
-  "Specified DIN CEN/TR 16798-8: Bottom- or Top-hung  opening, input port opening width"
-  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
-    final useInputPort=true,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
-      quantity="Length", unit="m", min=0));
-protected
-  Real C_w "Coefficient depending on the kind of window";
+  "Specified DIN CEN/TR 16798-8: Only valid for bottom- or top-hung opening"
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash;
+  Real cof "Coefficient depending on the kind of window";
 equation
   assert(
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
     "The model is only valid for top- or bottom-hung opening.",
     AssertionLevel.error);
-  opnWidth = u_win;
-  opnAngle =
+  opnAng =
     AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    winClrW,
-    winClrH,
-    opnWidth);
-  assert((winClrH/winClrW >= 1) and (winClrH/winClrW <= 2),
+    winClrWidth, winClrHeight, opnWidth);
+  assert((winClrHeight/winClrWidth >= 1) and (winClrHeight/winClrWidth <= 2),
     "For hinged windows, the model applies for height and width geometries of approx. 1:1 to 2:1",
     AssertionLevel.warning);
-  C_w = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.CoeffOpeningAreaDIN16798(
-    opnAngle);
-  A = C_w*clrOpnArea;
+  cof = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.CoeffOpeningAreaDIN16798(
+    opnAng);
+  A = cof*AClrOpn;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},
@@ -33,8 +26,8 @@ equation
                                 Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 4, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

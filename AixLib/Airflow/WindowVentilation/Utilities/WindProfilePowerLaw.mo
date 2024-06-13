@@ -1,25 +1,25 @@
 within AixLib.Airflow.WindowVentilation.Utilities;
 model WindProfilePowerLaw
   "Wind profile power law relationship of Hellmann"
-  parameter Modelica.Units.SI.Height hei(min=0)
+  parameter Modelica.Units.SI.Height height(min=0)
     "Height of the wind speed to calculate";
-  parameter Modelica.Units.SI.Height heiRef(min=0)=10
+  parameter Modelica.Units.SI.Height heightRef(min=0)=10
     "Reference height of the known wind speed";
-  parameter Modelica.Units.SI.Length lenRough(min=0)=0.6 "Roughness length";
-  Real alpha "Hellmann exponent";
-  Modelica.Blocks.Interfaces.RealInput u_r(unit="m/s", min=0)
+  parameter Modelica.Units.SI.Length lenRuf(min=0)=0.6 "Roughness length";
+  Real cof "Hellmann exponent (coefficient)";
+  Modelica.Blocks.Interfaces.RealInput winSpeRef(unit="m/s", min=0)
     "Wind speed at the reference height"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput u(unit="m/s", min=0)
-    "Wind speed at heigt"
+  Modelica.Blocks.Interfaces.RealOutput winSpe(unit="m/s", min=0)
+    "Wind speed at height"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
   assert(
-    hei > lenRough,
-    "Power law not appliable by height less than the roughness length",
+    height > lenRuf,
+    "Power law not applicable by height less than the roughness length",
     AssertionLevel.error);
-  alpha = 1/log(hei/lenRough);
-  u = u_r*(hei/heiRef)^alpha;
+  cof = 1/log(height/lenRuf);
+  winSpe = winSpeRef*(height/heightRef)^cof;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html><p>
@@ -28,7 +28,7 @@ equation
 </p>
 <p>
   The power law allows for the calculation of wind speeds at different
-  heights based on the reference speed and height.
+  heightghts based on the reference speed and heightght.
 </p>
 <h4>
   Roughness Classes and Lengths
@@ -237,10 +237,11 @@ equation
   <a href=
   \"https://wind-data.ch/tools/profile.php\">https://wind-data.ch/tools/profile.php</a>
 </p>
-</html>", revisions="<html><ul>
+</html>", revisions="<html>
+<ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>"));

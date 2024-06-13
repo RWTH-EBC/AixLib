@@ -1,34 +1,29 @@
 ﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashVDI2078
-  "Specified VDI 2078: Bottom-hung inwards opening, input port opening width"
+  "Specified VDI 2078: Only valid for bottom-hung inwards opening"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(
-    final useInputPort=true,
-    final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
-    redeclare final Modelica.Blocks.Interfaces.RealInput u_win(
-      quantity="Length", unit="m", min=0));
-  parameter Modelica.Units.SI.Height winRevFraH = 0.1
-    "Distance between the windows reveal and frame";
-  parameter Modelica.Units.SI.Length winSashD(min=0) = 0 "Window sash depth";
-  Modelica.Units.SI.Height H_eff(min=0) "Effective height for the thermal updraft";
-protected
-  Modelica.Units.SI.Height H_ovl(min=0)
+    final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward);
+  parameter Modelica.Units.SI.Height heightRevToFrm = 0.1
+    "Vertical distance (height) between the reveal above the window and window top frame";
+  parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
+    "Window sash thickness (depth)";
+  Modelica.Units.SI.Height effHeight(min=0)
+    "Effective height for the thermal updraft";
+  Modelica.Units.SI.Height ovlHeight(min=0)
     "Height of the overlap between window frame and casement";
-  Real C_Rev "Correction factor of the window reveal";
+  Real corRev "Correction factor of the window reveal";
 equation
-  opnWidth = u_win;
-  opnAngle =
+  opnAng =
     AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    winClrW,
-    winClrH,
-    opnWidth);
-  assert(opnAngle <= Modelica.Units.Conversions.from_deg(15),
+    winClrWidth, winClrHeight, opnWidth);
+  assert(opnAng <= Modelica.Units.Conversions.from_deg(15),
     "The model only applies to a maximum tilt angle of 15°",
     AssertionLevel.warning);
-  A = ((winClrW + winClrH - H_ovl)*opnWidth/3)*C_Rev;
-  H_eff = 2/3*(winClrH - H_ovl);
-  H_ovl = winSashD/(opnWidth + winSashD)*winClrH;
-  C_Rev = if opnWidth <= winRevFraH then 1
-    else 1 - 0.6*(1 - winRevFraH/opnWidth);
+  A = ((winClrWidth + winClrHeight - ovlHeight)*opnWidth/3)*corRev;
+  effHeight = 2/3*(winClrHeight - ovlHeight);
+  ovlHeight = sWinSas/(opnWidth + sWinSas)*winClrHeight;
+  corRev = if opnWidth <= heightRevToFrm then 1
+    else 1 - 0.6*(1 - heightRevToFrm/opnWidth);
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},
@@ -37,8 +32,8 @@ equation
                                 Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

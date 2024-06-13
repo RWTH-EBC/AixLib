@@ -1,15 +1,14 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialOpeningAreaSash
   "Window opening area, sash opening"
-  extends PartialOpeningArea;
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea;
   parameter AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes
     opnTyp = AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward
     "Window opening type";
   /*Variables to describe the opening*/
-  Modelica.Units.SI.Length opnWidth(min=0) "Window sash opening width";
-  Modelica.Units.SI.Angle opnAngle(
+  Modelica.Units.SI.Angle opnAng(
     min=0, max=Modelica.Constants.pi/2, displayUnit="deg")
-    "Window sash opening angle";
+    "Window sash opening angle, must be defined by extended model";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-70,90},{70,-50}},
@@ -95,8 +94,8 @@ partial model PartialOpeningAreaSash
     Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

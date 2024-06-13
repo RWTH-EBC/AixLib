@@ -26,8 +26,8 @@ equation
   rho_ref_ASL = rho_ref_H0*(1 - 0.00651*heiAbvSeaLvl/293)^4.255;
   rho_a_ASL = T_ref/T_a*rho_ref_ASL;
   C_e = min(1, max(0, (1 - 0.1*u_10)*((T_a - T_0)/25 + 0.2)));
-  V_flow = rho_ref_H0/rho_a_ASL*C_e*openingArea.A/2*
-    sqrt(max(C_w*(u_10^2), C_th*winClrH*abs(deltaT)));
+  V_flow =rho_ref_H0/rho_a_ASL*C_e*openingArea_1.A/2*sqrt(max(C_w*(u_10^2),
+    C_th*winClrH*abs(deltaT)));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>

@@ -1,10 +1,10 @@
 within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSimple "Common simple opening (no sash)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
-    final useInputPort=false,
-    final u_win);
+    final use_opnWidth_in=false,
+    final prescribedOpnWidth=0);
 equation
-  A = clrOpnArea;
+  A = AClrOpn;
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,90},{70,-50}},
@@ -17,8 +17,8 @@ equation
           textString="Simple")}), Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

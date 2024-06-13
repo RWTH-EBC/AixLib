@@ -21,9 +21,9 @@ equation
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
     AssertionLevel.warning);
-  V_flow_th = if noEvent(interimRes1 > Modelica.Constants.eps)
-    then 1/3*C_d*openingArea.A*sqrt(interimRes1) else 0;
-  V_flow_w =C_w*openingArea.A*u;
+  V_flow_th =if noEvent(interimRes1 > Modelica.Constants.eps) then 1/3*C_d*
+    openingArea_1.A*sqrt(interimRes1) else 0;
+  V_flow_w =C_w*openingArea_1.A*u;
   V_flow = sqrt(V_flow_th^2 + V_flow_w^2);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),

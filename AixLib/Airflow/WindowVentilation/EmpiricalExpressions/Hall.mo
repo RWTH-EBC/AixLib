@@ -12,13 +12,14 @@ protected
   Real C_d "Discharge coefficient";
   Real interimRes1 "Interim result";
 equation
-  C_d = 0.930*(openingArea.opnWidth^0.2) "Case: without window reveal, without radiator";
-  interimRes1 = 2*Modelica.Constants.g_n*winClrH*openingArea.C_NPL*deltaT/T_i;
+  C_d =0.930*(openingArea_1.opnWidth^0.2)
+                                         "Case: without window reveal, without radiator";
+  interimRes1 =2*Modelica.Constants.g_n*winClrH*openingArea_1.C_NPL*deltaT/T_i;
   assert(interimRes1 > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow = if noEvent(interimRes1 > Modelica.Constants.eps)
-    then C_d*openingArea.A*sqrt(interimRes1) else 0;
+  V_flow =if noEvent(interimRes1 > Modelica.Constants.eps) then C_d*
+    openingArea_1.A*sqrt(interimRes1) else 0;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

@@ -1,17 +1,16 @@
 ﻿within AixLib.Airflow.WindowVentilation.Utilities;
-model s_to_alpha "Convert from window opening width to opening angle"
+model WidthToAngle
+  "Convert from window opening width to opening angle"
   extends Modelica.Blocks.Interfaces.PartialConversionBlock(
     u(unit="m"), y(unit="rad"));
-  parameter Modelica.Units.SI.Length a(min=0)
+  parameter Modelica.Units.SI.Length lenAxs(min=0)
     "Length of the hinged axis, the axis should be parallel to a window frame";
-  parameter Modelica.Units.SI.Length b(min=0)
+  parameter Modelica.Units.SI.Length lenAxsToFrm(min=0)
     "Distance from the hinged axis to the frame across the opening area";
 equation
   y =
     AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    a,
-    b,
-    u);
+    lenAxs, lenAxsToFrm, u);
   annotation (Icon(graphics={            Text(
               extent={{-20,100},{-100,20}},
           textColor={0,0,0},
@@ -21,11 +20,11 @@ equation
           textString="α")}), Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>Convert from window opening width to opening angle.</p>
 </html>"));
-end s_to_alpha;
+end WidthToAngle;
