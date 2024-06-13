@@ -14,12 +14,15 @@ equation
     "The model is only valid for top- or bottom-hung opening.",
     AssertionLevel.error);
   opnWidth = u_win;
-  opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
-      winClrW, winClrH, opnWidth);
+  opnAngle =
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+    winClrW,
+    winClrH,
+    opnWidth);
   assert((winClrH/winClrW >= 1) and (winClrH/winClrW <= 2),
     "For hinged windows, the model applies for height and width geometries of approx. 1:1 to 2:1",
     AssertionLevel.warning);
-  C_w = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.coeffOpeningAreaDIN16798(
+  C_w = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.CoeffOpeningAreaDIN16798(
     opnAngle);
   A = C_w*clrOpnArea;
   annotation (Icon(graphics={

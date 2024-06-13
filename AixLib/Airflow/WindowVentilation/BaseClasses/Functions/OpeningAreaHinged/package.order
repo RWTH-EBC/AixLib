@@ -1,8 +1,8 @@
-alpha_to_s
-coeffOpeningAreaDIN16798
-effectiveOpeningArea
-equivalentOpeningArea
-geometricOpeningArea
-partialOpeningArea
-projectiveOpeningArea
-s_to_alpha
+AngleToWidth
+CoeffOpeningAreaDIN16798
+EffectiveOpeningArea
+EquivalentOpeningArea
+GeometricOpeningArea
+PartialOpeningArea
+ProjectiveOpeningArea
+WidthToAngle

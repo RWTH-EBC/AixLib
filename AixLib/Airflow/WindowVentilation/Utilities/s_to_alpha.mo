@@ -7,8 +7,11 @@ model s_to_alpha "Convert from window opening width to opening angle"
   parameter Modelica.Units.SI.Length b(min=0)
     "Distance from the hinged axis to the frame across the opening area";
 equation
-  y = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
-    a, b, u);
+  y =
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+    a,
+    b,
+    u);
   annotation (Icon(graphics={            Text(
               extent={{-20,100},{-100,20}},
           textColor={0,0,0},

@@ -26,8 +26,11 @@ equation
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal then
     opnAngle = u_win;
-    opnWidth = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.alpha_to_s(
-      lenA, lenB, opnAngle);
+    opnWidth =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.AngleToWidth(
+      lenA,
+      lenB,
+      opnAngle);
 
   /*Exceptions*/
   else

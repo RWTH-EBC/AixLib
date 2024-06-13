@@ -9,8 +9,8 @@ type SunshadingInstallationTypesVDI2078 = enumeration(
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

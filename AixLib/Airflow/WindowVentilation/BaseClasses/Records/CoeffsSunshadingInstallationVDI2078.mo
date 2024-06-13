@@ -3,7 +3,7 @@ record CoeffsSunshadingInstallationVDI2078
   "Coefficients of the volume flow decresed by window ventilation caused by closing different sunshadings"
   extends Modelica.Icons.Record;
   parameter AixLib.Airflow.WindowVentilation.BaseClasses.Records.SunshadingInstallationTypesVDI2078 typ;
-  final Real coeff(min=0, max=1)=
+  final Real cof(min=0, max=1)=
     if typ == AixLib.Airflow.WindowVentilation.BaseClasses.Records.SunshadingInstallationTypesVDI2078.NoSunshading
       then 1.0 else
     if typ == AixLib.Airflow.WindowVentilation.BaseClasses.Records.SunshadingInstallationTypesVDI2078.ExternalBlindsFront
@@ -17,8 +17,8 @@ record CoeffsSunshadingInstallationVDI2078
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

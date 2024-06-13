@@ -1,24 +1,24 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
-function equivalentOpeningArea
+function EquivalentOpeningArea
   "Calculation of the equivalent opening area"
   extends Modelica.Icons.Function;
-  input Modelica.Units.SI.Area A_clr(min=0) "Window clear opening area";
-  input Modelica.Units.SI.Area A_geo(min=0) "Window geometric opening area";
-  output Modelica.Units.SI.Area A(min=0) "Equivalent opening area";
+  input Modelica.Units.SI.Area AClr(min=0) "Window clear opening area";
+  input Modelica.Units.SI.Area AGeo(min=0) "Window geometric opening area";
+  output Modelica.Units.SI.Area AEqv(min=0) "Equivalent opening area";
 algorithm
-  if (A_clr<Modelica.Constants.eps) or (A_geo<Modelica.Constants.eps) then
-    A := 0;
+  if (AClr<Modelica.Constants.eps) or (AGeo<Modelica.Constants.eps) then
+    AEqv := 0;
   else
-    A := (A_clr^(-2) + A_geo^(-2))^(-0.5);
+    AEqv := (AClr^(-2) + AGeo^(-2))^(-0.5);
   end if;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>This function calculates the equivalent opening area.</p>
 </html>"));
-end equivalentOpeningArea;
+end EquivalentOpeningArea;

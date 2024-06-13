@@ -16,8 +16,11 @@ protected
   Real C_Rev "Correction factor of the window reveal";
 equation
   opnWidth = u_win;
-  opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
-      winClrW, winClrH, opnWidth);
+  opnAngle =
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+    winClrW,
+    winClrH,
+    opnWidth);
   assert(opnAngle <= Modelica.Units.Conversions.from_deg(15),
     "The model only applies to a maximum tilt angle of 15°",
     AssertionLevel.warning);

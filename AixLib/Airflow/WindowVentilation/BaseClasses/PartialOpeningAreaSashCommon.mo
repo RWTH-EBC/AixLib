@@ -32,13 +32,16 @@ equation
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward then
-    geoOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.geometricOpeningArea(
+    geoOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
       lenA, lenB, opnWidth);
-    projOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.projectiveOpeningArea(
+    projOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
       lenA, lenB, opnWidth);
-    s90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.alpha_to_s(
-      lenA, lenB, Modelica.Constants.pi/2);
-    geoOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.geometricOpeningArea(
+    s90 =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.AngleToWidth(
+      lenA,
+      lenB,
+      Modelica.Constants.pi/2);
+    geoOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
       lenA, lenB, s90);
     /*Define characteristic lengths*/
     if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
@@ -55,13 +58,16 @@ equation
   /*Pivot opening*/
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal then
-    geoOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.geometricOpeningArea(
+    geoOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
       lenA, lenB, opnWidth)*2;
-    projOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.projectiveOpeningArea(
+    projOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
       lenA, lenB, opnWidth)*2;
-    s90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.alpha_to_s(
-      lenA, lenB, Modelica.Constants.pi/2);
-    geoOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.geometricOpeningArea(
+    s90 =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.AngleToWidth(
+      lenA,
+      lenB,
+      Modelica.Constants.pi/2);
+    geoOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
       lenA, lenB, s90)*2;
     /*Define characteristic lengths*/
     if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical then
@@ -108,11 +114,11 @@ equation
   end if;
 
   /*Calculate the rest area types*/
-  eqOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.equivalentOpeningArea(
+  eqOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.EquivalentOpeningArea(
     clrOpnArea, geoOpnArea);
-  eqOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.equivalentOpeningArea(
+  eqOpnArea90 = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.EquivalentOpeningArea(
     clrOpnArea, geoOpnArea90);
-  effOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.effectiveOpeningArea(
+  effOpnArea = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.EffectiveOpeningArea(
     clrOpnArea, eqOpnArea, eqOpnArea90);
 
   /*Export area to port based on choice*/

@@ -1,22 +1,22 @@
 ﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
-function effectiveOpeningArea
+function EffectiveOpeningArea
   "Calculation of the effective opening area"
   extends Modelica.Icons.Function;
-  input Modelica.Units.SI.Area A_clr(min=0) "Window clear opening area";
-  input Modelica.Units.SI.Area A_eq(min=0) "Window equivalent opening area";
-  input Modelica.Units.SI.Area A_eq90(min=0)
+  input Modelica.Units.SI.Area AClr(min=0) "Window clear opening area";
+  input Modelica.Units.SI.Area AEqv(min=0) "Window equivalent opening area";
+  input Modelica.Units.SI.Area AEqv90(min=0)
     "Window equivalent opening area by 90° opening";
-  output Modelica.Units.SI.Area A(min=0) "Effective opening area";
+  output Modelica.Units.SI.Area AEff(min=0) "Effective opening area";
 algorithm
-  A := A_eq/A_eq90*A_clr;
+  AEff := AEqv/AEqv90*AClr;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>This function calculates the effective opening area.</p>
 </html>"));
-end effectiveOpeningArea;
+end EffectiveOpeningArea;

@@ -1,26 +1,26 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
-function projectiveOpeningArea
+function ProjectiveOpeningArea
   "Calculation of the projective opening area"
   extends
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.partialOpeningArea;
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.PartialOpeningArea;
 protected
-  Modelica.Units.SI.Angle alpha=
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
-    a, b, s) "Hinged opening angle";
+  Modelica.Units.SI.Angle ang=
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+    lenAxs, lenAxsToFrm, width) "Hinged opening angle";
   Modelica.Units.SI.Area A1 "Projective opening of oppsite side";
   Modelica.Units.SI.Area A2 "Projectvie opening of profile side";
 algorithm
-  A1 := a*b*(1 - cos(alpha));
-  A2 := 0.5*b*sin(alpha)*b*cos(alpha);
+  A1 := lenAxs*lenAxsToFrm*(1 - cos(ang));
+  A2 := 0.5*lenAxsToFrm*sin(ang)*lenAxsToFrm*cos(ang);
   A := A1 + 2*A2;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>This function calculates the projective opening area.</p>
 </html>"));
-end projectiveOpeningArea;
+end ProjectiveOpeningArea;

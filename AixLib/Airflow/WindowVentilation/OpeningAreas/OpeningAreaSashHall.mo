@@ -12,8 +12,11 @@ model OpeningAreaSashHall
   Real C_NPL "Correction factor of the neutral pressure level";
 equation
   opnWidth = u_win;
-  opnAngle = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.s_to_alpha(
-    winClrW, winClrH, opnWidth);
+  opnAngle =
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+    winClrW,
+    winClrH,
+    opnWidth);
   assert(winClrH >= winClrW,
     "The model only applies to windows whose height is not less than the width",
     AssertionLevel.warning);
