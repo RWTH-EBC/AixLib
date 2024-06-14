@@ -9,9 +9,6 @@ model OpeningAreaSashHall
     "Gap width in the overlap area between the frame and the sash";
   Real corNPL "Correction factor of the neutral pressure level";
 equation
-  opnAng =
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    winClrWidth, winClrHeight, opnWidth);
   assert(winClrHeight >= winClrWidth,
     "The model only applies to windows whose height is not less than the width",
     AssertionLevel.warning);
@@ -25,7 +22,7 @@ equation
           textString="Hall")}), Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>

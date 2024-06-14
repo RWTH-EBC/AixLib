@@ -9,9 +9,6 @@ equation
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
     "The model is only valid for top- or bottom-hung opening.",
     AssertionLevel.error);
-  opnAng =
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    winClrWidth, winClrHeight, opnWidth);
   assert((winClrHeight/winClrWidth >= 1) and (winClrHeight/winClrWidth <= 2),
     "For hinged windows, the model applies for height and width geometries of approx. 1:1 to 2:1",
     AssertionLevel.warning);
@@ -26,7 +23,7 @@ equation
                                 Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>

@@ -13,9 +13,6 @@ model OpeningAreaSashVDI2078
     "Height of the overlap between window frame and casement";
   Real corRev "Correction factor of the window reveal";
 equation
-  opnAng =
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
-    winClrWidth, winClrHeight, opnWidth);
   assert(opnAng <= Modelica.Units.Conversions.from_deg(15),
     "The model only applies to a maximum tilt angle of 15°",
     AssertionLevel.warning);
@@ -32,7 +29,7 @@ equation
                                 Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>

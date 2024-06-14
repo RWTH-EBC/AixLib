@@ -11,7 +11,7 @@ partial model PartialOpeningArea
   parameter Modelica.Units.SI.Length prescribedOpnWidth(min=0)=0
     "Fixed value of prescribed opening width"
     annotation(Dialog(enable = not use_opnWidth_in));
-  Modelica.Units.SI.Area AClrOpn = winClrWidth*winClrHeight
+  final parameter Modelica.Units.SI.Area AClrOpn = winClrWidth*winClrHeight
     "Window clear opening area";
   Modelica.Blocks.Interfaces.RealInput opnWidth_in(
     final quantity="Length", final unit="m", min=0) if use_opnWidth_in
@@ -49,7 +49,7 @@ equation
     Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>

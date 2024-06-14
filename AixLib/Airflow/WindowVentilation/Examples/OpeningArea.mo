@@ -210,9 +210,9 @@ model OpeningArea "Calculation of different opening areas"
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective)
     "Pivot, horizontal, effective opening, prescribed input"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
-  Utilities.AngleToWidth angleToWidth(lenAxs=
-        openingAreaSash_bottom_hung_in_geo_ang.winClrWidth, lenAxsToFrm=
-        openingAreaSash_bottom_hung_in_geo_ang.winClrHeight)
+  Utilities.AngleToWidth angleToWidth(
+    lenAxs=openingAreaSash_bottom_hung_in_geo_ang.lenAxs,
+    lenAxsToFrm=openingAreaSash_bottom_hung_in_geo_ang.lenAxsToFrm)
     "Convert opening angle to opening width"
     annotation (Placement(transformation(extent={{-60,120},{-40,140}})));
   OpeningAreas.OpeningAreaSashCommon openingAreaSash_bottom_hung_in_geo_ang(
@@ -223,8 +223,8 @@ model OpeningArea "Calculation of different opening areas"
     "Bottom-hung, inward, geometric opening"
     annotation (Placement(transformation(extent={{0,120},{20,140}})));
   Utilities.WidthToAngle widthToAngle(
-    lenAxs=openingAreaSash_bottom_hung_in_geo_ang.winClrWidth,
-    lenAxsToFrm=openingAreaSash_bottom_hung_in_geo_ang.winClrHeight)
+    lenAxs=openingAreaSash_bottom_hung_in_geo_ang.lenAxs,
+    lenAxsToFrm=openingAreaSash_bottom_hung_in_geo_ang.lenAxsToFrm)
     "Convert opening width to opening angle"
     annotation (Placement(transformation(extent={{-20,140},{0,160}})));
 equation

@@ -7,8 +7,18 @@ partial model PartialOpeningAreaSash
     "Window opening type";
   /*Variables to describe the opening*/
   Modelica.Units.SI.Angle opnAng(
-    min=0, max=Modelica.Constants.pi/2, displayUnit="deg")
-    "Window sash opening angle, must be defined by extended model";
+    min=0, max=Modelica.Constants.pi/2, displayUnit="deg")=
+    if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
+    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungOutward) then
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrHeight, winClrWidth, opnWidth)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
+    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward) then
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrWidth, winClrHeight, opnWidth)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical) then
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrHeight, winClrWidth/2, opnWidth)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal) then
+    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrWidth, winClrHeight/2, opnWidth)
+    else 0 "Window sash opening angle";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-70,90},{70,-50}},
@@ -94,7 +104,7 @@ partial model PartialOpeningAreaSash
     Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>

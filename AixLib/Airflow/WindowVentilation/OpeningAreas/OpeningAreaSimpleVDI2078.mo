@@ -4,10 +4,9 @@ model OpeningAreaSimpleVDI2078
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
     final use_opnWidth_in=false,
     final prescribedOpnWidth=0);
-  Modelica.Units.SI.Height effHeight(min=0)
+  final parameter Modelica.Units.SI.Height effHeight(min=0) = 2/3*winClrHeight
     "Effective height for the thermal updraft";
 equation
-  effHeight = 2/3*winClrHeight;
   A = 1/3*AClrOpn;
   annotation (Icon(graphics={
         Rectangle(
@@ -21,7 +20,7 @@ equation
           textString="VDI 2078")}), Documentation(revisions="<html>
 <ul>
   <li>
-    June 13, 2024, by Jun Jiang:<br/>
+    June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
