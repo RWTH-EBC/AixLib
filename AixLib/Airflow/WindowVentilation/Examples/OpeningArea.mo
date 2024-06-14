@@ -414,6 +414,6 @@ horizontal"),
 </ul>
 </html>", info="<html>
 <p>This example simulates and checks the models in package <a href=\"modelica://AixLib/Airflow/WindowVentilation/OpeningAreas/package.mo\">OpeningAreas</a>, calculating the window opening area with variable opening width or angle.</p>
-<p><br>The icon of the model changes itself automatically to indicate the type of window opening that is now being set.</p>
+<p>The icon of the model changes itself automatically to indicate the type of window opening that is now being set.</p>
 </html>"));
 end OpeningArea;

@@ -13,8 +13,9 @@ equation
     "The model only applies to windows whose height is not less than the width",
     AssertionLevel.warning);
   corNPL = sqrt((winClrWidth - opnWidth)/winClrHeight);
-  A = corNPL*opnWidth*(winClrHeight*opnWidth/(opnWidth + sWinSas) - winClrHeight*(1 - corNPL))
-    + 2*winClrHeight*sWinSas/(opnWidth + sWinSas)*winGapWidth;
+  A = if noEvent(opnWidth > Modelica.Constants.eps) then
+    corNPL*opnWidth*(winClrHeight*opnWidth/(opnWidth + sWinSas) - winClrHeight*(1 - corNPL))
+    + 2*winClrHeight*sWinSas/(opnWidth + sWinSas)*winGapWidth else 0;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},

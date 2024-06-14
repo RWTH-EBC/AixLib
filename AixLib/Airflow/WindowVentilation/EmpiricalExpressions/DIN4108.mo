@@ -2,9 +2,7 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model DIN4108 "Empirical expression according to DIN/TS 4108-8 (2022)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108 openingArea
-      constrainedby
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108 openingArea);
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));

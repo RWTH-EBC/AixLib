@@ -19,5 +19,7 @@ algorithm
     First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This function finds the sunshading coefficient according to the input sunshading type. Values are defined by VDI 2078.</p>
 </html>"));
 end CoeffsSunshadingInstallationVDI2078;

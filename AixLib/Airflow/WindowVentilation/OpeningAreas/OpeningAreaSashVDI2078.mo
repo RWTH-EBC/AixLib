@@ -16,11 +16,13 @@ equation
   assert(opnAng <= Modelica.Units.Conversions.from_deg(15),
     "The model only applies to a maximum tilt angle of 15°",
     AssertionLevel.warning);
-  A = ((winClrWidth + winClrHeight - ovlHeight)*opnWidth/3)*corRev;
   effHeight = 2/3*(winClrHeight - ovlHeight);
-  ovlHeight = sWinSas/(opnWidth + sWinSas)*winClrHeight;
+  ovlHeight = if sWinSas > Modelica.Constants.eps then
+    sWinSas/(opnWidth + sWinSas)*winClrHeight else 0;
   corRev = if opnWidth <= heightRevToFrm then 1
     else 1 - 0.6*(1 - heightRevToFrm/opnWidth);
+  A = if noEvent(opnWidth > Modelica.Constants.eps) then
+    ((winClrWidth + winClrHeight - ovlHeight)*opnWidth/3)*corRev else 0;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},

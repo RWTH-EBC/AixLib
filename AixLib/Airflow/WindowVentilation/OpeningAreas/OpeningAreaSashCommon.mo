@@ -130,5 +130,6 @@ equation
 </ul>
 </html>", info="<html>
 <p>This partial model provides a base class of common window sash opening area, incl. geometric, projective, equivalent, and effective opening area.</p>
+<p>Input port of this model is the opening width.</p>
 </html>"));
 end OpeningAreaSashCommon;

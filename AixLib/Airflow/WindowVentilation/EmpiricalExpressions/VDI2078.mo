@@ -1,15 +1,14 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model VDI2078 "Empirical expression according to VDI 2078 (2015)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078 openingArea
-    constrainedby AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078 openingArea);
   parameter Boolean use_cofSunSha_in=false
     "Use input port for sunshading coefficient";
   parameter
     AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.NoSunshading
     "Sunshading type"
-    annotation (Dialog(enable=not use_opnWidth_in));
+    annotation (Dialog(enable=not use_cofSunSha_in));
   Modelica.Blocks.Interfaces.RealInput cofSunSha_in(min=0, max=1) if use_cofSunSha_in
     "Conditional input port for sunshading coefficient"
     annotation (Placement(transformation(

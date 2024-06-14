@@ -1,6 +1,6 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses.Types;
 type SunshadingInstallationTypesVDI2078 = enumeration(
-    NoSunshading "Pivot-hung window withou sunshading",
+    NoSunshading "Pivot-hung window without sunshading",
     ExternalBlindsFront "Pivot-hung window with external venetian blinds > 0.4 m in front of the window",
     ExternalBlindsOn "Pivot-hung window with external venetian blinds on the window",
     Awning "Pivot-hung window with an awning",
@@ -14,5 +14,5 @@ type SunshadingInstallationTypesVDI2078 = enumeration(
   </li>
 </ul>
 </html>", info="<html>
-<p>This enum provides a selector for the record of sunshading coefficient.</p>
+<p>This enum defines types of sunshading coefficient.</p>
 </html>"));
