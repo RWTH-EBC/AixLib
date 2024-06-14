@@ -1,30 +1,28 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
-model GidsPhaff
-  "Empirical expression developed by de Gids and Phaff (1982)"
+model GidsPhaff "Empirical expression developed by de Gids and Phaff (1982)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
-  Modelica.Blocks.Interfaces.RealInput u_10(unit="m/s", min=0)
+      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+  Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 protected
-  Real C_1 = 0.001 "Coefficient 1";
-  Real C_2 = 0.0035 "Coefficient 2";
-  Real C_3 = 0.01 "Coefficient 3";
-  Real interimRes1 "Interim result";
+  Real cof1 = 0.001 "Coefficient 1";
+  Real cof2 = 0.0035 "Coefficient 2";
+  Real cof3 = 0.01 "Coefficient 3";
+  Real intRes "Interim result";
 equation
-  interimRes1 = C_1*(u_10^2) + C_2*winClrH*abs(deltaT) + C_3;
-  assert(interimRes1 > Modelica.Constants.eps,
+  intRes = cof1*(winSpe10^2) + cof2*winClrHeight*abs(dT_RoomAmb) + cof3;
+  assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow =if noEvent(interimRes1 > Modelica.Constants.eps) then 1/2*
-    openingArea_1.A*sqrt(interimRes1) else 0;
+  V_flow =if noEvent(intRes > Modelica.Constants.eps) then
+    1/2*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 3, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

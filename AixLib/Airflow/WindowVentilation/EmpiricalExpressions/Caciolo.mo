@@ -1,51 +1,48 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
-model Caciolo
-  "Empirical expression developed by Caciolo et al. (2013)"
+model Caciolo "Empirical expression developed by Caciolo et al. (2013)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
-      redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
-  Modelica.Blocks.Interfaces.RealInput u(unit="m/s", min=0)
+      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+  Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 protected
-  Real C_d = 0.60 "Discharge coefficient";
-  Real C_T "Coefficient of wind";
-  Modelica.Units.SI.Velocity u_lim=1.23
+  Real cofDcg = 0.60 "Discharge coefficient";
+  Real cofWin "Coefficient of wind";
+  Modelica.Units.SI.Velocity winSpeLim = 1.23
     "Lower bound of wind speed in windward conditions";
-  Real interimRes1 "Interim result";
+  Real intRes "Interim result";
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
-  Modelica.Units.SI.VolumeFlowRate V_flow_w "Wind induced volume flow";
+  Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation
-  beta = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.SmallestAngleDifference(
+  incAng = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.SmallestAngleDifference(
     AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes.Range180,
-    phi,
-    aziRef);
-  if abs(beta_deg) <= 90 then
+    winDir, aziRef);
+  if abs(incAngDeg) <= 90 then
     /*Windward*/
-    C_T = 1.234 - 0.490*u + 0.048*(u^2);
-    assert(u >= u_lim,
-      "The wind speed in the windward condition is less than the limitation, the V_flow_w will be set to 0",
+    cofWin = 1.234 - 0.490*winSpeLoc + 0.048*(winSpeLoc^2);
+    assert(winSpeLoc >= winSpeLim,
+      "The wind speed in the windward condition is less than the limitation, the V_flow_win will be set to 0",
       AssertionLevel.warning);
-    V_flow_w =if noEvent(u >= u_lim) then 0.0357*openingArea_1.A*(u - u_lim)
-       else 0;
+    V_flow_win =if noEvent(winSpeLoc >= winSpeLim) then
+      0.0357*openingArea.A*(winSpeLoc - winSpeLim) else 0;
   else
     /*Leeward*/
-    C_T = 1.355 - 0.179*u;
-    V_flow_w = 0;
+    cofWin = 1.355 - 0.179*winSpeLoc;
+    V_flow_win = 0;
   end if;
-  interimRes1 = Modelica.Constants.g_n*winClrH*deltaT*C_T/avgT;
-  assert(interimRes1 > Modelica.Constants.eps,
+  intRes = Modelica.Constants.g_n*winClrHeight*dT_RoomAmb*cofWin/TAvg;
+  assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
     AssertionLevel.warning);
-  V_flow_th =if noEvent(interimRes1 > Modelica.Constants.eps) then 1/3*
-    openingArea_1.A*C_d*sqrt(interimRes1) else 0;
-  V_flow = V_flow_th + V_flow_w;
+  V_flow_th =if noEvent(intRes > Modelica.Constants.eps) then
+    1/3*openingArea.A*cofDcg*sqrt(intRes) else 0;
+  V_flow = V_flow_th + V_flow_win;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-    <i>April 2, 2024&#160;</i> by Jun Jiang:<br/>
-    Implemented.
+    June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>

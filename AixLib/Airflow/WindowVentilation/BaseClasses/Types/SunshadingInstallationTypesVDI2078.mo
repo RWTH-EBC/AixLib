@@ -1,4 +1,4 @@
-within AixLib.Airflow.WindowVentilation.BaseClasses.Records;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Types;
 type SunshadingInstallationTypesVDI2078 = enumeration(
     NoSunshading "Pivot-hung window withou sunshading",
     ExternalBlindsFront "Pivot-hung window with external venetian blinds > 0.4 m in front of the window",

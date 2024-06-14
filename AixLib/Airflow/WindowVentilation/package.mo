@@ -28,9 +28,11 @@ annotation (Documentation(info="<html>
 <li>Effective opening area, derived from clear opening area and equivalent opening area, see function <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Functions/OpeningAreaHinged/effectiveOpeningArea.mo\">effectiveOpeningArea</a> </li>
 </ul>
 <p><br><br><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaQu.png\"/><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaGeo.png\"/><img src=\"modelica://AixLib/Resources/Images/Airflow/WindowVentilation/WindowOpeningAreaProj.png\"/> </p>
-<h4>Namespaces</h4>
+<h4>Nomenclature</h4>
+<p>Abv: Above</p>
 <p>Amb: Ambient</p>
 <p>Ang: Angle</p>
+<p>ASL: Above see level</p>
 <p>Avg: Average</p>
 <p>Axs: Axis</p>
 <p>Clr: Clear</p>
@@ -40,9 +42,14 @@ annotation (Documentation(info="<html>
 <p>Dif: Difference</p>
 <p>Eff: Effective</p>
 <p>Eqv: Equivalent</p>
+<p>Ext: External</p>
 <p>Frm: Frame</p>
 <p>Geo: Geometric</p>
 <p>Inc: Incidence</p>
+<p>Int: Interim; Internal</p>
+<p>Lim: Limit</p>
+<p>Loc: Local</p>
+<p>NPL: Neutral pressure level</p>
 <p>Opn: Open; Opening</p>
 <p>Ovl: Overlap</p>
 <p>Prj: Projective</p>

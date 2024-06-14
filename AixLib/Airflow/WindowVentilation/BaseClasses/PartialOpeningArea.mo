@@ -21,9 +21,8 @@ partial model PartialOpeningArea
     final quantity="Area", final unit="m2", min=0)
     "Output port for window opening area, must be defined by extended model"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-protected
-  Modelica.Blocks.Interfaces.RealInput opnWidth(final unit="m", min=0)
-    "Internal port to connect to opnWidth_in";
+  Modelica.Blocks.Interfaces.RealOutput opnWidth(final unit="m", min=0)
+    "Internal port to connect to opnWidth_in or prescribedOpnWidth";
 equation
   connect(opnWidth_in, opnWidth);
   if not use_opnWidth_in then
