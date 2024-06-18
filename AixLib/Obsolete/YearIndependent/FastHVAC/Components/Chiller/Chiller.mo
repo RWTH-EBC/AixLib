@@ -226,6 +226,12 @@ model Chiller "Base model of FastHVAC Chiller"
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
+  Modelica.Blocks.Interfaces.RealInput iceFac_in if not useBusConnectorOnly
+    "Input signal for icing factor"
+     annotation (Placement(transformation(
+        extent={{-16,-16},{16,16}},
+        rotation=90,
+        origin={-76,-136})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva
  if use_EvaCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
