@@ -31,13 +31,13 @@ partial model PartialRoomFourWalls
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf
+  parameter Components.Types.selectorCoefficients absInnerWallSurf if use_shortWaveRadIn
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn and not use_dynamicShortWaveRadMethod));
 
   replaceable parameter
-    ThermalZones.HighOrder.Components.Types.PartialCoeffTable coeffTableSolDistrFractions
+    ThermalZones.HighOrder.Components.Types.PartialCoeffTable coeffTableSolDistrFractions if use_shortWaveRadIn
     constrainedby
     AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
     "Record holding the values to reproduce the tables"
