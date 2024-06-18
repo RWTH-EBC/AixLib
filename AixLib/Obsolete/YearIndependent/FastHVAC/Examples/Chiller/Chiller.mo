@@ -181,6 +181,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{29.4,-12},{
+          25.2667,-12},{25.2667,-11.88},{21.1333,-11.88}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
