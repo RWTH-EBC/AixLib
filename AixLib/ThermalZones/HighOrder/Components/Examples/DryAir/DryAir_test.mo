@@ -82,9 +82,9 @@ equation
 <p>
   The simulation consists of the following models:
 </p>
-<table>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
   <caption>
-    \"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+    Models
   </caption>
   <tr>
     <td bgcolor=\"#DCDCDC\">
@@ -106,7 +106,7 @@ equation
     </td>
     <td>
       <p>
-        <a href=\"Building.Components.DryAir.Airload\">Airload</a>
+        <a href=\"AixLib.ThermalZones.HighOrder.Components.DryAir.Airload\">Airload</a>
       </p>
     </td>
   </tr>
@@ -119,7 +119,7 @@ equation
     <td>
       <p>
         <a href=
-        \"Building.Components.DryAir.VarAirExchange\">VarAirExchange</a>
+        \"AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange\">VarAirExchange</a>
       </p>
     </td>
   </tr>
@@ -132,7 +132,7 @@ equation
     <td>
       <p>
         <a href=
-        \"Building.Components.DryAir.InfiltrationRate_DIN12831\">InfiltrationRate_DIN12831</a>
+        \"AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831\">InfiltrationRate_DIN12831</a>
       </p>
     </td>
   </tr>
@@ -145,7 +145,7 @@ equation
     <td>
       <p>
         <a href=
-        \"Building.Components.DryAir.DynamicVentilation\">DynamicVentilation</a>
+        \"AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation\">DynamicVentilation</a>
       </p>
     </td>
   </tr>
