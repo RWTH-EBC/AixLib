@@ -96,11 +96,10 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
 
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", group="Sunblind", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", group="Sunblind", enable = withWindow and outside and withSunblind));
-  parameter Real LimitSolIrr if withWindow and outside and withSunblind
+  parameter Real LimitSolIrr=0
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
     annotation(Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
-  parameter Modelica.Units.SI.Temperature TOutAirLimit
-    if withWindow and outside and withSunblind
+  parameter Modelica.Units.SI.Temperature TOutAirLimit=288.15
     "Temperature at which sunblind closes (see also LimitSolIrr)" annotation (
       Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
   //Parameter and module fow shadow model
