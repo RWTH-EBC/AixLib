@@ -30,7 +30,7 @@ partial model PartialRoomFourWalls
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn and not use_dynamicShortWaveRadMethod));
