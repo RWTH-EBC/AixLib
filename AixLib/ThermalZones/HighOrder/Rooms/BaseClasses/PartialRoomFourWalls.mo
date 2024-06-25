@@ -36,7 +36,7 @@ partial model PartialRoomFourWalls
           use_shortWaveRadIn and not use_dynamicShortWaveRadMethod));
 
   replaceable parameter
-    ThermalZones.HighOrder.Components.Types.PartialCoeffTable coeffTableSolDistrFractions
+    ThermalZones.HighOrder.Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
     constrainedby
     AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
     "Record holding the values to reproduce the tables"
