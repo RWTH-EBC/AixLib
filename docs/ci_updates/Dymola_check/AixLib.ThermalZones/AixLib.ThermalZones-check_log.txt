@@ -2,7 +2,6 @@
 Error in model:  AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse 
 Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse">AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse</a>:
 Error: The following parameters don't have any value:
-  room.absInnerWallSurf
   room.coeffTableSolDistrFractions.coeffCeiling
   room.coeffTableSolDistrFractions.coeffFloor
   room.coeffTableSolDistrFractions.coeffOWEast
@@ -12,8 +11,8 @@ Error: The following parameters don't have any value:
   room.coeffTableSolDistrFractions.coeffWinAbs
   room.coeffTableSolDistrFractions.coeffWinLost
 
-The model has the same number of unknowns and equations: 1161
+The model has the same number of unknowns and equations: 1159
 The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 1161
+for the given numerical settings of parameters: 1159
 Error: ERRORS have been issued.
 
