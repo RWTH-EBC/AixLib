@@ -1,0 +1,25 @@
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.Examples.AHU 
+Failed to build model: AixLib.Airflow.AirHandlingUnit.Examples.AHU
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/AHU.mo:820:3-824:46:writable] Error: Argument 1 of pre must be a discrete expression, but ahu.T_oda is continuous.
+Failed to build model: AixLib.Airflow.AirHandlingUnit.Examples.AHU
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/AHU.mo:820:3-824:46:writable] Error: Argument 1 of pre must be a discrete expression, but ahu.T_oda is continuous.

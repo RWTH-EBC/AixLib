@@ -1,0 +1,890 @@
+
+
+Error in model:  AixLib.Media.Refrigerants.Validation.RefrigerantIntegration 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:427:3-427:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.T = extProp.y[3]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[3]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:428:3-428:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.p = extProp.y[4]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[4]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:429:3-429:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.h = extProp.y[5]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[5]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:432:3-432:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.T = extProp.y[8]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[8]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:433:3-433:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.p = extProp.y[9]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[9]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:434:3-434:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.h = extProp.y[10]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[10]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:437:3-437:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.T = extProp.y[13]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[13]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:438:3-438:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.p = extProp.y[14]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[14]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:439:3-439:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.h = extProp.y[15]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[15]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:442:3-442:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.T = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:443:3-443:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.p = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:444:3-444:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.h = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:447:3-447:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_dT_Ext = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "kg/m3"
+- sub-expression "states.s_dT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:449:3-449:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_pT_Ext = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "kg/m3"
+- sub-expression "states.s_pT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:451:3-451:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ph_Ext = extProp.y[23]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[23]" has unit "kg/m3"
+- sub-expression "states.s_ph_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:453:3-453:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ps_Ext = extProp.y[24]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[24]" has unit "kg/m3"
+- sub-expression "states.s_ps_Ext" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:243:3-243:38:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.T_satExt = extProp.y[16]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[16]" has unit "Pa"
+- sub-expression "saturation.T_satExt" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:245:3-245:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_lExt = extProp.y[17]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[17]" has unit "Pa"
+- sub-expression "saturation.d_lExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:247:3-247:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_vExt = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "Pa"
+- sub-expression "saturation.d_vExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:249:3-249:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_lExt = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "Pa"
+- sub-expression "saturation.h_lExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:251:3-251:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_vExt = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "Pa"
+- sub-expression "saturation.h_vExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:253:3-253:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_lExt = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "Pa"
+- sub-expression "saturation.s_lExt" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:255:3-255:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_vExt = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "Pa"
+- sub-expression "saturation.s_vExt" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_473_Horner/package.mo:57:5-57:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_473_Horner.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantIntegration.mo:14:3-15:56:writable] Error: Class Medium.AbsolutePressure not found in scope RefrigerantIntegration.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:427:3-427:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.T = extProp.y[3]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[3]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:428:3-428:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.p = extProp.y[4]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[4]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:429:3-429:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.h = extProp.y[5]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[5]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:432:3-432:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.T = extProp.y[8]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[8]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:433:3-433:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.p = extProp.y[9]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[9]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:434:3-434:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.h = extProp.y[10]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[10]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:437:3-437:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.T = extProp.y[13]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[13]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:438:3-438:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.p = extProp.y[14]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[14]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:439:3-439:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.h = extProp.y[15]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[15]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:442:3-442:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.T = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:443:3-443:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.p = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:444:3-444:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.h = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:447:3-447:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_dT_Ext = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "kg/m3"
+- sub-expression "states.s_dT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:449:3-449:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_pT_Ext = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "kg/m3"
+- sub-expression "states.s_pT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:451:3-451:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ph_Ext = extProp.y[23]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[23]" has unit "kg/m3"
+- sub-expression "states.s_ph_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:453:3-453:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ps_Ext = extProp.y[24]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[24]" has unit "kg/m3"
+- sub-expression "states.s_ps_Ext" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:243:3-243:38:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.T_satExt = extProp.y[16]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[16]" has unit "Pa"
+- sub-expression "saturation.T_satExt" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:245:3-245:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_lExt = extProp.y[17]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[17]" has unit "Pa"
+- sub-expression "saturation.d_lExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:247:3-247:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_vExt = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "Pa"
+- sub-expression "saturation.d_vExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:249:3-249:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_lExt = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "Pa"
+- sub-expression "saturation.h_lExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:251:3-251:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_vExt = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "Pa"
+- sub-expression "saturation.h_vExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:253:3-253:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_lExt = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "Pa"
+- sub-expression "saturation.s_lExt" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:255:3-255:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_vExt = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "Pa"
+- sub-expression "saturation.s_vExt" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_473_Horner/package.mo:57:5-57:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_473_Horner.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantIntegration.mo:14:3-15:56:writable] Error: Class Medium.AbsolutePressure not found in scope RefrigerantIntegration.
+
+
+Error in model:  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:427:3-427:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.T = extProp.y[3]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[3]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:428:3-428:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.p = extProp.y[4]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[4]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:429:3-429:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.h = extProp.y[5]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[5]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:432:3-432:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.T = extProp.y[8]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[8]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:433:3-433:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.p = extProp.y[9]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[9]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:434:3-434:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.h = extProp.y[10]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[10]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:437:3-437:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.T = extProp.y[13]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[13]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:438:3-438:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.p = extProp.y[14]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[14]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:439:3-439:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.h = extProp.y[15]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[15]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:442:3-442:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.T = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:443:3-443:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.p = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:444:3-444:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.h = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:447:3-447:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_dT_Ext = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "kg/m3"
+- sub-expression "states.s_dT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:449:3-449:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_pT_Ext = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "kg/m3"
+- sub-expression "states.s_pT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:451:3-451:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ph_Ext = extProp.y[23]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[23]" has unit "kg/m3"
+- sub-expression "states.s_ph_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:453:3-453:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ps_Ext = extProp.y[24]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[24]" has unit "kg/m3"
+- sub-expression "states.s_ps_Ext" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1912:5-1912:73:writable] Error: Called function ‘AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula.t_fIdg_t‘ is partial.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:427:3-427:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.T = extProp.y[3]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[3]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:428:3-428:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.p = extProp.y[4]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[4]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:429:3-429:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.dT_Ext.h = extProp.y[5]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[5]" has unit "kg/m3"
+- sub-expression "states.dT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:432:3-432:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.T = extProp.y[8]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[8]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:433:3-433:33:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.p = extProp.y[9]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[9]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:434:3-434:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.pT_Ext.h = extProp.y[10]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[10]" has unit "kg/m3"
+- sub-expression "states.pT_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:437:3-437:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.T = extProp.y[13]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[13]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:438:3-438:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.p = extProp.y[14]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[14]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:439:3-439:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ph_Ext.h = extProp.y[15]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[15]" has unit "kg/m3"
+- sub-expression "states.ph_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:442:3-442:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.T = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.T" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:443:3-443:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.p = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.p" has unit "Pa"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:444:3-444:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.ps_Ext.h = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "kg/m3"
+- sub-expression "states.ps_Ext.h" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:447:3-447:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_dT_Ext = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "kg/m3"
+- sub-expression "states.s_dT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:449:3-449:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_pT_Ext = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "kg/m3"
+- sub-expression "states.s_pT_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:451:3-451:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ph_Ext = extProp.y[23]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[23]" has unit "kg/m3"
+- sub-expression "states.s_ph_Ext" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsDerivatives/RefrigerantsDerivativesR134a.mo:453:3-453:34:writable] Warning: The following equation is INCONSISTENT due to specified unit information: states.s_ps_Ext = extProp.y[24]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[24]" has unit "kg/m3"
+- sub-expression "states.s_ps_Ext" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1912:5-1912:73:writable] Error: Called function ‘AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula.t_fIdg_t‘ is partial.
+
+
+Error in model:  AixLib.Media.Refrigerants.Validation.RefrigerantInversions 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:243:3-243:38:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.T_satExt = extProp.y[16]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[16]" has unit "Pa"
+- sub-expression "saturation.T_satExt" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:245:3-245:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_lExt = extProp.y[17]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[17]" has unit "Pa"
+- sub-expression "saturation.d_lExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:247:3-247:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_vExt = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "Pa"
+- sub-expression "saturation.d_vExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:249:3-249:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_lExt = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "Pa"
+- sub-expression "saturation.h_lExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:251:3-251:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_vExt = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "Pa"
+- sub-expression "saturation.h_vExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:253:3-253:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_lExt = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "Pa"
+- sub-expression "saturation.s_lExt" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:255:3-255:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_vExt = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "Pa"
+- sub-expression "saturation.s_vExt" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_340_Record/package.mo:56:5-56:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_340_Record.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantInversions.mo:64:3-64:47:writable] Error: Function Medium.specificEnthalpy_pT not found in scope RefrigerantInversions.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:243:3-243:38:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.T_satExt = extProp.y[16]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[16]" has unit "Pa"
+- sub-expression "saturation.T_satExt" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:245:3-245:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_lExt = extProp.y[17]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[17]" has unit "Pa"
+- sub-expression "saturation.d_lExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:247:3-247:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.d_vExt = extProp.y[18]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[18]" has unit "Pa"
+- sub-expression "saturation.d_vExt" has unit "kg/m3"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:249:3-249:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_lExt = extProp.y[19]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[19]" has unit "Pa"
+- sub-expression "saturation.h_lExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:251:3-251:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.h_vExt = extProp.y[20]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[20]" has unit "Pa"
+- sub-expression "saturation.h_vExt" has unit "J/kg"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:253:3-253:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_lExt = extProp.y[21]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[21]" has unit "Pa"
+- sub-expression "saturation.s_lExt" has unit "J/(kg.K)"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:255:3-255:36:writable] Warning: The following equation is INCONSISTENT due to specified unit information: saturation.s_vExt = extProp.y[22]
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "extProp.y[22]" has unit "Pa"
+- sub-expression "saturation.s_vExt" has unit "J/(kg.K)"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_340_Record/package.mo:56:5-56:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_340_Record.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantInversions.mo:64:3-64:47:writable] Error: Function Medium.specificEnthalpy_pT not found in scope RefrigerantInversions.
+
+
+Error in model:  AixLib.Media.Refrigerants.Examples.BranchingDynamicPipes 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFCeval.mo:1730:9-1731:93:writable] Error: Internal error NFCeval.evalRelationEqual failed to evaluate ‘boundary1.Medium.ThermoStates == Modelica.Media.Interfaces.Choices.IndependentVariables.ph‘
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFCeval.mo:1730:9-1731:93:writable] Error: Internal error NFCeval.evalRelationEqual failed to evaluate ‘boundary1.Medium.ThermoStates == Modelica.Media.Interfaces.Choices.IndependentVariables.ph‘
+
+
+Error in model:  AixLib.Media.Refrigerants.Validation.RefrigerantsFittedFormulas.RefrigerantsFittedFormulasR410a 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_473_Horner/package.mo:57:5-57:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_473_Horner.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:196:3-196:61:writable] Error: Variable MediumInt.fluidConstants[1].criticalTemperature not found in scope RefrigerantsFittedFormulasR134a.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Interfaces/PartialHybridTwoPhaseMediumFormula.mo:1293:3-1316:21:writable] Warning: Missing redeclare prefix on class extends density_derp_T, treating like redeclare anyway.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/R410A_HEoS/R410a_IIR_P1_48_T233_473_Horner/package.mo:57:5-57:50:writable] Error: Variable Choices.IndependentVariables.phX not found in scope R410a_IIR_P1_48_T233_473_Horner.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Validation/RefrigerantsFittedFormulas/RefrigerantsFittedFormulasR134a.mo:196:3-196:61:writable] Error: Variable MediumInt.fluidConstants[1].criticalTemperature not found in scope RefrigerantsFittedFormulasR134a.
+
+
+Error in model:  AixLib.Media.Refrigerants.Examples.RefrigerantTestImplementation 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Examples/RefrigerantTestImplementation.mo:5:3-13:33:writable] Error: Base class Modelica.Media.Examples.Tests.Components.PartialTestModel2 not found in scope RefrigerantTestImplementation.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/Media/Refrigerants/Examples/RefrigerantTestImplementation.mo:5:3-13:33:writable] Error: Base class Modelica.Media.Examples.Tests.Components.PartialTestModel2 not found in scope RefrigerantTestImplementation.
