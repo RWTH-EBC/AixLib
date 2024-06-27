@@ -1,18 +1,432 @@
 
-Error in model:  AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse">AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse</a>:
-Error: The following parameters don't have any value:
-  room.coeffTableSolDistrFractions.coeffCeiling
-  room.coeffTableSolDistrFractions.coeffFloor
-  room.coeffTableSolDistrFractions.coeffOWEast
-  room.coeffTableSolDistrFractions.coeffOWNorth
-  room.coeffTableSolDistrFractions.coeffOWSouth
-  room.coeffTableSolDistrFractions.coeffOWWest
-  room.coeffTableSolDistrFractions.coeffWinAbs
-  room.coeffTableSolDistrFractions.coeffWinLost
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
 
-The model has the same number of unknowns and equations: 1159
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 1159
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase940 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase940">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase940</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase640 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase640">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase640</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase920 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase920">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase920</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase900</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase640 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase640">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase640</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase920 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase920">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase920</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase620 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase620">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase620</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase920 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase920">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase920</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase650</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase940 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase940">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase940</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase650</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase600FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase600</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase600FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase620 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase620">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase620</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase620 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase620">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase620</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase900FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase640 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase640">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase640</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement.TestCase950</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase650</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase900</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950">AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
 Error: ERRORS have been issued.
 
