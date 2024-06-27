@@ -1,0 +1,9 @@
+
+Error in model:  AixLib.Utilities.Sensors.Examples.ExergyMeters 
+Check of <a href="Modelica://AixLib.Utilities.Sensors.Examples.ExergyMeters">AixLib.Utilities.Sensors.Examples.ExergyMeters</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+

@@ -1,0 +1,63 @@
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Lights 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Lights">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Lights</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.OneOffice 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.OneOffice">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.OneOffice</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Machines 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Machines">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Machines</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansTotTDep 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansTotTDep">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansTotTDep</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTDep 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTDep">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTDep</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran 
+Check of <a href="Modelica://AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran">AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTIndep 
+Check of <a href="Modelica://AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTIndep">AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTIndep</a>:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+
