@@ -1,0 +1,68 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Check of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Examples.GenericAHU\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Examples.GenericAHU\\\");\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos");
+simulateModel("AixLib.Systems.ModularAHU.Examples.GenericAHU", stopTime=7200, method="dassl", tolerance=1e-6, resultFile="AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Translation of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Examples.GenericAHU.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Check of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\\\");\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos");
+simulateModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem", stopTime=86400, method="dassl",  tolerance=1e-06, resultFile="AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Translation of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.translation.log");
