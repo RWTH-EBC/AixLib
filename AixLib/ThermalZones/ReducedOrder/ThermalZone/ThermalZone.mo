@@ -4,7 +4,8 @@ model ThermalZone "Thermal zone containing moisture balance"
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
@@ -58,7 +59,8 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   // Pool parameters
   replaceable package MediumPoolWater = AixLib.Media.Water
-   "Medium in the component"  annotation (choices(choice(redeclare package Medium =
+   "Medium in the component"  annotation (choices(choice(redeclare package
+          Medium =
             AixLib.Media.Water
               "Water")), Dialog(enable=use_pools,tab="Moisture", group="Pools"));
   parameter Integer nPools(min=1)=1  "Number of pools in thermal zone" annotation(Dialog(enable=use_pools,tab="Moisture", group="Pools"));
@@ -334,7 +336,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
   Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[3](each final quantity="HeatFlowRate",
       each final unit="W") if ATot > 0
-    "Heat flow based on internal gains from persons, machines, and light"
+    "Heat flow based on internal gains from lights[1], machines[2], and persons[3]"
                                                            annotation (
       Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
@@ -776,8 +778,7 @@ elseif use_MechanicalAirExchange and not use_NaturalAirExchange then
               {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-else
-     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
+else connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},

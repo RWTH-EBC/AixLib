@@ -18,7 +18,7 @@ partial model PartialCase "This is the base class from which the base cases will
     each GroundReflection= 0.2,
     each Latitude=sun.Latitude,
     each h= 1609,
-    each WeatherFormat=2) "N, E, S, W, Horz"
+    each WeatherFormat=true) "N, E, S, W, Horz"
     annotation (Placement(transformation(extent={{-102,41},{-74,69}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -41,21 +41,21 @@ partial model PartialCase "This is the base class from which the base cases will
       choices(
         choice(redeclare model Room = Rooms.ASHRAE140.SouthFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with south facing window"),
         choice(redeclare model Room = Rooms.ASHRAE140.EastWestFacingWindows (
           wallTypes=wallTypes,
-          calcMethodIn=4,
+          calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
           Type_Win=windowParam,
           redeclare final model CorrSolarGainWin = CorrSolarGainWin,
           solar_absorptance_OW=solar_absorptance_OW,
-          calcMethodOut=2,
+          calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
           Win_Area=Win_Area,
           absInnerWallSurf=absInnerWallSurf)
         "Room with east and west facing window")));
@@ -66,19 +66,21 @@ partial model PartialCase "This is the base class from which the base cases will
     T0_air=294.15,
     TWalls_start=289.15,
     final wallTypes=wallTypes,
-    calcMethodIn=4,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
     final Type_Win=windowParam,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
-    calcMethodOut=2,
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     final Win_Area=Win_Area,
     final absInnerWallSurf=absInnerWallSurf,
     final use_dynamicShortWaveRadMethod=false)
                   annotation(Placement(transformation(extent={{-27,8},{29,62}})));
 
-  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
+  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad
+ if activeHeatingOutput                                   "in kWh"
     annotation (Placement(transformation(extent={{130,58},{150,78}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad
+ if activeCoolingOutput                                   "in kWh"
     annotation (Placement(transformation(extent={{130,42},{150,62}})));
   Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
     "in kWh/m2"
@@ -94,10 +96,14 @@ partial model PartialCase "This is the base class from which the base cases will
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-97,-97},{-77,-77}})));
-  Modelica.Blocks.Continuous.Integrator integratorHeat annotation (Placement(transformation(extent={{72,62.5},{83,73.5}})));
-  Modelica.Blocks.Continuous.Integrator integratorCool annotation (Placement(transformation(extent={{72,46.5},{83,57.5}})));
-  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhHeat annotation (Placement(transformation(extent={{92,63},{102,73}})));
-  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhCool annotation (Placement(transformation(extent={{92,47},{102,57}})));
+  Modelica.Blocks.Continuous.Integrator integratorHeat if activeHeatingOutput
+                                                       annotation (Placement(transformation(extent={{72,62.5},{83,73.5}})));
+  Modelica.Blocks.Continuous.Integrator integratorCool if activeCoolingOutput
+                                                       annotation (Placement(transformation(extent={{72,46.5},{83,57.5}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhHeat if activeHeatingOutput
+                                                         annotation (Placement(transformation(extent={{92,63},{102,73}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhCool if activeCoolingOutput
+                                                         annotation (Placement(transformation(extent={{92,47},{102,57}})));
   Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Convective part"
     annotation (Placement(transformation(extent={{-120,-72},{-110,-62}})));
   Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
@@ -132,7 +138,8 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (choicesAllMatching=true);
   replaceable model CorrSolarGainWin =
       Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
-    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.Units.SI.Area Win_Area=12 "Window area ";
@@ -159,7 +166,10 @@ partial model PartialCase "This is the base class from which the base cases will
     "Simulation time when block should check if model results lies in limit range"
     annotation (Dialog(tab="Results check", group=
           "Cooling load or min. temperature"));
-
+  parameter Boolean activeHeatingOutput=true
+  "Activates blocks connected with HeaterCoolerPI.heatingPower";
+  parameter Boolean activeCoolingOutput=true
+  "Activates blocks connected with HeaterCoolerPI.coolingPower";
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{72,30},{84,42}})));

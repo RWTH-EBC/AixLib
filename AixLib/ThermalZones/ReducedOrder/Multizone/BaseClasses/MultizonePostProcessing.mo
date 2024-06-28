@@ -172,17 +172,17 @@ model MultizonePostProcessing
     each final quantity="Energy",
     each final unit="J",
     each displayUnit="kWh")
-    "Heat gains based on internal gains for each zone from persons, machines, and light"
+    "Heat gains based on internal gains for each zone from lights[1], machines[2], and persons[3]"
     annotation (Placement(transformation(extent={{100,-122},{120,-102}}),
         iconTransformation(extent={{100,-130},{120,-110}})));
   Modelica.Blocks.Interfaces.RealInput QIntGains_flow[numZones,3](each final
       quantity="HeatFlowRate", each final unit="W")
-    "Heat flow based on internal gains for each zone from persons, machines, and light"
+    "Heat flow based on internal gains for each zone from lights[1], machines[2], and persons[3]"
                                                                  annotation (
       Placement(transformation(extent={{-140,-140},{-100,-100}}),
         iconTransformation(extent={{-140,-140},{-100,-100}})));
   Modelica.Blocks.Continuous.Integrator QIntGainCalc[numZones,3]
-    "Heat gain based on internal gains for each zone from persons, machines, and light"
+    "Heat gain based on internal gains for each zone from lights[1], machines[2], and persons[3]"
     annotation (Placement(transformation(extent={{58,-124},{74,-108}})));
 equation
   connect(TAirAverageCalc.u, TAir) annotation (Line(points={{56.4,96},{56.4,100},
