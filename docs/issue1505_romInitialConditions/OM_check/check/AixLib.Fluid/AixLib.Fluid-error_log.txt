@@ -1,0 +1,41 @@
+
+
+Error in model:  AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Media/package.mo:4109:7-4109:67:writable] Error: Output parameter state was not assigned a value
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Media/package.mo:4109:7-4109:67:writable] Error: Output parameter state was not assigned a value

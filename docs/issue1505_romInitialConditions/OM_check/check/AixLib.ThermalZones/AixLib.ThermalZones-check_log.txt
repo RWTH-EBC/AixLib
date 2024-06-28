@@ -1,0 +1,1912 @@
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:41:3-41:44:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[2] = varAirExchange.port_b.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "varAirExchange.port_b.Q_flow" has unit "W"
+- sub-expression "realOut[2]" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:42:3-42:55:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[3] = infiltrationRate_DIN12831.port_b.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "infiltrationRate_DIN12831.port_b.Q_flow" has unit "W"
+- sub-expression "realOut[3]" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:43:3-43:53:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[4] = dynamicVentilation.port_inside.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "dynamicVentilation.port_inside.Q_flow" has unit "W"
+- sub-expression "realOut[4]" has unit "K"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:14:3-15:39:writable] Error: Could not evaluate structural parameter (or constant): zoneParam[<zone, 1>].nOrientations which gives dimensions of array: AWin. Array dimensions must be known at compile time.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:14:3-15:39:writable] Error: Could not evaluate structural parameter (or constant): zone.zoneParam.nOrientations which gives dimensions of array: AWin. Array dimensions must be known at compile time.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:41:3-41:44:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[2] = varAirExchange.port_b.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "varAirExchange.port_b.Q_flow" has unit "W"
+- sub-expression "realOut[2]" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:42:3-42:55:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[3] = infiltrationRate_DIN12831.port_b.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "infiltrationRate_DIN12831.port_b.Q_flow" has unit "W"
+- sub-expression "realOut[3]" has unit "K"
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Examples/DryAir/DryAir_test.mo:43:3-43:53:writable] Warning: The following equation is INCONSISTENT due to specified unit information: realOut[4] = dynamicVentilation.port_inside.Q_flow
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "dynamicVentilation.port_inside.Q_flow" has unit "W"
+- sub-expression "realOut[4]" has unit "K"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:14:3-15:39:writable] Error: Could not evaluate structural parameter (or constant): zoneParam[<zone, 1>].nOrientations which gives dimensions of array: AWin. Array dimensions must be known at compile time.
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:14:3-15:39:writable] Error: Could not evaluate structural parameter (or constant): zone.zoneParam.nOrientations which gives dimensions of array: AWin. Array dimensions must be known at compile time.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:27:3-28:46:writable] Notification: From here:
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/RC/OneElement.mo:211:3-212:44:writable] Error: Constant zoneParam.AExt is used without having been given a value.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo:27:3-28:46:writable] Notification: From here:
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/RC/OneElement.mo:211:3-212:44:writable] Error: Constant zoneParam.AExt is used without having been given a value.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/MultizonePostProcessing.mo:41:3-46:59:writable] Error: The conditional expression calc_rel_humidity could not be evaluated.
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/MultizonePostProcessing.mo:41:3-46:59:writable] Error: The conditional expression calc_rel_humidity could not be evaluated.
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/BoundaryConditions/WeatherData/Old/WeatherTRY/Weather.mo:123:7-123:46:writable] Warning: The following equation is INCONSISTENT due to specified unit information: weather.deMultiplex.y3[4] = weather.from_degC.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "weather.from_degC.u" has unit "K"
+- sub-expression "weather.deMultiplex.y3[4]" has unit "m/s"
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: room.ceiling.windowModel.Ag.y = room.ceiling.windowModel.Ag.k * room.ceiling.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "room.ceiling.windowModel.Ag.k * room.ceiling.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "room.ceiling.windowModel.Ag.y" has unit "W"
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: ceiling.windowModel.Ag.y = ceiling.windowModel.Ag.k * ceiling.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "ceiling.windowModel.Ag.k * ceiling.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "ceiling.windowModel.Ag.y" has unit "W"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/BoundaryConditions/WeatherData/Old/WeatherTRY/Weather.mo:123:7-123:46:writable] Warning: The following equation is INCONSISTENT due to specified unit information: weather.deMultiplex.y3[4] = weather.from_degC.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "weather.from_degC.u" has unit "K"
+- sub-expression "weather.deMultiplex.y3[4]" has unit "m/s"
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: room.ceiling.windowModel.Ag.y = room.ceiling.windowModel.Ag.k * room.ceiling.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "room.ceiling.windowModel.Ag.k * room.ceiling.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "room.ceiling.windowModel.Ag.y" has unit "W"
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: ceiling.windowModel.Ag.y = ceiling.windowModel.Ag.k * ceiling.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "ceiling.windowModel.Ag.k * ceiling.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "ceiling.windowModel.Ag.y" has unit "W"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo:88:3-88:64:writable] Warning: Conditional component ‘AirTemp‘ is used in a non-connect context.
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo:88:3-88:64:writable] Warning: Conditional component ‘AirTemp‘ is used in a non-connect context.
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620 
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: outerWall.windowModel.Ag.y = outerWall.windowModel.Ag.k * outerWall.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "outerWall.windowModel.Ag.k * outerWall.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "outerWall.windowModel.Ag.y" has unit "W"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFUnitCheck.mo:83:5-83:91:writable] Error: Internal error NFUnitCheck.checkUnits: unit check module failed
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/home/openmodelicausers/.openmodelica/libraries/Modelica 4.0.0+maint.om/Blocks/Math.mo:552:5-552:12:writable] Warning: The following equation is INCONSISTENT due to specified unit information: outerWall.windowModel.Ag.y = outerWall.windowModel.Ag.k * outerWall.windowModel.Ag.u
+Warning: The units of following sub-expressions need to be equal:
+- sub-expression "outerWall.windowModel.Ag.k * outerWall.windowModel.Ag.u" has unit "W/m2"
+- sub-expression "outerWall.windowModel.Ag.y" has unit "W"
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(SDF, "master", exactMatch=true)
+  installPackage(SDF, "0.4.2", exactMatch=false)
+  installPackage(SDF, "0.4.2", exactMatch=false).
+Notification: Skipped loading package SDF (0.4.2,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+Notification: You can install the requested package using one of the commands:
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=false)
+  installPackage(Modelica_DeviceDrivers, "2.1.1", exactMatch=true).
+Notification: Skipped loading package Modelica_DeviceDrivers (2.1.1,default) using MODELICAPATH /home/openmodelicausers/.openmodelica/libraries/ (uses-annotation may be wrong).
+[/var/lib/jenkins1/ws/LINUX_BUILDS/tmp.build/openmodelica-1.20.0~1-g2faf7aa/OMCompiler/Compiler/NFFrontEnd/NFType.mo:1112:13-1113:80:writable] Error: Internal error NFType.subscript got unsubscriptable type AixLib.Utilities.Interfaces.ShortRadSurf
