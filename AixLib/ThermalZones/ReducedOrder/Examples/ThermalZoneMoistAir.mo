@@ -5,8 +5,6 @@ model ThermalZoneMoistAir
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     use_moisture_balance=true,
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
@@ -143,7 +141,7 @@ model ThermalZoneMoistAir
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+      points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y, thermalZone.intGains)
@@ -162,11 +160,11 @@ equation
     annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
-  connect(sourcAir.ports[1], thermalZone.ports[1]) annotation (Line(points={{
-          -64,-70},{-46,-70},{-46,-36},{-2.35,-36},{-2.35,-7.2}}, color={0,127,
+  connect(sourcAir.ports[1], thermalZone.ports[1]) annotation (Line(points={{-64,-70},
+          {-46,-70},{-46,-36},{-1.175,-36},{-1.175,-7.2}},        color={0,127,
           255}));
-  connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
-          -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
+  connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{1.175,
+          -7.2},{1.175,-40},{-38,-40},{-38,-76},{-32,-76}},color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
@@ -181,7 +179,7 @@ equation
 </html>", info="<html>
 <p>
   This example illustrates the use of <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir</a>.
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
   Parameter set for thermal zone is for an office zone of an office
   building build as passive house. All boundary conditions are generic
   to show how to apply different kinds of boundary conditions. The

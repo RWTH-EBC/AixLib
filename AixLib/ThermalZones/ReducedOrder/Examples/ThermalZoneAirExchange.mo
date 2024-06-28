@@ -6,8 +6,6 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
     internalGainsMode=1,
@@ -137,7 +135,7 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
 
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+      points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, weaBus) annotation (Line(
@@ -147,8 +145,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-11.3,
-          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}},color={0,0,127}), Text(
+  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-9.6,-1.6},
+          {-35.65,-1.6},{-35.65,-4},{-61,-4}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -178,7 +176,7 @@ equation
         "Simulate and plot"),
     Documentation(info="<html><p>
   This example illustrates the use of <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped</a>.
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
   Parameter set for thermal zone is for an office zone of an office
   building build as passive house. All boundary conditions are generic
   to show how to apply different kinds of boundary conditions. The

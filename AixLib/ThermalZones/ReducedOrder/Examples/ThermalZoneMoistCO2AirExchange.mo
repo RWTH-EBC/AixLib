@@ -6,8 +6,6 @@ model ThermalZoneMoistCO2AirExchange
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     use_moisture_balance=true,
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     T_start=293.15,
@@ -200,8 +198,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pWat.p_w, humRat.p_w) annotation (Line(points={{-65,-24},{-56,-24},{
           -56,-20},{-45,-20}}, color={0,0,127}));
-  connect(humRat.X_w, thermalZone.ventHum) annotation (Line(points={{-23,-20},{
-          -20,-20},{-20,-7.1},{-9.5,-7.1}},  color={0,0,127}));
+  connect(humRat.X_w, thermalZone.ventHum) annotation (Line(points={{-23,-20},{-20,
+          -20},{-20,-7.3},{-9.9,-7.3}},      color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),

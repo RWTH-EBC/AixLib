@@ -6,10 +6,6 @@ model ThermalZoneMoistAirSwimmingPool
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     use_pools=true,
     use_moisture_balance=true,
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-        intWallRC(thermCapInt(each der_T(fixed=true))),
-        floorRC(thermCapExt(each der_T(fixed=true))),
-        roofRC(thermCapExt(each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
@@ -156,8 +152,7 @@ model ThermalZoneMoistAirSwimmingPool
     tableName="openingHours",
     columns=2:2,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))
-                                                                                                                                            "Boundary condition: Opening Hours of swiming pools"
+        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))                                              "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-92,-34},{-76,-18}})));
   Modelica.Blocks.Sources.Constant
                                const(k=273.15 + 30)

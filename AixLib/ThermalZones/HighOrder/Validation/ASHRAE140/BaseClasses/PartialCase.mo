@@ -25,13 +25,13 @@ partial model PartialCase "This is the base class from which the base cases will
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.txt"))
     annotation (Placement(transformation(extent={{-102,-14},{-85,3}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     tableName="Table",
     columns={4,5,6,7},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.txt"))
     annotation (Placement(transformation(extent={{-103,13},{-86,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
