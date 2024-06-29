@@ -105,10 +105,11 @@ model OpeningArea "Calculation of different opening areas"
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Projective)
     "Pivot, vertical, projective opening"
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
-  AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon openingAreaSash_pivot_vertical_eq(
+  AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon openingAreaSash_pivot_vertical_eqv(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical,
+
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Equivalent)
     "Pivot, vertical, equivalent opening"
     annotation (Placement(transformation(extent={{40,-20},{60,0}})));
@@ -133,10 +134,11 @@ model OpeningArea "Calculation of different opening areas"
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Projective)
     "Pivot, horizontal, projective opening"
     annotation (Placement(transformation(extent={{80,20},{100,40}})));
-  AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon openingAreaSash_pivot_horizontal_eq(
+  AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon openingAreaSash_pivot_horizontal_eqv(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal,
+
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Equivalent)
     "Pivot, horizontal, equivalent opening"
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
@@ -252,16 +254,18 @@ equation
       Line(points={{-119,10},{30,10},{30,70},{38,70}}, color={0,0,127}));
   connect(opnWidthSet.y, openingAreaSash_pivot_vertical_prj.opnWidth_in) annotation (
       Line(points={{-119,10},{30,10},{30,30},{38,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, openingAreaSash_pivot_vertical_eq.opnWidth_in) annotation (
-      Line(points={{-119,10},{30,10},{30,-10},{38,-10}}, color={0,0,127}));
+  connect(opnWidthSet.y, openingAreaSash_pivot_vertical_eqv.opnWidth_in)
+    annotation (Line(points={{-119,10},{30,10},{30,-10},{38,-10}}, color={0,0,
+          127}));
   connect(opnWidthSet.y, openingAreaSash_pivot_vertical_eff.opnWidth_in) annotation (
       Line(points={{-119,10},{30,10},{30,-50},{38,-50}}, color={0,0,127}));
   connect(opnWidthSet.y, openingAreaSash_pivot_horizontal_geo.opnWidth_in)
     annotation (Line(points={{-119,10},{70,10},{70,70},{78,70}}, color={0,0,127}));
   connect(opnWidthSet.y, openingAreaSash_pivot_horizontal_prj.opnWidth_in)
     annotation (Line(points={{-119,10},{70,10},{70,30},{78,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, openingAreaSash_pivot_horizontal_eq.opnWidth_in) annotation (
-     Line(points={{-119,10},{70,10},{70,-10},{78,-10}}, color={0,0,127}));
+  connect(opnWidthSet.y, openingAreaSash_pivot_horizontal_eqv.opnWidth_in)
+    annotation (Line(points={{-119,10},{70,10},{70,-10},{78,-10}}, color={0,0,
+          127}));
   connect(opnWidthSet.y, openingAreaSash_pivot_horizontal_eff.opnWidth_in)
     annotation (Line(points={{-119,10},{70,10},{70,-50},{78,-50}}, color={0,0,127}));
   connect(opnWidthSet.y, openingAreaSash_sliding_vertical_geo.opnWidth_in)
