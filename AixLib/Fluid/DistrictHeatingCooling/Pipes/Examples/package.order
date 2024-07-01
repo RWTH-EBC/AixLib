@@ -1,4 +1,7 @@
 DHCPipe
-PlugFlowPipeEmbedded
-PlugFlowPipeZeta
+DHCDoublePipe
 StaticPipe
+PlugFlowPipeEmbedded
+PlugFlowPipeEmbeddedDis
+PlugFlowPipeZeta
+TwoPipe

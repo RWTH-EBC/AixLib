@@ -1,2 +1,5 @@
 DynamicHysteresis
 SmoothSwitch
+TripleAnd
+HPReversibleControlLogicHeatColdDHWDirectCooling
+ValveControlLogic2PI

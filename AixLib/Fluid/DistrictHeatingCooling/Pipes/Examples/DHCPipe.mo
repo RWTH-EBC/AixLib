@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
-model DHCPipe "Simple example of DHCPipe and its four different modes"
+model DHCPipe "Simple example of PlugFlowPipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
@@ -17,7 +17,6 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     annotation (Placement(transformation(extent={{72,40},{52,60}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe  pip(
     redeclare package Medium = Medium,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare BaseClassesStatic.StaticCore pipCor "Static core",
     dh=0.1,
     length=100,
@@ -40,7 +39,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=1) "Flow source"
+    m_flow=3) "Flow source"
     annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTemOut(
@@ -67,7 +66,6 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     annotation (Placement(transformation(extent={{72,0},{52,20}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip1(
     redeclare package Medium = Medium,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     dh=0.1,
     length=100,
@@ -87,7 +85,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=1) "Flow source"
+    m_flow=3) "Flow source"
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Sensors.TemperatureTwoPort              senTemOut1(
     redeclare package Medium = Medium,
@@ -114,7 +112,6 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip2(
     redeclare package Medium = Medium,
     use_soil=true,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     dh=0.1,
     length=100,
@@ -134,7 +131,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=1) "Flow source"
+    m_flow=3) "Flow source"
     annotation (Placement(transformation(extent={{-70,-42},{-50,-22}})));
   Sensors.TemperatureTwoPort              senTemOut2(
     redeclare package Medium = Medium,
@@ -161,7 +158,6 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip3(
     redeclare package Medium = Medium,
     sum_zetas=2.5,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     dh=0.1,
     length=100,
@@ -181,7 +177,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     redeclare package Medium = Medium,
     use_T_in=true,
-    m_flow=1) "Flow source"
+    m_flow=3) "Flow source"
     annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
   Sensors.TemperatureTwoPort              senTemOut3(
     redeclare package Medium = Medium,
@@ -248,18 +244,18 @@ equation
   connect(senTemIn3.port_b, pip3.port_a)
     annotation (Line(points={{-20,-70},{-10,-70}}, color={0,127,255}));
   annotation (
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/DHCPipe.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeZeta.mos"
                       "Simulate and plot"),
-    experiment(StopTime=3600, Tolerance=1e-006),
+    experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html><p>
   Basic test of model <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe\">AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe</a>.
-  This test includes an inlet temperature step under a constant mass
-  flow rate. All four possible applications of the DHC pipe model are
-  shown as examples.
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta\">
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta</a>. This
+  test includes an inlet temperature step under a constant mass flow
+  rate.
 </p>
 <ul>
-  <li>November 12, 2020, by Michael Mans:<br/>
+  <li>September 25, 2019 by Nils Neuland:<br/>
     First implementation
   </li>
 </ul>
