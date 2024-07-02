@@ -13,8 +13,9 @@ model Wall
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
   // general wall parameters
+  parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
-    annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
+    annotation(Dialog(group="Structure of wall layers", enable=use_condLayers),   choicesAllMatching = true,
     Placement(transformation(extent={{2,76},{22,96}})));
 
 
@@ -141,6 +142,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     final energyDynamics=energyDynamics,
     final h=wall_height,
     final l=wall_length,
+    final use_condLayers=use_condLayers,
     final T0=T0,
     final clearance=clearance,
     final wallType=wallPar,

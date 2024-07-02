@@ -1,8 +1,8 @@
 ﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
-
+  extends
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
   parameter Boolean heatAHU
     "Status of heating of AHU"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
@@ -62,6 +62,7 @@ model MultizoneEquipped
     constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU
     "Air handling unit model"
     annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
+
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -113,6 +114,7 @@ model MultizoneEquipped
   Modelica.Blocks.Interfaces.RealOutput CO2Con[numZones] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
+
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
     "Calculated zone factors";
@@ -318,6 +320,7 @@ equation
     annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
         color={0,0,127}));
   end if;
+
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

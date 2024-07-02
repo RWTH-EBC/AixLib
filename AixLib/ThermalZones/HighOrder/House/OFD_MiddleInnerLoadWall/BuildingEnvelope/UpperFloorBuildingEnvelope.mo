@@ -119,6 +119,7 @@ model UpperFloorBuildingEnvelope
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Bedroom(
     final denAir=denAir,
     final cAir=cAir,
+    final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
     final energyDynamics=energyDynamics,
@@ -211,6 +212,7 @@ model UpperFloorBuildingEnvelope
     T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors,
+    final use_UFH=use_UFH,
     nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{78,28},
             {40,76}})));
@@ -261,12 +263,14 @@ model UpperFloorBuildingEnvelope
     T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors,
+    final use_UFH=use_UFH,
     nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{80,-36},
             {42,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Children2(
     final denAir=denAir,
     final cAir=cAir,
+    final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
     final energyDynamics=energyDynamics,
@@ -353,6 +357,7 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final use_UFH=use_UFH,
     T0_air=T0_air,
     nPorts=2,
     redeclare final package Medium = Medium)       annotation (Placement(transformation(extent={{78,-28},{

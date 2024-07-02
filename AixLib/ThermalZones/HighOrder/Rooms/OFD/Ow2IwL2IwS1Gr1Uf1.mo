@@ -116,7 +116,8 @@ model Ow2IwL2IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=true)
                            annotation (Placement(transformation(extent={{-58,-14},{-48,44}})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
@@ -146,7 +147,8 @@ model Ow2IwL2IwS1Gr1Uf1
     U_door=U_door_OD2,
     eps_door=eps_door_OD2,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=true)
                            annotation (Placement(transformation(
         origin={23,59},
         extent={{-4.99998,-27},{5.00001,27}},
@@ -174,7 +176,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={61,24},
         extent={{-2.99999,-16},{2.99999,16}},
@@ -202,7 +205,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={22,-60},
         extent={{-4.00002,-26},{4.00001,26}},
@@ -231,7 +235,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=false,
     ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=not use_UFH)
                      annotation (Placement(transformation(
         origin={-30,61},
         extent={{2.99997,-16},{-3.00002,16}},
@@ -260,7 +265,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=false,
     ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=not use_UFH)
                      annotation (Placement(transformation(
         origin={-27,-60},
         extent={{-2.00002,-11},{2.00001,11}},
@@ -288,7 +294,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=false,
     withDoor=false,
     redeclare final model WindowModel = WindowModel,
-    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={61,-15},
         extent={{-3,-15},{3,15}},

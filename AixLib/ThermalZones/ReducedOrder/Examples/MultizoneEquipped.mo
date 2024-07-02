@@ -3,7 +3,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped_control
+    multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,

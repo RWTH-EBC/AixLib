@@ -151,6 +151,7 @@ model GroundFloorBuildingEnvelope
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH)          annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
     final nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(
@@ -197,6 +198,7 @@ model GroundFloorBuildingEnvelope
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH,
     final nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{84,28},{46,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 WC_Storage(
@@ -245,6 +247,7 @@ model GroundFloorBuildingEnvelope
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH,
     final nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(
@@ -293,6 +296,7 @@ model GroundFloorBuildingEnvelope
     T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors,
+    final use_UFH=use_UFH,       
     final nPorts=2,
     redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Gr1Uf1 Corridor(
@@ -336,6 +340,7 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final use_UFH=use_UFH,
     T0_air=T0_air,
     final nPorts=2,
     redeclare package Medium = Medium)       annotation (Placement(transformation(extent={{82,-28},{42,10}})));
