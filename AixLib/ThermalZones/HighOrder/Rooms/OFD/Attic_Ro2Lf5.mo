@@ -3,8 +3,7 @@ model Attic_Ro2Lf5
   "Attic with 2 saddle roofs and a floor toward 5 rooms on the lower floor, with all other walls towards the outside"
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(    redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
-    final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length,
-    final use_UFH=false);
+    final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length);
 
   //////////room geometry
   parameter Modelica.Units.SI.Length length=2 "length " annotation (Dialog(
@@ -132,7 +131,7 @@ model Attic_Ro2Lf5
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
-    ISOrientation=1,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
@@ -163,7 +162,7 @@ model Attic_Ro2Lf5
     withWindow=withWindow2,
     windowarea=windowarea_RO2,
     wall_length=length,
-    ISOrientation=1,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
@@ -190,7 +189,7 @@ model Attic_Ro2Lf5
     wall_length=room2_length,
     wall_height=room2_width,
     withWindow=false,
-    ISOrientation=2,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     outside=false,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
@@ -218,15 +217,14 @@ model Attic_Ro2Lf5
     wall_length=room1_length,
     wall_height=room1_width,
     withWindow=false,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     outside=false,
-    ISOrientation=2,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
-
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
     final energyDynamics=energyDynamicsWalls,
@@ -248,7 +246,7 @@ model Attic_Ro2Lf5
     wall_length=room3_length,
     wall_height=room3_width,
     withWindow=false,
-    ISOrientation=2,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     outside=false,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
@@ -276,7 +274,7 @@ model Attic_Ro2Lf5
     wall_length=room4_length,
     wall_height=room4_width,
     withWindow=false,
-    ISOrientation=2,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     outside=false,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
@@ -304,7 +302,7 @@ model Attic_Ro2Lf5
     wall_length=room5_length,
     wall_height=room5_width,
     withWindow=false,
-    ISOrientation=2,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     outside=false,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
@@ -333,7 +331,7 @@ model Attic_Ro2Lf5
     door_height=0,
     door_width=0,
     windowarea=windowarea_RO1,
-    ISOrientation=1,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
     withWindow=false,
@@ -361,7 +359,7 @@ model Attic_Ro2Lf5
     door_height=0,
     door_width=0,
     windowarea=windowarea_RO1,
-    ISOrientation=1,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
     withWindow=false,
@@ -410,7 +408,7 @@ model Attic_Ro2Lf5
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,90})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
                                                      annotation (Placement(
         transformation(extent={{-119.5,-10},{-99.5,10}}), iconTransformation(
           extent={{-119.5,10},{-99.5,30}})));

@@ -225,7 +225,7 @@ model Ow2IwL1IwS1Gr1Uf1
     wall_height=room_width,
     withWindow=false,
     withDoor=false,
-    ISOrientation=3,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin) if not use_UFH
                      annotation (Placement(transformation(
@@ -254,7 +254,7 @@ model Ow2IwL1IwS1Gr1Uf1
     withWindow=false,
     outside=false,
     withDoor=false,
-    ISOrientation=2,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin) if not use_UFH
                                                   annotation (Placement(transformation(
@@ -265,7 +265,7 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
     annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
