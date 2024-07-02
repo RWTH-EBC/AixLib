@@ -250,9 +250,17 @@ equation
         Line(points={{82,4},{82,10}}, color={28,108,200})}),     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,80}})),
     experiment(StopTime=8640000),
-    Documentation(info="<html>
-<p>Based on the following table, the optimal number of discretization for the reduced cased of controlled TABS, is 20 discretizations. </p>
-<p>That is why 20 discretizations were in the model selected as default for the reduced case, whereas 100 discretizations were selected as default for the HOM case (tested in previous cases).</p>
-<p><img src=\"modelica://AixLib/../../../internal_dis.svg\"/></p>
+    Documentation(info="<html><p>
+  Based on the following table, the optimal number of discretization
+  for the reduced cased of controlled TABS, is 20 discretizations.
+</p>
+<p>
+  That is why 20 discretizations were in the model selected as default
+  for the reduced case, whereas 100 discretizations were selected as
+  default for the HOM case (tested in previous cases).
+</p>
+<p>
+  <img src=\"modelica://AixLib/../../../internal_dis.svg\" alt=\"1\">
+</p>
 </html>"));
 end ControlledTABS;
