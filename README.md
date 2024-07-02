@@ -1,6 +1,7 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
+[![OM](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)
 
-# AixLib
+# <img src="./AixLib/Resources/Images/Icon_Modelica_AixLib_background.png" width="40"> AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  
 The library contains models of HVAC systems as well as high and reduced order building models.  
@@ -21,18 +22,24 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
 
 The latest version is always available on the [release page](https://github.com/RWTH-EBC/AixLib/releases) and defined in [AixLib's package.mo](https://github.com/RWTH-EBC/AixLib/blob/master/AixLib/package.mo).
 
-## Dymola >= 2021x & MSL 4.0 Compability
-
-Starting with the Dymola 2021x version, the MSL 4.0 is included and automatically loaded. This leads to incompability with AixLib. Details and possible solutions are described in [this issue](https://github.com/RWTH-EBC/AixLib/issues/1156).
-
 ## How to cite AixLib
 
-We continuously improve **AixLib** and try to keep the community up-to-date with citable papers:
+We continuously improve **AixLib** and try to keep the community up-to-date with citable papers.
+Please use the following article for citations when using or enhancing AixLib.
 
-- AixLib - An Open-Source Modelica Library within the IEA-EBC Annex 60 Framework.
-  Müller D., Lauster M., Constantin A., Fuchs M., Remmen P..
-  BauSIM 2016, p.3–9, September 2016.
-  [link](http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf)
+@article{doi:10.1080/19401493.2023.2250521,<br>
+author = {Laura Maier and David Jansen and Fabian Wüllhorst and Martin Kremer and Alexander Kümpel and Tobias Blacha and Dirk Müller},<br>
+title = {AixLib: an open-source Modelica library for compound building energy systems from component to district level with automated quality management},<br>
+journal = {Journal of Building Performance Simulation},<br>
+volume = {0},<br>
+number = {0},<br>
+pages = {1-24},<br>
+year  = {2023},<br>
+publisher = {Taylor & Francis},<br>
+doi = {10.1080/19401493.2023.2250521},<br>
+URL = {https://doi.org/10.1080/19401493.2023.2250521 },<br>
+eprint = {https://doi.org/10.1080/19401493.2023.2250521 }<br>
+}
 
 ## Publications using AixLib
 

@@ -1,6 +1,29 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.BaseThermalZone;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+
+  replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
+    "Choose setup for this zone" annotation (choicesAllMatching=true);
+  parameter Integer nPorts =  0
+    "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+   // Pool parameters
+   parameter Boolean use_pools = false
+    "If true, pool model and corresponding connections are enabled"
+  annotation(Dialog(tab="Moisture", group="Pools"));
+
+   final parameter Integer nPortsROM = if use_pools then nPorts + 2 else nPorts
+    "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance"
+    annotation (Dialog(tab="CO2"));
+  parameter Boolean use_moisture_balance=false
+    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
+    annotation (Dialog(tab="Moisture"));
 
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
@@ -50,7 +73,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
-    final nPorts=nPorts,
+    final nPorts=nPortsROM,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
     final nOrientations=size(zoneParam.AExt, 1),
@@ -92,20 +115,28 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final mSenFac=mSenFac) "RC calculation core"
     annotation (Placement(transformation(extent={{38,56},{86,92}})));
 
+protected
+  parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
+  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
 
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,
           80}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,56.05},{78,56.05},{78,
-          52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,78},{92,
           78},{92,20},{104,20}},
                                color={191,0,0}));
   connect(ROM.TRad, TRad) annotation (Line(points={{87,86},{96,86},{96,60},{110,
           60}},      color={0,0,127}));
+  connect(TRad, TRad)
+    annotation (Line(points={{110,60},{110,60}}, color={0,0,127}));
   connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,82},{94,82},
           {94,40},{104,40}},
                            color={191,0,0}));
+
+  for i in 1:nPorts loop
+      connect(ROM.ports[i], ports[i]) annotation (Line(points={{77,56.05},{78,56.05},{78,
+          52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
+  end for;
 
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),graphics={Text(extent={{

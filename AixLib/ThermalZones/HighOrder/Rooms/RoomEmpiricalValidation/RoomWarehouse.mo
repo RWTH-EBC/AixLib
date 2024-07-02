@@ -47,12 +47,12 @@ model RoomWarehouse "Room model of Warehouse for Empirical validation"
       final outside=false,
       redeclare DataBase.Walls.EmpiricalValidation.FL_Warehouse wallPar,
       final solar_absorptance=0.3,
-      final ISOrientation=2,
+      final ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
       final withWindow=false,
       final withDoor=false),
     ceiling(
       redeclare DataBase.Walls.EmpiricalValidation.RO_Warehouse wallPar,
-      final ISOrientation=3,
+      final ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling,
       final withWindow=true,
       final windowarea=60,
       final withDoor=false));

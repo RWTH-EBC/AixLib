@@ -217,9 +217,8 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_height=room_width_short,
     withWindow=false,
     withDoor=false,
-    ISOrientation=3,
-    final use_condLayers=true)
-                     annotation (Placement(transformation(
+    final use_condLayers=true,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling) annotation (Placement(transformation(
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
@@ -247,8 +246,8 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_height=room_width_long,
     withWindow=false,
     withDoor=false,
-    ISOrientation=2,
-    final use_condLayers=not use_UFH)             annotation (Placement(transformation(
+    final use_condLayers=not use_UFH,
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor)                              annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));
@@ -339,7 +338,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation (
       Placement(transformation(extent={{-16,-104},{4,-84}}), iconTransformation(
           extent={{-16,-104},{4,-84}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
     annotation (Placement(transformation(extent={{-126,-74},{-99.5,-48}}),
                                                                          iconTransformation(extent={{-109.5,-60},{-89.5,-40}})));
 

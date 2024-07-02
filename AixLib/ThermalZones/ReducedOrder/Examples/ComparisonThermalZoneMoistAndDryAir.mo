@@ -322,8 +322,11 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),
+        experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ComparisonThermalZoneMoistAndDryAir.mos"
+        "Simulate and plot"),
     Documentation(revisions="<html><ul>
   <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.

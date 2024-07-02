@@ -171,8 +171,11 @@ equation
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),
+        experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+        __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneAirExchange.mos"
+        "Simulate and plot"),
     Documentation(info="<html><p>
   This example illustrates the use of <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped</a>.

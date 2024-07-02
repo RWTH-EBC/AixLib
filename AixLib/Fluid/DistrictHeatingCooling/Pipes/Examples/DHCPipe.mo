@@ -15,11 +15,10 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{72,40},{52,60}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe  pip(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare BaseClassesStatic.StaticCore pipCor "Static core",
-    nPorts=1,
     dh=0.1,
     length=100,
     dIns=0.05,
@@ -66,11 +65,10 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{72,0},{52,20}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip1(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip1(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
-    nPorts=1,
     dh=0.1,
     length=100,
     dIns=0.05,
@@ -113,12 +111,11 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{72,-42},{52,-22}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip2(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip2(
     redeclare package Medium = Medium,
     use_soil=true,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
-    nPorts=1,
     dh=0.1,
     length=100,
     dIns=0.05,
@@ -161,12 +158,11 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{72,-80},{52,-60}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip3(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe pip3(
     redeclare package Medium = Medium,
     sum_zetas=2.5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
-    nPorts=1,
     dh=0.1,
     length=100,
     dIns=0.05,
@@ -203,7 +199,7 @@ equation
   connect(Tin.y, sou.T_in)
     annotation (Line(points={{-79,54},{-72,54}},
                                                color={0,0,127}));
-  connect(pip.ports_b[1], senTemOut.port_a)
+  connect(pip.port_b, senTemOut.port_a)
     annotation (Line(points={{10,50},{20,50}},
                                              color={0,127,255}));
   connect(senTemOut.port_b, sin.ports[1])
@@ -219,7 +215,7 @@ equation
     annotation (Line(points={{-80,90},{0,90},{0,20}}, color={191,0,0}));
   connect(Tin1.y, sou1.T_in)
     annotation (Line(points={{-79,14},{-72,14}}, color={0,0,127}));
-  connect(pip1.ports_b[1], senTemOut1.port_a)
+  connect(pip1.port_b, senTemOut1.port_a)
     annotation (Line(points={{10,10},{20,10}}, color={0,127,255}));
   connect(senTemOut1.port_b, sin1.ports[1])
     annotation (Line(points={{40,10},{52,10}}, color={0,127,255}));
@@ -231,7 +227,7 @@ equation
     annotation (Line(points={{-80,90},{0,90},{0,-22}}, color={191,0,0}));
   connect(Tin2.y, sou2.T_in)
     annotation (Line(points={{-79,-28},{-72,-28}}, color={0,0,127}));
-  connect(pip2.ports_b[1], senTemOut2.port_a)
+  connect(pip2.port_b, senTemOut2.port_a)
     annotation (Line(points={{10,-32},{20,-32}}, color={0,127,255}));
   connect(senTemOut2.port_b, sin2.ports[1])
     annotation (Line(points={{40,-32},{52,-32}}, color={0,127,255}));
@@ -243,7 +239,7 @@ equation
     annotation (Line(points={{-80,90},{0,90},{0,-60}}, color={191,0,0}));
   connect(Tin3.y, sou3.T_in)
     annotation (Line(points={{-79,-66},{-72,-66}}, color={0,0,127}));
-  connect(pip3.ports_b[1], senTemOut3.port_a)
+  connect(pip3.port_b, senTemOut3.port_a)
     annotation (Line(points={{10,-70},{20,-70}}, color={0,127,255}));
   connect(senTemOut3.port_b, sin3.ports[1])
     annotation (Line(points={{40,-70},{52,-70}}, color={0,127,255}));

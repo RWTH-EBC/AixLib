@@ -24,7 +24,7 @@ model PipeBase
 
     parameter Integer nParallel(min=1)=1 "Number of identical parallel pipes"
     annotation(Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Length length "Length of pipe"
+  parameter Modelica.Units.SI.Length length=0 "Length of pipe"
     annotation (Dialog(group="Geometry"));
 
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=

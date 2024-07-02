@@ -81,6 +81,8 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     HeaterOn=false,
     hCool=0,
     lCool=-1,
+    heaLoadFacOut=0,
+    heaLoadFacGrd=0,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,

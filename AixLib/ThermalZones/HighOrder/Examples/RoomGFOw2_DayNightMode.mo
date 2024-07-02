@@ -6,6 +6,7 @@ model RoomGFOw2_DayNightMode
 
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
   replaceable package Medium =
     AixLib.Media.Water "Medium in the component"
       annotation (choices(
@@ -19,6 +20,7 @@ model RoomGFOw2_DayNightMode
 
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TWalls_start=290.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
