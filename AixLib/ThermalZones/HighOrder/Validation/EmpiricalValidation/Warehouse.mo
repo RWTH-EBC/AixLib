@@ -32,7 +32,7 @@ model Warehouse
   Modelica.Blocks.Sources.CombiTimeTable BuildingSpecifications(
     tableOnFile=true,
     tableName="Table",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.txt"),
     columns={2,3,4,5},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Air exchange due to windows in the roof area, {2} Temp in the Building (Top), {3} Temp in the Building (Center), {4} Temp in the Building (Bottom), {5} Air exchange due to windows in the roof"
@@ -78,12 +78,8 @@ model Warehouse
 
   parameter Real solar_absorptance_OW=0.4 "Solar absoptance outer walls ";
 
-  Modelica.Blocks.Sources.RealExpression Cool(y=idealHeaterCooler.coolingPower)
-    annotation (Placement(transformation(extent={{90,-24},{104,-8}})));
   Modelica.Blocks.Interfaces.RealOutput coolingPower
     annotation (Placement(transformation(extent={{128,-26},{148,-6}})));
-  Modelica.Blocks.Sources.RealExpression Heat(y=idealHeaterCooler.heatingPower)
-    annotation (Placement(transformation(extent={{90,-56},{104,-40}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower
     annotation (Placement(transformation(extent={{146,-58},{166,-38}})));
   Modelica.Blocks.Interfaces.RealOutput coolingEnergy
@@ -146,11 +142,6 @@ equation
   connect(roomTemp, to_degC.y) annotation (Line(points={{158,92},{142,92},{142,91},{138.5,91}}, color={0,0,127}));
   connect(ambientTempExpression.y, to_degC1.u) annotation (Line(points={{106.7,74},{110,74},{110,75},{127,75}}, color={0,0,127}));
   connect(ambientTemp, to_degC1.y) annotation (Line(points={{158,76},{152,76},{152,75},{138.5,75}}, color={0,0,127}));
-  connect(Cool.y, coolingPower)
-    annotation (Line(points={{104.7,-16},{138,-16}},
-                                                 color={0,0,127}));
-  connect(Heat.y, heatingPower)
-    annotation (Line(points={{104.7,-48},{156,-48}}, color={0,0,127}));
   connect(coolingEnergy, to_kWh.y) annotation (Line(points={{156,-32},{150,-32},
           {150,-31},{140.5,-31}},
                                color={0,0,127}));
@@ -160,15 +151,9 @@ equation
   connect(heatingPower, heatingPower)
     annotation (Line(points={{156,-48},{156,-48}},
                                                color={0,0,127}));
-  connect(heatingPower, integrator2.u) annotation (Line(points={{156,-48},{112,
-          -48},{112,-64.75},{114.1,-64.75}},
-                                    color={0,0,127}));
   connect(to_kWh1.u, integrator2.y) annotation (Line(points={{129,-65},{128,-65},
           {128,-64.75},{124.45,-64.75}},
                                     color={0,0,127}));
-  connect(coolingPower, integrator1.u) annotation (Line(points={{138,-16},{
-          112.1,-16},{112.1,-30.75}},
-                              color={0,0,127}));
   connect(integrator1.y, to_kWh.u) annotation (Line(points={{122.45,-30.75},{
           128.225,-30.75},{128.225,-31},{129,-31}},
                                                  color={0,0,127}));
@@ -182,11 +167,22 @@ equation
   connect(Source_TsetC1.y, prescribedTemperature.T) annotation (Line(points={{-77.2,
           -78},{-53.2,-78}},                                          color={0,
           0,127}));
-  connect(roomTempBottom, roomTempBottom) annotation (Line(points={{158,28},{158,28}}, color={0,0,127}));
+  connect(roomTempBottom, roomTempBottom) annotation (Line(points={{158,28},{
+          158,28}},                                                                    color={0,0,127}));
   connect(roomTemp, roomTemp) annotation (Line(points={{158,92},{158,92}}, color={0,0,127}));
   connect(MeasuredTemperatures.y, gain.u)
     annotation (Line(points={{106.7,12},{120.8,12}}, color={0,0,127}));
   connect(gain.y, meanMeasuredTemp) annotation (Line(points={{134.6,12},{158,12}}, color={0,0,127}));
+  connect(idealHeaterCooler.coolingPower, coolingPower) annotation (Line(points
+        ={{50,-60.6},{66,-60.6},{66,-60},{82,-60},{82,-16},{138,-16}}, color={0,
+          0,127}));
+  connect(idealHeaterCooler.coolingPower, integrator1.u) annotation (Line(
+        points={{50,-60.6},{82,-60.6},{82,-30.75},{112.1,-30.75}}, color={0,0,
+          127}));
+  connect(idealHeaterCooler.heatingPower, heatingPower) annotation (Line(points
+        ={{50,-56},{110,-56},{110,-48},{156,-48}}, color={0,0,127}));
+  connect(idealHeaterCooler.heatingPower, integrator2.u) annotation (Line(
+        points={{50,-56},{110,-56},{110,-64.75},{114.1,-64.75}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Tolerance=1e-06),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.mos"
