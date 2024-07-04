@@ -4,8 +4,7 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
     internalGainsMode=1,

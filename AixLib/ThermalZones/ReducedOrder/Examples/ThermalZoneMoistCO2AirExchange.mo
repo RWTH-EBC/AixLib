@@ -9,8 +9,7 @@ model ThermalZoneMoistCO2AirExchange
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     T_start=293.15,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam,
     internalGainsMode=3,
     recOrSep=true,
     use_C_flow=true,
