@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 function WidthToAngle
   "Conversion from the hinged opening width to hinged opening angle"
   extends Modelica.Icons.Function;
@@ -14,14 +14,16 @@ algorithm
     "The opening angle should be less or equal than 90°",
     AssertionLevel.error);
   ang := 2*asin(width/(2*lenAxsToFrm));
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This function converts the hinged opening width to hinged opening angle.</p>
+</html>", info="<html><p>
+  This function converts the hinged opening width to hinged opening
+  angle.
+</p>
 </html>"));
 end WidthToAngle;

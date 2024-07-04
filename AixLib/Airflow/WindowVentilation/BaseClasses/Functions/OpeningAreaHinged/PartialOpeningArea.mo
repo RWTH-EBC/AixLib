@@ -8,14 +8,16 @@ partial function PartialOpeningArea
     "Distance from the hinged axis to the frame across the opening area";
   input Modelica.Units.SI.Length width(min=0) "Opening width of window sash";
   output Modelica.Units.SI.Area A(min=0) "Opening area";
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial function defines the inputs and output of the function for opening area calculation.</p>
+</html>", info="<html><p>
+  This partial function defines the inputs and output of the function
+  for opening area calculation.
+</p>
 </html>"));
 end PartialOpeningArea;

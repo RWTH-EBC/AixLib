@@ -18,16 +18,24 @@ equation
     AssertionLevel.warning);
   V_flow =if noEvent(intRes > Modelica.Constants.eps) then
     1/2*openingArea.A*sqrt(intRes) else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by de Gids and Phaff.</p>
-<h4>References</h4>
-<p>Gids, W. de, &amp; Phaff, H. (1982). Ventilation rates and energy consumption due to open windows: a brief overview of research in the Netherlands. Air Infiltration Review, 4(1), 4&ndash;5.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by de Gids and
+  Phaff.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Gids, W. de, & Phaff, H. (1982). Ventilation rates and energy
+  consumption due to open windows: a brief overview of research in the
+  Netherlands. Air Infiltration Review, 4(1), 4–5.
+</p>
 </html>"));
 end GidsPhaff;

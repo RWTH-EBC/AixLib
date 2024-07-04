@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions;
 function SmallestAngleDifference
   "Smallest difference between two angles around a point"
   input AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes
@@ -28,15 +28,21 @@ algorithm
     /*Exceptions*/
     angDif := 0;
   end if;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This function finds the smallest difference between two angles around a point.</p>
-<p>The difference is calculated as input angle &apos;ang1&apos; to the reference angle &apos;ang2&apos;, positive value shows a clockwise direction from input to reference, i.e. shows a counter-clockwise by measurement.</p>
+</html>", info="<html><p>
+  This function finds the smallest difference between two angles around
+  a point.
+</p>
+<p>
+  The difference is calculated as input angle 'ang1' to the reference
+  angle 'ang2', positive value shows a clockwise direction from input
+  to reference, i.e. shows a counter-clockwise by measurement.
+</p>
 </html>"));
 end SmallestAngleDifference;

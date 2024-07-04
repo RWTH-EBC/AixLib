@@ -23,16 +23,24 @@ equation
     AssertionLevel.warning);
   V_flow =if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Tang et al..</p>
-<h4>References</h4>
-<p>Tang, Y., Li, X., Zhu, W., &amp; Cheng, P. L. (2016). Predicting single-sided airflow rates based on primary school experimental study. Building and Environment, 98, 71&ndash;79. </p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Tang et
+  al..
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Tang, Y., Li, X., Zhu, W., & Cheng, P. L. (2016). Predicting
+  single-sided airflow rates based on primary school experimental
+  study. Building and Environment, 98, 71–79.
+</p>
 </html>"));
 end Tang;

@@ -43,43 +43,40 @@ algorithm
                 y2d=d[i+1]);
   end if;
   annotation(smoothOrder=1,
-              Documentation(info="<html>
- <p>
- This function computes the fan power consumption for given volume flow rate,
- speed and performance data. The power consumption is
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   P = r<sub>N</sub><sup>3</sup> &nbsp; s(V&#775;/r<sub>N</sub>, d),
- </p>
- <p>
- where
- <i>P</i> is the power consumption,
- <i>r<sub>N</sub></i> is the normalized fan speed,
- <i>V&#775;</i> is the volume flow rate and
- <i>d</i> are performance data for fan or pump power consumption at <i>r<sub>N</sub>=1</i>.
- </p>
- <h4>Implementation</h4>
- <p>
- The function <i>s(&middot;, &middot;)</i> is a cubic hermite spline.
- If the data <i>d</i> define a monotone decreasing sequence, then
- <i>s(&middot;, d)</i> is a monotone decreasing function.
- </p>
- </html>",
-        revisions="<html>
- <ul>
- <li>
- February 26, 2014, by Filip Jorissen:<br/>
- Changed polynomial to be evaluated at <code>V_flow/r_N</code>
- instead of <code>V_flow</code> to properly account for the
- scaling law. See
- <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
- for a discussion and validation.
- </li>
- <li>
- September 28, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+              Documentation(info="<html><p>
+  This function computes the fan power consumption for given volume
+  flow rate, speed and performance data. The power consumption is
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  P = r<sub>N</sub><sup>3</sup> &#160; s(V̇/r<sub>N</sub>, d),
+</p>
+<p>
+  where <i>P</i> is the power consumption, <i>r<sub>N</sub></i> is the
+  normalized fan speed, <i>V̇</i> is the volume flow rate and <i>d</i>
+  are performance data for fan or pump power consumption at
+  <i>r<sub>N</sub>=1</i>.
+</p>
+<h4>
+  Implementation
+</h4>
+<p>
+  The function <i>s(·, ·)</i> is a cubic hermite spline. If the data
+  <i>d</i> define a monotone decreasing sequence, then <i>s(·, d)</i>
+  is a monotone decreasing function.
+</p>
+</html>",
+        revisions="<html><ul>
+  <li>February 26, 2014, by Filip Jorissen:<br/>
+    Changed polynomial to be evaluated at <code>V_flow/r_N</code>
+    instead of <code>V_flow</code> to properly account for the scaling
+    law. See <a href=
+    \"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
+    for a discussion and validation.
+  </li>
+  <li>September 28, 2011, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end power;

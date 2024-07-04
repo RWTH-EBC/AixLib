@@ -18,16 +18,26 @@ equation
     AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     1/2*openingArea.A*sqrt(intRes) else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Jiang et al..</p>
-<h4>References</h4>
-<p>Jiang, J., Yang, J., Rewitz, K., &amp; M&uuml;ller, D. (2022). Experimental Quantification of Air Volume Flow by Natural Ventilation through Window Opening. In American Society of Heating and Air-Conditioning Engineers (Chair), IAQ 2020: Indoor Environmental Quality Performance Approaches, Athens.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Jiang et
+  al..
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Jiang, J., Yang, J., Rewitz, K., & Müller, D. (2022). Experimental
+  Quantification of Air Volume Flow by Natural Ventilation through
+  Window Opening. In American Society of Heating and Air-Conditioning
+  Engineers (Chair), IAQ 2020: Indoor Environmental Quality Performance
+  Approaches, Athens.
+</p>
 </html>"));
 end Jiang;

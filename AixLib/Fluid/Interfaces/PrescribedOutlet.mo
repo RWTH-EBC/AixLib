@@ -408,82 +408,74 @@ equation
           pattern=LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid)}),
-  Documentation(info="<html>
- <p>
- This model sets the temperature or the water vapor mass fraction
- of the medium that leaves <code>port_a</code>
- to the value given by the input <code>TSet</code> or <code>X_wSet</code>,
- subject to optional limitations on the capacity
- for heating and cooling, or limitations on the humidification or dehumidification
- moisture mass flow rate.
- Also, optionally the model allows to take into account first order dynamics.
- </p>
- <p>
- If the parameters <code>energyDynamics</code> is not equal to
- <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
- the component models the dynamic response using a first order differential equation.
- The time constant of the component is equal to the parameter <code>tau</code>.
- This time constant is adjusted based on the mass flow rate using
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- &tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
- </p>
- <p>
- where
- <i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
- <i>m&#775;</i> and
- <i>&tau;</i> is the time constant at the nominal mass flow rate
- <i>m&#775;<sub>nom</sub></i>.
- This type of dynamics is equal to the dynamics that a completely mixed
- control volume would have.
- </p>
- <p>
- This model has no pressure drop.
- See <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
- AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
- for a model that instantiates this model and that has a pressure drop.
- </p>
- <p>
- In case of reverse flow,
- the fluid that leaves <code>port_a</code> has the same
- properties as the fluid that enters <code>port_b</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 3, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
- </li>
- <li>
- April 29, 2021, by Michael Wetter:<br/>
- Removed duplicate declaration of <code>m_flow_nominal</code> which is already
- declared in the base class.<br/>
- </li>
- <li>
- March 19, 2018, by Michael Wetter:<br/>
- Added bugfix as the old model did not track <code>TSet</code> and <code>X_wSet</code>
- simultaneously.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/893\">#893</a>.
- </li>
- <li>
- May 3, 2017, by Michael Wetter:<br/>
- Refactored model to allow <code>X_wSet</code> as an input.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
- </li>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- Removed inequality comparison of real numbers in <code>restrictCool</code>
- and in <code>restrictHeat</code> as this is not allowed in Modelica.
- </li>
- <li>
- November 10, 2014, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+  Documentation(info="<html><p>
+  This model sets the temperature or the water vapor mass fraction of
+  the medium that leaves <code>port_a</code> to the value given by the
+  input <code>TSet</code> or <code>X_wSet</code>, subject to optional
+  limitations on the capacity for heating and cooling, or limitations
+  on the humidification or dehumidification moisture mass flow rate.
+  Also, optionally the model allows to take into account first order
+  dynamics.
+</p>
+<p>
+  If the parameters <code>energyDynamics</code> is not equal to
+  <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>, the component
+  models the dynamic response using a first order differential
+  equation. The time constant of the component is equal to the
+  parameter <code>tau</code>. This time constant is adjusted based on
+  the mass flow rate using
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  τ<sub>eff</sub> = τ |ṁ| ⁄ ṁ<sub>nom</sub>
+</p>
+<p>
+  where <i>τ<sub>eff</sub></i> is the effective time constant for the
+  given mass flow rate <i>ṁ</i> and <i>τ</i> is the time constant at
+  the nominal mass flow rate <i>ṁ<sub>nom</sub></i>. This type of
+  dynamics is equal to the dynamics that a completely mixed control
+  volume would have.
+</p>
+<p>
+  This model has no pressure drop. See <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+  for a model that instantiates this model and that has a pressure
+  drop.
+</p>
+<p>
+  In case of reverse flow, the fluid that leaves <code>port_a</code>
+  has the same properties as the fluid that enters <code>port_b</code>.
+</p>
+</html>",revisions="<html><ul>
+  <li>March 3, 2022, by Michael Wetter:<br/>
+    Removed <code>massDynamics</code>.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue
+    1542</a>.
+  </li>
+  <li>April 29, 2021, by Michael Wetter:<br/>
+    Removed duplicate declaration of <code>m_flow_nominal</code> which
+    is already declared in the base class.<br/>
+  </li>
+  <li>March 19, 2018, by Michael Wetter:<br/>
+    Added bugfix as the old model did not track <code>TSet</code> and
+    <code>X_wSet</code> simultaneously.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/893\">#893</a>.
+  </li>
+  <li>May 3, 2017, by Michael Wetter:<br/>
+    Refactored model to allow <code>X_wSet</code> as an input.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
+  </li>
+  <li>January 26, 2016, by Michael Wetter:<br/>
+    Removed inequality comparison of real numbers in
+    <code>restrictCool</code> and in <code>restrictHeat</code> as this
+    is not allowed in Modelica.
+  </li>
+  <li>November 10, 2014, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end PrescribedOutlet;

@@ -45,14 +45,15 @@ equation
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial model provides a base class of window opening area.</p>
+</html>", info="<html><p>
+  This partial model provides a base class of window opening area.
+</p>
 </html>"));
 end PartialOpeningArea;

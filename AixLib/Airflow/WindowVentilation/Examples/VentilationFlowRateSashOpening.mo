@@ -101,15 +101,21 @@ equation
     annotation (Line(points={{-79,-90},{-62,-90}}, color={0,0,127}));
   connect(jiang.opnWidth_in, tang.opnWidth_in)
     annotation (Line(points={{-50,-78},{-50,-58},{30,-58}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This example checks the models that simulate the window ventilation flow rate with the sash opening. For the sash opening type, all models are set to the bottom-hung opening.</p>
-<p>The result shows that the estimated volume flow can be quite different when using different models.</p>
+</html>", info="<html><p>
+  This example checks the models that simulate the window ventilation
+  flow rate with the sash opening. For the sash opening type, all
+  models are set to the bottom-hung opening.
+</p>
+<p>
+  The result shows that the estimated volume flow can be quite
+  different when using different models.
+</p>
 </html>"));
 end VentilationFlowRateSashOpening;

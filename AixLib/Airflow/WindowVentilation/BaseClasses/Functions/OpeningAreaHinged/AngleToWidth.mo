@@ -11,14 +11,16 @@ function AngleToWidth
   output Modelica.Units.SI.Length width(min=0) "Opening width of window sash";
 algorithm
   width := 2*lenAxsToFrm*sin(ang/2);
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This function converts the hinged opening angle to hinged opening width.</p>
+</html>", info="<html><p>
+  This function converts the hinged opening angle to hinged opening
+  width.
+</p>
 </html>"));
 end AngleToWidth;

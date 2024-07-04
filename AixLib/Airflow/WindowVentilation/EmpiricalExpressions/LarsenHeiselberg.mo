@@ -52,16 +52,24 @@ equation
     openingArea.A*sqrt(intRes) else 0;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Larsen and Heiselberg.</p>
-<h4>References</h4>
-<p>Larsen, T. S., &amp; Heiselberg, P. (2008). Single-sided natural ventilation driven by wind pressure and temperature difference. Energy and Buildings, 40(6), 1031&ndash;1040.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Larsen and
+  Heiselberg.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Larsen, T. S., & Heiselberg, P. (2008). Single-sided natural
+  ventilation driven by wind pressure and temperature difference.
+  Energy and Buildings, 40(6), 1031–1040.
+</p>
 </html>"));
 end LarsenHeiselberg;

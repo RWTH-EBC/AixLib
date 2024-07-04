@@ -14,14 +14,17 @@ protected
   Modelica.Units.NonSI.Angle_deg incAngDeg "Incidence angle in degree";
 equation
   incAngDeg = Modelica.Units.Conversions.to_deg(incAng);
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial model provides a base class of models that estimate ventilation volume flow. The model has a wind direction input port to account for the wind incidence.</p>
+</html>", info="<html><p>
+  This partial model provides a base class of models that estimate
+  ventilation volume flow. The model has a wind direction input port to
+  account for the wind incidence.
+</p>
 </html>"));
 end PartialEmpiricalFlowStackWindIncidence;

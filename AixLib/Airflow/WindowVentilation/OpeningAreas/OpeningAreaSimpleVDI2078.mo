@@ -17,14 +17,16 @@ equation
         Text(
           extent={{-100,-100},{100,-60}},
           textColor={0,0,0},
-          textString="VDI 2078")}), Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+          textString="VDI 2078")}), Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model determines the window opening area by a simple opening without window sash according to VDI 2078:2015-06.</p>
+</html>", info="<html><p>
+  This model determines the window opening area by a simple opening
+  without window sash according to VDI 2078:2015-06.
+</p>
 </html>"));
 end OpeningAreaSimpleVDI2078;

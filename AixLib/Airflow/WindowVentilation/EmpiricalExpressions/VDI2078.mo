@@ -31,16 +31,24 @@ equation
     AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps)
     then cofSunSha*openingArea.A*sqrt(intRes) else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression according to VDI 2078:2015-06.</p>
-<h4>References</h4>
-<p>Verein Deutscher Ingenieure e.V. (2015.06). Berechnung der thermischen Lasten und Raumtemperaturen (Auslegung K&uuml;hllast und Jahressimulation) (VDI 2078). VDI Fachmedien GmbH &amp; Co. KG.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression according to VDI
+  2078:2015-06.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Verein Deutscher Ingenieure e.V. (2015.06). Berechnung der
+  thermischen Lasten und Raumtemperaturen (Auslegung Kühllast und
+  Jahressimulation) (VDI 2078). VDI Fachmedien GmbH & Co. KG.
+</p>
 </html>"));
 end VDI2078;

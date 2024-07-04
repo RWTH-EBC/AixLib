@@ -11,14 +11,15 @@ algorithm
   else
     AEqv := (AClr^(-2) + AGeo^(-2))^(-0.5);
   end if;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This function calculates the equivalent opening area.</p>
+</html>", info="<html><p>
+  This function calculates the equivalent opening area.
+</p>
 </html>"));
 end EquivalentOpeningArea;

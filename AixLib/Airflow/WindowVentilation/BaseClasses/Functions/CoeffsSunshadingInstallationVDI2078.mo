@@ -12,14 +12,16 @@ algorithm
      then 0.66 else if typ == AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.Awning
      then 1 else if typ == AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.Screen
      then 0.33 else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This function finds the sunshading coefficient according to the input sunshading type. Values are defined by VDI 2078.</p>
+</html>", info="<html><p>
+  This function finds the sunshading coefficient according to the input
+  sunshading type. Values are defined by VDI 2078.
+</p>
 </html>"));
 end CoeffsSunshadingInstallationVDI2078;

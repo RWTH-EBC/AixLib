@@ -20,16 +20,22 @@ equation
         Text(
           extent={{-100,-100},{100,-60}},
           textColor={0,0,0},
-          textString="Hall")}), Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+          textString="Hall")}), Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model determines the window opening area according to the empirical expression developed by Hall.</p>
-<p>Only bottom-hung openings can be applied.</p>
-<p>Input port of this model is the opening width.</p>
+</html>", info="<html><p>
+  This model determines the window opening area according to the
+  empirical expression developed by Hall.
+</p>
+<p>
+  Only bottom-hung openings can be applied.
+</p>
+<p>
+  Input port of this model is the opening width.
+</p>
 </html>"));
 end OpeningAreaSashHall;

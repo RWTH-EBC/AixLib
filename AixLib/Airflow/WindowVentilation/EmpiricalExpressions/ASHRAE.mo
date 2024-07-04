@@ -28,18 +28,32 @@ equation
   V_flow = sqrt(V_flow_th^2 + V_flow_win^2);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression according to ASHRAE handbook.</p>
-<p>It is also applied in EnergyPlus as the object <i>ZoneVentilation:WindandStackOpenArea</i>.</p>
-<h4>References</h4>
-<p>ASHRAE. (2009). 2009 ASHRAE handbook: Fundamentals (SI ed.). American Society of Heating, Refrigeration and Air-Conditioning Engineers.</p>
-<p>U.S. Department of Energy. (2023). EnergyPlus Version 23.1.0 Documentation: Engineering Reference [Build: 87ed9199d4]. U.S. Department of Energy. </p>
+</html>", info="<html><p>
+  This model contains the empirical expression according to ASHRAE
+  handbook.
+</p>
+<p>
+  It is also applied in EnergyPlus as the object
+  <i>ZoneVentilation:WindandStackOpenArea</i>.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  ASHRAE. (2009). 2009 ASHRAE handbook: Fundamentals (SI ed.). American
+  Society of Heating, Refrigeration and Air-Conditioning Engineers.
+</p>
+<p>
+  U.S. Department of Energy. (2023). EnergyPlus Version 23.1.0
+  Documentation: Engineering Reference [Build: 87ed9199d4]. U.S.
+  Department of Energy.
+</p>
 </html>"));
 end ASHRAE;

@@ -94,9 +94,9 @@ package PerfectGas "Model for air as a perfect gas"
         ThermodynamicState(p=p,T=temperature_phX(p,h,X), X=cat(1,X,{1-sum(X)}));
     annotation (
   Inline=true,
-  Documentation(info="<html>
- Function to set the state for given pressure, enthalpy and species concentration.
- </html>"));
+  Documentation(info="<html>Function to set the state for given pressure, enthalpy and species
+concentration.
+</html>"));
   end setState_phX;
 
   redeclare function setState_dTX
@@ -123,10 +123,9 @@ package PerfectGas "Model for air as a perfect gas"
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
-   The thermodynamic state record
-   is computed from density d, temperature T and composition X.
- </html>"));
+    Documentation(info="<html>The thermodynamic state record is computed from density d, temperature
+T and composition X.
+</html>"));
   end setState_dTX;
 
 redeclare function extends gasConstant "Gas constant"
@@ -151,10 +150,10 @@ algorithm
     smoothOrder=5,
     Inline=true,
     derivative=AixLib.Media.Specialized.Air.PerfectGas.saturationPressureLiquid_der,
-    Documentation(info="<html>
- Saturation pressure of water above the triple point temperature is computed from temperature. It's range of validity is between
- 273.16 and 373.16 K. Outside these limits a less accurate result is returned.
- </html>"));
+    Documentation(info="<html>Saturation pressure of water above the triple point temperature is
+computed from temperature. It's range of validity is between 273.16 and
+373.16 K. Outside these limits a less accurate result is returned.
+</html>"));
 end saturationPressureLiquid;
 
 function saturationPressureLiquid_der
@@ -171,11 +170,10 @@ algorithm
   annotation (
     smoothOrder=5,
     Inline=true,
-Documentation(info="<html>
- Derivative function of
- <a href=\"modelica://AixLib.Media.Specialized.Air.PerfectGas.saturationPressureLiquid\">
- AixLib.Media.Specialized.Air.PerfectGas.saturationPressureLiquid</a>
- </html>"));
+Documentation(info="<html>Derivative function of <a href=
+\"modelica://AixLib.Media.Specialized.Air.PerfectGas.saturationPressureLiquid\">
+AixLib.Media.Specialized.Air.PerfectGas.saturationPressureLiquid</a>
+</html>"));
 end saturationPressureLiquid_der;
 
   function sublimationPressureIce =
@@ -208,9 +206,9 @@ end saturationPressure;
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
- Pressure is returned from the thermodynamic state record input as a simple assignment.
- </html>"));
+    Documentation(info="<html>Pressure is returned from the thermodynamic state record input as a
+simple assignment.
+</html>"));
  end pressure;
 
  redeclare function extends temperature "Gas temperature"
@@ -219,9 +217,9 @@ end saturationPressure;
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
- Temperature is returned from the thermodynamic state record input as a simple assignment.
- </html>"));
+    Documentation(info="<html>Temperature is returned from the thermodynamic state record input as a
+simple assignment.
+</html>"));
  end temperature;
 
  redeclare function extends density "Gas density"
@@ -230,9 +228,9 @@ end saturationPressure;
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
- Density is computed from pressure, temperature and composition in the thermodynamic state record applying the ideal gas law.
- </html>"));
+    Documentation(info="<html>Density is computed from pressure, temperature and composition in the
+thermodynamic state record applying the ideal gas law.
+</html>"));
  end density;
 
  redeclare function extends specificEntropy
@@ -245,9 +243,11 @@ end saturationPressure;
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
- Specific entropy is calculated from the thermodynamic state record, assuming ideal gas behavior and including entropy of mixing. Liquid or solid water is not taken into account, the entire water content X[1] is assumed to be in the vapor state (relative humidity below 1.0).
- </html>"));
+    Documentation(info="<html>Specific entropy is calculated from the thermodynamic state record,
+assuming ideal gas behavior and including entropy of mixing. Liquid or
+solid water is not taken into account, the entire water content X[1] is
+assumed to be in the vapor state (relative humidity below 1.0).
+</html>"));
  end specificEntropy;
 
  redeclare function extends enthalpyOfVaporization
@@ -494,11 +494,10 @@ algorithm
   annotation(smoothOrder=5,
              Inline=true,
              inverse(h=specificEnthalpy_pTX(p, T, X)),
-             Documentation(info="<html>
- Temperature as a function of specific enthalpy and species concentration.
- The pressure is input for compatibility with the medium models, but the temperature
- is independent of the pressure.
- </html>"));
+             Documentation(info="<html>Temperature as a function of specific enthalpy and species
+concentration. The pressure is input for compatibility with the medium
+models, but the temperature is independent of the pressure.
+</html>"));
 end temperature_phX;
 //////////////////////////////////////////////////////////////////////
 // Protected classes.
@@ -520,40 +519,31 @@ protected
       "Specific heat capacity at constant volume";
     annotation (
       preferredView="info",
-      Documentation(info="<html>
- <p>
- This data record contains the coefficients for perfect gases.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 6, 2015, by Michael Wetter:<br/>
- Set <code>AbsolutePressure(start=p_default)</code>
- and <code>Temperature(start=T_default)</code>
- to have to have conistent start values.
- See also revision notes of
- <a href=\"modelica://AixLib.Media.Water\">
- AixLib.Media.Water</a>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
- </li>
- <li>
- May 1, 2015, by Michael Wetter:<br/>
- Added <code>Inline=true</code> for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
- issue 227</a>.
- </li>
- <li>
- September 12, 2014, by Michael Wetter:<br/>
- Corrected the wrong location of the <code>preferredView</code>
- and the <code>revisions</code> annotation.
- </li>
- <li>
- November 21, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"));
+      Documentation(info="<html><p>
+  This data record contains the coefficients for perfect gases.
+</p>
+</html>",revisions="<html><ul>
+  <li>June 6, 2015, by Michael Wetter:<br/>
+    Set <code>AbsolutePressure(start=p_default)</code> and
+    <code>Temperature(start=T_default)</code> to have to have conistent
+    start values. See also revision notes of <a href=
+    \"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>. This is for
+    <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+  </li>
+  <li>May 1, 2015, by Michael Wetter:<br/>
+    Added <code>Inline=true</code> for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/227\">issue 227</a>.
+  </li>
+  <li>September 12, 2014, by Michael Wetter:<br/>
+    Corrected the wrong location of the <code>preferredView</code> and
+    the <code>revisions</code> annotation.
+  </li>
+  <li>November 21, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"));
   end GasProperties;
   // In the assignments below, we compute cv as OpenModelica
   // cannot evaluate cv=cp-R as defined in GasProperties.
@@ -582,102 +572,92 @@ protected
     "Return specific entropy of moist air as a function of pressure p, temperature T and composition X (only valid for phi<1)";
   function s_pTX_der = Modelica.Media.Air.MoistAir.s_pTX_der
     "Return specific entropy of moist air as a function of pressure p, temperature T and composition X (only valid for phi<1)";
-  annotation(preferredView="info", Documentation(info="<html>
- <p>
- This package contains a <i>thermally perfect</i> model of moist air.
- </p>
- <p>
- A medium is called thermally perfect if
- </p>
- <ul>
- <li>
- it is in thermodynamic equilibrium,
- </li><li>
- it is chemically not reacting, and
- </li><li>
- internal energy and enthalpy are functions of temperature only.
- </li>
- </ul>
- <p>
- In addition, this medium model is <i>calorically perfect</i>, i.e., the
- specific heat capacities at constant pressure <i>c<sub>p</sub></i>
- and constant volume <i>c<sub>v</sub></i> are both constant (Bower 1998).
- </p>
- <p>
- This medium uses the ideal gas law
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- &rho; = p &frasl;(R T),
- </p>
- <p>
- where
- <i>&rho;</i> is the density,
- <i>p</i> is the pressure,
- <i>R</i> is the gas constant and
- <i>T</i> is the temperature.
- </p>
- <p>
- The enthalpy is computed using the convention that <i>h=0</i>
- if <i>T=0</i> &deg;C and no water vapor is present.
- </p>
- <p>
- Note that for typical building simulations, the media
- <a href=\"modelica://AixLib.Media.Air\">AixLib.Media.Air</a>
- should be used as it leads generally to faster simulation.
- </p>
- <h4>References</h4>
- <p>
- Bower, William B. <i>A primer in fluid mechanics: Dynamics of flows in one
- space dimension</i>. CRC Press. 1998.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
- Now printing different messages if temperature is above or below its limit,
- and adding instance name as JModelica does not print the full instance name in the assertion.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Replaced <code>spliceFunction</code> with <code>regStep</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
- </li>
- <li>
- November 13, 2014, by Michael Wetter:<br/>
- Removed <code>phi</code> and removed non-required computations.
- </li>
- <li>
- March 29, 2013, by Michael Wetter:<br/>
- Added <code>final standardOrderComponents=true</code> in the
- <code>BaseProperties</code> declaration. This avoids an error
- when models are checked in Dymola 2014 in the pedenatic mode.
- </li>
- <li>
- April 12, 2012, by Michael Wetter:<br/>
- Added keyword <code>each</code> to <code>Xi(stateSelect=...)</code>.
- </li>
- <li>
- April 4, 2012, by Michael Wetter:<br/>
- Added redeclaration of <code>ThermodynamicState</code> to avoid a warning
- during model check and translation.
- </li>
- <li>
- January 27, 2010, by Michael Wetter:<br/>
- Added function <code>enthalpyOfNonCondensingGas</code> and its derivative.
- </li>
- <li>
- January 27, 2010, by Michael Wetter:<br/>
- Fixed bug with temperature offset in <code>T_phX</code>.
- </li>
- <li>
- August 18, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+  annotation(preferredView="info", Documentation(info="<html><p>
+  This package contains a <i>thermally perfect</i> model of moist air.
+</p>
+<p>
+  A medium is called thermally perfect if
+</p>
+<ul>
+  <li>it is in thermodynamic equilibrium,
+  </li>
+  <li>it is chemically not reacting, and
+  </li>
+  <li>internal energy and enthalpy are functions of temperature only.
+  </li>
+</ul>
+<p>
+  In addition, this medium model is <i>calorically perfect</i>, i.e.,
+  the specific heat capacities at constant pressure
+  <i>c<sub>p</sub></i> and constant volume <i>c<sub>v</sub></i> are
+  both constant (Bower 1998).
+</p>
+<p>
+  This medium uses the ideal gas law
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  ρ = p ⁄(R T),
+</p>
+<p>
+  where <i>ρ</i> is the density, <i>p</i> is the pressure, <i>R</i> is
+  the gas constant and <i>T</i> is the temperature.
+</p>
+<p>
+  The enthalpy is computed using the convention that <i>h=0</i> if
+  <i>T=0</i> °C and no water vapor is present.
+</p>
+<p>
+  Note that for typical building simulations, the media <a href=
+  \"modelica://AixLib.Media.Air\">AixLib.Media.Air</a> should be used as
+  it leads generally to faster simulation.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Bower, William B. <i>A primer in fluid mechanics: Dynamics of flows
+  in one space dimension</i>. CRC Press. 1998.
+</p>
+</html>",revisions="<html><ul>
+  <li>October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
+    Now printing different messages if temperature is above or below
+    its limit, and adding instance name as JModelica does not print the
+    full instance name in the assertion. This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
+  </li>
+  <li>March 15, 2016, by Michael Wetter:<br/>
+    Replaced <code>spliceFunction</code> with <code>regStep</code>.
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+  </li>
+  <li>November 13, 2014, by Michael Wetter:<br/>
+    Removed <code>phi</code> and removed non-required computations.
+  </li>
+  <li>March 29, 2013, by Michael Wetter:<br/>
+    Added <code>final standardOrderComponents=true</code> in the
+    <code>BaseProperties</code> declaration. This avoids an error when
+    models are checked in Dymola 2014 in the pedenatic mode.
+  </li>
+  <li>April 12, 2012, by Michael Wetter:<br/>
+    Added keyword <code>each</code> to
+    <code>Xi(stateSelect=...)</code>.
+  </li>
+  <li>April 4, 2012, by Michael Wetter:<br/>
+    Added redeclaration of <code>ThermodynamicState</code> to avoid a
+    warning during model check and translation.
+  </li>
+  <li>January 27, 2010, by Michael Wetter:<br/>
+    Added function <code>enthalpyOfNonCondensingGas</code> and its
+    derivative.
+  </li>
+  <li>January 27, 2010, by Michael Wetter:<br/>
+    Fixed bug with temperature offset in <code>T_phX</code>.
+  </li>
+  <li>August 18, 2008, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
     Icon(graphics={
         Ellipse(
           extent={{-78,78},{-34,34}},

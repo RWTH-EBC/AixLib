@@ -187,81 +187,74 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hex",
-    Documentation(info="<html>
- <p>
- Partial model of a heat exchanger without humidity condensation.
- This model transfers heat in the amount of
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   Q = Q<sub>max</sub>  &epsilon;<br/>
-   &epsilon; = f(NTU, Z, flowRegime),
- </p>
- <p>
- where
- <i>Q<sub>max</sub></i> is the maximum heat that can be transferred,
- <i>&epsilon;</i> is the heat transfer effectiveness,
- <i>NTU</i> is the Number of Transfer Units,
- <i>Z</i> is the ratio of minimum to maximum capacity flow rate and
- <i>flowRegime</i> is the heat exchanger flow regime.
- such as
- parallel flow, cross flow or counter flow.
- </p>
- <p>
- The flow regimes depend on the heat exchanger configuration. All configurations
- defined in
- <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">
- AixLib.Fluid.Types.HeatExchangerConfiguration</a>
- are supported.
- </p>
- <p>
- Models that extend from this partial model need to provide an assignment
- for <code>UA</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 25, 2021 by Baptiste Ravache:<br/>
- Added a warning for when Q_flow_nominal is specified with the wrong sign.
- </li>
- <li>
- January 10, 2018 by Michael Wetter:<br/>
- Removed variable <code>Z</code> that is not used.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
- </li>
- <li>
- January 10, 2018 by Filip Jorissen:<br/>
- Corrected an error where the value of NTU was assigned to Z.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
- </li>
- <li>
- February 27, 2016 by Michael Wetter:<br/>
- Introduced <code>sta1_default</code> and <code>sta2_default</code>
- to enable translation under OpenModelica.
- Removed <code>max=1</code> attribute for <code>Z</code>. This is needed as near
- zero flow, <code>Z</code> can be larger than one due to the regularization.
- As <code>Z</code> is not used in this model other than for reporting, this bound
- need not be enforced (and the calculation of <code>eps</code> is fine at these small flow rates).
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue 490</a>.
- </li>
- <li>
- April 29, 2014 by Michael Wetter:<br/>
- Changed <code>assert</code> statement to avoid comparing
- enumeration with an integer, which triggers a warning
- in Dymola 2015.
- </li>
- <li>
- July 30, 2013 by Michael Wetter:<br/>
- Updated model to use new variable <code>mWat_flow</code>
- in the base class.
- </li>
- <li>
- February 12, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+    Documentation(info="<html><p>
+  Partial model of a heat exchanger without humidity condensation. This
+  model transfers heat in the amount of
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  Q = Q<sub>max</sub> ε<br/>
+  ε = f(NTU, Z, flowRegime),
+</p>
+<p>
+  where <i>Q<sub>max</sub></i> is the maximum heat that can be
+  transferred, <i>ε</i> is the heat transfer effectiveness, <i>NTU</i>
+  is the Number of Transfer Units, <i>Z</i> is the ratio of minimum to
+  maximum capacity flow rate and <i>flowRegime</i> is the heat
+  exchanger flow regime. such as parallel flow, cross flow or counter
+  flow.
+</p>
+<p>
+  The flow regimes depend on the heat exchanger configuration. All
+  configurations defined in <a href=
+  \"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">AixLib.Fluid.Types.HeatExchangerConfiguration</a>
+  are supported.
+</p>
+<p>
+  Models that extend from this partial model need to provide an
+  assignment for <code>UA</code>.
+</p>
+</html>",revisions="<html><ul>
+  <li>February 25, 2021 by Baptiste Ravache:<br/>
+    Added a warning for when Q_flow_nominal is specified with the wrong
+    sign.
+  </li>
+  <li>January 10, 2018 by Michael Wetter:<br/>
+    Removed variable <code>Z</code> that is not used. This is for
+    <a href=
+    \"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue
+    1328</a>.
+  </li>
+  <li>January 10, 2018 by Filip Jorissen:<br/>
+    Corrected an error where the value of NTU was assigned to Z. This
+    is for <a href=
+    \"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue
+    1328</a>.
+  </li>
+  <li>February 27, 2016 by Michael Wetter:<br/>
+    Introduced <code>sta1_default</code> and <code>sta2_default</code>
+    to enable translation under OpenModelica. Removed
+    <code>max=1</code> attribute for <code>Z</code>. This is needed as
+    near zero flow, <code>Z</code> can be larger than one due to the
+    regularization. As <code>Z</code> is not used in this model other
+    than for reporting, this bound need not be enforced (and the
+    calculation of <code>eps</code> is fine at these small flow rates).
+    This is for <a href=
+    \"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue
+    490</a>.
+  </li>
+  <li>April 29, 2014 by Michael Wetter:<br/>
+    Changed <code>assert</code> statement to avoid comparing
+    enumeration with an integer, which triggers a warning in Dymola
+    2015.
+  </li>
+  <li>July 30, 2013 by Michael Wetter:<br/>
+    Updated model to use new variable <code>mWat_flow</code> in the
+    base class.
+  </li>
+  <li>February 12, 2010, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end PartialEffectivenessNTU;

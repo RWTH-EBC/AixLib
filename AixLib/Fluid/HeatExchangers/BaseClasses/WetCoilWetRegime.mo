@@ -165,92 +165,95 @@ annotation (Icon(graphics={
         extent={{-100,100},{100,-100}},
         lineColor={28,108,200},
         fillColor={170,213,255},
-        fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
- <ul>
- <li>
- Jan 21, 2021, by Donghun Kim:<br/>First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This model implements the calculation for a 100% wet coil.
- </p>
- <p>
- The equations from Braun (1988) and Mitchell and Braun (2012a and b),
- which are essentially the extension of the <i>&epsilon;-NTU</i> approach to
- simultaneous sensible and latent heat transfer, are utilized.
- </p>
- <p>
- The mathematical equations are analogous to that of the sensible heat exchanger.
- However, the key distinction is that the heat transfer is driven by an enthalpy difference
- not by an temperature difference. This change in the driving potential results in re-defining
- capacitances and heat transfer coefficients accordingly.
- </p>
- 
- <p>
- The total heat transfer rate is expressed as
- </p>
- <p align=\"center\">
- <i> Q<sub>tot</sub>=&epsilon;* C*<sub>min </sub>
- (h<sub>air,in</sub>-h<sub>sat</sub>(T<sub>wat,in</sub>))</i>,
- </p>
- <p>
- where <i>&epsilon;*=f(Cr*,NTU*)</i> and <i>f</i> is the same <i>&epsilon;-NTU</i> relationships
- (depending on the heat exchanger configuration) for the sensible heat exchanger.
- </p>
- <p>
- <i>h<sub>air,in</sub> </i> and <i>h<sub>sat</sub></i>(<i>T<sub>wat,in</sub></i>) are
- the specific enthalpies of the incoming moist air and saturated moist air
- at the water inlet temperature.
- </p>
- <p>
- The capacitances of water and air streams are defined as
- </p>
- <p align=\"center\"><i>C*<sub>air</sub>=m<sub>air</sub></i> and
- <i>C*<sub>wat</sub>=m<sub>wat</sub>c<sub>p,wat</sub>/csat</i>,
- </p>
- <p>
- where <i>csat</i> is an specific heat capacity, which indicates the sensitivity
- of the enthalpy of the staturated moist air w.r.t. the temperature, and is defined
- here as <i>csat=(h<sub>sat</sub>(T<sub>wat,out</sub>)-h<sub>sat</sub>(T<sub>wat,in</sub>))
- /(T<sub>wat,out</sub>-T<sub>wat,in</sub>)</i>.
- </p>
- <p>
- The capacitance ratio and minimum capacitance are naturally defined as
- </p>
- <p align=\"center\"> <i>Cr*=min(C*<sub>air</sub>,C*<sub>wat</sub>)/max(C*<sub>air</sub>,C*<sub>wat</sub>)</i>
- and <i>C*<sub>min</sub>=min(C*<sub>air</sub>,C*<sub>wat</sub>)</i>.
- </p>
- <p><br/>
- The number of transfer unit for the wet-coil is defined as <i>NTU*=UA*/C*<sub>min</sub></i>, where
- </p>
- <p align=\"center\">
- <i>UA*=1/(1/(UA<sub>air</sub>/c<sub>p,air</sub>)+1/(UA<sub>wat</sub>/csat)</i>.
- </p>
- 
- <h4>References </h4>
- <p>
- Braun, James E. 1988.
- &quot;Methodologies for the Design and Control of Central Cooling Plants&quot;.
- PhD Thesis. University of Wisconsin - Madison.
- Available
- <a href=\"https://minds.wisconsin.edu/handle/1793/46694\">
- online</a>.
- </p>
- <p>
- Mitchell, John W., and James E. Braun. 2012a.
- Principles of heating, ventilation, and air conditioning in buildings.
- Hoboken, N.J.: Wiley.
- </p>
- <p>
- Mitchell, John W., and James E. Braun. 2012b.
- &quot;Supplementary Material Chapter 2: Heat Exchangers for Cooling Applications&quot;.
- Excerpt from Principles of heating, ventilation, and air conditioning in buildings.
- Hoboken, N.J.: Wiley.
- Available
- <a href=\"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
- online</a>.
- </p>
- </html>"),
+        fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>Jan 21, 2021, by Donghun Kim:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>",info="<html><p>
+  This model implements the calculation for a 100% wet coil.
+</p>
+<p>
+  The equations from Braun (1988) and Mitchell and Braun (2012a and b),
+  which are essentially the extension of the <i>ε-NTU</i> approach to
+  simultaneous sensible and latent heat transfer, are utilized.
+</p>
+<p>
+  The mathematical equations are analogous to that of the sensible heat
+  exchanger. However, the key distinction is that the heat transfer is
+  driven by an enthalpy difference not by an temperature difference.
+  This change in the driving potential results in re-defining
+  capacitances and heat transfer coefficients accordingly.
+</p>
+<p>
+  The total heat transfer rate is expressed as
+</p>
+<p align=\"center\">
+  <i>Q<sub>tot</sub>=ε* C*<sub>min</sub>
+  (h<sub>air,in</sub>-h<sub>sat</sub>(T<sub>wat,in</sub>))</i>,
+</p>
+<p>
+  where <i>ε*=f(Cr*,NTU*)</i> and <i>f</i> is the same <i>ε-NTU</i>
+  relationships (depending on the heat exchanger configuration) for the
+  sensible heat exchanger.
+</p>
+<p>
+  <i>h<sub>air,in</sub></i> and
+  <i>h<sub>sat</sub></i>(<i>T<sub>wat,in</sub></i>) are the specific
+  enthalpies of the incoming moist air and saturated moist air at the
+  water inlet temperature.
+</p>
+<p>
+  The capacitances of water and air streams are defined as
+</p>
+<p align=\"center\">
+  <i>C*<sub>air</sub>=m<sub>air</sub></i> and
+  <i>C*<sub>wat</sub>=m<sub>wat</sub>c<sub>p,wat</sub>/csat</i>,
+</p>
+<p>
+  where <i>csat</i> is an specific heat capacity, which indicates the
+  sensitivity of the enthalpy of the staturated moist air w.r.t. the
+  temperature, and is defined here as
+  <i>csat=(h<sub>sat</sub>(T<sub>wat,out</sub>)-h<sub>sat</sub>(T<sub>wat,in</sub>))
+  /(T<sub>wat,out</sub>-T<sub>wat,in</sub>)</i>.
+</p>
+<p>
+  The capacitance ratio and minimum capacitance are naturally defined
+  as
+</p>
+<p align=\"center\">
+  <i>Cr*=min(C*<sub>air</sub>,C*<sub>wat</sub>)/max(C*<sub>air</sub>,C*<sub>wat</sub>)</i>
+  and <i>C*<sub>min</sub>=min(C*<sub>air</sub>,C*<sub>wat</sub>)</i>.
+</p>
+<p>
+  <br/>
+  The number of transfer unit for the wet-coil is defined as
+  <i>NTU*=UA*/C*<sub>min</sub></i>, where
+</p>
+<p align=\"center\">
+  <i>UA*=1/(1/(UA<sub>air</sub>/c<sub>p,air</sub>)+1/(UA<sub>wat</sub>/csat)</i>.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Braun, James E. 1988. \"Methodologies for the Design and Control of
+  Central Cooling Plants\". PhD Thesis. University of Wisconsin -
+  Madison. Available <a href=
+  \"https://minds.wisconsin.edu/handle/1793/46694\">online</a>.
+</p>
+<p>
+  Mitchell, John W., and James E. Braun. 2012a. Principles of heating,
+  ventilation, and air conditioning in buildings. Hoboken, N.J.: Wiley.
+</p>
+<p>
+  Mitchell, John W., and James E. Braun. 2012b. \"Supplementary Material
+  Chapter 2: Heat Exchangers for Cooling Applications\". Excerpt from
+  Principles of heating, ventilation, and air conditioning in
+  buildings. Hoboken, N.J.: Wiley. Available <a href=
+  \"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
+  online</a>.
+</p>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilWetRegime;

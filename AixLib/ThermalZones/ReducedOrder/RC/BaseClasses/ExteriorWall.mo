@@ -58,32 +58,36 @@ equation
     annotation (Line(points={{60,0},{100,0}}, color={191,0,0}));
   annotation(defaultComponentName = "extWalRC",
   Diagram(coordinateSystem(preserveAspectRatio = false, extent=
-  {{-100, -100}, {100, 120}})),           Documentation(info="<html>
-   <p><code>ExteriorWall</code> represents heat conduction and heat storage
-   within walls. It links a variable number <code>n</code> of thermal resistances
-   and capacities to a series connection. <code>n</code> thus defines the spatial
-   discretization of thermal effects within the wall. All effects are considered
-   as one-dimensional normal to the wall&apos;s surface. This model is thought
-   for exterior wall elements that contribute to heat transfer to the outdoor.
-   The RC-chain is defined via a vector of capacities <code>CExt[n]</code> and a
-   vector of resistances <code>RExt[n]</code>. Resistances and capacities are
-   connected alternately, starting with the first resistance <code>RExt[1]</code>,
-   from heat <code>port_a</code> to heat <code>port_b</code>. <code>RExtRem</code>
-   is the resistance between the last capacity <code>CExt[end]</code> and the
-   heat <code>port_b</code>.</p>
-   <p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/BaseClasses/ExtMassVarRC/ExtMassVarRC.png\" alt=\"image\"/> </p>
-   </html>", revisions="<html>
-   <ul>
-   <li>
-   April 27, 2016, by Michael Wetter:<br/>
-   Added graphical connections.
-   </li>
-   <li>
-   April 17, 2015, by Moritz Lauster:<br/>
-   Implemented.
-   </li>
-   </ul>
-   </html>"), Icon(coordinateSystem(preserveAspectRatio=false,  extent=
+  {{-100, -100}, {100, 120}})),           Documentation(info="<html><p>
+  <code>ExteriorWall</code> represents heat conduction and heat storage
+  within walls. It links a variable number <code>n</code> of thermal
+  resistances and capacities to a series connection. <code>n</code>
+  thus defines the spatial discretization of thermal effects within the
+  wall. All effects are considered as one-dimensional normal to the
+  wall's surface. This model is thought for exterior wall elements that
+  contribute to heat transfer to the outdoor. The RC-chain is defined
+  via a vector of capacities <code>CExt[n]</code> and a vector of
+  resistances <code>RExt[n]</code>. Resistances and capacities are
+  connected alternately, starting with the first resistance
+  <code>RExt[1]</code>, from heat <code>port_a</code> to heat
+  <code>port_b</code>. <code>RExtRem</code> is the resistance between
+  the last capacity <code>CExt[end]</code> and the heat
+  <code>port_b</code>.
+</p>
+<p align=\"center\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/BaseClasses/ExtMassVarRC/ExtMassVarRC.png\"
+  alt=\"image\">
+</p>
+</html>", revisions="<html><ul>
+  <li>April 27, 2016, by Michael Wetter:<br/>
+    Added graphical connections.
+  </li>
+  <li>April 17, 2015, by Moritz Lauster:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"), Icon(coordinateSystem(preserveAspectRatio=false,  extent=
   {{-100,-100},{100,120}}), graphics={  Rectangle(extent = {{-86, 60}, {-34, 26}},
    fillColor = {255, 213, 170},
    fillPattern = FillPattern.Solid, lineColor = {175, 175, 175}), Rectangle(

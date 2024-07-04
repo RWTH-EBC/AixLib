@@ -23,16 +23,25 @@ equation
   V_flow = sqrt(V_flow_th^2 + V_flow_win^2);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression according to DIN/TS 4108-8:2022-09.</p>
-<h4>References</h4>
-<p>DIN Deutsches Institut f&uuml;r Normung e. V. (2022.09). W&auml;rmeschutz und Energie-Einsparung in Geb&auml;uden &ndash; Teil 8: Vermeidung von Schimmelwachstum in Wohngeb&auml;uden: Vornorm (DIN/TS 4108-8). Beuth Verlag GmbH.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression according to DIN/TS
+  4108-8:2022-09.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  DIN Deutsches Institut für Normung e. V. (2022.09). Wärmeschutz und
+  Energie-Einsparung in Gebäuden – Teil 8: Vermeidung von
+  Schimmelwachstum in Wohngebäuden: Vornorm (DIN/TS 4108-8). Beuth
+  Verlag GmbH.
+</p>
 </html>"));
 end DIN4108;

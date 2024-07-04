@@ -38,16 +38,24 @@ equation
   V_flow_th =if noEvent(intRes > Modelica.Constants.eps) then
     1/3*openingArea.A*cofDcg*sqrt(intRes) else 0;
   V_flow = V_flow_th + V_flow_win;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Caciolo et al..</p>
-<h4>References</h4>
-<p>Caciolo, M., Cui, S., Stabat, P., &amp; Marchio, D. (2013). Development of a new correlation for single-sided natural ventilation adapted to leeward conditions. Energy and Buildings, 60, 372&ndash;382.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Caciolo et
+  al..
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Caciolo, M., Cui, S., Stabat, P., & Marchio, D. (2013). Development
+  of a new correlation for single-sided natural ventilation adapted to
+  leeward conditions. Energy and Buildings, 60, 372–382.
+</p>
 </html>"));
 end Caciolo;

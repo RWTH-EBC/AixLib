@@ -33,14 +33,16 @@ equation
           LinePattern.Solid else LinePattern.Dash)));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial model provides a base class of models that estimate ventilation volume flow.</p>
+</html>", info="<html><p>
+  This partial model provides a base class of models that estimate
+  ventilation volume flow.
+</p>
 </html>"));
 end PartialEmpiricalFlow;

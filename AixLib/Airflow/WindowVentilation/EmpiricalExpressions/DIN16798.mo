@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
+within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model DIN16798 "Empirical expression according to DIN EN 16798-7 (2017)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
@@ -26,16 +26,27 @@ equation
     max(cofWin*(winSpe10^2), cofTh*winClrHeight*abs(dT_RoomAmb)));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8):2018-03.</p>
-<h4>References</h4>
-<p>DIN Deutsches Institut f&uuml;r Normung e. V. (2018.03). Energieeffizienz von Geb&auml;uden &ndash; L&uuml;ftung von Geb&auml;uden &ndash; Teil 8: Interpretation der Anforderungen der EN 16798-7 &ndash; Berechnungsmethoden zur Bestimmung der Luftvolumenstr&ouml;me in Geb&auml;uden einschlie&szlig;lich Infiltration (Modul M5-5): Englische Fassung CEN/TR 16798-8:2017 (DIN CEN/TR 16798-8). Beuth Verlag GmbH.</p>
+</html>", info="<html><p>
+  This model contains the empirical expression according to DIN CEN/TR
+  16798-8 (DIN SPEC 32739-8):2018-03.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  DIN Deutsches Institut für Normung e. V. (2018.03). Energieeffizienz
+  von Gebäuden – Lüftung von Gebäuden – Teil 8: Interpretation der
+  Anforderungen der EN 16798-7 – Berechnungsmethoden zur Bestimmung der
+  Luftvolumenströme in Gebäuden einschließlich Infiltration (Modul
+  M5-5): Englische Fassung CEN/TR 16798-8:2017 (DIN CEN/TR 16798-8).
+  Beuth Verlag GmbH.
+</p>
 </html>"));
 end DIN16798;

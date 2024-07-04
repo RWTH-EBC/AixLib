@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
+within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashCommon
   "Calculate geometric, projective, equivalent, and effective window opening
   areas, by different types of sash opening"
@@ -121,15 +121,20 @@ equation
           textColor={0,0,0},
           textString="%opnAreaTyp")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial model provides a base class of common window sash opening area, incl. geometric, projective, equivalent, and effective opening area.</p>
-<p>Input port of this model is the opening width.</p>
+</html>", info="<html><p>
+  This partial model provides a base class of common window sash
+  opening area, incl. geometric, projective, equivalent, and effective
+  opening area.
+</p>
+<p>
+  Input port of this model is the opening width.
+</p>
 </html>"));
 end OpeningAreaSashCommon;

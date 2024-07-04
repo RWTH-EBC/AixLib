@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses;
+within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialExampleVentilationFlowRate
   "Boundary conditions for ventilation flow rate examples"
   extends Modelica.Icons.Example;
@@ -41,14 +41,16 @@ equation
   annotation (experiment(
       StopTime=180,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"), Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+      __Dymola_Algorithm="Dassl"), Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial example provides the boundary condition settings for examples of ventilation flow rate.</p>
+</html>", info="<html><p>
+  This partial example provides the boundary condition settings for
+  examples of ventilation flow rate.
+</p>
 </html>"));
 end PartialExampleVentilationFlowRate;

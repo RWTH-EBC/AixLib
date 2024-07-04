@@ -184,165 +184,190 @@ equation
             textString="%name")}),
   Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
- <p>
- This model calculates the ground temperature response to obtain the temperature
- at the borehole wall in a geothermal system where heat is being injected into or
- extracted from the ground.
- </p>
- <p>
- A load-aggregation scheme based on that developed by Claesson and Javed (2012) is
- used to calculate the borehole wall temperature response with the temporal superposition
- of ground thermal loads. In its base form, the
- load-aggregation scheme uses fixed-length aggregation cells to agglomerate
- thermal load history together, with more distant cells (denoted with a higher cell and vector index)
- representing more distant thermal history. The more distant the thermal load, the
- less impactful it is on the borehole wall temperature change at the current time step.
- Each cell has an <em>aggregation time</em> associated to it denoted by <code>nu</code>,
- which corresponds to the simulation time (since the beginning of heat injection or
- extraction) at which the cell will begin shifting its thermal load to more distant
- cells. To determine <code>nu</code>, cells have a temporal size <i>r<sub>cel</sub></i>
- (<code>rcel</code> in this model)
- which follows the exponential growth
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_02.png\" />
- </p>
- <p>
- where <i>n<sub>Cel</sub></i> is the number of consecutive cells which can have the same size.
- Decreasing <i>r<sub>cel</sub></i> will generally decrease calculation times, at the cost of
- precision in the temporal superposition. <code>rcel</code> is expressed in multiples
- of the aggregation time resolution (via the parameter <code>tLoaAgg</code>).
- Then, <code>nu</code> may be expressed as the sum of all <code>rcel</code> values
- (multiplied by the aggregation time resolution) up to and including that cell in question.
- </p>
- <p>
- To determine the weighting factors, the borefield's temperature
- step response at the borefield wall is determined as
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_03.png\" />
- </p>
- <p>
- where <i>g(&middot;)</i> is the borefield's thermal response factor known as the <em>g-function</em>,
- <i>H</i> is the total length of all boreholes and <i>k<sub>s</sub></i> is the thermal
- conductivity of the soil. The weighting factors <code>kappa</code> (<i>&kappa;</i> in the equation below)
- for a given cell <i>i</i> are then expressed as follows.
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_04.png\" />
- </p>
- <p>
- where <i>&nu;</i> refers to the vector <code>nu</code> in this model and
- <i>T<sub>step</sub>(&nu;<sub>0</sub>)</i>=0.
- </p>
- <p>
- At every aggregation time step, a time event is generated to perform the load aggregation steps.
- First, the thermal load is shifted. When shifting between cells of different size, total
- energy is conserved. This operation is illustred in the figure below by Cimmino (2014).
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_01.png\" />
- </p>
- <p>
- After the cell-shifting operation is performed, the first aggregation cell has its
- value set to the average thermal load since the last aggregation step.
- Temporal superposition is then applied by means
- of a scalar product between the aggregated thermal loads <code>QAgg_flow</code> and the
- weighting factors <i>&kappa;</i>.
- </p>
- <p>
- Due to Modelica's variable time steps, the load aggregation scheme is modified by separating
- the thermal response between the current aggregation time step and everything preceding it.
- This is done according to
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_05.png\" />
- <br/>
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_06.png\" />
- </p>
- <p>
- where <i>T<sub>b</sub></i> is the borehole wall temperature,
- <i>T<sub>g</sub></i>
- is the undisturbed ground temperature,
- <i>Q</i> is the ground thermal load per borehole length and <i>h = g/(2 &pi; k<sub>s</sub>)</i>
- is a temperature response factor based on the g-function. <i>t<sub>k</sub></i>
- is the last discrete aggregation time step, meaning that the current time <i>t</i>
- satisfies <i>t<sub>k</sub>&le;t&le;t<sub>k+1</sub></i>.
- <i>&Delta;t<sub>agg</sub>(=t<sub>k+1</sub>-t<sub>k</sub>)</i> is the
- parameter <code>tLoaAgg</code> in the present model.
- </p>
- <p>
- Thus,
- <i>&Delta;T<sub>b</sub>*(t)</i>
- is the borehole wall temperature change due to the thermal history prior to the current
- aggregation step. At every aggregation time step, load aggregation and temporal superposition
- are used to calculate its discrete value. Assuming no heat injection or extraction until
- <i>t<sub>k+1</sub></i>, this term is assumed to have a linear
- time derivative, which is given by the difference between <i>&Delta;T<sub>b</sub>*(t<sub>k+1</sub>)</i>
- (the temperature change from load history at the next discrete aggregation time step, which
- is constant over the duration of the ongoing aggregation time step) and the total
- temperature change at the last aggregation time step, <i>&Delta;T<sub>b</sub>(t)</i>.
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_09.png\" />
- </p>
- <p>
- The second term <i>&Delta;T<sub>b,q</sub>(t)</i> concerns the ongoing aggregation time step.
- To obtain the time derivative of this term, the thermal response factor <i>h</i> is assumed
- to vary linearly over the course of an aggregation time step. Therefore, because
- the ongoing aggregation time step always concerns the first aggregation cell, its derivative (denoted
- by the parameter <code>dTStepdt</code> in this model) can be calculated as
- <code>kappa[1]</code>, the first value in the <code>kappa</code> vector,
- divided by the aggregation time step <i>&Delta;t</i>.
- The derivative of the temperature change at the borehole wall is then expressed
- as the multiplication of <code>dTStepdt</code> (which only needs to be
- calculated once at the start of the simulation) and the heat flow <i>Q</i> at
- the borehole wall.
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_10.png\" />
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_11.png\" />
- </p>
- <p>
- With the two terms in the expression of <i>&Delta;T<sub>b</sub>(t)</i> expressed
- as time derivatives, <i>&Delta;T<sub>b</sub>(t)</i> can itself also be
- expressed as its time derivative and implemented as such directly in the Modelica
- equations block with the <code>der()</code> operator.
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_07.png\" />
- <br/>
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_08.png\" />
- </p>
- <p>
- This load aggregation scheme is validated in
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Analytic_20Years\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Analytic_20Years</a>.
- </p>
- <h4>References</h4>
- <p>
- Cimmino, M. 2014. <i>D&eacute;veloppement et validation exp&eacute;rimentale de facteurs de r&eacute;ponse
- thermique pour champs de puits g&eacute;othermiques</i>,
- Ph.D. Thesis, &Eacute;cole Polytechnique de Montr&eacute;al.
- </p>
- <p>
- Claesson, J. and Javed, S. 2012. <i>A load-aggregation method to calculate extraction temperatures of borehole heat exchangers</i>. ASHRAE Transactions 118(1): 530-539.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 30, 2018, by Michael Wetter:<br/>
- Refactored model to compute the temperature difference relative to the initial temperature,
- because the model is independent of the initial temperature.
- </li>
- <li>
- April 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+        Documentation(info="<html><p>
+  This model calculates the ground temperature response to obtain the
+  temperature at the borehole wall in a geothermal system where heat is
+  being injected into or extracted from the ground.
+</p>
+<p>
+  A load-aggregation scheme based on that developed by Claesson and
+  Javed (2012) is used to calculate the borehole wall temperature
+  response with the temporal superposition of ground thermal loads. In
+  its base form, the load-aggregation scheme uses fixed-length
+  aggregation cells to agglomerate thermal load history together, with
+  more distant cells (denoted with a higher cell and vector index)
+  representing more distant thermal history. The more distant the
+  thermal load, the less impactful it is on the borehole wall
+  temperature change at the current time step. Each cell has an
+  <em>aggregation time</em> associated to it denoted by
+  <code>nu</code>, which corresponds to the simulation time (since the
+  beginning of heat injection or extraction) at which the cell will
+  begin shifting its thermal load to more distant cells. To determine
+  <code>nu</code>, cells have a temporal size <i>r<sub>cel</sub></i>
+  (<code>rcel</code> in this model) which follows the exponential
+  growth
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_02.png\">
+</p>
+<p>
+  where <i>n<sub>Cel</sub></i> is the number of consecutive cells which
+  can have the same size. Decreasing <i>r<sub>cel</sub></i> will
+  generally decrease calculation times, at the cost of precision in the
+  temporal superposition. <code>rcel</code> is expressed in multiples
+  of the aggregation time resolution (via the parameter
+  <code>tLoaAgg</code>). Then, <code>nu</code> may be expressed as the
+  sum of all <code>rcel</code> values (multiplied by the aggregation
+  time resolution) up to and including that cell in question.
+</p>
+<p>
+  To determine the weighting factors, the borefield's temperature step
+  response at the borefield wall is determined as
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_03.png\">
+</p>
+<p>
+  where <i>g(·)</i> is the borefield's thermal response factor known as
+  the <em>g-function</em>, <i>H</i> is the total length of all
+  boreholes and <i>k<sub>s</sub></i> is the thermal conductivity of the
+  soil. The weighting factors <code>kappa</code> (<i>κ</i> in the
+  equation below) for a given cell <i>i</i> are then expressed as
+  follows.
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_04.png\">
+</p>
+<p>
+  where <i>ν</i> refers to the vector <code>nu</code> in this model and
+  <i>T<sub>step</sub>(ν<sub>0</sub>)</i>=0.
+</p>
+<p>
+  At every aggregation time step, a time event is generated to perform
+  the load aggregation steps. First, the thermal load is shifted. When
+  shifting between cells of different size, total energy is conserved.
+  This operation is illustred in the figure below by Cimmino (2014).
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_01.png\">
+</p>
+<p>
+  After the cell-shifting operation is performed, the first aggregation
+  cell has its value set to the average thermal load since the last
+  aggregation step. Temporal superposition is then applied by means of
+  a scalar product between the aggregated thermal loads
+  <code>QAgg_flow</code> and the weighting factors <i>κ</i>.
+</p>
+<p>
+  Due to Modelica's variable time steps, the load aggregation scheme is
+  modified by separating the thermal response between the current
+  aggregation time step and everything preceding it. This is done
+  according to
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_05.png\"><br/>
+
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_06.png\">
+</p>
+<p>
+  where <i>T<sub>b</sub></i> is the borehole wall temperature,
+  <i>T<sub>g</sub></i> is the undisturbed ground temperature, <i>Q</i>
+  is the ground thermal load per borehole length and <i>h = g/(2 π
+  k<sub>s</sub>)</i> is a temperature response factor based on the
+  g-function. <i>t<sub>k</sub></i> is the last discrete aggregation
+  time step, meaning that the current time <i>t</i> satisfies
+  <i>t<sub>k</sub>≤t≤t<sub>k+1</sub></i>.
+  <i>Δt<sub>agg</sub>(=t<sub>k+1</sub>-t<sub>k</sub>)</i> is the
+  parameter <code>tLoaAgg</code> in the present model.
+</p>
+<p>
+  Thus, <i>ΔT<sub>b</sub>*(t)</i> is the borehole wall temperature
+  change due to the thermal history prior to the current aggregation
+  step. At every aggregation time step, load aggregation and temporal
+  superposition are used to calculate its discrete value. Assuming no
+  heat injection or extraction until <i>t<sub>k+1</sub></i>, this term
+  is assumed to have a linear time derivative, which is given by the
+  difference between <i>ΔT<sub>b</sub>*(t<sub>k+1</sub>)</i> (the
+  temperature change from load history at the next discrete aggregation
+  time step, which is constant over the duration of the ongoing
+  aggregation time step) and the total temperature change at the last
+  aggregation time step, <i>ΔT<sub>b</sub>(t)</i>.
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_09.png\">
+</p>
+<p>
+  The second term <i>ΔT<sub>b,q</sub>(t)</i> concerns the ongoing
+  aggregation time step. To obtain the time derivative of this term,
+  the thermal response factor <i>h</i> is assumed to vary linearly over
+  the course of an aggregation time step. Therefore, because the
+  ongoing aggregation time step always concerns the first aggregation
+  cell, its derivative (denoted by the parameter <code>dTStepdt</code>
+  in this model) can be calculated as <code>kappa[1]</code>, the first
+  value in the <code>kappa</code> vector, divided by the aggregation
+  time step <i>Δt</i>. The derivative of the temperature change at the
+  borehole wall is then expressed as the multiplication of
+  <code>dTStepdt</code> (which only needs to be calculated once at the
+  start of the simulation) and the heat flow <i>Q</i> at the borehole
+  wall.
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_10.png\">
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_11.png\">
+</p>
+<p>
+  With the two terms in the expression of <i>ΔT<sub>b</sub>(t)</i>
+  expressed as time derivatives, <i>ΔT<sub>b</sub>(t)</i> can itself
+  also be expressed as its time derivative and implemented as such
+  directly in the Modelica equations block with the <code>der()</code>
+  operator.
+</p>
+<p align=\"center\">
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_07.png\"><br/>
+
+  <img alt=\"image\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_08.png\">
+</p>
+<p>
+  This load aggregation scheme is validated in <a href=
+  \"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Analytic_20Years\">
+  AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.Analytic_20Years</a>.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Cimmino, M. 2014. <i>Développement et validation expérimentale de
+  facteurs de réponse thermique pour champs de puits géothermiques</i>,
+  Ph.D. Thesis, École Polytechnique de Montréal.
+</p>
+<p>
+  Claesson, J. and Javed, S. 2012. <i>A load-aggregation method to
+  calculate extraction temperatures of borehole heat exchangers</i>.
+  ASHRAE Transactions 118(1): 530-539.
+</p>
+</html>",revisions="<html><ul>
+  <li>August 30, 2018, by Michael Wetter:<br/>
+    Refactored model to compute the temperature difference relative to
+    the initial temperature, because the model is independent of the
+    initial temperature.
+  </li>
+  <li>April 5, 2018, by Alex Laferrière:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end GroundTemperatureResponse;

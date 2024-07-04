@@ -19,16 +19,23 @@ equation
     AssertionLevel.warning);
   V_flow =if noEvent(intRes > Modelica.Constants.eps) then
     cofDcg*openingArea.A*sqrt(intRes) else 0;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Hall.</p>
-<h4>References</h4>
-<p>Hall, M. (2004). Untersuchungen zum thermisch induzierten Luftwechselpotential von Kippfenstern [Dissertation]. Universit&auml;t Kassel, Kassel. </p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Hall.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Hall, M. (2004). Untersuchungen zum thermisch induzierten
+  Luftwechselpotential von Kippfenstern [Dissertation]. Universität
+  Kassel, Kassel.
+</p>
 </html>"));
 end Hall;

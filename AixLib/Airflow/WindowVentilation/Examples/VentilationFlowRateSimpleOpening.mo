@@ -158,15 +158,20 @@ equation
           48,34},{48,74},{0,74},{0,94},{18,94}}, color={0,0,127}));
   connect(cofSunShaSet.y, vDI2078_3.cofSunSha_in)
     annotation (Line(points={{60.5,15},{70,15},{70,18}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
-<p>The result shows that the estimated volume flow can be quite different when using different models.</p>
+</html>", info="<html><p>
+  This example checks the models that simulate the window ventilation
+  flow rate with the simple opening.
+</p>
+<p>
+  The result shows that the estimated volume flow can be quite
+  different when using different models.
+</p>
 </html>"));
 end VentilationFlowRateSimpleOpening;

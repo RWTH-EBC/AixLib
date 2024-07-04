@@ -19,16 +19,24 @@ equation
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
   V_flow_win = 0.025*openingArea.A*winSpe10;
   V_flow = max(V_flow_th, V_flow_win);
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model contains the empirical expression developed by Warren and Parkins.</p>
-<h4>References</h4>
-<p>Warren, P. R., &amp; Parkins, L. M. (1984). Single-sided ventilation through open windows. In Air infiltration and Ventilation Centre (Chair), Windows in building design and maintenance, Goteborg. </p>
+</html>", info="<html><p>
+  This model contains the empirical expression developed by Warren and
+  Parkins.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Warren, P. R., & Parkins, L. M. (1984). Single-sided ventilation
+  through open windows. In Air infiltration and Ventilation Centre
+  (Chair), Windows in building design and maintenance, Goteborg.
+</p>
 </html>"));
 end WarrenParkins;

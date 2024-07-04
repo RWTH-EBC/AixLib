@@ -98,75 +98,76 @@ equation
           extent={{-100,140},{100,100}},
           textColor={0,0,255},
           textString="%name")}),
-    Documentation(info="<html>
- <p>
- Calculates time delay at both sides of the pipe as the difference between the
- current simulation time and the inlet time of the fluid at both ends of the pipe.
- </p>
- <h4>Main equation</h4>
- <p align=\"center\">
- <i>&part;z(x,t)/&part;t + v(t) &part;z(x,t)/&part;x = 0,</i>
- </p>
- <p>
- where <i>z(x,t)</i> is the spatial distribution as a function of time of any
- property <i>z</i> of the fluid. For the inlet time propagation, <i>z</i> will
- be replaced by the inlet time of the fluid <i>t<sub>in</sub></i>.
- </p>
- <h4>Implementation</h4>
- <p>
- The inlet time is approached as a fluid property and its propagation follows
- the one-dimensional wave equation, implemented using the spatialDistribution
- function. This components requires the mass flow through the pipe and the pipe
- dimensions in order to derive information about the fluid propagation.
- </p>
- <p>
- The component calculates the delay time at the inlet and the outlet port of the pipe.
- For the forward flow, the time delay is exposed at the output <code>tau</code>,
- and for the backward flow, the time delay is exposed at the output <code>tauRev</code>.
- </p>
- <h4>Assumption</h4>
- <p>
- No axial mixing takes place in the pipe.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 2, 2020, by Philipp Mehrfeld:<br/>
- Corrected calculation of <code>tau</code> and <code>tauRev</code> to be be 
- only positive.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1427\">#1427</a>.
- </li>
- <li>
- December 14, 2018, by Michael Wetter:<br/>
- Corrected argument of <code>spatialDistribution</code> operator to be a parameter
- expression.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1055\">#1055</a>.
- </li>
- <li>
- September 9, 2016 by Bram van der Heijde:<br/>
- Rename from PDETime_massFlowMod to PlugFlowTransportDelayMod
- </li>
- <li>
- December 2015 by Carles Ribas Tugores:<br/>
- Modification in delay calculation to fix issues.
- </li>
- <li>
- November 6, 2015 by Bram van der Heijde:<br/>
- Adapted flow parameter to mass flow rate instead of velocity.
- This change should also fix the reverse and zero flow issues.
- </li>
- <li>
- October 13, 2015 by Marcus Fuchs:<br/>
- Use <code>abs()</code> of normalized velocity input in order to avoid negative
- delay times.
- </li>
- <li>
- July 2015 by Arnout Aertgeerts:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+    Documentation(info="<html><p>
+  Calculates time delay at both sides of the pipe as the difference
+  between the current simulation time and the inlet time of the fluid
+  at both ends of the pipe.
+</p>
+<h4>
+  Main equation
+</h4>
+<p align=\"center\">
+  <i>∂z(x,t)/∂t + v(t) ∂z(x,t)/∂x = 0,</i>
+</p>
+<p>
+  where <i>z(x,t)</i> is the spatial distribution as a function of time
+  of any property <i>z</i> of the fluid. For the inlet time
+  propagation, <i>z</i> will be replaced by the inlet time of the fluid
+  <i>t<sub>in</sub></i>.
+</p>
+<h4>
+  Implementation
+</h4>
+<p>
+  The inlet time is approached as a fluid property and its propagation
+  follows the one-dimensional wave equation, implemented using the
+  spatialDistribution function. This components requires the mass flow
+  through the pipe and the pipe dimensions in order to derive
+  information about the fluid propagation.
+</p>
+<p>
+  The component calculates the delay time at the inlet and the outlet
+  port of the pipe. For the forward flow, the time delay is exposed at
+  the output <code>tau</code>, and for the backward flow, the time
+  delay is exposed at the output <code>tauRev</code>.
+</p>
+<h4>
+  Assumption
+</h4>
+<p>
+  No axial mixing takes place in the pipe.
+</p>
+</html>",revisions="<html><ul>
+  <li>December 2, 2020, by Philipp Mehrfeld:<br/>
+    Corrected calculation of <code>tau</code> and <code>tauRev</code>
+    to be be only positive.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1427\">#1427</a>.
+  </li>
+  <li>December 14, 2018, by Michael Wetter:<br/>
+    Corrected argument of <code>spatialDistribution</code> operator to
+    be a parameter expression.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1055\">#1055</a>.
+  </li>
+  <li>September 9, 2016 by Bram van der Heijde:<br/>
+    Rename from PDETime_massFlowMod to PlugFlowTransportDelayMod
+  </li>
+  <li>December 2015 by Carles Ribas Tugores:<br/>
+    Modification in delay calculation to fix issues.
+  </li>
+  <li>November 6, 2015 by Bram van der Heijde:<br/>
+    Adapted flow parameter to mass flow rate instead of velocity. This
+    change should also fix the reverse and zero flow issues.
+  </li>
+  <li>October 13, 2015 by Marcus Fuchs:<br/>
+    Use <code>abs()</code> of normalized velocity input in order to
+    avoid negative delay times.
+  </li>
+  <li>July 2015 by Arnout Aertgeerts:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowTransportDelay;

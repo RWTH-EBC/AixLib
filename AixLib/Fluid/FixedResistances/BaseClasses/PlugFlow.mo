@@ -124,56 +124,53 @@ equation
           lineColor={175,175,175},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={175,175,175})}),
-    Documentation(revisions="<html>
- <ul>
- <li>
- October 20, 2017, by Michael Wetter:<br/>
- Deleted various parameters and variables that were not used.
- <br/>
- Revised documentation to follow the guidelines.
- </li>
- <li>
- May 19, 2016 by Marcus Fuchs:<br/>
- Remove condition on <code>show_V_flow</code> for calculation of
- <code>V_flow</code> to conform with pedantic checking.
- </li>
- <li>
- October 10, 2015 by Marcus Fuchs:<br/>
- Copy Icon from KUL implementation and rename model.
- </li>
- <li>
- June 23, 2015 by Marcus Fuchs:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Model that computes the temperature propagation of
- a fluid flow through a pipe, idealized as a plug flow.
- </p>
- <h4>Main equation</h4>
- <p>
- The transport delay is computed using the one-dimensional wave equation
- without source or sink terms,
- <p align=\"center\" style=\"font-style:italic;\">
- &part;z(x,t)/&part;t + v(t) &part;z(x,t)/&part;x = 0,
- </p>
- <p>where <i>z(x,t)</i> is the spatial distribution as a function of time of any
- property <i>z</i> of the fluid.
- For the temperature propagation, <i>z </i>will be replaced by <i>T</i>.
- </p>
- <h4>Assumptions</h4>
- <p>
- This model is based on the following assumptions:
- </p>
- <ul>
- <li>
- Axial diffusion in water is assumed to be negligibe.
- </li>
- <li>
- The water temperature is assumed uniform in a cross section.
- </li>
- </ul>
- </html>"),
+    Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Michael Wetter:<br/>
+    Deleted various parameters and variables that were not used.<br/>
+    Revised documentation to follow the guidelines.
+  </li>
+  <li>May 19, 2016 by Marcus Fuchs:<br/>
+    Remove condition on <code>show_V_flow</code> for calculation of
+    <code>V_flow</code> to conform with pedantic checking.
+  </li>
+  <li>October 10, 2015 by Marcus Fuchs:<br/>
+    Copy Icon from KUL implementation and rename model.
+  </li>
+  <li>June 23, 2015 by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>",info="<html><p>
+  Model that computes the temperature propagation of a fluid flow
+  through a pipe, idealized as a plug flow.
+</p>
+<h4>
+  Main equation
+</h4>
+<p>
+  The transport delay is computed using the one-dimensional wave
+  equation without source or sink terms,
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  ∂z(x,t)/∂t + v(t) ∂z(x,t)/∂x = 0,
+</p>
+<p>
+  where <i>z(x,t)</i> is the spatial distribution as a function of time
+  of any property <i>z</i> of the fluid. For the temperature
+  propagation, <i>z</i> will be replaced by <i>T</i>.
+</p>
+<h4>
+  Assumptions
+</h4>
+<p>
+  This model is based on the following assumptions:
+</p>
+<ul>
+  <li>Axial diffusion in water is assumed to be negligibe.
+  </li>
+  <li>The water temperature is assumed uniform in a cross section.
+  </li>
+</ul>
+</html>"),
   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlow;

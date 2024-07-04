@@ -6,13 +6,14 @@ type SunshadingInstallationTypesVDI2078 = enumeration(
     Awning "Pivot-hung window with an awning",
     Screen "Pivot-hung window with a screen on the window")
   "Common installation situations of sunshading according to VDI 2078"
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This enum defines types of sunshading coefficient.</p>
+</html>", info="<html><p>
+  This enum defines types of sunshading coefficient.
+</p>
 </html>"));

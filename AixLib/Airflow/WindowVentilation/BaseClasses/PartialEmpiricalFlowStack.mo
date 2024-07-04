@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses;
+within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialEmpiricalFlowStack
   "Partial model for empirical expressions with stack effect considered"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlow;
@@ -15,14 +15,17 @@ protected
     "Temperature difference between room and ambient";
   Modelica.Units.SI.Temperature TAvg = (TRoom + TAmb)/2
     "Average temperature of room and ambient";
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"//&quot;https://github.com/RWTH-EBC/AixLib/issues/1492//&quot;\">issue
+    1492</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This partial model provides a base class of models that estimate ventilation volume flow. The model has indoor and ambient temperature input ports to account for the thermal stack effect.</p>
+</html>", info="<html><p>
+  This partial model provides a base class of models that estimate
+  ventilation volume flow. The model has indoor and ambient temperature
+  input ports to account for the thermal stack effect.
+</p>
 </html>"));
 end PartialEmpiricalFlowStack;
