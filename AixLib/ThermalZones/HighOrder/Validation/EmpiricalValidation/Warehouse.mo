@@ -32,7 +32,7 @@ model Warehouse
   Modelica.Blocks.Sources.CombiTimeTable BuildingSpecifications(
     tableOnFile=true,
     tableName="Table",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.txt"),
     columns={2,3,4,5},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Air exchange due to windows in the roof area, {2} Temp in the Building (Top), {3} Temp in the Building (Center), {4} Temp in the Building (Bottom), {5} Air exchange due to windows in the roof"
