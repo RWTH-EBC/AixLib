@@ -1,0 +1,40 @@
+
+Error in model:  AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate 
+Check of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate">AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate</a>:
+The model has 14 scalar unknowns and 14 scalar equations.
+DAE with 14 unknown scalars and 14 scalar equations.
+
+Check of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate">AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate</a> successful.
+Translation of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate">AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate</a>:
+Error:  model <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate">AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate</a> is partial.
+The DAE has 14 scalar unknowns and 14 scalar equations.
+
+Statistics
+
+Original Model
+  Number of components: 7
+  Variables: 36
+  Parameters: 22 (53 scalars)
+  Unknowns: 14 (14 scalars)
+  Equations: 11
+  Nontrivial: 11
+Translated Model
+  Constants: 1 scalars
+  Free parameters: 51 scalars
+  Parameter depending: 1 scalars
+  Time-varying variables: 12 scalars
+  Alias variables: 2 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+
+Selected continuous time states
+Error detected when generating code.
+Translation aborted.
+Error: ERRORS have been issued.
+Error: Simulations failed for:
+<a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate">AixLib.Airflow.WindowVentilation.BaseClasses.PartialExampleVentilationFlowRate</a>
+
