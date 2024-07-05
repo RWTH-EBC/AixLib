@@ -109,7 +109,6 @@ model OpeningArea "Calculation of different opening areas"
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical,
-
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Equivalent)
     "Pivot, vertical, equivalent opening"
     annotation (Placement(transformation(extent={{40,-20},{60,0}})));
@@ -138,7 +137,6 @@ model OpeningArea "Calculation of different opening areas"
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal,
-
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Equivalent)
     "Pivot, horizontal, equivalent opening"
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
