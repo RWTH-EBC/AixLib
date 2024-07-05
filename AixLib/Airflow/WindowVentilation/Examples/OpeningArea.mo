@@ -413,7 +413,7 @@ horizontal"),
 <ul>
   <li>
     June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\\\"https://github.com/RWTH-EBC/AixLib/issues/1492\\\">issue 1492</a>)
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
