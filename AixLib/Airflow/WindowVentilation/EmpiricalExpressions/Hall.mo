@@ -3,10 +3,10 @@ model Hall "Empirical expression developed by Hall (2004)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
       redeclare AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashHall openingArea(
-        final sWinSas=sWinSas, final winGapWidth=winGapWidth));
+        final sWinSas=sWinSas, final widthWinGap=widthWinGap));
   parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
     "Window sash thickness (depth)";
-  parameter Modelica.Units.SI.Length winGapWidth(min=0) = 0.01
+  parameter Modelica.Units.SI.Length widthWinGap(min=0) = 0.01
     "Gap width in the overlap area between the frame and the sash";
 protected
   Real cofDcg = 0.930*(openingArea.opnWidth^0.2)

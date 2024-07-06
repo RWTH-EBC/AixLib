@@ -5,7 +5,7 @@ model OpeningAreaSashHall
     final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward);
   parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
     "Window sash thickness (depth)";
-  parameter Modelica.Units.SI.Length winGapWidth(min=0) = 0.01
+  parameter Modelica.Units.SI.Length widthWinGap(min=0) = 0.01
     "Gap width in the overlap area between the frame and the sash";
   Real corNPL "Correction factor of the neutral pressure level";
 equation
@@ -15,7 +15,7 @@ equation
   corNPL = sqrt((winClrWidth - opnWidth)/winClrHeight);
   A = if noEvent(opnWidth > Modelica.Constants.eps) then
     corNPL*opnWidth*(winClrHeight*opnWidth/(opnWidth + sWinSas) - winClrHeight*(1 - corNPL))
-    + 2*winClrHeight*sWinSas/(opnWidth + sWinSas)*winGapWidth else 0;
+    + 2*winClrHeight*sWinSas/(opnWidth + sWinSas)*widthWinGap else 0;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},
