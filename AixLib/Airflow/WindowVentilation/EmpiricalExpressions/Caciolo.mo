@@ -2,7 +2,8 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Caciolo "Empirical expression developed by Caciolo et al. (2013)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
-      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+      redeclare replaceable model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));

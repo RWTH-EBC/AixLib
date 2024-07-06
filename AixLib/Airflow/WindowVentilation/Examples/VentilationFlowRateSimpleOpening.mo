@@ -34,85 +34,86 @@ model VentilationFlowRateSimpleOpening
   Modelica.Blocks.Sources.Sine winDirSet(amplitude=2*Modelica.Constants.pi, f=0.05)
     "Set wind direction"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  EmpiricalExpressions.WarrenParkins warrenParkins(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.WarrenParkins warrenParkins(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea) "Model Warren Parkins"
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
+        "Model Warren Parkins"
     annotation (Placement(transformation(extent={{20,80},{40,100}})));
-  EmpiricalExpressions.GidsPhaff gidsPhaff(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.GidsPhaff gidsPhaff(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea) "Model de Gids Phaff"
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
+      "Model de Gids Phaff"
     annotation (Placement(transformation(extent={{20,40},{40,60}})));
-  EmpiricalExpressions.LarsenHeiselberg larsenHeiselberg(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.LarsenHeiselberg larsenHeiselberg(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
     aziRef=aziRef) "Model Larsen Heiselberg"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
-  EmpiricalExpressions.Caciolo caciolo(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.Caciolo caciolo(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
     aziRef=aziRef) "Model Caciolo"
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
-  Utilities.WindProfilePowerLaw winSpeProLoc(height=locHeight, heightRef=10)
+  AixLib.Airflow.WindowVentilation.Utilities.WindProfilePowerLaw winSpeProLoc(
+    height=locHeight, heightRef=10)
     "Calculate wind speed profile local"
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
-  EmpiricalExpressions.Tang tang(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.Tang tang(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea) "Modell Tang"
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
+      "Modell Tang"
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-  EmpiricalExpressions.VDI2078 vDI2078_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078,
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.NoSunshading)
     "Model VDI 2078"
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
-  EmpiricalExpressions.VDI2078 vDI2078_2(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_2(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078,
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.ExternalBlindsOn)
     "Model VDI 2078"
     annotation (Placement(transformation(extent={{60,40},{80,60}})));
-  EmpiricalExpressions.VDI2078 vDI2078_3(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_3(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078,
     use_cofSunSha_in=true) "Model VDI 2078"
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
-  EmpiricalExpressions.DIN16798 dIN16798_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN16798 dIN16798_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
     heightASL=200) "Model DIN 16798"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
-  EmpiricalExpressions.DIN4108 dIN4108_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 dIN4108_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea)
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple)
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-  EmpiricalExpressions.ASHRAE aSHRAE(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.ASHRAE aSHRAE(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple
-      openingArea,
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
     aziRef=aziRef)
     annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
   Modelica.Blocks.Sources.Pulse cofSunShaSet(
@@ -203,5 +204,8 @@ equation
 </html>", info="<html>
 <p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
-</html>"));
+</html>"), experiment(
+      StopTime=180,
+      Interval=0.1,
+      __Dymola_Algorithm="Dassl"));
 end VentilationFlowRateSimpleOpening;

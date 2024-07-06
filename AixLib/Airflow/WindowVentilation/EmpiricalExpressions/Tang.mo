@@ -1,7 +1,8 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Tang "Empirical expression developed by Tang et al. (2016)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-    redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+    redeclare replaceable model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
   parameter Modelica.Units.SI.TemperatureDifference dTLim(min=0.02)=0.05
     "Limitation of temperature difference: Due to the temperature difference in
     the denominator, this expression is not applicable to low temperature

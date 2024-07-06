@@ -2,7 +2,8 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Hall "Empirical expression developed by Hall (2004)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      redeclare AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashHall openingArea(
+      redeclare model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashHall (
         final sWinSas=sWinSas, final widthWinGap=widthWinGap));
   parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
     "Window sash thickness (depth)";

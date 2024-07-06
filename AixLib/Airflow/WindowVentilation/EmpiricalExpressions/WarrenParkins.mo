@@ -1,7 +1,8 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model WarrenParkins "Empirical expression developed by Warren and Parkins (1984)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+    redeclare replaceable model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));

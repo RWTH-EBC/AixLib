@@ -18,13 +18,16 @@ partial model PartialEmpiricalFlow
     final quantity="VolumeFlowRate", final unit="m3/s", min=0)
     "Ventilation flow rate"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  replaceable AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea
-    openingArea constrainedby
+  replaceable model OpeningArea =
+    AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea
+    constrainedby
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea(
       final winClrWidth=winClrWidth,
       final winClrHeight=winClrHeight)
     "Model for window opening area calculation"
-    annotation (Placement(transformation(extent={{20,60},{40,80}})), choicesAllMatching=true);
+    annotation(choicesAllMatching=true);
+  OpeningArea openingArea "Model instance for window opening area calculation"
+    annotation (Placement(transformation(extent={{20,60},{40,80}})));
 equation
   connect(opnWidth_in, openingArea.opnWidth_in) annotation (Line(
       points={{0,120},{0,70},{18,70}},

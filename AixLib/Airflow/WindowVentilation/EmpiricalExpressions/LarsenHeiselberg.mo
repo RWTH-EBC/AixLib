@@ -2,7 +2,8 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model LarsenHeiselberg "Empirical expression developed by Larsen and Heiselberg (2008)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
-      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple openingArea);
+      redeclare replaceable model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
   parameter Modelica.Units.SI.Velocity winSpeLim(min=0.25)=1
     "Limitation of wind speed: Due to the wind speed in the denominator, this
     expression is not applicable to low wind speeds, output with 0 if the wind

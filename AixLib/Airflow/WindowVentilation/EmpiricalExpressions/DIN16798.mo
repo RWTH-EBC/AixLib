@@ -2,7 +2,8 @@
 model DIN16798 "Empirical expression according to DIN EN 16798-7 (2017)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-      redeclare replaceable AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN16798 openingArea);
+      redeclare replaceable model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN16798);
   parameter Modelica.Units.SI.Height heightASL=0 "Height above sea level";
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"

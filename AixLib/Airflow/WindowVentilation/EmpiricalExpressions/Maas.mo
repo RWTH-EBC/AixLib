@@ -1,7 +1,8 @@
 within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Maas "Empirical expression developed by Maas (1995)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
-    redeclare AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon openingArea(
+    redeclare model OpeningArea =
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon (
       final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
       final opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective));
   Modelica.Blocks.Interfaces.RealInput winSpe13(unit="m/s", min=0)
