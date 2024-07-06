@@ -7,7 +7,8 @@ partial model PartialOpeningArea
   parameter Modelica.Units.SI.Height winClrHeight(min=0)
     "Height of the window clear opening";
   parameter Boolean use_opnWidth_in=true
-    "Use input port for window sash opening width";
+    "Use input port for window sash opening width"
+    annotation(choices(checkBox=true));
   parameter Modelica.Units.SI.Length prescribedOpnWidth(min=0)=0
     "Fixed value of prescribed opening width"
     annotation(Dialog(enable = not use_opnWidth_in));

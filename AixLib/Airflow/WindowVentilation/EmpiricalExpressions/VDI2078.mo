@@ -4,7 +4,8 @@ model VDI2078 "Empirical expression according to VDI 2078 (2015)"
     redeclare replaceable model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078);
   parameter Boolean use_cofSunSha_in=false
-    "Use input port for sunshading coefficient";
+    "Use input port for sunshading coefficient"
+    annotation(choices(checkBox=true));
   parameter
     AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.NoSunshading
