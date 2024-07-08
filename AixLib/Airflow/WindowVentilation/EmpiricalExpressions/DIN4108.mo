@@ -14,13 +14,13 @@ protected
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation
-  intRes = Modelica.Constants.g_n*winClrHeight*dT_RoomAmb/TAmb;
+  intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb/TAmb;
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
     AssertionLevel.warning);
-  V_flow_th =if noEvent(intRes > Modelica.Constants.eps) then
+  V_flow_th = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
-  V_flow_win =cofWin*openingArea.A*winSpeLoc;
+  V_flow_win = cofWin*openingArea.A*winSpeLoc;
   V_flow = sqrt(V_flow_th^2 + V_flow_win^2);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),

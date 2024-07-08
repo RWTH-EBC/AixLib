@@ -13,11 +13,11 @@ protected
   Real cof3 = 0.01 "Coefficient 3";
   Real intRes "Interim result";
 equation
-  intRes = cof1*(winSpe10^2) + cof2*winClrHeight*abs(dT_RoomAmb) + cof3;
+  intRes = cof1*(winSpe10^2) + cof2*winClrHeight*abs(dTRoomAmb) + cof3;
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow =if noEvent(intRes > Modelica.Constants.eps) then
+  V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     1/2*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>
 <ul>

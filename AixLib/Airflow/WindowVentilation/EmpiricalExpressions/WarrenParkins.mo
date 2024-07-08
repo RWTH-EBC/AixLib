@@ -12,7 +12,7 @@ protected
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation
-  intRes = Modelica.Constants.g_n*winClrHeight*dT_RoomAmb/TAvg;
+  intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb/TAvg;
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
     AssertionLevel.warning);

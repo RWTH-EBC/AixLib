@@ -81,34 +81,34 @@ model VentilationFlowRateSashOpening
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon (
         opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
         opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric))
-      "Modell Tang"
+    "Model Tang"
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vdi2078_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078,
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.NoSunshading)
-    "Model VDI 2078"
+    "Model VDI 2078, without sun shading"
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_2(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vdi2078_2(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078 (
         use_opnWidth_in=false, prescribedOpnWidth=0.1),
     sunShaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.SunshadingInstallationTypesVDI2078.ExternalBlindsOn)
-    "Model VDI 2078"
+    "Model VDI 2078, with sun shading"
     annotation (Placement(transformation(extent={{60,40},{80,60}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vDI2078_3(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.VDI2078 vdi2078_3(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078 (
         use_opnWidth_in=false, prescribedOpnWidth=0.1),
-    use_cofSunSha_in=true) "Model VDI 2078"
+    use_cofSunSha_in=true) "Model VDI 2078, with sun shading input"
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN16798 dIN16798_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN16798 din16798_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
@@ -116,21 +116,22 @@ model VentilationFlowRateSashOpening
         opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward),
     heightASL=200) "Model DIN 16798"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 dIN4108_1(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 din4108_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108 (
         opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward))
+    "Model DIN 4108"
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.ASHRAE aSHRAE(
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.ASHRAE ashrae(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon (
         opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
         opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric),
-    aziRef=aziRef)
+    aziRef=aziRef) "Model ASHRAE"
     annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
   Modelica.Blocks.Sources.Pulse cofSunShaSet(
     amplitude=0.5,
@@ -201,39 +202,39 @@ equation
           -62},{10,98},{18,98}}, color={0,0,127}));
   connect(tang.TAmb, warrenParkins.TAmb) annotation (Line(points={{18,-66},{0,-66},
           {0,94},{18,94}}, color={0,0,127}));
-  connect(vDI2078_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,78},
+  connect(vdi2078_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,78},
           {10,78},{10,98},{18,98}}, color={0,0,127}));
-  connect(vDI2078_1.TAmb, warrenParkins.TAmb)
+  connect(vdi2078_1.TAmb, warrenParkins.TAmb)
     annotation (Line(points={{58,74},{0,74},{0,94},{18,94}}, color={0,0,127}));
-  connect(vDI2078_2.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,58},
+  connect(vdi2078_2.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,58},
           {52,58},{52,78},{10,78},{10,98},{18,98}}, color={0,0,127}));
-  connect(vDI2078_2.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,54},{
+  connect(vdi2078_2.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,54},{
           48,54},{48,74},{0,74},{0,94},{18,94}}, color={0,0,127}));
-  connect(dIN16798_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-2},
+  connect(din16798_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-2},
           {10,-2},{10,98},{18,98}}, color={0,0,127}));
-  connect(dIN16798_1.TAmb, warrenParkins.TAmb)
+  connect(din16798_1.TAmb, warrenParkins.TAmb)
     annotation (Line(points={{58,-6},{0,-6},{0,94},{18,94}}, color={0,0,127}));
-  connect(dIN16798_1.winSpe10, warrenParkins.winSpe10) annotation (Line(points={
+  connect(din16798_1.winSpe10, warrenParkins.winSpe10) annotation (Line(points={
           {58,-12},{-10,-12},{-10,88},{18,88}}, color={0,0,127}));
-  connect(dIN4108_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-42},
+  connect(din4108_1.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-42},
           {10,-42},{10,98},{18,98}}, color={0,0,127}));
-  connect(dIN4108_1.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,-46},
+  connect(din4108_1.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,-46},
           {0,-46},{0,94},{18,94}}, color={0,0,127}));
-  connect(dIN4108_1.winSpeLoc, caciolo.winSpeLoc) annotation (Line(points={{58,-52},
+  connect(din4108_1.winSpeLoc, caciolo.winSpeLoc) annotation (Line(points={{58,-52},
           {-30,-52},{-30,-32},{18,-32}}, color={0,0,127}));
-  connect(aSHRAE.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-82},{
+  connect(ashrae.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,-82},{
           10,-82},{10,98},{18,98}}, color={0,0,127}));
-  connect(aSHRAE.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,-86},{0,
+  connect(ashrae.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,-86},{0,
           -86},{0,94},{18,94}}, color={0,0,127}));
-  connect(aSHRAE.winSpeLoc, caciolo.winSpeLoc) annotation (Line(points={{58,-92},
+  connect(ashrae.winSpeLoc, caciolo.winSpeLoc) annotation (Line(points={{58,-92},
           {-30,-92},{-30,-32},{18,-32}}, color={0,0,127}));
-  connect(aSHRAE.winDir, larsenHeiselberg.winDir) annotation (Line(points={{58,-96},
+  connect(ashrae.winDir, larsenHeiselberg.winDir) annotation (Line(points={{58,-96},
           {-20,-96},{-20,4},{18,4}}, color={0,0,127}));
-  connect(vDI2078_3.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,38},
+  connect(vdi2078_3.TRoom, warrenParkins.TRoom) annotation (Line(points={{58,38},
           {52,38},{52,78},{10,78},{10,98},{18,98}}, color={0,0,127}));
-  connect(vDI2078_3.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,34},{
+  connect(vdi2078_3.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,34},{
           48,34},{48,74},{0,74},{0,94},{18,94}}, color={0,0,127}));
-  connect(cofSunShaSet.y, vDI2078_3.cofSunSha_in)
+  connect(cofSunShaSet.y,vdi2078_3. cofSunSha_in)
     annotation (Line(points={{60.5,15},{70,15},{70,18}}, color={0,0,127}));
   connect(winOpnWidthSet.y, warrenParkins.opnWidth_in)
     annotation (Line(points={{99,110},{30,110},{30,102}}, color={0,0,127}));
@@ -245,13 +246,13 @@ equation
         points={{30,-18},{44,-18},{44,110},{30,110},{30,102}}, color={0,0,127}));
   connect(tang.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points=
           {{30,-58},{44,-58},{44,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(vDI2078_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
+  connect(vdi2078_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
         points={{70,82},{84,82},{84,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(dIN16798_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
+  connect(din16798_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
         points={{70,2},{84,2},{84,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(dIN4108_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
+  connect(din4108_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
         points={{70,-38},{84,-38},{84,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(aSHRAE.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
+  connect(ashrae.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
         points={{70,-78},{84,-78},{84,110},{30,110},{30,102}}, color={0,0,127}));
   connect(maas.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points=
           {{30,-98},{44,-98},{44,110},{30,110},{30,102}}, color={0,0,127}));
@@ -283,5 +284,8 @@ equation
 </html>", info="<html>
 <p>This example checks the models that simulate the window ventilation flow rate with the sash opening. For the sash opening type, all models are set to the bottom-hung opening.</p>
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
-</html>"));
+</html>"), experiment(
+      StopTime=180,
+      Interval=0.1,
+      __Dymola_Algorithm="Dassl"));
 end VentilationFlowRateSashOpening;

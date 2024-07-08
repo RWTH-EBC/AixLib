@@ -13,16 +13,17 @@ protected
   Real cof_dT = 0.02 "Coefficient of temperature difference";
   Real intRes "Interim result";
 equation
-  assert(abs(dT_RoomAmb) >= dTLim,
+  assert(abs(dTRoomAmb) >= dTLim,
     "The absolute temperature difference is less than the limited value, the term of temperature difference correlation will be set to 0",
     AssertionLevel.warning);
-  intRes = if noEvent(abs(dT_RoomAmb) >= dTLim)
-    then Modelica.Constants.g_n*winClrHeight*abs(dT_RoomAmb)/TRoom + cof_dT/abs(dT_RoomAmb)
-    else Modelica.Constants.g_n*winClrHeight*abs(dT_RoomAmb)/TRoom + 0;
+  intRes = if noEvent(abs(dTRoomAmb) >= dTLim)
+    then Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + cof_dT/
+      abs(dTRoomAmb)
+    else Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + 0;
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow =if noEvent(intRes > Modelica.Constants.eps) then
+  V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>
 <ul>

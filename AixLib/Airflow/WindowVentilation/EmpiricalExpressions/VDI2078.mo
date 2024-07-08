@@ -27,7 +27,7 @@ equation
     cofSunSha = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.CoeffsSunshadingInstallationVDI2078(
       sunShaTyp);
   end if;
-  intRes = Modelica.Constants.g_n*openingArea.effHeight*dT_RoomAmb/(2*TAmb);
+  intRes = Modelica.Constants.g_n*openingArea.effHeight*dTRoomAmb/(2*TAmb);
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);

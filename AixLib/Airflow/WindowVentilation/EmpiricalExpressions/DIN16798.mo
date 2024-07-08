@@ -23,8 +23,8 @@ protected
   Modelica.Units.SI.Density rhoAmbASL = TRef/TAmb*rhoRefASL
     "Air density, by ambient temperature, by height above sea level";
 equation
-  V_flow =rhoRefASL0/rhoAmbASL*cofExt*openingArea.A/2*sqrt(
-    max(cofWin*(winSpe10^2), cofTh*winClrHeight*abs(dT_RoomAmb)));
+  V_flow = rhoRefASL0/rhoAmbASL*cofExt*openingArea.A/2*sqrt(
+    max(cofWin*(winSpe10^2), cofTh*winClrHeight*abs(dTRoomAmb)));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>

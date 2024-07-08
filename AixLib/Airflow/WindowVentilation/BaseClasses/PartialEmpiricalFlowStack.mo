@@ -11,7 +11,7 @@ partial model PartialEmpiricalFlowStack
     "Ambient temperature, ranging from -30 to 50 °C"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
 protected
-  Modelica.Units.SI.TemperatureDifference dT_RoomAmb = TRoom - TAmb
+  Modelica.Units.SI.TemperatureDifference dTRoomAmb = TRoom - TAmb
     "Temperature difference between room and ambient";
   Modelica.Units.SI.Temperature TAvg = (TRoom + TAmb)/2
     "Average temperature of room and ambient";

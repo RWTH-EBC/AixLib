@@ -32,11 +32,11 @@ equation
     cofWin = 1.355 - 0.179*winSpeLoc;
     V_flow_win = 0;
   end if;
-  intRes = Modelica.Constants.g_n*winClrHeight*dT_RoomAmb*cofWin/TAvg;
+  intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb*cofWin/TAvg;
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
     AssertionLevel.warning);
-  V_flow_th =if noEvent(intRes > Modelica.Constants.eps) then
+  V_flow_th = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*openingArea.A*cofDcg*sqrt(intRes) else 0;
   V_flow = V_flow_th + V_flow_win;
   annotation (Documentation(revisions="<html>
