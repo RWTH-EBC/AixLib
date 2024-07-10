@@ -22,10 +22,10 @@ equation
   if abs(incAngDeg) <= 90 then
     /*Windward*/
     cofWin = 1.234 - 0.490*winSpeLoc + 0.048*(winSpeLoc^2);
-    assert(winSpeLoc >= winSpeLim,
-      "The wind speed in the windward condition is less than the limitation, the V_flow_win will be set to 0",
+    assert(winSpeLoc > winSpeLim,
+      "The wind speed in the windward condition is less or equal than the limitation, the V_flow_win will be set to 0",
       AssertionLevel.warning);
-    V_flow_win =if noEvent(winSpeLoc >= winSpeLim) then
+    V_flow_win =if noEvent(winSpeLoc > winSpeLim) then
       0.0357*openingArea.A*(winSpeLoc - winSpeLim) else 0;
   else
     /*Leeward*/

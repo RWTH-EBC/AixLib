@@ -3,7 +3,7 @@ model OpeningAreaSashDIN16798
   "Specified DIN CEN/TR 16798-8: Only valid for bottom- or top-hung opening"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash;
   Real cof "Coefficient depending on the kind of window";
-equation
+initial equation
   assert(
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
@@ -12,6 +12,7 @@ equation
   assert((winClrHeight/winClrWidth >= 1) and (winClrHeight/winClrWidth <= 2),
     "For hinged windows, the model applies for height and width geometries of approx. 1:1 to 2:1",
     AssertionLevel.warning);
+equation
   cof = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.CoeffOpeningAreaDIN16798(
     opnAng);
   A = cof*AClrOpn;

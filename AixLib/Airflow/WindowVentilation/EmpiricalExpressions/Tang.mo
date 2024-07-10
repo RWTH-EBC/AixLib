@@ -13,10 +13,10 @@ protected
   Real cof_dT = 0.02 "Coefficient of temperature difference";
   Real intRes "Interim result";
 equation
-  assert(abs(dTRoomAmb) >= dTLim,
-    "The absolute temperature difference is less than the limited value, the term of temperature difference correlation will be set to 0",
+  assert(abs(dTRoomAmb) > dTLim,
+    "The absolute temperature difference is less or equal than the limited value, the term of temperature difference correlation will be set to 0",
     AssertionLevel.warning);
-  intRes = if noEvent(abs(dTRoomAmb) >= dTLim)
+  intRes = if noEvent(abs(dTRoomAmb) > dTLim)
     then Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + cof_dT/
       abs(dTRoomAmb)
     else Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + 0;

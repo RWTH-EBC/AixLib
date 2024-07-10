@@ -140,7 +140,7 @@ model VentilationFlowRateSashOpening
     annotation (Placement(transformation(extent={{50,10},{60,20}})));
   Modelica.Blocks.Sources.SawTooth winOpnWidthSet(amplitude=0.3, period=10)
     "Set window opening width"
-    annotation (Placement(transformation(extent={{120,100},{100,120}})));
+    annotation (Placement(transformation(extent={{120,80},{100,100}})));
   Modelica.Blocks.Sources.Ramp dpSet(
     height=20,
     duration=160,
@@ -237,25 +237,26 @@ equation
   connect(cofSunShaSet.y,vdi2078_3. cofSunSha_in)
     annotation (Line(points={{60.5,15},{70,15},{70,18}}, color={0,0,127}));
   connect(winOpnWidthSet.y, warrenParkins.opnWidth_in)
-    annotation (Line(points={{99,110},{30,110},{30,102}}, color={0,0,127}));
+    annotation (Line(points={{99,90},{84,90},{84,100},{30,100},{30,102}},
+                                                          color={0,0,127}));
   connect(gidsPhaff.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{30,62},{44,62},{44,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{30,62},{44,62},{44,100},{30,100},{30,102}}, color={0,0,127}));
   connect(larsenHeiselberg.opnWidth_in, warrenParkins.opnWidth_in) annotation (
-      Line(points={{30,22},{44,22},{44,110},{30,110},{30,102}}, color={0,0,127}));
+      Line(points={{30,22},{44,22},{44,100},{30,100},{30,102}}, color={0,0,127}));
   connect(caciolo.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{30,-18},{44,-18},{44,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(tang.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points=
-          {{30,-58},{44,-58},{44,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{30,-18},{44,-18},{44,100},{30,100},{30,102}}, color={0,0,127}));
+  connect(tang.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points={{30,-58},
+          {44,-58},{44,100},{30,100},{30,102}},           color={0,0,127}));
   connect(vdi2078_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{70,82},{84,82},{84,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{70,82},{84,82},{84,100},{30,100},{30,102}}, color={0,0,127}));
   connect(din16798_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{70,2},{84,2},{84,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{70,2},{84,2},{84,100},{30,100},{30,102}}, color={0,0,127}));
   connect(din4108_1.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{70,-38},{84,-38},{84,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{70,-38},{84,-38},{84,100},{30,100},{30,102}}, color={0,0,127}));
   connect(ashrae.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(
-        points={{70,-78},{84,-78},{84,110},{30,110},{30,102}}, color={0,0,127}));
-  connect(maas.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points=
-          {{30,-98},{44,-98},{44,110},{30,110},{30,102}}, color={0,0,127}));
+        points={{70,-78},{84,-78},{84,100},{30,100},{30,102}}, color={0,0,127}));
+  connect(maas.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points={{30,-98},
+          {44,-98},{44,100},{30,100},{30,102}},           color={0,0,127}));
   connect(maas.TRoom, warrenParkins.TRoom) annotation (Line(points={{18,-102},{
           10,-102},{10,98},{18,98}}, color={0,0,127}));
   connect(maas.TAmb, warrenParkins.TAmb) annotation (Line(points={{18,-106},{0,
@@ -268,8 +269,8 @@ equation
           10,-122},{10,98},{18,98}}, color={0,0,127}));
   connect(hall.TAmb, warrenParkins.TAmb) annotation (Line(points={{58,-126},{0,
           -126},{0,94},{18,94}}, color={0,0,127}));
-  connect(hall.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points=
-          {{70,-118},{84,-118},{84,110},{30,110},{30,102}}, color={0,0,127}));
+  connect(hall.opnWidth_in, warrenParkins.opnWidth_in) annotation (Line(points={{70,-118},
+          {84,-118},{84,100},{30,100},{30,102}},            color={0,0,127}));
   connect(dpSet.y, jiang.dp)
     annotation (Line(points={{-79,-90},{-62,-90}}, color={0,0,127}));
   connect(jiang.opnWidth_in, tang.opnWidth_in)
@@ -287,5 +288,6 @@ equation
 </html>"), experiment(
       StopTime=180,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Diagram(coordinateSystem(extent={{-100,-140},{120,100}})));
 end VentilationFlowRateSashOpening;

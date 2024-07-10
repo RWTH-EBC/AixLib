@@ -41,6 +41,14 @@ protected
     "Geometric opening area by 90° opening";
   Modelica.Units.SI.Area AEqvOpn90(min=0)
     "Equivalent opening area by 90° opening";
+initial equation
+  if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingVertical or
+    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingHorizontal then
+    assert(
+      opnAreaTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric,
+      "By opening type 'Sliding', only 'geometric' opening area is valid.",
+      AssertionLevel.error);
+  end if;
 equation
   /*Hinged opening*/
   if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
@@ -48,10 +56,12 @@ equation
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward then
     /*Calculate area values*/
-    AGeoOpn = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
-      lenAxs, lenAxsToFrm, opnWidth);
-    APrjOpn = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
-      lenAxs, lenAxsToFrm, opnWidth);
+    AGeoOpn =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
+      lenAxs, lenAxsToFrm, opnWidth_internal);
+    APrjOpn =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
+      lenAxs, lenAxsToFrm, opnWidth_internal);
     opnWidth90 =
       AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.AngleToWidth(
       lenAxs, lenAxsToFrm, Modelica.Constants.pi/2);
@@ -62,10 +72,12 @@ equation
   elseif opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical or
     opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal then
     /*Calculate area values*/
-    AGeoOpn = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
-      lenAxs, lenAxsToFrm, opnWidth)*2;
-    APrjOpn = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
-      lenAxs, lenAxsToFrm, opnWidth)*2;
+    AGeoOpn =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.GeometricOpeningArea(
+      lenAxs, lenAxsToFrm, opnWidth_internal)*2;
+    APrjOpn =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.ProjectiveOpeningArea(
+      lenAxs, lenAxsToFrm, opnWidth_internal)*2;
     opnWidth90 =
       AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.AngleToWidth(
       lenAxs, lenAxsToFrm, Modelica.Constants.pi/2);
@@ -78,19 +90,15 @@ equation
     /*Calculate area values*/
     if opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SlidingVertical then
       /*Vertical*/
-      AGeoOpn = winClrWidth*opnWidth;
+      AGeoOpn = winClrWidth*opnWidth_internal;
       opnWidth90 = winClrHeight;
       AGeoOpn90 = winClrWidth*opnWidth90;
     else
       /*Horizontal*/
-      AGeoOpn = winClrHeight*opnWidth;
+      AGeoOpn = winClrHeight*opnWidth_internal;
       opnWidth90 = winClrWidth;
       AGeoOpn90 = winClrHeight*opnWidth90;
     end if;
-    assert(
-      opnAreaTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric,
-      "By opening type 'Sliding', only 'geometric' opening area is applicable.",
-      AssertionLevel.warning);
     APrjOpn = AGeoOpn;
 
   /*Exceptions*/

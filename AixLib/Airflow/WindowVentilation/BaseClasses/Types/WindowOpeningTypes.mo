@@ -8,7 +8,6 @@ type WindowOpeningTypes = enumeration(
     PivotHorizontal "Pivot horizontal opening (centre hinge horizontal)",
     SlidingVertical "Sliding opening vertical (single-hung or double-hung)",
     SlidingHorizontal "Sliding opening horizontal (slider)")
-    "Enumeration to define window opening types" annotation (Documentation(info=
-       "<html>
-<p>This enum defines window sash opening types.</p>
+    "Enumeration to define window opening types" annotation (Documentation(info="<html>
+<p>This enum defines window sash opening types, used in <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/PartialOpeningAreaSash.mo\">AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash</a>.</p>
 </html>"));

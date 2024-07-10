@@ -14,5 +14,5 @@ type SunshadingInstallationTypesVDI2078 = enumeration(
   </li>
 </ul>
 </html>", info="<html>
-<p>This enum defines types of sunshading coefficient.</p>
+<p>This enum defines types of sunshading coefficient, used in <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Functions/CoeffsSunshadingInstallationVDI2078.mo\">AixLib.Airflow.WindowVentilation.BaseClasses.Functions.CoeffsSunshadingInstallationVDI2078</a>.</p>
 </html>"));

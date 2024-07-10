@@ -4,5 +4,5 @@ type SmallestAngleDifferenceTypes = enumeration(
     Range360 "Result in the range of 0 to 360°")
     "Enumeration to define smallest angle difference types for the function"
   annotation (Documentation(info="<html>
-<p>This enum defines types of smallest angle difference.</p>
+<p>This enum defines types of smallest angle difference, used in <a href=\"modelica://AixLib/Airflow/WindowVentilation/BaseClasses/Functions/SmallestAngleDifference.mo\">AixLib.Airflow.WindowVentilation.BaseClasses.Functions.SmallestAngleDifference</a>.</p>
 </html>"));

@@ -8,16 +8,24 @@ partial model PartialOpeningAreaSash
   /*Variables to describe the opening*/
   Modelica.Units.SI.Angle opnAng(
     min=0, max=Modelica.Constants.pi/2, displayUnit="deg")=
-    if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward or
-    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungOutward) then
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrHeight, winClrWidth, opnWidth)
-    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward or
-    opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward) then
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrWidth, winClrHeight, opnWidth)
-    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical) then
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrHeight, winClrWidth/2, opnWidth)
-    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal) then
-    AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(winClrWidth, winClrHeight/2, opnWidth)
+    if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungInward
+      or opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.SideHungOutward)
+    then
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrHeight, winClrWidth, opnWidth_internal)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.TopHungOutward
+       or opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward)
+    then
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrWidth, winClrHeight, opnWidth_internal)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotVertical)
+    then
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrHeight, winClrWidth/2, opnWidth_internal)
+    else if (opnTyp == AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal)
+    then
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged.WidthToAngle(
+        winClrWidth, winClrHeight/2, opnWidth_internal)
     else 0 "Window sash opening angle";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

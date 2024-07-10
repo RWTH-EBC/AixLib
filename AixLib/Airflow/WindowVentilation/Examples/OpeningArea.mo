@@ -8,23 +8,23 @@ model OpeningArea "Calculation of different opening areas"
     height=0.5,
     duration=50,
     startTime=5) "Window opening width set value"
-    annotation (Placement(transformation(extent={{-140,0},{-120,20}})));
+    annotation (Placement(transformation(extent={{-160,0},{-140,20}})));
   Modelica.Blocks.Sources.Ramp opnAngSet(
     height=30,
     duration=50,
     startTime=5) "Window opening angle set value"
-    annotation (Placement(transformation(extent={{-140,120},{-120,140}})));
+    annotation (Placement(transformation(extent={{-160,-160},{-140,-140}})));
   Modelica.Blocks.Math.UnitConversions.From_deg from_deg
     "Convert from deg to rad"
-    annotation (Placement(transformation(extent={{-100,120},{-80,140}})));
+    annotation (Placement(transformation(extent={{-100,-160},{-80,-140}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple opnSimp(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight) "Simple opening without sash"
-    annotation (Placement(transformation(extent={{-140,80},{-120,100}})));
+    annotation (Placement(transformation(extent={{-80,120},{-60,140}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimpleVDI2078 opnSimpVDI2078(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight) "Simple opening without sash, VDI 2078"
-    annotation (Placement(transformation(extent={{-140,40},{-120,60}})));
+    annotation (Placement(transformation(extent={{-40,120},{-20,140}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon opnSasSdHunInGeo(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
@@ -159,7 +159,7 @@ model OpeningArea "Calculation of different opening areas"
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal,
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective)
     "Pivot, horizontal, effective opening, prescribed input"
-    annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
+    annotation (Placement(transformation(extent={{120,-60},{140,-40}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon opnSasSldVerGeo(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
@@ -191,109 +191,114 @@ model OpeningArea "Calculation of different opening areas"
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward)
     "Bottom-hung, inward, DIN 4108"
-    annotation (Placement(transformation(extent={{-40,-132},{-20,-112}})));
+    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108 opnSasPivHorDIN4108(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.PivotHorizontal,
     sWinSas=sWinSas) "Pivot, horizontal, DIN 4108"
-    annotation (Placement(transformation(extent={{-40,-160},{-20,-140}})));
+    annotation (Placement(transformation(extent={{40,-100},{60,-80}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashHall opnSasBtmHunInHall(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     sWinSas=sWinSas) "Bottom-hung, inward, Hall"
-    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
+    annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078 opnSasBtmHunInVDI2078(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     sWinSas=sWinSas) "Bottom-hung, inward, VDI2078"
-    annotation (Placement(transformation(extent={{40,-100},{60,-80}})));
+    annotation (Placement(transformation(extent={{120,-100},{140,-80}})));
   AixLib.Airflow.WindowVentilation.Utilities.AngleToWidth angToWidth(lenAxs=opnSasAngBtmHunInGeo.lenAxs,
       lenAxsToFrm=opnSasAngBtmHunInGeo.lenAxsToFrm)
     "Convert opening angle to opening width"
-    annotation (Placement(transformation(extent={{-60,120},{-40,140}})));
+    annotation (Placement(transformation(extent={{-60,-160},{-40,-140}})));
   AixLib.Airflow.WindowVentilation.Utilities.WidthToAngle widthToAng(lenAxs=opnSasAngBtmHunInGeo.lenAxs,
       lenAxsToFrm=opnSasAngBtmHunInGeo.lenAxsToFrm)
     "Convert opening width to opening angle"
-    annotation (Placement(transformation(extent={{-20,140},{0,160}})));
+    annotation (Placement(transformation(extent={{-20,-140},{0,-120}})));
   AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon opnSasAngBtmHunInGeo(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
     opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
     opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric)
     "Input of angle, bottom-hung, inward, geometric opening"
-    annotation (Placement(transformation(extent={{0,120},{20,140}})));
+    annotation (Placement(transformation(extent={{20,-160},{40,-140}})));
 
 equation
-  connect(opnWidthSet.y, opnSasSdHunInGeo.opnWidth_in) annotation (Line(points={
-          {-119,10},{-90,10},{-90,70},{-82,70}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSdHunInPrj.opnWidth_in) annotation (Line(points={
-          {-119,10},{-90,10},{-90,30},{-82,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSdHunInEqv.opnWidth_in) annotation (Line(points={
-          {-119,10},{-90,10},{-90,-10},{-82,-10}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSdHunInEff.opnWidth_in) annotation (Line(points={
-          {-119,10},{-90,10},{-90,-50},{-82,-50}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSdHunOutGeo.opnWidth_in) annotation (Line(points=
-         {{-119,10},{-50,10},{-50,70},{-42,70}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasBtmHunInGeo.opnWidth_in) annotation (Line(points=
-         {{-119,10},{-10,10},{-10,70},{-2,70}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasBtmHunInPrj.opnWidth_in) annotation (Line(points=
-         {{-119,10},{-10,10},{-10,30},{-2,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasBtmHunInEqv.opnWidth_in) annotation (Line(points=
-         {{-119,10},{-10,10},{-10,-10},{-2,-10}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasBtmHunInEff.opnWidth_in) annotation (Line(points=
-         {{-119,10},{-10,10},{-10,-50},{-2,-50}}, color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSdHunInGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {-90,10},{-90,70},{-82,70}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSdHunInPrj.opnWidth_in) annotation (Line(points={{-139,10},
+          {-90,10},{-90,30},{-82,30}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSdHunInEqv.opnWidth_in) annotation (Line(points={{-139,10},
+          {-90,10},{-90,-10},{-82,-10}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSdHunInEff.opnWidth_in) annotation (Line(points={{-139,10},
+          {-90,10},{-90,-50},{-82,-50}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSdHunOutGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {-50,10},{-50,70},{-42,70}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasBtmHunInGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {-10,10},{-10,70},{-2,70}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasBtmHunInPrj.opnWidth_in) annotation (Line(points={{-139,10},
+          {-10,10},{-10,30},{-2,30}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasBtmHunInEqv.opnWidth_in) annotation (Line(points={{-139,10},
+          {-10,10},{-10,-10},{-2,-10}},           color={0,0,127}));
+  connect(opnWidthSet.y, opnSasBtmHunInEff.opnWidth_in) annotation (Line(points={{-139,10},
+          {-10,10},{-10,-50},{-2,-50}},           color={0,0,127}));
   connect(opnWidthSet.y, opnSasTopHunOutPrj.opnWidth_in) annotation (Line(
-        points={{-119,10},{-50,10},{-50,30},{-42,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivVerGeo.opnWidth_in) annotation (Line(points={{
-          -119,10},{30,10},{30,70},{38,70}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivVerPrj.opnWidth_in) annotation (Line(points={{
-          -119,10},{30,10},{30,30},{38,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivVerEqv.opnWidth_in) annotation (Line(points={{
-          -119,10},{30,10},{30,-10},{38,-10}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivVerEff.opnWidth_in) annotation (Line(points={{
-          -119,10},{30,10},{30,-50},{38,-50}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivHorGeo.opnWidth_in) annotation (Line(points={{
-          -119,10},{70,10},{70,70},{78,70}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivHorPrj.opnWidth_in) annotation (Line(points={{
-          -119,10},{70,10},{70,30},{78,30}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivHorEqv.opnWidth_in) annotation (Line(points={{
-          -119,10},{70,10},{70,-10},{78,-10}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasPivHorEff.opnWidth_in) annotation (Line(points={{
-          -119,10},{70,10},{70,-50},{78,-50}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSldVerGeo.opnWidth_in) annotation (Line(points={{
-          -119,10},{-50,10},{-50,-10},{-42,-10}}, color={0,0,127}));
-  connect(opnWidthSet.y, opnSasSldHorGeo.opnWidth_in) annotation (Line(points={{
-          -119,10},{-50,10},{-50,-50},{-42,-50}}, color={0,0,127}));
-  connect(opnAngSet.y, from_deg.u) annotation (Line(points={{-119,130},{-102,130}},
+        points={{-139,10},{-50,10},{-50,30},{-42,30}}, color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivVerGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {30,10},{30,70},{38,70}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivVerPrj.opnWidth_in) annotation (Line(points={{-139,10},
+          {30,10},{30,30},{38,30}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivVerEqv.opnWidth_in) annotation (Line(points={{-139,10},
+          {30,10},{30,-10},{38,-10}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivVerEff.opnWidth_in) annotation (Line(points={{-139,10},
+          {30,10},{30,-50},{38,-50}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivHorGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {70,10},{70,70},{78,70}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivHorPrj.opnWidth_in) annotation (Line(points={{-139,10},
+          {70,10},{70,30},{78,30}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivHorEqv.opnWidth_in) annotation (Line(points={{-139,10},
+          {70,10},{70,-10},{78,-10}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasPivHorEff.opnWidth_in) annotation (Line(points={{-139,10},
+          {70,10},{70,-50},{78,-50}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSldVerGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {-50,10},{-50,-10},{-42,-10}},          color={0,0,127}));
+  connect(opnWidthSet.y, opnSasSldHorGeo.opnWidth_in) annotation (Line(points={{-139,10},
+          {-50,10},{-50,-50},{-42,-50}},          color={0,0,127}));
+  connect(opnAngSet.y, from_deg.u) annotation (Line(points={{-139,-150},{-102,-150}},
                                 color={0,0,127}));
   connect(opnWidthSet.y, opnSasBtmHunInDIN16798.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-90},{-82,-90}}, color={0,0,127}));
+        points={{-139,10},{-90,10},{-90,-90},{-82,-90}}, color={0,0,127}));
   connect(opnWidthSet.y, opnSasSdHunInDIN4108.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-70},{-50,-70},{-50,-90},{-42,-90}},
+        points={{-139,10},{-90,10},{-90,-70},{-50,-70},{-50,-90},{-42,-90}},
         color={0,0,127}));
   connect(opnWidthSet.y, opnSasBtmHunInDIN4108.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-70},{-50,-70},{-50,-122},{-42,-122}},
+        points={{-139,10},{-90,10},{-90,-70},{-10,-70},{-10,-90},{-2,-90}},
         color={0,0,127}));
   connect(opnWidthSet.y, opnSasPivHorDIN4108.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-70},{-50,-70},{-50,-150},{-42,-150}},
+        points={{-139,10},{-90,10},{-90,-70},{30,-70},{30,-90},{38,-90}},
         color={0,0,127}));
   connect(opnWidthSet.y, opnSasBtmHunInHall.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-70},{-8,-70},{-8,-90},{-2,-90}}, color=
+        points={{-139,10},{-90,10},{-90,-70},{70,-70},{70,-90},{78,-90}}, color=
          {0,0,127}));
   connect(opnWidthSet.y, opnSasBtmHunInVDI2078.opnWidth_in) annotation (Line(
-        points={{-119,10},{-90,10},{-90,-70},{30,-70},{30,-90},{38,-90}}, color=
+        points={{-139,10},{-90,10},{-90,-70},{110,-70},{110,-90},{118,-90}},
+                                                                          color=
          {0,0,127}));
   connect(from_deg.y, angToWidth.u)
-    annotation (Line(points={{-79,130},{-62,130}}, color={0,0,127}));
+    annotation (Line(points={{-79,-150},{-62,-150}},
+                                                   color={0,0,127}));
   connect(angToWidth.y, opnSasAngBtmHunInGeo.opnWidth_in)
-    annotation (Line(points={{-39,130},{-2,130}}, color={0,0,127}));
-  connect(angToWidth.y, widthToAng.u) annotation (Line(points={{-39,130},{-30,130},
-          {-30,150},{-22,150}}, color={0,0,127}));
+    annotation (Line(points={{-39,-150},{18,-150}},
+                                                  color={0,0,127}));
+  connect(angToWidth.y, widthToAng.u) annotation (Line(points={{-39,-150},{-30,-150},
+          {-30,-130},{-22,-130}},
+                                color={0,0,127}));
   annotation (experiment(
       StopTime=60,
       Interval=1,
-      __Dymola_Algorithm="Dassl"), Diagram(graphics={
+      __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-160,-160},
+            {160,160}}),                   graphics={
         Rectangle(
           extent={{-100,100},{-60,-60}},
           lineColor={28,108,200},
@@ -315,22 +320,22 @@ inward"),
           textString="Side-hung
 outward"),
         Text(
-          extent={{-120,80},{-100,60}},
+          extent={{-140,80},{-100,60}},
           textColor={0,0,0},
           fontSize=16,
           textString="geo."),
         Text(
-          extent={{-120,40},{-100,20}},
+          extent={{-140,40},{-100,20}},
           textColor={0,0,0},
-          textString="proj.",
-          fontSize=16),
+          fontSize=16,
+          textString="prj."),
         Text(
-          extent={{-120,0},{-100,-20}},
+          extent={{-140,0},{-100,-20}},
           textColor={0,0,0},
-          textString="eq.",
-          fontSize=16),
+          fontSize=16,
+          textString="eqv."),
         Text(
-          extent={{-120,-40},{-100,-60}},
+          extent={{-140,-40},{-100,-60}},
           textColor={0,0,0},
           textString="eff.",
           fontSize=16),
@@ -355,7 +360,7 @@ inward"),
           textString="Top-hung
 outward"),
         Rectangle(
-          extent={{18,100},{60,-60}},
+          extent={{20,100},{60,-60}},
           lineColor={28,108,200},
           fillColor={244,125,35},
           fillPattern=FillPattern.Solid),
@@ -365,7 +370,7 @@ outward"),
           textString="Pivot
 vertical"),
         Rectangle(
-          extent={{60,100},{100,-100}},
+          extent={{60,100},{100,-60}},
           lineColor={28,108,200},
           fillColor={102,44,145},
           fillPattern=FillPattern.Solid),
@@ -395,10 +400,28 @@ vertical"),
           textString="Sliding
 horizontal"),
         Text(
-          extent={{-120,-80},{-100,-100}},
+          extent={{-140,-80},{-100,-100}},
           textColor={0,0,0},
           fontSize=15,
-          textString="others")}),
+          textString="others"),
+        Text(
+          extent={{-160,160},{0,140}},
+          textColor={0,0,0},
+          fontSize=14,
+          textString="Simple opening",
+          horizontalAlignment=TextAlignment.Left),
+        Text(
+          extent={{-160,120},{0,100}},
+          textColor={0,0,0},
+          fontSize=13,
+          horizontalAlignment=TextAlignment.Left,
+          textString="Sash opening (input opening width)"),
+        Text(
+          extent={{-160,-100},{0,-120}},
+          textColor={0,0,0},
+          fontSize=12,
+          horizontalAlignment=TextAlignment.Left,
+          textString="Sash opening (input opening angle)")}),
     Documentation(revisions="<html>
 <ul>
   <li>

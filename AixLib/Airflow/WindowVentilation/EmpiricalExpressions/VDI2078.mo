@@ -17,22 +17,23 @@ model VDI2078 "Empirical expression according to VDI 2078 (2015)"
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-120})));
-  Modelica.Blocks.Interfaces.RealOutput cofSunSha(min=0, max=1)
+  Modelica.Blocks.Interfaces.RealOutput cofSunSha_internal(min=0, max=1)
     "Internal port to connect to cofSunSha_in or prescribed coefficient defined by type";
 protected
   Real intRes "Interim result";
 equation
-  connect(cofSunSha_in, cofSunSha);
+  connect(cofSunSha_in, cofSunSha_internal);
   if not use_cofSunSha_in then
-    cofSunSha = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.CoeffsSunshadingInstallationVDI2078(
+    cofSunSha_internal =
+      AixLib.Airflow.WindowVentilation.BaseClasses.Functions.CoeffsSunshadingInstallationVDI2078(
       sunShaTyp);
   end if;
   intRes = Modelica.Constants.g_n*openingArea.effHeight*dTRoomAmb/(2*TAmb);
   assert(intRes > Modelica.Constants.eps,
     "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
     AssertionLevel.warning);
-  V_flow = if noEvent(intRes > Modelica.Constants.eps)
-    then cofSunSha*openingArea.A*sqrt(intRes) else 0;
+  V_flow =if noEvent(intRes > Modelica.Constants.eps) then cofSunSha_internal*
+    openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

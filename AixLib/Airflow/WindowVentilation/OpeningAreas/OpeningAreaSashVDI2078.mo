@@ -18,11 +18,11 @@ equation
     AssertionLevel.warning);
   effHeight = 2/3*(winClrHeight - ovlHeight);
   ovlHeight = if sWinSas > Modelica.Constants.eps then
-    sWinSas/(opnWidth + sWinSas)*winClrHeight else 0;
-  corRev = if opnWidth <= heightRevToFrm then 1
-    else 1 - 0.6*(1 - heightRevToFrm/opnWidth);
-  A = if noEvent(opnWidth > Modelica.Constants.eps) then
-    ((winClrWidth + winClrHeight - ovlHeight)*opnWidth/3)*corRev else 0;
+    sWinSas/(opnWidth_internal + sWinSas)*winClrHeight else 0;
+  corRev = if opnWidth_internal <= heightRevToFrm then 1 else
+    1 - 0.6*(1 - heightRevToFrm/opnWidth_internal);
+  A = if noEvent(opnWidth_internal > Modelica.Constants.eps) then
+    ((winClrWidth + winClrHeight - ovlHeight)*opnWidth_internal/3)*corRev else 0;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},

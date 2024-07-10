@@ -40,10 +40,10 @@ equation
     cof2 = 0.0005;
     cof3 = 0.0111;
   end if;
-  assert(winSpe10 >= winSpeLim,
-    "The wind speed is less than the limited value, the term of wind correlation will be set to 0",
+  assert(winSpe10 > winSpeLim,
+    "The wind speed is equal or less than the limited value, the term of wind correlation will be set to 0",
     AssertionLevel.warning);
-  intRes =if noEvent(winSpe10 >= winSpeLim)
+  intRes =if noEvent(winSpe10 > winSpeLim)
     then cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight
       + cof3*dCofWinInc*dTRoomAmb/(winSpe10^2)
     else cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight + 0;

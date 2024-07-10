@@ -8,14 +8,16 @@ model OpeningAreaSashHall
   parameter Modelica.Units.SI.Length widthWinGap(min=0) = 0.01
     "Gap width in the overlap area between the frame and the sash";
   Real corNPL "Correction factor of the neutral pressure level";
-equation
+initial equation
   assert(winClrHeight >= winClrWidth,
     "The model only applies to windows whose height is not less than the width",
     AssertionLevel.warning);
-  corNPL = sqrt((winClrWidth - opnWidth)/winClrHeight);
-  A = if noEvent(opnWidth > Modelica.Constants.eps) then
-    corNPL*opnWidth*(winClrHeight*opnWidth/(opnWidth + sWinSas) - winClrHeight*(1 - corNPL))
-    + 2*winClrHeight*sWinSas/(opnWidth + sWinSas)*widthWinGap else 0;
+equation
+  corNPL = sqrt((winClrWidth - opnWidth_internal)/winClrHeight);
+  A = if noEvent(opnWidth_internal > Modelica.Constants.eps) then corNPL*
+    opnWidth_internal*(winClrHeight*opnWidth_internal/(opnWidth_internal +
+    sWinSas) - winClrHeight*(1 - corNPL)) + 2*winClrHeight*sWinSas/(
+    opnWidth_internal + sWinSas)*widthWinGap else 0;
   annotation (Icon(graphics={
         Text(
           extent={{-100,-100},{100,-60}},

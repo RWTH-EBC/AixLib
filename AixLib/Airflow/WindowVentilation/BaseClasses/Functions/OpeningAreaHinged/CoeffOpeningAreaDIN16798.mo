@@ -11,7 +11,7 @@ algorithm
   angDeg := Modelica.Units.Conversions.to_deg(ang);
   assert(angDeg <= 90,
     "The model only applies to a maximum tilt angle of 90°",
-    AssertionLevel.warning);
+    AssertionLevel.error);
   cof := 2.6e-7*(angDeg^3) - 1.19e-4*(angDeg^2) + 1.86e-2*angDeg;
   annotation (Documentation(revisions="<html>
 <ul>

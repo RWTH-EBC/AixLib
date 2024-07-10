@@ -6,19 +6,20 @@ model WindProfilePowerLaw
   parameter Modelica.Units.SI.Height heightRef(min=0)=10
     "Reference height of the known wind speed";
   parameter Modelica.Units.SI.Length lenRuf(min=0)=0.6 "Roughness length";
-  Real cof "Hellmann exponent (coefficient)";
+  final parameter Real cof = 1/log(height/lenRuf)
+    "Hellmann exponent (coefficient)";
   Modelica.Blocks.Interfaces.RealInput winSpeRef(unit="m/s", min=0)
     "Wind speed at the reference height"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput winSpe(unit="m/s", min=0)
     "Wind speed at height"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-equation
+initial equation
   assert(
     height > lenRuf,
     "Power law not applicable by height less than the roughness length",
     AssertionLevel.error);
-  cof = 1/log(height/lenRuf);
+equation
   winSpe = winSpeRef*(height/heightRef)^cof;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),

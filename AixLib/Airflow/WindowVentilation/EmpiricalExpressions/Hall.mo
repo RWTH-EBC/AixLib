@@ -10,7 +10,7 @@ model Hall "Empirical expression developed by Hall (2004)"
   parameter Modelica.Units.SI.Length widthWinGap(min=0) = 0.01
     "Gap width in the overlap area between the frame and the sash";
 protected
-  Real cofDcg = 0.930*(openingArea.opnWidth^0.2)
+  Real cofDcg = 0.930*(openingArea.opnWidth_internal^0.2)
     "Discharge coefficient, case: without window reveal, without radiator";
   Real intRes "Interim result";
 equation
