@@ -28,7 +28,8 @@ model CtrAHUBasic "Simple controller for AHU"
     final reverseAction=false)
                               annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,40},{20,60}})));
-  CtrRegBasic ctrRh(
+  CtrRegBasic_adapted
+              ctrRh(
     final useExternalTset=true,
     final useExternalTMea=true,
     Td=0,
@@ -131,10 +132,10 @@ model CtrAHUBasic "Simple controller for AHU"
   Modelica.Blocks.Sources.Constant ConstFlap1(final k=1)
                                                         "Flaps are always open"
     annotation (Placement(transformation(extent={{-68,-34},{-56,-22}})));
-  Modelica.Blocks.Math.BooleanToReal booleanToReal
+  Modelica.Blocks.Logical.Not        not1
     annotation (Placement(transformation(extent={{-140,-50},{-120,-30}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=273.15 +
-        18)
+        14)
     annotation (Placement(transformation(extent={{-174,-50},{-154,-30}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
@@ -267,22 +268,25 @@ equation
       pattern=LinePattern.Dash));
   connect(ConstFlap1.y, add.u2) annotation (Line(points={{-55.4,-28},{-48,-28},
           {-48,-27.2},{-43.4,-27.2}}, color={0,0,127}));
-  connect(greaterThreshold.y, booleanToReal.u)
+  connect(greaterThreshold.y, not1.u)
     annotation (Line(points={{-153,-40},{-142,-40}}, color={255,0,255}));
-  connect(greaterThreshold.u, genericAHUBus.TOdaMea) annotation (Line(points={{
-          -176,-40},{-182,-40},{-182,-26},{-186,-26},{-186,0.05},{100.05,0.05}},
+  connect(greaterThreshold.u, genericAHUBus.TOdaMea) annotation (Line(points={{-176,
+          -40},{-182,-40},{-182,-100},{100,-100},{100,0},{100.05,0},{100.05,
+          0.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PID_HRS.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{1,
-          -24},{64,-24},{64,-26},{130,-26},{130,-18},{146,-18},{146,0.05},{
-          100.05,0.05}}, color={0,0,127}), Text(
+  connect(PID_HRS.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{1,-24},
+          {100,-24},{100,0.05},{100.05,0.05}},
+                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(not1.y, ctrRh.Tset1) annotation (Line(points={{-119,-40},{-88,-40},{
+          -88,2},{-24,2},{-24,26},{-2,26}}, color={255,0,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
@@ -322,5 +326,10 @@ equation
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
-</html>"));
+</html>"),
+    experiment(
+      StartTime=17452800,
+      StopTime=17500000,
+      Interval=60,
+      __Dymola_Algorithm="Dassl"));
 end CtrAHUBasic;
