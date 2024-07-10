@@ -208,5 +208,8 @@ equation
 </html>"), experiment(
       StopTime=180,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mos"
+        "Simulate and plot"));
 end VentilationFlowRateSimpleOpening;

@@ -432,5 +432,8 @@ horizontal"),
 </html>", info="<html>
 <p>This example simulates and checks the models in package <a href=\"modelica://AixLib/Airflow/WindowVentilation/OpeningAreas/package.mo\">OpeningAreas</a>, calculating the window opening area with variable opening width or angle.</p>
 <p>The icon of the model changes itself automatically to indicate the type of window opening that is now being set.</p>
-</html>"));
+</html>"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/OpeningArea.mos"
+        "Simulate and plot"));
 end OpeningArea;

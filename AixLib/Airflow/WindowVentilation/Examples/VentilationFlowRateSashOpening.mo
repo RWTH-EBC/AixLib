@@ -289,5 +289,8 @@ equation
       StopTime=180,
       Interval=0.1,
       __Dymola_Algorithm="Dassl"),
-    Diagram(coordinateSystem(extent={{-100,-140},{120,100}})));
+    Diagram(coordinateSystem(extent={{-100,-140},{120,100}})),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSashOpening.mos"
+        "Simulate and plot"));
 end VentilationFlowRateSashOpening;
