@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140_ideal_heater_with_capacity
+model Ashrae140_ideal_heater
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -11,9 +11,10 @@ model Ashrae140_ideal_heater_with_capacity
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900 zoneParam,
+    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900_modified
+      zoneParam(T_start(displayUnit="K") = 290.65),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15,
+    T_start(displayUnit="K") = 290.65,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
@@ -238,6 +239,11 @@ model Ashrae140_ideal_heater_with_capacity
   Modelica.Blocks.Interfaces.RealOutput T_Capacity "Value of Real output"
     annotation (Placement(transformation(extent={{258,-72},{278,-52}}),
         iconTransformation(extent={{284,-178},{304,-158}})));
+  Modelica.Blocks.Sources.RealExpression realExpression17(y=heatCapacitor.port.Q_flow)
+              annotation (Placement(transformation(extent={{122,-42},{142,-22}})));
+  Modelica.Blocks.Interfaces.RealOutput Qflow_capacitor "Value of Real output"
+    annotation (Placement(transformation(extent={{160,-42},{180,-22}}),
+        iconTransformation(extent={{270,-46},{290,-26}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-108,40},{-46,40},{-46,-3.6},{-24,-3.6}},
@@ -306,6 +312,8 @@ equation
     annotation (Line(points={{48.5,-95},{62,-95},{62,-96}}, color={0,0,127}));
   connect(convection.fluid, thermalZone1.intGainsConv) annotation (Line(points=
           {{72,-86},{72,-19.84},{32.56,-19.84}}, color={191,0,0}));
+  connect(realExpression17.y, Qflow_capacitor)
+    annotation (Line(points={{143,-32},{170,-32}}, color={0,0,127}));
   annotation (experiment(
       StartTime=259200,
       StopTime=345600,
@@ -313,4 +321,4 @@ equation
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140_ideal_heater_with_capacity;
+end Ashrae140_ideal_heater;
