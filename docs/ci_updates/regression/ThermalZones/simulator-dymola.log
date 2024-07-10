@@ -709,92 +709,92 @@ rCheck = checkModel("AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad");
 Check of AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad:
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as MixingVolumeMoistAir airload in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_a port_a in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_a port_a in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_b port_b in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_b port_b in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as StaticTwoPortConservationEquation steBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as StaticTwoPortConservationEquation steBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as ConservationEquation dynBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.Interfaces.ConservationEquation
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.Interfaces.ConservationEquation
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as ConservationEquation dynBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as MixingVolumeMoistAir airload in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
   Context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
 Warning: Inconsistency for connectors dimensioned using parameter with annotation(Dialog(connectorSizing=true)).
  Some connector elements are not connected.
@@ -803,17 +803,12 @@ This is either because the connections and/or parameters has been edited textual
   wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.ports[1]
   wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.ports[2]
  
-The model has the same number of unknowns and equations: 10085
-The model could not be deduced to be symbolically well-posed.
-The model has
-  10001+5*varRad.n+nHeatedRooms+2*wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.nPorts+2  *wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.nPorts  +2*wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.airload.dynBal.nPorts
-scalar unknowns and
-  9864+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Door.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Door.twoStar_RadEx1.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Door.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Door.twoStar_RadEx1.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall3.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inner_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2a.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall3.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.Ceiling.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.floor.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2b.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom3.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom4.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom5.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+5*wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.nPorts+5  *wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.nPorts  +5*wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.airload.dynBal.nPorts
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  10085
-Check of AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad successful.
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
 Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos\",", "AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad.statistics.log");
@@ -829,92 +824,92 @@ simulateModel("AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad", startTime=0,
 Translation of AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad:
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as MixingVolumeMoistAir airload in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_a port_a in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_a port_a in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_b port_b in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as FluidPort_b port_b in AixLib.Fluid.Interfaces.PartialTwoPort
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as StaticTwoPortConservationEquation steBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as StaticTwoPortConservationEquation steBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as ConservationEquation dynBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.Interfaces.ConservationEquation
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.Fluid.Interfaces.ConservationEquation
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as ConservationEquation dynBal in AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as MixingVolumeMoistAir airload in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
  Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
   Component declared as VesselFluidPorts_b ports in AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom
 Warning: Base class Medium is not transitively non-replaceable,
  since it is a short class equal to a replaceable class.
-  File: /tmp/tmp-AixLib-0-535kmena/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
+  File: /tmp/tmp-AixLib-0-vrsz89jx/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 193
   Context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
 Warning: Inconsistency for connectors dimensioned using parameter with annotation(Dialog(connectorSizing=true)).
  Some connector elements are not connected.
@@ -923,416 +918,15 @@ This is either because the connections and/or parameters has been edited textual
   wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.ports[1]
   wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.ports[2]
  
-The DAE has 10085 scalar unknowns and 10085 scalar equations.
-Redundant consistent initial conditions.
-Removed the following equations which are redundant and consistent: 
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.p,     wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.Xi)}));
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.p,     wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.Xi)}));
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.p,     wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.Xi, {1    -sum(wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.Xi)}));
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.p,     wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.Xi)}));
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.p,     wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.Xi)}));
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.p,     wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.Xi)}));
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.p,     wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.Xi, {1    -sum(wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.Xi)}));
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.p,     wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.Xi)}));
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.p,     wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.Xi,     {1-sum(wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.Xi)}));
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.T =     temperature_phX_Unique1(wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.p,     wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.hOut_internal,     cat(1, wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.Xi, {1-    sum(wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.Xi)}));
- 
-This required evaluation of 
-the interactive parameters 
-    constRooms[1].k(start = 293.15)
-    constRooms[2].k(start = 293.15)
-    constRooms[3].k(start = 288.15)
-    constRooms[4].k(start = 293.15)
-    constRooms[5].k(start = 293.15)
-    constRooms[6].k(start = 293.15)
-    constRooms[7].k(start = 293.15)
-    constRooms[8].k(start = 288.15)
-    constRooms[9].k(start = 297.15)
-    constRooms[10].k(start = 293.15)
-    wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.T0_air(start =       288.15)
-    wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.X_start[1](start       = 0.01)
-    wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.X_start[1](start       = 0.01)
-    wholeHouseBuildingEnvelope.T0_air(start = 293.15)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Bath.T0_air(start = 297.15)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Bath.X_start[1](start = 0.01)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Children1.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Children2.X_start[1](start =       0.01)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.T0_air(start =       288.15)
-    wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.X_start[1](start =       0.01)
- 
-The redundancies involve
-initial equations: 
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[1].Xi_outflow[1]     = wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[2].Xi_outflow[1]     = wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[4].Xi_outflow[1]     = wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[5].Xi_outflow[1]     = wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[3].Xi_outflow[1]     = wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[1].Xi_outflow[1] =     wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[2].Xi_outflow[1] =     wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.medium.T =     wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[4].Xi_outflow[1] =     wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[5].Xi_outflow[1] =     wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.X_start[1];
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.medium.T     = wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.T_start;
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[3].Xi_outflow[1] =     wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.X_start[1];
- 
-Sparse solver handling possible: false.
-Due to flag Advanced.SparseActivate=false.
-Model sparse and large enough: true.
-Sparse solvers are available for dassl, lsodar, cvode, radau, esdirk*, sdirk* (using OpenMP, set number of cores with Advanced.NumberOfCores).
-The translated model contains large nonlinear systems of equations. The simulation may run faster in DAE mode. Enable DAE mode by setting the flag Advanced.Define.DAEsolver and use one of the solvers Dassl, Radau IIa, Esdirk*, or Sdirk34hw.
- 
-Statistics
- 
-Original Model
-  Number of components: 2249
-  Variables: 21077
-  Constants: 100 (100 scalars)
-  Parameters: 10792 (14111 scalars)
-  Unknowns: 10185 (10213 scalars)
-  Differentiated variables: 261 scalars
-  Equations: 8021
-  Nontrivial: 6915
-Translated Model
-  Constants: 4197 scalars
-  Free parameters: 1111 scalars
-  Parameter depending: 10065 scalars
-  Outputs: 11 scalars
-  Continuous time states: 251 scalars
-  Time-varying variables: 2306 scalars
-  Alias variables: 6745 scalars
-  Number of mixed real/discrete systems of equations: 0
-  Sizes of linear systems of equations: {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}
-  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  Sizes of nonlinear systems of equations: {6, 48, 6, 43, 6, 36, 6, 41, 6, 38, 6, 43, 6, 48, 6, 43, 6, 44, 6, 41, 52}
-  Sizes after manipulation of the nonlinear systems: {5, 9, 5, 8, 5, 7, 5, 8, 5, 7, 5, 8, 5, 9, 5, 8, 5, 9, 5, 8, 10}
-  Number of numerical Jacobians: 0
-  Initialization problem
-    Sizes of nonlinear systems of equations: {1, 1, 1, 1}
-    Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1}
-    Number of numerical Jacobians: 0
- 
-Selected continuous time states
-Statically selected continuous time states
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.airload.dynBal.m
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.airload.dynBal.mXi[1]
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.airload.dynBal.U
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom3.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom3.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom4.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom4.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom5.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.floorRoom5.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.OW2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.roof2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[1].cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[1].cap[2].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[1].cap[3].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[2].cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[2].cap[2].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[2].cap[3].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[3].cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[3].cap[2].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[3].cap[3].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[4].cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[4].cap[2].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[4].cap[3].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[5].cap[1].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[5].cap[2].T
-  wholeHouseBuildingEnvelope.groPlateLowPart[5].cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall2b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall3.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.inside_wall3.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall1b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall1b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.roof.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall1b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.roof.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.roof.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall1b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.inside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.outside_wall2.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.roof.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.Ceiling.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.floor.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.floor.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inner_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inner_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2a.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2a.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2b.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall2b.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall3.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.inside_wall3.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[3].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.outside_wall1.Wall.simpleNLayer.cap[4].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.Wall.simpleNLayer.cap[1].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.Wall.simpleNLayer.cap[2].T
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.roof.Wall.simpleNLayer.cap[3].T
- 
-Dynamically selected continuous time states
-There are 10 sets of dynamic state selection.
-From set 1 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.m
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children2.airload.dynBal.U
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[5].h_outflow
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[5].Xi_outflow[]
- 
-From set 2 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.m
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.airload.dynBal.U
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[1].h_outflow
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[1].Xi_outflow[]
- 
-From set 3 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.m
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.airload.dynBal.U
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[2].h_outflow
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[2].Xi_outflow[]
- 
-From set 4 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.m
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.airload.dynBal.U
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[3].h_outflow
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[3].Xi_outflow[]
- 
-From set 5 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[4].h_outflow
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[4].Xi_outflow[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.m
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.airload.dynBal.U
- 
-From set 6 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.m
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.airload.dynBal.U
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[5].h_outflow
-  wholeHouseBuildingEnvelope.groundFloor_Building.portVent_in[5].Xi_outflow[]
- 
-From set 7 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.m
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.airload.dynBal.U
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[1].h_outflow
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[1].Xi_outflow[]
- 
-From set 8 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.m
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.upperFloor_Building.Children1.airload.dynBal.U
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[2].h_outflow
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[2].Xi_outflow[]
- 
-From set 9 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.m
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.airload.dynBal.U
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[3].h_outflow
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[3].Xi_outflow[]
- 
-From set 10 there are 2 states to be selected from:
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.m
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.mXi[]
-  wholeHouseBuildingEnvelope.upperFloor_Building.Bath.airload.dynBal.U
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[4].h_outflow
-  wholeHouseBuildingEnvelope.upperFloor_Building.portVent_in[4].Xi_outflow[]
- 
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
 Warning: WARNINGS have been issued.
-Finished
- = true
+Error: ERRORS have been issued.
+ = false
 
+Instantiation of ?:
 Declaring variable: Boolean rScript ;
 
 savelog("AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad.translation.log"); = true
@@ -2213,10 +1807,11 @@ savelog("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.translation.
 
 rCheck = checkModel("AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270");
 Check of AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270:
-The model has the same number of unknowns and equations: 2803
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 2803
-Check of AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270 successful.
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos\",", "AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270.statistics.log");
@@ -2230,87 +1825,14 @@ Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.HighOrder.Exam
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos");
 simulateModel("AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270", startTime=0, stopTime=86400, outputInterval=3600, tolerance=1e-6, method="dassl", resultFile="AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270");
 Translation of AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270:
-The DAE has 2803 scalar unknowns and 2803 scalar equations.
- 
-Statistics
- 
-Original Model
-  Number of components: 649
-  Variables: 5512
-  Constants: 52 (287 scalars)
-  Parameters: 2703 (3593 scalars)
-  Unknowns: 2757 (2803 scalars)
-  Differentiated variables: 47 scalars
-  Equations: 2204
-  Nontrivial: 1841
-Translated Model
-  Constants: 1151 scalars
-  Free parameters: 1302 scalars
-  Parameter depending: 1670 scalars
-  Outputs: 5 scalars
-  Continuous time states: 47 scalars
-  Time-varying variables: 742 scalars
-  Alias variables: 1818 scalars
-  Number of mixed real/discrete systems of equations: 0
-  Sizes of linear systems of equations: {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3,   4, 4, 4, 4, 4, 4, 4}
-  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0}
-  Sizes of nonlinear systems of equations: {55, 55}
-  Sizes after manipulation of the nonlinear systems: {13, 13}
-  Number of numerical Jacobians: 0
- 
-Selected continuous time states
-Statically selected continuous time states
-  idealHeaterCooler.pITempCool.PI.I.y
-  idealHeaterCooler.pITempHeat.PI.I.y
-  idealHeaterCooler_dyn.pITempCool.PI.I.y
-  idealHeaterCooler_dyn.pITempHeat.PI.I.y
-  integrator2.y
-  integratorCool.y
-  integratorHeat.y
-  Room.airload.dynBal.m
-  Room.airload.dynBal.mXi[1]
-  Room.airload.dynBal.U
-  Room.ceiling.Wall.simpleNLayer.cap[1].T
-  Room.ceiling.Wall.simpleNLayer.cap[2].T
-  Room.ceiling.Wall.simpleNLayer.cap[3].T
-  Room.floor.Wall.simpleNLayer.cap[1].T
-  Room.floor.Wall.simpleNLayer.cap[2].T
-  Room.wallEast.Wall.simpleNLayer.cap[1].T
-  Room.wallEast.Wall.simpleNLayer.cap[2].T
-  Room.wallEast.Wall.simpleNLayer.cap[3].T
-  Room.wallNorth.Wall.simpleNLayer.cap[1].T
-  Room.wallNorth.Wall.simpleNLayer.cap[2].T
-  Room.wallNorth.Wall.simpleNLayer.cap[3].T
-  Room.wallSouth.Wall.simpleNLayer.cap[1].T
-  Room.wallSouth.Wall.simpleNLayer.cap[2].T
-  Room.wallSouth.Wall.simpleNLayer.cap[3].T
-  Room.wallWest.Wall.simpleNLayer.cap[1].T
-  Room.wallWest.Wall.simpleNLayer.cap[2].T
-  Room.wallWest.Wall.simpleNLayer.cap[3].T
-  Room_dyn.airload.dynBal.m
-  Room_dyn.airload.dynBal.mXi[1]
-  Room_dyn.airload.dynBal.U
-  Room_dyn.ceiling.Wall.simpleNLayer.cap[1].T
-  Room_dyn.ceiling.Wall.simpleNLayer.cap[2].T
-  Room_dyn.ceiling.Wall.simpleNLayer.cap[3].T
-  Room_dyn.floor.Wall.simpleNLayer.cap[1].T
-  Room_dyn.floor.Wall.simpleNLayer.cap[2].T
-  Room_dyn.wallEast.Wall.simpleNLayer.cap[1].T
-  Room_dyn.wallEast.Wall.simpleNLayer.cap[2].T
-  Room_dyn.wallEast.Wall.simpleNLayer.cap[3].T
-  Room_dyn.wallNorth.Wall.simpleNLayer.cap[1].T
-  Room_dyn.wallNorth.Wall.simpleNLayer.cap[2].T
-  Room_dyn.wallNorth.Wall.simpleNLayer.cap[3].T
-  Room_dyn.wallSouth.Wall.simpleNLayer.cap[1].T
-  Room_dyn.wallSouth.Wall.simpleNLayer.cap[2].T
-  Room_dyn.wallSouth.Wall.simpleNLayer.cap[3].T
-  Room_dyn.wallWest.Wall.simpleNLayer.cap[1].T
-  Room_dyn.wallWest.Wall.simpleNLayer.cap[2].T
-  Room_dyn.wallWest.Wall.simpleNLayer.cap[3].T
- 
-Finished
- = true
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
 
+Instantiation of ?:
 Declaring variable: Boolean rScript ;
 
 savelog("AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270.translation.log"); = true
@@ -2416,10 +1938,11 @@ savelog("AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN
 
 rCheck = checkModel("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270");
 Check of AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270:
-The model has the same number of unknowns and equations: 1585
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 1585
-Check of AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270 successful.
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case270.mos\",", "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.statistics.log");
@@ -2433,65 +1956,14 @@ Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.HighOrder.Vali
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case270.mos");
 simulateModel("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270", startTime=0, stopTime=31539600, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270");
 Translation of AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270:
-The DAE has 1585 scalar unknowns and 1585 scalar equations.
- 
-Statistics
- 
-Original Model
-  Number of components: 352
-  Variables: 3082
-  Constants: 41 (276 scalars)
-  Parameters: 1493 (2159 scalars)
-  Unknowns: 1548 (1585 scalars)
-  Differentiated variables: 25 scalars
-  Equations: 1256
-  Nontrivial: 1044
-Translated Model
-  Constants: 780 scalars
-  Free parameters: 876 scalars
-  Parameter depending: 909 scalars
-  Outputs: 5 scalars
-  Continuous time states: 25 scalars
-  Time-varying variables: 474 scalars
-  Alias variables: 981 scalars
-  Number of mixed real/discrete systems of equations: 0
-  Sizes of linear systems of equations: {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4}
-  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  Sizes of nonlinear systems of equations: {55}
-  Sizes after manipulation of the nonlinear systems: {13}
-  Number of numerical Jacobians: 0
- 
-Selected continuous time states
-Statically selected continuous time states
-  idealHeaterCooler.pITempCool.PI.I.y
-  idealHeaterCooler.pITempHeat.PI.I.y
-  integrator2.y
-  integratorCool.y
-  integratorHeat.y
-  Room.airload.dynBal.m
-  Room.airload.dynBal.mXi[1]
-  Room.airload.dynBal.U
-  Room.ceiling.Wall.simpleNLayer.cap[1].T
-  Room.ceiling.Wall.simpleNLayer.cap[2].T
-  Room.ceiling.Wall.simpleNLayer.cap[3].T
-  Room.floor.Wall.simpleNLayer.cap[1].T
-  Room.floor.Wall.simpleNLayer.cap[2].T
-  Room.wallEast.Wall.simpleNLayer.cap[1].T
-  Room.wallEast.Wall.simpleNLayer.cap[2].T
-  Room.wallEast.Wall.simpleNLayer.cap[3].T
-  Room.wallNorth.Wall.simpleNLayer.cap[1].T
-  Room.wallNorth.Wall.simpleNLayer.cap[2].T
-  Room.wallNorth.Wall.simpleNLayer.cap[3].T
-  Room.wallSouth.Wall.simpleNLayer.cap[1].T
-  Room.wallSouth.Wall.simpleNLayer.cap[2].T
-  Room.wallSouth.Wall.simpleNLayer.cap[3].T
-  Room.wallWest.Wall.simpleNLayer.cap[1].T
-  Room.wallWest.Wall.simpleNLayer.cap[2].T
-  Room.wallWest.Wall.simpleNLayer.cap[3].T
- 
-Finished
- = true
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
 
+Instantiation of ?:
 Declaring variable: Boolean rScript ;
 
 savelog("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.translation.log"); = true
@@ -3726,7 +3198,7 @@ savelog("AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.translation.
 rCheck = checkModel("AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode");
 Check of AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode:
 Warning: Component type specifier Pump specified an obsolete type: Obsolete model - Use one of the valves in package AixLib.Fluid.Movers..
-  File: /tmp/tmp-AixLib-3-9dnss72w/AixLib/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mo, line 50
+  File: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mo, line 50
  Component context: Pump
   Component declared as Pump Pump in AixLib.Obsolete.Year2021.Fluid.Movers
 Warning: Non-literal value.
@@ -3735,53 +3207,48 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class heatValve_new.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for res.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for res2.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class res2.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for radiator_ML_delta.res.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class radiator_ML_delta.res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for radiator_ML_delta.res.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class radiator_ML_delta.res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for hea.preDro.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class hea.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
-The model has the same number of unknowns and equations: 2610
-The model could not be deduced to be symbolically well-posed.
-The model has
-  2543+2*room_GF_2OW.airload.dynBal.nPorts+max([size(combinedWeather.WeatherData.columns,   1); size(combinedWeather.WeatherData.offset, 1)])+2*combinedWeather.deMultiplex.n1  +2*combinedWeather.deMultiplex.n2+2*combinedWeather.deMultiplex.n3+size(  Pump.table_minMaxCharacteristics.columns, 1)+radiator_ML_delta.multiLayer_HE[1].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[2].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[3].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[4].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[5].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[6].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[7].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[8].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[9].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[10].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[11].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[12].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[13].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[14].Volume.dynBal.nPorts+radiator_ML_delta.multiLayer_HE[15].Volume.dynBal.nPorts  +radiator_ML_delta.multiLayer_HE[16].Volume.dynBal.nPorts
-scalar unknowns and
-  2434+(if  not room_GF_2OW.outside_wall1.Wall.twoStar_RadEx.use_A_in then 1 else 0)  +(if room_GF_2OW.outside_wall1.heatTransfer_Outside.calcMethod ==   AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if room_GF_2OW.outside_wall1.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not room_GF_2OW.outside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if room_GF_2OW.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  DIN_6946 then 1 else (if room_GF_2OW.outside_wall2.heatTransfer_Outside.calcMethod   == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.  ASHRAE_Fundamentals then 1 else 2))+(if  not room_GF_2OW.inside_wall1.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not room_GF_2OW.inside_wall2.Wall.twoStar_RadEx.use_A_in   then 1 else 0)+(if  not room_GF_2OW.Ceiling.Wall.twoStar_RadEx.use_A_in then 1   else 0)+(if  not room_GF_2OW.floor.Wall.twoStar_RadEx.use_A_in then 1 else 0)  +max([size(combinedWeather.WeatherData.columns, 1); size(combinedWeather.WeatherData.offset,   1)])+2*combinedWeather.deMultiplex.n1+2*combinedWeather.deMultiplex.n2+2*  combinedWeather.deMultiplex.n3+size(Pump.table_minMaxCharacteristics.columns, 1)  +(if tank.use_Xi_in then 1 else (if tank.use_X_in then 0 else 1))+(if  not   tank.use_p_in then 1 else 0)+2*tank.nPorts+(if  not tank.use_h_in then 1 else 0)  +(if  not radiator_ML_delta.multiLayer_HE[1].twoStar_RadEx.use_A_in then 1   else 0)+(if  not radiator_ML_delta.multiLayer_HE[2].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[3].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[4].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[5].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[6].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[7].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[8].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[9].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[10].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[11].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[12].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[13].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[14].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[15].twoStar_RadEx.use_A_in   then 1 else 0)+(if  not radiator_ML_delta.multiLayer_HE[16].twoStar_RadEx.use_A_in   then 1 else 0)+5*room_GF_2OW.airload.dynBal.nPorts+(if  not radiator_ML_delta.multiLayer_HE[1].Volume.dynBal.use_mWat_flow   then 1 else 0)+3*radiator_ML_delta.multiLayer_HE[1].Volume.dynBal.nPorts+(if    not radiator_ML_delta.multiLayer_HE[2].Volume.dynBal.use_mWat_flow then 1   else 0)+3*radiator_ML_delta.multiLayer_HE[2].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[3].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[3].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[4].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[4].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[5].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[5].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[6].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[6].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[7].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[7].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[8].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[8].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[9].Volume.dynBal.use_mWat_flow then 1 else 0)+3  *radiator_ML_delta.multiLayer_HE[9].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[10].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[10].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[11].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[11].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[12].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[12].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[13].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[13].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[14].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[14].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[15].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[15].Volume.dynBal.nPorts+(if  not   radiator_ML_delta.multiLayer_HE[16].Volume.dynBal.use_mWat_flow then 1 else 0)  +3*radiator_ML_delta.multiLayer_HE[16].Volume.dynBal.nPorts
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  2610
-Check of AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode successful.
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
 Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mos\",", "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.statistics.log");
@@ -3796,7 +3263,7 @@ rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighO
 simulateModel("AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode", startTime=0, stopTime=86400, outputInterval=60, tolerance=1e-6, method="dassl", resultFile="AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode");
 Translation of AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode:
 Warning: Component type specifier Pump specified an obsolete type: Obsolete model - Use one of the valves in package AixLib.Fluid.Movers..
-  File: /tmp/tmp-AixLib-3-9dnss72w/AixLib/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mo, line 50
+  File: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mo, line 50
  Component context: Pump
   Component declared as Pump Pump in AixLib.Obsolete.Year2021.Fluid.Movers
 Warning: Non-literal value.
@@ -3805,138 +3272,51 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class heatValve_new.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for res.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for res2.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class res2.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for radiator_ML_delta.res.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class radiator_ML_delta.res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for radiator_ML_delta.res.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class radiator_ML_delta.res.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for hea.preDro.m_flow.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class hea.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-3-9dnss72w/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
-The DAE has 2610 scalar unknowns and 2610 scalar equations.
- 
-Statistics
- 
-Original Model
-  Number of components: 505
-  Variables: 6172
-  Constants: 85 (85 scalars)
-  Parameters: 2965 (4257 scalars)
-  Unknowns: 3122 (2681 scalars)
-  Differentiated variables: 73 scalars
-  Equations: 2382
-  Nontrivial: 1897
-Translated Model
-  Constants: 1519 scalars
-  Free parameters: 888 scalars
-  Parameter depending: 2095 scalars
-  Outputs: 4 scalars
-  Continuous time states: 57 scalars
-  Time-varying variables: 754 scalars
-  Alias variables: 1767 scalars
-  Number of mixed real/discrete systems of equations: 0
-  Sizes of linear systems of equations: {4, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 4, 3, 4, 4, 4, 3}
-  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  Sizes of nonlinear systems of equations: {149, 11}
-  Sizes after manipulation of the nonlinear systems: {23, 1}
-  Number of numerical Jacobians: 0
-  Initialization problem
-    Sizes of nonlinear systems of equations: {278, 11}
-    Sizes after manipulation of the nonlinear systems: {73, 1}
-    Number of numerical Jacobians: 0
- 
-Selected continuous time states
-Statically selected continuous time states
-  firstOrder.y
-  heatValve_new.filter.s[1]
-  heatValve_new.filter.s[2]
-  radiator_ML_delta.FlowTemperature.T
-  radiator_ML_delta.multiLayer_HE[1].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[1].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[2].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[2].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[3].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[3].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[4].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[4].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[5].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[5].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[6].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[6].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[7].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[7].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[8].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[8].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[9].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[9].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[10].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[10].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[11].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[11].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[12].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[12].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[13].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[13].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[14].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[14].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[15].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[15].Volume.dynBal.U
-  radiator_ML_delta.multiLayer_HE[16].radiator_wall.heatCapacitor.T
-  radiator_ML_delta.multiLayer_HE[16].Volume.dynBal.U
-  radiator_ML_delta.ReturnTemperature.T
-  room_GF_2OW.airload.dynBal.m
-  room_GF_2OW.airload.dynBal.mXi[1]
-  room_GF_2OW.airload.dynBal.U
-  room_GF_2OW.Ceiling.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.Ceiling.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.Ceiling.Wall.simpleNLayer.cap[3].T
-  room_GF_2OW.floor.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.floor.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.inside_wall1.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.inside_wall1.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.inside_wall2.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.inside_wall2.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.outside_wall1.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.outside_wall1.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.outside_wall1.Wall.simpleNLayer.cap[3].T
-  room_GF_2OW.outside_wall1.Wall.simpleNLayer.cap[4].T
-  room_GF_2OW.outside_wall2.Wall.simpleNLayer.cap[1].T
-  room_GF_2OW.outside_wall2.Wall.simpleNLayer.cap[2].T
-  room_GF_2OW.outside_wall2.Wall.simpleNLayer.cap[3].T
-  room_GF_2OW.outside_wall2.Wall.simpleNLayer.cap[4].T
- 
+  Near file: /tmp/tmp-AixLib-3-p2uocvwm/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
 Warning: WARNINGS have been issued.
-Finished
- = true
+Error: ERRORS have been issued.
+ = false
 
+Instantiation of ?:
 Declaring variable: Boolean rScript ;
 
 savelog("AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.translation.log"); = true
