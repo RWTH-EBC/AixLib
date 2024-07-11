@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140Testcase900SP_flexquant_test
+model Ashrae140Testcase600SP_flexquant_winter
   "Model of a ERC-Thermal Zone Including CCA and AHU"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -22,9 +22,9 @@ model Ashrae140Testcase900SP_flexquant_test
     T_start=T_start_tabs,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_5(),
     area=48,
-    thickness=0.1,
+    thickness=0.05,
     cp=900,
-    alpha=20,
+    alpha=30,
     length=50,
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -34,12 +34,12 @@ model Ashrae140Testcase900SP_flexquant_test
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
-    annotation (Placement(transformation(extent={{86,-102},{106,-80}})));
+    annotation (Placement(transformation(extent={{86,-100},{106,-78}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900
-      zoneParam(shadingFactor={0.15,0.15,0.15,0.15}),
+    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_600
+      zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=T_start_zone,
     recOrSep=false,
@@ -160,7 +160,7 @@ model Ashrae140Testcase900SP_flexquant_test
   Fluid.Sources.Boundary_pT        bouWatercold(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=277.15,
+    T=285.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -168,7 +168,7 @@ model Ashrae140Testcase900SP_flexquant_test
   Fluid.Sources.Boundary_pT        bouWatercold1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=275.15,
+    T=285.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -196,7 +196,7 @@ model Ashrae140Testcase900SP_flexquant_test
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.05,
+      k=0.03,
       Ti=120,
       rpm_pump=3000),
     ctrRh(
@@ -210,7 +210,7 @@ model Ashrae140Testcase900SP_flexquant_test
       Ti=125,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.00002,
+      k=0.00003,
       Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
@@ -394,103 +394,10 @@ model Ashrae140Testcase900SP_flexquant_test
     "Initialization temperature";
   parameter Modelica.Media.Interfaces.Types.Temperature T_start_zone=293.15
     "Start value of temperature";
-  Modelica.Blocks.Sources.CombiTimeTable QTabs_set(
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="UserProfiles",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
-    columns={2},
-    tableOnFile=false,
-    table=[0,0; 86400,0; 86400,5000; 97200,5000; 97200,0; 529200,0; 529200,5000;
-        540000,5000; 540000,0; 799200,0; 799200,5000; 810000,5000; 810000,0;
-        982800,0; 982800,5000; 993600,5000; 993600,0; 1080000,0; 1080000,0;
-        1090800,0; 1090800,0; 1522800,0; 1522800,0; 1533600,0; 1533600,0;
-        1792800,0; 1792800,0; 1803600,0; 1803600,0; 1976400,0; 1976400,0;
-        1987200,0; 1987200,0; 2073600,0; 2160000,0; 2160000,5000; 2170800,5000;
-        2170800,0; 2602800,0; 2602800,5000; 2613600,5000; 2613600,0; 2872800,0;
-        2872800,5000; 2883600,5000; 2883600,0; 3056400,0; 3056400,5000; 3067200,
-        5000; 3067200,0; 3153600,0; 3153600,5000; 3164400,5000; 3164400,0;
-        3596400,0; 3596400,1000; 3607200,1000; 3607200,0; 3866400,0; 3866400,
-        1000; 3877200,1000; 3877200,0; 4050000,0; 4050000,2000; 4060800,2000;
-        4060800,0; 4147200,0; 4147200,1000; 4158000,1000; 4158000,0; 4590000,0;
-        4590000,3000; 4600800,3000; 4600800,0; 4860000,0; 4860000,3000; 4870800,
-        3000; 4870800,0; 5043600,0; 5043600,0; 5054400,0; 5054400,0; 5140800,0;
-        5140800,0; 5151600,0; 5151600,0; 5583600,0; 5583600,0; 5594400,0;
-        5594400,0; 5853600,0; 5853600,0; 5864400,0; 5864400,0; 6037200,0;
-        6037200,0; 6048000,0; 6048000,0; 6134400,0; 6134400,0; 6145200,0;
-        6145200,0; 6231600,0; 6231600,-1000; 6242400,-1000; 6242400,0; 6674400,
-        0; 6674400,-2000; 6685200,-5000; 6685200,0; 6944400,0; 6944400,-2000;
-        6955200,-4000; 6955200,0; 7128000,0; 7128000,-3000; 7138800,-2000;
-        7138800,0; 7225200,0; 7225200,-3000; 7236000,-1000; 7236000,0; 7668000,
-        0; 7668000,-3000; 7678800,-1000; 7678800,0; 7938000,0; 7938000,-5000;
-        7948800,-1000; 7948800,0; 8121600,0],
-    offset={0},
-    shiftTime=0) annotation (Placement(transformation(
-        extent={{-7,-7},{7,7}},
-        rotation=0,
-        origin={-173,-24})));
-
-  Modelica.Blocks.Sources.CombiTimeTable T_set(
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="UserProfiles",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
-    columns={2},
-    tableOnFile=false,
-    table=[0,291.15; 86400,291.15; 86400,291.15; 97200,291.15; 97200,291.15;
-        529200,291.15; 529200,291.15; 540000,291.15; 540000,291.15; 799200,
-        291.15; 799200,291.15; 810000,291.15; 810000,291.15; 982800,291.15;
-        982800,291.15; 993600,291.15; 993600,291.15; 1080000,291.15; 1080000,
-        298.15; 1090800,298.15; 1090800,291.15; 1522800,291.15; 1522800,298.15;
-        1533600,298.15; 1533600,291.15; 1792800,291.15; 1792800,298.15; 1803600,
-        298.15; 1803600,291.15; 1976400,291.15; 1976400,298.15; 1987200,298.15;
-        1987200,291.15; 2073600,291.15; 2160000,291.15; 2160000,298.15; 2170800,
-        298.15; 2170800,291.15; 2602800,291.15; 2602800,298.15; 2613600,298.15;
-        2613600,291.15; 2872800,291.15; 2872800,298.15; 2883600,298.15; 2883600,
-        291.15; 3056400,291.15; 3056400,298.15; 3067200,298.15; 3067200,291.15;
-        3153600,291.15; 3153600,298.15; 3164400,298.15; 3164400,291.15; 3596400,
-        291.15; 3596400,291.15; 3607200,291.15; 3607200,291.15; 3866400,291.15;
-        3866400,291.15; 3877200,291.15; 3877200,291.15; 4050000,291.15; 4050000,
-        291.15; 4060800,291.15; 4060800,291.15; 4147200,291.15; 4147200,291.15;
-        4158000,291.15; 4158000,291.15; 4590000,291.15; 4590000,291.15; 4600800,
-        291.15; 4600800,291.15; 4860000,291.15; 4860000,291.15; 4870800,291.15;
-        4870800,291.15; 5043600,291.15; 5043600,293.15; 5054400,293.15; 5054400,
-        291.15; 5140800,291.15; 5140800,293.15; 5151600,293.15; 5151600,291.15;
-        5583600,291.15; 5583600,297.15; 5594400,297.15; 5594400,291.15; 5853600,
-        291.15; 5853600,298.15; 5864400,298.15; 5864400,291.15; 6037200,291.15;
-        6037200,294.15; 6048000,294.15; 6048000,291.15; 6134400,291.15; 6134400,
-        294.15; 6145200,294.15; 6145200,291.15; 6231600,291.15; 6231600,292.15;
-        6242400,292.15; 6242400,291.15; 6674400,291.15; 6674400,293.15; 6685200,
-        298.15; 6685200,291.15; 6944400,291.15; 6944400,291.15; 6955200,296.15;
-        6955200,291.15; 7128000,291.15; 7128000,293.15; 7138800,296.15; 7138800,
-        291.15; 7225200,291.15; 7225200,298.15; 7236000,292.15; 7236000,291.15;
-        7668000,291.15; 7668000,298.15; 7678800,292.15; 7678800,291.15; 7938000,
-        291.15; 7938000,297.15; 7948800,298.15; 7948800,291.15; 8121600,291.15],
-    offset={0},
-    shiftTime=0) annotation (Placement(transformation(
-        extent={{-7,-7},{7,7}},
-        rotation=0,
-        origin={-141,-96})));
-
-  Modelica.Blocks.Sources.Pulse          QTabs_set1(
-    amplitude=2500,
-    width=50,
-    period=1800,
-    offset=-2500,
-    startTime=17452800)
-                 annotation (Placement(transformation(
-        extent={{-7,-7},{7,7}},
-        rotation=0,
-        origin={-169,2})));
-  Modelica.Blocks.Sources.Pulse          QTabs_set2(
-    amplitude=7,
-    period=1800,
-    offset=291.15,
-    startTime=17452800)
-                 annotation (Placement(transformation(
-        extent={{-7,-7},{7,7}},
-        rotation=0,
-        origin={-141,-74})));
+  Modelica.Blocks.Interfaces.RealOutput Q_HotTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{158,86},{178,106}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_ColdTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{172,68},{192,88}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -504,7 +411,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{96,
-          -78.9},{96,-31.84},{66.56,-31.84}},                       color={191,
+          -76.9},{96,-31.84},{66.56,-31.84}},                       color={191,
           0,0}));
   connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{8.16364,
           -80.1818},{36,-80.1818},{36,-53.88},{34.71,-53.88}},   color={0,127,
@@ -562,20 +469,20 @@ equation
   connect(bouWatercold1.ports[1],genericAHU1. port_a4) annotation (Line(points={{29,-140},
           {-10,-140},{-10,-92}},         color={0,127,255}));
   connect(bouWatercold.ports[1],tabs1. port_b2) annotation (Line(points={{53,-140},
-          {104,-140},{104,-101.78}},
+          {104,-140},{104,-99.78}},
                                 color={0,127,255}));
   connect(bouWatercold1.ports[2],tabs1. port_a2) annotation (Line(points={{31,-140},
-          {30,-140},{30,-132},{100,-132},{100,-102}},
+          {30,-140},{30,-132},{100,-132},{100,-100}},
                                                 color={0,127,255}));
   connect(genericAHU1.port_b4,bouWatercold. ports[2]) annotation (Line(points={{
           -6.72727,-92},{-6,-92},{-6,-134},{54,-134},{54,-140},{55,-140}},
                                                                          color={
           0,127,255}));
   connect(bouWaterhot2.ports[1],tabs1. port_b1)
-    annotation (Line(points={{81,-114},{92,-114},{92,-102}},
+    annotation (Line(points={{81,-114},{92,-114},{92,-100}},
                                                           color={0,127,255}));
   connect(bouWaterhot3.ports[1],tabs1. port_a1)
-    annotation (Line(points={{63,-108},{88,-108},{88,-102}},
+    annotation (Line(points={{63,-108},{88,-108},{88,-100}},
                                                           color={0,127,255}));
   connect(ctrTabsQflow.tabsBus,Bus. tabsBus) annotation (Line(
       points={{-38,-18},{-10,-18},{-10,40.05},{8.05,40.05}},
@@ -586,7 +493,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(tabs1.tabsBus,Bus. tabsBus) annotation (Line(
-      points={{85.9,-90.89},{78,-90.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
+      points={{85.9,-88.89},{78,-88.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -638,6 +545,8 @@ equation
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
           68.8,-10},{94,-10},{94,-20},{110,-20}}, color={0,0,127}));
+  connect(ctrAhu.Tset, TAhuSet)
+    annotation (Line(points={{-60,-40},{-120,-40}}, color={0,0,127}));
   connect(realExpression.y, T_IntWall)
     annotation (Line(points={{167,46},{194,46}}, color={0,0,127}));
   connect(realExpression1.y, T_ExtWall)
@@ -695,15 +604,16 @@ equation
           -80.3},{60,-70.15},{60.4,-70.15},{60.4,-57.36}}, color={0,0,127}));
   connect(internalGains1.y[1], schedule_human) annotation (Line(points={{60,
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
-  connect(QTabs_set1.y, ctrTabsQflow.QFlowSet) annotation (Line(points={{-161.3,
-          2},{-110,2},{-110,-17.9},{-58.3,-17.9}}, color={0,0,127}));
-  connect(QTabs_set2.y, ctrAhu.Tset) annotation (Line(points={{-133.3,-74},{-82,
-          -74},{-82,-40},{-60,-40}}, color={0,0,127}));
+  connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
+          {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{182,78},{128,
+          78},{128,50},{81,50},{81,51}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3,Q_HotTabs)  annotation (Line(points={{81,81},{122,81},
+          {122,96},{168,96}}, color={0,0,127}));
   annotation (experiment(
-      StartTime=4752000,
-      StopTime=5052000,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140Testcase900SP_flexquant_test;
+end Ashrae140Testcase600SP_flexquant_winter;

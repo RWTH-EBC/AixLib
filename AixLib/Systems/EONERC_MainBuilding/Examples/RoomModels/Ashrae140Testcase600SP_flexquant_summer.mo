@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140Testcase900SP_flexquant
+model Ashrae140Testcase600SP_flexquant_summer
   "Model of a ERC-Thermal Zone Including CCA and AHU"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -22,9 +22,9 @@ model Ashrae140Testcase900SP_flexquant
     T_start=T_start_tabs,
     parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_5(),
     area=48,
-    thickness=0.1,
+    thickness=0.05,
     cp=900,
-    alpha=20,
+    alpha=30,
     length=50,
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -34,12 +34,12 @@ model Ashrae140Testcase900SP_flexquant
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
-    annotation (Placement(transformation(extent={{86,-102},{106,-80}})));
+    annotation (Placement(transformation(extent={{86,-100},{106,-78}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_900
-      zoneParam(shadingFactor={0.15,0.15,0.15,0.15}),
+    redeclare AixLib.Systems.EONERC_MainBuilding.BaseClasses.ASHRAE140_600
+      zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=T_start_zone,
     recOrSep=false,
@@ -196,7 +196,7 @@ model Ashrae140Testcase900SP_flexquant
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.05,
+      k=0.03,
       Ti=120,
       rpm_pump=3000),
     ctrRh(
@@ -210,7 +210,7 @@ model Ashrae140Testcase900SP_flexquant
       Ti=125,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.00002,
+      k=0.00003,
       Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
@@ -395,9 +395,9 @@ model Ashrae140Testcase900SP_flexquant
   parameter Modelica.Media.Interfaces.Types.Temperature T_start_zone=293.15
     "Start value of temperature";
   Modelica.Blocks.Interfaces.RealOutput Q_HotTabs "Value of Real output"
-    annotation (Placement(transformation(extent={{160,88},{180,108}})));
+    annotation (Placement(transformation(extent={{158,86},{178,106}})));
   Modelica.Blocks.Interfaces.RealOutput Q_ColdTabs "Value of Real output"
-    annotation (Placement(transformation(extent={{174,70},{194,90}})));
+    annotation (Placement(transformation(extent={{172,68},{192,88}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -411,7 +411,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{96,
-          -78.9},{96,-31.84},{66.56,-31.84}},                       color={191,
+          -76.9},{96,-31.84},{66.56,-31.84}},                       color={191,
           0,0}));
   connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{8.16364,
           -80.1818},{36,-80.1818},{36,-53.88},{34.71,-53.88}},   color={0,127,
@@ -469,20 +469,20 @@ equation
   connect(bouWatercold1.ports[1],genericAHU1. port_a4) annotation (Line(points={{29,-140},
           {-10,-140},{-10,-92}},         color={0,127,255}));
   connect(bouWatercold.ports[1],tabs1. port_b2) annotation (Line(points={{53,-140},
-          {104,-140},{104,-101.78}},
+          {104,-140},{104,-99.78}},
                                 color={0,127,255}));
   connect(bouWatercold1.ports[2],tabs1. port_a2) annotation (Line(points={{31,-140},
-          {30,-140},{30,-132},{100,-132},{100,-102}},
+          {30,-140},{30,-132},{100,-132},{100,-100}},
                                                 color={0,127,255}));
   connect(genericAHU1.port_b4,bouWatercold. ports[2]) annotation (Line(points={{
           -6.72727,-92},{-6,-92},{-6,-134},{54,-134},{54,-140},{55,-140}},
                                                                          color={
           0,127,255}));
   connect(bouWaterhot2.ports[1],tabs1. port_b1)
-    annotation (Line(points={{81,-114},{92,-114},{92,-102}},
+    annotation (Line(points={{81,-114},{92,-114},{92,-100}},
                                                           color={0,127,255}));
   connect(bouWaterhot3.ports[1],tabs1. port_a1)
-    annotation (Line(points={{63,-108},{88,-108},{88,-102}},
+    annotation (Line(points={{63,-108},{88,-108},{88,-100}},
                                                           color={0,127,255}));
   connect(ctrTabsQflow.tabsBus,Bus. tabsBus) annotation (Line(
       points={{-38,-18},{-10,-18},{-10,40.05},{8.05,40.05}},
@@ -493,7 +493,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(tabs1.tabsBus,Bus. tabsBus) annotation (Line(
-      points={{85.9,-90.89},{78,-90.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
+      points={{85.9,-88.89},{78,-88.89},{78,40},{44,40},{44,40.05},{8.05,40.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -545,6 +545,8 @@ equation
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
           68.8,-10},{94,-10},{94,-20},{110,-20}}, color={0,0,127}));
+  connect(ctrAhu.Tset, TAhuSet)
+    annotation (Line(points={{-60,-40},{-120,-40}}, color={0,0,127}));
   connect(realExpression.y, T_IntWall)
     annotation (Line(points={{167,46},{194,46}}, color={0,0,127}));
   connect(realExpression1.y, T_ExtWall)
@@ -602,21 +604,16 @@ equation
           -80.3},{60,-70.15},{60.4,-70.15},{60.4,-57.36}}, color={0,0,127}));
   connect(internalGains1.y[1], schedule_human) annotation (Line(points={{60,
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
-  connect(TAhuSet, ctrAhu.Tset)
-    annotation (Line(points={{-120,-40},{-60,-40}}, color={0,0,127}));
   connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
           {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
-  connect(Q_HotTabs, Q_HotTabs)
-    annotation (Line(points={{170,98},{170,98}}, color={0,0,127}));
-  connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{184,80},{130,
-          80},{130,52},{81,52},{81,51}}, color={0,0,127}));
-  connect(hotEnergyCalc.y3, Q_HotTabs) annotation (Line(points={{81,81},{124,81},
-          {124,98},{170,98}}, color={0,0,127}));
+  connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{182,78},{128,
+          78},{128,50},{81,50},{81,51}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3,Q_HotTabs)  annotation (Line(points={{81,81},{122,81},
+          {122,96},{168,96}}, color={0,0,127}));
   annotation (experiment(
-      StartTime=17452800,
-      StopTime=17800000,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140Testcase900SP_flexquant;
+end Ashrae140Testcase600SP_flexquant_summer;
