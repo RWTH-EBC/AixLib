@@ -160,7 +160,7 @@ model Ashrae140Testcase900SP_flexquant_test
   Fluid.Sources.Boundary_pT        bouWatercold(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -168,7 +168,7 @@ model Ashrae140Testcase900SP_flexquant_test
   Fluid.Sources.Boundary_pT        bouWatercold1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -189,7 +189,8 @@ model Ashrae140Testcase900SP_flexquant_test
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={63,-113})));
-  ModularAHU.Controller.CtrAHUBasic ctrAhu(
+  ModularAHU.Controller.CtrAHUBasic_adapted
+                                    ctrAhu(
     useExternalTset=true,
     k=1000,
     Ti=60,
@@ -398,7 +399,6 @@ model Ashrae140Testcase900SP_flexquant_test
     tableName="UserProfiles",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
-
     columns={2},
     tableOnFile=false,
     table=[0,0; 86400,0; 86400,5000; 97200,5000; 97200,0; 529200,0; 529200,5000;
@@ -429,12 +429,12 @@ model Ashrae140Testcase900SP_flexquant_test
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-173,-24})));
+
   Modelica.Blocks.Sources.CombiTimeTable T_set(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
-
     columns={2},
     tableOnFile=false,
     table=[0,291.15; 86400,291.15; 86400,291.15; 97200,291.15; 97200,291.15;
@@ -466,12 +466,12 @@ model Ashrae140Testcase900SP_flexquant_test
         291.15; 7225200,291.15; 7225200,298.15; 7236000,292.15; 7236000,291.15;
         7668000,291.15; 7668000,298.15; 7678800,292.15; 7678800,291.15; 7938000,
         291.15; 7938000,297.15; 7948800,298.15; 7948800,291.15; 8121600,291.15],
-
     offset={0},
     shiftTime=0) annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-141,-96})));
+
   Modelica.Blocks.Sources.Pulse          QTabs_set1(
     amplitude=2500,
     width=50,

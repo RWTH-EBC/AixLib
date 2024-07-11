@@ -160,7 +160,7 @@ model Ashrae140Testcase600SP_flexquant
   Fluid.Sources.Boundary_pT        bouWatercold(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -168,7 +168,7 @@ model Ashrae140Testcase600SP_flexquant
   Fluid.Sources.Boundary_pT        bouWatercold1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -189,7 +189,8 @@ model Ashrae140Testcase600SP_flexquant
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={63,-113})));
-  ModularAHU.Controller.CtrAHUBasic ctrAhu(
+  ModularAHU.Controller.CtrAHUBasic_adapted
+                                    ctrAhu(
     useExternalTset=true,
     k=1000,
     Ti=60,
@@ -393,6 +394,10 @@ model Ashrae140Testcase600SP_flexquant
     "Initialization temperature";
   parameter Modelica.Media.Interfaces.Types.Temperature T_start_zone=293.15
     "Start value of temperature";
+  Modelica.Blocks.Interfaces.RealOutput Q_HotTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{158,86},{178,106}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_ColdTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{172,68},{192,88}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -601,6 +606,10 @@ equation
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
   connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
           {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{182,78},{128,
+          78},{128,50},{81,50},{81,51}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3,Q_HotTabs)  annotation (Line(points={{81,81},{122,81},
+          {122,96},{168,96}}, color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=60,

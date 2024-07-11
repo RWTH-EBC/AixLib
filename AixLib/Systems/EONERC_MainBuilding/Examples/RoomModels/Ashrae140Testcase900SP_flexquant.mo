@@ -160,7 +160,7 @@ model Ashrae140Testcase900SP_flexquant
   Fluid.Sources.Boundary_pT        bouWatercold(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -168,7 +168,7 @@ model Ashrae140Testcase900SP_flexquant
   Fluid.Sources.Boundary_pT        bouWatercold1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=285.15,
+    T=275.15,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -189,7 +189,8 @@ model Ashrae140Testcase900SP_flexquant
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={63,-113})));
-  ModularAHU.Controller.CtrAHUBasic ctrAhu(
+  ModularAHU.Controller.CtrAHUBasic_adapted
+                                    ctrAhu(
     useExternalTset=true,
     k=1000,
     Ti=60,

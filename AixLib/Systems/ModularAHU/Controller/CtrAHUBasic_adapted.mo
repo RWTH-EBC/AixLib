@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularAHU.Controller;
-model CtrAHUBasic "Simple controller for AHU"
+model CtrAHUBasic_adapted "Simple controller for AHU"
 
   parameter Modelica.Units.SI.Temperature TFlowSet=289.15
     "Flow temperature set point of consumer"
@@ -23,7 +23,7 @@ model CtrAHUBasic "Simple controller for AHU"
         enable=usePreheater), Placement(transformation(extent={{0,70},{20,90}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
-    useExternalTMea=false,
+    useExternalTMea=true,
     Td=0,
     final initType=Modelica.Blocks.Types.Init.NoInit,
     final reverseAction=false)
@@ -37,7 +37,6 @@ model CtrAHUBasic "Simple controller for AHU"
     final reverseAction=true)
                              annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,10},{20,30}})));
-
 
   // Parameter for volume flow controller
   parameter Modelica.Units.SI.VolumeFlowRate VFlowSet=3000/3600
@@ -57,8 +56,6 @@ model CtrAHUBasic "Simple controller for AHU"
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation (dialog(group="Initialization"));
-
-
 
   BaseClasses.GenericAHUBus genericAHUBus "Bus connector for genericAHU"
     annotation (Placement(transformation(extent={{90,-10},{110,10}}),
@@ -109,8 +106,6 @@ model CtrAHUBasic "Simple controller for AHU"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={66,-36})));
-
-
 
   Modelica.Blocks.Routing.RealPassThrough realPassThrough if not useTwoFanCtr
     annotation (Placement(transformation(extent={{60,-66},{72,-54}})));
@@ -270,6 +265,12 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(ctrCo.TMea, genericAHUBus.TSupMea) annotation (Line(points={{10,38},{
+          10,32},{100.05,32},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
@@ -315,4 +316,4 @@ equation
       StopTime=17500000,
       Interval=60,
       __Dymola_Algorithm="Dassl"));
-end CtrAHUBasic;
+end CtrAHUBasic_adapted;
