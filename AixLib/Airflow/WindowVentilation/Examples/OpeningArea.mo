@@ -295,8 +295,10 @@ equation
           {-30,-130},{-22,-130}},
                                 color={0,0,127}));
   annotation (experiment(
+      StartTime=0,
       StopTime=60,
       Interval=1,
+      Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-160,-160},
             {160,160}}),                   graphics={
         Rectangle(

@@ -207,8 +207,10 @@ equation
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
 <p>Warnings are triggered when boundary conditions for an empirical expression are out of range. This could lead to inaccurate calculation results.</p>
 </html>"), experiment(
+      StartTime=0,
       StopTime=180,
       Interval=0.1,
+      Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mos"
