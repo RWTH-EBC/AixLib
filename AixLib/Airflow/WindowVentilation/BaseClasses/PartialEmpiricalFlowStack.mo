@@ -15,18 +15,6 @@ protected
     "Temperature difference between room and ambient";
   Modelica.Units.SI.Temperature TAvg = (TRoom + TAmb)/2
     "Average temperature of room and ambient";
-  Real intRes "Interim result used to check if assertion is raised";
-  Integer errCou(start=0) "Error counter";
-  parameter String varName "Variable name of root calculation";
-
-equation
-  assert(intRes > Modelica.Constants.eps and errCou < 2,
-    "In " + getInstanceName() + ": The polynomial under the square root to 
-    calculate" + varName + "is less than 0, " + varName + " will be set to 0",
-    AssertionLevel.warning);
-  when intRes > Modelica.Constants.eps then
-    errCou = pre(errCou) + 1;
-  end when;
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
