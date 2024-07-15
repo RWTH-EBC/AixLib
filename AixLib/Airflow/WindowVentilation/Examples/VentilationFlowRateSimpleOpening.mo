@@ -12,23 +12,24 @@ model VentilationFlowRateSimpleOpening
   parameter Modelica.Units.SI.Height locHeight(min=0)=4
     "Middle local height of the ventilation zone";
   Modelica.Blocks.Sources.Ramp TRoomSet(
-    height=10,
-    duration=100,
-    offset=20,
-    startTime=10) "Set room temperature in °C"
+    height=15,
+    duration=120,
+    offset=15,
+    startTime=50) "Set room temperature in °C"
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC "Convert degC to K"
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Modelica.Blocks.Sources.Ramp TAmbSet(
-    height=-10,
-    duration=100,
-    offset=10,
+    height=-40,
+    duration=160,
+    offset=40,
     startTime=10) "Set ambient temperature in °C"
     annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC1 "Convert degC to K"
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
-  Modelica.Blocks.Sources.TimeTable winSpe10Set(table=[0,2; 30,2; 50,5; 70,5; 90,
-        2; 120,2]) "Set wind speed at the height of 10 m"
+  Modelica.Blocks.Sources.TimeTable winSpe10Set(table=[0,0; 20,0; 30,5; 40,0; 50,
+        10; 60,0; 70,20; 80,0; 100,0; 110,20; 120,0; 130,10; 140,0; 150,5; 160,0;
+        180,0]) "Set wind speed at the height of 10 m"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
   Modelica.Blocks.Sources.Sine winDirSet(amplitude=2*Modelica.Constants.pi, f=0.05)
     "Set wind direction"
@@ -205,7 +206,7 @@ equation
 <p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
 </html>"), experiment(
-      StopTime=120,
+      StopTime=180,
       Interval=0.1,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file=
