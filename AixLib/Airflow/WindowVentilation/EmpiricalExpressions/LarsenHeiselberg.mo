@@ -3,11 +3,14 @@ model LarsenHeiselberg "Empirical expression developed by Larsen and Heiselberg 
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+      final varNameIntRes = "V_flow");
   parameter Modelica.Units.SI.Velocity winSpeLim(min=0.25)=1
     "Limitation of wind speed: Due to the wind speed in the denominator, this
     expression is not applicable to low wind speeds, output with 0 if the wind
     speed is less than this limit.";
+  Integer errCouWinSpe10(start=0)
+    "Warning counter for assertion check of 'winSpe10'";
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -17,7 +20,8 @@ protected
   Real dCofWinInc
     "Correlation of coefficient of wind incidence, equivalent to deltaC_p";
   Real cof1, cof2, cof3 "Other coefficients";
-  Real intRes "Interim result1";
+initial equation
+  errCouWinSpe10 = 0;
 equation
   incAng = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.SmallestAngleDifference(
     AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes.Range360,
@@ -40,16 +44,21 @@ equation
     cof2 = 0.0005;
     cof3 = 0.0111;
   end if;
-  assert(winSpe10 > winSpeLim,
-    "The wind speed is equal or less than the limited value, the term of wind correlation will be set to 0",
+  // Assertion of wind speed check
+  when winSpe10 < winSpeLim then
+    errCouWinSpe10 = pre(errCouWinSpe10) + 1;
+  end when;
+  assert(winSpe10 > winSpeLim or errCouWinSpe10 > 1,
+    "In " + getInstanceName() + ": The wind speed is equal or less than the
+    limited value (" + String(winSpeLim) + " m/s), the term of wind correlation 
+    will be set to 0",
     AssertionLevel.warning);
+  // Calculate intRes
   intRes =if noEvent(winSpe10 > winSpeLim)
     then cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight
       + cof3*dCofWinInc*dTRoomAmb/(winSpe10^2)
     else cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight + 0;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
+  // Calculate volume flow
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     openingArea.A*sqrt(intRes) else 0;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

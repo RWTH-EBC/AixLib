@@ -3,7 +3,8 @@ model ASHRAE "Empirical expression according to ASHRAE handbook (2009)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+      final varNameIntRes = "V_flow");
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -16,7 +17,6 @@ protected
     large fraction (approximately 90%) of the total opening area in the envelope,
     then the NPL is at the mid-height of that aperture, and dHeightNPL equals
     one-half the height of the aperture.";
-  Real intRes "Interim result";
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation

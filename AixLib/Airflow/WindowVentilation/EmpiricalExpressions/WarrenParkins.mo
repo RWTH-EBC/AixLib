@@ -2,20 +2,17 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model WarrenParkins "Empirical expression developed by Warren and Parkins (1984)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
     redeclare replaceable model OpeningArea =
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+    final varNameIntRes = "V_flow_th");
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 protected
   Real cofDcg = 0.61 "Discharge coefficient";
-  Real intRes "Interim result";
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation
   intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb/TAvg;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
-    AssertionLevel.warning);
   V_flow_th = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
   V_flow_win = 0.025*openingArea.A*winSpe10;

@@ -4,19 +4,16 @@ model Jiang "Empirical expression developed by Jiang et al. (2022)"
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon (
       final opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward,
-      final opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective));
+      final opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Effective),
+    final varNameIntRes = "V_flow");
   Modelica.Blocks.Interfaces.RealInput dp(unit="Pa")
     "Pressure difference between the outside and inside of the facade "
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 protected
   Real cof1 = 0.15 "Coefficient 1";
   Real cof2 = 0.33 "Coefficient 2";
-  Real intRes "Interim result";
 equation
   intRes = cof1*dp + cof2;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     1/2*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>

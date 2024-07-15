@@ -205,6 +205,7 @@ equation
 </html>", info="<html>
 <p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
+<p>Warnings are triggered when boundary conditions for an empirical expression are out of range. This could lead to inaccurate calculation results.</p>
 </html>"), experiment(
       StopTime=180,
       Interval=0.1,

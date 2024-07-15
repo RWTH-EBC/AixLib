@@ -3,7 +3,8 @@ model DIN16798 "Empirical expression according to DIN EN 16798-7 (2017)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN16798);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN16798,
+      final varNameIntRes = "V_flow");
   parameter Modelica.Units.SI.Height heightASL=0 "Height above sea level";
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
@@ -23,8 +24,8 @@ protected
   Modelica.Units.SI.Density rhoAmbASL = TRef/TAmb*rhoRefASL
     "Air density, by ambient temperature, by height above sea level";
 equation
-  V_flow = rhoRefASL0/rhoAmbASL*cofExt*openingArea.A/2*sqrt(
-    max(cofWin*(winSpe10^2), cofTh*winClrHeight*abs(dTRoomAmb)));
+  intRes = max(cofWin*(winSpe10^2), cofTh*winClrHeight*abs(dTRoomAmb));
+  V_flow = rhoRefASL0/rhoAmbASL*cofExt*openingArea.A/2*sqrt(intRes);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>

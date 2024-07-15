@@ -4,7 +4,8 @@ model Hall "Empirical expression developed by Hall (2004)"
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
       redeclare model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashHall (
-        final sWinSas=sWinSas, final widthWinGap=widthWinGap));
+        final sWinSas=sWinSas, final widthWinGap=widthWinGap),
+      final varNameIntRes = "V_flow");
   parameter Modelica.Units.SI.Thickness sWinSas(min=0) = 0
     "Window sash thickness (depth)";
   parameter Modelica.Units.SI.Length widthWinGap(min=0) = 0.01
@@ -12,13 +13,9 @@ model Hall "Empirical expression developed by Hall (2004)"
 protected
   Real cofDcg = 0.930*(openingArea.opnWidth_internal^0.2)
     "Discharge coefficient, case: without window reveal, without radiator";
-  Real intRes "Interim result";
 equation
   intRes = 2*Modelica.Constants.g_n*winClrHeight*openingArea.corNPL*dTRoomAmb/
     TRoom;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     cofDcg*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>

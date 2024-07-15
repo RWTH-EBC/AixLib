@@ -28,7 +28,24 @@ partial model PartialEmpiricalFlow
     annotation(choicesAllMatching=true);
   OpeningArea openingArea "Model instance for window opening area calculation"
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
+  //Variables and parameters for assertion check
+  Real intRes
+    "Interim result used to check the if assertion is raised in root calculation";
+  Integer errCouIntRes(start=0) "Warning counter for interim result warnings";
+  parameter String varNameIntRes "Variable name of interim result";
+initial equation
+  errCouIntRes = 0;
 equation
+  // Assertion check
+  when intRes < Modelica.Constants.eps then
+    errCouIntRes = pre(errCouIntRes) + 1;
+  end when;
+  assert(intRes > Modelica.Constants.eps or errCouIntRes > 1,
+    "In " + getInstanceName() + ": The polynomial under the square root to 
+    calculate '" + varNameIntRes + "' is equal or less than 0, '" +
+    varNameIntRes + "' will be set to 0",
+    AssertionLevel.warning);
+  // Connection(s)
   connect(opnWidth_in, openingArea.opnWidth_in) annotation (Line(
       points={{0,120},{0,70},{18,70}},
       color={0,0,127},
