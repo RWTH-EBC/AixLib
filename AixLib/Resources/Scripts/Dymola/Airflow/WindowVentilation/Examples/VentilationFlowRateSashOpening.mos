@@ -1,4 +1,4 @@
-simulateModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening", startTime=0, stopTime=180, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="VentilationFlowRateSashOpening");
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening", startTime=0, stopTime=120, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="VentilationFlowRateSashOpening");
 createPlot(
 	id=1,
 	position={10, 24, 600, 400},
