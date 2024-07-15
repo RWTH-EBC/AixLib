@@ -2,7 +2,8 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model Tang "Empirical expression developed by Tang et al. (2016)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
     redeclare replaceable model OpeningArea =
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+      varName="V_flow");
   parameter Modelica.Units.SI.TemperatureDifference dTLim(min=0.02)=0.05
     "Limitation of temperature difference: Due to the temperature difference in
     the denominator, this expression is not applicable to low temperature
@@ -20,9 +21,6 @@ equation
     then Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + cof_dT/
       abs(dTRoomAmb)
     else Modelica.Constants.g_n*winClrHeight*abs(dTRoomAmb)/TRoom + 0;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>

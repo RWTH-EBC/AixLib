@@ -3,7 +3,8 @@ model DIN4108 "Empirical expression according to DIN/TS 4108-8 (2022)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108,
+      varName="V_flow_th");
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -15,9 +16,6 @@ protected
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
 equation
   intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb/TAmb;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
-    AssertionLevel.warning);
   V_flow_th = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*cofDcg*openingArea.A*sqrt(intRes) else 0;
   V_flow_win = cofWin*openingArea.A*winSpeLoc;

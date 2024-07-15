@@ -2,7 +2,8 @@ within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model VDI2078 "Empirical expression according to VDI 2078 (2015)"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(
     redeclare replaceable model OpeningArea =
-      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078);
+      AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashVDI2078,
+      varName="V_flow");
   parameter Boolean use_cofSunSha_in=false
     "Use input port for sunshading coefficient"
     annotation(choices(checkBox=true));
@@ -29,9 +30,6 @@ equation
       sunShaTyp);
   end if;
   intRes = Modelica.Constants.g_n*openingArea.effHeight*dTRoomAmb/(2*TAmb);
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
   V_flow =if noEvent(intRes > Modelica.Constants.eps) then cofSunSha_internal*
     openingArea.A*sqrt(intRes) else 0;
   annotation (Documentation(revisions="<html>

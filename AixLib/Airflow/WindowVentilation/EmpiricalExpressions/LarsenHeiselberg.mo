@@ -3,7 +3,8 @@ model LarsenHeiselberg "Empirical expression developed by Larsen and Heiselberg 
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+      varName="V_flow");
   parameter Modelica.Units.SI.Velocity winSpeLim(min=0.25)=1
     "Limitation of wind speed: Due to the wind speed in the denominator, this
     expression is not applicable to low wind speeds, output with 0 if the wind
@@ -47,9 +48,6 @@ equation
     then cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight
       + cof3*dCofWinInc*dTRoomAmb/(winSpe10^2)
     else cof1*(cofWinInc^2)*(winSpe10^2) + cof2*dTRoomAmb*winClrHeight + 0;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow is less than 0, the V_flow will be set to 0",
-    AssertionLevel.warning);
   V_flow = if noEvent(intRes > Modelica.Constants.eps) then
     openingArea.A*sqrt(intRes) else 0;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

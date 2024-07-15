@@ -3,7 +3,8 @@ model Caciolo "Empirical expression developed by Caciolo et al. (2013)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStackWindIncidence(
       redeclare replaceable model OpeningArea =
-        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple);
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+      varName="V_flow_th");
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -33,9 +34,6 @@ equation
     V_flow_win = 0;
   end if;
   intRes = Modelica.Constants.g_n*winClrHeight*dTRoomAmb*cofWin/TAvg;
-  assert(intRes > Modelica.Constants.eps,
-    "The polynomial under the square root to calculate V_flow_th is less than 0, the V_flow_th will be set to 0",
-    AssertionLevel.warning);
   V_flow_th = if noEvent(intRes > Modelica.Constants.eps) then
     1/3*openingArea.A*cofDcg*sqrt(intRes) else 0;
   V_flow = V_flow_th + V_flow_win;
