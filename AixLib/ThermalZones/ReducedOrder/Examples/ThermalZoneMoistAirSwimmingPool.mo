@@ -152,7 +152,8 @@ model ThermalZoneMoistAirSwimmingPool
     tableName="openingHours",
     columns=2:2,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))                                              "Boundary condition: Opening Hours of swiming pools"
+        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt")) 
+    "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-92,-34},{-76,-18}})));
   Modelica.Blocks.Sources.Constant
                                const(k=273.15 + 30)

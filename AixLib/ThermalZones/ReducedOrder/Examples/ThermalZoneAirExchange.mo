@@ -144,8 +144,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-9.6,-1.6},
-          {-35.65,-1.6},{-35.65,-4},{-61,-4}},      color={0,0,127}), Text(
+  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-9.6,
+          -1.6},{-35.65,-1.6},{-35.65,-4},{-61,-4}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

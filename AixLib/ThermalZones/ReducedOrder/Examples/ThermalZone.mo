@@ -123,9 +123,6 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
-  Modelica.Blocks.Interfaces.RealInput TSetHeat1(start=293.15)
-           "Set point for heater"
-    annotation (Placement(transformation(extent={{-82,-22},{-42,18}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,6},{-10,6}},
@@ -147,8 +144,6 @@ equation
     annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
-  connect(thermalZone.TSetHeat, TSetHeat1) annotation (Line(points={{-9.6,1.2},
-          {-35.8,1.2},{-35.8,-2},{-62,-2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         experiment(Tolerance=1e-6,StopTime=3.1536e+007,Interval=3600),
