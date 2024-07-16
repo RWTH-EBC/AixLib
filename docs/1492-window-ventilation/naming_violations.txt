@@ -1,6 +1,20 @@
 
 
 
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/DIN4108.mo
+1: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
+
+2: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
+
+
+AixLib/Airflow/WindowVentilation/BaseClasses/PartialEmpiricalFlow.mo
+1: Name 'OpeningArea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Opening, Area. Affected line: replaceable model OpeningArea = AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea constrainedby AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea( final winClrWidth=winClrWidth, final winClrHeight=winClrHeight) "Model for window opening area calculation" annotation(choicesAllMatching=true);
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: OpeningArea openingArea "Model instance for window opening area calculation" annotation (Placement(transformation(extent={{20,60},{40,80}})));
+
+3: Name 'varNameIntRes' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Name. Affected line: parameter String varNameIntRes "Variable name of interim result";
+
+
 AixLib/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mo
 1: Name 'winSpe10Set' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Sources.TimeTable winSpe10Set(table=[0,0; 20,0; 30,5; 40,0; 50, 10; 60,0; 70,20; 80,0; 100,0; 110,20; 120,0; 130,10; 140,0; 150,5; 160,0;180,0]) "Set wind speed at the height of 10 m" annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
 
@@ -27,10 +41,26 @@ AixLib/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mo
 12: Name 'ashrae' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ashrae. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.ASHRAE ashrae( winClrWidth=winClrWidth, winClrHeight=winClrHeight, redeclare model OpeningArea = AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple, aziRef=aziRef) "Model ASHRAE" annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
 
 
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/DIN4108.mo
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/Maas.mo
+1: Name 'winSpe13' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe13. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe13(unit="m/s", min=0) "Local wind speed at a height of 13 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+
+2: Name 'cof3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cof3. Affected line: Real cof3 = 0.012 "Coefficient 3";
+
+
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/ASHRAE.mo
 1: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
 
 2: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
+
+
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/DIN16798.mo
+1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+
+2: Name 'cofTh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Th. Affected line: Real cofTh = 0.0035 "Coefficient of thermal buoyancy";
+
+3: Name 'T0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T0. Affected line: Modelica.Units.SI.Temperature T0 = 273.15 "Temperature at 0 °C";
+
+4: Name 'rhoRefASL0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ref0. Affected line: Modelica.Units.SI.Density rhoRefASL0 = 1.204 "Reference dry air density, 293 K, 0 m above see level";
 
 
 AixLib/Airflow/WindowVentilation/OpeningAreas/OpeningAreaSashCommon.mo
@@ -41,6 +71,30 @@ AixLib/Airflow/WindowVentilation/OpeningAreas/OpeningAreaSashCommon.mo
 3: Name 'AGeoOpn90' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Opn90. Affected line: Modelica.Units.SI.Area AGeoOpn90(min=0) "Geometric opening area by 90° opening";
 
 4: Name 'AEqvOpn90' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Opn90. Affected line: Modelica.Units.SI.Area AEqvOpn90(min=0) "Equivalent opening area by 90° opening";
+
+
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/LarsenHeiselberg.mo
+1: Name 'errCouWinSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Integer errCouWinSpe10(start=0) "Warning counter for assertion check of 'winSpe10'";
+
+2: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Real cof1, cof2, cof3 "Other coefficients";
+
+
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/WarrenParkins.mo
+1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+
+2: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
+
+3: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
+
+
+AixLib/Airflow/WindowVentilation/BaseClasses/Functions/OpeningAreaHinged/EffectiveOpeningArea.mo
+1: Name 'AEqv90' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Eqv90. Affected line: input Modelica.Units.SI.Area AEqv90(min=0) "Window equivalent opening area by 90° opening";
+
+
+AixLib/Airflow/WindowVentilation/BaseClasses/PartialOpeningArea.mo
+1: Name 'prescribedOpnWidth' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed. Affected line: parameter Modelica.Units.SI.Length prescribedOpnWidth(min=0)=0 "Fixed value of prescribed opening width" annotation(Dialog(enable = not use_opnWidth_in));
 
 
 AixLib/Airflow/WindowVentilation/Examples/OpeningArea.mo
@@ -98,17 +152,17 @@ AixLib/Airflow/WindowVentilation/Examples/VentilationFlowRateSashOpening.mo
 
 13: Name 'maas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: maas. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.Maas maas( winClrWidth=winClrWidth, winClrHeight=winClrHeight) "Model Maas" annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
 
-14: Name 'winSpePro13' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pro13. Affected line: AixLib.Airflow.WindowVentilation.Utilities.WindProfilePowerLaw winSpePro13( height=13, heightRef=10) "Calculate wind speed profile at height of 13 m" annotation (Placement(transformation(extent={{4,-120},{14,-110}})));
+14: Name 'winSpePro13' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pro13. Affected line: AixLib.Airflow.WindowVentilation.Utilities.WindProfilePowerLaw winSpePro13( height=13, heightRef=10) "Calculate wind speed profile at height of 13 m" annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
 
 15: Name 'hall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: hall. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.Hall hall( winClrWidth=winClrWidth, winClrHeight=winClrHeight) "Model Hall" annotation (Placement(transformation(extent={{60,-140},{80,-120}})));
 
 16: Name 'jiang' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: jiang. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.Jiang jiang( winClrWidth=winClrWidth, winClrHeight=winClrHeight) "Model Jiang" annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
 
 
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/Maas.mo
-1: Name 'winSpe13' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe13. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe13(unit="m/s", min=0) "Local wind speed at a height of 13 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+AixLib/Airflow/WindowVentilation/EmpiricalExpressions/GidsPhaff.mo
+1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 
-2: Name 'cof3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cof3. Affected line: Real cof3 = 0.012 "Coefficient 3";
+2: Name 'cof3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cof3. Affected line: Real cof3 = 0.01 "Coefficient 3";
 
 
 AixLib/Airflow/WindowVentilation/EmpiricalExpressions/Tang.mo
@@ -121,57 +175,3 @@ AixLib/Airflow/WindowVentilation/EmpiricalExpressions/Caciolo.mo
 1: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
 
 2: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
-
-
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/ASHRAE.mo
-1: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
-
-2: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
-
-
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/DIN16798.mo
-1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
-
-2: Name 'cofTh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Th. Affected line: Real cofTh = 0.0035 "Coefficient of thermal buoyancy";
-
-3: Name 'T0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T0. Affected line: Modelica.Units.SI.Temperature T0 = 273.15 "Temperature at 0 °C";
-
-4: Name 'rhoRefASL0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ref0. Affected line: Modelica.Units.SI.Density rhoRefASL0 = 1.204 "Reference dry air density, 293 K, 0 m above see level";
-
-
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/LarsenHeiselberg.mo
-1: Name 'errCouWinSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Integer errCouWinSpe10(start=0) "Warning counter for assertion check of 'winSpe10'";
-
-2: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Real cof1, cof2, cof3 "Other coefficients";
-
-
-AixLib/Airflow/WindowVentilation/BaseClasses/PartialOpeningArea.mo
-1: Name 'prescribedOpnWidth' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed. Affected line: parameter Modelica.Units.SI.Length prescribedOpnWidth(min=0)=0 "Fixed value of prescribed opening width" annotation(Dialog(enable = not use_opnWidth_in));
-
-
-AixLib/Airflow/WindowVentilation/BaseClasses/Functions/OpeningAreaHinged/EffectiveOpeningArea.mo
-1: Name 'AEqv90' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Eqv90. Affected line: input Modelica.Units.SI.Area AEqv90(min=0) "Window equivalent opening area by 90° opening";
-
-
-AixLib/Airflow/WindowVentilation/BaseClasses/PartialEmpiricalFlow.mo
-1: Name 'OpeningArea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Opening, Area. Affected line: replaceable model OpeningArea = AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea constrainedby AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningArea( final winClrWidth=winClrWidth, final winClrHeight=winClrHeight) "Model for window opening area calculation" annotation(choicesAllMatching=true);
-
-2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: OpeningArea openingArea "Model instance for window opening area calculation" annotation (Placement(transformation(extent={{20,60},{40,80}})));
-
-3: Name 'varNameIntRes' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Name. Affected line: parameter String varNameIntRes "Variable name of interim result";
-
-
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/WarrenParkins.mo
-1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
-
-2: Name 'V_flow_th' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_th. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
-
-3: Name 'V_flow_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: V_flow_win. Affected line: Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
-
-
-AixLib/Airflow/WindowVentilation/EmpiricalExpressions/GidsPhaff.mo
-1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0) "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
-
-2: Name 'cof3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cof3. Affected line: Real cof3 = 0.01 "Coefficient 3";
