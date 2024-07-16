@@ -285,6 +285,7 @@ equation
 <p>This example checks the models that simulate the window ventilation flow rate with the sash opening. For the sash opening type, all models are set to the bottom-hung opening.</p>
 <p>The result shows that the estimated volume flow can be quite different when using different models.</p>
 <p>Warnings are triggered when boundary conditions for an empirical expression are out of range. This could lead to inaccurate calculation results.</p>
+<p>This example is a stress test with a wide range of boundary conditions. These conditions can cause a lot of events and slow down the simulation. In practice, the warning will rarely be triggered.</p>
 </html>"), experiment(
       StartTime=0,
       StopTime=180,
