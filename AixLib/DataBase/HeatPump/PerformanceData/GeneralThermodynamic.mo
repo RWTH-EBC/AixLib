@@ -20,7 +20,8 @@ model GeneralThermodynamic
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.5) "Guetegrad"
+  Modelica.Blocks.Sources.RealExpression etaCarnot(y=eta_carnot)
+                                                          "Guetegrad"
     annotation (Placement(transformation(extent={{-118,18},{-82,38}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{0,-2},{20,18}})));
@@ -96,8 +97,6 @@ equation
           -110},{0,-110}}, color={0,0,127}));
   connect(productPel.y, qConOffDesign.u1) annotation (Line(points={{-1.9984e-15,
           -41},{-1.9984e-15,-44},{-38,-44}}, color={0,0,127}));
-  connect(copOffDesign.y, qConOffDesign.u2) annotation (Line(points={{83,0},{88,
-          0},{88,-56},{-38,-56}}, color={0,0,127}));
   connect(qConOffDesign.y, QCon) annotation (Line(points={{-61,-50},{-80,-50},{-80,
           -110}}, color={0,0,127}));
   connect(qConOffDesign.y, add1.u1) annotation (Line(points={{-61,-50},{-60,-50},
@@ -114,6 +113,8 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(copOffDesign.y, qConOffDesign.u2) annotation (Line(points={{83,0},{
+          126,0},{126,-56},{-38,-56}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GeneralThermodynamic;

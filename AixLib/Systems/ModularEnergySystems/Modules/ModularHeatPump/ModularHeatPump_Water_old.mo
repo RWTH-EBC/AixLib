@@ -118,7 +118,8 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
     annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
    parameter Boolean use_non_manufacturer=true  "Use non manufacturer approach?";
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.Generic_Water constrainedby
+      AixLib.DataBase.HeatPump.PerformanceData.Generic_Water_R410A
+                                                             constrainedby
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);

@@ -42,8 +42,7 @@ model DesignGenericHP
   SDF.NDTable SDFCOPDesign(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
+    final filename=filename_COP,
     final dataset="\COP",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -98,8 +97,7 @@ model DesignGenericHP
   SDF.NDTable SDF_PI_Design(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf"),
+    final filename=filename_PI,
     final dataset="\PI",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -113,7 +111,7 @@ model DesignGenericHP
   SDF.NDTable SDF_PI_FullLoad(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf"),
+    final filename=filename_PI,
     final dataset="\PI",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -138,8 +136,7 @@ model DesignGenericHP
   SDF.NDTable SDFCOPNominal1(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
+    final filename=filename_COP,
     final dataset="\COP",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -163,8 +160,7 @@ model DesignGenericHP
   SDF.NDTable SDF_T_FullLoad(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
+    final filename=filename_T_Design,
     final dataset="\T_mean_comp",
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -179,8 +175,7 @@ model DesignGenericHP
   SDF.NDTable SDF_T_Design(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf"),
+    final filename=filename_T_Design,
     final dataset="\T_mean_comp",
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -196,6 +191,20 @@ model DesignGenericHP
     annotation (Placement(transformation(extent={{104,20},{124,40}})));
   Modelica.Blocks.Math.Product product4
     annotation (Placement(transformation(extent={{80,-44},{100,-24}})));
+  parameter String filename=ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf")
+    "File name" annotation (Dialog(tab="NotManufacturer"));
+  parameter String filename_T_Design=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf")
+    "File name" annotation (Dialog(tab="NotManufacturer"));
+  parameter String filename_COP=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf")
+    "File name" annotation (Dialog(tab="NotManufacturer"));
+  parameter String filename_PI=ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf")
+    "File name" annotation (Dialog(tab="NotManufacturer"));
 equation
   connect(tSourceNom.y, fromKelvin3.Kelvin)
     annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));

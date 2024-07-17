@@ -13,7 +13,7 @@ package Examples "Holds examples for the modular energy system units"
       redeclare package MediumEvap = AixLib.Media.Water,
       use_non_manufacturer=true,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water,
+          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water_R410A,
       FreDep=false)
       annotation (Placement(transformation(extent={{40,-16},{60,4}})));
     .AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
@@ -395,7 +395,7 @@ package Examples "Holds examples for the modular energy system units"
       TSourceInternal=false,
       dpInternal=10000,
       redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water)
+          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water_R410A)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Fluid.Sources.Boundary_pT        bou(
       redeclare package Medium = AixLib.Media.Water,

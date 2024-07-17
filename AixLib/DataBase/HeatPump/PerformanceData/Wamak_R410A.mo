@@ -67,6 +67,8 @@ model Wamak_R410A "Wamak WaterWater R410A"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={56,60})));
+  Modelica.Blocks.Sources.RealExpression one(y=1)
+    annotation (Placement(transformation(extent={{28,64},{4,84}})));
 equation
 
   connect(QEva, QEva)
@@ -117,14 +119,6 @@ equation
           {98,-20},{74,-20},{74,-58}}, color={0,0,127}));
   connect(division.y, productQCon3.u2) annotation (Line(points={{-47,32},{-36,
           32},{-36,26},{-18,26},{-18,28}}, color={0,0,127}));
-  connect(sigBus.nSet, productQCon3.u1) annotation (Line(
-      points={{-0.925,100.07},{-0.925,62},{-24,62},{-24,40},{-18,40}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(productQCon3.y, productQCon1.u2) annotation (Line(points={{5,34},{22,
           34},{22,0},{-6,0},{-6,-58}}, color={0,0,127}));
   connect(productQCon3.y, productQCon.u2) annotation (Line(points={{5,34},{14,
@@ -188,6 +182,8 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(division.y, productQCon4.u1) annotation (Line(points={{-47,32},{-32,
           32},{-32,66},{44,66}}, color={0,0,127}));
+  connect(one.y, productQCon3.u1) annotation (Line(points={{2.8,74},{-24,74},{
+          -24,40},{-18,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},

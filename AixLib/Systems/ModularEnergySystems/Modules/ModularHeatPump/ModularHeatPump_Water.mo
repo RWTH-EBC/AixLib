@@ -69,7 +69,9 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSourceDes,
-    TSourceInternal=TSourceInternal)
+    TSourceInternal=TSourceInternal,
+    FreDep=FreDep,
+    eta_carnot=eta_carnot)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
 
   Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
@@ -108,12 +110,12 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     TSource=TSource)
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-56},{10,-36}})));
-  BaseClasses.COP_calc cOP_calc
-    annotation (Placement(transformation(extent={{-74,46},{-54,68}})));
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.Wamak_R134a constrainedby
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
+  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
+  parameter Real eta_carnot=0.405;
 protected
  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=7 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
@@ -171,29 +173,7 @@ equation
   connect(heatPump.port_a2, heatSource.port_b)
     annotation (Line(points={{14,-12},{14,-46},{10,-46}}, color={0,127,255}));
   connect(heatPump.port_b2, heatSource.port_a) annotation (Line(points={{-6,-12},
-          {-8,-12},{-8,-36},{-10,-36},{-10,-46}}, color={0,127,255}));
-  connect(sigBus.PelMea, cOP_calc.P_el_mea) annotation (Line(
-      points={{1.075,101.085},{1.075,78},{-88,78},{-88,61.4},{-76,61.4}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.QCon, cOP_calc.Q_con) annotation (Line(
-      points={{1.075,101.085},{1.075,80},{-100,80},{-100,52.6},{-76,52.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cOP_calc.COP, sigBus.COP) annotation (Line(points={{-53,57},{1.075,57},
-          {1.075,101.085}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+          {-16,-12},{-16,-46},{-10,-46}},         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

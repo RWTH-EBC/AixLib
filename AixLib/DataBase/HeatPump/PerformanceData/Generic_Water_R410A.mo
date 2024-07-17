@@ -1,5 +1,5 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Generic_Water "Generic WaterWater"
+model Generic_Water_R410A "Generic WaterWater"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -60,9 +60,6 @@ model Generic_Water "Generic WaterWater"
 //  parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 equation
 
-  connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
-          -70},{74,-70},{74,-74}},                                  color={0,0,127}));
-
   connect(QEva, QEva)
     annotation (Line(points={{80,-110},{80,-110}}, color={0,0,127}));
 
@@ -80,8 +77,6 @@ equation
           -33},{-6.66134e-16,-36},{-74,-36},{-74,-42}}, color={0,0,127}));
   connect(PelOnOff.y, addQEvap.u1) annotation (Line(points={{-6.66134e-16,-33},
           {-6.66134e-16,-50},{86,-50},{86,-74}}, color={0,0,127}));
-  connect(productQCon.y, QCon)
-    annotation (Line(points={{-80,-65},{-80,-110}}, color={0,0,127}));
   connect(addQEvap.y, QEva)
     annotation (Line(points={{80,-97},{80,-110}}, color={0,0,127}));
   connect(PelOnOff.y, Pel)
@@ -142,6 +137,10 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(productQCon.y, QCon) annotation (Line(points={{-80,-65},{-80,-110},{
+          -80,-110}}, color={0,0,127}));
+  connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
+          -80},{72,-80},{72,-74},{74,-74}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},
@@ -222,4 +221,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end Generic_Water;
+end Generic_Water_R410A;

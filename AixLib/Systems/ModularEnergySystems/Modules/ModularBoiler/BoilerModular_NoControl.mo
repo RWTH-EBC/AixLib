@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
-model BoilerModular3
+model BoilerModular_NoControl
 
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare final
       package Medium = AixLib.Media.Water, final m_flow_nominal=DesQ/(Medium.cp_const
@@ -29,23 +29,12 @@ model BoilerModular3
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
      "Guess value of dp = port_a.p - port_b.p"
      annotation (Dialog(tab="Advanced", group="Initialization"));
-
-     parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_external=0;
    parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
      "Guess value of m_flow = port_a.m_flow"
      annotation (Dialog(tab="Advanced", group="Initialization"));
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
      "Start value of pressure"
      annotation (Dialog(tab="Advanced", group="Initialization"));
-
-  Fluid.BoilerCHP.BoilerGeneric boilerGeneric(
-    allowFlowReversal=true,
-    initType=Modelica.Blocks.Types.Init.InitialState,
-    T_start=T_start,
-    QNom=DesQ,
-    THotNom=DesRetT + DesDelT,
-    TColdNom=DesRetT)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Fluid.Sensors.TemperatureTwoPort senTIn(
     redeclare final package Medium = AixLib.Media.Water,
@@ -76,7 +65,7 @@ model BoilerModular3
   final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   final parameter Modelica.Units.SI.PressureDifference dp_Boiler= 7.143*
       10^8*exp(-0.000007078*DesQ)*(V_flow_nominal)^2;
-  final parameter Modelica.Units.SI.PressureDifference dp_nominal= dp_Boiler+dp_external;
+  final parameter Modelica.Units.SI.PressureDifference dp_nominal= dp_Boiler;
 
   Fluid.Sensors.TemperatureTwoPort senTIn1(
     redeclare final package Medium = Media.Water,
@@ -101,16 +90,16 @@ model BoilerModular3
     addPowerToMedium=false,
     use_inputFilter=false) if Pump == true
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
+  Fluid.BoilerCHP.BoilerNoControl boilerNoControl(
+    redeclare package Medium = AixLib.Media.Water,
+    m_flow_nominal=311/4.18/20,
+    dp_nominal=dp_nominal,
+    paramBoiler=AixLib.DataBase.Boiler.General.Boiler_Vitocrossal200_311kW())
+    annotation (Placement(transformation(extent={{-2,-10},{18,10}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
+        displayUnit="K") = 293.15) "Temperature of environment around the boiler to account for heat losses"
+    annotation (Placement(transformation(extent={{48,-22},{36,-10}})));
 equation
-
-  connect(boilerControlBus, boilerGeneric.boilerControlBus) annotation (Line(
-      points={{0,100},{0,10},{0,10}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
 
     if DWheating == true then
 
@@ -122,14 +111,18 @@ equation
 
     end if;
 
+    connect(senTIn.T, boilerControlBus.TBoilerIn) annotation (Line(points={{-56,8.8},
+          {-56,86},{0,86},{0,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(port_a, senTIn1.port_a)
     annotation (Line(points={{-100,0},{-92,0}}, color={0,127,255}));
   connect(senTIn1.port_b, senTIn.port_a)
     annotation (Line(points={{-80,0},{-62,0}}, color={0,127,255}));
   connect(senTIn.port_b, pump.port_a)
     annotation (Line(points={{-50,0},{-44,0}}, color={0,127,255}));
-  connect(pump.port_b, boilerGeneric.port_a)
-    annotation (Line(points={{-24,0},{-10,0}}, color={0,127,255}));
   connect(boilerControlBus.m_flowSet, pump.y) annotation (Line(
       points={{0,100},{0,58},{-34,58},{-34,12}},
       color={255,204,51},
@@ -138,8 +131,32 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerGeneric.port_b, port_b)
-    annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
+  connect(pump.port_b, boilerNoControl.port_a)
+    annotation (Line(points={{-24,0},{-2,0}}, color={0,127,255}));
+  connect(boilerNoControl.port_b, port_b)
+    annotation (Line(points={{18,0},{100,0}}, color={0,127,255}));
+  connect(boilerControlBus.FirRatSet, boilerNoControl.u_rel) annotation (Line(
+      points={{0,100},{2,100},{2,24},{-12,24},{-12,7},{1,7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerNoControl.T_amb, fixedTemperature.port) annotation (Line(points
+        ={{14.8,-5},{30,-5},{30,-16},{36,-16}}, color={191,0,0}));
+  connect(boilerNoControl.fuelPower, boilerControlBus.PowerDemand) annotation (
+      Line(points={{15.2,11},{32,11},{32,100},{0,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(boilerNoControl.T_out, boilerControlBus.TSupplyMea) annotation (Line(
+        points={{15.2,3.2},{42,3.2},{42,100},{0,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
@@ -164,4 +181,4 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={192,192,192})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end BoilerModular3;
+end BoilerModular_NoControl;

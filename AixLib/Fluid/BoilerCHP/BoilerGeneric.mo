@@ -145,7 +145,7 @@ equation
   connect(fromKelvin.Celsius, toKelvin.Celsius)
     annotation (Line(points={{-1,-16},{6,-16}},         color={0,0,127}));
   connect(toKelvin.Kelvin, boilerControlBus.TSupplyMea) annotation (Line(points={{29,-16},
-          {36,-16},{36,-6},{22,-6},{22,60},{0,60},{0,100}},          color={0,0,
+          {36,-16},{36,60},{0,60},{0,100}},                          color={0,0,
           127}), Text(
       string="%second",
       index=1,

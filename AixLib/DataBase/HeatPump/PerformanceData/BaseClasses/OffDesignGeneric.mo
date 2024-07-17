@@ -14,7 +14,7 @@ model OffDesignGeneric
   SDF.NDTable sDF_COP(
     final nin=4,
     final readFromFile=true,
-    final filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf"),
+    final filename=filename,
     final dataset="/COP",
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
@@ -97,12 +97,15 @@ model OffDesignGeneric
         origin={-64,2})));
   Modelica.Blocks.Sources.RealExpression hundret(y=100)
     annotation (Placement(transformation(extent={{-102,-18},{-84,0}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=100, uMin=0)
+    annotation (Placement(transformation(extent={{-52,-100},{-32,-80}})));
+  parameter String filename=ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf")
+    "File name" annotation (Dialog(tab="Advanced"));
 equation
 
   connect(fromKelvin1.Celsius,multiplex4_2. u1[1]) annotation (Line(points={{26.8,70},
           {30,70},{30,8},{36,8},{36,9}},           color={0,0,127}));
-  connect(fromKelvin5.Celsius,multiplex4_2. u4[1]) annotation (Line(points={{-65,-90},
-          {6,-90},{6,-8},{36,-8},{36,-9}},   color={0,0,127}));
   connect(multiplex4_2.y,sDF_COP. u)
     annotation (Line(points={{59,0},{67.6,0}},      color={0,0,127}));
   connect(deltaTCon.y, multiplex4_2.u3[1])
@@ -113,8 +116,6 @@ equation
   connect(tSource1.y, switch1.u1)
     annotation (Line(points={{-34.2,59},{-34.2,62},{-22,62}},
                                                    color={0,0,127}));
-  connect(fromKelvin5.Celsius, deltaTCon.u2) annotation (Line(points={{-65,-90},
-          {-50,-90},{-50,-42},{-42,-42}},                     color={0,0,127}));
   connect(fromKelvin4.Celsius, deltaTCon.u1) annotation (Line(points={{-61,-30},
           {-42,-30}},                color={0,0,127}));
   connect(sDF_COP.y, COP)
@@ -142,6 +143,12 @@ equation
           {-80,-9},{-83.1,-9}}, color={0,0,127}));
   connect(frequency, productPel.u1)
     annotation (Line(points={{-120,8},{-76,8}}, color={0,0,127}));
+  connect(limiter1.y, multiplex4_2.u4[1]) annotation (Line(points={{-31,-90},{
+          20,-90},{20,-9},{36,-9}}, color={0,0,127}));
+  connect(fromKelvin5.Celsius, limiter1.u)
+    annotation (Line(points={{-65,-90},{-54,-90}}, color={0,0,127}));
+  connect(limiter1.y, deltaTCon.u2) annotation (Line(points={{-31,-90},{-26,-90},
+          {-26,-52},{-56,-52},{-56,-42},{-42,-42}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
                                                               Text(

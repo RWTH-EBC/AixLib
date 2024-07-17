@@ -118,8 +118,6 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
   parameter Real eta_carnot=0.405;
-  BaseClasses.COP_calc cOP_calc
-    annotation (Placement(transformation(extent={{-72,54},{-52,76}})));
 protected
  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=7 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
@@ -177,28 +175,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.PelMea, cOP_calc.P_el_mea) annotation (Line(
-      points={{1.075,101.085},{1.075,86},{-86,86},{-86,69.4},{-74,69.4}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.QCon, cOP_calc.Q_con) annotation (Line(
-      points={{1.075,101.085},{1.075,88},{-98,88},{-98,60.6},{-74,60.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cOP_calc.COP, sigBus.COP) annotation (Line(points={{-51,65},{1.075,65},
-          {1.075,101.085}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

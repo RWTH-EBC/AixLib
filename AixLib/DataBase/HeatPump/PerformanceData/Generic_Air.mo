@@ -73,6 +73,8 @@ model Generic_Air "Generic AirWater"
         origin={-4,52})));
   Modelica.Blocks.Sources.RealExpression IceFactor(y=1)
     annotation (Placement(transformation(extent={{26,180},{54,200}})));
+  Modelica.Blocks.Sources.RealExpression one(y=1)
+    annotation (Placement(transformation(extent={{54,-10},{30,10}})));
 equation
 
   connect(QEva, QEva)
@@ -119,14 +121,6 @@ equation
           {-70,-20},{74,-20},{74,-68}},color={0,0,127}));
   connect(scalingFactor.y, productQCon3.u2)
     annotation (Line(points={{27,32},{-38,32},{-38,22}}, color={0,0,127}));
-  connect(sigBus.nSet, productQCon3.u1) annotation (Line(
-      points={{-0.925,100.07},{0,100.07},{0,100},{-26,100},{-26,22}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(productQCon3.y, productQCon2.u1)
     annotation (Line(points={{-32,-1},{-32,-32},{86,-32},{86,-68}},
                                                        color={0,0,127}));
@@ -195,6 +189,8 @@ equation
           18,32},{18,46},{8,46}}, color={0,0,127}));
   connect(lookUpTable2D2.QEva, productQCon4.u1)
     annotation (Line(points={{78,63},{78,58},{8,58}}, color={0,0,127}));
+  connect(one.y, productQCon3.u1) annotation (Line(points={{28.8,0},{14,0},{14,
+          12},{-2,12},{-2,28},{-26,28},{-26,22}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},

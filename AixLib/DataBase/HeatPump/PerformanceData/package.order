@@ -5,10 +5,11 @@ PolynomalApproach
 VCLibMap
 calcCOP
 BaseClasses
-Generic_Water
+Generic_Water_R410A
 CarnotCOP
 GeneralThermodynamic
 GeneralThermodynamicReduced
 Generic_Air
 Wamak_R134a
 Wamak_R410A
+Generic_Water_R134a

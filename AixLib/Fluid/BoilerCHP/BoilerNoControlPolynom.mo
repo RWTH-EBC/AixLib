@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP;
-model BoilerNoControl "Boiler model with physics only"
+model BoilerNoControlPolynom "Boiler model with physics only"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
                                          final V=V));
@@ -7,6 +7,11 @@ model BoilerNoControl "Boiler model with physics only"
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
          "Boiler type"), choicesAllMatching=true);
+
+
+  parameter Real Coeff[:] = {0.9} "Coefficients for efficiency curve";
+
+
   parameter Modelica.Units.SI.ThermalConductance G=0.003*Q_nom/50
     "Constant thermal conductance to environment(G=Q_loss/dT)";
   parameter Modelica.Units.SI.HeatCapacity C=1.5*Q_nom
@@ -29,14 +34,13 @@ model BoilerNoControl "Boiler model with physics only"
         rotation=180,
         origin={-30,-20})));
   Modelica.Blocks.Math.Product QgasCalculation "Calculate gas usage"
-    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
+    annotation (Placement(transformation(extent={{10,82},{30,102}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
     "Limits the rel power between 0 and 1"
-    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
-        max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
+    annotation (Placement(transformation(extent={{-76,60},{-56,80}})));
+  Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=19900)
     "Nominal gas power"
-    annotation (Placement(transformation(extent={{-74,84},{-34,104}})));
+    annotation (Placement(transformation(extent={{-46,88},{-6,108}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower
     "Connector of Real output signal" annotation (Placement(transformation(
           extent={{100,90},{120,110}}), iconTransformation(extent={{-10,-10},{10,
@@ -58,13 +62,6 @@ model BoilerNoControl "Boiler model with physics only"
       Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation(
           extent={{58,-60},{78,-40}})));
 
-  Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending(
-    final tableOnFile=false,
-    final table=etaLoadBased,
-    final columns={2},
-    final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
-    "Table with efficiency parameters"
-    annotation (Placement(transformation(extent={{-40,50},{-19,71}})));
   Modelica.Blocks.Math.Product QflowCalculation
     "Calculation of the produced heatflow"      annotation (Placement(
         transformation(
@@ -82,72 +79,55 @@ model BoilerNoControl "Boiler model with physics only"
     "Table matrix for part load based efficiency (e.g. [0,0.99; 0.5, 0.98; 1, 0,97])";
   parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99]
   "Table matrix for temperature based efficiency";
-  Modelica.Blocks.Math.Product etaCalculation
-    "calculates the efficiency of the boiler" annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={10,50})));
-  Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending1(
-    final tableOnFile=false,
-    final table=etaTempBased,
-    final columns={2},
-    final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
-    "Table with efficiency parameters"
-    annotation (Placement(transformation(extent={{-40,20},{-19,41}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{48,14},{68,34}})));
+
   Modelica.Blocks.Interfaces.RealOutput efficiency
                                       annotation (Placement(transformation(
           extent={{100,120},{120,140}}),iconTransformation(extent={{-10,-10},{10,
             10}},
         rotation=0,
-        origin={72,138})));
+        origin={72,136})));
+  BaseClasses.Polynom polynom(a=Coeff)
+    annotation (Placement(transformation(extent={{-28,36},{-8,56}})));
 equation
   connect(vol.heatPort, ConductanceToEnv.port_a)
     annotation (Line(points={{-50,-70},{-50,-20},{-40,-20}}, color={191,0,0}));
   connect(vol.heatPort, internalCapacity.port)
     annotation (Line(points={{-50,-70},{-50,-40},{-8,-40}}, color={191,0,0}));
-  connect(QgasCalculation.y, fuelPower) annotation (Line(points={{1,90},{8,90},{
-          8,100},{110,100}},    color={0,0,127}));
+  connect(QgasCalculation.y, fuelPower) annotation (Line(points={{31,92},{60,92},
+          {60,100},{110,100}},  color={0,0,127}));
   connect(limiter.u, u_rel)
-    annotation (Line(points={{-82,70},{-82,96},{-80,96},{-80,120}},
+    annotation (Line(points={{-78,70},{-78,96},{-80,96},{-80,120}},
                                                              color={0,0,127}));
   connect(ConductanceToEnv.port_b, T_amb)
     annotation (Line(points={{-20,-20},{40,-20}}, color={191,0,0}));
-  connect(QgasCalculation.u1, NominalGasConsumption.y)
-    annotation (Line(points={{-22,96},{-26,96},{-26,94},{-32,94}},
-                                                   color={0,0,127}));
-  connect(limiter.y, QgasCalculation.u2) annotation (Line(points={{-59,70},{-50,
-          70},{-50,84},{-22,84}}, color={0,0,127}));
-  connect(limiter.y, efficiencyTableLoadDepending.u[1]) annotation (Line(points=
-         {{-59,70},{-50,70},{-50,60.5},{-42.1,60.5}}, color={0,0,127}));
+  connect(limiter.y, QgasCalculation.u2) annotation (Line(points={{-55,70},{-50,
+          70},{-50,86},{8,86}},   color={0,0,127}));
   connect(QflowCalculation.y, heater.Q_flow)
     annotation (Line(points={{-60,-9},{-60,-40}}, color={0,0,127}));
   connect(QflowCalculation.y, thermalPower) annotation (Line(points={{-60,-9},{-18,
           -9},{-18,0},{24,0},{24,80},{110,80}},color={0,0,127}));
-  connect(QgasCalculation.y, QflowCalculation.u2) annotation (Line(points={{1,90},{
-          8,90},{8,132},{-96,132},{-96,14},{-66,14}},            color={0,0,127}));
+  connect(QgasCalculation.y, QflowCalculation.u2) annotation (Line(points={{31,92},
+          {60,92},{60,140},{-96,140},{-96,14},{-66,14}},         color={0,0,127}));
   connect(senTCold.T, T_in) annotation (Line(points={{-70,-69},{-70,-102},{110,-102},
           {110,40}}, color={0,0,127}));
   connect(port_b, port_b)
     annotation (Line(points={{100,0},{100,0}}, color={0,127,255}));
-  connect(efficiencyTableLoadDepending.y[1], etaCalculation.u1) annotation (
-      Line(points={{-17.95,60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,
-          0,127}));
-  connect(efficiencyTableLoadDepending1.y[1], etaCalculation.u2) annotation (
-      Line(points={{-17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,
-          0,127}));
-  connect(senTCold.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
-        points={{-70,-69},{-72,-69},{-72,30.5},{-42.1,30.5}}, color={0,0,127}));
-  connect(QflowCalculation.u1, etaCalculation.y)
-    annotation (Line(points={{-54,14},{21,14},{21,50}}, color={0,0,127}));
   connect(temperatureSensor.T, T_out) annotation (Line(points={{69,24},{82,24},
           {82,60},{110,60}}, color={0,0,127}));
   connect(temperatureSensor.port, vol.heatPort) annotation (Line(points={{48,24},
           {44,24},{44,10},{42,10},{42,-70},{-50,-70}}, color={191,0,0}));
-  connect(etaCalculation.y, efficiency) annotation (Line(points={{21,50},{32,50},
-          {32,70},{44,70},{44,130},{110,130}}, color={0,0,127}));
+  connect(NominalGasConsumption.y, QgasCalculation.u1)
+    annotation (Line(points={{-4,98},{8,98}}, color={0,0,127}));
+  connect(limiter.y, polynom.u) annotation (Line(points={{-55,70},{-48,70},{-48,
+          68},{-42,68},{-42,52},{-30,52}}, color={0,0,127}));
+  connect(senTCold.T, polynom.tCold) annotation (Line(points={{-70,-69},{-74,-69},
+          {-74,40},{-30,40}}, color={0,0,127}));
+  connect(polynom.efficiency, QflowCalculation.u1) annotation (Line(points={{-7,
+          46},{8,46},{8,24},{-54,24},{-54,14}}, color={0,0,127}));
+  connect(efficiency, polynom.efficiency) annotation (Line(points={{110,130},{
+          74,130},{74,46},{-7,46}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
@@ -228,4 +208,4 @@ equation
   </li>
 </ul>
 </html>"));
-end BoilerNoControl;
+end BoilerNoControlPolynom;

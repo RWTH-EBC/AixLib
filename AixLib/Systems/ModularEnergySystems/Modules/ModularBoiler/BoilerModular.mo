@@ -138,7 +138,7 @@ equation
 
 
   connect(boilerControlBus, boilerGeneric.boilerControlBus) annotation (Line(
-      points={{0,100},{0,10},{-2.8,10}},
+      points={{0,100},{0,10},{0,10}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
