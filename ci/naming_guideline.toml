@@ -1,12 +1,12 @@
 modelica_special_names = [ "parameter", "constant", "replaceable", "import", "extends", "in", "of", "input", "output", "final", "protected", "public", "function", "model", "package", "inner", "outer",]
 modelica_types = [ "Real", "real", "Boolean", "boolean", "Integer", "String",]
-libraries = [ "Modelica",]
+libraries = [ "Modelica", "AixLib"]
 special_names = [ "energyDynamics", "massDynamics", "substanceDynamics", "traceDynamics", "linearizeFlowResistance", "computeFlowResistance", "homotopyInitialization", "linearized", "allowFlowReversal", "extrapolation", "smoothness", "initType",]
-special_parts_with_upper = [ "COP", "PID", "deltaM",]
-two_character_words = [ "is", "to", "no", "or", "on",]
+special_parts_with_upper = [ "COP", "PID", "deltaM", "NPL", "ASL"]
+two_character_words = [ "is", "to", "no", "or", "on", "in"]
 four_character_words = [ "const", "flow", "gain", "year", "time",]
 special_ends = [ "_flow", "_start", "_flow_nominal", "_nominal", "_flow_internal", "_internal", "_small", "_flow_small", "1", "2", "_a", "_b", "_p", "_n", "_x1", "_x2", "_in", "_out", ";", "_min", "_max", "_const",]
-SPECIAL_STARTS = [ "use_", "port_", "have_", "terminal_", "heatport_from_",]
+special_starts = [ "use_", "port_", "have_", "terminal_", "heatport_from_", "from_"]
 
 [special_parts]
 T = "temperature"
@@ -31,6 +31,7 @@ R = "resistance"
 C = "capacity"
 lambda = "conductivity"
 height = "height"
+Height = "height"
 U = "energy"
 nu = "viscosity"
 lat = "latitude"
@@ -54,3 +55,8 @@ tau = "transmittance"
 vel = "velocity"
 V = [ "volume", "voltage",]
 width = "width"
+Width = "width"
+Room = "room"
+Zone = "zone"
+zone = "zone"
+room = "room"
