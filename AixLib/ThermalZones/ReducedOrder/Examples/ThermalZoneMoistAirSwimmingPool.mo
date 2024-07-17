@@ -136,14 +136,15 @@ model ThermalZoneMoistAirSwimmingPool
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
-  Fluid.Sources.MassFlowSource_T sourcAir(
+  AixLib.Fluid.Sources.MassFlowSource_T sourcAir(
     redeclare package Medium = AixLib.Media.Air,
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
     nPorts=1) "mass flow rate of air into thermal zone"
     annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
-  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = AixLib.Media.Air,
+  AixLib.Fluid.Sources.Boundary_pT sinAir(redeclare package Medium =
+        AixLib.Media.Air,
       nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
   Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
@@ -152,7 +153,7 @@ model ThermalZoneMoistAirSwimmingPool
     tableName="openingHours",
     columns=2:2,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt")) 
+        "modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt"))
     "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-92,-34},{-76,-18}})));
   Modelica.Blocks.Sources.Constant
