@@ -1,0 +1,292 @@
+
+Error in model:  AixLib.Fluid.Storage.StorageDetailed 
+Check of <a href="Modelica://AixLib.Fluid.Storage.StorageDetailed">AixLib.Fluid.Storage.StorageDetailed</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 78
+ Component context: layer.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 78
+ Component context: heatingCoil1.pipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 78
+ Component context: heatingCoil1.pipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 78
+ Component context: heatingCoil2.pipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 78
+ Component context: heatingCoil2.pipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Check is assuming: data.hLowerPortDemand = 0
+Check is assuming: data.hTank = 0
+Check is assuming: data.hLowerPortSupply = 0
+Check is assuming: data.hUpperPortDemand = 0
+Check is assuming: data.hUpperPortSupply = 0
+Check is assuming: data.hHC1Up = 0
+Check is assuming: data.hHC1Low = 0
+Check is assuming: data.hHC2Up = 0
+Check is assuming: data.hHC2Low = 0
+Warning: Current version of the Modelica translator can only handle
+array of components with fixed size.
+But component layer[1].ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 32
+But component layer[1].dynBal.ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 72
+But component layer[2].ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 32
+But component layer[2].dynBal.ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 72
+But component layer[3].ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 32
+But component layer[3].dynBal.ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 72
+But component layer[4].ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 32
+But component layer[4].dynBal.ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 72
+But component layer[5].ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 32
+But component layer[5].dynBal.ports had non-fixed array dimensions [nPorts].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 72
+But component heatingCoil1.convHC1Outside had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 18
+But component heatingCoil1.Therm1 had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 24
+But component heatingCoil1.pipe had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 28
+But component heatingCoil2.convHC1Outside had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 18
+But component heatingCoil2.Therm1 had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 24
+But component heatingCoil2.pipe had non-fixed array dimensions [disHC].
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/BaseClasses/HeatingCoil.mo, line 28
+All variables used in size expressions must be declared as constants or parameters.
+Unspecified size for array of records layer[1].ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[1].dynBal.ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[2].ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[2].dynBal.ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[3].ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[3].dynBal.ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[4].ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[4].dynBal.ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[5].ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records layer[5].dynBal.ports; using default size for check. This must be specified before using the model.
+Unspecified size for array of records heatingCoil1.convHC1Outside; using default size for check. This must be specified before using the model.
+Unspecified size for array of records heatingCoil1.Therm1; using default size for check. This must be specified before using the model.
+Unspecified size for array of records heatingCoil1.pipe; using default size for check. This must be specified before using the model.
+Check is assuming: data.lengthHC1 = 0
+Unspecified size for array of records heatingCoil2.convHC1Outside; using default size for check. This must be specified before using the model.
+Unspecified size for array of records heatingCoil2.Therm1; using default size for check. This must be specified before using the model.
+Unspecified size for array of records heatingCoil2.pipe; using default size for check. This must be specified before using the model.
+Check is assuming: data.lengthHC2 = 0
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].res.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.res.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].res.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.res.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Check is assuming: mHC1_flow_nominal = 0
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].del.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.del.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].del.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.del.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].heaLos_a.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.heaLos_a.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].heaLos_a.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.heaLos_a.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].heaLos_b.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.heaLos_b.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].heaLos_b.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.heaLos_b.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil1.pipe[1].senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil1.pipe.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].res.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.res.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].res.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.res.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Check is assuming: mHC2_flow_nominal = 0
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].del.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.del.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].del.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.del.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].heaLos_a.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.heaLos_a.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].heaLos_a.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.heaLos_a.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].heaLos_b.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.heaLos_b.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].heaLos_b.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.heaLos_b.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for heatingCoil2.pipe[1].senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class heatingCoil2.pipe.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+The model contained invalid expressions.
+Check of class aborted.
+Warning: WARNINGS have been issued.
+
