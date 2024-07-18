@@ -1,0 +1,15 @@
+
+Error in model:  AixLib.Utilities.Sensors.Examples.ExergyMeters 
+Check of <a href="Modelica://AixLib.Utilities.Sensors.Examples.ExergyMeters">AixLib.Utilities.Sensors.Examples.ExergyMeters</a>:
+Error: For variable bufferStorageHeatingcoils.TStart
+ declared in class <a href="Modelica://AixLib.Fluid.Storage.StorageDetailed">AixLib.Fluid.Storage.StorageDetailed</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/StorageDetailed.mo at line <a href="Modelica://AixLib.Fluid.Storage.StorageDetailed#text:33">34</a>, and used in component <a href="Modelica://AixLib.Utilities.Sensors.Examples.ExergyMeters#:bufferStorageHeatingcoils">bufferStorageHeatingcoils</a>.
+Type inconsistent definition equation:
+  bufferStorageHeatingcoils.TStart = T_start;
+Error: The left hand side of the following equation is a vector
+and the right hand side is a scalar, i.e. it has non-compatible parts:
+    bufferStorageHeatingcoils.TStart = T_start;
+
+Basic type inconsistencies detected.
+Check aborted.
+Error: ERRORS have been issued.
+

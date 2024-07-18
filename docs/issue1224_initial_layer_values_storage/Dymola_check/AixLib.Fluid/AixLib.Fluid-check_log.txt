@@ -1,0 +1,15 @@
+
+Error in model:  AixLib.Fluid.Storage.Examples.StorageSolarCollector 
+Check of <a href="Modelica://AixLib.Fluid.Storage.Examples.StorageSolarCollector">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>:
+Error: For variable bufferStorage.TStart
+ declared in class <a href="Modelica://AixLib.Fluid.Storage.StorageDetailed">AixLib.Fluid.Storage.StorageDetailed</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Storage/StorageDetailed.mo at line <a href="Modelica://AixLib.Fluid.Storage.StorageDetailed#text:33">34</a>, and used in component <a href="Modelica://AixLib.Fluid.Storage.Examples.StorageSolarCollector#:bufferStorage">bufferStorage</a>.
+Type inconsistent definition equation:
+  bufferStorage.TStart = 333.15;
+Error: The left hand side of the following equation is a vector
+and the right hand side is a scalar, i.e. it has non-compatible parts:
+    bufferStorage.TStart = 333.15;
+
+Basic type inconsistencies detected.
+Check aborted.
+Error: ERRORS have been issued.
+
