@@ -12,8 +12,7 @@ model ComparisonThermalZoneMoistAndDryAir
     internalGainsMode=3,
     nPorts=2,
     T_start=293.15,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())
+    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-22},{10,-2}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -130,14 +129,14 @@ model ComparisonThermalZoneMoistAndDryAir
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-36},{54,-24}})));
 
-  Fluid.Sources.MassFlowSource_T sourcAir(
+  AixLib.Fluid.Sources.MassFlowSource_T sourcAir(
     redeclare package Medium = Media.Air,
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
     nPorts=1) "mass flow rate of air into thermal zone"
     annotation (Placement(transformation(extent={{-84,-92},{-64,-72}})));
-  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
+  AixLib.Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
       nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{-12,-98},{-32,-78}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
@@ -147,8 +146,7 @@ model ComparisonThermalZoneMoistAndDryAir
     redeclare package Medium = Media.Air,
     internalGainsMode=1,
     nPorts=2,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam,
     T_start=293.15) "Thermal zone"
     annotation (Placement(transformation(extent={{-12,74},{8,94}})));
 
@@ -258,14 +256,14 @@ model ComparisonThermalZoneMoistAndDryAir
   Modelica.Blocks.Math.Gain gain3(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{64,60},{52,72}})));
-  Fluid.Sources.MassFlowSource_T sourcAir1(
+  AixLib.Fluid.Sources.MassFlowSource_T sourcAir1(
     redeclare package Medium = Media.Air,
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
     nPorts=1) "mass flow rate of air into thermal zone"
     annotation (Placement(transformation(extent={{-72,0},{-52,20}})));
-  Fluid.Sources.Boundary_pT sinAir1(redeclare package Medium = Media.Air,
+  AixLib.Fluid.Sources.Boundary_pT sinAir1(redeclare package Medium = Media.Air,
       nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{34,4},{14,24}})));
 equation
@@ -292,10 +290,12 @@ equation
           67.2,-30}},
                  color={0,0,127}));
   connect(sourcAir.ports[1], thermalZoneMoistAir.ports[1]) annotation (Line(
-        points={{-64,-82},{-46,-82},{-46,-48},{-2.35,-48},{-2.35,-19.2}}, color=
+        points={{-64,-82},{-46,-82},{-46,-48},{-1.175,-48},{-1.175,-19.2}},
+                                                                          color=
          {0,127,255}));
   connect(thermalZoneMoistAir.ports[2], sinAir.ports[1]) annotation (Line(
-        points={{2.35,-19.2},{2.35,-52},{-38,-52},{-38,-88},{-32,-88}}, color={
+        points={{1.175,-19.2},{1.175,-52},{-38,-52},{-38,-88},{-32,-88}},
+                                                                        color={
           0,127,255}));
   connect(internalGains1.y, thermalZone.intGains)
     annotation (Line(points={{-1.3,32},{6,32},{6,75.6}}, color={0,0,127}));
@@ -314,9 +314,9 @@ equation
   connect(sine1.y, gain3.u) annotation (Line(points={{71,84},{68,84},{68,66},{65.2,
           66}}, color={0,0,127}));
   connect(sourcAir1.ports[1], thermalZone.ports[1]) annotation (Line(points={{-52,10},
-          {-48,10},{-48,48},{-4.35,48},{-4.35,76.8}},     color={0,127,255}));
-  connect(thermalZone.ports[2], sinAir1.ports[1]) annotation (Line(points={{0.35,
-          76.8},{0.35,44},{-40,44},{-40,14},{14,14}},     color={0,127,255}));
+          {-48,10},{-48,48},{-3.175,48},{-3.175,76.8}},   color={0,127,255}));
+  connect(thermalZone.ports[2], sinAir1.ports[1]) annotation (Line(points={{-0.825,
+          76.8},{-0.825,44},{-40,44},{-40,14},{14,14}},   color={0,127,255}));
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-78,-8},{-76,-8},{-76,90},{-12,90}},
       color={255,204,51},
