@@ -1,14 +1,12 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Generic_Air "Generic AirWater"
+model ASHP_Vitocal250A "ASHP_Vitocal250A"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
-
 
   Modelica.Blocks.Math.Product productQCon annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-80,-82})));
-
 
   LookUpTable2D lookUpTable2D(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
       dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal_250A())
@@ -271,4 +269,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end Generic_Air;
+end ASHP_Vitocal250A;

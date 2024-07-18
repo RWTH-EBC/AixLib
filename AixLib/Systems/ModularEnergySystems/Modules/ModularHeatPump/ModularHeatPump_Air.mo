@@ -114,7 +114,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
   Modelica.Blocks.Sources.BooleanExpression mode(y=true)
     annotation (Placement(transformation(extent={{162,60},{126,86}})));
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.Generic_Air constrainedby
+      AixLib.DataBase.HeatPump.PerformanceData.ASHP_Generic
+                                                           constrainedby
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
   parameter Real eta_carnot=0.405;

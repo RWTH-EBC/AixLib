@@ -1,5 +1,5 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Wamak_R134a "Wamak WaterWater R134a"
+model WSHP_Wamak_R134a "WSHP_Wamak_R134a"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -264,4 +264,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end Wamak_R134a;
+end WSHP_Wamak_R134a;

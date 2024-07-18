@@ -111,7 +111,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     "Liquid heat source"
     annotation (Placement(transformation(extent={{-10,-56},{10,-36}})));
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.Wamak_R134a constrainedby
+      AixLib.DataBase.HeatPump.PerformanceData.WSHP_Wamak_R134a
+                                                           constrainedby
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
