@@ -16,7 +16,7 @@ model OutsideWall
         AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withSunblind=true,
     outside=true,
-    calcMethodOut=2,
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     Blinding=0.2,
     LimitSolIrr=100,
     TOutAirLimit=282.15,

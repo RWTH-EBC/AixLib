@@ -14,10 +14,10 @@ record SurfaceOrientationData_N_E_S_W_Hor
 <p>
   Data in this set:
 </p>
-<table>
   <caption>
-    \"Data\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+    Data
   </caption>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
   <tr>
     <td style=\"background-color: #dcdcdc\">
       <p>
