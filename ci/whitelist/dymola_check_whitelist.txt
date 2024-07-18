@@ -33,7 +33,7 @@ AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveMassFlowRat
 AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors
 AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValves
 AixLib.Fluid.Actuators.Dampers.VAVBoxExponential
-AixLib.Fluid.Storage.BufferStorage
+AixLib.Fluid.Storage.StorageDetailed
 AixLib.Fluid.Storage.Examples.TwoPhaseSeparator
 AixLib.Media.Refrigerants.Examples.RefrigerantTestImplementation
 AixLib.Media.Refrigerants.Examples.BranchingDynamicPipes

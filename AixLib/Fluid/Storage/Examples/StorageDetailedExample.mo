@@ -1,12 +1,12 @@
 within AixLib.Fluid.Storage.Examples;
-model BufferStorage
+model StorageDetailedExample "Simple usage example for StorageDetailed"
 
   extends Modelica.Icons.Example;
   import AixLib;
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
-  AixLib.Fluid.Storage.BufferStorage bufferStorage(
+  AixLib.Fluid.Storage.StorageDetailed bufferStorage(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     m1_flow_nominal=const.k,
@@ -74,7 +74,8 @@ model BufferStorage
 equation
   connect(boundary.m_flow_in, const.y)
     annotation (Line(points={{34,38},{34,38},{51,38}}, color={0,0,127}));
-  connect(boundary1.ports[1], bufferStorage.fluidportTop2) annotation (Line(points={{-34,46},{-14,46},{-14,24.12},{-13.125,24.12}}, color={0,127,255}));
+  connect(boundary1.ports[1], bufferStorage.fluidportTop2) annotation (Line(points={{-34,46},
+          {-14,46},{-14,24.12},{-13.125,24.12}},                                                                                    color={0,127,255}));
   connect(bufferStorage.fluidportTop1, boundary.ports[1]) annotation (Line(points={{-6.5,24.12},{-6.5,45.06},{12,45.06},{12,46}}, color={0,127,255}));
   connect(bufferStorage.fluidportBottom1, boundary_ph5.ports[1]) annotation (Line(points={{-6.625,-0.24},{-6.625,-20.12},{2,-20.12},{2,-20}}, color={0,127,255}));
   connect(boundary2.ports[1], bufferStorage.fluidportBottom2) annotation (Line(points={{-36,-20},{-14,-20},{-14,-0.12},{-12.875,-0.12}}, color={0,127,255}));
@@ -85,7 +86,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/BufferStorage.mos" "Simulate and plot"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
@@ -104,4 +105,4 @@ equation
   </li>
 </ul>
 </html>"));
-end BufferStorage;
+end StorageDetailedExample;
