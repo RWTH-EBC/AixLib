@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.Data;
+within AixLib.Fluid.Actuators.Valves.Data;
 record EqualPercentage =
                 Generic (
     y =  {0,0.01,0.1,0.3,0.5,0.7,0.9,1},

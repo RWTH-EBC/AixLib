@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model CrossFlowReduction
   "model that calculates reduction factor for heat transfer in quasi-counter flow arrangement"
 

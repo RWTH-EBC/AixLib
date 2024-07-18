@@ -198,20 +198,51 @@ equation
           rotation=90)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=40000),
-    Documentation(info="<html>
-<p>Modular heat pump with different options</p>
+    Documentation(info="<html><p>
+  Modular heat pump with different options
+</p>
 <ul>
-<li>with or without pump</li>
-<li>with or without an external temperature for TSource</li>
+  <li>with or without pump
+  </li>
+  <li>with or without an external temperature for TSource
+  </li>
 </ul>
-<p><br>with different operation types:</p>
+<p>
+  <br/>
+  with different operation types:
+</p>
 <ul>
-<li>with a fixed THot, which is THotNom -&gt; temperature difference between THot and TCold is not constant</li>
-<li>with a fixed DeltaTCon -&gt; THot is not equal THotNom. THotNom is only important for nominal electrical demand</li>
-<li>as a high temperature heat pump, using R134a and a piston compressor</li>
-<li>as a low temperature heat pump, using R410a and a scroll compressor</li>
+  <li>with a fixed THot, which is THotNom -&gt; temperature difference
+  between THot and TCold is not constant
+  </li>
+  <li>with a fixed DeltaTCon -&gt; THot is not equal THotNom. THotNom
+  is only important for nominal electrical demand
+  </li>
+  <li>as a high temperature heat pump, using R134a and a piston
+  compressor
+  </li>
+  <li>as a low temperature heat pump, using R410a and a scroll
+  compressor
+  </li>
 </ul>
-<p><br>Concept </p>
-<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, DeltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
+<p>
+  <br/>
+  Concept
+</p>
+<p>
+  <br/>
+  The inner cycle of the heat pump is a Black-Box. The Black-Box uses
+  4-D performance maps, which describe the COP. The maps are based on a
+  given THot, TSource, DeltaTCon and PLR (for further informations:
+  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer).
+  The parameters QNom, THotNom, TSourceNom describe the nominal
+  behaviour for a full load operation point e.g. W10W55 or B0W45. The
+  nominal full load electircal power is calculated with the nominal COP
+  and is constant for different TSource. The part load beaviour
+  describes the part load of the compressor as a product of PLR and
+  nominal full load electrical power (variable speed control). The
+  thermal power and the thermal demand are calculated for any operation
+  point as a function of COP and electrical power.
+</p>
 </html>"));
 end ModularHeatPump_Air;

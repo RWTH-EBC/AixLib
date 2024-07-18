@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model LocalDuctConvectiveHeatFlow
   "heat transfer model for locally resolved rectangular ducts in quasi-counter 
   flow arrangement"
