@@ -69,7 +69,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Radiative internal gains"
     annotation (Placement(transformation(extent={{94,30},{114,50}}),
                             iconTransformation(extent={{92,24},{112,44}})));
-  RC.FourElements ROM(
+  AixLib.ThermalZones.ReducedOrder.RC.FourElements ROM(
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
@@ -107,6 +107,10 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
+    extWallRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
+    floorRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
+    intWallRC(thermCapInt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
+    roofRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,
