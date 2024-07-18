@@ -2,16 +2,5 @@
 
 convertClear();
 
-// Rename Buffer and standard storage
-convertClass("AixLib.Fluid.Storage.BufferStorage", "AixLib.Fluid.Storage.StorageDetailed");
-convertClass("AixLib.Fluid.Storage.Storage", "AixLib.Fluid.Storage.StorageSimple");
-
-//Rename data base due to renaming of buffer storage
-convertClass("AixLib.DataBase.Storage.BufferStorageBaseDataDefinition", "AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition");
-convertClass("AixLib.Fluid.Storage.Examples.BufferStorage", "AixLib.Fluid.Storage.Examples.StorageDetailedExample");
-﻿clear
-
-convertClear();
-
 // remove modifiers for PartialHuman-Model
 convertModifiers("AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman", {"ratioConvectiveHeat"}, fill("",0));
