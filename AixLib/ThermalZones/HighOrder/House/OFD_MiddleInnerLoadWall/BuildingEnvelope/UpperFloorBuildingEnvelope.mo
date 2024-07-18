@@ -373,7 +373,7 @@ model UpperFloorBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-36})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5]
     "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Corridor_UF, 4(9): Bath_UF, 5(10): Child2_UF"
@@ -542,45 +542,47 @@ equation
   connect(Children2.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60.8,-38},{-5,-38}}, color={0,0,0}));
   connect(Children2.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-36},{-18,-36},{-18,-42},{5,-42},{5,-38}}, color={191,0,0}));
   connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,
-          -23},{-92,-23},{-92,68.24},{-84,68.24}},                                                                             color={0,0,127}));
+          -17},{-92,-17},{-92,68.24},{-84,68.24}},                                                                             color={0,0,127}));
   connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,
-          -17},{-96,-17},{-96,88},{88,88},{88,68.68},{79.9,68.68}},                                                                               color={0,0,127}));
+          -14},{-96,-14},{-96,88},{88,88},{88,68.68},{79.9,68.68}},                                                                               color={0,0,127}));
   connect(AirExchangePort[3], Corridor.AirExchangePort) annotation (Line(points={{-115,
           -11},{-96,-11},{-96,88},{88,88},{88,4.205},{80,4.205}},                                                                              color={0,0,127}));
-  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-5},
-          {-96,-5},{-96,88},{88,88},{88,-76.68},{81.9,-76.68}},                                                                              color={0,0,127}));
-  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,1},
-          {-92,1},{-92,-74.24},{-86,-74.24}},                                                                                  color={0,0,127}));
-  connect(Bedroom.ports[1], portVent_in[1]) annotation (Line(points={{-65.05,13.52},
-          {-58,13.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,-76}},
+  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-8},
+          {-96,-8},{-96,88},{88,88},{88,-76.68},{81.9,-76.68}},                                                                              color={0,0,127}));
+  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,-5},
+          {-92,-5},{-92,-74.24},{-86,-74.24}},                                                                                 color={0,0,127}));
+  connect(Bedroom.ports[1], portVent_in[1]) annotation (Line(points={{-63.525,13.52},
+          {-58,13.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-72},{104,-72}},
         color={0,127,255}));
-  connect(Bedroom.ports[2], portVent_out[1]) annotation (Line(points={{-58.95,13.52},
-          {-58,13.52},{-58,-8},{-20,-8},{-20,-92},{104,-92}},
+  connect(Bedroom.ports[2], portVent_out[1]) annotation (Line(points={{-60.475,13.52},
+          {-58,13.52},{-58,-8},{-20,-8},{-20,-88},{104,-88}},
         color={0,127,255}));
-  connect(Children1.ports[1], portVent_in[2]) annotation (Line(points={{61.8975,
-          27.64},{40,27.64},{40,28},{20,28},{20,-92},{94,-92},{94,-72},{104,-72}},
+  connect(Children1.ports[1], portVent_in[2]) annotation (Line(points={{60.4488,
+          27.64},{40,27.64},{40,28},{20,28},{20,-92},{94,-92},{94,-70},{104,-70}},
         color={0,127,255}));
-  connect(Children1.ports[2], portVent_out[2]) annotation (Line(points={{56.1025,
-          27.64},{20,27.64},{20,-92},{94,-92},{94,-84},{104,-84},{104,-88}},
+  connect(Children1.ports[2], portVent_out[2]) annotation (Line(points={{57.5512,
+          27.64},{20,27.64},{20,-92},{94,-92},{94,-84},{104,-84},{104,-86}},
         color={0,127,255}));
-  connect(Corridor.ports[1], portVent_in[3]) annotation (Line(points={{61.05,-28.285},
+  connect(Corridor.ports[1], portVent_in[3]) annotation (Line(points={{59.525,-28.285},
           {40,-28.285},{40,-28},{20,-28},{20,-92},{94,-92},{94,-68},{104,-68}},
         color={0,127,255}));
-  connect(Corridor.ports[2], portVent_out[3]) annotation (Line(points={{54.95,-28.285},
-          {54.95,-32},{20,-32},{20,-92},{94,-92},{94,-84},{104,-84}},
+  connect(Corridor.ports[2], portVent_out[3]) annotation (Line(points={{56.475,-28.285},
+          {56.475,-32},{20,-32},{20,-92},{94,-92},{94,-84},{104,-84}},
         color={0,127,255}));
-  connect(Bath.ports[1], portVent_in[4]) annotation (Line(points={{63.8975,-35.64},
-          {62,-35.64},{62,-32},{20,-32},{20,-92},{94,-92},{94,-64},{104,-64}},
+  connect(Bath.ports[1], portVent_in[4]) annotation (Line(points={{62.4488,
+          -35.64},{62,-35.64},{62,-32},{20,-32},{20,-92},{94,-92},{94,-66},{104,
+          -66}},
         color={0,127,255}));
-  connect(Bath.ports[2], portVent_out[4]) annotation (Line(points={{58.1025,-35.64},
-          {58.1025,-32},{20,-32},{20,-92},{94,-92},{94,-80},{104,-80}},
+  connect(Bath.ports[2], portVent_out[4]) annotation (Line(points={{59.5512,
+          -35.64},{59.5512,-32},{20,-32},{20,-92},{94,-92},{94,-82},{104,-82}},
         color={0,127,255}));
-  connect(Children2.ports[1], portVent_in[5]) annotation (Line(points={{-67.05,-19.52},
-          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-60},{104,-60}},
+  connect(Children2.ports[1], portVent_in[5]) annotation (Line(points={{-65.525,
+          -19.52},{-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-64},{104,
+          -64}},
         color={0,127,255}));
-  connect(Children2.ports[2], portVent_out[5]) annotation (Line(points={{-60.95,
-          -19.52},{-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,
-          -76}},
+  connect(Children2.ports[2], portVent_out[5]) annotation (Line(points={{-62.475,
+          -19.52},{-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-80},{104,
+          -80}},
         color={0,127,255}));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

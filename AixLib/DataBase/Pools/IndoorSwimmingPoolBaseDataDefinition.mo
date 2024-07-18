@@ -41,13 +41,13 @@ record IndoorSwimmingPoolBaseDataDefinition
 
  // Wave mode
   parameter Boolean use_wavPool=false "Is there a wave machine installed?";
-  parameter Modelica.Units.SI.Length heightWav "Height of generated wave";
-  parameter Modelica.Units.SI.Length widthWav
+  parameter Modelica.Units.SI.Length heiWav "Height of generated wave";
+  parameter Modelica.Units.SI.Length widWav
     "Width of generated wave/ width of wave machineoutlet";
   parameter Modelica.Units.SI.Time timeWavPul_start
     "Start time of first wave cycle";
   parameter Modelica.Units.SI.Time perWavPul "Time of cycling period";
-  parameter Real widthWavPul "Fraction of time of wave generation within cycling period";
+  parameter Real widWavPul "Fraction of time of wave generation within cycling period";
 
  // Pool Walls
   parameter Modelica.Units.SI.Area AWalInt "Area of pool walls which is connected to inner rooms (inner pool walls)";
@@ -56,9 +56,6 @@ record IndoorSwimmingPoolBaseDataDefinition
   parameter Modelica.Units.SI.Area AFloExt "Area of pool floors which is connected to teh ground (pool floor with earth contact)";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWatHor "Mean value for the heat transfer coefficient of free convection on horizontal pool floors";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWatVer "Mean value for the heat transfer coefficient of free convection on vertical pool walls";
-  //replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam
-   "Wall base data definition with all layers of pool walls"  annotation (choicesAllMatching=true);
 
   annotation (Documentation(info="<html>
 
