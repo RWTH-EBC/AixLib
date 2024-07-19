@@ -1,0 +1,139 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl");
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl:
+The model has the same number of unknowns and equations: 181
+The model could not be deduced to be symbolically well-posed.
+The model has
+  175+combinedHeatPower.vol.dynBal.nPorts+size(combinedHeatPower.combiTable1Ds.columns,   1)
+scalar unknowns and
+  161+size(combinedHeatPower.combiTable1Ds.columns, 1)+2*source.nPorts+(if  not   source.use_m_flow_in then 1 else 0)+(if  not source.use_T_in then 1 else 0)+(  if  not source.use_X_in then 1 else 0)+2*sink.nPorts+(if  not sink.use_p_in   then 1 else 0)+(if  not sink.use_T_in then 1 else 0)+(if  not sink.use_X_in   then 1 else 0)+(if  not combinedHeatPower.vol.dynBal.use_mWat_flow then 1   else 0)+3*combinedHeatPower.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  181
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl\\\");\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos");
+simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl", tolerance=1e-06, stopTime=300, method="dassl",  resultFile="AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl");
+Translation of AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl:
+The DAE has 181 scalar unknowns and 181 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 38
+  Variables: 432
+  Constants: 5 (5 scalars)
+  Parameters: 195 (229 scalars)
+  Unknowns: 232 (185 scalars)
+  Differentiated variables: 5 scalars
+  Equations: 210
+  Nontrivial: 170
+Translated Model
+  Constants: 143 scalars
+  Free parameters: 58 scalars
+  Parameter depending: 71 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 38 scalars
+  Alias variables: 109 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  combinedHeatPower.internalCapacity.T
+  combinedHeatPower.senTCold.T
+  combinedHeatPower.senTHot.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystem");
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystem:
+The model has the same number of unknowns and equations: 367
+The model could not be deduced to be symbolically well-posed.
+The model has
+  361+combinedHeatPower.vol.dynBal.nPorts+size(combinedHeatPower.combiTable1Ds.columns,   1)
+scalar unknowns and
+  347+size(combinedHeatPower.combiTable1Ds.columns, 1)+2*source.nPorts+(if  not   source.use_m_flow_in then 1 else 0)+(if  not source.use_T_in then 1 else 0)+(  if  not source.use_X_in then 1 else 0)+2*sink.nPorts+(if  not sink.use_p_in   then 1 else 0)+(if  not sink.use_T_in then 1 else 0)+(if  not sink.use_X_in   then 1 else 0)+(if  not combinedHeatPower.vol.dynBal.use_mWat_flow then 1   else 0)+3*combinedHeatPower.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  367
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystem successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.BoilerCHP.Examples.CHPSystem\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.BoilerCHP.Examples.CHPSystem\\\");\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos");
+simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystem", tolerance=1e-06, stopTime=1200, method="dassl",  resultFile="AixLib.Fluid.BoilerCHP.Examples.CHPSystem");
+Translation of AixLib.Fluid.BoilerCHP.Examples.CHPSystem:
+The DAE has 367 scalar unknowns and 367 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 105
+  Variables: 786
+  Constants: 8 (8 scalars)
+  Parameters: 360 (394 scalars)
+  Unknowns: 418 (371 scalars)
+  Differentiated variables: 8 scalars
+  Equations: 404
+  Nontrivial: 360
+Translated Model
+  Constants: 177 scalars
+  Free parameters: 143 scalars
+  Parameter depending: 115 scalars
+  Continuous time states: 6 scalars
+  Time-varying variables: 112 scalars
+  Alias variables: 226 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {8, 9}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {5}
+    Sizes after manipulation of the linear systems: {0}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  combinedHeatPower.elControl.I.y
+  combinedHeatPower.senTCold.T
+  combinedHeatPower.senTHot.T
+  combinedHeatPower.thControl.PI.I.y
+  combinedHeatPower.thControl.PI1.I.y
+  combinedHeatPower.vol.dynBal.medium.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.BoilerCHP.Examples.CHPSystem.translation.log");

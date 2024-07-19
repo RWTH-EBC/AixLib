@@ -1,0 +1,92 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_TSet.y",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.electricalPower",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.thermalPower",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.fuelInput"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "TSet.y",
+        "combinedHeatPower.electricalPower",
+        "combinedHeatPower.thermalPower",
+        "combinedHeatPower.fuelInput"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl",
+    "simulation": {
+      "elapsed_time": 0.00859,
+      "final_time": 300,
+      "jacobians": 75,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystem.mat_TSet.y",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystem.mat_combinedHeatPower.senTHot.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "TSet.y",
+        "combinedHeatPower.senTHot.T"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.BoilerCHP.Examples.CHPSystem",
+    "simulation": {
+      "elapsed_time": 0.0276,
+      "final_time": 1200,
+      "jacobians": 409,
+      "start_time": 0,
+      "state_events": 5,
+      "success": true
+    }
+  }
+]
