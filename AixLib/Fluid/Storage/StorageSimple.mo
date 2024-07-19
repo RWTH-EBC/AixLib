@@ -30,7 +30,7 @@ model StorageSimple
                      layer[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
-    each final T_start=T_start,
+    T_start=T_start,
     each final m_flow_small=m_flow_small_layer,
     each final V = V / n,
     redeclare final package Medium = Medium,
@@ -48,7 +48,7 @@ model StorageSimple
                      layer_HE[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
-    each final T_start=T_start,
+    T_start=T_start,
     each final m_flow_small=m_flow_small_layer_HE,
     each final V = V_HE / n,
     redeclare final package Medium = Medium,
@@ -85,8 +85,8 @@ model StorageSimple
     "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
 
   //Initialization parameters
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start[n]
+    "Start value of temperature of each layer, e.g. for 3 layers: {20, 20, 20}" annotation(Dialog(tab="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
 

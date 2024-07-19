@@ -24,7 +24,8 @@ model StorageDetailedExample "Simple usage example for StorageDetailed"
         AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15) annotation (Placement(transformation(extent={{0,0},{-20,24}})));
+    TStart={333.15,328.15,323.15,318.15,313.15,308.15,303.15,298.15,293.15,293.15})
+    annotation (Placement(transformation(extent={{0,0},{-20,24}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-58,4},
             {-38,24}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
