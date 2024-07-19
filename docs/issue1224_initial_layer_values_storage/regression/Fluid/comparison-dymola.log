@@ -1,0 +1,1469 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.FixedResistances.Examples.SimplePipe.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.FixedResistances.Examples.SimplePipe.mat_senTemIn.T",
+        "funnel_comp/AixLib.Fluid.FixedResistances.Examples.SimplePipe.mat_senTemOut.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "senTemIn.T",
+        "senTemOut.T"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.FixedResistances.Examples.SimplePipe",
+    "simulation": {
+      "elapsed_time": 0.00801,
+      "final_time": 1000,
+      "jacobians": 43,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageBoiler.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[10].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_hea.Q_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "bufferStorage.layer[10].T",
+        "bufferStorage.layer[5].T",
+        "bufferStorage.layer[1].T",
+        "hea.Q_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageBoiler",
+    "simulation": {
+      "elapsed_time": 0.0789,
+      "final_time": 86400,
+      "jacobians": 85,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senEff.y",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_latEff.y",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senTemColOut.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senTemHotIn.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senTemColIn.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senTemHotOut.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senMasFraColIn.X",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senMasFraHotIn.X",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senMasFraColOut.X",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.mat_senMasFraHotOut.X"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "senEff.y",
+        "latEff.y",
+        "senTemColOut.T",
+        "senTemHotIn.T",
+        "senTemColIn.T",
+        "senTemHotOut.T",
+        "senMasFraColIn.X",
+        "senMasFraHotIn.X",
+        "senMasFraColOut.X",
+        "senMasFraHotOut.X"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger",
+    "simulation": {
+      "elapsed_time": 0.26,
+      "final_time": 7200,
+      "jacobians": 49,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.TPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.QPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.PPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.QEva"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "variables": [
+        "indoorSwimming.TPool",
+        "indoorSwimming.QPool",
+        "indoorSwimming.PPool",
+        "indoorSwimming.QEva"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool",
+    "simulation": {
+      "elapsed_time": 0.241041,
+      "final_time": 604800,
+      "jacobians": 98,
+      "start_time": 0,
+      "state_events": 9,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatPumpPower",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_coldStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_coldStorage.layer[1].T"
+      ],
+      "success_rate": 0.0,
+      "t_err_max": [
+        7776.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "heatPumpPower",
+        "heatStorage.layer[1].T",
+        "heatStorage.layer[5].T",
+        "coldStorage.layer[5].T",
+        "coldStorage.layer[1].T"
+      ],
+      "warnings": [
+        "Absolute error = 3.399e+03 at t = 7776.0 for heatPumpPower",
+        "Absolute error = 4.702e+00 at t = 0.0 for heatStorage.layer[1].T",
+        "Absolute error = 4.702e+00 at t = 0.0 for heatStorage.layer[5].T",
+        "Absolute error = 4.702e+00 at t = 0.0 for coldStorage.layer[5].T",
+        "Absolute error = 4.702e+00 at t = 0.0 for coldStorage.layer[1].T"
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump",
+    "simulation": {
+      "elapsed_time": 5.15,
+      "final_time": 86400,
+      "jacobians": 5119,
+      "start_time": 0,
+      "state_events": 349,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.mat_senTemIn.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.mat_senTemOut.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "senTemIn.T",
+        "senTemOut.T"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta",
+    "simulation": {
+      "elapsed_time": 0.00941,
+      "final_time": 1000,
+      "jacobians": 78,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_dpControlled_dp.mov.dpMachine",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_dpControlled_dp.mov.m_flow",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_m_flow_nominal",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_dpControlled_dp.mov.dpMachine",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_dp_nominal",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_val.y_actual",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar.mat_elEnergy"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        4
+      ],
+      "variables": [
+        "dpControlled_dp.mov.dpMachine",
+        "dpControlled_dp.mov.m_flow",
+        "m_flow_nominal",
+        "dpControlled_dp.mov.dpMachine",
+        "dp_nominal",
+        "val.y_actual",
+        "elEnergy"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar",
+    "simulation": {
+      "elapsed_time": 0.0206,
+      "final_time": 3600,
+      "jacobians": 93,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.mat_rampValvePosition.y",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.mat_pumpBus.rpmMea",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.mat_pumpBus.rpmSet",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.mat_pumpBus.onSet"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "rampValvePosition.y",
+        "pumpBus.rpmMea",
+        "pumpBus.rpmSet",
+        "pumpBus.onSet"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled",
+    "simulation": {
+      "elapsed_time": 0.0125,
+      "final_time": 600,
+      "jacobians": 170,
+      "start_time": 0,
+      "state_events": 3,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mat_demand.port_a.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "demand.port_a.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass",
+    "simulation": {
+      "elapsed_time": 0.0287,
+      "final_time": 100000,
+      "jacobians": 162,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.mat_senTemIn.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.mat_senTemOut.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "senTemIn.T",
+        "senTemOut.T"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded",
+    "simulation": {
+      "elapsed_time": 0.0111,
+      "final_time": 1000,
+      "jacobians": 109,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.mat_HR.m_flow",
+        "funnel_comp/AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.mat_FRdp.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "HR.m_flow",
+        "FRdp.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances",
+    "simulation": {
+      "elapsed_time": 0.259,
+      "final_time": 3600,
+      "jacobians": 41000,
+      "start_time": 0,
+      "state_events": 1199,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.HeatPumps.Examples.HeatPump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TConInMea",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TEvaInMea",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TEvaOutMea",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.QEva",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.QCon",
+        "funnel_comp/AixLib.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.Pel"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "heatPump.sigBus.TConInMea",
+        "heatPump.sigBus.TEvaInMea",
+        "heatPump.sigBus.TConOutMea",
+        "heatPump.sigBus.TEvaOutMea",
+        "heatPump.innerCycle.QEva",
+        "heatPump.innerCycle.QCon",
+        "heatPump.innerCycle.Pel"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.HeatPumps.Examples.HeatPump",
+    "simulation": {
+      "elapsed_time": 0.0163,
+      "final_time": 3600,
+      "jacobians": 72,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[10].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_temperatureSensor.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_solarThermal.Irradiation",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_solarThermal.heater.Q_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "bufferStorage.layer[10].T",
+        "bufferStorage.layer[5].T",
+        "bufferStorage.layer[1].T",
+        "temperatureSensor.T",
+        "solarThermal.Irradiation",
+        "solarThermal.heater.Q_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageSolarCollector",
+    "simulation": {
+      "elapsed_time": 0.623,
+      "final_time": 172800,
+      "jacobians": 1201,
+      "start_time": 0,
+      "state_events": 3,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.TPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_prescribedHeatFlow.Q_flow",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.PPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.QEva"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "variables": [
+        "indoorSwimming.TPool",
+        "prescribedHeatFlow.Q_flow",
+        "indoorSwimming.PPool",
+        "indoorSwimming.QEva"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem",
+    "simulation": {
+      "elapsed_time": 0.263527,
+      "final_time": 604800,
+      "jacobians": 98,
+      "start_time": 0,
+      "state_events": 9,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.mat_demand.senT_supply.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.mat_demand.senT_return.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.mat_demand.port_a.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "demand.senT_supply.T",
+        "demand.senT_return.T",
+        "demand.port_a.m_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot",
+    "simulation": {
+      "elapsed_time": 0.0235,
+      "final_time": 100000,
+      "jacobians": 115,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.mat_rampValvePosition.y",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.mat_pump.pumpBus.rpmMea",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.mat_pump.pumpBus.rpmSet",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.mat_pump.pumpBus.onSet"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "rampValvePosition.y",
+        "pump.pumpBus.rpmMea",
+        "pump.pumpBus.rpmSet",
+        "pump.pumpBus.onSet"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV",
+    "simulation": {
+      "elapsed_time": 0.0125,
+      "final_time": 600,
+      "jacobians": 134,
+      "start_time": 0,
+      "state_events": 3,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemIn.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemOut.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemIn1.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemOut1.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemIn2.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemOut2.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemIn3.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.mat_senTemOut3.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "variables": [
+        "senTemIn.T",
+        "senTemOut.T",
+        "senTemIn1.T",
+        "senTemOut1.T",
+        "senTemIn2.T",
+        "senTemOut2.T",
+        "senTemIn3.T",
+        "senTemOut3.T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe",
+    "simulation": {
+      "elapsed_time": 0.477,
+      "final_time": 3600,
+      "jacobians": 6494,
+      "start_time": 0,
+      "state_events": 178,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_m3hOda.y",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_V_flow_exp.showNumber",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_senTemSup.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_T_Sup_exp.showNumber",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_toDryAirSup.XiDry",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.mat_X_Sup_exp.showNumber"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "m3hOda.y",
+        "V_flow_exp.showNumber",
+        "senTemSup.T",
+        "T_Sup_exp.showNumber",
+        "toDryAirSup.XiDry",
+        "X_Sup_exp.showNumber"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation",
+    "simulation": {
+      "elapsed_time": 22.6,
+      "final_time": 7200,
+      "jacobians": 7689,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_TSet.y",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.electricalPower",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.thermalPower",
+        "funnel_comp/AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.mat_combinedHeatPower.fuelInput"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "TSet.y",
+        "combinedHeatPower.electricalPower",
+        "combinedHeatPower.thermalPower",
+        "combinedHeatPower.fuelInput"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl",
+    "simulation": {
+      "elapsed_time": 0.00946,
+      "final_time": 300,
+      "jacobians": 75,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat_TSet.y",
+        "funnel_comp/AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat_TOut.y",
+        "funnel_comp/AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat_TVol.T",
+        "funnel_comp/AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat_THeaOut.T",
+        "funnel_comp/AixLib.Fluid.HeatExchangers.Examples.HeatingRod.mat_Pel"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "TSet.y",
+        "TOut.y",
+        "TVol.T",
+        "THeaOut.T",
+        "Pel"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.HeatExchangers.Examples.HeatingRod",
+    "simulation": {
+      "elapsed_time": 0.0125659,
+      "final_time": 172800,
+      "jacobians": 40,
+      "start_time": 0,
+      "state_events": 6,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.heatingCoil1.Therm1[4].Q_flow",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.layer[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.portHC1In.p",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.portHC1Out.p"
+      ],
+      "success_rate": 0.5,
+      "t_err_max": [
+        1728.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "bufferStorage.heatingCoil1.Therm1[4].Q_flow",
+        "bufferStorage.layer[4].T",
+        "bufferStorage.portHC1In.p",
+        "bufferStorage.portHC1Out.p"
+      ],
+      "warnings": [
+        "Absolute error = 3.258e+02 at t = 1728.0 for bufferStorage.heatingCoil1.Therm1[4].Q_flow",
+        "Absolute error = 1.470e+01 at t = 0.0 for bufferStorage.layer[4].T",
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageDetailedExample",
+    "simulation": {
+      "elapsed_time": 0.0516,
+      "final_time": 86400,
+      "jacobians": 45,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.mat_rampValvePosition.y",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.mat_pump.pumpBus.dpMea",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.mat_pump.pumpBus.dpSet",
+        "funnel_comp/AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.mat_pump.pumpBus.onSet"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "rampValvePosition.y",
+        "pump.pumpBus.dpMea",
+        "pump.pumpBus.dpSet",
+        "pump.pumpBus.onSet"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled",
+    "simulation": {
+      "elapsed_time": 0.00962,
+      "final_time": 600,
+      "jacobians": 108,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Chillers.Examples.Chiller.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TConInMea",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TEvaInMea",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TEvaOutMea",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.QEva",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.QCon",
+        "funnel_comp/AixLib.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.Pel"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "chiller.sigBus.TConInMea",
+        "chiller.sigBus.TEvaInMea",
+        "chiller.sigBus.TConOutMea",
+        "chiller.sigBus.TEvaOutMea",
+        "chiller.innerCycle.QEva",
+        "chiller.innerCycle.QCon",
+        "chiller.innerCycle.Pel"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Chillers.Examples.Chiller",
+    "simulation": {
+      "elapsed_time": 0.0153,
+      "final_time": 3600,
+      "jacobians": 79,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.mat_demand.senT_supply.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.mat_demand.senT_return.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.mat_demand.port_a.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "demand.senT_supply.T",
+        "demand.senT_return.T",
+        "demand.port_a.m_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp",
+    "simulation": {
+      "elapsed_time": 0.0326,
+      "final_time": 100000,
+      "jacobians": 126,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_m3hOda.y",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_V_flow_exp.showNumber",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_senTemSup.T",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_T_Sup_exp.showNumber",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_toDryAirSup.XiDry",
+        "funnel_comp/AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.mat_X_Sup_exp.showNumber"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "m3hOda.y",
+        "V_flow_exp.showNumber",
+        "senTemSup.T",
+        "T_Sup_exp.showNumber",
+        "toDryAirSup.XiDry",
+        "X_Sup_exp.showNumber"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation",
+    "simulation": {
+      "elapsed_time": 7.58,
+      "final_time": 29600,
+      "jacobians": 1093,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_dpControlled_dp.mov.dpMachine",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_dpControlled_dp.mov.m_flow",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_m_flow_nominal",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_dpControlled_dp.mov.dpMachine",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_dp_nominal",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_val.y_actual",
+        "funnel_comp/AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst.mat_elEnergy"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        4
+      ],
+      "variables": [
+        "dpControlled_dp.mov.dpMachine",
+        "dpControlled_dp.mov.m_flow",
+        "m_flow_nominal",
+        "dpControlled_dp.mov.dpMachine",
+        "dp_nominal",
+        "val.y_actual",
+        "elEnergy"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst",
+    "simulation": {
+      "elapsed_time": 0.016,
+      "final_time": 3600,
+      "jacobians": 99,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.mat_senTemIn.T",
+        "funnel_comp/AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.mat_senTemOut.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "senTemIn.T",
+        "senTemOut.T"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe",
+    "simulation": {
+      "elapsed_time": 0.00626,
+      "final_time": 1000,
+      "jacobians": 35,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  }
+]

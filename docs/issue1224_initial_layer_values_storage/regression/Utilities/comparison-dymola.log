@@ -1,0 +1,80 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Utilities.Math.Examples.MovingAverage.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Utilities.Math.Examples.MovingAverage.mat_movingAverage.u",
+        "funnel_comp/AixLib.Utilities.Math.Examples.MovingAverage.mat_movingAverage.y"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "movingAverage.u",
+        "movingAverage.y"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Utilities.Math.Examples.MovingAverage",
+    "simulation": {
+      "elapsed_time": 0.00490499,
+      "final_time": 50,
+      "jacobians": 10,
+      "start_time": 0,
+      "state_events": 4,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Utilities.Sensors.Examples.ExergyMeters.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Utilities.Sensors.Examples.ExergyMeters.mat_calcExergyDestructionLoss_1.y",
+        "funnel_comp/AixLib.Utilities.Sensors.Examples.ExergyMeters.mat_calcExergyDestructionLoss_2.y"
+      ],
+      "success_rate": 0.0,
+      "t_err_max": [
+        4680.0,
+        4824.0
+      ],
+      "test_passed": [
+        0,
+        0
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "calcExergyDestructionLoss_1.y",
+        "calcExergyDestructionLoss_2.y"
+      ],
+      "warnings": [
+        "Absolute error = 1.272e+00 at t = 4680.0 for calcExergyDestructionLoss_1.y",
+        "Absolute error = 1.277e+00 at t = 4824.0 for calcExergyDestructionLoss_2.y"
+      ]
+    },
+    "model": "AixLib.Utilities.Sensors.Examples.ExergyMeters",
+    "simulation": {
+      "elapsed_time": 0.0997,
+      "final_time": 7200,
+      "jacobians": 33,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  }
+]

@@ -1,0 +1,11 @@
+Regression tests are only run for the following package:
+  AixLib.Utilities
+*** Error: AixLib_Utilities_Sensors_Examples_ExergyMeters.txt: Errors during result verification.
+           Absolute error = 1.272e+00 at t = 4680.0 for calcExergyDestructionLoss_1.y
+           Absolute error = 1.277e+00 at t = 4824.0 for calcExergyDestructionLoss_2.y
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.0 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 1 errors.
+
