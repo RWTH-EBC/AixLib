@@ -1,137 +1,3401 @@
  = true
 
 
-rCheck = checkModel("AixLib.Utilities.Sensors.Examples.ExergyMeters");
-Check of AixLib.Utilities.Sensors.Examples.ExergyMeters:
-The model has the same number of unknowns and equations: 4571
-Check of AixLib.Utilities.Sensors.Examples.ExergyMeters successful.
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified6");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified6:
+The model has the same number of unknowns and equations: 1521
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 1521
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified6 successful.
 Declaring variable: Boolean rCheck ;
 
-Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
-Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Utilities.Sensors.Examples.ExergyMeters\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
-Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
-Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Utilities.Sensors.Examples.ExergyMeters\\\");\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
-Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
-Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified6.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified6\",", "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified6\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified6.statistics.log");
 
 
-rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos");
-simulateModel("AixLib.Utilities.Sensors.Examples.ExergyMeters", tolerance=1e-6, stopTime=7200, method="dassl", resultFile="AixLib.Utilities.Sensors.Examples.ExergyMeters");
-Translation of AixLib.Utilities.Sensors.Examples.ExergyMeters:
-The DAE has 4571 scalar unknowns and 4571 scalar equations.
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified6.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified6", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified6");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified6:
+The DAE has 1521 scalar unknowns and 1521 scalar equations.
  
 Statistics
  
 Original Model
-  Number of components: 903
-  Variables: 10613
-  Constants: 150 (150 scalars)
-  Parameters: 4519 (4432 scalars)
-  Unknowns: 5944 (4693 scalars)
-  Differentiated variables: 115 scalars
-  Equations: 4822
-  Nontrivial: 3665
+  Number of components: 335
+  Variables: 5102
+  Constants: 152 (152 scalars)
+  Parameters: 2862 (3416 scalars)
+  Unknowns: 2088 (1662 scalars)
+  Differentiated variables: 7 scalars
+  Equations: 1711
+  Nontrivial: 1478
 Translated Model
-  Constants: 3348 scalars
-  Free parameters: 526 scalars
-  Parameter depending: 1587 scalars
-  Continuous time states: 81 scalars
-  Time-varying variables: 951 scalars
-  Alias variables: 2863 scalars
+  Constants: 2551 scalars
+  Free parameters: 553 scalars
+  Parameter depending: 719 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 435 scalars
+  Alias variables: 972 scalars
   Number of mixed real/discrete systems of equations: 0
-  Sizes of linear systems of equations: {2, 2, 2, 27, 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 2, 2}
-  Sizes after manipulation of the linear systems: {0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  Sizes of nonlinear systems of equations: {6, 6, 6, 6, 6, 6, 6, 6, 6}
-  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1, 49, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 5, 1, 1, 0, 1, 1}
   Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 49, 1, 1, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 5, 1, 1, 0, 1, 1}
+    Number of numerical Jacobians: 0
  
 Selected continuous time states
 Statically selected continuous time states
-  bufferStorageHeatingcoils.bottomCover.loadIns.T
-  bufferStorageHeatingcoils.bottomCover.loadWall.T
-  bufferStorageHeatingcoils.heatingCoil1.pipe[1].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[1].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[1].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[1].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[2].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[2].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[2].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[2].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[3].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[3].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[3].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[3].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[4].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[4].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[4].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[4].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[5].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[5].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[5].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[5].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[6].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[6].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[6].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[6].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[7].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[7].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[7].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[7].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[8].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[8].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[8].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[8].vol_b.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[9].del.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[9].timDel.x
-  bufferStorageHeatingcoils.heatingCoil1.pipe[9].vol_a.dynBal.U
-  bufferStorageHeatingcoils.heatingCoil1.pipe[9].vol_b.dynBal.U
-  bufferStorageHeatingcoils.layer[1].dynBal.U
-  bufferStorageHeatingcoils.layer[2].dynBal.U
-  bufferStorageHeatingcoils.layer[3].dynBal.U
-  bufferStorageHeatingcoils.layer[4].dynBal.U
-  bufferStorageHeatingcoils.layer[5].dynBal.U
-  bufferStorageHeatingcoils.layer[6].dynBal.U
-  bufferStorageHeatingcoils.layer[7].dynBal.U
-  bufferStorageHeatingcoils.layer[8].dynBal.U
-  bufferStorageHeatingcoils.layer[9].dynBal.U
-  bufferStorageHeatingcoils.layer[10].dynBal.U
-  bufferStorageHeatingcoils.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
-  bufferStorageHeatingcoils.topCover.loadIns.T
-  bufferStorageHeatingcoils.topCover.loadWall.T
-  consumer.medium.T
-  exergyStorageMeterConsumer.derivative.x
-  exergyStorageMeterHeater.derivative.x
-  exergyStorageMeterMedium.derivative.x
-  heater.medium.T
-  pumpPrim.filter.s[1]
-  pumpPrim.filter.s[2]
-  pumpPrim.vol.dynBal.U
-  pumpSec.filter.s[1]
-  pumpSec.filter.s[2]
-  pumpSec.vol.dynBal.U
+  heater.outCon.T
+  valNorth.vol.dynBal.U
+  valSouth.vol.dynBal.U
  
 Finished
  = true
 
 Declaring variable: Boolean rScript ;
 
-savelog("AixLib.Utilities.Sensors.Examples.ExergyMeters.translation.log");
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified6.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example1v2");
+Check of AixLib.Fluid.Examples.Performance.Example1v2:
+The model has the same number of unknowns and equations: 1418
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1376+pump.vol.dynBal.nPorts+vol[1].dynBal.nPorts+vol[2].dynBal.nPorts+  vol[3].dynBal.nPorts+vol[4].dynBal.nPorts+vol[5].dynBal.nPorts+  vol[6].dynBal.nPorts+vol[7].dynBal.nPorts+vol[8].dynBal.nPorts+  vol[9].dynBal.nPorts+vol[10].dynBal.nPorts+vol[11].dynBal.nPorts+  vol[12].dynBal.nPorts+vol[13].dynBal.nPorts+vol[14].dynBal.nPorts+  vol[15].dynBal.nPorts+vol[16].dynBal.nPorts+vol[17].dynBal.nPorts+  vol[18].dynBal.nPorts+vol[19].dynBal.nPorts+vol[20].dynBal.nPorts
+scalar unknowns and
+  1266+(if bou.use_Xi_in then 1 else (if bou.use_X_in then 0 else 1))+(if  not   bou.use_p_in then 1 else 0)+2*bou.nPorts+(if  not bou.use_T_in then 1 else 0)+  (if  not pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*pump.vol.dynBal.nPorts  +(if  not vol[1].dynBal.use_mWat_flow then 1 else 0)+3*vol[1].dynBal.nPorts+(  if  not vol[2].dynBal.use_mWat_flow then 1 else 0)+3*vol[2].dynBal.nPorts+(if    not vol[3].dynBal.use_mWat_flow then 1 else 0)+3*vol[3].dynBal.nPorts+(if    not vol[4].dynBal.use_mWat_flow then 1 else 0)+3*vol[4].dynBal.nPorts+(if    not vol[5].dynBal.use_mWat_flow then 1 else 0)+3*vol[5].dynBal.nPorts+(if    not vol[6].dynBal.use_mWat_flow then 1 else 0)+3*vol[6].dynBal.nPorts+(if    not vol[7].dynBal.use_mWat_flow then 1 else 0)+3*vol[7].dynBal.nPorts+(if    not vol[8].dynBal.use_mWat_flow then 1 else 0)+3*vol[8].dynBal.nPorts+(if    not vol[9].dynBal.use_mWat_flow then 1 else 0)+3*vol[9].dynBal.nPorts+(if    not vol[10].dynBal.use_mWat_flow then 1 else 0)+3*vol[10].dynBal.nPorts+(if    not vol[11].dynBal.use_mWat_flow then 1 else 0)+3*vol[11].dynBal.nPorts+(if    not vol[12].dynBal.use_mWat_flow then 1 else 0)+3*vol[12].dynBal.nPorts+(if    not vol[13].dynBal.use_mWat_flow then 1 else 0)+3*vol[13].dynBal.nPorts+(if    not vol[14].dynBal.use_mWat_flow then 1 else 0)+3*vol[14].dynBal.nPorts+(if    not vol[15].dynBal.use_mWat_flow then 1 else 0)+3*vol[15].dynBal.nPorts+(if    not vol[16].dynBal.use_mWat_flow then 1 else 0)+3*vol[16].dynBal.nPorts+(if    not vol[17].dynBal.use_mWat_flow then 1 else 0)+3*vol[17].dynBal.nPorts+(if    not vol[18].dynBal.use_mWat_flow then 1 else 0)+3*vol[18].dynBal.nPorts+(if    not vol[19].dynBal.use_mWat_flow then 1 else 0)+3*vol[19].dynBal.nPorts+(if    not vol[20].dynBal.use_mWat_flow then 1 else 0)+3*vol[20].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1418
+Check of AixLib.Fluid.Examples.Performance.Example1v2 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example1v2.mos\",", "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example1v2\",", "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example1v2\\\");\",", "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example1v2.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example1v2.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example1v2", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example1v2");
+Translation of AixLib.Fluid.Examples.Performance.Example1v2:
+The DAE has 1418 scalar unknowns and 1418 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 294
+  Variables: 4043
+  Constants: 116 (116 scalars)
+  Parameters: 1830 (1745 scalars)
+  Unknowns: 2097 (1518 scalars)
+  Differentiated variables: 43 scalars
+  Equations: 1565
+  Nontrivial: 1140
+Translated Model
+  Constants: 1690 scalars
+  Free parameters: 163 scalars
+  Parameter depending: 329 scalars
+  Continuous time states: 22 scalars
+  Time-varying variables: 374 scalars
+  Alias variables: 823 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: {21, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 4}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {21, 1, 6}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  hea.outCon.T
+  pump.vol.dynBal.U
+  vol[1].dynBal.U
+  vol[2].dynBal.U
+  vol[3].dynBal.U
+  vol[4].dynBal.U
+  vol[5].dynBal.U
+  vol[6].dynBal.U
+  vol[7].dynBal.U
+  vol[8].dynBal.U
+  vol[9].dynBal.U
+  vol[10].dynBal.U
+  vol[11].dynBal.U
+  vol[12].dynBal.U
+  vol[13].dynBal.U
+  vol[14].dynBal.U
+  vol[15].dynBal.U
+  vol[16].dynBal.U
+  vol[17].dynBal.U
+  vol[18].dynBal.U
+  vol[19].dynBal.U
+  vol[20].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example1v2.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example8");
+Check of AixLib.Fluid.Examples.Performance.Example8:
+The model has the same number of unknowns and equations: 2
+Check of AixLib.Fluid.Examples.Performance.Example8 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example8.mos\",", "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example8\",", "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example8\\\");\",", "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example8.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example8.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example8", tolerance=1e-6, stopTime=50, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example8");
+Translation of AixLib.Fluid.Examples.Performance.Example8:
+The DAE has 2 scalar unknowns and 2 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1
+  Variables: 2
+  Unknowns: 2 (2 scalars)
+  Equations: 2
+  Nontrivial: 2
+Translated Model
+  Time-varying variables: 2 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example8.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.SimpleHouse");
+Check of AixLib.Fluid.Examples.SimpleHouse:
+The model has the same number of unknowns and equations: 1201
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1166+2*(rad.nEle+zone.dynBal.nPorts)+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts  +rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+size(pump.massFlowRates, 1)
+scalar unknowns and
+  1122+(if bouAir.use_Xi_in then 2 else (if bouAir.use_X_in then 1 else 3))+3*  bouAir.nPorts+(if  not bouAir.use_p_in then 1 else 0)+(if  not bouAir.use_T_in   then 1 else 0)+(if bouWat.use_Xi_in then 1 else (if bouWat.use_X_in then 0   else 1))+(if  not bouWat.use_p_in then 1 else 0)+2*bouWat.nPorts+(if  not   bouWat.use_T_in then 1 else 0)+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if conDam.reset <> AixLib.Types.Reset.  Input then 1 else 0)+(if  not zone.dynBal.use_mWat_flow then 1 else 0)+5*  zone.dynBal.nPorts+(if  not rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  rad.vol[1].dynBal.nPorts+(if  not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)  +3*rad.vol[2].dynBal.nPorts+(if  not rad.vol[3].dynBal.use_mWat_flow then 1   else 0)+3*rad.vol[3].dynBal.nPorts+(if  not rad.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*rad.vol[4].dynBal.nPorts+(if  not rad.vol[5].dynBal.use_mWat_flow   then 1 else 0)+3*rad.vol[5].dynBal.nPorts+(if  not heaWat.vol.steBal.use_mWat_flow   then 1 else 0)+(if  not pump.vol.steBal.use_mWat_flow then 1 else 0)+(if    not fan.vol.steBal.use_mWat_flow then 1 else 0)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1201
+Check of AixLib.Fluid.Examples.SimpleHouse successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/SimpleHouse.mos\",", "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.SimpleHouse\",", "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.SimpleHouse\\\");\",", "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.SimpleHouse.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/SimpleHouse.mos");
+simulateModel("AixLib.Fluid.Examples.SimpleHouse", stopTime=3.1536e+07, method="Lsodar", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.SimpleHouse");
+Translation of AixLib.Fluid.Examples.SimpleHouse:
+The DAE has 1201 scalar unknowns and 1201 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 275
+  Variables: 2732
+  Constants: 92 (92 scalars)
+  Parameters: 1277 (1349 scalars)
+  Unknowns: 1363 (1268 scalars)
+  Differentiated variables: 16 scalars
+  Equations: 1182
+  Nontrivial: 967
+Translated Model
+  Constants: 1224 scalars
+  Free parameters: 166 scalars
+  Parameter depending: 263 scalars
+  Outputs: 24 scalars
+  Continuous time states: 10 scalars
+  Time-varying variables: 315 scalars
+  Alias variables: 741 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11}
+    Sizes after manipulation of the nonlinear systems: {5}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  vavDam.filter.s[1]
+  vavDam.filter.s[2]
+  walCap.T
+  zone.dynBal.mXi[1]
+  zone.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.SimpleHouse.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow:
+The model has the same number of unknowns and equations: 126
+The model could not be deduced to be symbolically well-posed.
+The model has
+  126
+scalar unknowns and
+  111+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  126
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelFlow.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelFlow.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow:
+The DAE has 126 scalar unknowns and 126 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 393
+  Constants: 12 (12 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 148 (170 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 211 scalars
+  Free parameters: 54 scalars
+  Parameter depending: 39 scalars
+  Time-varying variables: 47 scalars
+  Alias variables: 74 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow:
+The model has the same number of unknowns and equations: 136
+The model could not be deduced to be symbolically well-posed.
+The model has
+  136
+scalar unknowns and
+  121+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  136
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelFlow.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelFlow.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow:
+The DAE has 136 scalar unknowns and 136 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 26
+  Variables: 426
+  Constants: 13 (13 scalars)
+  Parameters: 253 (264 scalars)
+  Unknowns: 160 (180 scalars)
+  Equations: 152
+  Nontrivial: 141
+Translated Model
+  Constants: 228 scalars
+  Free parameters: 58 scalars
+  Parameter depending: 40 scalars
+  Time-varying variables: 51 scalars
+  Alias variables: 80 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 0, 0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised:
+The model has the same number of unknowns and equations: 125
+The model could not be deduced to be symbolically well-posed.
+The model has
+  125
+scalar unknowns and
+  110+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  125
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesDpOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesDpOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised:
+The DAE has 125 scalar unknowns and 125 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 394
+  Constants: 14 (14 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 147 (125 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 214 scalars
+  Free parameters: 53 scalars
+  Parameter depending: 17 scalars
+  Time-varying variables: 23 scalars
+  Alias variables: 75 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified5");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified5:
+The model has the same number of unknowns and equations: 1521
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 1521
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified5 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified5.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified5\",", "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified5\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified5.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified5.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified5", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified5");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified5:
+The DAE has 1521 scalar unknowns and 1521 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 335
+  Variables: 5102
+  Constants: 152 (152 scalars)
+  Parameters: 2862 (3416 scalars)
+  Unknowns: 2088 (1662 scalars)
+  Differentiated variables: 7 scalars
+  Equations: 1711
+  Nontrivial: 1478
+Translated Model
+  Constants: 2470 scalars
+  Free parameters: 553 scalars
+  Parameter depending: 717 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 511 scalars
+  Alias variables: 979 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {71}
+  Sizes after manipulation of the linear systems: {27}
+  Sizes of nonlinear systems of equations: {1, 49, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 5, 1, 1, 0, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 49, 1, 1, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 5, 1, 1, 0, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heater.outCon.T
+  valNorth.vol.dynBal.U
+  valSouth.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified5.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp:
+The model has the same number of unknowns and equations: 135
+The model could not be deduced to be symbolically well-posed.
+The model has
+  135
+scalar unknowns and
+  120+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  135
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelDp.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelDp.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp:
+The DAE has 135 scalar unknowns and 135 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 26
+  Variables: 427
+  Constants: 15 (15 scalars)
+  Parameters: 253 (264 scalars)
+  Unknowns: 159 (179 scalars)
+  Equations: 152
+  Nontrivial: 141
+Translated Model
+  Constants: 231 scalars
+  Free parameters: 57 scalars
+  Parameter depending: 40 scalars
+  Time-varying variables: 51 scalars
+  Alias variables: 79 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {13, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {13, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified4");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified4:
+The model has the same number of unknowns and equations: 1775
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 1775
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified4 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified4.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified4\",", "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified4\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified4.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified4.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified4", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified4");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified4:
+The DAE has 1775 scalar unknowns and 1775 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 379
+  Variables: 5722
+  Constants: 166 (166 scalars)
+  Parameters: 3090 (3620 scalars)
+  Unknowns: 2466 (1916 scalars)
+  Differentiated variables: 18 scalars
+  Equations: 1983
+  Nontrivial: 1652
+Translated Model
+  Constants: 2672 scalars
+  Free parameters: 553 scalars
+  Parameter depending: 789 scalars
+  Continuous time states: 8 scalars
+  Time-varying variables: 536 scalars
+  Alias variables: 1152 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {56}
+  Sizes after manipulation of the linear systems: {24}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 50, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 1, 1, 6, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 1, 1, 50, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 1, 1, 5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pumpCoo.vol.dynBal.U
+  pumpHea.vol.dynBal.U
+  spl.vol.dynBal.U
+  spl1.vol.dynBal.U
+  spl2.vol.dynBal.U
+  spl3.vol.dynBal.U
+  valNorth.vol.dynBal.U
+  valSouth.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified4.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump");
+Check of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump:
+Warning: Members of records must be set in declaration, modified iceFacMea.
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 40
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea
+Original declaration of iceFacMea:
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Controls/Interfaces/VapourCompressionMachineControlBus.mo, line 42
+  Context: AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 14
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
+The model has the same number of unknowns and equations: 4628
+Check of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump\\\");\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos");
+simulateModel("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump", startTime=0, stopTime=86400, method="dassl", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump");
+Translation of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump:
+Warning: Members of records must be set in declaration, modified iceFacMea.
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 40
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea
+Original declaration of iceFacMea:
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Controls/Interfaces/VapourCompressionMachineControlBus.mo, line 42
+  Context: AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 14
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
+The DAE has 4628 scalar unknowns and 4628 scalar equations.
+Sparse solver handling possible: false.
+Due to flag Advanced.SparseActivate=false.
+Model sparse and large enough: true.
+Sparse solvers are available for dassl, lsodar, cvode, radau, esdirk*, sdirk* (using OpenMP, set number of cores with Advanced.NumberOfCores).
+Warning: The conditions of the following assert statements are always false:
+Warning:   assert(heatPump.con.preDro.homotopyInitialization, "In GeothermalHeatPump.heatPump.con.preDro: The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",     AssertionLevel.warning);
+    The variable heatPump.con.preDro.homotopyInitialization = false, was declared in class AixLib.Fluid.BaseClasses.PartialResistance, /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/BaseClasses/PartialResistance.mo at line 12, and used in component heatPump.con.preDro.PartialResistance.
+Warning:   assert(heatPump.eva.preDro.homotopyInitialization, "In GeothermalHeatPump.heatPump.eva.preDro: The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",     AssertionLevel.warning);
+    The variable heatPump.eva.preDro.homotopyInitialization = false, was declared in class AixLib.Fluid.BaseClasses.PartialResistance, /tmp/tmp-AixLib-1-ao_m6et2/AixLib/Fluid/BaseClasses/PartialResistance.mo at line 12, and used in component heatPump.eva.preDro.PartialResistance.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 994
+  Variables: 12265
+  Constants: 220 (220 scalars)
+  Parameters: 5892 (6613 scalars)
+  Unknowns: 6153 (4801 scalars)
+  Differentiated variables: 151 scalars
+  Equations: 4930
+  Nontrivial: 3864
+Translated Model
+  Constants: 4129 scalars
+  Free parameters: 848 scalars
+  Parameter depending: 2427 scalars
+  Inputs: 1 scalars
+  Outputs: 14 scalars
+  Continuous time states: 113 scalars
+  Time-varying variables: 1197 scalars
+  Alias variables: 3033 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 3, 2, 2, 4, 3, 17, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 2, 4, 3, 17, 4, 2, 2, 2, 2,   2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0,   0, 0, 0}
+  Sizes of nonlinear systems of equations: {12, 5, 12, 5, 6, 6, 6, 3, 1, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {12, 1, 5, 1, 12, 1, 5, 1, 3, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 2, 0, 1, 0, 1, 0, 1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  coldStorage.bottomCover.loadIns.T
+  coldStorage.bottomCover.loadWall.T
+  coldStorage.heatingCoil1.pipe[1].del.x
+  coldStorage.heatingCoil1.pipe[1].timDel.x
+  coldStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  coldStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  coldStorage.heatingCoil1.pipe[2].del.x
+  coldStorage.heatingCoil1.pipe[2].timDel.x
+  coldStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  coldStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  coldStorage.heatingCoil1.pipe[3].del.x
+  coldStorage.heatingCoil1.pipe[3].timDel.x
+  coldStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  coldStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  coldStorage.heatingCoil1.pipe[4].del.x
+  coldStorage.heatingCoil1.pipe[4].timDel.x
+  coldStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  coldStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  coldStorage.heatingCoil1.pipe[5].del.x
+  coldStorage.heatingCoil1.pipe[5].timDel.x
+  coldStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  coldStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  coldStorage.layer[1].dynBal.U
+  coldStorage.layer[2].dynBal.U
+  coldStorage.layer[3].dynBal.U
+  coldStorage.layer[4].dynBal.U
+  coldStorage.layer[5].dynBal.U
+  coldStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  coldStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  coldStorage.topCover.loadIns.T
+  coldStorage.topCover.loadWall.T
+  heatPump.con.vol.dynBal.U
+  heatPump.eva.vol.dynBal.U
+  heatPump.senT_a1.T
+  heatPump.senT_a2.T
+  heatPump.senT_b1.T
+  heatPump.senT_b2.T
+  heatStorage.bottomCover.loadIns.T
+  heatStorage.bottomCover.loadWall.T
+  heatStorage.heatingCoil1.pipe[1].del.x
+  heatStorage.heatingCoil1.pipe[1].timDel.x
+  heatStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  heatStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  heatStorage.heatingCoil1.pipe[2].del.x
+  heatStorage.heatingCoil1.pipe[2].timDel.x
+  heatStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  heatStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  heatStorage.heatingCoil1.pipe[3].del.x
+  heatStorage.heatingCoil1.pipe[3].timDel.x
+  heatStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  heatStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  heatStorage.heatingCoil1.pipe[4].del.x
+  heatStorage.heatingCoil1.pipe[4].timDel.x
+  heatStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  heatStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  heatStorage.heatingCoil1.pipe[5].del.x
+  heatStorage.heatingCoil1.pipe[5].timDel.x
+  heatStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  heatStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  heatStorage.layer[1].dynBal.U
+  heatStorage.layer[2].dynBal.U
+  heatStorage.layer[3].dynBal.U
+  heatStorage.layer[4].dynBal.U
+  heatStorage.layer[5].dynBal.U
+  heatStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  heatStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  heatStorage.topCover.loadIns.T
+  heatStorage.topCover.loadWall.T
+  peaLoaDev.boiler.internalControl.ControlerHeater.PI.I.y
+  peaLoaDev.boiler.internalControl.eEnergyMeter_P.q_joule
+  peaLoaDev.boiler.internalControl.eEnergyMeter_S.q_joule
+  peaLoaDev.boiler.senTCold.T
+  peaLoaDev.boiler.senTHot.T
+  peaLoaDev.boiler.vol.dynBal.U
+  pumpColdConsumer.filter.s[1]
+  pumpColdConsumer.filter.s[2]
+  pumpColdConsumer.vol.dynBal.U
+  pumpCondenser.filter.s[1]
+  pumpCondenser.filter.s[2]
+  pumpCondenser.vol.dynBal.U
+  pumpEvaporator.filter.s[1]
+  pumpEvaporator.filter.s[2]
+  pumpEvaporator.vol.dynBal.U
+  pumpGeothermalSource.filter.s[1]
+  pumpGeothermalSource.filter.s[2]
+  pumpGeothermalSource.vol.dynBal.U
+  pumpHeatConsumer.filter.s[1]
+  pumpHeatConsumer.filter.s[2]
+  pumpHeatConsumer.vol.dynBal.U
+  valveColdStorage.filter.s[1]
+  valveColdStorage.filter.s[2]
+  valveHeatSink.filter.s[1]
+  valveHeatSink.filter.s[2]
+  valveHeatSource.filter.s[1]
+  valveHeatSource.filter.s[2]
+  valveHeatStorage.filter.s[1]
+  valveHeatStorage.filter.s[2]
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example7");
+Check of AixLib.Fluid.Examples.Performance.Example7:
+The model has the same number of unknowns and equations: 500
+The model has the same number of unknowns and equations: nTem
+Check of AixLib.Fluid.Examples.Performance.Example7 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example7.mos\",", "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example7\",", "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example7\\\");\",", "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example7.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example7.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example7", tolerance=1e-6, stopTime=100, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example7");
+Translation of AixLib.Fluid.Examples.Performance.Example7:
+The DAE has 500 scalar unknowns and 500 scalar equations.
+Sparse solver handling possible: false.
+Due to flag Advanced.SparseActivate=false.
+Model sparse and large enough: true.
+Sparse solvers are available for dassl, lsodar, cvode, radau, esdirk*, sdirk* (using OpenMP, set number of cores with Advanced.NumberOfCores).
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1
+  Variables: 5
+  Parameters: 4 (4 scalars)
+  Unknowns: 1 (500 scalars)
+  Differentiated variables: 500 scalars
+  Equations: 3
+  Nontrivial: 3
+Translated Model
+  Constants: 1 scalars
+  Free parameters: 2 scalars
+  Parameter depending: 1 scalars
+  Continuous time states: 500 scalars
+  Time-varying variables: 500 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  T[1]
+  T[2]
+  T[3]
+  T[4]
+  T[5]
+  T[6]
+  T[7]
+  T[8]
+  T[9]
+  T[10]
+  T[11]
+  T[12]
+  T[13]
+  T[14]
+  T[15]
+  T[16]
+  T[17]
+  T[18]
+  T[19]
+  T[20]
+  T[21]
+  T[22]
+  T[23]
+  T[24]
+  T[25]
+  T[26]
+  T[27]
+  T[28]
+  T[29]
+  T[30]
+  T[31]
+  T[32]
+  T[33]
+  T[34]
+  T[35]
+  T[36]
+  T[37]
+  T[38]
+  T[39]
+  T[40]
+  T[41]
+  T[42]
+  T[43]
+  T[44]
+  T[45]
+  T[46]
+  T[47]
+  T[48]
+  T[49]
+  T[50]
+  T[51]
+  T[52]
+  T[53]
+  T[54]
+  T[55]
+  T[56]
+  T[57]
+  T[58]
+  T[59]
+  T[60]
+  T[61]
+  T[62]
+  T[63]
+  T[64]
+  T[65]
+  T[66]
+  T[67]
+  T[68]
+  T[69]
+  T[70]
+  T[71]
+  T[72]
+  T[73]
+  T[74]
+  T[75]
+  T[76]
+  T[77]
+  T[78]
+  T[79]
+  T[80]
+  T[81]
+  T[82]
+  T[83]
+  T[84]
+  T[85]
+  T[86]
+  T[87]
+  T[88]
+  T[89]
+  T[90]
+  T[91]
+  T[92]
+  T[93]
+  T[94]
+  T[95]
+  T[96]
+  T[97]
+  T[98]
+  T[99]
+  T[100]
+  T[101]
+  T[102]
+  T[103]
+  T[104]
+  T[105]
+  T[106]
+  T[107]
+  T[108]
+  T[109]
+  T[110]
+  T[111]
+  T[112]
+  T[113]
+  T[114]
+  T[115]
+  T[116]
+  T[117]
+  T[118]
+  T[119]
+  T[120]
+  T[121]
+  T[122]
+  T[123]
+  T[124]
+  T[125]
+  T[126]
+  T[127]
+  T[128]
+  T[129]
+  T[130]
+  T[131]
+  T[132]
+  T[133]
+  T[134]
+  T[135]
+  T[136]
+  T[137]
+  T[138]
+  T[139]
+  T[140]
+  T[141]
+  T[142]
+  T[143]
+  T[144]
+  T[145]
+  T[146]
+  T[147]
+  T[148]
+  T[149]
+  T[150]
+  T[151]
+  T[152]
+  T[153]
+  T[154]
+  T[155]
+  T[156]
+  T[157]
+  T[158]
+  T[159]
+  T[160]
+  T[161]
+  T[162]
+  T[163]
+  T[164]
+  T[165]
+  T[166]
+  T[167]
+  T[168]
+  T[169]
+  T[170]
+  T[171]
+  T[172]
+  T[173]
+  T[174]
+  T[175]
+  T[176]
+  T[177]
+  T[178]
+  T[179]
+  T[180]
+  T[181]
+  T[182]
+  T[183]
+  T[184]
+  T[185]
+  T[186]
+  T[187]
+  T[188]
+  T[189]
+  T[190]
+  T[191]
+  T[192]
+  T[193]
+  T[194]
+  T[195]
+  T[196]
+  T[197]
+  T[198]
+  T[199]
+  T[200]
+  T[201]
+  T[202]
+  T[203]
+  T[204]
+  T[205]
+  T[206]
+  T[207]
+  T[208]
+  T[209]
+  T[210]
+  T[211]
+  T[212]
+  T[213]
+  T[214]
+  T[215]
+  T[216]
+  T[217]
+  T[218]
+  T[219]
+  T[220]
+  T[221]
+  T[222]
+  T[223]
+  T[224]
+  T[225]
+  T[226]
+  T[227]
+  T[228]
+  T[229]
+  T[230]
+  T[231]
+  T[232]
+  T[233]
+  T[234]
+  T[235]
+  T[236]
+  T[237]
+  T[238]
+  T[239]
+  T[240]
+  T[241]
+  T[242]
+  T[243]
+  T[244]
+  T[245]
+  T[246]
+  T[247]
+  T[248]
+  T[249]
+  T[250]
+  T[251]
+  T[252]
+  T[253]
+  T[254]
+  T[255]
+  T[256]
+  T[257]
+  T[258]
+  T[259]
+  T[260]
+  T[261]
+  T[262]
+  T[263]
+  T[264]
+  T[265]
+  T[266]
+  T[267]
+  T[268]
+  T[269]
+  T[270]
+  T[271]
+  T[272]
+  T[273]
+  T[274]
+  T[275]
+  T[276]
+  T[277]
+  T[278]
+  T[279]
+  T[280]
+  T[281]
+  T[282]
+  T[283]
+  T[284]
+  T[285]
+  T[286]
+  T[287]
+  T[288]
+  T[289]
+  T[290]
+  T[291]
+  T[292]
+  T[293]
+  T[294]
+  T[295]
+  T[296]
+  T[297]
+  T[298]
+  T[299]
+  T[300]
+  T[301]
+  T[302]
+  T[303]
+  T[304]
+  T[305]
+  T[306]
+  T[307]
+  T[308]
+  T[309]
+  T[310]
+  T[311]
+  T[312]
+  T[313]
+  T[314]
+  T[315]
+  T[316]
+  T[317]
+  T[318]
+  T[319]
+  T[320]
+  T[321]
+  T[322]
+  T[323]
+  T[324]
+  T[325]
+  T[326]
+  T[327]
+  T[328]
+  T[329]
+  T[330]
+  T[331]
+  T[332]
+  T[333]
+  T[334]
+  T[335]
+  T[336]
+  T[337]
+  T[338]
+  T[339]
+  T[340]
+  T[341]
+  T[342]
+  T[343]
+  T[344]
+  T[345]
+  T[346]
+  T[347]
+  T[348]
+  T[349]
+  T[350]
+  T[351]
+  T[352]
+  T[353]
+  T[354]
+  T[355]
+  T[356]
+  T[357]
+  T[358]
+  T[359]
+  T[360]
+  T[361]
+  T[362]
+  T[363]
+  T[364]
+  T[365]
+  T[366]
+  T[367]
+  T[368]
+  T[369]
+  T[370]
+  T[371]
+  T[372]
+  T[373]
+  T[374]
+  T[375]
+  T[376]
+  T[377]
+  T[378]
+  T[379]
+  T[380]
+  T[381]
+  T[382]
+  T[383]
+  T[384]
+  T[385]
+  T[386]
+  T[387]
+  T[388]
+  T[389]
+  T[390]
+  T[391]
+  T[392]
+  T[393]
+  T[394]
+  T[395]
+  T[396]
+  T[397]
+  T[398]
+  T[399]
+  T[400]
+  T[401]
+  T[402]
+  T[403]
+  T[404]
+  T[405]
+  T[406]
+  T[407]
+  T[408]
+  T[409]
+  T[410]
+  T[411]
+  T[412]
+  T[413]
+  T[414]
+  T[415]
+  T[416]
+  T[417]
+  T[418]
+  T[419]
+  T[420]
+  T[421]
+  T[422]
+  T[423]
+  T[424]
+  T[425]
+  T[426]
+  T[427]
+  T[428]
+  T[429]
+  T[430]
+  T[431]
+  T[432]
+  T[433]
+  T[434]
+  T[435]
+  T[436]
+  T[437]
+  T[438]
+  T[439]
+  T[440]
+  T[441]
+  T[442]
+  T[443]
+  T[444]
+  T[445]
+  T[446]
+  T[447]
+  T[448]
+  T[449]
+  T[450]
+  T[451]
+  T[452]
+  T[453]
+  T[454]
+  T[455]
+  T[456]
+  T[457]
+  T[458]
+  T[459]
+  T[460]
+  T[461]
+  T[462]
+  T[463]
+  T[464]
+  T[465]
+  T[466]
+  T[467]
+  T[468]
+  T[469]
+  T[470]
+  T[471]
+  T[472]
+  T[473]
+  T[474]
+  T[475]
+  T[476]
+  T[477]
+  T[478]
+  T[479]
+  T[480]
+  T[481]
+  T[482]
+  T[483]
+  T[484]
+  T[485]
+  T[486]
+  T[487]
+  T[488]
+  T[489]
+  T[490]
+  T[491]
+  T[492]
+  T[493]
+  T[494]
+  T[495]
+  T[496]
+  T[497]
+  T[498]
+  T[499]
+  T[500]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example7.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow:
+The model has the same number of unknowns and equations: 126
+The model could not be deduced to be symbolically well-posed.
+The model has
+  126
+scalar unknowns and
+  111+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  126
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow:
+The DAE has 126 scalar unknowns and 126 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 393
+  Constants: 12 (12 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 148 (126 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 211 scalars
+  Free parameters: 54 scalars
+  Parameter depending: 17 scalars
+  Time-varying variables: 23 scalars
+  Alias variables: 76 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised:
+The model has the same number of unknowns and equations: 125
+The model could not be deduced to be symbolically well-posed.
+The model has
+  125
+scalar unknowns and
+  110+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  125
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelDpOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelDpOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised:
+The DAE has 125 scalar unknowns and 125 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 394
+  Constants: 14 (14 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 147 (169 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 214 scalars
+  Free parameters: 53 scalars
+  Parameter depending: 39 scalars
+  Time-varying variables: 47 scalars
+  Alias variables: 73 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified3");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified3:
+The model has the same number of unknowns and equations: 2029
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 2029
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified3 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified3.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified3\",", "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified3\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified3.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified3.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified3", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified3");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified3:
+The DAE has 2029 scalar unknowns and 2029 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 415
+  Variables: 6258
+  Constants: 196 (196 scalars)
+  Parameters: 3390 (3948 scalars)
+  Unknowns: 2672 (2170 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2155
+  Nontrivial: 1802
+Translated Model
+  Constants: 2840 scalars
+  Free parameters: 613 scalars
+  Parameter depending: 925 scalars
+  Continuous time states: 74 scalars
+  Time-varying variables: 704 scalars
+  Alias variables: 1232 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {56}
+  Sizes after manipulation of the linear systems: {24}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 51, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 1, 1, 6, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 1, 1, 51, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 1, 1, 6, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pmpNorth.filter.s[1]
+  pmpNorth.filter.s[2]
+  pmpNorth.vol.dynBal.U
+  pmpSouth.filter.s[1]
+  pmpSouth.filter.s[2]
+  pmpSouth.vol.dynBal.U
+  pumpCoo.filter.s[1]
+  pumpCoo.filter.s[2]
+  pumpCoo.vol.dynBal.U
+  pumpHea.filter.s[1]
+  pumpHea.filter.s[2]
+  pumpHea.vol.dynBal.U
+  spl.vol.dynBal.U
+  spl1.vol.dynBal.U
+  spl2.vol.dynBal.U
+  spl3.vol.dynBal.U
+  valCoo.filter.s[1]
+  valCoo.filter.s[2]
+  valHea.filter.s[1]
+  valHea.filter.s[2]
+  valNorth.filter.s[1]
+  valNorth.filter.s[2]
+  valNorth.vol.dynBal.U
+  valNorth1[1].filter.s[1]
+  valNorth1[1].filter.s[2]
+  valNorth1[2].filter.s[1]
+  valNorth1[2].filter.s[2]
+  valNorth1[3].filter.s[1]
+  valNorth1[3].filter.s[2]
+  valNorth1[4].filter.s[1]
+  valNorth1[4].filter.s[2]
+  valNorth2[1].filter.s[1]
+  valNorth2[1].filter.s[2]
+  valNorth2[2].filter.s[1]
+  valNorth2[2].filter.s[2]
+  valNorth2[3].filter.s[1]
+  valNorth2[3].filter.s[2]
+  valNorth2[4].filter.s[1]
+  valNorth2[4].filter.s[2]
+  valNorth2[5].filter.s[1]
+  valNorth2[5].filter.s[2]
+  valNorth2[6].filter.s[1]
+  valNorth2[6].filter.s[2]
+  valNorth2[7].filter.s[1]
+  valNorth2[7].filter.s[2]
+  valNorth2[8].filter.s[1]
+  valNorth2[8].filter.s[2]
+  valSouth.filter.s[1]
+  valSouth.filter.s[2]
+  valSouth.vol.dynBal.U
+  valSouth1[1].filter.s[1]
+  valSouth1[1].filter.s[2]
+  valSouth1[2].filter.s[1]
+  valSouth1[2].filter.s[2]
+  valSouth1[3].filter.s[1]
+  valSouth1[3].filter.s[2]
+  valSouth1[4].filter.s[1]
+  valSouth1[4].filter.s[2]
+  valSouth2[1].filter.s[1]
+  valSouth2[1].filter.s[2]
+  valSouth2[2].filter.s[1]
+  valSouth2[2].filter.s[2]
+  valSouth2[3].filter.s[1]
+  valSouth2[3].filter.s[2]
+  valSouth2[4].filter.s[1]
+  valSouth2[4].filter.s[2]
+  valSouth2[5].filter.s[1]
+  valSouth2[5].filter.s[2]
+  valSouth2[6].filter.s[1]
+  valSouth2[6].filter.s[2]
+  valSouth2[7].filter.s[1]
+  valSouth2[7].filter.s[2]
+  valSouth2[8].filter.s[1]
+  valSouth2[8].filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified3.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example4");
+Check of AixLib.Fluid.Examples.Performance.Example4:
+The model has the same number of unknowns and equations: 251
+The model could not be deduced to be symbolically well-posed.
+The model has
+  251
+scalar unknowns and
+  224+(if bou.use_Xi_in then 2 else (if bou.use_X_in then 1 else 3))+3*bou.nPorts+  (if  not bou.use_p_in then 1 else 0)+(if  not bou.use_T_in then 1 else 0)+(if   sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+(if    not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(  if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)+(if    not xSat.use_p_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  251
+Check of AixLib.Fluid.Examples.Performance.Example4 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example4.mos\",", "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example4\",", "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example4\\\");\",", "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example4.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example4.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example4", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example4");
+Translation of AixLib.Fluid.Examples.Performance.Example4:
+The DAE has 251 scalar unknowns and 251 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 39
+  Variables: 572
+  Constants: 29 (29 scalars)
+  Parameters: 258 (265 scalars)
+  Unknowns: 285 (271 scalars)
+  Equations: 239
+  Nontrivial: 207
+Translated Model
+  Constants: 294 scalars
+  Free parameters: 43 scalars
+  Parameter depending: 53 scalars
+  Time-varying variables: 20 scalars
+  Alias variables: 155 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example4.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example5");
+Check of AixLib.Fluid.Examples.Performance.Example5:
+The model has the same number of unknowns and equations: 1
+Check of AixLib.Fluid.Examples.Performance.Example5 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example5.mos\",", "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example5\",", "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example5\\\");\",", "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example5.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example5.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example5", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example5");
+Translation of AixLib.Fluid.Examples.Performance.Example5:
+The DAE has 1 scalar unknowns and 1 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1
+  Variables: 4
+  Parameters: 3 (5 scalars)
+  Unknowns: 1 (1 scalars)
+  Differentiated variables: 1 scalars
+  Equations: 1
+  Nontrivial: 1
+Translated Model
+  Constants: 1 scalars
+  Free parameters: 3 scalars
+  Parameter depending: 1 scalars
+  Continuous time states: 1 scalars
+  Time-varying variables: 1 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  c
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example5.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example2");
+Check of AixLib.Fluid.Examples.Performance.Example2:
+The model has the same number of unknowns and equations: 188
+The model could not be deduced to be symbolically well-posed.
+The model has
+  186+pump_dp.vol.dynBal.nPorts
+scalar unknowns and
+  176+(if bou.use_Xi_in then 1 else (if bou.use_X_in then 0 else 1))+(if  not   bou.use_p_in then 1 else 0)+2*bou.nPorts+(if  not bou.use_T_in then 1 else 0)+  (if  not pump_dp.vol.dynBal.use_mWat_flow then 1 else 0)+3*pump_dp.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  188
+Check of AixLib.Fluid.Examples.Performance.Example2 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example2.mos\",", "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example2\",", "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example2\\\");\",", "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example2.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example2.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example2", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example2");
+Translation of AixLib.Fluid.Examples.Performance.Example2:
+The DAE has 188 scalar unknowns and 188 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 52
+  Variables: 587
+  Constants: 14 (14 scalars)
+  Parameters: 315 (329 scalars)
+  Unknowns: 258 (199 scalars)
+  Differentiated variables: 2 scalars
+  Equations: 229
+  Nontrivial: 189
+Translated Model
+  Constants: 283 scalars
+  Free parameters: 42 scalars
+  Parameter depending: 52 scalars
+  Continuous time states: 1 scalars
+  Time-varying variables: 49 scalars
+  Alias variables: 116 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {7, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {7, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 0, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pump_dp.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example2.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.ResistanceVolumeFlowReversal");
+Check of AixLib.Fluid.Examples.ResistanceVolumeFlowReversal:
+The model has the same number of unknowns and equations: 834
+The model could not be deduced to be symbolically well-posed.
+The model has
+  812+pump.vol.dynBal.nPorts+vol[1].dynBal.nPorts+vol[2].dynBal.nPorts+  vol[3].dynBal.nPorts+vol[4].dynBal.nPorts+vol[5].dynBal.nPorts+  vol[6].dynBal.nPorts+vol[7].dynBal.nPorts+vol[8].dynBal.nPorts+  vol[9].dynBal.nPorts+vol[10].dynBal.nPorts
+scalar unknowns and
+  752+(if bou.use_Xi_in then 1 else (if bou.use_X_in then 0 else 1))+(if  not   bou.use_p_in then 1 else 0)+2*bou.nPorts+(if  not bou.use_T_in then 1 else 0)+  (if  not pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*pump.vol.dynBal.nPorts  +(if  not vol[1].dynBal.use_mWat_flow then 1 else 0)+3*vol[1].dynBal.nPorts+(  if  not vol[2].dynBal.use_mWat_flow then 1 else 0)+3*vol[2].dynBal.nPorts+(if    not vol[3].dynBal.use_mWat_flow then 1 else 0)+3*vol[3].dynBal.nPorts+(if    not vol[4].dynBal.use_mWat_flow then 1 else 0)+3*vol[4].dynBal.nPorts+(if    not vol[5].dynBal.use_mWat_flow then 1 else 0)+3*vol[5].dynBal.nPorts+(if    not vol[6].dynBal.use_mWat_flow then 1 else 0)+3*vol[6].dynBal.nPorts+(if    not vol[7].dynBal.use_mWat_flow then 1 else 0)+3*vol[7].dynBal.nPorts+(if    not vol[8].dynBal.use_mWat_flow then 1 else 0)+3*vol[8].dynBal.nPorts+(if    not vol[9].dynBal.use_mWat_flow then 1 else 0)+3*vol[9].dynBal.nPorts+(if    not vol[10].dynBal.use_mWat_flow then 1 else 0)+3*vol[10].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  834
+Check of AixLib.Fluid.Examples.ResistanceVolumeFlowReversal successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/ResistanceVolumeFlowReversal.mos\",", "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.ResistanceVolumeFlowReversal\",", "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.ResistanceVolumeFlowReversal\\\");\",", "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/ResistanceVolumeFlowReversal.mos");
+simulateModel("AixLib.Fluid.Examples.ResistanceVolumeFlowReversal", tolerance=1e-6, stopTime=10000, method="CVode", resultFile="AixLib.Fluid.Examples.ResistanceVolumeFlowReversal");
+Translation of AixLib.Fluid.Examples.ResistanceVolumeFlowReversal:
+The DAE has 834 scalar unknowns and 834 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 174
+  Variables: 2385
+  Constants: 67 (67 scalars)
+  Parameters: 1107 (1073 scalars)
+  Unknowns: 1211 (894 scalars)
+  Differentiated variables: 5 scalars
+  Equations: 917
+  Nontrivial: 683
+Translated Model
+  Constants: 1017 scalars
+  Free parameters: 124 scalars
+  Parameter depending: 198 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 203 scalars
+  Alias variables: 492 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {6, 11, 1, 1, 1, 1, 1, 1, 1, 4}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 0, 0, 0, 0, 0, 0, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {6, 11, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  hea.outCon.T
+  pump.vol.dynBal.U
+  val.filter.s[1]
+  val.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Basic");
+Check of AixLib.Fluid.Examples.FlowSystem.Basic:
+The model has the same number of unknowns and equations: 2029
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 2029
+Check of AixLib.Fluid.Examples.FlowSystem.Basic successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Basic.mos\",", "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Basic\",", "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Basic\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Basic.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Basic.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Basic", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Basic");
+Translation of AixLib.Fluid.Examples.FlowSystem.Basic:
+The DAE has 2029 scalar unknowns and 2029 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 415
+  Variables: 6258
+  Constants: 196 (196 scalars)
+  Parameters: 3390 (3948 scalars)
+  Unknowns: 2672 (2170 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2155
+  Nontrivial: 1802
+Translated Model
+  Constants: 2806 scalars
+  Free parameters: 613 scalars
+  Parameter depending: 925 scalars
+  Continuous time states: 74 scalars
+  Time-varying variables: 748 scalars
+  Alias variables: 1222 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {56}
+  Sizes after manipulation of the linear systems: {24}
+  Sizes of nonlinear systems of equations: {1, 1, 106, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 28, 0, 1, 0, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 106, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 1, 0, 1, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pmpNorth.filter.s[1]
+  pmpNorth.filter.s[2]
+  pmpNorth.vol.dynBal.U
+  pmpSouth.filter.s[1]
+  pmpSouth.filter.s[2]
+  pmpSouth.vol.dynBal.U
+  pumpCoo.filter.s[1]
+  pumpCoo.filter.s[2]
+  pumpCoo.vol.dynBal.U
+  pumpHea.filter.s[1]
+  pumpHea.filter.s[2]
+  pumpHea.vol.dynBal.U
+  spl.vol.dynBal.U
+  spl1.vol.dynBal.U
+  spl2.vol.dynBal.U
+  spl3.vol.dynBal.U
+  valCoo.filter.s[1]
+  valCoo.filter.s[2]
+  valHea.filter.s[1]
+  valHea.filter.s[2]
+  valNorth.filter.s[1]
+  valNorth.filter.s[2]
+  valNorth.vol.dynBal.U
+  valNorth1[1].filter.s[1]
+  valNorth1[1].filter.s[2]
+  valNorth1[2].filter.s[1]
+  valNorth1[2].filter.s[2]
+  valNorth1[3].filter.s[1]
+  valNorth1[3].filter.s[2]
+  valNorth1[4].filter.s[1]
+  valNorth1[4].filter.s[2]
+  valNorth2[1].filter.s[1]
+  valNorth2[1].filter.s[2]
+  valNorth2[2].filter.s[1]
+  valNorth2[2].filter.s[2]
+  valNorth2[3].filter.s[1]
+  valNorth2[3].filter.s[2]
+  valNorth2[4].filter.s[1]
+  valNorth2[4].filter.s[2]
+  valNorth2[5].filter.s[1]
+  valNorth2[5].filter.s[2]
+  valNorth2[6].filter.s[1]
+  valNorth2[6].filter.s[2]
+  valNorth2[7].filter.s[1]
+  valNorth2[7].filter.s[2]
+  valNorth2[8].filter.s[1]
+  valNorth2[8].filter.s[2]
+  valSouth.filter.s[1]
+  valSouth.filter.s[2]
+  valSouth.vol.dynBal.U
+  valSouth1[1].filter.s[1]
+  valSouth1[1].filter.s[2]
+  valSouth1[2].filter.s[1]
+  valSouth1[2].filter.s[2]
+  valSouth1[3].filter.s[1]
+  valSouth1[3].filter.s[2]
+  valSouth1[4].filter.s[1]
+  valSouth1[4].filter.s[2]
+  valSouth2[1].filter.s[1]
+  valSouth2[1].filter.s[2]
+  valSouth2[2].filter.s[1]
+  valSouth2[2].filter.s[2]
+  valSouth2[3].filter.s[1]
+  valSouth2[3].filter.s[2]
+  valSouth2[4].filter.s[1]
+  valSouth2[4].filter.s[2]
+  valSouth2[5].filter.s[1]
+  valSouth2[5].filter.s[2]
+  valSouth2[6].filter.s[1]
+  valSouth2[6].filter.s[2]
+  valSouth2[7].filter.s[1]
+  valSouth2[7].filter.s[2]
+  valSouth2[8].filter.s[1]
+  valSouth2[8].filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Basic.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised:
+The model has the same number of unknowns and equations: 136
+The model could not be deduced to be symbolically well-posed.
+The model has
+  136
+scalar unknowns and
+  121+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  136
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelFlowOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelFlowOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised:
+The DAE has 136 scalar unknowns and 136 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 26
+  Variables: 426
+  Constants: 13 (13 scalars)
+  Parameters: 253 (264 scalars)
+  Unknowns: 160 (180 scalars)
+  Equations: 152
+  Nontrivial: 141
+Translated Model
+  Constants: 228 scalars
+  Free parameters: 58 scalars
+  Parameter depending: 40 scalars
+  Time-varying variables: 51 scalars
+  Alias variables: 80 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised:
+The model has the same number of unknowns and equations: 126
+The model could not be deduced to be symbolically well-posed.
+The model has
+  126
+scalar unknowns and
+  111+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  126
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlowOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlowOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised:
+The DAE has 126 scalar unknowns and 126 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 393
+  Constants: 12 (12 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 148 (126 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 211 scalars
+  Free parameters: 54 scalars
+  Parameter depending: 17 scalars
+  Time-varying variables: 23 scalars
+  Alias variables: 76 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified1");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified1:
+The model has the same number of unknowns and equations: 2029
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 2029
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified1 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified1.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified1\",", "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified1\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified1.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified1.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified1", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified1");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified1:
+The DAE has 2029 scalar unknowns and 2029 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 415
+  Variables: 6258
+  Constants: 196 (196 scalars)
+  Parameters: 3390 (3948 scalars)
+  Unknowns: 2672 (2170 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2155
+  Nontrivial: 1802
+Translated Model
+  Constants: 2830 scalars
+  Free parameters: 613 scalars
+  Parameter depending: 925 scalars
+  Continuous time states: 74 scalars
+  Time-varying variables: 724 scalars
+  Alias variables: 1222 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {56}
+  Sizes after manipulation of the linear systems: {24}
+  Sizes of nonlinear systems of equations: {1, 1, 62, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 7, 0, 1, 0, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 62, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pmpNorth.filter.s[1]
+  pmpNorth.filter.s[2]
+  pmpNorth.vol.dynBal.U
+  pmpSouth.filter.s[1]
+  pmpSouth.filter.s[2]
+  pmpSouth.vol.dynBal.U
+  pumpCoo.filter.s[1]
+  pumpCoo.filter.s[2]
+  pumpCoo.vol.dynBal.U
+  pumpHea.filter.s[1]
+  pumpHea.filter.s[2]
+  pumpHea.vol.dynBal.U
+  spl.vol.dynBal.U
+  spl1.vol.dynBal.U
+  spl2.vol.dynBal.U
+  spl3.vol.dynBal.U
+  valCoo.filter.s[1]
+  valCoo.filter.s[2]
+  valHea.filter.s[1]
+  valHea.filter.s[2]
+  valNorth.filter.s[1]
+  valNorth.filter.s[2]
+  valNorth.vol.dynBal.U
+  valNorth1[1].filter.s[1]
+  valNorth1[1].filter.s[2]
+  valNorth1[2].filter.s[1]
+  valNorth1[2].filter.s[2]
+  valNorth1[3].filter.s[1]
+  valNorth1[3].filter.s[2]
+  valNorth1[4].filter.s[1]
+  valNorth1[4].filter.s[2]
+  valNorth2[1].filter.s[1]
+  valNorth2[1].filter.s[2]
+  valNorth2[2].filter.s[1]
+  valNorth2[2].filter.s[2]
+  valNorth2[3].filter.s[1]
+  valNorth2[3].filter.s[2]
+  valNorth2[4].filter.s[1]
+  valNorth2[4].filter.s[2]
+  valNorth2[5].filter.s[1]
+  valNorth2[5].filter.s[2]
+  valNorth2[6].filter.s[1]
+  valNorth2[6].filter.s[2]
+  valNorth2[7].filter.s[1]
+  valNorth2[7].filter.s[2]
+  valNorth2[8].filter.s[1]
+  valNorth2[8].filter.s[2]
+  valSouth.filter.s[1]
+  valSouth.filter.s[2]
+  valSouth.vol.dynBal.U
+  valSouth1[1].filter.s[1]
+  valSouth1[1].filter.s[2]
+  valSouth1[2].filter.s[1]
+  valSouth1[2].filter.s[2]
+  valSouth1[3].filter.s[1]
+  valSouth1[3].filter.s[2]
+  valSouth1[4].filter.s[1]
+  valSouth1[4].filter.s[2]
+  valSouth2[1].filter.s[1]
+  valSouth2[1].filter.s[2]
+  valSouth2[2].filter.s[1]
+  valSouth2[2].filter.s[2]
+  valSouth2[3].filter.s[1]
+  valSouth2[3].filter.s[2]
+  valSouth2[4].filter.s[1]
+  valSouth2[4].filter.s[2]
+  valSouth2[5].filter.s[1]
+  valSouth2[5].filter.s[2]
+  valSouth2[6].filter.s[1]
+  valSouth2[6].filter.s[2]
+  valSouth2[7].filter.s[1]
+  valSouth2[7].filter.s[2]
+  valSouth2[8].filter.s[1]
+  valSouth2[8].filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified1.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised:
+The model has the same number of unknowns and equations: 135
+The model could not be deduced to be symbolically well-posed.
+The model has
+  135
+scalar unknowns and
+  120+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  135
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelDpOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelDpOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised:
+The DAE has 135 scalar unknowns and 135 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 26
+  Variables: 427
+  Constants: 15 (15 scalars)
+  Parameters: 253 (264 scalars)
+  Unknowns: 159 (179 scalars)
+  Equations: 152
+  Nontrivial: 141
+Translated Model
+  Constants: 231 scalars
+  Free parameters: 57 scalars
+  Parameter depending: 40 scalars
+  Time-varying variables: 51 scalars
+  Alias variables: 79 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {13}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {13}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example1v1");
+Check of AixLib.Fluid.Examples.Performance.Example1v1:
+The model has the same number of unknowns and equations: 398
+The model could not be deduced to be symbolically well-posed.
+The model has
+  396+pump.vol.dynBal.nPorts
+scalar unknowns and
+  386+(if bou.use_Xi_in then 1 else (if bou.use_X_in then 0 else 1))+(if  not   bou.use_p_in then 1 else 0)+2*bou.nPorts+(if  not bou.use_T_in then 1 else 0)+  (if  not pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*pump.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  398
+Check of AixLib.Fluid.Examples.Performance.Example1v1 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example1v1.mos\",", "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example1v1\",", "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example1v1\\\");\",", "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example1v1.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example1v1.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example1v1", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example1v1");
+Translation of AixLib.Fluid.Examples.Performance.Example1v1:
+The DAE has 398 scalar unknowns and 398 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 94
+  Variables: 1342
+  Constants: 36 (36 scalars)
+  Parameters: 749 (764 scalars)
+  Unknowns: 557 (458 scalars)
+  Differentiated variables: 3 scalars
+  Equations: 465
+  Nontrivial: 400
+Translated Model
+  Constants: 680 scalars
+  Free parameters: 102 scalars
+  Parameter depending: 89 scalars
+  Continuous time states: 2 scalars
+  Time-varying variables: 150 scalars
+  Alias variables: 237 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {6, 21}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {6, 21}
+    Sizes after manipulation of the nonlinear systems: {1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  hea.outCon.T
+  pump.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example1v1.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.FlowSystem.Simplified2");
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified2:
+The model has the same number of unknowns and equations: 2029
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 2029
+Check of AixLib.Fluid.Examples.FlowSystem.Simplified2 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified2.mos\",", "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.FlowSystem.Simplified2\",", "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.FlowSystem.Simplified2\\\");\",", "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.FlowSystem.Simplified2.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified2.mos");
+simulateModel("AixLib.Fluid.Examples.FlowSystem.Simplified2", tolerance=1e-6, stopTime=1000, method="Radau", resultFile="AixLib.Fluid.Examples.FlowSystem.Simplified2");
+Translation of AixLib.Fluid.Examples.FlowSystem.Simplified2:
+The DAE has 2029 scalar unknowns and 2029 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 415
+  Variables: 6258
+  Constants: 196 (196 scalars)
+  Parameters: 3390 (3948 scalars)
+  Unknowns: 2672 (2170 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2155
+  Nontrivial: 1802
+Translated Model
+  Constants: 2830 scalars
+  Free parameters: 613 scalars
+  Parameter depending: 925 scalars
+  Continuous time states: 74 scalars
+  Time-varying variables: 724 scalars
+  Alias variables: 1222 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {56}
+  Sizes after manipulation of the linear systems: {24}
+  Sizes of nonlinear systems of equations: {1, 1, 62, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 8, 0, 1, 0, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 62, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 8, 0, 0, 0, 0, 1, 0, 1, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pmpNorth.filter.s[1]
+  pmpNorth.filter.s[2]
+  pmpNorth.vol.dynBal.U
+  pmpSouth.filter.s[1]
+  pmpSouth.filter.s[2]
+  pmpSouth.vol.dynBal.U
+  pumpCoo.filter.s[1]
+  pumpCoo.filter.s[2]
+  pumpCoo.vol.dynBal.U
+  pumpHea.filter.s[1]
+  pumpHea.filter.s[2]
+  pumpHea.vol.dynBal.U
+  spl.vol.dynBal.U
+  spl1.vol.dynBal.U
+  spl2.vol.dynBal.U
+  spl3.vol.dynBal.U
+  valCoo.filter.s[1]
+  valCoo.filter.s[2]
+  valHea.filter.s[1]
+  valHea.filter.s[2]
+  valNorth.filter.s[1]
+  valNorth.filter.s[2]
+  valNorth.vol.dynBal.U
+  valNorth1[1].filter.s[1]
+  valNorth1[1].filter.s[2]
+  valNorth1[2].filter.s[1]
+  valNorth1[2].filter.s[2]
+  valNorth1[3].filter.s[1]
+  valNorth1[3].filter.s[2]
+  valNorth1[4].filter.s[1]
+  valNorth1[4].filter.s[2]
+  valNorth2[1].filter.s[1]
+  valNorth2[1].filter.s[2]
+  valNorth2[2].filter.s[1]
+  valNorth2[2].filter.s[2]
+  valNorth2[3].filter.s[1]
+  valNorth2[3].filter.s[2]
+  valNorth2[4].filter.s[1]
+  valNorth2[4].filter.s[2]
+  valNorth2[5].filter.s[1]
+  valNorth2[5].filter.s[2]
+  valNorth2[6].filter.s[1]
+  valNorth2[6].filter.s[2]
+  valNorth2[7].filter.s[1]
+  valNorth2[7].filter.s[2]
+  valNorth2[8].filter.s[1]
+  valNorth2[8].filter.s[2]
+  valSouth.filter.s[1]
+  valSouth.filter.s[2]
+  valSouth.vol.dynBal.U
+  valSouth1[1].filter.s[1]
+  valSouth1[1].filter.s[2]
+  valSouth1[2].filter.s[1]
+  valSouth1[2].filter.s[2]
+  valSouth1[3].filter.s[1]
+  valSouth1[3].filter.s[2]
+  valSouth1[4].filter.s[1]
+  valSouth1[4].filter.s[2]
+  valSouth2[1].filter.s[1]
+  valSouth2[1].filter.s[2]
+  valSouth2[2].filter.s[1]
+  valSouth2[2].filter.s[2]
+  valSouth2[3].filter.s[1]
+  valSouth2[3].filter.s[2]
+  valSouth2[4].filter.s[1]
+  valSouth2[4].filter.s[2]
+  valSouth2[5].filter.s[1]
+  valSouth2[5].filter.s[2]
+  valSouth2[6].filter.s[1]
+  valSouth2[6].filter.s[2]
+  valSouth2[7].filter.s[1]
+  valSouth2[7].filter.s[2]
+  valSouth2[8].filter.s[1]
+  valSouth2[8].filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.FlowSystem.Simplified2.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised:
+The model has the same number of unknowns and equations: 126
+The model could not be deduced to be symbolically well-posed.
+The model has
+  126
+scalar unknowns and
+  111+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_m_flow_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)  +(if sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(  if  not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  126
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelFlowOptimised.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelFlowOptimised.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised:
+The DAE has 126 scalar unknowns and 126 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 393
+  Constants: 12 (12 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 148 (170 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 211 scalars
+  Free parameters: 54 scalars
+  Parameter depending: 39 scalars
+  Time-varying variables: 47 scalars
+  Alias variables: 74 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp:
+The model has the same number of unknowns and equations: 125
+The model could not be deduced to be symbolically well-posed.
+The model has
+  125
+scalar unknowns and
+  110+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  125
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesDp.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesDp.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp:
+The DAE has 125 scalar unknowns and 125 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 394
+  Constants: 14 (14 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 147 (125 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 214 scalars
+  Free parameters: 53 scalars
+  Parameter depending: 17 scalars
+  Time-varying variables: 23 scalars
+  Alias variables: 75 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {11}
+  Sizes after manipulation of the nonlinear systems: {9}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11}
+    Sizes after manipulation of the nonlinear systems: {9}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example6");
+Check of AixLib.Fluid.Examples.Performance.Example6:
+The model has the same number of unknowns and equations: 1001
+The model has the same number of unknowns and equations:
+  1+2*nCapacitors
+Check of AixLib.Fluid.Examples.Performance.Example6 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example6.mos\",", "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example6\",", "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example6\\\");\",", "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example6.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example6.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example6", tolerance=1e-6, stopTime=100, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example6");
+Translation of AixLib.Fluid.Examples.Performance.Example6:
+The DAE has 1001 scalar unknowns and 1001 scalar equations.
+Sparse solver handling possible: false.
+Due to flag Advanced.SparseActivate=false.
+Model sparse and large enough: true.
+Sparse solvers are available for dassl, lsodar, cvode, radau, esdirk*, sdirk* (using OpenMP, set number of cores with Advanced.NumberOfCores).
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1
+  Variables: 5
+  Parameters: 3 (3 scalars)
+  Unknowns: 2 (1001 scalars)
+  Differentiated variables: 500 scalars
+  Equations: 4
+  Nontrivial: 4
+Translated Model
+  Constants: 2 scalars
+  Free parameters: 2 scalars
+  Continuous time states: 500 scalars
+  Time-varying variables: 1000 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  T[1]
+  T[2]
+  T[3]
+  T[4]
+  T[5]
+  T[6]
+  T[7]
+  T[8]
+  T[9]
+  T[10]
+  T[11]
+  T[12]
+  T[13]
+  T[14]
+  T[15]
+  T[16]
+  T[17]
+  T[18]
+  T[19]
+  T[20]
+  T[21]
+  T[22]
+  T[23]
+  T[24]
+  T[25]
+  T[26]
+  T[27]
+  T[28]
+  T[29]
+  T[30]
+  T[31]
+  T[32]
+  T[33]
+  T[34]
+  T[35]
+  T[36]
+  T[37]
+  T[38]
+  T[39]
+  T[40]
+  T[41]
+  T[42]
+  T[43]
+  T[44]
+  T[45]
+  T[46]
+  T[47]
+  T[48]
+  T[49]
+  T[50]
+  T[51]
+  T[52]
+  T[53]
+  T[54]
+  T[55]
+  T[56]
+  T[57]
+  T[58]
+  T[59]
+  T[60]
+  T[61]
+  T[62]
+  T[63]
+  T[64]
+  T[65]
+  T[66]
+  T[67]
+  T[68]
+  T[69]
+  T[70]
+  T[71]
+  T[72]
+  T[73]
+  T[74]
+  T[75]
+  T[76]
+  T[77]
+  T[78]
+  T[79]
+  T[80]
+  T[81]
+  T[82]
+  T[83]
+  T[84]
+  T[85]
+  T[86]
+  T[87]
+  T[88]
+  T[89]
+  T[90]
+  T[91]
+  T[92]
+  T[93]
+  T[94]
+  T[95]
+  T[96]
+  T[97]
+  T[98]
+  T[99]
+  T[100]
+  T[101]
+  T[102]
+  T[103]
+  T[104]
+  T[105]
+  T[106]
+  T[107]
+  T[108]
+  T[109]
+  T[110]
+  T[111]
+  T[112]
+  T[113]
+  T[114]
+  T[115]
+  T[116]
+  T[117]
+  T[118]
+  T[119]
+  T[120]
+  T[121]
+  T[122]
+  T[123]
+  T[124]
+  T[125]
+  T[126]
+  T[127]
+  T[128]
+  T[129]
+  T[130]
+  T[131]
+  T[132]
+  T[133]
+  T[134]
+  T[135]
+  T[136]
+  T[137]
+  T[138]
+  T[139]
+  T[140]
+  T[141]
+  T[142]
+  T[143]
+  T[144]
+  T[145]
+  T[146]
+  T[147]
+  T[148]
+  T[149]
+  T[150]
+  T[151]
+  T[152]
+  T[153]
+  T[154]
+  T[155]
+  T[156]
+  T[157]
+  T[158]
+  T[159]
+  T[160]
+  T[161]
+  T[162]
+  T[163]
+  T[164]
+  T[165]
+  T[166]
+  T[167]
+  T[168]
+  T[169]
+  T[170]
+  T[171]
+  T[172]
+  T[173]
+  T[174]
+  T[175]
+  T[176]
+  T[177]
+  T[178]
+  T[179]
+  T[180]
+  T[181]
+  T[182]
+  T[183]
+  T[184]
+  T[185]
+  T[186]
+  T[187]
+  T[188]
+  T[189]
+  T[190]
+  T[191]
+  T[192]
+  T[193]
+  T[194]
+  T[195]
+  T[196]
+  T[197]
+  T[198]
+  T[199]
+  T[200]
+  T[201]
+  T[202]
+  T[203]
+  T[204]
+  T[205]
+  T[206]
+  T[207]
+  T[208]
+  T[209]
+  T[210]
+  T[211]
+  T[212]
+  T[213]
+  T[214]
+  T[215]
+  T[216]
+  T[217]
+  T[218]
+  T[219]
+  T[220]
+  T[221]
+  T[222]
+  T[223]
+  T[224]
+  T[225]
+  T[226]
+  T[227]
+  T[228]
+  T[229]
+  T[230]
+  T[231]
+  T[232]
+  T[233]
+  T[234]
+  T[235]
+  T[236]
+  T[237]
+  T[238]
+  T[239]
+  T[240]
+  T[241]
+  T[242]
+  T[243]
+  T[244]
+  T[245]
+  T[246]
+  T[247]
+  T[248]
+  T[249]
+  T[250]
+  T[251]
+  T[252]
+  T[253]
+  T[254]
+  T[255]
+  T[256]
+  T[257]
+  T[258]
+  T[259]
+  T[260]
+  T[261]
+  T[262]
+  T[263]
+  T[264]
+  T[265]
+  T[266]
+  T[267]
+  T[268]
+  T[269]
+  T[270]
+  T[271]
+  T[272]
+  T[273]
+  T[274]
+  T[275]
+  T[276]
+  T[277]
+  T[278]
+  T[279]
+  T[280]
+  T[281]
+  T[282]
+  T[283]
+  T[284]
+  T[285]
+  T[286]
+  T[287]
+  T[288]
+  T[289]
+  T[290]
+  T[291]
+  T[292]
+  T[293]
+  T[294]
+  T[295]
+  T[296]
+  T[297]
+  T[298]
+  T[299]
+  T[300]
+  T[301]
+  T[302]
+  T[303]
+  T[304]
+  T[305]
+  T[306]
+  T[307]
+  T[308]
+  T[309]
+  T[310]
+  T[311]
+  T[312]
+  T[313]
+  T[314]
+  T[315]
+  T[316]
+  T[317]
+  T[318]
+  T[319]
+  T[320]
+  T[321]
+  T[322]
+  T[323]
+  T[324]
+  T[325]
+  T[326]
+  T[327]
+  T[328]
+  T[329]
+  T[330]
+  T[331]
+  T[332]
+  T[333]
+  T[334]
+  T[335]
+  T[336]
+  T[337]
+  T[338]
+  T[339]
+  T[340]
+  T[341]
+  T[342]
+  T[343]
+  T[344]
+  T[345]
+  T[346]
+  T[347]
+  T[348]
+  T[349]
+  T[350]
+  T[351]
+  T[352]
+  T[353]
+  T[354]
+  T[355]
+  T[356]
+  T[357]
+  T[358]
+  T[359]
+  T[360]
+  T[361]
+  T[362]
+  T[363]
+  T[364]
+  T[365]
+  T[366]
+  T[367]
+  T[368]
+  T[369]
+  T[370]
+  T[371]
+  T[372]
+  T[373]
+  T[374]
+  T[375]
+  T[376]
+  T[377]
+  T[378]
+  T[379]
+  T[380]
+  T[381]
+  T[382]
+  T[383]
+  T[384]
+  T[385]
+  T[386]
+  T[387]
+  T[388]
+  T[389]
+  T[390]
+  T[391]
+  T[392]
+  T[393]
+  T[394]
+  T[395]
+  T[396]
+  T[397]
+  T[398]
+  T[399]
+  T[400]
+  T[401]
+  T[402]
+  T[403]
+  T[404]
+  T[405]
+  T[406]
+  T[407]
+  T[408]
+  T[409]
+  T[410]
+  T[411]
+  T[412]
+  T[413]
+  T[414]
+  T[415]
+  T[416]
+  T[417]
+  T[418]
+  T[419]
+  T[420]
+  T[421]
+  T[422]
+  T[423]
+  T[424]
+  T[425]
+  T[426]
+  T[427]
+  T[428]
+  T[429]
+  T[430]
+  T[431]
+  T[432]
+  T[433]
+  T[434]
+  T[435]
+  T[436]
+  T[437]
+  T[438]
+  T[439]
+  T[440]
+  T[441]
+  T[442]
+  T[443]
+  T[444]
+  T[445]
+  T[446]
+  T[447]
+  T[448]
+  T[449]
+  T[450]
+  T[451]
+  T[452]
+  T[453]
+  T[454]
+  T[455]
+  T[456]
+  T[457]
+  T[458]
+  T[459]
+  T[460]
+  T[461]
+  T[462]
+  T[463]
+  T[464]
+  T[465]
+  T[466]
+  T[467]
+  T[468]
+  T[469]
+  T[470]
+  T[471]
+  T[472]
+  T[473]
+  T[474]
+  T[475]
+  T[476]
+  T[477]
+  T[478]
+  T[479]
+  T[480]
+  T[481]
+  T[482]
+  T[483]
+  T[484]
+  T[485]
+  T[486]
+  T[487]
+  T[488]
+  T[489]
+  T[490]
+  T[491]
+  T[492]
+  T[493]
+  T[494]
+  T[495]
+  T[496]
+  T[497]
+  T[498]
+  T[499]
+  T[500]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example6.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp");
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp:
+The model has the same number of unknowns and equations: 125
+The model could not be deduced to be symbolically well-posed.
+The model has
+  125
+scalar unknowns and
+  110+(if sou.use_Xi_in then 2 else (if sou.use_X_in then 1 else 3))+3*sou.nPorts+  (if  not sou.use_p_in then 1 else 0)+(if  not sou.use_T_in then 1 else 0)+(if   sin.use_Xi_in then 2 else (if sin.use_X_in then 1 else 3))+3*sin.nPorts+(if    not sin.use_p_in then 1 else 0)+(if  not sin.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  125
+Check of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelDp.mos\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp\\\");\",", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/ParallelDp.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp", stopTime=1, method="CVode", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp");
+Translation of AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp:
+The DAE has 125 scalar unknowns and 125 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 24
+  Variables: 394
+  Constants: 14 (14 scalars)
+  Parameters: 233 (243 scalars)
+  Unknowns: 147 (169 scalars)
+  Equations: 141
+  Nontrivial: 131
+Translated Model
+  Constants: 214 scalars
+  Free parameters: 53 scalars
+  Parameter depending: 39 scalars
+  Time-varying variables: 47 scalars
+  Alias variables: 73 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.Performance.Example3");
+Check of AixLib.Fluid.Examples.Performance.Example3:
+The model has the same number of unknowns and equations: 235
+The model could not be deduced to be symbolically well-posed.
+The model has
+  233+pump.vol.dynBal.nPorts
+scalar unknowns and
+  223+(if bou.use_Xi_in then 1 else (if bou.use_X_in then 0 else 1))+(if  not   bou.use_p_in then 1 else 0)+2*bou.nPorts+(if  not bou.use_T_in then 1 else 0)+  (if  not pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*pump.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  235
+Check of AixLib.Fluid.Examples.Performance.Example3 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example3.mos\",", "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.Performance.Example3\",", "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.Performance.Example3\\\");\",", "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.Performance.Example3.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example3.mos");
+simulateModel("AixLib.Fluid.Examples.Performance.Example3", tolerance=1e-6, stopTime=20, method="CVode", resultFile="AixLib.Fluid.Examples.Performance.Example3");
+Translation of AixLib.Fluid.Examples.Performance.Example3:
+The DAE has 235 scalar unknowns and 235 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 64
+  Variables: 777
+  Constants: 20 (20 scalars)
+  Parameters: 428 (442 scalars)
+  Unknowns: 329 (258 scalars)
+  Differentiated variables: 2 scalars
+  Equations: 285
+  Nontrivial: 238
+Translated Model
+  Constants: 401 scalars
+  Free parameters: 54 scalars
+  Parameter depending: 51 scalars
+  Continuous time states: 1 scalars
+  Time-varying variables: 65 scalars
+  Alias variables: 149 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {7}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {7}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pump.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.Performance.Example3.translation.log");

@@ -1,10 +1,10 @@
 ﻿[
   {
     "comparison": {
-      "file_name": "AixLib.Utilities.Sensors.Examples.ExergyMeters.mat",
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified6.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.Utilities.Sensors.Examples.ExergyMeters.mat_calcExergyDestructionLoss_1.y",
-        "funnel_comp/AixLib.Utilities.Sensors.Examples.ExergyMeters.mat_calcExergyDestructionLoss_2.y"
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified6.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified6.mat_pmpSouth.m_flow"
       ],
       "success_rate": 1.0,
       "t_err_max": [
@@ -20,19 +20,1117 @@
         0
       ],
       "variables": [
-        "calcExergyDestructionLoss_1.y",
-        "calcExergyDestructionLoss_2.y"
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
       ],
       "warnings": [
         null,
         null
       ]
     },
-    "model": "AixLib.Utilities.Sensors.Examples.ExergyMeters",
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified6",
     "simulation": {
-      "elapsed_time": 0.0962,
-      "final_time": 7200,
+      "elapsed_time": 0.0338569,
+      "final_time": 1000,
+      "jacobians": 7,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlow",
+    "simulation": {
+      "elapsed_time": 0.00840616,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlow",
+    "simulation": {
+      "elapsed_time": 0.00716305,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example1v2.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example1v2.mat_pump.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "pump.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example1v2",
+    "simulation": {
+      "elapsed_time": 0.0153968,
+      "final_time": 20,
+      "jacobians": 1,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified5.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified5.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified5.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified5",
+    "simulation": {
+      "elapsed_time": 0.0668099,
+      "final_time": 1000,
+      "jacobians": 8,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example8.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example8.mat_a",
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example8.mat_b"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "a",
+        "b"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example8",
+    "simulation": {
+      "elapsed_time": 0.004529,
+      "final_time": 50,
+      "jacobians": 1,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.SimpleHouse.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.SimpleHouse.mat_zone.T",
+        "funnel_comp/AixLib.Fluid.Examples.SimpleHouse.mat_heaWat.u",
+        "funnel_comp/AixLib.Fluid.Examples.SimpleHouse.mat_vavDam.y",
+        "funnel_comp/AixLib.Fluid.Examples.SimpleHouse.mat_fan.sta_a.T",
+        "funnel_comp/AixLib.Fluid.Examples.SimpleHouse.mat_fan.sta_b.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2,
+        3,
+        3
+      ],
+      "variables": [
+        "zone.T",
+        "heaWat.u",
+        "vavDam.y",
+        "fan.sta_a.T",
+        "fan.sta_b.T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.SimpleHouse",
+    "simulation": {
+      "elapsed_time": 2.47,
+      "final_time": 31536000.0,
+      "jacobians": 8096,
+      "start_time": 0,
+      "state_events": 1077,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDpOptimised",
+    "simulation": {
+      "elapsed_time": 0.00750709,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example4.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example4.mat_res.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "res.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example4",
+    "simulation": {
+      "elapsed_time": 0.00527501,
+      "final_time": 20,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDpOptimised",
+    "simulation": {
+      "elapsed_time": 0.00625396,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDp",
+    "simulation": {
+      "elapsed_time": 0.00644898,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified3.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified3.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified3.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified3",
+    "simulation": {
+      "elapsed_time": 0.230916,
+      "final_time": 1000,
+      "jacobians": 31,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlow",
+    "simulation": {
+      "elapsed_time": 0.00537109,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified4.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified4.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified4.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified4",
+    "simulation": {
+      "elapsed_time": 0.0937819,
+      "final_time": 1000,
+      "jacobians": 12,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatPumpPower",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_heatStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_coldStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.mat_coldStorage.layer[1].T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "heatPumpPower",
+        "heatStorage.layer[1].T",
+        "heatStorage.layer[5].T",
+        "coldStorage.layer[5].T",
+        "coldStorage.layer[1].T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump",
+    "simulation": {
+      "elapsed_time": 4.21,
+      "final_time": 86400,
+      "jacobians": 4621,
+      "start_time": 0,
+      "state_events": 303,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example7.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example7.mat_T[2]"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "T[2]"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example7",
+    "simulation": {
+      "elapsed_time": 0.089313,
+      "final_time": 100,
+      "jacobians": 4,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Basic.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Basic.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Basic.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Basic",
+    "simulation": {
+      "elapsed_time": 1.05079,
+      "final_time": 1000,
+      "jacobians": 34,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.mat_res[1].m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.mat_res[2].m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.mat_vol[1].T",
+        "funnel_comp/AixLib.Fluid.Examples.ResistanceVolumeFlowReversal.mat_vol[2].T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "res[1].m_flow",
+        "res[2].m_flow",
+        "vol[1].T",
+        "vol[2].T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.ResistanceVolumeFlowReversal",
+    "simulation": {
+      "elapsed_time": 0.028554,
+      "final_time": 10000,
+      "jacobians": 21,
+      "start_time": 0,
+      "state_events": 9,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example2.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example2.mat_pump_dp.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "pump_dp.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example2",
+    "simulation": {
+      "elapsed_time": 0.00888395,
+      "final_time": 20,
+      "jacobians": 40,
+      "start_time": 0,
+      "state_events": 19,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelDpOptimised",
+    "simulation": {
+      "elapsed_time": 0.00762987,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example5.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example5.mat_c"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "c"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example5",
+    "simulation": {
+      "elapsed_time": 0.00485492,
+      "final_time": 20,
+      "jacobians": 4,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesParallelFlowOptimised",
+    "simulation": {
+      "elapsed_time": 0.00707793,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesFlowOptimised",
+    "simulation": {
+      "elapsed_time": 0.00498796,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified1.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified1.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified1.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified1",
+    "simulation": {
+      "elapsed_time": 0.365424,
+      "final_time": 1000,
+      "jacobians": 32,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example3.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example3.mat_pump.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "pump.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example3",
+    "simulation": {
+      "elapsed_time": 0.00862694,
+      "final_time": 20,
+      "jacobians": 40,
+      "start_time": 0,
+      "state_events": 19,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelDp",
+    "simulation": {
+      "elapsed_time": 0.00564289,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.FlowSystem.Simplified2.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified2.mat_pmpNorth.m_flow",
+        "funnel_comp/AixLib.Fluid.Examples.FlowSystem.Simplified2.mat_pmpSouth.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "pmpNorth.m_flow",
+        "pmpSouth.m_flow"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.FlowSystem.Simplified2",
+    "simulation": {
+      "elapsed_time": 0.38847,
+      "final_time": 1000,
       "jacobians": 33,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.SeriesDp",
+    "simulation": {
+      "elapsed_time": 0.011987,
+      "final_time": 1,
+      "jacobians": 2,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example1v1.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example1v1.mat_pump.m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "pump.m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example1v1",
+    "simulation": {
+      "elapsed_time": 0.00894713,
+      "final_time": 20,
+      "jacobians": 1,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.Example6.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.Example6.mat_T[2]"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "T[2]"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.Example6",
+    "simulation": {
+      "elapsed_time": 0.099411,
+      "final_time": 100,
+      "jacobians": 4,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised.mat_sin.ports[1].m_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "sin.ports[1].m_flow"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Examples.Performance.PressureDrop.ParallelFlowOptimised",
+    "simulation": {
+      "elapsed_time": 0.00914907,
+      "final_time": 1,
+      "jacobians": 2,
       "start_time": 0,
       "state_events": 0,
       "success": true
