@@ -25,16 +25,15 @@ model Weather "Complex weather model"
 
   replaceable model RadOnTiltedSurface =
       AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
-    constrainedby AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
+    constrainedby
+    AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
     "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
 
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
   Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[SOD.nSurfaces] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
-  parameter Integer Outopt = 2 "Output options" annotation(Dialog(tab = "Optional output vector", compact = true, descriptionLabel = true), choices(choice = 1
-        "one vector",                                                                                                    choice = 2
-        "individual vectors",                                                                                                    radioButtons = true));
+  parameter Boolean outOpt = true "Output individual vectors instead of one vector [-]" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Cloud_cover = false "Cloud cover [-] (TRY col 7)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Wind_dir = false "Wind direction [deg] (TRY col 8)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Wind_speed = false "Wind speed [m/s]  (TRY col 9)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
@@ -52,24 +51,24 @@ model Weather "Complex weather model"
     Latitude=Latitude,
     DiffWeatherDataTime=DiffWeatherDataTime) annotation (Placement(
         transformation(extent={{-62,18},{-38,42}})));
-  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, each WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}})));
+  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, each WeatherFormat=false) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}})));
   Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = Modelica.Utilities.Files.loadResource(fileName), columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}})));
   Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}})));
-  Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if Outopt == 1 and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-  Modelica.Blocks.Interfaces.RealOutput CloudCover if Cloud_cover and Outopt == 2 "[0..8]" annotation(Placement(transformation(extent = {{114, 74}, {134, 94}}), iconTransformation(extent = {{150, 110}, {170, 130}})));
-  Modelica.Blocks.Interfaces.RealOutput WindDirection(unit = "deg") if Wind_dir and Outopt == 2
+  Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if outOpt == false and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
+  Modelica.Blocks.Interfaces.RealOutput CloudCover if Cloud_cover and outOpt "[0..8]" annotation(Placement(transformation(extent = {{114, 74}, {134, 94}}), iconTransformation(extent = {{150, 110}, {170, 130}})));
+  Modelica.Blocks.Interfaces.RealOutput WindDirection(unit = "deg") if Wind_dir and outOpt
     "in deg [0...360]"                                                                                             annotation(Placement(transformation(extent = {{126, 52}, {146, 72}}), iconTransformation(extent = {{150, 80}, {170, 100}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed(unit = "m/s") if Wind_speed and Outopt == 2 "in m/s" annotation(Placement(transformation(extent = {{126, 32}, {146, 52}}), iconTransformation(extent = {{150, 50}, {170, 70}})));
-  Modelica.Blocks.Interfaces.RealOutput AirTemp(unit = "K") if Air_temp and Outopt == 2
+  Modelica.Blocks.Interfaces.RealOutput WindSpeed(unit = "m/s") if Wind_speed and outOpt "in m/s" annotation(Placement(transformation(extent = {{126, 32}, {146, 52}}), iconTransformation(extent = {{150, 50}, {170, 70}})));
+  Modelica.Blocks.Interfaces.RealOutput AirTemp(unit = "K") if Air_temp and outOpt
     "in Kelvin"                                                                                     annotation(Placement(transformation(extent = {{126, 14}, {146, 34}}), iconTransformation(extent = {{150, 20}, {170, 40}})));
-  Modelica.Blocks.Interfaces.RealOutput AirPressure(unit = "Pa") if Air_press and Outopt == 2 "in Pa" annotation(Placement(transformation(extent = {{126, -8}, {146, 12}}), iconTransformation(extent = {{150, -10}, {170, 10}})));
-  Modelica.Blocks.Interfaces.RealOutput WaterInAir if Mass_frac and Outopt == 2
+  Modelica.Blocks.Interfaces.RealOutput AirPressure(unit = "Pa") if Air_press and outOpt "in Pa" annotation(Placement(transformation(extent = {{126, -8}, {146, 12}}), iconTransformation(extent = {{150, -10}, {170, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput WaterInAir if Mass_frac and outOpt
     "in kg/kg"                                                                             annotation(Placement(transformation(extent = {{126, -24}, {146, -4}}), iconTransformation(extent = {{150, -40}, {170, -20}})));
-  Modelica.Blocks.Interfaces.RealOutput RelHumidity if Rel_hum and Outopt == 2
+  Modelica.Blocks.Interfaces.RealOutput RelHumidity if Rel_hum and outOpt
     "in percent"                                                                            annotation(Placement(transformation(extent = {{126, -42}, {146, -22}}), iconTransformation(extent = {{150, -70}, {170, -50}})));
-  Modelica.Blocks.Interfaces.RealOutput SkyRadiation(unit = "W/m2") if Sky_rad and Outopt == 2 "in W/m2"
-                                                                                                        annotation(Placement(transformation(extent = {{126, -62}, {146, -42}}), iconTransformation(extent = {{150, -100}, {170, -80}})));
-  Modelica.Blocks.Interfaces.RealOutput TerrestrialRadiation(unit = "W/m2") if Ter_rad and Outopt == 2 "in W/m2"
+  Modelica.Blocks.Interfaces.RealOutput SkyRadiation(unit = "W/m2") if Sky_rad and outOpt "in W/m2"
+                                                                                                   annotation(Placement(transformation(extent = {{126, -62}, {146, -42}}), iconTransformation(extent = {{150, -100}, {170, -80}})));
+  Modelica.Blocks.Interfaces.RealOutput TerrestrialRadiation(unit = "W/m2") if Ter_rad and outOpt "in W/m2"
                                                                                                         annotation(Placement(transformation(extent = {{126, -78}, {146, -58}}), iconTransformation(extent = {{150, -130}, {170, -110}})));
   Modelica.Blocks.Math.Gain hPa_to_Pa(k = 100) if Air_press annotation(Placement(transformation(extent = {{26, -60}, {36, -50}})));
   Modelica.Blocks.Math.Gain percent_to_unit(k = 0.01) if Rel_hum annotation(Placement(transformation(extent = {{26, -78}, {36, -68}})));
@@ -93,7 +92,7 @@ initial equation
 equation
   // cloud cover
   if Cloud_cover then
-    if Outopt == 1 then
+    if outOpt == false then
       connect(WeatherDataVector[PosWV[1]], deMultiplex.y3[1]);
     else
       connect(CloudCover, deMultiplex.y3[1]);
@@ -101,7 +100,7 @@ equation
   end if;
   // wind direction
   if Wind_dir then
-    if Outopt == 1 then
+    if not outOpt then
       connect(WeatherDataVector[PosWV[2]], deMultiplex.y3[2]);
     else
       connect(WindDirection, deMultiplex.y3[2]);
@@ -109,7 +108,7 @@ equation
   end if;
   // wind speed
   if Wind_speed then
-    if Outopt == 1 then
+    if not outOpt then
       connect(WeatherDataVector[PosWV[3]], deMultiplex.y3[3]);
     else
       connect(WindSpeed, deMultiplex.y3[3]);
@@ -117,7 +116,7 @@ equation
   end if;
   // air temperature
   if Air_temp then
-    if Outopt == 1 then
+    if not outOpt then
       connect(deMultiplex.y3[4], from_degC.u);
       connect(WeatherDataVector[PosWV[4]], from_degC.y);
     else
@@ -127,7 +126,7 @@ equation
   end if;
   // air pressure, conversion from hPa to Pa
   if Air_press then
-    if Outopt == 1 then
+    if not outOpt then
       connect(deMultiplex.y3[5], hPa_to_Pa.u);
       connect(WeatherDataVector[PosWV[5]], hPa_to_Pa.y);
     else
@@ -137,7 +136,7 @@ equation
   end if;
   // mass fraction water in dry air, conversion from g/kg to kg/kg
   if Mass_frac then
-    if Outopt == 1 then
+    if not outOpt then
       connect(deMultiplex.y3[6], g_to_kg.u);
       connect(WeatherDataVector[PosWV[6]], g_to_kg.y);
     else
@@ -147,7 +146,7 @@ equation
   end if;
   // rel. humidity, conversion from % to 0..1
   if Rel_hum then
-    if Outopt == 1 then
+    if not outOpt then
       connect(deMultiplex.y3[7], percent_to_unit.u);
       connect(WeatherDataVector[PosWV[7]], percent_to_unit.y);
     else
@@ -157,7 +156,7 @@ equation
   end if;
   // longwave sky radiation
   if Sky_rad then
-    if Outopt == 1 then
+    if not outOpt then
       connect(WeatherDataVector[PosWV[8]], deMultiplex.y3[8]);
     else
       connect(SkyRadiation, deMultiplex.y3[8]);
@@ -165,7 +164,7 @@ equation
   end if;
   // longwave terrestric radiation
   if Ter_rad then
-    if Outopt == 1 then
+    if not outOpt then
       connect(WeatherDataVector[PosWV[9]], deMultiplex.y3[9]);
     else
       connect(TerrestrialRadiation, deMultiplex.y3[9]);

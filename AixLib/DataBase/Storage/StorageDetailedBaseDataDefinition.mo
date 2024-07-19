@@ -3,7 +3,6 @@ record StorageDetailedBaseDataDefinition
   "Base data definition for Buffer storage records"
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
-
   parameter Modelica.Units.SI.Height hTank "Height of storage";
   parameter Modelica.Units.SI.Height hLowerPortDemand "Height of lower demand port";
   parameter Modelica.Units.SI.Height hUpperPortDemand "Height of upper demand port";
@@ -21,6 +20,8 @@ record StorageDetailedBaseDataDefinition
     "thermal conductivity of storage wall";
   parameter Modelica.Units.SI.ThermalConductivity lambdaIns
     "thermal conductivity of storage insulation";
+  //parameter SI.CoefficientOfHeatTransfer alpha
+    //"Coefficient of heat transfer air <-> insulation of tank";
   parameter Modelica.Units.SI.Length hTS1 "Height of lower temperature sensor";
   parameter Modelica.Units.SI.Length hTS2 "Height of upper temperature sensor";
   parameter Modelica.Units.SI.Density rhoIns "Density of insulation";
@@ -39,25 +40,23 @@ record StorageDetailedBaseDataDefinition
   parameter Modelica.Units.SI.Length lengthHC1 "Length of Pipe for HR1";
   parameter Modelica.Units.SI.Length lengthHC2 "Length of Pipe for HR2";
 
-  annotation (Icon(graphics),Documentation(info="<html><h4>
+  annotation (Icon(graphics),               Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  Base data definition for detailed storage records
+  Base data definition for buffer storage records
 </p>
 <h4>
   <span style=\"color:#008000\">References</span>
 </h4>
 <p>
-  Base data definition for record used with
-  <a href=\"modelica://AixLib.Fluid.Storage.StorageDetailed\">AixLib.Fluid.Storage.StorageDetailed</a>
+  Base data definition for record used with <a href=
+  \"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and
+  <a href=
+  \"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a>
 </p>
 </html>",
         revisions="<html><ul>
-  <li>
-  <i>November 17, 2022</i> by Laura Maier:<br/>
-  Refactor and fix documentation
-  </li>
   <li>
     <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
     Add comments and fix documentation

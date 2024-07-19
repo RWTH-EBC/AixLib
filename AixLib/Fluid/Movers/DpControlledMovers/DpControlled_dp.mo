@@ -100,7 +100,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   Modelica.Blocks.Interfaces.RealInput dpMea(
     final quantity="PressureDifference",
     final displayUnit="Pa",
-    final unit="Pa")=gain.u if prescribeSystemPressure
+    final unit="Pa") if prescribeSystemPressure
     "Measurement of pressure difference between two points where the set point should be obtained"
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
@@ -416,7 +416,8 @@ equation
 </p>
 <p>
   <img height=\"300\" src=
-  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\">
+  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\"
+  alt=\"1\">
 </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
   <tr>
@@ -539,8 +540,7 @@ equation
   \"https://www.esmagazine.com/ext/resources/images/WhitePapers/CBS-US-Whitepaper.pdf\">
   Link to PDF</a>.
 </p>
-</html>", revisions="<html>
-<ul>
+</html>", revisions="<html><ul>
   <li>October 28, 2021, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1151\">#1151</a>
     Added model to library.

@@ -66,15 +66,12 @@ equation
     annotation (Line(points={{8,-20},{8,-50}}, color={0,127,255}));
   connect(tabs.port_b2, boundary3.ports[1]) annotation (Line(points={{16,-19.6},
           {16,-32},{42,-32},{42,-50}}, color={0,127,255}));
-  annotation (experiment(StopTime=36000), Documentation(revisions="<html><ul>
-  <li>December 09, 2021, by Alexander Kümpel:<br/>
-    First implementation.
-  </li>
+  annotation (experiment(StopTime=36000), Documentation(revisions="<html>
+<ul>
+<li>December 09, 2021, by Alexander K&uuml;mpel:<br>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>
-  Example for testing the Tabs system <a href=
-  \"modelica://AixLib.Systems.TABS.Tabs\">AixLib.Systems.TABS.Tabs</a>.
-</p>
+<p>Example for testing the Tabs system <a href=
+  \"modelica://AixLib.Systems.TABS.Tabs\">AixLib.Systems.TABS.Tabs</a>.</p>
 </html>"));
 end Tabs;
