@@ -1,0 +1,137 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Utilities.Sensors.Examples.ExergyMeters");
+Check of AixLib.Utilities.Sensors.Examples.ExergyMeters:
+The model has the same number of unknowns and equations: 4571
+Check of AixLib.Utilities.Sensors.Examples.ExergyMeters successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Utilities.Sensors.Examples.ExergyMeters\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Utilities.Sensors.Examples.ExergyMeters\\\");\",", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.Sensors.Examples.ExergyMeters.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos");
+simulateModel("AixLib.Utilities.Sensors.Examples.ExergyMeters", tolerance=1e-6, stopTime=7200, method="dassl", resultFile="AixLib.Utilities.Sensors.Examples.ExergyMeters");
+Translation of AixLib.Utilities.Sensors.Examples.ExergyMeters:
+The DAE has 4571 scalar unknowns and 4571 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 903
+  Variables: 10613
+  Constants: 150 (150 scalars)
+  Parameters: 4519 (4432 scalars)
+  Unknowns: 5944 (4693 scalars)
+  Differentiated variables: 115 scalars
+  Equations: 4822
+  Nontrivial: 3665
+Translated Model
+  Constants: 3348 scalars
+  Free parameters: 526 scalars
+  Parameter depending: 1587 scalars
+  Continuous time states: 81 scalars
+  Time-varying variables: 951 scalars
+  Alias variables: 2863 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 27, 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {6, 6, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorageHeatingcoils.bottomCover.loadIns.T
+  bufferStorageHeatingcoils.bottomCover.loadWall.T
+  bufferStorageHeatingcoils.heatingCoil1.pipe[1].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[1].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[2].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[2].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[3].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[3].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[4].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[4].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[5].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[5].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[6].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[6].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[7].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[7].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[8].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[8].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[9].del.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[9].timDel.x
+  bufferStorageHeatingcoils.heatingCoil1.pipe[9].vol_a.dynBal.U
+  bufferStorageHeatingcoils.heatingCoil1.pipe[9].vol_b.dynBal.U
+  bufferStorageHeatingcoils.layer[1].dynBal.U
+  bufferStorageHeatingcoils.layer[2].dynBal.U
+  bufferStorageHeatingcoils.layer[3].dynBal.U
+  bufferStorageHeatingcoils.layer[4].dynBal.U
+  bufferStorageHeatingcoils.layer[5].dynBal.U
+  bufferStorageHeatingcoils.layer[6].dynBal.U
+  bufferStorageHeatingcoils.layer[7].dynBal.U
+  bufferStorageHeatingcoils.layer[8].dynBal.U
+  bufferStorageHeatingcoils.layer[9].dynBal.U
+  bufferStorageHeatingcoils.layer[10].dynBal.U
+  bufferStorageHeatingcoils.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorageHeatingcoils.topCover.loadIns.T
+  bufferStorageHeatingcoils.topCover.loadWall.T
+  consumer.medium.T
+  exergyStorageMeterConsumer.derivative.x
+  exergyStorageMeterHeater.derivative.x
+  exergyStorageMeterMedium.derivative.x
+  heater.medium.T
+  pumpPrim.filter.s[1]
+  pumpPrim.filter.s[2]
+  pumpPrim.vol.dynBal.U
+  pumpSec.filter.s[1]
+  pumpSec.filter.s[2]
+  pumpSec.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Utilities.Sensors.Examples.ExergyMeters.translation.log");
