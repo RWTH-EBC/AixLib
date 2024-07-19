@@ -48,7 +48,7 @@ model ExergyMeters
     m_flow_nominal=0.5,
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
-  Fluid.Storage.BufferStorage  bufferStorageHeatingcoils(
+  Fluid.Storage.StorageDetailed bufferStorageHeatingcoils(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
