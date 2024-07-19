@@ -1,0 +1,803 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex");
+Check of AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex:
+The model has the same number of unknowns and equations: 3221
+The model could not be deduced to be symbolically well-posed.
+The model has
+  3029+tanSte.vol[1].dynBal.nPorts+tanSte.vol[2].dynBal.nPorts+tanSte.vol[3].dynBal.nPorts  +tanSte.vol[4].dynBal.nPorts+2*tanSte.nSeg+2*tanSte.mul.n1+2*tanSte.mul.n2+2*  tanSte.mul.n3+tanSte.sum1.nin+4*tanSte.str.nSeg+tanSte.indTanHex.rep.nout+  tanDyn.vol[1].dynBal.nPorts+tanDyn.vol[2].dynBal.nPorts+tanDyn.vol[3].dynBal.nPorts  +tanDyn.vol[4].dynBal.nPorts+2*tanDyn.nSeg+2*tanDyn.mul.n1+2*tanDyn.mul.n2+2*  tanDyn.mul.n3+tanDyn.sum1.nin+4*tanDyn.str.nSeg+tanDyn.indTanHex.rep.nout+  tanDyn.indTanHex.vol[1].dynBal.nPorts+tanDyn.indTanHex.vol[2].dynBal.nPorts+  tanDyn.indTanHex.vol[3].dynBal.nPorts+tanDyn.indTanHex.vol[4].dynBal.nPorts+  tanDyn.indTanHex.vol[5].dynBal.nPorts+tanDyn.indTanHex.vol[6].dynBal.nPorts+  tanDynSol.vol[1].dynBal.nPorts+tanDynSol.vol[2].dynBal.nPorts+tanDynSol.vol[3].dynBal.nPorts  +tanDynSol.vol[4].dynBal.nPorts+2*tanDynSol.nSeg+2*tanDynSol.mul.n1+2*  tanDynSol.mul.n2+2*tanDynSol.mul.n3+tanDynSol.sum1.nin+4*tanDynSol.str.nSeg+  tanDynSol.indTanHex.rep.nout
+scalar unknowns and
+  2883+(if bouWat.use_Xi_in then 1 else (if bouWat.use_X_in then 0 else 1))+(if    not bouWat.use_p_in then 1 else 0)+2*bouWat.nPorts+(if  not bouWat.use_T_in   then 1 else 0)+(if solColSup.use_Xi_in then 1 else (if solColSup.use_X_in   then 0 else 1))+(if  not solColSup.use_p_in then 1 else 0)+2*solColSup.nPorts  +(if  not solColSup.use_T_in then 1 else 0)+(if toSolCol.use_Xi_in then 1   else (if toSolCol.use_X_in then 0 else 1))+(if  not toSolCol.use_p_in then 1   else 0)+2*toSolCol.nPorts+(if  not toSolCol.use_T_in then 1 else 0)+3*  tanSte.nSeg+tanSte.mul.n1+tanSte.mul.n2+tanSte.mul.n3+4*tanSte.str.nSeg+  tanSte.indTanHex.rep.nout+3*tanDyn.nSeg+tanDyn.mul.n1+tanDyn.mul.n2+  tanDyn.mul.n3+4*tanDyn.str.nSeg+tanDyn.indTanHex.rep.nout+3*tanDynSol.nSeg+  tanDynSol.mul.n1+tanDynSol.mul.n2+tanDynSol.mul.n3+4*tanDynSol.str.nSeg+  tanDynSol.indTanHex.rep.nout+(if  not tanSte.vol[1].dynBal.use_mWat_flow then 1   else 0)+3*tanSte.vol[1].dynBal.nPorts+(if  not tanSte.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*tanSte.vol[2].dynBal.nPorts+(if  not tanSte.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanSte.vol[3].dynBal.nPorts+(if  not tanSte.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*tanSte.vol[4].dynBal.nPorts+(if  not tanDyn.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.vol[1].dynBal.nPorts+(if  not tanDyn.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.vol[2].dynBal.nPorts+(if  not tanDyn.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.vol[3].dynBal.nPorts+(if  not tanDyn.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.vol[4].dynBal.nPorts+(if  not tanDynSol.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*tanDynSol.vol[1].dynBal.nPorts+(if  not tanDynSol.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*tanDynSol.vol[2].dynBal.nPorts+(if  not tanDynSol.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanDynSol.vol[3].dynBal.nPorts+(if  not tanDynSol.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*tanDynSol.vol[4].dynBal.nPorts+(if  not tanSte.indTanHex.vol[1].steBal.use_mWat_flow   then 1 else 0)+(if  not tanSte.indTanHex.vol[2].steBal.use_mWat_flow then 1   else 0)+(if  not tanSte.indTanHex.vol[3].steBal.use_mWat_flow then 1 else 0)+  (if  not tanSte.indTanHex.vol[4].steBal.use_mWat_flow then 1 else 0)+(if  not   tanSte.indTanHex.vol[5].steBal.use_mWat_flow then 1 else 0)+(if  not   tanSte.indTanHex.vol[6].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDyn.indTanHex.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*tanDyn.indTanHex.vol[1].dynBal.nPorts  +(if  not tanDyn.indTanHex.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  tanDyn.indTanHex.vol[2].dynBal.nPorts+(if  not tanDyn.indTanHex.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.indTanHex.vol[3].dynBal.nPorts+(if  not   tanDyn.indTanHex.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*tanDyn.indTanHex.vol[4].dynBal.nPorts  +(if  not tanDyn.indTanHex.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*  tanDyn.indTanHex.vol[5].dynBal.nPorts+(if  not tanDyn.indTanHex.vol[6].dynBal.use_mWat_flow   then 1 else 0)+3*tanDyn.indTanHex.vol[6].dynBal.nPorts+(if  not   tanDynSol.indTanHex.vol[1].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDynSol.indTanHex.vol[2].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDynSol.indTanHex.vol[3].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDynSol.indTanHex.vol[4].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDynSol.indTanHex.vol[5].steBal.use_mWat_flow then 1 else 0)+(if  not   tanDynSol.indTanHex.vol[6].steBal.use_mWat_flow then 1 else 0)+tanDyn.sum1.nin  +tanDynSol.sum1.nin+tanSte.sum1.nin
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  3221
+Check of AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StratifiedEnhancedInternalHex.mos\",", "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex\",", "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex\\\");\",", "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StratifiedEnhancedInternalHex.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex", tolerance=1e-6, stopTime=1200, method="CVode", resultFile="AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex");
+Translation of AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex:
+The DAE has 3221 scalar unknowns and 3221 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 542
+  Variables: 6688
+  Constants: 162 (162 scalars)
+  Parameters: 2507 (2393 scalars)
+  Unknowns: 4019 (3317 scalars)
+  Differentiated variables: 48 scalars
+  Equations: 2750
+  Nontrivial: 2057
+Translated Model
+  Constants: 2410 scalars
+  Free parameters: 167 scalars
+  Parameter depending: 816 scalars
+  Continuous time states: 30 scalars
+  Time-varying variables: 615 scalars
+  Alias variables: 1864 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {9, 9, 9}
+  Sizes after manipulation of the linear systems: {0, 0, 0}
+  Sizes of nonlinear systems of equations: {1, 17, 17, 17, 17, 17, 17, 1, 1, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {0, 2, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 18, 18, 18, 18, 18, 18}
+    Sizes after manipulation of the nonlinear systems: {0, 2, 2, 2, 2, 2, 2}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  tanDyn.indTanHex.cap[1].T
+  tanDyn.indTanHex.cap[2].T
+  tanDyn.indTanHex.cap[3].T
+  tanDyn.indTanHex.cap[4].T
+  tanDyn.indTanHex.cap[5].T
+  tanDyn.indTanHex.cap[6].T
+  tanDyn.indTanHex.vol[1].dynBal.U
+  tanDyn.indTanHex.vol[2].dynBal.U
+  tanDyn.indTanHex.vol[3].dynBal.U
+  tanDyn.indTanHex.vol[4].dynBal.U
+  tanDyn.indTanHex.vol[5].dynBal.U
+  tanDyn.indTanHex.vol[6].dynBal.U
+  tanDyn.vol[1].dynBal.U
+  tanDyn.vol[2].dynBal.U
+  tanDyn.vol[3].dynBal.U
+  tanDyn.vol[4].dynBal.U
+  tanDynSol.indTanHex.cap[1].T
+  tanDynSol.indTanHex.cap[2].T
+  tanDynSol.indTanHex.cap[3].T
+  tanDynSol.indTanHex.cap[4].T
+  tanDynSol.indTanHex.cap[5].T
+  tanDynSol.indTanHex.cap[6].T
+  tanDynSol.vol[1].dynBal.U
+  tanDynSol.vol[2].dynBal.U
+  tanDynSol.vol[3].dynBal.U
+  tanDynSol.vol[4].dynBal.U
+  tanSte.vol[1].dynBal.U
+  tanSte.vol[2].dynBal.U
+  tanSte.vol[3].dynBal.U
+  tanSte.vol[4].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageBoiler");
+Check of AixLib.Fluid.Storage.Examples.StorageBoiler:
+The model has the same number of unknowns and equations: 3237
+Check of AixLib.Fluid.Storage.Examples.StorageBoiler successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageBoiler\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageBoiler\\\");\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageBoiler", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageBoiler");
+Translation of AixLib.Fluid.Storage.Examples.StorageBoiler:
+The DAE has 3237 scalar unknowns and 3237 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 641
+  Variables: 8585
+  Constants: 159 (159 scalars)
+  Parameters: 4054 (3957 scalars)
+  Unknowns: 4372 (3340 scalars)
+  Differentiated variables: 106 scalars
+  Equations: 3310
+  Nontrivial: 2541
+Translated Model
+  Constants: 2837 scalars
+  Free parameters: 284 scalars
+  Parameter depending: 1401 scalars
+  Continuous time states: 76 scalars
+  Time-varying variables: 841 scalars
+  Alias variables: 2093 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 3,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {22, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {22, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].del.x
+  bufferStorage.heatingCoil1.pipe[9].timDel.x
+  bufferStorage.heatingCoil1.pipe[9].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].del.x
+  bufferStorage.heatingCoil1.pipe[10].timDel.x
+  bufferStorage.heatingCoil1.pipe[10].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+  pump.filter.s[1]
+  pump.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageBoiler.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.Stratified");
+Check of AixLib.Fluid.Storage.Examples.Stratified:
+The model has the same number of unknowns and equations: 2145
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1933+tanSim.vol[1].dynBal.nPorts+tanSim.vol[2].dynBal.nPorts+tanSim.vol[3].dynBal.nPorts  +tanSim.vol[4].dynBal.nPorts+tanSim.vol[5].dynBal.nPorts+tanSim.vol[6].dynBal.nPorts  +tanSim.vol[7].dynBal.nPorts+tanSim.vol[8].dynBal.nPorts+tanSim.vol[9].dynBal.nPorts  +tanSim.vol[10].dynBal.nPorts+2*tanSim.nSeg+2*tanSim.mul.n1+2*tanSim.mul.n2+2*  tanSim.mul.n3+tanSim.sum1.nin+tanEnh.vol[1].dynBal.nPorts+tanEnh.vol[2].dynBal.nPorts  +tanEnh.vol[3].dynBal.nPorts+tanEnh.vol[4].dynBal.nPorts+tanEnh.vol[5].dynBal.nPorts  +tanEnh.vol[6].dynBal.nPorts+tanEnh.vol[7].dynBal.nPorts+tanEnh.vol[8].dynBal.nPorts  +tanEnh.vol[9].dynBal.nPorts+tanEnh.vol[10].dynBal.nPorts+2*tanEnh.nSeg+2*  tanEnh.mul.n1+2*tanEnh.mul.n2+2*tanEnh.mul.n3+tanEnh.sum1.nin+4*  tanEnh.str.nSeg
+scalar unknowns and
+  1785+3*tanSim.nSeg+tanSim.mul.n1+tanSim.mul.n2+tanSim.mul.n3+(if sou_1.use_Xi_in   then 1 else (if sou_1.use_X_in then 0 else 1))+(if  not sou_1.use_p_in then 1   else 0)+2*sou_1.nPorts+(if  not sou_1.use_T_in then 1 else 0)+(if   sin_1.use_Xi_in then 1 else (if sin_1.use_X_in then 0 else 1))+(if  not   sin_1.use_p_in then 1 else 0)+2*sin_1.nPorts+(if  not sin_1.use_T_in then 1   else 0)+3*tanEnh.nSeg+tanEnh.mul.n1+tanEnh.mul.n2+tanEnh.mul.n3+4*  tanEnh.str.nSeg+(if  not tanSim.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  tanSim.vol[1].dynBal.nPorts+(if  not tanSim.vol[2].dynBal.use_mWat_flow then 1   else 0)+3*tanSim.vol[2].dynBal.nPorts+(if  not tanSim.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[3].dynBal.nPorts+(if  not tanSim.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[4].dynBal.nPorts+(if  not tanSim.vol[5].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[5].dynBal.nPorts+(if  not tanSim.vol[6].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[6].dynBal.nPorts+(if  not tanSim.vol[7].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[7].dynBal.nPorts+(if  not tanSim.vol[8].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[8].dynBal.nPorts+(if  not tanSim.vol[9].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[9].dynBal.nPorts+(if  not tanSim.vol[10].dynBal.use_mWat_flow   then 1 else 0)+3*tanSim.vol[10].dynBal.nPorts+(if  not tanEnh.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[1].dynBal.nPorts+(if  not tanEnh.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[2].dynBal.nPorts+(if  not tanEnh.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[3].dynBal.nPorts+(if  not tanEnh.vol[4].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[4].dynBal.nPorts+(if  not tanEnh.vol[5].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[5].dynBal.nPorts+(if  not tanEnh.vol[6].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[6].dynBal.nPorts+(if  not tanEnh.vol[7].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[7].dynBal.nPorts+(if  not tanEnh.vol[8].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[8].dynBal.nPorts+(if  not tanEnh.vol[9].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[9].dynBal.nPorts+(if  not tanEnh.vol[10].dynBal.use_mWat_flow   then 1 else 0)+3*tanEnh.vol[10].dynBal.nPorts+tanEnh.sum1.nin+tanSim.sum1.nin
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2145
+Check of AixLib.Fluid.Storage.Examples.Stratified successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/Stratified.mos\",", "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.Stratified\",", "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.Stratified\\\");\",", "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.Stratified.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/Stratified.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.Stratified", stopTime=10800, tolerance=1e-08, method="CVode", resultFile="AixLib.Fluid.Storage.Examples.Stratified");
+Translation of AixLib.Fluid.Storage.Examples.Stratified:
+The DAE has 2145 scalar unknowns and 2145 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 311
+  Variables: 4152
+  Constants: 86 (86 scalars)
+  Parameters: 1351 (1307 scalars)
+  Unknowns: 2715 (2221 scalars)
+  Differentiated variables: 41 scalars
+  Equations: 1716
+  Nontrivial: 1224
+Translated Model
+  Constants: 1209 scalars
+  Free parameters: 111 scalars
+  Parameter depending: 417 scalars
+  Continuous time states: 21 scalars
+  Time-varying variables: 466 scalars
+  Alias variables: 1411 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  dH.y
+  tanEnh.vol[1].dynBal.U
+  tanEnh.vol[2].dynBal.U
+  tanEnh.vol[3].dynBal.U
+  tanEnh.vol[4].dynBal.U
+  tanEnh.vol[5].dynBal.U
+  tanEnh.vol[6].dynBal.U
+  tanEnh.vol[7].dynBal.U
+  tanEnh.vol[8].dynBal.U
+  tanEnh.vol[9].dynBal.U
+  tanEnh.vol[10].dynBal.U
+  tanSim.vol[1].dynBal.U
+  tanSim.vol[2].dynBal.U
+  tanSim.vol[3].dynBal.U
+  tanSim.vol[4].dynBal.U
+  tanSim.vol[5].dynBal.U
+  tanSim.vol[6].dynBal.U
+  tanSim.vol[7].dynBal.U
+  tanSim.vol[8].dynBal.U
+  tanSim.vol[9].dynBal.U
+  tanSim.vol[10].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.Stratified.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector");
+Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
+The model has the same number of unknowns and equations: 3383
+Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageSolarCollector\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageSolarCollector\\\");\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector", tolerance=1e-6, stopTime=172800, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSolarCollector");
+Translation of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
+The DAE has 3383 scalar unknowns and 3383 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 678
+  Variables: 8953
+  Constants: 163 (163 scalars)
+  Parameters: 4238 (4211 scalars)
+  Unknowns: 4552 (3488 scalars)
+  Differentiated variables: 114 scalars
+  Equations: 3530
+  Nontrivial: 2706
+Translated Model
+  Constants: 2908 scalars
+  Free parameters: 417 scalars
+  Parameter depending: 1455 scalars
+  Continuous time states: 83 scalars
+  Time-varying variables: 868 scalars
+  Alias variables: 2214 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {24, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {24, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].del.x
+  bufferStorage.heatingCoil1.pipe[9].timDel.x
+  bufferStorage.heatingCoil1.pipe[9].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].del.x
+  bufferStorage.heatingCoil1.pipe[10].timDel.x
+  bufferStorage.heatingCoil1.pipe[10].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+  PI.I.y
+  pump.filter.s[1]
+  pump.filter.s[2]
+  solarThermal.senTCold.T
+  solarThermal.senTHot.T
+  solarThermal.vol.dynBal.U
+  temperatureSensor.T
+  valve.filter.s[1]
+  valve.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageSolarCollector.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageDetailedExample");
+Check of AixLib.Fluid.Storage.Examples.StorageDetailedExample:
+The model has the same number of unknowns and equations: 2714
+Check of AixLib.Fluid.Storage.Examples.StorageDetailedExample successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageDetailedExample\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageDetailedExample\\\");\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageDetailedExample", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageDetailedExample");
+Translation of AixLib.Fluid.Storage.Examples.StorageDetailedExample:
+The DAE has 2714 scalar unknowns and 2714 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 532
+  Variables: 7113
+  Constants: 124 (124 scalars)
+  Parameters: 3345 (3234 scalars)
+  Unknowns: 3644 (2792 scalars)
+  Differentiated variables: 92 scalars
+  Equations: 2756
+  Nontrivial: 2117
+Translated Model
+  Constants: 2426 scalars
+  Free parameters: 222 scalars
+  Parameter depending: 1324 scalars
+  Continuous time states: 66 scalars
+  Time-varying variables: 623 scalars
+  Alias variables: 1555 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {6, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageDetailedExample.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample");
+Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
+The model has the same number of unknowns and equations: 960
+The model could not be deduced to be symbolically well-posed.
+The model has
+  934+storageSimple.layer[1].dynBal.nPorts+storageSimple.layer[2].dynBal.nPorts+  storageSimple.layer[3].dynBal.nPorts+storageSimple.layer_HE[1].dynBal.nPorts+  storageSimple.layer_HE[2].dynBal.nPorts+storageSimple.layer_HE[3].dynBal.nPorts  +2*storageSimple.n+heatingRod.vol.dynBal.nPorts+simpleConsumer.volume.dynBal.nPorts  +pumpGen.vol.dynBal.nPorts+pumpCon.vol.dynBal.nPorts
+scalar unknowns and
+  865+(if storageSimple.use_TOut then 2*storageSimple.n else 0)+(if   pressureBoundary.use_Xi_in then 1 else (if pressureBoundary.use_X_in then 0   else 1))+(if  not pressureBoundary.use_p_in then 1 else 0)+2*pressureBoundary.nPorts  +(if  not pressureBoundary.use_T_in then 1 else 0)+(if pressureBoundary1.use_Xi_in   then 1 else (if pressureBoundary1.use_X_in then 0 else 1))+(if  not   pressureBoundary1.use_p_in then 1 else 0)+2*pressureBoundary1.nPorts+(if  not   pressureBoundary1.use_T_in then 1 else 0)+(if PIDHR.reset <> AixLib.Types.Reset.  Input then 1 else 0)+(if PIDPumpGen.reset <> AixLib.Types.Reset.Input then 1   else 0)+(if PIDPumpCon.reset <> AixLib.Types.Reset.Input then 1 else 0)+(if    not storageSimple.layer[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer[1].dynBal.nPorts+(if  not storageSimple.layer[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer[2].dynBal.nPorts+(if  not   storageSimple.layer[3].dynBal.use_mWat_flow then 1 else 0)+3*storageSimple.layer[3].dynBal.nPorts  +(if  not storageSimple.layer_HE[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[1].dynBal.nPorts+(if  not storageSimple.layer_HE[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer_HE[2].dynBal.nPorts+(if  not   storageSimple.layer_HE[3].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[3].dynBal.nPorts+(if  not heatingRod.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatingRod.vol.dynBal.nPorts+(if  not simpleConsumer.volume.dynBal.use_mWat_flow   then 1 else 0)+3*simpleConsumer.volume.dynBal.nPorts+(if  not   pumpGen.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpGen.vol.dynBal.nPorts+(  if  not pumpCon.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpCon.vol.dynBal.nPorts  +(if (if PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  960
+Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageSimpleExample\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageSimpleExample\\\");\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample", tolerance=1e-6, stopTime=38200, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSimpleExample");
+Translation of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
+The DAE has 960 scalar unknowns and 960 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 229
+  Variables: 2454
+  Constants: 57 (57 scalars)
+  Parameters: 1109 (1398 scalars)
+  Unknowns: 1288 (1006 scalars)
+  Differentiated variables: 28 scalars
+  Equations: 1097
+  Nontrivial: 856
+Translated Model
+  Constants: 1025 scalars
+  Free parameters: 178 scalars
+  Parameter depending: 387 scalars
+  Outputs: 1 scalars
+  Continuous time states: 17 scalars
+  Time-varying variables: 239 scalars
+  Alias variables: 632 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: {5, 7}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {5, 7}
+    Sizes after manipulation of the nonlinear systems: {1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heatingRod.vol.dynBal.U
+  PIDHR.I.y
+  PIDPumpCon.I.y
+  PIDPumpGen.I.y
+  pumpCon.filter.s[1]
+  pumpCon.filter.s[2]
+  pumpCon.vol.dynBal.U
+  pumpGen.filter.s[1]
+  pumpGen.filter.s[2]
+  pumpGen.vol.dynBal.U
+  simpleConsumer.heatCapacitor.T
+  storageSimple.layer[1].dynBal.U
+  storageSimple.layer[2].dynBal.U
+  storageSimple.layer[3].dynBal.U
+  storageSimple.layer_HE[1].dynBal.U
+  storageSimple.layer_HE[2].dynBal.U
+  storageSimple.layer_HE[3].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageSimpleExample.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature");
+Check of AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature:
+The model has the same number of unknowns and equations: 586
+The model could not be deduced to be symbolically well-posed.
+The model has
+  540+tan.vol[1].dynBal.nPorts+tan.vol[2].dynBal.nPorts+tan.vol[3].dynBal.nPorts+  tan.vol[4].dynBal.nPorts+tan.vol[5].dynBal.nPorts+2*tan.nSeg+2*tan.mul.n1+2*  tan.mul.n2+2*tan.mul.n3+tan.sum1.nin
+scalar unknowns and
+  497+3*tan.nSeg+tan.mul.n1+tan.mul.n2+tan.mul.n3+(if loa.use_Xi_in then 1 else (  if loa.use_X_in then 0 else 1))+(if  not loa.use_p_in then 1 else 0)+2*  loa.nPorts+(if  not loa.use_T_in then 1 else 0)+(if masSou.use_Xi_in then 1   else (if masSou.use_X_in then 0 else 1))+(if  not masSou.use_m_flow_in then 1   else 0)+2*masSou.nPorts+(if  not masSou.use_T_in then 1 else 0)+(if  not   tan.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*tan.vol[1].dynBal.nPorts+(if    not tan.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*tan.vol[2].dynBal.nPorts  +(if  not tan.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*tan.vol[3].dynBal.nPorts  +(if  not tan.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*tan.vol[4].dynBal.nPorts  +(if  not tan.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*tan.vol[5].dynBal.nPorts  +tan.sum1.nin
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  586
+Check of AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StratifiedUnloadAtMinimumTemperature.mos\",", "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature\",", "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature\\\");\",", "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StratifiedUnloadAtMinimumTemperature.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature", stopTime=21600, method="Cvode", tolerance=1e-06, resultFile="AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature");
+Translation of AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature:
+The DAE has 586 scalar unknowns and 586 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 99
+  Variables: 1240
+  Constants: 29 (29 scalars)
+  Parameters: 464 (446 scalars)
+  Unknowns: 747 (612 scalars)
+  Differentiated variables: 10 scalars
+  Equations: 523
+  Nontrivial: 392
+Translated Model
+  Constants: 374 scalars
+  Free parameters: 73 scalars
+  Parameter depending: 122 scalars
+  Continuous time states: 5 scalars
+  Time-varying variables: 141 scalars
+  Alias variables: 377 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {11}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: {4, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {4}
+    Sizes after manipulation of the nonlinear systems: {2}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  tan.vol[1].dynBal.U
+  tan.vol[2].dynBal.U
+  tan.vol[3].dynBal.U
+  tan.vol[4].dynBal.U
+  tan.vol[5].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.ExpansionVessel");
+Check of AixLib.Fluid.Storage.Examples.ExpansionVessel:
+The model has the same number of unknowns and equations: 62
+The model could not be deduced to be symbolically well-posed.
+The model has
+  61+vol.dynBal.nPorts
+scalar unknowns and
+  58+(if  not vol.dynBal.use_mWat_flow then 1 else 0)+3*vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  62
+Check of AixLib.Fluid.Storage.Examples.ExpansionVessel successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/ExpansionVessel.mos\",", "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.ExpansionVessel\",", "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.ExpansionVessel\\\");\",", "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.ExpansionVessel.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/ExpansionVessel.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.ExpansionVessel", tolerance=1e-6, stopTime=7200, method="CVode", resultFile="AixLib.Fluid.Storage.Examples.ExpansionVessel");
+Translation of AixLib.Fluid.Storage.Examples.ExpansionVessel:
+The DAE has 62 scalar unknowns and 62 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 16
+  Variables: 169
+  Constants: 4 (4 scalars)
+  Parameters: 75 (68 scalars)
+  Unknowns: 90 (63 scalars)
+  Differentiated variables: 4 scalars
+  Equations: 78
+  Nontrivial: 56
+Translated Model
+  Constants: 50 scalars
+  Free parameters: 17 scalars
+  Parameter depending: 13 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 15 scalars
+  Alias variables: 40 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  expVes.H
+  expVes.m
+  vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.ExpansionVessel.translation.log");

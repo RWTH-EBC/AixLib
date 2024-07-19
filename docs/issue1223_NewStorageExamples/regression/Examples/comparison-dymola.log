@@ -1,0 +1,614 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanSte.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanSte.vol[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanSte.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanSte.vol[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDyn.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDyn.vol[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDyn.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDyn.vol[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDynSol.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDynSol.vol[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDynSol.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_tanDynSol.vol[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_senTemSte.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_senTemDyn.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.mat_senTemDynSol.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "tanSte.vol[1].T",
+        "tanSte.vol[2].T",
+        "tanSte.vol[3].T",
+        "tanSte.vol[4].T",
+        "tanDyn.vol[1].T",
+        "tanDyn.vol[2].T",
+        "tanDyn.vol[3].T",
+        "tanDyn.vol[4].T",
+        "tanDynSol.vol[1].T",
+        "tanDynSol.vol[2].T",
+        "tanDynSol.vol[3].T",
+        "tanDynSol.vol[4].T",
+        "senTemSte.T",
+        "senTemDyn.T",
+        "senTemDynSol.T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex",
+    "simulation": {
+      "elapsed_time": 0.067364,
+      "final_time": 1200,
+      "jacobians": 5,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageBoiler.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[10].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_bufferStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageBoiler.mat_hea.Q_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "bufferStorage.layer[10].T",
+        "bufferStorage.layer[5].T",
+        "bufferStorage.layer[1].T",
+        "hea.Q_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageBoiler",
+    "simulation": {
+      "elapsed_time": 0.0766,
+      "final_time": 86400,
+      "jacobians": 85,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[10].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_bufferStorage.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_temperatureSensor.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_solarThermal.Irradiation",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSolarCollector.mat_solarThermal.heater.Q_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "bufferStorage.layer[10].T",
+        "bufferStorage.layer[5].T",
+        "bufferStorage.layer[1].T",
+        "temperatureSensor.T",
+        "solarThermal.Irradiation",
+        "solarThermal.heater.Q_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageSolarCollector",
+    "simulation": {
+      "elapsed_time": 0.615,
+      "final_time": 172800,
+      "jacobians": 1201,
+      "start_time": 0,
+      "state_events": 3,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.Stratified.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_dH.y",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.m_flow",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[6].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[7].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[8].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[9].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanSim.vol[10].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[6].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[7].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[8].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[9].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.Stratified.mat_tanEnh.vol[10].T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "variables": [
+        "dH.y",
+        "tanSim.m_flow",
+        "tanSim.vol[1].T",
+        "tanSim.vol[2].T",
+        "tanSim.vol[3].T",
+        "tanSim.vol[4].T",
+        "tanSim.vol[5].T",
+        "tanSim.vol[6].T",
+        "tanSim.vol[7].T",
+        "tanSim.vol[8].T",
+        "tanSim.vol[9].T",
+        "tanSim.vol[10].T",
+        "tanEnh.vol[1].T",
+        "tanEnh.vol[2].T",
+        "tanEnh.vol[3].T",
+        "tanEnh.vol[4].T",
+        "tanEnh.vol[5].T",
+        "tanEnh.vol[6].T",
+        "tanEnh.vol[7].T",
+        "tanEnh.vol[8].T",
+        "tanEnh.vol[9].T",
+        "tanEnh.vol[10].T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.Stratified",
+    "simulation": {
+      "elapsed_time": 0.00902915,
+      "final_time": 10800,
+      "jacobians": 6,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.heatingCoil1.Therm1[4].Q_flow",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.layer[4].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.portHC1In.p",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageDetailedExample.mat_bufferStorage.portHC1Out.p"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "bufferStorage.heatingCoil1.Therm1[4].Q_flow",
+        "bufferStorage.layer[4].T",
+        "bufferStorage.portHC1In.p",
+        "bufferStorage.portHC1Out.p"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageDetailedExample",
+    "simulation": {
+      "elapsed_time": 0.0507,
+      "final_time": 86400,
+      "jacobians": 45,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat_storageSimple.layer[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat_storageSimple.layer[2].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat_storageSimple.layer[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat_heatingRod.Pel",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StorageSimpleExample.mat_simpleConsumer.Q_flow"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        2
+      ],
+      "variables": [
+        "storageSimple.layer[1].T",
+        "storageSimple.layer[2].T",
+        "storageSimple.layer[3].T",
+        "heatingRod.Pel",
+        "simpleConsumer.Q_flow"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StorageSimpleExample",
+    "simulation": {
+      "elapsed_time": 8.13,
+      "final_time": 38200,
+      "jacobians": 58978,
+      "start_time": 0,
+      "state_events": 21,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.ExpansionVessel.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.ExpansionVessel.mat_vol.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.ExpansionVessel.mat_expVes.port_a.p"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1
+      ],
+      "variables": [
+        "vol.T",
+        "expVes.port_a.p"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.ExpansionVessel",
+    "simulation": {
+      "elapsed_time": 0.00534797,
+      "final_time": 7200,
+      "jacobians": 4,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_tan.vol[1].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_tan.vol[3].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_tan.vol[5].T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_senTem.T",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_yBot.u",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_yMid.u",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_yTop.u",
+        "funnel_comp/AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature.mat_yHea.u"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "tan.vol[1].T",
+        "tan.vol[3].T",
+        "tan.vol[5].T",
+        "senTem.T",
+        "yBot.u",
+        "yMid.u",
+        "yTop.u",
+        "yHea.u"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature",
+    "simulation": {
+      "elapsed_time": 0.0170419,
+      "final_time": 21600,
+      "jacobians": 110,
+      "start_time": 0,
+      "state_events": 25,
+      "success": true
+    }
+  }
+]
