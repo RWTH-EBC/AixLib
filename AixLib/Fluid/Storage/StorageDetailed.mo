@@ -31,7 +31,7 @@ model StorageDetailed
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
   parameter Integer n(min=3)=5 "Number of Layers";
-  parameter Modelica.Units.SI.Temperature TStart[n]=fill(TStartWall,n)
+  parameter Modelica.Units.SI.Temperature TStart[n]=fill(298.15,n)
     "Start Temperature of fluid in each layer. e.g. for a 3 layer model: {20, 20, 20}"
     annotation (Dialog(tab="Initialization", group="Storage specific"));
 
