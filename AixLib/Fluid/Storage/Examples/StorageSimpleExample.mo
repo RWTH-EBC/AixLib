@@ -4,8 +4,6 @@ model StorageSimpleExample "Example model with simple storage"
   StorageSimple storageSimple(
     redeclare package Medium = Medium,
     use_TOut=true,
-    layer(each T(start=308.15,fixed=true)),
-    layer_HE(each T(start=308.15,fixed=true)),
     n=3,
     d=0.7,
     h=0.78,
@@ -18,8 +16,8 @@ model StorageSimpleExample "Example model with simple storage"
     A_HE=10,
     m_flow_nominal_layer=m_flow_nominal_gen,
     m_flow_nominal_HE=m_flow_nominal_gen,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    T_start=308.15)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_start=fill(308.15, 3))
     "300 l storage"
     annotation (Placement(transformation(extent={{22,-22},{-20,22}})));
   HeatExchangers.HeatingRod heatingRod(
@@ -265,7 +263,7 @@ equation
           textColor={0,0,0},
           textString="HR control")}),
     experiment(
-      StopTime=86400,
+      StopTime=38200,
       Interval=900,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),

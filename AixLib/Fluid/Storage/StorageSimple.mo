@@ -31,12 +31,15 @@ model StorageSimple
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE
     "Nominal mass flow rate of heat exchanger layers";
 
+  //Optional temperature outputs
+  parameter Boolean use_TOut = true "Use temperature real outputs";
+
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
 
   //Initialization parameters
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start[n]
+    "Start value of temperature of each layer, e.g. for 3 layers: {20, 20, 20}" annotation(Dialog(tab="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
 
@@ -46,8 +49,6 @@ model StorageSimple
    parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
 
-   //Optional temperature outputs
-   parameter Boolean use_TOut = true "Use temperature real outputs";
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_consumer(redeclare final package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -108}, {10, -88}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
@@ -64,14 +65,14 @@ model StorageSimple
     redeclare final package Medium = Medium,
     each final nPorts=2,
     each final m_flow_nominal=m_flow_nominal_layer)
-		annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
+  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "connect to ambient temperature around the storage"
-		annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), 
-				   iconTransformation(extent = {{-90, -10}, {-70, 10}})));
+  annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}),
+       iconTransformation(extent = {{-90, -10}, {-70, 10}})));
   Modelica.Fluid.Interfaces.FluidPort_b
     port_b_heatGenerator(redeclare final package Medium = Medium)
-		annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
+  annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
   Modelica.Fluid.Interfaces.FluidPort_a
     port_a_heatGenerator(redeclare final package Medium = Medium)
         annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
@@ -108,26 +109,11 @@ model StorageSimple
     each final kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
-
-  //Initialization parameters
-  parameter Modelica.Units.SI.Temperature T_start[n]
-    "Start value of temperature of each layer, e.g. for 3 layers: {20, 20, 20}" annotation(Dialog(tab="Initialization"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure" annotation(Dialog(tab="Initialization"));
-
-  //Mass flow rates to regulate zero flow
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-   parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-
-  Modelica.Blocks.Interfaces.RealOutput TTopLayer(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput TLayer[n](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each min=0,
+    each displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
         origin={-112,30},
         extent={{12,12},{-12,-12}},
@@ -136,10 +122,10 @@ model StorageSimple
         rotation=0,
         origin={-86.5,29.5})));
   Modelica.Blocks.Interfaces.RealOutput TLayer_HE[n](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    min=0,
-    displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each min=0,
+    each displayUnit="degC") if use_TOut "Temperature in the top layer" annotation (Placement(
         transformation(
         origin={112,30},
         extent={{-12,12},{12,-12}},
@@ -195,7 +181,7 @@ equation
     connect(bouyancy[k].port_a, layer[k + 1].heatPort);
     connect(bouyancy[k].port_b, layer[k].heatPort);
   end for;
-  connect(heatPort, heatPort) annotation(Line(points = {{-106, 0}, {-106, 0}}, color = {191, 0, 0}));
+  connect(heatPort, heatPort) annotation(Line(points={{-106,0},{-106,0}},      color = {191, 0, 0}));
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////  connection of Temperature Sensor//////////////////////////
