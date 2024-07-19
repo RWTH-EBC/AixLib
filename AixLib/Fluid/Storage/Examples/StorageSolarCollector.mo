@@ -13,7 +13,7 @@ model StorageSolarCollector
     mHC1_flow_nominal=solarThermal.m_flow_nominal,
     useHeatingCoil2=false,
     useHeatingRod=false,
-    TStart=333.15,
+    TStart=fill(333.15, 10),
     redeclare AixLib.DataBase.Storage.Generic_New_2000l data(hHC1Up=2.1),
     n=10,
     hConIn=1500,

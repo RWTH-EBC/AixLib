@@ -2,7 +2,8 @@ within AixLib.Fluid.Storage;
 model StorageDetailed
   "Buffer Storage Model with support for heating rod and two heating coils"
 
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
+    final T_start=sum(TStart)/n);
 
   replaceable package MediumHC1 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC1"
@@ -29,13 +30,14 @@ model StorageDetailed
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter Modelica.Units.SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
+  parameter Integer n(min=3)=5 "Number of Layers";
+  parameter Modelica.Units.SI.Temperature TStart[n]=fill(298.15,n)
+    "Start Temperature of fluid in each layer. e.g. for a 3 layer model: {20, 20, 20}"
+    annotation (Dialog(tab="Initialization", group="Storage specific"));
 
   replaceable parameter AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition data
     constrainedby AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition
     "Data record for Storage" annotation (choicesAllMatching);
-
-  parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
@@ -165,7 +167,7 @@ model StorageDetailed
       "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+  AixLib.Fluid.MixingVolumes.MixingVolume layer[n](
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
@@ -177,7 +179,7 @@ model StorageDetailed
     each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
-    final T_start=fill(TStart,n),
+    final T_start=TStart,
     redeclare each final package Medium = Medium,
     each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
@@ -303,7 +305,7 @@ model StorageDetailed
     pipeHC=data.pipeHC1,
     allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
-    TStart=TStart) if useHeatingCoil1
+    TStart=sum(TStart)/n) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -317,7 +319,7 @@ model StorageDetailed
     redeclare package Medium = MediumHC2,
     allowFlowReversal=allowFlowReversal_HC2,
     final m_flow_nominal=mHC2_flow_nominal,
-    TStart=TStart) if useHeatingCoil2
+    TStart=sum(TStart)/n) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
