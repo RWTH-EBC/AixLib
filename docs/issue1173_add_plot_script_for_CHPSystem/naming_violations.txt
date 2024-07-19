@@ -1,10 +1,22 @@
 
 
 
-AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo
-1: Documentation too short, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: CHP combinedHeatPower( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.02, TSetIn=true, minCapacity=20, delayTime=300, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo
+1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
-2: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, use_T_in=true, nPorts=1, m_flow=0.5) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+2: Documentation too short, Name 'combinedHeatPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combined, Heat, Power. Affected line: AixLib.Fluid.BoilerCHP.CHPNoControl combinedHeatPower( redeclare package Medium = Medium, m_flow_nominal=0.02, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+3: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Medium, use_T_in=true, nPorts=1, m_flow=0.5) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+4: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( nPorts=1, redeclare package Medium = Medium) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+
+5: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
+
+
+AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo
+1: Documentation too short, Name 'combinedHeatPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combined, Heat, Power. Affected line: AixLib.Fluid.BoilerCHP.CHP combinedHeatPower( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.02, TSetIn=true, minCapacity=20, delayTime=300, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK(), vol(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial), Kc=0.02, Tc=100, elControl(initType=Modelica.Blocks.Types.Init.InitialOutput)) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+2: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, use_T_in=true, nPorts=1, m_flow=0.1) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 
 3: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( nPorts=1, redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
 
