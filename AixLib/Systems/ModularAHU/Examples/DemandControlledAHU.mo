@@ -123,7 +123,7 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
     final C_start={CO2Con_start/1E6 * (MolCO2/MolAir)},
-    zoneParam=AixLib.DataBase.ThermalZones.Office_1995_1000(),
+	redeclare AixLib.DataBase.ThermalZones.Office_1995_1000 zoneParam,
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
