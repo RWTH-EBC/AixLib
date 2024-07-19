@@ -10,11 +10,11 @@ model MultizonePartlyCooled "Illustrates the use of Multizone"
     ABuilding=8375,
     ASurTot=12744.27,
     numZones=5,
-    zoneParam={AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true),
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true),
+    zoneParam={AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true, lCool=-1000),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true, lCool=-10000),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=false),
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true),
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true)},
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true, lCool=-20000),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(CoolerOn=true, lCool=-30000)},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
@@ -133,7 +133,12 @@ equation
           -55},{36.8,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+    experiment(
+      StartTime=14688000,
+      StopTime=15552000,
+      Interval=3600,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizonePartlyCooled.mos"
         "Simulate and plot"),

@@ -1,12 +1,4 @@
-simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.Multizone", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="Multizone");
-createPlot(id = 1,
- position = {55, 50, 697, 502},
- x = "time",
- y = {"multizone.TAir[1]"},
- autoscale = true,
- autoerase = true,
- autoreplot = true,
- grid = true,
- color = true,
- leftTitleType = 1,
- bottomTitleType = 1);
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.Multizone", tolerance=1e-6, stopTime=864000, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="Multizone");
+createPlot(id=1, position={0, 0, 1617, 533}, y={"multizone.TAir[1]", "multizone.TAir[2]", "multizone.TAir[3]", "multizone.TAir[4]",
+ "multizone.TAir[5]"}, range={0.0, 10.200000000000001, 19.5, 23.0}, erase=true, autoscale=true, grid=true, filename="Multizone.mat", subPlot=101, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}}, timeUnit="d", displayUnits={"degC", "degC", "degC", "degC", "degC"});
+createPlot(id=1, position={0, 0, 1617, 533}, y={"weaDat.weaBus.TDryBul"}, range={0.0, 10.200000000000001, -10000.0, 80000.0}, erase=true, grid=true, subPlot=102, colors={{28,108,200}}, timeUnit="d");
