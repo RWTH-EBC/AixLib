@@ -196,8 +196,8 @@ model Ashrae140Testcase600SP_flexquant_summer
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.03,
-      Ti=120,
+      k=0.01,
+      Ti=200,
       rpm_pump=3000),
     ctrRh(
       k=0.03,
@@ -210,7 +210,7 @@ model Ashrae140Testcase600SP_flexquant_summer
       Ti=125,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.00003,
+      k=0.000003,
       Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))

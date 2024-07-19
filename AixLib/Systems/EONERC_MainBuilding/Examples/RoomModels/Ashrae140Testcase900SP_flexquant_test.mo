@@ -196,8 +196,8 @@ model Ashrae140Testcase900SP_flexquant_test
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.05,
-      Ti=120,
+      k=k_co,
+      Ti=Ti_co,
       rpm_pump=3000),
     ctrRh(
       k=0.03,
@@ -210,8 +210,8 @@ model Ashrae140Testcase900SP_flexquant_test
       Ti=125,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.00002,
-      Ti=280,
+      k=k_tabs,
+      Ti=Ti_tabs,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
     annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
@@ -473,10 +473,10 @@ model Ashrae140Testcase900SP_flexquant_test
         origin={-141,-96})));
 
   Modelica.Blocks.Sources.Pulse          QTabs_set1(
-    amplitude=2500,
+    amplitude=5000,
     width=50,
     period=1800,
-    offset=-2500,
+    offset=-5000,
     startTime=17452800)
                  annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
@@ -491,6 +491,15 @@ model Ashrae140Testcase900SP_flexquant_test
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-141,-74})));
+  parameter Real k_tabs=3e-6 "Gain of controller"
+                                             annotation(Evaluate=false);
+  parameter Modelica.Units.SI.Time Ti_tabs=280
+    "Time constant of Integrator block"                                      annotation(Evaluate=false);
+  parameter Real k_co=0.01 "Gain of controller"
+                                               annotation(Evaluate=false);
+  parameter Modelica.Units.SI.Time Ti_co=200
+    "Time constant of Integrator block"
+                                       annotation(Evaluate=false);
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -727,8 +736,8 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
-      StartTime=4752000,
-      StopTime=5052000,
+      StartTime=17452800,
+      StopTime=17600000,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),

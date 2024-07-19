@@ -16,9 +16,9 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
   parameter Boolean useExternalQset = false "If True, set Volume Flow can be given externally";
   parameter Modelica.Units.SI.Power Q_flowSetCon=0
     "Power set point of consumer in W";
-  parameter Real k(unit="1")=0.025          "Gain of controller";
+  parameter Real k(unit="1")=0.025          "Gain of controller" annotation(Evaluate=false);
   parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
-    "Time constant of Integrator block";
+    "Time constant of Integrator block" annotation(Evaluate=false);
   parameter Modelica.Units.SI.Time Td(min=0) = 4
     "Time constant of Derivative block";
   parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0) = 2000
