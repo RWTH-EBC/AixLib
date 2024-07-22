@@ -103,9 +103,9 @@ model HeatPump "Example for the reversible heat pump model."
     amplitude=3000,
     offset=3000)
     annotation (Placement(transformation(extent={{76,26},{84,34}})));
-  AixLib.Fluid.Movers.SpeedControlled_Nrpm
-                                    pumSou(
+  AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm pumSou(
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+
     final allowFlowReversal=true,
     final addPowerToMedium=false,
     redeclare final package Medium = Medium_sin,

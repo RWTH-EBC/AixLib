@@ -84,10 +84,10 @@ model Chiller "Example for the reversible chiller model."
     offset=500,
     phase=3.1415926535898)
     annotation (Placement(transformation(extent={{76,56},{84,64}})));
-  AixLib.Fluid.Movers.SpeedControlled_Nrpm
-                                    pumSou(
+  AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm pumSou(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+
     final allowFlowReversal=true,
     final addPowerToMedium=false,
     redeclare final package Medium = Medium_sou)
