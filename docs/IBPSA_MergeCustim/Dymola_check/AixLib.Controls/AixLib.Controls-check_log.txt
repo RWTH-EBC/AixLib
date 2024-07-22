@@ -1,0 +1,87 @@
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: thermalZone1.indoorSwimmingPool.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 345
+Error: ERRORS have been issued.
+

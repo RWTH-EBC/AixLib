@@ -1,0 +1,331 @@
+
+Error in model:  AixLib.Fluid.Pools.IndoorSwimmingPool 
+Check of <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 2
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.Validation.Pump_Nrpm_stratos 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.Pump_Nrpm_stratos">AixLib.Fluid.Movers.Validation.Pump_Nrpm_stratos</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump1.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 26
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 26
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 26
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump2.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 32
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 32
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 32
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump3.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 38
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 38
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 38
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump4.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 44
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 44
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 44
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump5.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 50
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 50
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/Pump_Nrpm_stratos.mo, line 50
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem 
+Check of <a href="Modelica://AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem">AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: indoorSwimming.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: indoorSwimming.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mo, line 4
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Chillers.Examples.Chiller 
+Check of <a href="Modelica://AixLib.Fluid.Chillers.Examples.Chiller">AixLib.Fluid.Chillers.Examples.Chiller</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pumSou.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Chillers/Examples/Chiller.mo, line 88
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Chillers/Examples/Chiller.mo, line 88
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Chillers/Examples/Chiller.mo, line 88
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Pools.Examples.IndoorSwimmingPool 
+Check of <a href="Modelica://AixLib.Fluid.Pools.Examples.IndoorSwimmingPool">AixLib.Fluid.Pools.Examples.IndoorSwimmingPool</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: indoorSwimming.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/Examples/IndoorSwimmingPool.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/IndoorSwimmingPool.mo, line 332
+ Component context: indoorSwimming.cirPump.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Pools.IndoorSwimmingPool">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Pools/Examples/IndoorSwimmingPool.mo, line 4
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.Validation.PowerExact 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerExact">AixLib.Fluid.Movers.Validation.PowerExact</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump_Nrpm.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.Validation.PowerSimplified 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump_Nrpm.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 14
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.HeatPumps.Examples.HeatPump 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump">AixLib.Fluid.HeatPumps.Examples.HeatPump</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pumSou.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/Examples/HeatPump.mo, line 107
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/Examples/HeatPump.mo, line 107
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/Examples/HeatPump.mo, line 107
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm">AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: floMacSta.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 6
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 6
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 6
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: floMacDyn.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 12
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 12
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/SpeedControlled_Nrpm.mo, line 12
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.SpeedControlled_Nrpm 
+Check of <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 2
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 2
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 2
+Error: ERRORS have been issued.
+
