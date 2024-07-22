@@ -104,34 +104,33 @@ equation
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Validation/HeatExchangerLocation.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This validation model compares two tank models. The only difference between
- the two tank models is that <code>tan_aTop</code> has the hot water inlet
- for the heat exchanger above its outlet, whereas <code>tan_bTop</code>
- has the hot water inlet below its outlet. In both models, the heat exchanger
- extends from element <i>9</i> to element <i>11</i>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 7, 2018 by Filip Jorissen:<br/>
- Copied model from Buildings and update the model accordingly.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
- </li>
- <li>
- July 5, 2017, by Michael Wetter:<br/>
- Added zero mass flow rate boundary conditions to avoid a translation error in Dymola 2018.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/834\">issue 834</a>.
- </li>
- <li>
- June 23, 2016 by Michael Wetter:<br/>
- First implementation to test
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/531\">issue 531</a>.
- </li>
- </ul>
- </html>"),
-    experiment(Tolerance=1e-6, StopTime=600000),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This validation model compares two tank models. The only difference between
+the two tank models is that <code>tan_aTop</code> has the hot water inlet
+for the heat exchanger above its outlet, whereas <code>tan_bTop</code>
+has the hot water inlet below its outlet. In both models, the heat exchanger
+extends from element <i>9</i> to element <i>11</i>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 7, 2018 by Filip Jorissen:<br/>
+Copied model from Buildings and update the model accordingly.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+</li>
+<li>
+July 5, 2017, by Michael Wetter:<br/>
+Added zero mass flow rate boundary conditions to avoid a translation error in Dymola 2018.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/834\">issue 834</a>.
+</li>
+<li>
+June 23, 2016 by Michael Wetter:<br/>
+First implementation to test
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/531\">issue 531</a>.
+</li>
+</ul>
+</html>"),
+    experiment(Tolerance=1e-6, StopTime=600000));
 end HeatExchangerLocation;

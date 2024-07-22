@@ -92,28 +92,27 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/ConservationEquation.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- Model that tests the conservation equations that are used
- for the heat and mass balance.
- </p>
- </html>",
+<p>
+Model that tests the conservation equations that are used
+for the heat and mass balance.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 23, 2018, by Filip Jorissen:<br/>
- Added <code>prescribedHeatFlowRate=true</code> since
- this model prescribes the heat flow rate.
- </li>
- <li>
- January 22, 2016 by Michael Wetter:<br/>
- Updated model to use the new parameter <code>use_mWat_flow</code>
- rather than <code>sensibleOnly</code>.
- </li>
- <li>
- September 11, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 23, 2018, by Filip Jorissen:<br/>
+Added <code>prescribedHeatFlowRate=true</code> since
+this model prescribes the heat flow rate.
+</li>
+<li>
+January 22, 2016 by Michael Wetter:<br/>
+Updated model to use the new parameter <code>use_mWat_flow</code>
+rather than <code>sensibleOnly</code>.
+</li>
+<li>
+September 11, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ConservationEquation;

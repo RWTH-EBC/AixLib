@@ -144,21 +144,20 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- <p> This model evaluates the fluid temperatures using the multipole method of Claesson and Hellstrom (2011).
- </p>
- <h4>References</h4>
- <p>J. Claesson and G. Hellstrom. 
- <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
- </i>
- HVAC&amp;R Research,
- 17(6): 895-911, 2011.</p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 12, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p> This model evaluates the fluid temperatures using the multipole method of Claesson and Hellstrom (2011).
+</p>
+<h4>References</h4>
+<p>J. Claesson and G. Hellstrom. 
+<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
+</i>
+HVAC&amp;R Research,
+17(6): 895-911, 2011.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 12, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end multipoleFluidTemperature;

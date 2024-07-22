@@ -12,20 +12,19 @@ equation
     annotation (Line(points={{61,0},{110,0},{110,0}}, color={0,0,127}));
   annotation (
 Documentation(info="<html>
- <p>
- This is a partial model of a chiller whose coefficient of performance (COP) changes
- with temperatures in the same way as the Carnot efficiency changes.
- This base class is used for the Carnot chiller and Carnot heat pump
- that uses the compressor part load ratio as the control signal.
- </p>
- </html>",
+<p>
+This is a partial model of a chiller whose coefficient of performance (COP) changes
+with temperatures in the same way as the Carnot efficiency changes.
+This base class is used for the Carnot chiller and Carnot heat pump
+that uses the compressor part load ratio as the control signal.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- First implementation of this base class.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+First implementation of this base class.
+</li>
+</ul>
+</html>"));
 end PartialCarnot_T;

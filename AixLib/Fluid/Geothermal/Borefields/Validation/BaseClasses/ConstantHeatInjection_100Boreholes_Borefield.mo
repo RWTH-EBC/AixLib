@@ -10,17 +10,16 @@ defaultComponentPrefixes="parameter",
 defaultComponentName="borFieDat",
 Documentation(
 info="<html>
- <p>
- This record contains the borefield data of a field of <i>100</i> boreholes.
- </p>
- </html>",
+<p>
+This record contains the borefield data of a field of <i>100</i> boreholes.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 27, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+May 27, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ConstantHeatInjection_100Boreholes_Borefield;

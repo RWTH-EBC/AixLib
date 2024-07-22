@@ -21,9 +21,9 @@ protected
   parameter Real A6=4.74*10^(-12)
     "Constant 6 to calculate reference transmission";
   parameter Modelica.Units.SI.TransmissionCoefficient g_dir0=0.7537 "Reference vertical parallel transmission coefficient for direct radiation
-     for double pane window";
+    for double pane window";
   parameter Modelica.Units.SI.TransmissionCoefficient Ta_diff=0.84 "Energetic degree of transmission for diffuse radiation for uniformly
-     overcast sky";
+    overcast sky";
   parameter Modelica.Units.SI.TransmissionCoefficient Tai_diff=0.903
     "Pure degree of transmission for diffuse radiation";
   parameter Modelica.Units.SI.TransmissionCoefficient Ta1_diff=Ta_diff*Tai_diff
@@ -32,7 +32,7 @@ protected
     "Part of degree of transmission for single pane window related to Ta1_diff";
   parameter Modelica.Units.SI.ReflectionCoefficient rho_11_diff=rho_T1_diff/(2
        - (rho_T1_diff)) "Part of degree of transmission for single pane window
-     related to rho_T1_diff";
+    related to rho_T1_diff";
   parameter Modelica.Units.SI.ReflectionCoefficient rho_1_diff=rho_11_diff + ((
       (1 - rho_11_diff)*Tai_diff)^2*rho_11_diff)/(1 - (rho_11_diff*Tai_diff)^2)
     "Degree of reflection for single pane window";
@@ -42,14 +42,14 @@ protected
       XN2_diff "Energetic dregree of transmission for second pane";
   parameter Modelica.Units.SI.Emissivity a1_diff=1 - Ta1_diff - rho_1_diff
     "Degree of absorption for single pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Q21_diff=a1_diff*(1 + (
+  parameter Real Q21_diff=a1_diff*(1 + (
       Ta1_diff*rho_1_diff/XN2_diff))*UWin/25
-    "Coefficient of heat transfer for exterior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Q22_diff=a1_diff*(
+    "Auxiliary parameter for heat transfer of exterior pane of double pane window";
+  parameter Real Q22_diff=a1_diff*(
       Ta1_diff/XN2_diff)*(1 - (UWin/7.7))
-    "Coefficient of heat transfer for interior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Qsek2_diff=Q21_diff +
-      Q22_diff "Overall coefficient of heat transfer for double pane window";
+    "Auxiliary parameter for heat transfer of interior pane of double pane window";
+  parameter Real Qsek2_diff=Q21_diff + Q22_diff
+    "Overall auxiliary parameter for heat transfer of double pane window";
   parameter Modelica.Units.SI.TransmissionCoefficient CorG_diff=(Ta2_diff +
       Qsek2_diff)/g_dir0
     "Transmission coefficient correction factor for diffuse radiation";
@@ -110,33 +110,32 @@ equation
 
   annotation (defaultComponentName="corG",
   Documentation(info="<html>
-   <p>This model computes short-wave radiation through
-   transparent elements with any orientation and inclination by means of
-   solar transmission correction factors. Transmission properties of transparent
-   elements are in general dependent on the solar incidence angle. To take this
-   dependency into account, correction factors can be multiplied with the solar
-   radiation. These factors should not be mistaken as calculation of solar
-   radiation on tilted surfaces, calculation of <i>g</i>-values or consideration of
-   sunblinds, as it is an additional step. The implemented calculations are
-   defined in the German Guideline VDI 6007 Part 3 (VDI, 2015). The given model
-   is only valid for double pane windows. The guideline describes also
-   calculations for single pane and triple pane windows.</p>
-   <h4>References</h4>
-   <p>VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
-   Calculation of transient thermal response of rooms and buildings -
-   modelling of solar radiation.</p>
-   </html>",
+  <p>This model computes short-wave radiation through
+  transparent elements with any orientation and inclination by means of
+  solar transmission correction factors. Transmission properties of transparent
+  elements are in general dependent on the solar incidence angle. To take this
+  dependency into account, correction factors can be multiplied with the solar
+  radiation. These factors should not be mistaken as calculation of solar
+  radiation on tilted surfaces, calculation of <i>g</i>-values or consideration of
+  sunblinds, as it is an additional step. The implemented calculations are
+  defined in the German Guideline VDI 6007 Part 3 (VDI, 2015). The given model
+  is only valid for double pane windows. The guideline describes also
+  calculations for single pane and triple pane windows.</p>
+  <h4>References</h4>
+  <p>VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  modelling of solar radiation.</p>
+  </html>",
   revisions="<html>
-   <ul>
-   <li>
-   September 12, 2015 by Moritz Lauster:<br/>
-   Adapted to Annex 60 requirements.
-   </li>
-   <li>
-   February 24, 2014, by Reza Tavakoli:<br/>
-   First implementation.
-   </li>
-   </ul>
-   </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+  <ul>
+  <li>
+  September 12, 2015 by Moritz Lauster:<br/>
+  Adapted to Annex 60 requirements.
+  </li>
+  <li>
+  February 24, 2014, by Reza Tavakoli:<br/>
+  First implementation.
+  </li>
+  </ul>
+  </html>"));
 end CorrectionGDoublePane;

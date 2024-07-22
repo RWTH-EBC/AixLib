@@ -59,16 +59,15 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/MassFraction.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example tests the mass fraction sensors.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 7, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example tests the mass fraction sensors.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 7, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end MassFraction;

@@ -70,18 +70,17 @@ equation
         "Simulate and Plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
- <p>Basic test of model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized\">
- AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized</a>.
- This test includes an inlet temperature step under a constant mass flow rate.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 9, 2021, by Baptiste Ravache:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>Basic test of model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized\">
+AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized</a>.
+This test includes an inlet temperature step under a constant mass flow rate.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 9, 2021, by Baptiste Ravache:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PlugFlowPipeDiscretized;

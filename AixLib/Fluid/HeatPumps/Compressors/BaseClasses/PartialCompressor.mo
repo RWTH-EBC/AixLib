@@ -84,10 +84,10 @@ equation
   // bounds of the property data in the refrigerant package
   assert(port_b.T > ref.T_min and port_b.T < ref.TCri,
     "Condensing temperature must be above the minimum refrigerant temperature
-     and below the critical temperature.");
+    and below the critical temperature.");
   assert(port_a.T > ref.T_min and port_a.T < ref.TCri,
     "Evaporating temperature must be above the minimum refrigerant temperature
-     and below the critical temperature.");
+    and below the critical temperature.");
 
   annotation (
   Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
@@ -117,54 +117,53 @@ equation
           textString="%name")}),
     defaultComponentName="com",
       Documentation(info="<html>
- <p>
- This is the base class for the compressor model.
- </p>
- <p>
- The model evaluates the evaporating pressure of the refrigerant <i>p<sub>eva</sub></i>,
- the specific enthalpy of the evaporating saturated refrigerant vapor <i>h<sub>eva</sub></i>,
- the condensing pressure of the refrigerant <i>p<sub>con</sub></i>
- and the specific enthalpy of the condensing saturated liquid refrigerant <i>h<sub>cond</sub></i>
- at the evaporating temperature <i>T<sub>eva</sub></i> = <code>port_a.T</code>
- and condensing temperature <i>T<sub>con</sub></i> = <code>port_b.T</code>.
- </p>
- <p>
- Thermodynamic properties are evaluated from functions contained in the specified refrigerant package.
- </p>
- <h4>Assumptions and limitations</h4>
- <p>
- The model assumes isothermal condensation and evaporation, therefore
- refrigerant mass flow is not accounted for and heat ports are used instead of fluid ports.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 30, 2017, by Filip Jorissen:<br/>
- Removed <code>pressure_error</code> as
- this is replaced by
- <a href=\"modelica://AixLib.Fluid.HeatPumps.Compressors.BaseClasses.TemperatureProtection\">
- AixLib.Fluid.HeatPumps.Compressors.BaseClasses.TemperatureProtection</a>.
- See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
- </li>
- <li>
- May 26, 2017, by Michael Wetter and Thierry Nouidui:<br/>
- Reformulated <code>isOn</code> to use the same construct as the hysteresis block,
- and to work around a JModelica limitation.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/774\">#774</a>.
- </li>
- <li>
- April 25, 2017, by Michael Wetter:<br/>
- Reformulated <code>when</code> conditions and moved common assignments
- to this base class.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/739\">#739</a>.
- </li>
- <li>
- November 11, 2016, by Massimo Cimmino:<br/>
- First implementation of this base class.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is the base class for the compressor model.
+</p>
+<p>
+The model evaluates the evaporating pressure of the refrigerant <i>p<sub>eva</sub></i>,
+the specific enthalpy of the evaporating saturated refrigerant vapor <i>h<sub>eva</sub></i>,
+the condensing pressure of the refrigerant <i>p<sub>con</sub></i>
+and the specific enthalpy of the condensing saturated liquid refrigerant <i>h<sub>cond</sub></i>
+at the evaporating temperature <i>T<sub>eva</sub></i> = <code>port_a.T</code>
+and condensing temperature <i>T<sub>con</sub></i> = <code>port_b.T</code>.
+</p>
+<p>
+Thermodynamic properties are evaluated from functions contained in the specified refrigerant package.
+</p>
+<h4>Assumptions and limitations</h4>
+<p>
+The model assumes isothermal condensation and evaporation, therefore
+refrigerant mass flow is not accounted for and heat ports are used instead of fluid ports.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 30, 2017, by Filip Jorissen:<br/>
+Removed <code>pressure_error</code> as
+this is replaced by
+<a href=\"modelica://AixLib.Fluid.HeatPumps.Compressors.BaseClasses.TemperatureProtection\">
+AixLib.Fluid.HeatPumps.Compressors.BaseClasses.TemperatureProtection</a>.
+See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
+</li>
+<li>
+May 26, 2017, by Michael Wetter and Thierry Nouidui:<br/>
+Reformulated <code>isOn</code> to use the same construct as the hysteresis block,
+and to work around a JModelica limitation.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/774\">#774</a>.
+</li>
+<li>
+April 25, 2017, by Michael Wetter:<br/>
+Reformulated <code>when</code> conditions and moved common assignments
+to this base class.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/739\">#739</a>.
+</li>
+<li>
+November 11, 2016, by Massimo Cimmino:<br/>
+First implementation of this base class.
+</li>
+</ul>
+</html>"));
 end PartialCompressor;

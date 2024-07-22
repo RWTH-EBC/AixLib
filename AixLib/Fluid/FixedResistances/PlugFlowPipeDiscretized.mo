@@ -14,11 +14,11 @@ model PlugFlowPipeDiscretized
 
   parameter Boolean have_pipCap=true
     "= true, a mixing volume is added to each segment that corresponds 
-     to the heat capacity of the pipe segment wall"
+    to the heat capacity of the pipe segment wall"
     annotation (Dialog(tab="Advanced"));
   parameter Boolean have_symmetry=true
     "= false, the mixing volume is only on port_b of each segment,
-     which improve performances, but reduces dynamic accuracy"
+    which improve performances, but reduces dynamic accuracy"
     annotation (Dialog(tab="Advanced", enable=have_pipCap));
 
   parameter Modelica.Units.SI.Length dh "Hydraulic diameter"
@@ -249,30 +249,29 @@ equation
           color={162,29,33},
           thickness=0.5)}),
     Documentation(revisions="<html>
- <ul>
- <li>
- May 17, 2021, by Baptiste Ravache:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Wrapper around <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
- AixLib.Fluid.FixedResistances.PlugFlowPipe</a> which allows to specify <code>nSeg</code>
- successive segments of pipes (connected in series).
- </p>
- <p>
- This wrapper simplifies use-cases where different segments of the same
- pipe might have different boundary conditions. This would be the case,
- for instance, for sufficiently long stretches of buried pipes.
- </p>
- <p>
- To reduce coupled nonlinear equations, the pipe flow resistance
- is aggregated to a single instance of
- <a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
- AixLib.Fluid.FixedResistances.HydraulicDiameter</a> rather than being
- instantiated separately for each segment.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+May 17, 2021, by Baptiste Ravache:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Wrapper around <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
+AixLib.Fluid.FixedResistances.PlugFlowPipe</a> which allows to specify <code>nSeg</code>
+successive segments of pipes (connected in series).
+</p>
+<p>
+This wrapper simplifies use-cases where different segments of the same
+pipe might have different boundary conditions. This would be the case,
+for instance, for sufficiently long stretches of buried pipes.
+</p>
+<p>
+To reduce coupled nonlinear equations, the pipe flow resistance
+is aggregated to a single instance of
+<a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
+AixLib.Fluid.FixedResistances.HydraulicDiameter</a> rather than being
+instantiated separately for each segment.
+</p>
+</html>"));
 end PlugFlowPipeDiscretized;

@@ -49,16 +49,15 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/VectorFunctions.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of functions that take a vector as an argument.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 15, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of functions that take a vector as an argument.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 15, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end VectorFunctions;

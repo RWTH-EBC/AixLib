@@ -12,24 +12,23 @@ equation
   annotation (  experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/Polynomial.mos"
         "Simulate and plot"), Documentation(info="<html>
- <p>
- This model tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.Polynomial\">
- AixLib.Utilities.Math.Polynomial</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 21, 2021, by Michael Wetter:<br/>
- Renamed class to correct typo in class name.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1524\">IBPSA, #1524</a>.
- </li>
- <li>
- November 28, 2013, by Marcus Fuchs:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.Polynomial\">
+AixLib.Utilities.Math.Polynomial</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 21, 2021, by Michael Wetter:<br/>
+Renamed class to correct typo in class name.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1524\">IBPSA, #1524</a>.
+</li>
+<li>
+November 28, 2013, by Marcus Fuchs:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Polynomial;

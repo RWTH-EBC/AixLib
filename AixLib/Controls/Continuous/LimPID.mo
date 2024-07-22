@@ -89,6 +89,7 @@ block LimPID
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Utilities.Math.IntegratorWithReset I(
     final reset=if reset == AixLib.Types.Reset.Disabled then reset else AixLib.Types.Reset.Input,
+
     final y_reset=y_reset,
     final k=unitTime/Ti,
     final y_start=xi_start,
@@ -344,148 +345,148 @@ equation
    annotation (
 defaultComponentName="conPID",
 Documentation(info="<html>
- <p>
- PID controller in the standard form
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- y = k &nbsp; ( e(t) + 1 &frasl; T<sub>i</sub> &nbsp; &int; e(s) ds + T<sub>d</sub> de(t)&frasl;dt ),
- </p>
- <p>
- where
- <i>y</i> is the control signal,
- <i>e(t) = u<sub>s</sub> - u<sub>m</sub></i> is the control error,
- with <i>u<sub>s</sub></i> being the set point and <i>u<sub>m</sub></i> being
- the measured quantity,
- <i>k</i> is the gain,
- <i>T<sub>i</sub></i> is the time constant of the integral term and
- <i>T<sub>d</sub></i> is the time constant of the derivative term.
- </p>
- <p>
- Note that the units of <i>k</i> are the inverse of the units of the control error,
- while the units of <i>T<sub>i</sub></i> and <i>T<sub>d</sub></i> are seconds.
- </p>
- <p>
- For detailed treatment of integrator anti-windup, set-point weights and output limitation, see
- <a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>.
- </p>
- <h4>Options</h4>
- This controller can be configured as follows.
- <h5>P, PI, PD, or PID action</h5>
- <p>
- Through the parameter <code>controllerType</code>, the controller can be configured
- as P, PI, PD or PID controller. The default configuration is PI.
- </p>
- <h5>Direct or reverse acting</h5>
- <p>
- Through the parameter <code>reverseActing</code>, the controller can be configured to
- be reverse or direct acting.
- The above standard form is reverse acting, which is the default configuration.
- For a reverse acting controller, for a constant set point,
- an increase in measurement signal <code>u_m</code> decreases the control output signal <code>y</code>
- (Montgomery and McDowall, 2008).
- Thus,
- </p>
- <ul>
-   <li>
-   for a heating coil with a two-way valve, leave <code>reverseActing = true</code>, but
-   </li>
-   <li>
-   for a cooling coil with a two-way valve, set <code>reverseActing = false</code>.
-   </li>
- </ul>
- <h5>Reset of the controller output</h5>
- <p>
- The controller can be configured to enable an input port that allows resetting the controller
- output. The controller output can be reset as follows:
- </p>
- <ul>
-   <li>
-   If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
-   then the controller output is never reset.
-   </li>
-   <li>
-   If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
-   input signal <code>trigger</code> is enabled. Whenever the value of
-   this input changes from <code>false</code> to <code>true</code>,
-   the controller output is reset by setting <code>y</code>
-   to the value of the parameter <code>y_reset</code>.
-   </li>
-   <li>
-   If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
-   input signal <code>trigger</code> and a real input signal <code>y_reset_in</code>
-   are enabled. Whenever the value of
-   <code>trigger</code> changes from <code>false</code> to <code>true</code>,
-   the controller output is reset by setting the value of <code>y</code>
-   to <code>y_reset_in</code>.
-   </li>
- </ul>
- <p>
- Note that this controller implements an integrator anti-windup. Therefore,
- for most applications, keeping the default setting of
- <code>reset = AixLib.Types.Reset.Disabled</code> is sufficient.
- However, if the controller is used in conjuction with equipment that is being
- switched on, better control performance may be achieved by resetting the controller
- output when the equipment is switched on.
- This is in particular the case in situations
- where the equipment control input should continuously increase as the equipment is
- switched on, such as a light dimmer that may slowly increase the luminance, or
- a variable speed drive of a motor that should continuously increase the speed.
- </p>
- <h4>References</h4>
- <p>
- R. Montgomery and R. McDowall (2008).
- \"Fundamentals of HVAC Control Systems.\"
- American Society of Heating Refrigerating and Air-Conditioning Engineers Inc. Atlanta, GA.
- </p>
- 
- </html>",
+<p>
+PID controller in the standard form
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+y = k &nbsp; ( e(t) + 1 &frasl; T<sub>i</sub> &nbsp; &int; e(s) ds + T<sub>d</sub> de(t)&frasl;dt ),
+</p>
+<p>
+where
+<i>y</i> is the control signal,
+<i>e(t) = u<sub>s</sub> - u<sub>m</sub></i> is the control error,
+with <i>u<sub>s</sub></i> being the set point and <i>u<sub>m</sub></i> being
+the measured quantity,
+<i>k</i> is the gain,
+<i>T<sub>i</sub></i> is the time constant of the integral term and
+<i>T<sub>d</sub></i> is the time constant of the derivative term.
+</p>
+<p>
+Note that the units of <i>k</i> are the inverse of the units of the control error,
+while the units of <i>T<sub>i</sub></i> and <i>T<sub>d</sub></i> are seconds.
+</p>
+<p>
+For detailed treatment of integrator anti-windup, set-point weights and output limitation, see
+<a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>.
+</p>
+<h4>Options</h4>
+This controller can be configured as follows.
+<h5>P, PI, PD, or PID action</h5>
+<p>
+Through the parameter <code>controllerType</code>, the controller can be configured
+as P, PI, PD or PID controller. The default configuration is PI.
+</p>
+<h5>Direct or reverse acting</h5>
+<p>
+Through the parameter <code>reverseActing</code>, the controller can be configured to
+be reverse or direct acting.
+The above standard form is reverse acting, which is the default configuration.
+For a reverse acting controller, for a constant set point,
+an increase in measurement signal <code>u_m</code> decreases the control output signal <code>y</code>
+(Montgomery and McDowall, 2008).
+Thus,
+</p>
+<ul>
+  <li>
+  for a heating coil with a two-way valve, leave <code>reverseActing = true</code>, but
+  </li>
+  <li>
+  for a cooling coil with a two-way valve, set <code>reverseActing = false</code>.
+  </li>
+</ul>
+<h5>Reset of the controller output</h5>
+<p>
+The controller can be configured to enable an input port that allows resetting the controller
+output. The controller output can be reset as follows:
+</p>
+<ul>
+  <li>
+  If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
+  then the controller output is never reset.
+  </li>
+  <li>
+  If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
+  input signal <code>trigger</code> is enabled. Whenever the value of
+  this input changes from <code>false</code> to <code>true</code>,
+  the controller output is reset by setting <code>y</code>
+  to the value of the parameter <code>y_reset</code>.
+  </li>
+  <li>
+  If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
+  input signal <code>trigger</code> and a real input signal <code>y_reset_in</code>
+  are enabled. Whenever the value of
+  <code>trigger</code> changes from <code>false</code> to <code>true</code>,
+  the controller output is reset by setting the value of <code>y</code>
+  to <code>y_reset_in</code>.
+  </li>
+</ul>
+<p>
+Note that this controller implements an integrator anti-windup. Therefore,
+for most applications, keeping the default setting of
+<code>reset = AixLib.Types.Reset.Disabled</code> is sufficient.
+However, if the controller is used in conjuction with equipment that is being
+switched on, better control performance may be achieved by resetting the controller
+output when the equipment is switched on.
+This is in particular the case in situations
+where the equipment control input should continuously increase as the equipment is
+switched on, such as a light dimmer that may slowly increase the luminance, or
+a variable speed drive of a motor that should continuously increase the speed.
+</p>
+<h4>References</h4>
+<p>
+R. Montgomery and R. McDowall (2008).
+\"Fundamentals of HVAC Control Systems.\"
+American Society of Heating Refrigerating and Air-Conditioning Engineers Inc. Atlanta, GA.
+</p>
+
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 1, 2020, by Michael Wetter:<br/>
- Corrected wrong convention of reverse and direct action.<br/>
- Changed default configuration from PID to PI.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
- </li>
- <li>
- March 9, 2020, by Michael Wetter:<br/>
- Corrected wrong unit declaration for parameter <code>k</code>.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1316\">issue 1316</a>.
- </li>
- <li>
- October 19, 2019, by Filip Jorissen:<br/>
- Disabled homotopy to ensure bounded outputs
- by copying the implementation from MSL 3.2.3 and by
- hardcoding the implementation for <code>homotopyType=NoHomotopy</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1221\">issue 1221</a>.
- </li>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Refactored model.
- </li>
- <li>
- August 25, 2016, by Michael Wetter:<br/>
- Removed parameter <code>limitsAtInit</code> because it was only propagated to
- the instance <code>limiter</code>, but this block no longer makes use of this parameter.
- This is a non-backward compatible change.<br/>
- Revised implemenentation, added comments, made some parameter in the instances final.
- </li>
- <li>July 18, 2016, by Philipp Mehrfeld:<br/>
- Added integrator reset.
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/494\">issue 494</a>.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Changed the default value to <code>strict=true</code> in order to avoid events
- when the controller saturates.
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
- </li>
- <li>
- February 24, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),Icon(graphics={
+<ul>
+<li>
+June 1, 2020, by Michael Wetter:<br/>
+Corrected wrong convention of reverse and direct action.<br/>
+Changed default configuration from PID to PI.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
+</li>
+<li>
+March 9, 2020, by Michael Wetter:<br/>
+Corrected wrong unit declaration for parameter <code>k</code>.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1316\">issue 1316</a>.
+</li>
+<li>
+October 19, 2019, by Filip Jorissen:<br/>
+Disabled homotopy to ensure bounded outputs
+by copying the implementation from MSL 3.2.3 and by
+hardcoding the implementation for <code>homotopyType=NoHomotopy</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1221\">issue 1221</a>.
+</li>
+<li>
+September 29, 2016, by Michael Wetter:<br/>
+Refactored model.
+</li>
+<li>
+August 25, 2016, by Michael Wetter:<br/>
+Removed parameter <code>limitsAtInit</code> because it was only propagated to
+the instance <code>limiter</code>, but this block no longer makes use of this parameter.
+This is a non-backward compatible change.<br/>
+Revised implemenentation, added comments, made some parameter in the instances final.
+</li>
+<li>July 18, 2016, by Philipp Mehrfeld:<br/>
+Added integrator reset.
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/494\">issue 494</a>.
+</li>
+<li>
+March 15, 2016, by Michael Wetter:<br/>
+Changed the default value to <code>strict=true</code> in order to avoid events
+when the controller saturates.
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
+</li>
+<li>
+February 24, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"), Icon(graphics={
         Rectangle(
           extent={{-6,-20},{66,-66}},
           lineColor={255,255,255},
@@ -536,6 +537,5 @@ revisions="<html>
           visible=strict,
           points={{30,60},{81,60}},
           color={255,0,0},
-          smooth=Smooth.None)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          smooth=Smooth.None)}));
 end LimPID;

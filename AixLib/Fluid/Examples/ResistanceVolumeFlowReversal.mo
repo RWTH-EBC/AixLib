@@ -100,87 +100,86 @@ equation
        __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/ResistanceVolumeFlowReversal.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model demonstrates the impact of the <code>allowFlowReversal</code> parameter on the size
- of nonlinear systems of equations. The user can change the parameter value in the <code>allowFlowReversal</code>
- block and rerun the simulation. The results are also demonstrated below for <code>nRes.k = 10</code>,
- which is the number of parallel branches containing one pressure drop element and one mixing volume each.
- </p>
- <p>
- This model was created to demonstrate the influence of a new implementation of
- <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
- AixLib.Fluid.Interfaces.ConservationEquation</a>.
- The old implementation used the <code>actualStream()</code> function
- whereas the new implementation uses the <code>semiLinear()</code>
- function. This change allows Dymola to exploit knowledge about the <code>min</code> and <code>max</code> attributes
- of <code>m_flow</code>.
- When Dymola knows in which way the medium will flow, nonlinear systems can be simplified or completely removed.
- This is illustrated by the results below.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/216\">issue 216</a> for a discussion.
- </p>
- <p>
- Note that Dymola 2015FD01 can only reliable solve the last case. For the other
- two cases the Newton solver of the nonlinear system does not converge.
- </p>
- <p>
- These results were generated using Dymola 2015FD01 64 bit on Ubuntu 14.04
- and with <code>Evaluate=false</code>.
- </p>
- <h4>
- ResistanceVolumeFlowReversal = true
- </h4>
- <p>
- Sizes of nonlinear systems of equations: {6, 11, <b>56</b>}<br/>
- Sizes after manipulation of the nonlinear systems: {1, 9, <b>12</b>}
- </p>
- <h4>
- ResistanceVolumeFlowReversal = false
- </h4>
- <p>
- <b>Old implementation</b>
- </p>
- <p>
- Sizes of nonlinear systems of equations: {6, 11, <b>44</b>}<br/>
- Sizes after manipulation of the nonlinear systems: {1, 9, <b>11</b>}
- </p>
- <p>
- <b>New implementation</b>
- </p>
- <p>
- Sizes of nonlinear systems of equations: {6, 11, <b>4</b>}<br/>
- Sizes after manipulation of the nonlinear systems: {1, 9, <b>1</b>}
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 21, 2017, by Michael Wetter:<br/>
- Corrected parameterization to be independent of <code>k</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/825\">
- AixLib, #825</a>.
- </li>
- <li>
- May 8, 2017, by Michael Wetter:<br/>
- Updated heater model.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
- AixLib, #763</a>.
- </li>
- <li>
- April 11, 2016 by Michael Wetter:<br/>
- Corrected wrong hyperlink in documentation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
- </li>
- <li>
- February 22, 2016, by Michael Wetter:<br/>
- Removed parameter <code>dynamicBalance</code> for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">issue 411</a>.
- </li>
- <li>
- April 17, 2015, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model demonstrates the impact of the <code>allowFlowReversal</code> parameter on the size
+of nonlinear systems of equations. The user can change the parameter value in the <code>allowFlowReversal</code>
+block and rerun the simulation. The results are also demonstrated below for <code>nRes.k = 10</code>,
+which is the number of parallel branches containing one pressure drop element and one mixing volume each.
+</p>
+<p>
+This model was created to demonstrate the influence of a new implementation of
+<a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+AixLib.Fluid.Interfaces.ConservationEquation</a>.
+The old implementation used the <code>actualStream()</code> function
+whereas the new implementation uses the <code>semiLinear()</code>
+function. This change allows Dymola to exploit knowledge about the <code>min</code> and <code>max</code> attributes
+of <code>m_flow</code>.
+When Dymola knows in which way the medium will flow, nonlinear systems can be simplified or completely removed.
+This is illustrated by the results below.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/216\">issue 216</a> for a discussion.
+</p>
+<p>
+Note that Dymola 2015FD01 can only reliably solve the last case. For the other
+two cases the Newton solver of the nonlinear system does not converge.
+</p>
+<p>
+These results were generated using Dymola 2015FD01 64 bit on Ubuntu 14.04
+and with <code>Evaluate=false</code>.
+</p>
+<h4>
+ResistanceVolumeFlowReversal = true
+</h4>
+<p>
+Sizes of nonlinear systems of equations: {6, 11, <b>56</b>}<br/>
+Sizes after manipulation of the nonlinear systems: {1, 9, <b>12</b>}
+</p>
+<h4>
+ResistanceVolumeFlowReversal = false
+</h4>
+<p>
+<b>Old implementation</b>
+</p>
+<p>
+Sizes of nonlinear systems of equations: {6, 11, <b>44</b>}<br/>
+Sizes after manipulation of the nonlinear systems: {1, 9, <b>11</b>}
+</p>
+<p>
+<b>New implementation</b>
+</p>
+<p>
+Sizes of nonlinear systems of equations: {6, 11, <b>4</b>}<br/>
+Sizes after manipulation of the nonlinear systems: {1, 9, <b>1</b>}
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 21, 2017, by Michael Wetter:<br/>
+Corrected parameterization to be independent of <code>k</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/825\">
+AixLib, #825</a>.
+</li>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Updated heater model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
+<li>
+April 11, 2016 by Michael Wetter:<br/>
+Corrected wrong hyperlink in documentation for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
+</li>
+<li>
+February 22, 2016, by Michael Wetter:<br/>
+Removed parameter <code>dynamicBalance</code> for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">issue 411</a>.
+</li>
+<li>
+April 17, 2015, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ResistanceVolumeFlowReversal;

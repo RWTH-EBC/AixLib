@@ -55,23 +55,22 @@ equation
           0},{-40,-70},{0,-70}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
- <p>
- This model generates four json files,
- using a single or multiple inputs and at different points in time.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 9, 2019 by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
- </li>
- </ul>
- </html>"),
+<p>
+This model generates four json files,
+using a single or multiple inputs and at different points in time.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 9, 2019 by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
+</li>
+</ul>
+</html>"),
     experiment(
       StopTime=2,
       Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/JSONWriter.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end JSONWriter;

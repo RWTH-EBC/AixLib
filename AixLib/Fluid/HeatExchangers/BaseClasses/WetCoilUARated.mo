@@ -73,7 +73,7 @@ protected
       MediumW.specificHeatCapacityCp(staWat)
     "Isobaric specific heat capacity of water";
   parameter Modelica.Units.SI.SpecificHeatCapacity cpEff(fixed=false, min=0) "Effective specific heat: change in saturated moist air enthalpy with respect to
-     temperature along the saturation line between inlet and outlet water temperatures";
+    temperature along the saturation line between inlet and outlet water temperatures";
   parameter Modelica.Units.SI.SpecificEnthalpy LMED(fixed=false)
     "Log mean enthalpy difference";
   parameter Modelica.Units.SI.MassFlowRate UASta(
@@ -194,23 +194,22 @@ initial equation
         fillPattern=FillPattern.Solid)}), Diagram(
       coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
- <ul>
- <li>
- February 18, 2021 by Donghun Kim:<br/>
- First implementation
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This model calculates the overall heat transfer coefficient, i.e.,
- <i>UA</i>-value, from cooling coil data at rated conditions.
- </p>
- <p>
- The main limitation of the current implementation is that the rated
- conditions should correspond to a fully-dry or a fully-wet coil regime.
- The modeling uncertainty yielded by partially-wet rated conditions
- has not been assessed yet.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 18, 2021 by Donghun Kim:<br/>
+First implementation
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This model calculates the overall heat transfer coefficient, i.e.,
+<i>UA</i>-value, from cooling coil data at rated conditions.
+</p>
+<p>
+The main limitation of the current implementation is that the rated
+conditions should correspond to a fully-dry or a fully-wet coil regime.
+The modeling uncertainty yielded by partially-wet rated conditions
+has not been assessed yet.
+</p>
+</html>"));
 end WetCoilUARated;

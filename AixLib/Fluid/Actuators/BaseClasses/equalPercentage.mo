@@ -37,36 +37,35 @@ algorithm
   end if;
 annotation (
 Documentation(info="<html>
- <p>
- This function computes the opening characteristics of an equal percentage valve.
- </p><p>
- The function is used by the model
- <a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage\">
- AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage</a>.
- </p><p>
- For <code>y &lt; delta/2</code>, the valve characteristics is linear. For <code> y &gt; 3*delta/2</code>
- the valve characteristics is equal percentage. In between, a cubic spline is used to ensure
- that the valve characteristics is once continuously differentiable with respect to <code>y</code>.
- </p>
- </html>",
+<p>
+This function computes the opening characteristics of an equal percentage valve.
+</p><p>
+The function is used by the model
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage\">
+AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage</a>.
+</p><p>
+For <code>y &lt; delta/2</code>, the valve characteristics is linear. For <code> y &gt; 3*delta/2</code>
+the valve characteristics is equal percentage. In between, a cubic spline is used to ensure
+that the valve characteristics is once continuously differentiable with respect to <code>y</code>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 11, 2016 by Michael Wetter:<br/>
- Corrected wrong hyperlink in documentation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
- </li>
- <li>
- March 30, 2011 by Michael Wetter:<br/>
- Added <code>zeroDerivative</code> keyword.
- </li>
- <li>
- June 5, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+April 11, 2016 by Michael Wetter:<br/>
+Corrected wrong hyperlink in documentation for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
+</li>
+<li>
+March 30, 2011 by Michael Wetter:<br/>
+Added <code>zeroDerivative</code> keyword.
+</li>
+<li>
+June 5, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 smoothOrder=1,
-derivative(zeroDerivative=R, zeroDerivative=l, zeroDerivative=delta)=der_equalPercentage,
-  __Dymola_LockedEditing="Model from IBPSA");
+derivative(zeroDerivative=R, zeroDerivative=l, zeroDerivative=delta)=der_equalPercentage);
 end equalPercentage;

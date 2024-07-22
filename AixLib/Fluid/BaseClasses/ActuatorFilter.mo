@@ -83,28 +83,27 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}})),
     Documentation(info="<html>
- <p>
- This block implements a filter that is used to approximate the actuators
- of valves, dampers and fans.
- </p>
- <h4>Implementation</h4>
- <p>
- The implementation is based on
- <a href=\"modelica://Modelica.Blocks.Continuous.CriticalDamping\">
- Modelica.Blocks.Continuous.CriticalDamping</a>.
- It differs from that model in that the internal state of the filter <code>s</code>
- is transformed using <code>x = u_nominal*s</code>.
- It turns out that this transformation leads to smaller system of nonlinear equations if <code>u_nominal &ne; 0</code>, see
- <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498#issuecomment-885020611\">IBPSA, #1498</a>
- for a discussion.
- </html>",revisions="<html>
- <ul>
- <li>
- July 22, 2021, by Michael Wetter:<br/>
- First implementation for
- <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA, #1498</a>
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This block implements a filter that is used to approximate the actuators
+of valves, dampers and fans.
+</p>
+<h4>Implementation</h4>
+<p>
+The implementation is based on
+<a href=\"modelica://Modelica.Blocks.Continuous.CriticalDamping\">
+Modelica.Blocks.Continuous.CriticalDamping</a>.
+It differs from that model in that the internal state of the filter <code>s</code>
+is transformed using <code>x = u_nominal*s</code>.
+It turns out that this transformation leads to smaller system of nonlinear equations if <code>u_nominal &ne; 0</code>, see
+<a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498#issuecomment-885020611\">IBPSA, #1498</a>
+for a discussion.
+</html>", revisions="<html>
+<ul>
+<li>
+July 22, 2021, by Michael Wetter:<br/>
+First implementation for
+<a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA, #1498</a>
+</li>
+</ul>
+</html>"));
 end ActuatorFilter;

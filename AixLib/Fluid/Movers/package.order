@@ -5,6 +5,7 @@ SpeedControlled_Nrpm
 SpeedControlled_y
 Compressors
 DpControlledMovers
+Preconfigured
 PumpsPolynomialBased
 Data
 Examples

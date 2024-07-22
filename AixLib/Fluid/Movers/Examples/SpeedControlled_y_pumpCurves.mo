@@ -162,41 +162,40 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/SpeedControlled_y_pumpCurves.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example demonstrates how the pump curves changes for different (constant) input
- signal <code>y</code>.
- If <code>y &ge; delta = 0.05</code>, the pump curves are polynomials.
- For <code>y &lt; delta = 0.05</code>, the pump curves convert to linear functions to
- avoid a singularity at the origin.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 2, 2016, by Michael Wetter:<br/>
- Changed the valve opening signal to not take on zero as otherwise <code>pum.port_a.p</code>
- is negative, violating the <code>min</code> attribute on the pressure variable.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
- </li>
- <li>
- March 11, 2016, by Michael Wetter:<br/>
- Reformulated model for OpenModelica.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- June 14, 2015, by Filip Jorissen:<br/>
- Set constant speed for pump using a <code>parameter</code>
- instead of a <code>realInput</code>.
- </li>
- <li>March 24 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates how the pump curves changes for different (constant) input
+signal <code>y</code>.
+If <code>y &ge; delta = 0.05</code>, the pump curves are polynomials.
+For <code>y &lt; delta = 0.05</code>, the pump curves convert to linear functions to
+avoid a singularity at the origin.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 2, 2016, by Michael Wetter:<br/>
+Changed the valve opening signal to not take on zero as otherwise <code>pum.port_a.p</code>
+is negative, violating the <code>min</code> attribute on the pressure variable.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+</li>
+<li>
+March 11, 2016, by Michael Wetter:<br/>
+Reformulated model for OpenModelica.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+June 14, 2015, by Filip Jorissen:<br/>
+Set constant speed for pump using a <code>parameter</code>
+instead of a <code>realInput</code>.
+</li>
+<li>March 24 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SpeedControlled_y_pumpCurves;

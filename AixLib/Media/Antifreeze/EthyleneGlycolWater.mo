@@ -69,20 +69,20 @@ package EthyleneGlycolWater
 
   equation
   assert(T >= T_min, "
- In "  + getInstanceName() + ": Temperature T exceeded its minimum allowed value of " + String(T_min-273.15)
+In "   + getInstanceName() + ": Temperature T exceeded its minimum allowed value of " + String(T_min-273.15)
     + " degC (" + String(T_min) + " Kelvin)
- as required from medium model \""+ mediumName + "\".");
+as required from medium model \"" + mediumName + "\".");
   assert(T <= T_max, "
- In "  + getInstanceName() + ": Temperature T exceeded its maximum allowed value of " + String(T_max-273.15)
+In "   + getInstanceName() + ": Temperature T exceeded its maximum allowed value of " + String(T_max-273.15)
     + " degC (" + String(T_max) + " Kelvin)
- as required from medium model \""+ mediumName + "\".");
+as required from medium model \"" + mediumName + "\".");
 
   assert(X_a >= X_a_min, "
- In "  + getInstanceName() + ": Mass fraction x_a exceeded its minimum allowed value of " + String(X_a_min) + "
- as required from medium model \""+ mediumName + "\".");
+In "   + getInstanceName() + ": Mass fraction x_a exceeded its minimum allowed value of " + String(X_a_min) + "
+as required from medium model \"" + mediumName + "\".");
   assert(X_a <= X_a_max, "
- In "  + getInstanceName() + ": Mass fraction x_a exceeded its maximum allowed value of " + String(X_a_max) + "
- as required from medium model \""+ mediumName + "\".");
+In "   + getInstanceName() + ": Mass fraction x_a exceeded its maximum allowed value of " + String(X_a_max) + "
+as required from medium model \"" + mediumName + "\".");
 
     h = cp_const*(T-reference_T);
     u = h;
@@ -90,18 +90,18 @@ package EthyleneGlycolWater
     state.p = p;
 
     annotation(Documentation(info="<html>
-     <p>
-     This base properties model is identical to
-     <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
-     Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
-     except that the equation
-     <code>u = cv_const*(T - reference_T)</code>
-     has been replaced by <code>u=h</code> because
-     <code>cp_const=cv_const</code>.
-     Also, the model checks if the mass fraction of the mixture is within the
-     allowed limits.
-     </p>
- </html>"));
+    <p>
+    This base properties model is identical to
+    <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
+    Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
+    except that the equation
+    <code>u = cv_const*(T - reference_T)</code>
+    has been replaced by <code>u=h</code> because
+    <code>cp_const=cv_const</code>.
+    Also, the model checks if the mass fraction of the mixture is within the
+    allowed limits.
+    </p>
+</html>"));
   end BaseProperties;
 protected
   constant Modelica.Units.SI.MassFraction X_a_min=0.
@@ -156,28 +156,28 @@ protected
         proCoe.a_d)
     annotation (
     Documentation(info="<html>
-   <p>
-   Density of propylene antifreeze-water mixture at specified mass fraction
-   and temperature, based on Melinder (2010).
-   </p>
-   <h4>References</h4>
-   <p>
-   Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-   Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-   IIR/IIF.
-   </p>
-   </html>",
+  <p>
+  Density of propylene antifreeze-water mixture at specified mass fraction
+  and temperature, based on Melinder (2010).
+  </p>
+  <h4>References</h4>
+  <p>
+  Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+  Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+  IIR/IIF.
+  </p>
+  </html>",
   revisions="<html>
-   <ul>
-   <li>
-   May 2, 2018 by Massimo Cimmino:<br/>
-   First implementation.
-   This function is used by
-   <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
-   AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
-   </li>
-   </ul>
-   </html>"));
+  <ul>
+  <li>
+  May 2, 2018 by Massimo Cimmino:<br/>
+  First implementation.
+  This function is used by
+  <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
+  AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
+  </li>
+  </ul>
+  </html>"));
 
   end density_TX_a;
 
@@ -197,27 +197,27 @@ protected
 
   annotation (
   Documentation(info="<html>
- <p>
- Dynamic viscosity of antifreeze-water mixture at specified mass fraction and
- temperature, based on Melinder (2010).
- </p>
- <h4>References</h4>
- <p>
- Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
- Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
- IIR/IIF.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- May 2, 2018 by Massimo Cimmino:<br/>
- First implementation.
- This function is used by
- <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
- AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Dynamic viscosity of antifreeze-water mixture at specified mass fraction and
+temperature, based on Melinder (2010).
+</p>
+<h4>References</h4>
+<p>
+Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+IIR/IIF.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+May 2, 2018 by Massimo Cimmino:<br/>
+First implementation.
+This function is used by
+<a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
+AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
+</li>
+</ul>
+</html>"));
   end dynamicViscosity_TX_a;
 
   replaceable function fusionTemperature_TX_a
@@ -236,27 +236,27 @@ protected
 
   annotation (
   Documentation(info="<html>
- <p>
- Fusion temperature of antifreeze-water mixture at specified mass fraction and
- temperature, based on Melinder (2010).
- </p>
- <h4>References</h4>
- <p>
- Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
- Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
- IIR/IIF.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- May 2, 2018 by Massimo Cimmino:<br/>
- First implementation.
- This function is used by
- <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
- AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Fusion temperature of antifreeze-water mixture at specified mass fraction and
+temperature, based on Melinder (2010).
+</p>
+<h4>References</h4>
+<p>
+Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+IIR/IIF.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+May 2, 2018 by Massimo Cimmino:<br/>
+First implementation.
+This function is used by
+<a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
+AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
+</li>
+</ul>
+</html>"));
   end fusionTemperature_TX_a;
 
   replaceable function polynomialProperty
@@ -287,41 +287,41 @@ protected
     end for;
   annotation (
   Documentation(info="<html>
- <p>
- Evaluates a thermophysical property of a mixture, based on correlations proposed
- by Melinder (2010).
- </p>
- <p>
- The polynomial has the form
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup>
- + a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup>
- + ... +
- a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup>
- + ... +
- a<sub>ny[1])+1</sub> (x-xm)<sup>1</sup>(y-ym)<sup>0</sup>
- + ... +
- a<sub>ny[1]+ny[2]</sub> (x-xm)<sup>1</sup>(y-ym)<sup>ny[2]-1</sup>
- + ...
- </p>
- <h4>References</h4>
- <p>
- Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
- Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
- IIR/IIF.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- March 16, 2018 by Massimo Cimmino:<br/>
- First implementation.
- This function is used models in
- <a href=\"modelica://AixLib.Media.Antifreeze\">
- AixLib.Media.Antifreeze</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Evaluates a thermophysical property of a mixture, based on correlations proposed
+by Melinder (2010).
+</p>
+<p>
+The polynomial has the form
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup>
++ a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup>
++ ... +
+a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup>
++ ... +
+a<sub>ny[1])+1</sub> (x-xm)<sup>1</sup>(y-ym)<sup>0</sup>
++ ... +
+a<sub>ny[1]+ny[2]</sub> (x-xm)<sup>1</sup>(y-ym)<sup>ny[2]-1</sup>
++ ...
+</p>
+<h4>References</h4>
+<p>
+Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+IIR/IIF.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+March 16, 2018 by Massimo Cimmino:<br/>
+First implementation.
+This function is used models in
+<a href=\"modelica://AixLib.Media.Antifreeze\">
+AixLib.Media.Antifreeze</a>.
+</li>
+</ul>
+</html>"));
   end polynomialProperty;
 
   replaceable function specificHeatCapacityCp_TX_a
@@ -340,27 +340,27 @@ protected
 
   annotation (
   Documentation(info="<html>
- <p>
- Specific heat capacity of antifreeze-water mixture at specified mass fraction
- and temperature, based on Melinder (2010).
- </p>
- <h4>References</h4>
- <p>
- Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
- Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
- IIR/IIF.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- March 16, 2018 by Massimo Cimmino:<br/>
- First implementation.
- This function is used by
- <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
- AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Specific heat capacity of antifreeze-water mixture at specified mass fraction
+and temperature, based on Melinder (2010).
+</p>
+<h4>References</h4>
+<p>
+Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+IIR/IIF.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+March 16, 2018 by Massimo Cimmino:<br/>
+First implementation.
+This function is used by
+<a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
+AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
+</li>
+</ul>
+</html>"));
   end specificHeatCapacityCp_TX_a;
 
   replaceable function thermalConductivity_TX_a
@@ -379,96 +379,95 @@ protected
 
   annotation (
   Documentation(info="<html>
- <p>
- Thermal conductivity of antifreeze-water mixture at specified mass fraction and
- temperature, based on Melinder (2010).
- </p>
- <h4>References</h4>
- <p>
- Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
- Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
- IIR/IIF.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- March 16, 2018 by Massimo Cimmino:<br/>
- First implementation.
- This function is used by
- <a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
- AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Thermal conductivity of antifreeze-water mixture at specified mass fraction and
+temperature, based on Melinder (2010).
+</p>
+<h4>References</h4>
+<p>
+Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
+Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
+IIR/IIF.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+March 16, 2018 by Massimo Cimmino:<br/>
+First implementation.
+This function is used by
+<a href=\"modelica://AixLib.Media.Antifreeze.EthyleneGlycolWater\">
+AixLib.Media.Antifreeze.EthyleneGlycolWater</a>.
+</li>
+</ul>
+</html>"));
   end thermalConductivity_TX_a;
 annotation(preferredView="info", Documentation(info="<html>
- <p>
- This medium package models ethylene glycol - water mixtures.
- </p>
- <p>
- The mass density, specific heat capacity, thermal conductivity and viscosity
- are assumed constant and evaluated at a set temperature and mass fraction of
- ethylene glycol within the mixture. The dependence of the four properties
- are shown on the figure below.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterProperties.png\" border=\"1\"
- alt=\"Relative variation of specific heat capacity with temperature\"/>
- </p>
- <p>
- The accuracy of the thermophysical properties is dependent on the temperature
- variations encountered during simulations.
- The figure below shows the relative error of the the four properties over a
- <i>10</i> &deg;C range around the temperature used to evaluate the constant
- properties. The maximum errors are <i>0.8</i> % for mass density, <i>2.7</i> %
- for specific heat capacity, <i>3.2</i> % for thermal conductivity and <i>160</i>
- % for dynamic viscosity.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterError10degC.png\" border=\"1\"
- alt=\"Relative variation of specific heat capacity with temperature\"/>
- </p>
- <p>
- The figure below shows the relative error of the the four properties over a
- <i>20</i> &deg;C range around the temperature used to evaluate the constant
- proepties. The maximum errors are <i>1.5</i> % for mass density, <i>5.3</i> %
- for specific heat capacity, <i>5.9</i> % for thermal conductivity and <i>500</i>
- % for dynamic viscosity.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterError20degC.png\" border=\"1\"
- alt=\"Relative variation of specific heat capacity with temperature\"/>
- </p>
- <p>
- The enthalpy is computed using the convention that <i>h=0</i>
- if <i>T=0</i> &deg;C.
- </p>
- <h4>Limitations</h4>
- <p>
- Density, specific heat capacity, thermal conductivity and viscosity are constant.
- The ethylene glycol/water mixture is modeled as an incompressible liquid.
- There are no phase changes. The medium is limited to temperatures below
- <i>100</i> &deg;C and mass fractions below <i>0.60</i>.
- As is the case for <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>,
- this medium package should not be used if
- the simulation relies on the dynamic viscosity.
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- The temperature and mass fraction must be specified for the evaluation of the
- constant thermophysical properties. A typical use of the package is (e.g. for
- a temperature of <i>20</i> &deg;C and a mass fraction of <i>0.40</i>):
- </p>
- <p>
- <code>Medium = AixLib.Media.Antifreeze.EthyleneGlycolWater(property_T=293.15, X_a=0.40)</code>
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 05, 2020, by Wen HU:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This medium package models ethylene glycol - water mixtures.
+</p>
+<p>
+The mass density, specific heat capacity, thermal conductivity and viscosity
+are assumed constant and evaluated at a set temperature and mass fraction of
+ethylene glycol within the mixture. The dependence of the four properties
+are shown on the figure below.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterProperties.png\" border=\"1\"
+alt=\"Relative variation of specific heat capacity with temperature\"/>
+</p>
+<p>
+The accuracy of the thermophysical properties is dependent on the temperature
+variations encountered during simulations.
+The figure below shows the relative error of the the four properties over a
+<i>10</i> &deg;C range around the temperature used to evaluate the constant
+properties. The maximum errors are <i>0.8</i> % for mass density, <i>2.7</i> %
+for specific heat capacity, <i>3.2</i> % for thermal conductivity and <i>160</i>
+% for dynamic viscosity.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterError10degC.png\" border=\"1\"
+alt=\"Relative variation of specific heat capacity with temperature\"/>
+</p>
+<p>
+The figure below shows the relative error of the the four properties over a
+<i>20</i> &deg;C range around the temperature used to evaluate the constant
+proepties. The maximum errors are <i>1.5</i> % for mass density, <i>5.3</i> %
+for specific heat capacity, <i>5.9</i> % for thermal conductivity and <i>500</i>
+% for dynamic viscosity.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/EthyleneGlycolWaterError20degC.png\" border=\"1\"
+alt=\"Relative variation of specific heat capacity with temperature\"/>
+</p>
+<p>
+The enthalpy is computed using the convention that <i>h=0</i>
+if <i>T=0</i> &deg;C.
+</p>
+<h4>Limitations</h4>
+<p>
+Density, specific heat capacity, thermal conductivity and viscosity are constant.
+The ethylene glycol/water mixture is modeled as an incompressible liquid.
+There are no phase changes. The medium is limited to temperatures below
+<i>100</i> &deg;C and mass fractions below <i>0.60</i>.
+As is the case for <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>,
+this medium package should not be used if
+the simulation relies on the dynamic viscosity.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+The temperature and mass fraction must be specified for the evaluation of the
+constant thermophysical properties. A typical use of the package is (e.g. for
+a temperature of <i>20</i> &deg;C and a mass fraction of <i>0.40</i>):
+</p>
+<p>
+<code>Medium = AixLib.Media.Antifreeze.EthyleneGlycolWater(property_T=293.15, X_a=0.40)</code>
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 05, 2020, by Wen HU:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end EthyleneGlycolWater;

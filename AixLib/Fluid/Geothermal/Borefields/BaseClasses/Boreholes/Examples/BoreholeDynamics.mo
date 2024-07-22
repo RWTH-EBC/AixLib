@@ -14,7 +14,6 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
     borFieDat=borFieUTubDat,
     m_flow_nominal=borFieUTubDat.conDat.mBor_flow_nominal,
     dp_nominal=borFieUTubDat.conDat.dp_nominal,
-    dynFil=true,
     nSeg=nSeg,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TGro_start = {T_start for i in 1:nSeg},
@@ -43,7 +42,7 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
   parameter
     AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example
     borFieUTubDat "Borefield parameters with UTube borehole configuration"
-    annotation (Placement(transformation(extent={{80,20},{100,40}})));
+    annotation (Placement(transformation(extent={{90,40},{110,60}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TBorIn(m_flow_nominal=borFieUTubDat.conDat.mBor_flow_nominal,
     redeclare package Medium = Medium,
     tau=0)
@@ -68,10 +67,9 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
         origin={-98,90})));
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube borHolOneUTubSteSta(
     redeclare package Medium = Medium,
-    borFieDat=borFieUTubDat,
-    m_flow_nominal=borFieUTubDat.conDat.mBor_flow_nominal,
-    dp_nominal=borFieUTubDat.conDat.dp_nominal,
-    dynFil=false,
+    borFieDat=borFieUTubDatSteSta,
+    m_flow_nominal=borFieUTubDatSteSta.conDat.mBor_flow_nominal,
+    dp_nominal=borFieUTubDatSteSta.conDat.dp_nominal,
     nSeg=nSeg,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     TGro_start = {T_start for i in 1:nSeg},
@@ -117,7 +115,6 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.TwoUTube borHol2UTubDyn(
     redeclare package Medium = Medium,
     dp_nominal=borFie2UTubDat.conDat.dp_nominal,
-    dynFil=true,
     m_flow_nominal=borFie2UTubDat.conDat.mBor_flow_nominal,
     borFieDat=borFie2UTubDat,
     nSeg=nSeg,
@@ -145,13 +142,11 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
     p=101330,
     T=283.15) "Sink" annotation (Placement(transformation(extent={{80,-70},{60,-50}},
                   rotation=0)));
-  parameter
-    AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example
-    borFie2UTubDat(conDat=
-        AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Example(
-         borCon=AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel))
+  parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example borFie2UTubDat(
+    conDat=AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Example(
+      borCon=AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel))
     "Borefield parameters with UTube borehole configuration"
-    annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
+    annotation (Placement(transformation(extent={{90,-80},{110,-60}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TBorIn2(redeclare package Medium =
         Medium, m_flow_nominal=borFie2UTubDat.conDat.mBor_flow_nominal,
     tau=0)
@@ -171,10 +166,9 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
 
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.TwoUTube borHol2UTubSteSta(
     redeclare package Medium = Medium,
-    dp_nominal=borFie2UTubDat.conDat.dp_nominal,
-    dynFil=false,
-    m_flow_nominal=borFie2UTubDat.conDat.mBor_flow_nominal,
-    borFieDat=borFie2UTubDat,
+    dp_nominal=borFie2UTubDatSteSta.conDat.dp_nominal,
+    m_flow_nominal=borFie2UTubDatSteSta.conDat.mBor_flow_nominal,
+    borFieDat=borFie2UTubDatSteSta,
     nSeg=nSeg,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     TGro_start = {T_start for i in 1:nSeg},
@@ -230,6 +224,18 @@ model BoreholeDynamics "Example model for different borehole models and dynamics
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature3
     annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
+  parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example borFieUTubDatSteSta(filDat=
+        AixLib.Fluid.Geothermal.Borefields.Data.Filling.Bentonite(
+        steadyState=true))
+    "Borefield parameters with UTube borehole configuration and steady-state filling"
+    annotation (Placement(transformation(extent={{90,0},{110,20}})));
+  parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example borFie2UTubDatSteSta(
+    filDat=AixLib.Fluid.Geothermal.Borefields.Data.Filling.Bentonite(
+        steadyState=true),
+    conDat=AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Example(
+        borCon=AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel))
+    "Borefield parameters with UTube borehole configuration and steady-state filling"
+    annotation (Placement(transformation(extent={{90,-120},{110,-100}})));
 equation
   connect(sou.ports[1],TBorIn. port_a)
     annotation (Line(points={{-48,60},{-40,60}},
@@ -294,21 +300,26 @@ equation
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeDynamics.mos"
         "Simulate and Plot"),
         Documentation(info="<html>
- <p>
- This example illustrates different borehole models using different mass
- and energy dynamics.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 10, 2018, by Alex Laferri&egrave;re:<br/>
- Removed ground heat transfer models so the example focuses on the boreholes.
- </li>
- <li>
- February, 2018, by Damien Picard:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example illustrates different borehole models using different mass
+and energy dynamics.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 17, 2024, by Michael Wetter:<br/>
+Updated model due to removal of parameter <code>dynFil</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1885\">IBPSA, #1885</a>.
+</li>
+<li>
+July 10, 2018, by Alex Laferri&egrave;re:<br/>
+Removed ground heat transfer models so the example focuses on the boreholes.
+</li>
+<li>
+February, 2018, by Damien Picard:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end BoreholeDynamics;

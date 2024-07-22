@@ -104,28 +104,27 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
- <p>
- Model that demonstrates the temperature protection implementation of the
- <a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
- AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
- </p>
- <p>
- The heat pump is disabled when the evaporator and condenser temperature
- requirements are not satisfied.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- May 30, 2017, by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that demonstrates the temperature protection implementation of the
+<a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
+AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model.
+</p>
+<p>
+The heat pump is disabled when the evaporator and condenser temperature
+requirements are not satisfied.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+May 30, 2017, by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
+</li>
+</ul>
+</html>"));
 end ScrollWaterToWater_TemperatureProtection;

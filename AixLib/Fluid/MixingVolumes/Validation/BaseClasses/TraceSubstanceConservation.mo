@@ -104,23 +104,22 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation (    Documentation(info="<html>
- <p>
- This model is reconfigured to a steady state or
- dynamic check for conservation of trace substances.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 12, 2017, by Michael Wetter:<br/>
- Removed temperature connection that is no longer needed.<br/>
- This is for issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
- </li>
- <li>
- May 22 2015 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model is reconfigured to a steady state or
+dynamic check for conservation of trace substances.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 12, 2017, by Michael Wetter:<br/>
+Removed temperature connection that is no longer needed.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+May 22 2015 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end TraceSubstanceConservation;

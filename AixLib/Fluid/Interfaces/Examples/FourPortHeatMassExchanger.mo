@@ -59,20 +59,19 @@ equation
   connect(ram_T.y, sou1.T_in) annotation (Line(points={{-69,0},{-66,0},{-66,14},
           {-62,14}},     color={0,0,127}));
   annotation (    Documentation(info="<html>
- <p>
- This example model demonstrates the used of the
- <a href=\"modelica://AixLib.Fluid.Interfaces.FourPortHeatMassExchanger\">FourPortHeatMassExchanger</a> model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 2, 2017, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example model demonstrates the used of the
+<a href=\"modelica://AixLib.Fluid.Interfaces.FourPortHeatMassExchanger\">FourPortHeatMassExchanger</a> model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 2, 2017, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=5),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/FourPortHeatMassExchanger.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end FourPortHeatMassExchanger;

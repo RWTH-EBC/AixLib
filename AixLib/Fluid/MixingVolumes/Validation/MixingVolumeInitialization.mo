@@ -55,24 +55,23 @@ experiment(StopTime=0.001,
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeInitialization.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the initialization of the mixing volume.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 24, 2013 by Michael Wetter:<br/>
- Set <code>flowModel(m_flow_nominal=2)</code> in the pipe models to
- avoid a cyclic definition of
- <code>pipe1.flowModel.m_flow_nominal</code>
- and
- <code>pipe2.flowModel.m_flow_nominal</code>.
- </li>
- <li>
- October 12, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the initialization of the mixing volume.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 24, 2013 by Michael Wetter:<br/>
+Set <code>flowModel(m_flow_nominal=2)</code> in the pipe models to
+avoid a cyclic definition of
+<code>pipe1.flowModel.m_flow_nominal</code>
+and
+<code>pipe2.flowModel.m_flow_nominal</code>.
+</li>
+<li>
+October 12, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end MixingVolumeInitialization;

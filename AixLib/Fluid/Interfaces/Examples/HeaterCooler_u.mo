@@ -488,47 +488,46 @@ experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/HeaterCooler_u.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>Model that tests the basic class that is used for the heater models.
- It adds and removes heat for forward and reverse flow.
- The top and bottom models should give similar results,
- although the sign of the temperature difference over the components
- differ because of the reverse flow.
- The model computes differences in results that are expected to be
- close to each other after the initial transients decayed.
- All temperature sensors are configured as steady-state sensors to avoid
- differences in temperature due to the dynamic response of the sensor.
- </p>
- </html>",
+<p>Model that tests the basic class that is used for the heater models.
+It adds and removes heat for forward and reverse flow.
+The top and bottom models should give similar results,
+although the sign of the temperature difference over the components
+differ because of the reverse flow.
+The model computes differences in results that are expected to be
+close to each other after the initial transients decayed.
+All temperature sensors are configured as steady-state sensors to avoid
+differences in temperature due to the dynamic response of the sensor.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference,
- and added the difference to the regression results.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- May 30, 2014, by Michael Wetter:<br/>
- Changed initialization of mass dynamics to avoid overspecified system
- of equations if the medium model is incompressible.
- </li>
- <li>
- January 24, 2013, by Michael Wetter:<br/>
- Increased parameter <code>startTime</code> of the assert block
- and set initial conditions to
- <code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
- </li>
- <li>
- July 11, 2011, by Michael Wetter:<br/>
- Changed model to sensors with two fluid ports.
- Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
- </li>
- <li>
- April 17, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+May 30, 2014, by Michael Wetter:<br/>
+Changed initialization of mass dynamics to avoid overspecified system
+of equations if the medium model is incompressible.
+</li>
+<li>
+January 24, 2013, by Michael Wetter:<br/>
+Increased parameter <code>startTime</code> of the assert block
+and set initial conditions to
+<code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
+</li>
+<li>
+July 11, 2011, by Michael Wetter:<br/>
+Changed model to sensors with two fluid ports.
+Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
+</li>
+<li>
+April 17, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end HeaterCooler_u;

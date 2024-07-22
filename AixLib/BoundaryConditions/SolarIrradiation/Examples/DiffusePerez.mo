@@ -62,22 +62,21 @@ experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DiffusePerez.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of Perez' model for diffuse solar radiation.
- The three instances of Perez' model compute the diffuse solar
- irradiation on a roof, a wall and a floor.
- Since the floor only sees the ground but not the radiative heat flow that is
- scattered in the atmosphere, it receives the lowest amount of
- diffuse solar irradiation.
- </p>
- </html>",
+<p>
+This model tests the implementation of Perez' model for diffuse solar radiation.
+The three instances of Perez' model compute the diffuse solar
+irradiation on a roof, a wall and a floor.
+Since the floor only sees the ground but not the radiative heat flow that is
+scattered in the atmosphere, it receives the lowest amount of
+diffuse solar irradiation.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 24, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+May 24, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end DiffusePerez;

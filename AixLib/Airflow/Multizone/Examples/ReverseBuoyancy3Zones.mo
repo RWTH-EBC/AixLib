@@ -209,45 +209,44 @@ experiment(Tolerance=1e-06, StopTime=3600),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/ReverseBuoyancy3Zones.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
- <ul>
- <li>
- March 26, 2021 by Michael Wetter:<br/>
- Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
- </li>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- November 10, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This model is similar than
- <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
- AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
- However, the initial temperatures are such that at the start of the
- simulation, the flow direction between the three rooms reverses direction.
- </p>
- <p>
- At the start of the simulation,
- the outdoor temperature is <i>15</i>&deg;C,
- and the temperatures of the volumes are
- <i>20</i>&deg;C at the top,
- <i>22</i>&deg;C at the bottom west and
- <i>25</i>&deg;C at the bottom east.
- Thus, initially there is a net flow circulation in the counter-clock
- direction.
- Because the volume on the east exchanges air with the outside,
- it cools down fast. Once it cooled down sufficiently,
- the flow direction between the three rooms reverses
- because the air in the bottom east is heaviest.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 26, 2021 by Michael Wetter:<br/>
+Updated comments for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+</li>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+November 10, 2011, by Michael Wetter:<br/>
+Added documentation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This model is similar than
+<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
+However, the initial temperatures are such that at the start of the
+simulation, the flow direction between the three rooms reverses direction.
+</p>
+<p>
+At the start of the simulation,
+the outdoor temperature is <i>15</i>&deg;C,
+and the temperatures of the volumes are
+<i>20</i>&deg;C at the top,
+<i>22</i>&deg;C at the bottom west and
+<i>25</i>&deg;C at the bottom east.
+Thus, initially there is a net flow circulation in the counter-clock
+direction.
+Because the volume on the east exchanges air with the outside,
+it cools down fast. Once it cooled down sufficiently,
+the flow direction between the three rooms reverses
+because the air in the bottom east is heaviest.
+</p>
+</html>"));
 end ReverseBuoyancy3Zones;

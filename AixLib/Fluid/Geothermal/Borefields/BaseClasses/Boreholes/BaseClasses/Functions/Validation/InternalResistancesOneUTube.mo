@@ -57,7 +57,8 @@ initial equation
       kMed=kMed,
       muMed=muMed,
       cpMed=cpMed,
-      m_flow_nominal=m_flow_nominal);
+      m_flow_nominal=m_flow_nominal,
+      instanceName=getInstanceName());
 
   annotation (
     __Dymola_Commands(file=
@@ -65,20 +66,26 @@ initial equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=1.0),
     Documentation(info="<html>
- <p>
- This example validates the implementation of
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube</a>
- for the evaluation of the internal thermal resistances of a single U-tube
- borehole.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 21, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example validates the implementation of
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube</a>
+for the evaluation of the internal thermal resistances of a single U-tube
+borehole.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 22, 2023, by Michael Wetter:<br/>
+Corrected use of <code>getInstanceName()</code> which was called inside a function which
+is not allowed.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1814\">IBPSA, #1814</a>.
+</li>
+<li>
+June 21, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end InternalResistancesOneUTube;

@@ -9,21 +9,20 @@ block LimiterWindSpeed "Block that limits the wind speed"
   annotation (
 defaultComponentName="limMin",
 Documentation(info="<html>
- <p>
- Block that limits the wind speed to be positive.
- </p>
- <p>
- This block is used because interpolation of weather data can lead to slightly
- negative values.
- </p>
- </html>",
+<p>
+Block that limits the wind speed to be positive.
+</p>
+<p>
+This block is used because interpolation of weather data can lead to slightly
+negative values.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end LimiterWindSpeed;

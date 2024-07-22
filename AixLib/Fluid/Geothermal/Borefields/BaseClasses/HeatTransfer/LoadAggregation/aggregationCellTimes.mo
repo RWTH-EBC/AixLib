@@ -32,23 +32,22 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- <p>Simultaneously constructs both the <code>nu</code> vector, which is the
- aggregation time of each cell, and the <code>rCel</code> vector, which
- is the temporal size of each cell normalized with the time resolution of load
- aggregation <code>tLoaAgg</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 15, 2018, by Michael Wetter:<br/>
- Added <code>min=Modelica.Constants.small</code> to <code>tLoaAgg</code>
- so that a tool can infer that this quantity is non-zero.
- </li>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>Simultaneously constructs both the <code>nu</code> vector, which is the
+aggregation time of each cell, and the <code>rCel</code> vector, which
+is the temporal size of each cell normalized with the time resolution of load
+aggregation <code>tLoaAgg</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 15, 2018, by Michael Wetter:<br/>
+Added <code>min=Modelica.Constants.small</code> to <code>tLoaAgg</code>
+so that a tool can infer that this quantity is non-zero.
+</li>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end aggregationCellTimes;

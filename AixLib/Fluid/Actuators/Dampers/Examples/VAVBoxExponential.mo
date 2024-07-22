@@ -74,25 +74,24 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=240),
 Documentation(info="<html>
- <p>
- Test model for the variable air volume flow box.
- The model has two flow legs, both are connected to models for constant inlet and outlet
- pressures.
- The top flow leg has a flow resistance and an air damper, and
- the bottom flow leg combines both of these resistances into one model.
- Both flow legs have identical mass flow rates, except at very small
- flow rates. The reason for this difference is that the equations
- are regularized for numerical reasons, and combining the two components
- within one component leads to a slightly different equation for the
- regularization.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 20, 2007 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for the variable air volume flow box.
+The model has two flow legs, both are connected to models for constant inlet and outlet
+pressures.
+The top flow leg has a flow resistance and an air damper, and
+the bottom flow leg combines both of these resistances into one model.
+Both flow legs have identical mass flow rates, except at very small
+flow rates. The reason for this difference is that the equations
+are regularized for numerical reasons, and combining the two components
+within one component leads to a slightly different equation for the
+regularization.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 20, 2007 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end VAVBoxExponential;

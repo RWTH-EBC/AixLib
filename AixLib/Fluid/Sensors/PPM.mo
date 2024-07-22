@@ -70,59 +70,58 @@ annotation (defaultComponentName="senPPM",
           textColor={0,0,0},
           textString=DynamicSelect("", String(ppm, leftJustified=false, significantDigits=3)))}),
   Documentation(info="<html>
- <p>
- This model outputs the trace substance concentration in ppm contained in the fluid connected to its port.
- The sensor is ideal, i.e., it does not influence the fluid.
- </p>
- <p>
- The parameter <code>MM</code> is the molar mass of the trace substance.
- For a list of molar masses, see
- <a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">
- Modelica.Media.IdealGases.Common.SingleGasesData</a>
- and
- <a href=\"modelica://Modelica.Media.IdealGases.Common.FluidData\">
- Modelica.Media.IdealGases.Common.FluidData</a>.
- </p>
- <p>
- To measure PPM in a duct or pipe, use
- <a href=\"modelica://AixLib.Fluid.Sensors.PPMTwoPort\">AixLib.Fluid.Sensors.PPMTwoPort</a>
- rather than this sensor.
- Read the
- <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
- AixLib.Fluid.Sensors.UsersGuide</a>
- prior to using this model to see about potential numerical problems if this sensor is used incorrectly
- in a system model.
- </p>
- <h4>Assumptions</h4>
- <p>
- This sensor assumes that the concentration <i>C</i> of the medium
- is in mass fraction. Otherwise, the conversion to <i>ppm</i> will be
- wrong.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 21, 2020, by Michael Wetter:<br/>
- Introduced parameter <code>warnAboutOnePortConnection</code> and updated documentation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\">#1399</a>.
- </li>
- <li>
- February 25, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- December 16, 2015, by Michael Wetter:<br/>
- Revised implementation, corrected error in the molar fraction which
- used the inverse ratio.
- </li>
- <li>
- December 2, 2015, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model outputs the trace substance concentration in ppm contained in the fluid connected to its port.
+The sensor is ideal, i.e., it does not influence the fluid.
+</p>
+<p>
+The parameter <code>MM</code> is the molar mass of the trace substance.
+For a list of molar masses, see
+<a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">
+Modelica.Media.IdealGases.Common.SingleGasesData</a>
+and
+<a href=\"modelica://Modelica.Media.IdealGases.Common.FluidData\">
+Modelica.Media.IdealGases.Common.FluidData</a>.
+</p>
+<p>
+To measure PPM in a duct or pipe, use
+<a href=\"modelica://AixLib.Fluid.Sensors.PPMTwoPort\">AixLib.Fluid.Sensors.PPMTwoPort</a>
+rather than this sensor.
+Read the
+<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+AixLib.Fluid.Sensors.UsersGuide</a>
+prior to using this model to see about potential numerical problems if this sensor is used incorrectly
+in a system model.
+</p>
+<h4>Assumptions</h4>
+<p>
+This sensor assumes that the concentration <i>C</i> of the medium
+is in mass fraction. Otherwise, the conversion to <i>ppm</i> will be
+wrong.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 21, 2020, by Michael Wetter:<br/>
+Introduced parameter <code>warnAboutOnePortConnection</code> and updated documentation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\">#1399</a>.
+</li>
+<li>
+February 25, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+December 16, 2015, by Michael Wetter:<br/>
+Revised implementation, corrected error in the molar fraction which
+used the inverse ratio.
+</li>
+<li>
+December 2, 2015, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PPM;

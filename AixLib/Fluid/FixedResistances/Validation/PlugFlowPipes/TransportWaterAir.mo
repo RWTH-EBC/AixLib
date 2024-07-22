@@ -140,18 +140,17 @@ equation
         "Simulate and Plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
- <p>
- Validation model in which a step input is applied to
- the transport of air and water with a species concentration.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 25, 2017 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    Diagram(coordinateSystem(extent={{-100,-140},{100,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Validation model in which a step input is applied to
+the transport of air and water with a species concentration.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 25, 2017 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-140},{100,100}})));
 end TransportWaterAir;

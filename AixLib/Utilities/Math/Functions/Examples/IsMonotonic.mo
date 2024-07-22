@@ -57,21 +57,20 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Mat
         "Simulate and plot"),
 Documentation(
 info="<html>
- <p>
- This example tests the correct implementation of the function
- <a href=\"modelica://AixLib.Utilities.Math.Functions.isMonotonic\">
- AixLib.Utilities.Math.Functions.isMonotonic</a>.
- If the function is implemented incorrect, the example will stop
- with an error.
- </p>
- </html>",
+<p>
+This example tests the correct implementation of the function
+<a href=\"modelica://AixLib.Utilities.Math.Functions.isMonotonic\">
+AixLib.Utilities.Math.Functions.isMonotonic</a>.
+If the function is implemented incorrect, the example will stop
+with an error.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 8, 2014, by Marcus Fuchs:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 8, 2014, by Marcus Fuchs:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end IsMonotonic;

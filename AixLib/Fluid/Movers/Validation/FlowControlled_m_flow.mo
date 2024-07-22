@@ -5,11 +5,13 @@ model FlowControlled_m_flow
  extends AixLib.Fluid.Movers.Validation.BaseClasses.FlowMachine_ZeroFlow(
     gain(k=m_flow_nominal),
     redeclare AixLib.Fluid.Movers.FlowControlled_m_flow floMacSta(
+      nominalValuesDefineDefaultPressureCurve=true,
       redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal,
       use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
     redeclare AixLib.Fluid.Movers.FlowControlled_m_flow floMacDyn(
+      nominalValuesDefineDefaultPressureCurve=true,
       redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal,
       use_inputFilter=false,
@@ -29,24 +31,30 @@ experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_m_flow.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
- </p>
- <p>
- The fans have been configured as steady-state models.
- This ensures that the actual speed is equal to the input signal.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 14, 2012, by Michael Wetter:<br/>
- Added filter for start-up and shut-down transient.
- </li>
- <li>
- March 24 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
+</p>
+<p>
+The fans have been configured as steady-state models.
+This ensures that the actual speed is equal to the input signal.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 8, 2024, by Hongxiang Fu:<br/>
+Specified <code>nominalValuesDefineDefaultPressureCurve=true</code>
+in the mover component to suppress a warning.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3819\">#3819</a>.
+</li>
+<li>
+February 14, 2012, by Michael Wetter:<br/>
+Added filter for start-up and shut-down transient.
+</li>
+<li>
+March 24 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end FlowControlled_m_flow;

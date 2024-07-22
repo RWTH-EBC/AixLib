@@ -9,15 +9,14 @@ algorithm
   y := sum(u)/nin;
 
   annotation (Documentation(info="<html>
- <p>This function outputs the average of the vector. </p>
- </html>",revisions="<html>
- <ul>
- <li>November 28, 2013, by Marcus Fuchs:<br/>
- Implementation based on Michael Wetter&apos;s block
- <a href=\"modelica://AixLib.Utilities.Math.Average\">
- AixLib.Utilities.Math.Average</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>This function outputs the average of the vector. </p>
+</html>", revisions="<html>
+<ul>
+<li>November 28, 2013, by Marcus Fuchs:<br/>
+Implementation based on Michael Wetter&apos;s block
+<a href=\"modelica://AixLib.Utilities.Math.Average\">
+AixLib.Utilities.Math.Average</a>.
+</li>
+</ul>
+</html>"));
 end average;

@@ -103,30 +103,29 @@ equation
       Interval=600,
       Tolerance=1e-06),
     Documentation(info="<html>
- <p>
- This model illustrates the use of the models
- <a href=\"modelica://AixLib.Airflow.Multizone.Table_V_flow\">
- AixLib.Airflow.Multizone.Table_V_flow</a>
- and
- <a href=\"modelica://AixLib.Airflow.Multizone.Table_m_flow\">
- AixLib.Airflow.Multizone.Table_m_flow</a>
- to model self regulating inlet vents.
- The models are connected to a common volume that emulates a room on one side and
- to outside conditions on the other side (east and west orientation respectively).
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- May 03, 2021 by Klaas De Jonge:<br/>
- Added example for simulating a trickle vent using the TableData models
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model illustrates the use of the models
+<a href=\"modelica://AixLib.Airflow.Multizone.Table_V_flow\">
+AixLib.Airflow.Multizone.Table_V_flow</a>
+and
+<a href=\"modelica://AixLib.Airflow.Multizone.Table_m_flow\">
+AixLib.Airflow.Multizone.Table_m_flow</a>
+to model self regulating inlet vents.
+The models are connected to a common volume that emulates a room on one side and
+to outside conditions on the other side (east and west orientation respectively).
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+May 03, 2021 by Klaas De Jonge:<br/>
+Added example for simulating a trickle vent using the TableData models
+</li>
+</ul>
+</html>"));
 end TrickleVent;

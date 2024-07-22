@@ -105,29 +105,28 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=10800),
     Documentation(info="<html>
- This test model compares the radiator model when
- used as a steady-state and a dynamic model.
- </html>",revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- June 5, 2015 by Michael Wetter:<br/>
- Removed <code>annotation(Evaluate=true)</code> from instances
- <code>T_a_nominal</code> and <code>T_b_nominal</code>
- to avoid the warning about non-literal nominal values.
- This fixes
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/128\">#128</a>.
- </li>
- <li>
- January 30, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This test model compares the radiator model when
+used as a steady-state and a dynamic model.
+</html>", revisions="<html>
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+June 5, 2015 by Michael Wetter:<br/>
+Removed <code>annotation(Evaluate=true)</code> from instances
+<code>T_a_nominal</code> and <code>T_b_nominal</code>
+to avoid the warning about non-literal nominal values.
+This fixes
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/128\">#128</a>.
+</li>
+<li>
+January 30, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end RadiatorEN442_2;

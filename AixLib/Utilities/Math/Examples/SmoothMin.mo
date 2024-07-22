@@ -26,24 +26,23 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/SmoothMin.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.SmoothMin\">
- AixLib.Utilities.Math.SmoothMin</a>.
- </p>
- <p>
- This model also illustrates that the output can be larger than
- the minimum of the two input signals. Smaller values for <code>deltaX</code>
- will reduce this effect. Therefore do not use this function when the minimum
- output value should be respected.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 12, 2015, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.SmoothMin\">
+AixLib.Utilities.Math.SmoothMin</a>.
+</p>
+<p>
+This model also illustrates that the output can be larger than
+the minimum of the two input signals. Smaller values for <code>deltaX</code>
+will reduce this effect. Therefore do not use this function when the minimum
+output value should be respected.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 12, 2015, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SmoothMin;

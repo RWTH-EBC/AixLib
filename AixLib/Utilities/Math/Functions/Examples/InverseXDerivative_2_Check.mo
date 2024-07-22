@@ -49,28 +49,27 @@ experiment(
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/InverseXDerivative_2_Check.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model validates the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
- AixLib.Utilities.Math.Functions.inverseXRegularized</a>
- and its second order derivative
- <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
- AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition</a>.
- If the derivative implementation is wrong, the simulation will stop with an error.
- </p>
- </html>",
+<p>
+This model validates the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
+AixLib.Utilities.Math.Functions.inverseXRegularized</a>
+and its second order derivative
+<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
+AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition</a>.
+If the derivative implementation is wrong, the simulation will stop with an error.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 12, 2017, by Thierry S. Nouidui:<br/>
- Added blocks for checking integration errors.
- This is needed for the JModelica verification tests.
- </li>
- <li>
- August 11, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 12, 2017, by Thierry S. Nouidui:<br/>
+Added blocks for checking integration errors.
+This is needed for the JModelica verification tests.
+</li>
+<li>
+August 11, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end InverseXDerivative_2_Check;

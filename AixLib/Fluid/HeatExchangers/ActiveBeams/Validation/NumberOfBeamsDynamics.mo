@@ -24,21 +24,21 @@ experiment(Tolerance=1e-6, StopTime=500),
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/Validation/NumberOfBeamsDynamics.mos"
         "Simulate and plot"),
   Documentation(info="<html>
- <p>
- This model validates whether the transient response is indeed
- independent of the number of beams.
- The model is similar to
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Validation.NumberOfBeams\">
- AixLib.Fluid.HeatExchangers.ActiveBeams.Validation.NumberOfBeams</a>,
- except that it is configured with a dynamic balance and non-default initial conditions.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 24, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model validates whether the transient response is indeed
+independent of the number of beams.
+The model is similar to
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Validation.NumberOfBeams\">
+AixLib.Fluid.HeatExchangers.ActiveBeams.Validation.NumberOfBeams</a>,
+except that it is configured with a dynamic balance and non-default initial conditions.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 24, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
+
 end NumberOfBeamsDynamics;

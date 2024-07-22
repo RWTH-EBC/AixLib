@@ -54,35 +54,34 @@ protected
           fillPattern=FillPattern.Solid)}),
     defaultComponentName="pow",
     Documentation(info="<html>
- <p>
- Model that fits the flow coefficient of the massflow version of the
- orifice equation based on 2 datapoints of mass flow rate and pressure difference.
- </p>
- <p>
- A similar model is also used in the CONTAM software (Dols and Walton, 2015).
- </p>
- <p><b>References</b></p>
- <ul>
- <li>
- <b>W. S. Dols and B. J. Polidoro</b>,<b>2015</b>.
- <i>CONTAM User Guide and Program Documentation Version 3.2</i>,
- National Institute of Standards and Technology, NIST TN 1887, Sep. 2015. doi: <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>.
- </li>
- </ul>
- </html>",revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Apr 6, 2021, by Klaas De Jonge:<br/>
- First implementation.
- </li>
- </ul>
- </html>
- "),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that fits the flow coefficient of the massflow version of the
+orifice equation based on 2 datapoints of mass flow rate and pressure difference.
+</p>
+<p>
+A similar model is also used in the CONTAM software (Dols and Walton, 2015).
+</p>
+<p><b>References</b></p>
+<ul>
+<li>
+<b>W. S. Dols and B. J. Polidoro</b>,<b>2015</b>.
+<i>CONTAM User Guide and Program Documentation Version 3.2</i>,
+National Institute of Standards and Technology, NIST TN 1887, Sep. 2015. doi: <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>.
+</li>
+</ul>
+</html>", revisions="<html>
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Apr 6, 2021, by Klaas De Jonge:<br/>
+First implementation.
+</li>
+</ul>
+</html>
+"));
 end Points_m_flow;

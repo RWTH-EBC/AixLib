@@ -22,35 +22,34 @@ equation
   port_a.C_outflow = if allowFlowReversal then inStream(port_b.C_outflow) else zeros(Medium.nC);
   port_b.C_outflow = inStream(port_a.C_outflow);
   annotation (Documentation(info="<html>
- <p>
- Partial component to model a sensor.
- The sensor is ideal. It does not influence mass, energy,
- species or substance balance, and it has no flow friction.
- </p>
- </html>",
+<p>
+Partial component to model a sensor.
+The sensor is ideal. It does not influence mass, energy,
+species or substance balance, and it has no flow friction.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 15, 2015, by Filip Jorissen:<br/>
- Implemented more efficient computation of <code>port_a.Xi_outflow</code>,
- <code>port_a.h_outflow</code>
- and <code>port_a.C_outflow</code> when <code>allowFlowReversal=false</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/281\">#281</a>.
- </li>
- <li>
- June 19, 2015, by Michael Wetter:<br/>
- Moved <code>m_flow_small</code> to the <code>Advanced</code> tab
- as it usually need not be changed by the user.
- Other models such as heat exchangers also have this parameter
- on the <code>Advanced</code> tab.
- </li>
- <li>
- February 12, 2011, by Michael Wetter:<br/>
- First implementation.
- Implementation is based on <code>Modelica.Fluid</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 15, 2015, by Filip Jorissen:<br/>
+Implemented more efficient computation of <code>port_a.Xi_outflow</code>,
+<code>port_a.h_outflow</code>
+and <code>port_a.C_outflow</code> when <code>allowFlowReversal=false</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/281\">#281</a>.
+</li>
+<li>
+June 19, 2015, by Michael Wetter:<br/>
+Moved <code>m_flow_small</code> to the <code>Advanced</code> tab
+as it usually need not be changed by the user.
+Other models such as heat exchangers also have this parameter
+on the <code>Advanced</code> tab.
+</li>
+<li>
+February 12, 2011, by Michael Wetter:<br/>
+First implementation.
+Implementation is based on <code>Modelica.Fluid</code>.
+</li>
+</ul>
+</html>"));
 end PartialFlowSensor;

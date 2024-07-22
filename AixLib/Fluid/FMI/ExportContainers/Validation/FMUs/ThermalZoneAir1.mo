@@ -107,27 +107,26 @@ equation
           textString="TOut")}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},{160,180}})),
     Documentation(info="<html>
- <p>
- This example validates that
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZone\">
- AixLib.Fluid.FMI.ExportContainers.ThermalZone
- </a>
- exports correctly as an FMU.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 20, 2016, by Thierry S. Nouidui:<br/>
- Revised implementation and added mass flow rate sensors
- to connect the thermal zone adaptor to the thermal zone.
- </li>
- <li>
- April 28, 2016, by Thierry S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example validates that
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZone\">
+AixLib.Fluid.FMI.ExportContainers.ThermalZone
+</a>
+exports correctly as an FMU.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 20, 2016, by Thierry S. Nouidui:<br/>
+Revised implementation and added mass flow rate sensors
+to connect the thermal zone adaptor to the thermal zone.
+</li>
+<li>
+April 28, 2016, by Thierry S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/ThermalZoneAir1.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Export FMU"));
 end ThermalZoneAir1;

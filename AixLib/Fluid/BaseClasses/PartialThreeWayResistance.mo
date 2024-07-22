@@ -109,49 +109,49 @@ initial equation
          portFlowDirection_2<>Modelica.Fluid.Types.PortFlowDirection.Leaving or
          portFlowDirection_3<>Modelica.Fluid.Types.PortFlowDirection.Leaving,
          "In " + getInstanceName() + ": All ports are configured to
-          Modelica.Fluid.Types.PortFlowDirection.Leaving, which is non-physical.");
+         Modelica.Fluid.Types.PortFlowDirection.Leaving, which is non-physical.");
   assert(portFlowDirection_1<>Modelica.Fluid.Types.PortFlowDirection.Entering or
          portFlowDirection_2<>Modelica.Fluid.Types.PortFlowDirection.Entering or
          portFlowDirection_3<>Modelica.Fluid.Types.PortFlowDirection.Entering,
          "In " + getInstanceName() + ": All ports are configured to
-          Modelica.Fluid.Types.PortFlowDirection.Entering, which is non-physical.");
+         Modelica.Fluid.Types.PortFlowDirection.Entering, which is non-physical.");
 
 equation
   if verifyFlowReversal then
     if portFlowDirection_1==Modelica.Fluid.Types.PortFlowDirection.Entering then
       assert(port_1.m_flow> -m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is leaving port_1 despite portFlowDirection_1=PortFlowDirection.Entering, since m_flow="+
+      Flow is leaving port_1 despite portFlowDirection_1=PortFlowDirection.Entering, since m_flow=" +
       String(port_1.m_flow) + "<-"+String(m_flow_small));
     end if;
     if portFlowDirection_1==Modelica.Fluid.Types.PortFlowDirection.Leaving then
       assert(port_1.m_flow< m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is entering port_1 despite portFlowDirection_1=PortFlowDirection.Leaving, since m_flow="+
+      Flow is entering port_1 despite portFlowDirection_1=PortFlowDirection.Leaving, since m_flow=" +
       String(port_1.m_flow) + ">"+String(m_flow_small));
     end if;
     if portFlowDirection_2==Modelica.Fluid.Types.PortFlowDirection.Entering then
       assert(port_2.m_flow> -m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is leaving port_2 despite portFlowDirection_2=PortFlowDirection.Entering, since m_flow="+
+      Flow is leaving port_2 despite portFlowDirection_2=PortFlowDirection.Entering, since m_flow=" +
       String(port_2.m_flow) + "<-"+String(m_flow_small));
     end if;
     if portFlowDirection_2==Modelica.Fluid.Types.PortFlowDirection.Leaving then
       assert(port_2.m_flow< m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is entering port_2 despite portFlowDirection_2=PortFlowDirection.Leaving, since m_flow="+
+      Flow is entering port_2 despite portFlowDirection_2=PortFlowDirection.Leaving, since m_flow=" +
       String(port_2.m_flow) + ">"+String(m_flow_small));
     end if;
     if portFlowDirection_3==Modelica.Fluid.Types.PortFlowDirection.Entering then
       assert(port_3.m_flow> -m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is leaving port_3 despite portFlowDirection_3=PortFlowDirection.Entering, since m_flow="+
+      Flow is leaving port_3 despite portFlowDirection_3=PortFlowDirection.Entering, since m_flow=" +
       String(port_3.m_flow) + "<-"+String(m_flow_small));
     end if;
     if portFlowDirection_3==Modelica.Fluid.Types.PortFlowDirection.Leaving then
       assert(port_3.m_flow< m_flow_small,
       "In " + getInstanceName() + ":
-       Flow is entering port_3 despite portFlowDirection_3=PortFlowDirection.Leaving, since m_flow="+
+      Flow is entering port_3 despite portFlowDirection_3=PortFlowDirection.Leaving, since m_flow=" +
       String(port_3.m_flow) + ">"+String(m_flow_small));
     end if;
   end if;
@@ -230,91 +230,91 @@ equation
   end if;
    annotation (
     Documentation(info="<html>
- <p>
- Partial model for flow resistances with three ports such as a
- flow mixer/splitter or a three way valve.
- </p>
- <p>
- If <code>energyDynamics &ne; Modelica.Fluid.Types.Dynamics.SteadyState</code>,
- then at the junction of the three flows,
- a mixing volume will be present. This will introduce a dynamic energy and momentum
- balance, which often breaks algebraic loops.
- The time constant of the mixing volume is determined by the parameter <code>tau</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- March 22, 2020, by Filip Jorissen:<br/>
- Corrected error message of asserts that verify whether flow reversal occurs when
- <code>verifyFlowReversal=true</code> and <code>portFlowDirection&lt;&gt;Bidirectional</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1327\">#1327</a>.
- </li>
- <li>
- July 7, 2018, by Filip Jorissen:<br/>
- Added asserts that verify whether flow reversal occurs when
- <code>verifyFlowReversal=true</code> and <code>portFlowDirection&lt;&gt;Bidirectional</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/963\">#963</a>.
- </li>
- <li>
- July 8, 2018, by Filip Jorissen:<br/>
- Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
- </li>
- <li>
- March 30, 2018, by Filip Jorissen:<br/>
- Added graphical illustrations for the values of <code>portFlowDirection</code>.
- Added asserts that verify the consistency of
- the values of <code>portFlowDirection</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/902\">#902</a>.
- </li>
- <li>
- February 22, 2016, by Michael Wetter:<br/>
- Conditionally removed control volume <code>vol</code>, and added the conditional connnector
- <code>port_internal</code>.
- This was already done when the parameter <code>dynamicBalance</code> was present, but
- was updated wrong when this parameter was removed.
- Without these conditional components, the regression test for
- <code>AixLib.Fluid.Examples.ResistanceVolumeFlowReversal</code> fails to simulate.
- </li>
- <li>
- December 17, 2015, by Michael Wetter:<br/>
- Added assignment <code>redeclare final package Medium=Medium</code>
- as this is required for OpenModelica.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/475\">
- https://github.com/lbl-srg/modelica-buildings/issues/475</a>.
- </li>
- <li>
- February 20, 2016, by Ruben Baetens:<br/>
- Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
- </li>
- <li>
- April 13 2015, by Filip Jorissen:<br/>
- Exposed options for flow reversal to users and added corresponding implementation.
- </li>
- <li>
- March 23 2010, by Michael Wetter:<br/>
- Changed start values from <code>system.p_start</code> or (code <code>T_start</code>)
- to <code>Medium.p_default</code>.
- </li>
- <li>
- September 18, 2008 by Michael Wetter:<br/>
- Replaced splitter model with a fluid port since the
- splitter model in Modelica.Fluid 1.0 beta does not transport
- <code>mC_flow</code>.
- </li>
- <li>
- June 11, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),Icon(graphics={
+<p>
+Partial model for flow resistances with three ports such as a
+flow mixer/splitter or a three way valve.
+</p>
+<p>
+If <code>energyDynamics &ne; Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+then at the junction of the three flows,
+a mixing volume will be present. This will introduce a dynamic energy and momentum
+balance, which often breaks algebraic loops.
+The time constant of the mixing volume is determined by the parameter <code>tau</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Set <code>final massDynamics=energyDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+March 22, 2020, by Filip Jorissen:<br/>
+Corrected error message of asserts that verify whether flow reversal occurs when
+<code>verifyFlowReversal=true</code> and <code>portFlowDirection&lt;&gt;Bidirectional</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1327\">#1327</a>.
+</li>
+<li>
+July 7, 2018, by Filip Jorissen:<br/>
+Added asserts that verify whether flow reversal occurs when
+<code>verifyFlowReversal=true</code> and <code>portFlowDirection&lt;&gt;Bidirectional</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/963\">#963</a>.
+</li>
+<li>
+July 8, 2018, by Filip Jorissen:<br/>
+Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/977\">#977</a>.
+</li>
+<li>
+March 30, 2018, by Filip Jorissen:<br/>
+Added graphical illustrations for the values of <code>portFlowDirection</code>.
+Added asserts that verify the consistency of
+the values of <code>portFlowDirection</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/902\">#902</a>.
+</li>
+<li>
+February 22, 2016, by Michael Wetter:<br/>
+Conditionally removed control volume <code>vol</code>, and added the conditional connnector
+<code>port_internal</code>.
+This was already done when the parameter <code>dynamicBalance</code> was present, but
+was updated wrong when this parameter was removed.
+Without these conditional components, the regression test for
+<code>AixLib.Fluid.Examples.ResistanceVolumeFlowReversal</code> fails to simulate.
+</li>
+<li>
+December 17, 2015, by Michael Wetter:<br/>
+Added assignment <code>redeclare final package Medium=Medium</code>
+as this is required for OpenModelica.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/475\">
+https://github.com/lbl-srg/modelica-buildings/issues/475</a>.
+</li>
+<li>
+February 20, 2016, by Ruben Baetens:<br/>
+Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+</li>
+<li>
+April 13 2015, by Filip Jorissen:<br/>
+Exposed options for flow reversal to users and added corresponding implementation.
+</li>
+<li>
+March 23 2010, by Michael Wetter:<br/>
+Changed start values from <code>system.p_start</code> or (code <code>T_start</code>)
+to <code>Medium.p_default</code>.
+</li>
+<li>
+September 18, 2008 by Michael Wetter:<br/>
+Replaced splitter model with a fluid port since the
+splitter model in Modelica.Fluid 1.0 beta does not transport
+<code>mC_flow</code>.
+</li>
+<li>
+June 11, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"), Icon(graphics={
         Polygon(
           points={{104,28},{124,20},{104,12},{104,28}},
           lineColor={0,128,255},
@@ -354,6 +354,5 @@ equation
           fillPattern=FillPattern.Solid,
           visible=portFlowDirection_3==Modelica.Fluid.Types.PortFlowDirection.Leaving,
           origin={26,-125},
-          rotation=90)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          rotation=90)}));
 end PartialThreeWayResistance;

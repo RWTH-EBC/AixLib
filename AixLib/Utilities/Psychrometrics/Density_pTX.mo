@@ -34,27 +34,27 @@ equation
   annotation (
   defaultComponentName="den",
     Documentation(info="<html>
- <p>
- Block to compute the mass density of air for given
- pressure, temperature and water vapor mass fraction.
- </p>
- <p>
- Note that the water vapor mass fraction must be in <i>kg/kg</i>
- total air, and not dry air.
- </p>
- </html>",
+<p>
+Block to compute the mass density of air for given
+pressure, temperature and water vapor mass fraction.
+</p>
+<p>
+Note that the water vapor mass fraction must be in <i>kg/kg</i>
+total air, and not dry air.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 19, 2015, by Michael Wetter:<br/>
- Corrected default component name.
- </li>
- <li>
- February 24, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+August 19, 2015, by Michael Wetter:<br/>
+Corrected default component name.
+</li>
+<li>
+February 24, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                     graphics={
         Polygon(
@@ -91,6 +91,5 @@ revisions="<html>
           textString="density"),
         Line(
           points={{36,-72},{6,6}},
-          color={255,0,0})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          color={255,0,0})}));
 end Density_pTX;

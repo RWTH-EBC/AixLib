@@ -109,24 +109,23 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
- <p>
- Example model that illustrates the use of
- the <a href=\"modelica://AixLib.Fluid.Sources.PropertySource_T\">
- AixLib.Fluid.Sources.PropertySource_T</a> model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 30, 2018, by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
- </li>
- </ul>
- </html>"),
+<p>
+Example model that illustrates the use of
+the <a href=\"modelica://AixLib.Fluid.Sources.PropertySource_T\">
+AixLib.Fluid.Sources.PropertySource_T</a> model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 30, 2018, by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
+</li>
+</ul>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/PropertySource_T.mos"
         "Simulate and plot"),
     experiment(
       StopTime=1,
-      Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06));
 end PropertySource_T;

@@ -115,36 +115,34 @@ equation
   connect(reference.y[1], assEqu.u1) annotation (Line(points={{97,82},{100,82},
           {100,62},{78,62},{78,54},{83,54}}, color={0,0,127}));
   annotation ( Documentation(info="<html>
-   <p>Test Case 4 of the VDI 6007 Part 1: Calculation of indoor air temperature
-   excited by a radiative heat source for room version L.</p>
-   <h4>Boundary conditions</h4>
-   <ul>
-   <li>constant outdoor air temperature 22&deg;C</li>
-   <li>no solar or short-wave radiation on the exterior wall</li>
-   <li>no solar or short-wave radiation through the windows</li>
-   <li>no long-wave radiation exchange between exterior wall, windows
-   and ambient environment</li>
-   </ul>
-   <p>This test validates basic functionalities.</p>
-   </html>",revisions="<html>
-   <ul>
-   <li>
-   July 11, 2019, by Katharina Brinkmann:<br/>
-   Renamed <code>alphaWall</code> to <code>hConWall</code>
-   </li>
-   <li>
-   July 7, 2016, by Moritz Lauster:<br/>
-   Added automatic check against validation thresholds.
-   </li>
-   <li>
-   January 11, 2016, by Moritz Lauster:<br/>
-   Implemented.
-   </li>
-   </ul>
-   </html>"),
-            experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
+  <p>Test Case 4 of the VDI 6007 Part 1: Calculation of indoor air temperature
+  excited by a radiative heat source for room version L.</p>
+  <h4>Boundary conditions</h4>
+  <ul>
+  <li>constant outdoor air temperature 22&deg;C</li>
+  <li>no solar or short-wave radiation on the exterior wall</li>
+  <li>no solar or short-wave radiation through the windows</li>
+  <li>no long-wave radiation exchange between exterior wall, windows
+  and ambient environment</li>
+  </ul>
+  <p>This test validates basic functionalities.</p>
+  </html>", revisions="<html>
+  <ul>
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaWall</code> to <code>hConWall</code>
+  </li>
+  <li>
+  July 7, 2016, by Moritz Lauster:<br/>
+  Added automatic check against validation thresholds.
+  </li>
+  <li>
+  January 11, 2016, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+  </ul>
+  </html>"),experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase4.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end TestCase4;

@@ -47,29 +47,28 @@ equation
     Line(points={{-40,-80},{-40,-68}},
                                   color={192,192,192})}),
 Documentation(info="<html>
- <p>
- Twice Lipschitz continuously differentiable approximation to the <i>Heaviside(.,.)</i> function.
- See Example <a href=\"modelica://AixLib.Utilities.Math.Examples.SmoothHeaviside\">
- AixLib.Utilities.Math.Examples.SmoothHeaviside</a>.
- </p>
- </html>",
+<p>
+Twice Lipschitz continuously differentiable approximation to the <i>Heaviside(.,.)</i> function.
+See Example <a href=\"modelica://AixLib.Utilities.Math.Examples.SmoothHeaviside\">
+AixLib.Utilities.Math.Examples.SmoothHeaviside</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- October 21, 2019:<br/>
- Added <code>delta.min</code> attribute to guard against division by zero.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1202\">issue 1202</a>.
- </li>
- <li>
- July 17, 2015, by Marcus Fuchs:<br/>
- Add link to example.
- </li>
- <li>
- July 14, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+October 21, 2019:<br/>
+Added <code>delta.min</code> attribute to guard against division by zero.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1202\">issue 1202</a>.
+</li>
+<li>
+July 17, 2015, by Marcus Fuchs:<br/>
+Add link to example.
+</li>
+<li>
+July 14, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SmoothHeaviside;

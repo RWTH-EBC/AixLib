@@ -253,62 +253,61 @@ equation
           textString="TOut")}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-160},{160,160}})),
     Documentation(info="<html>
- <p>
- This example demonstrates how to export a model of an HVAC system
- that only provides convective cooling to a single thermal zone.
- <!-- @include_Buildings
- The HVAC system is adapted from
- <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
- AixLib.Examples.Tutorial.SpaceCooling.System3</a>,
- but flow resistances have been added to have the same configuration as
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones\">
- AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones</a>.
- -->
- <!-- @include_Buildings
- Having the same configuration is needed for the validation test
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
- AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>.
- -->
- </p>
- <p>
- The example extends from
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
- AixLib.Fluid.FMI.ExportContainers.HVACZone
- </a>
- which provides the input and output signals that are needed to interface
- the acausal HVAC system model with causal connectors of FMI.
- The instance <code>hvacAda</code> is the HVAC adapter
- that contains on the left a fluid port, and on the right signal ports
- which are then used to connect at the top-level of the model to signal
- ports which are exposed at the FMU interface.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 21, 2021 by David Blum:<br/>
- Correct supply and return water parameterization.<br/>
- Use explicit calculation of sensible and latent load to determine design load
- on cooling coil.<br/>
- This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2624\">#2624</a>.
- </li>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- November 11, 2016, by Michael Wetter:<br/>
- Made the cooling coil replaceable because the Buildings library
- uses the model for validation with a cooling coil model that is not
- in the Annex 60 library.
- </li>
- <li>
- April 16, 2016 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to export a model of an HVAC system
+that only provides convective cooling to a single thermal zone.
+<!-- @include_Buildings
+The HVAC system is adapted from
+<a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
+AixLib.Examples.Tutorial.SpaceCooling.System3</a>,
+but flow resistances have been added to have the same configuration as
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones\">
+AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones</a>.
+-->
+<!-- @include_Buildings
+Having the same configuration is needed for the validation test
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
+AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>.
+-->
+</p>
+<p>
+The example extends from
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
+AixLib.Fluid.FMI.ExportContainers.HVACZone
+</a>
+which provides the input and output signals that are needed to interface
+the acausal HVAC system model with causal connectors of FMI.
+The instance <code>hvacAda</code> is the HVAC adapter
+that contains on the left a fluid port, and on the right signal ports
+which are then used to connect at the top-level of the model to signal
+ports which are exposed at the FMU interface.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 21, 2021 by David Blum:<br/>
+Correct supply and return water parameterization.<br/>
+Use explicit calculation of sensible and latent load to determine design load
+on cooling coil.<br/>
+This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2624\">#2624</a>.
+</li>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+November 11, 2016, by Michael Wetter:<br/>
+Made the cooling coil replaceable because the Buildings library
+uses the model for validation with a cooling coil model that is not
+in the Annex 60 library.
+</li>
+<li>
+April 16, 2016 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/HVACZone.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Export FMU"));
 end HVACZone;

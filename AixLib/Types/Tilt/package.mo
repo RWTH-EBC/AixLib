@@ -18,7 +18,7 @@ Note that a ceiling has a tilt of <i>0</i>
 <!-- @include_Buildings
 , and also the solar collector models
 in
-<a href=\"AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
+<a href=\"modelica://AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
 require a tilt of <i>0</i>
 -->
 if they are facing straight upwards.

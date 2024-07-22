@@ -48,20 +48,19 @@ equation
       extent={{-6,3},{-6,3}}));
   annotation (
 Documentation(info="<html>
- <p>
- This example computes the sky clearness.
- </p>
- </html>",
+<p>
+This example computes the sky clearness.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- July 07, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+July 07, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(StartTime=100000, Tolerance=1e-6, StopTime=3000000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/SkyClearness.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end SkyClearness;

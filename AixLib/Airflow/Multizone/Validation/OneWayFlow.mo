@@ -220,19 +220,18 @@ equation
       __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Validation/OneWayFlow.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Apr 6, 2021, 2020, by Klaas De Jonge:<br/>
- First implementation.
- </li>
- </ul>
- </html>
- "),Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Apr 6, 2021, 2020, by Klaas De Jonge:<br/>
+First implementation.
+</li>
+</ul>
+</html>
+"), Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
 end OneWayFlow;

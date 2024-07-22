@@ -70,24 +70,23 @@ equation
           {20,-10},{20,-18},{40,-18}}, color={0,127,255}));
   annotation (Documentation(
         info="<html>
- <p>
- This model demonstrates the use of the mixing volume with air flowing into and out of the volume
- and trace substances added to the volume.
- </p>
- <p>
- The model <code>volDyn</code> uses a dynamic balance,
- whereas the model <code>volSte</code> uses a steady-state balance.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 19, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model demonstrates the use of the mixing volume with air flowing into and out of the volume
+and trace substances added to the volume.
+</p>
+<p>
+The model <code>volDyn</code> uses a dynamic balance,
+whereas the model <code>volSte</code> uses a steady-state balance.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 19, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeTraceSubstance.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=10),
-  __Dymola_LockedEditing="Model from IBPSA");
+    experiment(Tolerance=1e-6, StopTime=10));
 end MixingVolumeTraceSubstance;

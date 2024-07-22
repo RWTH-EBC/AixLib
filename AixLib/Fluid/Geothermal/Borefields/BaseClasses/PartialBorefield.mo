@@ -39,7 +39,12 @@ partial model PartialBorefield
     "Number of segments to use in vertical discretization of the boreholes";
   parameter Boolean forceGFunCalc = false
     "Set to true to force the thermal response to be calculated at the start instead of checking whether this has been pre-computed"
-    annotation (Dialog(tab="Advanced"));
+    annotation (Dialog(tab="Advanced", group="g-function"));
+  parameter Integer nSegGFun(min=1)=12 "Number of segments to use in the calculation of the g-function"
+    annotation (Dialog(tab="Advanced", group="g-function"));
+  parameter Integer nClu(min=1)=5
+    "Number of borehole clusters to use in the calculation of the g-function"
+    annotation (Dialog(tab="Advanced", group="g-function"));
 
   // General parameters of borefield
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template borFieDat "Borefield data"
@@ -68,11 +73,6 @@ partial model PartialBorefield
     "Vertical temperature gradient of the undisturbed soil for h below z0"
     annotation (Dialog(tab="Initialization", group="Temperature profile"));
 
-  // Dynamics of filling material
-  parameter Boolean dynFil=true
-    "Set to false to remove the dynamics of the filling material."
-    annotation (Dialog(tab="Dynamics"));
-
   Modelica.Blocks.Interfaces.RealOutput TBorAve(final quantity="ThermodynamicTemperature",
                                                 final unit="K",
                                                 displayUnit = "degC",
@@ -83,6 +83,8 @@ partial model PartialBorefield
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse groTemRes(
     final tLoaAgg=tLoaAgg,
     final nCel=nCel,
+    final nSeg=nSegGFun,
+    final nClu=nClu,
     final borFieDat=borFieDat,
     final forceGFunCalc=forceGFunCalc)
     "Ground temperature response"
@@ -105,7 +107,6 @@ partial model PartialBorefield
     final energyDynamics=energyDynamics,
     final p_start=p_start,
     final mSenFac=mSenFac,
-    final dynFil=dynFil,
     final TFlu_start=TFlu_start,
     final TGro_start=TGro_start) "Borehole"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -117,14 +118,16 @@ protected
 
   AixLib.Fluid.BaseClasses.MassFlowRateMultiplier masFloDiv(
     redeclare final package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal,
+    final use_input=false,
     final k=1/borFieDat.conDat.nBor)
                                    "Division of flow rate"
     annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
 
   AixLib.Fluid.BaseClasses.MassFlowRateMultiplier masFloMul(
     redeclare final package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal,
+    final use_input=false,
     final k=borFieDat.conDat.nBor) "Mass flow multiplier"
     annotation (Placement(transformation(extent={{60,-50},{80,-30}})));
 
@@ -181,7 +184,7 @@ equation
     annotation (Line(points={{-4.44089e-16,-20},{0,-20},{0,-30}},
                                                         color={191,0,0}));
   connect(QBorHol.Q_flow, QTotSeg_flow.u)
-    annotation (Line(points={{-10,-10},{-86,-10},{-86,80},{-62,80}},
+    annotation (Line(points={{-11,-10},{-86,-10},{-86,80},{-62,80}},
                                                           color={0,0,127}));
   connect(groTemRes.delTBor, repDelTBor.u)
     annotation (Line(points={{41,80},{58,80}}, color={0,0,127}));
@@ -273,73 +276,72 @@ equation
           fillPattern=FillPattern.Forward)}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),Documentation(info="<html>
- <p>
- This model simulates a borefield containing one or multiple boreholes
- using the parameters in the <code>borFieDat</code> record.
- </p>
- <p>
- Heat transfer to the soil is modeled using only one borehole heat exchanger
- (To be added in an extended model). The
- fluid mass flow rate into the borehole is divided to reflect the per-borehole
- fluid mass flow rate. The borehole model calculates the dynamics within the
- borehole itself using an axial discretization and a resistance-capacitance
- network for the internal thermal resistances between the individual pipes and
- between each pipe and the borehole wall.
- </p>
- <p>
- The thermal interaction between the borehole wall and the surrounding soil
- is modeled using
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>,
- which uses a cell-shifting load aggregation technique to calculate the borehole wall
- temperature after calculating and/or read (from a previous calculation) the borefield's thermal response factor.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 9, 2021, by Michael Wetter:<br/>
- Corrected placement of <code>each</code> keyword.<br/>
- See <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/2440\">Buildings, PR #2440</a>.
- </li>
- <li>
- August 25, 2020, by Filip Jorissen:<br/>
- Switched port connections for <code>masFloDiv</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/41\">#41</a>.
- </li>
- <li>
- March 24, 2020, by Damien Picard:<br/>
- Propagated flowReversal into <code>masFloDiv</code> and <code>masFloMul</code>.
- </li>
- <li>
- June 7, 2019, by Massimo Cimmino:<br/>
- Converted instances that are not of interest to user to be <code>protected</code>.
- </li>
- <li>
- June 4, 2019, by Massimo Cimmino:<br/>
- Added an output for the average borehole wall temperature.
- See
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1107\">#1107</a>.
- </li>
- <li>
- April 11, 2019, by Filip Jorissen:<br/>
- Added <code>choicesAllMatching</code> for <code>borFieDat</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1117\">#1117</a>.
- </li>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to water and glycolWater.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- July 2018, by Alex Laferri&egrave;re:<br/>
- Changed into a partial model and changed documentation to reflect the new approach
- used by the borefield models.
- </li>
- <li>
- July 2014, by Damien Picard:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model simulates a borefield containing one or multiple boreholes
+using the parameters in the <code>borFieDat</code> record.
+</p>
+<p>
+Heat transfer to the soil is modeled using only one borehole heat exchanger
+(To be added in an extended model). The
+fluid mass flow rate into the borehole is divided to reflect the per-borehole
+fluid mass flow rate. The borehole model calculates the dynamics within the
+borehole itself using an axial discretization and a resistance-capacitance
+network for the internal thermal resistances between the individual pipes and
+between each pipe and the borehole wall.
+</p>
+<p>
+The thermal interaction between the borehole wall and the surrounding soil
+is modeled using
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse</a>,
+which uses a cell-shifting load aggregation technique to calculate the borehole wall
+temperature after calculating and/or read (from a previous calculation) the borefield's thermal response factor.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 9, 2021, by Michael Wetter:<br/>
+Corrected placement of <code>each</code> keyword.<br/>
+See <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/2440\">Buildings, PR #2440</a>.
+</li>
+<li>
+August 25, 2020, by Filip Jorissen:<br/>
+Switched port connections for <code>masFloDiv</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/41\">#41</a>.
+</li>
+<li>
+March 24, 2020, by Damien Picard:<br/>
+Propagated flowReversal into <code>masFloDiv</code> and <code>masFloMul</code>.
+</li>
+<li>
+June 7, 2019, by Massimo Cimmino:<br/>
+Converted instances that are not of interest to user to be <code>protected</code>.
+</li>
+<li>
+June 4, 2019, by Massimo Cimmino:<br/>
+Added an output for the average borehole wall temperature.
+See
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1107\">#1107</a>.
+</li>
+<li>
+April 11, 2019, by Filip Jorissen:<br/>
+Added <code>choicesAllMatching</code> for <code>borFieDat</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1117\">#1117</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to water and glycolWater.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+July 2018, by Alex Laferri&egrave;re:<br/>
+Changed into a partial model and changed documentation to reflect the new approach
+used by the borefield models.
+</li>
+<li>
+July 2014, by Damien Picard:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialBorefield;

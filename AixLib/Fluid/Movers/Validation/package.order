@@ -1,3 +1,6 @@
+ComparePowerHydraulic
+ComparePowerInput
+ComparePowerTotal
 ControlledFlowMachine
 ControlledFlowMachineDynamic
 FlowControlled_dp
@@ -5,10 +8,12 @@ FlowControlled_dpSystem
 FlowControlled_m_flow
 PowerExact
 PowerSimplified
+PressureCurve
 PumpCurveConstruction
 PumpCurveDerivatives
 Pump_Nrpm_stratos
 Pump_stratos
+Pump_y_stratos
 SpeedControlled_Nrpm
 SpeedControlled_y
 SpeedControlled_y_linear

@@ -296,82 +296,81 @@ equation
                "%name")}),
 defaultComponentName="eco",
 Documentation(revisions="<html>
- <ul>
- <li>
- September 21, 2021, by Michael Wetter:<br/>
- Corrected typo in comments.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1525\">#1525</a>.
- </li>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
- <li>
- December 23, 2019, by Antoine Gautier:<br/>
- Updated parameter bindings consistently with refactoring of
- <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
- AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
- </li>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to moist air only.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- March 24, 2017, by Michael Wetter:<br/>
- Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
- </li>
- <li>
- March 22, 2017, by Michael Wetter:<br/>
- Removed the assignments of <code>AOut</code>, <code>AExh</code> and <code>ARec</code> as these are done in the damper instance using
- a final assignment of the parameter.
- This allows scaling the model with <code>m_flow_nominal</code>,
- which is generally known in the flow leg,
- and <code>v_nominal</code>, for which a default value can be specified.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- December 14, 2012 by Michael Wetter:<br/>
- Renamed protected parameters for consistency with the naming conventions.
- </li>
- <li>
- February 14, 2012 by Michael Wetter:<br/>
- Added filter to approximate the travel time of the actuator.
- </li>
- <li>
- February 3, 2012, by Michael Wetter:<br/>
- Removed assignment of <code>m_flow_small</code> as it is no
- longer used in its base class.
- </li>
- <li>
- February 23, 2010 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Model of an outside air mixing box with exponential dampers.
- Set <code>y=0</code> to close the outside air and exhaust air dampers.
- See
- <a href=\"modelica://AixLib.Fluid.Actuators.Dampers.Exponential\">
- AixLib.Fluid.Actuators.Dampers.Exponential</a>
- for the description of the exponential damper model.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 21, 2021, by Michael Wetter:<br/>
+Corrected typo in comments.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1525\">#1525</a>.
+</li>
+<li>
+June 10, 2021, by Michael Wetter:<br/>
+Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+as most users need not change this value.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
+</li>
+<li>
+December 23, 2019, by Antoine Gautier:<br/>
+Updated parameter bindings consistently with refactoring of
+<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
+AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air only.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+March 24, 2017, by Michael Wetter:<br/>
+Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+</li>
+<li>
+March 22, 2017, by Michael Wetter:<br/>
+Removed the assignments of <code>AOut</code>, <code>AExh</code> and <code>ARec</code> as these are done in the damper instance using
+a final assignment of the parameter.
+This allows scaling the model with <code>m_flow_nominal</code>,
+which is generally known in the flow leg,
+and <code>v_nominal</code>, for which a default value can be specified.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+December 14, 2012 by Michael Wetter:<br/>
+Renamed protected parameters for consistency with the naming conventions.
+</li>
+<li>
+February 14, 2012 by Michael Wetter:<br/>
+Added filter to approximate the travel time of the actuator.
+</li>
+<li>
+February 3, 2012, by Michael Wetter:<br/>
+Removed assignment of <code>m_flow_small</code> as it is no
+longer used in its base class.
+</li>
+<li>
+February 23, 2010 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Model of an outside air mixing box with exponential dampers.
+Set <code>y=0</code> to close the outside air and exhaust air dampers.
+See
+<a href=\"modelica://AixLib.Fluid.Actuators.Dampers.Exponential\">
+AixLib.Fluid.Actuators.Dampers.Exponential</a>
+for the description of the exponential damper model.
+</p>
+</html>"));
 end MixingBox;

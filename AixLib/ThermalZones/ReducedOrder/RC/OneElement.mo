@@ -17,8 +17,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Vector of areas of windows by orientations"
     annotation (Dialog(group="Windows"));
   parameter Modelica.Units.SI.Area ATransparent[nOrientations] "Vector of areas of transparent (solar radiation transmittend) elements by
-     orientations"
-                  annotation (Dialog(group="Windows"));
+    orientations" annotation (Dialog(group="Windows"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWin
     "Convective coefficient of heat transfer of windows (indoor)"
     annotation (Dialog(group="Windows"));
@@ -176,14 +175,14 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final nOut=dimension,
     final nIn=1) if ATot > 0
     "Splits incoming internal gains into separate gains for each wall element,
-     weighted by their area"
+    weighted by their area"
     annotation (Placement(transformation(extent={{210,76},{190,96}})));
   BaseClasses.ThermSplitter thermSplitterSolRad(
     final splitFactor=splitFactorSolRad,
     final nOut=dimension,
     final nIn=nOrientations) if ATot > 0 and sum(ATransparent) > 0
     "Splits incoming solar radiation into separate gains for each wall element,
-     weighted by their area"
+    weighted by their area"
     annotation (Placement(transformation(extent={{-138,138},{-122,154}})));
   BaseClasses.ExteriorWall extWallRC(
     final n=nExt,
@@ -237,12 +236,15 @@ protected
     rotation=-90,
     origin={-106,68})));
   Modelica.Blocks.Math.Gain eRadSol[nOrientations](
-    final k=gWin*(1 - ratioWinConRad)*ATransparent) if sum(ATransparent) > 0
+    final k(each unit="m2")=gWin*(1 - ratioWinConRad)*ATransparent,
+    u(each final unit="W/m2"),
+    y(each final unit="W")) if sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as radiation"
     annotation (Placement(transformation(extent={{-206,141},{-196,151}})));
   Modelica.Blocks.Math.Gain eConvSol[nOrientations](
-    final k=gWin*ratioWinConRad*ATransparent)
- if ratioWinConRad > 0 and sum(ATransparent) > 0
+    final k(each unit="m2")=gWin*ratioWinConRad*ATransparent,
+    u(each final unit="W/m2"),
+    y(each final unit="W")) if ratioWinConRad > 0 and sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as convection"
     annotation (Placement(transformation(extent={{-206,119},{-196,129}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(
@@ -521,66 +523,65 @@ equation
     textColor={0,0,0},
     textString="1")}),
   Documentation(info="<html>
- <p>
- This model merges all thermal masses into one
- element, parameterized by the length of the RC-chain
- <code>nExt,</code> the vector of the capacities <code>CExt[nExt]</code> that is
- connected via the vector of resistances <code>RExt[nExt]</code> and
- <code>RExtRem</code> to the ambient and indoor air.
- By default, the model neglects all
- internal thermal masses that are not directly connected to the ambient.
- However, the thermal capacity of the room air can be increased by
- using the parameter <code>mSenFac</code>.
- </p>
- <p>
- The image below shows the RC-network of this model.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
- </p>
-   </html>",
+<p>
+This model merges all thermal masses into one
+element, parameterized by the length of the RC-chain
+<code>nExt,</code> the vector of the capacities <code>CExt[nExt]</code> that is
+connected via the vector of resistances <code>RExt[nExt]</code> and
+<code>RExtRem</code> to the ambient and indoor air.
+By default, the model neglects all
+internal thermal masses that are not directly connected to the ambient.
+However, the thermal capacity of the room air can be increased by
+using the parameter <code>mSenFac</code>.
+</p>
+<p>
+The image below shows the RC-network of this model.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
+</p>
+  </html>",
 revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- October 9, 2019, by Michael Wetter:<br/>
- Refactored addition of moisture to also account for the energy content of the
- water vapor.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
- </li>
-   <li>
-   September 24, 2019, by Martin Kremer:<br/>
-   Added possibility to consider moisture balance. <br/>
-   Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
-   </li>
-   <li>
-   July 11, 2019, by Katharina Brinkmann:<br/>
-   Renamed <code>alphaRad</code> to <code>hRad</code>,
-   <code>alphaWin</code> to <code>hConWin</code>,
-   <code>alphaExt</code> to <code>hConExt</code>,
-   <code>alphaExtWallConst</code> to <code>hConExtWall_const</code>,
-   <code>alphaWinConst</code> to <code>hConWin_const</code>
-   </li>
-   <li>
-   January 25, 2019, by Michael Wetter:<br/>
-   Added start value to avoid warning in JModelica.
-   </li>
-   <li>
-   September 26, 2016, by Moritz Lauster:<br/>
-   Added conditional statements to solar radiation part.<br/>
-   Deleted conditional statements of
-   <code>splitFactor</code> and <code>splitFactorSolRad</code>.
-   </li>
-   <li>
-   April 17, 2015, by Moritz Lauster:<br/>
-   First implementation.
-   </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+October 9, 2019, by Michael Wetter:<br/>
+Refactored addition of moisture to also account for the energy content of the
+water vapor.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
+</li>
+  <li>
+  September 24, 2019, by Martin Kremer:<br/>
+  Added possibility to consider moisture balance. <br/>
+  Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
+  </li>
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaRad</code> to <code>hRad</code>,
+  <code>alphaWin</code> to <code>hConWin</code>,
+  <code>alphaExt</code> to <code>hConExt</code>,
+  <code>alphaExtWallConst</code> to <code>hConExtWall_const</code>,
+  <code>alphaWinConst</code> to <code>hConWin_const</code>
+  </li>
+  <li>
+  January 25, 2019, by Michael Wetter:<br/>
+  Added start value to avoid warning in JModelica.
+  </li>
+  <li>
+  September 26, 2016, by Moritz Lauster:<br/>
+  Added conditional statements to solar radiation part.<br/>
+  Deleted conditional statements of
+  <code>splitFactor</code> and <code>splitFactorSolRad</code>.
+  </li>
+  <li>
+  April 17, 2015, by Moritz Lauster:<br/>
+  First implementation.
+  </li>
+</ul>
+</html>"));
 end OneElement;

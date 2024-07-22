@@ -3,7 +3,6 @@ model ControlledFlowMachineDynamic
   "Fans with different control signals as input and a dynamic speed signal"
   extends Modelica.Icons.Example;
   extends AixLib.Fluid.Movers.Validation.BaseClasses.ControlledFlowMachine(
-    fan4(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     fan1(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     fan2(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     fan3(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
@@ -12,9 +11,18 @@ experiment(Tolerance=1e-6, StopTime=600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/ControlledFlowMachineDynamic.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- This example demonstrates the use of the flow model with four different configurations.
- At steady-state, all flow models have the same mass flow rate and pressure difference.
- </html>"),
-Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+This example demonstrates the use of the flow model with four different configurations.
+At steady-state, all flow models have the same mass flow rate and pressure difference.
+</html>", revisions="<html>
+<ul>
+<li>
+March 21, 2023, by Hongxiang Fu:<br/>
+Deleted the mover with <code>Nrpm</code> signal.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1704\">IBPSA, #1704</a>.
+</li>
+</ul>
+</html>"),
+Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})));
+
 end ControlledFlowMachineDynamic;

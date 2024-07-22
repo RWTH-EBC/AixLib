@@ -38,22 +38,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/SteamProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks thermophysical properties of the medium.
- </p>
- </html>",
+<p>
+This example checks thermophysical properties of the medium.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- October 30, 2020, by Kathryn Hinkelman:<br/>
- Rebased steam medium to PartialMedium and improved steam property consistency
- and efficiency.
- </li>
- <li>
- September 12, 2019, by Yangyang Fu:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+October 30, 2020, by Kathryn Hinkelman:<br/>
+Rebased steam medium to PartialMedium and improved steam property consistency
+and efficiency.
+</li>
+<li>
+September 12, 2019, by Yangyang Fu:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SteamProperties;

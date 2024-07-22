@@ -46,17 +46,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/LosslessPipe.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Validation model for a the pipe model with no friction and no heat loss.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 1, 2016, by Michael Wetter:<br/>
- First implementation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Validation model for a the pipe model with no friction and no heat loss.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 1, 2016, by Michael Wetter:<br/>
+First implementation for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+</li>
+</ul>
+</html>"));
 end LosslessPipe;

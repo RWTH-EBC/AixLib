@@ -155,37 +155,36 @@ equation
     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/PrescribedOutlet.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Model that demonstrates the use of an ideal heater and an ideal cooler.
- </p>
- <p>
- The heater model has a capacity of <code>Q_flow_max = 1.0e4</code> Watts and
- the cooler model has a capacitiy of <code>Q_flow_min = -1000</code> Watts.
- Hence, both only track their set point of the outlet temperature during certain times.
- There is also a heater and cooler with unlimited capacity.
- </p>
- <p>
- At <i>t=1000</i> second, the flow reverses its direction.
- </p>
- <p>
- Each flow leg has the same mass flow rate. There are three mass flow sources
- as using one source only would yield a nonlinear system of equations that
- needs to be solved to determine the mass flow rate distribution.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 21, 2014, by Michael Wetter:<br/>
- Revised example to test reverse flow and zero flow transition.
- </li>
- <li>
- March 19, 2014, by Christoph Nytsch-Geusen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Model that demonstrates the use of an ideal heater and an ideal cooler.
+</p>
+<p>
+The heater model has a capacity of <code>Q_flow_max = 1.0e4</code> Watts and
+the cooler model has a capacitiy of <code>Q_flow_min = -1000</code> Watts.
+Hence, both only track their set point of the outlet temperature during certain times.
+There is also a heater and cooler with unlimited capacity.
+</p>
+<p>
+At <i>t=1000</i> second, the flow reverses its direction.
+</p>
+<p>
+Each flow leg has the same mass flow rate. There are three mass flow sources
+as using one source only would yield a nonlinear system of equations that
+needs to be solved to determine the mass flow rate distribution.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 21, 2014, by Michael Wetter:<br/>
+Revised example to test reverse flow and zero flow transition.
+</li>
+<li>
+March 19, 2014, by Christoph Nytsch-Geusen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     experiment(
       StopTime=1200,
-      Tolerance=1e-6),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-6));
 end PrescribedOutlet;

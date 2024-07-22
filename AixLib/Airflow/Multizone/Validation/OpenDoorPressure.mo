@@ -82,16 +82,15 @@ equation
       Interval=600,
       Tolerance=1e-06),
     Documentation(info="<html>
- <p>
- This model validates the door model for the situation where there is only pressure-driven air flow.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 9, 2020 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model validates the door model for the situation where there is only pressure-driven air flow.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 9, 2020 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end OpenDoorPressure;

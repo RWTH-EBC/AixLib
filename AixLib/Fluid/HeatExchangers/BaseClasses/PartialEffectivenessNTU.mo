@@ -14,13 +14,20 @@ model PartialEffectivenessNTU
   parameter con configuration "Heat exchanger configuration"
     annotation (Evaluate=true);
 
+  constant Boolean use_dynamicFlowRegime = false
+    "If true, flow regime is determined using actual flow rates";
+  // This switch is declared as a constant instead of a parameter
+  //   as users typically need not to change this setting,
+  //   and setting it true may generate events.
+  //   See discussions in https://github.com/ibpsa/modelica-ibpsa/pull/1683
+
   parameter Boolean use_Q_flow_nominal = true
     "Set to true to specify Q_flow_nominal and temperatures, or to false to specify effectiveness"
     annotation (Evaluate=true,
                 Dialog(group="Nominal thermal performance"));
 
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(fixed=
-        use_Q_flow_nominal)
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(
+    fixed=use_Q_flow_nominal)
     "Nominal heat flow rate (positive for heat transfer from 1 to 2)"
     annotation (Dialog(group="Nominal thermal performance", enable=
           use_Q_flow_nominal));
@@ -54,7 +61,7 @@ protected
      p=Medium1.p_default,
      X=Medium1.X_default[1:Medium1.nXi]) "Default state for medium 1";
   final parameter Medium2.ThermodynamicState sta2_default = Medium2.setState_pTX(
-     T=Medium1.T_default,
+     T=Medium2.T_default,
      p=Medium2.p_default,
      X=Medium2.X_default[1:Medium2.nXi]) "Default state for medium 2";
 
@@ -83,10 +90,10 @@ protected
   flo flowRegime(fixed=false, start=flowRegime_nominal)
     "Heat exchanger flow regime";
 initial equation
-  assert(m1_flow_nominal > 0,
+  assert(m1_flow_nominal > Modelica.Constants.eps,
     "m1_flow_nominal must be positive, m1_flow_nominal = " + String(
     m1_flow_nominal));
-  assert(m2_flow_nominal > 0,
+  assert(m2_flow_nominal > Modelica.Constants.eps,
     "m2_flow_nominal must be positive, m2_flow_nominal = " + String(
     m2_flow_nominal));
 
@@ -153,19 +160,33 @@ initial equation
   UA_nominal = NTU_nominal*CMin_flow_nominal;
 equation
   // Assign the flow regime for the given heat exchanger configuration and capacity flow rates
-  if (configuration == con.ParallelFlow) then
-    flowRegime = if (C1_flow*C2_flow >= 0) then flo.ParallelFlow else flo.CounterFlow;
-  elseif (configuration == con.CounterFlow) then
-    flowRegime = if (C1_flow*C2_flow >= 0) then flo.CounterFlow else flo.ParallelFlow;
-  elseif (configuration == con.CrossFlowUnmixed) then
-    flowRegime = flo.CrossFlowUnmixed;
-  elseif (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
-    flowRegime = if (C1_flow < C2_flow) then flo.CrossFlowCMinMixedCMaxUnmixed
-       else flo.CrossFlowCMinUnmixedCMaxMixed;
+  if use_dynamicFlowRegime then
+    if (configuration == con.ParallelFlow) then
+      flowRegime = if (C1_flow*C2_flow >= 0) then flo.ParallelFlow else flo.CounterFlow;
+    elseif (configuration == con.CounterFlow) then
+      flowRegime = if (C1_flow*C2_flow >= 0) then flo.CounterFlow else flo.ParallelFlow;
+    elseif (configuration == con.CrossFlowUnmixed) then
+      flowRegime = flo.CrossFlowUnmixed;
+    elseif (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
+      flowRegime = if (C1_flow < C2_flow) then flo.CrossFlowCMinMixedCMaxUnmixed
+         else flo.CrossFlowCMinUnmixedCMaxMixed;
+    else
+      // have ( configuration == con.CrossFlowStream1UnmixedStream2Mixed)
+      flowRegime = if (C1_flow < C2_flow) then flo.CrossFlowCMinUnmixedCMaxMixed
+         else flo.CrossFlowCMinMixedCMaxUnmixed;
+    end if;
   else
-    // have ( configuration == con.CrossFlowStream1UnmixedStream2Mixed)
-    flowRegime = if (C1_flow < C2_flow) then flo.CrossFlowCMinUnmixedCMaxMixed
-       else flo.CrossFlowCMinMixedCMaxUnmixed;
+    flowRegime = flowRegime_nominal;
+    assert(noEvent(m1_flow > -0.1 * m1_flow_nominal)
+       and noEvent(m2_flow > -0.1 * m2_flow_nominal),
+"*** Warning in " + getInstanceName() +
+      ": The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.",
+      level = AssertionLevel.warning);
   end if;
 
   // Effectiveness
@@ -188,80 +209,111 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hex",
     Documentation(info="<html>
- <p>
- Partial model of a heat exchanger without humidity condensation.
- This model transfers heat in the amount of
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   Q = Q<sub>max</sub>  &epsilon;<br/>
-   &epsilon; = f(NTU, Z, flowRegime),
- </p>
- <p>
- where
- <i>Q<sub>max</sub></i> is the maximum heat that can be transferred,
- <i>&epsilon;</i> is the heat transfer effectiveness,
- <i>NTU</i> is the Number of Transfer Units,
- <i>Z</i> is the ratio of minimum to maximum capacity flow rate and
- <i>flowRegime</i> is the heat exchanger flow regime.
- such as
- parallel flow, cross flow or counter flow.
- </p>
- <p>
- The flow regimes depend on the heat exchanger configuration. All configurations
- defined in
- <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">
- AixLib.Fluid.Types.HeatExchangerConfiguration</a>
- are supported.
- </p>
- <p>
- Models that extend from this partial model need to provide an assignment
- for <code>UA</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 25, 2021 by Baptiste Ravache:<br/>
- Added a warning for when Q_flow_nominal is specified with the wrong sign.
- </li>
- <li>
- January 10, 2018 by Michael Wetter:<br/>
- Removed variable <code>Z</code> that is not used.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
- </li>
- <li>
- January 10, 2018 by Filip Jorissen:<br/>
- Corrected an error where the value of NTU was assigned to Z.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
- </li>
- <li>
- February 27, 2016 by Michael Wetter:<br/>
- Introduced <code>sta1_default</code> and <code>sta2_default</code>
- to enable translation under OpenModelica.
- Removed <code>max=1</code> attribute for <code>Z</code>. This is needed as near
- zero flow, <code>Z</code> can be larger than one due to the regularization.
- As <code>Z</code> is not used in this model other than for reporting, this bound
- need not be enforced (and the calculation of <code>eps</code> is fine at these small flow rates).
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue 490</a>.
- </li>
- <li>
- April 29, 2014 by Michael Wetter:<br/>
- Changed <code>assert</code> statement to avoid comparing
- enumeration with an integer, which triggers a warning
- in Dymola 2015.
- </li>
- <li>
- July 30, 2013 by Michael Wetter:<br/>
- Updated model to use new variable <code>mWat_flow</code>
- in the base class.
- </li>
- <li>
- February 12, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Partial model of a heat exchanger without humidity condensation.
+This model transfers heat in the amount of
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  Q = Q<sub>max</sub>  &epsilon;<br/>
+  &epsilon; = f(NTU, Z, flowRegime),
+</p>
+<p>
+where
+<i>Q<sub>max</sub></i> is the maximum heat that can be transferred,
+<i>&epsilon;</i> is the heat transfer effectiveness,
+<i>NTU</i> is the Number of Transfer Units,
+<i>Z</i> is the ratio of minimum to maximum capacity flow rate and
+<i>flowRegime</i> is the heat exchanger flow regime.
+such as
+parallel flow, cross flow or counter flow.
+</p>
+<p>
+The flow regimes depend on the heat exchanger configuration. All configurations
+defined in
+<a href=\"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">
+AixLib.Fluid.Types.HeatExchangerConfiguration</a>
+are supported.
+</p>
+<p>
+By default, the flow regime, such as counter flow or parallel flow,
+is kept constant based on the parameter value <code>configuration</code>.
+If a flow reverses direction, it is not changed, e.g.,
+a heat exchanger does not change from counter flow to parallel flow
+if one flow changes direction.
+To dynamically change the flow regime,
+set the constant <code>use_dynamicFlowRegime</code> to
+<code>true</code>.
+However, <code>use_dynamicFlowRegime=true</code>
+can cause slower simulation due to events.
+</p>
+<p>
+Models that extend from this partial model need to provide an assignment
+for <code>UA</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 3, 2023, by Jianjun Hu:<br/>
+Added <code>noEvent()</code> in the assertion function to avoid Optimica to not converge.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1690\">issue 1690</a>.
+</li>
+<li>
+January 24, 2023, by Hongxiang Fu:<br/>
+Set <code>flowRegime</code> to be equal to <code>flowRegime_nominal</code>
+by default. Added an assertion warning to inform the user about how to change
+this behaviour if the flow direction does need to change.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1682\">issue 1682</a>.
+</li>
+<li>
+November 11, 2023, by Michael Wetter:<br/>
+Corrected wrong temperature in assignment of <code>sta2_default</code>.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3151\">Buildings, issue 3151</a>.
+</li>
+<li>
+February 25, 2021 by Baptiste Ravache:<br/>
+Added a warning for when Q_flow_nominal is specified with the wrong sign.
+</li>
+<li>
+January 10, 2018 by Michael Wetter:<br/>
+Removed variable <code>Z</code> that is not used.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
+</li>
+<li>
+January 10, 2018 by Filip Jorissen:<br/>
+Corrected an error where the value of NTU was assigned to Z.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
+</li>
+<li>
+February 27, 2016 by Michael Wetter:<br/>
+Introduced <code>sta1_default</code> and <code>sta2_default</code>
+to enable translation under OpenModelica.
+Removed <code>max=1</code> attribute for <code>Z</code>. This is needed as near
+zero flow, <code>Z</code> can be larger than one due to the regularization.
+As <code>Z</code> is not used in this model other than for reporting, this bound
+need not be enforced (and the calculation of <code>eps</code> is fine at these small flow rates).
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue 490</a>.
+</li>
+<li>
+April 29, 2014 by Michael Wetter:<br/>
+Changed <code>assert</code> statement to avoid comparing
+enumeration with an integer, which triggers a warning
+in Dymola 2015.
+</li>
+<li>
+July 30, 2013 by Michael Wetter:<br/>
+Updated model to use new variable <code>mWat_flow</code>
+in the base class.
+</li>
+<li>
+February 12, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialEffectivenessNTU;

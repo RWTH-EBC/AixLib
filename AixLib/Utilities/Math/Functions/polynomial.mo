@@ -14,34 +14,33 @@ algorithm
   end for;
   y :=a*xp;
   annotation (Documentation(info="<html>
- This function computes a polynomial of arbitrary order.
- The polynomial has the form
- <p align=\"center\" style=\"font-style:italic;\">
-   y = a<sub>1</sub> + a<sub>2</sub> x + a<sub>3</sub> x<sup>2</sup> + ...
- </p>
- </html>",
+This function computes a polynomial of arbitrary order.
+The polynomial has the form
+<p align=\"center\" style=\"font-style:italic;\">
+  y = a<sub>1</sub> + a<sub>2</sub> x + a<sub>3</sub> x<sup>2</sup> + ...
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- December 14, 2016, by Michael Wetter:<br/>
- Removed derivative annotation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/602\">issue 602</a>.
- </li>
- <li>
- March 30, 2011, by Michael Wetter:<br/>
- Added <code>zeroDerivative</code> keyword.
- </li>
- <li>
- March 2, by Michael Wetter:<br/>
- Removed redundant <code>smoothOrder</code> annotation.
- </li>
- <li>
- February 29, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-smoothOrder=999,
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+December 14, 2016, by Michael Wetter:<br/>
+Removed derivative annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/602\">issue 602</a>.
+</li>
+<li>
+March 30, 2011, by Michael Wetter:<br/>
+Added <code>zeroDerivative</code> keyword.
+</li>
+<li>
+March 2, by Michael Wetter:<br/>
+Removed redundant <code>smoothOrder</code> annotation.
+</li>
+<li>
+February 29, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+smoothOrder=999);
 end polynomial;

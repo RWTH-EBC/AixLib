@@ -97,26 +97,25 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/TemperatureDryBulb.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example tests the dry bulb temperature sensors.
- One sensor is configured to be a steady-state model,
- a second sensor is configured to be a dynamic sensor and
- the third sensors is a dynamic sensor with heat transfer.
- There is also a sensor that measures the temperature difference.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 19, 2015 by Filip Jorissen:<br/>
- Extended example with demonstration of thermal losses.
- </li>
- <li>
- September 10, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example tests the dry bulb temperature sensors.
+One sensor is configured to be a steady-state model,
+a second sensor is configured to be a dynamic sensor and
+the third sensors is a dynamic sensor with heat transfer.
+There is also a sensor that measures the temperature difference.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 19, 2015 by Filip Jorissen:<br/>
+Extended example with demonstration of thermal losses.
+</li>
+<li>
+September 10, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{120,
-            100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+            100}})));
 end TemperatureDryBulb;

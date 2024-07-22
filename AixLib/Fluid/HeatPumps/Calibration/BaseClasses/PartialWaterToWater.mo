@@ -104,24 +104,23 @@ equation
             -100},{100,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,
             100}})),                                 preferredView="info",Documentation(info="<HTML>
- <p>
- Base class for the calibration of water to water heat pump models.
- </p>
- <p>
- Source and load temperatures and flow rates are read from an external time table.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- October 31, 2016, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Base class for the calibration of water to water heat pump models.
+</p>
+<p>
+Source and load temperatures and flow rates are read from an external time table.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+October 31, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialWaterToWater;

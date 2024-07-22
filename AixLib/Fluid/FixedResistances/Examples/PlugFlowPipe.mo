@@ -126,20 +126,19 @@ equation
         "Simulate and Plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
- <p>Basic test of model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
- AixLib.Fluid.FixedResistances.PlugFlowPipe</a> with and without outlet mixing volume.
- This test includes an inlet temperature step under a constant mass flow rate.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>July 27, 2021 by Baptiste Ravache<br/>Add case without mixing volume</li>
- </ul>
- <ul>
- <li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
- </ul>
- </html>"),
+<p>Basic test of model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
+AixLib.Fluid.FixedResistances.PlugFlowPipe</a> with and without outlet mixing volume.
+This test includes an inlet temperature step under a constant mass flow rate.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>July 27, 2021 by Baptiste Ravache<br/>Add case without mixing volume</li>
+</ul>
+<ul>
+<li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(extent={{-120,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
 end PlugFlowPipe;

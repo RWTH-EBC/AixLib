@@ -37,9 +37,6 @@ partial model PartialBorehole
     "Start value of pressure"
     annotation(Dialog(tab = "Initialization"));
 
-  parameter Boolean dynFil=true
-      "Set to false to remove the dynamics of the filling material"
-      annotation (Dialog(tab="Dynamics"));
   parameter Data.Borefield.Template borFieDat "Borefield parameters"
     annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
 
@@ -48,26 +45,32 @@ partial model PartialBorehole
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
     annotation(Documentation(info="<html>
- <p>
- Partial model to implement models simulating geothermal U-tube boreholes modeled
- as several borehole segments, with a uniform borehole wall boundary condition.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to water and glycolWater.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- July 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation of partial model.
- </li>
- <li>
- July 2014, by Damien Picard:<br/>
- First implementation.
- </ul>
- </html>"),
+<p>
+Partial model to implement models simulating geothermal U-tube boreholes modeled
+as several borehole segments, with a uniform borehole wall boundary condition.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 17, 2024, by Michael Wetter:<br/>
+Updated model due to removal of parameter <code>dynFil</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1885\">IBPSA, #1885</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to water and glycolWater.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+July 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation of partial model.
+</li>
+<li>
+July 2014, by Damien Picard:<br/>
+First implementation.
+</ul>
+</html>"),
 Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
@@ -106,6 +109,5 @@ Icon(coordinateSystem(
           extent={{64,76},{74,-84}},
           lineColor={0,0,0},
           fillColor={192,192,192},
-          fillPattern=FillPattern.Backward)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillPattern=FillPattern.Backward)}));
 end PartialBorehole;

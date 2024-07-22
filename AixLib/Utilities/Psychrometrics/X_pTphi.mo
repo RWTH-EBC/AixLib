@@ -41,48 +41,48 @@ equation
   //sum(X[:]) = 1; // The formulation with a sum in an equation section leads to a nonlinear equation system
   X[i_nw] =  1 - X[i_w];
   annotation (Documentation(info="<html>
- <p>
- Block to compute the water vapor concentration based on
- pressure, temperature and relative humidity.
- </p>
- <p>
- If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
- is used as atmospheric pressure,
- and the <code>p_in</code> input connector is disabled;
- if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
- and the value provided by the input connector is used instead.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>November 3, 2017 by Filip Jorissen:<br/>
- Converted (initial) algorithm section into (initial) equation section.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/847\">#847</a>.
- </li>
- <li>July 24, 2014 by Michael Wetter:<br/>
- Added <code>assert</code> to verify that <code>Medium.nX==2</code>
- as the implementation is only valid for such media.
- </li>
- <li>April 26, 2013 by Michael Wetter:<br/>
- Set the medium model to <code>AixLib.Media.Air</code>.
- This was required to allow a pedantic model check in Dymola 2014.
- </li>
- <li>August 21, 2012 by Michael Wetter:<br/>
- Added function call to compute water vapor content.
- </li>
- <li>
- February 22, 2010 by Michael Wetter:<br/>
- Improved the code that searches for the index of 'water' in the medium model.
- </li>
- <li>
- February 17, 2010 by Michael Wetter:<br/>
- Renamed block from <code>MassFraction_pTphi</code> to <code>X_pTphi</code>
- </li>
- <li>
- February 4, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),Icon(graphics={
+<p>
+Block to compute the water vapor concentration based on
+pressure, temperature and relative humidity.
+</p>
+<p>
+If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
+is used as atmospheric pressure,
+and the <code>p_in</code> input connector is disabled;
+if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
+and the value provided by the input connector is used instead.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>November 3, 2017 by Filip Jorissen:<br/>
+Converted (initial) algorithm section into (initial) equation section.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/847\">#847</a>.
+</li>
+<li>July 24, 2014 by Michael Wetter:<br/>
+Added <code>assert</code> to verify that <code>Medium.nX==2</code>
+as the implementation is only valid for such media.
+</li>
+<li>April 26, 2013 by Michael Wetter:<br/>
+Set the medium model to <code>AixLib.Media.Air</code>.
+This was required to allow a pedantic model check in Dymola 2014.
+</li>
+<li>August 21, 2012 by Michael Wetter:<br/>
+Added function call to compute water vapor content.
+</li>
+<li>
+February 22, 2010 by Michael Wetter:<br/>
+Improved the code that searches for the index of 'water' in the medium model.
+</li>
+<li>
+February 17, 2010 by Michael Wetter:<br/>
+Renamed block from <code>MassFraction_pTphi</code> to <code>X_pTphi</code>
+</li>
+<li>
+February 4, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"), Icon(graphics={
         Text(
           extent={{-96,16},{-54,-22}},
           textColor={0,0,0},
@@ -94,6 +94,5 @@ equation
         Text(
           extent={{26,56},{90,-54}},
           textColor={0,0,0},
-          textString="X_steam")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="X_steam")}));
 end X_pTphi;

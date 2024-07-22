@@ -23,27 +23,26 @@ record TwoPortFlowResistanceParameters
 
 annotation (preferredView="info",
 Documentation(info="<html>
- This class contains parameters that are used to
- compute the pressure drop in models that have one fluid stream.
- Note that the nominal mass flow rate is not declared here because
- the model
- <a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
- PartialTwoPortInterface</a>
- already declares it.
- </html>",
+This class contains parameters that are used to
+compute the pressure drop in models that have one fluid stream.
+Note that the nominal mass flow rate is not declared here because
+the model
+<a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
+PartialTwoPortInterface</a>
+already declares it.
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- April 13, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+April 13, 2009, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end TwoPortFlowResistanceParameters;

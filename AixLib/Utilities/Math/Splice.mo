@@ -60,22 +60,21 @@ equation
       textColor={160,160,164},
           textString="u1")}),
 Documentation(info="<html>
- <p>
- This block implements <a href=\"modelica://AixLib.Utilities.Math.Functions.spliceFunction\">
- AixLib.Utilities.Math.Functions.spliceFunction</a>, which provides a continuously differentiable transition between two arguments.
- </p>
- </html>",
+<p>
+This block implements <a href=\"modelica://AixLib.Utilities.Math.Functions.spliceFunction\">
+AixLib.Utilities.Math.Functions.spliceFunction</a>, which provides a continuously differentiable transition between two arguments.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 31, 2012, by Michael Wetter:<br/>
- Revised documentation.
- </li>
- <li>
- July 30, 2012, by Kaustubh Phalak:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 31, 2012, by Michael Wetter:<br/>
+Revised documentation.
+</li>
+<li>
+July 30, 2012, by Kaustubh Phalak:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Splice;

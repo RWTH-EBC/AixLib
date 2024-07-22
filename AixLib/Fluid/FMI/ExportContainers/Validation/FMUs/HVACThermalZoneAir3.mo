@@ -4,21 +4,20 @@ block HVACThermalZoneAir3 "Validation model for the convective HVAC system"
     redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2", "VOC", "CH2O"}));
 annotation (
     Documentation(info="<html>
- <p>
- This example validates that
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
- AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
- exports correctly as an FMU.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2016 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example validates that
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
+AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
+exports correctly as an FMU.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2016 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/HVACThermalZoneAir3.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Export FMU"));
 end HVACThermalZoneAir3;

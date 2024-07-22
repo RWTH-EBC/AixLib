@@ -55,33 +55,32 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/AltitudeAngle.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This example calculates the altitude angle of the sun at a given time.
- The altitude angle is the angle between the sun ray and the projection of the ray on a horizontal surface.
- </p>
- <p>
- Components used in this model are:
- </p>
- <ul>
- <li>
- <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination</a>
- </li>
- <li>
- <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle</a>
- </li>
- <li>
- <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle</a>
- </li>
- </ul>
- <br/>
- </html>",
+<p>
+This example calculates the altitude angle of the sun at a given time.
+The altitude angle is the angle between the sun ray and the projection of the ray on a horizontal surface.
+</p>
+<p>
+Components used in this model are:
+</p>
+<ul>
+<li>
+<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination</a>
+</li>
+<li>
+<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle</a>
+</li>
+<li>
+<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle</a>
+</li>
+</ul>
+<br/>
+</html>",
 revisions="<html>
- <ul>
- <li>
- Feb 01, 2012, by Kaustubh Phalak<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+Feb 01, 2012, by Kaustubh Phalak<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end AltitudeAngle;

@@ -39,46 +39,46 @@ equation
   end for;
   heatPort[nSeg].Q_flow = Q_flow[nSeg-1];
   annotation (Documentation(info="<html>
- <p>
- This model outputs a heat flow rate that can be added to fluid volumes
- in order to emulate buoyancy during a temperature inversion.
- For simplicity, this model does not compute a buoyancy induced mass flow rate,
- but rather a heat flow that has the same magnitude as the enthalpy flow
- associated with the buoyancy induced mass flow rate.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 7, 2018 by Filip Jorissen:<br/>
- Copied model from Buildings and update the model accordingly.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
- </li>
- <li>
- December 14, 2012 by Michael Wetter:<br/>
- Renamed protected parameters for consistency with naming convention.
- </li>
- <li>
- October 8, 2011 by Michael Wetter:<br/>
- Added <code>noEvent(...)</code> to
- <code>Q_flow[i] = k*smooth(1, if dT[i]>0 then dT[i]^2 else 0);</code>
- since the equation returns the same value to the left and right of
- <code>dT[i]>0</code>.
- </li>
- <li>
- September 16, 2011 by Michael Wetter:<br/>
- Changed the implementation from <code>Q_flow[i] = k*max(heatPort[i+1].T-heatPort[i].T, 0);</code> to
- <code>Q_flow[i] = k*smooth(1, if dT[i]>0 then dT[i]^2 else 0);</code>.
- The previous implementation was not differentiable. In modeling a solar system, this
- change reduced the computing time by a factor of 20 during the time when the pumps
- were almost switched off and colder temperature was fed from the collector to the tank.
- </li>
- <li>
- October 28, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model outputs a heat flow rate that can be added to fluid volumes
+in order to emulate buoyancy during a temperature inversion.
+For simplicity, this model does not compute a buoyancy induced mass flow rate,
+but rather a heat flow that has the same magnitude as the enthalpy flow
+associated with the buoyancy induced mass flow rate.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 7, 2018 by Filip Jorissen:<br/>
+Copied model from Buildings and update the model accordingly.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+</li>
+<li>
+December 14, 2012 by Michael Wetter:<br/>
+Renamed protected parameters for consistency with naming convention.
+</li>
+<li>
+October 8, 2011 by Michael Wetter:<br/>
+Added <code>noEvent(...)</code> to
+<code>Q_flow[i] = k*smooth(1, if dT[i]>0 then dT[i]^2 else 0);</code>
+since the equation returns the same value to the left and right of
+<code>dT[i]>0</code>.
+</li>
+<li>
+September 16, 2011 by Michael Wetter:<br/>
+Changed the implementation from <code>Q_flow[i] = k*max(heatPort[i+1].T-heatPort[i].T, 0);</code> to
+<code>Q_flow[i] = k*smooth(1, if dT[i]>0 then dT[i]^2 else 0);</code>.
+The previous implementation was not differentiable. In modeling a solar system, this
+change reduced the computing time by a factor of 20 during the time when the pumps
+were almost switched off and colder temperature was fed from the collector to the tank.
+</li>
+<li>
+October 28, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Rectangle(
@@ -115,6 +115,5 @@ Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,127},
-          fillPattern=FillPattern.Solid)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillPattern=FillPattern.Solid)}));
 end Buoyancy;

@@ -148,38 +148,37 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,
             -120},{120,160}})),
     Documentation(info="<html>
- <p>
- Model that is used as the base class for models that
- demonstrates the use of an ideal heater and an ideal cooler,
- or an ideal humidifier and dehumidifier.
- </p>
- <p>
- The model on the top has almost unlimited positive capacity (<code>Q_flow_nominal = 1.0e10</code> Watts),
- and hence its outlet temperature always reaches the set points.
- </p>
- <p>
- The model in the middle has a limited negative capacitiy (<code>Q_flow_nominal = 1000</code> Watts), and hence
- its outlet state reaches only a limited value corresponding to its
- maximum negative capacity.
- </p>
- <p>
- The model at the bottom has unlimited capacity.
- </p>
- <p>
- At <i>t=1000</i> second, the flow reverses its direction.
- </p>
- <p>
- Each flow leg has the same mass flow rate. There are three mass flow sources
- as using one source only would yield a nonlinear system of equations that
- needs to be solved to determine the mass flow rate distribution.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 3, 2017, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that is used as the base class for models that
+demonstrates the use of an ideal heater and an ideal cooler,
+or an ideal humidifier and dehumidifier.
+</p>
+<p>
+The model on the top has almost unlimited positive capacity (<code>Q_flow_nominal = 1.0e10</code> Watts),
+and hence its outlet temperature always reaches the set points.
+</p>
+<p>
+The model in the middle has a limited negative capacitiy (<code>Q_flow_nominal = 1000</code> Watts), and hence
+its outlet state reaches only a limited value corresponding to its
+maximum negative capacity.
+</p>
+<p>
+The model at the bottom has unlimited capacity.
+</p>
+<p>
+At <i>t=1000</i> second, the flow reverses its direction.
+</p>
+<p>
+Each flow leg has the same mass flow rate. There are three mass flow sources
+as using one source only would yield a nonlinear system of equations that
+needs to be solved to determine the mass flow rate distribution.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 3, 2017, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PrescribedOutletState;

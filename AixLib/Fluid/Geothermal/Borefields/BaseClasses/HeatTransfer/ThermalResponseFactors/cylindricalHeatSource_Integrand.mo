@@ -18,18 +18,17 @@ algorithm
 annotation (
 Inline=true,
 Documentation(info="<html>
- <p>
- Integrand of the cylindrical heat source solution for use in
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 22, 2018 by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Integrand of the cylindrical heat source solution for use in
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 22, 2018 by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end cylindricalHeatSource_Integrand;

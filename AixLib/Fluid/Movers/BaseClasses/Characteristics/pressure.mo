@@ -69,46 +69,45 @@ algorithm
   end if;
 annotation(smoothOrder=1,
 Documentation(info="<html>
- <p>
- This function computes the fan static
- pressure raise as a function of volume flow rate and revolution in the form
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   &Delta;p = r<sub>N</sub><sup>2</sup> &nbsp; s(V&#775;/r<sub>N</sub>, d),
- </p>
- <p>
- where
- <i>&Delta;p</i> is the pressure rise,
- <i>r<sub>N</sub></i> is the normalized fan speed,
- <i>V&#775;</i> is the volume flow rate and
- <i>d</i> are performance data for fan or pump power consumption at <i>r<sub>N</sub>=1</i>.
- </p>
- <h4>Implementation</h4>
- <p>
- The function <i>s(&middot;, &middot;)</i> is a cubic hermite spline.
- If the data <i>d</i> define a monotone decreasing sequence, then
- <i>s(&middot;, d)</i> is a monotone decreasing function.
- </p>
- <p>
- The function allows <i>r<sub>N</sub></i> to be zero.
- </p>
- </html>",
+<p>
+This function computes the fan static
+pressure raise as a function of volume flow rate and revolution in the form
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  &Delta;p = r<sub>N</sub><sup>2</sup> &nbsp; s(V&#775;/r<sub>N</sub>, d),
+</p>
+<p>
+where
+<i>&Delta;p</i> is the pressure rise,
+<i>r<sub>N</sub></i> is the normalized fan speed,
+<i>V&#775;</i> is the volume flow rate and
+<i>d</i> are performance data for fan or pump power consumption at <i>r<sub>N</sub>=1</i>.
+</p>
+<h4>Implementation</h4>
+<p>
+The function <i>s(&middot;, &middot;)</i> is a cubic hermite spline.
+If the data <i>d</i> define a monotone decreasing sequence, then
+<i>s(&middot;, d)</i> is a monotone decreasing function.
+</p>
+<p>
+The function allows <i>r<sub>N</sub></i> to be zero.
+</p>
+</html>",
   revisions="<html>
- <ul>
- <li>
- September 8, 2016, by Michael Wetter and Filip Jorissen:<br/>
- Changed implementation to allow <code>r_N = 0</code>.<br/>
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/458\">#458</a>.
- </li>
- <li>
- September 7, 2016, by Michael Wetter:<br/>
- Moved function which was a protected function to make it public, as it
- is now called by
- <a href=\"modelica://AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface\">
- AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 8, 2016, by Michael Wetter and Filip Jorissen:<br/>
+Changed implementation to allow <code>r_N = 0</code>.<br/>
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/458\">#458</a>.
+</li>
+<li>
+September 7, 2016, by Michael Wetter:<br/>
+Moved function which was a protected function to make it public, as it
+is now called by
+<a href=\"modelica://AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface\">
+AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface</a>.
+</li>
+</ul>
+</html>"));
 end pressure;

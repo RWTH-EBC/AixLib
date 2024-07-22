@@ -92,34 +92,33 @@ equation
 
   annotation (
     Documentation(info="<html>
- <p>
- This partial model is used to model one way flow-elements.
- It holds the conservation equations and should be extended by
- definition of <u><b>one</b></u> of the following variables:
- </p>
- <p>m_flow = mass flow rate trough the component</p>
- <p>or</p>
- <p>V_flow = volume flow rate through the component</p>
- <p>
- The flow from A-&gt;B is the positive flow.
- The resulting equation should be in the <code>extends</code> statement,
- not in the equation section since this model sets both
- <code>m_flow = V_flow*rho</code> and <code>V_flow = m_flow/rho</code>.
- </p>
- </html>",
+<p>
+This partial model is used to model one way flow-elements.
+It holds the conservation equations and should be extended by
+definition of <u><b>one</b></u> of the following variables:
+</p>
+<p>m_flow = mass flow rate trough the component</p>
+<p>or</p>
+<p>V_flow = volume flow rate through the component</p>
+<p>
+The flow from A-&gt;B is the positive flow.
+The resulting equation should be in the <code>extends</code> statement,
+not in the equation section since this model sets both
+<code>m_flow = V_flow*rho</code> and <code>V_flow = m_flow/rho</code>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Apr 06, 2021, by Klaas De Jonge:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Apr 06, 2021, by Klaas De Jonge:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialOneWayFlowElement;

@@ -23,6 +23,7 @@ model FlowControlled_dpSystem
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     m_flow_nominal=1,
     use_inputFilter=false) "Regular dp controlled fan"
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
@@ -30,6 +31,7 @@ model FlowControlled_dpSystem
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     m_flow_nominal=1,
     use_inputFilter=false,
     prescribeSystemPressure=true)
@@ -215,26 +217,32 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dpSystem.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example demonstrates and tests the use of
- <a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
- AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
- movers that use parameter
- <code>prescribeSystemPressure</code>.
- </p>
- <p>
- The mass flow rates and actual pressure heads of the two configurations are compared.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 4 2017, by Filip Jorissen:<br/>
- First implementation.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
- </li>
- </ul>
- </html>"),
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates and tests the use of
+<a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
+AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
+movers that use parameter
+<code>prescribeSystemPressure</code>.
+</p>
+<p>
+The mass flow rates and actual pressure heads of the two configurations are compared.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 9, 2024, by Hongxiang Fu:<br/>
+Specified <code>nominalValuesDefineDefaultPressureCurve=true</code>
+in the mover component to suppress a warning.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3819\">#3819</a>.
+</li>
+<li>
+May 4 2017, by Filip Jorissen:<br/>
+First implementation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
+</li>
+</ul>
+</html>"),
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
 end FlowControlled_dpSystem;

@@ -114,19 +114,18 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/ConstantEffectiveness.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model tests
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
- AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
- for different inlet conditions.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 28, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
+AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
+for different inlet conditions.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 28, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ConstantEffectiveness;

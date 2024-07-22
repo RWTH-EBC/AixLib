@@ -64,25 +64,24 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (
 Documentation(info="<html>
- <p>
- This example computes the sky brightness.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 2, 2021, by Ettore Zanetti:<br/>
- Changed extraterrestrial radiation and added time dependent correlation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- July 07, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the sky brightness.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 2, 2021, by Ettore Zanetti:<br/>
+Changed extraterrestrial radiation and added time dependent correlation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+July 07, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=8640000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/SkyBrightness.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end SkyBrightness;

@@ -17,25 +17,24 @@ algorithm
 
   annotation (smoothOrder=99,
   Documentation(info="<html>
- <p>
- Function to compute the density of moist air for given
- pressure, temperature and water vapor mass fraction.
- </p>
- <p>
- Note that the water vapor mass fraction is in <i>kg/kg</i>
- total air.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 23, 2015 by Filip Jorissen:<br/>
- Added derivative information for avoiding numerical Jacobians.
- </li>
- <li>
- February 24, 2015 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function to compute the density of moist air for given
+pressure, temperature and water vapor mass fraction.
+</p>
+<p>
+Note that the water vapor mass fraction is in <i>kg/kg</i>
+total air.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 23, 2015 by Filip Jorissen:<br/>
+Added derivative information for avoiding numerical Jacobians.
+</li>
+<li>
+February 24, 2015 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end density_pTX;

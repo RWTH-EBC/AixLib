@@ -12,6 +12,7 @@ impure function temperatureResponseMatrix
   input Modelica.Units.SI.ThermalConductivity kSoi
     "Thermal conductivity of soil";
   input Integer nSeg "Number of line source segments per borehole";
+  input Integer nClu "Number of clusters for g-function calculation";
   input Integer nTimSho "Number of time steps in short time region";
   input Integer nTimLon "Number of time steps in long time region";
   input Integer nTimTot "Number of g-function points";
@@ -28,11 +29,22 @@ protected
   Modelica.Units.SI.Time[nTimTot] tGFun "g-function evaluation times";
   Real[nTimTot] gFun "g-function vector";
   Boolean writegFun = false "True if g-function was succesfully written to file";
+  Integer labels[nBor](each fixed=false) "Cluster label associated with each data point";
+  Integer cluSiz[nClu](each fixed=false) "Size of the clusters";
+  Integer nCluUni "Number of unique borehole clusters";
 
 algorithm
   pathSave := "tmp/temperatureResponseMatrix/" + sha + "TStep.mat";
 
   if forceGFunCalc or not Modelica.Utilities.Files.exist(pathSave) then
+    (labels, cluSiz, nCluUni) :=
+      AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.clusterBoreholes(
+      nBor=nBor,
+      cooBor=cooBor,
+      hBor=hBor,
+      dBor=dBor,
+      rBor=rBor,
+      nClu=nClu);
     (tGFun,gFun) :=
       AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction(
       nBor=nBor,
@@ -42,9 +54,12 @@ algorithm
       rBor=rBor,
       aSoi=aSoi,
       nSeg=nSeg,
+      nClu=nCluUni,
       nTimSho=nTimSho,
       nTimLon=nTimLon,
-      ttsMax=ttsMax);
+      ttsMax=ttsMax,
+      labels = labels,
+      cluSiz = cluSiz[1:nCluUni]);
 
     for i in 1:nTimTot loop
       TStep[i,1] := tGFun[i];
@@ -69,43 +84,42 @@ algorithm
     ncol=2);
 
   annotation (Documentation(info="<html>
- <p>
- This function uses the parameters required to calculate the borefield's thermal
- response to build a SHA1-encrypted string unique to the borefield in question.
- Then, if the <code>forceGFunCalc</code> input is <code>true</code> or if
- there is no <code>.mat</code> file with the SHA1 hash as its filename in the
- <code>tmp/temperatureResponseMatrix</code> folder,
- the thermal response will be calculated and written as a
- <code>.mat</code> file. Otherwise, the
- thermal response will simply be read from the
- <code>.mat</code> file. In the <code>.mat</code> file, the data
- is saved in a matrix with the name <code>TStep</code>, where the first column is
- the time (in seconds) and the second column is the temperature step response,
- which is the g-function divided by <i>2 &pi; H k<sub>soi</sub></i>, with
- <code>H</code> being the borehole length and <i>k<sub>soi</sub></i> being the thermal
- conductivity of the soil.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>impure</code> declaration for MSL 4.0.0.
- </li>
- <li>
- August 27, 2018, by Michael Wetter:<br/>
- Changed name of temporary directory so that it is clear for users
- that this is a temporary directory.
- </li>
- <li>
- July 15, 2018, by Michael Wetter:<br/>
- Changed implementation to use matrix read and write from
- the Modelica Standard Library.
- </li>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function uses the parameters required to calculate the borefield's thermal
+response to build a SHA1-encrypted string unique to the borefield in question.
+Then, if the <code>forceGFunCalc</code> input is <code>true</code> or if
+there is no <code>.mat</code> file with the SHA1 hash as its filename in the
+<code>tmp/temperatureResponseMatrix</code> folder,
+the thermal response will be calculated and written as a
+<code>.mat</code> file. Otherwise, the
+thermal response will simply be read from the
+<code>.mat</code> file. In the <code>.mat</code> file, the data
+is saved in a matrix with the name <code>TStep</code>, where the first column is
+the time (in seconds) and the second column is the temperature step response,
+which is the g-function divided by <i>2 &pi; H k<sub>soi</sub></i>, with
+<code>H</code> being the borehole length and <i>k<sub>soi</sub></i> being the thermal
+conductivity of the soil.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>impure</code> declaration for MSL 4.0.0.
+</li>
+<li>
+August 27, 2018, by Michael Wetter:<br/>
+Changed name of temporary directory so that it is clear for users
+that this is a temporary directory.
+</li>
+<li>
+July 15, 2018, by Michael Wetter:<br/>
+Changed implementation to use matrix read and write from
+the Modelica Standard Library.
+</li>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end temperatureResponseMatrix;

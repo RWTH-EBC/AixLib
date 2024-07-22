@@ -280,29 +280,29 @@ initial algorithm
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau1 > Modelica.Constants.eps,
 "The parameter tau1, or the volume of the model from which tau may be derived, is unreasonably small.
-  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau1 = "+ String(tau1) + "\n");
+ You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+ Received tau1 = " + String(tau1) + "\n");
 
  // Check for tau2
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau2 > Modelica.Constants.eps,
 "The parameter tau2, or the volume of the model from which tau may be derived, is unreasonably small.
-  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau2 = "+ String(tau2) + "\n");
+ You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+ Received tau2 = " + String(tau2) + "\n");
 
   // Check for tau1
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau3 > Modelica.Constants.eps,
 "The parameter tau3, or the volume of the model from which tau may be derived, is unreasonably small.
-  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau3 = "+ String(tau3) + "\n");
+ You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+ Received tau3 = " + String(tau3) + "\n");
 
  // Check for tau2
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau4 > Modelica.Constants.eps,
 "The parameter tau4, or the volume of the model from which tau may be derived, is unreasonably small.
-  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau4 = "+ String(tau4) + "\n");
+ You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+ Received tau4 = " + String(tau4) + "\n");
 
   assert(homotopyInitialization, "In " + getInstanceName() +
     ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
@@ -359,27 +359,27 @@ equation
       smooth=Smooth.None));
   annotation (
     Documentation(info="<html>
- <p>This component transports four fluid streams between eight ports. It provides the basic model for implementing a dynamic heat exchanger. </p>
- <p>The model can be used as-is, although there will be no heat or mass transfer between the four fluid streams. To add heat transfer, heat flow can be added to the heat port of the four volumes.</p>
- <h4>Implementation</h4>
- <p>The variable names follow the conventions used in <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>. </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- July 18, 2018, by Massimo Cimmino:<br/>
- Remove start values of m_flow and dp variables.
- </li>
- </ul>
- <ul>
- <li>July 2014, by Damien Picard:<br/>First implementation. </li>
- </ul>
- </html>"),
+<p>This component transports four fluid streams between eight ports. It provides the basic model for implementing a dynamic heat exchanger. </p>
+<p>The model can be used as-is, although there will be no heat or mass transfer between the four fluid streams. To add heat transfer, heat flow can be added to the heat port of the four volumes.</p>
+<h4>Implementation</h4>
+<p>The variable names follow the conventions used in <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>. </p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+July 18, 2018, by Massimo Cimmino:<br/>
+Remove start values of m_flow and dp variables.
+</li>
+</ul>
+<ul>
+<li>July 2014, by Damien Picard:<br/>First implementation. </li>
+</ul>
+</html>"),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -415,6 +415,5 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics),
-  __Dymola_LockedEditing="Model from IBPSA");
+            100,100}}), graphics));
 end EightPortHeatMassExchanger;

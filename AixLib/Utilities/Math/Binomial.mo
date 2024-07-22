@@ -13,13 +13,12 @@ equation
           textColor={160,160,164},
           textString="binomial()")}),
     Documentation(info="<html>
-     <p>This block computes the binomial coefficient \"n choose k\".</p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 17, 2018, by Massimo Cimmino:<br/>First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+    <p>This block computes the binomial coefficient \"n choose k\".</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 17, 2018, by Massimo Cimmino:<br/>First implementation.
+</li>
+</ul>
+</html>"));
 end Binomial;

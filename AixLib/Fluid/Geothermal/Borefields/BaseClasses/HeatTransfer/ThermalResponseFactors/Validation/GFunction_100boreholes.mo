@@ -22,6 +22,10 @@ model GFunction_100boreholes
   final parameter Modelica.Units.SI.Time[nTimTot] tGFun(each fixed=false);
   final parameter Real[nTimTot] dspline(each fixed=false);
 
+  parameter Integer nClu=5 "Number of clusters to be generated";
+  parameter Integer labels[nBor](each fixed=false) "Cluster label associated with each data point";
+  parameter Integer cluSiz[nClu](each fixed=false) "Size of the clusters";
+
   Real gFun_int "Interpolated value of g-function";
   Real lntts_int "Non-dimensional logarithmic time for interpolation";
 
@@ -35,6 +39,13 @@ model GFunction_100boreholes
 
 initial equation
   // Evaluate g-function for the specified bore field configuration
+  (labels, cluSiz) = AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.clusterBoreholes(
+    nBor = nBor,
+    cooBor = cooBor,
+    hBor = hBor,
+    dBor = dBor,
+    rBor = rBor,
+    nClu = nClu);
   (tGFun,gFun) =
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction(
       nBor = nBor,
@@ -46,7 +57,10 @@ initial equation
       nSeg = nSeg,
       nTimSho = nTimSho,
       nTimLon = nTimLon,
-      ttsMax = ttsMax);
+      ttsMax = ttsMax,
+      nClu = nClu,
+      labels = labels,
+      cluSiz = cluSiz);
   lntts = log(tGFun/ts .+ Modelica.Constants.small);
   // Initialize parameters for interpolation
   dspline = AixLib.Utilities.Math.Functions.splineDerivatives(
@@ -83,18 +97,22 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/ThermalResponseFactors/Validation/GFunction_100boreholes.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks the implementation of functions that evaluate the
- g-function of a borefield of 100 boreholes in a 10 by 10 configuration.
- </p>
- </html>",
+<p>
+This example checks the implementation of functions that evaluate the
+g-function of a borefield of 100 boreholes in a 10 by 10 configuration.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 20, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 9, 2022, by Massimo Cimmino:<br/>
+Added parameters to define the number of clusters for the method of Prieto and
+Cimmino (2021).
+</li>
+<li>
+March 20, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end GFunction_100boreholes;

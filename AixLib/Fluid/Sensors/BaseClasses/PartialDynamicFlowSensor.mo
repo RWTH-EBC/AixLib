@@ -29,45 +29,51 @@ equation
     k = 1;
   end if;
   annotation (Icon(graphics={
-        Line(visible=(tau <> 0),
+        Line(visible=(tau > 0),
         points={{52,60},{58,74},{66,86},{76,92},{88,96},{98,96}}, color={0,
               0,127})}), Documentation(info="<html>
- <p>
- Partial component to model a sensor that measures any intensive properties
- of a flow, e.g., to get temperature or density in the flow
- between fluid connectors.</p>
- <p>
- The sensor computes a gain that is zero at zero mass flow rate.
- This avoids fast transients if the flow is close to zero, thereby
- improving the numerical efficiency.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 9, 2016, by Michael Wetter:<br/>
- Improved documentation for <code>tau</code>.
- </li>
- <li>
- January 12, 2016, by Filip Jorissen:<br/>
- Added optional parameter <code>tauInv</code>.
- </li>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- March 29, 2013, by Michael Wetter:<br/>
- Changed the parameter <code>initType</code> to
- <code>Modelica.Blocks.Types.Init.InitialState</code>.
- This allows a pedantic model check in Dymola 2014 of models that instanciate sensors
- but do not set this parameter. It also ensures that different Modelica simulators solve
- the same initialization problem.
- </li>
- <li>
- July 7, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Partial component to model a sensor that measures any intensive properties
+of a flow, e.g., to get temperature or density in the flow
+between fluid connectors.</p>
+<p>
+The sensor computes a gain that is zero at zero mass flow rate.
+This avoids fast transients if the flow is close to zero, thereby
+improving the numerical efficiency.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 10, 2022, by Michael Wetter:<br/>
+Corrected annotation to avoid comparing a real-valued parameter
+for equality.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1671\">IBPSA, #1671</a>.
+</li>
+<li>
+August 9, 2016, by Michael Wetter:<br/>
+Improved documentation for <code>tau</code>.
+</li>
+<li>
+January 12, 2016, by Filip Jorissen:<br/>
+Added optional parameter <code>tauInv</code>.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+March 29, 2013, by Michael Wetter:<br/>
+Changed the parameter <code>initType</code> to
+<code>Modelica.Blocks.Types.Init.InitialState</code>.
+This allows a pedantic model check in Dymola 2014 of models that instanciate sensors
+but do not set this parameter. It also ensures that different Modelica simulators solve
+the same initialization problem.
+</li>
+<li>
+July 7, 2011, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialDynamicFlowSensor;

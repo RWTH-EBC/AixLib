@@ -21,35 +21,34 @@ experiment(Tolerance=1e-06, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/InverseFlowFunctions.mos"
         "Simulate and plot"),
               Documentation(info="<html>
- <p>
- This model tests the inverse formulation of the flow functions.
- The pressure difference <code>dp</code> and <code>dpCalc</code> need to
- be equal up to the solver tolerance, except for a small neighborhood
- around the origin. In this neighborhood around the origin, the functions
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>
- and
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
- are not invertible.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- August 8, 2012, by Michael Wetter:<br/>
- Updated documentation.
- </li>
- <li>
- July 12, 2012, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the inverse formulation of the flow functions.
+The pressure difference <code>dp</code> and <code>dpCalc</code> need to
+be equal up to the solver tolerance, except for a small neighborhood
+around the origin. In this neighborhood around the origin, the functions
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>
+and
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
+are not invertible.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+August 8, 2012, by Michael Wetter:<br/>
+Updated documentation.
+</li>
+<li>
+July 12, 2012, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end InverseFlowFunctions;

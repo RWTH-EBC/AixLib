@@ -153,35 +153,34 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-260},{160,100}})),
     Documentation(info="<html>
- <p>
- This is a partial model that is used in the validation tests
- of the mixing volume.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 12, 2017, by Michael Wetter:<br/>
- Removed temperature connection that is no longer needed.<br/>
- This is for issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
- </li>
- <li>
- November 15, 2016, by Michael Wetter:<br/>
- Changed model to be <code>partial</code> and removed the <code>experiment</code> annotation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/590\">issue 590</a>.
- </li>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- May 22 2015 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is a partial model that is used in the validation tests
+of the mixing volume.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 12, 2017, by Michael Wetter:<br/>
+Removed temperature connection that is no longer needed.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+November 15, 2016, by Michael Wetter:<br/>
+Changed model to be <code>partial</code> and removed the <code>experiment</code> annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/590\">issue 590</a>.
+</li>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+May 22 2015 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end MoistureMixingConservation;

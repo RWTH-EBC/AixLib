@@ -73,32 +73,31 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/EnthalpyFlowRate.mos"
         "Simulate and plot"),    Documentation(info="<html>
- <p>
- This example tests the enthalpy flow rate sensor and the
- specific enthalpy sensor.
- The model compares the output of the enthalpy flow rate sensor with
- the product of the output of the enthalpy and the mass flow rate sensor.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference,
- and added the difference to the regression results.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- August 31, 2013, by Michael Wetter:<br/>
- Change <code>tau=0</code> to <code>tau=1</code> for sensors.
- Changed source model to use temperature instead of specific enthalpy
- as a parameter.
- </li>
- <li>
- September 29, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example tests the enthalpy flow rate sensor and the
+specific enthalpy sensor.
+The model compares the output of the enthalpy flow rate sensor with
+the product of the output of the enthalpy and the mass flow rate sensor.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+August 31, 2013, by Michael Wetter:<br/>
+Change <code>tau=0</code> to <code>tau=1</code> for sensors.
+Changed source model to use temperature instead of specific enthalpy
+as a parameter.
+</li>
+<li>
+September 29, 2009, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end EnthalpyFlowRate;

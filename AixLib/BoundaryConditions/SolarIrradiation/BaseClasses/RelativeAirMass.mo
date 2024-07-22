@@ -27,45 +27,44 @@ equation
   annotation (
     defaultComponentName="relAirMas",
     Documentation(info="<html>
- <p>
- This component computes the relative air mass for sky brightness.
- </p>
- <h4>References</h4>
- <p>
- R. Perez (1999).
- <i>Fortran Function irrpz.f</i>,
- Emailed by R. Perez to F.C. Winkelmann on May 21, 1999.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 6, 2021, by Ettore Zanetti:<br/>
- Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- May 2, 2021, by Ettore Zanetti:
- Introduced altitude attenuation for relative air mass calculation.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, issue 1477</a>.
- </li>
- <li>
- April 27, 2018, by Michael Wetter:<br/>
- Corrected <code>displayUnit</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
- </li>
- <li>
- July 07, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the relative air mass for sky brightness.
+</p>
+<h4>References</h4>
+<p>
+R. Perez (1999).
+<i>Fortran Function irrpz.f</i>,
+Emailed by R. Perez to F.C. Winkelmann on May 21, 1999.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 6, 2021, by Ettore Zanetti:<br/>
+Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+May 2, 2021, by Ettore Zanetti:
+Introduced altitude attenuation for relative air mass calculation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, issue 1477</a>.
+</li>
+<li>
+April 27, 2018, by Michael Wetter:<br/>
+Corrected <code>displayUnit</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+</li>
+<li>
+July 07, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textColor={0,0,255})}));
 end RelativeAirMass;

@@ -193,44 +193,43 @@ equation
     file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/WetCoilEffectivenessNTU.mos"
   "Simulate and plot"),
   Documentation(info="<html>
- <p>
- This model duplicates an example from Mitchell and Braun 2012, example SM-2-1
- (Mitchell and Braun 2012) to validate a single case for the
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU\">
- AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU</a>
- model.
- </p>
- <h4>Validation</h4>
- <p>
- The example simulates a wet coil with constant air
- and water inlet temperature and mass flow rate, and an increasing air inlet
- humidity which triggers the transition from a fully-dry to a fully-wet regime.
- The reference used for validation is the published experimental data.
- </p>
- <p>
- Note that the outlet air relative humidity may slightly exceed 100% when using
- the epsilon-NTU model.
- </p>
- <h4>References</h4>
- <p>
- Mitchell, John W., and James E. Braun. 2012.
- \"Supplementary Material Chapter 2: Heat Exchangers for Cooling Applications\".
- Excerpt from <i>Principles of heating, ventilation, and air conditioning in buildings</i>.
- Hoboken, N.J.: Wiley. Available online:
- <a href=\"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
- http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185</a>
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 19, 2017, by Michael Wetter:<br/>
- Revised model to avoid mixing textual equations and connect statements.
- </li>
- <li>
- March 17, 2017, by Michael O'Keefe:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model duplicates an example from Mitchell and Braun 2012, example SM-2-1
+(Mitchell and Braun 2012) to validate a single case for the
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU\">
+AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU</a>
+model.
+</p>
+<h4>Validation</h4>
+<p>
+The example simulates a wet coil with constant air
+and water inlet temperature and mass flow rate, and an increasing air inlet
+humidity which triggers the transition from a fully-dry to a fully-wet regime.
+The reference used for validation is the published experimental data.
+</p>
+<p>
+Note that the outlet air relative humidity may slightly exceed 100% when using
+the epsilon-NTU model.
+</p>
+<h4>References</h4>
+<p>
+Mitchell, John W., and James E. Braun. 2012.
+\"Supplementary Material Chapter 2: Heat Exchangers for Cooling Applications\".
+Excerpt from <i>Principles of heating, ventilation, and air conditioning in buildings</i>.
+Hoboken, N.J.: Wiley. Available online:
+<a href=\"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
+http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185</a>
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 19, 2017, by Michael Wetter:<br/>
+Revised model to avoid mixing textual equations and connect statements.
+</li>
+<li>
+March 17, 2017, by Michael O'Keefe:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end WetCoilEffectivenessNTU;

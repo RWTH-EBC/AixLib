@@ -12,30 +12,29 @@ equation
 
   annotation (defaultComponentName="floExc",
 Documentation(info="<html>
- <p>
- This model computes the air exchange between volumes.
- </p>
- <p>
- Input is the mass flow rate from
- <code>port_a1</code> to <code>port_b1</code> and from
- <code>port_a2</code> to <code>port_b2</code>.
- </p>
- </html>",
+<p>
+This model computes the air exchange between volumes.
+</p>
+<p>
+Input is the mass flow rate from
+<code>port_a1</code> to <code>port_b1</code> and from
+<code>port_a2</code> to <code>port_b2</code>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 18, 2014, by Michael Wetter:<br/>
- Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
- </li>
- <li>
- July 20, 2010, by Michael Wetter:<br/>
- Migrated model to Modelica 3.1 and integrated it into the Buildings library.
- </li>
- <li>
- January 17, 2006, by Michael Wetter:<br/>
- Implemented first version.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 18, 2014, by Michael Wetter:<br/>
+Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
+</li>
+<li>
+July 20, 2010, by Michael Wetter:<br/>
+Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+</li>
+<li>
+January 17, 2006, by Michael Wetter:<br/>
+Implemented first version.
+</li>
+</ul>
+</html>"));
 end ZonalFlow_m_flow;

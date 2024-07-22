@@ -102,32 +102,31 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255})}),
     Documentation(info="<html>
- <p>
- Model that changes the properties, 
- but not the mass flow rate,
- of the fluid that passes through it.
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- If <code>allowFlowReversal=true</code>, then the properties are changed for both flow directions,
- i.e., from <code>port_a</code> to <code>port_b</code> and
- from <code>port_b</code> to <code>port_a</code>.
- </p>
- <h4>Dynamics</h4>
- <p>
- This model has no dynamics.
- </p>
- </html>",
+<p>
+Model that changes the properties, 
+but not the mass flow rate,
+of the fluid that passes through it.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+If <code>allowFlowReversal=true</code>, then the properties are changed for both flow directions,
+i.e., from <code>port_a</code> to <code>port_b</code> and
+from <code>port_b</code> to <code>port_a</code>.
+</p>
+<h4>Dynamics</h4>
+<p>
+This model has no dynamics.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 30, 2018, by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+April 30, 2018, by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
+</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{
-            100,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+            100,100}})));
 end PartialPropertySource;

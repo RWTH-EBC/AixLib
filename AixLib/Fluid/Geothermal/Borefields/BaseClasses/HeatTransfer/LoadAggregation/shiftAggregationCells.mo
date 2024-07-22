@@ -33,24 +33,23 @@ algorithm
   QAggShi_flow[1] := 0;
 
   annotation (Documentation(info="<html>
- <p>
- Performs the shifting operation which propagates the thermal load history
- towards the more distant aggregation cells, and then sets the current cell's
- value at <i>0</i>. Additionally, this function also outputs the last filled load
- aggregation cell.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 15, 2018, by Michael Wetter:<br/>
- Added <code>min=Modelica.Constants.small</code> to <code>rCel</code>
- so that a tool can infer that this quantity is non-zero.
- </li>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Performs the shifting operation which propagates the thermal load history
+towards the more distant aggregation cells, and then sets the current cell's
+value at <i>0</i>. Additionally, this function also outputs the last filled load
+aggregation cell.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 15, 2018, by Michael Wetter:<br/>
+Added <code>min=Modelica.Constants.small</code> to <code>rCel</code>
+so that a tool can infer that this quantity is non-zero.
+</li>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end shiftAggregationCells;

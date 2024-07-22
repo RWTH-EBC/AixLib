@@ -9,16 +9,15 @@ function writeJSON
     IncludeDirectory="modelica://AixLib/Resources/C-Sources");
 
   annotation (Documentation(info="<html>
- <p>
- Function for writing data to a JSON file.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 15 2019, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function for writing data to a JSON file.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 15 2019, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end writeJSON;

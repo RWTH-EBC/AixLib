@@ -69,119 +69,132 @@ equation
         Line(points={{-100,90},{-80,90},{-80,-56}}, color={0,0,255})}),
 defaultComponentName="chi",
 Documentation(info="<html>
- <p>
- This is a model of a chiller whose coefficient of performance COP changes
- with temperatures in the same way as the Carnot efficiency changes.
- The control input is the setpoint of the evaporator leaving temperature, which
- is met exactly at steady state if the chiller has sufficient capacity.
- </p>
- <p>
- The model allows to either specify the Carnot effectivness
- <i>&eta;<sub>Carnot,0</sub></i>, or
- a <i>COP<sub>0</sub></i>
- at the nominal conditions, together with
- the evaporator temperature <i>T<sub>eva,0</sub></i> and
- the condenser temperature <i>T<sub>con,0</sub></i>, in which
- case the model computes the Carnot effectivness as
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- &eta;<sub>Carnot,0</sub> =
-   COP<sub>0</sub>
- &frasl;  (T<sub>eva,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
- </p>
- <p>
- On the <code>Advanced</code> tab, a user can specify the temperatures that
- will be used as the evaporator and condenser temperature.
- </p>
- <p>
- During the simulation, the chiller COP is computed as the product
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   COP = &eta;<sub>Carnot,0</sub> COP<sub>Carnot</sub> &eta;<sub>PL</sub>,
- </p>
- <p>
- where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
- <i>&eta;<sub>PL</sub></i> is a polynomial in the cooling part load ratio <i>y<sub>PL</sub></i>
- that can be used to take into account a change in <i>COP</i> at part load
- conditions.
- This polynomial has the form
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   &eta;<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y<sub>PL</sub> + a<sub>3</sub> y<sub>PL</sub><sup>2</sup> + ...
- </p>
- <p>
- where the coefficients <i>a<sub>i</sub></i>
- are declared by the parameter <code>a</code>.
- </p>
- <p>
- On the <code>Dynamics</code> tag, the model can be parametrized to compute a transient
- or steady-state response.
- The transient response of the model is computed using a first
- order differential equation for the evaporator and condenser fluid volumes.
- The chiller outlet temperatures are equal to the temperatures of these lumped volumes.
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- When using this component, make sure that the condenser has sufficient mass flow rate.
- Based on the evaporator mass flow rate, temperature difference and the efficiencies,
- the model computes how much heat will be added to the condenser.
- If the mass flow rate is too small, very high outlet temperatures can result.
- </p>
- <p>
- The evaporator heat flow rate <code>QEva_flow_nominal</code> is used to assign
- the default value for the mass flow rates, which are used for the pressure drop
- calculations.
- It is also used to compute the part load efficiency.
- Hence, make sure that <code>QEva_flow_nominal</code> is set to a reasonable value.
- </p>
- <p>
- The maximum cooling capacity is set by the parameter <code>QEva_flow_min</code>,
- which is by default set to negative infinity.
- </p>
- <p>
- The coefficient of performance depends on the
- evaporator and condenser leaving temperature
- since otherwise the second law of thermodynamics may be violated.
- </p>
- <h4>Notes</h4>
- <p>
- For a similar model that can be used as a heat pump, see
- <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_TCon\">
- AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>.
- </p>
- </html>",
+<p>
+This is a model of a chiller whose coefficient of performance COP changes
+with temperatures in the same way as the Carnot efficiency changes.
+The control input is the setpoint of the evaporator leaving temperature, which
+is met exactly at steady state if the chiller has sufficient capacity.
+</p>
+<p>
+Set <code>use_eta_Carnot_nominal=true</code> to specify directly
+the Carnot effectiveness <i>&eta;<sub>Carnot,0</sub></i>,
+in which case the value of the parameter <code>COP_nominal</code>
+will not affect the simulation.
+If <code>use_eta_Carnot_nominal=false</code>, the model will use
+the value of the parameter <code>COP_nominal</code>
+together with the specified nominal temperatures
+to compute the Carnot effectiveness as
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+&eta;<sub>Carnot,0</sub> =
+  COP<sub>0</sub>
+&frasl;  (T<sub>eva,0</sub> &frasl; (T<sub>con,0</sub> + T<sub>app,con,0</sub> - (T<sub>eva,0</sub>-T<sub>app,eva,0</sub>))),
+</p>
+<p>
+where
+<i>T<sub>eva,0</sub></i> is the evaporator temperature,
+<i>T<sub>con,0</sub></i> is the condenser temperature,
+<i>T<sub>app,eva,0</sub></i> is the evaporator approach temperature and
+<i>T<sub>app,con,0</sub></i> is the condenser approach temperature.
+</p>
+<p>
+The COP is computed as the product
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  COP = &eta;<sub>Carnot,0</sub> COP<sub>Carnot</sub> &eta;<sub>PL</sub>,
+</p>
+<p>
+where <i>COP<sub>Carnot</sub></i> is the Carnot efficiency and
+<i>&eta;<sub>PL</sub></i> is the part load efficiency, expressed using
+a polynomial.
+This polynomial has the form
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  &eta;<sub>PL</sub> = a<sub>1</sub> + a<sub>2</sub> y + a<sub>3</sub> y<sup>2</sup> + ...,
+</p>
+<p>
+where <i>y &isin; [0, 1]</i> is
+the part load for cooling and the coefficients <i>a<sub>i</sub></i>
+are declared by the parameter <code>a</code>.
+</p>
+<p>
+On the <code>Dynamics</code> tag, the model can be parametrized to compute a transient
+or steady-state response.
+The transient response of the model is computed using a first
+order differential equation for the evaporator and condenser fluid volumes.
+The chiller outlet temperatures are equal to the temperatures of these lumped volumes.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+When using this component, make sure that the condenser has sufficient mass flow rate.
+Based on the evaporator mass flow rate, temperature difference and the efficiencies,
+the model computes how much heat will be added to the condenser.
+If the mass flow rate is too small, very high outlet temperatures can result.
+</p>
+<p>
+The evaporator heat flow rate <code>QEva_flow_nominal</code> is used to assign
+the default value for the mass flow rates, which are used for the pressure drop
+calculations.
+It is also used to compute the part load efficiency.
+Hence, make sure that <code>QEva_flow_nominal</code> is set to a reasonable value.
+</p>
+<p>
+The maximum cooling capacity is set by the parameter <code>QEva_flow_min</code>,
+which is by default set to negative infinity.
+</p>
+<p>
+The coefficient of performance depends on the
+evaporator and condenser leaving temperature
+since otherwise the second law of thermodynamics may be violated.
+</p>
+<h4>Notes</h4>
+<p>
+For a similar model that can be used as a heat pump, see
+<a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.Carnot_TCon\">
+AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 8, 2017, by Michael Wetter:<br/>
- Replaced model that interfaces with fluid stream.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
- AixLib, #763</a>.
- </li>
- <li>
- January 2, 2017, by Filip Jorissen:<br/>
- Removed parameters
- <code>effInpEva</code> and <code>effInpCon</code>
- and updated documentation.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
- issue 497</a>.
- </li>
- <li>
- August 8, 2016, by Michael Wetter:<br/>
- Changed default temperature to compute COP to be the leaving temperature as
- use of the entering temperature can violate the 2nd law if the temperature
- lift is small.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
- Annex 60, issue 497</a>.
- </li>
- <li>
- November 25, 2015 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 3, 2023, by Michael Wetter:<br/>
+Changed in base class the parameter binding
+<code>etaCarnot_nominal(unit=\"1\") = COP_nominal/(TUseAct_nominal/(TCon_nominal+TAppCon_nominal - (TEva_nominal-TAppEva_nominal)))</code>
+to
+<code>etaCarnot_nominal(unit=\"1\") = 0.3</code> to avoid a circular assignment.<br/>
+Improved documentation.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3226\">Buildings, #3226</a>.
+</li>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Replaced model that interfaces with fluid stream.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
+<li>
+January 2, 2017, by Filip Jorissen:<br/>
+Removed parameters
+<code>effInpEva</code> and <code>effInpCon</code>
+and updated documentation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+issue 497</a>.
+</li>
+<li>
+August 8, 2016, by Michael Wetter:<br/>
+Changed default temperature to compute COP to be the leaving temperature as
+use of the entering temperature can violate the 2nd law if the temperature
+lift is small.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+Annex 60, issue 497</a>.
+</li>
+<li>
+November 25, 2015 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Carnot_TEva;

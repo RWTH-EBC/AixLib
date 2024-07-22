@@ -8,24 +8,23 @@ model CalendarTimeMonthsPlus
         "Simulate and plot"),
   Documentation(
     info="<html>
- <p>
- This model validates the use of the
- <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
- AixLib.Utilities.Time.CalendarTime</a>.
- It is identical to
- <a href=\"modelica://AixLib.Utilities.Time.Validation.CalendarTimeMonths\">
- AixLib.Utilities.Time.Validation.CalendarTimeMonths</a>
- except that the start and end time are different.
- </p>
- </html>",
+<p>
+This model validates the use of the
+<a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
+AixLib.Utilities.Time.CalendarTime</a>.
+It is identical to
+<a href=\"modelica://AixLib.Utilities.Time.Validation.CalendarTimeMonths\">
+AixLib.Utilities.Time.Validation.CalendarTimeMonths</a>
+except that the start and end time are different.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 14, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 14, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601));
 end CalendarTimeMonthsPlus;

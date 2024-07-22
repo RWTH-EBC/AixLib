@@ -36,19 +36,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (
 Documentation(info="<html>
- <p>
- This example computes the relative air mass for sky brightness.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 07, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the relative air mass for sky brightness.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 07, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
   experiment(Tolerance=1e-6, StopTime=864000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/RelativeAirMass.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end RelativeAirMass;

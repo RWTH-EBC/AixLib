@@ -30,24 +30,23 @@ algorithm
        String(lon) + " (= " + String(lon*180/Modelica.Constants.pi) + " degrees).");
 
   annotation (Documentation(info="<html>
- This function returns the longitude of the TMY3 weather data file.
- </html>",revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>impure</code> declaration for MSL 4.0.0.
- </li>
- <li>
- September 24, 2015, by Marcus Fuchs:<br/>
- Replace Dymola specific annotation by <code>loadSelector</code>
- for MSL compliancy as reported by @tbeu at
- <a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
- </li>
- <li>
- March 5, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This function returns the longitude of the TMY3 weather data file.
+</html>", revisions="<html>
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>impure</code> declaration for MSL 4.0.0.
+</li>
+<li>
+September 24, 2015, by Marcus Fuchs:<br/>
+Replace Dymola specific annotation by <code>loadSelector</code>
+for MSL compliancy as reported by @tbeu at
+<a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
+</li>
+<li>
+March 5, 2011, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end getLongitudeTMY3;

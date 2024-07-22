@@ -107,31 +107,30 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=2000),
     Documentation(info="<html>
- <p>
- Model that demonstrates the use of the
- <a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
- AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model.
- </p>
- <p>
- With constant inlet source and load water temperatures, the compressor frequency
- is increased linearly to its full load value and then ramped down to zero.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- April 25, 2017, by Michael Wetter:<br/>
- Changed input signal from ramp to a trapezoid to test switching it off.
- </li>
- <li>
- November 14, 2016, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that demonstrates the use of the
+<a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
+AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model.
+</p>
+<p>
+With constant inlet source and load water temperatures, the compressor frequency
+is increased linearly to its full load value and then ramped down to zero.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+April 25, 2017, by Michael Wetter:<br/>
+Changed input signal from ramp to a trapezoid to test switching it off.
+</li>
+<li>
+November 14, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ReciprocatingWaterToWater_VariableSpeed;

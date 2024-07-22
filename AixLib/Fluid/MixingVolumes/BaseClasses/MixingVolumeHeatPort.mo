@@ -12,40 +12,39 @@ equation
   annotation (
   defaultComponentName="vol",
   Documentation(info="<html>
- <p>
- Mixing volume with a heat port.
- </p>
- <p>
- This model is identical to
- <a href=\"modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume\">
- AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>,
- except that it has a heat port.
- </p>
- <p>
- Note that this model is typically only used to implement new component models that
- have staggered volumes.
- In contrast to
- <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
- AixLib.Fluid.MixingVolumes.MixingVolume</a>, it does
- not set <code>initialize_p</code> to <code>final</code> in order
- for this model to be usable in staggered volumes which require one
- pressure to be set to <code>initialize_p = not Medium.singleState</code>
- and all others to <code>false</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 9, 2021, by Michael Wetter:<br/>
- Corrected annotation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1547\">IBPSA, issue 1547</a>.
- </li>
- <li>
- October 19, 2017, by Michael Wetter:<br/>
- First implementation for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Mixing volume with a heat port.
+</p>
+<p>
+This model is identical to
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume\">
+AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>,
+except that it has a heat port.
+</p>
+<p>
+Note that this model is typically only used to implement new component models that
+have staggered volumes.
+In contrast to
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
+AixLib.Fluid.MixingVolumes.MixingVolume</a>, it does
+not set <code>initialize_p</code> to <code>final</code> in order
+for this model to be usable in staggered volumes which require one
+pressure to be set to <code>initialize_p = not Medium.singleState</code>
+and all others to <code>false</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 9, 2021, by Michael Wetter:<br/>
+Corrected annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1547\">IBPSA, issue 1547</a>.
+</li>
+<li>
+October 19, 2017, by Michael Wetter:<br/>
+First implementation for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
+</li>
+</ul>
+</html>"));
 end MixingVolumeHeatPort;

@@ -57,29 +57,28 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (
   Documentation(info="<html>
- <p>
- This example computes the solar incidence angle on a tilted surface.
- This model is also part of more extensive tests that run the
- model for different orientations. These tests are at
- <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle\">
- AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 24, 2015, by Michael Wetter:<br/>
- Assigned azimuth and tilt using the types from
- <a href=\"modelica://AixLib.Types.Tilt\">
- AixLib.Types.Tilt</a>.
- </li>
- <li>
- May 19, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the solar incidence angle on a tilted surface.
+This model is also part of more extensive tests that run the
+model for different orientations. These tests are at
+<a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle\">
+AixLib.BoundaryConditions.SolarGeometry.Examples.IncidenceAngle</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 24, 2015, by Michael Wetter:<br/>
+Assigned azimuth and tilt using the types from
+<a href=\"modelica://AixLib.Types.Tilt\">
+AixLib.Types.Tilt</a>.
+</li>
+<li>
+May 19, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
   experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/IncidenceAngle.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end IncidenceAngle;

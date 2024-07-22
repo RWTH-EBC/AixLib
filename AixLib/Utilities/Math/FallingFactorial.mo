@@ -13,13 +13,12 @@ equation
           textColor={160,160,164},
           textString="fallingFactorial()")}),
     Documentation(info="<html>
-     <p>This block computes the falling factorial, <i>y = n<sup>&#7733;</sup></i>.</p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 17, 2018, by Massimo Cimmino:<br/>First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+    <p>This block computes the falling factorial, <i>y = n<sup>&#7733;</sup></i>.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 17, 2018, by Massimo Cimmino:<br/>First implementation.
+</li>
+</ul>
+</html>"));
 end FallingFactorial;

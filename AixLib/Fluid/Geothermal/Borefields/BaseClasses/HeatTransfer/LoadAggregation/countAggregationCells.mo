@@ -27,23 +27,22 @@ algorithm
   end while;
 
 annotation (Documentation(info="<html>
- <p>
- Function that counts the required length of the aggregation time vector
- <code>nu</code> and of the weighting factor vectors <code>kappa</code> based on
- the maximum time for calculations related to the ground temperature response.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 15, 2018, by Michael Wetter:<br/>
- Added <code>min=1</code> to <code>nCel</code>
- so that a tool can infer that this quantity is non-zero.
- </li>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function that counts the required length of the aggregation time vector
+<code>nu</code> and of the weighting factor vectors <code>kappa</code> based on
+the maximum time for calculations related to the ground temperature response.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 15, 2018, by Michael Wetter:<br/>
+Added <code>min=1</code> to <code>nCel</code>
+so that a tool can infer that this quantity is non-zero.
+</li>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end countAggregationCells;

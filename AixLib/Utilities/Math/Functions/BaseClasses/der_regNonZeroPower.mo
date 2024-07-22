@@ -31,29 +31,28 @@ algorithm
  annotation(derivative(order=2, zeroDerivative=n, zeroDerivative=delta)=der_2_regNonZeroPower,
 Documentation(
 info="<html>
- <p>
- Implementation of the first derivative of the function
- <a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
- AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
- </p>
- </html>",
+<p>
+Implementation of the first derivative of the function
+<a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
+AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 17, 2015 by Michael Wetter:<br/>
- Corrected wrong derivative implementation which omitted the <code>der_x</code> term.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
- </li>
- <li>
- March 30, 2011, by Michael Wetter:<br/>
- Added <code>zeroDerivative</code> keyword.
- </li>
- <li>
- April 9, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 17, 2015 by Michael Wetter:<br/>
+Corrected wrong derivative implementation which omitted the <code>der_x</code> term.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+</li>
+<li>
+March 30, 2011, by Michael Wetter:<br/>
+Added <code>zeroDerivative</code> keyword.
+</li>
+<li>
+April 9, 2009, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end der_regNonZeroPower;

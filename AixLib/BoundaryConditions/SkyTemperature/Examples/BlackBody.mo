@@ -66,34 +66,33 @@ equation
       extent={{-6,3},{-6,3}}));
   annotation (
   Documentation(info="<html>
- <p>
- This example computes the black-body sky temperature
- for Chicago.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 18, 2017, by Filip Jorissen:<br/>
- Now computing both options of <code>TBlaSky</code>.
- This verifies the consistency of the two computation methods.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/648\">#648</a>.
- </li>
- <li>
- January 7, 2016, by Michael Wetter:<br/>
- Changed <code>connect</code> statement for infrared radiation due renaming of the
- variable. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/376\">issue 376</a>.
- Added comments.
- </li>
- <li>
- June 1, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the black-body sky temperature
+for Chicago.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 18, 2017, by Filip Jorissen:<br/>
+Now computing both options of <code>TBlaSky</code>.
+This verifies the consistency of the two computation methods.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/648\">#648</a>.
+</li>
+<li>
+January 7, 2016, by Michael Wetter:<br/>
+Changed <code>connect</code> statement for infrared radiation due renaming of the
+variable. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/376\">issue 376</a>.
+Added comments.
+</li>
+<li>
+June 1, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StartTime=0, StopTime=86400),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SkyTemperature/Examples/BlackBody.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end BlackBody;

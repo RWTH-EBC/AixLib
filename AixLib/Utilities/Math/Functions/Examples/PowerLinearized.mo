@@ -14,18 +14,17 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/PowerLinearized.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This example tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.Functions.powerLinearized\">
- AixLib.Utilities.Math.Functions.powerLinearized</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 8, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.Functions.powerLinearized\">
+AixLib.Utilities.Math.Functions.powerLinearized</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 8, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PowerLinearized;

@@ -136,34 +136,33 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Validation/TwoWayValveParameterization.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Test model for two way valves. This model tests the
- different parameterization of the valve model.
- All valves have the same mass flow rates.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 7, 2017, by Michael Wetter:<br/>
- Removed assertion blocks, exposed common parameters,
- and added a valve that uses <code>Av</code> as the parameter.
- </li>
- <li>
- April 1, 2013, by Michael Wetter:<br/>
- Removed the valve from <code>Modelica.Fluid</code> to allow a successful check
- of the model in the pedantic mode in Dymola 2014.
- </li>
- <li>
- March 1, 2013, by Michael Wetter:<br/>
- Removed assignment of <code>dpValve_nominal</code> if
- <code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
- as in this case, it is computed by the model.
- </li>
- <li>
- February 18, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for two way valves. This model tests the
+different parameterization of the valve model.
+All valves have the same mass flow rates.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 7, 2017, by Michael Wetter:<br/>
+Removed assertion blocks, exposed common parameters,
+and added a valve that uses <code>Av</code> as the parameter.
+</li>
+<li>
+April 1, 2013, by Michael Wetter:<br/>
+Removed the valve from <code>Modelica.Fluid</code> to allow a successful check
+of the model in the pedantic mode in Dymola 2014.
+</li>
+<li>
+March 1, 2013, by Michael Wetter:<br/>
+Removed assignment of <code>dpValve_nominal</code> if
+<code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
+as in this case, it is computed by the model.
+</li>
+<li>
+February 18, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end TwoWayValveParameterization;

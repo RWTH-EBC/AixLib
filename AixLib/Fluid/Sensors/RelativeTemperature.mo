@@ -71,40 +71,39 @@ equation
           textColor={0,0,0},
           textString=DynamicSelect("", String(T_rel, leftJustified=false, significantDigits=3)))}),
     Documentation(info="<html>
- <p>
- The relative temperature <code>T(port_a) - T(port_b)</code> is determined between
- the two ports of this component and is provided as output signal. The
- sensor should be connected in parallel with other equipment.
- There is no flow through the sensor.
- </p>
- <p>
- Note that this sensor should only be connected to fluid volumes, such as
- <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
- AixLib.Fluid.MixingVolumes.MixingVolume</a>. Otherwise, numerical
- problems may occur if one of the mass flow rates are close to zero.
- See
- <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
- AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
- </p>
- </html>",
+<p>
+The relative temperature <code>T(port_a) - T(port_b)</code> is determined between
+the two ports of this component and is provided as output signal. The
+sensor should be connected in parallel with other equipment.
+There is no flow through the sensor.
+</p>
+<p>
+Note that this sensor should only be connected to fluid volumes, such as
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
+AixLib.Fluid.MixingVolumes.MixingVolume</a>. Otherwise, numerical
+problems may occur if one of the mass flow rates are close to zero.
+See
+<a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- February 25, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- September 29, 2009, by Michael Wetter:<br/>
- First implementation, based on <code>Modelica.Fluid</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 25, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+September 29, 2009, by Michael Wetter:<br/>
+First implementation, based on <code>Modelica.Fluid</code>.
+</li>
+</ul>
+</html>"));
 end RelativeTemperature;

@@ -252,25 +252,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/DryCoilEffectivenessNTU.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model tests
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
- AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
- for different inlet conditions.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- February 12, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+for different inlet conditions.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+February 12, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end DryCoilEffectivenessNTU;

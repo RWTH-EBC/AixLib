@@ -168,29 +168,28 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
- <p>
- Model that demonstrates the use of the
- <a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
- AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model. This
- validation case also tests the stage input to the heat pump models.
- </p>
- <p>
- With constant inlet source and load water temperatures, the heat pumps cycle on
- and off. The capacity of the scaled heat pump model is compared to the
- capacity of the non-scaled heat pump model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- December 5, 2016, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that demonstrates the use of the
+<a href=\"modelica://AixLib.Fluid.HeatPumps.ScrollWaterToWater\">
+AixLib.Fluid.HeatPumps.ScrollWaterToWater</a> heat pump model. This
+validation case also tests the stage input to the heat pump models.
+</p>
+<p>
+With constant inlet source and load water temperatures, the heat pumps cycle on
+and off. The capacity of the scaled heat pump model is compared to the
+capacity of the non-scaled heat pump model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+December 5, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ScrollWaterToWater_ScalingFactor;

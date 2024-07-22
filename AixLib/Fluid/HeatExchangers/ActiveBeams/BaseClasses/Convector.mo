@@ -138,42 +138,41 @@ equation
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={95,95,95})}), defaultComponentName="con",
            Documentation(info="<html>
- <p>
- In cooling mode, this model adds heat to the water stream. The heat added is equal to:
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- Q<sub>Beam</sub> = Q<sub>rated</sub> f<sub><code>&#916;</code>T</sub> f<sub>SA</sub> f<sub>W</sub>
- </p>
- <p>
- In heating mode, the heat is removed from the water stream.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 3, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
- </li>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Made assignment of <code>senTem.y</code> final.
- </li>
- <li>
- June 13, 2016, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- May 20, 2016, by Alessandro Maccarini:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+In cooling mode, this model adds heat to the water stream. The heat added is equal to:
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+Q<sub>Beam</sub> = Q<sub>rated</sub> f<sub><code>&#916;</code>T</sub> f<sub>SA</sub> f<sub>W</sub>
+</p>
+<p>
+In heating mode, the heat is removed from the water stream.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 3, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+</li>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Made assignment of <code>senTem.y</code> final.
+</li>
+<li>
+June 13, 2016, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+May 20, 2016, by Alessandro Maccarini:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Convector;

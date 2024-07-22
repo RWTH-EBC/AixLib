@@ -15,8 +15,8 @@ block Heater_T
     "Maximum heat flow rate for cooling (negative)";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
-       0 "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
+     = 0 "Pressure";
 
   Modelica.Blocks.Interfaces.RealInput TSet(unit="K", displayUnit="degC")
     "Set point temperature of the fluid that leaves port_b"
@@ -36,34 +36,34 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (  Documentation(info="<html>
- <p>
- This example demonstrates how to export an FMU with a heater
- that takes as an input signal the leaving fluid temperature.
- The FMU has an instance of
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
- AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 8, 2017, by Michael Wetter:<br/>
- Updated heater model.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
- AixLib, #763</a>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- November 20, 2014 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to export an FMU with a heater
+that takes as an input signal the leaving fluid temperature.
+The FMU has an instance of
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
+AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Updated heater model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+November 20, 2014 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/Heater_T.mos"
         "Export FMU"),
     Icon(graphics={
@@ -125,6 +125,5 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
                    Text(
           extent={{26,-28},{70,-74}},
           textColor={255,255,255},
-          textString="+")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="+")}));
 end Heater_T;

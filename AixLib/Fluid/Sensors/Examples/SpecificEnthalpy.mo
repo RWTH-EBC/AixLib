@@ -50,20 +50,19 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/SpecificEnthalpy.mos"
         "Simulate and plot"),    Documentation(info="<html>
- <p>
- This example tests the specific enthalpy sensors.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 8, 2014, by Michael Wetter:<br/>
- Set species concentration to the default value of the medium.
- </li>
- <li>
- August 31, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example tests the specific enthalpy sensors.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 8, 2014, by Michael Wetter:<br/>
+Set species concentration to the default value of the medium.
+</li>
+<li>
+August 31, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SpecificEnthalpy;

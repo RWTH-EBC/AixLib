@@ -71,42 +71,41 @@ equation
           textColor={0,0,0},
           textString=DynamicSelect("", String(p_rel, leftJustified=false, significantDigits=3)))}),
     Documentation(info="<html>
- <p>
- The relative pressure <code>port_a.p - port_b.p</code> is determined between
- the two ports of this component and is provided as output signal. The
- sensor should be connected in parallel with other equipment, no flow
- through the sensor is allowed.
- </p>
- </html>",
+<p>
+The relative pressure <code>port_a.p - port_b.p</code> is determined between
+the two ports of this component and is provided as output signal. The
+sensor should be connected in parallel with other equipment, no flow
+through the sensor is allowed.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- February 25, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- February 19, 2016, by Michael Wetter:<br/>
- Corrected the quantity of the output signal from <code>Pressure</code>
- to <code>PressureDifference</code>.
- This was needed for the model
- <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_m_flow\">
- AixLib.Fluid.Movers.FlowControlled_m_flow</a>
- when revising it for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">
- issue 417</a>.
- </li>
- <li>
- September 29, 2009, by Michael Wetter:<br/>
- First implementation, based on <code>Modelica.Fluid</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 25, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+February 19, 2016, by Michael Wetter:<br/>
+Corrected the quantity of the output signal from <code>Pressure</code>
+to <code>PressureDifference</code>.
+This was needed for the model
+<a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_m_flow\">
+AixLib.Fluid.Movers.FlowControlled_m_flow</a>
+when revising it for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">
+issue 417</a>.
+</li>
+<li>
+September 29, 2009, by Michael Wetter:<br/>
+First implementation, based on <code>Modelica.Fluid</code>.
+</li>
+</ul>
+</html>"));
 end RelativePressure;

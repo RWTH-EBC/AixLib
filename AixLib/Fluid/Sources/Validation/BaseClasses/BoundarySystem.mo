@@ -30,24 +30,23 @@ equation
   connect(sin.ports[1], senTem.port_b)
     annotation (Line(points={{40,0},{10,0}}, color={0,127,255}));
   annotation (Documentation(info="<html>
- <p>
- System model used to test the boundary conditions for different media.
- This model has been introduced to get access to the medium mass fraction,
- which is a protected variable in
- <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
- AixLib.Fluid.Sources.Boundary_pT</a>.
- Therefore, this model has been created so that the boundary model has a port which
- is used to access the mass fraction.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 13, 2019 by Michael Wetter:<br/>
- First implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+System model used to test the boundary conditions for different media.
+This model has been introduced to get access to the medium mass fraction,
+which is a protected variable in
+<a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a>.
+Therefore, this model has been created so that the boundary model has a port which
+is used to access the mass fraction.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 13, 2019 by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
+</li>
+</ul>
+</html>"));
 end BoundarySystem;

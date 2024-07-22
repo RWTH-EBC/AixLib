@@ -62,17 +62,16 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Examples/InternalResistancesOneUTube.mos"
         "Simulate and plot"),
   Documentation(info="<html>
-   This example tests the implementation of
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesOneUTube\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesOneUTube</a>
- for the dynamic behavior of the filling material in a single U-tube borehole.
- </html>",revisions="<html>
- <ul>
- <li>
- July 19, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+  This example tests the implementation of
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesOneUTube\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesOneUTube</a>
+for the dynamic behavior of the filling material in a single U-tube borehole.
+</html>", revisions="<html>
+<ul>
+<li>
+July 19, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end InternalResistancesOneUTube;

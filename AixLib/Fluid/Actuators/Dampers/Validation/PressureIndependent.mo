@@ -4,8 +4,8 @@ model PressureIndependent
   extends Modelica.Icons.Example;
 
   package Medium = AixLib.Media.Air "Medium model for air";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
-       10 "Damper nominal pressure drop";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
+     = 10 "Damper nominal pressure drop";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Damper nominal mass flow rate";
   AixLib.Fluid.Actuators.Dampers.Exponential damExp(
@@ -123,53 +123,52 @@ __Dymola_Commands(
 file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Dampers/Validation/PressureIndependent.mos"
 "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model validates
- <a href=\"modelica://AixLib.Fluid.Actuators.Dampers.PressureIndependent\">
- AixLib.Fluid.Actuators.Dampers.PressureIndependent</a>
- by comparing it with
- </p>
- <ul>
- <li>
- an exponential damper model which opening is the one computed by the
- pressure independent model, see <code>damExp</code>,
- </li>
- <li>
- an exponential damper model which opening is computed by a PI controller
- tracking the same discharge mass flow rate, see <code>damExpPI</code>.
- </li>
- </ul>
- <p>
- The simulation consists in exposing these three models to
- <ol>
- <li>
- a first increase in the pressure drop at the damper boundaries, from negative
- to positive values, with a zero input control signal,
- </li>
- <li>
- a consecutive increase of input control signal, from zero to one, with a
- constant pressure drop at the damper boundaries,
- </li>
- <li>
- an eventual decrease in the pressure drop, from positive to negative values,
- with an input control signal equal to one.
- </li>
- </ol>
- <p>
- One can notice a small variation of the computed damper opening in the last
- transient around flow reversal.
- This is because the expression of the flow coefficient as a function of the
- mass flow rate and pressure drop is ill-defined near zero flow rate and
- the damper opening value results from the regularization process.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 5, 2020 by Antoine Gautier:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model validates
+<a href=\"modelica://AixLib.Fluid.Actuators.Dampers.PressureIndependent\">
+AixLib.Fluid.Actuators.Dampers.PressureIndependent</a>
+by comparing it with
+</p>
+<ul>
+<li>
+an exponential damper model which opening is the one computed by the
+pressure independent model, see <code>damExp</code>,
+</li>
+<li>
+an exponential damper model which opening is computed by a PI controller
+tracking the same discharge mass flow rate, see <code>damExpPI</code>.
+</li>
+</ul>
+<p>
+The simulation consists in exposing these three models to
+<ol>
+<li>
+a first increase in the pressure drop at the damper boundaries, from negative
+to positive values, with a zero input control signal,
+</li>
+<li>
+a consecutive increase of input control signal, from zero to one, with a
+constant pressure drop at the damper boundaries,
+</li>
+<li>
+an eventual decrease in the pressure drop, from positive to negative values,
+with an input control signal equal to one.
+</li>
+</ol>
+<p>
+One can notice a small variation of the computed damper opening in the last
+transient around flow reversal.
+This is because the expression of the flow coefficient as a function of the
+mass flow rate and pressure drop is ill-defined near zero flow rate and
+the damper opening value results from the regularization process.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 5, 2020 by Antoine Gautier:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})));
 end PressureIndependent;

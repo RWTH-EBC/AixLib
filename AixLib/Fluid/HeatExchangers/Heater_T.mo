@@ -37,93 +37,93 @@ equation
     annotation (
     defaultComponentName="hea",
 Documentation(info="<html>
- <p>
- Model for an ideal heater that controls its outlet temperature to
- a prescribed outlet temperature.
- </p>
- <p>
- This model forces the outlet temperature at <code>port_b</code> to be
- no lower than the temperature of the input signal
- <code>TSet</code>, subject to optional limits on the
- capacity.
- By default, the model has unlimited heating capacity.
- </p>
- <p>
- The output signal <code>Q_flow</code> is the heat added
- to the medium if the mass flow rate is from <code>port_a</code> to <code>port_b</code>.
- If the flow is reversed, then <code>Q_flow=0</code>.
- </p>
- <p>
- The outlet conditions at <code>port_a</code> are not affected by this model,
- other than for a possible pressure difference due to flow friction.
- </p>
- <p>
- If the parameter <code>energyDynamics</code> is different from
- <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
- the component models the dynamic response using a first order differential equation.
- The time constant of the component is equal to the parameter <code>tau</code>.
- This time constant is adjusted based on the mass flow rate using
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- &tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
- </p>
- <p>
- where
- <i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
- <i>m&#775;</i> and
- <i>&tau;</i> is the time constant at the nominal mass flow rate
- <i>m&#775;<sub>nom</sub></i>.
- This type of dynamics is equal to the dynamics that a completely mixed
- control volume would have.
- </p>
- <p>
- Optionally, this model can have a flow resistance.
- Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
- </p>
- <p>
- For a similar model that is a sensible cooling device, use
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.SensibleCooler_T\">
- AixLib.Fluid.HeatExchangers.SensibleCooler_T</a>.
- For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
- this with the nominal heating or cooling power, use
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
- AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>
- 
- </p>
- <h4>Limitations</h4>
- <p>
- If the flow is from <code>port_b</code> to <code>port_a</code>,
- then the enthalpy of the medium is not affected by this model.
- </p>
- <h4>Validation</h4>
- <p>
- The model has been validated against the analytical solution in
- the examples
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
- AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>
- and
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic\">
- AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic</a>.
- </p>
- </html>",
+<p>
+Model for an ideal heater that controls its outlet temperature to
+a prescribed outlet temperature.
+</p>
+<p>
+This model forces the outlet temperature at <code>port_b</code> to be
+no lower than the temperature of the input signal
+<code>TSet</code>, subject to optional limits on the
+capacity.
+By default, the model has unlimited heating capacity.
+</p>
+<p>
+The output signal <code>Q_flow</code> is the heat added
+to the medium if the mass flow rate is from <code>port_a</code> to <code>port_b</code>.
+If the flow is reversed, then <code>Q_flow=0</code>.
+</p>
+<p>
+The outlet conditions at <code>port_a</code> are not affected by this model,
+other than for a possible pressure difference due to flow friction.
+</p>
+<p>
+If the parameter <code>energyDynamics</code> is different from
+<code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+the component models the dynamic response using a first order differential equation.
+The time constant of the component is equal to the parameter <code>tau</code>.
+This time constant is adjusted based on the mass flow rate using
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+&tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
+</p>
+<p>
+where
+<i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
+<i>m&#775;</i> and
+<i>&tau;</i> is the time constant at the nominal mass flow rate
+<i>m&#775;<sub>nom</sub></i>.
+This type of dynamics is equal to the dynamics that a completely mixed
+control volume would have.
+</p>
+<p>
+Optionally, this model can have a flow resistance.
+Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
+</p>
+<p>
+For a similar model that is a sensible cooling device, use
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.SensibleCooler_T\">
+AixLib.Fluid.HeatExchangers.SensibleCooler_T</a>.
+For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
+this with the nominal heating or cooling power, use
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>
+
+</p>
+<h4>Limitations</h4>
+<p>
+If the flow is from <code>port_b</code> to <code>port_a</code>,
+then the enthalpy of the medium is not affected by this model.
+</p>
+<h4>Validation</h4>
+<p>
+The model has been validated against the analytical solution in
+the examples
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
+AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>
+and
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic\">
+AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 10, 2018, by Michael Wetter:<br/>
- Corrected missing propagation of initial conditions.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1016\">
- AixLib, #1016</a>.
- </li>
- <li>
- May 3, 2017, by Michael Wetter:<br/>
- First implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
- AixLib, #763</a>.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+September 10, 2018, by Michael Wetter:<br/>
+Corrected missing propagation of initial conditions.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1016\">
+AixLib, #1016</a>.
+</li>
+<li>
+May 3, 2017, by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
+</ul>
+</html>"),
     Icon(graphics={
         Rectangle(
           extent={{-70,60},{70,-60}},
@@ -172,6 +172,5 @@ revisions="<html>
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+        Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0})}));
 end Heater_T;

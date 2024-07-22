@@ -56,47 +56,47 @@ equation
   annotation (
     defaultComponentName="HDifTil",
     Documentation(info="<html>
- <p>
- This component computes the hemispherical diffuse irradiation on a tilted surface by using an anisotropic model proposed by Perez.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- P. Ineichen, R. Perez and R. Seals (1987).
- <i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
- Solar Energy, 39(4): 301-305.
- </li>
- <li>
- R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
- <i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
- Solar Energy, 39(3): 221-231.
- </li>
- <li>
- R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
- <i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
- Solar Energy, 44(5):271-289.
- </li>
- </ul>
- </html>",revisions="<html>
- <ul>
- <li>
- April 27, 2018, by Michael Wetter:<br/>
- Corrected <code>displayUnit</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
- </li>
- <li>
- June 6, 2012, by Wangda Zuo:<br/>
- Separated the contribution from the sky and the ground.
- </li>
- </ul>
- <ul>
- <li>
- May 24, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the hemispherical diffuse irradiation on a tilted surface by using an anisotropic model proposed by Perez.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+P. Ineichen, R. Perez and R. Seals (1987).
+<i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
+Solar Energy, 39(4): 301-305.
+</li>
+<li>
+R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
+<i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
+Solar Energy, 39(3): 221-231.
+</li>
+<li>
+R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
+<i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
+Solar Energy, 44(5):271-289.
+</li>
+</ul>
+</html>", revisions="<html>
+<ul>
+<li>
+April 27, 2018, by Michael Wetter:<br/>
+Corrected <code>displayUnit</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+</li>
+<li>
+June 6, 2012, by Wangda Zuo:<br/>
+Separated the contribution from the sky and the ground.
+</li>
+</ul>
+<ul>
+<li>
+May 24, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -126,6 +126,5 @@ equation
         Text(
           extent={{-52,-76},{-104,-64}},
           textColor={0,0,127},
-          textString="incAng")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="incAng")}));
 end DiffusePerez;

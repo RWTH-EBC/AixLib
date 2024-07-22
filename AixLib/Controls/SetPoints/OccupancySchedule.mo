@@ -175,68 +175,67 @@ equation
           textString="occupied")}),
 defaultComponentName="occSch",
 Documentation(info="<html>
- <p>
- This model outputs whether the building is currently occupied,
- and how long it will take until the next time when the building
- will be occupied or non-occupied.
- The latter may be used, for example, to start a ventilation system
- half an hour before occupancy starts in order to ventilate the room.
- </p>
- <p>
- The occupancy is defined by a time schedule of the form
- </p>
- <pre>
-   occupancy = 3600*{7, 12, 14, 19}
- </pre>
- <p>
- This indicates that the occupancy is from <i>7:00</i> until <i>12:00</i>
- and from <i>14:00</i> to <i>19:00</i>. This will be repeated periodically.
- The parameter <code>periodicity</code> defines the periodicity.
- The period always starts at <i>t=0</i> seconds.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 25, 2021, by Michael Wetter:<br/>
- Integrated changes from Buildings for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">IBPSA, #1454</a>.
- </li>
- <li>
- February 26, 2021, by Michael Wetter:<br/>
- Refactored implementation to use a function to compute the next time events.<br/>
- This is a work-around for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2369\">Buildings, issue 2369</a>.
- </li>
- <li>
- October 30, 2017, by Michael Wetter:<br/>
- Rewrote using <code>equation</code> rather than <code>algorithm</code>
- and removed assertion.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/844\">issue 844</a>.
- </li>
- <li>
- September 11, 2012, by Michael Wetter:<br/>
- Added <code>pre</code> operator in <code>when</code> clause and relaxed
- tolerance in <code>assert</code> statement.
- </li>
- <li>
- July 26, 2012, by Michael Wetter:<br/>
- Fixed a bug that caused an error in the schedule if the simulation start time was negative or equal to the first entry in the schedule.
- </li>
- <li>
- February 16, 2012, by Michael Wetter:<br/>
- Removed parameter <code>startTime</code>. It was removed because <code>startTime=0</code>
- would imply that the schedule should not start for one day if the simulation were
- to be started at <i>t=-8760</i> seconds.
- Fixed bug that prevented schedule to start when the simulation was started at a time that
- is higher than <code>endTime</code>.
- Renamed parameter <code>endTime</code> to <code>period</code>.
- </li>
- <li>
- April 2, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model outputs whether the building is currently occupied,
+and how long it will take until the next time when the building
+will be occupied or non-occupied.
+The latter may be used, for example, to start a ventilation system
+half an hour before occupancy starts in order to ventilate the room.
+</p>
+<p>
+The occupancy is defined by a time schedule of the form
+</p>
+<pre>
+  occupancy = 3600*{7, 12, 14, 19}
+</pre>
+<p>
+This indicates that the occupancy is from <i>7:00</i> until <i>12:00</i>
+and from <i>14:00</i> to <i>19:00</i>. This will be repeated periodically.
+The parameter <code>periodicity</code> defines the periodicity.
+The period always starts at <i>t=0</i> seconds.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 25, 2021, by Michael Wetter:<br/>
+Integrated changes from Buildings for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">IBPSA, #1454</a>.
+</li>
+<li>
+February 26, 2021, by Michael Wetter:<br/>
+Refactored implementation to use a function to compute the next time events.<br/>
+This is a work-around for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2369\">Buildings, issue 2369</a>.
+</li>
+<li>
+October 30, 2017, by Michael Wetter:<br/>
+Rewrote using <code>equation</code> rather than <code>algorithm</code>
+and removed assertion.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/844\">issue 844</a>.
+</li>
+<li>
+September 11, 2012, by Michael Wetter:<br/>
+Added <code>pre</code> operator in <code>when</code> clause and relaxed
+tolerance in <code>assert</code> statement.
+</li>
+<li>
+July 26, 2012, by Michael Wetter:<br/>
+Fixed a bug that caused an error in the schedule if the simulation start time was negative or equal to the first entry in the schedule.
+</li>
+<li>
+February 16, 2012, by Michael Wetter:<br/>
+Removed parameter <code>startTime</code>. It was removed because <code>startTime=0</code>
+would imply that the schedule should not start for one day if the simulation were
+to be started at <i>t=-8760</i> seconds.
+Fixed bug that prevented schedule to start when the simulation was started at a time that
+is higher than <code>endTime</code>.
+Renamed parameter <code>endTime</code> to <code>period</code>.
+</li>
+<li>
+April 2, 2009, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end OccupancySchedule;

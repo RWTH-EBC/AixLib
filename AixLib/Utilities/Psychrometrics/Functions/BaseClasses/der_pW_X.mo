@@ -25,18 +25,17 @@ algorithm
 
   annotation (
     Documentation(info="<html>
- <p>
- Derivative of function
- <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.pW_X\">
- AixLib.Utilities.Psychrometrics.Functions.pW_X</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 21, 2010 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Derivative of function
+<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.pW_X\">
+AixLib.Utilities.Psychrometrics.Functions.pW_X</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 21, 2010 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end der_pW_X;

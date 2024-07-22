@@ -19,35 +19,34 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/InvertingBasicFlowFunction_dp.mos"
         "Simulate and plot"),
               Documentation(info="<html>
- <p>
- This model tests whether the Modelica translator substitutes the
- inverse function for
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>.
- Specifically, this function declares in its <code>annotation</code> section
- that its inverse is provided by
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>.
- Translating this model should therefore give no nonlinear equations
- after the symbolic manipulation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 25, 2019, by Michael Wetter:<br/>
- Added start value to avoid warning in JModelica.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- August 5, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests whether the Modelica translator substitutes the
+inverse function for
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>.
+Specifically, this function declares in its <code>annotation</code> section
+that its inverse is provided by
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>.
+Translating this model should therefore give no nonlinear equations
+after the symbolic manipulation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 25, 2019, by Michael Wetter:<br/>
+Added start value to avoid warning in JModelica.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+August 5, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end InvertingBasicFlowFunction_dp;

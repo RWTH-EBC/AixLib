@@ -8,19 +8,18 @@ algorithm
 annotation (
 Inline=true,
 Documentation(info="<html>
- <p>
- This function evaluates the integral of the error function, given by:
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/ErrorFunctionIntegral_01.png\" />
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 22, 2018 by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function evaluates the integral of the error function, given by:
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/ErrorFunctionIntegral_01.png\" />
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 22, 2018 by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end finiteLineSource_Erfint;

@@ -5,13 +5,19 @@ model CO2TransportStep "Model with transport of CO2 through buoyancy driven flow
     volTop(nPorts=3),
     volEas(nPorts=6));
 
-  AixLib.Fluid.Sensors.TraceSubstances CO2SenTop(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.TraceSubstances CO2SenTop(
+    redeclare package Medium = Medium,
+    warnAboutOnePortConnection = false)
     "CO2 sensor"
     annotation (Placement(transformation(extent={{20,120},{40,140}})));
-  AixLib.Fluid.Sensors.TraceSubstances CO2SenWes(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.TraceSubstances CO2SenWes(
+    redeclare package Medium = Medium,
+    warnAboutOnePortConnection = false)
     "CO2 sensor"
     annotation (Placement(transformation(extent={{-102,10},{-82,30}})));
-  AixLib.Fluid.Sensors.TraceSubstances CO2SenEas(redeclare package Medium = Medium)
+  AixLib.Fluid.Sensors.TraceSubstances CO2SenEas(
+    redeclare package Medium = Medium,
+    warnAboutOnePortConnection = false)
     "CO2 sensor"
     annotation (Placement(transformation(extent={{58,10},{78,30}})));
   Modelica.Blocks.Sources.Pulse pulse(
@@ -51,32 +57,37 @@ equation
       StopTime=86400,
       Tolerance=1e-6),
     Documentation(info="<html>
- <p>
- This model is based on
- <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
- Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
- In addition, a CO<sub>2</sub> source has been added to the left room
- in the bottom floor.
- At initial time, all volumes have zero CO<sub>2</sub> concentration.
- At <i>t=3600</i> seconds, CO<sub>2</sub> is added to <code>volWes</code>.
- As time progresses, the CO<sub>2</sub> is transported to
- the other rooms, and eventually its concentration decays.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 26, 2021 by Michael Wetter:<br/>
- Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
- </li>
- <li>
- November 10, 2011, by Michael Wetter:<br/>
- Extended model from
- <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
- Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>
- and added documentation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model is based on
+<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>.
+In addition, a CO<sub>2</sub> source has been added to the left room
+in the bottom floor.
+At initial time, all volumes have zero CO<sub>2</sub> concentration.
+At <i>t=3600</i> seconds, CO<sub>2</sub> is added to <code>volWes</code>.
+As time progresses, the CO<sub>2</sub> is transported to
+the other rooms, and eventually its concentration decays.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2024, by Michael Wetter:<br/>
+Configured the sensor parameter to suppress the warning about being a one-port connection.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1857\">IBPSA, #1857</a>.
+</li>
+<li>
+March 26, 2021 by Michael Wetter:<br/>
+Updated comments for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+</li>
+<li>
+November 10, 2011, by Michael Wetter:<br/>
+Extended model from
+<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>
+and added documentation.
+</li>
+</ul>
+</html>"));
 end CO2TransportStep;

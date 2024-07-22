@@ -51,135 +51,137 @@ equation
   connect(weaBus.TDryBul, T_in_internal);
   annotation (defaultComponentName="out",
     Documentation(info="<html>
- <p>
- This model describes boundary conditions for
- pressure, enthalpy, and species concentration that can be obtained
- from weather data. The model is identical to
- <a href=\"modelica://AixLib.Fluid.Sources.Outside\">
- AixLib.Fluid.Sources.Outside</a>,
- except that it adds the wind pressure to the
- pressure at the fluid port <code>ports</code>.
- The correlation that is used to compute the wind pressure is based
- on Swami and Chandra (1987) and valid for low-rise buildings
- with rectangular shape.
- The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
- <!-- @include_Buildings
- For other buildings, the model
- <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a> or
- <a href=\"modelica://AixLib.Fluid.Sources.Outside_Cp\">
- AixLib.Fluid.Sources.Outside_Cp</a>
- should be used that takes
- the wind pressure coefficient as a parameter or an input.
- -->
- </p>
- <p>
- The wind pressure coefficient is computed based on the
- side ratio of the walls, which is defined as
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- s = x &frasl; y
- </p>
- <p>
- where <i>x</i> is the length of the wall that will be connected to
- this model, and <i>y</i> is the length of the adjacent wall.
- The wind direction is computed relative to the azimuth of this surface,
- which is equal to the parameter <code>azi</code>.
- The surface azimuth is defined in
- <a href=\"modelica://AixLib.Types.Azimuth\">
- AixLib.Types.Azimuth</a>.
- For example, if an exterior wall is South oriented, i.e., its outside-facing
- surface is towards South, use
- <code>AixLib.Types.Azimuth.S</code>.
- </p>
- <p>
- Based on the surface azimuth, the wind direction and the side ratio
- of the walls, the model computes how much the wind pressure
- is attenuated compared to the reference wind pressure <code>Cp0</code>.
- The reference wind pressure <code>Cp0</code> is a user-defined parameter,
- and must be equal to the wind pressure at zero wind incidence angle.
- Swami and Chandra (1987) recommend <i>C<sub>p0</sub> = 0.6</i> for
- all low-rise buildings as this represents the average of
- various values reported in the literature.
- The computation of the actual wind pressure coefficient <i>C<sub>p</sub></i>
- is explained in the function
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise\">
- Buildings.Airflow.Multizone.BaseClasses.windPressureLowRise</a>
- that is called by this model.
- </p>
- <p>
- The pressure <i>p</i> at the port <code>ports</code> is computed as
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   p = p<sub>w</sub> + C<sub>p</sub> 1 &frasl; 2 v<sup>2</sup> &rho;,
- </p>
- <p>
- where
- <i>p<sub>w</sub></i> is the atmospheric pressure from the weather bus,
- <i>v</i> is the wind speed from the weather bus, and
- <i>&rho;</i> is the fluid density.
- </p>
- 
- <p>
- This model differs from <a href=\"AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a> by the calculation of the wind pressure coefficient C<sub>p,act</sub>.
- The wind pressure coefficient is defined by an equation in stead of a user-defined table.
- This model is only suited for low-rise rectangular buildings.
- </p>
- 
- <h4>References</h4>
- <ul>
- <li>
- Muthusamy V. Swami and
- Subrato Chandra.
- <i>
- <a href=\"http://www.fsec.ucf.edu/en/publications/pdf/FSEC-CR-163-86.pdf\">
- Procedures for
- Calculating Natural
- Ventilation Airflow
- Rates in Buildings.</a></i>
- Florida Solar Energy Center, FSEC-CR-163-86. March, 1987.
- Cape Canaveral, Florida.
- </li>
- <li>
- Andrew K. Persily and Elizabeth M. Ivy.
- <i>
- <a href=\"http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=860831\">
- Input Data for Multizone Airflow and IAQ Analysis.</a></i>
- NIST, NISTIR 6585.
- January, 2001.
- Gaithersburg, MD.
- </li>
- </ul>
- </html>",
+<p>
+This model describes boundary conditions for
+pressure, enthalpy, and species concentration that can be obtained
+from weather data. The model is identical to
+<a href=\"modelica://AixLib.Fluid.Sources.Outside\">
+AixLib.Fluid.Sources.Outside</a>,
+except that it adds the wind pressure to the
+pressure at the fluid port <code>ports</code>.
+The correlation that is used to compute the wind pressure is based
+on Swami and Chandra (1987) and valid for low-rise buildings
+with rectangular shape.
+The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
+<!-- @include_Buildings
+For other buildings, the model
+<a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
+AixLib.Fluid.Sources.Outside_CpData</a> or
+<a href=\"modelica://AixLib.Fluid.Sources.Outside_Cp\">
+AixLib.Fluid.Sources.Outside_Cp</a>
+should be used that takes
+the wind pressure coefficient as a parameter or an input.
+-->
+</p>
+<p>
+The wind pressure coefficient is computed based on the
+side ratio of the walls, which is defined as
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+s = x &frasl; y
+</p>
+<p>
+where <i>x</i> is the length of the wall that will be connected to
+this model, and <i>y</i> is the length of the adjacent wall.
+The wind direction is computed relative to the azimuth of this surface,
+which is equal to the parameter <code>azi</code>.
+The surface azimuth is defined in
+<a href=\"modelica://AixLib.Types.Azimuth\">
+AixLib.Types.Azimuth</a>.
+For example, if an exterior wall is South oriented, i.e., its outside-facing
+surface is towards South, use
+<code>AixLib.Types.Azimuth.S</code>.
+</p>
+<p>
+Based on the surface azimuth, the wind direction and the side ratio
+of the walls, the model computes how much the wind pressure
+is attenuated compared to the reference wind pressure <code>Cp0</code>.
+The reference wind pressure <code>Cp0</code> is a user-defined parameter,
+and must be equal to the wind pressure at zero wind incidence angle.
+Swami and Chandra (1987) recommend <i>C<sub>p0</sub> = 0.6</i> for
+all low-rise buildings as this represents the average of
+various values reported in the literature.
+The computation of the actual wind pressure coefficient <i>C<sub>p</sub></i>
+is explained in the function
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise\">
+Buildings.Airflow.Multizone.BaseClasses.windPressureLowRise</a>
+that is called by this model.
+</p>
+<p>
+The pressure <i>p</i> at the port <code>ports</code> is computed as
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  p = p<sub>w</sub> + C<sub>p</sub> 1 &frasl; 2 v<sup>2</sup> &rho;,
+</p>
+<p>
+where
+<i>p<sub>w</sub></i> is the atmospheric pressure from the weather bus,
+<i>v</i> is the wind speed from the weather bus, and
+<i>&rho;</i> is the fluid density.
+</p>
+
+<p>
+This model differs from <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
+AixLib.Fluid.Sources.Outside_CpData</a> by the calculation of the wind pressure coefficient C<sub>p,act</sub>.
+The wind pressure coefficient is defined by an equation in stead of a user-defined table.
+This model is only suited for low-rise rectangular buildings.
+</p>
+
+<h4>References</h4>
+<ul>
+<li>
+Muthusamy V. Swami and
+Subrato Chandra.
+<i>
+<a href=\"http://www.fsec.ucf.edu/en/publications/pdf/FSEC-CR-163-86.pdf\">
+Procedures for
+Calculating Natural
+Ventilation Airflow
+Rates in Buildings.</a></i>
+Florida Solar Energy Center, FSEC-CR-163-86. March, 1987.
+Cape Canaveral, Florida.
+</li>
+<li>
+Andrew K. Persily and Elizabeth M. Ivy.
+<i>
+<a href=\"http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=860831\">
+Input Data for Multizone Airflow and IAQ Analysis.</a></i>
+NIST, NISTIR 6585.
+January, 2001.
+Gaithersburg, MD.
+</li>
+</ul>
+</html>",
 revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Jun 28, 2021, by Klaas De Jonge:<br/>
- Documentation changes to explain the difference with <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a>.
- </li>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- Added <code>unit</code> and <code>quantity</code> attributes.
- </li>
- <li>
- October 26, 2011 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    Icon(graphics={Text(
-          visible=use_Cp_in,
-          extent={{-140,92},{-92,62}},
-          textColor={0,0,255},
-          textString="C_p"),
+<ul>
+<li>
+April 4, 2023, by Michael Wetter:<br/>
+Removed use of non-existent parameter in annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1724\">IBPSA, #1724</a>.
+</li>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Jun 28, 2021, by Klaas De Jonge:<br/>
+Documentation changes to explain the difference with <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
+AixLib.Fluid.Sources.Outside_CpData</a>.
+</li>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Added <code>unit</code> and <code>quantity</code> attributes.
+</li>
+<li>
+October 26, 2011 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Icon(graphics={
           Text(
           visible=use_C_in,
           extent={{-154,-28},{-102,-62}},
@@ -188,6 +190,5 @@ revisions="<html>
         Text(
           extent={{-28,22},{28,-22}},
           textColor={255,255,255},
-          textString="Cp")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="Cp")}));
 end Outside_CpLowRise;

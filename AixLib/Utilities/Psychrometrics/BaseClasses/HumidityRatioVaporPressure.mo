@@ -3,7 +3,7 @@ partial block HumidityRatioVaporPressure
   "Humidity ratio for given water vapor pressure"
   extends Modelica.Blocks.Icons.Block;
   parameter Boolean use_p_in = true "Get the pressure from the input connector"
-    annotation(Evaluate=true, HideResult=true);
+    annotation(Evaluate=true);
 
   parameter Modelica.Units.SI.Pressure p=101325 "Fixed value of pressure"
     annotation (Dialog(enable=not use_p_in));
@@ -24,27 +24,33 @@ equation
   end if;
   annotation (
     Documentation(info="<html>
- <p>
- Partial Block to compute the relation between humidity ratio and water vapor partial pressure.
- </p>
- <p>If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
- is used as atmospheric pressure,
- and the <code>p_in</code> input connector is disabled;
- if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
- and the value provided by the input connector is used instead.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- April 14, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Partial Block to compute the relation between humidity ratio and water vapor partial pressure.
+</p>
+<p>If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
+is used as atmospheric pressure,
+and the <code>p_in</code> input connector is disabled;
+if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
+and the value provided by the input connector is used instead.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 11, 2024, by Michael Wetter:<br/>
+Corrected use of <code>HideResult</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1850\">#1850</a>.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+April 14, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
@@ -62,6 +68,5 @@ equation
           visible=use_p_in,
           extent={{-90,108},{-34,16}},
           textColor={0,0,0},
-          textString="p_in")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="p_in")}));
 end HumidityRatioVaporPressure;

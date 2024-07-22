@@ -26,36 +26,36 @@ equation
   annotation (
     defaultComponentName="cheTem",
     Documentation(info="<html>
- <p>
- This component checks the value of temperature.
- If the temperature is outside <code>TMin</code> and <code>TMax</code>,
- the simulation will stop with an error.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Added <code>noEvent</code>.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1340\">#1340</a>.
- </li>
- <li>
- January 31, 2020 by Filip Jorissen:<br/>
- Improved error message.
- </li>
- <li>
- October 27, 2011, by Wangda Zuo:<br/>
- Delete the unit conversion part and name it from ConvertTemperature to CheckTemperature.
- </li>
- <li>
- March 23, 2011, by Michael Wetter:<br/>
- Set <code>displayUnit</code> argument for temperature output signal.
- </li>
- <li>
- July 08, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component checks the value of temperature.
+If the temperature is outside <code>TMin</code> and <code>TMax</code>,
+the simulation will stop with an error.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Added <code>noEvent</code>.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1340\">#1340</a>.
+</li>
+<li>
+January 31, 2020 by Filip Jorissen:<br/>
+Improved error message.
+</li>
+<li>
+October 27, 2011, by Wangda Zuo:<br/>
+Delete the unit conversion part and name it from ConvertTemperature to CheckTemperature.
+</li>
+<li>
+March 23, 2011, by Michael Wetter:<br/>
+Set <code>displayUnit</code> argument for temperature output signal.
+</li>
+<li>
+July 08, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Ellipse(
@@ -79,6 +79,5 @@ equation
           lineThickness=0.5),
         Line(
           points={{-14,44},{-14,-41}},
-          thickness=0.5)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          thickness=0.5)}));
 end CheckDewPointTemperature;

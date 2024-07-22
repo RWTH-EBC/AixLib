@@ -121,164 +121,164 @@ equation
     yU=yU);
   k = if dpFixed_nominal > Modelica.Constants.eps then sqrt(1/(1/kFixed^2 + 1/kDam^2)) else kDam;
 annotation(Documentation(info="<html>
- <p>
- Partial model for air dampers with exponential opening characteristics.
- This is the base model for air dampers.
- The model implements the functions that relate the opening signal and the
- flow coefficient.
- The model also defines parameters that are used by different air damper
- models.
- </p>
- <p>
- The model is as in ASHRAE 825-RP except that a control signal of
- <code>y=0</code> means the damper is closed, and <code>y=1</code> means
- the damper is open.
- This is opposite of the implementation of ASHRAE 825-RP, but used here
- for consistency within this library.
- </p>
- <p>
- For <code>yL &lt; y &lt; yU</code>, the damper characteristics is:
- </p>
- <p style=\"font-style:italic;\">
-   k<sub>d</sub>(y) = exp(a+b (1-y))
- </p>
- <p>
- where <i>kd</i> is the loss coefficient (total pressure drop divided
- by dynamic pressure) and <i>y</i> is the fractional opening.
- </p>
- <p>
- Outside this range, the damper characteristics is defined by a quadratic polynomial that
- matches the damper resistance at <code>y=0</code> and <code>y=yL</code> or
- <code>y=yU</code> and <code>y=1</code>, respectively.
- In addition, the polynomials are such that <i>k<sub>d</sub>(y)</i> is differentiable in
- <i>y</i> and the derivative is continuous.
- </p>
- <p>
- The damper characteristics is then used to compute the flow coefficient <i>k(y)</i> as:
- </p>
- <p style=\"font-style:italic;\">
- k(y) = (2 &rho; &frasl; k<sub>d</sub>(y))<sup>1/2</sup> A
- </p>
- <p>
- where <i>A</i> is the face area, which is computed using the nominal
- mass flow rate <code>m_flow_nominal</code>, the nominal velocity
- <code>v_nominal</code> and the density of the medium.
- </p>
- <p>
- ASHRAE 825-RP lists the following parameter values as typical (note that the
- default values in the model correspond to opposed blades).
- <br/>
- </p>
- <table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
- style=\"border-collapse:collapse;\">
- <tr>
- <td></td><th>opposed blades</th><th>single blades</th>
- </tr>
- <tr>
- <td>yL</td><td>15/90</td><td>15/90</td>
- </tr>
- <tr>
- <td>yU</td><td>55/90</td><td>65/90</td>
- </tr>
- <tr>
- <td>k1</td><td>0.2 to 0.5</td><td>0.2 to 0.5</td>
- </tr>
- <tr>
- <td>a</td><td>-1.51</td><td>-1.51</td>
- </tr>
- <tr>
- <td>b</td><td>0.105*90</td><td>0.0842*90</td>
- </tr>
- </table>
- <p>
- (The loss coefficient in fully closed position <code>k0</code> is computed based on the leakage coefficient
- and the coefficient in fully open position.)
- </p>
- <h4>References</h4>
- <p>
- P. Haves, L. K. Norford, M. DeSimone and L. Mei,
- <i>A Standard Simulation Testbed for the Evaluation of Control Algorithms &amp; Strategies</i>,
- ASHRAE Final Report 825-RP, Atlanta, GA.
- </p>
- </html>",
+<p>
+Partial model for air dampers with exponential opening characteristics.
+This is the base model for air dampers.
+The model implements the functions that relate the opening signal and the
+flow coefficient.
+The model also defines parameters that are used by different air damper
+models.
+</p>
+<p>
+The model is as in ASHRAE 825-RP except that a control signal of
+<code>y=0</code> means the damper is closed, and <code>y=1</code> means
+the damper is open.
+This is opposite of the implementation of ASHRAE 825-RP, but used here
+for consistency within this library.
+</p>
+<p>
+For <code>yL &lt; y &lt; yU</code>, the damper characteristics is:
+</p>
+<p style=\"font-style:italic;\">
+  k<sub>d</sub>(y) = exp(a+b (1-y))
+</p>
+<p>
+where <i>kd</i> is the loss coefficient (total pressure drop divided
+by dynamic pressure) and <i>y</i> is the fractional opening.
+</p>
+<p>
+Outside this range, the damper characteristics is defined by a quadratic polynomial that
+matches the damper resistance at <code>y=0</code> and <code>y=yL</code> or
+<code>y=yU</code> and <code>y=1</code>, respectively.
+In addition, the polynomials are such that <i>k<sub>d</sub>(y)</i> is differentiable in
+<i>y</i> and the derivative is continuous.
+</p>
+<p>
+The damper characteristics is then used to compute the flow coefficient <i>k(y)</i> as:
+</p>
+<p style=\"font-style:italic;\">
+k(y) = (2 &rho; &frasl; k<sub>d</sub>(y))<sup>1/2</sup> A
+</p>
+<p>
+where <i>A</i> is the face area, which is computed using the nominal
+mass flow rate <code>m_flow_nominal</code>, the nominal velocity
+<code>v_nominal</code> and the density of the medium.
+</p>
+<p>
+ASHRAE 825-RP lists the following parameter values as typical (note that the
+default values in the model correspond to opposed blades).
+<br/>
+</p>
+<table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+style=\"border-collapse:collapse;\">
+<tr>
+<td></td><th>opposed blades</th><th>single blades</th>
+</tr>
+<tr>
+<td>yL</td><td>15/90</td><td>15/90</td>
+</tr>
+<tr>
+<td>yU</td><td>55/90</td><td>65/90</td>
+</tr>
+<tr>
+<td>k1</td><td>0.2 to 0.5</td><td>0.2 to 0.5</td>
+</tr>
+<tr>
+<td>a</td><td>-1.51</td><td>-1.51</td>
+</tr>
+<tr>
+<td>b</td><td>0.105*90</td><td>0.0842*90</td>
+</tr>
+</table>
+<p>
+(The loss coefficient in fully closed position <code>k0</code> is computed based on the leakage coefficient
+and the coefficient in fully open position.)
+</p>
+<h4>References</h4>
+<p>
+P. Haves, L. K. Norford, M. DeSimone and L. Mei,
+<i>A Standard Simulation Testbed for the Evaluation of Control Algorithms &amp; Strategies</i>,
+ASHRAE Final Report 825-RP, Atlanta, GA.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 21, 2021, by Michael Wetter:<br/>
- Corrected typo in comments.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1525\">#1525</a>.
- </li>
- <li>
- December 23, 2019, by Antoine Gautier:<br/>
- Removed the equations involving <code>m_flow</code> and <code>dp</code> that now need
- to be added in each derived damper model.<br/>
- Added the declaration of <code>dpDamper_nominal</code> and <code>dpFixed_nominal</code>.<br/>
- Replaced <code>k0</code> by leakage coefficient.<br/>
- Modified the limiting values for <code>k0</code> and <code>k1</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
- </li>
- <li>
- March 22, 2017, by Michael Wetter:<br/>
- Added back <code>v_nominal</code>, but set the assignment of <code>A</code>
- to be final. This allows scaling the model with <code>m_flow_nominal</code>,
- which is generally known in the flow leg,
- and <code>v_nominal</code>, for which a default value can be specified.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
- </li>
- <li>
- October 12, 2016 by David Blum:<br/>
- Removed parameter <code>v_nominal</code> and variable <code>area</code>,
- to simplify parameterization of the model.
- Also added assertion statements upon initialization
- for parameters <code>k0</code> and <code>k1</code> so that they fall within
- suggested ranges found in ASHRAE 825-RP. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
- </li>
- <li>
- January 27, 2015 by Michael Wetter:<br/>
- Set <code>Evaluate=true</code> for <code>use_constant_density</code>.
- This is a structural parameter. Adding this annotation leads to fewer
- numerical Jacobians for
- <code>Buildings.Examples.VAVReheat.ClosedLoop</code>
- with
- <code>Buildings.Media.PerfectGases.MoistAirUnsaturated</code>.
- </li>
- <li>
- December 14, 2012 by Michael Wetter:<br/>
- Renamed protected parameters for consistency with the naming conventions.
- </li>
- <li>
- January 16, 2012 by Michael Wetter:<br/>
- To simplify object inheritance tree, revised base classes
- <code>AixLib.Fluid.BaseClasses.PartialResistance</code>,
- <code>AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</code>,
- <code>AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</code>,
- <code>AixLib.Fluid.Actuators.BaseClasses.PartialActuator</code>
- and model
- <code>AixLib.Fluid.FixedResistances.PressureDrop</code>.
- </li>
- <li>
- August 5, 2011, by Michael Wetter:<br/>
- Moved linearized pressure drop equation from the function body to the equation
- section. With the previous implementation,
- the symbolic processor may not rearrange the equations, which can lead
- to coupled equations instead of an explicit solution.
- </li>
- <li>
- June 22, 2008 by Michael Wetter:<br/>
- Extended range of control signal from 0 to 1 by implementing the function
- <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
- exponentialDamper</a>.
- </li>
- <li>
- June 10, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+September 21, 2021, by Michael Wetter:<br/>
+Corrected typo in comments.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1525\">#1525</a>.
+</li>
+<li>
+December 23, 2019, by Antoine Gautier:<br/>
+Removed the equations involving <code>m_flow</code> and <code>dp</code> that now need
+to be added in each derived damper model.<br/>
+Added the declaration of <code>dpDamper_nominal</code> and <code>dpFixed_nominal</code>.<br/>
+Replaced <code>k0</code> by leakage coefficient.<br/>
+Modified the limiting values for <code>k0</code> and <code>k1</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
+</li>
+<li>
+March 22, 2017, by Michael Wetter:<br/>
+Added back <code>v_nominal</code>, but set the assignment of <code>A</code>
+to be final. This allows scaling the model with <code>m_flow_nominal</code>,
+which is generally known in the flow leg,
+and <code>v_nominal</code>, for which a default value can be specified.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
+</li>
+<li>
+October 12, 2016 by David Blum:<br/>
+Removed parameter <code>v_nominal</code> and variable <code>area</code>,
+to simplify parameterization of the model.
+Also added assertion statements upon initialization
+for parameters <code>k0</code> and <code>k1</code> so that they fall within
+suggested ranges found in ASHRAE 825-RP. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/544\">#544</a>.
+</li>
+<li>
+January 27, 2015 by Michael Wetter:<br/>
+Set <code>Evaluate=true</code> for <code>use_constant_density</code>.
+This is a structural parameter. Adding this annotation leads to fewer
+numerical Jacobians for
+<code>Buildings.Examples.VAVReheat.ClosedLoop</code>
+with
+<code>Buildings.Media.PerfectGases.MoistAirUnsaturated</code>.
+</li>
+<li>
+December 14, 2012 by Michael Wetter:<br/>
+Renamed protected parameters for consistency with the naming conventions.
+</li>
+<li>
+January 16, 2012 by Michael Wetter:<br/>
+To simplify object inheritance tree, revised base classes
+<code>AixLib.Fluid.BaseClasses.PartialResistance</code>,
+<code>AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve</code>,
+<code>AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</code>,
+<code>AixLib.Fluid.Actuators.BaseClasses.PartialActuator</code>
+and model
+<code>AixLib.Fluid.FixedResistances.PressureDrop</code>.
+</li>
+<li>
+August 5, 2011, by Michael Wetter:<br/>
+Moved linearized pressure drop equation from the function body to the equation
+section. With the previous implementation,
+the symbolic processor may not rearrange the equations, which can lead
+to coupled equations instead of an explicit solution.
+</li>
+<li>
+June 22, 2008 by Michael Wetter:<br/>
+Extended range of control signal from 0 to 1 by implementing the function
+<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
+exponentialDamper</a>.
+</li>
+<li>
+June 10, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
    Icon(graphics={Line(
          points={{0,100},{0,-24}}),
         Rectangle(
@@ -290,6 +290,5 @@ revisions="<html>
           extent={{-100,22},{100,-24}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillColor={0,127,255})}));
 end PartialDamperExponential;

@@ -59,46 +59,45 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation ( Documentation(info="<html>
- <p>
- Block that serves as a container to export a thermofluid flow component.
- This block contains a replaceable model <code>com</code> that needs to
- be redeclared to export any model that has as its base class
- <a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPort\">
- AixLib.Fluid.Interfaces.PartialTwoPort</a>.
- This allows exporting a large variety of thermofluid flow models
- with a simple redeclare.
- </p>
- <p>
- See for example
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop\">
- AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop</a>
- or
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u\">
- AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u</a>
- for how to use this block.
- </p>
- <p>
- Note that this block must not be used if the instance <code>com</code>
- sets a constant pressure. In such a situation, use
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
- AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
- together with
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
- AixLib.Fluid.FMI.Adaptors.Inlet</a>
- and
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
- AixLib.Fluid.FMI.Adaptors.Outlet</a>
- and set the pressure to be equal to the port <code>p</code> of
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
- AixLib.Fluid.FMI.Adaptors.Outlet</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 8, 2014, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Block that serves as a container to export a thermofluid flow component.
+This block contains a replaceable model <code>com</code> that needs to
+be redeclared to export any model that has as its base class
+<a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPort\">
+AixLib.Fluid.Interfaces.PartialTwoPort</a>.
+This allows exporting a large variety of thermofluid flow models
+with a simple redeclare.
+</p>
+<p>
+See for example
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop\">
+AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.PressureDrop</a>
+or
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u\">
+AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u</a>
+for how to use this block.
+</p>
+<p>
+Note that this block must not be used if the instance <code>com</code>
+sets a constant pressure. In such a situation, use
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
+together with
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
+AixLib.Fluid.FMI.Adaptors.Inlet</a>
+and
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+AixLib.Fluid.FMI.Adaptors.Outlet</a>
+and set the pressure to be equal to the port <code>p</code> of
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+AixLib.Fluid.FMI.Adaptors.Outlet</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 8, 2014, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ReplaceableTwoPort;

@@ -65,16 +65,15 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Pressure.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example tests the pressure sensors.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 31, 2013 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example tests the pressure sensors.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 31, 2013 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Pressure;

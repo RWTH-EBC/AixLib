@@ -105,28 +105,27 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=1000),
     Documentation(info="<html>
- <p>
- Model that demonstrates the use of the
- <a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
- AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model.
- </p>
- <p>
- The heat pump power, condenser heat transfer rate and evaporator heat transfer
- rate are calculated for given water temperatures and flow rates on the
- evaporator and condenser sides.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- October 18, 2016, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that demonstrates the use of the
+<a href=\"modelica://AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater\">
+AixLib.Fluid.HeatPumps.ReciprocatingWaterToWater</a> heat pump model.
+</p>
+<p>
+The heat pump power, condenser heat transfer rate and evaporator heat transfer
+rate are calculated for given water temperatures and flow rates on the
+evaporator and condenser sides.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+October 18, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end ReciprocatingWaterToWater_Static;

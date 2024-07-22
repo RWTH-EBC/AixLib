@@ -7,22 +7,21 @@ equation
 
   annotation (
   Documentation(info="<html>
- <p>
- This model tests the implementation of
- the block that outputs the model time.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 16, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model tests the implementation of
+the block that outputs the model time.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 16, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
   experiment(
   StartTime=-1,
   Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Time/Examples/ModelTime.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end ModelTime;

@@ -67,26 +67,25 @@ experiment(
       Tolerance=1e-06),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/BaseClasses/Examples/WindPressureProfile.mos"
         "Simulate and plot"), Documentation(info="<html>
- <p>
- This examples demonstrates the
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureProfile\">
- AixLib.Airflow.Multizone.BaseClasses.windPressureProfile</a>
- function.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Apr 6, 2021, by Klaas De Jonge:<br/>
- First implementation
- </li>
- </ul>
- </html>
- "),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This examples demonstrates the
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureProfile\">
+AixLib.Airflow.Multizone.BaseClasses.windPressureProfile</a>
+function.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Apr 6, 2021, by Klaas De Jonge:<br/>
+First implementation
+</li>
+</ul>
+</html>
+"));
 end WindPressureProfile;

@@ -14,22 +14,21 @@ algorithm
     inverse(phi=phi_pTX(p,T,X_w)),
     smoothOrder=1,
     Documentation(info="<html>
- <p>
- Absolute humidity of air for given
- pressure, temperature and relative humidity.
- </p>
- <p>
- Note that the absolute humidity is in <i>kg/kg</i>
- total air, and not dry air.
- </p>
- </html>",
+<p>
+Absolute humidity of air for given
+pressure, temperature and relative humidity.
+</p>
+<p>
+Note that the absolute humidity is in <i>kg/kg</i>
+total air, and not dry air.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 4, 2019 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+April 4, 2019 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end X_pTphi;

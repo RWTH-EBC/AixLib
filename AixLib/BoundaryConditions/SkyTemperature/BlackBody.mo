@@ -50,56 +50,56 @@ equation
   annotation (
     defaultComponentName="TBlaSky",
     Documentation(info="<html>
- <p>
- This component computes the black-body sky temperature.
- </p>
- <p>
- For <code>calTSky = 0</code>, the model uses horizontal infrared irradiation.
- Otherwise, it uses dry buld temperature, dew point temperature and opaque sky cover.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 3, 2017, by Michael Wetter:<br/>
- Removed <code>import</code> statement.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/852\">#852</a>.
- </li>
- <li>
- January 6, 2016, by Moritz Lauster:<br/>
- Changed unit and comment of input <code>nOpa</code> for correct display of units
- in <code>weaBus</code> and input <code>radHorIR</code> to <code>HHorIR</code>
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/376\">#376</a>.
- </li>
- <li>
- May 5, 2015, by Filip Jorissen:<br/>
- Converted <code>algorithm</code> section into
- <code>equation</code> section for easier differentiability.
- </li>
- <li>
- August 11, 2012, by Wangda Zuo:<br/>
- Renamed <code>radHor</code> to <code>radHorIR</code>.
- </li>
- <li>
- October 3, 2011, by Michael Wetter:<br/>
- Used enumeration to set the sky temperature computation.
- Fixed error in <code>if-then</code> statement that led to
- a selection of the wrong branch to compute the sky temperature.
- </li>
- <li>
- March 16, 2011, by Michael Wetter:<br/>
- Added types for parameters and attributes for variables.
- Removed default parameter value.
- </li>
- <li>
- March 15, 2011, by Wangda Zuo:<br/>
- Use <code>smoothMin()</code> instead of <code>min()</code>.
- </li>
- <li>
- June 1, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the black-body sky temperature.
+</p>
+<p>
+For <code>calTSky = 0</code>, the model uses horizontal infrared irradiation.
+Otherwise, it uses dry buld temperature, dew point temperature and opaque sky cover.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 3, 2017, by Michael Wetter:<br/>
+Removed <code>import</code> statement.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/852\">#852</a>.
+</li>
+<li>
+January 6, 2016, by Moritz Lauster:<br/>
+Changed unit and comment of input <code>nOpa</code> for correct display of units
+in <code>weaBus</code> and input <code>radHorIR</code> to <code>HHorIR</code>
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/376\">#376</a>.
+</li>
+<li>
+May 5, 2015, by Filip Jorissen:<br/>
+Converted <code>algorithm</code> section into
+<code>equation</code> section for easier differentiability.
+</li>
+<li>
+August 11, 2012, by Wangda Zuo:<br/>
+Renamed <code>radHor</code> to <code>radHorIR</code>.
+</li>
+<li>
+October 3, 2011, by Michael Wetter:<br/>
+Used enumeration to set the sky temperature computation.
+Fixed error in <code>if-then</code> statement that led to
+a selection of the wrong branch to compute the sky temperature.
+</li>
+<li>
+March 16, 2011, by Michael Wetter:<br/>
+Added types for parameters and attributes for variables.
+Removed default parameter value.
+</li>
+<li>
+March 15, 2011, by Wangda Zuo:<br/>
+Use <code>smoothMin()</code> instead of <code>min()</code>.
+</li>
+<li>
+June 1, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -129,6 +129,5 @@ equation
         Text(
           extent={{-88,-24},{-64,-36}},
           textColor={0,0,127},
-          textString="nOpa")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="nOpa")}));
 end BlackBody;

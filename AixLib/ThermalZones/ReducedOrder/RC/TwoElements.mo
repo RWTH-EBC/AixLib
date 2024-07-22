@@ -124,44 +124,44 @@ equation
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Interior Walls")}), Documentation(revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- July 11, 2019, by Katharina Brinkmann:<br/>
- Renamed <code>alphaInt</code> to <code>hConInt</code>,
- <code>alphaIntWall</code> to <code>hConIntWall</code>
- </li>
- <li>
- January 25, 2019, by Michael Wetter:<br/>
- Added start value to avoid warning in JModelica.
- </li>
- <li>
- April 18, 2015, by Moritz Lauster:<br/>
- First implementation.
- </li>
- </ul>
- </html>",  info="<html>
-   <p>This model distinguishes between internal
-   thermal masses and exterior walls. While exterior walls contribute to heat
-   transfer to the ambient, adiabatic conditions apply to internal masses.
-   Parameters for the internal wall element are the length of the RC-chain
-   <code>nInt</code>, the vector of the capacities
-   <code>CInt[nInt]</code> and the vector of the resistances <code>RInt[nInt]</code>.
-   This approach allows considering the dynamic behaviour induced by internal
-   heat storage.
-   </p>
-   <p>
-   The image below shows the RC-network of this model.
-   </p>
-   <p align=\"center\">
-   <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/TwoElements.png\" alt=\"image\"/>
-   </p>
-   </html>"),
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+July 11, 2019, by Katharina Brinkmann:<br/>
+Renamed <code>alphaInt</code> to <code>hConInt</code>,
+<code>alphaIntWall</code> to <code>hConIntWall</code>
+</li>
+<li>
+January 25, 2019, by Michael Wetter:<br/>
+Added start value to avoid warning in JModelica.
+</li>
+<li>
+April 18, 2015, by Moritz Lauster:<br/>
+First implementation.
+</li>
+</ul>
+</html>",   info="<html>
+  <p>This model distinguishes between internal
+  thermal masses and exterior walls. While exterior walls contribute to heat
+  transfer to the ambient, adiabatic conditions apply to internal masses.
+  Parameters for the internal wall element are the length of the RC-chain
+  <code>nInt</code>, the vector of the capacities
+  <code>CInt[nInt]</code> and the vector of the resistances <code>RInt[nInt]</code>.
+  This approach allows considering the dynamic behaviour induced by internal
+  heat storage.
+  </p>
+  <p>
+  The image below shows the RC-network of this model.
+  </p>
+  <p align=\"center\">
+  <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/TwoElements.png\" alt=\"image\"/>
+  </p>
+  </html>"),
   Icon(coordinateSystem(extent={{-240,-180},{240,180}},
   preserveAspectRatio=false),
   graphics={Rectangle(
@@ -171,6 +171,5 @@ equation
   pattern=LinePattern.None), Text(
   extent={{-60,60},{64,-64}},
   textColor={0,0,0},
-  textString="2")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+  textString="2")}));
 end TwoElements;

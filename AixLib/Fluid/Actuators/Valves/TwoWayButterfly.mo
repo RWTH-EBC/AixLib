@@ -45,49 +45,48 @@ model TwoWayButterfly
 annotation (
 defaultComponentName="valBut",
 Documentation(info="<html>
- <p>
- Two way valve with the flow characteristic of a typical butterfly valve as listed below.
- </p>
- <p>
- <img src=\"modelica://AixLib/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayButterfly.png\" alt=\"Butterfly valve characteristic\"/>
- </p>
- <h4>Implementation</h4>
- <p>
- The model assigns a <code>Kv</code> based on the table at
- <a href=\"http://www.mydatabook.org/fluid-mechanics/flow-coefficient-opening-and-closure-curves-of-butterfly-valves/\">mydatabook.org</a>.
- The <code>Kv</code> values listed in the parameter <code>Kvs</code> are reasonable assumptions,
- but the actual value can depend much on the design of the specific valve.
- Moreover, the <code>Kv</code> values for DN value smaller than DN 150 are a quadratic extrapolation
- from the value at DN 150.
- </p>
- </html>",
+<p>
+Two way valve with the flow characteristic of a typical butterfly valve as listed below.
+</p>
+<p>
+<img src=\"modelica://AixLib/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayButterfly.png\" alt=\"Butterfly valve characteristic\"/>
+</p>
+<h4>Implementation</h4>
+<p>
+The model assigns a <code>Kv</code> based on the table at
+<a href=\"http://www.mydatabook.org/fluid-mechanics/flow-coefficient-opening-and-closure-curves-of-butterfly-valves/\">mydatabook.org</a>.
+The <code>Kv</code> values listed in the parameter <code>Kvs</code> are reasonable assumptions,
+but the actual value can depend much on the design of the specific valve.
+Moreover, the <code>Kv</code> values for DN value smaller than DN 150 are a quadratic extrapolation
+from the value at DN 150.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
- <li>
- December 22, 2020 by Michael Wetter:<br/>
- Add parameter <code>Kvs</code>.
- </li>
- <li>
- December 20, 2020 by Filip Jorissen:<br/>
- Revised implementation with default <code>Kv</code> computation.
- </li>
- <li>
- July 8, 2018 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+June 10, 2021, by Michael Wetter:<br/>
+Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+as most users need not change this value.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
+</li>
+<li>
+December 22, 2020 by Michael Wetter:<br/>
+Add parameter <code>Kvs</code>.
+</li>
+<li>
+December 20, 2020 by Filip Jorissen:<br/>
+Revised implementation with default <code>Kv</code> computation.
+</li>
+<li>
+July 8, 2018 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(graphics={Ellipse(
           extent={{-16,18},{16,-14}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillPattern=FillPattern.Solid)}));
 end TwoWayButterfly;

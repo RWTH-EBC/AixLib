@@ -166,8 +166,9 @@ equation
     annotation (Line(points={{-100,60},{40,60}},  color={0,127,255}));
   connect(con.port_b, port_b1)
     annotation (Line(points={{60,60},{60,60},{100,60}}, color={0,127,255}));
-  connect(con.Q_flow, QCon_flow) annotation (Line(points={{61,64},{60,64},{60,90},
-          {110,90}}, color={0,0,127}));
+  connect(con.Q_flow, QCon_flow) annotation (Line(points={{61,64},{80,64},{80,
+          90},{110,90}},
+                     color={0,0,127}));
   connect(eva.port_a, port_a2)
     annotation (Line(points={{60,-60},{100,-60}}, color={0,127,255}));
   connect(eva.port_b, port_b2)
@@ -302,41 +303,40 @@ equation
         Line(points={{62,0},{100,0}},                 color={0,0,255})}),
     defaultComponentName="heaPum",
     Documentation(info="<html>
- <p>
- Partial model for a water to water heat pump, as detailed in Jin (2002). The
- model for the compressor is a partial model and needs to be replaced by one of the
- compressor models in
- <a href = \"modelica://AixLib.Fluid.HeatPumps.Compressors\">
- AixLib.Fluid.HeatPumps.Compressors</a>.
- </p>
- <h4>References</h4>
- <p>
- H. Jin.
- <i>
- Parameter estimation based models of water source heat pumps.
- </i>
- PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2002.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- May 30, 2017, by Filip Jorissen:<br/>
- Added temperature protection block and
- set <code>energyDynamics=DynamicFreeInitial</code>.
- See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">
- #769</a>.
- </li>
- <li>
- October 17, 2016, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Partial model for a water to water heat pump, as detailed in Jin (2002). The
+model for the compressor is a partial model and needs to be replaced by one of the
+compressor models in
+<a href = \"modelica://AixLib.Fluid.HeatPumps.Compressors\">
+AixLib.Fluid.HeatPumps.Compressors</a>.
+</p>
+<h4>References</h4>
+<p>
+H. Jin.
+<i>
+Parameter estimation based models of water source heat pumps.
+</i>
+PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2002.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+May 30, 2017, by Filip Jorissen:<br/>
+Added temperature protection block and
+set <code>energyDynamics=DynamicFreeInitial</code>.
+See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">
+#769</a>.
+</li>
+<li>
+October 17, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialWaterToWater;

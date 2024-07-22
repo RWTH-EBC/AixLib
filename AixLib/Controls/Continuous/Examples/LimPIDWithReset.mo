@@ -80,26 +80,26 @@ protected
     connect(preHea.port, cap.port)
       annotation (Line(points={{-58,0},{-28,0}}, color={191,0,0}));
     annotation (Documentation(info="<html>
- <p>
- Plant model for
- <a href=\"modelica://AixLib.Controls.Continuous.Examples.LimPIDWithReset\">
- AixLib.Controls.Continuous.Examples.LimPIDWithReset</a>.
- consisting of a simple heat transfer model.
- </p>
- <h4>Implementation</h4>
- <p>
- To compare the effect of the controller output reset, the plant and control
- models have been implemented in separate blocks so they can be instantiated
- twice in the system model with the appropriate control settings.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- October 3, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"));
+<p>
+Plant model for
+<a href=\"modelica://AixLib.Controls.Continuous.Examples.LimPIDWithReset\">
+AixLib.Controls.Continuous.Examples.LimPIDWithReset</a>.
+consisting of a simple heat transfer model.
+</p>
+<h4>Implementation</h4>
+<p>
+To compare the effect of the controller output reset, the plant and control
+models have been implemented in separate blocks so they can be instantiated
+twice in the system model with the appropriate control settings.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+October 3, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
   end Plant;
 
   model Controller "PID controller with optional output reset"
@@ -155,34 +155,34 @@ protected
     connect(gain.y, y)
       annotation (Line(points={{51,0},{100,0},{110,0}}, color={0,0,127}));
     annotation (Documentation(info="<html>
- <p>
- Controller model for
- <a href=\"modelica://AixLib.Controls.Continuous.Examples.LimPIDWithReset\">
- AixLib.Controls.Continuous.Examples.LimPIDWithReset</a>.
- </p>
- <p>
- The controller is reset whenever the input signal becomes bigger than
- <i>30</i>&deg;C.
- </p>
- <h4>Implementation</h4>
- <p>
- To compare the effect of the controller output reset, the plant and control
- models have been implemented in separate blocks so they can be instantiated
- twice in the system model with the appropriate control settings.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- October 10, 2016, by Michael Wetter:<br/>
- Added full path in the type declaration.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/540\">issue 540</a>.
- </li>
- <li>
- October 3, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"));
+<p>
+Controller model for
+<a href=\"modelica://AixLib.Controls.Continuous.Examples.LimPIDWithReset\">
+AixLib.Controls.Continuous.Examples.LimPIDWithReset</a>.
+</p>
+<p>
+The controller is reset whenever the input signal becomes bigger than
+<i>30</i>&deg;C.
+</p>
+<h4>Implementation</h4>
+<p>
+To compare the effect of the controller output reset, the plant and control
+models have been implemented in separate blocks so they can be instantiated
+twice in the system model with the appropriate control settings.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+October 10, 2016, by Michael Wetter:<br/>
+Added full path in the type declaration.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/540\">issue 540</a>.
+</li>
+<li>
+October 3, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
   end Controller;
 
 equation
@@ -205,23 +205,22 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Cont
         "Simulate and plot"),
     Documentation(
 info="<html>
- <p>
- Example that demonstrates the effect
- of the integrator reset.
- The top model has the reset of the controller output enabled.
- By plotting the controller error, one sees that the integrator reset
- improves the closed loop performance slightly.
- Note, however, that both controllers have an integrator anti-windup
- and hence the integrator reset has limited benefits.
- </p>
- </html>",
+<p>
+Example that demonstrates the effect
+of the integrator reset.
+The top model has the reset of the controller output enabled.
+By plotting the controller error, one sees that the integrator reset
+improves the closed loop performance slightly.
+Note, however, that both controllers have an integrator anti-windup
+and hence the integrator reset has limited benefits.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 29, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end LimPIDWithReset;

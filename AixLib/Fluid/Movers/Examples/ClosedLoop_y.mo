@@ -21,7 +21,7 @@ model ClosedLoop_y "Flow machine with feedback control"
     p=101325,
     T=293.15,
     nPorts=2) annotation (Placement(transformation(extent={{-82,10},{-62,30}})));
-  FixedResistances.PressureDrop dp1(
+  AixLib.Fluid.FixedResistances.PressureDrop dp1(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal/2) "Pressure drop"
@@ -78,28 +78,27 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
             160}})),
     Documentation(info="<html>
- <p>
- This example demonstrates the use of a fan with closed loop control.
- The fan is controlled to track a required mass flow rate.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- February 14, 2012, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates the use of a fan with closed loop control.
+The fan is controlled to track a required mass flow rate.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+February 14, 2012, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/ClosedLoop_y.mos"
         "Simulate and plot"),
     experiment(
       StopTime=3600,
-      Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06));
 end ClosedLoop_y;

@@ -1,6 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block EquationOfTime "Equation of time"
-  extends Modelica.Blocks.Icons.Block;
+  extends PartialConvertTime;
   Modelica.Blocks.Interfaces.RealInput nDay(
     quantity="Time",
     unit="s")
@@ -14,24 +14,30 @@ block EquationOfTime "Equation of time"
 protected
   Real Bt "Intermediate variable";
 equation
-  Bt = Modelica.Constants.pi*((nDay + 86400)/86400 - 81)/182
+  modTimAux = nDay;
+  Bt = Modelica.Constants.pi*((calTimAux + 86400)/86400 - 81)/182
     "Our unit is s instead of day in (A.4.2b)";
   eqnTim = 60*(9.87*Modelica.Math.sin(2*Bt) - 7.53*Modelica.Math.cos(Bt) - 1.5*
     Modelica.Math.sin(Bt)) "Our unit is s instead of min in (A.4.2a)";
   annotation (
     defaultComponentName="eqnTim",
     Documentation(info="<html>
- <p>
- This component computes the difference between solar noon and noon of local civic time.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 13, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the difference between solar noon and noon of local civil time.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 27, 2023, by Ettore Zanetti:<br/>
+Updated to use partial class for conversion from simulation time to calendar time.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1716\">IBPSA #1716</a>.
+</li>
+<li>
+May 13, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
@@ -44,6 +50,5 @@ equation
         Text(
           extent={{-6,4},{52,-24}},
           textColor={0,0,255},
-          textString="equ")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="equ")}));
 end EquationOfTime;

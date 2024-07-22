@@ -58,19 +58,18 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/DryCoilEffectivenessNTUMassFlow.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model tests
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
- AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
- for different mass flow rates.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 12, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+for different mass flow rates.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 12, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end DryCoilEffectivenessNTUMassFlow;

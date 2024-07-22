@@ -62,47 +62,46 @@ equation
       smooth=Smooth.None));
   annotation (    experiment(Tolerance=1e-08, StopTime=1),
     Documentation(info="<html>
- <p>
- This test checks if the trace substance flow rate is
- conserved when adding moisture to a mixing volume that is configured to steady state.<br/>
- The trace substance flow rate at the inlet and outlet should be equal
- since the trace substance concentration should not
- be affected by the independent mass fraction concentration.
- </p>
- <p>
- Note, however, that there is some approximation error because
- in its default configuration, the conservation balance
- models simplify the treatment of the water that is added
- to the fluid.
- See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
- AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
- and
- <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
- AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
- for a discussion.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 3, 2016, by Michael Wetter:<br/>
- Removed wrong assignment for <code>C_nominal</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/568\">issue 568</a>.
- </li>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference,
- and added the difference to the regression results.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- May 22 2015 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This test checks if the trace substance flow rate is
+conserved when adding moisture to a mixing volume that is configured to steady state.<br/>
+The trace substance flow rate at the inlet and outlet should be equal
+since the trace substance concentration should not
+be affected by the independent mass fraction concentration.
+</p>
+<p>
+Note, however, that there is some approximation error because
+in its default configuration, the conservation balance
+models simplify the treatment of the water that is added
+to the fluid.
+See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+and
+<a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+for a discussion.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 3, 2016, by Michael Wetter:<br/>
+Removed wrong assignment for <code>C_nominal</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/568\">issue 568</a>.
+</li>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+May 22 2015 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/TraceSubstanceConservationDynamicBalance.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end TraceSubstanceConservationDynamicBalance;

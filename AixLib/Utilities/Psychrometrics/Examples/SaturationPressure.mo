@@ -21,14 +21,13 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/SaturationPressure.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- This examples is a unit test for the saturation pressure computation.
- </html>",revisions="<html>
- <ul>
- <li>
- October 2, 2012 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This examples is a unit test for the saturation pressure computation.
+</html>", revisions="<html>
+<ul>
+<li>
+October 2, 2012 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end SaturationPressure;

@@ -88,77 +88,83 @@ algorithm
       i := i + 1;
     end while;
   end if;
-  assert(test, "In " + getInstanceName() + ":\n" +
+  assert(test, "In " + instanceName + ":\n" +
   "Maximum number of iterations exceeded. Check the borehole geometry.
-   The tubes may be too close to the borehole wall.
-   Input to the function
-   AixLib.Fluid.HeatExchangers.Boreholes.BaseClasses.doubleUTubeResistances
-   is
-             hSeg = "+ String(hSeg) + " m
-             rBor = "+ String(rBor) + " m
-             rTub = "+ String(rTub) + " m
-             eTub = "+ String(eTub) + " m
-             sha = "+ String(sha) + " m
-             kSoi = "+ String(kSoi) + " W/m/K
-             kFil = "+ String(kFil) + " W/m/K
-             kTub = "+ String(kTub) + " W/m/K
-   Computed x    = "+ String(x) + " m
-             Rgb  = "+ String(Rgb) + " K/W
-             Rgg1  = "+ String(Rgg1) + " K/W
-             Rgg2  = "+ String(Rgg2) + " K/W");
+  The tubes may be too close to the borehole wall.
+  Input to the function
+  AixLib.Fluid.HeatExchangers.Boreholes.BaseClasses.doubleUTubeResistances
+  is
+            hSeg = " + String(hSeg) + " m
+            rBor = " + String(rBor) + " m
+            rTub = " + String(rTub) + " m
+            eTub = " + String(eTub) + " m
+            sha = " + String(sha) + " m
+            kSoi = " + String(kSoi) + " W/m/K
+            kFil = " + String(kFil) + " W/m/K
+            kTub = " + String(kTub) + " W/m/K
+  Computed x    = " + String(x) + " m
+            Rgb  = " + String(Rgb) + " K/W
+            Rgg1  = " + String(Rgg1) + " K/W
+            Rgg2  = " + String(Rgg2) + " K/W");
 
 annotation (
   Documentation(info="<html>
- <p>
- This model computes the different thermal resistances present in a double U-tube
- borehole using the method of Bauer et al. (2011).
- It also computes the fluid-to-ground thermal resistance <i>R<sub>b</sub></i>
- and the grout-to-grout thermal resistance <i>R<sub>a</sub></i>
- as defined by Claesson and Hellstrom (2011) using the multipole method.
- </p>
- 
- <h4>References</h4>
- <p>J. Claesson and G. Hellstrom.
- <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
- </i>
- HVAC&amp;R Research,
- 17(6): 895-911, 2011.</p>
- <p>D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
- <i>Thermal resistance and capacity models for borehole heat exchangers</i>.
- International Journal of Energy Research, 35:312&ndash;320, 2011.</p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 7, 2022, by Michael Wetter:<br/>
- Changed function to be <code>pure</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
- </li>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>impure</code> declaration for MSL 4.0.0.
- </li>
- <li>
- July 18, 2018 by Massimo Cimmino:<br/>
- Implemented multipole method.
- </li>
- <li>
- February 14, 2014 by Michael Wetter:<br/>
- Added an assert statement to test for non-physical values.
- </li>
- <li>
- February 12, 2014, by Damien Picard:<br/>
- Remove the flow dependency of the resistances, as this function calculates the conduction resistances only.
- </li>
- <li>
- January 24, 2014, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- January 23, 2014, by Damien Picard:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model computes the different thermal resistances present in a double U-tube
+borehole using the method of Bauer et al. (2011).
+It also computes the fluid-to-ground thermal resistance <i>R<sub>b</sub></i>
+and the grout-to-grout thermal resistance <i>R<sub>a</sub></i>
+as defined by Claesson and Hellstrom (2011) using the multipole method.
+</p>
+
+<h4>References</h4>
+<p>J. Claesson and G. Hellstrom.
+<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
+</i>
+HVAC&amp;R Research,
+17(6): 895-911, 2011.</p>
+<p>D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
+<i>Thermal resistance and capacity models for borehole heat exchangers</i>.
+International Journal of Energy Research, 35:312&ndash;320, 2011.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 22, 2023, by Michael Wetter:<br/>
+Corrected use of <code>getInstanceName()</code> which was called inside a function which
+is not allowed.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1814\">IBPSA, #1814</a>.
+</li>
+<li>
+February 7, 2022, by Michael Wetter:<br/>
+Changed function to be <code>pure</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
+</li>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>impure</code> declaration for MSL 4.0.0.
+</li>
+<li>
+July 18, 2018 by Massimo Cimmino:<br/>
+Implemented multipole method.
+</li>
+<li>
+February 14, 2014 by Michael Wetter:<br/>
+Added an assert statement to test for non-physical values.
+</li>
+<li>
+February 12, 2014, by Damien Picard:<br/>
+Remove the flow dependency of the resistances, as this function calculates the conduction resistances only.
+</li>
+<li>
+January 24, 2014, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+January 23, 2014, by Damien Picard:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end internalResistancesTwoUTube;

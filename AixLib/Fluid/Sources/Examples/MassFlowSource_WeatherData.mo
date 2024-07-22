@@ -11,7 +11,7 @@ model MassFlowSource_WeatherData
     redeclare package Medium = Medium,
     m_flow=-1,
     nPorts=1) "Mass flow source model receiving h and X from weather data through
-      weather bus"
+     weather bus"
     annotation (Placement(transformation(extent={{96,-10},{76,10}})));
   AixLib.Fluid.Sources.Outside bou(redeclare package Medium = Medium, nPorts=1)
     "Model with outside conditions"
@@ -50,20 +50,19 @@ experiment(Tolerance=1e-6, StopTime=3.1536e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/MassFlowSource_WeatherData.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model demonstrates how to connect fluid flow components to a
- boundary condition that has environmental conditions as
- obtained from a weather file.
- The model draws a constant mass flow rate of outside air through
- its components.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 21, 2017 by Jianjun Hu:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model demonstrates how to connect fluid flow components to a
+boundary condition that has environmental conditions as
+obtained from a weather file.
+The model draws a constant mass flow rate of outside air through
+its components.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 21, 2017 by Jianjun Hu:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end MassFlowSource_WeatherData;

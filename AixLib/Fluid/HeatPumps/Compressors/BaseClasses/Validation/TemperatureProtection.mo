@@ -27,19 +27,18 @@ equation
     annotation (Line(points={{-59,10},{-40,10},{-22,10}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
- <p>
- Model that tests temperature protection functionality.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 31, 2017, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Model that tests temperature protection functionality.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 31, 2017, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Compressors/BaseClasses/Validation/TemperatureProtection.mos"
         "Simulate and plot"),
-    experiment(StopTime=5, Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+    experiment(StopTime=5, Tolerance=1e-06));
 end TemperatureProtection;

@@ -21,36 +21,35 @@ algorithm
     smoothOrder=99,
     Inline=true,
     Documentation(info="<html>
- <p>
- Function to compute the mass fraction for a given water vapor partial pressure.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 14, 2021 by Ettore Zanetti:<br/>
- Updated description.
- </li>
- <li>
- September 16, 2013 by Michael Wetter:<br/>
- Added attributes to variable <code>p_w</code>.
- </li>
- <li>
- March 9, 2012 by Michael Wetter:<br/>
- Added <code>smoothOrder=99</code> and <code>displayUnit</code> for pressure.
- </li>
- <li>
- February 17, 2010 by Michael Wetter:<br/>
- Renamed block from <code>HumidityRatio_pWat</code> to <code>X_pW</code>.
- </li>
- <li>
- April 14, 2009 by Michael Wetter:<br/>
- Converted model to block because <code>RealInput</code> are obsolete in Modelica 3.0.
- </li>
- <li>
- August 7, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function to compute the mass fraction for a given water vapor partial pressure.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 14, 2021 by Ettore Zanetti:<br/>
+Updated description.
+</li>
+<li>
+September 16, 2013 by Michael Wetter:<br/>
+Added attributes to variable <code>p_w</code>.
+</li>
+<li>
+March 9, 2012 by Michael Wetter:<br/>
+Added <code>smoothOrder=99</code> and <code>displayUnit</code> for pressure.
+</li>
+<li>
+February 17, 2010 by Michael Wetter:<br/>
+Renamed block from <code>HumidityRatio_pWat</code> to <code>X_pW</code>.
+</li>
+<li>
+April 14, 2009 by Michael Wetter:<br/>
+Converted model to block because <code>RealInput</code> are obsolete in Modelica 3.0.
+</li>
+<li>
+August 7, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end X_pW;

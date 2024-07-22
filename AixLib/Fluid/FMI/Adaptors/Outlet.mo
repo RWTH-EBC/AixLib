@@ -36,15 +36,15 @@ model Outlet "Adaptor for connecting a fluid outlet to the FMI interface"
         rotation=90,
         origin={0,-120})));
 protected
-  AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
+  output AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
     redeclare final package Medium = Medium)
     "Internal connector for fluid properties for back flow";
   AixLib.Fluid.FMI.Interfaces.PressureOutput p_in_internal
     "Internal connector for pressure";
 
-  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_in_internal
+  input AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_in_internal
     "Internal connector for mass fraction of forward flow properties";
-  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_out_internal
+  output AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_out_internal
     "Internal connector for mass fraction of backward flow properties";
 initial equation
    assert(Medium.nXi < 2,
@@ -85,7 +85,7 @@ equation
   bacPro_internal.T  = Medium.temperature_phX(
     p = p_in_internal,
     h = port_a.h_outflow,
-    X = port_a.Xi_outflow);
+    X = cat(1, port_a.Xi_outflow, {1-sum(port_a.Xi_outflow)}));
   bacPro_internal.C  = port_a.C_outflow;
 
   // Conditional connectors for pressure
@@ -133,49 +133,58 @@ equation
           textString="p",
           visible=use_p_in)}),
     Documentation(info="<html>
- <p>
- Model that is used to connect a fluid port with an output signal.
- The model needs to be used in conjunction with an instance of
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
- AixLib.Fluid.FMI.Adaptors.Inlet</a> in order for
- fluid mass flow rate and pressure to be properly assigned to
- the acausal fluid models.
- </p>
- <p>
- See
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
- AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
- or
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
- AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
- for how to use this model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to moist air and water.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- November 8, 2016, by Michael Wetter:<br/>
- Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
- </li>
- <li>
- April 29, 2015, by Michael Wetter:<br/>
- Redesigned to conditionally remove the pressure connector
- if <code>use_p_in=false</code>.
- </li>
- <li>
- April 15, 2015 by Michael Wetter:<br/>
- Changed connector variable to be temperature instead of
- specific enthalpy.
- </li>
- <li>
- January 21, 2014 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that is used to connect a fluid port with an output signal.
+The model needs to be used in conjunction with an instance of
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
+AixLib.Fluid.FMI.Adaptors.Inlet</a> in order for
+fluid mass flow rate and pressure to be properly assigned to
+the acausal fluid models.
+</p>
+<p>
+See
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
+or
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
+AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
+for how to use this model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 18, 2024, by Michael Wetter:<br/>
+Added causality.<br/>
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1853\">IBPSA, #1853</a>.
+</li>
+<li>
+June 29, 2023, by Michael Wetter:<br/>
+Corrected dimension of <code>X</code> in function call.<br/>
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1768\">#1768</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air and water.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+November 8, 2016, by Michael Wetter:<br/>
+Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
+</li>
+<li>
+April 29, 2015, by Michael Wetter:<br/>
+Redesigned to conditionally remove the pressure connector
+if <code>use_p_in=false</code>.
+</li>
+<li>
+April 15, 2015 by Michael Wetter:<br/>
+Changed connector variable to be temperature instead of
+specific enthalpy.
+</li>
+<li>
+January 21, 2014 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Outlet;

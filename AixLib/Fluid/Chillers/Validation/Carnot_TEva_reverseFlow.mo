@@ -24,7 +24,6 @@ model Carnot_TEva_reverseFlow
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
     use_eta_Carnot_nominal=true,
-    etaCarnot_nominal=0.3,
     m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
     show_T=true,
@@ -80,7 +79,7 @@ model Carnot_TEva_reverseFlow
     duration=60,
     startTime=1800,
     height=-2*m2_flow_nominal,
-    offset=m2_flow_nominal) "Mass flow rate for evaporater"
+    offset=m2_flow_nominal) "Mass flow rate for evaporator"
     annotation (Placement(transformation(extent={{92,-8},{72,12}})));
 equation
   connect(sou1.ports[1], chi.port_a1)    annotation (Line(
@@ -117,29 +116,34 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chiller
         "Simulate and plot"),
     Documentation(
 info="<html>
- <p>
- Example that simulates a chiller whose efficiency is scaled based on the
- Carnot cycle.
- The chiller takes as an input the evaporator leaving water temperature.
- The condenser mass flow rate is computed in such a way that it has
- a temperature difference equal to <code>dTEva_nominal</code>.
- </p>
- <p>
- This example checks the correct behavior if a mass flow rate attains zero.
- </p>
- </html>",
+<p>
+Example that simulates a chiller whose efficiency is scaled based on the
+Carnot cycle.
+The chiller takes as an input the evaporator leaving water temperature.
+The condenser mass flow rate is computed in such a way that it has
+a temperature difference equal to <code>dTEva_nominal</code>.
+</p>
+<p>
+This example checks the correct behavior if a mass flow rate attains zero.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- November 25, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 10, 2023, by Michael Wetter:<br/>
+Removed binding of parameter with same value as the default.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1692\">#1692</a>.
+</li>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+November 25, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Carnot_TEva_reverseFlow;

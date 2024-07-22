@@ -24,7 +24,8 @@ model ConstantHeatInjection_100Boreholes
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
-    inputType=AixLib.Fluid.Types.InputType.Constant)
+    inputType=AixLib.Fluid.Types.InputType.Constant,
+    dp_nominal=60E3) "Circulation pump"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TBorFieIn(
     redeclare package Medium = Medium,
@@ -83,36 +84,41 @@ equation
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/ConstantHeatInjection_100Boreholes.mos"
         "Simulate and Plot"),
 Documentation(info="<html>
- <p>
- This validation case simulates a borefield of 100 boreholes on a square 10 by 10
- grid.
- </p>
- <p>
- The heat injection rate in the borefield is constant and equal to
- <code>2*pi*kSoi*hBor*nBor</code>. In this case, the borehole wall temperature
- variation corresponds to the g-function of the borefield, as evaluated in
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 8, 2021, by Michael Wetter:<br/>
- Added missing <code>parameter</code> keyword.<br/>
- For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">IBPSA, issue 1464</a>.
- </li>
- <li>
- June 24, 2019, by Michael Wetter:<br/>
- Changed <code>StopTime</code> from integer to floating point.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1163\">issue 1163</a>.
- </li>
- <li>
- May 27, 2019, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This validation case simulates a borefield of 100 boreholes on a square 10 by 10
+grid.
+</p>
+<p>
+The heat injection rate in the borefield is constant and equal to
+<code>2*pi*kSoi*hBor*nBor</code>. In this case, the borehole wall temperature
+variation corresponds to the g-function of the borefield, as evaluated in
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 15, 2022, by Michael Wetter:<br/>
+Set proper head for pump.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1659\">IBPSA, issue 1659</a>.
+</li>
+<li>
+April 8, 2021, by Michael Wetter:<br/>
+Added missing <code>parameter</code> keyword.<br/>
+For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">IBPSA, issue 1464</a>.
+</li>
+<li>
+June 24, 2019, by Michael Wetter:<br/>
+Changed <code>StopTime</code> from integer to floating point.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1163\">issue 1163</a>.
+</li>
+<li>
+May 27, 2019, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})));
 end ConstantHeatInjection_100Boreholes;

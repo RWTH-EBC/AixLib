@@ -15,22 +15,22 @@ package Constants "Library of constants for psychometric functions"
 
   annotation (
     Documentation(info="<html>
- <p>
- This package provides constants for functions used
- in the calculation of thermodynamic properties of moist air.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 24, 2016, by Filip Jorissen:<br/>
- Added reference temperature.
- </li>
- <li>
- July 24, 2014, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This package provides constants for functions used
+in the calculation of thermodynamic properties of moist air.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 24, 2016, by Filip Jorissen:<br/>
+Added reference temperature.
+</li>
+<li>
+July 24, 2014, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(extent={{-100.0,-100.0},{100.0,100.0}}), graphics={
       Polygon(
         origin={-9.2597,25.6673},
@@ -52,6 +52,5 @@ package Constants "Library of constants for psychometric functions"
         pattern=LinePattern.None,
         fillPattern=FillPattern.Solid,
         points={{-10.873,41.478},{-10.873,41.478},{-14.048,-4.162},{-9.352,-24.8},{7.912,-24.469},{16.247,0.27},{16.247,0.27},{13.336,0.071},{13.336,0.071},{7.515,-9.983},{-3.134,-7.271},{-2.671,41.214},{-2.671,41.214}},
-        smooth=Smooth.Bezier)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+        smooth=Smooth.Bezier)}));
 end Constants;

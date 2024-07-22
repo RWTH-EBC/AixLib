@@ -16,8 +16,10 @@ model To_VolumeFraction "Example problem for conversion model"
     k=2,
     Td=1)
     annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-  AixLib.Fluid.Sensors.TraceSubstances senCO2(redeclare package Medium =
-        Medium, substanceName="CO2") "CO2 sensor"
+  AixLib.Fluid.Sensors.TraceSubstances senCO2(
+    redeclare package Medium = Medium,
+    substanceName="CO2",
+    warnAboutOnePortConnection = false) "CO2 sensor"
     annotation (Placement(transformation(extent={{120,0},{140,20}})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     nPorts=4,
@@ -143,37 +145,42 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors
         "Simulate and plot"),
   Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-200,-100},{200,100}})),
     Documentation(info="<html>
- This example demonstrates the modeling of a room with one person and CO<sub>2</sub> control.
- The room has a volume of <i>4*4*2.7 m<sup>3</sup></i>, and the CO<sub>2</sub> inflow is from
- one person.
- A control system regulates the outside air to maintain a CO<sub>2</sub> concentration of 1000 PPM
- in the room. The outside air has a CO<sub>2</sub> concentration of 300 PPM.
- Note that for simplicity, we allow zero outside air flow rate if the CO<sub>2</sub> concentration is below
- the setpoint, which does not comply with ASHRAE regulations.
- </html>",revisions="<html>
- <ul>
- <li>
- May 2, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- April 25, 2017 by Filip Jorissen:<br/>
- Increased model tolerance for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/750\">#750</a>.
- </li>
- <li>
- March 27, 2013 by Michael Wetter:<br/>
- Added a flow resistance between the volume and the ambient to decouple the
- state of the volume from the boundary conditions. This is needed to allow
- a pedantic model check in Dymola 2014, as otherwise, the initial conditions of
- the volume could not be specified without introducing redundant equations.
- </li>
- <li>
- February 13, 2010 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This example demonstrates the modeling of a room with one person and CO<sub>2</sub> control.
+The room has a volume of <i>4*4*2.7 m<sup>3</sup></i>, and the CO<sub>2</sub> inflow is from
+one person.
+A control system regulates the outside air to maintain a CO<sub>2</sub> concentration of 1000 PPM
+in the room. The outside air has a CO<sub>2</sub> concentration of 300 PPM.
+Note that for simplicity, we allow zero outside air flow rate if the CO<sub>2</sub> concentration is below
+the setpoint, which does not comply with ASHRAE regulations.
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2024, by Michael Wetter:<br/>
+Configured the sensor parameter to suppress the warning about being a one-port connection.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1857\">IBPSA, #1857</a>.
+</li>
+<li>
+May 2, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+April 25, 2017 by Filip Jorissen:<br/>
+Increased model tolerance for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/750\">#750</a>.
+</li>
+<li>
+March 27, 2013 by Michael Wetter:<br/>
+Added a flow resistance between the volume and the ambient to decouple the
+state of the volume from the boundary conditions. This is needed to allow
+a pedantic model check in Dymola 2014, as otherwise, the initial conditions of
+the volume could not be specified without introducing redundant equations.
+</li>
+<li>
+February 13, 2010 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end To_VolumeFraction;

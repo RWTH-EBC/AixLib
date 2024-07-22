@@ -15,26 +15,25 @@ equation
   annotation (
     defaultComponentName="solHouAng",
     Documentation(info="<html>
- <p>
- This component computes the solar hour angle,
- which is defined as the angle between the circle
- that passes through an observer, the north pole and the south pole,
- and the circle that passes through the sun, the north and the south pole.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 17, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the solar hour angle,
+which is defined as the angle between the circle
+that passes through an observer, the north pole and the south pole,
+and the circle that passes through the sun, the north and the south pole.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 17, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={  Bitmap(extent={{-90,-90},{90,90}}, fileName=
               "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarHourAngle.png"),
                               Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textColor={0,0,255})}));
 end SolarHourAngle;

@@ -57,32 +57,31 @@ experiment(
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/BasicFlowFunction_m_flow_DerivativeCheck2.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This model validates the implementation of
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
- and its second order derivative
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2</a>.
- If the derivative implementation is wrong, the simulation will stop with an error.
- </p>
- <h4>Implementation</h4>
- <p>
- The mass flow rate <code>m_flow</code> is increased non-linearly in order
- for the first and second derivatives in
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2\">
- AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2</a>
- to be non-zero during part of the simulation. This will ensure
- full code coverage of this function.
- </p>
- </html>",
+<p>
+This model validates the implementation of
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
+and its second order derivative
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2</a>.
+If the derivative implementation is wrong, the simulation will stop with an error.
+</p>
+<h4>Implementation</h4>
+<p>
+The mass flow rate <code>m_flow</code> is increased non-linearly in order
+for the first and second derivatives in
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der2</a>
+to be non-zero during part of the simulation. This will ensure
+full code coverage of this function.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- July 29, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+July 29, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end BasicFlowFunction_m_flow_DerivativeCheck2;

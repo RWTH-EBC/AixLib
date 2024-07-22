@@ -12,19 +12,18 @@ equation
   connect(sou.Xi_in, Xi_in) annotation (Line(points={{-62,-4},{-82,-4},{-82,0},{
           -120,0}}, color={0,0,127}));
   annotation (Documentation(info="<html>
- <p>
- System model used to test the boundary conditions for different media
- with independent prescribed mass fraction <code>Xi</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 13, 2019 by Michael Wetter:<br/>
- First implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+System model used to test the boundary conditions for different media
+with independent prescribed mass fraction <code>Xi</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 13, 2019 by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
+</li>
+</ul>
+</html>"));
 end BoundarySystemWithXi_in;

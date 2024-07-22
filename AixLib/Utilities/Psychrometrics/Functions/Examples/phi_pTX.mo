@@ -26,13 +26,12 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/Examples/phi_pTX.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
- <ul>
- <li>
- April 4, 2019 by Filip Jorissen:<br/>
- Added inverse implementation check
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+April 4, 2019 by Filip Jorissen:<br/>
+Added inverse implementation check
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
+</li>
+</ul>
+</html>"));
 end phi_pTX;

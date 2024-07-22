@@ -313,174 +313,173 @@ equation
           points={{66,60},{66,-60}})}),
     defaultComponentName="rad",
     Documentation(info="<html>
- <p>
- This is a model of a radiator that can be used as a dynamic or steady-state model.
- The required parameters are data that are typically available from
- manufacturers that follow the European Norm EN 442-2.
- </p>
- <p>
- However, to allow for varying mass flow rates, the transferred heat is computed
- using a discretization along the water flow path, and heat is exchanged between
- each compartment and a uniform room air and radiation temperature.
- This discretization is different from the computation in EN 442-2, which
- may yield water outlet temperatures that are below
- the room temperature at low mass flow rates.
- Furthermore, rather than using only one room temperature, this model uses
- a room air and room radiation temperature.
- </p>
- <p>
- The transferred heat is modeled as follows:
- Let <i>N</i> denote the number of elements used to discretize the radiator model.
- For each element <i>i &isin; {1, &hellip; , N}</i>,
- the convective and radiative heat transfer
- <i>Q<sup>i</sup><sub>c</sub></i> and
- <i>Q<sup>i</sup><sub>r</sub></i>
- from the radiator to the room is
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   Q<sup>i</sup><sub>c</sub> = sign(T<sup>i</sup>-T<sub>a</sub>)
-      (1-f<sub>r</sub>) UA &frasl; N |T<sup>i</sup>-T<sub>a</sub>|<sup>n</sup>
-   <br/> <br/>
-   Q<sup>i</sup><sub>r</sub> = sign(T<sup>i</sup>-T<sub>r</sub>)
-      f<sub>r</sub> UA &frasl; N |T<sup>i</sup>-T<sub>r</sub>|<sup>n</sup>
- </p>
- <p>
- where
- <i>T<sup>i</sup></i> is the water temperature of the element,
- <i>T<sub>a</sub></i> is the temperature of the room air,
- <i>T<sub>r</sub></i> is the radiative temperature,
- <i>0 &lt; f<sub>r</sub> &lt; 1</i> is the fraction of radiant to total heat transfer,
- <i>UA</i> is the UA-value of the radiator,
- and
- <i>n</i> is an exponent for the heat transfer.
- The model computes the UA-value by numerically solving the above equations
- for given
- nominal heating power, nominal temperatures, fraction radiant to total heat transfer
- and exponent for heat transfer.
- </p>
- <p>
- The parameter <code>energyDynamics</code> (in the Assumptions tab),
- determines whether the model computes the dynamic or the steady-state response.
- For the transient response, heat storage is computed using a
- finite volume approach for the
- water and the metal mass, which are both assumed to be at the same
- temperature.
- </p>
- <p>
- The default parameters for the heat capacities are valid for a flat plate radiator without fins,
- with one plate of water carying fluid, and a height of 0.42 meters.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- February 21, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- November 17, 2016, by Filip Jorissen:<br/>
- Added pressure drop equations and parameters.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/586\">#586</a>.
- </li>
- <li>
- November 3, 2016, by Michael Wetter:<br/>
- Set <code>preHea(final alpha=0)</code> as this allows to simplify the
- system of equations.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/570\">#570</a>.
- </li>
- <li>
- March 17, 2016, by Michael Wetter:<br/>
- Reformulated model to reduce the dimension of the nonlinear system of equations.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/435\">#435</a>.
- </li>
- <li>
- November 19, 2015, by Michael Wetter:<br/>
- Removed assignment of parameter
- <code>showDesignFlowDirection</code> in <code>extends</code> statement.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
- </li>
- <li>
- April 11, 2015, by Filip Jorissen:<br/>
- Propagated <code>vol.massDynamics</code> to
- top level parameter <code>massDynamics</code> instead of <code>energyDynamics</code>.
- </li>
- <li>
- November 25, 2014, by Carles Ribas Tugores:<br/>
- Interchange position of <code>fraRad</code> parameter and the complementary <code>(1-fraRad)</code>
- in the equation used to calculate the nominal heating power of each element, <code>QEle_flow_nominal[i]</code>.
- </li>
- <li>
- October 29, 2014, by Michael Wetter:<br/>
- Made assignment of <code>mFactor</code> final, and changed computation of
- density to use default medium states as are also used to compute the
- specific heat capacity.
- </li>
- <li>
- October 21, 2014, by Filip Jorissen:<br/>
- Added parameter <code>mFactor</code> and removed thermal capacity
- which can lead to an index reduction.
- </li>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- October 8, 2013 by Michael Wetter:<br/>
- Removed conditional statement in the declaration of the parameter
- <code>mDry</code>, as this is incorrect syntax.
- </li>
- <li>
- September 26, 2013 by Michael Wetter:<br/>
- Reformulated implementation to avoid mixing textual and graphical
- declarations in the <code>equation</code> section.
- </li>
- <li>
- April 4, 2011 by Michael Wetter:<br/>
- Changed the implementation to use
- <a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
- AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
- This allows formulating the model without any non-differentiable function
- inside the equation section.
- </li>
- <li>
- April 2, 2011 by Michael Wetter:<br/>
- Added <code>homotopy</code> operator.
- </li>
- <li>
- February 11, 2011 by Michael Wetter:<br/>
- Revised the initialization to ensure that at the nominal conditions, the
- amount of transferred heat is excatly the same as the specified nominal power.
- In the previous implementation, the UA-value was computed using a simplified
- expression for the temperature difference, leading to a slightly different amount
- of heat transfer.
- </li>
- <li>
- February 4, 2011 by Michael Wetter:<br/>
- Simplified implementation.
- </li>
- <li>
- January 30, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    Diagram(graphics={Rectangle(extent={{-62,78},{-46,50}}, lineColor={28,108,200})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is a model of a radiator that can be used as a dynamic or steady-state model.
+The required parameters are data that are typically available from
+manufacturers that follow the European Norm EN 442-2.
+</p>
+<p>
+However, to allow for varying mass flow rates, the transferred heat is computed
+using a discretization along the water flow path, and heat is exchanged between
+each compartment and a uniform room air and radiation temperature.
+This discretization is different from the computation in EN 442-2, which
+may yield water outlet temperatures that are below
+the room temperature at low mass flow rates.
+Furthermore, rather than using only one room temperature, this model uses
+a room air and room radiation temperature.
+</p>
+<p>
+The transferred heat is modeled as follows:
+Let <i>N</i> denote the number of elements used to discretize the radiator model.
+For each element <i>i &isin; {1, &hellip; , N}</i>,
+the convective and radiative heat transfer
+<i>Q<sup>i</sup><sub>c</sub></i> and
+<i>Q<sup>i</sup><sub>r</sub></i>
+from the radiator to the room is
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  Q<sup>i</sup><sub>c</sub> = sign(T<sup>i</sup>-T<sub>a</sub>)
+     (1-f<sub>r</sub>) UA &frasl; N |T<sup>i</sup>-T<sub>a</sub>|<sup>n</sup>
+  <br/> <br/>
+  Q<sup>i</sup><sub>r</sub> = sign(T<sup>i</sup>-T<sub>r</sub>)
+     f<sub>r</sub> UA &frasl; N |T<sup>i</sup>-T<sub>r</sub>|<sup>n</sup>
+</p>
+<p>
+where
+<i>T<sup>i</sup></i> is the water temperature of the element,
+<i>T<sub>a</sub></i> is the temperature of the room air,
+<i>T<sub>r</sub></i> is the radiative temperature,
+<i>0 &lt; f<sub>r</sub> &lt; 1</i> is the fraction of radiant to total heat transfer,
+<i>UA</i> is the UA-value of the radiator,
+and
+<i>n</i> is an exponent for the heat transfer.
+The model computes the UA-value by numerically solving the above equations
+for given
+nominal heating power, nominal temperatures, fraction radiant to total heat transfer
+and exponent for heat transfer.
+</p>
+<p>
+The parameter <code>energyDynamics</code> (in the Assumptions tab),
+determines whether the model computes the dynamic or the steady-state response.
+For the transient response, heat storage is computed using a
+finite volume approach for the
+water and the metal mass, which are both assumed to be at the same
+temperature.
+</p>
+<p>
+The default parameters for the heat capacities are valid for a flat plate radiator without fins,
+with one plate of water carying fluid, and a height of 0.42 meters.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Set <code>final massDynamics=energyDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+February 21, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+November 17, 2016, by Filip Jorissen:<br/>
+Added pressure drop equations and parameters.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/586\">#586</a>.
+</li>
+<li>
+November 3, 2016, by Michael Wetter:<br/>
+Set <code>preHea(final alpha=0)</code> as this allows to simplify the
+system of equations.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/570\">#570</a>.
+</li>
+<li>
+March 17, 2016, by Michael Wetter:<br/>
+Reformulated model to reduce the dimension of the nonlinear system of equations.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/435\">#435</a>.
+</li>
+<li>
+November 19, 2015, by Michael Wetter:<br/>
+Removed assignment of parameter
+<code>showDesignFlowDirection</code> in <code>extends</code> statement.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
+</li>
+<li>
+April 11, 2015, by Filip Jorissen:<br/>
+Propagated <code>vol.massDynamics</code> to
+top level parameter <code>massDynamics</code> instead of <code>energyDynamics</code>.
+</li>
+<li>
+November 25, 2014, by Carles Ribas Tugores:<br/>
+Interchange position of <code>fraRad</code> parameter and the complementary <code>(1-fraRad)</code>
+in the equation used to calculate the nominal heating power of each element, <code>QEle_flow_nominal[i]</code>.
+</li>
+<li>
+October 29, 2014, by Michael Wetter:<br/>
+Made assignment of <code>mFactor</code> final, and changed computation of
+density to use default medium states as are also used to compute the
+specific heat capacity.
+</li>
+<li>
+October 21, 2014, by Filip Jorissen:<br/>
+Added parameter <code>mFactor</code> and removed thermal capacity
+which can lead to an index reduction.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+October 8, 2013 by Michael Wetter:<br/>
+Removed conditional statement in the declaration of the parameter
+<code>mDry</code>, as this is incorrect syntax.
+</li>
+<li>
+September 26, 2013 by Michael Wetter:<br/>
+Reformulated implementation to avoid mixing textual and graphical
+declarations in the <code>equation</code> section.
+</li>
+<li>
+April 4, 2011 by Michael Wetter:<br/>
+Changed the implementation to use
+<a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
+AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
+This allows formulating the model without any non-differentiable function
+inside the equation section.
+</li>
+<li>
+April 2, 2011 by Michael Wetter:<br/>
+Added <code>homotopy</code> operator.
+</li>
+<li>
+February 11, 2011 by Michael Wetter:<br/>
+Revised the initialization to ensure that at the nominal conditions, the
+amount of transferred heat is excatly the same as the specified nominal power.
+In the previous implementation, the UA-value was computed using a simplified
+expression for the temperature difference, leading to a slightly different amount
+of heat transfer.
+</li>
+<li>
+February 4, 2011 by Michael Wetter:<br/>
+Simplified implementation.
+</li>
+<li>
+January 30, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Diagram(graphics={Rectangle(extent={{-62,78},{-46,50}}, lineColor={28,108,200})}));
 end RadiatorEN442_2;

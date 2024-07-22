@@ -29,21 +29,20 @@ equation
       extent={{-6,3},{-6,3}}));
   annotation (experiment(Tolerance=1e-6, StopTime=86400),
 Documentation(info="<html>
- <p>
- This example computes the solar hour angle,
- which is defined as the angle between the circle
- that passes through an observer, the north pole and the south pole,
- and the circle that passes through the sun, the north and the south pole.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 17, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the solar hour angle,
+which is defined as the angle between the circle
+that passes through an observer, the north pole and the south pole,
+and the circle that passes through the sun, the north and the south pole.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 17, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/SolarHourAngle.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end SolarHourAngle;

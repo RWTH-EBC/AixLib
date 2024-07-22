@@ -46,19 +46,18 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- <p>
- This function returns <code>true</code> if its argument is
- monotonic increasing or decreasing, and <code>false</code> otherwise.
- If <code>strict=true</code>, then strict monotonicity is tested,
- otherwise weak monotonicity is tested.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 28, 2011 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function returns <code>true</code> if its argument is
+monotonic increasing or decreasing, and <code>false</code> otherwise.
+If <code>strict=true</code>, then strict monotonicity is tested,
+otherwise weak monotonicity is tested.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 28, 2011 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end isMonotonic;

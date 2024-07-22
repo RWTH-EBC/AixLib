@@ -48,43 +48,43 @@ equation
   annotation (
     defaultComponentName="solAzi",
     Documentation(info="<html>
- <p>
- This component computes the solar azimuth angle.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 16, 2021, by Michael Wetter:<br/>
- Removed parameter <code>lat</code> and added an input connector for this quantity.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- June 9, 2020, by David Blum:<br/>
- Reformulated to use one-line if-statements.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1373\">issue 1373</a>.
- </li>
- <li>
- October 13, 2017, by Michael Wetter:<br/>
- Reformulated to use equation rather than algorithm section.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/834\">issue 834</a>.
- </li>
- <li>
- July 5, 2012, by Michael Wetter:<br/>
- Changed model to avoid an event at solar noon.
- </li>
- <li>
- February 28, 2012, by Wangda Zuo:<br/>
- Add solar time conversion since it is removed from <code>solTim</code>.
- </li>
- <li>
- May 18, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the solar azimuth angle.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 16, 2021, by Michael Wetter:<br/>
+Removed parameter <code>lat</code> and added an input connector for this quantity.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+June 9, 2020, by David Blum:<br/>
+Reformulated to use one-line if-statements.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1373\">issue 1373</a>.
+</li>
+<li>
+October 13, 2017, by Michael Wetter:<br/>
+Reformulated to use equation rather than algorithm section.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/834\">issue 834</a>.
+</li>
+<li>
+July 5, 2012, by Michael Wetter:<br/>
+Changed model to avoid an event at solar noon.
+</li>
+<li>
+February 28, 2012, by Wangda Zuo:<br/>
+Add solar time conversion since it is removed from <code>solTim</code>.
+</li>
+<li>
+May 18, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Bitmap(extent={{-90,-90},{90,90}}, fileName=
@@ -108,6 +108,5 @@ equation
         Text(
           extent={{-96,-86},{-54,-96}},
           textColor={0,0,127},
-          textString="lat")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="lat")}));
 end SolarAzimuth;

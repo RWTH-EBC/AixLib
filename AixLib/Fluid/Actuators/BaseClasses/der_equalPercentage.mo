@@ -37,30 +37,29 @@ algorithm
   end if;
 annotation (
 Documentation(info="<html>
- <p>
- This function computes the derivative of the opening characteristics of an equal percentage valve.
- </p><p>
- The function is the derivative of
- <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.equalPercentage\">
- AixLib.Fluid.Actuators.BaseClasses.equalPercentage</a>.
- </p>
- </html>",
+<p>
+This function computes the derivative of the opening characteristics of an equal percentage valve.
+</p><p>
+The function is the derivative of
+<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.equalPercentage\">
+AixLib.Fluid.Actuators.BaseClasses.equalPercentage</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 30, 2011 by Michael Wetter:<br/>
- Removed inputs for which no derivative is implemented from the argument list, and added
- <code>zeroDerivative</code> keyword in function that calls this function.
- </li>
- <li>
- February 4, 2010 by Michael Wetter:<br/>
- Fixed implementation of derivative function.
- </li>
- <li>
- June 6, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 30, 2011 by Michael Wetter:<br/>
+Removed inputs for which no derivative is implemented from the argument list, and added
+<code>zeroDerivative</code> keyword in function that calls this function.
+</li>
+<li>
+February 4, 2010 by Michael Wetter:<br/>
+Fixed implementation of derivative function.
+</li>
+<li>
+June 6, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end der_equalPercentage;

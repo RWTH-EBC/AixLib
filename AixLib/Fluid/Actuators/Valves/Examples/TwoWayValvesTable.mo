@@ -63,32 +63,31 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvesTable.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Test model for two way valves.
- The instance <code>valTab</code> has a linear opening characteristics
- based on a table, while <code>valLin</code> also has a linear opening
- characteristics that is directly implemented in the model.
- For practical applications in which valves with linear opening characteristics
- are used, one should use <code>valLin</code> rather
- than <code>valTab</code> as <code>valLin</code> is a more efficient
- implementation.
- </p>
- <p>
- This test demonstrates that both valves have, as expected, the same
- mass flow rate for the whole range of the opening signal.
- </p>
- <p>
- The parameter <code>filterOpening</code> is set to <code>false</code>,
- as this model is used to plot the flow at different opening signals
- without taking into account the travel time of the actuator.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 26, 2014 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for two way valves.
+The instance <code>valTab</code> has a linear opening characteristics
+based on a table, while <code>valLin</code> also has a linear opening
+characteristics that is directly implemented in the model.
+For practical applications in which valves with linear opening characteristics
+are used, one should use <code>valLin</code> rather
+than <code>valTab</code> as <code>valLin</code> is a more efficient
+implementation.
+</p>
+<p>
+This test demonstrates that both valves have, as expected, the same
+mass flow rate for the whole range of the opening signal.
+</p>
+<p>
+The parameter <code>filterOpening</code> is set to <code>false</code>,
+as this model is used to plot the flow at different opening signals
+without taking into account the travel time of the actuator.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2014 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end TwoWayValvesTable;

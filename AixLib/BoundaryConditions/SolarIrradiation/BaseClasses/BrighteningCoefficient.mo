@@ -113,29 +113,29 @@ equation
   annotation (
     defaultComponentName="briCoe",
     Documentation(info="<html>
- <p>
- This component computes the circumsolar and horizon brightening coefficients.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 27, 2018, by Michael Wetter:<br/>
- Corrected <code>displayUnit</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Replaced <code>spliceFunction</code> with <code>regStep</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
- </li>
- <li>
- May 25, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the circumsolar and horizon brightening coefficients.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 27, 2018, by Michael Wetter:<br/>
+Corrected <code>displayUnit</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+</li>
+<li>
+March 15, 2016, by Michael Wetter:<br/>
+Replaced <code>spliceFunction</code> with <code>regStep</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+</li>
+<li>
+May 25, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -161,6 +161,5 @@ equation
         Text(
           extent={{60,-30},{104,-52}},
           textColor={0,0,127},
-          textString="F2")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="F2")}));
 end BrighteningCoefficient;

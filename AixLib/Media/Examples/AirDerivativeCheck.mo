@@ -61,29 +61,28 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/AirDerivativeCheck.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks whether the function derivative
- is implemented correctly. If the derivative implementation
- is not correct, the model will stop with an assert statement.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- August 17, 2015, by Michael Wetter:<br/>
- Changed regression test to have slope different from one.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
- </li>
- <li>
- November 20, 2013, by Michael Wetter:<br/>
- Removed check of <code>enthalpyOfDryAir</code> as this function
- is protected and should therefore not be accessed from outside the class.
- </li>
- <li>
- May 12, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example checks whether the function derivative
+is implemented correctly. If the derivative implementation
+is not correct, the model will stop with an assert statement.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+August 17, 2015, by Michael Wetter:<br/>
+Changed regression test to have slope different from one.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+</li>
+<li>
+November 20, 2013, by Michael Wetter:<br/>
+Removed check of <code>enthalpyOfDryAir</code> as this function
+is protected and should therefore not be accessed from outside the class.
+</li>
+<li>
+May 12, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end AirDerivativeCheck;

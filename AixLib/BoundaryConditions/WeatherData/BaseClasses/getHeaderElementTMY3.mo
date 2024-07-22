@@ -61,50 +61,49 @@ algorithm
   element :=Modelica.Utilities.Strings.substring(lin, startIndex=staInd+1, endIndex=nexInd-1);
   annotation (Inline=false,
   Documentation(info="<html>
- This function scans the weather data file for a line that starts with the string <pre>
- start
- </pre>
- where <code>start</code> is a parameter.
- When this line is found, the function returns the element at the position number
- <code>position</code>, where <code>position</code> is a parameter.
- A comma is used as the delimiter of the elements.
- </html>",revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>impure</code> declaration for MSL 4.0.0.
- </li>
- <li>
- April 21, 2016, by Michael Wetter:<br/>
- Removed call to
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath\">
- AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath</a>
- because this function calls
- <a href=\"modelica://Modelica.Utilities.Files.loadResource\">
- Modelica.Utilities.Files.loadResource</a>, which needs to be resolved at compilation
- time, which is difficult if it is inside a function.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/506\">Buildings, #506</a>.
- </li>
- <li>
- September 24, 2015, by Marcus Fuchs:<br/>
- Replace Dymola specific annotation by <code>loadSelector</code>
- for MSL compliancy as reported by @tbeu at
- <a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
- </li>
- <li>
- May 2, 2013, by Michael Wetter:<br/>
- Added function call to <code>getAbsolutePath</code>.
- </li>
- <li>
- February 25, 2012, by Michael Wetter:<br/>
- Removed default value for parameter <code>name</code>.
- </li>
- <li>
- March 5, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This function scans the weather data file for a line that starts with the string <pre>
+start
+</pre>
+where <code>start</code> is a parameter.
+When this line is found, the function returns the element at the position number
+<code>position</code>, where <code>position</code> is a parameter.
+A comma is used as the delimiter of the elements.
+</html>", revisions="<html>
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>impure</code> declaration for MSL 4.0.0.
+</li>
+<li>
+April 21, 2016, by Michael Wetter:<br/>
+Removed call to
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath\">
+AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath</a>
+because this function calls
+<a href=\"modelica://Modelica.Utilities.Files.loadResource\">
+Modelica.Utilities.Files.loadResource</a>, which needs to be resolved at compilation
+time, which is difficult if it is inside a function.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/506\">Buildings, #506</a>.
+</li>
+<li>
+September 24, 2015, by Marcus Fuchs:<br/>
+Replace Dymola specific annotation by <code>loadSelector</code>
+for MSL compliancy as reported by @tbeu at
+<a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
+</li>
+<li>
+May 2, 2013, by Michael Wetter:<br/>
+Added function call to <code>getAbsolutePath</code>.
+</li>
+<li>
+February 25, 2012, by Michael Wetter:<br/>
+Removed default value for parameter <code>name</code>.
+</li>
+<li>
+March 5, 2011, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end getHeaderElementTMY3;

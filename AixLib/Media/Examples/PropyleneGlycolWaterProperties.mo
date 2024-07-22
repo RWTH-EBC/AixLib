@@ -16,17 +16,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/PropyleneGlycolWaterProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks thermophysical properties of the medium.
- </p>
- </html>",
+<p>
+This example checks thermophysical properties of the medium.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 13, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 13, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PropyleneGlycolWaterProperties;

@@ -81,17 +81,16 @@ equation
       __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CheckValve.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
- <ul>
- <li>
- September 16, 2019, by Kristoff Six and Filip Jorissen:<br/>
- Implementation of a hydraulic check valve. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1198\">issue 1198</a>.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Example model for the use of a hydraulic check valve.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 16, 2019, by Kristoff Six and Filip Jorissen:<br/>
+Implementation of a hydraulic check valve. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1198\">issue 1198</a>.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Example model for the use of a hydraulic check valve.
+</p>
+</html>"));
 end CheckValve;

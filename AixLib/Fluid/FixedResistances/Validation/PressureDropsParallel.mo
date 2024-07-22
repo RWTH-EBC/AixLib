@@ -88,16 +88,15 @@ equation
 annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PressureDropsParallel.mos" "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests two resistances in parallel.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 20, 2007 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests two resistances in parallel.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 20, 2007 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PressureDropsParallel;

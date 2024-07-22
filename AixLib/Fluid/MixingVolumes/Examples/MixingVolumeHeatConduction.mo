@@ -64,20 +64,19 @@ equation
       color={0,127,255}));
   annotation (Documentation(
         info="<html>
- <p>
- This model demonstrates the use of the mixing volume with heat conduction to the ambient.
- The mixing volume is configured as a steady-state model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 12, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model demonstrates the use of the mixing volume with heat conduction to the ambient.
+The mixing volume is configured as a steady-state model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 12, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1E-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Examples/MixingVolumeHeatConduction.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"));
 end MixingVolumeHeatConduction;

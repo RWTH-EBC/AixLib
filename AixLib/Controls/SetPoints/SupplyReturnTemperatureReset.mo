@@ -15,12 +15,12 @@ block SupplyReturnTemperatureReset
 
   parameter Boolean use_TRoo_in = false
     "Get the room temperature set point from the input connector"
-    annotation(Evaluate=true, HideResult=true);
+    annotation(Evaluate=true);
   parameter Modelica.Units.SI.Temperature TRoo=293.15
     "Fixed value of room temperature set point"
     annotation (Dialog(enable=not use_TRoo_in));
-  parameter Modelica.Units.SI.TemperatureDifference dTOutHeaBal(displayUnit="K")=
-       8 "Offset for heating curve";
+  parameter Modelica.Units.SI.TemperatureDifference dTOutHeaBal(displayUnit="K")
+     = 8 "Offset for heating curve";
   Modelica.Blocks.Interfaces.RealInput TRoo_in(final quantity="ThermodynamicTemperature",
                                                final unit = "K", displayUnit = "degC", min=0)
        if use_TRoo_in "Room air temperature set point"
@@ -65,53 +65,59 @@ equation
   annotation (
 defaultComponentName="watRes",
 Documentation(info="<html>
- <p>
- This block computes the set point temperatures for the
- supply and return water temperature.
- The set point for the room air temperature can either be specified
- by a parameter, or it can be an input to the model. The latter allows
- to use this model with systems that have night set back.
- </p>
- <p>
- If used to reset the temperature in a heating system,
- the parameter <code>dTOutHeaBal</code> can be used to shift the heating curve
- to take into account that heat gains from solar, equipment and people
- make up for some of the transmission losses.
- For example, in energy efficient houses, the heating may not be switched on if
- the outside air temperature is greater than
- <i>12</i>&deg;C, even if a room temperature of <i>20</i>&deg;C is required.
- In such a situation, set <code>dTOutHeaBal=20-12=8</code> Kelvin to
- shift the heating curve.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 03, 2020, by Jianjun Hu:<br/>
- Changed name from <code>HotWaterTemperatureReset</code> to 
- <code>SupplyReturnTemperatureReset</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1273\">#1273</a>.
- </li>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- February 13, 2013, by Michael Wetter:<br/>
- Corrected error that led to wrong results if the room air temperature is
- different from its nominal value <code>TRoo_nominal</code>.
- See ticket <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/74\">#74</a>.
- </li>
- <li>
- November 21, 2011, by Michael Wetter:<br/>
- Improved documentation.
- </li>
- <li>
- February 5, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),Icon(graphics={
+<p>
+This block computes the set point temperatures for the
+supply and return water temperature.
+The set point for the room air temperature can either be specified
+by a parameter, or it can be an input to the model. The latter allows
+to use this model with systems that have night set back.
+</p>
+<p>
+If used to reset the temperature in a heating system,
+the parameter <code>dTOutHeaBal</code> can be used to shift the heating curve
+to take into account that heat gains from solar, equipment and people
+make up for some of the transmission losses.
+For example, in energy efficient houses, the heating may not be switched on if
+the outside air temperature is greater than
+<i>12</i>&deg;C, even if a room temperature of <i>20</i>&deg;C is required.
+In such a situation, set <code>dTOutHeaBal=20-12=8</code> Kelvin to
+shift the heating curve.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 11, 2024, by Michael Wetter:<br/>
+Corrected use of <code>HideResult</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1850\">#1850</a>.
+</li>
+<li>
+January 03, 2020, by Jianjun Hu:<br/>
+Changed name from <code>HotWaterTemperatureReset</code> to
+<code>SupplyReturnTemperatureReset</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1273\">#1273</a>.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+February 13, 2013, by Michael Wetter:<br/>
+Corrected error that led to wrong results if the room air temperature is
+different from its nominal value <code>TRoo_nominal</code>.
+See ticket <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/74\">#74</a>.
+</li>
+<li>
+November 21, 2011, by Michael Wetter:<br/>
+Improved documentation.
+</li>
+<li>
+February 5, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"), Icon(graphics={
         Polygon(
           points={{90,-82},{68,-74},{68,-90},{90,-82}},
           lineColor={192,192,192},
@@ -148,6 +154,5 @@ Documentation(info="<html>
         Text(
           extent={{42,-30},{92,-80}},
           textColor={0,0,127},
-          textString="TRet")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="TRet")}));
 end SupplyReturnTemperatureReset;

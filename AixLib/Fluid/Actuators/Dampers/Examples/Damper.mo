@@ -92,22 +92,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Dampers/Examples/Damper.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- Test model for exponential and linear air dampers.
- The air dampers are connected to models for constant inlet and outlet
- pressures. The control signal of the dampers is a ramp.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 21, 2017 by David Blum:<br/>
- Added Linear damper models <code>lin</code>, <code>preIndFrom_dp</code>, and <code>preInd</code>.
- </li>
- <li>
- July 20, 2007 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for exponential and linear air dampers.
+The air dampers are connected to models for constant inlet and outlet
+pressures. The control signal of the dampers is a ramp.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 21, 2017 by David Blum:<br/>
+Added Linear damper models <code>lin</code>, <code>preIndFrom_dp</code>, and <code>preInd</code>.
+</li>
+<li>
+July 20, 2007 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end Damper;

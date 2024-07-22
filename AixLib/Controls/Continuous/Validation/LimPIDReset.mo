@@ -94,32 +94,31 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Validation/LimPIDReset.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
- <ul>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Revised example to increase code coverage.
- </li>
- <li>
- August 25, 2016, by Michael Wetter:<br/>
- Revised documentation and added script for regression test.
- </li>
- <li>
- August 02, 2016, by Philipp Mehrfeld:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>This model tests the implementation the
- <a href=\"Modelica://AixLib.Controls.Continuous.LimPID\">AixLib.Controls.Continuous.LimPID</a>
- with integrator reset.
- </p>
- <p>
- The instance <code>limPIOri</code> is the original implementation of the controller
- from the Modelica Standard Library.
- The instance <code>limPIWithReset</code> is the implementation from this library
- with integrator reset enabled. Whenever the boolean pulse input becomes true,
- the integrator is reset to <code>y_reset</code>.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 29, 2016, by Michael Wetter:<br/>
+Revised example to increase code coverage.
+</li>
+<li>
+August 25, 2016, by Michael Wetter:<br/>
+Revised documentation and added script for regression test.
+</li>
+<li>
+August 02, 2016, by Philipp Mehrfeld:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>This model tests the implementation the
+<a href=\"Modelica://AixLib.Controls.Continuous.LimPID\">AixLib.Controls.Continuous.LimPID</a>
+with integrator reset.
+</p>
+<p>
+The instance <code>limPIOri</code> is the original implementation of the controller
+from the Modelica Standard Library.
+The instance <code>limPIWithReset</code> is the implementation from this library
+with integrator reset enabled. Whenever the boolean pulse input becomes true,
+the integrator is reset to <code>y_reset</code>.
+</p>
+</html>"));
 end LimPIDReset;

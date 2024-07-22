@@ -66,41 +66,40 @@ experiment(Tolerance=1e-06, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/ZonalFlow.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example illustrates the use of the models that
- exchange a prescribed flow rate between the
- volumes that are attached to it.
- The block <code>ACS</code> prescribes the air exchange rate to
- 5 air changes per hour.
- The instance <code>zonFlo</code> takes as an input the air change per seconds,
- and the instance <code>floExc</code> takes as inputs the mass flow rate.
- For both instances, the air flows from
- <code>rooA</code> to <code>rooB</code>, and
- from <code>rooB</code> to <code>rooA</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 26, 2021 by Michael Wetter:<br/>
- Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
- </li>
- <li>
- May 30, 2018, by Michael Wetter:<br/>
- Added example for instace of
- <a href=\"modelica://AixLib.Airflow.Multizone.ZonalFlow_m_flow\">AixLib.Airflow.Multizone.ZonalFlow_m_flow</a>.
- </li>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- November 10, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example illustrates the use of the models that
+exchange a prescribed flow rate between the
+volumes that are attached to it.
+The block <code>ACS</code> prescribes the air exchange rate to
+5 air changes per hour.
+The instance <code>zonFlo</code> takes as an input the air change per seconds,
+and the instance <code>floExc</code> takes as inputs the mass flow rate.
+For both instances, the air flows from
+<code>rooA</code> to <code>rooB</code>, and
+from <code>rooB</code> to <code>rooA</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2021 by Michael Wetter:<br/>
+Updated comments for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+</li>
+<li>
+May 30, 2018, by Michael Wetter:<br/>
+Added example for instace of
+<a href=\"modelica://AixLib.Airflow.Multizone.ZonalFlow_m_flow\">AixLib.Airflow.Multizone.ZonalFlow_m_flow</a>.
+</li>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+November 10, 2011, by Michael Wetter:<br/>
+Added documentation.
+</li>
+</ul>
+</html>"));
 end ZonalFlow;
