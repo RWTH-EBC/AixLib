@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers;
+within AixLib.Obsolete.Year2024.Fluid.Movers;
 model SpeedControlled_Nrpm
   "Fan or pump with ideally controlled speed Nrpm as input signal"
   extends AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine(
@@ -13,6 +13,7 @@ model SpeedControlled_Nrpm
       y(final unit="1")),
     eff(
       per(final pressure = per.pressure)));
+ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter Modelica.Units.NonSI.AngularVelocity_rpm speed_rpm_nominal=1500 "Nominal rotational speed";
   parameter Real y_start(min=0, max=1, unit="1")=0 "Initial value of speed"
     annotation(Dialog(tab="Dynamics", group="Filtered speed", enable=use_inputFilter));
@@ -61,7 +62,7 @@ equation
             26},{-26,26},{-26,-46}},
                                    color={0,0,127}));
   end if;
-  annotation (defaultComponentName="pump",
+  annotation (Diagram(obsolete = "Obsolete model - use AixLib.Fluid.Movers.SpeedControlled_y instead"), defaultComponentName="pump",
     Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
             100}}),
       graphics={

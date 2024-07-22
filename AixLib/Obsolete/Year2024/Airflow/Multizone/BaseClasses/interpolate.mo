@@ -1,8 +1,8 @@
-within AixLib.Airflow.Multizone.BaseClasses;
+within AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses;
 function interpolate
   "Function for the interpolation of table data for airflow models"
   extends Modelica.Icons.Function;
-
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   input Real u "Independent variable";
   input Real[:] xd "X-axis support points";
   input Real[size(xd, 1)] yd "Y-axis support points";
@@ -38,7 +38,7 @@ algorithm
         y2d=d[i + 1]);
   end if;
 
-  annotation (
+  annotation (Diagram(obsolete = "Obsolete model"),
     Documentation(info="<html>
  <p>
  This function returns the value on a cubic hermite spline through the given support points
@@ -77,6 +77,5 @@ algorithm
  First Implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+ </html>"));
 end interpolate;

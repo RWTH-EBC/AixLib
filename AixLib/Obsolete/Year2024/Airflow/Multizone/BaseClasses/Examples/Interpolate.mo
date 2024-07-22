@@ -1,4 +1,4 @@
-within AixLib.Airflow.Multizone.BaseClasses.Examples;
+within AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses.Examples;
 model Interpolate "Test model for the function flowElementData"
   extends Modelica.Icons.Example;
 
@@ -28,7 +28,11 @@ initial equation
     ensureMonotonicity=true);
 equation
    dp=ramp.y;
-   m_flow =AixLib.Airflow.Multizone.BaseClasses.interpolate(u=dp,xd=xd,yd=yd,d=d);
+   m_flow =AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses.interpolate(
+    u=dp,
+    xd=xd,
+    yd=yd,
+    d=d);
 
   annotation (
 experiment(
@@ -38,7 +42,7 @@ experiment(
         "Simulate and plot"), Documentation(info="<html>
  <p>
  This example demonstrates the function
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.interpolate\">
+ <a href=\"modelica://AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses.interpolate\">
  AixLib.Airflow.Multizone.BaseClasses.interpolate</a>.
  </p>
  </html>",revisions="<html>
@@ -55,6 +59,5 @@ experiment(
  </li>
  </ul>
  </html>
- "),
-  __Dymola_LockedEditing="Model from IBPSA");
+ "));
 end Interpolate;
