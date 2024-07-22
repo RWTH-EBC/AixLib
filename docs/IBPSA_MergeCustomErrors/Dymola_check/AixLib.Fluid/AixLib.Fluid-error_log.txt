@@ -1,0 +1,58 @@
+
+Error in model:  AixLib.Fluid.Movers.Validation.PowerSimplified 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Movers.Validation.PowerExact 
+Check of <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerExact">AixLib.Fluid.Movers.Validation.PowerExact</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 23
+ Component context: pump_dp.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'use_powerCharacteristic' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Stratos30slash1to8 per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerSimplified.mo, line 35
+ Component context: pump_m_flow.per
+  Component declared as Stratos30slash1to8 per in <a href="Modelica://AixLib.Fluid.Movers.Data.Pumps.Wilo">AixLib.Fluid.Movers.Data.Pumps.Wilo</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.Validation.PowerSimplified">AixLib.Fluid.Movers.Validation.PowerSimplified</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/Validation/PowerExact.mo, line 4
+Error: ERRORS have been issued.
+
