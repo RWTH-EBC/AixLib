@@ -332,20 +332,20 @@ model IndoorSwimmingPool
     redeclare Movers.Data.Generic per(
       pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
             pumpHead/0.7,pumpHead,0}),
-      use_powerCharacteristic=false,
-      hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-          eta={0.7,0.8,0.7}),
+      etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
+      efficiency(V_flow={0,m_flow_nominal/1000,
+          m_flow_nominal/1000/0.7}, eta={0.7,0.8,0.7}),
       motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
           eta={0.9,0.9,0.9}),
       power(V_flow={0,(m_flow_nominal/1000*0.2),(m_flow_nominal/1000*0.5),
             m_flow_nominal/1000*0.7,m_flow_nominal/1000,m_flow_nominal/1000/0.7,
-            m_flow_nominal/1000/0.6,m_flow_nominal/1000/0.5,m_flow_nominal/1000
-            /0.4}, P={(m_flow_nominal/0.4)/1000*pumpHead/0.7/0.9,(
-            m_flow_nominal/0.5)/1000*pumpHead/0.7/0.9,(m_flow_nominal/0.6)/1000
-            *pumpHead/0.7/0.9,(m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,
-            m_flow_nominal/1000*pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*
-            pumpHead/0.7/0.9,(m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(
-            m_flow_nominal/1000*0.2)*pumpHead/0.7/0.9,0})),
+            m_flow_nominal/1000/0.6,m_flow_nominal/1000/0.5,m_flow_nominal/1000/
+            0.4}, P={(m_flow_nominal/0.4)/1000*pumpHead/0.7/0.9,(m_flow_nominal/
+            0.5)/1000*pumpHead/0.7/0.9,(m_flow_nominal/0.6)/1000*pumpHead/0.7/0.9,
+            (m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,m_flow_nominal/1000*
+            pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*pumpHead/0.7/0.9,(
+            m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(m_flow_nominal/1000*0.2)*
+            pumpHead/0.7/0.9,0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,
@@ -356,6 +356,7 @@ model IndoorSwimmingPool
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={0,-68})));
+
   Sensors.MassFlowRate              senMasFlo(redeclare package Medium =
         WaterMedium, allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},

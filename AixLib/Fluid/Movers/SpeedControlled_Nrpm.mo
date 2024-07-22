@@ -5,7 +5,6 @@ model SpeedControlled_Nrpm
     final preVar=AixLib.Fluid.Movers.BaseClasses.Types.PrescribedVariable.Speed,
     final nominalValuesDefineDefaultPressureCurve=false,
     final computePowerUsingSimilarityLaws=true,
-    final m_flow_nominal = max(per.pressure.V_flow)*rho_default,
     final stageInputs(each final unit="1") = per.speeds,
     final constInput(final unit="1") =       per.constantSpeed,
     filter(
@@ -13,12 +12,8 @@ model SpeedControlled_Nrpm
       u(final unit="1"),
       y(final unit="1")),
     eff(
-      per(final pressure = per.pressure,
-          final use_powerCharacteristic = per.use_powerCharacteristic),
-          r_N(start=y_start)),
-    gaiSpe(u(final unit="rev/min"),
-           final k=1/per.speed_rpm_nominal));
-
+      per(final pressure = per.pressure)));
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm speed_rpm_nominal=1500 "Nominal rotational speed";
   parameter Real y_start(min=0, max=1, unit="1")=0 "Initial value of speed"
     annotation(Dialog(tab="Dynamics", group="Filtered speed", enable=use_inputFilter));
 
@@ -38,15 +33,21 @@ protected
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=270,
         origin={10,-20})));
+protected
+  Modelica.Blocks.Math.Gain gaiSpe(final k=1/speed_rpm_nominal) "Pressure gain"
+    annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={-12,80})));
 initial equation
   assert(per.havePressureCurve,
    "SpeedControlled_Nrpm model requires to set the pressure vs. flow rate curve in record 'per'.");
 
 equation
   connect(Nrpm, gaiSpe.u)
-    annotation (Line(points={{0,120},{0,80},{-2.8,80}}, color={0,0,127}));
-  connect(gaiSpe.y, inputSwitch.u) annotation (Line(points={{-16.6,80},{-26,80},
-          {-26,50},{-22,50}}, color={0,0,127}));
+    annotation (Line(points={{0,120},{0,80}},           color={0,0,127}));
+  connect(gaiSpe.y, inputSwitch.u) annotation (Line(points={{-23,80},{-26,80},{-26,
+          50},{-22,50}},      color={0,0,127}));
   connect(eff.dp, gain.u) annotation (Line(points={{-11,-50},{2,-50},{10,-50},{10,
           -32}}, color={0,0,127}));
   connect(gain.y, preSou.dp_in)
@@ -176,6 +177,5 @@ equation
      by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br/>
         Model added to the Fluid library</li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+ </html>"));
 end SpeedControlled_Nrpm;
