@@ -1,0 +1,510 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Check of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.preheater.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.cooler.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.heater.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+The model has the same number of unknowns and equations: 9000
+The model could not be deduced to be symbolically well-posed.
+The model has
+  8800+genericAHU.preheater.hydraulicModule.valve.vol.dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+  genericAHU.preheater.hydraulicModule.junc456.dynBal.nPorts+genericAHU.preheater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.preheater.dynamicHX.vol1[1].dynBal.nPorts+2*genericAHU.preheater.dynamicHX.vol1[2].dynBal.nPorts  +genericAHU.preheater.dynamicHX.vol2[1].dynBal.nPorts+genericAHU.preheater.dynamicHX.vol2[2].dynBal.nPorts  +genericAHU.cooler.hydraulicModule.valve.vol.dynBal.nPorts+genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+  genericAHU.cooler.hydraulicModule.junc456.dynBal.nPorts+genericAHU.cooler.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.cooler.dynamicHX.vol1[1].dynBal.nPorts+2*genericAHU.cooler.dynamicHX.vol1[2].dynBal.nPorts  +genericAHU.cooler.dynamicHX.vol2[1].dynBal.nPorts+genericAHU.cooler.dynamicHX.vol2[2].dynBal.nPorts  +genericAHU.heater.hydraulicModule.valve.vol.dynBal.nPorts+genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+  genericAHU.heater.hydraulicModule.junc456.dynBal.nPorts+genericAHU.heater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.heater.dynamicHX.vol1[1].dynBal.nPorts+2*genericAHU.heater.dynamicHX.vol1[2].dynBal.nPorts  +genericAHU.heater.dynamicHX.vol2[1].dynBal.nPorts+genericAHU.heater.dynamicHX.vol2[2].dynBal.nPorts  +2*genericAHU.dynamicHX.vol1[1].dynBal.nPorts+2*genericAHU.dynamicHX.vol1[2].dynBal.nPorts  +2*genericAHU.dynamicHX.vol2[1].dynBal.nPorts+2*genericAHU.dynamicHX.vol2[2].dynBal.nPorts  +2*genericAHU.fanSup.vol.dynBal.nPorts+2*genericAHU.fanRet.vol.dynBal.nPorts+2  *genericAHU.humidifier.vol.dynBal.nPorts+2*genericAHU.humidifierRet.vol.dynBal.nPorts
+scalar unknowns and
+  8285+(if  not genericAHU.humidifier.steamHumidifier then 1 else 0)+(if   boundaryOutsideAir.use_Xi_in then 2 else (if boundaryOutsideAir.use_X_in then 1   else 3))+boundaryOutsideAir.nPorts+(if  not boundaryOutsideAir.use_p_in then 1   else 0)+boundaryOutsideAir.nPorts+(if  not boundaryOutsideAir.use_T_in then 1   else 0)+boundaryOutsideAir.nPorts+(if boundarySupplyAir.use_Xi_in then 2   else (if boundarySupplyAir.use_X_in then 1 else 3))+boundarySupplyAir.nPorts+  (if  not boundarySupplyAir.use_p_in then 1 else 0)+boundarySupplyAir.nPorts+(  if  not boundarySupplyAir.use_T_in then 1 else 0)+boundarySupplyAir.nPorts+(  if boundaryExhaustAir.use_Xi_in then 2 else (if boundaryExhaustAir.use_X_in   then 1 else 3))+boundaryExhaustAir.nPorts+(if  not boundaryExhaustAir.use_p_in   then 1 else 0)+boundaryExhaustAir.nPorts+(if  not boundaryExhaustAir.use_T_in   then 1 else 0)+boundaryExhaustAir.nPorts+(if boundaryReturnAir.use_Xi_in   then 2 else (if boundaryReturnAir.use_X_in then 1 else 3))+boundaryReturnAir.nPorts  +(if  not boundaryReturnAir.use_p_in then 1 else 0)+boundaryReturnAir.nPorts+(  if  not boundaryReturnAir.use_T_in then 1 else 0)+boundaryReturnAir.nPorts+(  if SourcePreheater.use_Xi_in then 1 else (if SourcePreheater.use_X_in then 0   else 1))+(if  not SourcePreheater.use_p_in then 1 else 0)+SourcePreheater.nPorts  +(if  not SourcePreheater.use_T_in then 1 else 0)+SourcePreheater.nPorts+(if   SinkPreheater.use_Xi_in then 1 else (if SinkPreheater.use_X_in then 0 else 1))  +(if  not SinkPreheater.use_p_in then 1 else 0)+SinkPreheater.nPorts+(if  not   SinkPreheater.use_T_in then 1 else 0)+SinkPreheater.nPorts+(if   SourceCooler.use_Xi_in then 1 else (if SourceCooler.use_X_in then 0 else 1))+(  if  not SourceCooler.use_p_in then 1 else 0)+SourceCooler.nPorts+(if  not   SourceCooler.use_T_in then 1 else 0)+SourceCooler.nPorts+(if SinkCooler.use_Xi_in   then 1 else (if SinkCooler.use_X_in then 0 else 1))+(if  not SinkCooler.use_p_in   then 1 else 0)+SinkCooler.nPorts+(if  not SinkCooler.use_T_in then 1 else 0)+  SinkCooler.nPorts+(if SourceHeater.use_Xi_in then 1 else (if SourceHeater.use_X_in   then 0 else 1))+(if  not SourceHeater.use_p_in then 1 else 0)+  SourceHeater.nPorts+(if  not SourceHeater.use_T_in then 1 else 0)+  SourceHeater.nPorts+(if SinkHeater.use_Xi_in then 1 else (if SinkHeater.use_X_in   then 0 else 1))+(if  not SinkHeater.use_p_in then 1 else 0)+SinkHeater.nPorts  +(if  not SinkHeater.use_T_in then 1 else 0)+SinkHeater.nPorts+(if  not   genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+  (if  not genericAHU.preheater.hydraulicModule.junc456.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.junc456.dynBal.nPorts+2*  genericAHU.preheater.hydraulicModule.junc456.dynBal.nPorts+(if  not   genericAHU.preheater.hydraulicModule.PumpInterface.pump.vol.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.preheater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts+(  if  not genericAHU.preheater.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1   else 0)+2*genericAHU.preheater.dynamicHX.vol1[1].dynBal.nPorts+3*  genericAHU.preheater.dynamicHX.vol1[1].dynBal.nPorts+(if  not genericAHU.preheater.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.preheater.dynamicHX.vol1[2].dynBal.nPorts+3*  genericAHU.preheater.dynamicHX.vol1[2].dynBal.nPorts+(if  not genericAHU.preheater.dynamicHX.vol2[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.dynamicHX.vol2[1].dynBal.nPorts+2*  genericAHU.preheater.dynamicHX.vol2[1].dynBal.nPorts+(if  not genericAHU.preheater.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.dynamicHX.vol2[2].dynBal.nPorts+2*  genericAHU.preheater.dynamicHX.vol2[2].dynBal.nPorts+(if  not genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.cooler.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+genericAHU.cooler.hydraulicModule.junc456.dynBal.nPorts+2*  genericAHU.cooler.hydraulicModule.junc456.dynBal.nPorts+(if  not   genericAHU.cooler.hydraulicModule.PumpInterface.pump.vol.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.cooler.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts+(if    not genericAHU.cooler.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)+2  *genericAHU.cooler.dynamicHX.vol1[1].dynBal.nPorts+3*genericAHU.cooler.dynamicHX.vol1[1].dynBal.nPorts  +(if  not genericAHU.cooler.dynamicHX.vol1[2].dynBal.use_mWat_flow then 1   else 0)+2*genericAHU.cooler.dynamicHX.vol1[2].dynBal.nPorts+3*  genericAHU.cooler.dynamicHX.vol1[2].dynBal.nPorts+(if  not genericAHU.cooler.dynamicHX.vol2[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.dynamicHX.vol2[1].dynBal.nPorts+2*  genericAHU.cooler.dynamicHX.vol2[1].dynBal.nPorts+(if  not genericAHU.cooler.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.cooler.dynamicHX.vol2[2].dynBal.nPorts+2*  genericAHU.cooler.dynamicHX.vol2[2].dynBal.nPorts+(if  not genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+(  if  not genericAHU.heater.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+genericAHU.heater.hydraulicModule.junc456.dynBal.nPorts+2*  genericAHU.heater.hydraulicModule.junc456.dynBal.nPorts+(if  not   genericAHU.heater.hydraulicModule.PumpInterface.pump.vol.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*genericAHU.heater.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts+(if    not genericAHU.heater.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)+2  *genericAHU.heater.dynamicHX.vol1[1].dynBal.nPorts+3*genericAHU.heater.dynamicHX.vol1[1].dynBal.nPorts  +(if  not genericAHU.heater.dynamicHX.vol1[2].dynBal.use_mWat_flow then 1   else 0)+2*genericAHU.heater.dynamicHX.vol1[2].dynBal.nPorts+3*  genericAHU.heater.dynamicHX.vol1[2].dynBal.nPorts+(if  not genericAHU.heater.dynamicHX.vol2[1].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.dynamicHX.vol2[1].dynBal.nPorts+2*  genericAHU.heater.dynamicHX.vol2[1].dynBal.nPorts+(if  not genericAHU.heater.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.dynamicHX.vol2[2].dynBal.nPorts+2*  genericAHU.heater.dynamicHX.vol2[2].dynBal.nPorts+(if  not genericAHU.dynamicHX.vol1[1].dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.dynamicHX.vol1[1].dynBal.nPorts+3*  genericAHU.dynamicHX.vol1[1].dynBal.nPorts+(if  not genericAHU.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.dynamicHX.vol1[2].dynBal.nPorts+3*  genericAHU.dynamicHX.vol1[2].dynBal.nPorts+(if  not genericAHU.dynamicHX.vol2[1].dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.dynamicHX.vol2[1].dynBal.nPorts+3*  genericAHU.dynamicHX.vol2[1].dynBal.nPorts+(if  not genericAHU.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.dynamicHX.vol2[2].dynBal.nPorts+3*  genericAHU.dynamicHX.vol2[2].dynBal.nPorts+(if  not genericAHU.fanSup.vol.dynBal.use_mWat_flow   then 1 else 0)+2*genericAHU.fanSup.vol.dynBal.nPorts+3*genericAHU.fanSup.vol.dynBal.nPorts  +(if  not genericAHU.fanRet.vol.dynBal.use_mWat_flow then 1 else 0)+2*  genericAHU.fanRet.vol.dynBal.nPorts+3*genericAHU.fanRet.vol.dynBal.nPorts+2*  genericAHU.humidifier.vol.dynBal.nPorts+3*genericAHU.humidifier.vol.dynBal.nPorts  +2*genericAHU.humidifierRet.vol.dynBal.nPorts+3*genericAHU.humidifierRet.vol.dynBal.nPorts  +(if  not genericAHU.preheater.hydraulicModule.valve.vol.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.preheater.hydraulicModule.valve.vol.dynBal.nPorts+2  *genericAHU.preheater.hydraulicModule.valve.vol.dynBal.nPorts+(if  not   genericAHU.cooler.hydraulicModule.valve.vol.dynBal.use_mWat_flow then 1 else 0)  +genericAHU.cooler.hydraulicModule.valve.vol.dynBal.nPorts+2*genericAHU.cooler.hydraulicModule.valve.vol.dynBal.nPorts  +(if  not genericAHU.heater.hydraulicModule.valve.vol.dynBal.use_mWat_flow   then 1 else 0)+genericAHU.heater.hydraulicModule.valve.vol.dynBal.nPorts+2*  genericAHU.heater.hydraulicModule.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  9000
+Check of AixLib.Systems.ModularAHU.Examples.GenericAHU successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Examples.GenericAHU\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Examples.GenericAHU\\\");\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos");
+simulateModel("AixLib.Systems.ModularAHU.Examples.GenericAHU", stopTime=7200, method="dassl", tolerance=1e-6, resultFile="AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Translation of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.preheater.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.cooler.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+Warning: Component type specifier SpeedControlled_Nrpm specified an obsolete type: Obsolete model - This model is obsolete and not maintained anymore.
+  File: /tmp/tmp-AixLib-0-g9oiui9h/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+ Component context: genericAHU.heater.hydraulicModule.PumpInterface.pump
+  Component declared as SpeedControlled_Nrpm pump in AixLib.Obsolete.Year2024.Fluid.Movers
+The DAE has 9000 scalar unknowns and 9000 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  genericAHU.preheater.dynamicHX.vol1[2].p_start = genericAHU.preheater.dynamicHX.p1_start;
+  genericAHU.cooler.dynamicHX.vol1[1].p_start = genericAHU.cooler.dynamicHX.p1_start;
+  genericAHU.heater.dynamicHX.vol1[2].p_start = genericAHU.heater.dynamicHX.p1_start;
+  genericAHU.dynamicHX.vol1[1].p_start = genericAHU.dynamicHX.p1_start;
+  genericAHU.dynamicHX.vol2[1].p_start = genericAHU.dynamicHX.p2_start;
+  genericAHU.fanSup.vol.p_start = genericAHU.fanSup.p_start;
+  genericAHU.humidifier.vol.p_start = genericAHU.humidifier.p_start;
+  if (genericAHU.dynamicHX.vol1[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (genericAHU.dynamicHX.vol1[2].dynBal.initialize_p) then 
+      genericAHU.dynamicHX.vol1[2].dynBal.medium.p = genericAHU.dynamicHX.vol1[2].dynBal.p_start;
+    end if;
+  else
+    if (genericAHU.dynamicHX.vol1[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (genericAHU.dynamicHX.vol1[2].dynBal.initialize_p) then 
+        der(genericAHU.dynamicHX.vol1[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    boundaryExhaustAir.p(start = 101325)
+    boundarySupplyAir.p(start = 101325)
+    genericAHU.dynamicHX.p1_start(start = 101325)
+    genericAHU.fanSup.dp_start(start = 0)
+    genericAHU.fanSup.p_start(start = 101325)
+    genericAHU.humidifier.p_start(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  genericAHU.fanSup.filter.y = genericAHU.fanSup.filter.y_start;
+  genericAHU.dampHX.port_a.p = genericAHU.preheater.dynamicHX.vol1[1].dynBal.p_start;
+  genericAHU.dampHX.port_a.p = genericAHU.preheater.dynamicHX.vol1[2].dynBal.p_start;
+  genericAHU.cooler.port_b1.p = genericAHU.cooler.dynamicHX.vol1[1].dynBal.p_start;
+  genericAHU.cooler.port_b1.p = genericAHU.cooler.dynamicHX.vol1[2].dynBal.p_start;
+  genericAHU.heater.port_b1.p = genericAHU.heater.dynamicHX.vol1[1].dynBal.p_start;
+  genericAHU.heater.port_b1.p = genericAHU.heater.dynamicHX.vol1[2].dynBal.p_start;
+  boundaryExhaustAir.p = genericAHU.dynamicHX.vol1[1].dynBal.p_start;
+  boundaryExhaustAir.p = genericAHU.dynamicHX.vol1[2].dynBal.p_start;
+  genericAHU.cooler.port_a1.p = genericAHU.dynamicHX.vol2[1].dynBal.p_start;
+  genericAHU.cooler.port_a1.p = genericAHU.dynamicHX.vol2[2].dynBal.p_start;
+  genericAHU.fanSup.port_a.p = genericAHU.fanSup.vol.dynBal.p_start;
+  genericAHU.fanSup.port_a.p = genericAHU.humidifier.vol.dynBal.p_start;
+ 
+Sparse solver handling possible: false.
+Due to flag Advanced.SparseActivate=false.
+Model sparse and large enough: true.
+Sparse solvers are available for dassl, lsodar, cvode, radau, esdirk*, sdirk* (using OpenMP, set number of cores with Advanced.NumberOfCores).
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1899
+  Variables: 23029
+  Constants: 457 (457 scalars)
+  Parameters: 10980 (11860 scalars)
+  Unknowns: 11592 (9419 scalars)
+  Differentiated variables: 337 scalars
+  Equations: 8571
+  Nontrivial: 6714
+Translated Model
+  Constants: 8261 scalars
+  Free parameters: 851 scalars
+  Parameter depending: 4191 scalars
+  Continuous time states: 260 scalars
+  Time-varying variables: 2222 scalars
+  Alias variables: 6211 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {3, 3, 3, 3, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5,   2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 3, 1, 4, 1, 1, 1, 18, 18, 18}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 2, 2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 1, 3, 1, 4, 1, 1, 18, 1, 18, 1, 18, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 3, 0, 3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  ctrAHUBasic.ctrCo.PID.D.x
+  ctrAHUBasic.ctrCo.PID.I.y
+  ctrAHUBasic.ctrPh.PID.D.x
+  ctrAHUBasic.ctrPh.PID.I.y
+  ctrAHUBasic.ctrRh.PID.D.x
+  ctrAHUBasic.ctrRh.PID.I.y
+  ctrAHUBasic.PID_VflowRet.D.x
+  ctrAHUBasic.PID_VflowRet.I.y
+  ctrAHUBasic.PID_VflowSup.D.x
+  ctrAHUBasic.PID_VflowSup.I.y
+  genericAHU.cooler.dynamicHX.heatCapacitor[1].T
+  genericAHU.cooler.dynamicHX.heatCapacitor[2].T
+  genericAHU.cooler.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  genericAHU.cooler.dynamicHX.vol1[1].dynBal.U
+  genericAHU.cooler.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  genericAHU.cooler.dynamicHX.vol1[2].dynBal.U
+  genericAHU.cooler.dynamicHX.vol2[1].dynBal.U
+  genericAHU.cooler.dynamicHX.vol2[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.junc456.dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.U
+  genericAHU.cooler.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.U
+  genericAHU.cooler.hydraulicModule.PT1_a1.y
+  genericAHU.cooler.hydraulicModule.PT1_a2.y
+  genericAHU.cooler.hydraulicModule.PT1_b1.y
+  genericAHU.cooler.hydraulicModule.PT1_b2.y
+  genericAHU.cooler.hydraulicModule.PumpInterface.pump.filter.s[1]
+  genericAHU.cooler.hydraulicModule.PumpInterface.pump.filter.s[2]
+  genericAHU.cooler.hydraulicModule.PumpInterface.pump.vol.dynBal.U
+  genericAHU.cooler.hydraulicModule.senT_a1.T
+  genericAHU.cooler.hydraulicModule.senT_a2.T
+  genericAHU.cooler.hydraulicModule.senT_b1.T
+  genericAHU.cooler.hydraulicModule.senT_b2.T
+  genericAHU.cooler.hydraulicModule.valve.filter.s[1]
+  genericAHU.cooler.hydraulicModule.valve.vol.dynBal.U
+  genericAHU.cooler.port_a1.p
+  genericAHU.cooler.port_b1.p
+  genericAHU.cooler.PT1_airIn.y
+  genericAHU.cooler.PT1_airOut.y
+  genericAHU.cooler.senT_airIn.T
+  genericAHU.cooler.senT_airOut.T
+  genericAHU.dampBypass.filter.s[1]
+  genericAHU.dampBypass.filter.s[2]
+  genericAHU.dampHX.filter.s[1]
+  genericAHU.dampHX.filter.s[2]
+  genericAHU.dampHX.port_a.p
+  genericAHU.dynamicHX.heatCapacitor[1].T
+  genericAHU.dynamicHX.heatCapacitor[2].T
+  genericAHU.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  genericAHU.dynamicHX.vol1[1].dynBal.U
+  genericAHU.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  genericAHU.dynamicHX.vol1[2].dynBal.U
+  genericAHU.dynamicHX.vol2[1].dynBal.medium.Xi[1]
+  genericAHU.dynamicHX.vol2[1].dynBal.U
+  genericAHU.dynamicHX.vol2[2].dynBal.medium.Xi[1]
+  genericAHU.dynamicHX.vol2[2].dynBal.U
+  genericAHU.fanRet.filter.s[1]
+  genericAHU.fanRet.filter.s[2]
+  genericAHU.fanRet.vol.dynBal.m
+  genericAHU.fanRet.vol.dynBal.medium.Xi[1]
+  genericAHU.fanRet.vol.dynBal.U
+  genericAHU.fanSup.filter.s[1]
+  genericAHU.fanSup.filter.s[2]
+  genericAHU.fanSup.vol.dynBal.medium.Xi[1]
+  genericAHU.fanSup.vol.dynBal.U
+  genericAHU.flapRet.filter.s[1]
+  genericAHU.flapRet.filter.s[2]
+  genericAHU.flapSup.filter.s[1]
+  genericAHU.flapSup.filter.s[2]
+  genericAHU.heater.dynamicHX.heatCapacitor[1].T
+  genericAHU.heater.dynamicHX.heatCapacitor[2].T
+  genericAHU.heater.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  genericAHU.heater.dynamicHX.vol1[1].dynBal.U
+  genericAHU.heater.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  genericAHU.heater.dynamicHX.vol1[2].dynBal.U
+  genericAHU.heater.dynamicHX.vol2[1].dynBal.U
+  genericAHU.heater.dynamicHX.vol2[2].dynBal.U
+  genericAHU.heater.hydraulicModule.junc456.dynBal.U
+  genericAHU.heater.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.U
+  genericAHU.heater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.U
+  genericAHU.heater.hydraulicModule.PT1_a1.y
+  genericAHU.heater.hydraulicModule.PT1_a2.y
+  genericAHU.heater.hydraulicModule.PT1_b1.y
+  genericAHU.heater.hydraulicModule.PT1_b2.y
+  genericAHU.heater.hydraulicModule.PumpInterface.pump.filter.s[1]
+  genericAHU.heater.hydraulicModule.PumpInterface.pump.filter.s[2]
+  genericAHU.heater.hydraulicModule.PumpInterface.pump.vol.dynBal.U
+  genericAHU.heater.hydraulicModule.senT_a1.T
+  genericAHU.heater.hydraulicModule.senT_a2.T
+  genericAHU.heater.hydraulicModule.senT_b1.T
+  genericAHU.heater.hydraulicModule.senT_b2.T
+  genericAHU.heater.hydraulicModule.valve.filter.s[1]
+  genericAHU.heater.hydraulicModule.valve.vol.dynBal.U
+  genericAHU.heater.port_b1.p
+  genericAHU.heater.PT1_airIn.y
+  genericAHU.heater.PT1_airOut.y
+  genericAHU.heater.senT_airIn.T
+  genericAHU.heater.senT_airOut.T
+  genericAHU.humidifier.vol.dynBal.medium.Xi[1]
+  genericAHU.humidifier.vol.dynBal.U
+  genericAHU.humidifierRet.vol.dynBal.m
+  genericAHU.humidifierRet.vol.dynBal.medium.Xi[1]
+  genericAHU.humidifierRet.vol.dynBal.U
+  genericAHU.preheater.dynamicHX.heatCapacitor[1].T
+  genericAHU.preheater.dynamicHX.heatCapacitor[2].T
+  genericAHU.preheater.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  genericAHU.preheater.dynamicHX.vol1[1].dynBal.U
+  genericAHU.preheater.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  genericAHU.preheater.dynamicHX.vol1[2].dynBal.U
+  genericAHU.preheater.dynamicHX.vol2[1].dynBal.U
+  genericAHU.preheater.dynamicHX.vol2[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.junc456.dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.U
+  genericAHU.preheater.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.U
+  genericAHU.preheater.hydraulicModule.PT1_a1.y
+  genericAHU.preheater.hydraulicModule.PT1_a2.y
+  genericAHU.preheater.hydraulicModule.PT1_b1.y
+  genericAHU.preheater.hydraulicModule.PT1_b2.y
+  genericAHU.preheater.hydraulicModule.PumpInterface.pump.filter.s[1]
+  genericAHU.preheater.hydraulicModule.PumpInterface.pump.filter.s[2]
+  genericAHU.preheater.hydraulicModule.PumpInterface.pump.vol.dynBal.U
+  genericAHU.preheater.hydraulicModule.senT_a1.T
+  genericAHU.preheater.hydraulicModule.senT_a2.T
+  genericAHU.preheater.hydraulicModule.senT_b1.T
+  genericAHU.preheater.hydraulicModule.senT_b2.T
+  genericAHU.preheater.hydraulicModule.valve.filter.s[1]
+  genericAHU.preheater.hydraulicModule.valve.vol.dynBal.U
+  genericAHU.preheater.PT1_airIn.y
+  genericAHU.preheater.PT1_airOut.y
+  genericAHU.preheater.senT_airIn.T
+  genericAHU.preheater.senT_airOut.T
+  genericAHU.PT1_airIn.y
+  genericAHU.PT1_airIn1.y
+  genericAHU.PT1_airIn2.y
+  genericAHU.PT1_airIn3.y
+  genericAHU.senRelHumSup.phi
+  genericAHU.senRelHumSup1.phi
+  genericAHU.senTExh.T
+  genericAHU.senTOda.T
+  genericAHU.senTRet.T
+  genericAHU.senTSup.T
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Examples.GenericAHU.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Check of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+The model has the same number of unknowns and equations: 1727
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1641+2*rad.nEle+6*size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.tableMerge,   1)+2*(if heatPumpSystem.use_opeEnvFroRec then size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.dataTable.tableUppBou,   1) else size(heatPumpSystem.tableUpp, 1))+6*size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.tableMerge,   1)+2*(if heatPumpSystem.use_opeEnvFroRec then size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.dataTable.tableUppBou,   1) else size(heatPumpSystem.tableUpp, 1))+vol.dynBal.nPorts+max([size(  timTab.columns, 1); size(timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+  rad.vol[2].dynBal.nPorts+rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+  rad.vol[5].dynBal.nPorts+rad.sumCon.nin+rad.sumRad.nin+heatPumpSystem.heatPump.con.vol.dynBal.nPorts  +heatPumpSystem.heatPump.eva.vol.dynBal.nPorts+2*heatPumpSystem.nthOrder+  heatPumpSystem.pumSin.vol.dynBal.nPorts+heatPumpSystem.pumSou.vol.dynBal.nPorts  +size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.uppCombiTable1Ds.columns,   1)+heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.nor1.nu  +heatPumpSystem.hPSystemController.safetyControl.onOffController.orSetN.nu+  heatPumpSystem.hPSystemController.multiSum.nu
+scalar unknowns and
+  1594+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if preSou.use_Xi_in   then 1 else (if preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in   then 1 else 0)+2*preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if   weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1   else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 1 else (if   sou.use_X_in then 0 else 1))+(if  not sou.use_p_in then 1 else 0)+2*sou.nPorts  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 1 else (if   sin.use_X_in then 0 else 1))+(if  not sin.use_p_in then 1 else 0)+2*sin.nPorts  +(if  not sin.use_T_in then 1 else 0)+size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.uppCombiTable1Ds.columns,   1)+(if  not vol.dynBal.use_mWat_flow then 1 else 0)+3*vol.dynBal.nPorts+(if    not rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts  +(if  not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not heatPumpSystem.heatPump.con.vol.dynBal.use_mWat_flow then 1 else 0)+3  *heatPumpSystem.heatPump.con.vol.dynBal.nPorts+(if  not heatPumpSystem.heatPump.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatPumpSystem.heatPump.eva.vol.dynBal.nPorts+2*  heatPumpSystem.nthOrder+(if  not heatPumpSystem.pumSin.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatPumpSystem.pumSin.vol.dynBal.nPorts+(if  not   heatPumpSystem.pumSou.vol.dynBal.use_mWat_flow then 1 else 0)+3*  heatPumpSystem.pumSou.vol.dynBal.nPorts+2*rad.nEle+6*size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.tableMerge,   1)+2*(if heatPumpSystem.use_opeEnvFroRec then size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.dataTable.tableUppBou,   1) else size(heatPumpSystem.tableUpp, 1))+6*size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.tableMerge,   1)+2*(if heatPumpSystem.use_opeEnvFroRec then size(heatPumpSystem.hPSystemController.safetyControl.operationalEnvelope.boundaryMap.dataTable.tableUppBou,   1) else size(heatPumpSystem.tableUpp, 1))
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1727
+Check of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\\\");\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos");
+simulateModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem", stopTime=86400, method="dassl",  tolerance=1e-06, resultFile="AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Translation of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+The DAE has 1727 scalar unknowns and 1727 scalar equations.
+Warning: The conditions of the following assert statements are always false:
+Warning:   assert(heatPumpSystem.heatPump.con.preDro.homotopyInitialization,     "In HeatPumpSystem.heatPumpSystem.heatPump.con.preDro: The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",     AssertionLevel.warning);
+    The variable heatPumpSystem.heatPump.con.preDro.homotopyInitialization = false, was declared in class AixLib.Fluid.BaseClasses.PartialResistance, /tmp/tmp-AixLib-1-ncxq1vje/AixLib/Fluid/BaseClasses/PartialResistance.mo at line 12, and used in component heatPumpSystem.heatPump.con.preDro.PartialResistance.
+Warning:   assert(heatPumpSystem.heatPump.eva.preDro.homotopyInitialization,     "In HeatPumpSystem.heatPumpSystem.heatPump.eva.preDro: The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",     AssertionLevel.warning);
+    The variable heatPumpSystem.heatPump.eva.preDro.homotopyInitialization = false, was declared in class AixLib.Fluid.BaseClasses.PartialResistance, /tmp/tmp-AixLib-1-ncxq1vje/AixLib/Fluid/BaseClasses/PartialResistance.mo at line 12, and used in component heatPumpSystem.heatPump.eva.preDro.PartialResistance.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 450
+  Variables: 3942
+  Constants: 85 (177 scalars)
+  Parameters: 1836 (3744 scalars)
+  Unknowns: 2021 (1774 scalars)
+  Differentiated variables: 40 scalars
+  Equations: 1713
+  Nontrivial: 1417
+Translated Model
+  Constants: 1888 scalars
+  Free parameters: 555 scalars
+  Parameter depending: 1815 scalars
+  Outputs: 24 scalars
+  Continuous time states: 30 scalars
+  Time-varying variables: 381 scalars
+  Alias variables: 1056 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 6, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {2}
+    Sizes after manipulation of the linear systems: {0}
+    Sizes of nonlinear systems of equations: {11, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaCap.T
+  heatPumpSystem.heatPump.con.heatCap.T
+  heatPumpSystem.heatPump.con.vol.dynBal.U
+  heatPumpSystem.heatPump.eva.heatCap.T
+  heatPumpSystem.heatPump.eva.vol.dynBal.U
+  heatPumpSystem.heatPump.heatFlowIneCon.x[1]
+  heatPumpSystem.heatPump.heatFlowIneCon.x[2]
+  heatPumpSystem.heatPump.heatFlowIneCon.x[3]
+  heatPumpSystem.heatPump.heatFlowIneEva.x[1]
+  heatPumpSystem.heatPump.heatFlowIneEva.x[2]
+  heatPumpSystem.heatPump.heatFlowIneEva.x[3]
+  heatPumpSystem.heatPump.senT_a1.T
+  heatPumpSystem.heatPump.senT_a2.T
+  heatPumpSystem.heatPump.senT_b1.T
+  heatPumpSystem.heatPump.senT_b2.T
+  heatPumpSystem.hPSystemController.calcCOP.movAve.uInt.y
+  heatPumpSystem.hPSystemController.hPControls.ConvTSetToNSet.movAve.uInt.y
+  heatPumpSystem.pumSin.filter.s[1]
+  heatPumpSystem.pumSin.filter.s[2]
+  heatPumpSystem.pumSin.vol.dynBal.U
+  heatPumpSystem.pumSou.filter.s[1]
+  heatPumpSystem.pumSou.filter.s[2]
+  heatPumpSystem.pumSou.vol.dynBal.U
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  senT_a1.T
+  vol.dynBal.m
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.translation.log");

@@ -1,0 +1,12 @@
+Regression tests are only run for the following package:
+  AixLib.Systems
+*** Error: AixLib_Systems_ModularAHU_Examples_GenericAHU.txt: Errors during result verification.
+           Absolute error = 4.472e-01 at t = 432.0 for ctrAHUBasic.genericAHUBus.TSupMea
+           Absolute error = 6.323e-03 at t = 144.0 for ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea
+           Absolute error = 2.043e-02 at t = 6336.0 for ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.1 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 1 errors.
+

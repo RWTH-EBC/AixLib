@@ -1,0 +1,134 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.GenericAHU.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TOdaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEtaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEhaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "success_rate": 0.5714285714285714,
+      "t_err_max": [
+        0.0,
+        432.0,
+        0.0,
+        0.0,
+        0.0,
+        144.0,
+        6336.0
+      ],
+      "test_passed": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "ctrAHUBasic.genericAHUBus.TOdaMea",
+        "ctrAHUBasic.genericAHUBus.TSupMea",
+        "ctrAHUBasic.genericAHUBus.TEtaMea",
+        "ctrAHUBasic.genericAHUBus.TEhaMea",
+        "ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "warnings": [
+        null,
+        "Absolute error = 4.472e-01 at t = 432.0 for ctrAHUBasic.genericAHUBus.TSupMea",
+        null,
+        null,
+        null,
+        "Absolute error = 6.323e-03 at t = 144.0 for ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "Absolute error = 2.043e-02 at t = 6336.0 for ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
+    "simulation": {
+      "elapsed_time": 0.84,
+      "final_time": 7200,
+      "jacobians": 349,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.sigBus.TConInMea",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.hPSystemController.hPControls.heatCurve.TSet",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.innerCycle.QCon",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.innerCycle.Pel",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_vol.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "heatPumpSystem.heatPump.sigBus.TConInMea",
+        "heatPumpSystem.heatPump.sigBus.TConOutMea",
+        "heatPumpSystem.hPSystemController.hPControls.heatCurve.TSet",
+        "heatPumpSystem.heatPump.innerCycle.QCon",
+        "heatPumpSystem.heatPump.innerCycle.Pel",
+        "vol.T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
+    "simulation": {
+      "elapsed_time": 1.77,
+      "final_time": 86400,
+      "jacobians": 8350,
+      "start_time": 0,
+      "state_events": 468,
+      "success": true
+    }
+  }
+]

@@ -1,0 +1,20 @@
+Regression tests are only run for the following package:
+  AixLib.Utilities
+*** Error: Simulation failed for 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos");'.
+*** Error: AixLib_Utilities_Sensors_Examples_ExergyMeters.txt: Errors during result verification.
+           While processing file AixLib.Utilities.Sensors.Examples.ExergyMeters.mat for variable calcExergyDestructionLoss_1.y: Fewer data points than reference results.
+len(yOld) = 101
+len(yNew) = 3
+Skipping error checking for this variable.
+
+           While processing file AixLib.Utilities.Sensors.Examples.ExergyMeters.mat for variable calcExergyDestructionLoss_2.y: Fewer data points than reference results.
+len(yOld) = 101
+len(yNew) = 3
+Skipping error checking for this variable.
+
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.0 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 2 errors.
+
