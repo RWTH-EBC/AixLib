@@ -11,23 +11,23 @@
         "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
         "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
       ],
-      "success_rate": 0.5714285714285714,
+      "success_rate": 0.8571428571428571,
       "t_err_max": [
         0.0,
-        432.0,
         0.0,
         0.0,
         0.0,
-        144.0,
-        6336.0
+        0.0,
+        0.0,
+        7200.0
       ],
       "test_passed": [
         1,
-        0,
         1,
         1,
         1,
-        0,
+        1,
+        1,
         0
       ],
       "var_groups": [
@@ -50,19 +50,19 @@
       ],
       "warnings": [
         null,
-        "Absolute error = 4.472e-01 at t = 432.0 for ctrAHUBasic.genericAHUBus.TSupMea",
         null,
         null,
         null,
-        "Absolute error = 6.323e-03 at t = 144.0 for ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
-        "Absolute error = 2.043e-02 at t = 6336.0 for ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+        null,
+        null,
+        "Absolute error = 1.146e-02 at t = 7200.0 for ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
       ]
     },
     "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
     "simulation": {
-      "elapsed_time": 0.877,
+      "elapsed_time": 0.132,
       "final_time": 7200,
-      "jacobians": 349,
+      "jacobians": 40,
       "start_time": 0,
       "state_events": 0,
       "success": true
@@ -123,7 +123,7 @@
     },
     "model": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
     "simulation": {
-      "elapsed_time": 1.86,
+      "elapsed_time": 1.79,
       "final_time": 86400,
       "jacobians": 8350,
       "start_time": 0,
