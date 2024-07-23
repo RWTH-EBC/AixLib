@@ -24,7 +24,7 @@ model PumpHeadControlled "testing the head controlled pump model."
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
   Modelica.Blocks.Sources.BooleanPulse    PumpOn1(period=600, width=500/600*100,
     startTime=0)
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
