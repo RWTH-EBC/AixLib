@@ -1,0 +1,104 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.TPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.QPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.PPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.mat_indoorSwimming.QEva"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "variables": [
+        "indoorSwimming.TPool",
+        "indoorSwimming.QPool",
+        "indoorSwimming.PPool",
+        "indoorSwimming.QEva"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool",
+    "simulation": {
+      "elapsed_time": 0.227535,
+      "final_time": 604800,
+      "jacobians": 97,
+      "start_time": 0,
+      "state_events": 9,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.TPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_prescribedHeatFlow.Q_flow",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.PPool",
+        "funnel_comp/AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.mat_indoorSwimming.QEva"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "variables": [
+        "indoorSwimming.TPool",
+        "prescribedHeatFlow.Q_flow",
+        "indoorSwimming.PPool",
+        "indoorSwimming.QEva"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem",
+    "simulation": {
+      "elapsed_time": 0.298165,
+      "final_time": 604800,
+      "jacobians": 97,
+      "start_time": 0,
+      "state_events": 9,
+      "success": true
+    }
+  }
+]

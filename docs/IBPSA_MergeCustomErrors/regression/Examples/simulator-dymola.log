@@ -1,0 +1,129 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
+The model has the same number of unknowns and equations: 677
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 677
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos");
+simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
+Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
+The DAE has 677 scalar unknowns and 677 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 161
+  Variables: 1600
+  Constants: 41 (41 scalars)
+  Parameters: 725 (917 scalars)
+  Unknowns: 834 (704 scalars)
+  Differentiated variables: 3 scalars
+  Equations: 700
+  Nontrivial: 575
+Translated Model
+  Constants: 579 scalars
+  Free parameters: 125 scalars
+  Parameter depending: 369 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 180 scalars
+  Alias variables: 409 scalars
+  Number of mixed real/discrete systems of equations: 1
+  Sizes of linear systems of equations: {26}
+  Sizes after manipulation of the linear systems: {13}
+  Sizes of nonlinear systems of equations: {75, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {16, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 74, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 16, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  indoorSwimming.cirPump.filter.s[1]
+  indoorSwimming.cirPump.filter.s[2]
+  indoorSwimming.PI.I.y
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
+The model has the same number of unknowns and equations: 733
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 733
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos");
+simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
+Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
+The DAE has 733 scalar unknowns and 733 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 171
+  Variables: 1742
+  Constants: 45 (45 scalars)
+  Parameters: 777 (964 scalars)
+  Unknowns: 920 (764 scalars)
+  Differentiated variables: 3 scalars
+  Equations: 763
+  Nontrivial: 619
+Translated Model
+  Constants: 629 scalars
+  Free parameters: 133 scalars
+  Parameter depending: 374 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 191 scalars
+  Alias variables: 446 scalars
+  Number of mixed real/discrete systems of equations: 1
+  Sizes of linear systems of equations: {26}
+  Sizes after manipulation of the linear systems: {13}
+  Sizes of nonlinear systems of equations: {79, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {17, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 78, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 17, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  indoorSwimming.cirPump.filter.s[1]
+  indoorSwimming.cirPump.filter.s[2]
+  PI.I.y
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.translation.log");
