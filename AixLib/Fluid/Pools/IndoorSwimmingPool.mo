@@ -321,22 +321,15 @@ model IndoorSwimmingPool
     redeclare package Medium = WaterMedium,
     redeclare Movers.Data.Generic per(
       pressure(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
-            m_flow_nominal/1000/0.7}, dp={pumpHead/0.7,pumpHead, 0}),
+            m_flow_nominal/1000/0.7}, dp={pumpHead/0.7,pumpHead,0}),
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
+
       etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.Efficiency_VolumeFlowRate,
-      efficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, eta={0.7,
-            0.8,0.7}),
-      motorEfficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-          eta={0.9,0.9,0.9}),
-      power(V_flow={0,(m_flow_nominal/1000*0.2),(m_flow_nominal/1000*0.5),
-            m_flow_nominal/1000*0.7,m_flow_nominal/1000,m_flow_nominal/1000/0.7,
-            m_flow_nominal/1000/0.6,m_flow_nominal/1000/0.5,m_flow_nominal/1000/
-            0.4}, P={(m_flow_nominal/0.4)/1000*pumpHead/0.7/0.9,(m_flow_nominal/
-            0.5)/1000*pumpHead/0.7/0.9,(m_flow_nominal/0.6)/1000*pumpHead/0.7/0.9,
-            (m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,m_flow_nominal/1000*
-            pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*pumpHead/0.7/0.9,(
-            m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(m_flow_nominal/1000*0.2)*
-            pumpHead/0.7/0.9,0})),
+
+      efficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
+            m_flow_nominal/1000/0.7}, eta={0.7,0.8,0.7}),
+      motorEfficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
+            m_flow_nominal/1000/0.7}, eta={0.9,0.9,0.9})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
