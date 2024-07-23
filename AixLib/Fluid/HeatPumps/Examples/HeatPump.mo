@@ -103,9 +103,8 @@ model HeatPump "Example for the reversible heat pump model."
     amplitude=3000,
     offset=3000)
     annotation (Placement(transformation(extent={{76,26},{84,34}})));
-  AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm pumSou(
+  Movers.SpeedControlled_y                                   pumSou(
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
-
     final allowFlowReversal=true,
     final addPowerToMedium=false,
     redeclare final package Medium = Medium_sin,
@@ -128,7 +127,8 @@ model HeatPump "Example for the reversible heat pump model."
         rotation=270,
         origin={86,-20})));
 
-  Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement(
+  Modelica.Blocks.Sources.Constant nIn(k=100/3040)
+                                              annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
@@ -174,8 +174,6 @@ equation
 
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
         points={{-34,-70},{-24,-70},{-24,-45},{-12.5,-45}}, color={0,127,255}));
-  connect(nIn.y, pumSou.Nrpm)
-    annotation (Line(points={{50,29.6},{50,24}}, color={0,0,127}));
   connect(Room.heatPort, heatFlowRateCon.port)
     annotation (Line(points={{86,-10},{86,0}},        color={191,0,0}));
   connect(sine.y, gain.u) annotation (Line(points={{84.4,30},{92,30},{92,24.8}},
@@ -186,8 +184,8 @@ equation
         points={{-12.5,3},{-70,3}},                   color={0,127,255}));
   connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
           {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
-  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
-          {60,4},{60,12}}, color={0,127,255}));
+  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-19},{76,
+          12},{60,12}},    color={0,127,255}));
   connect(pumSou.port_b, heatPump.port_a1) annotation (Line(points={{40,12},{28,
           12},{28,3},{16.5,3}}, color={0,127,255}));
   connect(senTAct.T, hysHeating.u) annotation (Line(points={{54,-53},{54,-54},{
@@ -197,7 +195,7 @@ equation
   connect(senTAct.port_b, sinkSideFixedBoundary.ports[1]) annotation (Line(
         points={{64,-64},{72,-64},{72,-64},{78,-64}}, color={0,127,255}));
   connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
-          -64},{66,-22},{76,-22}}, color={0,127,255}));
+          -64},{66,-21},{76,-21}}, color={0,127,255}));
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
         points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127},
         smooth=Smooth.None));
@@ -238,6 +236,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(pumSou.y, nIn.y)
+    annotation (Line(points={{50,24},{50,29.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(Tolerance=1e-6, StopTime=3600),

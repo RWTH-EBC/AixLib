@@ -9,7 +9,7 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
     parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(speed_rpm_nominal=2540, pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -54,7 +54,7 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
     Placement(visible = true, transformation(origin = {-84, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
 
@@ -84,8 +84,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation(
-    Line(points = {{-72, -30}, {-40, -30}, {-40, 10}}, color = {255, 0, 255}));
+  connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation (
+    Line(points={{-73,-30},{-39.95,-30},{-39.95,10.05}},
+                                                       color = {255, 0, 255}));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
