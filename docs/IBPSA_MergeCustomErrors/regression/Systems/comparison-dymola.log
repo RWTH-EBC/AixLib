@@ -60,7 +60,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
     "simulation": {
-      "elapsed_time": 0.132,
+      "elapsed_time": 0.168,
       "final_time": 7200,
       "jacobians": 40,
       "start_time": 0,
@@ -123,7 +123,7 @@
     },
     "model": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
     "simulation": {
-      "elapsed_time": 1.79,
+      "elapsed_time": 1.83,
       "final_time": 86400,
       "jacobians": 8350,
       "start_time": 0,
