@@ -1,18 +1,9 @@
 
-Error in model:  AixLib.Fluid.HeatPumps.Examples.HeatPump 
-Check of <a href="Modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump">AixLib.Fluid.HeatPumps.Examples.HeatPump</a>:
-Error: Component type specifier AixLib.Fluid.Movers.SpeedControlled_Nrpm not found
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/Examples/HeatPump.mo, line 107
- Component context: pumSou
-  Component declared as AixLib.Fluid.Movers.SpeedControlled_Nrpm pumSou in <a href="Modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump">AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Chillers.Examples.Chiller 
-Check of <a href="Modelica://AixLib.Fluid.Chillers.Examples.Chiller">AixLib.Fluid.Chillers.Examples.Chiller</a>:
-Error: Component type specifier AixLib.Fluid.Movers.SpeedControlled_Nrpm not found
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Chillers/Examples/Chiller.mo, line 88
- Component context: pumSou
-  Component declared as AixLib.Fluid.Movers.SpeedControlled_Nrpm pumSou in <a href="Modelica://AixLib.Fluid.Chillers.Examples.Chiller">AixLib.Fluid.Chillers.Examples.Chiller</a>
+Error in model:  AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled 
+Check of <a href="Modelica://AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled">AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled</a>:
+Error: Component type specifier Modelica.SIunits.MassFlowRate not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlled.mo, line 27
+ Component context: m_flow_nominal
+  Component declared as Modelica.SIunits.MassFlowRate m_flow_nominal in <a href="Modelica://AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled">AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled</a>
 Error: ERRORS have been issued.
 
