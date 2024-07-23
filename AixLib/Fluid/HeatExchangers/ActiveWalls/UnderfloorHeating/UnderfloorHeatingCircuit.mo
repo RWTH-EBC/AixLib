@@ -10,6 +10,10 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.Units.SI.Length length
     "Length of panel heating pipe" annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.Temperature TRoom_nominal=293.15
+    "Nominal Room Temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Distance spacing "Spacing between tubes"
+    annotation (Dialog(group="Panel Heating"));
 
   AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.UnderfloorHeatingElement
     ufhEle[dis](
@@ -118,6 +122,12 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
   Modelica.Blocks.Interfaces.RealOutput TFloorMax(unit="K", displayUnit="degC")
     "Maximum floor temperature"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
+
+      parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*PipeLength
+    "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
+      parameter Modelica.Units.SI.PressureDifference dp_Valve=0
+    "Pressure Difference set in regulating valve for pressure equalization in heating system"
+    annotation (Dialog(group="Pressure Drop"));
 
 
   FixedResistances.HydraulicDiameter resPip(

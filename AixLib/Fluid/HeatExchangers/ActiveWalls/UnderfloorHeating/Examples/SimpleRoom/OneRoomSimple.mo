@@ -25,8 +25,8 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     wallTypeCeiling={UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()},
 
     Spacing={0.35},
-    PipeThickness={0.002},
-    d_a={0.017},
+    thicknessPipe={0.002},
+    dOut={0.017},
     withSheathing=false)
     annotation (Placement(transformation(extent={{-32,-64},{18,-34}})));
 

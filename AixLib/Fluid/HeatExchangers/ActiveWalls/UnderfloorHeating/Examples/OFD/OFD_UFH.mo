@@ -66,7 +66,7 @@ model OFD_UFH
             {-52,-16}})));
   UnderfloorHeating.UnderfloorHeatingSystem underfloorHeatingSystem(
     redeclare package Medium = AixLib.Media.Water,
-    RoomNo=10,
+    nZones=10,
     dis=dis,
     Q_Nf={638,1078,502,341,783,766,506,196,443,658},
     A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor[1].Wall.A
@@ -99,9 +99,9 @@ model OFD_UFH
     T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15},
     Spacing=fill(0.2, 10),
-    PipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
-    PipeThickness=fill(0.002, 10),
-    d_a=fill(0.017, 10),
+    pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
+    thicknessPipe=fill(0.002, 10),
+    dOut=fill(0.017, 10),
     withSheathing=false)
     annotation (Placement(transformation(extent={{-68,-66},{-44,-52}})));
 
@@ -182,10 +182,12 @@ equation
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-21},
           {-50,-21},{-50,-15.75},{-44,-15.75}},                                                                                            color={191,0,0}));
   connect(m_flow_specification1.ports[1], underfloorHeatingSystem.port_a)
-    annotation (Line(points={{-82,-58},{-76,-58},{-76,-59},{-68,-59}}, color={0,
+    annotation (Line(points={{-82,-58},{-76,-58},{-76,-59.7778},{-68,-59.7778}},
+                                                                       color={0,
           127,255}));
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
-        points={{-44,-59},{-44,-58},{-24,-58}}, color={0,127,255}));
+        points={{-44,-59.7778},{-44,-58},{-24,-58}},
+                                                color={0,127,255}));
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-79.4,
           -36},{-63.68,-36},{-63.68,-51.0667}},        color={0,0,127}));
           for i in 1:dis loop

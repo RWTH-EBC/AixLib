@@ -11,6 +11,10 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   parameter Modelica.Units.SI.Length lengthMax=120
     "Maximum Length for one Circuit" annotation (Dialog(group="Panel Heating"));
 
+  parameter Modelica.Units.SI.Power Q_Nf
+    "Calculated Heat Load for room with panel heating"
+    annotation (Dialog(group="Room Specifications"));
+
   parameter Modelica.Units.SI.Power Q_flow_nominal
     "Nominal heat load for room with panel heating"
     annotation (Dialog(group="Room Specifications"));
@@ -32,14 +36,11 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   parameter Modelica.Units.SI.PressureDifference dpFixed_nominal=0
     "Additional pressure drop for every heating circuit, e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
 
-  parameter Modelica.Units.SI.Temperature T_Fmax=29 + 273.15
-    "Maximum surface temperature"
-    annotation (Dialog(group="Room Specifications"));
   parameter Modelica.Units.SI.Temperature TZone_nominal=20 + 273.15
     "Nominal zone temperature" annotation (Dialog(group="Room Specifications"));
-  final parameter Modelica.Units.SI.HeatFlux q_Gmax=8.92*(T_Fmax -
+  final parameter Modelica.Units.SI.HeatFlux q_Gmax=8.92*(TSurMax -
       TZone_nominal)^(1.1)
-    "Maxium possible heat flux with given surface temperature and room temperature";
+    "Maximum possible heat flux with given surface temperature and room temperature";
   parameter Boolean Ceiling "false if ground plate is under panel heating"
     annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
 
@@ -49,6 +50,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
 
   parameter Modelica.Units.SI.Distance spacing "Spacing between tubes"
     annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.Diameter d(min = dOut) = dOut "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
   final parameter Modelica.Units.SI.Length length=A/spacing
     "Possible pipe length for given panel heating area";
 
@@ -112,6 +114,13 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
       Modelica.Constants.pi*length) + (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
        else (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
     "thermal resistance through pipe layers";
+  parameter Integer use_vmax(min=1, max=2) "Output if v > v_max (0.5 m/s)"
+    annotation (choices(choice=1 "Warning", choice=2 "Error"));
+  parameter Integer calculateVol annotation (Dialog(group="Panel Heating",
+        descriptionLabel=true), choices(
+      choice=1 "Calculate Water Volume with inner diameter",
+      choice=2 "Calculate Water Volume with time constant",
+      radioButtons=true));
 
   UnderfloorHeatingCircuit circuits[nCircuits](
     each final energyDynamics=energyDynamics,
@@ -125,7 +134,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each final dp_Pipe=dpPipe_nominal,
     each final dp_Valve=dpValve_nominal,
     each final dpFixed_nominal=dpFixed_nominal,
-    each final TSurMeaMax=T_Fmax,
+    each final TSurMax=TSurMax,
     each final TRoom_nominal=TZone_nominal,
     each final pipeMaterial=pipeMaterial,
     each final thicknessPipe=thicknessPipe,
@@ -154,7 +163,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     withSheathing=withSheathing,
     lambda_M=sheathingMaterial.lambda,
     s_u=CoverThickness,
-    T_Fmax=T_Fmax,
+    T_Fmax=TSurMax,
     T_Room=TZone_nominal,
     q_Gmax=q_Gmax,
     dT_H=dT_Hi,

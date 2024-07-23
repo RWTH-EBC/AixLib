@@ -14,7 +14,7 @@ model OneRoomSimple_qu "Example for underfloor heating system with two rooms for
     annotation (Placement(transformation(extent={{-40,74},{-20,94}})));
   UnderfloorHeating.UnderfloorHeatingSystem underfloorHeatingSystem(
     redeclare package Medium = MediumWater,
-    RoomNo=1,
+    nZones=1,
     dis=dis,
     Q_Nf=-1.*{fixedHeatFlow.Q_flow},
     A={area},
@@ -24,8 +24,8 @@ model OneRoomSimple_qu "Example for underfloor heating system with two rooms for
     wallTypeCeiling={
         UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH()},
     Spacing={0.35},
-    PipeThickness={0.002},
-    d_a={0.017},
+    thicknessPipe={0.002},
+    dOut={0.017},
     withSheathing=false)
     annotation (Placement(transformation(extent={{-32,-32},{18,-2}})));
 
@@ -70,9 +70,11 @@ equation
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-85.3,
           13},{-23,13},{-23,0}},            color={0,0,127}));
   connect(boundary.ports[1], underfloorHeatingSystem.port_a) annotation (Line(
-        points={{-78,-16},{-56,-16},{-56,-17},{-32,-17}}, color={0,127,255}));
-  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points={{18,-17},
-          {38,-17},{38,-18},{54,-18}},          color={0,127,255}));
+        points={{-78,-16},{-56,-16},{-56,-18.6667},{-32,-18.6667}},
+                                                          color={0,127,255}));
+  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points={{18,
+          -18.6667},{38,-18.6667},{38,-18},{54,-18}},
+                                                color={0,127,255}));
   connect(underfloorHeatingSystem.m_flowNominal, boundary.m_flow_in)
     annotation (Line(points={{-32,-26},{-40,-26},{-40,-24},{-68,-24},{-68,-30},{
           -106,-30},{-106,-8},{-100,-8}},   color={0,0,127}));

@@ -3,7 +3,9 @@ model qG_TypeA
   "Calculating the limiting heat flux for underfloor heating Types A and C according to EN 1264"
   import Modelica.Constants.e;
 
-  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
+  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA(
+    lambda_E=wallTypeFloor.lambda[1],
+    R_lambdaB=wallTypeFloor.d[2]/wallTypeFloor.lambda[2]);
   final parameter Modelica.Units.SI.Thickness InsulationThickness=
       wallTypeCeiling.d[1] "Thickness of thermal insulation";
   final parameter Modelica.Units.SI.ThermalConductivity lambda_ins=
@@ -14,8 +16,6 @@ model qG_TypeA
 
   final parameter Modelica.Units.SI.Thickness CoverThickness=wallTypeFloor.d[1]
     "thickness of cover above pipe";
-  final parameter Modelica.Units.SI.ThermalConductivity lambda_E=wallTypeFloor.lambda[1]
-    "Thermal conductivity of cover";
 
   final parameter Modelica.Units.SI.ThermalInsulance R_lambdaB=wallTypeFloor.d[2]
       /wallTypeFloor.lambda[2] "Thermal resistance of flooring";

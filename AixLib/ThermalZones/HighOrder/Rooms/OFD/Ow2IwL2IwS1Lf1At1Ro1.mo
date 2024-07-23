@@ -237,7 +237,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_height=room_width_long,
     withWindow=false,
     withDoor=false,
-    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor)                              annotation (Placement(transformation(
+    ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor) if not use_UFH                           annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));

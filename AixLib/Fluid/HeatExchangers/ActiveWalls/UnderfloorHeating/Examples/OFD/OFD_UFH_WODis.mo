@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Examples.OFD;
 model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
   extends Modelica.Icons.Example;
 
-  parameter Integer nRooms = 11;
+  parameter Integer nZones = 11;
   parameter Integer nHeatedRooms = 10;
 
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
@@ -16,9 +16,9 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
       radioButtons=true));
   parameter Integer dis=1;
   parameter Modelica.Units.SI.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
-  parameter Modelica.Units.SI.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
+  parameter Modelica.Units.SI.Diameter dOut[nHeatedRooms] = fill(0.017, 10);
   parameter Modelica.Units.SI.Diameter d[nHeatedRooms] = fill(0.018, 10);
-  Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
+  Modelica.Blocks.Sources.Constant constAirEx[nZones](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
   Modelica.Blocks.Sources.Constant constAmb(k=261.15)
@@ -28,7 +28,7 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=180,
         origin={64,-70})));
-  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[nRooms]
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[nZones]
     annotation (Placement(transformation(
         extent={{8,-6},{-8,6}},
         rotation=0,
@@ -58,15 +58,15 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
     AirExchangeCorridor=0,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9)
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-16},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nZones] annotation (Placement(transformation(extent={{-60,-16},
             {-48,-4}})));
-  Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-18},
+  Modelica.Blocks.Sources.Constant adiabaticRadRooms[nZones](k=fill(0, nZones)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-18},
             {-74,-2}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-26},
             {-52,-16}})));
   UnderfloorHeating.UnderfloorHeatingSystem underfloorHeatingSystem(
     redeclare package Medium = AixLib.Media.Water,
-    RoomNo=10,
+    nZones=10,
     dis=dis,
     Q_Nf={638,1078,502,341,783,766,506,196,443,658},
     A={
@@ -97,9 +97,9 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
         wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.wallTypes.IW_hori_low_half},
     T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15},
     Spacing=fill(0.2, 10),
-    PipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
-    PipeThickness=fill(0.002, 10),
-    d_a=fill(0.017, 10),
+    pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
+    thicknessPipe=fill(0.002, 10),
+    dOut=fill(0.017, 10),
     withSheathing=false)
     annotation (Placement(transformation(extent={{-68,-66},{-44,-52}})));
 
@@ -190,8 +190,8 @@ equation
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
         points={{-44,-59.7778},{-44,-58},{-24,-58}},
                                                 color={0,127,255}));
-  connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{
-          -79.4,-36},{-70.4,-36},{-70.4,-55.1111}}, color={0,0,127}));
+  connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{-79.4,
+          -36},{-70.4,-36},{-70.4,-55.1111}},       color={0,0,127}));
 
   connect(wholeHouseBuildingEnvelope.heatingToRooms[4], underfloorHeatingSystem.heatFloor[1]) annotation (Line(points={{-14,
           9.65091},{-22,9.65091},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,-52.525}},
