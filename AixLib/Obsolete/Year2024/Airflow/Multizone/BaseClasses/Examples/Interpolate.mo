@@ -37,9 +37,7 @@ equation
   annotation (
 experiment(
       StopTime=500,
-      Tolerance=1e-06),
-  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/BaseClasses/Examples/Interpolate.mos"
-        "Simulate and plot"), Documentation(info="<html>
+      Tolerance=1e-06), Documentation(info="<html>
  <p>
  This example demonstrates the function
  <a href=\"modelica://AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses.interpolate\">
