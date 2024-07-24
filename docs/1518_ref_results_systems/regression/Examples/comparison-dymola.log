@@ -1,61 +1,17 @@
 ﻿[
   {
     "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.Heater.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
-    },
-    "model": "AixLib.Systems.ModularAHU.Examples.Heater",
-    "simulation": {
-      "elapsed_time": 0.0265,
-      "final_time": 3600,
-      "jacobians": 31,
-      "start_time": 0,
-      "state_events": 0,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
-    },
-    "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
-    "simulation": {
-      "elapsed_time": 48.4,
-      "final_time": 6566400.0,
-      "jacobians": 23927,
-      "start_time": 5961600.0,
-      "state_events": 51,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.GenericAHU.mat",
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TOdaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TSupMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEtaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEhaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.VFlowOutMea"
       ],
       "success_rate": 1.0,
       "t_err_max": [
-        0.0,
         0.0,
         0.0,
         0.0,
@@ -69,6 +25,68 @@
         1,
         1,
         1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+    "simulation": {
+      "elapsed_time": 0.0208,
+      "final_time": 800,
+      "jacobians": 53,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
         1,
         1
       ],
@@ -78,20 +96,17 @@
         0,
         0,
         1,
-        1,
         1
       ],
       "variables": [
-        "ctrAHUBasic.genericAHUBus.TOdaMea",
-        "ctrAHUBasic.genericAHUBus.TSupMea",
-        "ctrAHUBasic.genericAHUBus.TEtaMea",
-        "ctrAHUBasic.genericAHUBus.TEhaMea",
-        "ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
-        "ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
-        "ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
       ],
       "warnings": [
-        null,
         null,
         null,
         null,
@@ -100,11 +115,263 @@
         null
       ]
     },
-    "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
+    "model": "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
     "simulation": {
-      "elapsed_time": 0.137,
-      "final_time": 7200,
+      "elapsed_time": 0.0189,
+      "final_time": 600,
+      "jacobians": 46,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Pump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Pump",
+    "simulation": {
+      "elapsed_time": 0.02,
+      "final_time": 800,
+      "jacobians": 68,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Admix.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Admix",
+    "simulation": {
+      "elapsed_time": 0.0213,
+      "final_time": 800,
+      "jacobians": 56,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Throttle.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Throttle",
+    "simulation": {
+      "elapsed_time": 0.0111,
+      "final_time": 1000,
       "jacobians": 43,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Injection.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Injection",
+    "simulation": {
+      "elapsed_time": 0.0251,
+      "final_time": 800,
+      "jacobians": 55,
       "start_time": 0,
       "state_events": 0,
       "success": true
