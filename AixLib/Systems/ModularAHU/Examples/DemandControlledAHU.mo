@@ -122,6 +122,7 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
     annotation (Placement(transformation(extent={{-58,-34},{62,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final C_start={CO2Con_start/1E6 * (MolCO2/MolAir)},
  redeclare AixLib.DataBase.ThermalZones.Office_1995_1000 zoneParam,
     use_C_flow=true,
@@ -176,7 +177,8 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
   Fluid.Sources.Outside out(
     C={6.8355*0.0001},      nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-90,-14},
             {-70,6}})));
-  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package Medium = MediumAir)
+  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package
+      Medium =                                                                      MediumAir)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
