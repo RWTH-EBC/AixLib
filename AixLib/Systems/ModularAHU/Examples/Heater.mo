@@ -92,10 +92,7 @@ equation
   </li>
 </ul>
 </html>"),
-    experiment(
-      StopTime=3600,
-      __Dymola_fixedstepsize=1,
-      __Dymola_Algorithm="Dassl"),
+    experiment(StopTime=3600,Tolerance=1e-06),
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
         "Simulate and plot"));

@@ -179,9 +179,8 @@ equation
 </html>"),
     experiment(
       StopTime=2700,
-      __Dymola_fixedstepsize=1,
-      __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands(file(ensureSimulated=true)=
+      Interval=1,Tolerance=1e-06),
+    __Dymola_Commands(file=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Cooler.mos"
         "Simulate and Plot"));
 end AHU2_Cooler;

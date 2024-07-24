@@ -53,7 +53,7 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation(
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
     Placement(visible = true, transformation(origin = {-86, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(ThrottlePump.hydraulicBus, hydraulicBus) annotation (Line(
@@ -90,7 +90,7 @@ equation
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(StopTime=600),
+    experiment(StopTime=600,Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>December 06, 2022, by EBC-Modelica group:<br/>
     Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
