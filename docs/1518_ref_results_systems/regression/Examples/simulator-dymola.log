@@ -1,0 +1,658 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Admix");
+Check of AixLib.Systems.HydraulicModules.Example.Admix:
+The model has the same number of unknowns and equations: 2084
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2040+Admix.valve.vol.dynBal.nPorts+Admix.pipe1.simplePipe.vol[1].dynBal.nPorts+  Admix.pipe1.simplePipe.vol[2].dynBal.nPorts+Admix.pipe1.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe2.simplePipe.vol[1].dynBal.nPorts+Admix.pipe2.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe2.simplePipe.vol[3].dynBal.nPorts+Admix.pipe3.simplePipe.vol[1].dynBal.nPorts  +Admix.pipe3.simplePipe.vol[2].dynBal.nPorts+Admix.pipe3.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe4.simplePipe.vol[1].dynBal.nPorts+Admix.pipe4.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe4.simplePipe.vol[3].dynBal.nPorts+Admix.pipe5.simplePipe.vol[1].dynBal.nPorts  +Admix.pipe5.simplePipe.vol[2].dynBal.nPorts+Admix.pipe5.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe6.simplePipe.vol[1].dynBal.nPorts+Admix.pipe6.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe6.simplePipe.vol[3].dynBal.nPorts+Admix.junc456.dynBal.nPorts+  Admix.PumpInterface.pump.vol.dynBal.nPorts
+scalar unknowns and
+  1921+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Admix.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe4.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe5.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe5.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe5.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe6.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe6.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe6.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.junc456.dynBal.use_mWat_flow then 1 else 0)+3*Admix.junc456.dynBal.nPorts  +(if  not Admix.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  Admix.PumpInterface.pump.vol.dynBal.nPorts+(if  not Admix.valve.vol.dynBal.use_mWat_flow   then 1 else 0)+3*Admix.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2084
+Check of AixLib.Systems.HydraulicModules.Example.Admix successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Admix\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Admix\\\");\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Admix", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Admix");
+Translation of AixLib.Systems.HydraulicModules.Example.Admix:
+The DAE has 2084 scalar unknowns and 2084 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 457
+  Variables: 5628
+  Constants: 111 (111 scalars)
+  Parameters: 2717 (2811 scalars)
+  Unknowns: 2800 (2167 scalars)
+  Differentiated variables: 77 scalars
+  Equations: 2052
+  Nontrivial: 1585
+Translated Model
+  Constants: 2070 scalars
+  Free parameters: 165 scalars
+  Parameter depending: 931 scalars
+  Outputs: 12 scalars
+  Continuous time states: 56 scalars
+  Time-varying variables: 467 scalars
+  Alias variables: 1456 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {19}
+  Sizes after manipulation of the nonlinear systems: {2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {19, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  Admix.junc456.dynBal.U
+  Admix.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.vol[1].dynBal.U
+  Admix.pipe1.simplePipe.vol[2].dynBal.U
+  Admix.pipe1.simplePipe.vol[3].dynBal.U
+  Admix.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.vol[1].dynBal.U
+  Admix.pipe2.simplePipe.vol[2].dynBal.U
+  Admix.pipe2.simplePipe.vol[3].dynBal.U
+  Admix.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.vol[1].dynBal.U
+  Admix.pipe3.simplePipe.vol[2].dynBal.U
+  Admix.pipe3.simplePipe.vol[3].dynBal.U
+  Admix.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.vol[1].dynBal.U
+  Admix.pipe4.simplePipe.vol[2].dynBal.U
+  Admix.pipe4.simplePipe.vol[3].dynBal.U
+  Admix.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.vol[1].dynBal.U
+  Admix.pipe5.simplePipe.vol[2].dynBal.U
+  Admix.pipe5.simplePipe.vol[3].dynBal.U
+  Admix.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.vol[1].dynBal.U
+  Admix.pipe6.simplePipe.vol[2].dynBal.U
+  Admix.pipe6.simplePipe.vol[3].dynBal.U
+  Admix.PT1_a1.y
+  Admix.PT1_a2.y
+  Admix.PT1_b1.y
+  Admix.PT1_b2.y
+  Admix.PumpInterface.pump.filter.s[1]
+  Admix.PumpInterface.pump.filter.s[2]
+  Admix.PumpInterface.pump.vol.dynBal.U
+  Admix.senT_a1.T
+  Admix.senT_a2.T
+  Admix.senT_b1.T
+  Admix.senT_b2.T
+  Admix.valve.filter.s[1]
+  Admix.valve.vol.dynBal.U
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Admix.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.ThrottlePump");
+Check of AixLib.Systems.HydraulicModules.Example.ThrottlePump:
+The model has the same number of unknowns and equations: 1392
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1366+ThrottlePump.PumpInterface.pump.vol.dynBal.nPorts+ThrottlePump.pipe1.simplePipe.vol[1].dynBal.nPorts  +ThrottlePump.pipe1.simplePipe.vol[2].dynBal.nPorts+ThrottlePump.pipe1.simplePipe.vol[3].dynBal.nPorts  +ThrottlePump.pipe2.simplePipe.vol[1].dynBal.nPorts+ThrottlePump.pipe2.simplePipe.vol[2].dynBal.nPorts  +ThrottlePump.pipe2.simplePipe.vol[3].dynBal.nPorts+ThrottlePump.pipe3.simplePipe.vol[1].dynBal.nPorts  +ThrottlePump.pipe3.simplePipe.vol[2].dynBal.nPorts+ThrottlePump.pipe3.simplePipe.vol[3].dynBal.nPorts  +ThrottlePump.pipe4.simplePipe.vol[1].dynBal.nPorts+ThrottlePump.pipe4.simplePipe.vol[2].dynBal.nPorts  +ThrottlePump.pipe4.simplePipe.vol[3].dynBal.nPorts
+scalar unknowns and
+  1291+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   ThrottlePump.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.PumpInterface.pump.vol.dynBal.nPorts+(if  not ThrottlePump.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not   ThrottlePump.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not ThrottlePump.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not   ThrottlePump.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not ThrottlePump.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not   ThrottlePump.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not ThrottlePump.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not   ThrottlePump.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not ThrottlePump.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not   ThrottlePump.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not ThrottlePump.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not   ThrottlePump.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe4.simplePipe.vol[3].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1392
+Check of AixLib.Systems.HydraulicModules.Example.ThrottlePump successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.ThrottlePump\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.ThrottlePump\\\");\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.ThrottlePump", tolerance=1e-6, stopTime=600, resultFile="AixLib.Systems.HydraulicModules.Example.ThrottlePump");
+Translation of AixLib.Systems.HydraulicModules.Example.ThrottlePump:
+The DAE has 1392 scalar unknowns and 1392 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 305
+  Variables: 3737
+  Constants: 71 (71 scalars)
+  Parameters: 1810 (1882 scalars)
+  Unknowns: 1856 (1446 scalars)
+  Differentiated variables: 53 scalars
+  Equations: 1374
+  Nontrivial: 1075
+Translated Model
+  Constants: 1389 scalars
+  Free parameters: 115 scalars
+  Parameter depending: 610 scalars
+  Outputs: 12 scalars
+  Continuous time states: 40 scalars
+  Time-varying variables: 308 scalars
+  Alias variables: 977 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {14}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {14, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  ThrottlePump.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe1.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe1.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe2.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe2.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe3.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe3.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe4.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe4.simplePipe.vol[3].dynBal.U
+  ThrottlePump.PT1_a1.y
+  ThrottlePump.PT1_a2.y
+  ThrottlePump.PT1_b1.y
+  ThrottlePump.PT1_b2.y
+  ThrottlePump.PumpInterface.pump.filter.s[1]
+  ThrottlePump.PumpInterface.pump.filter.s[2]
+  ThrottlePump.PumpInterface.pump.vol.dynBal.U
+  ThrottlePump.senT_a1.T
+  ThrottlePump.senT_a2.T
+  ThrottlePump.senT_b1.T
+  ThrottlePump.senT_b2.T
+  ThrottlePump.valve.filter.s[1]
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.ThrottlePump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Injection");
+Check of AixLib.Systems.HydraulicModules.Example.Injection:
+The model has the same number of unknowns and equations: 3019
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2951+Injection.valve.vol.dynBal.nPorts+Injection.pipe1.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe1.simplePipe.vol[2].dynBal.nPorts+Injection.pipe1.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe2.simplePipe.vol[1].dynBal.nPorts+Injection.pipe2.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe2.simplePipe.vol[3].dynBal.nPorts+Injection.pipe3.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe3.simplePipe.vol[2].dynBal.nPorts+Injection.pipe3.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe4.simplePipe.vol[1].dynBal.nPorts+Injection.pipe4.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe4.simplePipe.vol[3].dynBal.nPorts+Injection.pipe5.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe5.simplePipe.vol[2].dynBal.nPorts+Injection.pipe5.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe6.simplePipe.vol[1].dynBal.nPorts+Injection.pipe6.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe6.simplePipe.vol[3].dynBal.nPorts+Injection.pipe7.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe7.simplePipe.vol[2].dynBal.nPorts+Injection.pipe7.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe8.simplePipe.vol[1].dynBal.nPorts+Injection.pipe8.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe8.simplePipe.vol[3].dynBal.nPorts+Injection.pipe9.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe9.simplePipe.vol[2].dynBal.nPorts+Injection.pipe9.simplePipe.vol[3].dynBal.nPorts  +Injection.junc3v6.dynBal.nPorts+Injection.PumpInterface.pump.vol.dynBal.nPorts  +Injection.junc15j.dynBal.nPorts+Injection.juncjp6.dynBal.nPorts
+scalar unknowns and
+  2773+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Injection.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe4.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe5.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe5.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe5.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe6.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe6.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe6.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe7.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe7.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe7.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe7.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe7.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe7.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe8.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe8.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe8.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe8.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe8.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe8.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe9.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe9.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe9.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe9.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe9.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe9.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.junc3v6.dynBal.use_mWat_flow   then 1 else 0)+3*Injection.junc3v6.dynBal.nPorts+(if  not Injection.PumpInterface.pump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*Injection.PumpInterface.pump.vol.dynBal.nPorts+(if  not   Injection.junc15j.dynBal.use_mWat_flow then 1 else 0)+3*Injection.junc15j.dynBal.nPorts  +(if  not Injection.juncjp6.dynBal.use_mWat_flow then 1 else 0)+3*  Injection.juncjp6.dynBal.nPorts+(if  not Injection.valve.vol.dynBal.use_mWat_flow   then 1 else 0)+3*Injection.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  3019
+Check of AixLib.Systems.HydraulicModules.Example.Injection successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Injection\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Injection\\\");\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Injection", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Injection");
+Translation of AixLib.Systems.HydraulicModules.Example.Injection:
+The DAE has 3019 scalar unknowns and 3019 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 655
+  Variables: 8105
+  Constants: 161 (161 scalars)
+  Parameters: 3879 (3918 scalars)
+  Unknowns: 4065 (3138 scalars)
+  Differentiated variables: 111 scalars
+  Equations: 2959
+  Nontrivial: 2264
+Translated Model
+  Constants: 2965 scalars
+  Free parameters: 196 scalars
+  Parameter depending: 1275 scalars
+  Outputs: 13 scalars
+  Continuous time states: 79 scalars
+  Time-varying variables: 667 scalars
+  Alias variables: 2114 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {26}
+  Sizes after manipulation of the nonlinear systems: {3}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {26, 1}
+    Sizes after manipulation of the nonlinear systems: {4, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  Injection.junc3v6.dynBal.U
+  Injection.junc15j.dynBal.U
+  Injection.juncjp6.dynBal.U
+  Injection.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.vol[1].dynBal.U
+  Injection.pipe1.simplePipe.vol[2].dynBal.U
+  Injection.pipe1.simplePipe.vol[3].dynBal.U
+  Injection.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.vol[1].dynBal.U
+  Injection.pipe2.simplePipe.vol[2].dynBal.U
+  Injection.pipe2.simplePipe.vol[3].dynBal.U
+  Injection.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.vol[1].dynBal.U
+  Injection.pipe3.simplePipe.vol[2].dynBal.U
+  Injection.pipe3.simplePipe.vol[3].dynBal.U
+  Injection.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.vol[1].dynBal.U
+  Injection.pipe4.simplePipe.vol[2].dynBal.U
+  Injection.pipe4.simplePipe.vol[3].dynBal.U
+  Injection.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.vol[1].dynBal.U
+  Injection.pipe5.simplePipe.vol[2].dynBal.U
+  Injection.pipe5.simplePipe.vol[3].dynBal.U
+  Injection.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.vol[1].dynBal.U
+  Injection.pipe6.simplePipe.vol[2].dynBal.U
+  Injection.pipe6.simplePipe.vol[3].dynBal.U
+  Injection.pipe7.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.vol[1].dynBal.U
+  Injection.pipe7.simplePipe.vol[2].dynBal.U
+  Injection.pipe7.simplePipe.vol[3].dynBal.U
+  Injection.pipe8.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe8.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe8.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe8.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe8.simplePipe.vol[1].dynBal.U
+  Injection.pipe8.simplePipe.vol[2].dynBal.U
+  Injection.pipe8.simplePipe.vol[3].dynBal.U
+  Injection.pipe9.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe9.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe9.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe9.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe9.simplePipe.vol[1].dynBal.U
+  Injection.pipe9.simplePipe.vol[2].dynBal.U
+  Injection.pipe9.simplePipe.vol[3].dynBal.U
+  Injection.PT1_a1.y
+  Injection.PT1_a2.y
+  Injection.PT1_b1.y
+  Injection.PT1_b2.y
+  Injection.PumpInterface.pump.filter.s[1]
+  Injection.PumpInterface.pump.filter.s[2]
+  Injection.PumpInterface.pump.vol.dynBal.U
+  Injection.senT_a1.T
+  Injection.senT_a2.T
+  Injection.senT_b1.T
+  Injection.senT_b2.T
+  Injection.valve.filter.s[1]
+  Injection.valve.vol.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Injection.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Pump");
+Check of AixLib.Systems.HydraulicModules.Example.Pump:
+The model has the same number of unknowns and equations: 912
+The model could not be deduced to be symbolically well-posed.
+The model has
+  898+Unmixed.PumpInterface.pump.vol.dynBal.nPorts+Unmixed.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +Unmixed.pipe1.plugFlowPipe.vol_a.dynBal.nPorts+Unmixed.pipe2.plugFlowPipe.vol_b.dynBal.nPorts  +Unmixed.pipe2.plugFlowPipe.vol_a.dynBal.nPorts+Unmixed.pipe3.plugFlowPipe.vol_b.dynBal.nPorts  +Unmixed.pipe3.plugFlowPipe.vol_a.dynBal.nPorts
+scalar unknowns and
+  853+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Unmixed.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  Unmixed.PumpInterface.pump.vol.dynBal.nPorts+(if  not Unmixed.pipe1.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*Unmixed.pipe1.plugFlowPipe.vol_b.dynBal.nPorts+(if  not   Unmixed.pipe1.plugFlowPipe.vol_a.dynBal.use_mWat_flow then 1 else 0)+3*  Unmixed.pipe1.plugFlowPipe.vol_a.dynBal.nPorts+(if  not Unmixed.pipe2.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*Unmixed.pipe2.plugFlowPipe.vol_b.dynBal.nPorts+(if  not   Unmixed.pipe2.plugFlowPipe.vol_a.dynBal.use_mWat_flow then 1 else 0)+3*  Unmixed.pipe2.plugFlowPipe.vol_a.dynBal.nPorts+(if  not Unmixed.pipe3.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*Unmixed.pipe3.plugFlowPipe.vol_b.dynBal.nPorts+(if  not   Unmixed.pipe3.plugFlowPipe.vol_a.dynBal.use_mWat_flow then 1 else 0)+3*  Unmixed.pipe3.plugFlowPipe.vol_a.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  912
+Check of AixLib.Systems.HydraulicModules.Example.Pump successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Pump\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Pump\\\");\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Pump", tolerance=1e-6, interval=5, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Pump");
+Error: Unknown named argument 'interval' for function simulateModel.
+In call simulateModel("AixLib.Systems.HydraulicModules.Example.Pump", tolerance=1e-6, interval=5, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Pump")
+The function is declared as:
+function simulateModel "Simulate a Modelica model"
+  input  String problem  := "" "Name of model, e.g. Modelica.Mechanics.Rotational.Components.Clutch";
+  input  Real startTime  := 0.0 "Start of simulation";
+  input  Real stopTime  := 1.0 "End of simulation";
+  input  Integer numberOfIntervals  := 0 "Number of output points";
+  input  Real outputInterval  := 0.0 "Distance between output points";
+  input  String method  := "Dassl" "Integration method";
+  input  Real tolerance  := 0.0001 "Tolerance of integration";
+  input  Real fixedstepsize  := 0.0 "Fixed step size for Euler";
+  input  String resultFile  := "dsres" "Where to store result";
+  output  Boolean result  "true if successful";
+end simulateModel;
+Errors found in: simulateModel()
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Pump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Throttle");
+Check of AixLib.Systems.HydraulicModules.Example.Throttle:
+The model has the same number of unknowns and equations: 962
+The model could not be deduced to be symbolically well-posed.
+The model has
+  944+Throttle.pipe1.simplePipe.vol[1].dynBal.nPorts+Throttle.pipe1.simplePipe.vol[2].dynBal.nPorts  +Throttle.pipe1.simplePipe.vol[3].dynBal.nPorts+Throttle.pipe2.simplePipe.vol[1].dynBal.nPorts  +Throttle.pipe2.simplePipe.vol[2].dynBal.nPorts+Throttle.pipe2.simplePipe.vol[3].dynBal.nPorts  +Throttle.pipe3.simplePipe.vol[1].dynBal.nPorts+Throttle.pipe3.simplePipe.vol[2].dynBal.nPorts  +Throttle.pipe3.simplePipe.vol[3].dynBal.nPorts
+scalar unknowns and
+  889+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Throttle.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Throttle.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not Throttle.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Throttle.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not   Throttle.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Throttle.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not Throttle.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Throttle.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not   Throttle.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Throttle.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not Throttle.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Throttle.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not   Throttle.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Throttle.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not Throttle.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Throttle.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not   Throttle.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Throttle.pipe3.simplePipe.vol[3].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  962
+Check of AixLib.Systems.HydraulicModules.Example.Throttle successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Throttle\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Throttle\\\");\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Throttle", tolerance=1e-6, stopTime=1000, resultFile="AixLib.Systems.HydraulicModules.Example.Throttle");
+Translation of AixLib.Systems.HydraulicModules.Example.Throttle:
+The DAE has 962 scalar unknowns and 962 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 204
+  Variables: 2610
+  Constants: 50 (50 scalars)
+  Parameters: 1264 (1222 scalars)
+  Unknowns: 1296 (996 scalars)
+  Differentiated variables: 39 scalars
+  Equations: 948
+  Nontrivial: 749
+Translated Model
+  Constants: 917 scalars
+  Free parameters: 69 scalars
+  Parameter depending: 396 scalars
+  Outputs: 8 scalars
+  Continuous time states: 30 scalars
+  Time-varying variables: 210 scalars
+  Alias variables: 676 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {9}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {9, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  Throttle.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  Throttle.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe1.simplePipe.vol[1].dynBal.U
+  Throttle.pipe1.simplePipe.vol[2].dynBal.U
+  Throttle.pipe1.simplePipe.vol[3].dynBal.U
+  Throttle.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  Throttle.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe2.simplePipe.vol[1].dynBal.U
+  Throttle.pipe2.simplePipe.vol[2].dynBal.U
+  Throttle.pipe2.simplePipe.vol[3].dynBal.U
+  Throttle.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  Throttle.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Throttle.pipe3.simplePipe.vol[1].dynBal.U
+  Throttle.pipe3.simplePipe.vol[2].dynBal.U
+  Throttle.pipe3.simplePipe.vol[3].dynBal.U
+  Throttle.PT1_a1.y
+  Throttle.PT1_a2.y
+  Throttle.PT1_b1.y
+  Throttle.PT1_b2.y
+  Throttle.senT_a1.T
+  Throttle.senT_a2.T
+  Throttle.senT_b1.T
+  Throttle.senT_b2.T
+  Throttle.valve.filter.s[1]
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Throttle.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Injection2WayValve");
+Check of AixLib.Systems.HydraulicModules.Example.Injection2WayValve:
+The model has the same number of unknowns and equations: 2312
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2262+Injection.PumpInterface.pump.vol.dynBal.nPorts+Injection.pipe1.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe1.simplePipe.vol[2].dynBal.nPorts+Injection.pipe1.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe2.simplePipe.vol[1].dynBal.nPorts+Injection.pipe2.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe2.simplePipe.vol[3].dynBal.nPorts+Injection.pipe3.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe3.simplePipe.vol[2].dynBal.nPorts+Injection.pipe3.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe4.simplePipe.vol[1].dynBal.nPorts+Injection.pipe4.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe4.simplePipe.vol[3].dynBal.nPorts+Injection.pipe5.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe5.simplePipe.vol[2].dynBal.nPorts+Injection.pipe5.simplePipe.vol[3].dynBal.nPorts  +Injection.pipe6.simplePipe.vol[1].dynBal.nPorts+Injection.pipe6.simplePipe.vol[2].dynBal.nPorts  +Injection.pipe6.simplePipe.vol[3].dynBal.nPorts+Injection.pipe7.simplePipe.vol[1].dynBal.nPorts  +Injection.pipe7.simplePipe.vol[2].dynBal.nPorts+Injection.pipe7.simplePipe.vol[3].dynBal.nPorts  +Injection.junc3v6.dynBal.nPorts+Injection.juncjp6.dynBal.nPorts
+scalar unknowns and
+  2128+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Injection.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  Injection.PumpInterface.pump.vol.dynBal.nPorts+(if  not Injection.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe4.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe5.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe5.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe5.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe6.simplePipe.vol[1].dynBal.nPorts+(if  not Injection.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe6.simplePipe.vol[2].dynBal.nPorts+(if  not   Injection.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe6.simplePipe.vol[3].dynBal.nPorts+(if  not Injection.pipe7.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe7.simplePipe.vol[1].dynBal.nPorts+(if  not   Injection.pipe7.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Injection.pipe7.simplePipe.vol[2].dynBal.nPorts+(if  not Injection.pipe7.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Injection.pipe7.simplePipe.vol[3].dynBal.nPorts+(if  not   Injection.junc3v6.dynBal.use_mWat_flow then 1 else 0)+3*Injection.junc3v6.dynBal.nPorts  +(if  not Injection.juncjp6.dynBal.use_mWat_flow then 1 else 0)+3*  Injection.juncjp6.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2312
+Check of AixLib.Systems.HydraulicModules.Example.Injection2WayValve successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Injection2WayValve\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Injection2WayValve\\\");\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Injection2WayValve", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Injection2WayValve");
+Translation of AixLib.Systems.HydraulicModules.Example.Injection2WayValve:
+The DAE has 2312 scalar unknowns and 2312 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 502
+  Variables: 6187
+  Constants: 121 (121 scalars)
+  Parameters: 2962 (2979 scalars)
+  Unknowns: 3104 (2402 scalars)
+  Differentiated variables: 87 scalars
+  Equations: 2268
+  Nontrivial: 1742
+Translated Model
+  Constants: 2270 scalars
+  Free parameters: 144 scalars
+  Parameter depending: 954 scalars
+  Outputs: 12 scalars
+  Continuous time states: 63 scalars
+  Time-varying variables: 511 scalars
+  Alias variables: 1623 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {21}
+  Sizes after manipulation of the nonlinear systems: {2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {21, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  Injection.junc3v6.dynBal.U
+  Injection.juncjp6.dynBal.U
+  Injection.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe1.simplePipe.vol[1].dynBal.U
+  Injection.pipe1.simplePipe.vol[2].dynBal.U
+  Injection.pipe1.simplePipe.vol[3].dynBal.U
+  Injection.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe2.simplePipe.vol[1].dynBal.U
+  Injection.pipe2.simplePipe.vol[2].dynBal.U
+  Injection.pipe2.simplePipe.vol[3].dynBal.U
+  Injection.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe3.simplePipe.vol[1].dynBal.U
+  Injection.pipe3.simplePipe.vol[2].dynBal.U
+  Injection.pipe3.simplePipe.vol[3].dynBal.U
+  Injection.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe4.simplePipe.vol[1].dynBal.U
+  Injection.pipe4.simplePipe.vol[2].dynBal.U
+  Injection.pipe4.simplePipe.vol[3].dynBal.U
+  Injection.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe5.simplePipe.vol[1].dynBal.U
+  Injection.pipe5.simplePipe.vol[2].dynBal.U
+  Injection.pipe5.simplePipe.vol[3].dynBal.U
+  Injection.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe6.simplePipe.vol[1].dynBal.U
+  Injection.pipe6.simplePipe.vol[2].dynBal.U
+  Injection.pipe6.simplePipe.vol[3].dynBal.U
+  Injection.pipe7.Insulation.CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Injection.pipe7.simplePipe.vol[1].dynBal.U
+  Injection.pipe7.simplePipe.vol[2].dynBal.U
+  Injection.pipe7.simplePipe.vol[3].dynBal.U
+  Injection.PT1_a1.y
+  Injection.PT1_a2.y
+  Injection.PT1_b1.y
+  Injection.PT1_b2.y
+  Injection.PumpInterface.pump.filter.s[1]
+  Injection.PumpInterface.pump.filter.s[2]
+  Injection.PumpInterface.pump.vol.dynBal.U
+  Injection.senT_a1.T
+  Injection.senT_a2.T
+  Injection.senT_b1.T
+  Injection.senT_b2.T
+  Injection.valve.filter.s[1]
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Injection2WayValve.translation.log");
