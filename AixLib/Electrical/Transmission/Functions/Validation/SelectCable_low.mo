@@ -36,5 +36,6 @@ August 25, 2020, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SelectCable_low;

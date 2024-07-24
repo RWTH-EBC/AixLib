@@ -373,5 +373,6 @@ First implementation.
           extent={{-100,22},{100,-24}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255})}));
+          fillColor={0,127,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PressureIndependent;

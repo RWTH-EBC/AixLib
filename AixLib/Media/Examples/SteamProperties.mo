@@ -54,5 +54,6 @@ September 12, 2019, by Yangyang Fu:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SteamProperties;

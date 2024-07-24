@@ -79,5 +79,6 @@ is replaced here by
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU\">
 AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilEffectivenessNTUMassFlow;

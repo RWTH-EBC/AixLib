@@ -375,5 +375,6 @@ a proportional-controller instead of a hysteresis controller.
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Examples/SimpleHouse.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SimpleHouse;

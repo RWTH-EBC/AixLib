@@ -66,5 +66,6 @@ First implementation.
           extent={{-150,110},{150,150}},
           textString="%name",
           textColor={0,0,255}), Bitmap(extent={{-90,-90},{90,90}}, fileName=
-              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ZenithAngle;

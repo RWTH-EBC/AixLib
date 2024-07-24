@@ -180,5 +180,6 @@ Added and revised documentation.
         grid={2,2}), graphics={
           Line(points={{-96,0},{-70,0}}, color={0,0,255}),
           Line(points={{70,0},{96,0}}, color={0,0,255}),
-          Rectangle(extent={{-70,30},{70,-30}}, lineColor={0,0,255})}));
+          Rectangle(extent={{-70,30},{70,-30}}, lineColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Conductor;

@@ -215,5 +215,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Loads.BaseClasses.LoadCtrl_N</a> and
 <a href=\"modelica://AixLib.Electrical.AC.OnePhase.Loads.Inductive\">
 AixLib.Electrical.AC.OnePhase.Loads.Inductive</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Inductive_N;

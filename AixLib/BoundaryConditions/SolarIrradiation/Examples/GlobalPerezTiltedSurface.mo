@@ -81,5 +81,6 @@ Nov 14, 2022, by Laura Maier:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end GlobalPerezTiltedSurface;

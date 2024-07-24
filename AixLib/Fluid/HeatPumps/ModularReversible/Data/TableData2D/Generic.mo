@@ -89,5 +89,6 @@ https://www.beuth.de/de/norm/din-en-14511-1/298537524</a>
   </li>
 </ul>
 </html>
-"),Icon);
+"),Icon, 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

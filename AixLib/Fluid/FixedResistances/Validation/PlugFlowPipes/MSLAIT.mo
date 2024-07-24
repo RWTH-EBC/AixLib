@@ -528,5 +528,6 @@ influence of allowFlowReversal and the presence of explicit volumes in the pipe.
 </li>
 <li>January 26, 2016 by Carles Ribas:<br/>First implementation. </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MSLAIT;

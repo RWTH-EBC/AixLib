@@ -61,5 +61,6 @@ Updated weather file as explained in <a href=\"https://github.com/ibpsa/modelica
 <td><p>-9</p></td>
 </tr>
 </table>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WD400;

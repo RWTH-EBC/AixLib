@@ -73,5 +73,6 @@ First implementation.
       StopTime=172800,
       Tolerance=1e-08),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{120,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{120,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end AirHeater_T;

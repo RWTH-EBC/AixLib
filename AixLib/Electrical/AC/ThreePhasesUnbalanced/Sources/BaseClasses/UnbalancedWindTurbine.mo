@@ -116,5 +116,6 @@ August 27, 2014, by Marco Bonvini:<br/>
 Revised documentation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end UnbalancedWindTurbine;

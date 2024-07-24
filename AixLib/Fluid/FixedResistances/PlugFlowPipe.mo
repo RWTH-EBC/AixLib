@@ -172,5 +172,6 @@ cooling systems.<br/>
 <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
 <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
 10.1016/j.enconman.2017.08.072</a>.</p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowPipe;

@@ -39,5 +39,6 @@ Created model and documentation.
 <p>
 This example shows how to use a fixed voltage generator model.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end FixedVoltageSource;

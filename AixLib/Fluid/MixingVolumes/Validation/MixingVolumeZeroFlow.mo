@@ -225,5 +225,6 @@ increase the chance of the error being produced for this simple example.
 </p>
 </html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeZeroFlow.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeZeroFlow;

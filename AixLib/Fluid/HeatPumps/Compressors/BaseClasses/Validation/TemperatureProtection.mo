@@ -40,5 +40,6 @@ First implementation.
 </html>"),
 __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Compressors/BaseClasses/Validation/TemperatureProtection.mos"
         "Simulate and plot"),
-    experiment(StopTime=5, Tolerance=1e-06));
+    experiment(StopTime=5, Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureProtection;

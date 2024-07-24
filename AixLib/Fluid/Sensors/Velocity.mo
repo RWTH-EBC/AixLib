@@ -129,5 +129,6 @@ Implementation is based on
 AixLib.Fluid.Sensors.VolumeFlowRate</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Velocity;

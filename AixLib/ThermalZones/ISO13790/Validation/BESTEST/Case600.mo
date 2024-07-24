@@ -168,5 +168,6 @@ for heating and <i>27</i>&deg;C for cooling. The room has no shade and a window 
 Mar 16, 2022, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
-</ul></html>"));
+</ul></html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Case600;

@@ -10,4 +10,5 @@ Added documentation.
 </html>", info="<html>
 This type defines the resistance per unit length and it typically used
 to describe physical properties of the line cables.
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

@@ -58,5 +58,6 @@ March 9 2022, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WeeklyScheduleObject;

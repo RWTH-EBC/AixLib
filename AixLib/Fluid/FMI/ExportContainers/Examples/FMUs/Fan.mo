@@ -82,5 +82,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           lineColor={0,0,0},
           pattern=LinePattern.None,
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={255,255,255})}));
+          fillColor={255,255,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Fan;

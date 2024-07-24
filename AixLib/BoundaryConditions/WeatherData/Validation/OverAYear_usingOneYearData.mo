@@ -32,6 +32,6 @@ The test script plots the dry bulb temperature for the days 0-10 and 365-375 for
 First implementation for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
 </li>
 </ul>
-</html>"));
-
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end OverAYear_usingOneYearData;

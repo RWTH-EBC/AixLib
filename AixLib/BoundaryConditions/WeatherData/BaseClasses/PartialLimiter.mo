@@ -58,5 +58,6 @@ First implementation.
           textColor={0,0,0})}),
     Diagram(coordinateSystem(
     preserveAspectRatio=true,
-    extent={{-100,-100},{100,100}})));
+    extent={{-100,-100},{100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialLimiter;

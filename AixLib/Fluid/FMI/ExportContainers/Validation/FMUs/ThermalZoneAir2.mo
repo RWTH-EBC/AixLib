@@ -19,5 +19,6 @@ First implementation.
 </ul>
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/ThermalZoneAir2.mos"
-        "Export FMU"));
+        "Export FMU"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZoneAir2;

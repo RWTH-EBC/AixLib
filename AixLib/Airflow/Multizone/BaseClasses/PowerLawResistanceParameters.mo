@@ -28,5 +28,6 @@ First implementation.
 </li>
 </ul>
 </html>
-"));
+"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PowerLawResistanceParameters;

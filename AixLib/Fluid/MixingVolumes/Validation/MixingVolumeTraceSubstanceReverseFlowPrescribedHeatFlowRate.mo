@@ -27,5 +27,6 @@ First implementation.
 </html>"),
  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=10));
+    experiment(Tolerance=1e-6, StopTime=10), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate;

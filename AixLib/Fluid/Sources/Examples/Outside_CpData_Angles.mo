@@ -106,5 +106,6 @@ First implementation.
 </html>"),
     experiment(
       StopTime=20,
-      Tolerance=1e-06));
+      Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData_Angles;

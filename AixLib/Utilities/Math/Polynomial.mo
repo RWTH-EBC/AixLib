@@ -23,5 +23,6 @@ First implementation.
 </html>"), Icon(graphics={   Text(
           extent={{-90,38},{90,-34}},
           textColor={160,160,164},
-          textString="polynominal()")}));
+          textString="polynominal()")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Polynomial;

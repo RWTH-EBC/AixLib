@@ -158,5 +158,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-140},{100,120}})),
-    Icon(coordinateSystem(extent={{-100,-140},{100,120}})));
+    Icon(coordinateSystem(extent={{-100,-140},{100,120}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValves;

@@ -135,5 +135,6 @@ First implementation.
 </html>"),
     experiment(
       StopTime=1200,
-      Tolerance=1e-6));
+      Tolerance=1e-6), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

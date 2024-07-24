@@ -243,5 +243,6 @@ First implementation.
         Line(
           points={{42,-18},{46,-38},{36,-52},{48,-72},{40,-86}},
           color={175,175,175},
-          smooth=Smooth.Bezier)}));
+          smooth=Smooth.Bezier)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HANaturalCylinder;

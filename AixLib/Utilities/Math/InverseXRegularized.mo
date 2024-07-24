@@ -18,5 +18,6 @@ Implementation based on Functions.inverseXRegularized.
 </html>"), Icon(graphics={   Text(
           extent={{-90,36},{90,-36}},
           textColor={160,160,164},
-          textString="inverseXRegularized()")}));
+          textString="inverseXRegularized()")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end InverseXRegularized;

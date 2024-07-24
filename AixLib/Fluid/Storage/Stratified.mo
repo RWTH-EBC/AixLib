@@ -208,5 +208,6 @@ Icon(graphics={
         Line(
           points={{22,-74},{70,-74},{70,72}},
           color={127,0,0},
-          pattern=LinePattern.Dot)}));
+          pattern=LinePattern.Dot)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Stratified;

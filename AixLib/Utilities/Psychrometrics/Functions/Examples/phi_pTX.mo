@@ -33,5 +33,6 @@ Added inverse implementation check
 for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end phi_pTX;

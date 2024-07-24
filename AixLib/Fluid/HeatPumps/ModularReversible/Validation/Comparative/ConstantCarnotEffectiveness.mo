@@ -22,5 +22,6 @@ First implementation.
 Validation case for <a href=\"modelica://AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness\">
 AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ConstantCarnotEffectiveness;

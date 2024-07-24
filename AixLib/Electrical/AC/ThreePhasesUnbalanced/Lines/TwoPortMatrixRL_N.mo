@@ -191,5 +191,6 @@ part of it has to be defined.
 The fourth line is the neutral one.
 </p>
 
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortMatrixRL_N;

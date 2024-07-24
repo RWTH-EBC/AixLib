@@ -67,5 +67,6 @@ First implementation.
       Tolerance=1e-6),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{120,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{120,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end AirHeater_u;

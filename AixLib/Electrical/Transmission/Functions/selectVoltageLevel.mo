@@ -57,5 +57,6 @@ The computation is as follows:
 </tr>
 </table>
 
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end selectVoltageLevel;

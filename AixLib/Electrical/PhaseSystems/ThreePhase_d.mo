@@ -33,5 +33,6 @@ package ThreePhase_d "AC system covering only resistive loads with three symmetr
 This package declares the functions that are used to implement
 the AC three-phase balanced and purely resistive models.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreePhase_d;

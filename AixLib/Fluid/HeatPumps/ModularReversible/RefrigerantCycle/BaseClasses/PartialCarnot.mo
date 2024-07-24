@@ -129,5 +129,6 @@ equation
     \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
   </li></ul>
 </html>"),
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialCarnot;

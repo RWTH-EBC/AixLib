@@ -109,5 +109,6 @@ First implementation to address
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1794\">IBPSA, #1794</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPortInterface;

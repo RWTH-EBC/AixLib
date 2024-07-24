@@ -802,5 +802,6 @@ Redesigned model to fix bug in medium balance.
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialFlowMachine;

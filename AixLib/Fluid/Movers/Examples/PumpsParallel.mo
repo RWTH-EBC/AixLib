@@ -149,5 +149,6 @@ First implementation.
 </html>"),
     experiment(
       StopTime=300,
-      Tolerance=1e-06));
+      Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PumpsParallel;

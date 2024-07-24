@@ -43,5 +43,6 @@ Added User's guide.
         Text(
           textColor={0,0,255},
           extent={{-154,104},{146,144}},
-          textString="%name")}));
+          textString="%name")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialGrid;

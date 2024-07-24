@@ -279,5 +279,6 @@ the capacitive effects of the lines.
 The fourth line is the neutral one.
 </p>
 
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortMatrixRLC_N;

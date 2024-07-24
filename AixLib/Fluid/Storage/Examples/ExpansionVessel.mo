@@ -56,5 +56,6 @@ Deleted outdated comment in documentation regarding compressible fluid.
 </li>
 </ul>
 </html>"),
-    experiment(Tolerance=1e-6, StopTime=7200));
+    experiment(Tolerance=1e-6, StopTime=7200), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ExpansionVessel;

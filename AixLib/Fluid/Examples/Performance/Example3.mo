@@ -134,5 +134,6 @@ Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
 </ul>
 </html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example3.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Example3;

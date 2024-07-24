@@ -282,5 +282,6 @@ First implementation.
         "Simulate and plot"),
     experiment(
       StopTime=172800,
-      Tolerance=1e-08));
+      Tolerance=1e-08), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialOneRoomRadiator;

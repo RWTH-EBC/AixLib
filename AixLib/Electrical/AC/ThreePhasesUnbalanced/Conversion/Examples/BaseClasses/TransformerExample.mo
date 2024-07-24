@@ -72,5 +72,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Conversion.Examples</a>.
 The model has a voltage source, a transformer and a load. The transformer
 model is replaceable so that different types of transformers can easily be tested.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TransformerExample;

@@ -54,5 +54,6 @@ First implementation.
         Text(
           extent={{-54,-66},{-106,-54}},
           textColor={0,0,127},
-          textString="incAng")}));
+          textString="incAng")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end DirectTiltedSurface;

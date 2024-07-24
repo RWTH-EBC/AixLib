@@ -9,5 +9,6 @@ record Case600FFResults "BESTEST comparison results free-floating"
 <p>
 BESTEST results for annual heating and cooling loads in free-floating mode.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Case600FFResults;

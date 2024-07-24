@@ -25,5 +25,6 @@ April 14, 2020, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end LimiterHorizontalInfraredIrradiation;

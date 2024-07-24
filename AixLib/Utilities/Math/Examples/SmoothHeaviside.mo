@@ -29,5 +29,6 @@ July 17, 2015, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SmoothHeaviside;

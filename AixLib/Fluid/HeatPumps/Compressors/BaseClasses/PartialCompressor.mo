@@ -165,5 +165,6 @@ November 11, 2016, by Massimo Cimmino:<br/>
 First implementation of this base class.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialCompressor;

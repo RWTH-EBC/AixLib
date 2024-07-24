@@ -55,5 +55,6 @@ The image below show how the phasors are computed when converting from Y to D.
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Electrical/AC/ThreePhasesUnbalanced/Interfaces/YtoD.png\"/>
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WyeToDelta;

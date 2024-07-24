@@ -204,5 +204,6 @@ can reproduce the same results obtained using three separate one phase circuits.
     experiment(Tolerance=1e-6, StopTime=1.0),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesBalanced/Loads/Examples/ThreePhases.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreePhases;

@@ -100,5 +100,6 @@ August 24, 2014, by Marco Bonvini:<br/>
 Documentation and example revised.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ACLine_R;

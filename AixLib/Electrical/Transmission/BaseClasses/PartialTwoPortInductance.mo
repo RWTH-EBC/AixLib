@@ -68,5 +68,6 @@ Added User's guide.
 <p>
 Partial model of an inductance that links two generalized electrical connectors.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPortInductance;

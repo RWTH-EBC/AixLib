@@ -26,4 +26,5 @@ SRCC# = 2012018A.
 The ratings provided for <code>dp_nominal</code> were suspicious
 so 100 Pa is used instead.<br/>
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

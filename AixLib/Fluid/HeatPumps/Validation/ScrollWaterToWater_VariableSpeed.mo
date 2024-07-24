@@ -120,5 +120,6 @@ November 11, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_VariableSpeed;

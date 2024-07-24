@@ -47,5 +47,6 @@ This model demonstrates the use of the csv file writer.
 </p>
 </html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/CSVWriter.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CSVWriter;

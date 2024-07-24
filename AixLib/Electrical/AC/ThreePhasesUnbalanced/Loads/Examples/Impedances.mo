@@ -108,5 +108,6 @@ Created model from previus version and added documentation.
     experiment(Tolerance=1e-6, StopTime=1.0),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Loads/Examples/Impedances.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Impedances;

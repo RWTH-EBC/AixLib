@@ -62,5 +62,6 @@ Added <code>defaultComponentPrefixes</code> and
        Initial version
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Stratos80slash1to12;

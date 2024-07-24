@@ -67,5 +67,6 @@ First implementation.
 </ul>
 </html>"),
 smoothOrder=1,
-derivative(zeroDerivative=R, zeroDerivative=l, zeroDerivative=delta)=der_equalPercentage);
+derivative(zeroDerivative=R, zeroDerivative=l, zeroDerivative=delta)=der_equalPercentage, 
+   __Dymola_LockedEditing="Model from IBPSA");
 end equalPercentage;

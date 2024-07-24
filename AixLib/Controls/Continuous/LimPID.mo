@@ -537,5 +537,6 @@ First implementation.
           visible=strict,
           points={{30,60},{81,60}},
           color={255,0,0},
-          smooth=Smooth.None)}));
+          smooth=Smooth.None)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end LimPID;

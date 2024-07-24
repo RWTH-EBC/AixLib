@@ -145,5 +145,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Lines.TwoPortRLC</a>
 and provides functionalities to parametrize the values of <i>R</i>, <i>L</i> and <i>C</i>
 using either commercial cables or default values.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Line_N;

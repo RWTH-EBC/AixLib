@@ -44,5 +44,6 @@ First implementation.
             100}}), graphics={Text(
           extent={{-28,42},{26,-34}},
           textColor={0,0,255},
-          textString="P")}));
+          textString="P")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckPressure;

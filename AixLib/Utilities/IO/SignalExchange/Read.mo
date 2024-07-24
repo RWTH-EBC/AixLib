@@ -119,5 +119,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1059\">#1059</a>.
             (KPIs==AixLib.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.RadiativeZoneTemperature) or
             (KPIs==AixLib.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.OperativeZoneTemperature) or
             (KPIs==AixLib.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.RelativeHumidity) or
-            (KPIs==AixLib.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.CO2Concentration)) then "zone" else ""))}));
+            (KPIs==AixLib.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.CO2Concentration)) then "zone" else ""))}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Read;

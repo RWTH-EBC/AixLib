@@ -252,5 +252,6 @@ March 19, 2014, by Christoph Nytsch-Geusen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PrescribedOutlet;

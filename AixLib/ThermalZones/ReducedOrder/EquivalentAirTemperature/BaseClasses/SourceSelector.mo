@@ -47,5 +47,6 @@ First implementation.
         Ellipse(lineColor={0,0,255},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          extent={{2,-8},{18,8}})}));
+          extent={{2,-8},{18,8}})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SourceSelector;

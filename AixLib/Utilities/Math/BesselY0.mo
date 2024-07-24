@@ -13,5 +13,6 @@ equation
 </html>"), Icon(graphics={   Text(
           extent={{-90,38},{90,-34}},
           textColor={160,160,164},
-          textString="besselY0()")}));
+          textString="besselY0()")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end BesselY0;

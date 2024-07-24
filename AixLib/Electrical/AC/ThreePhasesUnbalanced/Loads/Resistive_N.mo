@@ -111,5 +111,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Loads.BaseClasses.LoadCtrl_N</a> and
 <a href=\"modelica://AixLib.Electrical.AC.OnePhase.Loads.Resistive\">
 AixLib.Electrical.AC.OnePhase.Loads.Resistive</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Resistive_N;

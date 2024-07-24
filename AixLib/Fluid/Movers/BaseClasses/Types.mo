@@ -61,5 +61,6 @@ First implementation. This is for
 <p>
 This package contains type definitions for movers.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Types;

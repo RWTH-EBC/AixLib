@@ -157,5 +157,6 @@ Added nominal pressure drop for valve as
 this parameter no longer has a default value.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DryCoilEffectivenessNTUPControl;

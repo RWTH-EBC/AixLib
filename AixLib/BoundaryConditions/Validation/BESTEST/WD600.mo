@@ -57,5 +57,6 @@ Rework after comments from pull request
 <td><p>-7</p></td>
 </tr>
 </table>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WD600;

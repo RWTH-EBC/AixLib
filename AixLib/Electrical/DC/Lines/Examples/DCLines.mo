@@ -423,5 +423,6 @@ This model can be used to test how the linearized loads are affected by the volt
 caused by the lines. The longer the distance between the load and the source,
 the bigger is the voltage drop and thus the error introduced by the linearization.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DCLines;

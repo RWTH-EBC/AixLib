@@ -112,5 +112,6 @@ redeclared in order to have as type the record
 using the cables of the grid <code>network.grid.cables</code>. All the lines have the same
 nominal voltage <code>each V_nominal = network.V_nominal</code>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ACSimpleGridMedium;

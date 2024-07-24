@@ -88,5 +88,6 @@ For more information, see
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
   AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end CarnotWithLosses;

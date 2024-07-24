@@ -67,5 +67,6 @@ First implementation.
 Partial model to have consitent parameterization of the
 modular reversible model approaches.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialModularComparison;

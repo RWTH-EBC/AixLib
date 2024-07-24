@@ -64,5 +64,6 @@ May 21, 2017 by Jianjun Hu:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowSource_WeatherData;

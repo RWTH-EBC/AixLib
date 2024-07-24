@@ -24,5 +24,6 @@ works correctly at zero flow if both streams are zero.
 </p>
 </html>"), experiment(Tolerance=1e-06, StopTime=1),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/Validation/ConstantEffectivenessZeroFlowBothStreams.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectivenessZeroFlowBothStreams;

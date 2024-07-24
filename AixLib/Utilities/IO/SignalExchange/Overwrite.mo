@@ -114,5 +114,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1059\">#1059</a>.
           lineColor=DynamicSelect({235,235,235}, if activate.y then {0,255,0}
                     else {235,235,235}),
           fillColor=DynamicSelect({235,235,235}, if activate.y then {0,255,0}
-                    else {235,235,235}))}));
+                    else {235,235,235}))}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Overwrite;

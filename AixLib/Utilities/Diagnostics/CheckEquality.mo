@@ -44,5 +44,6 @@ First implementation.
         Text(
           extent={{-62,-38},{54,-68}},
           textColor={0,0,255},
-          textString="%threShold")}));
+          textString="%threShold")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckEquality;

@@ -30,5 +30,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Conversion.ACACConverter</a> model.
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
  "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Conversion/Examples/Converter.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Converter;

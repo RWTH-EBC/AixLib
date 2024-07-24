@@ -174,5 +174,6 @@ Axial diffusion in water is assumed to be negligibe.
 The water temperature is assumed uniform in a cross section.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlow;

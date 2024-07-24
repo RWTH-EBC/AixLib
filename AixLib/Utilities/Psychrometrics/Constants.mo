@@ -52,5 +52,6 @@ First implementation.
         pattern=LinePattern.None,
         fillPattern=FillPattern.Solid,
         points={{-10.873,41.478},{-10.873,41.478},{-14.048,-4.162},{-9.352,-24.8},{7.912,-24.469},{16.247,0.27},{16.247,0.27},{13.336,0.071},{13.336,0.071},{7.515,-9.983},{-3.134,-7.271},{-2.671,41.214},{-2.671,41.214}},
-        smooth=Smooth.Bezier)}));
+        smooth=Smooth.Bezier)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Constants;

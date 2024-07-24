@@ -60,5 +60,6 @@ First implementation.
 
 annotation (preferredView="info", Documentation(info="<html>
 This package contains type definitions.
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Types;

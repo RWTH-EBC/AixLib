@@ -83,5 +83,6 @@ First implementation.
 </li>
 </ul>
 </html>
-"));
+"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Points_m_flow;

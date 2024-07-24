@@ -108,5 +108,6 @@ First implementation.
         Text(
           extent={{-96,-86},{-54,-96}},
           textColor={0,0,127},
-          textString="lat")}));
+          textString="lat")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SolarAzimuth;

@@ -397,5 +397,6 @@ Icon(graphics={
           pattern=LinePattern.Dot),     Text(
         extent={{-100,100},{-8,70}},
         textString="%name",
-        textColor={0,0,255})}));
+        textColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialStratified;

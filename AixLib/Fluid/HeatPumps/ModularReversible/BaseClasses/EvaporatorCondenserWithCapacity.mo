@@ -292,5 +292,6 @@ equation
   but declared without a <code>parameter</code> keyword so that
   the calculation can follow a temperature or flow-rate based approach.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end EvaporatorCondenserWithCapacity;

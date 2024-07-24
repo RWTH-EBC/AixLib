@@ -89,5 +89,6 @@ AixLib.Electrical.DC.Lines.TwoPortRCLine</a>
 and provides functionalities to parametrize the values of <i>R</i> and <i>C</i> either
 using commercial cables or using default values.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Line;

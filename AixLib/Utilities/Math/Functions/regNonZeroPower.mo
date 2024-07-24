@@ -83,5 +83,6 @@ First implementation.
 </ul>
 </html>"), Inline=true,
            smoothOrder=2,
-           derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower);
+           derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower, 
+   __Dymola_LockedEditing="Model from IBPSA");
 end regNonZeroPower;

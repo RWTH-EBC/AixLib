@@ -19,5 +19,6 @@ the parallel or series configuration of the components
 and the value of parameter <code>from_dp</code>.
 </p>
 </html>"), experiment(Tolerance=1e-6, StopTime=1), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesParallelFlowOptimised.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SeriesParallelFlowOptimised;

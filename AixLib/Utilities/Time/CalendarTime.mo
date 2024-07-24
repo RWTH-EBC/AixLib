@@ -535,5 +535,6 @@ that it changes the time based on which the solar position is computed and TMY3 
           textColor={28,108,200},
           horizontalAlignment=TextAlignment.Right,
           visible=outputUnixTimeStamp,
-          textString="Unix time stamp (GMT)")}));
+          textString="Unix time stamp (GMT)")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTime;

@@ -181,5 +181,6 @@ First implementation.
                                   Text(
           extent={{-161,110},{139,150}},
           textString="%name",
-          textColor={0,0,255})}));
+          textColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowSource_T;

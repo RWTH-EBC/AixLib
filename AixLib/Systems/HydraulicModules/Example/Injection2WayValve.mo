@@ -94,7 +94,7 @@ equation
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=800),
+    experiment(StopTime=800,Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.
@@ -102,6 +102,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos"
         "SImulate and plot"));
 end Injection2WayValve;

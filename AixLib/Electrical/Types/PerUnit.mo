@@ -12,4 +12,5 @@ Added documentation.
 This type is used to declare whether an electric quantity such as voltage
 is expressed in SI units or in per units (i.e., the value divided by its nominal
 value).
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

@@ -126,5 +126,6 @@ First implementation.
 See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_TemperatureProtection;

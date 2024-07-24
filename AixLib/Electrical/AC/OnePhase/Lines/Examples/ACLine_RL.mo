@@ -88,5 +88,6 @@ Since the equivalent impedances are the same, each load draw the same current.
 The line model <code>RL_3</code> is the same as <code>RL_2</code> but it uses
 dynamic phasors.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ACLine_RL;

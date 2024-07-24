@@ -71,5 +71,6 @@ The picture below describes the grid topology.
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Electrical/Transmission/Grids/testGrid2Nodes.png\"/>
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ACSimpleGrid;

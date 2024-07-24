@@ -98,5 +98,6 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
-            -100},{200,200}}), graphics));
+            -100},{200,200}}), graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end EffectivenessNTUMassFlow;

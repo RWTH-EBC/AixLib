@@ -198,5 +198,6 @@ for a discussion and validation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-140,-140},{140,120}},
-          preserveAspectRatio=false)));
+          preserveAspectRatio=false)), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PumpCurveDerivatives;

@@ -66,5 +66,6 @@ See model
 AixLib.Electrical.AC.OnePhase.Lines.Line</a> for more
 information.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Line;

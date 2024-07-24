@@ -25,5 +25,6 @@ AixLib.Utilities.Time.CalendarTime</a>
 block.
 </p>
 </html>"),
-    experiment(Tolerance=1e-6, StopTime=1e+08));
+    experiment(Tolerance=1e-6, StopTime=1e+08), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTime;

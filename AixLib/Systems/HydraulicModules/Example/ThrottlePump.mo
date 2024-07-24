@@ -90,7 +90,7 @@ equation
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(StopTime=600),
+    experiment(StopTime=600,Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>December 06, 2022, by EBC-Modelica group:<br/>
     Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
@@ -101,6 +101,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos"
         "Simulate and plot"));
 end ThrottlePump;

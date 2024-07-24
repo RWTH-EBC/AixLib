@@ -77,5 +77,6 @@ This was implemented to get the corrected documentation string in the weather bu
           lineThickness=0.5),
         Line(
           points={{-12,40},{-12,-45}},
-          thickness=0.5)}));
+          thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckBlackBodySkyTemperature;

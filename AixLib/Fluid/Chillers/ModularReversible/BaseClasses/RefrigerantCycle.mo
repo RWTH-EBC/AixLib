@@ -180,5 +180,6 @@ equation
   sources for performance data differ. This indicates that they are not
   for the same device.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end RefrigerantCycle;

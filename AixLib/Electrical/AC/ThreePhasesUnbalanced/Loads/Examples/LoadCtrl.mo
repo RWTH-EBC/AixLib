@@ -97,5 +97,6 @@ March 10, 2015, by Marco Bonvini:<br/>
 Revised documentation of the example.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end LoadCtrl;

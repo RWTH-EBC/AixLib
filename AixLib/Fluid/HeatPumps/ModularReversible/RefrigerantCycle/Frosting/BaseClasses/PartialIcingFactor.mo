@@ -39,5 +39,6 @@ The icing factor is a heat transfer modifier between <i>0</i> and <i>1</i>, wher
     \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
   </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialIcingFactor;

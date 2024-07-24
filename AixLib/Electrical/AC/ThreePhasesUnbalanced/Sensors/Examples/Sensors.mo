@@ -129,5 +129,6 @@ they all produce <i>10</i> kW.
 experiment(StopTime=1.0, Tolerance=1e-6),
 __Dymola_Commands(file=
  "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Sensors/Examples/Sensors.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Sensors;

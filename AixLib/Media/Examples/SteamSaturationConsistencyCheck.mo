@@ -117,5 +117,6 @@ for the steam model.
 Errors are presented as percent differences between the standard property functions - 
 e.g medium.specificEnthalpy(saturatedState) - and the IF97 saturated property functions as the baseline.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SteamSaturationConsistencyCheck;

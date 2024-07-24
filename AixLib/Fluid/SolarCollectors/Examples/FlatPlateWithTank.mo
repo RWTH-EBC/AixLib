@@ -280,5 +280,6 @@ First implementation
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-200,-100},{180,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end FlatPlateWithTank;

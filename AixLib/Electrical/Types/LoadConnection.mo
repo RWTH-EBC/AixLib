@@ -13,4 +13,5 @@ Added documentation.
 </html>", info="<html>
 This type is used to describe different types of connections that can be used in
 unbalanced three phase systems.
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

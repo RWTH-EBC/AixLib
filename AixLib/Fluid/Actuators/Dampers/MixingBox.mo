@@ -372,5 +372,6 @@ See
 AixLib.Fluid.Actuators.Dampers.Exponential</a>
 for the description of the exponential damper model.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingBox;

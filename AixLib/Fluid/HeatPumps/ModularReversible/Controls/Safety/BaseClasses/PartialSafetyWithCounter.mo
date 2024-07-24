@@ -65,5 +65,6 @@ equation
 <p>
   This block counts the number of errors occurred in a specific safety block.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialSafetyWithCounter;

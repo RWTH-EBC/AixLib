@@ -29,5 +29,6 @@ First implementation.
 </html>"),
     experiment(
       StopTime=1080,
-      Tolerance=1e-6));
+      Tolerance=1e-6), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SteamHumidifier_X;

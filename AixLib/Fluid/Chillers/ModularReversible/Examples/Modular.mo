@@ -149,5 +149,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chiller
   <a href=\"modelica://AixLib.Fluid.Chillers.ModularReversible.Modular\">
   AixLib.Fluid.Chillers.ModularReversible.Modular</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Modular;

@@ -156,5 +156,6 @@ First implementation.
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/SolarCollectors/Examples/FlatPlateTotalArea.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=86400.0));
+    experiment(Tolerance=1e-6, StopTime=86400.0), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end FlatPlateTotalArea;
