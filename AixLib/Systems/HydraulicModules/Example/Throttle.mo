@@ -83,6 +83,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos"
         "Simulate and plot"));
 end Throttle;

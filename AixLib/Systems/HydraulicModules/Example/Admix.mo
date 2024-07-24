@@ -102,6 +102,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos"
         "Simulate and plot"));
 end Admix;

@@ -181,6 +181,6 @@ equation
       StopTime=2700,
       Interval=1,Tolerance=1e-06),
     __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Cooler.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Cooler.mos"
         "Simulate and Plot"));
 end AHU2_Cooler;

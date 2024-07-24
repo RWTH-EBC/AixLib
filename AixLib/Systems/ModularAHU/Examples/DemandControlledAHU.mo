@@ -287,6 +287,6 @@ The nominal values for heat exchangers are derived from data sheets and experime
 </ul>
 </html>"),
 __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/DemandControlledAHU.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/DemandControlledAHU.mos"
         "Simulate and plot"));
 end DemandControlledAHU;

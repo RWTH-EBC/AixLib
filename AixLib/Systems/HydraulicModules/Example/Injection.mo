@@ -104,6 +104,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos"
         "SImulate and plot"));
 end Injection;

@@ -163,6 +163,6 @@ equation
     experiment(
       StopTime=7200,
       Interval=1,Tolerance=1e-06),
-    __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Preheater.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Preheater.mos"
         "Simulate and Plot"));
 end AHU2_Preheater;
