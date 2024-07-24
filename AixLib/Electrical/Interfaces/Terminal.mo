@@ -75,5 +75,6 @@ Ruediger Franke and Hansjurg Wiesmann.<br/>
 Flexible modeling of electrical power systems - the Modelica PowerSystems library</a>.<br/>
 Proc. of the 10th Modelica Conference, Lund, Sweden, March 2014.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Terminal;

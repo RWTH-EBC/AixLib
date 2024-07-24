@@ -7,4 +7,5 @@ record Case900Mass = AixLib.ThermalZones.ISO13790.Data.Generic(
 <p>
 Thermal mass for Case900Mass.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

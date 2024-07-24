@@ -14,5 +14,6 @@ to constant <i>1</i>.
   First implementation (see issue <a href=
   \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
 </li></ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end NoFrosting;

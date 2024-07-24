@@ -306,5 +306,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics));
+            100}}), graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXTwoUTube;

@@ -88,5 +88,6 @@ First implementation.
           extent={{-16,18},{16,-14}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayButterfly;

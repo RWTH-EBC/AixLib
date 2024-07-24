@@ -56,5 +56,6 @@ that are part of the cable, and the diamater of the conductor <i>d</i>.
 <!-- ************ -->
 </table>
 
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end computeGMR;

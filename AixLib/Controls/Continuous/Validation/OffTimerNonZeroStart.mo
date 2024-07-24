@@ -19,5 +19,6 @@ First implementation.
 <a href=\"Modelica://AixLib.Controls.Continuous.OffTimer\">AixLib.Controls.Continuous.OffTimer</a>
 for negative start time.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end OffTimerNonZeroStart;

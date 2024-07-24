@@ -87,5 +87,6 @@ Icon(
     Bitmap(
       visible = warnAboutOnePortConnection,
       extent={{-96,-82},{-64,-50}},
-      fileName="modelica://AixLib/Resources/Images/Fluid/Sensors/warningIcon.png")}));
+      fileName="modelica://AixLib/Resources/Images/Fluid/Sensors/warningIcon.png")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialAbsoluteSensor;

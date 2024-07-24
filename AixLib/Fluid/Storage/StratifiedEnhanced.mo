@@ -162,5 +162,6 @@ First implementation.
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={255,255,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedEnhanced;

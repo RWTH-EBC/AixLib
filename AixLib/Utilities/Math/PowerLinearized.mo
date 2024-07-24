@@ -39,5 +39,6 @@ November 29, 2013, by Marcus Fuchs:<br/>
 Implementation based on Functions.powerLinearized.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PowerLinearized;

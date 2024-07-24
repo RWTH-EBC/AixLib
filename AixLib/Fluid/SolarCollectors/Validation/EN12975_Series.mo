@@ -153,5 +153,6 @@ First implementation to validate
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/SolarCollectors/Validation/EN12975_Series.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=86400));
+    experiment(Tolerance=1e-6, StopTime=86400), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end EN12975_Series;

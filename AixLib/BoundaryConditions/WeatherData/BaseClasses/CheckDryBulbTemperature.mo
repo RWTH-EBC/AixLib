@@ -79,5 +79,6 @@ First implementation.
           lineThickness=0.5),
         Line(
           points={{-10,46},{-10,-39}},
-          thickness=0.5)}));
+          thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckDryBulbTemperature;

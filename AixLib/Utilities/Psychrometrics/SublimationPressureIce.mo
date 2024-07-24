@@ -101,5 +101,6 @@ First implementation.
           lineColor={0,0,255},
           smooth=Smooth.Bezier,
           fillPattern=FillPattern.Solid,
-          fillColor={0,0,255})}));
+          fillColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SublimationPressureIce;

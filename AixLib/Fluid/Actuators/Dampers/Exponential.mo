@@ -139,5 +139,6 @@ First implementation.
           fillPattern=FillPattern.Solid), Polygon(
           points={{-22,-32},{26,10},{26,-2},{-22,-44},{-22,-32}},
           lineColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Exponential;

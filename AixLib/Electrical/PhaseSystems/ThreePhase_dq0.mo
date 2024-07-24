@@ -130,5 +130,6 @@ package ThreePhase_dq0 "AC system in dqo representation"
 This package declares the functions that are used to implement
 the AC three-phase balanced models using the DQ0 representation.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreePhase_dq0;

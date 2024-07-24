@@ -129,5 +129,6 @@ First implementation.
         Text(
           extent={{-88,-24},{-64,-36}},
           textColor={0,0,127},
-          textString="nOpa")}));
+          textString="nOpa")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end BlackBody;

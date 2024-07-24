@@ -20,5 +20,6 @@ June 4, 2014, by Marco Bonvini:<br/>
 Added the information section.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialPluggableUnbalanced;

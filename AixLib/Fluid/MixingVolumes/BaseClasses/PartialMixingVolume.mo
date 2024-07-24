@@ -587,5 +587,6 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
         Text(
           extent={{62,28},{-58,-22}},
           textColor={255,255,255},
-          textString=DynamicSelect("", String(T-273.15, format=".1f")))}));
+          textString=DynamicSelect("", String(T-273.15, format=".1f")))}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialMixingVolume;

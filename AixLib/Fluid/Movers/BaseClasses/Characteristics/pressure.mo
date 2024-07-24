@@ -109,5 +109,6 @@ is now called by
 AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end pressure;

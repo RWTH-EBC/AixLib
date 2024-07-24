@@ -120,5 +120,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})));
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ConstantHeatInjection_100Boreholes;

@@ -84,4 +84,5 @@ April 10, 2019, by Javier Arroyo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

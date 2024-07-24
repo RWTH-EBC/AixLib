@@ -162,5 +162,6 @@ equation
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
   UsersGuide</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialModularRefrigerantCycle;

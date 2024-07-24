@@ -212,5 +212,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, initialScale=0.1),
-    graphics));
+    graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXOneUTube;

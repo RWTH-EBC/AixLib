@@ -290,5 +290,6 @@ January 29, 2012, by Thierry S. Nouidui:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ACACTransformer;

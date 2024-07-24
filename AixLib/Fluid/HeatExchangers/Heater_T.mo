@@ -172,5 +172,6 @@ AixLib, #763</a>.
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0})}));
+        Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Heater_T;

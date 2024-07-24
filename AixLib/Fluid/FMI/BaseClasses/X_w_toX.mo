@@ -52,5 +52,6 @@ input <code>X</code>, because the conversion from scalar to vector
 needs to access the conditional connector, but conditional connectors
 can only be used in <code>connect</code> statements.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end X_w_toX;

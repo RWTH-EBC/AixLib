@@ -22,5 +22,6 @@ AixLib.Utilities.Math.BesselJ1</a>.
 July 17, 2018, by Massimo Cimmino:<br/>First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end BesselJ1;

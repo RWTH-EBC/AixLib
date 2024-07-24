@@ -154,5 +154,6 @@ First implementation.
         Line(
           points={{74,68},{84,72},{100,82}},
           color={175,175,175},
-          smooth=Smooth.Bezier)}));
+          smooth=Smooth.Bezier)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Grid;

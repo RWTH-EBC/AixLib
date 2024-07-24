@@ -216,5 +216,6 @@ First implementation.
             100,100}}),
                     graphics),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics));
+            100}}), graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialEightPortInterface;

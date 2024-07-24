@@ -68,5 +68,6 @@ First implementation.
           visible=use_p_in,
           extent={{-90,108},{-34,16}},
           textColor={0,0,0},
-          textString="p_in")}));
+          textString="p_in")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HumidityRatioVaporPressure;

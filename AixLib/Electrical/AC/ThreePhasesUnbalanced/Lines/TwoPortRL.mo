@@ -177,5 +177,6 @@ October 6, 2014, by Marco Bonvini:<br/>
 Revised documentation and model.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortRL;

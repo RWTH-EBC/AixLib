@@ -23,5 +23,6 @@ Added model and documentation.
 Interface model for an AC three-phase unbalanced component with two ports
 and with neutral cable.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPort_N;

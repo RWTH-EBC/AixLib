@@ -250,5 +250,6 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
       Text(
           extent={{-152,100},{148,140}},
           textString="%name",
-          textColor={0,0,255})}));
+          textColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolume;

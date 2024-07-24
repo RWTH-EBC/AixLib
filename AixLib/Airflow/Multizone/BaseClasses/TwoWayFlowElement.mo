@@ -187,5 +187,6 @@ This avoids a warning during translation.
 <li>February 4, 2005 by Michael Wetter:<br/>
        Released first version.
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayFlowElement;

@@ -106,5 +106,6 @@ package TwoConductor "Two conductors for DC components"
 This package declares the functions that are used to implement
 the DC models with double conductors.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoConductor;

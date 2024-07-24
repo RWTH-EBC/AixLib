@@ -354,5 +354,6 @@ First implementation.
           fillPattern=FillPattern.Solid,
           visible=portFlowDirection_3==Modelica.Fluid.Types.PortFlowDirection.Leaving,
           origin={26,-125},
-          rotation=90)}));
+          rotation=90)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialThreeWayResistance;

@@ -33,5 +33,6 @@ First implementation.
 </html>"),
   experiment(StartTime=100000, Tolerance=1e-6, StopTime=300000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/Examples/ZenithAngle.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ZenithAngle;

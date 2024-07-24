@@ -45,5 +45,6 @@ http://www.carrier.com.kw/pdf/pdf/Chilled%20Water%20Products/30XW.pdf</a>
   \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Carrier30XWP1012_1MW;

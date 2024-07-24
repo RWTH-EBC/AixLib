@@ -18,5 +18,6 @@ Implementation based on Functions.quadraticLinear.
 </html>"), Icon(graphics={   Text(
           extent={{-86,38},{94,-34}},
           textColor={160,160,164},
-          textString="quadraticLinear()")}));
+          textString="quadraticLinear()")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end QuadraticLinear;

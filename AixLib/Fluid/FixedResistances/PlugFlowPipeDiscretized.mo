@@ -273,5 +273,6 @@ is aggregated to a single instance of
 AixLib.Fluid.FixedResistances.HydraulicDiameter</a> rather than being
 instantiated separately for each segment.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowPipeDiscretized;

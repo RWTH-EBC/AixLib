@@ -22,5 +22,6 @@ First implementation.
 </ul>
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/FlowSplitter_u.mos"
-        "Export FMU"));
+        "Export FMU"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end FlowSplitter_u;

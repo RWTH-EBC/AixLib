@@ -67,5 +67,6 @@ March 6, 2020, by Kathryn Hinkelman:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SteamDerivativeCheck;

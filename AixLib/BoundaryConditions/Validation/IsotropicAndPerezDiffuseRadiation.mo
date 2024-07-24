@@ -103,5 +103,6 @@ This model outputs the global radiation with a certain inclination and orientati
 using the isotropic sky model and the Perez sky model. The variable <code>H</code> is
 the global radiation calculated using the isotropic sky model, while <code>HPer</code> is
 the global radiation calculated using the Perez sky model.</p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end IsotropicAndPerezDiffuseRadiation;

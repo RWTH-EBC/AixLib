@@ -140,5 +140,6 @@ This test includes an inlet temperature step under a constant mass flow rate.
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-120,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowPipe;

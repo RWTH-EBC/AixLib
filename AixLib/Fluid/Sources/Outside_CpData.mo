@@ -198,5 +198,6 @@ First implementation.
         Text(
           extent={{-54,66},{2,22}},
           textColor={255,255,255},
-          textString="Cp")}));
+          textString="Cp")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData;

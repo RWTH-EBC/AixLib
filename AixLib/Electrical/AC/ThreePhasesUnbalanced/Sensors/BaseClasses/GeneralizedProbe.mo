@@ -44,5 +44,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Sensors.ProbeWye</a> and
 AixLib.Electrical.AC.ThreePhasesUnbalanced.Sensors.ProbeDelta</a>.
 The output connectors are for the RMS voltage and the angle of the voltage phasors.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end GeneralizedProbe;

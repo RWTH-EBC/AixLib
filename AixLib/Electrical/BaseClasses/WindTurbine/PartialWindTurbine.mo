@@ -184,5 +184,6 @@ October 31, 2013, by Marco Bonvini:<br/>
 Models included in the AixLib library. Modified the information section.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialWindTurbine;

@@ -65,5 +65,6 @@ July 29, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end basicFlowFunction_m_flow_der2;

@@ -94,5 +94,6 @@ January 28, 2015, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end EightPortFlowResistanceParameters;

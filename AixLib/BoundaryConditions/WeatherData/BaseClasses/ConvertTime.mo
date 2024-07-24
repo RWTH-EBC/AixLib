@@ -119,5 +119,6 @@ First implementation.
         Line(
           points={{60,-2},{-66,-2}}),
         Line(
-          points={{60,-32},{-66,-32}})}));
+          points={{60,-32},{-66,-32}})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ConvertTime;

@@ -26,5 +26,6 @@ Changed number format to avoid a warning in Optimica about number to be too larg
 to be represented as an Integer.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Case600Results;

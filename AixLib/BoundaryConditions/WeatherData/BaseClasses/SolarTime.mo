@@ -59,5 +59,6 @@ First implementation.
         Text(
           extent={{-96,-44},{-44,-60}},
           textColor={0,0,127},
-          textString="locTim")}));
+          textString="locTim")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SolarTime;

@@ -156,5 +156,6 @@ annotation (Documentation(info="<html>
 This package declares the functions that are used to implement
 the different phase systems.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialPhaseSystem;

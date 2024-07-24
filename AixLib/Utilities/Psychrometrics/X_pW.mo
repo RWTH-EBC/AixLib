@@ -58,5 +58,6 @@ First implementation.
           textString="pW"), Text(
           extent={{46,44},{94,-24}},
           textColor={0,0,0},
-          textString="X")}));
+          textString="X")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end X_pW;

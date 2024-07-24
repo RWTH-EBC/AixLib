@@ -102,5 +102,6 @@ record Generic "Generic record definition for safety control blocks"
   </li>
 </ul>
 </html>
-"));
+"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

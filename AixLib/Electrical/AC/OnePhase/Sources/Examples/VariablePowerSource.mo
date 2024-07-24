@@ -63,5 +63,6 @@ Revised model and documentation.
 This example shows how to use a variable generator model. The model has to be used
 together with a voltage source generator.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end VariablePowerSource;

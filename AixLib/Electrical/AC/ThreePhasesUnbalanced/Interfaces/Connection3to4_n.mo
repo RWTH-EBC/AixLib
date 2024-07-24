@@ -68,5 +68,6 @@ Revised documentation.
 Adapter between electric connectors type n for AC three-phase unbalanced systems.
 This adapter connects a connector without neutral cable with a one that has it
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Connection3to4_n;

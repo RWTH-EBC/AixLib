@@ -29,5 +29,6 @@ Revised documentation.
 </html>", info="<html>
 <p>Electric connector type p for AC three-phase unbalanced systems
 with neutral cable connection.</p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Terminal4_p;

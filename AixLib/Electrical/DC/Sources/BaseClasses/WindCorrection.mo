@@ -71,5 +71,6 @@ February 1, 2013, by Thierry S. Nouidui:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WindCorrection;

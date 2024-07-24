@@ -86,5 +86,6 @@ First implementation for
 experiment(Tolerance=1E-6, StopTime=1.0),
 __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/BaseClasses/Validation/MixingVolumeHeatPortWater.mos"
-  "Simulate and plot"));
+  "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeHeatPortWater;

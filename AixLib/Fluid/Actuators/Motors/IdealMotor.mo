@@ -183,5 +183,6 @@ First implementation.
           thickness=0.5),
         Line(
           points={{6,-13},{16,-18},{6,-23}},
-          thickness=0.5)}));
+          thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end IdealMotor;

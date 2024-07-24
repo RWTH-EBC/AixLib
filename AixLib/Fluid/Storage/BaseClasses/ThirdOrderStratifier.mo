@@ -182,5 +182,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None,
-          lineColor={0,0,0})}));
+          lineColor={0,0,0})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThirdOrderStratifier;

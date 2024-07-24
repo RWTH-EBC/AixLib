@@ -63,5 +63,6 @@ AixLib/Resources/Data/Fluid/HeatPumps/BaseClasses/LargeScaleWaterToWaterParamete
     \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
   </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end LargeScaleWaterToWaterDeclarations;

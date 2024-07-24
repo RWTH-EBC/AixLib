@@ -127,5 +127,6 @@ This is a partial model that once extended can represent either DC or AC network
 This model is based on the assumption that the topology of the network does not depend on
 the type of cables that connect the nodes.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialNetwork;

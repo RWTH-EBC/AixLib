@@ -64,5 +64,6 @@ First implementation.
 </li>
 </ul>
 </html>"),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end OriginalModel;

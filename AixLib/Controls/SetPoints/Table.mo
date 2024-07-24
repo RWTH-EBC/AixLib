@@ -134,5 +134,6 @@ First implementation.
     Line(
       points={{26,24},{77,24}},
       color={0,0,255},
-      thickness=0.5)}));
+      thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Table;

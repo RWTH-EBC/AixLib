@@ -69,5 +69,6 @@ First implementation.
         Text(
           extent={{-98,-40},{-22,-58}},
           textColor={0,0,127},
-          textString="solHouAng")}));
+          textString="solHouAng")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ZenithAngle;

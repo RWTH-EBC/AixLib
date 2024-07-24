@@ -65,5 +65,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{
-            100,100}})));
+            100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PropertySource_h;

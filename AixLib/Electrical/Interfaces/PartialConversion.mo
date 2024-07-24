@@ -36,5 +36,6 @@ current at the <code>terminal_p</code>, and the variables
 current at the <code>terminal_n</code>.
 These variables are used in conversion models such as transformers and AC/DC converters.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialConversion;

@@ -169,5 +169,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
-                    graphics));
+                    graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end EightPort;

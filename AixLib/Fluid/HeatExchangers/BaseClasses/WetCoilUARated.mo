@@ -211,5 +211,6 @@ conditions should correspond to a fully-dry or a fully-wet coil regime.
 The modeling uncertainty yielded by partially-wet rated conditions
 has not been assessed yet.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilUARated;

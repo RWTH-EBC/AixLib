@@ -179,5 +179,6 @@ equation
   Red crosses indicate the point to write into the 2D table in Modelica.
 </p>
 
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialOperationalEnvelope;

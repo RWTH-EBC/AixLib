@@ -70,5 +70,6 @@ First implementation.
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/OnePhase/Loads/Examples/ParallelResistors.mos"
-        "Simulate and plot"));
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ParallelResistors;

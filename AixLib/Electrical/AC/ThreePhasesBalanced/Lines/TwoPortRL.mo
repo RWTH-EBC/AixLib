@@ -25,5 +25,6 @@ See model
 AixLib.Electrical.AC.OnePhase.Lines.TwoPortRL</a> for more
 information.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortRL;

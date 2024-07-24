@@ -13,4 +13,5 @@ Added User's guide.
 Enumeration for materials that can be used
 for cables.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

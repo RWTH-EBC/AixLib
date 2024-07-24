@@ -110,5 +110,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
         Text(
           extent={{-104,94},{-60,66}},
           textColor={0,0,255},
-          textString="u")}));
+          textString="u")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

@@ -15,4 +15,5 @@ info="<html>
 <p>
 Internal heat capacity per unit area of the floor for medium buildings.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

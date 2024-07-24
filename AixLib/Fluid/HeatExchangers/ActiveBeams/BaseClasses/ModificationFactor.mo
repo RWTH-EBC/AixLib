@@ -130,5 +130,6 @@ First implementation.
             100}}), graphics={Text(
           extent={{100,100},{-100,-100}},
           textColor={0,0,0},
-          textString="f")}));
+          textString="f")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ModificationFactor;

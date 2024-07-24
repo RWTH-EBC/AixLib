@@ -50,5 +50,6 @@ First implementation.
         Text(
           extent={{-95,-49},{-12,-104}},
           textColor={0,0,255},
-          textString="dTSup")}));
+          textString="dTSup")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HeatPumps;

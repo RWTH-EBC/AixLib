@@ -13,4 +13,5 @@ Added documentation.
 </html>", info="<html>
 This type is used to define which type of voltage level is used.
 This is typically used for computing or selecting the line cables.
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

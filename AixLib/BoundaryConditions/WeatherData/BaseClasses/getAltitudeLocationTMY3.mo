@@ -33,5 +33,6 @@ May 2, 2021, by Ettore Zanetti:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end getAltitudeLocationTMY3;

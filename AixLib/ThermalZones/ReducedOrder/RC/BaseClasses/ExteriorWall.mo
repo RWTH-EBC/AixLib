@@ -138,5 +138,6 @@ equation
    Line(points = {{18, -32}, {-20, -32}}, color = {0, 0, 0}, thickness = 0.5,
    smooth = Smooth.None),
    Line(points = {{14, -44}, {-15, -44}}, color = {0, 0, 0}, thickness = 0.5,
-   smooth = Smooth.None)}));
+   smooth = Smooth.None)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ExteriorWall;

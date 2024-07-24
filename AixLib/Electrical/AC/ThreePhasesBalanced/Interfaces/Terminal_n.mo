@@ -34,5 +34,6 @@ connector Terminal_n "AC three-phase balanced terminal ('negative')"
           points={{-100,50},{-100,-50},{0,-50},{0,50},{-100,50}},
           lineColor={0,120,120},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Terminal_n;

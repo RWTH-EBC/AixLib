@@ -159,5 +159,6 @@ First implementation.</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+            100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowHeatLoss;

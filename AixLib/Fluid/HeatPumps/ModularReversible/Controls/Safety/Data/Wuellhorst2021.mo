@@ -37,5 +37,6 @@ record Wuellhorst2021
   </li>
 </ul>
 </html>
-"));
+"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Wuellhorst2021;

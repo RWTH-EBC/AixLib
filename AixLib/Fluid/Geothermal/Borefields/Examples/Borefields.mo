@@ -191,5 +191,6 @@ First implementation.
 </ul>
 </html>"),
     experiment(
-      StopTime=36000,Tolerance=1e-6));
+      StopTime=36000,Tolerance=1e-6), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Borefields;

@@ -192,5 +192,6 @@ First implementation for
   Icon(graphics={Text(
           extent={{-40,18},{38,-20}},
           textColor={255,255,255},
-          textString="dh")}));
+          textString="dh")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HydraulicDiameter;

@@ -224,5 +224,6 @@ First Implementation.
   <p align=\"center\">
   <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/ThreeElements.png\" alt=\"image\"/>
   </p>
-  </html>"));
+  </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreeElements;

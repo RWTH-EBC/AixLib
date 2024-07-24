@@ -36,5 +36,6 @@ May 11, 2018, by Michael Wetter:
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PropertyCoefficients;

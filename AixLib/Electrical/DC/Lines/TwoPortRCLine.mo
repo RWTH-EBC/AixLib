@@ -94,5 +94,6 @@ October 31, 2013, by Marco Bonvini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortRCLine;

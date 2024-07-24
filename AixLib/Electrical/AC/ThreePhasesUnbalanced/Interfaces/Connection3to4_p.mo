@@ -66,5 +66,6 @@ Revised documentation.
 Adapter between electric connectors type p for AC three-phase unbalanced systems.
 This adapter connects two connectors without and without a neutral cable.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Connection3to4_p;

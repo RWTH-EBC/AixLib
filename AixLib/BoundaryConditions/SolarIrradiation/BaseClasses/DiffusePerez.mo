@@ -126,5 +126,6 @@ First implementation.
         Text(
           extent={{-52,-76},{-104,-64}},
           textColor={0,0,127},
-          textString="incAng")}));
+          textString="incAng")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end DiffusePerez;

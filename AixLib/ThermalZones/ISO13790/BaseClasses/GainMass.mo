@@ -45,5 +45,6 @@ AixLib.ThermalZones.ISO13790.Zone5R1C.Zone</a>
 Mar 16, 2022, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
-</ul></html>"));
+</ul></html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end GainMass;

@@ -97,5 +97,6 @@ other specific parameters like the geometrical properties.
 The record contains four partial replaceable functions used to compute
 the properties of the cable such its resistance, inductance or capacitance.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end BaseCable;

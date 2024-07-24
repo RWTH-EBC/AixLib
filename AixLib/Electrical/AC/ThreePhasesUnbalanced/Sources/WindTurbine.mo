@@ -23,5 +23,6 @@ For more information, see
 <a href=\"modelica://AixLib.Electrical.AC.OnePhase.Sources.WindTurbine\">
 AixLib.Electrical.AC.OnePhase.Sources.WindTurbine</a>.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WindTurbine;

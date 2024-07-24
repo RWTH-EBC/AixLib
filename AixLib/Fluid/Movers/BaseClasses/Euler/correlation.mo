@@ -146,5 +146,6 @@ First implementation. This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1645\">#1645</a>.
 </li>
 </ul>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end correlation;

@@ -721,5 +721,6 @@ First implementation.
           extent={{-90,-6},{-46,-50}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={120,120,120})}));
+          fillColor={120,120,120})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PerfectGas;

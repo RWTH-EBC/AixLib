@@ -416,5 +416,6 @@ The modeling approach also results in <i>n</i>-th order differentiable model
 depending on the selection of the underlying membership functions. This cooling
 coil model is once continuously differentiable at the mode switches.
 </p>
-</html>"));
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilDryWetRegime;
