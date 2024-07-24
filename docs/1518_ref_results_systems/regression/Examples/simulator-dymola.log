@@ -196,19 +196,6 @@ rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU
 simulateModel("AixLib.Systems.ModularAHU.Examples.DemandControlledAHU", tolerance=1e-5, startTime=5961600, stopTime=6566400, outputInterval=120, resultFile="AixLib.Systems.ModularAHU.Examples.DemandControlledAHU");
 Translation of AixLib.Systems.ModularAHU.Examples.DemandControlledAHU:
 The DAE has 11457 scalar unknowns and 11457 scalar equations.
-Warning: The initial conditions are not fully specified.
-Dymola has selected default initial conditions.
-Warning: Assuming fixed start value for the continuous states:
-    ctrAHUCO2.ctrCo.PID.D.x(start = ctrAHUCO2.ctrCo.PID.D.x_start)
-    ctrAHUCO2.ctrCo.PID.I.y(start = 0.0)
-    ctrAHUCO2.ctrPh.PID.D.x(start = ctrAHUCO2.ctrPh.PID.D.x_start)
-    ctrAHUCO2.ctrPh.PID.I.y(start = 0.0)
-    ctrAHUCO2.ctrRh.PID.D.x(start = ctrAHUCO2.ctrRh.PID.D.x_start)
-    ctrAHUCO2.ctrRh.PID.I.y(start = 0.0)
-    ctrAHUCO2.PID_CO2.I.y(start = 0.0)
-    ctrAHUCO2.PID_SteamHum.I.y(start = 0.0)
-    ctrAHUCO2.PID_VflowSup.I.y(start = 0.0)
- 
 Redundant consistent initial conditions.
 Removed the following equations which are redundant and consistent: 
   genericAHU.preheater.dynamicHX.vol1[2].p_start = genericAHU.preheater.dynamicHX.p1_start;
@@ -294,7 +281,6 @@ Translated Model
   Continuous time states: 272 scalars
   Time-varying variables: 3207 scalars
   Alias variables: 7517 scalars
-  Assumed default initial conditions: 9
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {5, 6, 3, 5, 5, 22, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
   Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -583,7 +569,6 @@ Statically selected continuous time states
   thermalZone.ventCont.dEMA.ExpAVG.x[1]
   thermalZone.ventCont.dEMA.ExpAVG1.x[1]
  
-Warning: WARNINGS have been issued.
 Finished
  = true
 

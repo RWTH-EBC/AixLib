@@ -36,7 +36,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.Heater",
     "simulation": {
-      "elapsed_time": 0.0233,
+      "elapsed_time": 0.0229,
       "final_time": 3600,
       "jacobians": 31,
       "start_time": 0,
@@ -93,7 +93,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
     "simulation": {
-      "elapsed_time": 49.3,
+      "elapsed_time": 48.9,
       "final_time": 6566400.0,
       "jacobians": 23845,
       "start_time": 5961600.0,
@@ -162,7 +162,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
     "simulation": {
-      "elapsed_time": 0.127,
+      "elapsed_time": 0.131,
       "final_time": 7200,
       "jacobians": 43,
       "start_time": 0,
