@@ -207,7 +207,9 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
     minVflowPer=0.2,
     CO2set=900,
     useTwoFanCtr=false,
-    kCO2=3000/3600) annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+    kCO2=3000/3600,
+    initType=Modelica.Blocks.Types.Init.InitialState)
+                    annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Utilities.Psychrometrics.Phi_pTX phi
     annotation (Placement(transformation(extent={{128,56},{148,76}})));
   BoundaryConditions.WeatherData.Bus weaBus1
