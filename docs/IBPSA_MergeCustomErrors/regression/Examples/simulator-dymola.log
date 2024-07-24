@@ -1,129 +1,1588 @@
  = true
 
 
-rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
-Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
-The model has the same number of unknowns and equations: 677
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 677
-Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool successful.
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir:
+The model has the same number of unknowns and equations: 2037
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1877+29*thermalZone.zoneParam.nOrientations+2*thermalZone.ROM.volMoiAir.dynBal.nPorts  +thermalZone.humanTotHeaDependent.productHeatOutput.nu+thermalZone.humanTotHeaDependent.productMoistureOutput.nu  +thermalZone.machinesSenHea.productHeatOutput.nu+thermalZone.lights.productHeatOutput.nu  +thermalZone.SumQLat1_flow.nu+max([size(internalGains.columns, 1); size(  internalGains.offset, 1)])
+scalar unknowns and
+  1908+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+(if sourcAir.use_Xi_in then 2 else (if   sourcAir.use_X_in then 1 else 3))+3*sourcAir.nPorts+(if  not sourcAir.use_m_flow_in   then 1 else 0)+(if  not sourcAir.use_T_in then 1 else 0)+(if sinAir.use_Xi_in   then 2 else (if sinAir.use_X_in then 1 else 3))+3*sinAir.nPorts+(if  not   sinAir.use_p_in then 1 else 0)+(if  not sinAir.use_T_in then 1 else 0)+19*  thermalZone.zoneParam.nOrientations+(if  not thermalZone.eqAirTempWall.TGroundFromInput   then 1 else 0)+5*thermalZone.ROM.volMoiAir.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2037
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir successful.
 Declaring variable: Boolean rCheck ;
 
-Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
-Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
-Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
-Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
-Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
-Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAir.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.statistics.log");
 
 
-rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos");
-simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
-Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
-The DAE has 677 scalar unknowns and 677 scalar equations.
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAir.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir:
+The DAE has 2037 scalar unknowns and 2037 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (thermalZone.ROM.volMoiAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (thermalZone.ROM.volMoiAir.dynBal.initialize_p) then 
+      thermalZone.ROM.volMoiAir.dynBal.medium.p = thermalZone.ROM.volMoiAir.dynBal.p_start;
+    end if;
+  else
+    if (thermalZone.ROM.volMoiAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (thermalZone.ROM.volMoiAir.dynBal.initialize_p) then 
+        der(thermalZone.ROM.volMoiAir.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    sinAir.p(start = 101325)
+    thermalZone.p_start(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinAir.p = thermalZone.ROM.volMoiAir.dynBal.p_start;
+ 
  
 Statistics
  
 Original Model
-  Number of components: 161
-  Variables: 1600
-  Constants: 41 (41 scalars)
-  Parameters: 725 (917 scalars)
-  Unknowns: 834 (704 scalars)
-  Differentiated variables: 3 scalars
-  Equations: 700
-  Nontrivial: 575
+  Number of components: 310
+  Variables: 2805
+  Constants: 86 (86 scalars)
+  Parameters: 792 (2610 scalars)
+  Unknowns: 1927 (2049 scalars)
+  Differentiated variables: 5 scalars
+  Equations: 1377
+  Nontrivial: 1271
 Translated Model
-  Constants: 579 scalars
-  Free parameters: 125 scalars
-  Parameter depending: 369 scalars
-  Continuous time states: 3 scalars
-  Time-varying variables: 180 scalars
-  Alias variables: 409 scalars
-  Number of mixed real/discrete systems of equations: 1
-  Sizes of linear systems of equations: {26}
-  Sizes after manipulation of the linear systems: {13}
-  Sizes of nonlinear systems of equations: {75, 1, 1}
-  Sizes after manipulation of the nonlinear systems: {16, 0, 1}
+  Constants: 607 scalars
+  Free parameters: 1951 scalars
+  Parameter depending: 328 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 617 scalars
+  Alias variables: 1242 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {29, 4}
+  Sizes after manipulation of the linear systems: {4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1}
   Number of numerical Jacobians: 0
   Initialization problem
-    Sizes of nonlinear systems of equations: {1, 74, 1}
-    Sizes after manipulation of the nonlinear systems: {0, 16, 1}
+    Sizes of linear systems of equations: {32}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.volMoiAir.dynBal.medium.Xi[1]
+  thermalZone.ROM.volMoiAir.dynBal.U
+ 
+Finished
+ = true
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool:
+The model has the same number of unknowns and equations: 3645
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 3645
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAirSwimmingPool.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAirSwimmingPool.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool:
+The DAE has 3645 scalar unknowns and 3645 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  thermalZone.ROM.p_start = thermalZone.p_start;
+  thermalZone.airFlowMoistureToROM.sou.vol.p_start = thermalZone.airFlowMoistureToROM.sou.p_start;
+  if (thermalZone.airFlowMoistureToROM.AirLay.dynBal.massDynamics ==     Modelica.Fluid.Types.Dynamics.FixedInitial) then 
+    if (thermalZone.airFlowMoistureToROM.AirLay.dynBal.initialize_p) then 
+      thermalZone.airFlowMoistureToROM.AirLay.dynBal.medium.p = thermalZone.airFlowMoistureToROM.AirLay.dynBal.p_start;
+    end if;
+  else
+    if (thermalZone.airFlowMoistureToROM.AirLay.dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (thermalZone.airFlowMoistureToROM.AirLay.dynBal.initialize_p) then 
+        der(thermalZone.airFlowMoistureToROM.AirLay.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    sinAir.p(start = 101325)
+    thermalZone.airFlowMoistureToROM.AirLay.p_start(start = 101325)
+    thermalZone.airFlowMoistureToROM.sou.p_start(start = 101325)
+    thermalZone.p_start(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinAir.p = thermalZone.ROM.volMoiAir.dynBal.p_start;
+  sinAir.p = thermalZone.airFlowMoistureToROM.AirLay.dynBal.p_start;
+  sinAir.p = thermalZone.airFlowMoistureToROM.sou.vol.dynBal.p_start;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 712
+  Variables: 6861
+  Constants: 169 (169 scalars)
+  Parameters: 2779 (5151 scalars)
+  Unknowns: 3913 (3743 scalars)
+  Differentiated variables: 34 scalars
+  Equations: 3071
+  Nontrivial: 2635
+Translated Model
+  Constants: 2021 scalars
+  Free parameters: 2252 scalars
+  Parameter depending: 1478 scalars
+  Continuous time states: 25 scalars
+  Time-varying variables: 1061 scalars
+  Alias variables: 2251 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {26, 13, 13, 26, 13, 13, 4, 4}
+  Sizes after manipulation of the linear systems: {13, 6, 6, 13, 6, 6, 0, 0}
+  Sizes of nonlinear systems of equations: {57, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {6, 0, 1, 0, 1, 0, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1, 68, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 8, 1, 1}
     Number of numerical Jacobians: 0
  
 Selected continuous time states
 Statically selected continuous time states
-  indoorSwimming.cirPump.filter.s[1]
-  indoorSwimming.cirPump.filter.s[2]
-  indoorSwimming.PI.I.y
+  thermalZone.airFlowMoistureToROM.AirLay.dynBal.medium.Xi[1]
+  thermalZone.airFlowMoistureToROM.AirLay.dynBal.U
+  thermalZone.airFlowMoistureToROM.sou.filter.s[1]
+  thermalZone.airFlowMoistureToROM.sou.filter.s[2]
+  thermalZone.airFlowMoistureToROM.sou.vol.dynBal.medium.Xi[1]
+  thermalZone.airFlowMoistureToROM.sou.vol.dynBal.U
+  thermalZone.heaterCooler.pITempHeat.PI.I.y
+  thermalZone.indoorSwimmingPool[1].cirPump.filter.s[1]
+  thermalZone.indoorSwimmingPool[1].cirPump.filter.s[2]
+  thermalZone.indoorSwimmingPool[1].cirPump.vol.dynBal.U
+  thermalZone.indoorSwimmingPool[1].PI.I.y
+  thermalZone.indoorSwimmingPool[1].poolSto.dynBal.U
+  thermalZone.indoorSwimmingPool[1].poolWat.dynBal.U
+  thermalZone.indoorSwimmingPool[2].cirPump.filter.s[1]
+  thermalZone.indoorSwimmingPool[2].cirPump.filter.s[2]
+  thermalZone.indoorSwimmingPool[2].cirPump.vol.dynBal.U
+  thermalZone.indoorSwimmingPool[2].PI.I.y
+  thermalZone.indoorSwimmingPool[2].poolSto.dynBal.U
+  thermalZone.indoorSwimmingPool[2].poolWat.dynBal.U
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.floorRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.roofRC.thermCapExt[1].T
+  thermalZone.ROM.volMoiAir.dynBal.medium.Xi[1]
+  thermalZone.ROM.volMoiAir.dynBal.U
+ 
+Finished
+ = true
+
+
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped:
+The model has the same number of unknowns and equations: 9930
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 9930
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneEquipped.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneEquipped.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped", tolerance=1e-6, stopTime=864000, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped:
+The DAE has 9930 scalar unknowns and 9930 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1462
+  Variables: 15305
+  Constants: 319 (319 scalars)
+  Parameters: 5610 (7030 scalars)
+  Unknowns: 9374 (9975 scalars)
+  Differentiated variables: 35 scalars
+  Equations: 6460
+  Nontrivial: 5930
+Translated Model
+  Constants: 2819 scalars
+  Free parameters: 1654 scalars
+  Parameter depending: 3662 scalars
+  Continuous time states: 35 scalars
+  Time-varying variables: 3134 scalars
+  Alias variables: 6055 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0}
+  Sizes of nonlinear systems of equations: {6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,   0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32, 32, 32, 32, 32}
+    Sizes after manipulation of the linear systems: {5, 5, 5, 5, 5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  multizone.zone[1].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[1].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[1].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[1].ROM.volAir.dynBal.m
+  multizone.zone[1].ROM.volAir.dynBal.U
+  multizone.zone[1].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[1].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[2].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[2].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[2].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[2].ROM.volAir.dynBal.m
+  multizone.zone[2].ROM.volAir.dynBal.U
+  multizone.zone[2].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[2].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[3].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[3].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[3].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[3].ROM.volAir.dynBal.m
+  multizone.zone[3].ROM.volAir.dynBal.U
+  multizone.zone[3].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[3].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[4].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[4].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[4].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[4].ROM.volAir.dynBal.m
+  multizone.zone[4].ROM.volAir.dynBal.U
+  multizone.zone[4].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[4].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[5].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[5].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[5].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[5].ROM.volAir.dynBal.m
+  multizone.zone[5].ROM.volAir.dynBal.U
+  multizone.zone[5].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[5].ventCont.dEMA.ExpAVG1.x[1]
  
 Finished
  = true
 
 Declaring variable: Boolean rScript ;
 
-savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.translation.log"); = true
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.translation.log"); = true
 
 
-rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
-Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
-The model has the same number of unknowns and equations: 733
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility:
+The model has the same number of unknowns and equations: 13468
 The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 733
-Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem successful.
+for the given numerical settings of parameters: 13468
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility successful.
 Declaring variable: Boolean rCheck ;
 
-Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
-Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
-Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
-Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
-Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
-Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.statistics.log");
 
 
-rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos");
-simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
-Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
-The DAE has 733 scalar unknowns and 733 scalar equations.
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility:
+The DAE has 13468 scalar unknowns and 13468 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.massDynamics ==     Modelica.Fluid.Types.Dynamics.FixedInitial) then 
+    if (multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.initialize_p) then 
+      multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.medium.p =         multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.p_start;
+    end if;
+  else
+    if (multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.initialize_p)         then 
+        der(multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.massDynamics ==     Modelica.Fluid.Types.Dynamics.FixedInitial) then 
+    if (multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.initialize_p)       then 
+      multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.medium.p =         multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.p_start;
+    end if;
+  else
+    if (multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.initialize_p)         then 
+        der(multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+The redundancies involve
+initial equations: 
+  multizone.zone[1].ROM.ports[1].p = 101325.0;
+  multizone.zone[1].ROM.ports[1].p = 101325.0;
+  multizone.zone[1].ROM.ports[1].p = 101325.0;
+ 
+active start values: 
+  multizone.zone[1].ROM.ports[1].p = 101325;
+ 
  
 Statistics
  
 Original Model
-  Number of components: 171
-  Variables: 1742
-  Constants: 45 (45 scalars)
-  Parameters: 777 (964 scalars)
-  Unknowns: 920 (764 scalars)
+  Number of components: 2234
+  Variables: 22366
+  Constants: 540 (540 scalars)
+  Parameters: 8720 (10837 scalars)
+  Unknowns: 13104 (13615 scalars)
+  Differentiated variables: 94 scalars
+  Equations: 9467
+  Nontrivial: 8430
+Translated Model
+  Constants: 13099 scalars
+  Parameter depending: 214 scalars
+  Continuous time states: 86 scalars
+  Time-varying variables: 3979 scalars
+  Alias variables: 7700 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4, 26, 13, 13, 4, 4, 26, 13, 13, 4, 45, 4, 4, 45, 4, 4, 45, 4, 4, 45, 4, 4, 45,   4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {56, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {6, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {56, 56, 56, 56, 56}
+    Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0}
+    Sizes of nonlinear systems of equations: {1, 1, 67, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0, 9, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Settings
+Evaluate = true
+Selected continuous time states
+Statically selected continuous time states
+  multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.mC[1]
+  multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.medium.Xi[1]
+  multizone.zone[1].airFlowMoistureToROM.AirLay.dynBal.U
+  multizone.zone[1].airFlowMoistureToROM.sou.filter.s[1]
+  multizone.zone[1].airFlowMoistureToROM.sou.filter.s[2]
+  multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.m
+  multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.mC[1]
+  multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.medium.Xi[1]
+  multizone.zone[1].airFlowMoistureToROM.sou.vol.dynBal.U
+  multizone.zone[1].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[1].indoorSwimmingPool[1].cirPump.filter.s[1]
+  multizone.zone[1].indoorSwimmingPool[1].cirPump.filter.s[2]
+  multizone.zone[1].indoorSwimmingPool[1].cirPump.vol.dynBal.U
+  multizone.zone[1].indoorSwimmingPool[1].PI.I.y
+  multizone.zone[1].indoorSwimmingPool[1].poolSto.dynBal.U
+  multizone.zone[1].indoorSwimmingPool[1].poolWat.dynBal.U
+  multizone.zone[1].indoorSwimmingPool[2].cirPump.filter.s[1]
+  multizone.zone[1].indoorSwimmingPool[2].cirPump.filter.s[2]
+  multizone.zone[1].indoorSwimmingPool[2].cirPump.vol.dynBal.U
+  multizone.zone[1].indoorSwimmingPool[2].PI.I.y
+  multizone.zone[1].indoorSwimmingPool[2].poolSto.dynBal.U
+  multizone.zone[1].indoorSwimmingPool[2].poolWat.dynBal.U
+  multizone.zone[1].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[1].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[1].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[1].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[1].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[1].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[1].ROM.volMoiAir.dynBal.U
+  multizone.zone[1].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[1].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[2].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[2].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[2].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[2].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[2].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[2].ROM.volMoiAir.dynBal.m
+  multizone.zone[2].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[2].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[2].ROM.volMoiAir.dynBal.U
+  multizone.zone[2].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[2].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[3].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[3].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[3].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[3].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[3].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[3].ROM.volMoiAir.dynBal.m
+  multizone.zone[3].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[3].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[3].ROM.volMoiAir.dynBal.U
+  multizone.zone[3].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[3].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[4].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[4].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[4].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[4].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[4].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[4].ROM.volMoiAir.dynBal.m
+  multizone.zone[4].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[4].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[4].ROM.volMoiAir.dynBal.U
+  multizone.zone[4].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[4].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[5].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[5].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[5].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[5].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[5].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[5].ROM.volMoiAir.dynBal.m
+  multizone.zone[5].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[5].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[5].ROM.volMoiAir.dynBal.U
+  multizone.zone[5].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[5].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[6].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[6].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[6].ROM.floorRC.thermCapExt[1].T
+  multizone.zone[6].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[6].ROM.roofRC.thermCapExt[1].T
+  multizone.zone[6].ROM.volMoiAir.dynBal.m
+  multizone.zone[6].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[6].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[6].ROM.volMoiAir.dynBal.U
+  multizone.zone[6].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[6].ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.Multizone");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.Multizone:
+The model has the same number of unknowns and equations: 9729
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 9729
+Check of AixLib.ThermalZones.ReducedOrder.Examples.Multizone successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\",", "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.Multizone", tolerance=1e-6, stopTime=864000, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.Multizone");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.Multizone:
+The DAE has 9729 scalar unknowns and 9729 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1430
+  Variables: 14167
+  Constants: 311 (311 scalars)
+  Parameters: 4637 (5623 scalars)
+  Unknowns: 9219 (9729 scalars)
+  Differentiated variables: 35 scalars
+  Equations: 6252
+  Nontrivial: 5761
+Translated Model
+  Constants: 2714 scalars
+  Free parameters: 1389 scalars
+  Parameter depending: 2610 scalars
+  Outputs: 23 scalars
+  Continuous time states: 35 scalars
+  Time-varying variables: 2907 scalars
+  Alias variables: 6043 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32, 32, 32, 32, 32}
+    Sizes after manipulation of the linear systems: {5, 5, 5, 5, 5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  multizone.zone[1].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[1].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[1].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[1].ROM.volAir.dynBal.m
+  multizone.zone[1].ROM.volAir.dynBal.U
+  multizone.zone[1].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[1].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[2].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[2].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[2].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[2].ROM.volAir.dynBal.m
+  multizone.zone[2].ROM.volAir.dynBal.U
+  multizone.zone[2].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[2].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[3].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[3].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[3].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[3].ROM.volAir.dynBal.m
+  multizone.zone[3].ROM.volAir.dynBal.U
+  multizone.zone[3].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[3].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[4].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[4].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[4].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[4].ROM.volAir.dynBal.m
+  multizone.zone[4].ROM.volAir.dynBal.U
+  multizone.zone[4].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[4].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[5].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[5].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[5].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[5].ROM.volAir.dynBal.m
+  multizone.zone[5].ROM.volAir.dynBal.U
+  multizone.zone[5].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[5].ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.Multizone.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance:
+The model has the same number of unknowns and equations: 1080
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1016+18*corGDouPan.n+2*thermalZoneFourElements.nOrientations+3*thermalZoneFourElements.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])+5*  eqAirTempVDI.n
+scalar unknowns and
+  998+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not eqAirTempVDI.TGroundFromInput then 1 else 0)+3*eqAirTempVDI.n+(  if souAir.use_Xi_in then 2 else (if souAir.use_X_in then 1 else 3))+(if  not   souAir.use_C_in then 1 else 0)+4*souAir.nPorts+(if  not souAir.use_m_flow_in   then 1 else 0)+(if  not souAir.use_T_in then 1 else 0)+(if sinAir.use_Xi_in   then 2 else (if sinAir.use_X_in then 1 else 3))+(if  not sinAir.use_C_in   then 1 else 0)+4*sinAir.nPorts+(if  not sinAir.use_p_in then 1 else 0)+(if    not sinAir.use_T_in then 1 else 0)+(if  not thermalZoneFourElements.volAir.dynBal.use_mWat_flow   then 1 else 0)+(if  not thermalZoneFourElements.use_C_flow then 1 else 0)+7*  thermalZoneFourElements.volAir.dynBal.nPorts+thermalZoneFourElements.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1080
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomFourElementsTraceSubstance.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomFourElementsTraceSubstance.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance", tolerance=1e-6, stopTime=604800, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance:
+The DAE has 1080 scalar unknowns and 1080 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (thermalZoneFourElements.volAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (thermalZoneFourElements.volAir.dynBal.initialize_p) then 
+      thermalZoneFourElements.volAir.dynBal.medium.p = thermalZoneFourElements.volAir.dynBal.p_start;
+    end if;
+  else
+    if (thermalZoneFourElements.volAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (thermalZoneFourElements.volAir.dynBal.initialize_p) then 
+        der(thermalZoneFourElements.volAir.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    sinAir.p(start = 101325)
+    thermalZoneFourElements.p_start(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinAir.p = thermalZoneFourElements.volAir.dynBal.p_start;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 175
+  Variables: 1544
+  Constants: 39 (39 scalars)
+  Parameters: 476 (654 scalars)
+  Unknowns: 1029 (1092 scalars)
+  Differentiated variables: 8 scalars
+  Equations: 810
+  Nontrivial: 717
+Translated Model
+  Constants: 345 scalars
+  Free parameters: 252 scalars
+  Parameter depending: 189 scalars
+  Outputs: 23 scalars
+  Continuous time states: 7 scalars
+  Time-varying variables: 345 scalars
+  Alias variables: 654 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {54, 4, 4}
+  Sizes after manipulation of the linear systems: {5, 0, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {65}
+    Sizes after manipulation of the linear systems: {8}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZoneFourElements.extWallRC.thermCapExt[1].T
+  thermalZoneFourElements.floorRC.thermCapExt[1].T
+  thermalZoneFourElements.intWallRC.thermCapInt[1].T
+  thermalZoneFourElements.roofRC.thermCapExt[1].T
+  thermalZoneFourElements.volAir.dynBal.mC[1]
+  thermalZoneFourElements.volAir.dynBal.medium.Xi[1]
+  thermalZoneFourElements.volAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElementsTraceSubstance.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir:
+The model has the same number of unknowns and equations: 3863
+The model could not be deduced to be symbolically well-posed.
+The model has
+  3547+29*thermalZoneMoistAir.zoneParam.nOrientations+2*thermalZoneMoistAir.ROM.volMoiAir.dynBal.nPorts  +thermalZoneMoistAir.humanTotHeaDependent.productHeatOutput.nu+  thermalZoneMoistAir.humanTotHeaDependent.productMoistureOutput.nu+  thermalZoneMoistAir.machinesSenHea.productHeatOutput.nu+thermalZoneMoistAir.lights.productHeatOutput.nu  +thermalZoneMoistAir.SumQLat1_flow.nu+max([size(internalGains.columns, 1);   size(internalGains.offset, 1)])+29*thermalZone.zoneParam.nOrientations+2*  thermalZone.ROM.volAir.dynBal.nPorts+thermalZone.humanSenHeaDependent.productHeatOutput.nu  +thermalZone.machinesSenHea.productHeatOutput.nu+thermalZone.lights.productHeatOutput.nu  +max([size(internalGains1.columns, 1); size(internalGains1.offset, 1)])
+scalar unknowns and
+  3608+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+(if sourcAir.use_Xi_in then 2 else (if   sourcAir.use_X_in then 1 else 3))+3*sourcAir.nPorts+(if  not sourcAir.use_m_flow_in   then 1 else 0)+(if  not sourcAir.use_T_in then 1 else 0)+(if sinAir.use_Xi_in   then 2 else (if sinAir.use_X_in then 1 else 3))+3*sinAir.nPorts+(if  not   sinAir.use_p_in then 1 else 0)+(if  not sinAir.use_T_in then 1 else 0)+max([  size(internalGains1.columns, 1); size(internalGains1.offset, 1)])+(if   sourcAir1.use_Xi_in then 2 else (if sourcAir1.use_X_in then 1 else 3))+3*  sourcAir1.nPorts+(if  not sourcAir1.use_m_flow_in then 1 else 0)+(if  not   sourcAir1.use_T_in then 1 else 0)+(if sinAir1.use_Xi_in then 2 else (if   sinAir1.use_X_in then 1 else 3))+3*sinAir1.nPorts+(if  not sinAir1.use_p_in   then 1 else 0)+(if  not sinAir1.use_T_in then 1 else 0)+19*thermalZoneMoistAir.zoneParam.nOrientations  +(if  not thermalZoneMoistAir.eqAirTempWall.TGroundFromInput then 1 else 0)+19  *thermalZone.zoneParam.nOrientations+(if  not thermalZone.eqAirTempWall.TGroundFromInput   then 1 else 0)+5*thermalZoneMoistAir.ROM.volMoiAir.dynBal.nPorts+(if  not   thermalZone.ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+5*thermalZone.ROM.volAir.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  3863
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ComparisonThermalZoneMoistAndDryAir.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir\",", "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ComparisonThermalZoneMoistAndDryAir.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir:
+The DAE has 3863 scalar unknowns and 3863 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (thermalZoneMoistAir.ROM.volMoiAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (thermalZoneMoistAir.ROM.volMoiAir.dynBal.initialize_p) then 
+      thermalZoneMoistAir.ROM.volMoiAir.dynBal.medium.p = thermalZoneMoistAir.ROM.volMoiAir.dynBal.p_start;
+    end if;
+  else
+    if (thermalZoneMoistAir.ROM.volMoiAir.dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (thermalZoneMoistAir.ROM.volMoiAir.dynBal.initialize_p) then 
+        der(thermalZoneMoistAir.ROM.volMoiAir.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (thermalZone.ROM.volAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (thermalZone.ROM.volAir.dynBal.initialize_p) then 
+      thermalZone.ROM.volAir.dynBal.medium.p = thermalZone.ROM.volAir.dynBal.p_start;
+    end if;
+  else
+    if (thermalZone.ROM.volAir.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (thermalZone.ROM.volAir.dynBal.initialize_p) then 
+        der(thermalZone.ROM.volAir.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    sinAir.p(start = 101325)
+    sinAir1.p(start = 101325)
+    thermalZone.p_start(start = 101325)
+    thermalZoneMoistAir.p_start(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinAir.p = thermalZoneMoistAir.ROM.volMoiAir.dynBal.p_start;
+  sinAir1.p = thermalZone.ROM.volAir.dynBal.p_start;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 552
+  Variables: 5264
+  Constants: 145 (145 scalars)
+  Parameters: 1448 (5057 scalars)
+  Unknowns: 3671 (3887 scalars)
+  Differentiated variables: 10 scalars
+  Equations: 2524
+  Nontrivial: 2332
+Translated Model
+  Constants: 1083 scalars
+  Free parameters: 3867 scalars
+  Parameter depending: 614 scalars
+  Continuous time states: 8 scalars
+  Time-varying variables: 1160 scalars
+  Alias variables: 2365 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {29, 4, 4, 29}
+  Sizes after manipulation of the linear systems: {4, 0, 0, 4}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32, 32}
+    Sizes after manipulation of the linear systems: {5, 5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.volAir.dynBal.medium.Xi[1]
+  thermalZone.ROM.volAir.dynBal.U
+  thermalZoneMoistAir.ROM.extWallRC.thermCapExt[1].T
+  thermalZoneMoistAir.ROM.intWallRC.thermCapInt[1].T
+  thermalZoneMoistAir.ROM.volMoiAir.dynBal.medium.Xi[1]
+  thermalZoneMoistAir.ROM.volMoiAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone:
+The model has the same number of unknowns and equations: 1929
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1777+29*thermalZone.zoneParam.nOrientations+thermalZone.ROM.volAir.dynBal.nPorts  +thermalZone.humanSenHeaDependent.productHeatOutput.nu+thermalZone.machinesSenHea.productHeatOutput.nu  +thermalZone.lights.productHeatOutput.nu+max([size(internalGains.columns, 1);   size(internalGains.offset, 1)])
+scalar unknowns and
+  1825+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+19*thermalZone.zoneParam.nOrientations+(if  not   thermalZone.eqAirTempWall.TGroundFromInput then 1 else 0)+(if  not   thermalZone.ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*thermalZone.ROM.volAir.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1929
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZone.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZone.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone:
+The DAE has 1929 scalar unknowns and 1929 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 291
+  Variables: 2646
+  Constants: 73 (73 scalars)
+  Parameters: 748 (2557 scalars)
+  Unknowns: 1825 (1929 scalars)
+  Differentiated variables: 4 scalars
+  Equations: 1304
+  Nontrivial: 1201
+Translated Model
+  Constants: 553 scalars
+  Free parameters: 1936 scalars
+  Parameter depending: 293 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 600 scalars
+  Alias variables: 1177 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 29, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.volAir.dynBal.m
+  thermalZone.ROM.volAir.dynBal.U
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement:
+The model has the same number of unknowns and equations: 816
+The model could not be deduced to be symbolically well-posed.
+The model has
+  763+18*corGDouPan.n+2*thermalZoneOneElement.nOrientations+thermalZoneOneElement.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])
+scalar unknowns and
+  771+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not thermalZoneOneElement.volAir.dynBal.use_mWat_flow then 1 else 0)  +3*thermalZoneOneElement.volAir.dynBal.nPorts+thermalZoneOneElement.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  816
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomOneElement.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomOneElement.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement:
+The DAE has 816 scalar unknowns and 816 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 136
+  Variables: 1194
+  Constants: 37 (37 scalars)
+  Parameters: 365 (506 scalars)
+  Unknowns: 792 (816 scalars)
   Differentiated variables: 3 scalars
+  Equations: 608
+  Nontrivial: 544
+Translated Model
+  Constants: 278 scalars
+  Free parameters: 211 scalars
+  Parameter depending: 118 scalars
+  Outputs: 23 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 267 scalars
+  Alias variables: 485 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 18, 4}
+  Sizes after manipulation of the linear systems: {0, 2, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {23}
+    Sizes after manipulation of the linear systems: {3}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZoneOneElement.extWallRC.thermCapExt[1].T
+  thermalZoneOneElement.volAir.dynBal.m
+  thermalZoneOneElement.volAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomOneElement.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange:
+The model has the same number of unknowns and equations: 2112
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1946+29*thermalZone.zoneParam.nOrientations+3*thermalZone.ROM.volMoiAir.dynBal.nPorts  +thermalZone.humanTotHeaDependent.productHeatOutput.nu+thermalZone.humanTotHeaDependent.productMoistureOutput.nu  +thermalZone.machinesSenHea.productHeatOutput.nu+thermalZone.lights.productHeatOutput.nu  +thermalZone.ventCont.optimalTemp.nin+thermalZone.ventCont.optimalTemp.nout+  thermalZone.ventCont.dEMA.nout+thermalZone.ventCont.dEMA.ExpAVG.n+  thermalZone.ventCont.dEMA.ExpAVG1.n+thermalZone.SumQLat2_flow.nu+max([size(  internalGains.columns, 1); size(internalGains.offset, 1)])
+scalar unknowns and
+  2004+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+(if  not humRat.use_p_in then 1 else 0)+19*  thermalZone.zoneParam.nOrientations+(if  not thermalZone.eqAirTempWall.TGroundFromInput   then 1 else 0)+thermalZone.ventCont.optimalTemp.nout+thermalZone.ventCont.dEMA.ExpAVG.n  +thermalZone.ventCont.dEMA.ExpAVG1.n+(if  not thermalZone.x_pTphi.use_p_in   then 1 else 0)+(if  not thermalZone.use_C_flow then 1 else 0)+7*  thermalZone.ROM.volMoiAir.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2112
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistCO2AirExchange.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistCO2AirExchange.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange:
+The DAE has 2112 scalar unknowns and 2112 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 327
+  Variables: 2902
+  Constants: 94 (94 scalars)
+  Parameters: 826 (2658 scalars)
+  Unknowns: 1982 (2112 scalars)
+  Differentiated variables: 8 scalars
+  Equations: 1407
+  Nontrivial: 1298
+Translated Model
+  Constants: 612 scalars
+  Free parameters: 1963 scalars
+  Parameter depending: 340 scalars
+  Outputs: 23 scalars
+  Continuous time states: 8 scalars
+  Time-varying variables: 653 scalars
+  Alias variables: 1296 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {29, 4}
+  Sizes after manipulation of the linear systems: {4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.volMoiAir.dynBal.m
+  thermalZone.ROM.volMoiAir.dynBal.mC[1]
+  thermalZone.ROM.volMoiAir.dynBal.medium.Xi[1]
+  thermalZone.ROM.volMoiAir.dynBal.U
+  thermalZone.ventCont.dEMA.ExpAVG.x[1]
+  thermalZone.ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+
+
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange:
+The model has the same number of unknowns and equations: 2010
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1849+29*thermalZone.zoneParam.nOrientations+thermalZone.ROM.volAir.dynBal.nPorts  +thermalZone.humanSenHeaDependent.productHeatOutput.nu+thermalZone.machinesSenHea.productHeatOutput.nu  +thermalZone.lights.productHeatOutput.nu+thermalZone.ventCont.optimalTemp.nin+  thermalZone.ventCont.optimalTemp.nout+thermalZone.ventCont.dEMA.nout+  thermalZone.ventCont.dEMA.ExpAVG.n+thermalZone.ventCont.dEMA.ExpAVG1.n+max([  size(internalGains.columns, 1); size(internalGains.offset, 1)])
+scalar unknowns and
+  1901+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+19*thermalZone.zoneParam.nOrientations+(if  not   thermalZone.eqAirTempWall.TGroundFromInput then 1 else 0)+thermalZone.ventCont.optimalTemp.nout  +thermalZone.ventCont.dEMA.ExpAVG.n+thermalZone.ventCont.dEMA.ExpAVG1.n+(if    not thermalZone.ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  thermalZone.ROM.volAir.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2010
+Check of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneAirExchange.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneAirExchange.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange:
+The DAE has 2010 scalar unknowns and 2010 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 304
+  Variables: 2766
+  Constants: 74 (74 scalars)
+  Parameters: 789 (2603 scalars)
+  Unknowns: 1903 (2010 scalars)
+  Differentiated variables: 6 scalars
+  Equations: 1344
+  Nontrivial: 1238
+Translated Model
+  Constants: 571 scalars
+  Free parameters: 1947 scalars
+  Parameter depending: 316 scalars
+  Outputs: 23 scalars
+  Continuous time states: 6 scalars
+  Time-varying variables: 622 scalars
+  Alias variables: 1231 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 29, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZone.ROM.extWallRC.thermCapExt[1].T
+  thermalZone.ROM.intWallRC.thermCapInt[1].T
+  thermalZone.ROM.volAir.dynBal.m
+  thermalZone.ROM.volAir.dynBal.U
+  thermalZone.ventCont.dEMA.ExpAVG.x[1]
+  thermalZone.ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround:
+The model has the same number of unknowns and equations: 857
+The model could not be deduced to be symbolically well-posed.
+The model has
+  804+18*corGDouPan.n+2*thermalZoneTwoElements.nOrientations+thermalZoneTwoElements.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])
+scalar unknowns and
+  813+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not thermalZoneTwoElements.volAir.dynBal.use_mWat_flow then 1 else 0)  +3*thermalZoneTwoElements.volAir.dynBal.nPorts+thermalZoneTwoElements.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  857
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElementsNonConstantTGround.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElementsNonConstantTGround.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround:
+The DAE has 857 scalar unknowns and 857 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 144
+  Variables: 1261
+  Constants: 37 (37 scalars)
+  Parameters: 391 (539 scalars)
+  Unknowns: 833 (857 scalars)
+  Differentiated variables: 4 scalars
+  Equations: 643
+  Nontrivial: 573
+Translated Model
+  Constants: 285 scalars
+  Free parameters: 222 scalars
+  Parameter depending: 133 scalars
+  Outputs: 23 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 283 scalars
+  Alias variables: 510 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 28, 4}
+  Sizes after manipulation of the linear systems: {0, 3, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {31}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZoneTwoElements.extWallRC.thermCapExt[1].T
+  thermalZoneTwoElements.intWallRC.thermCapInt[1].T
+  thermalZoneTwoElements.volAir.dynBal.m
+  thermalZoneTwoElements.volAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElementsNonConstantTGround.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements:
+The model has the same number of unknowns and equations: 852
+The model could not be deduced to be symbolically well-posed.
+The model has
+  799+18*corGDouPan.n+2*thermalZoneTwoElements.nOrientations+thermalZoneTwoElements.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])
+scalar unknowns and
+  807+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not thermalZoneTwoElements.volAir.dynBal.use_mWat_flow then 1 else 0)  +3*thermalZoneTwoElements.volAir.dynBal.nPorts+thermalZoneTwoElements.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  852
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElements.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElements.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements:
+The DAE has 852 scalar unknowns and 852 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 143
+  Variables: 1245
+  Constants: 37 (37 scalars)
+  Parameters: 380 (528 scalars)
+  Unknowns: 828 (852 scalars)
+  Differentiated variables: 4 scalars
+  Equations: 640
+  Nontrivial: 570
+Translated Model
+  Constants: 285 scalars
+  Free parameters: 214 scalars
+  Parameter depending: 130 scalars
+  Outputs: 23 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 280 scalars
+  Alias variables: 508 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 28, 4}
+  Sizes after manipulation of the linear systems: {0, 3, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {31}
+    Sizes after manipulation of the linear systems: {5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZoneTwoElements.extWallRC.thermCapExt[1].T
+  thermalZoneTwoElements.intWallRC.thermCapInt[1].T
+  thermalZoneTwoElements.volAir.dynBal.m
+  thermalZoneTwoElements.volAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomTwoElements.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements:
+The model has the same number of unknowns and equations: 989
+The model could not be deduced to be symbolically well-posed.
+The model has
+  931+18*corGDouPan.n+2*thermalZoneFourElements.nOrientations+thermalZoneFourElements.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])+5*  eqAirTempVDI.n
+scalar unknowns and
+  940+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not eqAirTempVDI.TGroundFromInput then 1 else 0)+3*eqAirTempVDI.n+(  if  not thermalZoneFourElements.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  thermalZoneFourElements.volAir.dynBal.nPorts+thermalZoneFourElements.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  989
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomFourElements.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomFourElements.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements:
+The DAE has 989 scalar unknowns and 989 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 170
+  Variables: 1436
+  Constants: 37 (37 scalars)
+  Parameters: 434 (596 scalars)
+  Unknowns: 965 (989 scalars)
+  Differentiated variables: 6 scalars
   Equations: 763
-  Nontrivial: 619
+  Nontrivial: 669
 Translated Model
-  Constants: 629 scalars
-  Free parameters: 133 scalars
-  Parameter depending: 374 scalars
-  Continuous time states: 3 scalars
-  Time-varying variables: 191 scalars
-  Alias variables: 446 scalars
-  Number of mixed real/discrete systems of equations: 1
-  Sizes of linear systems of equations: {26}
-  Sizes after manipulation of the linear systems: {13}
-  Sizes of nonlinear systems of equations: {79, 1, 1}
-  Sizes after manipulation of the nonlinear systems: {17, 0, 1}
+  Constants: 303 scalars
+  Free parameters: 232 scalars
+  Parameter depending: 162 scalars
+  Outputs: 23 scalars
+  Continuous time states: 6 scalars
+  Time-varying variables: 325 scalars
+  Alias variables: 600 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 54, 4, 4}
+  Sizes after manipulation of the linear systems: {0, 5, 0, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
   Number of numerical Jacobians: 0
   Initialization problem
-    Sizes of nonlinear systems of equations: {1, 78, 1}
-    Sizes after manipulation of the nonlinear systems: {0, 17, 1}
-    Number of numerical Jacobians: 0
+    Sizes of linear systems of equations: {65}
+    Sizes after manipulation of the linear systems: {8}
  
 Selected continuous time states
 Statically selected continuous time states
-  indoorSwimming.cirPump.filter.s[1]
-  indoorSwimming.cirPump.filter.s[2]
-  PI.I.y
+  thermalZoneFourElements.extWallRC.thermCapExt[1].T
+  thermalZoneFourElements.floorRC.thermCapExt[1].T
+  thermalZoneFourElements.intWallRC.thermCapInt[1].T
+  thermalZoneFourElements.roofRC.thermCapExt[1].T
+  thermalZoneFourElements.volAir.dynBal.m
+  thermalZoneFourElements.volAir.dynBal.U
  
 Finished
  = true
 
 Declaring variable: Boolean rScript ;
 
-savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.translation.log");
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomFourElements.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2:
+The model has the same number of unknowns and equations: 10232
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 10232
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2 successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2:
+The DAE has 10232 scalar unknowns and 10232 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1537
+  Variables: 14814
+  Constants: 411 (411 scalars)
+  Parameters: 4813 (5892 scalars)
+  Unknowns: 9590 (10232 scalars)
+  Differentiated variables: 45 scalars
+  Equations: 6533
+  Nontrivial: 6027
+Translated Model
+  Constants: 3030 scalars
+  Free parameters: 1342 scalars
+  Parameter depending: 2740 scalars
+  Outputs: 23 scalars
+  Continuous time states: 45 scalars
+  Time-varying variables: 3050 scalars
+  Alias variables: 6373 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {29, 4, 29, 4, 29, 4, 29, 4, 29, 4}
+  Sizes after manipulation of the linear systems: {4, 0, 4, 0, 4, 0, 4, 0, 4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32, 32, 32, 32, 32}
+    Sizes after manipulation of the linear systems: {5, 5, 5, 5, 5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  multizone.zone[1].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[1].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[1].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[1].ROM.volMoiAir.dynBal.m
+  multizone.zone[1].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[1].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[1].ROM.volMoiAir.dynBal.U
+  multizone.zone[1].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[1].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[2].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[2].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[2].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[2].ROM.volMoiAir.dynBal.m
+  multizone.zone[2].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[2].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[2].ROM.volMoiAir.dynBal.U
+  multizone.zone[2].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[2].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[3].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[3].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[3].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[3].ROM.volMoiAir.dynBal.m
+  multizone.zone[3].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[3].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[3].ROM.volMoiAir.dynBal.U
+  multizone.zone[3].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[3].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[4].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[4].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[4].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[4].ROM.volMoiAir.dynBal.m
+  multizone.zone[4].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[4].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[4].ROM.volMoiAir.dynBal.U
+  multizone.zone[4].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[4].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[5].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[5].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[5].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[5].ROM.volMoiAir.dynBal.m
+  multizone.zone[5].ROM.volMoiAir.dynBal.mC[1]
+  multizone.zone[5].ROM.volMoiAir.dynBal.medium.Xi[1]
+  multizone.zone[5].ROM.volMoiAir.dynBal.U
+  multizone.zone[5].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[5].ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements:
+The model has the same number of unknowns and equations: 908
+The model could not be deduced to be symbolically well-posed.
+The model has
+  855+18*corGDouPan.n+2*thermalZoneThreeElements.nOrientations+thermalZoneThreeElements.volAir.dynBal.nPorts  +5*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset, 1)])
+scalar unknowns and
+  863+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+14*corGDouPan.n+(if  not eqAirTemp.TGroundFromInput   then 1 else 0)+3*eqAirTemp.n+max([size(intGai.columns, 1); size(intGai.offset,   1)])+(if  not thermalZoneThreeElements.volAir.dynBal.use_mWat_flow then 1   else 0)+3*thermalZoneThreeElements.volAir.dynBal.nPorts+thermalZoneThreeElements.nOrientations
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  908
+Check of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomThreeElements.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomThreeElements.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements:
+The DAE has 908 scalar unknowns and 908 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 154
+  Variables: 1321
+  Constants: 37 (37 scalars)
+  Parameters: 400 (555 scalars)
+  Unknowns: 884 (908 scalars)
+  Differentiated variables: 5 scalars
+  Equations: 689
+  Nontrivial: 609
+Translated Model
+  Constants: 292 scalars
+  Free parameters: 219 scalars
+  Parameter depending: 145 scalars
+  Outputs: 23 scalars
+  Continuous time states: 5 scalars
+  Time-varying variables: 298 scalars
+  Alias variables: 546 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 40, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {46}
+    Sizes after manipulation of the linear systems: {6}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  thermalZoneThreeElements.extWallRC.thermCapExt[1].T
+  thermalZoneThreeElements.floorRC.thermCapExt[1].T
+  thermalZoneThreeElements.intWallRC.thermCapInt[1].T
+  thermalZoneThreeElements.volAir.dynBal.m
+  thermalZoneThreeElements.volAir.dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.SimpleRoomThreeElements.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled");
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled:
+The model has the same number of unknowns and equations: 9997
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 9997
+Check of AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizonePartlyCooled.mos\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled\\\");\",", "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizonePartlyCooled.mos");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled", tolerance=1e-6, startTime=14688000, stopTime=15552000, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled");
+Translation of AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled:
+The DAE has 9997 scalar unknowns and 9997 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 1510
+  Variables: 14667
+  Constants: 315 (315 scalars)
+  Parameters: 4865 (5851 scalars)
+  Unknowns: 9487 (9997 scalars)
+  Differentiated variables: 39 scalars
+  Equations: 6500
+  Nontrivial: 5993
+Translated Model
+  Constants: 2794 scalars
+  Free parameters: 1505 scalars
+  Parameter depending: 2674 scalars
+  Outputs: 23 scalars
+  Continuous time states: 39 scalars
+  Time-varying variables: 2979 scalars
+  Alias variables: 6211 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4, 2, 29, 4}
+  Sizes after manipulation of the linear systems: {0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {32, 32, 32, 32, 32}
+    Sizes after manipulation of the linear systems: {5, 5, 5, 5, 5}
+ 
+Selected continuous time states
+Statically selected continuous time states
+  multizone.zone[1].heaterCooler.pITempCool.PI.I.y
+  multizone.zone[1].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[1].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[1].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[1].ROM.volAir.dynBal.m
+  multizone.zone[1].ROM.volAir.dynBal.U
+  multizone.zone[1].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[1].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[2].heaterCooler.pITempCool.PI.I.y
+  multizone.zone[2].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[2].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[2].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[2].ROM.volAir.dynBal.m
+  multizone.zone[2].ROM.volAir.dynBal.U
+  multizone.zone[2].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[2].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[3].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[3].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[3].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[3].ROM.volAir.dynBal.m
+  multizone.zone[3].ROM.volAir.dynBal.U
+  multizone.zone[3].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[3].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[4].heaterCooler.pITempCool.PI.I.y
+  multizone.zone[4].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[4].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[4].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[4].ROM.volAir.dynBal.m
+  multizone.zone[4].ROM.volAir.dynBal.U
+  multizone.zone[4].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[4].ventCont.dEMA.ExpAVG1.x[1]
+  multizone.zone[5].heaterCooler.pITempCool.PI.I.y
+  multizone.zone[5].heaterCooler.pITempHeat.PI.I.y
+  multizone.zone[5].ROM.extWallRC.thermCapExt[1].T
+  multizone.zone[5].ROM.intWallRC.thermCapInt[1].T
+  multizone.zone[5].ROM.volAir.dynBal.m
+  multizone.zone[5].ROM.volAir.dynBal.U
+  multizone.zone[5].ventCont.dEMA.ExpAVG.x[1]
+  multizone.zone[5].ventCont.dEMA.ExpAVG1.x[1]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.translation.log");

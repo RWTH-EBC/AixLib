@@ -1,10 +1,11 @@
 Regression tests are only run for the following package:
-  AixLib.Fluid.Pools.Examples
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.1 MB.
+  AixLib.ThermalZones.ReducedOrder.Examples
+*** Error: Model 'AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped.mos /nowindow'.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneEquipped.txt.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.5 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 0 warnings and 0 errors.
-
-Unit tests completed successfully.
+Script that runs unit tests had 0 warnings and 2 errors.
 
