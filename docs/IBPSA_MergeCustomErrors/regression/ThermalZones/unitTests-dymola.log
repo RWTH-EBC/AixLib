@@ -2,11 +2,9 @@ Regression tests are only run for the following package:
   AixLib.ThermalZones
 *** Error: Model 'AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped.mos', '/nowindow']' timed out after 300 seconds
 *** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped.mos /nowindow'.
-*** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneEquipped.txt: Errors during result verification.
-           Absolute error = 1.168e+02 at t = 293760.0 for multizone.PHeater[1]
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 4.0 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 0 warnings and 3 errors.
+Script that runs unit tests had 0 warnings and 2 errors.
 

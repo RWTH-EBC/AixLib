@@ -1,8 +1,8 @@
 Regression tests are only run for the following package:
   AixLib.Fluid
-*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpControlled_dpConst.txt: Errors during result verification.
+*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpConst.txt: Errors during result verification.
            Absolute error = 1.375e+05 at t = 3600.0 for elEnergy
-*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpControlled_dpVar.txt: Errors during result verification.
+*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpVar.txt: Errors during result verification.
            Absolute error = 1.361e+05 at t = 3600.0 for elEnergy
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
