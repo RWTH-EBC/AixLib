@@ -3,6 +3,7 @@ EulerCurve
 EulerReducedSpeed
 FlowMachineInterface
 HydraulicEfficiencyMethods
+NegativePressureOrFlow
 MotorEfficiencyMethods
 PowerInterface
 TotalEfficiencyMethods
