@@ -1,5 +1,5 @@
 removePlots();
-simulateModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar", startTime=0, stopTime=3600, tolerance=1e-6, method="dassl", resultFile="DpControlled_dpVar");
+simulateModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst", startTime=0, stopTime=3600, tolerance=1e-6, method="dassl", resultFile="DpConst");
 
 createPlot(id=1,
  x="dpControlled_dp.mov.VMachine_flow",

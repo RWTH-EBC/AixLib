@@ -1,5 +1,5 @@
 within AixLib.Fluid.Movers.DpControlledMovers.Examples;
-model DpControlled_dpConst
+model DpConst
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium model";
 
@@ -68,9 +68,9 @@ equation
   connect(dpControlled_dp.P, integrator.u) annotation (Line(points={{1,9},{8,9},{8,70},{38,70}},   color={0,0,127}));
   connect(integrator.y, elEnergy) annotation (Line(points={{61,70},{110,70}}, color={0,0,127}));
   annotation (
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpControlled_dpConst.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpConst.mos"
         "Simulate and plot"),
     experiment(
       StopTime=3600,
       Tolerance=1e-06));
-end DpControlled_dpConst;
+end DpConst;
