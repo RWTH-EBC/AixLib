@@ -184,7 +184,7 @@ equation
 </html>", info="<html>
 <p>This example demonstrates the GenericAHU model with a simple control. The supply air temperature set point is 20&deg;C.</p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
+    __Dymola_Commands(file=
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
         "Simulate and plot"));
 end GenericAHU;
