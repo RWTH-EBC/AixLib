@@ -1,0 +1,1043 @@
+
+Error in model:  AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm">AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pump.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.DemandControlledAHU 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.DemandControlledAHU">AixLib.Systems.ModularAHU.Examples.DemandControlledAHU</a>:
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 204
+ Component context: genericAHU.fanSup.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/DemandControlledAHU.mo, line 15
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 214
+ Component context: genericAHU.fanRet.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/DemandControlledAHU.mo, line 15
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.EONERC_AHU2 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.EONERC_AHU2">AixLib.Systems.ModularAHU.Examples.EONERC_AHU2</a>:
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 204
+ Component context: genericAHU.fanSup.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/EONERC_AHU2.mo, line 5
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 214
+ Component context: genericAHU.fanRet.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/EONERC_AHU2.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.Injection2WayValve 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.Injection2WayValve">AixLib.Systems.HydraulicModules.Example.Injection2WayValve</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: Injection.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.TABS.Tabs 
+Check of <a href="Modelica://AixLib.Systems.TABS.Tabs">AixLib.Systems.TABS.Tabs</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pipe.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pipe.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pipe.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.PumpInterface.pump.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: pumpSys.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpSys.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHXCold.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHXCold.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHXHot.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHXHot.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Sources/BaseClasses/PartialSource.mo, line 37
+ Component context: bou.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.PumpInterface.pump.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: throttlePumpHot.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe4.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe4.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpHot.pipe4.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.PumpInterface.pump.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: throttlePumpCold.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe4.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe4.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: throttlePumpCold.pipe4.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit">AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: unmixed.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: unmixedThrottle.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: admix.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.Heater 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.Heater">AixLib.Systems.ModularAHU.Examples.Heater</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: registerModule.hydraulicModule.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.Cooler 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.Cooler">AixLib.Systems.ModularAHU.Examples.Cooler</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: registerModule.hydraulicModule.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.Pump 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.Pump">AixLib.Systems.HydraulicModules.Example.Pump</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: Unmixed.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.Injection 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.Injection">AixLib.Systems.HydraulicModules.Example.Injection</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: Injection.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.TABS.Examples.Tabs 
+Check of <a href="Modelica://AixLib.Systems.TABS.Examples.Tabs">AixLib.Systems.TABS.Examples.Tabs</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: tabs.pumpSys.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: tabs.throttlePumpHot.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: tabs.throttlePumpCold.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.Admix 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.Admix">AixLib.Systems.HydraulicModules.Example.Admix</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: Admix.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.HydraulicModules.Example.ThrottlePump 
+Check of <a href="Modelica://AixLib.Systems.HydraulicModules.Example.ThrottlePump">AixLib.Systems.HydraulicModules.Example.ThrottlePump</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: ThrottlePump.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.GenericAHU 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.valve.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe4.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe5.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.pipe6.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.hydraulicModule.junc456.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BasicPumpInterface is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/Admix.mo, line 126
+ Component context: preheater.hydraulicModule.PumpInterface
+  Component declared as BasicPumpInterface PumpInterface in <a href="Modelica://AixLib.Systems.HydraulicModules.BaseClasses">AixLib.Systems.HydraulicModules.BaseClasses</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.dynamicHX.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: preheater.dynamicHX.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.valve.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe4.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe5.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.pipe6.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.hydraulicModule.junc456.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BasicPumpInterface is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/Admix.mo, line 126
+ Component context: cooler.hydraulicModule.PumpInterface
+  Component declared as BasicPumpInterface PumpInterface in <a href="Modelica://AixLib.Systems.HydraulicModules.BaseClasses">AixLib.Systems.HydraulicModules.BaseClasses</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.dynamicHX.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: cooler.dynamicHX.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.valve.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe1.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe2.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe3.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe4.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe5.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.pipe6.simplePipe.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.hydraulicModule.junc456.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BasicPumpInterface is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/Admix.mo, line 126
+ Component context: heater.hydraulicModule.PumpInterface
+  Component declared as BasicPumpInterface PumpInterface in <a href="Modelica://AixLib.Systems.HydraulicModules.BaseClasses">AixLib.Systems.HydraulicModules.BaseClasses</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.dynamicHX.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: heater.dynamicHX.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHX.vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: dynamicHX.vol2.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 204
+ Component context: fanSup.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 2
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: fanSup.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 214
+ Component context: fanRet.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 2
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: fanRet.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: humidifier.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: humidifierRet.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.GenericAHU 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.GenericAHU">AixLib.Systems.ModularAHU.Examples.GenericAHU</a>:
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: genericAHU.preheater.hydraulicModule.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: genericAHU.cooler.hydraulicModule.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'use_powerCharacteristic' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/BaseClasses/FlowMachineInterface.mo, line 11
+ Component context: genericAHU.heater.hydraulicModule.PumpInterface.pump.eff.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'm_flow_nominal' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'gaiSpe' not found in PartialFlowMachine
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Movers/SpeedControlled_Nrpm.mo, line 4
+  Context: <a href="Modelica://AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine">AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/HydraulicModules/BaseClasses/PumpInterface_SpeedControlledNrpm.mo, line 5
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 204
+ Component context: genericAHU.fanSup.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/GenericAHU.mo, line 4
+Error: Class or component 'hydraulicEfficiency' not found in Generic per
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/GenericAHU.mo, line 214
+ Component context: genericAHU.fanRet.per
+  Component declared as Generic per in <a href="Modelica://AixLib.Fluid.Movers.Data">AixLib.Fluid.Movers.Data</a>
+  Attempted modification in <a href="Modelica://AixLib.Systems.ModularAHU.GenericAHU">AixLib.Systems.ModularAHU.GenericAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/GenericAHU.mo, line 4
+Error: ERRORS have been issued.
+
