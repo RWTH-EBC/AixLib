@@ -1,12 +1,23 @@
 within AixLib.Fluid.Pools.Examples;
-model IndoorSwimmingPool "Example of an indoor swimming pool"
+model IndoorSwimmingPoolWithError
+  "Example of an indoor swimming pool"
     extends Modelica.Icons.Example;
   .AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimming(poolParam=
         AixLib.DataBase.Pools.SportPool(),
     poolWallParam=
         AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction(),
                                            redeclare package WaterMedium =
-        WaterMedium)
+        WaterMedium,
+    cirPump(redeclare Movers.Data.Generic per(
+        power(V_flow={0,(indoorSwimming.m_flow_nominal/1000*0.2),(indoorSwimming.m_flow_nominal/1000*0.5),
+              indoorSwimming.m_flow_nominal/1000*0.7,indoorSwimming.m_flow_nominal/1000,indoorSwimming.m_flow_nominal/1000/0.7,
+              indoorSwimming.m_flow_nominal/1000/0.6,indoorSwimming.m_flow_nominal/1000/0.5,indoorSwimming.m_flow_nominal/1000
+              /0.4}, P={(indoorSwimming.m_flow_nominal/0.4)/1000*indoorSwimming.pumpHead/0.7/0.9,(
+              indoorSwimming.m_flow_nominal/0.5)/1000*indoorSwimming.pumpHead/0.7/0.9,(indoorSwimming.m_flow_nominal/0.6)/1000
+              *indoorSwimming.pumpHead/0.7/0.9,(indoorSwimming.m_flow_nominal/0.7)/1000*indoorSwimming.pumpHead/0.7/0.9,
+              indoorSwimming.m_flow_nominal/1000*indoorSwimming.pumpHead/0.8/0.9,(indoorSwimming.m_flow_nominal/1000*0.7)*
+              indoorSwimming.pumpHead/0.7/0.9,(indoorSwimming.m_flow_nominal/1000*0.5)*indoorSwimming.pumpHead/0.7/0.9,(
+              indoorSwimming.m_flow_nominal/1000*0.2)*indoorSwimming.pumpHead/0.7/0.9,0}))))
     annotation (Placement(transformation(extent={{-20,-40},{30,16}})));
 
     replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
@@ -63,4 +74,4 @@ equation
     Documentation(info="<html>
 <p>Example model for an sport oriented indoor swimming pool with an integrated ideal heat exchanger. </p>
 </html>"));
-end IndoorSwimmingPool;
+end IndoorSwimmingPoolWithError;
