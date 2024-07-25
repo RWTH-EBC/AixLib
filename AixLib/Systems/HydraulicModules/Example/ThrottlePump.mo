@@ -9,7 +9,7 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
     parameterPipe=DataBase.Pipes.Copper.Copper_40x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(speed_rpm_nominal=2540, pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,

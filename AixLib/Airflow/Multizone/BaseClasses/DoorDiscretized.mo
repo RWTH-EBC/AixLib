@@ -102,72 +102,72 @@ equation
         Line(points={{-54,-58},{-36,-58}}, color={0,0,0}),
         Line(points={{-54,-32},{-36,-32}}, color={0,0,0})}),
     Documentation(info="<html>
- <p>
- This is a partial model for the bi-directional air flow through a door.
- </p>
- <p>
- To compute the bi-directional flow,
- the door is discretize along the height coordinate, and uses
- an orifice equation to compute the flow for each compartment.
- </p>
- <p>
- The compartment area <code>dA</code> is a variable, which allows
- using the model for a door that can be open or closed.
- </p>
- </html>",
+<p>
+This is a partial model for the bi-directional air flow through a door.
+</p>
+<p>
+To compute the bi-directional flow,
+the door is discretize along the height coordinate, and uses
+an orifice equation to compute the flow for each compartment.
+</p>
+<p>
+The compartment area <code>dA</code> is a variable, which allows
+using the model for a door that can be open or closed.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 8, 2019, by Michael Wetter:<br/>
- Moved parameter <code>CD</code> from
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized\">
- AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized</a>
- to
- <a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOpen\">
- AixLib.Airflow.Multizone.DoorDiscretizedOpen</a>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/971\">#971</a>.
- </li>
- <li>
- June 27, 2018, by Michael Wetter:<br/>
- Corrected old parameter annotation.
- </li>
- <li>
- June 6, 2018, by Michael Wetter:<br/>
- Removed term that assures non-zero flow rate in each path, and
- reformulated flow balance to ensure that model is symmetric.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/937\">#937</a>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- September 26, 2013 by Michael Wetter:<br/>
- Added missing <code>each</code> keyword.
- </li>
- <li>
- December 14, 2012 by Michael Wetter:<br/>
- Renamed protected parameters for consistency with the naming conventions.
- </li>
- <li><i>December 6, 2011</i> by Michael Wetter:<br/>
-        Removed protected variable <code>rhoAve</code>.
- </li>
- <li><i>August 12, 2011</i> by Michael Wetter:<br/>
-        Changed model to use the new function
-        <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-        Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
- </li>
- <li><i>July 20, 2010</i> by Michael Wetter:<br/>
-        Migrated model to Modelica 3.1 and integrated it into the Buildings library.
- </li>
- <li><i>February 8, 2005</i> by Michael Wetter:<br/>
-        Released first version.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 8, 2019, by Michael Wetter:<br/>
+Moved parameter <code>CD</code> from
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized\">
+AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized</a>
+to
+<a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOpen\">
+AixLib.Airflow.Multizone.DoorDiscretizedOpen</a>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/971\">#971</a>.
+</li>
+<li>
+June 27, 2018, by Michael Wetter:<br/>
+Corrected old parameter annotation.
+</li>
+<li>
+June 6, 2018, by Michael Wetter:<br/>
+Removed term that assures non-zero flow rate in each path, and
+reformulated flow balance to ensure that model is symmetric.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/937\">#937</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+September 26, 2013 by Michael Wetter:<br/>
+Added missing <code>each</code> keyword.
+</li>
+<li>
+December 14, 2012 by Michael Wetter:<br/>
+Renamed protected parameters for consistency with the naming conventions.
+</li>
+<li><i>December 6, 2011</i> by Michael Wetter:<br/>
+       Removed protected variable <code>rhoAve</code>.
+</li>
+<li><i>August 12, 2011</i> by Michael Wetter:<br/>
+       Changed model to use the new function
+       <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
+       Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
+</li>
+<li><i>July 20, 2010</i> by Michael Wetter:<br/>
+       Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+</li>
+<li><i>February 8, 2005</i> by Michael Wetter:<br/>
+       Released first version.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DoorDiscretized;

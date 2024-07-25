@@ -10,7 +10,7 @@ model Admix "Test for admix circuit"
     valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(speed_rpm_nominal=2540, pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,

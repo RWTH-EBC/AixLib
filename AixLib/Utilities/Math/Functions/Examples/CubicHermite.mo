@@ -54,23 +54,23 @@ algorithm
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=1.0),
     Documentation(info="<html>
- <p>
- This example demonstrates the use of the function for cubic hermite interpolation
- and linear extrapolation.
- The example use interpolation with two different settings: One settings
- produces a monotone cubic hermite, whereas the other setting
- does not enforce monotonicity.
- The resulting plot should look as shown below, where for better visibility, the support points have been marked with black dots.
- Notice that the red curve is monotone increasing.
- </p>
- <p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Utilities/Math/Functions/Examples/cubicHermite.png\"/></p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 8, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates the use of the function for cubic hermite interpolation
+and linear extrapolation.
+The example use interpolation with two different settings: One settings
+produces a monotone cubic hermite, whereas the other setting
+does not enforce monotonicity.
+The resulting plot should look as shown below, where for better visibility, the support points have been marked with black dots.
+Notice that the red curve is monotonically increasing.
+</p>
+<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Utilities/Math/Functions/Examples/cubicHermite.png\"/></p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 8, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end CubicHermite;

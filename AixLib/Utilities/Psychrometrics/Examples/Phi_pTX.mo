@@ -35,16 +35,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/Phi_pTX.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This examples is a unit test for the relative humidity computation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 13, 2014, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This examples is a unit test for the relative humidity computation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 13, 2014, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Phi_pTX;

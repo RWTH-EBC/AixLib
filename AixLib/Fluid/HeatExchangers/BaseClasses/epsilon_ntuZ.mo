@@ -49,40 +49,40 @@ algorithm
              inverse(NTU=AixLib.Fluid.HeatExchangers.BaseClasses.ntu_epsilonZ(eps=eps, Z=Z, flowRegime=flowRegime)),
            smoothOrder=1,
            Documentation(info="<html>
- <p>
- This function computes the heat exchanger effectiveness for a given number of transfer units, capacity flow ratio and heat exchanger flow regime.
- The different options for the flow regime are declared in
- <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
- AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
- </p>
- </html>",
+<p>
+This function computes the heat exchanger effectiveness for a given number of transfer units, capacity flow ratio and heat exchanger flow regime.
+The different options for the flow regime are declared in
+<a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
+AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 28, 2016, by Massimo Cimmino:<br/>
- Added case for constant temperature phase change on one side of
- the heat exchanger.
- </li>
- <li>
- July 7, 2014, by Michael Wetter:<br/>
- Changed the type of the input <code>flowRegime</code> from
- <code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
- to <code>Integer</code>.
- This was required because this argument is passed in Dymola 2015 in the function
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_C\">
- AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_C</a>
- as an integer. Without this change, a translation warning occurs.
- </li>
- <li>
- September 25, 2013, by Michael Wetter:<br/>
- Changed test in the <code>assert</code> statement as OpenModelica
- had an error when comparing enumerations with integers.
- </li>
- <li>
- February 11, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 28, 2016, by Massimo Cimmino:<br/>
+Added case for constant temperature phase change on one side of
+the heat exchanger.
+</li>
+<li>
+July 7, 2014, by Michael Wetter:<br/>
+Changed the type of the input <code>flowRegime</code> from
+<code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
+to <code>Integer</code>.
+This was required because this argument is passed in Dymola 2015 in the function
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_C\">
+AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_C</a>
+as an integer. Without this change, a translation warning occurs.
+</li>
+<li>
+September 25, 2013, by Michael Wetter:<br/>
+Changed test in the <code>assert</code> statement as OpenModelica
+had an error when comparing enumerations with integers.
+</li>
+<li>
+February 11, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end epsilon_ntuZ;

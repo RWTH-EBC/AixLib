@@ -28,24 +28,24 @@ algorithm
   end if;
   annotation(smoothOrder=1,
       Documentation(info="<html>
- <p>
- For <i>x<sub>1</sub> &lt; x &lt; x<sub>2</sub></i>, this function interpolates
- using cubic hermite spline. For <i>x</i> outside this interval, the function
- linearly extrapolates.
- </p>
- <p>
- For how to use this function, see
- <a href=\"modelica://AixLib.Utilities.Math.Functions.Examples.CubicHermite\">
- AixLib.Utilities.Math.Functions.Examples.CubicHermite</a>.
- </p>
- </html>",
+<p>
+For <i>x<sub>1</sub> &lt; x &lt; x<sub>2</sub></i>, this function interpolates
+using cubic hermite spline. For <i>x</i> outside this interval, the function
+linearly extrapolates.
+</p>
+<p>
+For how to use this function, see
+<a href=\"modelica://AixLib.Utilities.Math.Functions.Examples.CubicHermite\">
+AixLib.Utilities.Math.Functions.Examples.CubicHermite</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 27, 2011 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 27, 2011 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end cubicHermiteLinearExtrapolation;

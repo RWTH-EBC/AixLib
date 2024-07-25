@@ -546,51 +546,51 @@ experiment(Tolerance=1e-7, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/Humidifier_u.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- Model that tests the basic class that is used for the humidifier model.
- It adds and removes water for forward and reverse flow.
- The top and bottom models should give similar results, although
- the sign of the humidity difference over the components differ
- because of the reverse flow.
- The model computes differences of results that
- are expected to be close to each other after the
- initial transients decayed.</p>
- </html>",
+<p>
+Model that tests the basic class that is used for the humidifier model.
+It adds and removes water for forward and reverse flow.
+The top and bottom models should give similar results, although
+the sign of the humidity difference over the components differ
+because of the reverse flow.
+The model computes differences of results that
+are expected to be close to each other after the
+initial transients decayed.</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference,
- and added the difference to the regression results.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- May 30, 2014, by Michael Wetter:<br/>
- Changed initialization of mass dynamics to avoid overspecified system
- of equations if the medium model is incompressible.
- </li>
- <li>
- October 9, 2013, by Michael Wetter:<br/>
- Introduced protected model <code>Humidifier</code> so that states at
- the fluid ports can be computed without having to use a conditionally
- removed variable. This is required for the model to pass the model check in
- Dymola 2014 FD01 beta3 with <code>Advanced.PedanticModelica=true;</code>.
- </li>
- <li>
- January 24, 2013, by Michael Wetter:<br/>
- Set initial conditions to
- <code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
- </li>
- <li>
- July 11, 2011, by Michael Wetter:<br/>
- Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
- </li>
- <li>
- April 18, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+May 30, 2014, by Michael Wetter:<br/>
+Changed initialization of mass dynamics to avoid overspecified system
+of equations if the medium model is incompressible.
+</li>
+<li>
+October 9, 2013, by Michael Wetter:<br/>
+Introduced protected model <code>Humidifier</code> so that states at
+the fluid ports can be computed without having to use a conditionally
+removed variable. This is required for the model to pass the model check in
+Dymola 2014 FD01 beta3 with <code>Advanced.PedanticModelica=true;</code>.
+</li>
+<li>
+January 24, 2013, by Michael Wetter:<br/>
+Set initial conditions to
+<code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
+</li>
+<li>
+July 11, 2011, by Michael Wetter:<br/>
+Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
+</li>
+<li>
+April 18, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

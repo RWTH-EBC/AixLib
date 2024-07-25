@@ -59,40 +59,40 @@ equation
         "Simulate and plot"),
         experiment(Tolerance=1e-6, StopTime=15),
 Documentation(info="<html>
- <p>
- This model provides an example of how the
- <a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.IndirectTankHeatExchanger\">
- AixLib.Fluid.Storage.BaseClasses.IndirectTankHeatExchanger</a>
- model is used. In the model water flows from a flow source through
- the heat exchanger to a low pressure environment. The stagnant fluid on the outside
- of the heat exchanger is modeled as a constant temperature.<br/>
- </p>
- </html>",
+<p>
+This model provides an example of how the
+<a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.IndirectTankHeatExchanger\">
+AixLib.Fluid.Storage.BaseClasses.IndirectTankHeatExchanger</a>
+model is used. In the model water flows from a flow source through
+the heat exchanger to a low pressure environment. The stagnant fluid on the outside
+of the heat exchanger is modeled as a constant temperature.<br/>
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 7, 2018 by Filip Jorissen:<br/>
- Copied model from Buildings and update the model accordingly.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
- </li>
- <li>
- February 27, 2016 by Michael Wetter:<br/>
- Stored example in a single file rather than a file with multiple examples.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/488\">#488</a>.
- </li>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- March 27, 2013 by Peter Grant:<br/>
- First implementation
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 7, 2018 by Filip Jorissen:<br/>
+Copied model from Buildings and update the model accordingly.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+</li>
+<li>
+February 27, 2016 by Michael Wetter:<br/>
+Stored example in a single file rather than a file with multiple examples.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/488\">#488</a>.
+</li>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+March 27, 2013 by Peter Grant:<br/>
+First implementation
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end IndirectTankHeatExchanger;
