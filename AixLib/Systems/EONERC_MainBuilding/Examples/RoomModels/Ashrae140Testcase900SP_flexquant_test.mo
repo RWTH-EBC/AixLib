@@ -473,10 +473,10 @@ model Ashrae140Testcase900SP_flexquant_test
         origin={-141,-96})));
 
   Modelica.Blocks.Sources.Pulse          QTabs_set1(
-    amplitude=5000,
+    amplitude=-250,
     width=50,
     period=1800,
-    offset=-5000,
+    offset=-0,
     startTime=17452800)
                  annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
