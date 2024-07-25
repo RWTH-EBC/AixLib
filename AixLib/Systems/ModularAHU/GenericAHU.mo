@@ -203,8 +203,10 @@ replaceable package Medium2 =
     final m_flow_nominal=m1_flow_nominal,
     redeclare Fluid.Movers.Data.Generic per(
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-      efficiency=hydraulicEfficiency,
-      motorEfficiency(eta={0.95})),
+
+      etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
+
+      efficiency=hydraulicEfficiency),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Supply air fan"
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
 
@@ -216,8 +218,10 @@ replaceable package Medium2 =
     final m_flow_nominal=m1_flow_nominal,
     redeclare Fluid.Movers.Data.Generic per(
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-      efficiency=hydraulicEfficiency,
-      motorEfficiency(eta={0.95})),
+
+      etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
+
+      efficiency=hydraulicEfficiency),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
