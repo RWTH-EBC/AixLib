@@ -108,7 +108,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex",
     "simulation": {
-      "elapsed_time": 0.067364,
+      "elapsed_time": 0.0509601,
       "final_time": 1200,
       "jacobians": 5,
       "start_time": 0,
@@ -159,9 +159,9 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageBoiler",
     "simulation": {
-      "elapsed_time": 0.0766,
+      "elapsed_time": 0.086,
       "final_time": 86400,
-      "jacobians": 85,
+      "jacobians": 101,
       "start_time": 0,
       "state_events": 0,
       "success": true
@@ -222,7 +222,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageSolarCollector",
     "simulation": {
-      "elapsed_time": 0.615,
+      "elapsed_time": 0.6,
       "final_time": 172800,
       "jacobians": 1201,
       "start_time": 0,
@@ -381,7 +381,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.Stratified",
     "simulation": {
-      "elapsed_time": 0.00902915,
+      "elapsed_time": 0.00866294,
       "final_time": 10800,
       "jacobians": 6,
       "start_time": 0,
@@ -432,7 +432,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageDetailedExample",
     "simulation": {
-      "elapsed_time": 0.0507,
+      "elapsed_time": 0.0486,
       "final_time": 86400,
       "jacobians": 45,
       "start_time": 0,
@@ -489,9 +489,9 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageSimpleExample",
     "simulation": {
-      "elapsed_time": 8.13,
+      "elapsed_time": 8.45,
       "final_time": 38200,
-      "jacobians": 58978,
+      "jacobians": 59209,
       "start_time": 0,
       "state_events": 21,
       "success": true
@@ -528,7 +528,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.ExpansionVessel",
     "simulation": {
-      "elapsed_time": 0.00534797,
+      "elapsed_time": 0.00575995,
       "final_time": 7200,
       "jacobians": 4,
       "start_time": 0,
@@ -603,7 +603,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StratifiedUnloadAtMinimumTemperature",
     "simulation": {
-      "elapsed_time": 0.0170419,
+      "elapsed_time": 0.0241089,
       "final_time": 21600,
       "jacobians": 110,
       "start_time": 0,

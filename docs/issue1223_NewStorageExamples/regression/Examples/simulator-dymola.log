@@ -100,7 +100,7 @@ savelog("AixLib.Fluid.Storage.Examples.StratifiedEnhancedInternalHex.translation
 
 rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageBoiler");
 Check of AixLib.Fluid.Storage.Examples.StorageBoiler:
-The model has the same number of unknowns and equations: 3237
+The model has the same number of unknowns and equations: 3241
 Check of AixLib.Fluid.Storage.Examples.StorageBoiler successful.
 Declaring variable: Boolean rCheck ;
 
@@ -115,26 +115,26 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.Stor
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos");
 simulateModel("AixLib.Fluid.Storage.Examples.StorageBoiler", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageBoiler");
 Translation of AixLib.Fluid.Storage.Examples.StorageBoiler:
-The DAE has 3237 scalar unknowns and 3237 scalar equations.
+The DAE has 3241 scalar unknowns and 3241 scalar equations.
  
 Statistics
  
 Original Model
-  Number of components: 641
-  Variables: 8585
+  Number of components: 651
+  Variables: 8627
   Constants: 159 (159 scalars)
-  Parameters: 4054 (3957 scalars)
-  Unknowns: 4372 (3340 scalars)
+  Parameters: 4092 (4095 scalars)
+  Unknowns: 4376 (3344 scalars)
   Differentiated variables: 106 scalars
-  Equations: 3310
-  Nontrivial: 2541
+  Equations: 3314
+  Nontrivial: 2545
 Translated Model
-  Constants: 2837 scalars
-  Free parameters: 284 scalars
-  Parameter depending: 1401 scalars
+  Constants: 2850 scalars
+  Free parameters: 287 scalars
+  Parameter depending: 1523 scalars
   Continuous time states: 76 scalars
-  Time-varying variables: 841 scalars
-  Alias variables: 2093 scalars
+  Time-varying variables: 843 scalars
+  Alias variables: 2095 scalars
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 3,   2, 2, 2, 2, 2, 2, 2, 2, 2}
   Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -319,7 +319,7 @@ savelog("AixLib.Fluid.Storage.Examples.Stratified.translation.log"); = true
 
 rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector");
 Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
-The model has the same number of unknowns and equations: 3383
+The model has the same number of unknowns and equations: 3387
 Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector successful.
 Declaring variable: Boolean rCheck ;
 
@@ -334,26 +334,26 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.Stor
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos");
 simulateModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector", tolerance=1e-6, stopTime=172800, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSolarCollector");
 Translation of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
-The DAE has 3383 scalar unknowns and 3383 scalar equations.
+The DAE has 3387 scalar unknowns and 3387 scalar equations.
  
 Statistics
  
 Original Model
-  Number of components: 678
-  Variables: 8953
+  Number of components: 688
+  Variables: 8995
   Constants: 163 (163 scalars)
-  Parameters: 4238 (4211 scalars)
-  Unknowns: 4552 (3488 scalars)
+  Parameters: 4276 (4349 scalars)
+  Unknowns: 4556 (3492 scalars)
   Differentiated variables: 114 scalars
-  Equations: 3530
-  Nontrivial: 2706
+  Equations: 3534
+  Nontrivial: 2710
 Translated Model
-  Constants: 2908 scalars
-  Free parameters: 417 scalars
-  Parameter depending: 1455 scalars
+  Constants: 2921 scalars
+  Free parameters: 420 scalars
+  Parameter depending: 1577 scalars
   Continuous time states: 83 scalars
-  Time-varying variables: 868 scalars
-  Alias variables: 2214 scalars
+  Time-varying variables: 870 scalars
+  Alias variables: 2216 scalars
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 2, 2, 2, 2, 2, 2}
   Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -582,15 +582,15 @@ savelog("AixLib.Fluid.Storage.Examples.StorageDetailedExample.translation.log");
 
 rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample");
 Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
-The model has the same number of unknowns and equations: 960
+The model has the same number of unknowns and equations: 964
 The model could not be deduced to be symbolically well-posed.
 The model has
-  934+storageSimple.layer[1].dynBal.nPorts+storageSimple.layer[2].dynBal.nPorts+  storageSimple.layer[3].dynBal.nPorts+storageSimple.layer_HE[1].dynBal.nPorts+  storageSimple.layer_HE[2].dynBal.nPorts+storageSimple.layer_HE[3].dynBal.nPorts  +2*storageSimple.n+heatingRod.vol.dynBal.nPorts+simpleConsumer.volume.dynBal.nPorts  +pumpGen.vol.dynBal.nPorts+pumpCon.vol.dynBal.nPorts
+  938+storageSimple.layer[1].dynBal.nPorts+storageSimple.layer[2].dynBal.nPorts+  storageSimple.layer[3].dynBal.nPorts+storageSimple.layer_HE[1].dynBal.nPorts+  storageSimple.layer_HE[2].dynBal.nPorts+storageSimple.layer_HE[3].dynBal.nPorts  +2*storageSimple.n+heatingRod.vol.dynBal.nPorts+simpleConsumer.volume.dynBal.nPorts  +pumpGen.vol.dynBal.nPorts+pumpCon.vol.dynBal.nPorts
 scalar unknowns and
-  865+(if storageSimple.use_TOut then 2*storageSimple.n else 0)+(if   pressureBoundary.use_Xi_in then 1 else (if pressureBoundary.use_X_in then 0   else 1))+(if  not pressureBoundary.use_p_in then 1 else 0)+2*pressureBoundary.nPorts  +(if  not pressureBoundary.use_T_in then 1 else 0)+(if pressureBoundary1.use_Xi_in   then 1 else (if pressureBoundary1.use_X_in then 0 else 1))+(if  not   pressureBoundary1.use_p_in then 1 else 0)+2*pressureBoundary1.nPorts+(if  not   pressureBoundary1.use_T_in then 1 else 0)+(if PIDHR.reset <> AixLib.Types.Reset.  Input then 1 else 0)+(if PIDPumpGen.reset <> AixLib.Types.Reset.Input then 1   else 0)+(if PIDPumpCon.reset <> AixLib.Types.Reset.Input then 1 else 0)+(if    not storageSimple.layer[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer[1].dynBal.nPorts+(if  not storageSimple.layer[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer[2].dynBal.nPorts+(if  not   storageSimple.layer[3].dynBal.use_mWat_flow then 1 else 0)+3*storageSimple.layer[3].dynBal.nPorts  +(if  not storageSimple.layer_HE[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[1].dynBal.nPorts+(if  not storageSimple.layer_HE[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer_HE[2].dynBal.nPorts+(if  not   storageSimple.layer_HE[3].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[3].dynBal.nPorts+(if  not heatingRod.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatingRod.vol.dynBal.nPorts+(if  not simpleConsumer.volume.dynBal.use_mWat_flow   then 1 else 0)+3*simpleConsumer.volume.dynBal.nPorts+(if  not   pumpGen.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpGen.vol.dynBal.nPorts+(  if  not pumpCon.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpCon.vol.dynBal.nPorts  +(if (if PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
+  869+(if storageSimple.use_TOut then 2*storageSimple.n else 0)+(if   pressureBoundary.use_Xi_in then 1 else (if pressureBoundary.use_X_in then 0   else 1))+(if  not pressureBoundary.use_p_in then 1 else 0)+2*pressureBoundary.nPorts  +(if  not pressureBoundary.use_T_in then 1 else 0)+(if pressureBoundary1.use_Xi_in   then 1 else (if pressureBoundary1.use_X_in then 0 else 1))+(if  not   pressureBoundary1.use_p_in then 1 else 0)+2*pressureBoundary1.nPorts+(if  not   pressureBoundary1.use_T_in then 1 else 0)+(if PIDHR.reset <> AixLib.Types.Reset.  Input then 1 else 0)+(if PIDPumpGen.reset <> AixLib.Types.Reset.Input then 1   else 0)+(if PIDPumpCon.reset <> AixLib.Types.Reset.Input then 1 else 0)+(if    not storageSimple.layer[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer[1].dynBal.nPorts+(if  not storageSimple.layer[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer[2].dynBal.nPorts+(if  not   storageSimple.layer[3].dynBal.use_mWat_flow then 1 else 0)+3*storageSimple.layer[3].dynBal.nPorts  +(if  not storageSimple.layer_HE[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[1].dynBal.nPorts+(if  not storageSimple.layer_HE[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer_HE[2].dynBal.nPorts+(if  not   storageSimple.layer_HE[3].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[3].dynBal.nPorts+(if  not heatingRod.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatingRod.vol.dynBal.nPorts+(if  not simpleConsumer.volume.dynBal.use_mWat_flow   then 1 else 0)+3*simpleConsumer.volume.dynBal.nPorts+(if  not   pumpGen.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpGen.vol.dynBal.nPorts+(  if  not pumpCon.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpCon.vol.dynBal.nPorts  +(if (if PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
 scalar equations.
 However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  960
+  964
 Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample successful.
 Declaring variable: Boolean rCheck ;
 
@@ -605,26 +605,26 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.Stor
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos");
 simulateModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample", tolerance=1e-6, stopTime=38200, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSimpleExample");
 Translation of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
-The DAE has 960 scalar unknowns and 960 scalar equations.
+The DAE has 964 scalar unknowns and 964 scalar equations.
  
 Statistics
  
 Original Model
-  Number of components: 229
-  Variables: 2454
+  Number of components: 247
+  Variables: 2530
   Constants: 57 (57 scalars)
-  Parameters: 1109 (1398 scalars)
-  Unknowns: 1288 (1006 scalars)
+  Parameters: 1181 (1670 scalars)
+  Unknowns: 1292 (1010 scalars)
   Differentiated variables: 28 scalars
-  Equations: 1097
-  Nontrivial: 856
+  Equations: 1101
+  Nontrivial: 860
 Translated Model
-  Constants: 1025 scalars
-  Free parameters: 178 scalars
-  Parameter depending: 387 scalars
+  Constants: 1047 scalars
+  Free parameters: 186 scalars
+  Parameter depending: 627 scalars
   Outputs: 1 scalars
   Continuous time states: 17 scalars
-  Time-varying variables: 239 scalars
+  Time-varying variables: 245 scalars
   Alias variables: 632 scalars
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {4}
@@ -768,16 +768,16 @@ Statistics
  
 Original Model
   Number of components: 16
-  Variables: 169
+  Variables: 168
   Constants: 4 (4 scalars)
-  Parameters: 75 (68 scalars)
+  Parameters: 74 (67 scalars)
   Unknowns: 90 (63 scalars)
   Differentiated variables: 4 scalars
   Equations: 78
   Nontrivial: 56
 Translated Model
   Constants: 50 scalars
-  Free parameters: 17 scalars
+  Free parameters: 16 scalars
   Parameter depending: 13 scalars
   Continuous time states: 3 scalars
   Time-varying variables: 15 scalars
