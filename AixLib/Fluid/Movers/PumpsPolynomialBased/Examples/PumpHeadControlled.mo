@@ -24,7 +24,7 @@ model PumpHeadControlled "testing the head controlled pump model."
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
   Modelica.Blocks.Sources.BooleanPulse    PumpOn1(period=600, width=500/600*100,
     startTime=0)
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
@@ -66,9 +66,9 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
           10},{40,-30},{-20,-30}}, color={0,127,255}));
   connect(vessle.ports[1], pump.port_a)
-    annotation (Line(points={{-34,10},{-10,10}}, color={0,127,255}));
+    annotation (Line(points={{-37,10},{-10,10}}, color={0,127,255}));
   connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
-          {-60,-30},{-60,10},{-38,10}}, color={0,127,255}));
+          {-60,-30},{-60,10},{-35,10}}, color={0,127,255}));
   connect(rampValvePosition.y, simpleValve.y)
     annotation (Line(points={{-21,-60},{-30,-60},{-30,-42}}, color={0,0,127}));
   annotation (
@@ -77,7 +77,7 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     Documentation(revisions="<html><ul>
-  <li>2019-09-18 by Alexander Kümpel:<br/>
+  <li>2019-09-18 by Alexander Kuempel:<br/>
     Renaming and restructuring.
   </li>
   <li>2018-03-01 by Peter Matthes:<br/>

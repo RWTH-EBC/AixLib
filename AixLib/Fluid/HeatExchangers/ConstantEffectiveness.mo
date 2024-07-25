@@ -26,51 +26,51 @@ model ConstantEffectiveness "Heat exchanger with constant effectiveness"
           preferredView="info",
 defaultComponentName="hex",
 Documentation(info="<html>
- <p>
- Model for a heat exchanger with constant effectiveness.
- </p>
- <p>
- This model transfers heat in the amount of
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
-   Q = Q<sub>max</sub> &epsilon;,
- </p>
- <p>
- where <i>&epsilon;</i> is a constant effectiveness and
- <i>Q<sub>max</sub></i> is the maximum heat that can be transferred.
- </p>
- <p>
- For a heat and moisture exchanger, use
- <a href=\"modelica://AixLib.Fluid.MassExchangers.ConstantEffectiveness\">
- AixLib.Fluid.MassExchangers.ConstantEffectiveness</a>
- instead of this model.
- </p>
- </html>",
+<p>
+Model for a heat exchanger with constant effectiveness.
+</p>
+<p>
+This model transfers heat in the amount of
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  Q = Q<sub>max</sub> &epsilon;,
+</p>
+<p>
+where <i>&epsilon;</i> is a constant effectiveness and
+<i>Q<sub>max</sub></i> is the maximum heat that can be transferred.
+</p>
+<p>
+For a heat and moisture exchanger, use
+<a href=\"modelica://AixLib.Fluid.MassExchangers.ConstantEffectiveness\">
+AixLib.Fluid.MassExchangers.ConstantEffectiveness</a>
+instead of this model.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 13, 2013 by Michael Wetter:<br/>
- Corrected error in the documentation.
- </li>
- <li>
- July 30, 2013 by Michael Wetter:<br/>
- Updated model to use new variable <code>mWat_flow</code>
- in the base class.
- </li>
- <li>
- January 28, 2010, by Michael Wetter:<br/>
- Added regularization near zero flow.
- </li>
- <li>
- October 2, 2009, by Michael Wetter:<br/>
- Changed computation of inlet temperatures to use
- <code>state_*_inflow</code> which is already known in base class.
- </li>
- <li>
- April 28, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 13, 2013 by Michael Wetter:<br/>
+Corrected error in the documentation.
+</li>
+<li>
+July 30, 2013 by Michael Wetter:<br/>
+Updated model to use new variable <code>mWat_flow</code>
+in the base class.
+</li>
+<li>
+January 28, 2010, by Michael Wetter:<br/>
+Added regularization near zero flow.
+</li>
+<li>
+October 2, 2009, by Michael Wetter:<br/>
+Changed computation of inlet temperatures to use
+<code>state_*_inflow</code> which is already known in base class.
+</li>
+<li>
+April 28, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectiveness;

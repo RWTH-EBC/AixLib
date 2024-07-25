@@ -154,18 +154,18 @@ equation
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-140},{140,140}})),
     Documentation(info="<html>
- <p>
- This model test the parameterization of three-way valves.
- All valves are sized equally, but use different configuration options.
- Therefore, the valves have all the same mass flow rate.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 7, 2017, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model test the parameterization of three-way valves.
+All valves are sized equally, but use different configuration options.
+Therefore, the valves have all the same mass flow rate.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 7, 2017, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreeWayValveParameterization;

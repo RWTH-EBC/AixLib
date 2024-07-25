@@ -112,114 +112,114 @@ initial equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="jun",
     Documentation(info="<html>
- <p>
- Model of a flow junction with an optional fixed resistance in each flow leg
- and an optional mixing volume at the junction.
- </p>
- <p>
- The pressure drop is implemented using the model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
- AixLib.Fluid.FixedResistances.PressureDrop</a>.
- If its nominal pressure drop is set to zero, then the pressure drop
- model will be removed.
- For example, the pressure drop declaration
- </p>
- <pre>
-   m_flow_nominal={ 0.1, 0.1,  -0.2},
-   dp_nominal =   {500,    0, -6000}
- </pre>
- <p>
- would model a flow mixer that has the nominal flow rates and associated pressure drops
- as shown in the figure below. Note that <code>port_3</code> is set to negative values.
- The negative values indicate that at the nominal conditions, fluid is leaving the component.
- </p>
- <p align=\"center\">
- <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Junction.png\"/>
- </p>
- <p>
- If
- <code>energyDynamics &lt;&gt; Modelica.Fluid.Types.Dynamics.SteadyState</code>,
- then at the flow junction, a fluid volume is modeled.
- The fluid volume is implemented using the model
- <a href=\"modelica://AixLib.Fluid.Delays.DelayFirstOrder\">
- AixLib.Fluid.Delays.DelayFirstOrder</a>.
- The fluid volume has the size
- </p>
- <pre>
-   V = sum(abs(m_flow_nominal[:])/3)*tau/rho_nominal
- </pre>
- <p>
- where <code>tau</code> is a parameter and <code>rho_nominal</code> is the density
- of the medium in the volume at nominal condition.
- Setting <code>energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial</code>
- can help reducing the size of the nonlinear
- system of equations.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- February 26, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- March 26, 2018 by Filip Jorissen:<br/>
- Removed <code>final allowFlowReversal=true</code> from all resistances
- since this overrides the default simplification when the flow
- is not bidirectional.
- This change can lead to smaller algebraic loops.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/898\">issue 898</a>.
- </li>
- <li>
- December 1, 2016, by Michael Wetter:<br/>
- Renamed model from <code>SplitterFixedResistanceDpM</code> to
- <code>FlowJunction</code> and removed the parameters
- <code>use_dh</code>, <code>dh</code> and <code>ReC</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
- </li>
- <li>
- October 14, 2016 by Michael Wetter:<br/>
- Added to Annex 60 library.<br/>
- Updated comment for parameter <code>use_dh</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
- </li>
- <li>
- Removed parameter <code>dynamicBalance</code> that overwrote the setting
- of <code>energyDynamics</code> and <code>massDynamics</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">
- Annex 60, issue 411</a>.
- </li>
- <li>
- February 1, 2012 by Michael Wetter:<br/>
- Expanded documentation.
- </li>
- <li>
- August 4, 2011 by Michael Wetter:<br/>
- Added <code>final allowFlowReversal=true</code> to all resistances since it is impractical
- to avoid flow reversal in large flow networks where such a setting may be useful.
- </li>
- <li>
- June 11, 2008 by Michael Wetter:<br/>
- Based class on
- <a href=\"modelica://AixLib.Fluid.BaseClasses.PartialThreeWayFixedResistance\">
- AixLib.Fluid.BaseClasses.PartialThreeWayFixedResistance</a>.
- </li>
- <li>
- July 20, 2007 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model of a flow junction with an optional fixed resistance in each flow leg
+and an optional mixing volume at the junction.
+</p>
+<p>
+The pressure drop is implemented using the model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
+AixLib.Fluid.FixedResistances.PressureDrop</a>.
+If its nominal pressure drop is set to zero, then the pressure drop
+model will be removed.
+For example, the pressure drop declaration
+</p>
+<pre>
+  m_flow_nominal={ 0.1, 0.1,  -0.2},
+  dp_nominal =   {500,    0, -6000}
+</pre>
+<p>
+would model a flow mixer that has the nominal flow rates and associated pressure drops
+as shown in the figure below. Note that <code>port_3</code> is set to negative values.
+The negative values indicate that at the nominal conditions, fluid is leaving the component.
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Junction.png\"/>
+</p>
+<p>
+If
+<code>energyDynamics &lt;&gt; Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+then at the flow junction, a fluid volume is modeled.
+The fluid volume is implemented using the model
+<a href=\"modelica://AixLib.Fluid.Delays.DelayFirstOrder\">
+AixLib.Fluid.Delays.DelayFirstOrder</a>.
+The fluid volume has the size
+</p>
+<pre>
+  V = sum(abs(m_flow_nominal[:])/3)*tau/rho_nominal
+</pre>
+<p>
+where <code>tau</code> is a parameter and <code>rho_nominal</code> is the density
+of the medium in the volume at nominal condition.
+Setting <code>energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial</code>
+can help reducing the size of the nonlinear
+system of equations.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+February 26, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+March 26, 2018 by Filip Jorissen:<br/>
+Removed <code>final allowFlowReversal=true</code> from all resistances
+since this overrides the default simplification when the flow
+is not bidirectional.
+This change can lead to smaller algebraic loops.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/898\">issue 898</a>.
+</li>
+<li>
+December 1, 2016, by Michael Wetter:<br/>
+Renamed model from <code>SplitterFixedResistanceDpM</code> to
+<code>FlowJunction</code> and removed the parameters
+<code>use_dh</code>, <code>dh</code> and <code>ReC</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
+</li>
+<li>
+October 14, 2016 by Michael Wetter:<br/>
+Added to Annex 60 library.<br/>
+Updated comment for parameter <code>use_dh</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
+</li>
+<li>
+Removed parameter <code>dynamicBalance</code> that overwrote the setting
+of <code>energyDynamics</code> and <code>massDynamics</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/411\">
+Annex 60, issue 411</a>.
+</li>
+<li>
+February 1, 2012 by Michael Wetter:<br/>
+Expanded documentation.
+</li>
+<li>
+August 4, 2011 by Michael Wetter:<br/>
+Added <code>final allowFlowReversal=true</code> to all resistances since it is impractical
+to avoid flow reversal in large flow networks where such a setting may be useful.
+</li>
+<li>
+June 11, 2008 by Michael Wetter:<br/>
+Based class on
+<a href=\"modelica://AixLib.Fluid.BaseClasses.PartialThreeWayFixedResistance\">
+AixLib.Fluid.BaseClasses.PartialThreeWayFixedResistance</a>.
+</li>
+<li>
+July 20, 2007 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Junction;

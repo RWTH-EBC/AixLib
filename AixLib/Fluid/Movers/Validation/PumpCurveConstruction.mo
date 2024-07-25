@@ -154,45 +154,45 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PumpCurveConstruction.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example tests whether the construction of the pump curve is correct implemented
- for the cases where no data point is given at zero head, zero mass flow rate, or both.
- </p>
- <p>
- Each pump is identical, but different points on the pump curve are specified.
- However, the pump curves are linear and hence, because the pump curves are linearly
- extrapolated, all four pumps need to give the same flow rate.
- </p>
- <h4>Implementation</h4>
- <p>
- The pump curves are such that the protected parameter <code>curve</code>
- of the pumps have different values. This then tests the correct extrapolation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 6, 2016, by Michael Wetter:<br/>
- Relaxed input signal to allow simulation if bounds on min and max values are checked in Dymola.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
- </li>
- <li>February 20, 2016, by Ruben Baetens:<br/>
- Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- January 7, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example tests whether the construction of the pump curve is correct implemented
+for the cases where no data point is given at zero head, zero mass flow rate, or both.
+</p>
+<p>
+Each pump is identical, but different points on the pump curve are specified.
+However, the pump curves are linear and hence, because the pump curves are linearly
+extrapolated, all four pumps need to give the same flow rate.
+</p>
+<h4>Implementation</h4>
+<p>
+The pump curves are such that the protected parameter <code>curve</code>
+of the pumps have different values. This then tests the correct extrapolation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 6, 2016, by Michael Wetter:<br/>
+Relaxed input signal to allow simulation if bounds on min and max values are checked in Dymola.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+</li>
+<li>February 20, 2016, by Ruben Baetens:<br/>
+Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+January 7, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,120}},
           preserveAspectRatio=false), graphics),
-    Icon(coordinateSystem(extent={{-100,-100},{100,120}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-100},{100,120}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PumpCurveConstruction;

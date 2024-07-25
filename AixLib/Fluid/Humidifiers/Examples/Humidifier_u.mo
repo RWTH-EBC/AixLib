@@ -105,30 +105,30 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Humidifiers/Examples/Humidifier_u.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Model that demonstrates the use of an ideal humidifier.
- Both humidifer models are identical, except that one model is configured
- as a steady-state model, whereas the other is configured as a dynamic model.
- Both humidifiers add water to the medium to track a set-point for the outlet
- temperature using adiabatic cooling.
- The temperature of the water that is added to the medium is determined by
- the parameter <code>T</code> of the humidifier models.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 23, 2013, by Michael Wetter:<br/>
- Added flow resistance at the outlet of the humidifier to avoid a numerical derivative,
- and changed model to use a prescribed mass flow rate.
- </li>
- <li>
- July 11, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Model that demonstrates the use of an ideal humidifier.
+Both humidifer models are identical, except that one model is configured
+as a steady-state model, whereas the other is configured as a dynamic model.
+Both humidifiers add water to the medium to track a set-point for the outlet
+temperature using adiabatic cooling.
+The temperature of the water that is added to the medium is determined by
+the parameter <code>T</code> of the humidifier models.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 23, 2013, by Michael Wetter:<br/>
+Added flow resistance at the outlet of the humidifier to avoid a numerical derivative,
+and changed model to use a prescribed mass flow rate.
+</li>
+<li>
+July 11, 2011, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     experiment(
       StopTime=1200,
-      Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

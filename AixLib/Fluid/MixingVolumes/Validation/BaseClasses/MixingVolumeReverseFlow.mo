@@ -80,36 +80,36 @@ equation
           40}}, color={0,0,127}));
   annotation (Documentation(
         info="<html>
- <p>
- This model is the base class to validate
- the mixing volume with air flowing into and out of the volume
- and heat, moisture or trace substance added to the volume.
- </p>
- <p>
- The model <code>volDyn</code> uses a dynamic balance,
- whereas the model <code>volSte</code> uses a steady-state balance.
- The mass flow rate starts positive and reverses its direction at <i>t=5</i> seconds.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 29, 2021, by Michael Wetter:<br/>
- Reformulated constraint of replaceable model to avoid access of
- component that is not in constraining type.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">IBPSA, #1473</a>.
- </li>
- <li>
- December 23, 2019, by Michael Wetter:<br/>
- Changed constraining clause to ensure that heat port is present.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1268\">IBPSA, #1268</a>.
- </li>
- <li>
- January 19, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model is the base class to validate
+the mixing volume with air flowing into and out of the volume
+and heat, moisture or trace substance added to the volume.
+</p>
+<p>
+The model <code>volDyn</code> uses a dynamic balance,
+whereas the model <code>volSte</code> uses a steady-state balance.
+The mass flow rate starts positive and reverses its direction at <i>t=5</i> seconds.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 29, 2021, by Michael Wetter:<br/>
+Reformulated constraint of replaceable model to avoid access of
+component that is not in constraining type.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">IBPSA, #1473</a>.
+</li>
+<li>
+December 23, 2019, by Michael Wetter:<br/>
+Changed constraining clause to ensure that heat port is present.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1268\">IBPSA, #1268</a>.
+</li>
+<li>
+January 19, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeReverseFlow;

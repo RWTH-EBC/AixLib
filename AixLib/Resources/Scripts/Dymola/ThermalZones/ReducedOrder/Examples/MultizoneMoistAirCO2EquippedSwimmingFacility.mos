@@ -1,4 +1,4 @@
-simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="Radau", resultFile="MultizoneMoistAirCO2EquippedSwimmingFacility");
+simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility", tolerance=1e-6, stopTime=3.1536e+007, numberOfIntervals=0, outputInterval=3600, method="CVode", resultFile="MultizoneMoistAirCO2EquippedSwimmingFacility");
 createPlot(id = 1,
  position = {55, 50, 697, 502},
  x = "time",

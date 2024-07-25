@@ -173,7 +173,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{90,-40},{110,-20}}),
         iconTransformation(extent={{90,-40},{110,-20}})));
 
-  .AixLib.Fluid.Pools.BaseClasses.waveMachine waveMachine(
+  AixLib.Fluid.Pools.BaseClasses.waveMachine waveMachine(
     heightWave=poolParam.heiWav,
     widthWave=poolParam.widWav,
     timeWavePul_start=poolParam.timeWavPul_start,
@@ -305,7 +305,7 @@ model IndoorSwimmingPool
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow idealHeater
     if poolParam.use_ideHeaExc
     annotation (Placement(transformation(extent={{48,-20},{32,-4}})));
-  Controls.Continuous.LimPID        PI(
+  AixLib.Controls.Continuous.LimPID        PI(
     k=poolParam.KHeat,
     yMax=poolParam.QMaxHeat,
     yMin=poolParam.QMinHeat,
@@ -317,38 +317,25 @@ model IndoorSwimmingPool
   Modelica.Blocks.Sources.RealExpression getSetTPool(y=poolParam.TPool)
     if poolParam.use_ideHeaExc
     annotation (Placement(transformation(extent={{96,-24},{78,-8}})));
-  Controls.Continuous.LimPID        PI1(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=5,
-    yMax=m_flow_nominal/0.9,
-    yMin=0) annotation (Placement(transformation(extent={{18,-54},{8,-44}})));
-  Movers.FlowControlled_m_flow cirPump(
+  AixLib.Fluid.Movers.FlowControlled_m_flow cirPump(
     redeclare package Medium = WaterMedium,
+    redeclare Movers.Data.Generic per(
+      pressure(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
+            m_flow_nominal/1000/0.7}, dp={pumpHead/0.7,pumpHead,0}),
+      etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
+
+      etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.Efficiency_VolumeFlowRate,
+
+      efficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
+            m_flow_nominal/1000/0.7}, eta={0.7,0.8,0.7}),
+      motorEfficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
+            m_flow_nominal/1000/0.7}, eta={0.9,0.9,0.9})),
+    inputType=AixLib.Fluid.Types.InputType.Continuous,
     energyDynamics=energyDynamics,
     T_start=poolParam.TPool,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
-    redeclare Movers.Data.Generic per(
-      pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
-            pumpHead/0.7,pumpHead,0}),
-      use_powerCharacteristic=false,
-      hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-          eta={0.7,0.8,0.7}),
-      motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-          eta={0.9,0.9,0.9}),
-      power(V_flow={0,(m_flow_nominal/1000*0.2),(m_flow_nominal/1000*0.5),
-            m_flow_nominal/1000*0.7,m_flow_nominal/1000,m_flow_nominal/1000/0.7,
-            m_flow_nominal/1000/0.6,m_flow_nominal/1000/0.5,m_flow_nominal/1000
-            /0.4}, P={(m_flow_nominal/0.4)/1000*pumpHead/0.7/0.9,(
-            m_flow_nominal/0.5)/1000*pumpHead/0.7/0.9,(m_flow_nominal/0.6)/1000
-            *pumpHead/0.7/0.9,(m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,
-            m_flow_nominal/1000*pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*
-            pumpHead/0.7/0.9,(m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(
-            m_flow_nominal/1000*0.2)*pumpHead/0.7/0.9,0})),
-    inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
-    nominalValuesDefineDefaultPressureCurve=true,
     dp_nominal=pumpHead,
     m_flow_start=m_flow_nominal)
     "circulation pump for permanent pool circulation " annotation (Placement(
@@ -356,11 +343,7 @@ model IndoorSwimmingPool
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={0,-68})));
-  Sensors.MassFlowRate              senMasFlo(redeclare package Medium =
-        WaterMedium, allowFlowReversal=false)
-    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={22,-68})));
+
   FixedResistances.PressureDrop              res(
     redeclare package Medium = WaterMedium,
     allowFlowReversal=false,
@@ -516,16 +499,6 @@ equation
       points={{-36,26},{-30,26},{-24,26}},
       color={0,127,255},
       smooth=Smooth.Bezier));
-  connect(cirPump.port_b, senMasFlo.port_a)
-    annotation (Line(points={{8,-68},{16,-68}}, color={0,127,255}));
-  connect(senMasFlo.port_b, res.port_a)
-    annotation (Line(points={{28,-68},{32,-68}}, color={0,127,255}));
-  connect(PI1.y, cirPump.m_flow_in)
-    annotation (Line(points={{7.5,-49},{0,-49},{0,-58.4}}, color={0,0,127}));
-  connect(PI1.u_s,getSetMasFlo. y)
-    annotation (Line(points={{19,-49},{27.3,-49}}, color={0,0,127}));
-  connect(senMasFlo.m_flow, PI1.u_m) annotation (Line(points={{22,-61.4},{22,-58},
-          {13,-58},{13,-55}}, color={0,0,127}));
 
   connect(elPower.u[1], cirPump.P) annotation (Line(points={{72,-76},{62,-76},{62,
           -60.8},{8.8,-60.8}}, color={0,0,127}));
@@ -538,6 +511,10 @@ equation
           4},{92,16},{83,16}}, color={0,0,127}));
   connect(getEva.y, m_flow_eva) annotation (Line(points={{-71.1,41},{-68,41},{
           -68,48},{-108,48}}, color={0,0,127}));
+  connect(getSetMasFlo.y, cirPump.m_flow_in)
+    annotation (Line(points={{27.3,-49},{0,-49},{0,-58.4}}, color={0,0,127}));
+  connect(cirPump.port_b, res.port_a)
+    annotation (Line(points={{8,-68},{32,-68}}, color={0,127,255}));
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},

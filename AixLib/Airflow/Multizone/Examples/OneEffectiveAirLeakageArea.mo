@@ -69,30 +69,30 @@ equation
       StopTime=7200,
       Tolerance=1e-08),
     Documentation(info="<html>
- <p>
- This model consists of a model for an effective air leakage area
- that is connected to two air volumes.
- Air flows due to the addition of air to the volume <code>volA</code>
- and because heat is exchanged with <code>volB</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 26, 2021 by Michael Wetter:<br/>
- Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
- </li>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- November 10, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model consists of a model for an effective air leakage area
+that is connected to two air volumes.
+Air flows due to the addition of air to the volume <code>volA</code>
+and because heat is exchanged with <code>volB</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2021 by Michael Wetter:<br/>
+Updated comments for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+</li>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+November 10, 2011, by Michael Wetter:<br/>
+Added documentation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end OneEffectiveAirLeakageArea;

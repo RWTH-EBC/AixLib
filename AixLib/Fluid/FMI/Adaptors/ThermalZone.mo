@@ -114,19 +114,19 @@ protected
           extent={{-150,90},{140,50}},
           textString="%name",
           textColor={0,0,255})}), Documentation(info="<html>
- <p>
- The (time varying) vector <code>Real</code> output signal of this block can be defined in its
- parameter menu via variable <code>y</code>. The purpose is to support the
- easy definition of vector-valued Real expressions in a block diagram.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 27, 2016, by Thierry S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>"));
+<p>
+The (time varying) vector <code>Real</code> output signal of this block can be defined in its
+parameter menu via variable <code>y</code>. The purpose is to support the
+easy definition of vector-valued Real expressions in a block diagram.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 27, 2016, by Thierry S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
   end RealVectorExpression;
 
   block x_i_toX_w "Conversion from Xi to X"
@@ -163,32 +163,32 @@ protected
   X_w_internal = sum(Xi_internal);
   connect( X_w, X_w_internal)
   annotation (Documentation(revisions="<html>
-   <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to moist air only.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- November 8, 2016, by Michael Wetter:<br/>
- Removed wrong usage of <code>each</code> keyword.
- </li>
- <li>
- April 27, 2016, by Thierry S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Block that converts a vector input for the water mass fraction <code>Xi</code>
- to a scalar output <code>X</code>.
- This is needed for models in which a scalar input signal <code>Xi</code> that
- may be conditionally removed is to be connected to a model with a vector
- input <code>X</code>, because the conversion from scalar to vector
- needs to access the conditional connector, but conditional connectors
- can only be used in <code>connect</code> statements.
- </p>
- </html>"));
+  <ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air only.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+November 8, 2016, by Michael Wetter:<br/>
+Removed wrong usage of <code>each</code> keyword.
+</li>
+<li>
+April 27, 2016, by Thierry S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Block that converts a vector input for the water mass fraction <code>Xi</code>
+to a scalar output <code>X</code>.
+This is needed for models in which a scalar input signal <code>Xi</code> that
+may be conditionally removed is to be connected to a model with a vector
+input <code>X</code>, because the conversion from scalar to vector
+needs to access the conditional connector, but conditional connectors
+can only be used in <code>connect</code> statements.
+</p>
+</html>"));
   end x_i_toX_w;
 
 initial equation
@@ -333,70 +333,70 @@ equation
           horizontalAlignment=TextAlignment.Right,
           textString="[%nPorts]")}),
     Documentation(info="<html>
- <p>
- Adaptor that can be used to connect a model of a thermal zone (with acausal ports)
- to input/output signals, which can be exposed in an FMI interface.
- </p>
- <p>
- This model has a vector <code>fluPor</code> with dimension <code>nPorts</code>
- which can be exposed at the FMI interface for the connecting the HVAC system.
- These connectors contain for each fluid inlet the mass flow rate, the temperature,
- the water vapor mass fraction per total mass of the air (unless <code>Medium.nXi=0</code>),
- and the trace substances (unless <code>Medium.nC=0</code>).
- </p>
- 
- <p>
- The connector <code>ports</code> can be used to connect the model with a thermal zone.
- The number of connections to <code>ports</code> must
- be equal to <code>nPorts</code>.
- </p>
- 
- <h4>Assumption and limitations</h4>
- <p>
- The mass flow rates at <code>ports</code> sum to zero, hence this
- model conserves mass. If the mass flow rates at <code>fluPor</code>
- do not sum to zero, then this model stops with an error.
- </p>
- <p>
- This model does not impose any pressure, other than setting the pressure
- of all fluid connections to <code>ports</code> to be equal.
- The reason is that setting a pressure can lead to non-physical system models,
- for example if a mass flow rate is imposed and the HVAC system is connected
- to a model that sets a pressure boundary condition such as
- <a href=\"modelica://AixLib.Fluid.Sources.Outside\">
- AixLib.Fluid.Sources.Outside</a>.
- Also, setting a pressure would make it impossible to use multiple instances
- of this model (one for each thermal zone) and build in Modelica an airflow network
- model with pressure driven mass flow rates.
- </p>
- <p>
- The model has no pressure drop.
- </p>
- 
- <h4>Typical use</h4>
- <p>
- See
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZone\">
- AixLib.Fluid.FMI.ExportContainers.ThermalZone
- </a>
- for a model that uses this model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice to moist air only.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- June 29, 2016, by Michael Wetter:<br/>
- Revised implementation and documentation.
- </li>
- <li>
- April 27, 2016, by Thierry S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Adaptor that can be used to connect a model of a thermal zone (with acausal ports)
+to input/output signals, which can be exposed in an FMI interface.
+</p>
+<p>
+This model has a vector <code>fluPor</code> with dimension <code>nPorts</code>
+which can be exposed at the FMI interface for the connecting the HVAC system.
+These connectors contain for each fluid inlet the mass flow rate, the temperature,
+the water vapor mass fraction per total mass of the air (unless <code>Medium.nXi=0</code>),
+and the trace substances (unless <code>Medium.nC=0</code>).
+</p>
+
+<p>
+The connector <code>ports</code> can be used to connect the model with a thermal zone.
+The number of connections to <code>ports</code> must
+be equal to <code>nPorts</code>.
+</p>
+
+<h4>Assumption and limitations</h4>
+<p>
+The mass flow rates at <code>ports</code> sum to zero, hence this
+model conserves mass. If the mass flow rates at <code>fluPor</code>
+do not sum to zero, then this model stops with an error.
+</p>
+<p>
+This model does not impose any pressure, other than setting the pressure
+of all fluid connections to <code>ports</code> to be equal.
+The reason is that setting a pressure can lead to non-physical system models,
+for example if a mass flow rate is imposed and the HVAC system is connected
+to a model that sets a pressure boundary condition such as
+<a href=\"modelica://AixLib.Fluid.Sources.Outside\">
+AixLib.Fluid.Sources.Outside</a>.
+Also, setting a pressure would make it impossible to use multiple instances
+of this model (one for each thermal zone) and build in Modelica an airflow network
+model with pressure driven mass flow rates.
+</p>
+<p>
+The model has no pressure drop.
+</p>
+
+<h4>Typical use</h4>
+<p>
+See
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZone\">
+AixLib.Fluid.FMI.ExportContainers.ThermalZone
+</a>
+for a model that uses this model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air only.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+June 29, 2016, by Michael Wetter:<br/>
+Revised implementation and documentation.
+</li>
+<li>
+April 27, 2016, by Thierry S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZone;

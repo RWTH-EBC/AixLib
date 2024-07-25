@@ -15,23 +15,23 @@ initial equation
   assert(abs(timeSpan[2]-14400) < 0.1, "Error in getting time span.");
   annotation (
     Documentation(info="<html>
- <p>
- This example tests getting the time span of a TMY3 weather data file with a long line in the
- header of the weather file.
- </p>
- </html>",
+<p>
+This example tests getting the time span of a TMY3 weather data file with a long line in the
+header of the weather file.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 27, 2021, by Michael Wetter:<br/>
- First implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1432\">#1432</a>.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+January 27, 2021, by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1432\">#1432</a>.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetTimeSpanTMY3LongHeader.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end GetTimeSpanTMY3LongHeader;

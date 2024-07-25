@@ -49,24 +49,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/SteamDerivativeCheck.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks whether the function derivative
- is implemented correctly. If the derivative implementation
- is not correct, the model will stop with an assert statement.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- March 16, 2020, by Michael Wetter:<br/>
- Changed to relative plus absolute error check in assertion because the specific enthalpy has a
- magnitude of <i>1E6</i>, which causes the assertion to fail in JModelica if an absolute accuracy
- of <i>1E-2</i> is requested.
- </li>
- <li>
- March 6, 2020, by Kathryn Hinkelman:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example checks whether the function derivative
+is implemented correctly. If the derivative implementation
+is not correct, the model will stop with an assert statement.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+March 16, 2020, by Michael Wetter:<br/>
+Changed to relative plus absolute error check in assertion because the specific enthalpy has a
+magnitude of <i>1E6</i>, which causes the assertion to fail in JModelica if an absolute accuracy
+of <i>1E-2</i> is requested.
+</li>
+<li>
+March 6, 2020, by Kathryn Hinkelman:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SteamDerivativeCheck;

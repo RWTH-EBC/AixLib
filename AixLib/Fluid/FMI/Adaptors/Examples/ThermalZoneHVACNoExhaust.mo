@@ -148,66 +148,66 @@ equation
         Text(
           extent={{-190,124},{-152,100}},
           pattern=LinePattern.None,
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Left,
           textString="Simplified model of
- an HVAC system
- in Modelica that could
- be exposed as an FMU"),
+an HVAC system
+in Modelica that could
+be exposed as an FMU"),
         Text(
           extent={{90,118},{128,94}},
           pattern=LinePattern.None,
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Left,
           textString="Simplified model of
- a thermal zone that
- may be in an FMU
- (but is here for simplicity
- also implemented in Modelica)")}),
+a thermal zone that
+may be in an FMU
+(but is here for simplicity
+also implemented in Modelica)")}),
     Documentation(info="<html>
- <p>
- This example demonstrates how to
- use the adaptors
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
- AixLib.Fluid.FMI.Adaptors.HVAC</a>
- and
- <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
- AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
- </p>
- <p>
- On the left hand side is an HVAC system with supply and return air stream.
- These are all connected to the adaptor.
- On the right of the adaptor is a simple room model, approximated by a volume with
- first order dynamics and heat loss to the ambient.
- </p>
- <p>
- Note that the there is zero net air flow into and out of the volume <code>vol</code>
- because the adaptor <code>hvacAda</code> conserves mass. Hence, any infiltration or
- exfiltration needs to be
- connected to the adaptor <code>hvacAda</code>, rather than the volume <code>vol</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 11, 2020, by Michael Wetter:<br/>
- Removed <code>fontSize</code> in annotation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1318\">#1318</a>.
- </li>
- <li>
- November 29, 2016, by Michael Wetter:<br/>
- Added separate signal for outdoor temperature used by HVAC system. This is
- to improve clarity regarding what signals are exchanged, see also
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/598\">#598</a>.
- </li>
- <li>
- June 29, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to
+use the adaptors
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
+AixLib.Fluid.FMI.Adaptors.HVAC</a>
+and
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
+AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
+</p>
+<p>
+On the left hand side is an HVAC system with supply and return air stream.
+These are all connected to the adaptor.
+On the right of the adaptor is a simple room model, approximated by a volume with
+first order dynamics and heat loss to the ambient.
+</p>
+<p>
+Note that the there is zero net air flow into and out of the volume <code>vol</code>
+because the adaptor <code>hvacAda</code> conserves mass. Hence, any infiltration or
+exfiltration needs to be
+connected to the adaptor <code>hvacAda</code>, rather than the volume <code>vol</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 11, 2020, by Michael Wetter:<br/>
+Removed <code>fontSize</code> in annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1318\">#1318</a>.
+</li>
+<li>
+November 29, 2016, by Michael Wetter:<br/>
+Added separate signal for outdoor temperature used by HVAC system. This is
+to improve clarity regarding what signals are exchanged, see also
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/598\">#598</a>.
+</li>
+<li>
+June 29, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Adaptors/Examples/ThermalZoneHVACNoExhaust.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=172800),
-  __Dymola_LockedEditing="Model from IBPSA");
+    experiment(Tolerance=1e-6, StopTime=172800), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZoneHVACNoExhaust;

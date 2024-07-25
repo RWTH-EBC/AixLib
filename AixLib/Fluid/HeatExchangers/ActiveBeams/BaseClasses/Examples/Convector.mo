@@ -49,28 +49,28 @@ equation
   annotation (experiment(Tolerance=1e-6, StopTime=10),__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/BaseClasses/Examples/Convector.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- The example tests the implementation of
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Convector\">
- AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Convector</a>.
- The room air temperature and the water mass flow rate are constant while the air flow rate varys with a ramp.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- June 13, 2016, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- May 20, 2016, by Alessandro Maccarini:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+The example tests the implementation of
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Convector\">
+AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Convector</a>.
+The room air temperature and the water mass flow rate are constant while the air flow rate varys with a ramp.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+June 13, 2016, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+May 20, 2016, by Alessandro Maccarini:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Convector;
