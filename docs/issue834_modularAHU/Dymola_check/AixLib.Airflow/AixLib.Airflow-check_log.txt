@@ -1,0 +1,364 @@
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SetConditionsHeaterCooler 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SetConditionsHeaterCooler">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SetConditionsHeaterCooler</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SetConditionsHeaterCooler
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCooling 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCooling">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCooling</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCooling
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SteamHumidifier 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SteamHumidifier">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SteamHumidifier</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SteamHumidifier
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler3 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler3">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler3</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler3
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchangerFixed 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchangerFixed">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchangerFixed</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchangerFixed
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingDehumHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingDehumHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingDehumHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingDehumHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehumHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehumHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehumHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehumHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater.Test_Heater2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU4 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU4">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU4</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU4
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHumidifying 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHumidifying">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHumidifying</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHumidifying
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Cooler
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>:
+Error: Component type specifier Modelica.SIunits.Area not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 5
+ Component context: A_room
+  Component declared as Modelica.SIunits.Area A_room in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.Volume not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 6
+ Component context: V_room
+  Component declared as Modelica.SIunits.Volume V_room in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.HeatFlowRate not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 8
+ Component context: Q_flow
+  Component declared as Modelica.SIunits.HeatFlowRate Q_flow in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.MassFlowRate not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 9
+ Component context: m_flow
+  Component declared as Modelica.SIunits.MassFlowRate m_flow in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.SpecificEnthalpy not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 11
+ Component context: h_air_in
+  Component declared as Modelica.SIunits.SpecificEnthalpy h_air_in in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.SpecificEnthalpy not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 12
+ Component context: h_air_out
+  Component declared as Modelica.SIunits.SpecificEnthalpy h_air_out in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.SpecificHeatCapacity not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 17
+ Component context: cp_air
+  Component declared as Modelica.SIunits.SpecificHeatCapacity cp_air in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.SpecificHeatCapacity not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 18
+ Component context: cp_steam
+  Component declared as Modelica.SIunits.SpecificHeatCapacity cp_steam in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: Component type specifier Modelica.SIunits.SpecificEnthalpy not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Room/SimpleRoom.mo, line 19
+ Component context: r_0
+  Component declared as Modelica.SIunits.SpecificEnthalpy r_0 in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Room.SimpleRoom</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.RecircFlap.Test_RecircFlap 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.RecircFlap.Test_RecircFlap">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.RecircFlap.Test_RecircFlap</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.RecircFlap.Test_RecircFlap
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU</a>:
+Error: Class or component 'freqHz' not found in Sine tempOutside
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 5
+ Component context: tempOutside
+  Component declared as Sine tempOutside in <a href="Modelica://Modelica.Blocks.Sources">Modelica.Blocks.Sources</a>
+  Attempted modification in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 2
+Error: Class or component 'freqHz' not found in Sine waterLoadOutside
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 29
+ Component context: waterLoadOutside
+  Component declared as Sine waterLoadOutside in <a href="Modelica://Modelica.Blocks.Sources">Modelica.Blocks.Sources</a>
+  Attempted modification in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 2
+Error: Class or component 'freqHz' not found in Sine tempAddInRoom
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 37
+ Component context: tempAddInRoom
+  Component declared as Sine tempAddInRoom in <a href="Modelica://Modelica.Blocks.Sources">Modelica.Blocks.Sources</a>
+  Attempted modification in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler1 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler1">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler1</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler.Test_Cooler1
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHum 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHum">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHum</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHum
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier1 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier1">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier1</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier1
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SprayHumidifier 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SprayHumidifier">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SprayHumidifier</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SprayHumidifier
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_RecircFlap 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_RecircFlap">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_RecircFlap</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_RecircFlap
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier.Test_SteamHumidifier2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU3 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU3">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU3</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU3
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_ExampleAHU
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_FlowControlled_dp 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_FlowControlled_dp">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_FlowControlled_dp</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_FlowControlled_dp
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Heater 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Heater">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Heater</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_Heater
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum_2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum_2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum_2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum_2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp.Test_FlowControlled_dp2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehum 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehum">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehum</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHUHeatingCoolingHumDehum
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHU 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHU">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHU</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonToAHU
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingHRS 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingHRS">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingHRS</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingHRS
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCooling 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCooling">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCooling</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCooling
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeatingCoolingDehum
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SprayHumidifier.Test_SprayHumidifier
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchanger 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchanger">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchanger</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger.Test_PlateHeatExchanger
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_PlateHeatExchanger2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingDehum 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingDehum">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingDehum</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUCoolingDehum
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm2 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm2">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm2</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm.Test_SpeedControlledFan_Nrpm2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SpeedControlledFan_Nrpm 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SpeedControlledFan_Nrpm">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SpeedControlledFan_Nrpm</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.Test_SpeedControlledFan_Nrpm
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler.Test_SensibleCooler
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeating 
+Check of <a href="Modelica://AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeating">AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeating</a>:
+Did not find model AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation.ComparisonOfAHUHeating
+Error: ERRORS have been issued.
+
