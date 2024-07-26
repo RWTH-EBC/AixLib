@@ -59,18 +59,18 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=20.0),
     Documentation(info="<html>
- <p>
- This example demonstrates the use of the function for the evaluation of the
- finite line source solution. The solution is evaluated at different positions
- and averaged over different lengths around line heat sources.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 12, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates the use of the function for the evaluation of the
+finite line source solution. The solution is evaluated at different positions
+and averaged over different lengths around line heat sources.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 12, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end FiniteLineSource;

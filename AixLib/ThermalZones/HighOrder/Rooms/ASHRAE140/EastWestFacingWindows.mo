@@ -60,7 +60,7 @@ model EastWestFacingWindows "windows facing south and west"
       wallPar=wallTypes.groundPlate_upp_half,
       outside=false),
     ceiling(
-      ISOrientation=3,
+      ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling,
       withDoor=false,
       wallPar=wallTypes.roof,
       outside=true,

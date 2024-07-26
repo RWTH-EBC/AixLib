@@ -78,23 +78,23 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{140,100}}), graphics), Documentation(info="<html>
- <p>
- This example demonstrates how to configure a model with a flow splitter.
- </p>
- <p>
- For this example, the model is not exported as an FMU. However, the
- thermofluid flow models are wrapped using input/output blocks.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 28, 2015, by Thierry S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to configure a model with a flow splitter.
+</p>
+<p>
+For this example, the model is not exported as an FMU. However, the
+thermofluid flow models are wrapped using input/output blocks.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 28, 2015, by Thierry S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Validation/FlowSplitter_u.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0),
-  __Dymola_LockedEditing="Model from IBPSA");
+    experiment(Tolerance=1e-6, StopTime=1.0), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end FlowSplitter_u;

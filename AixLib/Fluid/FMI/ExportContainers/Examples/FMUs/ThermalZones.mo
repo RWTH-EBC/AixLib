@@ -164,11 +164,11 @@ equation
         Text(
           extent={{68,132},{106,108}},
           pattern=LinePattern.None,
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Left,
           textString="Very simplified
- model of
- a thermal zone."),
+model of
+a thermal zone."),
         Rectangle(
           extent={{20,0},{112,-126}},
           fillColor={215,215,215},
@@ -177,60 +177,60 @@ equation
         Text(
           extent={{68,-4},{106,-28}},
           pattern=LinePattern.None,
-          lineColor={0,0,127},
+          textColor={0,0,127},
           horizontalAlignment=TextAlignment.Left,
           textString="Very simplified
- model of
- a thermal zone.")}),
+model of
+a thermal zone.")}),
     Documentation(info="<html>
- <p>
- This example demonstrates how to export a model
- that contains two thermal zones with convective heat input from the
- HVAC system only. The thermal zones are connected to an adaptor so that
- they can be coupled
- to an air-based HVAC system.
- <!-- @include_Buildings
- The thermal zone is
- taken from
- <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
- AixLib.Examples.Tutorial.SpaceCooling.System3</a>.
- -->
- </p>
- <p>
- The example extends from
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZones\">
- AixLib.Fluid.FMI.ExportContainers.ThermalZones</a>
- which provides
- the input and output signals that are needed to interface
- the acausal thermal zone models with causal connectors of FMI.
- The instance <code>theZonAda</code> is the thermal zone adaptor
- that contains on the right a fluid port, and on
- the left signal ports which are then used to connect at
- the top-level of the model to signal ports which are
- exposed at the FMU interface.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 11, 2020, by Michael Wetter:<br/>
- Removed <code>fontSize</code> in annotation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1318\">#1318</a>.
- </li>
- <li>
- December 4, 2017, by Michael Wetter:<br/>
- Added call to <code>Modelica.Utilities.Files.loadResource</code>
- for weather data file.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/867\">#867</a>.
- </li>
- <li>
- September 14, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to export a model
+that contains two thermal zones with convective heat input from the
+HVAC system only. The thermal zones are connected to an adaptor so that
+they can be coupled
+to an air-based HVAC system.
+<!-- @include_Buildings
+The thermal zone is
+taken from
+<a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
+AixLib.Examples.Tutorial.SpaceCooling.System3</a>.
+-->
+</p>
+<p>
+The example extends from
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZones\">
+AixLib.Fluid.FMI.ExportContainers.ThermalZones</a>
+which provides
+the input and output signals that are needed to interface
+the acausal thermal zone models with causal connectors of FMI.
+The instance <code>theZonAda</code> is the thermal zone adaptor
+that contains on the right a fluid port, and on
+the left signal ports which are then used to connect at
+the top-level of the model to signal ports which are
+exposed at the FMU interface.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 11, 2020, by Michael Wetter:<br/>
+Removed <code>fontSize</code> in annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1318\">#1318</a>.
+</li>
+<li>
+December 4, 2017, by Michael Wetter:<br/>
+Added call to <code>Modelica.Utilities.Files.loadResource</code>
+for weather data file.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/867\">#867</a>.
+</li>
+<li>
+September 14, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/ThermalZones.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Export FMU"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZones;

@@ -355,7 +355,7 @@ model GroundFloorBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-4})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
     annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5]
     "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
@@ -473,10 +473,10 @@ equation
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-32},{90,-32},{90,100},{110,100},{110,110}},
                                                            color={191,0,0}));
   connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-15},{-115,-15}},
+        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-9},{-115,-9}},
         color={0,0,127}));
   connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,
-          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-9},{-115,-9}},color={
+          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-6},{-115,-6}},color={
           0,0,127}));
   connect(Kitchen.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.9,
           -61.6},{-90,-61.6},{-90,-92},{90,-92},{90,26},{110,26}}, color={255,
@@ -485,25 +485,25 @@ equation
       Line(points={{44,-10.9},{36,-10.9},{36,-92},{-34,-92},{-34,-48.8},{-46,-48.8}},
         color={191,0,0}));
 
-  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,
-          13.92},{-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-108}},
+  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,13.92},
+          {-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-104}},
                                                color={191,0,0}));
-  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{
-          66.14,26},{34,26},{34,-88},{0,-88},{0,-104}},
+  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{66.14,
+          26},{34,26},{34,-88},{0,-88},{0,-102}},
                                                color={191,0,0}));
   connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},{63.2,-34},{34,-34},{34,-88},{0,-88},{0,-100}},
                                         color={191,0,0}));
-  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,
-          -37.44},{64.14,-34},{34,-34},{34,-88},{0,-88},{0,-96}},
+  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,-37.44},
+          {64.14,-34},{34,-34},{34,-88},{0,-88},{0,-98}},
                                                 color={191,0,0}));
   connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
-          {-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-92}},
+          {-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-96}},
                                               color={191,0,0}));
   connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
   connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,
-          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}},                                                                                color={0,0,127}));
+          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,0},{-115,0}},                                                                                color={0,0,127}));
   connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,
-          -74.24},{-92,-74.24},{-92,9},{-115,9}},                                                                            color={0,0,127}));
+          -74.24},{-92,-74.24},{-92,3},{-115,3}},                                                                            color={0,0,127}));
   connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
   connect(Livingroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.48,44},{-58,44},{-58,30},{-16,30},{-16,-38},{-5,-38}}, color={0,0,0}));
   connect(Livingroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-65.08,44},{-66,44},{-66,26},{-20,26},{-20,-44},{5,-44},{5,-38}}, color={191,0,0}));
@@ -515,37 +515,37 @@ equation
   connect(WC_Storage.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{65.66,-60},{66,-60},{66,-44},{5,-44},{5,-38}}, color={191,0,0}));
   connect(Kitchen.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60,-52},{-60,-38},{-5,-38}}, color={0,0,0}));
   connect(Kitchen.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-44},{5,-44},{5,-38}}, color={191,0,0}));
-  connect(Livingroom.ports[1], portVent_in[1]) annotation (Line(points={{-65.355,
-          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,
-          -76}},
+  connect(Livingroom.ports[1], portVent_in[1]) annotation (Line(points={{-63.6775,
+          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-72},{104,
+          -72}},
         color={0,127,255}));
-  connect(Livingroom.ports[2], portVent_out[1]) annotation (Line(points={{-58.645,
-          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-92},{104,-92}},
+  connect(Livingroom.ports[2], portVent_out[1]) annotation (Line(points={{-60.3225,
+          11.52},{-58,11.52},{-58,-8},{-20,-8},{-20,-88},{104,-88}},
         color={0,127,255}));
-  connect(Hobby.ports[1], portVent_in[2]) annotation (Line(points={{67.8975,27.64},
-          {40,27.64},{40,28},{20,28},{20,-92},{94,-92},{94,-72},{104,-72}},
+  connect(Hobby.ports[1], portVent_in[2]) annotation (Line(points={{66.4487,
+          27.64},{40,27.64},{40,28},{20,28},{20,-92},{94,-92},{94,-70},{104,-70}},
         color={0,127,255}));
-  connect(Hobby.ports[2], portVent_out[2]) annotation (Line(points={{62.1025,27.64},
-          {20,27.64},{20,-92},{94,-92},{94,-84},{104,-84},{104,-88}},
+  connect(Hobby.ports[2], portVent_out[2]) annotation (Line(points={{63.5512,
+          27.64},{20,27.64},{20,-92},{94,-92},{94,-84},{104,-84},{104,-86}},
         color={0,127,255}));
-  connect(Corridor.ports[1], portVent_in[3]) annotation (Line(points={{65.05,-28.285},
+  connect(Corridor.ports[1], portVent_in[3]) annotation (Line(points={{63.525,-28.285},
           {40,-28.285},{40,-28},{20,-28},{20,-92},{94,-92},{94,-68},{104,-68}},
         color={0,127,255}));
-  connect(Corridor.ports[2], portVent_out[3]) annotation (Line(points={{58.95,-28.285},
-          {58.95,-32},{20,-32},{20,-92},{94,-92},{94,-84},{104,-84}},
+  connect(Corridor.ports[2], portVent_out[3]) annotation (Line(points={{60.475,-28.285},
+          {60.475,-32},{20,-32},{20,-92},{94,-92},{94,-84},{104,-84}},
         color={0,127,255}));
-  connect(WC_Storage.ports[1], portVent_in[4]) annotation (Line(points={{65.8975,
-          -35.64},{62,-35.64},{62,-32},{20,-32},{20,-92},{94,-92},{94,-64},{104,
-          -64}},
+  connect(WC_Storage.ports[1], portVent_in[4]) annotation (Line(points={{64.4487,
+          -35.64},{62,-35.64},{62,-32},{20,-32},{20,-92},{94,-92},{94,-66},{104,
+          -66}},
         color={0,127,255}));
-  connect(WC_Storage.ports[2], portVent_out[4]) annotation (Line(points={{60.1025,
-          -35.64},{60.1025,-32},{20,-32},{20,-92},{94,-92},{94,-80},{104,-80}},
+  connect(WC_Storage.ports[2], portVent_out[4]) annotation (Line(points={{61.5512,
+          -35.64},{61.5512,-32},{20,-32},{20,-92},{94,-92},{94,-82},{104,-82}},
         color={0,127,255}));
-  connect(Kitchen.ports[1], portVent_in[5]) annotation (Line(points={{-67.05,-19.52},
-          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-60},{104,-60}},
+  connect(Kitchen.ports[1], portVent_in[5]) annotation (Line(points={{-65.525,-19.52},
+          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-64},{104,-64}},
         color={0,127,255}));
-  connect(Kitchen.ports[2], portVent_out[5]) annotation (Line(points={{-60.95,-19.52},
-          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-76},{104,-76}},
+  connect(Kitchen.ports[2], portVent_out[5]) annotation (Line(points={{-62.475,-19.52},
+          {-58,-19.52},{-58,-8},{-20,-8},{-20,-92},{94,-92},{94,-80},{104,-80}},
         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={

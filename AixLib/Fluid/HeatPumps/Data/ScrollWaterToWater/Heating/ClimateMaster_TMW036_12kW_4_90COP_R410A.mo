@@ -15,15 +15,15 @@ record ClimateMaster_TMW036_12kW_4_90COP_R410A =
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
- <p>
- Calibrated parameters for ClimateMaster TMW036.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 6, 2017, by Massimo Cimmino:<br/>
- Calibrated parameters.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Calibrated parameters for ClimateMaster TMW036.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 6, 2017, by Massimo Cimmino:<br/>
+Calibrated parameters.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");

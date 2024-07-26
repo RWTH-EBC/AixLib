@@ -47,7 +47,10 @@ model Tabs "Test of Tabs"
     area=3000,
     thickness=0.03,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    pumpSys(PumpInterface(speed_rpm_nominal=3580)),
+    throttlePumpHot(PumpInterface(speed_rpm_nominal=2900)),
+    throttlePumpCold(PumpInterface(speed_rpm_nominal=2900)))
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
   connect(ramp.y, prescribedTemperature.T)

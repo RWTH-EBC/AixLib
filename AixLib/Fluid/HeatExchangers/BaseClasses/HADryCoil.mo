@@ -33,11 +33,11 @@ model HADryCoil
   parameter Real r_nominal(min=0)=0.5
     "Ratio between air-side and water-side convective heat transfer coefficient"
           annotation(Dialog(tab="General", group="Nominal condition"));
-  parameter Modelica.Units.SI.ThermalConductance hA_nominal_w(min=0)=
+  parameter Modelica.Units.SI.ThermalConductance hA_nominal_w(min=0) =
     UA_nominal*(r_nominal + 1)/r_nominal
     "Water side convective heat transfer coefficient"
     annotation (Dialog(tab="General", group="Nominal condition"));
-  parameter Modelica.Units.SI.ThermalConductance hA_nominal_a(min=0)=
+  parameter Modelica.Units.SI.ThermalConductance hA_nominal_a(min=0) =
     r_nominal*hA_nominal_w
     "Air side convective heat transfer coefficient, including fin resistance"
     annotation (Dialog(tab="General", group="Nominal condition"));
@@ -100,58 +100,58 @@ equation
     hA_2 = x_a * hA_nominal_a;
   end if;
 annotation (Documentation(info="<html>
- <p>
- Model for sensible convective heat transfer coefficients for an air to water coil.
- </p>
- <p>
- This model computes the convective heat transfer coefficient
- for an air to water coil.
- The parameters allow a user to enable or disable, individually
- for each medium, the mass flow and/or the temperature dependence
- of the convective heat transfer coefficients.
- For a detailed explanation of the equation, see
- the references below.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- Wetter Michael,
- <a href=\"http://www.osti.gov/energycitations/product.biblio.jsp?osti_id=7353\">
- Simulation model finned water-air-coil without condensation</a>,
- LBNL-42355,
- Lawrence Berkeley National Laboratory,
- Berkeley, CA, 1999.
- </li>
- <li>
- Wetter Michael,
- <a href=\"http://www.osti.gov/energycitations/product.biblio.jsp?osti_id=7352\">
- Simulation model air-to-air plate heat exchanger</a>,
- LBNL-42354,
- Lawrence Berkeley National Laboratory,
- Berkeley, CA, 1999.
- </li>
- </ul>
- </html>",
+<p>
+Model for sensible convective heat transfer coefficients for an air to water coil.
+</p>
+<p>
+This model computes the convective heat transfer coefficient
+for an air to water coil.
+The parameters allow a user to enable or disable, individually
+for each medium, the mass flow and/or the temperature dependence
+of the convective heat transfer coefficients.
+For a detailed explanation of the equation, see
+the references below.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+Wetter Michael,
+<a href=\"http://www.osti.gov/energycitations/product.biblio.jsp?osti_id=7353\">
+Simulation model finned water-air-coil without condensation</a>,
+LBNL-42355,
+Lawrence Berkeley National Laboratory,
+Berkeley, CA, 1999.
+</li>
+<li>
+Wetter Michael,
+<a href=\"http://www.osti.gov/energycitations/product.biblio.jsp?osti_id=7352\">
+Simulation model air-to-air plate heat exchanger</a>,
+LBNL-42354,
+Lawrence Berkeley National Laboratory,
+Berkeley, CA, 1999.
+</li>
+</ul>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 9, 2017, by Michael Wetter:<br/>
- Corrected coefficient in Taylor expansion of <code>x_a</code>.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/698\">#698</a>.
- </li>
- <li>
- June 8, 2010, by Michael Wetter:<br/>
- Fixed bug in computation of <code>s_w</code>.
- The old implementation used the current inlet water temperature instead
- of the design condition that corresponds to <code>UA_nominal</code>.
- </li>
- <li>
- April 16, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+April 9, 2017, by Michael Wetter:<br/>
+Corrected coefficient in Taylor expansion of <code>x_a</code>.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/698\">#698</a>.
+</li>
+<li>
+June 8, 2010, by Michael Wetter:<br/>
+Fixed bug in computation of <code>s_w</code>.
+The old implementation used the current inlet water temperature instead
+of the design condition that corresponds to <code>UA_nominal</code>.
+</li>
+<li>
+April 16, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={            Text(
           extent={{-60,90},{66,0}},
@@ -218,6 +218,6 @@ revisions="<html>
           extent={{30,-66},{50,-88}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillPattern=FillPattern.Solid)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HADryCoil;

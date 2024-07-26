@@ -9,24 +9,24 @@ model GetAltitudeTMY3 "Test model to get Altitude of TMY3"
 
   annotation (
     Documentation(info="<html>
- <p>
- This example tests getting the location altitude of a TMY3 weather data file.
- </p>
- </html>",
+<p>
+This example tests getting the location altitude of a TMY3 weather data file.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Changed <code>alt</code> from variable to parameter as it is evaluated using an impure function call.
- </li>
- <li>
- September 16, 2021, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Changed <code>alt</code> from variable to parameter as it is evaluated using an impure function call.
+</li>
+<li>
+September 16, 2021, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetAltitudeTMY3.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end GetAltitudeTMY3;

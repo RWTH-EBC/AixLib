@@ -51,25 +51,25 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/TWetBul_TDryBulXi.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- This examples is a unit test for the wet bulb computation.
- The model on the top uses the accurate computation of the
- wet bulb temperature, whereas the model below uses the approximate
- computation of the wet bulb temperature.
- </html>",revisions="<html>
- <ul>
- <li>
- June 23, 2016, by Michael Wetter:<br/>
- Changed graphical annotation.
- </li>
- <li>
- October 1, 2012 by Michael Wetter:<br/>
- Revised implementation to add approximate computation of wet bulb temperature.
- </li>
- <li>
- May 7, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This examples is a unit test for the wet bulb computation.
+The model on the top uses the accurate computation of the
+wet bulb temperature, whereas the model below uses the approximate
+computation of the wet bulb temperature.
+</html>", revisions="<html>
+<ul>
+<li>
+June 23, 2016, by Michael Wetter:<br/>
+Changed graphical annotation.
+</li>
+<li>
+October 1, 2012 by Michael Wetter:<br/>
+Revised implementation to add approximate computation of wet bulb temperature.
+</li>
+<li>
+May 7, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TWetBul_TDryBulXi;

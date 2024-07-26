@@ -66,21 +66,21 @@ equation
         "Simulate and Plot"),
     experiment(StopTime=150, Tolerance=1e-006),
     Documentation(info="<html>
- <p>
- Validation model in which water flows into the pipe and then the flow is reversed.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 12, 2021, by Baptiste Ravache:<br/>
- Changed outlet boundary pressure to avoid negative
- pressure at the inlet when flow is reversed.
- </li>
- <li>
- October 25, 2017, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Validation model in which water flows into the pipe and then the flow is reversed.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 12, 2021, by Baptiste Ravache:<br/>
+Changed outlet boundary pressure to avoid negative
+pressure at the inlet when flow is reversed.
+</li>
+<li>
+October 25, 2017, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end FlowReversal;

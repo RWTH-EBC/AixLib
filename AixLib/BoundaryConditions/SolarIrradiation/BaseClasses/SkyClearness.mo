@@ -5,7 +5,7 @@ block SkyClearness "Sky clearness"
   Modelica.Blocks.Interfaces.RealInput zen(
     quantity="Angle",
     unit="rad",
-    displayUnit="degreeC") "Zenith angle of the sun beam"
+    displayUnit="deg") "Zenith angle of the sun beam"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealInput HDifHor(quantity=
         "RadiantEnergyFluenceRate", unit="W/m2")
@@ -47,59 +47,65 @@ equation
   annotation (
     defaultComponentName="skyCle",
     Documentation(info="<html>
- <p>
- This component computes the sky clearness.
- </p>
- <h4>Implementation</h4>
- <p>
- In the <code>AixLib</code> library, <code>HGloHor</code>
- is always larger than <i>1E-4</i>,
- minus some small undershoot due to regularization. Hence,
- the implementation is not simplified for
- <code>HGloHor &lt; Modelica.Constants.small</code>.
- </p>
- <p>
- The function call
- <code>AixLib.Utilities.Math.Functions.smoothMax</code>
- is such that the regularization is usually not triggered.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 6, 2021, by Ettore Zanetti:<br/>
- Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
- Changed input connector <code>HGloHor</code> to <code>HDirHor</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- May 2, 2021, by Ettore Zanetti:<br/>
- Corrected expression for sky clearness.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">issue 1477</a>.
- </li>
- <li>
- September 23, 2016, by Michael Wetter:<br/>
- Changed <code>deltaX</code> from <code>0.1</code> to <code>0.01</code>,
- and also optimized the code.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/521\">issue 521</a>.
- </li>
- <li>
- May 5, 2015, by Michael Wetter:<br/>
- Introduced constant <code>k</code> to reduce number of operations.
- </li>
- <li>
- May 5, 2015, by Filip Jorissen:<br/>
- Converted <code>algorithm</code> section into
- <code>equation</code> section for easier differentiability.
- </li>
- <li>
- July 07, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the sky clearness.
+</p>
+<h4>Implementation</h4>
+<p>
+In the <code>AixLib</code> library, <code>HDirNor</code>
+is always larger than <i>1E-4</i>,
+minus some small undershoot due to regularization. Hence,
+the implementation is not simplified for
+<code>HDirNor &lt; Modelica.Constants.small</code>.
+</p>
+<p>
+The function call
+<code>AixLib.Utilities.Math.Functions.smoothMax</code>
+is such that the regularization is usually not triggered.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 4, 2024, by Michael Wetter:<br/>
+Corrected <code>displayUnit</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1848\">IBPSA, #1848</a>.
+</li>
+<li>
+September 6, 2021, by Ettore Zanetti:<br/>
+Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+Changed input connector <code>HGloHor</code> to <code>HDirNor</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+May 2, 2021, by Ettore Zanetti:<br/>
+Corrected expression for sky clearness.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">issue 1477</a>.
+</li>
+<li>
+September 23, 2016, by Michael Wetter:<br/>
+Changed <code>deltaX</code> from <code>0.1</code> to <code>0.01</code>,
+and also optimized the code.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/521\">issue 521</a>.
+</li>
+<li>
+May 5, 2015, by Michael Wetter:<br/>
+Introduced constant <code>k</code> to reduce number of operations.
+</li>
+<li>
+May 5, 2015, by Filip Jorissen:<br/>
+Converted <code>algorithm</code> section into
+<code>equation</code> section for easier differentiability.
+</li>
+<li>
+July 07, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -113,10 +119,10 @@ equation
         Text(
           extent={{-48,54},{-100,66}},
           textColor={0,0,127},
-          textString="HGloHor"),
+          textString="HDirNor"),
         Text(
           extent={{-48,-66},{-100,-54}},
           textColor={0,0,127},
-          textString="zen")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="zen")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SkyClearness;

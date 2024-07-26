@@ -15,39 +15,39 @@ algorithm
 
   annotation(Inline=true,
   Documentation(revisions="<html>
- <ul>
- <li><i>February 18, 2016</i>
-     by Marcus Fuchs:<br/>
-     Add function with <code>Inline = true</code> in annotations to package for better performance,
-     as suggested in <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">#300</a> .</li>
- <li><i>April 29, 2008</i>
-     by <a href=\"mailto:Martin.Otter@DLR.de\">Martin Otter</a>:<br/>
-     Designed and implemented.</li>
- <li><i>August 12, 2008</i>
-     by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br/>
-     Minor modification to cover the limit case <code>x_small -> 0</code> without division by zero.</li>
- </ul>
- </html>",info="<html>
- <p>
- This function is used to approximate the equation
- </p>
- <pre>
-     y = <b>if</b> x &gt; 0 <b>then</b> y1 <b>else</b> y2;
- </pre>
- 
- <p>
- by a smooth characteristic, so that the expression is continuous and differentiable:
- </p>
- 
- <pre>
-    y = <b>smooth</b>(1, <b>if</b> x &gt;  x_small <b>then</b> y1 <b>else</b>
-                  <b>if</b> x &lt; -x_small <b>then</b> y2 <b>else</b> f(y1, y2));
- </pre>
- 
- <p>
- In the region <code>-x_small &lt; x &lt; x_small</code> a 2nd order polynomial is used
- for a smooth transition from <code>y1</code> to <code>y2</code>.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li><i>February 18, 2016</i>
+    by Marcus Fuchs:<br/>
+    Add function with <code>Inline = true</code> in annotations to package for better performance,
+    as suggested in <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">#300</a> .</li>
+<li><i>August 12, 2008</i>
+    by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br/>
+    Minor modification to cover the limit case <code>x_small -> 0</code> without division by zero.</li>
+<li><i>April 29, 2008</i>
+    by <a href=\"mailto:Martin.Otter@DLR.de\">Martin Otter</a>:<br/>
+    Designed and implemented.</li>
+</ul>
+</html>", info="<html>
+<p>
+This function is used to approximate the equation
+</p>
+<pre>
+    y = <b>if</b> x &gt; 0 <b>then</b> y1 <b>else</b> y2;
+</pre>
+
+<p>
+by a smooth characteristic, so that the expression is continuous and differentiable:
+</p>
+
+<pre>
+   y = <b>smooth</b>(1, <b>if</b> x &gt;  x_small <b>then</b> y1 <b>else</b>
+                 <b>if</b> x &lt; -x_small <b>then</b> y2 <b>else</b> f(y1, y2));
+</pre>
+
+<p>
+In the region <code>-x_small &lt; x &lt; x_small</code> a 2nd order polynomial is used
+for a smooth transition from <code>y1</code> to <code>y2</code>.
+</p>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end regStep;

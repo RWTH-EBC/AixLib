@@ -1,6 +1,7 @@
-BufferStorage
 ExpansionVessel
 StorageBoiler
+StorageDetailedExample
+StorageSimpleExample
 StorageSolarCollector
 Stratified
 StratifiedEnhancedInternalHex
