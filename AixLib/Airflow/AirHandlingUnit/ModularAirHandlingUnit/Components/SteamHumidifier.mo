@@ -1,6 +1,13 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SteamHumidifier
-  extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
+  extends
+    AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
+
+  parameter Modelica.Units.SI.Temperature TSteam=373.15
+    "Temperature of steam"
+    annotation (Dialog(
+      tab="Advanced",
+      group="Vaporization"));
 
   Modelica.Units.SI.SpecificEnthalpy h_steam "specific enthalpy of steam";
 
@@ -22,8 +29,7 @@ equation
   Q = Q_flow;
 
   // specific enthalpies
-   assert(T_watIn >= 373.15, "Steam temperature T has to be higher than 100 degC");
-   h_steam = cp_water * (373.15 - 273.15) + cp_steam * (T_watIn - 373.15) + r100;
+   h_steam = cp_water * (373.15 - TWatIn) + cp_steam * (TSteam - 373.15) + r100;
 
    connect(max.y,X_intern);
 
