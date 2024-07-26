@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -392,6 +392,8 @@ model GroundFloorBuildingEnvelope
       Medium = Medium) "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{94,-94},{114,-74}}), iconTransformation(extent={
             {94,-94},{108,-80}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-114,90},{-94,110}})));
 equation
   connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-50.89,
           75.68},{-50.89,82},{-12,82},{-12,78},{42,78},{42,84},{84,84},{84,86},{
