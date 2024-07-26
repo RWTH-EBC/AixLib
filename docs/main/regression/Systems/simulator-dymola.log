@@ -1,0 +1,1034 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Admix");
+Check of AixLib.Systems.HydraulicModules.Example.Admix:
+The model has the same number of unknowns and equations: 2088
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2044+Admix.valve.vol.dynBal.nPorts+Admix.pipe1.simplePipe.vol[1].dynBal.nPorts+  Admix.pipe1.simplePipe.vol[2].dynBal.nPorts+Admix.pipe1.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe2.simplePipe.vol[1].dynBal.nPorts+Admix.pipe2.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe2.simplePipe.vol[3].dynBal.nPorts+Admix.pipe3.simplePipe.vol[1].dynBal.nPorts  +Admix.pipe3.simplePipe.vol[2].dynBal.nPorts+Admix.pipe3.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe4.simplePipe.vol[1].dynBal.nPorts+Admix.pipe4.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe4.simplePipe.vol[3].dynBal.nPorts+Admix.pipe5.simplePipe.vol[1].dynBal.nPorts  +Admix.pipe5.simplePipe.vol[2].dynBal.nPorts+Admix.pipe5.simplePipe.vol[3].dynBal.nPorts  +Admix.pipe6.simplePipe.vol[1].dynBal.nPorts+Admix.pipe6.simplePipe.vol[2].dynBal.nPorts  +Admix.pipe6.simplePipe.vol[3].dynBal.nPorts+Admix.junc456.dynBal.nPorts+  Admix.PumpInterface.pump.vol.dynBal.nPorts
+scalar unknowns and
+  1925+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   Admix.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe4.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe5.simplePipe.vol[1].dynBal.nPorts+(if  not Admix.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe5.simplePipe.vol[2].dynBal.nPorts+(if  not   Admix.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe5.simplePipe.vol[3].dynBal.nPorts+(if  not Admix.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe6.simplePipe.vol[1].dynBal.nPorts+(if  not   Admix.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  Admix.pipe6.simplePipe.vol[2].dynBal.nPorts+(if  not Admix.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*Admix.pipe6.simplePipe.vol[3].dynBal.nPorts+(if  not   Admix.junc456.dynBal.use_mWat_flow then 1 else 0)+3*Admix.junc456.dynBal.nPorts  +(if  not Admix.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  Admix.PumpInterface.pump.vol.dynBal.nPorts+(if  not Admix.valve.vol.dynBal.use_mWat_flow   then 1 else 0)+3*Admix.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2088
+Check of AixLib.Systems.HydraulicModules.Example.Admix successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Admix\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Admix\\\");\",", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Admix.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Admix", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Admix");
+Translation of AixLib.Systems.HydraulicModules.Example.Admix:
+The DAE has 2088 scalar unknowns and 2088 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 467
+  Variables: 5670
+  Constants: 111 (111 scalars)
+  Parameters: 2755 (2949 scalars)
+  Unknowns: 2804 (2171 scalars)
+  Differentiated variables: 77 scalars
+  Equations: 2056
+  Nontrivial: 1589
+Translated Model
+  Constants: 2081 scalars
+  Free parameters: 168 scalars
+  Parameter depending: 1054 scalars
+  Outputs: 12 scalars
+  Continuous time states: 56 scalars
+  Time-varying variables: 471 scalars
+  Alias variables: 1457 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {19}
+  Sizes after manipulation of the nonlinear systems: {2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {19, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  Admix.junc456.dynBal.U
+  Admix.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe1.simplePipe.vol[1].dynBal.U
+  Admix.pipe1.simplePipe.vol[2].dynBal.U
+  Admix.pipe1.simplePipe.vol[3].dynBal.U
+  Admix.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe2.simplePipe.vol[1].dynBal.U
+  Admix.pipe2.simplePipe.vol[2].dynBal.U
+  Admix.pipe2.simplePipe.vol[3].dynBal.U
+  Admix.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe3.simplePipe.vol[1].dynBal.U
+  Admix.pipe3.simplePipe.vol[2].dynBal.U
+  Admix.pipe3.simplePipe.vol[3].dynBal.U
+  Admix.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe4.simplePipe.vol[1].dynBal.U
+  Admix.pipe4.simplePipe.vol[2].dynBal.U
+  Admix.pipe4.simplePipe.vol[3].dynBal.U
+  Admix.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe5.simplePipe.vol[1].dynBal.U
+  Admix.pipe5.simplePipe.vol[2].dynBal.U
+  Admix.pipe5.simplePipe.vol[3].dynBal.U
+  Admix.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  Admix.pipe6.simplePipe.vol[1].dynBal.U
+  Admix.pipe6.simplePipe.vol[2].dynBal.U
+  Admix.pipe6.simplePipe.vol[3].dynBal.U
+  Admix.PT1_a1.y
+  Admix.PT1_a2.y
+  Admix.PT1_b1.y
+  Admix.PT1_b2.y
+  Admix.PumpInterface.pump.filter.s[1]
+  Admix.PumpInterface.pump.filter.s[2]
+  Admix.PumpInterface.pump.vol.dynBal.U
+  Admix.senT_a1.T
+  Admix.senT_a2.T
+  Admix.senT_b1.T
+  Admix.senT_b2.T
+  Admix.valve.filter.s[1]
+  Admix.valve.vol.dynBal.U
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Admix.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Validation.AHU2_Preheater");
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Preheater:
+The model has the same number of unknowns and equations: 2556
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2471+max([size(combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+  registerModule.hydraulicModule.valve.vol.dynBal.nPorts+registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.junc456.dynBal.nPorts+2*size(registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns,   1)+2*registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+2*  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+  registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts+2*  registerModule.dynamicHX.vol1[1].dynBal.nPorts+2*registerModule.dynamicHX.vol1[2].dynBal.nPorts  +2*registerModule.dynamicHX.vol1[3].dynBal.nPorts+2*registerModule.dynamicHX.vol1[4].dynBal.nPorts  +2*registerModule.dynamicHX.vol1[5].dynBal.nPorts+registerModule.dynamicHX.vol2[1].dynBal.nPorts  +registerModule.dynamicHX.vol2[2].dynBal.nPorts+registerModule.dynamicHX.vol2[3].dynBal.nPorts  +registerModule.dynamicHX.vol2[4].dynBal.nPorts+registerModule.dynamicHX.vol2[5].dynBal.nPorts
+scalar unknowns and
+  2311+(if boundaryWaterSource.use_Xi_in then 1 else (if boundaryWaterSource.use_X_in   then 0 else 1))+(if  not boundaryWaterSource.use_p_in then 1 else 0)+2*  boundaryWaterSource.nPorts+(if  not boundaryWaterSource.use_T_in then 1 else 0)  +(if boundaryWaterSink.use_Xi_in then 1 else (if boundaryWaterSink.use_X_in   then 0 else 1))+(if  not boundaryWaterSink.use_p_in then 1 else 0)+2*  boundaryWaterSink.nPorts+(if  not boundaryWaterSink.use_T_in then 1 else 0)+(  if boundaryAirSource.use_Xi_in then 2 else (if boundaryAirSource.use_X_in   then 1 else 3))+3*boundaryAirSource.nPorts+(if  not boundaryAirSource.use_m_flow_in   then 1 else 0)+(if  not boundaryAirSource.use_T_in then 1 else 0)+(if   boundaryAirSink.use_Xi_in then 2 else (if boundaryAirSink.use_X_in then 1   else 3))+3*boundaryAirSink.nPorts+(if  not boundaryAirSink.use_p_in then 1   else 0)+(if  not boundaryAirSink.use_T_in then 1 else 0)+max([size(  combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+2*size(  registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns, 1)+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+(if    not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+3*registerModule.hydraulicModule.junc456.dynBal.nPorts+(if  not   registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts  +(if  not registerModule.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)  +5*registerModule.dynamicHX.vol1[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol1[3].dynBal.use_mWat_flow then 1 else 0)+5*  registerModule.dynamicHX.vol1[3].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[4].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[4].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol1[5].dynBal.use_mWat_flow then 1 else 0)+5*  registerModule.dynamicHX.vol1[5].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[1].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[2].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[2].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[3].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[4].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[4].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[5].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[5].dynBal.nPorts+(if  not   registerModule.hydraulicModule.valve.vol.dynBal.use_mWat_flow then 1 else 0)+3  *registerModule.hydraulicModule.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2556
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Preheater successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Preheater.mos\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Validation.AHU2_Preheater\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Validation.AHU2_Preheater\\\");\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Preheater.mos");
+simulateModel("AixLib.Systems.ModularAHU.Validation.AHU2_Preheater", tolerance=1e-6, outputInterval=1, stopTime=7200, resultFile="AixLib.Systems.ModularAHU.Validation.AHU2_Preheater");
+Translation of AixLib.Systems.ModularAHU.Validation.AHU2_Preheater:
+The DAE has 2556 scalar unknowns and 2556 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 487
+  Variables: 6441
+  Constants: 133 (133 scalars)
+  Parameters: 2896 (27364 scalars)
+  Unknowns: 3412 (2665 scalars)
+  Differentiated variables: 92 scalars
+  Equations: 2638
+  Nontrivial: 2035
+Translated Model
+  Constants: 2471 scalars
+  Free parameters: 17889 scalars
+  Parameter depending: 7469 scalars
+  Outputs: 17 scalars
+  Continuous time states: 66 scalars
+  Time-varying variables: 665 scalars
+  Alias variables: 1668 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {17, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {2, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {17, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  registerModule.dynamicHX.heatCapacitor[1].T
+  registerModule.dynamicHX.heatCapacitor[2].T
+  registerModule.dynamicHX.heatCapacitor[3].T
+  registerModule.dynamicHX.heatCapacitor[4].T
+  registerModule.dynamicHX.heatCapacitor[5].T
+  registerModule.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[1].dynBal.U
+  registerModule.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[2].dynBal.U
+  registerModule.dynamicHX.vol1[3].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[3].dynBal.U
+  registerModule.dynamicHX.vol1[4].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[4].dynBal.U
+  registerModule.dynamicHX.vol1[5].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[5].dynBal.U
+  registerModule.dynamicHX.vol2[1].dynBal.U
+  registerModule.dynamicHX.vol2[2].dynBal.U
+  registerModule.dynamicHX.vol2[3].dynBal.U
+  registerModule.dynamicHX.vol2[4].dynBal.U
+  registerModule.dynamicHX.vol2[5].dynBal.U
+  registerModule.hydraulicModule.junc456.dynBal.U
+  registerModule.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.PT1_a1.y
+  registerModule.hydraulicModule.PT1_a2.y
+  registerModule.hydraulicModule.PT1_b1.y
+  registerModule.hydraulicModule.PT1_b2.y
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[1]
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[2]
+  registerModule.hydraulicModule.senT_a1.T
+  registerModule.hydraulicModule.senT_a2.T
+  registerModule.hydraulicModule.senT_b1.T
+  registerModule.hydraulicModule.senT_b2.T
+  registerModule.hydraulicModule.valve.vol.dynBal.U
+  registerModule.PT1_airIn.y
+  registerModule.PT1_airOut.y
+  registerModule.senT_airIn.T
+  registerModule.senT_airOut.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.ThrottlePump");
+Check of AixLib.Systems.HydraulicModules.Example.ThrottlePump:
+The model has the same number of unknowns and equations: 1396
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1370+ThrottlePump.PumpInterface.pump.vol.dynBal.nPorts+ThrottlePump.pipe1.simplePipe.vol[1].dynBal.nPorts  +ThrottlePump.pipe1.simplePipe.vol[2].dynBal.nPorts+ThrottlePump.pipe1.simplePipe.vol[3].dynBal.nPorts  +ThrottlePump.pipe2.simplePipe.vol[1].dynBal.nPorts+ThrottlePump.pipe2.simplePipe.vol[2].dynBal.nPorts  +ThrottlePump.pipe2.simplePipe.vol[3].dynBal.nPorts+ThrottlePump.pipe3.simplePipe.vol[1].dynBal.nPorts  +ThrottlePump.pipe3.simplePipe.vol[2].dynBal.nPorts+ThrottlePump.pipe3.simplePipe.vol[3].dynBal.nPorts  +ThrottlePump.pipe4.simplePipe.vol[1].dynBal.nPorts+ThrottlePump.pipe4.simplePipe.vol[2].dynBal.nPorts  +ThrottlePump.pipe4.simplePipe.vol[3].dynBal.nPorts
+scalar unknowns and
+  1295+(if boundary.use_Xi_in then 1 else (if boundary.use_X_in then 0 else 1))+(  if  not boundary.use_p_in then 1 else 0)+2*boundary.nPorts+(if  not   boundary.use_T_in then 1 else 0)+(if boundary1.use_Xi_in then 1 else (if   boundary1.use_X_in then 0 else 1))+(if  not boundary1.use_p_in then 1 else 0)+2  *boundary1.nPorts+(if  not boundary1.use_T_in then 1 else 0)+(if  not   ThrottlePump.PumpInterface.pump.vol.dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.PumpInterface.pump.vol.dynBal.nPorts+(if  not ThrottlePump.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe1.simplePipe.vol[1].dynBal.nPorts+(if  not   ThrottlePump.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe1.simplePipe.vol[2].dynBal.nPorts+(if  not ThrottlePump.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe1.simplePipe.vol[3].dynBal.nPorts+(if  not   ThrottlePump.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe2.simplePipe.vol[1].dynBal.nPorts+(if  not ThrottlePump.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe2.simplePipe.vol[2].dynBal.nPorts+(if  not   ThrottlePump.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe2.simplePipe.vol[3].dynBal.nPorts+(if  not ThrottlePump.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe3.simplePipe.vol[1].dynBal.nPorts+(if  not   ThrottlePump.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe3.simplePipe.vol[2].dynBal.nPorts+(if  not ThrottlePump.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe3.simplePipe.vol[3].dynBal.nPorts+(if  not   ThrottlePump.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe4.simplePipe.vol[1].dynBal.nPorts+(if  not ThrottlePump.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*ThrottlePump.pipe4.simplePipe.vol[2].dynBal.nPorts+(if  not   ThrottlePump.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*  ThrottlePump.pipe4.simplePipe.vol[3].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1396
+Check of AixLib.Systems.HydraulicModules.Example.ThrottlePump successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.ThrottlePump\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.ThrottlePump\\\");\",", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.ThrottlePump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.ThrottlePump", tolerance=1e-6, stopTime=600, resultFile="AixLib.Systems.HydraulicModules.Example.ThrottlePump");
+Translation of AixLib.Systems.HydraulicModules.Example.ThrottlePump:
+The DAE has 1396 scalar unknowns and 1396 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 315
+  Variables: 3779
+  Constants: 71 (71 scalars)
+  Parameters: 1848 (2020 scalars)
+  Unknowns: 1860 (1450 scalars)
+  Differentiated variables: 53 scalars
+  Equations: 1378
+  Nontrivial: 1079
+Translated Model
+  Constants: 1400 scalars
+  Free parameters: 120 scalars
+  Parameter depending: 731 scalars
+  Outputs: 12 scalars
+  Continuous time states: 40 scalars
+  Time-varying variables: 312 scalars
+  Alias variables: 978 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {14}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {14, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  ThrottlePump.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe1.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe1.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe1.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe2.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe2.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe2.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe3.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe3.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe3.simplePipe.vol[3].dynBal.U
+  ThrottlePump.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  ThrottlePump.pipe4.simplePipe.vol[1].dynBal.U
+  ThrottlePump.pipe4.simplePipe.vol[2].dynBal.U
+  ThrottlePump.pipe4.simplePipe.vol[3].dynBal.U
+  ThrottlePump.PT1_a1.y
+  ThrottlePump.PT1_a2.y
+  ThrottlePump.PT1_b1.y
+  ThrottlePump.PT1_b2.y
+  ThrottlePump.PumpInterface.pump.filter.s[1]
+  ThrottlePump.PumpInterface.pump.filter.s[2]
+  ThrottlePump.PumpInterface.pump.vol.dynBal.U
+  ThrottlePump.senT_a1.T
+  ThrottlePump.senT_a2.T
+  ThrottlePump.senT_b1.T
+  ThrottlePump.senT_b2.T
+  ThrottlePump.valve.filter.s[1]
+ 
+Finished
+ = true
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.ThrottlePump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Check of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem\\\");\",", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos");
+simulateModel("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem", stopTime=86400, method="dassl",  tolerance=1e-06, resultFile="AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
+Translation of AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Examples.Heater");
+Check of AixLib.Systems.ModularAHU.Examples.Heater:
+The model has the same number of unknowns and equations: 2546
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2490+registerModule.hydraulicModule.valve.vol.dynBal.nPorts+registerModule.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +registerModule.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts+  registerModule.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts+  registerModule.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts+  registerModule.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts+  registerModule.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts+  registerModule.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts+  registerModule.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts+  registerModule.hydraulicModule.junc456.dynBal.nPorts+registerModule.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +2*registerModule.dynamicHX.vol1[1].dynBal.nPorts+2*registerModule.dynamicHX.vol1[2].dynBal.nPorts  +registerModule.dynamicHX.vol2[1].dynBal.nPorts+registerModule.dynamicHX.vol2[2].dynBal.nPorts
+scalar unknowns and
+  2331+(if boundaryWaterSource.use_Xi_in then 1 else (if boundaryWaterSource.use_X_in   then 0 else 1))+(if  not boundaryWaterSource.use_p_in then 1 else 0)+2*  boundaryWaterSource.nPorts+(if  not boundaryWaterSource.use_T_in then 1 else 0)  +(if boundaryWaterSink.use_Xi_in then 1 else (if boundaryWaterSink.use_X_in   then 0 else 1))+(if  not boundaryWaterSink.use_p_in then 1 else 0)+2*  boundaryWaterSink.nPorts+(if  not boundaryWaterSink.use_T_in then 1 else 0)+(  if boundaryAirSource.use_Xi_in then 2 else (if boundaryAirSource.use_X_in   then 1 else 3))+3*boundaryAirSource.nPorts+(if  not boundaryAirSource.use_p_in   then 1 else 0)+(if  not boundaryAirSource.use_T_in then 1 else 0)+(if   boundaryAirSink.use_Xi_in then 2 else (if boundaryAirSink.use_X_in then 1   else 3))+3*boundaryAirSink.nPorts+(if  not boundaryAirSink.use_p_in then 1   else 0)+(if  not boundaryAirSink.use_T_in then 1 else 0)+(if  not   registerModule.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.nPorts  +(if  not registerModule.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+3*registerModule.hydraulicModule.junc456.dynBal.nPorts+(if  not   registerModule.hydraulicModule.PumpInterface.pump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.PumpInterface.pump.vol.dynBal.nPorts  +(if  not registerModule.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)  +5*registerModule.dynamicHX.vol1[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[1].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[2].dynBal.nPorts+(if  not   registerModule.hydraulicModule.valve.vol.dynBal.use_mWat_flow then 1 else 0)+3  *registerModule.hydraulicModule.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2546
+Check of AixLib.Systems.ModularAHU.Examples.Heater successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos\",", "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Examples.Heater\",", "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Examples.Heater\\\");\",", "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Examples.Heater.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos");
+simulateModel("AixLib.Systems.ModularAHU.Examples.Heater", tolerance=1e-6, stopTime=3600, resultFile="AixLib.Systems.ModularAHU.Examples.Heater");
+Translation of AixLib.Systems.ModularAHU.Examples.Heater:
+The DAE has 2546 scalar unknowns and 2546 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (registerModule.dynamicHX.vol1[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (registerModule.dynamicHX.vol1[1].dynBal.initialize_p) then 
+      registerModule.dynamicHX.vol1[1].dynBal.medium.p = registerModule.dynamicHX.vol1[1].dynBal.p_start;
+    end if;
+  else
+    if (registerModule.dynamicHX.vol1[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (registerModule.dynamicHX.vol1[1].dynBal.initialize_p) then 
+        der(registerModule.dynamicHX.vol1[1].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (registerModule.dynamicHX.vol1[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (registerModule.dynamicHX.vol1[2].dynBal.initialize_p) then 
+      registerModule.dynamicHX.vol1[2].dynBal.medium.p = registerModule.dynamicHX.vol1[2].dynBal.p_start;
+    end if;
+  else
+    if (registerModule.dynamicHX.vol1[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (registerModule.dynamicHX.vol1[2].dynBal.initialize_p) then 
+        der(registerModule.dynamicHX.vol1[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+The redundancies involve
+initial equations: 
+  0.0 = 0;
+  0.0 = 0;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 549
+  Variables: 6673
+  Constants: 134 (134 scalars)
+  Parameters: 3181 (3386 scalars)
+  Unknowns: 3358 (2653 scalars)
+  Differentiated variables: 122 scalars
+  Equations: 2479
+  Nontrivial: 1925
+Translated Model
+  Constants: 2408 scalars
+  Free parameters: 212 scalars
+  Parameter depending: 1209 scalars
+  Continuous time states: 70 scalars
+  Time-varying variables: 592 scalars
+  Alias variables: 1752 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {5, 2, 5, 2, 5, 2, 5, 2, 5, 2, 5, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {18}
+  Sizes after manipulation of the nonlinear systems: {2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of linear systems of equations: {4, 179, 12}
+    Sizes after manipulation of the linear systems: {2, 59, 2}
+    Sizes of nonlinear systems of equations: {1, 18, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  ctrBasic.PID.D.x
+  ctrBasic.PID.I.y
+  registerModule.dynamicHX.heatCapacitor[1].T
+  registerModule.dynamicHX.heatCapacitor[2].T
+  registerModule.dynamicHX.vol1[1].dynBal.medium.T
+  registerModule.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[2].dynBal.medium.T
+  registerModule.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol2[1].dynBal.medium.T
+  registerModule.dynamicHX.vol2[2].dynBal.medium.T
+  registerModule.hydraulicModule.junc456.dynBal.medium.T
+  registerModule.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe1.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe1.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe2.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe2.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe3.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe3.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe4.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe4.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe5.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe5.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.simplePipe.PipeWall[1].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.simplePipe.PipeWall[2].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.simplePipe.PipeWall[3].CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.simplePipe.vol[1].dynBal.medium.T
+  registerModule.hydraulicModule.pipe6.simplePipe.vol[2].dynBal.medium.T
+  registerModule.hydraulicModule.pipe6.simplePipe.vol[3].dynBal.medium.T
+  registerModule.hydraulicModule.PT1_a1.y
+  registerModule.hydraulicModule.PT1_a2.y
+  registerModule.hydraulicModule.PT1_b1.y
+  registerModule.hydraulicModule.PT1_b2.y
+  registerModule.hydraulicModule.PumpInterface.pump.filter.s[1]
+  registerModule.hydraulicModule.PumpInterface.pump.filter.s[2]
+  registerModule.hydraulicModule.PumpInterface.pump.vol.dynBal.medium.T
+  registerModule.hydraulicModule.senT_a1.T
+  registerModule.hydraulicModule.senT_a2.T
+  registerModule.hydraulicModule.senT_b1.T
+  registerModule.hydraulicModule.senT_b2.T
+  registerModule.hydraulicModule.valve.filter.s[1]
+  registerModule.hydraulicModule.valve.vol.dynBal.medium.T
+  registerModule.PT1_airIn.y
+  registerModule.PT1_airOut.y
+  registerModule.senT_airIn.T
+  registerModule.senT_airOut.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Examples.Heater.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Injection");
+Check of AixLib.Systems.HydraulicModules.Example.Injection:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Injection\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Injection\\\");\",", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Injection.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Injection", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Injection");
+Translation of AixLib.Systems.HydraulicModules.Example.Injection:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Injection.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Pump");
+Check of AixLib.Systems.HydraulicModules.Example.Pump:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Pump\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Pump\\\");\",", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Pump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Pump", tolerance=1e-6, outputInterval=5, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Pump");
+Translation of AixLib.Systems.HydraulicModules.Example.Pump:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Pump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Validation.AHU2_Cooler");
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Cooler:
+The model has the same number of unknowns and equations: 2420
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2341+max([size(combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+  registerModule.hydraulicModule.valve.vol.dynBal.nPorts+registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.junc456.dynBal.nPorts+2*size(registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns,   1)+2*registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+2*  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+  registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts+2*  registerModule.dynamicHX.vol1[1].dynBal.nPorts+2*registerModule.dynamicHX.vol1[2].dynBal.nPorts  +2*registerModule.dynamicHX.vol1[3].dynBal.nPorts+2*registerModule.dynamicHX.vol1[4].dynBal.nPorts  +registerModule.dynamicHX.vol2[1].dynBal.nPorts+registerModule.dynamicHX.vol2[2].dynBal.nPorts  +registerModule.dynamicHX.vol2[3].dynBal.nPorts+registerModule.dynamicHX.vol2[4].dynBal.nPorts
+scalar unknowns and
+  2193+(if boundaryWaterSource.use_Xi_in then 1 else (if boundaryWaterSource.use_X_in   then 0 else 1))+(if  not boundaryWaterSource.use_p_in then 1 else 0)+2*  boundaryWaterSource.nPorts+(if  not boundaryWaterSource.use_T_in then 1 else 0)  +(if boundaryWaterSink.use_Xi_in then 1 else (if boundaryWaterSink.use_X_in   then 0 else 1))+(if  not boundaryWaterSink.use_p_in then 1 else 0)+2*  boundaryWaterSink.nPorts+(if  not boundaryWaterSink.use_T_in then 1 else 0)+(  if boundaryAirSource.use_Xi_in then 2 else (if boundaryAirSource.use_X_in   then 1 else 3))+3*boundaryAirSource.nPorts+(if  not boundaryAirSource.use_m_flow_in   then 1 else 0)+(if  not boundaryAirSource.use_T_in then 1 else 0)+(if   boundaryAirSink.use_Xi_in then 2 else (if boundaryAirSink.use_X_in then 1   else 3))+3*boundaryAirSink.nPorts+(if  not boundaryAirSink.use_p_in then 1   else 0)+(if  not boundaryAirSink.use_T_in then 1 else 0)+max([size(  combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+2*size(  registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns, 1)+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+(if    not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+3*registerModule.hydraulicModule.junc456.dynBal.nPorts+(if  not   registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts  +(if  not registerModule.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)  +5*registerModule.dynamicHX.vol1[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol1[3].dynBal.use_mWat_flow then 1 else 0)+5*  registerModule.dynamicHX.vol1[3].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[4].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[4].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[1].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[3].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[3].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[4].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[4].dynBal.nPorts+(if  not   registerModule.hydraulicModule.valve.vol.dynBal.use_mWat_flow then 1 else 0)+3  *registerModule.hydraulicModule.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2420
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Cooler successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Cooler.mos\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Validation.AHU2_Cooler\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Validation.AHU2_Cooler\\\");\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Cooler.mos");
+simulateModel("AixLib.Systems.ModularAHU.Validation.AHU2_Cooler", tolerance=1e-6, outputInterval=1, stopTime=2700, resultFile="AixLib.Systems.ModularAHU.Validation.AHU2_Cooler");
+Translation of AixLib.Systems.ModularAHU.Validation.AHU2_Cooler:
+The DAE has 2420 scalar unknowns and 2420 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 464
+  Variables: 6155
+  Constants: 125 (125 scalars)
+  Parameters: 2790 (41180 scalars)
+  Unknowns: 3240 (2523 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2514
+  Nontrivial: 1950
+Translated Model
+  Constants: 2376 scalars
+  Free parameters: 19299 scalars
+  Parameter depending: 19948 scalars
+  Outputs: 17 scalars
+  Continuous time states: 62 scalars
+  Time-varying variables: 629 scalars
+  Alias variables: 1576 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {17, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {2, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {17, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  registerModule.dynamicHX.heatCapacitor[1].T
+  registerModule.dynamicHX.heatCapacitor[2].T
+  registerModule.dynamicHX.heatCapacitor[3].T
+  registerModule.dynamicHX.heatCapacitor[4].T
+  registerModule.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[1].dynBal.U
+  registerModule.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[2].dynBal.U
+  registerModule.dynamicHX.vol1[3].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[3].dynBal.U
+  registerModule.dynamicHX.vol1[4].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[4].dynBal.U
+  registerModule.dynamicHX.vol2[1].dynBal.U
+  registerModule.dynamicHX.vol2[2].dynBal.U
+  registerModule.dynamicHX.vol2[3].dynBal.U
+  registerModule.dynamicHX.vol2[4].dynBal.U
+  registerModule.hydraulicModule.junc456.dynBal.U
+  registerModule.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.PT1_a1.y
+  registerModule.hydraulicModule.PT1_a2.y
+  registerModule.hydraulicModule.PT1_b1.y
+  registerModule.hydraulicModule.PT1_b2.y
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[1]
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[2]
+  registerModule.hydraulicModule.senT_a1.T
+  registerModule.hydraulicModule.senT_a2.T
+  registerModule.hydraulicModule.senT_b1.T
+  registerModule.hydraulicModule.senT_b2.T
+  registerModule.hydraulicModule.valve.vol.dynBal.U
+  registerModule.PT1_airIn.y
+  registerModule.PT1_airOut.y
+  registerModule.senT_airIn.T
+  registerModule.senT_airOut.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Examples.DemandControlledAHU");
+Check of AixLib.Systems.ModularAHU.Examples.DemandControlledAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/DemandControlledAHU.mos\",", "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Examples.DemandControlledAHU\",", "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Examples.DemandControlledAHU\\\");\",", "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/DemandControlledAHU.mos");
+simulateModel("AixLib.Systems.ModularAHU.Examples.DemandControlledAHU", tolerance=1e-5, startTime=5961600, stopTime=6566400, outputInterval=120, resultFile="AixLib.Systems.ModularAHU.Examples.DemandControlledAHU");
+Translation of AixLib.Systems.ModularAHU.Examples.DemandControlledAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Throttle");
+Check of AixLib.Systems.HydraulicModules.Example.Throttle:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Throttle\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Throttle\\\");\",", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Throttle.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Throttle", tolerance=1e-6, stopTime=1000, resultFile="AixLib.Systems.HydraulicModules.Example.Throttle");
+Translation of AixLib.Systems.HydraulicModules.Example.Throttle:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Throttle.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.HydraulicModules.Example.Injection2WayValve");
+Check of AixLib.Systems.HydraulicModules.Example.Injection2WayValve:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.HydraulicModules.Example.Injection2WayValve\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.HydraulicModules.Example.Injection2WayValve\\\");\",", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos");
+simulateModel("AixLib.Systems.HydraulicModules.Example.Injection2WayValve", tolerance=1e-6, stopTime=800, resultFile="AixLib.Systems.HydraulicModules.Example.Injection2WayValve");
+Translation of AixLib.Systems.HydraulicModules.Example.Injection2WayValve:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.HydraulicModules.Example.Injection2WayValve.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Validation.AHU2_Heater");
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Heater:
+The model has the same number of unknowns and equations: 2418
+The model could not be deduced to be symbolically well-posed.
+The model has
+  2341+max([size(combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+  registerModule.hydraulicModule.valve.vol.dynBal.nPorts+registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts+  registerModule.hydraulicModule.junc456.dynBal.nPorts+2*size(registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns,   1)+2*registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+2*  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+  registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts+2*  registerModule.dynamicHX.vol1[1].dynBal.nPorts+2*registerModule.dynamicHX.vol1[2].dynBal.nPorts  +2*registerModule.dynamicHX.vol1[3].dynBal.nPorts+2*registerModule.dynamicHX.vol1[4].dynBal.nPorts  +registerModule.dynamicHX.vol2[1].dynBal.nPorts+registerModule.dynamicHX.vol2[2].dynBal.nPorts  +registerModule.dynamicHX.vol2[3].dynBal.nPorts+registerModule.dynamicHX.vol2[4].dynBal.nPorts
+scalar unknowns and
+  2193+(if boundaryWaterSource.use_Xi_in then 1 else (if boundaryWaterSource.use_X_in   then 0 else 1))+(if  not boundaryWaterSource.use_p_in then 1 else 0)+2*  boundaryWaterSource.nPorts+(if  not boundaryWaterSource.use_T_in then 1 else 0)  +(if boundaryWaterSink.use_Xi_in then 1 else (if boundaryWaterSink.use_X_in   then 0 else 1))+(if  not boundaryWaterSink.use_p_in then 1 else 0)+2*  boundaryWaterSink.nPorts+(if  not boundaryWaterSink.use_T_in then 1 else 0)+(  if boundaryAirSource.use_Xi_in then 2 else (if boundaryAirSource.use_X_in   then 1 else 3))+3*boundaryAirSource.nPorts+(if  not boundaryAirSource.use_m_flow_in   then 1 else 0)+(if  not boundaryAirSource.use_T_in then 1 else 0)+(if   boundaryAirSink.use_Xi_in then 2 else (if boundaryAirSink.use_X_in then 1   else 3))+3*boundaryAirSink.nPorts+(if  not boundaryAirSink.use_p_in then 1   else 0)+(if  not boundaryAirSink.use_T_in then 1 else 0)+max([size(  combiTimeTable.columns, 1); size(combiTimeTable.offset, 1)])+2*size(  registerModule.hydraulicModule.PumpInterface.physics.maxMinTable.columns, 1)+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n1+  registerModule.hydraulicModule.PumpInterface.physics.deMultiplex2.n2+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.n+(if    not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.nPorts  +(if  not registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.nPorts  +(if  not registerModule.hydraulicModule.junc456.dynBal.use_mWat_flow then 1   else 0)+3*registerModule.hydraulicModule.junc456.dynBal.nPorts+(if  not   registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.hydraulicModule.PumpInterface.physics.vol.dynBal.nPorts  +(if  not registerModule.dynamicHX.vol1[1].dynBal.use_mWat_flow then 1 else 0)  +5*registerModule.dynamicHX.vol1[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[2].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol1[3].dynBal.use_mWat_flow then 1 else 0)+5*  registerModule.dynamicHX.vol1[3].dynBal.nPorts+(if  not registerModule.dynamicHX.vol1[4].dynBal.use_mWat_flow   then 1 else 0)+5*registerModule.dynamicHX.vol1[4].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[1].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[1].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[2].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[2].dynBal.nPorts+(if  not   registerModule.dynamicHX.vol2[3].dynBal.use_mWat_flow then 1 else 0)+3*  registerModule.dynamicHX.vol2[3].dynBal.nPorts+(if  not registerModule.dynamicHX.vol2[4].dynBal.use_mWat_flow   then 1 else 0)+3*registerModule.dynamicHX.vol2[4].dynBal.nPorts+(if  not   registerModule.hydraulicModule.valve.vol.dynBal.use_mWat_flow then 1 else 0)+3  *registerModule.hydraulicModule.valve.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  2418
+Check of AixLib.Systems.ModularAHU.Validation.AHU2_Heater successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Heater.mos\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Validation.AHU2_Heater\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Validation.AHU2_Heater\\\");\",", "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Heater.mos");
+simulateModel("AixLib.Systems.ModularAHU.Validation.AHU2_Heater", tolerance=1e-6, outputInterval=1, stopTime=4320, resultFile="AixLib.Systems.ModularAHU.Validation.AHU2_Heater");
+Translation of AixLib.Systems.ModularAHU.Validation.AHU2_Heater:
+The DAE has 2418 scalar unknowns and 2418 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 464
+  Variables: 6155
+  Constants: 125 (125 scalars)
+  Parameters: 2790 (12497 scalars)
+  Unknowns: 3240 (2521 scalars)
+  Differentiated variables: 86 scalars
+  Equations: 2514
+  Nontrivial: 1950
+Translated Model
+  Constants: 2293 scalars
+  Free parameters: 5007 scalars
+  Parameter depending: 5640 scalars
+  Outputs: 17 scalars
+  Continuous time states: 62 scalars
+  Time-varying variables: 627 scalars
+  Alias variables: 1576 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {17, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {2, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {17, 1}
+    Sizes after manipulation of the nonlinear systems: {3, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  registerModule.dynamicHX.heatCapacitor[1].T
+  registerModule.dynamicHX.heatCapacitor[2].T
+  registerModule.dynamicHX.heatCapacitor[3].T
+  registerModule.dynamicHX.heatCapacitor[4].T
+  registerModule.dynamicHX.vol1[1].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[1].dynBal.U
+  registerModule.dynamicHX.vol1[2].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[2].dynBal.U
+  registerModule.dynamicHX.vol1[3].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[3].dynBal.U
+  registerModule.dynamicHX.vol1[4].dynBal.medium.Xi[1]
+  registerModule.dynamicHX.vol1[4].dynBal.U
+  registerModule.dynamicHX.vol2[1].dynBal.U
+  registerModule.dynamicHX.vol2[2].dynBal.U
+  registerModule.dynamicHX.vol2[3].dynBal.U
+  registerModule.dynamicHX.vol2[4].dynBal.U
+  registerModule.hydraulicModule.junc456.dynBal.U
+  registerModule.hydraulicModule.pipe1.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe1.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe2.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe2.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe3.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe3.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe4.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe4.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe5.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe5.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.pipe6.Insulation.CylindricLoad1.heatCapacitor.T
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.del.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.timDel.x
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_a.dynBal.U
+  registerModule.hydraulicModule.pipe6.plugFlowPipe.vol_b.dynBal.U
+  registerModule.hydraulicModule.PT1_a1.y
+  registerModule.hydraulicModule.PT1_a2.y
+  registerModule.hydraulicModule.PT1_b1.y
+  registerModule.hydraulicModule.PT1_b2.y
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[1]
+  registerModule.hydraulicModule.PumpInterface.physics.criticalDamping.x[2]
+  registerModule.hydraulicModule.senT_a1.T
+  registerModule.hydraulicModule.senT_a2.T
+  registerModule.hydraulicModule.senT_b1.T
+  registerModule.hydraulicModule.senT_b2.T
+  registerModule.hydraulicModule.valve.vol.dynBal.U
+  registerModule.PT1_airIn.y
+  registerModule.PT1_airOut.y
+  registerModule.senT_airIn.T
+  registerModule.senT_airOut.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Validation.AHU2_Heater.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Check of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Systems.ModularAHU.Examples.GenericAHU\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Systems.ModularAHU.Examples.GenericAHU\\\");\",", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Systems.ModularAHU.Examples.GenericAHU.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos");
+simulateModel("AixLib.Systems.ModularAHU.Examples.GenericAHU", stopTime=7200, method="dassl", tolerance=1e-6, resultFile="AixLib.Systems.ModularAHU.Examples.GenericAHU");
+Translation of AixLib.Systems.ModularAHU.Examples.GenericAHU:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Systems.ModularAHU.Examples.GenericAHU.translation.log");

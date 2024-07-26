@@ -1,0 +1,2693 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Fluid.FixedResistances.Examples.SimplePipe");
+Check of AixLib.Fluid.FixedResistances.Examples.SimplePipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/SimplePipe.mos\",", "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.FixedResistances.Examples.SimplePipe\",", "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.FixedResistances.Examples.SimplePipe\\\");\",", "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.FixedResistances.Examples.SimplePipe.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/SimplePipe.mos");
+translateModel("AixLib.Fluid.FixedResistances.Examples.SimplePipe");
+Translation of AixLib.Fluid.FixedResistances.Examples.SimplePipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.FixedResistances.Examples.SimplePipe", stopTime=1000, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.FixedResistances.Examples.SimplePipe");
+Instantiation of ?:
+Translation of AixLib.Fluid.FixedResistances.Examples.SimplePipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.FixedResistances.Examples.SimplePipe.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe");
+Check of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/StaticPipe.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/StaticPipe.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe", stopTime=1000, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled");
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled:
+The model has the same number of unknowns and equations: 151
+The model could not be deduced to be symbolically well-posed.
+The model has
+  140+2*(size(pump.maxMinTable.columns, 1)+pump.deMultiplex3_1.n1+pump.deMultiplex3_1.n2)  +pump.criticalDamping.n+pump.vol.dynBal.nPorts
+scalar unknowns and
+  130+2*size(pump.maxMinTable.columns, 1)+pump.deMultiplex3_1.n1+pump.deMultiplex3_1.n2  +pump.criticalDamping.n+(if vessle.use_Xi_in then 1 else (if vessle.use_X_in   then 0 else 1))+(if  not vessle.use_p_in then 1 else 0)+2*vessle.nPorts+(if    not vessle.use_T_in then 1 else 0)+(if  not pump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*pump.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  151
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlled.mos\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled\\\");\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlled.mos");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled", tolerance=1e-6, stopTime=600, method="dassl", resultFile="AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled");
+Translation of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled:
+The DAE has 151 scalar unknowns and 151 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 34
+  Variables: 378
+  Constants: 9 (9 scalars)
+  Parameters: 177 (481 scalars)
+  Unknowns: 192 (155 scalars)
+  Differentiated variables: 5 scalars
+  Equations: 158
+  Nontrivial: 131
+Translated Model
+  Constants: 136 scalars
+  Free parameters: 253 scalars
+  Parameter depending: 127 scalars
+  Outputs: 7 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 36 scalars
+  Alias variables: 93 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1}
+  Sizes after manipulation of the nonlinear systems: {0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pump.criticalDamping.x[1]
+  simpleValve.filter.s[1]
+  simpleValve.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger");
+Check of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger:
+The model has the same number of unknowns and equations: 5083
+The model could not be deduced to be symbolically well-posed.
+The model has
+  3373+32*enthalpyExchanger.n+16*enthalpyExchanger.airDuct2.heatTransfer.n+18*  enthalpyExchanger.airDuct2.massTransfer.n+16*enthalpyExchanger.airDuct1.heatTransfer.n  +18*enthalpyExchanger.airDuct1.massTransfer.n+5*enthalpyExchanger.membrane.heatTransfer.n  +enthalpyExchanger.membrane.massTransfer.n+2*enthalpyExchanger.airDuct2.vol[1].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[2].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[3].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[4].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[5].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[6].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[7].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[8].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[9].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[10].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[11].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[12].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[13].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[14].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[15].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[1].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[2].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[3].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[4].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[5].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[6].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[7].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[8].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[9].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[10].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[11].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[12].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[13].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[14].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[15].dynBal.nPorts
+scalar unknowns and
+  3043+17*enthalpyExchanger.airDuct2.heatTransfer.n+19*enthalpyExchanger.airDuct2.massTransfer.n  +3*(if enthalpyExchanger.couFloArr then 2*enthalpyExchanger.n else 0)+17*  enthalpyExchanger.airDuct1.heatTransfer.n+19*enthalpyExchanger.airDuct1.massTransfer.n  +7*enthalpyExchanger.membrane.heatTransfer.n+3*enthalpyExchanger.membrane.massTransfer.n  +2*(if enthalpyExchanger.useConPer then 1 else 0)+32*enthalpyExchanger.n+(if   souAirHot.use_Xi_in then 2 else (if souAirHot.use_X_in then 1 else 3))+3*  souAirHot.nPorts+(if  not souAirHot.use_p_in then 1 else 0)+(if  not   souAirHot.use_T_in then 1 else 0)+(if sinAirHot.use_Xi_in then 2 else (if   sinAirHot.use_X_in then 1 else 3))+3*sinAirHot.nPorts+(if  not   sinAirHot.use_p_in then 1 else 0)+(if  not sinAirHot.use_T_in then 1 else 0)+(  if souAirCol.use_Xi_in then 2 else (if souAirCol.use_X_in then 1 else 3))+3*  souAirCol.nPorts+(if  not souAirCol.use_p_in then 1 else 0)+(if  not   souAirCol.use_T_in then 1 else 0)+(if sinAirCol.use_Xi_in then 2 else (if   sinAirCol.use_X_in then 1 else 3))+3*sinAirCol.nPorts+(if  not   sinAirCol.use_p_in then 1 else 0)+(if  not sinAirCol.use_T_in then 1 else 0)+5  *enthalpyExchanger.airDuct2.vol[1].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[2].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[3].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[4].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[5].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[6].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[7].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[8].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[9].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[10].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[11].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[12].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[13].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[14].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[15].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[1].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[2].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[3].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[4].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[5].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[6].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[7].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[8].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[9].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[10].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[11].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[12].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[13].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[14].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[15].dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  5083
+Check of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Examples/Test_EnthalpyExchanger.mos\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger\\\");\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Examples/Test_EnthalpyExchanger.mos");
+simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger", stopTime=7200, outputInterval=10, method="dassl", tolerance=1e-6, resultFile="AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger");
+Translation of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger:
+The DAE has 5083 scalar unknowns and 5083 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  if (enthalpyExchanger.airDuct2.vol[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[1].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[1].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[1].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[1].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[1].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[1].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[2].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[2].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[2].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[2].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[2].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[3].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[3].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[3].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[3].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[3].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[3].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[3].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[4].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[4].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[4].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[4].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[4].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[4].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[4].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[5].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[5].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[5].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[5].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[5].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[5].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[5].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[6].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[6].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[6].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[6].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[6].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[6].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[6].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[7].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[7].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[7].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[7].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[7].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[7].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[7].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[8].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[8].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[8].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[8].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[8].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[8].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[8].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[9].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[9].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[9].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[9].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[9].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[9].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[9].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[10].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[10].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[10].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[10].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[10].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[10].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[10].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[11].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[11].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[11].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[11].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[11].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[11].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[11].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[12].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[12].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[12].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[12].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[12].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[12].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[12].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[13].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[13].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[13].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[13].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[13].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[13].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[13].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[14].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[14].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[14].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[14].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[14].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[14].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[14].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[15].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[15].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[15].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[15].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[15].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[15].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[15].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[1].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[1].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[1].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[1].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[1].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[1].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[2].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[2].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[2].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[2].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[2].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[3].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[3].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[3].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[3].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[3].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[3].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[3].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[4].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[4].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[4].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[4].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[4].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[4].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[4].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[5].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[5].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[5].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[5].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[5].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[5].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[5].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[6].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[6].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[6].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[6].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[6].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[6].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[6].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[7].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[7].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[7].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[7].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[7].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[7].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[7].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[8].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[8].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[8].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[8].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[8].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[8].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[8].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[9].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[9].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[9].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[9].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[9].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[9].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[9].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[10].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[10].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[10].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[10].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[10].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[10].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[10].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[11].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[11].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[11].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[11].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[11].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[11].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[11].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[12].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[12].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[12].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[12].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[12].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[12].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[12].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[13].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[13].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[13].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[13].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[13].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[13].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[13].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[14].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[14].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[14].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[14].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[14].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[14].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[14].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[15].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[15].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[15].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[15].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[15].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[15].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[15].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    sinAirCol.p(start = 101325)
+    sinAirHot.p(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirCol.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+  sinAirHot.p = 101325.0;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 556
+  Variables: 6181
+  Constants: 154 (154 scalars)
+  Parameters: 2178 (2382 scalars)
+  Unknowns: 3849 (5219 scalars)
+  Differentiated variables: 117 scalars
+  Equations: 2512
+  Nontrivial: 1919
+Translated Model
+  Constants: 2163 scalars
+  Free parameters: 163 scalars
+  Parameter depending: 1011 scalars
+  Continuous time states: 87 scalars
+  Time-varying variables: 1614 scalars
+  Alias variables: 2804 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  enthalpyExchanger.airDuct1.senRelHum.phi
+  enthalpyExchanger.airDuct1.senTem.T
+  enthalpyExchanger.airDuct1.vol[1].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[1].dynBal.U
+  enthalpyExchanger.airDuct1.vol[2].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[2].dynBal.U
+  enthalpyExchanger.airDuct1.vol[3].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[3].dynBal.U
+  enthalpyExchanger.airDuct1.vol[4].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[4].dynBal.U
+  enthalpyExchanger.airDuct1.vol[5].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[5].dynBal.U
+  enthalpyExchanger.airDuct1.vol[6].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[6].dynBal.U
+  enthalpyExchanger.airDuct1.vol[7].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[7].dynBal.U
+  enthalpyExchanger.airDuct1.vol[8].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[8].dynBal.U
+  enthalpyExchanger.airDuct1.vol[9].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[9].dynBal.U
+  enthalpyExchanger.airDuct1.vol[10].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[10].dynBal.U
+  enthalpyExchanger.airDuct1.vol[11].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[11].dynBal.U
+  enthalpyExchanger.airDuct1.vol[12].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[12].dynBal.U
+  enthalpyExchanger.airDuct1.vol[13].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[13].dynBal.U
+  enthalpyExchanger.airDuct1.vol[14].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[14].dynBal.U
+  enthalpyExchanger.airDuct1.vol[15].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[15].dynBal.U
+  enthalpyExchanger.airDuct2.senRelHum.phi
+  enthalpyExchanger.airDuct2.senTem.T
+  enthalpyExchanger.airDuct2.vol[1].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[1].dynBal.U
+  enthalpyExchanger.airDuct2.vol[2].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[2].dynBal.U
+  enthalpyExchanger.airDuct2.vol[3].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[3].dynBal.U
+  enthalpyExchanger.airDuct2.vol[4].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[4].dynBal.U
+  enthalpyExchanger.airDuct2.vol[5].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[5].dynBal.U
+  enthalpyExchanger.airDuct2.vol[6].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[6].dynBal.U
+  enthalpyExchanger.airDuct2.vol[7].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[7].dynBal.U
+  enthalpyExchanger.airDuct2.vol[8].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[8].dynBal.U
+  enthalpyExchanger.airDuct2.vol[9].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[9].dynBal.U
+  enthalpyExchanger.airDuct2.vol[10].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[10].dynBal.U
+  enthalpyExchanger.airDuct2.vol[11].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[11].dynBal.U
+  enthalpyExchanger.airDuct2.vol[12].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[12].dynBal.U
+  enthalpyExchanger.airDuct2.vol[13].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[13].dynBal.U
+  enthalpyExchanger.airDuct2.vol[14].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[14].dynBal.U
+  enthalpyExchanger.airDuct2.vol[15].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[15].dynBal.U
+  enthalpyExchanger.membrane.heatTransfer.Ts[1]
+  enthalpyExchanger.membrane.heatTransfer.Ts[2]
+  enthalpyExchanger.membrane.heatTransfer.Ts[3]
+  enthalpyExchanger.membrane.heatTransfer.Ts[4]
+  enthalpyExchanger.membrane.heatTransfer.Ts[5]
+  enthalpyExchanger.membrane.heatTransfer.Ts[6]
+  enthalpyExchanger.membrane.heatTransfer.Ts[7]
+  enthalpyExchanger.membrane.heatTransfer.Ts[8]
+  enthalpyExchanger.membrane.heatTransfer.Ts[9]
+  enthalpyExchanger.membrane.heatTransfer.Ts[10]
+  enthalpyExchanger.membrane.heatTransfer.Ts[11]
+  enthalpyExchanger.membrane.heatTransfer.Ts[12]
+  enthalpyExchanger.membrane.heatTransfer.Ts[13]
+  enthalpyExchanger.membrane.heatTransfer.Ts[14]
+  enthalpyExchanger.membrane.heatTransfer.Ts[15]
+  senMasFraColIn.X
+  senMasFraColOut.X
+  senMasFraHotIn.X
+  senMasFraHotOut.X
+  senTemColIn.T
+  senTemColOut.T
+  senTemHotIn.T
+  senTemHotOut.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp");
+Check of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDp.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDp.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystem");
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.BoilerCHP.Examples.CHPSystem\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.BoilerCHP.Examples.CHPSystem\\\");\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.BoilerCHP.Examples.CHPSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos");
+simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystem", tolerance=1e-06, stopTime=1200, method="dassl",  resultFile="AixLib.Fluid.BoilerCHP.Examples.CHPSystem");
+Translation of AixLib.Fluid.BoilerCHP.Examples.CHPSystem:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.BoilerCHP.Examples.CHPSystem.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst");
+Check of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst:
+The model has the same number of unknowns and equations: 250
+The model could not be deduced to be symbolically well-posed.
+The model has
+  248+vol.dynBal.nPorts
+scalar unknowns and
+  237+(if sou.use_Xi_in then 1 else (if sou.use_X_in then 0 else 1))+(if  not   sou.use_p_in then 1 else 0)+2*sou.nPorts+(if  not sou.use_T_in then 1 else 0)+  (if  not dpControlled_dp.mov.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+3*vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  250
+Check of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpConst.mos\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst\\\");\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpConst.mos");
+simulateModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst", startTime=0, stopTime=3600, tolerance=1e-6, method="dassl", resultFile="AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst");
+Translation of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst:
+The DAE has 250 scalar unknowns and 250 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 82
+  Variables: 814
+  Constants: 19 (19 scalars)
+  Parameters: 465 (949 scalars)
+  Unknowns: 330 (265 scalars)
+  Differentiated variables: 7 scalars
+  Equations: 284
+  Nontrivial: 236
+Translated Model
+  Constants: 686 scalars
+  Free parameters: 51 scalars
+  Parameter depending: 271 scalars
+  Outputs: 1 scalars
+  Continuous time states: 5 scalars
+  Time-varying variables: 61 scalars
+  Alias variables: 164 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {3, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {3, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  dpControlled_dp.mov.filter.s[1]
+  dpControlled_dp.mov.filter.s[2]
+  integrator.y
+  val.filter.s[1]
+  val.filter.s[2]
+ 
+Finished
+ = true
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample");
+Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
+The model has the same number of unknowns and equations: 964
+The model could not be deduced to be symbolically well-posed.
+The model has
+  938+storageSimple.layer[1].dynBal.nPorts+storageSimple.layer[2].dynBal.nPorts+  storageSimple.layer[3].dynBal.nPorts+storageSimple.layer_HE[1].dynBal.nPorts+  storageSimple.layer_HE[2].dynBal.nPorts+storageSimple.layer_HE[3].dynBal.nPorts  +2*storageSimple.n+heatingRod.vol.dynBal.nPorts+simpleConsumer.volume.dynBal.nPorts  +pumpGen.vol.dynBal.nPorts+pumpCon.vol.dynBal.nPorts
+scalar unknowns and
+  869+(if storageSimple.use_TOut then 2*storageSimple.n else 0)+(if   pressureBoundary.use_Xi_in then 1 else (if pressureBoundary.use_X_in then 0   else 1))+(if  not pressureBoundary.use_p_in then 1 else 0)+2*pressureBoundary.nPorts  +(if  not pressureBoundary.use_T_in then 1 else 0)+(if pressureBoundary1.use_Xi_in   then 1 else (if pressureBoundary1.use_X_in then 0 else 1))+(if  not   pressureBoundary1.use_p_in then 1 else 0)+2*pressureBoundary1.nPorts+(if  not   pressureBoundary1.use_T_in then 1 else 0)+(if PIDHR.reset <> AixLib.Types.Reset.  Input then 1 else 0)+(if PIDPumpGen.reset <> AixLib.Types.Reset.Input then 1   else 0)+(if PIDPumpCon.reset <> AixLib.Types.Reset.Input then 1 else 0)+(if    not storageSimple.layer[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer[1].dynBal.nPorts+(if  not storageSimple.layer[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer[2].dynBal.nPorts+(if  not   storageSimple.layer[3].dynBal.use_mWat_flow then 1 else 0)+3*storageSimple.layer[3].dynBal.nPorts  +(if  not storageSimple.layer_HE[1].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[1].dynBal.nPorts+(if  not storageSimple.layer_HE[2].dynBal.use_mWat_flow   then 1 else 0)+3*storageSimple.layer_HE[2].dynBal.nPorts+(if  not   storageSimple.layer_HE[3].dynBal.use_mWat_flow then 1 else 0)+3*  storageSimple.layer_HE[3].dynBal.nPorts+(if  not heatingRod.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heatingRod.vol.dynBal.nPorts+(if  not simpleConsumer.volume.dynBal.use_mWat_flow   then 1 else 0)+3*simpleConsumer.volume.dynBal.nPorts+(if  not   pumpGen.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpGen.vol.dynBal.nPorts+(  if  not pumpCon.vol.dynBal.use_mWat_flow then 1 else 0)+3*pumpCon.vol.dynBal.nPorts  +(if (if PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDHR.reset == AixLib.Types.Reset.Disabled then PIDHR.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpGen.reset == AixLib.Types.Reset.Disabled then PIDPumpGen.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if (  if PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   PIDPumpCon.reset == AixLib.Types.Reset.Disabled then PIDPumpCon.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  964
+Check of AixLib.Fluid.Storage.Examples.StorageSimpleExample successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageSimpleExample\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageSimpleExample\\\");\",", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageSimpleExample.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample", tolerance=1e-6, stopTime=38200, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSimpleExample");
+Translation of AixLib.Fluid.Storage.Examples.StorageSimpleExample:
+The DAE has 964 scalar unknowns and 964 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 247
+  Variables: 2530
+  Constants: 57 (57 scalars)
+  Parameters: 1181 (1670 scalars)
+  Unknowns: 1292 (1010 scalars)
+  Differentiated variables: 28 scalars
+  Equations: 1101
+  Nontrivial: 860
+Translated Model
+  Constants: 1047 scalars
+  Free parameters: 186 scalars
+  Parameter depending: 627 scalars
+  Outputs: 1 scalars
+  Continuous time states: 17 scalars
+  Time-varying variables: 245 scalars
+  Alias variables: 632 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: {5, 7}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {5, 7}
+    Sizes after manipulation of the nonlinear systems: {1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heatingRod.vol.dynBal.U
+  PIDHR.I.y
+  PIDPumpCon.I.y
+  PIDPumpGen.I.y
+  pumpCon.filter.s[1]
+  pumpCon.filter.s[2]
+  pumpCon.vol.dynBal.U
+  pumpGen.filter.s[1]
+  pumpGen.filter.s[2]
+  pumpGen.vol.dynBal.U
+  simpleConsumer.heatCapacitor.T
+  storageSimple.layer[1].dynBal.U
+  storageSimple.layer[2].dynBal.U
+  storageSimple.layer[3].dynBal.U
+  storageSimple.layer_HE[1].dynBal.U
+  storageSimple.layer_HE[2].dynBal.U
+  storageSimple.layer_HE[3].dynBal.U
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageSimpleExample.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar");
+Check of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar:
+The model has the same number of unknowns and equations: 250
+The model could not be deduced to be symbolically well-posed.
+The model has
+  248+vol.dynBal.nPorts
+scalar unknowns and
+  237+(if sou.use_Xi_in then 1 else (if sou.use_X_in then 0 else 1))+(if  not   sou.use_p_in then 1 else 0)+2*sou.nPorts+(if  not sou.use_T_in then 1 else 0)+  (if  not dpControlled_dp.mov.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+3*vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  250
+Check of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpVar.mos\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar\\\");\",", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpVar.mos");
+simulateModel("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar", startTime=0, stopTime=3600, tolerance=1e-6, method="dassl", resultFile="AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar");
+Translation of AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar:
+The DAE has 250 scalar unknowns and 250 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 82
+  Variables: 814
+  Constants: 19 (19 scalars)
+  Parameters: 465 (949 scalars)
+  Unknowns: 330 (265 scalars)
+  Differentiated variables: 7 scalars
+  Equations: 284
+  Nontrivial: 236
+Translated Model
+  Constants: 686 scalars
+  Free parameters: 51 scalars
+  Parameter depending: 271 scalars
+  Outputs: 1 scalars
+  Continuous time states: 5 scalars
+  Time-varying variables: 61 scalars
+  Alias variables: 164 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {3, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {3, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  dpControlled_dp.mov.filter.s[1]
+  dpControlled_dp.mov.filter.s[2]
+  integrator.y
+  val.filter.s[1]
+  val.filter.s[2]
+ 
+Finished
+ = true
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump");
+Check of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump:
+Warning: Members of records must be set in declaration, modified iceFacMea.
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 40
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea
+Original declaration of iceFacMea:
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Controls/Interfaces/VapourCompressionMachineControlBus.mo, line 42
+  Context: AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 14
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump\\\");\",", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos");
+simulateModel("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump", startTime=0, stopTime=86400, method="dassl", tolerance=1e-06, resultFile="AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump");
+Translation of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump:
+Warning: Members of records must be set in declaration, modified iceFacMea.
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 40
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea
+Original declaration of iceFacMea:
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Controls/Interfaces/VapourCompressionMachineControlBus.mo, line 42
+  Context: AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /tmp/tmp-AixLib-1-jw6rx5mx/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 14
+  Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
+The model has the same number of unknowns and equations: 677
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 677
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPool\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPool.mos");
+simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPool");
+Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPool:
+The DAE has 677 scalar unknowns and 677 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 161
+  Variables: 1600
+  Constants: 41 (41 scalars)
+  Parameters: 725 (917 scalars)
+  Unknowns: 834 (704 scalars)
+  Differentiated variables: 3 scalars
+  Equations: 700
+  Nontrivial: 575
+Translated Model
+  Constants: 579 scalars
+  Free parameters: 125 scalars
+  Parameter depending: 369 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 180 scalars
+  Alias variables: 409 scalars
+  Number of mixed real/discrete systems of equations: 1
+  Sizes of linear systems of equations: {26}
+  Sizes after manipulation of the linear systems: {13}
+  Sizes of nonlinear systems of equations: {75, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {16, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 74, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 16, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  indoorSwimming.cirPump.filter.s[1]
+  indoorSwimming.cirPump.filter.s[2]
+  indoorSwimming.PI.I.y
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPool.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances");
+Check of AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances:
+The model has the same number of unknowns and equations: 60
+The model could not be deduced to be symbolically well-posed.
+The model has
+  60
+scalar unknowns and
+  48+(if sou1.use_Xi_in then 1 else (if sou1.use_X_in then 0 else 1))+(if  not   sou1.use_p_in then 1 else 0)+2*sou1.nPorts+(if  not sou1.use_T_in then 1 else 0)  +(if sin1.use_Xi_in then 1 else (if sin1.use_X_in then 0 else 1))+(if  not   sin1.use_p_in then 1 else 0)+2*sin1.nPorts+(if  not sin1.use_T_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  60
+Check of AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CompareFixedResistances.mos\",", "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\",", "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\\\");\",", "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CompareFixedResistances.mos");
+simulateModel("AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances", stopTime=3600, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances");
+Translation of AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances:
+The DAE has 60 scalar unknowns and 60 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 12
+  Variables: 181
+  Constants: 6 (6 scalars)
+  Parameters: 87 (85 scalars)
+  Unknowns: 88 (60 scalars)
+  Equations: 88
+  Nontrivial: 81
+Translated Model
+  Constants: 66 scalars
+  Free parameters: 22 scalars
+  Parameter depending: 9 scalars
+  Time-varying variables: 7 scalars
+  Alias variables: 47 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta");
+Check of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeZeta.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeZeta.mos");
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta", stopTime=1000, method="dassl", tolerance=1e-6, resultFile="AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.Examples.HeatPump");
+Check of AixLib.Fluid.HeatPumps.Examples.HeatPump:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos\",", "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.Examples.HeatPump\",", "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.Examples.HeatPump\\\");\",", "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.Examples.HeatPump.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos");
+simulateModel("AixLib.Fluid.HeatPumps.Examples.HeatPump", tolerance=1e-6, stopTime=3600, method="dassl", resultFile="AixLib.Fluid.HeatPumps.Examples.HeatPump");
+Translation of AixLib.Fluid.HeatPumps.Examples.HeatPump:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.Examples.HeatPump.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageBoiler");
+Check of AixLib.Fluid.Storage.Examples.StorageBoiler:
+The model has the same number of unknowns and equations: 3241
+Check of AixLib.Fluid.Storage.Examples.StorageBoiler successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageBoiler\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageBoiler\\\");\",", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageBoiler.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageBoiler", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageBoiler");
+Translation of AixLib.Fluid.Storage.Examples.StorageBoiler:
+The DAE has 3241 scalar unknowns and 3241 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 651
+  Variables: 8627
+  Constants: 159 (159 scalars)
+  Parameters: 4092 (4095 scalars)
+  Unknowns: 4376 (3344 scalars)
+  Differentiated variables: 106 scalars
+  Equations: 3314
+  Nontrivial: 2545
+Translated Model
+  Constants: 2850 scalars
+  Free parameters: 287 scalars
+  Parameter depending: 1523 scalars
+  Continuous time states: 76 scalars
+  Time-varying variables: 843 scalars
+  Alias variables: 2095 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 3,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {22, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {22, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].del.x
+  bufferStorage.heatingCoil1.pipe[9].timDel.x
+  bufferStorage.heatingCoil1.pipe[9].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].del.x
+  bufferStorage.heatingCoil1.pipe[10].timDel.x
+  bufferStorage.heatingCoil1.pipe[10].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+  pump.filter.s[1]
+  pump.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageBoiler.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatExchangers.Examples.HeatingRod");
+Check of AixLib.Fluid.HeatExchangers.Examples.HeatingRod:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/HeatingRod.mos\",", "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatExchangers.Examples.HeatingRod\",", "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatExchangers.Examples.HeatingRod\\\");\",", "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatExchangers.Examples.HeatingRod.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/HeatingRod.mos");
+simulateModel("AixLib.Fluid.HeatExchangers.Examples.HeatingRod", stopTime=172800, method="Radau", tolerance=1e-6, resultFile="AixLib.Fluid.HeatExchangers.Examples.HeatingRod");
+Translation of AixLib.Fluid.HeatExchangers.Examples.HeatingRod:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatExchangers.Examples.HeatingRod.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
+The model has the same number of unknowns and equations: 733
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 733
+Check of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem\\\");\",", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Pools/Examples/IndoorSwimmingPoolExternalHeatingSystem.mos");
+simulateModel("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem", tolerance=1e-6, stopTime=604800, numberOfIntervals=0, outputInterval=900, method="CVode", resultFile="AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem");
+Translation of AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem:
+The DAE has 733 scalar unknowns and 733 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 171
+  Variables: 1742
+  Constants: 45 (45 scalars)
+  Parameters: 777 (964 scalars)
+  Unknowns: 920 (764 scalars)
+  Differentiated variables: 3 scalars
+  Equations: 763
+  Nontrivial: 619
+Translated Model
+  Constants: 629 scalars
+  Free parameters: 133 scalars
+  Parameter depending: 374 scalars
+  Continuous time states: 3 scalars
+  Time-varying variables: 191 scalars
+  Alias variables: 446 scalars
+  Number of mixed real/discrete systems of equations: 1
+  Sizes of linear systems of equations: {26}
+  Sizes after manipulation of the linear systems: {13}
+  Sizes of nonlinear systems of equations: {79, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {17, 0, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 78, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 17, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  indoorSwimming.cirPump.filter.s[1]
+  indoorSwimming.cirPump.filter.s[2]
+  PI.I.y
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector");
+Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
+The model has the same number of unknowns and equations: 3387
+Check of AixLib.Fluid.Storage.Examples.StorageSolarCollector successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageSolarCollector\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageSolarCollector\\\");\",", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageSolarCollector.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector", tolerance=1e-6, stopTime=172800, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageSolarCollector");
+Translation of AixLib.Fluid.Storage.Examples.StorageSolarCollector:
+The DAE has 3387 scalar unknowns and 3387 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 688
+  Variables: 8995
+  Constants: 163 (163 scalars)
+  Parameters: 4276 (4349 scalars)
+  Unknowns: 4556 (3492 scalars)
+  Differentiated variables: 114 scalars
+  Equations: 3534
+  Nontrivial: 2710
+Translated Model
+  Constants: 2921 scalars
+  Free parameters: 420 scalars
+  Parameter depending: 1577 scalars
+  Continuous time states: 83 scalars
+  Time-varying variables: 870 scalars
+  Alias variables: 2216 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {4, 3, 3, 2, 2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {24, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {24, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {1, 0, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].del.x
+  bufferStorage.heatingCoil1.pipe[9].timDel.x
+  bufferStorage.heatingCoil1.pipe[9].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[9].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].del.x
+  bufferStorage.heatingCoil1.pipe[10].timDel.x
+  bufferStorage.heatingCoil1.pipe[10].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[10].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+  PI.I.y
+  pump.filter.s[1]
+  pump.filter.s[2]
+  solarThermal.senTCold.T
+  solarThermal.senTHot.T
+  solarThermal.vol.dynBal.U
+  temperatureSensor.T
+  valve.filter.s[1]
+  valve.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageSolarCollector.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass");
+Check of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation");
+Check of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/DynamicValidation.mos\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation\\\");\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/DynamicValidation.mos");
+simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation", stopTime=7200, numberOfIntervals=0, outputInterval=2, method="dassl",tolerance=1E-6, resultFile="AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation");
+Translation of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded");
+Check of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeEmbedded.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeEmbedded.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded", stopTime=1000, method="dassl", tolerance=1e-6, resultFile="AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled");
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled:
+The model has the same number of unknowns and equations: 156
+The model could not be deduced to be symbolically well-posed.
+The model has
+  144+2*(size(pump.maxMinTable.columns, 1)+pump.deMultiplex2.n1+pump.deMultiplex2.n2)  +pump.criticalDamping.n+pump.vol.dynBal.nPorts
+scalar unknowns and
+  134+2*size(pump.maxMinTable.columns, 1)+pump.deMultiplex2.n1+pump.deMultiplex2.n2  +pump.criticalDamping.n+(if vessle.use_Xi_in then 1 else (if vessle.use_X_in   then 0 else 1))+(if  not vessle.use_p_in then 1 else 0)+2*vessle.nPorts+(if    not vessle.use_T_in then 1 else 0)+(if  not pump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*pump.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  156
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlled.mos\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled\\\");\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlled.mos");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled", tolerance=1e-6, stopTime=600.0, method="dassl", resultFile="AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled");
+Translation of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled:
+The DAE has 156 scalar unknowns and 156 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 35
+  Variables: 388
+  Constants: 15 (15 scalars)
+  Parameters: 177 (374 scalars)
+  Unknowns: 196 (160 scalars)
+  Differentiated variables: 6 scalars
+  Equations: 163
+  Nontrivial: 137
+Translated Model
+  Constants: 242 scalars
+  Free parameters: 135 scalars
+  Parameter depending: 38 scalars
+  Outputs: 7 scalars
+  Continuous time states: 4 scalars
+  Time-varying variables: 37 scalars
+  Alias variables: 97 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1}
+  Sizes after manipulation of the nonlinear systems: {0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  pump.criticalDamping.x[1]
+  pump.criticalDamping.x[2]
+  simpleValve.filter.s[1]
+  simpleValve.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Storage.Examples.StorageDetailedExample");
+Check of AixLib.Fluid.Storage.Examples.StorageDetailedExample:
+The model has the same number of unknowns and equations: 2714
+Check of AixLib.Fluid.Storage.Examples.StorageDetailedExample successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Storage.Examples.StorageDetailedExample\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Storage.Examples.StorageDetailedExample\\\");\",", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Storage.Examples.StorageDetailedExample.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos");
+simulateModel("AixLib.Fluid.Storage.Examples.StorageDetailedExample", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="AixLib.Fluid.Storage.Examples.StorageDetailedExample");
+Translation of AixLib.Fluid.Storage.Examples.StorageDetailedExample:
+The DAE has 2714 scalar unknowns and 2714 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 532
+  Variables: 7113
+  Constants: 124 (124 scalars)
+  Parameters: 3345 (3234 scalars)
+  Unknowns: 3644 (2792 scalars)
+  Differentiated variables: 92 scalars
+  Equations: 2756
+  Nontrivial: 2117
+Translated Model
+  Constants: 2426 scalars
+  Free parameters: 222 scalars
+  Parameter depending: 1324 scalars
+  Continuous time states: 66 scalars
+  Time-varying variables: 623 scalars
+  Alias variables: 1555 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {6, 6, 6, 6, 6, 6, 6, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 1, 1, 1, 1, 1, 1}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  bufferStorage.bottomCover.loadIns.T
+  bufferStorage.bottomCover.loadWall.T
+  bufferStorage.heatingCoil1.pipe[1].del.x
+  bufferStorage.heatingCoil1.pipe[1].timDel.x
+  bufferStorage.heatingCoil1.pipe[1].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[1].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].del.x
+  bufferStorage.heatingCoil1.pipe[2].timDel.x
+  bufferStorage.heatingCoil1.pipe[2].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[2].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].del.x
+  bufferStorage.heatingCoil1.pipe[3].timDel.x
+  bufferStorage.heatingCoil1.pipe[3].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[3].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].del.x
+  bufferStorage.heatingCoil1.pipe[4].timDel.x
+  bufferStorage.heatingCoil1.pipe[4].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[4].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].del.x
+  bufferStorage.heatingCoil1.pipe[5].timDel.x
+  bufferStorage.heatingCoil1.pipe[5].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[5].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].del.x
+  bufferStorage.heatingCoil1.pipe[6].timDel.x
+  bufferStorage.heatingCoil1.pipe[6].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[6].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].del.x
+  bufferStorage.heatingCoil1.pipe[7].timDel.x
+  bufferStorage.heatingCoil1.pipe[7].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[7].vol_b.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].del.x
+  bufferStorage.heatingCoil1.pipe[8].timDel.x
+  bufferStorage.heatingCoil1.pipe[8].vol_a.dynBal.U
+  bufferStorage.heatingCoil1.pipe[8].vol_b.dynBal.U
+  bufferStorage.layer[1].dynBal.U
+  bufferStorage.layer[2].dynBal.U
+  bufferStorage.layer[3].dynBal.U
+  bufferStorage.layer[4].dynBal.U
+  bufferStorage.layer[5].dynBal.U
+  bufferStorage.layer[6].dynBal.U
+  bufferStorage.layer[7].dynBal.U
+  bufferStorage.layer[8].dynBal.U
+  bufferStorage.layer[9].dynBal.U
+  bufferStorage.layer[10].dynBal.U
+  bufferStorage.storageMantle[1].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[1].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[2].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[3].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[4].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[5].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[6].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[7].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[8].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[9].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Insulation.CylindricLoad1.heatCapacitor.T
+  bufferStorage.storageMantle[10].Wall.CylindricLoad1.heatCapacitor.T
+  bufferStorage.topCover.loadIns.T
+  bufferStorage.topCover.loadWall.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Storage.Examples.StorageDetailedExample.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV");
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV:
+The model has the same number of unknowns and equations: 220
+The model could not be deduced to be symbolically well-posed.
+The model has
+  208+2*(size(pump.maxMinTable.columns, 1)+pump.deMultiplex2.n1+pump.deMultiplex2.n2)  +pump.criticalDamping.n+pump.vol.dynBal.nPorts
+scalar unknowns and
+  198+2*size(pump.maxMinTable.columns, 1)+pump.deMultiplex2.n1+pump.deMultiplex2.n2  +pump.criticalDamping.n+(if vessle.use_Xi_in then 1 else (if vessle.use_X_in   then 0 else 1))+(if  not vessle.use_p_in then 1 else 0)+2*vessle.nPorts+(if    not vessle.use_T_in then 1 else 0)+(if  not pump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*pump.vol.dynBal.nPorts
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  220
+Check of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledDpV.mos\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV\\\");\",", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledDpV.mos");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV", tolerance=1e-6, stopTime=600.0, method="dassl", resultFile="AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV");
+Translation of AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV:
+The DAE has 220 scalar unknowns and 220 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 58
+  Variables: 526
+  Constants: 16 (16 scalars)
+  Parameters: 242 (586 scalars)
+  Unknowns: 268 (224 scalars)
+  Differentiated variables: 8 scalars
+  Equations: 228
+  Nontrivial: 195
+Translated Model
+  Constants: 261 scalars
+  Free parameters: 310 scalars
+  Parameter depending: 59 scalars
+  Outputs: 4 scalars
+  Continuous time states: 6 scalars
+  Time-varying variables: 50 scalars
+  Alias variables: 146 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1}
+  Sizes after manipulation of the nonlinear systems: {0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  ctrlDpVarN.PID.D.x
+  ctrlDpVarN.PID.I.y
+  pump.criticalDamping.x[1]
+  pump.criticalDamping.x[2]
+  simpleValve.filter.s[1]
+  simpleValve.filter.s[2]
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot");
+Check of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopHeatPumpCarnot.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopHeatPumpCarnot.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.Chillers.Examples.Chiller");
+Check of AixLib.Fluid.Chillers.Examples.Chiller:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Examples/Chiller.mos\",", "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.Chillers.Examples.Chiller\",", "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.Chillers.Examples.Chiller\\\");\",", "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.Chillers.Examples.Chiller.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Examples/Chiller.mos");
+simulateModel("AixLib.Fluid.Chillers.Examples.Chiller", tolerance=1e-6, stopTime=3600, method="dassl", resultFile="AixLib.Fluid.Chillers.Examples.Chiller");
+Translation of AixLib.Fluid.Chillers.Examples.Chiller:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.Chillers.Examples.Chiller.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl");
+Check of AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl\\\");\",", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos");
+simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl", tolerance=1e-06, stopTime=300, method="dassl",  resultFile="AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl");
+Translation of AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation");
+Check of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation:
+The model has the same number of unknowns and equations: 5511
+The model could not be deduced to be symbolically well-posed.
+The model has
+  3783+32*enthalpyExchanger.n+16*enthalpyExchanger.airDuct2.heatTransfer.n+18*  enthalpyExchanger.airDuct2.massTransfer.n+16*enthalpyExchanger.airDuct1.heatTransfer.n  +18*enthalpyExchanger.airDuct1.massTransfer.n+5*enthalpyExchanger.membrane.heatTransfer.n  +enthalpyExchanger.membrane.massTransfer.n+2*enthalpyExchanger.airDuct2.vol[1].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[2].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[3].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[4].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[5].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[6].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[7].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[8].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[9].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[10].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[11].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[12].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[13].dynBal.nPorts  +2*enthalpyExchanger.airDuct2.vol[14].dynBal.nPorts+2*enthalpyExchanger.airDuct2.vol[15].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[1].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[2].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[3].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[4].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[5].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[6].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[7].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[8].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[9].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[10].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[11].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[12].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[13].dynBal.nPorts+2*enthalpyExchanger.airDuct1.vol[14].dynBal.nPorts  +2*enthalpyExchanger.airDuct1.vol[15].dynBal.nPorts+max([size(bondaryEta.columns,   1); size(bondaryEta.offset, 1)])+max([size(bondaryOda.columns, 1); size(  bondaryOda.offset, 1)])+max([size(Results.columns, 1); size(Results.offset, 1)])  +2*fan.vol.dynBal.nPorts+2*fan1.vol.dynBal.nPorts
+scalar unknowns and
+  3435+17*enthalpyExchanger.airDuct2.heatTransfer.n+19*enthalpyExchanger.airDuct2.massTransfer.n  +3*(if enthalpyExchanger.couFloArr then 2*enthalpyExchanger.n else 0)+17*  enthalpyExchanger.airDuct1.heatTransfer.n+19*enthalpyExchanger.airDuct1.massTransfer.n  +7*enthalpyExchanger.membrane.heatTransfer.n+3*enthalpyExchanger.membrane.massTransfer.n  +2*(if enthalpyExchanger.useConPer then 1 else 0)+32*enthalpyExchanger.n+(if   souEta.use_Xi_in then 2 else (if souEta.use_X_in then 1 else 3))+3*  souEta.nPorts+(if  not souEta.use_p_in then 1 else 0)+(if  not souEta.use_T_in   then 1 else 0)+(if sinEha.use_Xi_in then 2 else (if sinEha.use_X_in then 1   else 3))+3*sinEha.nPorts+(if  not sinEha.use_p_in then 1 else 0)+(if  not   sinEha.use_T_in then 1 else 0)+(if souOda.use_Xi_in then 2 else (if   souOda.use_X_in then 1 else 3))+3*souOda.nPorts+(if  not souOda.use_p_in then 1   else 0)+(if  not souOda.use_T_in then 1 else 0)+(if sinSup.use_Xi_in then 2   else (if sinSup.use_X_in then 1 else 3))+3*sinSup.nPorts+(if  not   sinSup.use_p_in then 1 else 0)+(if  not sinSup.use_T_in then 1 else 0)+max([  size(bondaryEta.columns, 1); size(bondaryEta.offset, 1)])+max([size(  bondaryOda.columns, 1); size(bondaryOda.offset, 1)])+max([size(Results.columns,   1); size(Results.offset, 1)])+(if conPID.reset <> AixLib.Types.Reset.Input   then 1 else 0)+(if conPID1.reset <> AixLib.Types.Reset.Input then 1 else 0)+5  *enthalpyExchanger.airDuct2.vol[1].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[2].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[3].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[4].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[5].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[6].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[7].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[8].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[9].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[10].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[11].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[12].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[13].dynBal.nPorts+5*enthalpyExchanger.airDuct2.vol[14].dynBal.nPorts  +5*enthalpyExchanger.airDuct2.vol[15].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[1].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[2].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[3].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[4].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[5].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[6].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[7].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[8].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[9].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[10].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[11].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[12].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[13].dynBal.nPorts  +5*enthalpyExchanger.airDuct1.vol[14].dynBal.nPorts+5*enthalpyExchanger.airDuct1.vol[15].dynBal.nPorts  +(if  not fan.vol.dynBal.use_mWat_flow then 1 else 0)+5*fan.vol.dynBal.nPorts+  (if (if conPID.reset == AixLib.Types.Reset.Disabled then conPID.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   conPID.reset == AixLib.Types.Reset.Disabled then conPID.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+(if    not fan1.vol.dynBal.use_mWat_flow then 1 else 0)+5*fan1.vol.dynBal.nPorts+(  if (if conPID1.reset == AixLib.Types.Reset.Disabled then conPID1.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   conPID1.reset == AixLib.Types.Reset.Disabled then conPID1.reset else   AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  5511
+Check of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/StaticValidation.mos\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation\\\");\",", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/StaticValidation.mos");
+simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation", stopTime=29600, numberOfIntervals=0, outputInterval=1, method="dassl",tolerance=1E-6, resultFile="AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation");
+Translation of AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation:
+The DAE has 5511 scalar unknowns and 5511 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  fan1.vol.p_start = fan1.p_start;
+  if (enthalpyExchanger.airDuct2.vol[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[1].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[1].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[1].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[1].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[1].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[1].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[2].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[2].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[2].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[2].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[2].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[3].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[3].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[3].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[3].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[3].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[3].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[3].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[4].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[4].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[4].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[4].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[4].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[4].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[4].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[5].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[5].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[5].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[5].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[5].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[5].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[5].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[6].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[6].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[6].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[6].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[6].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[6].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[6].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[7].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[7].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[7].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[7].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[7].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[7].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[7].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[8].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[8].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[8].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[8].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[8].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[8].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[8].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[9].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[9].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[9].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[9].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[9].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[9].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[9].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[10].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[10].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[10].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[10].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[10].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[10].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[10].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[11].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[11].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[11].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[11].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[11].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[11].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[11].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[12].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[12].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[12].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[12].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[12].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[12].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[12].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[13].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[13].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[13].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[13].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[13].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[13].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[13].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[14].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[14].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[14].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[14].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[14].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[14].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[14].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct2.vol[15].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct2.vol[15].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct2.vol[15].dynBal.medium.p = enthalpyExchanger.airDuct2.vol[15].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct2.vol[15].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct2.vol[15].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct2.vol[15].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[1].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[1].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[1].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[1].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[1].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[1].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[1].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[2].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[2].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[2].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[2].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[2].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[2].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[2].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[3].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[3].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[3].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[3].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[3].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[3].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[3].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[4].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[4].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[4].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[4].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[4].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[4].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[4].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[5].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[5].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[5].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[5].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[5].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[5].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[5].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[6].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[6].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[6].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[6].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[6].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[6].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[6].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[7].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[7].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[7].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[7].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[7].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[7].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[7].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[8].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[8].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[8].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[8].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[8].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[8].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[8].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[9].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[9].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[9].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[9].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[9].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[9].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[9].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[10].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[10].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[10].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[10].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[10].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[10].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[10].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[11].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[11].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[11].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[11].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[11].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[11].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[11].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[12].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[12].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[12].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[12].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[12].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[12].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[12].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[13].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[13].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[13].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[13].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[13].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[13].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[13].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[14].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[14].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[14].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[14].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[14].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[14].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[14].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (enthalpyExchanger.airDuct1.vol[15].dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.    FixedInitial) then 
+    if (enthalpyExchanger.airDuct1.vol[15].dynBal.initialize_p) then 
+      enthalpyExchanger.airDuct1.vol[15].dynBal.medium.p = enthalpyExchanger.airDuct1.vol[15].dynBal.p_start;
+    end if;
+  else
+    if (enthalpyExchanger.airDuct1.vol[15].dynBal.massDynamics ==       Modelica.Fluid.Types.Dynamics.SteadyStateInitial) then 
+      if (enthalpyExchanger.airDuct1.vol[15].dynBal.initialize_p) then 
+        der(enthalpyExchanger.airDuct1.vol[15].dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+  if (fan.vol.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)     then 
+    if (fan.vol.dynBal.initialize_p) then 
+      fan.vol.dynBal.medium.p = fan.vol.dynBal.p_start;
+    end if;
+  else
+    if (fan.vol.dynBal.massDynamics == Modelica.Fluid.Types.Dynamics.      SteadyStateInitial) then 
+      if (fan.vol.dynBal.initialize_p) then 
+        der(fan.vol.dynBal.medium.p) = 0;
+      end if;
+    end if;
+  end if;
+ 
+This required evaluation of 
+the interactive parameters 
+    fan.p_start(start = 101325)
+    fan1.p_start(start = 101325)
+    sinEha.p(start = 101325)
+    sinSup.p(start = 101325)
+    souEta.p(start = 101325)
+    souOda.p(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinSup.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  sinEha.p = 101325.0;
+  souOda.p = fan.vol.dynBal.p_start;
+  souEta.p = fan1.vol.dynBal.p_start;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 676
+  Variables: 7282
+  Constants: 168 (168 scalars)
+  Parameters: 2808 (3273 scalars)
+  Unknowns: 4306 (5679 scalars)
+  Differentiated variables: 129 scalars
+  Equations: 2961
+  Nontrivial: 2303
+Translated Model
+  Constants: 2677 scalars
+  Free parameters: 252 scalars
+  Parameter depending: 1422 scalars
+  Continuous time states: 97 scalars
+  Time-varying variables: 1771 scalars
+  Alias variables: 2998 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,   2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+  Sizes of nonlinear systems of equations: {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1}
+  Sizes after manipulation of the nonlinear systems: {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1, 1}
+    Sizes after manipulation of the nonlinear systems: {0, 0}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  conPID.I.y
+  conPID1.I.y
+  enthalpyExchanger.airDuct1.senRelHum.phi
+  enthalpyExchanger.airDuct1.senTem.T
+  enthalpyExchanger.airDuct1.vol[1].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[1].dynBal.U
+  enthalpyExchanger.airDuct1.vol[2].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[2].dynBal.U
+  enthalpyExchanger.airDuct1.vol[3].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[3].dynBal.U
+  enthalpyExchanger.airDuct1.vol[4].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[4].dynBal.U
+  enthalpyExchanger.airDuct1.vol[5].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[5].dynBal.U
+  enthalpyExchanger.airDuct1.vol[6].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[6].dynBal.U
+  enthalpyExchanger.airDuct1.vol[7].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[7].dynBal.U
+  enthalpyExchanger.airDuct1.vol[8].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[8].dynBal.U
+  enthalpyExchanger.airDuct1.vol[9].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[9].dynBal.U
+  enthalpyExchanger.airDuct1.vol[10].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[10].dynBal.U
+  enthalpyExchanger.airDuct1.vol[11].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[11].dynBal.U
+  enthalpyExchanger.airDuct1.vol[12].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[12].dynBal.U
+  enthalpyExchanger.airDuct1.vol[13].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[13].dynBal.U
+  enthalpyExchanger.airDuct1.vol[14].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[14].dynBal.U
+  enthalpyExchanger.airDuct1.vol[15].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct1.vol[15].dynBal.U
+  enthalpyExchanger.airDuct2.senRelHum.phi
+  enthalpyExchanger.airDuct2.senTem.T
+  enthalpyExchanger.airDuct2.vol[1].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[1].dynBal.U
+  enthalpyExchanger.airDuct2.vol[2].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[2].dynBal.U
+  enthalpyExchanger.airDuct2.vol[3].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[3].dynBal.U
+  enthalpyExchanger.airDuct2.vol[4].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[4].dynBal.U
+  enthalpyExchanger.airDuct2.vol[5].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[5].dynBal.U
+  enthalpyExchanger.airDuct2.vol[6].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[6].dynBal.U
+  enthalpyExchanger.airDuct2.vol[7].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[7].dynBal.U
+  enthalpyExchanger.airDuct2.vol[8].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[8].dynBal.U
+  enthalpyExchanger.airDuct2.vol[9].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[9].dynBal.U
+  enthalpyExchanger.airDuct2.vol[10].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[10].dynBal.U
+  enthalpyExchanger.airDuct2.vol[11].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[11].dynBal.U
+  enthalpyExchanger.airDuct2.vol[12].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[12].dynBal.U
+  enthalpyExchanger.airDuct2.vol[13].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[13].dynBal.U
+  enthalpyExchanger.airDuct2.vol[14].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[14].dynBal.U
+  enthalpyExchanger.airDuct2.vol[15].dynBal.medium.Xi[1]
+  enthalpyExchanger.airDuct2.vol[15].dynBal.U
+  enthalpyExchanger.membrane.heatTransfer.Ts[1]
+  enthalpyExchanger.membrane.heatTransfer.Ts[2]
+  enthalpyExchanger.membrane.heatTransfer.Ts[3]
+  enthalpyExchanger.membrane.heatTransfer.Ts[4]
+  enthalpyExchanger.membrane.heatTransfer.Ts[5]
+  enthalpyExchanger.membrane.heatTransfer.Ts[6]
+  enthalpyExchanger.membrane.heatTransfer.Ts[7]
+  enthalpyExchanger.membrane.heatTransfer.Ts[8]
+  enthalpyExchanger.membrane.heatTransfer.Ts[9]
+  enthalpyExchanger.membrane.heatTransfer.Ts[10]
+  enthalpyExchanger.membrane.heatTransfer.Ts[11]
+  enthalpyExchanger.membrane.heatTransfer.Ts[12]
+  enthalpyExchanger.membrane.heatTransfer.Ts[13]
+  enthalpyExchanger.membrane.heatTransfer.Ts[14]
+  enthalpyExchanger.membrane.heatTransfer.Ts[15]
+  fan.filter.s[1]
+  fan.filter.s[2]
+  fan.vol.dynBal.medium.Xi[1]
+  fan.vol.dynBal.U
+  fan1.filter.s[1]
+  fan1.filter.s[2]
+  fan1.vol.dynBal.medium.Xi[1]
+  fan1.vol.dynBal.U
+  senMasFraEha.X
+  senMasFraEta.X
+  senMasFraOda.X
+  senMasFraSup.X
+  senTemEha.T
+  senTemEta.T
+  senTemOda.T
+  senTemSup.T
+ 
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe");
+Check of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/DHCPipe.mos\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe\\\");\",", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/DHCPipe.mos");
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe");
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe", stopTime=3600, method="dassl", tolerance=1e-6, resultFile="AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe");
+Instantiation of ?:
+Translation of AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe:
+-------------------------------------------------
+Error: the model is too complex for the current license.
+Your license must be upgraded to handle this model.
+-------------------------------------------------
+Error: ERRORS have been issued.
+ = false
+
+Instantiation of ?:
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe.translation.log");
