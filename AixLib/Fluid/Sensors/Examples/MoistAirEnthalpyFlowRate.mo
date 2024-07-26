@@ -89,27 +89,27 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors
         "Simulate and plot"),
     Documentation(
     info="<html>
- <p>
- This example tests the sensible and latent enthalpy sensors.
- It compares the output from the enthalpy sensor with the sum of the
- sensible and latent enthalpy sensors.
- </p>
- </html>",
+<p>
+This example tests the sensible and latent enthalpy sensors.
+It compares the output from the enthalpy sensor with the sum of the
+sensible and latent enthalpy sensors.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Removed assertion and added the enthalpy flow rates instead
- to the plot window so that they become part of the regression tests.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- January 23 2013, by Michael Wetter:<br/>
- Changed time constant of <code>senH</code> so that it has
- the same transient response model as <code>senH_flow</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Removed assertion and added the enthalpy flow rates instead
+to the plot window so that they become part of the regression tests.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+January 23 2013, by Michael Wetter:<br/>
+Changed time constant of <code>senH</code> so that it has
+the same transient response model as <code>senH_flow</code>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MoistAirEnthalpyFlowRate;

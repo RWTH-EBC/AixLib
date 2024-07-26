@@ -61,7 +61,7 @@ initial equation
     dpValve_nominal =  (m_flow_nominal/Kv_SI)^2;
   else
     assert(CvData == AixLib.Fluid.Types.CvTypes.Av, "Invalid value for CvData.
- Obtained CvData = "+ String(CvData) + ".");
+Obtained CvData = " + String(CvData) + ".");
     Kv_SI =           Av*sqrt(rhoStd);
     Kv    =           Kv_SI/(rhoStd/3600/sqrt(1E5));
     Cv    =           Kv_SI/(rhoStd*0.0631/1000/sqrt(6895));
@@ -69,89 +69,89 @@ initial equation
   end if;
 
   annotation (Documentation(info="<html>
- <p>
- Model that computes the flow coefficients of valves. This base class allows the following modeling options,
- which have been adapted from the valve implementation
- in <a href=\"modelica://Modelica.Fluid\">
- Modelica.Fluid</a>
- to specify the valve flow coefficient in fully open conditions:
- </p>
- <ul>
- <li><code>CvData = AixLib.Fluid.Types.CvTypes.Av</code>: the flow coefficient is given by the metric <code>Av</code> coefficient (m^2).</li>
- <li><code>CvData = AixLib.Fluid.Types.CvTypes.Kv</code>: the flow coefficient is given by the metric <code>Kv</code> coefficient (m^3/h).</li>
- <li><code>CvData = AixLib.Fluid.Types.CvTypes.Cv</code>: the flow coefficient is given by the US <code>Cv</code> coefficient (USG/min).</li>
- <li><code>CvData = AixLib.Fluid.Types.CvTypes.OpPoint</code>: the flow is computed from the nominal operating point specified by <code>dp_nominal</code> and <code>m_flow_nominal</code>.</li>
- </ul>
- <p>
- The treatment of parameters <code>Kv</code> and <code>Cv</code> is
- explained in detail in the
- <a href=\"modelica://Modelica.Fluid.UsersGuide.ComponentDefinition.ValveCharacteristics\">Users Guide</a>.
- </p>
- <p>
- In contrast to the model in <a href=\"modelica://Modelica.Fluid\">
- Modelica.Fluid</a>, this model uses the protected parameter <code>Kv_SI</code>,
- which is the flow coefficient in SI units, i.e.,
- it is the ratio between mass flow rate in <code>kg/s</code> and square root
- of pressure drop in <code>Pa</code>.
- The value of <code>Kv_SI</code> is computed based on the parameters
- <code>Av</code>,
- <code>Kv</code>,
- <code>Cv</code>, or, if
- <code>CvData = AixLib.Fluid.Types.CvTypes.OpPoint</code>, based on
- <code>m_flow_nominal</code> and <code>dpValve_nominal</code>.
- Conversely, if
- <code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>, then
- <code>dpValve_nominal</code> is computed based on
- <code>Av</code>,
- <code>Kv</code>, or
- <code>Cv</code>, and the nominal mass flow rate <code>m_flow_nominal</code>.
- Therefore, if
- <code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
- then specifying a value for <code>dpValve_nominal</code> is a syntax error.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- August 12, 2014, by Michael Wetter:<br/>
- Changed attribute <code>min</code> of <code>dpValve_nominal</code>
- to <code>0</code>.
- This is needed as for example in
- <a href=\"modelica://AixLib.Fluid.Actuators.Valves.Examples.TwoWayValveTable\">
- AixLib.Fluid.Actuators.Valves.Examples.TwoWayValveTable</a>,
- <code>dpValve_nominal=0</code>.
- </li>
- <li>
- August 8, 2014, by Michael Wetter:<br/>
- Changed the <code>initial algorithm</code> to an <code>initial equation</code>
- section. Otherwise, OpenModelica attempts to solve for the parameter
- values using numerical iteration, and fails in doing so.
- </li>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- March 25, 2013, by Michael Wetter:<br/>
- Removed stray backslash in write statement.
- </li>
- <li>
- February 28, 2013, by Michael Wetter:<br/>
- Reformulated assignment of parameters, and removed <code>Kv_SI</code> as
- a public parameter because it is always computed based on other parameters.
- This change avoids a translation error in Dymola 2014 beta1 in
- the pedantic mode, and a translation warning otherwise.
- </li>
- <li>
- February 18, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model that computes the flow coefficients of valves. This base class allows the following modeling options,
+which have been adapted from the valve implementation
+in <a href=\"modelica://Modelica.Fluid\">
+Modelica.Fluid</a>
+to specify the valve flow coefficient in fully open conditions:
+</p>
+<ul>
+<li><code>CvData = AixLib.Fluid.Types.CvTypes.Av</code>: the flow coefficient is given by the metric <code>Av</code> coefficient (m^2).</li>
+<li><code>CvData = AixLib.Fluid.Types.CvTypes.Kv</code>: the flow coefficient is given by the metric <code>Kv</code> coefficient (m^3/h).</li>
+<li><code>CvData = AixLib.Fluid.Types.CvTypes.Cv</code>: the flow coefficient is given by the US <code>Cv</code> coefficient (USG/min).</li>
+<li><code>CvData = AixLib.Fluid.Types.CvTypes.OpPoint</code>: the flow is computed from the nominal operating point specified by <code>dp_nominal</code> and <code>m_flow_nominal</code>.</li>
+</ul>
+<p>
+The treatment of parameters <code>Kv</code> and <code>Cv</code> is
+explained in detail in the
+<a href=\"modelica://Modelica.Fluid.UsersGuide.ComponentDefinition.ValveCharacteristics\">Users Guide</a>.
+</p>
+<p>
+In contrast to the model in <a href=\"modelica://Modelica.Fluid\">
+Modelica.Fluid</a>, this model uses the protected parameter <code>Kv_SI</code>,
+which is the flow coefficient in SI units, i.e.,
+it is the ratio between mass flow rate in <code>kg/s</code> and square root
+of pressure drop in <code>Pa</code>.
+The value of <code>Kv_SI</code> is computed based on the parameters
+<code>Av</code>,
+<code>Kv</code>,
+<code>Cv</code>, or, if
+<code>CvData = AixLib.Fluid.Types.CvTypes.OpPoint</code>, based on
+<code>m_flow_nominal</code> and <code>dpValve_nominal</code>.
+Conversely, if
+<code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>, then
+<code>dpValve_nominal</code> is computed based on
+<code>Av</code>,
+<code>Kv</code>, or
+<code>Cv</code>, and the nominal mass flow rate <code>m_flow_nominal</code>.
+Therefore, if
+<code>CvData &lt;&gt; AixLib.Fluid.Types.CvTypes.OpPoint</code>,
+then specifying a value for <code>dpValve_nominal</code> is a syntax error.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+August 12, 2014, by Michael Wetter:<br/>
+Changed attribute <code>min</code> of <code>dpValve_nominal</code>
+to <code>0</code>.
+This is needed as for example in
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.Examples.TwoWayValveTable\">
+AixLib.Fluid.Actuators.Valves.Examples.TwoWayValveTable</a>,
+<code>dpValve_nominal=0</code>.
+</li>
+<li>
+August 8, 2014, by Michael Wetter:<br/>
+Changed the <code>initial algorithm</code> to an <code>initial equation</code>
+section. Otherwise, OpenModelica attempts to solve for the parameter
+values using numerical iteration, and fails in doing so.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+March 25, 2013, by Michael Wetter:<br/>
+Removed stray backslash in write statement.
+</li>
+<li>
+February 28, 2013, by Michael Wetter:<br/>
+Reformulated assignment of parameters, and removed <code>Kv_SI</code> as
+a public parameter because it is always computed based on other parameters.
+This change avoids a translation error in Dymola 2014 beta1 in
+the pedantic mode, and a translation warning otherwise.
+</li>
+<li>
+February 18, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ValveParameters;

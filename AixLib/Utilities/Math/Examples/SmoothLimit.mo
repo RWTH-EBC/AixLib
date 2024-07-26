@@ -17,18 +17,18 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/SmoothLimit.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.SmoothLimit\">
- AixLib.Utilities.Math.SmoothLimit</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 14, 2010, by Wangda Zuo, Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.SmoothLimit\">
+AixLib.Utilities.Math.SmoothLimit</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 14, 2010, by Wangda Zuo, Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SmoothLimit;

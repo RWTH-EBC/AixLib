@@ -48,31 +48,31 @@ equation
       thickness=0.5));
   annotation (
   Documentation(info="<html>
- <p>
- This example computes the solar incidence angle on tilted surfaces.
- There are fives surfaces, a horizontal surface and a surface
- that faces Norths, East, South and West.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 24, 2015, by Michael Wetter:<br/>
- Assigned azimuth and tilt using the types from
- <a href=\"modelica://AixLib.Types.Tilt\">
- AixLib.Types.Tilt</a>.
- </li>
- <li>
- January 16, 2015, by Michael Wetter:<br/>
- Added surfaces for each orientation.
- </li>
- <li>
- May 19, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the solar incidence angle on tilted surfaces.
+There are fives surfaces, a horizontal surface and a surface
+that faces Norths, East, South and West.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 24, 2015, by Michael Wetter:<br/>
+Assigned azimuth and tilt using the types from
+<a href=\"modelica://AixLib.Types.Tilt\">
+AixLib.Types.Tilt</a>.
+</li>
+<li>
+January 16, 2015, by Michael Wetter:<br/>
+Added surfaces for each orientation.
+</li>
+<li>
+May 19, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/Examples/IncidenceAngle.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end IncidenceAngle;

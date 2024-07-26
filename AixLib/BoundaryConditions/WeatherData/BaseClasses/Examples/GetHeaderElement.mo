@@ -29,31 +29,31 @@ initial equation
 
   annotation (
     Documentation(info="<html>
- <p>
- This example tests getting the header of the TMY3 weather data file.
- </p>
- </html>",
+<p>
+This example tests getting the header of the TMY3 weather data file.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 21, 2016, by Michael Wetter:<br/>
- Added call to
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath\">
- AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath</a>
- as this call has been removed from the function
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getHeaderElementTMY3\">
- AixLib.BoundaryConditions.WeatherData.BaseClasses.getHeaderElementTMY3</a>.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/506\">Buildings, #506</a>.
- </li>
- <li>
- July 14, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+April 21, 2016, by Michael Wetter:<br/>
+Added call to
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath\">
+AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath</a>
+as this call has been removed from the function
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getHeaderElementTMY3\">
+AixLib.BoundaryConditions.WeatherData.BaseClasses.getHeaderElementTMY3</a>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/506\">Buildings, #506</a>.
+</li>
+<li>
+July 14, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetHeaderElement.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end GetHeaderElement;

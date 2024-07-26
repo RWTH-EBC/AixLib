@@ -171,50 +171,50 @@ experiment(Tolerance=1E-9, StopTime=2),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolume.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of the mixing volumes.
- It compares the results from the mixing volume of the Modelica
- Standard Library with the implementation in the <code>Buildings</code>
- library.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 12, 2017, by Michael Wetter:<br/>
- Removed temperature connection that is no longer needed.<br/>
- This is for issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
- </li>
- <li>
- January 12, 2017, by Thierry S. Nouidui:<br/>
- Refactored difference blocks for checking integration errors.
- This is needed for the JModelica verification tests.
- </li>
- <li>
- November 4, 2016, by Michael Wetter:<br/>
- Removed wrong use of <code>each</code> keyword.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/575\">issue 575</a>.
- </li>
- <li>
- November 2, 2016, by Michael Wetter:<br/>
- Changed assertions to blocks that compute the difference,
- and added the difference to the regression results.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
- </li>
- <li>
- October 24, 2013, by Michael Wetter:<br/>
- Set <code>vol(h_start=45300.945)</code>.
- This avoids a cyclic assignment of <code>vol.T_start</code>
- and <code>vol.h_start</code> in
- <code>Modelica.Fluid.Vessels.ClosedVolume</code>.
- </li>
- <li>
- October 12, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of the mixing volumes.
+It compares the results from the mixing volume of the Modelica
+Standard Library with the implementation in the <code>Buildings</code>
+library.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 12, 2017, by Michael Wetter:<br/>
+Removed temperature connection that is no longer needed.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+January 12, 2017, by Thierry S. Nouidui:<br/>
+Refactored difference blocks for checking integration errors.
+This is needed for the JModelica verification tests.
+</li>
+<li>
+November 4, 2016, by Michael Wetter:<br/>
+Removed wrong use of <code>each</code> keyword.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/575\">issue 575</a>.
+</li>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
+<li>
+October 24, 2013, by Michael Wetter:<br/>
+Set <code>vol(h_start=45300.945)</code>.
+This avoids a cyclic assignment of <code>vol.T_start</code>
+and <code>vol.h_start</code> in
+<code>Modelica.Fluid.Vessels.ClosedVolume</code>.
+</li>
+<li>
+October 12, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolume;

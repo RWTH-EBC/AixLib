@@ -20,26 +20,26 @@ algorithm
       Inline=false,
       smoothOrder=5,
       Documentation(info="<html>
- <p>
- Derivative of function
- <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce\">
- AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce</a>.
- </p>
- </html>",
+<p>
+Derivative of function
+<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce\">
+AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 12, 2020, by Michael Wetter:<br/>
- Change name of argument <code>dTsat</code> to <code>dTSat</code> for consistency
- with
- <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.BaseClasses.der_saturationPressureLiquid\">
- AixLib.Utilities.Psychrometrics.Functions.BaseClasses.der_saturationPressureLiquid</a>.
- </li>
- <li>
- November 20, 2013 by Michael Wetter:<br/>
- First implementation, moved from <code>AixLib.Media</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 12, 2020, by Michael Wetter:<br/>
+Change name of argument <code>dTsat</code> to <code>dTSat</code> for consistency
+with
+<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.BaseClasses.der_saturationPressureLiquid\">
+AixLib.Utilities.Psychrometrics.Functions.BaseClasses.der_saturationPressureLiquid</a>.
+</li>
+<li>
+November 20, 2013 by Michael Wetter:<br/>
+First implementation, moved from <code>AixLib.Media</code>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end der_sublimationPressureIce;

@@ -62,69 +62,69 @@ annotation (defaultComponentName="senEntFlo",
           textColor={0,0,0},
           textString=DynamicSelect("", String(H_flow, leftJustified=false, significantDigits=3)))}),
   Documentation(info="<html>
- <p>
- This model outputs the enthalphy flow rate of the medium in the flow
- between fluid ports. The sensor is ideal, i.e., it does not influence the fluid.
- </p>
- <p>
- If the parameter <code>tau</code> is non-zero, then the measured
- specific enthalpy <i>h<sub>out</sub></i> that is used to
- compute the enthalpy flow rate
- <i>H&#775; = m&#775; h<sub>out</sub></i>
- is computed using a first order differential equation.
- See <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
- AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
- </p>
- <p>
- For a sensor that measures the latent enthalpy flow rate, use
- <a href=\"modelica://AixLib.Fluid.Sensors.LatentEnthalpyFlowRate\">
- AixLib.Fluid.Sensors.LatentEnthalpyFlowRate</a>.
- </p>
- </html>",
+<p>
+This model outputs the enthalphy flow rate of the medium in the flow
+between fluid ports. The sensor is ideal, i.e., it does not influence the fluid.
+</p>
+<p>
+If the parameter <code>tau</code> is non-zero, then the measured
+specific enthalpy <i>h<sub>out</sub></i> that is used to
+compute the enthalpy flow rate
+<i>H&#775; = m&#775; h<sub>out</sub></i>
+is computed using a first order differential equation.
+See <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
+AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
+</p>
+<p>
+For a sensor that measures the latent enthalpy flow rate, use
+<a href=\"modelica://AixLib.Fluid.Sensors.LatentEnthalpyFlowRate\">
+AixLib.Fluid.Sensors.LatentEnthalpyFlowRate</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- October 19, 2020, by Antoine Gautier:<br/>
- Changed default value for <code>tau</code> from <code>1</code> to <code>0</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1406\">#1406</a>.
- </li>
- <li>
- February 25, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- Made unit assignment of output signal final.
- </li>
- <li>
- January 18, 2016 by Filip Jorissen:<br/>
- Using parameter <code>tauInv</code>
- since this now exists in
- <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
- </li>
- <li>
- August 31, 2013, by Michael Wetter:<br/>
- Removed default value <code>tau=0</code> as the base class
- already sets <code>tau=1</code>.
- This change was made so that all sensors use the same default value.
- </li>
- <li>
- June 3, 2011 by Michael Wetter:<br/>
- Revised implementation to add dynamics in such a way that
- the time constant increases as the mass flow rate tends to zero.
- This can improve the numerics.
- </li>
- <li>
- April 9, 2008 by Michael Wetter:<br/>
- First implementation.
- Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+October 19, 2020, by Antoine Gautier:<br/>
+Changed default value for <code>tau</code> from <code>1</code> to <code>0</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1406\">#1406</a>.
+</li>
+<li>
+February 25, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Made unit assignment of output signal final.
+</li>
+<li>
+January 18, 2016 by Filip Jorissen:<br/>
+Using parameter <code>tauInv</code>
+since this now exists in
+<a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
+</li>
+<li>
+August 31, 2013, by Michael Wetter:<br/>
+Removed default value <code>tau=0</code> as the base class
+already sets <code>tau=1</code>.
+This change was made so that all sensors use the same default value.
+</li>
+<li>
+June 3, 2011 by Michael Wetter:<br/>
+Revised implementation to add dynamics in such a way that
+the time constant increases as the mass flow rate tends to zero.
+This can improve the numerics.
+</li>
+<li>
+April 9, 2008 by Michael Wetter:<br/>
+First implementation.
+Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end EnthalpyFlowRate;

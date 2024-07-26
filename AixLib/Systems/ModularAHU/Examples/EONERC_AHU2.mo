@@ -246,8 +246,5 @@ equation
 </ul>
 </html>", info="<html>
 <p>This example includes the GenericAHU model that is parameterized according to an existing air-handling unit of the EON.ERC test hall.</p>
-</html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
-        "Simulate and plot"));
+</html>"));
 end EONERC_AHU2;

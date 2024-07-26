@@ -57,22 +57,22 @@ equation
       extent={{6,3},{6,3}}));
   annotation (
     Documentation(info="<html>
- <p>
- This example computes the hemispherical diffuse irradiation
- on a roof, wall and a floor, using an isotropic sky model.
- Since the floor only sees the ground,
- it receives the lowest amount of diffuse solar irradiation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 24, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the hemispherical diffuse irradiation
+on a roof, wall and a floor, using an isotropic sky model.
+Since the floor only sees the ground,
+it receives the lowest amount of diffuse solar irradiation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 24, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DiffuseIsotropic.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end DiffuseIsotropic;

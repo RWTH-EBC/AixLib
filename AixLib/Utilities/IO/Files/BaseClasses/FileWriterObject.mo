@@ -17,16 +17,16 @@ extends ExternalObject;
       IncludeDirectory="modelica://AixLib/Resources/C-Sources");
 
     annotation(Documentation(info="<html>
- <p>
- Creates an empty file with name <code>fileName</code>.
- If <code>fileName</code> is used in another instance of
- <a href=\"modelica://AixLib.Utilities.IO.Files.CSVWriter\">
- AixLib.Utilities.IO.Files.CSVWriter</a>,
- the simulation stops with an error.
- </p>
- </html>",revisions="<html>
- c
- </html>"));
+<p>
+Creates an empty file with name <code>fileName</code>.
+If <code>fileName</code> is used in another instance of
+<a href=\"modelica://AixLib.Utilities.IO.Files.CSVWriter\">
+AixLib.Utilities.IO.Files.CSVWriter</a>,
+the simulation stops with an error.
+</p>
+</html>", revisions="<html>
+c
+</html>"));
   end constructor;
 
   function destructor "Release storage and close the external object"
@@ -35,34 +35,34 @@ extends ExternalObject;
     annotation(Include=" #include <fileWriterFree.c>",
     IncludeDirectory="modelica://AixLib/Resources/C-Sources");
   annotation(Documentation(info="<html>
- <p>
- Destructor that frees the memory of the object
- <code>FileWriter</code>.
- </p>
- </html>",
+<p>
+Destructor that frees the memory of the object
+<code>FileWriter</code>.
+</p>
+</html>",
   revisions="<html>
- <ul>
- <li>
- May 12, 2018, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"));
+<ul>
+<li>
+May 12, 2018, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
   end destructor;
 
 annotation(Documentation(info="<html>
- <p>
- Class derived from <code>ExternalObject</code> having two local external function definition,
- named <code>destructor</code> and <code>constructor</code> respectively.
- </p>
- </html>",
+<p>
+Class derived from <code>ExternalObject</code> having two local external function definition,
+named <code>destructor</code> and <code>constructor</code> respectively.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 10 2018, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+May 10 2018, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end FileWriterObject;

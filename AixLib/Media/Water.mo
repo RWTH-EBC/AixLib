@@ -19,8 +19,9 @@ package Water "Package with model for liquid water with constant density"
     final parameter Boolean standardOrderComponents=true
       "If true, and reducedX = true, the last element of X will be computed from the other ones";
     Modelica.Units.SI.Density d=d_const "Density of medium";
-    Temperature T(stateSelect=
-      if preferredMediumStates then StateSelect.prefer else StateSelect.default)
+    Temperature T(
+      start=293.15,
+      stateSelect=if preferredMediumStates then StateSelect.prefer else StateSelect.default)
       "Temperature of medium";
     InputAbsolutePressure p "Absolute pressure of medium";
     InputMassFraction[nXi] Xi=fill(0, 0)
@@ -68,51 +69,51 @@ package Water "Package with model for liquid water with constant density"
     assert(noEvent(p >= 0.0), "Pressure (= " + String(p) + " Pa) of medium \"AixLib.Media.Water\" is negative\n(Temperature = " + String(T) + " K)");
 
     annotation(Documentation(info="<html>
- <p>
- Model with basic thermodynamic properties.
- </p>
- <p>
- This base properties model is identical to
- <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
- Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
- except that the equation
- <code>u = cv_const*(T - reference_T)</code>
- has been replaced by <code>u=h</code> because
- <code>cp_const=cv_const</code>.
- </p>
- <p>
- This model provides equation for the following thermodynamic properties:
- </p>
- <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" summary=\"Thermodynamic properties\">
-   <tr><td><strong>Variable</strong></td>
-       <td><strong>Unit</strong></td>
-       <td><strong>Description</strong></td></tr>
-   <tr><td>T</td>
-       <td>K</td>
-       <td>temperature</td></tr>
-   <tr><td>p</td>
-       <td>Pa</td>
-       <td>absolute pressure</td></tr>
-   <tr><td>d</td>
-       <td>kg/m3</td>
-       <td>density</td></tr>
-   <tr><td>h</td>
-       <td>J/kg</td>
-       <td>specific enthalpy</td></tr>
-   <tr><td>u</td>
-       <td>J/kg</td>
-       <td>specific internal energy</td></tr>
-   <tr><td>Xi[nXi]</td>
-       <td>kg/kg</td>
-       <td>independent mass fractions m_i/m</td></tr>
-   <tr><td>R</td>
-       <td>J/kg.K</td>
-       <td>gas constant</td></tr>
-   <tr><td>M</td>
-       <td>kg/mol</td>
-       <td>molar mass</td></tr>
- </table>
- </html>"));
+<p>
+Model with basic thermodynamic properties.
+</p>
+<p>
+This base properties model is identical to
+<a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
+Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
+except that the equation
+<code>u = cv_const*(T - reference_T)</code>
+has been replaced by <code>u=h</code> because
+<code>cp_const=cv_const</code>.
+</p>
+<p>
+This model provides equation for the following thermodynamic properties:
+</p>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" summary=\"Thermodynamic properties\">
+  <tr><td><strong>Variable</strong></td>
+      <td><strong>Unit</strong></td>
+      <td><strong>Description</strong></td></tr>
+  <tr><td>T</td>
+      <td>K</td>
+      <td>temperature</td></tr>
+  <tr><td>p</td>
+      <td>Pa</td>
+      <td>absolute pressure</td></tr>
+  <tr><td>d</td>
+      <td>kg/m3</td>
+      <td>density</td></tr>
+  <tr><td>h</td>
+      <td>J/kg</td>
+      <td>specific enthalpy</td></tr>
+  <tr><td>u</td>
+      <td>J/kg</td>
+      <td>specific internal energy</td></tr>
+  <tr><td>Xi[nXi]</td>
+      <td>kg/kg</td>
+      <td>independent mass fractions m_i/m</td></tr>
+  <tr><td>R</td>
+      <td>J/kg.K</td>
+      <td>gas constant</td></tr>
+  <tr><td>M</td>
+      <td>kg/mol</td>
+      <td>molar mass</td></tr>
+</table>
+</html>"));
   end BaseProperties;
 
 function enthalpyOfLiquid "Return the specific enthalpy of liquid"
@@ -125,142 +126,148 @@ annotation (
   smoothOrder=5,
   Inline=true,
 Documentation(info="<html>
- <p>
- Enthalpy of the water.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 16, 2014 by Michael Wetter:<br/>
- First implementation.
- This function is used by
- <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir\">
- AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir</a>.
- </li>
- </ul>
- </html>"));
+<p>
+Enthalpy of the water.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 16, 2014 by Michael Wetter:<br/>
+First implementation.
+This function is used by
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir\">
+AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir</a>.
+</li>
+</ul>
+</html>"));
 end enthalpyOfLiquid;
   annotation(Documentation(info="<html>
- <p>
- This medium package models liquid water.
- </p>
- <p>
- The mass density is computed using a constant value of <i>995.586</i> kg/s.
- For a medium model in which the density is a function of temperature, use
- <a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity\">
- AixLib.Media.Specialized.Water.TemperatureDependentDensity</a> which may have considerably higher computing time.
- </p>
- <p>
- For the specific heat capacities at constant pressure and at constant volume,
- a constant value of <i>4184</i> J/(kg K), which corresponds to <i>20</i>&deg;C
- is used.
- The figure below shows the relative error of the specific heat capacity that
- is introduced by this simplification.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Media/Water/plotCp.png\" border=\"1\"
- alt=\"Relative variation of specific heat capacity with temperature\"/>
- </p>
- <p>
- The enthalpy is computed using the convention that <i>h=0</i>
- if <i>T=0</i> &deg;C.
- </p>
- <h4>Limitations</h4>
- <p>
- Density, specific heat capacity, thermal conductivity and viscosity are constant.
- Water is modeled as an incompressible liquid.
- There are no phase changes.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 28, 2020, by Michael Wetter:<br/>
- Reformulated <code>BaseProperties</code> to avoid event-triggering assertions.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1401\">#1401</a>.
- </li>
- <li>
- October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
- Now printing different messages if temperature is above or below its limit,
- and adding instance name as JModelica does not print the full instance name in the assertion.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
- </li>
- <li>
- June 6, 2015, by Michael Wetter:<br/>
- Set <code>AbsolutePressure(start=p_default)</code> to avoid
- a translation error if
- <a href=\"modelica://AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource\">
- AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource</a>
- (if used with water instead of air)
- is translated in pedantic mode in Dymola 2016.
- The reason is that pressures use <code>Medium.p_default</code> as start values,
- but
- <a href=\"modelica://Modelica.Media.Interfaces.Types\">
- Modelica.Media.Interfaces.Types</a>
- sets a default value of <i>1E-5</i>.
- A similar change has been done for pressure and density.
- This fixes
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
- </li>
- <li>
- June 6, 2015, by Michael Wetter:<br/>
- Changed type of <code>BaseProperties.T</code> from
- <code>Modelica.Units.SI.Temperature</code> to <code>Temperature</code>.
- Otherwise, it has a different start value than <code>Medium.T</code>, which
- causes an error if
- <a href=\"AixLib.Media.Examples.WaterProperties\">
- AixLib.Media.Examples.WaterProperties</a>
- is translated in pedantic mode.
- This fixes
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
- </li>
- <li>
- June 5, 2015, by Michael Wetter:<br/>
- Added <code>stateSelect</code> attribute in <code>BaseProperties.T</code>
- to allow correct use of <code>preferredMediumState</code> as
- described in
- <a href=\"modelica://Modelica.Media.Interfaces.PartialMedium\">
- Modelica.Media.Interfaces.PartialMedium</a>,
- and set <code>preferredMediumState=false</code>
- to keep the same states as were used before.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/260\">#260</a>.
- </li>
- <li>
- June 5, 2015, by Michael Wetter:<br/>
- Removed <code>ThermodynamicState</code> declaration as this lead to
- the error
- \"Attempting to redeclare record ThermodynamicState when the original was not replaceable.\"
- in Dymola 2016 using the pedantic model check.
- </li>
- <li>
- May 1, 2015, by Michael Wetter:<br/>
- Added <code>Inline=true</code> for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
- issue 227</a>.
- </li>
- <li>
- February 25, 2015, by Michael Wetter:<br/>
- Removed <code>stateSelect</code> attribute on pressure as this caused
- <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
- AixLib.Examples.Tutorial.SpaceCooling.System3</a>
- to fail with the error message
- \"differentiated if-then-else was not continuous\".
- </li>
- <li>
- October 15, 2014, by Michael Wetter:<br/>
- Reimplemented media based on
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/blob/446aa83720884052476ad6d6d4f90a6a29bb8ec9/AixLib/Media/Water.mo\">446aa83</a>.
- </li>
- <li>
- November 15, 2013, by Michael Wetter:<br/>
- Complete new reimplementation because the previous version
- had the option to add a compressibility to the medium, which
- has never been used.
- </li>
- </ul>
- </html>"),
+<p>
+This medium package models liquid water.
+</p>
+<p>
+The mass density is computed using a constant value of <i>995.586</i> kg/s.
+For a medium model in which the density is a function of temperature, use
+<a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity\">
+AixLib.Media.Specialized.Water.TemperatureDependentDensity</a> which may have considerably higher computing time.
+</p>
+<p>
+For the specific heat capacities at constant pressure and at constant volume,
+a constant value of <i>4184</i> J/(kg K), which corresponds to <i>20</i>&deg;C
+is used.
+The figure below shows the relative error of the specific heat capacity that
+is introduced by this simplification.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Water/plotCp.png\" border=\"1\"
+alt=\"Relative variation of specific heat capacity with temperature\"/>
+</p>
+<p>
+The enthalpy is computed using the convention that <i>h=0</i>
+if <i>T=0</i> &deg;C.
+</p>
+<h4>Limitations</h4>
+<p>
+Density, specific heat capacity, thermal conductivity and viscosity are constant.
+Water is modeled as an incompressible liquid.
+There are no phase changes.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 18, 2024, by Michael Wetter:<br/>
+Added <code>start</code> and <code>nominal</code> attributes
+to avoid warnings in OpenModelica due to conflicting values.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1890\">IBPSA, #1890</a>.
+</li>
+<li>
+September 28, 2020, by Michael Wetter:<br/>
+Reformulated <code>BaseProperties</code> to avoid event-triggering assertions.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1401\">#1401</a>.
+</li>
+<li>
+October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
+Now printing different messages if temperature is above or below its limit,
+and adding instance name as JModelica does not print the full instance name in the assertion.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
+</li>
+<li>
+June 6, 2015, by Michael Wetter:<br/>
+Set <code>AbsolutePressure(start=p_default)</code> to avoid
+a translation error if
+<a href=\"modelica://AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource\">
+AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource</a>
+(if used with water instead of air)
+is translated in pedantic mode in Dymola 2016.
+The reason is that pressures use <code>Medium.p_default</code> as start values,
+but
+<a href=\"modelica://Modelica.Media.Interfaces.Types\">
+Modelica.Media.Interfaces.Types</a>
+sets a default value of <i>1E-5</i>.
+A similar change has been done for pressure and density.
+This fixes
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+</li>
+<li>
+June 6, 2015, by Michael Wetter:<br/>
+Changed type of <code>BaseProperties.T</code> from
+<code>Modelica.Units.SI.Temperature</code> to <code>Temperature</code>.
+Otherwise, it has a different start value than <code>Medium.T</code>, which
+causes an error if
+<a href=\"modelica://AixLib.Media.Examples.WaterProperties\">
+AixLib.Media.Examples.WaterProperties</a>
+is translated in pedantic mode.
+This fixes
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+</li>
+<li>
+June 5, 2015, by Michael Wetter:<br/>
+Added <code>stateSelect</code> attribute in <code>BaseProperties.T</code>
+to allow correct use of <code>preferredMediumState</code> as
+described in
+<a href=\"modelica://Modelica.Media.Interfaces.PartialMedium\">
+Modelica.Media.Interfaces.PartialMedium</a>,
+and set <code>preferredMediumState=false</code>
+to keep the same states as were used before.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/260\">#260</a>.
+</li>
+<li>
+June 5, 2015, by Michael Wetter:<br/>
+Removed <code>ThermodynamicState</code> declaration as this lead to
+the error
+\"Attempting to redeclare record ThermodynamicState when the original was not replaceable.\"
+in Dymola 2016 using the pedantic model check.
+</li>
+<li>
+May 1, 2015, by Michael Wetter:<br/>
+Added <code>Inline=true</code> for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
+issue 227</a>.
+</li>
+<li>
+February 25, 2015, by Michael Wetter:<br/>
+Removed <code>stateSelect</code> attribute on pressure as this caused
+<a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
+AixLib.Examples.Tutorial.SpaceCooling.System3</a>
+to fail with the error message
+\"differentiated if-then-else was not continuous\".
+</li>
+<li>
+October 15, 2014, by Michael Wetter:<br/>
+Reimplemented media based on
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/blob/446aa83720884052476ad6d6d4f90a6a29bb8ec9/Annex60/Media/Water.mo\">446aa83</a>.
+</li>
+<li>
+November 15, 2013, by Michael Wetter:<br/>
+Complete new reimplementation because the previous version
+had the option to add a compressibility to the medium, which
+has never been used.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Polygon(
@@ -287,6 +294,6 @@ end enthalpyOfLiquid;
           extent={{20,-30},{78,-88}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={95,95,95})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          fillColor={95,95,95})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Water;
