@@ -56,7 +56,6 @@ public
 
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalResistancesOneUTube
     intResUTub(
-      dynFil=dynFil,
       hSeg=hSeg,
       energyDynamics=energyDynamics,
       Rgb_val=Rgb_val,
@@ -92,12 +91,13 @@ initial equation
       kMed=kMed,
       muMed=muMed,
       cpMed=cpMed,
-      m_flow_nominal=m1_flow_nominal);
+      m_flow_nominal=m1_flow_nominal,
+      instanceName=getInstanceName());
 
 equation
     assert(borFieDat.conDat.borCon == AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.SingleUTube,
   "This model should be used for single U-type borefield, not double U-type.
-   Check that the conDat record has been correctly parametrized");
+  Check that the conDat record has been correctly parametrized");
   connect(RVol2.y, RConv2.Rc) annotation (Line(points={{-79,-8},{-60,-8},{-40,
           -8},{-40,-28},{-12,-28}},
                                 color={0,0,127}));
@@ -127,78 +127,91 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
- <p>
- Model for the heat transfer between the fluid and within the borehole filling
- for a single borehole segment.
- This model computes the dynamic response of the fluid in the tubes,
- the heat transfer between the fluid and the borehole filling,
- and the heat storage within the fluid and the borehole filling.
- </p>
- <p>
- This model computes the different thermal resistances present
- in a single-U-tube borehole using the method of Bauer et al. (2011)
- and computing explicitely the fluid-to-ground thermal resistance
- <i>R<sub>b</sub></i> and the
- grout-to-grout resistance
- <i>R<sub>a</sub></i> as defined by Claesson and Hellstrom (2011)
- using the multipole method.
- </p>
- <h4>References</h4>
- <p>J. Claesson and G. Hellstrom.
- <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
- </i>
- HVAC&amp;R Research,
- 17(6): 895-911, 2011.</p>
- <p>
- D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
- <i>
- Thermal resistance and capacity models for borehole heat exchangers
- </i>.
- International Journal Of Energy Research, 35:312-320, 2011.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- February 28, 2022, by Massimo Cimmino:<br/>
- Removed <code>printDebug</code> parameter from call to
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube</a>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
- </li>
- <li>
- July 10, 2018, by Alex Laferri&egrave;re:<br/>
- Updated documentation following major changes to the AixLib.Fluid.HeatExchangers.Ground package.
- Additionally, implemented a partial InternalHex model.
- </li>
- <li>
- June 18, 2014, by Michael Wetter:<br/>
- Added initialization for temperatures and derivatives of <code>capFil1</code>
- and <code>capFil2</code> to avoid a warning during translation.
- </li>
- <li>
- February 14, 2014, by Michael Wetter:<br/>
- Removed unused parameters <code>B0</code> and <code>B1</code>.
- </li>
- <li>
- January 24, 2014, by Michael Wetter:<br/>
- Revised implementation, added comments, replaced
- <code>HeatTransfer.Windows.BaseClasses.ThermalConductor</code>
- with resistance models from the Modelica Standard Library.
- </li>
- <li>
- January 23, 2014, by Damien Picard:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Model for the heat transfer between the fluid and within the borehole filling
+for a single borehole segment.
+This model computes the dynamic response of the fluid in the tubes,
+the heat transfer between the fluid and the borehole filling,
+and the heat storage within the fluid and the borehole filling.
+</p>
+<p>
+This model computes the different thermal resistances present
+in a single-U-tube borehole using the method of Bauer et al. (2011)
+and computing explicitely the fluid-to-ground thermal resistance
+<i>R<sub>b</sub></i> and the
+grout-to-grout resistance
+<i>R<sub>a</sub></i> as defined by Claesson and Hellstrom (2011)
+using the multipole method.
+</p>
+<h4>References</h4>
+<p>J. Claesson and G. Hellstrom.
+<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
+</i>
+HVAC&amp;R Research,
+17(6): 895-911, 2011.</p>
+<p>
+D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
+<i>
+Thermal resistance and capacity models for borehole heat exchangers
+</i>.
+International Journal Of Energy Research, 35:312-320, 2011.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 17, 2024, by Michael Wetter:<br/>
+Updated model due to removal of parameter <code>dynFil</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1885\">IBPSA, #1885</a>.
+</li>
+<li>
+November 22, 2023, by Michael Wetter:<br/>
+Corrected use of <code>getInstanceName()</code> which was called inside a function which
+is not allowed.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1814\">IBPSA, #1814</a>.
+</li>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+February 28, 2022, by Massimo Cimmino:<br/>
+Removed <code>printDebug</code> parameter from call to
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesOneUTube</a>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
+</li>
+<li>
+July 10, 2018, by Alex Laferri&egrave;re:<br/>
+Updated documentation following major changes to the AixLib.Fluid.HeatExchangers.Ground package.
+Additionally, implemented a partial InternalHex model.
+</li>
+<li>
+June 18, 2014, by Michael Wetter:<br/>
+Added initialization for temperatures and derivatives of <code>capFil1</code>
+and <code>capFil2</code> to avoid a warning during translation.
+</li>
+<li>
+February 14, 2014, by Michael Wetter:<br/>
+Removed unused parameters <code>B0</code> and <code>B1</code>.
+</li>
+<li>
+January 24, 2014, by Michael Wetter:<br/>
+Revised implementation, added comments, replaced
+<code>HeatTransfer.Windows.BaseClasses.ThermalConductor</code>
+with resistance models from the Modelica Standard Library.
+</li>
+<li>
+January 23, 2014, by Damien Picard:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, initialScale=0.1),
-    graphics),
-  __Dymola_LockedEditing="Model from IBPSA");
+    graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXOneUTube;

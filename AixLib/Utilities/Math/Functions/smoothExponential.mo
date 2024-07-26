@@ -26,21 +26,18 @@ algorithm
     y  := 1+x2*(a2+x2*a3);
   end if;
     annotation (smoothOrder=1, Documentation(info="<html>
- <p>
- Function to provide a once continuously differentiable approximation
- to <i>exp(- |x| )</i>
- in the interval <i>|x| &lt; &delta;</i> for some positive <i>&delta;</i>
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 30, 2008, by Michael Wetter:<br/>
- First implementation.
- Implemented to reduce chattering in
- <a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.Stratifier\">
- AixLib.Fluid.Storage.BaseClasses.Stratifier</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function to provide a once continuously differentiable approximation
+to <i>exp(- |x| )</i>
+in the interval <i>|x| &lt; &delta;</i> for some positive <i>&delta;</i>
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 30, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end smoothExponential;

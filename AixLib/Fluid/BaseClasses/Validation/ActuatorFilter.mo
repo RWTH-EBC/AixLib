@@ -46,21 +46,21 @@ equation
       StopTime=20,
       Tolerance=1e-06),
     Documentation(info="<html>
- <p>
- This example validates
- <a href=\"modelica://AixLib.Fluid.BaseClasses.ActuatorFilter\">
- AixLib.Fluid.BaseClasses.ActuatorFilter</a>.
- The validation is done for different settings of <code>u_nominal</code> and for
- different start values of the filter output.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 22, 2021, by Michael Wetter:<br/>
- First implementation for
- <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA, #1498</a>
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example validates
+<a href=\"modelica://AixLib.Fluid.BaseClasses.ActuatorFilter\">
+AixLib.Fluid.BaseClasses.ActuatorFilter</a>.
+The validation is done for different settings of <code>u_nominal</code> and for
+different start values of the filter output.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 22, 2021, by Michael Wetter:<br/>
+First implementation for
+<a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA, #1498</a>
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ActuatorFilter;

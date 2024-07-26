@@ -154,61 +154,61 @@ equation
   annotation (
     defaultComponentName="HDifTil",
     Documentation(info="<html>
- <p>
- This component computes the hemispherical diffuse irradiation on a tilted surface using an anisotropic
- sky model proposed by Perez.
- For a definition of the parameters, see the
- <a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">User's Guide</a>.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- P. Ineichen, R. Perez and R. Seals (1987).
- <i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
- Solar Energy, 39(4): 301-305.
- </li>
- <li>
- R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
- <i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
- Solar Energy, 39(3): 221-231.
- </li>
- <li>
- R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
- <i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
- Solar Energy, 44(5):271-289.
- </li>
- </ul>
- </html>",revisions="<html>
- <ul>
- <li>
- September 6, 2021, by Ettore Zanetti:<br/>
- Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- November 14, 2015, by Michael Wetter:<br/>
- Added <code>min</code>, <code>max</code> and <code>unit</code>
- attributes for <code>rho</code>.
- </li>
- <li>
- June 6, 2012, by Wangda Zuo:<br/>
- Added contributions from sky and ground that were separated in base class.
- </li>
- <li>
- February 25, 2012, by Michael Wetter:<br/>
- Changed component to get zenith angle from weather bus.
- </li>
- <li>
- May 24, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the hemispherical diffuse irradiation on a tilted surface using an anisotropic
+sky model proposed by Perez.
+For a definition of the parameters, see the
+<a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">User's Guide</a>.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+P. Ineichen, R. Perez and R. Seals (1987).
+<i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
+Solar Energy, 39(4): 301-305.
+</li>
+<li>
+R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
+<i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
+Solar Energy, 39(3): 221-231.
+</li>
+<li>
+R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
+<i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
+Solar Energy, 44(5):271-289.
+</li>
+</ul>
+</html>", revisions="<html>
+<ul>
+<li>
+September 6, 2021, by Ettore Zanetti:<br/>
+Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+November 14, 2015, by Michael Wetter:<br/>
+Added <code>min</code>, <code>max</code> and <code>unit</code>
+attributes for <code>rho</code>.
+</li>
+<li>
+June 6, 2012, by Wangda Zuo:<br/>
+Added contributions from sky and ground that were separated in base class.
+</li>
+<li>
+February 25, 2012, by Michael Wetter:<br/>
+Changed component to get zenith angle from weather bus.
+</li>
+<li>
+May 24, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end DiffusePerez;

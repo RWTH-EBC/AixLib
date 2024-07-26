@@ -428,7 +428,7 @@ package PVSystem
     model PVInverterRMS "Inverter model including system management"
       extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
-      parameter Modelica.Units.SI.Power uMax2
+      parameter Modelica.Units.SI.Power uMax2=3800
         "Upper limits of input signals (MaxOutputPower)";
      Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW(
       final quantity="Power",

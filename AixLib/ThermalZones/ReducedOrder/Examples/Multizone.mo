@@ -133,7 +133,10 @@ equation
           -55},{36.8,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=3.1536e+007, Interval=3600),
+    experiment(Tolerance=1e-6, StopTime=864000, Interval=3600),
+    __Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos"
+        "Simulate and plot"),
     Documentation(info="<html><p>
   This example illustrates the use of <a href=
   \"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>.

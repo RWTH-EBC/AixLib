@@ -23,37 +23,37 @@ annotation (
         StopTime=1,
         Tolerance=1E-9),
       Documentation(info="<html>
- <p>
- This example checks whether the function derivative
- is implemented correctly. If the derivative implementation
- is not correct, the model will stop with an assert statement.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- April 22, 2016, by Michael Wetter:<br/>
- Changed accuarcy test in assertion to use the relative error because the
- magnitude of <code>y</code> is <i>1E5</i> and hence testing an absolute
- error is too stringent.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">Buildings, issue 510</a>.
- </li>
- <li>
- August 17, 2015 by Michael Wetter:<br/>
- Updated regression test to have slope that is different from one.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
- </li>
- <li>
- October 4, 2014, by Michael Wetter:<br/>
- Added a high tolerance which is needed for OpenModelica to pass the assert
- statement.
- </li>
- <li>
- October 29, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example checks whether the function derivative
+is implemented correctly. If the derivative implementation
+is not correct, the model will stop with an assert statement.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+April 22, 2016, by Michael Wetter:<br/>
+Changed accuarcy test in assertion to use the relative error because the
+magnitude of <code>y</code> is <i>1E5</i> and hence testing an absolute
+error is too stringent.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">Buildings, issue 510</a>.
+</li>
+<li>
+August 17, 2015 by Michael Wetter:<br/>
+Updated regression test to have slope that is different from one.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+</li>
+<li>
+October 4, 2014, by Michael Wetter:<br/>
+Added a high tolerance which is needed for OpenModelica to pass the assert
+statement.
+</li>
+<li>
+October 29, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DewPointTemperatureDerivativeCheck;

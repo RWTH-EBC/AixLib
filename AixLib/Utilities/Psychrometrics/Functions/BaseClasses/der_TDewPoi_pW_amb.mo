@@ -20,22 +20,22 @@ algorithm
 
   annotation (
     Documentation(info="<html>
- <p>
- Derivative of dew point temperature calculation for moist air.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 4, 2014, by Michael Wetter:<br/>
- Removed <code>extends AixLib.Utilities.Psychrometrics.Functions.BaseClasses.pW_TDewPoi_amb</code>
- as this gives a compile time error in OpenModelica as the input argument <code>T</code>
- cannot be found.
- </li>
- <li>
- May 21, 2010 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Derivative of dew point temperature calculation for moist air.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 4, 2014, by Michael Wetter:<br/>
+Removed <code>extends AixLib.Utilities.Psychrometrics.Functions.BaseClasses.pW_TDewPoi_amb</code>
+as this gives a compile time error in OpenModelica as the input argument <code>T</code>
+cannot be found.
+</li>
+<li>
+May 21, 2010 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end der_TDewPoi_pW_amb;

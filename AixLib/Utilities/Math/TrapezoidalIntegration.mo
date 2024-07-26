@@ -9,14 +9,14 @@ equation
           extent={{-90,36},{90,-36}},
           textColor={160,160,164},
           textString="trapezoidalIntegration()")}), Documentation(info="<html>
- <p>This function computes a definite integral using the trapezoidal rule. </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 29, 2013 by Marcus Fuchs:<br/>
- Implementation based on Functions.trapezoidalIntegration.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>This function computes a definite integral using the trapezoidal rule. </p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 29, 2013 by Marcus Fuchs:<br/>
+Implementation based on Functions.trapezoidalIntegration.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TrapezoidalIntegration;

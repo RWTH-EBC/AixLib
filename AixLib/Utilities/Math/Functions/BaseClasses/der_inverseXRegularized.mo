@@ -27,19 +27,19 @@ algorithm
 annotation (
 Documentation(
 info="<html>
- <p>
- Implementation of the first derivative of the function
- <a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
- AixLib.Utilities.Math.Functions.inverseXRegularized</a>.
- </p>
- </html>",
+<p>
+Implementation of the first derivative of the function
+<a href=\"modelica://AixLib.Utilities.Math.Functions.inverseXRegularized\">
+AixLib.Utilities.Math.Functions.inverseXRegularized</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 22, 2016, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 22, 2016, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end der_inverseXRegularized;

@@ -6,13 +6,10 @@ model ThermalZoneMoistCO2AirExchange
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     use_moisture_balance=true,
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     T_start=293.15,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam,
     internalGainsMode=3,
     recOrSep=true,
     use_C_flow=true,

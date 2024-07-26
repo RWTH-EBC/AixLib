@@ -14,17 +14,17 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks thermophysical properties of the medium.
- </p>
- </html>",
+<p>
+This example checks thermophysical properties of the medium.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- December 19, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+December 19, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WaterProperties;

@@ -15,19 +15,19 @@ experiment(Tolerance=1e-6, StopTime=600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Motors/Examples/IdealMotor.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- Test model for the ideal motor with hysteresis model.
- The motor receives at its control input a time-varying signal.
- It adjusts its position whenever the input signal differs
- from the current position by more than the hysteresis.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 8, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for the ideal motor with hysteresis model.
+The motor receives at its control input a time-varying signal.
+It adjusts its position whenever the input signal differs
+from the current position by more than the hysteresis.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 8, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end IdealMotor;
