@@ -37,7 +37,7 @@ model SubstationDirectHeatingDirectCoolingDHW
     annotation (Placement(transformation(extent={{76,-30},{56,-10}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW
     substationDirectHeatingDirectCoolingDHW(
-    heatDemand_max=4000,
+    heatDemand_max=40000,
     deltaT_heatingSet(displayUnit="K") = 10,
     deltaT_coolingGridSet(displayUnit="K") = 6,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,

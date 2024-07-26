@@ -34,10 +34,12 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
     annotation (Placement(transformation(extent={{188,8},{208,28}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
+    nominalValuesDefineDefaultPressureCurve=true,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
-    use_inputFilter=false)
+    use_inputFilter=false,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
@@ -129,10 +131,12 @@ public
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
+    nominalValuesDefineDefaultPressureCurve=true,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
-    use_inputFilter=false)
+    use_inputFilter=false,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
   "Input for cooling demand profile of substation"

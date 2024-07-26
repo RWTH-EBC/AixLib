@@ -33,8 +33,10 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
@@ -127,8 +129,10 @@ public
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
   "Input for cooling demand profile of substation"
@@ -163,17 +167,17 @@ public
     annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
   Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet))
     annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
   Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet(unit = "K")
   "Set temperature difference for heating on the site of thermal network"

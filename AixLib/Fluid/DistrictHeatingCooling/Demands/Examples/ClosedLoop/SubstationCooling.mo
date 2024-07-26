@@ -22,8 +22,8 @@ model SubstationCooling "Small example of substation for buildings with only coo
   Modelica.Blocks.Sources.Sine sine(
     f=1/3600,
     startTime=0,
-    amplitude=1000,
-    offset=2000)
+    amplitude=2000,
+    offset=6000)
     annotation (Placement(transformation(extent={{-50,66},{-30,86}})));
   Modelica.Blocks.Sources.Ramp tempColdLine(
     height=5,
@@ -43,10 +43,11 @@ model SubstationCooling "Small example of substation for buildings with only coo
       Medium = Medium, m_flow_nominal=0.5)
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling substationCooling(
-    coolingDemand_max=-3000,
+    coolingDemand_max=-20000,
     deltaT_coolingSet(displayUnit="K") = 6,
     deltaT_coolingGridSet(displayUnit="K") = 4,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    dp_nominal(displayUnit="bar") = 10000)
     annotation (Placement(transformation(extent={{6,-10},{30,12}})));
 equation
   connect(hotLine.ports[1], senTemHotLine.port_a)

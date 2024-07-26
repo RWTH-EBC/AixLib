@@ -39,8 +39,10 @@ model SubstationDirectHeatingDirectCoolingDHW "Substation model for bidirctional
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
@@ -108,8 +110,8 @@ public
         transformation(extent={{-290,92},{-250,132}}),
                                                     iconTransformation(extent={{-180,22},
             {-140,62}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   Modelica.Blocks.Sources.Constant const4(k=T_supplyDHWSet)
     annotation (Placement(transformation(extent={{192,-150},{172,-130}})));
@@ -141,8 +143,8 @@ public
     annotation (Placement(transformation(extent={{-226,70},{-214,82}})));
   Modelica.Blocks.Math.Division division3
     annotation (Placement(transformation(extent={{-152,50},{-136,66}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTemHPin(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemHPin(redeclare package Medium
+      =        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{28,-10},{48,12}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*(senTemIn.T
          - 15 - 273.15))

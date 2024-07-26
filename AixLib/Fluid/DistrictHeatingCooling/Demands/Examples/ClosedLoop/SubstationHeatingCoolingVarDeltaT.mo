@@ -36,8 +36,8 @@ model SubstationHeatingCoolingVarDeltaT "Small example of substation for buildin
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT
     substationHeatingCooling(
     redeclare package Medium = Medium,
-    heatDemand_max=4000,
-    coolingDemand_max=-2000,
+    heatDemand_max=40000,
+    coolingDemand_max=-20000,
     deltaT_coolingSet(displayUnit="K") = 4,
     deltaT_heatingSet(displayUnit="K") = 4)
     annotation (Placement(transformation(extent={{-24,8},{10,32}})));

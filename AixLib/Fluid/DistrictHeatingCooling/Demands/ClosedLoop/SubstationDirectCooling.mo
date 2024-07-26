@@ -52,8 +52,10 @@ public
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{50,-10},{30,10}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
     "Input for cooling demand profile of substation"
@@ -66,11 +68,11 @@ public
                                    realExpression1(y=(cp_default*(273.15 + 22
          - senTem4.T)))
     annotation (Placement(transformation(extent={{104,84},{92,96}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
+      =        Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium)

@@ -37,8 +37,10 @@ model SubstationDirectHeatingDirectCooling "Substation model for bidirctional lo
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
 public
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
@@ -83,8 +85,10 @@ public
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
   "Input for cooling demand profile of substation"

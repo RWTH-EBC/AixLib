@@ -40,10 +40,12 @@ model SubstationCooling
     tau=60) annotation (Placement(transformation(extent={{70,6},{90,26}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
+    nominalValuesDefineDefaultPressureCurve=true,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_inputFilter=false)
+    use_inputFilter=false,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{68,-10},{48,10}})));
   AixLib.Fluid.Chillers.Carnot_TEva chiller(
     redeclare package Medium1 = Medium,
@@ -86,8 +88,8 @@ model SubstationCooling
     "Input for cooling demand profile of substation (negative values for cooling)"
     annotation (Placement(transformation(extent={{-166,74},{-126,114}}),
         iconTransformation(extent={{-166,74},{-126,114}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package Medium
+      =        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-82,-6},{-66,8}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
   "Supply temperature of the cooling circuit in the building"
@@ -115,6 +117,9 @@ model SubstationCooling
   Modelica.Blocks.Math.Gain gain(k=-1)
     "switches cooling demand profile from positiv to negativ values"
     annotation (Placement(transformation(extent={{-118,70},{-98,90}})));
+  Sensors.TemperatureTwoPort senTemChiIn(redeclare package Medium = Medium,
+      m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{20,-10},{36,4}})));
 equation
   connect(port_a, vol.ports[1])
     annotation (Line(points={{-142,0},{-121,0},{-121,6}},
@@ -129,8 +134,6 @@ equation
   connect(chiller.port_b2, coolingSupplyBuilding.ports[1]) annotation (Line(
         points={{12,-10.4},{40,-10.4},{40,-54},{44,-54}},
                                                       color={0,127,255}));
-  connect(pumpCooling.port_b, chiller.port_a1)
-    annotation (Line(points={{48,0},{12,0},{12,0.4}}, color={0,127,255}));
   connect(add.y, coolingReturnBuilding.T_in) annotation (Line(points={{-71,-70},
           {-58,-70},{-58,-50},{-48,-50}}, color={0,0,127}));
   connect(deltaT_coolingBuildingSite.y, add.u2) annotation (Line(points={{-105,-84},
@@ -173,6 +176,10 @@ equation
           {-34,1},{-34,0.4},{-6,0.4}}, color={0,127,255}));
   connect(vol.ports[2], senTemChiOut.port_a) annotation (Line(points={{-119,6},{
           -118,6},{-118,1},{-82,1}}, color={0,127,255}));
+  connect(senTemChiIn.port_b, pumpCooling.port_b)
+    annotation (Line(points={{36,-3},{36,0},{48,0}}, color={0,127,255}));
+  connect(senTemChiIn.port_a, chiller.port_a1)
+    annotation (Line(points={{20,-3},{20,0.4},{12,0.4}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {100,120}}), graphics={
         Rectangle(

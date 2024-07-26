@@ -38,7 +38,7 @@ model SubstationHeating "Small example of substation for buildings with only hea
     annotation (Placement(transformation(extent={{-80,42},{-60,62}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeating substationHeating(
     redeclare package Medium = Medium,
-    heatDemand_max=3000,
+    heatDemand_max=30000,
     deltaT_heatingSet(displayUnit="K") = 10,
     deltaT_heatingGridSet(displayUnit="K") = 5)
     annotation (Placement(transformation(extent={{4,-10},{28,12}})));

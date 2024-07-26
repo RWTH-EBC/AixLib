@@ -33,8 +33,10 @@ model SubstationHeating
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
   AixLib.Fluid.Sources.MassFlowSource_T heatingReturnBuilding(
     use_m_flow_in=true,

@@ -43,8 +43,8 @@ model SubstationHeatingCoolingFixDeltaT "Small example of substation for buildin
     deltaT_coolingSet(displayUnit="K") = 6,
     deltaT_heatingSet(displayUnit="K") = 6,
     deltaT_heatingGridSet(displayUnit="K") = 4,
-    coolingDemand_max=-2000,
-    heatDemand_max=4000)
+    coolingDemand_max=-20000,
+    heatDemand_max=40000)
     annotation (Placement(transformation(extent={{-22,-8},{16,18}})));
   Modelica.Blocks.Sources.TimeTable ColdDemand(table=[0,0; 3600,0; 3600,1500;
         7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000])
