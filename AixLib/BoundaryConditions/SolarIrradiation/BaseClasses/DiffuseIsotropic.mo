@@ -30,32 +30,32 @@ equation
   annotation (
     defaultComponentName="HDifTilIso",
     Documentation(info="<html>
- <p>
- This component computes the hemispherical diffuse irradiation on a tilted surface.
- The irradiation is composed of the diffuse horizontal solar irradiation and the irradiation
- that has been reflected by the ground. Both components are adjusted to take into account
- the tilt of the receiving surface.
- </p>
- <h4>References</h4>
- P. Ineichen, R. Perez and R. Seals (1987).
- <i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
- Solar Energy, 39(4): 301-305.
- </html>",revisions="<html>
- <ul>
- <li>
- June 6, 2012, by Wangda Zuo:<br/>
- Separated the contributions from the sky and the ground.
- </li>
- <li>
- May 24, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the hemispherical diffuse irradiation on a tilted surface.
+The irradiation is composed of the diffuse horizontal solar irradiation and the irradiation
+that has been reflected by the ground. Both components are adjusted to take into account
+the tilt of the receiving surface.
+</p>
+<h4>References</h4>
+P. Ineichen, R. Perez and R. Seals (1987).
+<i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
+Solar Energy, 39(4): 301-305.
+</html>", revisions="<html>
+<ul>
+<li>
+June 6, 2012, by Wangda Zuo:<br/>
+Separated the contributions from the sky and the ground.
+</li>
+<li>
+May 24, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textColor={0,0,255})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end DiffuseIsotropic;

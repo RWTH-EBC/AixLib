@@ -29,19 +29,19 @@ model ExportedModel "Model to be exported as an FMU"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
 annotation(Documentation(info="<html>
- <p>
- This is an example of a model that would be compiled in BOPTEST if the
- original model were using the signal exchange blocks. Note that inputs
- are added to activate and set values of control signals that can be overwritten
- and outputs are added to read signals from the read blocks.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 17, 2018, by David Blum:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is an example of a model that would be compiled in BOPTEST if the
+original model were using the signal exchange blocks. Note that inputs
+are added to activate and set values of control signals that can be overwritten
+and outputs are added to read signals from the read blocks.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 17, 2018, by David Blum:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ExportedModel;

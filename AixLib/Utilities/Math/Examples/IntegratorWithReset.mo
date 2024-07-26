@@ -56,35 +56,35 @@ annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/IntegratorWithReset.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Math.IntegratorWithReset\">
- AixLib.Utilities.Math.IntegratorWithReset</a>
- with and without reset, and with different start values
- and reset values.
- </p>
- <p>
- The integrator <code>intWitRes1</code> is triggered by a sample trigger
- which becomes true at <i>t=0</i>, while <code>intWitRes2</code> is triggered
- by a boolean pulse with is true at <i>t=0</i>.
- Hence, <code>intWitRes1</code> starts with <code>y(0)=y_reset</code> while
- <code>intWitRes2</code> starts with <code>y(0)=y_start</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Added more test cases and adapted model to new parameterization.
- </li>
- <li>
- August 23, 2016, by Michael Wetter:<br/>
- Extended example to test initialization.
- </li>
- <li>
- August 2, 2016, by Philipp Mehrfeld:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Math.IntegratorWithReset\">
+AixLib.Utilities.Math.IntegratorWithReset</a>
+with and without reset, and with different start values
+and reset values.
+</p>
+<p>
+The integrator <code>intWitRes1</code> is triggered by a sample trigger
+which becomes true at <i>t=0</i>, while <code>intWitRes2</code> is triggered
+by a boolean pulse with is true at <i>t=0</i>.
+Hence, <code>intWitRes1</code> starts with <code>y(0)=y_reset</code> while
+<code>intWitRes2</code> starts with <code>y(0)=y_start</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+September 29, 2016, by Michael Wetter:<br/>
+Added more test cases and adapted model to new parameterization.
+</li>
+<li>
+August 23, 2016, by Michael Wetter:<br/>
+Extended example to test initialization.
+</li>
+<li>
+August 2, 2016, by Philipp Mehrfeld:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end IntegratorWithReset;

@@ -5,8 +5,8 @@ block IntegratorWithReset "Output the integral of the input signal"
   parameter Real k(unit="1")=1 "Integrator gain";
 
   /* InitialState is the default, because it was the default in Modelica 2.2
-      and therefore this setting is backward compatible
-   */
+     and therefore this setting is backward compatible
+  */
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3,4: initial output)"
     annotation(Evaluate=true,
@@ -76,76 +76,76 @@ equation
   annotation (
 defaultComponentName="intWitRes",
     Documentation(info="<html>
- <p>
- This model is similar to
- <a href=\"modelica://Modelica.Blocks.Continuous.Integrator\">
- Modelica.Blocks.Continuous.Integrator</a>
- except that it optionally allows to reset the output <code>y</code>
- of the integrator.
- </p>
- <p>
- The output of the integrator can be reset as follows:
- </p>
- <ul>
- <li>
- If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
- then the integrator is never reset.
- </li>
- <li>
- If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
- input signal <code>trigger</code> is enabled. Whenever the value of
- this input changes from <code>false</code> to <code>true</code>,
- the integrator is reset by setting <code>y</code>
- to the value of the parameter <code>y_reset</code>.
- </li>
- <li>
- If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
- input signal <code>trigger</code> is enabled. Whenever the value of
- this input changes from <code>false</code> to <code>true</code>,
- the integrator is reset by setting <code>y</code>
- to the value of the input signal <code>y_reset_in</code>.
- </li>
- </ul>
- <p>
- See <a href=\"modelica://AixLib.Utilities.Math.Examples.IntegratorWithReset\">
- AixLib.Utilities.Math.Examples.IntegratorWithReset</a> for an example.
- </p>
- <h4>Implementation</h4>
- <p>
- To adjust the icon layer, the code of
- <a href=\"modelica://Modelica.Blocks.Continuous.Integrator\">
- Modelica.Blocks.Continuous.Integrator</a>
- has been copied into this model rather than extended.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- November 1, 2016, by Michael Wetter:<br/>
- Corrected wrong annotation for <code>y_reset</code>,
- and made rendering of <code>y_reset_in</code> conditional.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/562\">#562</a>.
- </li>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Refactored model to use a <code>type</code> for configuration
- of the integrator reset.
- </li>
- <li>
- August 9, 2016, by Michael Wetter:<br/>
- Reformulated model using a conditional connector to use the same
- design pattern as is used in other models.
- </li>
- <li>
- August 9, 2016, by Michael Wetter:<br/>
- Revised model.
- </li>
- <li>
- July 18, 2016, by Philipp Mehrfeld:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model is similar to
+<a href=\"modelica://Modelica.Blocks.Continuous.Integrator\">
+Modelica.Blocks.Continuous.Integrator</a>
+except that it optionally allows to reset the output <code>y</code>
+of the integrator.
+</p>
+<p>
+The output of the integrator can be reset as follows:
+</p>
+<ul>
+<li>
+If <code>reset = AixLib.Types.Reset.Disabled</code>, which is the default,
+then the integrator is never reset.
+</li>
+<li>
+If <code>reset = AixLib.Types.Reset.Parameter</code>, then a boolean
+input signal <code>trigger</code> is enabled. Whenever the value of
+this input changes from <code>false</code> to <code>true</code>,
+the integrator is reset by setting <code>y</code>
+to the value of the parameter <code>y_reset</code>.
+</li>
+<li>
+If <code>reset = AixLib.Types.Reset.Input</code>, then a boolean
+input signal <code>trigger</code> is enabled. Whenever the value of
+this input changes from <code>false</code> to <code>true</code>,
+the integrator is reset by setting <code>y</code>
+to the value of the input signal <code>y_reset_in</code>.
+</li>
+</ul>
+<p>
+See <a href=\"modelica://AixLib.Utilities.Math.Examples.IntegratorWithReset\">
+AixLib.Utilities.Math.Examples.IntegratorWithReset</a> for an example.
+</p>
+<h4>Implementation</h4>
+<p>
+To adjust the icon layer, the code of
+<a href=\"modelica://Modelica.Blocks.Continuous.Integrator\">
+Modelica.Blocks.Continuous.Integrator</a>
+has been copied into this model rather than extended.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+November 1, 2016, by Michael Wetter:<br/>
+Corrected wrong annotation for <code>y_reset</code>,
+and made rendering of <code>y_reset_in</code> conditional.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/562\">#562</a>.
+</li>
+<li>
+September 29, 2016, by Michael Wetter:<br/>
+Refactored model to use a <code>type</code> for configuration
+of the integrator reset.
+</li>
+<li>
+August 9, 2016, by Michael Wetter:<br/>
+Reformulated model using a conditional connector to use the same
+design pattern as is used in other models.
+</li>
+<li>
+August 9, 2016, by Michael Wetter:<br/>
+Revised model.
+</li>
+<li>
+July 18, 2016, by Philipp Mehrfeld:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100.0,-100.0},{100.0,100.0}}),
@@ -172,6 +172,6 @@ Icon(coordinateSystem(
             extent={{70,-14},{370,26}},
           textColor={0,0,0},
           horizontalAlignment=TextAlignment.Left,
-          textString="y")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="y")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end IntegratorWithReset;

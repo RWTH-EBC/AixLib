@@ -48,18 +48,18 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/PropyleneGlycolWaterDerivativeCheck.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This example checks whether the function derivative
- is implemented correctly. If the derivative implementation
- is not correct, the model will stop with an assert statement.
- </p>
- </html>",  revisions="<html>
- <ul>
- <li>
- March 13, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example checks whether the function derivative
+is implemented correctly. If the derivative implementation
+is not correct, the model will stop with an assert statement.
+</p>
+</html>",   revisions="<html>
+<ul>
+<li>
+March 13, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PropyleneGlycolWaterDerivativeCheck;

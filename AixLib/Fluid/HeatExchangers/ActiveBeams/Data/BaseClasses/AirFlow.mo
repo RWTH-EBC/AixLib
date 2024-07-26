@@ -7,28 +7,28 @@ record AirFlow "Record for primary air parameters"
     "Normalized performance factor at these flow rates";
 
   annotation (Documentation(info="<html>
- <p>
- Data record for performance data that describe the air volume flow rate versus
- the change in the rate of heating or cooling.
- </p>
- <p>
- The normamlized volume flow rate <i>r<sub>V</sub></i> must be strictly increasing, i.e.,
- <i>r<sub>V</sub><sup>i</sup> &lt; r<sub>V</sub><sup>i+1</sup></i>.
- Both vectors, <i>r<sub>V</sub></i> and <i>f</i>
- must have the same size.
- </p>
- </html>",
+<p>
+Data record for performance data that describe the air volume flow rate versus
+the change in the rate of heating or cooling.
+</p>
+<p>
+The normamlized volume flow rate <i>r<sub>V</sub></i> must be strictly increasing, i.e.,
+<i>r<sub>V</sub><sup>i</sup> &lt; r<sub>V</sub><sup>i+1</sup></i>.
+Both vectors, <i>r<sub>V</sub></i> and <i>f</i>
+must have the same size.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 13, 2016, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- May 20, 2016, by Alessandro Maccarini:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 13, 2016, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+May 20, 2016, by Alessandro Maccarini:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end AirFlow;
