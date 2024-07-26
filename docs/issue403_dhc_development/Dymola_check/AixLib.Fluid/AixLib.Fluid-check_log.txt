@@ -1187,340 +1187,6 @@ Check of class aborted.
 Warning: WARNINGS have been issued.
 
 
-Error in model:  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling 
-Check of <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling</a>:
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
- Component context: vol.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
- Component context: vol1.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
- Component context: pumpCooling.vol.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
- Component context: chiller.con.vol.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Sources/BaseClasses/PartialSource.mo, line 37
- Component context: coolingReturnBuilding.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Sources/BaseClasses/PartialSource.mo, line 37
- Component context: coolingSupplyBuilding.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Check is assuming: coolingDemand_max = 0
-Warning: Non-literal value.
-In nominal attribute for vol.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol1.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol1.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol1.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol1.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.vol.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.vol.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.preSou.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.preSou.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.preSou.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.preSou.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.senMasFlo.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.senMasFlo.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.senMasFlo.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.senMasFlo.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.port_a1.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.port_a1.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.port_b1.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.port_b1.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.port_a2.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.port_a2.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.port_b2.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.port_b2.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.con.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.con.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.con.vol.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for chiller.con.vol.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.vol.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for chiller.con.preDro.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.preDro.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.con.preDro.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.preDro.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.preDro.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.preDro.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.preDro.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.preDro.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.outCon.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.outCon.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.eva.outCon.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.eva.outCon.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for coolingReturnBuilding.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class coolingReturnBuilding.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 126
-Warning: Non-literal value.
-In nominal attribute for coolingSupplyBuilding.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class coolingSupplyBuilding.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 126
-Warning: Non-literal value.
-In nominal attribute for senTemChiOut.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class senTemChiOut.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for senTemChiOut.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class senTemChiOut.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for vol.dynBal.hOut.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
-Used in component <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling#$vol:dynBal">vol.dynBal</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
-Warning: Non-literal value.
-In nominal attribute for vol.dynBal.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol.dynBal.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol.dynBal.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol.dynBal.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol1.dynBal.hOut.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
-Used in component <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling#$vol1:dynBal">vol1.dynBal</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
-Warning: Non-literal value.
-In nominal attribute for vol1.dynBal.ports[1].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol1.dynBal.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for vol1.dynBal.ports[2].h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class vol1.dynBal.ports.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.vol.steBal.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.vol.steBal.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for pumpCooling.vol.steBal.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class pumpCooling.vol.steBal.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: Non-literal value.
-In nominal attribute for chiller.con.vol.steBal.port_a.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.vol.steBal.port_a.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
-Warning: Non-literal value.
-In nominal attribute for chiller.con.vol.steBal.port_b.h_outflow.
-Ignoring nominal attribute.
-In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
-Used in base-class chiller.con.vol.steBal.port_b.FluidPort.
-  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
-Warning: The variable pumpCooling.m_flow_nominal=0 is not in range [1e-60,1e+100].
-Warning: Evaluation caused division by zero (chiller.QCon_flow_nominal=0),
- in 1/chiller.QCon_flow_nominal.
-Check of class aborted.
-Warning: WARNINGS have been issued.
-
-
 Error in model:  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT 
 Check of <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT</a>:
 Component type specifier BaseProperties is a partial type
@@ -2361,6 +2027,340 @@ Warning: Evaluation caused division by zero (heaPum.QEva_flow_nominal=0),
 Warning: Evaluation caused division by zero (chi.QCon_flow_nominal=0),
  in 1/chi.QCon_flow_nominal.
 Warning: The variable pumpCooling.m_flow_nominal=0 is not in range [1e-60,1e+100].
+Check of class aborted.
+Warning: WARNINGS have been issued.
+
+
+Error in model:  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling 
+Check of <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: vol1.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: pumpCooling.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: chiller.con.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Sources/BaseClasses/PartialSource.mo, line 37
+ Component context: coolingReturnBuilding.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Sources/BaseClasses/PartialSource.mo, line 37
+ Component context: coolingSupplyBuilding.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Check is assuming: coolingDemand_max = 0
+Warning: Non-literal value.
+In nominal attribute for vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol1.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol1.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol1.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol1.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.preSou.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.preSou.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.preSou.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.preSou.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.port_a1.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.port_a1.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.port_b1.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.port_b1.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.port_a2.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.port_a2.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.port_b2.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.port_b2.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.con.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.con.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.con.vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for chiller.con.vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for chiller.con.preDro.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.preDro.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.con.preDro.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.preDro.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.preDro.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.preDro.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.preDro.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.preDro.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.outCon.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.outCon.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.eva.outCon.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.eva.outCon.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for coolingReturnBuilding.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class coolingReturnBuilding.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 126
+Warning: Non-literal value.
+In nominal attribute for coolingSupplyBuilding.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class coolingSupplyBuilding.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 126
+Warning: Non-literal value.
+In nominal attribute for senTemChiOut.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTemChiOut.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senTemChiOut.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTemChiOut.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling#$vol:dynBal">vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol1.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling#$vol1:dynBal">vol1.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for vol1.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol1.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol1.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol1.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.vol.steBal.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.vol.steBal.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for pumpCooling.vol.steBal.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pumpCooling.vol.steBal.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for chiller.con.vol.steBal.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.vol.steBal.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for chiller.con.vol.steBal.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class chiller.con.vol.steBal.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: The variable pumpCooling.m_flow_nominal=0 is not in range [1e-60,1e+100].
+Warning: Evaluation caused division by zero (chiller.QCon_flow_nominal=0),
+ in 1/chiller.QCon_flow_nominal.
 Check of class aborted.
 Warning: WARNINGS have been issued.
 

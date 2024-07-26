@@ -1,112 +1,6 @@
 
 
 
-AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeatingCoolingFixDeltaT.mo
-1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
-
-2: Name 'heatDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
-
-3: Name 'coolingDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
-
-4: Name 'deltaT_heatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
-
-5: Name 'deltaT_coolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
-
-6: Name 'deltaT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
-
-7: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
-
-8: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-
-9: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{188,8},{208,28}})));
-
-10: Missing documentation, Name 'pumpHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heating. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false) annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
-
-11: Missing documentation, Name 'sourceHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Heating. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceHeating( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
-
-12: Missing documentation, Name 'T_return' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_return. Affected line: Modelica.Blocks.Sources.Constant T_return(k=deltaT_heatingSet) annotation (Placement(transformation(extent={{118,-102},{104,-88}})));
-
-13: Missing documentation, Name 'sinkHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Heating. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{-48,-64},{-28,-44}})));
-
-14: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet)) annotation (Placement(transformation(extent={{128,-56},{116,-44}})));
-
-15: Missing documentation, Name 'division' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division annotation (Placement(transformation(extent={{104,-44},{90,-30}})));
-
-16: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.Carnot_TCon heaPum( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=false, allowFlowReversal2=false, dTEva_nominal=-deltaT_heatingGridSet, dTCon_nominal=deltaT_heatingSet, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, use_eta_Carnot_nominal=true, show_T=true, etaCarnot_nominal=0.5, QCon_flow_nominal=heatDemand_max) annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
-
-17: Missing documentation, Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
-
-18: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet)) annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
-
-19: Name 'heatDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W") "Input for heat demand profile of substation" annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}), iconTransformation(extent={{240,70},{200,110}})));
-
-20: Name 'T_supplyHeatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Heating. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K") "Supply temperature of the heating circuit in the building" annotation ( Placement(transformation( extent={{20,20},{-20,-20}}, rotation=180, origin={-270,-138}), iconTransformation(extent={{240,114},{200,154}})));
-
-21: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
-
-22: Missing documentation. Affected line: Modelica.Blocks.Math.Add add1(k2=-1) annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
-
-23: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun( redeclare package Medium = Medium, tau=60, dp_nominal={0,dp_nominal,dp_nominal}, m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1}, portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering) annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
-
-24: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun1( redeclare package Medium = Medium, tau=60, dp_nominal={0,dp_nominal,dp_nominal}, m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1}, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering) annotation (Placement(transformation(extent={{134,-10},{114,10}})));
-
-25: Missing documentation. Affected line: AixLib.Fluid.Chillers.Carnot_TEva chi( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=false, allowFlowReversal2=false, dTEva_nominal=-deltaT_coolingSet, dTCon_nominal=deltaT_coolingGridSet, use_eta_Carnot_nominal=true, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, etaCarnot_nominal=0.4, QEva_flow_nominal=coolingDemand_max) annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
-
-26: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false) annotation (Placement(transformation(extent={{48,14},{28,34}})));
-
-27: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W") "Input for cooling demand profile of substation" annotation (Placement( transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-280,66}, {-240,106}})));
-
-28: Name 'T_supplyCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Cooling. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit = "K") "Supply temperature of cooling circuit in the building" annotation ( Placement(transformation(extent={{248,82},{208,122}}), iconTransformation(extent={{-280,112},{-240,152}})));
-
-29: Missing documentation, Name 'sourceCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Cooling. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceCooling( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{-70,44},{-50,64}})));
-
-30: Missing documentation, Name 'sinkCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Cooling. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkCooling(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{30,46},{10,66}})));
-
-31: Missing documentation. Affected line: Modelica.Blocks.Math.Add add2(k2=-1) annotation (Placement(transformation(extent={{82,102},{62,122}})));
-
-32: Missing documentation, Name 'division2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division2 annotation (Placement(transformation(extent={{48,100},{34,114}})));
-
-33: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=-(cp_default* deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{78,84},{66,96}})));
-
-34: Missing documentation, Name 'add3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: add3. Affected line: Modelica.Blocks.Math.Add add3( k2=+1) annotation (Placement(transformation(extent={{-120,100},{-100,120}})));
-
-35: Missing documentation, Name 'T_return1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_return. Affected line: Modelica.Blocks.Sources.Constant T_return1(k=deltaT_coolingSet) annotation (Placement(transformation(extent={{-158,76},{-138,96}})));
-
-36: Missing documentation, Name 'division3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division3. Affected line: Modelica.Blocks.Math.Division division3 annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
-
-37: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet)) annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
-
-38: Missing documentation, Name 'senMasFlo_GridHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Heat. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-
-39: Missing documentation, Name 'senMasFlo_GridCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Cool. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-
-40: Missing documentation, Name 'senMasFlo_HeatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Heat, Pump. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-
-41: Missing documentation, Name 'senMasFlo_chiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_chiller. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{78,14},{58,34}})));
-
-42: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(extent={{188,52},{168,72}})));
-
-
-AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationDirectHeatingDirectCooling.mo
-1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
-
-2: Name 'warmLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: warm, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT warmLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Warm Line of network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-66,-2})));
-
-3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Cold line of network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={84,42})));
-
-4: Missing documentation, Name 'T_coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_cold, Line. Affected line: Modelica.Blocks.Sources.Constant T_coldLine(k=12 + 273.15) annotation (Placement(transformation(extent={{38,72},{58,92}})));
-
-5: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-48,4},{-28,24}})));
-
-6: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{42,4},{62,24}})));
-
-7: Missing documentation, Name 'T_warmLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_warm, Line. Affected line: Modelica.Blocks.Sources.Constant T_warmLine(k=22 + 273.15) annotation (Placement(transformation(extent={{-98,-44},{-78,-24}})));
-
-8: Missing documentation, Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Sources.TimeTable coolingDemand(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000]) annotation (Placement(transformation(extent={{-82,36},{-62,56}})));Modelica.Blocks.Sources.TimeTable heatDemand(table=[0,2000; 3600,2000; 3600,0;7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500]) annotation (Placement(transformation(extent={{58,38},{38,58}})));
-
-9: Documentation too short, Name 'SubstationDirectHeatingDirectCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Substation, Direct, Heating, Direct, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCooling SubstationDirectHeatingDirectCooling( heatDemand_max=4000, deltaT_heatingSet(displayUnit="K") = 10, redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, deltaT_heatingGridSet(displayUnit="K") = 10, deltaT_coolingGridSet(displayUnit="K") = 10, m_flow_nominal=2, T_supplyHeatingSet=318.15) annotation (Placement(transformation(extent={{-18,-2},{30,30}})));
-
-
 AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeatingCoolingFixDeltaT.mo
 1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
 
@@ -127,82 +21,6 @@ AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeatin
 9: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=323.15) annotation (Placement(transformation(extent={{42,54},{22,74}})));
 
 10: Documentation too short, Name 'substationHeatingCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Heating, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingFixDeltaT substationHeatingCooling( redeclare package Medium = Medium, deltaT_coolingGridSet(displayUnit="K") = 4, deltaT_coolingSet(displayUnit="K") = 6, deltaT_heatingSet(displayUnit="K") = 6, deltaT_heatingGridSet(displayUnit="K") = 4, coolingDemand_max=-2000, heatDemand_max=4000) annotation (Placement(transformation(extent={{-22,-8},{16,18}})));
-
-
-AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationCooling.mo
-1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
-
-2: Name 'coolingDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
-
-3: Name 'deltaT_coolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
-
-4: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
-
-5: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{-130,6},{-110,26}})));
-
-6: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, T_start=288.15, tau=60) annotation (Placement(transformation(extent={{70,6},{90,26}})));
-
-7: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, addPowerToMedium=false, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, use_inputFilter=false) annotation (Placement(transformation(extent={{68,-10},{48,10}})));
-
-8: Missing documentation, Name 'chiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: chiller. Affected line: AixLib.Fluid.Chillers.Carnot_TEva chiller( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=true, use_eta_Carnot_nominal=true, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, allowFlowReversal2=false, etaCarnot_nominal=0.4, QEva_flow_nominal=coolingDemand_max, QEva_flow_min=coolingDemand_max) annotation (Placement(transformation( extent={{-9,9},{9,-9}}, rotation=180, origin={3,-5})));
-
-9: Name 'coolingReturnBuilding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Return, Building. Affected line: AixLib.Fluid.Sources.MassFlowSource_T coolingReturnBuilding( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) "Mass flow source represents return flow of buildings cooling system" annotation (Placement(transformation(extent={{-46,-64},{-26,-44}})));
-
-10: Missing documentation, Name 'deltaT_coolingBuildingSite' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Building, Site. Affected line: Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k= deltaT_coolingSet) annotation (Placement(transformation(extent={{-126,-94},{-106,-74}})));
-
-11: Name 'coolingSupplyBuilding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Supply, Building. Affected line: AixLib.Fluid.Sources.Boundary_pT coolingSupplyBuilding(redeclare package Medium = Medium, nPorts=1) "Mass flow sink represents supply flow of buildings cooling system" annotation (Placement(transformation(extent={{64,-64},{44,-44}})));
-
-12: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=-(cp_default*deltaT_coolingSet)) annotation (Placement(transformation(extent={{-96,-46},{-84,-34}})));
-
-13: Missing documentation, Name 'division' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division annotation (Placement(transformation(extent={{-72,-38},{-58,-24}})));
-
-14: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=-(cp_default*deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{-24,50},{-12,62}})));
-
-15: Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 "Calculation of mass flow rate needed from dhc grid for cooling" annotation (Placement(transformation(extent={{-2,64},{12,78}})));
-
-16: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W") "Input for cooling demand profile of substation (negative values for cooling)" annotation (Placement(transformation(extent={{-166,74},{-126,114}}), iconTransformation(extent={{-166,74},{-126,114}})));
-
-17: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-82,-6},{-66,8}})));
-
-18: Name 'T_supplyCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Cooling. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K") "Supply temperature of the cooling circuit in the building" annotation (Placement(transformation(extent={{-166,28},{-126,68}}), iconTransformation(extent={{-166,28},{-126,68}})));
-
-19: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2=+1) annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
-
-20: Missing documentation. Affected line: Modelica.Blocks.Math.Add add1(k2=-1) annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
-
-21: Name 'powerDemandChiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Chiller. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandChiller(unit="W") "Power demand of chiller" annotation (Placement(transformation(extent={{96,90},{116,110}}), iconTransformation(extent={{96,90},{116,110}})));
-
-22: Name 'powerDemandPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Pump. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandPump(unit="W") "Power demand of distribution pump" annotation (Placement(transformation(extent={{96,66},{116,86}}), iconTransformation(extent={{96,66},{116,86}})));
-
-23: Name 'powerDemandSubstation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Substation. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit="W") "Power demand of substation (sum of chiller and distribution pump)" annotation (Placement(transformation(extent={{96,42},{116,62}}), iconTransformation(extent={{96,42},{116,62}})));
-
-
-AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeatingCoolingVarDeltaT.mo
-1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
-
-2: Name 'SourceHot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source. Affected line: AixLib.Fluid.Sources.Boundary_pT SourceHot( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Hot line" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-76,-8})));
-
-3: Name 'SourceCold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Cold. Affected line: AixLib.Fluid.Sources.Boundary_pT SourceCold( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "cold line" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={74,-6})));
-
-4: Missing documentation, Name 'SourceTemperatureColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Temperature, Cold, Line. Affected line: Modelica.Blocks.Sources.Constant SourceTemperatureColdLine(k=289.15) annotation (Placement(transformation(extent={{118,18},{98,38}})));
-
-5: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-56,-18},{-36,2}})));
-
-6: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{24,-16},{44,4}})));
-
-7: Missing documentation, Name 'SourceTemperatureHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Temperature, Line. Affected line: Modelica.Blocks.Sources.Constant SourceTemperatureHotLine(k=293.15) annotation (Placement(transformation(extent={{-114,-42},{-94,-22}})));
-
-8: Missing documentation, Name 'SupplyTemperatureCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Supply, Temperature, Cooling. Affected line: Modelica.Blocks.Sources.Constant SupplyTemperatureCoolingSet(k=285.15) annotation (Placement(transformation(extent={{-80,76},{-60,96}})));
-
-9: Missing documentation, Name 'SupplyTemperatureHeaingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Supply, Temperature, Heaing. Affected line: Modelica.Blocks.Sources.Constant SupplyTemperatureHeaingSet(k=323.15) annotation (Placement(transformation(extent={{54,80},{34,100}})));
-
-10: Documentation too short, Name 'substationHeatingCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Heating, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT substationHeatingCooling( redeclare package Medium = Medium, heatDemand_max=4000, coolingDemand_max=-2000, deltaT_coolingSet(displayUnit="K") = 4, deltaT_heatingSet(displayUnit="K") = 4) annotation (Placement(transformation(extent={{-24,8},{10,32}})));
-
-11: Missing documentation, Name 'ColdDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Demand. Affected line: Modelica.Blocks.Sources.TimeTable ColdDemand(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000]) annotation (Placement(transformation(extent={{-80,48},{-60,68}})));Modelica.Blocks.Sources.TimeTable HeatDemand(table=[0,2000; 3600,2000; 3600,0;7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500]) annotation (Placement(transformation(extent={{54,48},{34,68}})));
-
-12: Missing documentation, Name 'dT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_cooling, Grid. Affected line: Modelica.Blocks.Sources.Ramp dT_coolingGridSet( height=2, duration=7200, offset=3, startTime=10800) annotation (Placement(transformation(extent={{-80,18},{-60,38}})));
-
-13: Missing documentation, Name 'dT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_heating, Grid. Affected line: Modelica.Blocks.Sources.Ramp dT_heatingGridSet( height=-3, duration=10800, offset=7, startTime=7200) annotation (Placement(transformation(extent={{56,18},{36,38}})));
 
 
 AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectHeatingDirectCoolingDHW.mo
@@ -301,6 +119,114 @@ AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectHeatingDi
 47: Missing documentation, Name 'const6' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const6. Affected line: Modelica.Blocks.Sources.Constant const6(k=0.1*m_flow_nominal) annotation (Placement(transformation(extent={{26,114},{38,126}})));
 
 
+AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationDirectHeatingDirectCooling.mo
+1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+
+2: Name 'warmLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: warm, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT warmLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Warm Line of network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-66,-2})));
+
+3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Cold line of network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={84,42})));
+
+4: Missing documentation, Name 'T_coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_cold, Line. Affected line: Modelica.Blocks.Sources.Constant T_coldLine(k=12 + 273.15) annotation (Placement(transformation(extent={{38,72},{58,92}})));
+
+5: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-48,4},{-28,24}})));
+
+6: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{42,4},{62,24}})));
+
+7: Missing documentation, Name 'T_warmLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_warm, Line. Affected line: Modelica.Blocks.Sources.Constant T_warmLine(k=22 + 273.15) annotation (Placement(transformation(extent={{-98,-44},{-78,-24}})));
+
+8: Missing documentation, Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Sources.TimeTable coolingDemand(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000]) annotation (Placement(transformation(extent={{-82,36},{-62,56}})));Modelica.Blocks.Sources.TimeTable heatDemand(table=[0,2000; 3600,2000; 3600,0;7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500]) annotation (Placement(transformation(extent={{58,38},{38,58}})));
+
+9: Documentation too short, Name 'SubstationDirectHeatingDirectCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Substation, Direct, Heating, Direct, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCooling SubstationDirectHeatingDirectCooling( heatDemand_max=4000, deltaT_heatingSet(displayUnit="K") = 10, redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, deltaT_heatingGridSet(displayUnit="K") = 10, deltaT_coolingGridSet(displayUnit="K") = 10, m_flow_nominal=2, T_supplyHeatingSet=318.15) annotation (Placement(transformation(extent={{-18,-2},{30,30}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeatingCoolingVarDeltaT.mo
+1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+
+2: Name 'SourceHot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source. Affected line: AixLib.Fluid.Sources.Boundary_pT SourceHot( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Hot line" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-76,-8})));
+
+3: Name 'SourceCold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Cold. Affected line: AixLib.Fluid.Sources.Boundary_pT SourceCold( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "cold line" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={74,-6})));
+
+4: Missing documentation, Name 'SourceTemperatureColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Temperature, Cold, Line. Affected line: Modelica.Blocks.Sources.Constant SourceTemperatureColdLine(k=289.15) annotation (Placement(transformation(extent={{118,18},{98,38}})));
+
+5: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-56,-18},{-36,2}})));
+
+6: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{24,-16},{44,4}})));
+
+7: Missing documentation, Name 'SourceTemperatureHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Temperature, Line. Affected line: Modelica.Blocks.Sources.Constant SourceTemperatureHotLine(k=293.15) annotation (Placement(transformation(extent={{-114,-42},{-94,-22}})));
+
+8: Missing documentation, Name 'SupplyTemperatureCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Supply, Temperature, Cooling. Affected line: Modelica.Blocks.Sources.Constant SupplyTemperatureCoolingSet(k=285.15) annotation (Placement(transformation(extent={{-80,76},{-60,96}})));
+
+9: Missing documentation, Name 'SupplyTemperatureHeaingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Supply, Temperature, Heaing. Affected line: Modelica.Blocks.Sources.Constant SupplyTemperatureHeaingSet(k=323.15) annotation (Placement(transformation(extent={{54,80},{34,100}})));
+
+10: Documentation too short, Name 'substationHeatingCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Heating, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT substationHeatingCooling( redeclare package Medium = Medium, heatDemand_max=4000, coolingDemand_max=-2000, deltaT_coolingSet(displayUnit="K") = 4, deltaT_heatingSet(displayUnit="K") = 4) annotation (Placement(transformation(extent={{-24,8},{10,32}})));
+
+11: Missing documentation, Name 'ColdDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Demand. Affected line: Modelica.Blocks.Sources.TimeTable ColdDemand(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000]) annotation (Placement(transformation(extent={{-80,48},{-60,68}})));Modelica.Blocks.Sources.TimeTable HeatDemand(table=[0,2000; 3600,2000; 3600,0;7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500]) annotation (Placement(transformation(extent={{54,48},{34,68}})));
+
+12: Missing documentation, Name 'dT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_cooling, Grid. Affected line: Modelica.Blocks.Sources.Ramp dT_coolingGridSet( height=2, duration=7200, offset=3, startTime=10800) annotation (Placement(transformation(extent={{-80,18},{-60,38}})));
+
+13: Missing documentation, Name 'dT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_heating, Grid. Affected line: Modelica.Blocks.Sources.Ramp dT_heatingGridSet( height=-3, duration=10800, offset=7, startTime=7200) annotation (Placement(transformation(extent={{56,18},{36,38}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectHeatingDirectCooling.mo
+1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+
+2: Name 'heatDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
+
+3: Name 'deltaT_heatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
+
+4: Name 'deltaT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
+
+5: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
+
+6: Name 'T_supplyHeatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Heating. Affected line: parameter Modelica.Units.SI.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
+
+7: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
+
+8: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{188,8},{208,28}})));
+
+9: Missing documentation, Name 'pumpHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heating. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating( redeclare package Medium = Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
+
+10: Missing documentation, Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
+
+11: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet)) annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
+
+12: Name 'heatDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W") "Input for heat demand profile of substation" annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}), iconTransformation(extent={{152,84},{112,124}})));
+
+13: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun( redeclare package Medium = Medium, dp_nominal={0,dp_nominal,dp_nominal}, portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering, m_flow_nominal=m_flow_nominal*{1,1,1}) annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
+
+14: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun1( redeclare package Medium = Medium, dp_nominal={0,dp_nominal,dp_nominal}, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering, m_flow_nominal=m_flow_nominal*{1,1,1}) annotation (Placement(transformation(extent={{136,-10},{116,10}})));
+
+15: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder del( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-24,24},{-4,44}})));
+
+16: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{48,14},{28,34}})));
+
+17: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W") "Input for cooling demand profile of substation" annotation (Placement( transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,66}, {-136,106}})));
+
+18: Missing documentation, Name 'division2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division2 annotation (Placement(transformation(extent={{48,100},{34,114}})));
+
+19: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=(cp_default*deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{78,84},{66,96}})));
+
+20: Missing documentation, Name 'senMasFlo_GridHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Heat. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
+
+21: Missing documentation, Name 'senMasFlo_GridCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Cool. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{152,-10},{172,10}})));
+
+22: Missing documentation, Name 'senMasFlo_HeatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Heat, Pump. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
+
+23: Missing documentation. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{78,14},{58,34}})));
+
+24: Missing documentation, Name 'prescribedHeatFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={-40,88})));
+
+25: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{22,-34},{42,-14}})));
+
+26: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-46,-34},{-26,-14}})));
+
+27: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder del1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-10,-24},{10,-44}})));
+
+28: Missing documentation, Name 'prescribedHeatFlow1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1 annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=-90, origin={-40,-84})));
+
+29: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(extent={{-178,-132},{-158,-112}})));
+
+
 AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectCooling.mo
 1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
@@ -343,6 +269,90 @@ AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectCooling.m
 20: Name 'mass_flow_heatExchangerHeating1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mass_flow_heat, Exchanger, Heating. Affected line: Modelica.Blocks.Logical.Switch mass_flow_heatExchangerHeating1 "calculation of mass flow through heat exchanger (heating)" annotation (Placement(transformation(extent={{-14,84},{6,104}})));
 
 21: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=m_flow_nominal) annotation (Placement(transformation(extent={{-50,48},{-38,60}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationDirectHeatingDirectCoolingDHW.mo
+1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+
+2: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=289.15) annotation (Placement(transformation(extent={{-52,72},{-32,92}})));
+
+3: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-56,-18},{-36,2}})));
+
+4: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{22,2},{42,22}})));
+
+5: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=273.15 + 27) annotation (Placement(transformation(extent={{-96,-84},{-76,-64}})));
+
+6: Missing documentation, Name 'timeTable1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Table. Affected line: Modelica.Blocks.Sources.TimeTable timeTable1(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000; 24000, 2000; 24000,0]) annotation (Placement(transformation(extent={{-98,2},{-78,22}})));Modelica.Blocks.Sources.TimeTable timeTable(table=[0,0; 24000,0; 24000,2000;34800,3000; 34800,0; 45600,0; 45600,4000; 63600,4000; 63600,0]) annotation (Placement(transformation(extent={{76,-30},{56,-10}})));
+
+7: Documentation too short, Name 'substationDirectHeatingDirectCoolingDHW' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Direct, Heating, Direct, Cooling, D, W. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW substationDirectHeatingDirectCoolingDHW( heatDemand_max=4000, deltaT_heatingSet(displayUnit="K") = 10, deltaT_coolingGridSet(displayUnit="K") = 6, redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, T_supplyDHWSet=333.15, T_returnSpaceHeatingSet=283.15, m_flow_nominal=0.1) annotation (Placement(transformation(extent={{-34,-2},{14,30}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeating.mo
+1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+
+2: Name 'hotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sources.Boundary_pT hotLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Supply of substation, represents warm line of dhc network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-54,0})));
+
+3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=false, nPorts=1) "Cool pipe of dhc network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={84,0})));
+
+4: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( amplitude=1000, f=1/3600, offset=2000, startTime=0) annotation (Placement(transformation(extent={{-80,72},{-60,92}})));
+
+5: Missing documentation, Name 'tempHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Line. Affected line: Modelica.Blocks.Sources.Ramp tempHotLine( height=10, duration=7200, startTime=3600, offset=293.15) annotation (Placement(transformation(extent={{-94,10},{-74,30}})));
+
+6: Missing documentation, Name 'step' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: step. Affected line: Modelica.Blocks.Sources.Step step( height=10, offset=313.15, startTime=18000) annotation (Placement(transformation(extent={{-80,42},{-60,62}})));
+
+7: Documentation too short, Name 'substationHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Heating. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeating substationHeating( redeclare package Medium = Medium, heatDemand_max=3000, deltaT_heatingSet(displayUnit="K") = 10, deltaT_heatingGridSet(displayUnit="K") = 5) annotation (Placement(transformation(extent={{4,-10},{28,12}})));
+
+8: Missing documentation, Name 'senTemHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemHotLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{-34,-10},{-14,10}})));
+
+9: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationCooling.mo
+1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
+
+2: Name 'coolingDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
+
+3: Name 'deltaT_coolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
+
+4: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
+
+5: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{-130,6},{-110,26}})));
+
+6: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, T_start=288.15, tau=60) annotation (Placement(transformation(extent={{70,6},{90,26}})));
+
+7: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, addPowerToMedium=false, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, use_inputFilter=false) annotation (Placement(transformation(extent={{68,-10},{48,10}})));
+
+8: Missing documentation, Name 'chiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: chiller. Affected line: AixLib.Fluid.Chillers.Carnot_TEva chiller( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=true, use_eta_Carnot_nominal=true, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, allowFlowReversal2=false, etaCarnot_nominal=0.4, QEva_flow_nominal=coolingDemand_max, QEva_flow_min=coolingDemand_max) annotation (Placement(transformation( extent={{-9,9},{9,-9}}, rotation=180, origin={3,-5})));
+
+9: Name 'coolingReturnBuilding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Return, Building. Affected line: AixLib.Fluid.Sources.MassFlowSource_T coolingReturnBuilding( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) "Mass flow source represents return flow of buildings cooling system" annotation (Placement(transformation(extent={{-46,-64},{-26,-44}})));
+
+10: Missing documentation, Name 'deltaT_coolingBuildingSite' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Building, Site. Affected line: Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k= deltaT_coolingSet) annotation (Placement(transformation(extent={{-126,-94},{-106,-74}})));
+
+11: Name 'coolingSupplyBuilding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Supply, Building. Affected line: AixLib.Fluid.Sources.Boundary_pT coolingSupplyBuilding(redeclare package Medium = Medium, nPorts=1) "Mass flow sink represents supply flow of buildings cooling system" annotation (Placement(transformation(extent={{64,-64},{44,-44}})));
+
+12: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=-(cp_default*deltaT_coolingSet)) annotation (Placement(transformation(extent={{-96,-46},{-84,-34}})));
+
+13: Missing documentation, Name 'division' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division annotation (Placement(transformation(extent={{-72,-38},{-58,-24}})));
+
+14: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=-(cp_default*deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{-24,50},{-12,62}})));
+
+15: Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 "Calculation of mass flow rate needed from dhc grid for cooling" annotation (Placement(transformation(extent={{-2,64},{12,78}})));
+
+16: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W") "Input for cooling demand profile of substation (negative values for cooling)" annotation (Placement(transformation(extent={{-166,74},{-126,114}}), iconTransformation(extent={{-166,74},{-126,114}})));
+
+17: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-82,-6},{-66,8}})));
+
+18: Name 'T_supplyCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Cooling. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K") "Supply temperature of the cooling circuit in the building" annotation (Placement(transformation(extent={{-166,28},{-126,68}}), iconTransformation(extent={{-166,28},{-126,68}})));
+
+19: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2=+1) annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
+
+20: Missing documentation. Affected line: Modelica.Blocks.Math.Add add1(k2=-1) annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
+
+21: Name 'powerDemandChiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Chiller. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandChiller(unit="W") "Power demand of chiller" annotation (Placement(transformation(extent={{96,90},{116,110}}), iconTransformation(extent={{96,90},{116,110}})));
+
+22: Name 'powerDemandPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Pump. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandPump(unit="W") "Power demand of distribution pump" annotation (Placement(transformation(extent={{96,66},{116,86}}), iconTransformation(extent={{96,66},{116,86}})));
+
+23: Name 'powerDemandSubstation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Substation. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit="W") "Power demand of substation (sum of chiller and distribution pump)" annotation (Placement(transformation(extent={{96,42},{116,62}}), iconTransformation(extent={{96,42},{116,62}})));
 
 
 AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeatingCoolingVarDeltaT.mo
@@ -439,40 +449,90 @@ AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeatingCoolingV
 46: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(extent={{188,52},{168,72}})));
 
 
-AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationCooling.mo
-1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeatingCoolingFixDeltaT.mo
+1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-2: Name 'hotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sources.Boundary_pT hotLine( redeclare package Medium = Medium, use_T_in=false, nPorts=1) "Return of substation, represents warm line of dhc network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-68,-16})));
+2: Name 'heatDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
 
-3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Cool pipe of dhc network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={82,24})));
+3: Name 'coolingDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
 
-4: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, startTime=0, amplitude=1000, offset=2000) annotation (Placement(transformation(extent={{-50,66},{-30,86}})));
+4: Name 'deltaT_heatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-5: Missing documentation, Name 'tempColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Cold, Line. Affected line: Modelica.Blocks.Sources.Ramp tempColdLine( height=5, duration=7200, offset=288.15, startTime=72000) annotation (Placement(transformation(extent={{44,46},{64,66}})));
+5: Name 'deltaT_coolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
 
-6: Missing documentation, Name 'step' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: step. Affected line: Modelica.Blocks.Sources.Step step( startTime=18000, height=-2, offset=283.15) annotation (Placement(transformation(extent={{-50,34},{-30,54}})));
+6: Name 'deltaT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
 
-7: Missing documentation, Name 'senTemHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemHotLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
+7: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-8: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+8: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
 
-9: Documentation too short, Name 'substationCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling substationCooling( coolingDemand_max=-3000, deltaT_coolingSet(displayUnit="K") = 6, deltaT_coolingGridSet(displayUnit="K") = 4, redeclare package Medium = Medium) annotation (Placement(transformation(extent={{6,-10},{30,12}})));
+9: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{188,8},{208,28}})));
 
+10: Missing documentation, Name 'pumpHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heating. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false) annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
 
-AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationDirectHeatingDirectCoolingDHW.mo
-1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
+11: Missing documentation, Name 'sourceHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Heating. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceHeating( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
 
-2: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=289.15) annotation (Placement(transformation(extent={{-52,72},{-32,92}})));
+12: Missing documentation, Name 'T_return' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_return. Affected line: Modelica.Blocks.Sources.Constant T_return(k=deltaT_heatingSet) annotation (Placement(transformation(extent={{118,-102},{104,-88}})));
 
-3: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-56,-18},{-36,2}})));
+13: Missing documentation, Name 'sinkHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Heating. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkHeating(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{-48,-64},{-28,-44}})));
 
-4: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{22,2},{42,22}})));
+14: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet)) annotation (Placement(transformation(extent={{128,-56},{116,-44}})));
 
-5: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=273.15 + 27) annotation (Placement(transformation(extent={{-96,-84},{-76,-64}})));
+15: Missing documentation, Name 'division' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division annotation (Placement(transformation(extent={{104,-44},{90,-30}})));
 
-6: Missing documentation, Name 'timeTable1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Table. Affected line: Modelica.Blocks.Sources.TimeTable timeTable1(table=[0,0; 3600,0; 3600,1500;7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000; 24000, 2000; 24000,0]) annotation (Placement(transformation(extent={{-98,2},{-78,22}})));Modelica.Blocks.Sources.TimeTable timeTable(table=[0,0; 24000,0; 24000,2000;34800,3000; 34800,0; 45600,0; 45600,4000; 63600,4000; 63600,0]) annotation (Placement(transformation(extent={{76,-30},{56,-10}})));
+16: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.Carnot_TCon heaPum( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=false, allowFlowReversal2=false, dTEva_nominal=-deltaT_heatingGridSet, dTCon_nominal=deltaT_heatingSet, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, use_eta_Carnot_nominal=true, show_T=true, etaCarnot_nominal=0.5, QCon_flow_nominal=heatDemand_max) annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
 
-7: Documentation too short, Name 'substationDirectHeatingDirectCoolingDHW' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Direct, Heating, Direct, Cooling, D, W. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationDirectHeatingDirectCoolingDHW substationDirectHeatingDirectCoolingDHW( heatDemand_max=4000, deltaT_heatingSet(displayUnit="K") = 10, deltaT_coolingGridSet(displayUnit="K") = 6, redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, T_supplyDHWSet=333.15, T_returnSpaceHeatingSet=283.15, m_flow_nominal=0.1) annotation (Placement(transformation(extent={{-34,-2},{14,30}})));
+17: Missing documentation, Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
+
+18: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet)) annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
+
+19: Name 'heatDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W") "Input for heat demand profile of substation" annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}), iconTransformation(extent={{240,70},{200,110}})));
+
+20: Name 'T_supplyHeatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Heating. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K") "Supply temperature of the heating circuit in the building" annotation ( Placement(transformation( extent={{20,20},{-20,-20}}, rotation=180, origin={-270,-138}), iconTransformation(extent={{240,114},{200,154}})));
+
+21: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
+
+22: Missing documentation. Affected line: Modelica.Blocks.Math.Add add1(k2=-1) annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
+
+23: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun( redeclare package Medium = Medium, tau=60, dp_nominal={0,dp_nominal,dp_nominal}, m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1}, portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering) annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
+
+24: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun1( redeclare package Medium = Medium, tau=60, dp_nominal={0,dp_nominal,dp_nominal}, m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1}, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering) annotation (Placement(transformation(extent={{134,-10},{114,10}})));
+
+25: Missing documentation. Affected line: AixLib.Fluid.Chillers.Carnot_TEva chi( redeclare package Medium1 = Medium, redeclare package Medium2 = Medium, allowFlowReversal1=false, allowFlowReversal2=false, dTEva_nominal=-deltaT_coolingSet, dTCon_nominal=deltaT_coolingGridSet, use_eta_Carnot_nominal=true, dp1_nominal=dp_nominal, dp2_nominal=dp_nominal, etaCarnot_nominal=0.4, QEva_flow_nominal=coolingDemand_max) annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
+
+26: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false) annotation (Placement(transformation(extent={{48,14},{28,34}})));
+
+27: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W") "Input for cooling demand profile of substation" annotation (Placement( transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-280,66}, {-240,106}})));
+
+28: Name 'T_supplyCoolingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Cooling. Affected line: Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit = "K") "Supply temperature of cooling circuit in the building" annotation ( Placement(transformation(extent={{248,82},{208,122}}), iconTransformation(extent={{-280,112},{-240,152}})));
+
+29: Missing documentation, Name 'sourceCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Cooling. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceCooling( use_m_flow_in=true, use_T_in=true, redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{-70,44},{-50,64}})));
+
+30: Missing documentation, Name 'sinkCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Cooling. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkCooling(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation(extent={{30,46},{10,66}})));
+
+31: Missing documentation. Affected line: Modelica.Blocks.Math.Add add2(k2=-1) annotation (Placement(transformation(extent={{82,102},{62,122}})));
+
+32: Missing documentation, Name 'division2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division2 annotation (Placement(transformation(extent={{48,100},{34,114}})));
+
+33: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=-(cp_default* deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{78,84},{66,96}})));
+
+34: Missing documentation, Name 'add3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: add3. Affected line: Modelica.Blocks.Math.Add add3( k2=+1) annotation (Placement(transformation(extent={{-120,100},{-100,120}})));
+
+35: Missing documentation, Name 'T_return1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_return. Affected line: Modelica.Blocks.Sources.Constant T_return1(k=deltaT_coolingSet) annotation (Placement(transformation(extent={{-158,76},{-138,96}})));
+
+36: Missing documentation, Name 'division3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division3. Affected line: Modelica.Blocks.Math.Division division3 annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
+
+37: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet)) annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
+
+38: Missing documentation, Name 'senMasFlo_GridHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Heat. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
+
+39: Missing documentation, Name 'senMasFlo_GridCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Cool. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{152,-10},{172,10}})));
+
+40: Missing documentation, Name 'senMasFlo_HeatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Heat, Pump. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
+
+41: Missing documentation, Name 'senMasFlo_chiller' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_chiller. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{78,14},{58,34}})));
+
+42: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(extent={{188,52},{168,72}})));
 
 
 AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeating.mo
@@ -525,81 +585,21 @@ AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationHeating.mo
 24: Name 'powerDemandSubstation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power, Demand, Substation. Affected line: Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit = "W") "Power demand of substation (sum of heat pump and distribution pump)" annotation (Placement(transformation(extent={{158,48},{178,68}}), iconTransformation(extent={{158,48},{178,68}})));
 
 
-AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationHeating.mo
+AixLib/Fluid/DistrictHeatingCooling/Demands/Examples/ClosedLoop/SubstationCooling.mo
 1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water "Fluid in the pipes";
 
-2: Name 'hotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sources.Boundary_pT hotLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Supply of substation, represents warm line of dhc network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-54,0})));
+2: Name 'hotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sources.Boundary_pT hotLine( redeclare package Medium = Medium, use_T_in=false, nPorts=1) "Return of substation, represents warm line of dhc network" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-68,-16})));
 
-3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=false, nPorts=1) "Cool pipe of dhc network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={84,0})));
+3: Name 'coldLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Line. Affected line: AixLib.Fluid.Sources.Boundary_pT coldLine( redeclare package Medium = Medium, use_T_in=true, nPorts=1) "Cool pipe of dhc network" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={82,24})));
 
-4: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( amplitude=1000, f=1/3600, offset=2000, startTime=0) annotation (Placement(transformation(extent={{-80,72},{-60,92}})));
+4: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, startTime=0, amplitude=1000, offset=2000) annotation (Placement(transformation(extent={{-50,66},{-30,86}})));
 
-5: Missing documentation, Name 'tempHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Line. Affected line: Modelica.Blocks.Sources.Ramp tempHotLine( height=10, duration=7200, startTime=3600, offset=293.15) annotation (Placement(transformation(extent={{-94,10},{-74,30}})));
+5: Missing documentation, Name 'tempColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Cold, Line. Affected line: Modelica.Blocks.Sources.Ramp tempColdLine( height=5, duration=7200, offset=288.15, startTime=72000) annotation (Placement(transformation(extent={{44,46},{64,66}})));
 
-6: Missing documentation, Name 'step' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: step. Affected line: Modelica.Blocks.Sources.Step step( height=10, offset=313.15, startTime=18000) annotation (Placement(transformation(extent={{-80,42},{-60,62}})));
+6: Missing documentation, Name 'step' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: step. Affected line: Modelica.Blocks.Sources.Step step( startTime=18000, height=-2, offset=283.15) annotation (Placement(transformation(extent={{-50,34},{-30,54}})));
 
-7: Documentation too short, Name 'substationHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Heating. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeating substationHeating( redeclare package Medium = Medium, heatDemand_max=3000, deltaT_heatingSet(displayUnit="K") = 10, deltaT_heatingGridSet(displayUnit="K") = 5) annotation (Placement(transformation(extent={{4,-10},{28,12}})));
+7: Missing documentation, Name 'senTemHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemHotLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
 
-8: Missing documentation, Name 'senTemHotLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemHotLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{-34,-10},{-14,10}})));
+8: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 
-9: Missing documentation, Name 'senTemColdLine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cold, Line. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTemColdLine(redeclare package Medium = Medium, m_flow_nominal=0.5) annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-
-
-AixLib/Fluid/DistrictHeatingCooling/Demands/ClosedLoop/SubstationDirectHeatingDirectCooling.mo
-1: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
-
-2: Name 'heatDemand_max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: parameter Modelica.Units.SI.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
-
-3: Name 'deltaT_heatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
-
-4: Name 'deltaT_heatingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_heating, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
-
-5: Name 'deltaT_coolingGridSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta, T_cooling, Grid. Affected line: parameter Modelica.Units.SI.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
-
-6: Name 'T_supplyHeatingSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_supply, Heating. Affected line: parameter Modelica.Units.SI.Temperature T_supplyHeatingSet "Set supply temperature fore space heating";
-
-7: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
-
-8: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder vol1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal, tau=60) annotation (Placement(transformation(extent={{188,8},{208,28}})));
-
-9: Missing documentation, Name 'pumpHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heating. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating( redeclare package Medium = Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
-
-10: Missing documentation, Name 'division1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division1 annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
-
-11: Missing documentation, Name 'const3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: const3. Affected line: Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet)) annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
-
-12: Name 'heatDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W") "Input for heat demand profile of substation" annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}), iconTransformation(extent={{152,84},{112,124}})));
-
-13: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun( redeclare package Medium = Medium, dp_nominal={0,dp_nominal,dp_nominal}, portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering, m_flow_nominal=m_flow_nominal*{1,1,1}) annotation (Placement(transformation(extent={{-156,10},{-136,-10}})));
-
-14: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.Junction jun1( redeclare package Medium = Medium, dp_nominal={0,dp_nominal,dp_nominal}, portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering, m_flow_nominal=m_flow_nominal*{1,1,1}) annotation (Placement(transformation(extent={{136,-10},{116,10}})));
-
-15: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder del( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-24,24},{-4,44}})));
-
-16: Missing documentation, Name 'pumpCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cooling. Affected line: AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling( redeclare package Medium = Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, addPowerToMedium=false, use_inputFilter=false, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{48,14},{28,34}})));
-
-17: Name 'coolingDemand' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Demand. Affected line: Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W") "Input for cooling demand profile of substation" annotation (Placement( transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,66}, {-136,106}})));
-
-18: Missing documentation, Name 'division2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division. Affected line: Modelica.Blocks.Math.Division division2 annotation (Placement(transformation(extent={{48,100},{34,114}})));
-
-19: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k=(cp_default*deltaT_coolingGridSet)) annotation (Placement(transformation(extent={{78,84},{66,96}})));
-
-20: Missing documentation, Name 'senMasFlo_GridHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Heat. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-
-21: Missing documentation, Name 'senMasFlo_GridCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Grid, Cool. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-
-22: Missing documentation, Name 'senMasFlo_HeatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flo_, Heat, Pump. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-
-23: Missing documentation. Affected line: AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{78,14},{58,34}})));
-
-24: Missing documentation, Name 'prescribedHeatFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={-40,88})));
-
-25: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{22,-34},{42,-14}})));
-
-26: Missing documentation. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium, m_flow_nominal=2) annotation (Placement(transformation(extent={{-46,-34},{-26,-14}})));
-
-27: Missing documentation. Affected line: AixLib.Fluid.Delays.DelayFirstOrder del1( nPorts=2, redeclare package Medium = Medium, m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-10,-24},{10,-44}})));
-
-28: Missing documentation, Name 'prescribedHeatFlow1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1 annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=-90, origin={-40,-84})));
-
-29: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(extent={{-178,-132},{-158,-112}})));
+9: Documentation too short, Name 'substationCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: substation, Cooling. Affected line: AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling substationCooling( coolingDemand_max=-3000, deltaT_coolingSet(displayUnit="K") = 6, deltaT_coolingGridSet(displayUnit="K") = 4, redeclare package Medium = Medium) annotation (Placement(transformation(extent={{6,-10},{30,12}})));
