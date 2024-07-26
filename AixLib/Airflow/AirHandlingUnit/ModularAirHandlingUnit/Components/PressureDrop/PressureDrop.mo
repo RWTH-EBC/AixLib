@@ -8,6 +8,6 @@ model PressureDrop
 
 equation
 
-  dp = a * (m_flow/rho)^b;
+  dp = dp_nominal * (m_flow/m_flow_nominal)^b;
 
 end PressureDrop;

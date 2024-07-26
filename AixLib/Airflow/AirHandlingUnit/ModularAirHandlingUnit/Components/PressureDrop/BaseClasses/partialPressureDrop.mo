@@ -3,7 +3,8 @@ partial model partialPressureDrop
 
         input Modelica.Units.SI.MassFlowRate m_flow;
         input Modelica.Units.SI.Density rho;
-        parameter Real a = 0.5;
+        parameter Modelica.Units.SI.PressureDifference dp_nominal;
+        parameter Modelica.Units.SI.MassFlowRate m_flow_nominal;
 
         output Modelica.Units.SI.Pressure dp;
 
