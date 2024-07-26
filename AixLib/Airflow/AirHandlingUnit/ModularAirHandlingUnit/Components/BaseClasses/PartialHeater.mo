@@ -3,14 +3,28 @@ partial model PartialHeater
   "BaseClass for heat exchangers in air handling units"
 
   // parameters
-  parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1006
+    "specific heat capacity of dry air"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860
+    "specific heat capacity of steam"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Density rho_air = 1.2
+    "Density of air"
+    annotation(Dialog(tab="Advanced"));
 
-  parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
+  parameter Boolean use_T_set=false
+    "if true, a set temperature is used to calculate the necessary heat flow rate";
 
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal = 45E3 "maximum heat output of heater at design point. Only used, if use_T_set = true" annotation (HideResult = (not use_T_set));
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal = 45E3
+    "maximum heat output of heater at design point. Only used, if use_T_set = true"
+    annotation (Dialog(enable=not use_T_set));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_nominal
+    "pressure drop at nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
 
   // constants
   constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
@@ -73,8 +87,11 @@ partial model PartialHeater
   replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);
 
-      PartialPressureDrop partialPressureDrop(m_flow = m_flow_airIn,
-      rho = rho_air);
+      PartialPressureDrop partialPressureDrop(
+        final m_flow = m_flow_airIn,
+        final rho = rho_air,
+        final dp_nominal = dp_nominal,
+        final m_flow_nominal = m_flow_nominal);
 
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
@@ -90,7 +107,7 @@ protected
   parameter Real Q_in=0 "dummy heat flow rate, if use_T_set = false";
   Modelica.Blocks.Interfaces.RealInput Q_in_internal "internal heat flow rate";
   Modelica.Blocks.Interfaces.RealInput T_intern "internal temperature";
-  Modelica.Blocks.Math.Max max
+  Modelica.Blocks.Math.Max max if use_T_set
     annotation (Placement(transformation(extent={{-18,74},{-8,84}})));
   Modelica.Blocks.Sources.Constant Q_nominal(k=Q_flow_nominal) if not use_T_set
     annotation (Placement(transformation(extent={{12,40},{32,60}})));
@@ -104,7 +121,7 @@ equation
   m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
 
   // heat flows
-  Q_flow = -(m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut);
+  Q_flow = m_flow_dryairOut * h_airOut - m_flow_dryairIn * h_airIn;
   Q = Q_flow;
 
   Q_flow = Q_in_internal;
