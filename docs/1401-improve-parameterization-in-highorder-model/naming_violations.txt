@@ -1,0 +1,65 @@
+
+
+
+AixLib/ThermalZones/HighOrder/Rooms/BaseClasses/PartialRoom.mo
+1: Name 'nPorts' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ports. Affected line: parameter Integer nPorts=0 "Number of fluid ports" annotation(Evaluate=true, Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+2: Name 'use_moisture_balance' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_moisture_balance. Affected line: parameter Boolean use_moisture_balance=false "Set to true to enable moisture gain balance in the rooms air" annotation (Dialog(group="Moist Air"));
+
+3: Name 'use_C_flow_input' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: C_flow_input. Affected line: parameter Boolean use_C_flow_input=true "Set to true to use an input connector for the trace substances. False indicates internal calculation" annotation(Dialog(enable=use_C_flow, group="Trace Substances"));
+
+4: Missing documentation, Name 'thermRoom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: therm. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (Placement( transformation(extent={{-20,12},{0,32}}), iconTransformation(extent={{-24, -10},{-4,10}})));
+
+5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.RadPort starRoom annotation (Placement(transformation( extent={{2,12},{22,32}}), iconTransformation(extent={{6,-10},{26,10}})));Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate( final room_V=room_V, final n50=n50, final e=e, final eps=eps, final c=cAir, final rho = denAir) if use_infiltEN12831 annotation (Placement(transformation(extent={{-30,-10},{-18,2}})));
+
+6: Missing documentation, Name 'AirExchangePort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Exchange, Port. Affected line: Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation (Placement( transformation( extent={{-13,-13},{13,13}}, rotation=0, origin={-112,80}), iconTransformation( extent={{-10,-9.5},{10,9.5}}, rotation=0, origin={-110,69.5})));
+
+7: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement( transformation( extent={{-6,5},{6,-5}}, rotation=90, origin={-7,-2})));Components.MoistAir.VarMoistAirExchange NaturalVentilation(final V=room_V) annotation (Placement(transformation(extent={{-34,-24},{-22,-12}})));Components.DryAir.DynamicVentilation dynamicVentilation( final HeatingLimit=HeatingLimit, final Max_VR=Max_VR, final Diff_toTempset=Diff_toTempset, final Tset=Tset) if withDynamicVentilation annotation (Placement(transformation(extent={{-30,-38},{-18,-26}})));
+
+8: Missing documentation, Name 'Tair' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tair. Affected line: Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair annotation (Placement(transformation(extent={{24,-6},{38,8}})));
+
+9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Fluid.MixingVolumes.MixingVolumeMoistAir airload( redeclare final package Medium = Medium, final p_start=p_start, final X_start=X_start, final C_start=C_start, final C_nominal=C_nominal, final mSenFac=mSenFac, final use_C_flow=use_C_flow, final nPorts=nPorts, final m_flow_nominal=room_V*6/3600*1.2, final V=room_V, final energyDynamics=energyDynamics, final massDynamics=massDynamics, final T_start=T_start) "Indoor air volume" annotation (Placement(transformation(extent={{18,-22},{-2,-2}})));
+
+10: Name 'ports' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ports. Affected line: Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts]( redeclare each final package Medium = Medium) "Auxiliary fluid inlets and outlets to indoor air volume" annotation ( Placement(transformation( extent={{-45,-12},{45,12}}, origin={-3,-100}),iconTransformation( extent={{-30.5,-8},{30.5,8}}, origin={0,-101.5})));
+
+11: Name 'ventHum' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: vent. Affected line: Modelica.Blocks.Interfaces.RealInput ventHum if use_moisture_balance "absolute humidity of ventilation air" annotation (Placement(transformation( extent={{-122,-48},{-100,-26}}), iconTransformation(extent={{-120,-46}, {-100,-26}})));
+
+12: Missing documentation, Name 'thermOutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: therm, Outside. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation (Placement(transformation(extent={{-110,90},{-90,110}})));
+
+13: Name 'h_fg' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_fg. Affected line: protected constant Modelica.Units.SI.SpecificEnergy h_fg= AixLib.Media.Air.enthalpyOfCondensingGas(273.15 + 37) "Latent heat of water vapor";
+
+
+AixLib/ThermalZones/HighOrder/Rooms/BaseClasses/PartialRoomParams.mo
+1: Name 'wallTypes' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall, Types. Affected line: replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls "Types of walls (contains multiple records)" annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
+
+2: Name 'energyDynamicsWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: energy, Dynamics, Walls. Affected line: parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab="Dynamics"));
+
+3: Documentation too short, Name 'T0_air' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T0_air. Affected line: parameter Modelica.Units.SI.Temperature T0_air=295.11 "Air" annotation (Dialog(tab="Initialization", group="Air volume of room"));
+
+4: Name 'TWalls_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Modelica.Units.SI.Temperature TWalls_start= Modelica.Units.Conversions.from_degC(16) "Initial temperature of all walls" annotation (Dialog(tab="Initialization", group="Walls"));
+
+5: Name 'radLongCalcMethod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Long, Calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer" annotation ( Evaluate=true, Dialog(tab="Inner walls", group="Longwave radiation", compact=true));
+
+6: Name 'T_ref' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_ref. Affected line: parameter Modelica.Units.SI.Temperature T_ref= Modelica.Units.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation" annotation (Dialog( tab="Inner walls", group="Longwave radiation", enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+
+7: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+8: Name 'CorrSolarGainWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Corr, Solar. Affected line: replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
+9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)));
+
+10: Name 'ratioSunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Sunblind. Affected line: parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8 "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind" annotation(Dialog(tab="Outer walls", group = "Sunblind", enable=use_sunblind));
+
+11: Name 'solIrrThreshold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold. Affected line: parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350 "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)" annotation (Dialog( tab="Outer walls", group="Sunblind", enable=use_sunblind));
+
+12: Name 'TOutAirLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Modelica.Units.SI.Temperature TOutAirLimit=293.15 "Temperature at which sunblind closes (see also solIrrThreshold)" annotation (Dialog( tab="Outer walls", group="Sunblind", enable=use_sunblind));
+
+13: Name 'e' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: e. Affected line: parameter Real e=0.03 "Coefficient of windshield" annotation (Dialog(tab="Infiltration acc. to EN 12831 (airtightness)", enable=use_infiltEN12831));
+
+14: Name 'HeatingLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating, Limit. Affected line: parameter Modelica.Units.SI.Temperature HeatingLimit=288.15 "Outside temperature at which the heating activates" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+15: Name 'Max_VR' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Max_. Affected line: parameter Real Max_VR=10 "Maximal ventilation rate" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+16: Name 'Diff_toTempset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff_to, Tempset. Affected line: parameter Modelica.Units.SI.TemperatureDifference Diff_toTempset=2 "Difference to set temperature" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+17: Documentation too short, Name 'Tset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tset. Affected line: parameter Modelica.Units.SI.Temperature Tset=295.15 "Tset" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
