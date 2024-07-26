@@ -3,14 +3,27 @@ partial model PartialCooler
   "BaseClass for cooling heat exchangers in air handling units"
 
   // parameters
-  parameter Modelica.Units.SI.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water" annotation (HideResult = (use_T_set));
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1006
+    "specific heat capacity of dry air"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860
+    "specific heat capacity of steam"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Density rho_air = 1.2
+    "Density of air"
+    annotation(Dialog(tab="Advanced"));
 
   parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
 
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(min=0) = 45E3 "maximum cooling power of cooler (design point)";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(max=0) = -45E3
+    "maximum cooling power of cooler (design point), has to be negative"
+    annotation(Dialog(enable=not use_T_set));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_nominal
+    "pressure drop at nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
 
   // constants
   constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
@@ -18,7 +31,6 @@ partial model PartialCooler
   // Variables
   Modelica.Units.SI.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
   Modelica.Units.SI.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
-  Modelica.Units.SI.SpecificEnthalpy h_wat "specific enthalpy of extracted water";
 
   Modelica.Units.SI.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
   Modelica.Units.SI.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
@@ -28,8 +40,11 @@ partial model PartialCooler
   replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);
 
-      PartialPressureDrop partialPressureDrop(m_flow = m_flow_airIn,
-      rho = rho_air);
+      PartialPressureDrop partialPressureDrop(
+        final m_flow = m_flow_airIn,
+        final rho = rho_air,
+        final dp_nominal = dp_nominal,
+        final m_flow_nominal = m_flow_nominal);
 
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(
     final quantity = "MassFlowRate",
@@ -101,10 +116,11 @@ equation
   m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
   m_flow_dryairOut - m_flow_dryairIn = 0;
 
-  mb_flow = m_flow_dryairIn * (X_airIn - X_airOut); // condensate
+  mb_flow = m_flow_dryairIn * (X_airOut - X_airIn); // condensate
 
   // heat flows
-  Q_flow = m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut - mb_flow * h_wat;
+  // Q_flow = m_flow_dryairOut * h_airOut - m_flow_dryairIn * h_airIn + mb_flow * h_wat;
+  Q_flow = m_flow_dryairOut * h_airOut - m_flow_dryairIn * h_airIn;
   Q = Q_flow;
   if not use_T_set then
     Q_flow = u_intern * Q_flow_nominal;
@@ -117,7 +133,6 @@ equation
   // sepcific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
   h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
-  h_wat = c_wat * (T_airOut - 273.15);
 
   partialPressureDrop.dp = dp;
 
