@@ -16,8 +16,8 @@ model CorG_ASHRAE140
   parameter Real Rout = 0.0476 "Exterior combined heat transfer coefficient";
   parameter Real RairGab = 0.1588 "Heat transfer coefficient of air gap";
 
-  Real[n] AOI " Angle of incidence";
-  Real[n] AOI_help;
+  Real[n] inc " Angle of incidence";
+  Real[n] inc_help;
   Real[n] AOR "Angle of refraction";
   Real[n] RPERP "Perpendicular reflectance(component of polarization)";
   Real[n] RPAR "Parallel reflectance(component of polarization)";
@@ -45,15 +45,15 @@ model CorG_ASHRAE140
 equation
   for i in 1:n loop
     // Snell's Law
-    AOI[i] = SR_input[i].AOI; // in rad
-    AOI_help[i] = to_deg(SR_input[i].AOI); // angle of solar incidence in deg
-    y=AOI_help[i];
+    inc[i] = SR_input[i].inc; // in rad
+    inc_help[i] = to_deg(SR_input[i].inc); // angle of solar incidence in deg
+    y=inc_help[i];
 
-    AOR[i] = asin(sin(AOI[i])/INDRG); //  Angle of refraction in deg
+    AOR[i] = asin(sin(inc[i])/INDRG); //  Angle of refraction in deg
 
     //Fresnel Equations(Reflectance at 1 air to glass interface)
-    RPERP[i]*(sin(AOR[i]+(AOI[i])))^2 = (sin(AOR[i]-(AOI[i])))^2;
-    RPAR[i]*(tan(AOR[i]+(AOI[i])))^2 = (tan(AOR[i]- (AOI[i])))^2;
+    RPERP[i]*(sin(AOR[i]+(inc[i])))^2 = (sin(AOR[i]-(inc[i])))^2;
+    RPAR[i]*(tan(AOR[i]+(inc[i])))^2 = (tan(AOR[i]- (inc[i])))^2;
     R[i] = (RPERP[i]+RPAR[i])/2;
 
     //Fresnel Equations(Transmittance due to reflectance with several panes)

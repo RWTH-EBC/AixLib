@@ -65,7 +65,7 @@ equation
     solRadOut.I_diff = solRadIn.I_diff*gShaDir*redFacDifRad;
   end if;
   solRadOut.I_gr = solRadIn.I_gr;
-  solRadOut.AOI = solRadIn.AOI;
+  solRadOut.inc = solRadIn.inc;
 
   connect(shaLen.weaBus, weaBus) annotation (Line(
       points={{-40,0},{-74,0},{-74,80},{-100,80}},

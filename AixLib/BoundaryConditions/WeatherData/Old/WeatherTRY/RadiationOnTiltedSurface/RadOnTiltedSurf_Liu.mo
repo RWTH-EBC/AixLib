@@ -67,7 +67,7 @@ equation
   OutTotalRadTilted.I_diff = 0.5*(1 + cos(from_deg(Tilt)))*InDiffRadHor;
   OutTotalRadTilted.I_gr = GroundReflection*(InBeamRadHor + InDiffRadHor)*((1 - cos(from_deg(Tilt)))/2);
 
-  OutTotalRadTilted.AOI = Modelica.Math.acos(cos_theta); // in rad
+  OutTotalRadTilted.inc = Modelica.Math.acos(cos_theta); // in rad
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

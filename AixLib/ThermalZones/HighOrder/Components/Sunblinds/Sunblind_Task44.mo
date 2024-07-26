@@ -837,7 +837,7 @@ equation
        Rad_Out[i].I_dir=Rad_In[i].I_dir*gsunblind[i]*combiTimeTable.y[1];
        Rad_Out[i].I_diff=Rad_In[i].I_diff*gsunblind[i]*combiTimeTable.y[1];
        Rad_Out[i].I_gr=Rad_In[i].I_gr*gsunblind[i]*combiTimeTable.y[1];
-       Rad_Out[i].AOI=Rad_In[i].AOI;
+       Rad_Out[i].inc=Rad_In[i].inc;
        sunblindonoff[i]=1-gsunblind[i]*combiTimeTable.y[1];
      end for;
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})),
