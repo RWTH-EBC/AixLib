@@ -1,7 +1,6 @@
 within AixLib.Fluid.Storage.Examples;
 model StorageBoiler
   extends Modelica.Icons.Example;
-  import AixLib;
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -28,14 +27,11 @@ model StorageBoiler
     hConIn=1500,
     hConOut=15,
     redeclare package Medium = Medium,
-    hConHC1=300)                       annotation (Placement(transformation(extent={{6,-14},
-            {-18,16}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-56,-10},
-            {-36,10}})));
-  AixLib.Fluid.Sources.Boundary_pT
-                     boundary_p(          redeclare package Medium = Medium,
-      nPorts=1)                 annotation(Placement(transformation(extent={{-48,46},
-            {-28,66}})));
+    hConHC1=300) annotation (Placement(transformation(extent={{6,-14},{-18,16}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15)
+  annotation(Placement(transformation(extent={{-56,-10},{-36,10}})));
+  AixLib.Fluid.Sources.Boundary_pT boundary_p(redeclare package Medium = Medium,nPorts=1)
+	annotation(Placement(transformation(extent={{-48,46},{-28,66}})));
   Modelica.Blocks.Sources.Constant SetTemp(k=273.15 + 80) annotation (Placement(
         transformation(
         extent={{-7,-7},{7,7}},
@@ -46,23 +42,22 @@ model StorageBoiler
     m_flow_nominal=0.5,
     dp_nominal=200)
     annotation (Placement(transformation(extent={{18,-34},{38,-14}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance
-                                           hydraulicResistance(zeta = 1000,
+  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
     diameter=0.05,
-    m_flow_nominal=0.001)                                                   annotation(Placement(transformation(extent={{46,-34},
+    m_flow_nominal=0.001) annotation(Placement(transformation(extent={{46,-34},
             {66,-14}})));
-  AixLib.Fluid.Sources.Boundary_ph
-                      boundary_ph1(use_p_in = true, h = 0.8e5,
+  AixLib.Fluid.Sources.Boundary_ph boundary_ph1(use_p_in = true,
+	h = 0.8e5,
     nPorts=1,
-    redeclare package Medium = Medium)                         annotation(Placement(transformation(extent={{-66,-44},
-            {-46,-24}})));
-  Modelica.Blocks.Sources.Ramp ramp(duration = 1000,               height = 0.00001e5,
-    offset=101325)                                                                     annotation(Placement(transformation(extent={{-96,-36},
-            {-76,-16}})));
-  AixLib.Fluid.Sources.Boundary_pT
-                      boundary_ph2(nPorts=1, redeclare package Medium = Medium)
-                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-38,34})));
+    redeclare package Medium = Medium)
+	annotation(Placement(transformation(extent={{-66,-44},{-46,-24}})));
+  Modelica.Blocks.Sources.Ramp ramp(duration = 1000,
+	height = 0.00001e5,
+    offset=101325) annotation(Placement(transformation(extent={{-96,-36},{-76,-16}})));
+  AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1,
+					  redeclare package Medium = Medium)
+					  annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-38,34})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -79,10 +74,7 @@ model StorageBoiler
       m_flow_nominal=pipe1.m_flow_nominal,
     per(pressure(V_flow={0,pipe.m_flow_nominal/1000,pipe.m_flow_nominal/(1000*
             0.8)}, dp={dpSet.k/0.8,dpSet.k,0}), motorCooledByFluid=false))
-                                           annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=90,
-        origin={2,42})));
+		annotation (Placement(transformation(extent={{10,10},{-10,-10}},rotation=90,origin={2,42})));
   Modelica.Blocks.Sources.Constant dpSet(k=40000)
     "Constant set pressure difference for pump" annotation (Placement(
         transformation(
@@ -91,8 +83,8 @@ model StorageBoiler
         origin={37,27})));
 equation
   connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points={{38,-24},
-          {46,-24}},                                                                           color = {0, 127, 255}));
-  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-75,-26},{-68,-26}},      color = {0, 0, 127}));
+          {46,-24}},color = {0, 127, 255}));
+  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-75,-26},{-68,-26}},color = {0, 0, 127}));
   connect(boundary_ph1.ports[1], pipe1.port_a) annotation (Line(
       points={{-46,-34},{-36,-34}},
       color={0,127,255}));
@@ -119,13 +111,19 @@ equation
           28},{24,28},{24,42},{14,42}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos" "Simulate and plot"),
-    Documentation(info = "<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
+    Documentation(
+    info="<html>
 <p>
-  This is a simple example of a storage and a boiler.
+  This is a simple example of a storage and an ideal heater.<br/>
+  The ideal heater has a constant supply temperature and supplies heat
+  to a thermal energy water storage.<br/>
+  The pressure boundary is an idealized consumer with a pressure ramp.
 </p>
 <ul>
+  <li>
+    <i>November 14, 2022</i> by Laura Maier:<br/>
+    Added simulate and plot scripts, add docu and adapt parameters.
+  </li>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
