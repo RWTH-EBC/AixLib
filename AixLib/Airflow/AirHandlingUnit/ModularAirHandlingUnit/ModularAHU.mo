@@ -6,7 +6,8 @@ model ModularAHU "model of a modular air handling unit"
   parameter Boolean dehumidifying = false;
   parameter Boolean heating = false;
   parameter Boolean heatRecovery = false;
-  parameter Boolean use_PhiSet = false;
+  parameter Boolean usePhiSet = false;
+  parameter Boolean limPhiOda(start=false);
 
   parameter Modelica.Units.SI.Temperature Twat=373.15
     "water or steam temperature"
@@ -48,7 +49,7 @@ model ModularAHU "model of a modular air handling unit"
   Modelica.Blocks.Interfaces.RealInput T_oda(unit="K", start=288.15) "K"
     annotation (Placement(transformation(extent={{-174,26},{-146,54}}),
         iconTransformation(extent={{-168,36},{-160,44}})));
-  Modelica.Blocks.Interfaces.RealInput phi_oda(start=0.5)
+  Modelica.Blocks.Interfaces.RealInput phi_oda(min=0, max=1, start=0.5)
     "relative humidity of outdoor air" annotation (Placement(transformation(
           extent={{-174,-14},{-146,14}}), iconTransformation(extent={{-168,16},
             {-160,24}})));
@@ -63,9 +64,11 @@ model ModularAHU "model of a modular air handling unit"
     annotation (Placement(transformation(extent={{8,-48},{28,-28}})));
   Components.FanSimple fanSimple1(rho_air=rho, eta=eta_eta)
     annotation (Placement(transformation(extent={{-20,48},{-40,68}})));
-  Modelica.Blocks.Math.Gain gain(k=rho)
+protected
+  Modelica.Blocks.Math.Gain toMasFlo(k=rho)
     annotation (Placement(transformation(extent={{-140,74},{-128,86}})));
 
+public
   Modelica.Blocks.Interfaces.RealInput VflowEta(unit="m3/s") "m3/s" annotation (
      Placement(transformation(extent={{174,66},{146,94}}), iconTransformation(
           extent={{168,56},{160,64}})));
@@ -218,13 +221,18 @@ protected
     annotation (Placement(transformation(extent={{96,-36},{116,-16}})));
   // Controler
 public
-  Controler.ControlerHumidifier controlerHumidifier(use_PhiSet=true)
+  Controler.ControlerHumidifier controlerHumidifier(usePhiSet=true)
     annotation (Placement(transformation(extent={{46,-12},{54,-4}})));
   // Utilities
   ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum annotation (Placement(transformation(extent={{142,-88},
             {152,-78}})));
   Controler.ControlerCooler controlerCooler(activeDehumidifying=dehumidifying)
     annotation (Placement(transformation(extent={{-36,-90},{-16,-70}})));
+protected
+  Modelica.Blocks.Routing.RealPassThrough reaPasThrLimPhi if not limPhiOda
+    annotation (Placement(transformation(extent={{-150,-30},{-142,-22}})));
+  Modelica.Blocks.Nonlinear.Limiter limPhi(uMax=1, uMin=0) if limPhiOda
+    annotation (Placement(transformation(extent={{-146,12},{-136,22}})));
 protected
   Modelica.Blocks.Routing.RealPassThrough realPassThrough
     annotation (Placement(transformation(extent={{126,-84},{134,-76}})));
@@ -251,10 +259,6 @@ protected
     annotation (Placement(transformation(extent={{56,-86},{46,-96}})));
 equation
 
-  if phi_oda > 1 or phi_oda < 0 then
-    Modelica.Utilities.Streams.print("Warning: The relative humidity of outdoor air is not in the range [0, 1]");
-  end if;
-
   if not cooling and not dehumidifying then
     QCooIntern = 0;
   end if;
@@ -275,13 +279,13 @@ equation
   connect(QCooIntern,QflowC);
   connect(QHumIntern,QflowHum);
 
-  connect(VflowOda, gain.u)
+  connect(VflowOda, toMasFlo.u)
     annotation (Line(points={{-160,80},{-141.2,80}}, color={0,0,127}));
-  connect(gain.y, heatRecoverySystem.m_flow_airInOda) annotation (Line(points={{
-          -127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,0,127}));
+  connect(toMasFlo.y, heatRecoverySystem.m_flow_airInOda) annotation (Line(
+        points={{-127.4,80},{-120,80},{-120,20},{-95,20}}, color={0,0,127}));
   connect(T_oda, heatRecoverySystem.T_airInOda) annotation (Line(points={{-160,40},
           {-120,40},{-120,17},{-95,17}}, color={0,0,127}));
-  connect(gain.y, passThroughHrs.m_flow_airIn) annotation (Line(points={{-127.4,
+  connect(toMasFlo.y, passThroughHrs.m_flow_airIn) annotation (Line(points={{-127.4,
           80},{-120,80},{-120,-11},{-95,-11}}, color={0,0,127}));
   connect(T_oda, passThroughHrs.T_airIn) annotation (Line(points={{-160,40},{-120,
           40},{-120,-16},{-95,-16}}, color={0,0,127}));
@@ -416,8 +420,6 @@ equation
     annotation (Line(points={{-89,44},{-84,44},{-84,24}}, color={255,0,255}));
   connect(relToAbsHum.absHum, passThroughHrs.X_airIn) annotation (Line(points={
           {-125,-3},{-120,-3},{-120,-21},{-95,-21}}, color={0,0,127}));
-  connect(phi_oda, relToAbsHum.relHum)
-    annotation (Line(points={{-160,0},{-137,0},{-137,-0.4}}, color={0,0,127}));
   connect(relToAbsHum.absHum, heatRecoverySystem.X_airInOda) annotation (Line(
         points={{-125,-3},{-120,-3},{-120,14},{-95,14}}, color={0,0,127}));
   connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
@@ -445,6 +447,15 @@ equation
         points={{-73,-21},{-40,-21},{-40,-86},{-37,-86}}, color={0,0,127}));
   connect(heatRecoverySystem.X_airOutOda, controlerCooler.Xout) annotation (
       Line(points={{-73,4},{-40,4},{-40,-86},{-37,-86}}, color={0,0,127}));
+  connect(phi_oda, reaPasThrLimPhi.u) annotation (Line(points={{-160,1.77636e-15},
+          {-154,1.77636e-15},{-154,-26},{-150.8,-26}}, color={0,0,127}));
+  connect(reaPasThrLimPhi.y, relToAbsHum.relHum) annotation (Line(points={{-141.6,
+          -26},{-140,-26},{-140,0},{-138,0},{-138,-0.4},{-137,-0.4}}, color={0,0,
+          127}));
+  connect(phi_oda, limPhi.u) annotation (Line(points={{-160,0},{-154,0},{-154,17},
+          {-147,17}}, color={0,0,127}));
+  connect(limPhi.y, relToAbsHum.relHum) annotation (Line(points={{-135.5,17},{-130,
+          17},{-130,6},{-142,6},{-142,-0.4},{-137,-0.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));
