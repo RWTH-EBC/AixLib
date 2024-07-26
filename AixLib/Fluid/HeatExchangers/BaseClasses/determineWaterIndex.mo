@@ -22,27 +22,27 @@ algorithm
     "Did not find medium species 'water' in the medium model. " +
     "Change medium model.");
   annotation (Documentation(revisions="<html>
- <ul>
- <li>
- April 19, 2017, by Michael Wetter:<br/>
- Removed assertion as function is valid also for other values than <code>N==2</code>.
- </li>
- <li>
- March 17, 2017, by Michael O'Keefe:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Given an array of strings representing substance names, this function returns
- the integer index of the substance named \"water\" (case-insensitive).
- </p>
- 
- <p>
- This function is useful to automate lookup up the index of water within a media
- so as to avoid hard-coding or guessing what the index will be. Typically, this
- function would be run once at initialization time.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+April 19, 2017, by Michael Wetter:<br/>
+Removed assertion as function is valid also for other values than <code>N==2</code>.
+</li>
+<li>
+March 17, 2017, by Michael O'Keefe:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Given an array of strings representing substance names, this function returns
+the integer index of the substance named \"water\" (case-insensitive).
+</p>
+
+<p>
+This function is useful to automate lookup up the index of water within a media
+so as to avoid hard-coding or guessing what the index will be. Typically, this
+function would be run once at initialization time.
+</p>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end determineWaterIndex;

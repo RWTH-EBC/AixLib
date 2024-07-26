@@ -144,20 +144,20 @@ partial model EightPort "Partial model with eight ports"
   annotation (
     preferredView="info",
     Documentation(info="<html>
- <p>This model defines an interface for components with eight ports. The parameters <code>allowFlowReversal1,
- </code> <code>allowFlowReversal2</code>, <code>allowFlowReversal3</code> and <code>allowFlowReversal4</code> 
- may be used by models that extend this model to treat flow reversal. </p>
- <p>This model is identical to <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>, except that it has eight ports. </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>July 2014, by Damien Picard:<br/>First implementation. </li>
- </ul>
- </html>"),
+<p>This model defines an interface for components with eight ports. The parameters <code>allowFlowReversal1,
+</code> <code>allowFlowReversal2</code>, <code>allowFlowReversal3</code> and <code>allowFlowReversal4</code> 
+may be used by models that extend this model to treat flow reversal. </p>
+<p>This model is identical to <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>, except that it has eight ports. </p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>July 2014, by Damien Picard:<br/>First implementation. </li>
+</ul>
+</html>"),
     Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -169,6 +169,6 @@ partial model EightPort "Partial model with eight ports"
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
-                    graphics),
-  __Dymola_LockedEditing="Model from IBPSA");
+                    graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end EightPort;

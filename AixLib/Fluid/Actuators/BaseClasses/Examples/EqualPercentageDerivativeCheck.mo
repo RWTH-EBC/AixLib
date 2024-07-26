@@ -17,18 +17,18 @@ equation
  annotation(experiment(Tolerance=1e-6, StartTime=0, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/BaseClasses/Examples/EqualPercentageDerivativeCheck.mos" "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example checks whether the function derivative
- is implemented correctly. If the derivative implementation
- is not correct, the model will stop with an assert statement.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 6, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example checks whether the function derivative
+is implemented correctly. If the derivative implementation
+is not correct, the model will stop with an assert statement.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 6, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end EqualPercentageDerivativeCheck;

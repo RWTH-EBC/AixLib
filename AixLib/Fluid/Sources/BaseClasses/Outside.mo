@@ -1,11 +1,11 @@
 within AixLib.Fluid.Sources.BaseClasses;
 partial model Outside
   "Boundary that takes weather data, and optionally trace substances, as an input"
-  extends AixLib.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
+  extends AixLib.Fluid.Sources.BaseClasses.PartialAirSource(final verifyInputs=true);
 
   parameter Boolean use_C_in = false
     "Get the trace substances from the input connector"
-    annotation(Evaluate=true, HideResult=true);
+    annotation(Evaluate=true);
   parameter Medium.ExtraProperty C[Medium.nC](
     final quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
     "Fixed values of trace substances"
@@ -108,77 +108,89 @@ equation
           textColor={255,255,255},
           textString=DynamicSelect("", String(weaBus.TDryBul-273.15, format=".1f")))}),
     Documentation(info="<html>
- <p>
- This is the base class for models that describes boundary conditions for
- pressure, enthalpy, and species concentration that can be obtained
- from weather data, and that may be modified based on the wind pressure.
- </p>
- <p>If the parameter <code>use_C_in</code> is <code>false</code> (default option),
- the <code>C</code> parameter
- is used as the trace substance for flow that leaves the component, and the
- <code>C_in</code> input connector is disabled; if <code>use_C_in</code> is <code>true</code>,
- then the <code>C</code> parameter is ignored, and the value provided by the input connector is used instead.</p>
- <p>
- Note that boundary temperature,
- mass fractions and trace substances have only an effect if the mass flow
- is from the boundary into the port. If mass is flowing from
- the port into the boundary, the boundary definitions,
- with exception of boundary pressure, do not have an effect.
- </p>
- </html>",
+<p>
+This is the base class for models that describes boundary conditions for
+pressure, enthalpy, and species concentration that can be obtained
+from weather data, and that may be modified based on the wind pressure.
+</p>
+<p>If the parameter <code>use_C_in</code> is <code>false</code> (default option),
+the <code>C</code> parameter
+is used as the trace substance for flow that leaves the component, and the
+<code>C_in</code> input connector is disabled; if <code>use_C_in</code> is <code>true</code>,
+then the <code>C</code> parameter is ignored, and the value provided by the input connector is used instead.</p>
+<p>
+Note that boundary temperature,
+mass fractions and trace substances have only an effect if the mass flow
+is from the boundary into the port. If mass is flowing from
+the port into the boundary, the boundary definitions,
+with exception of boundary pressure, do not have an effect.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- February 25, 2020, by Michael Wetter:<br/>
- Changed icon to display its operating state.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
- </li>
- <li>
- November 14, 2019, by Michael Wetter:<br/>
- Removed duplicate connector.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
- </li>
- <li>
- January 14, 2019 by Jianjun Hu:<br/>
- Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
- AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
- </li>
- <li>
- May 30, 2017 by Jianjun Hu:<br/>
- Corrected <code>X_in_internal = zeros()</code> to be <code>X_in_internal = ones()</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/787\"> #787</a>.
- </li>
- <li>
- April, 25, 2016 by Marcus Fuchs:<br/>
- Introduced missing <code>each</code> keyword. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/454\"> #454</a>,
- to prevent a warning in OpenModelica.
- </li>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- Added <code>unit</code> and <code>quantity</code> attributes.
- </li>
- <li>
- May 30, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- October 26, 2011 by Michael Wetter:<br/>
- Introduced new base class to allow implementation of wind pressure for natural ventilation.
- </li>
- <li>
- April 27, 2011 by Michael Wetter:<br/>
- Revised implementation to allow medium model that do not have water vapor.
- </li>
- <li>
- Feb. 9, 2011 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 11, 2024, by Michael Wetter:<br/>
+Corrected use of <code>HideResult</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1850\">#1850</a>.
+</li>
+<li>
+January 09, 2023, by Jianjun Hu:<br/>
+Changed base class to constrain medium to moist air.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1681\">IBPSA, #1681</a>.
+</li>
+<li>
+February 25, 2020, by Michael Wetter:<br/>
+Changed icon to display its operating state.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+</li>
+<li>
+November 14, 2019, by Michael Wetter:<br/>
+Removed duplicate connector.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
+</li>
+<li>
+January 14, 2019 by Jianjun Hu:<br/>
+Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
+AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
+</li>
+<li>
+May 30, 2017 by Jianjun Hu:<br/>
+Corrected <code>X_in_internal = zeros()</code> to be <code>X_in_internal = ones()</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/787\"> #787</a>.
+</li>
+<li>
+April, 25, 2016 by Marcus Fuchs:<br/>
+Introduced missing <code>each</code> keyword. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/454\"> #454</a>,
+to prevent a warning in OpenModelica.
+</li>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Added <code>unit</code> and <code>quantity</code> attributes.
+</li>
+<li>
+May 30, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+October 26, 2011 by Michael Wetter:<br/>
+Introduced new base class to allow implementation of wind pressure for natural ventilation.
+</li>
+<li>
+April 27, 2011 by Michael Wetter:<br/>
+Revised implementation to allow medium model that do not have water vapor.
+</li>
+<li>
+Feb. 9, 2011 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Outside;

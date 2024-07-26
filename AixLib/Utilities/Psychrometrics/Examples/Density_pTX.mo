@@ -35,16 +35,16 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/Density_pTX.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This examples is a unit test for the density computation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 24, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This examples is a unit test for the density computation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 24, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Density_pTX;

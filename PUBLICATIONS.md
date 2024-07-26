@@ -61,6 +61,8 @@ ISBN: 978-1-71382-360-5
 
 ### HOM and ROM
 
+#### Comparison of Thermal Simulation Models with Different Levels of Detail for Non-Residential Buildings
+Jansen, David; Richarz, Jan; Vaeßen, Dominik; Hering, Dominik; Müller, Dirk (2022). In: Proceedings of BauSim Conference 2022:  9th Conference of IBPSA-Germany and Austria, 2022, Weimar, Germany. [PDF](https://publications.ibpsa.org/proceedings/bausim/2022/papers/bausim2022_Jansen_David.pdf), [DOI:10.26868/29761662.2022.42](https://doi.org/10.26868/29761662.2022.42)
 #### Not published yet
 Currently only an internal report with the title "*Verification and Comparison of High and Low Order Building Models from the Modelica Library AixLib using ASHRAE Standard 140*".
 

@@ -18,7 +18,7 @@ model CarnotVerifyEtaCarnot
     (TCon_nominal + TAppCon_nominal - (TEva_nominal-TAppEva_nominal))  "Coefficient of performance";
 
   parameter Modelica.Units.SI.Temperature TCon_nominal=273.15 + 30
-    "Nominal condensor temperature";
+    "Nominal condenser temperature";
 
   parameter Modelica.Units.SI.Temperature TEva_nominal=273.15 + 5
     "Nominal evaporator temperature";
@@ -169,20 +169,20 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/CarnotVerifyEtaCarnot.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This example verifies that the coefficient of performance is identical
- to the one specified for the nominal operating point if the current
- operating conditions are the same as the nominal conditions.
- It thus verifies the correct deviation of the nominal parameters
- for the situation where the Carnot effectiveness is specified as a parameter.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 15, 2017, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example verifies that the coefficient of performance is identical
+to the one specified for the nominal operating point if the current
+operating conditions are the same as the nominal conditions.
+It thus verifies the correct deviation of the nominal parameters
+for the situation where the Carnot effectiveness is specified as a parameter.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 15, 2017, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end CarnotVerifyEtaCarnot;

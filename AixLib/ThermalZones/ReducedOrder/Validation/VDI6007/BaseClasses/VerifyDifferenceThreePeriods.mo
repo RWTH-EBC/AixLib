@@ -77,50 +77,50 @@ equation
 annotation (
 defaultComponentName="verDif",
 Documentation(info="<html>
- <p>
- Block that outputs <code>satisfied = false</code> if
- <code>abs(u1-u2) &gt; threShold</code> within the prescribed time intervals,
- or <code>satisfied = true</code> otherwise.
- </p>
- <h4>Implementation</h4>
- <p>
- The test uses a hysteresis of plus/minus 1% in order to avoid
- chattering if <code>abs(u1-u2)</code> is near <code>threShold</code>.
- </p>
- <p>
- The difference <code>abs(u1-u2)</code> is filtered with a first order filter with time constant <code>tau</code>.
- This guards against rounding errors in event handling by upstream signal-generating blocks.
- </p>
- </html>",
+<p>
+Block that outputs <code>satisfied = false</code> if
+<code>abs(u1-u2) &gt; threShold</code> within the prescribed time intervals,
+or <code>satisfied = true</code> otherwise.
+</p>
+<h4>Implementation</h4>
+<p>
+The test uses a hysteresis of plus/minus 1% in order to avoid
+chattering if <code>abs(u1-u2)</code> is near <code>threShold</code>.
+</p>
+<p>
+The difference <code>abs(u1-u2)</code> is filtered with a first order filter with time constant <code>tau</code>.
+This guards against rounding errors in event handling by upstream signal-generating blocks.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- November 4, 2021, by Michael Wetter:<br/>
- Added filtering to guard against rounding errors in events of upstream signal generating blocks.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2713\">Buildings, #2713</a>.
- </li>
- <li>
- September 7, 2018, by Michael Wetter:<br/>
- Rewrote inequality to turn a state into a time event for Dymola 2019FD01.
- </li>
- <li>
- December 16, 2016, by Michael Wetter:<br/>
- Reformulated model for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/623\">
- https://github.com/ibpsa/modelica-ibpsa/issues/623</a>.
- </li>
- <li>
- October 10, 2013, by Michael Wetter:<br/>
- Reformulated model to allow scheduling of time events as opposed to state events,
- and removed <code>noEvent</code> operator which is not needed as these
- are only time events.
- </li>
- <li>
- June 29, 2016, by Moritz Lauster:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+November 4, 2021, by Michael Wetter:<br/>
+Added filtering to guard against rounding errors in events of upstream signal generating blocks.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2713\">Buildings, #2713</a>.
+</li>
+<li>
+September 7, 2018, by Michael Wetter:<br/>
+Rewrote inequality to turn a state into a time event for Dymola 2019FD01.
+</li>
+<li>
+December 16, 2016, by Michael Wetter:<br/>
+Reformulated model for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/623\">
+https://github.com/ibpsa/modelica-ibpsa/issues/623</a>.
+</li>
+<li>
+October 10, 2013, by Michael Wetter:<br/>
+Reformulated model to allow scheduling of time events as opposed to state events,
+and removed <code>noEvent</code> operator which is not needed as these
+are only time events.
+</li>
+<li>
+June 29, 2016, by Moritz Lauster:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end VerifyDifferenceThreePeriods;

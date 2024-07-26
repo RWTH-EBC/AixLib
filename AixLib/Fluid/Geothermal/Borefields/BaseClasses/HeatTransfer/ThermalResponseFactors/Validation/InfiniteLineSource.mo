@@ -24,17 +24,17 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=15.0),
     Documentation(info="<html>
- <p>
- This example demonstrates the use of the function for the evaluation of the
- infinite line source solution.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 12, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates the use of the function for the evaluation of the
+infinite line source solution.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 12, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end InfiniteLineSource;

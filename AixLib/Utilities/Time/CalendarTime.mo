@@ -46,23 +46,33 @@ model CalendarTime
         iconTransformation(extent={{100,-50},{120,-30}})));
 
 protected
+  final constant Real eps_time(final unit="s") = 1 "Small value for time";
   final constant Integer firstYear = 2010
     "First year that is supported, i.e. the first year in timeStampsNewYear[:]";
   final constant Integer lastYear = firstYear + size(timeStampsNewYear,1) - 1;
-  constant Modelica.Units.SI.Time timeStampsNewYear[22]={1262304000.0,
-      1293840000.0,1325376000.0,1356998400.0,1388534400.0,1420070400.0,
-      1451606400.0,1483228800.0,1514764800.0,1546300800.0,1577836800.0,
-      1609459200.0,1640995200.0,1672531200.0,1704067200.0,1735689600.0,
-      1767225600.0,1798761600.0,1830297600.0,1861920000.0,1893456000.0,
-      1924992000.0} "Epoch time stamps for new years day 2010 to 2031";
-  constant Boolean isLeapYear[21] = {
+  constant Modelica.Units.SI.Time timeStampsNewYear[42]={1262304000.0,
+    1293840000.0,1325376000.0,1356998400.0,1388534400.0,1420070400.0,
+    1451606400.0,1483228800.0,1514764800.0,1546300800.0,1577836800.0,
+    1609459200.0,1640995200.0,1672531200.0,1704067200.0,1735689600.0,
+    1767225600.0,1798761600.0,1830297600.0,1861920000.0,1893456000.0,
+    1924992000.0,1956528000.0,1988150400.0,2019686400.0,2051222400.0,
+    2082758400.0,2114380800.0,2145916800.0,2177452800.0,2208988800.0,
+    2240611200.0,2272147200.0,2303683200.0,2335219200.0,2366841600.0,
+    2398377600.0,2429913600.0,2461449600.0,2493072000.0,2524608000.0,
+    2556144000.0} "Epoch time stamps for new years day 2010 to 2051";
+  constant Boolean isLeapYear[41] = {
+    false, false, true, false,
+    false, false, true, false,
+    false, false, true, false,
+    false, false, true, false,
+    false, false, true, false,
     false, false, true, false,
     false, false, true, false,
     false, false, true, false,
     false, false, true, false,
     false, false, true, false,
     false}
-    "List of leap years starting from firstYear (2010), up to and including 2030";
+    "List of leap years starting from firstYear (2010), up to and including 2050";
   final constant Integer dayInMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
     "Number of days in each month";
   parameter Modelica.Units.SI.Time timOff(fixed=false) "Time offset";
@@ -104,7 +114,7 @@ initial algorithm
   assert(not zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom
          or yearRef>=firstYear and yearRef<=lastYear,
     "The value you chose for yearRef (=" + String(yearRef) + ") is outside of
-    the validity range of "+ String(firstYear) + " to " + String(lastYear) + ".");
+   the validity range of " + String(firstYear) + " to " + String(lastYear) + ".");
 
   // check if the day number exists for the chosen month and year
   assert(not zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom
@@ -149,11 +159,101 @@ initial algorithm
   elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2020 or
     zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2020 then
       timOff :=timeStampsNewYear[11];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2021 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2021 then
+      timOff :=timeStampsNewYear[12];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2022 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2022 then
+      timOff :=timeStampsNewYear[13];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2023 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2023 then
+      timOff :=timeStampsNewYear[14];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2024 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2024 then
+      timOff := timeStampsNewYear[14];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2025 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2025 then
+      timOff := timeStampsNewYear[15];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2026 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2026 then
+      timOff := timeStampsNewYear[16];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2027 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2027 then
+      timOff := timeStampsNewYear[17];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2028 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2028 then
+      timOff := timeStampsNewYear[18];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2029 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2029 then
+      timOff := timeStampsNewYear[19];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2030 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2030 then
+      timOff := timeStampsNewYear[20];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2031 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2031 then
+      timOff := timeStampsNewYear[21];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2032 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2032 then
+      timOff := timeStampsNewYear[22];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2033 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2033 then
+      timOff := timeStampsNewYear[23];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2034 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2034 then
+      timOff := timeStampsNewYear[24];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2035 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2035 then
+      timOff := timeStampsNewYear[25];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2036 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2036 then
+      timOff := timeStampsNewYear[26];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2037 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2037 then
+      timOff := timeStampsNewYear[27];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2038 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2038 then
+      timOff := timeStampsNewYear[28];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2039 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2039 then
+      timOff := timeStampsNewYear[29];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2040 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2040 then
+      timOff := timeStampsNewYear[30];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2041 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2041 then
+      timOff := timeStampsNewYear[31];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2042 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2042 then
+      timOff := timeStampsNewYear[32];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2043 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2043 then
+      timOff := timeStampsNewYear[33];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2044 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2044 then
+      timOff := timeStampsNewYear[34];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2045 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2045 then
+      timOff := timeStampsNewYear[35];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2046 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2046 then
+      timOff := timeStampsNewYear[36];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2047 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2047 then
+      timOff := timeStampsNewYear[37];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2048 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2048 then
+      timOff := timeStampsNewYear[38];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2049 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2049 then
+      timOff := timeStampsNewYear[39];
+  elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.NY2050 or
+    zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef == 2050 then
+      timOff := timeStampsNewYear[40];
   else
     timOff :=0;
     // this code should not be reachable
     assert(false, "No valid ZeroTime could be identified.
-    This is a bug, please submit a bug report.");
+   This is a bug, please submit a bug report.");
   end if;
 
   // add additional offset when using a custom date and time
@@ -166,30 +266,30 @@ initial algorithm
   assert(time + offset + timOff >= timeStampsNewYear[1],
     if zerTim == AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStamp then
       "Could not initialize date in the CalendarTime block.
-    You selected 1970 as the time=0 reference.
-    Therefore the simulation startTime must be at least "+ String(timeStampsNewYear[1]) + "."
+   You selected 1970 as the time=0 reference.
+   Therefore the simulation startTime must be at least " + String(timeStampsNewYear[1]) + "."
     elseif zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom then
       if yearRef <firstYear then
         "Could not initialize date in the CalendarTime block.
-    You selected a custom time=0 reference.
-    The minimum value for yearRef is then "+ String(firstYear) + " but your value is " + String(yearRef) + "."
+   You selected a custom time=0 reference.
+   The minimum value for yearRef is then " + String(firstYear) + " but your value is " + String(yearRef) + "."
       else
         "Could not initialize date in the CalendarTime block.
-    You selected a custom time=0 reference.
-    Possibly your startTime is too small."
+   You selected a custom time=0 reference.
+   Possibly your startTime is too small."
       else
         "Could not initialize date in the CalendarTime block.
-    Possibly your startTime is negative?");
+   Possibly your startTime is negative?");
 
   assert(time + offset + timOff < timeStampsNewYear[size(timeStampsNewYear,1)],
     if zerTim == AixLib.Utilities.Time.Types.ZeroTime.Custom and yearRef >= lastYear then
       "Could not initialize date in the CalendarTime block.
-    You selected a custom time=0 reference.
-    The maximum value for yearRef is then "+ String(lastYear) +
+   You selected a custom time=0 reference.
+   The maximum value for yearRef is then " + String(lastYear) +
    " but your value is " + String(yearRef) + "."
     else
        "Could not initialize date in the CalendarTime block.
-        Possibly your startTime is too large.");
+       Possibly your startTime is too large.");
 
   // iterate to find the year at initialization
 initial algorithm
@@ -221,25 +321,6 @@ equation
   // compute unix time step based on found offset
   unixTimeStampLocal = time + offset + timOff;
 
-  // update the year when passing the epoch time stamp of the next year
-  when unixTimeStampLocal >= timeStampsNewYear[pre(yearIndex)+1] then
-    yearIndex=pre(yearIndex)+1;
-    assert(yearIndex<=size(timeStampsNewYear,1),
-      "Index out of range for epoch vector: timeStampsNewYear needs to be extended beyond the year "
-        + String(firstYear+size(timeStampsNewYear,1)));
-    year = pre(year) + 1;
-  end when;
-
-  // update the month when passing the last day of the current month
-  when unixTimeStampLocal >= pre(epochLastMonth) +
-      (if pre(month)==2 and isLeapYear[yearIndex]
-        then 1 + dayInMonth[pre(month)] else dayInMonth[pre(month)])*3600*24 then
-    month = if pre(month) == 12 then 1 else pre(month) + 1;
-    epochLastMonth = pre(epochLastMonth) +
-      (if pre(month)==2 and isLeapYear[yearIndex]
-        then 1 + dayInMonth[pre(month)] else dayInMonth[pre(month)])*3600*24;
-  end when;
-
   // compute other variables that can be computed without using when() statements
   hourSampleTrigger =sample(hourSampleStart, 3600);
   when hourSampleTrigger then
@@ -261,6 +342,31 @@ equation
       daysSinceEpoch = pre(daysSinceEpoch) + 1;
       weekDay = if (pre(weekDay) == 7) then 1 else (pre(weekDay) + 1);
     end if;
+
+    // update the year when passing the epoch time stamp of the next year
+    if unixTimeStampLocal - timeStampsNewYear[pre(yearIndex)+1] > -eps_time then
+      yearIndex=pre(yearIndex)+1;
+      year = pre(year) + 1;
+    else
+      yearIndex = pre(yearIndex);
+      year = pre(year);
+    end if;
+    assert(yearIndex<=size(timeStampsNewYear,1),
+      "Index out of range for epoch vector: timeStampsNewYear needs to be extended beyond the year "
+        + String(firstYear+size(timeStampsNewYear,1)));
+
+    // update the month when passing the last day of the current month
+    if unixTimeStampLocal - ( pre(epochLastMonth) + (if pre(month)==2 and isLeapYear[yearIndex] then 1 + dayInMonth[pre(month)] else dayInMonth[pre(month)])*3600*24)  > -eps_time then
+      month = if pre(month) == 12 then 1 else pre(month) + 1;
+      // Use floor(0.1 + ...) to avoid floating point errors when accumulating epochLastMonth.
+      epochLastMonth = floor(0.1 + pre(epochLastMonth) +
+        (if pre(month)==2 and isLeapYear[yearIndex]
+          then 1 + dayInMonth[pre(month)] else dayInMonth[pre(month)])*3600*24);
+    else
+      month = pre(month);
+      epochLastMonth = pre(epochLastMonth);
+    end if;
+
     day = integer(1+floor((unixTimeStampLocal-epochLastMonth)/3600/24));
 
     firstDaySampling = false;
@@ -272,98 +378,111 @@ equation
   annotation (
     defaultComponentName="calTim",
   Documentation(revisions="<html>
- <ul>
- <li>
- November 6, 2019, by Milica Grahovac:<br/>
- Extended functionality to year 2030.
- </li>
- <li>
- August 20, 2019, by Filip Jorissen:<br/>
- Revised implementation such that the meaning of <code>time</code> is better explained
- and unix time stamps are correctly defined with respect to GMT.
- (see <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1192\">#1192</a>).
- </li>
- <li>
- February 14, 2019, by Damien Picard:<br/>
- Fix bug when non-zero offset by substracting the offset from hourSampleStart and daySampleStart
- (see <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1099\">#1099</a>).
- </li>
- <li>
- August 3, 2016, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This blocks computes the unix time stamp, date and time
- and the day of the week based on the Modelica
- variable <code>time</code>.
- As for the weather data reader
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
- AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>,
- <code>time=0</code> corresponds to January 1st at midnight
- in the <em>local time zone</em>.
- The computed outputs are thus also for the local time zone.
- The year for which <code>time=0</code> is determined by
- the parameter <code>zerTim</code>.
- </p>
- <h4>Main equations</h4>
- <p>
- The unix time stamp corresponding to the current time is computed.
- From this variables the corresponding, year, date and time are computed using functions
- such as <code>floor()</code> and <code>ceil()</code>.
- </p>
- <h4>Assumption and limitations</h4>
- <p>
- The implementation only supports date computations from year 2010 up to and including 2020.
- Daylight saving is not supported.
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- The user must define which time and date correspond to <code>time = 0</code>
- using the model parameters <code>zerTim</code>, and, if
- <code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.Custom</code>,
- the parameter <code>yearRef</code>.
- When <code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code>,
- <code>time</code> is defined with respect to GMT. This is different from the use
- of <code>time</code> in the weather data reader
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
- AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>, as the weather data files
- used with this reader are generally defined with <code>time</code> being local time.
- If  <code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code> is used,
- then the weather data files read by
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
- AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>
- must also be defined with GMT as the time stamp.
- 
- The user can choose from new year, midnight for a number of years:
- 2010 to 2030 and also 1970.
- The latter corresponds to a unix stamp of <i>0</i>.
- (Note that when choosing the reference time equal to 0 at 1970,
- the actual simulation time must be within the 2010-2030 range.
- For instance <code>startTime = 1262304000</code> corresponds
- to the simulation starting on the 1st of January 2010
- when setting <code>zerTim = ZeroTime.UnixTimeStamp</code>.
- This is within the 2010-2020 range and is therefore allowed.)
- The unix time stamp is formally defined as the number of
- seconds since midnight of new year in 1970 GMT.
- To output the correct unix time stamp, set <code>outputUnixTimeStamp=true</code>
- We then require the local time zone <code>timZon</code>
- (see <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
- AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>)
- since <code>time</code> uses the local time zone instead of GMT.
- We always output <code>unixTimeStampLocal</code>, which is a time stamp
- that uses the local time zone reference instead of GMT.
- </p>
- <h4>Implementation</h4>
- <p>
- The model was implemented such that no events are being generated for computing the minute of the day.
- The model also contains an implementation for setting <code>time=0</code>
- for any day and month other than January first.
- This is however not activated in the current model since these options may wrongly give the impression
- that it changes the time based on which the solar position is computed and TMY3 data are read.
- </p>
- </html>"),
+<ul>
+<li>
+March 8, 2024, by Jelger Jansen:<br/>
+Allow reference years later than 2020 and extend functionality to year 2050.<br/>
+This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1847\">#1847</a>.
+</li>  
+<li>
+December 19, 2022, by Michael Wetter:<br/>
+Refactored implementation to avoid wrong day number due to rounding errors that caused simultaneous events
+to not be triggered at the same time.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3199\">Buildings, #3199</a>.
+</li>
+<li>
+November 6, 2019, by Milica Grahovac:<br/>
+Extended functionality to year 2030.
+</li>
+<li>
+August 20, 2019, by Filip Jorissen:<br/>
+Revised implementation such that the meaning of <code>time</code> is better explained
+and unix time stamps are correctly defined with respect to GMT.
+(see <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1192\">#1192</a>).
+</li>
+<li>
+February 14, 2019, by Damien Picard:<br/>
+Fix bug when non-zero offset by substracting the offset from hourSampleStart and daySampleStart
+(see <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1099\">#1099</a>).
+</li>
+<li>
+August 3, 2016, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This blocks computes the unix time stamp, date and time
+and the day of the week based on the Modelica
+variable <code>time</code>.
+As for the weather data reader
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
+AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>,
+<code>time=0</code> corresponds to January 1st at midnight
+in the <em>local time zone</em>.
+The computed outputs are thus also for the local time zone.
+The year for which <code>time=0</code> is determined by
+the parameter <code>zerTim</code>.
+</p>
+<h4>Main equations</h4>
+<p>
+The unix time stamp corresponding to the current time is computed.
+From this variables the corresponding, year, date and time are computed using functions
+such as <code>floor()</code> and <code>ceil()</code>.
+</p>
+<h4>Assumption and limitations</h4>
+<p>
+The implementation only supports date computations from year 2010 up to and including 2020.
+Daylight saving is not supported.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+The user must define which time and date correspond to <code>time = 0</code>
+using the model parameters <code>zerTim</code>, and, if
+<code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.Custom</code>,
+the parameter <code>yearRef</code>.
+When <code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code>,
+<code>time</code> is defined with respect to GMT. This is different from the use
+of <code>time</code> in the weather data reader
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
+AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>, as the weather data files
+used with this reader are generally defined with <code>time</code> being local time.
+If  <code>zerTim==AixLib.Utilities.Time.Types.ZeroTime.UnixTimeStampGMT</code> is used,
+then the weather data files read by
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
+AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>
+must also be defined with GMT as the time stamp.
+
+The user can choose from new year, midnight for a number of years:
+2010 to 2050 and also 1970.
+The latter corresponds to a unix stamp of <i>0</i>.
+(Note that when choosing the reference time equal to 0 at 1970,
+the actual simulation time must be within the 2010-2051 range.
+For instance <code>startTime = 1262304000</code> corresponds
+to the simulation starting on the 1st of January 2010
+when setting <code>zerTim = ZeroTime.UnixTimeStamp</code>.
+This is within the 2010-2050 range and is therefore allowed.)
+The unix time stamp is formally defined as the number of
+seconds since midnight of new year in 1970 GMT.
+To output the correct unix time stamp, set <code>outputUnixTimeStamp=true</code>
+We then require the local time zone <code>timZon</code>
+(see <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
+AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>)
+since <code>time</code> uses the local time zone instead of GMT.
+We always output <code>unixTimeStampLocal</code>, which is a time stamp
+that uses the local time zone reference instead of GMT.
+</p>
+<h4>Implementation</h4>
+<p>
+The model was implemented such that no events are being generated for computing the minute of the day.
+The model also contains an implementation for setting <code>time=0</code>
+for any day and month other than January first.
+This is however not activated in the current model since these options may wrongly give the impression
+that it changes the time based on which the solar position is computed and TMY3 data are read.
+</p>
+</html>"),
     Icon(graphics={
         Text(
           extent={{-34,90},{96,80}},
@@ -416,6 +535,6 @@ equation
           textColor={28,108,200},
           horizontalAlignment=TextAlignment.Right,
           visible=outputUnixTimeStamp,
-          textString="Unix time stamp (GMT)")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="Unix time stamp (GMT)")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTime;

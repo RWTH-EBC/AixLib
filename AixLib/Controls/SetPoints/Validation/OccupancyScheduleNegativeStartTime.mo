@@ -18,17 +18,17 @@ model OccupancyScheduleNegativeStartTime
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/SetPoints/Validation/OccupancyScheduleNegativeStartTime.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Example that validates the occupancy schedule
- for a negative start time.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 30, 2017, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Example that validates the occupancy schedule
+for a negative start time.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 30, 2017, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end OccupancyScheduleNegativeStartTime;

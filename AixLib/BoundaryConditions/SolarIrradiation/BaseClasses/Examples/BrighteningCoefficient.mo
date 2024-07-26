@@ -91,22 +91,22 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (
 Documentation(info="<html>
- <p>
- This example computes the circumsolar and horizon brightening coefficients.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 25, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example computes the circumsolar and horizon brightening coefficients.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 25, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1e-6, StopTime=8640000),
 __Dymola_Commands(
       file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/BrighteningCoefficient.mos"
       "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end BrighteningCoefficient;

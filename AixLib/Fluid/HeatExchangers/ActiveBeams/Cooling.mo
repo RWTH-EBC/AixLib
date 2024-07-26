@@ -268,75 +268,75 @@ defaultComponentName="actBea",
 Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-140,-120},{140,120}})),
 Documentation(info="<html>
- <p>
- Model of an active beam, based on the EnergyPlus beam model  <code>AirTerminal:SingleDuct:ConstantVolume:FourPipeBeam</code>.
- </p>
- <p>
- This model operates only in cooling mode. For a model that operates in both heating and cooling mode,
- use <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
- AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>.
- </p>
- <p>
- For a description of the equations, see the
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
- User's Guide</a>.
- </p>
- <p>
- Performance data are available from
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Data\">
- AixLib.Fluid.HeatExchangers.ActiveBeams.Data</a>.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- DOE(2015) EnergyPlus documentation v8.4.0 - Engineering Reference.
- </li>
- </ul>
- </html>",revisions="<html>
- <ul>
- <li>
- March 3, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
- </li>
- <li>
- March 30, 2021, by Michael Wetter:<br/>
- Added annotation <code>HideResult=true</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">IBPSA, #1459</a>.
- </li>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Changed <code>homotopyInitialization</code> to a constant.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
- </li>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>
- November 3, 2016, by Michael Wetter:<br/>
- Set <code>final alpha=0</code> for prescribed heat flow rate.
- </li>
- <li>
- September 17, 2016, by Michael Wetter:<br/>
- Corrected wrong annotation to avoid an error in the pedantic model check
- in Dymola 2017 FD01 beta2.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/557\">issue 557</a>.
- </li>
- <li>
- June 14, 2016, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- May 20, 2016, by Alessandro Maccarini:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Model of an active beam, based on the EnergyPlus beam model  <code>AirTerminal:SingleDuct:ConstantVolume:FourPipeBeam</code>.
+</p>
+<p>
+This model operates only in cooling mode. For a model that operates in both heating and cooling mode,
+use <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
+AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>.
+</p>
+<p>
+For a description of the equations, see the
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
+User's Guide</a>.
+</p>
+<p>
+Performance data are available from
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Data\">
+AixLib.Fluid.HeatExchangers.ActiveBeams.Data</a>.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+DOE(2015) EnergyPlus documentation v8.4.0 - Engineering Reference.
+</li>
+</ul>
+</html>", revisions="<html>
+<ul>
+<li>
+March 3, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+</li>
+<li>
+March 30, 2021, by Michael Wetter:<br/>
+Added annotation <code>HideResult=true</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">IBPSA, #1459</a>.
+</li>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Changed <code>homotopyInitialization</code> to a constant.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
+<li>
+November 3, 2016, by Michael Wetter:<br/>
+Set <code>final alpha=0</code> for prescribed heat flow rate.
+</li>
+<li>
+September 17, 2016, by Michael Wetter:<br/>
+Corrected wrong annotation to avoid an error in the pedantic model check
+in Dymola 2017 FD01 beta2.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/557\">issue 557</a>.
+</li>
+<li>
+June 14, 2016, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+May 20, 2016, by Alessandro Maccarini:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Cooling;
