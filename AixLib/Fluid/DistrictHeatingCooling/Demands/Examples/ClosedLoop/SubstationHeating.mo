@@ -40,7 +40,8 @@ model SubstationHeating "Small example of substation for buildings with only hea
     redeclare package Medium = Medium,
     heatDemand_max=30000,
     deltaT_heatingSet(displayUnit="K") = 10,
-    deltaT_heatingGridSet(displayUnit="K") = 5)
+    deltaT_heatingGridSet(displayUnit="K") = 5,
+    dp_nominal=30000)
     annotation (Placement(transformation(extent={{4,-10},{28,12}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTemHotLine(redeclare package
       Medium = Medium, m_flow_nominal=0.5)

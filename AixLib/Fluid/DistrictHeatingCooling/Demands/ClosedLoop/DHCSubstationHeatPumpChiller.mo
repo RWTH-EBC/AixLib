@@ -2,49 +2,49 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpChiller
   "Substation model for bidirctional low-temperature networks for buildings with  heat pump and chiller"
 
-    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+    replaceable package Medium = AixLib.Media.Water
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa", min=1)
     "Nominal pressure drop";
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=max(max((heaDem_max/(
-      cp_default*deltaT_heaSecSet)), -cooDem_max/(cp_default*deltaT_cooSecSet)),
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0.001)=max(max((heatDemand_max/(
+      cp_default*deltaT_heatSecSet)), -coolingDemand_max/(cp_default*deltaT_coolingSecSet)),
       0.0001)
     "Nominal mass flow rate based on max. demand and set temperature difference";
 
-  parameter Modelica.Units.SI.HeatFlowRate heaDem_max
+  parameter Modelica.Units.SI.HeatFlowRate heatDemand_max(min=1)
     "Maximum heat demand for scaling of heatpump in Watt"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.HeatFlowRate cooDem_max
+  parameter Modelica.Units.SI.HeatFlowRate coolingDemand_max
     "Maximum cooling demand for scaling of chiller in Watt (negative values)"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.Temperature T_heaSecSet=273.15 + 55
+  parameter Modelica.Units.SI.Temperature T_heatSecSet(min=273.15+1)=273.15 + 55
     "Set supply temperature for space heating on secondary side (building system)"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.TemperatureDifference deltaT_heaSecSet
-    "Set temperature difference for heating on secondary site (building system)"
+  parameter Modelica.Units.SI.TemperatureDifference deltaT_heatSecSet(min=0.1)
+    "Set temperature difference for heating on secondary side (building system)"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.Temperature T_cooSecSet=273.15 + 12
+  parameter Modelica.Units.SI.Temperature T_coolingSecSet=273.15 + 12
     "Set supply temperature for cooling on secondary side (building system)"
     annotation (Dialog(tab="General", group="Building System"));
 
-  parameter Modelica.Units.SI.Temperature deltaT_cooSecSet
-    "Set temperature difference for cooling on secondary site (building system)"
+  parameter Modelica.Units.SI.TemperatureDifference deltaT_coolingSecSet(min=0.1)
+    "Set temperature difference for cooling on secondary side (building system)"
     annotation (Dialog(tab="General", group="Building System"));
 
 
-  parameter Modelica.Units.SI.Temperature deltaT_heaPriSet
-    "Set temperature difference for heating on primary site (grid)"
+  parameter Modelica.Units.SI.TemperatureDifference deltaT_heatPriSet(min=0.1)
+    "Set temperature difference for heating on primary side (grid)"
     annotation (Dialog(tab="General", group="Grid"));
 
-  parameter Modelica.Units.SI.Temperature deltaT_cooPriSet
-    "Set temperature difference for cooling on primary site (grid)"
+  parameter Modelica.Units.SI.TemperatureDifference deltaT_coolingPriSet(min=0.1)
+    "Set temperature difference for cooling on primary side (grid)"
     annotation (Dialog(tab="General", group="Grid"));
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
@@ -57,7 +57,7 @@ model DHCSubstationHeatPumpChiller
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
              annotation (Placement(transformation(extent={{188,8},{208,28}})));
-  AixLib.Fluid.Movers.FlowControlled_m_flow pumHea(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -67,17 +67,17 @@ model DHCSubstationHeatPumpChiller
     dp_nominal=dp_nominal)
     "decentral distribution pump for heating on primary side"
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
-  AixLib.Fluid.Sources.MassFlowSource_T souHeaSec(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceHeatingSec(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
-  Modelica.Blocks.Sources.Constant T_heaPumInSec(k=T_heaSecSet -
-        deltaT_heaSecSet) "Inlet temperatur of heat pump on secondary side"
+  Modelica.Blocks.Sources.Constant T_heatPumpInSec(k=T_heatSecSet -
+        deltaT_heatSecSet) "Inlet temperatur of heat pump on secondary side"
     annotation (Placement(transformation(extent={{102,-72},{88,-58}})));
-  Sources.Boundary_pT sinHeaSec(redeclare package Medium = Medium, nPorts=1)
+  Sources.Boundary_pT sinkHeatingSec(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-48,-64},{-28,-44}})));
-  Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heaSecSet))
+  Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatSecSet))
     annotation (Placement(transformation(extent={{128,-56},{116,-44}})));
   Modelica.Blocks.Math.Division division
     annotation (Placement(transformation(extent={{104,-44},{90,-30}})));
@@ -91,7 +91,7 @@ public
     "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
-  AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
+  AixLib.Fluid.HeatPumps.Carnot_TCon heatPump(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
     allowFlowReversal1=false,
     allowFlowReversal2=false,
@@ -100,12 +100,12 @@ public
     use_eta_Carnot_nominal=true,
     show_T=true,
     etaCarnot_nominal=0.5,
-    QCon_flow_max=heaDem_max,
-    QCon_flow_nominal=heaDem_max)
+    QCon_flow_max=heatDemand_max,
+    QCon_flow_nominal=heatDemand_max)
     annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
-  Modelica.Blocks.Interfaces.RealInput heaDem(unit="W")
+  Modelica.Blocks.Interfaces.RealInput heatDemand(unit="W")
     "Input for heat demand profile of substation" annotation (Placement(
         transformation(extent={{-294,-80},{-254,-40}}), iconTransformation(
           extent={{232,76},{192,116}})));
@@ -128,7 +128,7 @@ public
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
     m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1})
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
-  AixLib.Fluid.Chillers.Carnot_TEva chi(
+  AixLib.Fluid.Chillers.Carnot_TEva chiller(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     allowFlowReversal1=false,
@@ -137,10 +137,10 @@ public
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     etaCarnot_nominal=0.4,
-    QEva_flow_min=cooDem_max,
-    QEva_flow_nominal=cooDem_max)
+    QEva_flow_min=coolingDemand_max,
+    QEva_flow_nominal=coolingDemand_max)
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
-  AixLib.Fluid.Movers.FlowControlled_m_flow pumCoo(
+  AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
@@ -150,16 +150,16 @@ public
     dp_nominal=dp_nominal)
     "decentral distribution pump for cooling on primary side"
     annotation (Placement(transformation(extent={{52,14},{32,34}})));
-  Modelica.Blocks.Interfaces.RealInput cooDem(unit="W")
+  Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(
         transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{
             -280,-120},{-240,-80}})));
-  AixLib.Fluid.Sources.MassFlowSource_T souCoo(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(extent={{-66,44},{-46,64}})));
-  Sources.Boundary_pT sinCoo(redeclare package Medium = Medium, nPorts=1)
+  Sources.Boundary_pT sinkCooling(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{34,44},{14,64}})));
   Modelica.Blocks.Math.Add add2(k2=+1)
     annotation (Placement(transformation(extent={{94,68},{74,88}})));
@@ -167,47 +167,47 @@ public
     annotation (Placement(transformation(extent={{60,66},{46,80}})));
   Modelica.Blocks.Math.Division division3
     annotation (Placement(transformation(extent={{-58,100},{-72,114}})));
-  Modelica.Blocks.Sources.Constant const2(k=cp_default*deltaT_cooSecSet)
+  Modelica.Blocks.Sources.Constant const2(k=cp_default*deltaT_coolingSecSet)
     annotation (Placement(transformation(extent={{-32,86},{-44,98}})));
 
-  Modelica.Blocks.Interfaces.RealOutput P_el_heaPum(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput P_el_heatPump(unit="W")
     "Power demand of heat pump" annotation (Placement(transformation(extent={{-260,
             100},{-280,120}}), iconTransformation(extent={{-260,100},{-280,120}})));
-  Modelica.Blocks.Interfaces.RealOutput P_el_chi(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput P_el_chiller(unit="W")
     "Power demand of chiller" annotation (Placement(transformation(extent={{-260,
             126},{-280,146}}), iconTransformation(extent={{-260,126},{-280,146}})));
-  Modelica.Blocks.Interfaces.RealOutput P_el_subSta(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput P_el_subStation(unit="W")
     "Power demand of substation for heat pump, chiller and distribution pumps on primary side (grid)"
     annotation (Placement(transformation(extent={{-260,74},{-280,94}}),
         iconTransformation(extent={{-260,74},{-280,94}})));
   Modelica.Blocks.Math.Sum sum1(nin=4)
     annotation (Placement(transformation(extent={{-220,74},{-240,94}})));
-  Modelica.Blocks.Sources.Constant T_heaPumSet(k=T_heaSecSet)
+  Modelica.Blocks.Sources.Constant T_heatPumpSet(k=T_heatSecSet)
     annotation (Placement(transformation(extent={{40,-78},{26,-64}})));
   Modelica.Blocks.Sources.RealExpression
-                                   realExpression2(y=heaPum.P)
+                                   realExpression2(y=heatPump.P)
     annotation (Placement(transformation(extent={{-176,-78},{-164,-66}})));
   Modelica.Blocks.Sources.RealExpression
-                                   realExpression1(y=heaDem)
+                                   realExpression1(y=heatDemand)
     annotation (Placement(transformation(extent={{138,-38},{126,-26}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*
-        deltaT_heaPriSet)
+        deltaT_heatPriSet)
     annotation (Placement(transformation(extent={{-128,-96},{-116,-84}})));
   Modelica.Blocks.Sources.RealExpression
-                                   realExpression3(y=heaPum.P)
+                                   realExpression3(y=heatPump.P)
     annotation (Placement(transformation(extent={{-228,104},{-240,116}})));
   Modelica.Blocks.Sources.RealExpression
-                                   realExpression4(y=chi.P)
+                                   realExpression4(y=chiller.P)
     annotation (Placement(transformation(extent={{-228,130},{-240,142}})));
   Modelica.Blocks.Sources.RealExpression
-                                   realExpression5(y=chi.P)
+                                   realExpression5(y=chiller.P)
     annotation (Placement(transformation(extent={{130,66},{118,78}})));
-  Modelica.Blocks.Sources.Constant const3(k=cp_default*deltaT_cooPriSet)
+  Modelica.Blocks.Sources.Constant const3(k=cp_default*deltaT_coolingPriSet)
     annotation (Placement(transformation(extent={{94,48},{80,62}})));
-  Modelica.Blocks.Sources.Constant T_chiSet(k=T_cooSecSet)
+  Modelica.Blocks.Sources.Constant T_chillerSet(k=T_coolingSecSet)
     annotation (Placement(transformation(extent={{24,2},{10,16}})));
-  Modelica.Blocks.Sources.RealExpression realExpression6(y=T_cooSecSet +
-        deltaT_cooSecSet)
+  Modelica.Blocks.Sources.RealExpression realExpression6(y=T_coolingSecSet +
+        deltaT_coolingSecSet)
     annotation (Placement(transformation(extent={{-106,52},{-94,64}})));
 
 protected
@@ -229,75 +229,75 @@ equation
     annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255},
       thickness=1));
-  connect(chi.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
+  connect(chiller.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
           {-146,10}},color={0,127,255},
       thickness=1));
-  connect(heaPum.port_b2, jun1.port_3)
+  connect(heatPump.port_b2, jun1.port_3)
     annotation (Line(points={{10,-24},{126,-24},{126,-10}},
                                                           color={0,127,255},
       thickness=1));
-  connect(pumHea.port_b, heaPum.port_a2) annotation (Line(
+  connect(pumpHeating.port_b, heatPump.port_a2) annotation (Line(
       points={{-60,-24},{-10,-24}},
       color={0,127,255},
       thickness=1));
-  connect(chi.port_a1, pumCoo.port_b) annotation (Line(
+  connect(chiller.port_a1, pumpCooling.port_b) annotation (Line(
       points={{-4,24},{32,24}},
       color={0,127,255},
       thickness=1));
-  connect(heaDem, add1.u1)
+  connect(heatDemand, add1.u1)
     annotation (Line(points={{-274,-60},{-136,-60}}, color={0,0,127}));
   connect(add1.y, division1.u1) annotation (Line(points={{-113,-66},{-106,-66},{
           -106,-65.2},{-97.6,-65.2}}, color={0,0,127}));
-  connect(division1.y, pumHea.m_flow_in) annotation (Line(points={{-79.2,-70},{-70,
+  connect(division1.y, pumpHeating.m_flow_in) annotation (Line(points={{-79.2,-70},{-70,
           -70},{-70,-36}}, color={0,0,127}));
-  connect(souHeaSec.ports[1], heaPum.port_a1) annotation (Line(
+  connect(sourceHeatingSec.ports[1], heatPump.port_a1) annotation (Line(
       points={{42,-54},{28,-54},{28,-36},{10,-36}},
       color={0,127,255},
       thickness=0.5));
-  connect(sinHeaSec.ports[1], heaPum.port_b1) annotation (Line(
+  connect(sinkHeatingSec.ports[1], heatPump.port_b1) annotation (Line(
       points={{-28,-54},{-22,-54},{-22,-36},{-10,-36}},
       color={0,127,255},
       thickness=0.5));
   connect(division.u2, const.y) annotation (Line(points={{105.4,-41.2},{112,-41.2},
           {112,-50},{115.4,-50}}, color={0,0,127}));
-  connect(division.y, souHeaSec.m_flow_in) annotation (Line(points={{89.3,-37},{
+  connect(division.y, sourceHeatingSec.m_flow_in) annotation (Line(points={{89.3,-37},{
           76.65,-37},{76.65,-46},{64,-46}}, color={0,0,127}));
-  connect(souCoo.ports[1], chi.port_a2) annotation (Line(
+  connect(sourceCooling.ports[1], chiller.port_a2) annotation (Line(
       points={{-46,54},{-30,54},{-30,36},{-24,36}},
       color={0,127,255},
       thickness=0.5));
-  connect(chi.port_b2, sinCoo.ports[1]) annotation (Line(
+  connect(chiller.port_b2, sinkCooling.ports[1]) annotation (Line(
       points={{-4,36},{0,36},{0,54},{14,54}},
       color={0,127,255},
       thickness=0.5));
   connect(division2.u1, add2.y) annotation (Line(points={{61.4,77.2},{67.7,77.2},
           {67.7,78},{73,78}},          color={0,0,127}));
-  connect(division2.y, pumCoo.m_flow_in) annotation (Line(points={{45.3,73},{42,
+  connect(division2.y, pumpCooling.m_flow_in) annotation (Line(points={{45.3,73},{42,
           73},{42,36}},                  color={0,0,127}));
   connect(const2.y, division3.u2) annotation (Line(points={{-44.6,92},{-50,92},{
           -50,102.8},{-56.6,102.8}},  color={0,0,127}));
-  connect(division3.y, souCoo.m_flow_in) annotation (Line(points={{-72.7,107},{
+  connect(division3.y, sourceCooling.m_flow_in) annotation (Line(points={{-72.7,107},{
           -86,107},{-86,62},{-68,62}},
                                    color={0,0,127}));
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
-  connect(sum1.y, P_el_subSta)
+  connect(sum1.y, P_el_subStation)
     annotation (Line(points={{-241,84},{-270,84}}, color={0,0,127}));
   //Power Consumptin Calculation
-  connect(chi.P, sum1.u[1]);
-  connect(heaPum.P, sum1.u[2]);
-  connect(pumCoo.P, sum1.u[3]);
-  connect(pumHea.P, sum1.u[4]);
+  connect(chiller.P, sum1.u[1]);
+  connect(heatPump.P, sum1.u[2]);
+  connect(pumpCooling.P, sum1.u[3]);
+  connect(pumpHeating.P, sum1.u[4]);
 
   connect(vol.ports[2], jun.port_1) annotation (Line(
       points={{-231,4},{-230,4},{-230,0},{-156,0}},
       color={0,127,255},
       thickness=1));
-  connect(jun.port_2, pumHea.port_a) annotation (Line(
+  connect(jun.port_2, pumpHeating.port_a) annotation (Line(
       points={{-136,0},{-124,0},{-124,-24},{-80,-24}},
       color={0,127,255},
       thickness=1));
-  connect(jun1.port_2, pumCoo.port_a) annotation (Line(
+  connect(jun1.port_2, pumpCooling.port_a) annotation (Line(
       points={{116,0},{104,0},{104,24},{52,24}},
       color={0,127,255},
       thickness=1));
@@ -305,9 +305,9 @@ equation
       points={{199,8},{196,8},{196,0},{136,0}},
       color={0,127,255},
       thickness=1));
-  connect(souHeaSec.T_in, T_heaPumInSec.y) annotation (Line(points={{64,-50},{80,
+  connect(sourceHeatingSec.T_in, T_heatPumpInSec.y) annotation (Line(points={{64,-50},{80,
           -50},{80,-65},{87.3,-65}}, color={0,0,127}));
-  connect(heaPum.TSet, T_heaPumSet.y) annotation (Line(points={{12,-39},{20,-39},
+  connect(heatPump.TSet, T_heatPumpSet.y) annotation (Line(points={{12,-39},{20,-39},
           {20,-71},{25.3,-71}}, color={0,0,127}));
   connect(realExpression2.y, add1.u2)
     annotation (Line(points={{-163.4,-72},{-136,-72}}, color={0,0,127}));
@@ -315,22 +315,22 @@ equation
           {124.7,-32.8},{124.7,-32},{125.4,-32}}, color={0,0,127}));
   connect(realExpression.y, division1.u2) annotation (Line(points={{-115.4,-90},
           {-108,-90},{-108,-74.8},{-97.6,-74.8}}, color={0,0,127}));
-  connect(P_el_heaPum, realExpression3.y)
+  connect(P_el_heatPump, realExpression3.y)
     annotation (Line(points={{-270,110},{-240.6,110}}, color={0,0,127}));
-  connect(P_el_chi, realExpression4.y)
+  connect(P_el_chiller, realExpression4.y)
     annotation (Line(points={{-270,136},{-240.6,136}}, color={0,0,127}));
-  connect(add2.u1, cooDem) annotation (Line(points={{96,84},{182,84},{182,62},{228,
+  connect(add2.u1, coolingDemand) annotation (Line(points={{96,84},{182,84},{182,62},{228,
           62}}, color={0,0,127}));
   connect(add2.u2, realExpression5.y)
     annotation (Line(points={{96,72},{117.4,72}}, color={0,0,127}));
   connect(division2.u2, const3.y) annotation (Line(points={{61.4,68.8},{66,68.8},
           {66,55},{79.3,55}}, color={0,0,127}));
-  connect(division3.u1, cooDem) annotation (Line(points={{-56.6,111.2},{122,
+  connect(division3.u1, coolingDemand) annotation (Line(points={{-56.6,111.2},{122,
           111.2},{122,84},{182,84},{182,62},{228,62}},
                                                 color={0,0,127}));
-  connect(chi.TSet, T_chiSet.y)
+  connect(chiller.TSet, T_chillerSet.y)
     annotation (Line(points={{-2,21},{2,21},{2,9},{9.3,9}}, color={0,0,127}));
-  connect(realExpression6.y, souCoo.T_in) annotation (Line(points={{-93.4,58},{
+  connect(realExpression6.y, sourceCooling.T_in) annotation (Line(points={{-93.4,58},{
           -68,58}},               color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},
             {220,160}}), graphics={
