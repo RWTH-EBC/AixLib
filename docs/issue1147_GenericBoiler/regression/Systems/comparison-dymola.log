@@ -1,0 +1,1082 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.Heater.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.hydraulicBus.valveSet"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "ctrBasic.registerBus.TAirInMea",
+        "ctrBasic.registerBus.TAirOutMea",
+        "ctrBasic.registerBus.hydraulicBus.valveSet"
+      ],
+      "warnings": [
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.Heater",
+    "simulation": {
+      "elapsed_time": 0.0229,
+      "final_time": 3600,
+      "jacobians": 31,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Pump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Pump.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Pump",
+    "simulation": {
+      "elapsed_time": 0.0182,
+      "final_time": 800,
+      "jacobians": 67,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.TRetMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.Efficiency",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.ThermalPower",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.fuelPower"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "boilerControlBus.TSupMea",
+        "boilerControlBus.TRetMea",
+        "boilerControlBus.Efficiency",
+        "boilerControlBus.ThermalPower",
+        "boilerControlBus.fuelPower"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple",
+    "simulation": {
+      "elapsed_time": 0.0345,
+      "final_time": 84000,
+      "jacobians": 97,
+      "start_time": 0,
+      "state_events": 3,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Injection.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Injection",
+    "simulation": {
+      "elapsed_time": 0.027,
+      "final_time": 800,
+      "jacobians": 55,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_registerModule.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_registerModule.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[6]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[5]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[3]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[4]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[9]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_combiTimeTable.y[8]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_Simulation_VF_in_m3h.y",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_Simulation_VF_out_m3h.y"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "registerModule.registerBus.TAirInMea",
+        "registerModule.registerBus.TAirOutMea",
+        "combiTimeTable.y[6]",
+        "combiTimeTable.y[5]",
+        "combiTimeTable.y[3]",
+        "combiTimeTable.y[4]",
+        "registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "combiTimeTable.y[9]",
+        "combiTimeTable.y[8]",
+        "Simulation_VF_in_m3h.y",
+        "Simulation_VF_out_m3h.y"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler",
+    "simulation": {
+      "elapsed_time": 2.56,
+      "final_time": 2700,
+      "jacobians": 11738,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TOdaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_thermalZone.CO2Con"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        5961600.0,
+        5961600.0,
+        5961600.0,
+        5961600.0,
+        5961600.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "variables": [
+        "genericAHU.genericAHUBus.TSupMea",
+        "genericAHU.genericAHUBus.TOdaMea",
+        "genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
+        "genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
+        "thermalZone.CO2Con"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
+    "simulation": {
+      "elapsed_time": 50.7,
+      "final_time": 6566400.0,
+      "jacobians": 24401,
+      "start_time": 5961600.0,
+      "state_events": 51,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Throttle.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Throttle.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Throttle",
+    "simulation": {
+      "elapsed_time": 0.0121,
+      "final_time": 1000,
+      "jacobians": 43,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.TRetMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.Efficiency",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.ThermalPower",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.fuelPower"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "boilerControlBus.TSupMea",
+        "boilerControlBus.TRetMea",
+        "boilerControlBus.Efficiency",
+        "boilerControlBus.ThermalPower",
+        "boilerControlBus.fuelPower"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve",
+    "simulation": {
+      "elapsed_time": 0.0542,
+      "final_time": 84000,
+      "jacobians": 542,
+      "start_time": 0,
+      "state_events": 12,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.TRetMea",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.Efficiency",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.ThermalPower",
+        "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.fuelPower"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "variables": [
+        "boilerControlBus.TSupMea",
+        "boilerControlBus.TRetMea",
+        "boilerControlBus.Efficiency",
+        "boilerControlBus.ThermalPower",
+        "boilerControlBus.fuelPower"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback",
+    "simulation": {
+      "elapsed_time": 2.82,
+      "final_time": 20000,
+      "jacobians": 32091,
+      "start_time": 0,
+      "state_events": 2547,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Injection2WayValve.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+    "simulation": {
+      "elapsed_time": 0.0286,
+      "final_time": 800,
+      "jacobians": 53,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[6]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[5]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[3]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[4]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[9]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[8]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_in_m3h.y",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_out_m3h.y"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "registerModule.registerBus.TAirInMea",
+        "registerModule.registerBus.TAirOutMea",
+        "combiTimeTable.y[6]",
+        "combiTimeTable.y[5]",
+        "combiTimeTable.y[3]",
+        "combiTimeTable.y[4]",
+        "registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "combiTimeTable.y[9]",
+        "combiTimeTable.y[8]",
+        "Simulation_VF_in_m3h.y",
+        "Simulation_VF_out_m3h.y"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater",
+    "simulation": {
+      "elapsed_time": 1.2,
+      "final_time": 4320,
+      "jacobians": 4262,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.GenericAHU.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TOdaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEtaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEhaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "ctrAHUBasic.genericAHUBus.TOdaMea",
+        "ctrAHUBasic.genericAHUBus.TSupMea",
+        "ctrAHUBasic.genericAHUBus.TEtaMea",
+        "ctrAHUBasic.genericAHUBus.TEhaMea",
+        "ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
+    "simulation": {
+      "elapsed_time": 0.156,
+      "final_time": 7200,
+      "jacobians": 40,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.sigBus.TConInMea",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.hPSystemController.hPControls.heatCurve.TSet",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.innerCycle.QCon",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_heatPumpSystem.heatPump.innerCycle.Pel",
+        "funnel_comp/AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat_vol.T"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "heatPumpSystem.heatPump.sigBus.TConInMea",
+        "heatPumpSystem.heatPump.sigBus.TConOutMea",
+        "heatPumpSystem.hPSystemController.hPControls.heatCurve.TSet",
+        "heatPumpSystem.heatPump.innerCycle.QCon",
+        "heatPumpSystem.heatPump.innerCycle.Pel",
+        "vol.T"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
+    "simulation": {
+      "elapsed_time": 1.82,
+      "final_time": 86400,
+      "jacobians": 8350,
+      "start_time": 0,
+      "state_events": 468,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[6]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[5]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[3]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[4]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[9]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[8]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_in_m3h.y",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_out_m3h.y"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "registerModule.registerBus.TAirInMea",
+        "registerModule.registerBus.TAirOutMea",
+        "combiTimeTable.y[6]",
+        "combiTimeTable.y[5]",
+        "combiTimeTable.y[3]",
+        "combiTimeTable.y[4]",
+        "registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "combiTimeTable.y[9]",
+        "combiTimeTable.y[8]",
+        "Simulation_VF_in_m3h.y",
+        "Simulation_VF_out_m3h.y"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater",
+    "simulation": {
+      "elapsed_time": 1.5,
+      "final_time": 7200,
+      "jacobians": 4988,
+      "start_time": 0,
+      "state_events": 10,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.ThrottlePump.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+    "simulation": {
+      "elapsed_time": 0.019,
+      "final_time": 600,
+      "jacobians": 46,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Example.Admix.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Example.Admix.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Example.Admix",
+    "simulation": {
+      "elapsed_time": 0.0214,
+      "final_time": 800,
+      "jacobians": 56,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  }
+]
