@@ -10,7 +10,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Boolean transferHeat=false
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -22,13 +22,13 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Units.SI.AbsolutePressure dp_start=0
     "Guess value of dp = port_a.p - port_b.p"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Modelica.Units.SI.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal=m_flow_nominal^2*a/
       (rho_default^2) "Pressure drop at nominal mass flow rate"

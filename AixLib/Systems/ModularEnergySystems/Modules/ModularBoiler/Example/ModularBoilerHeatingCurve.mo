@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example;
-model ModularBoilerSimple
+model ModularBoilerHeatingCurve
   "Example for ModularBoiler - With Pump and simple Pump regulation"
   extends Modelica.Icons.Example;
   parameter Integer k=2 "number of consumers";
@@ -14,7 +14,7 @@ model ModularBoilerSimple
     redeclare function HeatingCurveFunction =
         AixLib.Controls.SetPoints.Functions.HeatingCurveFunction,
     dp_Valve(displayUnit="Pa") = 6000,
-    use_HeaCur=false,
+    use_HeaCur=true,
     Kv=10,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = MediumWater)
@@ -28,11 +28,6 @@ model ModularBoilerSimple
   AixLib.Controls.Interfaces.BoilerControlBus
                               boilerControlBus
     annotation (Placement(transformation(extent={{-10,52},{10,72}})));
-  Modelica.Blocks.Sources.Constant TFlowSet(k=273 + 60) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-86,40})));
   Modelica.Blocks.Sources.BooleanConstant isOnSet(k=true) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -85,12 +80,6 @@ equation
           {64,10}},                             color={191,0,0}));
   connect(sine.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{61,68},{
           64,68},{64,50}},         color={0,0,127}));
-  connect(TFlowSet.y, boilerControlBus.TSupSet) annotation (Line(points={{-75,40},
-          {0,40},{0,62}},          color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(sine1.y, boilerControlBus.TAmbient) annotation (Line(points={{-107,56},
           {-16,56},{-16,62},{0,62}}, color={0,0,127}), Text(
       string="%second",
@@ -99,4 +88,4 @@ equation
       horizontalAlignment=TextAlignment.Left));
 annotation (
     experiment(StopTime=86400, __Dymola_Algorithm="Dassl"));
-end ModularBoilerSimple;
+end ModularBoilerHeatingCurve;

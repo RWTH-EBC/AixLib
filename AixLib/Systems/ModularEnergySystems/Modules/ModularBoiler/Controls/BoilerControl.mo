@@ -24,11 +24,11 @@ model BoilerControl "Master controller that holds all other controls"
   parameter Real night_hour=22 annotation (Dialog(group="Heating Curve"));
   parameter Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve" annotation (Dialog(group="Heating Curve"));
-  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=273.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=0
     "Offset to heating curve temperature" annotation (Dialog(group="Heating Curve"));
 
   // Feedback Control
-
+  parameter Boolean hasFeedback=true  "circuit has Feedback"     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="Feedback"));
   parameter Real kFeedBack=1 "Gain of controller"
                                           annotation (Dialog(group="Feedback Return Control"));
   parameter Modelica.Units.SI.Time TiFeedBack=0.5
@@ -70,14 +70,14 @@ model BoilerControl "Master controller that holds all other controls"
     final night_hour=night_hour,
     final zerTim=zerTim,
     final TOffset=TOffset)          if TFlowByHeaCur
-    annotation (Placement(transformation(extent={{-76,70},{-56,90}})));
+    annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));
   FeedbackControl feedbackControl(
     final TReturnNom=TReturnNom,
     final k=kFeedBack,
     final Ti=TiFeedBack,
     final yMax=yMaxFeedBack,
-    final yMin=yMinFeedBack)
-    annotation (Placement(transformation(extent={{-76,-46},{-56,-26}})));
+    final yMin=yMinFeedBack) if hasFeedback
+    annotation (Placement(transformation(extent={{-74,-88},{-54,-68}})));
   InternalPLRControl internalPLRControl(
     final k=kPLR,
     final Ti=TiPLR,
@@ -96,16 +96,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.TAmbient, heatingCurveControl1.TAmb) annotation (
       Line(
-      points={{0,100},{0,100},{-100,100},{-100,80},{-76,80}},
+      points={{0,100},{-100,100},{-100,-40},{-74,-40}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatingCurveControl1.TFlowSet, internalPLRControl.TFlowSet)
     annotation (Line(
-      points={{-55,80},{-50,80},{-50,16},{-22,16}},
+      points={{-53,-40},{-30,-40},{-30,16},{-22,16}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(safteyControl.isOn, pLRMinCheck.isOn) annotation (Line(points={{0.4,46},
@@ -136,9 +138,11 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.TRetMea, feedbackControl.TReturnMea) annotation (
       Line(
-      points={{0,100},{-100,100},{-100,-36},{-76.2,-36}},
+      points={{0,100},{-100,100},{-100,-78},{-74.2,-78}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
@@ -157,7 +161,9 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(feedbackControl.yValve, boilerControlBus.yValSet) annotation (
-      Line(points={{-55,-36},{76,-36},{76,100},{0,100}}, color={0,0,127}),
+      Line(points={{-53,-78},{100,-78},{100,100},{0,100}},
+                                                         color={0,0,127},
+      pattern=LinePattern.Dash),
       Text(
       string="%second",
       index=1,
@@ -193,5 +199,12 @@ equation
           pattern=LinePattern.Dash,
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
-          textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false),
+        graphics={Text(
+          extent={{-96,-46},{-10,-60}},
+          textColor={28,108,200},
+          textString="Optional flow set temperature by heating curve"), Text(
+          extent={{-94,-84},{-8,-98}},
+          textColor={28,108,200},
+          textString="Optional control of return tempature via feedback valve ")}));
 end BoilerControl;

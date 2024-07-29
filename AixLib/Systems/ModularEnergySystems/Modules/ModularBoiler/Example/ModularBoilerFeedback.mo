@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example;
-model ModularBoilerSimple
+model ModularBoilerFeedback
   "Example for ModularBoiler - With Pump and simple Pump regulation"
   extends Modelica.Icons.Example;
   parameter Integer k=2 "number of consumers";
@@ -9,7 +9,7 @@ model ModularBoilerSimple
     hasPump=true,
     QNom=50000,
     T_start=303.15,
-    hasFeedback=false,
+    hasFeedback=true,
     use_tableData=true,
     redeclare function HeatingCurveFunction =
         AixLib.Controls.SetPoints.Functions.HeatingCurveFunction,
@@ -99,4 +99,4 @@ equation
       horizontalAlignment=TextAlignment.Left));
 annotation (
     experiment(StopTime=86400, __Dymola_Algorithm="Dassl"));
-end ModularBoilerSimple;
+end ModularBoilerFeedback;

@@ -5,23 +5,9 @@ model ModularBoiler
     redeclare package Medium = MediumWater,
     final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
 
-  parameter Boolean m_flowVar=false "Use variable water massflow"
-    annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
-
-  parameter Boolean Advanced=false "dTWater is constant for different PLR"
-    annotation (choices(checkBox=true), Dialog(enable=m_flowVar,descriptionLabel=true, tab="Advanced",group="Boiler behaviour"));
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
-    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
-
-  parameter Modelica.Units.SI.Temperature TStart=293.15 "T start"
-    annotation (Dialog(tab="Advanced"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
 
   // System Parameters
-  parameter Boolean hasFeedback=true  "circuit has Feedback"     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="System setup"));
-  parameter Boolean Pump=true "Model includes a pump"
+  parameter Boolean hasPump=true "Model includes a pump"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="System setup"));
   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
     annotation (Dialog(group="System setup"));
@@ -58,7 +44,7 @@ model ModularBoiler
   parameter Real night_hour=22 annotation(Dialog(enable = use_HeaCur, tab="Control", group="Heating Curve"));
   parameter Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve" annotation(Dialog(enable = use_HeaCur, tab="Control", group="Heating Curve"));
-  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=273.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=0
     "Offset to heating curve temperature" annotation(Dialog(enable = use_HeaCur, tab="Control", group="Heating Curve"));
 
   // PLR Flow temperature control
@@ -66,26 +52,30 @@ model ModularBoiler
   parameter Modelica.Units.SI.Time TiPLR=10 "Time constant of Integrator block" annotation (Dialog(tab="Control", group = "Flow temperature"));
 
   // Feedback
+  parameter Boolean hasFeedback=true  "circuit has Feedback"     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="Feedback"));
   parameter Real kFeedBack=1 "Gain of controller" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
   parameter Modelica.Units.SI.Time TiFeedBack=0.5
     "Time constant of Integrator block" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
   parameter Real yMaxFeedBack=0.99 "Upper limit of output" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
   parameter Real yMinFeedBack=0.01 "Lower limit of output" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
-  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  parameter Modelica.Units.SI.PressureDifference dp_Valve  "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
+  parameter Real Kv "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)] annotation (Dialog(enable=hasFeedback))"
+        annotation (Dialog(enable = hasFeedback, group="Feedback"));
 
   Fluid.BoilerCHP.BoilerGeneric boilerGeneric(
     allowFlowReversal=allowFlowReversal,
-    final T_start=TStart,
+    final T_start=T_start,
     final QNom=QNom,
     TSupNom=TSupNom,
-    final TRetNom=TRetNom)
-    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    final TRetNom=TRetNom,
+    energyDynamics=energyDynamics)
+    annotation (Placement(transformation(extent={{12,-10},{32,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
-    final T_start=TStart,
+    final T_start=T_start,
     final transferHeat=false,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001)
@@ -98,7 +88,7 @@ model ModularBoiler
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
-    final T_start=TStart,
+    final T_start=T_start,
     final transferHeat=false,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001)
@@ -106,24 +96,31 @@ model ModularBoiler
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-60,0})));
+        origin={-40,0})));
 
   AixLib.Fluid.Movers.SpeedControlled_y pump(
     redeclare final package Medium = Medium,
+    energyDynamics=energyDynamics,
+    T_start=T_start,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_small=0.001,
     final per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={
             dp_nominal/0.8,dp_nominal,0})),
-    final addPowerToMedium=false) if Pump "Boiler Pump"
-    annotation (Placement(transformation(extent={{-46,-10},{-26,10}})));
+    final addPowerToMedium=false) if hasPump
+                                          "Boiler Pump"
+    annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
 
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
     redeclare final package Medium = Medium,
+    energyDynamics=energyDynamics,
+    T_start=T_start,
     use_inputFilter=false,
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    Kv=Kv,
     final m_flow_nominal= m_flow_nominal,
-    final dpValve_nominal=dp_Valve,
-    final dpFixed_nominal={0,0})           if hasFeedback
-    annotation (Placement(transformation(extent={{-94,-10},{-74,10}})));
+    final dpFixed_nominal={10,10})         if hasFeedback
+    annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
+//    final dpValve_nominal=dp_Valve,
 
   AixLib.Controls.Interfaces.BoilerControlBus
                               boilerControlBus
@@ -143,6 +140,7 @@ model ModularBoiler
     final zerTim=zerTim,
     final TOffset=TOffset,
     final TReturnNom=TRetNom,
+    final hasFeedback=hasFeedback,
     final kFeedBack=kFeedBack,
     final TiFeedBack=TiFeedBack,
     final yMaxFeedBack=yMaxFeedBack,
@@ -155,6 +153,11 @@ model ModularBoiler
 
   parameter Modelica.Units.SI.Temperature TSupNom=353.15
     "Design supply temperature";
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab="Dynamics"), group="Conservation equations");
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
+    "Start value of temperature" annotation (Dialog(tab="Initialization"));
 protected
     parameter Modelica.Units.SI.PressureDifference dp_nominal = dp_nominal_boiler + dp_Valve;
   parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
@@ -162,30 +165,30 @@ protected
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_medium = Medium.cp_const;
 
 equation
-  if not Pump then
+  if not hasPump then
     connect(senTRet.port_b, boilerGeneric.port_a);
   else
     connect(pump.port_b, boilerGeneric.port_a)
-      annotation (Line(points={{-26,0},{-8,0}}, color={0,127,255}));
+      annotation (Line(points={{-6,0},{12,0}},  color={0,127,255}));
     connect(senTRet.port_b, pump.port_a)
-      annotation (Line(points={{-50,0},{-46,0}}, color={0,127,255}));
+      annotation (Line(points={{-30,0},{-26,0}}, color={0,127,255}));
   end if;
 
   connect(senTSup.port_b, port_b)
     annotation (Line(points={{70,0},{100,0}}, color={0,127,255}));
   connect(senTSup.port_a, boilerGeneric.port_b)
-    annotation (Line(points={{50,0},{12,0}}, color={0,127,255}));
+    annotation (Line(points={{50,0},{32,0}}, color={0,127,255}));
 
   if hasFeedback then
     connect(port_a, val.port_1)
-      annotation (Line(points={{-100,0},{-94,0}}, color={0,127,255},
+      annotation (Line(points={{-100,0},{-74,0}}, color={0,127,255},
         pattern=LinePattern.Dash));
     connect(val.port_2, senTRet.port_a) annotation (Line(
-        points={{-74,0},{-70,0}},
+        points={{-54,0},{-50,0}},
         color={0,127,255},
         pattern=LinePattern.Dash));
     connect(port_b, val.port_3)
-      annotation (Line(points={{100,0},{100,-40},{-84,-40},{-84,-10}},
+      annotation (Line(points={{100,0},{78,0},{78,-44},{-64,-44},{-64,-10}},
                       color={0,127,255},
         pattern=LinePattern.Dash));
   else
@@ -194,7 +197,7 @@ equation
 
   connect(boilerGeneric.boilerControlBus, boilerControlBus) annotation (
       Line(
-      points={{2,10},{2,82},{0,82},{0,98}},
+      points={{22,10},{22,92},{0,92},{0,98}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -202,7 +205,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(boilerControlBus.yValSet, val.y) annotation (Line(
-      points={{0,98},{0,44},{-84,44},{-84,12}},
+      points={{0,98},{0,22},{-64,22},{-64,12}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -210,7 +213,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.yPumSet, pump.y) annotation (Line(
-      points={{0,98},{0,44},{-36,44},{-36,12}},
+      points={{0,98},{0,22},{-16,22},{-16,12}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

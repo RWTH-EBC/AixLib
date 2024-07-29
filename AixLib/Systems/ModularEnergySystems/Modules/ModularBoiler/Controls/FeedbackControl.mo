@@ -2,7 +2,7 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls;
 model FeedbackControl "Controller for return feedback mixing"
 protected
   Modelica.Blocks.Sources.RealExpression TSetReturn(final y=TReturnNom)
-    annotation (Placement(transformation(extent={{-76,12},{-56,32}})));
+    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 public
   Modelica.Blocks.Continuous.LimPID PIValve(
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -28,7 +28,7 @@ public
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={-30,22})));
+        origin={-34,0})));
   Modelica.Blocks.Math.Gain gain2(final k=-1)
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -47,10 +47,10 @@ equation
                                                           color={0,0,127}));
   connect(gain2.y, PIValve.u_m)
     annotation (Line(points={{-61.4,-34},{-2,-34},{-2,-12}}, color={0,0,127}));
-  connect(gain1.y, PIValve.u_s) annotation (Line(points={{-23.4,22},{-16,22},{-16,
-          6},{-20,6},{-20,1.9984e-15},{-14,1.9984e-15}}, color={0,0,127}));
+  connect(gain1.y, PIValve.u_s) annotation (Line(points={{-27.4,0},{-20.7,0},{
+          -20.7,1.9984e-15},{-14,1.9984e-15}},           color={0,0,127}));
   connect(TSetReturn.y, gain1.u)
-    annotation (Line(points={{-55,22},{-37.2,22}}, color={0,0,127}));
+    annotation (Line(points={{-49,0},{-41.2,0}},   color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

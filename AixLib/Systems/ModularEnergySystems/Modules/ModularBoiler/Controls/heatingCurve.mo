@@ -12,7 +12,7 @@ model heatingCurve
  parameter Real night_hour=22 annotation (Dialog(group="Heating Curve"));
  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve" annotation (Dialog(group="Heating Curve"));
- parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=273.15
+ parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=0
     "Offset to heating curve temperature" annotation (Dialog(group="Heating Curve"));
 
  AixLib.Controls.SetPoints.HeatingCurve heatingCurve(
