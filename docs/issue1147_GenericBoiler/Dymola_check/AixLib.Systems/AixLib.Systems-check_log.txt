@@ -1,25 +1,7 @@
 
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler
 Error: ERRORS have been issued.
 
 
@@ -29,9 +11,21 @@ Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Con
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.PLRMinCheck
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerFeedback 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerFeedback">AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerFeedback</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerFeedback
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerHeatingCurve 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerHeatingCurve">AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerHeatingCurve</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerHeatingCurve
 Error: ERRORS have been issued.
 
 
@@ -53,20 +47,44 @@ Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Con
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerSimple
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler 
-Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler</a>:
-Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler
+Error in model:  AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerSimple 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerSimple">AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerSimple</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.ModularBoiler.Example.ModularBoilerSimple
 Error: ERRORS have been issued.
 
 
 Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerHeatingCurve 
 Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerHeatingCurve">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerHeatingCurve</a>:
 Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerHeatingCurve
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example.ModularBoilerFeedback
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.heatingCurve
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.BoilerControl
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay 
+Check of <a href="Modelica://AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay">AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay</a>:
+Did not find model AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Controls.DeviceStatusDelay
 Error: ERRORS have been issued.
 
