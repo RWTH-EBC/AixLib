@@ -1,0 +1,152 @@
+
+Error in model:  AixLib.Fluid.Solar.Thermal.SolarThermal 
+Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.SolarThermal">AixLib.Fluid.Solar.Thermal.SolarThermal</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Use of undeclared variable senTCold.T
+Errors found in: connect(senTCold.T, calcTempMean.u1)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 46
+Error: Use of undeclared variable senTHot.T
+Errors found in: connect(senTHot.T, calcTempMean.u2)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
+Check is assuming: m_flow_nominal = 0
+Warning: Non-literal value.
+In nominal attribute for port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senTRet.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTRet.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senTRet.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTRet.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senTSup.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTSup.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senTSup.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTSup.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for preDro.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class preDro.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for preDro.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class preDro.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Solar.Thermal.SolarThermal#$vol:dynBal">vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Storage.Examples.StorageSolarCollector 
+Check of <a href="Modelica://AixLib.Fluid.Storage.Examples.StorageSolarCollector">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>:
+Error: Use of undeclared variable senTCold.T
+Errors found in: connect(senTCold.T, solarThermal.calcTempMean.u1)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 46
+Error: Use of undeclared variable senTHot.T
+Errors found in: connect(senTHot.T, solarThermal.calcTempMean.u2)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
+Error: Unknown function AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters in pump.eff.per.pressure (model <a href="Modelica://AixLib.Fluid.Movers.FlowControlled_dp">AixLib.Fluid.Movers.FlowControlled_dp</a>).
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector 
+Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>:
+Error: Use of undeclared variable senTCold.T
+Errors found in: connect(senTCold.T, solarThermal.calcTempMean.u1)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 46
+Error: Use of undeclared variable senTHot.T
+Errors found in: connect(senTHot.T, solarThermal.calcTempMean.u2)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
