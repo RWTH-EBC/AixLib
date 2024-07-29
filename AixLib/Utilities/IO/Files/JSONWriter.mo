@@ -47,56 +47,56 @@ equation
   annotation (
   defaultComponentName="jsonWri",
   Documentation(info="<html>
- <p>
- This model samples the model inputs <code>u</code> and saves them to a json file.
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- The parameter <code>nin</code> defines the number of variables that are stored.
- In Dymola, this parameter is updated automatically when inputs are connected to the component.
- </p>
- <p>
- The parameter <code>fileName</code> defines to what file name the results
- are saved. The file is in the current working directory,
- unless an absolute path is provided.
- </p>
- <p>
- The parameter <code>keyNames</code> defines the key names that are used to 
- store the json values corresponding to the inputs <code>u</code>.
- </p>
- <h4>Dynamics</h4>
- <p>
- This model samples its inputs at the time defined by the parameter <code>outputTime</code>
- and writes them to the file <code>fileName</code>.
- The model has the following options:
- </p>
- <ul>
- <li>
- If <code>outputTime==OutputTime.Initial</code>, results are saved at initialisation.
- </li>
- <li>
- If <code>outputTime==OutputTime.Custom</code>, results are saved when the built-in variable
- <code>time</code> achieves <code>customTime</code>.
- </li>
- <li>
- If <code>outputTime==OutputTime.Terminal</code>, results are saved when the simulation terminates.
- </li>
- </ul>
- </html>",
+<p>
+This model samples the model inputs <code>u</code> and saves them to a json file.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+The parameter <code>nin</code> defines the number of variables that are stored.
+In Dymola, this parameter is updated automatically when inputs are connected to the component.
+</p>
+<p>
+The parameter <code>fileName</code> defines to what file name the results
+are saved. The file is in the current working directory,
+unless an absolute path is provided.
+</p>
+<p>
+The parameter <code>keyNames</code> defines the key names that are used to 
+store the json values corresponding to the inputs <code>u</code>.
+</p>
+<h4>Dynamics</h4>
+<p>
+This model samples its inputs at the time defined by the parameter <code>outputTime</code>
+and writes them to the file <code>fileName</code>.
+The model has the following options:
+</p>
+<ul>
+<li>
+If <code>outputTime==OutputTime.Initial</code>, results are saved at initialisation.
+</li>
+<li>
+If <code>outputTime==OutputTime.Custom</code>, results are saved when the built-in variable
+<code>time</code> achieves <code>customTime</code>.
+</li>
+<li>
+If <code>outputTime==OutputTime.Terminal</code>, results are saved when the simulation terminates.
+</li>
+</ul>
+</html>",
 revisions="<html>
- <ul>
- <li>
- April 9, 2019 by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+April 9, 2019 by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
+</li>
+</ul>
+</html>"),
   Icon(graphics={
          Text(
           extent={{-88,90},{88,48}},
           textColor={0,0,127},
           horizontalAlignment=TextAlignment.Right,
-          textString="JSON")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="JSON")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end JSONWriter;

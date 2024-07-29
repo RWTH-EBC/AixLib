@@ -88,19 +88,19 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Examples/InternalHEXOneUTube.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- This example simulates the interior thermal behavior of a single U-tube borehole segment.
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source FixedBoundary with Boundary_pT. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- June 2018, by Damien Picard:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This example simulates the interior thermal behavior of a single U-tube borehole segment.
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source FixedBoundary with Boundary_pT. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+June 2018, by Damien Picard:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXOneUTube;

@@ -306,31 +306,31 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Documentation(info="<html>
- <p>
- This block enables the reading of weather measurements and their meta-data by an external
- program without the need to explicitly propagate the signal to a top-level model.
- This block utilizes a number of pre-configured instances of
- <a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Read\">
- AixLib.Utilities.IO.SignalExchange.Read</a>
- </p>
- <h4>Typical use and important parameters</h4>
- <p>
- This block is typically used by the BOPTEST framework
- (see <a href=\"https://github.com/ibpsa/project1-boptest\">BOPTEST</a>)
- to identify and read weather measurements by test
- controllers. It is used in combination with a dedicated parser to perform
- this task (see <a href=\"https://github.com/ibpsa/project1-boptest/tree/master/parsing\">Parser Code</a>).
- </p>
- </html>",
+<p>
+This block enables the reading of weather measurements and their meta-data by an external
+program without the need to explicitly propagate the signal to a top-level model.
+This block utilizes a number of pre-configured instances of
+<a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Read\">
+AixLib.Utilities.IO.SignalExchange.Read</a>
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+This block is typically used by the BOPTEST framework
+(see <a href=\"https://github.com/ibpsa/project1-boptest\">BOPTEST</a>)
+to identify and read weather measurements by test
+controllers. It is used in combination with a dedicated parser to perform
+this task (see <a href=\"https://github.com/ibpsa/project1-boptest/tree/master/parsing\">Parser Code</a>).
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- October 2, 2020 by David Blum:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1402\">#1402</a>.
- </li>
- </ul>
- </html>"),Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+<ul>
+<li>
+October 2, 2020 by David Blum:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1402\">#1402</a>.
+</li>
+</ul>
+</html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}),                                     graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -353,6 +353,6 @@ revisions="<html>
           lineColor={0,0,0},
           fillColor={244,125,35},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{120,120}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{120,120}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end WeatherStation;

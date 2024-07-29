@@ -28,24 +28,24 @@ equation
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/SignalExchange/Examples/FirstOrder.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This example uses the signal exchange blocks in an original model,
- <a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.OriginalModel\">
- AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.OriginalModel</a>
- along with a corresponding model that would result if the original model were
- compiled with the BOPTEST parser, <a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.ExportedModel\">
- AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.ExportedModel</a>
- to demonstrate the overwriting of either setpoint or actuator control signals
- and reading of signals.
- </p>
- </html>",
+<p>
+This example uses the signal exchange blocks in an original model,
+<a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.OriginalModel\">
+AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.OriginalModel</a>
+along with a corresponding model that would result if the original model were
+compiled with the BOPTEST parser, <a href=\"modelica://AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.ExportedModel\">
+AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses.ExportedModel</a>
+to demonstrate the overwriting of either setpoint or actuator control signals
+and reading of signals.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- December 17, 2018, by David Blum:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+December 17, 2018, by David Blum:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end FirstOrder;

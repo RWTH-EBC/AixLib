@@ -20,27 +20,27 @@ algorithm
 annotation (
 Inline=true,
 Documentation(info="<html>
- <p>
- Evaluates the exponential integral (E<sub>1</sub>), based
- on the polynomial and rational approximations of Abramowitz and Stegun (1964).
- </p>
- <h4>References</h4>
- <p>
- Abramowitz, Milton, and Irene A. Stegun. Handbook of Mathematical Functions
- with Formulas, Graphs, and Mathematical Tables. National Bureau of Standards.
- (1964): 1046 p.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 16, 2018 by Michael Wetter:<br/>
- Inlined function.
- </li>
- <li>
- March 21, 2018 by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Evaluates the exponential integral (E<sub>1</sub>), based
+on the polynomial and rational approximations of Abramowitz and Stegun (1964).
+</p>
+<h4>References</h4>
+<p>
+Abramowitz, Milton, and Irene A. Stegun. Handbook of Mathematical Functions
+with Formulas, Graphs, and Mathematical Tables. National Bureau of Standards.
+(1964): 1046 p.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 16, 2018 by Michael Wetter:<br/>
+Inlined function.
+</li>
+<li>
+March 21, 2018 by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end exponentialIntegralE1;

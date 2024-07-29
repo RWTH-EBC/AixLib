@@ -17,23 +17,23 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Discrete/Examples/BooleanDelay.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Example that demonstrates the use of the boolean delay block.
- The output signal of the block is delayed by one sampling interval.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 3, 2017, by Michael Wetter:<br/>
- Changed sampling interval to avoid simultaneous events.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/641\">#641</a>.
- </li>
- <li>
- November 21, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Example that demonstrates the use of the boolean delay block.
+The output signal of the block is delayed by one sampling interval.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 3, 2017, by Michael Wetter:<br/>
+Changed sampling interval to avoid simultaneous events.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/641\">#641</a>.
+</li>
+<li>
+November 21, 2011, by Michael Wetter:<br/>
+Added documentation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end BooleanDelay;

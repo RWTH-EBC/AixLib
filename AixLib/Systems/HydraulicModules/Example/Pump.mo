@@ -10,7 +10,7 @@ model Pump "Test for unmixed pump circuit"
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(speed_rpm_nominal=2540, pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -87,7 +87,7 @@ equation
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(StopTime=800,Interval = 5),
+    experiment(StopTime=800,Interval = 5,Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>December 06, 2022, by EBC-Modelica group:<br/>
     Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
@@ -98,6 +98,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos"
         "Simulate and plot"));
 end Pump;

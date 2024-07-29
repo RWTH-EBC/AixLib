@@ -7,7 +7,7 @@ model DelayFirstOrder
     final mSenFac=1);
 
   parameter Modelica.Units.SI.Time tau=60 "Time constant at nominal flow"
-    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+    annotation (Dialog(group="Delay time"));
 
 protected
   parameter Modelica.Units.SI.Volume V_nominal=m_flow_nominal*tau/rho_default
@@ -19,47 +19,53 @@ protected
           textString="tau=%tau")}),
 defaultComponentName="del",
     Documentation(info="<html>
- <p>
- This model approximates a transport delay using a first order differential equations.
- </p>
- <p>
- The model consists of a mixing volume with two ports. The size of the
- mixing volume is such that at the nominal mass flow rate
- <code>m_flow_nominal</code>,
- the time constant of the volume is equal to the parameter <code>tau</code>.
- </p>
- <p>
- The heat flux connector is optional, it need not be connnected.
- </p>
- </html>",
+<p>
+This model approximates a transport delay using first order differential equations.
+</p>
+<p>
+The model consists of a mixing volume with two ports. The size of the
+mixing volume is such that at the nominal mass flow rate
+<code>m_flow_nominal</code>,
+the time constant of the volume is equal to the parameter <code>tau</code>.
+</p>
+<p>
+The heat flux connector is optional and need not be connnected.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- September 14, 2013, by Michael Wetter:<br/>
- Renamed <code>V0</code> to <code>V_nominal</code> to use consistent notation.
- </li>
- <li>
- September 24, 2008, by Michael Wetter:<br/>
- Changed base class from <code>Modelica.Fluid</code> to <code>AixLib</code> library.
- This was done to track the auxiliary species flow <code>mC_flow</code>.
- </li>
- <li>
- September 4, 2008, by Michael Wetter:<br/>
- Fixed bug in assignment of parameter <code>sta0</code>.
- The earlier implementation
- required temperature to be a state, which is not always the case.
- </li>
- <li>
- March 17, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+July 12, 2024, by Michael Wetter:<br/>
+Moved parameter <code>tau</code> to the main parameter tab.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1906\">#1906</a>.
+</li>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Set <code>final massDynamics=energyDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+September 14, 2013, by Michael Wetter:<br/>
+Renamed <code>V0</code> to <code>V_nominal</code> to use consistent notation.
+</li>
+<li>
+September 24, 2008, by Michael Wetter:<br/>
+Changed base class from <code>Modelica.Fluid</code> to <code>AixLib</code> library.
+This was done to track the auxiliary species flow <code>mC_flow</code>.
+</li>
+<li>
+September 4, 2008, by Michael Wetter:<br/>
+Fixed bug in assignment of parameter <code>sta0</code>.
+The earlier implementation
+required temperature to be a state, which is not always the case.
+</li>
+<li>
+March 17, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DelayFirstOrder;

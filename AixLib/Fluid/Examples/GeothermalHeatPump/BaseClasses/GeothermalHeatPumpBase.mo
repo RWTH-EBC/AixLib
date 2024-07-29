@@ -19,7 +19,7 @@ partial model GeothermalHeatPumpBase
     PeakLoadDeviceModel peaLoaDev
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
-  Storage.BufferStorage
+  Storage.StorageDetailed
                   coldStorage(
     redeclare package Medium = Medium,
     redeclare package MediumHC1 = Medium,
@@ -90,7 +90,7 @@ partial model GeothermalHeatPumpBase
         extent={{-6,-7},{6,7}},
         rotation=90,
         origin={-60,1})));
-  Storage.BufferStorage
+  Storage.StorageDetailed
                   heatStorage(
     redeclare package Medium = Medium,
     redeclare package MediumHC1 = Medium,

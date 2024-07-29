@@ -45,22 +45,22 @@ equation
     annotation (Line(points={{-10,0},{-20,0},{-40,0}}, color={0,127,255}));
 
    annotation (    Documentation(revisions="<html>
- <ul>
- <li>
- May 26, 2017, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- Example model that demonstrates how translation statistics
- depend on the type of boundary conditions,
- the parallel or series configuration of the components
- and the value of parameter <code>from_dp</code>.
- </p>
- </html>"),
+<ul>
+<li>
+May 26, 2017, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+Example model that demonstrates how translation statistics
+depend on the type of boundary conditions,
+the parallel or series configuration of the components
+and the value of parameter <code>from_dp</code>.
+</p>
+</html>"),
     experiment(Tolerance=1e-6, StopTime=1),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesDp.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end SeriesDp;

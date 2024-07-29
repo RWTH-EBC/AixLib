@@ -40,8 +40,8 @@ model HeatTransferConduction
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalInner(
     hCon_const=hConWaterHorizontal,
     A=AFloInt,
-    calcMethod=3,
-    surfaceOrientation=1)
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon,
+    surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall)
                   annotation (Placement(transformation(
         origin={-50,-20},
         extent={{-10,-10},{10,10}},
@@ -49,8 +49,8 @@ model HeatTransferConduction
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterVerticalOuter(
     hCon_const=hConWaterVertical,
     A=AWalExt,
-    calcMethod=3,
-    surfaceOrientation=1)  annotation (Placement(transformation(
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon,
+    surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall)  annotation (Placement(transformation(
         origin={-50,40},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -64,8 +64,8 @@ model HeatTransferConduction
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterHorizontalOuter(
     hCon_const=hConWaterHorizontal,
     A=AFloExt,
-    calcMethod=3,
-    surfaceOrientation=1)  annotation (Placement(transformation(
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon,
+    surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall)  annotation (Placement(transformation(
         origin={-50,-60},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -95,8 +95,8 @@ model HeatTransferConduction
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConvWaterVerticalInner(
     hCon_const=hConWaterVertical,
     A=AWalInt,
-    calcMethod=3,
-    surfaceOrientation=1)  annotation (Placement(transformation(
+    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon,
+    surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall)  annotation (Placement(transformation(
         origin={-50,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));

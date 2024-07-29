@@ -35,25 +35,25 @@ algorithm
 annotation (
 Documentation(
 info="<html>
- <p>
- Implementation of the second derivative of the function
- <a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
- AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
- </p>
- </html>",
+<p>
+Implementation of the second derivative of the function
+<a href=\"modelica://AixLib.Utilities.Math.Functions.regNonZeroPower\">
+AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 17, 2015 by Michael Wetter:<br/>
- Corrected wrong derivative implementation which omitted the <code>der_x</code> term.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
- </li>
- <li>
- April 9, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+August 17, 2015 by Michael Wetter:<br/>
+Corrected wrong derivative implementation which omitted the <code>der_x</code> term.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+</li>
+<li>
+April 9, 2009, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end der_2_regNonZeroPower;

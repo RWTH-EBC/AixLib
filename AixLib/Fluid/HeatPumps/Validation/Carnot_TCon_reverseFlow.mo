@@ -38,7 +38,6 @@ model Carnot_TCon_reverseFlow
     m1_flow_nominal=m1_flow_nominal,
     show_T=true,
     use_eta_Carnot_nominal=true,
-    etaCarnot_nominal=0.3,
     QCon_flow_nominal=QCon_flow_nominal,
     allowFlowReversal1=true,
     allowFlowReversal2=true,
@@ -101,29 +100,35 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPum
         "Simulate and plot"),
     Documentation(
 info="<html>
- <p>
- Example that simulates a heat pump whose efficiency is scaled based on the
- Carnot cycle.
- The heat pump takes as an input the condenser leaving water temperature.
- The condenser mass flow rate is computed in such a way that it has
- a temperature difference equal to <code>dTCon_nominal</code>.
- </p>
- <p>
- This example checks the correct behavior if a mass flow rate attains zero.
- </p>
- </html>",
+<p>
+Example that simulates a heat pump whose efficiency is scaled based on the
+Carnot cycle.
+The heat pump takes as an input the condenser leaving water temperature.
+The condenser mass flow rate is computed in such a way that it has
+a temperature difference equal to <code>dTCon_nominal</code>.
+</p>
+<p>
+This example checks the correct behavior if a mass flow rate attains zero.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- November 25, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 10, 2023, by Michael Wetter:<br/>
+Removed binding of parameter with same value as the default.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1692\">#1692</a>.
+</li>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\">#1072</a>.
+</li>
+<li>
+November 25, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TCon_reverseFlow;

@@ -27,18 +27,18 @@ equation
   ddy=der(dy);
   annotation (experiment(Tolerance=1E-6, StopTime=3),
     Documentation(info="<html>
- <p>
- Demonstration of the use of a quintic Hermite spline interpolation function.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 19, 2017, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Demonstration of the use of a quintic Hermite spline interpolation function.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 19, 2017, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/QuinticHermite.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end QuinticHermite;

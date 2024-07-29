@@ -156,7 +156,8 @@ equation
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
   connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation (
-    Line(points = {{-68, -24}, {-38, -24}, {-38, 10}}, color = {255, 0, 255}));
+    Line(points={{-69,-24},{-37.95,-24},{-37.95,10.05}},
+                                                       color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
@@ -170,10 +171,9 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=4320,
-      __Dymola_fixedstepsize=1,
-      __Dymola_Algorithm="Dassl"),
+      StopTime=4320,Tolerance=1e-06,
+      Interval=1),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Heater.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Heater.mos"
         "Simulate and Plot"));
 end AHU2_Heater;

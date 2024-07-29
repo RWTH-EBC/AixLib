@@ -9,7 +9,7 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
     parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(speed_rpm_nominal=2540, pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -85,7 +85,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(pumpOn.y, hydraulicBus.pumpBus.onSet) annotation (
-    Line(points = {{-72, -30}, {-40, -30}, {-40, 10}}, color = {255, 0, 255}));
+    Line(points={{-73,-30},{-39.95,-30},{-39.95,10.05}},
+                                                       color = {255, 0, 255}));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
@@ -93,7 +94,7 @@ equation
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=800),
+    experiment(StopTime=800,Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.
@@ -101,6 +102,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Injection2WayValve.mos"
         "SImulate and plot"));
 end Injection2WayValve;
