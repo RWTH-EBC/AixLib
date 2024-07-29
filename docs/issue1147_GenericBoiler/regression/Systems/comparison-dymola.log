@@ -36,7 +36,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.Heater",
     "simulation": {
-      "elapsed_time": 0.0229,
+      "elapsed_time": 0.024,
       "final_time": 3600,
       "jacobians": 31,
       "start_time": 0,
@@ -99,7 +99,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Pump",
     "simulation": {
-      "elapsed_time": 0.0182,
+      "elapsed_time": 0.0209,
       "final_time": 800,
       "jacobians": 67,
       "start_time": 0,
@@ -117,20 +117,20 @@
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.ThermalPower",
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple.mat_boilerControlBus.fuelPower"
       ],
-      "success_rate": 1.0,
+      "success_rate": 0.4,
       "t_err_max": [
+        840.0,
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.0
+        840.0,
+        840.0
       ],
       "test_passed": [
+        0,
         1,
         1,
-        1,
-        1,
-        1
+        0,
+        0
       ],
       "var_groups": [
         0,
@@ -147,18 +147,18 @@
         "boilerControlBus.fuelPower"
       ],
       "warnings": [
+        "Absolute error = 2.204e-01 at t = 840.0 for boilerControlBus.TSupMea",
         null,
         null,
-        null,
-        null,
-        null
+        "Absolute error = 4.557e+02 at t = 840.0 for boilerControlBus.ThermalPower",
+        "Absolute error = 5.088e+02 at t = 840.0 for boilerControlBus.fuelPower"
       ]
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple",
     "simulation": {
-      "elapsed_time": 0.0345,
+      "elapsed_time": 0.0219,
       "final_time": 84000,
-      "jacobians": 97,
+      "jacobians": 114,
       "start_time": 0,
       "state_events": 3,
       "success": true
@@ -219,7 +219,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Injection",
     "simulation": {
-      "elapsed_time": 0.027,
+      "elapsed_time": 0.029,
       "final_time": 800,
       "jacobians": 55,
       "start_time": 0,
@@ -318,7 +318,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler",
     "simulation": {
-      "elapsed_time": 2.56,
+      "elapsed_time": 2.78,
       "final_time": 2700,
       "jacobians": 11738,
       "start_time": 0,
@@ -375,7 +375,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
     "simulation": {
-      "elapsed_time": 50.7,
+      "elapsed_time": 52.2,
       "final_time": 6566400.0,
       "jacobians": 24401,
       "start_time": 5961600.0,
@@ -438,7 +438,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Throttle",
     "simulation": {
-      "elapsed_time": 0.0121,
+      "elapsed_time": 0.0113,
       "final_time": 1000,
       "jacobians": 43,
       "start_time": 0,
@@ -456,20 +456,20 @@
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.ThermalPower",
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve.mat_boilerControlBus.fuelPower"
       ],
-      "success_rate": 1.0,
+      "success_rate": 0.0,
       "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
+        840.0,
+        840.0,
+        840.0,
+        840.0,
+        840.0
       ],
       "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1
+        0,
+        0,
+        0,
+        0,
+        0
       ],
       "var_groups": [
         0,
@@ -486,20 +486,20 @@
         "boilerControlBus.fuelPower"
       ],
       "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null
+        "Absolute error = 9.520e+00 at t = 840.0 for boilerControlBus.TSupMea",
+        "Absolute error = 1.047e+01 at t = 840.0 for boilerControlBus.TRetMea",
+        "Absolute error = 7.843e-03 at t = 840.0 for boilerControlBus.Efficiency",
+        "Absolute error = 1.373e+04 at t = 840.0 for boilerControlBus.ThermalPower",
+        "Absolute error = 1.371e+04 at t = 840.0 for boilerControlBus.fuelPower"
       ]
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve",
     "simulation": {
-      "elapsed_time": 0.0542,
+      "elapsed_time": 0.0536,
       "final_time": 84000,
-      "jacobians": 542,
+      "jacobians": 504,
       "start_time": 0,
-      "state_events": 12,
+      "state_events": 10,
       "success": true
     }
   },
@@ -513,20 +513,20 @@
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.ThermalPower",
         "funnel_comp/AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback.mat_boilerControlBus.fuelPower"
       ],
-      "success_rate": 1.0,
+      "success_rate": 0.0,
       "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
+        11600.0,
+        11400.0,
+        11600.0,
+        12000.0,
+        12000.0
       ],
       "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1
+        0,
+        0,
+        0,
+        0,
+        0
       ],
       "var_groups": [
         0,
@@ -543,20 +543,20 @@
         "boilerControlBus.fuelPower"
       ],
       "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null
+        "Absolute error = 3.413e+00 at t = 11600.0 for boilerControlBus.TSupMea",
+        "Absolute error = 6.953e+00 at t = 11400.0 for boilerControlBus.TRetMea",
+        "Absolute error = 1.582e-02 at t = 11600.0 for boilerControlBus.Efficiency",
+        "Absolute error = 7.962e+03 at t = 12000.0 for boilerControlBus.ThermalPower",
+        "Absolute error = 8.286e+03 at t = 12000.0 for boilerControlBus.fuelPower"
       ]
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback",
     "simulation": {
-      "elapsed_time": 2.82,
+      "elapsed_time": 6.2,
       "final_time": 20000,
-      "jacobians": 32091,
+      "jacobians": 69639,
       "start_time": 0,
-      "state_events": 2547,
+      "state_events": 5480,
       "success": true
     }
   },
@@ -615,7 +615,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
     "simulation": {
-      "elapsed_time": 0.0286,
+      "elapsed_time": 0.0226,
       "final_time": 800,
       "jacobians": 53,
       "start_time": 0,
@@ -714,7 +714,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater",
     "simulation": {
-      "elapsed_time": 1.2,
+      "elapsed_time": 1.09,
       "final_time": 4320,
       "jacobians": 4262,
       "start_time": 0,
@@ -783,7 +783,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
     "simulation": {
-      "elapsed_time": 0.156,
+      "elapsed_time": 0.133,
       "final_time": 7200,
       "jacobians": 40,
       "start_time": 0,
@@ -846,7 +846,7 @@
     },
     "model": "AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
     "simulation": {
-      "elapsed_time": 1.82,
+      "elapsed_time": 2.08,
       "final_time": 86400,
       "jacobians": 8350,
       "start_time": 0,
@@ -945,7 +945,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater",
     "simulation": {
-      "elapsed_time": 1.5,
+      "elapsed_time": 1.65,
       "final_time": 7200,
       "jacobians": 4988,
       "start_time": 0,
@@ -1008,7 +1008,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
     "simulation": {
-      "elapsed_time": 0.019,
+      "elapsed_time": 0.0157,
       "final_time": 600,
       "jacobians": 46,
       "start_time": 0,
@@ -1071,7 +1071,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Admix",
     "simulation": {
-      "elapsed_time": 0.0214,
+      "elapsed_time": 0.0232,
       "final_time": 800,
       "jacobians": 56,
       "start_time": 0,
