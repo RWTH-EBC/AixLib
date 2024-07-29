@@ -124,6 +124,19 @@ Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector 
+Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>:
+Error: Use of undeclared variable senTCold.T
+Errors found in: connect(senTCold.T, solarThermal.calcTempMean.u1)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 46
+Error: Use of undeclared variable senTHot.T
+Errors found in: connect(senTHot.T, solarThermal.calcTempMean.u2)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.Fluid.Storage.Examples.StorageSolarCollector 
 Check of <a href="Modelica://AixLib.Fluid.Storage.Examples.StorageSolarCollector">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>:
 Error: Use of undeclared variable senTCold.T
@@ -133,19 +146,6 @@ Error: Use of undeclared variable senTHot.T
 Errors found in: connect(senTHot.T, solarThermal.calcTempMean.u2)
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
 Error: Unknown function AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters in pump.eff.per.pressure (model <a href="Modelica://AixLib.Fluid.Movers.FlowControlled_dp">AixLib.Fluid.Movers.FlowControlled_dp</a>).
-The model contained invalid expressions.
-Check aborted.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector 
-Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>:
-Error: Use of undeclared variable senTCold.T
-Errors found in: connect(senTCold.T, solarThermal.calcTempMean.u1)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 46
-Error: Use of undeclared variable senTHot.T
-Errors found in: connect(senTHot.T, solarThermal.calcTempMean.u2)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/SolarThermal.mo, line 48
 The model contained invalid expressions.
 Check aborted.
 Error: ERRORS have been issued.
