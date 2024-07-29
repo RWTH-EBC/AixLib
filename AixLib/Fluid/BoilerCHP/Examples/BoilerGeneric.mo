@@ -75,7 +75,7 @@ equation
     annotation (Line(points={{-8,0},{-42,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=2000, __Dymola_Algorithm="Dassl"),
+    experiment(Tolerance=1e-6, StopTime=2000, __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/BoilerGeneric.mos"
         "Simulate and Plot"),
     Documentation(info="<html><h4>
