@@ -203,9 +203,7 @@ replaceable package Medium2 =
     final m_flow_nominal=m1_flow_nominal,
     redeclare Fluid.Movers.Data.Generic per(
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-
       etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
-
       efficiency=hydraulicEfficiency),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Supply air fan"
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
@@ -218,9 +216,7 @@ replaceable package Medium2 =
     final m_flow_nominal=m1_flow_nominal,
     redeclare Fluid.Movers.Data.Generic per(
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-
       etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
-
       efficiency=hydraulicEfficiency),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
@@ -653,8 +649,8 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(points={{-210,0},{-166,0},{-90,0}},  color={28,108,200}),
-        Rectangle(visible=usePreheater, extent={{-164,38},{-116,-40}}, lineColor
-            = {0,0,0},
+        Rectangle(visible=usePreheater, extent={{-164,38},{-116,-40}}, lineColor=
+              {0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Rectangle(extent={{-4,38},{44,-40}}, lineColor={0,0,0}),
