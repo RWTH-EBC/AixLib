@@ -98,7 +98,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 annotation (
-    experiment(StopTime=86400, __Dymola_Algorithm="Dassl"),
+    experiment(StopTime=86400, Tolerance=1e-06, __Dymola_Algorithm="Dassl"),
      __Dymola_Commands(file=
         "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerSimple.mos"
         "Simulate and Plot"), Documentation(info="<html>

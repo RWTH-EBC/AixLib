@@ -113,7 +113,7 @@ equation
   connect(senTRet.port_b, modularBoiler.port_a) annotation (Line(points={{14,
           -62},{-56,-62},{-56,0},{-34,0}}, color={0,127,255}));
 annotation (
-    experiment(StopTime=86400, __Dymola_Algorithm="Dassl"),
+    experiment(StopTime=86400, Tolerance=1e-06, __Dymola_Algorithm="Dassl"),
      __Dymola_Commands(file=
         "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerFeedback.mos"
         "Simulate and Plot"), Documentation(info="<html>
