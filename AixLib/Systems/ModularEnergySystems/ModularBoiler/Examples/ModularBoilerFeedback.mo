@@ -7,7 +7,7 @@ model ModularBoilerFeedback
 
   ModularBoiler modularBoiler(
     hasPump=true,
-    QNom=50000,
+    Q_flow_nominal=50000,
     kFeedBack=1,
     TiFeedBack=1,
     T_start=303.15,

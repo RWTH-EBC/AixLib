@@ -54,10 +54,10 @@ model DeviceStatusDelay
         rotation=90,
         origin={-80,30})));
   Modelica.Blocks.Interfaces.BooleanInput
-                                       u "Connector of Boolean input signal"
+                                       u "On/Off signal that should be checked"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.BooleanOutput y
-    "Connector of Boolean output signal"
+    "On/Off signal checked against minimal and maximum on/off time"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.BooleanInput u_safety if use_safetyShutoff
     "set true, to force shutoff and hold until false"
@@ -126,7 +126,7 @@ equation
     Documentation(info="<html><p>
   The model makes sure that an on signal is only passed through if the
   device was on for a given time <span style=
-  \"font-family: Courier New;\">thresholdTimer</span> asdf
+  \"font-family: Courier New;\">thresholdTimer</span>.
 </p>
 <p>
   <br/>
@@ -136,8 +136,10 @@ equation
   \"font-family: Courier New;\">thresholdTimer</span> is exceeded the
   output signal can switch to false but will stay true until the input
   value is set to false again. Then again the timer start to count and
-  the output won't change to true until the timer is finished again.
+  the output won't change to true until the timer is finished again.<br/>
 </p>
+With the additional input <span style=
+  \"font-family: Courier New;\">u_saftey</span> the output is immediatly set to off, even if the timer wouldn't allow it.
 </html>", revisions="<html>
 <ul>
   <li>October 10, 2019, by David Jansen:<br/>

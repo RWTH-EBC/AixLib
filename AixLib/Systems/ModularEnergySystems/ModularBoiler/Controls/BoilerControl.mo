@@ -4,7 +4,7 @@ model BoilerControl "Master controller that holds all other controls"
   //Nominal
     parameter Modelica.Units.SI.Temperature dtWaterNom "Constant output value"
     annotation (Dialog(group="Nominal Condition"));
-  parameter Modelica.Units.SI.Temperature TReturnNom=323.15
+  parameter Modelica.Units.SI.Temperature TRetNom=323.15
     "Nominal return temperature" annotation (Dialog(group="Nominal Condition"));
 
   // Firing Rate Flow Control
@@ -76,7 +76,7 @@ model BoilerControl "Master controller that holds all other controls"
     final TOffset=TOffset)          if TFlowByHeaCur
     annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));
   FeedbackControl feedbackControl(
-    TRetNom=TReturnNom,
+    TRetNom=TRetNom,
     final k=kFeedBack,
     final Ti=TiFeedBack,
     final yMax=yMaxFeedBack,

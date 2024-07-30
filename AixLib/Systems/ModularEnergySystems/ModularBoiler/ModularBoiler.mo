@@ -2,29 +2,32 @@ within AixLib.Systems.ModularEnergySystems.ModularBoiler;
 model ModularBoiler
   "Modular Boiler Model - With pump and feedback - Simple PLR regulation"
 
-    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
-    redeclare package Medium = MediumWater,
-    final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
+      Medium = MediumWater, final m_flow_nominal=Q_flow_nominal/(Medium.cp_const
+        *dT_nominal));
 
   // System Parameters
   parameter Boolean hasPump=true "Model includes a pump"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="System setup"));
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Thermal dimension power"
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
+    "Thermal dimension power"
     annotation (Dialog(group="System setup"));
   parameter Real FirRatMin=0.15 "Minimal firing rate"  annotation(Dialog(group="System setup"));
   package MediumWater = AixLib.Media.Water "Boiler Medium" annotation(Dialog(group="System setup"));
 
   // Nominal parameters
-    parameter Modelica.Units.SI.Temperature TRetNom=308.15
+  parameter Modelica.Units.SI.Temperature TRet_nominal=308.15
     "Return temperature TCold"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
+  parameter Modelica.Units.SI.TemperatureDifference dT_nominal=20
+    "Temperature difference nominal"
     annotation (Dialog(group="Nominal condition"));
-
+  parameter Modelica.Units.SI.Temperature TSup_nominal=353.15
+    "Design supply temperature" annotation (Dialog(group="Nominal condition"));
   // Safety Control
-  parameter Modelica.Units.SI.Temperature TFlowMax=363.15
+  parameter Modelica.Units.SI.Temperature TSup_max=363.15
     "Maximal temperature to force shutdown" annotation(Dialog(tab="Control", group="Safety"));
-  parameter Modelica.Units.SI.Temperature TRetMin=313.15
+  parameter Modelica.Units.SI.Temperature TRet_min=313.15
     "Minimum return temperature, at which the system is shut down" annotation(Dialog(tab="Control", group="Safety"));
   parameter Modelica.Units.SI.Time time_minOff=900
     "Time after which the device can be turned on again" annotation(Dialog(tab="Control", group="Safety"));
@@ -69,9 +72,9 @@ model ModularBoiler
   Fluid.BoilerCHP.BoilerGeneric boilerGeneric(
     allowFlowReversal=allowFlowReversal,
     final T_start=T_start,
-    final QNom=QNom,
-    TSupNom=TSupNom,
-    final TRetNom=TRetNom,
+    final QNom=Q_flow_nominal,
+    TSupNom=TSup_nominal,
+    final TRetNom=TRet_nominal,
     energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{12,-10},{32,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(
@@ -130,7 +133,7 @@ model ModularBoiler
     annotation (Placement(transformation(extent={{-10,88},{10,108}})));
 
   Controls.BoilerControl boilerControl(
-    dtWaterNom=dTWaterNom,
+    dtWaterNom=dT_nominal,
     final FirRatMin=FirRatMin,
     kFloTem=kFloTem,
     TiFloTem=TiFloTem,
@@ -142,20 +145,18 @@ model ModularBoiler
     final night_hour=night_hour,
     final zerTim=zerTim,
     final TOffset=TOffset,
-    final TReturnNom=TRetNom,
+    final TRetNom=TRet_nominal,
     final hasFeedback=hasFeedback,
     final kFeedBack=kFeedBack,
     final TiFeedBack=TiFeedBack,
     final yMaxFeedBack=yMaxFeedBack,
     final yMinFeedBack=yMinFeedBack,
-    final TRetMin=TRetMin,
+    final TRetMin=TRet_min,
     final time_minOff=time_minOff,
-    final TFlowMax=TFlowMax,
+    final TFlowMax=TSup_max,
     final time_minOn=time_minOn) "Central control unit of boiler"
     annotation (Placement(transformation(extent={{-96,58},{-62,92}})));
 
-  parameter Modelica.Units.SI.Temperature TSupNom=353.15
-    "Design supply temperature";
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab="Dynamics"), group="Conservation equations");
@@ -166,7 +167,8 @@ model ModularBoiler
 protected
     parameter Modelica.Units.SI.PressureDifference dp_nominal = dp_nominal_boiler + dp_Valve;
   parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-  parameter Modelica.Units.SI.PressureDifference dp_nominal_boiler=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.Units.SI.PressureDifference dp_nominal_boiler=7.143*10^8*
+      exp(-0.007078*Q_flow_nominal/1000)*(V_flow_nominal)^2;
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_medium = Medium.cp_const;
 
 equation

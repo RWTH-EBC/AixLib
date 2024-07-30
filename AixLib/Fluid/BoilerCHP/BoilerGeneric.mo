@@ -4,19 +4,20 @@ model BoilerGeneric "Generic performance map based boiler"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
     T_start=T_start,
     a=coeffPresLoss,
-    redeclare package Medium=AixLib.Media.Water,
-    vol(energyDynamics=energyDynamics,                             V=(1.1615*
-          QNom/1000)/1000),
-    final m_flow_nominal=QNom/(Medium.cp_const*(TSupNom - TRetNom)),
+    redeclare package Medium = AixLib.Media.Water,
+    vol(energyDynamics=energyDynamics, V=(1.1615*Q_flow_nominal/1000)/1000),
+    final m_flow_nominal=Q_flow_nominal/(Medium.cp_const*(TSup_nominal -
+        TRet_nominal)),
     final dp_nominal=m_flow_nominal^2*a/(Medium.d_const^2));
 
-  parameter Modelica.Units.SI.HeatFlowRate QNom       "Design thermal capacity";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
+    "Design thermal capacity" annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
-  parameter Modelica.Units.SI.Temperature TSupNom=353.15
-    "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
+  parameter Modelica.Units.SI.Temperature TSup_nominal=353.15
+    "Design supply temperature" annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
-  parameter Modelica.Units.SI.Temperature TRetNom=333.15
-    "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
+  parameter Modelica.Units.SI.Temperature TRet_nominal=333.15
+    "Design return temperature" annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
       T(start=T_start))            "Boiler thermal capacity (dry weight)"
@@ -25,15 +26,15 @@ model BoilerGeneric "Generic performance map based boiler"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.OffDesignOperation offDesignOperation(
-    QNom=QNom,
-    TSupNom=TSupNom,
-    TRetNom=TRetNom) "off design operation"
+    QNom=Q_flow_nominal,
+    TSupNom=TSup_nominal,
+    TRetNom=TRet_nominal) "off design operation"
     annotation (Placement(transformation(extent={{30,70},{50,90}})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(final G=
-        0.0465*QNom/1000 + 4.9891)
-                             "Thermal resistance of the boiler casing"
-    annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(
+      final G=0.0465*Q_flow_nominal/1000 + 4.9891)
+    "Thermal resistance of the boiler casing" annotation (Placement(
+        transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-38,-34})));
@@ -47,9 +48,9 @@ model BoilerGeneric "Generic performance map based boiler"
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor( final T(unit="K"))
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   BaseClasses.DesignOperation designOperation(
-    QNom=QNom,
-    TSupNom=TSupNom,
-    TRetNom=TRetNom) "designOperation for design fuel power"
+    QNom=Q_flow_nominal,
+    TSupNom=TSup_nominal,
+    TRetNom=TRet_nominal) "designOperation for design fuel power"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   Modelica.Blocks.Math.Product fuelPower(final y(unit="W")) "fuel power" annotation (Placement(
         transformation(
@@ -63,9 +64,9 @@ model BoilerGeneric "Generic performance map based boiler"
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"  annotation (Dialog(tab="Dynamics", group="Conservation equations"));
 protected
-  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
+  parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*Q_flow_nominal/1000)
     "Pressure loss coefficient of the heat generator";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*Q_flow_nominal
     "Heat capacity of metal (J/K)";
 
 equation
@@ -147,8 +148,8 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The model differs between <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> and <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a>.</p>
-<p>In <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> for nominal conditions the (max) fuel power is estimated. The <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a> fuel consumption is estimated via firing rate. </p>
+<p>The model differs between <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> and <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a>.</p>
+<p>In <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation\">DesignOperation</a> for nominal conditions the (max) fuel power is estimated. The <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation\">OffDesignOperation</a> fuel consumption is estimated via firing rate. </p>
 <p>During operation, the transferred heat flow is estimated with respect to actual efficiency within a performance map.</p>
 <p><br>Further assumptions are used:</p>
 <ul>

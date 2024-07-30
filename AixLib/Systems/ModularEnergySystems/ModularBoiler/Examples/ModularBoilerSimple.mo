@@ -7,7 +7,7 @@ model ModularBoilerSimple
 
   ModularBoiler modularBoiler(
     hasPump=true,
-    QNom=50000,
+    Q_flow_nominal=50000,
     T_start=303.15,
     hasFeedback=false,
     use_tableData=true,
