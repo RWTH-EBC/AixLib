@@ -35,6 +35,7 @@ model ModularBoilerHeatingCurve
         origin={-88,76})));
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = AixLib.Media.Water,
+    energyDynamics=modularBoiler.energyDynamics,
     massDynamics=modularBoiler.energyDynamics,
     T_start=modularBoiler.T_start,
     m_flow_nominal=modularBoiler.m_flow_nominal,
