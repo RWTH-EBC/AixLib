@@ -1,28 +1,28 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
 model DesignOperation "Operating for design conditions"
 
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Design thermal capacity";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
+    "Design thermal capacity";
 
-  parameter Modelica.Units.SI.Temperature TSupNom=273.15 + 80
+  parameter Modelica.Units.SI.Temperature TSup_nominal=273.15 + 80
     "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
-  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 60
+  parameter Modelica.Units.SI.Temperature TRet_nominal=273.15 + 60
     "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
 
 
-  Modelica.Blocks.Sources.RealExpression ReturnTemp(y=TRetNom)
+  Modelica.Blocks.Sources.RealExpression ReturnTemp(y=TRet_nominal)
     "Nominal return temperature"
     annotation (Placement(transformation(extent={{-100,6},{-54,30}})));
 
   Modelica.Blocks.Sources.RealExpression y_fullLoad(y=1) "realtive power"
     annotation (Placement(transformation(extent={{-100,-52},{-54,-28}})));
 
-  Modelica.Blocks.Sources.RealExpression conductance(y=0.0465*QNom/1000 +
-        4.9891)
-    "Thermal conductance"
+  Modelica.Blocks.Sources.RealExpression conductance(y=0.0465*Q_flow_nominal/
+        1000 + 4.9891) "Thermal conductance"
     annotation (Placement(transformation(extent={{-98,54},{-52,78}})));
-  Modelica.Blocks.Sources.RealExpression NomCap(y=QNom)
+  Modelica.Blocks.Sources.RealExpression NomCap(y=Q_flow_nominal)
     "Nominal thermal capacity"
     annotation (Placement(transformation(extent={{-100,28},{-54,52}})));
   Modelica.Blocks.Math.Division division
@@ -55,10 +55,10 @@ model DesignOperation "Operating for design conditions"
 
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{-36,-14},{-16,6}})));
-  Modelica.Blocks.Sources.RealExpression SupplyTemp(y=TSupNom)
+  Modelica.Blocks.Sources.RealExpression SupplyTemp(y=TSup_nominal)
     "Nominal supply temperature"
     annotation (Placement(transformation(extent={{-100,-22},{-54,2}})));
-  Modelica.Blocks.Sources.RealExpression DeltaT_amb(y=TSupNom - 293.15)
+  Modelica.Blocks.Sources.RealExpression DeltaT_amb(y=TSup_nominal - 293.15)
     "temperature difference supply-ambient"
     annotation (Placement(transformation(extent={{-100,80},{-54,104}})));
   Modelica.Blocks.Math.Product losses "Nominal boiler losses"

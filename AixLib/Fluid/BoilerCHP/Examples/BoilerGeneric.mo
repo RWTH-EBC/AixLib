@@ -7,9 +7,9 @@ model BoilerGeneric
   AixLib.Fluid.BoilerCHP.BoilerGeneric boiGen(
     redeclare package Medium = Medium,
     T_start=293.15,
-    QNom=20000,
-    TSupNom=353.15,
-    TRetNom=333.15)
+    Q_flow_nominal=20000,
+    TSup_nominal=353.15,
+    TRet_nominal=333.15)
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_m_flow_in=false,

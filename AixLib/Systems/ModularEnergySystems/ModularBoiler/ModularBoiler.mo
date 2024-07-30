@@ -72,9 +72,9 @@ model ModularBoiler
   Fluid.BoilerCHP.BoilerGeneric boilerGeneric(
     allowFlowReversal=allowFlowReversal,
     final T_start=T_start,
-    final QNom=Q_flow_nominal,
-    TSupNom=TSup_nominal,
-    final TRetNom=TRet_nominal,
+    final Q_flow_nominal=Q_flow_nominal,
+    TSup_nominal=TSup_nominal,
+    final TRet_nominal=TRet_nominal,
     energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{12,-10},{32,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(

@@ -26,9 +26,9 @@ model BoilerGeneric "Generic performance map based boiler"
         rotation=90,
         origin={-18,-50})));
   BaseClasses.OffDesignOperation offDesignOperation(
-    QNom=Q_flow_nominal,
-    TSupNom=TSup_nominal,
-    TRetNom=TRet_nominal) "off design operation"
+    Q_flow_nominal=Q_flow_nominal,
+    TSup_nominal=TSup_nominal,
+    TRet_nominal=TRet_nominal) "off design operation"
     annotation (Placement(transformation(extent={{30,70},{50,90}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor conductanceToEnv(
@@ -48,9 +48,9 @@ model BoilerGeneric "Generic performance map based boiler"
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor( final T(unit="K"))
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   BaseClasses.DesignOperation designOperation(
-    QNom=Q_flow_nominal,
-    TSupNom=TSup_nominal,
-    TRetNom=TRet_nominal) "designOperation for design fuel power"
+    Q_flow_nominal=Q_flow_nominal,
+    TSup_nominal=TSup_nominal,
+    TRet_nominal=TRet_nominal) "designOperation for design fuel power"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   Modelica.Blocks.Math.Product fuelPower(final y(unit="W")) "fuel power" annotation (Placement(
         transformation(

@@ -1,12 +1,13 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
 model OffDesignOperation
 
-  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Design thermal capacity";
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
+    "Design thermal capacity";
 
-  parameter Modelica.Units.SI.Temperature TSupNom=273.15 + 80
+  parameter Modelica.Units.SI.Temperature TSup_nominal=273.15 + 80
     "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
-  parameter Modelica.Units.SI.Temperature TRetNom=273.15 + 60
+  parameter Modelica.Units.SI.Temperature TRet_nominal=273.15 + 60
     "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
 
@@ -38,17 +39,17 @@ package Medium=AixLib.Media.Water;
 
   Modelica.Blocks.Math.Division devision
     annotation (Placement(transformation(extent={{-30,-30},{-12,-12}})));
-  Modelica.Blocks.Sources.RealExpression TRetNomExp(y=TRetNom)
+  Modelica.Blocks.Sources.RealExpression TRetNomExp(y=TRet_nominal)
     "Nominal return temperature"
     annotation (Placement(transformation(extent={{-92,18},{-46,42}})));
-  Modelica.Blocks.Sources.RealExpression TSupNomExp(y=TSupNom)
+  Modelica.Blocks.Sources.RealExpression TSupNomExp(y=TSup_nominal)
     "Nominal supply temperature"
     annotation (Placement(transformation(extent={{-92,-4},{-46,20}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
 protected
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nom=QNom/(Medium.cp_const*(
-      TSupNom - TRetNom));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nom=Q_flow_nominal/(Medium.cp_const
+      *(TSup_nominal - TRet_nominal));
 equation
 
   connect(boilerControlBus.m_flowMea, devision1.u1) annotation (Line(
