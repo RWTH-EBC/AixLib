@@ -9,14 +9,14 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-0-s8fd18sg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-0-xphfhn9n/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-0-s8fd18sg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-0-xphfhn9n/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The model has the same number of unknowns and equations: 575
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -47,20 +47,15 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-0-s8fd18sg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-0-xphfhn9n/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-0-s8fd18sg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-0-xphfhn9n/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The DAE has 575 scalar unknowns and 575 scalar equations.
-Warning: The initial conditions are not fully specified.
-Dymola has selected default initial conditions.
-Warning: Assuming fixed start value for the continuous states:
-    vol.dynBal.U(start = 4165531.824*(vol.dynBal.fluidVolume*(vol.dynBal.T_start      -273.15)))
- 
  
 Statistics
  
@@ -75,13 +70,12 @@ Original Model
   Nontrivial: 485
 Translated Model
   Constants: 412 scalars
-  Free parameters: 127 scalars
-  Parameter depending: 293 scalars
+  Free parameters: 126 scalars
+  Parameter depending: 294 scalars
   Outputs: 10 scalars
   Continuous time states: 10 scalars
   Time-varying variables: 143 scalars
   Alias variables: 382 scalars
-  Assumed default initial conditions: 1
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {4}
   Sizes after manipulation of the linear systems: {0}
@@ -123,14 +117,14 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-1-wtstcp5e/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-1-65t3c1iy/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-1-wtstcp5e/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-1-65t3c1iy/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The model has the same number of unknowns and equations: 604
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -161,14 +155,14 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-1-wtstcp5e/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-1-65t3c1iy/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-1-wtstcp5e/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-1-65t3c1iy/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The DAE has 604 scalar unknowns and 604 scalar equations.
 Warning: The initial conditions are not fully specified.
 Dymola has selected default initial conditions.
@@ -189,8 +183,8 @@ Original Model
   Nontrivial: 504
 Translated Model
   Constants: 536 scalars
-  Free parameters: 328 scalars
-  Parameter depending: 516 scalars
+  Free parameters: 327 scalars
+  Parameter depending: 517 scalars
   Outputs: 9 scalars
   Continuous time states: 10 scalars
   Time-varying variables: 163 scalars
@@ -237,14 +231,14 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-2-88g7j9gx/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-2-wac39ezl/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-2-88g7j9gx/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-2-wac39ezl/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The model has the same number of unknowns and equations: 745
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -275,20 +269,15 @@ Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-2-88g7j9gx/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-2-wac39ezl/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Warning: Non-literal value.
 In nominal attribute for modularBoiler.boilerGeneric.preDro.dp.
 Ignoring nominal attribute.
 In class Modelica.Units.SI.
   Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
 Used in base-class modularBoiler.boilerGeneric.preDro.PartialTwoPortInterface.
-  Near file: /tmp/tmp-AixLib-2-88g7j9gx/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+  Near file: /tmp/tmp-AixLib-2-wac39ezl/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 The DAE has 745 scalar unknowns and 745 scalar equations.
-Warning: The initial conditions are not fully specified.
-Dymola has selected default initial conditions.
-Warning: Assuming fixed start value for the continuous states:
-    vol.dynBal.U(start = 4165531.824*(vol.dynBal.fluidVolume*(vol.dynBal.T_start      -273.15)))
- 
  
 Statistics
  
@@ -303,13 +292,12 @@ Original Model
   Nontrivial: 630
 Translated Model
   Constants: 559 scalars
-  Free parameters: 172 scalars
-  Parameter depending: 359 scalars
+  Free parameters: 171 scalars
+  Parameter depending: 360 scalars
   Outputs: 11 scalars
   Continuous time states: 13 scalars
   Time-varying variables: 195 scalars
   Alias variables: 491 scalars
-  Assumed default initial conditions: 1
   Number of mixed real/discrete systems of equations: 0
   Sizes of linear systems of equations: {4}
   Sizes after manipulation of the linear systems: {0}

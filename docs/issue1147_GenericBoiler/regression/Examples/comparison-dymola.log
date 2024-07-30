@@ -48,9 +48,9 @@
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerSimple",
     "simulation": {
-      "elapsed_time": 0.0198,
+      "elapsed_time": 0.0193,
       "final_time": 84000,
-      "jacobians": 97,
+      "jacobians": 114,
       "start_time": 0,
       "state_events": 3,
       "success": true
@@ -105,11 +105,11 @@
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerHeatingCurve",
     "simulation": {
-      "elapsed_time": 0.053,
+      "elapsed_time": 0.056,
       "final_time": 84000,
-      "jacobians": 542,
+      "jacobians": 504,
       "start_time": 0,
-      "state_events": 12,
+      "state_events": 10,
       "success": true
     }
   },
@@ -162,11 +162,11 @@
     },
     "model": "AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback",
     "simulation": {
-      "elapsed_time": 2.95,
+      "elapsed_time": 6.37,
       "final_time": 20000,
-      "jacobians": 32091,
+      "jacobians": 69639,
       "start_time": 0,
-      "state_events": 2547,
+      "state_events": 5480,
       "success": true
     }
   }
