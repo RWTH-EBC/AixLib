@@ -13,8 +13,11 @@ model BoilerNoControl "Boiler model with physics only"
     "Heat capacity of metal (J/K)";
   parameter Modelica.Units.SI.Volume V=paramBoiler.volume "Volume";
 
-  parameter Modelica.Units.SI.Power Q_nom=paramBoiler.Q_nom
+  parameter Modelica.Units.SI.Power Q_nom=paramBoiler.Q_flow_nominal
     "Nominal heating power";
+    parameter Modelica.Units.SI.Power Q_flowFuel_nominal=paramBoiler.Q_flowFuel_nominal
+    "Nominal firing power";
+
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(
       final C=C, T(start=T_start)) "Boiler thermal capacity (dry weight)"
@@ -33,8 +36,8 @@ model BoilerNoControl "Boiler model with physics only"
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
     "Limits the rel power between 0 and 1"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
-        max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
+  Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=
+        Q_flowFuel_nominal)
     "Nominal gas power"
     annotation (Placement(transformation(extent={{-74,84},{-34,104}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower

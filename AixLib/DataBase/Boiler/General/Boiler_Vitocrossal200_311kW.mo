@@ -5,7 +5,8 @@ record Boiler_Vitocrossal200_311kW
     name="Vitocrossal200_311kW",
     volume=279/1000,
     pressureDrop = 4000/(7.79e-3)^2,
-    Q_nom = 326000,
+    Q_flowFuel_nominal = 326000,
+    Q_flow_nominal=311000,
     Q_min = 326000*0.33,
     eta = [0.3, (0.973+0.989)/2;
            0.4, (0.960+0.981)/2;

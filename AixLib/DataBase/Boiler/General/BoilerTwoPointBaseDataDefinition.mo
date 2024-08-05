@@ -10,7 +10,9 @@ record BoilerTwoPointBaseDataDefinition
     "Water volume of boiler";
   parameter Real pressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*Q_flow[m^3/s]^2";
-  parameter SI.Power Q_nom
+      parameter SI.Power Q_flowFuel_nominal
+    "Nominal fuel power / firing power, refering to net (inferior) calorific value";
+  parameter SI.Power Q_flow_nominal
     "Nominal heat power / thermal load, refering to net (inferior) calorific value";
   parameter SI.Power Q_min
     "Minimal heat power / thermal load, refering to net (inferior) calorific value";
