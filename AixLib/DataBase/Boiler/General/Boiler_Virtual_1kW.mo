@@ -5,7 +5,7 @@ record Boiler_Virtual_1kW "Boiler virtual 1kW"
     volume=0.00076,
     pressureDrop=10218000000.0,
     Q_flowFuel_nominal=1000,
-    Q_flow_nominal=1,
+    Q_flow_nominal=900,
     Q_min=100,
     eta=[0.3,0.93; 1.0,0.93]);
     annotation (Documentation(revisions="<html><ul>
