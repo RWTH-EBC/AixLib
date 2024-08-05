@@ -1,0 +1,760 @@
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>:
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>:
+Warning: Members of records must be set in declaration, modified iceFacMea.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 40
+  Context: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase.heatPumpControlBus.iceFacMea</a>
+Original declaration of iceFacMea:
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Interfaces/VapourCompressionMachineControlBus.mo, line 42
+  Context: <a href="Modelica://AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea">AixLib.Controls.Interfaces.VapourCompressionMachineControlBus.iceFacMea</a>
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 14
+  Context: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel</a>
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.ControlerHeater:h">peaLoaDev.boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for peaLoaDev.boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.ControlerHeater:h">peaLoaDev.boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl:ControlerHeater">peaLoaDev.boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.QNormated:k">peaLoaDev.boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for peaLoaDev.boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.QNormated:k">peaLoaDev.boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl:QNormated">peaLoaDev.boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>:
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$ControlerHeater:h">ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$ControlerHeater:h">ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#:ControlerHeater">ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$QNormated:k">QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$QNormated:k">QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#:QNormated">QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>:
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Warning: Non-literal value.
+In nominal attribute for port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.dp.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Units.SI">Modelica.Units.SI</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class boiler.pressureDrop.PartialTwoPortInterface.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.vol:dynBal">boiler.vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: boiler.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Warning: Non-literal value.
+In nominal attribute for port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.dp.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Units.SI">Modelica.Units.SI</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class boiler.pressureDrop.PartialTwoPortInterface.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.vol:dynBal">boiler.vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: boiler.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Warning: Non-literal value.
+In nominal attribute for port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTCold.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTCold.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senTHot.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senTHot.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.pressureDrop.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for boiler.pressureDrop.dp.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Units.SI">Modelica.Units.SI</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class boiler.pressureDrop.PartialTwoPortInterface.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.vol:dynBal">boiler.vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for boiler.vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class boiler.vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Boiler 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>:
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line 81
+ Component context: vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.ControlerHeater:h">internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+In value attribute for internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.ControlerHeater:h">internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line 12
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Boiler.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl:ControlerHeater">internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable paramBoiler.Q_nom
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.QNormated:k">internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+In value attribute for internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.QNormated:k">internalControl.QNormated.k</a>.
+  File: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line 543
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Boiler.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl:QNormated">internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Check is assuming: m_flow_nominal = 0
+Warning: Non-literal value.
+In nominal attribute for port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senTCold.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTCold.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senTCold.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTCold.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senTHot.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTHot.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senTHot.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senTHot.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for senMasFlo.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senMasFlo.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for senMasFlo.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class senMasFlo.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for vol.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for pressureDrop.port_a.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pressureDrop.port_a.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 25
+Warning: Non-literal value.
+In nominal attribute for pressureDrop.port_b.h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class pressureDrop.port_b.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Interfaces.mo, line 45
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.hOut.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Blocks.Interfaces">Modelica.Blocks.Interfaces</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$vol:dynBal">vol.dynBal</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/MixingVolumes/BaseClasses/PartialMixingVolume.mo, line 73
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[1].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+Warning: Non-literal value.
+In nominal attribute for vol.dynBal.ports[2].h_outflow.
+Ignoring nominal attribute.
+In class <a href="Modelica://Modelica.Media.Interfaces.Types">Modelica.Media.Interfaces.Types</a>.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line 3921
+Used in base-class vol.dynBal.ports.FluidPort.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Fluid/Vessels.mo, line 711
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
