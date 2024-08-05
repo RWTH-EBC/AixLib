@@ -1,5 +1,5 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model ASHP_Vitocal250A "ASHP_Vitocal250A"
+model Vitocal250A "Vitocal250A"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -269,4 +269,4 @@ equation
 <p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
 </html>"));
-end ASHP_Vitocal250A;
+end Vitocal250A;

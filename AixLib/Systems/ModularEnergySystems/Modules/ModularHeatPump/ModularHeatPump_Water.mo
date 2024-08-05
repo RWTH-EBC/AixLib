@@ -117,6 +117,14 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     annotation (choicesAllMatching=true);
   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
   parameter Real eta_carnot=0.405;
+  Modelica.Blocks.Continuous.Integrator integrator
+    annotation (Placement(transformation(extent={{44,52},{64,72}})));
+  Modelica.Blocks.Math.Gain gain
+    annotation (Placement(transformation(extent={{40,120},{60,140}})));
+  Modelica.Blocks.Continuous.Integrator integrator1
+    annotation (Placement(transformation(extent={{40,160},{60,180}})));
+  Modelica.Blocks.Math.Gain gain1
+    annotation (Placement(transformation(extent={{40,200},{60,220}})));
 protected
  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=7 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
@@ -175,6 +183,63 @@ equation
     annotation (Line(points={{14,-12},{14,-46},{10,-46}}, color={0,127,255}));
   connect(heatPump.port_b2, heatSource.port_a) annotation (Line(points={{-6,-12},
           {-16,-12},{-16,-46},{-10,-46}},         color={0,127,255}));
+  connect(sigBus.PelMea, integrator.u) annotation (Line(
+      points={{1.075,101.085},{1.075,62},{42,62}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.PelMea, gain.u) annotation (Line(
+      points={{1.075,101.085},{1.075,130},{38,130}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(gain.y, sigBus.Power_Electricity) annotation (Line(points={{61,130},{
+          108,130},{108,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integrator.y, sigBus.Energy_Electricity) annotation (Line(points={{65,
+          62},{126,62},{126,86},{1,86},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.QCon, gain1.u) annotation (Line(
+      points={{1.075,101.085},{1.075,210},{38,210}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(gain1.y, sigBus.Power_Heating) annotation (Line(points={{61,210},{92,
+          210},{92,208},{150,208},{150,100},{76,100},{76,101},{1,101}}, color={
+          0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.QCon, integrator1.u) annotation (Line(
+      points={{1.075,101.085},{1.075,170},{38,170}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(integrator1.y, sigBus.Energy_Heating) annotation (Line(points={{61,
+          170},{150,170},{150,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
