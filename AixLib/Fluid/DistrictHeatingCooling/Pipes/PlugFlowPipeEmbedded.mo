@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeEmbedded
   "Embedded pipe model using spatialDistribution for temperature delay"
 

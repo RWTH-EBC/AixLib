@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.HVACAgentsCommunications;
+within AixLib.Controls.HVACAgentBasedControl.Examples.HVACAgentsCommunications;
 model SimpleCommunication
   extends Modelica.Icons.Example;
 

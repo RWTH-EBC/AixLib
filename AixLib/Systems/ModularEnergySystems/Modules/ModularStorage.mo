@@ -455,12 +455,27 @@ package ModularStorage
     therm[n].Q_flow = -qFlow[n-1];
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -100},{100,100}}),
-                        graphics), Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
-<p>Model for heat transfer between buffer storage layers. Models conductance of water. An effective heat conductivity is therefore calculated. Used in BufferStorage model. </p>
-<p>Adaption from AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction by mzu</p>
-<p><b><span style=\"color: #008000;\">Sources</span> </b></p>
-<p>R. Viskanta, A. KaraIds: Interferometric observations of the temperature structure in water cooled or heated from above. <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977] </p>
+                        graphics), Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Model for heat transfer between buffer storage layers. Models
+  conductance of water. An effective heat conductivity is therefore
+  calculated. Used in BufferStorage model.
+</p>
+<p>
+  Adaption from
+  AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction by mzu
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Sources</span></b>
+</p>
+<p>
+  R. Viskanta, A. KaraIds: Interferometric observations of the
+  temperature structure in water cooled or heated from above.
+  <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69.
+  Bibtex-Key [R.VISKANTA1977]
+</p>
 </html>",
      revisions="<html><ul>
   <li>
