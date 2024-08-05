@@ -338,7 +338,9 @@ equation
           extent={{-62,142},{102,132}},
           textColor={28,108,200},
           textString="Design Full-Load & Evap-Power")}),
-    Documentation(info="<html>
-<p>Auslegung des Betriebspunktes indem die maximale elektrische Leistung vorliegt</p>
+    Documentation(info="<html><p>
+  Auslegung des Betriebspunktes indem die maximale elektrische Leistung
+  vorliegt
+</p>
 </html>"));
 end DesignGenericHP;
