@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
+within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
 model PowerIsentropicEfficiency
   "Model describing flow isentropic efficiency on power approach"
   extends PartialIsentropicEfficiency;

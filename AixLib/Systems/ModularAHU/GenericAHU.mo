@@ -711,11 +711,22 @@ equation
         Line(points={{80,-40},{80,-90}}, color={28,108,200}),
         Line(points={{118,-40},{118,-90}}, color={28,108,200})}),Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},{220,120}})),
-    Documentation(revisions="<html>
-<ul>
-<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+    Documentation(revisions="<html><ul>
+  <li>October 29, 2019, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>", info="<html>
-<p>The GenericAHU is an air-handling unit model with detailed hydraulic system of the preheater, heater and cooler. The ahu includes a heat exchanger for heat recovery and a humidifier for the supply air. The humidifier can be insert steam or water that evaporates completely (adiabatic). Further, the ahu includes an adiabatic humidifier in the return air chanal in order to cool the return air and use the heat recovery heat excahnger to cool the supply air. The preheater, steam humdifier and adiabatic humidifier are conditional and can be deactivated.</p>
+<p>
+  The GenericAHU is an air-handling unit model with detailed hydraulic
+  system of the preheater, heater and cooler. The ahu includes a heat
+  exchanger for heat recovery and a humidifier for the supply air. The
+  humidifier can be insert steam or water that evaporates completely
+  (adiabatic). Further, the ahu includes an adiabatic humidifier in the
+  return air chanal in order to cool the return air and use the heat
+  recovery heat excahnger to cool the supply air. The preheater, steam
+  humdifier and adiabatic humidifier are conditional and can be
+  deactivated.
+</p>
 </html>"));
 end GenericAHU;

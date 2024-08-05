@@ -153,22 +153,49 @@ equation
       horizontalAlignment=TextAlignment.Left));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The model differs between <u>design</u> operation <u>off-design</u> operation.</p>
-<p>For design conditions (parametrization) the model estimates max. fuel consumption. The <u>off-design</u> fuel consumption is estimated via FirRatSet [-]. </p>
-<p>During operation, the transferred heat flow is estimated with respect to actual efficiency within a performance map.</p>
-<p><br>Further assumptions are used:</p>
+        Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  The model differs between <u>design</u> operation <u>off-design</u>
+  operation.
+</p>
+<p>
+  For design conditions (parametrization) the model estimates max. fuel
+  consumption. The <u>off-design</u> fuel consumption is estimated via
+  FirRatSet [-].
+</p>
+<p>
+  During operation, the transferred heat flow is estimated with respect
+  to actual efficiency within a performance map.
+</p>
+<p>
+  <br/>
+  Further assumptions are used:
+</p>
 <ul>
-<li>The quadratic coefficient <span style=\"font-family: Courier New;\">coeffPresLoss </span>is described by a fit-function from manufacturer data.</li>
-<li>The volume <span style=\"font-family: Courier New;\">vol.V</span> bases on a fit from manufacturer data.</li>
-<li>G: Thermal conductance is described by a fit 0.0465 * QNom/1000 + 4.9891 from manufacturere data at a temperature difference of 50 K to ambient</li>
-<li>C: Factor C/QNom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default. (see AixLib.Fluid.BoilerCHP.BoilerNoControl)</li>
+  <li>The quadratic coefficient <span style=
+  \"font-family: Courier New;\">coeffPresLoss</span> is described by a
+  fit-function from manufacturer data.
+  </li>
+  <li>The volume <span style=\"font-family: Courier New;\">vol.V</span>
+  bases on a fit from manufacturer data.
+  </li>
+  <li>G: Thermal conductance is described by a fit 0.0465 * QNom/1000 +
+  4.9891 from manufacturere data at a temperature difference of 50 K to
+  ambient
+  </li>
+  <li>C: Factor C/QNom is in range of 1.2 to 2 for boilers with nominal
+  power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus,
+  a value of 1.5 is used as default. (see
+  AixLib.Fluid.BoilerCHP.BoilerNoControl)
+  </li>
 </ul>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>June, 2023&nbsp;</i> by Moritz Zuschlag &amp; David Jansen</li>
+        revisions="<html><ul>
+  <li>
+    <i>June, 2023&#160;</i> by Moritz Zuschlag & David Jansen
+  </li>
 </ul>
 </html>"));
 end BoilerGeneric;
