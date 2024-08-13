@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140_ideal_heater
+model Template_Ashrae140_ideal_heater
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -200,22 +200,13 @@ model Ashrae140_ideal_heater
     annotation (Placement(
     transformation(extent={{-101,38},{-67,70}}), iconTransformation(
     extent={{-110,50},{-90,70}})));
-  Modelica.Blocks.Math.MultiSum multiSum(nu=4)
+  Modelica.Blocks.Math.MultiSum multiSum(nu=1)
     annotation (Placement(transformation(extent={{248,-100},{260,-88}})));
-  Modelica.Blocks.Sources.RealExpression realExpression14(y=thermalZone1.ROM.radHeatSol[
+  Modelica.Blocks.Sources.RealExpression realExpression20(y=thermalZone1.ROM.radHeatSol[
         1].Q_flow)
-    annotation (Placement(transformation(extent={{208,-96},{228,-76}})));
-  Modelica.Blocks.Sources.RealExpression realExpression15(y=thermalZone1.ROM.radHeatSol[
-        2].Q_flow)
-    annotation (Placement(transformation(extent={{208,-110},{228,-90}})));
-  Modelica.Blocks.Sources.RealExpression realExpression16(y=thermalZone1.ROM.radHeatSol[
-        3].Q_flow)
-    annotation (Placement(transformation(extent={{208,-126},{228,-106}})));
-  Modelica.Blocks.Sources.RealExpression realExpression17(y=thermalZone1.ROM.radHeatSol[
-        4].Q_flow)
-    annotation (Placement(transformation(extent={{210,-142},{230,-122}})));
+    annotation (Placement(transformation(extent={{212,-104},{232,-84}})));
   Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
-    annotation (Placement(transformation(extent={{282,-110},{302,-90}})));
+    annotation (Placement(transformation(extent={{282,-104},{302,-84}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=10000)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -282,16 +273,9 @@ equation
   connect(T_amb, T_amb)
     annotation (Line(points={{-24,54},{-24,54}}, color={0,0,127}));
   connect(multiSum.y,solar_radiation)  annotation (Line(points={{261.02,-94},{
-          276,-94},{276,-100},{292,-100}},
-                                         color={0,0,127}));
-  connect(realExpression14.y, multiSum.u[1]) annotation (Line(points={{229,-86},
-          {242,-86},{242,-95.575},{248,-95.575}}, color={0,0,127}));
-  connect(realExpression15.y, multiSum.u[2]) annotation (Line(points={{229,-100},
-          {242,-100},{242,-94.525},{248,-94.525}}, color={0,0,127}));
-  connect(realExpression16.y, multiSum.u[3]) annotation (Line(points={{229,-116},
-          {244,-116},{244,-93.475},{248,-93.475}}, color={0,0,127}));
-  connect(realExpression17.y, multiSum.u[4]) annotation (Line(points={{231,-132},
-          {244,-132},{244,-92.425},{248,-92.425}}, color={0,0,127}));
+          292,-94}},                     color={0,0,127}));
+  connect(realExpression20.y, multiSum.u[1]) annotation (Line(points={{233,-94},
+          {248,-94}},                             color={0,0,127}));
   connect(prescribedHeatFlow.Q_flow, QFlowSet)
     annotation (Line(points={{118,-156},{154,-156}},color={0,0,127}));
   connect(realExpression13.y, T_Capacity)
@@ -313,4 +297,4 @@ equation
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140_ideal_heater;
+end Template_Ashrae140_ideal_heater;
