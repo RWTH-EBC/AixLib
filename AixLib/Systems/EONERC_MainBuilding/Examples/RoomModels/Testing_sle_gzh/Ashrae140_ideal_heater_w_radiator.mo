@@ -1,5 +1,5 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Template_Ashrae140_ideal_heater
+within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels.Testing_sle_gzh;
+model Ashrae140_ideal_heater_w_radiator
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -7,7 +7,7 @@ model Template_Ashrae140_ideal_heater
     annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+    annotation (Placement(transformation(extent={{108,-28},{128,-8}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
@@ -186,12 +186,6 @@ model Template_Ashrae140_ideal_heater
   Modelica.Blocks.Interfaces.RealOutput T_Roof "Value of Real output"
     annotation (Placement(transformation(extent={{258,-54},{278,-34}}),
         iconTransformation(extent={{284,-178},{304,-158}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    "Convective heat flow of additional internal gains"
-    annotation (Placement(transformation(extent={{118,-166},{98,-146}})));
-  Modelica.Blocks.Interfaces.RealInput QFlowSet
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{174,-176},{134,-136}})));
   Modelica.Blocks.Interfaces.RealOutput T_amb "Value of Real output"
     annotation (Placement(transformation(extent={{-34,44},{-14,64}}),
         iconTransformation(extent={{284,-178},{304,-158}})));
@@ -200,42 +194,138 @@ model Template_Ashrae140_ideal_heater
     annotation (Placement(
     transformation(extent={{-101,38},{-67,70}}), iconTransformation(
     extent={{-110,50},{-90,70}})));
-  Modelica.Blocks.Math.MultiSum multiSum(nu=1)
-    annotation (Placement(transformation(extent={{248,-100},{260,-88}})));
-  Modelica.Blocks.Sources.RealExpression realExpression20(y=thermalZone1.ROM.radHeatSol[
+  Fluid.Sources.MassFlowSource_T
+                           source(
+    redeclare package Medium = AixLib.Media.Water,
+    use_T_in=true,
+    nPorts=1,
+    m_flow=1,
+    T=328.15) annotation (Placement(transformation(extent={{-76,-148},{-56,-128}})));
+  Fluid.Sources.Boundary_pT
+                        sink(redeclare package Medium = AixLib.Media.Water,
+      nPorts=1)
+    "Sink"
+    annotation (Placement(transformation(extent={{92,-150},{72,-130}})));
+  Fluid.HeatExchangers.Radiators.Radiator        radiator(
+    redeclare package Medium = AixLib.Media.Water,
+    m_flow_nominal=1,
+    selectable=true,
+    radiatorType=AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
+        NominalPower=496,
+        RT_nom=Modelica.Units.Conversions.from_degC({55,45,20}),
+        PressureDrop=1017878,
+        Exponent=1.2776,
+        VolumeWater=3.6,
+        MassSteel=17.01,
+        DensitySteel=7900,
+        CapacitySteel=551,
+        LambdaSteel=60,
+        Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10,
+        length=2.6,
+        height=0.3),
+    N=2,
+    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
+    "Radiator"
+    annotation (Placement(transformation(extent={{-16,-150},{4,-130}})));
+  Fluid.FixedResistances.PressureDrop res(
+    redeclare package Medium = AixLib.Media.Water,
+    m_flow_nominal=1,
+    dp_nominal=100000)
+    "Pipe"
+    annotation (Placement(transformation(extent={{40,-150},{60,-130}})));
+  Modelica.Blocks.Interfaces.RealInput T_flow_in
+    "Prescribed boundary temperature"
+    annotation (Placement(transformation(extent={{-142,-136},{-102,-96}})));
+  Modelica.Blocks.Sources.RealExpression realExpression30(y=radiator.multiLayer_HE[
+        1].radiator_wall.port_a.T)
+    annotation (Placement(transformation(extent={{-256,-6},{-236,14}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_inside1
+    "Value of Real output" annotation (Placement(transformation(extent={{-220,
+            -6},{-200,14}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression31(y=radiator.multiLayer_HE[
+        1].radiator_wall.port_b.T)
+    annotation (Placement(transformation(extent={{-256,-36},{-236,-16}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_outside1
+    "Value of Real output" annotation (Placement(transformation(extent={{-218,
+            -36},{-198,-16}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression32(y=radiator.multiLayer_HE[
+        1].radiator_wall.heatCapacitor.T)
+    annotation (Placement(transformation(extent={{-256,-60},{-236,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_m "Value of Real output"
+    annotation (Placement(transformation(extent={{-218,-60},{-198,-40}}),
+        iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression34(y=radiator.ReturnTemperature.T)
+    annotation (Placement(transformation(extent={{-256,-86},{-236,-66}})));
+  Modelica.Blocks.Interfaces.RealOutput T_flow_out "Value of Real output"
+    annotation (Placement(transformation(extent={{-218,-86},{-198,-66}}),
+        iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4)
+    annotation (Placement(transformation(extent={{262,-102},{274,-90}})));
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=thermalZone1.ROM.radHeatSol[
         1].Q_flow)
-    annotation (Placement(transformation(extent={{212,-104},{232,-84}})));
+    annotation (Placement(transformation(extent={{222,-98},{242,-78}})));
+  Modelica.Blocks.Sources.RealExpression realExpression13(y=thermalZone1.ROM.radHeatSol[
+        2].Q_flow)
+    annotation (Placement(transformation(extent={{222,-112},{242,-92}})));
+  Modelica.Blocks.Sources.RealExpression realExpression14(y=thermalZone1.ROM.radHeatSol[
+        3].Q_flow)
+    annotation (Placement(transformation(extent={{222,-128},{242,-108}})));
+  Modelica.Blocks.Sources.RealExpression realExpression15(y=thermalZone1.ROM.radHeatSol[
+        4].Q_flow)
+    annotation (Placement(transformation(extent={{224,-144},{244,-124}})));
   Modelica.Blocks.Interfaces.RealOutput solar_radiation "Value of Real output"
-    annotation (Placement(transformation(extent={{282,-104},{302,-84}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=10000)
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={42,-128})));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={72,-96})));
-  Modelica.Blocks.Sources.Constant const(k=5)
-    annotation (Placement(transformation(extent={{38,-100},{48,-90}})));
-  Modelica.Blocks.Sources.RealExpression realExpression13(y=heatCapacitor.T)
-    annotation (Placement(transformation(extent={{220,-72},{240,-52}})));
-  Modelica.Blocks.Interfaces.RealOutput T_Capacity "Value of Real output"
-    annotation (Placement(transformation(extent={{258,-72},{278,-52}}),
-        iconTransformation(extent={{284,-178},{304,-158}})));
-  Modelica.Blocks.Sources.RealExpression realExpression4(y=heatCapacitor.port.Q_flow)
-    annotation (Placement(transformation(extent={{122,-42},{142,-22}})));
-  Modelica.Blocks.Interfaces.RealOutput Qflow_capacitor "Value of Real output"
-    annotation (Placement(transformation(extent={{160,-42},{180,-22}}),
-        iconTransformation(extent={{270,-46},{290,-26}})));
+    annotation (Placement(transformation(extent={{296,-112},{316,-92}})));
+  Modelica.Blocks.Sources.RealExpression realExpression36(y=radiator.multiLayer_HE[
+        2].radiator_wall.port_a.T)
+    annotation (Placement(transformation(extent={{-172,-6},{-152,14}})));
+  Modelica.Blocks.Sources.RealExpression realExpression37(y=radiator.multiLayer_HE[
+        2].radiator_wall.port_b.T)
+    annotation (Placement(transformation(extent={{-172,-36},{-152,-16}})));
+  Modelica.Blocks.Sources.RealExpression realExpression38(y=radiator.multiLayer_HE[
+        2].radiator_wall.heatCapacitor.T)
+    annotation (Placement(transformation(extent={{-172,-60},{-152,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_inside2
+    "Value of Real output" annotation (Placement(transformation(extent={{-136,
+            -6},{-116,14}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_outside2
+    "Value of Real output" annotation (Placement(transformation(extent={{-134,
+            -36},{-114,-16}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_m2 "Value of Real output"
+    annotation (Placement(transformation(extent={{-134,-60},{-114,-40}}),
+        iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.Constant const(k=273.15 + 55)
+    annotation (Placement(transformation(extent={{-104,-94},{-94,-84}})));
+  Modelica.Blocks.Sources.RealExpression realExpression39(y=radiator.multiLayer_HE[
+        2].heatConv_Radiator.port_b.T)
+    annotation (Placement(transformation(extent={{-344,20},{-324,40}})));
+  Modelica.Blocks.Interfaces.RealOutput heatConv_RadiatorT
+    "Value of Real output" annotation (Placement(transformation(extent={{-306,
+            20},{-286,40}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression40(y=radiator.multiLayer_HE[
+        2].twoStar_RadEx.radPort.T)
+    annotation (Placement(transformation(extent={{-344,48},{-324,68}})));
+  Modelica.Blocks.Interfaces.RealOutput RadheatRadT "Value of Real output"
+    annotation (Placement(transformation(extent={{-306,48},{-286,68}}),
+        iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression50(y=radiator.multiLayer_HE[
+        2].radiator_wall.port_a.Q_flow)
+    annotation (Placement(transformation(extent={{-346,-4},{-326,16}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_input_q
+    "Value of Real output" annotation (Placement(transformation(extent={{-310,
+            -4},{-290,16}}), iconTransformation(extent={{282,-88},{302,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression16(y=radiator.multiLayer_HE[
+        2].radiator_wall.port_b.Q_flow)
+    annotation (Placement(transformation(extent={{-346,-34},{-326,-14}})));
+  Modelica.Blocks.Interfaces.RealOutput T_radwall_outside_q
+    "Value of Real output" annotation (Placement(transformation(extent={{-308,
+            -34},{-288,-14}}), iconTransformation(extent={{282,-88},{302,-68}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-108,40},{-46,40},{-46,-3.6},{-24,-3.6}},
       color={255,204,51},
       thickness=0.5));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{34.8,2.2},{94,
-          2.2},{94,-20},{110,-20}},               color={0,0,127}));
+          2.2},{94,-18},{118,-18}},               color={0,0,127}));
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{26,
           -68.3},{26,-56.83},{26.4,-56.83},{26.4,-45.36}}, color={0,0,127}));
   connect(boundaryExhaustAir.ports[1], thermalZone1.ports[1]) annotation (Line(
@@ -272,29 +362,58 @@ equation
       thickness=0.5));
   connect(T_amb, T_amb)
     annotation (Line(points={{-24,54},{-24,54}}, color={0,0,127}));
-  connect(multiSum.y,solar_radiation)  annotation (Line(points={{261.02,-94},{
-          292,-94}},                     color={0,0,127}));
-  connect(realExpression20.y, multiSum.u[1]) annotation (Line(points={{233,-94},
-          {248,-94}},                             color={0,0,127}));
-  connect(prescribedHeatFlow.Q_flow, QFlowSet)
-    annotation (Line(points={{118,-156},{154,-156}},color={0,0,127}));
-  connect(realExpression13.y, T_Capacity)
-    annotation (Line(points={{241,-62},{268,-62}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, heatCapacitor.port) annotation (Line(points=
-          {{98,-156},{58,-156},{58,-128},{52,-128}}, color={191,0,0}));
-  connect(heatCapacitor.port, convection.solid)
-    annotation (Line(points={{52,-128},{72,-128},{72,-106}}, color={191,0,0}));
-  connect(const.y, convection.Gc)
-    annotation (Line(points={{48.5,-95},{62,-95},{62,-96}}, color={0,0,127}));
-  connect(convection.fluid, thermalZone1.intGainsConv) annotation (Line(points=
-          {{72,-86},{72,-19.84},{32.56,-19.84}}, color={191,0,0}));
-  connect(realExpression4.y, Qflow_capacitor)
-    annotation (Line(points={{143,-32},{170,-32}}, color={0,0,127}));
+  connect(radiator.port_b,res. port_a)
+    annotation (Line(points={{4,-140},{40,-140}},   color={0,127,255}));
+  connect(res.port_b,sink. ports[1])
+    annotation (Line(points={{60,-140},{72,-140}},  color={0,127,255}));
+  connect(source.ports[1],radiator. port_a)
+    annotation (Line(points={{-56,-138},{-54,-138},{-54,-140},{-16,-140}},
+                                                       color={0,127,255}));
+  connect(radiator.ConvectiveHeat, thermalZone1.intGainsConv) annotation (Line(
+        points={{-8,-138},{-8,-86},{14,-86},{14,-90},{44,-90},{44,-19.84},{
+          32.56,-19.84}}, color={191,0,0}));
+  connect(radiator.RadiativeHeat, thermalZone1.intGainsRad) annotation (Line(
+        points={{-2,-138},{34,-138},{34,-92},{46,-92},{46,-11.14},{32.56,-11.14}},
+        color={0,0,0}));
+  connect(realExpression30.y, T_radwall_inside1)
+    annotation (Line(points={{-235,4},{-210,4}}, color={0,0,127}));
+  connect(realExpression31.y, T_radwall_outside1)
+    annotation (Line(points={{-235,-26},{-208,-26}}, color={0,0,127}));
+  connect(realExpression32.y, T_radwall_m)
+    annotation (Line(points={{-235,-50},{-208,-50}}, color={0,0,127}));
+  connect(realExpression34.y, T_flow_out)
+    annotation (Line(points={{-235,-76},{-208,-76}}, color={0,0,127}));
+  connect(multiSum.y,solar_radiation)  annotation (Line(points={{275.02,-96},{
+          290,-96},{290,-102},{306,-102}},
+                                         color={0,0,127}));
+  connect(realExpression4.y, multiSum.u[1]) annotation (Line(points={{243,-88},
+          {256,-88},{256,-97.575},{262,-97.575}}, color={0,0,127}));
+  connect(realExpression13.y,multiSum. u[2]) annotation (Line(points={{243,-102},
+          {256,-102},{256,-96.525},{262,-96.525}}, color={0,0,127}));
+  connect(realExpression14.y,multiSum. u[3]) annotation (Line(points={{243,-118},
+          {258,-118},{258,-95.475},{262,-95.475}}, color={0,0,127}));
+  connect(realExpression15.y,multiSum. u[4]) annotation (Line(points={{245,-134},
+          {258,-134},{258,-94.425},{262,-94.425}}, color={0,0,127}));
+  connect(realExpression36.y, T_radwall_inside2)
+    annotation (Line(points={{-151,4},{-126,4}}, color={0,0,127}));
+  connect(realExpression37.y, T_radwall_outside2)
+    annotation (Line(points={{-151,-26},{-124,-26}}, color={0,0,127}));
+  connect(realExpression38.y, T_radwall_m2)
+    annotation (Line(points={{-151,-50},{-124,-50}}, color={0,0,127}));
+  connect(const.y, source.T_in) annotation (Line(points={{-93.5,-89},{-93.5,-90},
+          {-88,-90},{-88,-134},{-78,-134}}, color={0,0,127}));
+  connect(realExpression39.y, heatConv_RadiatorT)
+    annotation (Line(points={{-323,30},{-296,30}}, color={0,0,127}));
+  connect(realExpression40.y, RadheatRadT)
+    annotation (Line(points={{-323,58},{-296,58}}, color={0,0,127}));
+  connect(realExpression50.y, T_radwall_input_q)
+    annotation (Line(points={{-325,6},{-300,6}}, color={0,0,127}));
+  connect(realExpression16.y, T_radwall_outside_q)
+    annotation (Line(points={{-325,-24},{-298,-24}}, color={0,0,127}));
   annotation (experiment(
-      StartTime=259200,
-      StopTime=345600,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Template_Ashrae140_ideal_heater;
+end Ashrae140_ideal_heater_w_radiator;

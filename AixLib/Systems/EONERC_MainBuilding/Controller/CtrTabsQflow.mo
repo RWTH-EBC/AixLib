@@ -31,7 +31,9 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
   HydraulicModules.Controller.CtrThrottleQFlow_cold
                                                ctrThrottleColdQFlow(
-      useExternalQset=true, reverseAction=false)
+      useExternalQset=true,
+    k=k,
+    Ti=Ti,                  reverseAction=false)
     annotation (Placement(transformation(extent={{52,-68},{72,-48}})));
   HydraulicModules.Controller.CalcHydraulicPower calcHydraulicPower
     annotation (Placement(transformation(extent={{0,28},{-20,48}})));

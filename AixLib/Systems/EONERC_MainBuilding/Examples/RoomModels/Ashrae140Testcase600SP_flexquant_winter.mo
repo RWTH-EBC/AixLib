@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140Testcase600SP_flexquant
+model Ashrae140Testcase600SP_flexquant_winter
   "Model of a ERC-Thermal Zone Including CCA and AHU"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -189,14 +189,15 @@ model Ashrae140Testcase600SP_flexquant
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={63,-113})));
-  ModularAHU.Controller.CtrAHUBasic ctrAhu(
+  ModularAHU.Controller.CtrAHUBasic_adapted
+                                    ctrAhu(
     useExternalTset=true,
     k=1000,
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.03,
-      Ti=120,
+      k=0.01,
+      Ti=200,
       rpm_pump=3000),
     ctrRh(
       k=0.03,
@@ -209,7 +210,7 @@ model Ashrae140Testcase600SP_flexquant
       Ti=125,
       rpm_pump=3000),
     ctrThrottleColdQFlow(
-      k=0.00003,
+      k=0.000005,
       Ti=280,
       rpm_pump=3000),
     ctrPump(rpm_pump=3000))
@@ -393,6 +394,10 @@ model Ashrae140Testcase600SP_flexquant
     "Initialization temperature";
   parameter Modelica.Media.Interfaces.Types.Temperature T_start_zone=293.15
     "Start value of temperature";
+  Modelica.Blocks.Interfaces.RealOutput Q_HotTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{158,86},{178,106}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_ColdTabs "Value of Real output"
+    annotation (Placement(transformation(extent={{172,68},{192,88}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-74,28},{8,28},{8,-15.6},{10,-15.6}},
@@ -515,13 +520,6 @@ equation
   connect(coolEnergyCalc.Tout2,Bus. tabsBus.coldThrottleBus.TRtrnOutMea)
     annotation (Line(points={{59,53},{52,53},{52,40},{8.05,40},{8.05,40.05}},
                           color={0,0,127}));
-  connect(coolEnergyCalc.vFlow1,Bus. ahuBus.coolerBus.hydraulicBus.VFlowInMea)
-    annotation (Line(points={{65,71},{8.05,71},{8.05,40.05}},    color={0,0,127}));
-  connect(coolEnergyCalc.Tin1,Bus. ahuBus.coolerBus.hydraulicBus.TFwrdInMea)
-    annotation (Line(points={{59,67},{59,66},{8.05,66},{8.05,40.05}},
-                                    color={0,0,127}));
-  connect(coolEnergyCalc.Tout1,Bus. ahuBus.coolerBus.hydraulicBus.TRtrnOutMea)
-    annotation (Line(points={{59,63},{8.05,63},{8.05,40.05}},    color={0,0,127}));
   connect(coolEnergyCalc.y1,QFlowCold)  annotation (Line(points={{81,60},{110,
           60}},                        color={0,0,127}));
   connect(hotEnergyCalc.vFlow2,Bus. tabsBus.hotThrottleBus.VFlowInMea)
@@ -532,10 +530,6 @@ equation
     annotation (Line(points={{59,83},{8.05,83},{8.05,40.05}},    color={0,0,127}));
   connect(hotEnergyCalc.Tin2,Bus. tabsBus.hotThrottleBus.TFwrdInMea)
     annotation (Line(points={{59,87},{8.05,87},{8.05,40.05}},    color={0,0,127}));
-  connect(hotEnergyCalc.vFlow1,Bus. ahuBus.heaterBus.hydraulicBus.VFlowInMea)
-    annotation (Line(points={{65,101},{66,101},{66,102},{8.05,102},{8.05,40.05}},
-                                                                          color=
-         {0,0,127}));
   connect(hotEnergyCalc.y1, QFlowHeat)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
@@ -568,10 +562,6 @@ equation
           {152,-108},{152,-85.475}}, color={0,0,127}));
   connect(realExpression7.y, multiSum.u[4]) annotation (Line(points={{135,-124},
           {135,-105},{152,-105},{152,-84.425}}, color={0,0,127}));
-  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea)
-    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}}, color={0,0,127}));
-  connect(hotEnergyCalc.Tout1, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea)
-    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}}, color={0,0,127}));
   connect(Q_Tabs, add1.y)
     annotation (Line(points={{142,126},{114.6,126}}, color={0,0,127}));
   connect(Q_Ahu, add2.y)
@@ -601,10 +591,56 @@ equation
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
   connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
           {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{182,78},{128,
+          78},{128,50},{81,50},{81,51}}, color={0,0,127}));
+  connect(hotEnergyCalc.y3,Q_HotTabs)  annotation (Line(points={{81,81},{122,81},
+          {122,96},{168,96}}, color={0,0,127}));
+  connect(coolEnergyCalc.vFlow1, Bus.ahuBus.coolerBus.hydraulicBus.VFlowOutMea)
+    annotation (Line(points={{65,71},{92,71},{92,72},{36,72},{36,40.05},{8.05,
+          40.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(coolEnergyCalc.Tin1, Bus.ahuBus.coolerBus.hydraulicBus.TFwrdOutMea)
+    annotation (Line(points={{59,67},{8.05,67},{8.05,40.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(coolEnergyCalc.Tout1, Bus.ahuBus.coolerBus.hydraulicBus.TRtrnInMea)
+    annotation (Line(points={{59,63},{8.05,63},{8.05,40.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(hotEnergyCalc.Tout1, Bus.ahuBus.heaterBus.hydraulicBus.TRtrnInMea)
+    annotation (Line(points={{59,93},{8.05,93},{8.05,40.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(hotEnergyCalc.Tin1, Bus.ahuBus.heaterBus.hydraulicBus.TFwrdOutMea)
+    annotation (Line(points={{59,97},{8.05,97},{8.05,40.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(hotEnergyCalc.vFlow1, Bus.ahuBus.heaterBus.hydraulicBus.VFlowOutMea)
+    annotation (Line(points={{65,101},{65,106},{8.05,106},{8.05,40.05}}, color=
+          {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
       StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140Testcase600SP_flexquant;
+end Ashrae140Testcase600SP_flexquant_winter;
