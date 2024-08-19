@@ -3,3 +3,15 @@ clear
 convertClear();
 
 
+convertClass("AixLib.Fluid.Chillers.Chiller", "AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller");
+convertClass("AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller", "AixLib.Obsolete.Year2024.Fluid.Chillers.BaseClasses.InnerCycle_Chiller");
+convertClass("AixLib.Fluid.Chillers.Examples.Chiller", "AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller");
+convertClass("AixLib.DataBase.HeatPump", "AixLib.Obsolete.Year2024.DataBase.HeatPump");
+convertClass("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "AixLib.Obsolete.Year2024.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine");
+convertClass("AixLib.Controls.HeatPump.SafetyControls", "AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls");
+convertClass("AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity", "AixLib.Obsolete.Year2024.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity");
+convertClass("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus");
+convertClass("AixLib.DataBase.Chiller", "AixLib.Obsolete.Year2024.DataBase.Chiller");
+convertClass("AixLib.Fluid.HeatPumps.HeatPump", "AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump");
+convertClass("AixLib.Fluid.HeatPumps.Examples.HeatPump", "AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump", "AixLib.Obsolete.Year2024.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump");
