@@ -119,9 +119,9 @@ equation
           -9},{-18,0},{24,0},{24,80},{110,80}},color={0,0,127}));
   connect(QgasCalculation.y, QflowCalculation.u2) annotation (Line(points={{1,90},{
           8,90},{8,132},{-96,132},{-96,14},{-66,14}},            color={0,0,127}));
-  connect(senTHot.T, T_out) annotation (Line(points={{40,-69},{52,-69},{52,-56},
+  connect(senTSup.T, T_out) annotation (Line(points={{40,-69},{52,-69},{52,-56},
           {60,-56},{60,60},{110,60}}, color={0,0,127}));
-  connect(senTCold.T, T_in) annotation (Line(points={{-70,-69},{-70,-102},{110,-102},
+  connect(senTRet.T, T_in) annotation (Line(points={{-70,-69},{-70,-102},{110,-102},
           {110,40}}, color={0,0,127}));
   connect(port_b, port_b)
     annotation (Line(points={{100,0},{100,0}}, color={0,127,255}));
@@ -131,7 +131,7 @@ equation
   connect(efficiencyTableLoadDepending1.y[1], etaCalculation.u2) annotation (
       Line(points={{-17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,
           0,127}));
-  connect(senTCold.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
+  connect(senTRet.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
         points={{-70,-69},{-72,-69},{-72,30.5},{-42.1,30.5}}, color={0,0,127}));
   connect(QflowCalculation.u1, etaCalculation.y)
     annotation (Line(points={{-54,14},{21,14},{21,50}}, color={0,0,127}));
