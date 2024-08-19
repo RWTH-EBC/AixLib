@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -103,7 +103,7 @@ model HPSystemController
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Safety Control", group="Operational Envelope"),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
+  parameter Obsolete.Year2024.DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
       tab="Safety Control",
       group="Operational Envelope",
@@ -152,7 +152,7 @@ model HPSystemController
       tab="Safety Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
-  Controls.HeatPump.SafetyControls.SafetyControl safetyControl(
+  Obsolete.Year2024.Controls.HeatPump.SafetyControls.SafetyControl safetyControl(
     final use_minRunTime=use_minRunTime,
     final minRunTime(displayUnit="min") = minRunTime,
     final minLocTime(displayUnit="min") = minLocTime,
@@ -189,7 +189,7 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  AixLib.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(
+  AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(
       final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
@@ -234,9 +234,9 @@ model HPSystemController
         origin={-60,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k=fill(1, if not use_chiller and use_deFro then 2 else 1), nu=if not use_chiller and use_deFro then 2 else 1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
+  AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
+        Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
     if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro

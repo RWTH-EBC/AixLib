@@ -95,7 +95,7 @@ package AixLib
 	version="1.4.0",				  
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.4.0_to_1.4.1.mos",
 	version="1.4.1",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.4.1_to_2.0.0.mos"),
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.4.1_to_2.0.0.mos",
 	version="2.1.0",				  
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.0.0_to_2.1.0.mos")
 					  ),

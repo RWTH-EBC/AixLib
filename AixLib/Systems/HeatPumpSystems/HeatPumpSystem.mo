@@ -1,11 +1,11 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
     transferHeat=true,
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
-    redeclare AixLib.Fluid.HeatPumps.HeatPump heatPump(
+    redeclare AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump heatPump(
       final use_autoCalc=false,
       final Q_useNominal=0,
       final mFlow_evaNominal=mFlow_evaNominal,
@@ -57,14 +57,14 @@ model HeatPumpSystem
 //Heat Pump
 
   replaceable model PerDataHea =
-      AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby
-    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D              constrainedby
-    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
 
@@ -202,7 +202,7 @@ equation
 </html>", info="<html>
 <p>
   This model uses the heat pump model <a href=
-  \"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>
+  \"modelica://AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump</a>
   to simulate a whole system, including controls, pumps and second heat
   generator.
 </p>

@@ -216,7 +216,7 @@ partial model GeothermalHeatPumpBase
         origin={-89,-54})));
   Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     annotation (Placement(transformation(extent={{-21,60},{20,98}})));
-  HeatPumps.HeatPump heatPump(useBusConnectorOnly=true) annotation (Placement(
+  Obsolete.Year2024.Fluid.HeatPumps.HeatPump heatPump(useBusConnectorOnly=true) annotation (Placement(
         transformation(
         extent={{-14,17},{14,-17}},
         rotation=90,

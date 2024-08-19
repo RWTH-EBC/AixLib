@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Examples.Chiller;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Examples.Chiller;
 model Chiller
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
@@ -9,12 +9,12 @@ model Chiller
   Components.Chiller.Chiller chiller(
     use_revChi=true,
     redeclare model PerDataMainChi =
-        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D (
+          dataTable=AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+           AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     refIneFre_constant=1,
@@ -203,7 +203,7 @@ equation
 </h4>
 <p>
   Example Setup is based on fluid example of <a href=
-  \"modelica://AixLib.Fluid.Chillers.Examples.Chiller\">AixLib.Fluid.Chillers.Examples.Chiller</a>
+  \"modelica://AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller\">AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller</a>
 </p>
 </html>",
   revisions="<html><ul>

@@ -33,10 +33,10 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
       massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
       energyDynamics=energyDynamics,
       redeclare model PerDataMainHP =
-          DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
-              AixLib.DataBase.HeatPump.EN255.Vitocal350BWH110()),
+          Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
+              AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH110()),
       redeclare model PerDataRevHP =
-          DataBase.Chiller.PerformanceData.LookUpTable2D),
+          Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D),
     heatPumpControlBus.iceFacMea = 1,
     heatStorage(energyDynamics=energyDynamics),
     coldStorage(energyDynamics=energyDynamics),

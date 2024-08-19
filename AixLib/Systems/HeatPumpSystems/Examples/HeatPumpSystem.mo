@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.Examples;
+within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
@@ -71,7 +71,7 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -105,10 +105,10 @@ model HeatPumpSystem "Example for a heat pump system"
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=
-            AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(
+            AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(
             tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833;
             45,4833,4917,4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,
             7125,7250,7417,7583]),

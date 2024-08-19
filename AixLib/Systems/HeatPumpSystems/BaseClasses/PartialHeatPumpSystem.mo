@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -164,7 +164,7 @@ partial model PartialHeatPumpSystem
       group="Operational Envelope",
       enable=use_sec and use_opeEnv,
       descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
+  parameter Obsolete.Year2024.DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (Dialog(
       tab="Safety Control",
       group="Operational Envelope",

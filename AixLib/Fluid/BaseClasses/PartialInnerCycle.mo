@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BaseClasses;
+within AixLib.Fluid.BaseClasses;
 partial model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a vapour compression machine (heat pump or chiller)"
 
@@ -156,7 +156,7 @@ equation
 </html>", info="<html>
 <p>
   This black box model represents the refrigerant cycle of a vapour
-  compression machine. Used in AixLib.Fluid.HeatPumps.HeatPump and
+  compression machine. Used in AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump and
   AixLib.Fluid.Chiller.Chiller, this model serves the simulation of a
   reversible vapour compression machine. Thus, data both of chillers
   and heat pumps can be used to calculate the three relevant values
