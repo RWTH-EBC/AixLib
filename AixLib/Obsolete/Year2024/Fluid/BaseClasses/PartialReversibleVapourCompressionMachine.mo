@@ -458,7 +458,8 @@ protected
       autoCalc_VEva else VEva;
   parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then
       autoCalc_VCon else VCon;
-
+  Modelica.Blocks.Sources.BooleanConstant modeSetTrue(k=true)
+    if not useBusConnectorOnly and not use_rev "Used if use_rev=false)";
 
 equation
   //Control and feedback for the auto-calculation of condenser and evaporator data
@@ -540,7 +541,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-
+  connect(modeSetTrue.y, sigBus.modeSet);
   connect(modeSet, sigBus.modeSet) annotation (Line(points={{-116,-20},{-76,-20},
           {-76,-42.915},{-104.925,-42.915}},
                                         color={255,0,255}), Text(
