@@ -1,0 +1,40 @@
+convertClear();
+
+// Renamed classes
+convertClass("AixLib.Fluid.HeatPumps.HeatPump", "AixLib.Fluid.HeatPumps.ModularReversible.Modular");
+convertClass("AixLib.Fluid.Chillers.Chiller", "AixLib.Fluid.Chillers.ModularReversible.Modular");
+convertClass("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus");
+// Renamed inputs
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "nSet", "ySet");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "T_amb_eva", "TEvaAmb");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "T_amb_con", "TConAmb");
+convertElement("AixLib.Fluid.HeatPumps.HeatPump", "modeSet", "hea");
+convertElement("AixLib.Fluid.Chillers.Chiller", "modeSet", "coo");
+
+// Renamed parameters
+convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "nSet", "ySet");
+convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "modeSet", "coo");
+convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowEvaMea", "mEvaMea_flow");
+convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowConMea", "mConMea_flow");
+convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "iceFacMea", "iceFacHPMea");
+
+// Renamed parameters
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "mFlow_conNominal", "mCon_flow_nominal");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "deltaM_con", "deltaMCon");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "Medium_eva", "MediumEva");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "mFlow_evaNominal", "mCEva_flow_nominal");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "deltaM_eva", "deltaMEva");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "PerDataMainHP", "RefrigerantCycleHeatPumpHeating");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "PerDataRevHP", "RefrigerantCycleHeatPumpCooling");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "show_TPort", "show_T");
+convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "useBusConnectorOnly", "use_busConOnl");
+// Removed options
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"iceFac_in"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauSenT"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"transferHeat"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauHeaTraEva"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"TAmbEva_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauHeaTraCon"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"TAmbCon_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"use_autoCal"}, fill("",0), true);
+convertModifiers("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", {"COPMea"}, fill("",0), true);
