@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2024.Fluid.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Fluid.BaseClasses;
 partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -329,7 +329,7 @@ partial model PartialReversibleVapourCompressionMachine
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
+  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
 
@@ -351,7 +351,7 @@ partial model PartialReversibleVapourCompressionMachine
     "Set value of operation mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
-  Sensors.TemperatureTwoPort senT_a2(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_a2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*mFlow_evaNominal_final,
@@ -366,7 +366,7 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={38,-86})));
-  Sensors.TemperatureTwoPort senT_b2(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_b2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*mFlow_evaNominal_final,
@@ -381,13 +381,13 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-52,-86})));
-  Sensors.MassFlowRate mFlow_eva(redeclare final package Medium = Medium_eva,
+  AixLib.Fluid.Sensors.MassFlowRate mFlow_eva(redeclare final package Medium = Medium_eva,
       final allowFlowReversal=allowFlowReversalEva)
     "Mass flow sensor at the evaporator" annotation (Placement(transformation(
         origin={72,-60},
         extent={{10,-10},{-10,10}},
         rotation=0)));
-  Sensors.TemperatureTwoPort senT_b1(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_b1(
     final initType=initType,
     final transferHeat=transferHeat,
     final TAmb=TAmbCon_nominal,
@@ -402,7 +402,7 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={38,92})));
-  Sensors.TemperatureTwoPort senT_a1(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_a1(
     final initType=initType,
     final transferHeat=transferHeat,
     redeclare final package Medium = Medium_con,
@@ -417,7 +417,7 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-34,90})));
-  Sensors.MassFlowRate mFlow_con(final allowFlowReversal=allowFlowReversalEva,
+  AixLib.Fluid.Sensors.MassFlowRate mFlow_con(final allowFlowReversal=allowFlowReversalEva,
       redeclare final package Medium = Medium_con)
     "Mass flow sensor at the evaporator" annotation (Placement(transformation(
         origin={-76,60},
@@ -577,8 +577,8 @@ equation
       points={{0,-102},{0,-110},{-24,-110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
-          -60}}, color={0,127,255}));
+  connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60}},
+                 color={0,127,255}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(
       points={{16,64.6},{16,77.04},{0,77.04}},
       color={0,0,127},

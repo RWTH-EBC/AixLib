@@ -123,7 +123,7 @@ model Chiller
     annotation (Placement(transformation(extent={{46,-82},{34,-70}})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{10,-78},{0,-88}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBus1
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus1
     annotation (Placement(transformation(extent={{18,-28},{30,-16}}),
         iconTransformation(extent={{18,-28},{30,-16}})));
 equation

@@ -1,7 +1,8 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
   parameter Modelica.Units.SI.Time minRunTime
     "Minimal time the device is turned on or off";

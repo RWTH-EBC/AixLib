@@ -200,7 +200,7 @@ model HPSystemController
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus
+  Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-116,-76},{-84,-42}}),
         iconTransformation(extent={{-116,-78},{-82,-40}})));

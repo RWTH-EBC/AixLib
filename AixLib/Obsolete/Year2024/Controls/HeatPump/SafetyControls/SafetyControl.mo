@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 

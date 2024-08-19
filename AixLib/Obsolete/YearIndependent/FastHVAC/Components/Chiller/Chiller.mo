@@ -247,7 +247,7 @@ model Chiller "Base model of FastHVAC Chiller"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
         transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
           extent={{-108,-52},{-90,-26}})));
   AixLib.Obsolete.Year2024.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(

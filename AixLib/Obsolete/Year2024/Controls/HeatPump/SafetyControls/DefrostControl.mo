@@ -1,6 +1,7 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
   parameter Boolean use_chiller=true
     "True if defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));

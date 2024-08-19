@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
@@ -14,7 +14,7 @@ partial model PartialPerformanceData
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-80,-110})));
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
+  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
     "Bus-connector used in a heat pump" annotation (Placement(
         transformation(
         extent={{-15,-14},{15,14}},

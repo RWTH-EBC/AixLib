@@ -5,7 +5,7 @@ partial model PartialInnerCycle
   parameter Boolean use_rev=true "True if the vapour compression machine is reversible";
   parameter Real scalingFactor=1 "Scaling factor of vapour compression machine";
 
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
+  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-18,86},{18,118}}), iconTransformation(
           extent={{-16,88},{18,118}})));
   Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev

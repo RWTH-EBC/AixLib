@@ -1,6 +1,7 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter Boolean use_minRunTime
     "False if minimal runtime of HP is not considered" annotation(choices(checkBox=true));
   parameter Modelica.Units.SI.Time minRunTime(displayUnit="min")
@@ -125,17 +126,19 @@ equation
   connect(notSetOn.y, andIsOff.u1) annotation (Line(points={{-55.5,77},{-50,77},
           {-50,42},{16,42},{16,38},{14.8,38}}, color={255,0,255}));
   connect(andIsOff.y, orSetN.u[1]) annotation (Line(points={{28.6,38},{40,38},{40,
-          5.25},{52,5.25}}, color={255,0,255}));
+          -2.625},{52,-2.625}},
+                            color={255,0,255}));
   connect(andIsOn.y, orSetN.u[2]) annotation (Line(points={{28.6,18},{38,18},{38,
-          1.75},{52,1.75}}, color={255,0,255}));
+          -0.875},{52,-0.875}},
+                            color={255,0,255}));
   connect(andRun.y, orSetN.u[3]) annotation (Line(points={{30.6,78},{46,78},{46,
-          -1.75},{52,-1.75}}, color={255,0,255}));
+          0.875},{52,0.875}}, color={255,0,255}));
   connect(andLoc.y, andLocOff.u1) annotation (Line(points={{40.6,-60},{46,-60},{
           46,-72},{50.8,-72}}, color={255,0,255}));
   connect(andTurnOn.y, andLocOff.u2) annotation (Line(points={{40.6,-84},{46,-84},
           {46,-76.8},{50.8,-76.8}}, color={255,0,255}));
   connect(andLocOff.y, orSetN.u[4]) annotation (Line(points={{64.6,-72},{64.6,-32},
-          {40,-32},{40,-5.25},{52,-5.25}}, color={255,0,255}));
+          {40,-32},{40,2.625},{52,2.625}}, color={255,0,255}));
   connect(notSetOn.y, andTurnOff.u2) annotation (Line(points={{-55.5,77},{-50,77},
           {-50,81.2},{-13.2,81.2}}, color={255,0,255}));
   connect(pre1.y, andTurnOff.u1) annotation (Line(points={{-71.4,-42},{-72,-42},

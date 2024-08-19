@@ -1,5 +1,7 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
 partial block PartialSafetyControl "Base Block"
+    extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
     annotation (Placement(transformation(extent={{-152,4},{-120,36}})));

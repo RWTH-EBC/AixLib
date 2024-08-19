@@ -246,7 +246,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
   AixLib.Obsolete.Year2024.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(

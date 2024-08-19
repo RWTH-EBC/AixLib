@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -60,7 +60,7 @@ model HPControl
     final zerTim=zerTim)
                     if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-  Interfaces.VapourCompressionMachineControlBus sigBusHP
+  Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
     annotation (Placement(transformation(extent={{100,6},{128,34}})));

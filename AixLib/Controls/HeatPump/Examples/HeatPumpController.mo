@@ -11,7 +11,7 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Interaction.Show.BooleanValue showOnOff
     "Shows the current value of the on/off signal"
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
+  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     "Required to make the signals on the bus accessible" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},

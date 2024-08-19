@@ -1,5 +1,6 @@
-within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
 partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Safety Control", group="Operational Envelope"),choices(checkBox=true));
