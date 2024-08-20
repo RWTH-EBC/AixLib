@@ -241,7 +241,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(StopTime=7200,Interval=15,Tolerance=1e-06), Documentation(revisions="<html><ul>
-  <li>October 29, 2019, by Alexander Kümpel:<br/>
+  <li>October 29, 2019, by Alexander Kuempel:<br/>
     First implementation
   </li>
 </ul>
