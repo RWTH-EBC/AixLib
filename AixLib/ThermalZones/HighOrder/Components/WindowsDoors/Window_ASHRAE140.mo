@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(

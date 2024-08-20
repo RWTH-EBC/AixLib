@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+﻿within AixLib.Fluid.BoilerCHP.Examples;
 model CHPSystemNoControl "Example that illustrates use of CHPNoControl model"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water

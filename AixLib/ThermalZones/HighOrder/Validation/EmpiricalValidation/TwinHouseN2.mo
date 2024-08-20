@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model TwinHouseN2
    extends Modelica.Icons.Example;
    replaceable package MediumAir = AixLib.Media.Air "Medium within the room";

@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
 expandable connector PumpBus "Standard data bus with pump information"
   extends Modelica.Icons.SignalBus;
   import      Modelica.Units.SI;

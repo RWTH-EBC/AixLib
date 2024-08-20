@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
 model Poly_R22_EEV_16 "Polynomial - R22 - EEV - 1.6 mm"
   extends PolynomialFlowCoefficient(
     final polyMod=Types.PolynomialModels.Li2013,

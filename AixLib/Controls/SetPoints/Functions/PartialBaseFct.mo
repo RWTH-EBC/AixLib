@@ -1,4 +1,4 @@
-within AixLib.Controls.SetPoints.Functions;
+﻿within AixLib.Controls.SetPoints.Functions;
 partial function PartialBaseFct "Base function of a heating curve"
   extends Modelica.Icons.Function;
 

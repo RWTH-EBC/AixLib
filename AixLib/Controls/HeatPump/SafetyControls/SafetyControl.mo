@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 

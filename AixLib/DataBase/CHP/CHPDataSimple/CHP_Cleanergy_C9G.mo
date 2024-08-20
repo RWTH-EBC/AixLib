@@ -1,4 +1,4 @@
-within AixLib.DataBase.CHP.CHPDataSimple;
+﻿within AixLib.DataBase.CHP.CHPDataSimple;
 record CHP_Cleanergy_C9G
   "Cleanergy: mini BHKW C9G (8-25 kW thermal, Stirling engine for low caloric gas)"
   extends CHPDataSimple.CHPBaseDataDefinition(

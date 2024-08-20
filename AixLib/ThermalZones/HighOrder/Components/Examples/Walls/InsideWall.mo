@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
+﻿within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
 model InsideWall
   extends Modelica.Icons.Example;
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{92, 10}, {72, 30}})));

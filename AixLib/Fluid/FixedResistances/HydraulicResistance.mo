@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
   "Simple model for a hydraulic resistance using a pressure loss factor"
   extends AixLib.Fluid.BaseClasses.PartialResistance(

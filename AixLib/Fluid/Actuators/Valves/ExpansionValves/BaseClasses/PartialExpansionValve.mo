@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialExpansionValve
   "Base model for all expansion valve models"
 

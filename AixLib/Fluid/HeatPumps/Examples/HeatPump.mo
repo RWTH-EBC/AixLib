@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.Examples;
+﻿within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
 
