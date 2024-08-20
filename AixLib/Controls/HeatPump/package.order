@@ -1,6 +1,7 @@
 AntiLegionella
 HPControl
-HPControllerOnOff
+InverterControlledHP
+TwoPointControlledHP
 ModularHeatPumps
 Examples
 BaseClasses

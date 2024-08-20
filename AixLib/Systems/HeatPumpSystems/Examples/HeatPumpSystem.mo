@@ -100,7 +100,7 @@ model HeatPumpSystem "Example for a heat pump system"
     cpEva=4180,
     cpCon=4180,
     use_secHeaGen=false,
-    redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP (hys=5),
+    redeclare model TSetToNSet = Controls.HeatPump.TwoPointControlledHP (bandwidth=5),
     use_sec=true,
     QCon_nominal=10000,
     P_el_nominal=2500,

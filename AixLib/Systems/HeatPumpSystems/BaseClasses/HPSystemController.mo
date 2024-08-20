@@ -1,11 +1,11 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
 //HeatPump Control
-  replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
+  replaceable model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
     constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
 
   parameter Boolean use_tableData=true

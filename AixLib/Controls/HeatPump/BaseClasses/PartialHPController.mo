@@ -1,8 +1,8 @@
 within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialHPController
   "Base class of a heat pump controller with bus interface"
-  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
-    heatPumpControlBus annotation (Placement(transformation(
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
+    annotation (Placement(transformation(
         extent={{-29.5,-29.5},{29.5,29.5}},
         rotation=270,
         origin={99.5,0.5})));

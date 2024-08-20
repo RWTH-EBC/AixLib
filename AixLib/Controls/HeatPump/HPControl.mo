@@ -1,9 +1,10 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
@@ -15,8 +16,8 @@ model HPControl
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct
-                                       annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
+      SetPoints.Functions.HeatingCurveFunction constrainedby
+    SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
@@ -60,8 +61,7 @@ model HPControl
     final zerTim=zerTim)
                     if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-  Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
-    sigBusHP
+  Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
     annotation (Placement(transformation(extent={{100,6},{128,34}})));
@@ -142,7 +142,7 @@ equation
           {114,20}},          color={0,0,127}));
 
   connect(sigBusHP,ConvTSetToNSet. sigBusHP) annotation (Line(
-      points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
+      points={{-102,-58},{24,-58},{24,3.73},{42.88,3.73}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -163,12 +163,12 @@ equation
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
 
-  connect(TSup,ConvTSetToNSet. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
+  connect(TSup,ConvTSetToNSet.TMea)  annotation (Line(points={{-114,60},{-82,60},{-82,-22},
           {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
 
   connect(ConvTSetToNSet.ySecHeaGen, ySecHeaGen) annotation (Line(
-      points={{61.92,-9.36},{61.92,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,
-          -90},{-4,-104}},
+      points={{60,-9.7},{60,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,-90},{
+          -4,-104}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ySecHeaGen, ySecHeaGen)

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
+within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
@@ -82,12 +82,18 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={154,6})));
-  Controls.HeatPump.HPControllerOnOff hPControllerOnOff(bandwidth=5)
+  Controls.HeatPump.TwoPointControlledHP
+                                      twoPointControlledHP(
+    use_secHeaGen=false,
+    use_heaLim=false,
+    T_heaLim=293.15,
+    movAveTime=300,
+    bandwidth=2)
     "Controls the temperature in the heat storage by switching the heat pump on or off"
-    annotation (Placement(transformation(extent={{-78,62},{-58,82}})));
+    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 45)
     "Set point of upper heat storage temperature"
-    annotation (Placement(transformation(extent={{-160,0},{-148,12}})));
+    annotation (Placement(transformation(extent={{-120,70},{-110,80}})));
   Control.geothermalFieldController     geothermalFieldControllerCold(
       temperature_low=273.15 + 8, temperature_high=273.15 + 10)
     "Controls the heat exchange with the geothermal field and the heat storage"
@@ -96,6 +102,8 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
       temperature_low=308.15, temperature_high=313.15)
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
+  Modelica.Blocks.Sources.BooleanConstant mode "Dummy signal for unit mode, true: heat pump, false: chiller"
+    annotation (Placement(transformation(extent={{-56,56},{-44,68}})));
 equation
   connect(resistanceColdConsumerFlow.port_b,coldConsumerFlow. ports[1])
     annotation (Line(points={{94,-20},{94,-20},{148,-20}},  color={0,127,255}));
@@ -119,14 +127,6 @@ equation
           0,127}));
   connect(peaLoaDev.port_b,heatConsumerFlow. ports[1]) annotation (Line(
         points={{120,-50},{120,-50},{148,-50}}, color={0,127,255}));
-  connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
-     Line(
-      points={{-58.05,72.05},{-44,72.05},{-44,79},{-0.5,79}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(peaLoaDev.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
     annotation (Line(points={{112.77,-56.54},{112.77,-118},{-26,-118},{-26,-100},
           {-71.5,-100},{-71.5,-119.5}}, color={0,0,127}));
@@ -151,10 +151,32 @@ equation
   connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
           -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
           127,255}));
-  connect(TStorageSet.y, hPControllerOnOff.TSet) annotation (Line(points={{
-          -147.4,6},{-130,6},{-130,76},{-78,76}}, color={0,0,127}));
-  connect(getTStorageUpper.y, hPControllerOnOff.TMea)
-    annotation (Line(points={{-139,68},{-78,68}}, color={0,0,127}));
+  connect(TStorageSet.y, twoPointControlledHP.TSet) annotation (Line(points={{-109.5,
+          75},{-98,75},{-98,76},{-81.6,76}},        color={0,0,127}));
+  connect(twoPointControlledHP.sigBusHP, heatPumpControlBus) annotation (Line(
+      points={{-80.7,66.9},{-84,66.9},{-84,86},{0,86},{0,79},{-0.5,79}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(twoPointControlledHP.nOut, heatPumpControlBus.nSet) annotation (Line(
+        points={{-59,70},{-4,70},{-4,79.095},{-0.3975,79.095}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(mode.y, heatPumpControlBus.modeSet) annotation (Line(points={{-43.4,
+          62},{-30,62},{-30,79.095},{-0.3975,79.095}},             color={255,0,
+          255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(getTStorageUpper.y,twoPointControlledHP.TMea)  annotation (Line(
+        points={{-139,68},{-138,68},{-138,62},{-81.6,62}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StartTime=0, Interval=500, StopTime=86400, __Dymola_Algorithm="Dassl"), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>
