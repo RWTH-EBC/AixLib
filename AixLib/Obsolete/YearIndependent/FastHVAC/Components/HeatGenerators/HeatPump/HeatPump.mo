@@ -70,7 +70,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
       group="Heat Losses",
       tab="Condenser",
       enable=use_ConCap));
-  parameter Modelica.Units.SI.ThermalConductance GConIns
+  parameter Modelica.Units.SI.ThermalConductance GConIns=0
     "Constant thermal conductance of condenser material" annotation (Evaluate=
         true, Dialog(
       group="Heat Losses",
@@ -103,7 +103,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
       group="Heat Losses",
       tab="Evaporator",
       enable=use_EvaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEvaIns
+  parameter Modelica.Units.SI.ThermalConductance GEvaIns=0
     "Constant thermal conductance of Evaporator material" annotation (Evaluate=
         true, Dialog(
       group="Heat Losses",

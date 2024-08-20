@@ -134,59 +134,59 @@ equation
   hA = h*A;
   annotation (            defaultComponentName="hNat",
             Documentation(info="<html>
-             <p>
-             This model calculates the convection coefficient <i>h</i> for natural convection
-             from a cylinder submerged in fluid. <i>h</i> is calcualted using Eq 9.34 from
-             Incropera and DeWitt (1996).
-             Output of the block is the <i>hA</i> value.
-             </p>
-             <p>
-             The Nusselt number is computed as
-             </p>
-             <p align=\"center\" style=\"font-style:italic;\">
-             Nu<sub>D</sub> = (0.6 + (0.387 Ra<sub>D</sub><sup>(1/6)</sup>)/(1+(0.559 Pr)<sup>
-             (9/16)</sup>)<sup>(8/27)</sup>)<sup>2</sup>);
-             </p>
-             <p>
-             where <i>Nu<sub>D</sub></i> is the Nusselt number, <i>Ra<sub>D</sub></i> is the
-             Rayleigh number and
-             <i>Pr</i> is the Prandtl number.<br/>
-             This correclation is accurate for <i>Ra<sub>D</sub></i> less than 10<sup>12</sup>.
-             </p>
-             <p>
-             <i>h</i> is then calculated from the Nusselt number. The equation is
-             </p>
-             <p align=\"center\" style=\"font-style:italic;\">
-             h = Nu<sub>D</sub> k/D
-             </p>
-             <p>
-             where <i>k</i> is the thermal conductivity of the fluid and <i>D</i> is the diameter
-             of the submerged cylinder.
-             </p>
-             <h4>References</h4>
-             <p>
-             Fundamentals of Heat and Mass Transfer (Fourth Edition), Frank Incropera and David
-             DeWitt, John Wiley and Sons, 1996
-             </p>
-             </html>",revisions="<html>
-             <ul>
- <li>
- August 29, 2014 by Michael Wetter:<br/>
- Refactored function calls for medium properties.
- </li>
- <li>
- May 10, 2013 by Michael Wetter:<br/>
- Revised implementation to use <code>hA_nominal</code> as a parameter, and compute the
- associated surface area <code>A</code>. This revision was required to have a consistent
- computation of the <code>hA</code> values inside and outside of the coil in the
- heat exchanger model of the water tank.
- </li>
- <li>
- February 26, 2013 by Peter Grant:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+            <p>
+            This model calculates the convection coefficient <i>h</i> for natural convection
+            from a cylinder submerged in fluid. <i>h</i> is calcualted using Eq 9.34 from
+            Incropera and DeWitt (1996).
+            Output of the block is the <i>hA</i> value.
+            </p>
+            <p>
+            The Nusselt number is computed as
+            </p>
+            <p align=\"center\" style=\"font-style:italic;\">
+            Nu<sub>D</sub> = (0.6 + (0.387 Ra<sub>D</sub><sup>(1/6)</sup>)/(1+(0.559 Pr)<sup>
+            (9/16)</sup>)<sup>(8/27)</sup>)<sup>2</sup>);
+            </p>
+            <p>
+            where <i>Nu<sub>D</sub></i> is the Nusselt number, <i>Ra<sub>D</sub></i> is the
+            Rayleigh number and
+            <i>Pr</i> is the Prandtl number.<br/>
+            This correclation is accurate for <i>Ra<sub>D</sub></i> less than 10<sup>12</sup>.
+            </p>
+            <p>
+            <i>h</i> is then calculated from the Nusselt number. The equation is
+            </p>
+            <p align=\"center\" style=\"font-style:italic;\">
+            h = Nu<sub>D</sub> k/D
+            </p>
+            <p>
+            where <i>k</i> is the thermal conductivity of the fluid and <i>D</i> is the diameter
+            of the submerged cylinder.
+            </p>
+            <h4>References</h4>
+            <p>
+            Fundamentals of Heat and Mass Transfer (Fourth Edition), Frank Incropera and David
+            DeWitt, John Wiley and Sons, 1996
+            </p>
+            </html>", revisions="<html>
+            <ul>
+<li>
+August 29, 2014 by Michael Wetter:<br/>
+Refactored function calls for medium properties.
+</li>
+<li>
+May 10, 2013 by Michael Wetter:<br/>
+Revised implementation to use <code>hA_nominal</code> as a parameter, and compute the
+associated surface area <code>A</code>. This revision was required to have a consistent
+computation of the <code>hA</code> values inside and outside of the coil in the
+heat exchanger model of the water tank.
+</li>
+<li>
+February 26, 2013 by Peter Grant:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(graphics={                       Text(
           extent={{-66,88},{60,-2}},
           textColor={0,0,0},
@@ -243,6 +243,6 @@ equation
         Line(
           points={{42,-18},{46,-38},{36,-52},{48,-72},{40,-86}},
           color={175,175,175},
-          smooth=Smooth.Bezier)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          smooth=Smooth.Bezier)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HANaturalCylinder;

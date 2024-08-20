@@ -29,24 +29,24 @@ equation
       StopTime=10,
       Tolerance=1e-06),
   Documentation(revisions="<html>
- <ul>
- <li>
- October 8, 2018 by Filip Jorissen:<br/>
- Using implementation of the parameter <code>significantDigits</code>.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
- </li>
- <li>
- May 10, 2018 by Filip Jorissen:<br/>
- First implementation.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This model demonstrates the use of the csv file writer.
- </p>
- </html>"),
+<ul>
+<li>
+October 8, 2018 by Filip Jorissen:<br/>
+Using implementation of the parameter <code>significantDigits</code>.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
+</li>
+<li>
+May 10, 2018 by Filip Jorissen:<br/>
+First implementation.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This model demonstrates the use of the csv file writer.
+</p>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/CSVWriter.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CSVWriter;

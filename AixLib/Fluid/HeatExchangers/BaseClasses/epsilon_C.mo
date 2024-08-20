@@ -78,48 +78,48 @@ algorithm
   Inline=false,
   smoothOrder=1,
   Documentation(info="<html>
- <p>
- This function computes the heat exchanger effectiveness,
- the Number of Transfer Units, and the capacity flow ratio
- for given capacity flow rates.
- </p>
- <p>
- The implementation allows for zero flow rate.
- As <code>CMin_flow</code> crosses <code>delta*CMin_flow_nominal</code> from above,
- the Number of Transfer Units and the heat exchanger effectiveness go to zero.
- </p>
- <p>
- The different options for the flow regime are declared in
- <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
- AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
- </p>
- </html>",
+<p>
+This function computes the heat exchanger effectiveness,
+the Number of Transfer Units, and the capacity flow ratio
+for given capacity flow rates.
+</p>
+<p>
+The implementation allows for zero flow rate.
+As <code>CMin_flow</code> crosses <code>delta*CMin_flow_nominal</code> from above,
+the Number of Transfer Units and the heat exchanger effectiveness go to zero.
+</p>
+<p>
+The different options for the flow regime are declared in
+<a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
+AixLib.Fluid.Types.HeatExchangerFlowRegime</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 10, 2018, by Michael Wetter:<br/>
- Removed outputs <code>Z</code> and <code>NTU</code> as they are not used by other models.
- Removed <code>if</code> statement that can cause a discontinuous derivative.
- </li>
- <li>
- July 7, 2014, by Michael Wetter:<br/>
- Changed the type of the input <code>flowRegime</code> from
- <code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
- to <code>Integer</code>.
- This was done to have the same argument list as
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ\">
- AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ</a>,
- in which the type had to be changed.
- </li>
- <li>
- July 6, 2014, by Michael Wetter:<br/>
- Removed unused <code>import</code> statement.
- </li>
- <li>
- February 20, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+January 10, 2018, by Michael Wetter:<br/>
+Removed outputs <code>Z</code> and <code>NTU</code> as they are not used by other models.
+Removed <code>if</code> statement that can cause a discontinuous derivative.
+</li>
+<li>
+July 7, 2014, by Michael Wetter:<br/>
+Changed the type of the input <code>flowRegime</code> from
+<code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code>
+to <code>Integer</code>.
+This was done to have the same argument list as
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ\">
+AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ</a>,
+in which the type had to be changed.
+</li>
+<li>
+July 6, 2014, by Michael Wetter:<br/>
+Removed unused <code>import</code> statement.
+</li>
+<li>
+February 20, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end epsilon_C;

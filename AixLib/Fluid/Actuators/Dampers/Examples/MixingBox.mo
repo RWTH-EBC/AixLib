@@ -81,18 +81,18 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=240),
 Documentation(info="<html>
- <p>
- Test model for the economizer mixing box.
- The economizer mixing box is exposed to time varying pressure boundary
- conditions and input signals.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 23, 2010 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for the economizer mixing box.
+The economizer mixing box is exposed to time varying pressure boundary
+conditions and input signals.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 23, 2010 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingBox;

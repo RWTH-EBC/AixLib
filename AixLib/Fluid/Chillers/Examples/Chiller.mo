@@ -84,8 +84,7 @@ model Chiller "Example for the reversible chiller model."
     offset=500,
     phase=3.1415926535898)
     annotation (Placement(transformation(extent={{76,56},{84,64}})));
-  AixLib.Fluid.Movers.SpeedControlled_Nrpm
-                                    pumSou(
+  Movers.SpeedControlled_y                                   pumSou(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
@@ -109,7 +108,8 @@ model Chiller "Example for the reversible chiller model."
         rotation=270,
         origin={86,2})));
 
-  Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement(
+  Modelica.Blocks.Sources.Constant nIn(k=100/3040)
+                                              annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
@@ -164,20 +164,18 @@ model Chiller "Example for the reversible chiller model."
     annotation (Placement(transformation(extent={{10,-78},{0,-88}})));
 equation
 
-  connect(nIn.y, pumSou.Nrpm)
-    annotation (Line(points={{50,51.6},{50,46}}, color={0,0,127}));
   connect(Room.heatPort,heatFlowRateEva. port)
     annotation (Line(points={{86,12},{96,12},{96,18}},color={191,0,0}));
   connect(sine.y, gain.u) annotation (Line(points={{84.4,60},{92,60},{92,56.8},
           {96,56.8}}, color={0,0,127}));
   connect(heatFlowRateEva.Q_flow, gain.y) annotation (Line(points={{96,34},{96,
           47.6}},                   color={0,0,127}));
-  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,4},{76,26},
-          {60,26},{60,34}},color={0,127,255}));
+  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,3},{76,34},
+          {60,34}},        color={0,127,255}));
   connect(senTAct.port_b, sourceSideFixedBoundary.ports[1]) annotation (Line(
         points={{64,-38},{78,-38}},                   color={0,127,255}));
-  connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-38},{66,-38},
-          {66,0},{76,0}},          color={0,127,255}));
+  connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-38},{66,
+          -38},{66,1},{76,1}},     color={0,127,255}));
   connect(chiller.nSet, booleanToReal.y) annotation (Line(points={{-2.83333,
           -26.84},{-3,-26.84},{-3,-45.3}}, color={0,0,127}));
           connect(sinkSideMassFlowSource.ports[1], chiller.port_a1) annotation (Line(
@@ -208,6 +206,8 @@ equation
           -92},{16,-87},{11,-87}}, color={255,0,255}));
   connect(booleanStep.y, logicalSwitch.u2) annotation (Line(points={{23.2,-54},{
           14,-54},{14,-83},{11,-83}}, color={255,0,255}));
+  connect(nIn.y, pumSou.y)
+    annotation (Line(points={{50,51.6},{50,46}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(Tolerance=1e-6, StopTime=3600),

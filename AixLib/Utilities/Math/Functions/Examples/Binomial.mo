@@ -22,17 +22,17 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=15.9),
     Documentation(info="<html>
- <p>
- This example demonstrates the use of the function for the evaluation of the
- binomial coefficient \"n choose k\".
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 6, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates the use of the function for the evaluation of the
+binomial coefficient \"n choose k\".
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 6, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Binomial;

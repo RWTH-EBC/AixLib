@@ -63,11 +63,12 @@ annotation (
   machines.
 </p>
 </html>", revisions="<html><ul>
-<ul>
-  <li>May 21, 2021, by Fabian Wüllhorst:<br/>
-    Refactor (see <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/912\">issue 912</a>).
-  </li>
+  <ul>
+    <li>May 21, 2021, by Fabian Wüllhorst:<br/>
+      Refactor (see <a href=
+      \"https://github.com/RWTH-EBC/AixLib/issues/912\">issue 912</a>).
+    </li>
+  </ul>
 </ul>
 </html>"));
 end VapourCompressionMachineControlBus;

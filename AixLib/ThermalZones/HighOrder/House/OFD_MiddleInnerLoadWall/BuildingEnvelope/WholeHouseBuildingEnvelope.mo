@@ -5,8 +5,10 @@ model WholeHouseBuildingEnvelope
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model";
+  replaceable package Medium = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
 
@@ -190,7 +192,7 @@ model WholeHouseBuildingEnvelope
     alfa=1.5707963267949,
     replaceable package Medium = Medium) annotation (Placement(transformation(extent={{-22,44},{22,82}})));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)
                                                      annotation (Placement(
         transformation(extent={{-128,66},{-100,94}}),iconTransformation(extent={{-120,60},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[11] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic"
@@ -279,6 +281,8 @@ model WholeHouseBuildingEnvelope
                                "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{90,-98},{110,-78}}), iconTransformation(extent={
             {96,-92},{110,-78}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-112,90},{-92,110}})));
 equation
   connect(upperFloor_Building.thermOutside, thermOutside) annotation (Line(
         points={{-26,33.54},{-74,33.54},{-74,100},{-100,100}}, color={191,0,0}));

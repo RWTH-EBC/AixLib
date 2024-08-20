@@ -48,21 +48,21 @@ equation
     annotation (Line(points={{40,140},{50,140},{60,140}}, color={0,127,255}));
 annotation (
     Documentation(info="<html>
- <p>
- This example validates that
- <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
- AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
- exports correctly as an FMU.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2016 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example validates that
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.HVACZone\">
+AixLib.Fluid.FMI.ExportContainers.HVACZone</a>
+exports correctly as an FMU.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2016 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/HVACThermalZoneAir1.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Export FMU"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HVACThermalZoneAir1;

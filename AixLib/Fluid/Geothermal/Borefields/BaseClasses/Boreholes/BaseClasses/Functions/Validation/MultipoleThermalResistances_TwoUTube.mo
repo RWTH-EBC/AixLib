@@ -50,30 +50,30 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=1.0),
     Documentation(info="<html>
- <p>
- This example validates the implementation of
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.multipoleThermalResistances\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.multipoleThermalResistances</a>
- for the evaluation of the borehole thermal resistances.
- </p>
- <p>
- The multipole method is used to evaluate thermal resistances for a double U-tube
- borehole with symmetrically positionned pipes. Results are compared to
- reference values given in Claesson (2012).
- </p>
- <h4>References</h4>
- <p>
- Claesson, J. (2012). Multipole method to calculate borehole thermal resistances.
- Mathematical report. Department of Building Physics, Lund University, Box 118,
- SE-221 00 Lund, Sweden. 128 pages.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 21, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example validates the implementation of
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.multipoleThermalResistances\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.multipoleThermalResistances</a>
+for the evaluation of the borehole thermal resistances.
+</p>
+<p>
+The multipole method is used to evaluate thermal resistances for a double U-tube
+borehole with symmetrically positionned pipes. Results are compared to
+reference values given in Claesson (2012).
+</p>
+<h4>References</h4>
+<p>
+Claesson, J. (2012). Multipole method to calculate borehole thermal resistances.
+Mathematical report. Department of Building Physics, Lund University, Box 118,
+SE-221 00 Lund, Sweden. 128 pages.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 21, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end MultipoleThermalResistances_TwoUTube;

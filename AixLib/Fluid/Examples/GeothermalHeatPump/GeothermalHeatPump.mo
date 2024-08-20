@@ -1,12 +1,14 @@
-﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
+within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
 
   extends
     AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
-        package Medium = Medium, energyDynamics=energyDynamics),
+  redeclare model PeakLoadDeviceModel=
+        AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone (                             redeclare
+          package                                                                                                 Medium =
+                         Medium, energyDynamics=energyDynamics),
                                   heatPump(
       redeclare package Medium_con = Medium,
       redeclare package Medium_eva = Medium,
@@ -36,6 +38,7 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
               AixLib.DataBase.HeatPump.EN255.Vitocal350BWH110()),
       redeclare model PerDataRevHP =
           DataBase.Chiller.PerformanceData.LookUpTable2D),
+    heatPumpControlBus.iceFacMea = 1,
     heatStorage(energyDynamics=energyDynamics),
     coldStorage(energyDynamics=energyDynamics),
     pumpCondenser(energyDynamics=energyDynamics),
@@ -121,9 +124,9 @@ equation
   connect(pumpGeothermalSource.dp_in,pressureDifference. y) annotation (Line(
         points={{-89,-45.6},{-89,-36},{56,-36},{56,6},{147.4,6}},      color={0,
           0,127}));
-  connect(PeakLoadDevice.port_b,heatConsumerFlow. ports[1]) annotation (Line(
+  connect(peaLoaDev.port_b,heatConsumerFlow. ports[1]) annotation (Line(
         points={{120,-50},{120,-50},{148,-50}}, color={0,127,255}));
-  connect(PeakLoadDevice.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
+  connect(peaLoaDev.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
     annotation (Line(points={{112.77,-56.54},{112.77,-118},{-26,-118},{-26,-100},
           {-71.5,-100},{-71.5,-119.5}}, color={0,0,127}));
   connect(getTStorageLower.y,geothermalFieldControllerCold. temperature)
@@ -173,7 +176,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(getTStorageUpper.y,twoPointControlledHP.TMea)  annotation (Line(
         points={{-139,68},{-138,68},{-138,62},{-81.6,62}}, color={0,0,127}));
-  annotation (experiment(Tolerance=1e-6, StartTime=0, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+  annotation (experiment(Tolerance=1e-6, StartTime=0, Interval=500, StopTime=86400, __Dymola_Algorithm="Dassl"), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>

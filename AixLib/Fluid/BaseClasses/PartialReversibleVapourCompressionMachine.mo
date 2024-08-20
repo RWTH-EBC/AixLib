@@ -30,7 +30,7 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-  parameter Modelica.Units.SI.Power Q_useNominal(start=0)
+  parameter Modelica.Units.SI.Power Q_useNominal=0
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
@@ -76,13 +76,13 @@ partial model PartialReversibleVapourCompressionMachine
       group="Heat Losses",
       tab="Condenser",
       enable=use_conCap));
-  parameter Modelica.Units.SI.ThermalConductance GConOut
+  parameter Modelica.Units.SI.ThermalConductance GConOut=0
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true, Dialog(
       group="Heat Losses",
       tab="Condenser",
       enable=use_conCap));
-  parameter Modelica.Units.SI.ThermalConductance GConIns
+  parameter Modelica.Units.SI.ThermalConductance GConIns=0
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true, Dialog(
       group="Heat Losses",
@@ -117,13 +117,13 @@ partial model PartialReversibleVapourCompressionMachine
       group="Heat Losses",
       tab="Evaporator",
       enable=use_evaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEvaOut
+  parameter Modelica.Units.SI.ThermalConductance GEvaOut=0
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true, Dialog(
       group="Heat Losses",
       tab="Evaporator",
       enable=use_evaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEvaIns
+  parameter Modelica.Units.SI.ThermalConductance GEvaIns=0
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true, Dialog(
       group="Heat Losses",
@@ -788,7 +788,7 @@ equation
 <ol>
   <li>
     <a href=
-    \"AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle\">InnerCycle</a>
+    \"AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump\">InnerCycle</a>
     (Black Box): Here, the user can use between several input models or
     just easily create his own, modular black box model. Please look at
     the model description for more info.

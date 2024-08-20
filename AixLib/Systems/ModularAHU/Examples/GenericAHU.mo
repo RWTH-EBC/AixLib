@@ -12,7 +12,7 @@ model GenericAHU "Example of generic ahu model"
             AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
+          PumpInterface(speed_rpm_nominal=3040, pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
         dynamicHX(
         dp1_nominal=50,
@@ -21,8 +21,8 @@ model GenericAHU "Example of generic ahu model"
         tau2=15,
         dT_nom=30,
         Q_nom=30000)),
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+    redeclare package Medium1 = AixLib.Media.Air,
+    redeclare package Medium2 = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15,
     m1_flow_nominal=3000/3600*1.2,
@@ -39,7 +39,7 @@ model GenericAHU "Example of generic ahu model"
             AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
+          PumpInterface(speed_rpm_nominal=3690, pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
         dynamicHX(
         dp1_nominal=80,
@@ -56,7 +56,7 @@ model GenericAHU "Example of generic ahu model"
             AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
+          PumpInterface(speed_rpm_nominal=3040, pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
         dynamicHX(
         dp1_nominal=50,
@@ -188,7 +188,7 @@ equation
   The supply air temperature set point is 20°C.
 </p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
+    __Dymola_Commands(file=
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
         "Simulate and plot"));
 end GenericAHU;

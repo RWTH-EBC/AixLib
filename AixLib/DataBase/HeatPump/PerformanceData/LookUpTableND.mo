@@ -280,17 +280,18 @@ equation
   </li>
 </ul>
 </html>", revisions="<html><ul>
-<ul>
-  <li>
-    <i>May 21, 2021ф</i> by Fabian Wüllhorst:<br/>
-    Make use of BaseClasses (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
-  </li>
-  <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-  </li>
+  <ul>
+    <li>
+      <i>May 21, 2021ф</i> by Fabian Wüllhorst:<br/>
+      Make use of BaseClasses (see issue <a href=
+      \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
+    </li>
+    <li>
+      <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+      First implementation (see issue <a href=
+      \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    </li>
+  </ul>
 </ul>
 </html>"));
 end LookUpTableND;

@@ -375,81 +375,81 @@ equation
   annotation (
     experiment(
       StopTime=603900,
-      Interval=900,
+      Interval=120,
       Tolerance=1e-006),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PlugFlowPipes/PlugFlowAIT.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-120,-160},{160,160}})),
     Documentation(info="<html>
- <p>
- The example contains
- experimental data from a real district heating network.
- </p>
- <p>The pipes' temperatures are not initialized. Therefore, results of
- outflow temperature before approximately the first 10000 seconds should not be
- considered.
- </p>
- <p>
- Note that these three models are identical, except for the pipe model that is used:
- </p>
- <ul>
- <li>
- The model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT\">
- AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT</a>
- uses the pipe model from the Modelica Standard Library, with a fine discretization.
- See the parameter <code>nNodes</code>.
- </li>
- <li>
- The model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT2Nodes\">
- AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT2Nodes</a>
- uses the same model as above, but sets <code>nNodes=2</code>.
- </li>
- <li>
- The model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT\">
- AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT</a>
- uses the plug flow model
- <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
- AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.
- </li>
- </ul>
- <p>
- This comparison between different discretization levels and pipe models is made
- to check the influence of the discretization and pipe model on computation time
- and simulation accuracy.
- </p>
- <h4>Test bench schematic</h4>
- <p><img alt=\"Schematic of test district heating network\"
- src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Validation/PlugFlowPipes/AITTestBench.png\"/>
- </p>
- <h4>Calibration</h4>
- <p>To calculate the length specific thermal resistance <code>R</code> of the pipe,
- the thermal resistance of the surrounding ground is added, which yields</p>
- <p align=\"center\"style=\"font-style:italic;\">
- R=1/(0.208)+1/(2 &nbsp; lambda_g &nbsp; Modelica.Constants.pi) &nbsp; log(1/0.18),</p>
- <p>where the thermal conductivity of the ground <code>lambda_g</code> = 2.4 W/(m K).
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 7, 2020, by Michael Wetter:<br/>
- Replaced measured data from specification in Modelica file to external table,
- as this reduces the computing time.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1289\"> #1289</a>.
- </li>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>July 4, 2016 by Bram van der Heijde:<br/>Added parameters to test the
- influence of allowFlowReversal and the presence of explicit volumes in the pipe.
- </li>
- <li>January 26, 2016 by Carles Ribas:<br/>First implementation. </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+The example contains
+experimental data from a real district heating network.
+</p>
+<p>The pipes' temperatures are not initialized. Therefore, results of
+outflow temperature before approximately the first 10000 seconds should not be
+considered.
+</p>
+<p>
+Note that these three models are identical, except for the pipe model that is used:
+</p>
+<ul>
+<li>
+The model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT\">
+AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT</a>
+uses the pipe model from the Modelica Standard Library, with a fine discretization.
+See the parameter <code>nNodes</code>.
+</li>
+<li>
+The model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT2Nodes\">
+AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.MSLAIT2Nodes</a>
+uses the same model as above, but sets <code>nNodes=2</code>.
+</li>
+<li>
+The model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT\">
+AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT</a>
+uses the plug flow model
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
+AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.
+</li>
+</ul>
+<p>
+This comparison between different discretization levels and pipe models is made
+to check the influence of the discretization and pipe model on computation time
+and simulation accuracy.
+</p>
+<h4>Test bench schematic</h4>
+<p><img alt=\"Schematic of test district heating network\"
+src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Validation/PlugFlowPipes/AITTestBench.png\"/>
+</p>
+<h4>Calibration</h4>
+<p>To calculate the length specific thermal resistance <code>R</code> of the pipe,
+the thermal resistance of the surrounding ground is added, which yields</p>
+<p align=\"center\"style=\"font-style:italic;\">
+R=1/(0.208)+1/(2 &nbsp; lambda_g &nbsp; Modelica.Constants.pi) &nbsp; log(1/0.18),</p>
+<p>where the thermal conductivity of the ground <code>lambda_g</code> = 2.4 W/(m K).
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 7, 2020, by Michael Wetter:<br/>
+Replaced measured data from specification in Modelica file to external table,
+as this reduces the computing time.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1289\"> #1289</a>.
+</li>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>July 4, 2016 by Bram van der Heijde:<br/>Added parameters to test the
+influence of allowFlowReversal and the presence of explicit volumes in the pipe.
+</li>
+<li>January 26, 2016 by Carles Ribas:<br/>First implementation. </li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowAIT;
