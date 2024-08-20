@@ -1,47 +1,36 @@
-within AixLib.Systems.HeatPumpSystems;
+﻿within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
     transferHeat=true,
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
-    redeclare AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump heatPump(
+    redeclare AixLib.Fluid.HeatPumps.ModularReversible.Modular heatPump(
       final use_autoCalc=false,
       final Q_useNominal=0,
-      final mFlow_evaNominal=mFlow_evaNominal,
       final VEva=VEva,
-      redeclare final model PerDataMainHP = PerDataHea,
-      redeclare final model PerDataRevHP = PerDataChi,
-      redeclare final package Medium_con = Medium_con,
-      redeclare final package Medium_eva = Medium_eva,
+      redeclare final model RefrigerantCycleHeatPumpHeating = PerDataHea,
+      redeclare final model RefrigerantCycleHeatPumpCooling = PerDataChi,
+      redeclare final package MediumCon = Medium_con,
+      redeclare final package MediumEva = Medium_eva,
       final use_rev=use_revHP,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
-      final useBusConnectorOnly=true,
-      final mFlow_conNominal=mFlow_conNominal,
       final VCon=VCon,
       final dpCon_nominal=dpCon_nominal,
-      final deltaM_con=deltaM_con,
       final use_conCap=use_conCap,
       final CCon=CCon,
       final GConOut=GConOut,
       final GConIns=GConIns,
       final dpEva_nominal=dpEva_nominal,
-      final deltaM_eva=deltaM_eva,
       final use_evaCap=use_evaCap,
       final CEva=CEva,
       final GEvaOut=GEvaOut,
       final GEvaIns=GEvaIns,
-      final tauSenT=tauSenT,
-      final transferHeat=transferHeat,
       final allowFlowReversalEva=allowFlowReversalEva,
       final allowFlowReversalCon=allowFlowReversalCon,
-      final tauHeaTraEva=tauHeaTraEva,
-      final tauHeaTraCon=tauHeaTraCon,
-      final TAmbCon_nominal=TAmbCon_nominal,
-      final TAmbEva_nominal=TAmbEva_nominal,
       final initType=initType,
       final pCon_start=pCon_start,
       final TCon_start=TCon_start,
@@ -52,7 +41,12 @@ model HeatPumpSystem
       final x_start=x_start,
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
-      final energyDynamics=energyDynamics));
+      final energyDynamics=energyDynamics,
+      final mEva_flow_nominal=mFlow_evaNominal,
+      final use_busConOnl=true,
+      final mCon_flow_nominal=mFlow_conNominal,
+      final deltaMCon=deltaM_con,
+      final deltaMEva=deltaM_eva));
 
 //Heat Pump
 
@@ -201,8 +195,7 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This model uses the heat pump model <a href=
-  \"modelica://AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump</a>
+  This model uses the heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump</a>
   to simulate a whole system, including controls, pumps and second heat
   generator.
 </p>

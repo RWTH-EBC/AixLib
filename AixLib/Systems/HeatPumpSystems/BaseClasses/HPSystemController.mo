@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -200,9 +200,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-116,-76},{-84,-42}}),
+  Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
+    sigBusHP annotation (Placement(transformation(extent={{-116,-76},{-84,-42}}),
         iconTransformation(extent={{-116,-78},{-82,-40}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature of HP system"
     annotation (Placement(transformation(
@@ -306,7 +305,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.PelMea, multiSum.u[1]) annotation (Line(
-      points={{-99.92,-58.915},{-78,-58.915},{-78,70}},
+      points={{-100,-59},{-78,-59},{-78,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -314,14 +313,13 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(calcCOP.y_COP, sigBusHP.CoPMea) annotation (Line(points={{-18.7,78},{
-          -14,78},{-14,-58.915},{-99.92,-58.915}}, color={0,0,127}), Text(
+          -14,78},{-14,-59},{-100,-59}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sigBusHP.TOdaMea, icingBlock.T_oda) annotation (Line(
-      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,90.4},{43.28,
-          90.4}},
+      points={{-100,-59},{-14,-59},{-14,74},{28,74},{28,90.4},{43.28,90.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -329,8 +327,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.TEvaInMea, icingBlock.T_flow_ev) annotation (Line(
-      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,86.8},{43.28,
-          86.8}},
+      points={{-100,-59},{-14,-59},{-14,74},{28,74},{28,86.8},{43.28,86.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -338,17 +335,15 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.TEvaOutMea, icingBlock.T_ret_ev) annotation (Line(
-      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,83.2},{43.28,
-          83.2}},
+      points={{-100,-59},{-14,-59},{-14,74},{28,74},{28,83.2},{43.28,83.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.m_flowEvaMea, icingBlock.m_flow_ev) annotation (Line(
-      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,79.6},{43.28,
-          79.6}},
+  connect(sigBusHP.mEvaMea_flow, icingBlock.m_flow_ev) annotation (Line(
+      points={{-100,-59},{-14,-59},{-14,74},{28,74},{28,79.6},{43.28,79.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -361,8 +356,8 @@ equation
       pattern=LinePattern.Dash));
   connect(calcQHeat.Q_flow, calcCOP.QHeat) annotation (Line(points={{-63.2,90},
           {-56,90},{-56,83.6},{-48.6,83.6}}, color={0,0,127}));
-  connect(sigBusHP.m_flowConMea, calcQHeat.m_flow) annotation (Line(
-      points={{-99.92,-58.915},{-94,-58.915},{-94,94.8},{-81.6,94.8}},
+  connect(sigBusHP.mConMea_flow, calcQHeat.m_flow) annotation (Line(
+      points={{-100,-59},{-94,-59},{-94,94.8},{-81.6,94.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -370,7 +365,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.TConOutMea, calcQHeat.T_a) annotation (Line(
-      points={{-99.92,-58.915},{-94,-58.915},{-94,89.2},{-81.6,89.2}},
+      points={{-100,-59},{-94,-59},{-94,89.2},{-81.6,89.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -378,55 +373,55 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.TConInMea, calcQHeat.T_b) annotation (Line(
-      points={{-99.92,-58.915},{-94,-58.915},{-94,84.4},{-81.6,84.4}},
+      points={{-100,-59},{-94,-59},{-94,84.4},{-81.6,84.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(safetyControl.modeOut, sigBusHP.modeSet) annotation (Line(
-      points={{49.6667,0},{64,0},{64,-58.915},{-99.92,-58.915}},
+  connect(safetyControl.modeOut, sigBusHP.coo) annotation (Line(
+      points={{49.6667,0},{64,0},{64,-59},{-100,-59}},
       color={255,0,255},
       pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanPassThroughMode.y, sigBusHP.modeSet) annotation (Line(
-      points={{34.6,-32},{64,-32},{64,-58.915},{-99.92,-58.915}},
+  connect(booleanPassThroughMode.y, sigBusHP.coo) annotation (Line(
+      points={{34.6,-32},{64,-32},{64,-59},{-100,-59}},
       color={255,0,255},
       pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(safetyControl.nOut, sigBusHP.nSet) annotation (Line(
-      points={{49.6667,8},{90,8},{90,-58.915},{-99.92,-58.915}},
+  connect(safetyControl.nOut,sigBusHP.ySet)  annotation (Line(
+      points={{49.6667,8},{90,8},{90,-59},{-100,-59}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(realPasThrSec.y, sigBusHP.nSet) annotation (Line(
-      points={{34.7,41},{90,41},{90,-58.915},{-99.92,-58.915}},
+  connect(realPasThrSec.y,sigBusHP.ySet)  annotation (Line(
+      points={{34.7,41},{90,41},{90,-59},{-100,-59}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(icingBlock.iceFac, sigBusHP.iceFacMea) annotation (Line(
-      points={{62.9,85},{120,85},{120,-58.915},{-99.92,-58.915}},
+  connect(icingBlock.iceFac, sigBusHP.iceFacHPMea) annotation (Line(
+      points={{62.9,85},{120,85},{120,-59},{-100,-59}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const.y, sigBusHP.iceFacMea) annotation (Line(
-      points={{60.8,64},{120,64},{120,-58.915},{-99.92,-58.915}},
+  connect(const.y, sigBusHP.iceFacHPMea) annotation (Line(
+      points={{60.8,64},{120,64},{120,-59},{-100,-59}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
       string="%second",
@@ -434,13 +429,13 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constTAmb.y, sigBusHP.TConAmbMea) annotation (Line(points={{-86.7,-83},
-          {-99.92,-83},{-99.92,-58.915}}, color={0,0,127}), Text(
+          {-100,-83},{-100,-59}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(T_oda, sigBusHP.TEvaAmbMea) annotation (Line(points={{-114,0},{-99.92,
-          0},{-99.92,-58.915}}, color={0,0,127}), Text(
+  connect(T_oda, sigBusHP.TEvaAmbMea) annotation (Line(points={{-114,0},{-100,0},
+          {-100,-59}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

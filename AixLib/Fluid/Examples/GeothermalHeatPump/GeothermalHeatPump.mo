@@ -1,29 +1,27 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
 
-  extends AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare model PeakLoadDeviceModel=
-        AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone (                             redeclare
-          package                                                                                                 Medium =
-                         Medium, energyDynamics=energyDynamics),
-                                  heatPump(
-      redeclare package Medium_con = Medium,
-      redeclare package Medium_eva = Medium,
+  extends
+    AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
+    redeclare model PeakLoadDeviceModel =
+        AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone (
+          redeclare package Medium = Medium, energyDynamics=energyDynamics),
+    heatPump(
+      redeclare package MediumCon = Medium,
+      redeclare package MediumEva = Medium,
       use_rev=false,
       use_autoCalc=false,
       Q_useNominal=0,
       use_refIne=false,
       refIneFre_constant=0,
-      mFlow_conNominal=0.5,
       VCon=0.005,
       dpCon_nominal=0,
       use_conCap=false,
       CCon=0,
       GConOut=0,
       GConIns=0,
-      mFlow_evaNominal=0.5,
       VEva=0.005,
       dpEva_nominal=0,
       use_evaCap=false,
@@ -32,12 +30,16 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
       GEvaIns=0,
       massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
       energyDynamics=energyDynamics,
-      redeclare model PerDataMainHP =
-          Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
-              AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH110()),
-      redeclare model PerDataRevHP =
-          Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D),
-    heatPumpControlBus.iceFacMea = 1,
+      redeclare model RefrigerantCycleHeatPumpHeating =
+          Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+            dataTable=
+              AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH110
+              ()),
+      redeclare model RefrigerantCycleHeatPumpCooling =
+          Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D,
+      mCon_flow_nominal=0.5,
+      mEva_flow_nominal=0.5),
+    heatPumpControlBus(iceFacHPMea=1),
     heatStorage(energyDynamics=energyDynamics),
     coldStorage(energyDynamics=energyDynamics),
     pumpCondenser(energyDynamics=energyDynamics),

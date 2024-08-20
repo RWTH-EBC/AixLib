@@ -11,9 +11,9 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Interaction.Show.BooleanValue showOnOff
     "Shows the current value of the on/off signal"
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
-    "Required to make the signals on the bus accessible" annotation (Placement(
-        transformation(
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
+    heatPumpControlBus "Required to make the signals on the bus accessible"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,0})));
@@ -61,7 +61,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.nSet, showN.numberPort) annotation (Line(
+  connect(heatPumpControlBus.ySet, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -88,12 +88,12 @@ equation
                    color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[1].y, heatPumpControlBus.m_flowEvaMea)
+  connect(massFlowRateMeasurements[1].y,heatPumpControlBus.mEvaMea_flow)
     annotation (Line(points={{-37,-96},{20,-96},{20,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[2].y, heatPumpControlBus.m_flowConMea)
+  connect(massFlowRateMeasurements[2].y,heatPumpControlBus.mConMea_flow)
     annotation (Line(points={{-37,-96},{0,-96},{0,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
       index=1,
@@ -102,7 +102,7 @@ equation
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
           -74,-60},{100,-60}}, color={0,0,127}));
-  connect(heatPumpControlBus.modeSet, showMode.activePort) annotation (Line(
+  connect(heatPumpControlBus.coo, showMode.activePort) annotation (Line(
       points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
       color={255,204,51},
       thickness=0.5), Text(

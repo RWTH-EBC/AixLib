@@ -1,40 +1,68 @@
 convertClear();
 
-// Renamed classes
-convertClass("AixLib.Fluid.HeatPumps.HeatPump", "AixLib.Fluid.HeatPumps.ModularReversible.Modular");
-convertClass("AixLib.Fluid.Chillers.Chiller", "AixLib.Fluid.Chillers.ModularReversible.Modular");
-convertClass("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus");
 // Renamed inputs
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "nSet", "ySet");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "T_amb_eva", "TEvaAmb");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "T_amb_con", "TConAmb");
-convertElement("AixLib.Fluid.HeatPumps.HeatPump", "modeSet", "hea");
-convertElement("AixLib.Fluid.Chillers.Chiller", "modeSet", "coo");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "nSet", "ySet");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "T_amb_eva", "TEvaAmb");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "T_amb_con", "TConAmb");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "modeSet", "coo");
 
 // Renamed parameters
-convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "nSet", "ySet");
-convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "modeSet", "coo");
-convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowEvaMea", "mEvaMea_flow");
-convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowConMea", "mConMea_flow");
-convertElement("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", "iceFacMea", "iceFacHPMea");
-
-// Renamed parameters
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "mFlow_conNominal", "mCon_flow_nominal");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "deltaM_con", "deltaMCon");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "Medium_eva", "MediumEva");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "mFlow_evaNominal", "mCEva_flow_nominal");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "deltaM_eva", "deltaMEva");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "PerDataMainHP", "RefrigerantCycleHeatPumpHeating");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "PerDataRevHP", "RefrigerantCycleHeatPumpCooling");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "show_TPort", "show_T");
-convertElement("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "useBusConnectorOnly", "use_busConOnl");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "Medium_con", "MediumCon");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "mFlow_conNominal", "mCon_flow_nominal");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "deltaM_con", "deltaMCon");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "Medium_eva", "MediumEva");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "mFlow_evaNominal", "mEva_flow_nominal");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "deltaM_eva", "deltaMEva");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "PerDataMainHP", "RefrigerantCycleHeatPumpHeating");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "PerDataRevHP", "RefrigerantCycleHeatPumpCooling");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "show_TPort", "show_T");
+convertElement("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "useBusConnectorOnly", "use_busConOnl");
 // Removed options
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"iceFac_in"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauSenT"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"transferHeat"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauHeaTraEva"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"TAmbEva_nominal"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"tauHeaTraCon"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"TAmbCon_nominal"}, fill("",0), true);
-convertModifiers("AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", {"use_autoCal"}, fill("",0), true);
-convertModifiers("AixLib.Controls.Interfaces.VapourCompressionMachineControlBus", {"COPMea"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"iceFac_in"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"tauSenT"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"transferHeat"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"tauHeaTraEva"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"TAmbEva_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"tauHeaTraCon"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"TAmbCon_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", {"use_autoCal"}, fill("",0), true);
+
+// Renamed inputs
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "nSet", "ySet");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "T_amb_eva", "TEvaAmb");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "T_amb_con", "TConAmb");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "modeSet", "hea");
+// Renamed parameters
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "Medium_con", "MediumCon");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "mFlow_conNominal", "mCon_flow_nominal");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "deltaM_con", "deltaMCon");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "Medium_eva", "MediumEva");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "mFlow_evaNominal", "mEva_flow_nominal");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "deltaM_eva", "deltaMEva");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "PerDataMainHP", "RefrigerantCycleHeatPumpHeating");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "PerDataRevHP", "RefrigerantCycleHeatPumpCooling");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "show_TPort", "show_T");
+convertElement("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "useBusConnectorOnly", "use_busConOnl");
+// Removed options
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"iceFac_in"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"tauSenT"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"transferHeat"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"tauHeaTraEva"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"TAmbEva_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"tauHeaTraCon"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"TAmbCon_nominal"}, fill("",0), true);
+convertModifiers("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", {"use_autoCal"}, fill("",0), true);
+
+// Renamed parameters
+convertElement("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "nSet", "ySet");
+convertElement("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "modeSet", "hea");
+convertElement("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowEvaMea", "mEvaMea_flow");
+convertElement("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "m_flowConMea", "mConMea_flow");
+convertElement("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "iceFacMea", "iceFacHPMea");
+convertModifiers("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", {"COPMea"}, fill("",0), true);
+
+// Renamed classes
+convertClass("AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump", "AixLib.Fluid.HeatPumps.ModularReversible.Modular");
+convertClass("AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller", "AixLib.Fluid.Chillers.ModularReversible.Modular");
+convertClass("AixLib.Obsolete.Year2024.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine", "AixLib.Obsolete.Year2024.Fluid.Chillers.Chiller");
+convertClass("AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus", "AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus");

@@ -28,16 +28,16 @@ model HPControllerOnOff
     annotation (Placement(transformation(extent={{22,-10},{42,10}})));
 equation
 
-  connect(mode.y, heatPumpControlBus.modeSet) annotation (Line(points={{9,-40},
-          {60,-40},{60,0.3525},{99.6475,0.3525}}, color={255,0,255}), Text(
+  connect(mode.y, heatPumpControlBus.hea) annotation (Line(points={{9,-40},{60,-40},
+          {60,0.5},{99.5,0.5}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(onOffController.y, NOnOff.u)
     annotation (Line(points={{11,0},{20,0}}, color={255,0,255}));
-  connect(NOnOff.y, heatPumpControlBus.nSet) annotation (Line(points={{43,0},{
-          72,0},{72,0.3525},{99.6475,0.3525}}, color={0,0,127}), Text(
+  connect(NOnOff.y,heatPumpControlBus.ySet)  annotation (Line(points={{43,0},{72,
+          0},{72,0.5},{99.5,0.5}},             color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

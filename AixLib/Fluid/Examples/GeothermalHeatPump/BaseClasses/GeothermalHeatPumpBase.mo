@@ -214,10 +214,11 @@ partial model GeothermalHeatPumpBase
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-89,-54})));
-  Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
+  HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
+    heatPumpControlBus
     annotation (Placement(transformation(extent={{-21,60},{20,98}})));
-  Obsolete.Year2024.Fluid.HeatPumps.HeatPump heatPump(useBusConnectorOnly=true) annotation (Placement(
-        transformation(
+  HeatPumps.ModularReversible.Modular heatPump(use_busConOnl=true) annotation (
+      Placement(transformation(
         extent={{-14,17},{14,-17}},
         rotation=90,
         origin={-25,5.99998})));
@@ -262,19 +263,19 @@ equation
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
   connect(resistanceHeatConsumerFlow.port_b, peaLoaDev.port_a) annotation (
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
-  connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-16.5,
-          20},{-16,20},{-16,28},{-146,28},{-146,27.2}},        color={0,127,255}));
-  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{-18,
-          -57},{-18,-8.00001},{-16.5,-8.00001}}, color={0,127,255}));
-  connect(heatPump.port_b2, geothField_sink1.ports[2]) annotation (Line(points={
-          {-33.5,-8.00001},{-88,-8.00001},{-88,24.8},{-146,24.8}}, color={0,127,
+  connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-14.8,
+          20},{-16,20},{-16,28},{-146,28},{-146,25.4}},        color={0,127,255}));
+  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{-18,-57},
+          {-18,-8.00002},{-14.8,-8.00002}},      color={0,127,255}));
+  connect(heatPump.port_b2, geothField_sink1.ports[2]) annotation (Line(points={{-35.2,
+          -8.00002},{-88,-8.00002},{-88,26.6},{-146,26.6}},        color={0,127,
           255}));
-  connect(heatPump.port_a2, valveHeatSource.port_b) annotation (Line(points={{-33.5,
+  connect(heatPump.port_a2, valveHeatSource.port_b) annotation (Line(points={{-35.2,
           20},{-44,20},{-44,7},{-60,7}}, color={0,127,255}));
-  connect(heatPump.port_a2, valveColdStorage.port_b) annotation (Line(points={{-33.5,
+  connect(heatPump.port_a2, valveColdStorage.port_b) annotation (Line(points={{-35.2,
           20},{-44,20},{-44,38},{-58,38}}, color={0,127,255}));
-  connect(valveHeatSink.port_b, heatPump.port_a1) annotation (Line(points={{-24,
-          -54},{-24,-56},{-16.5,-56},{-16.5,-8.00002}}, color={0,127,255}));
+  connect(valveHeatSink.port_b, heatPump.port_a1) annotation (Line(points={{-24,-54},
+          {-24,-56},{-14.8,-56},{-14.8,-8.00002}},      color={0,127,255}));
   connect(heatPumpControlBus, heatPump.sigBus) annotation (Line(
       points={{-0.5,79},{-0.5,-32},{-30.525,-32},{-30.525,-7.86002}},
       color={255,204,51},
@@ -289,8 +290,8 @@ equation
     annotation (Line(points={{33.1,20.17},{33.1,32},{80,32}}, color={0,127,255}));
   connect(pumpCondenser.port_a, heatStorage.portHC1Out) annotation (Line(points=
          {{6,-98},{16,-98},{16,-74.58},{23.825,-74.58}}, color={0,127,255}));
-  connect(heatPump.port_b1, heatStorage.portHC1In) annotation (Line(points={{
-          -16.5,20},{8,20},{8,-69.31},{23.65,-69.31}}, color={0,127,255}));
+  connect(heatPump.port_b1, heatStorage.portHC1In) annotation (Line(points={{-14.8,
+          20},{8,20},{8,-69.31},{23.65,-69.31}},       color={0,127,255}));
   connect(heatStorage.fluidportTop2, pumpHeatConsumer.port_a) annotation (Line(
         points={{42.375,-61.83},{42.375,-50},{58,-50}}, color={0,127,255}));
   connect(resistanceHeatConsumerReturn.port_b, heatStorage.fluidportBottom2)
@@ -298,8 +299,8 @@ equation
           127,255}));
   connect(pumpEvaporator.port_a, coldStorage.portHC1Out) annotation (Line(
         points={{14,36},{16,36},{16,7.42},{23.825,7.42}}, color={0,127,255}));
-  connect(heatPump.port_b2, coldStorage.portHC1In) annotation (Line(points={{
-          -33.5,-8.00002},{-33.5,-16},{14,-16},{14,12.69},{23.65,12.69}}, color
+  connect(heatPump.port_b2, coldStorage.portHC1In) annotation (Line(points={{-35.2,
+          -8.00002},{-35.2,-16},{14,-16},{14,12.69},{23.65,12.69}},       color
         ={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(

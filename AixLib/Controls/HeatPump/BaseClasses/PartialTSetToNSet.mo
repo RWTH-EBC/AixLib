@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
   parameter Boolean use_secHeaGen=false
@@ -24,7 +24,8 @@ partial model PartialTSetToNSet
     annotation (Placement(transformation(extent={{-132,44},{-100,76}})));
   Modelica.Blocks.Interfaces.RealOutput nOut "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus
+    sigBusHP
     annotation (Placement(transformation(extent={{-124,-42},{-90,-12}})));
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
