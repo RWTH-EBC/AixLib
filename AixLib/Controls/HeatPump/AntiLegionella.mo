@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model AntiLegionella "Control to avoid Legionella in the DHW"
 
   parameter Modelica.Units.SI.ThermodynamicTemperature TLegMin=333.15

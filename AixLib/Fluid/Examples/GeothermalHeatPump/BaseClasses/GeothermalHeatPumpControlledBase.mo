@@ -52,16 +52,14 @@ partial model GeothermalHeatPumpControlledBase
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{140,60},{160,80}})));
 equation
-  connect(getTStorageLower.y, coldStorageTemperature) annotation (Line(points={{-139,52},
-          {-136,52},{-136,46},{-166,46},{-166,-80},{-134,-80},{-134,-120}},
-                                            color={0,0,127}));
-  connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={{-139,68},
-          {-136,68},{-136,82},{-166,82},{-166,-80},{-100,-80},{-100,-120}},
+  connect(getTStorageLower.y, coldStorageTemperature) annotation (Line(points={
+          {-139,52},{-134,52},{-134,-120}}, color={0,0,127}));
+  connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
+          {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
   connect(heatPumpPower, heatPumpControlBus.PelMea) annotation (Line(points={{-45.5,
-          -119.5},{-45.5,-80},{-166,-80},{-166,82},{-94,82},{-94,79.095},{
-          -0.3975,79.095}},
-                    color={0,0,127}), Text(
+          -119.5},{-45.5,-80},{-110,-80},{-110,64},{-94,64},{-94,79.095},{-0.3975,
+          79.095}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
