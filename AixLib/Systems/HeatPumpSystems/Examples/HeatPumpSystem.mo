@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.Examples;
+﻿within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
@@ -71,11 +71,12 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
+    redeclare model RefrigerantCycleInertia =
+        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder
+        (refIneFreConst=0.01, nthOrd=3),
     dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
     use_opeEnvFroRec=true,
@@ -86,10 +87,8 @@ model HeatPumpSystem "Example for a heat pump system"
     minRunTime(displayUnit="min"),
     minLocTime(displayUnit="min"),
     use_antLeg=false,
-    use_refIne=true,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     minTimeAntLeg(displayUnit="min") = 900,
-    scalingFactor=1,
     use_tableData=false,
     dpCon_nominal=0,
     use_conCap=true,
@@ -101,11 +100,11 @@ model HeatPumpSystem "Example for a heat pump system"
     cpCon=4180,
     use_secHeaGen=false,
     redeclare model TSetToNSet = Controls.HeatPump.TwoPointControlledHP (bandwidth=5),
-    use_sec=true,
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D
+        (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=
             AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(
@@ -116,10 +115,6 @@ model HeatPumpSystem "Example for a heat pump system"
         extrapolation=false),
     redeclare function HeatingCurveFunction =
         Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=328.15),
-    use_minRunTime=true,
-    use_minLocTime=true,
-    use_runPerHou=true,
-    pre_n_start=true,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
     TCon_nominal=313.15,
@@ -176,7 +171,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus.TDryBul,TOut. T) annotation (Line(
-      points={{-68,64},{-4,64}},
+      points={{-67.95,64.05},{-36,64.05},{-36,64},{-4,64}},
       color={255,204,51},
       thickness=0.5,
       smooth=Smooth.None), Text(
@@ -194,7 +189,7 @@ equation
           {14,-90},{14,-83.4286},{10,-83.4286}},
                                        color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-45.0714},{5.95,-45.0714}},
+      points={{-67.95,64.05},{-58,64.05},{-58,-45.0714},{5.95,-45.0714}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -204,9 +199,8 @@ equation
           {88,-57.7143},{64,-57.7143}},      color={0,127,255}));
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
-  connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
-          -20},{54,-16},{-2,-16},{-2,-24},{5.95,-24},{5.95,-36.0714}},
-                                                     color={0,0,127}));
+  connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{-4,
+          -20},{-4,-36},{5.95,-36},{5.95,-36.0714}}, color={0,0,127}));
   connect(rad.port_b, heatPumpSystem.port_a1) annotation (Line(points={{20,12},
           {-12,12},{-12,-57.7143},{10,-57.7143}},color={0,127,255}));
   connect(rad.port_b, preSou.ports[1])

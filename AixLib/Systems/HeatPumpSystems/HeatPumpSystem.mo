@@ -6,15 +6,18 @@ model HeatPumpSystem
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare AixLib.Fluid.HeatPumps.ModularReversible.Modular heatPump(
-      final use_autoCalc=false,
-      final Q_useNominal=0,
+      redeclare model RefrigerantCycleInertia = RefrigerantCycleInertia,
+      dTCon_nominal=dTCon,
+      dTEva_nominal=dTEva,
+      QHea_flow_nominal=QCon_nominal,
+      TConHea_nominal=TCon_nominal,
+      TEvaHea_nominal=TEva_nominal,
       final VEva=VEva,
       redeclare final model RefrigerantCycleHeatPumpHeating = PerDataHea,
       redeclare final model RefrigerantCycleHeatPumpCooling = PerDataChi,
       redeclare final package MediumCon = Medium_con,
       redeclare final package MediumEva = Medium_eva,
       final use_rev=use_revHP,
-      final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
@@ -38,9 +41,6 @@ model HeatPumpSystem
       final pEva_start=pEva_start,
       final TEva_start=TEva_start,
       final XEva_start=XEva_start,
-      final x_start=x_start,
-      final yRefIne_start=yRefIne_start,
-      final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
       final mEva_flow_nominal=mFlow_evaNominal,
       final use_busConOnl=true,
@@ -48,8 +48,7 @@ model HeatPumpSystem
       final deltaMCon=deltaM_con,
       final deltaMEva=deltaM_eva));
 
-//Heat Pump
-
+  //Heat Pump
   replaceable model PerDataHea =
       AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby
     AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -61,21 +60,14 @@ model HeatPumpSystem
     AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
-
+  replaceable model RefrigerantCycleInertia =
+      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.NoInertia
+      constrainedby AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.BaseClasses.PartialInertia
+    annotation (choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
       radioButtons=true));
-  parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=true);
-  parameter Boolean use_refIne=true  "Consider the inertia of the refrigerant cycle"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
-  constant Modelica.Units.SI.Frequency refIneFre_constant
-    "Cut off frequency representing inertia of refrigerant cycle" annotation (
-      Dialog(
-      tab="Heat Pump",
-      group="Refrigerant cycle inertia",
-      enable=use_refIne), Evaluate=true);
-  parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
+
 //Condenser/Evaporator
   parameter Modelica.Units.SI.Volume VCon(displayUnit="l")
     "Volume in condenser. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
@@ -166,12 +158,13 @@ model HeatPumpSystem
       tab="Initialization",
       group="Evaporator",
       enable=use_evaCap));
+
 equation
 
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
-  connect(heatPump.sigBus, hPSystemController.sigBusHP) annotation (Line(
-      points={{-25.78,-9.15},{-84,-9.15},{-84,112.35},{-49.51,112.35}},
+  connect(hPControls.sigBusHP, heatPump.sigBus) annotation (Line(
+      points={{-20.38,118.4},{-50,118.4},{-50,-10.58},{-25.78,-10.58}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
