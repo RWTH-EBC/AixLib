@@ -25,7 +25,7 @@ partial model PartialTSetToNSet
     annotation (Placement(transformation(extent={{-132,44},{-100,76}})));
   Modelica.Blocks.Interfaces.RealOutput nOut "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-124,-46},{-90,-16}})));
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
@@ -41,13 +41,13 @@ partial model PartialTSetToNSet
         extent={{16,16},{-16,-16}},
         rotation=180,
         origin={-116,-80})));
-  Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen
+  AixLib.Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen
     "If second heater is off, zero is passed" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={0,-70})));
-  Utilities.Math.MovingAverage movAve(final aveTime=movAveTime, final u_start=0)
+  AixLib.Utilities.Math.MovingAverage movAve(final aveTime=movAveTime, final u_start=0)
     if use_heaLim
     "Moving average to account for fluctuations in the outdoor air temperature"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));

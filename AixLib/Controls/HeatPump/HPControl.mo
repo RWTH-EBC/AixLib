@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -61,9 +61,9 @@ model HPControl
     final zerTim=zerTim)
                     if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-  Interfaces.VapourCompressionMachineControlBus sigBusHP
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
-  Modelica.Blocks.Interfaces.RealOutput nOut
+  Modelica.Blocks.Interfaces.RealOutput yOut "Relative compressor speed"
     annotation (Placement(transformation(extent={{100,6},{128,34}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}}),
@@ -88,7 +88,7 @@ model HPControl
         rotation=90,
         origin={-12,-72})));
 
-  SetPoints.HeatingCurve heatCurve(
+  AixLib.Controls.SetPoints.HeatingCurve heatCurve(
     final TOffset=0,
     final use_dynTRoom=false,
     final zerTim=zerTim,
@@ -111,7 +111,7 @@ model HPControl
   Modelica.Blocks.Sources.BooleanConstant constHeating(final k=true)
     "If you want to include chilling, please insert control blocks first"
     annotation (Placement(transformation(extent={{82,-26},{94,-14}})));
-  Modelica.Blocks.Interfaces.BooleanOutput modeOut
+  Modelica.Blocks.Interfaces.BooleanOutput hea "Heating mode"
     annotation (Placement(transformation(extent={{100,-34},{128,-6}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
@@ -138,7 +138,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(ConvTSetToNSet.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
+  connect(ConvTSetToNSet.nOut,yOut)  annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
           {114,20}},          color={0,0,127}));
 
   connect(sigBusHP,ConvTSetToNSet. sigBusHP) annotation (Line(
@@ -158,8 +158,8 @@ equation
       points={{6.8,46},{26,46},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{94.6,-20}},
-                              color={255,0,255}));
+  connect(hea, constHeating.y)
+    annotation (Line(points={{114,-20},{94.6,-20}}, color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
 

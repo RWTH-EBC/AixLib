@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
@@ -7,50 +7,8 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
     AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
     redeclare model PeakLoadDeviceModel =
         AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone (
-          redeclare package Medium = Medium, energyDynamics=energyDynamics),
-    heatPump(
-      redeclare package MediumCon = Medium,
-      redeclare package MediumEva = Medium,
-      use_rev=false,
-      use_autoCalc=false,
-      Q_useNominal=0,
-      use_refIne=false,
-      refIneFre_constant=0,
-      VCon=0.005,
-      dpCon_nominal=0,
-      use_conCap=false,
-      CCon=0,
-      GConOut=0,
-      GConIns=0,
-      VEva=0.005,
-      dpEva_nominal=0,
-      use_evaCap=false,
-      CEva=0,
-      GEvaOut=0,
-      GEvaIns=0,
-      massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-      energyDynamics=energyDynamics,
-      redeclare model RefrigerantCycleHeatPumpHeating =
-          Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
-            dataTable=
-              AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH110
-              ()),
-      redeclare model RefrigerantCycleHeatPumpCooling =
-          Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D,
-      mCon_flow_nominal=0.5,
-      mEva_flow_nominal=0.5),
-    heatPumpControlBus(iceFacHPMea=1),
-    heatStorage(energyDynamics=energyDynamics),
-    coldStorage(energyDynamics=energyDynamics),
-    pumpCondenser(energyDynamics=energyDynamics),
-    pumpGeothermalSource(energyDynamics=energyDynamics),
-    pumpEvaporator(energyDynamics=energyDynamics),
-    pumpColdConsumer(energyDynamics=energyDynamics),
-    pumpHeatConsumer(energyDynamics=energyDynamics));
+          redeclare package Medium = Medium, energyDynamics=energyDynamics));
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics"));
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -148,8 +106,8 @@ equation
   connect(geothermalFieldControllerHeat.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
-  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
-          -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
+  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{-18,-57},
+          {-18,-8.00001},{-24,-8.00001},{-24,0}},                     color={0,
           127,255}));
   connect(TStorageSet.y, twoPointControlledHP.TSet) annotation (Line(points={{-109.5,
           75},{-98,75},{-98,76},{-81.6,76}},        color={0,0,127}));
@@ -161,22 +119,28 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(twoPointControlledHP.nOut, heatPumpControlBus.nSet) annotation (Line(
-        points={{-59,70},{-4,70},{-4,79.095},{-0.3975,79.095}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(mode.y, heatPumpControlBus.modeSet) annotation (Line(points={{-43.4,
-          62},{-30,62},{-30,79.095},{-0.3975,79.095}},             color={255,0,
-          255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(getTStorageUpper.y,twoPointControlledHP.TMea)  annotation (Line(
         points={{-139,68},{-138,68},{-138,62},{-81.6,62}}, color={0,0,127}));
+  connect(mode.y, heatPumpControlBus.hea) annotation (Line(points={{-43.4,62},{
+          0,62},{0,80},{-0.5,80},{-0.5,79}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(heatPump.P, heatPumpPower) annotation (Line(points={{-30,21},{-30,20},
+          {-116,20},{-116,-88},{-45.5,-88},{-45.5,-119.5}}, color={0,0,127}));
+  connect(twoPointControlledHP.nOut, heatPumpControlBus.ySet) annotation (Line(
+        points={{-59,70},{0,70},{0,79},{-0.5,79}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,6},{6,6}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(twoPointControlledHP.nOut, heatPumpControlBus.yMea) annotation (Line(
+        points={{-59,70},{-0.5,70},{-0.5,79}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (experiment(Tolerance=1e-6, StartTime=0, Interval=500, StopTime=86400, __Dymola_Algorithm="Dassl"), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>

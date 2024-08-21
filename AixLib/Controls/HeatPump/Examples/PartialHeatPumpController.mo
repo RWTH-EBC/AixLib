@@ -2,7 +2,7 @@
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
 
-  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus heatPumpControlBus
     "Required to make the signals on the bus accessible" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -51,7 +51,7 @@ equation
   connect(nSet, hPController.nOut) annotation (Line(points={{116,60},{102,60},{102,
           58},{76,58},{76,0},{22,0}}, color={0,0,127}));
   connect(T_oda.y, heatPumpControlBus.TOdaMea) annotation (Line(points={{-79,-70},
-          {-55.95,-70},{-55.95,-49.95}}, color={0,0,127}), Text(
+          {-56,-70},{-56,-50}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
