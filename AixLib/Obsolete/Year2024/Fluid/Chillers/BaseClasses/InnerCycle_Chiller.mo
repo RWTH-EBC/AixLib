@@ -1,6 +1,6 @@
 within AixLib.Obsolete.Year2024.Fluid.Chillers.BaseClasses;
 model InnerCycle_Chiller "Blackbox model of refrigerant cycle of a chiller"
-  extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
+  extends AixLib.Obsolete.Year2024.Fluid.BaseClasses.PartialInnerCycle;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
   replaceable model PerDataMainChi =

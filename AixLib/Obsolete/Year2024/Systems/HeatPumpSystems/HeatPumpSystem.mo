@@ -1,6 +1,6 @@
-within AixLib.Systems.HeatPumpSystems;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
 model HeatPumpSystem
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
+  extends AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
     transferHeat=true,
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
@@ -208,13 +208,13 @@ equation
 </p>
 <p>
   A <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters\">
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters\">
   set of parameters</a> is used to estimate the model parameters.
 </p>
 <p>
   See <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem\">
-  AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem</a>
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem\">
+  AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem</a>
   for information about the features of the heat pump system.
 </p>
 </html>"));

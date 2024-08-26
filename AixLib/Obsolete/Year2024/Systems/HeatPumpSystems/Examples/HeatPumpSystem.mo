@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.Examples;
+﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
@@ -68,7 +68,7 @@ model HeatPumpSystem "Example for a heat pump system"
     p=200000,
     T=281.15) "Fluid sink on source side"
     annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
-  AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
+  AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
     dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(),
@@ -117,13 +117,13 @@ model HeatPumpSystem "Example for a heat pump system"
         printAsserts=false,
         extrapolation=false),
     redeclare function HeatingCurveFunction =
-        Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=328.15),
+        AixLib.Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=328.15),
     use_minRunTime=true,
     use_minLocTime=true,
     use_runPerHou=true,
     pre_n_start=true,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
+    redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
+    redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
     TCon_nominal=313.15,
     TCon_start=313.15,
     TEva_start=283.15,
@@ -216,11 +216,11 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
     experiment(Tolerance=1e-6, StopTime=86400),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos"
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Obsolete/Year2024/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos"
         "Simulate and plot"),
     Documentation(info="<html><p>
   Model for testing the model <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem</a>.
 </p>
 <p>
   A simple radiator is used to heat a room. This example is based on

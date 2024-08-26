@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BaseClasses;
+within AixLib.Obsolete.Year2024.Fluid.BaseClasses;
 partial model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a vapour compression machine (heat pump or chiller)"
 

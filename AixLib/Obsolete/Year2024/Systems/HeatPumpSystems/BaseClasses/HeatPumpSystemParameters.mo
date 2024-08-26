@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 record HeatPumpSystemParameters
   "Parameters for design point of a heat pump system"
   parameter Modelica.Units.SI.HeatFlowRate QCon_nominal
@@ -49,7 +49,7 @@ record HeatPumpSystemParameters
 <p>
   Base record used to define standard heat pump system parameters. Used
   in <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>,
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem</a>,
   the parameters of this record are used to estimation the values of
   central heat pump parameters such as heat loss, mass flow rate etc.
 </p>

@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -12,7 +12,7 @@ partial model PartialHeatPumpSystem
     final show_T=false,
     redeclare package Medium2 = Medium_eva);
   import Modelica.Blocks.Types.Init;
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
+  extends AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
    cpCon = Medium_con.heatCapacity_cp(stateCon_default),
    cpEva = Medium_eva.heatCapacity_cp(stateEva_default));
 
@@ -50,13 +50,13 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  replaceable parameter Fluid.Movers.Data.Generic perEva
+  replaceable parameter AixLib.Fluid.Movers.Data.Generic perEva
     constrainedby AixLib.Fluid.Movers.Data.Generic
     "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Source",
       enable=use_evaPum));
-  replaceable parameter Fluid.Movers.Data.Generic perCon
+  replaceable parameter AixLib.Fluid.Movers.Data.Generic perCon
     constrainedby AixLib.Fluid.Movers.Data.Generic
     "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
@@ -73,10 +73,10 @@ partial model PartialHeatPumpSystem
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      Controls.SetPoints.Functions.HeatingCurveFunction annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=not use_tableData),choicesAllMatching=true);
+      AixLib.Controls.SetPoints.Functions.HeatingCurveFunction annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=not use_tableData),choicesAllMatching=true);
 
   parameter
-    DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
+    AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
       AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
          "Record with information about heating curve data"
@@ -294,11 +294,12 @@ partial model PartialHeatPumpSystem
       group="Temperature sensors",
       enable=transferHeat));
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
+  replaceable AixLib.Fluid.Interfaces.PartialFourPortInterface heatPump
+    constrainedby AixLib.Fluid.Interfaces.PartialFourPortInterface
                                               annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
-  Fluid.Movers.SpeedControlled_y pumSin(
+  AixLib.Fluid.Movers.SpeedControlled_y pumSin(
     redeclare final package Medium = Medium_con,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final p_start=pCon_start,
@@ -314,7 +315,7 @@ partial model PartialHeatPumpSystem
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-70,40})));
-  Fluid.Movers.SpeedControlled_y pumSou(
+  AixLib.Fluid.Movers.SpeedControlled_y pumSou(
     redeclare package Medium = Medium_eva,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final p_start=pEva_start,
@@ -334,7 +335,7 @@ partial model PartialHeatPumpSystem
   Modelica.Blocks.Interfaces.RealInput T_oda(unit="K")
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,104},{-100,134}})));
-  Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
+  AixLib.Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
     redeclare final package Medium = Medium_con)
                                            if not use_conPum
@@ -343,7 +344,7 @@ partial model PartialHeatPumpSystem
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-70,12})));
-  Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
+  AixLib.Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     final allowFlowReversal=allowFlowReversalCon,
     redeclare final package Medium = Medium_eva)
                                            if not use_evaPum
@@ -365,7 +366,7 @@ partial model PartialHeatPumpSystem
         rotation=180,
         origin={40,61})));
 
-  Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
+  AixLib.Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
     redeclare final package Medium = Medium_con)
                                            if not use_secHeaGen
@@ -374,7 +375,7 @@ partial model PartialHeatPumpSystem
         rotation=180,
         origin={38,34})));
 
-  HPSystemController hPSystemController(
+  AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.HPSystemController hPSystemController(
     final use_secHeaGen=use_secHeaGen,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
@@ -440,8 +441,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
 connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
@@ -610,7 +611,7 @@ connect(pumSou.port_a, port_a2) annotation (Line(
 <ol>
   <li>
     <a href=
-    \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">
+    \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">
     HPSystemController</a>: Model used to calculate a relative
     compressor speed and heat pump mode based on the ambient
     temperature and current supply temperature.

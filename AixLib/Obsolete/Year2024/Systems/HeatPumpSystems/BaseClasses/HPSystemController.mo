@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -15,10 +15,10 @@ model HPSystemController
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      Controls.SetPoints.Functions.HeatingCurveFunction annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=not use_tableData),choicesAllMatching=true);
+      AixLib.Controls.SetPoints.Functions.HeatingCurveFunction annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=not use_tableData),choicesAllMatching=true);
 
   parameter
-    DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
+    AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
       AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
          "Record with information about heating curve data"
@@ -152,7 +152,7 @@ model HPSystemController
       tab="Safety Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
-  Obsolete.Year2024.Controls.HeatPump.SafetyControls.SafetyControl safetyControl(
+  AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.SafetyControl safetyControl(
     final use_minRunTime=use_minRunTime,
     final minRunTime(displayUnit="min") = minRunTime,
     final minLocTime(displayUnit="min") = minLocTime,
@@ -173,7 +173,7 @@ model HPSystemController
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable)         if use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
-  Controls.HeatPump.HPControl hPControls(
+  AixLib.Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
     final use_secHeaGen=use_secHeaGen,
     redeclare final model TSetToNSet = TSetToNSet,
@@ -192,7 +192,7 @@ model HPSystemController
   AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(
       final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
-  Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
+  AixLib.Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
     "Calculates the heat flow added to the source medium"
     annotation (Placement(transformation(extent={{-80,82},{-64,98}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
@@ -200,7 +200,7 @@ model HPSystemController
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus
+  AixLib.Obsolete.Year2024.Controls.Interfaces.VapourCompressionMachineControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-116,-76},{-84,-42}}),
         iconTransformation(extent={{-116,-78},{-82,-40}})));

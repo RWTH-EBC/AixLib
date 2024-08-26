@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -226,7 +226,7 @@ equation
 </p>
 <p>
   Looking at the <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>,
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>,
   the task of the control block is also to control the pumps or fans
   and second heat generator if necessary.
 </p>

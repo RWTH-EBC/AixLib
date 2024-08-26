@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
 package BaseClasses "BaseClasses for heat pump systems"
 
 annotation (Documentation(revisions="<html><ul>
@@ -11,7 +11,7 @@ annotation (Documentation(revisions="<html><ul>
 </html>", info="<html>
 <p>
   This package contains models used in <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem</a>.
 </p>
 </html>"));
 end BaseClasses;
