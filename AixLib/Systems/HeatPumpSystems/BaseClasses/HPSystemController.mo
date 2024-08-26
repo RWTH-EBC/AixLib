@@ -257,15 +257,15 @@ equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
                                      color={0,0,127}));
-  connect(hPControls.nOut,safetyControl. nSet) annotation (Line(
+  connect(hPControls.yOut,safetyControl. nSet) annotation (Line(
       points={{-27.34,8},{5.33333,8}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(hPControls.nOut,realPasThrSec. u) annotation (Line(
+  connect(hPControls.yOut,realPasThrSec. u) annotation (Line(
       points={{-27.34,8},{-10,8},{-10,41},{18.6,41}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(hPControls.modeOut,safetyControl. modeSet) annotation (Line(points={{-27.34,
+  connect(hPControls.hea,safetyControl. modeSet) annotation (Line(points={{-27.34,
           0},{5.33333,0}},                                               color={255,0,
           255},
       pattern=LinePattern.Dash));
@@ -290,14 +290,13 @@ equation
                                color={0,0,127}));
   connect(y_sou, y_sou)
     annotation (Line(points={{-60,-114},{-60,-114}}, color={0,0,127}));
-  connect(hPControls.ySecHeaGen, ySecHeaGen) annotation (Line(points={{-49.76,
-          -16.8},{-49.76,-44},{1.77636e-15,-44},{1.77636e-15,-114}},
+  connect(hPControls.ySecHeaGen, ySecHeaGen) annotation (Line(points={{-49,-17.6},
+          {-49,-44},{1.77636e-15,-44},{1.77636e-15,-114}},
                                             color={0,0,127}));
-  connect(hPControls.y_sin, y_sin) annotation (Line(points={{-38.36,-16},{-38,
-          -16},{-38,-40},{60,-40},{60,-114}},
-                                         color={0,0,127}));
-  connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-60,
-          -16},{-60,-114}},                           color={0,0,127}));
+  connect(hPControls.y_sin, y_sin) annotation (Line(points={{-37.6,-18.8},{-38,-18.8},
+          {-38,-40},{60,-40},{60,-114}}, color={0,0,127}));
+  connect(hPControls.y_sou, y_sou) annotation (Line(points={{-60.4,-18.8},{-60,-18.8},
+          {-60,-114}},                                color={0,0,127}));
   connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
           {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
@@ -355,7 +354,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(hPControls.modeOut, booleanPassThroughMode.u) annotation (Line(
+  connect(hPControls.hea, booleanPassThroughMode.u) annotation (Line(
       points={{-27.34,0},{-10,0},{-10,-32},{20.8,-32}},
       color={255,0,255},
       pattern=LinePattern.Dash));

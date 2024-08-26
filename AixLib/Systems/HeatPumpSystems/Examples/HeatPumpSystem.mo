@@ -101,7 +101,7 @@ model HeatPumpSystem "Example for a heat pump system"
     cpCon=4180,
     use_secHeaGen=false,
     redeclare model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
-        (                                                                       hys=5),
+        (bandwidth=5),
     use_sec=true,
     QCon_nominal=10000,
     P_el_nominal=2500,
