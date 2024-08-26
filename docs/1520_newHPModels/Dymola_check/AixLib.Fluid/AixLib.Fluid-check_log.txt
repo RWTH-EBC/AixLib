@@ -1,0 +1,170 @@
+
+Error in model:  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>:
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:numRow">numRow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 115
+In value attribute for numRow.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:numRow">numRow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 115
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:numCol">numCol</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 116
+In value attribute for numCol.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:numCol">numCol</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 116
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:valTabPEle">valTabPEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 121
+In value attribute for valTabPEle.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:valTabPEle">valTabPEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 121
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Error: Use of undeclared variable tabQUse_flow.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable smoothness
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable extrapolation
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Error: Use of undeclared variable smoothness
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Error: Use of undeclared variable extrapolation
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Check is assuming: useInRevDev = false
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>:
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:numRow">numRow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 115
+In value attribute for numRow.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:numRow">numRow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 115
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Variable found in base-class PartialTableData3D.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:numCol">numCol</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 116
+In value attribute for numCol.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:numCol">numCol</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 116
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Variable found in base-class PartialTableData3D.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:valTabPEle">valTabPEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 121
+In value attribute for valTabPEle.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:valTabPEle">valTabPEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 121
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Variable found in base-class PartialTableData3D.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Error: Use of undeclared variable tabQUse_flow.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:valTabQCon_flow">valTabQCon_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 124
+In value attribute for valTabQCon_flow.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Modifier applied for component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:valTabQCon_flow">valTabQCon_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 124
+Variable found in class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 2
+Variable found in base-class PartialTableData3D.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Error: Use of undeclared variable tabQUse_flow.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable smoothness
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable extrapolation
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdeQUse_flow">tabIdeQUse_flow</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 128
+Error: Use of undeclared variable tabPEle.table
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Error: Use of undeclared variable smoothness
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Error: Use of undeclared variable extrapolation
+In class <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData3D.mo, line 11
+Used in component <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D#:tabIdePEle">tabIdePEle</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableData3D.mo, line 136
+Check is assuming: useInHeaPum = false
+Check is assuming: datTab.use_TEvaOutForTab = false
+Check is assuming: datTab.use_TConOutForTab = false
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
