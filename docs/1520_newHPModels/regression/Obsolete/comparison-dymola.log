@@ -1,0 +1,203 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TConInMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TEvaInMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.sigBus.TEvaOutMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.QEva",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.QCon",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller.mat_chiller.innerCycle.Pel"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "chiller.sigBus.TConInMea",
+        "chiller.sigBus.TEvaInMea",
+        "chiller.sigBus.TConOutMea",
+        "chiller.sigBus.TEvaOutMea",
+        "chiller.innerCycle.QEva",
+        "chiller.innerCycle.QCon",
+        "chiller.innerCycle.Pel"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller",
+    "simulation": {
+      "elapsed_time": 0.024,
+      "final_time": 3600,
+      "jacobians": 79,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TConInMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TEvaInMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TConOutMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.sigBus.TEvaOutMea",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.QEva",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.QCon",
+        "funnel_comp/AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump.mat_heatPump.innerCycle.Pel"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "heatPump.sigBus.TConInMea",
+        "heatPump.sigBus.TEvaInMea",
+        "heatPump.sigBus.TConOutMea",
+        "heatPump.sigBus.TEvaOutMea",
+        "heatPump.innerCycle.QEva",
+        "heatPump.innerCycle.QCon",
+        "heatPump.innerCycle.Pel"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump",
+    "simulation": {
+      "elapsed_time": 0.0165,
+      "final_time": 3600,
+      "jacobians": 72,
+      "start_time": 0,
+      "state_events": 1,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat",
+      "funnel_dirs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "success_rate": 0.0,
+      "t_err_max": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "test_passed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "heatPumpSystem.heatPump.sigBus.TConInMea",
+        "heatPumpSystem.heatPump.sigBus.TConOutMea",
+        "heatPumpSystem.hPSystemController.hPControls.heatCurve.TSet",
+        "heatPumpSystem.heatPump.innerCycle.QCon",
+        "heatPumpSystem.heatPump.innerCycle.Pel",
+        "vol.T"
+      ],
+      "warnings": [
+        "Translation, simulation or extracting simulation results failed. IOError while reading /tmp/tmp-AixLib-0-23gtexnh/AixLib/AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat generated by Obsolete/Year2024/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos.\nFile /tmp/tmp-AixLib-0-23gtexnh/AixLib/AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.Examples.HeatPumpSystem.mat does not exist.\n",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "model": "AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.Examples.HeatPumpSystem",
+    "simulation": {
+      "elapsed_time": 0,
+      "final_time": 86400,
+      "jacobians": 0,
+      "start_time": 0,
+      "state_events": 0,
+      "success": false
+    }
+  }
+]

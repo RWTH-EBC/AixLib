@@ -1,0 +1,74 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Electrical.PVSystem.Validation.ValidationPVSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Electrical.PVSystem.Validation.ValidationPVSystem.mat_DCOutputPower",
+        "funnel_comp/AixLib.Electrical.PVSystem.Validation.ValidationPVSystem.mat_DCOutputPower_Measured"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        28684800.0,
+        28684800.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "DCOutputPower",
+        "DCOutputPower_Measured"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Electrical.PVSystem.Validation.ValidationPVSystem",
+    "simulation": {
+      "elapsed_time": 0.0341,
+      "final_time": 28771200.0,
+      "jacobians": 940,
+      "start_time": 28684800.0,
+      "state_events": 81,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Electrical.PVSystem.Examples.ExamplePVSystem.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Electrical.PVSystem.Examples.ExamplePVSystem.mat_DCOutputPower"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "DCOutputPower"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.Electrical.PVSystem.Examples.ExamplePVSystem",
+    "simulation": {
+      "elapsed_time": 0.79,
+      "final_time": 31536000.0,
+      "jacobians": 23122,
+      "start_time": 0,
+      "state_events": 4856,
+      "success": true
+    }
+  }
+]
