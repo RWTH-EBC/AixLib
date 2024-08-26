@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.Examples;
+within AixLib.Controls.HeatPump.Examples;
 model TwoPointControlledHeatPump
   extends Modelica.Icons.Example;
   extends PartialHeatPumpController(redeclare TwoPointControlledHP hPController(
@@ -12,10 +12,11 @@ annotation(experiment(Tolerance=1e-6, StartTime=0, StopTime=10000), __Dymola_Com
   TSet and TMea.
 </p>
 </html>", revisions="<html><ul>
-<li>
-  <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
-  First implementation (see issue <a href=
-  \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
-</li>
+  <li>
+    <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
+  </li>
+</ul>
 </html>"));
 end TwoPointControlledHeatPump;

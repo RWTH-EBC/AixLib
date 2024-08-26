@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.Examples;
+within AixLib.Controls.HeatPump.Examples;
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
 
@@ -70,10 +70,11 @@ equation
   Partial example model for heat pump controls.
 </p>
 </html>", revisions="<html><ul>
-<li>
-  <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
-  First implementation (see issue <a href=
-  \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
-</li>
+  <li>
+    <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
+  </li>
+</ul>
 </html>"));
 end PartialHeatPumpController;
