@@ -1,0 +1,879 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The model has the same number of unknowns and equations: 1776
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1728+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.refCyc.refCycHeaPumHea.proQUse_flow.nu+  heaPum.con.vol.dynBal.nPorts+2*heaPum.eva.vol.dynBal.nPorts+size(  heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu  +size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu
+scalar unknowns and
+  1682+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 2 else (if   sou.use_X_in then 1 else 3))+3*sou.nPorts+(if  not sou.use_p_in then 1 else 0)  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 2 else (if   sin.use_X_in then 1 else 3))+3*sin.nPorts+(if  not sin.use_p_in then 1 else 0)  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+5*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1776
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/Modular_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/Modular_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The DAE has 1776 scalar unknowns and 1776 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  heaPum.eva.p_start = heaPum.pEva_start;
+ 
+This required evaluation of 
+the interactive parameters 
+    heaPum.pEva_start(start = 101325)
+    sin.p(start = 101325)
+ 
+The redundancies involve
+initial equations: 
+  sin.p = heaPum.eva.vol.dynBal.p_start;
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 463
+  Variables: 3665
+  Constants: 78 (78 scalars)
+  Parameters: 1743 (2220 scalars)
+  Unknowns: 1844 (1833 scalars)
+  Differentiated variables: 24 scalars
+  Equations: 1715
+  Nontrivial: 1431
+Translated Model
+  Constants: 1575 scalars
+  Free parameters: 307 scalars
+  Parameter depending: 856 scalars
+  Outputs: 24 scalars
+  Continuous time states: 16 scalars
+  Time-varying variables: 369 scalars
+  Alias variables: 1024 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.heaCap.T
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.vol.dynBal.medium.Xi[1]
+  heaPum.eva.vol.dynBal.U
+  oneRooRadHeaPumCtr.PIDCoo.I.y
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for heaPum.con.preDro.dp.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class heaPum.con.preDro.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for heaPum.eva.preDro.dp.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class heaPum.eva.preDro.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+The model has the same number of unknowns and equations: 1643
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1600+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.con.vol.dynBal.nPorts+heaPum.eva.vol.dynBal.nPorts  +size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu  +size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu
+scalar unknowns and
+  1560+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 1 else (if   sou.use_X_in then 0 else 1))+(if  not sou.use_p_in then 1 else 0)+2*sou.nPorts  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 1 else (if   sin.use_X_in then 0 else 1))+(if  not sin.use_p_in then 1 else 0)+2*sin.nPorts  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1643
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/LargeScaleWaterToWater_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/LargeScaleWaterToWater_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for heaPum.con.preDro.dp.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class heaPum.con.preDro.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for heaPum.eva.preDro.dp.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class heaPum.eva.preDro.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-0-8n2aikae/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+The DAE has 1643 scalar unknowns and 1643 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 453
+  Variables: 3668
+  Constants: 78 (78 scalars)
+  Parameters: 1804 (4627 scalars)
+  Unknowns: 1786 (1686 scalars)
+  Differentiated variables: 22 scalars
+  Equations: 1671
+  Nontrivial: 1396
+Translated Model
+  Constants: 1533 scalars
+  Free parameters: 856 scalars
+  Parameter depending: 2678 scalars
+  Outputs: 24 scalars
+  Continuous time states: 14 scalars
+  Time-varying variables: 364 scalars
+  Alias variables: 960 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.vol.dynBal.U
+  oneRooRadHeaPumCtr.PIDCoo.I.y
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The model has the same number of unknowns and equations: 1696
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1651+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.con.vol.dynBal.nPorts+2*heaPum.eva.vol.dynBal.nPorts  +size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu  +size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu
+scalar unknowns and
+  1603+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 2 else (if   sou.use_X_in then 1 else 3))+3*sou.nPorts+(if  not sou.use_p_in then 1 else 0)  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 2 else (if   sin.use_X_in then 1 else 3))+3*sin.nPorts+(if  not sin.use_p_in then 1 else 0)  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+5*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1696
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/AirToWater2D_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/AirToWater2D_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The DAE has 1696 scalar unknowns and 1696 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  heaPum.eva.p_start = heaPum.pEva_start;
+ 
+This required evaluation of 
+the interactive parameters 
+    heaPum.pEva_start(start = 101325)
+    sin.p(start = 101325)
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 453
+  Variables: 3677
+  Constants: 78 (78 scalars)
+  Parameters: 1809 (2851 scalars)
+  Unknowns: 1790 (1753 scalars)
+  Differentiated variables: 23 scalars
+  Equations: 1674
+  Nontrivial: 1402
+Translated Model
+  Constants: 1219 scalars
+  Free parameters: 441 scalars
+  Parameter depending: 1522 scalars
+  Outputs: 24 scalars
+  Continuous time states: 15 scalars
+  Time-varying variables: 386 scalars
+  Alias variables: 1114 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 2, 1, 2}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.vol.dynBal.medium.Xi[1]
+  heaPum.eva.vol.dynBal.U
+  oneRooRadHeaPumCtr.PIDCoo.I.y
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The model has the same number of unknowns and equations: 1750
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1698+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.refCyc.refCycHeaPumHea.proQUse_flow.nu+  heaPum.refCyc.refCycHeaPumCoo.proQUse_flow.nu+heaPum.con.vol.dynBal.nPorts+  heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns,   1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu+2*heaPum.nthOrd
+scalar unknowns and
+  1664+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 1 else (if   sou.use_X_in then 0 else 1))+(if  not sou.use_p_in then 1 else 0)+2*sou.nPorts  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 1 else (if   sin.use_X_in then 0 else 1))+(if  not sin.use_p_in then 1 else 0)+2*sin.nPorts  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+2*heaPum.nthOrd+(if    not vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1750
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/CarnotWithLosses_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/CarnotWithLosses_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-1-ohia7ixg/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The DAE has 1750 scalar unknowns and 1750 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 466
+  Variables: 3658
+  Constants: 78 (78 scalars)
+  Parameters: 1712 (2030 scalars)
+  Unknowns: 1868 (1793 scalars)
+  Differentiated variables: 26 scalars
+  Equations: 1731
+  Nontrivial: 1434
+Translated Model
+  Constants: 1238 scalars
+  Free parameters: 252 scalars
+  Parameter depending: 892 scalars
+  Outputs: 24 scalars
+  Continuous time states: 18 scalars
+  Time-varying variables: 381 scalars
+  Alias variables: 1138 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3, 8, 8}
+  Sizes after manipulation of the nonlinear systems: {1, 2, 2}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.heaCap.T
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.heaCap.T
+  heaPum.eva.vol.dynBal.U
+  heaPum.refCycIneCon.criDam.x[1]
+  heaPum.refCycIneEva.criDam.x[1]
+  oneRooRadHeaPumCtr.PIDCoo.I.y
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The model has the same number of unknowns and equations: 1647
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1604+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.con.vol.dynBal.nPorts+heaPum.eva.vol.dynBal.nPorts  +size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu  +size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu
+scalar unknowns and
+  1564+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 1 else (if   sou.use_X_in then 0 else 1))+(if  not sou.use_p_in then 1 else 0)+2*sou.nPorts  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 1 else (if   sin.use_X_in then 0 else 1))+(if  not sin.use_p_in then 1 else 0)+2*sin.nPorts  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1647
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/TableData3D_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/TableData3D_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-2-xpmyfn_d/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The DAE has 1647 scalar unknowns and 1647 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 446
+  Variables: 3567
+  Constants: 78 (78 scalars)
+  Parameters: 1711 (2047 scalars)
+  Unknowns: 1778 (1690 scalars)
+  Differentiated variables: 22 scalars
+  Equations: 1659
+  Nontrivial: 1384
+Translated Model
+  Constants: 1225 scalars
+  Free parameters: 259 scalars
+  Parameter depending: 903 scalars
+  Outputs: 24 scalars
+  Continuous time states: 14 scalars
+  Time-varying variables: 365 scalars
+  Alias variables: 1063 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 1}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.vol.dynBal.U
+  oneRooRadHeaPumCtr.PIDCoo.I.y
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Failed
+ = false
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator");
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The model has the same number of unknowns and equations: 1648
+The model could not be deduced to be symbolically well-posed.
+The model has
+  1603+2*(rad.nEle+vol.dynBal.nPorts)+max([size(timTab.columns, 1); size(  timTab.offset, 1)])+rad.vol[1].dynBal.nPorts+rad.vol[2].dynBal.nPorts+  rad.vol[3].dynBal.nPorts+rad.vol[4].dynBal.nPorts+rad.vol[5].dynBal.nPorts+  rad.sumCon.nin+rad.sumRad.nin+heaPum.con.vol.dynBal.nPorts+2*heaPum.eva.vol.dynBal.nPorts  +size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapHea.nor.nu  +size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+heaPum.safCtr.opeEnv.bouMapCoo.nor.nu
+scalar unknowns and
+  1555+max([size(timTab.columns, 1); size(timTab.offset, 1)])+(if weaDat.pAtmSou   == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+(if sou.use_Xi_in then 2 else (if   sou.use_X_in then 1 else 3))+3*sou.nPorts+(if  not sou.use_p_in then 1 else 0)  +(if  not sou.use_T_in then 1 else 0)+(if sin.use_Xi_in then 2 else (if   sin.use_X_in then 1 else 3))+3*sin.nPorts+(if  not sin.use_p_in then 1 else 0)  +(if  not sin.use_T_in then 1 else 0)+(if preSou.use_Xi_in then 1 else (if   preSou.use_X_in then 0 else 1))+(if  not preSou.use_p_in then 1 else 0)+2*  preSou.nPorts+(if  not preSou.use_T_in then 1 else 0)+(if  not   vol.dynBal.use_mWat_flow then 1 else 0)+5*vol.dynBal.nPorts+(if  not   rad.vol[1].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[1].dynBal.nPorts+(if    not rad.vol[2].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[2].dynBal.nPorts  +(if  not rad.vol[3].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[3].dynBal.nPorts  +(if  not rad.vol[4].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[4].dynBal.nPorts  +(if  not rad.vol[5].dynBal.use_mWat_flow then 1 else 0)+3*rad.vol[5].dynBal.nPorts  +(if  not pumHeaPum.vol.steBal.use_mWat_flow then 1 else 0)+(if  not   pumHeaPumSou.vol.steBal.use_mWat_flow then 1 else 0)+(if  not heaPum.con.vol.dynBal.use_mWat_flow   then 1 else 0)+3*heaPum.con.vol.dynBal.nPorts+(if  not heaPum.eva.vol.dynBal.use_mWat_flow   then 1 else 0)+5*heaPum.eva.vol.dynBal.nPorts+size(heaPum.safCtr.opeEnv.bouMapHea.tabBou.columns,   1)+size(heaPum.safCtr.opeEnv.bouMapCoo.tabBou.columns, 1)+2*rad.nEle
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  1648
+Check of AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator successful.
+Warning: WARNINGS have been issued.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/VCLibAirToWater_OneRoomRadiator.mos\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator\\\");\",", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/VCLibAirToWater_OneRoomRadiator.mos");
+simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator");
+Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator:
+Warning: Non-literal value.
+In nominal attribute for rad.res.m_flow.
+Ignoring nominal attribute.
+In class Modelica.Units.SI.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Units.mo, line 237
+Used in base-class rad.res.PartialTwoPortInterface.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPum.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPum.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_in.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+Warning: Non-literal value.
+In nominal attribute for pumHeaPumSou.m_flow_actual.
+Ignoring nominal attribute.
+In class Modelica.Blocks.Interfaces.
+  Near file: /opt/dymola-2022-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line 2
+Used in base-class pumHeaPumSou.FlowControlled_m_flow.
+  Near file: /tmp/tmp-AixLib-3-jwx1ipu4/AixLib/Fluid/Movers/Preconfigured/FlowControlled_m_flow.mo, line 3
+The DAE has 1648 scalar unknowns and 1648 scalar equations.
+Redundant consistent initial conditions.
+Removed the following equations which are redundant and consistent: 
+  heaPum.eva.p_start = heaPum.pEva_start;
+ 
+This required evaluation of 
+the interactive parameters 
+    heaPum.pEva_start(start = 101325)
+    sin.p(start = 101325)
+ 
+ 
+Statistics
+ 
+Original Model
+  Number of components: 429
+  Variables: 3472
+  Constants: 77 (77 scalars)
+  Parameters: 1665 (2022 scalars)
+  Unknowns: 1730 (1705 scalars)
+  Differentiated variables: 22 scalars
+  Equations: 1612
+  Nontrivial: 1342
+Translated Model
+  Constants: 1310 scalars
+  Free parameters: 220 scalars
+  Parameter depending: 867 scalars
+  Outputs: 24 scalars
+  Continuous time states: 14 scalars
+  Time-varying variables: 357 scalars
+  Alias variables: 1050 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
+  Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
+  Sizes of nonlinear systems of equations: {3}
+  Sizes after manipulation of the nonlinear systems: {1}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {11, 1, 1, 2}
+    Sizes after manipulation of the nonlinear systems: {5, 1, 1, 1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+  heaPum.con.vol.dynBal.U
+  heaPum.eva.vol.dynBal.medium.Xi[1]
+  heaPum.eva.vol.dynBal.U
+  oneRooRadHeaPumCtr.PIDHea.I.y
+  rad.vol[1].dynBal.U
+  rad.vol[2].dynBal.U
+  rad.vol[3].dynBal.U
+  rad.vol[4].dynBal.U
+  rad.vol[5].dynBal.U
+  temRet.T
+  temSup.T
+  vol.dynBal.m
+  vol.dynBal.medium.Xi[1]
+  vol.hOut_internal
+ 
+Warning: WARNINGS have been issued.
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.translation.log");
