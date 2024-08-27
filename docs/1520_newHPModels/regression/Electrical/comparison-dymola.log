@@ -30,7 +30,7 @@
     },
     "model": "AixLib.Electrical.PVSystem.Validation.ValidationPVSystem",
     "simulation": {
-      "elapsed_time": 0.0341,
+      "elapsed_time": 0.0158,
       "final_time": 28771200.0,
       "jacobians": 940,
       "start_time": 28684800.0,
@@ -63,7 +63,7 @@
     },
     "model": "AixLib.Electrical.PVSystem.Examples.ExamplePVSystem",
     "simulation": {
-      "elapsed_time": 0.79,
+      "elapsed_time": 0.71,
       "final_time": 31536000.0,
       "jacobians": 23122,
       "start_time": 0,

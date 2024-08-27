@@ -108,7 +108,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening",
     "simulation": {
-      "elapsed_time": 0.102,
+      "elapsed_time": 0.0597,
       "final_time": 180,
       "jacobians": 4022,
       "start_time": 0,
@@ -243,7 +243,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening",
     "simulation": {
-      "elapsed_time": 0.227,
+      "elapsed_time": 0.0943,
       "final_time": 180,
       "jacobians": 4332,
       "start_time": 0,
@@ -450,7 +450,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.OpeningArea",
     "simulation": {
-      "elapsed_time": 0.00301,
+      "elapsed_time": 0.00215,
       "final_time": 60,
       "jacobians": 64,
       "start_time": 0,
@@ -597,7 +597,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.Examples.AHU",
     "simulation": {
-      "elapsed_time": 0.134,
+      "elapsed_time": 0.113,
       "final_time": 86400,
       "jacobians": 0,
       "start_time": 0,
