@@ -1,11 +1,10 @@
 Regression tests are only run for the following package:
   AixLib.Fluid.HeatPumps.ModularReversible.Examples
-*** Error: Simulation failed for 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/TableData3D_OneRoomRadiator.mos");'.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Fluid_HeatPumps_ModularReversible_Examples_TableData3D_OneRoomRadiator.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Fluid_HeatPumps_ModularReversible_Examples_VCLibAirToWater_OneRoomRadiator.txt.
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.2 MB.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.3 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 0 warnings and 1 errors.
+Script that runs unit tests had 0 warnings and 0 errors.
+
+Unit tests completed successfully.
 

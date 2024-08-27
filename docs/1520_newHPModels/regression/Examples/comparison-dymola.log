@@ -48,7 +48,7 @@
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.LargeScaleWaterToWater_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.069994,
+      "elapsed_time": 0.0698049,
       "final_time": 86400,
       "jacobians": 94,
       "start_time": 0,
@@ -111,7 +111,7 @@
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.Modular_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.0574811,
+      "elapsed_time": 0.0677998,
       "final_time": 86400,
       "jacobians": 84,
       "start_time": 0,
@@ -174,7 +174,7 @@
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.AirToWater2D_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.0725551,
+      "elapsed_time": 0.0746729,
       "final_time": 86400,
       "jacobians": 110,
       "start_time": 0,
@@ -237,7 +237,7 @@
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.CarnotWithLosses_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.11128,
+      "elapsed_time": 0.119246,
       "final_time": 86400,
       "jacobians": 118,
       "start_time": 0,
@@ -248,38 +248,110 @@
   {
     "comparison": {
       "file_name": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_vol.T_start",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_vol.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_temSup.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_temRet.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_heaPum.refCyc.sigBus.onOffMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "vol.T_start",
+        "vol.T",
+        "temSup.T",
+        "temRet.T",
+        "heaPum.refCyc.sigBus.onOffMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0,
+      "elapsed_time": 0.059828,
       "final_time": 86400,
-      "jacobians": 0,
+      "jacobians": 76,
       "start_time": 0,
-      "state_events": 0,
-      "success": false
+      "state_events": 21,
+      "success": true
     }
   },
   {
     "comparison": {
       "file_name": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat_vol.T_start",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat_vol.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat_temSup.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat_temRet.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator.mat_heaPum.refCyc.sigBus.yMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "vol.T_start",
+        "vol.T",
+        "temSup.T",
+        "temRet.T",
+        "heaPum.refCyc.sigBus.yMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.0631669,
+      "elapsed_time": 0.0660491,
       "final_time": 86400,
       "jacobians": 69,
       "start_time": 0,
