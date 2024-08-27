@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D;
 partial record Generic
   "Partial record for three-dimensional data for heat pumps"
-  extends GenericHeatPump(final nDim=3);
+  extends AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.GenericHeatPump(final nDim=3);
   annotation (Documentation(info="<html>
 <p>
   Data for three-dimensional performance data, assuming the following order: 

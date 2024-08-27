@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF;
 record GenericHeatPump "Partial n-dimensional heat pump data"
-  extends Generic;
+  extends AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.Generic;
 
   parameter String datasetQCon_flow "Dataset name for useful heat flow rate"
     annotation (Dialog(group="Condenser heat flow"));
