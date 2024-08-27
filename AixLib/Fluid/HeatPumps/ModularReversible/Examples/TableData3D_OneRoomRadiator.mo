@@ -29,10 +29,7 @@ model TableData3D_OneRoomRadiator
     use_intSafCtr=true,
     redeclare model RefrigerantCycleHeatPumpHeating =
         AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D (
-        PEle_nominal=1000,
-        scaFac=1,
-        extrapMethod=SDF.Types.ExtrapolationMethod.Hold,
-        redeclare
+          extrapMethod=SDF.Types.ExtrapolationMethod.Hold, redeclare
           AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VZH088AG
           datTab),
     TConHea_nominal=TRadSup_nominal,

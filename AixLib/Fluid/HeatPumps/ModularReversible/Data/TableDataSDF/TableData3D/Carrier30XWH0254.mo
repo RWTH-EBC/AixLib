@@ -2,7 +2,6 @@ within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D;
 record Carrier30XWH0254 "Data for Carrier 30XWH-0254 machine"
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.Generic(
-    outOrd={2,1,3},
     facGai={1,1,100},
     use_TConOutForTab=true,
     use_TEvaOutForTab=false,
