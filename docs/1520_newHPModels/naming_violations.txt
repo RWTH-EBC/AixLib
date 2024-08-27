@@ -1,322 +1,6 @@
 
 
 
-AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo
-1: Name 'm_flow_nominal_layer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow_nominal_layer. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer=0.5 "Nominal mass flow rate in layers of storages";
-
-2: Name 'm_flow_nominal_HE' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow_nominal_. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE=0.5 "Nominal mass flow rate of heat exchanger layers of storages";
-
-3: Name 'T_start_cold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start_cold. Affected line: parameter Modelica.Units.SI.Temperature T_start_cold=300 "Initial temperature of cold components";
-
-4: Name 'T_start_hot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start_hot. Affected line: parameter Modelica.Units.SI.Temperature T_start_hot=300 "Initial temperature of warm components";
-
-5: Missing documentation, Name 'PeakLoadDeviceModel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Peak, Load, Device, Model. Affected line: replaceable model PeakLoadDeviceModel = AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby AixLib.Fluid.Interfaces.PartialTwoPortTransport(redeclare package Medium=Medium) annotation(choicesAllMatching=true);
-
-6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: PeakLoadDeviceModel peaLoaDev annotation (Placement(transformation(extent={{108,-56},{120,-44}})));Storage.StorageDetailed coldStorage( redeclare package Medium = Medium, energyDynamics=energyDynamics, redeclare package MediumHC1 = Medium, redeclare package MediumHC2 = Medium, m1_flow_nominal=m_flow_nominal_layer, m2_flow_nominal=m_flow_nominal_layer, mHC1_flow_nominal=m_flow_nominal_HE, useHeatingCoil2=false, useHeatingRod=false, redeclare DataBase.Storage.Generic_New_2000l data( hTank=1.5, hUpperPortDemand=1.45, hUpperPortSupply=1.45, hHC1Up=1.45, dTank=1, sIns=0.2, lambdaIns=0.075, hTS2=1.45), n=5, hConIn=100, hConOut=10, hConHC1=500, upToDownHC1=false) "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{24,-14}, {52,20}})));FixedResistances.PressureDrop resistanceColdStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in evaporator circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=180, origin={-34,38})));
-
-7: Name 'geothFieldSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: geoth, Field, Source. Affected line: AixLib.Fluid.Sources.Boundary_pT geothFieldSource( redeclare package Medium = Medium, nPorts=1, T=284.15) "Source representing geothermal field" annotation (Placement(transformation(extent={{-158,-60},{-146,-48}})));
-
-8: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FixedResistances.PressureDrop resistanceGeothermalSource( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in geothermal field circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=0, origin={-70,-54})));FixedResistances.PressureDrop resistanceColdConsumerFlow( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in cold consumer flow line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={87,-20})));Actuators.Valves.TwoWayQuickOpening valveHeatSink( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting geothermal field to the condenser of the heat pump" annotation (Placement(transformation(extent={{-36,-61},{-24,-47}})));Actuators.Valves.TwoWayQuickOpening valveHeatSource(redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting geothermal field to the evaporator of the heat pump" annotation (Placement( transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-60,1})));
-
-9: Name 'heatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Storage. Affected line: AixLib.Fluid.Storage.StorageDetailed heatStorage( redeclare package Medium = Medium, energyDynamics=energyDynamics, redeclare package MediumHC1 = Medium, redeclare package MediumHC2 = Medium, m1_flow_nominal=m_flow_nominal_layer, m2_flow_nominal=m_flow_nominal_layer, mHC1_flow_nominal=m_flow_nominal_HE, useHeatingCoil2=false, useHeatingRod=false, redeclare DataBase.Storage.Generic_New_2000l data( hTank=1.5, hUpperPortDemand=1.45, hUpperPortSupply=1.45, hHC1Up=1.45, dTank=1, sIns=0.2, lambdaIns=0.075, hTS2=1.45), n=5, hConIn=100, hConOut=10, hConHC1=500) "Storage tank for buffering heat demand" annotation (Placement(transformation(extent={{24,-96},{52,-62}})));
-
-10: Name 'resistanceHeatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Storage. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in condenser circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-18,-78})));
-
-11: Name 'geothField_sink1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: geoth, Field_sink. Affected line: AixLib.Fluid.Sources.Boundary_pT geothField_sink1(redeclare package Medium = Medium, nPorts=2) "One of two sinks representing geothermal field" annotation (Placement(transformation(extent={{-158,20},{-146,32}})));
-
-12: Name 'resistanceHeatConsumerFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Consumer. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatConsumerFlow( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in heat consumer flow line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={87,-50})));
-
-13: Name 'valveColdStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: valve, Cold, Storage. Affected line: AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening valveColdStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting cold storage to the evaporator of the heat pump" annotation (Placement( transformation( extent={{-6,7},{6,-7}}, rotation=180, origin={-52,38})));
-
-14: Name 'valveHeatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: valve, Heat, Storage. Affected line: AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening valveHeatStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting heat storage to the condenser of the heat pump" annotation (Placement( transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-18,-63})));
-
-15: Name 'pumpColdConsumer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cold, Consumer. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpColdConsumer( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to cold consumers" annotation (Placement(transformation(extent={{58,-27},{72,-13}})));
-
-16: Name 'pumpHeatConsumer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heat, Consumer. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpHeatConsumer( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_hot) "Pump moving fluid from storage tank to heat consumers" annotation (Placement(transformation(extent={{58,-57},{72,-43}})));
-
-17: Name 'resistanceColdConsumerReturn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Cold, Consumer, Return. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceColdConsumerReturn( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in cold consumer return line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=180, origin={87,32})));
-
-18: Name 'resistanceHeatConsumerReturn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Consumer, Return. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatConsumerReturn( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in heat consumer return line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=180, origin={87,-106})));
-
-19: Name 'pumpCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Condenser. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpCondenser( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to condenser of heat pump" annotation (Placement(transformation( extent={{-7,7},{7,-7}}, rotation=180, origin={-1,-98})));
-
-20: Name 'pumpEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Evaporator. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpEvaporator( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to evaporator of heat pump" annotation (Placement(transformation( extent={{-7,7},{7,-7}}, rotation=180, origin={7,36})));
-
-21: Name 'pumpGeothermalSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Geothermal, Source. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpGeothermalSource( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from geothermal source into system" annotation ( Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={-89,-54})));
-
-22: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus heatPumpControlBus annotation (Placement(transformation(extent={{-21,60},{20,98}})));
-
-23: Missing documentation, Name 'heatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Pump. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.Modular heatPump( redeclare package MediumCon = Medium, redeclare package MediumEva = Medium, use_rev=false, tauCon=0.005*heatPump.rhoCon/heatPump.mCon_flow_nominal, dTCon_nominal=0, tauEva=0.005*heatPump.rhoEva/heatPump.mEva_flow_nominal, dpCon_nominal=0, use_conCap=false, CCon=0, GConOut=0, GConIns=0, dTEva_nominal=0, dpEva_nominal=0, use_evaCap=false, CEva=0, GEvaOut=0, GEvaIns=0, use_intSafCtr=false, energyDynamics=energyDynamics, QHea_flow_nominal=12740, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData2D ( redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN255.Vitocal350BWH110 datTab), redeclare model RefrigerantCycleHeatPumpCooling = AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling, mCon_flow_nominal=0.5, mEva_flow_nominal=0.5, TConHea_nominal=318.15, TEvaHea_nominal=273.15, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15, use_busConOnl=true) annotation ( Placement(transformation( extent={{-10,10},{10,-10}}, rotation=90, origin={-30,10})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Examples/BaseClasses/OneRoomRadiatorHeatPumpControl.mo
-1: Name 'swiHeaCooYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiHeaCooYSet if witCoo "Switch ySet for heating and cooling" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, origin={30,70}, rotation=0)));
-
-2: Name 'constYSetZer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Sources.Constant constYSetZer(final k=0) "ySet equals zero" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={30,-18})));
-
-3: Name 'swiYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiYSet "If no demand, switch heat pump off" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={70,50})));
-
-
-AixLib/Obsolete/YearIndependent/FastHVAC/Examples/HeatGenerators/HeatPump/HeatPump.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{48,-70},{66,-52}})));FastHVAC.Components.Pumps.FluidSource fluidSource(medium= FastHVAC.Media.WaterSimple()) "Fluidsource for source" annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-
-2: Documentation too short, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Components.HeatGenerators.HeatPump.HeatPump heatPump( refIneFre_constant=1, Medium_con=Media.WaterSimple(), Medium_eva=Media.WaterSimple(), mFlow_conNominal=0.5, VCon=0.4, deltaM_con=0.1, use_ConCap=false, CCon=100, GCon=5, mFlow_evaNominal=0.5, VEva=0.04, deltaM_eva=0.1, use_EvaCap=false, CEva=100, GEva=5, allowFlowReversalEva=true, use_revHP=true, TCon_start(displayUnit="K"), TEva_start(displayUnit="K"), redeclare model PerDataHea = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D ( dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()), redeclare model PerDataChi = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D ( dataTable=AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()), Q_useNominal=0, use_autoCalc=false, TAmbCon_nominal=288.15) annotation (Placement(transformation( extent={{-13,-16},{13,16}}, rotation=-90, origin={3,-2})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FastHVAC.Components.Sinks.Vessel vessel_ev "vessel for open evaporator circuit" annotation (Placement( transformation( extent={{-11,-9},{11,9}}, rotation=180, origin={-35,57})));
-
-4: Name 'dotm_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dotm_source. Affected line: Modelica.Blocks.Sources.Constant dotm_source(k=1) "Source mass flow signal" annotation (Placement(transformation(extent={{-98,-82},{-78,-62}})));
-
-5: Name 'dotm_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dotm_sink. Affected line: Modelica.Blocks.Sources.Constant dotm_sink(k=0.106) "sink mass flow signal" annotation (Placement( transformation( extent={{-4,-4},{4,4}}, rotation=270, origin={36,38})));
-
-6: Name 'T_amb_internal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15) "Constant internal ambient temeprature" annotation (Placement(transformation(extent={{7,-7},{-7,7}}, rotation=-90, origin={3,-35})));
-
-7: Name 'booleanToReal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Real. Affected line: Modelica.Blocks.Math.BooleanToReal booleanToReal "on off control " annotation (Placement(transformation(extent={{4,4},{-4,-4}}, rotation=90, origin={6,40})));
-
-8: Name 'TsuSourceRamp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Ramp. Affected line: Modelica.Blocks.Sources.Ramp TsuSourceRamp( duration=1000, startTime=1000, height=25, offset=278) "Ramp signal for the temperature input of the source side's ideal mass flow source" annotation (Placement(transformation(extent={{-96,-34},{-76,-14}})));
-
-9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BaseClasses.WorkingFluid Room(m_fluid=5*1000, T0=293.15) "Volume" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={90,-26})));
-
-10: Name 'heatFlowRateCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Rate. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon "Heat flow rate of the condenser" annotation (Placement(transformation( extent={{-6,6},{6,-6}}, rotation=270, origin={52,-18})));
-
-11: Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, amplitude=3000, offset=3000) "hourly sine " annotation (Placement(transformation(extent={{66,8},{58,16}})));
-
-12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Components.Pumps.Pump pump "sink pump" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={36,20})));
-
-13: Missing documentation, Name 'booleanStep' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Step. Affected line: Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=10000, startValue=true) annotation (Placement(transformation(extent={{-6,-6},{6,6}}, rotation=270, origin={0,78})));
-
-14: Missing documentation, Name 'hysHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Logical.Hysteresis hysHeating( pre_y_start=true, uLow=273.15 + 30, uHigh=273.15 + 35) annotation (Placement(transformation(extent={{66,58},{56,68}})));
-
-15: Missing documentation, Name 'logicalSwitch' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: logical, Switch. Affected line: Modelica.Blocks.Logical.LogicalSwitch logicalSwitch annotation (Placement(transformation(extent={{26,50},{16,60}})));
-
-16: Missing documentation, Name 'hysCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooling. Affected line: Modelica.Blocks.Logical.Hysteresis hysCooling( pre_y_start=false, uLow=273.15 + 15, uHigh=273.15 + 19) annotation (Placement(transformation(extent={{58,42},{48,52}})));
-
-
-AixLib/Obsolete/Year2024/Fluid/HeatPumps/HeatPump.mo
-1: Name 'PerDataMainHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data, Main. Affected line: replaceable model PerDataMainHP = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of a heat pump in main operation mode" annotation (choicesAllMatching=true);
-
-2: Name 'PerDataRevHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataRevHP = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of a heat pump in reversible operation mode" annotation (Dialog(enable=use_rev),choicesAllMatching=true);
-
-
-AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-20})));Sources.Boundary_pT heatConsumerFlow(redeclare package Medium = Medium, nPorts=1) "Sink representing heat consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-50})));Sources.Boundary_pT heatConsumerReturn(redeclare package Medium = Medium, nPorts=1, T=303.15) "Source representing heat consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-106})));Sources.Boundary_pT coldConsumerReturn(redeclare package Medium = Medium, nPorts=1, T=287.15) "Source representing cold consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,32})));
-
-2: Name 'pressureDifference' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pressure, Difference. Affected line: Modelica.Blocks.Sources.Constant pressureDifference(k=60000) "Pressure difference used for all pumps" annotation ( Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,6})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Controls.HeatPump.TwoPointControlledHP twoPointControlledHP( use_secHeaGen=false, use_heaLim=false, T_heaLim=293.15, movAveTime=300, bandwidth=2) "Controls the temperature in the heat storage by switching the heat pump on or off" annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-
-4: Name 'TStorageSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage. Affected line: Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 45) "Set point of upper heat storage temperature" annotation (Placement(transformation(extent={{-120,70},{-110,80}})));
-
-5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Control.geothermalFieldController geothermalFieldControllerCold( temperature_low=273.15 + 8, temperature_high=273.15 + 10) "Controls the heat exchange with the geothermal field and the heat storage" annotation (Placement(transformation(extent={{-102,28},{-86,44}})));Control.geothermalFieldController geothermalFieldControllerHeat( temperature_low=308.15, temperature_high=313.15) "Controls the heat exchange with the geothermal field and the heat storage" annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
-
-6: Name 'mode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mode. Affected line: Modelica.Blocks.Sources.BooleanConstant mode "Dummy signal for unit mode, true: heat pump, false: chiller" annotation (Placement(transformation(extent={{-56,56},{-44,68}})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Examples/TableData3D_OneRoomRadiator.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modular heaPum( redeclare package MediumCon = MediumWat, redeclare package MediumEva = MediumWat, use_rev=false, allowDifferentDeviceIdentifiers=true, dTCon_nominal=8, use_conCap=false, dTEva_nominal=5, use_evaCap=false, QHea_flow_nominal=Q_flow_nominal, use_intSafCtr=true, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D ( extrapMethod=SDF.Types.ExtrapolationMethod.Hold, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VZH088AG datTab), TConHea_nominal=TRadSup_nominal, dpCon_nominal(displayUnit="kPa") = 40000, TEvaHea_nominal=sou.T, dpEva_nominal(displayUnit="kPa") = 40000, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.Data.Wuellhorst2021 safCtrPar, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15) "Large scale water to water heat pump" annotation (Placement(transformation(extent={{20,-160},{0,-140}})));
-
-
-AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpControlledBase.mo
-1: Name 'getTStorageUpper' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage, Upper. Affected line: Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[ heatStorage.n].T) "Gets the temperature of upper heat storage layer" annotation (Placement(transformation(extent={{-160,58},{-140,78}})));
-
-2: Name 'getTStorageLower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage, Lower. Affected line: Modelica.Blocks.Sources.RealExpression getTStorageLower(y=coldStorage.layer[1].T) "Gets the temperature of lower cold storage layer" annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
-
-3: Name 'coldStorageTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Storage, Temperature. Affected line: Modelica.Blocks.Interfaces.RealOutput coldStorageTemperature( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0, start=T_start_cold) "Temperature in the cold storage" annotation ( Placement(transformation( origin={-134,-120}, extent={{10,-10},{-10,10}}, rotation=90), iconTransformation( extent={{10,-10},{-10,10}}, rotation=90, origin={-100,-110})));
-
-4: Name 'heatStorageTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Storage, Temperature. Affected line: Modelica.Blocks.Interfaces.RealOutput heatStorageTemperature( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0, start=T_start_hot) "Temperature in the heat storage" annotation (Placement( transformation( origin={-100,-120}, extent={{10,-10},{-10,10}}, rotation=90), iconTransformation( extent={{10,-10},{-10,10}}, rotation=90, origin={-140,-110})));
-
-5: Name 'chemicalEnergyFlowRate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: chemical, Energy, Rate. Affected line: Modelica.Blocks.Interfaces.RealOutput chemicalEnergyFlowRate(final unit="W") "Flow of primary (chemical) energy into boiler " annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=270, origin={-71.5,-119.5}), iconTransformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-20.5,-109})));
-
-6: Name 'heatPumpPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Pump, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput heatPumpPower(final unit="W") "Electrical power of the heat pump" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, rotation=270, origin={-45.5,-119.5}), iconTransformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-60.5,-109})));
-
-7: Missing documentation, Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system annotation (Placement(transformation(extent={{140,60},{160,80}})));
-
-
-AixLib/Controls/HeatPump/DefrostControl.mo
-1: Name 'deltaIceFac' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta. Affected line: parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events.";
-
-2: Missing documentation. Affected line: Modelica.Blocks.Interfaces.BooleanInput hea annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Logical.SmoothSwitch swiErr "If an error occurs, the value of the conZero block will be used(0)" annotation (Placement(transformation(extent={{58,2},{78,22}})));
-
-4: Missing documentation. Affected line: Modelica.Blocks.Interfaces.BooleanOutput heaOut annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
-
-5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBus annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
-
-6: Name 'logicalSwitch' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: logical, Switch. Affected line: Modelica.Blocks.Logical.LogicalSwitch logicalSwitch "If a chiller is used to defrost, mode will be false" annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
-
-7: Name 'conTrueUseChi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: True. Affected line: Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) "Set mode to false to simulate the defrost cycle" annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableDataSDF.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear "Interpolation method" annotation(Dialog(group="Data handling"));parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.Hold "Extrapolation method" annotation(Dialog(group="Data handling"));
-
-2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable nDTabQUse_flow( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF-Table data for condenser heat flow" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={70,30})));SDF.NDTable nDTabPEle( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF table data for electrical power" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={10,30})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RearrangeInputs ordInp(final nDim=nDim) "Possibly change Input order" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-40,50})));
-
-4: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabQUse_flow=SDF.Types.ExternalNDTable( nDTabQUse_flow.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabQUse_flow.filename), nDTabQUse_flow.dataset, nDTabQUse_flow.dataUnit, nDTabQUse_flow.scaleUnits));
-
-5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabPEle=SDF.Types.ExternalNDTable( nDTabPEle.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabPEle.filename), nDTabPEle.dataset, nDTabPEle.dataUnit, nDTabPEle.scaleUnits));
-
-6: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: function evaluate input SDF.Types.ExternalNDTable table;input Real[:] params;input SDF.Types.InterpolationMethod interpMethod;input SDF.Types.ExtrapolationMethod extrapMethod;
-
-7: Missing documentation, Name 'value;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: value. Affected line: output Real value;
-
-
-AixLib/Controls/HeatPump/TwoPointControlledHP.mo
-1: Name 'bandwidth' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bandwidth. Affected line: parameter Real bandwidth "Bandwith of hysteresis of controller";
-
-2: Name 'onOffController' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Controller. Affected line: Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=bandwidth, final pre_y_start=false) "Hysteresis controller for set temperature" annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Data/TableData3D/Generic.mo
-1: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename "File name of sdf table data" annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
-
-2: Name 'datasetPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetPEle "Dataset name for electrical power" annotation (Dialog(group="Electrical Power"));
-
-3: Name 'dataUnitPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitPEle "Data unit for electrical power" annotation (Dialog(group="Electrical Power"));
-
-4: Name 'scaleUnitsPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsPEle[nDim] "Scale units for electrical power" annotation (Dialog(group="Electrical Power"));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/TableData3D/VCLibPy/Generic.mo
-1: Name 'flowsheet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: flowsheet. Affected line: parameter String flowsheet "Name of the flowsheet";
-
-2: Name 'refrigerant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: refrigerant. Affected line: parameter String refrigerant "Name of the fluid";
-
-
-AixLib/Controls/HeatPump/HPControl.mo
-1: Missing documentation, Name 'HeatingCurveFunction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating, Curve, Function. Affected line: replaceable function HeatingCurveFunction = SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
-
-2: Name 'heatingCurveRecord' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heating, Curve, Record. Affected line: parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord= AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10() "Record with information about heating curve data" annotation (Dialog(group="Heating Curve - Data", enable = use_tableData),choicesAllMatching=true);
-
-3: Name 'declination' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: declination. Affected line: parameter Real declination=2 "Declination of curve" annotation (Dialog(group="Heating Curve - Data", enable = use_tableData));
-
-4: Name 'day_hour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: day_hour. Affected line: parameter Real day_hour=6 "Hour of day at which day mode is enabled" annotation (Dialog(group="Heating Curve - Night mode"));
-
-5: Name 'night_hour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: night_hour. Affected line: parameter Real night_hour=22 "Hour of day at which night mode is enabled" annotation (Dialog(group="Heating Curve - Night mode"));
-
-6: Name 'weekly' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: weekly. Affected line: parameter Boolean weekly=true "Switch between a daily or weekly trigger approach" annotation(Dialog(tab="Anti Legionella",descriptionLabel=true), choices(choice=true "Weekly", choice=false "Daily", radioButtons=true));
-
-7: Name 'trigWeekDay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trig, Week. Affected line: parameter Integer trigWeekDay "Day of the week at which control is triggered" annotation (Dialog(tab="Anti Legionella", enable=use_antLeg and weekly));
-
-8: Name 'trigHour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trig, Hour. Affected line: parameter Integer trigHour=3 "Hour of the day at which control is triggered" annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
-
-9: Missing documentation, Name 'antiLegionella' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: anti, Legionella. Affected line: AixLib.Controls.HeatPump.AntiLegionella antiLegionella( final TLegMin=TLegMin, minTimeAntLeg=minTimeAntLeg, trigWeekDay=trigWeekDay, trigHour=trigHour, yearRef=2017, final zerTim=zerTim) if use_antLeg annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-
-10: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
-
-11: Name 'T_oda' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_oda. Affected line: Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature" annotation (Placement(transformation(extent={{-128,-14},{-100,14}}), iconTransformation(extent={{-140,-26},{-100,14}})));
-
-12: Missing documentation, Name 'y_sou' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: y_sou. Affected line: Modelica.Blocks.Interfaces.RealOutput y_sou annotation (Placement(transformation(extent={{14,-14},{-14,14}}, rotation=90, origin={-60,-114})));
-
-13: Missing documentation, Name 'y_sin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: y_sin. Affected line: Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation( extent={{14,-14},{-14,14}}, rotation=90, origin={60,-114})));
-
-14: Name 'constHeating1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Sources.Constant constHeating1(final k=1) "If you want to include chilling, please insert control blocks first" annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-12,-72})));
-
-15: Missing documentation, Name 'heatCurve' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Curve. Affected line: AixLib.Controls.SetPoints.HeatingCurve heatCurve( final TOffset=0, final use_dynTRoom=false, final zerTim=zerTim, final day_hour=day_hour, final night_hour=night_hour, final heatingCurveRecord=heatingCurveRecord, final declination=declination, redeclare function HeatingCurveFunction = HeatingCurveFunction, use_tableData=use_tableData, final TRoom_nominal=293.15) annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
-
-16: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},{76,26}})));
-
-17: Name 'realPasThrAntLeg' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real. Affected line: Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg if not use_antLeg "No Anti Legionella" annotation ( choicesAllMatching=true, Placement( transformation(extent={{-10,38},{6,54}})));
-
-18: Name 'constHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Sources.BooleanConstant constHeating(final k=true) "If you want to include chilling, please insert control blocks first" annotation (Placement(transformation(extent={{82,-26},{94,-14}})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/GenericHeatPump.mo
-1: Name 'datasetQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetQCon_flow "Dataset name for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-2: Name 'dataUnitQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitQCon_flow "Data unit for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-3: Name 'scaleUnitsQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsQCon_flow[nDim] "Scale units for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-
-AixLib/Obsolete/YearIndependent/FastHVAC/Components/HeatGenerators/HeatPump/HeatPump.mo
-1: Name 'Medium_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_eva. Affected line: parameter AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva= AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple() "Medium at source side" annotation (Dialog(tab="Evaporator"), choicesAllMatching=true);
-
-2: Name 'use_autoCalc' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_auto, Calc. Affected line: parameter Boolean use_autoCalc=false "Enable automatic estimation of volumes and mass flows?" annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-
-3: Name 'Q_useNominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_use, Nominal. Affected line: parameter Modelica.Units.SI.Power Q_useNominal(start=0) "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)" annotation (Dialog(enable=use_autoCalc));
-
-4: Name 'PerDataHea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataHea = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of HP in heating mode" annotation (choicesAllMatching=true);
-
-5: Name 'PerDataChi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataChi = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of HP in chilling mode" annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-
-6: Name 'scalingFactor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scaling, Factor. Affected line: parameter Real scalingFactor=1 "Scaling-factor of HP";
-
-7: Name 'refIneFre_constant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fre_constant. Affected line: parameter Modelica.Units.SI.Frequency refIneFre_constant "Cut off frequency for inertia of refrigerant cycle" annotation (Dialog( enable=use_refIne, group="Refrigerant inertia"), Evaluate=true);
-
-8: Name 'nthOrder' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Order. Affected line: parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable= use_refIne, group="Refrigerant inertia"));
-
-9: Name 'useBusConnectorOnly' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Connector, Only. Affected line: parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input" annotation(choices(checkBox=true), Dialog(group="Input Connectors"));
-
-10: Name 'm_fluidCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_fluid. Affected line: parameter Modelica.Units.SI.Mass m_fluidCon=VCon_final*con.medium.rho "Mass of working fluid";
-
-11: Name 'deltaM_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: _con. Affected line: parameter Real deltaM_con=0.1 "Fraction of nominal mass flow rate where transition to turbulent occurs" annotation (Dialog(tab="Condenser", group="Flow resistance"));
-
-12: Name 'GCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GCon "Constant thermal conductance of condenser material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Condenser", enable=use_ConCap));
-
-13: Name 'GConIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConIns=0 "Constant thermal conductance of condenser material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Condenser", enable=use_ConCap));
-
-14: Name 'm_fluidEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_fluid. Affected line: parameter Modelica.Units.SI.Mass m_fluidEva=VEva_final*eva.medium.rho "Mass of working fluid";
-
-15: Name 'deltaM_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: _eva. Affected line: parameter Real deltaM_eva=0.1 "Fraction of nominal mass flow rate where transition to turbulent occurs" annotation (Dialog(tab="Evaporator", group="Flow resistance"));
-
-16: Name 'GEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEva "Constant thermal conductance of Evaporator material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Evaporator", enable=use_EvaCap));
-
-17: Name 'GEvaIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaIns=0 "Constant thermal conductance of Evaporator material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Evaporator", enable=use_EvaCap));
-
-18: Name 'allowFlowReversalCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Reversal. Affected line: parameter Boolean allowFlowReversalCon=true "= false to simplify equations, assuming, but not enforcing, no flow reversal" annotation (Dialog(group="Condenser", tab="Assumptions"));
-
-19: Name 'transferHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: transfer, Heat. Affected line: parameter Boolean transferHeat=true "If true, temperature T converges towards TAmb when no flow" annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
-
-20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Interfaces.EnthalpyPort_a enthalpyPort_a( m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0)) "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{-104,56},{-96,64}})));Interfaces.EnthalpyPort_b enthalpyPort_b( m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0)) "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{104,56},{96,64}})));Interfaces.EnthalpyPort_a enthalpyPort_a1( m_flow(min=if allowFlowReversalEva then -Modelica.Constants.inf else 0)) "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)" annotation (Placement(transformation(extent={{96,-64},{104,-56}})));Interfaces.EnthalpyPort_b enthalpyPort_b1( m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0)) "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)" annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));BaseClasses.EvaporatorCondenserWithCapacity con( final kAOut_nominal=GCon, final m_fluid=m_fluidCon, final T_start=TCon_start, final use_cap=use_ConCap, final is_con=true, final V=VCon_final*scalingFactor, final C=CCon*scalingFactor, final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal_final)^0.88, final medium=Medium_con, final m_flow_small=1E-4*abs(mFlow_conNominal_final), final m_flow_nominal=mFlow_conNominal_final) "Heat exchanger model for the condenser" annotation (Placement(transformation(extent={{-16,76},{16,108}})));BaseClasses.EvaporatorCondenserWithCapacity eva( final medium=Medium_eva, final use_cap=use_EvaCap, final kAOut_nominal=GEva, final m_fluid=m_fluidEva, final T_start=TEva_start, final m_flow_small=1E-4*abs(mFlow_evaNominal_final), final is_con=false, final V=VEva_final*scalingFactor, final C=CEva*scalingFactor, final m_flow_nominal=mFlow_evaNominal_final, final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal_final)^0.88) "Heat exchanger model for the evaporator" annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
-
-21: Name 'heatFlowIneEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat. Affected line: Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva( final initType=initType, final normalized=true, final n=nthOrder, final f=refIneFre_constant, final y_start=yRefIne_start) if use_refIne "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow" annotation (Placement(transformation( extent={{6,6},{-6,-6}}, rotation=90, origin={-14,-52})));
-
-22: Name 'realPassThroughnSetCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Pass, Throughn. Affected line: Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if not use_refIne "Use default nSet value" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=90, origin={16,58})));
-
-23: Name 'heatFlowIneCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat. Affected line: Modelica.Blocks.Continuous.CriticalDamping heatFlowIneCon( final initType=initType, final normalized=true, final n=nthOrder, final f=refIneFre_constant, final y_start=yRefIne_start) if use_refIne "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=90, origin={-16,58})));
-
-24: Name 'realPassThroughnSetEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Pass, Throughn. Affected line: Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if not use_refIne "Use default nSet value" annotation (Placement(transformation( extent={{6,-6},{-6,6}}, rotation=90, origin={16,-52})));
-
-25: Name 'varTempOutEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if use_EvaCap "Forces heat losses according to ambient temperature" annotation (Placement(transformation( extent={{-8,-8},{8,8}}, rotation=180, origin={68,-108})));
-
-26: Name 'varTempOutCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if use_ConCap "Forces heat losses according to ambient temperature" annotation (Placement(transformation( extent={{-8,-8},{8,8}}, rotation=180, origin={68,110})));
-
-27: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(extent={{-108,-52},{-90,-26}})));
-
-28: Missing documentation, Name 'innerCycle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: inner, Cycle. Affected line: AixLib.Obsolete.Year2024.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle( redeclare final model PerDataMainHP =PerDataHea, redeclare final model PerDataRevHP = PerDataChi, final use_rev=use_revHP, final scalingFactor=scalingFactor) annotation ( Placement(transformation( extent={{-27,-26},{27,26}}, rotation=90, origin={0,-1})));
-
-29: Name 'T_amb_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb_eva. Affected line: Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final displayUnit="degC") if use_EvaCap "Ambient temperature on the evaporator side" annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=0, origin={110,-100})));
-
-30: Name 'T_amb_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb_con. Affected line: Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final displayUnit="degC") if use_ConCap "Ambient temperature on the condenser side" annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=180, origin={110,100})));
-
-31: Name 'modeSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mode. Affected line: Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly and use_revHP "Set value of HP mode" annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
-
-32: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sensors.TemperatureSensor senT_a2 "Temperature at sink inlet" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={40,-86})));Sensors.TemperatureSensor senT_b2 "Temperature at sink outlet" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={-52,-86})));Sensors.MassFlowSensor mFlow_eva "Mass flow sensor at the evaporator" annotation (Placement(transformation( origin={70,-60}, extent={{10,-10},{-10,10}}, rotation=0)));Sensors.TemperatureSensor senT_b1 "Temperature at sink outlet" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={38,92})));Sensors.TemperatureSensor senT_a1 "Temperature at sink inlet" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={-34,92})));Sensors.MassFlowSensor mFlow_con "Mass flow sensor at the evaporator" annotation (Placement(transformation( origin={-80,60}, extent={{-10,10},{10,-10}}, rotation=0)));
-
-33: Name 'autoCalc_mFlow_min' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_min=0.3 "Realistic mass flow minimum for simulation plausibility";
-
-34: Name 'autoCalc_Vmin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_, Vmin. Affected line: parameter Modelica.Units.SI.Volume autoCalc_Vmin=0.003 "Realistic volume minimum for simulation plausibility";
-
-35: Missing documentation, Name 'autoCalc_mFlow_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m, Flow_eva. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_eva=if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max( 0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
-
-36: Missing documentation, Name 'autoCalc_mFlow_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m, Flow_con. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_con=if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max( 0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
-
-37: Missing documentation, Name 'mFlow_evaNominal_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flow_eva, Nominal_final. Affected line: parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
-
-38: Missing documentation, Name 'mFlow_conNominal_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flow_con, Nominal_final. Affected line: parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
-
-39: Missing documentation, Name 'autoCalc_VEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_. Affected line: parameter Modelica.Units.SI.Volume autoCalc_VEva=if machineType then max( 0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001* Q_useNominal - 0.0066, autoCalc_Vmin);
-
-40: Missing documentation, Name 'autoCalc_VCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_. Affected line: parameter Modelica.Units.SI.Volume autoCalc_VCon=if machineType then max( 0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002* Q_useNominal - 0.0084, autoCalc_Vmin);
-
-41: Missing documentation, Name 'VEva_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Eva_final. Affected line: parameter Modelica.Units.SI.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
-
-42: Missing documentation, Name 'VCon_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Con_final. Affected line: parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
-
-
 AixLib/Obsolete/YearIndependent/FastHVAC/Components/Chiller/Chiller.mo
 1: Name 'Medium_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_eva. Affected line: parameter AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva=AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple() "Medium at source side" annotation (Dialog(tab="Evaporator"), choicesAllMatching=true);
 
@@ -403,30 +87,258 @@ AixLib/Obsolete/YearIndependent/FastHVAC/Components/Chiller/Chiller.mo
 42: Missing documentation, Name 'VCon_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Con_final. Affected line: parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
 
 
-AixLib/Fluid/HeatPumps/ModularReversible/BaseClasses/PartialReversibleRefrigerantMachine.mo
-1: Name 'MediumEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumEva = Modelica.Media.Interfaces.PartialMedium "Medium on evaporator side" annotation (choicesAllMatching=true);
+AixLib/Controls/HeatPump/Examples/PartialHeatPumpController.mo
+1: Name 'T_meas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_meas. Affected line: Modelica.Blocks.Sources.Sine T_meas( f=1/3600, amplitude=6, offset=310) "Generates the measured temperature" annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
 
-2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable PartialModularRefrigerantCycle refCyc constrainedby PartialModularRefrigerantCycle(final use_rev=use_rev) "Model of the refrigerant cycle" annotation (Placement(transformation( extent={{-18,-18},{18,18}}, rotation=90)));
+2: Name 'T_set' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_set. Affected line: Modelica.Blocks.Sources.Constant T_set(k=310) "Provides the temperature set point" annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 
-3: Name 'RefrigerantCycleInertia' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Refrigerant, Cycle, Inertia. Affected line: replaceable model RefrigerantCycleInertia = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.NoInertia constrainedby AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.BaseClasses.PartialInertia "Inertia between the refrigerant cycle outputs and the heat exchangers." annotation (choicesAllMatching=true, Dialog(group="Inertia"));
+3: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable BaseClasses.PartialTSetToNSet hPController constrainedby BaseClasses.PartialTSetToNSet( final use_secHeaGen=false, use_heaLim=false, T_heaLim=293.15, movAveTime=300) annotation (Placement(transformation(extent={{-20,-20}, {20,20}})), __Dymola_choicesAllMatching=true);
 
-4: Name 'allowDifferentDeviceIdentifiers' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Different, Device, Identifiers. Affected line: parameter Boolean allowDifferentDeviceIdentifiers=false "if use_rev=true, device data for cooling and heating need to entered. Set allowDifferentDeviceIdentifiers=true to allow different device identifiers devIde" annotation(Dialog(tab="Advanced", enable=use_rev));
+4: Name 'T_oda' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_oda. Affected line: Modelica.Blocks.Sources.Constant T_oda(k=273.15) "Provides the temperature set point" annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
 
-5: Name 'GConOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConOut=0 "Outer thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
 
-6: Name 'GConIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConIns=0 "Inner thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
+AixLib/Fluid/HeatPumps/ModularReversible/Examples/TableData3D_OneRoomRadiator.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modular heaPum( redeclare package MediumCon = MediumWat, redeclare package MediumEva = MediumWat, use_rev=false, allowDifferentDeviceIdentifiers=true, dTCon_nominal=8, use_conCap=false, dTEva_nominal=5, use_evaCap=false, QHea_flow_nominal=Q_flow_nominal, use_intSafCtr=true, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D ( extrapMethod=SDF.Types.ExtrapolationMethod.Hold, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VZH088AG datTab), TConHea_nominal=TRadSup_nominal, dpCon_nominal(displayUnit="kPa") = 40000, TEvaHea_nominal=sou.T, dpEva_nominal(displayUnit="kPa") = 40000, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.Data.Wuellhorst2021 safCtrPar, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15) "Large scale water to water heat pump" annotation (Placement(transformation(extent={{20,-160},{0,-140}})));
 
-7: Name 'GEvaOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaOut=0 "Outer thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
 
-8: Name 'GEvaIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaIns=0 "Inner thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
+AixLib/Controls/HeatPump/TwoPointControlledHP.mo
+1: Name 'bandwidth' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bandwidth. Affected line: parameter Real bandwidth "Bandwith of hysteresis of controller";
 
-9: Name 'allowFlowReversalCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Reversal. Affected line: parameter Boolean allowFlowReversalCon=true "= false to simplify equations, assuming, but not enforcing, no flow reversal" annotation (Dialog(group="Condenser", tab="Assumptions"));
+2: Name 'onOffController' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Controller. Affected line: Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=bandwidth, final pre_y_start=false) "Hysteresis controller for set temperature" annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
 
-10: Name 'Q1_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q1. Affected line: Modelica.Units.SI.HeatFlowRate Q1_flow = QCon_flow "Heat transferred into the medium 1";
 
-11: Name 'Q2_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q2. Affected line: Modelica.Units.SI.HeatFlowRate Q2_flow = QEva_flow "Heat transferred into the medium 2";
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/Generic.mo
+1: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename "File name of sdf table data" annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
 
-12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RefrigerantCycleInertia refCycIneCon "Inertia model for condenser side" annotation(Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={0,50})));RefrigerantCycleInertia refCycIneEva "Inertia model for evaporator side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={0,-50})));
+2: Name 'datasetPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetPEle "Dataset name for electrical power" annotation (Dialog(group="Electrical Power"));
+
+3: Name 'dataUnitPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitPEle "Data unit for electrical power" annotation (Dialog(group="Electrical Power"));
+
+4: Name 'scaleUnitsPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsPEle[nDim] "Scale units for electrical power" annotation (Dialog(group="Electrical Power"));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Examples/VCLibAirToWater_OneRoomRadiator.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modular heaPum( redeclare package MediumCon = MediumWat, redeclare package MediumEva = MediumAir, use_rev=false, allowDifferentDeviceIdentifiers=true, dTCon_nominal=8, use_conCap=false, dTEva_nominal=3, use_evaCap=false, QHea_flow_nominal=Q_flow_nominal, use_intSafCtr=true, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D ( redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy.VCLibVaporInjectionPhaseSeparatorR410A datTab), TConHea_nominal=TRadSup_nominal, dpCon_nominal(displayUnit="Pa") = 2000, TEvaHea_nominal=sou.T, dpEva_nominal(displayUnit="Pa") = 200, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.Data.Wuellhorst2021 safCtrPar, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15) "Large scale water to water heat pump" annotation (Placement(transformation(extent={{20,-160},{0,-140}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableData3D/Generic.mo
+1: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename "File name of sdf table data" annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
+
+2: Name 'datasetPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetPEle "Dataset name for electrical power" annotation (Dialog(group="Electrical Power"));
+
+3: Name 'dataUnitPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitPEle "Data unit for electrical power" annotation (Dialog(group="Electrical Power"));
+
+4: Name 'scaleUnitsPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsPEle[nDim] "Scale units for electrical power" annotation (Dialog(group="Electrical Power"));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/GenericHeatPump.mo
+1: Name 'datasetQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetQCon_flow "Dataset name for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+2: Name 'dataUnitQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitQCon_flow "Data unit for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+3: Name 'scaleUnitsQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsQCon_flow[nDim] "Scale units for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableData3D/GenericHeatPump.mo
+1: Name 'datasetQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetQCon_flow "Dataset name for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+2: Name 'dataUnitQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitQCon_flow "Data unit for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+3: Name 'scaleUnitsQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsQCon_flow[nDim] "Scale units for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
+
+
+AixLib/Obsolete/YearIndependent/FastHVAC/Examples/HeatGenerators/HeatPump/HeatPump.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{48,-70},{66,-52}})));FastHVAC.Components.Pumps.FluidSource fluidSource(medium= FastHVAC.Media.WaterSimple()) "Fluidsource for source" annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
+
+2: Documentation too short, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Components.HeatGenerators.HeatPump.HeatPump heatPump( refIneFre_constant=1, Medium_con=Media.WaterSimple(), Medium_eva=Media.WaterSimple(), mFlow_conNominal=0.5, VCon=0.4, deltaM_con=0.1, use_ConCap=false, CCon=100, GCon=5, mFlow_evaNominal=0.5, VEva=0.04, deltaM_eva=0.1, use_EvaCap=false, CEva=100, GEva=5, allowFlowReversalEva=true, use_revHP=true, TCon_start(displayUnit="K"), TEva_start(displayUnit="K"), redeclare model PerDataHea = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D ( dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()), redeclare model PerDataChi = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D ( dataTable=AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()), Q_useNominal=0, use_autoCalc=false, TAmbCon_nominal=288.15) annotation (Placement(transformation( extent={{-13,-16},{13,16}}, rotation=-90, origin={3,-2})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FastHVAC.Components.Sinks.Vessel vessel_ev "vessel for open evaporator circuit" annotation (Placement( transformation( extent={{-11,-9},{11,9}}, rotation=180, origin={-35,57})));
+
+4: Name 'dotm_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dotm_source. Affected line: Modelica.Blocks.Sources.Constant dotm_source(k=1) "Source mass flow signal" annotation (Placement(transformation(extent={{-98,-82},{-78,-62}})));
+
+5: Name 'dotm_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dotm_sink. Affected line: Modelica.Blocks.Sources.Constant dotm_sink(k=0.106) "sink mass flow signal" annotation (Placement( transformation( extent={{-4,-4},{4,4}}, rotation=270, origin={36,38})));
+
+6: Name 'T_amb_internal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15) "Constant internal ambient temeprature" annotation (Placement(transformation(extent={{7,-7},{-7,7}}, rotation=-90, origin={3,-35})));
+
+7: Name 'booleanToReal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Real. Affected line: Modelica.Blocks.Math.BooleanToReal booleanToReal "on off control " annotation (Placement(transformation(extent={{4,4},{-4,-4}}, rotation=90, origin={6,40})));
+
+8: Name 'TsuSourceRamp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Ramp. Affected line: Modelica.Blocks.Sources.Ramp TsuSourceRamp( duration=1000, startTime=1000, height=25, offset=278) "Ramp signal for the temperature input of the source side's ideal mass flow source" annotation (Placement(transformation(extent={{-96,-34},{-76,-14}})));
+
+9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BaseClasses.WorkingFluid Room(m_fluid=5*1000, T0=293.15) "Volume" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={90,-26})));
+
+10: Name 'heatFlowRateCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Rate. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon "Heat flow rate of the condenser" annotation (Placement(transformation( extent={{-6,6},{6,-6}}, rotation=270, origin={52,-18})));
+
+11: Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, amplitude=3000, offset=3000) "hourly sine " annotation (Placement(transformation(extent={{66,8},{58,16}})));
+
+12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Components.Pumps.Pump pump "sink pump" annotation (Placement(transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={36,20})));
+
+13: Missing documentation, Name 'booleanStep' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Step. Affected line: Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=10000, startValue=true) annotation (Placement(transformation(extent={{-6,-6},{6,6}}, rotation=270, origin={0,78})));
+
+14: Missing documentation, Name 'hysHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Logical.Hysteresis hysHeating( pre_y_start=true, uLow=273.15 + 30, uHigh=273.15 + 35) annotation (Placement(transformation(extent={{66,58},{56,68}})));
+
+15: Missing documentation, Name 'logicalSwitch' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: logical, Switch. Affected line: Modelica.Blocks.Logical.LogicalSwitch logicalSwitch annotation (Placement(transformation(extent={{26,50},{16,60}})));
+
+16: Missing documentation, Name 'hysCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooling. Affected line: Modelica.Blocks.Logical.Hysteresis hysCooling( pre_y_start=false, uLow=273.15 + 15, uHigh=273.15 + 19) annotation (Placement(transformation(extent={{58,42},{48,52}})));
+
+
+AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo
+1: Name 'm_flow_nominal_layer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow_nominal_layer. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer=0.5 "Nominal mass flow rate in layers of storages";
+
+2: Name 'm_flow_nominal_HE' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow_nominal_. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE=0.5 "Nominal mass flow rate of heat exchanger layers of storages";
+
+3: Name 'T_start_cold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start_cold. Affected line: parameter Modelica.Units.SI.Temperature T_start_cold=300 "Initial temperature of cold components";
+
+4: Name 'T_start_hot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start_hot. Affected line: parameter Modelica.Units.SI.Temperature T_start_hot=300 "Initial temperature of warm components";
+
+5: Missing documentation, Name 'PeakLoadDeviceModel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Peak, Load, Device, Model. Affected line: replaceable model PeakLoadDeviceModel = AixLib.Fluid.Interfaces.PartialTwoPortTransport constrainedby AixLib.Fluid.Interfaces.PartialTwoPortTransport(redeclare package Medium=Medium) annotation(choicesAllMatching=true);
+
+6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: PeakLoadDeviceModel peaLoaDev annotation (Placement(transformation(extent={{108,-56},{120,-44}})));Storage.StorageDetailed coldStorage( redeclare package Medium = Medium, energyDynamics=energyDynamics, redeclare package MediumHC1 = Medium, redeclare package MediumHC2 = Medium, m1_flow_nominal=m_flow_nominal_layer, m2_flow_nominal=m_flow_nominal_layer, mHC1_flow_nominal=m_flow_nominal_HE, useHeatingCoil2=false, useHeatingRod=false, redeclare DataBase.Storage.Generic_New_2000l data( hTank=1.5, hUpperPortDemand=1.45, hUpperPortSupply=1.45, hHC1Up=1.45, dTank=1, sIns=0.2, lambdaIns=0.075, hTS2=1.45), n=5, hConIn=100, hConOut=10, hConHC1=500, upToDownHC1=false) "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{24,-14}, {52,20}})));FixedResistances.PressureDrop resistanceColdStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in evaporator circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=180, origin={-34,38})));
+
+7: Name 'geothFieldSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: geoth, Field, Source. Affected line: AixLib.Fluid.Sources.Boundary_pT geothFieldSource( redeclare package Medium = Medium, nPorts=1, T=284.15) "Source representing geothermal field" annotation (Placement(transformation(extent={{-158,-60},{-146,-48}})));
+
+8: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FixedResistances.PressureDrop resistanceGeothermalSource( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in geothermal field circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=0, origin={-70,-54})));FixedResistances.PressureDrop resistanceColdConsumerFlow( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in cold consumer flow line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={87,-20})));Actuators.Valves.TwoWayQuickOpening valveHeatSink( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting geothermal field to the condenser of the heat pump" annotation (Placement(transformation(extent={{-36,-61},{-24,-47}})));Actuators.Valves.TwoWayQuickOpening valveHeatSource(redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting geothermal field to the evaporator of the heat pump" annotation (Placement( transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-60,1})));
+
+9: Name 'heatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Storage. Affected line: AixLib.Fluid.Storage.StorageDetailed heatStorage( redeclare package Medium = Medium, energyDynamics=energyDynamics, redeclare package MediumHC1 = Medium, redeclare package MediumHC2 = Medium, m1_flow_nominal=m_flow_nominal_layer, m2_flow_nominal=m_flow_nominal_layer, mHC1_flow_nominal=m_flow_nominal_HE, useHeatingCoil2=false, useHeatingRod=false, redeclare DataBase.Storage.Generic_New_2000l data( hTank=1.5, hUpperPortDemand=1.45, hUpperPortSupply=1.45, hHC1Up=1.45, dTank=1, sIns=0.2, lambdaIns=0.075, hTS2=1.45), n=5, hConIn=100, hConOut=10, hConHC1=500) "Storage tank for buffering heat demand" annotation (Placement(transformation(extent={{24,-96},{52,-62}})));
+
+10: Name 'resistanceHeatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Storage. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dp_nominal=15000) "Resistance in condenser circuit" annotation (Placement(transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-18,-78})));
+
+11: Name 'geothField_sink1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: geoth, Field_sink. Affected line: AixLib.Fluid.Sources.Boundary_pT geothField_sink1(redeclare package Medium = Medium, nPorts=2) "One of two sinks representing geothermal field" annotation (Placement(transformation(extent={{-158,20},{-146,32}})));
+
+12: Name 'resistanceHeatConsumerFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Consumer. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatConsumerFlow( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in heat consumer flow line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={87,-50})));
+
+13: Name 'valveColdStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: valve, Cold, Storage. Affected line: AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening valveColdStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting cold storage to the evaporator of the heat pump" annotation (Placement( transformation( extent={{-6,7},{6,-7}}, rotation=180, origin={-52,38})));
+
+14: Name 'valveHeatStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: valve, Heat, Storage. Affected line: AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening valveHeatStorage( redeclare package Medium = Medium, m_flow_nominal=0.5, dpValve_nominal=5000) "Valve connecting heat storage to the condenser of the heat pump" annotation (Placement( transformation( extent={{-6,-7},{6,7}}, rotation=90, origin={-18,-63})));
+
+15: Name 'pumpColdConsumer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Cold, Consumer. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpColdConsumer( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to cold consumers" annotation (Placement(transformation(extent={{58,-27},{72,-13}})));
+
+16: Name 'pumpHeatConsumer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Heat, Consumer. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpHeatConsumer( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_hot) "Pump moving fluid from storage tank to heat consumers" annotation (Placement(transformation(extent={{58,-57},{72,-43}})));
+
+17: Name 'resistanceColdConsumerReturn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Cold, Consumer, Return. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceColdConsumerReturn( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in cold consumer return line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=180, origin={87,32})));
+
+18: Name 'resistanceHeatConsumerReturn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: resistance, Heat, Consumer, Return. Affected line: AixLib.Fluid.FixedResistances.PressureDrop resistanceHeatConsumerReturn( redeclare package Medium = Medium, m_flow_nominal=0.2, dp_nominal=10000) "Resistance in heat consumer return line" annotation (Placement(transformation( extent={{-7,-7},{7,7}}, rotation=180, origin={87,-106})));
+
+19: Name 'pumpCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Condenser. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpCondenser( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to condenser of heat pump" annotation (Placement(transformation( extent={{-7,7},{7,-7}}, rotation=180, origin={-1,-98})));
+
+20: Name 'pumpEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Evaporator. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpEvaporator( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from storage tank to evaporator of heat pump" annotation (Placement(transformation( extent={{-7,7},{7,-7}}, rotation=180, origin={7,36})));
+
+21: Name 'pumpGeothermalSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Geothermal, Source. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pumpGeothermalSource( energyDynamics=energyDynamics, m_flow_nominal=0.05, redeclare package Medium = Medium, addPowerToMedium=false, T_start=T_start_cold) "Pump moving fluid from geothermal source into system" annotation ( Placement(transformation( extent={{-7,-7},{7,7}}, rotation=0, origin={-89,-54})));
+
+22: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus heatPumpControlBus annotation (Placement(transformation(extent={{-21,60},{20,98}})));
+
+23: Missing documentation, Name 'heatPump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Pump. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.Modular heatPump( redeclare package MediumCon = Medium, redeclare package MediumEva = Medium, use_rev=false, tauCon=0.005*heatPump.rhoCon/heatPump.mCon_flow_nominal, dTCon_nominal=0, tauEva=0.005*heatPump.rhoEva/heatPump.mEva_flow_nominal, dpCon_nominal=0, use_conCap=false, CCon=0, GConOut=0, GConIns=0, dTEva_nominal=0, dpEva_nominal=0, use_evaCap=false, CEva=0, GEvaOut=0, GEvaIns=0, use_intSafCtr=false, energyDynamics=energyDynamics, QHea_flow_nominal=12740, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData2D ( redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN255.Vitocal350BWH110 datTab), redeclare model RefrigerantCycleHeatPumpCooling = AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling, mCon_flow_nominal=0.5, mEva_flow_nominal=0.5, TConHea_nominal=318.15, TEvaHea_nominal=273.15, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15, use_busConOnl=true) annotation ( Placement(transformation( extent={{-10,10},{10,-10}}, rotation=90, origin={-30,10})));
+
+
+AixLib/Controls/HeatPump/HPControl.mo
+1: Missing documentation, Name 'HeatingCurveFunction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating, Curve, Function. Affected line: replaceable function HeatingCurveFunction = SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
+
+2: Name 'heatingCurveRecord' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heating, Curve, Record. Affected line: parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord= AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10() "Record with information about heating curve data" annotation (Dialog(group="Heating Curve - Data", enable = use_tableData),choicesAllMatching=true);
+
+3: Name 'declination' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: declination. Affected line: parameter Real declination=2 "Declination of curve" annotation (Dialog(group="Heating Curve - Data", enable = use_tableData));
+
+4: Name 'day_hour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: day_hour. Affected line: parameter Real day_hour=6 "Hour of day at which day mode is enabled" annotation (Dialog(group="Heating Curve - Night mode"));
+
+5: Name 'night_hour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: night_hour. Affected line: parameter Real night_hour=22 "Hour of day at which night mode is enabled" annotation (Dialog(group="Heating Curve - Night mode"));
+
+6: Name 'weekly' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: weekly. Affected line: parameter Boolean weekly=true "Switch between a daily or weekly trigger approach" annotation(Dialog(tab="Anti Legionella",descriptionLabel=true), choices(choice=true "Weekly", choice=false "Daily", radioButtons=true));
+
+7: Name 'trigWeekDay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trig, Week. Affected line: parameter Integer trigWeekDay "Day of the week at which control is triggered" annotation (Dialog(tab="Anti Legionella", enable=use_antLeg and weekly));
+
+8: Name 'trigHour' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trig, Hour. Affected line: parameter Integer trigHour=3 "Hour of the day at which control is triggered" annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
+
+9: Missing documentation, Name 'antiLegionella' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: anti, Legionella. Affected line: AixLib.Controls.HeatPump.AntiLegionella antiLegionella( final TLegMin=TLegMin, minTimeAntLeg=minTimeAntLeg, trigWeekDay=trigWeekDay, trigHour=trigHour, yearRef=2017, final zerTim=zerTim) if use_antLeg annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
+
+10: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
+
+11: Name 'T_oda' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_oda. Affected line: Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature" annotation (Placement(transformation(extent={{-128,-14},{-100,14}}), iconTransformation(extent={{-140,-26},{-100,14}})));
+
+12: Missing documentation, Name 'y_sou' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: y_sou. Affected line: Modelica.Blocks.Interfaces.RealOutput y_sou annotation (Placement(transformation(extent={{14,-14},{-14,14}}, rotation=90, origin={-60,-114})));
+
+13: Missing documentation, Name 'y_sin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: y_sin. Affected line: Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation( extent={{14,-14},{-14,14}}, rotation=90, origin={60,-114})));
+
+14: Name 'constHeating1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Sources.Constant constHeating1(final k=1) "If you want to include chilling, please insert control blocks first" annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-12,-72})));
+
+15: Missing documentation, Name 'heatCurve' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Curve. Affected line: AixLib.Controls.SetPoints.HeatingCurve heatCurve( final TOffset=0, final use_dynTRoom=false, final zerTim=zerTim, final day_hour=day_hour, final night_hour=night_hour, final heatingCurveRecord=heatingCurveRecord, final declination=declination, redeclare function HeatingCurveFunction = HeatingCurveFunction, use_tableData=use_tableData, final TRoom_nominal=293.15) annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
+
+16: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},{76,26}})));
+
+17: Name 'realPasThrAntLeg' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real. Affected line: Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg if not use_antLeg "No Anti Legionella" annotation ( choicesAllMatching=true, Placement( transformation(extent={{-10,38},{6,54}})));
+
+18: Name 'constHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating. Affected line: Modelica.Blocks.Sources.BooleanConstant constHeating(final k=true) "If you want to include chilling, please insert control blocks first" annotation (Placement(transformation(extent={{82,-26},{94,-14}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableDataSDF.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear "Interpolation method" annotation(Dialog(group="Data handling"));parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.Hold "Extrapolation method" annotation(Dialog(group="Data handling"));
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable nDTabQUse_flow( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF-Table data for condenser heat flow" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={70,30})));SDF.NDTable nDTabPEle( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF table data for electrical power" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={10,30})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RearrangeInputs ordInp(final nDim=nDim) "Possibly change Input order" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-40,50})));
+
+4: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabQUse_flow=SDF.Types.ExternalNDTable( nDTabQUse_flow.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabQUse_flow.filename), nDTabQUse_flow.dataset, nDTabQUse_flow.dataUnit, nDTabQUse_flow.scaleUnits));
+
+5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabPEle=SDF.Types.ExternalNDTable( nDTabPEle.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabPEle.filename), nDTabPEle.dataset, nDTabPEle.dataUnit, nDTabPEle.scaleUnits));
+
+6: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: function evaluate input SDF.Types.ExternalNDTable table;input Real[:] params;input SDF.Types.InterpolationMethod interpMethod;input SDF.Types.ExtrapolationMethod extrapMethod;
+
+7: Missing documentation, Name 'value;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: value. Affected line: output Real value;
+
+
+AixLib/Obsolete/Year2019/Fluid/HeatPumps/HeatPumpSimple.mo
+1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby Modelica.Media.Interfaces.PartialMedium;
+
+2: Name 'port_a_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_a_source. Affected line: Modelica.Fluid.Interfaces.FluidPort_a port_a_source(redeclare package Medium = Medium) "Heat pump inlet on the source side" annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}})));
+
+3: Name 'port_b_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_b_source. Affected line: Modelica.Fluid.Interfaces.FluidPort_b port_b_source(redeclare package Medium = Medium) "Heat pump outlet on the source side" annotation(Placement(transformation(extent = {{-100, -80}, {-80, -60}})));
+
+4: Name 'port_a_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_a_sink. Affected line: Modelica.Fluid.Interfaces.FluidPort_a port_a_sink(redeclare package Medium = Medium) "Heat pump inlet on the sink side" annotation(Placement(transformation(extent = {{80, -80}, {100, -60}})));
+
+5: Name 'port_b_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_b_sink. Affected line: Modelica.Fluid.Interfaces.FluidPort_b port_b_sink(redeclare package Medium = Medium) "Heat pump outlet on the sink side" annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
+
+6: Name 'volumeEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: volume, Evaporator. Affected line: AixLib.Fluid.MixingVolumes.MixingVolume volumeEvaporator( V=VolumeEvaporator, nPorts=2, redeclare package Medium = Medium, m_flow_nominal=0.01) "Water volume of the evaporator on the source side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={-70,-60})));
+
+7: Name 'volumeCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: volume, Condenser. Affected line: AixLib.Fluid.MixingVolumes.MixingVolume volumeCondenser( V=VolumeCondenser, nPorts=2, redeclare package Medium = Medium, m_flow_nominal=0.01) "Water volume of the condenser on the sink side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={70,-30})));
+
+8: Name 'temperatureSinkOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temperature, Sink. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSinkOut(redeclare package Medium = Medium, m_flow_nominal=0.01) "Temperature sensor at outlet on the sink side" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={80,50})));
+
+9: Name 'temperatureSourceIn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temperature, Source. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSourceIn(redeclare package Medium = Medium, m_flow_nominal=0.01) "Temperature sensor at inlet on the source side" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={-80,36})));
+
+10: Name 'HeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Condenser. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowCondenser "Heat flow on the sink side" annotation(Placement(transformation(extent={{-4,-4}, {4,4}}, origin={48,-40})));
+
+11: Name 'HeatFlowEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Evaporator. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowEvaporator "Heat flow on the source side" annotation(Placement(transformation(extent={{4,-4},{ -4,4}}, origin={-46,-50})));
+
+12: Name 'PowerTable' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power, Table. Affected line: Modelica.Blocks.Tables.CombiTable2Ds PowerTable(table=tablePower) "Calculates electric power based on temperature in source and sink" annotation (Placement(transformation(extent={{-52,20},{-32,40}})));
+
+13: Name 'HeatFlowCondenserTable' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Condenser, Table. Affected line: Modelica.Blocks.Tables.CombiTable2Ds HeatFlowCondenserTable(table= tableHeatFlowCondenser) "Calculates heat flow based on temperature in source and sink" annotation (Placement(transformation(extent={{-52,-12},{-32,8}})));
+
+14: Name 'SwitchHeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Switch, Heat, Condenser. Affected line: Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser "Switch to deactivate heat flow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
+
+15: Name 'constZero2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant constZero2(k = 0) "Zero heat flow, when heat pump off" annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
+
+16: Name 'SwitchPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Switch, Power. Affected line: Modelica.Blocks.Logical.Switch SwitchPower "Switch to deactivate Power when off" annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
+
+17: Name 'constZero1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant constZero1(k = 0) "Zero power, when heat pump off" annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
+
+18: Name 'feedbackHeatFlowEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: feedback, Heat, Evaporator. Affected line: Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
+
+19: Name 'Power' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power. Affected line: Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
+
+20: Name 'VolumeEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Volume, Evaporator. Affected line: parameter Modelica.Units.SI.Volume VolumeEvaporator=0.01 "Volume im m3";
+
+21: Name 'VolumeCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Volume, Condenser. Affected line: parameter Modelica.Units.SI.Volume VolumeCondenser=0.01 "Volume im m3";
+
+22: Name 'tablePower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Power. Affected line: parameter Real tablePower[:, :] = fill(0.0, 0, 2) "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+
+23: Name 'tableHeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Heat, Condenser. Affected line: parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2) "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+
+24: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Examples/BaseClasses/OneRoomRadiatorHeatPumpControl.mo
+1: Name 'swiHeaCooYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiHeaCooYSet if witCoo "Switch ySet for heating and cooling" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, origin={30,70}, rotation=0)));
+
+2: Name 'constYSetZer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Sources.Constant constYSetZer(final k=0) "ySet equals zero" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={30,-18})));
+
+3: Name 'swiYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiYSet "If no demand, switch heat pump off" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={70,50})));
 
 
 AixLib/Obsolete/Year2019/Fluid/HeatPumps/HeatPumpDetailed.mo
@@ -533,18 +445,96 @@ AixLib/Obsolete/Year2019/Fluid/HeatPumps/HeatPumpDetailed.mo
 51: Name 'hydRes_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Res_con. Affected line: AixLib.Fluid.FixedResistances.PressureDrop hydRes_con( redeclare package Medium = Medium_con, m_flow_nominal=mFlow_conNominal, m_flow(start=mFlow_conNominal), dp_nominal=dp_conNominal) "The pressure drop caused by flow resistance in the condenser" annotation ( Placement(transformation( extent={{-8,-8},{8,8}}, rotation=90, origin={130,22})));
 
 
-AixLib/Controls/HeatPump/BaseClasses/PartialTSetToNSet.mo
-1: Name 'T_heaLim' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_hea. Affected line: parameter Modelica.Units.SI.Temperature T_heaLim=293.15 "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down" annotation(Dialog(group= "Heating limit temperature", enable=use_heaLim));
+AixLib/Obsolete/YearIndependent/FastHVAC/Components/HeatGenerators/HeatPump/HeatPump.mo
+1: Name 'Medium_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_eva. Affected line: parameter AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva= AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple() "Medium at source side" annotation (Dialog(tab="Evaporator"), choicesAllMatching=true);
 
-2: Name 'swiNullHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Null. Affected line: Modelica.Blocks.Logical.Switch swiNullHP "If HP is off, zero is passed" annotation (Placement(transformation(extent={{60,-20},{80,0}})));
+2: Name 'use_autoCalc' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_auto, Calc. Affected line: parameter Boolean use_autoCalc=false "Enable automatic estimation of volumes and mass flows?" annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
 
-3: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-124,-46},{-90,-16}})));
+3: Name 'Q_useNominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_use, Nominal. Affected line: parameter Modelica.Units.SI.Power Q_useNominal(start=0) "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)" annotation (Dialog(enable=use_autoCalc));
 
-4: Name 'swiNullsecHeaGen' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Nullsec. Affected line: AixLib.Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen "If second heater is off, zero is passed" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={0,-70})));
+4: Name 'PerDataHea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataHea = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of HP in heating mode" annotation (choicesAllMatching=true);
 
-5: Missing documentation, Name 'lessThreshold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: less, Threshold. Affected line: Modelica.Blocks.Logical.LessThreshold lessThreshold(final threshold= T_heaLim) if use_heaLim annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+5: Name 'PerDataChi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataChi = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of HP in chilling mode" annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
 
-6: Missing documentation, Name 'booleanConstant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Constant. Affected line: Modelica.Blocks.Sources.BooleanConstant booleanConstant(final k=true) if not use_heaLim annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
+6: Name 'scalingFactor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scaling, Factor. Affected line: parameter Real scalingFactor=1 "Scaling-factor of HP";
+
+7: Name 'refIneFre_constant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fre_constant. Affected line: parameter Modelica.Units.SI.Frequency refIneFre_constant "Cut off frequency for inertia of refrigerant cycle" annotation (Dialog( enable=use_refIne, group="Refrigerant inertia"), Evaluate=true);
+
+8: Name 'nthOrder' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Order. Affected line: parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable= use_refIne, group="Refrigerant inertia"));
+
+9: Name 'useBusConnectorOnly' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Connector, Only. Affected line: parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input" annotation(choices(checkBox=true), Dialog(group="Input Connectors"));
+
+10: Name 'm_fluidCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_fluid. Affected line: parameter Modelica.Units.SI.Mass m_fluidCon=VCon_final*con.medium.rho "Mass of working fluid";
+
+11: Name 'deltaM_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: _con. Affected line: parameter Real deltaM_con=0.1 "Fraction of nominal mass flow rate where transition to turbulent occurs" annotation (Dialog(tab="Condenser", group="Flow resistance"));
+
+12: Name 'GCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GCon "Constant thermal conductance of condenser material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Condenser", enable=use_ConCap));
+
+13: Name 'GConIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConIns=0 "Constant thermal conductance of condenser material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Condenser", enable=use_ConCap));
+
+14: Name 'm_fluidEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_fluid. Affected line: parameter Modelica.Units.SI.Mass m_fluidEva=VEva_final*eva.medium.rho "Mass of working fluid";
+
+15: Name 'deltaM_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: _eva. Affected line: parameter Real deltaM_eva=0.1 "Fraction of nominal mass flow rate where transition to turbulent occurs" annotation (Dialog(tab="Evaporator", group="Flow resistance"));
+
+16: Name 'GEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEva "Constant thermal conductance of Evaporator material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Evaporator", enable=use_EvaCap));
+
+17: Name 'GEvaIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaIns=0 "Constant thermal conductance of Evaporator material" annotation (Evaluate= true, Dialog( group="Heat Losses", tab="Evaporator", enable=use_EvaCap));
+
+18: Name 'allowFlowReversalCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Reversal. Affected line: parameter Boolean allowFlowReversalCon=true "= false to simplify equations, assuming, but not enforcing, no flow reversal" annotation (Dialog(group="Condenser", tab="Assumptions"));
+
+19: Name 'transferHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: transfer, Heat. Affected line: parameter Boolean transferHeat=true "If true, temperature T converges towards TAmb when no flow" annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
+
+20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Interfaces.EnthalpyPort_a enthalpyPort_a( m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0)) "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{-104,56},{-96,64}})));Interfaces.EnthalpyPort_b enthalpyPort_b( m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0)) "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{104,56},{96,64}})));Interfaces.EnthalpyPort_a enthalpyPort_a1( m_flow(min=if allowFlowReversalEva then -Modelica.Constants.inf else 0)) "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)" annotation (Placement(transformation(extent={{96,-64},{104,-56}})));Interfaces.EnthalpyPort_b enthalpyPort_b1( m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0)) "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)" annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));BaseClasses.EvaporatorCondenserWithCapacity con( final kAOut_nominal=GCon, final m_fluid=m_fluidCon, final T_start=TCon_start, final use_cap=use_ConCap, final is_con=true, final V=VCon_final*scalingFactor, final C=CCon*scalingFactor, final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal_final)^0.88, final medium=Medium_con, final m_flow_small=1E-4*abs(mFlow_conNominal_final), final m_flow_nominal=mFlow_conNominal_final) "Heat exchanger model for the condenser" annotation (Placement(transformation(extent={{-16,76},{16,108}})));BaseClasses.EvaporatorCondenserWithCapacity eva( final medium=Medium_eva, final use_cap=use_EvaCap, final kAOut_nominal=GEva, final m_fluid=m_fluidEva, final T_start=TEva_start, final m_flow_small=1E-4*abs(mFlow_evaNominal_final), final is_con=false, final V=VEva_final*scalingFactor, final C=CEva*scalingFactor, final m_flow_nominal=mFlow_evaNominal_final, final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal_final)^0.88) "Heat exchanger model for the evaporator" annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
+
+21: Name 'heatFlowIneEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat. Affected line: Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva( final initType=initType, final normalized=true, final n=nthOrder, final f=refIneFre_constant, final y_start=yRefIne_start) if use_refIne "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow" annotation (Placement(transformation( extent={{6,6},{-6,-6}}, rotation=90, origin={-14,-52})));
+
+22: Name 'realPassThroughnSetCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Pass, Throughn. Affected line: Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if not use_refIne "Use default nSet value" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=90, origin={16,58})));
+
+23: Name 'heatFlowIneCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat. Affected line: Modelica.Blocks.Continuous.CriticalDamping heatFlowIneCon( final initType=initType, final normalized=true, final n=nthOrder, final f=refIneFre_constant, final y_start=yRefIne_start) if use_refIne "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=90, origin={-16,58})));
+
+24: Name 'realPassThroughnSetEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Pass, Throughn. Affected line: Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if not use_refIne "Use default nSet value" annotation (Placement(transformation( extent={{6,-6},{-6,6}}, rotation=90, origin={16,-52})));
+
+25: Name 'varTempOutEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if use_EvaCap "Forces heat losses according to ambient temperature" annotation (Placement(transformation( extent={{-8,-8},{8,8}}, rotation=180, origin={68,-108})));
+
+26: Name 'varTempOutCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if use_ConCap "Forces heat losses according to ambient temperature" annotation (Placement(transformation( extent={{-8,-8},{8,8}}, rotation=180, origin={68,110})));
+
+27: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(extent={{-108,-52},{-90,-26}})));
+
+28: Missing documentation, Name 'innerCycle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: inner, Cycle. Affected line: AixLib.Obsolete.Year2024.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle( redeclare final model PerDataMainHP =PerDataHea, redeclare final model PerDataRevHP = PerDataChi, final use_rev=use_revHP, final scalingFactor=scalingFactor) annotation ( Placement(transformation( extent={{-27,-26},{27,26}}, rotation=90, origin={0,-1})));
+
+29: Name 'T_amb_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb_eva. Affected line: Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final displayUnit="degC") if use_EvaCap "Ambient temperature on the evaporator side" annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=0, origin={110,-100})));
+
+30: Name 'T_amb_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb_con. Affected line: Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final displayUnit="degC") if use_ConCap "Ambient temperature on the condenser side" annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=180, origin={110,100})));
+
+31: Name 'modeSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mode. Affected line: Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly and use_revHP "Set value of HP mode" annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
+
+32: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sensors.TemperatureSensor senT_a2 "Temperature at sink inlet" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={40,-86})));Sensors.TemperatureSensor senT_b2 "Temperature at sink outlet" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={-52,-86})));Sensors.MassFlowSensor mFlow_eva "Mass flow sensor at the evaporator" annotation (Placement(transformation( origin={70,-60}, extent={{10,-10},{-10,10}}, rotation=0)));Sensors.TemperatureSensor senT_b1 "Temperature at sink outlet" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={38,92})));Sensors.TemperatureSensor senT_a1 "Temperature at sink inlet" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={-34,92})));Sensors.MassFlowSensor mFlow_con "Mass flow sensor at the evaporator" annotation (Placement(transformation( origin={-80,60}, extent={{-10,10},{10,-10}}, rotation=0)));
+
+33: Name 'autoCalc_mFlow_min' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_min=0.3 "Realistic mass flow minimum for simulation plausibility";
+
+34: Name 'autoCalc_Vmin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_, Vmin. Affected line: parameter Modelica.Units.SI.Volume autoCalc_Vmin=0.003 "Realistic volume minimum for simulation plausibility";
+
+35: Missing documentation, Name 'autoCalc_mFlow_eva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m, Flow_eva. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_eva=if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max( 0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
+
+36: Missing documentation, Name 'autoCalc_mFlow_con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_m, Flow_con. Affected line: parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_con=if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max( 0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
+
+37: Missing documentation, Name 'mFlow_evaNominal_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flow_eva, Nominal_final. Affected line: parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
+
+38: Missing documentation, Name 'mFlow_conNominal_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Flow_con, Nominal_final. Affected line: parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
+
+39: Missing documentation, Name 'autoCalc_VEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_. Affected line: parameter Modelica.Units.SI.Volume autoCalc_VEva=if machineType then max( 0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001* Q_useNominal - 0.0066, autoCalc_Vmin);
+
+40: Missing documentation, Name 'autoCalc_VCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: auto, Calc_. Affected line: parameter Modelica.Units.SI.Volume autoCalc_VCon=if machineType then max( 0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002* Q_useNominal - 0.0084, autoCalc_Vmin);
+
+41: Missing documentation, Name 'VEva_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Eva_final. Affected line: parameter Modelica.Units.SI.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
+
+42: Missing documentation, Name 'VCon_final' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Con_final. Affected line: parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
+
+
+AixLib/Obsolete/Year2024/Fluid/HeatPumps/HeatPump.mo
+1: Name 'PerDataMainHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data, Main. Affected line: replaceable model PerDataMainHP = AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of a heat pump in main operation mode" annotation (choicesAllMatching=true);
+
+2: Name 'PerDataRevHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Data. Affected line: replaceable model PerDataRevHP = AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData "Performance data of a heat pump in reversible operation mode" annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
 
 AixLib/Obsolete/Year2019/Fluid/HeatPumps/BaseClasses/CycleHP.mo
@@ -685,110 +675,6 @@ AixLib/Obsolete/Year2019/Fluid/HeatPumps/BaseClasses/CycleHP.mo
 68: Missing documentation, Name 'PIDmaxHeatFlowCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: Modelica.Blocks.Continuous.LimPID PIDmaxHeatFlowCon( controllerType=Modelica.Blocks.Types.SimpleController.PI, Ti=1, yMax=1, yMin=0, y_start=1) annotation (Placement(transformation(extent={{46,52},{66,72}})));
 
 
-AixLib/Obsolete/Year2019/Fluid/HeatPumps/Examples/HeatPumpDetailed.mo
-1: Missing documentation, Name 'Medium_sin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_sin. Affected line: replaceable package Medium_sin = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
-
-2: Missing documentation, Name 'Medium_sou' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_sou. Affected line: replaceable package Medium_sou = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: .AixLib.Obsolete.Year2019.Fluid.HeatPumps.HeatPumpDetailed heatPump( P_eleOutput=true, capCalcType=2, CorrFlowCo=false, CorrFlowEv=false, dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(), PT1_cycle=true, timeConstantCycle=1, mFlow_conNominal=1, mFlow_evaNominal=1, T_evaIn(transferHeat=true, TAmb=291.15), T_evaOut(transferHeat=true, TAmb=291.15), T_conIn(transferHeat=true, TAmb=273.15), T_conOut(transferHeat=true, TAmb=273.15), redeclare package Medium_con = Medium_sin, redeclare package Medium_eva = Medium_sou) "Detailed heat pump mainly based on manufacturing data" annotation (Placement(transformation(extent={{-16,14},{14,-6}})));
-
-4: Name 'sourceSideMassFlowSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Side, Mass, Source. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceSideMassFlowSource( use_T_in=true, m_flow=1, redeclare package Medium = Medium_sou, nPorts=1, T=275.15) "Ideal mass flow source at the inlet of the source side" annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
-
-5: Name 'sourceSideFixedBoundary' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Side, Fixed, Boundary. Affected line: AixLib.Fluid.Sources.Boundary_pT sourceSideFixedBoundary(redeclare package Medium = Medium_sou, nPorts=1) "Fixed boundary at the outlet of the source side" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={-80,36})));
-
-6: Name 'TsuSourceRamp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Ramp. Affected line: Modelica.Blocks.Sources.Ramp TsuSourceRamp( duration=1000, startTime=1000, height=25, offset=278) "Ramp signal for the temperature input of the source side's ideal mass flow source" annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
-
-7: Missing documentation. Affected line: Modelica.Blocks.Logical.Hysteresis hys( pre_y_start=true, uLow=273.15 + 30, uHigh=273.15 + 40) annotation (Placement(transformation(extent={{64,50},{44,70}})));
-
-8: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, amplitude=3000, offset=3000) annotation (Placement(transformation(extent={{76,26},{84,34}})));
-
-9: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement( transformation( extent={{4,-4},{-4,4}}, rotation=90, origin={50,34})));
-
-10: Name 'heatFlowRateCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Rate. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon "Heat flow rate of the condenser" annotation (Placement(transformation( extent={{-6,6},{6,-6}}, rotation=270, origin={94,6})));
-
-11: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation( extent={{-4,-4},{4,4}}, rotation=270, origin={96,22})));
-
-12: Name 'sinkSideFixedBoundary' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Side, Fixed, Boundary. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkSideFixedBoundary(redeclare package Medium = Medium_sin, nPorts=1) "Fixed boundary at the outlet of the sink side" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={88,-64})));
-
-
-AixLib/Obsolete/Year2019/Fluid/HeatPumps/HeatPumpSimple.mo
-1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby Modelica.Media.Interfaces.PartialMedium;
-
-2: Name 'port_a_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_a_source. Affected line: Modelica.Fluid.Interfaces.FluidPort_a port_a_source(redeclare package Medium = Medium) "Heat pump inlet on the source side" annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}})));
-
-3: Name 'port_b_source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_b_source. Affected line: Modelica.Fluid.Interfaces.FluidPort_b port_b_source(redeclare package Medium = Medium) "Heat pump outlet on the source side" annotation(Placement(transformation(extent = {{-100, -80}, {-80, -60}})));
-
-4: Name 'port_a_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_a_sink. Affected line: Modelica.Fluid.Interfaces.FluidPort_a port_a_sink(redeclare package Medium = Medium) "Heat pump inlet on the sink side" annotation(Placement(transformation(extent = {{80, -80}, {100, -60}})));
-
-5: Name 'port_b_sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_b_sink. Affected line: Modelica.Fluid.Interfaces.FluidPort_b port_b_sink(redeclare package Medium = Medium) "Heat pump outlet on the sink side" annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
-
-6: Name 'volumeEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: volume, Evaporator. Affected line: AixLib.Fluid.MixingVolumes.MixingVolume volumeEvaporator( V=VolumeEvaporator, nPorts=2, redeclare package Medium = Medium, m_flow_nominal=0.01) "Water volume of the evaporator on the source side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={-70,-60})));
-
-7: Name 'volumeCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: volume, Condenser. Affected line: AixLib.Fluid.MixingVolumes.MixingVolume volumeCondenser( V=VolumeCondenser, nPorts=2, redeclare package Medium = Medium, m_flow_nominal=0.01) "Water volume of the condenser on the sink side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={70,-30})));
-
-8: Name 'temperatureSinkOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temperature, Sink. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSinkOut(redeclare package Medium = Medium, m_flow_nominal=0.01) "Temperature sensor at outlet on the sink side" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={80,50})));
-
-9: Name 'temperatureSourceIn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temperature, Source. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSourceIn(redeclare package Medium = Medium, m_flow_nominal=0.01) "Temperature sensor at inlet on the source side" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={-80,36})));
-
-10: Name 'HeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Condenser. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowCondenser "Heat flow on the sink side" annotation(Placement(transformation(extent={{-4,-4}, {4,4}}, origin={48,-40})));
-
-11: Name 'HeatFlowEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Evaporator. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowEvaporator "Heat flow on the source side" annotation(Placement(transformation(extent={{4,-4},{ -4,4}}, origin={-46,-50})));
-
-12: Name 'PowerTable' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power, Table. Affected line: Modelica.Blocks.Tables.CombiTable2Ds PowerTable(table=tablePower) "Calculates electric power based on temperature in source and sink" annotation (Placement(transformation(extent={{-52,20},{-32,40}})));
-
-13: Name 'HeatFlowCondenserTable' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Condenser, Table. Affected line: Modelica.Blocks.Tables.CombiTable2Ds HeatFlowCondenserTable(table= tableHeatFlowCondenser) "Calculates heat flow based on temperature in source and sink" annotation (Placement(transformation(extent={{-52,-12},{-32,8}})));
-
-14: Name 'SwitchHeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Switch, Heat, Condenser. Affected line: Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser "Switch to deactivate heat flow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
-
-15: Name 'constZero2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant constZero2(k = 0) "Zero heat flow, when heat pump off" annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
-
-16: Name 'SwitchPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Switch, Power. Affected line: Modelica.Blocks.Logical.Switch SwitchPower "Switch to deactivate Power when off" annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
-
-17: Name 'constZero1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant constZero1(k = 0) "Zero power, when heat pump off" annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
-
-18: Name 'feedbackHeatFlowEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: feedback, Heat, Evaporator. Affected line: Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
-
-19: Name 'Power' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power. Affected line: Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
-
-20: Name 'VolumeEvaporator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Volume, Evaporator. Affected line: parameter Modelica.Units.SI.Volume VolumeEvaporator=0.01 "Volume im m3";
-
-21: Name 'VolumeCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Volume, Condenser. Affected line: parameter Modelica.Units.SI.Volume VolumeCondenser=0.01 "Volume im m3";
-
-22: Name 'tablePower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Power. Affected line: parameter Real tablePower[:, :] = fill(0.0, 0, 2) "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
-
-23: Name 'tableHeatFlowCondenser' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Heat, Condenser. Affected line: parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2) "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
-
-24: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
-
-
-AixLib/Controls/HeatPump/Examples/PartialHeatPumpController.mo
-1: Name 'T_meas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_meas. Affected line: Modelica.Blocks.Sources.Sine T_meas( f=1/3600, amplitude=6, offset=310) "Generates the measured temperature" annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-
-2: Name 'T_set' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_set. Affected line: Modelica.Blocks.Sources.Constant T_set(k=310) "Provides the temperature set point" annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
-
-3: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable BaseClasses.PartialTSetToNSet hPController constrainedby BaseClasses.PartialTSetToNSet( final use_secHeaGen=false, use_heaLim=false, T_heaLim=293.15, movAveTime=300) annotation (Placement(transformation(extent={{-20,-20}, {20,20}})), __Dymola_choicesAllMatching=true);
-
-4: Name 'T_oda' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_oda. Affected line: Modelica.Blocks.Sources.Constant T_oda(k=273.15) "Provides the temperature set point" annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/Generic.mo
-1: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename "File name of sdf table data" annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
-
-2: Name 'datasetPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetPEle "Dataset name for electrical power" annotation (Dialog(group="Electrical Power"));
-
-3: Name 'dataUnitPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitPEle "Data unit for electrical power" annotation (Dialog(group="Electrical Power"));
-
-4: Name 'scaleUnitsPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsPEle[nDim] "Scale units for electrical power" annotation (Dialog(group="Electrical Power"));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Data/TableData3D/GenericHeatPump.mo
-1: Name 'datasetQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetQCon_flow "Dataset name for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-2: Name 'dataUnitQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitQCon_flow "Data unit for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-3: Name 'scaleUnitsQCon_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsQCon_flow[nDim] "Scale units for useful heat flow rate" annotation (Dialog(group="Condenser heat flow"));
-
-
 AixLib/Obsolete/YearIndependent/FastHVAC/Examples/Chiller/Chiller.mo
 1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{52,-38},{66,-52}})));FastHVAC.Components.Pumps.FluidSource fluidSource(medium= FastHVAC.Media.WaterSimple()) "Fluidsource for sink" annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
 
@@ -823,5 +709,119 @@ AixLib/Obsolete/YearIndependent/FastHVAC/Examples/Chiller/Chiller.mo
 16: Missing documentation, Name 'logicalSwitch' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: logical, Switch. Affected line: Modelica.Blocks.Logical.LogicalSwitch logicalSwitch annotation (Placement(transformation(extent={{10,-78},{0,-88}})));
 
 
-AixLib/Fluid/HeatPumps/ModularReversible/Examples/VCLibAirToWater_OneRoomRadiator.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modular heaPum( redeclare package MediumCon = MediumWat, redeclare package MediumEva = MediumAir, use_rev=false, allowDifferentDeviceIdentifiers=true, dTCon_nominal=8, use_conCap=false, dTEva_nominal=3, use_evaCap=false, QHea_flow_nominal=Q_flow_nominal, use_intSafCtr=true, redeclare model RefrigerantCycleHeatPumpHeating = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D ( redeclare AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy.VCLibVaporInjectionPhaseSeparatorR410A datTab), TConHea_nominal=TRadSup_nominal, dpCon_nominal(displayUnit="Pa") = 2000, TEvaHea_nominal=sou.T, dpEva_nominal(displayUnit="Pa") = 200, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.Data.Wuellhorst2021 safCtrPar, TConCoo_nominal=273.15, TEvaCoo_nominal=273.15) "Large scale water to water heat pump" annotation (Placement(transformation(extent={{20,-160},{0,-140}})));
+AixLib/Controls/HeatPump/BaseClasses/PartialTSetToNSet.mo
+1: Name 'T_heaLim' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_hea. Affected line: parameter Modelica.Units.SI.Temperature T_heaLim=293.15 "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down" annotation(Dialog(group= "Heating limit temperature", enable=use_heaLim));
+
+2: Name 'swiNullHP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Null. Affected line: Modelica.Blocks.Logical.Switch swiNullHP "If HP is off, zero is passed" annotation (Placement(transformation(extent={{60,-20},{80,0}})));
+
+3: Missing documentation. Affected line: AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP annotation (Placement(transformation(extent={{-124,-46},{-90,-16}})));
+
+4: Name 'swiNullsecHeaGen' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Nullsec. Affected line: AixLib.Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen "If second heater is off, zero is passed" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=90, origin={0,-70})));
+
+5: Missing documentation, Name 'lessThreshold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: less, Threshold. Affected line: Modelica.Blocks.Logical.LessThreshold lessThreshold(final threshold= T_heaLim) if use_heaLim annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+
+6: Missing documentation, Name 'booleanConstant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Constant. Affected line: Modelica.Blocks.Sources.BooleanConstant booleanConstant(final k=true) if not use_heaLim annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
+
+
+AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpControlledBase.mo
+1: Name 'getTStorageUpper' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage, Upper. Affected line: Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[ heatStorage.n].T) "Gets the temperature of upper heat storage layer" annotation (Placement(transformation(extent={{-160,58},{-140,78}})));
+
+2: Name 'getTStorageLower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage, Lower. Affected line: Modelica.Blocks.Sources.RealExpression getTStorageLower(y=coldStorage.layer[1].T) "Gets the temperature of lower cold storage layer" annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
+
+3: Name 'coldStorageTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cold, Storage, Temperature. Affected line: Modelica.Blocks.Interfaces.RealOutput coldStorageTemperature( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0, start=T_start_cold) "Temperature in the cold storage" annotation ( Placement(transformation( origin={-134,-120}, extent={{10,-10},{-10,10}}, rotation=90), iconTransformation( extent={{10,-10},{-10,10}}, rotation=90, origin={-100,-110})));
+
+4: Name 'heatStorageTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Storage, Temperature. Affected line: Modelica.Blocks.Interfaces.RealOutput heatStorageTemperature( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0, start=T_start_hot) "Temperature in the heat storage" annotation (Placement( transformation( origin={-100,-120}, extent={{10,-10},{-10,10}}, rotation=90), iconTransformation( extent={{10,-10},{-10,10}}, rotation=90, origin={-140,-110})));
+
+5: Name 'chemicalEnergyFlowRate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: chemical, Energy, Rate. Affected line: Modelica.Blocks.Interfaces.RealOutput chemicalEnergyFlowRate(final unit="W") "Flow of primary (chemical) energy into boiler " annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=270, origin={-71.5,-119.5}), iconTransformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-20.5,-109})));
+
+6: Name 'heatPumpPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Pump, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput heatPumpPower(final unit="W") "Electrical power of the heat pump" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, rotation=270, origin={-45.5,-119.5}), iconTransformation(extent={{10,-10},{-10,10}}, rotation=90, origin={-60.5,-109})));
+
+7: Missing documentation, Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system annotation (Placement(transformation(extent={{140,60},{160,80}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/TableData3D/VCLibPy/Generic.mo
+1: Name 'flowsheet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: flowsheet. Affected line: parameter String flowsheet "Name of the flowsheet";
+
+2: Name 'refrigerant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: refrigerant. Affected line: parameter String refrigerant "Name of the fluid";
+
+
+AixLib/Controls/HeatPump/DefrostControl.mo
+1: Name 'deltaIceFac' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta. Affected line: parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events.";
+
+2: Missing documentation. Affected line: Modelica.Blocks.Interfaces.BooleanInput hea annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Logical.SmoothSwitch swiErr "If an error occurs, the value of the conZero block will be used(0)" annotation (Placement(transformation(extent={{58,2},{78,22}})));
+
+4: Missing documentation. Affected line: Modelica.Blocks.Interfaces.BooleanOutput heaOut annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBus annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
+
+6: Name 'logicalSwitch' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: logical, Switch. Affected line: Modelica.Blocks.Logical.LogicalSwitch logicalSwitch "If a chiller is used to defrost, mode will be false" annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
+
+7: Name 'conTrueUseChi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: True. Affected line: Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) "Set mode to false to simulate the defrost cycle" annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/BaseClasses/PartialReversibleRefrigerantMachine.mo
+1: Name 'MediumEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumEva = Modelica.Media.Interfaces.PartialMedium "Medium on evaporator side" annotation (choicesAllMatching=true);
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable PartialModularRefrigerantCycle refCyc constrainedby PartialModularRefrigerantCycle(final use_rev=use_rev) "Model of the refrigerant cycle" annotation (Placement(transformation( extent={{-18,-18},{18,18}}, rotation=90)));
+
+3: Name 'RefrigerantCycleInertia' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Refrigerant, Cycle, Inertia. Affected line: replaceable model RefrigerantCycleInertia = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.NoInertia constrainedby AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.BaseClasses.PartialInertia "Inertia between the refrigerant cycle outputs and the heat exchangers." annotation (choicesAllMatching=true, Dialog(group="Inertia"));
+
+4: Name 'allowDifferentDeviceIdentifiers' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Different, Device, Identifiers. Affected line: parameter Boolean allowDifferentDeviceIdentifiers=false "if use_rev=true, device data for cooling and heating need to entered. Set allowDifferentDeviceIdentifiers=true to allow different device identifiers devIde" annotation(Dialog(tab="Advanced", enable=use_rev));
+
+5: Name 'GConOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConOut=0 "Outer thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
+
+6: Name 'GConIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConIns=0 "Inner thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
+
+7: Name 'GEvaOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaOut=0 "Outer thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
+
+8: Name 'GEvaIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaIns=0 "Inner thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
+
+9: Name 'allowFlowReversalCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Reversal. Affected line: parameter Boolean allowFlowReversalCon=true "= false to simplify equations, assuming, but not enforcing, no flow reversal" annotation (Dialog(group="Condenser", tab="Assumptions"));
+
+10: Name 'Q1_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q1. Affected line: Modelica.Units.SI.HeatFlowRate Q1_flow = QCon_flow "Heat transferred into the medium 1";
+
+11: Name 'Q2_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q2. Affected line: Modelica.Units.SI.HeatFlowRate Q2_flow = QEva_flow "Heat transferred into the medium 2";
+
+12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RefrigerantCycleInertia refCycIneCon "Inertia model for condenser side" annotation(Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={0,50})));RefrigerantCycleInertia refCycIneEva "Inertia model for evaporator side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={0,-50})));
+
+
+AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium, nPorts=1) annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-20})));Sources.Boundary_pT heatConsumerFlow(redeclare package Medium = Medium, nPorts=1) "Sink representing heat consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-50})));Sources.Boundary_pT heatConsumerReturn(redeclare package Medium = Medium, nPorts=1, T=303.15) "Source representing heat consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,-106})));Sources.Boundary_pT coldConsumerReturn(redeclare package Medium = Medium, nPorts=1, T=287.15) "Source representing cold consumer" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,32})));
+
+2: Name 'pressureDifference' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pressure, Difference. Affected line: Modelica.Blocks.Sources.Constant pressureDifference(k=60000) "Pressure difference used for all pumps" annotation ( Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={154,6})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Controls.HeatPump.TwoPointControlledHP twoPointControlledHP( use_secHeaGen=false, use_heaLim=false, T_heaLim=293.15, movAveTime=300, bandwidth=2) "Controls the temperature in the heat storage by switching the heat pump on or off" annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+
+4: Name 'TStorageSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Storage. Affected line: Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 45) "Set point of upper heat storage temperature" annotation (Placement(transformation(extent={{-120,70},{-110,80}})));
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Control.geothermalFieldController geothermalFieldControllerCold( temperature_low=273.15 + 8, temperature_high=273.15 + 10) "Controls the heat exchange with the geothermal field and the heat storage" annotation (Placement(transformation(extent={{-102,28},{-86,44}})));Control.geothermalFieldController geothermalFieldControllerHeat( temperature_low=308.15, temperature_high=313.15) "Controls the heat exchange with the geothermal field and the heat storage" annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
+
+6: Name 'mode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mode. Affected line: Modelica.Blocks.Sources.BooleanConstant mode "Dummy signal for unit mode, true: heat pump, false: chiller" annotation (Placement(transformation(extent={{-56,56},{-44,68}})));
+
+
+AixLib/Obsolete/Year2019/Fluid/HeatPumps/Examples/HeatPumpDetailed.mo
+1: Missing documentation, Name 'Medium_sin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_sin. Affected line: replaceable package Medium_sin = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+
+2: Missing documentation, Name 'Medium_sou' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium_sou. Affected line: replaceable package Medium_sou = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: .AixLib.Obsolete.Year2019.Fluid.HeatPumps.HeatPumpDetailed heatPump( P_eleOutput=true, capCalcType=2, CorrFlowCo=false, CorrFlowEv=false, dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(), PT1_cycle=true, timeConstantCycle=1, mFlow_conNominal=1, mFlow_evaNominal=1, T_evaIn(transferHeat=true, TAmb=291.15), T_evaOut(transferHeat=true, TAmb=291.15), T_conIn(transferHeat=true, TAmb=273.15), T_conOut(transferHeat=true, TAmb=273.15), redeclare package Medium_con = Medium_sin, redeclare package Medium_eva = Medium_sou) "Detailed heat pump mainly based on manufacturing data" annotation (Placement(transformation(extent={{-16,14},{14,-6}})));
+
+4: Name 'sourceSideMassFlowSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Side, Mass, Source. Affected line: AixLib.Fluid.Sources.MassFlowSource_T sourceSideMassFlowSource( use_T_in=true, m_flow=1, redeclare package Medium = Medium_sou, nPorts=1, T=275.15) "Ideal mass flow source at the inlet of the source side" annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
+
+5: Name 'sourceSideFixedBoundary' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source, Side, Fixed, Boundary. Affected line: AixLib.Fluid.Sources.Boundary_pT sourceSideFixedBoundary(redeclare package Medium = Medium_sou, nPorts=1) "Fixed boundary at the outlet of the source side" annotation (Placement( transformation( extent={{-10,10},{10,-10}}, rotation=0, origin={-80,36})));
+
+6: Name 'TsuSourceRamp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source, Ramp. Affected line: Modelica.Blocks.Sources.Ramp TsuSourceRamp( duration=1000, startTime=1000, height=25, offset=278) "Ramp signal for the temperature input of the source side's ideal mass flow source" annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
+
+7: Missing documentation. Affected line: Modelica.Blocks.Logical.Hysteresis hys( pre_y_start=true, uLow=273.15 + 30, uHigh=273.15 + 40) annotation (Placement(transformation(extent={{64,50},{44,70}})));
+
+8: Missing documentation, Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( f=1/3600, amplitude=3000, offset=3000) annotation (Placement(transformation(extent={{76,26},{84,34}})));
+
+9: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement( transformation( extent={{4,-4},{-4,4}}, rotation=90, origin={50,34})));
+
+10: Name 'heatFlowRateCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Rate. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon "Heat flow rate of the condenser" annotation (Placement(transformation( extent={{-6,6},{6,-6}}, rotation=270, origin={94,6})));
+
+11: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation( extent={{-4,-4},{4,4}}, rotation=270, origin={96,22})));
+
+12: Name 'sinkSideFixedBoundary' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink, Side, Fixed, Boundary. Affected line: AixLib.Fluid.Sources.Boundary_pT sinkSideFixedBoundary(redeclare package Medium = Medium_sin, nPorts=1) "Fixed boundary at the outlet of the sink side" annotation (Placement( transformation( extent={{10,-10},{-10,10}}, rotation=0, origin={88,-64})));
