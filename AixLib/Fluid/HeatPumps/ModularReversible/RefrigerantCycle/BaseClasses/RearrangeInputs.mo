@@ -25,5 +25,11 @@ equation
   For instsance, <code>outOrd={2, 1, 3}</code> switches input 
   two and one.
 </p>
+</html>", revisions="<html>
+<ul>  <li>
+    <i>August 27, 2024</i> by Fabian Wuellhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1520</a>)
+  </li></ul>
 </html>"));
 end RearrangeInputs;

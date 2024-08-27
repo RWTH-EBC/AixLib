@@ -132,27 +132,16 @@ equation
       extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html>
 <ul>
   <li>
-    <i>May 21, 2021</i> by Fabian Wuellhorst:<br/>
-    Make use of BaseClasses (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">AixLib #1092</a>)
-  </li>
-  <li>
-    <i>November 26, 2018</i> by Fabian Wuellhorst:<br/>
+    <i>August 27, 2024</i> by Fabian Wuellhorst:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">AixLib #577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1520</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>
-  This model uses two-dimensional table data typically given
-  by manufacturers as required by e.g. European Norm 14511
-  or ASHRAE 205 to calculate
+  This model uses three-dimensional table data possibly given
+  by manufacturers or estimated using other tools, such as VCLibPy, to calculate
   <code>QCon_flow</code> and <code>PEle</code>.
-</p>
-<p>
-  For different condenser outlet and evaporator inlet temperatures,
-  the tables must provide two of the three following values:
-  electrical power consumption, evaporator heat flow rate, and COP.
 </p>
 <p>
   Note that losses are often implicitly included in measured data.
@@ -165,7 +154,7 @@ For the scaling factor, the table data for condenser heat flow rate (<code>QConT
 is evaluated at nominal conditions. Hence, the scaling factor is
 </p>
 <pre>
-scaFac = QCon_flow_nominal/QConTabDat_flow(TEva_nominal, TCon_nominal).
+scaFac = QCon_flow_nominal/QConTabDat_flow(TCon_nominal, TEva_nominal, y_nominal).
 
 </pre>
 <p>
@@ -175,37 +164,6 @@ This implies a constant COP over different design sizes:
 <p><code>QCon_flow = scaFac * tabQCon_flow.y</code> </p>
 <p><code>PEle = scaFac * tabPel.y</code></p>
 
-
-<h4>Known Limitations </h4>
-<ul>
-<li>
-  Manufacturers are not required to provide the compressor speed at which
-  the data are measured. Thus, nominal values may be obtained at different
-  compressor speeds and, thus, efficiencies.
-  To accurately model the available thermal output,
-  please check that you use tables of the maximal thermal output,
-  which is often provided in the data sheets from the manufacturers.
-  This limitation only holds for inverter driven heat pumps.
-</li>
-<li>
-  We assume that the efficiency is contant over the whole
-  compressor speed range. Typically, effciencies will drop at minimal
-  and maximal compressor speeds.
-  To model an inverter controlled heat pump, the relative
-  compressor speed <code>yMea</code> is used to scale
-  the ouput of the tables linearly.
-  For models including the compressor speed, check the SDF-Library
-  dependent refrigerant cycle models in the
-  <a href=\"https://github.com/RWTH-EBC/AixLib\">AixLib</a> Library.
-</li>
-</ul>
-<h4>References</h4>
-<p>
-EN 14511-2018: Air conditioners, liquid chilling packages and heat pumps for space
-heating and cooling and process chillers, with electrically driven compressors
-<a href=\"https://www.beuth.de/de/norm/din-en-14511-1/298537524\">
-https://www.beuth.de/de/norm/din-en-14511-1/298537524</a>
-</p>
 
 </html>"));
 end TableData3D;
