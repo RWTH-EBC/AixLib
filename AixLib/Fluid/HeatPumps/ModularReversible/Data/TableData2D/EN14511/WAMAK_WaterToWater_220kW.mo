@@ -86,6 +86,6 @@ https://products.wamak.eu/combine.php?&amp;ampcoverpg&amp;ampdescriptmrktadv&amp
   First implementation (see issue <a href=
   \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
 </li></ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WAMAK_WaterToWater_220kW;

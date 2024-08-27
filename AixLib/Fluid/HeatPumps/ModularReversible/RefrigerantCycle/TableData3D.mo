@@ -1,37 +1,50 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle;
 model TableData3D
-  "Data based on compressor speed, condenser temperature, and evaporator temperature"
+  "3D data: condenser temperature, evaporator temperature, compressor speed"
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle(
     final devIde=datTab.devIde,
-    PEle_nominal=Modelica.Blocks.Tables.Internal.getTable2DValueNoDer2(
-        tabIdePEle,
-        TCon_nominal,
-        TEva_nominal) * scaFac);
+    PEle_nominal=evaluate(extTabPEle, uOrdSca_nominal, interpMethod, extrapMethod)
+      * scaFac);
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D(
+    facGain(final k=datTab.facGai),
+    final u_nominal={TCon_nominal,TEva_nominal,y_nominal},
     final useInRevDev=not useInHeaPum,
     scaFac=QHea_flow_nominal/QHeaNoSca_flow_nominal,
-    final valTabQEva_flow=valTabQCon_flow .- valTabPEle,
-    final valTabQCon_flow={{tabQUse_flow.table[j, i] for i in 2:numCol} for j in
-            2:numRow},
     final use_TConOutForTab=datTab.use_TConOutForTab,
-    final use_TEvaOutForTab=datTab.use_TEvaOutForTab);
-  parameter Modelica.Units.SI.HeatFlowRate QHeaNoSca_flow_nominal=Modelica.Blocks.Tables.Internal.getTable2DValueNoDer2(
-        tabIdeQUse_flow,
-        TCon_nominal,
-        TEva_nominal)
+    final use_TEvaOutForTab=datTab.use_TEvaOutForTab,
+    nDTabPEle(
+      final filename=datTab.filename,
+      final dataset=datTab.datasetPEle,
+      final dataUnit=datTab.dataUnitPEle,
+      final scaleUnits=datTab.scaleUnitsPEle),
+    nDTabQUse_flow(
+      final filename=datTab.filename,
+      final dataset=datTab.datasetQCon_flow,
+      final dataUnit=datTab.dataUnitQCon_flow,
+      final scaleUnits=datTab.scaleUnitsQCon_flow),
+    ordInp(final outOrd=datTab.outOrd));
+  parameter Modelica.Units.SI.HeatFlowRate QHeaNoSca_flow_nominal=evaluate(
+        extTabQUse_flow, uOrdSca_nominal, interpMethod, extrapMethod)
     "Unscaled nominal heating capacity "
     annotation (Dialog(group="Nominal condition"));
 
-  replaceable parameter AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.GenericHeatPump datTab
+  replaceable parameter
+    AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.Generic
+    datTab constrainedby
+    AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.Generic
     "Data Table of HP" annotation (choicesAllMatching=true);
+
+initial algorithm
+  assert(datTab.nDim == 3, "In " + getInstanceName() + ": 
+    The provided SDF record contains more than three dimensions", AssertionLevel.error);
 
 equation
 
-  connect(scaFacTimPel.y, PEle) annotation (Line(points={{-40,-9},{-40,-24},{0,
+  connect(scaFacTimPel.y, PEle) annotation (Line(points={{-40,-21},{-40,-24},{0,
           -24},{0,-130}}, color={0,0,127}));
-  connect(scaFacTimPel.y, redQCon.u2) annotation (Line(points={{-40,-9},{-40,-24},
+  connect(scaFacTimPel.y, redQCon.u2) annotation (Line(points={{-40,-21},{-40,-24},
           {64,-24},{64,-78}}, color={0,0,127}));
   connect(reaPasThrTEvaOut.u, sigBus.TEvaOutMea) annotation (Line(points={{-10,102},
           {-10,120},{1,120}},      color={0,0,127}), Text(
@@ -58,34 +71,45 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   if useInHeaPum then
-    connect(reaPasThrTConIn.y, multiplex3_1.u1[1])
-      annotation (Line(points={{50,79},{50,70},{27,70},{27,62}}, color={0,0,127}));
-    connect(reaPasThrTConOut.y, multiplex3_1.u1[1])
-      annotation (Line(points={{90,79},{90,70},{27,70},{27,62}}, color={0,0,127}));
-    connect(reaPasThrTEvaOut.y, multiplex3_1.u2[1]) annotation (Line(points={{-10,79},
-            {-10,70},{20,70},{20,62}},color={0,0,127}));
-    connect(reaPasThrTEvaIn.y, multiplex3_1.u2[1]) annotation (Line(points={{-50,79},
-            {-50,70},{20,70},{20,62}},
+    connect(reaPasThrTConIn.y, mux.u[1])
+      annotation (Line(points={{50,79},{50,70},{-80,70},{-80,47.6667}},
+                                                                 color={0,0,127}));
+    connect(reaPasThrTConOut.y, mux.u[1])
+      annotation (Line(points={{90,79},{90,70},{-80,70},{-80,47.6667}},
+                                                                 color={0,0,127}));
+    connect(reaPasThrTEvaOut.y, mux.u[2]) annotation (Line(points={{-10,79},{-10,
+            70},{-80,70},{-80,50}},   color={0,0,127}));
+    connect(reaPasThrTEvaIn.y, mux.u[2]) annotation (Line(points={{-50,79},{-50,
+            70},{-80,70},{-80,50}},
                                   color={0,0,127}));
   else
-    connect(reaPasThrTEvaOut.y, multiplex3_1.u1[1]) annotation (Line(points={{-10,79},
-            {-10,70},{27,70},{27,62}},                color={0,0,127}));
-    connect(reaPasThrTEvaIn.y, multiplex3_1.u1[1]) annotation (Line(points={{-50,79},
-            {-50,70},{27,70},{27,62}},            color={0,0,127}));
-    connect(reaPasThrTConOut.y, multiplex3_1.u2[1])
-      annotation (Line(points={{90,79},{90,70},{20,70},{20,62}}, color={0,0,127}));
-    connect(reaPasThrTConIn.y, multiplex3_1.u2[1])
-      annotation (Line(points={{50,79},{50,70},{20,70},{20,62}}, color={0,0,127}));
+    connect(reaPasThrTEvaOut.y, mux.u[1]) annotation (Line(points={{-10,79},{
+            -10,70},{-80,70},{-80,47.6667}},          color={0,0,127}));
+    connect(reaPasThrTEvaIn.y, mux.u[1]) annotation (Line(points={{-50,79},{-50,
+            70},{-80,70},{-80,47.6667}},          color={0,0,127}));
+    connect(reaPasThrTConOut.y, mux.u[2])
+      annotation (Line(points={{90,79},{90,70},{-80,70},{-80,50}},
+                                                                 color={0,0,127}));
+    connect(reaPasThrTConIn.y, mux.u[2])
+      annotation (Line(points={{50,79},{50,70},{-80,70},{-80,50}},
+                                                                 color={0,0,127}));
   end if;
-  connect(scaFacTimPel.y, feeHeaFloEva.u1) annotation (Line(points={{-40,-9},{-40,
+  connect(scaFacTimPel.y, feeHeaFloEva.u1) annotation (Line(points={{-40,-21},{-40,
           -24},{-86,-24},{-86,-10},{-78,-10}}, color={0,0,127}));
-  connect(scaFacTimQUse_flow.y, feeHeaFloEva.u2) annotation (Line(points={{40,-9},
+  connect(scaFacTimQUse_flow.y, feeHeaFloEva.u2) annotation (Line(points={{40,-21},
           {40,-26},{-70,-26},{-70,-18}}, color={0,0,127}));
-  connect(nConGain.u, sigBus.yMea) annotation (Line(points={{-80,102},{-80,120},
-          {1,120}}, color={0,0,127}), Text(
+  connect(mux.u[3], sigBus.yMea) annotation (Line(points={{-80,52.3333},{-80,50},
+          {-102,50},{-102,120},{1,120}},    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(booToRea.u, sigBus.onOffMea) annotation (Line(points={{-80,102},{-80,
+          120},{1,120}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
     Line(points={

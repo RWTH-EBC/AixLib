@@ -37,14 +37,15 @@ model Modular_OneRoomRadiator
     use_evaCap=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model RefrigerantCycleHeatPumpHeating =
-      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness(
+      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
+        (
         redeclare
           AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.NoFrosting
           iceFacCal,
         TAppCon_nominal=0,
         TAppEva_nominal=0),
     redeclare model RefrigerantCycleHeatPumpCooling =
-      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D(
+      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D (
         redeclare
           AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.NoFrosting
           iceFacCal,
@@ -126,6 +127,6 @@ equation
   experiment(
       StartTime=0,
       StopTime=86400,
-      Tolerance=1e-08), 
+      Tolerance=1e-08),
    __Dymola_LockedEditing="Model from IBPSA");
 end Modular_OneRoomRadiator;
