@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularEnergySystems.Controls;
+within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlMflowNotManufacturer
 
    parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
@@ -163,12 +163,20 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Control unit of the relativ condenser water mass flow [0,1] for two different operation methods:</p>
+    Documentation(info="<html><p>
+  Control unit of the relativ condenser water mass flow [0,1] for two
+  different operation methods:
+</p>
 <ul>
-<li>constant THot </li>
-<li>constant temperature difference between THot and TCold</li>
+  <li>constant THot
+  </li>
+  <li>constant temperature difference between THot and TCold
+  </li>
 </ul>
-<p><br>A Shutdown is controlled with a degressiv decrease of warter mass flow to avoid non physical behaviour.</p>
+<p>
+  <br/>
+  A Shutdown is controlled with a degressiv decrease of warter mass
+  flow to avoid non physical behaviour.
+</p>
 </html>"));
 end ControlMflowNotManufacturer;
