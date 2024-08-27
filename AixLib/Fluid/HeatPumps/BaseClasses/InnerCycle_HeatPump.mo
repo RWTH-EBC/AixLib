@@ -26,6 +26,7 @@ model InnerCycle_HeatPump
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
+    TSourceInternal=TSourceInternal,
     FreDep=FreDep,
     eta_carnot=eta_carnot)               if not use_non_manufacturer
   annotation (Placement(transformation(
