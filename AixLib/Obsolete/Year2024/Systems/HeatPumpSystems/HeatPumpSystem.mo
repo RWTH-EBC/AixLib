@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
+﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
@@ -200,6 +200,8 @@ equation
   </li>
 </ul>
 </html>", info="<html>
+    <h4>Deprecation Warning</h4>
+<p>This model is deprecated, switch to the ModularReversible approach. Read <a href=\"https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible\">https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible</a> for further information. </p>
 <p>
   This model uses the heat pump model <a href=
   \"modelica://AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump</a>

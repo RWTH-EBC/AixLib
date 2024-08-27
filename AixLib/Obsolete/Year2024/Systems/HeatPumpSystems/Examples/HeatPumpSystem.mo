@@ -218,7 +218,9 @@ equation
     experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Obsolete/Year2024/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos"
         "Simulate and plot"),
-    Documentation(info="<html><p>
+    Documentation(info="<html>    <h4>Deprecation Warning</h4>
+<p>This model is deprecated, switch to the ModularReversible approach. Read <a href=\"https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible\">https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible</a> for further information. </p>
+<p>
   Model for testing the model <a href=
   \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem</a>.
 </p>

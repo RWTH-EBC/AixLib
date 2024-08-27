@@ -104,6 +104,8 @@ model Chiller
   </li>
 </ul>
 </html>", info="<html>
+    <h4>Deprecation Warning</h4>
+<p>This model is deprecated, switch to the ModularReversible approach. Read <a href=\"https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible\">https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible</a> for further information. </p>
 <p>
   This generic grey-box chiller model uses empirical data to model the
   refrigerant cycle. The modelling of system inertias and heat losses

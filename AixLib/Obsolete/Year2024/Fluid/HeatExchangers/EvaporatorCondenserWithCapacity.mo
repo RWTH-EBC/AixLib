@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2024.Fluid.HeatExchangers;
+﻿within AixLib.Obsolete.Year2024.Fluid.HeatExchangers;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -245,6 +245,8 @@ equation
   </li>
 </ul>
 </html>", info="<html>
+    <h4>Deprecation Warning</h4>
+    <p>This model is deprecated, use <a href=\"AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.EvaporatorCondenserWithCapacity\">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.EvaporatorCondenserWithCapacity</a> instead. </p>
 <p>
   Model for an evaporator or condenser with the use of a capacity to
   simulate heat losses.

@@ -214,7 +214,10 @@ equation
     experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Obsolete/Year2024/Fluid/Chillers/Examples/Chiller.mos"
         "Simulate and plot"),
-    Documentation(info="<html><h4>
+    Documentation(info="<html>
+        <h4>Deprecation Warning</h4>
+<p>This model is deprecated, switch to the ModularReversible approach. Read <a href=\"https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible\">https://github.com/RWTH-EBC/AixLib/wiki/Switch-from-model-HeatPump-to-ModularReversible</a> for further information. </p>
+<h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>
 <p>
