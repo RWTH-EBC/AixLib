@@ -14,7 +14,7 @@ model RearrangeInputs
 
 equation
   for i in 1:nDim loop
-    connect(u[i], y[outOrd[i]])
+    connect(u[outOrd[i]], y[i])
       annotation (Line(points={{-120,0},{110,0}}, color={0,0,127}));
   end for;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

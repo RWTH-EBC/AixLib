@@ -6,7 +6,7 @@ partial record Generic "Partial record for 3D VCLibPy data for heat pumps"
     final scaleUnitsQCon_flow={"","K","K"},
     final dataUnitQCon_flow="W",
     final datasetQCon_flow="/" + flowsheet + "/" + refrigerant + "/Q_con_outer",
-    final outOrd={2,3,1},
+    final outOrd={3,1,2},
     final use_TConOutForTab=false,
     final use_TEvaOutForTab=false,
     final scaleUnitsPEle={"","K","K"},

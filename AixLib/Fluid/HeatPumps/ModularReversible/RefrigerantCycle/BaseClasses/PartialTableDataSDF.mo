@@ -163,5 +163,34 @@ equation
     \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1520</a>)
   </li></ul>
 </html>"),
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
+                                Rectangle(
+        extent={{-120,-122},{122,120}},
+        lineColor={0,0,127},
+        fillColor={255,255,255},
+        fillPattern=FillPattern.Solid),
+      Rectangle(
+          extent={{-60,60},{60,-60}},
+          lineColor={47,49,172},
+          fillColor={255,255,125},
+          fillPattern=FillPattern.Solid),
+      Line(
+        points={{-20,60},{-20,-60}},
+        color={161,159,189}),
+      Line(
+        points={{20,60},{20,-60}},
+        color={161,159,189}),
+      Line(
+        points={{1,64},{1,-56}},
+        color={161,159,189},
+          origin={4,-21},
+          rotation=90),
+      Line(
+        points={{1,76},{1,-44}},
+        color={161,159,189},
+          origin={16,19},
+          rotation=90),
+      Rectangle(
+          extent={{-60,60},{60,-60}},
+          lineColor={47,49,172})}));
 end PartialTableDataSDF;

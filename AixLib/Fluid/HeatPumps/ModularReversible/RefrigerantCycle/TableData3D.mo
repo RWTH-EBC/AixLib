@@ -111,25 +111,7 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (Icon(graphics={
-    Line(points={
-          {-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},
-          {30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},
-          {60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},
-          {60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
-    Line(points={{0.0,40.0},{0.0,-40.0}}),
-    Rectangle(fillColor={255,215,136},
-      fillPattern=FillPattern.Solid,
-      extent={{-60.0,20.0},{-30.0,40.0}}),
-    Rectangle(fillColor={255,215,136},
-      fillPattern=FillPattern.Solid,
-      extent={{-60.0,0.0},{-30.0,20.0}}),
-    Rectangle(fillColor={255,215,136},
-      fillPattern=FillPattern.Solid,
-      extent={{-60.0,-20.0},{-30.0,0.0}}),
-    Rectangle(fillColor={255,215,136},
-      fillPattern=FillPattern.Solid,
-      extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html>
+  annotation (                                 Documentation(revisions="<html>
 <ul>
   <li>
     <i>August 27, 2024</i> by Fabian Wuellhorst:<br/>
