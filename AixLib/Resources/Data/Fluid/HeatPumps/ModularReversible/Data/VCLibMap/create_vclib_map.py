@@ -103,66 +103,16 @@ def _regression_of_examples(working_dir: pathlib.Path, flowsheet: str, fluid: st
         fluid=fluid,
         flowsheet=flowsheet
     )
-
-    nominal_mass_flow_rates = {
-        'Propane_Standard': {
-            'm_flow_con': 0.13170689122288656,
-            'm_flow_eva': 0.4698166163310231
-        },
-        'Propane_VaporInjectionEconomizer': {
-            'm_flow_con': 0.12221246255424453,
-            'm_flow_eva': 0.5072144808237113
-        },
-        'Propane_VaporInjectionPhaseSeparator': {
-            'm_flow_con': 0.12236052958964315,
-            'm_flow_eva': 0.5062971789448456
-        },
-        'R32_VaporInjectionEconomizer': {
-            'm_flow_con': 0.2335750652761698,
-            'm_flow_eva': 0.9552806559898083
-        },
-        'R32_VaporInjectionPhaseSeparator': {
-            'm_flow_con': 0.23509023365071813,
-            'm_flow_eva': 0.9530536567212923
-        },
-        'R134a_Standard': {
-            'm_flow_con': 0.09171901398866596,
-            'm_flow_eva': 0.2861170780547123
-        },
-        'R134a_VaporInjectionEconomizer': {
-            'm_flow_con': 0.08105962488829771,
-            'm_flow_eva': 0.32805139387751864
-        },
-        'R134a_VaporInjectionPhaseSeparator': {
-            'm_flow_con': 0.0809824183319496,
-            'm_flow_eva': 0.3263759809952493
-        },
-        'R152a_Standard': {
-            'm_flow_con': 0.08988153310572121,
-            'm_flow_eva': 0.29967632922744786
-        },
-        'R152a_VaporInjectionEconomizer': {
-            'm_flow_con': 0.0806911349331151,
-            'm_flow_eva': 0.33180010105593655
-        },
-        'R152a_VaporInjectionPhaseSeparator': {
-            'm_flow_con': 0.08073631246873691,
-            'm_flow_eva': 0.33155683191906166
-        },
-        'R410A_Standard': {
-            'm_flow_con': 0.2262470533626624,
-            'm_flow_eva': 0.7710796852952025
-        },
-        'R410A_VaporInjectionEconomizer': {
-            'm_flow_con': 0.2011073496768124,
-            'm_flow_eva': 0.8250453656014359
-        },
-        'R410A_VaporInjectionPhaseSeparator': {
-            'm_flow_con': 0.20346259433325997,
-            'm_flow_eva': 0.8179198444245127
-        }
-    }
-
+    from vclibpy.utils.nominal_design import nominal_hp_design
+    from vclibpy import Inputs
+    nominal_design = nominal_hp_design(
+        heat_pump=heat_pump,
+        fluid=fluid,
+        inputs=Inputs(T_con_in=273.15 + 47, T_eva_in=271.15, n=0.8, dT_eva_superheating=5, dT_con_subcooling=0),
+        dT_eva=5,
+        dT_con=8
+    )
+    heat_pump.terminate()
     utils.full_factorial_map_generation(
         heat_pump=heat_pump,
         save_path=working_dir,
@@ -171,8 +121,8 @@ def _regression_of_examples(working_dir: pathlib.Path, flowsheet: str, fluid: st
         n_ar=n_ar,
         use_multiprocessing=True,
         save_plots=False,
-        m_flow_con=nominal_mass_flow_rates[f"{fluid}_{flowsheet}"]["m_flow_con"],
-        m_flow_eva=nominal_mass_flow_rates[f"{fluid}_{flowsheet}"]["m_flow_eva"],
+        m_flow_con=nominal_design["m_flow_con"],
+        m_flow_eva=nominal_design["m_flow_eva"],
         dT_eva_superheating=5,
         dT_con_subcooling=0,
     )
@@ -180,7 +130,7 @@ def _regression_of_examples(working_dir: pathlib.Path, flowsheet: str, fluid: st
 
 def create_model(fluid, flowsheet):
     model_name = f"VCLib{flowsheet}{fluid}"
-    description = f"Map based on VCLib with {flowsheet.lower()} and {fluid}"
+    description = f"Map based on VCLib with {flowsheet} and {fluid}"
     filename = f"modelica://AixLib/Resources/Data/Fluid/HeatPumps/ModularReversible/Data/VCLibMap/{flowsheet}_{fluid}.sdf"
 
     model = f"""
@@ -208,9 +158,75 @@ def print_package(fluids, flowsheets):
         print()  # Add an empty line between models for readability
 
 
+def compare_old_to_new():
+    from vclibpy.utils.sdf_ import sdf_to_csv
+    base_path = pathlib.Path(r"D:\00_temp\compare")
+    os.makedirs(base_path.joinpath("old"), exist_ok=True)
+    os.makedirs(base_path.joinpath("new"), exist_ok=True)
+
+    sdf_to_csv(
+        filepath=base_path.joinpath("VCLibMap_old.sdf"),
+        save_path=base_path.joinpath("old")
+    )
+    sdf_to_csv(
+        filepath=base_path.joinpath("VaporInjectionPhaseSeparator_Propane.sdf"),
+        save_path=base_path.joinpath("new")
+    )
+
+    df_old = pd.read_csv(base_path.joinpath("old", "VIPhaseSeparatorFlowsheet_Propane.csv"), index_col=0)
+    df_new = pd.read_csv(base_path.joinpath("new", "VaporInjectionPhaseSeparator_Propane.csv"), index_col=0)
+
+    def remove_unit(df):
+        columns = {col: col.split(" ")[0] for col in df.columns}
+        return df.rename(columns=columns)
+    # New / old
+    scaling_factor = 9300 / 4050.15977812231
+    df_old = remove_unit(df_old)
+    df_old = df_old.rename(columns={
+        "Q_con": "Q_con_outer",
+        "eva_err_ntu": "error_eva",
+        "con_err_ntu": "error_con",
+        "p_1": "p_eva",
+        "p_2": "p_con"
+    })
+    df_old.loc[:, "Q_con_outer"] *= scaling_factor
+    df_old.loc[:, "m_flow_ref"] *= scaling_factor
+    df_old.loc[:, "P_el"] = df_old.loc[:, "Q_con_outer"] / df_old.loc[:, "COP"]
+    df_new = remove_unit(df_new)
+    assert np.all(df_old["n"] == df_new["n"]), "n does not match"
+    assert np.all(df_old["T_eva_in"] == df_new["T_eva_in"]), "T_eva_in does not match"
+    assert np.all(df_old["T_con_in"] == df_new["T_con_in"]), "T_con_in does not match"
+    import matplotlib.pyplot as plt
+    variables = ["Q_con_outer", "P_el", "m_flow_ref", "p_eva", "p_con", "error_eva", "error_con"]
+    fig, ax = plt.subplots(len(variables), 1)
+    for idx, var in enumerate(variables):
+        ax[idx].plot([df_old[var].min(), df_old[var].max()], [df_old[var].min(), df_old[var].max()], color="black")
+        ax[idx].scatter(df_old[var], df_new[var])
+        ax[idx].set_ylabel(f"{var} new")
+        ax[idx].set_xlabel(f"{var} old")
+    fig2, ax2 = plt.subplots(len(variables), 1)
+    for idx, var in enumerate(variables):
+        ax2[idx].scatter(df_old["n"], df_old[var] - df_new[var])
+        ax2[idx].set_ylabel(f"{var} old-new")
+        ax2[idx].set_xlabel(f"n")
+    fig3, ax3 = plt.subplots(len(variables), 1)
+    for idx, var in enumerate(variables):
+        ax3[idx].scatter(df_old["T_con_in"], df_old[var] - df_new[var])
+        ax3[idx].set_ylabel(f"{var} old-new")
+        ax3[idx].set_xlabel(f"T_con_in")
+    fig4, ax4 = plt.subplots(len(variables), 1)
+    for idx, var in enumerate(variables):
+        ax4[idx].scatter(df_old["T_eva_in"], df_old[var] - df_new[var])
+        ax4[idx].set_ylabel(f"{var} old-new")
+        ax4[idx].set_xlabel(f"T_eva_in")
+    plt.show()
+    raise Exception
+
+
 if __name__ == "__main__":
     import logging
     logging.basicConfig(level="INFO")
+    #compare_old_to_new()
     from vclibpy.media import set_global_media_properties
     from vclibpy.media import RefProp
     set_global_media_properties(RefProp)

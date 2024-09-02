@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy;
 record VCLibStandardR152a
-  "Map based on VCLib with standard and R152a"
+  "Map based on VCLib with Standard and R152a"
   extends AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy.Generic(
     refrigerant="R152a",
     flowsheet="Standard",

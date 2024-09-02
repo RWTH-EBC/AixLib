@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy;
 record VCLibVaporInjectionPhaseSeparatorPropane
-  "Map based on VCLib with vaporinjectionphaseseparator and Propane"
+  "Map based on VCLib with VaporInjectionPhaseSeparator and Propane"
   extends AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData3D.VCLibPy.Generic(
     refrigerant="Propane",
     flowsheet="VaporInjectionPhaseSeparator",
