@@ -72,7 +72,7 @@
     },
     "model": "AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime",
     "simulation": {
-      "elapsed_time": 0.00534606,
+      "elapsed_time": 0.00957203,
       "final_time": 207360,
       "jacobians": 24,
       "start_time": -112320,
