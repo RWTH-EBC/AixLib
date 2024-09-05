@@ -3,7 +3,7 @@ model OFD_UFH
   "Test environment for OFD with underfloor heating system"
   extends Modelica.Icons.Example;
 
-  parameter Integer nRooms = 11;
+  parameter Integer nZones = 11;
   parameter Integer nHeatedRooms = 10;
 
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
@@ -17,9 +17,9 @@ model OFD_UFH
       radioButtons=true));
   parameter Integer dis=10;
   parameter Modelica.Units.SI.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
-  parameter Modelica.Units.SI.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
+  parameter Modelica.Units.SI.Diameter dOut[nHeatedRooms] = fill(0.017, 10);
   parameter Modelica.Units.SI.Diameter d[nHeatedRooms] = fill(0.018, 10);
-  Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
+  Modelica.Blocks.Sources.Constant constAirEx[nZones](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
   Modelica.Blocks.Sources.Constant constAmb(k=261.15)
@@ -27,7 +27,7 @@ model OFD_UFH
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow    groundTemp[5](Q_flow=
         fill(0, 5))
     annotation (Placement(transformation(extent={{-54,-96},{-42,-84}})));
-  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[nRooms]
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[nZones]
     annotation (Placement(transformation(
         extent={{8,-6},{-8,6}},
         rotation=0,
@@ -58,9 +58,9 @@ model OFD_UFH
     AirExchangeCorridor=0,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9)
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-16},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nZones] annotation (Placement(transformation(extent={{-60,-16},
             {-48,-4}})));
-  Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-18},
+  Modelica.Blocks.Sources.Constant adiabaticRadRooms[nZones](k=fill(0, nZones)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-18},
             {-74,-2}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-26},
             {-52,-16}})));
@@ -68,7 +68,7 @@ model OFD_UFH
     redeclare package Medium = AixLib.Media.Water,
     nZones=10,
     dis=dis,
-    Q_Nf={638,1078,502,341,783,766,506,196,443,658},
+    Q_flow_nominal={638,1078,502,341,783,766,506,196,443,658},
     A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor[1].Wall.A
         *dis,wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.floor[
         1].Wall.A*dis,wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.floor[

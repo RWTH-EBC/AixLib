@@ -2,15 +2,6 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 partial model PartialUnderFloorHeatingSystemParameters
   "Common parameters for underfloor heating system"
 
-  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
-    "velocity of medium in pipe";
-
-  final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(
-      Modelica.Constants.pi*0.5))
-    "Inner pipe diameter as a comparison for user parameter";
-
-  parameter Modelica.Units.SI.Diameter dInn=dOut - 2*thicknessPipe
-    "Inner diameter of pipe";
 
   parameter Modelica.Units.SI.ThermalResistance R_x = 0
     "Thermal Resistance between Screed and Pipe";

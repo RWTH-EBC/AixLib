@@ -5,7 +5,25 @@ model qG_TypeA
 
   extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA(
     lambda_E=wallTypeFloor.lambda[1],
-    R_lambdaB=wallTypeFloor.d[2]/wallTypeFloor.lambda[2]);
+    final R_lambdaB=wallTypeFloor.d[2]/wallTypeFloor.lambda[2]);
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
+    "Wall type for floor"
+    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  parameter Boolean Ceiling "false if ground plate is under panel heating"
+    annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
+    "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
+  final parameter Modelica.Units.SI.Power Q_flow_nominal "Nominal heat flow";
+  parameter Modelica.Units.SI.Area A;
+  parameter Modelica.Units.SI.HeatFlux q_flow_nominal=Q_flow_nominal/A
+    "Area specific heat flow rate ";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_nominal "Nominal temperature difference";
+  parameter Modelica.Units.SI.TemperatureDifference dT_Hi "Nominal temperature difference between heating medium";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp "Specific heat capacity";
+  parameter Modelica.Units.SI.Temperature T_U=293.15
+    "Nominal Room Temperature lying under panel heating"
+    annotation (Dialog(group="Room Specifications"));
+
   final parameter Modelica.Units.SI.Thickness InsulationThickness=
       wallTypeCeiling.d[1] "Thickness of thermal insulation";
   final parameter Modelica.Units.SI.ThermalConductivity lambda_ins=
@@ -16,10 +34,6 @@ model qG_TypeA
 
   final parameter Modelica.Units.SI.Thickness CoverThickness=wallTypeFloor.d[1]
     "thickness of cover above pipe";
-
-  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaB=wallTypeFloor.d[2]
-      /wallTypeFloor.lambda[2] "Thermal resistance of flooring";
-
   final parameter Modelica.Units.SI.ThermalInsulance R_lambdaCeiling=if Ceiling
        then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
     "Thermal resistance of ceiling";
@@ -35,6 +49,9 @@ model qG_TypeA
 
   parameter Modelica.Units.SI.Temperature T_Fmax "maximum surface temperature";
   parameter Modelica.Units.SI.Temperature T_Room "Room temperature";
+  parameter Modelica.Units.SI.Temperature TZone_nominal=20 + 273.15 "Nominal zone temperature";
+    parameter Modelica.Units.SI.Temperature TZoneBel_nominal=20 + 273.15;
+
 
   final parameter Real f_G = if s_u/T <= 0.173 then 1 else (q_Gmax - (q_Gmax - phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T) * e^(-20 * (s_u / T - 0.173)^2)) / (phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T);
   final parameter Real phi = ((T_Fmax - T_Room) / d_T0)^(1.1);

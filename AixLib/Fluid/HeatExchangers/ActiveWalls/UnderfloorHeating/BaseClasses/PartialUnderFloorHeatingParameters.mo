@@ -6,13 +6,13 @@ partial model PartialUnderFloorHeatingParameters
     "Maximum surface temperature"                                                            annotation (Dialog(group=
           "Room Specifications"));
 
-  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
-    "velocity of medium in pipe";
-
-
   parameter Modelica.Units.SI.Diameter dOut "Outer diameter of pipe"
                                                                     annotation (Dialog( group=
           "Panel Heating"));
+
+
+  parameter Modelica.Units.SI.Diameter dInn=dOut - 2*thicknessPipe
+    "Inner diameter of pipe";
 
 
   parameter Modelica.Units.SI.Thickness thicknessPipe "Thickness of pipe wall"

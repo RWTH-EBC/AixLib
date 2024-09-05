@@ -10,11 +10,6 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
 
   parameter Modelica.Units.SI.Length lengthMax=120
     "Maximum Length for one Circuit" annotation (Dialog(group="Panel Heating"));
-
-  parameter Modelica.Units.SI.Power Q_Nf
-    "Calculated Heat Load for room with panel heating"
-    annotation (Dialog(group="Room Specifications"));
-
   parameter Modelica.Units.SI.Power Q_flow_nominal
     "Nominal heat load for room with panel heating"
     annotation (Dialog(group="Room Specifications"));

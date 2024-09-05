@@ -9,6 +9,11 @@ partial model PartialUnderFloorHeating
     "Nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
   final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=
       m_flow_nominal/rho_default "Nominal Volume Flow Rate in pipe";
+  final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(
+      Modelica.Constants.pi*0.5))
+    "Inner pipe diameter as a comparison for user parameter";
+  final parameter Modelica.Units.SI.Velocity v=V_flow_nominal/(Modelica.Constants.pi/4*dInn^(2))
+    "velocity of medium in pipe";
 
 protected
     parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(

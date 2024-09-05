@@ -20,10 +20,8 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     A={area},
     wallTypeFloor={
         UnderfloorHeating.BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},
-
     Ceiling={false},
     wallTypeCeiling={UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()},
-
     Spacing={0.35},
     thicknessPipe={0.002},
     dOut={0.017},
@@ -41,41 +39,77 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     annotation (Placement(transformation(extent={{-100,-26},{-86,-12}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     redeclare package Medium = MediumWater,
-    use_m_flow_in=true,
-    use_T_in=true,
+    m_flow=underfloorHeatingSystem.m_flow_nominal,
+    T=underfloorHeatingSystem.T_Vdes,
     nPorts=1)
     annotation (Placement(transformation(extent={{-98,-58},{-78,-38}})));
   AixLib.Fluid.Sources.Boundary_pT bou(redeclare package Medium =
         MediumWater,
       nPorts=1)
     annotation (Placement(transformation(extent={{74,-60},{54,-40}})));
+
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort convRadToCombPort annotation (
+     Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=270,
+        origin={-12,-8})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort convRadToCombPort1
+    annotation (Placement(transformation(
+        extent={{-10,-8},{10,8}},
+        rotation=90,
+        origin={-12,-86})));
+  RadConvToSingle radConvToSingle
+    annotation (Placement(transformation(extent={{24,12},{44,32}})));
+  RadConvToSingle radConvToSingle1
+    annotation (Placement(transformation(extent={{46,-96},{26,-76}})));
 equation
 
   for i in 1:dis loop
-    connect(fixedHeatFlow1.port, underfloorHeatingSystem.heatCeiling[i])
-    annotation (Line(points={{38,-90},{20,-90},{20,-92},{-7,-92},{-7,-64}},
-        color={191,0,0}));
     connect(thermalConductor[i].port_b, vol.heatPort) annotation (Line(points={{-24,-2},
-          {-34,-2},{-34,22},{-10,22}}, color={191,0,0}));
+            {-22,-2},{-22,22},{-10,22}},
+                                       color={191,0,0}));
+    connect(radConvToSingle.port_a, thermalConductor[i].port_a) annotation (Line(points={{24,22},
+            {10,22},{10,-2},{-4,-2}},                                                                     color={191,0,0}));
+  end for;
+
+  for i in 1:underfloorHeatingSystem.nZones loop
+    connect(convRadToCombPort1.portConv, underfloorHeatingSystem.portConCei[i]) annotation (Line(points={{-7,-76},
+            {-7,-72},{3,-72},{3,-67.3333}},
+        color={191,0,0}));
+    connect(convRadToCombPort1.portRad, underfloorHeatingSystem.portRadCei[i])
+    annotation (Line(points={{-17,-76},{-17,-67.3333},{-17,-67.3333}},
+        color={0,0,0}));
+    connect(underfloorHeatingSystem.portRadFloor[i], convRadToCombPort.portRad)
+    annotation (Line(points={{-17,-34},{-20,-34},{-20,-18},{-17,-18}}, color={191,
+          0,0}));
+    connect(underfloorHeatingSystem.portConFloor[i], convRadToCombPort.portConv)
+    annotation (Line(points={{3,-34},{-6,-34},{-6,-18},{-7,-18}},
+                                                                color={191,0,0}));
   end for;
 
   connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{-85.3,
-          -19},{-23,-19},{-23,-32}}, color={0,0,127}));
+          -19},{-37,-19},{-37,-40.6667}},
+                                     color={0,0,127}));
   connect(boundary.ports[1], underfloorHeatingSystem.port_a) annotation (Line(
-        points={{-78,-48},{-56,-48},{-56,-49},{-32,-49}}, color={0,127,255}));
-  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points=
-         {{18,-49},{38,-49},{38,-50},{54,-50}}, color={0,127,255}));
-  connect(underfloorHeatingSystem.m_flowNominal, boundary.m_flow_in)
-    annotation (Line(points={{-32,-58},{-40,-58},{-40,-56},{-68,-56},{-68,-62},{
-          -106,-62},{-106,-40},{-100,-40}}, color={0,0,127}));
-  connect(underfloorHeatingSystem.T_FlowNominal, boundary.T_in) annotation (
-      Line(points={{-32,-62.5},{-62,-62.5},{-62,-70},{-114,-70},{-114,-44},{-100,
-          -44}}, color={0,0,127}));
-  connect(thermalConductor.port_a, underfloorHeatingSystem.heatFloor)
-    annotation (Line(points={{-4,-2},{-2,-2},{-2,-4},{4,-4},{4,-24},{-7,-24},{-7,
-          -34}}, color={191,0,0}));
-  connect(fixedHeatFlow.port, vol.heatPort) annotation (Line(points={{-20,84},{-14,
-          84},{-14,22},{-10,22}}, color={191,0,0}));
+        points={{-78,-48},{-56,-48},{-56,-50.6667},{-32,-50.6667}},
+                                                          color={0,127,255}));
+  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points={{18,
+          -50.6667},{38,-50.6667},{38,-50},{54,-50}},
+                                                color={0,127,255}));
+  connect(fixedHeatFlow.port, vol.heatPort) annotation (Line(points={{-20,84},{
+          -10,84},{-10,22},{-10,22}},
+                                  color={191,0,0}));
+
+
+  connect(convRadToCombPort.portConvRadComb, radConvToSingle.heatFloor)
+    annotation (Line(points={{-12,2},{62,2},{62,22},{44,22}},color={191,0,0}));
+  connect(fixedHeatFlow1.port, radConvToSingle1.port_a)
+    annotation (Line(points={{38,-90},{42,-90},{42,-86},{46,-86}},
+                                                 color={191,0,0}));
+  connect(radConvToSingle1.heatFloor, convRadToCombPort1.portConvRadComb)
+    annotation (Line(points={{26,-86},{-2,-86},{-2,-96},{-12,-96}},
+                                                 color={191,0,0}));
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end OneRoomSimple;

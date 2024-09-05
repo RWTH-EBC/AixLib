@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 model DiscretizedFloorTemperatureAnalysis
   "Calculation of min, mean, and max floor surface temperature"
-  parameter Integer dis(min=1);
+  parameter Integer dis(min=1)=1;
 
   Modelica.Blocks.Math.MultiSum mulSum(final k=fill(1, mulSum.nu), nu=dis)
     "Sum up the single temperatures"

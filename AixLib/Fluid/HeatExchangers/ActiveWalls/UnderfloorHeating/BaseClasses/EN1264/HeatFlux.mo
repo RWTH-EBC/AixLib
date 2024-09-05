@@ -9,6 +9,26 @@ model HeatFlux "Upward and downward heat flux of an underfloor heating circuit a
   final parameter Modelica.Units.SI.ThermalConductivity lambda_u = lambda_E "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
   parameter Modelica.Units.SI.Temperature T_U "Temperature of room / ground under panel heating";
 
+  parameter Modelica.Units.SI.Temperature TZone_nominal=20 + 273.15 "Nominal zone temperature";
+  parameter Modelica.Units.SI.Temperature TSup_nominal
+    "Nominal supply temperature";
+  parameter Modelica.Units.SI.Temperature TRet_nominal
+    "Nominal return temperature";
+  parameter Modelica.Units.SI.Diameter dOut "Outer diameter of pipe"
+                                                                    annotation (Dialog( group=
+          "Panel Heating"));
+  parameter Modelica.Units.SI.Diameter dInn=dOut - 2*thicknessPipe
+    "Inner diameter of pipe";
+  parameter Modelica.Units.SI.Thickness thicknessPipe "Thickness of pipe wall"
+    annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.Length length "Length of pipe"
+    annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.Thickness thicknessSheathing "Thickness of pipe sheathing"
+    annotation (Dialog(group="Panel Heating"));
+  replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition sheathingMaterial
+      "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=withSheathing), choicesAllMatching=true);
+  replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition
+    pipeMaterial "Pipe Material" annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
 
   final parameter Modelica.Units.SI.HeatFlux q_max = K_H * dT_H;
   final parameter Modelica.Units.SI.HeatFlux q_U = 1 / R_U * (R_O * q_max + T_Room - T_U);

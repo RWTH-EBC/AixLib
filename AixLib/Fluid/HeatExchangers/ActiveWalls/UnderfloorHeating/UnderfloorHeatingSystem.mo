@@ -5,6 +5,7 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   extends
     AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeatingSystemParameters;
 
+import Modelica.Constants.e;
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
 
@@ -12,9 +13,6 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   parameter Integer nZones(min=1)
     "Number of zones / rooms heated with panel heating"
     annotation (Dialog(group="General"));
-  parameter Modelica.Units.SI.Power Q_Nf[nZones]
-    "Calculated Heat Load for room with panel heating"
-    annotation (Dialog(group="Room Specifications"));
   parameter Integer calculateVol = 1 annotation (Dialog(group="Panel Heating",
         descriptionLabel=true), choices(
       choice=1 "Calculate Water Volume with inner diameter",
@@ -24,6 +22,8 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
     "Nominal heat Load for zone with panel heating" annotation (Dialog(group=
           "Room Specifications"));
   parameter Modelica.Units.SI.Area A[nZones] "Floor Area" annotation(Dialog(group = "Room Specifications"));
+  parameter Integer use_vmax(min=1, max=2) "Output if v > v_max (0.5 m/s)"
+    annotation (choices(choice=1 "Warning", choice=2 "Error"));
   //# TODO Record, move to norm, rename
   parameter Modelica.Units.SI.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
   parameter Modelica.Units.SI.Temperature TSurMax[nZones]=fill(302.15,nZones)  "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
@@ -32,12 +32,24 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   parameter Boolean Ceiling[nZones] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[nZones] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
 
-  parameter Modelica.Units.SI.Temperature T_U[nZones]=293.15                                                      "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
-
+  parameter Modelica.Units.SI.Temperature T_U[nZones]=fill(293.15, nZones)  "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
+  final parameter Real K_H[nZones]=ufhRoom.K_H
+    "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
+  final parameter Real q_G[nZones]=ufhRoom.q_G
+    "needed heat flux from underfloor heating";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[nZones]=q_G ./
+      K_H
+    "Nominal temperature difference between heating medium and room for each room";
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe[nZones]=100*PipeLength
+       ./ ufhRoom.nCircuits "Pressure Difference in each pipe for every room";
+ final parameter Modelica.Units.SI.PressureDifference dp_Valve[nZones]=max(
+      dp_Pipe) .- dp_Pipe
+    "Pressure Difference set in regulating valve for pressure equalization";
   parameter Modelica.Units.SI.Distance Spacing[nZones] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
   final parameter Modelica.Units.SI.Length PipeLength[nZones] = A ./ Spacing "Pipe Length in every room";
   parameter Modelica.Units.SI.Thickness thicknessPipe[nZones] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter dOut[nZones] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut[nZones] - 2*thicknessPipe[nZones] "Inner diameter of pipe";
   parameter Modelica.Units.SI.Diameter d[nZones](min = dOut) = dOut "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
 
   final parameter Modelica.Units.SI.HeatFlux qMax_flow_nominal=max(ufhRoom.q_flow_nominal)
@@ -49,20 +61,18 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   final parameter Modelica.Units.SI.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes) "Temperature difference at flow temperature";
   final parameter Modelica.Units.SI.Temperature T_Vdes = (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) "Flow Temperature according to EN 1264";
   final parameter Modelica.Units.SI.Temperature T_Roomdes = T_Room[1] "Room temperature in room with highest heat flux";
-  final parameter Modelica.Units.SI.TemperatureDifference sigma_i[nZones] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:nZones}) "Nominal temperature spread in rooms";
+  final parameter Modelica.Units.SI.TemperatureDifference sigma_i[nZones] = cat(1, {sigma_des}, {(3 * ufhRoom.dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - ufhRoom.dT_Hi[n])  / ( 3 * ufhRoom.dT_Hi[n])) ^ (0.5) - 1)) for n in 2:nZones}) "Nominal temperature spread in rooms";
   final parameter Modelica.Units.SI.Temperature T_Return[nZones] = fill(T_Vdes,nZones)  .- sigma_i "Nominal return temperature in each room";
 
   final parameter Modelica.Units.SI.PressureDifference dpDis_nominal=if sum(
       ufhRoom.nCircuits) == 1 then 0 else
       UnderfloorHeating.BaseClasses.PressureLoss.GetPressureLossOfUFHDistributor(
-       VTot_flow_nominal/nDistributors, nHeaCirPerDis)
+       V_flow_nominal/nDistributors, nHeaCirPerDis)
     "Nominal pressure drop of control equipment";
   final parameter Integer nDistributors(min=1) = integer(ceil(sum(ufhRoom.nCircuits)
     /14)) "Number of Distributors needed in the underfloor heating system";
-  final parameter Modelica.Units.SI.VolumeFlowRate VTot_flow_nominal=
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=
       m_flow_nominal/rho_default "Nominal system volume flow rate";
-
-  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/rho_default "Nominal Volume Flow Rate in pipe";
 
   final parameter Integer nHeaCirPerDis(min=1) = integer(ceil(sum(ufhRoom.nCircuits)
     /nDistributors)) "Average number of heating circuits in distributor";
@@ -103,11 +113,11 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
     final T_U=T_U,
     final TSurMax=TSurMax,
     final TZone_nominal=T_Room,
-    each final pipeMaterial=PipeMaterial,
+    each final pipeMaterial=pipeMaterial,
     final thicknessPipe=thicknessPipe,
     final dOut=dOut,
     each final withSheathing=withSheathing,
-    each final sheathingMaterial=SheathingMaterial,
+    each final sheathingMaterial=sheathingMaterial,
     final d=d,
     each use_vmax=use_vmax,
     each TSup_nominal=T_Vdes,
@@ -190,10 +200,10 @@ equation
   if nZones > 1 then
     for x in 2:nZones loop
       for u in 1:ufhRoom.nCircuits[x] loop
-        connect(distributor.portsCirSup[(sum(CircuitNo[v] for v in 1:(x - 1)) +
+        connect(distributor.portsCirSup[(sum(ufhRoom.nCircuits[v] for v in 1:(x - 1)) +
           u)], ufhRoom[x].ports_a[u]) annotation (Line(points={{-22.6667,0},{
                 -22.6667,20},{0,20}},  color={0,127,255}));
-        connect(ufhRoom[x].ports_b[u], distributor.portsCirRet[(sum(CircuitNo[v]
+        connect(ufhRoom[x].ports_b[u], distributor.portsCirRet[(sum(ufhRoom.nCircuits[v]
           for v in 1:(x - 1)) + u)]) annotation (Line(points={{40,20},{40,20},{
                 46,20},{46,-46},{-17.3333,-46},{-17.3333,-40.6667}},  color={0,127,
                 255}));

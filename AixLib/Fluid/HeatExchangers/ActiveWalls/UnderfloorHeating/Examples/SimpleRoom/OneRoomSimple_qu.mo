@@ -16,7 +16,7 @@ model OneRoomSimple_qu "Example for underfloor heating system with two rooms for
     redeclare package Medium = MediumWater,
     nZones=1,
     dis=dis,
-    Q_Nf=-1.*{fixedHeatFlow.Q_flow},
+    Q_flow_nominal=-1.*{fixedHeatFlow.Q_flow},
     A={area},
     wallTypeFloor={
         UnderfloorHeating.BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},

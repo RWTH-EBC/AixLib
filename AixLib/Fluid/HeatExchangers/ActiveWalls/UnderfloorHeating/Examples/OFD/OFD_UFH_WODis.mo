@@ -68,7 +68,7 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
     redeclare package Medium = AixLib.Media.Water,
     nZones=10,
     dis=dis,
-    Q_Nf={638,1078,502,341,783,766,506,196,443,658},
+    Q_flow_nominal={638,1078,502,341,783,766,506,196,443,658},
     A={
     wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_width,
     wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_width,
