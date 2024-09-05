@@ -1,0 +1,22 @@
+clear
+
+convertClear();
+
+// Changes from IBPSA
+
+// Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1885
+convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield",
+                {"dynFil"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube",
+                {"dynFil"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.TwoUTube",
+                {"dynFil"}, fill("",0), true);
+
+
+// Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1614
+convertModifiers("AixLib.Fluid.Storage.ExpansionVessel", {"p"}, fill("",0), true);
+
+
+// Moved models due to deletion in IBPSA
+convertClass("AixLib.Airflow.Multizone.BaseClasses", "AixLib.Obsolete.Year2024.Airflow.Multizone.BaseClasses.interpolate");
+convertClass("AixLib.Fluid.Movers.SpeedControlled_Nrpm", "AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm");

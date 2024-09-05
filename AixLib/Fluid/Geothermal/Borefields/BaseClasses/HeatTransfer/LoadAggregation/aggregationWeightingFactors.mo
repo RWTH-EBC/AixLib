@@ -67,19 +67,19 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
- <p>
- This function uses spline interpolation to construct the weighting factors
- vector <code>kappa</code> using the aggregation times <code>nu</code> and the
- temperature step reponse (a time-series in the form of a matrix) of the
- borefield as an input.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function uses spline interpolation to construct the weighting factors
+vector <code>kappa</code> using the aggregation times <code>nu</code> and the
+temperature step reponse (a time-series in the form of a matrix) of the
+borefield as an input.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end aggregationWeightingFactors;

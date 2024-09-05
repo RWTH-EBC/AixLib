@@ -17,8 +17,7 @@ partial model PartialRoomFourWalls
   parameter Modelica.Units.SI.Area Win_Area=12 "Window area " annotation (
       Dialog(
       group="Windows",
-      descriptionLabel=true,
-      enable=withWindow1));
+      descriptionLabel=true));
 
   parameter Boolean use_shortWaveRadIn=true
     "Use bus connector for incoming shortwave radiation"
@@ -31,13 +30,13 @@ partial model PartialRoomFourWalls
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf if use_shortWaveRadIn
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
     annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
           use_shortWaveRadIn and not use_dynamicShortWaveRadMethod));
 
   replaceable parameter
-    ThermalZones.HighOrder.Components.Types.PartialCoeffTable coeffTableSolDistrFractions if use_shortWaveRadIn
+    ThermalZones.HighOrder.Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
     constrainedby
     AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
     "Record holding the values to reproduce the tables"

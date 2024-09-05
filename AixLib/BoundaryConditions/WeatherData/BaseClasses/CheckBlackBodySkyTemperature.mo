@@ -29,31 +29,31 @@ equation
   annotation (
     defaultComponentName="cheSkyBlaBodTem",
     Documentation(info="<html>
- <p>
- This component checks the value of the black-body sky temperature.
- If the temperature is outside <code>TMin</code> and <code>TMax</code>,
- the simulation will stop with an error.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 14, 2020, by Michael Wetter:<br/>
- Added <code>noEvent</code> and removed output connector.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1340\">#1340</a>.
- </li>
- <li>
- January 31, 2020 by Filip Jorissen:<br/>
- Improved error message.
- </li>
- <li>
- January 5, 2015 by Michael Wetter:<br/>
- First implementation, based on
- <a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature\">
- AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature</a>.
- This was implemented to get the corrected documentation string in the weather bus connector.
- </li>
- </ul>
- </html>"),
+<p>
+This component checks the value of the black-body sky temperature.
+If the temperature is outside <code>TMin</code> and <code>TMax</code>,
+the simulation will stop with an error.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 14, 2020, by Michael Wetter:<br/>
+Added <code>noEvent</code> and removed output connector.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1340\">#1340</a>.
+</li>
+<li>
+January 31, 2020 by Filip Jorissen:<br/>
+Improved error message.
+</li>
+<li>
+January 5, 2015 by Michael Wetter:<br/>
+First implementation, based on
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature\">
+AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature</a>.
+This was implemented to get the corrected documentation string in the weather bus connector.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Ellipse(
@@ -77,6 +77,6 @@ equation
           lineThickness=0.5),
         Line(
           points={{-12,40},{-12,-45}},
-          thickness=0.5)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckBlackBodySkyTemperature;

@@ -82,38 +82,38 @@ equation
       StopTime=7200,
       Tolerance=1e-06),
     Documentation(info="<html>
- <p>
- This model consists of two doors with the same geometry.
- For <i>t &le; 1000</i> seconds, the door <code>dooOpeClo</code>
- is closed, and afterwards it is open. The door
- <code>dooOpe</code> is always open.
- Heat is added to the volume <code>volB</code>, which causes
- a density difference between <code>volA</code> and <code>volB</code>.
- This density difference induces a bi-directional airflow through both doors.
- Both doors have exactly the same bi-directional airflow rates.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 26, 2021 by Michael Wetter:<br/>
- Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
- </li>
- <li>
- December 22, 2014 by Michael Wetter:<br/>
- Removed <code>Modelica.Fluid.System</code>
- to address issue
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
- </li>
- <li>
- October 8, 2013, by Michael Wetter:<br/>
- Removed parameter <code>show_V_flow</code>.
- </li>
- <li>
- November 10, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model consists of two doors with the same geometry.
+For <i>t &le; 1000</i> seconds, the door <code>dooOpeClo</code>
+is closed, and afterwards it is open. The door
+<code>dooOpe</code> is always open.
+Heat is added to the volume <code>volB</code>, which causes
+a density difference between <code>volA</code> and <code>volB</code>.
+This density difference induces a bi-directional airflow through both doors.
+Both doors have exactly the same bi-directional airflow rates.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 26, 2021 by Michael Wetter:<br/>
+Updated comments for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+</li>
+<li>
+December 22, 2014 by Michael Wetter:<br/>
+Removed <code>Modelica.Fluid.System</code>
+to address issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+</li>
+<li>
+October 8, 2013, by Michael Wetter:<br/>
+Removed parameter <code>show_V_flow</code>.
+</li>
+<li>
+November 10, 2011, by Michael Wetter:<br/>
+Added documentation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end OneOpenDoor;

@@ -21,18 +21,18 @@ model DecemberToJanuary
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/Validation/DecemberToJanuary.mos"
         "Simulate and plot"),
       Documentation(info="<html>
- <p>
- This is a validation case for a data file that has a few incomplete days in December and goes into
- a few days into January. The data does not start and does not end at midnight.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- October 26, 2017, by Michael Wetter:<br/>
- First implementation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is a validation case for a data file that has a few incomplete days in December and goes into
+a few days into January. The data does not start and does not end at midnight.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+October 26, 2017, by Michael Wetter:<br/>
+First implementation for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end DecemberToJanuary;

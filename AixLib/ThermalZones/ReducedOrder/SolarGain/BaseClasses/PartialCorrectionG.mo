@@ -46,19 +46,19 @@ partial model PartialCorrectionG
   textColor={0,0,0},
   textString="%name")}),
   Documentation(info="<html>
-   <p>Partial model for correction factors for transmitted solar radiation
-   through a transparent element.</p>
-   </html>",revisions="<html>
-   <ul>
-   <li>
-   February 27, 2016, by Michael Wetter:<br/>
-   Moved input above outputs.
-   </li>
-   <li>
-   February 24, 2014, by Reza Tavakoli:<br/>
-   Implemented.
-   </li>
-   </ul>
-   </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+  <p>Partial model for correction factors for transmitted solar radiation
+  through a transparent element.</p>
+  </html>", revisions="<html>
+  <ul>
+  <li>
+  February 27, 2016, by Michael Wetter:<br/>
+  Moved input above outputs.
+  </li>
+  <li>
+  February 24, 2014, by Reza Tavakoli:<br/>
+  Implemented.
+  </li>
+  </ul>
+  </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialCorrectionG;

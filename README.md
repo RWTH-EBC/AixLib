@@ -1,11 +1,11 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
-[![OM](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib/development/badge_file/om_readyness_badge.svg)
+[![OM](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)
 
 # <img src="./AixLib/Resources/Images/Icon_Modelica_AixLib_background.png" width="40"> AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  
 The library contains models of HVAC systems as well as high and reduced order building models.  
-It is being developed at [RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate (EBC)](http://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1) in Aachen, Germany.
+It is being developed at [RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate (EBC)](https://www.ebc.eonerc.rwth-aachen.de/) in Aachen, Germany.
 
 As the library is developed at RWTH Aachen University's EBC, the library's name **AixLib** is derived from the city's French name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. With the name **AixLib** we follow this local tradition.
 

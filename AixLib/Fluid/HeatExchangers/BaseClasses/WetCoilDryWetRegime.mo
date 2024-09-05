@@ -163,12 +163,12 @@ model WetCoilDryWetRegime
   Real dryFra(final unit="1", min=0, max=1)
     "Dry fraction, 0.3 means condensation occurs at 30% heat exchange length from air inlet";
 protected
-  Modelica.Units.SI.MassFlowRate mAirNonZer_flow(min=Modelica.Constants.eps)=
+  Modelica.Units.SI.MassFlowRate mAirNonZer_flow(min=Modelica.Constants.eps) =
     AixLib.Utilities.Math.Functions.smoothMax(
     x1=mAir_flow,
     x2=1E-3*mAir_flow_nominal,
     deltaX=0.25E-3*mAir_flow_nominal) "Mass flow rate of air";
-  Modelica.Units.SI.MassFlowRate mWatNonZer_flow(min=Modelica.Constants.eps)=
+  Modelica.Units.SI.MassFlowRate mWatNonZer_flow(min=Modelica.Constants.eps) =
     AixLib.Utilities.Math.Functions.smoothMax(
     x1=mWat_flow,
     x2=1E-3*mWat_flow_nominal,
@@ -231,7 +231,7 @@ equation
           textStyle={TextStyle.Bold},
           pattern=LinePattern.None,
           textString="WET",
-          lineColor={0,0,0}),
+          textColor={0,0,0}),
         Line(
           points={{20,0},{120,0}},
           color={28,108,200},
@@ -375,47 +375,47 @@ equation
           textString="QSen")}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-120},{140,120}})),
     Documentation(revisions="<html>
- <ul>
- <li>
- Jan 21, 2021, by Donghun Kim:<br/>First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This model implements the switching algorithm for the dry and wet regime.
- </p>
- <p>
- The switching criteria for (counter-flow) cooling coil modes are as follows.</p>
- <p>
- R1: If the coil surface temperature at the air inlet is lower than the dew-point
- temperature at the inlet to the coil, then the cooling coil surface is fully-wet.</p>
- <p>
- R2: If the surface temperature at the air outlet section is higher than
- the dew-point temperature of the air at the inlet, then the cooling coil surface is fully-dry.</p>
- <p>
- At each point of a simulation time step, the fuzzy-modeling approach determines
- the weights for R1 and R2 respectively (namely <i>&mu;<sub>FW</sub></i> and <i>&mu;<sub>FD</sub></i>)
- from the dew-point and coil surface temperatures.</p>
- <p>
- It calculates total and sensible heat transfer rates according to the weights as follows.
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- Q&#775;<sub>tot</sub>=&mu;<sub>FD</sub> Q&#775;<sub>tot,FD</sub>+&mu;<sub>FW</sub> Q<sub>tot,FW</sub>
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- Q&#775;<sub>sen</sub>=&mu;<sub>FD</sub> Q&#775;<sub>sen,FD</sub>+&mu;<sub>FW</sub> Q<sub>sen,FW</sub>
- </p>
- <p>
- The fuzzy-modeling ensures <i>&mu;<sub>FW</sub> + &mu;<sub>FD</sub> = 1</i>,
- <i>&mu;<sub>FW</sub> &gt;=0</i> and <i>&mu;<sub>FD</sub> &gt;=0</i>, which means the fuzzy
- model outcomes of <i>Q&#775;<sub>sen</sub></i> and <i>Q&#775;<sub>tot</sub></i> are always convex combinations of heat transfer
- rates for fully-dry and fully-wet modes and therefore are always bounded by them.
- </p>
- <p>
- The modeling approach also results in <i>n</i>-th order differentiable model
- depending on the selection of the underlying membership functions. This cooling
- coil model is once continuously differentiable at the mode switches.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+Jan 21, 2021, by Donghun Kim:<br/>First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This model implements the switching algorithm for the dry and wet regime.
+</p>
+<p>
+The switching criteria for (counter-flow) cooling coil modes are as follows.</p>
+<p>
+R1: If the coil surface temperature at the air inlet is lower than the dew-point
+temperature at the inlet to the coil, then the cooling coil surface is fully-wet.</p>
+<p>
+R2: If the surface temperature at the air outlet section is higher than
+the dew-point temperature of the air at the inlet, then the cooling coil surface is fully-dry.</p>
+<p>
+At each point of a simulation time step, the fuzzy-modeling approach determines
+the weights for R1 and R2 respectively (namely <i>&mu;<sub>FW</sub></i> and <i>&mu;<sub>FD</sub></i>)
+from the dew-point and coil surface temperatures.</p>
+<p>
+It calculates total and sensible heat transfer rates according to the weights as follows.
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+Q&#775;<sub>tot</sub>=&mu;<sub>FD</sub> Q&#775;<sub>tot,FD</sub>+&mu;<sub>FW</sub> Q<sub>tot,FW</sub>
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+Q&#775;<sub>sen</sub>=&mu;<sub>FD</sub> Q&#775;<sub>sen,FD</sub>+&mu;<sub>FW</sub> Q<sub>sen,FW</sub>
+</p>
+<p>
+The fuzzy-modeling ensures <i>&mu;<sub>FW</sub> + &mu;<sub>FD</sub> = 1</i>,
+<i>&mu;<sub>FW</sub> &gt;=0</i> and <i>&mu;<sub>FD</sub> &gt;=0</i>, which means the fuzzy
+model outcomes of <i>Q&#775;<sub>sen</sub></i> and <i>Q&#775;<sub>tot</sub></i> are always convex combinations of heat transfer
+rates for fully-dry and fully-wet modes and therefore are always bounded by them.
+</p>
+<p>
+The modeling approach also results in <i>n</i>-th order differentiable model
+depending on the selection of the underlying membership functions. This cooling
+coil model is once continuously differentiable at the mode switches.
+</p>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilDryWetRegime;

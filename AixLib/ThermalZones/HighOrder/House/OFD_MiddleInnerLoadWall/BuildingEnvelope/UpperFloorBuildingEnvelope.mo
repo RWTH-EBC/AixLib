@@ -418,6 +418,8 @@ model UpperFloorBuildingEnvelope
       Medium = Medium) "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{94,-94},{114,-74}}), iconTransformation(extent={
             {94,-94},{108,-80}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-114,90},{-94,110}})));
 equation
   connect(Bedroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-53.1,
           78.32},{-52,78.32},{-52,84},{-40,84},{-40,82},{-12,82},{-12,80},{54,80},

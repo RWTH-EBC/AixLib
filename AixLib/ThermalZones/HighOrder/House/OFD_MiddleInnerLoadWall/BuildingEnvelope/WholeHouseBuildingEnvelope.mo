@@ -284,6 +284,8 @@ model WholeHouseBuildingEnvelope
                                "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{90,-98},{110,-78}}), iconTransformation(extent={
             {96,-92},{110,-78}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-112,90},{-92,110}})));
 equation
   connect(upperFloor_Building.thermOutside, thermOutside) annotation (Line(
         points={{-26,33.54},{-74,33.54},{-74,100},{-100,100}}, color={191,0,0}));

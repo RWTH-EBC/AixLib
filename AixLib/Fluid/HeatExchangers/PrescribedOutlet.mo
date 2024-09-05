@@ -140,118 +140,118 @@ equation
           textString="Q_flow")}),
 defaultComponentName="preOut",
 Documentation(info="<html>
- <p>
- Model that allows specifying the temperature and mass fraction of the fluid
- that leaves the model from <code>port_b</code>.
- </p>
- <p>
- This model forces the outlet temperature at <code>port_b</code> to be equal to the temperature
- of the input signal <code>TSet</code>, subject to optional limits on the
- heating or cooling capacity <code>QMax_flow &ge; 0</code> and <code>QMin_flow &le; 0</code>.
- Similarly than for the temperature,
- this model also forces the outlet water mass fraction at <code>port_b</code> to be
- no lower than the
- input signal <code>X_wSet</code>, subject to optional limits on the
- maximum water vapor mass flow rate that is added, as
- described by the parameter <code>mWatMax_flow</code>.
- By default, the model has unlimited capacity, but control of temperature
- and humidity can be subject to capacity limits, or be disabled.
- </p>
- <p>
- The output signal <code>Q_flow</code> is the heat added (for heating) or subtracted (for cooling)
- to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
- If the flow is reversed, then <code>Q_flow=0</code>.
- </p>
- <p>
- The outlet conditions at <code>port_a</code> are not affected by this model.
- </p>
- <p>
- If the parameter <code>energyDynamics</code> is not equal to
- <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
- the component models the dynamic response using a first order differential equation.
- The time constant of the component is equal to the parameter <code>tau</code>.
- This time constant is adjusted based on the mass flow rate using
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- &tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
- </p>
- <p>
- where
- <i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
- <i>m&#775;</i> and
- <i>&tau;</i> is the time constant at the nominal mass flow rate
- <i>m&#775;<sub>nom</sub></i>.
- This type of dynamics is equal to the dynamics that a completely mixed
- control volume would have.
- </p>
- <p>
- Optionally, this model can have a flow resistance.
- If no flow resistance is requested, set <code>dp_nominal=0</code>.
- </p>
- <p>
- For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
- this with the nominal heating or cooling power, use
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
- AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>
- 
- </p>
- <h4>Limitations</h4>
- <p>
- This model only adds or removes heat or water vapor for the flow from
- <code>port_a</code> to <code>port_b</code>.
- The enthalpy of the reverse flow is not affected by this model.
- </p>
- <p>
- If this model is used to cool air below the dew point temperature, the water mass fraction
- will not change.
- </p>
- <p>
- Note that for <code>use_TSet = false</code>, the enthalpy of the leaving fluid
- will not be changed, even if moisture is added. The enthalpy added (or removed)
- by the change in humidity is neglected. To properly account for change in enthalpy
- due to humidification, use instead
- <a href=\"AixLib.Fluid.Humidifiers.SprayAirWasher_X\">
- AixLib.Fluid.Humidifiers.SprayAirWasher_X</a>.
- </p>
- <h4>Validation</h4>
- <p>
- The model has been validated against the analytical solution in
- the examples
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
- AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>
- and
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic\">
- AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic</a>.
- </p>
- </html>",
+<p>
+Model that allows specifying the temperature and mass fraction of the fluid
+that leaves the model from <code>port_b</code>.
+</p>
+<p>
+This model forces the outlet temperature at <code>port_b</code> to be equal to the temperature
+of the input signal <code>TSet</code>, subject to optional limits on the
+heating or cooling capacity <code>QMax_flow &ge; 0</code> and <code>QMin_flow &le; 0</code>.
+Similarly than for the temperature,
+this model also forces the outlet water mass fraction at <code>port_b</code> to be
+no lower than the
+input signal <code>X_wSet</code>, subject to optional limits on the
+maximum water vapor mass flow rate that is added, as
+described by the parameter <code>mWatMax_flow</code>.
+By default, the model has unlimited capacity, but control of temperature
+and humidity can be subject to capacity limits, or be disabled.
+</p>
+<p>
+The output signal <code>Q_flow</code> is the heat added (for heating) or subtracted (for cooling)
+to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
+If the flow is reversed, then <code>Q_flow=0</code>.
+</p>
+<p>
+The outlet conditions at <code>port_a</code> are not affected by this model.
+</p>
+<p>
+If the parameter <code>energyDynamics</code> is not equal to
+<code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+the component models the dynamic response using a first order differential equation.
+The time constant of the component is equal to the parameter <code>tau</code>.
+This time constant is adjusted based on the mass flow rate using
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+&tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
+</p>
+<p>
+where
+<i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
+<i>m&#775;</i> and
+<i>&tau;</i> is the time constant at the nominal mass flow rate
+<i>m&#775;<sub>nom</sub></i>.
+This type of dynamics is equal to the dynamics that a completely mixed
+control volume would have.
+</p>
+<p>
+Optionally, this model can have a flow resistance.
+If no flow resistance is requested, set <code>dp_nominal=0</code>.
+</p>
+<p>
+For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
+this with the nominal heating or cooling power, use
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>
+
+</p>
+<h4>Limitations</h4>
+<p>
+This model only adds or removes heat or water vapor for the flow from
+<code>port_a</code> to <code>port_b</code>.
+The enthalpy of the reverse flow is not affected by this model.
+</p>
+<p>
+If this model is used to cool air below the dew point temperature, the water mass fraction
+will not change.
+</p>
+<p>
+Note that for <code>use_TSet = false</code>, the enthalpy of the leaving fluid
+will not be changed, even if moisture is added. The enthalpy added (or removed)
+by the change in humidity is neglected. To properly account for change in enthalpy
+due to humidification, use instead
+<a href=\"modelica://AixLib.Fluid.Humidifiers.SprayAirWasher_X\">
+AixLib.Fluid.Humidifiers.SprayAirWasher_X</a>.
+</p>
+<h4>Validation</h4>
+<p>
+The model has been validated against the analytical solution in
+the examples
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
+AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>
+and
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic\">
+AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic</a>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 3, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
- </li>
- <li>
- May 3, 2017, by Michael Wetter:<br/>
- Updated protected model for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
- </li>
- <li>
- December 1, 2016, by Michael Wetter:<br/>
- Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
- </li>
- <li>
- November 11, 2014, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- March 19, 2014, by Christoph Nytsch-Geusen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 3, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+</li>
+<li>
+May 3, 2017, by Michael Wetter:<br/>
+Updated protected model for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
+</li>
+<li>
+December 1, 2016, by Michael Wetter:<br/>
+Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+</li>
+<li>
+November 11, 2014, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+March 19, 2014, by Christoph Nytsch-Geusen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PrescribedOutlet;

@@ -6,8 +6,6 @@ model ExpansionVessel "Expansion vessel with fixed pressure"
    final mSenFac=1);
   parameter Modelica.Units.SI.Volume V_start(start=1)
     "Volume of liquid stored in the vessel at the start of the simulation";
-  parameter Modelica.Units.SI.Pressure p=Medium.p_default
-    "Constant pressure of the expansion vessel";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(
     redeclare package Medium = Medium) "Fluid port"
@@ -82,71 +80,77 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="exp",
 Documentation(info="<html>
- <p>
- This is a model of a pressure expansion vessel. The vessel has a constant pressure
- that is equal to the value of the parameter <code>p_start</code>.
- The model takes into account the energy and mass balance of the medium.
- It has no heat exchange with the ambient.
- </p>
- <p>
- The expansion vessel needs to be used in closed loops that contain
- water to set a reference pressure and, for liquids where the
- density is modeled as a function of temperature, to allow for
- the thermal expansion of the liquid.
- </p>
- <p>
- Note that alternatively, the model
- <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
- AixLib.Fluid.Sources.Boundary_pT</a> may be used to set
- a reference pressure. The main difference between these two models
- is that in this model, there is an energy and mass balance for the volume.
- In contrast, for
- <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
- AixLib.Fluid.Sources.Boundary_pT</a>,
- any mass flow rate that flows out of the model will be at a user-specified temperature.
- Therefore, <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
- AixLib.Fluid.Sources.Boundary_pT</a> leads to smaller systems
- of equations, which may result in faster simulation.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 29, 2014, by Michael Wetter:<br/>
- Removed undesirable annotation <code>Evaluate=true</code>.
- </li>
- <li>
- March 25, 2014 by Michael Wetter:<br/>
- Revised the model to use a constant pressure rather than a constant volume of
- water and gas. This leads to a simpler model.
- </li>
- <li>
- August 1, 2013 by Michael Wetter:<br/>
- Updated model to use new connector <code>mWat_flow</code>.
- </li>
- <li>
- February 7, 2012 by Michael Wetter:<br/>
- Revised due to changes in conservation equations in <code>AixLib.Fluid.Interfaces</code>.
- </li>
- <li>
- September 16, 2011 by Michael Wetter:<br/>
- Set <code>m(stateSelect=StateSelect.always)</code>, since
- setting the <code>stateSelect</code> attribute leads to smaller systems of equations.
- </li>
- <li>
- July 26, 2011 by Michael Wetter:<br/>
- Revised model to use new declarations from
- <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">
- AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
- </li>
- <li>
- May 25, 2011 by Michael Wetter:<br/>
- Revised model due to a change in the fluid volume model.
- </li>
- <li>
- Nov. 4, 2009 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is a model of a pressure expansion vessel. The vessel has a constant pressure
+that is equal to the value of the parameter <code>p_start</code>.
+The model takes into account the energy and mass balance of the medium.
+It has no heat exchange with the ambient.
+</p>
+<p>
+The expansion vessel needs to be used in closed loops that contain
+water to set a reference pressure and, for liquids where the
+density is modeled as a function of temperature, to allow for
+the thermal expansion of the liquid.
+</p>
+<p>
+Note that alternatively, the model
+<a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a> may be used to set
+a reference pressure. The main difference between these two models
+is that in this model, there is an energy and mass balance for the volume.
+In contrast, for
+<a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a>,
+any mass flow rate that flows out of the model will be at a user-specified temperature.
+Therefore, <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a> leads to smaller systems
+of equations, which may result in faster simulation.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 11, 2022, by Michael Wetter:<br/>
+Removed nonused parameter <code>p</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1614\">IBPSA, #1614</a>.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+March 25, 2014 by Michael Wetter:<br/>
+Revised the model to use a constant pressure rather than a constant volume of
+water and gas. This leads to a simpler model.
+</li>
+<li>
+August 1, 2013 by Michael Wetter:<br/>
+Updated model to use new connector <code>mWat_flow</code>.
+</li>
+<li>
+February 7, 2012 by Michael Wetter:<br/>
+Revised due to changes in conservation equations in <code>AixLib.Fluid.Interfaces</code>.
+</li>
+<li>
+September 16, 2011 by Michael Wetter:<br/>
+Set <code>m(stateSelect=StateSelect.always)</code>, since
+setting the <code>stateSelect</code> attribute leads to smaller systems of equations.
+</li>
+<li>
+July 26, 2011 by Michael Wetter:<br/>
+Revised model to use new declarations from
+<a href=\"modelica://AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">
+AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+</li>
+<li>
+May 25, 2011 by Michael Wetter:<br/>
+Revised model due to a change in the fluid volume model.
+</li>
+<li>
+Nov. 4, 2009 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ExpansionVessel;

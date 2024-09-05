@@ -27,20 +27,20 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/Examples/ReaderTMY3.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the TMY3 data reader.
- The instance <code>weaDat</code> obtains all weather data from the weather file,
- whereas the instance <code>weaDatInpCon</code> obtains the global horizontal and
- the diffuse horizontal solar radiation from its input connectors.
- </p>
- </html>",
+<p>
+This model tests the TMY3 data reader.
+The instance <code>weaDat</code> obtains all weather data from the weather file,
+whereas the instance <code>weaDatInpCon</code> obtains the global horizontal and
+the diffuse horizontal solar radiation from its input connectors.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- June 25, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+June 25, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ReaderTMY3;

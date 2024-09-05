@@ -11,20 +11,20 @@ equation
       smooth=Smooth.None));
   annotation (
   Documentation(info="<html>
- <p>
- This example demonstrates how to export an FMU
- that simply passes all its inputs to its outputs.
- Such an FMU could for example be used in a block diagram as a place-holder
- for another FMU that provides an actual implementation of a component.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 16, 2015 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to export an FMU
+that simply passes all its inputs to its outputs.
+Such an FMU could for example be used in a block diagram as a place-holder
+for another FMU that provides an actual implementation of a component.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 16, 2015 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/TwoPortPassThrough.mos"
         "Export FMU"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -35,6 +35,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           smooth=Smooth.None), Line(
           points={{-100,0},{100,0}},
           color={0,0,255},
-          smooth=Smooth.None)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          smooth=Smooth.None)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortPassThrough;

@@ -57,22 +57,22 @@ equation
       color={0,127,255}));
   annotation (Documentation(
         info="<html>
- <p>
- This model shows that steady state mass dynamics are correctly simulated.
- A change in pressure does not lead to an exchange and/or creation of mass.
- The mixing volume temperature is also unaffected by a pressure change.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 9, 2015 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model shows that steady state mass dynamics are correctly simulated.
+A change in pressure does not lead to an exchange and/or creation of mass.
+The mixing volume temperature is also unaffected by a pressure change.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 9, 2015 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1E-6, StopTime=1.0),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeSteadyStateMass.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeSteadyStateMass;

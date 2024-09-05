@@ -4,8 +4,8 @@ type OutputTime = enumeration(
     Terminal "Output results at terminal() time",
     Custom "Output results at custom time value")
     "Time when results are outputted" annotation (Documentation(info="<html>
- <p>
- Enumeration for when output files are written.
- </p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Enumeration for when output files are written.
+</p>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
