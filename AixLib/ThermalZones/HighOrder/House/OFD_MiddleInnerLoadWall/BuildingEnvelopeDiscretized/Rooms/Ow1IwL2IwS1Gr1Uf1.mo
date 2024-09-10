@@ -5,7 +5,6 @@ model Ow1IwL2IwS1Gr1Uf1
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(    redeclare
       AixLib.DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
                                                                           final room_V=room_length*room_width*room_height);
-parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotation (Dialog(enable = use_UFH));
   //////////room geometry
   parameter Modelica.Units.SI.Length room_length=2 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -15,6 +14,8 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.Units.SI.Height room_height=2 "height "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Area AFloor=4 "Floor Area"   annotation (Dialog(group="Dimensions"));
+
 
   // Windows and Doors
   parameter Boolean withWindow1=true "Window 1" annotation (Dialog(
@@ -155,7 +156,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
         origin={25,-59},
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling[dis](
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -173,7 +174,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.IW_hori_low_half,
     each outside=false,
-    each wall_length=room_length/dis,
+    each wall_length=room_length,
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
@@ -181,7 +182,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
         origin={-31,60},
         extent={{2,-9},{-2,9}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor[dis](
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -199,7 +200,7 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.groundPlate_upp_half,
     each outside=false,
-    each wall_length=room_length/dis,
+    each wall_length=room_length,
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
@@ -242,9 +243,9 @@ parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotat
           extent={{-109.5,-70},{-89.5,-50}})));
   AixLib.Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,50},{-89.5,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling[dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground[dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2b
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
@@ -263,22 +264,19 @@ equation
   connect(inside_wall1.port_outside, thermInsideWall1) annotation (Line(points={{23,
           64.2502},{23,76.3751},{30,76.3751},{30,90}},      color={191,0,0}));
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,
-          34.5333},{-80,34.5333},{-80,-60},{-109.5,-60}},        color={0,0,127}));
+          34.5333},{-78,34.5333},{-78,-60},{-109.5,-60}},        color={0,0,127}));
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
      Line(points={{-99.5,60},{-80,60},{-80,39.6667},{-61.5,39.6667}}, color={
           255,128,0}));
   connect(thermCeiling, thermCeiling) annotation (Line(points={{90,70},{85,70},
           {85,70},{90,70}}, color={191,0,0}));
-          for i in 1:dis loop
-  connect(ground[i], floor[i].port_outside) annotation (Line(
+  connect(ground, floor.port_outside) annotation (Line(
       points={{-6,-94},{-6,-74},{-24,-74},{-24,-62.1},{-27,-62.1}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(floor[i].thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-27,-58},{-26,-58},{-26,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
-  connect(Ceiling[i].port_outside, thermCeiling[i])
-    annotation (Line(points={{-31,62.1},{-31,70},{90,70}}, color={191,0,0}));
-  connect(Ceiling[i].thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-31,58},{-30,58},{-30,44},{50,44},{50,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
-          end for;
+  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-27,-58},{-26,-58},{-26,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
+  connect(Ceiling.port_outside, thermCeiling)    annotation (Line(points={{-31,62.1},{-31,70},{90,70}}, color={191,0,0}));
+  connect(Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-31,58},{-30,58},{-30,44},{50,44},{50,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
   connect(inside_wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{25,-54},{24,-54},{24,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
   connect(inside_wall2b.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,-17},{56,-17},{56,-16},{50,-16},{50,-48},{-7,-48},{-7,-8}},              color={191,0,0}));
   connect(inside_wall2a.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,23},{56,23},{56,22},{50,22},{50,-48},{-7,-48},{-7,-8}},              color={191,0,0}));

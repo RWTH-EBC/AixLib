@@ -69,17 +69,16 @@ model OFD_UFH
     nZones=10,
     dis=dis,
     Q_flow_nominal={638,1078,502,341,783,766,506,196,443,658},
-    A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.floor[1].Wall.A
-        *dis,wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.upperFloor_Building.Children1.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.upperFloor_Building.Bath.floor[
-        1].Wall.A*dis,wholeHouseBuildingEnvelope.upperFloor_Building.Children2.floor[
-        1].Wall.A*dis},
+    A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.AFloor,
+       wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.AFloor,
+       wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.AFloor,
+       wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.AFloor,
+       wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.AFloor,
+       wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.AFloor,
+       wholeHouseBuildingEnvelope.upperFloor_Building.Children1.AFloor,
+       wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.AFloor,
+       wholeHouseBuildingEnvelope.upperFloor_Building.Bath.AFloor,
+       wholeHouseBuildingEnvelope.upperFloor_Building.Children2.AFloor},
     calculateVol=2,
     wallTypeFloor=fill(
         BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(), 10),
@@ -90,12 +89,11 @@ model OFD_UFH
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[
-        1].Wall.wallType},
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.wallType},
     T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15},
     Spacing=fill(0.2, 10),
@@ -114,8 +112,7 @@ model OFD_UFH
   AixLib.Fluid.Sources.Boundary_pT boundary(redeclare package Medium =
         AixLib.Media.Water, nPorts=1)
     annotation (Placement(transformation(extent={{-12,-64},{-24,-52}})));
-  Modelica.Blocks.Sources.Constant const[sum(underfloorHeatingSystem.CircuitNo)](each k=
-        1)
+  Modelica.Blocks.Sources.Constant const[sum(underfloorHeatingSystem.ufhRoom.nCircuits)](each k=1)
           annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
@@ -149,7 +146,7 @@ equation
       Line(points={{-49,46},{-38,46},{-38,37.6},{-16.8,37.6}},    color={0,0,
           127}));
   connect(prescribedAmbTemperature.port, wholeHouseBuildingEnvelope.thermOutside)
-    annotation (Line(points={{-28,64},{-14,64},{-14,45.44}},    color={191,0,0}));
+    annotation (Line(points={{-28,64},{-14.56,64},{-14.56,46}}, color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
@@ -188,8 +185,8 @@ equation
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
         points={{-44,-59.7778},{-44,-58},{-24,-58}},
                                                 color={0,127,255}));
-  connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-79.4,
-          -36},{-63.68,-36},{-63.68,-51.0667}},        color={0,0,127}));
+  connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{-79.4,
+          -36},{-70.4,-36},{-70.4,-55.1111}},          color={0,0,127}));
           for i in 1:dis loop
   connect(underfloorHeatingSystem.heatFloor[i], wholeHouseBuildingEnvelope.groFloDown[3*dis+i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},

@@ -123,7 +123,7 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     "Maximum floor temperature"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
 
-      parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*PipeLength
+      parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*length
     "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
       parameter Modelica.Units.SI.PressureDifference dp_Valve=0
     "Pressure Difference set in regulating valve for pressure equalization in heating system"

@@ -117,7 +117,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    dis=dis,
     final U_door_OD1=UValOutDoors,
     final eps_door_OD1=epsOutDoors,
     room_lengthb=length2,
@@ -163,7 +162,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    dis=dis,
     room_length=length1,
     room_width=room_width,
     room_height=room_height,
@@ -207,7 +205,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    dis=dis,
     room_length=length4,
     room_width=room_width,
     room_height=room_height,
@@ -253,7 +250,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    dis=dis,
     room_length=length3 + length4 + thickness_IWsimple,
     room_width=room_width,
     room_height=room_height,
@@ -304,7 +300,6 @@ model GroundFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Corridor,
-    dis=dis,
     room_length=length2 + length3 + thickness_IWsimple,
     room_width=room_width,
     room_height=room_height,
@@ -371,6 +366,8 @@ model GroundFloorBuildingEnvelope
   AixLib.Utilities.Interfaces.ConvRadComb portConvRadRooms[5]
     "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-114,90},{-94,110}})));
 equation
   for i in 1:dis loop
   connect(Livingroom.thermCeiling[i], thermCeiling_Livingroom[i]) annotation (Line(
@@ -432,17 +429,17 @@ equation
   connect(Hobby.WindSpeedPort, WindSpeedPort) annotation (Line(points={{83.905,
           42.4},{90,42.4},{90,-92},{-90,-92},{-90,27},{-115,27}}, color={0,0,
           127}));
-  connect(Livingroom.thermOutside, thermOutside) annotation (Line(points={{-84,75.36},{-90,75.36},{-90,100},{-100,100}},
-                                                color={191,0,0}));
-  connect(Kitchen.thermOutside, thermOutside) annotation (Line(points={{-84,-83.36},{-90,-83.36},{-90,100},{-100,100}},
-                                           color={191,0,0}));
-  connect(WC_Storage.thermOutside, thermOutside) annotation (Line(points={{82,-83.52},{82,-92},{-90,-92},{-90,100},{-100,100}},
-                                                           color={191,0,0}));
-  connect(Corridor.thermOutside, thermOutside) annotation (Line(points={{82,9.62},{86,9.62},{86,8},{90,8},{90,-92},{-90,-92},{-90,100},{-100,100}},
-                                                                         color=
+  connect(Livingroom.thermOutside, thermOutside) annotation (Line(points={{-84,76},
+          {-90,76},{-90,100},{-104,100}},       color={191,0,0}));
+  connect(Kitchen.thermOutside, thermOutside) annotation (Line(points={{-84,-84},
+          {-90,-84},{-90,100},{-104,100}}, color={191,0,0}));
+  connect(WC_Storage.thermOutside, thermOutside) annotation (Line(points={{82,-84},
+          {82,-92},{-90,-92},{-90,100},{-104,100}},        color={191,0,0}));
+  connect(Corridor.thermOutside, thermOutside) annotation (Line(points={{82,10},
+          {86,10},{86,8},{90,8},{90,-92},{-90,-92},{-90,100},{-104,100}},color=
           {191,0,0}));
-  connect(Hobby.thermOutside, thermOutside) annotation (Line(points={{84,75.52},{90,75.52},{90,86},{-90,86},{-90,100},{-100,100}},
-                                                          color={191,0,0}));
+  connect(Hobby.thermOutside, thermOutside) annotation (Line(points={{84,76},{90,
+          76},{90,86},{-90,86},{-90,100},{-104,100}},     color={191,0,0}));
   connect(Livingroom.thermInsideWall1a, Hobby.thermInsideWall1) annotation (
       Line(points={{-42.2,53.6},{-32,53.6},{-32,86},{36,86},{36,54.4},{47.9,54.4}},
                   color={191,0,0}));

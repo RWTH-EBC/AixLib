@@ -149,6 +149,8 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   BaseClasses.EN1264.HeatFlux EN_1264(
     lambda_E=lambda_E,
     R_lambdaB0=R_lambdaB,
+    wallTypeFloor=wallTypeFloor,
+    wallTypeCeiling=wallTypeCeiling,
     R_lambdaIns=R_lambdaIns,
     alpha_Ceiling=alpha_Ceiling,
     T_U=T_U,

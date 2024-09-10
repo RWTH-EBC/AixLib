@@ -7,7 +7,6 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final room_V=room_length*room_width_long*
       room_height_long - room_length*(room_width_long - room_width_short)*(
       room_height_long - room_height_short)*0.5);
-  parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotation (Dialog(enable = use_UFH));
 
   //////////room geometry
   parameter Modelica.Units.SI.Length room_length=2 "length "
@@ -27,6 +26,9 @@ model Ow1IwL2IwS1Lf1At1Ro1
 
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+
+  parameter Modelica.Units.SI.Area AFloor=4 "Floor Area"   annotation (Dialog(group="Dimensions"));
+
 
   // Windows and Doors
   parameter Boolean withWindow3=true "Window 3 " annotation (Dialog(
@@ -168,7 +170,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor[dis](
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -186,7 +188,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.IW_hori_upp_half,
     each outside=false,
-    each wall_length=room_length/dis,
+    each wall_length=room_length,
     each wall_height=room_width_long,
     each withWindow=false,
     each withDoor=false,
@@ -258,7 +260,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,40},{100,60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor[dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}}),
         iconTransformation(extent={{-16,-104},{4,-84}})));
   AixLib.Utilities.Interfaces.SolarRad_in SolarRadiationPort_Roof annotation (
@@ -297,14 +299,12 @@ equation
   connect(thermOutside, outside_wall1.port_outside) annotation (Line(points={{-100,100},{-78,100},{-78,17},{-60.25,17}}, color={191,0,0}));
   connect(roof.port_outside, thermOutside) annotation (Line(points={{58,62.15},
           {58,76},{-62,76},{-62,100},{-100,100}},                                                                      color={191,0,0}));
-          for i in 1:dis loop
-  connect(thermFloor[i], floor[i].port_outside) annotation (Line(
+  connect(thermFloor, floor.port_outside) annotation (Line(
       points={{-6,-94},{-8,-94},{-8,-66},{-22,-66},{-22,-62.1},{-24,-62.1}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(floor[i].thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-24,-58},
-            {-24,-46},{-7,-46},{-7,-8}},                                                                                                            color={191,0,0}));
-          end for;
+  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-24,-58},
+          {-24,-46},{-7,-46},{-7,-8}},                                                                                                              color={191,0,0}));
   connect(inside_wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{20,-56},{20,-46},{-7,-46},{-7,-8}},              color={191,0,0}));
   connect(inside_wall2b.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,-20},
           {48,-20},{48,-46},{-7,-46},{-7,-8}},                                                                                                                     color={191,0,0}));

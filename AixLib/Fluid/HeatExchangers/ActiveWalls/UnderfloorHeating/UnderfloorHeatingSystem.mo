@@ -10,6 +10,7 @@ import Modelica.Constants.e;
     "Nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
 
 
+
   parameter Integer nZones(min=1)
     "Number of zones / rooms heated with panel heating"
     annotation (Dialog(group="General"));
@@ -40,13 +41,13 @@ import Modelica.Constants.e;
   final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[nZones]=q_G ./
       K_H
     "Nominal temperature difference between heating medium and room for each room";
-  parameter Modelica.Units.SI.PressureDifference dp_Pipe[nZones]=100*PipeLength
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe[nZones]=100*length
        ./ ufhRoom.nCircuits "Pressure Difference in each pipe for every room";
  final parameter Modelica.Units.SI.PressureDifference dp_Valve[nZones]=max(
       dp_Pipe) .- dp_Pipe
     "Pressure Difference set in regulating valve for pressure equalization";
   parameter Modelica.Units.SI.Distance Spacing[nZones] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
-  final parameter Modelica.Units.SI.Length PipeLength[nZones] = A ./ Spacing "Pipe Length in every room";
+  final parameter Modelica.Units.SI.Length length[nZones] = A ./ Spacing "Pipe Length in every room";
   parameter Modelica.Units.SI.Thickness thicknessPipe[nZones] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter dOut[nZones] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut[nZones] - 2*thicknessPipe[nZones] "Inner diameter of pipe";
@@ -61,7 +62,7 @@ import Modelica.Constants.e;
   final parameter Modelica.Units.SI.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes) "Temperature difference at flow temperature";
   final parameter Modelica.Units.SI.Temperature T_Vdes = (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) "Flow Temperature according to EN 1264";
   final parameter Modelica.Units.SI.Temperature T_Roomdes = T_Room[1] "Room temperature in room with highest heat flux";
-  final parameter Modelica.Units.SI.TemperatureDifference sigma_i[nZones] = cat(1, {sigma_des}, {(3 * ufhRoom.dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - ufhRoom.dT_Hi[n])  / ( 3 * ufhRoom.dT_Hi[n])) ^ (0.5) - 1)) for n in 2:nZones}) "Nominal temperature spread in rooms";
+  final parameter Modelica.Units.SI.TemperatureDifference sigma_i[nZones] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:nZones}) "Nominal temperature spread in rooms";
   final parameter Modelica.Units.SI.Temperature T_Return[nZones] = fill(T_Vdes,nZones)  .- sigma_i "Nominal return temperature in each room";
 
   final parameter Modelica.Units.SI.PressureDifference dpDis_nominal=if sum(

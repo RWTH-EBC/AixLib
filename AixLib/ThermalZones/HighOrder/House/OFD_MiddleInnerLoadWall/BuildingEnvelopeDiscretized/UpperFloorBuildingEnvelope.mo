@@ -113,6 +113,8 @@ model UpperFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children2[dis]
     annotation (Placement(transformation(extent={{60,-120},{80,-100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-114,90},{-94,110}})));
   Rooms.Ow2IwL2IwS1Lf1At1Ro1 Bedroom(
     final denAir=denAir,
     final cAir=cAir,
@@ -132,7 +134,6 @@ model UpperFloorBuildingEnvelope
     final e=e,
     final eps=eps,
     final solar_absorptance_OW=solar_absorptance_OW,
-    dis=dis,
     withWindow2=true,
     room_length=length5 + length6 + thickness_IWsimple,
     final eps_door_OD2=epsOutDoors,
@@ -179,7 +180,6 @@ model UpperFloorBuildingEnvelope
     final e=e,
     final eps=eps,
     final solar_absorptance_OW=solar_absorptance_OW,
-    dis=dis,
     withWindow2=true,
     room_length=length5,
     room_width_long=room_width_long,
@@ -225,7 +225,6 @@ model UpperFloorBuildingEnvelope
     final e=e,
     final eps=eps,
     final solar_absorptance_OW=solar_absorptance_OW,
-    dis=dis,
     room_length=length8,
     room_width_long=room_width_long,
     room_width_short=room_width_short,
@@ -272,7 +271,6 @@ model UpperFloorBuildingEnvelope
     final e=e,
     final eps=eps,
     final solar_absorptance_OW=solar_absorptance_OW,
-    dis=dis,
     withWindow2=true,
     room_length=length7 + length8 + thickness_IWsimple,
     room_width_long=room_width_long,
@@ -324,7 +322,6 @@ model UpperFloorBuildingEnvelope
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Corridor,
     final solar_absorptance_OW=solar_absorptance_OW,
-    dis=dis,
     room_length=length6 + length7 + thickness_IWsimple,
     room_lengthb=length7,
     room_width_long=room_width_long,
@@ -439,17 +436,17 @@ equation
   connect(Children1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{81.905,
           42.4},{90,42.4},{90,-92},{-90,-92},{-90,33},{-133,33}},        color=
           {0,0,127}));
-  connect(Bedroom.thermOutside, thermOutside) annotation (Line(points={{-82,77.36},{-90,77.36},{-90,100},{-100,100}},
-                                                color={191,0,0}));
-  connect(Children2.thermOutside, thermOutside) annotation (Line(points={{-84,-83.36},{-90,-83.36},{-90,100},{-100,100}},
-                                           color={191,0,0}));
-  connect(Bath.thermOutside, thermOutside) annotation (Line(points={{84,-83.52},{84,-92},{-90,-92},{-90,100},{-100,100}},
-                                                    color={191,0,0}));
-  connect(Corridor.thermOutside, thermOutside) annotation (Line(points={{82,9.62},{86,9.62},{86,8},{90,8},{90,-92},{-90,-92},{-90,100},{-100,100}},
-                                                                         color=
+  connect(Bedroom.thermOutside, thermOutside) annotation (Line(points={{-82,78},
+          {-90,78},{-90,100},{-104,100}},       color={191,0,0}));
+  connect(Children2.thermOutside, thermOutside) annotation (Line(points={{-84,-84},
+          {-90,-84},{-90,100},{-104,100}}, color={191,0,0}));
+  connect(Bath.thermOutside, thermOutside) annotation (Line(points={{84,-84},{84,
+          -92},{-90,-92},{-90,100},{-104,100}},     color={191,0,0}));
+  connect(Corridor.thermOutside, thermOutside) annotation (Line(points={{82,10},
+          {86,10},{86,8},{90,8},{90,-92},{-90,-92},{-90,100},{-104,100}},color=
           {191,0,0}));
-  connect(Children1.thermOutside, thermOutside) annotation (Line(points={{82,75.52},{90,75.52},{90,86},{-90,86},{-90,100},{-100,100}},
-                                                                color={191,0,0}));
+  connect(Children1.thermOutside, thermOutside) annotation (Line(points={{82,76},
+          {90,76},{90,86},{-90,86},{-90,100},{-104,100}},       color={191,0,0}));
   connect(Bedroom.thermCeiling, thermCeiling_Bedroom) annotation (Line(points={
           {-44,62},{-32,62},{-32,86},{-90,86},{-90,109}}, color={191,0,0}));
   connect(Children1.thermCeiling, thermCeiling_Children1) annotation (Line(

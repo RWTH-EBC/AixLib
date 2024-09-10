@@ -42,6 +42,8 @@ model WholeHouseBuildingEnvelope
     annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
   parameter Modelica.Units.SI.Temperature TDynVentAttic_set = 288.15 "Attic set temperature for dyn. vent."
     annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-112,90},{-92,110}})));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope
     groundFloor_Building(

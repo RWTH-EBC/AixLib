@@ -11,7 +11,7 @@ partial model PartialUnderFloorHeatingSystemParameters
   replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition
     pipeMaterial "Pipe Material"
     annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-  parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
+  parameter Integer dis(min = 1) = 1 "Parameter to enable dissertisation layers";
 
   replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition sheathingMaterial
       "Sheathing Material" annotation (
