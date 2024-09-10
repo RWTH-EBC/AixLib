@@ -1,403 +1,4 @@
 
-Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>:
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.outside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.outside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.outside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.outside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.inside_wall1a.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.inside_wall1a.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.inside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.inside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.Ceiling.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.Ceiling.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.floor.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.floor.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Livingroom.inside_wall1b.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Livingroom.inside_wall1b.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.outside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.outside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.outside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.outside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.inside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.inside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.inside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.inside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.Ceiling.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.Ceiling.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Hobby.floor.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Hobby.floor.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.outside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.outside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.outside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.outside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.inside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.inside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.inside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.inside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.Ceiling.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.Ceiling.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: WC_Storage.floor.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: WC_Storage.floor.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.outside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.outside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.outside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.outside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.inside_wall1a.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.inside_wall1a.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.inside_wall2.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.inside_wall2.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.Ceiling.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.Ceiling.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.floor.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.floor.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Kitchen.inside_wall1b.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Kitchen.inside_wall1b.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.outside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.outside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.inside_wall1.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.inside_wall1.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.inside_wall2a.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.inside_wall2a.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.inside_wall3.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.inside_wall3.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.Ceiling.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.Ceiling.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.floor.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.floor.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: Component type specifier CorrSolGain is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Corridor.inside_wall2b.windowModel.corrSolGain
-  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
-Warning: Component type specifier WindowModel is equal to a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Corridor.inside_wall2b.windowModel
-  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable floor[i].port_outside
-Errors found in: connect(Livingroom.ground[i], floor[i].port_outside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 325
-Error: Use of undeclared variable floor[i].thermStarComb_inside
-Errors found in: connect(floor[i].thermStarComb_inside, Livingroom.thermStar_Demux.portConvRadComb)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 327
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable floor[i].port_outside
-Errors found in: connect(Kitchen.ground[i], floor[i].port_outside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 325
-Error: Use of undeclared variable floor[i].thermStarComb_inside
-Errors found in: connect(floor[i].thermStarComb_inside, Kitchen.thermStar_Demux.portConvRadComb)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 327
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Livingroom.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 436
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Kitchen.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 438
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(WC_Storage.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 440
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Corridor.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 443
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Hobby.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 445
-The model contained invalid expressions.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope 
 Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>:
 Warning: Component type specifier CorrSolGain is equal to a partial type
@@ -804,31 +405,153 @@ Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.T
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
 are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Bedroom.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 443
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Children2.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 445
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Bath.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 447
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Corridor.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 450
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Errors found in: connect(Children1.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 452
+Error: Failed to expand connect(Bedroom.thermFloor[1], thermFloor_Bedroom[1]);
+
+Index outside of legal range in Bedroom.thermFloor[1].
+Error: Failed to expand connect(Children1.thermFloor[1], thermFloor_Children1[1]);
+
+Index outside of legal range in Children1.thermFloor[1].
+Error: Failed to expand connect(Corridor.thermFloor[1], thermFloor_Corridor[1]);
+
+Index outside of legal range in Corridor.thermFloor[1].
+Error: Failed to expand connect(Bath.thermFloor[1], thermFloor_Bath[1]);
+
+Index outside of legal range in Bath.thermFloor[1].
+Error: Failed to expand connect(Children2.thermFloor[1], thermFloor_Children2[1]);
+
+Index outside of legal range in Children2.thermFloor[1].
+Error: Failed to expand connect(Bedroom.thermFloor[2], thermFloor_Bedroom[2]);
+
+Index outside of legal range in Bedroom.thermFloor[2].
+Error: Failed to expand connect(Children1.thermFloor[2], thermFloor_Children1[2]);
+
+Index outside of legal range in Children1.thermFloor[2].
+Error: Failed to expand connect(Corridor.thermFloor[2], thermFloor_Corridor[2]);
+
+Index outside of legal range in Corridor.thermFloor[2].
+Error: Failed to expand connect(Bath.thermFloor[2], thermFloor_Bath[2]);
+
+Index outside of legal range in Bath.thermFloor[2].
+Error: Failed to expand connect(Children2.thermFloor[2], thermFloor_Children2[2]);
+
+Index outside of legal range in Children2.thermFloor[2].
+The model contained invalid connect statements.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan 
+Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>:
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+  Context: <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium</a>
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.uppFloDown
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groFloUp
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Errors found in: connect(OFD.uppFloDown, OFD.groFloUp)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 214
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groFloDown
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groPlateUp
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Errors found in: connect(OFD.groFloDown, OFD.groPlateUp)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 215
 The model contained invalid expressions.
 Check aborted.
 Warning: WARNINGS have been issued.
@@ -1641,73 +1364,6 @@ Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.T
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
 are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable floor[i].port_outside
-Errors found in: connect(groundFloor_Building.Livingroom.ground[i], floor[i].port_outside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 325
-Error: Use of undeclared variable floor[i].thermStarComb_inside
-Errors found in: connect(floor[i].thermStarComb_inside, groundFloor_Building.Livingroom.thermStar_Demux.portConvRadComb)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 327
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable floor[i].port_outside
-Errors found in: connect(groundFloor_Building.Kitchen.ground[i], floor[i].port_outside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 325
-Error: Use of undeclared variable floor[i].thermStarComb_inside
-Errors found in: connect(floor[i].thermStarComb_inside, groundFloor_Building.Kitchen.thermStar_Demux.portConvRadComb)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 327
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
-are Enumeration and Integer, but they must be compatible.
-Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
-are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groundFloor_Building">groundFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 47
-Errors found in: connect(groundFloor_Building.Livingroom.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 436
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groundFloor_Building">groundFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 47
-Errors found in: connect(groundFloor_Building.Kitchen.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 438
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groundFloor_Building">groundFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 47
-Errors found in: connect(groundFloor_Building.WC_Storage.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 440
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groundFloor_Building">groundFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 47
-Errors found in: connect(groundFloor_Building.Corridor.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 443
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groundFloor_Building">groundFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 47
-Errors found in: connect(groundFloor_Building.Hobby.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/GroundFloorBuildingEnvelope.mo, line 445
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
@@ -1732,46 +1388,46 @@ Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.T
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
 are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:upperFloor_Building">upperFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 86
-Errors found in: connect(upperFloor_Building.Bedroom.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 443
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:upperFloor_Building">upperFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 86
-Errors found in: connect(upperFloor_Building.Children2.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 445
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:upperFloor_Building">upperFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 86
-Errors found in: connect(upperFloor_Building.Bath.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 447
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:upperFloor_Building">upperFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 86
-Errors found in: connect(upperFloor_Building.Corridor.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 450
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.UpperFloorBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 2
-Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:upperFloor_Building">upperFloor_Building</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 86
-Errors found in: connect(upperFloor_Building.Children1.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/UpperFloorBuildingEnvelope.mo, line 452
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
 are Enumeration and Integer, but they must be compatible.
 Error: Use of undeclared variable groundFloor_Building.Livingroom.floor[1].Wall.A
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
+Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#$groPlateLowPart:A">groPlateLowPart.A</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/BaseClasses/SimpleNLayer.mo, line 3
+Error: Use of undeclared variable groundFloor_Building.Hobby.floor[1].Wall.A
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
+Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#$groPlateLowPart:A">groPlateLowPart.A</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/BaseClasses/SimpleNLayer.mo, line 3
+Error: Use of undeclared variable groundFloor_Building.Corridor.floor[1].Wall.A
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
+Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#$groPlateLowPart:A">groPlateLowPart.A</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/BaseClasses/SimpleNLayer.mo, line 3
+Error: Use of undeclared variable groundFloor_Building.WC_Storage.floor[1].Wall.A
 In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
 Used in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#$groPlateLowPart:A">groPlateLowPart.A</a>.
@@ -1789,30 +1445,7 @@ Modifier applied for component <a href="Modelica://AixLib.ThermalZones.HighOrder
 Variable found in class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
 Variable found in component <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope#:groPlateLowPart">groPlateLowPart</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 239
-Warning: Connect argument was not one of the valid forms, since upperFloor_Building is not a connector.
-Error: Use of undeclared variable upperFloor_Building.thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
-Errors found in: connect(upperFloor_Building.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 278
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
-Errors found in: connect(attic_2Ro_5Rooms.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 280
-Warning: Connect argument was not one of the valid forms, since groundFloor_Building is not a connector.
-Error: Use of undeclared variable groundFloor_Building.thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
-Error: Use of undeclared variable thermOutside
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 2
-Errors found in: connect(groundFloor_Building.thermOutside, thermOutside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 282
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/WholeHouseBuildingEnvelope.mo, line 241
 The model contained invalid expressions.
 Check aborted.
 Warning: WARNINGS have been issued.
@@ -1957,206 +1590,393 @@ Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>:
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
-  Context: <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium</a>
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.uppFloDown
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groFloUp
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Errors found in: connect(OFD.uppFloDown, OFD.groFloUp)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 214
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groFloDown
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groPlateUp
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Errors found in: connect(OFD.groFloDown, OFD.groPlateUp)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 215
-The model contained invalid expressions.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>:
+Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope 
+Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.GroundFloorBuildingEnvelope</a>:
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: outside_wall1.windowModel.corrSolGain
+ Component context: Livingroom.outside_wall1.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: outside_wall1.windowModel
+ Component context: Livingroom.outside_wall1.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: outside_wall2.windowModel.corrSolGain
+ Component context: Livingroom.outside_wall2.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: outside_wall2.windowModel
+ Component context: Livingroom.outside_wall2.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: inside_wall1a.windowModel.corrSolGain
+ Component context: Livingroom.inside_wall1a.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: inside_wall1a.windowModel
+ Component context: Livingroom.inside_wall1a.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: inside_wall2.windowModel.corrSolGain
+ Component context: Livingroom.inside_wall2.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: inside_wall2.windowModel
+ Component context: Livingroom.inside_wall2.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: Ceiling.windowModel.corrSolGain
+ Component context: Livingroom.Ceiling.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: Ceiling.windowModel
+ Component context: Livingroom.Ceiling.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: floor.windowModel.corrSolGain
+ Component context: Livingroom.floor.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: floor.windowModel
+ Component context: Livingroom.floor.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
 Warning: Component type specifier CorrSolGain is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
- Component context: inside_wall1b.windowModel.corrSolGain
+ Component context: Livingroom.inside_wall1b.windowModel.corrSolGain
   Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
 Warning: Component type specifier WindowModel is equal to a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
- Component context: inside_wall1b.windowModel
+ Component context: Livingroom.inside_wall1b.windowModel
   Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.outside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.outside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.outside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.outside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.inside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.inside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.inside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.inside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.Ceiling.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.Ceiling.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Hobby.floor.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Hobby.floor.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.outside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.outside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.outside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.outside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.inside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.inside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.inside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.inside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.Ceiling.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.Ceiling.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: WC_Storage.floor.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: WC_Storage.floor.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL1IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.outside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.outside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.outside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.outside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.inside_wall1a.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.inside_wall1a.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.inside_wall2.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.inside_wall2.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.Ceiling.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.Ceiling.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.floor.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.floor.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Kitchen.inside_wall1b.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Kitchen.inside_wall1b.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow2IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.outside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.outside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.inside_wall1.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.inside_wall1.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.inside_wall2a.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.inside_wall2a.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.inside_wall3.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.inside_wall3.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.Ceiling.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.Ceiling.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.floor.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.floor.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
+Warning: Component type specifier CorrSolGain is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo, line 17
+ Component context: Corridor.inside_wall2b.windowModel.corrSolGain
+  Component declared as CorrSolGain corrSolGain in <a href="Modelica://AixLib.ThermalZones.HighOrder.Components.Walls.Wall">AixLib.ThermalZones.HighOrder.Components.Walls.Wall</a>
+Warning: Component type specifier WindowModel is equal to a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo, line 87
+ Component context: Corridor.inside_wall2b.windowModel
+  Component declared as WindowModel windowModel in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.Rooms.Ow1IwL2IwS1Gr1Uf1</a>
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
 are Enumeration and Integer, but they must be compatible.
 Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
 are Enumeration and Integer, but they must be compatible.
-Error: Use of undeclared variable floor[i].port_outside
-Errors found in: connect(ground[i], floor[i].port_outside)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 325
-Error: Use of undeclared variable floor[i].thermStarComb_inside
-Errors found in: connect(floor[i].thermStarComb_inside, thermStar_Demux.portConvRadComb)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/Rooms/Ow2IwL2IwS1Gr1Uf1.mo, line 327
-The model contained invalid expressions.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 1
+are Enumeration and Integer, but they must be compatible.
+Warning: The types of the operands in AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 = 2
+are Enumeration and Integer, but they must be compatible.
+Error: Failed to expand connect(Livingroom.thermCeiling[1], thermCeiling_Livingroom[1]);
+
+Index outside of legal range in Livingroom.thermCeiling[1].
+Error: Failed to expand connect(Hobby.thermCeiling[1], thermCeiling_Hobby[1]);
+
+Index outside of legal range in Hobby.thermCeiling[1].
+Error: Failed to expand connect(Corridor.thermCeiling[1], thermCeiling_Corridor[1]);
+
+Index outside of legal range in Corridor.thermCeiling[1].
+Error: Failed to expand connect(WC_Storage.thermCeiling[1], thermCeiling_WCStorage[1]);
+
+Index outside of legal range in WC_Storage.thermCeiling[1].
+Error: Failed to expand connect(Kitchen.thermCeiling[1], thermCeiling_Kitchen[1]);
+
+Index outside of legal range in Kitchen.thermCeiling[1].
+Error: Failed to expand connect(Livingroom.ground[1], groundTemp[1]);
+
+Index outside of legal range in Livingroom.ground[1].
+Error: Failed to expand connect(Hobby.ground[1], groundTemp[2]);
+
+Index outside of legal range in Hobby.ground[1].
+Error: Failed to expand connect(Corridor.ground[1], groundTemp[3]);
+
+Index outside of legal range in Corridor.ground[1].
+Error: Failed to expand connect(WC_Storage.ground[1], groundTemp[4]);
+
+Index outside of legal range in WC_Storage.ground[1].
+Error: Failed to expand connect(Kitchen.ground[1], groundTemp[5]);
+
+Index outside of legal range in Kitchen.ground[1].
+The model contained invalid connect statements.
 Check aborted.
 Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
