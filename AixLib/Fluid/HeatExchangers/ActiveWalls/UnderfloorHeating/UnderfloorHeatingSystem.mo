@@ -50,7 +50,7 @@ import Modelica.Constants.e;
   final parameter Modelica.Units.SI.Length length[nZones] = A ./ Spacing "Pipe Length in every room";
   parameter Modelica.Units.SI.Thickness thicknessPipe[nZones] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter dOut[nZones] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut[nZones] - 2*thicknessPipe[nZones] "Inner diameter of pipe";
+  parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut .- 2.*thicknessPipe               "Inner diameter of pipe";
   parameter Modelica.Units.SI.Diameter d[nZones](min = dOut) = dOut "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
 
   final parameter Modelica.Units.SI.HeatFlux qMax_flow_nominal=max(ufhRoom.q_flow_nominal)
@@ -173,7 +173,7 @@ protected
 initial equation
   // Check validity of data
   assert(
-    ufhRoom.q_flow_nominal[1] == qMax_flow_nominal,
+    ufhRoom[1].q_flow_nominal == qMax_flow_nominal,
     "The room with the highest specific heat load needs to be the first element of the vector. Ignore if highest heat load appears in bathroom",
     AssertionLevel.warning);
 
@@ -193,18 +193,18 @@ equation
 
   // HEATING CIRCUITS FLUID CONNECTIONS
 
-     for m in 1:ufhRoom.nCircuits[1] loop
+     for m in 1:ufhRoom[1].nCircuits loop
     connect(distributor.portsCirSup[m], ufhRoom[1].ports_a[m]);
     connect(ufhRoom[1].ports_b[m], distributor.portsCirRet[m]);
   end for;
 
   if nZones > 1 then
     for x in 2:nZones loop
-      for u in 1:ufhRoom.nCircuits[x] loop
-        connect(distributor.portsCirSup[(sum(ufhRoom.nCircuits[v] for v in 1:(x - 1)) +
+      for u in 1:ufhRoom[x].nCircuits loop
+        connect(distributor.portsCirSup[(sum(ufhRoom[v].nCircuits for v in 1:(x - 1)) +
           u)], ufhRoom[x].ports_a[u]) annotation (Line(points={{-22.6667,0},{
                 -22.6667,20},{0,20}},  color={0,127,255}));
-        connect(ufhRoom[x].ports_b[u], distributor.portsCirRet[(sum(ufhRoom.nCircuits[v]
+        connect(ufhRoom[x].ports_b[u], distributor.portsCirRet[(sum(ufhRoom[v].nCircuits
           for v in 1:(x - 1)) + u)]) annotation (Line(points={{40,20},{40,20},{
                 46,20},{46,-46},{-17.3333,-46},{-17.3333,-40.6667}},  color={0,127,
                 255}));
@@ -216,6 +216,14 @@ equation
 
   connect(uVal, ufhRoom.uVal) annotation (Line(points={{-120,60},{-14,60},{-14,32},
           {-4,32}}, color={0,0,127}));
+  connect(ufhRoom.portRadFloor, portRadFloor) annotation (Line(points={{12,40},{
+          12,86},{-40,86},{-40,100}}, color={191,0,0}));
+  connect(ufhRoom.portConFloor, portConFloor) annotation (Line(points={{28,40},{
+          28,86},{40,86},{40,100}}, color={191,0,0}));
+  connect(ufhRoom.portConCei, portConCei) annotation (Line(points={{28,0},{28,-86},
+          {40,-86},{40,-100}}, color={191,0,0}));
+  connect(ufhRoom.portRadCei, portRadCei) annotation (Line(points={{12,0},{8,0},
+          {8,-56},{-40,-56},{-40,-100}}, color={191,0,0}));
     annotation (Icon(coordinateSystem(extent={{-100,-80},{100,100}},initialScale=0.1),
         graphics={
         Rectangle(

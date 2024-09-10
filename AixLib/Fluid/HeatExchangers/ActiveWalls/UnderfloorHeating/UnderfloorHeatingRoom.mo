@@ -55,7 +55,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
       wallTypeCeiling.lambda[1] "Thermal conductivity of thermal insulation";
   final parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns= InsulationThickness/lambda_ins "Thermal resistance of thermal insulation";
 
-  final parameter Modelica.Units.SI.Thickness CoverThickness=
+  final parameter Modelica.Units.SI.Thickness CoverThickness=wallTypeFloor.d[1]
     "thickness of cover above pipe";
   final parameter Modelica.Units.SI.ThermalConductivity lambda_u=wallTypeFloor.lambda[1]
     "Thermal conductivity of wall layers above panel heating without flooring (coverage)";

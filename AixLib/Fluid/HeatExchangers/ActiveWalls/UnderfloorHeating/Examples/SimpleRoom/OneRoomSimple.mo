@@ -68,8 +68,8 @@ equation
     connect(thermalConductor[i].port_b, vol.heatPort) annotation (Line(points={{-24,-2},
             {-22,-2},{-22,22},{-10,22}},
                                        color={191,0,0}));
-    connect(radConvToSingle.port_a, thermalConductor[i].port_a) annotation (Line(points={{24,22},
-            {10,22},{10,-2},{-4,-2}},                                                                     color={191,0,0}));
+    connect(radConvToSingle.portCon, thermalConductor[i].port_a) annotation (
+        Line(points={{24,22},{10,22},{10,-2},{-4,-2}}, color={191,0,0}));
   end for;
 
   for i in 1:underfloorHeatingSystem.nZones loop
@@ -103,9 +103,8 @@ equation
 
   connect(convRadToCombPort.portConvRadComb, radConvToSingle.heatFloor)
     annotation (Line(points={{-12,2},{62,2},{62,22},{44,22}},color={191,0,0}));
-  connect(fixedHeatFlow1.port, radConvToSingle1.port_a)
-    annotation (Line(points={{38,-90},{42,-90},{42,-86},{46,-86}},
-                                                 color={191,0,0}));
+  connect(fixedHeatFlow1.port, radConvToSingle1.portCon) annotation (Line(
+        points={{38,-90},{42,-90},{42,-86},{46,-86}}, color={191,0,0}));
   connect(radConvToSingle1.heatFloor, convRadToCombPort1.portConvRadComb)
     annotation (Line(points={{26,-86},{-2,-86},{-2,-96},{-12,-96}},
                                                  color={191,0,0}));
