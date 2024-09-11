@@ -89,11 +89,12 @@ model OFD_UFH
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling.Wall.wallType,
-        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling.Wall.wallType,
-        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling.Wall.wallType,
-        wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling.Wall.wallType,
-        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling.Wall.wallType},
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling[
+        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling[
+        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling[
+        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[
+        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[
+        1].Wall.wallType},
     T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15},
     Spacing=fill(0.2, 10),

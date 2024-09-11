@@ -6,6 +6,8 @@ model Ow2IwL2IwS1Gr1Uf1
       AixLib.DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
                                                                           final room_V=room_length*room_width*room_height);
 
+  parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotation (Dialog(enable = use_UFH));
+
   //////////room geometry
   parameter Modelica.Units.SI.Length room_length=2 "length "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -196,7 +198,7 @@ model Ow2IwL2IwS1Gr1Uf1
         origin={22,-62},
         extent={{-4.00002,-26},{4.00001,26}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling[dis](
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -214,7 +216,7 @@ model Ow2IwL2IwS1Gr1Uf1
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.IW_hori_low_half,
     each outside=false,
-    each wall_length=room_length,
+    each wall_length=room_length/dis,
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
@@ -222,7 +224,7 @@ model Ow2IwL2IwS1Gr1Uf1
         origin={-30,59},
         extent={{2.99997,-16},{-3.00002,16}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor[dis](
     each final energyDynamics=energyDynamicsWalls,
     each final calcMethodOut=calcMethodOut,
     each final hConOut_const=hConOut_const,
@@ -240,7 +242,7 @@ model Ow2IwL2IwS1Gr1Uf1
     each final solar_absorptance=solar_absorptance_OW,
     each final wallPar=wallTypes.groundPlate_upp_half,
     each outside=false,
-    each wall_length=room_length,
+    each wall_length=room_length/dis,
     each wall_height=room_width,
     each withWindow=false,
     each withDoor=false,
@@ -289,11 +291,11 @@ model Ow2IwL2IwS1Gr1Uf1
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50.5,99})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling[dis]
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1b
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground if not
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground[dis] if not
     use_UFH
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
 
@@ -318,16 +320,18 @@ equation
           128,0}));
   connect(thermInsideWall1b, thermInsideWall1b) annotation (Line(points={{90,-10},
           {85,-10},{85,-10},{90,-10}}, color={191,0,0}));
-  connect(ground, floor.port_outside) annotation (Line(
+  for i in 1:dis loop
+    connect(ground[i], floor[i].port_outside) annotation (Line(
       points={{-6,-94},{-6,-74},{-24,-74},{-24,-64.1},{-27,-64.1}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-27,-60},
+    connect(floor[i].thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-27,-60},
             {-26,-60},{-26,-48},{-7,-48},{-7,-8}},                                                                                                               color={191,0,0}));
-  connect(Ceiling.port_outside, thermCeiling) annotation (Line(points={{-30,
-          62.15},{-30,74},{84,74},{84,70},{90,70}},      color={191,0,0}));
-  connect(Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-30,56},
-          {-30,46},{54,46},{54,-46},{-6,-46},{-6,-42},{-7,-42},{-7,-8}},                                                                                                               color={191,0,0}));
+    connect(Ceiling[i].port_outside, thermCeiling[i]) annotation (Line(points={{-30,
+            62.15},{-30,74},{84,74},{84,70},{90,70}},    color={191,0,0}));
+    connect(Ceiling[i].thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-30,56},
+            {-30,46},{54,46},{54,-46},{-6,-46},{-6,-42},{-7,-42},{-7,-8}},                                                                                                             color={191,0,0}));
+  end for;
   connect(outside_wall1.port_outside, thermOutside) annotation (Line(points={{-58.25,
           13},{-76,13},{-76,100},{-100,100}},                                                                            color={191,0,0}));
   connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{23,
