@@ -10,6 +10,123 @@ Error: Class or component 'initDynamicsAir' not found in WholeHouseBuildingEnvel
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan 
+Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>:
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+ Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
+  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
+Warning: Base class Medium is not transitively non-replaceable,
+ since it is a short class equal to a replaceable class.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
+  Context: <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium</a>
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.uppFloDown
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groFloUp
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Errors found in: connect(OFD.uppFloDown, OFD.groFloUp)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 214
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groFloDown
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
+Error: Use of undeclared variable OFD.groPlateUp
+In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
+Errors found in: connect(OFD.groFloDown, OFD.groPlateUp)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 215
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad 
 Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad">AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad</a>:
 Error: Overriding final modifier for T0_air
@@ -131,123 +248,6 @@ In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad"
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFDHeatLoad.mo, line 2
 Errors found in: connect(wholeHouseBuildingEnvelope.groFloDown, wholeHouseBuildingEnvelope.groPlateUp)
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFDHeatLoad.mo, line 137
-The model contained invalid expressions.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>:
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as Attic_Ro2Lf5 attic_2Ro_5Rooms in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_a port_a in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as FluidPort_b port_b in <a href="Modelica://AixLib.Fluid.Interfaces.PartialTwoPort">AixLib.Fluid.Interfaces.PartialTwoPort</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as StaticTwoPortConservationEquation steBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation">AixLib.Fluid.Interfaces.ConservationEquation</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as ConservationEquation dynBal in <a href="Modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume">AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as MixingVolumeMoistAir airload in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
- Component context: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium
-  Component declared as VesselFluidPorts_b ports in <a href="Modelica://AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom">AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom</a>
-Warning: Base class Medium is not transitively non-replaceable,
- since it is a short class equal to a replaceable class.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelope/WholeHouseBuildingEnvelope.mo, line 196
-  Context: <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.Medium</a>
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.uppFloDown
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groFloUp
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Errors found in: connect(OFD.uppFloDown, OFD.groFloUp)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 214
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groFloDown
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Warning: Connect argument was not one of the valid forms, since OFD is not a connector.
-Error: Use of undeclared variable OFD.groPlateUp
-In class <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 2
-Errors found in: connect(OFD.groFloDown, OFD.groPlateUp)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo, line 215
 The model contained invalid expressions.
 Check aborted.
 Warning: WARNINGS have been issued.
