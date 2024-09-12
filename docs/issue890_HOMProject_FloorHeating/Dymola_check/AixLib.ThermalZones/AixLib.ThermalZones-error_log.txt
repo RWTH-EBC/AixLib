@@ -1,15 +1,4 @@
 
-Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad 
-Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad</a>:
-Error: Class or component 'initDynamicsAir' not found in WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/OFDHeatLoad.mo, line 51
- Component context: wholeHouseBuildingEnvelope
-  Component declared as WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/OFDHeatLoad.mo, line 2
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan 
 Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan">AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan</a>:
 Warning: Base class Medium is not transitively non-replaceable,
@@ -251,5 +240,16 @@ Errors found in: connect(wholeHouseBuildingEnvelope.groFloDown, wholeHouseBuildi
 The model contained invalid expressions.
 Check aborted.
 Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad 
+Check of <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad</a>:
+Error: Class or component 'initDynamicsAir' not found in WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/OFDHeatLoad.mo, line 51
+ Component context: wholeHouseBuildingEnvelope
+  Component declared as WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad">AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.OFDHeatLoad</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/HighOrder/House/OFD_MiddleInnerLoadWall/BuildingEnvelopeDiscretized/OFDHeatLoad.mo, line 2
 Error: ERRORS have been issued.
 
