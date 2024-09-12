@@ -95,7 +95,7 @@ model OFD_UFH
         1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[
         1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[
         1].Wall.wallType},
-    T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
+    TZoneBel_nominal={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15},
     Spacing=fill(0.2, 10),
     pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),

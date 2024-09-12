@@ -12,8 +12,7 @@ import Modelica.Constants.e;
 
 
   parameter Integer nZones(min=1)
-    "Number of zones / rooms heated with panel heating"
-    annotation (Dialog(group="General"));
+    "Number of zones / rooms heated with panel heating" annotation (Dialog(group="General"));
   parameter Integer calculateVol = 1 annotation (Dialog(group="Panel Heating",
         descriptionLabel=true), choices(
       choice=1 "Calculate Water Volume with inner diameter",
@@ -33,13 +32,13 @@ import Modelica.Constants.e;
   parameter Boolean Ceiling[nZones] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[nZones] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
 
-  parameter Modelica.Units.SI.Temperature T_U[nZones]=fill(293.15, nZones)  "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature TZoneBel_nominal[nZones]=fill(293.15, nZones)  "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
   final parameter Real K_H[nZones]=ufhRoom.K_H
     "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
-  final parameter Real q_G[nZones]=ufhRoom.q_G
+  final parameter Real q_flow_nominal[nZones]=ufhRoom.q_flow_nominal
     "needed heat flux from underfloor heating";
-  final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[nZones]=q_G ./
-      K_H
+  final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[nZones]=
+  q_flow_nominal ./K_H
     "Nominal temperature difference between heating medium and room for each room";
   parameter Modelica.Units.SI.PressureDifference dp_Pipe[nZones]=100*length
        ./ ufhRoom.nCircuits "Pressure Difference in each pipe for every room";
@@ -111,7 +110,7 @@ import Modelica.Constants.e;
     final dpValve_nominal=dp_Valve,
     each final dpFixed_nominal=dpDis_nominal,
     final Ceiling=Ceiling,
-    final T_U=T_U,
+    final TZoneBel_nominal=TZoneBel_nominal,
     final TSurMax=TSurMax,
     final TZone_nominal=T_Room,
     each final pipeMaterial=pipeMaterial,

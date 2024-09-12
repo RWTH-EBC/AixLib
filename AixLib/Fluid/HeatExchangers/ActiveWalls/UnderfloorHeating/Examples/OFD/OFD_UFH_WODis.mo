@@ -95,13 +95,15 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
         wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.wallTypes.IW_hori_low_half,
         wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.wallTypes.IW_hori_low_half,
         wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.wallTypes.IW_hori_low_half},
-    T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15},
+    TZoneBel_nominal={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15},
     Spacing=fill(0.2, 10),
     pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
     thicknessPipe=fill(0.002, 10),
     dOut=fill(0.017, 10),
-    withSheathing=false)
-    annotation (Placement(transformation(extent={{-68,-66},{-44,-52}})));
+    withSheathing=false,
+    ufhRoom(TSup_nominal(displayUnit="K") = 308.15, TRet_nominal(
+            displayUnit="K") = 303.15))
+    annotation (Placement(transformation(extent={{-68,-66},{-50,-50}})));
 
   AixLib.Fluid.Sources.MassFlowSource_T m_flow_specification1(
     redeclare package Medium = AixLib.Media.Water,
@@ -118,9 +120,9 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
         rotation=0,
         origin={-86,-36})));
   RadConvToSingle radConvToSingleCeiling[5]
-    annotation (Placement(transformation(extent={{24,-102},{44,-82}})));
+    annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
   RadConvToSingle radConvToSingleFloor[10]
-    annotation (Placement(transformation(extent={{12,-44},{32,-24}})));
+    annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
 equation
   connect(constAmb.y, prescribedAmbTemperature.T) annotation (Line(
       points={{-49,80},{-46,80},{-46,64},{-41.2,64}},
@@ -183,46 +185,48 @@ equation
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-21},
           {-50,-21},{-50,-15.75},{-44,-15.75}},                                                                                            color={191,0,0}));
   connect(m_flow_specification1.ports[1], underfloorHeatingSystem.port_a)
-    annotation (Line(points={{-82,-58},{-76,-58},{-76,-59.7778},{-68,-59.7778}},
+    annotation (Line(points={{-82,-58},{-76,-58},{-76,-58.8889},{-68,-58.8889}},
                                                                        color={0,
           127,255}));
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
-        points={{-44,-59.7778},{-44,-58},{-24,-58}},
+        points={{-50,-58.8889},{-50,-58},{-24,-58}},
                                                 color={0,127,255}));
   connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{-79.4,
-          -36},{-70.4,-36},{-70.4,-55.1111}},       color={0,0,127}));
+          -36},{-69.8,-36},{-69.8,-53.5556}},       color={0,0,127}));
 
   for i in 1:5 loop
   connect(groundTemp[i].port, underfloorHeatingSystem.portConCei[i]) annotation (Line(
-        points={{58,-70},{2,-70},{2,-78},{-51.2,-78},{-51.2,-67.5556}},   color
+        points={{58,-70},{48,-70},{48,-68},{-52,-68},{-52,-67.7778},{-55.4,
+            -67.7778}},                                                   color
         ={191,0,0}));
   connect(groundTemp[i].port, underfloorHeatingSystem.portRadCei[i]) annotation (Line(
-        points={{58,-70},{2,-70},{2,-78},{-60.8,-78},{-60.8,-67.5556}}, color={191,
+        points={{58,-70},{48,-70},{48,-74},{-62.6,-74},{-62.6,-67.7778}},
+                                                                        color={191,
           0,0}));
-    connect(radConvToSingleCeiling[i].heatFloor, wholeHouseBuildingEnvelope.heatingToRooms[5+i]) annotation (Line(points={{44,-92},
-            {46,-92},{46,-48},{-20,-48},{-20,10},{-14,10},{-14,9.90545}},
-                                  color={191,0,0}));
+    connect(radConvToSingleCeiling[i].heatFloor, wholeHouseBuildingEnvelope.heatingToRooms[5+i]) annotation (Line(points={{30,-90},
+            {32,-90},{32,-46},{-4,-46},{-4,-22},{-22,-22},{-22,9.90545},{-14,
+            9.90545}},            color={191,0,0}));
   connect(radConvToSingleCeiling[i].portCon, underfloorHeatingSystem.portConCei[
-    5+i]) annotation (Line(points={{24,-86},{-51.2,-86},{-51.2,-67.5944}}, color={
+    5+i]) annotation (Line(points={{10,-84},{-55.4,-84},{-55.4,-67.8222}}, color={
           191,0,0}));
   connect(radConvToSingleCeiling[i].portRad, underfloorHeatingSystem.portRadCei[
-    5+i]) annotation (Line(points={{24,-98.2},{-20,-98.2},{-20,-96},{-60.8,-96},
-            {-60.8,-67.5944}},
+    5+i]) annotation (Line(points={{10,-96.2},{-62.6,-96.2},{-62.6,-67.8222}},
                       color={191,0,0}));
 
   end for;
 
 
   connect(underfloorHeatingSystem.portConFloor, radConvToSingleFloor.portCon)
-    annotation (Line(points={{-51.2,-52},{-52,-52},{-52,-28},{12,-28}}, color={191,
+    annotation (Line(points={{-55.4,-50},{-52,-50},{-52,-24},{10,-24}}, color={191,
           0,0}));
   connect(radConvToSingleFloor.portRad, underfloorHeatingSystem.portRadFloor)
-    annotation (Line(points={{12,-40.2},{-60.8,-40.2},{-60.8,-52}}, color={191,0,
+    annotation (Line(points={{10,-36.2},{-62.6,-36.2},{-62.6,-50}}, color={191,0,
           0}));
   for i in 1:nZones-1 loop
     connect(radConvToSingleFloor[i].heatFloor, wholeHouseBuildingEnvelope.heatingToRooms[
-    i]) annotation (Line(points={{32,-34},{42,-34},{42,-22},{-30,-22},{-30,10.16},
-            {-14,10.16}}, color={191,0,0}));
+    i]) annotation (Line(points={{30,-30},{52,-30},{52,-16.08},{-20,-16.08},{
+            -20,10.16},{-14,10.16}},
+                          color={191,0,0}));
   end for;
   annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
