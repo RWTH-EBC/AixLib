@@ -7,21 +7,21 @@ partial model PartialUnderFloorHeatingSystemParameters
     "Thermal Resistance between Screed and Pipe";
   parameter Boolean withSheathing = false "=false if pipe has no Sheathing" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
   parameter Modelica.Units.SI.Thickness thicknessSheathing "Thickness of pipe sheathing"
-    annotation (Dialog(group="Panel Heating"));
+    annotation (Dialog(enable=withSheathing, group="Panel Heating"));
   replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition
     pipeMaterial "Pipe Material"
     annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
   parameter Integer dis(min = 1) = 1 "Parameter to enable dissertisation layers";
 
-  replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition sheathingMaterial
-      "Sheathing Material" annotation (
+  replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition
+  sheathingMaterial "Sheathing Material" annotation (
         Dialog(group="Panel Heating", enable=withSheathing), choicesAllMatching=true);
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=
     Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
-  parameter Boolean raiseErrorForMaxVelocity
+  parameter Boolean raiseErrorForMaxVelocity = true
     "=true to raise error if v > v_max (0.5 m/s)"
     annotation(Dialog(tab="Advanced"));
 

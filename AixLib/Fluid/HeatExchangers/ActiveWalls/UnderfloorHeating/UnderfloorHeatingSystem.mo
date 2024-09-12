@@ -49,7 +49,7 @@ import Modelica.Constants.e;
   final parameter Modelica.Units.SI.Length length[nZones] = A ./ Spacing "Pipe Length in every room";
   parameter Modelica.Units.SI.Thickness thicknessPipe[nZones] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
   parameter Modelica.Units.SI.Diameter dOut[nZones] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut .- 2.*thicknessPipe               "Inner diameter of pipe";
+  parameter Modelica.Units.SI.Diameter dInn[nZones]=dOut .- 2.*thicknessPipe "Inner diameter of pipe";
   parameter Modelica.Units.SI.Diameter d[nZones](min = dOut) = dOut "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
 
   final parameter Modelica.Units.SI.HeatFlux qMax_flow_nominal=max(ufhRoom.q_flow_nominal)

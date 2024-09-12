@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
   extends
     AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeating;
-  parameter Modelica.Units.SI.PressureDifference dpValve_nominal=0
+  parameter Modelica.Units.SI.PressureDifference dpValve_nominal=1
     "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.Units.SI.PressureDifference dpFixed_nominal = 0
