@@ -238,6 +238,30 @@ model Ashrae140_ideal_heater
   Modelica.Blocks.Interfaces.RealOutput Qflow_capacitor "Value of Real output"
     annotation (Placement(transformation(extent={{160,-42},{180,-22}}),
         iconTransformation(extent={{270,-46},{290,-26}})));
+  Modelica.Blocks.Sources.RealExpression realExpression28(y=thermalZone1.ROM.convIntWall.solid.T)
+    annotation (Placement(transformation(extent={{-206,34},{-186,54}})));
+  Modelica.Blocks.Sources.RealExpression realExpression29(y=thermalZone1.ROM.convExtWall.solid.T)
+    annotation (Placement(transformation(extent={{-206,58},{-186,78}})));
+  Modelica.Blocks.Sources.RealExpression realExpression31(y=thermalZone1.ROM.convRoof.solid.T)
+              annotation (Placement(transformation(extent={{-208,80},{-188,100}})));
+  Modelica.Blocks.Sources.RealExpression realExpression32(y=thermalZone1.ROM.convWin.solid.T)
+    annotation (Placement(transformation(extent={{-206,8},{-186,28}})));
+  Modelica.Blocks.Interfaces.RealOutput int_sur "Value of Real output"
+    annotation (Placement(transformation(extent={{-168,34},{-148,54}}),
+        iconTransformation(extent={{272,-92},{292,-72}})));
+  Modelica.Blocks.Interfaces.RealOutput ext_sur "Value of Real output"
+    annotation (Placement(transformation(extent={{-168,58},{-148,78}}),
+        iconTransformation(extent={{272,-68},{292,-48}})));
+  Modelica.Blocks.Interfaces.RealOutput roof_sur "Value of Real output"
+    annotation (Placement(transformation(extent={{-170,80},{-150,100}}),
+        iconTransformation(extent={{270,-46},{290,-26}})));
+  Modelica.Blocks.Interfaces.RealOutput win_sur
+                                               "Value of Real output"
+    annotation (Placement(transformation(extent={{-168,8},{-148,28}}),
+        iconTransformation(extent={{272,-92},{292,-72}})));
+  Modelica.Blocks.Interfaces.RealOutput TRad
+    "Mean indoor radiation temperature"
+    annotation (Placement(transformation(extent={{50,-18},{70,2}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-108,40},{-46,40},{-46,-3.6},{-24,-3.6}},
@@ -306,9 +330,18 @@ equation
           {{72,-86},{72,-19.84},{32.56,-19.84}}, color={191,0,0}));
   connect(realExpression4.y, Qflow_capacitor)
     annotation (Line(points={{143,-32},{170,-32}}, color={0,0,127}));
+  connect(realExpression31.y,roof_sur)
+    annotation (Line(points={{-187,90},{-160,90}}, color={0,0,127}));
+  connect(realExpression29.y,ext_sur)
+    annotation (Line(points={{-185,68},{-158,68}}, color={0,0,127}));
+  connect(realExpression28.y,int_sur)
+    annotation (Line(points={{-185,44},{-158,44}}, color={0,0,127}));
+  connect(realExpression32.y,win_sur)
+    annotation (Line(points={{-185,18},{-158,18}}, color={0,0,127}));
+  connect(thermalZone1.TRad, TRad) annotation (Line(points={{34.8,-3.6},{47.4,
+          -3.6},{47.4,-8},{60,-8}}, color={0,0,127}));
   annotation (experiment(
-      StartTime=259200,
-      StopTime=345600,
+      StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
