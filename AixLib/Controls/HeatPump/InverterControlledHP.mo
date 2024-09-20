@@ -7,6 +7,8 @@ model InverterControlledHP
     annotation (Dialog(group="PI Values"));
   parameter Modelica.Units.SI.Time Ti    "Time constant of Integrator block"
     annotation (Dialog(group="PI Values"));
+  parameter Real yMin=0.2 "Minimal relative compressor speed"
+    annotation (Dialog(group="PI Values"));
 
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=bandwidth,
       pre_y_start=false)                                                                    "Hysteresis controller for set temperature"
@@ -16,7 +18,7 @@ model InverterControlledHP
     final k=k,
     final Ti=Ti,
     final yMax=1,
-    final yMin=0)
+    final yMin=yMin)
     "PI-Control for a inverter controlled HP"
     annotation (Placement(transformation(extent={{20,40},{40,60}})));
 

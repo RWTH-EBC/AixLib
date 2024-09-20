@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.Examples;
+﻿within AixLib.Controls.HeatPump.Examples;
 model InverterControlledHeatPump
   extends Modelica.Icons.Example;
   extends PartialHeatPumpController(redeclare InverterControlledHP hPController(
@@ -6,8 +6,7 @@ model InverterControlledHeatPump
       k=0.05,
       Ti=100));
 
-annotation(experiment(Tolerance=1e-6, StartTime=0, StopTime=10000), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
-        "Simulate and plot"),
+annotation(experiment(Tolerance=1e-6, StartTime=0, StopTime=10000),
     Documentation(info="<html><p>
   Example for an inverter controlled heat pump. Play around with the PI
   settings to see how they influence nSet depending on TSet and TMea.
