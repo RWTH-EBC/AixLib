@@ -14,7 +14,8 @@ model ModularHeatPump_Water
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
 
-    parameter Modelica.Units.SI.Temperature TCon_start=293.15 "Initial temperature condenser"
+    parameter Modelica.Units.SI.Temperature TCon_start=THotDes
+                                                              "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
