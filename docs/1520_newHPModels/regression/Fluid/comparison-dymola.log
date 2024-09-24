@@ -30,7 +30,7 @@
     },
     "model": "AixLib.Fluid.FixedResistances.Examples.SimplePipe",
     "simulation": {
-      "elapsed_time": 0.00861,
+      "elapsed_time": 0.00864,
       "final_time": 1000,
       "jacobians": 43,
       "start_time": 0,
@@ -81,7 +81,7 @@
     },
     "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHeadControlled",
     "simulation": {
-      "elapsed_time": 0.0106,
+      "elapsed_time": 0.0147,
       "final_time": 600,
       "jacobians": 108,
       "start_time": 0,
@@ -150,7 +150,7 @@
     },
     "model": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpConst",
     "simulation": {
-      "elapsed_time": 0.0181,
+      "elapsed_time": 0.0176,
       "final_time": 3600,
       "jacobians": 120,
       "start_time": 0,
@@ -189,7 +189,7 @@
     },
     "model": "AixLib.Fluid.BoilerCHP.Examples.CHPSystem",
     "simulation": {
-      "elapsed_time": 0.0267,
+      "elapsed_time": 0.0271,
       "final_time": 1200,
       "jacobians": 409,
       "start_time": 0,
@@ -234,7 +234,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp",
     "simulation": {
-      "elapsed_time": 0.0276,
+      "elapsed_time": 0.0279,
       "final_time": 100000,
       "jacobians": 126,
       "start_time": 0,
@@ -321,7 +321,7 @@
     },
     "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples.Test_EnthalpyExchanger",
     "simulation": {
-      "elapsed_time": 0.288,
+      "elapsed_time": 0.304,
       "final_time": 7200,
       "jacobians": 62,
       "start_time": 0,
@@ -378,7 +378,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageSimpleExample",
     "simulation": {
-      "elapsed_time": 8.59,
+      "elapsed_time": 8.8,
       "final_time": 38200,
       "jacobians": 59209,
       "start_time": 0,
@@ -417,7 +417,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.StaticPipe",
     "simulation": {
-      "elapsed_time": 0.00623,
+      "elapsed_time": 0.016,
       "final_time": 1000,
       "jacobians": 35,
       "start_time": 0,
@@ -486,7 +486,7 @@
     },
     "model": "AixLib.Fluid.Movers.DpControlledMovers.Examples.DpVar",
     "simulation": {
-      "elapsed_time": 0.0178,
+      "elapsed_time": 0.0196,
       "final_time": 3600,
       "jacobians": 122,
       "start_time": 0,
@@ -537,7 +537,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageBoiler",
     "simulation": {
-      "elapsed_time": 0.0888,
+      "elapsed_time": 0.089,
       "final_time": 86400,
       "jacobians": 101,
       "start_time": 0,
@@ -576,7 +576,7 @@
     },
     "model": "AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances",
     "simulation": {
-      "elapsed_time": 0.247,
+      "elapsed_time": 0.255,
       "final_time": 3600,
       "jacobians": 41000,
       "start_time": 0,
@@ -587,17 +587,53 @@
   {
     "comparison": {
       "file_name": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_vol.T_start",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_vol.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_temSup.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_temRet.T",
+        "funnel_comp/AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator.mat_heaPum.refCyc.sigBus.onOffMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "vol.T_start",
+        "vol.T",
+        "temSup.T",
+        "temRet.T",
+        "heaPum.refCyc.sigBus.onOffMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.TableData3D_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.066196,
+      "elapsed_time": 0.063236,
       "final_time": 86400,
       "jacobians": 76,
       "start_time": 0,
@@ -648,7 +684,7 @@
     },
     "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPool",
     "simulation": {
-      "elapsed_time": 0.227072,
+      "elapsed_time": 0.257457,
       "final_time": 604800,
       "jacobians": 97,
       "start_time": 0,
@@ -705,7 +741,7 @@
     },
     "model": "AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump",
     "simulation": {
-      "elapsed_time": 4.3,
+      "elapsed_time": 4.44,
       "final_time": 86400,
       "jacobians": 4606,
       "start_time": 0,
@@ -744,7 +780,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta",
     "simulation": {
-      "elapsed_time": 0.00783,
+      "elapsed_time": 0.00862,
       "final_time": 1000,
       "jacobians": 78,
       "start_time": 0,
@@ -795,7 +831,7 @@
     },
     "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlled",
     "simulation": {
-      "elapsed_time": 0.0112,
+      "elapsed_time": 0.012,
       "final_time": 600,
       "jacobians": 170,
       "start_time": 0,
@@ -828,7 +864,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass",
     "simulation": {
-      "elapsed_time": 0.0286,
+      "elapsed_time": 0.0362,
       "final_time": 100000,
       "jacobians": 162,
       "start_time": 0,
@@ -867,7 +903,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeEmbedded",
     "simulation": {
-      "elapsed_time": 0.0109,
+      "elapsed_time": 0.0115,
       "final_time": 1000,
       "jacobians": 109,
       "start_time": 0,
@@ -930,7 +966,7 @@
     },
     "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.DynamicValidation",
     "simulation": {
-      "elapsed_time": 21.7,
+      "elapsed_time": 21.8,
       "final_time": 7200,
       "jacobians": 7673,
       "start_time": 0,
@@ -987,7 +1023,7 @@
     },
     "model": "AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLibAirToWater_OneRoomRadiator",
     "simulation": {
-      "elapsed_time": 0.051178,
+      "elapsed_time": 0.052094,
       "final_time": 86400,
       "jacobians": 60,
       "start_time": 0,
@@ -1050,7 +1086,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageSolarCollector",
     "simulation": {
-      "elapsed_time": 0.613,
+      "elapsed_time": 0.616,
       "final_time": 172800,
       "jacobians": 1201,
       "start_time": 0,
@@ -1101,7 +1137,7 @@
     },
     "model": "AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem",
     "simulation": {
-      "elapsed_time": 0.251196,
+      "elapsed_time": 0.254136,
       "final_time": 604800,
       "jacobians": 97,
       "start_time": 0,
@@ -1146,7 +1182,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot",
     "simulation": {
-      "elapsed_time": 0.0242,
+      "elapsed_time": 0.025,
       "final_time": 100000,
       "jacobians": 115,
       "start_time": 0,
@@ -1197,7 +1233,7 @@
     },
     "model": "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledDpV",
     "simulation": {
-      "elapsed_time": 0.0128,
+      "elapsed_time": 0.0121,
       "final_time": 600,
       "jacobians": 134,
       "start_time": 0,
@@ -1272,7 +1308,7 @@
     },
     "model": "AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.DHCPipe",
     "simulation": {
-      "elapsed_time": 0.409,
+      "elapsed_time": 0.454,
       "final_time": 3600,
       "jacobians": 6494,
       "start_time": 0,
@@ -1323,7 +1359,7 @@
     },
     "model": "AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl",
     "simulation": {
-      "elapsed_time": 0.0077,
+      "elapsed_time": 0.00932,
       "final_time": 300,
       "jacobians": 75,
       "start_time": 0,
@@ -1380,7 +1416,7 @@
     },
     "model": "AixLib.Fluid.HeatExchangers.Examples.HeatingRod",
     "simulation": {
-      "elapsed_time": 0.0121601,
+      "elapsed_time": 0.011466,
       "final_time": 172800,
       "jacobians": 40,
       "start_time": 0,
@@ -1443,7 +1479,7 @@
     },
     "model": "AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation",
     "simulation": {
-      "elapsed_time": 7.82,
+      "elapsed_time": 7.83,
       "final_time": 29600,
       "jacobians": 1180,
       "start_time": 0,
@@ -1494,7 +1530,7 @@
     },
     "model": "AixLib.Fluid.Storage.Examples.StorageDetailedExample",
     "simulation": {
-      "elapsed_time": 0.0479,
+      "elapsed_time": 0.0483,
       "final_time": 86400,
       "jacobians": 45,
       "start_time": 0,
