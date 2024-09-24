@@ -141,7 +141,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (experiment(Tolerance=1e-6, StartTime=0, Interval=500, StopTime=86400, __Dymola_Algorithm="Dassl"), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+  annotation (experiment(Tolerance=1e-6, StartTime=0, Interval=500, StopTime=86400, __Dymola_Algorithm="Dassl"), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
