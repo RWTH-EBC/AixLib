@@ -5,7 +5,7 @@ Regression tests are only run for the following package:
            Absolute error = 7.203e+00 at t = 30240.0 for temSup.T
            Absolute error = 4.749e+00 at t = 31104.0 for temRet.T
            Absolute error = 3.664e-01 at t = 30240.0 for heaPum.refCyc.sigBus.yMea
-*** Error: AixLib_Fluid_Examples_GeothermalHeatPump.txt: Errors during result verification.
+*** Error: AixLib_Fluid_Examples_GeothermalHeatPump_GeothermalHeatPump.txt: Errors during result verification.
            Absolute error = 2.247e+02 at t = 52704.0 for heatPumpPower
 *** Warning: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump: Translation statistics for simulation and results changed for number of continuous time states.
  Old = 113
