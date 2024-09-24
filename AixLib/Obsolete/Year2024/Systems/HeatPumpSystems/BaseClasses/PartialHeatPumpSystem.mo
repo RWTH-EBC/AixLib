@@ -65,7 +65,7 @@ partial model PartialHeatPumpSystem
 
 //HeatPump Control
   replaceable model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
-    constrainedby Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
+    constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
