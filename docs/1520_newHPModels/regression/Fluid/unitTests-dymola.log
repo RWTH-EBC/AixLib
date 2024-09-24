@@ -5,8 +5,7 @@ Regression tests are only run for the following package:
            Absolute error = 7.203e+00 at t = 30240.0 for temSup.T
            Absolute error = 4.749e+00 at t = 31104.0 for temRet.T
            Absolute error = 3.664e-01 at t = 30240.0 for heaPum.refCyc.sigBus.yMea
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Fluid_Examples_GeothermalHeatPump_GeothermalHeatPump.txt.
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.1 MB.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
