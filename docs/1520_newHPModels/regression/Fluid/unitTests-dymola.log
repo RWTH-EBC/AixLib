@@ -1,13 +1,10 @@
 Regression tests are only run for the following package:
   AixLib.Fluid
-*** Error: AixLib_Fluid_HeatPumps_ModularReversible_Examples_VCLibAirToWater_OneRoomRadiator.txt: Errors during result verification.
-           Absolute error = 3.221e+00 at t = 31104.0 for vol.T
-           Absolute error = 7.203e+00 at t = 30240.0 for temSup.T
-           Absolute error = 4.749e+00 at t = 31104.0 for temRet.T
-           Absolute error = 3.664e-01 at t = 30240.0 for heaPum.refCyc.sigBus.yMea
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 0 warnings and 1 errors.
+Script that runs unit tests had 0 warnings and 0 errors.
+
+Unit tests completed successfully.
 
