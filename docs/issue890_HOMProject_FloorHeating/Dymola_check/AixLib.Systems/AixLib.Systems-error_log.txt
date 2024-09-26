@@ -1,6 +1,0 @@
-
-Error in model:  AixLib.Systems.BuildingEnergySystem.BuildingEnergySystem 
-Check of <a href="Modelica://AixLib.Systems.BuildingEnergySystem.BuildingEnergySystem">AixLib.Systems.BuildingEnergySystem.BuildingEnergySystem</a>:
-Did not find model AixLib.Systems.BuildingEnergySystem.BuildingEnergySystem
-Error: ERRORS have been issued.
-
