@@ -130,7 +130,7 @@ equation
   connect(volumeEvaporator.ports[2], port_b_source) annotation (Line(
       points={{-80,-62},{-80,-70},{-90,-70}},
       color={0,127,255}));
-  annotation (obsolete = "Obsolete model - use AixLib.Fluid.HeatPumps.HeatPump instead", Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249},
+  annotation (obsolete = "Obsolete model - use AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump instead", Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info="<html><h4>
@@ -147,7 +147,7 @@ equation
 </h4>
 <p>
   <a href=
-  \"AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple\">AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple</a>
+  \"AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPumpSimple\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPumpSimple</a>
 </p>
 <ul>
   <li>May 15, 2017, by Christian Behm:<br/>

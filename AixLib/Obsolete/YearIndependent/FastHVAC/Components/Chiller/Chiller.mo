@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Chiller;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Chiller;
 model Chiller "Base model of FastHVAC Chiller"
   import AixLib;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
@@ -23,11 +23,11 @@ model Chiller "Base model of FastHVAC Chiller"
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataMainChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in cooling mode"
     annotation (Diagram(obsolete = "Obsolete model - FastHVAC is not maintained anymore but can still be used."),choicesAllMatching=true);
   replaceable model PerDataRevChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in heating mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";
@@ -247,10 +247,10 @@ model Chiller "Base model of FastHVAC Chiller"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
         transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
           extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+  AixLib.Obsolete.Year2024.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
     redeclare final model PerDataMainChi = PerDataMainChi,
     redeclare final model PerDataRevChi = PerDataRevChi,
     final use_rev=use_revChi,
