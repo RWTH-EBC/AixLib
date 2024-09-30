@@ -4,9 +4,10 @@ record Boiler_Vitogas200F_18kW "Gas-fired boiler Viessmann Vitogas200-F 18kW"
     name="Vitogas200F_18kW",
     volume=0.0097,
     pressureDrop=7853000000.0,
-    Q_nom=19900,
+    Q_flowFuel_nominal=19900,
+    Q_flow_nominal=18000,
     Q_min=5970,
-    eta=[0.3,0.93; 1.0,0.93]);
+    eta=[0.3,0.885; 1.0,0.885]);
     annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>

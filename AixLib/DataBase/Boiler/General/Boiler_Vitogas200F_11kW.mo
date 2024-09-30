@@ -4,7 +4,8 @@ record Boiler_Vitogas200F_11kW "Gas-fired boiler Viessmann Vitogas200-F 11kW"
     name="Vitogas200F_11kW",
     volume=0.0076,
     pressureDrop=10218000000.0,
-    Q_nom=12100,
+    Q_flowFuel_nominal=12100,
+    Q_flow_nominal=11000,
     Q_min=3630,
     eta=[0.3,0.93; 1.0,0.93]);
   annotation (Documentation(revisions="<html><ul>
