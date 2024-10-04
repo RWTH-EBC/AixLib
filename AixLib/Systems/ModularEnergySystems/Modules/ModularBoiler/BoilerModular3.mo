@@ -101,6 +101,10 @@ model BoilerModular3
     addPowerToMedium=false,
     use_inputFilter=false) if Pump == true
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
+  Modelica.Blocks.Continuous.Integrator integrator4
+    annotation (Placement(transformation(extent={{30,30},{50,50}})));
+  Modelica.Blocks.Math.Gain gain1
+    annotation (Placement(transformation(extent={{32,64},{44,76}})));
 equation
 
   connect(boilerControlBus, boilerGeneric.boilerControlBus) annotation (Line(
@@ -140,6 +144,35 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(boilerGeneric.port_b, port_b)
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
+  connect(boilerControlBus.PowerDemand, integrator4.u) annotation (Line(
+      points={{0,100},{0,40},{28,40}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(integrator4.y, boilerControlBus.EnergyFuel) annotation (Line(points={
+          {51,40},{64,40},{64,38},{86,38},{86,100},{0,100}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(boilerControlBus.PowerDemand, gain1.u) annotation (Line(
+      points={{0,100},{0,70},{30.8,70}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(gain1.y, boilerControlBus.PowerFuel) annotation (Line(points={{44.6,
+          70},{62,70},{62,68},{74,68},{74,100},{0,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

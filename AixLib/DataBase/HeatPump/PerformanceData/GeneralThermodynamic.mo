@@ -45,6 +45,8 @@ model GeneralThermodynamic
         origin={-50,-50})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=20, uMin=1)
+    annotation (Placement(transformation(extent={{84,40},{104,60}})));
 equation
   connect(tSourceNom.y, carnotCOPDesign.tCold)
     annotation (Line(points={{-100.7,84},{-92,84},{-92,86},{-82,86}},
@@ -87,8 +89,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(carnotCOPOffDesign.COP, copOffDesign.u1) annotation (Line(points={{61.15,
-          49.95},{72,49.95},{72,26},{54,26},{54,6},{60,6}}, color={0,0,127}));
   connect(etaCarnot.y, copOffDesign.u2) annotation (Line(points={{-80.2,28},{42,
           28},{42,-8},{56,-8},{56,-6},{60,-6}}, color={0,0,127}));
   connect(division1.y, productPel.u2)
@@ -115,6 +115,10 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(copOffDesign.y, qConOffDesign.u2) annotation (Line(points={{83,0},{
           126,0},{126,-56},{-38,-56}}, color={0,0,127}));
+  connect(carnotCOPOffDesign.COP, limiter.u) annotation (Line(points={{61.15,
+          49.95},{71.575,49.95},{71.575,50},{82,50}}, color={0,0,127}));
+  connect(limiter.y, copOffDesign.u1) annotation (Line(points={{105,50},{114,50},
+          {114,22},{60,22},{60,6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GeneralThermodynamic;

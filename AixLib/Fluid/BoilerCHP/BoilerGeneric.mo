@@ -66,6 +66,8 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{-22,-26},{-2,-6}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
     annotation (Placement(transformation(extent={{8,-26},{28,-6}})));
+  Modelica.Blocks.Continuous.Integrator integrator4
+    annotation (Placement(transformation(extent={{44,4},{64,24}})));
 protected
   parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -151,6 +153,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(heatFlowSensor.Q_flow, integrator4.u) annotation (Line(points={{-20,
+          -27.4},{-20,-2},{34,-2},{34,14},{42,14}}, color={0,0,127}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html><h4>

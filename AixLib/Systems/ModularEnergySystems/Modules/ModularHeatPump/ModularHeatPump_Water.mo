@@ -14,8 +14,7 @@ model ModularHeatPump_Water
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
 
-    parameter Modelica.Units.SI.Temperature TCon_start=THotDes
-                                                              "Initial temperature condenser"
+    parameter Modelica.Units.SI.Temperature TCon_start=293.15 "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
@@ -200,18 +199,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(gain.y, sigBus.Power_Electricity) annotation (Line(points={{61,130},{
-          108,130},{108,101},{1,101}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(integrator.y, sigBus.Energy_Electricity) annotation (Line(points={{65,
-          62},{126,62},{126,86},{1,86},{1,101}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(sigBus.QCon, gain1.u) annotation (Line(
       points={{1.075,101.085},{1.075,210},{38,210}},
       color={255,204,51},
@@ -220,13 +207,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(gain1.y, sigBus.Power_Heating) annotation (Line(points={{61,210},{92,
-          210},{92,208},{150,208},{150,100},{76,100},{76,101},{1,101}}, color={
-          0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(sigBus.QCon, integrator1.u) annotation (Line(
       points={{1.075,101.085},{1.075,170},{38,170}},
       color={255,204,51},
@@ -235,8 +215,26 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator1.y, sigBus.Energy_Heating) annotation (Line(points={{61,
-          170},{150,170},{150,101},{1,101}}, color={0,0,127}), Text(
+  connect(gain.y, sigBus.PowerElec) annotation (Line(points={{61,130},{84,130},
+          {84,132},{106,132},{106,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integrator1.y, sigBus.EnergyHeat) annotation (Line(points={{61,170},{
+          86,170},{86,164},{136,164},{136,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(integrator.y, sigBus.EnergyElec) annotation (Line(points={{65,62},{92,
+          62},{92,64},{114,64},{114,101},{1,101}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(gain1.y, sigBus.PowerHeat) annotation (Line(points={{61,210},{156,210},
+          {156,101},{1,101}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
