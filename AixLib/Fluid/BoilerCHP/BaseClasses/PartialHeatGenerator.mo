@@ -98,7 +98,10 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_nominal=m_flow_nominal,
     final show_T=false,
     final allowFlowReversal=allowFlowReversal,
-    final dp_nominal=dp_nominal)
+    final dp_nominal=dp_nominal,
+    final deltaM=deltaM,
+    final from_dp=from_dp,
+    final linearized=linearized)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
