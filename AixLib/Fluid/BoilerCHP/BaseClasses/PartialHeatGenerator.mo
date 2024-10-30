@@ -30,8 +30,8 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     "Start value of pressure"
     annotation (Dialog(tab="Advanced", group="Initialization"));
 
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=m_flow_nominal^2*a/
-      (rho_default^2) "Pressure drop at nominal mass flow rate"
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=a*(m_flow_nominal/rho_default)^n
+      "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -42,7 +42,9 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Real deltaM=0.3
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach."
+  parameter Real a "Coefficient of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n."
+  annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real n=2 "Exponent of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n."
   annotation (Dialog(tab="Advanced", group="Pressure drop"));
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Medium,
