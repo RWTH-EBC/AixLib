@@ -1,6 +1,7 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.a,
+                                      n=paramBoiler.n,
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
                                          final V=V));
 
