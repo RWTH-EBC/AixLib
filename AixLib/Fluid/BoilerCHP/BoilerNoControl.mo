@@ -197,8 +197,8 @@ equation
 <p>
   <br/>
   Assumptions for predefined parameter values (based on <i><a href=
-  \"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">
-  Vissmann data cheat</a></i>):
+  \"http:static.viessmann.com/resources/technical_documents/DE/de/VDP/5811009VDP00001_1.pdf?#pagemode=bookmarks&zoom=page-fit&view=Fit\">
+  Vissmann data cheat 5811009</a></i>):
 </p>
 <p>
   G: a heat loss of 0.3 % of nominal power at a temperature difference
