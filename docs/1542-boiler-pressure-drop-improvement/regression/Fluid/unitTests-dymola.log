@@ -1,0 +1,11 @@
+Regression tests are only run for the following package:
+  AixLib.Fluid
+*** Error: AixLib_Fluid_Examples_GeothermalHeatPump_GeothermalHeatPump.txt: Errors during result verification.
+           Absolute error = 2.769e+03 at t = 78624.0 for heatPumpPower
+           Absolute error = 1.671e-01 at t = 52704.0 for heatStorage.layer[5].T
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 1 errors.
+
