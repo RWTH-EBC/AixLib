@@ -197,7 +197,7 @@ equation
 <p>
   <br/>
   Assumptions for predefined parameter values (based on <i><a href=
-  \"http:static.viessmann.com/resources/technical_documents/DE/de/VDP/5811009VDP00001_1.pdf?#pagemode=bookmarks&zoom=page-fit&view=Fit\">
+  \"http:static.viessmann.com/resources/technical_documents/DE/de/VDP/5811009VDP00001_1.pdf?#pagemode=bookmarks&amp;zoom=page-fit&amp;view=Fit\">
   Vissmann data cheat 5811009</a></i>):
 </p>
 <p>
