@@ -47,59 +47,59 @@ protected
     Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 90, origin = {102, 124})));
   Modelica.Blocks.Sources.Constant hConNZ_const[nNZs](final k = ANZ.*hConNZ) if ATotNZ > 0 "Coefficient of convective heat transfer for neighbourd zone borders" annotation(
     Placement(transformation(origin = {134, 124}, extent = {{-5, -5}, {5, 5}}, rotation = 180)));
-  //  Modelica.Blocks.Math.Gain specificRadFlow[nNZs](
-  //    final k(each unit="1/m2") = fill(1,nNZs)./{if A > 0 then A else 1 for A in ANZ},
-  //    u(each final unit="W"),
-  //    y(each final unit="W/m2")) if ATotNZ > 0
-  //    "calculates specific radiative heat flow to  neighboured zone borders"
-  //    annotation (Placement(transformation(extent={{166,116},{176,126}})));
+//    Modelica.Blocks.Math.Gain specificRadFlow[nNZs](
+//      final k(each unit="1/m2") = fill(1,nNZs)./{if A > 0 then A else 1 for A in ANZ},
+//      u(each final unit="W"),
+//      y(each final unit="W/m2")) if ATotNZ > 0
+//      "calculates specific radiative heat flow to  neighboured zone borders"
+//      annotation (Placement(transformation(extent={{166,116},{176,126}})));
   // connections
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resNZNZ[sum({i for
-  //    i in 1:(nNZs - 1)})](final G=BaseClasses.GSurfSurf(ANZ, hRad)) if
-  //       ATotNZ > 0 and nNZs > 1
-  //    "Resistor between different neighboured zone border surfaces" annotation (
-  //      Placement(transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        origin={170,148},
-  //        rotation=-90)));
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallNZ[
-  //    nNZs](final G={min(ATotExt, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
-  //      ATotExt > 0 and ATotNZ > 0
-  //    "Resistor between exterior walls and neighboured zone borders" annotation (Placement(
-  //        transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        origin={80,66},
-  //        rotation=90)));
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nNZs](
-  //     final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
-  //       ATotNZ > 0 and ATotWin > 0 "Resistor between neighboured zone borders and windows"
-  //    annotation (Placement(transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        origin={106,66},
-  //        rotation=90)));
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntNZ[nNZs](
-  //      final G={min(AInt, ANZ[i])*hRad for i in 1:nNZs}, each dT(start=0)) if
-  //       AInt > 0 and ATotNZ > 0
-  //    "Resistor between interior walls and neighboured zone borders" annotation (Placement(
-  //        transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        rotation=90,
-  //        origin={132,66})));
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorNZ[nNZs](
-  //      final G={min(ANZ[i], AFloor)*hRad for i in 1:nNZs}, each dT(start=0)) if
-  //       ATotNZ > 0 and AFloor > 0
-  //    "Resistor between floor plate and neighboured zone borders" annotation (Placement(
-  //        transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        rotation=90,
-  //        origin={158,66})));
-  //  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofNZ[nNZs](
-  //      final G={min(ARoof, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
-  //      ARoof > 0 and ATotNZ > 0 "Resistor between roofs and neighboured zone borders"
-  //    annotation (Placement(transformation(
-  //        extent={{-10,-10},{10,10}},
-  //        origin={60,168},
-  //        rotation=0)));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resNZNZ[sum({i for
+      i in 1:(nNZs - 1)})](final G=BaseClasses.GSurfSurf(ANZ, hRad)) if
+         ATotNZ > 0 and nNZs > 1
+      "Resistor between different neighboured zone border surfaces" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          origin={170,148},
+          rotation=-90)));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallNZ[
+      nNZs](final G={min(ATotExt, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
+        ATotExt > 0 and ATotNZ > 0
+      "Resistor between exterior walls and neighboured zone borders" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          origin={80,66},
+          rotation=90)));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resWinNZ[nNZs](
+       final G={min(ATotWin, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
+         ATotNZ > 0 and ATotWin > 0 "Resistor between neighboured zone borders and windows"
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          origin={106,66},
+          rotation=90)));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntNZ[nNZs](
+        final G={min(AInt, ANZ[i])*hRad for i in 1:nNZs}, each dT(start=0)) if
+         AInt > 0 and ATotNZ > 0
+      "Resistor between interior walls and neighboured zone borders" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={132,66})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorNZ[nNZs](
+        final G={min(ANZ[i], AFloor)*hRad for i in 1:nNZs}, each dT(start=0)) if
+         ATotNZ > 0 and AFloor > 0
+      "Resistor between floor plate and neighboured zone borders" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={158,66})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofNZ[nNZs](
+        final G={min(ARoof, ANZ[j])*hRad for j in 1:nNZs}, each dT(start=0)) if
+        ARoof > 0 and ATotNZ > 0 "Resistor between roofs and neighboured zone borders"
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          origin={60,168},
+          rotation=0)));
 equation
 // connect NZ borders
   if ATotNZ > 0 then
@@ -121,79 +121,79 @@ equation
 //            148},{146,148}}, color={191,0,0}));
       end if;
     end for;
-//    for i in 2:nNZs loop
-//      for j in 1:(i-1) loop
-//        if ANZ[i] > 0 and ANZ[j] > 0 then
-//          if i==2 then
-//            connect(resNZNZ[1].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
-//                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
-//            connect(resNZNZ[1].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
-//                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
-//          else
-//            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
-//                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
-//            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
-//                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
-//          end if;
-//        end if;
-//      end for;
-//    end for;
+    for i in 2:nNZs loop
+      for j in 1:(i-1) loop
+        if ANZ[i] > 0 and ANZ[j] > 0 then
+          if i==2 then
+            connect(resNZNZ[1].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
+                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
+            connect(resNZNZ[1].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
+                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
+          else
+            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
+                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
+            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
+                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
+          end if;
+        end if;
+      end for;
+    end for;
   end if;
-//  if ATotExt > 0 then
-//    for j in 1:nNZs loop
-//      if ANZ[j] > 0 then
-//        connect(heatFlowSensor[j].port_a, resExtWallNZ[j].port_b) annotation (Line(
-//              points={{146,148},{154,148},{154,88},{80,88},{80,76}}, color={191,0,0}));
-//        connect(resExtWallNZ[j].port_a, convExtWall.solid) annotation (Line(points={{80,56},
-//                {80,44},{-62,44},{-62,-16},{-118,-16},{-118,-40},{-114,-40}},
-//              color={191,0,0}));
-//      end if;
-//    end for;
-//  end if;
-//  if ATotWin > 0 then
-//    for j in 1:nNZs loop
-//      if ANZ[j] > 0 then
-//        connect(resWinNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{106,76},
-//                {106,88},{154,88},{154,148},{146,148}},          color={191,0,0}));
-//        connect(resWinNZ[j].port_a, convWin.solid) annotation (Line(points={{106,56},
-//                {106,52},{60,52},{60,84},{-120,84},{-120,40},{-116,40}}, color={191,0,
-//                0}));
-//      end if;
-//    end for;
-//  end if;
-//  if AInt > 0 then
-//    for i in 1:nNZs loop
-//      if ANZ[i] > 0 then
-//        connect(resIntNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{132,76},
-//                {132,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
-//        connect(resIntNZ[i].port_a, convIntWall.solid) annotation (Line(points={{132,56},
-//                {132,-2},{152,-2},{152,-40},{148,-40}}, color={191,0,0}));
-//      end if;
-//    end for;
-//  end if;
-//  if AFloor > 0 then
-//    for i in 1:nNZs loop
-//      if ANZ[i] > 0 then
-//        connect(resFloorNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{158,76},
-//                {158,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
-//        connect(resFloorNZ[i].port_a, convFloor.solid) annotation (Line(points={{158,56},
-//                {158,26},{234,26},{234,-150},{26,-150},{26,-136},{-12,-136},{
-//                -12,-124}},
-//              color={191,0,0}));
-//      end if;
-//    end for;
-//  end if;
-//  if ARoof > 0 then
-//    for j in 1:nNZs loop
-//      if ANZ[j] > 0 then
-//        connect(resRoofNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(
-//              points={{70,168},{72,168},{72,170},{154,170},{154,148},{146,148}},
-//              color={191,0,0}));
-//        connect(resRoofNZ[j].port_a, convRoof.solid) annotation (Line(points={{50,168},
-//                {8,168},{8,136},{-12,136},{-12,130}}, color={191,0,0}));
-//      end if;
-//    end for;
-//  end if;
+  if ATotExt > 0 then
+    for j in 1:nNZs loop
+      if ANZ[j] > 0 then
+        connect(heatFlowSensor[j].port_a, resExtWallNZ[j].port_b) annotation (Line(
+              points={{146,148},{154,148},{154,88},{80,88},{80,76}}, color={191,0,0}));
+        connect(resExtWallNZ[j].port_a, convExtWall.solid) annotation (Line(points={{80,56},
+                {80,44},{-62,44},{-62,-16},{-118,-16},{-118,-40},{-114,-40}},
+              color={191,0,0}));
+      end if;
+    end for;
+  end if;
+  if ATotWin > 0 then
+    for j in 1:nNZs loop
+      if ANZ[j] > 0 then
+        connect(resWinNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{106,76},
+                {106,88},{154,88},{154,148},{146,148}},          color={191,0,0}));
+        connect(resWinNZ[j].port_a, convWin.solid) annotation (Line(points={{106,56},
+                {106,52},{60,52},{60,84},{-120,84},{-120,40},{-116,40}}, color={191,0,
+                0}));
+      end if;
+    end for;
+  end if;
+  if AInt > 0 then
+    for i in 1:nNZs loop
+      if ANZ[i] > 0 then
+        connect(resIntNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{132,76},
+                {132,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
+        connect(resIntNZ[i].port_a, convIntWall.solid) annotation (Line(points={{132,56},
+                {132,-2},{152,-2},{152,-40},{148,-40}}, color={191,0,0}));
+      end if;
+    end for;
+  end if;
+  if AFloor > 0 then
+    for i in 1:nNZs loop
+      if ANZ[i] > 0 then
+        connect(resFloorNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{158,76},
+                {158,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
+        connect(resFloorNZ[i].port_a, convFloor.solid) annotation (Line(points={{158,56},
+                {158,26},{234,26},{234,-150},{26,-150},{26,-136},{-12,-136},{
+                -12,-124}},
+              color={191,0,0}));
+      end if;
+    end for;
+  end if;
+  if ARoof > 0 then
+    for j in 1:nNZs loop
+      if ANZ[j] > 0 then
+        connect(resRoofNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(
+              points={{70,168},{72,168},{72,170},{154,170},{154,148},{146,148}},
+              color={191,0,0}));
+        connect(resRoofNZ[j].port_a, convRoof.solid) annotation (Line(points={{50,168},
+                {8,168},{8,136},{-12,136},{-12,130}}, color={191,0,0}));
+      end if;
+    end for;
+  end if;
 // internal gains splitter connections
 //  for i in 6:size(AArray, 1) loop
 //    if AArray[i] > 0 then
