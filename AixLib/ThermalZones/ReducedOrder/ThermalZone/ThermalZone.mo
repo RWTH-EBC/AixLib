@@ -112,8 +112,8 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   corG corGMod(
     final n=zoneParam.nOrientations,
-    final UWin=zoneParam.UWin) if
-    sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
+    final UWin=zoneParam.UWin)
+ if sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-16,43},{-4,55}})));
   replaceable EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
@@ -137,8 +137,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    TGroundFromInput=true) if
-                          zoneParam.ARoof > 0
+    TGroundFromInput=true) if zoneParam.ARoof > 0
     "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-40,66},{-28,78}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
@@ -229,8 +228,8 @@ model ThermalZone "Thermal zone containing moisture balance"
   replaceable SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
-    final gValues=zoneParam.shadingFactor) if
-    sum(zoneParam.ATransparent) > 0
+    final gValues=zoneParam.shadingFactor)
+ if sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{4,44},{10,50}})));
 
   // Air Exchange
@@ -285,16 +284,16 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{-48,-58},{-38,-48}})));
   BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains(
     final roomArea=zoneParam.AZone,
-    final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
-       ATot > 0 and use_moisture_balance
+    final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople)
+    if ATot > 0 and use_moisture_balance
     "Internal moisture gains by plants, etc."
     annotation (Dialog(enable=use_moisture_balance, tab="Moisture"),
       Placement(transformation(extent={{-70,-68},{-62,-60}})));
-  Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if
-       internalGainsMode <> 3 and use_moisture_balance
+  Modelica.Blocks.Sources.Constant noMoisturePerson(k=0)
+    if internalGainsMode <> 3 and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-58},{-62,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w if
-       (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
+  Modelica.Blocks.Interfaces.RealOutput X_w
+    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
     "Humidity output" annotation (Placement(transformation(extent={{100,-80},{
             120,-60}}),
                     iconTransformation(extent={{100,-80},{120,-60}})));
@@ -387,35 +386,44 @@ protected
     Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{-14,68},
             {-6,76}})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if
-    zoneParam.ARoof > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof
+ if zoneParam.ARoof > 0
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,5},{-5,-5}},rotation=0,
     origin={5,83})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof if
-    zoneParam.ARoof > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
+ if zoneParam.ARoof > 0
     "Prescribed temperature for roof outdoor surface temperature"
     annotation (Placement(transformation(extent={{-4.5,-4},{4.5,4}},
                                                                 rotation=0,
     origin={-9.5,84})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor if
-    zoneParam.AFloor > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
+ if zoneParam.AFloor > 0
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
+  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
+    final dataSource=zoneParam.TSoilDataSource,
+    final TMean=zoneParam.TSoil,
+    final offsetTime=zoneParam.TSoilOffsetTime,
+    final amplitudeTGround=zoneParam.TSoilAmplitude,
+    final fileDataSource=zoneParam.TSoilFile)
+    "Outdoor surface temperature for floor plate"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
+    rotation=180,origin={39,22})));
   Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt))
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
         origin={-2,16})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWall if
-    sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWall
+ if sum(zoneParam.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{26,24},{16,14}})));
   Modelica.Blocks.Sources.Constant hConWin(final k=(zoneParam.hConWinOut + zoneParam.hRadWall)*sum(zoneParam.AWin))
     "Outdoor coefficient of heat transfer for windows" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90,
         origin={22,48})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
-    sum(zoneParam.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWin
+ if sum(zoneParam.AWin) > 0
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{26,30},{16,40}})));
   Modelica.Blocks.Math.Add solRadRoof[zoneParam.nOrientationsRoof]
@@ -424,12 +432,12 @@ protected
   Modelica.Blocks.Math.Add solRadWall[zoneParam.nOrientations]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-54,22},{-44,32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall if
-    sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall
+ if sum(zoneParam.AExt) > 0
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{-18,16},{-10,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin if
-    sum(zoneParam.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin
+ if sum(zoneParam.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{4,31},{12,38}})));
 
@@ -452,8 +460,8 @@ protected
         origin={-35,-1})));
 
   // protected: MoistAir
-  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
+  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w)
+    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
     annotation (Placement(transformation(extent={{-28,-56},{-20,-40}})));
 
 
@@ -483,15 +491,7 @@ protected
   Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
      and use_NaturalAirExchange and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-14},{-64,-8}})));
-  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
-    final dataSource=zoneParam.TSoilDataSource,
-    final TMean=zoneParam.TSoil,
-    final offsetTime=zoneParam.TSoilOffsetTime,
-    final amplitudeTGround=zoneParam.TSoilAmplitude,
-    final fileDataSource=zoneParam.TSoilFile)
-    "Outdoor surface temperature for floor plate"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
-    rotation=180,origin={39,22})));
+
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -1089,6 +1089,12 @@ end if;
           smooth=Smooth.None,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
+        Text(
+          extent={{65,-7},{90,-18}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Internal Gains"),
         Polygon(
           points={{30,100},{-88,100},{-88,60},{30,60},{30,100},{30,100},{30,100}},
           lineColor={0,0,255},
@@ -1154,12 +1160,6 @@ Cooling"),
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="Moisture"),
-        Text(
-          extent={{65,-3},{90,-14}},
-          lineColor={0,0,255},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="Internal Gains"),
         Rectangle(
           extent={{-72,6},{-2,-38}},
           lineColor={0,0,255},

@@ -3,6 +3,8 @@ AirFlowRateSplit
 AirFlowRateSum
 MoistSplitter
 MultizonePostProcessing
+NzSplitter
 PartialMultizone
 RelToAbsHum
 SumCondition
+nzSplitVal

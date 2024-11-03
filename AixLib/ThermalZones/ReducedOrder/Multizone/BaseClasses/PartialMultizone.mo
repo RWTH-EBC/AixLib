@@ -12,6 +12,11 @@ partial model PartialMultizone "Partial model for multizone models"
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
+  parameter Integer sumNzConnectors = sum(zoneParam[:].nNZs) "Total number of adjacent zone connectors";
+  parameter Integer actNzConnectors = sum(zoneParam[:].nNZs) / 2 "Actual number of adjacent zone connectors";
+  parameter Integer[numZones,2] nzConnectorIndex = fill(1, numZones, 2) "Start and end index of connectors each zone uses";
+  parameter Integer[sumNzConnectors] otherNzIndices = fill(1, sum(zoneParam[:].nNZs)) "List of target indices for each NZ port";
+  parameter Integer[actNzConnectors,2] nzConnectionPairs = fill(1, actNzConnectors, 2) "List of nz connection indices to connect";
   replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
 
@@ -19,7 +24,8 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"  annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
 
-
+  parameter Boolean use_interzonal_flow=false
+    "Consider heat flow between thermal zones by setting true";
   parameter Boolean use_MechanicalAirExchange=true
     "Consider mechanical ventilation by setting true";
   parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
@@ -75,13 +81,13 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
-       ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0 "Radiative internal gains"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    if ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
@@ -211,7 +217,10 @@ partial model PartialMultizone "Partial model for multizone models"
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={38,-110})));
-
+  NzSplitter nzDistributor(nConnections=actNzConnectors, connectionPairs=nzConnectionPairs)//nPorts = sumNzConnectors, splitFactor=nzSplitVal(sumNzConnectors, otherNzIndices))
+    if numZones > 1 and use_interzonal_flow
+    "Distributor for connection between adjacent zones" annotation(
+    Placement(transformation(origin = {88, 92}, extent = {{-4, -4}, {4, 4}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
@@ -254,7 +263,11 @@ equation
   end if;
 
 
-
+  if numZones > 1 and use_interzonal_flow then
+    for i in 1:numZones loop
+      connect(zone[i].nzHeatFlow[1:zoneParam[i].nNZs], nzDistributor.splitterPort[sum(zoneParam[1:i-1].nNZs)+1:(sum(zoneParam[1:i-1].nNZs)+zoneParam[i].nNZs)]);
+    end for;
+  end if;
 
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
@@ -276,25 +289,26 @@ equation
         color={0,0,127},
         smooth=Smooth.None));
     end if;
+    
 
     // connect neighboured zone with higher index to this NZ, making sure that
     // multiple NZ borders between two zones are connected in the same order
-    if sum(zoneParam[i].ANZ) > 0 then
-      for i_i in 1:zoneParam[i].nNZs loop
-        for j in i:numZones loop
-          if sum(zoneParam[j].ANZ) > 0 and zoneParam[i].otherNZIndex[i_i] == j then
-            for j_i in 1:zoneParam[j].nNZs loop
-              if zoneParam[j].otherNZIndex[j_i] == i then
-                if sum({if o == i then 1 else 0 for o in zoneParam[j].otherNZIndex[1:j_i]}) == sum({if o == j then 1 else 0 for o in zoneParam[i].otherNZIndex[1:i_i]}) then
-                  connect(zone[i].nzHeatFlow[i_i], zone[j].nzHeatFlow[j_i]) annotation (Line(points={{80,85.9},
-                          {90,85.9},{90,88},{86,88},{86,85.9},{80,85.9}},                                                                     color={191,0,0}));
-                end if;
-              end if;
-            end for;
-          end if;
-        end for;
-      end for;
-    end if;
+//    if sum(zoneParam[i].ANZ) > 0 then
+//      for i_i in 1:zoneParam[i].nNZs loop
+//        for j in i:numZones loop
+//          if sum(zoneParam[j].ANZ) > 0 and zoneParam[i].otherNZIndex[i_i] == j then
+//            for j_i in 1:zoneParam[j].nNZs loop
+//              if zoneParam[j].otherNZIndex[j_i] == i then
+//                if sum({if o == i then 1 else 0 for o in zoneParam[j].otherNZIndex[1:j_i]}) == sum({if o == j then 1 else 0 for o in zoneParam[i].otherNZIndex[1:i_i]}) then
+//                  connect(zone[i].nzHeatFlow[i_i], zone[j].nzHeatFlow[j_i]) annotation (Line(points={{80,85.9},
+//                          {90,85.9},{90,88},{86,88},{86,85.9},{80,85.9}},                                                                     color={191,0,0}));
+//                end if;
+//              end if;
+//            end for;
+//          end if;
+//        end for;
+//      end for;
+//    end if;
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80.42,70.32},
           {86,70.32},{86,-78},{66,-78},{-100,-78},{-100,-70}},

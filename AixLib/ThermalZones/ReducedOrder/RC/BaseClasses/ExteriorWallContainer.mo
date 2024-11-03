@@ -31,9 +31,11 @@ model ExteriorWallContainer
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a "interior port"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
     iconTransformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b "exterior port"
-    annotation (Placement(transformation(extent={{90,-10},{110,10}}),
-    iconTransformation(extent={{90,-10},{110,10}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b "exterior port"
+      annotation (Placement(transformation(extent={{90,-10},{110,10}}),
+      iconTransformation(extent={{90,-10},{110,10}})));
+//  InteriorWall extWallRC(n = 1, CInt = CExt, T_start = T_start, RInt = RExt)  annotation(
+//    Placement(transformation(extent = {{-10, -11}, {10, 11}})));
 equation
   if pass_through then
     port_a.Q_flow = -port_b.Q_flow;
