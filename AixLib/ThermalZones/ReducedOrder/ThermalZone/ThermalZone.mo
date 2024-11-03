@@ -907,7 +907,7 @@ end if;
               -69.82},{-51.69,-62},{-16,-62},{-16,-52},{26,-52},{26,0},{98,0},{98,
               90},{87,90}},
         color={0,0,127}));
-      connect(TSoil.y, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
+      connect(TSoil.TGroundOut, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
               {46,22},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},{-34,-68},{-34,
               -73.18},{-39.79,-73.18}},
         color={0,0,127}));

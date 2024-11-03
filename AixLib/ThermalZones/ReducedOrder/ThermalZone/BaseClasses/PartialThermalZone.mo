@@ -69,7 +69,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Radiative internal gains"
     annotation (Placement(transformation(extent={{94,30},{114,50}}),
                             iconTransformation(extent={{92,24},{112,44}})));
-  AixLib.ThermalZones.ReducedOrder.RC.FourElements ROM(
+  AixLib.ThermalZones.ReducedOrder.RC.FiveElements ROM(
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
