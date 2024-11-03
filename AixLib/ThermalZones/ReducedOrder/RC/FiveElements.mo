@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 
 model FiveElements "Thermal Zone with five elements for exterior walls, interior walls, floor plate, roof, and neighboured zone borders\""
-  extends FourElements(AArray = cat(1, {ATotExt, ATotWin, AInt, AFloor, ARoof}));
-  //, ANZ));
+  extends FourElements(AArray = cat(1, {ATotExt, ATotWin, AInt, AFloor, ARoof}, ANZ));
   parameter Integer nNZs(min = 1) "Number of neighboured zone borders to consider" annotation(
     Dialog(group = "Zone borders"));
   parameter Modelica.Units.SI.Area ANZ[nNZs] "Area of neighboured zone borders" annotation(
@@ -30,16 +29,12 @@ model FiveElements "Thermal Zone with five elements for exterior walls, interior
               {195,190}})));
   BaseClasses.ExteriorWallContainer nzRC[nNZs](final RExt = RNZ, final RExtRem = RNZRem, final CExt = CNZ, final pass_through = {thisZoneIndex > otherNZIndex[i] for i in 1:nNZs}, each final n = nNZ, each final T_start = T_start) if ATotNZ > 0 "RC-element for NZ borders" annotation(
     Placement(transformation(extent = {{-10, -11}, {10, 11}}, rotation = 90, origin = {102, 155})));
-  //  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a nzIndoorSurface[nNZs] if
-  //     indoorPortNZ "Auxiliary port at indoor surface of NZ borders"
-  //    annotation (Placement(transformation(extent={{124,-190},{144,-170}}),
-  //        iconTransformation(extent={{-50,-190},{-30,-170}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a nzIndoorSurface[nNZs] if
+       indoorPortNZ "Auxiliary port at indoor surface of NZ borders"
+      annotation (Placement(transformation(extent={{124,-190},{144,-170}}),
+          iconTransformation(extent={{-50,-190},{-30,-170}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor[nNZs] if ATotNZ > 0 "measures radiative heat flow to NZ border surfaces" annotation(
     Placement(transformation(extent = {{8, 8}, {-8, -8}}, rotation = 0, origin = {138, 148})));
-  //  Modelica.Blocks.Interfaces.RealOutput qRad[nNZs](each final quantity="RadiantEnergyFluenceRate",
-  //      each final unit="W/m2") if ATotNZ > 0
-  //    "specific radiation to neighboured zone border surfaces"
-  //    annotation (Placement(transformation(extent={{240,50},{260,70}})));
 
 protected
   parameter Modelica.Units.SI.Area ATotNZ = sum(ANZ) "Sum of neighboured zone border areas";
@@ -47,12 +42,7 @@ protected
     Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 90, origin = {102, 124})));
   Modelica.Blocks.Sources.Constant hConNZ_const[nNZs](final k = ANZ.*hConNZ) if ATotNZ > 0 "Coefficient of convective heat transfer for neighbourd zone borders" annotation(
     Placement(transformation(origin = {134, 124}, extent = {{-5, -5}, {5, 5}}, rotation = 180)));
-//    Modelica.Blocks.Math.Gain specificRadFlow[nNZs](
-//      final k(each unit="1/m2") = fill(1,nNZs)./{if A > 0 then A else 1 for A in ANZ},
-//      u(each final unit="W"),
-//      y(each final unit="W/m2")) if ATotNZ > 0
-//      "calculates specific radiative heat flow to  neighboured zone borders"
-//      annotation (Placement(transformation(extent={{166,116},{176,126}})));
+
   // connections
     Modelica.Thermal.HeatTransfer.Components.ThermalConductor resNZNZ[sum({i for
       i in 1:(nNZs - 1)})](final G=BaseClasses.GSurfSurf(ANZ, hRad)) if
@@ -116,9 +106,9 @@ equation
           Line(points = {{102, 114}, {102, 98}, {66, 98}, {66, 0}, {80, 0}}, color = {191, 0, 0}));
         connect(heatFlowSensor[i].port_b, convNZ[i].solid) annotation(
           Line(points = {{130, 148}, {120, 148}, {120, 140}, {102, 140}, {102, 134}}, color = {191, 0, 0}));
-//        connect(nzIndoorSurface[i], heatFlowSensor[i].port_a) annotation (Line(points={{134,
-//            -180},{134,-166},{114,-166},{114,44},{118,44},{118,100},{154,100},{154,
-//            148},{146,148}}, color={191,0,0}));
+        connect(nzIndoorSurface[i], heatFlowSensor[i].port_a) annotation (Line(points={{134,
+            -180},{134,-166},{114,-166},{114,44},{118,44},{118,100},{154,100},{154,
+            148},{146,148}}, color={191,0,0}));
       end if;
     end for;
     for i in 2:nNZs loop
@@ -195,22 +185,15 @@ equation
     end for;
   end if;
 // internal gains splitter connections
-//  for i in 6:size(AArray, 1) loop
-//    if AArray[i] > 0 then
-//      connect(thermSplitterIntGains.portOut[sum({if A > 0 then 1 else 0 for A in AArray[1:i]})], heatFlowSensor[i-5].port_a)
-//        annotation (Line(points={{190,86},{178,86},{178,108},{154,108},{154,148},
-//              {146,148}},
-//                    color={191,0,0}));
-//      connect(thermSplitterSolRad.portOut[sum({if A > 0 then 1 else 0 for A in AArray[1:i]})], heatFlowSensor[i-5].port_a) annotation (
-//         Line(points={{-122,146},{-116,146},{-116,88},{154,88},{154,148},{146,148}},
-//            color={191,0,0}));
-//    end if;
-//  end for;
-//  connect(heatFlowSensor.Q_flow, specificRadFlow.u) annotation (Line(points={{138,
-//          156.8},{138,160},{150,160},{150,121},{165,121}},
-//                                                         color={0,0,127}));
-//  connect(specificRadFlow.y, qRad) annotation (Line(points={{176.5,121},{196,121},
-//          {196,60},{250,60}}, color={0,0,127}));
+  for i in 1:nNZs loop
+    connect(thermSplitterIntGains.portOut[end-nNZs+i], heatFlowSensor[i].port_a)
+      annotation (Line(points={{190,86},{178,86},{178,108},{154,108},{154,148},{146,148}},
+        color={191,0,0}));  
+    connect(thermSplitterSolRad.portOut[end-nNZs+i], heatFlowSensor[i].port_a) 
+      annotation (Line(points={{-122,146},{-116,146},{-116,88},{154,88},{154,148},{146,148}},
+        color={191,0,0}));
+  end for;  
+
   annotation(
     defaultComponentName = "theZon",
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-240, -180}, {240, 180}}), graphics = {Polygon(points = {{74, 168}, {188, 168}, {188, 106}, {98, 106}, {96, 106}, {74, 106}, {74, 168}}, lineColor = {0, 0, 255}, smooth = Smooth.None, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{108, 118}, {146, 104}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, textString = "NZ borders")}),

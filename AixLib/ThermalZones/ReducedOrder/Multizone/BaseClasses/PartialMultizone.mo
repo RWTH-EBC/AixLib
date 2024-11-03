@@ -12,11 +12,8 @@ partial model PartialMultizone "Partial model for multizone models"
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
-  parameter Integer sumNzConnectors = sum(zoneParam[:].nNZs) "Total number of adjacent zone connectors";
-  parameter Integer actNzConnectors = sum(zoneParam[:].nNZs) / 2 "Actual number of adjacent zone connectors";
-  parameter Integer[numZones,2] nzConnectorIndex = fill(1, numZones, 2) "Start and end index of connectors each zone uses";
-  parameter Integer[sumNzConnectors] otherNzIndices = fill(1, sum(zoneParam[:].nNZs)) "List of target indices for each NZ port";
-  parameter Integer[actNzConnectors,2] nzConnectionPairs = fill(1, actNzConnectors, 2) "List of nz connection indices to connect";
+  parameter Integer nNzConnectors(min=1) "Actual number of adjacent zone connectors";
+  parameter Integer[nNzConnectors,2] nzConnectionPairs = fill(1, nNzConnectors, 2) "List of nz connection indices to connect";
   replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
 
@@ -217,7 +214,7 @@ partial model PartialMultizone "Partial model for multizone models"
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={38,-110})));
-  NzSplitter nzDistributor(nConnections=actNzConnectors, connectionPairs=nzConnectionPairs)//nPorts = sumNzConnectors, splitFactor=nzSplitVal(sumNzConnectors, otherNzIndices))
+  NzSplitter nzDistributor(nConnections=nNzConnectors, connectionPairs=nzConnectionPairs)
     if numZones > 1 and use_interzonal_flow
     "Distributor for connection between adjacent zones" annotation(
     Placement(transformation(origin = {88, 92}, extent = {{-4, -4}, {4, 4}})));
@@ -262,7 +259,7 @@ equation
     end for;
   end if;
 
-
+  // connect heat flow between zones
   if numZones > 1 and use_interzonal_flow then
     for i in 1:numZones loop
       connect(zone[i].nzHeatFlow[1:zoneParam[i].nNZs], nzDistributor.splitterPort[sum(zoneParam[1:i-1].nNZs)+1:(sum(zoneParam[1:i-1].nNZs)+zoneParam[i].nNZs)]);
@@ -289,26 +286,6 @@ equation
         color={0,0,127},
         smooth=Smooth.None));
     end if;
-    
-
-    // connect neighboured zone with higher index to this NZ, making sure that
-    // multiple NZ borders between two zones are connected in the same order
-//    if sum(zoneParam[i].ANZ) > 0 then
-//      for i_i in 1:zoneParam[i].nNZs loop
-//        for j in i:numZones loop
-//          if sum(zoneParam[j].ANZ) > 0 and zoneParam[i].otherNZIndex[i_i] == j then
-//            for j_i in 1:zoneParam[j].nNZs loop
-//              if zoneParam[j].otherNZIndex[j_i] == i then
-//                if sum({if o == i then 1 else 0 for o in zoneParam[j].otherNZIndex[1:j_i]}) == sum({if o == j then 1 else 0 for o in zoneParam[i].otherNZIndex[1:i_i]}) then
-//                  connect(zone[i].nzHeatFlow[i_i], zone[j].nzHeatFlow[j_i]) annotation (Line(points={{80,85.9},
-//                          {90,85.9},{90,88},{86,88},{86,85.9},{80,85.9}},                                                                     color={191,0,0}));
-//                end if;
-//              end if;
-//            end for;
-//          end if;
-//        end for;
-//      end for;
-//    end if;
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80.42,70.32},
           {86,70.32},{86,-78},{66,-78},{-100,-78},{-100,-70}},
@@ -366,6 +343,10 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html><ul>
+  <li>November 3, 2024, by Philip Groesdonk:<br/>
+    Added interzonal connections. This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1080\">issue 1080</a>.
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and AixLib models.
   </li>
