@@ -33,9 +33,6 @@ model FiveElements "Thermal Zone with five elements for exterior walls, interior
        indoorPortNZ "Auxiliary port at indoor surface of NZ borders"
       annotation (Placement(transformation(extent={{124,-190},{144,-170}}),
           iconTransformation(extent={{-50,-190},{-30,-170}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor[nNZs] if ATotNZ > 0 "measures radiative heat flow to NZ border surfaces" annotation(
-    Placement(transformation(extent = {{8, 8}, {-8, -8}}, rotation = 0, origin = {138, 148})));
-
 protected
   parameter Modelica.Units.SI.Area ATotNZ = sum(ANZ) "Sum of neighboured zone border areas";
   Modelica.Thermal.HeatTransfer.Components.Convection convNZ[nNZs] if ATotNZ > 0 "Convective heat transfer of neighboured zone borders" annotation(
@@ -104,26 +101,24 @@ equation
           Line(points = {{112, 124}, {128.5, 124}}, color = {0, 0, 127}));
         connect(convNZ[i].fluid, senTAir.port) annotation(
           Line(points = {{102, 114}, {102, 98}, {66, 98}, {66, 0}, {80, 0}}, color = {191, 0, 0}));
-        connect(heatFlowSensor[i].port_b, convNZ[i].solid) annotation(
-          Line(points = {{130, 148}, {120, 148}, {120, 140}, {102, 140}, {102, 134}}, color = {191, 0, 0}));
-        connect(nzIndoorSurface[i], heatFlowSensor[i].port_a) annotation (Line(points={{134,
-            -180},{134,-166},{114,-166},{114,44},{118,44},{118,100},{154,100},{154,
-            148},{146,148}}, color={191,0,0}));
+        connect(nzIndoorSurface[i], convNZ[i].solid) annotation (Line(points={{134,
+            -180},{134,-166},{114,-166},{114,44},{118,44},{118,100},{85,100},{85,
+            140},{102,140}, {102,134}}, color={191,0,0}));
       end if;
     end for;
     for i in 2:nNZs loop
       for j in 1:(i-1) loop
         if ANZ[i] > 0 and ANZ[j] > 0 then
           if i==2 then
-            connect(resNZNZ[1].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
-                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
-            connect(resNZNZ[1].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
-                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
+            connect(resNZNZ[1].port_a, convNZ[i].solid) annotation (Line(points={{170,158},
+                    {170,162},{152,162},{152,140},{102,140},{102,134}}, color={191,0,0}));
+            connect(resNZNZ[1].port_b, convNZ[j].solid) annotation (Line(points={{170,138},
+                    {170,134},{152,134},{152,140},{102,140},{102,134}}, color={191,0,0}));
           else
-            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_a, heatFlowSensor[i].port_a) annotation (Line(points={{170,158},
-                    {170,162},{152,162},{152,148},{146,148}},           color={191,0,0}));
-            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{170,138},
-                    {170,134},{152,134},{152,148},{146,148}},           color={191,0,0}));
+            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_a, convNZ[i].solid) annotation (Line(points={{170,158},
+                    {170,162},{152,162},{152,140},{102,140},{102,134}}, color={191,0,0}));
+            connect(resNZNZ[sum({k for k in 1:(i-2)}) + j].port_b, convNZ[j].solid) annotation (Line(points={{170,138},
+                    {170,134},{152,134},{152,140},{102,140},{102,134}}, color={191,0,0}));
           end if;
         end if;
       end for;
@@ -132,8 +127,8 @@ equation
   if ATotExt > 0 then
     for j in 1:nNZs loop
       if ANZ[j] > 0 then
-        connect(heatFlowSensor[j].port_a, resExtWallNZ[j].port_b) annotation (Line(
-              points={{146,148},{154,148},{154,88},{80,88},{80,76}}, color={191,0,0}));
+        connect(convNZ[j].solid, resExtWallNZ[j].port_b) annotation (Line(
+              points={{102,134},{102,140},{85,140},{85,88},{80,88},{80,76}}, color={191,0,0}));
         connect(resExtWallNZ[j].port_a, convExtWall.solid) annotation (Line(points={{80,56},
                 {80,44},{-62,44},{-62,-16},{-118,-16},{-118,-40},{-114,-40}},
               color={191,0,0}));
@@ -143,8 +138,8 @@ equation
   if ATotWin > 0 then
     for j in 1:nNZs loop
       if ANZ[j] > 0 then
-        connect(resWinNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(points={{106,76},
-                {106,88},{154,88},{154,148},{146,148}},          color={191,0,0}));
+        connect(resWinNZ[j].port_b, convNZ[j].solid) annotation (Line(points={{106,76},
+                {106,88},{85,88},{85,140},{102,140},{102,134}}, color={191,0,0}));
         connect(resWinNZ[j].port_a, convWin.solid) annotation (Line(points={{106,56},
                 {106,52},{60,52},{60,84},{-120,84},{-120,40},{-116,40}}, color={191,0,
                 0}));
@@ -154,8 +149,8 @@ equation
   if AInt > 0 then
     for i in 1:nNZs loop
       if ANZ[i] > 0 then
-        connect(resIntNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{132,76},
-                {132,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
+        connect(resIntNZ[i].port_b, convNZ[i].solid) annotation (Line(points={{132,76},
+                {132,88},{85,88},{85,140},{102,140},{102,134}}, color={191,0,0}));
         connect(resIntNZ[i].port_a, convIntWall.solid) annotation (Line(points={{132,56},
                 {132,-2},{152,-2},{152,-40},{148,-40}}, color={191,0,0}));
       end if;
@@ -164,8 +159,8 @@ equation
   if AFloor > 0 then
     for i in 1:nNZs loop
       if ANZ[i] > 0 then
-        connect(resFloorNZ[i].port_b, heatFlowSensor[i].port_a) annotation (Line(points={{158,76},
-                {158,88},{154,88},{154,148},{146,148}},     color={191,0,0}));
+        connect(resFloorNZ[i].port_b, convNZ[i].solid) annotation (Line(points={{158,76},
+                {158,88},{85,88},{85,140},{102,140},{102,134}}, color={191,0,0}));
         connect(resFloorNZ[i].port_a, convFloor.solid) annotation (Line(points={{158,56},
                 {158,26},{234,26},{234,-150},{26,-150},{26,-136},{-12,-136},{
                 -12,-124}},
@@ -176,8 +171,8 @@ equation
   if ARoof > 0 then
     for j in 1:nNZs loop
       if ANZ[j] > 0 then
-        connect(resRoofNZ[j].port_b, heatFlowSensor[j].port_a) annotation (Line(
-              points={{70,168},{72,168},{72,170},{154,170},{154,148},{146,148}},
+        connect(resRoofNZ[j].port_b, convNZ[j].solid) annotation (Line(
+              points={{70,168},{72,168},{72,170},{85,170},{85,140},{102,140},{102,134}},
               color={191,0,0}));
         connect(resRoofNZ[j].port_a, convRoof.solid) annotation (Line(points={{50,168},
                 {8,168},{8,136},{-12,136},{-12,130}}, color={191,0,0}));
@@ -186,11 +181,11 @@ equation
   end if;
 // internal gains splitter connections
   for i in 1:nNZs loop
-    connect(thermSplitterIntGains.portOut[end-nNZs+i], heatFlowSensor[i].port_a)
-      annotation (Line(points={{190,86},{178,86},{178,108},{154,108},{154,148},{146,148}},
+    connect(thermSplitterIntGains.portOut[end-nNZs+i], convNZ[i].solid)
+      annotation (Line(points={{190,86},{178,86},{178,108},{85,108},{85,140},{102,140},{102,134}},
         color={191,0,0}));  
-    connect(thermSplitterSolRad.portOut[end-nNZs+i], heatFlowSensor[i].port_a) 
-      annotation (Line(points={{-122,146},{-116,146},{-116,88},{154,88},{154,148},{146,148}},
+    connect(thermSplitterSolRad.portOut[end-nNZs+i], convNZ[i].solid) 
+      annotation (Line(points={{-122,146},{-116,146},{-116,88},{85,88},{85,140},{102,140},{102,134}},
         color={191,0,0}));
   end for;  
 

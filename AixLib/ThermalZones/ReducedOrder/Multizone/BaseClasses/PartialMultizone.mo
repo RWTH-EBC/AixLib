@@ -13,7 +13,8 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter Integer numZones(min=1)
     "Number of zones";
   parameter Integer nNzConnectors(min=1) "Actual number of adjacent zone connectors";
-  parameter Integer[nNzConnectors,2] nzConnectionPairs = fill(1, nNzConnectors, 2) "List of nz connection indices to connect";
+  parameter Integer[nNzConnectors,2] nzConnectionPairs = fill(1, nNzConnectors, 2) 
+    "List of nz index pairs to connect, each pointing to a concatenated array of all ThermalZones' nzHeatFlow ports";
   replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
 
