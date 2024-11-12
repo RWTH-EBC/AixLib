@@ -1,34 +1,6 @@
 
 
 
-AixLib/Fluid/BoilerCHP/Boiler.mo
-1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
-
-2: Name 'paramHC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param. Affected line: parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition paramHC "Parameters for heating curve" annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
-
-3: Name 'KR' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K. Affected line: parameter Real KR=1 "Gain of Boiler heater" annotation (Dialog(tab = "General", group = "Boiler type"));
-
-4: Name 'TN' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N. Affected line: parameter Modelica.Units.SI.Time TN=0.1 "Time Constant of boiler heater (T>0 required)" annotation (Dialog(tab="General", group="Boiler type"));
-
-5: Name 'riseTime' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rise. Affected line: parameter Modelica.Units.SI.Time riseTime=30 "Rise/Fall time for step input(T>0 required)" annotation (Dialog(tab="General", group="Boiler type"));
-
-6: Name 'declination' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: declination. Affected line: parameter Real declination=1.1 "Declination" annotation(Dialog(tab="External Control"));
-
-7: Name 'Tdelta_Max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tdelta_. Affected line: parameter Modelica.Units.SI.TemperatureDifference Tdelta_Max=2 "Difference from set flow temperature over which boiler stops" annotation (Dialog(tab="External Control"));
-
-8: Name 'Tdelta_Min' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tdelta_. Affected line: parameter Modelica.Units.SI.TemperatureDifference Tdelta_Min=2 "Difference from set flow temperature under which boiler starts" annotation (Dialog(tab="External Control"));
-
-9: Name 'Fb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fb. Affected line: parameter Modelica.Units.SI.Time Fb=3600 "Period of time for increased set temperature" annotation (Dialog(tab="External Control"));
-
-10: Name 'FA' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: parameter Real FA=0.2 "Increment for increased set temperature" annotation(Dialog(tab="External Control"));
-
-11: Name 'TAmbient' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ambient. Affected line: Modelica.Blocks.Interfaces.RealInput TAmbient( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") "Ambient air temperature" annotation (Placement( transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent= {{-80,60},{-60,80}})));
-
-12: Name 'switchToNightMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch, Night, Mode. Affected line: Modelica.Blocks.Interfaces.BooleanInput switchToNightMode "Connector of Boolean input signal" annotation (Placement(transformation( extent={{-100,10},{-60,50}}), iconTransformation(extent={{-80,30},{-60, 50}})));
-
-13: Name 'ExtControl' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Control. Affected line: replaceable model ExtControl = AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl "External control" annotation (Dialog(tab="External Control"),choicesAllMatching=true);
-
-
 AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
 1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group= "Boiler type"), choicesAllMatching=true);
 
@@ -67,16 +39,32 @@ AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
 18: Name 'efficiencyTableLoadDepending1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: efficiency, Table, Load, Depending. Affected line: Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending1( final tableOnFile=false, final table=etaTempBased, final columns={2}, final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) "Table with efficiency parameters" annotation (Placement(transformation(extent={{-40,20},{-19,41}})));
 
 
-AixLib/DataBase/Boiler/General/BoilerTwoPointBaseDataDefinition.mo
-1: Missing documentation. Affected line: import Modelica.Units.SI;
+AixLib/Fluid/BoilerCHP/Boiler.mo
+1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
 
-2: Name 'name' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: name. Affected line: parameter String name "Name of boiler";
+2: Name 'paramHC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param. Affected line: parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition paramHC "Parameters for heating curve" annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
 
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Volume volume "Water volume of boiler";
+3: Name 'KR' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K. Affected line: parameter Real KR=1 "Gain of Boiler heater" annotation (Dialog(tab = "General", group = "Boiler type"));
 
-4: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
+4: Name 'TN' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N. Affected line: parameter Modelica.Units.SI.Time TN=0.1 "Time Constant of boiler heater (T>0 required)" annotation (Dialog(tab="General", group="Boiler type"));
 
-5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Power Q_nom "Nominal heat power / thermal load, refering to net (inferior) calorific value";parameter SI.Power Q_min "Minimal heat power / thermal load, refering to net (inferior) calorific value";parameter Real[:,2] eta "Normal supply level";
+5: Name 'riseTime' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rise. Affected line: parameter Modelica.Units.SI.Time riseTime=30 "Rise/Fall time for step input(T>0 required)" annotation (Dialog(tab="General", group="Boiler type"));
+
+6: Name 'declination' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: declination. Affected line: parameter Real declination=1.1 "Declination" annotation(Dialog(tab="External Control"));
+
+7: Name 'Tdelta_Max' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tdelta_. Affected line: parameter Modelica.Units.SI.TemperatureDifference Tdelta_Max=2 "Difference from set flow temperature over which boiler stops" annotation (Dialog(tab="External Control"));
+
+8: Name 'Tdelta_Min' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tdelta_. Affected line: parameter Modelica.Units.SI.TemperatureDifference Tdelta_Min=2 "Difference from set flow temperature under which boiler starts" annotation (Dialog(tab="External Control"));
+
+9: Name 'Fb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fb. Affected line: parameter Modelica.Units.SI.Time Fb=3600 "Period of time for increased set temperature" annotation (Dialog(tab="External Control"));
+
+10: Name 'FA' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: parameter Real FA=0.2 "Increment for increased set temperature" annotation(Dialog(tab="External Control"));
+
+11: Name 'TAmbient' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ambient. Affected line: Modelica.Blocks.Interfaces.RealInput TAmbient( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") "Ambient air temperature" annotation (Placement( transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent= {{-80,60},{-60,80}})));
+
+12: Name 'switchToNightMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch, Night, Mode. Affected line: Modelica.Blocks.Interfaces.BooleanInput switchToNightMode "Connector of Boolean input signal" annotation (Placement(transformation( extent={{-100,10},{-60,50}}), iconTransformation(extent={{-80,30},{-60, 50}})));
+
+13: Name 'ExtControl' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Control. Affected line: replaceable model ExtControl = AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl "External control" annotation (Dialog(tab="External Control"),choicesAllMatching=true);
 
 
 AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo
@@ -93,3 +81,15 @@ AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo
 6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: MixingVolumes.MixingVolume vol( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final m_flow_small=m_flow_small, final allowFlowReversal=allowFlowReversal, final nPorts=2, final p_start=p_start, final T_start=T_start) "Fluid volume" annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));FixedResistances.PressureDrop pressureDrop( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final show_T=false, final allowFlowReversal=allowFlowReversal, final dp_nominal=dp_nominal, final deltaM=deltaM, final from_dp=from_dp, final linearized=linearized) "Pressure drop" annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
 
 7: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( Medium.p_default, Medium.T_default, Medium.X_default) "Density used for parameterization of pressure curve" annotation (Dialog(tab="Advanced", group="Pressure drop"));
+
+
+AixLib/DataBase/Boiler/General/BoilerTwoPointBaseDataDefinition.mo
+1: Missing documentation. Affected line: import Modelica.Units.SI;
+
+2: Name 'name' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: name. Affected line: parameter String name "Name of boiler";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Volume volume "Water volume of boiler";
+
+4: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Power Q_nom "Nominal heat power / thermal load, refering to net (inferior) calorific value";parameter SI.Power Q_min "Minimal heat power / thermal load, refering to net (inferior) calorific value";parameter Real[:,2] eta "Normal supply level";
