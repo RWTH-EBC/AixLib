@@ -1,6 +1,34 @@
 
 
 
+AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo
+1: Name 'transferHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: transfer, Heat. Affected line: parameter Boolean transferHeat=false "If true, temperature T converges towards TAmb when no flow" annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+
+2: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Guess value of m_flow = port_a.m_flow" annotation (Dialog(tab="Advanced", group="Initialization"));
+
+3: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Coefficient of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n." annotation (Dialog(tab="Advanced", group="Pressure drop"));
+
+4: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sensors.TemperatureTwoPort senTCold( redeclare final package Medium = Medium, final tau=tau, final m_flow_nominal=m_flow_nominal, final initType=initType, final T_start=T_start, final transferHeat=transferHeat, final TAmb=TAmb, final tauHeaTra=tauHeaTra, final allowFlowReversal=allowFlowReversal, final m_flow_small=m_flow_small) "Temperature sensor of cold side of heat generator (return)" annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));Sensors.TemperatureTwoPort senTHot( redeclare final package Medium = Medium, final tau=tau, final m_flow_nominal=m_flow_nominal, final initType=initType, final T_start=T_start, final transferHeat=transferHeat, final TAmb=TAmb, final tauHeaTra=tauHeaTra, final allowFlowReversal=allowFlowReversal, final m_flow_small=m_flow_small) "Temperature sensor of hot side of heat generator (supply)" annotation (Placement(transformation(extent={{30,-90},{50,-70}})));Sensors.MassFlowRate senMasFlo( redeclare final package Medium = Medium, final allowFlowReversal=allowFlowReversal) "Sensor for mass flwo rate" annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
+
+5: Name 'heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heater. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater "Prescribed heat flow" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={-60,-50})));
+
+6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: MixingVolumes.MixingVolume vol( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final m_flow_small=m_flow_small, final allowFlowReversal=allowFlowReversal, final nPorts=2, final p_start=p_start, final T_start=T_start) "Fluid volume" annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));FixedResistances.PressureDrop pressureDrop( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final show_T=false, final allowFlowReversal=allowFlowReversal, final dp_nominal=dp_nominal, final deltaM=deltaM, final from_dp=from_dp, final linearized=linearized) "Pressure drop" annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
+
+7: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( Medium.p_default, Medium.T_default, Medium.X_default) "Density used for parameterization of pressure curve" annotation (Dialog(tab="Advanced", group="Pressure drop"));
+
+
+AixLib/DataBase/Boiler/General/BoilerTwoPointBaseDataDefinition.mo
+1: Missing documentation. Affected line: import Modelica.Units.SI;
+
+2: Name 'name' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: name. Affected line: parameter String name "Name of boiler";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Volume volume "Water volume of boiler";
+
+4: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Power Q_nom "Nominal heat power / thermal load, refering to net (inferior) calorific value";parameter SI.Power Q_min "Minimal heat power / thermal load, refering to net (inferior) calorific value";parameter Real[:,2] eta "Normal supply level";
+
+
 AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
 1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group= "Boiler type"), choicesAllMatching=true);
 
@@ -65,31 +93,3 @@ AixLib/Fluid/BoilerCHP/Boiler.mo
 12: Name 'switchToNightMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch, Night, Mode. Affected line: Modelica.Blocks.Interfaces.BooleanInput switchToNightMode "Connector of Boolean input signal" annotation (Placement(transformation( extent={{-100,10},{-60,50}}), iconTransformation(extent={{-80,30},{-60, 50}})));
 
 13: Name 'ExtControl' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Control. Affected line: replaceable model ExtControl = AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl "External control" annotation (Dialog(tab="External Control"),choicesAllMatching=true);
-
-
-AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo
-1: Name 'transferHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: transfer, Heat. Affected line: parameter Boolean transferHeat=false "If true, temperature T converges towards TAmb when no flow" annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-
-2: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Guess value of m_flow = port_a.m_flow" annotation (Dialog(tab="Advanced", group="Initialization"));
-
-3: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Coefficient of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n." annotation (Dialog(tab="Advanced", group="Pressure drop"));
-
-4: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sensors.TemperatureTwoPort senTCold( redeclare final package Medium = Medium, final tau=tau, final m_flow_nominal=m_flow_nominal, final initType=initType, final T_start=T_start, final transferHeat=transferHeat, final TAmb=TAmb, final tauHeaTra=tauHeaTra, final allowFlowReversal=allowFlowReversal, final m_flow_small=m_flow_small) "Temperature sensor of cold side of heat generator (return)" annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));Sensors.TemperatureTwoPort senTHot( redeclare final package Medium = Medium, final tau=tau, final m_flow_nominal=m_flow_nominal, final initType=initType, final T_start=T_start, final transferHeat=transferHeat, final TAmb=TAmb, final tauHeaTra=tauHeaTra, final allowFlowReversal=allowFlowReversal, final m_flow_small=m_flow_small) "Temperature sensor of hot side of heat generator (supply)" annotation (Placement(transformation(extent={{30,-90},{50,-70}})));Sensors.MassFlowRate senMasFlo( redeclare final package Medium = Medium, final allowFlowReversal=allowFlowReversal) "Sensor for mass flwo rate" annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
-
-5: Name 'heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heater. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater "Prescribed heat flow" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={-60,-50})));
-
-6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: MixingVolumes.MixingVolume vol( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final m_flow_small=m_flow_small, final allowFlowReversal=allowFlowReversal, final nPorts=2, final p_start=p_start, final T_start=T_start) "Fluid volume" annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));FixedResistances.PressureDrop pressureDrop( redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal, final show_T=false, final allowFlowReversal=allowFlowReversal, final dp_nominal=dp_nominal, final deltaM=deltaM, final from_dp=from_dp, final linearized=linearized) "Pressure drop" annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-
-7: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( Medium.p_default, Medium.T_default, Medium.X_default) "Density used for parameterization of pressure curve" annotation (Dialog(tab="Advanced", group="Pressure drop"));
-
-
-AixLib/DataBase/Boiler/General/BoilerTwoPointBaseDataDefinition.mo
-1: Missing documentation. Affected line: import Modelica.Units.SI;
-
-2: Name 'name' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: name. Affected line: parameter String name "Name of boiler";
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Volume volume "Water volume of boiler";
-
-4: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
-
-5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Power Q_nom "Nominal heat power / thermal load, refering to net (inferior) calorific value";parameter SI.Power Q_min "Minimal heat power / thermal load, refering to net (inferior) calorific value";parameter Real[:,2] eta "Normal supply level";
