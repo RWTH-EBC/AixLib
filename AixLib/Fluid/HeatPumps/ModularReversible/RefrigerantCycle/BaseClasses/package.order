@@ -3,3 +3,6 @@ PartialCarnot
 PartialHeatPumpCycle
 PartialRefrigerantCycle
 PartialTableData2D
+PartialTableData3D
+PartialTableDataSDF
+RearrangeInputs
