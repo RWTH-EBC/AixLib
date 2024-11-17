@@ -12,8 +12,8 @@ partial model PartialMultizone "Partial model for multizone models"
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
-  parameter Integer nNzConnectors(min=1) "Actual number of adjacent zone connectors";
-  parameter Integer[nNzConnectors,2] nzConnectionPairs = fill(1, nNzConnectors, 2) 
+  parameter Integer nNzConnectors(min=0)=0 "Actual number of adjacent zone connectors";
+  parameter Integer[max(nNzConnectors, 1),2] nzConnectionPairs = fill(1, max(nNzConnectors, 1), 2)
     "List of nz index pairs to connect, each pointing to a concatenated array of all ThermalZones' nzHeatFlow ports";
   replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
@@ -216,8 +216,8 @@ partial model PartialMultizone "Partial model for multizone models"
         rotation=90,
         origin={38,-110})));
   NzSplitter nzDistributor(nConnections=nNzConnectors, connectionPairs=nzConnectionPairs)
-    if numZones > 1 and use_interzonal_flow
-    "Distributor for connection between adjacent zones" annotation(
+    if numZones > 1 and use_interzonal_flow and nNzConnectors > 0
+    "Distributor for connection between adjacent zones" annotation (
     Placement(transformation(origin = {88, 92}, extent = {{-4, -4}, {4, 4}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
@@ -261,7 +261,7 @@ equation
   end if;
 
   // connect heat flow between zones
-  if numZones > 1 and use_interzonal_flow then
+  if numZones > 1 and use_interzonal_flow and nNzConnectors > 0 then
     for i in 1:numZones loop
       connect(zone[i].nzHeatFlow[1:zoneParam[i].nNZs], nzDistributor.splitterPort[sum(zoneParam[1:i-1].nNZs)+1:(sum(zoneParam[1:i-1].nNZs)+zoneParam[i].nNZs)]);
     end for;
