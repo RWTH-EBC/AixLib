@@ -1,0 +1,22 @@
+
+Error in model:  AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office</a>:
+Error: Multiple modifier for aExt.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/OfficePassiveHouse/OPH_1_Office.mo, line 3
+  Context: <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office.AixLib.DataBase.ThermalZones.ZoneBaseRecord">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office.AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+Error: Multiple modifier for aExt.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/OfficePassiveHouse/OPH_1_Office.mo, line 3
+  Context: <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office.AixLib.DataBase.ThermalZones.ZoneBaseRecord">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office.AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler</a>:
+Error: Multiple modifier for aExt.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/OfficePassiveHouse/OPH_1_OfficeNoHeaterCooler.mo, line 3
+  Context: <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler.AixLib.DataBase.ThermalZones.ZoneBaseRecord">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler.AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+Error: Multiple modifier for aExt.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/DataBase/ThermalZones/OfficePassiveHouse/OPH_1_OfficeNoHeaterCooler.mo, line 3
+  Context: <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler.AixLib.DataBase.ThermalZones.ZoneBaseRecord">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler.AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+Error: ERRORS have been issued.
+
