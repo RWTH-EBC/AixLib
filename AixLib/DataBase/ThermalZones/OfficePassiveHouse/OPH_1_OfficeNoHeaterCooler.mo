@@ -43,7 +43,21 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     wfRoof={1},
     aRoof=0.7,
     aExt=0.7,
+    aExt = 0.5,
+    nNZs = 1,
+    ANZ = {0.0},
+    hConNZ = {0.0},
+    nNZ = 1,
+    RNZ = {{0.00001}},
+    RNZRem = {0.00001},
+    CNZ = {{0.00001}},
+    otherNZIndex = {1},
+    thisZoneIndex = 1,
     TSoil=283.15,
+    TSoilDataSource = BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant,
+    TSoilOffsetTime = 0,
+    TSoilAmplitude = 0.0,
+    TSoilFile = "NoName",
     hConWallOut=20.0,
     hRadWall=5,
     hConWinOut=20.0,
@@ -90,6 +104,9 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
   annotation (Documentation(revisions="<html><ul>
+  <li>May 5, 2023, by Philip Groesdonk:<br/>
+    Additional soil temperature and neighboured zone border parameters.
+  </li>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.
   </li>

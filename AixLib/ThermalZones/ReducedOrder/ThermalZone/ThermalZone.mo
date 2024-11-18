@@ -76,7 +76,7 @@ model ThermalZone "Thermal zone containing moisture balance"
   replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
@@ -84,14 +84,14 @@ model ThermalZone "Thermal zone containing moisture balance"
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{56,-34},
             {76,-14}})));
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{56,-34},
             {76,-14}})));
 
-  AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent(
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent(
     final ratioConv=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
@@ -115,7 +115,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     final UWin=zoneParam.UWin)
  if sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-16,43},{-4,55}})));
-  EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
+  replaceable EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
     final n=zoneParam.nOrientations,
     final wfWall=zoneParam.wfWall,
@@ -123,13 +123,13 @@ model ThermalZone "Thermal zone containing moisture balance"
     final wfGro=zoneParam.wfGro,
     final hConWallOut=zoneParam.hConWallOut,
     final hRad=zoneParam.hRadWall,
+    TGroundFromInput=true,
     final hConWinOut=zoneParam.hConWinOut,
-    final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    final aExt=zoneParam.aExt) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-38,10},{-26,22}})));
 
-  EquivalentAirTemperature.VDI6007 eqAirTempRoof(
+  replaceable EquivalentAirTemperature.VDI6007 eqAirTempRoof(
     final wfGro=0,
     final n=zoneParam.nOrientationsRoof,
     final aExt=zoneParam.aRoof,
@@ -137,7 +137,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    final TGro=273.15) if zoneParam.ARoof > 0
+    TGroundFromInput=true) if zoneParam.ARoof > 0
     "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-40,66},{-28,78}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
@@ -155,11 +155,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     final til=zoneParam.tiltExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,10},{-68,26}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
+  replaceable BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
      final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls)
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,31},{-68,48}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
+  replaceable BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
      final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof)
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
@@ -221,7 +221,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Power for cooling" annotation (Placement(transformation(extent={{100,-30},
             {120,-10}}), iconTransformation(extent={{100,-50},{120,-30}})));
-  SolarGain.SimpleExternalShading simpleExternalShading(
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a nzHeatFlow[zoneParam.nNZs] if sum(zoneParam.ANZ) > 0
+    "surface heat port for nz borders - inner surface if zone index is higher than index of other zone, outer if lower"
+    annotation (Placement(transformation(extent={{94,86},{114,106}}),
+                            iconTransformation(extent={{90,70},{110,90}})));
+  replaceable SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
     final gValues=zoneParam.shadingFactor)
@@ -398,7 +402,12 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil)
+  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
+    final dataSource=zoneParam.TSoilDataSource,
+    final TMean=zoneParam.TSoil,
+    final offsetTime=zoneParam.TSoilOffsetTime,
+    final amplitudeTGround=zoneParam.TSoilAmplitude,
+    final fileDataSource=zoneParam.TSoilFile)
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={39,22})));
@@ -482,6 +491,7 @@ protected
   Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
      and use_NaturalAirExchange and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-14},{-64,-8}})));
+
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -583,8 +593,9 @@ equation
           {-44,87},{-44,75.6},{-41.2,75.6}}, color={0,0,127}));
   connect(constSunblindRoof.y, eqAirTempRoof.sunblind) annotation (Line(points={
           {-36,91.7},{-36,79.2},{-34,79.2}}, color={0,0,127}));
-  connect(TSoil.y, preTemFloor.T)
-    annotation (Line(points={{43.4,22},{48,22},{48,28.8}}, color={0,0,127}));
+  connect(TSoil.TGroundOut, preTemFloor.T)
+    annotation (Line(points={{43.4,19.6},{48,19.6},{48,28.8}},
+                                                           color={0,0,127}));
   connect(preTemFloor.port, ROM.floor)
     annotation (Line(points={{48,42},{48,56},{62,56}}, color={191,0,0}));
   connect(preTemRoof.port, theConRoof.fluid)
@@ -731,6 +742,10 @@ equation
                                          color={0,0,127}));
   end if;
 
+  if sum(zoneParam.ANZ) > 0 then
+    connect(ROM.nz, nzHeatFlow) annotation (Line(points={{80.5,92},{80,92},{80,96},
+            {104,96}}, color={191,0,0}));
+  end if;
 
 if use_NaturalAirExchange and not use_MechanicalAirExchange then
     connect(weaBus.TDryBul, preTemVen.T) annotation (Line(
@@ -873,6 +888,11 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
           -40},{110,-40}},                   color={0,0,127}));
+  connect(TSoil.TGroundOut, eqAirTempWall.TGro_in) annotation (Line(points={{43.4,
+          19.6},{48,19.6},{48,8.8},{-32,8.8}}, color={0,0,127}));
+  connect(TSoil.TGroundOut, eqAirTempRoof.TGro_in) annotation (Line(points={{43.4,
+          19.6},{48,19.6},{48,28},{36,28},{36,62},{-34,62},{-34,64.8}}, color={0,
+          0,127}));
 
   if use_pools then
     for i in 1:nPools loop
@@ -887,7 +907,7 @@ end if;
               -69.82},{-51.69,-62},{-16,-62},{-16,-52},{26,-52},{26,0},{98,0},{98,
               90},{87,90}},
         color={0,0,127}));
-      connect(TSoil.y, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
+      connect(TSoil.TGroundOut, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
               {46,22},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},{-34,-68},{-34,
               -73.18},{-39.79,-73.18}},
         color={0,0,127}));
@@ -923,6 +943,12 @@ end if;
     annotation (Line(points={{-54.42,-73.24},{-57.25,-73.24},{-57.25,-74.11},{-60.15,
           -74.11}}, color={0,0,127}));
    annotation (Documentation(revisions="<html><ul>
+  <li>April 20, 2023, by Philip Groesdonk:<br/>
+  Added five element RC model (for heat exchange with neighboured zones) and
+  an option choice for set temperatures of soil, i.e. floor element outdoor 
+  surface temperatures. This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1080\">issue 1080</a>.
+  </li>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
   </li>
@@ -957,10 +983,10 @@ end if;
   Comprehensive ready-to-use model for thermal zones, combining
   caclulation core, handling of solar radiation and internal gains.
   Core model is a <a href=
-  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
-  model. Conditional removements of the core model are passed-through
+  \"AixLib.ThermalZones.ReducedOrder.RC.FiveElements\">AixLib.ThermalZones.ReducedOrder.RC.FiveElements</a>
+  model. Conditional removals of the core model are passed-through
   and related models on thermal zone level are as well conditional. All
-  models for solar radiation are part of Annex60 library. Internal
+  models for solar radiation are part of IBPSA library. Internal
   gains are part of AixLib.
 </p>
 <p>

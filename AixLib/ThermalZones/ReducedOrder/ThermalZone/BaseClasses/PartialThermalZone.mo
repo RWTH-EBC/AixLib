@@ -69,7 +69,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Radiative internal gains"
     annotation (Placement(transformation(extent={{94,30},{114,50}}),
                             iconTransformation(extent={{92,24},{112,44}})));
-  AixLib.ThermalZones.ReducedOrder.RC.FourElements ROM(
+  AixLib.ThermalZones.ReducedOrder.RC.FiveElements ROM(
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
@@ -106,6 +106,15 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
+    final nNZs=zoneParam.nNZs,
+    final ANZ=zoneParam.ANZ,
+    final hConNZ=zoneParam.hConNZ,
+    final nNZ=zoneParam.nNZ,
+    final RNZ=zoneParam.RNZ,
+    final RNZRem=zoneParam.RNZRem,
+    final CNZ=zoneParam.CNZ,
+    final otherNZIndex=zoneParam.otherNZIndex,
+    final thisZoneIndex=zoneParam.thisZoneIndex,
     final energyDynamics=energyDynamics,
     extWallRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
     floorRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
@@ -121,7 +130,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
-  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
+  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor + sum(zoneParam.ANZ));
 
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,
@@ -193,6 +202,9 @@ equation
   \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
 </p>
 <ul>
+  <li>April 20, 2023, by Philip Groesdonk:<br/>
+    Added five element RC model (for heat exchange with neighboured zones).
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and MSL models.
   </li>
