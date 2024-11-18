@@ -104,15 +104,13 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     TThresholdCooler=2*Modelica.Constants.eps,
     withIdealThresholds=false);
   annotation (Documentation(revisions="<html><ul>
-  <li>
-    <li>May 5, 2023, by Philip Groesdonk:<br/>
-      Additional soil temperature and neighboured zone border parameters.
-    </li>
-    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
-    Implement dummy zone record to assign this record as default
-    parameter value, where unavoidable.
-  </li>
+  <li>May 5, 2023, by Philip Groesdonk:<br/>
+    Additional soil temperature and neighboured zone border parameters.
+  </li><i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+  <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>Implement
+  dummy zone record to assign this record as default parameter value,
+  where unavoidable.
 </ul>
 </html>"));
 end ZoneRecordDummy;
