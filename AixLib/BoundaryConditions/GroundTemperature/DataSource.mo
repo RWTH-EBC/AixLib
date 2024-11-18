@@ -1,5 +1,5 @@
 within AixLib.BoundaryConditions.GroundTemperature;
-type GroundTemperatureDataSource = enumeration(
+type DataSource = enumeration(
     Constant "Use constant value",
     File "Use data from file with tabular data",
     Kusuda "Use Kusuda model for undisturbed ground temperature with selectable parameters",
@@ -7,7 +7,7 @@ type GroundTemperatureDataSource = enumeration(
   "Enumeration to define data source for the ground temperature"
       annotation(Documentation(info="<html>
  <p>
- Enumeration to define the data source used in GroundTemperatureOptions.
+ Enumeration to define the data source used in AixLib.BoundaryConditions.GroundTemperature.Options.
  </p>
  </html>",
         revisions="<html>

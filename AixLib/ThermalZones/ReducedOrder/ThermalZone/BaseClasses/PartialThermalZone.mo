@@ -106,20 +106,21 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
-    final nNZs=zoneParam.nNZs,
-    final ANZ=zoneParam.ANZ,
-    final hConNZ=zoneParam.hConNZ,
-    final nNZ=zoneParam.nNZ,
-    final RNZ=zoneParam.RNZ,
-    final RNZRem=zoneParam.RNZRem,
-    final CNZ=zoneParam.CNZ,
-    final otherNZIndex=zoneParam.otherNZIndex,
-    final thisZoneIndex=zoneParam.thisZoneIndex,
+    final nIze=zoneParam.nIze,
+    final AIze=zoneParam.AIze,
+    final hConIze=zoneParam.hConIze,
+    final nIzeRC=zoneParam.nIzeRC,
+    final RIze=zoneParam.RIze,
+    final RIzeRem=zoneParam.RIzeRem,
+    final CIze=zoneParam.CIze,
+    final othZoneInd=zoneParam.othZoneInd,
+    final zoneInd=zoneParam.zoneInd,
     final energyDynamics=energyDynamics,
     extWallRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
     floorRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
     intWallRC(thermCapInt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
     roofRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial))),
+    izeRC(extWalRC(thermCapExt(each der_T(fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)))),
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,
@@ -130,7 +131,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
-  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor + sum(zoneParam.ANZ));
+  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor + sum(zoneParam.AIze))
+                                                                          "Total area of elements in the zone";
 
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,

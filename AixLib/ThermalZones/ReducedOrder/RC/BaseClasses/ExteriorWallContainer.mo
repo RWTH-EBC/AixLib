@@ -18,15 +18,15 @@ model ExteriorWallContainer
     "Initial temperature of capacities"
     annotation(Dialog(group="Thermal mass"));
 
-  parameter Boolean pass_through = false
+  parameter Boolean pasThr=false
     "If true, there is no RC element and heat flow is passed through";
 
-  ExteriorWall extWallRC(
+  AixLib.ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC(
     n=n,
     RExt=RExt,
     RExtRem=RExtRem,
     CExt=CExt,
-    T_start=T_start) if                                                                 not pass_through
+    T_start=T_start) if not pasThr
     annotation (Placement(transformation(extent={{-10,-10},{10,12}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a "interior port"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
@@ -34,16 +34,15 @@ model ExteriorWallContainer
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b "exterior port"
       annotation (Placement(transformation(extent={{90,-10},{110,10}}),
       iconTransformation(extent={{90,-10},{110,10}})));
-//  InteriorWall extWallRC(n = 1, CInt = CExt, T_start = T_start, RInt = RExt)  annotation(
-//    Placement(transformation(extent = {{-10, -11}, {10, 11}})));
+
 equation
-  if pass_through then
+  if pasThr then
     port_a.Q_flow = -port_b.Q_flow;
     0 = port_a.T - port_b.T;
   else
-    connect(port_a, extWallRC.port_a)
+    connect(port_a, extWalRC.port_a)
       annotation (Line(points={{-100,0},{-10,0}}, color={191,0,0}));
-    connect(extWallRC.port_b, port_b)
+    connect(extWalRC.port_b, port_b)
       annotation (Line(points={{10,0},{100,0}}, color={191,0,0}));
   end if;
   annotation(defaultComponentName = "extWalRC",
