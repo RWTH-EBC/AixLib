@@ -43,7 +43,6 @@ record OPH_1_Office "Office zone of office building"
     wfRoof={1},
     aRoof=0.7,
     aExt=0.7,
-    aExt = 0.5,
     nNZs = 1,
     ANZ = {0.0},
     hConNZ = {0.0},
