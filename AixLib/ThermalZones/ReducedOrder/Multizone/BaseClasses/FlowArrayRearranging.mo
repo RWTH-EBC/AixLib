@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model FlowArrayRearranging "A model to rearrange heat flows between a range of ports"
   parameter Integer nCon=1 "Number of connections";
-  parameter Integer conPaiArr[nCon, 2] "Array of port numbers to connect";
+  parameter Integer conPaiArr[nCon, 2]={{1, 2} for i in 1:nCon} "Array of port numbers to connect";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a splPor[nCon * 2] "Thermal in-/output" annotation (
     Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
 equation
