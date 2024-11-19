@@ -221,10 +221,10 @@ model ThermalZone "Thermal zone containing moisture balance"
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Power for cooling" annotation (Placement(transformation(extent={{100,-30},
             {120,-10}}), iconTransformation(extent={{100,-50},{120,-30}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a nzHeatFlow[zoneParam.nNZs] if sum(zoneParam.ANZ) > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a izeHeaFlow[zoneParam.nIze]
+    if sum(zoneParam.AIze) > 0
     "surface heat port for nz borders - inner surface if zone index is higher than index of other zone, outer if lower"
-    annotation (Placement(transformation(extent={{94,86},{114,106}}),
-                            iconTransformation(extent={{90,70},{110,90}})));
+    annotation (Placement(transformation(extent={{94,86},{114,106}})));
   replaceable SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
@@ -402,15 +402,14 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  BoundaryConditions.GroundTemperature.GroundTemperatureOptions TSoil(
-    final dataSource=zoneParam.TSoilDataSource,
-    final TMean=zoneParam.TSoil,
-    final offsetTime=zoneParam.TSoilOffsetTime,
-    final amplitudeTGround=zoneParam.TSoilAmplitude,
-    final fileDataSource=zoneParam.TSoilFile)
-    "Outdoor surface temperature for floor plate"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
-    rotation=180,origin={39,22})));
+  AixLib.BoundaryConditions.GroundTemperature.Options TSoi(
+    final datSou=zoneParam.TSoiDatSou,
+    final TMea=zoneParam.TSoil,
+    final offTime=zoneParam.TSoiOffTim,
+    final ampTGro=zoneParam.TSoiAmp,
+    final filDatSou=zoneParam.TSoiFil)
+    "Outdoor surface temperature for floor plate" annotation (Placement(
+        transformation(extent={{4,-4},{-4,4}}, rotation=180)));
   Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt))
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
@@ -551,14 +550,14 @@ equation
   connect(solRadWall.y, eqAirTempWall.HSol) annotation (Line(points={{-43.5,27},
           {-42,27},{-42,19.6},{-39.2,19.6}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTempWall.TBlaSky) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-60,10},{-60,16},{-39.2,16}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-60,10},{-60,16},{-39.2,16}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, eqAirTempWall.TDryBul) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-60,10},{-60,12.4},{-39.2,12.4}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-60,10},{-60,12.4},{-39.2,12.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -572,14 +571,14 @@ equation
   connect(theConWall.solid, ROM.extWall) annotation (Line(points={{26,19},{29,19},
           {29,70},{38,70}}, color={191,0,0}));
   connect(weaBus.TDryBul, eqAirTempRoof.TDryBul) annotation (Line(
-      points={{-100,34},{-86,34},{-86,60},{-46,60},{-46,68.4},{-41.2,68.4}},
+      points={{-99.915,34.08},{-86,34.08},{-86,60},{-46,60},{-46,68.4},{-41.2,68.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TBlaSky, eqAirTempRoof.TBlaSky) annotation (Line(
-      points={{-100,34},{-86,34},{-86,60},{-46,60},{-46,72},{-41.2,72}},
+      points={{-99.915,34.08},{-86,34.08},{-86,60},{-46,60},{-46,72},{-41.2,72}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -593,9 +592,8 @@ equation
           {-44,87},{-44,75.6},{-41.2,75.6}}, color={0,0,127}));
   connect(constSunblindRoof.y, eqAirTempRoof.sunblind) annotation (Line(points={
           {-36,91.7},{-36,79.2},{-34,79.2}}, color={0,0,127}));
-  connect(TSoil.TGroundOut, preTemFloor.T)
-    annotation (Line(points={{43.4,19.6},{48,19.6},{48,28.8}},
-                                                           color={0,0,127}));
+  connect(TSoi.TGroOut, preTemFloor.T)
+    annotation (Line(points={{4.4,0},{48,0},{48,28.8}}, color={0,0,127}));
   connect(preTemFloor.port, ROM.floor)
     annotation (Line(points={{48,42},{48,56},{62,56}}, color={191,0,0}));
   connect(preTemRoof.port, theConRoof.fluid)
@@ -711,14 +709,14 @@ equation
   connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-6},{58,
           -6},{58,-2},{92,-2},{92,78},{86,78}},color={191,0,0}));
   connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-0.8},{-55.84,-0.8}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-0.8},{-55.84,-0.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-26},{-66,-26}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-26},{-66,-26}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -742,14 +740,14 @@ equation
                                          color={0,0,127}));
   end if;
 
-  if sum(zoneParam.ANZ) > 0 then
-    connect(ROM.nz, nzHeatFlow) annotation (Line(points={{80.5,92},{80,92},{80,96},
-            {104,96}}, color={191,0,0}));
+  if sum(zoneParam.AIze) > 0 then
+    connect(ROM.ize, izeHeaFlow) annotation (Line(points={{83.5,91.8},{80,91.8},
+            {80,96},{104,96}}, color={191,0,0}));
   end if;
 
 if use_NaturalAirExchange and not use_MechanicalAirExchange then
     connect(weaBus.TDryBul, preTemVen.T) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-42,10},{-42,-1},{-38.6,-1}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-42,10},{-42,-1},{-38.6,-1}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(
@@ -793,7 +791,8 @@ elseif use_MechanicalAirExchange and not use_NaturalAirExchange then
               {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-else connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
+else
+     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
@@ -859,7 +858,7 @@ end if;
   connect(x_pTphi.X[1], mixedHumidity.humidity_flow2) annotation (Line(points={{-63.7,
           -11},{-62,-11},{-62,-8.8},{-55.84,-8.8}},     color={0,0,127}));
   connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-9.2},{-70.6,-9.2}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-9.2},{-70.6,-9.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -867,7 +866,7 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-11},{-70.6,-11}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-11},{-70.6,-11}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -875,7 +874,7 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-12.8},{-70.6,-12.8}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-12.8},{-70.6,-12.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -888,11 +887,10 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
           -40},{110,-40}},                   color={0,0,127}));
-  connect(TSoil.TGroundOut, eqAirTempWall.TGro_in) annotation (Line(points={{43.4,
-          19.6},{48,19.6},{48,8.8},{-32,8.8}}, color={0,0,127}));
-  connect(TSoil.TGroundOut, eqAirTempRoof.TGro_in) annotation (Line(points={{43.4,
-          19.6},{48,19.6},{48,28},{36,28},{36,62},{-34,62},{-34,64.8}}, color={0,
-          0,127}));
+  connect(TSoi.TGroOut, eqAirTempWall.TGro_in) annotation (Line(points={{4.4,0},
+          {48,0},{48,8.8},{-32,8.8}}, color={0,0,127}));
+  connect(TSoi.TGroOut, eqAirTempRoof.TGro_in) annotation (Line(points={{4.4,0},
+          {48,0},{48,28},{36,28},{36,62},{-34,62},{-34,64.8}}, color={0,0,127}));
 
   if use_pools then
     for i in 1:nPools loop
@@ -907,10 +905,9 @@ end if;
               -69.82},{-51.69,-62},{-16,-62},{-16,-52},{26,-52},{26,0},{98,0},{98,
               90},{87,90}},
         color={0,0,127}));
-      connect(TSoil.TGroundOut, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
-              {46,22},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},{-34,-68},{-34,
-              -73.18},{-39.79,-73.18}},
-        color={0,0,127}));
+      connect(TSoi.TGroOut, indoorSwimmingPool[i].TSoil) annotation (Line(
+            points={{4.4,0},{46,0},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},
+              {-34,-68},{-34,-73.18},{-39.79,-73.18}}, color={0,0,127}));
       connect(indoorSwimmingPool[i].QPool, SumQPool.u[i]) annotation (Line(points={{-39.44,
               -76.36},{-39.44,-78},{-28,-78}},                color={0,0,127}));
       connect(indoorSwimmingPool[i].PPool, SumPPool.u[i]) annotation (Line(points={{-39.44,

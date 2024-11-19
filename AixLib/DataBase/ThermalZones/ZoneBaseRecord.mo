@@ -63,23 +63,21 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Resistance of remaining resistor RRoofRem between capacity n and outside";
   parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof]
     "Heat capacities of roof, from inside to outside";
-  parameter Integer nNZs(min=1)
-    "Number of neighboured zone borders to consider";
-  parameter Modelica.Units.SI.Area ANZ[nNZs]
-    "Area of neighboured zone borders";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConNZ[nNZs]
-    "Convective coefficient of heat transfer of neighboured zone borders (indoor)";
-  parameter Integer nNZ(min=1)
-    "Number of RC-elements of neighboured zone borders";
-  parameter Modelica.Units.SI.ThermalResistance RNZ[nNZs, nNZ]
-    "Resistances of neighboured zone borders, from inside to outside";
-  parameter Modelica.Units.SI.ThermalResistance RNZRem[nNZs]
-    "Resistance of remaining resistor RNZRem between capacity n and outside";
-  parameter Modelica.Units.SI.HeatCapacity CNZ[nNZs, nNZ]
-    "Heat capacities of neighboured zone borders, from inside to outside";
-  parameter Integer otherNZIndex[nNZs]
-    "Index of the zone in the multizone (starting at 1) to which each neighboured zone border is adjacent";
-  parameter Integer thisZoneIndex
+  parameter Integer nIze(min=1) "Number of interzonal elements to consider";
+  parameter Modelica.Units.SI.Area AIze[nIze] "Area of interzonal elements";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIze[nIze]
+    "Convective coefficient of heat transfer of interzonal elements (indoor)";
+  parameter Integer nIzeRC(min=1)
+    "Number of RC-elements of interzonal elements";
+  parameter Modelica.Units.SI.ThermalResistance RIze[nIze,nIzeRC]
+    "Resistances of interzonal elements, from inside to outside";
+  parameter Modelica.Units.SI.ThermalResistance RIzeRem[nIze]
+    "Resistance of remaining resistor of interzonal elements between capacity nIzeRC and outside";
+  parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]
+    "Heat capacities of interzonal elements, from inside to outside";
+  parameter Integer othZoneInd[nIze]
+    "Index of the zone in the multizone (starting at 1) to which each interzonal element is adjacent";
+  parameter Integer zoneInd
     "Index of this zone in the multizone (starting at 1)";
   parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof";
   parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof";
@@ -94,14 +92,15 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Coefficient of absorption of exterior walls (outdoor)";
   parameter Modelica.Units.SI.Temperature TSoil
     "Temperature of soil (used for outside surface temperature of floors and thermal radiation)";
-  parameter BoundaryConditions.GroundTemperature.GroundTemperatureDataSource TSoilDataSource=BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant
+  parameter AixLib.BoundaryConditions.GroundTemperature.DataSource TSoiDatSou=
+      AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
     "choice for the data source of the outside surface temperature of floors";
-  parameter Real TSoilOffsetTime
-    "Time from simulation start to minimum soil temperature in s if sine model is chosen as TSoilDataSource";
-  parameter Modelica.Units.SI.Temperature TSoilAmplitude
-    "Amplitude of TSoil if sine model is chosen as TSoilDataSource";
-  parameter String TSoilFile
-    "File with TSoil table if file is chosen as TSoilDataSource";
+  parameter Real TSoiOffTim
+    "Time from simulation start to minimum soil temperature in s if sine model is chosen as TSoiDatSou";
+  parameter .Modelica.Units.SI.Temperature TSoiAmp
+    "Amplitude of TSoil if sine model is chosen as TSoiDatSou";
+  parameter String TSoiFil
+    "File with TSoil table if file is chosen as TSoiDatSou";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut
     "Exterior walls convective coefficient of heat transfer (outdoor)";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadWall
