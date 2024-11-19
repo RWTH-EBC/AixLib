@@ -73,7 +73,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Resistances of interzonal elements, from inside to outside";
   parameter Modelica.Units.SI.ThermalResistance RIzeRem[nIze]
     "Resistance of remaining resistor of interzonal elements between capacity nIzeRC and outside";
-  parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]
+  parameter Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]
     "Heat capacities of interzonal elements, from inside to outside";
   parameter Integer othZoneInd[nIze]
     "Index of the zone in the multizone (starting at 1) to which each interzonal element is adjacent";
@@ -97,7 +97,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "choice for the data source of the outside surface temperature of floors";
   parameter Real TSoiOffTim
     "Time from simulation start to minimum soil temperature in s if sine model is chosen as TSoiDatSou";
-  parameter .Modelica.Units.SI.Temperature TSoiAmp
+  parameter Modelica.Units.SI.Temperature TSoiAmp
     "Amplitude of TSoil if sine model is chosen as TSoiDatSou";
   parameter String TSoiFil
     "File with TSoil table if file is chosen as TSoiDatSou";

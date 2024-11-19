@@ -26,7 +26,7 @@ model FiveElements "Thermal Zone with five elements for exterior walls, interior
   parameter Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC](each min=Modelica.Constants.small)
     "Vector of heat capacities of interzonal elements, from inside to outside"
     annotation (Dialog(group="Zone borders"));
-  parameter Boolean indoorPortIze=false
+  parameter Boolean indPorIze=false
     "Additional heat port at indoor surface of interzonal elements"                                      annotation (
     Dialog(group="Zone borders"),
     choices(checkBox=true));
@@ -49,7 +49,7 @@ model FiveElements "Thermal Zone with five elements for exterior walls, interior
     "RC-element for interzonal elements" annotation (Placement(transformation(
           extent={{-10,-11},{10,11}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a izeIntSur[nIze]
-    if indoorPortIze "Auxiliary port at indoor surface of interzonal elements"
+    if indPorIze     "Auxiliary port at indoor surface of interzonal elements"
       annotation (Placement(transformation(extent={{124,-190},{144,-170}})));
 protected
   parameter Modelica.Units.SI.Area ATotIze=sum(AIze)

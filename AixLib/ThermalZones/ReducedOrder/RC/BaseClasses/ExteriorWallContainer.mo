@@ -27,6 +27,7 @@ model ExteriorWallContainer
     RExtRem=RExtRem,
     CExt=CExt,
     T_start=T_start) if not pasThr
+    "RC element that may be conditionally removed by pass-through option"
     annotation (Placement(transformation(extent={{-10,-10},{10,12}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a "interior port"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),

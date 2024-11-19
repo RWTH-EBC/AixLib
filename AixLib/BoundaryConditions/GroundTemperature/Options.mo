@@ -4,6 +4,7 @@ model Options
   import Modelica.Constants.pi;
 
   parameter AixLib.BoundaryConditions.GroundTemperature.DataSource datSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
+    "Choice by which option for ground temperature is to be provided"
     annotation (Dialog(group="General"));
   parameter Modelica.Units.SI.Temperature TMea "constant or mean ground temperature (for sine) or average air temperature over the year (for Kusuda)"
     annotation (Dialog(group="General", enable=not datSou==AixLib.BoundaryConditions.GroundTemperature.DataSource.File));
