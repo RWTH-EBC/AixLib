@@ -1,31 +1,10 @@
 Regression tests are only run for the following package:
   AixLib.Systems
-*** Warning: AixLib.Systems.ModularAHU.Examples.GenericAHU: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 3, 0, 3, 0
- New = 0, 0, 0, 1, 0, 1, 0, 0, 4, 0, 4, 0, 4, 0
 *** Error: AixLib_Systems_ModularAHU_Examples_DemandControlledAHU.txt: Errors during result verification.
            Absolute error = 5.093e-04 at t = 6342624.0 for genericAHU.genericAHUBus.heaterBus.VFlowAirMea
-*** Warning: AixLib.Systems.ModularAHU.Examples.DemandControlledAHU: Translation statistics for initialization and results changed for nonlinear.
- Old = 4, 0, 4, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0
- New = 4, 0, 3, 0, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0
-*** Warning: AixLib.Systems.ModularAHU.Examples.Heater: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 0, 3, 0
- New = 0, 4, 0
-*** Warning: AixLib.Systems.ModularAHU.Validation.AHU2_Cooler: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 3, 0
- New = 4, 0
-*** Warning: AixLib.Systems.ModularAHU.Validation.AHU2_Heater: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 3, 0
- New = 4, 0
-*** Warning: AixLib.Systems.ModularAHU.Validation.AHU2_Preheater: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 3, 0
- New = 4, 0
-*** Warning: AixLib.Systems.HydraulicModules.Example.Admix: Translation statistics for initialization changed for nonlinear, but results are unchanged.
- Old = 3, 0
- New = 4, 0
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.9 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 7 warnings and 1 errors.
+Script that runs unit tests had 0 warnings and 1 errors.
 
