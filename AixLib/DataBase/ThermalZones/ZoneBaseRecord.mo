@@ -63,21 +63,21 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Resistance of remaining resistor RRoofRem between capacity n and outside";
   parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof]
     "Heat capacities of roof, from inside to outside";
-  parameter Integer nIze(min=1) "Number of interzonal elements to consider";
-  parameter Modelica.Units.SI.Area AIze[nIze] "Area of interzonal elements";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIze[nIze]
+  parameter Integer nIze(min=1)=1 "Number of interzonal elements to consider";
+  parameter Modelica.Units.SI.Area AIze[nIze]= {0.0} "Area of interzonal elements";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIze[nIze]={0.0}
     "Convective coefficient of heat transfer of interzonal elements (indoor)";
-  parameter Integer nIzeRC(min=1)
+  parameter Integer nIzeRC(min=1)=1
     "Number of RC-elements of interzonal elements";
-  parameter Modelica.Units.SI.ThermalResistance RIze[nIze,nIzeRC]
+  parameter Modelica.Units.SI.ThermalResistance RIze[nIze,nIzeRC]={{0.00001}}
     "Resistances of interzonal elements, from inside to outside";
-  parameter Modelica.Units.SI.ThermalResistance RIzeRem[nIze]
+  parameter Modelica.Units.SI.ThermalResistance RIzeRem[nIze]={0.00001}
     "Resistance of remaining resistor of interzonal elements between capacity nIzeRC and outside";
-  parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]
+  parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]={{0.00001}}
     "Heat capacities of interzonal elements, from inside to outside";
-  parameter Integer othZoneInd[nIze]
+  parameter Integer othZoneInd[nIze]={1}
     "Index of the zone in the multizone (starting at 1) to which each interzonal element is adjacent";
-  parameter Integer zoneInd
+  parameter Integer zoneInd=1
     "Index of this zone in the multizone (starting at 1)";
   parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof";
   parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof";
@@ -95,11 +95,11 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter AixLib.BoundaryConditions.GroundTemperature.DataSource TSoiDatSou=
       AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
     "choice for the data source of the outside surface temperature of floors";
-  parameter Real TSoiOffTim
+  parameter Real TSoiOffTim=6004800
     "Time from simulation start to minimum soil temperature in s if sine model is chosen as TSoiDatSou";
-  parameter .Modelica.Units.SI.Temperature TSoiAmp
+  parameter Modelica.Units.SI.Temperature TSoiAmp=0
     "Amplitude of TSoil if sine model is chosen as TSoiDatSou";
-  parameter String TSoiFil
+  parameter String TSoiFil="NoName"
     "File with TSoil table if file is chosen as TSoiDatSou";
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut
     "Exterior walls convective coefficient of heat transfer (outdoor)";
