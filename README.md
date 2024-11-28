@@ -1,5 +1,5 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
-[![OM](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)
+[![OM](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)](https://libraries.openmodelica.org/branches/master/AixLib/AixLib.html)
 
 # <img src="./AixLib/Resources/Images/Icon_Modelica_AixLib_background.png" width="40"> AixLib
 
