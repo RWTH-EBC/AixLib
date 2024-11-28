@@ -1,26 +1,4 @@
 
-Error in model:  AixLib.Utilities.HeatTransfer.SolarRadInRoom 
-Check of <a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom">AixLib.Utilities.HeatTransfer.SolarRadInRoom</a>
-Warning: The initial equation,
-   assert(sum(walls.height)/size(walls, 1)-walls[1].height &lt; _GlobalScope.Modelica.Constants.eps,     "Not all walls have the same height");
- references unconnected expandable connectors:
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[1]">walls[1].g</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[1]">walls[1].Q_flow_ShoRadFroSur</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[1]">walls[1].solar_reflectance</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[2]">walls[2].g</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[2]">walls[2].Q_flow_ShoRadFroSur</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[2]">walls[2].solar_reflectance</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[3]">walls[3].g</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[3]">walls[3].Q_flow_ShoRadFroSur</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[3]">walls[3].solar_reflectance</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[4]">walls[4].g</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[4]">walls[4].Q_flow_ShoRadFroSur</a>
-<a href="Modelica://AixLib.Utilities.HeatTransfer.SolarRadInRoom#diagram$:walls[4]">walls[4].solar_reflectance</a>
-Errors detected for expandable connectors.
-Check aborted.
-Warning: WARNINGS have been issued.
-
-
 Error in model:  AixLib.Utilities.Examples.TimeUtilities_test 
 Check of <a href="Modelica://AixLib.Utilities.Examples.TimeUtilities_test">AixLib.Utilities.Examples.TimeUtilities_test</a>
 Found for import <a href="Modelica://Utilities">Utilities</a>

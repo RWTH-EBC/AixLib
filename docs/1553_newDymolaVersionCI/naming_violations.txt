@@ -1,0 +1,123 @@
+
+
+
+AixLib/Utilities/HeatTransfer/SolarRadInRoom.mo
+1: Name 'nWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
+
+2: Name 'nFloors' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floors. Affected line: parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
+
+3: Name 'floor_length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: floor_length. Affected line: parameter Modelica.Units.SI.Length floor_length=0 "Total length of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor" annotation (Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
+
+4: Name 'floor_width' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: floor_width. Affected line: parameter Modelica.Units.SI.Length floor_width=0 "Total width of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor" annotation (Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable "Record holding the values to reproduce the tables" annotation (Dialog(group="Static Calculation", enable=not use_dynamicMethod), choicesAllMatching=true, Placement(transformation(extent={{-10,78},{10,98}})));
+
+6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Interfaces.ShortRadSurf win_in[nWin] "Windows input" annotation (Placement( transformation(extent={{-120,-10},{-100,10}}), iconTransformation( extent={{-120,-10},{-100,10}})));Interfaces.ShortRadSurf walls[nWalls] "Output to the walls" annotation ( Placement(transformation(extent={{100,50},{120,70}}), iconTransformation( extent={{100,50},{120,70}})));Interfaces.ShortRadSurf floors[nFloors] "Output to the floor(s)" annotation ( Placement(transformation(extent={{100,10},{120,30}}), iconTransformation( extent={{100,10},{120,30}})));Interfaces.ShortRadSurf ceilings[nCei] "Output to the ceiling(s)" annotation ( Placement(transformation(extent={{100,-30},{120,-10}}), iconTransformation( extent={{100,-30},{120,-10}})));Interfaces.ShortRadSurf win_out[nWin] "Output to the ceiling(s)" annotation (Placement(transformation(extent={{100,-70},{120,-50}}), iconTransformation(extent={{100,-70},{120,-50}})));
+
+7: Name 'solar_frac_win_abs' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_win_abs. Affected line: Real solar_frac_win_abs[nWin]=if use_dynamicMethod then fill(solar_frac_win_abs_int/nWin, nWin) else fill(staticCoeffTable.coeffWinAbs/nWin, nWin) "Solar fractions for windows, absorbed";
+
+8: Name 'solar_frac_win_lost' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_win_lost. Affected line: Real solar_frac_win_lost[nWin]=if use_dynamicMethod then fill(solar_frac_win_lost_int/nWin, nWin) else fill(staticCoeffTable.coeffWinLost/nWin, nWin) "Solar fractions for windows, lost cause of transmitvity";
+
+9: Name 'solar_frac_cei' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_cei. Affected line: Real solar_frac_cei[nCei]=if use_dynamicMethod then bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei else fill(staticCoeffTable.coeffCeiling/nCei, nCei) "Solar fractions for ceilings";
+
+10: Name 'solar_frac_flo' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_flo. Affected line: Real solar_frac_flo[nFloors]=if use_dynamicMethod then fill(solar_frac_flo_int/nFloors, nFloors) else fill(staticCoeffTable.coeffFloor/nFloors, nFloors) "Solar fractions for floors";
+
+11: Name 'solar_frac_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_wall. Affected line: Real solar_frac_wall[nWalls]=if use_dynamicMethod then bounce_1_wall .+ bounce_2_floor_wall .+ bounce_3_rem_wall .+ bounce_R_rem_wall else {staticCoeffTable.coeffOWEast,staticCoeffTable.coeffOWSouth,staticCoeffTable.coeffOWWest,staticCoeffTable.coeffOWNorth} "Solar fractions for walls";
+
+12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: protected function sight_fac_parallel "Calculate sight factor based on B7-2 in ASHRAE Appendix for parallel areas" input Real x "Length of floor / ceiling";
+
+13: Name 'D' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: D. Affected line: input Real D "Height of wall";
+
+14: Missing documentation, Name 'sight_factor;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sight_factor. Affected line: output Real sight_factor;
+
+15: Missing documentation. Affected line: protected Real X = x / D;
+
+16: Missing documentation, Name 'Y' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Real Y = y / D;
+
+17: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: algorithm sight_factor := 2 / (Modelica.Constants.pi * Y * X) *(Modelica.Math.log((1 + Y*Y)*( 1 + X*X)/(1 + Y*Y + X*X))^0.5 + X*(1 + Y*Y)^0.5*Modelica.Math.atan(X/(1 + Y*Y)^0.5) + Y*(1 + X*X)^0.5*Modelica.Math.atan(Y/(1 + X*X)^0.5) - X* Modelica.Math.atan(X) - Y*Modelica.Math.atan(Y));
+
+18: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: function sight_fac_orthogonal "Calculate sight factor based on B7-1 in ASHRAE Appendix for orthogonal areas" input Real x "Length of floor / wall";
+
+19: Name 'z' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: z. Affected line: input Real z "Height of wall";
+
+20: Missing documentation, Name 'Y' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: protected Real Y = y / x;
+
+21: Missing documentation, Name 'Z' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Z. Affected line: Real Z = y / x;
+
+22: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: algorithm sight_factor := 1 / (Modelica.Constants.pi * Y) *( Y * Modelica.Math.atan(1 / Y) + Z * Modelica.Math.atan(1 / Z) - (Z*Z + Y*Y)^0.5* Modelica.Math.atan(1/(Z*Z + Y*Y)^0.5) + 0.25*Modelica.Math.log((1 + Y*Y)*( 1 + Z*Z)/(1 + Y*Y + Z*Z)*((Y*Y*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^( Y^2))*((Z*Z*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
+
+23: Name 'floor_length_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: floor_length_int. Affected line: Modelica.Units.SI.Length floor_length_int=if nFloors > 1 then floor_length else floors[1].length "Total length of floors";
+
+24: Name 'floor_height_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: floor_height_int. Affected line: Modelica.Units.SI.Height floor_height_int=if nFloors > 1 then floor_width else floors[1].height "Total height of floors";
+
+25: Name 'solar_frac_win_lost_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_win_lost_int. Affected line: Real solar_frac_win_lost_int = bounce_1_win_lost + bounce_2_floor_win_lost + bounce_3_rem_win_lost + bounce_R_rem_win_lost "Solar fractions for windows";
+
+26: Name 'solar_frac_flo_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar_frac_flo_int. Affected line: Real solar_frac_flo_int = bounce_1_floor + bounce_2_floor_floor + bounce_3_rem_floor + bounce_R_rem_floor "Solar fractions for floors";
+
+27: Missing documentation, Name 'alpha_flo_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: alpha_flo_int. Affected line: Real alpha_flo_int=sum(floors.solar_absorptance)/nFloors;
+
+28: Missing documentation, Name 'alpha_win_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: alpha_win_int. Affected line: Real alpha_win_int=sum(win_in.solar_absorptance)/nWin;
+
+29: Missing documentation, Name 'rho_win_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_win_int. Affected line: Real rho_win_int=sum(win_in.solar_reflectance)/nWin;
+
+30: Missing documentation, Name 'A_floor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_floor. Affected line: Modelica.Units.SI.Area A_floor=sum(floors.length .* floors.height);
+
+31: Missing documentation, Name 'A_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_win. Affected line: Modelica.Units.SI.Area A_win=sum(win_in.length .* win_in.height);
+
+32: Missing documentation, Name 'A_walls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_walls. Affected line: Modelica.Units.SI.Area A_walls[nWalls]=walls.length .* walls.height;
+
+33: Missing documentation, Name 'A_ceil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_ceil. Affected line: Modelica.Units.SI.Area A_ceil[nCei]=ceilings.length .* ceilings.height;
+
+34: Name 'area_total' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: area_total. Affected line: Modelica.Units.SI.Area area_total=A_floor + sum(A_ceil) + sum(A_walls) + A_win "Total area of all surfaces, used for bounce";
+
+35: Missing documentation, Name 'bounce_1_win_lost' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_1_win_lost. Affected line: Real bounce_1_win_lost = 0;
+
+36: Missing documentation, Name 'bounce_1_cei' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_1_cei. Affected line: Real bounce_1_cei[nCei] = fill(0, nCei);
+
+37: Missing documentation, Name 'bounce_1_floor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_1_floor. Affected line: Real bounce_1_floor = alpha_flo_int;
+
+38: Missing documentation, Name 'bounce_1_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_1_wall. Affected line: Real bounce_1_wall[nWalls] = fill(0, nWalls);
+
+39: Name 'sum_bounce_1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_bounce_. Affected line: Real sum_bounce_1 = alpha_flo_int "Just used to make the concept of bounce 3 more clear";
+
+40: Missing documentation, Name 'bounce_2_floor_cei' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_2_floor_cei. Affected line: Real bounce_2_floor_cei[nCei]=(1 - alpha_flo_int) .* sight_fac_floor_cei .* ceilings.solar_absorptance;
+
+41: Missing documentation, Name 'bounce_2_floor_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_2_floor_wall. Affected line: Real bounce_2_floor_wall[nWalls]=(1 - alpha_flo_int) .* sight_fac_floor_wall .* walls.solar_absorptance;
+
+42: Missing documentation, Name 'bounce_2_floor_win_lost' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_2_floor_win_lost. Affected line: Real bounce_2_floor_win_lost = (1-alpha_flo_int) * sight_fac_floor_win * (1-(rho_win_int + alpha_win_int/2));
+
+43: Missing documentation, Name 'bounce_2_floor_win_abs' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_2_floor_win_abs. Affected line: Real bounce_2_floor_win_abs = (1-alpha_flo_int) * sight_fac_floor_win * alpha_win_int/2;
+
+44: Missing documentation, Name 'sum_bounce_2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_bounce_. Affected line: Real sum_bounce_2 = sum(bounce_2_floor_cei) + sum(bounce_2_floor_wall) + bounce_2_floor_win_lost + bounce_2_floor_win_abs;
+
+45: Missing documentation, Name 'bounce_3_rem_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_3_rem_wall. Affected line: Real bounce_3_rem_wall[nWalls]=(1 - sum_bounce_1 - sum_bounce_2) .* A_walls .* walls.solar_absorptance/area_total;
+
+46: Missing documentation, Name 'bounce_3_rem_floor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_3_rem_floor. Affected line: Real bounce_3_rem_floor = (1 - sum_bounce_1 - sum_bounce_2) * A_floor / area_total * alpha_flo_int;
+
+47: Missing documentation, Name 'bounce_3_rem_win_lost' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_3_rem_win_lost. Affected line: Real bounce_3_rem_win_lost = (1 - sum_bounce_1 - sum_bounce_2) * A_win / area_total * (1-(rho_win_int + alpha_win_int/2));
+
+48: Missing documentation, Name 'bounce_3_rem_win_abs' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_3_rem_win_abs. Affected line: Real bounce_3_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2) * A_win / area_total * alpha_win_int;
+
+49: Missing documentation, Name 'sum_bounce_3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_bounce_3. Affected line: Real sum_bounce_3 = sum(bounce_3_rem_cei) + sum(bounce_3_rem_wall) + bounce_3_rem_floor + bounce_3_rem_win_abs + bounce_3_rem_win_lost;
+
+50: Missing documentation, Name 'bounce_R_rem_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_, R_rem_wall. Affected line: Real bounce_R_rem_wall[nWalls] = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_wall / sum_bounce_3);
+
+51: Missing documentation, Name 'bounce_R_rem_floor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_, R_rem_floor. Affected line: Real bounce_R_rem_floor = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_floor / sum_bounce_3);
+
+52: Missing documentation, Name 'bounce_R_rem_win_lost' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_, R_rem_win_lost. Affected line: Real bounce_R_rem_win_lost = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_win_lost / sum_bounce_3);
+
+53: Missing documentation, Name 'bounce_R_rem_win_abs' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bounce_, R_rem_win_abs. Affected line: Real bounce_R_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_win_abs / sum_bounce_3);
+
+54: Missing documentation, Name 'sight_fac_floor_win' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sight_fac_floor_win. Affected line: Real sight_fac_floor_win = A_win / (A_win + sum(A_walls)) * (1 - sum(sight_fac_floor_cei));
+
+55: Missing documentation, Name 'sight_fac_floor_wall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sight_fac_floor_wall. Affected line: Real sight_fac_floor_wall[nWalls] = A_walls / (A_win + sum(A_walls)) * (1 - sum(sight_fac_floor_cei));
+
+56: Missing documentation, Name 'QRadWalls_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: Modelica.Blocks.Sources.RealExpression QRadWalls_out[nWalls](y={Q_flow_in * solar_frac_wall[n] for n in 1:nWalls});
+
+57: Missing documentation. Affected line: Modelica.Blocks.Sources.RealExpression QRadCei_out[nCei](y={Q_flow_in * solar_frac_cei[n] for n in 1:nCei});
+
+58: Missing documentation, Name 'QRadFloors_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floors. Affected line: Modelica.Blocks.Sources.RealExpression QRadFloors_out[nFloors](y={Q_flow_in * solar_frac_flo[n] for n in 1:nFloors});
+
+59: Missing documentation. Affected line: Modelica.Blocks.Sources.RealExpression QRadWin_out[nWin](y={Q_flow_in* solar_frac_win_abs[n] for n in 1:nWin});
+
+60: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: initial equation // Asssert energy balance matches assert(abs(sum(cat(1, solar_frac_cei, solar_frac_flo, solar_frac_wall, solar_frac_win_lost, solar_frac_win_abs)) - 1) < Modelica.Constants.eps, "Sum of solar fractions is not equal to 1", AssertionLevel.error);
