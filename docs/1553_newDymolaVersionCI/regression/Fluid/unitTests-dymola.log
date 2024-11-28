@@ -1,0 +1,14 @@
+Regression tests are only run for the following package:
+  AixLib.Fluid
+*** Warning: AixLib.Fluid.Pools.Examples.IndoorSwimmingPool: Translation statistics for initialization changed for nonlinear, but results are unchanged.
+ Old = 0, 16, 1
+ New = 1, 16, 1
+*** Warning: AixLib.Fluid.Pools.Examples.IndoorSwimmingPoolExternalHeatingSystem: Translation statistics for initialization changed for nonlinear, but results are unchanged.
+ Old = 0, 17, 1
+ New = 1, 17, 1
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.1 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 2 warnings and 0 errors.
+
