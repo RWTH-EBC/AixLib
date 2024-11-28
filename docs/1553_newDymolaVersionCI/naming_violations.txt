@@ -121,3 +121,11 @@ AixLib/Utilities/HeatTransfer/SolarRadInRoom.mo
 59: Missing documentation. Affected line: Modelica.Blocks.Sources.RealExpression QRadWin_out[nWin](y={Q_flow_in* solar_frac_win_abs[n] for n in 1:nWin});
 
 60: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: initial equation // Asssert energy balance matches assert(abs(sum(cat(1, solar_frac_cei, solar_frac_flo, solar_frac_wall, solar_frac_win_lost, solar_frac_win_abs)) - 1) < Modelica.Constants.eps, "Sum of solar fractions is not equal to 1", AssertionLevel.error);
+
+
+AixLib/Utilities/Examples/TimeUtilities_test.mo
+1: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.NightMode nightMode(dayStart = 8, dayEnd = 20) annotation(Placement(transformation(extent = {{-12, -32}, {8, -12}})));Sources.HourOfDay hourOfDay annotation(Placement(transformation(extent = {{-12, 10}, {8, 30}})));
+
+2: Missing documentation, Name 'boolNightMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: bool, Night, Mode. Affected line: Modelica.Blocks.Interfaces.BooleanOutput boolNightMode annotation(Placement(transformation(extent = {{56, -30}, {76, -10}})));
+
+3: Missing documentation, Name 'realSamples' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Samples. Affected line: Modelica.Blocks.Interfaces.RealOutput realSamples[1] annotation(Placement(transformation(extent = {{56, 30}, {76, 50}})));

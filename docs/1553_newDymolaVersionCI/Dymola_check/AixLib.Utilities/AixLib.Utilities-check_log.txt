@@ -5,9 +5,41 @@ Found for import <a href="Modelica://Utilities">Utilities</a>
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Examples/TimeUtilities_test.mo, line 2
   Context: <a href="Modelica://AixLib.Utilities.Examples.TimeUtilities_test">AixLib.Utilities.Examples.TimeUtilities_test</a>
 Error: Error: Lookup failed for import <a href="Modelica://Utilities">Utilities</a>
-Warning: One (or more) causal signals without any source in the same connection set.
-  output boolNightMode 
 The model has the same number of unknowns and equations: 22
-Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
+Translation of <a href="Modelica://AixLib.Utilities.Examples.TimeUtilities_test">AixLib.Utilities.Examples.TimeUtilities_test</a>
+Found for import <a href="Modelica://Utilities">Utilities</a>
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Examples/TimeUtilities_test.mo, line 2
+  Context: <a href="Modelica://AixLib.Utilities.Examples.TimeUtilities_test">AixLib.Utilities.Examples.TimeUtilities_test</a>
+Error: Error: Lookup failed for import <a href="Modelica://Utilities">Utilities</a>
+The DAE has 22 scalar unknowns and 22 scalar equations.
+
+Statistics
+
+Original Model
+  Number of components: 9
+  Variables: 33
+  Parameters: 11 (11 scalars)
+  Unknowns: 22 (22 scalars)
+  Equations: 22
+  Nontrivial: 21
+Translated Model
+  Free parameters: 7 scalars
+  Parameter depending: 4 scalars
+  Outputs: 2 scalars
+  Time-varying variables: 13 scalars
+  Alias variables: 9 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+
+Selected continuous time states
+Error detected when generating code.
+Translation aborted.
+Error: ERRORS have been issued.
+Error: Simulations failed for:
+<a href="Modelica://AixLib.Utilities.Examples.TimeUtilities_test">AixLib.Utilities.Examples.TimeUtilities_test</a>
 
