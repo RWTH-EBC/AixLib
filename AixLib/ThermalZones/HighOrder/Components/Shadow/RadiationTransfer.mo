@@ -51,7 +51,7 @@ equation
           30},{-20,2},{42,2}}, color={0,0,127}));
   connect(const.y, preSolRad.I_gr[1]) annotation (Line(points={{-39,-10},{-30,-10},
           {-30,-6.2},{42.2,-6.2}}, color={0,0,127}));
-  connect(hDirTil.inc, preSolRad.AOI[1]) annotation (Line(points={{-39,66},{-26,
+  connect(hDirTil.inc, preSolRad.incAng[1]) annotation (Line(points={{-39,66},{-26,
           66},{-26,-14},{42,-14}}, color={0,0,127}));
   connect(preSolRad.solarRad_out[1], solRadOut)
     annotation (Line(points={{78,0},{110,0}}, color={255,128,0}));
