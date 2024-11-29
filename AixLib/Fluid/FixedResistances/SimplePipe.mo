@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model SimplePipe "Simple pipe model with n discrete elements"
 
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
