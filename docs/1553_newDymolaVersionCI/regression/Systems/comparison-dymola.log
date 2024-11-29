@@ -90,7 +90,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater",
     "simulation": {
-      "elapsed_time": 1.3,
+      "elapsed_time": 1.25,
       "final_time": 7200,
       "jacobians": 5019,
       "start_time": 0,
@@ -153,7 +153,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
     "simulation": {
-      "elapsed_time": 0.0112,
+      "elapsed_time": 0.0115,
       "final_time": 600,
       "jacobians": 46,
       "start_time": 0,
@@ -216,7 +216,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Admix",
     "simulation": {
-      "elapsed_time": 0.0161,
+      "elapsed_time": 0.0176,
       "final_time": 800,
       "jacobians": 56,
       "start_time": 0,
@@ -261,7 +261,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.Heater",
     "simulation": {
-      "elapsed_time": 0.0188,
+      "elapsed_time": 0.019,
       "final_time": 3600,
       "jacobians": 31,
       "start_time": 0,
@@ -324,7 +324,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Pump",
     "simulation": {
-      "elapsed_time": 0.0173,
+      "elapsed_time": 0.017,
       "final_time": 800,
       "jacobians": 67,
       "start_time": 0,
@@ -387,7 +387,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Injection",
     "simulation": {
-      "elapsed_time": 0.0217,
+      "elapsed_time": 0.0197,
       "final_time": 800,
       "jacobians": 55,
       "start_time": 0,
@@ -486,7 +486,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler",
     "simulation": {
-      "elapsed_time": 2.3,
+      "elapsed_time": 2.26,
       "final_time": 2700,
       "jacobians": 11739,
       "start_time": 0,
@@ -504,19 +504,19 @@
         "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
         "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_thermalZone.CO2Con"
       ],
-      "success_rate": 0.8,
+      "success_rate": 1.0,
       "t_err_max": [
         5961600.0,
         5961600.0,
         5961600.0,
-        6342624.0,
+        5961600.0,
         5961600.0
       ],
       "test_passed": [
         1,
         1,
         1,
-        0,
+        1,
         1
       ],
       "var_groups": [
@@ -537,13 +537,13 @@
         null,
         null,
         null,
-        "Absolute error = 5.093e-04 at t = 6342624.0 for genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
+        null,
         null
       ]
     },
     "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
     "simulation": {
-      "elapsed_time": 45.9,
+      "elapsed_time": 44.6,
       "final_time": 6566400.0,
       "jacobians": 24106,
       "start_time": 5961600.0,
@@ -606,7 +606,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Throttle",
     "simulation": {
-      "elapsed_time": 0.00742,
+      "elapsed_time": 0.00692,
       "final_time": 1000,
       "jacobians": 43,
       "start_time": 0,
@@ -669,7 +669,7 @@
     },
     "model": "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
     "simulation": {
-      "elapsed_time": 0.0164,
+      "elapsed_time": 0.0168,
       "final_time": 800,
       "jacobians": 53,
       "start_time": 0,
@@ -768,7 +768,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater",
     "simulation": {
-      "elapsed_time": 0.944,
+      "elapsed_time": 0.976,
       "final_time": 4320,
       "jacobians": 4262,
       "start_time": 0,
@@ -837,7 +837,7 @@
     },
     "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
     "simulation": {
-      "elapsed_time": 0.108,
+      "elapsed_time": 0.117,
       "final_time": 7200,
       "jacobians": 40,
       "start_time": 0,
