@@ -1,5 +1,5 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
-[![OM](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)
+[![OM](https://rwth-ebc.github.io/AixLib/main/om_readiness_badge.svg)](https://libraries.openmodelica.org/branches/master/AixLib/AixLib.html)
 
 # <img src="./AixLib/Resources/Images/Icon_Modelica_AixLib_background.png" width="40"> AixLib
 
@@ -17,7 +17,7 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
   ``git clone --recurse-submodules https://github.com/RWTH-EBC/AixLib.git``
 * If you have already cloned the repository, run:  
   ``git submodule update --init --recursive``
-* The default branch of AixLib is the ``development`` branch. This means that after cloning the repository, you always checked out the ``development`` branch.
+* The default branch of AixLib is the ``main`` branch. This means that after cloning the repository, you always checked out the ``main`` branch.
 
 ## Release versions
 
