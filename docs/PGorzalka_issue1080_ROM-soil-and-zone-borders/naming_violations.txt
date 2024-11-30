@@ -67,6 +67,144 @@ AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo
 32: Name 'QIntGains_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](each final quantity="HeatFlowRate", each final unit="W") if ASurTot > 0 or VAir > 0 "Heat flow based on internal gains for each zone from lights[1], machines[2], and persons[3]" annotation (Placement(transformation(extent={{100,-90},{ 120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
 
 
+AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo
+1: Name 'withAirCap' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAirCap = true "Consider capacity of indoor air";
+
+2: Name 'nOrientations' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations. Affected line: parameter Integer nOrientations(min=1) "Number of total facades with different combination of tilt and orientation";
+
+3: Name 'ATransparent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Transparent. Affected line: parameter Modelica.Units.SI.Area ATransparent[nOrientations] "Areas of transparent (solar radiation transmittend) elements by orientations";
+
+4: Name 'gWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g. Affected line: parameter Modelica.Units.SI.TransmissionCoefficient gWin "Total energy transmittance of windows";
+
+5: Name 'ratioWinConRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio. Affected line: parameter Real ratioWinConRad "Ratio for windows between convective and radiative heat emission";
+
+6: Name 'AFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.Area AFloor "Area of floor plate";
+
+7: Name 'hConFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConFloor "Convective coefficient of heat transfer of floor plate (indoor)";
+
+8: Name 'nFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
+
+9: Name 'RFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
+
+10: Name 'RFloorRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
+
+11: Name 'CFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
+
+12: Name 'ARoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Area ARoof "Area of roof";
+
+13: Name 'hConRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoof "Convective coefficient of heat transfer of roof (indoor)";
+
+14: Name 'nRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Integer nRoof(min=1) "Number of RC-elements of roof";
+
+15: Name 'RRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
+
+16: Name 'RRoofRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
+
+17: Name 'CRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof] "Heat capacities of roof, from inside to outside";
+
+18: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]={{0.00001}} "Heat capacities of interzonal elements, from inside to outside";
+
+19: Name 'nOrientationsRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations, Roof. Affected line: parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof";
+
+20: Name 'tiltRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Roof. Affected line: parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof";
+
+21: Name 'aziRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Angle aziRoof[nOrientationsRoof] "Azimuths of roof";
+
+22: Name 'wfRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Roof. Affected line: parameter Real wfRoof[nOrientationsRoof] "Weight factors of the roof";
+
+23: Name 'aRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a, Roof. Affected line: parameter Modelica.Units.SI.Emissivity aRoof "Coefficient of absorption of roof (outdoor)";
+
+24: Name 'aExt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Modelica.Units.SI.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
+
+25: Name 'TSoil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Soil. Affected line: parameter Modelica.Units.SI.Temperature TSoil "Temperature of soil (used for outside surface temperature of floors and thermal radiation)";
+
+26: Name 'hConWallOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
+
+27: Name 'hRadWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadWall "Coefficient of heat transfer for linearized radiation for exterior walls";
+
+28: Name 'hConRoofOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
+
+29: Name 'hRadRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadRoof "Coefficient of heat transfer for linearized radiation for roof";
+
+30: Name 'tiltExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Walls. Affected line: parameter Modelica.Units.SI.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
+
+31: Name 'aziExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Modelica.Units.SI.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
+
+32: Name 'wfWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Wall. Affected line: parameter Real wfWall[nOrientations] "Weight factors of the walls";
+
+33: Name 'wfWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfWin[nOrientations] "Weight factors of the windows";
+
+34: Name 'wfGro' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfGro "Weight factor of the ground";
+
+35: Name 'specificPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: specific, People. Affected line: parameter Real specificPeople "people per squaremeter";
+
+36: Name 'activityDegree' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: activity, Degree. Affected line: parameter Real activityDegree "acitivity degree of people in met";
+
+37: Name 'fixedHeatFlowRatePersons' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Heat, Rate, Persons. Affected line: parameter Modelica.Units.SI.HeatFlowRate fixedHeatFlowRatePersons "Area specific heatflowrate by persons in case of temperature independent calculation";
+
+38: Name 'ratioConvectiveHeatPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, People. Affected line: parameter Real ratioConvectiveHeatPeople "Ratio of convective heat from overall heat output for people";
+
+39: Name 'internalGainsMoistureNoPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Moisture, People. Affected line: parameter Real internalGainsMoistureNoPeople "internal moisture production of plants, etc. except from people in g/(h m²)";
+
+40: Name 'internalGainsMachinesSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Machines, Specific. Affected line: parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
+
+41: Name 'ratioConvectiveHeatMachines' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Machines. Affected line: parameter Real ratioConvectiveHeatMachines "Ratio of convective heat from overall heat output for machines";
+
+42: Name 'lightingPowerSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: lighting, Power, Specific. Affected line: parameter Modelica.Units.SI.HeatFlux lightingPowerSpecific "Heat flux of lighting";
+
+43: Name 'ratioConvectiveHeatLighting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Lighting. Affected line: parameter Real ratioConvectiveHeatLighting "Ratio of convective heat from overall heat output for lights";
+
+44: Name 'useConstantACHrate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Constant, Hrate. Affected line: parameter Boolean useConstantACHrate "Choose if a constant infiltration rate is used";
+
+45: Name 'baseACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: base. Affected line: parameter Real baseACH "Base ACH rate for ventilation controller";
+
+46: Name 'maxUserACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: User. Affected line: parameter Real maxUserACH "Additional ACH value for max. user activity";
+
+47: Name 'maxOverheatingACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Overheating. Affected line: parameter Real maxOverheatingACH[2] "Additional ACH value when overheating appears, transition range";
+
+48: Name 'maxSummerACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Summer. Affected line: parameter Real maxSummerACH[3] "Additional ACH in summer, Tmin, Tmax";
+
+49: Name 'winterReduction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: winter, Reduction. Affected line: parameter Real winterReduction[3] "Reduction factor of userACH for cold weather";
+
+50: Name 'withAHU' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAHU "Zone is connected to central air handling unit";
+
+51: Name 'shadingFactor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: shading, Factor. Affected line: parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
+
+52: Name 'hHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: parameter Real hHeat "Upper limit controller output";
+
+53: Name 'lHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Heat. Affected line: parameter Real lHeat "Lower limit controller output";
+
+54: Name 'KRHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Heat. Affected line: parameter Real KRHeat "Gain of the controller";
+
+55: Name 'TNHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Heat. Affected line: parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller";
+
+56: Name 'HeaterOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater. Affected line: parameter Boolean HeaterOn "Use heater component";
+
+57: Name 'hCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cool. Affected line: parameter Real hCool "Upper limit controller output";
+
+58: Name 'lCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Cool. Affected line: parameter Real lCool "Lower limit controller output";
+
+59: Name 'heaLoadFacOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
+
+60: Name 'heaLoadFacGrd' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
+
+61: Name 'KRCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Cool. Affected line: parameter Real KRCool "Gain of the controller";
+
+62: Name 'TNCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Cool. Affected line: parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
+
+63: Name 'CoolerOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler. Affected line: parameter Boolean CoolerOn "Use chiller component";
+
+64: Name 'TThresholdHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Heater. Affected line: parameter Modelica.Units.SI.Temperature TThresholdHeater "Threshold temperature below ideal heater is used";
+
+65: Name 'TThresholdCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Cooler. Affected line: parameter Modelica.Units.SI.Temperature TThresholdCooler "Threshold temperature above ideal cooler is used";
+
+66: Name 'withIdealThresholds' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with, Ideal, Thresholds. Affected line: parameter Boolean withIdealThresholds "Sets if the threshold temperatures for ideal heater and cooler should be used";
+
+
+AixLib/ThermalZones/ReducedOrder/RC/BaseClasses/ExteriorWallContainer.mo
+1: Missing documentation. Affected line: AixLib.ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC( n=n, RExt=RExt, RExtRem=RExtRem, CExt=CExt, T_start=T_start) if not pasThr annotation (Placement(transformation(extent={{-10,-10},{10,12}})));
+
+
 AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo
 1: Name 'corG' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: replaceable model corG = SolarGain.CorrectionGDoublePane constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG "Model for correction of solar transmission" annotation(choicesAllMatching=true);
 
@@ -183,6 +321,10 @@ AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo
 57: Missing documentation, Name 'QIntGainsInternalTot_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains, Internal. Affected line: Modelica.Blocks.Sources.RealExpression QIntGainsInternalTot_flow[3](y={-lights.convHeat.Q_flow - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow - machinesSenHea.convHeat.Q_flow, -humanTotHeaDependent.radHeat.Q_flow - humanTotHeaDependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
 
 
+AixLib/BoundaryConditions/GroundTemperature/Options.mo
+1: Missing documentation. Affected line: parameter AixLib.BoundaryConditions.GroundTemperature.DataSource datSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant annotation (Dialog(group="General"));
+
+
 AixLib/ThermalZones/ReducedOrder/Validation/ASHRAE140/FiveElements/TestCase960.mo
 1: Name 'corGDoublePane' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G, Double, Pane. Affected line: AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane( UWin=3.046492744695893, n=4) "Correction factor for solar transmission" annotation (Placement(transformation(extent={{6,70},{26,90}})));
 
@@ -193,142 +335,6 @@ AixLib/ThermalZones/ReducedOrder/Validation/ASHRAE140/FiveElements/TestCase960.m
 4: Name 'TEquAirRoofSun' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 TEquAirRoofSun( aExt=0.6, wfGro=0, hConWallOut=14.399999999999999, hRad=7.400000000000001, n=1, wfWall={1.0}, wfWin={0}, TGro=285.15) "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{88,388},{108,408}})));
 
 5: Name 'to_degCel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: to_deg. Affected line: Modelica.Blocks.Math.UnitConversions.To_degC to_degCel "Indoor air temperature in degC" annotation (Placement(transformation(extent={{180,318},{192,330}})));
-
-
-AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo
-1: Name 'withAirCap' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAirCap = true "Consider capacity of indoor air";
-
-2: Name 'nOrientations' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations. Affected line: parameter Integer nOrientations(min=1) "Number of total facades with different combination of tilt and orientation";
-
-3: Name 'ATransparent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Transparent. Affected line: parameter Modelica.Units.SI.Area ATransparent[nOrientations] "Areas of transparent (solar radiation transmittend) elements by orientations";
-
-4: Name 'gWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g. Affected line: parameter Modelica.Units.SI.TransmissionCoefficient gWin "Total energy transmittance of windows";
-
-5: Name 'ratioWinConRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio. Affected line: parameter Real ratioWinConRad "Ratio for windows between convective and radiative heat emission";
-
-6: Name 'AFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.Area AFloor "Area of floor plate";
-
-7: Name 'hConFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConFloor "Convective coefficient of heat transfer of floor plate (indoor)";
-
-8: Name 'nFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
-
-9: Name 'RFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
-
-10: Name 'RFloorRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
-
-11: Name 'CFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
-
-12: Name 'ARoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Area ARoof "Area of roof";
-
-13: Name 'hConRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoof "Convective coefficient of heat transfer of roof (indoor)";
-
-14: Name 'nRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Integer nRoof(min=1) "Number of RC-elements of roof";
-
-15: Name 'RRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
-
-16: Name 'RRoofRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
-
-17: Name 'CRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof] "Heat capacities of roof, from inside to outside";
-
-18: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC] "Heat capacities of interzonal elements, from inside to outside";
-
-19: Name 'nOrientationsRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations, Roof. Affected line: parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof";
-
-20: Name 'tiltRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Roof. Affected line: parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof";
-
-21: Name 'aziRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Angle aziRoof[nOrientationsRoof] "Azimuths of roof";
-
-22: Name 'wfRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Roof. Affected line: parameter Real wfRoof[nOrientationsRoof] "Weight factors of the roof";
-
-23: Name 'aRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a, Roof. Affected line: parameter Modelica.Units.SI.Emissivity aRoof "Coefficient of absorption of roof (outdoor)";
-
-24: Name 'aExt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Modelica.Units.SI.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
-
-25: Name 'TSoil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Soil. Affected line: parameter Modelica.Units.SI.Temperature TSoil "Temperature of soil (used for outside surface temperature of floors and thermal radiation)";
-
-26: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter .Modelica.Units.SI.Temperature TSoiAmp "Amplitude of TSoil if sine model is chosen as TSoiDatSou";
-
-27: Name 'hConWallOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
-
-28: Name 'hRadWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadWall "Coefficient of heat transfer for linearized radiation for exterior walls";
-
-29: Name 'hConRoofOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
-
-30: Name 'hRadRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadRoof "Coefficient of heat transfer for linearized radiation for roof";
-
-31: Name 'tiltExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Walls. Affected line: parameter Modelica.Units.SI.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
-
-32: Name 'aziExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Modelica.Units.SI.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
-
-33: Name 'wfWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Wall. Affected line: parameter Real wfWall[nOrientations] "Weight factors of the walls";
-
-34: Name 'wfWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfWin[nOrientations] "Weight factors of the windows";
-
-35: Name 'wfGro' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfGro "Weight factor of the ground";
-
-36: Name 'specificPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: specific, People. Affected line: parameter Real specificPeople "people per squaremeter";
-
-37: Name 'activityDegree' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: activity, Degree. Affected line: parameter Real activityDegree "acitivity degree of people in met";
-
-38: Name 'fixedHeatFlowRatePersons' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Heat, Rate, Persons. Affected line: parameter Modelica.Units.SI.HeatFlowRate fixedHeatFlowRatePersons "Area specific heatflowrate by persons in case of temperature independent calculation";
-
-39: Name 'ratioConvectiveHeatPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, People. Affected line: parameter Real ratioConvectiveHeatPeople "Ratio of convective heat from overall heat output for people";
-
-40: Name 'internalGainsMoistureNoPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Moisture, People. Affected line: parameter Real internalGainsMoistureNoPeople "internal moisture production of plants, etc. except from people in g/(h m²)";
-
-41: Name 'internalGainsMachinesSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Machines, Specific. Affected line: parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
-
-42: Name 'ratioConvectiveHeatMachines' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Machines. Affected line: parameter Real ratioConvectiveHeatMachines "Ratio of convective heat from overall heat output for machines";
-
-43: Name 'lightingPowerSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: lighting, Power, Specific. Affected line: parameter Modelica.Units.SI.HeatFlux lightingPowerSpecific "Heat flux of lighting";
-
-44: Name 'ratioConvectiveHeatLighting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Lighting. Affected line: parameter Real ratioConvectiveHeatLighting "Ratio of convective heat from overall heat output for lights";
-
-45: Name 'useConstantACHrate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Constant, Hrate. Affected line: parameter Boolean useConstantACHrate "Choose if a constant infiltration rate is used";
-
-46: Name 'baseACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: base. Affected line: parameter Real baseACH "Base ACH rate for ventilation controller";
-
-47: Name 'maxUserACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: User. Affected line: parameter Real maxUserACH "Additional ACH value for max. user activity";
-
-48: Name 'maxOverheatingACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Overheating. Affected line: parameter Real maxOverheatingACH[2] "Additional ACH value when overheating appears, transition range";
-
-49: Name 'maxSummerACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Summer. Affected line: parameter Real maxSummerACH[3] "Additional ACH in summer, Tmin, Tmax";
-
-50: Name 'winterReduction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: winter, Reduction. Affected line: parameter Real winterReduction[3] "Reduction factor of userACH for cold weather";
-
-51: Name 'withAHU' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAHU "Zone is connected to central air handling unit";
-
-52: Name 'shadingFactor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: shading, Factor. Affected line: parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
-
-53: Name 'hHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: parameter Real hHeat "Upper limit controller output";
-
-54: Name 'lHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Heat. Affected line: parameter Real lHeat "Lower limit controller output";
-
-55: Name 'KRHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Heat. Affected line: parameter Real KRHeat "Gain of the controller";
-
-56: Name 'TNHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Heat. Affected line: parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller";
-
-57: Name 'HeaterOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater. Affected line: parameter Boolean HeaterOn "Use heater component";
-
-58: Name 'hCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cool. Affected line: parameter Real hCool "Upper limit controller output";
-
-59: Name 'lCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Cool. Affected line: parameter Real lCool "Lower limit controller output";
-
-60: Name 'heaLoadFacOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
-
-61: Name 'heaLoadFacGrd' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
-
-62: Name 'KRCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Cool. Affected line: parameter Real KRCool "Gain of the controller";
-
-63: Name 'TNCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Cool. Affected line: parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
-
-64: Name 'CoolerOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler. Affected line: parameter Boolean CoolerOn "Use chiller component";
-
-65: Name 'TThresholdHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Heater. Affected line: parameter Modelica.Units.SI.Temperature TThresholdHeater "Threshold temperature below ideal heater is used";
-
-66: Name 'TThresholdCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Cooler. Affected line: parameter Modelica.Units.SI.Temperature TThresholdCooler "Threshold temperature above ideal cooler is used";
-
-67: Name 'withIdealThresholds' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with, Ideal, Thresholds. Affected line: parameter Boolean withIdealThresholds "Sets if the threshold temperatures for ideal heater and cooler should be used";
 
 
 AixLib/Fluid/Pools/BaseClasses/AirFlowMoistureToROM.mo
@@ -343,10 +349,6 @@ AixLib/Fluid/Pools/BaseClasses/AirFlowMoistureToROM.mo
 5: Missing documentation. Affected line: Modelica.Blocks.Math.MultiSum SumQEva(nu=nPools) annotation (Placement(transformation(extent={{76,34},{60,50}})));
 
 6: Missing documentation, Name 'prescribedHeatFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation (Placement(transformation(extent={{48,32},{28,52}})));
-
-
-AixLib/BoundaryConditions/GroundTemperature/Options.mo
-1: Missing documentation. Affected line: parameter AixLib.BoundaryConditions.GroundTemperature.DataSource datSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant annotation (Dialog(group="General"));
 
 
 AixLib/ThermalZones/ReducedOrder/ThermalZone/BaseClasses/PartialThermalZone.mo
@@ -367,10 +369,6 @@ AixLib/ThermalZones/ReducedOrder/ThermalZone/BaseClasses/PartialThermalZone.mo
 8: Name 'intGainsConv' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains, Conv. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if ATot > 0 or zoneParam.VAir > 0 "Convective internal gains" annotation (Placement(transformation(extent={{94,10},{114,30}}), iconTransformation(extent={{92,-6},{112,14}})));
 
 9: Name 'intGainsRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0 "Radiative internal gains" annotation (Placement(transformation(extent={{94,30},{114,50}}), iconTransformation(extent={{92,24},{112,44}})));
-
-
-AixLib/ThermalZones/ReducedOrder/RC/BaseClasses/ExteriorWallContainer.mo
-1: Missing documentation. Affected line: AixLib.ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC( n=n, RExt=RExt, RExtRem=RExtRem, CExt=CExt, T_start=T_start) if not pasThr annotation (Placement(transformation(extent={{-10,-10},{10,12}})));
 
 
 AixLib/ThermalZones/ReducedOrder/RC/FiveElements.mo
