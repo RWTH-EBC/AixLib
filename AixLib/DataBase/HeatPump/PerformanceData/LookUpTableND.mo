@@ -1,6 +1,7 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
-  extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   parameter Real scalingFactor=1 "Scaling factor of heat pump";
   parameter Real nConv=100
@@ -42,15 +43,6 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-22,80})));
- Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
-    annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-4,-4},
-            {4,4}},
-        rotation=-90,
-        origin={-2,80})));
-  Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
-        -76,50], Placement(transformation(extent={{-3,-3},{3,3}},
-        rotation=-90,
-        origin={15,81})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
@@ -146,20 +138,6 @@ equation
           52},{-48,52},{-48,46.4}},       color={0,0,127}));
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-2,55.6},{-2,
           52},{48,52},{48,44.4}},            color={0,0,127}));
-  connect(sigBus.TEvaInMea, t_Ev_in.u) annotation (Line(
-      points={{-0.925,100.07},{-2,100.07},{-2,84.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBus.TConOutMea, t_Co_ou.u) annotation (Line(
-      points={{-0.925,100.07},{15,100.07},{15,84.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(sigBus.nSet, nConGain.u) annotation (Line(
       points={{-0.925,100.07},{-22,100.07},{-22,84.8}},
       color={255,204,51},
@@ -170,10 +148,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{-22,75.6},{
           -22,72},{-4,72},{-4,64.8},{-4.8,64.8}},              color={0,0,127}));
-  connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{15,77.7},{15,
-          70},{0.8,70},{0.8,64.8}},     color={0,0,127}));
-  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{-2,75.6},{-2,
-          64.8}},               color={0,0,127}));
   connect(realCorr.y, scalingFacTimesQCon.u1) annotation (Line(points={{
           -1.33227e-15,29.4},{-1.33227e-15,14},{-43.6,14},{-43.6,10.8}},
                                     color={0,0,127}));
@@ -230,6 +204,22 @@ equation
           -94},{-80,-110}},                         color={0,0,127}));
   connect(proRedQEva.u2,feedbackHeatFlowEvaporator. y) annotation (Line(
         points={{-78.4,-56.8},{-78,-56.8},{-78,-47.4}}, color={0,0,127}));
+  connect(sigBus.TConOutMea, multiplex3_1.u1[1]) annotation (Line(
+      points={{-0.925,100.07},{18,100.07},{18,64.8},{0.8,64.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.TEvaInMea, multiplex3_1.u2[1]) annotation (Line(
+      points={{-0.925,100.07},{-0.925,64.8},{-2,64.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

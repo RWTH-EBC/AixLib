@@ -1,194 +1,189 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Vitocal250A "Vitocal250A"
+model WSHP_Weishaupt_R410A "WSHP_Weishaupt_R410A"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   Modelica.Blocks.Math.Product productQCon annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={-80,-82})));
+        origin={-80,-70})));
 
   LookUpTable2D lookUpTable2D(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal_250A())
-    annotation (Placement(transformation(extent={{100,64},{120,84}})));
+      dataTable=HeatPumpComparison.DataBase.WWP_W_22_ID())
+    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   Controls.Interfaces.VapourCompressionMachineControlBus        sigBus1
     "Bus-connector used in a heat pump" annotation (Placement(
         transformation(
-        extent={{-18,-18},{18,18}},
+        extent={{-15,-14},{15,14}},
         rotation=0,
-        origin={110,100}), iconTransformation(extent={{-18,-18},{18,18}},
-          origin={110,100})));
-  Modelica.Blocks.Sources.RealExpression NomSupplyTemp(y=THotNom)
-    annotation (Placement(transformation(extent={{178,158},{150,176}})));
-  Modelica.Blocks.Sources.RealExpression NomSourceTemp(y=TSourceNom)
-    annotation (Placement(transformation(extent={{178,142},{150,160}})));
+        origin={-51,100})));
+  Modelica.Blocks.Sources.RealExpression zero2(y=THotNom)
+    annotation (Placement(transformation(extent={{-128,122},{-100,140}})));
+  Modelica.Blocks.Sources.RealExpression zero4(y=TSourceNom)
+    annotation (Placement(transformation(extent={{-128,106},{-100,124}})));
   LookUpTable2D lookUpTable2D1(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal_250A())
-    annotation (Placement(transformation(extent={{-88,20},{-68,40}})));
-  Modelica.Blocks.Sources.RealExpression NominalPower(y=QNom)
-    annotation (Placement(transformation(extent={{86,28},{62,48}})));
-  Modelica.Blocks.Math.Division scalingFactor
-    annotation (Placement(transformation(extent={{48,22},{28,42}})));
+      dataTable=HeatPumpComparison.DataBase.WWP_W_22_ID())
+    annotation (Placement(transformation(extent={{80,60},{100,80}})));
+  Modelica.Blocks.Sources.RealExpression zero5(y=QNom)
+    annotation (Placement(transformation(extent={{-128,30},{-100,48}})));
+  Modelica.Blocks.Math.Division division
+    annotation (Placement(transformation(extent={{-68,22},{-48,42}})));
   Modelica.Blocks.Math.Product productQCon1
                                            annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,-80})));
+        origin={0,-70})));
   Modelica.Blocks.Math.Product productQCon2
                                            annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={80,-80})));
+        origin={80,-70})));
   Modelica.Blocks.Math.Product productQCon3
                                            annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-32,10})));
-  LookUpTable2D lookUpTable2D2(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal_250A())
-    annotation (Placement(transformation(extent={{60,64},{80,84}})));
-  Modelica.Blocks.Sources.RealExpression TSourceMax(y=273.15 + 25)
-    annotation (Placement(transformation(extent={{8,122},{52,146}})));
-  Modelica.Blocks.Sources.RealExpression TSupplyMin(y=273.15 + 35) annotation (
-      Placement(transformation(
-        extent={{-22,-14},{22,14}},
         rotation=0,
-        origin={30,154})));
+        origin={-6,34})));
+  LookUpTable2D lookUpTable2D2(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+      dataTable=HeatPumpComparison.DataBase.WWP_W_22_ID())
+    annotation (Placement(transformation(extent={{120,20},{140,40}})));
+  Modelica.Blocks.Sources.RealExpression zero3(y=273.15 + 25)
+    annotation (Placement(transformation(extent={{130,62},{158,80}})));
+  Modelica.Blocks.Sources.RealExpression zero6(y=THotNom - DeltaTCon)
+    annotation (Placement(transformation(extent={{130,78},{158,96}})));
   Controls.Interfaces.VapourCompressionMachineControlBus        sigBus2
     "Bus-connector used in a heat pump" annotation (Placement(
         transformation(
         extent={{-15,-14},{15,14}},
         rotation=0,
-        origin={71,100})));
-  Modelica.Blocks.Sources.RealExpression NomRelPower(y=1)
-    annotation (Placement(transformation(extent={{178,124},{150,144}})));
+        origin={201,54})));
+  Modelica.Blocks.Sources.RealExpression zero1(y=1)
+    annotation (Placement(transformation(extent={{-126,92},{-98,110}})));
   Modelica.Blocks.Sources.RealExpression zero7(y=1)
-    annotation (Placement(transformation(extent={{24,164},{52,182}})));
+    annotation (Placement(transformation(extent={{128,108},{156,126}})));
+  Modelica.Blocks.Sources.RealExpression zero8(y=1)
+    annotation (Placement(transformation(extent={{42,136},{70,154}})));
   Modelica.Blocks.Math.Product productQCon4
                                            annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-4,52})));
-  Modelica.Blocks.Sources.RealExpression IceFactor(y=1)
-    annotation (Placement(transformation(extent={{26,180},{54,200}})));
+        origin={56,60})));
   Modelica.Blocks.Sources.RealExpression one(y=1)
-    annotation (Placement(transformation(extent={{54,-10},{30,10}})));
+    annotation (Placement(transformation(extent={{28,64},{4,84}})));
 equation
 
   connect(QEva, QEva)
     annotation (Line(points={{80,-110},{80,-110}}, color={0,0,127}));
 
   connect(productQCon.y, QCon)
-    annotation (Line(points={{-80,-93},{-80,-110}}, color={0,0,127}));
+    annotation (Line(points={{-80,-81},{-80,-110}}, color={0,0,127}));
 
   connect(sigBus1, lookUpTable2D.sigBus) annotation (Line(
-      points={{110,100},{110,85},{109.9,85},{109.9,84}},
+      points={{-51,100},{-51,85},{-50.1,85},{-50.1,80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(NomSupplyTemp.y, sigBus1.TConOutMea) annotation (Line(points={{148.6,
-          167},{110.09,167},{110.09,100.09}}, color={0,0,127}), Text(
+  connect(zero2.y, sigBus1.TConOutMea) annotation (Line(points={{-98.6,131},{
+          -50.925,131},{-50.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(NomSourceTemp.y, sigBus1.TEvaInMea) annotation (Line(points={{148.6,
-          151},{110.09,151},{110.09,100.09}}, color={0,0,127}), Text(
+  connect(zero4.y, sigBus1.TEvaInMea) annotation (Line(points={{-98.6,115},{
+          -50.925,115},{-50.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sigBus, lookUpTable2D1.sigBus) annotation (Line(
-      points={{-1,100},{-78.1,100},{-78.1,40}},
+      points={{-1,100},{89.9,100},{89.9,80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(NominalPower.y, scalingFactor.u1)
-    annotation (Line(points={{60.8,38},{50,38}}, color={0,0,127}));
-  connect(lookUpTable2D.QCon, scalingFactor.u2)
-    annotation (Line(points={{102,63},{102,26},{50,26}}, color={0,0,127}));
-  connect(productQCon1.y, Pel) annotation (Line(points={{-2.22045e-15,-91},{
+  connect(zero5.y, division.u1) annotation (Line(points={{-98.6,39},{-82,39},{
+          -82,38},{-70,38}}, color={0,0,127}));
+  connect(lookUpTable2D.QCon, division.u2) annotation (Line(points={{-58,59},{
+          -58,52},{-84,52},{-84,26},{-70,26}}, color={0,0,127}));
+  connect(lookUpTable2D1.Pel, productQCon1.u1) annotation (Line(points={{90,59},
+          {90,-14},{6,-14},{6,-58}}, color={0,0,127}));
+  connect(productQCon1.y, Pel) annotation (Line(points={{-2.22045e-15,-81},{
           -2.22045e-15,-96},{0,-96},{0,-110}}, color={0,0,127}));
-  connect(lookUpTable2D1.QEva, productQCon2.u2) annotation (Line(points={{-70,19},
-          {-70,-20},{74,-20},{74,-68}},color={0,0,127}));
-  connect(scalingFactor.y, productQCon3.u2)
-    annotation (Line(points={{27,32},{-38,32},{-38,22}}, color={0,0,127}));
+  connect(lookUpTable2D1.QCon, productQCon.u1) annotation (Line(points={{82,59},
+          {82,-8},{-36,-8},{-36,-26},{-74,-26},{-74,-58}}, color={0,0,127}));
+  connect(lookUpTable2D1.QEva, productQCon2.u2) annotation (Line(points={{98,59},
+          {98,-20},{74,-20},{74,-58}}, color={0,0,127}));
+  connect(division.y, productQCon3.u2) annotation (Line(points={{-47,32},{-36,
+          32},{-36,26},{-18,26},{-18,28}}, color={0,0,127}));
+  connect(productQCon3.y, productQCon1.u2) annotation (Line(points={{5,34},{22,
+          34},{22,0},{-6,0},{-6,-58}}, color={0,0,127}));
+  connect(productQCon3.y, productQCon.u2) annotation (Line(points={{5,34},{14,
+          34},{14,6},{-86,6},{-86,-58}}, color={0,0,127}));
   connect(productQCon3.y, productQCon2.u1)
-    annotation (Line(points={{-32,-1},{-32,-32},{86,-32},{86,-68}},
-                                                       color={0,0,127}));
+    annotation (Line(points={{5,34},{86,34},{86,-58}}, color={0,0,127}));
   connect(productQCon2.y, QEva)
-    annotation (Line(points={{80,-91},{80,-110}}, color={0,0,127}));
-  connect(TSupplyMin.y, sigBus2.TConOutMea) annotation (Line(points={{54.2,154},
-          {71.075,154},{71.075,100.07}}, color={0,0,127}), Text(
+    annotation (Line(points={{80,-81},{80,-110}}, color={0,0,127}));
+  connect(zero6.y, sigBus2.TConOutMea) annotation (Line(points={{159.4,87},{
+          201.075,87},{201.075,54.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(TSourceMax.y, sigBus2.TEvaInMea) annotation (Line(points={{54.2,134},
-          {71.075,134},{71.075,100.07}}, color={0,0,127}), Text(
+  connect(zero3.y, sigBus2.TEvaInMea) annotation (Line(points={{159.4,71},{
+          201.075,71},{201.075,54.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sigBus2, lookUpTable2D2.sigBus) annotation (Line(
-      points={{71,100},{70,100},{70,84},{69.9,84}},
+      points={{201,54},{202,54},{202,48},{129.9,48},{129.9,40}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(NomRelPower.y, sigBus1.nSet) annotation (Line(points={{148.6,134},{
-          110.09,134},{110.09,100.09}}, color={0,0,127}), Text(
+  connect(zero1.y, sigBus1.nSet) annotation (Line(points={{-96.6,101},{-84,101},
+          {-84,102},{-50.925,102},{-50.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(zero7.y, sigBus2.nSet) annotation (Line(points={{53.4,173},{71.075,
-          173},{71.075,100.07}}, color={0,0,127}), Text(
+  connect(zero7.y, sigBus2.nSet) annotation (Line(points={{157.4,117},{201.075,
+          117},{201.075,54.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(productQCon4.y, sigBus.QEvapNom) annotation (Line(points={{-15,52},{
-          -46,52},{-46,100.07},{-0.925,100.07}},
-                                            color={0,0,127}), Text(
+  connect(zero8.y, sigBus2.iceFacMea) annotation (Line(points={{71.4,145},{
+          201.075,145},{201.075,54.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(IceFactor.y, sigBus1.iceFacMea) annotation (Line(points={{55.4,190},{
-          110.09,190},{110.09,100.09}}, color={0,0,127}), Text(
+  connect(zero8.y, sigBus1.iceFacMea) annotation (Line(points={{71.4,145},{71.4,
+          136},{72,136},{72,126},{-46,126},{-46,100.07},{-50.925,100.07}},
+                                     color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(lookUpTable2D2.QEva, productQCon4.u2) annotation (Line(points={{138,
+          19},{138,2},{34,2},{34,54},{44,54}}, color={0,0,127}));
+  connect(productQCon4.y, sigBus.QEvapNom) annotation (Line(points={{67,60},{72,
+          60},{72,100.07},{-0.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(IceFactor.y, sigBus2.iceFacMea) annotation (Line(points={{55.4,190},{
-          71.075,190},{71.075,100.07}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(lookUpTable2D1.QCon, productQCon.u2)
-    annotation (Line(points={{-86,19},{-86,-70},{-86,-70}}, color={0,0,127}));
-  connect(productQCon3.y, productQCon.u1) annotation (Line(points={{-32,-1},{
-          -32,-32},{-74,-32},{-74,-70}}, color={0,0,127}));
-  connect(lookUpTable2D1.Pel, productQCon1.u2) annotation (Line(points={{-78,19},
-          {-78,-50},{-6,-50},{-6,-68}}, color={0,0,127}));
-  connect(productQCon3.y, productQCon1.u1) annotation (Line(points={{-32,-1},{
-          -32,-42},{6,-42},{6,-68}}, color={0,0,127}));
-  connect(scalingFactor.y, productQCon4.u2) annotation (Line(points={{27,32},{
-          18,32},{18,46},{8,46}}, color={0,0,127}));
-  connect(lookUpTable2D2.QEva, productQCon4.u1)
-    annotation (Line(points={{78,63},{78,58},{8,58}}, color={0,0,127}));
-  connect(one.y, productQCon3.u1) annotation (Line(points={{28.8,0},{14,0},{14,
-          12},{-2,12},{-2,28},{-26,28},{-26,22}}, color={0,0,127}));
+  connect(division.y, productQCon4.u1) annotation (Line(points={{-47,32},{-32,
+          32},{-32,66},{44,66}}, color={0,0,127}));
+  connect(one.y, productQCon3.u1) annotation (Line(points={{2.8,74},{-24,74},{
+          -24,40},{-18,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},
@@ -283,4 +278,4 @@ equation
   \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_DeltaT_HK.png\">
 </p>
 </html>"));
-end Vitocal250A;
+end WSHP_Weishaupt_R410A;

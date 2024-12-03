@@ -46,7 +46,7 @@ model WSHP_Wamak_R410A "WSHP_Wamak_R410A"
   LookUpTable2D lookUpTable2D2(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
       dataTable=AixLib.DataBase.HeatPump.EN14511.Wamak_R410A())
     annotation (Placement(transformation(extent={{120,20},{140,40}})));
-  Modelica.Blocks.Sources.RealExpression zero3(y=273.15 + 40)
+  Modelica.Blocks.Sources.RealExpression zero3(y=273.15 + 25)
     annotation (Placement(transformation(extent={{130,62},{158,80}})));
   Modelica.Blocks.Sources.RealExpression zero6(y=THotNom - DeltaTCon)
     annotation (Placement(transformation(extent={{130,78},{158,96}})));
