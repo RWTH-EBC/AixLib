@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps;
+﻿within AixLib.Fluid.HeatPumps;
 model HeatPump
   "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
 
