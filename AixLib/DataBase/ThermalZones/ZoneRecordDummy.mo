@@ -60,7 +60,7 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     othZoneInd=fill(1, nIze),
     zoneInd=1,
     TSoil=Modelica.Constants.eps,
-    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant,
+    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant,
 
     TSoiOffTim=Modelica.Constants.eps,
     TSoiAmp=Modelica.Constants.eps,
@@ -112,6 +112,7 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
     withIdealThresholds=false);
+
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
     Additional soil temperature and neighboured zone border parameters.
