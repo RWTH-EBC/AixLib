@@ -43,21 +43,7 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     wfRoof={1},
     aRoof=0.7,
     aExt=0.7,
-    nIze=1,
-    AIze={0.0},
-    hConIze={0.0},
-    nIzeRC=1,
-    RIze={{0.00001}},
-    RIzeRem={0.00001},
-    CIze={{0.00001}},
-    othZoneInd={1},
-    zoneInd=1,
     TSoil=283.15,
-    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant,
-
-    TSoiOffTim=0,
-    TSoiAmp=0.0,
-    TSoiFil="NoName",
     hConWallOut=20.0,
     hRadWall=5,
     hConWinOut=20.0,
@@ -104,6 +90,7 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
+
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
     Additional soil temperature and neighboured zone border parameters.

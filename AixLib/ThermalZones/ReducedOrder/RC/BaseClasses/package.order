@@ -1,6 +1,7 @@
 ExteriorWall
+ExteriorWallContainer
+GSurfSurf
 InteriorWall
 ThermSplitter
 splitFacVal
-GSurfSurf
-ExteriorWallContainer
+

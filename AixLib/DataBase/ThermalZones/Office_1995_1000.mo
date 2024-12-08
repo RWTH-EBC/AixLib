@@ -47,21 +47,7 @@ record Office_1995_1000 "Office zone from 1995 with 1000 m² area and without he
     wfRoof={0.0},
     aRoof=0.0,
     aExt=0.5,
-    nIze=1,
-    AIze={0.0},
-    hConIze={0.0},
-    nIzeRC=1,
-    RIze={{0.00001}},
-    RIzeRem={0.00001},
-    CIze={{0.00001}},
-    othZoneInd={1},
-    zoneInd=1,
     TSoil=286.15,
-    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant,
-
-    TSoiOffTim=0,
-    TSoiAmp=0.0,
-    TSoiFil="NoName",
     hConWallOut=20.000000000000004,
     hRadWall=5.0,
     hConWinOut=20.0,
@@ -111,4 +97,5 @@ record Office_1995_1000 "Office zone from 1995 with 1000 m² area and without he
     withIdealThresholds=false,
     TThresholdHeater=288.15,
     TThresholdCooler=295.15);
+
 end Office_1995_1000;
