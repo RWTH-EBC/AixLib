@@ -61,7 +61,6 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     zoneInd=1,
     TSoil=Modelica.Constants.eps,
     TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant,
-
     TSoiOffTim=Modelica.Constants.eps,
     TSoiAmp=Modelica.Constants.eps,
     TSoiFil="NoName",
@@ -89,9 +88,7 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     maxUserACH=1,
     maxOverheatingACH={Modelica.Constants.inf,Modelica.Constants.eps},
     maxSummerACH={Modelica.Constants.eps,Modelica.Constants.eps,2*Modelica.Constants.eps},
-
     winterReduction={Modelica.Constants.eps,Modelica.Constants.eps,2*Modelica.Constants.eps},
-
     withAHU=false,
     minAHU=Modelica.Constants.eps,
     maxAHU=2*Modelica.Constants.eps,

@@ -53,11 +53,11 @@ model Options
     offset=TMea,
     startTime=-31536000.0) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine
     "Source for sine function for temperature"
-    annotation (Placement(transformation(extent={{-10,-26},{10,-6}})));
+    annotation (Placement(transformation(extent={{-10,-28},{10,-8}})));
   Modelica.Blocks.Sources.Constant TGroConSou(final k=TMea) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant
     "Constant ground temperature"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180,
-        origin={-1.77636e-15,22})));
+        origin={0,22})));
   Modelica.Blocks.Sources.CombiTimeTable tabTGro(
     tableOnFile=true,
     tableName="TGround",
@@ -74,8 +74,9 @@ equation
   connect(TGroConSou.y, TGroOut)
     annotation (Line(points={{11,22},{56,22},{56,0},{110,0}},
                                                             color={0,0,127}));
-  connect(sin.y, TGroOut) annotation (Line(points={{11,-16},{56,-16},{56,0},{110,
-          0}}, color={0,0,127}));
+  connect(sin.y, TGroOut) annotation (Line(points={{11,-18},{56,-18},{56,0},{
+          110,0}},
+               color={0,0,127}));
   connect(tabTGro.y[1], TGroOut) annotation (Line(points={{11,-56},{56,-56},{56,
           0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
