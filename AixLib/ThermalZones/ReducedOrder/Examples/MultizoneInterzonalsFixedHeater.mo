@@ -144,6 +144,7 @@ equation
   annotation (experiment(
       StartTime=1497600,
       StopTime=5155200,
+	  Tolerance=1e-6,
       Interval=3600),
       __Dymola_Commands(file="Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mos"
         "Simulate and plot"),
