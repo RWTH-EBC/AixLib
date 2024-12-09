@@ -92,8 +92,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Coefficient of absorption of exterior walls (outdoor)";
   parameter Modelica.Units.SI.Temperature TSoil
     "Temperature of soil (used for outside surface temperature of floors and thermal radiation)";
-  parameter AixLib.BoundaryConditions.GroundTemperature.DataSource TSoiDatSou=
-      AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
+  parameter AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem
+    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant
     "choice for the data source of the outside surface temperature of floors";
   parameter Real TSoiOffTim=6004800
     "Time from simulation start to minimum soil temperature in s if sine model is chosen as TSoiDatSou";

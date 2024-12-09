@@ -3,28 +3,31 @@ model Options
   "A model that provides different options for ground temperature output"
   import Modelica.Constants.pi;
 
-  parameter AixLib.BoundaryConditions.GroundTemperature.DataSource datSou=AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
+  parameter AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem datSou
+    =AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant
+    "Choice by which option for ground temperature is to be provided"
     annotation (Dialog(group="General"));
   parameter Modelica.Units.SI.Temperature TMea "constant or mean ground temperature (for sine) or average air temperature over the year (for Kusuda)"
-    annotation (Dialog(group="General", enable=not datSou==AixLib.BoundaryConditions.GroundTemperature.DataSource.File));
+    annotation (Dialog(group="General", enable=not datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File));
   parameter Real offTime=0
     "Offset time from simulation time 0 until minimum ground temperature in s (for sine and Kusuda)"
-    annotation (Dialog(group="General", enable=datSou==AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda or datSou==AixLib.BoundaryConditions.GroundTemperature.DataSource.Sine));
+    annotation (Dialog(group="General", enable=datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda
+           or datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine));
   parameter Modelica.Units.SI.TemperatureDifference ampTGro=0
     "amplitude of ground temperature (for sine option) or of surface temperature [(maximum air temperature - minimum air temperature)/2] (for Kusuda)"
-    annotation (Dialog(group="General", enable=datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda
-           or datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Sine));
+    annotation (Dialog(group="General", enable=datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda
+           or datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine));
   parameter String filDatSou="NoName"
     "path to a (.mos) file that has the temperature stored in a table called TGround"
-    annotation (Dialog(group="General", enable=datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.File));
+    annotation (Dialog(group="General", enable=datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File));
   parameter Modelica.Units.SI.ThermalDiffusivity theDifKusPerDay=0.04
     "Thermal diffusivity of the ground for Kusuda. Declare in m2/day!"
     annotation (Dialog(group="Special Kusuda parameters", enable=datSou ==
-          AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda));
+          AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda));
   parameter Modelica.Units.SI.Distance depTGroKus=0
     "Depth of ground temperature for Kusuda"
     annotation (Dialog(group="Special Kusuda parameters", enable=datSou ==
-          AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda));
+          AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda));
 
   // add conditions
   AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureKusuda kusUnd(
@@ -32,11 +35,10 @@ model Options
     T_amp=ampTGro,
     D=depTGroKus,
     alpha=theDifKusPerDay,
-    t_shift=offTime/86400.0)
-    if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda
+    t_shift=offTime/86400.0) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TSenKus
-    if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Kusuda
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TSenKus if datSou ==
+    AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Kusuda
     "Sensor to show Kusuda ground temperature"
     annotation (Placement(transformation(extent={{22,50},{42,70}})));
   Modelica.Blocks.Interfaces.RealOutput TGroOut(
@@ -49,19 +51,18 @@ model Options
     f=1.0/31536000.0,
     phase=-offTime/31536000.0*2*pi - pi/2,
     offset=TMea,
-    startTime=-31536000.0)
-    if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Sine
+    startTime=-31536000.0) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine
     "Source for sine function for temperature"
-    annotation (Placement(transformation(extent={{-10,-26},{10,-6}})));
-  Modelica.Blocks.Sources.Constant TGroConSou(final k=TMea) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant
+    annotation (Placement(transformation(extent={{-10,-28},{10,-8}})));
+  Modelica.Blocks.Sources.Constant TGroConSou(final k=TMea) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant
     "Constant ground temperature"
-    annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180)));
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180,
+        origin={0,22})));
   Modelica.Blocks.Sources.CombiTimeTable tabTGro(
     tableOnFile=true,
     tableName="TGround",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=filDatSou)
-    if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSource.File
+    fileName=filDatSou) if datSou == AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File
     "Ground temperatures from table"
     annotation (Placement(transformation(extent={{-10,-66},{10,-46}})));
 
@@ -71,9 +72,11 @@ equation
   connect(TSenKus.T, TGroOut) annotation (Line(points={{43,60},{56,60},{56,0},{110,
           0}}, color={0,0,127}));
   connect(TGroConSou.y, TGroOut)
-    annotation (Line(points={{11,0},{56,0},{56,0},{110,0}}, color={0,0,127}));
-  connect(sin.y, TGroOut) annotation (Line(points={{11,-16},{56,-16},{56,0},{110,
-          0}}, color={0,0,127}));
+    annotation (Line(points={{11,22},{56,22},{56,0},{110,0}},
+                                                            color={0,0,127}));
+  connect(sin.y, TGroOut) annotation (Line(points={{11,-18},{56,-18},{56,0},{
+          110,0}},
+               color={0,0,127}));
   connect(tabTGro.y[1], TGroOut) annotation (Line(points={{11,-56},{56,-56},{56,
           0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

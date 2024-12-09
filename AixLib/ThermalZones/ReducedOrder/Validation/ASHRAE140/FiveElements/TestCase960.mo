@@ -30,9 +30,7 @@ model TestCase960 "Test case 960"
         0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
-  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDoublePane(
-    UWin=3.046492744695893, n=4)
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGvaDouPan(UWin=3.046492744695893, n=4)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
   AixLib.ThermalZones.ReducedOrder.RC.FiveElements bacZoneFivEle(
@@ -114,9 +112,9 @@ model TestCase960 "Test case 960"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant hConWall(k=11.9*54)                "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90,
-        origin={30,2})));
+  Modelica.Blocks.Sources.Constant hConWal(k=11.9*54)
+    "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
     annotation (Placement(transformation(extent={{68,-34},{88,-14}})));
@@ -261,7 +259,7 @@ model TestCase960 "Test case 960"
     annotation (Placement(transformation(extent={{126,-96},{136,-86}})));
   Modelica.Blocks.Math.Gain sigCha2(k=-1) "Changes sign"
     annotation (Placement(transformation(extent={{108,-95},{118,-84}})));
-  Modelica.Blocks.Math.Gain sigCha3(k=-1) "Changes sign"
+  Modelica.Blocks.Math.Gain sigCha(k=-1) "Changes sign"
     annotation (Placement(transformation(extent={{106,-79},{116,-68}})));
   Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
     annotation (Placement(transformation(extent={{126,-75},{138,-63}})));
@@ -414,8 +412,7 @@ model TestCase960 "Test case 960"
       ={0}, azi={0})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-10,374},{10,394}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007
-    TEquAirRoofSun(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 TEquAirRooSun(
     aExt=0.6,
     wfGro=0,
     hConWallOut=14.399999999999999,
@@ -445,7 +442,7 @@ model TestCase960 "Test case 960"
   Modelica.Blocks.Math.Add solRadRooSun[1]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{62,404},{72,414}})));
-  Modelica.Blocks.Math.UnitConversions.To_degC to_degCel
+  Modelica.Blocks.Math.UnitConversions.To_degC TIndDegCel
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{180,318},{192,330}})));
   Modelica.Blocks.Interfaces.RealOutput TFreFlo(unit="degC")
@@ -471,23 +468,20 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(const.y, TEquAir.sunblind) annotation (Line(points={{-13.7,33},{-12,33},
           {-12,24},{-14,24}}, color={0,0,127}));
-  connect(HDifTil.HSkyDifTil, corGDoublePane.HSkyDifTil)
-    annotation (Line(
-    points={{-47,52},{-28,52},{-6,52},{-6,82},{4,82}}, color={0,0,127}));
-  connect(HDirTil.H, corGDoublePane.HDirTil)
-    annotation (Line(points={{-47,78},{-10,78},{-10,86},{4,86}},
-    color={0,0,127}));
+  connect(HDifTil.HSkyDifTil, corGvaDouPan.HSkyDifTil) annotation (Line(points=
+          {{-47,52},{-28,52},{-6,52},{-6,82},{4,82}}, color={0,0,127}));
+  connect(HDirTil.H, corGvaDouPan.HDirTil) annotation (Line(points={{-47,78},{-10,
+          78},{-10,86},{4,86}}, color={0,0,127}));
   connect(HDirTil.H,solRad. u1)
     annotation (Line(points={{-47,78},{-42,78},{-42,30},{-39,30}},
                    color={0,0,127}));
-  connect(HDirTil.inc, corGDoublePane.inc)
-    annotation (Line(points={{-47,74},{4,74}},        color={0,0,127}));
+  connect(HDirTil.inc, corGvaDouPan.inc)
+    annotation (Line(points={{-47,74},{4,74}}, color={0,0,127}));
   connect(HDifTil.H,solRad. u2)
     annotation (Line(points={{-47,46},{-44,46},{-44,24},{-39,24}},
                  color={0,0,127}));
-  connect(HDifTil.HGroDifTil, corGDoublePane.HGroDifTil)
-    annotation (Line(
-    points={{-47,40},{-4,40},{-4,78},{4,78}}, color={0,0,127}));
+  connect(HDifTil.HGroDifTil, corGvaDouPan.HGroDifTil) annotation (Line(points=
+          {{-47,40},{-4,40},{-4,78},{4,78}}, color={0,0,127}));
   connect(solRad.y, TEquAir.HSol)
     annotation (Line(points={{-27.5,27},{-26,27},{-26,18}}, color={0,0,127}));
   connect(weaDat.weaBus, HDifTil[1].weaBus)
@@ -536,8 +530,8 @@ equation
           {40,28},{40,17},{36,17}}, color={191,0,0}));
   connect(conHeaWal.fluid, TPreExtWal.port) annotation (Line(points={{26,17},{24,
           17},{24,16},{20,16}}, color={191,0,0}));
-  connect(hConWall.y, conHeaWal.Gc)
-    annotation (Line(points={{30,6.4},{31,6},{31,12}}, color={0,0,127}));
+  connect(hConWal.y, conHeaWal.Gc)
+    annotation (Line(points={{0,4.4},{31,4.4},{31,12}}, color={0,0,127}));
   connect(weaBus.TBlaSky, TEquAir.TBlaSky) annotation (Line(
       points={{-82.915,22.08},{-58,22.08},{-58,18},{-32,18},{-32,12},{-26,12}},
       color={255,204,51},
@@ -548,8 +542,8 @@ equation
 
   connect(intGaiCon.port, bacZoneFivEle.intGainsConv) annotation (Line(points={{
           88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, bacZoneFivEle.solRad) annotation (
-      Line(points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,0,127}));
+  connect(corGvaDouPan.solarRadWinTrans, bacZoneFivEle.solRad) annotation (Line(
+        points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,0,127}));
   connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{68,
           -24}},          color={0,0,127}));
   connect(gainCon.y, intGaiCon.Q_flow)
@@ -665,7 +659,7 @@ equation
           -86},{-5.2,-86}}, color={0,0,127}));
   connect(cooFlowSen.Q_flow, sigCha2.u) annotation (Line(points={{86,-92.6},{86,
           -94},{103,-94},{103,-89.5},{107,-89.5}}, color={0,0,127}));
-  connect(heaFlowSen.Q_flow, sigCha3.u) annotation (Line(points={{86,-66.6},{86,
+  connect(heaFlowSen.Q_flow, sigCha.u) annotation (Line(points={{86,-66.6},{86,
           -66.6},{86,-74},{90,-74},{86,-74},{96,-74},{96,-73.5},{105,-73.5}},
         color={0,0,127}));
   connect(hea.port, heaFlowSen.port_b)
@@ -674,7 +668,7 @@ equation
     annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
   connect(sigCha2.y, heaCooPowSum.u[1]) annotation (Line(points={{118.5,-89.5},{
           120,-89.5},{120,-91.875},{126,-91.875}}, color={0,0,127}));
-  connect(sigCha3.y, heaCooPowSum.u[2]) annotation (Line(points={{116.5,-73.5},{
+  connect(sigCha.y, heaCooPowSum.u[2]) annotation (Line(points={{116.5,-73.5},{
           121.25,-73.5},{121.25,-90.125},{126,-90.125}}, color={0,0,127}));
   connect(gainIntHea.y, annHeaLoa) annotation (Line(points={{138.6,-34},{140.3,-34},
           {152,-34}}, color={0,0,127}));
@@ -684,7 +678,7 @@ equation
           {152,-52}}, color={0,0,127}));
   connect(gainIntCoo.u, annCooLoaInt.y) annotation (Line(points={{124.8,-52},{121.4,
           -52},{118.55,-52}}, color={0,0,127}));
-  connect(sigCha3.y, annHeaLoaInt.u) annotation (Line(points={{116.5,-73.5},{122,
+  connect(sigCha.y, annHeaLoaInt.u) annotation (Line(points={{116.5,-73.5},{122,
           -73.5},{122,-63},{102,-63},{102,-34},{105.9,-34}}, color={0,0,127}));
   connect(sigCha2.y, annCooLoaInt.u) annotation (Line(points={{118.5,-89.5},{118.5,
           -61},{105.9,-61},{105.9,-52}}, color={0,0,127}));
@@ -823,9 +817,9 @@ equation
   connect(theConRooSun.Gc, hConRooSun.y)
     annotation (Line(points={{132,346.5},{132,346},{147.6,346}},
                                                          color={0,0,127}));
-  connect(TEquAirRoofSun.TEqAir, TPreRooSun.T) annotation (Line(points={{109,398},
-          {130,398},{130,383.2}},               color={0,0,127}));
-  connect(const1Sun.y, TEquAirRoofSun.sunblind)
+  connect(TEquAirRooSun.TEqAir, TPreRooSun.T) annotation (Line(points={{109,398},
+          {130,398},{130,383.2}}, color={0,0,127}));
+  connect(const1Sun.y, TEquAirRooSun.sunblind)
     annotation (Line(points={{98,425.7},{98,410}}, color={0,0,127}));
   connect(HDifTilRooSun.H, solRadRooSun.u2) annotation (Line(points={{11,384},{36,
           384},{36,406},{61,406}}, color={0,0,127}));
@@ -837,17 +831,17 @@ equation
       points={{-182,94},{-124,94},{-124,324},{-28,324},{-28,412},{-10,412}},
       color={255,204,51},
       thickness=0.5));
-  connect(solRadRooSun.y, TEquAirRoofSun.HSol) annotation (Line(points={{72.5,409},
-          {80,409},{80,404},{86,404}}, color={0,0,127}));
-  connect(weaBus.TBlaSky, TEquAirRoofSun.TBlaSky) annotation (Line(
-      points={{-82.915,22.08},{-98,22.08},{-98,306},{-12,306},{-12,328},{-14,328},
-          {-14,428},{80,428},{80,398},{86,398}},
+  connect(solRadRooSun.y, TEquAirRooSun.HSol) annotation (Line(points={{72.5,
+          409},{80,409},{80,404},{86,404}}, color={0,0,127}));
+  connect(weaBus.TBlaSky, TEquAirRooSun.TBlaSky) annotation (Line(
+      points={{-82.915,22.08},{-98,22.08},{-98,306},{-12,306},{-12,328},{-14,
+          328},{-14,428},{80,428},{80,398},{86,398}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(weaBus.TDryBul, TEquAirRoofSun.TDryBul) annotation (Line(
+  connect(weaBus.TDryBul, TEquAirRooSun.TDryBul) annotation (Line(
       points={{-82.915,22.08},{-98,22.08},{-98,344},{-60,344},{-60,372},{58,372},
           {58,392},{86,392}},
       color={255,204,51},
@@ -858,10 +852,10 @@ equation
   connect(theConRooSun.solid, sunZoneFivEle.roof)
     annotation (Line(points={{124.5,339},{124.5,338},{126,338},{126,334},{124.9,
           334},{124.9,328}},                                 color={191,0,0}));
-  connect(sunZoneFivEle.TAir, to_degCel.u) annotation (Line(points={{151,326},{174,
-          326},{174,324},{178.8,324}}, color={0,0,127}));
-  connect(to_degCel.y, TFreFlo) annotation (Line(points={{192.6,324},{200,324},{
-          200,342},{172,342},{172,354},{192,354}}, color={0,0,127}));
+  connect(sunZoneFivEle.TAir, TIndDegCel.u) annotation (Line(points={{151,326},
+          {174,326},{174,324},{178.8,324}}, color={0,0,127}));
+  connect(TIndDegCel.y, TFreFlo) annotation (Line(points={{192.6,324},{200,324},
+          {200,342},{172,342},{172,354},{192,354}}, color={0,0,127}));
   connect(sunZoneFivEle.ize, bacZoneFivEle.ize) annotation (Line(points={{147.5,
           327.8},{146,327.8},{146,332},{156,332},{156,56},{89.5,56},{89.5,49.8}},
         color={191,0,0}));
