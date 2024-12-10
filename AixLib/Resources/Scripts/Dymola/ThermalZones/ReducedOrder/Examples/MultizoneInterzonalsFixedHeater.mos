@@ -1,0 +1,17 @@
+﻿simulateModel(
+  "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater",
+  startTime=1497600,
+  stopTime=5155200,
+  numberOfIntervals=1016,
+  method="Radau",
+  resultFile="MultizoneInterzonalsFixedHeater");
+createPlot(id=1, 
+  position={16, 15, 584, 361}, 
+  x="time",
+  y={"multizone.TAir[1]", "multizone.TAir[2]", "multizone.TAir[3]"},
+  range={1400000.0, 5200000.0, -5.0, 35.0},
+  grid=true,
+  colors={{28,108,200}, {238,46,47}, {0,140,72}}, 
+  timeUnit="s", 
+  displayUnits={"degC", "degC", "degC"});
+
