@@ -1,11 +1,18 @@
 Regression tests are only run for the following package:
   AixLib.ThermalZones
-*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2: Translation statistics for simulation changed for linear, but results are unchanged.
- Old = 4, 0, 4, 0, 4, 0, 4, 0, 4, 0
- New = 3, 0, 3, 0, 3, 0, 3, 0, 3, 0
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 3.3 MB.
+*** Error: Model 'AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Model 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Model 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case300' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case300.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Model 'AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Model 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620' failed: TimeoutExpired: Command '['dymola', 'run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mos', '/nowindow']' timed out after 300 seconds
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater.mos /nowindow'.
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mos /nowindow'.
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case300.mos /nowindow'.
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mos /nowindow'.
+*** Error: Simulation failed for 'dymola run_AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mos /nowindow'.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 3.0 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 1 warnings and 0 errors.
+Script that runs unit tests had 0 warnings and 10 errors.
 
