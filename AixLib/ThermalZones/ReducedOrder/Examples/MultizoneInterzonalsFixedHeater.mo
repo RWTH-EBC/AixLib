@@ -48,7 +48,7 @@ model MultizoneInterzonalsFixedHeater
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/DEU_NW_Morschenich_for_MultizoneInterzonalsFixedHeaterExample.mos"))
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/DEU_NW_Morschenich_for_MultizoneInterzonalsFixedHeaterExample.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
 
@@ -56,7 +56,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/InternalGains_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_MorschenichSfhFixedHeater.txt"),
     columns=2:10)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -66,7 +66,7 @@ model MultizoneInterzonalsFixedHeater
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="AHU",
     columns=2:5,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/AHU_MorschenichSfhFixedHeater.txt"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/AHU_MorschenichSfhFixedHeater.txt"))
     "Boundary conditions for air handling unit"
     annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
 
@@ -74,7 +74,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/TsetHeat_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetHeat_MorschenichSfhFixedHeater.txt"),
     columns=2:4)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
@@ -83,7 +83,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/TsetCool_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetCool_MorschenichSfhFixedHeater.txt"),
     columns=2:4)
     "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
@@ -91,7 +91,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="IntGainsConvRad",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/MorschenichSfhFixedHeater_AddIntGains.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/MorschenichSfhFixedHeater_AddIntGains.txt"),
     columns=2:4)
     "Additional internal gains (radiative)"
     annotation (Placement(transformation(extent={{-64,-34},{-48,-18}})));
@@ -103,7 +103,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="IntGainsConvRad",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/MorschenichSfhFixedHeater_AddIntGains.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/MorschenichSfhFixedHeater_AddIntGains.txt"),
     columns=5:7)
     "Additional internal gains (convective)"
     annotation (Placement(transformation(extent={{-64,-72},{-48,-56}})));

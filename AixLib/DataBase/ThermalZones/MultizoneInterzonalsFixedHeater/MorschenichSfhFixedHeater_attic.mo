@@ -58,7 +58,7 @@ record MorschenichSfhFixedHeater_attic
     TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File,
     TSoiOffTim = 6004800,
     TSoiAmp = 0,
-    TSoiFil = Modelica.Utilities.Files.loadResource("modelica://AixLib/DataBase/ThermalZones/MultizoneInterzonalsFixedHeater/t_soil_MorschenichSfhFixedHeater.txt"),
+    TSoiFil = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/t_soil_MorschenichSfhFixedHeater.txt"),
     hConWallOut = 20.0,
     hRadWall = 5.0,
     hConWinOut = 20.0,
