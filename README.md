@@ -57,7 +57,7 @@ Furthermore, you are welcome to contribute via [Pull Requests](https://github.co
 ## License
 
 The **AixLib** Library is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD-license.
-See [AixLib Library license](https://htmlpreview.github.io/?https://github.com/rwth-ebc/aixlib/blob/master/AixLib/legal.html).
+See [AixLib Library license](https://htmlpreview.github.io/?https://github.com/rwth-ebc/aixlib/blob/main/AixLib/UsersGuide/License.mo).
 
 ## Acknowledgements
 
