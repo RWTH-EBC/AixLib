@@ -7,5 +7,5 @@ Comparison files output by funnel are stored in the directory 'funnel_comp' of s
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 2 warnings and 0 errors.
+Script that runs unit tests had 1 warnings and 0 errors.
 
