@@ -1,4 +1,4 @@
-﻿simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater", startTime=1497600, stopTime=5155200, numberOfIntervals=1016, method="Radau", resultFile="MultizoneInterzonalsFixedHeater");
+﻿simulateModel("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater", startTime=1497600, stopTime=5155200, numberOfIntervals=1016, method="CVode", resultFile="MultizoneInterzonalsFixedHeater");
 createPlot(id=1, 
   position={16, 15, 584, 361}, 
   x="time",
