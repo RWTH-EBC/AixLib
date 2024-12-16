@@ -35,8 +35,8 @@ equation
     experiment(
       StartTime=10368000,
       StopTime=10540800,
-      Interval=3600,
-      __Dymola_Algorithm="Dassl"),
+      Tolerance=1e-6,
+      Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
