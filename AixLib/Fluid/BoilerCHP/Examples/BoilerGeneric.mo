@@ -76,7 +76,7 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(Tolerance=1e-6, StopTime=2000, __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands(file="Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/BoilerGeneric.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/BoilerGeneric.mos"
         "Simulate and Plot"),
     Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
