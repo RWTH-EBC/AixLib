@@ -10,7 +10,7 @@ model ModularBoiler
   parameter Boolean hasPump=true "Model includes a pump"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="System setup"));
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
-    "Thermal dimension power"
+    "Nominal heat flow rate"
     annotation (Dialog(group="System setup"));
   parameter Real FirRatMin=0.15 "Minimal firing rate"  annotation(Dialog(group="System setup"));
   package MediumWater = AixLib.Media.Water "Boiler Medium" annotation(Dialog(group="System setup"));
