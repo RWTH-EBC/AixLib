@@ -11,7 +11,7 @@ model OffDesignOperation "Calculation of operation for non-nominal/off-design co
     "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
 
-package Medium=AixLib.Media.Water;
+replaceable package Medium=AixLib.Media.Water;
 
   Controls.Interfaces.BoilerControlBus                     boilerControlBus
     annotation (Placement(transformation(extent={{-8,90},{12,110}})));
