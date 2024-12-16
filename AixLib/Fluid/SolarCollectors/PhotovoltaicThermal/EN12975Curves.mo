@@ -140,7 +140,13 @@ equation
   Known Limitations
 </h4>
 <ul>
-<li>The parameters for pressure losses and capacities inside the 
+  <li>
+   No empirical validation has been carried out with the model, only with the 
+   parameters in the recrods from the PhD thesis for a single operating point.
+   So, always questions results outside of the operating conditions 
+   stated above.
+  </li>
+  <li>The parameters for pressure losses and capacities inside the 
    records are based on the solar thermal model, not on the PhD thesis.
   </li>
   <li>With the standard BaseParameters, this model uses water as
