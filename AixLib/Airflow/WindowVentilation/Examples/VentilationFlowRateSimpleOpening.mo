@@ -101,8 +101,16 @@ model VentilationFlowRateSimpleOpening
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
-    heightASL=200) "Model DIN 16798"
+    heightASL=200) "Model DIN 16798, without window opening behavior"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
+  AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN16798 din16798_2(
+    winClrWidth=winClrWidth,
+    winClrHeight=winClrHeight,
+    redeclare model OpeningArea =
+        AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
+    heightASL=200,
+    winOpnBeh=true) "Model DIN 16798, with window opening behavior"
+    annotation (Placement(transformation(extent={{60,-40},{80,-20}})));
   AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 din4108_1(
     winClrWidth=winClrWidth,
     winClrHeight=winClrHeight,
@@ -181,6 +189,12 @@ equation
           60},{0,-6},{58,-6}}, color={0,0,127}));
   connect(winSpe10Set.y, din16798_1.winSpe10) annotation (Line(points={{-79,30},
           {-10,30},{-10,-12},{58,-12}}, color={0,0,127}));
+  connect(from_degC.y, din16798_2.TRoom) annotation (Line(points={{-39,90},{10,90},
+          {10,-2},{52,-2},{52,-22},{58,-22}}, color={0,0,127}));
+  connect(from_degC1.y, din16798_2.TAmb) annotation (Line(points={{-39,60},{0,60},
+          {0,-6},{50,-6},{50,-26},{58,-26}}, color={0,0,127}));
+  connect(winSpe10Set.y, din16798_2.winSpe10) annotation (Line(points={{-79,30},
+          {-10,30},{-10,-12},{48,-12},{48,-32},{58,-32}}, color={0,0,127}));
   connect(from_degC.y, din4108_1.TRoom) annotation (Line(points={{-39,90},{10,
           90},{10,-42},{58,-42}}, color={0,0,127}));
   connect(from_degC1.y, din4108_1.TAmb) annotation (Line(points={{-39,60},{0,60},
