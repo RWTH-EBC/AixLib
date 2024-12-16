@@ -1,5 +1,5 @@
 within AixLib.Fluid.Solar.Thermal.BaseClasses;
-model ThermalEfficiency
+model SolarThermalEfficiency
   "Calculates the efficiency of a solar thermal collector"
   parameter Modelica.Units.SI.Efficiency eta_zero(max=1)
     "Conversion factor/Efficiency at Q = 0";
@@ -79,4 +79,4 @@ annotation (Documentation(info="<html>
     implemented
   </li>
 </ul></html>"));
-end ThermalEfficiency;
+end SolarThermalEfficiency;
