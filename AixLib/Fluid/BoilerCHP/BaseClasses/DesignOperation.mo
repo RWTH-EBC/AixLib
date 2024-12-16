@@ -145,19 +145,36 @@ equation
           textString="Design
 ")}),                                                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model calculates the nominal fuel power (W) for nominal conditions. </p>
-<p>The nominal adiabatic efficiency (reference is the higher heating value (includes vaporization enthalpy)) comes from the SDF and depends on:</span></p>
+    Documentation(info="<html><p>
+  This model calculates the nominal fuel power (W) for nominal
+  conditions.
+</p>
+<p>
+  The nominal adiabatic efficiency (reference is the higher heating
+  value (includes vaporization enthalpy)) comes from the SDF and
+  depends on:
+</p>
 <ul>
-<li>Nominal return temperature (TRet_nominal)</span></li>
-<li>Nominale temperature difference (TSup_nominal-TRet_nominal)</span></li>
-<li>Nominal relative temperature difference (1)</span></li>
-<li>Nominal relative water mass flow (1)</span></li>
+  <li>Nominal return temperature (TRet_nominal)
+  </li>
+  <li>Nominale temperature difference (TSup_nominal-TRet_nominal)
+  </li>
+  <li>Nominal relative temperature difference (1)
+  </li>
+  <li>Nominal relative water mass flow (1)
+  </li>
 </ul>
-<p><br>Further assumptions are taken into account for nominal losses: Thermal conductance is described by a fit<span style=\"font-family: Calibri; color: #595959;\"> 0.0465 * QNom/1000 + 4.9891</span> based on manufacturere data at a temperature difference of 50 K to ambient</p>
-</html>", revisions="<html>
-<ul>
-<li>June, 2023  by Moritz Zuschlag &amp; David Jansen</li>
+<p>
+  <br/>
+  Further assumptions are taken into account for nominal losses:
+  Thermal conductance is described by a fit <span style=
+  \"font-family: Calibri; color: #595959;\">0.0465 * QNom/1000 +
+  4.9891</span> based on manufacturere data at a temperature difference
+  of 50 K to ambient
+</p>
+</html>", revisions="<html><ul>
+  <li>June, 2023 by Moritz Zuschlag & David Jansen
+  </li>
 </ul>
 </html>"));
 end DesignOperation;
