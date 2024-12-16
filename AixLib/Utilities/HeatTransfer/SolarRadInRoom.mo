@@ -160,8 +160,6 @@ protected
 initial equation
   // Asssert energy balance matches
   assert(abs(sum(cat(1, solar_frac_cei, solar_frac_flo, solar_frac_wall, solar_frac_win_lost, solar_frac_win_abs)) - 1) < Modelica.Constants.eps, "Sum of solar fractions is not equal to 1", AssertionLevel.error);
-  // Assert all walls have the same height:
-  assert(((sum(walls.height) / size(walls, 1)) - walls[1].height) <  Modelica.Constants.eps, "Not all walls have the same height", AssertionLevel.error);
   assert(sum(A_ceil) - A_floor < Modelica.Constants.eps, "Ceiling and floor have mismatching areas", AssertionLevel.error);
   // Check correct user input if multiple floors are selected
   assert(A_floor - floor_height_int*floor_length_int < Modelica.Constants.eps, "Total floor area mismatches area specified by user", AssertionLevel.error);
@@ -174,6 +172,8 @@ equation
   for n in 1:nWalls loop
     connect(walls[n].Q_flow_ShoRadOnSur, QRadWalls_out[n].y);
   end for;
+  // Assert all walls have the same height during equation, as connect is required:
+  assert(((sum(walls.height) / size(walls, 1)) - walls[1].height) <  Modelica.Constants.eps, "Not all walls have the same height", AssertionLevel.error);
 
   for n in 1:nWin loop
     connect(win_out[n].Q_flow_ShoRadOnSur, QRadWin_out[n].y);

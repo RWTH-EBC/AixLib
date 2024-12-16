@@ -42,7 +42,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Real deltaM=0.3
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach."
+  parameter Real a "Coefficient of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n."
   annotation (Dialog(tab="Advanced", group="Pressure drop"));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
