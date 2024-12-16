@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model FeedbackControl "Controller for return feedback mixing"
 protected
   Modelica.Blocks.Sources.RealExpression TSetReturn(final y=TRetNom)

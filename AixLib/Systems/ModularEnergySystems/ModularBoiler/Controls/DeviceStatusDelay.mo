@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model DeviceStatusDelay
     extends Modelica.Blocks.Icons.DiscreteBlock;
 

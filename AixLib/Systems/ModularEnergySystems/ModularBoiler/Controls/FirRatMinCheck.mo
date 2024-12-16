@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model FirRatMinCheck
 
   parameter Real FirRatMin=0.15 "Minimal firing rate";

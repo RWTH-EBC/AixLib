@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model SafetyControl
   parameter Modelica.Units.SI.Temperature TFlowMax=378.15 "Maximum flow temperature, at which the system is shut down";
   parameter Modelica.Units.SI.Temperature TRetMin=313.15 "Minimum return temperature, at which the system is shut down";

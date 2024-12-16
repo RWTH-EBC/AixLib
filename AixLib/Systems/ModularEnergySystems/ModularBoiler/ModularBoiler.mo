@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler;
 model ModularBoiler
   "Modular Boiler Model - With pump and feedback - Simple PLR regulation"
 

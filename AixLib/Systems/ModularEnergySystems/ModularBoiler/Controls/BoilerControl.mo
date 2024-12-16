@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model BoilerControl "Master controller that holds all other controls"
 
   //Nominal

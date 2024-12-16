@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples;
 model ModularBoilerHeatingCurve
   "Example for ModularBoiler - With Pump and simple Pump regulation"
   extends Modelica.Icons.Example;
@@ -91,7 +91,7 @@ equation
 annotation (
     experiment(StopTime=86400, Tolerance=1e-06, __Dymola_Algorithm="Dassl"),
      __Dymola_Commands(file=
-        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerHeatingCurve.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ScalableGenerationModules/Examples/ModularBoilerHeatingCurve.mos"
         "Simulate and Plot"), Documentation(info="<html>
 <p>Example with flow set temperature defined by heating curve.</p>
 </html>"));

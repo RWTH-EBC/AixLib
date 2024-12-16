@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Controls;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls;
 model InternalFirRatControl
   "Simple control with flow temperature PID control if no other signal provided"
  // PI Control

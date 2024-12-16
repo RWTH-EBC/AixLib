@@ -1,11 +1,11 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples;
 model ModularBoilerFeedback
   "Example for ModularBoiler - With Pump and simple Pump regulation"
   extends Modelica.Icons.Example;
   parameter Integer k=2 "number of consumers";
   package MediumWater = AixLib.Media.Water;
 
-  AixLib.Systems.ModularEnergySystems.ModularBoiler.ModularBoiler modularBoiler(
+  AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler modularBoiler(
     hasPump=true,
     Q_flow_nominal=50000,
     kFeedBack=1,
@@ -116,7 +116,7 @@ equation
 annotation (
     experiment(StopTime=86400, Tolerance=1e-06, __Dymola_Algorithm="Dassl"),
      __Dymola_Commands(file=
-        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerFeedback.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ScalableGenerationModules/Examples/ModularBoilerFeedback.mos"
         "Simulate and Plot"), Documentation(info="<html>
 <p>Example with constant flow set temperature by input and activated feedback valve for return temperature control.</p>
 </html>"));

@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.ModularBoiler;
+within AixLib.Systems.ScalableGenerationModules.ModularBoiler;
 package Examples
 extends Modelica.Icons.ExamplesPackage;
 
