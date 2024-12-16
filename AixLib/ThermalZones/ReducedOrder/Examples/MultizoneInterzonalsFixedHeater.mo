@@ -5,7 +5,7 @@ model MultizoneInterzonalsFixedHeater
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=0,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15,
+    T_start=277.15,
     VAir=650.4175459028824,
     ABuilding=289.33669130351973,
     ASurTot=1053.4606419289657,
@@ -142,8 +142,9 @@ equation
     annotation (Line(points={{-47.2,-64},{-24,-64}}, color={0,0,127}));
 
   annotation (experiment(
-      StartTime=1497600,
+      StartTime=2797200,
       StopTime=5155200,
+	  Tolerance=1e-6,
       Interval=3600),
       __Dymola_Commands(file="Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mos"
         "Simulate and plot"),
