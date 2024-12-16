@@ -1,5 +1,6 @@
 Temperature
 IntegralAbsoluteError
+IntegralErrorDualBounds
 IntegralErrorWithFilter
 IntegralSquareError
 IntegralTimer
