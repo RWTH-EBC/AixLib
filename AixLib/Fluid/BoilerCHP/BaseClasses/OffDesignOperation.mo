@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
-model OffDesignOperation
+model OffDesignOperation "Calculation of operation for non-nominal/off-design conditions"
 
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
     "Design thermal capacity";
