@@ -77,35 +77,35 @@ equation
   annotation (__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/Outside_CpData_Angles.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model demonstrates the use of a source for ambient conditions that computes
- the wind pressure on a facade of a building using a user-defined wind pressure profile.
- </p>
- <p>
- The model showcases the possibility to use asymmetrical wind pressure profiles.
- It also shows how <i>C<sub>p,act</sub></i> shifts with regards to the wind direction and azimuth
- based on the <i>C<sub>p</sub></i> values which are defined relative to the surface normal.
- </p>
- <p>
- The plot shows <i>C<sub>p,act</sub></i> of each boundary for each wind direction.
- Notice how the profile is shifted based on the surface azimuth.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Jun 28, 2021 by Klaas De Jonge:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This model demonstrates the use of a source for ambient conditions that computes
+the wind pressure on a facade of a building using a user-defined wind pressure profile.
+</p>
+<p>
+The model showcases the possibility to use asymmetrical wind pressure profiles.
+It also shows how <i>C<sub>p,act</sub></i> shifts with regards to the wind direction and azimuth
+based on the <i>C<sub>p</sub></i> values which are defined relative to the surface normal.
+</p>
+<p>
+The plot shows <i>C<sub>p,act</sub></i> of each boundary for each wind direction.
+Notice how the profile is shifted based on the surface azimuth.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+Jun 28, 2021 by Klaas De Jonge:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     experiment(
       StopTime=20,
-      Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData_Angles;

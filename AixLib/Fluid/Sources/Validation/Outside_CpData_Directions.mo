@@ -74,24 +74,24 @@ equation
   annotation (__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Validation/Outside_CpData_Directions.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model demonstrates the use of a source for ambient conditions that computes
- the wind pressure on a facade of a building using a user-defined wind pressure profile.
- In this model, the wind pressure profile is not realistic, but rather it is set to <i>1</i>
- if the wind strikes the surface perpendicular, and otherwise it goes back to <i>0</i>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 11, 2022, by Michael Wetter:<br/>
- First implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- </ul>
- </html>"),
+<p>
+This model demonstrates the use of a source for ambient conditions that computes
+the wind pressure on a facade of a building using a user-defined wind pressure profile.
+In this model, the wind pressure profile is not realistic, but rather it is set to <i>1</i>
+if the wind strikes the surface perpendicular, and otherwise it goes back to <i>0</i>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 11, 2022, by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+</ul>
+</html>"),
     experiment(
       StopTime=86400,
-      Tolerance=1e-06),
-  __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData_Directions;

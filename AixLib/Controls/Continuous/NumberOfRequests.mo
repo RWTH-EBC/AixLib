@@ -39,50 +39,50 @@ algorithm
   annotation (
 defaultComponentName="numReq",
 Documentation(info="<html>
- <p>
- Block that outputs the number of inputs that exceed a threshold.
- The parameter <code>kind</code> is used to determine the kind of the
- inequality. The table below shows the allowed settings.
- </p>
- <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\" summary=\"Allowed parameter settings.\">
- <tr>
- <th>Value of parameter <code>kind</code></th>
- <th>Output signal incremented by 1 for each <i>i &isin; {1, ..., nin}</i> if</th>
- </tr>
- <tr>
- <td>0</td>
- <td><code>u[i] &gt; threShold</code></td>
- </tr>
- <tr>
- <td>1</td>
- <td><code>u[i] &ge; threShold</code></td>
- </tr>
- <tr>
- <td>2</td>
- <td><code>u[i] &le; threShold</code></td>
- </tr>
- <tr>
- <td>3</td>
- <td><code>u[i] &lt; threShold</code></td>
- </tr>
- </table>
- <p>
- This model may be used to check how many rooms
- exceed a temperature threshold.
- </p>
- </html>",
+<p>
+Block that outputs the number of inputs that exceed a threshold.
+The parameter <code>kind</code> is used to determine the kind of the
+inequality. The table below shows the allowed settings.
+</p>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\" summary=\"Allowed parameter settings.\">
+<tr>
+<th>Value of parameter <code>kind</code></th>
+<th>Output signal incremented by 1 for each <i>i &isin; {1, ..., nin}</i> if</th>
+</tr>
+<tr>
+<td>0</td>
+<td><code>u[i] &gt; threShold</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>u[i] &ge; threShold</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>u[i] &le; threShold</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>u[i] &lt; threShold</code></td>
+</tr>
+</table>
+<p>
+This model may be used to check how many rooms
+exceed a temperature threshold.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- November 21, 2011, by Michael Wetter:<br/>
- Improved documentation.
- </li>
- <li>
- November 25, 2008, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),Icon(graphics={
+<ul>
+<li>
+November 21, 2011, by Michael Wetter:<br/>
+Improved documentation.
+</li>
+<li>
+November 25, 2008, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"), Icon(graphics={
         Text(
           extent={{-128,88},{-6,28}},
           textColor={0,0,255},
@@ -96,6 +96,6 @@ revisions="<html>
         Line(points={{-18,24},{66,54}}, color={255,0,0}),
         Line(points={{-78,-50},{78,-50}}),
         Line(points={{70,-46},{78,-50}}),
-        Line(points={{70,-54},{78,-50}})}),
-  __Dymola_LockedEditing="Model from IBPSA");
+        Line(points={{70,-54},{78,-50}})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end NumberOfRequests;

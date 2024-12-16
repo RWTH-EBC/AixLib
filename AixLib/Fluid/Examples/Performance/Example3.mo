@@ -74,66 +74,66 @@ equation
             -60},{60,40}}),    graphics),
     experiment(Tolerance=1e-6, StopTime=20),
     Documentation(revisions="<html>
- <ul>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- July 14, 2015, by Michael Wetter:<br/>
- Revised documentation.
- </li>
- <li>
- April 17, 2015, by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>",info="<html>
- <p>
- This example demonstrates the importance of merging
- pressure drop components that are connected in series,
- into one pressure drop component.
- Parameter <code>mergeDp.k</code> can be used to merge two components
- that are connected in series.
- Parameter <code>from_dp</code> also has an influence of the computational speed.
- </p>
- <p>
- Following script can be used in Dymola to compare the CPU times.
- For this script to work, make sure that Dymola stores at least 4 results.
- </p>
- <p>
- <code>
- cpuOld=OutputCPUtime;<br/>
- evaluateOld=Evaluate;<br/>
- OutputCPUtime:=true;<br/>
- simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=false, mergeDp.k=false, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
- simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=false, mergeDp.k=true, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
- simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=true, mergeDp.k=false, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
- simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=true, mergeDp.k=true, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
- createPlot(id=1, position={15, 10, 592, 421}, range={0.0, 1000.0, -0.01, 8}, autoscale=false, grid=true);<br/>
- plotExpression(apply(Example3[end-3].CPUtime), false, \"from_dp=false, mergeDp=false\", 1);<br/>
- plotExpression(apply(Example3[end-2].CPUtime), false, \"from_dp=false, mergeDp=true\", 1);<br/>
- plotExpression(apply(Example3[end-1].CPUtime), false, \"from_dp=true, mergeDp=false\", 1);<br/>
- plotExpression(apply(Example3[end].CPUtime), false, \"from_dp=true, mergeDp=true\", 1);<br/>
- OutputCPUtime=cpuOld;<br/>
- Evaluate=evaluateOld;</code>
- </p>
- <p>
- See Jorissen et al. (2015) for a discussion.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
- Simulation speed analysis and improvements of Modelica
- models for building energy simulation.<br/>
- Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+July 14, 2015, by Michael Wetter:<br/>
+Revised documentation.
+</li>
+<li>
+April 17, 2015, by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>", info="<html>
+<p>
+This example demonstrates the importance of merging
+pressure drop components that are connected in series,
+into one pressure drop component.
+Parameter <code>mergeDp.k</code> can be used to merge two components
+that are connected in series.
+Parameter <code>from_dp</code> also has an influence of the computational speed.
+</p>
+<p>
+Following script can be used in Dymola to compare the CPU times.
+For this script to work, make sure that Dymola stores at least 4 results.
+</p>
+<p>
+<code>
+cpuOld=OutputCPUtime;<br/>
+evaluateOld=Evaluate;<br/>
+OutputCPUtime:=true;<br/>
+simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=false, mergeDp.k=false, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
+simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=false, mergeDp.k=true, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
+simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=true, mergeDp.k=false, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
+simulateModel(\"AixLib.Fluid.Examples.Performance.Example3(from_dp.k=true, mergeDp.k=true, nRes.k=10)\", stopTime=1000, numberOfIntervals=10, method=\"dassl\", resultFile=\"Example3\");<br/>
+createPlot(id=1, position={15, 10, 592, 421}, range={0.0, 1000.0, -0.01, 8}, autoscale=false, grid=true);<br/>
+plotExpression(apply(Example3[end-3].CPUtime), false, \"from_dp=false, mergeDp=false\", 1);<br/>
+plotExpression(apply(Example3[end-2].CPUtime), false, \"from_dp=false, mergeDp=true\", 1);<br/>
+plotExpression(apply(Example3[end-1].CPUtime), false, \"from_dp=true, mergeDp=false\", 1);<br/>
+plotExpression(apply(Example3[end].CPUtime), false, \"from_dp=true, mergeDp=true\", 1);<br/>
+OutputCPUtime=cpuOld;<br/>
+Evaluate=evaluateOld;</code>
+</p>
+<p>
+See Jorissen et al. (2015) for a discussion.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
+Simulation speed analysis and improvements of Modelica
+models for building energy simulation.<br/>
+Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
+</li>
+</ul>
+</html>"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example3.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Example3;

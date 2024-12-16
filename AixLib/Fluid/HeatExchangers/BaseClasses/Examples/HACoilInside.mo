@@ -31,17 +31,17 @@ equation
         "Simulate and plot"),
         experiment(Tolerance=1e-6, StopTime=15),
         Documentation(info="<html>
-         <p>
-         Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
-         AixLib.Fluid.HeatExchanger.BaseClassess.HACoilInside</a>.
-         </p>
-         </html>",revisions="<html>
- <ul>
- <li>
- May 11, 2013, by Michael Wetter:<br/>
- First version.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        <p>
+        Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
+        AixLib.Fluid.HeatExchanger.BaseClassess.HACoilInside</a>.
+        </p>
+        </html>", revisions="<html>
+<ul>
+<li>
+May 11, 2013, by Michael Wetter:<br/>
+First version.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end HACoilInside;

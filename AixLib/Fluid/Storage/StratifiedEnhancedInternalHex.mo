@@ -95,13 +95,13 @@ model StratifiedEnhancedInternalHex
     redeclare final package Medium =MediumHex,
      m_flow(min=if allowFlowReversalHex then -Modelica.Constants.inf else 0))
     "Heat exchanger inlet"
-   annotation (Placement(transformation(extent={{-110,-48},{-90,-28}}),
+   annotation (Placement(transformation(extent={{-150,-30},{-130,-10}}),
                    iconTransformation(extent={{-110,-48},{-90,-28}})));
   Modelica.Fluid.Interfaces.FluidPort_b portHex_b(
      redeclare final package Medium = MediumHex,
      m_flow(max=if allowFlowReversalHex then Modelica.Constants.inf else 0))
     "Heat exchanger outlet"
-   annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
+   annotation (Placement(transformation(extent={{-150,-90},{-130,-70}}),
         iconTransformation(extent={{-110,-90},{-90,-70}})));
 
   BaseClasses.IndirectTankHeatExchanger indTanHex(
@@ -126,11 +126,10 @@ model StratifiedEnhancedInternalHex
     final allowFlowReversal=allowFlowReversalHex,
     final m_flow_small=1e-4*abs(mHex_flow_nominal))
     "Heat exchanger inside the tank"
-     annotation (Placement(
-        transformation(
-        extent={{-10,-15},{10,15}},
+     annotation (Placement(transformation(
+        extent={{10,-15},{-10,15}},
         rotation=180,
-        origin={-87,32})));
+        origin={-120,-20})));
 
   Modelica.Units.SI.HeatFlowRate QHex_flow=-sum(indTanHex.port.Q_flow)
     "Heat transferred from the heat exchanger to the tank";
@@ -173,17 +172,17 @@ equation
     for i in 1:hexSegMult loop
       connect(indTanHex.port[j*hexSegMult+i], heaPorVol[segHex_a + (if hHex_a > hHex_b then j else -j)])
         annotation (Line(
-       points={{-87,41.8},{-20,41.8},{-20,-2.22045e-16},{0,-2.22045e-16}},
+       points={{-120,-10.2},{-120,0},{0,0}},
        color={191,0,0},
        smooth=Smooth.None));
     end for;
   end for;
   connect(portHex_a, indTanHex.port_a) annotation (Line(
-      points={{-100,-38},{-68,-38},{-68,32},{-77,32}},
+      points={{-140,-20},{-130,-20}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(indTanHex.port_b, portHex_b) annotation (Line(
-      points={{-97,32},{-98,32},{-98,18},{-70,18},{-70,-80},{-100,-80}},
+      points={{-110,-20},{-100,-20},{-100,-80},{-140,-80}},
       color={0,127,255},
       smooth=Smooth.None));
 
@@ -229,114 +228,115 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName = "tan",
 Documentation(info = "<html>
- <p>
- This is a model of a stratified storage tank for thermal energy storage with built-in heat exchanger.
- </p>
- <p>
- See the
- <a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
- AixLib.Fluid.Storage.UsersGuide</a>
- for more information.
- </p>
- <h4>Limitations</h4>
- <p>
- The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
- </p>
- </html>",
+<p>
+This is a model of a stratified storage tank for thermal energy storage with built-in heat exchanger.
+</p>
+<p>
+See the
+<a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
+AixLib.Fluid.Storage.UsersGuide</a>
+for more information.
+</p>
+<h4>Limitations</h4>
+<p>
+The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code> and <code>massDynamicsHex</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- June 7, 2018 by Filip Jorissen:<br/>
- Copied model from Buildings and update the model accordingly.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
- </li>
- <li>
- June 23, 2016, by Michael Wetter:<br/>
- Corrected computation of the heat exchanger location which was wrong
- if <code>hHex_a &lt; hHex_b</code>, e.g., the port a of the heat exchanger
- is below the port b.
- This closes
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/531\">issue 531</a>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- July 2, 2015, by Michael Wetter:<br/>
- Set the default value <code>energyDynamicsHexSolid=energyDynamicsHex</code>
- rather than
- <code>energyDynamicsHexSolid=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial</code>
- as users are not likely to want different settings.
- </li>
- <li>
- July 1, 2015, by Filip Jorissen:<br/>
- Added parameter <code>energyDynamicsHexSolid</code>.
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
- #434</a>.
- </li>
- <li>
- March 28, 2015, by Filip Jorissen:<br/>
- Propagated <code>allowFlowReversal</code> and <code>m_flow_small</code>.
- </li>
- <li>
- September 2, 2014 by Michael Wetter:<br/>
- Replaced the <code>abs()</code> function in the assignment of the parameter
- <code>nSegHexTan</code> as the return value of <code>abs()</code>
- is a <code>Real</code> which causes a type error during model check.
- </li>
- <li>
- August 29, 2014 by Michael Wetter:<br/>
- Corrected issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">#271</a>
- which led to a compilation error if the heat exchanger and the tank
- had different media.
- </li>
- <li>
- April 18, 2014 by Michael Wetter:<br/>
- Added missing ceiling function in computation of <code>botHexSeg</code>.
- Without this function, this parameter can take on zero, which is wrong
- because the Modelica uses one-based arrays.
- 
- Revised the model as the old version required the port<sub>a</sub>
- of the heat exchanger to be located higher than port<sub>b</sub>.
- This makes sense if the heat exchanger is used to heat up the tank,
- but not if it is used to cool down a tank, such as in a cooling plant.
- The following parameters were changed:
- <ol>
- <li>Changed <code>hexTopHeight</code> to <code>hHex_a</code>.</li>
- <li>Changed <code>hexBotHeight</code> to <code>hHex_b</code>.</li>
- <li>Changed <code>topHexSeg</code> to <code>segHex_a</code>,
-  and made it protected as this is deduced from <code>hHex_a</code>.</li>
- <li>Changed <code>botHexSeg</code> to <code>segHex_b</code>,
-  and made it protected as this is deduced from <code>hHex_b</code>.</li>
- </ol>
- The names of the following ports have been changed:
- <ol>
- <li>Changed <code>port_a1</code> to <code>portHex_a</code>.</li>
- <li>Changed <code>port_b1</code> to <code>portHex_b</code>.</li>
- </ol>
- The conversion script should update old instances of
- this model automatically in Dymola for all of the above changes.
- </li>
- <li>
- May 10, 2013 by Michael Wetter:<br/>
- Removed <code>m_flow_nominal_tank</code> which was not used.
- </li>
- <li>
- January 29, 2013 by Peter Grant:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code> and <code>massDynamicsHex</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+June 7, 2018 by Filip Jorissen:<br/>
+Copied model from Buildings and update the model accordingly.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+</li>
+<li>
+June 23, 2016, by Michael Wetter:<br/>
+Corrected computation of the heat exchanger location which was wrong
+if <code>hHex_a &lt; hHex_b</code>, e.g., the port a of the heat exchanger
+is below the port b.
+This closes
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/531\">issue 531</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+July 2, 2015, by Michael Wetter:<br/>
+Set the default value <code>energyDynamicsHexSolid=energyDynamicsHex</code>
+rather than
+<code>energyDynamicsHexSolid=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial</code>
+as users are not likely to want different settings.
+</li>
+<li>
+July 1, 2015, by Filip Jorissen:<br/>
+Added parameter <code>energyDynamicsHexSolid</code>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
+#434</a>.
+</li>
+<li>
+March 28, 2015, by Filip Jorissen:<br/>
+Propagated <code>allowFlowReversal</code> and <code>m_flow_small</code>.
+</li>
+<li>
+September 2, 2014 by Michael Wetter:<br/>
+Replaced the <code>abs()</code> function in the assignment of the parameter
+<code>nSegHexTan</code> as the return value of <code>abs()</code>
+is a <code>Real</code> which causes a type error during model check.
+</li>
+<li>
+August 29, 2014 by Michael Wetter:<br/>
+Corrected issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">#271</a>
+which led to a compilation error if the heat exchanger and the tank
+had different media.
+</li>
+<li>
+April 18, 2014 by Michael Wetter:<br/>
+Added missing ceiling function in computation of <code>botHexSeg</code>.
+Without this function, this parameter can take on zero, which is wrong
+because the Modelica uses one-based arrays.
+
+Revised the model as the old version required the port<sub>a</sub>
+of the heat exchanger to be located higher than port<sub>b</sub>.
+This makes sense if the heat exchanger is used to heat up the tank,
+but not if it is used to cool down a tank, such as in a cooling plant.
+The following parameters were changed:
+<ol>
+<li>Changed <code>hexTopHeight</code> to <code>hHex_a</code>.</li>
+<li>Changed <code>hexBotHeight</code> to <code>hHex_b</code>.</li>
+<li>Changed <code>topHexSeg</code> to <code>segHex_a</code>,
+ and made it protected as this is deduced from <code>hHex_a</code>.</li>
+<li>Changed <code>botHexSeg</code> to <code>segHex_b</code>,
+ and made it protected as this is deduced from <code>hHex_b</code>.</li>
+</ol>
+The names of the following ports have been changed:
+<ol>
+<li>Changed <code>port_a1</code> to <code>portHex_a</code>.</li>
+<li>Changed <code>port_b1</code> to <code>portHex_b</code>.</li>
+</ol>
+The conversion script should update old instances of
+this model automatically in Dymola for all of the above changes.
+</li>
+<li>
+May 10, 2013 by Michael Wetter:<br/>
+Removed <code>m_flow_nominal_tank</code> which was not used.
+</li>
+<li>
+January 29, 2013 by Peter Grant:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    Diagram(coordinateSystem(extent={{-140,-100},{100,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedEnhancedInternalHex;

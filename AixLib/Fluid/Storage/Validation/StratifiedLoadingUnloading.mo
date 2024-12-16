@@ -147,20 +147,20 @@ equation
   annotation (                     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Validation/StratifiedLoadingUnloading.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- This test model compares two tank models. The only difference between
- the two tank models is that one uses the third order upwind discretization
- scheme that reduces numerical diffusion that is induced when connecting
- volumes in series.
- </html>",revisions="<html>
- <ul>
- <li>
- June 7, 2018 by Filip Jorissen:<br/>
- Copied model from Buildings and update the model accordingly.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
- </li>
- </ul>
- </html>"),
-    experiment(Tolerance=1e-6, StopTime=14400),
-  __Dymola_LockedEditing="Model from IBPSA");
+This test model compares two tank models. The only difference between
+the two tank models is that one uses the third order upwind discretization
+scheme that reduces numerical diffusion that is induced when connecting
+volumes in series.
+</html>", revisions="<html>
+<ul>
+<li>
+June 7, 2018 by Filip Jorissen:<br/>
+Copied model from Buildings and update the model accordingly.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+</li>
+</ul>
+</html>"),
+    experiment(Tolerance=1e-6, StopTime=14400), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end StratifiedLoadingUnloading;

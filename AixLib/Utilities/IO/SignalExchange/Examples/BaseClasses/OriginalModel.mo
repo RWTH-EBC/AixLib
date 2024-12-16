@@ -50,21 +50,20 @@ equation
     annotation (Line(points={{29,-20},{0,-20},{0,18}}, color={0,0,127}));
 
   annotation (Documentation(info="<html>
- <p>
- This is a model of a first order dynamic system with feedback control.
- Signal exchange blocks are implemented to overwrite either the setpoint or
- actuator control signals as well as read the output of the first order
- system.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 17, 2018, by David Blum:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-          Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This is a model of a first order dynamic system with feedback control.
+Signal exchange blocks are implemented to overwrite either the setpoint or
+actuator control signals as well as read the output of the first order
+system.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 17, 2018, by David Blum:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end OriginalModel;

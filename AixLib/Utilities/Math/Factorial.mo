@@ -11,13 +11,13 @@ equation
           textColor={160,160,164},
           textString="factorial()")}),
     Documentation(info="<html>
-     <p>This block computes the factorial of the integer input, <i>y=n!</i>.</p>
- </html>",revisions="<html>
- <ul>
- <li>
- July 17, 2018, by Massimo Cimmino:<br/>First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+    <p>This block computes the factorial of the integer input, <i>y=n!</i>.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+July 17, 2018, by Massimo Cimmino:<br/>First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Factorial;

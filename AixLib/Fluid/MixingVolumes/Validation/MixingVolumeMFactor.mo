@@ -49,49 +49,49 @@ equation
   connect(bou.ports[3], vol1.ports[2]) annotation (Line(points={{40,1.33227e-15},
           {20,1.33227e-15},{20,-80},{2,-80}}, color={0,127,255}));
   annotation (Documentation(info="<html>
- <p>This model contains two verifications for the implementation of <code>mSenFac</code>:</p>
- <ol>
- <li>
- The mixingVolume temperature <code>vol.T</code> should be constant.
- This is to check the correct implementation of the parameter <code>mSenFac</code> for moist air media.
- </li>
- <li>
- The temperature response of <code>volMFactor.T</code> and <code>vol1.T</code> should be nearly identical.
- Furthermore the response of the species concentration <code>Xi</code> demonstrates the
- difference between using an <code>mSenFac = 10</code> and multiplying volume by <i>10</i>.
- </li>
- </ol>
- <p>
- See
- <a href=\"modelica://AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow\">
- AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow</a>
- for the rational of the selected initial conditions for the volumes.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 27, 2015 by Michael Wetter:<br/>
- Set the mass dynamics of the volume to
- <code>Modelica.Fluid.Types.Dynamics.DynamicFreeInitial</code>
- to avoid an overspecified but consistent initial value problem.
- The previous implementation caused a warning in Dymola 2015 FD01, and caused
- in Dymola 2016 beta 2 to not translate the model.
- The problem was that the boundary condition and the volume
- both declared an equation for the initial pressure.
- </li>
- <li>
- December, 2014 by Filip Jorissen:<br/>
- Added temperature verification.
- </li>
- <li>
- November 25, 2014 by Filip Jorissen:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>This model contains two verifications for the implementation of <code>mSenFac</code>:</p>
+<ol>
+<li>
+The mixingVolume temperature <code>vol.T</code> should be constant.
+This is to check the correct implementation of the parameter <code>mSenFac</code> for moist air media.
+</li>
+<li>
+The temperature response of <code>volMFactor.T</code> and <code>vol1.T</code> should be nearly identical.
+Furthermore the response of the species concentration <code>Xi</code> demonstrates the
+difference between using an <code>mSenFac = 10</code> and multiplying volume by <i>10</i>.
+</li>
+</ol>
+<p>
+See
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow\">
+AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow</a>
+for the rational of the selected initial conditions for the volumes.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 27, 2015 by Michael Wetter:<br/>
+Set the mass dynamics of the volume to
+<code>Modelica.Fluid.Types.Dynamics.DynamicFreeInitial</code>
+to avoid an overspecified but consistent initial value problem.
+The previous implementation caused a warning in Dymola 2015 FD01, and caused
+in Dymola 2016 beta 2 to not translate the model.
+The problem was that the boundary condition and the volume
+both declared an equation for the initial pressure.
+</li>
+<li>
+December, 2014 by Filip Jorissen:<br/>
+Added temperature verification.
+</li>
+<li>
+November 25, 2014 by Filip Jorissen:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 experiment(Tolerance=1E-6, StopTime=100),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeMFactor.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeMFactor;
