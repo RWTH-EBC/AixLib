@@ -297,6 +297,10 @@ equation
     June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
+  <li>
+    Dec. 16, 2024, by Jun Jiang:<br/>
+    Update due to model update (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>This example checks the models that simulate the window ventilation flow rate with the sash opening. For the sash opening type, all models are set to the bottom-hung opening.</p>

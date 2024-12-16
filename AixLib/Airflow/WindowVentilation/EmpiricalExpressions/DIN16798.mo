@@ -38,6 +38,10 @@ equation
     June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
+  <li>
+    Dec. 16, 2024, by Jun Jiang:<br/>
+    Add parameter for window opening behavior (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>This model contains the empirical expression according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8):2018-03.</p>
