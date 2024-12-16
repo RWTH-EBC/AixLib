@@ -1,0 +1,245 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening");
+Check of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening
+The model has the same number of unknowns and equations: 195
+The model could not be deduced to be symbolically well-posed.
+The model has
+  195
+scalar unknowns and
+  193+(if  not vdi2078_1.use_cofSunSha_in then 1 else 0)+(if  not vdi2078_2.use_cofSunSha_in   then 1 else 0)+(if  not vdi2078_3.use_cofSunSha_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  195
+Check of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mos\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening\\\");\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSimpleOpening.mos");
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening", startTime=0, stopTime=180, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening");
+Translation of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening
+The DAE has 195 scalar unknowns and 195 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 33
+  Variables: 353
+  Parameters: 158 (189 scalars)
+  Unknowns: 195 (195 scalars)
+  Equations: 230
+  Nontrivial: 201
+Translated Model
+  Constants: 84 scalars
+  Free parameters: 68 scalars
+  Parameter depending: 78 scalars
+  Time-varying variables: 105 scalars
+  Alias variables: 49 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening");
+Check of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening
+The model has the same number of unknowns and equations: 341
+The model could not be deduced to be symbolically well-posed.
+The model has
+  341
+scalar unknowns and
+  337+(if  not warrenParkins.openingArea.use_opnWidth_in then 1 else 0)+(if  not   gidsPhaff.openingArea.use_opnWidth_in then 1 else 0)+(if  not larsenHeiselberg.openingArea.use_opnWidth_in   then 1 else 0)+(if  not caciolo.openingArea.use_opnWidth_in then 1 else 0)+(  if  not tang.openingArea.use_opnWidth_in then 1 else 0)+(if  not   vdi2078_1.openingArea.use_opnWidth_in then 1 else 0)+(if  not vdi2078_1.use_cofSunSha_in   then 1 else 0)+(if  not vdi2078_2.openingArea.use_opnWidth_in then 1 else 0)+  (if  not vdi2078_2.use_cofSunSha_in then 1 else 0)+(if  not vdi2078_3.openingArea.use_opnWidth_in   then 1 else 0)+(if  not vdi2078_3.use_cofSunSha_in then 1 else 0)+(if  not   din16798_1.openingArea.use_opnWidth_in then 1 else 0)+(if  not   din16798_2.openingArea.use_opnWidth_in then 1 else 0)+(if  not   din4108_1.openingArea.use_opnWidth_in then 1 else 0)+(if  not ashrae.openingArea.use_opnWidth_in   then 1 else 0)+(if  not maas.openingArea.use_opnWidth_in then 1 else 0)+(if    not hall.openingArea.use_opnWidth_in then 1 else 0)+(if  not jiang.openingArea.use_opnWidth_in   then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  341
+Check of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSashOpening.mos\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening\\\");\",", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/VentilationFlowRateSashOpening.mos");
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening", startTime=0, stopTime=180, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening");
+Translation of AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening
+The DAE has 341 scalar unknowns and 341 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 42
+  Variables: 586
+  Parameters: 245 (276 scalars)
+  Unknowns: 341 (341 scalars)
+  Equations: 350
+  Nontrivial: 325
+Translated Model
+  Constants: 89 scalars
+  Free parameters: 112 scalars
+  Parameter depending: 140 scalars
+  Time-varying variables: 186 scalars
+  Alias variables: 90 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: {2}
+  Sizes after manipulation of the linear systems: {0}
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Airflow.WindowVentilation.Examples.OpeningArea");
+Check of AixLib.Airflow.WindowVentilation.Examples.OpeningArea
+The model has the same number of unknowns and equations: 282
+The model could not be deduced to be symbolically well-posed.
+The model has
+  282
+scalar unknowns and
+  281+(if  not opnSasSdHunInGeo.use_opnWidth_in then 1 else 0)+(if  not   opnSasSdHunInPrj.use_opnWidth_in then 1 else 0)+(if  not opnSasSdHunInEqv.use_opnWidth_in   then 1 else 0)+(if  not opnSasSdHunInEff.use_opnWidth_in then 1 else 0)+(if    not opnSasSdHunOutGeo.use_opnWidth_in then 1 else 0)+(if  not   opnSasBtmHunInGeo.use_opnWidth_in then 1 else 0)+(if  not opnSasBtmHunInPrj.use_opnWidth_in   then 1 else 0)+(if  not opnSasBtmHunInEqv.use_opnWidth_in then 1 else 0)+(if    not opnSasBtmHunInEff.use_opnWidth_in then 1 else 0)+(if  not   opnSasTopHunOutPrj.use_opnWidth_in then 1 else 0)+(if  not opnSasPivVerGeo.use_opnWidth_in   then 1 else 0)+(if  not opnSasPivVerPrj.use_opnWidth_in then 1 else 0)+(if    not opnSasPivVerEqv.use_opnWidth_in then 1 else 0)+(if  not opnSasPivVerEff.use_opnWidth_in   then 1 else 0)+(if  not opnSasPivHorGeo.use_opnWidth_in then 1 else 0)+(if    not opnSasPivHorPrj.use_opnWidth_in then 1 else 0)+(if  not opnSasPivHorEqv.use_opnWidth_in   then 1 else 0)+(if  not opnSasPivHorEff.use_opnWidth_in then 1 else 0)+(if    not opnSasPivHorEffPre.use_opnWidth_in then 1 else 0)+(if  not   opnSasSldVerGeo.use_opnWidth_in then 1 else 0)+(if  not opnSasSldHorGeo.use_opnWidth_in   then 1 else 0)+(if  not opnSasBtmHunInDIN16798.use_opnWidth_in then 1 else 0)  +(if  not opnSasSdHunInDIN4108.use_opnWidth_in then 1 else 0)+(if  not   opnSasBtmHunInDIN4108.use_opnWidth_in then 1 else 0)+(if  not opnSasPivHorDIN4108.use_opnWidth_in   then 1 else 0)+(if  not opnSasBtmHunInHall.use_opnWidth_in then 1 else 0)+(  if  not opnSasBtmHunInVDI2078.use_opnWidth_in then 1 else 0)+(if  not   opnSasAngBtmHunInGeo.use_opnWidth_in then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  282
+Check of AixLib.Airflow.WindowVentilation.Examples.OpeningArea successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/OpeningArea.mos\",", "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Airflow.WindowVentilation.Examples.OpeningArea\",", "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Airflow.WindowVentilation.Examples.OpeningArea\\\");\",", "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Airflow.WindowVentilation.Examples.OpeningArea.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/OpeningArea.mos");
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.OpeningArea", startTime=0, stopTime=60, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Airflow.WindowVentilation.Examples.OpeningArea");
+Translation of AixLib.Airflow.WindowVentilation.Examples.OpeningArea
+The DAE has 282 scalar unknowns and 282 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 36
+  Variables: 549
+  Parameters: 267 (267 scalars)
+  Unknowns: 282 (282 scalars)
+  Equations: 247
+  Nontrivial: 246
+Translated Model
+  Constants: 63 scalars
+  Free parameters: 66 scalars
+  Parameter depending: 213 scalars
+  Time-varying variables: 144 scalars
+  Alias variables: 63 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Airflow.WindowVentilation.Examples.OpeningArea.translation.log"); = true
+
+
+rCheck = checkModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU");
+Check of AixLib.Airflow.AirHandlingUnit.Examples.AHU
+The model has the same number of unknowns and equations: 175
+The model could not be deduced to be symbolically well-posed.
+The model has
+  157+2*ahu.sample.n
+scalar unknowns and
+  165+(if  not ahu.use_Vflow_in_extractAir then 1 else 0)+ahu.sample.n
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  175
+Check of AixLib.Airflow.AirHandlingUnit.Examples.AHU successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos\",", "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Airflow.AirHandlingUnit.Examples.AHU\",", "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Airflow.AirHandlingUnit.Examples.AHU\\\");\",", "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Airflow.AirHandlingUnit.Examples.AHU.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos");
+simulateModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU", stopTime=86400, outputInterval=60, method="lsodar", tolerance=1e-6, resultFile="AixLib.Airflow.AirHandlingUnit.Examples.AHU");
+Translation of AixLib.Airflow.AirHandlingUnit.Examples.AHU
+The DAE has 175 scalar unknowns and 175 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 27
+  Variables: 207
+  Constants: 8 (8 scalars)
+  Parameters: 41 (41 scalars)
+  Unknowns: 156 (220 scalars)
+  Equations: 187
+  Nontrivial: 140
+Translated Model
+  Constants: 16 scalars
+  Free parameters: 30 scalars
+  Parameter depending: 14 scalars
+  Outputs: 3 scalars
+  Time-varying variables: 181 scalars
+  Alias variables: 28 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {6, 6, 1}
+  Sizes after manipulation of the nonlinear systems: {1, 1, 0}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+Finished
+ = true
+
+
+
+
+
+
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Airflow.AirHandlingUnit.Examples.AHU.translation.log");
