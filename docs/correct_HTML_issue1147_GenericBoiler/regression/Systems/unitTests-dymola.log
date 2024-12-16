@@ -1,11 +1,17 @@
 Regression tests are only run for the following package:
   AixLib.Systems
-*** Warning: AixLib.Systems.ModularEnergySystems.ModularBoiler.Examples.ModularBoilerFeedback: Translation statistics for simulation changed for nonlinear, but results are unchanged.
+*** Warning: File not found in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerSimple.mos");'.
+
+*** Warning: File not found in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerHeatingCurve.mos");'.
+
+*** Warning: File not found in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularEnergySystems/Examples/ModularBoilerFeedback.mos");'.
+
+*** Warning: AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerFeedback: Translation statistics for simulation changed for nonlinear, but results are unchanged.
  Old = 1
  New = 2
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.1 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 1 warnings and 0 errors.
+Script that runs unit tests had 4 warnings and 0 errors.
 
