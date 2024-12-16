@@ -5,7 +5,11 @@ model RoomGFOw2_DayNightMode
   extends Modelica.Icons.Example;
 
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-
+  final parameter AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition  SOD=
+  AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
+    "Surface orientation data"  annotation (
+      Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true),
+      choicesAllMatching = true);
   replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
   replaceable package Medium =
     AixLib.Media.Water "Medium in the component"
@@ -30,16 +34,6 @@ model RoomGFOw2_DayNightMode
     use_infiltEN12831=true,
     n50=3,                                withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73,
     T0_air=294.15)                                                                                                                                                                                                        annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
-  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather combinedWeather(
-    Latitude=49.5,
-    Longitude=8.5,
-    Cloud_cover=false,
-    Wind_speed=true,
-    Air_temp=true,
-    fileName=
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-    WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
-    annotation (Placement(transformation(extent={{-100,78},{-62,104}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp annotation(Placement(transformation(extent={{-32,38},{-12,58}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow adiabaticWalls[4](each Q_flow=0) annotation (Placement(transformation(extent={{100,34},{80,54}})));
@@ -119,6 +113,18 @@ model RoomGFOw2_DayNightMode
         extent={{-4,4},{4,-4}},
         rotation=180,
         origin={12,-2})));
+  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/TRY2015_522361130393_Jahr_City_Potsdam.mos"))
+    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
+        transformation(extent={{-20,80},{20,120}}), iconTransformation(extent={{
+            -284,-42},{-264,-22}})));
+  Components.SolarIrradiation.RadOnTiltedSurfaceIBPSA RadOnTiltedSurfaceAdaptor[
+    SOD.nSurfaces](
+    til=SOD.Tilt .* Modelica.Constants.pi ./ 180,
+    each rho=0.2,
+    azi=SOD.Azimut .* Modelica.Constants.pi ./ 180) "Adapt weather bus to HOM"
+    annotation (Placement(transformation(extent={{49,80},{69,100}})));
 equation
   connect(varTemp.port, room_GF_2OW.thermOutside) annotation(Line(points={{-12,48},{16,48},{16,43.64}},           color = {191, 0, 0}));
   connect(res.port_b, heatValve_new.port_a)
@@ -128,18 +134,12 @@ equation
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},{54,-26}},        color = {0, 127, 255}));
   connect(room_GF_2OW.AirExchangePort, AirExchange.y) annotation(Line(points={{14.2,38.51},{14.2,38},{10,38},{10,67},{21.5,67}},
                                                                                                                           color = {0, 0, 127}));
-  connect(combinedWeather.SolarRadiation_OrientedSurfaces[1], room_GF_2OW.SolarRadiationPort_OW2) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 84}, {43.09, 84}, {43.09, 43.82}}, color = {255, 128, 0}));
-  connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], room_GF_2OW.SolarRadiationPort_OW1) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 31.4}, {16.09, 31.4}}, color = {255, 128, 0}));
-  connect(combinedWeather.WindSpeed, room_GF_2OW.WindSpeedPort) annotation(Line(points={{
-          -60.7333,98.8},{-4,98.8},{-4,18.8},{16.09,18.8}},                                                                                       color = {0, 0, 127}));
-  connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,
-          94.9},{-40,94.9},{-40,48},{-34,48}},                                                                                                  color = {0, 0, 127}));
   connect(Pump.port_a, res2.port_b) annotation (Line(points={{-74,-26},{-80,-26},{-80,-68},{-10,-68}},
                                color={0,127,255}));
   connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points={{-67.15,10.3},{-64,10.3},{-64,-15.8}},        color = {255, 0, 255}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points={{23,8},{23,25},{31.48,25},{31.48,26}},            color = {191, 0, 0}));
-  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2},{40,-2},{40,0},{56,0},{56,30},{110,30}},
-                                                                                        color = {0, 0, 127}));
+  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2.5},{40,-2.5},
+          {40,0},{56,0},{56,30},{110,30}},                                              color = {0, 0, 127}));
   connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-84,-26},{-74,-26}},
       color={0,127,255}));
@@ -168,6 +168,43 @@ equation
     annotation (Line(points={{23,-2},{16.8,-2}}, color={0,0,127}));
   connect(firstOrder.y, controlPIThermostat.u_m)
     annotation (Line(points={{7.6,-2},{5,-2},{5,-7}}, color={0,0,127}));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-80,90},{-4,90},{-4,96},{0,96},{0,100}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(weaBus.TDryBul, varTemp.T) annotation (Line(
+      points={{0.1,100.1},{0.1,96},{-2,96},{-2,86},{-46,86},{-46,48},{-34,48}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(weaBus.winSpe, room_GF_2OW.WindSpeedPort) annotation (Line(
+      points={{0.1,100.1},{0.1,18.8},{16.09,18.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+    // Connecting n RadOnTiltedSurf
+  for i in 1:SOD.nSurfaces loop
+    connect(weaBus, RadOnTiltedSurfaceAdaptor[i].weaBus) annotation (Line(
+      points={{0,100},{32,100},{32,90},{48.8,90}},
+      color={255,204,51},
+      thickness=0.5));
+  end for;
+  connect(RadOnTiltedSurfaceAdaptor[1].radOnTiltedSurf, room_GF_2OW.SolarRadiationPort_OW2)
+    annotation (Line(points={{70,89.9},{84,89.9},{84,56},{43.09,56},{43.09,
+          43.82}}, color={255,128,0}));
+  connect(RadOnTiltedSurfaceAdaptor[2].radOnTiltedSurf, room_GF_2OW.SolarRadiationPort_OW1)
+    annotation (Line(points={{70,89.9},{84,89.9},{84,56},{6,56},{6,31.4},{16.09,
+          31.4}}, color={255,128,0}));
   annotation(experiment(StopTime = 86400, Interval = 60, Tolerance=1e-6, Algorithm = "Dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mos"
                       "Simulate and plot"),
