@@ -7,7 +7,11 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
       group="Construction parameters",
       compact=true,
       descriptionLabel=true));
-
+  final parameter AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition  SOD=
+  AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S()
+    "Surface orientation data"  annotation (
+      Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true),
+      choicesAllMatching = true);
   replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
 
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -21,20 +25,6 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](each unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
   Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={64,-77}),      iconTransformation(extent={{101,-79},{117,-63}})));
   Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}),      iconTransformation(extent={{101,-99},{117,-83}})));
-  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
-    Latitude=49.5,
-    Longitude=8.5,
-    GroundReflection=0.2,
-    tableName="wetter",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
-    Wind_dir=false,
-    Wind_speed=true,
-    Air_temp=true,
-    fileName=
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-    WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
-    annotation (Placement(transformation(extent={{125,55},{77,87}})));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope OFD(
     redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes,
@@ -52,7 +42,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     redeclare package Medium = MediumAir,
     UValOutDoors=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
-    annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
+    annotation (Placement(transformation(extent={{-11,53},{-23.5,66}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
     groundFloor
     annotation (Placement(transformation(extent={{-116,-94},{-76,-63}})));
@@ -63,6 +53,18 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature tempGround[5](T=fill(273.15
          + 9, 5))
     annotation (Placement(transformation(extent={{-21.5,-84},{-9,-71}})));
+  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/TRY2015_522361130393_Jahr_City_Potsdam.mos"))
+    annotation (Placement(transformation(extent={{-46,80},{-26,100}})));
+  Components.SolarIrradiation.RadOnTiltedSurfaceIBPSA RadOnTiltedSurfaceAdaptor[
+    SOD.nSurfaces](
+    til=SOD.Tilt .* Modelica.Constants.pi ./ 180,
+    each rho=0.2,
+    azi=SOD.Azimut .* Modelica.Constants.pi ./ 180) "Adapt weather bus to HOM"
+    annotation (Placement(transformation(extent={{65,80},{85,100}})));
+  BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
+        transformation(extent={{-20,78},{20,118}}), iconTransformation(extent={{
+            -284,-42},{-264,-22}})));
 equation
   // Romm Temperatures
   TAirRooms[1] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.heatPort.T);
@@ -85,36 +87,16 @@ equation
   TsetValvesSchedule[3] =Modelica.Units.Conversions.to_degC(TSet.y[3]);
   TsetValvesSchedule[4] =Modelica.Units.Conversions.to_degC(TSet.y[4]);
   TsetValvesSchedule[5] =Modelica.Units.Conversions.to_degC(TSet.y[5]);
-  Toutside =Modelica.Units.Conversions.to_degC(Weather.AirTemp);
+  Toutside =Modelica.Units.Conversions.to_degC(weaBus.TDryBul);
   //SolarRadiation
-  SolarRadiation[1] = Weather.SolarRadiation_OrientedSurfaces[1].I;
-  SolarRadiation[2] = Weather.SolarRadiation_OrientedSurfaces[2].I;
-  SolarRadiation[3] = Weather.SolarRadiation_OrientedSurfaces[3].I;
-  SolarRadiation[4] = Weather.SolarRadiation_OrientedSurfaces[4].I;
-  SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
-  SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
-  connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation (Line(points={{75.4,80.6},{-48,80.6},{-48,32},{-39.75,32},{-39.75,31.75}},
-                                                          color={0,0,127}));
-  connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-16.5,59.5},{-35,59.5},{-35,45.05}},
-                                         color={191,0,0}));
-  connect(tempOutside.T, Weather.AirTemp) annotation (Line(points={{-2.75,59.5},
-          {22,59.5},{22,75.8},{75.4,75.8}}, color={0,0,127}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[1], OFD.North) annotation (
-      Line(points={{113.48,53.4},{113.48,16.55},{62.85,16.55}},
-                                                              color={255,128,0}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[2], OFD.East) annotation (
-      Line(points={{113.48,53.4},{113.48,4.2},{62.85,4.2}},     color={255,128,0}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[3], OFD.South) annotation (
-      Line(points={{113.48,53.4},{113.48,-8.15},{62.85,-8.15}}, color={255,128,0}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[4], OFD.West) annotation (
-      Line(points={{113.48,53.4},{113.48,-19.55},{62.85,-19.55}}, color={255,128,
-          0}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[5], OFD.SolarRadiationPort_RoofN)
-    annotation (Line(points={{113.48,53.4},{113.48,41.25},{62.85,41.25}}, color=
-         {255,128,0}));
-  connect(Weather.SolarRadiation_OrientedSurfaces[6], OFD.SolarRadiationPort_RoofS)
-    annotation (Line(points={{113.48,53.4},{113.48,28.9},{62.85,28.9}},   color=
-         {255,128,0}));
+  SolarRadiation[1] = RadOnTiltedSurfaceAdaptor[1].radOnTiltedSurf.I;
+  SolarRadiation[2] = RadOnTiltedSurfaceAdaptor[2].radOnTiltedSurf.I;
+  SolarRadiation[3] = RadOnTiltedSurfaceAdaptor[3].radOnTiltedSurf.I;
+  SolarRadiation[4] = RadOnTiltedSurfaceAdaptor[4].radOnTiltedSurf.I;
+  SolarRadiation[5] = RadOnTiltedSurfaceAdaptor[5].radOnTiltedSurf.I;
+  SolarRadiation[6] = RadOnTiltedSurfaceAdaptor[6].radOnTiltedSurf.I;
+  connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-23.5,59.5},
+          {-35.95,59.5},{-35.95,46}},    color={191,0,0}));
   connect(NaturalVentilation.y[1], OFD.AirExchangePort[1]) annotation (Line(
         points={{-74,69},{-78,69},{-78,20.0909},{-39.75,20.0909}},   color={0,0,
           127}));
@@ -230,6 +212,46 @@ equation
           -17.5},{-41,-17.5},{-41,-13.5045},{-35,-13.5045}},                                                                                                color={191,0,0}));
   connect(heatStarToCombHeaters[9].portConvRadComb, OFD.heatingToRooms[10]) annotation (Line(points={{-44,
           -17.5},{-41,-17.5},{-41,-13.0727},{-35,-13.0727}},                                                                                                 color={191,0,0}));
+  connect(RadOnTiltedSurfaceAdaptor[1].radOnTiltedSurf, OFD.North) annotation (
+      Line(points={{86,89.9},{95,89.9},{95,16.55},{62.85,16.55}}, color={255,128,
+          0}));
+  connect(RadOnTiltedSurfaceAdaptor[2].radOnTiltedSurf, OFD.East) annotation (
+      Line(points={{86,89.9},{95,89.9},{95,4.2},{62.85,4.2}}, color={255,128,0}));
+  connect(RadOnTiltedSurfaceAdaptor[3].radOnTiltedSurf, OFD.South) annotation (
+      Line(points={{86,89.9},{95,89.9},{95,-8.15},{62.85,-8.15}}, color={255,128,
+          0}));
+  connect(RadOnTiltedSurfaceAdaptor[4].radOnTiltedSurf, OFD.West) annotation (
+      Line(points={{86,89.9},{95,89.9},{95,-19.55},{62.85,-19.55}}, color={255,128,
+          0}));
+  connect(RadOnTiltedSurfaceAdaptor[5].radOnTiltedSurf, OFD.SolarRadiationPort_RoofN)
+    annotation (Line(points={{86,89.9},{95,89.9},{95,41.25},{62.85,41.25}},
+        color={255,128,0}));
+  connect(RadOnTiltedSurfaceAdaptor[6].radOnTiltedSurf, OFD.SolarRadiationPort_RoofS)
+    annotation (Line(points={{86,89.9},{95,89.9},{95,28.9},{62.85,28.9}}, color
+        ={255,128,0}));
+    // Connecting n RadOnTiltedSurf
+  for i in 1:SOD.nSurfaces loop
+    connect(weaBus, RadOnTiltedSurfaceAdaptor[i].weaBus) annotation (Line(
+      points={{0,98},{32,98},{32,90},{64.8,90}},
+      color={255,204,51},
+      thickness=0.5));
+  end for;
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-26,90},{-3,90},{-3,98},{0,98}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(weaBus.TDryBul, tempOutside.T) annotation (Line(
+      points={{0.1,98.1},{0.1,59},{-9.75,59},{-9.75,59.5}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.winSpe, OFD.WindSpeedPort) annotation (Line(
+      points={{0.1,98.1},{0.1,76},{-48,76},{-48,31},{-39.75,31},{-39.75,31.75}},
+      color={255,204,51},
+      thickness=0.5));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent={{-170,-100},{170,100}},      grid = {1, 1}), graphics={              Rectangle(extent={{-123,86},{-84,26}},    lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-120,72},{-84,34}},    lineColor={0,0,255},
           textString="1-Bedroom
