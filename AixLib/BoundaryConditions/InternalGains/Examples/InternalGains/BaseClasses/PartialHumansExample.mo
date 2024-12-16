@@ -13,7 +13,7 @@ partial model PartialHumansExample "Base class with bounday conditions for human
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad annotation (Placement(transformation(extent={{18,-16},{34,0}})));
   Modelica.Blocks.Math.MultiSum sumQ_flows(nu=2) annotation (Placement(transformation(extent={{34,-70},{46,-58}})));
   replaceable AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman humanIntGains(roomArea=20) constrainedby AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman(roomArea=20) annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-16,-12},{10,14}})));
-  Modelica.Blocks.Interfaces.RealOutput HeatOut(quantity = "Power", unit = "W") annotation (
+  Modelica.Blocks.Interfaces.RealOutput HeatOut(quantity = "Power", unit = "W") annotation(
     Placement(visible = true, iconTransformation(extent = {{80, -80}, {100, -60}}, rotation = 0)));
 equation
   connect(sine.y,varTempRoom. T) annotation(Line(points={{-82.6,24},{-92,24},{-92,52},{-86,52}},          color = {0, 0, 127}));
