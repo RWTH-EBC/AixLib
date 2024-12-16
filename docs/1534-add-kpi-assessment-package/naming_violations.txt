@@ -1,0 +1,11 @@
+
+
+
+AixLib/Utilities/KPIs/BaseClasses/PartialIntegralError.mo
+1: Name 'use_reset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_reset. Affected line: parameter Boolean use_reset = false "If true, reset port enabled" annotation(choices(checkBox=true));
+
+2: Name 'reset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: reset. Affected line: Modelica.Blocks.Interfaces.BooleanInput reset if use_reset "Conditional connector of reset signal" annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=90, origin={0,-120})));
+
+
+AixLib/Utilities/KPIs/Examples/IntegralErrors.mo
+1: Name 'conZero' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant conZero(k=0) "Constant zero as reference value" annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
