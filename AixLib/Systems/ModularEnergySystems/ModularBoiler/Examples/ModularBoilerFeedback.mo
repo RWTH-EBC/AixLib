@@ -5,7 +5,7 @@ model ModularBoilerFeedback
   parameter Integer k=2 "number of consumers";
   package MediumWater = AixLib.Media.Water;
 
-  ModularBoiler modularBoiler(
+  AixLib.Systems.ModularEnergySystems.ModularBoiler.ModularBoiler modularBoiler(
     hasPump=true,
     Q_flow_nominal=50000,
     kFeedBack=1,
