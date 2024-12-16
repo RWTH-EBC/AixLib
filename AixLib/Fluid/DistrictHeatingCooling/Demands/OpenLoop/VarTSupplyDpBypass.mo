@@ -58,7 +58,7 @@ public
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={-50,40})));
+        origin={-48,64})));
   Modelica.Blocks.Sources.Constant temRet(k=TReturn)
     "Temperature of return line in °C" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
@@ -142,23 +142,22 @@ equation
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -60},{80,-60}}, color={0,127,255}));
   connect(temRet.y, deltaT.u2)
-    annotation (Line(points={{-79,46},{-62,46}}, color={0,0,127}));
+    annotation (Line(points={{-79,46},{-66,46},{-66,70},{-60,70}},
+                                                 color={0,0,127}));
   connect(gain.y, hea2MasFlo.u2)
     annotation (Line(points={{-5,64},{-2,64},{-2,58}}, color={0,0,127}));
   connect(Q_flow_input, hea2MasFlo.u1)
     annotation (Line(points={{-108,80},{10,80},{10,58}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
     annotation (Line(points={{52,-60},{60,-60}}, color={0,127,255}));
-  connect(changeSign.y, sink.m_flow_in)
-    annotation (Line(points={{0,-47},{0,-52},{-18,-52}}, color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
     annotation (Line(points={{-54,-60},{-40,-60}}, color={0,127,255}));
-  connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-64,-49},{-64,-8},
-          {-64,34},{-62,34}}, color={0,0,127}));
+  connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-64,-49},{-64,-46},{-60,-46},{-60,58}},
+                              color={0,0,127}));
   connect(max.y, gain.u)
     annotation (Line(points={{-29,6},{-28,6},{-28,64}}, color={0,0,127}));
-  connect(deltaT.y, max.u1) annotation (Line(points={{-39,40},{-46,40},{-46,12},
-          {-52,12}}, color={0,0,127}));
+  connect(deltaT.y, max.u1) annotation (Line(points={{-37,64},{-37,18},{-52,18},{-52,12}},
+                     color={0,0,127}));
   connect(mindeltaT.y, max.u2) annotation (Line(points={{-103,-28},{-78,-28},{
           -78,0},{-52,0}}, color={0,0,127}));
   connect(temRet_nominal.y, min.u1)
@@ -186,8 +185,8 @@ equation
   connect(switch1.y, source.T_in) annotation (Line(points={{117,32},{124,32},{
           124,-64},{30,-64}},
                           color={0,0,127}));
-  connect(changeSign.y, source.m_flow_in)
-    annotation (Line(points={{0,-47},{0,-68},{30,-68}}, color={0,0,127}));
+  connect(changeSign.y, sink.m_flow_in) annotation (Line(points={{-1.9984e-15,-47},{-1.9984e-15,-52},{-18,-52}}, color={0,0,127}));
+  connect(smoothMax.y, source.m_flow_in) annotation (Line(points={{-1.9984e-15,-15},{-1.9984e-15,-16},{12,-16},{12,-68},{30,-68}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
