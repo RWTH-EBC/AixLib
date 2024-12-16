@@ -1,19 +1,205 @@
 ﻿[
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat",
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_TransmittedSolarRadiation_room"
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF",
+    "simulation": {
+      "elapsed_time": 34.2,
+      "final_time": 31539600.0,
+      "jacobians": 123327,
+      "start_time": 0,
+      "state_events": 366,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF",
+    "simulation": {
+      "elapsed_time": 62.5,
+      "final_time": 31539600.0,
+      "jacobians": 143407,
+      "start_time": 0,
+      "state_events": 366,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_TransmittedSolarRadiation_room"
       ],
       "success_rate": 1.0,
       "t_err_max": [
@@ -82,13 +268,271 @@
         null
       ]
     },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430",
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240",
     "simulation": {
-      "elapsed_time": 108,
+      "elapsed_time": 41.4,
       "final_time": 31539600.0,
-      "jacobians": 153601,
+      "jacobians": 125985,
       "start_time": 0,
-      "state_events": 881,
+      "state_events": 1016,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.mat_thermalZone.TAir"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "thermalZone.TAir"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange",
+    "simulation": {
+      "elapsed_time": 7.85526,
+      "final_time": 31536000.0,
+      "jacobians": 20799,
+      "start_time": 0,
+      "state_events": 2972,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF",
+    "simulation": {
+      "elapsed_time": 46.8,
+      "final_time": 31539600.0,
+      "jacobians": 140274,
+      "start_time": 0,
+      "state_events": 366,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat_multizone.TAir[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat_multizone.zone[1].X_w"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1
+      ],
+      "variables": [
+        "multizone.TAir[1]",
+        "multizone.zone[1].X_w"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility",
+    "simulation": {
+      "elapsed_time": 224.461,
+      "final_time": 31536000.0,
+      "jacobians": 29897,
+      "start_time": 0,
+      "state_events": 6201,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220",
+    "simulation": {
+      "elapsed_time": 41.3,
+      "final_time": 31539600.0,
+      "jacobians": 124345,
+      "start_time": 0,
+      "state_events": 991,
       "success": true
     }
   },
@@ -171,7 +615,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
     "simulation": {
-      "elapsed_time": 1.68,
+      "elapsed_time": 0.887,
       "final_time": 25920000.0,
       "jacobians": 27,
       "start_time": 0,
@@ -181,238 +625,40 @@
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat",
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_TransmittedSolarRadiation_room"
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat_thermalZone.TAir",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat_thermalZone.X_w"
       ],
       "success_rate": 1.0,
       "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
         0.0,
         0.0
       ],
       "test_passed": [
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1
       ],
       "var_groups": [
         0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280",
-    "simulation": {
-      "elapsed_time": 160,
-      "final_time": 31539600.0,
-      "jacobians": 222040,
-      "start_time": 0,
-      "state_events": 1757,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_meanMeasuredTemp",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_roomTemp",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_coolingPower",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_heatingPower"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
         1
       ],
-      "var_groups": [
-        0,
-        0,
-        1,
-        2
-      ],
       "variables": [
-        "meanMeasuredTemp",
-        "roomTemp",
-        "coolingPower",
-        "heatingPower"
+        "thermalZone.TAir",
+        "thermalZone.X_w"
       ],
       "warnings": [
-        null,
-        null,
         null,
         null
       ]
     },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse",
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool",
     "simulation": {
-      "elapsed_time": 10.5,
+      "elapsed_time": 67.3998,
       "final_time": 31536000.0,
-      "jacobians": 95719,
+      "jacobians": 25950,
       "start_time": 0,
-      "state_events": 365,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920",
-    "simulation": {
-      "elapsed_time": 187,
-      "final_time": 31539600.0,
-      "jacobians": 226779,
-      "start_time": 0,
-      "state_events": 950,
+      "state_events": 3931,
       "success": true
     }
   },
@@ -501,7 +747,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case250",
     "simulation": {
-      "elapsed_time": 95.9,
+      "elapsed_time": 51.2,
       "final_time": 31539600.0,
       "jacobians": 159373,
       "start_time": 0,
@@ -528,309 +774,6 @@
       "start_time": 0.0,
       "state_events": 0,
       "success": false
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230",
-    "simulation": {
-      "elapsed_time": 96.5,
-      "final_time": 31539600.0,
-      "jacobians": 142453,
-      "start_time": 0,
-      "state_events": 986,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat_multizone.TAir[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat_multizone.CO2Con[1]"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        1
-      ],
-      "variables": [
-        "multizone.TAir[1]",
-        "multizone.CO2Con[1]"
-      ],
-      "warnings": [
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2",
-    "simulation": {
-      "elapsed_time": 28.9307,
-      "final_time": 31536000.0,
-      "jacobians": 11750,
-      "start_time": 0,
-      "state_events": 2984,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat_thermalZone.TAir",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool.mat_thermalZone.X_w"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        1
-      ],
-      "variables": [
-        "thermalZone.TAir",
-        "thermalZone.X_w"
-      ],
-      "warnings": [
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool",
-    "simulation": {
-      "elapsed_time": 33.633,
-      "final_time": 31536000.0,
-      "jacobians": 25950,
-      "start_time": 0,
-      "state_events": 3931,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat_thermalZone.TAir",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat_thermalZone.X_w"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        1
-      ],
-      "variables": [
-        "thermalZone.TAir",
-        "thermalZone.X_w"
-      ],
-      "warnings": [
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir",
-    "simulation": {
-      "elapsed_time": 4.99922,
-      "final_time": 31536000.0,
-      "jacobians": 20421,
-      "start_time": 0,
-      "state_events": 2938,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600",
-    "simulation": {
-      "elapsed_time": 172,
-      "final_time": 31539600.0,
-      "jacobians": 230765,
-      "start_time": 0,
-      "state_events": 1659,
-      "success": true
     }
   },
   {
@@ -918,7 +861,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case400",
     "simulation": {
-      "elapsed_time": 63.1,
+      "elapsed_time": 68.1,
       "final_time": 31539600.0,
       "jacobians": 115951,
       "start_time": 0,
@@ -928,21 +871,23 @@
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat",
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[2]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[3]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[4]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[5]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[2]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[3]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[4]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[5]"
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430.mat_TransmittedSolarRadiation_room"
       ],
       "success_rate": 1.0,
       "t_err_max": [
+        0.0,
         0.0,
         0.0,
         0.0,
@@ -964,33 +909,37 @@
         1,
         1,
         1,
+        1,
         1
       ],
       "var_groups": [
         0,
         0,
         0,
-        0,
-        0,
         1,
         1,
         1,
-        1,
-        1
+        2,
+        2,
+        3,
+        3,
+        4
       ],
       "variables": [
-        "multizone.TAir[1]",
-        "multizone.TAir[2]",
-        "multizone.TAir[3]",
-        "multizone.TAir[4]",
-        "multizone.TAir[5]",
-        "multizone.PHeater[1]",
-        "multizone.PHeater[2]",
-        "multizone.PHeater[3]",
-        "multizone.PHeater[4]",
-        "multizone.PHeater[5]"
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
       ],
       "warnings": [
+        null,
         null,
         null,
         null,
@@ -1003,27 +952,41 @@
         null
       ]
     },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped",
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430",
     "simulation": {
-      "elapsed_time": 5.3189,
-      "final_time": 864000,
-      "jacobians": 803,
+      "elapsed_time": 50.1,
+      "final_time": 31539600.0,
+      "jacobians": 153601,
       "start_time": 0,
-      "state_events": 131,
+      "state_events": 881,
       "success": true
     }
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat",
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_TRoom",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_Q_flowToRoomConv",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_Q_flowToRoomRad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_m_flowHC"
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_TransmittedSolarRadiation_room"
       ],
       "success_rate": 1.0,
       "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
         0.0,
         0.0,
         0.0,
@@ -1033,34 +996,320 @@
         1,
         1,
         1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         1
       ],
       "var_groups": [
         0,
+        0,
+        0,
         1,
         1,
-        2
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
       ],
       "variables": [
-        "TRoom",
-        "Q_flowToRoomConv",
-        "Q_flowToRoomRad",
-        "m_flowHC"
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
       ],
       "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
         null
       ]
     },
-    "model": "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode",
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395",
     "simulation": {
-      "elapsed_time": 1.3,
-      "final_time": 86400,
-      "jacobians": 361,
+      "elapsed_time": 30.9,
+      "final_time": 31539600.0,
+      "jacobians": 101321,
       "start_time": 0,
-      "state_events": 2,
+      "state_events": 651,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810",
+    "simulation": {
+      "elapsed_time": 85.1,
+      "final_time": 31539600.0,
+      "jacobians": 191551,
+      "start_time": 0,
+      "state_events": 1113,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.mat_thermalZone.TAir"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0
+      ],
+      "test_passed": [
+        1
+      ],
+      "var_groups": [
+        0
+      ],
+      "variables": [
+        "thermalZone.TAir"
+      ],
+      "warnings": [
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone",
+    "simulation": {
+      "elapsed_time": 22.396,
+      "final_time": 31536000.0,
+      "jacobians": 20407,
+      "start_time": 0,
+      "state_events": 2938,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940",
+    "simulation": {
+      "elapsed_time": 192,
+      "final_time": 31539600.0,
+      "jacobians": 216549,
+      "start_time": 0,
+      "state_events": 1461,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat_meanMeasuredTemp",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat_roomTemp"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0
+      ],
+      "variables": [
+        "meanMeasuredTemp",
+        "roomTemp"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2",
+    "simulation": {
+      "elapsed_time": 92.2,
+      "final_time": 3546000.0,
+      "jacobians": 51738,
+      "start_time": 0,
+      "state_events": 74,
       "success": true
     }
   },
@@ -1125,7 +1374,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950",
     "simulation": {
-      "elapsed_time": 108,
+      "elapsed_time": 68.9,
       "final_time": 31539600.0,
       "jacobians": 157652,
       "start_time": 0,
@@ -1218,7 +1467,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case410",
     "simulation": {
-      "elapsed_time": 86.4,
+      "elapsed_time": 41.1,
       "final_time": 31539600.0,
       "jacobians": 125309,
       "start_time": 0,
@@ -1228,19 +1477,19 @@
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat",
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_TransmittedSolarRadiation_room"
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_TransmittedSolarRadiation_room"
       ],
       "success_rate": 1.0,
       "t_err_max": [
@@ -1284,10 +1533,10 @@
       ],
       "variables": [
         "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "FreeFloatRoomTemperature",
+        "AnnualHeatingLoad",
         "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
         "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "FreeFloatRoomTemperature",
+        "AnnualCoolingLoad",
         "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
         "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
         "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
@@ -1309,661 +1558,52 @@
         null
       ]
     },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF",
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210",
     "simulation": {
-      "elapsed_time": 67.7,
+      "elapsed_time": 42.8,
       "final_time": 31539600.0,
-      "jacobians": 124874,
+      "jacobians": 126068,
       "start_time": 0,
-      "state_events": 366,
+      "state_events": 994,
       "success": true
     }
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat",
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZone.TAir",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZoneMoistAir.TAir",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZoneMoistAir.X_w"
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat_multizone.TAir[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2.mat_multizone.CO2Con[1]"
       ],
       "success_rate": 1.0,
       "t_err_max": [
-        0.0,
         0.0,
         0.0
       ],
       "test_passed": [
         1,
-        1,
         1
       ],
       "var_groups": [
         0,
-        1,
-        2
+        1
       ],
       "variables": [
-        "thermalZone.TAir",
-        "thermalZoneMoistAir.TAir",
-        "thermalZoneMoistAir.X_w"
+        "multizone.TAir[1]",
+        "multizone.CO2Con[1]"
       ],
       "warnings": [
-        null,
         null,
         null
       ]
     },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir",
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2",
     "simulation": {
-      "elapsed_time": 25.9737,
+      "elapsed_time": 81.9643,
       "final_time": 31536000.0,
-      "jacobians": 20410,
+      "jacobians": 11750,
       "start_time": 0,
-      "state_events": 2934,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240",
-    "simulation": {
-      "elapsed_time": 75,
-      "final_time": 31539600.0,
-      "jacobians": 125985,
-      "start_time": 0,
-      "state_events": 1016,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.TAir",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.X_w",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.CO2Con"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        1,
-        2
-      ],
-      "variables": [
-        "thermalZone.TAir",
-        "thermalZone.X_w",
-        "thermalZone.CO2Con"
-      ],
-      "warnings": [
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange",
-    "simulation": {
-      "elapsed_time": 17.3891,
-      "final_time": 31536000.0,
-      "jacobians": 20815,
-      "start_time": 0,
-      "state_events": 2980,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270",
-    "simulation": {
-      "elapsed_time": 172,
-      "final_time": 31539600.0,
-      "jacobians": 230553,
-      "start_time": 0,
-      "state_events": 1778,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440",
-    "simulation": {
-      "elapsed_time": 152,
-      "final_time": 31539600.0,
-      "jacobians": 222204,
-      "start_time": 0,
-      "state_events": 1629,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220",
-    "simulation": {
-      "elapsed_time": 82.3,
-      "final_time": 31539600.0,
-      "jacobians": 124345,
-      "start_time": 0,
-      "state_events": 991,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640",
-    "simulation": {
-      "elapsed_time": 208,
-      "final_time": 31539600.0,
-      "jacobians": 264096,
-      "start_time": 0,
-      "state_events": 2787,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940",
-    "simulation": {
-      "elapsed_time": 150,
-      "final_time": 31539600.0,
-      "jacobians": 216549,
-      "start_time": 0,
-      "state_events": 1461,
+      "state_events": 2984,
       "success": true
     }
   },
@@ -2082,7 +1722,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270",
     "simulation": {
-      "elapsed_time": 1.72,
+      "elapsed_time": 0.887,
       "final_time": 86400,
       "jacobians": 1001,
       "start_time": 0,
@@ -2092,30 +1732,14 @@
   },
   {
     "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat",
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF.mat_TransmittedSolarRadiation_room"
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZone.TAir",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZoneMoistAir.TAir",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir.mat_thermalZoneMoistAir.X_w"
       ],
       "success_rate": 1.0,
       "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
         0.0,
         0.0,
         0.0
@@ -2123,1191 +1747,31 @@
       "test_passed": [
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1
       ],
       "var_groups": [
         0,
-        0,
-        0,
         1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
+        2
       ],
       "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
+        "thermalZone.TAir",
+        "thermalZoneMoistAir.TAir",
+        "thermalZoneMoistAir.X_w"
       ],
       "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null
       ]
     },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF",
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir",
     "simulation": {
-      "elapsed_time": 97,
-      "final_time": 31539600.0,
-      "jacobians": 140274,
-      "start_time": 0,
-      "state_events": 366,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[2]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[3]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[4]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[5]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[2]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[3]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[4]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[5]"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0,
-        14688000.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "variables": [
-        "multizone.TAir[1]",
-        "multizone.TAir[2]",
-        "multizone.TAir[3]",
-        "multizone.TAir[4]",
-        "multizone.TAir[5]",
-        "multizone.PCooler[1]",
-        "multizone.PCooler[2]",
-        "multizone.PCooler[3]",
-        "multizone.PCooler[4]",
-        "multizone.PCooler[5]"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled",
-    "simulation": {
-      "elapsed_time": 0.666597,
-      "final_time": 15552000.0,
-      "jacobians": 312,
-      "start_time": 14688000.0,
-      "state_events": 70,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange.mat_thermalZone.TAir"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0
-      ],
-      "test_passed": [
-        1
-      ],
-      "var_groups": [
-        0
-      ],
-      "variables": [
-        "thermalZone.TAir"
-      ],
-      "warnings": [
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange",
-    "simulation": {
-      "elapsed_time": 5.37144,
+      "elapsed_time": 13.7496,
       "final_time": 31536000.0,
-      "jacobians": 20799,
+      "jacobians": 20410,
       "start_time": 0,
-      "state_events": 2972,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat",
-      "funnel_dirs": [],
-      "success_rate": 0,
-      "t_err_max": [],
-      "test_passed": [],
-      "var_groups": [],
-      "variables": [],
-      "warnings": []
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620",
-    "simulation": {
-      "elapsed_time": 0,
-      "final_time": 31539600.0,
-      "jacobians": 0,
-      "start_time": 0.0,
-      "state_events": 0,
-      "success": false
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900",
-    "simulation": {
-      "elapsed_time": 148,
-      "final_time": 31539600.0,
-      "jacobians": 204912,
-      "start_time": 0,
-      "state_events": 1215,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420",
-    "simulation": {
-      "elapsed_time": 83.5,
-      "final_time": 31539600.0,
-      "jacobians": 126055,
-      "start_time": 0,
-      "state_events": 761,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF",
-    "simulation": {
-      "elapsed_time": 69.9,
-      "final_time": 31539600.0,
-      "jacobians": 143407,
-      "start_time": 0,
-      "state_events": 366,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat_multizone.TAir[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility.mat_multizone.zone[1].X_w"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        1
-      ],
-      "variables": [
-        "multizone.TAir[1]",
-        "multizone.zone[1].X_w"
-      ],
-      "warnings": [
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility",
-    "simulation": {
-      "elapsed_time": 103.161,
-      "final_time": 31536000.0,
-      "jacobians": 29897,
-      "start_time": 0,
-      "state_events": 6201,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810",
-    "simulation": {
-      "elapsed_time": 117,
-      "final_time": 31539600.0,
-      "jacobians": 191551,
-      "start_time": 0,
-      "state_events": 1113,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        2,
-        2,
-        3
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650",
-    "simulation": {
-      "elapsed_time": 126,
-      "final_time": 31539600.0,
-      "jacobians": 197882,
-      "start_time": 0,
-      "state_events": 986,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone.mat_thermalZone.TAir"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0
-      ],
-      "test_passed": [
-        1
-      ],
-      "var_groups": [
-        0
-      ],
-      "variables": [
-        "thermalZone.TAir"
-      ],
-      "warnings": [
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone",
-    "simulation": {
-      "elapsed_time": 9.29218,
-      "final_time": 31536000.0,
-      "jacobians": 20407,
-      "start_time": 0,
-      "state_events": 2938,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395",
-    "simulation": {
-      "elapsed_time": 54.8,
-      "final_time": 31539600.0,
-      "jacobians": 101321,
-      "start_time": 0,
-      "state_events": 651,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[1]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[2]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[3]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[4]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[5]",
-        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_weaDat.weaBus.TDryBul"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        1
-      ],
-      "variables": [
-        "multizone.TAir[1]",
-        "multizone.TAir[2]",
-        "multizone.TAir[3]",
-        "multizone.TAir[4]",
-        "multizone.TAir[5]",
-        "weaDat.weaBus.TDryBul"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.ReducedOrder.Examples.Multizone",
-    "simulation": {
-      "elapsed_time": 1.58874,
-      "final_time": 864000,
-      "jacobians": 325,
-      "start_time": 0,
-      "state_events": 83,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat_meanMeasuredTemp",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2.mat_roomTemp"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0
-      ],
-      "variables": [
-        "meanMeasuredTemp",
-        "roomTemp"
-      ],
-      "warnings": [
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2",
-    "simulation": {
-      "elapsed_time": 159,
-      "final_time": 3546000.0,
-      "jacobians": 51738,
-      "start_time": 0,
-      "state_events": 74,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320",
-    "simulation": {
-      "elapsed_time": 171,
-      "final_time": 31539600.0,
-      "jacobians": 225834,
-      "start_time": 0,
-      "state_events": 1683,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_AnnualHeatingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_AnnualCoolingLoad",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "AnnualHeatingLoad",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "AnnualCoolingLoad",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210",
-    "simulation": {
-      "elapsed_time": 85.5,
-      "final_time": 31539600.0,
-      "jacobians": 126068,
-      "start_time": 0,
-      "state_events": 994,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_FreeFloatRoomTemperature",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_Room.thermRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_Room.starRoom.T",
-        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF.mat_TransmittedSolarRadiation_room"
-      ],
-      "success_rate": 1.0,
-      "t_err_max": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
-      ],
-      "variables": [
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
-        "FreeFloatRoomTemperature",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
-        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
-        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
-        "Room.thermRoom.T",
-        "Room.starRoom.T",
-        "TransmittedSolarRadiation_room"
-      ],
-      "warnings": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF",
-    "simulation": {
-      "elapsed_time": 77.3,
-      "final_time": 31539600.0,
-      "jacobians": 123327,
-      "start_time": 0,
-      "state_events": 366,
+      "state_events": 2934,
       "success": true
     }
   },
@@ -3390,11 +1854,104 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped",
     "simulation": {
-      "elapsed_time": 5.79895,
+      "elapsed_time": 3.8754,
       "final_time": 864000,
       "jacobians": 787,
       "start_time": 0,
       "state_events": 131,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920",
+    "simulation": {
+      "elapsed_time": 231,
+      "final_time": 31539600.0,
+      "jacobians": 226779,
+      "start_time": 0,
+      "state_events": 950,
       "success": true
     }
   },
@@ -3483,11 +2040,1526 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case800",
     "simulation": {
-      "elapsed_time": 94,
+      "elapsed_time": 45.7,
       "final_time": 31539600.0,
       "jacobians": 141517,
       "start_time": 0,
       "state_events": 589,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320",
+    "simulation": {
+      "elapsed_time": 93.4,
+      "final_time": 31539600.0,
+      "jacobians": 225834,
+      "start_time": 0,
+      "state_events": 1683,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280",
+    "simulation": {
+      "elapsed_time": 89.3,
+      "final_time": 31539600.0,
+      "jacobians": 222040,
+      "start_time": 0,
+      "state_events": 1757,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600",
+    "simulation": {
+      "elapsed_time": 161,
+      "final_time": 31539600.0,
+      "jacobians": 230765,
+      "start_time": 0,
+      "state_events": 1659,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[2]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[3]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[4]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_multizone.TAir[5]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat_weaDat.weaBus.TDryBul"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "variables": [
+        "multizone.TAir[1]",
+        "multizone.TAir[2]",
+        "multizone.TAir[3]",
+        "multizone.TAir[4]",
+        "multizone.TAir[5]",
+        "weaDat.weaBus.TDryBul"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.Multizone",
+    "simulation": {
+      "elapsed_time": 1.42164,
+      "final_time": 864000,
+      "jacobians": 325,
+      "start_time": 0,
+      "state_events": 83,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[2]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[3]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[4]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.TAir[5]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[2]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[3]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[4]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped.mat_multizone.PHeater[5]"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "multizone.TAir[1]",
+        "multizone.TAir[2]",
+        "multizone.TAir[3]",
+        "multizone.TAir[4]",
+        "multizone.TAir[5]",
+        "multizone.PHeater[1]",
+        "multizone.PHeater[2]",
+        "multizone.PHeater[3]",
+        "multizone.PHeater[4]",
+        "multizone.PHeater[5]"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped",
+    "simulation": {
+      "elapsed_time": 6.39626,
+      "final_time": 864000,
+      "jacobians": 803,
+      "start_time": 0,
+      "state_events": 131,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620",
+    "simulation": {
+      "elapsed_time": 249,
+      "final_time": 31539600.0,
+      "jacobians": 252504,
+      "start_time": 0,
+      "state_events": 1559,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270",
+    "simulation": {
+      "elapsed_time": 96.9,
+      "final_time": 31539600.0,
+      "jacobians": 230553,
+      "start_time": 0,
+      "state_events": 1778,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_meanMeasuredTemp",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_roomTemp",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_coolingPower",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse.mat_heatingPower"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "variables": [
+        "meanMeasuredTemp",
+        "roomTemp",
+        "coolingPower",
+        "heatingPower"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse",
+    "simulation": {
+      "elapsed_time": 14.4,
+      "final_time": 31536000.0,
+      "jacobians": 95719,
+      "start_time": 0,
+      "state_events": 365,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440",
+    "simulation": {
+      "elapsed_time": 86.9,
+      "final_time": 31539600.0,
+      "jacobians": 222204,
+      "start_time": 0,
+      "state_events": 1629,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_FreeFloatRoomTemperature",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "FreeFloatRoomTemperature",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF",
+    "simulation": {
+      "elapsed_time": 40,
+      "final_time": 31539600.0,
+      "jacobians": 124874,
+      "start_time": 0,
+      "state_events": 366,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[2]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[3]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[4]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.TAir[5]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[1]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[2]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[3]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[4]",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled.mat_multizone.PCooler[5]"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0,
+        14688000.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "multizone.TAir[1]",
+        "multizone.TAir[2]",
+        "multizone.TAir[3]",
+        "multizone.TAir[4]",
+        "multizone.TAir[5]",
+        "multizone.PCooler[1]",
+        "multizone.PCooler[2]",
+        "multizone.PCooler[3]",
+        "multizone.PCooler[4]",
+        "multizone.PCooler[5]"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled",
+    "simulation": {
+      "elapsed_time": 0.969812,
+      "final_time": 15552000.0,
+      "jacobians": 312,
+      "start_time": 14688000.0,
+      "state_events": 70,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.TAir",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.X_w",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange.mat_thermalZone.CO2Con"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2
+      ],
+      "variables": [
+        "thermalZone.TAir",
+        "thermalZone.X_w",
+        "thermalZone.CO2Con"
+      ],
+      "warnings": [
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange",
+    "simulation": {
+      "elapsed_time": 17.4672,
+      "final_time": 31536000.0,
+      "jacobians": 20815,
+      "start_time": 0,
+      "state_events": 2980,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230",
+    "simulation": {
+      "elapsed_time": 50.3,
+      "final_time": 31539600.0,
+      "jacobians": 142453,
+      "start_time": 0,
+      "state_events": 986,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900",
+    "simulation": {
+      "elapsed_time": 109,
+      "final_time": 31539600.0,
+      "jacobians": 204912,
+      "start_time": 0,
+      "state_events": 1215,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        3
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650",
+    "simulation": {
+      "elapsed_time": 132,
+      "final_time": 31539600.0,
+      "jacobians": 197882,
+      "start_time": 0,
+      "state_events": 986,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420",
+    "simulation": {
+      "elapsed_time": 41.9,
+      "final_time": 31539600.0,
+      "jacobians": 126055,
+      "start_time": 0,
+      "state_events": 761,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat_thermalZone.TAir",
+        "funnel_comp/AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir.mat_thermalZone.X_w"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1
+      ],
+      "variables": [
+        "thermalZone.TAir",
+        "thermalZone.X_w"
+      ],
+      "warnings": [
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir",
+    "simulation": {
+      "elapsed_time": 7.85374,
+      "final_time": 31536000.0,
+      "jacobians": 20421,
+      "start_time": 0,
+      "state_events": 2938,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_TRoom",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_Q_flowToRoomConv",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_Q_flowToRoomRad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode.mat_m_flowHC"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "variables": [
+        "TRoom",
+        "Q_flowToRoomConv",
+        "Q_flowToRoomRad",
+        "m_flowHC"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode",
+    "simulation": {
+      "elapsed_time": 0.675,
+      "final_time": 86400,
+      "jacobians": 361,
+      "start_time": 0,
+      "state_events": 2,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_AnnualHeatingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_AnnualCoolingLoad",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_Room.thermRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_Room.starRoom.T",
+        "funnel_comp/AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640.mat_TransmittedSolarRadiation_room"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4
+      ],
+      "variables": [
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit",
+        "AnnualHeatingLoad",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit",
+        "AnnualCoolingLoad",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit",
+        "checkResultsAccordingToASHRAEHeatingOrTempMax.satisfied",
+        "checkResultsAccordingToASHRAECoolingOrTempMin.satisfied",
+        "Room.thermRoom.T",
+        "Room.starRoom.T",
+        "TransmittedSolarRadiation_room"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640",
+    "simulation": {
+      "elapsed_time": 172,
+      "final_time": 31539600.0,
+      "jacobians": 264096,
+      "start_time": 0,
+      "state_events": 2787,
       "success": true
     }
   }
