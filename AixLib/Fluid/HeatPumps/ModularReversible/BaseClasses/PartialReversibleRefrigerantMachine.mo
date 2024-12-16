@@ -383,7 +383,6 @@ partial model PartialReversibleRefrigerantMachine
         origin={110,30})));
 // To avoid using the bus, set the section below to protected
 // <!-- @include_Buildings @include_IDEAS @include_BuildingSystems
-protected
 // -->
   RefrigerantMachineControlBus sigBus
     "Bus with model outputs and possibly inputs" annotation (Placement(transformation(

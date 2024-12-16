@@ -4,7 +4,7 @@ convertClear();
 
 
 // Rename Buffer and standard storage
-//convertClass("AixLib.Fluid.Storage.BufferStorage", "AixLib.Fluid.Storage.StorageDetailed");
+convertClass("AixLib.Fluid.Storage.BufferStorage", "AixLib.Fluid.Storage.StorageDetailed");
 convertClass("AixLib.Fluid.Storage.Storage", "AixLib.Fluid.Storage.StorageSimple");
 
 //Rename data base due to renaming of buffer storage
