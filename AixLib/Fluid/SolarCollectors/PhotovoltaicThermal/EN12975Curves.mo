@@ -2,6 +2,7 @@
 model EN12975Curves
   "Collector approach based on EN12975, efficiency based on curves"
   extends AixLib.Fluid.SolarCollectors.EN12975(
+    redeclare package Medium = AixLib.Media.Water,
     final nPanels=0,
     nColType=AixLib.Fluid.SolarCollectors.Types.NumberSelection.Area,
     final per=AixLib.Fluid.SolarCollectors.Data.GenericEN12975(
@@ -18,7 +19,8 @@ model EN12975Curves
     eta0=perPVT.eta0,
     a1=perPVT.a1,
     a2=perPVT.a2));
-  replaceable Data.PhotovoltaicThermalBaseDataDefinition perPVT
+  replaceable parameter AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.PhotovoltaicThermalBaseDataDefinition perPVT
+    constrainedby AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.PhotovoltaicThermalBaseDataDefinition
     "Performance data for PV-Thermal"
     annotation (choicesAllMatching=true, Placement(transformation(extent={{40,-78},
             {54,-64}})));

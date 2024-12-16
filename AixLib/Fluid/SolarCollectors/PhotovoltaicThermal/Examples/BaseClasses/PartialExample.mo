@@ -1,5 +1,5 @@
 within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Examples.BaseClasses;
-model PartialExample
+partial model PartialExample
   "Example to demonstrate the function of the photovoltaic thermal collector model"
   replaceable package Medium = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model";
@@ -8,8 +8,7 @@ model PartialExample
   parameter Modelica.Units.SI.PressureDifference dp_nominal
     "Nominal pressure drop";
   Sources.MassFlowSource_T
-                      sou(redeclare package Medium = Medium, m_flow=
-        m_flow_nominal)
+                      sou(redeclare package Medium = Medium)
     "Source model"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Sources.Boundary_pT sin(redeclare package Medium = Medium, p=2e5)

@@ -3,7 +3,7 @@ record Unglazed "Unglazed PVT collector"
   extends PhotovoltaicThermalBaseDataDefinition(
     etaEle_zero=0.1052,
     mEle=0.3848,
-    eta=0.672045005,
+    eta0=0.672045005,
     a1=20.6360,
     a2=6.17E-04);
   annotation(Documentation(info="<html><h4>
