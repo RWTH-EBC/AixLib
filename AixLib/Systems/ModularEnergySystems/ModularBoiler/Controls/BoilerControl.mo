@@ -66,15 +66,6 @@ model BoilerControl "Master controller that holds all other controls"
   AixLib.Controls.Interfaces.BoilerControlBus
                               boilerControlBus
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  heatingCurve heatingCurveControl1(
-    redeclare final function HeatingCurveFunction = HeatingCurveFunction,
-    final use_tableData=use_tableData,
-    final declination=declination,
-    final day_hour=day_hour,
-    final night_hour=night_hour,
-    final zerTim=zerTim,
-    final TOffset=TOffset)          if TFlowByHeaCur
-    annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));
   FeedbackControl feedbackControl(
     TRetNom=TRetNom,
     final k=kFeedBack,
@@ -88,6 +79,20 @@ model BoilerControl "Master controller that holds all other controls"
     final yMax=1,
     final yMin=FirRatMin)
     annotation (Placement(transformation(extent={{-20,6},{0,26}})));
+ AixLib.Controls.SetPoints.HeatingCurve heatingCurve123(
+    final TOffset=TOffset,
+    final use_dynTRoom=false,
+    final zerTim=zerTim,
+    final day_hour=day_hour,
+    final night_hour=night_hour,
+    final heatingCurveRecord=
+        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10
+        (),
+    final declination=declination,
+    redeclare function HeatingCurveFunction = HeatingCurveFunction,
+    final use_tableData=use_tableData,
+    final TRoom_nominal=293.15) if TFlowByHeaCur
+    annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));
 equation
   connect(boilerControlBus.isOn, safteyControl.isOnSet) annotation (Line(
       points={{0,100},{0,100},{-38,100},{-38,50.4},{-20,50.4}},
@@ -97,22 +102,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.TAmbient, heatingCurveControl1.TAmb) annotation (
-      Line(
-      points={{0,100},{-100,100},{-100,-40},{-74,-40}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash),
-                      Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(heatingCurveControl1.TFlowSet, internalFirRatControl.TFlowSet)
-    annotation (Line(
-      points={{-53,-40},{-30,-40},{-30,16},{-22,16}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(safteyControl.isOn, firRatMinCheck.isOn) annotation (Line(points={{0.4,
           46},{40,46},{40,4.2},{46,4.2}}, color={255,0,255}));
   connect(internalFirRatControl.FirRatSet, firRatMinCheck.FirRatSet)
@@ -181,6 +170,17 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(boilerControlBus.TAmbient, heatingCurve123.T_oda) annotation (Line(
+      points={{0,100},{-100,100},{-100,-40},{-76,-40}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatingCurve123.TSet, internalFirRatControl.TFlowSet) annotation (
+      Line(points={{-53,-40},{-40,-40},{-40,16},{-22,16}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

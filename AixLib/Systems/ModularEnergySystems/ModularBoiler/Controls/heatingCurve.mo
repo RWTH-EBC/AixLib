@@ -22,7 +22,8 @@ model heatingCurve
     final day_hour=day_hour,
     final night_hour=night_hour,
     final heatingCurveRecord=
-        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10(),
+        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10
+        (),
     final declination=declination,
     redeclare function HeatingCurveFunction = HeatingCurveFunction,
     final use_tableData=use_tableData,
