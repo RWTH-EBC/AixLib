@@ -1,23 +1,14 @@
 within AixLib.Utilities.KPIs;
 model IntegralSquareError "Integral square error (ISE)"
-  extends AixLib.Utilities.KPIs.BaseClasses.PartialIntegralError;
-  Modelica.Blocks.Math.Feedback dif "Difference between u and ref"
-    annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
-  Modelica.Blocks.Continuous.Integrator intErr "Error integrator"
-    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  extends AixLib.Utilities.KPIs.BaseClasses.PartialIntegralError(
+  final use_reset=false);
   Modelica.Blocks.Math.Product pro "Square of error"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
 equation
-  connect(u, dif.u1)
-    annotation (Line(points={{-120,60},{-68,60}}, color={0,0,127}));
-  connect(ref, dif.u2)
-    annotation (Line(points={{-120,-60},{-60,-60},{-60,52}}, color={0,0,127}));
-  connect(intErr.y, y)
-    annotation (Line(points={{81,0},{110,0}}, color={0,0,127}));
-  connect(dif.y, pro.u1) annotation (Line(points={{-51,60},{-40,60},{-40,6},{
-          -22,6}}, color={0,0,127}));
-  connect(dif.y, pro.u2) annotation (Line(points={{-51,60},{-40,60},{-40,-6},{
-          -22,-6}}, color={0,0,127}));
+  connect(dif.y, pro.u1) annotation (Line(points={{-71,60},{-60,60},{-60,0},{
+          -40,0},{-40,6},{-22,6}}, color={0,0,127}));
+  connect(dif.y, pro.u2) annotation (Line(points={{-71,60},{-60,60},{-60,0},{
+          -40,0},{-40,-6},{-22,-6}}, color={0,0,127}));
   connect(pro.y, intErr.u)
     annotation (Line(points={{1,0},{58,0}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
