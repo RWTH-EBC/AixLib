@@ -44,7 +44,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
   parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach."
   annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  Sensors.TemperatureTwoPort senTRet(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
     final tau=tau,
     final m_flow_nominal=m_flow_nominal,
@@ -57,7 +57,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_small=m_flow_small)
     "Temperature sensor of cold side of heat generator (return)"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
-  Sensors.TemperatureTwoPort senTSup(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(
     redeclare final package Medium = Medium,
     final tau=tau,
     final m_flow_nominal=m_flow_nominal,
@@ -70,7 +70,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_small=m_flow_small)
     "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
-  Sensors.MassFlowRate senMasFlo(
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(
     redeclare final package Medium = Medium,
     final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flwo rate"
@@ -81,7 +81,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,-50})));
-  MixingVolumes.MixingVolume vol(
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=m_flow_small,
@@ -91,7 +91,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final T_start=T_start)
     "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
-  FixedResistances.PressureDrop preDro(
+  AixLib.Fluid.FixedResistances.PressureDrop preDro(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final show_T=false,
