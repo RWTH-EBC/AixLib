@@ -7,5 +7,25 @@ AixLib/Utilities/KPIs/BaseClasses/PartialIntegralError.mo
 2: Name 'reset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: reset. Affected line: Modelica.Blocks.Interfaces.BooleanInput reset if use_reset "Conditional connector of reset signal" annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=90, origin={0,-120})));
 
 
+AixLib/Utilities/KPIs/IntegralTimer.mo
+1: Name 'conZero' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant conZero(k=0) "Constant zero" annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
+
+2: Name 'reset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: reset. Affected line: Modelica.Blocks.Interfaces.BooleanInput reset if use_reset "Conditional connector of reset signal" annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=90, origin={0,-120})));
+
+
 AixLib/Utilities/KPIs/Examples/IntegralErrors.mo
 1: Name 'conZero' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zero. Affected line: Modelica.Blocks.Sources.Constant conZero(k=0) "Constant zero as reference value" annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: IntegralAbsoluteError iae "IAE" annotation (Placement(transformation(extent={{0,80},{20,100}})));IntegralSquareError ise "ISE" annotation (Placement(transformation(extent={{0,40},{20,60}})));IntegralErrorWithFilter intErrPos(posFil=true) "Integral error positive" annotation (Placement(transformation(extent={{0,0},{20,20}})));IntegralErrorWithFilter intErrNeg(posFil=false) "Integral error negative" annotation (Placement(transformation(extent={{0,-40},{20,-20}})));IntegralErrorWithFilter intErrPosRes(use_reset=true, posFil=true) "Integral error positive with reset" annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
+
+3: Documentation too short. Affected line: Modelica.Blocks.Logical.Not not1 "Not" annotation (Placement(transformation(extent={{40,-80},{60,-60}})));
+
+
+AixLib/Utilities/KPIs/Examples/IntegralTimer.mo
+1: Name 'intlTim1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: intl. Affected line: AixLib.Utilities.KPIs.IntegralTimer intlTim1 "Integral timer 1" annotation (Placement(transformation(extent={{0,60},{20,80}})));
+
+2: Name 'intlTim2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: intl. Affected line: AixLib.Utilities.KPIs.IntegralTimer intlTim2 "Integral timer 2" annotation (Placement(transformation(extent={{0,0},{20,20}})));
+
+3: Name 'intlTimRes' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: intl. Affected line: AixLib.Utilities.KPIs.IntegralTimer intlTimRes(use_reset=true) "Integral timer with reset" annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
+
+4: Documentation too short. Affected line: Modelica.Blocks.Logical.Not not1 "Not" annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
