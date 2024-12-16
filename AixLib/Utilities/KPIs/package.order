@@ -1,5 +1,7 @@
+Temperature
 IntegralAbsoluteError
 IntegralErrorWithFilter
 IntegralSquareError
+IntegralTimer
 Examples
 BaseClasses
