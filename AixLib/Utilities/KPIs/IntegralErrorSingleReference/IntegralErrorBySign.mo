@@ -37,5 +37,13 @@ equation
           textString="IE"), Text(
           extent={{-80,0},{80,-80}},
           textColor={28,108,200},
-          textString=DynamicSelect("+", if posItg then "+" else "-"))}));
+          textString=DynamicSelect("+", if posItg then "+" else "-"))}),
+      Documentation(revisions="<html>
+<ul>
+  <li>
+    December 17, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end IntegralErrorBySign;

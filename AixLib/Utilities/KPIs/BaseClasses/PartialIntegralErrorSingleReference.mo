@@ -34,5 +34,13 @@ equation
   connect(booExpItgAct.y, swiErr.u2) annotation (Line(points={{-79,90},{-30,90},
           {-30,0},{-22,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    December 17, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end PartialIntegralErrorSingleReference;

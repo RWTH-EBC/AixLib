@@ -15,8 +15,7 @@ partial model PartialTemperatureAssessment
     annotation(Dialog(enable=use_itgTim), Evaluate=true, HideResult=true,
       choices(checkBox=true));
   Modelica.Blocks.Interfaces.RealInput T(
-    final unit="K", displayUnit="degC", final min=0)
-    "Temperature input"
+    final unit="K", displayUnit="degC", final min=0) "Temperature input"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput degSecOutUppBou(final unit="K.s")
     "Degree-second out of upper bound"
@@ -124,5 +123,13 @@ equation
       pattern=DynamicSelect(LinePattern.Dash,
         if resItgTimInBou then LinePattern.Solid else LinePattern.Dash)));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    December 17, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end PartialTemperatureAssessment;

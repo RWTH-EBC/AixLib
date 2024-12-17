@@ -34,4 +34,12 @@ equation
     // Set true if conditional connector disabled
     itgAct_internal = true;
   end if;
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    December 17, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end PartialIntegratorBase;

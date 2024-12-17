@@ -16,4 +16,12 @@ partial model PartialIntegralErrorDualReference
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
 equation
   assert(refUpp > refLow, "Dual references wrong (refUpp<=refLow)");
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    December 17, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end PartialIntegralErrorDualReference;
