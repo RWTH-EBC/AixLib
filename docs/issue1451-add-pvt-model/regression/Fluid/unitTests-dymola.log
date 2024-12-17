@@ -2,14 +2,6 @@ Regression tests are only run for the following package:
   AixLib.Fluid
 *** Warning: Unspecified initial conditions in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mos");'.
 
-*** Error: AixLib_Fluid_SolarCollectors_PhotovoltaicThermal_Examples_PhotovoltaicThermal.txt: Errors during result verification.
-           Absolute error = 4.642e+02 at t = 10501056.0 for pvt.PEle
-           Absolute error = 5.591e+01 at t = 10501056.0 for pvt.vol[1].T
-           Absolute error = 4.437e+01 at t = 10501056.0 for pvt.vol[2].T
-           Absolute error = 3.478e+01 at t = 10501056.0 for pvt.vol[3].T
-           Absolute error = 2.289e+03 at t = 10501056.0 for pvt.vol[1].heatPort.Q_flow
-           Absolute error = 1.907e+03 at t = 10501056.0 for pvt.vol[2].heatPort.Q_flow
-           Absolute error = 1.556e+03 at t = 10501056.0 for pvt.vol[3].heatPort.Q_flow
 *** Error: AixLib_Fluid_BoilerCHP_Examples_CHPSystem.txt: Errors during result verification.
            Absolute error = 1.511e+01 at t = 12.0 for combinedHeatPower.senTHot.T
 *** Warning: AixLib.Fluid.BoilerCHP.Examples.CHPSystem: Found translation statistics for initialization for linear in old but not in new results.
@@ -20,5 +12,5 @@ Comparison files output by funnel are stored in the directory 'funnel_comp' of s
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 4 warnings and 2 errors.
+Script that runs unit tests had 4 warnings and 1 errors.
 
