@@ -6,11 +6,11 @@ model CHPSystem "Example that illustrates use of CHP model"
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.02,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     TSetIn=true,
     minCapacity=20,
     delayTime=300,
     param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK(),
-    vol(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
     Kc=0.02,
     Tc=100,
     elControl(initType=Modelica.Blocks.Types.Init.InitialOutput))
