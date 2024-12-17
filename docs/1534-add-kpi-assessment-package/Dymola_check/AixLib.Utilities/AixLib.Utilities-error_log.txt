@@ -1,63 +1,12 @@
 
 Error in model:  AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment 
 Check of <a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment">AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment</a>
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrPos
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 15
- Component context: intlErrDuaBou.intErrPos
-  Component declared as IntegralErrorBySign intErrPos in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/BaseClasses/PartialTemperatureAssessment.mo, line 17
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrNeg
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 18
- Component context: intlErrDuaBou.intErrNeg
-  Component declared as IntegralErrorBySign intErrNeg in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/BaseClasses/PartialTemperatureAssessment.mo, line 17
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Utilities.KPIs.Examples.IntegralErrorDualBounds 
-Check of <a href="Modelica://AixLib.Utilities.KPIs.Examples.IntegralErrorDualBounds">AixLib.Utilities.KPIs.Examples.IntegralErrorDualBounds</a>
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrPos
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 15
- Component context: intErrDua.intErrPos
-  Component declared as IntegralErrorBySign intErrPos in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/Examples/IntegralErrorDualBounds.mo, line 22
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrNeg
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 18
- Component context: intErrDua.intErrNeg
-  Component declared as IntegralErrorBySign intErrNeg in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/Examples/IntegralErrorDualBounds.mo, line 22
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrPos
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 15
- Component context: intErrDuaRes.intErrPos
-  Component declared as IntegralErrorBySign intErrPos in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/Examples/IntegralErrorDualBounds.mo, line 25
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrNeg
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 18
- Component context: intErrDuaRes.intErrNeg
-  Component declared as IntegralErrorBySign intErrNeg in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/Examples/IntegralErrorDualBounds.mo, line 25
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Utilities.KPIs.IntegralErrorDualBounds 
-Check of <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrPos
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 15
- Component context: intErrPos
-  Component declared as IntegralErrorBySign intErrPos in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 2
-Error: Class or component 'use_reset' not found in IntegralErrorBySign intErrNeg
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 18
- Component context: intErrNeg
-  Component declared as IntegralErrorBySign intErrNeg in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorSingleReference">AixLib.Utilities.KPIs.IntegralErrorSingleReference</a>
-  Attempted modification in <a href="Modelica://AixLib.Utilities.KPIs.IntegralErrorDualBounds">AixLib.Utilities.KPIs.IntegralErrorDualBounds</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/IntegralErrorDualBounds.mo, line 2
+In call connect(<a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment#diagram:intlErrDuaBou.yAbsTot,absDegSecOutBou">intlErrDuaBou.yAbsTot, absDegSecOutBou</a>)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/BaseClasses/PartialTemperatureAssessment.mo, line <a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment#text:25">26</a>
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment#text:intlErrDuaBou.yAbsTot">intlErrDuaBou.yAbsTot</a>
+In class <a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment">AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/KPIs/BaseClasses/PartialTemperatureAssessment.mo, line <a href="Modelica://AixLib.Utilities.KPIs.BaseClasses.PartialTemperatureAssessment#text">2</a>
+The model contained invalid expressions.
+Check aborted.
 Error: ERRORS have been issued.
 
