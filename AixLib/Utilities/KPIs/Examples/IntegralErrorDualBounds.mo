@@ -1,6 +1,7 @@
 within AixLib.Utilities.KPIs.Examples;
 model IntegralErrorDualBounds "Test integral error dual bounds"
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
   Modelica.Blocks.Sources.Ramp ramUppBou(
     height=4,
     duration=8,
@@ -27,14 +28,14 @@ model IntegralErrorDualBounds "Test integral error dual bounds"
 equation
   connect(ramUppBou.y, intErrDua.uppLim) annotation (Line(points={{-79,50},{-60,
           50},{-60,52},{-24,52}}, color={0,0,127}));
-  connect(ramUppBou.y, intErrDuaRes.uppLim) annotation (Line(points={{-79,50},{
-          -60,50},{-60,-28},{-24,-28}}, color={0,0,127}));
-  connect(pulSou.y, intErrDua.u) annotation (Line(points={{-79,0},{-50,0},{-50,
-          40},{-24,40}}, color={0,0,127}));
-  connect(pulSou.y, intErrDuaRes.u) annotation (Line(points={{-79,0},{-50,0},{
-          -50,-40},{-24,-40}}, color={0,0,127}));
-  connect(ramLowBou.y, intErrDua.lowLim) annotation (Line(points={{-79,-50},{
-          -40,-50},{-40,28},{-24,28}}, color={0,0,127}));
-  connect(ramLowBou.y, intErrDuaRes.lowLim) annotation (Line(points={{-79,-50},
-          {-40,-50},{-40,-52},{-24,-52}}, color={0,0,127}));
+  connect(ramUppBou.y, intErrDuaRes.uppLim) annotation (Line(points={{-79,50},{-60,
+          50},{-60,-28},{-24,-28}}, color={0,0,127}));
+  connect(pulSou.y, intErrDua.u) annotation (Line(points={{-79,0},{-50,0},{-50,40},
+          {-24,40}}, color={0,0,127}));
+  connect(pulSou.y, intErrDuaRes.u) annotation (Line(points={{-79,0},{-50,0},{-50,
+          -40},{-24,-40}}, color={0,0,127}));
+  connect(ramLowBou.y, intErrDua.lowLim) annotation (Line(points={{-79,-50},{-40,
+          -50},{-40,28},{-24,28}}, color={0,0,127}));
+  connect(ramLowBou.y, intErrDuaRes.lowLim) annotation (Line(points={{-79,-50},{
+          -40,-50},{-40,-52},{-24,-52}}, color={0,0,127}));
 end IntegralErrorDualBounds;

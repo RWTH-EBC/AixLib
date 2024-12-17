@@ -1,8 +1,5 @@
+IntegralErrorSingleReference
 Temperature
-IntegralAbsoluteError
 IntegralErrorDualBounds
-IntegralErrorWithFilter
-IntegralSquareError
-IntegralTimer
 Examples
 BaseClasses
