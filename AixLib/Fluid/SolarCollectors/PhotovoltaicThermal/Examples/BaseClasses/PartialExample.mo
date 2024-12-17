@@ -8,7 +8,8 @@ partial model PartialExample
   parameter Modelica.Units.SI.PressureDifference dp_nominal
     "Nominal pressure drop";
   Sources.MassFlowSource_T
-                      sou(redeclare package Medium = Medium)
+                      sou(redeclare package Medium = Medium, m_flow=
+        m_flow_nominal)
     "Source model"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Sources.Boundary_pT sin(redeclare package Medium = Medium, p=2e5)

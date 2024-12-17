@@ -6,7 +6,7 @@ model PhotovoltaicThermal
     AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Examples.BaseClasses.PartialExample(
     sin(nPorts=1),
     sou(nPorts=1),
-    m_flow_nominal=0.04,
+    m_flow_nominal=pvt.m_flow_nominal,
     dp_nominal=pvt.dp_nominal);
 
   EN12975Curves pvt(
