@@ -1,5 +1,5 @@
 within AixLib.Utilities.KPIs.Examples;
-model IntegralErrorsSingleReference
+model IntegralErrorSingleReference
   "Comparison of different models for integral errors with single reference"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Pulse pul(
@@ -110,4 +110,4 @@ equation
       StopTime=10,
       Interval=0.1,
       __Dymola_Algorithm="Dassl"));
-end IntegralErrorsSingleReference;
+end IntegralErrorSingleReference;

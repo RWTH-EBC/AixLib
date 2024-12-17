@@ -14,17 +14,17 @@ partial model PartialTemperatureAssessment
   Modelica.Blocks.Interfaces.RealOutput absDegSecOutBou(final unit="K.s")
     "Absolute degree-second out of bound"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  IntegralErrorDualBounds intlErrDuaBou
+  IntegralErrorDualReference.IntegralErrorDualBounds intlErrDuaBou
     "Integral temperature error with dual bounds"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
   connect(T, intlErrDuaBou.u)
     annotation (Line(points={{-120,0},{-24,0}}, color={0,0,127}));
-  connect(intlErrDuaBou.yUpp, degSecOutUppBou) annotation (Line(points={{22,12},
+  connect(intlErrDuaBou.yPos, degSecOutUppBou) annotation (Line(points={{22,12},
           {80,12},{80,60},{110,60}}, color={0,0,127}));
   connect(intlErrDuaBou.yAbsTot, absDegSecOutBou)
     annotation (Line(points={{22,0},{110,0}}, color={0,0,127}));
-  connect(intlErrDuaBou.yLow, degSecOutLowBou) annotation (Line(points={{22,-12},
+  connect(intlErrDuaBou.yNeg, degSecOutLowBou) annotation (Line(points={{22,-12},
           {80,-12},{80,-60},{110,-60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

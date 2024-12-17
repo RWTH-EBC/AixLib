@@ -1,6 +1,6 @@
 within AixLib.Utilities.KPIs.IntegralErrorSingleReference;
 model IntegralErrorBySign
-  "Integral error with by sign (either only positive or only negative errors)"
+  "Integral error by sign (either only positive or only negative errors)"
   extends AixLib.Utilities.KPIs.BaseClasses.PartialIntegralErrorSingleReference;
   extends Modelica.Blocks.Icons.Block;
   parameter Boolean posItg=true
