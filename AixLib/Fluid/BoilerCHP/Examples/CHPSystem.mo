@@ -6,7 +6,7 @@ model CHPSystem "Example that illustrates use of CHP model"
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.02,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     TSetIn=true,
     minCapacity=20,
     delayTime=300,
