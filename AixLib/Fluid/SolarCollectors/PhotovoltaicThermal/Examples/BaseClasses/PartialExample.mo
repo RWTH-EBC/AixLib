@@ -1,6 +1,6 @@
 within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Examples.BaseClasses;
 partial model PartialExample
-  "Example to demonstrate the function of the photovoltaic thermal collector model"
+  "Partial example to demonstrate the function of the photovoltaic thermal collector model"
   replaceable package Medium = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
@@ -35,7 +35,5 @@ This partial model introduces common blocks used for solar thermal examples.
  issue 1451</a>.
   </li>
 </ul>
-</html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mos"));
+</html>"));
 end PartialExample;

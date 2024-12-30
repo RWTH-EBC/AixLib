@@ -10,8 +10,7 @@ record Unglazed "Unglazed PVT collector"
   Overview
 </h4>
 <p>
-  Derived from the simulated results of a glazed PVT Collector without
-  low-emission coating from this <a href=
+  Derived from the simulated results of a unglazed PVT Collector from this <a href=
   \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">
   thesis</a> p.43 Figure 3.12.
 </p>

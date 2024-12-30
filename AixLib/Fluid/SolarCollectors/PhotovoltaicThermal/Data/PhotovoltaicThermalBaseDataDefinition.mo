@@ -31,7 +31,7 @@ partial record PhotovoltaicThermalBaseDataDefinition
 </h4>
 <p>
   This record extends the solar thermal collectors records and
-  adds efficieny curves for the electrical part to enable a 
+  adds efficiency curves for the electrical part to enable a 
   model of a photovoltaic thermal collector.
   Note that the default values for angles, pressure drops and 
   panel area are generic assumptions based on values for 
@@ -39,7 +39,7 @@ partial record PhotovoltaicThermalBaseDataDefinition
   \"modelica://AixLib.Fluid.SolarCollectors.Data\">AixLib.Fluid.SolarCollectors.Data</a>.
   If you want to model a specific device, check the general 
   UsersGuide for information on these parameters and set 
-  them appropriatly: <a href=
+  them appropriately: <a href=
   \"modelica://AixLib.Fluid.SolarCollectors.UsersGuide\">AixLib.Fluid.SolarCollectors.UsersGuide</a>.
 </p>
 <h4>

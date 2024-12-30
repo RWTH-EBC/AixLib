@@ -21,7 +21,7 @@ model EN12975Curves
     a2=perPVT.a2));
   replaceable parameter AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.PhotovoltaicThermalBaseDataDefinition perPVT
     constrainedby AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.PhotovoltaicThermalBaseDataDefinition
-    "Performance data for PV-Thermal"
+    "Performance data for both solar thermal collector and PV"
     annotation (choicesAllMatching=true, Placement(transformation(extent={{40,-78},
             {54,-64}})));
   AixLib.Fluid.SolarCollectors.BaseClasses.EN12975SolarGain eleGai(
@@ -53,7 +53,7 @@ model EN12975Curves
     "Sum of all electrical gains"
     annotation (Placement(transformation(extent={{40,86},{48,94}})));
   Modelica.Blocks.Math.Add      add(final k1=+1, final k2=+1)
-    "Sum of all electrical gains"
+    "Sum of all electrical gains and losses"
     annotation (Placement(transformation(extent={{56,76},{64,84}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf,
       final uMin=0) "Electrical power generation can't be lower than zero"
@@ -126,16 +126,16 @@ equation
   thermal efficiency as well as the coefficients for the linear
   approximation are derived from <a href=
   \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">
-  this thesis </a> by Markus Lämmle, p.43
+  this thesis</a> by Markus Lämmle, p.43
   Figure 3.12. The underlying data was validated with the following
   assumptions:
 </p>
 <ul>
   <li>solar irradiation G=1000 W/m^2
   </li>
-  <li>windspeed Uwind=3m/s
+  <li>windspeed Uwind=3 m/s
   </li>
-  <li>ambient temperature Ta= 25°C
+  <li>ambient temperature Ta=25 °C
   </li>
 </ul>
 <h4>
