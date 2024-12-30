@@ -84,7 +84,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430",
     "simulation": {
-      "elapsed_time": 108,
+      "elapsed_time": 111,
       "final_time": 31539600.0,
       "jacobians": 153601,
       "start_time": 0,
@@ -171,7 +171,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
     "simulation": {
-      "elapsed_time": 1.52,
+      "elapsed_time": 1.41,
       "final_time": 25920000.0,
       "jacobians": 27,
       "start_time": 0,
@@ -264,7 +264,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case280",
     "simulation": {
-      "elapsed_time": 148,
+      "elapsed_time": 150,
       "final_time": 31539600.0,
       "jacobians": 222040,
       "start_time": 0,
@@ -315,7 +315,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse",
     "simulation": {
-      "elapsed_time": 9.32,
+      "elapsed_time": 9.36,
       "final_time": 31536000.0,
       "jacobians": 95719,
       "start_time": 0,
@@ -408,7 +408,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920",
     "simulation": {
-      "elapsed_time": 201,
+      "elapsed_time": 196,
       "final_time": 31539600.0,
       "jacobians": 226779,
       "start_time": 0,
@@ -501,7 +501,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case250",
     "simulation": {
-      "elapsed_time": 89.4,
+      "elapsed_time": 90.5,
       "final_time": 31539600.0,
       "jacobians": 159373,
       "start_time": 0,
@@ -615,7 +615,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case230",
     "simulation": {
-      "elapsed_time": 87.2,
+      "elapsed_time": 87.5,
       "final_time": 31539600.0,
       "jacobians": 142453,
       "start_time": 0,
@@ -654,7 +654,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2",
     "simulation": {
-      "elapsed_time": 28.5349,
+      "elapsed_time": 25.7652,
       "final_time": 31536000.0,
       "jacobians": 11750,
       "start_time": 0,
@@ -693,7 +693,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool",
     "simulation": {
-      "elapsed_time": 33.8811,
+      "elapsed_time": 33.9204,
       "final_time": 31536000.0,
       "jacobians": 25950,
       "start_time": 0,
@@ -732,7 +732,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir",
     "simulation": {
-      "elapsed_time": 5.38866,
+      "elapsed_time": 5.12346,
       "final_time": 31536000.0,
       "jacobians": 20421,
       "start_time": 0,
@@ -825,7 +825,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600",
     "simulation": {
-      "elapsed_time": 167,
+      "elapsed_time": 168,
       "final_time": 31539600.0,
       "jacobians": 230765,
       "start_time": 0,
@@ -918,7 +918,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case400",
     "simulation": {
-      "elapsed_time": 63.6,
+      "elapsed_time": 62.8,
       "final_time": 31539600.0,
       "jacobians": 115951,
       "start_time": 0,
@@ -1005,7 +1005,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped",
     "simulation": {
-      "elapsed_time": 5.49141,
+      "elapsed_time": 5.1244,
       "final_time": 864000,
       "jacobians": 803,
       "start_time": 0,
@@ -1056,7 +1056,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode",
     "simulation": {
-      "elapsed_time": 1.32,
+      "elapsed_time": 1.22,
       "final_time": 86400,
       "jacobians": 361,
       "start_time": 0,
@@ -1125,7 +1125,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950",
     "simulation": {
-      "elapsed_time": 118,
+      "elapsed_time": 111,
       "final_time": 31539600.0,
       "jacobians": 157652,
       "start_time": 0,
@@ -1218,7 +1218,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case410",
     "simulation": {
-      "elapsed_time": 88.2,
+      "elapsed_time": 90.6,
       "final_time": 31539600.0,
       "jacobians": 125309,
       "start_time": 0,
@@ -1311,7 +1311,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF",
     "simulation": {
-      "elapsed_time": 66.1,
+      "elapsed_time": 63.8,
       "final_time": 31539600.0,
       "jacobians": 124874,
       "start_time": 0,
@@ -1356,7 +1356,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir",
     "simulation": {
-      "elapsed_time": 24.5238,
+      "elapsed_time": 24.8812,
       "final_time": 31536000.0,
       "jacobians": 20410,
       "start_time": 0,
@@ -1449,7 +1449,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case240",
     "simulation": {
-      "elapsed_time": 71.9,
+      "elapsed_time": 73.9,
       "final_time": 31539600.0,
       "jacobians": 125985,
       "start_time": 0,
@@ -1494,7 +1494,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange",
     "simulation": {
-      "elapsed_time": 16.9179,
+      "elapsed_time": 17.8644,
       "final_time": 31536000.0,
       "jacobians": 20815,
       "start_time": 0,
@@ -1587,7 +1587,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270",
     "simulation": {
-      "elapsed_time": 158,
+      "elapsed_time": 163,
       "final_time": 31539600.0,
       "jacobians": 230553,
       "start_time": 0,
@@ -1680,7 +1680,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case440",
     "simulation": {
-      "elapsed_time": 152,
+      "elapsed_time": 162,
       "final_time": 31539600.0,
       "jacobians": 222204,
       "start_time": 0,
@@ -1773,7 +1773,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220",
     "simulation": {
-      "elapsed_time": 72.2,
+      "elapsed_time": 70.8,
       "final_time": 31539600.0,
       "jacobians": 124345,
       "start_time": 0,
@@ -1866,7 +1866,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640",
     "simulation": {
-      "elapsed_time": 201,
+      "elapsed_time": 213,
       "final_time": 31539600.0,
       "jacobians": 264096,
       "start_time": 0,
@@ -1959,7 +1959,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940",
     "simulation": {
-      "elapsed_time": 143,
+      "elapsed_time": 149,
       "final_time": 31539600.0,
       "jacobians": 216549,
       "start_time": 0,
@@ -2082,7 +2082,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Examples.ASHREA140.CompareDynamicAndStaticSolarFrac_Case270",
     "simulation": {
-      "elapsed_time": 1.57,
+      "elapsed_time": 1.49,
       "final_time": 86400,
       "jacobians": 1001,
       "start_time": 0,
@@ -2175,7 +2175,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF",
     "simulation": {
-      "elapsed_time": 94.1,
+      "elapsed_time": 98.7,
       "final_time": 31539600.0,
       "jacobians": 140274,
       "start_time": 0,
@@ -2262,7 +2262,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled",
     "simulation": {
-      "elapsed_time": 0.68296,
+      "elapsed_time": 0.687685,
       "final_time": 15552000.0,
       "jacobians": 312,
       "start_time": 14688000.0,
@@ -2295,7 +2295,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange",
     "simulation": {
-      "elapsed_time": 5.54749,
+      "elapsed_time": 5.9508,
       "final_time": 31536000.0,
       "jacobians": 20799,
       "start_time": 0,
@@ -2409,7 +2409,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900",
     "simulation": {
-      "elapsed_time": 146,
+      "elapsed_time": 139,
       "final_time": 31539600.0,
       "jacobians": 204912,
       "start_time": 0,
@@ -2502,7 +2502,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case420",
     "simulation": {
-      "elapsed_time": 72.1,
+      "elapsed_time": 71.4,
       "final_time": 31539600.0,
       "jacobians": 126055,
       "start_time": 0,
@@ -2595,7 +2595,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF",
     "simulation": {
-      "elapsed_time": 67.2,
+      "elapsed_time": 65.7,
       "final_time": 31539600.0,
       "jacobians": 143407,
       "start_time": 0,
@@ -2634,7 +2634,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility",
     "simulation": {
-      "elapsed_time": 102.667,
+      "elapsed_time": 96.8694,
       "final_time": 31536000.0,
       "jacobians": 29897,
       "start_time": 0,
@@ -2727,7 +2727,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case810",
     "simulation": {
-      "elapsed_time": 142,
+      "elapsed_time": 122,
       "final_time": 31539600.0,
       "jacobians": 191551,
       "start_time": 0,
@@ -2796,7 +2796,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650",
     "simulation": {
-      "elapsed_time": 122,
+      "elapsed_time": 120,
       "final_time": 31539600.0,
       "jacobians": 197882,
       "start_time": 0,
@@ -2829,7 +2829,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone",
     "simulation": {
-      "elapsed_time": 8.32151,
+      "elapsed_time": 12.4888,
       "final_time": 31536000.0,
       "jacobians": 20407,
       "start_time": 0,
@@ -2922,7 +2922,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case395",
     "simulation": {
-      "elapsed_time": 53.2,
+      "elapsed_time": 50.2,
       "final_time": 31539600.0,
       "jacobians": 101321,
       "start_time": 0,
@@ -2985,7 +2985,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.Multizone",
     "simulation": {
-      "elapsed_time": 1.40322,
+      "elapsed_time": 1.42796,
       "final_time": 864000,
       "jacobians": 325,
       "start_time": 0,
@@ -3024,7 +3024,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2",
     "simulation": {
-      "elapsed_time": 159,
+      "elapsed_time": 158,
       "final_time": 3546000.0,
       "jacobians": 51738,
       "start_time": 0,
@@ -3117,7 +3117,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case320",
     "simulation": {
-      "elapsed_time": 156,
+      "elapsed_time": 157,
       "final_time": 31539600.0,
       "jacobians": 225834,
       "start_time": 0,
@@ -3210,7 +3210,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case210",
     "simulation": {
-      "elapsed_time": 75.4,
+      "elapsed_time": 73.2,
       "final_time": 31539600.0,
       "jacobians": 126068,
       "start_time": 0,
@@ -3303,7 +3303,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF",
     "simulation": {
-      "elapsed_time": 73.9,
+      "elapsed_time": 78.6,
       "final_time": 31539600.0,
       "jacobians": 123327,
       "start_time": 0,
@@ -3390,7 +3390,7 @@
     },
     "model": "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped",
     "simulation": {
-      "elapsed_time": 5.68393,
+      "elapsed_time": 6.1257,
       "final_time": 864000,
       "jacobians": 787,
       "start_time": 0,
@@ -3483,7 +3483,7 @@
     },
     "model": "AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case800",
     "simulation": {
-      "elapsed_time": 98.3,
+      "elapsed_time": 98.5,
       "final_time": 31539600.0,
       "jacobians": 141517,
       "start_time": 0,

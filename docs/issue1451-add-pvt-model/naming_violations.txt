@@ -1,64 +1,6 @@
 
 
 
-AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/EN12975Curves.mo
-1: Documentation too short. Affected line: Modelica.Blocks.Interfaces.RealOutput PEle(unit="W", displayUnit="kW") annotation (Placement(transformation(extent={{100,70},{120,90}})));
-
-2: Name 'multiSumLos' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multi. Affected line: Modelica.Blocks.Math.MultiSum multiSumLos( nu=nSeg) "Sum of all electrical losses" annotation (Placement(transformation(extent={{40,62},{48,70}})));
-
-3: Name 'multiSumGai' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multi. Affected line: Modelica.Blocks.Math.MultiSum multiSumGai(nu=nSeg) "Sum of all electrical gains" annotation (Placement(transformation(extent={{40,86},{48,94}})));
-
-4: Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=0) "Electrical power generation can't be lower than zero" annotation (Placement(transformation(extent={{76,76},{84,84}})));
-
-
-AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Examples/PhotovoltaicThermal.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: EN12975Curves pvt( redeclare package Medium = AixLib.Media.Water, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, nSeg=3, azi=0, til=0.5235987755983, rho=0.2, totalArea=20, redeclare AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.ThermalGlazedWithLowEmissionCoating perPVT) "Photovoltaic thermal model" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-
-AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo
-1: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, use_T_in=true, nPorts=1, m_flow=0.03) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-
-2: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, nPorts=1) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: HeatGeneratorNoControl heatGeneratorNoControll( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal= 0.03, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=0.002, coeffPresLoss=1e10) "Heat generator without control" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-4: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
-
-
-AixLib/Fluid/BoilerCHP/Examples/BoilerNoControlSystem.mo
-1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
-
-2: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( use_m_flow_in=false, redeclare package Medium = Medium, use_T_in=true, m_flow=0.2, T=313.15, nPorts=1) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-
-3: Name 'pipe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pipe. Affected line: Modelica.Fluid.Pipes.StaticPipe pipe( length=1, diameter=0.025, redeclare package Medium = Medium) "Pressure drop" annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-
-4: Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system(p_start=system.p_ambient, p_ambient(displayUnit="Pa")) "Pressure drop" annotation (Placement(transformation(extent={{80,80},{100,100}})));
-
-5: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium = Medium) "Sink" annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-
-6: Name 'ramp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ramp. Affected line: Modelica.Blocks.Sources.Ramp ramp( height=1, duration=360, offset=0, startTime=120) "Ambient air temperature" annotation (Placement(transformation(extent={{-60,62},{-40,82}})));
-
-7: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoilerNoControl boilerNoControl( redeclare package Medium = Medium, m_flow_nominal=0.2, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_18kW()) annotation (Placement(transformation(extent={{-24,-14},{2,14}})));
-
-8: Name 'ramp1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ramp. Affected line: Modelica.Blocks.Sources.Ramp ramp1( height=60, duration=360, offset=273.15, startTime=520) "Ambient air temperature" annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
-
-
-AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo
-1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
-
-2: Documentation too short, Name 'combinedHeatPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combined, Heat, Power. Affected line: AixLib.Fluid.BoilerCHP.CHPNoControl combinedHeatPower( redeclare package Medium = Medium, m_flow_nominal=0.02, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-3: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Medium, use_T_in=true, nPorts=1, m_flow=0.5) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-
-4: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( nPorts=1, redeclare package Medium = Medium) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-
-5: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
-
-
-AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Data/PhotovoltaicThermalBaseDataDefinition.mo
-1: Name 'etaEle_zero' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ele_zero. Affected line: parameter Modelica.Units.SI.Efficiency etaEle_zero(max=1) "Conversion factor/Efficiency at Q = 0 for electrical efficiency";
-
-
 AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
 1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group= "Boiler type"), choicesAllMatching=true);
 
@@ -95,6 +37,104 @@ AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
 17: Name 'etaCalculation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Calculation. Affected line: Modelica.Blocks.Math.Product etaCalculation "calculates the efficiency of the boiler" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={10,50})));
 
 18: Name 'efficiencyTableLoadDepending1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: efficiency, Table, Load, Depending. Affected line: Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending1( final tableOnFile=false, final table=etaTempBased, final columns={2}, final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) "Table with efficiency parameters" annotation (Placement(transformation(extent={{-40,20},{-19,41}})));
+
+
+AixLib/Fluid/BoilerCHP/Examples/BoilerNoControlSystem.mo
+1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
+
+2: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( use_m_flow_in=false, redeclare package Medium = Medium, use_T_in=true, m_flow=0.2, T=313.15, nPorts=1) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+3: Name 'pipe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pipe. Affected line: Modelica.Fluid.Pipes.StaticPipe pipe( length=1, diameter=0.025, redeclare package Medium = Medium) "Pressure drop" annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+
+4: Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system(p_start=system.p_ambient, p_ambient(displayUnit="Pa")) "Pressure drop" annotation (Placement(transformation(extent={{80,80},{100,100}})));
+
+5: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium = Medium) "Sink" annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
+6: Name 'ramp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ramp. Affected line: Modelica.Blocks.Sources.Ramp ramp( height=1, duration=360, offset=0, startTime=120) "Ambient air temperature" annotation (Placement(transformation(extent={{-60,62},{-40,82}})));
+
+7: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoilerNoControl boilerNoControl( redeclare package Medium = Medium, m_flow_nominal=0.2, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_18kW()) annotation (Placement(transformation(extent={{-24,-14},{2,14}})));
+
+8: Name 'ramp1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ramp. Affected line: Modelica.Blocks.Sources.Ramp ramp1( height=60, duration=360, offset=273.15, startTime=520) "Ambient air temperature" annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
+
+
+AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/EN12975Curves.mo
+1: Documentation too short. Affected line: Modelica.Blocks.Interfaces.RealOutput PEle(unit="W", displayUnit="kW") annotation (Placement(transformation(extent={{100,70},{120,90}})));
+
+2: Name 'multiSumLos' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multi. Affected line: Modelica.Blocks.Math.MultiSum multiSumLos( nu=nSeg) "Sum of all electrical losses" annotation (Placement(transformation(extent={{40,62},{48,70}})));
+
+3: Name 'multiSumGai' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multi. Affected line: Modelica.Blocks.Math.MultiSum multiSumGai(nu=nSeg) "Sum of all electrical gains" annotation (Placement(transformation(extent={{40,86},{48,94}})));
+
+4: Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=0) "Electrical power generation can't be lower than zero" annotation (Placement(transformation(extent={{76,76},{84,84}})));
+
+
+AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Examples/PhotovoltaicThermal.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: EN12975Curves pvt( redeclare package Medium = AixLib.Media.Water, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, nSeg=3, azi=0, til=0.5235987755983, rho=0.2, totalArea=20, redeclare AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data.ThermalGlazedWithLowEmissionCoating perPVT) "Photovoltaic thermal model" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+
+AixLib/Fluid/BoilerCHP/CHPNoControl.mo
+1: Name 'param' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param. Affected line: parameter AixLib.DataBase.CHP.CHPDataSimple.CHPBaseDataDefinition param "CHP data set" annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+
+2: Name 'minCapacity' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Capacity. Affected line: parameter Real minCapacity = 0 "Minimum allowable working capacity (unit [-])" annotation(Dialog(group="Unit properties"));
+
+3: Name 'G' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance G=0.003*param.data_CHP[end, 3] /50 "Constant thermal conductance to environment(G=Q_loss/dT)";
+
+4: Name 'u_rel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: u_rel. Affected line: Modelica.Blocks.Interfaces.RealInput u_rel( final unit="1") "Relative" annotation (Placement( transformation(extent={{-126,66},{-100,94}}, rotation=0), iconTransformation(extent={{-80,-70},{-60,-50}})));
+
+5: Name 'electricalPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: electrical, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput electricalPower( final quantity="Power", final unit="W") "Electrical power" annotation (Placement( transformation( origin={20,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-50,90})));
+
+6: Name 'thermalPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thermal, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput thermalPower(final unit="W") "Thermal power" annotation (Placement( transformation( origin={36,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-20,90})));
+
+7: Name 'fuelInput' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fuel, Input. Affected line: Modelica.Blocks.Interfaces.RealOutput fuelInput(final unit="W") "Fuel input" annotation (Placement(transformation( origin={51,110}, extent={{-10,-11},{10,11}}, rotation=90), iconTransformation( extent={{-10,-11},{10,11}}, rotation=90, origin={20,90})));
+
+8: Name 'fuelConsumption' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fuel, Consumption. Affected line: Modelica.Blocks.Interfaces.RealOutput fuelConsumption "Fuel consumption" annotation (Placement(transformation( origin={66,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={50,90})));
+
+9: Name 'combiTable1Ds' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combi, Table, Ds. Affected line: Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds( tableName="NoName", fileName="NoName", final table=param.data_CHP) "Time table to read CHP performance data" annotation (Placement(transformation(extent={{40,40},{60,60}}, rotation=0)));
+
+10: Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin= minCapacity) "Limits the rel power between 0 and 1" annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+
+11: Name 'gain4' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gain4. Affected line: Modelica.Blocks.Math.Gain gain4(final k=1000) "Conversion factor" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=270, origin={66,90})));
+
+12: Name 'gain3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gain3. Affected line: Modelica.Blocks.Math.Gain gain3(final k=1000) "Conversion factor" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=270, origin={50,90})));
+
+13: Name 'toPercent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Percent. Affected line: Modelica.Blocks.Math.Gain toPercent(final k=100) "Conversion factor" annotation (Placement(transformation( extent={{6,-6},{-6,6}}, rotation=180, origin={12,50})));
+
+14: Name 'internalCapacity' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Capacity. Affected line: Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C, T(start=T_start)) "Boiler thermal capacity (dry weight)" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, rotation=90, origin={2,-40})));
+
+15: Name 'ConductanceToEnv' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Conductance. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=G) "Thermal resistance of the boiler casing" annotation ( Placement(transformation( extent={{10,-10},{-10,10}}, rotation=180, origin={-30,-20})));
+
+16: Name 'T_amb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb "Heat port for heat losses to ambient" annotation ( Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation( extent={{58,-60},{78,-40}})));
+
+
+AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Examples/BaseClasses/PartialExample.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.MassFlowSource_T sou(redeclare package Medium = Medium, m_flow= m_flow_nominal) "Source model" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));Sources.Boundary_pT sin(redeclare package Medium = Medium, p=2e5) "Sink model" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam= Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"), computeWetBulbTemperature=false) "Weather data file reader" annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+
+
+AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo
+1: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( use_m_flow_in=false, nPorts=1, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity, m_flow=0.05, T=293.15) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+2: Name 'pipe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pipe. Affected line: Modelica.Fluid.Pipes.StaticPipe pipe( length=1, diameter=0.025, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity) "Pressure drop" annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+
+3: Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system(p_start=system.p_ambient, p_ambient(displayUnit="Pa")) "Pressure drop" annotation (Placement(transformation(extent={{80,80},{100,100}})));
+
+4: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Boiler boiler( redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.03, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare model ExtControl = BaseClasses.Controllers.ExternalControlNightDayHC, declination=1.2, FA=0, paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(), riseTime=0, TN=0.05, paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW()) "Boiler" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+5: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity) "Sink" annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
+6: Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( amplitude=5, f=1/86400, phase=4.7123889803847, offset=273.15) "Ambient air temperature" annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
+
+7: Name 'isNight' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Night. Affected line: Modelica.Blocks.Sources.BooleanConstant isNight(k=false) "No night-setback" annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
+
+
+AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo
+1: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, use_T_in=true, nPorts=1, m_flow=0.03) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+2: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, nPorts=1) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: HeatGeneratorNoControl heatGeneratorNoControll( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal= 0.03, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=0.002, coeffPresLoss=1e10) "Heat generator without control" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+4: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
 
 
 AixLib/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mo
@@ -145,6 +185,22 @@ AixLib/Fluid/BoilerCHP/Boiler.mo
 13: Name 'ExtControl' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Control. Affected line: replaceable model ExtControl = AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl "External control" annotation (Dialog(tab="External Control"),choicesAllMatching=true);
 
 
+AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Data/PhotovoltaicThermalBaseDataDefinition.mo
+1: Name 'etaEle_zero' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ele_zero. Affected line: parameter Modelica.Units.SI.Efficiency etaEle_zero(max=1) "Conversion factor/Efficiency at Q = 0 for electrical efficiency";
+
+
+AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo
+1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
+
+2: Documentation too short, Name 'combinedHeatPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combined, Heat, Power. Affected line: AixLib.Fluid.BoilerCHP.CHPNoControl combinedHeatPower( redeclare package Medium = Medium, m_flow_nominal=0.02, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+3: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( redeclare package Medium = Medium, use_T_in=true, nPorts=1, m_flow=0.5) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+4: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( nPorts=1, redeclare package Medium = Medium) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+
+5: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
+
+
 AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo
 1: Documentation too short, Name 'combinedHeatPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combined, Heat, Power. Affected line: AixLib.Fluid.BoilerCHP.CHP combinedHeatPower( redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.02, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial, TSetIn=true, minCapacity=20, delayTime=300, param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK(), Kc=0.02, Tc=100, elControl(initType=Modelica.Blocks.Types.Init.InitialOutput)) "CHP" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -153,62 +209,6 @@ AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo
 3: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink( nPorts=1, redeclare package Medium = Media.Specialized.Water.TemperatureDependentDensity) "Sink" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
 
 4: Name 'trapezoid' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: trapezoid. Affected line: Modelica.Blocks.Sources.Trapezoid trapezoid( rising=7200, width=7200, falling=7200, period=28800, offset=313.15, amplitude=50, startTime=7200) "Source temperature" annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
-
-
-AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo
-1: Name 'source' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: source. Affected line: Modelica.Fluid.Sources.MassFlowSource_T source( use_m_flow_in=false, nPorts=1, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity, m_flow=0.05, T=293.15) "Source" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-
-2: Name 'pipe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pipe. Affected line: Modelica.Fluid.Pipes.StaticPipe pipe( length=1, diameter=0.025, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity) "Pressure drop" annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-
-3: Name 'system' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: system. Affected line: inner Modelica.Fluid.System system(p_start=system.p_ambient, p_ambient(displayUnit="Pa")) "Pressure drop" annotation (Placement(transformation(extent={{80,80},{100,100}})));
-
-4: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Boiler boiler( redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.03, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare model ExtControl = BaseClasses.Controllers.ExternalControlNightDayHC, declination=1.2, FA=0, paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(), riseTime=0, TN=0.05, paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW()) "Boiler" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-5: Documentation too short, Name 'sink' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sink. Affected line: Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium = AixLib.Media.Specialized.Water.TemperatureDependentDensity) "Sink" annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-
-6: Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( amplitude=5, f=1/86400, phase=4.7123889803847, offset=273.15) "Ambient air temperature" annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-
-7: Name 'isNight' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Night. Affected line: Modelica.Blocks.Sources.BooleanConstant isNight(k=false) "No night-setback" annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
-
-
-AixLib/Fluid/BoilerCHP/CHPNoControl.mo
-1: Name 'param' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param. Affected line: parameter AixLib.DataBase.CHP.CHPDataSimple.CHPBaseDataDefinition param "CHP data set" annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
-2: Name 'minCapacity' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Capacity. Affected line: parameter Real minCapacity = 0 "Minimum allowable working capacity (unit [-])" annotation(Dialog(group="Unit properties"));
-
-3: Name 'G' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance G=0.003*param.data_CHP[end, 3] /50 "Constant thermal conductance to environment(G=Q_loss/dT)";
-
-4: Name 'u_rel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: u_rel. Affected line: Modelica.Blocks.Interfaces.RealInput u_rel( final unit="1") "Relative" annotation (Placement( transformation(extent={{-126,66},{-100,94}}, rotation=0), iconTransformation(extent={{-80,-70},{-60,-50}})));
-
-5: Name 'electricalPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: electrical, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput electricalPower( final quantity="Power", final unit="W") "Electrical power" annotation (Placement( transformation( origin={20,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-50,90})));
-
-6: Name 'thermalPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thermal, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput thermalPower(final unit="W") "Thermal power" annotation (Placement( transformation( origin={36,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={-20,90})));
-
-7: Name 'fuelInput' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fuel, Input. Affected line: Modelica.Blocks.Interfaces.RealOutput fuelInput(final unit="W") "Fuel input" annotation (Placement(transformation( origin={51,110}, extent={{-10,-11},{10,11}}, rotation=90), iconTransformation( extent={{-10,-11},{10,11}}, rotation=90, origin={20,90})));
-
-8: Name 'fuelConsumption' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fuel, Consumption. Affected line: Modelica.Blocks.Interfaces.RealOutput fuelConsumption "Fuel consumption" annotation (Placement(transformation( origin={66,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={50,90})));
-
-9: Name 'combiTable1Ds' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: combi, Table, Ds. Affected line: Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds( tableName="NoName", fileName="NoName", final table=param.data_CHP) "Time table to read CHP performance data" annotation (Placement(transformation(extent={{40,40},{60,60}}, rotation=0)));
-
-10: Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin= minCapacity) "Limits the rel power between 0 and 1" annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-
-11: Name 'gain4' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gain4. Affected line: Modelica.Blocks.Math.Gain gain4(final k=1000) "Conversion factor" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=270, origin={66,90})));
-
-12: Name 'gain3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gain3. Affected line: Modelica.Blocks.Math.Gain gain3(final k=1000) "Conversion factor" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=270, origin={50,90})));
-
-13: Name 'toPercent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Percent. Affected line: Modelica.Blocks.Math.Gain toPercent(final k=100) "Conversion factor" annotation (Placement(transformation( extent={{6,-6},{-6,6}}, rotation=180, origin={12,50})));
-
-14: Name 'internalCapacity' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Capacity. Affected line: Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C, T(start=T_start)) "Boiler thermal capacity (dry weight)" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, rotation=90, origin={2,-40})));
-
-15: Name 'ConductanceToEnv' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Conductance. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=G) "Thermal resistance of the boiler casing" annotation ( Placement(transformation( extent={{10,-10},{-10,10}}, rotation=180, origin={-30,-20})));
-
-16: Name 'T_amb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb "Heat port for heat losses to ambient" annotation ( Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation( extent={{58,-60},{78,-40}})));
-
-
-AixLib/Fluid/SolarCollectors/PhotovoltaicThermal/Examples/BaseClasses/PartialExample.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.MassFlowSource_T sou(redeclare package Medium = Medium, m_flow= m_flow_nominal) "Source model" annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));Sources.Boundary_pT sin(redeclare package Medium = Medium, p=2e5) "Sink model" annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-
-2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam= Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"), computeWetBulbTemperature=false) "Weather data file reader" annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
 
 
 AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo
