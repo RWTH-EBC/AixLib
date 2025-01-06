@@ -40,6 +40,10 @@ equation
     June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
+  <li>
+    Dec. 18, 2024, by Jun Jiang:<br/>
+    Replace the wind speed warning counter with max() function for cases of negligible wind-driven airflow (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>This model contains the empirical expression developed by Caciolo et al..</p>

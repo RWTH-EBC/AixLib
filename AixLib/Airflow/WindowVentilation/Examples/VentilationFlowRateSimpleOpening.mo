@@ -101,7 +101,9 @@ model VentilationFlowRateSimpleOpening
     winClrHeight=winClrHeight,
     redeclare model OpeningArea =
       AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
-    heightASL=200) "Model DIN 16798, without window opening behavior"
+    heightASL=200,
+    final winOpnBeh=false)
+    "Model DIN 16798, without window opening behavior"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
   AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN16798 din16798_2(
     winClrWidth=winClrWidth,
@@ -109,7 +111,8 @@ model VentilationFlowRateSimpleOpening
     redeclare model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
     heightASL=200,
-    winOpnBeh=true) "Model DIN 16798, with window opening behavior"
+    final winOpnBeh=true)
+    "Model DIN 16798, with window opening behavior"
     annotation (Placement(transformation(extent={{60,-40},{80,-20}})));
   AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 din4108_1(
     winClrWidth=winClrWidth,
