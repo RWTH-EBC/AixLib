@@ -23,7 +23,7 @@ equation
   if abs(incAngDeg) <= 90 then
     /*Windward*/
     cofWin = 1.234 - 0.490*winSpeLoc + 0.048*(winSpeLoc^2);
-    // If winSpeLoc < winSpeLim, wind-driven airflow negligible
+    // If winSpeLoc < winSpeLim, wind-driven airflow is negligible
     V_flow_win = 0.0357*openingArea.A*max(winSpeLoc - winSpeLim, 0);
   else
     /*Leeward*/
