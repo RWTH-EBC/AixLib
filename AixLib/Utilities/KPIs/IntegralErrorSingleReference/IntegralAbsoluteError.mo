@@ -19,5 +19,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model is an integrator for absolute error (IAE).</p>
 </html>"));
 end IntegralAbsoluteError;

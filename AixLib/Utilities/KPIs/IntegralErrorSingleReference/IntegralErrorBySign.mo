@@ -45,5 +45,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model is a sign-based integrator, which allows for the integration of errors only when they are greater than or less than zero.</p>
 </html>"));
 end IntegralErrorBySign;

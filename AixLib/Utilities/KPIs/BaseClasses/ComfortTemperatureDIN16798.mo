@@ -46,5 +46,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model calculates the comfort temperature band based on ambiemt temperature according to DIN EN 16798-1.</p>
 </html>"));
 end ComfortTemperatureDIN16798;

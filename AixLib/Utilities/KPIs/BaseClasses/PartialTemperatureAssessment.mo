@@ -11,7 +11,7 @@ partial model PartialTemperatureAssessment
     "= true, activate integral timers"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Boolean resItgTimInBou=false
-    "=true, integral timers will be reset if the temperature within bounds"
+    "= true, integral timers will be reset if the temperature within bounds"
     annotation(Dialog(enable=use_itgTim), Evaluate=true, HideResult=true,
       choices(checkBox=true));
   Modelica.Blocks.Interfaces.RealInput T(
@@ -131,5 +131,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model is the base model of temperature assessments.</p>
 </html>"));
 end PartialTemperatureAssessment;

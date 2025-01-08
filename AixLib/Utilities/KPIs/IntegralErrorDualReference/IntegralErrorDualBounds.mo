@@ -86,5 +86,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model is an error integrator for dual boundaries, where errors exceeding the upper limit or falling below the lower limit are integrated seperately. The boolean outputs represent the state of whether the value is outside the boundaries.</p>
 </html>"));
 end IntegralErrorDualBounds;

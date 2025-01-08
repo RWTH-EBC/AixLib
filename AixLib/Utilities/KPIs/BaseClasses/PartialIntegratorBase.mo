@@ -41,5 +41,9 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This partial model is the base model of error integrators.</p>
+<p>If the port <i>itgAct_in</i> is enabled, the input will be integrated only when this port&apos;s input is set to <i>true</i>.</p>
+<p>If the port <i>itgRes_in</i> is enabled, the integrated value will be reset to 0 whenever this port experiences a rising edge (similar to <i>Modelica.Blocks.Continuous.Integrator</i>).</p>
 </html>"));
 end PartialIntegratorBase;

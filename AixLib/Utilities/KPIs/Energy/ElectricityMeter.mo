@@ -48,6 +48,8 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model is an electricity meter that integrates input eletric power into energy, with the option to output the activation time when the power is greater than 0.</p>
 </html>"), Icon(graphics={Line(points={{80,-40},{60,-80},{80,-60},{60,-100}},
             color={0,0,0}), Line(points={{60,-92},{60,-100},{66,-96}}, color={0,
               0,0})}));

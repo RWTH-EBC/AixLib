@@ -25,5 +25,7 @@ equation
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
   </li>
 </ul>
+</html>", info="<html>
+<p>This model assesses room temperature according to DIN EN 16798-1, where the comfort room temperature is based on the ambient temperature.</p>
 </html>"));
 end DIN16798;
