@@ -21,10 +21,12 @@ model ThermalEnergyMeterDual
     annotation (Placement(transformation(extent={{100,-80},{120,-60}})));
   AixLib.Utilities.KPIs.IntegralErrorSingleReference.IntegralErrorBySign itgHea(
     final use_itgAct_in=false,
+    final use_itgRes_in=false,
     final posItg=true) "Integration heating energy"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   AixLib.Utilities.KPIs.IntegralErrorSingleReference.IntegralErrorBySign itgCoo(
     final use_itgAct_in=false,
+    final use_itgRes_in=false,
     final posItg=false) "Integration cooling energy"
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
   Modelica.Blocks.Sources.Constant conZero(final k=0) "Constant zero"
