@@ -1,5 +1,5 @@
 within AixLib.Utilities.KPIs;
-package Energy
+package Energy "KPIs for energy"
 extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>
