@@ -1,19 +1,8 @@
 within AixLib.Utilities.KPIs.BaseClasses;
 partial model PartialTemperatureAssessment
   "Partial model for temperature assessment"
-  parameter Boolean use_itgAct_in=false
-    "= true, enable activation connector; = false, disable connector, integrator continuously activated"
-    annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Boolean resItgInBou=false
-    "= true, integrators will be reset if the temperature within bounds"
-    annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Boolean use_itgTim=false
-    "= true, activate integral timers"
-    annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Boolean resItgTimInBou=false
-    "= true, integral timers will be reset if the temperature within bounds"
-    annotation(Dialog(enable=use_itgTim), Evaluate=true, HideResult=true,
-      choices(checkBox=true));
+  extends AixLib.Utilities.KPIs.BaseClasses.PartialAssessmentBase(
+    final nItgTim=3);
   Modelica.Blocks.Interfaces.RealInput T(
     final unit="K", displayUnit="degC", final min=0) "Temperature input"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -26,19 +15,10 @@ partial model PartialTemperatureAssessment
   Modelica.Blocks.Interfaces.RealOutput totDegSecOutBou(final unit="K.s")
     "Total degree-second out of bound"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
-  Modelica.Blocks.Interfaces.BooleanInput itgAct_in if use_itgAct_in
-    "Conditional connector to activate integrator"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={0,-120})));
   AixLib.Utilities.KPIs.IntegralErrorDualReference.IntegralErrorDualBounds itgErrDuaBou(
     final use_itgAct_in=use_itgAct_in, final use_itgRes_in=resItgInBou)
     "Dual bounds integrator for temperature"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
-  Modelica.Blocks.Logical.Not notRes if (resItgInBou or resItgTimInBou)
-    "Conditional not logic for reset"
-    annotation (Placement(transformation(extent={{40,-40},{20,-20}})));
   Modelica.Blocks.Interfaces.RealOutput timeOutUppBou(final unit="s") if use_itgTim
     "Time out of upper bound"
     annotation (Placement(transformation(extent={{100,-60},{120,-40}})));
@@ -48,10 +28,6 @@ partial model PartialTemperatureAssessment
   Modelica.Blocks.Interfaces.RealOutput timeOutLowBou(final unit="s") if use_itgTim
     "Time out of lower bound"
     annotation (Placement(transformation(extent={{100,-100},{120,-80}})));
-  AixLib.Utilities.KPIs.IntegralErrorSingleReference.IntegralTimer itgTim[3](
-    each final use_itgRes_in=resItgTimInBou) if use_itgTim
-    "Conditional integral timers"
-    annotation (Placement(transformation(extent={{60,-80},{80,-60}})));
 equation
   connect(T, itgErrDuaBou.u)
     annotation (Line(points={{-120,0},{-24,0}}, color={0,0,127}));
