@@ -13,10 +13,10 @@ model IntegralErrorDualReference "Test integral error with dual references"
     offset=-1,
     startTime=1) "Ramp lower bound"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
-  Modelica.Blocks.Sources.Pulse pulSou(
+  Modelica.Blocks.Sources.Pulse pul(
     amplitude=8,
     period=2,
-    offset=-4) "Pulse source"
+    offset=-4) "Pulse as input value"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Sources.BooleanStep booSteItgAct(startTime=4)
     "Boolean source to activate integrators"
@@ -42,12 +42,12 @@ equation
           {-60,32},{-24,32}}, color={0,0,127}));
   connect(ramUppBou.y, iedActRes.refUpp) annotation (Line(points={{-79,90},{-60,
           90},{-60,-28},{-24,-28}}, color={0,0,127}));
-  connect(pulSou.y, ied.u) annotation (Line(points={{-79,50},{-50,50},{-50,80},
-          {-24,80}}, color={0,0,127}));
-  connect(pulSou.y, iedAct.u) annotation (Line(points={{-79,50},{-50,50},{-50,
-          20},{-24,20}}, color={0,0,127}));
-  connect(pulSou.y, iedActRes.u) annotation (Line(points={{-79,50},{-50,50},{
-          -50,-40},{-24,-40}}, color={0,0,127}));
+  connect(pul.y, ied.u) annotation (Line(points={{-79,50},{-50,50},{-50,80},{-24,
+          80}}, color={0,0,127}));
+  connect(pul.y, iedAct.u) annotation (Line(points={{-79,50},{-50,50},{-50,20},{
+          -24,20}}, color={0,0,127}));
+  connect(pul.y, iedActRes.u) annotation (Line(points={{-79,50},{-50,50},{-50,-40},
+          {-24,-40}}, color={0,0,127}));
   connect(ramLowBou.y, ied.refLow) annotation (Line(points={{-79,10},{-40,10},{
           -40,68},{-24,68}}, color={0,0,127}));
   connect(ramLowBou.y, iedAct.refLow) annotation (Line(points={{-79,10},{-40,10},
@@ -60,4 +60,24 @@ equation
           -50},{-68,-50},{-68,-80},{0,-80},{0,-64}}, color={255,0,255}));
   connect(booSteItgRes.y, iedActRes.itgRes_in)
     annotation (Line(points={{-79,-90},{12,-90},{12,-64}}, color={255,0,255}));
+  annotation (
+    Documentation(info="<html>
+<p>This example checks the models of error integrators with dual references.</p>
+<p>The results represent the differences in configurations regarding activation and reset functions.</p>
+</html>", revisions="<html>
+<ul>
+  <li>
+    January 9, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/IntegralErrorDualReference.mos"
+        "Simulate and plot"),
+    experiment(
+      StartTime=0,
+      StopTime=10,
+      Interval=0.1,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"));
 end IntegralErrorDualReference;

@@ -12,6 +12,7 @@ annotation (Documentation(info="<html>
 <p>Building upon these primary sub-packages, additional specialized sub-packages have been developed to address specific aspects of control performance:</p>
 <ul>
 <li>The package <a href=\"modelica://AixLib/Utilities/KPIs/Energy/package.mo\">Energy</a> focuses on evaluating both electrical and thermal energy metrics.</li>
+<li>The package <a href=\"modelica://AixLib/Utilities/KPIs/IndoorAirQuality/package.mo\">IndoorAirQuality</a> focuses on assessing indoor air pollutants, such as CO<sub>2</sub>.</li>
 <li>The package <a href=\"modelica://AixLib/Utilities/KPIs/Temperature/package.mo\">Temperature</a> aims at assessing thermal comfort based on room temperature.</li>
 </ul>
 </html>"));

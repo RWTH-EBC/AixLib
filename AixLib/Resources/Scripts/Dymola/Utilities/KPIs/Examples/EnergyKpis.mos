@@ -1,0 +1,7 @@
+simulateModel("AixLib.Utilities.KPIs.Examples.EnergyKpis", startTime=0, stopTime=10, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="EnergyKpis");
+createPlot(id=1, position={0, 0, 1653, 686}, y={"pulQ_flow.y"}, heading="Thermal meter", range={0.0, 10.0, -1.5, 1.5}, grid=true, subPlot=101, colors={{28,108,200}}, timeUnit="s", displayUnits={"W"});
+createPlot(id=1, position={0, 0, 1653, 686}, y={"thmMtr.QHea", "thmMtr.QCoo", "thmMtrTim.QHea", "thmMtrTim.QCoo"}, range={0.0, 10.0, -2.0000000000000003E-06, 2.0000000000000003E-06}, grid=true, subPlot=102, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, timeUnit="s", displayUnits={"kWh", "kWh", "kWh", "kWh"});
+createPlot(id=1, position={0, 0, 1653, 686}, y={"thmMtrTim.timeHea", "thmMtrTim.timeCoo"}, range={0.0, 10.0, -2.0, 8.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}}, timeUnit="s", displayUnits={"s", "s"});
+createPlot(id=2, position={85, 67, 995, 603}, y={"pulP.y"}, heading="Electricity meter", range={0.0, 10.0, -1.0, 3.0}, grid=true, subPlot=101, colors={{28,108,200}}, timeUnit="s", displayUnits={"W"});
+createPlot(id=2, position={85, 67, 995, 603}, y={"eleMtr.E", "eleMtrTim.E"}, range={0.0, 10.0, -1.0000000000000002E-06, 3.0000000000000005E-06}, grid=true, subPlot=102, colors={{28,108,200}, {238,46,47}}, timeUnit="s", displayUnits={"kWh", "kWh"});
+createPlot(id=2, position={85, 67, 995, 603}, y={"eleMtrTim.timeAct"}, range={0.0, 10.0, -2.0, 6.0}, grid=true, subPlot=103, colors={{28,108,200}}, timeUnit="s", displayUnits={"s"});

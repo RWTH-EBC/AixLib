@@ -107,7 +107,22 @@ equation
   connect(not1.y, itgErrPosActRes.itgRes_in) annotation (Line(points={{81,-30},{
           90,-30},{90,-50},{36,-50},{36,-42}}, color={255,0,255}));
   annotation (experiment(
+      StartTime=0,
       StopTime=10,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/IntegralErrorSingleReference.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
+<p>This example checks the models of error integrators with a single reference.</p>
+<p>The results represent the differences of IAE, ISE, by sign, and timer. The integrators are configured differntly in terms of their activation and reset functions.</p>
+</html>", revisions="<html>
+<ul>
+  <li>
+    January 9, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>"));
 end IntegralErrorSingleReference;

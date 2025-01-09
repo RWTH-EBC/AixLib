@@ -41,30 +41,46 @@ model Co2Kpis "Test of different CO2 concentration KPIs"
   IndoorAirQuality.Co2DIN16798 din16798Tim(use_itgTim=true)
     "DIN EN 16798-1 with timers"
     annotation (Placement(transformation(extent={{40,60},{60,80}})));
-  IndoorAirQuality.Co2DIN16798 din16798ActTim(use_itgAct_in=true, use_itgTim=
-        true) "DIN EN 16798-1 with activation connector and timers"
+  IndoorAirQuality.Co2DIN16798 din16798ActTim(use_itgAct_in=true, use_itgTim=true)
+    "DIN EN 16798-1 with activation connector and timers"
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
 equation
   connect(traCo2Con.y, fixBou.co2Con)
     annotation (Line(points={{-79,90},{-22,90}}, color={0,0,127}));
   connect(traCo2Con.y, fixBouAct.co2Con) annotation (Line(points={{-79,90},{-30,
           90},{-30,50},{-22,50}}, color={0,0,127}));
-  connect(booPulAct.y, fixBouAct.itgAct_in) annotation (Line(points={{-79,10},{
-          -40,10},{-40,30},{-10,30},{-10,38}}, color={255,0,255}));
+  connect(booPulAct.y, fixBouAct.itgAct_in) annotation (Line(points={{-79,10},{-40,
+          10},{-40,30},{-10,30},{-10,38}}, color={255,0,255}));
   connect(traCo2Con.y, fixBouRes.co2Con) annotation (Line(points={{-79,90},{-30,
           90},{-30,10},{-22,10}}, color={0,0,127}));
   connect(traCo2Con.y, fixBouTim.co2Con) annotation (Line(points={{-79,90},{-30,
           90},{-30,-30},{-22,-30}}, color={0,0,127}));
-  connect(traCo2Con.y, fixBouTimRes.co2Con) annotation (Line(points={{-79,90},{
-          -30,90},{-30,-70},{-22,-70}}, color={0,0,127}));
-  connect(traCo2Con.y, din16798Tim.co2Con) annotation (Line(points={{-79,90},{
-          -30,90},{-30,70},{38,70}}, color={0,0,127}));
-  connect(booPulAct.y, din16798ActTim.itgAct_in) annotation (Line(points={{-79,
-          10},{-40,10},{-40,-10},{50,-10},{50,18}}, color={255,0,255}));
+  connect(traCo2Con.y, fixBouTimRes.co2Con) annotation (Line(points={{-79,90},{-30,
+          90},{-30,-70},{-22,-70}}, color={0,0,127}));
+  connect(traCo2Con.y, din16798Tim.co2Con) annotation (Line(points={{-79,90},{-30,
+          90},{-30,70},{38,70}}, color={0,0,127}));
+  connect(booPulAct.y, din16798ActTim.itgAct_in) annotation (Line(points={{-79,10},
+          {-40,10},{-40,-10},{50,-10},{50,18}}, color={255,0,255}));
   connect(traCo2Con.y, din16798ActTim.co2Con) annotation (Line(points={{-79,90},
           {-30,90},{-30,70},{30,70},{30,30},{38,30}}, color={0,0,127}));
-  annotation (experiment(
+  annotation (
+    experiment(
+      StartTime=0,
       StopTime=120,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    January 9, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example checks the models for CO<sub>2</sub> KPIs.</p>
+<p>The results represent the differences of fixed limit and multiple limits according to DIN EN 16798-1. The assessments are configured differntly in terms of their activation, reset, and timer functions.</p>
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/Co2Kpis.mos"
+        "Simulate and plot"));
 end Co2Kpis;

@@ -80,7 +80,22 @@ equation
   connect(traTAmb.y, from_degC1.u)
     annotation (Line(points={{-79,-90},{-62,-90}}, color={0,0,127}));
   annotation (experiment(
+      StartTime=0,
       StopTime=120,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    January 9, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example checks the models for temperature KPIs.</p>
+<p>The results represent the differences of fixed and flexible boundaries, as well as boundaries according to DIN EN 16798-1. The assessments are configured differntly in terms of their activation, reset, and timer functions.</p>
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/TemperatureKpis.mos"
+        "Simulate and plot"));
 end TemperatureKpis;

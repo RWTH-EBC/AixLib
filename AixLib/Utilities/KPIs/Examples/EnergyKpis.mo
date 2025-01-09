@@ -34,7 +34,22 @@ equation
   connect(pulP.y, eleMtrTim.P) annotation (Line(points={{-79,-50},{-40,-50},{-40,
           -70},{-2,-70}}, color={0,0,127}));
   annotation (experiment(
+      StartTime=0,
       StopTime=10,
       Interval=0.1,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    January 9, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1534\">issue 1534</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example checks the models of energy KPIs.</p>
+<p>The results represent the differences of thermal meters and electricity meters, with or without timer functions.</p>
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/EnergyKpis.mos"
+        "Simulate and plot"));
 end EnergyKpis;
