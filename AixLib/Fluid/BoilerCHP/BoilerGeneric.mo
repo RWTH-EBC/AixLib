@@ -68,6 +68,8 @@ model BoilerGeneric "Generic performance map based boiler"
     annotation (Placement(transformation(extent={{8,-26},{28,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator4
     annotation (Placement(transformation(extent={{44,4},{64,24}})));
+  Modelica.Blocks.Continuous.Integrator integrator1
+    annotation (Placement(transformation(extent={{10,20},{30,40}})));
 protected
   parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -113,13 +115,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(thermalPower.y, boilerControlBus.ThermalPower) annotation (Line(
-        points={{-38,3},{-38,0},{0,0},{0,100}},                      color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(senTCold.T, boilerControlBus.TColdMea) annotation (Line(points={{-70,-69},
           {-70,100},{0,100}},               color={0,0,127}), Text(
       string="%second",
@@ -155,6 +150,21 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(heatFlowSensor.Q_flow, integrator4.u) annotation (Line(points={{-20,
           -27.4},{-20,-2},{34,-2},{34,14},{42,14}}, color={0,0,127}));
+  connect(thermalPower.y, integrator1.u) annotation (Line(points={{-38,3},{-38,
+          -10},{4,-10},{4,30},{8,30}}, color={0,0,127}));
+  connect(integrator1.y, boilerControlBus.EnergyHeat) annotation (Line(points={
+          {31,30},{40,30},{40,32},{66,32},{66,100},{0,100}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalPower.y, boilerControlBus.PowerHeat) annotation (Line(points={
+          {-38,3},{-30,3},{-30,0},{0,0},{0,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html><h4>
