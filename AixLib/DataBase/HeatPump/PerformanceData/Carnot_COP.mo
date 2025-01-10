@@ -1,27 +1,22 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model GeneralThermodynamic
+model Carnot_COP
 
    extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
-
-
-
-
 
   CarnotCOP carnotCOPDesign
     annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
   CarnotCOP carnotCOPOffDesign
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   Modelica.Blocks.Sources.RealExpression tSourceNom(y=TSourceNom)
-    annotation (Placement(transformation(extent={{-128,72},{-102,96}})));
+    annotation (Placement(transformation(extent={{-164,46},{-100,80}})));
   Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom)
-    annotation (Placement(transformation(extent={{-124,90},{-102,114}})));
+    annotation (Placement(transformation(extent={{-164,80},{-102,114}})));
   Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot(y=eta_carnot)
-                                                          "Guetegrad"
+  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.5) "Guetegrad"
     annotation (Placement(transformation(extent={{-118,18},{-82,38}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{0,-2},{20,18}})));
@@ -45,14 +40,20 @@ model GeneralThermodynamic
         origin={-50,-50})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=20, uMin=1)
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=20, uMin=0)
     annotation (Placement(transformation(extent={{84,40},{104,60}})));
+  Modelica.Blocks.Logical.Greater greater
+    annotation (Placement(transformation(extent={{60,100},{80,120}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{108,92},{128,112}})));
+  Modelica.Blocks.Sources.RealExpression etaCarnot1(y=0)  "Guetegrad"
+    annotation (Placement(transformation(extent={{10,70},{46,90}})));
 equation
   connect(tSourceNom.y, carnotCOPDesign.tCold)
-    annotation (Line(points={{-100.7,84},{-92,84},{-92,86},{-82,86}},
+    annotation (Line(points={{-96.8,63},{-92,63},{-92,86},{-82,86}},
                                                     color={0,0,127}));
-  connect(tHotNom.y, carnotCOPDesign.tHot) annotation (Line(points={{-100.9,102},
-          {-90,102},{-90,94},{-82,94}},color={0,0,127}));
+  connect(tHotNom.y, carnotCOPDesign.tHot) annotation (Line(points={{-98.9,97},
+          {-90,97},{-90,94},{-82,94}}, color={0,0,127}));
   connect(sigBus.TConOutMea, carnotCOPOffDesign.tHot) annotation (Line(
       points={{-0.925,100.07},{0,100.07},{0,54},{38,54}},
       color={255,204,51},
@@ -115,10 +116,32 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(copOffDesign.y, qConOffDesign.u2) annotation (Line(points={{83,0},{
           126,0},{126,-56},{-38,-56}}, color={0,0,127}));
-  connect(carnotCOPOffDesign.COP, limiter.u) annotation (Line(points={{61.15,
-          49.95},{71.575,49.95},{71.575,50},{82,50}}, color={0,0,127}));
   connect(limiter.y, copOffDesign.u1) annotation (Line(points={{105,50},{114,50},
           {114,22},{60,22},{60,6}}, color={0,0,127}));
+  connect(sigBus.TConOutMea, greater.u1) annotation (Line(
+      points={{-0.925,100.07},{14,100.07},{14,98},{26,98},{26,110},{58,110}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.TEvaInMea, greater.u2) annotation (Line(
+      points={{-0.925,100.07},{24,100.07},{24,102},{58,102}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(greater.y, switch1.u2) annotation (Line(points={{81,110},{86,110},{86,
+          108},{90,108},{90,102},{106,102}}, color={255,0,255}));
+  connect(carnotCOPOffDesign.COP, switch1.u1) annotation (Line(points={{61.15,
+          49.95},{74,49.95},{74,86},{98,86},{98,110},{106,110}}, color={0,0,127}));
+  connect(switch1.y, limiter.u) annotation (Line(points={{129,102},{146,102},{
+          146,70},{82,70},{82,50}}, color={0,0,127}));
+  connect(etaCarnot1.y, switch1.u3) annotation (Line(points={{47.8,80},{52,80},
+          {52,82},{58,82},{58,90},{106,90},{106,94}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end GeneralThermodynamic;
+end Carnot_COP;

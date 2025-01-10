@@ -19,9 +19,23 @@ model CarnotCOP
           origin={111.5,-0.5})));
 
 
+  Modelica.Blocks.Logical.Greater greater
+    annotation (Placement(transformation(extent={{-20,16},{0,36}})));
+  Modelica.Blocks.Sources.RealExpression etaCarnot1(y=0)  "Guetegrad"
+    annotation (Placement(transformation(extent={{-42,-44},{-6,-24}})));
 equation
 
-  COP=1/(1-(tCold/tHot));
+if greater.y then
+  COP =  1 / (1 - (tCold / tHot));
+else
+  COP =  1;
+end if;
+
+
+  connect(tHot, greater.u1) annotation (Line(points={{-120,40},{-74,40},{-74,26},
+          {-22,26}}, color={0,0,127}));
+  connect(tCold, greater.u2) annotation (Line(points={{-120,-40},{-66,-40},{-66,
+          18},{-22,18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CarnotCOP;
