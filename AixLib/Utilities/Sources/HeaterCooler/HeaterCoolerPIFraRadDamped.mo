@@ -1,8 +1,8 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 model HeaterCoolerPIFraRadDamped
   extends PartialHeaterCoolerPIFraRad(
-  fraCooRad= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then 0.5 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then 0.5 else 0.5,
-  fraHeaRad= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then 0.5 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then 0.5 else 0.5);
+  fraCooRad= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then traSysRec.fraHeaRadRad elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then traSysRec.fraHeaRadUfh else traSysRec.fraHeaRadCca,
+  fraHeaRad= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then traSysRec.fraCooRadRad elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then traSysRec.fraCooRadUfh else traSysRec.fraCooRadCca);
 
   parameter SimplifiedTransferSystems.TransferSystem traSys=
       SimplifiedTransferSystems.TransferSystem.IdealHeater

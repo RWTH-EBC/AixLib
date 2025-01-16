@@ -10,6 +10,13 @@ record SimplifiedTransferSystem
   parameter Modelica.Units.SI.Time T_UfhGroFlo(start=1)=3600 "Time Constant for underfloorheating of ground floor";
   parameter Modelica.Units.SI.Time T_UfhFlo(start=1)=3600 "Time Constant for underfloorheating of inner floor";
   parameter Modelica.Units.SI.Time T_Cca(start=1)=14400  "Time Constant for concrete core activation";
+  parameter Real fraHeaRadRad=0.5 "Fraction of heating to radiation for radiators";
+  parameter Real fraCooRadRad=0.5 "Fraction of cooling to radiation for radiators";
+  parameter Real fraHeaRadUfh=0.5 "Fraction of heating to radiation for underfloorheating";
+  parameter Real fraCooRadUfh=0.5 "Fraction of cooling to radiation for underfloorheating";
+  parameter Real fraHeaRadCca=0.5 "Fraction of heating to radiation for concreate core activation";
+  parameter Real fraCooRadCca=0.5 "Fraction of cooling to radiation for concreate core activation";
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimplifiedTransferSystem;
