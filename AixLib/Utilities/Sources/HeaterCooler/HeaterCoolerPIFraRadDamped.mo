@@ -26,11 +26,6 @@ parameter AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.Transf
      zoneParam.AFloor * traSysRec.k_UfhFlo) / zoneParam.AZone else traSysRec.k_Cca "Gain for PT1 for damped heating transfer";
   parameter Modelica.Units.SI.Time TPT1= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then traSysRec.T_Rad elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then ((zoneParam.AZone - zoneParam.AFloor) * traSysRec.T_UfhGroFlo +
      zoneParam.AFloor * traSysRec.T_UfhFlo) / zoneParam.AZone else traSysRec.T_Cca "Time Constant for PT1 for damped heating transfer";
-//   parameter Real fraCooRad= if traSysInt == 0 then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then 0.5 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then 0.5 else 0.5 "Fraction of cooling power on radiative port";
-//  parameter Real fraHeaRad= if traSysInt == 0 then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then 0.5 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then 0.5 else 0.5 "Fraction of heating power on radiative port";
-//   parameter Real kPT1=0 "Gain for PT1 for damped heating transfer";
-//   parameter Modelica.Units.SI.Time TPT1=0 "Time Constant for PT1 for damped
-//     heating transfer";
 
   Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=kPT1, T=TPT1) if not
     traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater
@@ -41,40 +36,7 @@ parameter AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.Transf
      == SimplifiedTransferSystems.TransferSystem.IdealHeater
     "Emulates the belayed cooling flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-20,-84},{0,-64}})));
-initial equation
-  if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then
-//     kPT1=0; // dummy value
-//     TPT1=0; // dummy value
-    // TODO Jonatan
-    fraHeaRad=0;
-    fraCooRad=0;
 
-  elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then
-//     kPT1=traSysRec.k_Rad;
-//     TPT1=traSysRec.T_Rad;
-    // TODO Jonatan
-    fraHeaRad=0.5;
-    fraCooRad=0.5;
-
-  elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then
-    // This only works for 4 element exports, AFloor is area of groundfloor,
-    //  AZone is total zone area
-//     kPT1=((zoneParam.AZone - zoneParam.AFloor) * traSysRec.k_UfhGroFlo +
-//      zoneParam.AFloor * traSysRec.k_UfhFlo) / zoneParam.AZone;
-//     TPT1=((zoneParam.AZone - zoneParam.AFloor) * traSysRec.T_UfhGroFlo +
-//      zoneParam.AFloor * traSysRec.T_UfhFlo) / zoneParam.AZone;
-    // TODO Jonatan
-    fraHeaRad=0.5;
-    fraCooRad=0.5;
-
-  else // ConcreteCoreActivation
-//     kPT1=traSysRec.k_Cca;
-//     TPT1=traSysRec.T_Cca;
-    // TODO Jonatan
-    fraHeaRad=0.5;
-    fraCooRad=0.5;
-
-  end if;
 equation
   connect(pITempHeat.y, firstOrderHeating.u) annotation (Line(points={{-1,20},{2,
           20},{2,46},{-30,46},{-30,64},{-22,64}}, color={0,0,127},
