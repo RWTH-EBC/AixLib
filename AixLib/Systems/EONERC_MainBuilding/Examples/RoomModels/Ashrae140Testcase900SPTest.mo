@@ -142,7 +142,7 @@ model Ashrae140Testcase900SPTest
   Fluid.Sources.Boundary_pT        bouWaterhot(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=333.15,
+    T=318.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
@@ -150,7 +150,7 @@ model Ashrae140Testcase900SPTest
   Fluid.Sources.Boundary_pT        bouWaterhot1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=333.15,
+    T=318.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
@@ -188,6 +188,7 @@ model Ashrae140Testcase900SPTest
         rotation=90,
         origin={63,-113})));
   ModularAHU.Controller.CtrAHUBasic ctrAhu(
+    usePreheater=false,
     useExternalTset=true,
     k=1000,
     Ti=60,
@@ -468,11 +469,11 @@ equation
   connect(tabs1.heatPort,thermalZone1.intGainsConv) annotation (Line(points={{94,
           -78.9},{94,-33.84},{66.56,-33.84}},                       color={191,
           0,0}));
-  connect(genericAHU1.port_b1,thermalZone1.ports[1]) annotation (Line(points={{8.16364,
-          -80.1818},{36,-80.1818},{36,-55.88},{34.71,-55.88}},   color={0,127,
+  connect(genericAHU1.port_b1,thermalZone1.ports[1]) annotation (Line(points={{8.16364,-80.1818},{36,
+          -80.1818},{36,-55.88},{34.71,-55.88}},                 color={0,127,
           255}));
-  connect(genericAHU1.port_a2,thermalZone1.ports[2]) annotation (Line(points={{8.16364,
-          -70.7273},{46,-70.7273},{46,-55.88},{41.29,-55.88}}, color={0,127,255}));
+  connect(genericAHU1.port_a2,thermalZone1.ports[2]) annotation (Line(points={{8.16364,-70.7273},{46,
+          -70.7273},{46,-55.88},{41.29,-55.88}},               color={0,127,255}));
   connect(boundaryExhaustAir.ports[1],genericAHU1.port_b2) annotation (Line(
         points={{-50,-70},{-50,-70.7273},{-28,-70.7273}},    color={0,127,255}));
   connect(thermalZone1.TAir, Bus.TZoneMea) annotation (Line(points={{68.8,-11.8},
