@@ -1,0 +1,425 @@
+
+
+
+AixLib/DataBase/ThermalZones/ZoneBaseRecord.mo
+1: Name 'withAirCap' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAirCap = true "Consider capacity of indoor air";
+
+2: Name 'nOrientations' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations. Affected line: parameter Integer nOrientations(min=1) "Number of total facades with different combination of tilt and orientation";
+
+3: Name 'ATransparent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Transparent. Affected line: parameter Modelica.Units.SI.Area ATransparent[nOrientations] "Areas of transparent (solar radiation transmittend) elements by orientations";
+
+4: Name 'gWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g. Affected line: parameter Modelica.Units.SI.TransmissionCoefficient gWin "Total energy transmittance of windows";
+
+5: Name 'ratioWinConRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio. Affected line: parameter Real ratioWinConRad "Ratio for windows between convective and radiative heat emission";
+
+6: Name 'AFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.Area AFloor "Area of floor plate";
+
+7: Name 'hConFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConFloor "Convective coefficient of heat transfer of floor plate (indoor)";
+
+8: Name 'nFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
+
+9: Name 'RFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
+
+10: Name 'RFloorRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
+
+11: Name 'CFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: parameter Modelica.Units.SI.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
+
+12: Name 'ARoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Area ARoof "Area of roof";
+
+13: Name 'hConRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoof "Convective coefficient of heat transfer of roof (indoor)";
+
+14: Name 'nRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Integer nRoof(min=1) "Number of RC-elements of roof";
+
+15: Name 'RRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
+
+16: Name 'RRoofRem' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
+
+17: Name 'CRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof] "Heat capacities of roof, from inside to outside";
+
+18: Name 'nOrientationsRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Orientations, Roof. Affected line: parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof";
+
+19: Name 'tiltRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Roof. Affected line: parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof";
+
+20: Name 'aziRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.Angle aziRoof[nOrientationsRoof] "Azimuths of roof";
+
+21: Name 'wfRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Roof. Affected line: parameter Real wfRoof[nOrientationsRoof] "Weight factors of the roof";
+
+22: Name 'aRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a, Roof. Affected line: parameter Modelica.Units.SI.Emissivity aRoof "Coefficient of absorption of roof (outdoor)";
+
+23: Name 'aExt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Modelica.Units.SI.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
+
+24: Name 'TSoil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Soil. Affected line: parameter Modelica.Units.SI.Temperature TSoil "Temperature of soil";
+
+25: Name 'hConWallOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
+
+26: Name 'hRadWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadWall "Coefficient of heat transfer for linearized radiation for exterior walls";
+
+27: Name 'hConRoofOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
+
+28: Name 'hRadRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadRoof "Coefficient of heat transfer for linearized radiation for roof";
+
+29: Name 'tiltExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: tilt, Walls. Affected line: parameter Modelica.Units.SI.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
+
+30: Name 'aziExtWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Modelica.Units.SI.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
+
+31: Name 'wfWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf, Wall. Affected line: parameter Real wfWall[nOrientations] "Weight factors of the walls";
+
+32: Name 'wfWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfWin[nOrientations] "Weight factors of the windows";
+
+33: Name 'wfGro' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wf. Affected line: parameter Real wfGro "Weight factor of the ground";
+
+34: Name 'specificPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: specific, People. Affected line: parameter Real specificPeople "people per squaremeter";
+
+35: Name 'activityDegree' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: activity, Degree. Affected line: parameter Real activityDegree "acitivity degree of people in met";
+
+36: Name 'fixedHeatFlowRatePersons' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Heat, Rate, Persons. Affected line: parameter Modelica.Units.SI.HeatFlowRate fixedHeatFlowRatePersons "Area specific heatflowrate by persons in case of temperature independent calculation";
+
+37: Name 'ratioConvectiveHeatPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, People. Affected line: parameter Real ratioConvectiveHeatPeople "Ratio of convective heat from overall heat output for people";
+
+38: Name 'internalGainsMoistureNoPeople' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Moisture, People. Affected line: parameter Real internalGainsMoistureNoPeople "internal moisture production of plants, etc. except from people in g/(h m²)";
+
+39: Name 'internalGainsMachinesSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Machines, Specific. Affected line: parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
+
+40: Name 'ratioConvectiveHeatMachines' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Machines. Affected line: parameter Real ratioConvectiveHeatMachines "Ratio of convective heat from overall heat output for machines";
+
+41: Name 'lightingPowerSpecific' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: lighting, Power, Specific. Affected line: parameter Modelica.Units.SI.HeatFlux lightingPowerSpecific "Heat flux of lighting";
+
+42: Name 'ratioConvectiveHeatLighting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Convective, Heat, Lighting. Affected line: parameter Real ratioConvectiveHeatLighting "Ratio of convective heat from overall heat output for lights";
+
+43: Name 'useConstantACHrate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Constant, Hrate. Affected line: parameter Boolean useConstantACHrate "Choose if a constant infiltration rate is used";
+
+44: Name 'baseACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: base. Affected line: parameter Real baseACH "Base ACH rate for ventilation controller";
+
+45: Name 'maxUserACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: User. Affected line: parameter Real maxUserACH "Additional ACH value for max. user activity";
+
+46: Name 'maxOverheatingACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Overheating. Affected line: parameter Real maxOverheatingACH[2] "Additional ACH value when overheating appears, transition range";
+
+47: Name 'maxSummerACH' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Summer. Affected line: parameter Real maxSummerACH[3] "Additional ACH in summer, Tmin, Tmax";
+
+48: Name 'winterReduction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: winter, Reduction. Affected line: parameter Real winterReduction[3] "Reduction factor of userACH for cold weather";
+
+49: Name 'withAHU' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with. Affected line: parameter Boolean withAHU "Zone is connected to central air handling unit";
+
+50: Name 'shadingFactor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: shading, Factor. Affected line: parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
+
+51: Name 'hHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: parameter Real hHeat "Upper limit controller output";
+
+52: Name 'lHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Heat. Affected line: parameter Real lHeat "Lower limit controller output";
+
+53: Name 'KRHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Heat. Affected line: parameter Real KRHeat "Gain of the controller";
+
+54: Name 'TNHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Heat. Affected line: parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller";
+
+55: Name 'HeaterOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater. Affected line: parameter Boolean HeaterOn "Use heater component";
+
+56: Name 'hCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cool. Affected line: parameter Real hCool "Upper limit controller output";
+
+57: Name 'lCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l, Cool. Affected line: parameter Real lCool "Lower limit controller output";
+
+58: Name 'heaLoadFacOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
+
+59: Name 'heaLoadFacGrd' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load. Affected line: parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
+
+60: Name 'KRCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, Cool. Affected line: parameter Real KRCool "Gain of the controller";
+
+61: Name 'TNCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, Cool. Affected line: parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
+
+62: Name 'CoolerOn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler. Affected line: parameter Boolean CoolerOn "Use chiller component";
+
+63: Name 'TThresholdHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Heater. Affected line: parameter Modelica.Units.SI.Temperature TThresholdHeater "Threshold temperature below ideal heater is used";
+
+64: Name 'TThresholdCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold, Cooler. Affected line: parameter Modelica.Units.SI.Temperature TThresholdCooler "Threshold temperature above ideal cooler is used";
+
+65: Name 'withIdealThresholds' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with, Ideal, Thresholds. Affected line: parameter Boolean withIdealThresholds "Sets if the threshold temperatures for ideal heater and cooler should be used";
+
+
+AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo
+1: Name 'corG' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: replaceable model corG = SolarGain.CorrectionGDoublePane constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG "Model for correction of solar transmission" annotation(choicesAllMatching=true);
+
+2: Name 'internalGainsMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Mode. Affected line: parameter Integer internalGainsMode = 1 "decides which internal gains model for persons is used";
+
+3: Name 'use_MechanicalAirExchange' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Mechanical, Exchange. Affected line: parameter Boolean use_MechanicalAirExchange = false "Consider mechanical ventilation by setting true";
+
+4: Name 'use_NaturalAirExchange' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Natural, Exchange. Affected line: parameter Boolean use_NaturalAirExchange = use_MechanicalAirExchange "Consider natural infiltration and ventilation by setting true";
+
+5: Name 'Heater_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater_on. Affected line: parameter Boolean Heater_on=true "Activates the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+6: Name 'h_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_heater. Affected line: parameter Real h_heater=0 "Upper limit controller output of the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+7: Name 'l_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_heater. Affected line: parameter Real l_heater=0 "Lower limit controller output of the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+8: Name 'KR_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_heater. Affected line: parameter Real KR_heater=1000 "Gain of the heating controller" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+9: Name 'TN_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_heater. Affected line: parameter Modelica.Units.SI.Time TN_heater=1 "Time constant of the heating controller" annotation (Dialog( tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+10: Name 'Cooler_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler_on. Affected line: parameter Boolean Cooler_on=true "Activates the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+11: Name 'h_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_cooler. Affected line: parameter Real h_cooler=0 "Upper limit controller output of the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+12: Name 'l_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_cooler. Affected line: parameter Real l_cooler=0 "Lower limit controller output of the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+13: Name 'KR_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_cooler. Affected line: parameter Real KR_cooler=1000 "Gain of the cooling controller" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+14: Name 'TN_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_cooler. Affected line: parameter Modelica.Units.SI.Time TN_cooler=1 "Time constant of the cooling controller" annotation (Dialog( tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+15: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater "Transfer system type" annotation (Dialog( tab="IdealHeaterCooler", group="Modes", enable=not recOrSep));
+
+16: Name 'areaBod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: area. Affected line: parameter Modelica.Units.SI.Area areaBod=1.8 "Body surface area source SIA 2024:2015" annotation (Dialog(tab="CO2", enable=use_C_flow));
+
+17: Name 'nPools' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pools. Affected line: parameter Integer nPools(min=1)=1 "Number of pools in thermal zone" annotation(Dialog(enable=use_pools,tab="Moisture", group="Pools"));
+
+18: Name 'poolParam' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pool, Param. Affected line: replaceable parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition poolParam[nPools]= fill(DataBase.Pools.IndoorSwimmingPoolDummy(), nPools) if use_pools "Setup for swimming pools" annotation (Dialog( enable=use_pools, tab="Moisture", group="Pools"));
+
+19: Name 'poolWallParam' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pool, Wall, Param. Affected line: replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition poolWallParam[nPools] = fill(DataBase.Walls.ASHRAE140.DummyDefinition(), nPools) if use_pools "Setup for swimming pool walls" annotation(Dialog(enable=use_pools,tab="Moisture", group="Pools"));
+
+20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam "Choose setup for this zone" annotation (choicesAllMatching=true);
+
+21: Missing documentation, Name 'humanSenHeaDependent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: human, Dependent. Affected line: AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent( final ratioConv=zoneParam.ratioConvectiveHeatPeople, final roomArea=zoneParam.AZone, final specificPersons=zoneParam.specificPeople, final activityDegree=zoneParam.activityDegree, final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{56,-34}, {76,-14}})));
+
+22: Missing documentation, Name 'humanSenHeaIndependent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: human, Independent. Affected line: AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent( final ratioConv=zoneParam.ratioConvectiveHeatPeople, final roomArea=zoneParam.AZone, final specificPersons=zoneParam.specificPeople, final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{56,-34}, {76,-14}})));
+
+23: Missing documentation, Name 'humanTotHeaDependent' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: human, Dependent. Affected line: AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent( final ratioConv=zoneParam.ratioConvectiveHeatPeople, final roomArea=zoneParam.AZone, final specificPersons=zoneParam.specificPeople, final activityDegree=zoneParam.activityDegree, final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{56,-34}, {76,-14}})));
+
+24: Name 'machinesSenHea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: machines. Affected line: replaceable AixLib.BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific machinesSenHea( final ratioConv=zoneParam.ratioConvectiveHeatMachines, final intGainsMachinesRoomAreaSpecific=zoneParam.internalGainsMachinesSpecific, final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{56,-56}, {76,-37}})));
+
+25: Name 'lights' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: lights. Affected line: replaceable AixLib.BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lights( final ratioConv=zoneParam.ratioConvectiveHeatLighting, final lightingPowerRoomAreaSpecific=zoneParam.lightingPowerSpecific, final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{56,-78}, {76,-59}})));
+
+26: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: corG corGMod( final n=zoneParam.nOrientations, final UWin=zoneParam.UWin) if sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission" annotation (Placement(transformation(extent={{-16,43},{-4,55}})));EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall( withLongwave=true, final n=zoneParam.nOrientations, final wfWall=zoneParam.wfWall, final wfWin=zoneParam.wfWin, final wfGro=zoneParam.wfGro, final hConWallOut=zoneParam.hConWallOut, final hRad=zoneParam.hRadWall, final hConWinOut=zoneParam.hConWinOut, final aExt=zoneParam.aExt, final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0 "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-38,10},{-26,22}})));EquivalentAirTemperature.VDI6007 eqAirTempRoof( final wfGro=0, final n=zoneParam.nOrientationsRoof, final aExt=zoneParam.aRoof, final wfWall=zoneParam.wfRoof, final hConWallOut=zoneParam.hConRoofOut, final hRad=zoneParam.hRadRoof, final wfWin=fill(0, zoneParam.nOrientationsRoof), final TGro=273.15) if zoneParam.ARoof > 0 "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{-40,66},{-28,78}})));
+
+27: Name 'constSunblindRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Sunblind, Roof. Affected line: Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof]( each k=0) "Sets sunblind signal to zero (open)" annotation (Placement( transformation( extent={{3,-3},{-3,3}}, rotation=90, origin={-36,95})));
+
+28: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilWall[zoneParam.nOrientations]( each final outSkyCon=true, each final outGroCon=true, final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls) "Calculates diffuse solar radiation on titled surface for both directions" annotation (Placement(transformation(extent={{-84,10},{-68,26}})));BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations]( final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls) "Calculates direct solar radiation on titled surface for both directions" annotation (Placement(transformation(extent={{-84,31},{-68,48}})));BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof]( final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof) "Calculates direct solar radiation on titled surface for roof" annotation (Placement(transformation(extent={{-84,82},{-68,98}})));Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped heaterCooler( each h_heater=h_heater, each l_heater=l_heater, each KR_heater=KR_heater, each TN_heater=TN_heater, each h_cooler=h_cooler, each l_cooler=l_cooler, each KR_cooler=KR_cooler, each TN_cooler=TN_cooler, final zoneParam=zoneParam, each recOrSep=recOrSep, each Heater_on=Heater_on, each Cooler_on=Cooler_on, each staOrDyn=not zoneParam.withIdealThresholds, traSys=traSys) if (ATot > 0 or zoneParam.VAir > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or ( not recOrSep and (Heater_on or Cooler_on)) "Heater Cooler with PI control" annotation (Placement(transformation(extent={{62,32},{84,52}})));Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam= zoneParam) if zoneParam.withIdealThresholds annotation (Placement(transformation(extent={{-9,-8},{9,8}}, rotation=0, origin={69,18})));
+
+29: Name 'TSetCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cool. Affected line: Modelica.Blocks.Interfaces.RealInput TSetCool( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) "Set point for cooler" annotation (Placement(transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-108,8}), iconTransformation( extent={{10,-10},{-10,10}}, rotation=180, origin={-96,40})));
+
+30: Name 'TSetHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: Modelica.Blocks.Interfaces.RealInput TSetHeat( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) "Set point for heater" annotation (Placement(transformation( extent={{20,20},{-20,-20}}, rotation=180, origin={-108,-16}),iconTransformation( extent={{10,-10},{-10,10}}, rotation=180, origin={-96,12})));
+
+31: Name 'PHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater. Affected line: Modelica.Blocks.Interfaces.RealOutput PHeater(final quantity="HeatFlowRate", final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) "Power for heating" annotation (Placement(transformation(extent={{100,-10}, {120,10}}), iconTransformation(extent={{100,-30},{120,-10}})));
+
+32: Name 'PCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler. Affected line: Modelica.Blocks.Interfaces.RealOutput PCooler(final quantity="HeatFlowRate", final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) "Power for cooling" annotation (Placement(transformation(extent={{100,-30}, {120,-10}}), iconTransformation(extent={{100,-50},{120,-30}})));
+
+33: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SolarGain.SimpleExternalShading simpleExternalShading( final nOrientations=zoneParam.nOrientations, final maxIrrs=zoneParam.maxIrr, final gValues=zoneParam.shadingFactor) if sum(zoneParam.ATransparent) > 0 annotation (Placement(transformation(extent={{4,44},{10,50}})));// Air Exchange Controls.VentilationController.VentilationController ventCont( final useConstantOutput=zoneParam.useConstantACHrate, final baseACH=zoneParam.baseACH, final maxUserACH=zoneParam.maxUserACH, final maxOverheatingACH=zoneParam.maxOverheatingACH, final maxSummerACH=zoneParam.maxSummerACH, final winterReduction=zoneParam.winterReduction, final Tmean_start=zoneParam.T_start) if (ATot > 0 or zoneParam.VAir > 0) and use_NaturalAirExchange "Calculates natural venitlation and infiltration" annotation (Placement(transformation(extent={{-66,-34},{-50,-18}})));Utilities.Psychrometrics.MixedTemperature mixedTemp if (ATot > 0 or zoneParam.VAir > 0) and use_NaturalAirExchange and use_MechanicalAirExchange "Mixes temperature of infiltration flow and mechanical ventilation flow" annotation (Placement(transformation(extent={{-56,-4},{-48,4}})));HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if (ATot > 0 or zoneParam.VAir > 0) and (use_NaturalAirExchange or use_MechanicalAirExchange) and not use_moisture_balance "Heat flow due to ventilation" annotation (Placement(transformation(extent={{-22,-14},{-6,2}})));
+
+34: Name 'ventTemp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: vent, Temp. Affected line: Modelica.Blocks.Interfaces.RealInput ventTemp( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC", min=0) if (ATot > 0 or zoneParam.VAir > 0) and use_MechanicalAirExchange "Ventilation and infiltration temperature" annotation (Placement( transformation(extent={{-128,-60},{-88,-20}}), iconTransformation( extent={{-106,-26},{-86,-6}})));
+
+35: Name 'ventRate' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: vent, Rate. Affected line: Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate", final unit="1/h") if (ATot > 0 or zoneParam.VAir > 0) and use_MechanicalAirExchange "Ventilation and infiltration rate" annotation ( Placement(transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-108,-64}), iconTransformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-96,-42})));
+
+36: Missing documentation, Name 'SumQLat2_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Lat2. Affected line: Modelica.Blocks.Math.MultiSum SumQLat2_flow(nu=3) if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and (use_NaturalAirExchange or use_MechanicalAirExchange) annotation (Placement(transformation(extent={{-48,-58},{-38,-48}})));
+
+37: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains( final roomArea=zoneParam.AZone, final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if ATot > 0 and use_moisture_balance "Internal moisture gains by plants, etc." annotation (Dialog(enable=use_moisture_balance, tab="Moisture"), Placement(transformation(extent={{-70,-68},{-62,-60}})));
+
+38: Missing documentation, Name 'noMoisturePerson' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Moisture, Person. Affected line: Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3 and use_moisture_balance annotation (Placement(transformation(extent={{-70,-58},{-62,-50}})));
+
+39: Name 'ventHum' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: vent. Affected line: Modelica.Blocks.Interfaces.RealInput ventHum( final quantity="MassFraction", final unit="kg/kg", min=0) if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_MechanicalAirExchange "Ventilation and infiltration humidity" annotation (Placement( transformation(extent={{-128,-108},{-88,-68}}), iconTransformation( extent={{-110,-84},{-88,-62}})));
+
+40: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: HighOrder.Components.MoistAir.VarMoistAirExchange airExcMoi(final V=zoneParam.VAir) if (ATot > 0 or zoneParam.VAir > 0) and (use_NaturalAirExchange or use_MechanicalAirExchange) and use_moisture_balance "Heat flow due to ventilation" annotation (Placement(transformation(extent={{-22,-14},{-6,2}})));// CO2 BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance( areaZon=zoneParam.AZone, actDeg=zoneParam.activityDegree, VZon=zoneParam.VAir, spePeo=zoneParam.specificPeople, final XCO2_amb=XCO2_amb, final areaBod=areaBod, final metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and use_C_flow annotation (Placement(transformation(extent={{16,-74},{32,-58}})));
+
+41: Name 'CO2Con' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O. Affected line: Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir > 0) and use_C_flow "CO2 concentration in the thermal zone in ppm" annotation (Placement(transformation(extent={{100,-100},{120,-80}}), iconTransformation(extent={{100,-100},{120,-80}})));
+
+42: Name 'XCO2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O. Affected line: Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot > 0 or zoneParam.VAir > 0) and use_C_flow "Mass fraction of co2 in ROM in kg_CO2/ kg_TotalAir" annotation (Placement(transformation(extent={{-8,-74},{10,-60}})));
+
+43: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof]( each final outSkyCon=false, each final outGroCon=false, final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof) "Calculates diffuse solar radiation on titled surface for roof" annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
+
+44: Name 'QIntGains_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[3](each final quantity="HeatFlowRate", each final unit="W") if ATot > 0 "Heat flow based on internal gains from lights[1], machines[2], and persons[3]" annotation ( Placement(transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent={{100,-50},{120,-30}})));
+
+45: Missing documentation, Name 'SumQPool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pool. Affected line: Modelica.Blocks.Math.MultiSum SumQPool(nu=nPools) if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools annotation (Placement(transformation(extent={{-28,-82},{-20,-74}})));
+
+46: Missing documentation, Name 'SumPPool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pool. Affected line: Modelica.Blocks.Math.MultiSum SumPPool(nu=nPools) if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools annotation (Placement(transformation(extent={{-28,-82},{-20,-74}})));
+
+47: Missing documentation, Name 'SumPool_m_flow_add' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pool_m_flow_add. Affected line: Modelica.Blocks.Math.MultiSum SumPool_m_flow_add(nu=nPools) if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools annotation (Placement(transformation(extent={{-28,-82},{-20,-74}})));
+
+48: Name 'hConRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: protected Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof) "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{-14,68}, {-6,76}})));
+
+49: Name 'theConRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if zoneParam.ARoof > 0 "Outdoor convective heat transfer of roof" annotation (Placement(transformation(extent={{5,5},{-5,-5}},rotation=0, origin={5,83})));
+
+50: Name 'preTemRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof if zoneParam.ARoof > 0 "Prescribed temperature for roof outdoor surface temperature" annotation (Placement(transformation(extent={{-4.5,-4},{4.5,4}}, rotation=0, origin={-9.5,84})));
+
+51: Name 'preTemFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Floor. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor if zoneParam.AFloor > 0 "Prescribed temperature for floor plate outdoor surface temperature" annotation (Placement(transformation(extent={{-6,-6},{6,6}}, rotation=90,origin={48,36})));
+
+52: Name 'TSoil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Soil. Affected line: Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) "Outdoor surface temperature for floor plate" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=180,origin={39,22})));
+
+53: Name 'hConWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt)) "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{ -4,4}}, rotation=180, origin={-2,16})));
+
+54: Name 'theConWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: Modelica.Thermal.HeatTransfer.Components.Convection theConWall if sum(zoneParam.AExt) > 0 "Outdoor convective heat transfer of walls" annotation (Placement(transformation(extent={{26,24},{16,14}})));
+
+55: Name 'solRadRoof' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Roof. Affected line: Modelica.Blocks.Math.Add solRadRoof[zoneParam.nOrientationsRoof] "Sums up solar radiation of both directions" annotation (Placement(transformation(extent={{-58,82},{-48,92}})));
+
+56: Name 'solRadWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: Modelica.Blocks.Math.Add solRadWall[zoneParam.nOrientations] "Sums up solar radiation of both directions" annotation (Placement(transformation(extent={{-54,22},{-44,32}})));
+
+57: Name 'preTemWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wall. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall if sum(zoneParam.AExt) > 0 "Prescribed temperature for exterior walls outdoor surface temperature" annotation (Placement(transformation(extent={{-18,16},{-10,24}})));
+
+58: Missing documentation, Name 'QIntGainsInternalInd_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains, Internal. Affected line: Modelica.Blocks.Sources.RealExpression QIntGainsInternalInd_flow[3](y={-lights.convHeat.Q_flow - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow - machinesSenHea.convHeat.Q_flow, -humanSenHeaIndependent.radHeat.Q_flow - humanSenHeaIndependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
+
+59: Missing documentation, Name 'QIntGainsInternalTot_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains, Internal. Affected line: Modelica.Blocks.Sources.RealExpression QIntGainsInternalTot_flow[3](y={-lights.convHeat.Q_flow - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow - machinesSenHea.convHeat.Q_flow, -humanTotHeaDependent.radHeat.Q_flow - humanTotHeaDependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
+
+
+AixLib/Utilities/Sources/HeaterCooler/SimplifiedTransferSystems/SimplifiedTransferSystem.mo
+1: Name 'k_UfhGroFlo' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k_. Affected line: parameter Real k_UfhGroFlo(unit="1")=0.9 "Gain for underfloorheating of ground floor";
+
+2: Name 'k_UfhFlo' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k_. Affected line: parameter Real k_UfhFlo(unit="1")=0.9 "Gain for underfloorheating of inner floor";
+
+3: Name 'k_Cca' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k_. Affected line: parameter Real k_Cca(unit="1")=0.94 "Gain for concrete core activation";
+
+4: Name 'T_Rad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_. Affected line: parameter Modelica.Units.SI.Time T_Rad(start=1)=1 "Time Constant for radiator";
+
+5: Name 'T_UfhGroFlo' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_. Affected line: parameter Modelica.Units.SI.Time T_UfhGroFlo(start=1)=3600 "Time Constant for underfloorheating of ground floor";
+
+6: Name 'T_UfhFlo' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_. Affected line: parameter Modelica.Units.SI.Time T_UfhFlo(start=1)=3600 "Time Constant for underfloorheating of inner floor";
+
+7: Name 'T_Cca' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_. Affected line: parameter Modelica.Units.SI.Time T_Cca(start=1)=14400 "Time Constant for concrete core activation";
+
+
+AixLib/Utilities/Sources/HeaterCooler/HeaterCoolerPIFraRadDamped.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter SimplifiedTransferSystems.SimplifiedTransferSystem traSysRec "record of transfer system parameters" annotation (choicesAllMatching=true);
+
+2: Name 'kPT1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Real kPT1= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then traSysRec.k_Rad elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then ((zoneParam.AZone - zoneParam.AFloor) * traSysRec.k_UfhGroFlo + zoneParam.AFloor * traSysRec.k_UfhFlo) / zoneParam.AZone else traSysRec.k_Cca "Gain for PT1 for damped heating transfer";
+
+3: Name 'firstOrderHeating' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: first, Order, Heating. Affected line: Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=kPT1, T=TPT1) if not traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater "Emulates the belayed heat flow into the building due to thermal activated building systems" annotation (Placement(transformation(extent={{-20,54},{0,74}})));
+
+4: Name 'firstOrderCooling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: first, Order, Cooling. Affected line: Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=kPT1, T=TPT1) if not traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater "Emulates the belayed cooling flow into the building due to thermal activated building systems" annotation (Placement(transformation(extent={{-20,-84},{0,-64}})));
+
+
+AixLib/Utilities/Sources/HeaterCooler/HeaterCoolerPIFraRad.mo
+1: Documentation too short, Name 'setPointCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Point, Cool. Affected line: Modelica.Blocks.Interfaces.RealInput setPointCool( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation ( Placement(transformation(extent={{-120,-60},{-80,-20}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={-24,-72})));
+
+2: Documentation too short, Name 'setPointHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Point, Heat. Affected line: Modelica.Blocks.Interfaces.RealInput setPointHeat( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation ( Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={22,-72})));
+
+3: Missing documentation, Name 'booleanExpressionHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Expression, Heater. Affected line: Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not recOrSep then Heater_on else zoneParam.HeaterOn) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
+
+4: Missing documentation, Name 'booleanExpressionCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Expression, Cooler. Affected line: Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
+
+5: Name 'heaterActive' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heater, Active. Affected line: Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn "Switches Controler on and off" annotation (Placement(transformation(extent= {{-120,-6},{-80,34}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={68,-72})));
+
+6: Name 'coolerActive' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooler, Active. Affected line: Modelica.Blocks.Interfaces.BooleanInput coolerActive if not staOrDyn "Switches Controler on and off" annotation (Placement(transformation(extent= {{-120,-34},{-80,6}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={-70,-72})));
+
+
+AixLib/Utilities/Sources/HeaterCooler/SimplyfiedTransferSystems/BaseTransferSystem.mo
+1: Documentation too short, Name 'k' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Real k(unit="1")=1 "Gain";
+
+
+AixLib/Utilities/Sources/HeaterCooler/PartialHeaterCoolerPIFraRad.mo
+1: Name 'Heater_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater_on. Affected line: parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
+
+2: Name 'Cooler_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler_on. Affected line: parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
+
+3: Name 'h_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_heater. Affected line: parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+
+4: Name 'l_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_heater. Affected line: parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+
+5: Name 'KR_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_heater. Affected line: parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+
+6: Name 'TN_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_heater. Affected line: parameter Modelica.Units.SI.Time TN_heater=1 "Time constant of the heating controller" annotation (Dialog( tab="Heater", group="Controller", enable=not recOrSep));
+
+7: Name 'h_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_cooler. Affected line: parameter Real h_cooler = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+
+8: Name 'l_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_cooler. Affected line: parameter Real l_cooler = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+
+9: Name 'KR_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_cooler. Affected line: parameter Real KR_cooler = 1000 "Gain of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+
+10: Name 'TN_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_cooler. Affected line: parameter Modelica.Units.SI.Time TN_cooler=1 "Time constant of the cooling controller" annotation (Dialog( tab="Cooler", group="Controller", enable=not recOrSep));
+
+11: Name 'zoneParam' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Param. Affected line: parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam( heaLoadFacGrd=0, heaLoadFacOut=0) = AixLib.DataBase.ThermalZones.ZoneRecordDummy() "Zone definition" annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
+
+12: Name 'pITempCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp, Cool. Affected line: AixLib.Controls.Continuous.PITemp pITempCool( rangeSwitch=false, h=if not recOrSep then h_cooler else zoneParam.hCool, l=if not recOrSep then l_cooler else zoneParam.lCool, KR=if not recOrSep then KR_cooler else zoneParam.KRCool, TN=if not recOrSep then TN_cooler else zoneParam.TNCool) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) "PI control for cooler" annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
+
+13: Missing documentation. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heaCon if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation( extent={{10,10},{-10,-10}}, rotation=180, origin={58,80})));
+
+14: Name 'pITempHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp, Heat. Affected line: AixLib.Controls.Continuous.PITemp pITempHeat( rangeSwitch=false, h=if not recOrSep then h_heater else zoneParam.hHeat, l=if not recOrSep then l_heater else zoneParam.lHeat, KR=if not recOrSep then KR_heater else zoneParam.KRHeat, TN=if not recOrSep then TN_heater else zoneParam.TNHeat) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+
+15: Name 'heatingPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heating, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput heatingPower( final quantity="HeatFlowRate", final unit="W") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) "Power for heating" annotation (Placement(transformation(extent={{80,20},{120,60}}), iconTransformation(extent={{80,20},{120,60}})));
+
+16: Name 'coolingPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooling, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput coolingPower( final quantity="HeatFlowRate", final unit="W") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) "Power for cooling" annotation (Placement(transformation(extent={{80,-26},{120,14}}), iconTransformation(extent={{80,-26},{120,14}})));
+
+17: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gainRad(k=fraHeaRad) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(extent={{20,40},{40,60}})));
+
+18: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gainCon(k=1 - fraHeaRad) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(extent={{20,70},{40,90}})));
+
+19: Missing documentation. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heaRad if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation( extent={{10,10},{-10,-10}}, rotation=180, origin={58,50})));
+
+20: Missing documentation. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cooCon if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(transformation( extent={{10,10},{-10,-10}}, rotation=180, origin={58,-62})));
+
+21: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gainCooRad(k=fraCooRad) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(transformation(extent={{20,-102},{40,-82}})));
+
+22: Missing documentation. Affected line: Modelica.Blocks.Math.Gain gainCooCon(k=1 - fraCooRad) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(transformation(extent={{20,-72},{40,-52}})));
+
+23: Missing documentation. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow cooRad if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(transformation( extent={{10,10},{-10,-10}}, rotation=180, origin={58,-92})));
+
+24: Documentation too short, Name 'setPointCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Point, Cool. Affected line: Modelica.Blocks.Interfaces.RealInput setPointCool( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation ( Placement(transformation(extent={{-120,-60},{-80,-20}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={-24,-72})));
+
+25: Documentation too short, Name 'setPointHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Point, Heat. Affected line: Modelica.Blocks.Interfaces.RealInput setPointHeat( final quantity="ThermodynamicTemperature", final unit="K", displayUnit="degC") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation ( Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={22,-72})));
+
+26: Missing documentation, Name 'booleanExpressionHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Expression, Heater. Affected line: Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not recOrSep then Heater_on else zoneParam.HeaterOn) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
+
+27: Missing documentation, Name 'booleanExpressionCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Expression, Cooler. Affected line: Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
+
+28: Name 'heaterActive' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heater, Active. Affected line: Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn "Switches Controler on and off" annotation (Placement(transformation(extent= {{-120,-6},{-80,34}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={68,-72})));
+
+29: Name 'coolerActive' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cooler, Active. Affected line: Modelica.Blocks.Interfaces.BooleanInput coolerActive if not staOrDyn "Switches Controler on and off" annotation (Placement(transformation(extent= {{-120,-34},{-80,6}}), iconTransformation( extent={{-20,-20},{20,20}}, rotation=90, origin={-70,-72})));
+
+
+AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo
+1: Name 'buildingID' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: building, D. Affected line: parameter Integer buildingID "Unique identifier of the building";
+
+2: Name 'ABuilding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Building. Affected line: parameter Modelica.Units.SI.Area ABuilding(min=0) "Net floor area of building";
+
+3: Name 'numZones' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Zones. Affected line: parameter Integer numZones(min=1) "Number of zones";
+
+4: Name 'zoneParam' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Param. Affected line: replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones] "Setup for zones" annotation (choicesAllMatching=false);
+
+5: Name 'nPorts' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ports. Affected line: parameter Integer nPorts = 0 "Number of fluid ports" annotation(Evaluate=true, Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+6: Name 'use_MechanicalAirExchange' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Mechanical, Exchange. Affected line: parameter Boolean use_MechanicalAirExchange=true "Consider mechanical ventilation by setting true";
+
+7: Name 'use_NaturalAirExchange' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Natural, Exchange. Affected line: parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange "Consider natural ventilation and infiltration by setting true";
+
+8: Name 'XCO2_amb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O2_amb. Affected line: parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4 "Massfraction of CO2 in atmosphere (equals 403ppm)" annotation (Dialog(tab="CO2", enable=use_C_flow));
+
+9: Name 'areaBod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: area. Affected line: parameter Modelica.Units.SI.Area areaBod=1.8 "Body surface area source SIA 2024:2015" annotation (Dialog(tab="CO2", enable=use_C_flow));
+
+10: Name 'use_moisture_balance' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_moisture_balance. Affected line: parameter Boolean use_moisture_balance=false "If true, input connector QLat_flow is enabled and room air computes moisture balance" annotation (Dialog(tab="Moisture"));
+
+11: Name 'corG' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: replaceable model corG = SolarGain.CorrectionGDoublePane constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG "Model for correction of solar transmission" annotation(choicesAllMatching=true);
+
+12: Name 'intGains' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Blocks.Interfaces.RealInput intGains[3*numZones] "Input profiles for internal gains persons, machines, light" annotation ( Placement(transformation( extent={{20,-20},{-20,20}}, rotation=-90, origin={76,-100}), iconTransformation( extent={{-10,-10},{10,10}}, rotation=90, origin={60,-110})));
+
+13: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.WeatherData.Bus weaBus "Weather data bus" annotation (Placement( transformation(extent={{-117,53},{-83,85}}), iconTransformation( extent={{-90,30},{-70,50}})));
+
+14: Name 'intGainsConv' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains, Conv. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if ASurTot > 0 or VAir > 0 "Convective internal gains" annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}), iconTransformation(extent={{-90,-92},{-70,-72}})));
+
+15: Name 'intGainsRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if ASurTot > 0 "Radiative internal gains" annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}), iconTransformation(extent={{-90,-60},{-70,-40}})));
+
+16: Name 'internalGainsMode' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Gains, Mode. Affected line: parameter Integer internalGainsMode "Decides which internal gains model for persons is used";
+
+17: Name 'Heater_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater_on. Affected line: parameter Boolean Heater_on=true "Activates the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+18: Name 'h_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_heater. Affected line: parameter Real h_heater=0 "Upper limit controller output of the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+19: Name 'l_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_heater. Affected line: parameter Real l_heater=0 "Lower limit controller output of the heater" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+20: Name 'KR_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_heater. Affected line: parameter Real KR_heater=1000 "Gain of the heating controller" annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+21: Name 'TN_heater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_heater. Affected line: parameter Modelica.Units.SI.Time TN_heater=1 "Time constant of the heating controller" annotation (Dialog( tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+
+22: Name 'Cooler_on' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler_on. Affected line: parameter Boolean Cooler_on=true "Activates the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+23: Name 'h_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: h_cooler. Affected line: parameter Real h_cooler=0 "Upper limit controller output of the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+24: Name 'l_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: l_cooler. Affected line: parameter Real l_cooler=0 "Lower limit controller output of the cooler" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+25: Name 'KR_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K, R_cooler. Affected line: parameter Real KR_cooler=1000 "Gain of the cooling controller" annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+26: Name 'TN_cooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N_cooler. Affected line: parameter Modelica.Units.SI.Time TN_cooler=1 "Time constant of the cooling controller" annotation (Dialog( tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+27: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater "Transfer system type" annotation (Dialog( tab="IdealHeaterCooler", group="Modes", enable=not recOrSep));
+
+28: Missing documentation, Name 'MediumPoolWater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium, Pool, Water. Affected line: replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare package Medium = AixLib.Media.Water "Water")), Dialog(enable=use_pools_tot,tab="Moisture", group="Pools"));
+
+29: Name 'TSetHeat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat. Affected line: Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones]( each final quantity="ThermodynamicTemperature", each final unit="K", each displayUnit="degC", each min=0) "Set point for heater - used only if zoneParam[i].HeaterOn is true" annotation (Placement(transformation( extent={{20,-20},{-20,20}}, rotation=270, origin={-40,-100}), iconTransformation( extent={{10,-10},{-10,10}}, rotation=270, origin={-52,-110})));
+
+30: Name 'TSetCool' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cool. Affected line: Modelica.Blocks.Interfaces.RealInput TSetCool[numZones]( each final quantity="ThermodynamicTemperature", each final unit="K", each displayUnit="degC", each min=0) "Set point for cooler - used only if zoneParam[i].CoolerOn is true" annotation (Placement(transformation( extent={{20,-20},{-20,20}}, rotation=270, origin={-80,-100}), iconTransformation( extent={{10,-10},{-10,10}}, rotation=270, origin={-74,-110})));
+
+31: Name 'PHeater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heater. Affected line: Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](each final quantity="HeatFlowRate", each final unit="W") "Power for heating" annotation ( Placement(transformation(extent={{100,-56},{120,-36}}), iconTransformation(extent={{80,-80},{100,-60}})));
+
+32: Name 'PCooler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cooler. Affected line: Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](each final quantity="HeatFlowRate", each final unit="W") "Power for cooling" annotation ( Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation( extent={{80,-100},{100,-80}})));
+
+33: Name 'QIntGains_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gains. Affected line: Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](each final quantity="HeatFlowRate", each final unit="W") if ASurTot > 0 or VAir > 0 "Heat flow based on internal gains for each zone from lights[1], machines[2], and persons[3]" annotation (Placement(transformation(extent={{100,-90},{ 120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
