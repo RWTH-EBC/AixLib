@@ -57,13 +57,8 @@ equation
   connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  connect(heatPumpPower, heatPumpControlBus.PelMea) annotation (Line(points={{-45.5,
-          -119.5},{-45.5,-80},{-110,-80},{-110,64},{-94,64},{-94,79.095},{-0.3975,
-          79.095}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
+  connect(heatPump.P, heatPumpPower) annotation (Line(points={{-30,21},{-30,30},
+          {-100,30},{-100,-90},{-45.5,-90},{-45.5,-119.5}}, color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html><p>
   Base class of an example demonstrating the use of a heat pump
   connected to two storages and a geothermal source. A replaceable

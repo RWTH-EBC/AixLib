@@ -1,6 +1,7 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.a,
+                                      n=paramBoiler.n,
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
                                          final V=V));
 
@@ -196,8 +197,8 @@ equation
 <p>
   <br/>
   Assumptions for predefined parameter values (based on <i><a href=
-  \"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">
-  Vissmann data cheat</a></i>):
+  \"http:static.viessmann.com/resources/technical_documents/DE/de/VDP/5811009VDP00001_1.pdf?#pagemode=bookmarks&amp;zoom=page-fit&amp;view=Fit\">
+  Vissmann data cheat 5811009</a></i>):
 </p>
 <p>
   G: a heat loss of 0.3 % of nominal power at a temperature difference

@@ -37,32 +37,32 @@ algorithm
   end if;
 annotation (
 Documentation(info="<html>
- <p>
- This function attemps to build a vector of length <code>nTim</code> with a geometric
- expansion of the time variable between <code>dt</code> and <code>t_max</code>.
- </p>
- <p>
- If <code>t_max &gt; nTim*dt</code>, then a geometrically expanding vector is built as
- </p>
- <p align=\"center\">
- <i>t = [dt, dt*(1-r<sup>2</sup>)/(1-r), ... , dt*(1-r<sup>n</sup>)/(1-r), ... , t<sub>max</sub>],</i>
- </p>
- <p>
- where <i>r</i> is the geometric expansion factor.
- </p>
- <p>
- If <code>t_max &lt; nTim*dt</code>, then a linearly expanding vector is built as
- </p>
- <p align=\"center\">
- <i>t = [dt, 2*dt, ... , n*dt, ... , <code>nTim</code>*dt]</i>
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- June 28, 2018 by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function attemps to build a vector of length <code>nTim</code> with a geometric
+expansion of the time variable between <code>dt</code> and <code>t_max</code>.
+</p>
+<p>
+If <code>t_max &gt; nTim*dt</code>, then a geometrically expanding vector is built as
+</p>
+<p align=\"center\">
+<i>t = [dt, dt*(1-r<sup>2</sup>)/(1-r), ... , dt*(1-r<sup>n</sup>)/(1-r), ... , t<sub>max</sub>],</i>
+</p>
+<p>
+where <i>r</i> is the geometric expansion factor.
+</p>
+<p>
+If <code>t_max &lt; nTim*dt</code>, then a linearly expanding vector is built as
+</p>
+<p align=\"center\">
+<i>t = [dt, 2*dt, ... , n*dt, ... , <code>nTim</code>*dt]</i>
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+June 28, 2018 by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end timeGeometric;

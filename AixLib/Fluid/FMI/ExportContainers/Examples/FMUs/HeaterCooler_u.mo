@@ -25,40 +25,40 @@ equation
       smooth=Smooth.None));
 
   annotation (  Documentation(info="<html>
- <p>
- This example demonstrates how to export an FMU with a heater
- that takes as an input signal the normalized heat flow rate.
- The FMU has an instance of
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
- AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>.
- </p>
- <p>
- The mass dynamics has been set to
- <code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
- See the
- <a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
- for the rationale.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- November 3, 2014 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This example demonstrates how to export an FMU with a heater
+that takes as an input signal the normalized heat flow rate.
+The FMU has an instance of
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>.
+</p>
+<p>
+The mass dynamics has been set to
+<code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
+See the
+<a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
+for the rationale.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 7, 2022, by Michael Wetter:<br/>
+Removed <code>massDynamics</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+November 3, 2014 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/HeaterCooler_u.mos"
         "Export FMU"),
     Icon(graphics={
@@ -106,6 +106,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
         Text(
           extent={{-104,94},{-60,66}},
           textColor={0,0,255},
-          textString="u")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="u")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

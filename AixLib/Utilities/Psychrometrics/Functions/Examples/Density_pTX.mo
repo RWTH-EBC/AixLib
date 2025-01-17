@@ -23,19 +23,19 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psy
         "Simulate and plot"),
     Documentation(
 info="<html>
- <p>
- Model that tests the implementation of
- <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
- AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>.
- </p>
- </html>",
+<p>
+Model that tests the implementation of
+<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
+AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>.
+</p>
+</html>",
     revisions="<html>
- <ul>
- <li>
- February 24, 2015 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+February 24, 2015 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Density_pTX;

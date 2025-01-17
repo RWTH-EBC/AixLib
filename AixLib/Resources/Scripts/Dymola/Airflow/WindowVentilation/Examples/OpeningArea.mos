@@ -1,0 +1,134 @@
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.OpeningArea", startTime=0, stopTime=60, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="OpeningArea");
+createPlot(
+	id=1,
+	position={0, 0, 1200, 600},
+	y={"opnSimp.A", "opnSimpVDI2078.A"},
+	heading="Simple opening",
+	range={0.0, 60.0, 0.4, 1.6},
+	grid=true,
+	colors={{28,108,200}, {238,46,47}},
+	timeUnit="s",
+	displayUnits={"m2", "m2"});
+createPlot(
+	id=2,
+	position={50, 50, 1200, 600},
+	y={"opnSasSdHunInGeo.A", "opnSasSdHunInPrj.A", "opnSasSdHunInEqv.A", "opnSasSdHunInEff.A", "opnSasSdHunOutGeo.A"},
+	heading="Sash opening common 1",
+	range={0.0, 60.0, -0.5, 1.5},
+	grid=true,
+	subPlot=101,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}},
+	timeUnit="s",
+	displayUnits={"m2", "m2", "m2", "m2", "m2"});
+createPlot(
+	id=2,
+	position={50, 50, 1200, 600},
+	y={"opnSasBtmHunInGeo.A", "opnSasBtmHunInPrj.A", "opnSasBtmHunInEqv.A", "opnSasBtmHunInEff.A", "opnSasTopHunOutPrj.A"},
+	range={0.0, 60.0, -0.5, 1.5},
+	grid=true,
+	subPlot=102,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}},
+	timeUnit="s",
+	displayUnits={"m2", "m2", "m2", "m2", "m2"});
+createPlot(
+	id=2,
+	position={50, 50, 1200, 600},
+	y={"opnSasPivVerGeo.A", "opnSasPivVerPrj.A", "opnSasPivVerEqv.A", "opnSasPivVerEff.A"},
+	range={0.0, 60.0, -1.0, 2.0},
+	grid=true,
+	subPlot=103,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}},
+	timeUnit="s",
+	displayUnits={"m2", "m2", "m2", "m2"});
+createPlot(
+	id=2,
+	position={50, 50, 1200, 600},
+	y={"opnSasPivHorGeo.A", "opnSasPivHorPrj.A", "opnSasPivHorEqv.A", "opnSasPivHorEff.A"},
+	range={0.0, 60.0, -1.0, 2.0},
+	grid=true,
+	subPlot=104,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}},
+	timeUnit="s",
+	displayUnits={"m2", "m2", "m2", "m2"});
+createPlot(
+	id=3,
+	position={100, 100, 1200, 600},
+	y={"opnSasSldVerGeo.A"},
+	heading="Sash opening common 2",
+	range={0.0, 60.0, -0.2, 0.6},
+	grid=true,
+	subPlot=101,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=3,
+	position={100, 100, 1200, 600},
+	y={"opnSasSldHorGeo.A"},
+	range={0.0, 60.0, -0.5, 1.0},
+	grid=true,
+	subPlot=102,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=3,
+	position={100, 100, 1200, 600},
+	y={"opnSasPivHorEffPre.A"},
+	range={0.0, 60.0, 1.1, 1.4},
+	grid=true,
+	subPlot=103,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=3,
+	position={100, 100, 1200, 600},
+	y={"opnSasAngBtmHunInGeo.A"},
+	range={0.0, 60.0, -1.0, 2.0},
+	grid=true,
+	subPlot=104,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=4,
+	position={150, 150, 1200, 600},
+	y={"opnSasBtmHunInDIN16798.A"},
+	heading="Sash opening special",
+	range={0.0, 60.0, -0.2, 0.6},
+	grid=true,
+	subPlot=101,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=4,
+	position={150, 150, 1200, 600},
+	y={"opnSasSdHunInDIN4108.A", "opnSasBtmHunInDIN4108.A", "opnSasPivHorDIN4108.A"},
+	range={0.0, 60.0, -0.5, 1.5},
+	grid=true,
+	subPlot=102,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}},
+	timeUnit="s",
+	displayUnits={"m2", "m2", "m2"});
+createPlot(
+	id=4,
+	position={150, 150, 1200, 600},
+	y={"opnSasBtmHunInHall.A"},
+	range={0.0, 60.0, -0.1, 0.2},
+	grid=true,
+	subPlot=103,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});
+createPlot(
+	id=4,
+	position={150, 150, 1200, 600},
+	y={"opnSasBtmHunInVDI2078.A"},
+	range={0.0, 60.0, -0.1, 0.3},
+	grid=true,
+	subPlot=104,
+	colors={{28,108,200}},
+	timeUnit="s",
+	displayUnits={"m2"});

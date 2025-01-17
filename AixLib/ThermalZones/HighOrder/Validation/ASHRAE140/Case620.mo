@@ -7,10 +7,10 @@ model Case620
     tableHeatOrTempMax=[620,4613,5944],
     redeclare model RoomModel = Rooms.ASHRAE140.EastWestFacingWindows (
         wallTypes=wallTypes,
-        calcMethodIn=4,
+        calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017,
         Type_Win=windowParam,
         solar_absorptance_OW=solar_absorptance_OW,
-        calcMethodOut=2,
+        calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
         Win_Area=Win_Area,
         absInnerWallSurf=absInnerWallSurf),
     Room(redeclare Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions));
@@ -31,10 +31,6 @@ model Case620
     annotation (Placement(transformation(extent={{-38,-82},{-27,-71}})));
   Modelica.Blocks.Sources.Constant TSet_Heater(final k=TsetHeater)
     annotation (Placement(transformation(extent={{30,-81},{19,-70}})));
-  Modelica.Blocks.Sources.RealExpression HeatingPower(y=idealHeaterCooler.heatingPower)
-    annotation (Placement(transformation(extent={{43,58},{63,78}})));
-  Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
-    annotation (Placement(transformation(extent={{43,42},{63,62}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
     annotation (Placement(transformation(extent={{-20,-82},{-9,-71}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC1 annotation (
@@ -61,13 +57,15 @@ equation
   connect(idealHeaterCooler.heatCoolRoom, Room.thermRoom) annotation (Line(
         points={{4,-59},{22,-59},{22,-19},{-2,-19},{-2,35},{-2.92,35}}, color={191,
           0,0}));
-  connect(HeatingPower.y, integratorHeat.u)
-    annotation (Line(points={{64,68},{70.9,68}}, color={0,0,127}));
-  connect(CoolingPower.y, integratorCool.u)
-    annotation (Line(points={{64,52},{70.9,52}}, color={0,0,127}));
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
   connect(Room.transShoWaveRadWin, integrator2.u) annotation (Line(points={{17.8,5.3},{17.8,-0.75},{74,-0.75}}, color={0,0,127}));
+  connect(idealHeaterCooler.heatingPower, integratorHeat.u) annotation (Line(
+        points={{5,-51},{32.3,-51},{32.3,-5},{52.3,-5},{52.3,68},{70.9,68}},
+        color={0,0,127}));
+  connect(idealHeaterCooler.coolingPower, integratorCool.u) annotation (Line(
+        points={{5,-55.6},{39.1,-55.6},{39.1,-9.4},{57.1,-9.4},{57.1,52},{70.9,
+          52}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

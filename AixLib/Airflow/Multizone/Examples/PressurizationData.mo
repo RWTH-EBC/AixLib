@@ -67,40 +67,40 @@ equation
       StopTime=2592000,
       Tolerance=1e-06),
     Documentation(info="<html>
- <p>
- This model illustrates the use of
- <a href=\"modelica://AixLib.Airflow.Multizone.Point_m_flow\">
- AixLib.Airflow.Multizone.Point_m_flow</a>
- to model
- infiltration through the building evelope for a known <i>n<sub>50</sub></i> value (also known as ACH50).
- As the <i>n<sub>50</sub></i> value and the building volume is known,
- the flow at 50 Pa is known. Dividing this flow accross the entire envelope
- (typically surface weighted) and using
- <a href=\"modelica://AixLib.Airflow.Multizone.Point_m_flow\">
- AixLib.Airflow.Multizone.Point_m_flow</a>,
- the infiltration airflow at lower pressure differences can be modelled.
- <br/>
- In this example, the two models each represent 50% of the surface where airflow occured due to the pressurization test.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 8, 2022, by Michael Wetter:<br/>
- Changed tolerance from <i>1E-8</i> to <i>1E-6</i>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1606\">IBPSA, #1606</a>.
- </li>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- May 03, 2021 by Klaas De Jonge:<br/>
- Added example for simulating infiltration airflow using the Powerlaw_1DataPoint model
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model illustrates the use of
+<a href=\"modelica://AixLib.Airflow.Multizone.Point_m_flow\">
+AixLib.Airflow.Multizone.Point_m_flow</a>
+to model
+infiltration through the building evelope for a known <i>n<sub>50</sub></i> value (also known as ACH50).
+As the <i>n<sub>50</sub></i> value and the building volume is known,
+the flow at 50 Pa is known. Dividing this flow accross the entire envelope
+(typically surface weighted) and using
+<a href=\"modelica://AixLib.Airflow.Multizone.Point_m_flow\">
+AixLib.Airflow.Multizone.Point_m_flow</a>,
+the infiltration airflow at lower pressure differences can be modelled.
+<br/>
+In this example, the two models each represent 50% of the surface where airflow occured due to the pressurization test.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+April 8, 2022, by Michael Wetter:<br/>
+Changed tolerance from <i>1E-8</i> to <i>1E-6</i>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1606\">IBPSA, #1606</a>.
+</li>
+<li>
+February 2, 2022, by Michael Wetter:<br/>
+Revised implementation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+</li>
+<li>
+May 03, 2021 by Klaas De Jonge:<br/>
+Added example for simulating infiltration airflow using the Powerlaw_1DataPoint model
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PressurizationData;

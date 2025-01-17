@@ -14,16 +14,16 @@ algorithm
   end for;
 
 annotation (Documentation(info="<html>
- <p>
- Function that returns the factorial <i>n!</i> for <i>0 &le; n &le; 12</i>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 9, 2018, by Massimo Cimmino:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Function that returns the factorial <i>n!</i> for <i>0 &le; n &le; 12</i>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 9, 2018, by Massimo Cimmino:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end factorial;

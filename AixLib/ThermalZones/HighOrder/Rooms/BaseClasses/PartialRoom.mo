@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
@@ -6,7 +6,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
       final T_start=T0_air);
 
   // Medium in the room
-  replaceable package MediumAir = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+  replaceable package MediumAir = AixLib.Media.Air constrainedby
+    Modelica.Media.Interfaces.PartialMedium                                                              "Medium in the component"
       annotation (choices(
         choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
         choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
@@ -105,6 +106,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
     "Latent heat gains for the room"
     annotation (Placement(transformation(extent={{-124,-68},{-100,-44}}),
         iconTransformation(extent={{-120,-80},{-100,-60}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-110,90},{-90,110}})));
 protected
   constant Modelica.Units.SI.SpecificEnergy h_fg=
       AixLib.Media.Air.enthalpyOfCondensingGas(273.15 + 37)
@@ -123,14 +126,11 @@ protected
  if use_moisture_balance
     "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{58,-52},{46,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput hum_internal
-    "internal humidity (used for case with no moisture balance";
-  Modelica.Blocks.Interfaces.RealOutput mWat_flow_internal
+  Modelica.Blocks.Interfaces.RealOutput hum_internal = 0  if not use_moisture_balance
+    "internal humidity (used for case with no moisture balance)";
+  Modelica.Blocks.Interfaces.RealOutput mWat_flow_internal = 0 if not use_moisture_balance
     "internal mass flow rate of water vapor (used for case with no moisture balance)";
 equation
-  hum_internal = 0;
-  mWat_flow_internal = 0;
-
   connect(QLat_flow, sumQLat_flow.u[2]) annotation (Line(
       points={{-112,-56},{80,-56},{80,-36.475},{76,-36.475}},
       color={0,0,127},
@@ -144,10 +144,19 @@ equation
       points={{-4,-16},{-14,-16},{-14,-14.88},{-22.6,-14.88}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(NaturalVentilation.HumIn, ventHum) annotation (Line(
-      points={{-33.4,-21},{-62,-21},{-62,-22},{-74,-22},{-74,-37},{-111,-37}},
+  if use_moisture_balance then
+    connect(NaturalVentilation.HumIn, ventHum) annotation (Line(
+        points={{-33.4,-21},{-62,-21},{-62,-22},{-74,-22},{-74,-37},{-111,-37}},
+        color={0,0,127},
+        pattern=LinePattern.Dash));
+    connect(mWat_flow.y, airload.mWat_flow) annotation (Line(
+      points={{47.6,-28},{36,-28},{36,-10},{26,-10},{26,-4},{20,-4}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  else
+    connect(NaturalVentilation.HumIn, hum_internal);
+    connect(airload.mWat_flow, mWat_flow_internal);
+  end if;
   connect(conQLat_flow.port, airload.heatPort) annotation (Line(
       points={{46,-46},{24,-46},{24,-12},{18,-12}},
       color={191,0,0},
@@ -158,13 +167,13 @@ equation
       points={{12,22},{12,4},{-3.875,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(infiltrationRate.port_a,thermOutside)  annotation (Line(
+  connect(infiltrationRate.port_a, thermOutside) annotation (Line(
       points={{-30,-4},{-66,-4},{-66,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(NaturalVentilation.port_a,thermOutside)  annotation (Line(points={{-34,-18},
-          {-68,-18},{-68,100},{-100,100}},   color={191,0,0}));
-  connect(dynamicVentilation.port_outside,thermOutside)  annotation (Line(
+  connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{
+          -34,-18},{-68,-18},{-68,100},{-100,100}}, color={191,0,0}));
+  connect(dynamicVentilation.port_outside, thermOutside) annotation (Line(
       points={{-30,-32},{-72,-32},{-72,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
@@ -201,13 +210,9 @@ equation
       points={{69.49,-37},{64,-37},{64,-46},{58,-46}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(mWat_flow.y, airload.mWat_flow) annotation (Line(
-      points={{47.6,-28},{36,-28},{36,-10},{26,-10},{26,-4},{20,-4}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
 
-  connect(NaturalVentilation.HumIn, hum_internal);
-  connect(airload.mWat_flow, mWat_flow_internal);
+
+
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
@@ -215,7 +220,10 @@ equation
     Model added to the AixLib library.
   </li>
   <li>February, 2022 by Fabian Wüllhorst and Martin Kremer:<br/>
-    Changed airLoad-model to mxing volume to use media model. Added possibility to analyse substance and water vapor balance (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1123\">#1123</a>)
+  Changed airLoad-model to mxing volume to use media model. Added possibility to analyse substance and water vapor balance (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1123\">#1123</a>)
+  </li>
+  <li>November, 2023 by Benani Zoumba:<br/>
+  Changed connections for moisture balance <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1460\">#1460</a>)
 </ul>
 </html>", info="<html>
 <p>This model provides a basic configuration of an air load, a replaceable parameter set for wall paramters and air exchange models that can be used to build up individual High-Order-Models for rooms.</p>
