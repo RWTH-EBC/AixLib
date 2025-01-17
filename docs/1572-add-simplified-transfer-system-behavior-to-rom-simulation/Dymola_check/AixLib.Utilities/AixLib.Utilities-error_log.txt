@@ -5,6 +5,45 @@ Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSyste
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>
+Warning: Record has a value, and attempt to modify specific elements.
+The element modification of e.g. heaLoadFacGrd will be ignored.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Sources/HeaterCooler/PartialHeaterCoolerPIFraRad.mo, line 26
+Attempted overriding found at:
+ Component context: AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPIFraRad.zoneParam.heaLoadFacGrd
+  Component declared as AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPIFraRad">AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPIFraRad</a>
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Sources/HeaterCooler/PartialHeaterCoolerPIFraRad.mo, line <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPIFraRad.zoneParam#text:2">27</a>
+Error: The problem is structurally singular.
+
+It has 10 scalar unknowns and 6 scalar equations.
+  The Real part has 8 unknowns and 4 equations.
+  The Integer part has 0 unknowns and 0 equations.
+  The Boolean part has 2 unknowns and 2 equations.
+  The String part has 0 unknowns and 0 equations.
+Error: The model is not well-posed.
+The model has
+  10
+scalar unknowns and
+  6
+scalar equations.
+Using the given settings of the parameters, the difference could be reduced to
+  4
+Attempting to further localize singularity.
+
+Singularity of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a> is at the top level.
+Warning: The model <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a> is structurally singular,
+when assuming the most generic outside couplings to all the flow variables of its connectors.
+Error: The input connector <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped#diagram:firstOrderCooling.u">u</a> of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped#diagram:firstOrderCooling">firstOrderCooling</a> is not connected from the outside.
+ It is likely that it should have been connected, and recursive check assumes this.
+ The missing connection is a likely cause of errors in the model.
+Error: The input connector <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped#diagram:firstOrderHeating.u">u</a> of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped#diagram:firstOrderHeating">firstOrderHeating</a> is not connected from the outside.
+ It is likely that it should have been connected, and recursive check assumes this.
+ The missing connection is a likely cause of errors in the model.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.Radiator 
 Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.Radiator">AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.Radiator</a>
 Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.Radiator
