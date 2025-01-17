@@ -3,7 +3,7 @@ model Carnot_COP_Reduced
    extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
-  CarnotCOP carnotCOPDesign
+  BaseClasses.CarnotCOP carnotCOPDesign
     annotation (Placement(transformation(extent={{-78,62},{-58,82}})));
   Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
@@ -30,7 +30,7 @@ model Carnot_COP_Reduced
     annotation (Placement(transformation(extent={{42,66},{106,100}})));
   Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom)
     annotation (Placement(transformation(extent={{42,100},{104,134}})));
-  CarnotCOP carnotCOPDesign1
+  BaseClasses.CarnotCOP carnotCOPDesign1
     annotation (Placement(transformation(extent={{126,100},{146,120}})));
   Modelica.Blocks.Math.Product copDesign annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

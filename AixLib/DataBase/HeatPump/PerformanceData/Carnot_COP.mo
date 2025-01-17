@@ -4,9 +4,9 @@ model Carnot_COP
    extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
-  CarnotCOP carnotCOPDesign
+  BaseClasses.CarnotCOP carnotCOPDesign
     annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
-  CarnotCOP carnotCOPOffDesign
+  BaseClasses.CarnotCOP carnotCOPOffDesign
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   Modelica.Blocks.Sources.RealExpression tSourceNom(y=TSourceNom)
     annotation (Placement(transformation(extent={{-164,46},{-100,80}})));

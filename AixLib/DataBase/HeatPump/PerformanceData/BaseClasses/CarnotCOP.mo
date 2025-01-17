@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData.BaseClasses;
 model CarnotCOP
   Modelica.Blocks.Interfaces.RealInput tHot annotation (Placement(
         transformation(
@@ -18,7 +18,6 @@ model CarnotCOP
         origin={111.5,-2}), iconTransformation(extent={{-11.5,-10.5},{11.5,10.5}},
           origin={111.5,-0.5})));
 
-
   Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{-20,16},{0,36}})));
   Modelica.Blocks.Sources.RealExpression etaCarnot1(y=0)  "Guetegrad"
@@ -30,7 +29,6 @@ if greater.y then
 else
   COP =  1;
 end if;
-
 
   connect(tHot, greater.u1) annotation (Line(points={{-120,40},{-74,40},{-74,26},
           {-22,26}}, color={0,0,127}));
