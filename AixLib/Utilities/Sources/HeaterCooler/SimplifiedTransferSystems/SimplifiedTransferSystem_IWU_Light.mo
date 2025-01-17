@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems;
-record SimplifiedTransferSystem
+record SimplifiedTransferSystem_IWU_Light
   extends Modelica.Icons.Record;
   parameter Real k_Rad(unit="1")=1 "Gain for radiator";
   parameter Real k_UfhGroFlo(unit="1")=0.9 "Gain for underfloorheating of ground floor";
@@ -18,4 +18,4 @@ record SimplifiedTransferSystem
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end SimplifiedTransferSystem;
+end SimplifiedTransferSystem_IWU_Light;
