@@ -1,39 +1,30 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
 model CtrTabsQflow "Power based Controller for concrete core activation"
-  parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.Units.SI.Temperature TflowSet=293.15   "Flow temperature set point of consumer";
   parameter Real k(unit="1")=0.03          "Gain of controller";
   parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=60
     "Time constant of Integrator block";
   parameter Modelica.Units.SI.Time Td(min=0)= 0 "Time constant of Derivative block";
-  parameter Real rpm_pump(unit="1")=3000          "Rpm of the Pump";
-//   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
-//     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-//     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
-  parameter Real xi_start=0
-    "Initial or guess value value for integrator output (= integrator state)"
-    annotation(Dialog(group="PID"));
-  parameter Real xd_start=0
-    "Initial or guess value for state of derivative block"
-    annotation(Dialog(group="PID"));
-  parameter Real y_start=0 "Initial value of output"
-    annotation(Dialog(group="PID"));
+  parameter Real rpm_pump(unit="1")=2500          "Rpm of the Pump";
 
   EONERC_MainBuilding.BaseClasses.TabsBus2 tabsBus annotation (Placement(
         transformation(extent={{84,-18},{118,18}}), iconTransformation(extent={
             {88,-14},{112,14}})));
-  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=2500)
+  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=rpm_pump)
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
   HydraulicModules.Controller.CtrThrottleQFlow ctrThrottleHotQFlow(
-      useExternalQset=true, reverseAction=true)
+      useExternalQset=true,
+    k=k,
+    Ti=Ti,
+    Td=Td,
+    rpm_pump=rpm_pump,      reverseAction=true)
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
   HydraulicModules.Controller.CtrThrottleQFlow_cold
                                                ctrThrottleColdQFlow(
       useExternalQset=true,
     k=k,
-    Ti=Ti,                  reverseAction=false)
+    Ti=Ti,
+    Td=Td,
+    rpm_pump=rpm_pump,      reverseAction=false)
     annotation (Placement(transformation(extent={{52,-68},{72,-48}})));
   HydraulicModules.Controller.CalcHydraulicPower calcHydraulicPower
     annotation (Placement(transformation(extent={{0,28},{-20,48}})));

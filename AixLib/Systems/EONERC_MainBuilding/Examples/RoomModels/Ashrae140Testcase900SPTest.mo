@@ -4,8 +4,9 @@ model Ashrae140Testcase900SPTest
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
-    package MediumAir = AixLib.Media.AirIncompressible
+    package MediumAir = AixLib.Media.Air(extraPropertiesNames={"C_flow"})
     annotation (choicesAllMatching=true);
+
   TABS.Tabs
        tabs1(
     redeclare package Medium = MediumWater,
@@ -31,12 +32,16 @@ model Ashrae140Testcase900SPTest
       zoneParam,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
+    use_C_flow=true,
+    use_moisture_balance=true,
+    use_MechanicalAirExchange=false,
+    use_NaturalAirExchange=true,
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
     nPorts=2)
      "Thermal zone"
-    annotation (Placement(transformation(extent={{10,-64},{66,-6}})));
+    annotation (Placement(transformation(extent={{8,-64},{64,-6}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -130,6 +135,7 @@ model Ashrae140Testcase900SPTest
   Fluid.Sources.Boundary_pT boundaryOutsideAir1(
     use_X_in=true,
     use_Xi_in=false,
+    C={6.12157E-4},
     use_T_in=true,
     redeclare package Medium = MediumAir,
     T=283.15,
@@ -188,18 +194,22 @@ model Ashrae140Testcase900SPTest
         rotation=90,
         origin={63,-113})));
   ModularAHU.Controller.CtrAHUBasic ctrAhu(
+    TFlowSet=293.15,
     usePreheater=false,
     useExternalTset=true,
+    useExternalVflow=true,
     k=1000,
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
       k=0.03,
       Ti=120,
+      Td=0,
       rpm_pump=3000),
     ctrRh(
       k=0.03,
       Ti=120,
+      Td=0,
       rpm_pump=3000))
     annotation (Placement(transformation(extent={{-58,-50},{-38,-30}})));
   Controller.CtrTabsQflow ctrTabsQflow(
@@ -454,9 +464,11 @@ model Ashrae140Testcase900SPTest
         rotation=0,
         origin={-99,-40})));
 
+  Modelica.Blocks.Sources.Constant VflowExt(k=3*129/3600)
+    annotation (Placement(transformation(extent={{-114,-74},{-94,-54}})));
 equation
   connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
-      points={{-72,30},{8,30},{8,-17.6},{10,-17.6}},
+      points={{-72,30},{8,30},{8,-17.6}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -466,24 +478,24 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(tabs1.heatPort,thermalZone1.intGainsConv) annotation (Line(points={{94,
-          -78.9},{94,-33.84},{66.56,-33.84}},                       color={191,
+  connect(tabs1.heatPort,thermalZone1.intGainsConv) annotation (Line(points={{94,-78.9},{94,-33.84},{64.56,-33.84}},
+                                                                    color={191,
           0,0}));
   connect(genericAHU1.port_b1,thermalZone1.ports[1]) annotation (Line(points={{8.16364,-80.1818},{36,
-          -80.1818},{36,-55.88},{34.71,-55.88}},                 color={0,127,
+          -80.1818},{36,-55.88},{32.71,-55.88}},                 color={0,127,
           255}));
   connect(genericAHU1.port_a2,thermalZone1.ports[2]) annotation (Line(points={{8.16364,-70.7273},{46,
-          -70.7273},{46,-55.88},{41.29,-55.88}},               color={0,127,255}));
+          -70.7273},{46,-55.88},{39.29,-55.88}},               color={0,127,255}));
   connect(boundaryExhaustAir.ports[1],genericAHU1.port_b2) annotation (Line(
         points={{-50,-70},{-50,-70.7273},{-28,-70.7273}},    color={0,127,255}));
-  connect(thermalZone1.TAir, Bus.TZoneMea) annotation (Line(points={{68.8,-11.8},
-          {86.4,-11.8},{86.4,40.05},{8.05,40.05}},  color={0,0,127}), Text(
+  connect(thermalZone1.TAir, Bus.TZoneMea) annotation (Line(points={{66.8,-11.8},{86.4,-11.8},{86.4,40.05},{
+          8.05,40.05}},                             color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boundaryOutsideAir1.T_in, weaBus.TDryBul) annotation (Line(points={{-58.8,
-          -81.6},{-86,-81.6},{-86,-2},{-43,-2}}, color={0,0,127}), Text(
+  connect(boundaryOutsideAir1.T_in, weaBus.TDryBul) annotation (Line(points={{-58.8,-81.6},{-86,-81.6},{-86,
+          -1.92},{-42.915,-1.92}},               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -496,23 +508,20 @@ equation
                                                    color={0,0,127}));
   connect(boundaryOutsideAir1.ports[1], genericAHU1.port_a1) annotation (Line(
         points={{-50,-80},{-50,-80.1818},{-28,-80.1818}}, color={0,127,255}));
-  connect(x_pTphi1.T, weaBus.TDryBul) annotation (Line(points={{-70.8,-64},{-86,
-          -64},{-86,-2},{-43,-2}},
-                              color={0,0,127}), Text(
+  connect(x_pTphi1.T, weaBus.TDryBul) annotation (Line(points={{-70.8,-64},{-86,-64},{-86,-1.92},{-42.915,
+          -1.92}},            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(x_pTphi1.phi, weaBus.relHum) annotation (Line(points={{-70.8,-66.4},{-70.8,
-          -66},{-86,-66},{-86,-2},{-43,-2}},
-                                           color={0,0,127}), Text(
+  connect(x_pTphi1.phi, weaBus.relHum) annotation (Line(points={{-70.8,-66.4},{-70.8,-66},{-86,-66},{-86,
+          -1.92},{-42.915,-1.92}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi1.p_in, weaBus.pAtm) annotation (Line(points={{-70.8,-61.6},{-70,
-          -61.6},{-70,-62},{-86,-62},{-86,-2},{-43,-2}},
-                                                      color={0,0,127}), Text(
+  connect(x_pTphi1.p_in, weaBus.pAtm) annotation (Line(points={{-70.8,-61.6},{-70,-61.6},{-70,-62},{-86,-62},
+          {-86,-1.92},{-42.915,-1.92}},               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -609,8 +618,8 @@ equation
     annotation (Line(points={{185,-26},{212,-26}}, color={0,0,127}));
   connect(realExpression4.y, T_Roof)
     annotation (Line(points={{187,-46},{214,-46}}, color={0,0,127}));
-  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{214,-70},{92,-70},{92,
-          -2},{-4,-2},{-4,16},{-43,16},{-43,-2}}, color={0,0,127}), Text(
+  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{214,-70},{92,-70},{92,-2},{-4,-2},{-4,16},{
+          -42.915,16},{-42.915,-1.92}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -625,8 +634,8 @@ equation
           {137,-107},{168,-107},{168,-86.425}}, color={0,0,127}));
   connect(multiSum.y, solar_radiation) annotation (Line(points={{181.02,-88},{
           194,-88},{194,-94},{212,-94}}, color={0,0,127}));
-  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-11.8},{
-          68.8,-10},{86,-10},{86,0},{118,0},{118,-14},{136,-14}}, color={0,0,
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{66.8,-11.8},{66.8,-10},{86,-10},{86,0},{118,
+          0},{118,-14},{136,-14}},                                color={0,0,
           127}));
   connect(coolEnergyCalc.y3, add1.u2) annotation (Line(points={{81,51},{88,51},
           {88,77},{94,77},{94,125.4},{98.8,125.4}}, color={0,0,127}));
@@ -652,16 +661,18 @@ equation
     annotation (Line(points={{189,-128},{208,-128}}, color={0,0,127}));
   connect(realExpression10.y, T_Tabs_Pipe)
     annotation (Line(points={{187,-148},{214,-148}}, color={0,0,127}));
-  connect(internalGains4.y, thermalZone1.intGains) annotation (Line(points={{60,
-          -80.3},{60,-70},{60,-59.36},{60.4,-59.36}}, color={0,0,127}));
+  connect(internalGains4.y, thermalZone1.intGains) annotation (Line(points={{60,-80.3},{60,-59.36},{58.4,-59.36}},
+                                                      color={0,0,127}));
   connect(QTabs_set.y[1], ctrTabsQflow.QFlowSet) annotation (Line(points={{
           -91.3,-20},{-66,-20},{-66,-17.9},{-58.3,-17.9}}, color={0,0,127}));
   connect(T_set.y[1], ctrAhu.Tset)
     annotation (Line(points={{-91.3,-40},{-60,-40}}, color={0,0,127}));
+  connect(VflowExt.y, ctrAhu.VflowSet)
+    annotation (Line(points={{-93,-64},{-90,-64},{-90,-45},{-60,-45}}, color={0,0,127}));
   annotation (experiment(
       StopTime=8121600,
       Interval=60,
-      __Dymola_Algorithm="Cvode"),
+      __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
 end Ashrae140Testcase900SPTest;
