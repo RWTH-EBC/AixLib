@@ -45,13 +45,6 @@ model ThermalZone "Thermal zone containing moisture balance"
       tab="IdealHeaterCooler",
       group="Cooler",
       enable=not recOrSep));
-//  parameter
-//    Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
-//    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater
-//    "Transfer system type" annotation (Dialog(
-//      tab="IdealHeaterCooler",
-//      group="Modes",
-//      enable=not recOrSep));
 
   // CO2 parameters
   parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
