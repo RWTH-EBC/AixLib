@@ -1,0 +1,11 @@
+
+Error in model:  AixLib.Systems.ModularAHU.Examples.DemandControlledAHU 
+Check of <a href="Modelica://AixLib.Systems.ModularAHU.Examples.DemandControlledAHU">AixLib.Systems.ModularAHU.Examples.DemandControlledAHU</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ModularAHU/Examples/DemandControlledAHU.mo, line 123
+Error: ERRORS have been issued.
+

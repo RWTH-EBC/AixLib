@@ -1,0 +1,51 @@
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingWithPV.mo, line 171
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone1.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingWithPV.mo, line 177
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingHeating.mo, line 7
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone1.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingHeating.mo, line 12
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingHeating.mo, line 7
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone1.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/HVACAgentBasedControl/Examples/BuildingHeatingSystems/BuildingHeating.mo, line 12
+Error: ERRORS have been issued.
+

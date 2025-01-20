@@ -1,632 +1,242 @@
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.Multizone 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>
-Error: The problem is structurally singular.
-
-It has 9794 scalar unknowns and 9789 scalar equations.
-  The Real part has 9699 unknowns and 9694 equations.
-  The Integer part has 0 unknowns and 0 equations.
-  The Boolean part has 95 unknowns and 95 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  8904+14*multizone.numZones+29*multizone.zone[1].zoneParam.nOrientations+  multizone.zone[1].ROM.volAir.dynBal.nPorts+multizone.zone[1].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[1].machinesSenHea.productHeatOutput.nu+multizone.zone[1].lights.productHeatOutput.nu  +multizone.zone[1].ventCont.optimalTemp.nin+multizone.zone[1].ventCont.optimalTemp.nout  +multizone.zone[1].ventCont.dEMA.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[2].zoneParam.nOrientations  +multizone.zone[2].ROM.volAir.dynBal.nPorts+multizone.zone[2].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[2].machinesSenHea.productHeatOutput.nu+multizone.zone[2].lights.productHeatOutput.nu  +multizone.zone[2].ventCont.optimalTemp.nin+multizone.zone[2].ventCont.optimalTemp.nout  +multizone.zone[2].ventCont.dEMA.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[3].zoneParam.nOrientations  +multizone.zone[3].ROM.volAir.dynBal.nPorts+multizone.zone[3].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[3].machinesSenHea.productHeatOutput.nu+multizone.zone[3].lights.productHeatOutput.nu  +multizone.zone[3].ventCont.optimalTemp.nin+multizone.zone[3].ventCont.optimalTemp.nout  +multizone.zone[3].ventCont.dEMA.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[4].zoneParam.nOrientations  +multizone.zone[4].ROM.volAir.dynBal.nPorts+multizone.zone[4].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[4].machinesSenHea.productHeatOutput.nu+multizone.zone[4].lights.productHeatOutput.nu  +multizone.zone[4].ventCont.optimalTemp.nin+multizone.zone[4].ventCont.optimalTemp.nout  +multizone.zone[4].ventCont.dEMA.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[5].zoneParam.nOrientations  +multizone.zone[5].ROM.volAir.dynBal.nPorts+multizone.zone[5].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[5].machinesSenHea.productHeatOutput.nu+multizone.zone[5].lights.productHeatOutput.nu  +multizone.zone[5].ventCont.optimalTemp.nin+multizone.zone[5].ventCont.optimalTemp.nout  +multizone.zone[5].ventCont.dEMA.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+replicatorTemperatureVentilation.nout  +max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout
-scalar unknowns and
-  9225+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+2*replicatorTemperatureVentilation.nout+2  *max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout+19*multizone.zone[1].zoneParam.nOrientations  +(if  not multizone.zone[1].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[1].ventCont.optimalTemp.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[2].zoneParam.nOrientations  +(if  not multizone.zone[2].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[2].ventCont.optimalTemp.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[3].zoneParam.nOrientations  +(if  not multizone.zone[3].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[3].ventCont.optimalTemp.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[4].zoneParam.nOrientations  +(if  not multizone.zone[4].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[4].ventCont.optimalTemp.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[5].zoneParam.nOrientations  +(if  not multizone.zone[5].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[5].ventCont.optimalTemp.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[1].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[1].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[2].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[2].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[3].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[3].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[4].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[4].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[5].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[5].ROM.volAir.dynBal.nPorts
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  5
-Attempting to further localize singularity.
-
-Attempting to further localize singularity.
-
-Attempting to further localize singularity.
-
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 201
-The model could not be deduced to be symbolically well-posed.
-The model has
-  37+multizone.zone[1].humanSenHeaDependent.productHeatOutput.nu
-scalar unknowns and
-  39
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  39
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*multizone.zone[1].zoneParam.nOrientations
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 20
-Attempting to further localize singularity.
-
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone#diagram$multizone.zone[1].heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone#diagram$multizone.zone.heaterCooler:firstOrderCooling">multizone.zone[1].heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.Multizone 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volMoiAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.AirLay.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.sou.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool</a>
-Error: The problem is structurally singular.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistCO2AirExchange.mo, line 7
+Error: ERRORS have been issued.
 
-It has 3756 scalar unknowns and 3755 scalar equations.
-  The Real part has 3739 unknowns and 3738 equations.
-  The Integer part has 0 unknowns and 0 equations.
-  The Boolean part has 17 unknowns and 17 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  3475+29*thermalZone.zoneParam.nOrientations+2*thermalZone.ROM.volMoiAir.dynBal.nPorts  +thermalZone.humanTotHeaDependent.productHeatOutput.nu+thermalZone.humanTotHeaDependent.productMoistureOutput.nu  +thermalZone.machinesSenHea.productHeatOutput.nu+thermalZone.lights.productHeatOutput.nu  +5*thermalZone.zoneParam.nOrientationsRoof+thermalZone.SumQLat1_flow.nu+  thermalZone.indoorSwimmingPool[1].poolSto.dynBal.nPorts+thermalZone.indoorSwimmingPool[1].poolWat.dynBal.nPorts  +thermalZone.indoorSwimmingPool[1].elPower.nu+thermalZone.indoorSwimmingPool[1].cirPump.vol.dynBal.nPorts  +thermalZone.indoorSwimmingPool[2].poolSto.dynBal.nPorts+thermalZone.indoorSwimmingPool[2].poolWat.dynBal.nPorts  +thermalZone.indoorSwimmingPool[2].elPower.nu+thermalZone.indoorSwimmingPool[2].cirPump.vol.dynBal.nPorts  +thermalZone.SumQPool.nu+thermalZone.SumPPool.nu+thermalZone.SumPool_m_flow_add.nu  +2*thermalZone.airFlowMoistureToROM.nPools+2*thermalZone.airFlowMoistureToROM.AirLay.dynBal.nPorts  +2*thermalZone.airFlowMoistureToROM.sou.vol.dynBal.nPorts+thermalZone.airFlowMoistureToROM.Sum_m_flow_eva.nu  +thermalZone.airFlowMoistureToROM.SumQEva.nu+max([size(internalGains.columns, 1);   size(internalGains.offset, 1)])+max([size(tableOpeningHours.columns, 1); size  (tableOpeningHours.offset, 1)])
-scalar unknowns and
-  3413+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(internalGains.columns, 1); size  (internalGains.offset, 1)])+(if sourcAir.use_Xi_in then 2 else (if   sourcAir.use_X_in then 1 else 3))+3*sourcAir.nPorts+(if  not sourcAir.use_m_flow_in   then 1 else 0)+(if  not sourcAir.use_T_in then 1 else 0)+(if sinAir.use_Xi_in   then 2 else (if sinAir.use_X_in then 1 else 3))+3*sinAir.nPorts+(if  not   sinAir.use_p_in then 1 else 0)+(if  not sinAir.use_T_in then 1 else 0)+max([  size(tableOpeningHours.columns, 1); size(tableOpeningHours.offset, 1)])+19*  thermalZone.zoneParam.nOrientations+(if  not thermalZone.eqAirTempWall.TGroundFromInput   then 1 else 0)+(if  not thermalZone.eqAirTempRoof.TGroundFromInput then 1   else 0)+3*thermalZone.zoneParam.nOrientationsRoof+(if thermalZone.indoorSwimmingPool[1].Sinc.use_Xi_in   then 1 else (if thermalZone.indoorSwimmingPool[1].Sinc.use_X_in then 0 else 1))  +(if  not thermalZone.indoorSwimmingPool[1].Sinc.use_p_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[1].Sinc.nPorts+(if  not thermalZone.indoorSwimmingPool[1].Sinc.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[1].sincEva.use_Xi_in then 1   else (if thermalZone.indoorSwimmingPool[1].sincEva.use_X_in then 0 else 1))+(  if  not thermalZone.indoorSwimmingPool[1].sincEva.use_p_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[1].sincEva.nPorts+(if  not thermalZone.indoorSwimmingPool[1].sincEva.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[1].bou.use_Xi_in then 1   else (if thermalZone.indoorSwimmingPool[1].bou.use_X_in then 0 else 1))+(if    not thermalZone.indoorSwimmingPool[1].bou.use_m_flow_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[1].bou.nPorts+(if  not thermalZone.indoorSwimmingPool[1].bou.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[1].PI.reset &lt;&gt;   AixLib.Types.Reset.Input then 1 else 0)+(if thermalZone.indoorSwimmingPool[2].Sinc.use_Xi_in   then 1 else (if thermalZone.indoorSwimmingPool[2].Sinc.use_X_in then 0 else 1))  +(if  not thermalZone.indoorSwimmingPool[2].Sinc.use_p_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[2].Sinc.nPorts+(if  not thermalZone.indoorSwimmingPool[2].Sinc.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[2].sincEva.use_Xi_in then 1   else (if thermalZone.indoorSwimmingPool[2].sincEva.use_X_in then 0 else 1))+(  if  not thermalZone.indoorSwimmingPool[2].sincEva.use_p_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[2].sincEva.nPorts+(if  not thermalZone.indoorSwimmingPool[2].sincEva.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[2].bou.use_Xi_in then 1   else (if thermalZone.indoorSwimmingPool[2].bou.use_X_in then 0 else 1))+(if    not thermalZone.indoorSwimmingPool[2].bou.use_m_flow_in then 1 else 0)+2*  thermalZone.indoorSwimmingPool[2].bou.nPorts+(if  not thermalZone.indoorSwimmingPool[2].bou.use_T_in   then 1 else 0)+(if thermalZone.indoorSwimmingPool[2].PI.reset &lt;&gt;   AixLib.Types.Reset.Input then 1 else 0)+5*thermalZone.ROM.volMoiAir.dynBal.nPorts  +(if  not thermalZone.indoorSwimmingPool[1].poolSto.dynBal.use_mWat_flow then 1   else 0)+3*thermalZone.indoorSwimmingPool[1].poolSto.dynBal.nPorts+(if  not   thermalZone.indoorSwimmingPool[1].poolWat.dynBal.use_mWat_flow then 1 else 0)+3  *thermalZone.indoorSwimmingPool[1].poolWat.dynBal.nPorts+(if (if   thermalZone.indoorSwimmingPool[1].PI.reset == AixLib.Types.Reset.Disabled   then thermalZone.indoorSwimmingPool[1].PI.reset else AixLib.Types.Reset.Input)   &lt;&gt; AixLib.Types.Reset.Input then 1 else 0)+(if (if thermalZone.indoorSwimmingPool[1].PI.reset   == AixLib.Types.Reset.Disabled then thermalZone.indoorSwimmingPool[1].PI.reset   else AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+  (if  not thermalZone.indoorSwimmingPool[1].cirPump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*thermalZone.indoorSwimmingPool[1].cirPump.vol.dynBal.nPorts+  (if  not thermalZone.indoorSwimmingPool[2].poolSto.dynBal.use_mWat_flow then 1   else 0)+3*thermalZone.indoorSwimmingPool[2].poolSto.dynBal.nPorts+(if  not   thermalZone.indoorSwimmingPool[2].poolWat.dynBal.use_mWat_flow then 1 else 0)+3  *thermalZone.indoorSwimmingPool[2].poolWat.dynBal.nPorts+(if (if   thermalZone.indoorSwimmingPool[2].PI.reset == AixLib.Types.Reset.Disabled   then thermalZone.indoorSwimmingPool[2].PI.reset else AixLib.Types.Reset.Input)   &lt;&gt; AixLib.Types.Reset.Input then 1 else 0)+(if (if thermalZone.indoorSwimmingPool[2].PI.reset   == AixLib.Types.Reset.Disabled then thermalZone.indoorSwimmingPool[2].PI.reset   else AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+  (if  not thermalZone.indoorSwimmingPool[2].cirPump.vol.dynBal.use_mWat_flow   then 1 else 0)+3*thermalZone.indoorSwimmingPool[2].cirPump.vol.dynBal.nPorts+5  *thermalZone.airFlowMoistureToROM.AirLay.dynBal.nPorts+(if  not   thermalZone.airFlowMoistureToROM.sou.vol.dynBal.use_mWat_flow then 1 else 0)+5  *thermalZone.airFlowMoistureToROM.sou.vol.dynBal.nPorts+thermalZone.airFlowMoistureToROM.SumQEva.nu  +thermalZone.airFlowMoistureToROM.nPools
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  1
-Attempting to further localize singularity.
 
-Attempting to further localize singularity.
-
-The model could not be deduced to be symbolically well-posed.
-The model has
-  366+2*thermalZone.ROM.volMoiAir.dynBal.nPorts+thermalZone.zoneParam.nOrientations
-scalar unknowns and
-  358+5*thermalZone.ROM.volMoiAir.dynBal.nPorts
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  378
-The model could not be deduced to be symbolically well-posed.
-The model has
-  49+thermalZone.humanTotHeaDependent.productHeatOutput.nu+thermalZone.humanTotHeaDependent.productMoistureOutput.nu
-scalar unknowns and
-  53
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  53
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+thermalZone.machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+thermalZone.lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*thermalZone.zoneParam.nOrientations
-The model could not be deduced to be symbolically well-posed.
-The model has
-  5+3*thermalZone.zoneParam.nOrientations
-scalar unknowns and
-  4+3*thermalZone.zoneParam.nOrientations+(if  not thermalZone.eqAirTempWall.TGroundFromInput   then 1 else 0)
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  17
-The model could not be deduced to be symbolically well-posed.
-The model has
-  4+3*thermalZone.zoneParam.nOrientationsRoof
-scalar unknowns and
-  3+3*thermalZone.zoneParam.nOrientationsRoof+(if  not thermalZone.eqAirTempRoof.TGroundFromInput   then 1 else 0)
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  7
-Attempting to further localize singularity.
-
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool#diagram$thermalZone:heaterCooler">thermalZone.heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool#diagram$thermalZone:heaterCooler">thermalZone.heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool#diagram$thermalZone.heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool#diagram$thermalZone.heaterCooler:firstOrderCooling">thermalZone.heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
 Error: ERRORS have been issued.
 
 
 Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled 
 Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled">AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled</a>
-Error: The problem is structurally singular.
-
-It has 10090 scalar unknowns and 10089 scalar equations.
-  The Real part has 9975 unknowns and 9974 equations.
-  The Integer part has 0 unknowns and 0 equations.
-  The Boolean part has 115 unknowns and 115 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  9200+14*multizone.numZones+29*multizone.zone[1].zoneParam.nOrientations+  multizone.zone[1].ROM.volAir.dynBal.nPorts+multizone.zone[1].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[1].machinesSenHea.productHeatOutput.nu+multizone.zone[1].lights.productHeatOutput.nu  +multizone.zone[1].ventCont.optimalTemp.nin+multizone.zone[1].ventCont.optimalTemp.nout  +multizone.zone[1].ventCont.dEMA.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[2].zoneParam.nOrientations  +multizone.zone[2].ROM.volAir.dynBal.nPorts+multizone.zone[2].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[2].machinesSenHea.productHeatOutput.nu+multizone.zone[2].lights.productHeatOutput.nu  +multizone.zone[2].ventCont.optimalTemp.nin+multizone.zone[2].ventCont.optimalTemp.nout  +multizone.zone[2].ventCont.dEMA.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[3].zoneParam.nOrientations  +multizone.zone[3].ROM.volAir.dynBal.nPorts+multizone.zone[3].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[3].machinesSenHea.productHeatOutput.nu+multizone.zone[3].lights.productHeatOutput.nu  +multizone.zone[3].ventCont.optimalTemp.nin+multizone.zone[3].ventCont.optimalTemp.nout  +multizone.zone[3].ventCont.dEMA.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[4].zoneParam.nOrientations  +multizone.zone[4].ROM.volAir.dynBal.nPorts+multizone.zone[4].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[4].machinesSenHea.productHeatOutput.nu+multizone.zone[4].lights.productHeatOutput.nu  +multizone.zone[4].ventCont.optimalTemp.nin+multizone.zone[4].ventCont.optimalTemp.nout  +multizone.zone[4].ventCont.dEMA.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[5].zoneParam.nOrientations  +multizone.zone[5].ROM.volAir.dynBal.nPorts+multizone.zone[5].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[5].machinesSenHea.productHeatOutput.nu+multizone.zone[5].lights.productHeatOutput.nu  +multizone.zone[5].ventCont.optimalTemp.nin+multizone.zone[5].ventCont.optimalTemp.nout  +multizone.zone[5].ventCont.dEMA.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+replicatorTemperatureVentilation.nout  +max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout
-scalar unknowns and
-  9525+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+2*replicatorTemperatureVentilation.nout+2  *max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout+19*multizone.zone[1].zoneParam.nOrientations  +(if  not multizone.zone[1].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[1].ventCont.optimalTemp.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[2].zoneParam.nOrientations  +(if  not multizone.zone[2].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[2].ventCont.optimalTemp.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[3].zoneParam.nOrientations  +(if  not multizone.zone[3].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[3].ventCont.optimalTemp.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[4].zoneParam.nOrientations  +(if  not multizone.zone[4].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[4].ventCont.optimalTemp.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[5].zoneParam.nOrientations  +(if  not multizone.zone[5].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[5].ventCont.optimalTemp.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[1].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[1].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[2].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[2].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[3].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[3].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[4].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[4].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[5].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[5].ROM.volAir.dynBal.nPorts
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  1
-Attempting to further localize singularity.
-
-Attempting to further localize singularity.
-
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 1613
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 1613
-Attempting to further localize singularity.
-
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 201
-The model could not be deduced to be symbolically well-posed.
-The model has
-  37+multizone.zone[3].humanSenHeaDependent.productHeatOutput.nu
-scalar unknowns and
-  39
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  39
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[3].machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[3].lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*multizone.zone[3].zoneParam.nOrientations
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 20
-Attempting to further localize singularity.
-
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled">AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled#diagram$multizone.zone:heaterCooler">multizone.zone[3].heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled">AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled#diagram$multizone.zone:heaterCooler">multizone.zone[3].heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled#diagram$multizone.zone[3].heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled#diagram$multizone.zone.heaterCooler:firstOrderCooling">multizone.zone[3].heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a>
-Error: The problem is structurally singular.
-
-It has 10045 scalar unknowns and 10040 scalar equations.
-  The Real part has 9883 unknowns and 9878 equations.
-  The Integer part has 5 unknowns and 5 equations.
-  The Boolean part has 157 unknowns and 157 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  9058+19*multizone.numZones+29*multizone.zone[1].zoneParam.nOrientations+  multizone.zone[1].ROM.volAir.dynBal.nPorts+multizone.zone[1].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[1].machinesSenHea.productHeatOutput.nu+multizone.zone[1].lights.productHeatOutput.nu  +multizone.zone[1].ventCont.optimalTemp.nin+multizone.zone[1].ventCont.optimalTemp.nout  +multizone.zone[1].ventCont.dEMA.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[2].zoneParam.nOrientations  +multizone.zone[2].ROM.volAir.dynBal.nPorts+multizone.zone[2].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[2].machinesSenHea.productHeatOutput.nu+multizone.zone[2].lights.productHeatOutput.nu  +multizone.zone[2].ventCont.optimalTemp.nin+multizone.zone[2].ventCont.optimalTemp.nout  +multizone.zone[2].ventCont.dEMA.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[3].zoneParam.nOrientations  +multizone.zone[3].ROM.volAir.dynBal.nPorts+multizone.zone[3].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[3].machinesSenHea.productHeatOutput.nu+multizone.zone[3].lights.productHeatOutput.nu  +multizone.zone[3].ventCont.optimalTemp.nin+multizone.zone[3].ventCont.optimalTemp.nout  +multizone.zone[3].ventCont.dEMA.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[4].zoneParam.nOrientations  +multizone.zone[4].ROM.volAir.dynBal.nPorts+multizone.zone[4].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[4].machinesSenHea.productHeatOutput.nu+multizone.zone[4].lights.productHeatOutput.nu  +multizone.zone[4].ventCont.optimalTemp.nin+multizone.zone[4].ventCont.optimalTemp.nout  +multizone.zone[4].ventCont.dEMA.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+29*multizone.zone[5].zoneParam.nOrientations  +multizone.zone[5].ROM.volAir.dynBal.nPorts+multizone.zone[5].humanSenHeaDependent.productHeatOutput.nu  +multizone.zone[5].machinesSenHea.productHeatOutput.nu+multizone.zone[5].lights.productHeatOutput.nu  +multizone.zone[5].ventCont.optimalTemp.nin+multizone.zone[5].ventCont.optimalTemp.nout  +multizone.zone[5].ventCont.dEMA.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+2*multizone.AirHandlingUnit.sample.n  +max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout+max([size(tableAHU.columns, 1); size(  tableAHU.offset, 1)])+max([size(tableTSet.columns, 1); size(tableTSet.offset, 1)])
-scalar unknowns and
-  9383+(if  not multizone.AirHandlingUnit.use_Vflow_in_extractAir then 1 else 0)+  multizone.AirHandlingUnit.sample.n+5*multizone.numZones+(if weaDat.pAtmSou ==   AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+2*max([size(tableInternalGains.columns, 1);   size(tableInternalGains.offset, 1)])+replicator.nout+replicator1.nout+2*max([  size(tableAHU.columns, 1); size(tableAHU.offset, 1)])+2*max([size(  tableTSet.columns, 1); size(tableTSet.offset, 1)])+19*multizone.zone[1].zoneParam.nOrientations  +(if  not multizone.zone[1].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[1].ventCont.optimalTemp.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[2].zoneParam.nOrientations  +(if  not multizone.zone[2].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[2].ventCont.optimalTemp.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[3].zoneParam.nOrientations  +(if  not multizone.zone[3].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[3].ventCont.optimalTemp.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[4].zoneParam.nOrientations  +(if  not multizone.zone[4].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[4].ventCont.optimalTemp.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+19*multizone.zone[5].zoneParam.nOrientations  +(if  not multizone.zone[5].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[5].ventCont.optimalTemp.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[1].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[1].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[2].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[2].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[3].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[3].ROM.volAir.dynBal.nPorts+(if  not   multizone.zone[4].ROM.volAir.dynBal.use_mWat_flow then 1 else 0)+3*  multizone.zone[4].ROM.volAir.dynBal.nPorts+(if  not multizone.zone[5].ROM.volAir.dynBal.use_mWat_flow   then 1 else 0)+3*multizone.zone[5].ROM.volAir.dynBal.nPorts
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  5
-Attempting to further localize singularity.
-
-Warning: The following real variables are declared with the prefix discrete,
-but are not assigned in a when-clause, either by an assignment or an equation:
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_2">multizone.AirHandlingUnit.deHuHRS_false.h_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_CoilOut">multizone.AirHandlingUnit.deHuHRS_false.h_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_surface">multizone.AirHandlingUnit.deHuHRS_false.h_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:p_sat_surface">multizone.AirHandlingUnit.deHuHRS_false.p_sat_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:phi_t">multizone.AirHandlingUnit.deHuHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:Q_dot_C">multizone.AirHandlingUnit.deHuHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:Q_dot_H">multizone.AirHandlingUnit.deHuHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_2">multizone.AirHandlingUnit.deHuHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_3">multizone.AirHandlingUnit.deHuHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_4">multizone.AirHandlingUnit.deHuHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_CoilOut">multizone.AirHandlingUnit.deHuHRS_false.T_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_surface">multizone.AirHandlingUnit.deHuHRS_false.T_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:X_sup">multizone.AirHandlingUnit.deHuHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_false:X_surface">multizone.AirHandlingUnit.deHuHRS_false.X_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_2">multizone.AirHandlingUnit.deHuHRS_true.h_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_CoilOut">multizone.AirHandlingUnit.deHuHRS_true.h_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_surface">multizone.AirHandlingUnit.deHuHRS_true.h_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:p_sat_surface">multizone.AirHandlingUnit.deHuHRS_true.p_sat_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:phi_t">multizone.AirHandlingUnit.deHuHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:Q_dot_C">multizone.AirHandlingUnit.deHuHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:Q_dot_H">multizone.AirHandlingUnit.deHuHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_2">multizone.AirHandlingUnit.deHuHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_3">multizone.AirHandlingUnit.deHuHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_4">multizone.AirHandlingUnit.deHuHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_CoilOut">multizone.AirHandlingUnit.deHuHRS_true.T_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_surface">multizone.AirHandlingUnit.deHuHRS_true.T_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:X_sup">multizone.AirHandlingUnit.deHuHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.deHuHRS_true:X_surface">multizone.AirHandlingUnit.deHuHRS_true.X_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:dTFan">multizone.AirHandlingUnit.dTFan</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:phi_t">multizone.AirHandlingUnit.huCHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:Q_dot_C">multizone.AirHandlingUnit.huCHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:Q_dot_H">multizone.AirHandlingUnit.huCHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:T_2">multizone.AirHandlingUnit.huCHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:T_3">multizone.AirHandlingUnit.huCHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:T_4">multizone.AirHandlingUnit.huCHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_false:X_sup">multizone.AirHandlingUnit.huCHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:phi_t">multizone.AirHandlingUnit.huCHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:Q_dot_C">multizone.AirHandlingUnit.huCHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:Q_dot_H">multizone.AirHandlingUnit.huCHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:T_2">multizone.AirHandlingUnit.huCHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:T_3">multizone.AirHandlingUnit.huCHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:T_4">multizone.AirHandlingUnit.huCHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huCHRS_true:X_sup">multizone.AirHandlingUnit.huCHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_false:phi_t">multizone.AirHandlingUnit.huPreHHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_false:Q_dot_C">multizone.AirHandlingUnit.huPreHHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_false:Q_dot_H">multizone.AirHandlingUnit.huPreHHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_false:X_sup">multizone.AirHandlingUnit.huPreHHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_true:phi_t">multizone.AirHandlingUnit.huPreHHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_true:Q_dot_C">multizone.AirHandlingUnit.huPreHHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_true:Q_dot_H">multizone.AirHandlingUnit.huPreHHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.huPreHHRS_true:X_sup">multizone.AirHandlingUnit.huPreHHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:phi_t">multizone.AirHandlingUnit.onlyCoolingHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:Q_dot_C">multizone.AirHandlingUnit.onlyCoolingHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:Q_dot_H">multizone.AirHandlingUnit.onlyCoolingHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_2">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_3">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_4">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:X_sup">multizone.AirHandlingUnit.onlyCoolingHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:phi_t">multizone.AirHandlingUnit.onlyCoolingHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:Q_dot_C">multizone.AirHandlingUnit.onlyCoolingHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:Q_dot_H">multizone.AirHandlingUnit.onlyCoolingHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_2">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_3">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_4">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:X_sup">multizone.AirHandlingUnit.onlyCoolingHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:phi_t">multizone.AirHandlingUnit.onlyHeatingHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:Q_dot_C">multizone.AirHandlingUnit.onlyHeatingHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:Q_dot_H">multizone.AirHandlingUnit.onlyHeatingHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_2">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_3">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_4">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:X_sup">multizone.AirHandlingUnit.onlyHeatingHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:phi_t">multizone.AirHandlingUnit.onlyHeatingHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:Q_dot_C">multizone.AirHandlingUnit.onlyHeatingHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:Q_dot_H">multizone.AirHandlingUnit.onlyHeatingHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_2">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_3">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_4">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:X_sup">multizone.AirHandlingUnit.onlyHeatingHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:P_el_eta">multizone.AirHandlingUnit.P_el_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:P_el_sup">multizone.AirHandlingUnit.P_el_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:phi_sup">multizone.AirHandlingUnit.phi_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:phi_t">multizone.AirHandlingUnit.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:phi_t_withHRS">multizone.AirHandlingUnit.phi_t_withHRS</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:phi_t_withoutHRS">multizone.AirHandlingUnit.phi_t_withoutHRS</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:Q_dot_C">multizone.AirHandlingUnit.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:Q_dot_H">multizone.AirHandlingUnit.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone.AirHandlingUnit:sample.y">multizone.AirHandlingUnit.sample.y[]</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.startState:Q_dot_C">multizone.AirHandlingUnit.startState.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit.startState:Q_dot_H">multizone.AirHandlingUnit.startState.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_1">multizone.AirHandlingUnit.T_1</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_5">multizone.AirHandlingUnit.T_5</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_6">multizone.AirHandlingUnit.T_6</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_eta">multizone.AirHandlingUnit.T_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_oda">multizone.AirHandlingUnit.T_oda</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:T_sup">multizone.AirHandlingUnit.T_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:TsupplyAirOut">multizone.AirHandlingUnit.TsupplyAirOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:V_dot_eta">multizone.AirHandlingUnit.V_dot_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:V_dot_sup">multizone.AirHandlingUnit.V_dot_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_eta">multizone.AirHandlingUnit.X_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_oda">multizone.AirHandlingUnit.X_oda</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_odaRaw">multizone.AirHandlingUnit.X_odaRaw</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_odaSat">multizone.AirHandlingUnit.X_odaSat</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_sup">multizone.AirHandlingUnit.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_supMax">multizone.AirHandlingUnit.X_supMax</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone.AirHandlingUnit:X_supMin">multizone.AirHandlingUnit.X_supMin</a>
-Warning: Note that Clocked variables should not be declared as discrete.
-Attempting to further localize singularity.
-
-Attempting to further localize singularity.
-
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 201
-The model could not be deduced to be symbolically well-posed.
-The model has
-  37+multizone.zone[1].humanSenHeaDependent.productHeatOutput.nu
-scalar unknowns and
-  39
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  39
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*multizone.zone[1].zoneParam.nOrientations
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 20
-Attempting to further localize singularity.
-
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone.zone[1].heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone.zone.heaterCooler:firstOrderCooling">multizone.zone[1].heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
-Warning: WARNINGS have been issued.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAir</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAir.mo, line 6
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
-Error: The problem is structurally singular.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ThermalZone.mo, line 5
+Error: ERRORS have been issued.
 
-It has 10548 scalar unknowns and 10543 scalar equations.
-  The Real part has 10386 unknowns and 10381 equations.
-  The Integer part has 5 unknowns and 5 equations.
-  The Boolean part has 157 unknowns and 157 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  9516+23*multizone.numZones+29*multizone.zone[1].zoneParam.nOrientations+3*  multizone.zone[1].ROM.volMoiAir.dynBal.nPorts+multizone.zone[1].humanTotHeaDependent.productHeatOutput.nu  +multizone.zone[1].humanTotHeaDependent.productMoistureOutput.nu+  multizone.zone[1].machinesSenHea.productHeatOutput.nu+multizone.zone[1].lights.productHeatOutput.nu  +multizone.zone[1].ventCont.optimalTemp.nin+multizone.zone[1].ventCont.optimalTemp.nout  +multizone.zone[1].ventCont.dEMA.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+multizone.zone[1].SumQLat2_flow.nu+29  *multizone.zone[2].zoneParam.nOrientations+3*multizone.zone[2].ROM.volMoiAir.dynBal.nPorts  +multizone.zone[2].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[2].humanTotHeaDependent.productMoistureOutput.nu  +multizone.zone[2].machinesSenHea.productHeatOutput.nu+multizone.zone[2].lights.productHeatOutput.nu  +multizone.zone[2].ventCont.optimalTemp.nin+multizone.zone[2].ventCont.optimalTemp.nout  +multizone.zone[2].ventCont.dEMA.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+multizone.zone[2].SumQLat2_flow.nu+29  *multizone.zone[3].zoneParam.nOrientations+3*multizone.zone[3].ROM.volMoiAir.dynBal.nPorts  +multizone.zone[3].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[3].humanTotHeaDependent.productMoistureOutput.nu  +multizone.zone[3].machinesSenHea.productHeatOutput.nu+multizone.zone[3].lights.productHeatOutput.nu  +multizone.zone[3].ventCont.optimalTemp.nin+multizone.zone[3].ventCont.optimalTemp.nout  +multizone.zone[3].ventCont.dEMA.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+multizone.zone[3].SumQLat2_flow.nu+29  *multizone.zone[4].zoneParam.nOrientations+3*multizone.zone[4].ROM.volMoiAir.dynBal.nPorts  +multizone.zone[4].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[4].humanTotHeaDependent.productMoistureOutput.nu  +multizone.zone[4].machinesSenHea.productHeatOutput.nu+multizone.zone[4].lights.productHeatOutput.nu  +multizone.zone[4].ventCont.optimalTemp.nin+multizone.zone[4].ventCont.optimalTemp.nout  +multizone.zone[4].ventCont.dEMA.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+multizone.zone[4].SumQLat2_flow.nu+29  *multizone.zone[5].zoneParam.nOrientations+3*multizone.zone[5].ROM.volMoiAir.dynBal.nPorts  +multizone.zone[5].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[5].humanTotHeaDependent.productMoistureOutput.nu  +multizone.zone[5].machinesSenHea.productHeatOutput.nu+multizone.zone[5].lights.productHeatOutput.nu  +multizone.zone[5].ventCont.optimalTemp.nin+multizone.zone[5].ventCont.optimalTemp.nout  +multizone.zone[5].ventCont.dEMA.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+multizone.zone[5].SumQLat2_flow.nu+2  *multizone.AirHandlingUnit.sample.n+max([size(tableInternalGains.columns, 1);   size(tableInternalGains.offset, 1)])+replicator.nout+replicator1.nout+max([  size(tableAHU.columns, 1); size(tableAHU.offset, 1)])+max([size(  tableTSet.columns, 1); size(tableTSet.offset, 1)])
-scalar unknowns and
-  9886+(if  not multizone.AirHandlingUnit.use_Vflow_in_extractAir then 1 else 0)+  multizone.AirHandlingUnit.sample.n+6*multizone.numZones+(if weaDat.pAtmSou ==   AixLib.BoundaryConditions.Types.DataSource.Parameter then 1 else 0)+(if   weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+2*max([size(tableInternalGains.columns, 1);   size(tableInternalGains.offset, 1)])+replicator.nout+replicator1.nout+2*max([  size(tableAHU.columns, 1); size(tableAHU.offset, 1)])+2*max([size(  tableTSet.columns, 1); size(tableTSet.offset, 1)])+19*multizone.zone[1].zoneParam.nOrientations  +(if  not multizone.zone[1].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[1].ventCont.optimalTemp.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[1].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[2].zoneParam.nOrientations+(if  not   multizone.zone[2].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[2].ventCont.optimalTemp.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[2].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[3].zoneParam.nOrientations+(if  not   multizone.zone[3].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[3].ventCont.optimalTemp.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[3].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[4].zoneParam.nOrientations+(if  not   multizone.zone[4].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[4].ventCont.optimalTemp.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[4].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[5].zoneParam.nOrientations+(if  not   multizone.zone[5].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[5].ventCont.optimalTemp.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[5].x_pTphi.use_p_in   then 1 else 0)+(if  not multizone.zone[1].use_C_flow then 1 else 0)+7*  multizone.zone[1].ROM.volMoiAir.dynBal.nPorts+(if  not multizone.zone[2].use_C_flow   then 1 else 0)+7*multizone.zone[2].ROM.volMoiAir.dynBal.nPorts+(if  not   multizone.zone[3].use_C_flow then 1 else 0)+7*multizone.zone[3].ROM.volMoiAir.dynBal.nPorts  +(if  not multizone.zone[4].use_C_flow then 1 else 0)+7*multizone.zone[4].ROM.volMoiAir.dynBal.nPorts  +(if  not multizone.zone[5].use_C_flow then 1 else 0)+7*multizone.zone[5].ROM.volMoiAir.dynBal.nPorts
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  5
-Attempting to further localize singularity.
 
-Warning: The following real variables are declared with the prefix discrete,
-but are not assigned in a when-clause, either by an assignment or an equation:
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_2">multizone.AirHandlingUnit.deHuHRS_false.h_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_CoilOut">multizone.AirHandlingUnit.deHuHRS_false.h_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:h_surface">multizone.AirHandlingUnit.deHuHRS_false.h_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:p_sat_surface">multizone.AirHandlingUnit.deHuHRS_false.p_sat_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:phi_t">multizone.AirHandlingUnit.deHuHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:Q_dot_C">multizone.AirHandlingUnit.deHuHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:Q_dot_H">multizone.AirHandlingUnit.deHuHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_2">multizone.AirHandlingUnit.deHuHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_3">multizone.AirHandlingUnit.deHuHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_4">multizone.AirHandlingUnit.deHuHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_CoilOut">multizone.AirHandlingUnit.deHuHRS_false.T_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:T_surface">multizone.AirHandlingUnit.deHuHRS_false.T_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:X_sup">multizone.AirHandlingUnit.deHuHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_false:X_surface">multizone.AirHandlingUnit.deHuHRS_false.X_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_2">multizone.AirHandlingUnit.deHuHRS_true.h_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_CoilOut">multizone.AirHandlingUnit.deHuHRS_true.h_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:h_surface">multizone.AirHandlingUnit.deHuHRS_true.h_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:p_sat_surface">multizone.AirHandlingUnit.deHuHRS_true.p_sat_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:phi_t">multizone.AirHandlingUnit.deHuHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:Q_dot_C">multizone.AirHandlingUnit.deHuHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:Q_dot_H">multizone.AirHandlingUnit.deHuHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_2">multizone.AirHandlingUnit.deHuHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_3">multizone.AirHandlingUnit.deHuHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_4">multizone.AirHandlingUnit.deHuHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_CoilOut">multizone.AirHandlingUnit.deHuHRS_true.T_CoilOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:T_surface">multizone.AirHandlingUnit.deHuHRS_true.T_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:X_sup">multizone.AirHandlingUnit.deHuHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.deHuHRS_true:X_surface">multizone.AirHandlingUnit.deHuHRS_true.X_surface</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:dTFan">multizone.AirHandlingUnit.dTFan</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:phi_t">multizone.AirHandlingUnit.huCHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:Q_dot_C">multizone.AirHandlingUnit.huCHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:Q_dot_H">multizone.AirHandlingUnit.huCHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:T_2">multizone.AirHandlingUnit.huCHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:T_3">multizone.AirHandlingUnit.huCHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:T_4">multizone.AirHandlingUnit.huCHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_false:X_sup">multizone.AirHandlingUnit.huCHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:phi_t">multizone.AirHandlingUnit.huCHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:Q_dot_C">multizone.AirHandlingUnit.huCHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:Q_dot_H">multizone.AirHandlingUnit.huCHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:T_2">multizone.AirHandlingUnit.huCHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:T_3">multizone.AirHandlingUnit.huCHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:T_4">multizone.AirHandlingUnit.huCHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huCHRS_true:X_sup">multizone.AirHandlingUnit.huCHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_false:phi_t">multizone.AirHandlingUnit.huPreHHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_false:Q_dot_C">multizone.AirHandlingUnit.huPreHHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_false:Q_dot_H">multizone.AirHandlingUnit.huPreHHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_false:X_sup">multizone.AirHandlingUnit.huPreHHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_true:phi_t">multizone.AirHandlingUnit.huPreHHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_true:Q_dot_C">multizone.AirHandlingUnit.huPreHHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_true:Q_dot_H">multizone.AirHandlingUnit.huPreHHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.huPreHHRS_true:X_sup">multizone.AirHandlingUnit.huPreHHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:phi_t">multizone.AirHandlingUnit.onlyCoolingHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:Q_dot_C">multizone.AirHandlingUnit.onlyCoolingHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:Q_dot_H">multizone.AirHandlingUnit.onlyCoolingHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_2">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_3">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:T_4">multizone.AirHandlingUnit.onlyCoolingHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_false:X_sup">multizone.AirHandlingUnit.onlyCoolingHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:phi_t">multizone.AirHandlingUnit.onlyCoolingHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:Q_dot_C">multizone.AirHandlingUnit.onlyCoolingHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:Q_dot_H">multizone.AirHandlingUnit.onlyCoolingHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_2">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_3">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:T_4">multizone.AirHandlingUnit.onlyCoolingHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyCoolingHRS_true:X_sup">multizone.AirHandlingUnit.onlyCoolingHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:phi_t">multizone.AirHandlingUnit.onlyHeatingHRS_false.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:Q_dot_C">multizone.AirHandlingUnit.onlyHeatingHRS_false.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:Q_dot_H">multizone.AirHandlingUnit.onlyHeatingHRS_false.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_2">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_3">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:T_4">multizone.AirHandlingUnit.onlyHeatingHRS_false.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_false:X_sup">multizone.AirHandlingUnit.onlyHeatingHRS_false.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:phi_t">multizone.AirHandlingUnit.onlyHeatingHRS_true.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:Q_dot_C">multizone.AirHandlingUnit.onlyHeatingHRS_true.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:Q_dot_H">multizone.AirHandlingUnit.onlyHeatingHRS_true.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_2">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_2</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_3">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_3</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:T_4">multizone.AirHandlingUnit.onlyHeatingHRS_true.T_4</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.onlyHeatingHRS_true:X_sup">multizone.AirHandlingUnit.onlyHeatingHRS_true.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:P_el_eta">multizone.AirHandlingUnit.P_el_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:P_el_sup">multizone.AirHandlingUnit.P_el_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:phi_sup">multizone.AirHandlingUnit.phi_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:phi_t">multizone.AirHandlingUnit.phi_t</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:phi_t_withHRS">multizone.AirHandlingUnit.phi_t_withHRS</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:phi_t_withoutHRS">multizone.AirHandlingUnit.phi_t_withoutHRS</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:Q_dot_C">multizone.AirHandlingUnit.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:Q_dot_H">multizone.AirHandlingUnit.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#diagram$multizone.AirHandlingUnit:sample.y">multizone.AirHandlingUnit.sample.y[]</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.startState:Q_dot_C">multizone.AirHandlingUnit.startState.Q_dot_C</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit.startState:Q_dot_H">multizone.AirHandlingUnit.startState.Q_dot_H</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_1">multizone.AirHandlingUnit.T_1</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_5">multizone.AirHandlingUnit.T_5</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_6">multizone.AirHandlingUnit.T_6</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_eta">multizone.AirHandlingUnit.T_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_oda">multizone.AirHandlingUnit.T_oda</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:T_sup">multizone.AirHandlingUnit.T_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:TsupplyAirOut">multizone.AirHandlingUnit.TsupplyAirOut</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:V_dot_eta">multizone.AirHandlingUnit.V_dot_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:V_dot_sup">multizone.AirHandlingUnit.V_dot_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_eta">multizone.AirHandlingUnit.X_eta</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_oda">multizone.AirHandlingUnit.X_oda</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_odaRaw">multizone.AirHandlingUnit.X_odaRaw</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_odaSat">multizone.AirHandlingUnit.X_odaSat</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_sup">multizone.AirHandlingUnit.X_sup</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_supMax">multizone.AirHandlingUnit.X_supMax</a>
-<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#text$multizone.AirHandlingUnit:X_supMin">multizone.AirHandlingUnit.X_supMin</a>
-Warning: Note that Clocked variables should not be declared as discrete.
-Attempting to further localize singularity.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir">AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZoneMoistAir.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ComparisonThermalZoneMoistAndDryAir.mo, line 6
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ComparisonThermalZoneMoistAndDryAir.mo, line 142
+Error: ERRORS have been issued.
 
-Attempting to further localize singularity.
 
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 233
-The model could not be deduced to be symbolically well-posed.
-The model has
-  49+multizone.zone[1].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[1].humanTotHeaDependent.productMoistureOutput.nu
-scalar unknowns and
-  53
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  53
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*multizone.zone[1].zoneParam.nOrientations
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 20
-Attempting to further localize singularity.
-
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#diagram$multizone.zone[1].heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped#diagram$multizone.zone.heaterCooler:firstOrderCooling">multizone.zone[1].heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
-Warning: WARNINGS have been issued.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volMoiAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.AirLay.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.sou.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
 Error: ERRORS have been issued.
 
 
 Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2 
 Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2</a>
-Error: The problem is structurally singular.
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Error: ERRORS have been issued.
 
-It has 10297 scalar unknowns and 10292 scalar equations.
-  The Real part has 10202 unknowns and 10197 equations.
-  The Integer part has 0 unknowns and 0 equations.
-  The Boolean part has 95 unknowns and 95 equations.
-  The String part has 0 unknowns and 0 equations.
-Error: The model is not well-posed.
-The model has
-  9372+15*multizone.numZones+29*multizone.zone[1].zoneParam.nOrientations+  multizone.zone[1].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[1].humanTotHeaDependent.productMoistureOutput.nu  +multizone.zone[1].machinesSenHea.productHeatOutput.nu+multizone.zone[1].lights.productHeatOutput.nu  +multizone.zone[1].ventCont.optimalTemp.nin+multizone.zone[1].ventCont.optimalTemp.nout  +multizone.zone[1].ventCont.dEMA.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+multizone.zone[1].SumQLat2_flow.nu+29  *multizone.zone[2].zoneParam.nOrientations+multizone.zone[2].humanTotHeaDependent.productHeatOutput.nu  +multizone.zone[2].humanTotHeaDependent.productMoistureOutput.nu+  multizone.zone[2].machinesSenHea.productHeatOutput.nu+multizone.zone[2].lights.productHeatOutput.nu  +multizone.zone[2].ventCont.optimalTemp.nin+multizone.zone[2].ventCont.optimalTemp.nout  +multizone.zone[2].ventCont.dEMA.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+multizone.zone[2].SumQLat2_flow.nu+29  *multizone.zone[3].zoneParam.nOrientations+multizone.zone[3].humanTotHeaDependent.productHeatOutput.nu  +multizone.zone[3].humanTotHeaDependent.productMoistureOutput.nu+  multizone.zone[3].machinesSenHea.productHeatOutput.nu+multizone.zone[3].lights.productHeatOutput.nu  +multizone.zone[3].ventCont.optimalTemp.nin+multizone.zone[3].ventCont.optimalTemp.nout  +multizone.zone[3].ventCont.dEMA.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+multizone.zone[3].SumQLat2_flow.nu+29  *multizone.zone[4].zoneParam.nOrientations+multizone.zone[4].humanTotHeaDependent.productHeatOutput.nu  +multizone.zone[4].humanTotHeaDependent.productMoistureOutput.nu+  multizone.zone[4].machinesSenHea.productHeatOutput.nu+multizone.zone[4].lights.productHeatOutput.nu  +multizone.zone[4].ventCont.optimalTemp.nin+multizone.zone[4].ventCont.optimalTemp.nout  +multizone.zone[4].ventCont.dEMA.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+multizone.zone[4].SumQLat2_flow.nu+29  *multizone.zone[5].zoneParam.nOrientations+multizone.zone[5].humanTotHeaDependent.productHeatOutput.nu  +multizone.zone[5].humanTotHeaDependent.productMoistureOutput.nu+  multizone.zone[5].machinesSenHea.productHeatOutput.nu+multizone.zone[5].lights.productHeatOutput.nu  +multizone.zone[5].ventCont.optimalTemp.nin+multizone.zone[5].ventCont.optimalTemp.nout  +multizone.zone[5].ventCont.dEMA.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+multizone.zone[5].SumQLat2_flow.nu+  max([size(tableInternalGains.columns, 1); size(tableInternalGains.offset, 1)])  +replicator.nout+replicator1.nout+replicator2.nout+replicator3.nout
-scalar unknowns and
-  9723+(if weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter   then 1 else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+2*max([size(tableInternalGains.columns, 1);   size(tableInternalGains.offset, 1)])+replicator.nout+replicator1.nout+(if    not x_pTphi.use_p_in then 1 else 0)+2*replicator2.nout+2*replicator3.nout+19*  multizone.zone[1].zoneParam.nOrientations+(if  not multizone.zone[1].eqAirTempWall.TGroundFromInput   then 1 else 0)+multizone.zone[1].ventCont.optimalTemp.nout+multizone.zone[1].ventCont.dEMA.ExpAVG.n  +multizone.zone[1].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[1].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[2].zoneParam.nOrientations+(if  not   multizone.zone[2].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[2].ventCont.optimalTemp.nout+multizone.zone[2].ventCont.dEMA.ExpAVG.n  +multizone.zone[2].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[2].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[3].zoneParam.nOrientations+(if  not   multizone.zone[3].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[3].ventCont.optimalTemp.nout+multizone.zone[3].ventCont.dEMA.ExpAVG.n  +multizone.zone[3].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[3].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[4].zoneParam.nOrientations+(if  not   multizone.zone[4].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[4].ventCont.optimalTemp.nout+multizone.zone[4].ventCont.dEMA.ExpAVG.n  +multizone.zone[4].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[4].x_pTphi.use_p_in   then 1 else 0)+19*multizone.zone[5].zoneParam.nOrientations+(if  not   multizone.zone[5].eqAirTempWall.TGroundFromInput then 1 else 0)+  multizone.zone[5].ventCont.optimalTemp.nout+multizone.zone[5].ventCont.dEMA.ExpAVG.n  +multizone.zone[5].ventCont.dEMA.ExpAVG1.n+(if  not multizone.zone[5].x_pTphi.use_p_in   then 1 else 0)+(if  not multizone.zone[1].use_C_flow then 1 else 0)+7*  multizone.zone[1].ROM.volMoiAir.dynBal.nPorts+(if  not multizone.zone[2].use_C_flow   then 1 else 0)+7*multizone.zone[2].ROM.volMoiAir.dynBal.nPorts+(if  not   multizone.zone[3].use_C_flow then 1 else 0)+7*multizone.zone[3].ROM.volMoiAir.dynBal.nPorts  +(if  not multizone.zone[4].use_C_flow then 1 else 0)+7*multizone.zone[4].ROM.volMoiAir.dynBal.nPorts  +(if  not multizone.zone[5].use_C_flow then 1 else 0)+7*multizone.zone[5].ROM.volMoiAir.dynBal.nPorts
-scalar equations.
-Using the given settings of the parameters, the difference could be reduced to
-  5
-Attempting to further localize singularity.
 
-Attempting to further localize singularity.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Error: ERRORS have been issued.
 
-Attempting to further localize singularity.
 
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 233
-The model could not be deduced to be symbolically well-posed.
-The model has
-  49+multizone.zone[1].humanTotHeaDependent.productHeatOutput.nu+multizone.zone[1].humanTotHeaDependent.productMoistureOutput.nu
-scalar unknowns and
-  53
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  53
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].machinesSenHea.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model could not be deduced to be symbolically well-posed.
-The model has
-  28+multizone.zone[1].lights.productHeatOutput.nu
-scalar unknowns and
-  29
-scalar equations.
-However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
-  29
-The model has the same number of unknowns and equations:
-  14*multizone.zone[1].zoneParam.nOrientations
-The model has the same number of unknowns and equations
-for the given numerical settings of parameters: 20
-Attempting to further localize singularity.
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Error: ERRORS have been issued.
 
-Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a>, class <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped</a>.
-Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2#diagram$multizone.zone:heaterCooler">multizone.zone[1].heaterCooler</a> is structurally singular.
-when assuming inputs to be known
-and the most generic outside couplings to all the flow variables of its connectors.
-Error: The input connector <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2#diagram$multizone.zone[1].heaterCooler">u</a> of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2#diagram$multizone.zone.heaterCooler:firstOrderCooling">multizone.zone[1].heaterCooler.firstOrderCooling</a> is not connected from the outside.
- It is likely that it should have been connected, and recursive check assumes this.
- The missing connection is a likely cause of errors in the model.
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistAirSwimmingPool.mo, line 6
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: ROM.volAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: ROM.volMoiAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 2
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: airFlowMoistureToROM.AirLay.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: airFlowMoistureToROM.sou.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: thermalZone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/ThermalZoneAirExchange.mo, line 5
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.Multizone 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.Multizone">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>
+Error: Class or component 'traSys' not found in HeaterCoolerPIFraRadDamped heaterCooler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/ThermalZone/ThermalZone.mo, line 175
+ Component context: multizone.zone.heaterCooler
+  Component declared as HeaterCoolerPIFraRadDamped heaterCooler in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler">AixLib.Utilities.Sources.HeaterCooler</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/PartialMultizone.mo, line 87
 Error: ERRORS have been issued.
 
