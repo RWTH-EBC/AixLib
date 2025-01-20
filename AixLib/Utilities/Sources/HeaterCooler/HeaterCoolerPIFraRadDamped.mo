@@ -8,10 +8,10 @@ model HeaterCoolerPIFraRadDamped
 //  fraHeaRad= if traSysInt == SimplifiedTransferSystems.TransferSystem.IdealHeater then 0 elseif traSysInt == SimplifiedTransferSystems.TransferSystem.Radiator then traSysRec.fraCooRadRad elseif traSysInt == SimplifiedTransferSystems.TransferSystem.UnderFloorHeating then traSysRec.fraCooRadUfh else traSysRec.fraCooRadCca);
 
   parameter Real K_PT1 = if not recOrSep then 0 else zoneParam.traSysK
-  "Gain for PT1 for damped heating transfer"
+    "Gain for PT1 for damped heating transfer"
       annotation(Dialog(tab = "Heater", group = "PT1 Damper",enable=not recOrSep));
   parameter Modelica.Units.SI.Time T_PT1 = if not recOrSep then 0 else zoneParam.traSysT
-  "Time Constant for PT1 for damped heating transfer"
+    "Time Constant for PT1 for damped heating transfer"
       annotation (Dialog(tab="Heater", group="PT1 Damper", enable=not recOrSep));
 
 
@@ -39,10 +39,10 @@ model HeaterCoolerPIFraRadDamped
 
 
 protected
-  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=kPT1, T=TPT1) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=K_PT1, T=T_PT1) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Emulates the belayed cooling flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-16,-82},{4,-62}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=kPT1, T=TPT1) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=K_PT1, T=T_PT1) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "Emulates the belayed heat flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
 equation

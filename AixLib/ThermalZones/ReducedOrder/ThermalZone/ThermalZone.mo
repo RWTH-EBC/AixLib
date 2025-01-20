@@ -45,13 +45,13 @@ model ThermalZone "Thermal zone containing moisture balance"
       tab="IdealHeaterCooler",
       group="Cooler",
       enable=not recOrSep));
-  parameter
-    Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
-    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater
-    "Transfer system type" annotation (Dialog(
-      tab="IdealHeaterCooler",
-      group="Modes",
-      enable=not recOrSep));
+//  parameter
+//    Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
+//    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater
+//    "Transfer system type" annotation (Dialog(
+//      tab="IdealHeaterCooler",
+//      group="Modes",
+//      enable=not recOrSep));
 
   // CO2 parameters
   parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
@@ -185,11 +185,10 @@ model ThermalZone "Thermal zone containing moisture balance"
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each Cooler_on=Cooler_on,
-    each staOrDyn=not zoneParam.withIdealThresholds,
-    traSys=traSys)                     if (ATot > 0 or zoneParam.VAir
-     > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
-    not recOrSep and (Heater_on or Cooler_on))
-                                      "Heater Cooler with PI control"
+    each staOrDyn=not zoneParam.withIdealThresholds)
+      if (ATot > 0 or zoneParam.VAir > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
+        not recOrSep and (Heater_on or Cooler_on))
+      "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{62,32},{84,52}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
        zoneParam) if zoneParam.withIdealThresholds

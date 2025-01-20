@@ -147,15 +147,21 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
-  parameter
-    AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
-    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater "Heating system type" annotation (Dialog(compact=true,
-        descriptionLabel=true), choices(
-      choice=traSys.IdealHeater "Ideal Heater",
-      choice=traSys.Radiator "Radiator",
-      choice=traSys.UnderFloorHeating "Under Floor Heating",
-      choice=traSys.ConcreteCoreActivation "Concrete Core Activation",
-      radioButtons=true));
+  parameter Real traSysK "Gain for PT1 for damped heating transfer";
+  parameter Modelica.Units.SI.Time traSysT
+    "Time Constant for PT1 for damped heating transfer";
+  parameter Real traSysFraHeaRad "Fraction of heat transfer to radiation";
+  parameter Real traSysFraCooRad "Fraction of cool transfer to radiation";
+
+//  parameter
+//    AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
+//    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater "Heating system type" annotation (Dialog(compact=true,
+//        descriptionLabel=true), choices(
+//      choice=traSys.IdealHeater "Ideal Heater",
+//      choice=traSys.Radiator "Radiator",
+//      choice=traSys.UnderFloorHeating "Under Floor Heating",
+//      choice=traSys.ConcreteCoreActivation "Concrete Core Activation",
+//      radioButtons=true));
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
