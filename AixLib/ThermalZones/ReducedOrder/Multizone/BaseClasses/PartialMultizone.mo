@@ -150,13 +150,6 @@ partial model PartialMultizone "Partial model for multizone models"
       tab="IdealHeaterCooler",
       group="Cooler",
       enable=not recOrSep));
-//  parameter
-//    Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
-//    traSys=AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.IdealHeater
-//    "Transfer system type" annotation (Dialog(
-//      tab="IdealHeaterCooler",
-//      group="Modes",
-//      enable=not recOrSep));
 
   //Swimming pool params
   parameter Boolean use_pools_tot = false "use swimming pools within at least one zone of the multizone" annotation(Dialog(tab="Moisture", group="Pools"));

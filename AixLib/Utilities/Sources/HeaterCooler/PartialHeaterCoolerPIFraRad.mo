@@ -25,10 +25,10 @@ partial model PartialHeaterCoolerPIFraRad
         "Seperate",choice = true "Record",radioButtons = true));
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam(
     heaLoadFacGrd=0,
-    heaLoadFacOut=0)                                              = AixLib.DataBase.ThermalZones.ZoneRecordDummy()
+    heaLoadFacOut=0) =                                              AixLib.DataBase.ThermalZones.ZoneRecordDummy()
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
-  parameter Real fraCooRad "Fraction of cooling power on radiative port";
-  parameter Real fraHeaRad "Fraction of heating power on radiative port";
+  parameter Real fraCooRad "Fraction of cooling power on radiative port" annotation(Dialog(enable=not recOrSep));
+  parameter Real fraHeaRad "Fraction of heating power on radiative port" annotation(Dialog(enable=not recOrSep));
   AixLib.Controls.Continuous.PITemp pITempCool(
     rangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.hCool,
