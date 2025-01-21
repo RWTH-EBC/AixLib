@@ -23,6 +23,7 @@ model SolarThermalCollector
       m_flow_nominal=system.m_flow_nominal)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     A=2,
     redeclare package Medium = Medium,
     m_flow_nominal=system.m_flow_nominal,
