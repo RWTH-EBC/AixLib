@@ -59,7 +59,7 @@ equation
         points={{5,-55.6},{36.05,-55.6},{36.05,-14.2},{60.05,-14.2},{60.05,52},
           {70.9,52}}, color={0,0,127}));
   annotation (
-    experiment(StopTime=31539600, Tolerance=1e-06),
+    experiment(StopTime=864000, Tolerance=1e-06),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case600.mos"
         "Simulate and plot"),

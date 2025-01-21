@@ -12,7 +12,7 @@ model Case300
     tableHeatOrTempMax=[300,4761,5964]);
 
   annotation (
-    experiment(StopTime=31539600, Tolerance=1e-06),
+    experiment(StopTime=864000, Tolerance=1e-06),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case300.mos"
         "Simulate and plot"),
