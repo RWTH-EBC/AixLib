@@ -30,7 +30,7 @@ block AirFlowRateSplit
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
 
-  Modelica.Blocks.Interfaces.RealInput setAHU[dimension] if dynamicControl
+  Modelica.Blocks.Interfaces.RealInput setAHU[dimension]
     "Input for volume flow per room if dynamic ventilation control is used"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -43,7 +43,6 @@ protected
   Real airFlowRateOutput "Sum of air flow rates";
   parameter Real defVal[dimension]={if VAir > 0 then 0 else 0.000001 for VAir in zoneParam.VAir}
     "Default value to prevent division by zero";
-
 equation
   if dynamicControl then
     airFlowVector * 3600 = (zoneParam.minAHU + zoneParam.maxAHU .* setAHU) .* zoneParam.AZone;

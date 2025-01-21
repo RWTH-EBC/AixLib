@@ -12,6 +12,7 @@ block AirFlowRateSum
     "Wether to use dynamic ventilation control depending on room temperature";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension]
     "Records of zones";
+
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
@@ -25,16 +26,16 @@ block AirFlowRateSum
     final unit="m3/s") "Air flow rate"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
-  Modelica.Blocks.Interfaces.RealInput setAHU[dimension] if dynamicControl
-    "Output for volume flow per room if dynamic ventilation control is used"
+  Modelica.Blocks.Interfaces.RealInput setAHU[dimension]
+    "Input for volume flow per room if dynamic ventilation control is used"
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=180,
         origin={-120,-90}), iconTransformation(extent={{-140,-110},{-100,-70}})));
+
 protected
   Real airFlowVector[dimension]
     "Sum of air flow in the zones";
-
 equation
   if dynamicControl then
     airFlowVector * 3600 = (zoneParam.minAHU + zoneParam.maxAHU .* setAHU) .* zoneParam.AZone;
