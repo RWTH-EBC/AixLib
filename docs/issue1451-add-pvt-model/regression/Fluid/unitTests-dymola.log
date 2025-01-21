@@ -1,0 +1,10 @@
+Regression tests are only run for the following package:
+  AixLib.Fluid
+*** Warning: Unspecified initial conditions in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mos");'.
+
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 1 warnings and 0 errors.
+
