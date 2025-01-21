@@ -120,7 +120,8 @@ model MultizoneEquipped
     final numZones=numZones,
     final zoneParam=zoneParam,
     final heatAHU=heatAHU,
-    final coolAHU=coolAHU) if dynamicControlAHU
+    final coolAHU=coolAHU,
+    maxAHU_PI=3)           if dynamicControlAHU
     annotation (Placement(transformation(extent={{-48,-22},{-36,-10}})));
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
@@ -348,8 +349,8 @@ equation
           127}));
   connect(dynamicVolumeFlowControl.roomHeatPort, zone.intGainsConv) annotation (
      Line(points={{-36,-16},{86,-16},{86,70.32},{80.42,70.32}}, color={191,0,0}));
-  connect(AHU[4], dynamicVolumeFlowControl.AHUProfile) annotation (Line(points=
-          {{-100,-16},{-86,-16},{-86,2},{-60,2},{-60,-20.8},{-49.2,-20.8}},
+  connect(AHU[4], dynamicVolumeFlowControl.AHUProfile) annotation (Line(points={{-100,
+          -8.5},{-86,-8.5},{-86,2},{-60,2},{-60,-20.8},{-49.2,-20.8}},
         color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
