@@ -29,6 +29,8 @@ model MultizoneEquipped
     Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
   parameter Boolean dynamicControlAHU=false
     "Status of dynamic AHU control depending on room temperature";
+  parameter Boolean dynamicSetTempControlAHU=true
+    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
   parameter Real effHRSAHU_enabled(
     min=0,
     max=1)
@@ -119,10 +121,14 @@ model MultizoneEquipped
   BaseClasses.DynamicVolumeFlowControl dynamicVolumeFlowControl(
     final numZones=numZones,
     final zoneParam=zoneParam,
-    final heatAHU=heatAHU,
+    final heatAHU=false,
     final coolAHU=coolAHU,
-    maxAHU_PI=3)           if dynamicControlAHU
-    annotation (Placement(transformation(extent={{-48,-22},{-36,-10}})));
+    maxAHU_PI_Heat=1,
+    maxAHU_PI_Cool=1.5)    if dynamicControlAHU
+    annotation (Placement(transformation(extent={{-48,-32},{-36,-20}})));
+  BaseClasses.DynamicAHUTemperatureControl dynamicAHUTemperatureControl(
+      dynamicSetTempControlAHU=dynamicSetTempControlAHU)
+    annotation (Placement(transformation(extent={{-36,-14},{-48,-2}})));
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
     "Calculated zone factors";
@@ -232,12 +238,6 @@ equation
 
   end for;
 
-  connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
-      points={{-100,-23.5},{-100,-14},{-86,-14},{-86,2},{24,2},{24,19.75},{12.4,
-          19.75}},
-      color={0,0,127},
-      smooth=Smooth.None));
-
   connect(airFlowRate.airFlow, AirHandlingUnit.Vflow_in) annotation (Line(
       points={{-58.8,28},{-58,28},{-58,21.25},{-50.6,21.25}},
       color={0,0,127},
@@ -338,19 +338,36 @@ equation
   end if;
 
   connect(TSetHeat, dynamicVolumeFlowControl.TSetHeat) annotation (Line(points={{-40,
-          -100},{-40,-26},{-39.6,-26},{-39.6,-23.2}},color={0,0,127}));
+          -100},{-40,-34},{-39.6,-34},{-39.6,-33.2}},color={0,0,127}));
   connect(TSetCool, dynamicVolumeFlowControl.TSetCool) annotation (Line(points={{-80,
-          -100},{-80,-38},{-44.4,-38},{-44.4,-23.2}},color={0,0,127}));
+          -100},{-80,-38},{-44.4,-38},{-44.4,-33.2}},color={0,0,127}));
   connect(dynamicVolumeFlowControl.setAHU, airFlowRate.setAHU) annotation (Line(
-        points={{-49.2,-16},{-58,-16},{-58,16},{-73.2,16},{-73.2,22.6}}, color={
+        points={{-49.2,-26},{-58,-26},{-58,16},{-73.2,16},{-73.2,22.6}}, color={
           0,0,127}));
   connect(dynamicVolumeFlowControl.setAHU, airFlowRateSplit.setAHU) annotation (
-     Line(points={{-49.2,-16},{-58,-16},{-58,-4},{50,-4},{50,20.8}}, color={0,0,
+     Line(points={{-49.2,-26},{-58,-26},{-58,4},{50,4},{50,20.8}},   color={0,0,
           127}));
   connect(dynamicVolumeFlowControl.roomHeatPort, zone.intGainsConv) annotation (
-     Line(points={{-36,-16},{86,-16},{86,70.32},{80.42,70.32}}, color={191,0,0}));
+     Line(points={{-36,-26},{86,-26},{86,70.32},{80.42,70.32}}, color={191,0,0}));
   connect(AHU[4], dynamicVolumeFlowControl.AHUProfile) annotation (Line(points={{-100,
-          -8.5},{-86,-8.5},{-86,2},{-60,2},{-60,-20.8},{-49.2,-20.8}},
+          -8.5},{-100,-16},{-90,-16},{-90,-30.8},{-49.2,-30.8}},
+        color={0,0,127}));
+  connect(AHU[1], dynamicAHUTemperatureControl.TsetAHU_In) annotation (Line(
+        points={{-100,-23.5},{-86,-23.5},{-86,0},{-76,0},{-76,-8},{-49.2,-8}},
+        color={0,0,127}));
+  connect(dynamicAHUTemperatureControl.TsetAHU_Out, AirHandlingUnit.T_supplyAir)
+    annotation (Line(points={{-34.8,-8},{-2,-8},{-2,-6},{22,-6},{22,19.75},{12.4,
+          19.75}}, color={0,0,127}));
+
+  connect(dynamicAHUTemperatureControl.T_Oda, weaBus.TDryBul) annotation (Line(
+        points={{-46.8,-0.8},{-46.8,0},{-99.915,0},{-99.915,69.08}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(dynamicAHUTemperatureControl.T_Eta, minTemp.y) annotation (Line(
+        points={{-37.32,-0.8},{26,-0.8},{26,-16},{16,-16},{16,-28},{19.5,-28}},
         color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

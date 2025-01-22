@@ -45,7 +45,7 @@ protected
     "Default value to prevent division by zero";
 equation
   if dynamicControl then
-    airFlowVector * 3600 = (zoneParam.minAHU + zoneParam.maxAHU .* setAHU) .* zoneParam.AZone;
+    airFlowVector * 3600 = zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
    elseif withProfile then
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
     zoneParam.minAHU) * profile) .* zoneParam.AZone);
