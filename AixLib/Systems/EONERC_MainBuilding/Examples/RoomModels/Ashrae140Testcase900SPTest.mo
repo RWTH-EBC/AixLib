@@ -670,7 +670,7 @@ equation
   connect(VflowExt.y, ctrAhu.VflowSet)
     annotation (Line(points={{-93,-64},{-90,-64},{-90,-45},{-60,-45}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=8121600,
+      StopTime=31536000,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
