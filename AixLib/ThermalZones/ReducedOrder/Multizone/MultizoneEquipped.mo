@@ -27,10 +27,16 @@ model MultizoneEquipped
     "Status of Heat Recovery System of AHU"
     annotation (
     Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
-  parameter Boolean dynamicControlAHU=false
+  parameter Boolean dynamicVolumeFlowControlAHU=false
     "Status of dynamic AHU control depending on room temperature";
-  parameter Boolean dynamicSetTempControlAHU=true
+  parameter Boolean dynamicSetTempControlAHU=false
     "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
+  parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
+    "Temperature after HRS in AHU over which there should be no ahu heating
+        for temperature reasons (humidifciation/dehumidifaction still possible)";
+  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU = 294.15
+        "Temperature after HRS in AHU under which there should be no ahu cooling
+        for temperature reasons (humidifciation/dehumidifaction still possible)";
   parameter Real effHRSAHU_enabled(
     min=0,
     max=1)
@@ -121,13 +127,16 @@ model MultizoneEquipped
   BaseClasses.DynamicVolumeFlowControl dynamicVolumeFlowControl(
     final numZones=numZones,
     final zoneParam=zoneParam,
-    final heatAHU=false,
+    final heatAHU=heatAHU,
     final coolAHU=coolAHU,
     maxAHU_PI_Heat=1,
-    maxAHU_PI_Cool=1.5)    if dynamicControlAHU
+    maxAHU_PI_Cool=1.5)    if dynamicVolumeFlowControlAHU
     annotation (Placement(transformation(extent={{-48,-32},{-36,-20}})));
   BaseClasses.DynamicAHUTemperatureControl dynamicAHUTemperatureControl(
-      dynamicSetTempControlAHU=dynamicSetTempControlAHU)
+      dynamicSetTempControlAHU=dynamicSetTempControlAHU,
+      T_Treshold_Heating=T_Treshold_Heating_AHU,
+      T_Treshold_Cooling=T_Treshold_Cooling_AHU,
+      phi_HRS = if HRS then effHRSAHU_enabled else effHRSAHU_disabled)
     annotation (Placement(transformation(extent={{-36,-14},{-48,-2}})));
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
@@ -149,7 +158,7 @@ protected
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
     final dimension=numZones,
     withProfile=true,
-    dynamicControl=dynamicControlAHU,
+    dynamicControl=dynamicVolumeFlowControlAHU,
     final zoneParam=zoneParam) if ASurTot > 0 or VAir > 0
     "Post-processor for AHU outputs"
     annotation (Placement(transformation(
@@ -175,7 +184,7 @@ protected
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
     final dimension=numZones,
     withProfile=true,
-    dynamicControl=dynamicControlAHU,
+    dynamicControl=dynamicVolumeFlowControlAHU,
     final zoneParam=zoneParam)
     "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
