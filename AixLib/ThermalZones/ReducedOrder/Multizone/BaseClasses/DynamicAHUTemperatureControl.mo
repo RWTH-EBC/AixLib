@@ -15,6 +15,7 @@ model DynamicAHUTemperatureControl
         transformation(extent={{-100,-20},{-140,20}}), iconTransformation(
           extent={{-100,-20},{-140,20}})));
   Modelica.Units.SI.Temperature T_AHU_After_HRS "Temp after HRS in AHU";
+  Modelica.Units.SI.Temperature TsetAHU "Dummy for set temparature of AHU";
   Modelica.Blocks.Interfaces.RealInput T_Oda "Outdoor air temperature"
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
@@ -39,52 +40,66 @@ model DynamicAHUTemperatureControl
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={120,0})));
-  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold=
+  Modelica.Blocks.Logical.LessEqualThreshold HeatingThreshold(threshold=
         T_Treshold_Heating)
     annotation (Placement(transformation(extent={{80,20},{60,40}})));
-  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
-       T_Treshold_Cooling)
+  Modelica.Blocks.Logical.GreaterEqualThreshold CoolingThreshold(threshold=
+        T_Treshold_Cooling)
     annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
-  Modelica.Blocks.Logical.Or or1
-    annotation (Placement(transformation(extent={{30,-10},{10,10}})));
-  Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{-20,10},{-40,-10}})));
-  Modelica.Blocks.Logical.Switch switch2
+  Modelica.Blocks.Logical.Switch switchHeat
+    annotation (Placement(transformation(extent={{20,40},{0,20}})));
+  Modelica.Blocks.Logical.Switch switch
     annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
 
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=
         dynamicSetTempControlAHU)
-    annotation (Placement(transformation(extent={{-10,-40},{-30,-20}})));
+    annotation (Placement(transformation(extent={{-12,-70},{-32,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=T_AHU_After_HRS)
     annotation (Placement(transformation(extent={{-60,54},{-40,74}})));
+  Modelica.Blocks.Sources.Constant const(k=T_Treshold_Heating)
+    annotation (Placement(transformation(extent={{52,8},{40,20}})));
+  Modelica.Blocks.Sources.Constant const1(k=T_Treshold_Cooling)
+    annotation (Placement(transformation(extent={{52,-20},{40,-8}})));
+  Modelica.Blocks.Logical.Switch switchCool
+    annotation (Placement(transformation(extent={{20,-40},{0,-20}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=TsetAHU)
+    annotation (Placement(transformation(extent={{-20,-2},{-40,18}})));
 equation
 
   T_AHU_After_HRS = T_Oda + phi_HRS * (T_Eta - T_Oda + 1e-3);
 
-  connect(lessEqualThreshold.y, or1.u1) annotation (Line(points={{59,30},{40,30},
-          {40,0},{32,0}}, color={255,0,255}));
-  connect(greaterEqualThreshold.y, or1.u2) annotation (Line(points={{59,-30},{40,
-          -30},{40,-8},{32,-8}}, color={255,0,255}));
-  connect(or1.y, switch1.u2)
-    annotation (Line(points={{9,0},{-18,0}},  color={255,0,255}));
-  connect(TsetAHU_In, switch1.u1) annotation (Line(points={{120,-70},{0,-70},{0,
-          -8},{-18,-8}},
-                       color={0,0,127}));
-  connect(switch1.y, switch2.u1) annotation (Line(points={{-41,0},{-46,0},{-46,8},
-          {-58,8}},  color={0,0,127}));
-  connect(TsetAHU_In, switch2.u3) annotation (Line(points={{120,-70},{-52,-70},{
-          -52,-8},{-58,-8}},
-                       color={0,0,127}));
-  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-31,-30},{-48,
-          -30},{-48,0},{-58,0}}, color={255,0,255}));
-  connect(switch2.y, TsetAHU_Out)
+  if HeatingThreshold.y then
+    TsetAHU = switchHeat.y;
+  elseif CoolingThreshold.y then
+    TsetAHU = switchCool.y;
+  else
+    TsetAHU = realExpression.y;
+  end if;
+
+  connect(TsetAHU_In, switch.u3) annotation (Line(points={{120,-70},{-52,-70},{-52,
+          -8},{-58,-8}}, color={0,0,127}));
+  connect(booleanExpression.y, switch.u2) annotation (Line(points={{-33,-60},{-50,
+          -60},{-50,0},{-58,0}}, color={255,0,255}));
+  connect(switch.y, TsetAHU_Out)
     annotation (Line(points={{-81,0},{-120,0}}, color={0,0,127}));
-  connect(realExpression.y, lessEqualThreshold.u) annotation (Line(points={{-39,
-          64},{90,64},{90,30},{82,30}}, color={0,0,127}));
-  connect(realExpression.y, greaterEqualThreshold.u) annotation (Line(points={{-39,
-          64},{90,64},{90,-30},{82,-30}}, color={0,0,127}));
-  connect(realExpression.y, switch1.u3)
-    annotation (Line(points={{-39,64},{0,64},{0,8},{-18,8}}, color={0,0,127}));
+  connect(realExpression.y, HeatingThreshold.u) annotation (Line(points={{-39,64},
+          {90,64},{90,30},{82,30}}, color={0,0,127}));
+  connect(realExpression.y, CoolingThreshold.u) annotation (Line(points={{-39,64},
+          {90,64},{90,-30},{82,-30}}, color={0,0,127}));
+  connect(HeatingThreshold.y, switchHeat.u2)
+    annotation (Line(points={{59,30},{22,30}}, color={255,0,255}));
+  connect(const.y, switchHeat.u1) annotation (Line(points={{39.4,14},{30,14},{30,
+          22},{22,22}}, color={0,0,127}));
+  connect(const1.y, switchCool.u1) annotation (Line(points={{39.4,-14},{30,-14},
+          {30,-22},{22,-22}}, color={0,0,127}));
+  connect(CoolingThreshold.y, switchCool.u2)
+    annotation (Line(points={{59,-30},{22,-30}}, color={255,0,255}));
+  connect(realExpression.y, switchHeat.u3) annotation (Line(points={{-39,64},{30,
+          64},{30,38},{22,38}}, color={0,0,127}));
+  connect(realExpression.y, switchCool.u3) annotation (Line(points={{-39,64},{90,
+          64},{90,-50},{30,-50},{30,-38},{22,-38}}, color={0,0,127}));
+  connect(realExpression1.y, switch.u1)
+    annotation (Line(points={{-41,8},{-58,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end DynamicAHUTemperatureControl;
