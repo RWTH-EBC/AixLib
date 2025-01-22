@@ -30,9 +30,10 @@ package UsersGuide "User's Guide"
   When calling the simulate and plot script, the simulation is
   only performed for ten days and not the full year to avoid time-out errors
   in the CI. To see if the models are valid compared to ASHRAE, you have to
-  simulate the full year. When the change was performed, all models, except those listed below,
-  were valid and any change in model structure should be catched in the first ten days
-  in CI.
+  simulate the full year (with stopTime=31539600). 
+  When the change was performed, all models, except those listed below,
+  were valid and any change in model structure should be catched in 
+  the first ten days in CI.
 </p>
 <table>
   <caption>
