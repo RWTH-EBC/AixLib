@@ -8,16 +8,17 @@ model DynamicVolumeFlowControl
     "Records of zones";
   parameter Boolean heatAHU "Status of heating of AHU";
   parameter Boolean coolAHU "Status of cooling of AHU";
-  parameter Real maxAHU_PI "Max output value for PI controller";
+  parameter Real maxAHU_PI_Heat "Max output value for heating PI controller";
+  parameter Real maxAHU_PI_Cool "Max output value for cooling PI controller";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roomHeatPort[numZones]
     annotation (Placement(transformation(extent={{80,-20},{120,20}}),
         iconTransformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Interfaces.RealOutput setAHU[numZones] annotation (Placement(transformation(extent={{-100,
             -20},{-140,20}}), iconTransformation(extent={{-100,-20},{-140,20}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Cool[numZones](
-    k=0.25*maxAHU_PI,
+    k=0.25*maxAHU_PI_Cool,
     yMax=0,
-    yMin=-maxAHU_PI,
+    yMin=-maxAHU_PI_Cool,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=120,
     Td=0.1) annotation (Placement(transformation(extent={{40,-20},{20,-40}})));
@@ -26,8 +27,8 @@ model DynamicVolumeFlowControl
   Modelica.Blocks.Math.Max max[numZones]
     annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Heat[numZones](
-    k=0.25*maxAHU_PI,
-    yMax=maxAHU_PI,
+    k=0.25*maxAHU_PI_Heat,
+    yMax=maxAHU_PI_Heat,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=120,
