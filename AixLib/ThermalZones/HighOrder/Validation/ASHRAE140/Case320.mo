@@ -6,7 +6,7 @@ model Case320
     tableCoolOrTempMin=[320,-7304,-5061],
     tableHeatOrTempMax=[320,3859,5141]);
   annotation (
-    experiment(StopTime=864000, Tolerance=1e-06),
+    experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case320.mos"
         "Simulate and plot"),
