@@ -67,7 +67,7 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
     annotation (Placement(transformation(extent={{32,48},{52,68}})));
   Modelica.Blocks.Logical.Not           pumpSwitchOff3
     annotation (Placement(transformation(extent={{72,48},{92,68}})));
-  Modelica.Blocks.Sources.Constant valveReference(final k=0.0001)
+  Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
     annotation (Placement(transformation(extent={{0,78},{20,98}})));
 equation
 
@@ -89,7 +89,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(Q_flowSet, pumpSwitchOff1.u) annotation (Line(points={{-120,-50},{-40,
-          -50},{-40,-78},{-34,-78}}, color={0,0,127}));
+          -50},{-40,-78},{-34,-78}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(pumpSwitchOff1.y, switch1.u2) annotation (Line(points={{-11,-78},{24,
           -78},{24,-68},{32,-68}}, color={255,0,255}));
   connect(switch1.y, hydraulicBus.valveSet) annotation (Line(points={{55,-68},{

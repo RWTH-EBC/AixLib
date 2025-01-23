@@ -63,6 +63,12 @@ block CtrThrottleQFlow
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Blocks.Logical.Not           pumpSwitchOff1
     annotation (Placement(transformation(extent={{60,30},{80,50}})));
+  Modelica.Blocks.Sources.Constant lowerBound(final k=0)
+    annotation (Placement(transformation(extent={{-20,-102},{0,-82}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{16,-64},{36,-84}})));
+  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold
+    annotation (Placement(transformation(extent={{-54,-84},{-34,-64}})));
 equation
 
   connect(PID.u_s, Q_flowSet) annotation (Line(
@@ -76,16 +82,8 @@ equation
 
   connect(PID.u_m, Q_flowMea)
     annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
-  connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{1,-50},{8,-50},{8,34},{18,34}},   color={0,0,127}));
   connect(constPumpSet.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{
-          100.12,-50},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -100,6 +98,23 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(lowerBound.y, switch1.u1)
+    annotation (Line(points={{1,-92},{6,-92},{6,-82},{14,-82}}, color={0,0,127}));
+  connect(PID.y, switch1.u3) annotation (Line(points={{1,-50},{6,-50},{6,-66},{14,-66}}, color={0,0,127}));
+  connect(switch1.y, pumpSwitchOff.u)
+    annotation (Line(points={{37,-74},{42,-74},{42,-28},{12,-28},{12,34},{18,34}}, color={0,0,127}));
+  connect(switch1.y, hydraulicBus.valveSet) annotation (Line(points={{37,-74},{42,-74},{42,-28},{98,-28},{
+          98,0.12},{100.12,0.12}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(Q_flowSet, lessEqualThreshold.u) annotation (Line(
+      points={{-120,-50},{-62,-50},{-62,-74},{-56,-74}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(lessEqualThreshold.y, switch1.u2)
+    annotation (Line(points={{-33,-74},{14,-74}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

@@ -147,7 +147,7 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{-70,-68},{-62,-60}})));
   Fluid.Sources.Boundary_pT        bouWaterhot(
     redeclare package Medium = MediumWater,
-    use_T_in=false,
+    use_T_in=true,
     T=318.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
@@ -156,7 +156,7 @@ model Ashrae140Testcase900SPTest
   Fluid.Sources.Boundary_pT        bouWaterhot1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
-    T=318.15,
+    T=308.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
@@ -187,7 +187,7 @@ model Ashrae140Testcase900SPTest
         origin={81,-119})));
   Fluid.Sources.Boundary_pT        bouWaterhot3(
     redeclare package Medium = MediumWater,
-    use_T_in=false,
+    use_T_in=true,
     T=308.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
@@ -216,12 +216,12 @@ model Ashrae140Testcase900SPTest
     ctrThrottleHotQFlow(
       k=0.00003,
       Ti=280,
-      rpm_pump=2000),
+      rpm_pump=1500),
     ctrThrottleColdQFlow(
       k=0.00003,
       Ti=280,
-      rpm_pump=3000),
-    ctrPump(rpm_pump=3000))
+      rpm_pump=1500),
+    ctrPump(rpm_pump=1500))
     annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowCold "Value of Real output"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
@@ -466,6 +466,11 @@ model Ashrae140Testcase900SPTest
 
   Modelica.Blocks.Sources.Constant VflowExt(k=3*129/3600)
     annotation (Placement(transformation(extent={{-114,-74},{-94,-54}})));
+  Modelica.Blocks.Sources.Constant TSupExt(k=45 + 273.15)
+    annotation (Placement(transformation(extent={{-116,-108},{-96,-88}})));
+  BasicCarnot basicCarnot annotation (Placement(transformation(extent={{-80,-160},{-60,-140}})));
+  Modelica.Blocks.Math.Add add(k1=-1000)
+    annotation (Placement(transformation(extent={{186,112},{206,132}})));
 equation
   connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
       points={{-72,30},{8,30},{8,-17.6}},
@@ -669,6 +674,24 @@ equation
     annotation (Line(points={{-91.3,-40},{-60,-40}}, color={0,0,127}));
   connect(VflowExt.y, ctrAhu.VflowSet)
     annotation (Line(points={{-93,-64},{-90,-64},{-90,-45},{-60,-45}}, color={0,0,127}));
+  connect(TSupExt.y, bouWaterhot.T_in)
+    annotation (Line(points={{-95,-98},{-22,-98},{-22,-128},{1,-128},{1,-123}}, color={0,0,127}));
+  connect(TSupExt.y, bouWaterhot3.T_in)
+    annotation (Line(points={{-95,-98},{-22,-98},{-22,-128},{61,-128},{61,-119}}, color={0,0,127}));
+  connect(TSupExt.y, basicCarnot.TConAct)
+    annotation (Line(points={{-95,-98},{-86,-98},{-86,-144.8},{-82,-144.8}}, color={0,0,127}));
+  connect(basicCarnot.TEvaAct, weaBus.TDryBul) annotation (Line(points={{-82,-153},{-86,-153},{-86,-1.92},{
+          -42.915,-1.92}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(hotEnergyCalc.y1, basicCarnot.QCon_flow_internal) annotation (Line(points={{81,90},{130,90},{130,
+          46},{-120,46},{-120,-132},{-69.8,-132},{-69.8,-138}}, color={0,0,127}));
+  connect(QTabs_set.y[1], add.u2)
+    annotation (Line(points={{-91.3,-20},{-66,-20},{-66,22},{90,22},{90,116},{184,116}}, color={0,0,127}));
+  connect(Q_Tabs_ctr, add.u1)
+    annotation (Line(points={{4,194},{170,194},{170,128},{184,128}}, color={0,0,127}));
   annotation (experiment(
       StopTime=31536000,
       Interval=60,
