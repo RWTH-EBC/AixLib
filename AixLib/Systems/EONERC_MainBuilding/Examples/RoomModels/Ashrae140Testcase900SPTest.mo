@@ -20,10 +20,8 @@ model Ashrae140Testcase900SPTest
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
-    throttlePumpCold(Kv=10, redeclare
-        HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
+    throttlePumpCold(Kv=10, redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
     annotation (Placement(transformation(extent={{84,-102},{104,-80}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
@@ -56,7 +54,7 @@ model Ashrae140Testcase900SPTest
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
-    m1_flow_nominal=129/3600*3,
+    m1_flow_nominal=129/3600*3*1.225,
     m2_flow_nominal=0.1,
     T_start=293.15,
     usePreheater=false,
@@ -82,29 +80,25 @@ model Ashrae140Testcase900SPTest
         length=10,
         Kv=3,
         valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+        redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
         dynamicHX(
         dp1_nominal=5,
         dp2_nominal=5000,
-        dT_nom=10,
-        Q_nom=2000)),
+        dT_nom=7,
+        Q_nom=1500)),
     heater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_10x0_6(),
         length=10,
         Kv=3,
         valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+        redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per))),
         dynamicHX(
         dp1_nominal=5,
         dp2_nominal=5000,
-        dT_nom=20,
-        Q_nom=2000)),
+        dT_nom=25,
+        Q_nom=4000)),
     final dynamicHX(
       dp1_nominal=150,
       dp2_nominal=150,
@@ -205,12 +199,12 @@ model Ashrae140Testcase900SPTest
       k=0.03,
       Ti=120,
       Td=0,
-      rpm_pump=3000),
+      rpm_pump=1500),
     ctrRh(
       k=0.03,
       Ti=120,
       Td=0,
-      rpm_pump=3000))
+      rpm_pump=1500))
     annotation (Placement(transformation(extent={{-58,-50},{-38,-30}})));
   Controller.CtrTabsQflow ctrTabsQflow(
     ctrThrottleHotQFlow(
