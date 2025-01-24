@@ -5,10 +5,10 @@ model HeaterCoolerPIFraRadDamped
     fraHeaRad = if not recOrSep then 0 else zoneParam.traSysFraHeaRad,
     fraCooRad = if not recOrSep then 0 else zoneParam.traSysFraCooRad);
 
-  parameter Real K_PT1 = if not recOrSep then 0 else zoneParam.traSysK
+  parameter Real K_PT1 = if not recOrSep then 1 else zoneParam.traSysK
     "Gain for PT1 for damped heating transfer"
       annotation(Dialog(tab = "General", group = "PT1 Damper", enable=not recOrSep));
-  parameter Modelica.Units.SI.Time T_PT1 = if not recOrSep then 0 else zoneParam.traSysT
+  parameter Modelica.Units.SI.Time T_PT1 = if not recOrSep then 1 else zoneParam.traSysT
     "Time Constant for PT1 for damped heating transfer"
       annotation (Dialog(tab="General", group = "PT1 Damper", enable=not recOrSep));
 

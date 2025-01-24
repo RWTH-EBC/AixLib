@@ -780,8 +780,7 @@ elseif use_MechanicalAirExchange and not use_NaturalAirExchange then
               {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-else
-     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
+else connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
