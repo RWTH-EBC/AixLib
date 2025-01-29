@@ -6,11 +6,15 @@ model DIN16798 "Empirical expression according to DIN EN 16798-7 (2017)"
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN16798,
       final varNameIntRes = "V_flow");
   parameter Modelica.Units.SI.Height heightASL=0 "Height above sea level";
+  parameter Boolean winOpnBeh=false "Activate window opening behavior depending
+    on ambient temperature and wind speed"
+    annotation(choices(checkBox=true));
   Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s", min=0)
     "Local wind speed at a height of 10 m"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 protected
-  Real cofExt = min(1, max(0, (1 - 0.1*winSpe10)*((TAmb - T0)/25 + 0.2)))
+  Real cofExt = if winOpnBeh then
+    min(1, max(0, (1 - 0.1*winSpe10)*((TAmb - T0)/25 + 0.2))) else 1
     "Coefficient depending on external conditions";
   Real cofTh = 0.0035 "Coefficient of thermal buoyancy";
   Real cofWin = 0.001 "Coefficient of wind speed";
@@ -33,6 +37,10 @@ equation
   <li>
     June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
+  </li>
+  <li>
+    Dec. 16, 2024, by Jun Jiang:<br/>
+    Add parameter for window opening behavior (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
   </li>
 </ul>
 </html>", info="<html>
