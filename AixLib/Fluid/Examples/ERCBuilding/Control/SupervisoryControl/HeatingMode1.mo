@@ -64,17 +64,14 @@ equation
           -66,-80},{-66,-90},{-33.2,-90}}, color={0,0,127}));
 
           annotation (
-  Documentation(info="<html>
-  
-  <p>
+  Documentation(info="<html><p>
   <b>HeatingMode</b>
-  </p>
-  
-  When the HeatingMode is activated by a incomming transition it is controlled wether the average temperature of the upper two tmeperature sensors in the hot storage is below a limit value. 
-  If this is the case and the evaporater temperatur is above the limite values the heatpump is switched on in heatingMode. It remains there still the temperature at the lowest temperature 
-  sensor in the hot storage reaches a limit value.
-  </p>
-  
-  
+</p>When the HeatingMode is activated by a incomming transition it is
+controlled wether the average temperature of the upper two tmeperature
+sensors in the hot storage is below a limit value. If this is the case
+and the evaporater temperatur is above the limite values the heatpump
+is switched on in heatingMode. It remains there still the temperature
+at the lowest temperature sensor in the hot storage reaches a limit
+value.
 </html>"));
 end HeatingMode1;
