@@ -1,0 +1,10 @@
+simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference", startTime=0, stopTime=10, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="IntegralErrorDualReference");
+createPlot(id=1, position={0, 0, 1653, 686}, y={"pul.y", "ramUppBou.y", "ramLowBou.y"}, heading="Normal", range={0.0, 10.0, -6.0, 6.0}, grid=true, subPlot=101, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
+createPlot(id=1, position={0, 0, 1653, 686}, y={"booSteItgAct.y", "booSteItgRes.y"}, range={0.0, 10.0, -0.5, 1.5}, grid=true, subPlot=102, colors={{28,108,200}, {28,108,200}}, timeUnit="s");
+createPlot(id=1, position={0, 0, 1653, 686}, y={"ied.y", "ied.yPos", "ied.yNeg"}, range={0.0, 10.0, -20.0, 20.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
+createPlot(id=2, position={75, 75, 584, 361}, y={"pul.y", "ramUppBou.y", "ramLowBou.y"}, heading="With activation", range={0.0, 10.0, -6.0, 6.0}, grid=true, subPlot=101, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
+createPlot(id=2, position={75, 75, 584, 361}, y={"booSteItgAct.y", "booSteItgRes.y"}, range={0.0, 10.0, -0.5, 1.5}, grid=true, subPlot=102, colors={{28,108,200}, {28,108,200}}, timeUnit="s");
+createPlot(id=2, position={75, 75, 584, 361}, y={"iedAct.y", "iedAct.yPos", "iedAct.yNeg"}, range={0.0, 10.0, -6.0, 6.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
+createPlot(id=3, position={95, 95, 584, 361}, y={"pul.y", "ramUppBou.y", "ramLowBou.y"}, heading="With activation and reset", range={0.0, 10.0, -6.0, 6.0}, grid=true, subPlot=101, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
+createPlot(id=3, position={95, 95, 584, 361}, y={"booSteItgAct.y", "booSteItgRes.y"}, range={0.0, 10.0, -0.5, 1.5}, grid=true, subPlot=102, colors={{28,108,200}, {28,108,200}}, timeUnit="s");
+createPlot(id=3, position={95, 95, 584, 361}, y={"iedActRes.y", "iedActRes.yPos", "iedActRes.yNeg"}, range={0.0, 10.0, -4.0, 6.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s");
