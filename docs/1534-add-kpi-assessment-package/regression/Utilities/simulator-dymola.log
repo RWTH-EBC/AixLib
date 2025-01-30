@@ -10,12 +10,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 30
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 30
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -23,12 +23,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: itgTimRes
   Component declared as IntegralTimer itgTimRes in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 34
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 34
 The model has the same number of unknowns and equations: 224
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -51,7 +51,7 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.KPIs.Examples.Int
 
 
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/KPIs/Examples/IntegralErrorSingleReference.mos");
-simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference", startTime=0, stopTime=10, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference");
+simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference", startTime=0, stopTime=10, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference");
 Translation of AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
@@ -60,12 +60,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 30
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 30
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -73,12 +73,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: itgTimRes
   Component declared as IntegralTimer itgTimRes in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 34
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/Examples/IntegralErrorSingleReference.mo, line 34
 The DAE has 224 scalar unknowns and 224 scalar equations.
  
 Statistics
@@ -136,12 +136,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -149,12 +149,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouAct.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -162,12 +162,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -175,12 +175,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -188,12 +188,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTimRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -201,12 +201,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -214,12 +214,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat2.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -227,12 +227,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat3.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -240,12 +240,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat4.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -253,12 +253,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -266,12 +266,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat2.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -279,12 +279,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat3.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -292,12 +292,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat4.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 The model has the same number of unknowns and equations: 558
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -320,7 +320,7 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.KPIs.Examples.Co2
 
 
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/KPIs/Examples/Co2Kpis.mos");
-simulateModel("AixLib.Utilities.KPIs.Examples.Co2Kpis", startTime=0, stopTime=120, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.Co2Kpis");
+simulateModel("AixLib.Utilities.KPIs.Examples.Co2Kpis", startTime=0, stopTime=120, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.Co2Kpis");
 Translation of AixLib.Utilities.KPIs.Examples.Co2Kpis
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
@@ -329,12 +329,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -342,12 +342,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouAct.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -355,12 +355,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -368,12 +368,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -381,12 +381,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTimRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -394,12 +394,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -407,12 +407,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat2.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -420,12 +420,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat3.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -433,12 +433,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798Tim.fixLimCat4.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -446,12 +446,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -459,12 +459,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat2.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -472,12 +472,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat3.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -485,12 +485,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798ActTim.fixLimCat4.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-0-qdhp2tn7/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-0-sf_pdex9/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 The DAE has 558 scalar unknowns and 558 scalar equations.
  
 Statistics
@@ -575,7 +575,7 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.KPIs.Examples.Int
 
 
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/KPIs/Examples/IntegralErrorDualReference.mos");
-simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference", startTime=0, stopTime=10, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference");
+simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference", startTime=0, stopTime=10, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference");
 Translation of AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference
 The DAE has 222 scalar unknowns and 222 scalar equations.
  
@@ -821,12 +821,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtr.itgTimHea
   Component declared as IntegralTimer itgTimHea in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -834,12 +834,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtr.itgTimCoo
   Component declared as IntegralTimer itgTimCoo in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -847,12 +847,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtrTim.itgTimHea
   Component declared as IntegralTimer itgTimHea in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -860,12 +860,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtrTim.itgTimCoo
   Component declared as IntegralTimer itgTimCoo in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -873,12 +873,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: eleMtr.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -886,12 +886,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: eleMtrTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
 The model has the same number of unknowns and equations: 217
 Check of AixLib.Utilities.KPIs.Examples.EnergyKpis successful.
 Warning: WARNINGS have been issued.
@@ -906,7 +906,7 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.KPIs.Examples.Ene
 
 
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/KPIs/Examples/EnergyKpis.mos");
-simulateModel("AixLib.Utilities.KPIs.Examples.EnergyKpis", startTime=0, stopTime=10, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.EnergyKpis");
+simulateModel("AixLib.Utilities.KPIs.Examples.EnergyKpis", startTime=0, stopTime=10, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.EnergyKpis");
 Translation of AixLib.Utilities.KPIs.Examples.EnergyKpis
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
@@ -915,12 +915,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtr.itgTimHea
   Component declared as IntegralTimer itgTimHea in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -928,12 +928,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtr.itgTimCoo
   Component declared as IntegralTimer itgTimCoo in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -941,12 +941,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtrTim.itgTimHea
   Component declared as IntegralTimer itgTimHea in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 34
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -954,12 +954,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: thmMtrTim.itgTimCoo
   Component declared as IntegralTimer itgTimCoo in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ThermalEnergyMeterDual.mo, line 37
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -967,12 +967,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: eleMtr.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -980,12 +980,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: eleMtrTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-2-e87s75zk/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
+  File: /tmp/tmp-AixLib-2-481w0kai/AixLib/Utilities/KPIs/Energy/ElectricityMeter.mo, line 23
 The DAE has 217 scalar unknowns and 217 scalar equations.
  
 Statistics
@@ -1042,12 +1042,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1055,12 +1055,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouAct.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1068,12 +1068,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1081,12 +1081,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1094,12 +1094,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTimRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1107,12 +1107,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: flxBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1120,12 +1120,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798_1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 The model has the same number of unknowns and equations: 702
 The model could not be deduced to be symbolically well-posed.
 The model has
@@ -1148,7 +1148,7 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Utilities.KPIs.Examples.Tem
 
 
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Utilities/KPIs/Examples/TemperatureKpis.mos");
-simulateModel("AixLib.Utilities.KPIs.Examples.TemperatureKpis", startTime=0, stopTime=120, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.TemperatureKpis");
+simulateModel("AixLib.Utilities.KPIs.Examples.TemperatureKpis", startTime=0, stopTime=120, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="AixLib.Utilities.KPIs.Examples.TemperatureKpis");
 Translation of AixLib.Utilities.KPIs.Examples.TemperatureKpis
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
@@ -1157,12 +1157,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1170,12 +1170,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouAct.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1183,12 +1183,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1196,12 +1196,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTim.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1209,12 +1209,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: fixBouTimRes.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1222,12 +1222,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: flxBou.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 Warning: Local "y" conflict with inherited. Should be identical
 Warning: Component y(unit = "s"),
   but previously y(unit = << Empty >>).
@@ -1235,12 +1235,12 @@ Warning: Component y(unit = "s"),
  
   For element y found at
  
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/IntegralErrorSingleReference/IntegralTimer.mo, line 6
   Conflict with element from
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialIntegratorBase.mo, line 9
  Component context: din16798_1.itgTim
   Component declared as IntegralTimer itgTim in AixLib.Utilities.KPIs.IntegralErrorSingleReference
-  File: /tmp/tmp-AixLib-3-6c1jy7n5/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
+  File: /tmp/tmp-AixLib-3-cdcs5pos/AixLib/Utilities/KPIs/BaseClasses/PartialAssessmentBase.mo, line 27
 The DAE has 702 scalar unknowns and 702 scalar equations.
  
 Statistics
