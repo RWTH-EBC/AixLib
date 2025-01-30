@@ -1,4 +1,4 @@
-simulateModel("AixLib.Utilities.KPIs.Examples.TemperatureKpis", startTime=0, stopTime=120, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="TemperatureKpis");
+simulateModel("AixLib.Utilities.KPIs.Examples.TemperatureKpis", startTime=0, stopTime=120, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="TemperatureKpis");
 createPlot(id=1, position={0, 0, 1653, 686}, y={"traT.y", "fixBou.TCom", "fixBou.conTUppBou.k", "fixBou.conTLowBou.k"}, heading="Fixed boundaries", range={0.0, 120.0, 10.0, 40.0}, grid=true, subPlot=101, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, timeUnit="s", displayUnits={"degC", "degC", "degC", "degC"});
 createPlot(id=1, position={0, 0, 1653, 686}, y={"booPulAct.y"}, range={0.0, 120.0, -0.5, 1.5}, grid=true, subPlot=102, colors={{28,108,200}}, timeUnit="s");
 createPlot(id=1, position={0, 0, 1653, 686}, y={"fixBou.totDegSecOutBou", "fixBouAct.totDegSecOutBou", "fixBouRes.totDegSecOutBou"}, range={0.0, 120.0, -200.0, 600.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s", displayUnits={"K.s", "K.s", "K.s"});

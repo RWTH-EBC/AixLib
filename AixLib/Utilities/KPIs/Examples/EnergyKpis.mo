@@ -36,7 +36,7 @@ equation
   annotation (experiment(
       StartTime=0,
       StopTime=10,
-      Interval=0.1,
+      Interval=1,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     Documentation(revisions="<html>

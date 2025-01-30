@@ -109,7 +109,7 @@ equation
   annotation (experiment(
       StartTime=0,
       StopTime=10,
-      Interval=0.1,
+      Interval=1,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/KPIs/Examples/IntegralErrorSingleReference.mos"

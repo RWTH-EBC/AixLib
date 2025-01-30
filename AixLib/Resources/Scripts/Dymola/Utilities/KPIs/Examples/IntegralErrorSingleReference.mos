@@ -1,4 +1,4 @@
-simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference", startTime=0, stopTime=10, outputInterval=0.1, method="dassl", tolerance=1e-6, resultFile="IntegralErrorSingleReference");
+simulateModel("AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference", startTime=0, stopTime=10, outputInterval=1, method="dassl", tolerance=1e-6, resultFile="IntegralErrorSingleReference");
 createPlot(id=1, position={0, 0, 1653, 686}, y={"pul.y", "conZeroRef.y"}, heading="IAE and ISE", range={0.0, 10.0, -1.0, 1.5}, grid=true, subPlot=101, colors={{28,108,200}, {238,46,47}}, timeUnit="s");
 createPlot(id=1, position={0, 0, 1653, 686}, y={"booSteItgAct.y", "booSteItgRes.y"}, range={0.0, 10.0, -0.5, 1.5}, grid=true, subPlot=102, colors={{28,108,200}, {28,108,200}}, timeUnit="s");
 createPlot(id=1, position={0, 0, 1653, 686}, y={"iae.y", "iaeAct.y", "iaeActRes.y", "ise.y"}, range={0.0, 10.0, -2.0, 8.0}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, timeUnit="s");
