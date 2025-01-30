@@ -69,6 +69,9 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
     annotation (Placement(transformation(extent={{72,48},{92,68}})));
   Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
     annotation (Placement(transformation(extent={{0,78},{20,98}})));
+  Modelica.Blocks.Math.Min min1 annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
+  Modelica.Blocks.Sources.Constant const(k=-100)
+    annotation (Placement(transformation(extent={{-102,76},{-82,96}})));
 equation
 
   connect(PID.u_s, Q_flowSet) annotation (Line(
@@ -80,8 +83,6 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.u_m, Q_flowMea)
-    annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
   connect(constPumpSet.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
@@ -115,6 +116,10 @@ equation
           {21,88},{26,88},{26,64},{30,64}}, color={0,0,127}));
   connect(switch1.y, pumpSwitchOff2.u) annotation (Line(points={{55,-68},{60,
           -68},{60,36},{10,36},{10,52},{30,52}}, color={0,0,127}));
+  connect(Q_flowMea, min1.u2)
+    annotation (Line(points={{-120,60},{-68,60},{-68,74},{-62,74}}, color={0,0,127}));
+  connect(min1.y, PID.u_m) annotation (Line(points={{-39,80},{-10,80},{-10,-38}}, color={0,0,127}));
+  connect(const.y, min1.u1) annotation (Line(points={{-81,86},{-62,86}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

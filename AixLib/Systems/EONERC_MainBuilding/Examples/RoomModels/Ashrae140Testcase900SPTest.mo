@@ -16,12 +16,14 @@ model Ashrae140Testcase900SPTest
     thickness=0.1,
     alpha=20,
     length=50,
+    dT_nom_hx=2,
+    Q_nom_hx=3500,
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
-    throttlePumpCold(Kv=10, redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
+    throttlePumpCold(Kv=2, redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))))
     annotation (Placement(transformation(extent={{84,-102},{104,-80}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
@@ -37,15 +39,13 @@ model Ashrae140Testcase900SPTest
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-     "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{8,-64},{64,-6}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/ASHRAE140.mos"))
-    "Weather data reader"
+        "modelica://AixLib/Resources/weatherdata/ASHRAE140.mos")) "Weather data reader"
     annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
 
   ModularAHU.GenericAHU genericAHU1(
@@ -120,8 +120,7 @@ model Ashrae140Testcase900SPTest
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={-54,-70})));
-  BoundaryConditions.WeatherData.Bus        weaBus
-    "Weather data bus"
+  BoundaryConditions.WeatherData.Bus        weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{-60,-18},{-26,14}}),
     iconTransformation(extent={{-150,388},{-130,408}})));
   BaseClasses.ZoneBus Bus
@@ -196,26 +195,21 @@ model Ashrae140Testcase900SPTest
     Ti=60,
     VFlowSet=3*129/3600,
     ctrCo(
-      k=0.03,
-      Ti=120,
+      k=0.015,
+      Ti=200,
       Td=0,
       rpm_pump=1500),
     ctrRh(
-      k=0.03,
-      Ti=120,
+      k=0.015,
+      Ti=200,
       Td=0,
       rpm_pump=1500))
     annotation (Placement(transformation(extent={{-58,-50},{-38,-30}})));
   Controller.CtrTabsQflow ctrTabsQflow(
-    ctrThrottleHotQFlow(
-      k=0.00003,
-      Ti=280,
-      rpm_pump=1500),
-    ctrThrottleColdQFlow(
-      k=0.00003,
-      Ti=280,
-      rpm_pump=1500),
-    ctrPump(rpm_pump=1500))
+    k=0.00007,
+    Ti=200,
+    rpm_pump=1500,
+    ctrThrottleColdQFlow(k=0.0001))
     annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowCold "Value of Real output"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
@@ -274,8 +268,7 @@ model Ashrae140Testcase900SPTest
     annotation (Placement(transformation(extent={{130,119},{150,139}})));
   Modelica.Blocks.Interfaces.RealOutput Q_Ahu "Value of Real output"
     annotation (Placement(transformation(extent={{130,155},{150,175}})));
-  Modelica.Blocks.Interfaces.RealOutput Q_Tabs_ctr
-    "Connector of Real output signal"
+  Modelica.Blocks.Interfaces.RealOutput Q_Tabs_ctr "Connector of Real output signal"
     annotation (Placement(transformation(extent={{-6,184},{14,204}})));
   Modelica.Blocks.Math.Gain gain(k=0.001)
     annotation (Placement(transformation(extent={{-32,184},{-12,204}})));
@@ -411,8 +404,7 @@ model Ashrae140Testcase900SPTest
         0.4,1,1; 579600,0,0.1,0,0; 583140,0,0.1,0,0; 583200,0,0.1,0,0; 586740,0,
         0.1,0,0; 586800,0,0.1,0,0; 590340,0,0.1,0,0; 590400,0,0.1,0,0; 593940,0,
         0.1,0,0; 594000,0,0.1,0,0; 597540,0,0.1,0,0; 597600,0,0.1,0,0; 601140,0,
-        0.1,0,0; 601200,0,0.1,0,0; 604740,0,0.1,0,0])
-    "Table with profiles for internal gains"
+        0.1,0,0; 601200,0,0.1,0,0; 604740,0,0.1,0,0]) "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=90,
         origin={60,-88})));
@@ -463,8 +455,20 @@ model Ashrae140Testcase900SPTest
   Modelica.Blocks.Sources.Constant TSupExt(k=45 + 273.15)
     annotation (Placement(transformation(extent={{-116,-108},{-96,-88}})));
   BasicCarnot basicCarnot annotation (Placement(transformation(extent={{-80,-160},{-60,-140}})));
-  Modelica.Blocks.Math.Add add(k1=-1000)
-    annotation (Placement(transformation(extent={{186,112},{206,132}})));
+  Modelica.Blocks.Interfaces.RealOutput P_HP annotation (Placement(transformation(extent={{-48,-156},{-34,
+            -142}}), iconTransformation(extent={{-48,-156},{-34,-142}})));
+  Modelica.Blocks.Math.MultiSum multiSum1(nu=6)
+    annotation (Placement(transformation(extent={{12,120},{24,132}})));
+  Modelica.Blocks.Interfaces.RealOutput P_Pumps annotation (Placement(transformation(extent={{66,120},{80,
+            134}}), iconTransformation(extent={{-48,-156},{-34,-142}})));
+  Modelica.Blocks.Interfaces.RealOutput P_Fans annotation (Placement(transformation(extent={{62,150},{76,
+            164}}), iconTransformation(extent={{-48,-156},{-34,-142}})));
+  Modelica.Blocks.Math.MultiSum multiSum2(nu=2)
+    annotation (Placement(transformation(extent={{14,150},{26,162}})));
+  Modelica.Blocks.Math.Gain gain1(k=0.001)
+    annotation (Placement(transformation(extent={{36,146},{56,166}})));
+  Modelica.Blocks.Math.Gain gain2(k=0.001)
+    annotation (Placement(transformation(extent={{36,118},{56,138}})));
 equation
   connect(weaDat.weaBus,thermalZone1.weaBus) annotation (Line(
       points={{-72,30},{8,30},{8,-17.6}},
@@ -662,12 +666,6 @@ equation
     annotation (Line(points={{187,-148},{214,-148}}, color={0,0,127}));
   connect(internalGains4.y, thermalZone1.intGains) annotation (Line(points={{60,-80.3},{60,-59.36},{58.4,-59.36}},
                                                       color={0,0,127}));
-  connect(QTabs_set.y[1], ctrTabsQflow.QFlowSet) annotation (Line(points={{
-          -91.3,-20},{-66,-20},{-66,-17.9},{-58.3,-17.9}}, color={0,0,127}));
-  connect(T_set.y[1], ctrAhu.Tset)
-    annotation (Line(points={{-91.3,-40},{-60,-40}}, color={0,0,127}));
-  connect(VflowExt.y, ctrAhu.VflowSet)
-    annotation (Line(points={{-93,-64},{-90,-64},{-90,-45},{-60,-45}}, color={0,0,127}));
   connect(TSupExt.y, bouWaterhot.T_in)
     annotation (Line(points={{-95,-98},{-22,-98},{-22,-128},{1,-128},{1,-123}}, color={0,0,127}));
   connect(TSupExt.y, bouWaterhot3.T_in)
@@ -682,10 +680,83 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(hotEnergyCalc.y1, basicCarnot.QCon_flow_internal) annotation (Line(points={{81,90},{130,90},{130,
           46},{-120,46},{-120,-132},{-69.8,-132},{-69.8,-138}}, color={0,0,127}));
-  connect(QTabs_set.y[1], add.u2)
-    annotation (Line(points={{-91.3,-20},{-66,-20},{-66,22},{90,22},{90,116},{184,116}}, color={0,0,127}));
-  connect(Q_Tabs_ctr, add.u1)
-    annotation (Line(points={{4,194},{170,194},{170,128},{184,128}}, color={0,0,127}));
+  connect(QTabs_set.y[1], ctrTabsQflow.QFlowSet)
+    annotation (Line(points={{-91.3,-20},{-66,-20},{-66,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(T_set.y[1], ctrAhu.Tset) annotation (Line(points={{-91.3,-40},{-60,-40}}, color={0,0,127}));
+  connect(VflowExt.y, ctrAhu.VflowSet)
+    annotation (Line(points={{-93,-64},{-80,-64},{-80,-45},{-60,-45}}, color={0,0,127}));
+  connect(basicCarnot.P, P_HP)
+    annotation (Line(points={{-60,-150},{-60,-149},{-41,-149}}, color={0,0,127}));
+  connect(Bus.tabsBus.pumpBus.pumpBus.PelMea, multiSum1.u[1]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,124.25},{12,124.25}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.tabsBus.hotThrottleBus.pumpBus.PelMea, multiSum1.u[2]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,124.95},{12,124.95}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.tabsBus.coldThrottleBus.pumpBus.PelMea, multiSum1.u[3]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,125.65},{12,125.65}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.ahuBus.preheaterBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[4]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,126.35},{12,126.35}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.ahuBus.coolerBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[5]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,127.05},{12,127.05}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.ahuBus.heaterBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[6]) annotation (Line(
+      points={{8.05,40.05},{8.05,116},{6,116},{6,127.75},{12,127.75}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.ahuBus.powerFanSupMea, multiSum2.u[1]) annotation (Line(
+      points={{8.05,40.05},{12,40.05},{12,154.95},{14,154.95}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Bus.ahuBus.powerFanRetMea, multiSum2.u[2]) annotation (Line(
+      points={{8.05,40.05},{8.05,38},{14,38},{14,157.05}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(multiSum2.y, gain1.u) annotation (Line(points={{27.02,156},{34,156}}, color={0,0,127}));
+  connect(gain1.y, P_Fans) annotation (Line(points={{57,156},{57,157},{69,157}}, color={0,0,127}));
+  connect(multiSum1.y, gain2.u)
+    annotation (Line(points={{25.02,126},{25.02,128},{34,128}}, color={0,0,127}));
+  connect(gain2.y, P_Pumps)
+    annotation (Line(points={{57,128},{65,128},{65,127},{73,127}}, color={0,0,127}));
   annotation (experiment(
       StopTime=31536000,
       Interval=60,

@@ -406,11 +406,11 @@ equation
   connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{96,
           -78.9},{96,-31.84},{66.56,-31.84}},                       color={191,
           0,0}));
-  connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{8.16364,
-          -80.1818},{36,-80.1818},{36,-53.88},{34.71,-53.88}},   color={0,127,
+  connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{8.16364,-80.1818},{36,
+          -80.1818},{36,-53.88},{34.71,-53.88}},                 color={0,127,
           255}));
-  connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{8.16364,
-          -70.7273},{46,-70.7273},{46,-53.88},{41.29,-53.88}}, color={0,127,255}));
+  connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{8.16364,-70.7273},{46,
+          -70.7273},{46,-53.88},{41.29,-53.88}},               color={0,127,255}));
   connect(boundaryExhaustAir.ports[1],genericAHU1. port_b2) annotation (Line(
         points={{-50,-70},{-50,-70.7273},{-28,-70.7273}},    color={0,127,255}));
   connect(thermalZone1.TAir,Bus. TZoneMea) annotation (Line(points={{68.8,-9.8},
@@ -419,8 +419,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boundaryOutsideAir1.T_in,weaBus. TDryBul) annotation (Line(points={{-58.8,
-          -81.6},{-86,-81.6},{-86,-2},{-43,-2}}, color={0,0,127}), Text(
+  connect(boundaryOutsideAir1.T_in,weaBus. TDryBul) annotation (Line(points={{-58.8,-81.6},{-86,-81.6},{-86,
+          -1.92},{-42.915,-1.92}},               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -433,23 +433,20 @@ equation
                                                    color={0,0,127}));
   connect(boundaryOutsideAir1.ports[1],genericAHU1. port_a1) annotation (Line(
         points={{-50,-80},{-50,-80.1818},{-28,-80.1818}}, color={0,127,255}));
-  connect(x_pTphi1.T,weaBus. TDryBul) annotation (Line(points={{-70.8,-64},{-86,
-          -64},{-86,-2},{-43,-2}},
-                              color={0,0,127}), Text(
+  connect(x_pTphi1.T,weaBus. TDryBul) annotation (Line(points={{-70.8,-64},{-86,-64},{-86,-1.92},{-42.915,
+          -1.92}},            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(x_pTphi1.phi,weaBus. relHum) annotation (Line(points={{-70.8,-66.4},{
-          -70.8,-66},{-86,-66},{-86,-2},{-43,-2}},
-                                           color={0,0,127}), Text(
+  connect(x_pTphi1.phi,weaBus. relHum) annotation (Line(points={{-70.8,-66.4},{-70.8,-66},{-86,-66},{-86,
+          -1.92},{-42.915,-1.92}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi1.p_in,weaBus. pAtm) annotation (Line(points={{-70.8,-61.6},{
-          -70,-61.6},{-70,-62},{-86,-62},{-86,-2},{-43,-2}},
-                                                      color={0,0,127}), Text(
+  connect(x_pTphi1.p_in,weaBus. pAtm) annotation (Line(points={{-70.8,-61.6},{-70,-61.6},{-70,-62},{-86,-62},
+          {-86,-1.92},{-42.915,-1.92}},               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -552,8 +549,8 @@ equation
     annotation (Line(points={{167,-24},{194,-24}}, color={0,0,127}));
   connect(realExpression4.y, T_Roof)
     annotation (Line(points={{169,-44},{196,-44}}, color={0,0,127}));
-  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{196,-68},{74,-68},{74,
-          0},{-22,0},{-22,18},{-43,18},{-43,-2}}, color={0,0,127}), Text(
+  connect(T_amb, weaBus.TDryBul) annotation (Line(points={{196,-68},{74,-68},{74,0},{-22,0},{-22,18},{
+          -42.915,18},{-42.915,-1.92}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
