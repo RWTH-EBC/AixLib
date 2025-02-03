@@ -43,13 +43,13 @@ createPlot(
 createPlot(
 	id=3,
 	position={30, 72, 600, 400},
-	y={"vdi2078_1.V_flow", "vdi2078_2.V_flow", "vdi2078_3.V_flow", "din16798_1.V_flow", "din4108_1.V_flow"},
+	y={"vdi2078_1.V_flow", "vdi2078_2.V_flow", "vdi2078_3.V_flow", "din16798_1.V_flow", "din16798_2.V_flow", "din4108_1.V_flow"},
 	heading="Volume flow 2",
 	range={0.0, 180.0, -0.1, 1.2},
 	grid=true,
-	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}},
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}},
 	timeUnit="s",
-	displayUnits={"m3/s", "m3/s", "m3/s", "m3/s", "m3/s"});
+	displayUnits={"m3/s", "m3/s", "m3/s", "m3/s", "m3/s", "m3/s"});
 createPlot(
 	id=4,
 	position={40, 96, 600, 400},

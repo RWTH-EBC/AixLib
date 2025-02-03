@@ -26,6 +26,7 @@ model BoilerSystem "Example that illustrates use of boiler model"
     redeclare package Medium =
         AixLib.Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.03,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model ExtControl =
         BaseClasses.Controllers.ExternalControlNightDayHC,
     declination=1.2,

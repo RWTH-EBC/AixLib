@@ -5,8 +5,6 @@ model Caciolo "Empirical expression developed by Caciolo et al. (2013)"
       redeclare replaceable model OpeningArea =
         AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSimple,
       final varNameIntRes = "V_flow_th");
-    Integer errCouWinSpeLoc(start=0)
-      "Warning counter for assertion check of 'winSpeLoc'";
   Modelica.Blocks.Interfaces.RealInput winSpeLoc(unit="m/s", min=0)
     "Local wind speed by window or facade"
     annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
@@ -17,27 +15,16 @@ protected
     "Lower bound of wind speed in windward conditions";
   Modelica.Units.SI.VolumeFlowRate V_flow_th "Thermal induced volume flow";
   Modelica.Units.SI.VolumeFlowRate V_flow_win "Wind induced volume flow";
-initial equation
-  errCouWinSpeLoc = 0;
 equation
   incAng = AixLib.Airflow.WindowVentilation.BaseClasses.Functions.SmallestAngleDifference(
     AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes.Range180,
     winDir, aziRef);
-  // Assertion of wind speed
-  when (winSpeLoc < winSpeLim) and abs(incAngDeg) <= 90 then
-    errCouWinSpeLoc = pre(errCouWinSpeLoc) + 1;
-  end when;
-  assert(winSpeLoc > winSpeLim or errCouWinSpeLoc > 1,
-    "In " + getInstanceName() + ": The wind speed in the windward condition 
-    is equal or less than the limitation (" + String(winSpeLim) + " m/s), the 
-    'V_flow_win' will be set to 0",
-    AssertionLevel.warning);
   // Calculate V_flow_win
   if abs(incAngDeg) <= 90 then
     /*Windward*/
     cofWin = 1.234 - 0.490*winSpeLoc + 0.048*(winSpeLoc^2);
-    V_flow_win =if noEvent(winSpeLoc > winSpeLim) then
-      0.0357*openingArea.A*(winSpeLoc - winSpeLim) else 0;
+    // If winSpeLoc < winSpeLim, wind-driven airflow is negligible
+    V_flow_win = 0.0357*openingArea.A*max(winSpeLoc - winSpeLim, 0);
   else
     /*Leeward*/
     cofWin = 1.355 - 0.179*winSpeLoc;
@@ -52,6 +39,10 @@ equation
   <li>
     June 14, 2024, by Jun Jiang:<br/>
     First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
+  </li>
+  <li>
+    Dec. 18, 2024, by Jun Jiang:<br/>
+    Replace the wind speed warning counter with max() function for cases of negligible wind-driven airflow (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
   </li>
 </ul>
 </html>", info="<html>
