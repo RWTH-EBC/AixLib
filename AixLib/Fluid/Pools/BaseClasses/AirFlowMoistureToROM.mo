@@ -24,8 +24,8 @@ model AirFlowMoistureToROM
   parameter Modelica.Units.SI.Volume VAirLay = 7500
     "volume of air layer above pool for mass exchange due to evaporation";
 
-  Modelica.Blocks.Interfaces.RealInput QEva[nPools](final quantity=
-        "HeatFlowRate", final unit="W") "Heat due to evaporation" annotation (
+  Modelica.Blocks.Interfaces.RealInput QEva[nPools](each final quantity=
+        "HeatFlowRate", each final unit="W") "Heat due to evaporation" annotation (
       Placement(transformation(extent={{118,26},{88,56}}), iconTransformation(
           extent={{106,24},{82,48}})));
   Modelica.Blocks.Interfaces.RealInput m_flow_eva[nPools]
