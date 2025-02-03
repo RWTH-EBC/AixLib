@@ -6,7 +6,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
       final T_start=T0_air);
 
   // Medium in the room
-  replaceable package MediumAir = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+  replaceable package MediumAir = AixLib.Media.Air constrainedby
+    Modelica.Media.Interfaces.PartialMedium                                                              "Medium in the component"
       annotation (choices(
         choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
         choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
@@ -105,6 +106,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
     "Latent heat gains for the room"
     annotation (Placement(transformation(extent={{-124,-68},{-100,-44}}),
         iconTransformation(extent={{-120,-80},{-100,-60}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-110,90},{-90,110}})));
 protected
   constant Modelica.Units.SI.SpecificEnergy h_fg=
       AixLib.Media.Air.enthalpyOfCondensingGas(273.15 + 37)
@@ -164,13 +167,13 @@ equation
       points={{12,22},{12,4},{-3.875,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(infiltrationRate.port_a,thermOutside)  annotation (Line(
+  connect(infiltrationRate.port_a, thermOutside) annotation (Line(
       points={{-30,-4},{-66,-4},{-66,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(NaturalVentilation.port_a,thermOutside)  annotation (Line(points={{-34,-18},
-          {-68,-18},{-68,100},{-100,100}},   color={191,0,0}));
-  connect(dynamicVentilation.port_outside,thermOutside)  annotation (Line(
+  connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{
+          -34,-18},{-68,-18},{-68,100},{-100,100}}, color={191,0,0}));
+  connect(dynamicVentilation.port_outside, thermOutside) annotation (Line(
       points={{-30,-32},{-72,-32},{-72,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));

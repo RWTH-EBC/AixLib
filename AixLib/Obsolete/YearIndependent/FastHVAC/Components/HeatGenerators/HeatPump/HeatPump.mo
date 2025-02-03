@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Base model of FastHVAC Heat Pump"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
@@ -25,11 +25,11 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP";
@@ -246,10 +246,10 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+  AixLib.Obsolete.Year2024.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
     redeclare final model PerDataMainHP =PerDataHea,
     redeclare final model PerDataRevHP = PerDataChi,
     final use_rev=use_revHP,
@@ -556,7 +556,7 @@ equation
 <p>
   HeatPump model adapted to FastHAVC library.<br/>
   This model is based on the Fluid model <a href=
-  \"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>
+  \"modelica://AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump</a>
   created by Fabian Wüllhorst in 2018.
 </p>
 </html>",

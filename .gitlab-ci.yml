@@ -1,5 +1,5 @@
 
 include:
     project: 'EBC/EBC_all/gitlab_ci/templates'
-    ref: AixLibCI
+    ref: AixLibCI2024
     file: 'modelica-ci-tests/scripts/.gitlab-ci.yml'
