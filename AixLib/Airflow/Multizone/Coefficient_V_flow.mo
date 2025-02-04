@@ -93,6 +93,6 @@ Apr 6, 2021, by Klaas De Jonge:<br/>
 First Implementation. Model expecting direct input of volume flow powerlaw coefficients.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Coefficient_V_flow;

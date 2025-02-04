@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataULg160104_2 "Experimental data from ULg's pipe test bench from 4 January 2016. Low mass flow"
   extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
     T_start_out=15.0,
@@ -37,6 +37,6 @@ See <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.
 AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg</a>
 for more information.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PipeDataULg160104_2;

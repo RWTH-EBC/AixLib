@@ -46,6 +46,6 @@ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1716\">IBPS
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-            100}})), 
+            100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialConvertTime;

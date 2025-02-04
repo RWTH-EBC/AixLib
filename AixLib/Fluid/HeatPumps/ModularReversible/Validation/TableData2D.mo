@@ -8,8 +8,7 @@ model TableData2D
       mCon_flow_nominal=mCon_flow_nominal,
       tauCon=VCon*heaPum.rhoCon/mCon_flow_nominal,
       redeclare model RefrigerantCycleInertia =
-          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder
-          (
+          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder (
           refIneFreConst=refIneFreConst,
           nthOrd=2,
           initType=Modelica.Blocks.Types.Init.InitialState),
@@ -55,6 +54,6 @@ model TableData2D
     \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
   </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TableData2D;

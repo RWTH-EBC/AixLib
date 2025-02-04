@@ -86,6 +86,6 @@ First implementation.
     experiment(
       StartTime=1.728e+07,
       StopTime=1.78848e+07,
-      Tolerance=1e-6), 
+      Tolerance=1e-6),
    __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData;

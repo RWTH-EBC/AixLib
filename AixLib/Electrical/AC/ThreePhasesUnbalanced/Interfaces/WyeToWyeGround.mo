@@ -78,6 +78,6 @@ which is measured
 between the phase and the neutral. This model assures that the voltage of the neutral
 cable is equal to zero.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WyeToWyeGround;

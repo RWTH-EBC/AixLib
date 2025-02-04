@@ -72,6 +72,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
       StopTime=2,
       Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/JSONWriter.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end JSONWriter;

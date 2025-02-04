@@ -169,13 +169,13 @@ model BuildingWithPV
     annotation (Placement(transformation(extent={{-60,118},{-40,138}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(redeclare package Medium =
-        Modelica.Media.Air.SimpleAir, 
+        Modelica.Media.Air.SimpleAir,
     redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam)
     annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
-        Modelica.Media.Air.SimpleAir, 
+        Modelica.Media.Air.SimpleAir,
         redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam)                      annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus

@@ -20,28 +20,28 @@ model StorageSolarCollector
     hConOut=15,
     redeclare package Medium = Medium,
     hConHC1=1500)
-		annotation (Placement(transformation(extent={{-10,14},{-30,34}})));
+  annotation (Placement(transformation(extent={{-10,14},{-30,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15)
-	annotation(Placement(transformation(extent={{-60,14},
+ annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
   AixLib.Fluid.Sources.Boundary_pT boundary_p(redeclare package Medium = Medium,nPorts=1)
-	annotation(Placement(transformation(extent={{86,74},
+ annotation(Placement(transformation(extent={{86,74},
             {66,94}})));
   AixLib.Fluid.FixedResistances.PressureDrop
                    res1(
     redeclare package Medium = Medium,
     m_flow_nominal=solarThermal.m_flow_nominal,
     dp_nominal=2000)
-	annotation(Placement(transformation(extent={{-6,-10},{14,10}})));
+ annotation(Placement(transformation(extent={{-6,-10},{14,10}})));
   AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1, redeclare package Medium = Medium)
-	annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
+ annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
   AixLib.Fluid.FixedResistances.PressureDrop
                    res(
     redeclare package Medium = Medium,
     allowFlowReversal=true,
     m_flow_nominal=solarThermal.m_flow_nominal,
     dp_nominal=2000)
-	annotation(Placement(transformation(extent={{-40,-26},{-20,-6}})));
+ annotation(Placement(transformation(extent={{-40,-26},{-20,-6}})));
   AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
     vol(T(start=298.15, fixed=true)),
     Collector=AixLib.DataBase.SolarThermal.FlatCollector(),
@@ -54,7 +54,7 @@ model StorageSolarCollector
     width=10,
     amplitude=0.05,
     offset=0)
-	annotation(Placement(transformation(extent={{-96,-14},{-76,6}})));
+ annotation(Placement(transformation(extent={{-96,-14},{-76,6}})));
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valve(
     redeclare package Medium = Medium,
     m_flow_nominal=solarThermal.m_flow_nominal,
@@ -64,18 +64,18 @@ model StorageSolarCollector
         origin={69,42})));
   AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)
-	  annotation(Placement(transformation(extent={{48,-10},{68,10}})));
+   annotation(Placement(transformation(extent={{48,-10},{68,10}})));
   Modelica.Blocks.Continuous.LimPID PI(controllerType = Modelica.Blocks.Types.SimpleController.PI,
     k=0.005,
     Ti=60,
-	yMax = 0.999,
-	yMin = 0) annotation(Placement(transformation(extent = {{-6, 6}, {6, -6}}, rotation = 90, origin={90,14})));
+ yMax = 0.999,
+ yMin = 0) annotation(Placement(transformation(extent = {{-6, 6}, {6, -6}}, rotation = 90, origin={90,14})));
   Modelica.Blocks.Sources.Constant const(k = 273.15 + 70)
-	annotation(Placement(transformation(extent={{74,-10},{80,-4}})));
+ annotation(Placement(transformation(extent={{74,-10},{80,-4}})));
   Modelica.Blocks.Math.Add add(k2 = -1)
-	annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 90, origin={88,30})));
+ annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 90, origin={88,30})));
   Modelica.Blocks.Sources.Constant const1(k = 1)
-	annotation(Placement(transformation(extent={{70,20},{78,28}})));
+ annotation(Placement(transformation(extent={{70,20},{78,28}})));
   Modelica.Blocks.Sources.CombiTimeTable hotSummerDay(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     table=[0,21,0; 3600,20.6,0; 7200,20.5,0; 10800,20.4,0; 14400,20,6; 18000,20.5,

@@ -109,6 +109,6 @@ Icon(coordinateSystem(
           extent={{64,76},{74,-84}},
           lineColor={0,0,0},
           fillColor={192,192,192},
-          fillPattern=FillPattern.Backward)}), 
+          fillPattern=FillPattern.Backward)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialBorehole;

@@ -682,6 +682,6 @@ Jan 21, 2021, by Donghun Kim:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilEffectivenessNTU;

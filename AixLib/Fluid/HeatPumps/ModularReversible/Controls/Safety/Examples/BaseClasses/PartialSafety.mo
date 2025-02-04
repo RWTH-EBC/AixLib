@@ -39,6 +39,6 @@ equation
   Partial example providing interfaces to
   show usage of safety control models.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialSafety;

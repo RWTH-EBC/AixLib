@@ -20,6 +20,6 @@ First implementation.
 <p>
 Generic record for the internal heat capacity of the building zone per unit area of the floor.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

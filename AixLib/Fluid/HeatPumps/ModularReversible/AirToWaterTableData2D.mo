@@ -47,6 +47,6 @@ heating and cooling and process chillers, with electrically driven compressors
 https://www.beuth.de/de/norm/din-en-14511-1/298537524</a>
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end AirToWaterTableData2D;

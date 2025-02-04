@@ -120,6 +120,6 @@ Apr 06, 2021, by Klaas De Jonge:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialOneWayFlowElement;

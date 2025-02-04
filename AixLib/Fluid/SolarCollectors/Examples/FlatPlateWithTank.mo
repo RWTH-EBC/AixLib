@@ -116,7 +116,7 @@ model FlatPlateWithTank
   Modelica.Blocks.Math.BooleanToReal booToRea(
     realTrue=m_flow_nominal)
     "Conversion of control signal to real-valued signal"
-	annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+ annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 equation
   connect(solCol.port_b,TOut. port_a) annotation (Line(
       points={{18,56},{30,56}},
@@ -180,7 +180,7 @@ equation
     annotation (Line(points={{-118,0},{-102,0}}, color={255,0,255}));
   connect(pum.m_flow_in, booToRea.y) annotation (Line(points={{-62,7.77156e-16},
           {-70,7.77156e-16},{-70,0},{-78,0}}, color={0,0,127}));
-    annotation(
+    annotation (
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/SolarCollectors/Examples/FlatPlateWithTank.mos"
         "Simulate and plot"),
    experiment(Tolerance=1e-6, StopTime=86400.0),
@@ -280,6 +280,6 @@ First implementation
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-200,-100},{180,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end FlatPlateWithTank;

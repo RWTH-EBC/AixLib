@@ -81,6 +81,6 @@ First implementation.
           lineThickness=1,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="P")}), 
+          textString="P")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end GeneralizedSensor;

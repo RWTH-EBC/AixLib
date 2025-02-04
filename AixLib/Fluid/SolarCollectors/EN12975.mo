@@ -198,6 +198,6 @@ First implementation.
           smooth=Smooth.None,
           thickness=1,
           origin={0,40},
-          rotation=90)}), 
+          rotation=90)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end EN12975;

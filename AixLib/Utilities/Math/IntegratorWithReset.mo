@@ -172,6 +172,6 @@ Icon(coordinateSystem(
             extent={{70,-14},{370,26}},
           textColor={0,0,0},
           horizontalAlignment=TextAlignment.Left,
-          textString="y")}), 
+          textString="y")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end IntegratorWithReset;

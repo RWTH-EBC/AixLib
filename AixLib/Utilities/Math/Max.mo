@@ -19,6 +19,6 @@ First implementation.
 </html>"), Icon(graphics={Text(
           extent={{-74,90},{70,-70}},
           textColor={0,0,255},
-          textString="max")}), 
+          textString="max")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Max;

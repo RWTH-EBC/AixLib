@@ -47,6 +47,6 @@ This is for
           extent={{-10,18},{-20,28}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid)}), 
+          fillPattern=FillPattern.Solid)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Interpolate;

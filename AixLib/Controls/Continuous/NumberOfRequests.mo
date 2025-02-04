@@ -96,6 +96,6 @@ First implementation.
         Line(points={{-18,24},{66,54}}, color={255,0,0}),
         Line(points={{-78,-50},{78,-50}}),
         Line(points={{70,-46},{78,-50}}),
-        Line(points={{70,-54},{78,-50}})}), 
+        Line(points={{70,-54},{78,-50}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end NumberOfRequests;

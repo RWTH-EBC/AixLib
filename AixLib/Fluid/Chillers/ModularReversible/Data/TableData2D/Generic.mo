@@ -33,6 +33,6 @@ record Generic "Basic chiller data"
   </li>
 </ul>
 </html>"),
-   Icon, 
+   Icon,
    __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

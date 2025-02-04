@@ -19,6 +19,6 @@ Created documentation.
 <p>
 This model declares connectors for electrical components with two terminals.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialBaseTwoPort;

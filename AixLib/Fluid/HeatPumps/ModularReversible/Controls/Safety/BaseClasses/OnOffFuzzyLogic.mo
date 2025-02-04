@@ -98,6 +98,6 @@ at the minimal speed.
         extent={{-154,138},{146,98}},
         textString="%name",
         textColor={0,0,255})}),                               Diagram(
-        coordinateSystem(preserveAspectRatio=false)), 
+        coordinateSystem(preserveAspectRatio=false)),
    __Dymola_LockedEditing="Model from IBPSA");
 end OnOffFuzzyLogic;

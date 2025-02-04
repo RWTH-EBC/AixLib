@@ -19,8 +19,8 @@ block SupplyReturnTemperatureReset
   parameter Modelica.Units.SI.Temperature TRoo=293.15
     "Fixed value of room temperature set point"
     annotation (Dialog(enable=not use_TRoo_in));
-  parameter Modelica.Units.SI.TemperatureDifference dTOutHeaBal(displayUnit="K")
-     = 8 "Offset for heating curve";
+  parameter Modelica.Units.SI.TemperatureDifference dTOutHeaBal(displayUnit="K")=
+       8 "Offset for heating curve";
   Modelica.Blocks.Interfaces.RealInput TRoo_in(final quantity="ThermodynamicTemperature",
                                                final unit = "K", displayUnit = "degC", min=0)
        if use_TRoo_in "Room air temperature set point"
@@ -154,6 +154,6 @@ First implementation.
         Text(
           extent={{42,-30},{92,-80}},
           textColor={0,0,127},
-          textString="TRet")}), 
+          textString="TRet")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SupplyReturnTemperatureReset;

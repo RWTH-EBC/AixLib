@@ -13,5 +13,5 @@ Added documentation.
 </html>", info="<html>
 This type is used to indicate how a model
 should be initialized.
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

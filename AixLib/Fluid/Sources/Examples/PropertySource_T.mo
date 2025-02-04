@@ -127,6 +127,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/881\">#881</a>.
         "Simulate and plot"),
     experiment(
       StopTime=1,
-      Tolerance=1e-06), 
+      Tolerance=1e-06),
    __Dymola_LockedEditing="Model from IBPSA");
 end PropertySource_T;

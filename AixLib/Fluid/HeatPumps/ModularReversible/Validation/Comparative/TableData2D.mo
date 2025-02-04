@@ -16,7 +16,6 @@ model TableData2D "Validation case for table data approach"
             use_TEvaOutForTab=false,
             use_TConOutForTab=false,
             tabQCon_flow=[0,288.15,298.15; 293.15,34084.9,0; 303.15,30000,34620],
-
             tabUppBou=[273.15,273.15; 273.15,273.15],
             use_TEvaOutForOpeEnv=false,
             use_TConOutForOpeEnv=false))));
@@ -38,6 +37,6 @@ First implementation.
 Validation case for <a href=\"modelica://AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D\">
 AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TableData2D;

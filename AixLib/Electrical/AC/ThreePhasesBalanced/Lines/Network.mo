@@ -61,6 +61,6 @@ AixLib.Electrical.Transmission.Grids.PartialGrid</a>
 for more information about the topology of the network, such as
 the number of nodes, how they are connected, and the length of each connection.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Network;

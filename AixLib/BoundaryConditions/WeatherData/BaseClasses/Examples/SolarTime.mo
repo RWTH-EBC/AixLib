@@ -41,6 +41,6 @@ First implementation.
 </ul>
 </html>"),  experiment(Tolerance=1e-6, StopTime=864000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/SolarTime.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end SolarTime;

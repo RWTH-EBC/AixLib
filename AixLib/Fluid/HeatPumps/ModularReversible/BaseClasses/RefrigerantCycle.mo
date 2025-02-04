@@ -8,7 +8,7 @@ model RefrigerantCycle
     annotation(Dialog(enable=use_rev));
 
   replaceable model RefrigerantCycleHeatPumpHeating =
-    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating(
+    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating (
       useInHeaPum=true)
       constrainedby
         AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle
@@ -16,7 +16,7 @@ model RefrigerantCycle
     annotation (choicesAllMatching=true);
 
   replaceable model RefrigerantCycleHeatPumpCooling =
-      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling(
+      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling (
         useInChi=true)
       constrainedby
         AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.PartialChillerCycle
@@ -31,7 +31,7 @@ model RefrigerantCycle
   annotation (Placement(transformation(extent={{-60,40},{-19,80}}, rotation=0)));
 
 protected
-  parameter String devIde =
+  parameter String devIde=
     if use_rev then refCycHeaPumCoo.devIde else refCycHeaPumHea.devIde
     "Data source for refrigerant cycle";
 
@@ -192,6 +192,6 @@ equation
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
   UsersGuide</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end RefrigerantCycle;

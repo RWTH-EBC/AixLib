@@ -10,8 +10,8 @@ model TWetBul_TDryBulXi
     duration=1,
     offset=273.15 + 30) "Dry bulb temperature"
                  annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBul(         redeclare
-      package Medium = Medium) "Model for wet bulb temperature"
+  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBul(         redeclare package
+              Medium = Medium) "Model for wet bulb temperature"
     annotation (Placement(transformation(extent={{0,20},{20,40}})));
   Modelica.Blocks.Sources.Constant p(k=101325) "Pressure"
                                     annotation (Placement(transformation(extent={{-80,-20},
@@ -70,6 +70,6 @@ May 7, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TWetBul_TDryBulXi;

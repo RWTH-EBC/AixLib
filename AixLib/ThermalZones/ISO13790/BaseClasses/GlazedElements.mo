@@ -102,6 +102,6 @@ The model neglects the extra heat flow due to thermal radiation to the sky from 
 Mar 16, 2022, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
-</ul></html>"),  
+</ul></html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end GlazedElements;

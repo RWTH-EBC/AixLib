@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.BaseClasses;
 partial model PartialOperationalEnvelope
   "Indicates if the device operation is within a defined envelope"
   extends BaseClasses.PartialSafetyWithCounter;
@@ -179,6 +179,6 @@ equation
   Red crosses indicate the point to write into the 2D table in Modelica.
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialOperationalEnvelope;

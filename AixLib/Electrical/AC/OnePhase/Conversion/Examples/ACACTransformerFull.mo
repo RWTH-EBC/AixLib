@@ -33,8 +33,7 @@ model ACACTransformerFull
     offset=0,
     height=-4000*0.8) "Load power consumption profile"
     annotation (Placement(transformation(extent={{70,40},{50,60}})));
-  AixLib.Electrical.AC.OnePhase.Conversion.ACACTransformerFull
-                                                              tra_cc(
+  AixLib.Electrical.AC.OnePhase.Conversion.ACACTransformerFull tra_cc(
     VABase=4000,
     R1=0.01,
     L1=0.01,
@@ -132,6 +131,6 @@ First implementation.
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/OnePhase/Conversion/Examples/ACACTransformerFull.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ACACTransformerFull;

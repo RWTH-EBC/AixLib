@@ -252,6 +252,6 @@ table below</p>
 </tr>
 </table>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end IEEE4;

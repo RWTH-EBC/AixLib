@@ -112,6 +112,6 @@ First implementation.
         Line(points={{68,-44},{-62,-44}}, color={175,175,175}),
         Line(points={{68,-18},{-10,-18}}, color={175,175,175}),
         Line(points={{70,6},{12,6}}, color={175,175,175}),
-        Line(points={{68,32},{22,32}}, color={175,175,175})}), 
+        Line(points={{68,32},{22,32}}, color={175,175,175})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end pW_TDewPoi;

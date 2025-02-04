@@ -106,6 +106,6 @@ to validate the modular reversible models by means of
 comparison to the <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_y\">
 AixLib.Fluid.HeatPumps.Carnot_y</a> model.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialComparison;

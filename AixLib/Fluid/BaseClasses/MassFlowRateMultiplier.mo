@@ -123,6 +123,6 @@ First implementation.
           lineColor={0,0,255},
           smooth=Smooth.None,
           fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}), 
+          fillPattern=FillPattern.Solid)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowRateMultiplier;

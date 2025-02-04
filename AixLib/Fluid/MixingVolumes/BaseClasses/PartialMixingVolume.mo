@@ -32,8 +32,8 @@ model PartialMixingVolume
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
       redeclare each package Medium = Medium,
       each h_outflow(nominal=Medium.h_default),
-      each Xi_outflow(each nominal=0.01)
-      ) "Fluid inlets and outlets"
+      each Xi_outflow(each nominal=0.01))
+        "Fluid inlets and outlets"
     annotation (Placement(transformation(extent={{-40,-10},{40,10}},
       origin={0,-100})));
 
@@ -587,6 +587,6 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
         Text(
           extent={{62,28},{-58,-22}},
           textColor={255,255,255},
-          textString=DynamicSelect("", String(T-273.15, format=".1f")))}), 
+          textString=DynamicSelect("", String(T-273.15, format=".1f")))}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialMixingVolume;

@@ -30,6 +30,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    experiment(StartTime=172800, Tolerance=1e-6, StopTime=345600), 
+    experiment(StartTime=172800, Tolerance=1e-6, StopTime=345600),
    __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTimeMonths;

@@ -50,6 +50,6 @@ First implementation.
         Text(
           extent={{-6,4},{52,-24}},
           textColor={0,0,255},
-          textString="equ")}), 
+          textString="equ")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end EquationOfTime;

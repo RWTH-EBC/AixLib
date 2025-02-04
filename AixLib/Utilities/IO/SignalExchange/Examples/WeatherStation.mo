@@ -31,6 +31,6 @@ September 29, 2020, by David Blum:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WeatherStation;

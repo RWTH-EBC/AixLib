@@ -26,6 +26,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601), 
+    experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601),
    __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTimeMonthsPlus;

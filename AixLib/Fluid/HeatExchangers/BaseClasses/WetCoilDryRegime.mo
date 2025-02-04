@@ -92,6 +92,6 @@ See
 AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
 for documentation.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilDryRegime;

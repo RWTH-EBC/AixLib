@@ -96,6 +96,6 @@ and uses the load model from the package
 AixLib.Electrical.AC.OnePhase.Loads.Impedance</a>.
 The model computes the voltages, currents and powers on each phase.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Impedance;

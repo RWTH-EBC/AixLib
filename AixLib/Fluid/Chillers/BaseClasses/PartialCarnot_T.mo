@@ -26,6 +26,6 @@ January 26, 2016, by Michael Wetter:<br/>
 First implementation of this base class.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialCarnot_T;

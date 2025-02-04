@@ -44,6 +44,6 @@ April 13, 2009, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortFlowResistanceParameters;

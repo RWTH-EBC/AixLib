@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataULg150801
   "Experimental data from ULg's pipe test bench from August 1"
   extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
@@ -38,6 +38,6 @@ See <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.
 AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg</a>
 for more information.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PipeDataULg150801;

@@ -36,6 +36,6 @@ First implementation.
           textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="XiTotal")}), 
+          textString="XiTotal")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ToDryAir;

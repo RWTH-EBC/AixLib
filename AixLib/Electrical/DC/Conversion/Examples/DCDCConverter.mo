@@ -73,6 +73,6 @@ First implementation.
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/DC/Conversion/Examples/DCDCConverter.mos"
         "Simulate and plot"),
-    Icon(coordinateSystem(extent={{-140,-100},{100,140}})), 
+    Icon(coordinateSystem(extent={{-140,-100},{100,140}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end DCDCConverter;

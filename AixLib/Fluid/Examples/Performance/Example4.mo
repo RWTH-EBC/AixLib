@@ -160,6 +160,6 @@ Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
 </html>"),
 experiment(Tolerance=1e-6, StopTime=20),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example4.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Example4;

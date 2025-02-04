@@ -4,8 +4,8 @@ model SwitchingUnit "Test of switchingUnit model of E.ON ERC main building"
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare
-      package Medium = Medium, m_flow_nominal=2)
+  AixLib.Systems.EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package
+              Medium = Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-30,-46},{30,26}})));
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,

@@ -30,6 +30,6 @@ September 12, 2016, by Marcus Fuchs:<br/>
 First implementation
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WaterProperties_pT;

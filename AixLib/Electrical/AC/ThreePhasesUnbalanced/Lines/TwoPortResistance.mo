@@ -115,6 +115,6 @@ October 3, 2014, by Marco Bonvini:<br/>
 Added model and documentation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortResistance;

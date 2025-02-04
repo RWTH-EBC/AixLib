@@ -92,6 +92,6 @@ First implementation.
 experiment(Tolerance=1E-6, StopTime=100),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeMFactor.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeMFactor;

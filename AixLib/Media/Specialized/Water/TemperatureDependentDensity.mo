@@ -952,6 +952,6 @@ First implementation.
         Text(
           extent={{-64,88},{-42,58}},
           textColor={255,0,0},
-          textString="T")}), 
+          textString="T")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureDependentDensity;

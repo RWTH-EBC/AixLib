@@ -164,6 +164,6 @@ The matrix is symmetric thus just the upper triangular
 part of it has to be defined.
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortMatrixRL;

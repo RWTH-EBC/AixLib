@@ -19,6 +19,6 @@ First implementation.
   experiment(Tolerance=1e-6, StartTime=-31536000, StopTime=31536000),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/ConvertTimeNegativeStart.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConvertTimeNegativeStart;

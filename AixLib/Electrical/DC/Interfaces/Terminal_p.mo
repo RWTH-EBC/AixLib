@@ -9,6 +9,6 @@ connector Terminal_p "Terminal p for DC electrical systems"
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>Electric connector for DC electrical systems.</p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Terminal_p;

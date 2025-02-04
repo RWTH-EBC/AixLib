@@ -222,16 +222,16 @@ block ReaderTMY3 "Reader for TMY3 weather data"
     Evaluate=true,
     Dialog(tab="Advanced", group="Sky temperature"));
 
-  final parameter Modelica.Units.SI.Angle lon(displayUnit="deg") =
+  final parameter Modelica.Units.SI.Angle lon(displayUnit="deg")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getLongitudeTMY3(filNam)
     "Longitude";
-  final parameter Modelica.Units.SI.Angle lat(displayUnit="deg") =
+  final parameter Modelica.Units.SI.Angle lat(displayUnit="deg")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getLatitudeTMY3(filNam)
     "Latitude";
-  final parameter Modelica.Units.SI.Time timZon(displayUnit="h") =
+  final parameter Modelica.Units.SI.Time timZon(displayUnit="h")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeZoneTMY3(filNam)
     "Time zone";
-  final parameter Modelica.Units.SI.Length alt(displayUnit="m") =
+  final parameter Modelica.Units.SI.Length alt(displayUnit="m")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getAltitudeLocationTMY3(
     filNam) "Location altitude above sea level";
 
@@ -1831,6 +1831,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false,
-     extent={{-200,-300},{300,300}})), 
+     extent={{-200,-300},{300,300}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ReaderTMY3;

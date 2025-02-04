@@ -207,6 +207,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Lines.TwoPortMatrixRL</a> that includ
 the capacitive effects of the lines.
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortMatrixRLC;

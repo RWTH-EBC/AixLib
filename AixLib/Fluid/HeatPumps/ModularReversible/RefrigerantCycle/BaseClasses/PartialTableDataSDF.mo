@@ -89,8 +89,8 @@ partial model PartialTableDataSDF
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-100,30})));
-  Modelica.Blocks.Math.BooleanToReal booToRea(final realTrue=1, final realFalse
-      =0) "Convert on/off signal to real" annotation (Placement(transformation(
+  Modelica.Blocks.Math.BooleanToReal booToRea(final realTrue=1, final realFalse=
+       0) "Convert on/off signal to real" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-80,90})));

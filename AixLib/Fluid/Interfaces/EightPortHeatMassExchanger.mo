@@ -415,6 +415,6 @@ Remove start values of m_flow and dp variables.
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics), 
+            100,100}}), graphics),
    __Dymola_LockedEditing="Model from IBPSA");
 end EightPortHeatMassExchanger;

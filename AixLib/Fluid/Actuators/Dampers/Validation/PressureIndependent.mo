@@ -4,8 +4,8 @@ model PressureIndependent
   extends Modelica.Icons.Example;
 
   package Medium = AixLib.Media.Air "Medium model for air";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 10 "Damper nominal pressure drop";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       10 "Damper nominal pressure drop";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Damper nominal mass flow rate";
   AixLib.Fluid.Actuators.Dampers.Exponential damExp(
@@ -170,6 +170,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})), 
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end PressureIndependent;

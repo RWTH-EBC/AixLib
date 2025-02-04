@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.Examples;
+﻿within AixLib.Fluid.Actuators.Valves.Examples;
 model ThreeWayValves "Three way valves with different opening characteristics"
   extends Modelica.Icons.Example;
 
@@ -130,6 +130,6 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ThreeWayValves;

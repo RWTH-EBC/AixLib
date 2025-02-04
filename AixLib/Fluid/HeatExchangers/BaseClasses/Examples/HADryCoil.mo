@@ -88,6 +88,6 @@ April 9, 2017, by Michael Wetter:<br/>
 First version.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end HADryCoil;

@@ -128,6 +128,6 @@ equation
   You can select different options for the modeling of the icing factor or
   implement your own approach.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialRefrigerantCycle;

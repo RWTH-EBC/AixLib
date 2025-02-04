@@ -58,6 +58,6 @@ AixLib.Fluid.Chillers.Carnot_y</a>, duplicate of the example
 <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_y\">
 AixLib.Fluid.Chillers.Examples.Carnot_y</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y;

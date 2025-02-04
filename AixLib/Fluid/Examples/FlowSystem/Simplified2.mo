@@ -23,6 +23,6 @@ First implementation.
 </html>"),
 experiment(Tolerance=1e-6, StopTime=1000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified2.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Simplified2;

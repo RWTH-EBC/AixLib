@@ -281,6 +281,6 @@ equation
   experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElements.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end SimpleRoomTwoElements;

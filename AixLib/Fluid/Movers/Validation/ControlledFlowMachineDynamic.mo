@@ -23,6 +23,6 @@ This is for
 </li>
 </ul>
 </html>"),
-Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})), 
+Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160, 160}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ControlledFlowMachineDynamic;

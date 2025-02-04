@@ -5,8 +5,7 @@ model PolynomalApproach
     AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
-      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
-                                                                                             "Function to calculate peformance Data" annotation(choicesAllMatching=true);
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
 protected
   Real Char[2];
 equation

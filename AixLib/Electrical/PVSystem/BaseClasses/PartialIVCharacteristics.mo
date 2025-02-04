@@ -1,11 +1,11 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 partial model PartialIVCharacteristics
 "Partial model for IV Characteristic of a PV module"
 
 replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
 constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
 "PV Panel data definition"
-						 annotation (choicesAllMatching);
+       annotation (choicesAllMatching);
 
 // Adjustable input parameters
 
@@ -92,45 +92,45 @@ Modelica.Blocks.Interfaces.RealInput absRadRat(final unit= "1")
 Modelica.Blocks.Interfaces.RealInput radTil(final unit="W/m2")
   "Total solar irradiance on the tilted surface"
   annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(extent={{-140,-100},{-100,
-		  -60}})));
+    -60}})));
 
 
 annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
    Rectangle(
-	lineColor={0,0,0},
-	fillColor={255,255,255},
-	fillPattern=FillPattern.Solid,
-	extent={{-100,100},{100,-100}}),
-	  Line(
-		points={{-66,-64},{-66,88}},
-		color={0,0,0},
-		arrow={Arrow.None,Arrow.Filled},
-		thickness=0.5),
-	  Line(
-		points={{-66,-64},{64,-64}},
-		color={0,0,0},
-		arrow={Arrow.None,Arrow.Filled},
-		thickness=0.5),
-	  Text(
-		extent={{-72,80},{-102,68}},
-		lineColor={0,0,0},
-		lineThickness=0.5,
-		fillColor={255,255,255},
-		fillPattern=FillPattern.Solid,
-		textString="I"),
-	  Text(
-		extent={{80,-80},{50,-92}},
-		lineColor={0,0,0},
-		lineThickness=0.5,
-		fillColor={255,255,255},
-		fillPattern=FillPattern.Solid,
-		textString="U"),
-	  Line(
-		points={{-66,54},{-66,54},{-6,54},{12,50},{22,42},{32,28},{38,8},{42,-14},
-			{44,-44},{44,-64}},
-		color={0,0,0},
-		thickness=0.5,
-		smooth=Smooth.Bezier)}),
-							 Diagram(coordinateSystem(preserveAspectRatio=false)));
+ lineColor={0,0,0},
+ fillColor={255,255,255},
+ fillPattern=FillPattern.Solid,
+ extent={{-100,100},{100,-100}}),
+   Line(
+  points={{-66,-64},{-66,88}},
+  color={0,0,0},
+  arrow={Arrow.None,Arrow.Filled},
+  thickness=0.5),
+   Line(
+  points={{-66,-64},{64,-64}},
+  color={0,0,0},
+  arrow={Arrow.None,Arrow.Filled},
+  thickness=0.5),
+   Text(
+  extent={{-72,80},{-102,68}},
+  lineColor={0,0,0},
+  lineThickness=0.5,
+  fillColor={255,255,255},
+  fillPattern=FillPattern.Solid,
+  textString="I"),
+   Text(
+  extent={{80,-80},{50,-92}},
+  lineColor={0,0,0},
+  lineThickness=0.5,
+  fillColor={255,255,255},
+  fillPattern=FillPattern.Solid,
+  textString="U"),
+   Line(
+  points={{-66,54},{-66,54},{-6,54},{12,50},{22,42},{32,28},{38,8},{42,-14},
+   {44,-44},{44,-64}},
+  color={0,0,0},
+  thickness=0.5,
+  smooth=Smooth.Bezier)}),
+        Diagram(coordinateSystem(preserveAspectRatio=false)));
 
 end PartialIVCharacteristics;

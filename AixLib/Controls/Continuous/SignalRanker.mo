@@ -36,6 +36,6 @@ First implementation.
 Icon(graphics={Text(
           extent={{-94,34},{96,-164}},
           textColor={0,0,255},
-          textString="y[i] >= y[i+1]")}), 
+          textString="y[i] >= y[i+1]")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SignalRanker;

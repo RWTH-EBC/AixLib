@@ -23,6 +23,6 @@ March 2, 2022, by Hongxiang Fu:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end efficiencyParameters_yMot;

@@ -130,6 +130,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chiller
   speed <code>yMea</code> are plotted to show the influence of
   the safety control.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end CarnotWithLosses;

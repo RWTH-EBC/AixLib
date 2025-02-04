@@ -49,6 +49,6 @@ First implementation.
 </html>"),
   experiment(Tolerance=1e-6, StopTime=864000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/RelativeAirMass.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end RelativeAirMass;

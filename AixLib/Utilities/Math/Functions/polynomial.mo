@@ -42,6 +42,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-smoothOrder=999, 
+smoothOrder=999,
    __Dymola_LockedEditing="Model from IBPSA");
 end polynomial;

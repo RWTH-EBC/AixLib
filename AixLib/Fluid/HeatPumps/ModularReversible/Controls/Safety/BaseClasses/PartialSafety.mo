@@ -68,6 +68,6 @@ partial model PartialSafety "Safety control with I/O"
   <code>sigBus</code> either the input signals are equal to the output
   signals or, if an error occurs, set to 0.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialSafety;

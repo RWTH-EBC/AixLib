@@ -13,8 +13,8 @@ model HeaterFan_noReverseFlow
 
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=Q_flow_nominal/1000/
       10 "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 2000 "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       2000 "Pressure";
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=1000
     "Heat flow rate at u=1, positive for heating";
 
@@ -130,6 +130,6 @@ First implementation.
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Validation/HeaterFan_noReverseFlow.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=1.0), 
+    experiment(Tolerance=1e-6, StopTime=1.0),
    __Dymola_LockedEditing="Model from IBPSA");
 end HeaterFan_noReverseFlow;

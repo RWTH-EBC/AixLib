@@ -92,6 +92,6 @@ Implementation of a hydraulic check valve. This is for
 <p>
 Example model for the use of a hydraulic check valve.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end CheckValve;

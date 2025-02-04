@@ -70,6 +70,6 @@ The image below describes the connection of the windings.
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Electrical/AC/ThreePhasesUnbalanced/Conversion/BaseClasses/YD_a.png\"/>
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialConverterStepDownYD;

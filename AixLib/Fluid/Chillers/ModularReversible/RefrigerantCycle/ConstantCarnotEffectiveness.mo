@@ -127,6 +127,6 @@ equation
 </html>"), Icon(graphics={Text(
           extent={{-78,68},{74,-78}},
           textColor={0,0,127},
-          textString="Carnot")}), 
+          textString="Carnot")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConstantCarnotEffectiveness;

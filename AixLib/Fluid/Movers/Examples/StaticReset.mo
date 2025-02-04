@@ -330,6 +330,6 @@ First implementation. This is for
         "Simulate and plot"),
     experiment(
       StopTime=3600,
-      Tolerance=1e-06), 
+      Tolerance=1e-06),
    __Dymola_LockedEditing="Model from IBPSA");
 end StaticReset;

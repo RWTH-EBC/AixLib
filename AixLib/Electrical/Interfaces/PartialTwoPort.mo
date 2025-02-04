@@ -37,6 +37,6 @@ Model included into the AixLib library.
 This is a model of a component with two electric terminals.
 It represents a common interface that is extended by other models.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPort;

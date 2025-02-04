@@ -193,6 +193,6 @@ December 5, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ReciprocatingWaterToWater_ScalingFactor;

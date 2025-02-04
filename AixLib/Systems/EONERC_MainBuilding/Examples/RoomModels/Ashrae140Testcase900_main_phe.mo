@@ -287,7 +287,7 @@ model Ashrae140Testcase900_main_phe
         origin={-4,136})));
   BasicCarnot basicCarnot annotation (Placement(transformation(extent={{-86,-134},{-60,-108}})));
   Modelica.Blocks.Math.MultiSum multiSum1(nu=6)
-    annotation (Placement(transformation(extent={{142,156},{154,168}})));
+    annotation (Placement(transformation(extent={{142,158},{154,170}})));
   Modelica.Blocks.Math.MultiSum multiSum2(nu=2)
     annotation (Placement(transformation(extent={{140,178},{152,190}})));
   Modelica.Blocks.Math.Gain gain1(k=0.001)
@@ -608,7 +608,7 @@ equation
   connect(basicCarnot.P, P_HP)
     annotation (Line(points={{-60,-121},{-54,-121},{-54,-148},{-79,-148},{-79,-161}}, color={0,0,127}));
   connect(Bus.tabsBus.pumpBus.pumpBus.PelMea, multiSum1.u[1]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,160.25}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,162.25}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -616,7 +616,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(Bus.tabsBus.hotThrottleBus.pumpBus.PelMea, multiSum1.u[2]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,160.95}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,162.95}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -624,7 +624,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(Bus.tabsBus.coldThrottleBus.pumpBus.PelMea, multiSum1.u[3]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,161.65}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,163.65}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -632,7 +632,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(Bus.ahuBus.preheaterBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[4]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,162.35}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,164.35}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -640,7 +640,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(Bus.ahuBus.coolerBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[5]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,163.05}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,165.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -648,7 +648,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(Bus.ahuBus.heaterBus.hydraulicBus.pumpBus.PelMea, multiSum1.u[6]) annotation (Line(
-      points={{28.05,100.05},{28.05,162},{142,162},{142,163.75}},
+      points={{28.05,100.05},{28.05,162},{142,162},{142,165.75}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -675,7 +675,7 @@ equation
   connect(gain1.y, P_Fans)
     annotation (Line(points={{180.6,184},{187.8,184},{187.8,183},{195,183}}, color={0,0,127}));
   connect(multiSum1.y, gain2.u)
-    annotation (Line(points={{155.02,162},{155.02,161},{167,161}}, color={0,0,127}));
+    annotation (Line(points={{155.02,164},{155.02,161},{167,161}}, color={0,0,127}));
   connect(gain2.y, P_Pumps) annotation (Line(points={{178.5,161},{195,161}}, color={0,0,127}));
   connect(T_sup_in, basicCarnot.TConAct)
     annotation (Line(points={{-160,-98},{-120,-98},{-120,-114.24},{-88.6,-114.24}}, color={0,0,127}));

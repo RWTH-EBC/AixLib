@@ -152,6 +152,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    Diagram(coordinateSystem(extent={{-100,-140},{100,100}})), 
+    Diagram(coordinateSystem(extent={{-100,-140},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end TransportWaterAir;

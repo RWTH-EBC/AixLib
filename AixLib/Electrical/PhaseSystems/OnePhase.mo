@@ -121,6 +121,6 @@ package OnePhase "Single phase two connectors AC system"
 This package declares the functions that are used to implement
 the AC single phase models.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end OnePhase;

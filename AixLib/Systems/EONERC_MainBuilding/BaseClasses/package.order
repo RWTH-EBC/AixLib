@@ -19,3 +19,7 @@ ERCMainBuilding_OfficeNorth
 ERCMainBuilding_OfficeSouth
 EnergyCalc
 ASHRAE140_600
+GenBus
+ControlBus
+ZoneMeaBus
+DisturbanceBus

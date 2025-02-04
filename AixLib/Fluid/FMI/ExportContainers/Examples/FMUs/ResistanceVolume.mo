@@ -126,6 +126,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           extent={{18,32},{84,-34}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={170,213,255})}), 
+          fillColor={170,213,255})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ResistanceVolume;

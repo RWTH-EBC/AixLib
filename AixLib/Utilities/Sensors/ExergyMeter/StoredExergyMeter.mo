@@ -21,8 +21,7 @@ model StoredExergyMeter
                Medium)
     "Specific entropy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{70,0},{50,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package Medium =
                Medium)
     "Specific enthalpy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -36,12 +35,10 @@ model StoredExergyMeter
     "Reference pressure"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef[n](redeclare
-      package                                                                      Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef[n](redeclare package Medium =
                        Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{-10,60},{-30,40}})));
-  Modelica.Fluid.Sensors.SpecificEntropy specificEntropyRef[n](redeclare
-      package                                                                    Medium =
+  Modelica.Fluid.Sensors.SpecificEntropy specificEntropyRef[n](redeclare package Medium =
                        Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{10,60},{30,40}})));
   Modelica.Blocks.Interfaces.RealOutput exergyChangeRate(final quantity="Power",

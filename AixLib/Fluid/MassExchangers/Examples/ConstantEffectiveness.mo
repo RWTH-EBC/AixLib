@@ -101,6 +101,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExc
 <b>Note:</b> This problem fails to translate in Dymola 2012 due to an error in Dymola's support
 of stream connector. This bug will be corrected in future versions of Dymola.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectiveness;

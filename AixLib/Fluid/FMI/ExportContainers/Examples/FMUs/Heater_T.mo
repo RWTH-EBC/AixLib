@@ -15,8 +15,8 @@ block Heater_T
     "Maximum heat flow rate for cooling (negative)";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 0 "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       0 "Pressure";
 
   Modelica.Blocks.Interfaces.RealInput TSet(unit="K", displayUnit="degC")
     "Set point temperature of the fluid that leaves port_b"
@@ -125,6 +125,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
                    Text(
           extent={{26,-28},{70,-74}},
           textColor={255,255,255},
-          textString="+")}), 
+          textString="+")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Heater_T;

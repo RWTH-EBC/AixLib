@@ -62,6 +62,6 @@ and <i>T<sub>ref</sub></i> is the reference temperature.
 The temperature <i>T</i> is the temperature of the heat port
 if <code>useHeatPort = true</code>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPortResistance;

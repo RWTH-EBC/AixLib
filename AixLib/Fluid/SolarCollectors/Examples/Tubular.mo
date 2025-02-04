@@ -123,6 +123,6 @@ March 27, 2013 by Peter Grant:<br/>
 First implementation
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Tubular;

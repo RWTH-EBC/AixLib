@@ -67,6 +67,6 @@ First implementation.
         Text(
           extent={{-46,-66},{-98,-54}},
           textColor={0,0,127},
-          textString="solTim")}), 
+          textString="solTim")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SkyBrightness;

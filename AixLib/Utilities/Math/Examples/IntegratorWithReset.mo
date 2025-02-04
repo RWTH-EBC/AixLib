@@ -85,6 +85,6 @@ August 2, 2016, by Philipp Mehrfeld:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end IntegratorWithReset;

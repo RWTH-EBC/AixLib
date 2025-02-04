@@ -118,6 +118,6 @@ First implementation.
         Text(
           extent={{-149,-114},{151,-154}},
           textColor={0,0,255},
-          textString="%name")}), 
+          textString="%name")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPort;

@@ -136,6 +136,6 @@ First implementation.
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Examples/RectangularBorefield.mos"
         "Simulate and plot"),
   experiment(
-      StopTime=2678400,Tolerance=1e-6), 
+      StopTime=2678400,Tolerance=1e-6),
    __Dymola_LockedEditing="Model from IBPSA");
 end RectangularBorefield;

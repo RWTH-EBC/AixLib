@@ -71,13 +71,13 @@ model HeatPumpDetailed
   AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm pumSou(
     redeclare final package Medium = Medium_sin,
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
-
     final allowFlowReversal=true,
     final addPowerToMedium=false) "Fan or pump at source side of HP"
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={50,12})));
+
   AixLib.Fluid.MixingVolumes.MixingVolume Room(
     nPorts=2,
     final use_C_flow=false,

@@ -238,8 +238,8 @@ equation
           36,36},{36,37},{40,37}}, color={0,127,255}));
   connect(storageSimple.TLayer[3], PIDHR.u_m) annotation (Line(points={{19.165,
           7.04},{26,7.04},{26,42},{-46,42},{-46,76.4}}, color={0,0,127}));
-  connect(storageSimple.TLayer[3], storageHysteresis.u) annotation (Line(points
-        ={{19.165,7.04},{24,7.04},{24,40},{-74,40},{-74,50},{-73.2,50},{-73.2,
+  connect(storageSimple.TLayer[3], storageHysteresis.u) annotation (Line(points=
+         {{19.165,7.04},{24,7.04},{24,40},{-74,40},{-74,50},{-73.2,50},{-73.2,
           56.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={

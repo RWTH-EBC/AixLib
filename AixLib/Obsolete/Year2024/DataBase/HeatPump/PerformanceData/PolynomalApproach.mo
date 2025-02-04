@@ -5,8 +5,7 @@ model PolynomalApproach
     AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
-      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
-                                                                                             "Function to calculate peformance Data" annotation(choicesAllMatching=true);
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
   Modelica.Blocks.Sources.RealExpression internal_Pel(final y=Char[1]*
         scalingFactor)                                                 annotation (Placement(
         transformation(

@@ -210,6 +210,6 @@ Added <code>m_flow_nominal</code>, which is used if component is configured as s
 Released first version.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end MediumColumnDynamic;

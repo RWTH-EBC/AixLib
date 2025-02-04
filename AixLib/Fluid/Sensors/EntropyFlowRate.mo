@@ -108,6 +108,6 @@ First implementation based on
 AixLib.Fluid.Sensors.EnthalpyFlowRate</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end EntropyFlowRate;

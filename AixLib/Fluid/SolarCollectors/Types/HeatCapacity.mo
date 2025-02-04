@@ -11,5 +11,5 @@ type HeatCapacity = enumeration(
 <p>
 Enumeration used to define the different types of solar collector capacity specification.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

@@ -72,6 +72,6 @@ January 8, 2014, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end IsMonotonic;

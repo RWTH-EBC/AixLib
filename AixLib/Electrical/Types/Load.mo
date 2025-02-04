@@ -14,5 +14,5 @@ Added documentation.
 </ul>
 </html>", info="<html>
 This type indicates in which mode the load model operates.
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

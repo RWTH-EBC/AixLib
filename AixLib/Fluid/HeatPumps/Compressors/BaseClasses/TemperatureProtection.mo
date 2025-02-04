@@ -163,6 +163,6 @@ and <code>TEvaMin</code>.
 Parameter <code>dTHys</code> may be used
 to change the hysteresis interval.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureProtection;

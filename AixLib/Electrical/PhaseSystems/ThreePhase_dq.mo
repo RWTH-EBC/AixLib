@@ -103,6 +103,6 @@ package ThreePhase_dq "AC system, symmetrically loaded three-phase"
 This package declares the functions that are used to implement
 the AC three-phase balanced models using the DQ representation.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ThreePhase_dq;

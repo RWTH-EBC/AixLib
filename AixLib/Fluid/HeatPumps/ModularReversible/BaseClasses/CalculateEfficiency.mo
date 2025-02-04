@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses;
 model CalculateEfficiency
   "Calculate the COP or EER of a device"
   extends Modelica.Blocks.Icons.Block;
@@ -112,6 +112,6 @@ equation
   the electrical power can get zero, a lower boundary is used to
   avoid division by zero.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end CalculateEfficiency;

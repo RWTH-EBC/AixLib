@@ -481,6 +481,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    Diagram(graphics={Rectangle(extent={{-62,78},{-46,50}}, lineColor={28,108,200})}), 
+    Diagram(graphics={Rectangle(extent={{-62,78},{-46,50}}, lineColor={28,108,200})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end RadiatorEN442_2;

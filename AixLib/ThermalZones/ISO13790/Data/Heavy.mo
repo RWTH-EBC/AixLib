@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ISO13790.Data;
-record Heavy = ISO13790.Data.Generic(
+record Heavy = ISO13790.Data.Generic (
     heaC=260000,
     facMas=3) "Heavy"
      annotation (
@@ -15,5 +15,5 @@ info="<html>
 <p>
 Internal heat capacity per unit area of the floor for heavy buildings.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

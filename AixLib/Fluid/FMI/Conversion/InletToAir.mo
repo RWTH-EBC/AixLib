@@ -238,6 +238,6 @@ First implementation.
           visible=allowFlowReversal,
           points={{-76,-16},{-34,-36},{-8,-66}},
           color={0,0,255},
-          smooth=Smooth.Bezier)}), 
+          smooth=Smooth.Bezier)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end InletToAir;

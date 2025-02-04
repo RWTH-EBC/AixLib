@@ -47,6 +47,6 @@ Created model and documentation.
 Partial model that represents a three-phase unbalanced
 transformer without neutral cable connection.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialConverter;

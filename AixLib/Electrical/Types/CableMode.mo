@@ -15,5 +15,5 @@ This type is used to indicate in which mode the cable model works.
 In automatic mode the cable is automatically sized using basic information like
 nominal voltage and power, in commercial mode the user can select among a list of
 commercially available cables.
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

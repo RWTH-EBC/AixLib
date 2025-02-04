@@ -26,5 +26,5 @@ of the necessary information for modeling.
 This data record was created to allow verification of EN12975 base classes
 despite the limitations in available data.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

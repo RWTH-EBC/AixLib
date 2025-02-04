@@ -17,6 +17,6 @@ Example of a weekly schedule that outputs 1 from 7:00 to 19:00 on week-days, and
       Tolerance=1e-06),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/WeeklySchedule7to19.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WeeklySchedule7to19;

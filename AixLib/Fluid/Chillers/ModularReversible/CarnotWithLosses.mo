@@ -4,8 +4,7 @@ model CarnotWithLosses
   extends AixLib.Fluid.Chillers.ModularReversible.Modular(
     QHea_flow_nominal=PEle_nominal*refCyc.refCycChiHea.COP_nominal,
     redeclare model RefrigerantCycleChillerHeating =
-        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-        (
+        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
         PEle_nominal=PEle_nominal,
         redeclare
           AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.NoFrosting
@@ -15,8 +14,7 @@ model CarnotWithLosses
         TAppCon_nominal=TAppCon_nominal,
         TAppEva_nominal=TAppEva_nominal),
     redeclare model RefrigerantCycleChillerCooling =
-        AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-        (
+        AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
         redeclare
           AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.FunctionalIcingFactor
           iceFacCal(redeclare function icingFactor =
@@ -26,8 +24,7 @@ model CarnotWithLosses
         etaCarnot_nominal=etaCarnot_nominal),
     final allowDifferentDeviceIdentifiers=false,
     redeclare model RefrigerantCycleInertia =
-        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder
-        (
+        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder (
         final refIneFreConst=1/refIneTimCon,
         final nthOrd=1,
         initType=Modelica.Blocks.Types.Init.InitialOutput));
@@ -88,6 +85,6 @@ For more information, see
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
   AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end CarnotWithLosses;

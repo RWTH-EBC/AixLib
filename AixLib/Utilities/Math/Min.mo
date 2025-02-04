@@ -20,6 +20,6 @@ First implementation.
 </html>"), Icon(graphics={Text(
           extent={{-72,88},{72,-72}},
           textColor={0,0,255},
-          textString="min")}), 
+          textString="min")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Min;

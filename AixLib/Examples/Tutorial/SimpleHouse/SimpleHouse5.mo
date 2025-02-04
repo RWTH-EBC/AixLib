@@ -1,4 +1,4 @@
-within AixLib.Examples.Tutorial.SimpleHouse;
+﻿within AixLib.Examples.Tutorial.SimpleHouse;
 model SimpleHouse5 "Heating controller model"
   extends SimpleHouse4(final use_constantHeater=false);
 
@@ -82,6 +82,6 @@ src=\"modelica://AixLib/Resources/Images/Examples/Tutorial/SimpleHouse/result5.p
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Examples/Tutorial/SimpleHouse/SimpleHouse5.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end SimpleHouse5;

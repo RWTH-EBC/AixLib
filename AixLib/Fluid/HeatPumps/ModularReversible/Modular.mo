@@ -25,8 +25,8 @@ model Modular
       annotation(Dialog(group="Nominal condition - Cooling", enable=use_rev));
 
   replaceable model RefrigerantCycleHeatPumpHeating =
-    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle
-      (PEle_nominal=0)
+    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle (
+       PEle_nominal=0)
        constrainedby
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle(
        final useInHeaPum=true,
@@ -142,6 +142,6 @@ equation
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
   AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Modular;

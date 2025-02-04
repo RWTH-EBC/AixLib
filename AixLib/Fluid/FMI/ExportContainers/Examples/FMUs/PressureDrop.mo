@@ -8,8 +8,8 @@ block PressureDrop
 
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 100 "Pressure drop at nominal mass flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       100 "Pressure drop at nominal mass flow rate";
   annotation (
   Documentation(info="<html>
 <p>
@@ -44,6 +44,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           extent={{-100,14},{100,-16}},
           lineColor={0,0,0},
           fillColor={0,127,255},
-          fillPattern=FillPattern.HorizontalCylinder)}), 
+          fillPattern=FillPattern.HorizontalCylinder)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PressureDrop;

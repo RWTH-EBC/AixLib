@@ -42,6 +42,6 @@ May 11, 2013, by Michael Wetter:<br/>
 First version.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end HACoilInside;

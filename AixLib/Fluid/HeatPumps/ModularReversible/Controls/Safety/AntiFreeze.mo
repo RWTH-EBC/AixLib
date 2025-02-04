@@ -70,6 +70,6 @@ equation
 <h4>Assumptions</h4>
   This block does not check the evaporator inlet or condenser outlet temperatures
   because they are assumed to be always higher than the other side.
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end AntiFreeze;

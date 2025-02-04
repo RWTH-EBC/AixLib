@@ -17,7 +17,6 @@ protected
         1,
         {max(flowCharacteristics.phi[1], 1E-8)},
         {flowCharacteristics.phi[i] for i in 2:size(flowCharacteristics.phi, 1)})],
-
     final columns=2:2,
     final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Normalized mass flow rate for the given valve position under the assumption of a constant pressure"
@@ -191,6 +190,6 @@ First implementation.
         Line(
           points={{-56,-74},{-56,-96}}),
         Line(
-          points={{-68,-82},{-44,-82}})}), 
+          points={{-68,-82},{-44,-82}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayTable;

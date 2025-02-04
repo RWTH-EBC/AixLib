@@ -86,6 +86,6 @@ higher than I<sub>MAX</sub>. The cables are selected from
 <a href=\"modelica://AixLib.Electrical.Transmission.LowVoltageCables\">
 AixLib.Electrical.Transmission.LowVoltageCables</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end selectCable_low;

@@ -117,6 +117,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{120,
-            100}})), 
+            100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureDryBulb;

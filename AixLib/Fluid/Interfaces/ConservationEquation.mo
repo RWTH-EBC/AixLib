@@ -753,6 +753,6 @@ Implemented first version in <code>Buildings</code> library, based on model from
         Text(
           extent={{-155,-120},{145,-160}},
           textColor={0,0,255},
-          textString="%name")}), 
+          textString="%name")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConservationEquation;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
 partial record PipeDataULg "Base class for ULg experimental data"
   extends PipeDataBaseDefinition;
   parameter Modelica.Units.NonSI.Temperature_degC T_start_in=20
@@ -70,6 +70,6 @@ the fluid temperature (determined by EES software).
 </li>
 </ul>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PipeDataULg;

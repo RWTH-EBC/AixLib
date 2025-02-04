@@ -29,6 +29,6 @@ March 19, 2015, by Marco Bonvini:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PowerOutput;

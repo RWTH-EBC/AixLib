@@ -12,8 +12,8 @@ block Humidifier_u
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
 
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 0 "Pressure";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       0 "Pressure";
 
   parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal=0.01*0.005
     "Water mass flow rate at u=1, positive for humidification";
@@ -110,6 +110,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
         Text(
           extent={{-104,94},{-60,66}},
           textColor={0,0,255},
-          textString="u")}), 
+          textString="u")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Humidifier_u;

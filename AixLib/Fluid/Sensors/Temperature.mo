@@ -120,6 +120,6 @@ Implementation is based on <code>Modelica.Fluid</code>.
         Text(
           extent={{180,90},{60,40}},
           textColor={0,0,0},
-          textString=DynamicSelect("", String(T-273.15, format=".1f")))}), 
+          textString=DynamicSelect("", String(T-273.15, format=".1f")))}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Temperature;

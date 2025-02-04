@@ -26,8 +26,8 @@ model ThirdOrderStratifier
     "Enthalpy flow between the volumes" annotation (Placement(transformation(
           extent={{-140,-100},{-100,-60}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_a[nSeg + 2] fluidPort(redeclare each
-      package Medium = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a[nSeg + 2] fluidPort(redeclare each package
+              Medium = Medium)
     "Fluid port, needed to get pressure, temperature and species concentration"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
@@ -182,6 +182,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None,
-          lineColor={0,0,0})}), 
+          lineColor={0,0,0})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ThirdOrderStratifier;

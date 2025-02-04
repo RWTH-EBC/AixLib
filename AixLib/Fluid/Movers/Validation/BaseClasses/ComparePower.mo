@@ -9,10 +9,10 @@ model ComparePower
     "Performance records"
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal =
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=
     per.peak.V_flow * rho_default
     "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal =
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=
     per.peak.dp
     "Nominal pressure drop";
   final parameter Modelica.Units.SI.Density rho_default=
@@ -121,6 +121,6 @@ First implementation. This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1880\">IBPSA, #1880</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ComparePower;

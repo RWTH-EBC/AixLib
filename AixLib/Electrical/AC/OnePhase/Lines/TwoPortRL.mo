@@ -99,6 +99,6 @@ August 5, 2014, by Marco Bonvini:<br/>
 Revised model and documentation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortRL;

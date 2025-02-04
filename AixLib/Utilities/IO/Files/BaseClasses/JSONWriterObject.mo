@@ -62,6 +62,6 @@ April 15 2019, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end JSONWriterObject;

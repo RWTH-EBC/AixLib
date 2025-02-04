@@ -89,7 +89,6 @@ block LimPID
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Utilities.Math.IntegratorWithReset I(
     final reset=if reset == AixLib.Types.Reset.Disabled then reset else AixLib.Types.Reset.Input,
-
     final y_reset=y_reset,
     final k=unitTime/Ti,
     final y_start=xi_start,
@@ -537,6 +536,6 @@ First implementation.
           visible=strict,
           points={{30,60},{81,60}},
           color={255,0,0},
-          smooth=Smooth.None)}), 
+          smooth=Smooth.None)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end LimPID;

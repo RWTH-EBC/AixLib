@@ -3,8 +3,8 @@ model ConstantCarnotEffectiveness
   "Validation case for modular Carnot approach"
   extends BaseClasses.PartialModularComparison(heaPum(redeclare model
         RefrigerantCycleHeatPumpHeating =
-          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-          (etaCarnot_nominal=etaCarnot_nominal)));
+          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
+           etaCarnot_nominal=etaCarnot_nominal)));
   extends Modelica.Icons.Example;
 
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
@@ -22,6 +22,6 @@ First implementation.
 Validation case for <a href=\"modelica://AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness\">
 AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConstantCarnotEffectiveness;

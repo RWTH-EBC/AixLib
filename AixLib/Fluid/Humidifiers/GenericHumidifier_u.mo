@@ -49,9 +49,9 @@ model GenericHumidifier_u
     annotation (Placement(transformation(extent={{-100,-104},{-80,-84}})));
   Modelica.Blocks.Routing.RealPassThrough Tsteam if steamHumidifier
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y = mWat_flow_nominal)  annotation(
+  Modelica.Blocks.Sources.RealExpression realExpression(y = mWat_flow_nominal)  annotation (
     Placement(visible = true, transformation(origin = {-62, 32}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Product product annotation(
+  Modelica.Blocks.Math.Product product annotation (
     Placement(visible = true, transformation(origin = {-20, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 protected
   Modelica.Blocks.Interfaces.RealInput Tsteam_intern;

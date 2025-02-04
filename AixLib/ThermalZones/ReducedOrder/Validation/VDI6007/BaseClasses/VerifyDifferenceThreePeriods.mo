@@ -121,6 +121,6 @@ June 29, 2016, by Moritz Lauster:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end VerifyDifferenceThreePeriods;

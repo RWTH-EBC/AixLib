@@ -215,6 +215,6 @@ First implementation.
         "Simulate and plot"),
     experiment(Tolerance=1e-06, StopTime=86400),
     Diagram(coordinateSystem(extent={{-100,-120},{100,120}})),
-    Icon(coordinateSystem(extent={{-100,-120},{100,120}})), 
+    Icon(coordinateSystem(extent={{-100,-120},{100,120}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ExtremeAmbientConditions;

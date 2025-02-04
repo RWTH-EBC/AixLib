@@ -159,6 +159,6 @@ First implementation.
         textColor={0,0,0},
         textString=DynamicSelect("",String(y,
           leftJustified=false,
-          significantDigits=3)))}), 
+          significantDigits=3)))}),
    __Dymola_LockedEditing="Model from IBPSA");
 end CollectorPump;

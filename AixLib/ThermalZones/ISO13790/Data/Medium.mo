@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ISO13790.Data;
-record Medium = ISO13790.Data.Generic(
+record Medium = ISO13790.Data.Generic (
     heaC=165000,
     facMas=2.5) "Medium"
      annotation (
@@ -15,5 +15,5 @@ info="<html>
 <p>
 Internal heat capacity per unit area of the floor for medium buildings.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

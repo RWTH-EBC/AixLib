@@ -232,6 +232,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           origin={-4,-58},
-          rotation=270)}), 
+          rotation=270)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end AirToOutlet;
