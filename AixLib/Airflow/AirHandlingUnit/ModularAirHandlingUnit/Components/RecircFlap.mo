@@ -2,135 +2,134 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model RecircFlap "model for recirculating flap"
 
   // parameters
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.Units.SI.Density rho_air = 1.2 "Density of air";
-  parameter Boolean exponential = false "= true for exponential opening of flap";
-
-  // variables
-  Modelica.Units.SI.SpecificHeatCapacity cp_airInOda "specific heat capacity of incoming outdoor air";
-  Modelica.Units.SI.SpecificHeatCapacity cp_airInEta "specific heat capacity of incoming exhaust air";
-
-  Real splitFactor "factor that describes portion of exhaust air, that is mixed into the outdoor air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
+    "specific heat capacity of dry air"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpSteam = 1860
+    "specific heat capacity of steam"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Density rhoAir = 1.2
+    "Density of air"
+    annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
+  parameter Modelica.Units.SI.PressureDifference dp_nominal
+    "pressure drop at nominal mass flow rate"
+    annotation(Dialog(group="Nominal conditions"));
 
   replaceable model PartialPressureDrop =
       Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);
 
-      PartialPressureDrop partialPressureDrop(m_flow = m_flow_airInOda,
-      rho = rho_air);
+  PartialPressureDrop partialPressureDrop(
+    final m_flow=mAirInOda_flow,
+    final rho=rhoAir,
+    final m_flow_nominal = m_flow_nominal,
+    final dp_nominal = dp_nominal);
 
-      PartialPressureDrop partialPressureDrop2(m_flow = m_flow_airInEta,
-      rho = rho_air);
+  PartialPressureDrop partialPressureDrop2(
+    final m_flow=mAirInEta_flow,
+    final rho=rhoAir,
+    final m_flow_nominal = m_flow_nominal,
+    final dp_nominal = dp_nominal);
 
-  Modelica.Blocks.Interfaces.RealInput flapPosition "position of recirculating flap" annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealInput flapPos "position of recirculating flap"
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-40,-110}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-100})));
-  Modelica.Blocks.Interfaces.RealInput m_flow_airInEta(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of incoming exhaust air"
-    annotation (Placement(transformation(extent={{140,60},{100,100}}),
-        iconTransformation(extent={{120,70},{100,90}})));
-  Modelica.Blocks.Interfaces.RealInput T_airInEta(
-    final quantity = "ThermodynamicTemperature",
-    final unit = "K",
-    displayUnit = "degC")
-    "mass flow rate of incoming exhaust air"
-    annotation (Placement(transformation(extent={{140,30},{100,70}}),
-        iconTransformation(extent={{120,40},{100,60}})));
-  Modelica.Blocks.Interfaces.RealInput X_airInEta(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "mass flow rate of incoming exhaust air"
-    annotation (Placement(transformation(extent={{140,0},{100,40}}),
-        iconTransformation(extent={{120,10},{100,30}})));
-  Modelica.Blocks.Interfaces.RealOutput m_flow_airOutEta(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of outgoing exhaust air"
+  Modelica.Blocks.Interfaces.RealInput mAirInEta_flow(final quantity="MassFlowRate",
+      final unit="kg/s") "mass flow rate of incoming exhaust air" annotation (
+      Placement(transformation(extent={{140,60},{100,100}}), iconTransformation(
+          extent={{120,70},{100,90}})));
+  Modelica.Blocks.Interfaces.RealInput TAirInEta(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "mass flow rate of incoming exhaust air" annotation (
+      Placement(transformation(extent={{140,30},{100,70}}), iconTransformation(
+          extent={{120,40},{100,60}})));
+  Modelica.Blocks.Interfaces.RealInput XAirInEta(final quantity="MassFraction",
+      final unit="kg/kg") "mass flow rate of incoming exhaust air" annotation (
+      Placement(transformation(extent={{140,0},{100,40}}), iconTransformation(
+          extent={{120,10},{100,30}})));
+  Modelica.Blocks.Interfaces.RealOutput mAirOutEta_flow(final quantity="MassFlowRate",
+      final unit="kg/s") "mass flow rate of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,70},{-120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput T_airOutEta(
-    final quantity = "ThermodynamicTemperature",
-    final unit = "K",
-    displayUnit = "degC")
-    "temperature of outgoing exhaust air"
+  Modelica.Blocks.Interfaces.RealOutput TAirOutEta(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "temperature of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,42},{-120,62}})));
-  Modelica.Blocks.Interfaces.RealOutput X_airOutEta(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "absolute humidity of outgoing exhaust air"
+  Modelica.Blocks.Interfaces.RealOutput XAirOutEta(final quantity="MassFraction",
+      final unit="kg/kg") "absolute humidity of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,10},{-120,30}})));
- Modelica.Blocks.Interfaces.RealInput m_flow_airInOda(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of incoming outdoor air" annotation (Placement(
-        transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(
-          extent={{-120,-90},{-100,-70}})));
-  Modelica.Blocks.Interfaces.RealInput T_airInOda(
-    final quantity = "ThermodynamicTemperature",
-    final unit = "K",
-    displayUnit = "degC")
-    "Temperature of incoming outdoor air" annotation (Placement(transformation(
-          extent={{-140,-70},{-100,-30}}), iconTransformation(extent={{-120,-60},
-            {-100,-40}})));
-  Modelica.Blocks.Interfaces.RealInput X_airInOda(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "absolute humidity of incoming outdoor air" annotation (Placement(
-        transformation(extent={{-140,-40},{-100,0}}), iconTransformation(extent=
-           {{-120,-30},{-100,-10}})));
-  Modelica.Blocks.Interfaces.RealOutput m_flow_airOutOda(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of outgoing mixed air"
+ Modelica.Blocks.Interfaces.RealInput mAirInOda_flow(final quantity="MassFlowRate",
+      final unit="kg/s") "mass flow rate of incoming outdoor air" annotation (
+      Placement(transformation(extent={{-140,-100},{-100,-60}}),
+        iconTransformation(extent={{-120,-90},{-100,-70}})));
+  Modelica.Blocks.Interfaces.RealInput TAirInOda(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Temperature of incoming outdoor air" annotation (
+      Placement(transformation(extent={{-140,-70},{-100,-30}}),
+        iconTransformation(extent={{-120,-60},{-100,-40}})));
+  Modelica.Blocks.Interfaces.RealInput XAirInOda(final quantity="MassFraction",
+      final unit="kg/kg") "absolute humidity of incoming outdoor air"
+    annotation (Placement(transformation(extent={{-140,-40},{-100,0}}),
+        iconTransformation(extent={{-120,-30},{-100,-10}})));
+  Modelica.Blocks.Interfaces.RealOutput mAirOutOda_flow(final quantity="MassFlowRate",
+      final unit="kg/s") "mass flow rate of outgoing mixed air"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
-  Modelica.Blocks.Interfaces.RealOutput T_airOutOda(
-    final quantity = "ThermodynamicTemperature",
-    final unit = "K",
-    displayUnit = "degC")
-    "temperature of outgoing mixed air" annotation (Placement(transformation(extent={{100,-60},
-            {120,-40}}),        iconTransformation(extent={{100,-60},{120,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput X_airOutOda(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "absolute humidity of outgoing mixed air" annotation (Placement(transformation(
-          extent={{100,-30},{120,-10}}),
-                                       iconTransformation(extent={{100,-30},{
-            120,-10}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirOutOda(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "temperature of outgoing mixed air" annotation (
+      Placement(transformation(extent={{100,-60},{120,-40}}),
+        iconTransformation(extent={{100,-60},{120,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput XAirOutOda(final quantity="MassFraction",
+      final unit="kg/kg") "absolute humidity of outgoing mixed air" annotation
+    (Placement(transformation(extent={{100,-30},{120,-10}}), iconTransformation(
+          extent={{100,-30},{120,-10}})));
 
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+protected
+  // variables
+  Modelica.Units.SI.SpecificHeatCapacity cpAirInOda
+    "specific heat capacity of incoming outdoor air";
+  Modelica.Units.SI.SpecificHeatCapacity cpAirInEta
+    "specific heat capacity of incoming exhaust air";
+
+  Real splitFactor
+    "factor that describes portion of exhaust air, that is mixed into the outdoor air";
 equation
 
   //mass balances
-  m_flow_airInOda + m_flow_airInEta * splitFactor - m_flow_airOutOda = 0;
-  m_flow_airInEta * (1 - splitFactor) - m_flow_airOutEta = 0;
+  mAirInOda_flow + mAirInEta_flow * splitFactor - mAirOutOda_flow = 0;
+  mAirInEta_flow * (1 - splitFactor) - mAirOutEta_flow = 0;
 
   //mass balance moisture
-   X_airInEta = X_airOutEta;
-   X_airOutOda = (m_flow_airInOda * X_airInOda + m_flow_airInEta * X_airInEta * splitFactor) / m_flow_airOutOda;
+  XAirInEta = XAirOutEta;
+  XAirOutOda = (mAirInOda_flow * XAirInOda
+    + mAirInEta_flow * XAirInEta * splitFactor) / mAirOutOda_flow;
 
    //energy balance
-   T_airInEta = T_airOutEta;
-   T_airOutOda = (m_flow_airInOda * cp_airInOda * T_airInOda + m_flow_airInEta * cp_airInEta * T_airInEta * splitFactor) / (m_flow_airInOda * cp_airInOda + m_flow_airInEta * cp_airInEta * splitFactor);
+  TAirInEta = TAirOutEta;
+  TAirOutOda = (mAirInOda_flow * cpAirInOda * TAirInOda
+    + mAirInEta_flow * cpAirInEta * TAirInEta * splitFactor)
+    /(mAirInOda_flow * cpAirInOda + mAirInEta_flow * cpAirInEta * splitFactor);
 
    //specific heat capacities
-   cp_airInOda = cp_steam * X_airInOda + cp_air * (1 - X_airInOda);
-   cp_airInEta = cp_steam * X_airInEta + cp_air * (1 - X_airInEta);
+   cpAirInOda =cpSteam*XAirInOda + cpAir*(1 - XAirInOda);
+   cpAirInEta =cpSteam*XAirInEta + cpAir*(1 - XAirInEta);
 
    //splitFactor
-   if exponential == true then
-     splitFactor = 1 - exp(flapPosition); // ToDo: add realistic function!!!
-   else
-     splitFactor = flapPosition;
-   end if;
+   splitFactor =flapPos;
 
-    partialPressureDrop.dp + partialPressureDrop2.dp = dp;
+   partialPressureDrop.dp + partialPressureDrop2.dp = dp;
 
 annotation (
     preferredView="info",
