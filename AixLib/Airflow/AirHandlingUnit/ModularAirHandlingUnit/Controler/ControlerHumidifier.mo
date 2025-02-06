@@ -39,6 +39,23 @@ equation
 
   connect(X_intern, XHumSet);
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{20,100},{100,0},{20,-100}},
+          color={95,95,95},
+          thickness=0.5),
+        Text(
+          extent={{-90,20},{56,-20}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Control")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerHumidifier;

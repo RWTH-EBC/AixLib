@@ -12,8 +12,8 @@ model ControlerCooler
           extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-20})));
-  Modelica.Blocks.Interfaces.RealInput Xout(start=0.01)
-    "measured value for absolute humidity at cooler outlet" annotation (
+  Modelica.Blocks.Interfaces.RealInput XIn(start=0.01)
+    "measured value for absolute humidity at cooler inlet" annotation (
       Placement(transformation(extent={{-140,-80},{-100,-40}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
@@ -49,9 +49,8 @@ equation
     annotation (Line(points={{-37,4},{-31,4}},color={0,0,127}));
   connect(dewPoi.T, min_X.u1) annotation (Line(points={{-9,4},{10,4}},
                     color={0,0,127}));
-  connect(Xout, greater.u1) annotation (Line(points={{-120,-60},{-88,-60},{-88,
-          80},{-10,80}},
-                 color={0,0,127}));
+  connect(XIn, greater.u1) annotation (Line(points={{-120,-60},{-88,-60},{-88,
+          80},{-10,80}}, color={0,0,127}));
   connect(xSupSet, greater.u2) annotation (Line(points={{-120,60},{-16,60},{-16,
           72},{-10,72}}, color={0,0,127}));
   connect(greater.y, switch1.u2) annotation (Line(points={{13,80},{50,80},{50,
@@ -63,6 +62,23 @@ equation
           14},{56,14}}, color={0,0,127}));
   connect(switch1.y, TcoolerSet) annotation (Line(points={{79,22},{82,22},{82,0},
           {110,0}},        color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{20,100},{100,0},{20,-100}},
+          color={95,95,95},
+          thickness=0.5),
+        Text(
+          extent={{-90,20},{56,-20}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Control")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerCooler;
