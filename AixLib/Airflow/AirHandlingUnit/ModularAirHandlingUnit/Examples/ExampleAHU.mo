@@ -79,5 +79,6 @@ equation
     experiment(
       StopTime=31536000,
       Interval=3600,
+      Tolerance=1e-04,
       __Dymola_Algorithm="Dassl"));
 end ExampleAHU;

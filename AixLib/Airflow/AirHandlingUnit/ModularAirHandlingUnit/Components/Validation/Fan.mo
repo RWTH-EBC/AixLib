@@ -93,5 +93,8 @@ equation
   annotation (experiment(
       StopTime=14400,
       Interval=5,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-04,
+      __Dymola_Algorithm="Dassl"), Documentation(info="<html>
+<p>This example compares the fan component to the mover model in the Fluid-package. </p>
+</html>"));
 end Fan;

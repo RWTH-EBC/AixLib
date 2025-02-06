@@ -123,5 +123,6 @@ equation
     experiment(
       StopTime=86400,
       Interval=1,
+      Tolerance=1e-04,
       __Dymola_Algorithm="Dassl"));
 end ComparisonToAHU;

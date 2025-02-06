@@ -172,6 +172,7 @@ equation
   annotation (experiment(
       StopTime=14400,
       Interval=5,
+      Tolerance=1e-04,
       __Dymola_Algorithm="Dassl"), Documentation(info="<html>
 <p>This example compares the steam humidifier component to the steam humidifier models in the <b>Fluid</b>-package. </p>
 <p><br>The results show good agreement with small differences that can be explained the following way. </p>

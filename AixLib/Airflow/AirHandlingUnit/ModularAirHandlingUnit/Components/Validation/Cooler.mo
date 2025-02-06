@@ -108,5 +108,6 @@ equation
   annotation (experiment(
       StopTime=14400,
       Interval=5,
+      Tolerance=1e-04,
       __Dymola_Algorithm="Dassl"));
 end Cooler;
