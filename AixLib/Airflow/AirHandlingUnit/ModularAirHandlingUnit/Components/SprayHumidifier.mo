@@ -1,26 +1,26 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
   parameter Real k = 500 "exponent for humidification degree";
 
   // Variables
-  Modelica.Units.SI.SpecificEnthalpy h_watIn "specific enthalpy of incoming water";
+  Modelica.Units.SI.SpecificEnthalpy hWatIn "specific enthalpy of incoming water";
 
-  Real eta_B "humidification degree";
+  Real etaHum "humidification degree";
 
 
-  Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
+  Modelica.Blocks.Interfaces.RealOutput Q_flow "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
 
-  Modelica.Blocks.Interfaces.RealOutput mWat "mass flow rate water"
+  Modelica.Blocks.Interfaces.RealOutput mWat_flow "mass flow rate water"
     annotation (Placement(transformation(extent={{100,-64},{120,-44}})));
   Utilities.Psychrometrics.SaturationPressure pSat
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   Utilities.Psychrometrics.X_pW humRat(use_p_in=false)
     annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 protected
-  Real WLN "water to air ratio";
+  Real watToAirRat "water to air ratio";
   Modelica.Units.SI.Temperature T_intern "internal outlet temperature";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=T_intern)
@@ -32,42 +32,45 @@ protected
   Modelica.Blocks.Sources.RealExpression realExpression1(y=X_intern)
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 equation
-  T_intern = T_airOut;
-  m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
+  T_intern =TAirOut;
+  mDryAirIn_flow * (1 + XAirIn) = mAirIn_flow;
 
   // mass balance
-  m_flow_airIn + m_wat_flow_intern * eta_B - m_flow_airOut = 0;
-  m_flow_dryairIn * X_airIn + m_wat_flow_intern * eta_B - m_flow_dryairOut * X_intern = 0;
+  mAirIn_flow + mWat_flow_intern * etaHum - mAirOut_flow = 0;
+  mDryAirIn_flow * XAirIn + mWat_flow_intern * etaHum
+    - mDryAirOut_flow * X_intern = 0;
 
   if not use_X_set then
     // water to air ratio
-    WLN = m_wat_flow_intern/m_flow_airIn;
+    watToAirRat =mWat_flow_intern/mAirIn_flow;
     // humidification degree
-    eta_B = 1 - exp(-k * WLN);
+    etaHum = 1 - exp(-k * watToAirRat);
   else
-    WLN=0;
-    eta_B = 1;
-    X_intern = X_airOut;
+    watToAirRat=0;
+    etaHum = 1;
+    X_intern =XAirOut;
   end if;
-  mWat = m_wat_flow_intern;
+  mWat_flow = mWat_flow_intern;
 
   // energy balance
-  m_flow_dryairIn * h_airIn + m_wat_flow_intern * eta_B * h_watIn - m_flow_dryairOut * h_airOut = 0;
+  mDryAirIn_flow * hAirIn + mWat_flow_intern * etaHum * hWatIn
+    - mDryAirOut_flow * hAirOut = 0;
 
   // heat flow
-  Q = m_wat_flow_intern * eta_B * h_watIn;
+  Q_flow = mWat_flow_intern*etaHum*hWatIn;
 
   // specific enthalpies
-  h_watIn = cp_water * (T_watIn - 273.15);
+  hWatIn = cpWater * (TWatIn - 273.15);
 
 
 
-  assert(X_airOut < humRat.X_w,
+  assert(
+    XAirOut < humRat.X_w,
     "saturation exceeded with given set value. Humidification is reduced.",
     AssertionLevel.warning);
 
-  connect(min.y, X_airOut);
-  connect(min1.y, X_airOut);
+  connect(min.y, XAirOut);
+  connect(min1.y, XAirOut);
   connect(pSat.pSat, humRat.p_w)
     annotation (Line(points={{-39,40},{-31,40}}, color={0,0,127}));
   connect(realExpression.y, pSat.TSat) annotation (Line(points={{-57,4},{-54,4},
@@ -81,13 +84,6 @@ equation
   connect(realExpression1.y, min1.u2)
     annotation (Line(points={{1,2},{8,2},{8,4},{18,4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Text(
-          extent={{-90,84},{-14,66}},
-          lineColor={0,0,0},
-          lineThickness=1,
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid,
-          textString="%name"),
         Polygon(
           points={{-100,-68},{-94,-66},{-84,-64},{-66,-66},{-54,-64},{-34,-68},{
               -18,-64},{4,-68},{26,-66},{40,-68},{56,-66},{66,-68},{82,-68},{90,
@@ -120,11 +116,7 @@ equation
           points={{82,94},{82,-94}},
           color={0,0,0},
           thickness=0.5,
-          pattern=LinePattern.Dash),
-        Rectangle(
-          extent={{-100,94},{100,-94}},
-          lineColor={0,0,0},
-          lineThickness=0.5)}),                                  Diagram(
+          pattern=LinePattern.Dash)}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html><p>
   This model provides a idealized spray humidifier. The output air

@@ -9,27 +9,27 @@ model SteamHumidifier
       tab="Advanced",
       group="Vaporization"));
 
-  Modelica.Units.SI.SpecificEnthalpy h_steam "specific enthalpy of steam";
+  Modelica.Units.SI.SpecificEnthalpy hSteam "specific enthalpy of steam";
 
-  Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
+  Modelica.Blocks.Interfaces.RealOutput Q_flow "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
 equation
 
-  X_airOut = X_intern;
+  XAirOut = X_intern;
 
   //mass balances
-  m_flow_airIn + m_wat_flow_intern - m_flow_airOut = 0;
-  m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
+  mAirIn_flow + mWat_flow_intern - mAirOut_flow = 0;
+  mDryAirIn_flow * (1 + XAirIn) = mAirIn_flow;
 
   //mass balance moisture
-  m_flow_dryairIn * X_airIn + m_wat_flow_intern - m_flow_dryairOut * X_intern = 0;
+  mDryAirIn_flow * XAirIn + mWat_flow_intern - mDryAirOut_flow * X_intern = 0;
 
   //heat flows
-  Q_flow = m_wat_flow_intern * h_steam;
-  Q = Q_flow;
+  Qb_flow = mWat_flow_intern * hSteam;
+  Q_flow = Qb_flow;
 
   // specific enthalpies
-   h_steam = cp_water * (373.15 - TWatIn) + cp_steam * (TSteam - 373.15) + r100;
+   hSteam = cpWater * (373.15 - TWatIn) + cpSteam * (TSteam - 373.15) + r100;
 
    connect(max.y,X_intern);
 

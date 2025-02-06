@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Heater
   "Idealized model for heater containing heat capacity of heat exchanger"
   extends Components.BaseClasses.PartialHeater;
@@ -6,15 +6,9 @@ model Heater
 equation
 
   // mass balance moisture
-  X_airIn = X_airOut;
+  XAirIn = XAirOut;
 
-  annotation (Icon(graphics={Line(
-          points={{-76,-58},{-76,-74}},
-          color={0,0,0},
-          thickness=1), Line(
-          points={{-84,-66},{-68,-66}},
-          color={0,0,0},
-          thickness=1)}), Documentation(info="<html><p>
+  annotation (            Documentation(info="<html><p>
   This model provides a idealized heater. The model considers the
   convective heat transfer from the heat transfer surface in the air
   stream. Moreover the heat capacity of the heating surface and the

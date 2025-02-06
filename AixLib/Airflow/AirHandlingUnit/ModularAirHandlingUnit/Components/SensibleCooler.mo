@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SensibleCooler
   "Idealized model for cooler (not considering condensation)"
   extends BaseClasses.PartialCooler;
@@ -6,15 +6,9 @@ model SensibleCooler
 equation
 
   // mass balance moisture
-  X_airIn = X_airOut;
+  XAirIn = XAirOut;
 
-  annotation (Icon(graphics={Line(
-          points={{-90,-42},{-80,-42}},
-          color={0,0,0},
-          thickness=1), Line(
-          points={{100,94},{-100,-94}},
-          color={0,0,0},
-          thickness=0.5)}), Documentation(info="<html><p>
+  annotation (              Documentation(info="<html><p>
   This model provides a idealized sensible cooler. The model considers
   the convective heat transfer from the heat transfer surface in the
   air stream. Moreover the heat capacity of the heating surface and the
