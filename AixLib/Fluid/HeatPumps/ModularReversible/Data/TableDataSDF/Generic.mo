@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF;
 record Generic
   "Partial n-dimensional data of refrigerant machines"
   parameter String devIde "Name of the device";
-  parameter Integer nDim(min=1) "Number of table dimensions";
+  parameter Integer nDim(min=2) "Number of table dimensions";
   parameter String filename "File name of sdf table data"
     annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
   parameter Real facGai[nDim]=fill(1, nDim)
