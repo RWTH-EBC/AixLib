@@ -1,8 +1,9 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation;
 model SteamHumidifier
   extends Modelica.Icons.Example;
-  Fluid.Sources.Boundary_pT sin(redeclare package Medium = AixLib.Media.Air,
-      nPorts=1)
+  Fluid.Sources.Boundary_pT sin(
+    redeclare package Medium = AixLib.Media.Air,
+    nPorts=1)
     annotation (Placement(transformation(extent={{110,-70},{90,-50}})));
   Fluid.Sources.MassFlowSource_T sou(
     redeclare package Medium = AixLib.Media.Air,
