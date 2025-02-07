@@ -4,8 +4,8 @@ record GenericVCLibPy
     final devIde="VCLib_" + flowsheet + "_" + refrigerant,
     final dataUnitQCon_flow="W",
     final datasetQCon_flow="/" + flowsheet + "/" + refrigerant + "/Q_con_outer",
-    final use_TConOutForTab=false,
-    final use_TEvaOutForTab=false,
+    use_TConOutForTab=false,
+    use_TEvaOutForTab=false,
     final dataUnitPEle="W",
     final datasetPEle="/" + flowsheet + "/" + refrigerant + "/P_el",
     final facGai=fill(1, nDim));
