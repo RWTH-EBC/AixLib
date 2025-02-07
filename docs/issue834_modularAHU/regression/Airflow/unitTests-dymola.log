@@ -1,36 +1,10 @@
 Regression tests are only run for the following package:
   AixLib.Airflow
-*** Error: AixLib_Airflow_AirHandlingUnit_ModularAirHandlingUnit_Components_Validation_SteamHumidifier.txt: Errors during result verification.
-           Absolute error = 8.378e+02 at t = 0.0 for hum1.Q_flow
-           Absolute error = 8.511e+02 at t = 0.0 for resPow1.y
-           Absolute error = 5.434e-02 at t = 3888.0 for resT1.y
-*** Warning: AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SteamHumidifier: Translation statistics for simulation and results changed for number of continuous time states.
- Old = 6
- New = 8
-*** Error: AixLib_Airflow_AirHandlingUnit_ModularAirHandlingUnit_Components_Validation_Heater.txt: Errors during result verification.
-           Absolute error = 3.301e-03 at t = 5472.0 for resT.y
-*** Warning: AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.Heater: Translation statistics for simulation and results changed for number of continuous time states.
- Old = 4
- New = 5
-*** Error: AixLib_Airflow_AirHandlingUnit_ModularAirHandlingUnit_Components_Validation_Cooler.txt: Errors during result verification.
-           Absolute error = 1.432e+04 at t = 0.0 for preOut.Q_flow
-           Absolute error = 1.434e+04 at t = 0.0 for resPow.y
-*** Warning: AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.Cooler: Translation statistics for simulation and results changed for number of continuous time states.
- Old = 2
- New = 4
-*** Error: AixLib_Airflow_AirHandlingUnit_ModularAirHandlingUnit_Components_Validation_SprayHumidifier.txt: Errors during result verification.
-           Absolute error = 1.000e-03 at t = 0.0 for hum1.mWat_flow
-           Absolute error = 1.000e-03 at t = 0.0 for resMas1.y
-           Absolute error = 5.434e-02 at t = 3888.0 for resT1.y
-*** Warning: AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SprayHumidifier: Translation statistics for simulation and results changed for number of continuous time states.
- Old = 6
- New = 8
-*** Warning: AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SensibleCooler: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
- Old = 4
- New = 5
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 5 warnings and 4 errors.
+Script that runs unit tests had 0 warnings and 0 errors.
+
+Unit tests completed successfully.
 
