@@ -1,0 +1,29 @@
+simulateModel( "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU", startTime=0, method="Dassl", tolerance=1e-4, 
+			   stopTime=86400, numberOfIntervals=0, outputInterval=1, resultFile="ComparisonToAHU");
+createPlot(id=1, 
+ position={0, 0, 1604, 578}, 
+ y={"ahu.QflowH", "modularAHU.QHea_flow"}, 
+ range={0.0, 90000.0, -200000.0, 600000.0}, 
+ grid=true, 
+ subPlot=101, 
+ colors={{28,108,200}, {238,46,47}}, 
+ timeUnit="s", 
+ displayUnits={"W", "W"});
+createPlot(id=1, 
+ position={0, 0, 1604, 578},
+ y={"ahu.QflowC", "abs1.y"}, 
+ range={0.0, 90000.0, -500000.0, 1000000.0}, 
+ grid=true, 
+ subPlot=102, 
+ colors={{28,108,200}, {238,46,47}}, 
+ timeUnit="s", 
+ displayUnits={"W", ""});
+createPlot(id=1, 
+ position={0, 0, 1604, 578}, 
+ y={"ahu.Pel", "modularAHU.Pel"}, 
+ range={0.0, 90000.0, -200000.0, 800000.0}, 
+ grid=true, 
+ subPlot=103, 
+ colors={{28,108,200}, {238,46,47}}, 
+ timeUnit="s", displayUnits={"W", "W"});
+
