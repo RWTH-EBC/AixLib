@@ -11,6 +11,7 @@ model Fan
     annotation (Placement(transformation(extent={{100,-70},{80,-50}})));
   Fluid.Movers.FlowControlled_dp mov(
     redeclare package Medium = AixLib.Media.Air "Moist air",
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare AixLib.Fluid.Movers.Data.Generic per(efficiency(eta={1})),
     m_flow_nominal=4500/3600*1.2,
     dp_nominal=800)

@@ -13,6 +13,7 @@ model Heater
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600*1.2,
     dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     Q_flow_nominal=8000)
     annotation (Placement(transformation(extent={{-4,-70},{16,-50}})));
   Fluid.Sources.Boundary_pT sin(redeclare package Medium = AixLib.Media.Air,
@@ -60,7 +61,8 @@ model Heater
   Fluid.HeatExchangers.Heater_T heaFlu1(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600*1.2,
-    dp_nominal=20)
+    dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Media.Air,
       m_flow_nominal=4500/3600*1.2)

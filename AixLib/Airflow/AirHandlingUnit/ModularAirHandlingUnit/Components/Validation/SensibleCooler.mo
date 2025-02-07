@@ -13,6 +13,7 @@ model SensibleCooler
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600*1.2,
     dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     Q_flow_nominal=-8000)
     annotation (Placement(transformation(extent={{-4,-70},{16,-50}})));
   Fluid.Sources.Boundary_pT sin(redeclare package Medium = AixLib.Media.Air,
@@ -75,7 +76,8 @@ model SensibleCooler
   Fluid.HeatExchangers.SensibleCooler_T cooFlu1(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600,
-    dp_nominal=20)
+    dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-4,30},{16,50}})));
 equation
   connect(sou.ports[1], cooFlu.port_a) annotation (Line(points={{-28,-60},{-16,

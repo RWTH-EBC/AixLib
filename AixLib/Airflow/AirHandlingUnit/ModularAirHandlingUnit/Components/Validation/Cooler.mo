@@ -51,7 +51,8 @@ model Cooler
   Fluid.HeatExchangers.PrescribedOutlet preOut(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600*1.2,
-    dp_nominal=20)
+    dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-6,-70},{14,-50}})));
   Controler.ControlerCooler controlerCooler(activeDehumidifying=true)
     annotation (Placement(transformation(extent={{-28,30},{-8,50}})));

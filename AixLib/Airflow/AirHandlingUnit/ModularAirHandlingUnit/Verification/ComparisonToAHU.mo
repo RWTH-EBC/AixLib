@@ -49,7 +49,13 @@ model ComparisonToAHU
     heating=true,
     heatRecovery=true,
     usePhiSet=true,
-    limPhiOda=false)
+    limPhiOda=false,
+    m_flow_nominal=100*1.2,
+    dpHrs_nominal(displayUnit="Pa") = 120,
+    dpCoo_nominal(displayUnit="Pa") = 80,
+    dpHea_nominal(displayUnit="Pa") = 40,
+    dpFanOda_nominal(displayUnit="Pa") = 800,
+    dpFanEta_nominal(displayUnit="Pa") = 800)
     annotation (Placement(transformation(extent={{-54,-68},{16,-30}})));
   Modelica.Blocks.Math.Abs abs1
     annotation (Placement(transformation(extent={{-46,-100},{-66,-80}})));

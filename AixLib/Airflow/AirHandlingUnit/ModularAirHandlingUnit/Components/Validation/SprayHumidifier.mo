@@ -58,6 +58,7 @@ model SprayHumidifier
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600*1.2,
     dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     mWat_flow_nominal=2.5/3600,
     TLiqWat_in=293.15,
     steamHumidifier=false)
@@ -80,7 +81,8 @@ model SprayHumidifier
   Fluid.Humidifiers.SprayAirWasher_X hum1(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=4500/3600,
-    dp_nominal=20)
+    dp_nominal=20,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{8,30},{28,50}})));
   Fluid.Sensors.MassFractionTwoPort senMasFra1(redeclare package Medium =
         Media.Air, m_flow_nominal=4500/3600*1.2)
