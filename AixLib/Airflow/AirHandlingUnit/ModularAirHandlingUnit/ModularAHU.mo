@@ -307,7 +307,7 @@ protected
   Modelica.Blocks.Interfaces.RealInput QHumIntern
     "internal connector for humidification power";
 
-  // PassTrhoughs
+  // PassTroughs
   Components.PassThrough passThroughHrs if not heatRecovery
     annotation (Placement(transformation(extent={{-94,-26},{-74,-6}})));
   Components.PassThrough passThroughCoo if not cooling and not dehumidifying

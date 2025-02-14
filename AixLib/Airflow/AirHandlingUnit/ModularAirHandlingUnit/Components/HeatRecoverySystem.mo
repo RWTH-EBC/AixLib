@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model HeatRecoverySystem
 
   parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
@@ -185,7 +185,7 @@ equation
   XAirInOda = XAirOutOda;
   XAirInEta = XAirOutEta;
 
-  // sepcific enthalpies
+  // specific enthalpies
   hAirInOda =cpAir*(TAirInOda - 273.15) + XAirInOda*(cpSteam*(TAirInOda - 273.15)
      + r0);
   hAirOutOda =cpAir*(TAirOutOda - 273.15) + XAirOutOda*(cpSteam*(TAirOutOda -

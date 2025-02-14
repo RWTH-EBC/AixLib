@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples;
-model ExampleAHU "Comparitive simulation with existing AHU model"
+model ExampleAHU "Comparative simulation with existing AHU model"
   extends Modelica.Icons.Example;
   ModularAHU modularAHU(
     humidifying=true,
