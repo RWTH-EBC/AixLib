@@ -1,0 +1,65 @@
+
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/Generic.mo
+1: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename "File name of sdf table data" annotation (Dialog(loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
+
+2: Name 'datasetPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetPEle "Dataset name for electrical power" annotation (Dialog(group="Electrical Power"));
+
+3: Name 'dataUnitPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitPEle "Data unit for electrical power" annotation (Dialog(group="Electrical Power"));
+
+4: Name 'scaleUnitsPEle' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: scale, Units. Affected line: parameter String scaleUnitsPEle[nDim] "Scale units for electrical power" annotation (Dialog(group="Electrical Power"));
+
+
+AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo
+1: Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
+
+2: Name 'multizone' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multizone. Affected line: AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone( buildingID=1, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, VAir=33500, ABuilding=8375, ASurTot=12744.27, numZones=6, zoneParam={DataBase.ThermalZones.SwimmingFacility.SwimmingHall(HeaterOn= true),DataBase.ThermalZones.SwimmingFacility.Entrance(HeaterOn=true), DataBase.ThermalZones.SwimmingFacility.Changing(HeaterOn=true), DataBase.ThermalZones.SwimmingFacility.Showers(HeaterOn=true), DataBase.ThermalZones.SwimmingFacility.Supervisory(HeaterOn=true), DataBase.ThermalZones.SwimmingFacility.Technichal(HeaterOn=true)}, use_C_flow=true, use_moisture_balance=true, internalGainsMode=3, use_pools_tot=true, heatAHU=true, coolAHU=true, dehuAHU=true, huAHU=true, BPFDehuAHU=0.2, HRS=false, sampleRateAHU=1800, effFanAHU_sup=0.7, effFanAHU_eta=0.7, effHRSAHU_enabled=0.8, effHRSAHU_disabled=0.2, zone( use_pools={true,false,false,false,false,false}, nPools={2,1,1,1,1,1}, poolWallParam={{ AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction(), AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()}, {AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{ AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{ AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{ AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()},{ AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()}}, poolParam={{AixLib.DataBase.Pools.SportPool(), AixLib.DataBase.Pools.ChildrensPool()},{ AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{ AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{ AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{ AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},{ AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()}}, ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(each der_T(fixed=true))), floorRC(thermCapExt(each der_T(fixed=true))), roofRC(thermCapExt(each der_T(fixed=true))))), redeclare package Medium = Medium, T_start=293.15, dpAHU_sup(displayUnit="Pa") = 800, dpAHU_eta(displayUnit="Pa") = 800) "Multizone" annotation (Placement(transformation(extent={{32,-8},{52,12}})));
+
+3: Name 'tableInternalGains' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Internal, Gains. Affected line: Modelica.Blocks.Sources.CombiTimeTable tableInternalGains( tableOnFile=true, extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, tableName="Internals", fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingFacility_6Zones.txt"), columns=2:19) "Profiles for internal gains" annotation (Placement(transformation(extent={{74,-42},{58,-26}})));
+
+4: Name 'prescribedHeatFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[6] "Radiative heat flow of additional internal gains" annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
+
+5: Name 'sine' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sine. Affected line: Modelica.Blocks.Sources.Sine sine( amplitude=500, f=1/86400, offset=500) "Sinusoidal excitation for additional internal gains" annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
+
+6: Name 'prescribedHeatFlow1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[6] "Convective heat flow of additional internal gains" annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
+
+7: Name 'replicator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: replicator. Affected line: Modelica.Blocks.Routing.Replicator replicator(nout=6) "Replicates sinusoidal excitation for numZones" annotation (Placement( transformation( extent={{-6,-6},{6,6}}, rotation=0, origin={-30,-54})));
+
+8: Name 'replicator1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: replicator. Affected line: Modelica.Blocks.Routing.Replicator replicator1(nout=6) "Replicates sinusoidal excitation for numZones" annotation (Placement( transformation( extent={{-6,-6},{6,6}}, rotation=0, origin={-30,-76})));
+
+9: Name 'tableAHU' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table. Affected line: Modelica.Blocks.Sources.CombiTimeTable tableAHU( tableOnFile=true, extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, tableName="AHU", columns=2:5, fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_SwimmingFacility_6Zones.txt")) "Boundary conditions for air handling unit" annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
+
+10: Name 'tableTSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table. Affected line: Modelica.Blocks.Sources.CombiTimeTable tableTSet( tableOnFile=true, tableName="Tset", extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Tset_SwimmingFacility.txt"), columns=2:7) "Set points for heater" annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+
+11: Name 'tableOpeningHours' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: table, Opening, Hours. Affected line: Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours( tableOnFile=true, extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, tableName="openingHours", columns=2:2, fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/OpeningHours_SwimmingFacility.txt")) "Boundary condition: Opening Hours of swiming pools" annotation (Placement(transformation(extent={{-64,-32},{-48,-16}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/PartialTableDataSDF.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear "Interpolation method" annotation(Dialog(group="Data handling"));parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.Hold "Extrapolation method" annotation(Dialog(group="Data handling"));
+
+2: Missing documentation. Affected line: parameter Integer nExtSta=1 annotation (Dialog(group="Extra states", enable=useExtSta));
+
+3: Name 'datasetExt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dataset. Affected line: parameter String datasetExt[nExtSta]={"p_1"} "Dataset names for extra states" annotation (Dialog(group="Extra states", enable=useExtSta));
+
+4: Name 'dataUnitExt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data, Unit. Affected line: parameter String dataUnitExt[nExtSta]={"Pa"} "Data unit for extra states" annotation (Dialog(group="Extra states", enable=useExtSta));
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable nDTabQUse_flow( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF-Table data for condenser heat flow" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={70,30})));SDF.NDTable nDTabPEle( final nin=nDim, final readFromFile=true, final interpMethod=interpMethod, final extrapMethod=extrapMethod) "SDF table data for electrical power" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={10,30})));
+
+6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RearrangeInputs ordInp(final nDim=nDim) "Possibly change Input order" annotation ( Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-40,50})));
+
+7: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable nDTabSta[nExtSta]( each final filename=nDTabQUse_flow.filename, final dataset=datasetExt, final dataUnit=dataUnitExt, each final scaleUnits=nDTabQUse_flow.scaleUnits, each final nin=nDim, each final readFromFile=true, each final interpMethod=interpMethod, each final extrapMethod=extrapMethod) if useExtSta "SDF-Table data for extra states" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={110,30})));
+
+8: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabQUse_flow=SDF.Types.ExternalNDTable( nDTabQUse_flow.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabQUse_flow.filename), nDTabQUse_flow.dataset, nDTabQUse_flow.dataUnit, nDTabQUse_flow.scaleUnits));
+
+9: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SDF.Types.ExternalNDTable extTabPEle=SDF.Types.ExternalNDTable( nDTabPEle.nin, SDF.Functions.readTableData( Modelica.Utilities.Files.loadResource(nDTabPEle.filename), nDTabPEle.dataset, nDTabPEle.dataUnit, nDTabPEle.scaleUnits));
+
+10: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: function evaluate input SDF.Types.ExternalNDTable table;input Real[:] params;input SDF.Types.InterpolationMethod interpMethod;input SDF.Types.ExtrapolationMethod extrapMethod;
+
+11: Missing documentation, Name 'value;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: value. Affected line: output Real value;
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/Data/TableDataSDF/GenericVCLibPy.mo
+1: Name 'flowsheet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: flowsheet. Affected line: parameter String flowsheet "Name of the flowsheet";
+
+2: Name 'refrigerant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: refrigerant. Affected line: parameter String refrigerant "Name of the fluid";
