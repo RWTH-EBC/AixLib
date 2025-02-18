@@ -1,13 +1,9 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses;
 partial model PartialTableData3D
   "Partial model with components for TableData3D approach for heat pumps and chillers"
-  extends AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableDataSDF(final
-      nDim=3);
   parameter Real y_nominal(final min=0, final max=1, final unit="1")=1
-    "Nominal electrical power consumption"
+    "Nominal compressor speed"
     annotation (Dialog(group="Nominal condition"));
-
-
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
     Documentation(info="<html>

@@ -1,6 +1,7 @@
 NoHeating
 PartialCarnot
 PartialHeatPumpCycle
+PartialHeatPumpTableDataND
 PartialRefrigerantCycle
 PartialTableData2D
 PartialTableData3D
