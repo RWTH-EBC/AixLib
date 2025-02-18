@@ -3,6 +3,7 @@ AirFlowRateSplit
 AirFlowRateSum
 MoistSplitter
 MultizonePostProcessing
+FlowArrayRearranging
 PartialMultizone
 RelToAbsHum
 SumCondition

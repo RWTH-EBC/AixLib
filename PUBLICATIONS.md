@@ -61,6 +61,11 @@ ISBN: 978-1-71382-360-5
 
 ### HOM and ROM
 
+#### Integration of Heat Flow through Borders between Adjacent Zones in AixLib's Reduced-Order Model
+Groesdonk, Philip; Jansen, David; Estevam Schmiedt, Jacob; Hoffschmidt, Bernhard (2023). In: Proceedings of the 15th International Modelica Conference: Aachen, 9-11 October 2023 / Modelica Association and Linköping University Electronic Press, Pages: 577-587.
+DOI: URL: https://doi.org/10.3384/ecp204577   
+
+
 #### Comparison of Thermal Simulation Models with Different Levels of Detail for Non-Residential Buildings
 Jansen, David; Richarz, Jan; Vaeßen, Dominik; Hering, Dominik; Müller, Dirk (2022). In: Proceedings of BauSim Conference 2022:  9th Conference of IBPSA-Germany and Austria, 2022, Weimar, Germany. [PDF](https://publications.ibpsa.org/proceedings/bausim/2022/papers/bausim2022_Jansen_David.pdf), [DOI:10.26868/29761662.2022.42](https://doi.org/10.26868/29761662.2022.42)
 #### Not published yet
