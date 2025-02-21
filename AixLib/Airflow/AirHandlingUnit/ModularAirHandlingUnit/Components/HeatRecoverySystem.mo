@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model HeatRecoverySystem
 
   parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
@@ -53,13 +53,13 @@ model HeatRecoverySystem
     Components.PressureDrop.BaseClasses.partialPressureDrop
     annotation(choicesAllMatching=true);
 
-  PartialPressureDrop partialPressureDrop(
+  PartialPressureDrop partialPressureDropOda(
     final m_flow=mAirInOda_flow,
     final rho=rhoAir,
     final m_flow_nominal=m_flow_nominal,
     final dp_nominal=dp_nominal);
 
-  PartialPressureDrop partialPressureDrop2(
+  PartialPressureDrop partialPressureDropEta(
     final m_flow=mAirInEta_flow,
     final rho=rhoAir,
     final m_flow_nominal=m_flow_nominal,
@@ -202,8 +202,8 @@ equation
   Q_flow = (mDryAirInEta_flow * hAirInEta - mDryAirOutEta_flow * hAirOutEta);
   Q_flow = -(mDryAirInOda_flow * hAirInOda - mDryAirOutOda_flow * hAirOutOda);
 
-  partialPressureDrop.dp = dpOda;
-  partialPressureDrop2.dp = dpEta;
+  partialPressureDropOda.dp = dpOda;
+  partialPressureDropEta.dp = dpEta;
 
   connect(TOutMax.y, add.u1) annotation (Line(points={{-47.4,12},{-36,12},{-36,
           26},{-28,26}},
@@ -224,8 +224,9 @@ equation
       annotation (
     preferredView="info",
     Documentation(info="<html><p>
-  This model describes two streams of moist air where the exit
+  This model describes a sensible heat recovery system with two streams of moist air where the exit
   temperature is calculated over a user set parameter.
+  The model is valid only for equal mass flow rates of the two air streams.
 </p>
 <p>
   If the maximum possible temperature at the outlet overshoots the set

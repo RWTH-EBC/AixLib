@@ -57,5 +57,12 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}),                               Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>February, 2025 by Martin Kremer:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end ControlerHumidifier;

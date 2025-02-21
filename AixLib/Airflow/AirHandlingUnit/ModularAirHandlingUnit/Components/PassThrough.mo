@@ -49,5 +49,12 @@ equation
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
-          preserveAspectRatio=false)));
+          preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>April, 2020 by Martin Kremer:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end PassThrough;

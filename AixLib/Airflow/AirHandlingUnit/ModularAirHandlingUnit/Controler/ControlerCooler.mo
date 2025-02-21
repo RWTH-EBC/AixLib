@@ -1,5 +1,6 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerCooler
+  "Controler for cooler"
   parameter Boolean activeDehumidifying=false
     "true if active dehumidifying is done in cooler";
   Modelica.Blocks.Interfaces.RealInput xSupSet(start=0.007)
@@ -80,5 +81,17 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}),                               Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p> This model implements a control strategy for the cooler.
+It controls the oultet temperature as set value for the cooler itself.
+If acitve dehumidification is implemented, it chooses between the minimum temperature as needed for sensible cooling and sub-cooling.
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>February, 2025 by Martin Kremer:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end ControlerCooler;

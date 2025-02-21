@@ -6,15 +6,16 @@ model ModularAHU "model of a modular air handling unit"
   parameter Boolean cooling = true
     "set to true if cooling is implemented";
   parameter Boolean dehumidifying = false
-    "set to true if dehumidification by sub-cooling shall be implemented";
+    "set to true if dehumidification by sub-cooling is implemented"
+    annotation(Dialog(enable=cooling and heating));
   parameter Boolean heating = true
     "set to true if heating is used";
   parameter Boolean heatRecovery = true
     "set to true if heat recovery system is implemented";
   parameter Boolean usePhiSet = false
     "set to true if relative humidity is controlled, else absolute humidity is controlled";
-  parameter Boolean limPhiOda(start=false)
-    "set to true if outdoor air humidity shall be limited to saturation";
+  parameter Boolean limPhiOda = false
+    "set to true if outdoor air humidity is limited to saturation";
 
 
   // Nominal values
@@ -115,25 +116,24 @@ model ModularAHU "model of a modular air handling unit"
     dp_nominal=dpHrs_nominal,
     redeclare model PartialPressureDrop =
         Components.PressureDrop.PressureDropSimple)
-      if heatRecovery
+      if heatRecovery "heat recovery system"
     annotation (Placement(transformation(extent={{-94,2},{-74,22}})));
   Components.FanSimple fanOda(
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dpFanOda_nominal,
-    final eta=etaFanOda)
+    final eta=etaFanOda) "outdoor air fan"
     annotation (Placement(transformation(extent={{8,-48},{28,-28}})));
   Components.FanSimple fanEta(
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dpFanEta_nominal,
-    final eta=etaFanEta)
+    final eta=etaFanEta) "extract air fan"
     annotation (Placement(transformation(extent={{-20,48},{-40,68}})));
   Components.Cooler coo(
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dpCoo_nominal,
     final use_T_set=true,
     redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
-      if cooling or dehumidifying
+        Components.PressureDrop.PressureDropSimple) if cooling "cooler"
     annotation (Placement(transformation(extent={{-32,-50},{-12,-30}})));
   replaceable model humidifier = Components.SteamHumidifier
     constrainedby Components.BaseClasses.PartialHumidifier
@@ -155,13 +155,13 @@ model ModularAHU "model of a modular air handling unit"
     dp_nominal=dpHea_nominal,
     use_T_set=true,
     redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple)
-      if heating or dehumidifying
+        Components.PressureDrop.PressureDropSimple) if heating
     annotation (Placement(transformation(extent={{96,-64},{116,-44}})));
 
   // Set values
   Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K", start=295.15)
-    "K (use as PortIn)" annotation (Placement(transformation(
+    "Set value for supply air temperature in K"
+                        annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=-90,
         origin={100,-100}), iconTransformation(
@@ -169,7 +169,8 @@ model ModularAHU "model of a modular air handling unit"
         rotation=-90,
         origin={140,-104})));
   Modelica.Blocks.Interfaces.RealInput phiSupSet[2](start={0.4,0.6})
-    "relativ Humidity [Range: 0...1] (Vector: [1] min, [2] max)" annotation (
+    "set value for supply air relative humidity [Range: 0...1] (Vector: [1] min, [2] max)"
+                                                                 annotation (
       Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=-90,
@@ -180,7 +181,7 @@ model ModularAHU "model of a modular air handling unit"
 
   // Outputs
   Modelica.Blocks.Interfaces.RealOutput phiSup(start=0.8)
-    "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
+    "supply air relative humidity"    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={160,-60}), iconTransformation(
@@ -188,7 +189,8 @@ model ModularAHU "model of a modular air handling unit"
         rotation=180,
         origin={164,-40})));
   Modelica.Blocks.Interfaces.RealOutput TSup(unit="K", start=295.15)
-    "K (use as PortOut)" annotation (Placement(transformation(
+    "supply air temperature in K"
+                         annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={159,-27}), iconTransformation(
@@ -248,15 +250,14 @@ model ModularAHU "model of a modular air handling unit"
   // Controler
   Controler.ControlerHumidifier conHum(
     final use_PhiSet=true)
-      if humidifying
+      if humidifying "Controler for Humidifier"
     annotation (Placement(transformation(extent={{46,-12},{54,-4}})));
   Controler.ControlerHeatRecovery conHeaRecSys(
     final dT_min=2)
-       if heatRecovery
+       if heatRecovery "Controler for heat recovery system"
     annotation (Placement(transformation(extent={{-110,34},{-90,54}})));
   Controler.ControlerCooler conCoo(
-    final activeDehumidifying=dehumidifying)
-      if cooling or dehumidifying
+    final activeDehumidifying=dehumidifying) if cooling "Controler for cooler"
     annotation (Placement(transformation(extent={{-36,-90},{-16,-70}})));
 protected
   constant Modelica.Units.SI.Density rho = 1.2
@@ -264,12 +265,15 @@ protected
   parameter Boolean use_X_set = dehumidifying "true if dehumidifying is chosen";
 
   Modelica.Blocks.Routing.RealPassThrough reaPasThrLimPhi if not limPhiOda
+    "pass through for realtive humidity, if not limited"
     annotation (Placement(transformation(extent={{-150,-30},{-142,-22}})));
   Modelica.Blocks.Nonlinear.Limiter limPhi(uMax=1, uMin=0) if limPhiOda
+    "limits relative humidity to saturation"
     annotation (Placement(transformation(extent={{-146,12},{-136,22}})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough
     annotation (Placement(transformation(extent={{126,-84},{134,-76}})));
-  Modelica.Blocks.Math.Add add annotation (Placement(transformation(
+  Modelica.Blocks.Math.Add add "sums power of both fans"
+                               annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-60,-74})));
@@ -291,11 +295,14 @@ protected
     "Converter from relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{56,-86},{46,-96}})));
   Modelica.Blocks.Math.Gain toMasFloOda(k=rho)
+    "converts volume flow to mass flow"
     annotation (Placement(transformation(extent={{-140,74},{-128,86}})));
   Modelica.Blocks.Math.Gain toMasFloEta(k=rho)
+    "converts volume flow rate to mass flow rate"
     annotation (Placement(transformation(extent={{134,74},{122,86}})));
   // Utilities
   ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
+    "Converter from absolute humidity to relative humidity"
     annotation (Placement(transformation(extent={{142,-88},
             {152,-78}})));
 
@@ -309,18 +316,24 @@ protected
 
   // PassTroughs
   Components.PassThrough passThroughHrs if not heatRecovery
+    "passes variables to next component if no heat recovery system is used"
     annotation (Placement(transformation(extent={{-94,-26},{-74,-6}})));
-  Components.PassThrough passThroughCoo if not cooling and not dehumidifying
+  Components.PassThrough passThroughCoo if not cooling
+    "passes variables to next component if no cooling is implemented"
     annotation (Placement(transformation(extent={{-32,-26},{-12,-6}})));
   Components.PassThrough passThroughHum if not humidifying
+    "passes variables to next component if no humidifying is implemented"
     annotation (Placement(transformation(extent={{54,-36},{74,-16}})));
-  Components.PassThrough passThroughHea if not heating and not dehumidifying
+  Components.PassThrough passThroughHea if not heating
+    "passes variables to next component if no heating is implemented"
     annotation (Placement(transformation(extent={{96,-36},{116,-16}})));
 
   // Input for fans
   Modelica.Blocks.Sources.Constant dpEtaIn(k=dpFanEta)
+    "pressure increase over fan"
     annotation (Placement(transformation(extent={{-56,76},{-48,84}})));
   Modelica.Blocks.Sources.Constant dpSupIn(k=dpFanOda)
+    "pressure increase over fan"
     annotation (Placement(transformation(extent={{-2,2},{6,10}})));
 equation
 
@@ -415,11 +428,11 @@ equation
           {-66,63},{-66,17},{-73,17}}, color={0,0,127}));
   connect(fanEta.XAirOut, heaRecSys.XAirInEta) annotation (Line(points={{-41,60},
           {-66,60},{-66,14},{-73,14}}, color={0,0,127}));
-  connect(fanEta.TAirOut, conHeaRecSys.T_airInEta) annotation (Line(points={{-41,
+  connect(fanEta.TAirOut, conHeaRecSys.TAirInEta) annotation (Line(points={{-41,
           63},{-114,63},{-114,50},{-111,50}}, color={0,0,127}));
-  connect(TOda, conHeaRecSys.T_airInOda) annotation (Line(points={{-160,40},{-116,
+  connect(TOda, conHeaRecSys.TAirInOda) annotation (Line(points={{-160,40},{-116,
           40},{-116,38},{-111,38}}, color={0,0,127}));
-  connect(TSupSet, conHeaRecSys.T_set) annotation (Line(points={{100,-100},{100,
+  connect(TSupSet, conHeaRecSys.TSet) annotation (Line(points={{100,-100},{100,
           -80},{34,-80},{34,-100},{-160,-100},{-160,56},{-136,56},{-136,44},{-111,
           44}}, color={0,0,127}));
   connect(heaRecSys.mAirOutOda_flow, passThroughCoo.m_flow_airIn) annotation (
@@ -523,8 +536,8 @@ equation
     annotation (Line(points={{-89,44},{-84,44},{-84,24}}, color={0,0,127}));
   connect(heaRecSys.TAirOutOda, conHeaRecSys.TAirOut) annotation (Line(points={{
           -73,7},{-64,7},{-64,28},{-101.6,28},{-101.6,32}}, color={0,0,127}));
-  connect(fanOda.temIncFan, conHeaRecSys.temIncFan) annotation (Line(points={{29,
-          -43},{32,-43},{32,-56},{-108.6,-56},{-108.6,32}}, color={0,0,127}));
+  connect(fanOda.temIncFan, conHeaRecSys.dTFan) annotation (Line(points={{29,-43},
+          {32,-43},{32,-56},{-108.6,-56},{-108.6,32}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}}), graphics={
         Rectangle(
@@ -583,5 +596,21 @@ equation
         Line(points={{80,-40},{72,-44},{80,-48}}, color={0,0,0}),
         Line(points={{64,-40},{72,-44},{64,-48}}, color={0,0,0})}),
                                                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})),
+    Documentation(info="<html><p>
+  This model represnts a central air handling unit.
+  It can be configured in modular way. Depending on the desired functionalities it will inherit a heat recovery system, a heater, a cooler and a humidifier.
+  The type of hmumidifier can be chosen by the user. It will be either steam or adiabatic humidification.
+  Dehumidification is realized by sub-cooling only. Hence, if no cooling and heating is implemented, dehumidification will be disabled.
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>April, 2020 by Martin Kremer:<br/>
+    First Implementation.
+  </li>
+  <li>February, 2025 by Martin Kremer:<br/>
+    Impleted some controler and minor bug fixes.
+  </li>
+</ul>
+</html>"));
 end ModularAHU;

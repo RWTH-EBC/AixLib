@@ -3,7 +3,7 @@ model ExampleAHU "Comparative simulation with existing AHU model"
   extends Modelica.Icons.Example;
   ModularAHU modularAHU(
     humidifying=true,
-    cooling=true,
+    cooling=false,
     dehumidifying=true,
     heating=true,
     heatRecovery=true,
@@ -80,5 +80,9 @@ equation
       StopTime=31536000,
       Interval=3600,
       Tolerance=1e-04,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<p> This example showcases the functionality of the modular air handling unit model.
+</p>
+</html>"));
 end ExampleAHU;

@@ -70,5 +70,12 @@ equation
           points={{-48,-64},{78,-20}},
           color={0,0,0},
           thickness=0.5)}),                                      Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>April, 2020 by Martin Kremer:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end FanSimple;
