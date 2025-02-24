@@ -12,6 +12,10 @@ partial model PartialMultizone "Partial model for multizone models"
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
+  parameter Integer nZonCon(min=0) = 1
+    "Actual number of adjacent zone connectors";
+  parameter Integer zonConPaiArr[max(nZonCon, 1),2]=fill(1, max(nZonCon, 1), 2)
+    "List of pairs of interzonal element indices to connect, each index pointing to a concatenated array of all ThermalZones' interzonal element ports";
   replaceable parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
 
@@ -19,7 +23,8 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"  annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
 
-
+  parameter Boolean use_izeCon=false
+    "Consider heat flow connection between interzonal elements of thermal zones by setting true";
   parameter Boolean use_MechanicalAirExchange=true
     "Consider mechanical ventilation by setting true";
   parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
@@ -211,7 +216,11 @@ partial model PartialMultizone "Partial model for multizone models"
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={38,-110})));
-
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.FlowArrayRearranging
+    izeArrCon(nCon=max(nZonCon, 1), conPaiArr=zonConPaiArr)
+    if numZones > 1 and use_izeCon and nZonCon > 0
+    "Distributor for connection between adjacent zones" annotation (Placement(
+        transformation(extent={{-4,-4},{4,4}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
@@ -253,8 +262,14 @@ equation
     end for;
   end if;
 
-
-
+  // connect heat flow between zones
+  if numZones > 1 and use_izeCon and nZonCon > 0 then
+    for i in 1:numZones loop
+      connect(zone[i].izeHeaFlow[1:zoneParam[i].nIze], izeArrCon.splPor[
+        sum(zoneParam[1:i - 1].nIze) + 1:(sum(zoneParam[1:i - 1].nIze) +
+        zoneParam[i].nIze)]);
+    end for;
+  end if;
 
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
@@ -333,6 +348,10 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html><ul>
+  <li>November 3, 2024, by Philip Groesdonk:<br/>
+    Added interzonal connections. This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1080\">issue 1080</a>.
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and AixLib models.
   </li>
