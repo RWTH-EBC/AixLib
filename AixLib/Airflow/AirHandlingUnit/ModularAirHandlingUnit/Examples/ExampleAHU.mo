@@ -3,7 +3,7 @@ model ExampleAHU "Comparative simulation with existing AHU model"
   extends Modelica.Icons.Example;
   ModularAHU modularAHU(
     humidifying=true,
-    cooling=false,
+    cooling=true,
     dehumidifying=true,
     heating=true,
     heatRecovery=true,
