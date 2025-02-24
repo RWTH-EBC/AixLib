@@ -1,12 +1,24 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses;
 partial model PartialTableDataSDF
   "Partial model with components for table data using ND SDF tables for heat pumps and chillers"
-  parameter Integer nDim=1 "Number of input dimensions";
+  parameter Integer nDim(min=2) "Number of input dimensions";
   parameter Real scaFac "Scaling factor";
   parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
     "Interpolation method" annotation(Dialog(group="Data handling"));
   parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.Hold
     "Extrapolation method" annotation(Dialog(group="Data handling"));
+  parameter Boolean useExtSta=false
+    "=true to output extra states stored in sdf file"
+    annotation (Dialog(group="Extra states"));
+  parameter Integer nExtSta=1
+    annotation (Dialog(group="Extra states", enable=useExtSta));
+  parameter String datasetExt[nExtSta]={"p_1"}
+    "Dataset names for extra states"
+    annotation (Dialog(group="Extra states", enable=useExtSta));
+  parameter String dataUnitExt[nExtSta]={"Pa"}
+    "Data unit for extra states"
+    annotation (Dialog(group="Extra states", enable=useExtSta));
+
   Modelica.Blocks.Math.Product scaFacTimPel "Scale electrical power consumption"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -22,7 +34,6 @@ partial model PartialTableDataSDF
     annotation (Placement(
         transformation(extent={{-10,-10},{10,10}}, rotation=0,
         origin={-110,90})));
-
   Modelica.Blocks.Routing.RealPassThrough reaPasThrTEvaIn if (not useInRevDev and not use_TEvaOutForTab) or (useInRevDev and not use_TConOutForTab)
     "Used to enable conditional bus connection" annotation (Placement(
         transformation(
@@ -47,7 +58,6 @@ partial model PartialTableDataSDF
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={90,90})));
-
   Modelica.Blocks.Math.Gain facGain[nDim]
     "Convert relative speed n to an absolute value for interpolation in sdf tables"
     annotation (Placement(transformation(
@@ -72,7 +82,6 @@ partial model PartialTableDataSDF
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={10,30})));
-
   Modelica.Blocks.Routing.Multiplex  mux(final n=nDim)
                 "Concat all inputs into an array"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -94,6 +103,19 @@ partial model PartialTableDataSDF
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-80,90})));
+  SDF.NDTable nDTabSta[nExtSta](
+    each final filename=nDTabQUse_flow.filename,
+    final dataset=datasetExt,
+    final dataUnit=dataUnitExt,
+    each final scaleUnits=nDTabQUse_flow.scaleUnits,
+    each final nin=nDim,
+    each final readFromFile=true,
+    each final interpMethod=interpMethod,
+    each final extrapMethod=extrapMethod) if useExtSta
+    "SDF-Table data for extra states" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={110,30})));
 protected
   parameter Real u_nominal[nDim]
     "Nominal conditions input array";
@@ -103,7 +125,6 @@ protected
     "=true to use evaporator outlet temperature, false for inlet";
   parameter Boolean use_TConOutForTab=true
     "=true to use condenser outlet temperature, false for inlet";
-
   parameter Boolean useInRevDev "=true to indicate usage in reversed operation";
   parameter SDF.Types.ExternalNDTable extTabQUse_flow=SDF.Types.ExternalNDTable(
        nDTabQUse_flow.nin, SDF.Functions.readTableData(
@@ -128,6 +149,10 @@ protected
       IncludeDirectory="modelica://SDF/Resources/C-Sources");
   end evaluate;
 equation
+  for i in 1:nExtSta loop
+    connect(nDTabSta[i].u, facGain.y) annotation (Line(points={{110,42},{110,50},
+            {1,50},{1,50}}, color={0,0,127}));
+  end for;
   connect(nDTabPEle.y, scaFacTimPel.u1) annotation (Line(points={{10,19},{10,10},
           {-34,10},{-34,2}},  color={0,0,127}));
   connect(nDTabQUse_flow.y, scaFacTimQUse_flow.u1) annotation (Line(points={{70,19},
@@ -149,7 +174,8 @@ equation
           -96,90},{-96,50},{-106,50},{-106,42}}, color={0,0,127}));
   connect(booToRea.y, onOffTimScaFac.u1) annotation (Line(points={{-80,79},{-80,
           76},{-94,76},{-94,42}}, color={0,0,127}));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+    annotation (Dialog(group="Extra states"),
+              Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
     Documentation(info="<html>
 <p>
@@ -193,4 +219,5 @@ equation
       Rectangle(
           extent={{-60,60},{60,-60}},
           lineColor={47,49,172})}));
+
 end PartialTableDataSDF;
