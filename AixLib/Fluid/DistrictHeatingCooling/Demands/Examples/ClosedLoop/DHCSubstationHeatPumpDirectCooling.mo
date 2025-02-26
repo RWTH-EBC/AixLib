@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.ClosedLoop;
 model DHCSubstationHeatPumpDirectCooling
   import AixLib;
   extends Modelica.Icons.Example;

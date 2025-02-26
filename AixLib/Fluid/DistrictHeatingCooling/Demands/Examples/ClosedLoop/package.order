@@ -4,6 +4,5 @@ SubstationCooling
 SubstationHeating
 SubstationHeatingCoolingFixDeltaT
 SubstationHeatingCoolingVarDeltaT
-SubstationDirectCooling
 SubstationDirectHeatingDirectCooling
 SubstationDirectHeatingDirectCoolingDHW

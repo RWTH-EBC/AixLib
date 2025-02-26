@@ -50,8 +50,10 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     "decentral distribution pump for heating on primary side"
     annotation (Placement(transformation(extent={{-60,-14},{-40,-34}})));
   Sources.MassFlowSource_T souHeaSec(
@@ -110,8 +112,10 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=true,
     use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    dp_nominal=dp_nominal)
     "decentral distribution pump for cooling on primary side"
     annotation (Placement(transformation(extent={{68,14},{48,34}})));
   Modelica.Blocks.Math.Division division2
@@ -189,11 +193,11 @@ protected
 
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-240,0},{-214,0},{-214,4}},
+    annotation (Line(points={{-240,0},{-213,0},{-213,4}},
                                                         color={0,127,255},
       thickness=1));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{240,0},{216,0},{216,8}},
+    annotation (Line(points={{240,0},{217,0},{217,8}},
                                                      color={0,127,255},
       thickness=1));
   connect(heaDem, add1.u1)
@@ -214,7 +218,7 @@ equation
   connect(T_heaPumSet.y, heaPum.TSet)
     annotation (Line(points={{77.5,-39},{60,-39}}, color={0,0,127}));
   connect(dirCoo.ports[1], pumCoo.port_b)
-    annotation (Line(points={{4,24},{48,24}}, color={0,127,255},
+    annotation (Line(points={{5,24},{48,24}}, color={0,127,255},
       thickness=1));
   connect(cooDem, division2.u1) annotation (Line(points={{248,62},{176,62},{176,
           63.2},{103.4,63.2}}, color={0,0,127}));
@@ -248,7 +252,7 @@ equation
   connect(division1.y, pumHeaPri.m_flow_in) annotation (Line(points={{-73.2,-62},
           {-50,-62},{-50,-36}}, color={0,0,127}));
   connect(senT_dirCooOutPri.port_b, dirCoo.ports[2])
-    annotation (Line(points={{-58,24},{8,24}}, color={0,127,255},
+    annotation (Line(points={{-58,24},{7,24}}, color={0,127,255},
       thickness=1));
   connect(jun.port_3, senT_dirCooOutPri.port_a) annotation (Line(points={{-126,
           10},{-128,10},{-128,24},{-78,24}}, color={0,127,255},
@@ -269,7 +273,7 @@ equation
   connect(m_flow_heaSec.u1, realExpression4.y) annotation (Line(points={{169.4,
           -60.8},{177.7,-60.8},{177.7,-60},{181.4,-60}}, color={0,0,127}));
   connect(vol.ports[2], jun.port_1)
-    annotation (Line(points={{-210,4},{-210,0},{-136,0}}, color={0,127,255},
+    annotation (Line(points={{-211,4},{-211,0},{-136,0}}, color={0,127,255},
       thickness=1));
   connect(jun.port_2, pumHeaPri.port_a) annotation (Line(points={{-116,0},{-96,
           0},{-96,-24},{-60,-24}}, color={0,127,255},
@@ -278,7 +282,7 @@ equation
     annotation (Line(points={{68,24},{108,24}}, color={0,127,255},
       thickness=1));
   connect(jun1.port_1, vol1.ports[2])
-    annotation (Line(points={{156,0},{220,0},{220,8}}, color={0,127,255},
+    annotation (Line(points={{156,0},{219,0},{219,8}}, color={0,127,255},
       thickness=1));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,
             -160},{240,160}}),
