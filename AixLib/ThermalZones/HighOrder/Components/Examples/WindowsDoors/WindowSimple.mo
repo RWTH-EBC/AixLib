@@ -30,7 +30,7 @@ equation
   connect(SolarRadiation.y, varRad.I_gr[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,46.9},{-64.9,46.9}},
       color={0,0,127}));
-  connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
+  connect(SolarRadiation.y, varRad.incAng[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,43},{-65,43}},
       color={0,0,127}));
   connect(Tinside1.port, windowSimple.radPort) annotation (Line(points={{38,42},{26,42},{26,21.6},{10.2,21.6}}, color={191,0,0}));

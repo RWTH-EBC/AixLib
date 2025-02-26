@@ -262,7 +262,7 @@ equation
   OutTotalRadTilted.I_dir = BeamRadTilt;
   OutTotalRadTilted.I_diff = DiffRadTilt;
   OutTotalRadTilted.I_gr = RadGroundRefl;
-  OutTotalRadTilted.AOI = Modelica.Math.acos(cos_theta); // in rad
+  OutTotalRadTilted.incAng = Modelica.Math.acos(cos_theta); // in rad
 
 //Output
   BeamRadTilt=BeamRadTiltOut;

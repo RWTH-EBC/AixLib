@@ -86,7 +86,7 @@ equation
       points={{79,80},{74,80},{74,66.9},{68.9,66.9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. AOI) annotation (Line(
+  connect(constSun.y,varRad. incAng) annotation (Line(
       points={{79,80},{74,80},{74,63},{69,63}},
       color={0,0,127},
       smooth=Smooth.None));
