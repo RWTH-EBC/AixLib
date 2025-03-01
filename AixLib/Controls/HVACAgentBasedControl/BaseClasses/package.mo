@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl;
-package BaseClasses 
+package BaseClasses  
   extends Modelica.Icons.BasesPackage;
 
 end BaseClasses;

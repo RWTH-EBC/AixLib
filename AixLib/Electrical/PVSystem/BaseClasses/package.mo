@@ -15,7 +15,7 @@ package BaseClasses
 
    parameter Real n_mod(final quantity=
       "NumberOfModules", final unit="1") "Number of connected PV modules"
-      annotation ();
+      annotation();
 
 
   // Parameters from module data sheet

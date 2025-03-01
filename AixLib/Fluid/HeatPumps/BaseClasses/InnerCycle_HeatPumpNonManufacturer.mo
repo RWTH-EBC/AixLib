@@ -4,8 +4,7 @@ model InnerCycle_HeatPumpNonManufacturer
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle(use_rev=false);
 
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-                                                                                  constrainedby
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData constrainedby
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
     final scalingFactor=scalingFactor,
     final THotMax=THotMax,

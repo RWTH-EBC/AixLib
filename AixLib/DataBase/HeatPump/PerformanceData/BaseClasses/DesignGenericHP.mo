@@ -47,7 +47,7 @@ model DesignGenericHP
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for COP" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
@@ -141,7 +141,7 @@ model DesignGenericHP
     final dataUnit="-",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for COP" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
@@ -165,7 +165,7 @@ model DesignGenericHP
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for mean compressor temperature" annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},
@@ -180,7 +180,7 @@ model DesignGenericHP
     final dataUnit="K",
     final scaleUnits={"degC","Hz","K","degC"},
     final interpMethod=SDF.Types.InterpolationMethod.Linear,
-    final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+    final extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     "SDF-Table data for mean compressor temperature" annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},

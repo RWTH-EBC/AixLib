@@ -1,5 +1,5 @@
 within AixLib.Utilities;
-package Multiplier 
+package Multiplier  
   extends Modelica.Icons.Package;
 
 end Multiplier;

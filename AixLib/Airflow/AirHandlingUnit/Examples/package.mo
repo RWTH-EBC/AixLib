@@ -3,5 +3,5 @@ package Examples "Contains examples for Air Handling Units"
 extends Modelica.Icons.ExamplesPackage;
 
 
-annotation ();
+annotation();
 end Examples;

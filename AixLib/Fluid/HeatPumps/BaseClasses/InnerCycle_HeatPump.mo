@@ -6,8 +6,7 @@ model InnerCycle_HeatPump
   parameter Boolean use_non_manufacturer=false;
 
   replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-                                                                                  constrainedby
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData constrainedby
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Replaceable model for performance data of a heat pump in main operation mode" annotation (
       choicesAllMatching=true);

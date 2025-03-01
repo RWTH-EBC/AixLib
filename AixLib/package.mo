@@ -6,10 +6,10 @@ package AixLib
     NcDataReader2(version="2.5.0"),
     ObsoleteModelica4(version="4.0.0"),
     Modelica(version="4.0.0"),
-    SDF(version="0.4.2"),
-      Modelica_DeviceDrivers(version="2.1.0"),
       ModelicaServices(version="4.0.0"),
-      EnergyNeighborhoods(version="1")),
+      Modelica_DeviceDrivers(version="2.1.1"),
+      EnergyNeighborhoods(version="1"),
+      SDF(version="0.4.4")),
   version="1.2.3",
   conversion(from(
     version="0.3.2",

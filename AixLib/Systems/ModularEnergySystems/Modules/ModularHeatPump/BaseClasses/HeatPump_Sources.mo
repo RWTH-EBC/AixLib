@@ -179,7 +179,7 @@ package HeatPump_Sources
 
      parameter Modelica.Units.SI.Temperature TSource=TSourceNom "Temperature of heat source"
      annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
-
+   parameter Modelica.Units.SI.HeatFlowRate QDes=150000 "Design heat flow rate of heat pump";
     replaceable package MediumEvap = AixLib.Media.Air
                                        constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium heat source"
@@ -242,14 +242,16 @@ package HeatPump_Sources
       annotation (Placement(transformation(extent={{-94,-64},{-82,-52}})));
     Modelica.Blocks.Math.Product product1
       annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
-    Modelica.Blocks.Sources.RealExpression zero(y=0.1)
-                                                     annotation (Placement(
+    Modelica.Blocks.Sources.RealExpression zero(y=1) annotation (Placement(
           transformation(
           extent={{-12,-12},{12,12}},
           rotation=0,
           origin={-38,-96})));
     Modelica.Blocks.Logical.Switch switch2
       annotation (Placement(transformation(extent={{4,-96},{24,-76}})));
+    Modelica.Blocks.Sources.RealExpression mFlowEva2(y=QDes*10)
+                      "massflow heat source"
+      annotation (Placement(transformation(extent={{98,-50},{56,-26}})));
   equation
     connect(port_a, bouEvap_b.ports[1])
       annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
@@ -263,20 +265,12 @@ package HeatPump_Sources
             42},{-22,42}}, color={0,0,127}));
     connect(switch1.y, bouEvap_a.T_in) annotation (Line(points={{1,50},{16,50},{16,
             16},{0,16},{0,-5.6},{13.2,-5.6}}, color={0,0,127}));
-    connect(sigBus.QEvapNom, division1.u1) annotation (Line(
-        points={{0.09,100.08},{0.09,80},{62,80},{62,-44},{42,-44}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
     connect(division1.y, product1.u1) annotation (Line(points={{19,-50},{12,-50},
             {12,-32},{-4,-32}}, color={0,0,127}));
     connect(product1.y, bouEvap_a.m_flow_in) annotation (Line(points={{-27,-38},
             {-32,-38},{-32,-11.2},{13.2,-11.2}}, color={0,0,127}));
-    connect(switch1.y, add.u1) annotation (Line(points={{1,50},{4,50},{4,16},{
-            -50,16},{-50,14},{-132,14},{-132,-52}},
+    connect(switch1.y, add.u1) annotation (Line(points={{1,50},{16,50},{16,16},{-50,
+            16},{-50,14},{-132,14},{-132,-52}},
                                               color={0,0,127}));
     connect(sigBus.TSourceSet, switch1.u3) annotation (Line(
         points={{0.09,100.08},{0,100.08},{0,80},{-36,80},{-36,58},{-22,58}},
@@ -286,12 +280,8 @@ package HeatPump_Sources
         index=-1,
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
-    connect(conPID.y, switch2.u1) annotation (Line(points={{-45,-58},{-30,-58},
-            {-30,-78},{2,-78}}, color={0,0,127}));
     connect(switch2.y, product1.u2) annotation (Line(points={{25,-86},{34,-86},
             {34,-64},{4,-64},{4,-44},{-4,-44}}, color={0,0,127}));
-    connect(zero.y, switch2.u3) annotation (Line(points={{-24.8,-96},{-12,-96},
-            {-12,-94},{2,-94}}, color={0,0,127}));
     connect(sigBus.OnOff, switch2.u2) annotation (Line(
         points={{0.09,100.08},{2,100.08},{2,58},{138,58},{138,-86},{2,-86}},
         color={255,204,51},
@@ -317,6 +307,12 @@ package HeatPump_Sources
       annotation (Line(points={{-109,-58},{-95.2,-58}}, color={0,0,127}));
     connect(gain1.y, conPID.u_s)
       annotation (Line(points={{-81.4,-58},{-68,-58}}, color={0,0,127}));
+    connect(zero.y, switch2.u1) annotation (Line(points={{-24.8,-96},{-16,-96},{-16,
+            -80},{2,-80},{2,-78}}, color={0,0,127}));
+    connect(zero.y, switch2.u3) annotation (Line(points={{-24.8,-96},{-12,-96},{-12,
+            -94},{2,-94}}, color={0,0,127}));
+    connect(mFlowEva2.y, division1.u1) annotation (Line(points={{53.9,-38},{50,
+            -38},{50,-44},{42,-44}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Ellipse(
             extent={{-74,78},{74,-78}},

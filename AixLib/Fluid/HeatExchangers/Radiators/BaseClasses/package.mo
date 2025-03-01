@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators;
-package BaseClasses 
+package BaseClasses  
 extends Modelica.Icons.BasesPackage;
 
 annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}})), Icon(

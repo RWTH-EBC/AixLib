@@ -5,5 +5,5 @@ extends Modelica.Icons.BasesPackage;
 
 
 
-  annotation ();
+  annotation();
 end BaseClasses;

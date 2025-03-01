@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit;
-package BaseClasses 
+package BaseClasses  
   extends Modelica.Icons.BasesPackage;
 
 end BaseClasses;

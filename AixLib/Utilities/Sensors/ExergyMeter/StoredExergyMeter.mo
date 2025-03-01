@@ -21,8 +21,7 @@ model StoredExergyMeter
                Medium)
     "Specific entropy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{70,0},{50,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy[n](redeclare package Medium =
                Medium)
     "Specific enthalpy of the medium used in exergy calculations"
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));

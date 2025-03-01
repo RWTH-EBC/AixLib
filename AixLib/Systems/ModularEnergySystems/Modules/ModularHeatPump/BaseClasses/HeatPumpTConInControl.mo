@@ -10,11 +10,11 @@ partial model HeatPumpTConInControl
     parameter Boolean EnableFeedback=true;
 parameter Real PLRMin=0.4 "Limit of PLR; less =0";
     parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
-   annotation ();
+   annotation();
   parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow"
-   annotation ();
+   annotation();
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
-   annotation ();
+   annotation();
 
   Fluid.Sensors.TemperatureTwoPort senTConInlet(
     redeclare final package Medium = AixLib.Media.Water,

@@ -47,6 +47,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
     VEva=max(0.0000001*QDes - 0.0075, 0.003),
     TCon_start=TCon_start,
+    TEva_start=TSourceDes,
     redeclare model PerDataMainHP = PerDataMainHP,
     use_non_manufacturer=false,
     use_rev=false,
@@ -65,6 +66,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     show_TPort=false,
+    THotMax=343.15,
     THotNom=THotDes,
     TSourceNom=TSourceDes,
     QNom=QDes,
@@ -72,6 +74,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     DeltaTEvap=DeltaTEvap,
     TSource=TSourceDes,
     TSourceInternal=TSourceInternal,
+    FreDep=false,
     eta_carnot=eta_carnot)
     annotation (Placement(transformation(extent={{-6,-18},{14,6}})));
 
@@ -103,7 +106,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
   BaseClasses.HeatPump_Sources.Air air(
     TSourceNom=TSourceDes,
     TSourceInternal=TSourceInternal,
-    TSource=TSource,                   redeclare package MediumEvap =
+    TSource=TSource,
+    QDes=QDes,                         redeclare package MediumEvap =
         AixLib.Media.Air,
     DeltaTEvap=7)
     annotation (Placement(transformation(extent={{-16,-54},{4,-34}})));

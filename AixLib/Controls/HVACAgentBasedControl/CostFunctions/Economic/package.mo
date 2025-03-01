@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl.CostFunctions;
-package Economic 
+package Economic  
   extends Modelica.Icons.VariantsPackage;
 
 end Economic;

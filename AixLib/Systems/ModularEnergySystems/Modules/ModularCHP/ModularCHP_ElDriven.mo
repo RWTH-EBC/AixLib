@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularEnergySystems.Modules.ModularCHP;
+within AixLib.Systems.ModularEnergySystems.Modules.ModularCHP;
 model ModularCHP_ElDriven
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
