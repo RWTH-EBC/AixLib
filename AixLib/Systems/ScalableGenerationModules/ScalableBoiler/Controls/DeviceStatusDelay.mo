@@ -59,7 +59,7 @@ model DeviceStatusDelay
   Modelica.Blocks.Interfaces.BooleanOutput y
     "On/Off signal checked against minimal and maximum on/off time"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.BooleanInput u_safety if use_safetyShutoff
+  Modelica.Blocks.Interfaces.BooleanInput uSafShuOff if use_safetyShutoff
     "set true, to force shutoff and hold until false"
     annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression if not
@@ -101,8 +101,8 @@ equation
           -32},{88,-52},{50,-52},{50,-72},{58,-72}}, color={255,0,255}));
   connect(and1.y,pre_hold. u) annotation (Line(points={{81,-72},{96,-72},{96,0},
           {82,0}}, color={255,0,255}));
-  connect(u_safety,not1. u)
-    annotation (Line(points={{-120,-80},{-92,-80}},color={255,0,255}));
+  connect(uSafShuOff, not1.u)
+    annotation (Line(points={{-120,-80},{-92,-80}}, color={255,0,255}));
   connect(not1.y,and1. u2)
     annotation (Line(points={{-69,-80},{58,-80}},color={255,0,255}));
   connect(and1.y,change_output. u) annotation (Line(points={{81,-72},{96,-72},{

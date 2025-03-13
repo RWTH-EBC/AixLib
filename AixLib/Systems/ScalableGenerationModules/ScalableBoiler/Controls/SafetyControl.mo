@@ -48,7 +48,7 @@ equation
           8},{66,8}}, color={255,0,255}));
   connect(devStaDel.y, isOn) annotation (Line(points={{89,8},{98,8},{98,0},{104,
           0}}, color={255,0,255}));
-  connect(greater.y, devStaDel.u_safety)
+  connect(greater.y, devStaDel.uSafShuOff)
     annotation (Line(points={{-27,0},{66,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
