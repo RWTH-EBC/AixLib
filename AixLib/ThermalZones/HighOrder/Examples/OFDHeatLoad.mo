@@ -70,23 +70,23 @@ equation
       points={{-49,80},{-46,80},{-46,64},{-41.2,64}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I) annotation (Line(
+  connect(constSun.y,varRad.H)  annotation (Line(
       points={{79,80},{74,80},{74,78.9},{68.9,78.9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_dir) annotation (Line(
+  connect(constSun.y, varRad.HDir) annotation (Line(
       points={{79,80},{74,80},{74,75},{69,75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_diff) annotation (Line(
+  connect(constSun.y, varRad.HDif) annotation (Line(
       points={{79,80},{74,80},{74,71},{69,71}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_gr) annotation (Line(
+  connect(constSun.y,varRad.HGrd)  annotation (Line(
       points={{79,80},{74,80},{74,66.9},{68.9,66.9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. AOI) annotation (Line(
+  connect(constSun.y, varRad.incAng) annotation (Line(
       points={{79,80},{74,80},{74,63},{69,63}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -106,25 +106,22 @@ equation
     annotation (Line(points={{-28,64},{-14,64},{-14,45.44}},    color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
-  connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.5833},{48,69.5833},{48,28.64},{43.68,28.64}},color={
+  connect(varRad.solRadOut[1], wholeHouseBuildingEnvelope.North) annotation (
+      Line(points={{51,69.5833},{48,69.5833},{48,28.64},{43.68,28.64}}, color={
           255,128,0}));
-  connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.75},{48,69.75},{48,21.36},{43.68,21.36}},
-                                                                 color={255,128,
-          0}));
-  connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.9167},{48,69.9167},{48,14.08},{43.68,14.08}},
-                                                                    color={255,
+  connect(varRad.solRadOut[2], wholeHouseBuildingEnvelope.East) annotation (
+      Line(points={{51,69.75},{48,69.75},{48,21.36},{43.68,21.36}}, color={255,
           128,0}));
-  connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.0833},{48,70.0833},{48,7.36},{43.68,7.36}},color={255,
-          128,0}));
-  connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-        annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
-                                                                         color=
-          {255,128,0}));
-  connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
+  connect(varRad.solRadOut[3], wholeHouseBuildingEnvelope.South) annotation (
+      Line(points={{51,69.9167},{48,69.9167},{48,14.08},{43.68,14.08}}, color={
+          255,128,0}));
+  connect(varRad.solRadOut[4], wholeHouseBuildingEnvelope.West) annotation (
+      Line(points={{51,70.0833},{48,70.0833},{48,7.36},{43.68,7.36}}, color={
+          255,128,0}));
+  connect(varRad.solRadOut[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
+    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+        color={255,128,0}));
+  connect(varRad.solRadOut[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
     annotation (Line(points={{51,70.4167},{48,70.4167},{48,35.92},{43.68,35.92}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));

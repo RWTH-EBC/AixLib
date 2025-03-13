@@ -255,14 +255,15 @@ equation
     DiffRadTilt = DiffRadTiltHZ + DiffRadTiltDOM + DiffRadTiltCS
     "total diffuse irradiation on a tilted Surface";
 
-    OutTotalRadTilted.I = max(0, BeamRadTilt + DiffRadTilt + RadGroundRefl)
+  OutTotalRadTilted.H   = max(0, BeamRadTilt + DiffRadTilt + RadGroundRefl)
     "output connector for the total Irradiation on a tilted Surface";
 
   // calculation of direct. diffuse and ground reflection radiation on tilted surface
-  OutTotalRadTilted.I_dir = BeamRadTilt;
-  OutTotalRadTilted.I_diff = DiffRadTilt;
-  OutTotalRadTilted.I_gr = RadGroundRefl;
-  OutTotalRadTilted.AOI = Modelica.Math.acos(cos_theta); // in rad
+  OutTotalRadTilted.HDir = BeamRadTilt;
+  OutTotalRadTilted.HDif = DiffRadTilt;
+  OutTotalRadTilted.HGrd = RadGroundRefl;
+  OutTotalRadTilted.incAng = Modelica.Math.acos(cos_theta);
+                                                         // in rad
 
 //Output
   BeamRadTilt=BeamRadTiltOut;

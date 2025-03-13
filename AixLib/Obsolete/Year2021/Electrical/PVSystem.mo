@@ -1,4 +1,4 @@
-within AixLib.Obsolete.Year2021.Electrical;
+﻿within AixLib.Obsolete.Year2021.Electrical;
 package PVSystem
 
   model PVSystem "PVSystem"
@@ -15,7 +15,7 @@ package PVSystem
       annotation (Placement(transformation(extent={{-124,-12},{-100,14}}),
           iconTransformation(extent={{-136,-24},{-100,14}})));
 
-    Modelica.Blocks.Sources.RealExpression realExpression(y=IcTotalRad.I)
+    Modelica.Blocks.Sources.RealExpression realExpression(y=IcTotalRad.H)
       annotation (Placement(transformation(extent={{-96,-10},{-76,10}})));
   equation
 

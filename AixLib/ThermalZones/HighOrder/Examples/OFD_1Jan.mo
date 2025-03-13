@@ -87,12 +87,12 @@ equation
   TsetValvesSchedule[5] =Modelica.Units.Conversions.to_degC(TSet.y[5]);
   Toutside =Modelica.Units.Conversions.to_degC(Weather.AirTemp);
   //SolarRadiation
-  SolarRadiation[1] = Weather.SolarRadiation_OrientedSurfaces[1].I;
-  SolarRadiation[2] = Weather.SolarRadiation_OrientedSurfaces[2].I;
-  SolarRadiation[3] = Weather.SolarRadiation_OrientedSurfaces[3].I;
-  SolarRadiation[4] = Weather.SolarRadiation_OrientedSurfaces[4].I;
-  SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
-  SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
+  SolarRadiation[1] =Weather.SolarRadiation_OrientedSurfaces[1].H;
+  SolarRadiation[2] =Weather.SolarRadiation_OrientedSurfaces[2].H;
+  SolarRadiation[3] =Weather.SolarRadiation_OrientedSurfaces[3].H;
+  SolarRadiation[4] =Weather.SolarRadiation_OrientedSurfaces[4].H;
+  SolarRadiation[5] =Weather.SolarRadiation_OrientedSurfaces[5].H;
+  SolarRadiation[6] =Weather.SolarRadiation_OrientedSurfaces[6].H;
   connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation (Line(points={{75.4,80.6},{-48,80.6},{-48,32},{-39.75,32},{-39.75,31.75}},
                                                           color={0,0,127}));
   connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-16.5,59.5},{-35,59.5},{-35,45.05}},

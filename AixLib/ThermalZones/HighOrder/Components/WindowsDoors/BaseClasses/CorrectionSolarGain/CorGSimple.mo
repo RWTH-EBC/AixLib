@@ -4,7 +4,7 @@ model CorGSimple "Simple correction with factor g for shortwave solar transmitta
 
 equation
     for i in 1:n loop
-      solarRadWinTrans[i] = SR_input[i].I*g;
+      solarRadWinTrans[i] =SR_input[i].H *g;
     end for;
 
   annotation (Documentation(info="<html><h4>

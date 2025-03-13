@@ -51,21 +51,21 @@ equation
   else
     gShaDir = 0;
   end if;
-  solRadOut.I = solRadOut.I_dir + solRadOut.I_diff;
-  solRadOut.I_dir = solRadIn.I_dir*gShaDir;
+  solRadOut.H =solRadOut.HDir + solRadOut.HDif;
+  solRadOut.HDir = solRadIn.HDir*gShaDir;
   // Calculate the shadow factor for diffuse radiation
   if calMod == AixLib.ThermalZones.HighOrder.Components.Shadow.Types.selectorShadowEffectMode.constRedDiffAllDir then
     gShaDif = gShaDif_mean;
-    solRadOut.I_diff = solRadIn.I_diff*gShaDif*redFacDifRad;
+    solRadOut.HDif = solRadIn.HDif*gShaDif*redFacDifRad;
   elseif calMod == AixLib.ThermalZones.HighOrder.Components.Shadow.Types.selectorShadowEffectMode.constRedDiffPerpDir then
     gShaDif = atan((heiWinMax+heiWinMin)/2 / lenShie)/(Modelica.Constants.pi/2);
-    solRadOut.I_diff = solRadIn.I_diff*gShaDif*redFacDifRad;
+    solRadOut.HDif = solRadIn.HDif*gShaDif*redFacDifRad;
   else
     gShaDif = 99;  //Not used in the following equation, to avoid sigular structure
-    solRadOut.I_diff = solRadIn.I_diff*gShaDir*redFacDifRad;
+    solRadOut.HDif = solRadIn.HDif*gShaDir*redFacDifRad;
   end if;
-  solRadOut.I_gr = solRadIn.I_gr;
-  solRadOut.AOI = solRadIn.AOI;
+  solRadOut.HGrd =solRadIn.HGrd;
+  solRadOut.incAng = solRadIn.incAng;
 
   connect(shaLen.weaBus, weaBus) annotation (Line(
       points={{-40,0},{-74,0},{-74,80},{-100,80}},

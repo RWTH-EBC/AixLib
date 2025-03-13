@@ -833,11 +833,11 @@ extends AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSu
     annotation (Placement(transformation(extent={{-22,36},{-2,56}})));
 equation
    for i in 1:n loop
-       Rad_Out[i].I=Rad_In[i].I*gsunblind[i]*combiTimeTable.y[1];
-       Rad_Out[i].I_dir=Rad_In[i].I_dir*gsunblind[i]*combiTimeTable.y[1];
-       Rad_Out[i].I_diff=Rad_In[i].I_diff*gsunblind[i]*combiTimeTable.y[1];
-       Rad_Out[i].I_gr=Rad_In[i].I_gr*gsunblind[i]*combiTimeTable.y[1];
-       Rad_Out[i].AOI=Rad_In[i].AOI;
+    Rad_Out[i].H   =Rad_In[i].H*gsunblind[i]*combiTimeTable.y[1];
+    Rad_Out[i].HDir = Rad_In[i].HDir*gsunblind[i]*combiTimeTable.y[1];
+    Rad_Out[i].HDif = Rad_In[i].HDif*gsunblind[i]*combiTimeTable.y[1];
+    Rad_Out[i].HGrd   =Rad_In[i].HGrd*gsunblind[i]*combiTimeTable.y[1];
+    Rad_Out[i].incAng = Rad_In[i].incAng;
        sunblindonoff[i]=1-gsunblind[i]*combiTimeTable.y[1];
      end for;
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})),

@@ -42,12 +42,18 @@ equation
   connect(heatStarToComb.portConvRadComb, outerWall.thermStarComb_inside) annotation (Line(points={{-48,26},{-42,26},{-42,25},{-30,25}}, color={191,0,0}));
   connect(Toutside.port, outerWall.port_outside) annotation (Line(points={{20,22},{2,22},{2,25},{-17.7,25}}, color={191,0,0}));
   connect(WindSpeed.y, outerWall.WindSpeedPort) annotation (Line(points={{11.1,56},{-4,56},{-4,66.8},{-17.7,66.8}}, color={0,0,127}));
-  connect(varRad.solarRad_out[1], outerWall.SolarRadiationPort) annotation (Line(points={{41,80},{12,80},{12,77.25},{-16.2,77.25}}, color={255,128,0}));
-  connect(Solarradiation.y, varRad.AOI[1]) annotation (Line(points={{77.1,79},{68.55,79},{68.55,87},{59,87}}, color={0,0,127}));
-  connect(Solarradiation.y, varRad.I_gr[1]) annotation (Line(points={{77.1,79},{67.55,79},{67.55,83.1},{58.9,83.1}}, color={0,0,127}));
-  connect(Solarradiation.y, varRad.I_diff[1]) annotation (Line(points={{77.1,79},{68.55,79},{68.55,79},{59,79}}, color={0,0,127}));
-  connect(Solarradiation.y, varRad.I_dir[1]) annotation (Line(points={{77.1,79},{67.55,79},{67.55,75},{59,75}}, color={0,0,127}));
-  connect(Solarradiation.y, varRad.I[1]) annotation (Line(points={{77.1,79},{68.55,79},{68.55,71.1},{58.9,71.1}}, color={0,0,127}));
+  connect(varRad.solRadOut[1], outerWall.SolarRadiationPort) annotation (Line(
+        points={{41,80},{12,80},{12,77.25},{-16.2,77.25}}, color={255,128,0}));
+  connect(Solarradiation.y, varRad.incAng[1]) annotation (Line(points={{77.1,79},
+          {68.55,79},{68.55,87},{59,87}}, color={0,0,127}));
+  connect(Solarradiation.y, varRad.HGrd[1]) annotation (Line(points={{77.1,79},
+          {67.55,79},{67.55,83.1},{58.9,83.1}}, color={0,0,127}));
+  connect(Solarradiation.y, varRad.HDif[1]) annotation (Line(points={{77.1,79},
+          {68.55,79},{68.55,79},{59,79}}, color={0,0,127}));
+  connect(Solarradiation.y, varRad.HDir[1]) annotation (Line(points={{77.1,79},
+          {67.55,79},{67.55,75},{59,75}}, color={0,0,127}));
+  connect(Solarradiation.y, varRad.H[1]) annotation (Line(points={{77.1,79},{
+          68.55,79},{68.55,71.1},{58.9,71.1}}, color={0,0,127}));
   annotation (experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

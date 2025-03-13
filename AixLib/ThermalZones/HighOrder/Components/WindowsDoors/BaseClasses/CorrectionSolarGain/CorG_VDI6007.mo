@@ -51,7 +51,7 @@ Real[n] Qsek2_dir;
 Real[n] CorG_dir;  // transmission coefficient correction factor for direct irradiations
 equation
   for i in 1:n loop
-    theta[i] = SR_input[i].AOI;
+    theta[i] =SR_input[i].incAng;
     Ta_dir[i]= (((((A6*to_deg(theta[i])+A5)*to_deg(theta[i])+A4)*to_deg(theta[i])+A3)*to_deg(theta[i])+A2)*to_deg(theta[i])+A1)*to_deg(theta[i])+A0;
     Tai_dir[i]= 0.907^(1/sqrt(1-(sin(theta[i])/1.515)^2));
     Ta1_dir[i]= Ta_dir[i]*Tai_dir[i];
@@ -67,7 +67,8 @@ equation
     CorG_dir[i]= (Ta2_dir[i]+Qsek2_dir[i])/g_dir0;
 
     //calculating the input thermal energy due to solar radiation
-    solarRadWinTrans[i] = ((SR_input[i].I_dir*CorG_dir[i])+(SR_input[i].I_diff*CorG_diff)+(SR_input[i].I_gr*CorG_gr));
+    solarRadWinTrans[i] =((SR_input[i].HDir*CorG_dir[i]) + (SR_input[i].HDif*
+      CorG_diff) + (SR_input[i].HGrd*CorG_gr));
   end for;
 
 annotation (
