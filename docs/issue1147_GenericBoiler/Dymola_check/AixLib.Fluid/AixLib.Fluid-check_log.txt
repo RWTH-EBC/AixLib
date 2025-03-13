@@ -1,6 +1,95 @@
 
-Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone 
-Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>
+Error: Class or component 'energyDynamics' not found in Boiler boiler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
+ Component context: peaLoaDev.boiler
+  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 4
+Error: Class or component 'energyDynamics' not found in Boiler boiler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
+ Component context: PeakLoadDeviceModel.boiler
+  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 4
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase.PeakLoadDeviceModel#text">20</a>
+  Context: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel</a>
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>
+Error: Class or component 'energyDynamics' not found in Boiler boiler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 25
+ Component context: boiler
+  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.CHPSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystem">AixLib.Fluid.BoilerCHP.Examples.CHPSystem</a>
+Error: Class or component 'energyDynamics' not found in CHP combinedHeatPower
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo, line 5
+ Component context: combinedHeatPower
+  Component declared as CHP combinedHeatPower in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystem">AixLib.Fluid.BoilerCHP.Examples.CHPSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem">AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem</a>
+Error: Class or component 'energyDynamics' not found in HeatGeneratorNoControl heatGeneratorNoControll
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo, line 18
+ Component context: heatGeneratorNoControll
+  Component declared as HeatGeneratorNoControl heatGeneratorNoControll in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem">AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>
+Error: Class or component 'energyDynamics' not found in Boiler boiler
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
+ Component context: boiler
+  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector 
+Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>
+Error: Class or component 'energyDynamics' not found in SolarThermal solarThermal
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mo, line 25
+ Component context: solarThermal
+  Component declared as SolarThermal solarThermal in <a href="Modelica://AixLib.Fluid.Solar.Thermal">AixLib.Fluid.Solar.Thermal</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl">AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl</a>
+Error: Class or component 'energyDynamics' not found in CHPNoControl combinedHeatPower
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo, line 6
+ Component context: combinedHeatPower
+  Component declared as CHPNoControl combinedHeatPower in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl">AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>
 Component type specifier BaseProperties is a partial type
   It must be redeclared before being used.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
@@ -11,7 +100,7 @@ Error: Class or component 'energyDynamics' not found in Boiler boiler
  Component context: boiler
   Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
   Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 4
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 4
 Error: ERRORS have been issued.
 
 
@@ -74,55 +163,6 @@ Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.CHPSystem 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystem">AixLib.Fluid.BoilerCHP.Examples.CHPSystem</a>
-Error: Class or component 'energyDynamics' not found in CHP combinedHeatPower
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo, line 5
- Component context: combinedHeatPower
-  Component declared as CHP combinedHeatPower in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystem">AixLib.Fluid.BoilerCHP.Examples.CHPSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystem.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl 
-Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
- Component context: boiler.vol.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Error: Class or component 'energyDynamics' not found in Boiler boiler
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
- Component context: boiler
-  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 4
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl">AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl</a>
-Error: Class or component 'energyDynamics' not found in CHPNoControl combinedHeatPower
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo, line 6
- Component context: combinedHeatPower
-  Component declared as CHPNoControl combinedHeatPower in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl">AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem">AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem</a>
-Error: Class or component 'energyDynamics' not found in HeatGeneratorNoControl heatGeneratorNoControll
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo, line 18
- Component context: heatGeneratorNoControll
-  Component declared as HeatGeneratorNoControl heatGeneratorNoControll in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem">AixLib.Fluid.BoilerCHP.Examples.HeatGeneratorNoControllSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/HeatGeneratorNoControllSystem.mo, line 2
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem 
 Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem</a>
 Error: Class or component 'energyDynamics' not found in BoilerNoControl boilerNoControl
@@ -134,58 +174,18 @@ Error: Class or component 'energyDynamics' not found in BoilerNoControl boilerNo
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>
-Error: Class or component 'energyDynamics' not found in Boiler boiler
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 25
- Component context: boiler
-  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector 
-Check of <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>
-Error: Class or component 'energyDynamics' not found in SolarThermal solarThermal
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mo, line 25
- Component context: solarThermal
-  Component declared as SolarThermal solarThermal in <a href="Modelica://AixLib.Fluid.Solar.Thermal">AixLib.Fluid.Solar.Thermal</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector">AixLib.Fluid.Solar.Thermal.Examples.SolarThermalCollector</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
-Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: boiler.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
 Error: Class or component 'energyDynamics' not found in Boiler boiler
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
  Component context: boiler
   Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
   Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump 
-Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>
-Error: Class or component 'energyDynamics' not found in Boiler boiler
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
- Component context: peaLoaDev.boiler
-  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 4
-Error: Class or component 'energyDynamics' not found in Boiler boiler
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 8
- Component context: PeakLoadDeviceModel.boiler
-  Component declared as Boiler boiler in <a href="Modelica://AixLib.Fluid.BoilerCHP">AixLib.Fluid.BoilerCHP</a>
-  Attempted modification in <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 4
-Warning: Redeclaration requires a subtype.
- But missing component dp_start.
-  In redeclaration of PeakLoadDeviceModel.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase.PeakLoadDeviceModel#text">20</a>
-  Context: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel</a>
-Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 

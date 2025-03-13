@@ -1,49 +1,7 @@
 
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler">AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerFeedback 
 Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerFeedback">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerFeedback</a>
 Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerFeedback
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve 
-Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve</a>
-Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve
 Error: ERRORS have been issued.
 
 
@@ -53,8 +11,50 @@ Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Contro
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.SafetyControl
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerSimple
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler">AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.ModularBoiler
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.FeedbackControl 
 Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.FeedbackControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.FeedbackControl</a>
 Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.FeedbackControl
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.BoilerControl
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Examples.ModularBoilerHeatingCurve
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.InternalFirRatControl
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay">AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay</a>
+Did not find model AixLib.Systems.ScalableGenerationModules.ModularBoiler.Controls.DeviceStatusDelay
 Error: ERRORS have been issued.
 
