@@ -44,7 +44,7 @@ record Supervisory "Swimming facility - Supervisory and control rooms"
     wfRoof = {1.0},
     aRoof = 0.5,
     aExt = 0.5,
-    TSoil = 286.15,
+    TSoil=286.15,
     hConWallOut = 20.0,
     hRadWall = 5.0,
     hConWinOut = 20.0,

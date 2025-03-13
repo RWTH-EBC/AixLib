@@ -1,7 +1,7 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialEmpiricalFlowStackWindIncidence
   "Partial model for empirical expressions with stack effect and wind incidence angle considered"
-  extends PartialEmpiricalFlowStack;
+  extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack;
   parameter Modelica.Units.SI.Angle aziRef(displayUnit="deg")=0
     "Azimuth angle of the referece surface impacted by wind";
   Modelica.Units.SI.Angle incAng(displayUnit="deg")
