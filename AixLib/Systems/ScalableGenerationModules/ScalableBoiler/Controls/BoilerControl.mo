@@ -20,13 +20,13 @@ model BoilerControl "Master controller that holds all other controls"
   parameter Boolean TFlowByHeaCur=false "Use heating curve to set flow temperature" annotation (Dialog(group="Heating Curve"));
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet" annotation (Dialog(group="Heating Curve"));
-  replaceable function HeatingCurveFunction =
+  replaceable function heaCurFun =
       AixLib.Controls.SetPoints.Functions.HeatingCurveFunction annotation (
       choicesAllMatching=true, Dialog(group="Heating Curve"));
-  parameter Real declination=1 annotation (Dialog(group="Heating Curve"));
-  parameter Real day_hour=6 annotation (Dialog(group="Heating Curve"));
-  parameter Real night_hour=22 annotation (Dialog(group="Heating Curve"));
-  parameter Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
+  parameter Real dec=1 "Declination of heating curve" annotation (Dialog(group="Heating Curve"));
+  parameter Real dayHou=6 "Hour of day at which day mode is enabled" annotation (Dialog(group="Heating Curve"));
+  parameter Real nigHou=22 "Hour of day at which night mode is enabled"   annotation (Dialog(group="Heating Curve"));
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve" annotation (Dialog(group="Heating Curve"));
   parameter Modelica.Units.SI.ThermodynamicTemperature TOffset=0
     "Offset to heating curve temperature" annotation (Dialog(group="Heating Curve"));
@@ -55,41 +55,42 @@ model BoilerControl "Master controller that holds all other controls"
     "Time after which the device can be turned off again" annotation (Dialog(group="Safety Control"));
   // Pump Control
 
-  FirRatMinCheck firRatMinChe(final FirRatMin=FirRatMin)
+  AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls.FirRatMinCheck firRatMinChe(final FirRatMin=FirRatMin)
+    "Check to prevent firing rate going below minimal firing rate"
     annotation (Placement(transformation(extent={{46,-10},{66,10}})));
   SafetyControl safCtr(
     final TFlowMax=TFlowMax,
     final TRetMin=TRetMin,
     final time_minOff=time_minOff,
-    final time_minOn=time_minOn)
+    final time_minOn=time_minOn) "Saftey control for the boiler"
     annotation (Placement(transformation(extent={{-20,36},{0,56}})));
   AixLib.Controls.Interfaces.BoilerControlBus
                               boilerControlBus
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  FeedbackControl fdbCtrl(
+  AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls.FeedbackControl fdbCtrl(
     TRetNom=TRetNom,
     final k=kFeedBack,
     final Ti=TiFeedBack,
     final yMax=yMaxFeedBack,
     final yMin=yMinFeedBack) if hasFeedback
+    "Controler for return temperature control with feedback loop if enabled"
     annotation (Placement(transformation(extent={{-74,-88},{-54,-68}})));
-  InternalFirRatControl intlFirRatCtr(
+  AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls.InternalFirRatControl intlFirRatCtr(
     final k=kFloTem,
     final Ti=TiFloTem,
     final yMax=1,
-    final yMin=FirRatMin)
+    final yMin=FirRatMin) "Simple control with flow temperature PID control"
     annotation (Placement(transformation(extent={{-20,6},{0,26}})));
- AixLib.Controls.SetPoints.HeatingCurve heaCur(
+  AixLib.Controls.SetPoints.HeatingCurve heaCur(
     final TOffset=TOffset,
     final use_dynTRoom=false,
     final zerTim=zerTim,
-    final day_hour=day_hour,
-    final night_hour=night_hour,
+    final day_hour=dayHou,
+    final night_hour=nigHou,
     final heatingCurveRecord=
-        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10
-        (),
-    final declination=declination,
-    redeclare function HeatingCurveFunction = HeatingCurveFunction,
+        AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10(),
+    final declination=dec,
+    redeclare function HeatingCurveFunction = heaCurFun,
     final use_tableData=use_tableData,
     final TRoom_nominal=293.15) if TFlowByHeaCur
     annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));

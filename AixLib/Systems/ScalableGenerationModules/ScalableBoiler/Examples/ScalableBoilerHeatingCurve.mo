@@ -3,24 +3,21 @@ model ScalableBoilerHeatingCurve
   "Example for ScalableBoiler - With Pump and simple Pump regulation using a 
   heating curve for supply temperature control"
   extends Modelica.Icons.Example;
-  parameter Integer k=2 "number of consumers";
   package MediumWater = AixLib.Media.Water;
 
-  ScalableBoiler scaBoi(
-    hasPump=true,
+  AixLib.Systems.ScalableGenerationModules.ScalableBoiler.ScalableBoiler scaBoi(
+    hasPum=true,
     Q_flow_nominal=50000,
     T_start=303.15,
-    hasFeedback=false,
+    hasFedBac=false,
     use_tableData=true,
-    redeclare function HeatingCurveFunction =
-        AixLib.Controls.SetPoints.Functions.HeatingCurveFunction,
     dp_Valve(displayUnit="Pa") = 6000,
     use_HeaCur=true,
     Kv=10,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = MediumWater)
-    annotation (Placement(transformation(extent={{-34,-30},{26,30}})));
-  Fluid.Sources.Boundary_pT bou(
+    annotation (Placement(transformation(extent={{-36,-30},{24,30}})));
+  AixLib.Fluid.Sources.Boundary_pT bou(
     use_T_in=false,
     redeclare package Medium = MediumWater,
     T=293.15,
@@ -34,7 +31,7 @@ model ScalableBoilerHeatingCurve
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-88,76})));
-  Fluid.MixingVolumes.MixingVolume vol(
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=scaBoi.energyDynamics,
     massDynamics=scaBoi.energyDynamics,
@@ -59,7 +56,7 @@ model ScalableBoilerHeatingCurve
     f=4/86400,
     offset=278.15)
     annotation (Placement(transformation(extent={{-128,46},{-108,66}})));
-  Fluid.Sensors.TemperatureTwoPort senTRet(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Media.Water,
     final m_flow_nominal=scaBoi.m_flow_nominal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -72,7 +69,7 @@ model ScalableBoilerHeatingCurve
         origin={22,-80})));
 equation
   connect(boilerControlBus, scaBoi.boilerControlBus) annotation (Line(
-      points={{0,62},{0,29.4},{-4,29.4}},
+      points={{0,62},{0,29.4},{-6,29.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -80,7 +77,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(bou.ports[1], scaBoi.port_a)
-    annotation (Line(points={{-72,0},{-34,0}}, color={0,127,255}));
+    annotation (Line(points={{-72,0},{-36,0}}, color={0,127,255}));
   connect(isOnSet.y, boilerControlBus.isOn) annotation (Line(points={{-77,76},
           {0,76},{0,62}},         color={255,0,255}), Text(
       string="%second",
@@ -88,7 +85,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(scaBoi.port_b, vol.ports[1])
-    annotation (Line(points={{26,0},{73,0}}, color={0,127,255}));
+    annotation (Line(points={{24,0},{73,0}}, color={0,127,255}));
   connect(preHeaFlo.port, vol.heatPort)
     annotation (Line(points={{64,30},{64,10}}, color={191,0,0}));
   connect(sineHeaFlo.y, preHeaFlo.Q_flow)
@@ -102,7 +99,7 @@ equation
   connect(vol.ports[2], senTRet.port_a) annotation (Line(points={{75,0},{54,0},{
           54,-80},{32,-80}}, color={0,127,255}));
   connect(scaBoi.port_a, senTRet.port_b)
-    annotation (Line(points={{-34,0},{-34,-80},{12,-80}}, color={0,127,255}));
+    annotation (Line(points={{-36,0},{-36,-80},{12,-80}}, color={0,127,255}));
 annotation (
     experiment(StopTime=86400, Tolerance=1e-06, __Dymola_Algorithm="Dassl"),
      __Dymola_Commands(file=

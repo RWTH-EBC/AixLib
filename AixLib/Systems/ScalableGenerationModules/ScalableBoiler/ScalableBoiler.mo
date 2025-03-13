@@ -7,8 +7,9 @@ model ScalableBoiler
         *dT_nominal));
 
   // System Parameters
-  parameter Boolean hasPump=true "Model includes a pump"
-    annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="System setup"));
+  parameter Boolean hasPum=true "Model includes a pump"
+    annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group=
+          "System setup"));
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
     "Nominal heat flow rate"
     annotation (Dialog(group="System setup"));
@@ -58,12 +59,19 @@ model ScalableBoiler
           "Flow temperature"));
 
   // Feedback
-  parameter Boolean hasFeedback=true  "circuit has Feedback"     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group="Feedback"));
-  parameter Real kFeedBack=1 "Gain of controller" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
+  parameter Boolean hasFedBac=true "circuit has Feedback"        annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group=
+          "Feedback"));
+  parameter Real kFedBac=1 "Gain of controller"   annotation (Dialog(enable=
+          hasFeedback,                                                                   tab="Control", group=
+          "Feedback"));
   parameter Modelica.Units.SI.Time TiFeedBack=0.5
     "Time constant of Integrator block" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
-  parameter Real yMaxFeedBack=0.99 "Upper limit of output" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
-  parameter Real yMinFeedBack=0.01 "Lower limit of output" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
+  parameter Real yMaxFedBac=0.99 "Upper limit of output"   annotation (Dialog(enable=
+          hasFeedback,                                                                            tab="Control", group=
+          "Feedback"));
+  parameter Real yMinFedBac=0.01 "Lower limit of output"   annotation (Dialog(enable=
+          hasFeedback,                                                                            tab="Control", group=
+          "Feedback"));
   parameter Modelica.Units.SI.PressureDifference dp_Valve  "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
   parameter Real Kv "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)] annotation (Dialog(enable=hasFeedback))"
@@ -112,7 +120,7 @@ model ScalableBoiler
     final m_flow_small=0.001,
     final per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={
             dp_nominal/0.8,dp_nominal,0})),
-    final addPowerToMedium=false) if hasPump "Boiler Pump"
+    final addPowerToMedium=false) if hasPum  "Boiler Pump"
     annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
 
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
@@ -123,7 +131,7 @@ model ScalableBoiler
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=Kv,
     final m_flow_nominal= m_flow_nominal,
-    final dpFixed_nominal={10,10})         if hasFeedback
+    final dpFixed_nominal={10,10}) if hasFedBac
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
 //    final dpValve_nominal=dp_Valve,
 
@@ -138,18 +146,18 @@ model ScalableBoiler
     TiFloTem=TiFloTem,
     final TFlowByHeaCur=use_HeaCur,
     final use_tableData=use_tableData,
-    redeclare final function HeatingCurveFunction = HeatingCurveFunction,
-    final declination=declination,
-    final day_hour=day_hour,
-    final night_hour=night_hour,
+    redeclare final function heaCurFun = HeatingCurveFunction,
+    final dec=declination,
+    final dayHou=day_hour,
+    final nigHou=night_hour,
     final zerTim=zerTim,
     final TOffset=TOffset,
     final TRetNom=TRet_nominal,
-    final hasFeedback=hasFeedback,
-    final kFeedBack=kFeedBack,
+    final hasFeedback=hasFedBac,
+    final kFeedBack=kFedBac,
     final TiFeedBack=TiFeedBack,
-    final yMaxFeedBack=yMaxFeedBack,
-    final yMinFeedBack=yMinFeedBack,
+    final yMaxFeedBack=yMaxFedBac,
+    final yMinFeedBack=yMinFedBac,
     final TRetMin=TRet_min,
     final time_minOff=time_minOff,
     final TFlowMax=TSup_max,
@@ -170,7 +178,7 @@ protected
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_medium = Medium.cp_const;
 
 equation
-  if not hasPump then
+  if not hasPum then
     connect(senTRet.port_b, boiGen.port_a);
   else
     connect(pum.port_b, boiGen.port_a)
@@ -184,7 +192,7 @@ equation
   connect(senTSup.port_a, boiGen.port_b)
     annotation (Line(points={{50,0},{32,0}}, color={0,127,255}));
 
-  if hasFeedback then
+  if hasFedBac then
     connect(port_a, val.port_1)
       annotation (Line(points={{-100,0},{-74,0}}, color={0,127,255},
         pattern=LinePattern.Dash));

@@ -1,6 +1,6 @@
 within AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls;
 model InternalFirRatControl
-  "Simple control with flow temperature PID control if no other signal provided"
+  "Simple control with flow temperature PID control"
  // PI Control
  parameter Real k=1 "Gain of controller" annotation (Dialog(group="Flow Temperature PI"));
  parameter Modelica.Units.SI.Time Ti=10 "Time constant of Integrator block" annotation (Dialog(group="Flow Temperature PI"));

@@ -3,7 +3,7 @@ model SafetyControl
   parameter Modelica.Units.SI.Temperature TFlowMax=378.15 "Maximum flow temperature, at which the system is shut down";
   parameter Modelica.Units.SI.Temperature TRetMin=313.15 "Minimum return temperature, at which the system is shut down";
 
-  Modelica.Blocks.Sources.RealExpression TSupMaxExp(final y=TFlowMax)
+  Modelica.Blocks.Sources.RealExpression TSupMaxExp(final y=TFlowMax) "Real expression for maximum expected flow temperature"
     annotation (Placement(transformation(extent={{-96,-30},{-76,-10}})));
   Modelica.Blocks.Interfaces.RealInput TSupMea(unit="K")
     "Measured flow temperature of boiler"
