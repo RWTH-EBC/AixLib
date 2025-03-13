@@ -19,8 +19,9 @@ model BoilerGeneric "Generic performance map based boiler"
   parameter Modelica.Units.SI.Temperature TRet_nominal=333.15
     "Design return temperature" annotation (Dialog(group="Nominal condition"),Evaluate=false);
 
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor intCap(final C=C, T(
-        start=T_start)) "Boiler thermal capacity (dry weight)"
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor intCap(final C=C, T(start=
+          T_start, fixed=true))
+                        "Boiler thermal capacity (dry weight)"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=90)));
   AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation offDesignOperation(
     Q_flow_nominal=Q_flow_nominal,
