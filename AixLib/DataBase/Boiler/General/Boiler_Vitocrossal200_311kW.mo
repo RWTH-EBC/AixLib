@@ -4,7 +4,7 @@ record Boiler_Vitocrossal200_311kW
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitocrossal200_311kW",
     volume=279/1000,
-    pressureDrop = 4000/(7.79e-3)^2,
+    a = 4000/(7.79e-3)^2,
     Q_nom = 326000,
     Q_min = 326000*0.33,
     eta = [0.3, (0.973+0.989)/2;

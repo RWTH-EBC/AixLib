@@ -8,8 +8,10 @@ record BoilerTwoPointBaseDataDefinition
     "Name of boiler";
   parameter SI.Volume volume
     "Water volume of boiler";
-  parameter Real pressureDrop
-    "Pressure drop coefficient, delta_p[Pa] = PD*Q_flow[m^3/s]^2";
+  parameter Real a
+    "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
+  parameter Real n=2
+    "Pressure drop exponent (typical value is 2), dp_nominal[Pa] = a*V_flow_nominal[m^2/s]^n";
   parameter SI.Power Q_nom
     "Nominal heat power / thermal load, refering to net (inferior) calorific value";
   parameter SI.Power Q_min

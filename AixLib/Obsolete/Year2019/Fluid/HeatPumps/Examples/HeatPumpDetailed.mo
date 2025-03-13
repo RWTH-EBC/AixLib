@@ -165,7 +165,7 @@ equation
 <p>
   Besides using the default simple table data, the user should also
   test tabulated data from <a href=
-  \"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or
+  \"modelica://AixLib.Obsolete.Year2024.DataBase.HeatPump\">AixLib.Obsolete.Year2024.DataBase.HeatPump</a> or
   polynomial functions.
 </p>
 </html>",
