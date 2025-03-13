@@ -51,9 +51,6 @@ partial model PartialHeatGenerator "Partial model for heat generators"
       Medium.T_default,
       Medium.X_default) "Density used for parameterization of pressure curve"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics"));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -93,7 +90,6 @@ partial model PartialHeatGenerator "Partial model for heat generators"
         origin={-60,-50})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
-    final energyDynamics=energyDynamics,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=m_flow_small,
     final allowFlowReversal=allowFlowReversal,
@@ -102,6 +98,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final T_start=T_start)
     "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
+
   AixLib.Fluid.FixedResistances.PressureDrop preDro(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -112,11 +109,6 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final from_dp=from_dp,
     final linearized=linearized) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
-      Medium.p_default,
-      Medium.T_default,
-      Medium.X_default) "Density used for parameterization of pressure curve"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
 
 equation
   connect(port_a, senTRet.port_a) annotation (Line(
