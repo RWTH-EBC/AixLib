@@ -195,7 +195,7 @@ public
         transformation(
         extent={{-10,-10},{10,10}},
         origin={-20,88})));
-  Modelica.Blocks.Sources.RealExpression SolarRadTotal(y=SolarRadiationPort.I) if outside
+  Modelica.Blocks.Sources.RealExpression SolarRadTotal(y=SolarRadiationPort.H) if outside
     annotation (Placement(transformation(extent={{-80,86},{-60,106}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
     "Outdoor air (dry bulb) temperature sensor"

@@ -15,11 +15,11 @@ model PrescribedSolarRad "variable radiation condition"
   Modelica.Blocks.Interfaces.RealInput AOI[n] "radiation on surface (W/m2)"
     annotation (Placement(transformation(extent={{-120,-76},{-80,-36}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
 equation
-  solarRad_out[:].I = I[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_dir = I_dir[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_diff = I_diff[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_gr = I_gr[:] "Radiant energy fluence rate";
-  solarRad_out[:].AOI = AOI[:] "Radiant energy fluence rate";
+  solarRad_out[:].H = I[:] "Radiant energy fluence rate";
+  solarRad_out[:].HDir = I_dir[:] "Radiant energy fluence rate";
+  solarRad_out[:].HDif = I_diff[:] "Radiant energy fluence rate";
+  solarRad_out[:].HGrd = I_gr[:] "Radiant energy fluence rate";
+  solarRad_out[:].incAng = AOI[:] "Radiant energy fluence rate";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),graphics={
