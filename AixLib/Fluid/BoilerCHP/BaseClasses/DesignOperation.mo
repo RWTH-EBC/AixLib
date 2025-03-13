@@ -12,11 +12,11 @@ model DesignOperation "Calculation of operation for nominal/design conditions"
 
 
 
-  Modelica.Blocks.Sources.RealExpression ReturnTemp(y=TRet_nominal)
+  Modelica.Blocks.Sources.RealExpression RetTem(y=TRet_nominal)
     "Nominal return temperature"
     annotation (Placement(transformation(extent={{-100,6},{-54,30}})));
 
-  Modelica.Blocks.Sources.RealExpression y_fullLoad(y=1) "realtive power"
+  Modelica.Blocks.Sources.RealExpression yfulLoa(y=1) "realtive power"
     annotation (Placement(transformation(extent={{-100,-52},{-54,-28}})));
 
   Modelica.Blocks.Sources.RealExpression conductance(y=0.0465*Q_flow_nominal/
@@ -37,11 +37,12 @@ model DesignOperation "Calculation of operation for nominal/design conditions"
         origin={0,-110})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4
     annotation (Placement(transformation(extent={{18,-16},{38,4}})));
-  SDF.NDTable boilerEffciency(
+  SDF.NDTable boiEff(
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/BaseClasses/GenericBoiler/Boiler_Generic_Characteristic_Chart.sdf"),
+
     dataset="/Characteristic chart",
     dataUnit="-",
     scaleUnits={"K","K","-","-"},
@@ -55,22 +56,22 @@ model DesignOperation "Calculation of operation for nominal/design conditions"
 
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{-36,-14},{-16,6}})));
-  Modelica.Blocks.Sources.RealExpression SupplyTemp(y=TSup_nominal)
+  Modelica.Blocks.Sources.RealExpression SupTem(y=TSup_nominal)
     "Nominal supply temperature"
     annotation (Placement(transformation(extent={{-100,-22},{-54,2}})));
-  Modelica.Blocks.Sources.RealExpression DeltaT_amb(y=TSup_nominal - 293.15)
+  Modelica.Blocks.Sources.RealExpression dTAmb(y=TSup_nominal - 293.15)
     "temperature difference supply-ambient"
     annotation (Placement(transformation(extent={{-100,80},{-54,104}})));
   Modelica.Blocks.Math.Product losses "Nominal boiler losses"
     annotation (Placement(transformation(extent={{-32,76},{-12,96}})));
 equation
 
-  connect(multiplex4.y, boilerEffciency.u)
+  connect(multiplex4.y, boiEff.u)
     annotation (Line(points={{39,-6},{52,-6}}, color={0,0,127}));
-  connect(boilerEffciency.y, division.u2) annotation (Line(points={{75,-6},{80,-6},
-          {80,22},{50,22},{50,52},{56,52}}, color={0,0,127}));
-  connect(y_fullLoad.y, multiplex4.u3[1]) annotation (Line(points={{-51.7,-40},
-          {-8,-40},{-8,-9},{16,-9}}, color={0,0,127}));
+  connect(boiEff.y, division.u2) annotation (Line(points={{75,-6},{80,-6},{80,
+          22},{50,22},{50,52},{56,52}}, color={0,0,127}));
+  connect(yfulLoa.y, multiplex4.u3[1]) annotation (Line(points={{-51.7,-40},{-8,
+          -40},{-8,-9},{16,-9}}, color={0,0,127}));
   connect(NomCap.y, add.u2) annotation (Line(points={{-51.7,40},{-40,40},{-40,
           58},{18,58}},
                     color={0,0,127}));
@@ -78,22 +79,22 @@ equation
                     color={0,0,127}));
   connect(division.y, NomFueDem) annotation (Line(points={{79,58},{92,58},{92,
           -80},{0,-80},{0,-110}}, color={0,0,127}));
-  connect(ReturnTemp.y, multiplex4.u1[1]) annotation (Line(points={{-51.7,18},{
-          -10,18},{-10,3},{16,3}}, color={0,0,127}));
-  connect(SupplyTemp.y, add1.u2) annotation (Line(points={{-51.7,-10},{-38,-10}},
-                      color={0,0,127}));
+  connect(RetTem.y, multiplex4.u1[1]) annotation (Line(points={{-51.7,18},{-10,
+          18},{-10,3},{16,3}}, color={0,0,127}));
+  connect(SupTem.y, add1.u2)
+    annotation (Line(points={{-51.7,-10},{-38,-10}}, color={0,0,127}));
   connect(conductance.y, losses.u2) annotation (Line(points={{-49.7,66},{-40,66},
           {-40,80},{-34,80}}, color={0,0,127}));
-  connect(DeltaT_amb.y, losses.u1)
+  connect(dTAmb.y, losses.u1)
     annotation (Line(points={{-51.7,92},{-34,92}}, color={0,0,127}));
   connect(losses.y, add.u1) annotation (Line(points={{-11,86},{0,86},{0,70},{18,
           70}}, color={0,0,127}));
-  connect(y_fullLoad.y, multiplex4.u4[1]) annotation (Line(points={{-51.7,-40},
-          {-8,-40},{-8,-15},{16,-15}}, color={0,0,127}));
+  connect(yfulLoa.y, multiplex4.u4[1]) annotation (Line(points={{-51.7,-40},{-8,
+          -40},{-8,-15},{16,-15}}, color={0,0,127}));
   connect(add1.y, multiplex4.u2[1])
     annotation (Line(points={{-15,-4},{16,-4},{16,-3}}, color={0,0,127}));
-  connect(ReturnTemp.y, add1.u1) annotation (Line(points={{-51.7,18},{-46,18},{
-          -46,2},{-38,2}}, color={0,0,127}));
+  connect(RetTem.y, add1.u1) annotation (Line(points={{-51.7,18},{-46,18},{-46,
+          2},{-38,2}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},

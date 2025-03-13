@@ -24,11 +24,12 @@ replaceable package Medium=AixLib.Media.Water;
     annotation (Placement(transformation(extent={{-100,-80},{-60,-52}})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4
     annotation (Placement(transformation(extent={{24,10},{46,32}})));
-  SDF.NDTable boilerEffciency(
+  SDF.NDTable boiEff(
     nin=4,
     readFromFile=true,
     filename=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/BaseClasses/GenericBoiler/Boiler_Generic_Characteristic_Chart.sdf"),
+
     dataset="/Characteristic chart",
     dataUnit="-",
     scaleUnits={"K","K","-","-"},
@@ -62,11 +63,10 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(m_flow_nominalExp.y, devision1.u2) annotation (Line(points={{-58,-66},
           {-56,-66},{-56,-60},{-52,-60}}, color={0,0,127}));
-  connect(multiplex4.y, boilerEffciency.u)
-    annotation (Line(points={{47.1,21},{52,21},{52,22},{58,22}},
-                                               color={0,0,127}));
-  connect(boilerEffciency.y, boilerControlBus.Efficiency) annotation (Line(
-        points={{81,22},{96,22},{96,68},{2,68},{2,100}}, color={0,0,127}), Text(
+  connect(multiplex4.y, boiEff.u) annotation (Line(points={{47.1,21},{52,21},{
+          52,22},{58,22}}, color={0,0,127}));
+  connect(boiEff.y, boilerControlBus.Efficiency) annotation (Line(points={{81,
+          22},{96,22},{96,68},{2,68},{2,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
