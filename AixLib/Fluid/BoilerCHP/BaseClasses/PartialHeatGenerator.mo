@@ -51,6 +51,9 @@ partial model PartialHeatGenerator "Partial model for heat generators"
       Medium.T_default,
       Medium.X_default) "Density used for parameterization of pressure curve"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -90,6 +93,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
         origin={-60,-50})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=m_flow_small,
     final allowFlowReversal=allowFlowReversal,

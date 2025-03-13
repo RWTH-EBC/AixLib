@@ -5,7 +5,7 @@ model BoilerGeneric "Generic performance map based boiler"
     T_start=T_start,
     a=coeffPreLos,
     redeclare package Medium = AixLib.Media.Water,
-    vol(energyDynamics=energyDynamics, V=(1.1615*Q_flow_nominal/1000)/1000),
+    vol(V=(1.1615*Q_flow_nominal/1000)/1000),
     final m_flow_nominal=Q_flow_nominal/(Medium.cp_const*(TSup_nominal -
         TRet_nominal)),
     final dp_nominal=m_flow_nominal^2*a/(Medium.d_const^2));
@@ -60,8 +60,6 @@ model BoilerGeneric "Generic performance map based boiler"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-38,14})));
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"  annotation (Dialog(tab="Dynamics", group="Conservation equations"));
 protected
   parameter Real coeffPreLos=7.143*10^8*exp(-0.007078*Q_flow_nominal/1000)
     "Pressure loss coefficient of the heat generator";
