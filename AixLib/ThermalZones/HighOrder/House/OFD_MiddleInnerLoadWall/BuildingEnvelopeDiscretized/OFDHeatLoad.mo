@@ -51,7 +51,7 @@ model OFDHeatLoad
   WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope(
     use_UFH=false,
     redeclare
-      Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.EnEV2009Heavy_UFH
+      Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Data.FloorLayers.EnEV2009Heavy_UFH
       wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,

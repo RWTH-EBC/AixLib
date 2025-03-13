@@ -1,21 +1,28 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
 model K_H_TypeA
  "Merge of all functions to calculate K_H for underfloor heating type A (EN 1264)"
-replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
-    "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
-    "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
-    replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition
-    sheathingMaterial "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=withSheathing), choicesAllMatching=true);
-replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition
-    pipeMaterial "Pipe Material" annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
+    "Wall type for floor"
+    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
+    "Wall type for ceiling"
+    annotation (Dialog(group="Room Specifications", enable=isCeiling), choicesAllMatching=true);
+  replaceable parameter Data.Sheathing_Materials.SheathingMaterialDefinition
+    sheMat "Sheathing Material" annotation (Dialog(group="Panel Heating",
+        enable=withSheathing), choicesAllMatching=true);
+  replaceable parameter Data.PipeMaterials.PipeMaterialDefinition pipMat
+    "Pipe Material"
+    annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
 
  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpha_Ceiling=
       5.8824 "Coefficient of heat transfer at floor surface";
- parameter Boolean Ceiling = if wallTypeCeiling.n == 3 then true else false "false if ground plate is under panel heating" annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
+  parameter Boolean isCeiling=if wallTypeCeiling.n == 3 then true else false
+    "false if ground plate is under panel heating"  annotation (Dialog(group=
+          "Room Specifications"),                                                                                                                                           choices(checkBox=true));
  parameter Modelica.Units.SI.Distance T "Spacing between tubes";
  parameter Modelica.Units.SI.Diameter d_a "outer diameter of pipe";
- parameter Modelica.Units.SI.ThermalConductivity lambda_R = pipeMaterial.lambda "Coefficient of heat transfer of pipe material";
+  parameter Modelica.Units.SI.ThermalConductivity lambda_R=pipMat.lambda
+    "Coefficient of heat transfer of pipe material";
  constant Modelica.Units.SI.ThermalConductivity lambda_R0 = 0.35;
  parameter Modelica.Units.SI.Thickness s_R "thickness of pipe wall";
  constant Modelica.Units.SI.Thickness s_R0 = 0.002;
@@ -23,7 +30,9 @@ replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.
  parameter Boolean withSheathing = true "false if pipe has no Sheathing" annotation (choices(checkBox=true));
  parameter Modelica.Units.SI.Diameter D = d_a  "Outer diameter of pipe including Sheathing" annotation (Dialog(enable = withSheathing));
  final parameter Modelica.Units.SI.Diameter d_M = if withSheathing then D else 0;
- parameter Modelica.Units.SI.ThermalConductivity lambda_M = sheathingMaterial.lambda "Thermal Conductivity for Sheathing" annotation (Dialog(enable = withSheathing));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_M=sheMat.lambda
+    "Thermal Conductivity for Sheathing"
+    annotation (Dialog(enable=withSheathing));
 
  parameter Modelica.Units.SI.Thickness s_u=wallTypeFloor.d[1] "thickness of floor screed";
  parameter Modelica.Units.SI.ThermalConductivity lambda_E=wallTypeFloor.lambda[1] "Thermal conductivity of floor screed";
@@ -32,13 +41,16 @@ replaceable parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.
        else 0 "Thermal resistance of flooring";
  parameter Modelica.Units.SI.ThermalInsulance R_lambdaB = if R_lambdaB0 < 0.1 then 0.1 else R_lambdaB0 "Thermal resistance of flooring used for dimensioning";
 
- final parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns= wallTypeCeiling.d[1]/wallTypeCeiling.lambda[1] "Thermal resistance of thermal insulation";
- final parameter Modelica.Units.SI.ThermalInsulance R_alphaCeiling = if Ceiling then 1/alpha_Ceiling else 0 "Thermal resistance at the ceiling";
- final parameter Modelica.Units.SI.ThermalInsulance R_lambdaCeiling=if Ceiling
-       then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
+ parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns "Thermal resistance of thermal insulation";
+ parameter Modelica.Units.SI.ThermalInsulance R_alphaCeiling=if
+      isCeiling then 1/alpha_Ceiling else 0 "Thermal resistance at the ceiling";
+ parameter Modelica.Units.SI.ThermalInsulance R_lambdaCeiling=if
+      isCeiling then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (
+      wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/
+      wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
     "Thermal resistance of ceiling";
- final parameter Modelica.Units.SI.ThermalInsulance R_lambdaPlaster=if Ceiling
-       then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0
+ parameter Modelica.Units.SI.ThermalInsulance R_lambdaPlaster=if
+      isCeiling then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0
     "Thermal resistance of plaster";
 
  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer B =  if withSheathing == false then
@@ -85,7 +97,7 @@ protected
 
  import Modelica.Math.log;
 
-  Tables.CombiTable2DParameter determine_au(
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.Tables.CombiTable2DParameter determine_au(
     table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,1.066,1.053,1.041,1.035; 0.1,1.063,1.05,1.039,1.0335;
         0.15,1.057,1.046,1.035,1.0305; 0.2,1.051,1.041,1.0315,1.0275; 0.225,1.048,1.038,1.0295,1.026; 0.3,1.0395,1.031,
         1.024,1.021; 0.375,1.03,1.0221,1.0181,1.015],
@@ -93,7 +105,7 @@ protected
     u1=if T <= 0.375 then T else 0.375)
                   "Table A.2 according to EN 1264-2 p. 29"
     annotation (Placement(transformation(extent={{-96,20},{-70,46}})));
-  Tables.CombiTable2DParameter determine_aD(
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.Tables.CombiTable2DParameter determine_aD(
     table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,1.016,1.014; 0.1,1.029,1.025,1.022,1.018;
         0.15,1.04,1.034,1.029,1.024; 0.2,1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,1.044,1.039;
         0.375,1.056,1.051,1.046,1.042],
@@ -101,7 +113,7 @@ protected
     u1=if T <= 0.375 then T else 0.375)
                   "Table A.3 according to EN 1264-2 p. 30"
     annotation (Placement(transformation(extent={{-96,-20},{-70,6}})));
-  Tables.CombiTable1DParameter determine_aT(table=[0,1.23; 0.05,1.188; 0.10,1.156; 0.15,1.134], u=R_lambdaB)
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.Tables.CombiTable1DParameter determine_aT(table=[0,1.23; 0.05,1.188; 0.10,1.156; 0.15,1.134], u=R_lambdaB)
     "Table A.1 according to EN 1264-2 p. 29" annotation (Placement(transformation(extent={{-96,60},{-72,84}})));
 
 initial equation

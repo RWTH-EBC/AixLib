@@ -6,12 +6,13 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
     annotation (Dialog(group="Panel Heating"));
   parameter Integer nPipeLay=if withSheathing then 2 else 1
     "Number of pipe layers";
-  final parameter Modelica.Units.SI.Volume VWat=Modelica.Constants.pi/4*dInn^
+  parameter Modelica.Units.SI.Volume VWat=Modelica.Constants.pi/4*dInn^
       (2)*length "Water Volume in Tube";
-  final parameter Modelica.Units.SI.Time tau=VWat*(rho_default*dis)/
+  parameter Modelica.Units.SI.Time tau=VWat*(rho_default*dis)/
       m_flow_nominal;
-  final parameter Modelica.Units.SI.Area APipeInnSuf=Modelica.Constants.pi*dInn*length "Surface area inside the pipe";
-  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer hPipeInnTurb=2200
+  parameter Modelica.Units.SI.Area APipeInnSuf=Modelica.Constants.pi*dInn*length
+    "Surface area inside the pipe";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hPipeInnTurb=2200
     "Coefficient of heat transfer at the inner surface of pipe due to turbulent flow";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -47,12 +48,13 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
            {{-8,-108},{8,-92}}), iconTransformation(extent={{-12,-112},{8,-92}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatConduction pipeHeaCon[nPipeLay](
-    final d_out=if withSheathing then {dOut, dOut + thicknessSheathing} else {dOut},
-    final lambda=if withSheathing then {pipeMaterial.lambda,sheathingMaterial.lambda} else {pipeMaterial.lambda},
-    final d_in=if withSheathing then {dInn, dOut} else {dInn},
+    final d_out=if withSheathing then {dOut,dOut + sShe} else {dOut},
+    final lambda=if withSheathing then {pipMat.lambda,sheMat.lambda} else {
+        pipMat.lambda},
+    final d_in=if withSheathing then {dInn,dOut} else {dInn},
     each final nParallel=1,
-    each final length=length) "Cylindric heat conduction through pipe" annotation (
-      Placement(transformation(
+    each final length=length) "Cylindric heat conduction through pipe"
+    annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={-30,60})));

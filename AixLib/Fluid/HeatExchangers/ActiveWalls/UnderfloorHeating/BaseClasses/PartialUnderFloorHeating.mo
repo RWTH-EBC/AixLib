@@ -2,11 +2,11 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 partial model PartialUnderFloorHeating
   "Common interfaces for underfloor heating"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-  extends PartialUnderFloorHeatingParameters;
-
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(m_flow_nominal(min=Modelica.Constants.eps));
+  extends PartialUnderFloorHeatingParameters(
+    dInn=sqrt(4*V_flow_nominal /Modelica.Constants.pi/v_nominal));
+  parameter Modelica.Units.SI.Velocity v_nominal = 0.1
+    "Nominal fluid velocity";
   final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=
       m_flow_nominal/rho_default "Nominal Volume Flow Rate in pipe";
   final parameter Modelica.Units.SI.Diameter dInnMin=sqrt(4*V_flow_nominal/(

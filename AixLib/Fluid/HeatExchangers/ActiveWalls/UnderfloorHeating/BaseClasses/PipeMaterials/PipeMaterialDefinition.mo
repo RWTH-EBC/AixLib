@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Pip
 record PipeMaterialDefinition "Record for definition of pipe material"
   extends Modelica.Icons.Record;
 
- parameter Modelica.Units.SI.ThermalConductivity lambda;
+  parameter Modelica.Units.SI.ThermalConductivity lambda;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)),Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

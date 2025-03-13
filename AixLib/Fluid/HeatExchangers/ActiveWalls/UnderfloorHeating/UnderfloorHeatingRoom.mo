@@ -1,29 +1,25 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingRoom "Model for heating of one room with underfloor heating"
-  extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=nCircuits,
-                   final m_flow_nominal=m_flow_PanelHeating);
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(
+    redeclare package Medium = AixLib.Media.Water "Water",
+    final nPorts=nCircuits,
+    final m_flow_nominal=mTot_flow_nominal);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
+      Medium = AixLib.Media.Water "Water");
   extends AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeatingParameters;
 
-  final parameter Integer nCircuits(min=1) = integer(ceil(length/lengthMax))
+  parameter Integer nCircuits(min=1)=integer(ceil(length/lengthMax))
     "Number of circuits in one zone";
-
   parameter Modelica.Units.SI.Length lengthMax=120
     "Maximum Length for one Circuit" annotation (Dialog(group="Panel Heating"));
   parameter Modelica.Units.SI.Power Q_flow_nominal
     "Nominal heat load for room with panel heating"
     annotation (Dialog(group="Room Specifications"));
-  final parameter Modelica.Units.SI.HeatFlux q_flow_nominal=Q_flow_nominal/A
-    "Area specific heat flow rate ";
-
-  //Q_F wird nicht mehr verwendet, kann also entfernt werden?
-  final parameter Modelica.Units.SI.Power Q_F=if q_flow_nominal <= q_G then
-      q_flow_nominal*A else q_G*A "nominal heat flow of panel heating";
-
   parameter Modelica.Units.SI.Temperature TSup_nominal
     "Nominal supply temperature";
   parameter Modelica.Units.SI.Temperature TRet_nominal
     "Nominal return temperature";
+
   parameter Modelica.Units.SI.PressureDifference dpPipe_nominal=100*length
     "Nominal pressure drop in every heating circuit"
     annotation (Dialog(group="Pressure Drop"));
@@ -33,85 +29,36 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   parameter Modelica.Units.SI.PressureDifference dpFixed_nominal=0
     "Additional pressure drop for every heating circuit, e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
 
-  parameter Modelica.Units.SI.Temperature TZone_nominal=20 + 273.15
+  parameter Modelica.Units.SI.Temperature TZone_nominal=293.15
     "Nominal zone temperature" annotation (Dialog(group="Room Specifications"));
-  final parameter Modelica.Units.SI.HeatFlux q_Gmax=8.92*(TSurMax -
-      TZone_nominal)^(1.1)
-    "Maximum possible heat flux with given surface temperature and room temperature";
-  parameter Boolean Ceiling "false if ground plate is under panel heating"
+  parameter Boolean isCeiling "=false if ground plate is under panel heating"
     annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
 
   parameter Modelica.Units.SI.Temperature TZoneBel_nominal=293.15
     "Nominal Room Temperature lying under panel heating"
     annotation (Dialog(group="Room Specifications"));
 
-  parameter Modelica.Units.SI.Distance spacing "Spacing between tubes"
+  parameter Modelica.Units.SI.Distance spa "Spacing between tubes"
     annotation (Dialog(group="Panel Heating"));
-  parameter Modelica.Units.SI.Diameter d(min = dOut) = dOut "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
-  final parameter Modelica.Units.SI.Length length=A/spacing
+  parameter Modelica.Units.SI.Diameter dOutShe(min=dOut) = dOut + 2*sShe
+    "Outer diameter of pipe including Sheathing"
+     annotation (Dialog( group="Panel Heating",   enable=withSheathing));
+  parameter Modelica.Units.SI.Length length=A/spa
     "Possible pipe length for given panel heating area";
 
-  final parameter Modelica.Units.SI.Thickness InsulationThickness=
-      wallTypeCeiling.d[1] "Thickness of thermal insulation";
-  final parameter Modelica.Units.SI.ThermalConductivity lambda_ins=
+  parameter Modelica.Units.SI.Thickness sIns=wallTypeCeiling.d[1]
+    "Thickness of thermal insulation";
+  parameter Modelica.Units.SI.ThermalConductivity lambdaIns=
       wallTypeCeiling.lambda[1] "Thermal conductivity of thermal insulation";
-  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaIns= InsulationThickness/lambda_ins "Thermal resistance of thermal insulation";
+  parameter Modelica.Units.SI.ThermalInsulance RIns=sIns/lambdaIns
+    "Thermal resistance of thermal insulation";
 
-  final parameter Modelica.Units.SI.Thickness CoverThickness=wallTypeFloor.d[1]
-    "thickness of cover above pipe";
-  final parameter Modelica.Units.SI.ThermalConductivity lambda_u=wallTypeFloor.lambda[1]
-    "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
-  final parameter Modelica.Units.SI.ThermalConductivity lambda_E=lambda_u
-    "Thermal conductivity of cover";
-  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaCeiling=if Ceiling
-       then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
-    "Thermal resistance of ceiling";
-  final parameter Modelica.Units.SI.ThermalInsulance R_lambdaPlaster=if Ceiling
-       then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0
-    "Thermal resistance of plaster";
-  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at Ceiling Surface";
-
-  final parameter Modelica.Units.SI.ThermalInsulance R_U=EN_1264.R_U
-    "Thermal resistance of wall layers under panel heating";
-  final parameter Modelica.Units.SI.ThermalInsulance R_O=EN_1264.R_O
-    "Thermal resistance of wall layers above panel heating";
-
-  final parameter Modelica.Units.SI.TemperatureDifference sigma_i=TSup_nominal -
-      TRet_nominal "Temperature spread for room (max = 5 for room with highest heat load)" annotation (Dialog(group="Room Specifications"));
-  final parameter Modelica.Units.SI.MassFlowRate m_flow_PanelHeating=A*
-      q_flow_nominal/(sigma_i*Cp_Medium)*(1 + (R_O/R_U) + (TZone_nominal - TZoneBel_nominal)/
-      (q_flow_nominal*R_U)) "nominal mass flow rate";
-  final parameter Modelica.Units.SI.MassFlowRate m_flow_Circuit=
-      m_flow_PanelHeating/nCircuits
+  parameter Modelica.Units.SI.MassFlowRate mTot_flow_nominal=Q_flow_nominal
+    /((TSup_nominal - TRet_nominal)*cpMed)*(1 + (EN_1264.R_O/EN_1264.R_U) + (TZone_nominal -
+      TZoneBel_nominal)/(Q_flow_nominal/A*EN_1264.R_U)) "Total nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate mCir_flow_nominal=
+      mTot_flow_nominal/nCircuits
     "Nominal mass flow rate in each heating circuit";
-
-  final parameter Real K_H=EN_1264.K_H
-    "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
-  final parameter Modelica.Units.SI.HeatFlux q_G=EN_1264.q_G
-    "specific limiting heat flux";
-  parameter Modelica.Units.SI.TemperatureDifference dT_Hi
-    "Nominal temperature difference between heating medium"
-    annotation (Dialog(group="Panel Heating"));
-  final parameter Modelica.Units.SI.TemperatureDifference dT_HU=
-      UnderfloorHeating.BaseClasses.logDT({TSup_nominal,TRet_nominal,TZoneBel_nominal});
-
-  final parameter Modelica.Units.SI.ThermalResistance R_add=1/(K_H*(1 + R_O/R_U*
-      dT_Hi/dT_HU)*A + A*(TZone_nominal - TZoneBel_nominal)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*
-      dT_Hi/dT_HU) - R_pipe - 1/(2200*Modelica.Constants.pi*dInn*length)
-    "additional thermal resistance";
-  final parameter Modelica.Units.SI.ThermalResistance R_pipe=if withSheathing
-       then (log(dOut + thicknessSheathing/dOut))/(2*sheathingMaterial.lambda*
-      Modelica.Constants.pi*length) + (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
-       else (log(dOut/dInn))/(2*pipeMaterial.lambda*Modelica.Constants.pi*length)
-    "thermal resistance through pipe layers";
-  parameter Integer use_vmax(min=1, max=2) "Output if v > v_max (0.5 m/s)"
-    annotation (choices(choice=1 "Warning", choice=2 "Error"));
-  parameter Integer calculateVol annotation (Dialog(group="Panel Heating",
-        descriptionLabel=true), choices(
-      choice=1 "Calculate Water Volume with inner diameter",
-      choice=2 "Calculate Water Volume with time constant",
-      radioButtons=true));
-
   UnderfloorHeatingCircuit circuits[nCircuits](
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -125,45 +72,45 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each final dp_Valve=dpValve_nominal,
     each final dpFixed_nominal=dpFixed_nominal,
     each final TSurMax=TSurMax,
-    each final TRoom_nominal=TZone_nominal,
-    each final pipeMaterial=pipeMaterial,
-    each final thicknessPipe=thicknessPipe,
+    each final TZone_nominal=TZone_nominal,
+    each final pipMat=pipMat,
+    each final sPip=sPip,
     each final dOut=dOut,
     each final withSheathing=withSheathing,
-    each final sheathingMaterial=sheathingMaterial,
+    each final sheMat=sheMat,
+    each final sShe=sShe,
+    each final length=length/nCircuits,
     redeclare each final package Medium = Medium,
     each final A=A/nCircuits,
     each final dis=dis,
     each final raiseErrorForMaxVelocity=raiseErrorForMaxVelocity,
-    each final spacing=spacing,
-    each m_flow_nominal=m_flow_Circuit,
+    each final spa=spa,
+    each m_flow_nominal=mCir_flow_nominal,
     each final wallTypeFloor=wallTypeFloor,
     each final wallTypeCeiling=wallTypeCeiling,
-    each R_x=R_add*nCircuits) "Underloor heating circuits"
+    each R_x=EN_1264.R_add*nCircuits) "Underloor heating circuits"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
   BaseClasses.EN1264.HeatFlux EN_1264(
-    lambda_E=lambda_E,
-    wallTypeFloor=wallTypeFloor,
-    wallTypeCeiling=wallTypeCeiling,
-    R_lambdaIns=R_lambdaIns,
-    alpha_Ceiling=alpha_Ceiling,
-    T_U=TZoneBel_nominal,
-    d_a=dOut,
-    lambda_R=pipeMaterial.lambda,
-    s_R=thicknessPipe,
-    withSheathing=withSheathing,
-    lambda_M=sheathingMaterial.lambda,
-    s_u=CoverThickness,
-    T_Fmax=TSurMax,
-    T_Room=TZone_nominal,
-    q_Gmax=q_Gmax,
-    dT_H=dT_Hi,
-    Ceiling=Ceiling,
-    R_lambdaCeiling=R_lambdaCeiling,
-    R_lambdaPlaster=R_lambdaPlaster,
-    D=dOut + thicknessSheathing,
-    T=spacing)
-    annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
+    final wallTypeFloor=wallTypeFloor,
+    final wallTypeCeiling=wallTypeCeiling,
+    final R_lambdaIns=RIns,
+    final dInn=dInn,
+    final T_U=TZoneBel_nominal,
+    final d_a=dOut,
+    final pipMat=pipMat,
+    final sheMat=sheMat,
+    final s_R=sPip,
+    final withSheathing=withSheathing,
+    final T_Fmax=TSurMax,
+    final T_Room=TZone_nominal,
+    final isCeiling=isCeiling,
+    final D=dOut + sShe,
+    final T=spa,
+    final Q_flow_nominal=Q_flow_nominal,
+    final TSup_nominal=TSup_nominal,
+    final TRet_nominal=TRet_nominal,
+    final length=length,
+    final A=A)         annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
   Modelica.Blocks.Interfaces.RealInput uVal
     "Control value for valve (0: closed, 1: open)" annotation (Placement(
         transformation(
@@ -221,14 +168,12 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.Units.SI.SpecificHeatCapacity Cp_Medium=Medium.specificHeatCapacityCp(sta_default)
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpMed=
+      Medium.specificHeatCapacityCp(sta_default)
     "Specific Heat capacity of medium";
 
 initial equation
-  assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
-     + getInstanceName());
-
-  assert(TRet_nominal < TSup_nominal, "Return Temperature is higher than the Flow Temperature in"
+  assert(TRet_nominal < TSup_nominal, "Return Temperature is higher than the supply temperature"
      + getInstanceName());
 equation
 

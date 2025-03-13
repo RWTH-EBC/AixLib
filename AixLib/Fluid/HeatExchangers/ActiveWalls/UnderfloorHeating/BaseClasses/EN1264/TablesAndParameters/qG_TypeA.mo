@@ -1,16 +1,12 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
 model qG_TypeA
   "Calculating the limiting heat flux for underfloor heating Types A and C according to EN 1264"
   import Modelica.Constants.e;
 
-  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA(
-    final R_lambdaB=wallTypeFloor.d[2]/wallTypeFloor.lambda[2]);
+  extends UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
 
   parameter Modelica.Units.SI.Temperature T_Fmax "maximum surface temperature";
   parameter Modelica.Units.SI.Temperature T_Room = 20 + 273.15 "Room temperature";
-
-  final parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at Ceiling Surface";
-
   final parameter Real f_G = if s_u/T <= 0.173 then 1 else (q_Gmax - (q_Gmax - phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T) * e^(-20 * (s_u / T - 0.173)^2)) / (phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T);
   final parameter Real phi = ((T_Fmax - T_Room) / d_T0)^(1.1);
   final parameter Modelica.Units.SI.TemperatureDifference d_T0 = 9;
@@ -27,13 +23,13 @@ model qG_TypeA
     else
   phi * B_G * (dT_HG / phi) ^(n_G) * 0.375 / T * f_G "specific limiting heat flux";
 
-  parameter Modelica.Units.SI.HeatFlux q_Gmax
+  parameter Modelica.Units.SI.HeatFlux q_Gmax=8.92*(T_Fmax - T_Room)^(1.1)
     "Maxium possible heat flux with given surface temperature and room temperature";
   final parameter Modelica.Units.SI.TemperatureDifference dT_HG375 = phi *  (B_G / (B * product_ai))^(1/(1-n_G)) "maximum temperature difference at Spacing = 0.375 m";
   final parameter Modelica.Units.SI.TemperatureDifference dT_HG = if T <= 0.375 then phi *  (B_G / (B * product_ai))^(1/(1-n_G)) else phi * ( B_G / (B * product_ai))^(1/(1-n_G)) * f_G "maximum temperature difference between heating medium and room";
   parameter Modelica.Units.SI.TemperatureDifference dT_H "logarithmic temperature difference between heating medium and room";
 
-  Tables.CombiTable2DParameter tableA4(
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.Tables.CombiTable2DParameter tableA4(
     table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,
         85,91.5,96.8,100,100,100,100,100,100; 0.075,75.3,83.5,89.9,96.3,99.5,100,
         100,100,100; 0.1,66,75.4,82.9,89.3,95.5,98.8,100,100,100; 0.15,51,61.1,69.2,
@@ -51,7 +47,7 @@ model qG_TypeA
     "Table A.5 according to prEN 1264-2 p. 29"
     annotation (Placement(transformation(extent={{-54,-60},{-28,-34}})));
 
-  Tables.CombiTable2DParameter tableA6(
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.Tables.CombiTable2DParameter tableA6(
     table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,
         0.008,0.005,0.002,0,0,0,0,0,0; 0.075,0.024,0.021,0.018,0.011,0.002,0,0,0,
         0; 0.1,0.046,0.043,0.041,0.033,0.014,0.005,0,0,0; 0.15,0.088,0.085,0.082,

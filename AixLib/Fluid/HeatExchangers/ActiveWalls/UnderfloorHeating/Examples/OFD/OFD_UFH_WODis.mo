@@ -42,11 +42,10 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
   ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     wholeHouseBuildingEnvelope(
     use_UFH=true,
-    redeclare BaseClasses.FloorLayers.EnEV2009Heavy_UFH wallTypes,
+    redeclare Data.FloorLayers.EnEV2009Heavy_UFH wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=292.15,
-    calcMethodIn=1,
     redeclare model WindowModel =
         ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
     redeclare AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009
@@ -67,33 +66,38 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
   UnderfloorHeating.UnderfloorHeatingSystem underfloorHeatingSystem(
     redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=0.1,
-    thicknessSheathing=0.005,
-    sheathingMaterial(lambda=0.15),
+    sShe=0.005,
+    sheMat(lambda=0.15),
     nZones=10,
     dis=dis,
     Q_flow_nominal={638,1078,502,341,783,766,506,196,443,658},
-    A={
-    wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_width,
-    wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_width,
-    wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.room_width,
-    wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.room_width,
-    wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.room_length*wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.room_width,
-    wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.room_length*wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.room_width_long,
-    wholeHouseBuildingEnvelope.upperFloor_Building.Children1.room_length*wholeHouseBuildingEnvelope.upperFloor_Building.Children1.room_width_long,
-    wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.room_length*wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.room_width_long,
-    wholeHouseBuildingEnvelope.upperFloor_Building.Bath.room_length*wholeHouseBuildingEnvelope.upperFloor_Building.Bath.room_width_long,
-    wholeHouseBuildingEnvelope.upperFloor_Building.Children2.room_length*wholeHouseBuildingEnvelope.upperFloor_Building.Children2.room_width_long},
-    calculateVol=2,
+    A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_length*
+        wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.room_width,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_length*
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.room_width,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.room_length*
+        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.room_width,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.room_length*
+        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.room_width,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.room_length*
+        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.room_width,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.room_length*
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.room_width_long,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children1.room_length*
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children1.room_width_long,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.room_length*
+        wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.room_width_long,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bath.room_length*
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bath.room_width_long,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children2.room_length*
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children2.room_width_long},
     use_vmax=1,
-    wallTypeFloor=fill(
-        BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(), 10),
+    wallTypeFloor=fill(Data.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(),
+        10),
     Ceiling={false,false,false,false,false,true,true,true,true,true},
-    wallTypeCeiling={
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
+    wallTypeCeiling={Data.FloorLayers.Ceiling_Dummy(),
+        Data.FloorLayers.Ceiling_Dummy(),Data.FloorLayers.Ceiling_Dummy(),
+        Data.FloorLayers.Ceiling_Dummy(),Data.FloorLayers.Ceiling_Dummy(),
         wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.wallTypes.IW_hori_low_half,
         wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.wallTypes.IW_hori_low_half,
         wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.wallTypes.IW_hori_low_half,
@@ -101,57 +105,11 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
         wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.wallTypes.IW_hori_low_half},
     TZoneBel_nominal={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15,293.15},
-    Spacing=fill(0.2, 10),
-    pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
-    thicknessPipe=fill(0.002, 10),
+    spa=fill(0.2, 10),
+    pipMat=Data.PipeMaterials.PERTpipe(),
+    sPip=fill(0.002, 10),
     dOut=fill(0.017, 10),
-    withSheathing=true,
-    ufhRoom(
-      thicknessSheathing=0.005,
-            TSup_nominal(displayUnit="K") = 308.15, TRet_nominal(
-            displayUnit="K") = 303.15,
-      circuits(thicknessSheathing=0.005, length=80),
-      EN_1264(sheathingMaterial={
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition(
-            lambda=0.15)}, pipeMaterial={
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22),
-            AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition(
-            lambda=0.22)})))
+    withSheathing=true)
     annotation (Placement(transformation(extent={{-68,-66},{-50,-50}})));
 
   AixLib.Fluid.Sources.MassFlowSource_T m_flow_specification1(

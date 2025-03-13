@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 model Distributor
   "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;

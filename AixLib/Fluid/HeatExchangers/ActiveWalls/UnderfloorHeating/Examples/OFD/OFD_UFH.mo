@@ -41,7 +41,7 @@ model OFD_UFH
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized.WholeHouseBuildingEnvelope
     wholeHouseBuildingEnvelope(
     use_UFH=true,
-    redeclare BaseClasses.FloorLayers.EnEV2009Heavy_UFH wallTypes,
+    redeclare Data.FloorLayers.EnEV2009Heavy_UFH wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=292.15,
@@ -70,36 +70,31 @@ model OFD_UFH
     dis=dis,
     Q_flow_nominal={638,1078,502,341,783,766,506,196,443,658},
     A={wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.AFloor,
-       wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.AFloor,
-       wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.AFloor,
-       wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.AFloor,
-       wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.AFloor,
-       wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.AFloor,
-       wholeHouseBuildingEnvelope.upperFloor_Building.Children1.AFloor,
-       wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.AFloor,
-       wholeHouseBuildingEnvelope.upperFloor_Building.Bath.AFloor,
-       wholeHouseBuildingEnvelope.upperFloor_Building.Children2.AFloor},
-    calculateVol=2,
-    wallTypeFloor=fill(
-        BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(), 10),
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.AFloor,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.AFloor,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.AFloor,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.AFloor,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.AFloor,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children1.AFloor,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.AFloor,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Bath.AFloor,
+        wholeHouseBuildingEnvelope.upperFloor_Building.Children2.AFloor},
+    wallTypeFloor=fill(Data.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(),
+        10),
     Ceiling={false,false,false,false,false,true,true,true,true,true},
-    wallTypeCeiling={
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
-        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[
-        1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[
-        1].Wall.wallType},
-    TZoneBel_nominal={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
-        293.15},
-    Spacing=fill(0.2, 10),
-    pipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
-    thicknessPipe=fill(0.002, 10),
+    wallTypeCeiling={Data.FloorLayers.Ceiling_Dummy(),
+        Data.FloorLayers.Ceiling_Dummy(),Data.FloorLayers.Ceiling_Dummy(),
+        Data.FloorLayers.Ceiling_Dummy(),Data.FloorLayers.Ceiling_Dummy(),
+        wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.Ceiling[1].Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.Ceiling[1].Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.Ceiling[1].Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[1].Wall.wallType,
+        wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[1].Wall.wallType},
+    TZoneBel_nominal={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
+        293.15,293.15},
+    spa=fill(0.2, 10),
+    pipMat=Data.PipeMaterials.PERTpipe(),
+    sPip=fill(0.002, 10),
     dOut=fill(0.017, 10),
     withSheathing=false)
     annotation (Placement(transformation(extent={{-68,-66},{-44,-52}})));
@@ -113,7 +108,7 @@ model OFD_UFH
   AixLib.Fluid.Sources.Boundary_pT boundary(redeclare package Medium =
         AixLib.Media.Water, nPorts=1)
     annotation (Placement(transformation(extent={{-12,-64},{-24,-52}})));
-  Modelica.Blocks.Sources.Constant const[sum(underfloorHeatingSystem.ufhRoom.nCircuits)](each k=1)
+  Modelica.Blocks.Sources.Constant const[sum(underfloorHeatingSystem.ufhZone.nCircuits)](each k=1)
           annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
@@ -188,7 +183,7 @@ equation
                                                 color={0,127,255}));
   connect(const.y, underfloorHeatingSystem.uVal) annotation (Line(points={{-79.4,
           -36},{-70.4,-36},{-70.4,-55.1111}},          color={0,0,127}));
-          for i in 1:dis loop
+  for i in 1:dis loop
   connect(underfloorHeatingSystem.heatFloor[i], wholeHouseBuildingEnvelope.groFloDown[3*dis+i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
           {-14,2.32}}, color={191,0,0}));
@@ -267,7 +262,7 @@ equation
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
             -70},{-44,-65.5917},{-56,-65.5917}},
                                      color={191,0,0}));
-          end for;
+  end for;
   annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
                       "Simulate and plot"),

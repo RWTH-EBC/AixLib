@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
 record FLground_EnEV2009_SML_upHalf_UFH
   "Floor towards ground (upper part) after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht) for underfloor heating"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(

@@ -3,12 +3,9 @@ DiscretizedFloorTemperatureAnalysis
 Distributor
 PartialModularPort_ab
 RadiativeConvectiveHeatTransfer
-PipeMaterials
-Sheathing_Materials
 EN1264
-Flooring
-FloorLayers
 PressureLoss
 PartialUnderFloorHeating
 PartialUnderFloorHeatingParameters
 PartialUnderFloorHeatingSystemParameters
+RadiativeConvectiveHeatTransferParameters

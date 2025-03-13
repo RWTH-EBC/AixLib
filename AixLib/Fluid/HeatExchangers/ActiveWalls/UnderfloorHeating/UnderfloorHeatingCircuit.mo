@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
   extends
     AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeating;
+  extends AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RadiativeConvectiveHeatTransferParameters;
+
   parameter Modelica.Units.SI.PressureDifference dpValve_nominal=1
     "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(group="Pressure Drop"));
@@ -10,10 +12,15 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.Units.SI.Length length
     "Length of panel heating pipe" annotation (Dialog(group="Panel Heating"));
-  parameter Modelica.Units.SI.Temperature TRoom_nominal=293.15
-    "Nominal Room Temperature" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.Units.SI.Distance spacing "Spacing between tubes"
+  parameter Modelica.Units.SI.Temperature TZone_nominal=293.15
+    "Nominal zone temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Distance spa "Spacing between tubes"
     annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*length
+    "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
+  parameter Modelica.Units.SI.PressureDifference dp_Valve=0
+    "Pressure Difference set in regulating valve for pressure equalization in heating system"
+    annotation (Dialog(group="Pressure Drop"));
 
   AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.UnderfloorHeatingElement
     ufhEle[dis](
@@ -26,13 +33,13 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
-    each final thicknessSheathing=thicknessSheathing,
-    each final pipeMaterial=pipeMaterial,
-    each final sheathingMaterial=sheathingMaterial,
+    each final sShe=sShe,
+    each final pipMat=pipMat,
+    each final sheMat=sheMat,
     each final energyDynamicsWalls=energyDynamics,
     each final m_flow_nominal=m_flow_nominal,
     each final A=A/dis,
-    each final thicknessPipe=thicknessPipe,
+    each final sPip=sPip,
     each final dis=integer(dis),
     each final length=length/dis,
     each final dOut=dOut,
@@ -63,9 +70,14 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
         rotation=180,
         origin={-20,62})));
   AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RadiativeConvectiveHeatTransfer radConSplFlo[dis](
-    each eps=wallTypeFloor.eps,
-    each surfaceOrientation=2,
-    each A=A/dis)
+    each final calcMethod=calcMethod,
+    each final radCalcMethod=radCalcMethod,
+    each final eps=wallTypeFloor.eps,
+    each final surfaceOrientation=surfaceOrientation,
+    each final T_ref=T_ref,
+    each final hCon_const=hCon_const,
+    each final dT_small=dT_small,
+    each final A=A/dis)
          "Splitter for radiative and convective heat of floor" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -102,16 +114,21 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
         rotation=180,
         origin={20,-60})));
   AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RadiativeConvectiveHeatTransfer radConSplCei[dis](
-    each eps=wallTypeFloor.eps,
-    each surfaceOrientation=2,
-    each A=A/dis)
+    each final calcMethod=calcMethod,
+    each final radCalcMethod=radCalcMethod,
+    each final eps=wallTypeCeiling.eps,
+    each final surfaceOrientation=surfaceOrientation,
+    each final T_ref=T_ref,
+    each final hCon_const=hCon_const,
+    each final dT_small=dT_small,
+    each final A=A/dis)
          "Splitter for radiative and convective heat of ceiling" annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={0,-30})));
   BaseClasses.DiscretizedFloorTemperatureAnalysis
-    discretizedFloorTemperatureAnalysis
+    discretizedFloorTemperatureAnalysis(dis=dis)
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
   Modelica.Blocks.Interfaces.RealOutput TFloorMea(unit="K", displayUnit="degC")
     "Mean floor temperature"
@@ -122,12 +139,6 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
   Modelica.Blocks.Interfaces.RealOutput TFloorMax(unit="K", displayUnit="degC")
     "Maximum floor temperature"
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
-
-      parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*length
-    "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
-      parameter Modelica.Units.SI.PressureDifference dp_Valve=0
-    "Pressure Difference set in regulating valve for pressure equalization in heating system"
-    annotation (Dialog(group="Pressure Drop"));
 
 
   FixedResistances.HydraulicDiameter resPip(
@@ -194,7 +205,7 @@ equation
   connect(radConSplCei.portCon, theColConCei.port_a) annotation (Line(points={{4,
           -40},{4,-44},{20,-44},{20,-50}}, color={191,0,0}));
   connect(discretizedFloorTemperatureAnalysis.port_a, ufhEle.heaPorFloor)
-    annotation (Line(points={{40,30},{16,30},{16,16},{0,16},{0,4.2}},     color=
+    annotation (Line(points={{40,30},{16,30},{16,12},{0,12},{0,4.2}},     color=
          {191,0,0}));
   connect(discretizedFloorTemperatureAnalysis.TFloorMea, TFloorMea) annotation (
      Line(points={{61,26},{94,26},{94,30},{110,30}}, color={0,0,127}));

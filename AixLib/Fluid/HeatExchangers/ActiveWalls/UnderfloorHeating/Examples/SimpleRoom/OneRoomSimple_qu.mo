@@ -18,13 +18,11 @@ model OneRoomSimple_qu "Example for underfloor heating system with two rooms for
     dis=dis,
     Q_flow_nominal=-1.*{fixedHeatFlow.Q_flow},
     A={area},
-    wallTypeFloor={
-        UnderfloorHeating.BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},
+    wallTypeFloor={Data.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},
     Ceiling={true},
-    wallTypeCeiling={
-        UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH()},
-    Spacing={0.35},
-    thicknessPipe={0.002},
+    wallTypeCeiling={Data.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH()},
+    spa={0.35},
+    sPip={0.002},
     dOut={0.017},
     withSheathing=false)
     annotation (Placement(transformation(extent={{-32,-32},{18,-2}})));

@@ -27,14 +27,11 @@ partial model PartialModularPort_ab
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation(Dialog(tab="Assumptions",group="General"), Evaluate=true);
 
-  // Definition of parameters describing initialisation and numeric limits
-  //
-  parameter Medium.MassFlowRate m_flow_nominal = 0.1
-    "Nominal mass flow rate"
-    annotation(Dialog(tab = "Advanced",group="Numeric limitations"));
-  parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
-    "Small mass flow rate for regularization of zero flow"
-    annotation(Dialog(tab = "Advanced",group="Numeric limitations"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0) = 1E-4*abs(
+    m_flow_nominal) "Small mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced"));
 
   // Definition of connectors
   //
