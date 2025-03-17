@@ -79,6 +79,8 @@ model GenericCHP
   Controls.Interfaces.CHPControlBus        cHPControlBus
     annotation (Placement(transformation(extent={{-78,88},{-58,112}}),
         iconTransformation(extent={{90,32},{110,56}})));
+  Modelica.Blocks.Continuous.Integrator integrator2
+    annotation (Placement(transformation(extent={{14,-2},{-6,18}})));
 equation
 
 THotEngine=vol.T;
@@ -128,6 +130,21 @@ THotEngine=vol.T;
       thickness=0.5), Text(
       string="%first",
       index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(designOnOffCHP.Q_flow, cHPControlBus.PowerHeat) annotation (Line(
+        points={{17,71.4},{68,71.4},{68,24},{-68,24},{-68,100}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(designOnOffCHP.Q_flow, integrator2.u)
+    annotation (Line(points={{17,71.4},{17,8},{16,8}}, color={0,0,127}));
+  connect(integrator2.y, cHPControlBus.EnergyHeat) annotation (Line(points={{-7,
+          8},{-68,8},{-68,100}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

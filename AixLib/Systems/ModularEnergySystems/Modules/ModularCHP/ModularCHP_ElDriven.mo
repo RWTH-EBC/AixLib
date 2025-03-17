@@ -166,6 +166,9 @@ parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCC=0.0641977628513021*Nom
 
 //  zeta=2*dp_nominal*Modelica.Constants.pi^2/(Medium.d_const*V_flow_CC^2*16),
 
+public
+  Modelica.Blocks.Continuous.Integrator integrator2
+    annotation (Placement(transformation(extent={{54,60},{74,80}})));
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then
@@ -201,13 +204,6 @@ equation
   connect(genericCHP.maxThermalPower, cHPControlBus.maxTermalPower) annotation (
      Line(points={{10.8,11.8},{10.8,34},{18,34},{18,78},{0,78},{0,102}}, color={
           0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(genericCHP.minThermalPower, cHPControlBus.minThermalPower)
-    annotation (Line(points={{7.6,11.8},{7.6,34},{16,34},{16,76},{0,76},{0,102}},
-        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -251,7 +247,7 @@ equation
           -198,-48},{-198,-12},{-273,-12},{-273,-32}},
                       color={0,0,127}));
   connect(genericCHP.THotEngine, gain1.u) annotation (Line(points={{4,-11},{4,
-          16},{-202,16},{-202,-14},{-250,-14},{-250,-32}},
+          -2},{-24,-2},{-24,6},{-202,6},{-202,-14},{-250,-14},{-250,-32}},
                                                   color={0,0,127}));
   connect(bou.ports[1], fanCC.port_a) annotation (Line(points={{-26,-34},{-30,-34},
           {-30,-26},{-36,-26}}, color={0,127,255}));
@@ -264,7 +260,8 @@ equation
   connect(onOff3.y, switch3.u2) annotation (Line(points={{-43,30},{-32,30},{-32,
           32},{5,32},{5,55.8}}, color={255,0,255}));
   connect(genericCHP.THotEngine, onOff3.u) annotation (Line(points={{4,-11},{4,
-          16},{-74,16},{-74,24},{-66,24}},           color={0,0,127}));
+          0},{-28,0},{-28,12},{-74,12},{-74,24},{-66,24}},
+                                                     color={0,0,127}));
   connect(switch4.y, switch3.u1) annotation (Line(points={{-9.1,67},{12.2,67},{12.2,
           55.8}}, color={0,0,127}));
   connect(realExpression.y, switch3.u3) annotation (Line(points={{-71.3,60},{-36,
@@ -280,18 +277,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericCHP.powerDemand, cHPControlBus.FuelDemand) annotation (Line(
-        points={{15,4},{42,4},{42,102},{0,102}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(genericCHP.Pel, cHPControlBus.ElectricPower) annotation (Line(points=
-          {{15,9.4},{15,74},{0,74},{0,102}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(cHPControlBus, genericCHP.cHPControlBus) annotation (Line(
       points={{0,102},{2,102},{2,84},{28,84},{28,4.4},{14,4.4}},
       color={255,204,51},
@@ -302,12 +287,39 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(fanHC.port_b, TColdHeatCircuit.port_a) annotation (Line(points={{-100,
           -32},{-102,-32},{-102,-72},{-56,-72}}, color={0,127,255}));
-  connect(integrator1.y, cHPControlBus.Energy_Elec_CHP) annotation (Line(points
-        ={{71,38},{82,38},{82,102},{0,102}}, color={0,0,127}), Text(
+  connect(integrator1.y, cHPControlBus.EnergyElec) annotation (Line(points={{71,
+          38},{86,38},{86,102},{0,102}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(genericCHP.powerDemand, cHPControlBus.PowerFuel) annotation (Line(
+        points={{15,4},{42,4},{42,102},{0,102}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(genericCHP.Pel, cHPControlBus.PowerElec) annotation (Line(points={{15,
+          9.4},{15,102},{0,102}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(genericCHP.powerDemand, integrator2.u)
+    annotation (Line(points={{15,4},{52,4},{52,70}}, color={0,0,127}));
+  connect(integrator2.y, cHPControlBus.EnergyFuel) annotation (Line(points={{75,
+          70},{78,70},{78,78},{80,78},{80,102},{0,102}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(genericCHP.minThermalPower, cHPControlBus.MinThermalPower)
+    annotation (Line(points={{7.6,11.8},{7.6,55.9},{0.1,55.9},{0.1,102.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
