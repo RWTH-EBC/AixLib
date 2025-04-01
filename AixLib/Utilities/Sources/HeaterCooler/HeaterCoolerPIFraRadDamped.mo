@@ -5,18 +5,24 @@ model HeaterCoolerPIFraRadDamped
     fraHeaRad = if not recOrSep then 0 else zoneParam.traSysFraHeaRad,
     fraCooRad = if not recOrSep then 0 else zoneParam.traSysFraCooRad);
 
-  parameter Real K_PT1 = if not recOrSep then 1 else zoneParam.traSysK
+  parameter Real K_PT1_Heating = if not recOrSep then 1 else zoneParam.traSysHeatK
     "Gain for PT1 for damped heating transfer"
       annotation(Dialog(tab = "General", group = "PT1 Damper", enable=not recOrSep));
-  parameter Modelica.Units.SI.Time T_PT1 = if not recOrSep then 1 else zoneParam.traSysT
+  parameter Modelica.Units.SI.Time T_PT1_Heating = if not recOrSep then 1 else zoneParam.traSysHeatT
     "Time Constant for PT1 for damped heating transfer"
+      annotation (Dialog(tab="General", group = "PT1 Damper", enable=not recOrSep));
+  parameter Real K_PT1_Cooling = if not recOrSep then 1 else zoneParam.traSysCoolK
+    "Gain for PT1 for damped cooling transfer"
+      annotation(Dialog(tab = "General", group = "PT1 Damper", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time T_PT1_Cooling = if not recOrSep then 1 else zoneParam.traSysCoolT
+    "Time Constant for PT1 for damped cooling transfer"
       annotation (Dialog(tab="General", group = "PT1 Damper", enable=not recOrSep));
 
 protected
-  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=K_PT1, T=T_PT1) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=K_PT1_Cooling, T=T_PT1_Cooling) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Emulates the belayed cooling flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-16,-82},{4,-62}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=K_PT1, T=T_PT1) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=K_PT1_Heating, T=T_PT1_Heating) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "Emulates the belayed heat flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
 
