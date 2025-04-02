@@ -33,6 +33,6 @@ This is for
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160,
-            160}})), 
+            160}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ControlledFlowMachine;

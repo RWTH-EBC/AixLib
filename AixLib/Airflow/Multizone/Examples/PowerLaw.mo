@@ -121,6 +121,6 @@ Added example for the four 'Powerlaw' models in the Multizone package.
 
 </ul>
 </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,100}})), 
+    Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end PowerLaw;

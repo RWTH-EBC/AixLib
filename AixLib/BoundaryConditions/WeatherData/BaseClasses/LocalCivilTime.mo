@@ -56,6 +56,6 @@ First implementation.
           textString="cloTim"), Text(
           extent={{74,6},{98,-4}},
           textColor={0,0,127},
-          textString="calTim")}), 
+          textString="calTim")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end LocalCivilTime;

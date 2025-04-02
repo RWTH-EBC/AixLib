@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.Interfaces;
+within AixLib.Obsolete.Year2024.Controls.Interfaces;
 expandable connector VapourCompressionMachineControlBus
   "Standard data bus with heat pump or chiller information"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

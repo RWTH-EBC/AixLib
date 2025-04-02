@@ -21,5 +21,5 @@ Documentation(info = "<html>
 Ratings data taken from the <a href=\"http://www.solar-rating.org\">
 Solar Rating and Certification Corporation website</a>. SRCC# = 2012047A.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

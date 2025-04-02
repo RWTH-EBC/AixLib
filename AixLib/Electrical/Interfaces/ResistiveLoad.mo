@@ -31,6 +31,6 @@ This is a model of a generic resistive load. This model is an extension of the b
 <a href=\"modelica://AixLib.Electrical.Interfaces.Load\">
 AixLib.Electrical.Interfaces.Load</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ResistiveLoad;

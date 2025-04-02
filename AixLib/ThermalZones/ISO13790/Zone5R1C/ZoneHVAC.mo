@@ -64,6 +64,6 @@ First implementation.
     Icon(graphics={Text(
           extent={{-180,94},{-116,48}},
           textColor={0,0,88},
-          textString="intLatGai")}), 
+          textString="intLatGai")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ZoneHVAC;

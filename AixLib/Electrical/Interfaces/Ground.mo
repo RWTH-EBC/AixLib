@@ -31,6 +31,6 @@ May 15, 2014, by Marco Bonvini:<br/>
 Created documentation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Ground;

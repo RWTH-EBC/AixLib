@@ -59,6 +59,6 @@ Hans Olsson, Martin Otter, Sven Erik Mattson and Hilding Elmqvist.<br/>
 Balanced Models in Modelica 3.0 for Increased Model Quality</a>.<br/>
 Proc. of the 7th Modelica Conference, Bielefeld, Germany, March 2008.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end VariableVoltageSource;

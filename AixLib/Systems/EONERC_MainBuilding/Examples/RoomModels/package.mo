@@ -5,5 +5,5 @@ package RoomModels "Models for testing room controllers"
 
 
 
-annotation ();
+annotation();
 end RoomModels;

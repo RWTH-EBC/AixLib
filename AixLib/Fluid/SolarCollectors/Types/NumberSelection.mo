@@ -8,5 +8,5 @@ type NumberSelection = enumeration(
 Enumeration used to define the different methods of declaring solar thermal
 system size.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

@@ -86,6 +86,6 @@ First implementation.
           textColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="phi")}), 
+          textString="phi")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Phi_pTX;

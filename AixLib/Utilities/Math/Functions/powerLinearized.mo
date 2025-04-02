@@ -42,6 +42,6 @@ February 3, 2011, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  smoothOrder=1, Inline=true, 
+</html>"),  smoothOrder=1, Inline=true,
    __Dymola_LockedEditing="Model from IBPSA");
 end powerLinearized;

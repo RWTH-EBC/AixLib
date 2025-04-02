@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl.CostFunctions;
-package Exergy 
+package Exergy  
   extends Modelica.Icons.VariantsPackage;
 
 

@@ -28,6 +28,6 @@ First implementation for
       Tolerance=1e-06),
     __Dymola_Commands(
       file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesSpecializedAirPerfectGas.mos"
-           "Simulate and plot"), 
+           "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end CoupledVolumesSpecializedAirPerfectGas;

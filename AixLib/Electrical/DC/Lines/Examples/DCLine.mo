@@ -88,6 +88,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/DC
 This model is a simple test case that show how to use a line model
 and parametrize it using a commercial cable.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end DCLine;

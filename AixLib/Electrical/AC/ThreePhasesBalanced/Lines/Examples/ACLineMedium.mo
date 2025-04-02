@@ -161,6 +161,6 @@ The code snippet shows how a line model <code>line_1</code> redeclared its
 record type in order to be <code>AixLib.Electrical.Transmission.MediumVoltageCables.Generic</code>.
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ACLineMedium;

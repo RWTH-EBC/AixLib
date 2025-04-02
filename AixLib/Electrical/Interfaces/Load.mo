@@ -252,6 +252,6 @@ A linearized model will not consume the nominal power if the voltage
 at the terminal differs from the nominal voltage.
 </p>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Load;

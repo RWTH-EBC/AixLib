@@ -51,6 +51,6 @@ First implementation. This is for
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-160,-80},{160,160}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ControlledFlowMachinePreconfigured;

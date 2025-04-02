@@ -51,11 +51,9 @@ protected
     input Real errAbs "Absolute error threshold";
     input String message "Message for error reporting";
 
-  protected
-              Real TErrAbs=abs(Medium.temperature(state1)-Medium.temperature(state2))
+  protected   Real TErrAbs=abs(Medium.temperature(state1)-Medium.temperature(state2))
       "Absolute error in temperature";
-  protected
-              Real pErrAbs=abs(Medium.pressure(state1)-Medium.pressure(state2))
+  protected   Real pErrAbs=abs(Medium.pressure(state1)-Medium.pressure(state2))
       "Absolute error in pressure";
   algorithm
     assert(TErrAbs < errAbs, "Absolute temperature error: " + String(TErrAbs) +
@@ -139,6 +137,6 @@ December 19, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialProperties;

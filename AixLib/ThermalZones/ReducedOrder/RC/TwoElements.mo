@@ -171,6 +171,6 @@ First implementation.
   pattern=LinePattern.None), Text(
   extent={{-60,60},{64,-64}},
   textColor={0,0,0},
-  textString="2")}), 
+  textString="2")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoElements;

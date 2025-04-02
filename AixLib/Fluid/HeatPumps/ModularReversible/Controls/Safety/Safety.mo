@@ -234,6 +234,6 @@ AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.AntiFreeze</a> </li>
 <li><a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.MinimalFlowRate\">
 AixLib.Fluid.HeatPumps.ModularReversible.Controls.Safety.MinimalFlowRate</a> </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Safety;

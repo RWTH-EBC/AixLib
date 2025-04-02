@@ -112,6 +112,6 @@ First implementation.
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/SolarCollectors/BaseClasses/Examples/ASHRAESolarGain.mos"
         "Simulate and plot"),
-        experiment(Tolerance=1e-6, StopTime=86400), 
+        experiment(Tolerance=1e-6, StopTime=86400),
    __Dymola_LockedEditing="Model from IBPSA");
 end ASHRAESolarGain;

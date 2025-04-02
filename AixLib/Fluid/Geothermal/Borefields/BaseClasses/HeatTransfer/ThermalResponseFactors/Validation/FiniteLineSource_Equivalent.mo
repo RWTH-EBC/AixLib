@@ -84,6 +84,6 @@ June 9, 2022, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end FiniteLineSource_Equivalent;

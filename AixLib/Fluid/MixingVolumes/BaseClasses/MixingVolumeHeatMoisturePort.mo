@@ -79,6 +79,6 @@ First implementation for
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeHeatMoisturePort;

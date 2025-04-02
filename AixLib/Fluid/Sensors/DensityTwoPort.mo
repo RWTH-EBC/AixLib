@@ -114,6 +114,6 @@ September 29, 2009, by Michael Wetter:<br/>
 First implementation, based on <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end DensityTwoPort;

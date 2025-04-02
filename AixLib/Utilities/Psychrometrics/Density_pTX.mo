@@ -91,6 +91,6 @@ First implementation.
           textString="density"),
         Line(
           points={{36,-72},{6,6}},
-          color={255,0,0})}), 
+          color={255,0,0})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Density_pTX;

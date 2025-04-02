@@ -91,6 +91,6 @@ First implementation.
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(points={{-52,-40},{56,-40},{44,-32}}, color={175,175,175}),
-        Line(points={{56,-40},{44,-48}}, color={175,175,175})}), 
+        Line(points={{56,-40},{44,-48}}, color={175,175,175})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end HACoilInside;

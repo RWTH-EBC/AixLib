@@ -75,6 +75,6 @@ otherwise it uses the power factor specified by the input <code>pf_in</code>.
 <p align=\"center\" style=\"font-style:italic;\">
 Q = P  tan(arccos(pf))
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end InductiveLoad;

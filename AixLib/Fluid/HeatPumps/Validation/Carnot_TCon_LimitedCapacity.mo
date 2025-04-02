@@ -19,6 +19,6 @@ February 5, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TCon_LimitedCapacity;

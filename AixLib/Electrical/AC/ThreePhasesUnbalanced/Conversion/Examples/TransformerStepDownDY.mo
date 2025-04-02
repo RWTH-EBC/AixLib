@@ -33,6 +33,6 @@ AixLib.Electrical.AC.ThreePhasesUnbalanced.Conversion.ACACTransformerStepDownDY<
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
  "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Conversion/Examples/TransformerStepDownDY.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TransformerStepDownDY;

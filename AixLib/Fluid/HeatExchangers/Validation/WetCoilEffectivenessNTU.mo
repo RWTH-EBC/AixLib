@@ -231,6 +231,6 @@ March 17, 2017, by Michael O'Keefe:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilEffectivenessNTU;

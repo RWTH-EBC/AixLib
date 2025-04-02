@@ -169,6 +169,6 @@ are often iteration variables in nonlinear equation systems.
           fillPattern=FillPattern.Solid,
           visible=not allowFlowReversal2,
           origin={-79,-50},
-          rotation=360)}), 
+          rotation=360)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialFourPort;

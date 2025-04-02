@@ -32,6 +32,6 @@ November 29, 2013, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end QuadraticLinear;

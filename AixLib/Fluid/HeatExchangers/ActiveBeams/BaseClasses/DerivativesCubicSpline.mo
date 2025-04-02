@@ -79,6 +79,6 @@ First implementation.
           points={{-82,-72},{-40,-72},{-18,-56},{-6,-32},{0,-8},{14,26},{32,46},
               {46,50},{80,50}},
           color={0,0,0},
-          smooth=Smooth.Bezier)}), 
+          smooth=Smooth.Bezier)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end DerivativesCubicSpline;

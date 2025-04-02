@@ -64,6 +64,6 @@ This example shows how to use a variable generator model. The generator model ha
 together with a voltage source generator, which is in this example the
 grid model.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end VariablePowerSource;

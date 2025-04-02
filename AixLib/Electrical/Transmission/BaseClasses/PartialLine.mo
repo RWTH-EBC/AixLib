@@ -38,6 +38,6 @@ It adds two generalized electric connectors.
 See <a href=\"modelica://AixLib.Electrical.Transmission.BaseClasses.PartialBaseLine\">
 AixLib.Electrical.Transmission.BaseClasses.PartialBaseLine</a> for more information.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialLine;

@@ -35,6 +35,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           smooth=Smooth.None), Line(
           points={{-100,0},{100,0}},
           color={0,0,255},
-          smooth=Smooth.None)}), 
+          smooth=Smooth.None)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortPassThrough;

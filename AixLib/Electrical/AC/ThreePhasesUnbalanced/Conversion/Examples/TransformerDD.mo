@@ -39,6 +39,6 @@ in the connector do not have a neutral reference.
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
  "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Conversion/Examples/TransformerDD.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TransformerDD;

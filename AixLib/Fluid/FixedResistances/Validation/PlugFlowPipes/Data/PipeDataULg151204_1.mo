@@ -39,6 +39,6 @@ See <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.
 AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg</a>
 for more information.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PipeDataULg151204_1;

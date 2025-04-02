@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

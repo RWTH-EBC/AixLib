@@ -57,6 +57,6 @@ The probe <code>probe_D</code> measures the phase
 voltages after the conversion to D. Their RMS value is equal to <i>480</i> V,
 the line voltage provided by the voltage source.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WyeToDelta;

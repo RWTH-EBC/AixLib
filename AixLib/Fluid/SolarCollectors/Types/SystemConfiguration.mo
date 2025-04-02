@@ -9,5 +9,5 @@ type SystemConfiguration = enumeration(
 Enumeration used to define the different configurations of
 solar thermal systems.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

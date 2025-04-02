@@ -31,13 +31,13 @@ package PerfectGas "Model for air as a perfect gas"
     Xi(
       nominal={0.01},
       each stateSelect=if preferredMediumStates then StateSelect.prefer else StateSelect.default),
-    final standardOrderComponents=true)
+    final standardOrderComponents=true
 
     /* p, T, X = X[Water] are used as preferred states, since only then all
      other quantities can be computed in a recursive sequence.
      If other variables are selected as states, static state selection
      is no longer possible and non-linear algebraic equations occur.
-      */
+      */)
   protected
     constant Modelica.Units.SI.MolarMass[2] MMX={steam.MM,dryair.MM}
       "Molar masses of components";
@@ -721,6 +721,6 @@ First implementation.
           extent={{-90,-6},{-46,-50}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={120,120,120})}), 
+          fillColor={120,120,120})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PerfectGas;

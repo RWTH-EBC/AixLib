@@ -161,6 +161,6 @@ First implementation.
         Text(
           extent={{60,-30},{104,-52}},
           textColor={0,0,127},
-          textString="F2")}), 
+          textString="F2")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end BrighteningCoefficient;

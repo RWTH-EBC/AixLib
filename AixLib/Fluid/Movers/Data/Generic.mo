@@ -277,6 +277,6 @@ both have default values and also allow the user to override them easily.
 See <a href=\"https://github.com/modelica/ModelicaSpecification/issues/791\">
 Modelica Specification issue #791</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

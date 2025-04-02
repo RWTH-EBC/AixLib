@@ -57,6 +57,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources
         "Simulate and plot"),
 experiment(
       StopTime=1,
-      Tolerance=1e-06), 
+      Tolerance=1e-06),
    __Dymola_LockedEditing="Model from IBPSA");
 end Boundary;

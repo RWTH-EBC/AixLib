@@ -52,6 +52,6 @@ Updated parameter names for
        Initial version
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Pump_stratos;

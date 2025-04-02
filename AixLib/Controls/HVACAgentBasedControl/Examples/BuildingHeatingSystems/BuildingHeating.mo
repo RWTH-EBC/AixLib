@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -10,7 +10,7 @@ model BuildingHeating
             {-34,84}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
-        Modelica.Media.Air.SimpleAir, 
+        Modelica.Media.Air.SimpleAir,
     redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam)                      annotation(Placement(transformation(extent={{22,58},
             {48,84}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(redeclare package Medium =

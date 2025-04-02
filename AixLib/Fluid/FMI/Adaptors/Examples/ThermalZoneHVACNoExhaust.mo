@@ -208,6 +208,6 @@ First implementation.
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Adaptors/Examples/ThermalZoneHVACNoExhaust.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=172800), 
+    experiment(Tolerance=1e-6, StopTime=172800),
    __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZoneHVACNoExhaust;

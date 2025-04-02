@@ -127,6 +127,6 @@ The temperature <i>T</i> is the temperature of the heat port if <code>useHeatPor
 The impedance <i>L</i> and the capacity <i>C</i> do not vary with respect to the temperature
 and are specified by the user.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPortRLC;

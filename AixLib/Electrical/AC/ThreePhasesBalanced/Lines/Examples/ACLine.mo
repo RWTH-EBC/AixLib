@@ -127,6 +127,6 @@ are resistive loads. Each load is connected to the source with different configu
 However, the equivalent impedance between each load and the source is the same.
 Since the equivalent impedances are the same, each load draws the same current.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ACLine;

@@ -140,6 +140,6 @@ IEEE 4 nodes validation test case with the following characteristics
 <i>V<sub>Sec</sub> = 4.16kV</i>),</li>
 <li>Y-Y transformer</li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end YY;

@@ -82,6 +82,6 @@ July 9, 2021, by Baptiste Ravache:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowPipeDiscretized;

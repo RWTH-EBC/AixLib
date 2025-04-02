@@ -80,6 +80,6 @@ Adapter between electric connectors type p for AC three-phase unbalanced systems
 This adapter connects a connector without neutral cable to a connector without
 neutral cable.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Connection3to3Ground_p;

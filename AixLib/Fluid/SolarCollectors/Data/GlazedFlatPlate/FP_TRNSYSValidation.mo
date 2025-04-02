@@ -22,5 +22,5 @@ Default values in the TRNSYS Simualtion Studio SDHW example.
 No value for <code>dp_nominal</code> was provided in TRNSYS, so 100
 Pascal was used as a placeholder.<br/>
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

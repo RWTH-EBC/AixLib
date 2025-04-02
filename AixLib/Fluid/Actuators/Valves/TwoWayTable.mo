@@ -191,6 +191,6 @@ First implementation.
         Line(
           points={{-56,-74},{-56,-96}}),
         Line(
-          points={{-68,-82},{-44,-82}})}), 
+          points={{-68,-82},{-44,-82}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayTable;

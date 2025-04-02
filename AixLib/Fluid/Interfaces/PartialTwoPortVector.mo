@@ -143,6 +143,6 @@ First implementation.
           textColor={0,0,255},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})), 
+            100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPortVector;

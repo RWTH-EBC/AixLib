@@ -43,6 +43,6 @@ This function is useful to automate lookup up the index of water within a media
 so as to avoid hard-coding or guessing what the index will be. Typically, this
 function would be run once at initialization time.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end determineWaterIndex;

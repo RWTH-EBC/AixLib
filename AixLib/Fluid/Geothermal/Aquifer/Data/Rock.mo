@@ -22,6 +22,6 @@ May 2023, Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Rock;

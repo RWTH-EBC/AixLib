@@ -25,6 +25,6 @@ See the documentation of
 <a href=\"modelica://AixLib.Fluid.Movers.Data.Fans.Greenheck\">
 AixLib.Fluid.Movers.Data.Fans.Greenheck</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end BIDW16;

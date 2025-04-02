@@ -36,6 +36,6 @@ First implementation.
 Validation case for <a href=\"modelica://AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D\">
 AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.TableData2D</a>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end TableData2D;

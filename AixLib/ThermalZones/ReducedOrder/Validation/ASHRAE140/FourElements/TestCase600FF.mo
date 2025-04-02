@@ -169,8 +169,8 @@ model TestCase600FF "Test case 600 free floating"
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1]
-    (til={0}, azi={0})
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+     til={0}, azi={0})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](til={0},

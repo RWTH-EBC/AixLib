@@ -112,6 +112,6 @@ equation
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-240,-220},{100,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end LargeScaleWaterToWater_OneRoomRadiator;

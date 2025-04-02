@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl.Examples;
-package BuildingHeatingSystems 
+package BuildingHeatingSystems  
   extends Modelica.Icons.ExamplesPackage;
 
 end BuildingHeatingSystems;

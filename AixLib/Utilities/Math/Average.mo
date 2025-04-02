@@ -20,6 +20,6 @@ First implementation.
 </html>"), Icon(graphics={Text(
           extent={{-74,46},{66,-58}},
           textColor={0,0,255},
-          textString="ave")}), 
+          textString="ave")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Average;

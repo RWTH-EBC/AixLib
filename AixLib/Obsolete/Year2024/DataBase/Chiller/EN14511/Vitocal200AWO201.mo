@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511;
+within AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511;
 record Vitocal200AWO201 "Vitocal200AWO201Chilling"
   extends AixLib.Obsolete.Year2024.DataBase.Chiller.ChillerBaseDataDefinition(
     tableP_ele=[0, 20, 25, 27, 30, 35; 7,1380.0, 1590.0, 1680.0, 1800.0, 1970.0;  18,950.0, 1060.0, 1130.0, 1200.0, 1350.0],

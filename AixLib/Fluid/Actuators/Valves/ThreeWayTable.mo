@@ -149,6 +149,6 @@ First implementation.
         Line(
           points={{-92,-76},{-68,-76}}),
         Line(
-          points={{-92,-84},{-68,-84}})}), 
+          points={{-92,-84},{-68,-84}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end ThreeWayTable;

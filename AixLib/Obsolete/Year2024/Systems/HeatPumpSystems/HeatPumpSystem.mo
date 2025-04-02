@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,

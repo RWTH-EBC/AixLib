@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511;
 record Vitocal200AWO201
   "Vitocal200AWO201"
   extends AixLib.Obsolete.Year2024.DataBase.HeatPump.HeatPumpBaseDataDefinition(

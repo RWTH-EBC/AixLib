@@ -72,6 +72,6 @@ Following the associated publication by Wuellhorst et al. (2021),
         Polygon(lineColor={192,192,192},
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid,
-          points={{92,-82},{70,-74},{70,-90},{92,-82}})}), 
+          points={{92,-82},{70,-74},{70,-90},{92,-82}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end VariableOrder;

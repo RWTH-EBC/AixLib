@@ -86,6 +86,6 @@ The figure shows that the signal <code>y</code> becomes zero around <i>t = 1</i>
         "Simulate and plot"),
     experiment(
       StopTime=10,
-      Tolerance=1e-6), 
+      Tolerance=1e-6),
    __Dymola_LockedEditing="Model from IBPSA");
 end TestVoltageCTRL;

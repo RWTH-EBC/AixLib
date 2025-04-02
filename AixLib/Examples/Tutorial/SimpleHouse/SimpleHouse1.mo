@@ -86,6 +86,6 @@ src=\"modelica://AixLib/Resources/Images/Examples/Tutorial/SimpleHouse/result1.p
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Examples/Tutorial/SimpleHouse/SimpleHouse1.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end SimpleHouse1;

@@ -60,6 +60,6 @@ a period equal to <code>tDelay</code>.
 <p>
 A signal <code>y = 0</code> can be used to turn off a load.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end StateMachineVoltCtrl;

@@ -20,6 +20,6 @@ Implementation based on Kaustubh Phalak&apos;s block
 AixLib.Utilities.Math.IntegerReplicator</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end integerReplicator;

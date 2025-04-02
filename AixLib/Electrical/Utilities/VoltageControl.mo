@@ -94,6 +94,6 @@ a first order filter that represents such a dynamic effect. The presence of the 
 filter avoids that the output of the finite state machine controller
 are differentiated (causing runtime errors).
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end VoltageControl;

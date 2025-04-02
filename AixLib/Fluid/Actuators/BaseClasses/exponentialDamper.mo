@@ -75,6 +75,6 @@ June 22, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),   smoothOrder=1, 
+</html>"),   smoothOrder=1,
    __Dymola_LockedEditing="Model from IBPSA");
 end exponentialDamper;

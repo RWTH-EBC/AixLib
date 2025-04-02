@@ -106,6 +106,6 @@ First implementation.
           extent={{-74,20},{-36,-24}},
           textColor=DynamicSelect({255,255,255}, (1-y)*{255,255,255}),
           fillPattern=FillPattern.Solid,
-          textString="%%")}), 
+          textString="%%")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayEqualPercentage;

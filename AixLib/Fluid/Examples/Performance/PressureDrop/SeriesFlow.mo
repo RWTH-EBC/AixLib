@@ -60,6 +60,6 @@ and the value of parameter <code>from_dp</code>.
 </html>"),
     experiment(Tolerance=1e-06, StopTime=1),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end SeriesFlow;

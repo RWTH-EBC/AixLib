@@ -29,6 +29,6 @@ May 27, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConstantHeatInjection_100Boreholes_Configuration;

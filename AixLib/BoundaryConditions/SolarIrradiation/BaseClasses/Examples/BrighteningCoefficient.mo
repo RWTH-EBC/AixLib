@@ -107,6 +107,6 @@ __Dymola_Commands(
       file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/BrighteningCoefficient.mos"
       "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end BrighteningCoefficient;

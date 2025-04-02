@@ -46,6 +46,6 @@ Added model, documentation and results for regression test.
 </html>"),
 experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/DC/Lines/Examples/Resistance.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Resistance;

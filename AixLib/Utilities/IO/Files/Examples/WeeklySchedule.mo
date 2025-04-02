@@ -50,6 +50,6 @@ Example and consistency test for a weekly schedule.
       Tolerance=1e-06),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/WeeklySchedule.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WeeklySchedule;

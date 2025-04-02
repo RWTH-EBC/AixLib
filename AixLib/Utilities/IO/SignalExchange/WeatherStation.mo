@@ -353,6 +353,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1402\">#1402</a>.
           lineColor={0,0,0},
           fillColor={244,125,35},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{120,120}})), 
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{120,120}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end WeatherStation;

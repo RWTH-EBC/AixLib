@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(

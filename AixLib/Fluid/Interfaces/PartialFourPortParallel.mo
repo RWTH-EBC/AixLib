@@ -101,6 +101,6 @@ AixLib.Fluid.Interfaces.PartialFourPort</a>.
           textColor={0,0,255},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
-          textString="%name")}), 
+          textString="%name")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialFourPortParallel;

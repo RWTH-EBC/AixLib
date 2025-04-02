@@ -143,6 +143,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end HeatingOnly;

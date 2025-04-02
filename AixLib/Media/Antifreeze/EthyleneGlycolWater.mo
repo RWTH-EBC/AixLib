@@ -469,6 +469,6 @@ August 05, 2020, by Wen HU:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end EthyleneGlycolWater;

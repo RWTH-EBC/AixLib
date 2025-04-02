@@ -123,6 +123,6 @@ First implementation.
         Text(
           extent={{-48,-66},{-100,-54}},
           textColor={0,0,127},
-          textString="zen")}), 
+          textString="zen")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SkyClearness;

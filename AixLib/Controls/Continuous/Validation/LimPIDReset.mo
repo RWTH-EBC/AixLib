@@ -120,6 +120,6 @@ The instance <code>limPIWithReset</code> is the implementation from this library
 with integrator reset enabled. Whenever the boolean pulse input becomes true,
 the integrator is reset to <code>y_reset</code>.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end LimPIDReset;

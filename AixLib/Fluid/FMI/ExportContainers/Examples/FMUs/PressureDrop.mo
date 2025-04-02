@@ -44,6 +44,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           extent={{-100,14},{100,-16}},
           lineColor={0,0,0},
           fillColor={0,127,255},
-          fillPattern=FillPattern.HorizontalCylinder)}), 
+          fillPattern=FillPattern.HorizontalCylinder)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PressureDrop;

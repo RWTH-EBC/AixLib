@@ -25,6 +25,6 @@ First implementation.
 </html>"),
     experiment(
       StopTime=1080,
-      Tolerance=1e-6), 
+      Tolerance=1e-6),
    __Dymola_LockedEditing="Model from IBPSA");
 end SprayAirWasher_X_dynamic;

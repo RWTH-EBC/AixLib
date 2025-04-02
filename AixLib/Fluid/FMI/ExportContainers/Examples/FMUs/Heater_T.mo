@@ -125,6 +125,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
                    Text(
           extent={{26,-28},{70,-74}},
           textColor={255,255,255},
-          textString="+")}), 
+          textString="+")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Heater_T;

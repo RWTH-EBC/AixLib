@@ -17,6 +17,6 @@ Implementation based on Functions.smoothExponential.
 </html>"), Icon(graphics={   Text(
           extent={{-88,38},{92,-34}},
           textColor={160,160,164},
-          textString="smoothExponential()")}), 
+          textString="smoothExponential()")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SmoothExponential;

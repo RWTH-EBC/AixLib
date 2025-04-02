@@ -38,6 +38,6 @@ First implementation.
         Text(
           extent={{-100,30},{98,-16}},
           textColor={0,0,0},
-          textString="0 <= u")}), 
+          textString="0 <= u")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialLimiterMin;

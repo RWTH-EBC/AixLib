@@ -15,6 +15,6 @@ the bigger is the voltage drop and thus the error introduced by the linearizatio
 </html>"),
 experiment(Tolerance=1e-06, StopTime=4000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/DC/Lines/Examples/DCLinesLinearized.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end DCLinesLinearized;

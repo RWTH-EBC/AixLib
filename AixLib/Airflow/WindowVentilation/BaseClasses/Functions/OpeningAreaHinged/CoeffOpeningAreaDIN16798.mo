@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions.OpeningAreaHinged;
 function CoeffOpeningAreaDIN16798
   "Coefficient for hinged opening area according to DIN CEN/TR 16798-8 (DIN SPEC 32739-8)"
   extends Modelica.Icons.Function;

@@ -147,6 +147,6 @@ Initial version for refactoring inputs of sources.
 See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PartialSource_Xi_C;

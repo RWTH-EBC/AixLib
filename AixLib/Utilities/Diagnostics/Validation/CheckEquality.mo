@@ -44,6 +44,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    experiment(Tolerance=1e-6, StopTime=1), 
+    experiment(Tolerance=1e-6, StopTime=1),
    __Dymola_LockedEditing="Model from IBPSA");
 end CheckEquality;

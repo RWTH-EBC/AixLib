@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 package BaseClasses "Package with base classes for AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls"
 
 

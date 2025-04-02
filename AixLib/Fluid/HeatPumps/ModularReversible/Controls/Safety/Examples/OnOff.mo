@@ -60,6 +60,6 @@ equation
   experiment(
       StopTime=7200,
       Interval=1,
-      Tolerance=1e-08), 
+      Tolerance=1e-08),
    __Dymola_LockedEditing="Model from IBPSA");
 end OnOff;

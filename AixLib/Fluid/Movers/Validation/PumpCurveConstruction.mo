@@ -193,6 +193,6 @@ First implementation.
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,120}},
           preserveAspectRatio=false), graphics),
-    Icon(coordinateSystem(extent={{-100,-100},{100,120}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,120}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end PumpCurveConstruction;

@@ -176,6 +176,6 @@ AixLib, #763</a>.
         Text(
           extent={{-110,102},{-74,84}},
           textColor={0,0,127},
-          textString="T")}), 
+          textString="T")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SensibleCooler_T;

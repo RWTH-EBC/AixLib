@@ -85,6 +85,6 @@ Gaithersburg, MD.
 <li><b>M. W. Liddament, 1996</b>, <i>A guide to energy efficient ventilation</i>. AIVC Annex V. </li>
 </ul>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end windPressureProfile;

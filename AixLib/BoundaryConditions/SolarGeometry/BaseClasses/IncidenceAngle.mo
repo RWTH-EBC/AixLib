@@ -77,6 +77,6 @@ First implementation.
         Text(
           extent={{-98,-42},{-42,-54}},
           textColor={0,0,127},
-          textString="solHouAng")}), 
+          textString="solHouAng")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end IncidenceAngle;

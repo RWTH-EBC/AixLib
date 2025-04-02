@@ -91,6 +91,6 @@ June 4, 2014, by Marco Bonvini:<br/>
 Added model, documentation and results for regression test.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end RCModel;

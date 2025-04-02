@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
+within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashCommon
   "Calculate geometric, projective, equivalent, and effective window opening
   areas, by different types of sash opening"

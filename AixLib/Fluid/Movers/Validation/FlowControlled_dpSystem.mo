@@ -244,6 +244,6 @@ This is for
 </li>
 </ul>
 </html>"),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end FlowControlled_dpSystem;

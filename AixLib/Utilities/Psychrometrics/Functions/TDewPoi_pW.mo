@@ -76,6 +76,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-        Inline=true, 
+        Inline=true,
    __Dymola_LockedEditing="Model from IBPSA");
 end TDewPoi_pW;

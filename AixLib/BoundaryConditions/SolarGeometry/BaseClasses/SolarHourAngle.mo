@@ -35,6 +35,6 @@ First implementation.
                               Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}), 
+          textColor={0,0,255})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SolarHourAngle;

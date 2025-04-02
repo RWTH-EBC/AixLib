@@ -122,6 +122,6 @@ for an example of the supported file format.
     Line(points={{26,-88},{88,-88}}),
     Line(points={{26,-72},{88,-72}}),
     Line(points={{26,24},{88,24}}),
-    Line(points={{26,8},{88,8}})}), 
+    Line(points={{26,8},{88,8}})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end WeeklySchedule;

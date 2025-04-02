@@ -15,5 +15,5 @@ info="<html>
 <p>
 Thermal mass for Case600Mass.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

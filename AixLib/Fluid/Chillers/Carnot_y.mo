@@ -180,6 +180,6 @@ First implementation.
 </ul>
 </html>"),
     Icon(graphics={
-        Line(points={{0,-70},{0,-90},{100,-90}}, color={0,0,255})}), 
+        Line(points={{0,-70},{0,-90},{100,-90}}, color={0,0,255})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y;

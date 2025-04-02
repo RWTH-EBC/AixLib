@@ -84,6 +84,6 @@ Jan 16, 2012, by Peter Grant:<br/>
 First implementation
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end EN12975HeatLoss;

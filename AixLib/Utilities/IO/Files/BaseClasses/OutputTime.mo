@@ -7,5 +7,5 @@ type OutputTime = enumeration(
 <p>
 Enumeration for when output files are written.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");

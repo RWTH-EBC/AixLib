@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl;
-package CostFunctions 
+package CostFunctions  
   extends Modelica.Icons.VariantsPackage;
 
 

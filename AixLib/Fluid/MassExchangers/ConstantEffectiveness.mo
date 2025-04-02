@@ -176,6 +176,6 @@ First implementation, based on
 AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectiveness;

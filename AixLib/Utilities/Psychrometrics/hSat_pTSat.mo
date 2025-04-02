@@ -56,6 +56,6 @@ First implementation.
 Block to compute the enthalpy of saturated
 air given the saturation temperature and fluid pressure.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end hSat_pTSat;

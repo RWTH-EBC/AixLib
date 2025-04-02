@@ -154,6 +154,6 @@ First implementation.
         Text(
           extent={{42,-30},{92,-80}},
           textColor={0,0,127},
-          textString="TRet")}), 
+          textString="TRet")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end SupplyReturnTemperatureReset;

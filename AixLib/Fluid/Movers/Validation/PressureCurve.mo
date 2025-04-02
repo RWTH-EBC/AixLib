@@ -66,6 +66,6 @@ First implementation. This is for
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3371\">#3371</a>.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end PressureCurve;

@@ -97,6 +97,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
           extent={{-88,90},{88,48}},
           textColor={0,0,127},
           horizontalAlignment=TextAlignment.Right,
-          textString="JSON")}), 
+          textString="JSON")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end JSONWriter;

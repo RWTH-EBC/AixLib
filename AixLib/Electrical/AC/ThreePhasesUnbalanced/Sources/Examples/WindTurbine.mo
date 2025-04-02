@@ -88,6 +88,6 @@ Created model and documentation
 </html>"),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Electrical/AC/ThreePhasesUnbalanced/Sources/Examples/WindTurbine.mos"
-        "Simulate and plot"), 
+        "Simulate and plot"),
    __Dymola_LockedEditing="Model from IBPSA");
 end WindTurbine;

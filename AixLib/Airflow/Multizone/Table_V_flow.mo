@@ -97,6 +97,6 @@ First implementation.
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Forward),
-        Line(points={{2,78},{2,-78}}, color={28,108,200})}), 
+        Line(points={{2,78},{2,-78}}, color={28,108,200})}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Table_V_flow;

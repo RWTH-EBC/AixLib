@@ -111,6 +111,5 @@ First implementation.
 </li>
 </ul>
 </html>
-"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+"),__Dymola_LockedEditing="Model from IBPSA");
 end Table_m_flow;

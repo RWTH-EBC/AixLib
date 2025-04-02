@@ -23,6 +23,6 @@ Sep 8, 2010 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end biquadratic;

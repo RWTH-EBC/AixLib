@@ -166,8 +166,8 @@ model TestCase950FF "Test case 950 free float"
     "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.txt"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1]
-    (til={0}, azi={0})
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+     til={0}, azi={0})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](til={0},

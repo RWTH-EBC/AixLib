@@ -35,6 +35,6 @@ connector Terminal_n "Terminal n for AC one phase systems"
           points={{-50,50},{-100,0},{-50,-50},{0,0},{-50,50}},
           lineColor={0,120,120},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}), 
+          fillPattern=FillPattern.Solid)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end Terminal_n;

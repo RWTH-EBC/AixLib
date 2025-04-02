@@ -1831,6 +1831,6 @@ First implementation.
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false,
-     extent={{-200,-300},{300,300}})), 
+     extent={{-200,-300},{300,300}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end ReaderTMY3;

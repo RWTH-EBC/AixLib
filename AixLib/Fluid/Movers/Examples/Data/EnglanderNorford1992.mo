@@ -37,6 +37,6 @@ Englander, S. L., and L. K. Norford.
 \"Saving fan energy in VAV systems- part 1: analysis of a variable-speed-drive retrofit.\" 
 <i>ASHRAE Winter Meeting, Anaheim, CA, USA, 01/25-29/92.</i> 1992.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end EnglanderNorford1992;

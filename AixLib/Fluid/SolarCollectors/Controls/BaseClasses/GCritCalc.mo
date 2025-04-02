@@ -69,6 +69,6 @@ This is for
   First implementation
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end GCritCalc;

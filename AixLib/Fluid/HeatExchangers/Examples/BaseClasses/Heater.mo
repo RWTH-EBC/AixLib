@@ -156,6 +156,6 @@ First implementation.
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{120,100}})), 
+    Icon(coordinateSystem(extent={{-100,-100},{120,100}})),
    __Dymola_LockedEditing="Model from IBPSA");
 end Heater;

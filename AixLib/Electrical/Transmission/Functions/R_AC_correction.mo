@@ -289,6 +289,6 @@ The correction is based on the type of cabel (AWG or kcmil) and the material.
 </tr>
 </table>
 
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end R_AC_correction;

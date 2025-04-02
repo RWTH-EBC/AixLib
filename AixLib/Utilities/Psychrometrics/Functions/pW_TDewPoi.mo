@@ -56,6 +56,6 @@ First implementation.
 </html>"),
     Inline=true,
     smoothOrder=99,
-    derivative=BaseClasses.der_pW_TDewPoi, 
+    derivative=BaseClasses.der_pW_TDewPoi,
    __Dymola_LockedEditing="Model from IBPSA");
 end pW_TDewPoi;

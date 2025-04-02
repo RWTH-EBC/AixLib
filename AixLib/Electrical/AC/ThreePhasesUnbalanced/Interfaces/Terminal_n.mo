@@ -23,6 +23,6 @@ Revised documentation.
 </ul>
 </html>", info="<html>
 <p>Electric connector type n for AC three-phase unbalanced systems.</p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end Terminal_n;

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.CHPDataSimple;
+within AixLib.DataBase.CHP.CHPDataSimple;
 record CHP_EcPower_XRGI15 "EC Power: chp CRGI 15  (17-30 kW thermal)"
   extends CHPDataSimple.CHPBaseDataDefinition(
     vol={8e-3},

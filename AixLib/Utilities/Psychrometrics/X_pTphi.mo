@@ -94,6 +94,6 @@ First implementation.
         Text(
           extent={{26,56},{90,-54}},
           textColor={0,0,0},
-          textString="X_steam")}), 
+          textString="X_steam")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end X_pTphi;

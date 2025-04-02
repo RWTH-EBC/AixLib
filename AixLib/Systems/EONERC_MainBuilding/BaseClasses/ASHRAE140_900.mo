@@ -90,5 +90,5 @@ record ASHRAE140_900 "Record for ASHRAE140 Testcase 900"
     withIdealThresholds = false,
     TThresholdHeater = 288.15,
     TThresholdCooler = 295.15);
-  annotation ();
+  annotation();
 end ASHRAE140_900;

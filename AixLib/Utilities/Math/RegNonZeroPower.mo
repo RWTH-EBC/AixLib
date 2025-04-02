@@ -54,6 +54,6 @@ AixLib.Utilities.Math.Functions.regNonZeroPower</a>.
 </html>"), Icon(graphics={   Text(
           extent={{-88,38},{92,-34}},
           textColor={160,160,164},
-          textString="regNonZeroPower()")}), 
+          textString="regNonZeroPower()")}),
    __Dymola_LockedEditing="Model from IBPSA");
 end RegNonZeroPower;

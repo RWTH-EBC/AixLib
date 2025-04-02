@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor;
 partial function PartialBaseFct "Base function for all icing factor functions"
   extends Modelica.Icons.Function;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

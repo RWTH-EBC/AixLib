@@ -255,6 +255,6 @@ See
 AixLib.Electrical.AC.ThreePhasesUnbalanced.Conversion.BaseClasses.PartialConverterStepDownDY</a> for
 details on the connections.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end ACACTransformerStepDownDY;

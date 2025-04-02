@@ -63,6 +63,5 @@ equation
   </li>
 </ul>
 </html>
-"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+"),__Dymola_LockedEditing="Model from IBPSA");
 end MinimalFlowRate;

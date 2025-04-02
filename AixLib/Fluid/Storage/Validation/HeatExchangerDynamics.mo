@@ -153,6 +153,6 @@ First implementation to test
 </li>
 </ul>
 </html>"),
-    experiment(Tolerance=1e-6, StopTime=14400), 
+    experiment(Tolerance=1e-6, StopTime=14400),
    __Dymola_LockedEditing="Model from IBPSA");
 end HeatExchangerDynamics;

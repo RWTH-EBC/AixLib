@@ -53,6 +53,6 @@ July 14, 2010, by Wangda Zuo, Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end smoothHeaviside;

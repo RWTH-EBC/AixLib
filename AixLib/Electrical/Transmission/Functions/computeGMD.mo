@@ -28,6 +28,6 @@ GMD = (d<sub>1</sub> d<sub>2</sub> d<sub>3</sub>)<sup>1/3</sup>,
 where <i>d<sub>1</sub></i>, <i>d<sub>2</sub></i>, and <i>d<sub>3</sub></i> are
  the distances between the conductors.
 </p>
-</html>"),  
+</html>"),
    __Dymola_LockedEditing="Model from IBPSA");
 end computeGMD;
