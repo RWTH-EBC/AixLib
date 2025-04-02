@@ -25,7 +25,7 @@ model HydraulicDiameter "Fixed flow resistance with hydraulic diameter and m_flo
     "Factor to take into account resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
   final parameter Modelica.Units.SI.PressureDifference dpStraightPipe_nominal(
-      displayUnit="Pa") =
+      displayUnit="Pa")=
     Modelica.Fluid.Pipes.BaseClasses.WallFriction.Detailed.pressureLoss_m_flow(
     m_flow=m_flow_nominal,
     rho_a=rho_default,

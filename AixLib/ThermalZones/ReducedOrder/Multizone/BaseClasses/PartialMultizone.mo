@@ -154,8 +154,8 @@ partial model PartialMultizone "Partial model for multizone models"
 
   //Swimming pool params
   parameter Boolean use_pools_tot = false "use swimming pools within at least one zone of the multizone" annotation(Dialog(tab="Moisture", group="Pools"));
-  replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare
-          package Medium =
+  replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare package
+                  Medium =
             AixLib.Media.Water
               "Water")), Dialog(enable=use_pools_tot,tab="Moisture", group="Pools"));
 

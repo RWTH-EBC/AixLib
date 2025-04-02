@@ -180,7 +180,7 @@ equation
     annotation (Line(points={{-118,0},{-102,0}}, color={255,0,255}));
   connect(pum.m_flow_in, booToRea.y) annotation (Line(points={{-62,7.77156e-16},
           {-70,7.77156e-16},{-70,0},{-78,0}}, color={0,0,127}));
-    annotation(
+    annotation (
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/SolarCollectors/Examples/FlatPlateWithTank.mos"
         "Simulate and plot"),
    experiment(Tolerance=1e-6, StopTime=86400.0),

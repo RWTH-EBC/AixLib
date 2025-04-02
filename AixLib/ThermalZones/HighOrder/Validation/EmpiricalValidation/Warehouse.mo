@@ -173,14 +173,14 @@ equation
   connect(MeasuredTemperatures.y, gain.u)
     annotation (Line(points={{106.7,12},{120.8,12}}, color={0,0,127}));
   connect(gain.y, meanMeasuredTemp) annotation (Line(points={{134.6,12},{158,12}}, color={0,0,127}));
-  connect(idealHeaterCooler.coolingPower, coolingPower) annotation (Line(points
-        ={{50,-60.6},{66,-60.6},{66,-60},{82,-60},{82,-16},{138,-16}}, color={0,
+  connect(idealHeaterCooler.coolingPower, coolingPower) annotation (Line(points=
+         {{50,-60.6},{66,-60.6},{66,-60},{82,-60},{82,-16},{138,-16}}, color={0,
           0,127}));
   connect(idealHeaterCooler.coolingPower, integrator1.u) annotation (Line(
         points={{50,-60.6},{82,-60.6},{82,-30.75},{112.1,-30.75}}, color={0,0,
           127}));
-  connect(idealHeaterCooler.heatingPower, heatingPower) annotation (Line(points
-        ={{50,-56},{110,-56},{110,-48},{156,-48}}, color={0,0,127}));
+  connect(idealHeaterCooler.heatingPower, heatingPower) annotation (Line(points=
+         {{50,-56},{110,-56},{110,-48},{156,-48}}, color={0,0,127}));
   connect(idealHeaterCooler.heatingPower, integrator2.u) annotation (Line(
         points={{50,-56},{110,-56},{110,-64.75},{114.1,-64.75}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Tolerance=1e-06),

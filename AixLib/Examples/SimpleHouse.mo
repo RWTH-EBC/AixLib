@@ -1,4 +1,4 @@
-within AixLib.Examples;
+﻿within AixLib.Examples;
 model SimpleHouse
   "Illustrative example of a simple heating, ventilation and room model"
   extends Modelica.Icons.Example;

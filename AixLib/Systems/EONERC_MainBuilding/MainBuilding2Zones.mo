@@ -2711,11 +2711,11 @@ equation
   connect(thermalZone2South.intGains, internalGains1.y) annotation (Line(points=
          {{344.4,210.32},{343.2,210.32},{343.2,197.7},{345,197.7}}, color={0,0,
           127}));
-  connect(eRC_AHU1.port_a2, thermalZone2South.ports[1]) annotation (Line(points
-        ={{144.545,214},{231.272,214},{231.272,213.56},{318.71,213.56}}, color=
+  connect(eRC_AHU1.port_a2, thermalZone2South.ports[1]) annotation (Line(points=
+         {{144.545,214},{231.272,214},{231.272,213.56},{318.71,213.56}}, color=
           {0,127,255}));
-  connect(eRC_AHU1.port_b1, thermalZone2South.ports[2]) annotation (Line(points
-        ={{144.545,190},{332,190},{332,213.56},{325.29,213.56}}, color={0,127,
+  connect(eRC_AHU1.port_b1, thermalZone2South.ports[2]) annotation (Line(points=
+         {{144.545,190},{332,190},{332,213.56},{325.29,213.56}}, color={0,127,
           255}));
   connect(eRC_AHU.port_b1, thermalZone1North.ports[1]) annotation (Line(points=
           {{26.5455,278},{142,278},{142,304.12},{136.71,304.12}}, color={0,127,
@@ -2838,11 +2838,11 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(bou1.ports[1], heatExchangerSystem.port_a2) annotation (Line(points={
           {-78,-78},{-78,-40},{-75,-40}}, color={0,127,255}));
-  connect(eRC_AHU.port_a1, boundaryOutsideAir.ports[1]) annotation (Line(points
-        ={{-94,278},{-108,278},{-108,282},{-130,282},{-130,250}}, color={0,127,
+  connect(eRC_AHU.port_a1, boundaryOutsideAir.ports[1]) annotation (Line(points=
+         {{-94,278},{-108,278},{-108,282},{-130,282},{-130,250}}, color={0,127,
           255}));
-  connect(boundaryExhaustAir.ports[1], eRC_AHU.port_b2) annotation (Line(points
-        ={{-136,302},{-116,302},{-116,302},{-94,302}}, color={0,127,255}));
+  connect(boundaryExhaustAir.ports[1], eRC_AHU.port_b2) annotation (Line(points=
+         {{-136,302},{-116,302},{-116,302},{-94,302}}, color={0,127,255}));
   connect(x_pTphi.X, boundaryOutsideAir1.X_in) annotation (Line(points={{-161,
           270},{-158,270},{-158,194},{-94,194}}, color={0,0,127}));
   connect(boundaryOutsideAir1.T_in, boundaryOutsideAir.T_in) annotation (Line(

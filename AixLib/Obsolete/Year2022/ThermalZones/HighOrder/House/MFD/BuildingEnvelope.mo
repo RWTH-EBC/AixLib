@@ -137,8 +137,8 @@ package BuildingEnvelope
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Kitchen annotation(Placement(transformation(extent = {{100, -96}, {120, -76}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermLivingroom annotation(Placement(transformation(extent = {{-60, 12}, {-44, 28}}), iconTransformation(extent = {{-56, 14}, {-44, 28}})));
     AixLib.Utilities.Interfaces.RadPort StarLivingroom annotation (Placement(
-          transformation(extent={{-40,12},{-24,28}}), iconTransformation(extent
-            ={{-40,0},{-24,14}})));
+          transformation(extent={{-40,12},{-24,28}}), iconTransformation(extent=
+             {{-40,0},{-24,14}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren annotation(Placement(transformation(extent={{34,28},
               {50,44}}),                                                                                                                  iconTransformation(extent={{34,28},
               {50,44}})));

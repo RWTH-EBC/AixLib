@@ -8,7 +8,7 @@ model Interpolate "Example model of the Interpolate block"
     "Table of mass flow rate in kg/s (second column) as a function of pressure difference in Pa (first column)";
   parameter Real[:] xd=table[:,1] "x-axis support points";
   parameter Real[size(xd, 1)] yd=table[:,2] "y-axis support points";
-  parameter Real[size(xd, 1)] d =
+  parameter Real[size(xd, 1)] d=
     AixLib.Utilities.Math.Functions.splineDerivatives(
       x=xd,
       y=yd,

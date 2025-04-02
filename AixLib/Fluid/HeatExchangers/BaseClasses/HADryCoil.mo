@@ -33,11 +33,11 @@ model HADryCoil
   parameter Real r_nominal(min=0)=0.5
     "Ratio between air-side and water-side convective heat transfer coefficient"
           annotation(Dialog(tab="General", group="Nominal condition"));
-  parameter Modelica.Units.SI.ThermalConductance hA_nominal_w(min=0) =
+  parameter Modelica.Units.SI.ThermalConductance hA_nominal_w(min=0)=
     UA_nominal*(r_nominal + 1)/r_nominal
     "Water side convective heat transfer coefficient"
     annotation (Dialog(tab="General", group="Nominal condition"));
-  parameter Modelica.Units.SI.ThermalConductance hA_nominal_a(min=0) =
+  parameter Modelica.Units.SI.ThermalConductance hA_nominal_a(min=0)=
     r_nominal*hA_nominal_w
     "Air side convective heat transfer coefficient, including fin resistance"
     annotation (Dialog(tab="General", group="Nominal condition"));

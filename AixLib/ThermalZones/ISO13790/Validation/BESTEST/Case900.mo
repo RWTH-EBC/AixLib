@@ -4,8 +4,8 @@ model Case900
     zon5R1C(hInt=2.74,
       redeclare replaceable AixLib.ThermalZones.ISO13790.Validation.BESTEST.Data.Case900Mass buiMas),
     annComBESTEST(
-      EHeaMax=  7.3476E+09,
-      EHeaMin=  4.2120E+09,
+      EHeaMax = 7.3476E+09,
+      EHeaMin = 4.2120E+09,
       ECooMax=-11.3940E+09,
       ECooMin= -7.6860E+09,
       PHeaMax=3797,

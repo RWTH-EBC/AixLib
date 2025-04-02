@@ -323,9 +323,7 @@ model IndoorSwimmingPool
       pressure(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
             m_flow_nominal/1000/0.7}, dp={pumpHead/0.7,pumpHead,0}),
       etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-
       etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.Efficiency_VolumeFlowRate,
-
       efficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,
             m_flow_nominal/1000/0.7}, eta={0.7,0.8,0.7}),
       motorEfficiency(V_flow={m_flow_nominal/1000/100,m_flow_nominal/1000,

@@ -36,9 +36,9 @@ partial model PartialCarnot_y
     annotation (Placement(transformation(extent={{-140,70},{-100,110}})));
 
 protected
-  Modelica.Units.SI.HeatFlowRate QCon_flow_internal(start=QCon_flow_nominal) =
+  Modelica.Units.SI.HeatFlowRate QCon_flow_internal(start=QCon_flow_nominal)=
     P - QEva_flow_internal "Condenser heat input";
-  Modelica.Units.SI.HeatFlowRate QEva_flow_internal(start=QEva_flow_nominal) =
+  Modelica.Units.SI.HeatFlowRate QEva_flow_internal(start=QEva_flow_nominal)=
     if COP_is_for_cooling then -COP*P else (1 - COP)*P "Evaporator heat input";
 
   Modelica.Blocks.Sources.RealExpression yEva_flow_in(

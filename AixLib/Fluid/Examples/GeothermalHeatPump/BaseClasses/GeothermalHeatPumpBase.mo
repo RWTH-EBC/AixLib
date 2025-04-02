@@ -343,8 +343,8 @@ equation
   connect(pumpEvaporator.port_a, coldStorage.portHC1Out) annotation (Line(
         points={{14,36},{16,36},{16,7.42},{23.825,7.42}}, color={0,127,255}));
   connect(heatPump.port_b2, coldStorage.portHC1In) annotation (Line(points={{-36,0},
-          {-36,-2},{18,-2},{18,12.69},{23.65,12.69}},                     color
-        ={0,127,255}));
+          {-36,-2},{18,-2},{18,12.69},{23.65,12.69}},                     color=
+         {0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),

@@ -5,8 +5,7 @@ model OutsideWall
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     use_shortWaveRadOut=true,
     redeclare model WindowModel =
-        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
-        (                                                                                                 redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec),
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140 (                          redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec),
     redeclare AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S wallPar,
     wall_length=5,
     wall_height=2,

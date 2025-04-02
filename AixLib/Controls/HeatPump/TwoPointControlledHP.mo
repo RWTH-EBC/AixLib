@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model TwoPointControlledHP
   "Controller gives full speed or stop signal depending on temperature hysteresis"
   extends AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet;

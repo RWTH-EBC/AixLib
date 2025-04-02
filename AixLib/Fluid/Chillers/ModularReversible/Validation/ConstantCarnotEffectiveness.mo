@@ -3,8 +3,8 @@ model ConstantCarnotEffectiveness
   "Validation case for modular Carnot approach"
   extends BaseClasses.PartialModularComparison(chi(redeclare model
         RefrigerantCycleChillerCooling =
-          AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-          (etaCarnot_nominal=etaCarnot_nominal)));
+          AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
+           etaCarnot_nominal=etaCarnot_nominal)));
   extends Modelica.Icons.Example;
 
   annotation (experiment(Tolerance=1e-6, StopTime=3600),

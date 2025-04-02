@@ -15,8 +15,8 @@ model Chiller "Example for the reversible chiller model."
     nPorts=1) "Ideal mass flow source at the inlet of the sink side"
     annotation (Placement(transformation(extent={{-54,-58},{-34,-38}})));
 
-  AixLib.Fluid.Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare
-      package                                                                          Medium =
+  AixLib.Fluid.Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare package
+                                                                                       Medium =
                        Medium_sin, nPorts=1)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(
@@ -47,12 +47,12 @@ model Chiller "Example for the reversible chiller model."
     use_refIne=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model PerDataMainChi =
-        AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D
-        ( dataTable=
+        AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D (
+          dataTable=
             AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D
-        (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     use_rev=true,
     use_autoCalc=false,

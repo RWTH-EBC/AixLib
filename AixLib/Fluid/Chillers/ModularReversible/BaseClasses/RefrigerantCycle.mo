@@ -7,7 +7,7 @@ model RefrigerantCycle "Refrigerant cycle model of a chiller"
     annotation(Dialog(enable=use_rev));
 
   replaceable model RefrigerantCycleChillerCooling =
-      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling(
+      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.NoCooling (
         useInChi=true)
     constrainedby
       AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.PartialChillerCycle
@@ -15,7 +15,7 @@ model RefrigerantCycle "Refrigerant cycle model of a chiller"
     annotation (choicesAllMatching=true);
 
   replaceable model RefrigerantCycleChillerHeating =
-      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating(
+      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating (
         useInHeaPum=true)
     constrainedby
       AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle
@@ -30,7 +30,7 @@ model RefrigerantCycle "Refrigerant cycle model of a chiller"
     annotation (Placement(transformation(extent={{-60,38},{-19,80}}, rotation=0)));
 
 protected
-  parameter String devIde =
+  parameter String devIde=
     if use_rev then refCycChiHea.devIde else refCycChiCoo.devIde
     "Data source for refrigerant cycle";
 

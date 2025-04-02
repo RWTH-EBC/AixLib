@@ -86,12 +86,12 @@ model ExergyMeters
         extent={{-7,-7.5},{7,7.5}},
         rotation=180,
         origin={-53,56.5})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimIn(redeclare
-      package Medium =                                                                     Medium)
+  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimIn(redeclare package
+              Medium =                                                                     Medium)
     "Exergy content of medium flow entering the storage on primary side"
     annotation (Placement(transformation(extent={{-36,76},{-14,96}})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimOut(redeclare
-      package Medium =                                                                      Medium)
+  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimOut(redeclare package
+              Medium =                                                                      Medium)
     "Exergy content of medium flow exiting the storage on primary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
@@ -138,12 +138,12 @@ model ExergyMeters
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={96,70})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecOut(redeclare
-      package Medium =                                                                     Medium)
+  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecOut(redeclare package
+              Medium =                                                                     Medium)
     "Exergy content of medium flow entering the storage on secondary side"
     annotation (Placement(transformation(extent={{34,72},{56,92}})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecIn(redeclare
-      package Medium =                                                                    Medium)
+  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecIn(redeclare package
+              Medium =                                                                    Medium)
     "Exergy content of medium flow exiting the storage on secondary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},

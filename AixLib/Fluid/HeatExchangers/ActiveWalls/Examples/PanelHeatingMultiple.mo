@@ -8,28 +8,22 @@ model PanelHeatingMultiple
 
   Distributor distributor(redeclare package Medium = Medium, m_flow_nominal=0.5, n=6)
     annotation (Placement(transformation(extent={{-32,-20},{8,20}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis1(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis1(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,64},{84,76}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis2(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis2(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,34},{84,46}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis3(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis3(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,6},{84,18}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis4(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis4(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-22},{84,-10}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis5(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis5(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-52},{84,-40}})));
-  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis6(redeclare
-      package                                                                                 Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis6(redeclare package Medium = Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-80},{84,-68}})));
   Modelica.Fluid.Sources.MassFlowSource_T boundary(

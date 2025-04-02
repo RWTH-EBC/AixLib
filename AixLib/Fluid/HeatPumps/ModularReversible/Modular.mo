@@ -25,8 +25,8 @@ model Modular
       annotation(Dialog(group="Nominal condition - Cooling", enable=use_rev));
 
   replaceable model RefrigerantCycleHeatPumpHeating =
-    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle
-      (PEle_nominal=0)
+    AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle (
+       PEle_nominal=0)
        constrainedby
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle(
        final useInHeaPum=true,

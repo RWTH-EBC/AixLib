@@ -32,8 +32,8 @@ model HeaterCooler_u
     dp_nominal=5,
     m_flow_nominal=0.5)
     annotation (Placement(transformation(extent={{-100,134},{-80,154}})));
-  AixLib.Fluid.Sources.Boundary_pT sin_1(                       redeclare
-      package Medium = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin_1(                       redeclare package
+              Medium = Medium,
     use_p_in=true,
     T=288.15,
     nPorts=4)             annotation (Placement(transformation(extent={{-168,

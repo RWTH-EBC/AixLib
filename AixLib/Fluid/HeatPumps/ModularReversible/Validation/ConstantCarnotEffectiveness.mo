@@ -9,14 +9,13 @@ model ConstantCarnotEffectiveness
       mCon_flow_nominal=mCon_flow_nominal,
       tauCon=VCon*heaPum.rhoCon/mCon_flow_nominal,
       redeclare model RefrigerantCycleInertia =
-          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder
-          (
+          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder (
           refIneFreConst=refIneFreConst,
           nthOrd=2,
           initType=Modelica.Blocks.Types.Init.InitialState),
       redeclare model RefrigerantCycleHeatPumpHeating =
-          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-          (TAppCon_nominal=0,
+          AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
+           TAppCon_nominal=0,
            TAppEva_nominal=0,
            etaCarnot_nominal=etaCarnot_nominal)));
 

@@ -1,4 +1,4 @@
-within AixLib.Fluid.SolarCollectors;
+﻿within AixLib.Fluid.SolarCollectors;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
   annotation(preferredView="info",

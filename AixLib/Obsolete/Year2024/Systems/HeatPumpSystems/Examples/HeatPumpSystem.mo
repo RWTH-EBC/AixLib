@@ -100,14 +100,13 @@ model HeatPumpSystem "Example for a heat pump system"
     cpEva=4180,
     cpCon=4180,
     use_secHeaGen=false,
-    redeclare model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP
-        (bandwidth=5),
+    redeclare model TSetToNSet = AixLib.Controls.HeatPump.TwoPointControlledHP (
+         bandwidth=5),
     use_sec=true,
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D
-        (
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=
             AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113(

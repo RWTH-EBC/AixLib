@@ -276,8 +276,8 @@ model WholeHouseBuildingEnvelope
       Medium = Medium) if useVentAirPort "Inlet for ventilation" annotation (
       Placement(transformation(extent={{90,-78},{110,-58}}), iconTransformation(
           extent={{94,-70},{108,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portVent_out[11](redeclare final
-      package Medium = Medium) if useVentAirPort
+  Modelica.Fluid.Interfaces.FluidPort_b portVent_out[11](redeclare final package
+              Medium = Medium) if useVentAirPort
                                "Outlet of Ventilation" annotation (Placement(
         transformation(extent={{90,-98},{110,-78}}), iconTransformation(extent={
             {96,-92},{110,-78}})));

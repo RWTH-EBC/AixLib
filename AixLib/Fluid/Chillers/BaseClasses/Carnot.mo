@@ -13,11 +13,11 @@ partial model Carnot
   parameter Modelica.Units.SI.HeatFlowRate QCon_flow_nominal(min=0)
     "Nominal heating flow rate" annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal(final max=0)
-     = -10 "Temperature difference evaporator outlet-inlet"
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal(final max=0)=
+       -10 "Temperature difference evaporator outlet-inlet"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal(final min=0)
-     = 10 "Temperature difference condenser outlet-inlet"
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal(final min=0)=
+       10 "Temperature difference condenser outlet-inlet"
     annotation (Dialog(group="Nominal condition"));
 
   // Efficiency
@@ -51,12 +51,12 @@ partial model Carnot
     "Pressure difference over evaporator"
     annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.Units.SI.TemperatureDifference TAppCon_nominal(min=0) =
+  parameter Modelica.Units.SI.TemperatureDifference TAppCon_nominal(min=0)=
     if cp1_default < 1500 then 5 else 2
     "Temperature difference between refrigerant and working fluid outlet in condenser"
     annotation (Dialog(group="Efficiency"));
 
-  parameter Modelica.Units.SI.TemperatureDifference TAppEva_nominal(min=0) =
+  parameter Modelica.Units.SI.TemperatureDifference TAppEva_nominal(min=0)=
     if cp2_default < 1500 then 5 else 2
     "Temperature difference between refrigerant and working fluid outlet in evaporator"
     annotation (Dialog(group="Efficiency"));
@@ -136,12 +136,12 @@ partial model Carnot
     x2=TConAct - TEvaAct,
     deltaX=0.25) "Carnot efficiency";
 
-  Modelica.Units.SI.Temperature TConAct(start=TCon_nominal + TAppCon_nominal)
-     = Medium1.temperature(staB1) + QCon_flow/QCon_flow_nominal*TAppCon_nominal
+  Modelica.Units.SI.Temperature TConAct(start=TCon_nominal + TAppCon_nominal)=
+       Medium1.temperature(staB1) + QCon_flow/QCon_flow_nominal*TAppCon_nominal
     "Condenser temperature used to compute efficiency, taking into account pinch temperature between fluid and refrigerant";
 
-  Modelica.Units.SI.Temperature TEvaAct(start=TEva_nominal - TAppEva_nominal)
-     = Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal
+  Modelica.Units.SI.Temperature TEvaAct(start=TEva_nominal - TAppEva_nominal)=
+       Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal
     "Evaporator temperature used to compute efficiency, taking into account pinch temperature between fluid and refrigerant";
 
 protected

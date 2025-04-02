@@ -12,8 +12,7 @@ model Modular
     allowDifferentDeviceIdentifiers=true,
     QCoo_flow_nominal=-30000,
     redeclare model RefrigerantCycleInertia =
-        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder
-        (
+        AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.VariableOrder (
         refIneFreConst=1/300,
         nthOrd=1,
         initType=Modelica.Blocks.Types.Init.InitialState),
@@ -38,8 +37,8 @@ model Modular
     show_T=true,
     QHea_flow_nominal=30000,
     redeclare model RefrigerantCycleChillerCooling =
-        AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness
-        (etaCarnot_nominal=0.35),
+        AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.ConstantCarnotEffectiveness (
+         etaCarnot_nominal=0.35),
     redeclare model RefrigerantCycleChillerHeating =
         AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData2D (
           redeclare

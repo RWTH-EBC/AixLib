@@ -6,8 +6,8 @@ model HeatingCurve "Model of a heating curve"
       choice=true "Table Data",
       choice=false "Function",
       radioButtons=true));
-  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset(displayUnit="K")
-     = 0 "Offset to heating curve temperature"
+  parameter Modelica.Units.SI.ThermodynamicTemperature TOffset(displayUnit="K")=
+       0 "Offset to heating curve temperature"
     annotation (Dialog(descriptionLabel=true));
   //Function
   replaceable function HeatingCurveFunction =

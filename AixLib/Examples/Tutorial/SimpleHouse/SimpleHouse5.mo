@@ -1,4 +1,4 @@
-within AixLib.Examples.Tutorial.SimpleHouse;
+﻿within AixLib.Examples.Tutorial.SimpleHouse;
 model SimpleHouse5 "Heating controller model"
   extends SimpleHouse4(final use_constantHeater=false);
 

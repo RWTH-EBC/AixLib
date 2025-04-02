@@ -26,8 +26,8 @@ model Modular
       annotation(Dialog(group="Nominal condition - Heating", enable=use_rev));
 
   replaceable model RefrigerantCycleChillerCooling =
-      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.PartialChillerCycle
-      (PEle_nominal=0)
+      AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.PartialChillerCycle (
+       PEle_nominal=0)
     constrainedby
     AixLib.Fluid.Chillers.ModularReversible.RefrigerantCycle.BaseClasses.PartialChillerCycle(
        final useInChi=true,
@@ -40,8 +40,8 @@ model Modular
     annotation (choicesAllMatching=true);
 
   replaceable model RefrigerantCycleChillerHeating =
-      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating
-      (PEle_nominal=PEle_nominal)
+      AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.NoHeating (
+       PEle_nominal=PEle_nominal)
        constrainedby
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpCycle(
        final useInHeaPum=false,

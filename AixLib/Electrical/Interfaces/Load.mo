@@ -25,7 +25,7 @@ model Load "Partial model for a generic load"
   max=AixLib.Electrical.Types.InitMode.linearized) = AixLib.Electrical.Types.InitMode.zero_current
     "Initialization mode for homotopy operator"  annotation(Dialog(tab = "Initialization"));
 
-  Modelica.Units.SI.Voltage v[:](start=PhaseSystem.phaseVoltages(V_nominal)) =
+  Modelica.Units.SI.Voltage v[:](start=PhaseSystem.phaseVoltages(V_nominal))=
     terminal.v "Voltage vector";
   Modelica.Units.SI.Current i[:](each start=0) = terminal.i "Current vector";
   Modelica.Units.SI.Power S[PhaseSystem.n]=PhaseSystem.phasePowers_vi(v, -i)

@@ -1,4 +1,4 @@
-within AixLib.Fluid.SolarCollectors.Data;
+﻿within AixLib.Fluid.SolarCollectors.Data;
 record GenericEN12975
   "Generic data record for EN12975 solar collector models"
   extends AixLib.Fluid.SolarCollectors.Data.BaseClasses.Generic;

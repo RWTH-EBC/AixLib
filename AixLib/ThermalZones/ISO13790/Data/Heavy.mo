@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ISO13790.Data;
-record Heavy = ISO13790.Data.Generic(
+record Heavy = ISO13790.Data.Generic (
     heaC=260000,
     facMas=3) "Heavy"
      annotation (

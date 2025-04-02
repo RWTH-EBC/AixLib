@@ -8,8 +8,8 @@ block PressureDrop
 
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
-     = 100 "Pressure drop at nominal mass flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=
+       100 "Pressure drop at nominal mass flow rate";
   annotation (
   Documentation(info="<html>
 <p>

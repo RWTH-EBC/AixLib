@@ -42,8 +42,8 @@ model Window_ASHRAE140
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={WindowType.g,1 -
-        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0}) if
-    use_solarRadWinTrans
+        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0})
+ if use_solarRadWinTrans
     "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
     annotation (Placement(transformation(extent={{68,96},{78,106}})));
 equation
