@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 model PartialHumidifier
   "partial model of a humidifier"
   extends Components.BaseClasses.PartialComponent;
@@ -13,8 +13,16 @@ model PartialHumidifier
   parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal = 0.05
     "nominal water/steam flow rate of humidifier"
     annotation(Dialog(enable=not use_X_set,group="Nominal conditions"));
-  parameter Modelica.Units.SI.Temperature TWatIn
+  parameter Modelica.Units.SI.Temperature TWatIn(start=288.15)
     "temperature of liquid water added to humidifier";
+
+  parameter Modelica.Units.SI.Temperature TSteam=373.15
+    "Temperature of steam in steam humidifier"
+    annotation (Dialog(
+      tab="Advanced",
+      group="Vaporization"));
+
+  parameter Real k = 500 "exponent for humidification degree  in spray humidifier";
 
   // Variables
   Modelica.Blocks.Interfaces.RealInput u(min=0, max=1) if not use_X_set
@@ -46,8 +54,10 @@ model PartialHumidifier
     final dp_nominal=dp_nominal,
     final m_flow_nominal=m_flow_nominal);
 
-protected
+
+
   // constants
+protected
   constant Modelica.Units.SI.SpecificEnthalpy r100 = 2257E3
     "specific heat of vaporization at 100°C";
 

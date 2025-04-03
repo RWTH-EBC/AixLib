@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 partial model PartialComponent
   "BaseClass for components in air handling units with one air flow"
 
@@ -27,14 +27,15 @@ partial model PartialComponent
 
   Modelica.Blocks.Interfaces.RealInput mAirIn_flow(final quantity="MassFlowRate",
       final unit="kg/s") "mass flow rate of incoming air" annotation (Placement(
-        transformation(extent={{-140,50},{-100,90}}), iconTransformation(extent
-          ={{-120,70},{-100,90}})));
+        transformation(extent={{-140,50},{-100,90}}), iconTransformation(extent=
+           {{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirIn(
     final quantity="ThermodynamicTemperature",
     final unit="K",
+    start=288.15,
     displayUnit="degC") "Temperature of incoming air" annotation (Placement(
-        transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent
-          ={{-120,40},{-100,60}})));
+        transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent=
+           {{-120,40},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput XAirIn(final quantity="MassFraction",
       final unit="kg/kg") "absolute humidity of incoming air" annotation (
       Placement(transformation(extent={{-140,-10},{-100,30}}),
@@ -45,6 +46,7 @@ partial model PartialComponent
   Modelica.Blocks.Interfaces.RealOutput TAirOut(
     final quantity="ThermodynamicTemperature",
     final unit="K",
+    start=288.15,
     displayUnit="degC") "temperature of outgoing air" annotation (Placement(
         transformation(extent={{100,40},{120,60}}), iconTransformation(extent={{
             100,40},{120,60}})));
@@ -56,8 +58,8 @@ partial model PartialComponent
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
 
-protected
   // constants
+protected
   constant Modelica.Units.SI.SpecificEnthalpy r0 = 2500E3
     "specific heat of vaporization at 0°C";
 

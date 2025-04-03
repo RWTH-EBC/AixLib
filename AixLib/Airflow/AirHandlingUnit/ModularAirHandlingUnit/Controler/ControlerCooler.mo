@@ -5,8 +5,8 @@ model ControlerCooler
     "true if active dehumidifying is done in cooler";
   Modelica.Blocks.Interfaces.RealInput xSupSet(start=0.007)
     "max. set value for absolute humidity of supply air" annotation (Placement(
-        transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent
-          ={{-120,50},{-100,70}})));
+        transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
+           {{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput TsupSet(start=293.15)
     "set value for temperature at supply air outlet" annotation (Placement(
         transformation(extent={{-140,-40},{-100,0}}),   iconTransformation(

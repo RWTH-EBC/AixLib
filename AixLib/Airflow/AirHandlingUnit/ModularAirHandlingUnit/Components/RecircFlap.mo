@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model RecircFlap "model for recirculating flap"
 
   // parameters
@@ -90,14 +90,14 @@ model RecircFlap "model for recirculating flap"
       Placement(transformation(extent={{100,-60},{120,-40}}),
         iconTransformation(extent={{100,-60},{120,-40}})));
   Modelica.Blocks.Interfaces.RealOutput XAirOutOda(final quantity="MassFraction",
-      final unit="kg/kg") "absolute humidity of outgoing mixed air" annotation
-    (Placement(transformation(extent={{100,-30},{120,-10}}), iconTransformation(
+      final unit="kg/kg") "absolute humidity of outgoing mixed air" annotation (
+     Placement(transformation(extent={{100,-30},{120,-10}}), iconTransformation(
           extent={{100,-30},{120,-10}})));
 
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-protected
   // variables
+protected
   Modelica.Units.SI.SpecificHeatCapacity cpAirInOda
     "specific heat capacity of incoming outdoor air";
   Modelica.Units.SI.SpecificHeatCapacity cpAirInEta

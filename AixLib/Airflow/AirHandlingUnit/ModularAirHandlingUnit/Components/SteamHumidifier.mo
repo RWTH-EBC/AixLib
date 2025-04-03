@@ -3,12 +3,6 @@ model SteamHumidifier
   extends
     AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
-  parameter Modelica.Units.SI.Temperature TSteam=373.15
-    "Temperature of steam"
-    annotation (Dialog(
-      tab="Advanced",
-      group="Vaporization"));
-
   Modelica.Units.SI.SpecificEnthalpy hSteam "specific enthalpy of steam";
 
   Modelica.Blocks.Interfaces.RealOutput Q_flow "heat flow rate"

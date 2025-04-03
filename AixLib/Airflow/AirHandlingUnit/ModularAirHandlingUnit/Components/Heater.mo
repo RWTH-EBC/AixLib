@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Heater
   "Idealized model for heater containing heat capacity of heat exchanger"
   extends Components.BaseClasses.PartialHeater;

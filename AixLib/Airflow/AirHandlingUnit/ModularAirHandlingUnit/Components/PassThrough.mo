@@ -10,6 +10,7 @@ model PassThrough
   Modelica.Blocks.Interfaces.RealInput T_airIn(
     final quantity="ThermodynamicTemperature",
     final unit="K",
+    start=288.15,
     displayUnit="degC")
     "Temperature of incoming air"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
@@ -26,6 +27,7 @@ model PassThrough
   Modelica.Blocks.Interfaces.RealOutput T_airOut(
     final quantity="ThermodynamicTemperature",
     final unit="K",
+    start=288.15,
     displayUnit="degC") "Temperature of outgoing air"
      annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
