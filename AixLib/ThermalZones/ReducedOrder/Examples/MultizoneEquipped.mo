@@ -15,14 +15,16 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    use_moisture_balance=true,
     internalGainsMode=1,
+    redeclare model AHUMod =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
     huAHU=true,
     BPFDehuAHU=0.2,
-    HRS=false,
-    sampleRateAHU=1800,
+    heatRecoveryAHU=true,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=0.8,
@@ -63,7 +65,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
   Modelica.Blocks.Math.Gain gain(k=0.5)
     "Split additional internal gains into radiative an convective"
-    annotation (Placement(transformation(extent={{-56,-60},{-44,-48}})));
+    annotation (Placement(transformation(extent={{-58,-62},{-46,-50}})));
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{-56,-82},{-44,-70}})));
@@ -109,9 +111,10 @@ equation
   connect(tableInternalGains.y, multizone.intGains)
     annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
   connect(gain.y, replicator.u)
-    annotation (Line(points={{-43.4,-54},{-37.2,-54}}, color={0,0,127}));
-  connect(sine.y, gain.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-54},
-          {-57.2,-54}}, color={0,0,127}));
+    annotation (Line(points={{-45.4,-56},{-40,-56},{-40,-54},{-37.2,-54}},
+                                                       color={0,0,127}));
+  connect(sine.y, gain.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-56},
+          {-59.2,-56}}, color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-76},
           {-57.2,-76}}, color={0,0,127}));
   connect(gain1.y, replicator1.u)
