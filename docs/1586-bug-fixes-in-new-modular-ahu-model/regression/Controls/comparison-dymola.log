@@ -1,0 +1,83 @@
+﻿[
+  {
+    "comparison": {
+      "file_name": "AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay.occupied",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay1.occupied",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay2.occupied",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay.tNexNonOcc",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay.tNexOcc",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay1.tNexNonOcc",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay1.tNexOcc",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay2.tNexNonOcc",
+        "funnel_comp/AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime.mat_occSchDay2.tNexOcc"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0,
+        -112320.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5
+      ],
+      "variables": [
+        "occSchDay.occupied",
+        "occSchDay1.occupied",
+        "occSchDay2.occupied",
+        "occSchDay.tNexNonOcc",
+        "occSchDay.tNexOcc",
+        "occSchDay1.tNexNonOcc",
+        "occSchDay1.tNexOcc",
+        "occSchDay2.tNexNonOcc",
+        "occSchDay2.tNexOcc"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime",
+    "simulation": {
+      "elapsed_time": 0.0029881,
+      "final_time": 207360,
+      "jacobians": 24,
+      "start_time": -112320,
+      "state_events": 0,
+      "success": true
+    }
+  }
+]
