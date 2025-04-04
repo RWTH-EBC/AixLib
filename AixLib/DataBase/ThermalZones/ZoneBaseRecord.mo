@@ -148,12 +148,12 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Reduction factor of userACH for cold weather";
   parameter Boolean withAHU
     "Zone is connected to central air handling unit";
-  parameter Real minAHU(unit = "m3/(h.m2)")
+  parameter Real minAHU(unit="m3/(h.m2)")
     "Minimum specific air flow supplied by the AHU";
-  parameter Real maxAHU(unit = "m3/(h.m2)")
+  parameter Real maxAHU(unit="m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
   parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
-  parameter Real maxIrr[nOrientations](each unit = "W/m2") "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
+  parameter Real maxIrr[nOrientations](unit="W/m2")        "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
@@ -173,6 +173,16 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Real traSysHeatK "Gain for PT1 for damped heating transfer";
+  parameter Modelica.Units.SI.Time traSysHeatT
+    "Time Constant for PT1 for damped heating transfer";
+  parameter Real traSysCoolK "Gain for PT1 for damped cooling transfer";
+  parameter Modelica.Units.SI.Time traSysCoolT
+    "Time Constant for PT1 for damped cooling transfer";
+  parameter Real traSysFraHeaRad "Fraction of heat transfer to radiation";
+  parameter Real traSysFraCooRad "Fraction of cool transfer to radiation";
+
+
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.

@@ -164,7 +164,8 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
 
-  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler(
+  Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped
+                                                heaterCooler(
     each h_heater=h_heater,
     each l_heater=l_heater,
     each KR_heater=KR_heater,
@@ -177,11 +178,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each Cooler_on=Cooler_on,
-    each staOrDyn=not zoneParam.withIdealThresholds) if (ATot > 0 or zoneParam.VAir
-     > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
-    not recOrSep and (Heater_on or Cooler_on))
-                                      "Heater Cooler with PI control"
-    annotation (Placement(transformation(extent={{62,26},{84,46}})));
+    each staOrDyn=not zoneParam.withIdealThresholds)
+      if (ATot > 0 or zoneParam.VAir > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
+        not recOrSep and (Heater_on or Cooler_on))
+      "Heater Cooler with PI control"
+    annotation (Placement(transformation(extent={{62,32},{84,52}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
        zoneParam) if zoneParam.withIdealThresholds
     annotation (Placement(transformation(extent={{-9,-8},{9,8}},
@@ -382,6 +383,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     VAirLay=zoneParam.VAir)
     if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
     annotation (Placement(transformation(extent={{-66,-76},{-60,-70}})));
+
 protected
     Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{-14,68},
@@ -645,20 +647,20 @@ equation
   connect(hConWin.y, theConWin.Gc)
     annotation (Line(points={{22,43.6},{22,40},{21,40}}, color={0,0,127}));
   connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
-    annotation (Line(points={{76.38,19.6},{80,19.6},{80,28},{80.48,28},{80.48,28.8}},
+    annotation (Line(points={{76.38,19.6},{80,19.6},{80,28},{80.48,28},{80.48,34.8}},
         color={255,0,255}));
   connect(heaterCoolerController.coolerActive, heaterCooler.coolerActive)
     annotation (Line(points={{76.38,16.4},{76.38,16},{66,16},{66,26},{65.3,26},{
-          65.3,28.8}}, color={255,0,255}));
+          65.3,34.8}}, color={255,0,255}));
   connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,-16},
-          {-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,28.8}}, color={0,0,
+          {-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,34.8}}, color={0,0,
           127}));
   connect(TSetCool, heaterCooler.setPointCool) annotation (Line(points={{-108,8},
-          {70,8},{70,16},{70.36,16},{70.36,28.8}}, color={0,0,127}));
-  connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{84,35.4},
+          {70,8},{70,16},{70.36,16},{70.36,34.8}}, color={0,0,127}));
+  connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{84,41.4},
           {84,-2},{98,-2},{98,-20},{110,-20}}, color={0,0,127}));
-  connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{84,40},{
-          90,40},{90,0},{110,0}}, color={0,0,127}));
+  connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{84,46},{
+          90,46},{90,0},{110,0}}, color={0,0,127}));
   connect(weaBus, heaterCoolerController.weaBus) annotation (Line(
       points={{-100,34},{-86,34},{-86,10},{58,10},{58,21.44},{62.07,21.44}},
       color={255,204,51},
@@ -667,8 +669,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{82.9,
-          32},{96,32},{96,20},{104,20}}, color={191,0,0}));
+  connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{82.9,38},
+          {96,38},{96,20},{104,20}},     color={191,0,0}));
   connect(corGMod.solarRadWinTrans, simpleExternalShading.solRadWin)
     annotation (Line(points={{-3.4,49},{2.3,49},{2.3,48.92},{3.88,48.92}},
         color={0,0,127}));
@@ -939,6 +941,8 @@ end if;
   connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM.m_flow_eva)
     annotation (Line(points={{-54.42,-73.24},{-57.25,-73.24},{-57.25,-74.11},{-60.15,
           -74.11}}, color={0,0,127}));
+  connect(heaterCooler.heaPorRad, ROM.intGainsRad) annotation (Line(points={{82.9,
+          33},{92,33},{92,82},{86,82}}, color={191,0,0}));
    annotation (Documentation(revisions="<html><ul>
   <li>April 20, 2023, by Philip Groesdonk:<br/>
   Added five element RC model (for heat exchange with neighboured zones) and

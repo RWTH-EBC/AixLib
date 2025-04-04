@@ -156,7 +156,6 @@ partial model PartialMultizone "Partial model for multizone models"
       group="Cooler",
       enable=not recOrSep));
 
-
   //Swimming pool params
   parameter Boolean use_pools_tot = false "use swimming pools within at least one zone of the multizone" annotation(Dialog(tab="Moisture", group="Pools"));
   replaceable package MediumPoolWater = Media.Water annotation (choices(choice(redeclare

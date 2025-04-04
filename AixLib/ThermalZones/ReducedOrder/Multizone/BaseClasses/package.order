@@ -7,3 +7,5 @@ FlowArrayRearranging
 PartialMultizone
 RelToAbsHum
 SumCondition
+DynamicVolumeFlowControl
+DynamicAHUTemperatureControl

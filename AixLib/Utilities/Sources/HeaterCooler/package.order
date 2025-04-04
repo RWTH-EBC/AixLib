@@ -1,4 +1,7 @@
 HeaterCoolerController
 HeaterCoolerPI
+HeaterCoolerPIFraRad
+HeaterCoolerPIFraRadDamped
 PartialHeaterCooler
 PartialHeaterCoolerPI
+PartialHeaterCoolerPIFraRad

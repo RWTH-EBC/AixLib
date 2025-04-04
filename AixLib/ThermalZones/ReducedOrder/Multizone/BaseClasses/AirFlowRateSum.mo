@@ -8,8 +8,11 @@ block AirFlowRateSum
     "Profile or occupancy as control value for AHU" annotation(choices(
     choice =  false "Relative Occupation",choice = true "Profile",
     radioButtons = true));
+  parameter Boolean dynamicControl = false
+    "Wether to use dynamic ventilation control depending on room temperature";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension]
     "Records of zones";
+
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
@@ -23,19 +26,27 @@ block AirFlowRateSum
     final unit="m3/s") "Air flow rate"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
+  Modelica.Blocks.Interfaces.RealInput setAHU[dimension]
+    "Input for volume flow per room if dynamic ventilation control is used"
+    annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=180,
+        origin={-120,-90}), iconTransformation(extent={{-140,-110},{-100,-70}})));
 
 protected
   Real airFlowVector[dimension]
     "Sum of air flow in the zones";
-
 equation
-  if withProfile then
+  if dynamicControl then
+    airFlowVector * 3600 = zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
+  elseif withProfile then
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
     zoneParam.minAHU) * profile) .* zoneParam.AZone);
   else
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
     zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
   end if;
+
   (airFlow) =
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
     airFlowVector,
