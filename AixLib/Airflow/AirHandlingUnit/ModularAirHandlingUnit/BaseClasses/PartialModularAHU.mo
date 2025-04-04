@@ -75,7 +75,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
   parameter Modelica.Units.SI.Temperature TSteam=373.15
     "steam temperature in steam humidifier"
     annotation(Dialog(tab="Advanced", group="Humidifying",enable=humidifying));
-  parameter Modelica.Units.SI.Temperature k=500
+  parameter Real k=500
     "exponent for humidification degree in spray humidifier"
     annotation(Dialog(tab="Advanced", group="Humidifying",enable=humidifying));
 

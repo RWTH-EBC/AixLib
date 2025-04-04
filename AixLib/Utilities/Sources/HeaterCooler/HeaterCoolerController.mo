@@ -24,7 +24,7 @@ Modelica.Blocks.Sources.Constant TAirThresholdHeating(k=zoneParam.TThresholdHeat
     "true if cooler is active" annotation (Placement(transformation(extent={{100,-30},
           {120,-10}}),       iconTransformation(extent={{72,-30},{92,-10}})));
   Modelica.Blocks.Logical.Greater greater
-  "check if outside temperature above threshold"
+    "check if outside temperature above threshold"
                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

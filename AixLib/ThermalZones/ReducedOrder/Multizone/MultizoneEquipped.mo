@@ -120,6 +120,13 @@ model MultizoneEquipped
     heatRecovery=heatRecoveryAHU,
     usePhiSet=relOrAbsHumAHU,
     limPhiOda=false,
+    m_flow_nominal=0.1,
+    dpHrs_nominal(displayUnit="Pa") = 1,
+    dpCoo_nominal(displayUnit="Pa") = 1,
+    dpHea_nominal(displayUnit="Pa") = 1,
+    dpHum_nominal(displayUnit="Pa") = 1,
+    dpFanOda_nominal(displayUnit="Pa") = dpAHU_sup,
+    dpFanEta_nominal(displayUnit="Pa") = dpAHU_eta,
     effHrsOn=effHRSAHU_enabled,
     effHrsOff=effHRSAHU_disabled,
     dpFanOda=dpAHU_sup,
@@ -151,7 +158,7 @@ model MultizoneEquipped
       T_Treshold_Cooling=T_Treshold_Cooling_AHU,
       phi_HRS = if heatRecoveryAHU then effHRSAHU_enabled else effHRSAHU_disabled)
       if ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-42,-56},{-54,-44}})));
+    annotation (Placement(transformation(extent={{-42,-46},{-54,-34}})));
 
 
 protected
@@ -251,8 +258,8 @@ equation
 
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], airFlowRate.relOccupation[i]) annotation (Line(
-        points={{76,-100},{74,-100},{74,-42},{-76,-42},{-76,26},{-73.2,26},{-73.2,
-            25.6}},
+        points={{76,-100},{74,-100},{74,-20},{-76,-20},{-76,26},{-73.2,26},{
+            -73.2,25.6}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(intGains[(i*3) - 2], airFlowRateSplit.relOccupation[i]) annotation (
@@ -272,14 +279,14 @@ equation
   connect(airFlowRate.airFlow, AirHandlingUnit.VOda_flow) annotation (Line(
         points={{-58.8,28},{-56,28},{-56,32},{-50.75,32}}, color={0,0,127}));
   connect(AirHandlingUnit.TOda, weaBus.TDryBul) annotation (Line(points={{-50.75,
-          28},{-52,28},{-52,68},{-96,68},{-96,69.08},{-99.915,69.08}}, color={0,
+          28},{-54,28},{-54,68},{-96,68},{-96,69.08},{-99.915,69.08}}, color={0,
           0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(AirHandlingUnit.phiOda, weaBus.relHum) annotation (Line(points={{-50.75,
-          24},{-52,24},{-52,68},{-98,68},{-98,69.08},{-99.915,69.08}},
+          24},{-54,24},{-54,68},{-98,68},{-98,69.08},{-99.915,69.08}},
                                                      color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -372,17 +379,18 @@ equation
           16.75},{-100,10},{-80,10},{-80,-64.8},{-25.2,-64.8}},
         color={0,0,127}));
   connect(AHU[1], dynamicAHUTemperatureControl.TsetAHU_In) annotation (Line(
-        points={{-100,3.25},{-100,10},{-80,10},{-80,-50},{-55.2,-50}},
+        points={{-100,3.25},{-100,10},{-80,10},{-80,-40},{-55.2,-40}},
         color={0,0,127}));
   connect(dynamicAHUTemperatureControl.T_Oda, weaBus.TDryBul) annotation (Line(
-        points={{-52.8,-42.8},{-52.8,69.08},{-99.915,69.08}},        color={0,0,
+        points={{-52.8,-32.8},{-52.8,-32},{-54,-32},{-54,70},{-76,70},{-76,
+          69.08},{-99.915,69.08}},                                   color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(dynamicAHUTemperatureControl.T_Eta, minTemp.y) annotation (Line(
-        points={{-43.32,-42.8},{-44,-42.8},{-44,-36},{16,-36},{16,-28},{19.5,-28}},
+        points={{-43.32,-32.8},{14,-32.8},{14,-28},{19.5,-28}},
         color={0,0,127}));
   connect(TSetHeat, dynamicVolumeFlowControl.TSetHeat) annotation (Line(points={
           {-40,-100},{-40,-74},{-15.6,-74},{-15.6,-67.2}}, color={0,0,127}));
