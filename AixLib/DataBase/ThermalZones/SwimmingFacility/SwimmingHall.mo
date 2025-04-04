@@ -89,7 +89,13 @@ record SwimmingHall "Swimming facility - Swimming hall"
     CoolerOn = false,
     withIdealThresholds = false,
     TThresholdHeater = 303.15,
-    TThresholdCooler = 308.15);
+    TThresholdCooler = 308.15,
+    traSysHeatK=1,
+    traSysHeatT=1,
+    traSysCoolK=1,
+    traSysCoolT=1,
+    traSysFraHeaRad=0,
+    traSysFraCooRad=0);
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.

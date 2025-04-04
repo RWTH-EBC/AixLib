@@ -103,5 +103,11 @@ record MorschenichSfhFixedHeater_storey_1
     CoolerOn = false,
     withIdealThresholds = false,
     TThresholdHeater = 288.15,
-    TThresholdCooler = 295.15);
+    TThresholdCooler = 295.15,
+    traSysHeatK=1,
+    traSysHeatT=1,
+    traSysCoolK=1,
+    traSysCoolT=1,
+    traSysFraHeaRad=0,
+    traSysFraCooRad=0);
 end MorschenichSfhFixedHeater_storey_1;

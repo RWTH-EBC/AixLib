@@ -89,7 +89,13 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false);
+    withIdealThresholds=false,
+    traSysHeatK=1,
+    traSysHeatT=1,
+    traSysCoolK=1,
+    traSysCoolT=1,
+    traSysFraHeaRad=0,
+    traSysFraCooRad=0);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>

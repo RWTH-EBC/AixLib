@@ -108,7 +108,13 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     CoolerOn=false,
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
-    withIdealThresholds=false);
+    withIdealThresholds=false,
+    traSysHeatK=1,
+    traSysHeatT=1,
+    traSysCoolK=1,
+    traSysCoolT=1,
+    traSysFraHeaRad=0,
+    traSysFraCooRad=0);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
