@@ -3,13 +3,13 @@ model DynamicVolumeFlowControl
   "V_flow control depending on indoor temperature"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer numZones "Number of Zones";
+  parameter Integer numZones = 1 "Number of Zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Records of zones";
-  parameter Boolean heatAHU "Status of heating of AHU";
-  parameter Boolean coolAHU "Status of cooling of AHU";
-  parameter Real maxAHU_PI_Heat "Max output value for heating PI controller";
-  parameter Real maxAHU_PI_Cool "Max output value for cooling PI controller";
+  parameter Boolean heatAHU = false "Status of heating of AHU";
+  parameter Boolean coolAHU = false  "Status of cooling of AHU";
+  parameter Real maxAHU_PI_Heat = 1  "Max output value for heating PI controller";
+  parameter Real maxAHU_PI_Cool = 1  "Max output value for cooling PI controller";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roomHeatPort[numZones]
     annotation (Placement(transformation(extent={{80,-20},{120,20}}),
         iconTransformation(extent={{80,-20},{120,20}})));
@@ -85,8 +85,6 @@ equation
     annotation (Line(points={{50,-120},{50,30},{42,30}}, color={0,0,127}));
   connect(TSetCool, PI_AHU_Cool.u_s) annotation (Line(points={{-30,-120},{-30,-82},
           {46,-82},{46,-30},{42,-30}}, color={0,0,127}));
-  connect(roomHeatPort, TAir.port)
-    annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
   connect(gainCool.y, switchCool.u1)
     annotation (Line(points={{-6.6,-30},{-18,-30}}, color={0,0,127}));
   connect(AHUProfile, replicator.u)
@@ -109,6 +107,8 @@ equation
     annotation (Line(points={{-81,0},{-120,0}}, color={0,0,127}));
   connect(PI_AHU_Heat.y, gainHeat.u)
     annotation (Line(points={{19,30},{7.2,30}}, color={0,0,127}));
+  connect(roomHeatPort, TAir.port)
+    annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end DynamicVolumeFlowControl;
