@@ -77,9 +77,9 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{20,-10},{0,10}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-52,-56},{-40,-44}})));
-  Modelica.Blocks.Math.Add dTZoneHeat[numZones](k1=+1, k2=-1)
+  Modelica.Blocks.Math.Add dTZoneHeat[numZones](k1=-1, k2=+1)
     annotation (Placement(transformation(extent={{100,40},{80,60}})));
-  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=-1, k2=+1)
+  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=+1, k2=-1)
     annotation (Placement(transformation(extent={{100,-40},{80,-60}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{72,48},{60,60}})));
@@ -91,9 +91,9 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{-30,-10},{-50,10}})));
   Modelica.Blocks.Sources.Constant const6(k=0)
     annotation (Placement(transformation(extent={{-50,-26},{-38,-14}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresisCooling(uLow=-0.15, uHigh=0.5)
+  Modelica.Blocks.Logical.Hysteresis hysteresisCooling(uLow=-0.5, uHigh=0.25)
     annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresisHeating(uLow=-0.15, uHigh=0.5)
+  Modelica.Blocks.Logical.Hysteresis hysteresisHeating(uLow=-0.5, uHigh=0.25)
     annotation (Placement(transformation(extent={{40,70},{20,90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff(y=OnOff)
     annotation (Placement(transformation(extent={{-8,-6},{-20,6}})));
@@ -103,19 +103,35 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
     "Air temperature of the zones which are supplied by the AHU"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-  WeightedAvg avgTZoneCool(numZones=numZones, zoneParam=zoneParam)
-    annotation (Placement(transformation(extent={{72,-40},{60,-28}})));
-  WeightedAvg avgTZoneHeat(numZones=numZones, zoneParam=zoneParam)
-    annotation (Placement(transformation(extent={{72,28},{60,40}})));
+  Modelica.Blocks.Math.MinMax minMaxHeat(nu=numZones)
+    annotation (Placement(transformation(extent={{72,26},{58,40}})));
+  Modelica.Blocks.Math.MinMax minMax(nu=numZones)
+    annotation (Placement(transformation(extent={{68,-40},{56,-28}})));
+  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=293.15) annotation (
+     Placement(transformation(
+        extent={{-20,20},{20,-20}},
+        rotation=0,
+        origin={-120,90}), iconTransformation(
+        extent={{20,-20},{-20,20}},
+        rotation=180,
+        origin={-120,80})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+    annotation (Placement(transformation(extent={{-42,-88},{-22,-68}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant1
+    annotation (Placement(transformation(extent={{-62,68},{-42,88}})));
+  Modelica.Blocks.Logical.Not not1
+    annotation (Placement(transformation(extent={{8,76},{0,84}})));
+  Modelica.Blocks.Logical.Not not2
+    annotation (Placement(transformation(extent={{8,-84},{0,-76}})));
 equation
 
-  if hysteresisHeating.y then
+  if TOda < 283.15 then
     HeatingCooling = true;
   else
     HeatingCooling = false;
   end if;
 
-  if not hysteresisHeating.y and not hysteresisCooling.y then
+  if hysteresisHeating.y and hysteresisCooling.y then
     OnOff = false;
   else
     OnOff = true;
@@ -164,26 +180,30 @@ equation
           {-28,-8}},                               color={0,0,127}));
   connect(switchOff.y, add.u1) annotation (Line(points={{-51,0},{-60,0},{-60,6},
           {-68,6}}, color={0,0,127}));
-  connect(hysteresisCooling.y, switchCool.u2) annotation (Line(points={{19,-80},
-          {-20,-80},{-20,-42}}, color={255,0,255}));
-  connect(hysteresisHeating.y, switchHeat.u2)
-    annotation (Line(points={{19,80},{-20,80},{-20,42}}, color={255,0,255}));
   connect(booleanExpressionOnOff.y, switchOff.u2)
     annotation (Line(points={{-20.6,0},{-28,0}}, color={255,0,255}));
   connect(booleanExpressionHeatingCooling.y, switchHeatingCooling.u2)
     annotation (Line(points={{33.4,0},{22,0}}, color={255,0,255}));
-  connect(dTZoneCool.y, avgTZoneCool.u) annotation (Line(points={{79,-50},{76,
-          -50},{76,-34},{73.2,-34}}, color={0,0,127}));
-  connect(dTZoneHeat.y, avgTZoneHeat.u) annotation (Line(points={{79,50},{76,50},
-          {76,34},{73.2,34}}, color={0,0,127}));
-  connect(avgTZoneHeat.y, PI_AHU_Heat.u_m)
-    annotation (Line(points={{59.4,34},{30,34},{30,38}}, color={0,0,127}));
-  connect(hysteresisHeating.u, avgTZoneHeat.y) annotation (Line(points={{42,80},
-          {50,80},{50,34},{59.4,34}}, color={0,0,127}));
-  connect(avgTZoneCool.y, hysteresisCooling.u) annotation (Line(points={{59.4,
-          -34},{50,-34},{50,-80},{42,-80}}, color={0,0,127}));
-  connect(avgTZoneCool.y, PI_AHU_Cool.u_m)
-    annotation (Line(points={{59.4,-34},{30,-34},{30,-38}}, color={0,0,127}));
+  connect(dTZoneHeat.y, minMaxHeat.u) annotation (Line(points={{79,50},{74,50},
+          {74,44},{76,44},{76,33},{72,33}}, color={0,0,127}));
+  connect(dTZoneCool.y, minMax.u) annotation (Line(points={{79,-50},{78,-50},{78,
+          -34},{68,-34}}, color={0,0,127}));
+  connect(PI_AHU_Heat.u_m, minMaxHeat.yMin)
+    annotation (Line(points={{30,38},{30,28.8},{57.3,28.8}}, color={0,0,127}));
+  connect(hysteresisHeating.u, minMaxHeat.yMin) annotation (Line(points={{42,80},
+          {48,80},{48,28.8},{57.3,28.8}}, color={0,0,127}));
+  connect(minMax.yMin, PI_AHU_Cool.u_m) annotation (Line(points={{55.4,-37.6},{36,
+          -37.6},{36,-32},{30,-32},{30,-38}}, color={0,0,127}));
+  connect(minMax.yMin, hysteresisCooling.u) annotation (Line(points={{55.4,-37.6},
+          {48,-37.6},{48,-80},{42,-80}}, color={0,0,127}));
+  connect(hysteresisHeating.y, not1.u)
+    annotation (Line(points={{19,80},{8.8,80}}, color={255,0,255}));
+  connect(not1.y, switchHeat.u2)
+    annotation (Line(points={{-0.4,80},{-20,80},{-20,42}}, color={255,0,255}));
+  connect(hysteresisCooling.y, not2.u)
+    annotation (Line(points={{19,-80},{8.8,-80}}, color={255,0,255}));
+  connect(not2.y, switchCool.u2) annotation (Line(points={{-0.4,-80},{-14,-80},{
+          -14,-48},{-20,-48},{-20,-42}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Dynamic_T_SUP_Control;
