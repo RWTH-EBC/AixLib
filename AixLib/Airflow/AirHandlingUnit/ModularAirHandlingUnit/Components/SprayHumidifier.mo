@@ -31,7 +31,7 @@ protected
   Modelica.Blocks.Sources.RealExpression realExpression1(y=X_intern)
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 equation
-  T_intern =TAirOut;
+  T_intern = TAirOut;
   mDryAirIn_flow * (1 + XAirIn) = mAirIn_flow;
 
   // mass balance

@@ -72,7 +72,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
   parameter Modelica.Units.SI.Temperature TWat=293.15
     "water temperature"
     annotation(Dialog(tab="Advanced", group="Humidifying",enable=humidifying));
-  parameter Modelica.Units.SI.Temperature TSteam=373.15
+  parameter Modelica.Units.SI.Temperature TSteam=363.15
     "steam temperature in steam humidifier"
     annotation(Dialog(tab="Advanced", group="Humidifying",enable=humidifying));
   parameter Real k=500
@@ -201,7 +201,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
 
   // Components
 
-  replaceable model humidifier = Components.SteamHumidifier
+  replaceable model humidifier = Components.SprayHumidifier
     constrainedby Components.BaseClasses.PartialHumidifier
     "replaceable model for humidifier"  annotation(choicesAllMatching=true);
 

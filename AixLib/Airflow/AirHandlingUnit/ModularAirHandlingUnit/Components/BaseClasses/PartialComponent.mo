@@ -9,13 +9,13 @@ partial model PartialComponent
   parameter Modelica.Units.SI.SpecificHeatCapacity cpSteam = 1860
     "specific heat capacity of steam"
     annotation(Dialog(tab="Advanced"));
-  parameter Modelica.Units.SI.Density rhoAir = 1.2
+  parameter Modelica.Units.SI.Density rhoAir=1.2
     "Density of air"
     annotation(Dialog(tab="Advanced"));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = 0.01
     "nominal mass flow rate"
     annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.Units.SI.PressureDifference dp_nominal
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=1
     "pressure drop at nominal mass flow rate"
     annotation(Dialog(group="Nominal conditions"));
 
@@ -30,9 +30,9 @@ partial model PartialComponent
         transformation(extent={{-140,50},{-100,90}}), iconTransformation(extent=
            {{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirIn(
+    final start=283.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    start=288.15,
     displayUnit="degC") "Temperature of incoming air" annotation (Placement(
         transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent=
            {{-120,40},{-100,60}})));
@@ -44,9 +44,9 @@ partial model PartialComponent
       final unit="kg/s") "mass flow rate of outgoing air"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOut(
+    final start=283.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    start=288.15,
     displayUnit="degC") "temperature of outgoing air" annotation (Placement(
         transformation(extent={{100,40},{120,60}}), iconTransformation(extent={{
             100,40},{120,60}})));

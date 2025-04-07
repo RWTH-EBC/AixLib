@@ -18,7 +18,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     use_moisture_balance=true,
     internalGainsMode=1,
     redeclare model AHUMod =
-        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU,
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
@@ -137,7 +137,11 @@ equation
           34.6,-82},{34.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
+    experiment(
+      StopTime=31536000,
+      Interval=3600,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Cvode"),
     __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneEquipped.mos"
         "Simulate and plot"),

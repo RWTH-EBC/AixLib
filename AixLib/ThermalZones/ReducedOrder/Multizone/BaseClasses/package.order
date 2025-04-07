@@ -9,5 +9,6 @@ RelToAbsHum
 SumCondition
 DynamicVolumeFlowControl
 DynamicAHUTemperatureControl
-DynamicT_SUPControl
-DynamicAHU_VFlow_Control
+Dynamic_T_SUP_Control
+Dynamic_Vflow_Control
+WeightedAvg
