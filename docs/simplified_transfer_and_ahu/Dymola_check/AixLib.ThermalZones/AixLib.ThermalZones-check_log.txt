@@ -16,6 +16,23 @@ Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizo
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
+Error: Class or component 'HRS' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
+Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater 
 Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
 Error: Class or component 'humidifying' not found in AHUMod AirHandlingUnit
@@ -163,22 +180,5 @@ Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizo
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 2
 Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
-Error: Class or component 'HRS' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
-Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
 Error: ERRORS have been issued.
 
