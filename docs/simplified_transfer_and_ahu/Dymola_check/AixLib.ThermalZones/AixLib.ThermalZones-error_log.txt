@@ -1,4 +1,21 @@
 
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
+Error: Class or component 'HRS' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
+Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater 
 Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
 Error: Class or component 'humidifying' not found in AHUMod AirHandlingUnit
@@ -163,253 +180,5 @@ Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizo
   Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$zoneParam:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$roomHeatPort:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-In value attribute for PI_AHU_Cool.k.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$PI_AHU_Cool:k">PI_AHU_Cool.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Continuous.mo, line <a href="Modelica://Modelica.Blocks.Continuous.LimPID#text:10">768</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#:PI_AHU_Cool">PI_AHU_Cool</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 33
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$PI_AHU_Cool:maxAHU_PI_Cool">maxAHU_PI_Cool</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$PI_AHU_Cool:k">PI_AHU_Cool.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Continuous.mo, line <a href="Modelica://Modelica.Blocks.Continuous.LimPID#text:10">768</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-In value attribute for PI_AHU_Heat.k.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$PI_AHU_Heat:k">PI_AHU_Heat.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Continuous.mo, line <a href="Modelica://Modelica.Blocks.Continuous.LimPID#text:10">768</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#:PI_AHU_Heat">PI_AHU_Heat</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 42
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$PI_AHU_Heat:maxAHU_PI_Heat">maxAHU_PI_Heat</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$PI_AHU_Heat:k">PI_AHU_Heat.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Continuous.mo, line <a href="Modelica://Modelica.Blocks.Continuous.LimPID#text:10">768</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 60
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 68
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-In value attribute for booleanCoolAHUExpression.k.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$booleanCoolAHUExpression:k">booleanCoolAHUExpression.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Sources.mo, line <a href="Modelica://Modelica.Blocks.Sources.BooleanConstant#text:2">1905</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#:booleanCoolAHUExpression">booleanCoolAHUExpression</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 80
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$booleanCoolAHUExpression:coolAHU">coolAHU</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$booleanCoolAHUExpression:k">booleanCoolAHUExpression.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Sources.mo, line <a href="Modelica://Modelica.Blocks.Sources.BooleanConstant#text:2">1905</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-In value attribute for avedTZoneHeat.nin.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$avedTZoneHeat:nin">avedTZoneHeat.nin</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line <a href="Modelica://Modelica.Blocks.Interfaces.MISO#text:4">376</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in base-class avedTZoneHeat.MISO.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Math/Average.mo, line 3
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$avedTZoneHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$avedTZoneHeat:nin">avedTZoneHeat.nin</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line <a href="Modelica://Modelica.Blocks.Interfaces.MISO#text:4">376</a>
-In value attribute for booleanHeatAHUExpression.k.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$booleanHeatAHUExpression:k">booleanHeatAHUExpression.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Sources.mo, line <a href="Modelica://Modelica.Blocks.Sources.BooleanConstant#text:2">1905</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#:booleanHeatAHUExpression">booleanHeatAHUExpression</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 94
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$booleanHeatAHUExpression:heatAHU">heatAHU</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$booleanHeatAHUExpression:k">booleanHeatAHUExpression.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Sources.mo, line <a href="Modelica://Modelica.Blocks.Sources.BooleanConstant#text:2">1905</a>
-In value attribute for avedTZoneHeat1.nin.
-Modifier applied in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$avedTZoneHeat1:nin">avedTZoneHeat1.nin</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line <a href="Modelica://Modelica.Blocks.Interfaces.MISO#text:4">376</a>
-Variable found in class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 2
-Variable found in base-class avedTZoneHeat1.MISO.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Math/Average.mo, line 3
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$avedTZoneHeat1:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#$avedTZoneHeat1:nin">avedTZoneHeat1.nin</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Interfaces.mo, line <a href="Modelica://Modelica.Blocks.Interfaces.MISO#text:4">376</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$TZone:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Errors found in: T_AHU_After_HRS = T_Oda + phi_HRS*(T_Eta - T_Oda + 1e-3)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:125">126</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:T_Oda">T_Oda</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:T_Eta">T_Eta</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:T_Oda">T_Oda</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Errors found in: T_AHU_After_HRS = T_Oda + phi_HRS*(T_Eta - T_Oda + 1e-3)
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:125">126</a>
-Errors found in: if HeatingThreshold.y then
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:127">128</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:HeatingThreshold.y">HeatingThreshold.y</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Errors found in: elseif CoolingThreshold.y then
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:129">130</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text:CoolingThreshold.y">CoolingThreshold.y</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$zoneParam:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$roomHeatPort:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$TZone:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$zoneParam:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$roomHeatPort:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$TZone:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Warning: Current version of the Modelica translator can only handle
-array of components with fixed size.
-But component zoneParam had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 6
-But component roomHeatPort had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 30
-But component gainCool had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 40
-But component gainHeat had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 49
-But component dTZoneHeat had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 84
-But component dTZoneCool had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 86
-But component TZone had non-fixed array dimensions [numZones].
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line 121
-All variables used in size expressions must be declared as constants or parameters.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$zoneParam:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records zoneParam; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$roomHeatPort:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records roomHeatPort; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records gainCool; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$gainHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records gainHeat; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneHeat:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records dTZoneHeat; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$dTZoneCool:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records dTZoneCool; using default size for check. This must be specified before using the model.
-Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text$TZone:numZones">numZones</a>
-In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/DynamicT_SUPControl.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.DynamicT_SUPControl#text">2</a>
-Unspecified size for array of records TZone; using default size for check. This must be specified before using the model.
-The model contained invalid expressions.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
-Error: Class or component 'HRS' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
-Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
 Error: ERRORS have been issued.
 
