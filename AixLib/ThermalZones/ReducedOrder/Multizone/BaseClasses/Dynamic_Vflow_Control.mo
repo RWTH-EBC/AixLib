@@ -10,7 +10,6 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
   parameter Real gain_Vflow_Cool_Max = 2
     "max temperature difference of T_SUP for further cooling power";
 
-  Boolean HeatingCooling[numZones];
   Boolean OnOff[numZones];
 
   Modelica.Blocks.Interfaces.RealOutput Vflow_setAHU[numZones] annotation (
@@ -74,7 +73,7 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{-52,-56},{-40,-44}})));
   Modelica.Blocks.Math.Add dTZoneHeat[numZones](k1=-1, k2=+1)
     annotation (Placement(transformation(extent={{100,40},{80,60}})));
-  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=+1, k2=-1)
+  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=-1, k2=+1)
     annotation (Placement(transformation(extent={{100,-60},{80,-40}})));
   Modelica.Blocks.Sources.Constant const1[numZones](k=0)
     annotation (Placement(transformation(extent={{72,48},{60,60}})));
@@ -96,7 +95,7 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
         OnOff) annotation (Placement(transformation(extent={{-8,-6},{-20,6}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
     "Air temperature of the zones which are supplied by the AHU"
-    annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+    annotation (Placement(transformation(extent={{86,-8},{74,8}})));
   Modelica.Blocks.Math.Product product[numZones]
     annotation (Placement(transformation(extent={{-70,-10},{-90,10}})));
   Modelica.Blocks.Routing.Replicator replicator(nout=numZones)
@@ -109,8 +108,14 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{20,-10},{0,10}})));
   Modelica.Blocks.Math.Add TSetAvg[numZones](k1=0.5, k2=0.5)
     annotation (Placement(transformation(extent={{80,-16},{68,-28}})));
-  Modelica.Blocks.Logical.Greater greater[numZones]
-    annotation (Placement(transformation(extent={{52,-16},{40,-28}})));
+  Utilities.Logical.DynamicHysteresis HysteresisHeatinCooling[numZones]
+    annotation (Placement(transformation(extent={{50,10},{30,-10}})));
+  Modelica.Blocks.Math.Add add[numZones](k1=+1, k2=+1)
+    annotation (Placement(transformation(extent={{56,24},{52,28}})));
+  Modelica.Blocks.Math.Add add1[numZones](k1=-1, k2=+1)
+    annotation (Placement(transformation(extent={{56,16},{52,20}})));
+  Modelica.Blocks.Sources.Constant const3[numZones](k=0.5)
+    annotation (Placement(transformation(extent={{66,20},{62,24}})));
 equation
 
   for i in 1:numZones loop
@@ -129,9 +134,9 @@ equation
   connect(const.y, switchCool.u3) annotation (Line(points={{-39.4,-50},{-28,-50},
           {-28,-42}},    color={0,0,127}));
   connect(roomHeatPort, TZone.port)
-    annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
-  connect(TZone.T, dTZoneHeat.u2) annotation (Line(points={{59,0},{50,0},{50,22},
-          {110,22},{110,44},{102,44}},                 color={0,0,127}));
+    annotation (Line(points={{100,0},{86,0}}, color={191,0,0}));
+  connect(TZone.T, dTZoneHeat.u2) annotation (Line(points={{73.4,0},{68,0},{68,
+          24},{110,24},{110,44},{102,44}},             color={0,0,127}));
   connect(TSetHeat, dTZoneHeat.u1) annotation (Line(points={{30,-120},{30,-98},{
           116,-98},{116,56},{102,56}},                   color={0,0,127}));
   connect(const1.y, PI_AHU_Heat.u_s) annotation (Line(points={{59.4,54},{52,54},
@@ -174,24 +179,34 @@ equation
   connect(switchHeatingCooling.y, switchOff.u1) annotation (Line(points={{-1,0},{
           -4,0},{-4,8},{-28,8}},    color={0,0,127}));
   connect(switchHeat.y, switchHeatingCooling.u1) annotation (Line(points={{-20,19},
-          {-20,14},{30,14},{30,8},{22,8}},          color={0,0,127}));
+          {-20,14},{26,14},{26,8},{22,8}},          color={0,0,127}));
   connect(switchCool.y, switchHeatingCooling.u3) annotation (Line(points={{-20,-19},
-          {-20,-14},{30,-14},{30,-8},{22,-8}},                     color={0,0,127}));
-  connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,
+          {-20,-14},{26,-14},{26,-8},{22,-8}},                     color={0,0,127}));
+  connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{73.4,0},{68,0},{68,
           -12},{108,-12},{108,-44},{102,-44}},
                                           color={0,0,127}));
   connect(TSetCool, dTZoneCool.u2) annotation (Line(points={{-30,-120},{-30,-94},
           {110,-94},{110,-56},{102,-56}}, color={0,0,127}));
-  connect(TSetHeat, TSetAvg.u2) annotation (Line(points={{30,-120},{30,-98},{
-          116,-98},{116,-18},{82,-18},{82,-18.4},{81.2,-18.4}}, color={0,0,127}));
-  connect(TSetCool, TSetAvg.u1) annotation (Line(points={{-30,-120},{-30,-94},{
-          110,-94},{110,-26},{96,-26},{96,-25.6},{81.2,-25.6}}, color={0,0,127}));
-  connect(TSetAvg.y, greater.u1)
-    annotation (Line(points={{67.4,-22},{53.2,-22}}, color={0,0,127}));
-  connect(TZone.T, greater.u2) annotation (Line(points={{59,0},{50,0},{50,-12},
-          {60,-12},{60,-16},{53.2,-16},{53.2,-17.2}}, color={0,0,127}));
-  connect(greater.y, switchHeatingCooling.u2) annotation (Line(points={{39.4,
-          -22},{32,-22},{32,0},{22,0}}, color={255,0,255}));
+  connect(TSetHeat, TSetAvg.u2) annotation (Line(points={{30,-120},{30,-98},{116,
+          -98},{116,-18},{82,-18},{82,-18.4},{81.2,-18.4}}, color={0,0,127}));
+  connect(TSetCool, TSetAvg.u1) annotation (Line(points={{-30,-120},{-30,-94},{110,
+          -94},{110,-26},{96,-26},{96,-25.6},{81.2,-25.6}}, color={0,0,127}));
+  connect(const3.y, add.u2) annotation (Line(points={{61.8,22},{58,22},{58,24},
+          {56.4,24},{56.4,24.8}}, color={0,0,127}));
+  connect(const3.y, add1.u1) annotation (Line(points={{61.8,22},{58,22},{58,
+          19.2},{56.4,19.2}}, color={0,0,127}));
+  connect(TZone.T, add1.u2) annotation (Line(points={{73.4,0},{68,0},{68,16.8},
+          {56.4,16.8}}, color={0,0,127}));
+  connect(TZone.T, add.u1) annotation (Line(points={{73.4,0},{68,0},{68,27.2},{
+          56.4,27.2}}, color={0,0,127}));
+  connect(HysteresisHeatinCooling.y, switchHeatingCooling.u2)
+    annotation (Line(points={{29,0},{22,0}}, color={255,0,255}));
+  connect(TSetAvg.y, HysteresisHeatinCooling.u) annotation (Line(points={{67.4,
+          -22},{60,-22},{60,0},{52,0}}, color={0,0,127}));
+  connect(add1.y, HysteresisHeatinCooling.uLow)
+    annotation (Line(points={{51.8,18},{45,18},{45,12}}, color={0,0,127}));
+  connect(add.y, HysteresisHeatinCooling.uHigh)
+    annotation (Line(points={{51.8,26},{37,26},{37,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Dynamic_Vflow_Control;

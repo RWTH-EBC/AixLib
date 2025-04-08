@@ -383,16 +383,6 @@ equation
   connect(dynamic_T_SUP_Control.TsetAHU_Out, AirHandlingUnit.TSupSet)
     annotation (Line(points={{-62,-30},{-68,-30},{-68,-6},{6.25,-6},{6.25,-0.8}},
         color={0,0,127}));
-  connect(dynamic_T_SUP_Control.TOda, weaBus.TDryBul) annotation (Line(points={
-          {-62,-22},{-62,-16},{-120,-16},{-120,48},{-78,48},{-78,69.08},{
-          -99.915,69.08}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(dynamic_Vflow_Control.TOda, dynamic_T_SUP_Control.TOda) annotation (
-      Line(points={{-22,-42},{-36,-42},{-36,-16},{-62,-16},{-62,-22}}, color={0,
-          0,127}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},

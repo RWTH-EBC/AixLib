@@ -107,35 +107,21 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{72,26},{58,40}})));
   Modelica.Blocks.Math.MinMax minMax(nu=numZones)
     annotation (Placement(transformation(extent={{68,-40},{56,-28}})));
-  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=293.15) annotation (
-     Placement(transformation(
-        extent={{-20,20},{20,-20}},
-        rotation=0,
-        origin={-120,90}), iconTransformation(
-        extent={{20,-20},{-20,20}},
-        rotation=180,
-        origin={-120,80})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant
-    annotation (Placement(transformation(extent={{-42,-88},{-22,-68}})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant1
-    annotation (Placement(transformation(extent={{-62,68},{-42,88}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{8,76},{0,84}})));
   Modelica.Blocks.Logical.Not not2
     annotation (Placement(transformation(extent={{8,-84},{0,-76}})));
 equation
 
-  if TOda < 283.15 then
-    HeatingCooling = true;
-  else
-    HeatingCooling = false;
-  end if;
+  HeatingCooling = false;
+
 
   if hysteresisHeating.y and hysteresisCooling.y then
     OnOff = false;
   else
     OnOff = true;
   end if;
+
 
   connect(PI_AHU_Cool.y,gainCool.u)
     annotation (Line(points={{19,-50},{13.2,-50}},color={0,0,127}));
@@ -157,8 +143,8 @@ equation
     annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
   connect(TZone.T, dTZoneHeat.u2) annotation (Line(points={{59,0},{50,0},{50,22},
           {110,22},{110,44},{102,44}},                 color={0,0,127}));
-  connect(TSetHeat, dTZoneHeat.u1) annotation (Line(points={{30,-120},{30,-98},
-          {116,-98},{116,56},{102,56}},                  color={0,0,127}));
+  connect(TSetHeat, dTZoneHeat.u1) annotation (Line(points={{30,-120},{30,-98},{
+          116,-98},{116,56},{102,56}},                   color={0,0,127}));
   connect(const1.y, PI_AHU_Heat.u_s) annotation (Line(points={{59.4,54},{52,54},
           {52,50},{42,50}}, color={0,0,127}));
   connect(const2.y, switchHeat.u3)
@@ -169,15 +155,11 @@ equation
           {-20,-16},{30,-16},{30,-8},{22,-8}}, color={0,0,127}));
   connect(const4.y, PI_AHU_Cool.u_s) annotation (Line(points={{59.4,-54},{52,-54},
           {52,-50},{42,-50}}, color={0,0,127}));
-  connect(switchHeatingCooling.y, switchOff.u1)
-    annotation (Line(points={{-1,0},{-4,0},{-4,8},{-28,8}}, color={0,0,127}));
   connect(const6.y, switchOff.u3)
     annotation (Line(points={{-37.4,-20},{-34,-20},{-34,-14},{-20,-14},{-20,-8},
           {-28,-8}},                               color={0,0,127}));
   connect(switchOff.y, add.u1) annotation (Line(points={{-51,0},{-60,0},{-60,6},
           {-68,6}}, color={0,0,127}));
-  connect(booleanExpressionOnOff.y, switchOff.u2)
-    annotation (Line(points={{-20.6,0},{-28,0}}, color={255,0,255}));
   connect(booleanExpressionHeatingCooling.y, switchHeatingCooling.u2)
     annotation (Line(points={{33.4,0},{22,0}}, color={255,0,255}));
   connect(dTZoneHeat.y, minMaxHeat.u) annotation (Line(points={{79,50},{74,50},
@@ -188,8 +170,9 @@ equation
     annotation (Line(points={{30,38},{30,28.8},{57.3,28.8}}, color={0,0,127}));
   connect(hysteresisHeating.u, minMaxHeat.yMin) annotation (Line(points={{42,80},
           {48,80},{48,28.8},{57.3,28.8}}, color={0,0,127}));
-  connect(minMax.yMin, PI_AHU_Cool.u_m) annotation (Line(points={{55.4,-37.6},{36,
-          -37.6},{36,-32},{30,-32},{30,-38}}, color={0,0,127}));
+  connect(minMax.yMin, PI_AHU_Cool.u_m) annotation (Line(points={{55.4,-37.6},{
+          48,-37.6},{48,-32},{30,-32},{30,-38}},
+                                              color={0,0,127}));
   connect(minMax.yMin, hysteresisCooling.u) annotation (Line(points={{55.4,-37.6},
           {48,-37.6},{48,-80},{42,-80}}, color={0,0,127}));
   connect(hysteresisHeating.y, not1.u)
@@ -200,10 +183,15 @@ equation
     annotation (Line(points={{19,-80},{8.8,-80}}, color={255,0,255}));
   connect(not2.y, switchCool.u2) annotation (Line(points={{-0.4,-80},{-14,-80},{
           -14,-48},{-20,-48},{-20,-42}}, color={255,0,255}));
-  connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,
-          -22},{110,-22},{110,-44},{102,-44}}, color={0,0,127}));
+  connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,-22},
+          {110,-22},{110,-44},{102,-44}}, color={0,0,127}));
   connect(TSetCool, dTZoneCool.u2) annotation (Line(points={{-30,-120},{-30,-96},
           {110,-96},{110,-56},{102,-56}}, color={0,0,127}));
+  connect(not2.y, switchOff.u2) annotation (Line(points={{-0.4,-80},{-6,-80},{
+          -6,-6},{-24,-6},{-24,0},{-28,0}},
+                                         color={255,0,255}));
+  connect(gainCool.y, switchOff.u1) annotation (Line(points={{-0.6,-50},{-4,-50},
+          {-4,8},{-28,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Dynamic_T_SUP_Control;
