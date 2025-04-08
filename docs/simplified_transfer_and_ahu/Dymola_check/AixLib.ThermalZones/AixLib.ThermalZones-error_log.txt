@@ -1,18 +1,80 @@
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
-Error: Class or component 'HRS' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
-Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control</a>
+Warning: Automatically introducing 'each' in definition equation for variable:
+  PI_AHU_Cool[1].controllerType
+Additional warnings of this type will not be written.
+Error: The problem is structurally singular.
+
+It has 129 scalar unknowns and 128 scalar equations.
+  The Real part has 113 unknowns and 113 equations.
+  The Integer part has 0 unknowns and 0 equations.
+  The Boolean part has 16 unknowns and 15 equations.
+  The String part has 0 unknowns and 0 equations.
+Error: The model is not well-posed.
+The model has
+  125+3*numZones+replicator.nout
+scalar unknowns and
+  126+replicator.nout+numZones
+scalar equations.
+Using the given settings of the parameters, the difference could be reduced to
+  1
+Attempting to further localize singularity.
+
+The model has the same number of unknowns and equations: replicator.nout
+Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control</a> is at the top level.
+Warning: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control</a> is structurally singular,
+when assuming inputs to be known
+and the most generic outside couplings to all the flow variables of its connectors.
+Warning: The problem is structurally singular for the element type Boolean.
+
+The number of scalar Boolean unknown elements are 16.
+The number of scalar Boolean equation elements are 15.
+The following variables are considered as unknowns, but are not appearing in the equations.
+<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_Vflow_Control#text:HeatingCooling">HeatingCooling[]</a>
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a>
+Warning: Failed to evaluate and check the size declaration of multizone.zone[1].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is multizone.zone[1].ROM.nIze, and the required size is 1.
+Warning: Failed to evaluate and check the size declaration of multizone.zone[2].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is multizone.zone[2].ROM.nIze, and the required size is 1.
+Warning: Failed to evaluate and check the size declaration of multizone.zone[3].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is multizone.zone[3].ROM.nIze, and the required size is 1.
+Warning: Failed to evaluate and check the size declaration of multizone.zone[4].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is multizone.zone[4].ROM.nIze, and the required size is 1.
+Warning: Failed to evaluate and check the size declaration of multizone.zone[5].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is multizone.zone[5].ROM.nIze, and the required size is 1.
+In call connect(<a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#diagram$multizone:dynamic_Vflow_Control.TOda,dynamic_T_SUP_Control.TOda">dynamic_Vflow_Control.TOda, dynamic_T_SUP_Control.TOda</a>)
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped#text:394">395</a>
+Error: Use of undeclared variable: <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#text$multizone:dynamic_Vflow_Control.TOda">dynamic_Vflow_Control.TOda</a>
+In class <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped#text">2</a>
+Used in component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped#:multizone">multizone</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneEquipped.mo, line 6
+Errors found in: state = ThermodynamicState(p=p, T=T)
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_pTX#text:9">6210</a>
+In call <a href="Modelica://"></a>(p=p, T=T)
+Error: Unknown function ThermodynamicState in  (function <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_pTX">Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_pTX</a>).
+Errors found in: state = ThermodynamicState(p=p, T=T)
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_pTX#text:9">6210</a>
+Errors found in: state = ThermodynamicState(p=p, T=T0 + h/cp_const)
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_phX#text:9">6221</a>
+In call <a href="Modelica://"></a>(p=p, T=T0 + h/cp_const)
+Error: Unknown function ThermodynamicState in  (function <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_phX">Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_phX</a>).
+Errors found in: state = ThermodynamicState(p=p, T=T0 + h/cp_const)
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Media/package.mo, line <a href="Modelica://Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.setState_phX#text:9">6221</a>
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
@@ -180,5 +242,22 @@ Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizo
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 2
 Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
+Error: Class or component 'HRS' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
+Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2EquippedSwimmingFacility.mo, line 2
 Error: ERRORS have been issued.
 
