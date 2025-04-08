@@ -79,8 +79,8 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{-52,-56},{-40,-44}})));
   Modelica.Blocks.Math.Add dTZoneHeat[numZones](k1=-1, k2=+1)
     annotation (Placement(transformation(extent={{100,40},{80,60}})));
-  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=+1, k2=-1)
-    annotation (Placement(transformation(extent={{100,-40},{80,-60}})));
+  Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=-1, k2=+1)
+    annotation (Placement(transformation(extent={{100,-60},{80,-40}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{72,48},{60,60}})));
   Modelica.Blocks.Sources.Constant const2(k=0)
@@ -155,14 +155,10 @@ equation
           {-28,-42}},    color={0,0,127}));
   connect(roomHeatPort, TZone.port)
     annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
-  connect(TZone.T, dTZoneHeat.u2) annotation (Line(points={{59,0},{50,0},{50,24},
-          {110,24},{110,44},{102,44}},                 color={0,0,127}));
-  connect(TSetHeat, dTZoneHeat.u1) annotation (Line(points={{30,-120},{30,-98},{
-          116,-98},{116,22},{120,22},{120,56},{102,56}}, color={0,0,127}));
-  connect(TSetCool, dTZoneCool.u1) annotation (Line(points={{-30,-120},{-30,-96},
-          {108,-96},{108,-56},{102,-56}}, color={0,0,127}));
-  connect(TZone.T, dTZoneCool.u2) annotation (Line(points={{59,0},{50,0},{50,-20},
-          {110,-20},{110,-44},{102,-44}},                   color={0,0,127}));
+  connect(TZone.T, dTZoneHeat.u2) annotation (Line(points={{59,0},{50,0},{50,22},
+          {110,22},{110,44},{102,44}},                 color={0,0,127}));
+  connect(TSetHeat, dTZoneHeat.u1) annotation (Line(points={{30,-120},{30,-98},
+          {116,-98},{116,56},{102,56}},                  color={0,0,127}));
   connect(const1.y, PI_AHU_Heat.u_s) annotation (Line(points={{59.4,54},{52,54},
           {52,50},{42,50}}, color={0,0,127}));
   connect(const2.y, switchHeat.u3)
@@ -204,6 +200,10 @@ equation
     annotation (Line(points={{19,-80},{8.8,-80}}, color={255,0,255}));
   connect(not2.y, switchCool.u2) annotation (Line(points={{-0.4,-80},{-14,-80},{
           -14,-48},{-20,-48},{-20,-42}}, color={255,0,255}));
+  connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,
+          -22},{110,-22},{110,-44},{102,-44}}, color={0,0,127}));
+  connect(TSetCool, dTZoneCool.u2) annotation (Line(points={{-30,-120},{-30,-96},
+          {110,-96},{110,-56},{102,-56}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Dynamic_T_SUP_Control;
