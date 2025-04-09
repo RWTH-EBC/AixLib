@@ -1,6 +1,6 @@
 ﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Cooler "Idealized model for cooler considering condensation"
-  extends BaseClasses.PartialCooler;
+  extends BaseClasses.PartialCooler(TAirIn( start=291.15, fixed=false));
 
   AixLib.Utilities.Psychrometrics.SaturationPressure pSat if use_T_set
     annotation (Placement(transformation(extent={{-24,26},{-4,46}})));

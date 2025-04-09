@@ -30,7 +30,6 @@ partial model PartialComponent
         transformation(extent={{-140,50},{-100,90}}), iconTransformation(extent=
            {{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirIn(
-    final start=291.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Temperature of incoming air" annotation (Placement(
@@ -44,7 +43,6 @@ partial model PartialComponent
       final unit="kg/s") "mass flow rate of outgoing air"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOut(
-    final start=291.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing air" annotation (Placement(
