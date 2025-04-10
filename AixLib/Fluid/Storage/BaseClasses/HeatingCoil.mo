@@ -2,8 +2,7 @@ within AixLib.Fluid.Storage.BaseClasses;
 model HeatingCoil "Heating coil for heat storage model"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
- parameter Integer disHC = 2 "Number of elements for heating coil discretization";
-
+  parameter Integer disHC = 2 "Number of elements for heating coil discretization";
   parameter Modelica.Units.SI.Length lengthHC=3 "Length of Pipe for HC";
 
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC=20
@@ -12,8 +11,16 @@ model HeatingCoil "Heating coil for heat storage model"
   parameter Modelica.Units.SI.Temperature TStart=298.15
     "Start Temperature of fluid" annotation (Dialog(group="Initialization"));
 
- parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
+  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
+
+  final parameter Modelica.Units.SI.PressureDifference dpFixed_nominal=sum(pipe.res.dpStraightPipe_nominal)*fac
+    "Pressure drop to include in valve models connected in series to this model";
+  parameter Real fac=1 "Factor to take into account flow resistance of bends etc.,
+    fac=dp_nominal/dpStraightPipe_nominal";
+  parameter Boolean computePressureLossInternally = true
+    "=false to include the pressure drop in a valve dpFixed_nominal";
+
 
   AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each final hCon=hConHC, each final A=pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC)
                 "Outer heat convection"
@@ -39,7 +46,9 @@ model HeatingCoil "Heating coil for heat storage model"
     each final rhoPip=pipeHC.d,
     each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final T_start_in=TStart,
-    each final T_start_out=TStart) annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
+    each final T_start_out=TStart,
+    each final fac=fac_internal)   annotation (Placement(transformation(extent={{-16,-16},
+            {16,16}})));
 
 protected
   parameter Medium.ThermodynamicState sta_default=
@@ -49,6 +58,8 @@ protected
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
       Medium.heatCapacity_cp(sta_default)
     "Specific heat capacity of Medium in default state";
+  parameter Real fac_internal = if computePressureLossInternally then fac else 0
+    "Internal value to either enable or disable HydraulicDiameters pressure drop";
 
 equation
 
@@ -59,7 +70,8 @@ equation
       smooth=Smooth.None));
 
 
-  connect(convHC1Outside.port_b, pipe.heatPort) annotation (Line(points={{0,40},{0,16}}, color={191,0,0}));
+  connect(convHC1Outside.port_b, pipe.heatPort) annotation (Line(points={{0,40},{
+          0,16}},                                                                        color={191,0,0}));
   connect(port_a, pipe[1].port_a) annotation (Line(
       points={{-100,0},{-16,0}},
       color={0,127,255},
@@ -161,6 +173,10 @@ equation
 </p>
 </html>",
       revisions="<html><ul>
+  <li>April 10, 2025, by Fabian Wuellhorst:<br/>
+  Add option to calculate pressure drops externally, for  <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1587\">#1587</a>.
+  </li>
   <li>January 24, 2020 by Philipp Mehrfeld:<br/>
     <a href=
     \"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Use
