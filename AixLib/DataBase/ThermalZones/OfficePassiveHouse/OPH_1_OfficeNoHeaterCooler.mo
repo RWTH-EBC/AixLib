@@ -49,7 +49,8 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     hConWinOut=20.0,
     hConRoofOut=20,
     hRadRoof=5,
-    tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949,0},
+    tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949,
+        1.5707963267949,0},
     aziExtWalls={0,1.5707963267949,3.1415926535898,4.7123889803847,0},
     wfWall={0.2,0.2,0.2,0.2,0.1},
     wfWin={0.25,0.25,0.25,0.25,0},
@@ -72,8 +73,8 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     withAHU=true,
     minAHU=0,
     maxAHU=12,
-    maxIrr = {100,100,100,100,0},
-    shadingFactor = {0.7,0.7,0.7,0.7,0},
+    maxIrr={100,100,100,100,0},
+    shadingFactor={0.7,0.7,0.7,0.7,0},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,
@@ -89,7 +90,11 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
+
   annotation (Documentation(revisions="<html><ul>
+  <li>May 5, 2023, by Philip Groesdonk:<br/>
+    Additional soil temperature and neighboured zone border parameters.
+  </li>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.
   </li>
