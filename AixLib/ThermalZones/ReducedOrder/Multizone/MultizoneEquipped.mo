@@ -152,8 +152,7 @@ model MultizoneEquipped
     numZones=numZones,
     zoneParam=zoneParam,
     dT_SUP_Heat_Max(displayUnit="K") = 7,
-    dT_SUP_Cool_Max(displayUnit="K") = 10)
-                                          if ASurTot > 0 or VAir > 0
+    dT_SUP_Cool_Max(displayUnit="K") = 4) if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
