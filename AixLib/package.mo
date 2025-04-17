@@ -3,9 +3,9 @@ package AixLib
 
   annotation (
   uses(
- SDF(version="0.4.2"),
+ Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0"),
-      Modelica_DeviceDrivers(version="2.1.1")),
+      SDF(version="0.4.4")),
   version="2.1.1",
   conversion(from(
     version="0.3.2",
