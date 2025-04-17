@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

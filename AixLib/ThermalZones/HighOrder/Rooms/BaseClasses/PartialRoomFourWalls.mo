@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoomFourWalls
   "Partial room model for a room with 4 walls, 1 ceiling and 1 floor"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(

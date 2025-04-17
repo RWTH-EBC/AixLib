@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.ModularReversible;
+within AixLib.Fluid.HeatPumps.ModularReversible;
 package UsersGuide
   "User's Guide for modular reversible heat pump and chiller models"
   extends Modelica.Icons.Information;

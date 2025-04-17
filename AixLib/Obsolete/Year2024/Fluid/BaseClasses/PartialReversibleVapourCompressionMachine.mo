@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Fluid.BaseClasses;
+within AixLib.Obsolete.Year2024.Fluid.BaseClasses;
 partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(

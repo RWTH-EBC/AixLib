@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 record HeatPumpSystemParameters
   "Parameters for design point of a heat pump system"
   parameter Modelica.Units.SI.HeatFlowRate QCon_nominal

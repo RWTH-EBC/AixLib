@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
+within AixLib.Controls.HVACAgentBasedControl.Agents;
 model HeatProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 100000 "maximum capacity for heatgeneration";

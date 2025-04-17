@@ -1,9 +1,9 @@
-﻿within AixLib.BoundaryConditions.InternalGains.CO2;
+within AixLib.BoundaryConditions.InternalGains.CO2;
 model CO2Balance "Calculation of CO2 concentration within a thermal zone"
   parameter Modelica.Units.SI.Area areaZon "Zone area";
   parameter Real actDeg = 1.8 "Activity degree (Met units)";
   parameter Modelica.Units.SI.Volume VZon "Zone volume";
-  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
+  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.38509E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
   parameter Modelica.Units.SI.Area areaBod=1.8
     "Body surface area source SIA 2024:2015";

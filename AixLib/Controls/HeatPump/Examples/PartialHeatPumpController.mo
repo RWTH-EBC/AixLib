@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.Examples;
+within AixLib.Controls.HeatPump.Examples;
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
 

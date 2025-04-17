@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.EONERC_MainBuilding.Controller;
+within AixLib.Systems.EONERC_MainBuilding.Controller;
 model HeatPumpSystemVolumeFlowControl
   "Constant intput connected with heatPUmpSystemBus"
 

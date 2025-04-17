@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends
     AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;

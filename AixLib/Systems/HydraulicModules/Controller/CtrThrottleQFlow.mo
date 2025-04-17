@@ -51,7 +51,8 @@ block CtrThrottleQFlow
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseActing=reverseAction)
+    final reverseActing=reverseAction,
+    reset=AixLib.Types.Reset.Parameter)
             annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
 
   Modelica.Blocks.Logical.OnOffController
@@ -69,16 +70,10 @@ block CtrThrottleQFlow
     annotation (Placement(transformation(extent={{16,-64},{36,-84}})));
   Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold
     annotation (Placement(transformation(extent={{-54,-84},{-34,-64}})));
+  Modelica.Blocks.Sources.Constant const1(k=0)
+    annotation (Placement(transformation(extent={{-72,10},{-52,30}})));
+  Modelica.Blocks.Math.Max max1 annotation (Placement(transformation(extent={{-46,-16},{-26,4}})));
 equation
-
-  connect(PID.u_s, Q_flowSet) annotation (Line(
-      points={{-22,-50},{-120,-50}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constQ_flowSet.y, PID.u_s) annotation (Line(
-      points={{-79,0},{-66,0},{-66,-50},{-22,-50}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
 
   connect(PID.u_m, Q_flowMea)
     annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
@@ -115,6 +110,16 @@ equation
       pattern=LinePattern.Dash));
   connect(lessEqualThreshold.y, switch1.u2)
     annotation (Line(points={{-33,-74},{14,-74}}, color={255,0,255}));
+  connect(lessEqualThreshold.y, PID.trigger)
+    annotation (Line(points={{-33,-74},{-30,-74},{-30,-28},{-18,-28},{-18,-38}}, color={255,0,255}));
+  connect(max1.u1, const1.y)
+    annotation (Line(points={{-48,0},{-52,0},{-52,20},{-51,20},{-51,20}}, color={0,0,127}));
+  connect(constQ_flowSet.y, PID.u_s)
+    annotation (Line(points={{-79,0},{-58,0},{-58,-50},{-22,-50}}, color={0,0,127}));
+  connect(Q_flowSet, max1.u2)
+    annotation (Line(points={{-120,-50},{-60,-50},{-60,-12},{-48,-12}}, color={0,0,127}));
+  connect(max1.y, PID.u_s)
+    annotation (Line(points={{-25,-6},{-22,-6},{-22,-26},{-32,-26},{-32,-50},{-22,-50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

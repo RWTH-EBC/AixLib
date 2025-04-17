@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";

@@ -1,39 +1,39 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVRadiationHorizontal "PV radiation and absorptance model - input: total irradiance on horizontal plane"
 
  parameter Real lat(final quantity = "Angle",
    final unit = "rad",
    displayUnit = "deg") "Latitude"
-   annotation ();
+   annotation();
 
  parameter Real lon(final quantity = "Angle",
    final unit = "rad",
    displayUnit = "deg") "Longitude"
-   annotation ();
+   annotation();
 
  parameter Real  alt(final quantity="Length", final unit="m")
    "Site altitude in Meters, default= 1"
-   annotation ();
+   annotation();
 
  parameter Real til(final quantity = "Angle",
    final unit = "rad",
    displayUnit = "deg")
    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
-   annotation ();
+   annotation();
 
  parameter Real  azi(final quantity = "Angle",
    final unit = "rad",
    displayUnit = "deg")
    "Module surface azimuth. azi=-90 degree if normal of surface outward unit points towards east; azi=0 if it points towards south"
-   annotation ();
+   annotation();
 
  parameter Real timZon(final quantity="Time",
    final unit="s", displayUnit="h")
    "Time zone in seconds relative to GMT"
-   annotation ();
+   annotation();
 
  parameter Real groRef(final unit="1") "Ground refelctance"
-   annotation ();
+   annotation();
 
  // Air mass parameters for mono-SI
   parameter Real b_0=0.935823;

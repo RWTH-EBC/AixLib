@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2021.Electrical;
+within AixLib.Obsolete.Year2021.Electrical;
 package PVSystem
 
   model PVSystem "PVSystem"

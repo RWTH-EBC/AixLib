@@ -291,6 +291,14 @@ equation
           -46,-80},{-22,-80}},
                            color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(VflowSet, ctrCo.V_flow_air_set) annotation (Line(points={{-120,-50},{-88,-50},{-88,-74},{-46,-74},
+          {-46,-32},{-48,-32},{-48,57.2},{-0.8,57.2}}, color={0,0,127}));
+  connect(ConstVflow.y, ctrCo.V_flow_air_set) annotation (Line(points={{-59,-50},{-46,-50},{-46,-32},{-48,
+          -32},{-48,57.2},{-0.8,57.2}}, color={0,0,127}));
+  connect(VflowSet, ctrRh.V_flow_air_set) annotation (Line(points={{-120,-50},{-88,-50},{-88,-74},{-46,-74},
+          {-46,-32},{-48,-32},{-48,58},{-10,58},{-10,27.2},{-0.8,27.2}}, color={0,0,127}));
+  connect(ConstVflow.y, ctrRh.Tset) annotation (Line(points={{-59,-50},{-46,-50},{-46,-32},{-48,-32},{-48,
+          30},{-32,30},{-32,20},{-2,20}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

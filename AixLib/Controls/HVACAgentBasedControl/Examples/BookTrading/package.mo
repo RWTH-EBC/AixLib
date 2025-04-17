@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl.Examples;
-package BookTrading 
+package BookTrading  
   extends Modelica.Icons.ExamplesPackage;
 
 end BookTrading;

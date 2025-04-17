@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.Validation.BESTEST;
+within AixLib.BoundaryConditions.Validation.BESTEST;
 model WD100
   "Test model for BESTEST weather data: base case"
   extends Modelica.Icons.Example;

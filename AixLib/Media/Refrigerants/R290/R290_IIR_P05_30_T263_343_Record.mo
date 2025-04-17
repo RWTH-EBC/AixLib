@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.R290;
+within AixLib.Media.Refrigerants.R290;
 package R290_IIR_P05_30_T263_343_Record
   "Refrigerant model for R290 using a hybrid approach with recods developed
   by Sangi et al."

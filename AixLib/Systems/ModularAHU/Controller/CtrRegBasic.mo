@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Controller;
+within AixLib.Systems.ModularAHU.Controller;
 block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
@@ -60,6 +60,12 @@ block CtrRegBasic "Controller for heating and cooling registers"
           extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-120})));
+  Modelica.Blocks.Math.MultiProduct multiProduct(nu=3)
+    annotation (Placement(transformation(extent={{56,-4},{68,8}})));
+  Modelica.Blocks.Sources.Constant const(k=1/(3*129/3600))
+    annotation (Placement(transformation(extent={{-10,40},{10,60}})));
+  Modelica.Blocks.Interfaces.RealInput V_flow_air_set
+    annotation (Placement(transformation(extent={{-128,52},{-88,92}})));
 equation
 
     connect(PID.u_s, Tset) annotation (Line(
@@ -91,19 +97,24 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (
-      Line(points={{41,0},{68,0},{68,0.13},{101.135,0.13}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(PID.y, registerBus.hydraulicBus.valveSet) annotation (Line(points={{
           11,-50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(multiProduct.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{69.02,2},{70,2},
+          {70,0.13},{101.135,0.13}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constRpmPump.y, multiProduct.u[1])
+    annotation (Line(points={{41,0},{41,0.6},{56,0.6}}, color={0,0,127}));
+  connect(const.y, multiProduct.u[2])
+    annotation (Line(points={{11,50},{50,50},{50,2},{56,2}}, color={0,0,127}));
+  connect(V_flow_air_set, multiProduct.u[3])
+    annotation (Line(points={{-108,72},{50,72},{50,3.4},{56,3.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},

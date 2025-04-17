@@ -201,10 +201,7 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    redeclare Fluid.Movers.Data.Generic per(
-      etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-      etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
-      efficiency=hydraulicEfficiency),
+    redeclare AixLib.Fluid.Movers.Data.Fans.Luftkonverter per,
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Supply air fan"
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
 
@@ -214,10 +211,7 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    redeclare Fluid.Movers.Data.Generic per(
-      etaHydMet=AixLib.Fluid.Movers.BaseClasses.Types.HydraulicEfficiencyMethod.Efficiency_VolumeFlowRate,
-      etaMotMet=AixLib.Fluid.Movers.BaseClasses.Types.MotorEfficiencyMethod.NotProvided,
-      efficiency=hydraulicEfficiency),
+    redeclare AixLib.Fluid.Movers.Data.Fans.Luftkonverter per,
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -318,7 +312,7 @@ replaceable package Medium2 =
         origin={50,40})));
 
 
-  parameter Modelica.Units.SI.PressureDifference dpDamper_nominal = 1
+  parameter Modelica.Units.SI.PressureDifference dpDamper_nominal=1
     "Pressure drop of fully open dampers at nominal mass flow rate";
 protected
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
@@ -351,10 +345,10 @@ protected
         rotation=270,
         origin={150,102})));
 equation
-  connect(preheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
-          {-160,-27.5385},{-160,-100}},            color={0,127,255}));
-  connect(preheater.port_b2, port_b3) annotation (Line(points={{-110,-27.5385},
-          {-110,-100},{-120,-100}},          color={0,127,255}));
+  connect(preheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},{-160,-27.5385},{-160,-100}},
+                                                   color={0,127,255}));
+  connect(preheater.port_b2, port_b3) annotation (Line(points={{-110,-27.5385},{-110,-100},{-120,-100}},
+                                             color={0,127,255}));
   connect(const.y, add.u2)
     annotation (Line(points={{-93.7,33},{-94,33},{-94,35.6},{-88.8,35.6}},
                                                      color={0,0,127}));
@@ -372,16 +366,14 @@ equation
     annotation (Line(points={{-90,0},{-90,-20}},           color={0,127,255}));
   connect(dampBypass.port_b, dynamicHX.port_b2) annotation (Line(points={{-70,-20},
           {-20,-20},{-20,-0.4}},color={0,127,255}));
-  connect(cooler.port_a2, port_a4) annotation (Line(points={{2,-27.5385},{-4,
-          -27.5385},{-4,-100},{0,-100}},
+  connect(cooler.port_a2, port_a4) annotation (Line(points={{2,-27.5385},{-4,-27.5385},{-4,-100},{0,-100}},
                                color={0,127,255}));
-  connect(cooler.port_b2, port_b4) annotation (Line(points={{46,-27.5385},{46,
-          -28},{48,-28},{48,-100},{40,-100}},
-                                         color={0,127,255}));
-  connect(heater.port_a2, port_a5) annotation (Line(points={{76,-27.5385},{76,
-          -100},{80,-100}},                       color={0,127,255}));
-  connect(heater.port_b2, port_b5) annotation (Line(points={{120,-27.5385},{122,
-          -27.5385},{122,-100},{120,-100}},                     color={0,127,255}));
+  connect(cooler.port_b2, port_b4) annotation (Line(points={{46,-27.5385},{46,-28},{48,-28},{48,-100},{40,
+          -100}},                        color={0,127,255}));
+  connect(heater.port_a2, port_a5) annotation (Line(points={{76,-27.5385},{76,-100},{80,-100}},
+                                                  color={0,127,255}));
+  connect(heater.port_b2, port_b5) annotation (Line(points={{120,-27.5385},{122,-27.5385},{122,-100},{120,
+          -100}},                                               color={0,127,255}));
   connect(dynamicHX.port_b2, cooler.port_a1) annotation (Line(points={{-20,-0.4},
           {-8,-0.4},{-8,0.153846},{2,0.153846}},color={0,127,255}));
   connect(heater.port_b1, humidifier.port_a) annotation (Line(points={{120,
@@ -553,16 +545,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(preheater.registerBus, genericAHUBus.preheaterBus) annotation (Line(
-      points={{-153.78,-13.9231},{-172,-13.9231},{-172,-14},{-242,-14},{-242,
-          120},{-118,120},{-118,120.09},{0.09,120.09}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cooler.registerBus, genericAHUBus.coolerBus) annotation (Line(
-      points={{2.22,-13.9231},{-16,-13.9231},{-16,-120},{234,-120},{234,120.09},
+      points={{-153.78,-13.9231},{-172,-13.9231},{-172,-14},{-242,-14},{-242,120},{-118,120},{-118,120.09},
           {0.09,120.09}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -570,9 +553,16 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(cooler.registerBus, genericAHUBus.coolerBus) annotation (Line(
+      points={{2.22,-13.9231},{-16,-13.9231},{-16,-120},{234,-120},{234,120.09},{0.09,120.09}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   connect(heater.registerBus, genericAHUBus.heaterBus) annotation (Line(
-      points={{76.22,-13.9231},{68,-13.9231},{68,-120},{234,-120},{234,120},{
-          0.09,120},{0.09,120.09}},
+      points={{76.22,-13.9231},{68,-13.9231},{68,-120},{234,-120},{234,120},{0.09,120},{0.09,120.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

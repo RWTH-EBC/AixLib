@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems;
 package Examples "Package with Examples for Heat Pump Systems"
 
 annotation (Icon(graphics={

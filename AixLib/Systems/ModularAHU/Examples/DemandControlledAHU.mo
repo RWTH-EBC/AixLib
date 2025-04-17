@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Examples;
+within AixLib.Systems.ModularAHU.Examples;
 model DemandControlledAHU "Example for air handling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 

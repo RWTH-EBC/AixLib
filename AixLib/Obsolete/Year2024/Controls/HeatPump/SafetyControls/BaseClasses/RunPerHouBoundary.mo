@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
+within AixLib.Airflow.WindowVentilation.EmpiricalExpressions;
 model DIN16798 "Empirical expression according to DIN EN 16798-7 (2017)"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlowStack(

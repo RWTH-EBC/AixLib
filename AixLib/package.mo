@@ -5,7 +5,7 @@ package AixLib
   uses(
  SDF(version="0.4.2"),
     Modelica(version="4.0.0"),
-    Modelica_DeviceDrivers(version="2.0.0")),
+      Modelica_DeviceDrivers(version="2.1.1")),
   version="2.1.1",
   conversion(from(
     version="0.3.2",

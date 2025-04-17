@@ -4,19 +4,21 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
   parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=60
     "Time constant of Integrator block";
   parameter Modelica.Units.SI.Time Td(min=0)= 0 "Time constant of Derivative block";
-  parameter Real rpm_pump(unit="1")=2500          "Rpm of the Pump";
+  parameter Real rpm_pump_heat(unit="1")=1500          "Rpm of the Pump";
+  parameter Real rpm_pump_cold(unit="1")=1500          "Rpm of the Pump";
+  parameter Real rpm_pump_mix(unit="1")=1500          "Rpm of the Pump";
 
   EONERC_MainBuilding.BaseClasses.TabsBus2 tabsBus annotation (Placement(
         transformation(extent={{84,-18},{118,18}}), iconTransformation(extent={
             {88,-14},{112,14}})));
-  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=rpm_pump)
+  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=rpm_pump_mix)
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
   HydraulicModules.Controller.CtrThrottleQFlow ctrThrottleHotQFlow(
       useExternalQset=true,
     k=k,
     Ti=Ti,
     Td=Td,
-    rpm_pump=rpm_pump,      reverseAction=true)
+    rpm_pump=rpm_pump_heat,      reverseAction=true)
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
   HydraulicModules.Controller.CtrThrottleQFlow_cold
                                                ctrThrottleColdQFlow(
@@ -24,7 +26,7 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
     k=k,
     Ti=Ti,
     Td=Td,
-    rpm_pump=rpm_pump,      reverseAction=false)
+    rpm_pump=rpm_pump_cold,      reverseAction=false)
     annotation (Placement(transformation(extent={{52,-68},{72,-48}})));
   HydraulicModules.Controller.CalcHydraulicPower calcHydraulicPower
     annotation (Placement(transformation(extent={{0,28},{-20,48}})));

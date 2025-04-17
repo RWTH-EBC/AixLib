@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package

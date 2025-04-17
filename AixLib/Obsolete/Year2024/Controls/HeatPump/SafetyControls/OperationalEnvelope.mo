@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSafetyControl;

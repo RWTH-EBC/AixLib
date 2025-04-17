@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
 

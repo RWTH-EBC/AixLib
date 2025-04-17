@@ -1,4 +1,4 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
-package Examples 
+package Examples  
   extends Modelica.Icons.ExamplesPackage;
 end Examples;
