@@ -1,7 +1,7 @@
 within AixLib.Systems.EONERC_MainBuilding;
 model BasicCarnot
 
-  parameter Real etaCarnot_nominal = 0.3;
+  parameter Real etaCarnot_nominal = 0.35;
   parameter Real etaPL = 1;
 
   Real COPCar;
