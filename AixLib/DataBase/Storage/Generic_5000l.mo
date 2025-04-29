@@ -28,12 +28,20 @@ record Generic_5000l "Pseudo storage with 5000 l (standing)"
     lengthHC1=1500,
     lengthHC2=1500);
 
-  annotation (Icon(graphics),               Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Buffer Storage: Generic 2000 l</p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Base data definition for record used with <a
-href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
-href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
+  annotation (Icon(graphics),               Documentation(info="<html><h4>
+  <font color=\"#008000\">Overview</font>
+</h4>
+<p>
+  Buffer Storage: Generic 2000 l
+</p>
+<h4>
+  <font color=\"#008000\">References</font>
+</h4>
+<p>
+  Base data definition for record used with <a href=
+  \"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and
+  <a href=
+  \"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a>
+</p>
 </html>"));
 end Generic_5000l;
