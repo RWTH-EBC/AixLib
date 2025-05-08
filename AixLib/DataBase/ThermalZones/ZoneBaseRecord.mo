@@ -2,7 +2,6 @@ within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
-<<<<<<< HEAD
   // General
   // Thermal Zone
   parameter Boolean withAirCap = true "Consider capacity of indoor air" annotation(Dialog(group="Thermal Zone"));
@@ -18,24 +17,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)" annotation(Dialog(group="Thermal Zone"));
   parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)" annotation(Dialog(group="Thermal Zone"));
 
-=======
-  // Initialization
-  parameter Modelica.Units.SI.Temperature T_start "Initial temperature" annotation(Dialog(tab="Initialization"));
-
-  // General
-  // Thermal Zone
-  parameter Boolean withAirCap = true "Consider capacity of indoor air" annotation(Dialog(group="Thermal Zone"));
-  parameter Modelica.Units.SI.Volume VAir "Air volume of the zone" annotation(Dialog(group="Thermal Zone"));
-  parameter Modelica.Units.SI.Area AZone "Net floor area of zone" annotation(Dialog(group="Thermal Zone"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
-    "Coefficient of heat transfer for linearized radiation exchange between walls" annotation(Dialog(group="Thermal Zone"));
-  parameter Modelica.Units.SI.Angle lat "Latitude of zone location" annotation(Dialog(group="Thermal Zone"));
-  parameter Integer nOrientations(min=1) "Number of total facades with different
-   combination of tilt and orientation" annotation(Dialog(group="Thermal Zone"));
-  parameter Integer zoneInd=1
-    "Index of this zone in the multizone (starting at 1)" annotation(Dialog(group="Thermal Zone"));
-
->>>>>>> origin/1582-teaserzone-optimize-parameter-structure
   // Windows
   parameter Modelica.Units.SI.Area AWin[nOrientations]
     "Areas of windows by orientations" annotation(Dialog(group="Windows"));
@@ -141,7 +122,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadRoof
     "Coefficient of heat transfer for linearized radiation for roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
 
-<<<<<<< HEAD
   // Connection to other zones
   parameter Integer nIze(min=1)=1 "Number of interzonal elements to consider" annotation(Dialog(group="Connection to other zones"));
   parameter Modelica.Units.SI.Area AIze[nIze]= {0.0} "Area of interzonal elements" annotation(Dialog(group="Connection to other zones"));
@@ -198,7 +178,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Reduction factor of userACH for cold weather" annotation(Dialog(tab="Air exchange", enable=useConstantACHrate==false));
 
 
-  // Heating & Cooling
+  // Energy Supply
   // Heating
   parameter Boolean HeaterOn=true
                              "Use heater component" annotation(Dialog(tab="Energy Supply", group="Heating"));
@@ -236,95 +216,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   // Initialization
   parameter Modelica.Units.SI.Temperature T_start "Initial temperature" annotation(Dialog(tab="Initialization"));
    annotation(Documentation(info="<html><p>
-=======
-  // Zone Borders
-  parameter Integer nIze(min=1)=1 "Number of interzonal elements to consider" annotation(Dialog(group="Zone Borders"));
-  parameter Modelica.Units.SI.Area AIze[nIze]= {0.0} "Area of interzonal elements" annotation(Dialog(group="Zone Borders"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIze[nIze]={0.0}
-    "Convective coefficient of heat transfer of interzonal elements (indoor)" annotation(Dialog(group="Zone Borders"));
-  parameter Integer nIzeRC(min=1)=1
-    "Number of RC-elements of interzonal elements" annotation(Dialog(group="Zone Borders"));
-  parameter Modelica.Units.SI.ThermalResistance RIze[nIze,nIzeRC]={{0.00001}}
-    "Resistances of interzonal elements, from inside to outside" annotation(Dialog(group="Zone Borders"));
-  parameter Modelica.Units.SI.ThermalResistance RIzeRem[nIze]={0.00001}
-    "Resistance of remaining resistor of interzonal elements between capacity nIzeRC and outside" annotation(Dialog(group="Zone Borders"));
-  parameter .Modelica.Units.SI.HeatCapacity CIze[nIze,nIzeRC]={{0.00001}}
-    "Heat capacities of interzonal elements, from inside to outside" annotation(Dialog(group="Zone Borders"));
-  parameter Integer othZoneInd[nIze]={1}
-    "Index of the zone in the multizone (starting at 1) to which each interzonal element is adjacent" annotation(Dialog(group="Zone Borders"));
-
-  // Internal Gains
-  parameter Real specificPeople "people per squaremeter" annotation(Dialog(tab="Internal gains"));
-  parameter Real activityDegree "acitivity degree of people in met" annotation(Dialog(tab="Internal gains"));
-  parameter Modelica.Units.SI.HeatFlowRate fixedHeatFlowRatePersons "Area specific heatflowrate by persons in case of temperature independent
-    calculation" annotation(Dialog(tab="Internal gains"));
-  parameter Real ratioConvectiveHeatPeople
-    "Ratio of convective heat from overall heat output for people" annotation(Dialog(tab="Internal gains"));
-  parameter Real internalGainsMoistureNoPeople
-    "internal moisture production of plants, etc. except from people in g/(h m²)" annotation(Dialog(tab="Internal gains"));
-  parameter Real internalGainsMachinesSpecific "Heat Flux of machines" annotation(Dialog(tab="Internal gains"));
-  parameter Real ratioConvectiveHeatMachines
-    "Ratio of convective heat from overall heat output for machines" annotation(Dialog(tab="Internal gains"));
-  parameter Modelica.Units.SI.HeatFlux lightingPowerSpecific
-    "Heat flux of lighting" annotation(Dialog(tab="Internal gains"));
-  parameter Real ratioConvectiveHeatLighting
-    "Ratio of convective heat from overall heat output for lights" annotation(Dialog(tab="Internal gains"));
-
-  // ACH
-  parameter Boolean useConstantACHrate=false
-    "Choose if a constant infiltration rate is used" annotation(Dialog(tab="ACH"));
-  parameter Real baseACH "Base ACH rate for ventilation controller" annotation(Dialog(tab="ACH"));
-  parameter Real maxUserACH "Additional ACH value for max. user activity" annotation(Dialog(tab="ACH", enable=useConstantACHrate==false));
-  parameter Real maxOverheatingACH[2]
-    "Additional ACH value when overheating appears, transition range" annotation(Dialog(tab="ACH", enable=useConstantACHrate==false));
-  parameter Real maxSummerACH[3]
-    "Additional ACH in summer, Tmin, Tmax" annotation(Dialog(tab="ACH", enable=useConstantACHrate==false));
-  parameter Real winterReduction[3]
-    "Reduction factor of userACH for cold weather" annotation(Dialog(tab="ACH", enable=useConstantACHrate==false));
-
-  // AHU
-  parameter Boolean withAHU=true
-    "Zone is connected to central air handling unit" annotation(Dialog(tab="AHU"));
-  parameter Real minAHU(unit="m3/(h.m2)")
-    "Minimum specific air flow supplied by the AHU" annotation(Dialog(tab="AHU", enable=withAHU));
-  parameter Real maxAHU(unit="m3/(h.m2)")
-    "Maximum specific air flow supplied by the AHU" annotation(Dialog(tab="AHU", enable=withAHU));
-
-  // External Gains
-  parameter Real shadingFactor[nOrientations]
-  "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds."
-  annotation(Dialog(tab="External gains"));
-  parameter Real maxIrr[nOrientations](unit="W/m2")
-  "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature."
-  annotation(Dialog(tab="External gains"));
-
-  // Heating & Cooling
-  // Heating
-  parameter Boolean HeaterOn "Use heater component" annotation(Dialog(tab="Heating-Cooling", group="Heating"));
-  parameter Real hHeat "Upper limit controller output" annotation(Dialog(tab="Heating-Cooling", group="Heating", enable=HeaterOn==true));
-  parameter Real lHeat "Lower limit controller output" annotation(Dialog(tab="Heating-Cooling", group="Heating", enable=HeaterOn==true));
-  parameter Real KRHeat "Gain of the controller" annotation(Dialog(tab="Heating-Cooling", group="Heating", enable=HeaterOn==true));
-  parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller" annotation(Dialog(tab="Heating-Cooling", group="Heating", enable=HeaterOn==true));
-
-  // Cooling
-  parameter Boolean CoolerOn "Use chiller component" annotation(Dialog(tab="Heating-Cooling", group="Cooling"));
-  parameter Real hCool "Upper limit controller output" annotation(Dialog(tab="Heating-Cooling", group="Cooling", enable=CoolerOn==true));
-  parameter Real lCool "Lower limit controller output" annotation(Dialog(tab="Heating-Cooling", group="Cooling", enable=CoolerOn==true));
-  parameter Real KRCool "Gain of the controller" annotation(Dialog(tab="Heating-Cooling", group="Cooling", enable=CoolerOn==true));
-  parameter Modelica.Units.SI.Time TNCool "Time constant of the controller" annotation(Dialog(tab="Heating-Cooling", group="Cooling", enable=CoolerOn==true));
-
-  // Heating & Cooling
-  parameter Boolean withIdealThresholds
-    "Sets if the threshold temperatures for ideal heater and cooler should
-        be used" annotation(Dialog(tab="Heating-Cooling"));
-  parameter Modelica.Units.SI.Temperature TThresholdHeater
-    "Threshold temperature below ideal heater is used" annotation(Dialog(tab="Heating-Cooling", group="Heating", enable=HeaterOn==true and withIdealThresholds==true));
-  parameter Modelica.Units.SI.Temperature TThresholdCooler
-    "Threshold temperature above ideal cooler is used" annotation(Dialog(tab="Heating-Cooling", group="Cooling", enable=CoolerOn==true and withIdealThresholds==true));
-  parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)" annotation(Dialog(tab="Heating-Cooling"));
-  parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)" annotation(Dialog(tab="Heating-Cooling"));
-  annotation(Documentation(info="<html><p>
->>>>>>> origin/1582-teaserzone-optimize-parameter-structure
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
   It aggregates all parameters at one record to enhance usability,
