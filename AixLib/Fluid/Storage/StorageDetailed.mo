@@ -305,7 +305,10 @@ model StorageDetailed
     pipeHC=data.pipeHC1,
     allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
-    TStart=sum(TStart)/n) if useHeatingCoil1
+    TStart=sum(TStart)/n,
+    fac=fac,
+    computePressureLossInternally=computePressureLossInternally)
+                          if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -340,6 +343,18 @@ model StorageDetailed
   parameter Boolean allowFlowReversal_HC2=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation(Dialog(tab="Assumptions"));
+  parameter Boolean computePressureLossInternally=true
+    "=false to include the pressure drop in a valve dpFixed_nominal"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
+  parameter Real fac=1 "Factor to take into account flow resistance of bends etc.,
+    fac=dp_nominal/dpStraightPipe_nominal"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
+  parameter Modelica.Units.SI.PressureDifference dpHC1Fixed_nominal=heatingCoil1.dpFixed_nominal if useHeatingCoil1
+    "Pressure drop to include in valve models connected in series to this model"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
+  parameter Modelica.Units.SI.PressureDifference dpHC2Fixed_nominal=heatingCoil2.dpFixed_nominal if useHeatingCoil2
+    "Pressure drop to include in valve models connected in series to this model"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,
@@ -778,6 +793,10 @@ for i in 2:(n-1) loop
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html><ul>
+  <li>April 10, 2025, by Fabian Wuellhorst:<br/>
+  Add option to calculate pressure drops externally, for  <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1587\">#1587</a>.
+  </li>
   <li>November 14, 2022, by Laura Maier:<br/>
   Add adapt name and do some spring cleaning
   </li>
