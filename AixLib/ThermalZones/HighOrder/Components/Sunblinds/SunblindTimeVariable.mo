@@ -839,7 +839,7 @@ equation
     Rad_Out[i].HDif = Rad_In[i].HDif*gsunblind[i]*combiTimeTable.y[1];
     Rad_Out[i].HGrd = Rad_In[i].HGrd*gsunblind[i]*combiTimeTable.y[1];
     Rad_Out[i].incAng = Rad_In[i].incAng;
-    sunblindonoff[i] = 1 - gsunblind[i]*combiTimeTable.y[1];
+    sunblindonoff[i] = 1 - gsunblind[i] * combiTimeTable.y[1];
   end for;
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})),
                          Icon(coordinateSystem(
