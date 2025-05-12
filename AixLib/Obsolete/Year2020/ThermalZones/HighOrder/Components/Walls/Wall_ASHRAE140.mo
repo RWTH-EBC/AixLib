@@ -143,7 +143,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind Sunblind(
     final n=1,
     final gsunblind={Blinding},
-    final Imax=LimitSolIrr,
+    final H_max=LimitSolIrr,
     final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
@@ -299,7 +299,8 @@ end if;
 
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
           {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
-  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,-14},{-54,-14},{-54,-13.875},{-45.4375,-13.875}},
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-57.6,
+          -14},{-54,-14},{-54,-13.875},{-45.4375,-13.875}},
                                                       color={0,0,127}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{29,80},{7,
           80},{7,57},{-9.22,57},{-9.22,33.8}}, color={191,0,0}));
