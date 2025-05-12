@@ -18,3 +18,4 @@ convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_dir[n]", "HDir[
 convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_diff[n]", "HDif[n]");
 convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_gr[n]", "HGrd[n]");
 convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "AOI[n]", "incAng[n]");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind", "Imax", "H_max");

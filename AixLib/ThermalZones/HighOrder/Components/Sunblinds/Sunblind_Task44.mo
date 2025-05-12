@@ -1007,6 +1007,10 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
+    May 12, 2025, by Jun Jiang:<br/>
+    Change variable names (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1525\">issue 1525</a>)
+  </li>
+  <li>
     <i>January 16, 2015&#160;</i> by Ana Constantin:<br/>
     Implemented as extending from PartialSunblind and using the new
     solar radiation connectors
