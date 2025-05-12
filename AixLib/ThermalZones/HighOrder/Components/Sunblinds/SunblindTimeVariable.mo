@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
 model SunblindTimeVariable
-  extends AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind(Imax=0);
-
+  extends
+    AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind(
+     H_max=0);
 
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 600,0; 1200,
         0; 1800,0; 2400,0; 3000,0; 3600,0; 4200,0; 4800,0; 5400,0; 6000,0; 6600,
@@ -832,14 +833,14 @@ model SunblindTimeVariable
         1; 3540000,1; 3540600,1; 3541200,1; 3541800,1; 3542400,1])
     annotation (Placement(transformation(extent={{-22,36},{-2,56}})));
 equation
-   for i in 1:n loop
-    Rad_Out[i].H   =Rad_In[i].H*gsunblind[i]*combiTimeTable.y[1];
+  for i in 1:n loop
+    Rad_Out[i].H = Rad_In[i].H*gsunblind[i]*combiTimeTable.y[1];
     Rad_Out[i].HDir = Rad_In[i].HDir*gsunblind[i]*combiTimeTable.y[1];
     Rad_Out[i].HDif = Rad_In[i].HDif*gsunblind[i]*combiTimeTable.y[1];
-    Rad_Out[i].HGrd   =Rad_In[i].HGrd*gsunblind[i]*combiTimeTable.y[1];
+    Rad_Out[i].HGrd = Rad_In[i].HGrd*gsunblind[i]*combiTimeTable.y[1];
     Rad_Out[i].incAng = Rad_In[i].incAng;
-       sunblindonoff[i]=1-gsunblind[i]*combiTimeTable.y[1];
-     end for;
+    sunblindonoff[i] = 1 - gsunblind[i]*combiTimeTable.y[1];
+  end for;
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})),
                          Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-80,-80},{80,80}}),

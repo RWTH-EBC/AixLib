@@ -9,23 +9,23 @@ model Sunblind "Reduces beam at Imax and TOutAirLimit"
     "Outdoor air (dry bulb) temperature"
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})));
 equation
-   for i in 1:n loop
-     if (Rad_In[i].H>Imax and TOutAir > TOutAirLimit) then
-      Rad_Out[i].H =Rad_In[i].H*gsunblind[i];
+  for i in 1:n loop
+    if (Rad_In[i].H > H_max and TOutAir > TOutAirLimit) then
+      Rad_Out[i].H = Rad_In[i].H*gsunblind[i];
       Rad_Out[i].HDir = Rad_In[i].HDir*gsunblind[i];
       Rad_Out[i].HDif = Rad_In[i].HDif*gsunblind[i];
-      Rad_Out[i].HGrd =Rad_In[i].HGrd*gsunblind[i];
+      Rad_Out[i].HGrd = Rad_In[i].HGrd*gsunblind[i];
       Rad_Out[i].incAng = Rad_In[i].incAng;
-       sunblindonoff[i]=1-gsunblind[i];
-     else // quantity of solar radiation remains unchanged
-      Rad_Out[i].H =Rad_In[i].H;
+      sunblindonoff[i] = 1 - gsunblind[i];
+    else // quantity of solar radiation remains unchanged
+      Rad_Out[i].H = Rad_In[i].H;
       Rad_Out[i].HDir = Rad_In[i].HDir;
       Rad_Out[i].HDif = Rad_In[i].HDif;
-      Rad_Out[i].HGrd =Rad_In[i].HGrd;
+      Rad_Out[i].HGrd = Rad_In[i].HGrd;
       Rad_Out[i].incAng = Rad_In[i].incAng;
-       sunblindonoff[i]=0;
-     end if;
-     end for;
+      sunblindonoff[i]=0;
+    end if;
+  end for;
             annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-80,-80},{80,80}}),
                                                 graphics={
