@@ -30,12 +30,10 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
     annotation (Placement(transformation(extent={{52,-68},{72,-48}})));
   HydraulicModules.Controller.CalcHydraulicPower calcHydraulicPower
     annotation (Placement(transformation(extent={{0,28},{-20,48}})));
-  Modelica.Blocks.Interfaces.RealInput QFlowSet
-    "Connector of second Real input signal" annotation (Placement(
-        transformation(extent={{-120,-16},{-86,18}}), iconTransformation(extent=
-           {{-120,-16},{-86,18}})));
+  Modelica.Blocks.Interfaces.RealInput QFlowSet_h "Connector of second Real input signal" annotation (
+      Placement(transformation(extent={{-122,28},{-88,62}}), iconTransformation(extent={{-122,28},{-88,62}})));
   Modelica.Blocks.Sources.Constant const(k=0)
-    annotation (Placement(transformation(extent={{-22,2},{-6,18}})));
+    annotation (Placement(transformation(extent={{-20,2},{-4,18}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{-18,-58},{-2,-42}})));
   Modelica.Blocks.Math.Max max3
@@ -45,18 +43,13 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
   Modelica.Blocks.Interfaces.RealOutput Q_flow1
     "Connector of Real output signal"
     annotation (Placement(transformation(extent={{98,80},{118,100}})));
+  Modelica.Blocks.Interfaces.RealInput QFlowSet_c "Connector of second Real input signal" annotation (
+      Placement(transformation(extent={{-118,-48},{-84,-14}}), iconTransformation(extent={{-120,-16},{-86,
+            18}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{1.4,68.2},{42,68.2},{42,70},{102,70},{102,36},{101.085,36},{101.085,
           0.09}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(calcHydraulicPower.hydraulicBus, tabsBus.pumpBus) annotation (Line(
-      points={{0,38},{101.085,38},{101.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -81,8 +74,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(max3.u2, const.y) annotation (Line(points={{19,16},{16,16},{16,14},{
-          14,14},{14,10},{-5.2,10}},
+  connect(max3.u2, const.y) annotation (Line(points={{19,16},{16,16},{16,14},{14,14},{14,10},{-3.2,10}},
                      color={0,0,127}));
   connect(const1.y, min1.u2) annotation (Line(points={{-1.2,-50},{10,-50},{10,
           -38},{15,-38}},     color={0,0,127}));
@@ -90,16 +82,24 @@ equation
           19},{30.5,18},{44,18},{44,6},{50,6}}, color={0,0,127}));
   connect(min1.y, ctrThrottleColdQFlow.Q_flowMea) annotation (Line(points={{
           26.5,-35},{44,-35},{44,-52},{50,-52}}, color={0,0,127}));
-  connect(QFlowSet, ctrThrottleColdQFlow.Q_flowSet) annotation (Line(points={{
-          -103,1},{-50,1},{-50,-6},{40,-6},{40,-63},{50,-63}}, color={0,0,127}));
-  connect(QFlowSet, ctrThrottleHotQFlow.Q_flowSet) annotation (Line(points={{
-          -103,1},{-50,1},{-50,-5},{50,-5}}, color={0,0,127}));
-  connect(min1.u1, calcHydraulicPower.Q_flow) annotation (Line(points={{15,-32},
-          {-16,-32},{-16,-30},{-54,-30},{-54,38},{-20.8,38}}, color={0,0,127}));
-  connect(max3.u1, calcHydraulicPower.Q_flow) annotation (Line(points={{19,22},
-          {-38,22},{-38,38},{-20.8,38}}, color={0,0,127}));
-  connect(calcHydraulicPower.Q_flow, Q_flow1) annotation (Line(points={{-20.8,
-          38},{-24,38},{-24,90},{108,90}}, color={0,0,127}));
+  connect(calcHydraulicPower.Q_flow, Q_flow1) annotation (Line(points={{-20.8,45.4},{-24,45.4},{-24,90},{
+          108,90}},                        color={0,0,127}));
+  connect(tabsBus, calcHydraulicPower.tabsBus2) annotation (Line(
+      points={{101,0},{102,0},{102,37.8},{-0.2,37.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(max3.u1, calcHydraulicPower.Q_flow_h)
+    annotation (Line(points={{19,22},{-24,22},{-24,38.4},{-20.8,38.4}}, color={0,0,127}));
+  connect(min1.u1, calcHydraulicPower.Q_flow_c)
+    annotation (Line(points={{15,-32},{-28,-32},{-28,29.4},{-20.8,29.4}}, color={0,0,127}));
+  connect(ctrThrottleHotQFlow.Q_flowSet, QFlowSet_h)
+    annotation (Line(points={{50,-5},{50,-6},{-84,-6},{-84,45},{-105,45}}, color={0,0,127}));
+  connect(ctrThrottleColdQFlow.Q_flowSet, QFlowSet_c)
+    annotation (Line(points={{50,-63},{50,-64},{-80,-64},{-80,-31},{-101,-31}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},

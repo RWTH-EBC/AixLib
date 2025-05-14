@@ -680,7 +680,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(hotEnergyCalc.y1, basicCarnot.QCon_flow_internal) annotation (Line(points={{81,90},{130,90},{130,
           46},{-120,46},{-120,-132},{-69.8,-132},{-69.8,-138}}, color={0,0,127}));
-  connect(QTabs_set.y[1], ctrTabsQflow.QFlowSet)
+  connect(QTabs_set.y[1], ctrTabsQflow.QFlowSet_h)
     annotation (Line(points={{-91.3,-20},{-66,-20},{-66,-17.9},{-58.3,-17.9}}, color={0,0,127}));
   connect(T_set.y[1], ctrAhu.Tset) annotation (Line(points={{-91.3,-40},{-60,-40}}, color={0,0,127}));
   connect(VflowExt.y, ctrAhu.VflowSet)

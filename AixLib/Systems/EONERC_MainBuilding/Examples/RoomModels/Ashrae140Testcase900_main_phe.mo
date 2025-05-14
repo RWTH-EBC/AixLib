@@ -687,7 +687,7 @@ equation
     annotation (Line(points={{-160,20},{-120,20},{-120,10},{-62,10}}, color={0,0,127}));
   connect(VflowSet, ctrAhu.VflowSet)
     annotation (Line(points={{-160,-40},{-120,-40},{-120,6},{-68,6},{-68,5},{-62,5}}, color={0,0,127}));
-  connect(QFlowSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-160,80},{-120,80},{-120,70},{-92,70},
+  connect(QFlowSet, ctrTabsQflow.QFlowSet_h) annotation (Line(points={{-160,80},{-120,80},{-120,70},{-92,70},
           {-92,70.1},{-60.3,70.1}}, color={0,0,127}));
   connect(T_Tabs_Pipe, T_Tabs_Pipe) annotation (Line(points={{154,-168},{154,-168}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-100,-160},{100,100}})), Icon(coordinateSystem(extent={{

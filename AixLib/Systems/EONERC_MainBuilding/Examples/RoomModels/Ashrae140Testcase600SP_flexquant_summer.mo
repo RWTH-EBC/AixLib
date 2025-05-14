@@ -589,8 +589,8 @@ equation
           -80.3},{60,-70.15},{60.4,-70.15},{60.4,-57.36}}, color={0,0,127}));
   connect(internalGains1.y[1], schedule_human) annotation (Line(points={{60,
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
-  connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
-          {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(QFlowTabsSet, ctrTabsQflow.QFlowSet_h)
+    annotation (Line(points={{-120,0},{-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
   connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{182,78},{128,
           78},{128,50},{81,50},{81,51}}, color={0,0,127}));
   connect(hotEnergyCalc.y3,Q_HotTabs)  annotation (Line(points={{81,81},{122,81},

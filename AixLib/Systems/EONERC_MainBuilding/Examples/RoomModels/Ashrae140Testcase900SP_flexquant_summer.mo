@@ -589,8 +589,8 @@ equation
           -80.3},{60,-66},{98,-66},{98,-48},{136,-48}}, color={0,0,127}));
   connect(TAhuSet, ctrAhu.Tset)
     annotation (Line(points={{-120,-40},{-60,-40}}, color={0,0,127}));
-  connect(QFlowTabsSet, ctrTabsQflow.QFlowSet) annotation (Line(points={{-120,0},
-          {-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
+  connect(QFlowTabsSet, ctrTabsQflow.QFlowSet_h)
+    annotation (Line(points={{-120,0},{-70,0},{-70,-17.9},{-58.3,-17.9}}, color={0,0,127}));
   connect(Q_HotTabs, Q_HotTabs)
     annotation (Line(points={{170,98},{170,98}}, color={0,0,127}));
   connect(Q_ColdTabs, coolEnergyCalc.y3) annotation (Line(points={{184,80},{130,

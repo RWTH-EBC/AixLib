@@ -3,7 +3,8 @@ expandable connector ControlBus "Generation bus"
   extends Modelica.Icons.SignalBus;
   import Modelica.Units.SI;
 
-  SI.Power Q_Tabs_Set;
+  SI.Power Q_Tabs_Set_h;
+  SI.Power Q_Tabs_Set_c;
   SI.Temperature T_AHU_sup_Set;
   SI.VolumeFlowRate Vflow_AHU_Set;
   SI.Temperature T_Gen_Set;

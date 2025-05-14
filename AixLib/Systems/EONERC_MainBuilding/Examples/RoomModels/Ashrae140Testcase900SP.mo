@@ -535,8 +535,8 @@ equation
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{68.8,-9.8},{
           68.8,-10},{94,-10},{94,-20},{110,-20}}, color={0,0,127}));
-  connect(ctrTabsQflow.QFlowSet, QFlowTabsSet) annotation (Line(points={{-58.3,
-          -17.9},{-58.3,-18},{-94,-18},{-94,0},{-120,0}}, color={0,0,127}));
+  connect(ctrTabsQflow.QFlowSet_h, QFlowTabsSet)
+    annotation (Line(points={{-58.3,-17.9},{-58.3,-18},{-94,-18},{-94,0},{-120,0}}, color={0,0,127}));
   connect(ctrAhu.Tset, TAhuSet)
     annotation (Line(points={{-60,-40},{-120,-40}}, color={0,0,127}));
   connect(realExpression.y, T_IntWall)
