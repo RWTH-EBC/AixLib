@@ -1,4 +1,0 @@
-
----- AixLib/Utilities/Math/Functions/Examples/SmoothInterpolation.mo ----
-line 11 column 1 - Warning: <p> attribute "align" not allowed for HTML5
-
