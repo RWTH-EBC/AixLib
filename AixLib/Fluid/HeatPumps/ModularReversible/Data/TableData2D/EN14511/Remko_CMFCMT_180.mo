@@ -31,14 +31,36 @@ record Remko_CMFCMT_180 "Remko CMF-CMT 180"
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     uses(AixLib(version="2.1.1")),
-    Documentation(revisions="<html>
- <ul><li>
- <i>May 15, 2025</i> by Anton Lleshaj:<br/>
-  First implementation (see issue <a href= \"https://github.com/RWTH-EBC/AixLib/issues/1593\"> #1593</a>)
- </li></ul>
-
-</html>", info="<html>
-<p>Data for air-to-water heat pump from Remko. These tables are based on digitized data from manufacturer graphs. Temperature intervals are discretized with finer resolution in areas of high curvature to maintain accuracy. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>. Since manufacturers often provide <span style=\"font-family: Courier New;\">COP</span> and <span style=\"font-family: Courier New;\">Qmax</span> at different temperature points, <span style=\"font-family: Courier New;\">PEle</span> is calculated only at the temperature values common to both datasets to avoid extrapolation. As a result, the <span style=\"font-family: Courier New;\">Qmax</span> and <span style=\"font-family: Courier New;\">PEle</span> tables may differ in size.</p>
-<p><br>Remko, Montage- und Betriebsanleitung REMKO CMF / CMT 180 <a href=\"https://remko.canto.de/pdfviewer/viewer/viewer.html?v=medienportal&portalType=v%2Fmedienportal&column=document&id=ogl474tqb557d7hgdvht8sni6d&suffix=pdf&print=1\"> Montage- und Betriebsanleitung REMKO CMF/CMT 180</a>. </p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 15, 2025</i> by Anton Lleshaj:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1593\">#1593</a>)
+  </li>
+</ul>
+</html>", info="<html><p>
+  Data for air-to-water heat pump from Remko. These tables are based on
+  digitized data from manufacturer graphs. Temperature intervals are
+  discretized with finer resolution in areas of high curvature to
+  maintain accuracy. Electrical power <span style=
+  \"font-family: Courier New;\">PEle</span> is calculated using the
+  formula: <span style=\"font-family: Courier New;\">PEle</span> =
+  <span style=\"font-family: Courier New;\">Qmax</span> / <span style=
+  \"font-family: Courier New;\">COP</span>. Since manufacturers often
+  provide <span style=\"font-family: Courier New;\">COP</span> and
+  <span style=\"font-family: Courier New;\">Qmax</span> at different
+  temperature points, <span style=
+  \"font-family: Courier New;\">PEle</span> is calculated only at the
+  temperature values common to both datasets to avoid extrapolation. As
+  a result, the <span style=\"font-family: Courier New;\">Qmax</span> and
+  <span style=\"font-family: Courier New;\">PEle</span> tables may differ
+  in size.
+</p>
+<p>
+  <br/>
+  Remko, Montage- und Betriebsanleitung REMKO CMF / CMT 180 <a href=
+  \"https://remko.canto.de/pdfviewer/viewer/viewer.html?v=medienportal&amp;portalType=v%2Fmedienportal&amp;column=document&amp;id=ogl474tqb557d7hgdvht8sni6d&amp;suffix=pdf&amp;print=1\">
+  Montage- und Betriebsanleitung REMKO CMF/CMT 180</a>.
+</p>
 </html>"));
 end Remko_CMFCMT_180;
