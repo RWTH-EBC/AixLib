@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
+within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
 record NIBE_S2125_12 "NIBE S2125 12"
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.GenericAirToWater(
@@ -24,16 +24,18 @@ record NIBE_S2125_12 "NIBE S2125 12"
     devIde="NIBE S2125 12");
 
 
-// These tables were created by taking data from graphs from the manufacturer.
-// The temperature intervals are discretized based on the curvature of the curves:
-// finer resolution is used in regions with higher curvature to preserve accuracy.
-// The electrical power (Pel) is calculated using: Pel = Qmax / COP.
-// Some manufacturers don’t provide the same temperature intervals for COP and Qmax,
-// so for Pel, only the common temperature values are used to avoid extrapolation.
-// That’s why the table sizes for Qmax and Pel may be different.
-
-
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    uses(AixLib(version="2.1.1")));
+    uses(AixLib(version="2.1.1")),
+    Documentation(revisions="<html>
+
+ <ul><li>
+ <i>May 15, 2025</i> by Anton Lleshaj:<br/>
+  First implementation (see issue <a href= \"https://github.com/RWTH-EBC/AixLib/issues/1593\"> #1593</a>)
+ </li></ul>
+
+</html>", info="<html>
+<p>Data for air-to-water heat pump from NIBE. These tables are based on digitized data from manufacturer graphs. Temperature intervals are discretized with finer resolution in areas of high curvature to maintain accuracy. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>. Since manufacturers often provide <span style=\"font-family: Courier New;\">COP</span> and <span style=\"font-family: Courier New;\">Qmax</span> at different temperature points, <span style=\"font-family: Courier New;\">PEle</span> is calculated only at the temperature values common to both datasets to avoid extrapolation. As a result, the <span style=\"font-family: Courier New;\">Qmax</span> and <span style=\"font-family: Courier New;\">PEle</span> tables may differ in size.</p>
+<p><br>NIBE S2125 Installateurhandbuch. <a href=\"https://assetstore.nibe.se/hcms/v2.3/entity/document/887685/storage/ODg3Njg1LzAvbWFzdGVy\">Luft/Wasser-W&auml;rmepumpe NIBE S2125</a>. </p>
+</html>"));
 end NIBE_S2125_12;

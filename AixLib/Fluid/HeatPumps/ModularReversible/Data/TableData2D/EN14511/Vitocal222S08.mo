@@ -27,5 +27,17 @@ record Vitocal222S08 "Vitocal 222 S08"
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    uses(AixLib(version="2.1.1")));
+    uses(AixLib(version="2.1.1")),
+    Documentation(revisions="<html>
+
+ <ul><li>
+ <i>May 15, 2025</i> by Anton Lleshaj:<br/>
+  First implementation (see issue <a href= \"https://github.com/RWTH-EBC/AixLib/issues/1593\"> #1593</a>)
+ </li></ul>
+
+</html>", info="<html>
+<p>According to data from Viessmann data sheets. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>.</p>
+<p><br>Viessmman, Planungsanleitung Vitocal <a href=\"https://www.haustechnik-handrich.de/media/60/36/d9/1709725041/vie-pa-z022670.pdf\"> Viessmann Planungsanleitung Vitocal</a>. </p>
+</html>
+"));
 end Vitocal222S08;

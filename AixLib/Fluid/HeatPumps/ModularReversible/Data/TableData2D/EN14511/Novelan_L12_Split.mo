@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
+﻿within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
 record Novelan_L12_Split "Novelan L12 Split"
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.GenericAirToWater(
@@ -22,12 +22,18 @@ record Novelan_L12_Split "Novelan L12 Split"
     use_TConOutForTab=true,
     use_TEvaOutForTab=false,
     devIde="Novelan L12 Split");
-// These tables were created by taking data from graphs from the manufacturer.
-// The temperature intervals are discretized based on the curvature of the curves:
-// finer resolution is used in regions with higher curvature to preserve accuracy.
-// The electrical power (Pel) is calculated using: Pel = Qmax / COP.
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    uses(AixLib(version="2.1.1")));
+    uses(AixLib(version="2.1.1")),
+    Documentation(revisions="<html>
+ <ul><li>
+ <i>May 15, 2025</i> by Anton Lleshaj:<br/>
+  First implementation (see issue <a href= \"https://github.com/RWTH-EBC/AixLib/issues/1593\"> #1593</a>)
+ </li></ul>
+
+</html>", info="<html>
+<p>Data for air-to-water heat pump from Novelan. These tables are based on digitized data from manufacturer graphs. Temperature intervals are discretized with finer resolution in areas of high curvature to maintain accuracy. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>. Since manufacturers often provide <span style=\"font-family: Courier New;\">COP</span> and <span style=\"font-family: Courier New;\">Qmax</span> at different temperature points, <span style=\"font-family: Courier New;\">PEle</span> is calculated only at the temperature values common to both datasets to avoid extrapolation. As a result, the <span style=\"font-family: Courier New;\">Qmax</span> and <span style=\"font-family: Courier New;\">PEle</span> tables may differ in size.</p>
+<p><br>Novelan, Betriebsanleitung L…Split – Serie <a href=\"https://www.novelan.com/download/18.7138b2418661edafbc4cf8/1678191784748/Bedienungsanleitung%20(400%20V).pdf\">Luft/Wasser-Wärmepumpen L…Split–Serie</a>. </p>
+</html>"));
 end Novelan_L12_Split;
