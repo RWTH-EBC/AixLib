@@ -76,7 +76,7 @@ equation
   connect(product2.y, Q_flow_h)
     annotation (Line(points={{77,-78},{94,-78},{94,4},{108,4}}, color={0,0,127}));
   connect(gain2.u, tabsBus2.hotThrottleBus.VFlowOutMea) annotation (Line(points={{-59.8,-77},{-59.8,-78},{
-          -84,-78},{-84,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
+          -82,-78},{-82,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -87,7 +87,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add1.u1, tabsBus2.hotThrottleBus.TRtrnInMea) annotation (Line(points={{-24,-40},{-80,-40},{-80,
+  connect(add1.u1, tabsBus2.hotThrottleBus.TRtrnInMea) annotation (Line(points={{-24,-40},{-82,-40},{-82,
           -1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -101,14 +101,14 @@ equation
                         color={0,0,127}));
   connect(product3.y, Q_flow_c)
     annotation (Line(points={{69,-162},{86,-162},{86,-86},{108,-86}}, color={0,0,127}));
-  connect(gain4.u, tabsBus2.coldThrottleBus.VFlowOutMea) annotation (Line(points={{-67.8,-161},{-67.8,-166},
-          {-84,-166},{-84,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
+  connect(gain4.u, tabsBus2.coldThrottleBus.VFlowOutMea) annotation (Line(points={{-67.8,-161},{-67.8,-168},
+          {-82,-168},{-82,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add2.u2, tabsBus2.coldThrottleBus.TFwrdOutMea) annotation (Line(points={{-32,-136},{-84,-136},{
-          -84,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
+  connect(add2.u2, tabsBus2.coldThrottleBus.TFwrdOutMea) annotation (Line(points={{-32,-136},{-82,-136},{
+          -82,-1.95},{-97.95,-1.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

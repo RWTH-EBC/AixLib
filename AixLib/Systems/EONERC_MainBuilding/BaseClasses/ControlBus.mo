@@ -7,6 +7,18 @@ expandable connector ControlBus "Generation bus"
   SI.Power Q_Tabs_Set_c;
   SI.Temperature T_AHU_sup_Set;
   SI.VolumeFlowRate Vflow_AHU_Set;
+  Real internal_AHU_Ph_rpm_Set;
+  Real internal_AHU_Rh_rpm_Set;
+  Real internal_AHU_Co_rpm_Set;
+  Real internal_AHU_Ph_valve_Set;
+  Real internal_AHU_Rh_valve_Set;
+  Real internal_AHU_Co_valve_Set;
+  Real AHU_Ph_rpm_Set;
+  Real AHU_Rh_rpm_Set;
+  Real AHU_Co_rpm_Set;
+  Real AHU_Ph_valve_Set;
+  Real AHU_Rh_valve_Set;
+  Real AHU_Co_valve_Set;
   SI.Temperature T_Gen_Set;
   SI.Temperature T_room_heat_Set;
   SI.Temperature T_room_cool_Set;

@@ -134,6 +134,20 @@ model CtrAHUBasic "Simple controller for AHU"
   Modelica.Blocks.Sources.Constant ConstFlap1(final k=1)
                                                         "Flaps are always open"
     annotation (Placement(transformation(extent={{-68,-34},{-56,-22}})));
+  EONERC_MainBuilding.BaseClasses.ControlBus                controlBus annotation (Placement(transformation(
+          extent={{40,82},{78,112}}),    iconTransformation(extent={{-26,82},{12,112}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough1 if usePreheater
+    annotation (Placement(transformation(extent={{122,130},{142,150}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough2 if usePreheater
+    annotation (Placement(transformation(extent={{124,102},{144,122}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough3
+    annotation (Placement(transformation(extent={{122,74},{142,94}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough4
+    annotation (Placement(transformation(extent={{122,48},{142,68}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough5
+    annotation (Placement(transformation(extent={{122,20},{142,40}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough6
+    annotation (Placement(transformation(extent={{122,-6},{142,14}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{20.2,80},{100.05,80},{100.05,0.05}},
@@ -160,11 +174,11 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constTflowSet.y, ctrCo.Tset) annotation (Line(
-      points={{-79,50},{-2,50}},
+      points={{-79,50},{-0.6,50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(constTflowSet.y, ctrRh.Tset) annotation (Line(
-      points={{-79,50},{-28,50},{-28,20},{-2,20}},
+      points={{-79,50},{-28,50},{-28,20},{-0.6,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstVflow.y, PID_VflowSup.u_s)
@@ -177,11 +191,11 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(Tset, ctrCo.Tset) annotation (Line(
-      points={{-120,0},{-28,0},{-28,50},{-2,50}},
+      points={{-120,0},{-28,0},{-28,50},{-0.6,50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(Tset, ctrRh.Tset) annotation (Line(
-      points={{-120,0},{-28,0},{-28,20},{-2,20}},
+      points={{-120,0},{-28,0},{-28,20},{-0.6,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstFlap.y, genericAHUBus.flapEtaSet) annotation (Line(points={{32.6,
@@ -259,7 +273,7 @@ equation
   connect(add.y, PID_HRS.u_s) annotation (Line(points={{-27.3,-23},{-27.3,-24},
           {-22,-24}}, color={0,0,127}));
   connect(add.u1, ctrRh.Tset) annotation (Line(
-      points={{-43.4,-18.8},{-62,-18.8},{-62,30},{-32,30},{-32,20},{-2,20}},
+      points={{-43.4,-18.8},{-62,-18.8},{-62,30},{-32,30},{-32,20},{-0.6,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstFlap1.y, add.u2) annotation (Line(points={{-55.4,-28},{-48,-28},
@@ -298,7 +312,116 @@ equation
   connect(VflowSet, ctrRh.V_flow_air_set) annotation (Line(points={{-120,-50},{-88,-50},{-88,-74},{-46,-74},
           {-46,-32},{-48,-32},{-48,58},{-10,58},{-10,27.2},{-0.8,27.2}}, color={0,0,127}));
   connect(ConstVflow.y, ctrRh.Tset) annotation (Line(points={{-59,-50},{-46,-50},{-46,-32},{-48,-32},{-48,
-          30},{-32,30},{-32,20},{-2,20}}, color={0,0,127}));
+          30},{-32,30},{-32,20},{-0.6,20}},
+                                          color={0,0,127}));
+  connect(ctrPh.rpm_Set, controlBus.internal_AHU_Ph_rpm_Set) annotation (Line(points={{20.6,88},{36,88},{36,
+          78},{59.095,78},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrPh.valve_Set, controlBus.internal_AHU_Ph_valve_Set) annotation (Line(points={{20.6,71},{59.095,
+          71},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrCo.rpm_Set, controlBus.internal_AHU_Co_rpm_Set) annotation (Line(points={{20.6,58},{60,58},{60,
+          78},{59.095,78},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrCo.valve_Set, controlBus.internal_AHU_Co_valve_Set) annotation (Line(points={{20.6,41},{32,41},
+          {32,58},{60,58},{60,80},{59.095,80},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(ctrRh.rpm_Set, controlBus.internal_AHU_Rh_rpm_Set) annotation (Line(points={{20.6,28},{34,28},{34,
+          58},{60,58},{60,82},{59.095,82},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrRh.valve_Set, controlBus.internal_AHU_Rh_valve_Set) annotation (Line(points={{20.6,11},{40,11},
+          {40,12},{60,12},{60,36},{59.095,36},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough1.u, controlBus.AHU_Ph_rpm_Set) annotation (Line(points={{120,140},{59.095,140},{
+          59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough1.y, genericAHUBus.preheaterBus.hydraulicBus.pumpBus.rpmSet) annotation (Line(
+        points={{143,140},{152,140},{152,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough2.u, controlBus.AHU_Ph_valve_Set) annotation (Line(points={{122,112},{84,112},{84,
+          97.075},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough2.y, genericAHUBus.preheaterBus.hydraulicBus.valveSet) annotation (Line(points={{
+          145,112},{152,112},{152,0},{146,0},{146,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough3.u, controlBus.AHU_Rh_rpm_Set) annotation (Line(points={{120,84},{84,84},{84,96},
+          {80,96},{80,97.075},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough3.y, genericAHUBus.heaterBus.hydraulicBus.pumpBus.rpmSet) annotation (Line(points=
+          {{143,84},{152,84},{152,0},{100.05,0},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough4.u, controlBus.AHU_Rh_valve_Set) annotation (Line(points={{120,58},{112,58},{112,
+          84},{82,84},{82,97.075},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough4.y, genericAHUBus.heaterBus.hydraulicBus.valveSet) annotation (Line(points={{143,
+          58},{152,58},{152,0},{148,0},{148,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough5.u, controlBus.AHU_Co_rpm_Set) annotation (Line(points={{120,30},{112,30},{112,96},
+          {59.095,96},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough5.y, genericAHUBus.coolerBus.hydraulicBus.pumpBus.rpmSet) annotation (Line(points=
+          {{143,30},{152,30},{152,0},{148,0},{148,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough6.u, controlBus.AHU_Co_valve_Set) annotation (Line(points={{120,4},{120,96},{
+          59.095,96},{59.095,97.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(realPassThrough6.y, genericAHUBus.coolerBus.hydraulicBus.valveSet) annotation (Line(points={{143,
+          4},{144,4},{144,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

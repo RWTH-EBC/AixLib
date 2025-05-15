@@ -42,7 +42,7 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
   AixLib.Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
-    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     final k=k,
     final Ti=Ti,
     final Td=Td,

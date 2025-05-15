@@ -27,7 +27,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
     annotation(Dialog(group="PID"));
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation (Placement(transformation(extent={{-126,-20},{-86,20}})));
   AixLib.Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
@@ -66,10 +66,14 @@ block CtrRegBasic "Controller for heating and cooling registers"
     annotation (Placement(transformation(extent={{-10,40},{10,60}})));
   Modelica.Blocks.Interfaces.RealInput V_flow_air_set
     annotation (Placement(transformation(extent={{-128,52},{-88,92}})));
+  Modelica.Blocks.Interfaces.RealOutput rpm_Set "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{96,70},{116,90}})));
+  Modelica.Blocks.Interfaces.RealOutput valve_Set "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{96,-100},{116,-80}})));
 equation
 
     connect(PID.u_s, Tset) annotation (Line(
-      points={{-12,-50},{-47.1,-50},{-47.1,0},{-120,0}},
+      points={{-12,-50},{-48,-50},{-48,0},{-106,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(constTflowSet.y, PID.u_s) annotation (Line(
@@ -97,24 +101,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.y, registerBus.hydraulicBus.valveSet) annotation (Line(points={{
-          11,-50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(multiProduct.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{69.02,2},{70,2},
-          {70,0.13},{101.135,0.13}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(constRpmPump.y, multiProduct.u[1])
     annotation (Line(points={{41,0},{41,0.6},{56,0.6}}, color={0,0,127}));
   connect(const.y, multiProduct.u[2])
     annotation (Line(points={{11,50},{50,50},{50,2},{56,2}}, color={0,0,127}));
   connect(V_flow_air_set, multiProduct.u[3])
     annotation (Line(points={{-108,72},{50,72},{50,3.4},{56,3.4}}, color={0,0,127}));
+  connect(multiProduct.y, rpm_Set)
+    annotation (Line(points={{69.02,2},{74,2},{74,18},{92,18},{92,80},{106,80}}, color={0,0,127}));
+  connect(valve_Set, PID.y)
+    annotation (Line(points={{106,-90},{86,-90},{86,-50},{11,-50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},

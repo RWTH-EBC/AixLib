@@ -19,7 +19,7 @@ model CtrTabsQflow "Power based Controller for concrete core activation"
     Ti=Ti,
     Td=Td,
     rpm_pump=rpm_pump_heat,      reverseAction=true)
-    annotation (Placement(transformation(extent={{52,-10},{72,10}})));
+    annotation (Placement(transformation(extent={{54,-10},{74,10}})));
   HydraulicModules.Controller.CtrThrottleQFlow_cold
                                                ctrThrottleColdQFlow(
       useExternalQset=true,
@@ -58,7 +58,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(ctrThrottleHotQFlow.hydraulicBus, tabsBus.hotThrottleBus) annotation (
      Line(
-      points={{73.4,0.2},{101.7,0.2},{101.7,0.09},{101.085,0.09}},
+      points={{75.4,0.2},{101.7,0.2},{101.7,0.09},{101.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -78,8 +78,8 @@ equation
                      color={0,0,127}));
   connect(const1.y, min1.u2) annotation (Line(points={{-1.2,-50},{10,-50},{10,
           -38},{15,-38}},     color={0,0,127}));
-  connect(max3.y, ctrThrottleHotQFlow.Q_flowMea) annotation (Line(points={{30.5,
-          19},{30.5,18},{44,18},{44,6},{50,6}}, color={0,0,127}));
+  connect(max3.y, ctrThrottleHotQFlow.Q_flowMea) annotation (Line(points={{30.5,19},{30.5,18},{44,18},{44,6},
+          {52,6}},                              color={0,0,127}));
   connect(min1.y, ctrThrottleColdQFlow.Q_flowMea) annotation (Line(points={{
           26.5,-35},{44,-35},{44,-52},{50,-52}}, color={0,0,127}));
   connect(calcHydraulicPower.Q_flow, Q_flow1) annotation (Line(points={{-20.8,45.4},{-24,45.4},{-24,90},{
@@ -97,7 +97,7 @@ equation
   connect(min1.u1, calcHydraulicPower.Q_flow_c)
     annotation (Line(points={{15,-32},{-28,-32},{-28,29.4},{-20.8,29.4}}, color={0,0,127}));
   connect(ctrThrottleHotQFlow.Q_flowSet, QFlowSet_h)
-    annotation (Line(points={{50,-5},{50,-6},{-84,-6},{-84,45},{-105,45}}, color={0,0,127}));
+    annotation (Line(points={{52,-5},{52,-6},{-84,-6},{-84,45},{-105,45}}, color={0,0,127}));
   connect(ctrThrottleColdQFlow.Q_flowSet, QFlowSet_c)
     annotation (Line(points={{50,-63},{50,-64},{-80,-64},{-80,-31},{-101,-31}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
