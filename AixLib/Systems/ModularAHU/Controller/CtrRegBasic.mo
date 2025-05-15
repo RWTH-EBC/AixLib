@@ -4,15 +4,19 @@ block CtrRegBasic "Controller for heating and cooling registers"
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
   parameter Boolean useExternalTMea = false "If True, measured temperature can be given externally";
-  parameter Modelica.Units.SI.Temperature TflowSet = 293.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
+  parameter Modelica.Units.SI.Temperature TflowSet=293.15   "Flow temperature set point of consumer" annotation (Dialog(enable=
           useExternalTset == false));
-  parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
-  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=130
+  parameter Real k(
+    min=0,
+    unit="1")=0.01                          "Gain of controller";
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=300
     "Time constant of Integrator block";
-  parameter Modelica.Units.SI.Time Td(min=0) = 4
+  parameter Modelica.Units.SI.Time Td(min=0)=0
     "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
+  parameter Real rpm_pump(
+    min=0,
+    unit="1")=1500                                "Rpm of the Pump";
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation (Dialog(group="PID"));
   parameter Boolean reverseAction = true

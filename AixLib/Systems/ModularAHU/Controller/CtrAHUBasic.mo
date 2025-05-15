@@ -49,9 +49,11 @@ model CtrAHUBasic "Simple controller for AHU"
   parameter Boolean useTwoFanCtr=false
     "If True, a PID for each of the two fans is used. Use two PID controllers for open systems (if the air canal is not closed)."
     annotation (dialog(group="Fan Controller"));
-  parameter Real k=50 "Gain of controller"
+  parameter Real k=1000
+                      "Gain of controller"
     annotation (dialog(group="Fan Controller"));
-  parameter Modelica.Units.SI.Time Ti=5 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti=60
+                                        "Time constant of Integrator block"
     annotation (dialog(group="Fan Controller"));
   parameter Real y_start=0 "Initial value of output"
     annotation (dialog(group="Fan Controller"));

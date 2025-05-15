@@ -17,12 +17,12 @@ block CtrThrottleQFlow
   parameter Boolean useExternalQset = false "If True, set Volume Flow can be given externally";
   parameter Modelica.Units.SI.Power Q_flowSetCon=0
     "Power set point of consumer in W";
-  parameter Real k(unit="1")=0.025          "Gain of controller";
-  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
+  parameter Real k(unit="1")=0.00005        "Gain of controller";
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=300
     "Time constant of Integrator block";
-  parameter Modelica.Units.SI.Time Td(min=0) = 4
+  parameter Modelica.Units.SI.Time Td(min=0)=4
     "Time constant of Derivative block";
-  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0) = 2000
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0)=2000
     "Rpm of the Pump";
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"

@@ -1,11 +1,11 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
 model CtrTabsQflow "Power based Controller for concrete core activation"
-  parameter Real k(unit="1")=0.03          "Gain of controller";
-  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=60
+  parameter Real k(unit="1")=0.00005       "Gain of controller";
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small)=300
     "Time constant of Integrator block";
-  parameter Modelica.Units.SI.Time Td(min=0)= 0 "Time constant of Derivative block";
-  parameter Real rpm_pump_heat(unit="1")=1500          "Rpm of the Pump";
-  parameter Real rpm_pump_cold(unit="1")=1500          "Rpm of the Pump";
+  parameter Modelica.Units.SI.Time Td(min=0)=0  "Time constant of Derivative block";
+  parameter Real rpm_pump_heat(unit="1")=250           "Rpm of the Pump";
+  parameter Real rpm_pump_cold(unit="1")=325           "Rpm of the Pump";
   parameter Real rpm_pump_mix(unit="1")=1500          "Rpm of the Pump";
 
   EONERC_MainBuilding.BaseClasses.TabsBus2 tabsBus annotation (Placement(
