@@ -27,8 +27,22 @@ record NIBE_F2050_10 "NIBE F2050 10"
         coordinateSystem(preserveAspectRatio=false)),
     uses(AixLib(version="2.1.1")),
     Documentation(info="<html>
-<p>Data for air-to-water heat pump from NIBE. These tables are based on digitized data from manufacturer graphs. Temperature intervals are discretized with finer resolution in areas of high curvature to maintain accuracy. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>. Since manufacturers often provide <span style=\"font-family: Courier New;\">COP</span> and <span style=\"font-family: Courier New;\">Qmax</span> at different temperature points, <span style=\"font-family: Courier New;\">PEle</span> is calculated only at the temperature values common to both datasets to avoid extrapolation. As a result, the <span style=\"font-family: Courier New;\">Qmax</span> and <span style=\"font-family: Courier New;\">PEle</span> tables may differ in size.</p>
-<p><br>NIBE F2050 Installateurhandbuch. <a href=\"https://assetstore.nibe.se/hcms/v2.3/entity/document/874825/storage/ODc0ODI1LzAvbWFzdGVy\">Luft/Wasser-W&auml;rmepumpe NIBE F2050</a>. </p>
+<p>Data for air-to-water heat pump from NIBE. These tables are based on
+  digitized data from manufacturer graphs. Temperature intervals are
+  discretized with finer resolution in areas of high curvature to
+  maintain accuracy. Electrical power <code>PEle</code> is calculated using the
+  formula: <code>PEle</code> =
+ <code>Qmax</code> / <code>COP</code>. Since manufacturers often
+  provide <code>COP</code> and
+  <code>Qmax</code> at different
+  temperature points, <code>PEle</code> is calculated only at the
+  temperature values common to both datasets to avoid extrapolation. As
+  a result, the <code>Qmax</code> and
+  <code>PEle</code> tables may differ
+  in size.</p>
+<p><br>NIBE F2050 Installateurhandbuch. <a href=
+\"https://assetstore.nibe.se/hcms/v2.3/entity/document/874825/storage/ODc0ODI1LzAvbWFzdGVy\">
+Luft/Wasser-W&auml;rmepumpe NIBE F2050</a>. </p>
 </html>", revisions="<html>
  <ul><li>
  <i>May 15, 2025</i> by Anton Lleshaj:<br/>

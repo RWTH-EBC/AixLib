@@ -23,10 +23,6 @@ record Remko_CMFCMT_180 "Remko CMF-CMT 180"
     use_TEvaOutForTab=false,
     devIde="Remko CMF-CMT 180");
 
-// These tables were created by taking data from graphs from the manufacturer.
-// The temperature intervals are discretized based on the curvature of the curves:
-// finer resolution is used in regions with higher curvature to preserve accuracy.
-// The electrical power (Pel) is calculated using: Pel = Qmax / COP.
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
@@ -42,18 +38,15 @@ record Remko_CMFCMT_180 "Remko CMF-CMT 180"
   Data for air-to-water heat pump from Remko. These tables are based on
   digitized data from manufacturer graphs. Temperature intervals are
   discretized with finer resolution in areas of high curvature to
-  maintain accuracy. Electrical power <span style=
-  \"font-family: Courier New;\">PEle</span> is calculated using the
-  formula: <span style=\"font-family: Courier New;\">PEle</span> =
-  <span style=\"font-family: Courier New;\">Qmax</span> / <span style=
-  \"font-family: Courier New;\">COP</span>. Since manufacturers often
-  provide <span style=\"font-family: Courier New;\">COP</span> and
-  <span style=\"font-family: Courier New;\">Qmax</span> at different
-  temperature points, <span style=
-  \"font-family: Courier New;\">PEle</span> is calculated only at the
+  maintain accuracy. Electrical power <code>PEle</code> is calculated using the
+  formula: <code>PEle</code> =
+ <code>Qmax</code> / <code>COP</code>. Since manufacturers often
+  provide <code>COP</code> and
+  <code>Qmax</code> at different
+  temperature points, <code>PEle</code> is calculated only at the
   temperature values common to both datasets to avoid extrapolation. As
-  a result, the <span style=\"font-family: Courier New;\">Qmax</span> and
-  <span style=\"font-family: Courier New;\">PEle</span> tables may differ
+  a result, the <code>Qmax</code> and
+  <code>PEle</code> tables may differ
   in size.
 </p>
 <p>

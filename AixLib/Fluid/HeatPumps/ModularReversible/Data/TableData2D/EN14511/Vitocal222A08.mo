@@ -35,13 +35,14 @@ record Vitocal222A08 "Vitocal 222 A08"
  </li></ul>
 
 </html>", info="<html>
-<p>According to data from Viessmann data sheets. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>.</p>
+<p>According to data from Viessmann data sheets. Electrical power <code>PEle</code> is calculated using the
+  formula: <code>PEle</code> =
+ <code>Qmax</code> / <code>COP</code>. </p>
 <p><br>Viessmman, Planungsanleitung Vitocal <a href=\"https://www.haustechnik-handrich.de/media/e4/e4/64/1709723281/vie-pa-z015192.pdf\"> Viessmann Planungsanleitung Vitocal</a>. </p>
 </html>
 
 
 
 
-According to data from Dimplex data sheets
 "));
 end Vitocal222A08;

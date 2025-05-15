@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
+within AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.EN14511;
 record Novelan_L12_Split "Novelan L12 Split"
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.Data.TableData2D.GenericAirToWater(
@@ -33,7 +33,19 @@ record Novelan_L12_Split "Novelan L12 Split"
  </li></ul>
 
 </html>", info="<html>
-<p>Data for air-to-water heat pump from Novelan. These tables are based on digitized data from manufacturer graphs. Temperature intervals are discretized with finer resolution in areas of high curvature to maintain accuracy. Electrical power <span style=\"font-family: Courier New;\">PEle</span> is calculated using the formula: <span style=\"font-family: Courier New;\">PEle</span> = <span style=\"font-family: Courier New;\">Qmax</span> / <span style=\"font-family: Courier New;\">COP</span>. Since manufacturers often provide <span style=\"font-family: Courier New;\">COP</span> and <span style=\"font-family: Courier New;\">Qmax</span> at different temperature points, <span style=\"font-family: Courier New;\">PEle</span> is calculated only at the temperature values common to both datasets to avoid extrapolation. As a result, the <span style=\"font-family: Courier New;\">Qmax</span> and <span style=\"font-family: Courier New;\">PEle</span> tables may differ in size.</p>
-<p><br>Novelan, Betriebsanleitung L…Split – Serie <a href=\"https://www.novelan.com/download/18.7138b2418661edafbc4cf8/1678191784748/Bedienungsanleitung%20(400%20V).pdf\">Luft/Wasser-Wärmepumpen L…Split–Serie</a>. </p>
+<p>Data for air-to-water heat pump from Novelan. These tables are based on
+  digitized data from manufacturer graphs. Temperature intervals are
+  discretized with finer resolution in areas of high curvature to
+  maintain accuracy. Electrical power <code>PEle</code> is calculated using the
+  formula: <code>PEle</code> =
+ <code>Qmax</code> / <code>COP</code>. Since manufacturers often
+  provide <code>COP</code> and
+  <code>Qmax</code> at different
+  temperature points, <code>PEle</code> is calculated only at the
+  temperature values common to both datasets to avoid extrapolation. As
+  a result, the <code>Qmax</code> and
+  <code>PEle</code> tables may differ
+  in size. </p>
+<p><br>Novelan, Betriebsanleitung L&hellip;Split &ndash; Serie <a href=\"https://www.novelan.com/download/18.7138b2418661edafbc4cf8/1678191784748/Bedienungsanleitung%20(400%20V).pdf\">Luft/Wasser-W&auml;rmepumpen L&hellip;Split&ndash;Serie</a>. </p>
 </html>"));
 end Novelan_L12_Split;
