@@ -1,26 +1,29 @@
 within AixLib.Utilities.Sources;
-model PrescribedSolarRad "variable radiation condition"
+model PrescribedSolarRad "Prescribed solar radiation conditions"
   parameter Integer n=1 "number of output vector length";
-  AixLib.Utilities.Interfaces.SolarRad_out solarRad_out[n] annotation (Placement(
-        transformation(extent={{80,-10},{100,10}})));
-  Modelica.Blocks.Interfaces.RealInput I[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,62},{-80,102}}), iconTransformation(extent={{-100,78},{-78,100}})));
-
-  Modelica.Blocks.Interfaces.RealInput I_dir[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,30},{-80,70}}), iconTransformation(extent={{-100,40},{-80,60}})));
-  Modelica.Blocks.Interfaces.RealInput I_diff[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-4},{-80,36}}), iconTransformation(extent={{-100,0},{-80,20}})));
-  Modelica.Blocks.Interfaces.RealInput I_gr[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-38},{-80,2}}), iconTransformation(extent={{-100,-42},{-78,-20}})));
-  Modelica.Blocks.Interfaces.RealInput AOI[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-76},{-80,-36}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
+  AixLib.Utilities.Interfaces.SolarRad_out solRadOut[n]
+    annotation (Placement(transformation(extent={{80,-10},{100,10}})));
+  Modelica.Blocks.Interfaces.RealInput H[n](unit="W/m2")
+    "Total radiation (W/m2)"
+    annotation (Placement(transformation(extent={{-120,60},{-80,100}})));
+  Modelica.Blocks.Interfaces.RealInput HDir[n](unit="W/m2")
+    "Direct radiation (W/m2)"
+    annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
+  Modelica.Blocks.Interfaces.RealInput HDif[n](unit="W/m2")
+    "Diffuse radiation(W/m2)"
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
+  Modelica.Blocks.Interfaces.RealInput HGrd[n](unit="W/m2")
+    "Ground reflected radiation (W/m2)"
+    annotation (Placement(transformation(extent={{-120,-60},{-80,-20}})));
+  Modelica.Blocks.Interfaces.RealInput incAng[n](unit="rad")
+    "Incidence angle"
+    annotation (Placement(transformation(extent={{-120,-100},{-80,-60}})));
 equation
-  solarRad_out[:].I = I[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_dir = I_dir[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_diff = I_diff[:] "Radiant energy fluence rate";
-  solarRad_out[:].I_gr = I_gr[:] "Radiant energy fluence rate";
-  solarRad_out[:].AOI = AOI[:] "Radiant energy fluence rate";
-
+  solRadOut[:].H = H[:];
+  solRadOut[:].HDir = HDir[:];
+  solRadOut[:].HDif = HDif[:];
+  solRadOut[:].HGrd = HGrd[:];
+  solRadOut[:].incAng = incAng[:];
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),graphics={
        Line(
@@ -59,6 +62,10 @@ equation
          pattern = LinePattern.None,
          fillPattern=FillPattern.Sphere,
          fillColor={255,255,0})}),     Documentation(revisions="<html><ul>
+  <li>
+    March 13, 2025, by Jun Jiang:<br/>
+    Change variable names (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1525\">issue 1525</a>)
+  </li>
   <li>
     <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
     Added the components of the total radiation
