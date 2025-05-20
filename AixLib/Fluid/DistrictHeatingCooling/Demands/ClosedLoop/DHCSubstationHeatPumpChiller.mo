@@ -61,9 +61,8 @@ model DHCSubstationHeatPumpChiller
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
-    use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
-    "decentral distribution pump for heating on primary side"
+    m_flow_nominal=m_flow_nominal,
+    use_riseTime) "decentral distribution pump for heating on primary side"
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
   AixLib.Fluid.Sources.MassFlowSource_T souHeaSec(
     use_m_flow_in=true,
@@ -142,9 +141,8 @@ public
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
-    use_inputFilter=false,
-    m_flow_nominal=m_flow_nominal)
-    "decentral distribution pump for cooling on primary side"
+    m_flow_nominal=m_flow_nominal,
+    use_riseTime) "decentral distribution pump for cooling on primary side"
     annotation (Placement(transformation(extent={{52,14},{32,34}})));
   Modelica.Blocks.Interfaces.RealInput cooDem(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(

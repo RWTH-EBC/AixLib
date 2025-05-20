@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Validation;
+within AixLib.Systems.ModularAHU.Validation;
 model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -65,19 +65,24 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
       length=1,
       Kv=6.3,
       valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
-          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.14,0.24,0.43,0.68,
-          0.81,0.93,0.96,1.0}, phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.02,0.05,0.08,
-          0.27,0.6,0.95,1.0}, phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
-      valve(use_inputFilter=false),
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+          a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0.0,0.14,0.24,0.43,0.68,0.81,0.93,0.96,1.0},
+            phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}),
+          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0.0,0.02,0.05,0.08,0.27,0.6,0.95,1.0},
+            phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
+      valve(strokeTime, use_strokeTime),
       pipe1(length=2.8, fac=9),
       pipe2(length=0.63, parameterPipe=
             AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-      pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=1.85),
-      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=0.4),
+      pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            1.85),
+      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            0.4),
       pipe5(length=3.2, fac=10),
-      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=0.82),
+      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=
+            0.82),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=

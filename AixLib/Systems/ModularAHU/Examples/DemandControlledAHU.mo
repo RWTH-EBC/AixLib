@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Examples;
+within AixLib.Systems.ModularAHU.Examples;
 model DemandControlledAHU "Example for air handling unit with demand controlled ventilation"
   extends Modelica.Icons.Example;
 
@@ -23,15 +23,27 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
         parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
         length=1,
         Kv=10,
-        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.13,0.205,0.566,0.813,0.88,0.91,0.95,1}, phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,1}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.25,0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.022,0.53,0.96,0.98,0.99,1})),
-        valve(use_inputFilter=true),
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+            a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0,0.13,0.205,0.566,0.813,0.88,0.91,0.95,1},
+              phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,1}),
+            b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0,0.1,0.2,0.25,0.52,0.8,0.9,0.95,1},
+              phi={0,0.001,0.002,0.022,0.53,0.96,0.98,0.99,1})),
+        valve(strokeTime, use_strokeTime),
         pipe1(length=1.53),
         pipe2(length=0.54),
         pipe3(length=1.06),
-        pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=0.48),
+        pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+            length=0.48),
         pipe5(length=1.44, fac=16),
         pipe6(length=0.52),
-        redeclare HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled PumpInterface(pumpParam=AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9(), calculatePower=true)),
+        redeclare
+          HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          PumpInterface(pumpParam=
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9(),
+            calculatePower=true)),
       tau=90 + 70,
       T_amb=293.15,
       dynamicHX(
@@ -58,8 +70,15 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
         length=1,
         Kv=10,
         T_start=294.75,
-        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.07,0.12,0.45,0.65,0.89,0.93,0.96,1}, phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-        valve(use_inputFilter=true),
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+            a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0,0.07,0.12,0.45,0.65,0.89,0.93,0.96,1},
+              phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
+            b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1},
+              phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
+        valve(strokeTime, use_strokeTime),
         pipe1(
           T_start=283.15,
           parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),
@@ -68,8 +87,13 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
         pipe3(length=0.9),
         pipe4(length=0.3),
         pipe5(length=2.95, fac=13),
-        pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_1(), length=0.5),
-        redeclare HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled PumpInterface(pumpParam=AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN32(), calculatePower=true)),
+        pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_1(),
+            length=0.5),
+        redeclare
+          HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          PumpInterface(pumpParam=
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN32(),
+            calculatePower=true)),
       T_start=293.65,
       tau=90,
       T_amb=296.65,
@@ -89,15 +113,30 @@ model DemandControlledAHU "Example for air handling unit with demand controlled 
         parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
         length=1,
         Kv=6.3,
-        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.14,0.24,0.43,0.68,0.81,0.93,0.96,1.0}, phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.02,0.05,0.08,0.27,0.6,0.95,1.0}, phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
-        valve(use_inputFilter=false),
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+            a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0.0,0.14,0.24,0.43,0.68,0.81,0.93,0.96,1.0},
+              phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}),
+            b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+              y={0.0,0.02,0.05,0.08,0.27,0.6,0.95,1.0},
+              phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
+        valve(strokeTime, use_strokeTime),
         pipe1(length=2.8, fac=9),
-        pipe2(length=0.63, parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-        pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=1.85),
-        pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=0.4),
+        pipe2(length=0.63, parameterPipe=
+              AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
+        pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+            length=1.85),
+        pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+            length=0.4),
         pipe5(length=3.2, fac=10),
-        pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=0.82),
-        redeclare HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled PumpInterface(pumpParam=AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V5(), calculatePower=true)),
+        pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=
+              0.82),
+        redeclare
+          HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+          PumpInterface(pumpParam=
+              AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V5(),
+            calculatePower=true)),
       tau=90,
       T_amb=293.15,
       dynamicHX(

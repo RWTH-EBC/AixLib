@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Validation;
+within AixLib.Systems.ModularAHU.Validation;
 model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -65,12 +65,14 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
       Kv=10,
       T_start=294.75,
       valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
-          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.07,0.12,0.45,0.65,
-          0.89,0.93,0.96,1}, phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.26,
-          0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-      valve(use_inputFilter=false),
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+          a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0,0.07,0.12,0.45,0.65,0.89,0.93,0.96,1},
+            phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
+          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1},
+            phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
+      valve(strokeTime, use_strokeTime),
       pipe1(
         T_start=283.15,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),
