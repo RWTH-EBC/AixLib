@@ -1,0 +1,60 @@
+ = true
+
+
+rCheck = checkModel("AixLib.Controls.Continuous.Examples.SignalRanker");
+Check of AixLib.Controls.Continuous.Examples.SignalRanker
+The model has the same number of unknowns and equations: 12
+The model could not be deduced to be symbolically well-posed.
+The model has
+  6+2*sigRan.nin
+scalar unknowns and
+  9+sigRan.nin
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  12
+Check of AixLib.Controls.Continuous.Examples.SignalRanker successful.
+Declaring variable: Boolean rCheck ;
+
+Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/SignalRanker.mos\",", "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+Modelica.Utilities.Streams.print("      \"model\" : \"AixLib.Controls.Continuous.Examples.SignalRanker\",", "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+Modelica.Utilities.Streams.print("      \"check\" : {", "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+Modelica.Utilities.Streams.print("        \"command\" : \"checkModel(\\\"AixLib.Controls.Continuous.Examples.SignalRanker\\\");\",", "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+Modelica.Utilities.Streams.print("        \"result\"  : " + String(rCheck), "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+Modelica.Utilities.Streams.print("      },", "AixLib.Controls.Continuous.Examples.SignalRanker.statistics.log");
+
+
+rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/SignalRanker.mos");
+simulateModel("AixLib.Controls.Continuous.Examples.SignalRanker", method="Cvode", tolerance=1e-6, stopTime=1.0, resultFile="AixLib.Controls.Continuous.Examples.SignalRanker");
+Translation of AixLib.Controls.Continuous.Examples.SignalRanker
+The DAE has 12 scalar unknowns and 12 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 5
+  Variables: 27
+  Parameters: 19 (19 scalars)
+  Unknowns: 8 (12 scalars)
+  Equations: 9
+  Nontrivial: 9
+Translated Model
+  Constants: 2 scalars
+  Free parameters: 17 scalars
+  Parameter depending: 1 scalars
+  Time-varying variables: 8 scalars
+  Alias variables: 3 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Finished
+Finished
+ = true
+
+Declaring variable: Boolean rScript ;
+
+savelog("AixLib.Controls.Continuous.Examples.SignalRanker.translation.log");
