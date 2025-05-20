@@ -52,6 +52,35 @@ convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening",
 convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayTable",
                  {"use_inputFilter", "riseTime"}, {"use_strokeTime", "strokeTime"}, true);
 
+convertModifiers("AixLib.Fluid.Actuators.Dampers.Exponential",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Dampers.MixingBox",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Dampers.MixingBoxMinimumFlow",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Dampers.PressureIndependent",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayLinear",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayTable",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayButterfly",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayLinear",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayPolynomial",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening",
+                 {"order"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.TwoWayTable",
+                 {"order"}, fill("",0), true);
+
 
 // Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1885
 convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield",
