@@ -262,8 +262,8 @@ Added missing <code>replaceable</code> for the terminal.
 <li>
 November 28, 2016, by Michael Wetter:<br/>
 Made voltage public to allow setting a start value in
-<a href=\"modelica://Buildings.Electrical.AC.ThreePhasesUnbalanced.Validation.IEEETests.Test4NodesFeeder.UnbalancedStepUp.DY\">
-Buildings.Electrical.AC.ThreePhasesUnbalanced.Validation.IEEETests.Test4NodesFeeder.UnbalancedStepUp.DY</a>.<br/>
+<a href=\"modelica://AixLib.Electrical.AC.ThreePhasesUnbalanced.Validation.IEEETests.Test4NodesFeeder.UnbalancedStepUp.DY\">
+AixLib.Electrical.AC.ThreePhasesUnbalanced.Validation.IEEETests.Test4NodesFeeder.UnbalancedStepUp.DY</a>.<br/>
 This is for
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/584\">#584</a>.
 </li>
