@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
@@ -11,7 +11,6 @@ model Injection "Injection circuit with pump and three way valve"
 
 
   Fluid.Actuators.Valves.ThreeWayTable valve(
-    order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,

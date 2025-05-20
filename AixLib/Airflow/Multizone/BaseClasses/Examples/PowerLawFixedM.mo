@@ -49,10 +49,10 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 <p>
 This examples demonstrates the
 <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLaw\">
-Buildings.Airflow.Multizone.BaseClasses.powerLaw</a>
+AixLib.Airflow.Multizone.BaseClasses.powerLaw</a>
 and
 <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
+AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
 functions.
 They need to return the same function value.
 This is verified by an <code>assert</code> statement.

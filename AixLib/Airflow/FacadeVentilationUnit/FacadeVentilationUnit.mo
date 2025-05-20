@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.FacadeVentilationUnit;
+within AixLib.Airflow.FacadeVentilationUnit;
 model FacadeVentilationUnit
   "Facade Ventilation Unit (FVU) equipped with a recuperator"
   replaceable package Water = AixLib.Media.Water
@@ -67,15 +67,13 @@ model FacadeVentilationUnit
     m2_flow_nominal=fVUParam.m2_flow_nominal_cooler)
     "The heat exchanger used for cooling"
     annotation (Placement(transformation(extent={{182,22},{162,42}})));
-  Modelica.Fluid.Interfaces.FluidPort_b heaterReturnConnector(redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b heaterReturnConnector(redeclare package Medium =
                Water) "Connector to the heating water sink"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a heaterFlowConnector(redeclare package Medium =
                Water) "Connector to the heating water source"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b coolerReturnConnector(redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b coolerReturnConnector(redeclare package Medium =
                Water) "Connector to the cooling water source"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a coolerFlowConnector(redeclare package Medium =
@@ -118,31 +116,32 @@ model FacadeVentilationUnit
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperCirculationAir(
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeLong,
     m_flow_nominal=fVUParam.m_flow_nominal_damper,
-    dpValve_nominal=fVUParam.dp_nominal_damper)
-                 "Damper that controls the air stream that is recirculated"
-                 annotation (Placement(transformation(
+    dpValve_nominal=fVUParam.dp_nominal_damper,
+    strokeTime,
+    use_strokeTime) "Damper that controls the air stream that is recirculated"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={30,-16})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperBypass(
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeLong,
     m_flow_nominal=fVUParam.m_flow_nominal_damper,
-    dpValve_nominal=fVUParam.dp_nominal_damper)
-    "The second of two dampers that control the air flow through the 
-    recuperator"             annotation (Placement(transformation(
+    dpValve_nominal=fVUParam.dp_nominal_damper,
+    strokeTime,
+    use_strokeTime) "The second of two dampers that control the air flow through the 
+    recuperator" annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-27,36})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperHeatRecovery(
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeLong,
     m_flow_nominal=fVUParam.m_flow_nominal_damper,
-    dpValve_nominal=fVUParam.dp_nominal_damper)
+    dpValve_nominal=fVUParam.dp_nominal_damper,
+    strokeTime,
+    use_strokeTime)
     "The first of two dampers that control the air flow through the recuperator"
-                 annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-82,-68})));
@@ -154,11 +153,11 @@ model FacadeVentilationUnit
         origin={129,4})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperFreshAir(
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeShort,
     m_flow_nominal=fVUParam.m_flow_nominal_damper,
-    dpValve_nominal=fVUParam.dp_nominal_damper)
-                 "Can be used to disconnect the unit from fresh air source"
-                 annotation (Placement(transformation(
+    dpValve_nominal=fVUParam.dp_nominal_damper,
+    strokeTime,
+    use_strokeTime) "Can be used to disconnect the unit from fresh air source"
+    annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-112,-68})));
@@ -185,21 +184,21 @@ model FacadeVentilationUnit
         origin={18,14})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening heatingValve(
     redeclare package Medium = Water,
-    riseTime=fVUParam.damperRiseTimeLong,
     dpValve_nominal=fVUParam.dp1_nominal_heater,
-    m_flow_nominal=fVUParam.m1_flow_nominal_heater)
-    "Valve controlling the heating water flow into the unit"
-                         annotation (Placement(transformation(
+    m_flow_nominal=fVUParam.m1_flow_nominal_heater,
+    strokeTime,
+    use_strokeTime) "Valve controlling the heating water flow into the unit"
+    annotation (Placement(transformation(
         extent={{-9,9},{9,-9}},
         rotation=90,
         origin={122,60})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening coolingValve(
     redeclare package Medium = Water,
-    riseTime=fVUParam.damperRiseTimeLong,
     dpValve_nominal=fVUParam.dp1_nominal_heater,
-    m_flow_nominal=fVUParam.m1_flow_nominal_heater)
-    "Valve controlling the cooling water flow into the unit"
-                         annotation (Placement(transformation(
+    m_flow_nominal=fVUParam.m1_flow_nominal_heater,
+    strokeTime,
+    use_strokeTime) "Valve controlling the cooling water flow into the unit"
+    annotation (Placement(transformation(
         extent={{-9,9},{9,-9}},
         rotation=90,
         origin={192,58})));
