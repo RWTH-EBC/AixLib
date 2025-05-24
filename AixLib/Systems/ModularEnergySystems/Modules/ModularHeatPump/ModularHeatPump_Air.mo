@@ -121,7 +121,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
       AixLib.DataBase.HeatPump.PerformanceData.Vitocal250A constrainedby
     DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     annotation (choicesAllMatching=true);
-  parameter Real eta_carnot=0.405;
+  parameter Real eta_carnot;
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{44,60},{64,80}})));
   Modelica.Blocks.Math.Gain gain

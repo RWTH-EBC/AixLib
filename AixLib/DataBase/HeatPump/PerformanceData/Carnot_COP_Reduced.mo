@@ -7,7 +7,8 @@ model Carnot_COP_Reduced
     annotation (Placement(transformation(extent={{-78,62},{-58,82}})));
   Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
     annotation (Placement(transformation(extent={{-150,-6},{-94,18}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot(y=0.5) "Guetegrad"
+  Modelica.Blocks.Sources.RealExpression etaCarnot(y=eta_carnot)
+                                                          "Guetegrad"
     annotation (Placement(transformation(extent={{-118,18},{-82,38}})));
   Modelica.Blocks.Math.Product cop annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

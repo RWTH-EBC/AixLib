@@ -20,8 +20,6 @@ model CarnotCOP
 
   Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{-20,16},{0,36}})));
-  Modelica.Blocks.Sources.RealExpression etaCarnot1(y=0)  "Guetegrad"
-    annotation (Placement(transformation(extent={{-42,-44},{-6,-24}})));
 equation
 
 if greater.y then

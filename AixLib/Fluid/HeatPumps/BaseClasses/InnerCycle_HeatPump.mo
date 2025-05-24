@@ -67,7 +67,7 @@ model InnerCycle_HeatPump
     annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
   parameter Boolean FreDep=true "COP=f(compressor frequency)?";
-  parameter Real eta_carnot=0.405;
+  parameter Real eta_carnot=0.4;
 equation
 
   connect(PerformanceDataHPHeating.QCon, switchQCon.u1)
