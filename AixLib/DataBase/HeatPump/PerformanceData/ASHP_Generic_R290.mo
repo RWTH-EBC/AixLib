@@ -155,6 +155,13 @@ equation
           -80,-110}}, color={0,0,127}));
   connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
           -80},{72,-80},{72,-74},{74,-74}}, color={0,0,127}));
+  connect(offDesign.COP, sigBus.COP) annotation (Line(points={{-80,52.8},{-80,
+          20},{-24,20},{-24,68},{-0.925,68},{-0.925,100.07}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{140,100}}),                                  graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},

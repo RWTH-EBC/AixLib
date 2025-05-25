@@ -205,6 +205,10 @@ model DesignGenericHP
   parameter String filename_PI=ModelicaServices.ExternalReferences.loadResource(
       "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf")
     "File name" annotation (Dialog(tab="NotManufacturer"));
+  Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
+    annotation (Placement(transformation(extent={{72,98},{92,118}})));
+  Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
+    annotation (Placement(transformation(extent={{82,-116},{102,-96}})));
 equation
   connect(tSourceNom.y, fromKelvin3.Kelvin)
     annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));
@@ -301,14 +305,10 @@ equation
     annotation (Line(points={{63,-28},{78,-28}}, color={0,0,127}));
   connect(product4.y, division3.u1) annotation (Line(points={{101,-34},{104,-34},
           {104,-32},{106,-32},{106,-28},{122,-28}}, color={0,0,127}));
-  connect(SDF_T_FullLoad.y, product4.u2) annotation (Line(points={{25.2,-104},{
-          50,-104},{50,-40},{78,-40}}, color={0,0,127}));
   connect(multiplex4_2.y, SDF_T_FullLoad.u) annotation (Line(points={{-21,-28},
           {-18,-28},{-18,-104},{-2.4,-104}}, color={0,0,127}));
   connect(log1.y, product3.u2)
     annotation (Line(points={{87,24},{102,24}}, color={0,0,127}));
-  connect(SDF_T_Design.y, product3.u1) annotation (Line(points={{49.2,110},{66,
-          110},{66,36},{102,36}}, color={0,0,127}));
   connect(sigBus.TConOutMea, fromKelvin1.Kelvin) annotation (Line(
       points={{201.075,0.07},{-118,0.07},{-118,-38},{-90,-38}},
       color={255,204,51},
@@ -317,6 +317,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(SDF_T_Design.y, toKelvin.Celsius) annotation (Line(points={{49.2,110},
+          {60,110},{60,108},{70,108}}, color={0,0,127}));
+  connect(toKelvin.Kelvin, product3.u1) annotation (Line(points={{93,108},{98,
+          108},{98,104},{104,104},{104,62},{102,62},{102,36}}, color={0,0,127}));
+  connect(SDF_T_FullLoad.y, toKelvin1.Celsius) annotation (Line(points={{25.2,
+          -104},{52,-104},{52,-106},{80,-106}}, color={0,0,127}));
+  connect(toKelvin1.Kelvin, product4.u2) annotation (Line(points={{103,-106},{
+          110,-106},{110,-104},{78,-104},{78,-40}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-160},{200,
             160}})),

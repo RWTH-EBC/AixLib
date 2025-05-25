@@ -18,7 +18,7 @@ model ModularHeatPump_Air
                                                               "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
-    parameter Boolean TSourceInternal=true
+    parameter Boolean TSourceInternal=false
                                           "Use internal TSource?"
     annotation (choices(checkBox=true), Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
       parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
