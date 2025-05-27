@@ -100,6 +100,8 @@ package AixLib
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.0.0_to_2.1.0.mos",
 	version="2.1.0",
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.0_to_2.1.1.mos",
+	version="2.1.1",
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.1_to_2.1.2.mos",
 	version="2.2.0",
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.2_to_2.2.0.mos")),
   Documentation(info = "<html><p>
