@@ -9,5 +9,13 @@ annotation (
         "modelica://AixLib/Resources/Scripts/Dymola/Systems/ScalableGenerationModules/Examples/ScalableBoilerConstantSup.mos"
         "Simulate and Plot"), Documentation(info="<html>
 <p>Example with a predefined constant flow set temperature via input.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end ScalableBoilerFeedbackNew;

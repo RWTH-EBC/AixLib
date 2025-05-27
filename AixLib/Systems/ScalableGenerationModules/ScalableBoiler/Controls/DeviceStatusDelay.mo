@@ -142,9 +142,11 @@ With the additional input <span style=
   \"font-family: Courier New;\">u_saftey</span> the output is immediatly set to off, even if the timer wouldn't allow it.
 </html>", revisions="<html>
 <ul>
-  <li>October 10, 2019, by David Jansen:<br/>
-    Implemented model
-  </li>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
 </ul>
 </html>"));
 end DeviceStatusDelay;

@@ -67,5 +67,13 @@ equation
           textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p><span style=\"font-family: Arial;\">Optional control to control the return temperature based on a feedback circuit.</span></p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end FeedbackControl;

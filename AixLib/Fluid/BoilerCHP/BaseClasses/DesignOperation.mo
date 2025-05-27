@@ -2,32 +2,39 @@ within AixLib.Fluid.BoilerCHP.BaseClasses;
 model DesignOperation "Calculation of operation for nominal/design conditions"
 
   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=50000
-    "Design thermal capacity";
+    "Design thermal capacity"  annotation (Dialog(group="Design"));
 
   parameter Modelica.Units.SI.Temperature TSup_nominal=273.15 + 80
     "Design supply temperature" annotation (Dialog(group="Design"),Evaluate=false);
 
   parameter Modelica.Units.SI.Temperature TRet_nominal=273.15 + 60
     "Design return temperature" annotation (Dialog(group="Design"),Evaluate=false);
+  parameter Modelica.Units.SI.Temperature TAmb=273.15 + 20
+    "Ambient temperature for heat losses" annotation (Dialog(group="Design"));
+  parameter Modelica.Units.SI.ThermalConductance theCon = 0.0465*Q_flow_nominal/
+        1000 + 4.9891 "Thermal conductance";
+  parameter String filename=ModelicaServices.ExternalReferences.loadResource(
+    "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/BaseClasses/GenericBoiler/Boiler_Generic_Characteristic_Chart.sdf")
+    "Filename for generic boiler curves" annotation(Dialog(tab="Advanced"));
+  final parameter Modelica.Units.SI.HeatFlowRate nomEff = evaluate(
+    extTabPEle,
+    {TRet_nominal, TSup_nominal - TRet_nominal, 1, 1},
+    SDF.Types.InterpolationMethod.Linear,
+    SDF.Types.ExtrapolationMethod.Hold)
+    "Nominal efficiency";
+  final parameter Modelica.Units.SI.HeatFlowRate nomFueDem = (Q_flow_nominal + QLos_flow_nominal) / nomEff
+    "Nominal fuel demand";
+  final parameter Modelica.Units.SI.HeatFlowRate QLos_flow_nominal = theCon * (TSup_nominal - TAmb)
+    "Nominal heat losses";
 
-
-
-  Modelica.Blocks.Sources.RealExpression RetTem(y=TRet_nominal)
-    "Nominal return temperature"
-    annotation (Placement(transformation(extent={{-100,6},{-54,30}})));
-
-  Modelica.Blocks.Sources.RealExpression yfulLoa(y=1) "realtive power"
-    annotation (Placement(transformation(extent={{-100,-52},{-54,-28}})));
-
-  Modelica.Blocks.Sources.RealExpression conductance(y=0.0465*Q_flow_nominal/
-        1000 + 4.9891) "Thermal conductance"
-    annotation (Placement(transformation(extent={{-98,54},{-52,78}})));
-  Modelica.Blocks.Sources.RealExpression NomCap(y=Q_flow_nominal)
-    "Nominal thermal capacity"
-    annotation (Placement(transformation(extent={{-100,28},{-54,52}})));
-  Modelica.Blocks.Math.Division division
-    annotation (Placement(transformation(extent={{58,48},{78,68}})));
-  Modelica.Blocks.Interfaces.RealOutput NomFueDem(quantity="Power", final unit=
+  final parameter SDF.Types.ExternalNDTable extTabPEle=SDF.Types.ExternalNDTable(
+       4,
+       SDF.Functions.readTableData(
+         filename,
+        "/Characteristic chart",
+        "-",
+        {"K","K","-","-"}));
+  Modelica.Blocks.Interfaces.RealOutput nomFueDemOut(quantity="Power", final unit=
         "W") "Nominal fuel demand" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -35,66 +42,19 @@ model DesignOperation "Calculation of operation for nominal/design conditions"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-110})));
-  Modelica.Blocks.Routing.Multiplex4 multiplex4
-    annotation (Placement(transformation(extent={{18,-16},{38,4}})));
-  SDF.NDTable boiEff(
-    nin=4,
-    readFromFile=true,
-    filename=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/BaseClasses/GenericBoiler/Boiler_Generic_Characteristic_Chart.sdf"),
-
-    dataset="/Characteristic chart",
-    dataUnit="-",
-    scaleUnits={"K","K","-","-"},
-    interpMethod=SDF.Types.InterpolationMethod.Linear,
-    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
-    "Characteristic chart of adiabatic boiler efficiency"
-    annotation (Placement(transformation(extent={{54,-16},{74,4}})));
-
-  Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{20,54},{40,74}})));
-
-  Modelica.Blocks.Math.Add add1(k1=-1)
-    annotation (Placement(transformation(extent={{-36,-14},{-16,6}})));
-  Modelica.Blocks.Sources.RealExpression SupTem(y=TSup_nominal)
-    "Nominal supply temperature"
-    annotation (Placement(transformation(extent={{-100,-22},{-54,2}})));
-  Modelica.Blocks.Sources.RealExpression dTAmb(y=TSup_nominal - 293.15)
-    "temperature difference supply-ambient"
-    annotation (Placement(transformation(extent={{-100,80},{-54,104}})));
-  Modelica.Blocks.Math.Product losses "Nominal boiler losses"
-    annotation (Placement(transformation(extent={{-32,76},{-12,96}})));
+protected
+  function evaluate
+    input SDF.Types.ExternalNDTable table;
+    input Real[:] params;
+    input SDF.Types.InterpolationMethod interpMethod;
+    input SDF.Types.ExtrapolationMethod extrapMethod;
+    output Real value;
+    external "C" value = ModelicaNDTable_evaluate(table, size(params, 1), params, interpMethod, extrapMethod) annotation (
+      Include="#include <ModelicaNDTable.c>",
+      IncludeDirectory="modelica://SDF/Resources/C-Sources");
+  end evaluate;
 equation
-
-  connect(multiplex4.y, boiEff.u)
-    annotation (Line(points={{39,-6},{52,-6}}, color={0,0,127}));
-  connect(boiEff.y, division.u2) annotation (Line(points={{75,-6},{80,-6},{80,
-          22},{50,22},{50,52},{56,52}}, color={0,0,127}));
-  connect(yfulLoa.y, multiplex4.u3[1]) annotation (Line(points={{-51.7,-40},{-8,
-          -40},{-8,-9},{16,-9}}, color={0,0,127}));
-  connect(NomCap.y, add.u2) annotation (Line(points={{-51.7,40},{-40,40},{-40,
-          58},{18,58}},
-                    color={0,0,127}));
-  connect(add.y, division.u1) annotation (Line(points={{41,64},{56,64}},
-                    color={0,0,127}));
-  connect(division.y, NomFueDem) annotation (Line(points={{79,58},{92,58},{92,
-          -80},{0,-80},{0,-110}}, color={0,0,127}));
-  connect(RetTem.y, multiplex4.u1[1]) annotation (Line(points={{-51.7,18},{-10,
-          18},{-10,3},{16,3}}, color={0,0,127}));
-  connect(SupTem.y, add1.u2)
-    annotation (Line(points={{-51.7,-10},{-38,-10}}, color={0,0,127}));
-  connect(conductance.y, losses.u2) annotation (Line(points={{-49.7,66},{-40,66},
-          {-40,80},{-34,80}}, color={0,0,127}));
-  connect(dTAmb.y, losses.u1)
-    annotation (Line(points={{-51.7,92},{-34,92}}, color={0,0,127}));
-  connect(losses.y, add.u1) annotation (Line(points={{-11,86},{0,86},{0,70},{18,
-          70}}, color={0,0,127}));
-  connect(yfulLoa.y, multiplex4.u4[1]) annotation (Line(points={{-51.7,-40},{-8,
-          -40},{-8,-15},{16,-15}}, color={0,0,127}));
-  connect(add1.y, multiplex4.u2[1])
-    annotation (Line(points={{-15,-4},{16,-4},{16,-3}}, color={0,0,127}));
-  connect(RetTem.y, add1.u1) annotation (Line(points={{-51.7,18},{-46,18},{-46,
-          2},{-38,2}}, color={0,0,127}));
+  nomFueDemOut=nomFueDem;
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},
@@ -174,8 +134,11 @@ equation
   of 50 K to ambient
 </p>
 </html>", revisions="<html><ul>
-  <li>June, 2023 by Moritz Zuschlag & David Jansen
-  </li>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
 </ul>
 </html>"));
 end DesignOperation;

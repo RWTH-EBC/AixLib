@@ -18,7 +18,9 @@ model BoilerGeneric "Generic performance map based boiler"
 
   parameter Modelica.Units.SI.Temperature TRet_nominal=333.15
     "Design return temperature" annotation (Dialog(group="Nominal condition"),Evaluate=false);
-
+  parameter String filename=ModelicaServices.ExternalReferences.loadResource(
+    "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/BaseClasses/GenericBoiler/Boiler_Generic_Characteristic_Chart.sdf")
+    "Filename for generic boiler curves" annotation(Dialog(tab="Advanced"));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor intCap(final C=C, T(start=
           T_start, fixed=true))
                         "Boiler thermal capacity (dry weight)"
@@ -26,30 +28,37 @@ model BoilerGeneric "Generic performance map based boiler"
   AixLib.Fluid.BoilerCHP.BaseClasses.OffDesignOperation offDesignOperation(
     Q_flow_nominal=Q_flow_nominal,
     TSup_nominal=TSup_nominal,
-    TRet_nominal=TRet_nominal) "off design operation"
-    annotation (Placement(transformation(extent={{30,70},{50,90}})));
+    TRet_nominal=TRet_nominal,
+    redeclare package Medium = Medium,
+    final filename=filename)   "Calculate efficiency in off design operation"
+    annotation (Placement(transformation(extent={{40,70},{60,90}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor conToEnv(final G=0.0465
         *Q_flow_nominal/1000 + 4.9891)
     "Thermal resistance of the boiler casing" annotation (Placement(
-        transformation(extent={{6,-6},{-6,6}}, rotation=180)));
+        transformation(extent={{10,-10},{-10,10}},
+                                               rotation=180,
+        origin={-18,-30})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TEnvFix(T(displayUnit="K")
        = 293.15)
     "Temperature of environment around the boiler to account for heat losses"
-    annotation (Placement(transformation(extent={{26,-38},{14,-26}})));
+    annotation (Placement(transformation(extent={{60,-40},{40,-20}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFloSen
     "Sensor to measure heatflow of heatlosses"
-    annotation (Placement(transformation(extent={{-6,-26},{6,-38}})));
-  AixLib.Controls.Interfaces.BoilerControlBus boilerControlBus
-    "Control bus for boiler"
+    annotation (Placement(transformation(extent={{4,-20},{24,-40}})));
+  AixLib.Controls.Interfaces.BoilerControlBus boiBus
+    "Signal bus for the boiler"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TSupMea(final T(unit="K"))
     "Measurement of supply/volume temperature"
     annotation (Placement(transformation(extent={{-50,-26},{-30,-6}})));
   AixLib.Fluid.BoilerCHP.BaseClasses.DesignOperation designOperation(
-    Q_flow_nominal=Q_flow_nominal,
-    TSup_nominal=TSup_nominal,
-    TRet_nominal=TRet_nominal) "designOperation for design fuel power"
+    final Q_flow_nominal=Q_flow_nominal,
+    final TSup_nominal=TSup_nominal,
+    final TRet_nominal=TRet_nominal,
+    final filename=filename,
+    final TAmb=TEnvFix.T,
+    final theCon=conToEnv.G)   "Calculate design fuel power"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   Modelica.Blocks.Math.Product fuePow(final y(unit="W"))
     "Fuel power calculation" annotation (Placement(transformation(
@@ -72,19 +81,18 @@ equation
   connect(vol.heatPort, intCap.port)
     annotation (Line(points={{-50,-70},{-50,0},{-10,0}}, color={191,0,0}));
   connect(heaFloSen.port_b, TEnvFix.port)
-    annotation (Line(points={{6,-32},{14,-32}}, color={191,0,0}));
-  connect(conToEnv.port_b, heaFloSen.port_a) annotation (Line(points={{6,-6.10623e-16},
-          {14,-6.10623e-16},{14,-22},{-10,-22},{-10,-32},{-6,-32}}, color={191,0,
+    annotation (Line(points={{24,-30},{40,-30}},color={191,0,0}));
+  connect(conToEnv.port_b, heaFloSen.port_a) annotation (Line(points={{-8,-30},{
+          4,-30}},                                                  color={191,0,
           0}));
   connect(conToEnv.port_a, vol.heatPort)
-    annotation (Line(points={{-6,0},{-50,0},{-50,-70}}, color={191,0,0}));
+    annotation (Line(points={{-28,-30},{-50,-30},{-50,-70}},
+                                                        color={191,0,0}));
   connect(vol.heatPort, TSupMea.port)
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
-  connect(designOperation.NomFueDem, fuePow.u2)
-    annotation (Line(points={{-50,69},{-50,60}}, color={0,0,127}));
   connect(thePow.y, heater.Q_flow) annotation (Line(points={{-38,3},{-38,0},{-60,
           0},{-60,-40}}, color={0,0,127}));
-  connect(boilerControlBus.FirRatSet, fuePow.u1) annotation (Line(
+  connect(boiBus.FirRatSet, fuePow.u1) annotation (Line(
       points={{0,100},{0,66},{-38,66},{-38,60}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -92,21 +100,21 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(thePow.y, boilerControlBus.ThermalPower) annotation (Line(points={{-38,
-          3},{-38,0},{0,0},{0,100}}, color={0,0,127}), Text(
+  connect(thePow.y, boiBus.ThermalPower) annotation (Line(points={{-38,3},{-38,0},
+          {-20,0},{-20,20},{0,20},{0,100}},    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senMasFlo.m_flow, boilerControlBus.m_flowMea) annotation (Line(points={{70,-69},
-          {70,100},{0,100}},            color={0,0,127}), Text(
+  connect(senMasFlo.m_flow, boiBus.m_flowMea) annotation (Line(points={{70,-69},
+          {70,100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(fuePow.y, thePow.u2)
     annotation (Line(points={{-44,37},{-44,26}}, color={0,0,127}));
-  connect(boilerControlBus.Efficiency, thePow.u1) annotation (Line(
+  connect(boiBus.eta, thePow.u1) annotation (Line(
       points={{0,100},{0,32},{-32,32},{-32,26}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -114,33 +122,34 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senTRet.T, boilerControlBus.TRetMea) annotation (Line(points={{-70,-69},
-          {-70,100},{0,100}}, color={0,0,127}), Text(
+  connect(senTRet.T, boiBus.TRetMea) annotation (Line(points={{-70,-69},{-70,
+          100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus, offDesignOperation.boilerControlBus) annotation (
-      Line(
-      points={{0,100},{40.2,100},{40.2,90}},
+  connect(boiBus, offDesignOperation.boiBus) annotation (Line(
+      points={{0,100},{0,90},{50.2,90}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(TSupMea.T, boilerControlBus.TSupMea) annotation (Line(points={{-29,-16},
-          {-14,-16},{-14,-14},{0,-14},{0,100}}, color={0,0,127}), Text(
+  connect(TSupMea.T, boiBus.TSupMea) annotation (Line(points={{-29,-16},{-20,-16},
+          {-20,20},{0,20},{0,100}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(fuePow.y, boilerControlBus.fuelPower) annotation (Line(points={{-44,37},
-          {-44,32},{0,32},{0,100}}, color={0,0,127}), Text(
+  connect(fuePow.y, boiBus.fuelPower) annotation (Line(points={{-44,37},{-44,34},
+          {0,34},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(designOperation.nomFueDemOut, fuePow.u2)
+    annotation (Line(points={{-50,69},{-50,60}}, color={0,0,127}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
@@ -158,7 +167,11 @@ equation
 </html>",
         revisions="<html>
 <ul>
-<li><i>June, 2023&nbsp;</i> by Moritz Zuschlag &amp; David Jansen</li>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
 </ul>
 </html>"));
 end BoilerGeneric;

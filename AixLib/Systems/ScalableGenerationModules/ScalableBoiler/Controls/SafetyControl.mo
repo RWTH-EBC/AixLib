@@ -66,5 +66,13 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p><span style=\"font-family: Arial;\">Stops the boiler if the flow temperature exceeds the maxmium flow temperature.</span></p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end SafetyControl;

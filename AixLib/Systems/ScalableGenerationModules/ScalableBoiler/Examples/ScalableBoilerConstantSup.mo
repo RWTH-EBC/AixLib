@@ -7,10 +7,10 @@ model ScalableBoilerConstantSup
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-90,38})));
+        origin={-70,20})));
 equation
-  connect(TSupSet.y, boilerControlBus.TSupSet) annotation (Line(points={{-79,38},
-          {0,38},{0,62}}, color={0,0,127}), Text(
+  connect(TSupSet.y, boiBus.TSupSet) annotation (Line(points={{-59,20},{-42,20},
+          {-42,40},{14,40},{14,62},{0,62}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -22,5 +22,13 @@ annotation (
         "modelica://AixLib/Resources/Scripts/Dymola/Systems/ScalableGenerationModules/Examples/ScalableBoilerConstantSup.mos"
         "Simulate and Plot"), Documentation(info="<html>
 <p>Example with a predefined constant flow set temperature via input.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end ScalableBoilerConstantSup;

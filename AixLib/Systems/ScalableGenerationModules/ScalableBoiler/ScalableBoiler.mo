@@ -135,8 +135,7 @@ model ScalableBoiler
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
 //    final dpValve_nominal=dp_Valve,
 
-  AixLib.Controls.Interfaces.BoilerControlBus
-                              boilerControlBus
+  AixLib.Controls.Interfaces.BoilerControlBus boiBus
     annotation (Placement(transformation(extent={{-10,88},{10,108}})));
 
   Controls.BoilerControl boiCtr(
@@ -169,7 +168,7 @@ model ScalableBoiler
   parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
     "Start value of temperature" annotation (Dialog(tab="Initialization"));
   Modelica.Blocks.Sources.Constant conPum(k=1)
-    annotation (Placement(transformation(extent={{-52,32},{-32,52}})));
+    annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
 protected
     parameter Modelica.Units.SI.PressureDifference dp_nominal = dp_nominal_boiler + dp_Valve;
   parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
@@ -208,7 +207,7 @@ equation
     connect(port_a, senTRet.port_a);
   end if;
 
-  connect(boiGen.boilerControlBus, boilerControlBus) annotation (Line(
+  connect(boiGen.boiBus, boiBus) annotation (Line(
       points={{22,10},{22,92},{0,92},{0,98}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -216,7 +215,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.yValSet, val.y) annotation (Line(
+  connect(boiBus.yValSet, val.y) annotation (Line(
       points={{0,98},{0,22},{-64,22},{-64,12}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -224,7 +223,7 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boiCtr.boilerControlBus, boilerControlBus) annotation (Line(
+  connect(boiCtr.boiBus, boiBus) annotation (Line(
       points={{-79,92},{0,92},{0,98}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -233,7 +232,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(conPum.y, pum.y)
-    annotation (Line(points={{-31,42},{-16,42},{-16,12}}, color={0,0,127}));
+    annotation (Line(points={{-19,50},{-16,50},{-16,12}}, color={0,0,127}));
     annotation (Dialog(group = "Feedback"), choices(checkBox = true),
               Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
@@ -326,5 +325,13 @@ equation
 <h4>Configuration options</h4>
 <p>The model can be configured with or without a pump (<i>hasPump</i>) and with or without a feedback circuit (<i>hasFeedback</i>) for return temperature control.</p>
 <p>Furthermore the model can have an internal control for the flow temperature based on a heating curve (<i>use_HeaCur</i>). This allows an easy setup of a direct to use simulation model of the boiler that can be connected to other modules.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end ScalableBoiler;

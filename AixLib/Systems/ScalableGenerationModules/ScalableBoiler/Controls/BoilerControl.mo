@@ -64,8 +64,7 @@ model BoilerControl "Master controller that holds all other controls"
     final time_minOff=time_minOff,
     final time_minOn=time_minOn) "Saftey control for the boiler"
     annotation (Placement(transformation(extent={{-20,36},{0,56}})));
-  AixLib.Controls.Interfaces.BoilerControlBus
-                              boilerControlBus
+  AixLib.Controls.Interfaces.BoilerControlBus boiBus "Boiler signal bus"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls.FeedbackControl fdbCtrl(
     TRetNom=TRetNom,
@@ -95,7 +94,7 @@ model BoilerControl "Master controller that holds all other controls"
     final TRoom_nominal=293.15) if TFlowByHeaCur
     annotation (Placement(transformation(extent={{-74,-50},{-54,-30}})));
 equation
-  connect(boilerControlBus.isOn, safCtr.isOnSet) annotation (Line(
+  connect(boiBus.isOn, safCtr.isOnSet) annotation (Line(
       points={{0,100},{0,100},{-38,100},{-38,50.4},{-20,50.4}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -108,7 +107,7 @@ equation
   connect(intlFirRatCtr.FirRatSet, firRatMinChe.FirRatSet)
     annotation (Line(points={{1,16},{38,16},{38,0},{46,0}}, color={0,0,127}));
   if not TFlowByHeaCur then
-    connect(boilerControlBus.TSupSet, intlFirRatCtr.TSupSet) annotation (Line(
+    connect(boiBus.TSupSet, intlFirRatCtr.TSupSet) annotation (Line(
         points={{0,100},{-100,100},{-100,16},{-22,16}},
         color={255,204,51},
         thickness=0.5,
@@ -118,7 +117,7 @@ equation
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
   end if;
-  connect(boilerControlBus.TRetMea, safCtr.TRetMea) annotation (Line(
+  connect(boiBus.TRetMea, safCtr.TRetMea) annotation (Line(
       points={{0,100},{-38,100},{-38,42},{-22,42},{-22,41.8}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -126,7 +125,7 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.TRetMea, fdbCtrl.TRetMea) annotation (Line(
+  connect(boiBus.TRetMea, fdbCtrl.TRetMea) annotation (Line(
       points={{0,100},{-100,100},{-100,-78},{-74.2,-78}},
       color={255,204,51},
       thickness=0.5,
@@ -135,13 +134,13 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(firRatMinChe.FirRat, boilerControlBus.FirRatSet) annotation (Line(
-        points={{67,0},{76,0},{76,100},{0,100}}, color={0,0,127}), Text(
+  connect(firRatMinChe.FirRat, boiBus.FirRatSet) annotation (Line(points={{67,0},
+          {76,0},{76,100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(fdbCtrl.yValve, boilerControlBus.yValSet) annotation (Line(
+  connect(fdbCtrl.yValve, boiBus.yValSet) annotation (Line(
       points={{-53,-78},{100,-78},{100,100},{0,100}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
@@ -149,7 +148,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus.TSupMea, safCtr.TSupMea) annotation (Line(
+  connect(boiBus.TSupMea, safCtr.TSupMea) annotation (Line(
       points={{0,100},{-38,100},{-38,46},{-22,46}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -157,7 +156,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.TSupMea, intlFirRatCtr.TFlowMea) annotation (Line(
+  connect(boiBus.TSupMea, intlFirRatCtr.TFlowMea) annotation (Line(
       points={{0,100},{-38,100},{-38,10.8},{-22,10.8}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -165,7 +164,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boilerControlBus.TAmbient, heaCur.T_oda) annotation (Line(
+  connect(boiBus.TAmbient, heaCur.T_oda) annotation (Line(
       points={{0,100},{-100,100},{-100,-40},{-76,-40}},
       color={255,204,51},
       thickness=0.5,
@@ -198,5 +197,13 @@ equation
           textString="Optional control of return tempature via feedback valve ")}),
     Documentation(info="<html>
 Top level model of boiler control that puts the components below together.
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
 </html>"));
 end BoilerControl;

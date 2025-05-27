@@ -44,7 +44,7 @@ model BoilerGeneric
     offset=273.15 + 75,
     startTime=700) "Ambient air temperature"
     annotation (Placement(transformation(extent={{-100,58},{-80,78}})));
-  Controls.Interfaces.BoilerControlBus boilerControlBus1
+  Controls.Interfaces.BoilerControlBus boiBus "Signal bus for boiler"
     annotation (Placement(transformation(extent={{-8,12},{12,32}})));
 equation
   connect(boiGen.port_b, sink.ports[1])
@@ -53,17 +53,17 @@ equation
     annotation (Line(points={{-79,4},{-64,4}}, color={0,0,127}));
   connect(sine.y, conPID.u_s)
     annotation (Line(points={{-79,68},{-46,68}}, color={0,0,127}));
-  connect(boiGen.boilerControlBus, boilerControlBus1) annotation (Line(
+  connect(boiGen.boiBus, boiBus) annotation (Line(
       points={{2,10},{2,22}},
       color={255,204,51},
       thickness=0.5));
-  connect(conPID.y, boilerControlBus1.FirRatSet) annotation (Line(points={{-23,68},
-          {2,68},{2,22}}, color={0,0,127}), Text(
+  connect(conPID.y, boiBus.FirRatSet) annotation (Line(points={{-23,68},{2,68},
+          {2,22}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boilerControlBus1.TSupMea, conPID.u_m) annotation (Line(
+  connect(boiBus.TSupMea, conPID.u_m) annotation (Line(
       points={{2,22},{-32,22},{-32,56},{-34,56}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -91,5 +91,13 @@ The firing rate of the boiler is controlled by a PI controller to hold a sine pr
 </html>
 
 
-"));
+", revisions="<html>
+<ul>
+<li>
+<i>June, 2023</i> by Moritz Zuschlag; David Jansen<br/>
+    First Implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1147\">#1147</a>)
+</li>
+</ul>
+</html>"));
 end BoilerGeneric;
