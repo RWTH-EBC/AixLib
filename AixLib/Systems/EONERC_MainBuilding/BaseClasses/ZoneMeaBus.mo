@@ -4,7 +4,10 @@ expandable connector ZoneMeaBus "Zone Bus"
   import Modelica.Units.SI;
 
   SI.Temperature T_room;
-
+  Real T_discomfort_heat;
+  Real T_discomfort_heat_squared;
+  Real T_discomfort_cold;
+  Real T_discomfort_cold_squared;
 
   annotation (
     Icon(graphics,
