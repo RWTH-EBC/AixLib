@@ -4,9 +4,6 @@ Regression tests are only run for the following package:
            Absolute error = 2.580e+01 at t = 864.0 for Q_flowToRoomConv
            Absolute error = 1.195e+01 at t = 864.0 for Q_flowToRoomRad
            Absolute error = 1.816e-02 at t = 864.0 for m_flowHC
-*** Warning: AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode: Translation statistics for simulation and results changed for number of continuous time states.
- Old = 57
- New = 56
 *** Error: AixLib_ThermalZones_ISO13790_Validation_BESTEST_Case900FF.txt: Errors during result verification.
            Absolute error = 2.011e+00 at t = 24282720.0 for zon5R1C.TAir
 *** Error: AixLib_ThermalZones_ISO13790_Validation_BESTEST_Case900.txt: Errors during result verification.
@@ -17,15 +14,9 @@ Regression tests are only run for the following package:
            Absolute error = 2.650e+09 at t = 31536000.0 for ECoo.y
 *** Error: AixLib_ThermalZones_ISO13790_Validation_BESTEST_Case600FF.txt: Errors during result verification.
            Absolute error = 8.839e+00 at t = 3153600.0 for zon5R1C.TAir
-*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
- Old = 86
- New = 83
-*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
- Old = 25
- New = 22
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 3.0 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 3 warnings and 5 errors.
+Script that runs unit tests had 0 warnings and 5 errors.
 

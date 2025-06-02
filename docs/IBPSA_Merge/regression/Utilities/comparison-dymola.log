@@ -30,7 +30,7 @@
     },
     "model": "AixLib.Utilities.Math.Examples.MovingAverage",
     "simulation": {
-      "elapsed_time": 0.00291014,
+      "elapsed_time": 0.00282979,
       "final_time": 50,
       "jacobians": 10,
       "start_time": 0,
@@ -141,7 +141,7 @@
     },
     "model": "AixLib.Utilities.KPIs.Examples.IntegralErrorSingleReference",
     "simulation": {
-      "elapsed_time": 0.00162,
+      "elapsed_time": 0.00165,
       "final_time": 10,
       "jacobians": 183,
       "start_time": 0,
@@ -234,7 +234,7 @@
     },
     "model": "AixLib.Utilities.KPIs.Examples.EnergyKpis",
     "simulation": {
-      "elapsed_time": 0.00151,
+      "elapsed_time": 0.00153,
       "final_time": 10,
       "jacobians": 165,
       "start_time": 0,
@@ -273,7 +273,7 @@
     },
     "model": "AixLib.Utilities.Sensors.Examples.ExergyMeters",
     "simulation": {
-      "elapsed_time": 0.0874,
+      "elapsed_time": 0.0882,
       "final_time": 7200,
       "jacobians": 41,
       "start_time": 0,
@@ -438,7 +438,7 @@
     },
     "model": "AixLib.Utilities.KPIs.Examples.TemperatureKpis",
     "simulation": {
-      "elapsed_time": 0.00692,
+      "elapsed_time": 0.00706,
       "final_time": 120,
       "jacobians": 416,
       "start_time": 0,
@@ -549,7 +549,7 @@
     },
     "model": "AixLib.Utilities.KPIs.Examples.IntegralErrorDualReference",
     "simulation": {
-      "elapsed_time": 0.00174,
+      "elapsed_time": 0.00179,
       "final_time": 10,
       "jacobians": 192,
       "start_time": 0,
@@ -666,7 +666,7 @@
     },
     "model": "AixLib.Utilities.KPIs.Examples.Co2Kpis",
     "simulation": {
-      "elapsed_time": 0.00852,
+      "elapsed_time": 0.00817,
       "final_time": 120,
       "jacobians": 447,
       "start_time": 0,
