@@ -1,0 +1,44 @@
+Regression tests are only run for the following package:
+  AixLib.Fluid
+*** Error: AixLib_Fluid_Examples_GeothermalHeatPump_GeothermalHeatPump.txt: Errors during result verification.
+           Absolute error = 3.438e+03 at t = 85536.0 for heatPumpPower
+           Absolute error = 3.861e-01 at t = 79488.0 for heatStorage.layer[1].T
+           Absolute error = 1.878e+00 at t = 79488.0 for heatStorage.layer[5].T
+           Absolute error = 1.041e+00 at t = 84672.0 for coldStorage.layer[1].T
+*** Error: AixLib_Fluid_Movers_PumpsPolynomialBased_Examples_PumpSpeedControlledDpV.txt: Errors during result verification.
+           Absolute error = 3.548e+00 at t = 30.0 for pump.pumpBus.rpmMea
+           Absolute error = 1.623e+01 at t = 54.0 for pump.pumpBus.rpmSet
+*** Error: AixLib_Fluid_Movers_PumpsPolynomialBased_Examples_PumpSpeedControlled.txt: Errors during result verification.
+           Absolute error = 2.148e+00 at t = 330.0 for pumpBus.rpmMea
+*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpVar.txt: Errors during result verification.
+           Absolute error = 3.368e+03 at t = 1548.0 for dpControlled_dp.mov.dpMachine
+           Absolute error = 5.528e-02 at t = 1548.0 for dpControlled_dp.mov.m_flow
+           Absolute error = 3.368e+03 at t = 1548.0 for dpControlled_dp.mov.dpMachine
+           Absolute error = 1.610e-02 at t = 2700.0 for val.y_actual
+           Absolute error = 8.260e+03 at t = 2340.0 for elEnergy
+*** Error: AixLib_Fluid_Movers_DpControlledMovers_Examples_DpConst.txt: Errors during result verification.
+           Absolute error = 1.721e+03 at t = 1620.0 for dpControlled_dp.mov.dpMachine
+           Absolute error = 4.678e-02 at t = 1044.0 for dpControlled_dp.mov.m_flow
+           Absolute error = 1.721e+03 at t = 1620.0 for dpControlled_dp.mov.dpMachine
+           Absolute error = 1.610e-02 at t = 2700.0 for val.y_actual
+           Absolute error = 7.288e+03 at t = 2340.0 for elEnergy
+*** Error: AixLib_Fluid_Storage_Examples_StorageSimpleExample.txt: Errors during result verification.
+           Absolute error = 1.625e+00 at t = 37054.0 for storageSimple.layer[1].T
+           Absolute error = 2.641e+00 at t = 37054.0 for storageSimple.layer[2].T
+           Absolute error = 3.703e+00 at t = 37054.0 for storageSimple.layer[3].T
+           Absolute error = 8.163e+03 at t = 25976.0 for heatingRod.Pel
+*** Error: AixLib_Fluid_Storage_Examples_StorageBoiler.txt: Errors during result verification.
+           Absolute error = 1.165e+01 at t = 2592.0 for hea.Q_flow
+*** Error: AixLib_Fluid_Storage_Examples_StorageSolarCollector.txt: Errors during result verification.
+           Absolute error = 3.738e-01 at t = 3456.0 for bufferStorage.layer[10].T
+           Absolute error = 7.886e+00 at t = 19008.0 for solarThermal.heater.Q_flow
+*** Error: AixLib_Fluid_HeatExchangers_Examples_HeatingRod.txt: Errors during result verification.
+           Absolute error = 2.717e+00 at t = 153792.0 for Pel
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Fluid_MassExchangers_MembraneBasedEnthalpyExchangers_Validation_StaticValidation.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Fluid_MassExchangers_MembraneBasedEnthalpyExchangers_Validation_DynamicValidation.txt.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.1 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 9 errors.
+
