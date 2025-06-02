@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Example;
+within AixLib.Systems.HydraulicModules.Examples;
 model ERC_ExperimentalHall_CoolingCircuit
   "Cooling circuit of the new ERC experimental hall"
   extends Modelica.Icons.Example;

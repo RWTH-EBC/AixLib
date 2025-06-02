@@ -1,9 +1,9 @@
 within AixLib.Systems.HydraulicModules;
-package Example "Simple Examples"
+package Examples "Simple Exampless"
   extends Modelica.Icons.ExamplesPackage;
 
 
 
 
 
-end Example;
+end Examples;
