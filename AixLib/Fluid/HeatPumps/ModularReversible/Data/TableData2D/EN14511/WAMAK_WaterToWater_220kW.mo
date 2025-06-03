@@ -77,8 +77,8 @@ record WAMAK_WaterToWater_220kW "220 kW water to water with R513A"
 <h4>References</h4>
 <p>
 WAMAK, Produktblatt ver. 2023/24.
-<a href=\"https://products.wamak.eu/combine.php?&amp;ampcoverpg&amp;ampdescriptmrktadv&amp;amplang=de-DE&amp;ampcode_id=WAHDR2XE\">
-https://products.wamak.eu/combine.php?&amp;ampcoverpg&amp;ampdescriptmrktadv&amp;amplang=de-DE&amp;ampcode_id=WAHDR2XE</a>.
+<a href=\"https://products.wamak.eu/\">
+WAMAK Product Sheets Application</a>.
 </p>
 </html>", revisions="<html>
 <ul><li>
@@ -86,6 +86,6 @@ https://products.wamak.eu/combine.php?&amp;ampcoverpg&amp;ampdescriptmrktadv&amp
   First implementation (see issue <a href=
   \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
 </li></ul>
-</html>"),
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
 end WAMAK_WaterToWater_220kW;

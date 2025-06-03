@@ -48,6 +48,6 @@ Viessmann, Planungshandbuch.
 https://www.haustechnik-handrich.de/media/pdf/54/c4/14/vie-pa-z022164.pdf</a>.
 </p>
 
-</html>"),
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
 end Vitocal251A08;
