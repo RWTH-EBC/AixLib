@@ -6,7 +6,7 @@ package AixLib
 	SDF(version="0.4.2"),
 	Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0")),
-  version="2.2.0",
+  version="3.0.0",
   conversion(conversion(
   from(
     version="0.3.2",
@@ -198,8 +198,8 @@ package AixLib
     script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.1_to_2.1.2.mos"),
   from(
     version="2.1.2",
-    to="2.2.0",
-    script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.2_to_2.2.0.mos"))),
+    to="3.0.0",
+    script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.2_to_3.0.0.mos"))),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of
