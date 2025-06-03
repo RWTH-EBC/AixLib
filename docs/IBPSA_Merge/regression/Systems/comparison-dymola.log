@@ -1,49 +1,49 @@
 ﻿[
   {
     "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat",
+      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirInMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirOutMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[6]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[5]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[3]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[4]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[9]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[8]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_in_m3h.y",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_out_m3h.y"
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[6]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[5]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[3]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[4]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[9]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[8]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_in_m3h.y",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_out_m3h.y"
       ],
-      "success_rate": 0.5833333333333334,
+      "success_rate": 1.0,
       "t_err_max": [
         0.0,
-        3758.4,
         0.0,
         0.0,
         0.0,
         0.0,
-        3672.0,
-        3715.2,
         0.0,
         0.0,
-        3628.8,
-        3672.0
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "test_passed": [
         1,
-        0,
         1,
         1,
         1,
         1,
-        0,
-        0,
         1,
         1,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "var_groups": [
         0,
@@ -75,24 +75,87 @@
       ],
       "warnings": [
         null,
-        "Absolute error = 5.767e-01 at t = 3758.4 for registerModule.registerBus.TAirOutMea",
         null,
         null,
         null,
         null,
-        "Absolute error = 4.255e+00 at t = 3672.0 for registerModule.registerBus.hydraulicBus.TFwrdOutMea",
-        "Absolute error = 2.897e+00 at t = 3715.2 for registerModule.registerBus.hydraulicBus.TRtrnInMea",
         null,
         null,
-        "Absolute error = 1.341e-01 at t = 3628.8 for Simulation_VF_in_m3h.y",
-        "Absolute error = 2.145e-02 at t = 3672.0 for Simulation_VF_out_m3h.y"
+        null,
+        null,
+        null,
+        null,
+        null
       ]
     },
-    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater",
+    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater",
     "simulation": {
-      "elapsed_time": 0.855,
-      "final_time": 4320,
-      "jacobians": 4232,
+      "elapsed_time": 1.33,
+      "final_time": 7200,
+      "jacobians": 5000,
+      "start_time": 0,
+      "state_events": 7,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Examples.Admix.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Examples.Admix",
+    "simulation": {
+      "elapsed_time": 0.0164,
+      "final_time": 800,
+      "jacobians": 73,
       "start_time": 0,
       "state_events": 0,
       "success": true
@@ -109,20 +172,20 @@
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.ThrottlePump.mat_hydraulicBus.VFlowInMea",
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.ThrottlePump.mat_hydraulicBus.VFlowOutMea"
       ],
-      "success_rate": 0.3333333333333333,
+      "success_rate": 1.0,
       "t_err_max": [
-        192.0,
-        282.0,
-        282.0,
-        288.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
         0.0,
         0.0
       ],
       "test_passed": [
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        1,
         1,
         1
       ],
@@ -143,17 +206,17 @@
         "hydraulicBus.VFlowOutMea"
       ],
       "warnings": [
-        "Absolute error = 6.511e+00 at t = 192.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 6.046e+00 at t = 282.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 6.046e+00 at t = 282.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 6.196e+00 at t = 288.0 for hydraulicBus.TRtrnOutMea",
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ]
     },
     "model": "AixLib.Systems.HydraulicModules.Examples.ThrottlePump",
     "simulation": {
-      "elapsed_time": 0.00775,
+      "elapsed_time": 0.012,
       "final_time": 600,
       "jacobians": 61,
       "start_time": 0,
@@ -163,287 +226,44 @@
   },
   {
     "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.GenericAHU.mat",
+      "file_name": "AixLib.Systems.ModularAHU.Examples.Heater.mat",
       "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TOdaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TSupMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEtaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEhaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.hydraulicBus.valveSet"
       ],
-      "success_rate": 0.5714285714285714,
+      "success_rate": 1.0,
       "t_err_max": [
         0.0,
-        144.0,
-        0.0,
-        144.0,
-        0.0,
-        0.0,
-        576.0
-      ],
-      "test_passed": [
-        1,
-        0,
-        1,
-        0,
-        1,
-        1,
-        0
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1
-      ],
-      "variables": [
-        "ctrAHUBasic.genericAHUBus.TOdaMea",
-        "ctrAHUBasic.genericAHUBus.TSupMea",
-        "ctrAHUBasic.genericAHUBus.TEtaMea",
-        "ctrAHUBasic.genericAHUBus.TEhaMea",
-        "ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
-        "ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
-        "ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
-      ],
-      "warnings": [
-        null,
-        "Absolute error = 5.161e-01 at t = 144.0 for ctrAHUBasic.genericAHUBus.TSupMea",
-        null,
-        "Absolute error = 3.046e-01 at t = 144.0 for ctrAHUBasic.genericAHUBus.TEhaMea",
-        null,
-        null,
-        "Absolute error = 6.580e-03 at t = 576.0 for ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
-      ]
-    },
-    "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
-    "simulation": {
-      "elapsed_time": 0.307,
-      "final_time": 7200,
-      "jacobians": 93,
-      "start_time": 0,
-      "state_events": 0,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TSupMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TOdaMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_thermalZone.CO2Con"
-      ],
-      "success_rate": 0.6,
-      "t_err_max": [
-        5961600.0,
-        5961600.0,
-        6082560.0,
-        6451488.0,
-        5961600.0
-      ],
-      "test_passed": [
-        1,
-        1,
-        0,
-        0,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        1,
-        2,
-        3
-      ],
-      "variables": [
-        "genericAHU.genericAHUBus.TSupMea",
-        "genericAHU.genericAHUBus.TOdaMea",
-        "genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
-        "genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
-        "thermalZone.CO2Con"
-      ],
-      "warnings": [
-        null,
-        null,
-        "Absolute error = 2.864e-03 at t = 6082560.0 for genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
-        "Absolute error = 3.502e-02 at t = 6451488.0 for genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
-        null
-      ]
-    },
-    "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
-    "simulation": {
-      "elapsed_time": 37.7,
-      "final_time": 6566400.0,
-      "jacobians": 25274,
-      "start_time": 5961600.0,
-      "state_events": 51,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirInMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.TAirOutMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[6]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[5]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[3]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[4]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[9]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_combiTimeTable.y[8]",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_in_m3h.y",
-        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Preheater.mat_Simulation_VF_out_m3h.y"
-      ],
-      "success_rate": 0.5833333333333334,
-      "t_err_max": [
-        0.0,
-        216.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        144.0,
-        3816.0,
-        0.0,
-        0.0,
-        144.0,
-        144.0
-      ],
-      "test_passed": [
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        0,
-        0,
-        1,
-        1,
-        0,
-        0
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        2,
-        2,
-        2,
-        2
-      ],
-      "variables": [
-        "registerModule.registerBus.TAirInMea",
-        "registerModule.registerBus.TAirOutMea",
-        "combiTimeTable.y[6]",
-        "combiTimeTable.y[5]",
-        "combiTimeTable.y[3]",
-        "combiTimeTable.y[4]",
-        "registerModule.registerBus.hydraulicBus.TFwrdOutMea",
-        "registerModule.registerBus.hydraulicBus.TRtrnInMea",
-        "combiTimeTable.y[9]",
-        "combiTimeTable.y[8]",
-        "Simulation_VF_in_m3h.y",
-        "Simulation_VF_out_m3h.y"
-      ],
-      "warnings": [
-        null,
-        "Absolute error = 1.551e+00 at t = 216.0 for registerModule.registerBus.TAirOutMea",
-        null,
-        null,
-        null,
-        null,
-        "Absolute error = 6.591e+00 at t = 144.0 for registerModule.registerBus.hydraulicBus.TFwrdOutMea",
-        "Absolute error = 4.752e+00 at t = 3816.0 for registerModule.registerBus.hydraulicBus.TRtrnInMea",
-        null,
-        null,
-        "Absolute error = 8.398e-01 at t = 144.0 for Simulation_VF_in_m3h.y",
-        "Absolute error = 2.685e-01 at t = 144.0 for Simulation_VF_out_m3h.y"
-      ]
-    },
-    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Preheater",
-    "simulation": {
-      "elapsed_time": 1.04,
-      "final_time": 7200,
-      "jacobians": 5000,
-      "start_time": 0,
-      "state_events": 7,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.HydraulicModules.Examples.Throttle.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TFwrdInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TFwrdOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TRtrnInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TRtrnOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.VFlowInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.VFlowOutMea"
-      ],
-      "success_rate": 0.3333333333333333,
-      "t_err_max": [
-        210.0,
-        280.0,
-        280.0,
-        310.0,
         0.0,
         0.0
       ],
       "test_passed": [
-        0,
-        0,
-        0,
-        0,
+        1,
         1,
         1
       ],
       "var_groups": [
         0,
         0,
-        0,
-        0,
-        1,
         1
       ],
       "variables": [
-        "hydraulicBus.TFwrdInMea",
-        "hydraulicBus.TFwrdOutMea",
-        "hydraulicBus.TRtrnInMea",
-        "hydraulicBus.TRtrnOutMea",
-        "hydraulicBus.VFlowInMea",
-        "hydraulicBus.VFlowOutMea"
+        "ctrBasic.registerBus.TAirInMea",
+        "ctrBasic.registerBus.TAirOutMea",
+        "ctrBasic.registerBus.hydraulicBus.valveSet"
       ],
       "warnings": [
-        "Absolute error = 7.660e+00 at t = 210.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 4.881e+00 at t = 280.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 4.881e+00 at t = 280.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 4.289e+00 at t = 310.0 for hydraulicBus.TRtrnOutMea",
+        null,
         null,
         null
       ]
     },
-    "model": "AixLib.Systems.HydraulicModules.Examples.Throttle",
+    "model": "AixLib.Systems.ModularAHU.Examples.Heater",
     "simulation": {
-      "elapsed_time": 0.00543,
-      "final_time": 1000,
-      "jacobians": 43,
+      "elapsed_time": 0.0241,
+      "final_time": 3600,
+      "jacobians": 56,
       "start_time": 0,
       "state_events": 0,
       "success": true
@@ -460,20 +280,20 @@
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection.mat_hydraulicBus.VFlowInMea",
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection.mat_hydraulicBus.VFlowOutMea"
       ],
-      "success_rate": 0.3333333333333333,
+      "success_rate": 1.0,
       "t_err_max": [
-        200.0,
-        536.0,
-        536.0,
-        568.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
         0.0,
         0.0
       ],
       "test_passed": [
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        1,
         1,
         1
       ],
@@ -494,190 +314,19 @@
         "hydraulicBus.VFlowOutMea"
       ],
       "warnings": [
-        "Absolute error = 5.330e+00 at t = 200.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 1.819e+00 at t = 536.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 1.819e+00 at t = 536.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 2.289e+00 at t = 568.0 for hydraulicBus.TRtrnOutMea",
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ]
     },
     "model": "AixLib.Systems.HydraulicModules.Examples.Injection",
     "simulation": {
-      "elapsed_time": 0.0748,
+      "elapsed_time": 0.0206,
       "final_time": 800,
       "jacobians": 70,
-      "start_time": 0,
-      "state_events": 0,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.ModularAHU.Examples.Heater.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirInMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.TAirOutMea",
-        "funnel_comp/AixLib.Systems.ModularAHU.Examples.Heater.mat_ctrBasic.registerBus.hydraulicBus.valveSet"
-      ],
-      "success_rate": 0.3333333333333333,
-      "t_err_max": [
-        0.0,
-        108.0,
-        108.0
-      ],
-      "test_passed": [
-        1,
-        0,
-        0
-      ],
-      "var_groups": [
-        0,
-        0,
-        1
-      ],
-      "variables": [
-        "ctrBasic.registerBus.TAirInMea",
-        "ctrBasic.registerBus.TAirOutMea",
-        "ctrBasic.registerBus.hydraulicBus.valveSet"
-      ],
-      "warnings": [
-        null,
-        "Absolute error = 7.754e-01 at t = 108.0 for ctrBasic.registerBus.TAirOutMea",
-        "Absolute error = 5.095e-02 at t = 108.0 for ctrBasic.registerBus.hydraulicBus.valveSet"
-      ]
-    },
-    "model": "AixLib.Systems.ModularAHU.Examples.Heater",
-    "simulation": {
-      "elapsed_time": 0.0743,
-      "final_time": 3600,
-      "jacobians": 56,
-      "start_time": 0,
-      "state_events": 0,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.HydraulicModules.Examples.Admix.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TFwrdInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TFwrdOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TRtrnInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.TRtrnOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.VFlowInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Admix.mat_hydraulicBus.VFlowOutMea"
-      ],
-      "success_rate": 0.3333333333333333,
-      "t_err_max": [
-        48.0,
-        328.0,
-        328.0,
-        336.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1
-      ],
-      "variables": [
-        "hydraulicBus.TFwrdInMea",
-        "hydraulicBus.TFwrdOutMea",
-        "hydraulicBus.TRtrnInMea",
-        "hydraulicBus.TRtrnOutMea",
-        "hydraulicBus.VFlowInMea",
-        "hydraulicBus.VFlowOutMea"
-      ],
-      "warnings": [
-        "Absolute error = 1.091e+00 at t = 48.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 1.554e+00 at t = 328.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 1.554e+00 at t = 328.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 1.770e+00 at t = 336.0 for hydraulicBus.TRtrnOutMea",
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.Systems.HydraulicModules.Examples.Admix",
-    "simulation": {
-      "elapsed_time": 0.0131,
-      "final_time": 800,
-      "jacobians": 73,
-      "start_time": 0,
-      "state_events": 0,
-      "success": true
-    }
-  },
-  {
-    "comparison": {
-      "file_name": "AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat",
-      "funnel_dirs": [
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TFwrdInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TFwrdOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TRtrnInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TRtrnOutMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.VFlowInMea",
-        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.VFlowOutMea"
-      ],
-      "success_rate": 0.3333333333333333,
-      "t_err_max": [
-        200.0,
-        304.0,
-        304.0,
-        328.0,
-        0.0,
-        0.0
-      ],
-      "test_passed": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1
-      ],
-      "var_groups": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1
-      ],
-      "variables": [
-        "hydraulicBus.TFwrdInMea",
-        "hydraulicBus.TFwrdOutMea",
-        "hydraulicBus.TRtrnInMea",
-        "hydraulicBus.TRtrnOutMea",
-        "hydraulicBus.VFlowInMea",
-        "hydraulicBus.VFlowOutMea"
-      ],
-      "warnings": [
-        "Absolute error = 7.955e+00 at t = 200.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 2.615e+00 at t = 304.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 2.615e+00 at t = 304.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 3.036e+00 at t = 328.0 for hydraulicBus.TRtrnOutMea",
-        null,
-        null
-      ]
-    },
-    "model": "AixLib.Systems.HydraulicModules.Examples.Injection2WayValve",
-    "simulation": {
-      "elapsed_time": 0.0713,
-      "final_time": 800,
-      "jacobians": 66,
       "start_time": 0,
       "state_events": 0,
       "success": true
@@ -694,20 +343,20 @@
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Pump.mat_hydraulicBus.VFlowInMea",
         "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Pump.mat_hydraulicBus.VFlowOutMea"
       ],
-      "success_rate": 0.3333333333333333,
+      "success_rate": 1.0,
       "t_err_max": [
-        40.0,
-        224.0,
-        224.0,
-        240.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
         0.0,
         0.0
       ],
       "test_passed": [
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        1,
         1,
         1
       ],
@@ -728,17 +377,17 @@
         "hydraulicBus.VFlowOutMea"
       ],
       "warnings": [
-        "Absolute error = 6.420e-01 at t = 40.0 for hydraulicBus.TFwrdInMea",
-        "Absolute error = 3.654e+00 at t = 224.0 for hydraulicBus.TFwrdOutMea",
-        "Absolute error = 3.654e+00 at t = 224.0 for hydraulicBus.TRtrnInMea",
-        "Absolute error = 3.935e+00 at t = 240.0 for hydraulicBus.TRtrnOutMea",
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ]
     },
     "model": "AixLib.Systems.HydraulicModules.Examples.Pump",
     "simulation": {
-      "elapsed_time": 0.0748,
+      "elapsed_time": 0.0178,
       "final_time": 800,
       "jacobians": 74,
       "start_time": 0,
@@ -763,7 +412,7 @@
         "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_Simulation_VF_in_m3h.y",
         "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Cooler.mat_Simulation_VF_out_m3h.y"
       ],
-      "success_rate": 0.9166666666666666,
+      "success_rate": 1.0,
       "t_err_max": [
         0.0,
         0.0,
@@ -775,7 +424,7 @@
         0.0,
         0.0,
         0.0,
-        1458.0,
+        0.0,
         0.0
       ],
       "test_passed": [
@@ -789,7 +438,7 @@
         1,
         1,
         1,
-        0,
+        1,
         1
       ],
       "var_groups": [
@@ -831,15 +480,366 @@
         null,
         null,
         null,
-        "Absolute error = 1.050e-03 at t = 1458.0 for Simulation_VF_in_m3h.y",
+        null,
         null
       ]
     },
     "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Cooler",
     "simulation": {
-      "elapsed_time": 3.72,
+      "elapsed_time": 2.57,
       "final_time": 2700,
       "jacobians": 11726,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.TOdaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.DemandControlledAHU.mat_thermalZone.CO2Con"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        5961600.0,
+        5961600.0,
+        5961600.0,
+        5961600.0,
+        5961600.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "variables": [
+        "genericAHU.genericAHUBus.TSupMea",
+        "genericAHU.genericAHUBus.TOdaMea",
+        "genericAHU.genericAHUBus.heaterBus.hydraulicBus.valveSet",
+        "genericAHU.genericAHUBus.heaterBus.VFlowAirMea",
+        "thermalZone.CO2Con"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.DemandControlledAHU",
+    "simulation": {
+      "elapsed_time": 43.2,
+      "final_time": 6566400.0,
+      "jacobians": 25274,
+      "start_time": 5961600.0,
+      "state_events": 51,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Examples.Throttle.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Throttle.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Examples.Throttle",
+    "simulation": {
+      "elapsed_time": 0.00722,
+      "final_time": 1000,
+      "jacobians": 43,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TFwrdInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.TRtrnOutMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.VFlowInMea",
+        "funnel_comp/AixLib.Systems.HydraulicModules.Examples.Injection2WayValve.mat_hydraulicBus.VFlowOutMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "variables": [
+        "hydraulicBus.TFwrdInMea",
+        "hydraulicBus.TFwrdOutMea",
+        "hydraulicBus.TRtrnInMea",
+        "hydraulicBus.TRtrnOutMea",
+        "hydraulicBus.VFlowInMea",
+        "hydraulicBus.VFlowOutMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.HydraulicModules.Examples.Injection2WayValve",
+    "simulation": {
+      "elapsed_time": 0.0159,
+      "final_time": 800,
+      "jacobians": 66,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.TAirOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[6]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[5]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[3]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[4]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[9]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_combiTimeTable.y[8]",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_in_m3h.y",
+        "funnel_comp/AixLib.Systems.ModularAHU.Validation.AHU2_Heater.mat_Simulation_VF_out_m3h.y"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "variables": [
+        "registerModule.registerBus.TAirInMea",
+        "registerModule.registerBus.TAirOutMea",
+        "combiTimeTable.y[6]",
+        "combiTimeTable.y[5]",
+        "combiTimeTable.y[3]",
+        "combiTimeTable.y[4]",
+        "registerModule.registerBus.hydraulicBus.TFwrdOutMea",
+        "registerModule.registerBus.hydraulicBus.TRtrnInMea",
+        "combiTimeTable.y[9]",
+        "combiTimeTable.y[8]",
+        "Simulation_VF_in_m3h.y",
+        "Simulation_VF_out_m3h.y"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Validation.AHU2_Heater",
+    "simulation": {
+      "elapsed_time": 1.03,
+      "final_time": 4320,
+      "jacobians": 4232,
+      "start_time": 0,
+      "state_events": 0,
+      "success": true
+    }
+  },
+  {
+    "comparison": {
+      "file_name": "AixLib.Systems.ModularAHU.Examples.GenericAHU.mat",
+      "funnel_dirs": [
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TOdaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TSupMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEtaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.TEhaMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "funnel_comp/AixLib.Systems.ModularAHU.Examples.GenericAHU.mat_ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "success_rate": 1.0,
+      "t_err_max": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "test_passed": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "var_groups": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "variables": [
+        "ctrAHUBasic.genericAHUBus.TOdaMea",
+        "ctrAHUBasic.genericAHUBus.TSupMea",
+        "ctrAHUBasic.genericAHUBus.TEtaMea",
+        "ctrAHUBasic.genericAHUBus.TEhaMea",
+        "ctrAHUBasic.genericAHUBus.preheaterBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.coolerBus.hydraulicBus.valveMea",
+        "ctrAHUBasic.genericAHUBus.heaterBus.hydraulicBus.valveMea"
+      ],
+      "warnings": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "model": "AixLib.Systems.ModularAHU.Examples.GenericAHU",
+    "simulation": {
+      "elapsed_time": 0.146,
+      "final_time": 7200,
+      "jacobians": 93,
       "start_time": 0,
       "state_events": 0,
       "success": true
