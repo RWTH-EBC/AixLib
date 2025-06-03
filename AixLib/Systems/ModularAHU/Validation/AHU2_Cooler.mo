@@ -72,7 +72,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
           b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
             y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1},
             phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-      valve(strokeTime, use_strokeTime),
+      valve(use_strokeTime=false),
       pipe1(
         T_start=283.15,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),

@@ -21,7 +21,7 @@ model EONERC_AHU2
             b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
               y={0,0.1,0.2,0.25,0.52,0.8,0.9,0.95,1},
               phi={0,0.001,0.002,0.022,0.53,0.96,0.98,0.99,1})),
-        valve(strokeTime, use_strokeTime),
+        valve(use_strokeTime=true),
         pipe1(length=1.53),
         pipe2(length=0.54),
         pipe3(length=1.06),
@@ -68,7 +68,7 @@ model EONERC_AHU2
             b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
               y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1},
               phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-        valve(strokeTime, use_strokeTime),
+        valve(use_strokeTime=true),
         pipe1(
           T_start=283.15,
           parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),
@@ -111,7 +111,7 @@ model EONERC_AHU2
             b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
               y={0.0,0.02,0.05,0.08,0.27,0.6,0.95,1.0},
               phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
-        valve(strokeTime, use_strokeTime),
+        valve(use_strokeTime=false),
         pipe1(length=2.8, fac=9),
         pipe2(length=0.63, parameterPipe=
               AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),

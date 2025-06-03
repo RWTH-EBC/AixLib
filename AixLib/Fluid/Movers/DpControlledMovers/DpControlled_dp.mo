@@ -19,7 +19,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal(
     min=0,
-    displayUnit="Pa") = if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+    displayUnit="Pa") = if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_riseTime=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation (Dialog(group="Nominal condition"));
@@ -56,7 +56,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
           massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
 
   // Classes used to implement the filtered speed
-  parameter Boolean use_inputFilter=true
+  parameter Boolean use_riseTime=true
     "= true, if speed is filtered with a 2nd order CriticalDamping filter"
     annotation(Dialog(tab="Dynamics", group="Filtered speed"));
   parameter Modelica.Units.SI.Time riseTime=30
@@ -64,20 +64,20 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       Dialog(
       tab="Dynamics",
       group="Filtered speed",
-      enable=use_inputFilter));
+      enable=use_riseTime));
   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
     "Type of initialization (no init/steady state/initial state/initial output)"
-    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_riseTime));
   parameter Real y_start(min=0, max=1, unit="1")=0
     "Initial value of speed"
-    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_riseTime));
 
   // Sensor parameters
   parameter Modelica.Units.SI.PressureDifference dp_start=0
     "Initial value of pressure raise" annotation (Dialog(
       tab="Dynamics",
       group="Filtered speed",
-      enable=use_inputFilter));
+      enable=use_riseTime));
   parameter Modelica.Units.SI.Time tauSen=0
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Sensor"));
@@ -170,7 +170,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(
         per.speeds, 1)},
     final prescribeSystemPressure=prescribeSystemPressure,
-    use_riseTime) "Mover: pump or fan"
+    final use_riseTime=use_riseTime) "Mover: pump or fan"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput P(final quantity="Power", final unit="W")
@@ -319,19 +319,19 @@ equation
           color={0,0,0},
           smooth=Smooth.None),
         Rectangle(
-          visible=use_inputFilter,
+          visible=use_riseTime,
           extent={{-32,40},{34,100}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Ellipse(
-          visible=use_inputFilter,
+          visible=use_riseTime,
           extent={{-32,100},{34,40}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Text(
-          visible=use_inputFilter,
+          visible=use_riseTime,
           extent={{-20,92},{22,46}},
           lineColor={0,0,0},
           fillColor={135,135,135},

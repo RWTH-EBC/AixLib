@@ -62,7 +62,7 @@ model DHCSubstationHeatPumpChiller
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     m_flow_nominal=m_flow_nominal,
-    use_riseTime) "decentral distribution pump for heating on primary side"
+    use_riseTime=false) "decentral distribution pump for heating on primary side"
     annotation (Placement(transformation(extent={{-80,-14},{-60,-34}})));
   AixLib.Fluid.Sources.MassFlowSource_T souHeaSec(
     use_m_flow_in=true,
@@ -142,7 +142,7 @@ public
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     m_flow_nominal=m_flow_nominal,
-    use_riseTime) "decentral distribution pump for cooling on primary side"
+    use_riseTime=false) "decentral distribution pump for cooling on primary side"
     annotation (Placement(transformation(extent={{52,14},{32,34}})));
   Modelica.Blocks.Interfaces.RealInput cooDem(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(
@@ -216,11 +216,11 @@ protected
 
 equation
   connect(port_a,vol. ports[1])
-    annotation (Line(points={{-260,0},{-234,0},{-234,4}},
+    annotation (Line(points={{-260,0},{-233,0},{-233,4}},
                                                         color={0,127,255},
       thickness=1));
   connect(port_b,vol1. ports[1])
-    annotation (Line(points={{220,0},{196,0},{196,8}},
+    annotation (Line(points={{220,0},{197,0},{197,8}},
                                                      color={0,127,255},
       thickness=1));
   connect(chi.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
@@ -284,7 +284,7 @@ equation
   connect(pumHea.P, sum1.u[4]);
 
   connect(vol.ports[2], jun.port_1) annotation (Line(
-      points={{-230,4},{-230,4},{-230,0},{-156,0}},
+      points={{-231,4},{-230,4},{-230,0},{-156,0}},
       color={0,127,255},
       thickness=1));
   connect(jun.port_2, pumHea.port_a) annotation (Line(
@@ -296,7 +296,7 @@ equation
       color={0,127,255},
       thickness=1));
   connect(vol1.ports[2], jun1.port_1) annotation (Line(
-      points={{200,8},{196,8},{196,0},{136,0}},
+      points={{199,8},{196,8},{196,0},{136,0}},
       color={0,127,255},
       thickness=1));
   connect(souHeaSec.T_in, T_heaPumInSec.y) annotation (Line(points={{64,-50},{80,
